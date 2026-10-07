@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`0680de9b2b53985fd031b155cbc2c66c357ed10f`](https://github.com/jevansaks/windows-rs/commit/0680de9b2b53985fd031b155cbc2c66c357ed10f),
-published in `jevansaks/windows-rs`. It directly follows the previously adopted
+[`7f3e04f7cfeb2c31eea00f2330b0159572644828`](https://github.com/jevansaks/windows-rs/commit/7f3e04f7cfeb2c31eea00f2330b0159572644828),
+published in `jevansaks/windows-rs`. It directly follows the native Flags fix
+`0680de9b2b53985fd031b155cbc2c66c357ed10f`, which follows the previously adopted
 `f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` namespace-container fix, which follows
 `0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`, whose parent is the pipeline baseline
 `a71662f435eaf24dde7346b684cb4cffc64ca376`. This ledger does not claim that every
@@ -202,3 +203,43 @@ upstream revision that passes the unchanged C++ regression, direct-RDL control,
 producer representation/ownership controls, and the real-header NLS gate above.
 Keep these tests enabled; removing the fork pin alone is not evidence that the
 source marker survives.
+
+## Converging RetVal source annotations
+
+**Upstream issue:** not filed. The duplicate was reproduced on the adopted fork
+`0680de9b2b53985fd031b155cbc2c66c357ed10f`; a public-upstream repro is not claimed.
+
+**Source and impact:** MIDL `[retval]` comments and converted `_Out_retval_`
+annotations can independently mark the same parameter. Previously both markers
+were emitted, producing two identical `#[retval]` entries in RDL and two physical
+`RetValAttribute` instances. This is duplicate emission, not a disagreement about
+the native output contract or a reason to change a signature.
+
+**Local fix and adoption:** producer
+[`7f3e04f7cfeb2c31eea00f2330b0159572644828`](https://github.com/jevansaks/windows-rs/commit/7f3e04f7cfeb2c31eea00f2330b0159572644828)
+coalesces only those two RetVal sources during parameter-attribute emission.
+Both source channels remain represented in the snapshot. No global annotation
+deduplication, header rewrite, or wrapper implementation is introduced.
+
+**Standalone repro and verification:** `tests\fixtures\retval_sources.cpp` uses
+the checked-in capture headers and four COM property methods: both channels,
+MIDL-only, annotation-only, and an ordinary output. The consumer regression checks
+exact RDL and physical WinMD counts of 1/1/1/0, all output directions, and retained
+`SpecialName`. Set `WIN32METADATA_RETVAL_OUTPUT_ROOT` to a fresh output directory
+to retain the fixture, RDL, WinMD, and observations.
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    retval_source_channels_emit_one_attribute -- --nocapture
+```
+
+The producer also checks both extracted source channels explicitly:
+
+```powershell
+cargo test -p windows-clang --test annotations duplicate_retval_sources_emit_one_attribute -- --nocapture
+```
+
+**Removal condition:** adopt upstream handling that passes the unchanged
+dual-channel, single-channel, and ordinary-output controls, preserving native
+signatures and other attributes. Retain the regression when retiring the fork
+patch.

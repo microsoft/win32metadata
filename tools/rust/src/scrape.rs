@@ -3845,6 +3845,100 @@ mod tests {
     }
 
     #[test]
+    fn retval_source_channels_emit_one_attribute() {
+        use windows_metadata::{HasAttributes, MethodAttributes};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_RETVAL_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("retval-sources"),
+        };
+        let source = include_str!("../tests/fixtures/retval_sources.cpp");
+        let fixture = root.join("retval_sources.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let partitions = snapshot
+            .emit_by_header_with_options(&EmitOptions::new("Test.Retval", references.types()))
+            .unwrap();
+        assert_eq!(partitions.len(), 1);
+        let rdl = partitions.into_values().next().unwrap();
+        let input = root.join("actual.rdl");
+        std::fs::write(&input, &rdl).unwrap();
+        let output = root.join("RetvalSources.winmd");
+        compile_inputs(&[input], &[], "RetvalSources", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let interface = index.expect("Test.Retval", "IRetvalSources");
+        assert_eq!(interface.methods().count(), 4);
+        let expected = BTreeMap::from([
+            ("get_Both", 1),
+            ("get_MidlOnly", 1),
+            ("get_SalOnly", 1),
+            ("get_Plain", 0),
+        ]);
+        let mut rdl_counts = BTreeMap::new();
+        let mut metadata_counts = BTreeMap::new();
+        for name in expected.keys() {
+            let line = rdl
+                .lines()
+                .find(|line| line.contains(&format!("fn {name}(")))
+                .unwrap();
+            rdl_counts.insert(*name, line.matches("#[retval]").count());
+            let method = interface
+                .methods()
+                .find(|method| method.name() == *name)
+                .unwrap();
+            assert!(
+                method.flags().contains(MethodAttributes::SpecialName),
+                "{name}"
+            );
+            let parameter = method
+                .params()
+                .find(|parameter| parameter.sequence() == 1)
+                .unwrap();
+            assert_eq!(
+                parameter.direction(),
+                windows_metadata::reader::ParamDirection::Output,
+                "{name}"
+            );
+            metadata_counts.insert(
+                *name,
+                parameter
+                    .attributes()
+                    .filter(|attribute| {
+                        attribute.name() == "RetValAttribute"
+                            && attribute.namespace() == "Windows.Win32.Foundation.Metadata"
+                    })
+                    .count(),
+            );
+        }
+        let observed = format!(
+            "RDL RetVal counts: {rdl_counts:?}\nWinMD RetVal counts: {metadata_counts:?}\nAll four output directions and COM property SpecialName flags remain intact.\n"
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert_eq!(
+            rdl_counts, expected,
+            "RetVal source channels must converge once"
+        );
+        assert_eq!(metadata_counts, expected, "physical RetVal attributes");
+    }
+
+    #[test]
     #[ignore = "requires a repaired SDK cohort in WIN32METADATA_NLS_INPUT_ROOT and a fresh WIN32METADATA_NLS_OUTPUT_ROOT"]
     fn sdk_partitioned_nls_preserves_enum_contracts() {
         use windows_metadata::{HasAttributes, Type, Value};
