@@ -3701,7 +3701,6 @@ mod tests {
     }
 
     #[test]
-    #[ignore = "windows-clang drops [[clang::flag_enum]] before RDL emission: https://github.com/microsoft/windows-rs/issues/5047"]
     fn clang_flag_enum_preserves_flags_attribute() {
         use clang_sys::*;
         use std::ffi::{CStr, CString};
@@ -3905,18 +3904,18 @@ mod tests {
         )
         .unwrap();
         let enums = [
-            ("FOLD_STRING_MAP_FLAGS", 5),
-            ("ENUM_DATE_FORMATS_FLAGS", 8),
-            ("TIME_FORMAT_FLAGS", 5),
-            ("ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS", 2),
-            ("MULTI_BYTE_TO_WIDE_CHAR_FLAGS", 4),
-            ("COMPARE_STRING_FLAGS", 10),
-            ("IS_VALID_LOCALE_FLAGS", 2),
-            ("ENUM_SYSTEM_CODE_PAGES_FLAGS", 2),
-            ("COMPARESTRING_RESULT", 3),
+            ("FOLD_STRING_MAP_FLAGS", 5, true),
+            ("ENUM_DATE_FORMATS_FLAGS", 8, false),
+            ("TIME_FORMAT_FLAGS", 5, true),
+            ("ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS", 2, false),
+            ("MULTI_BYTE_TO_WIDE_CHAR_FLAGS", 4, true),
+            ("COMPARE_STRING_FLAGS", 10, true),
+            ("IS_VALID_LOCALE_FLAGS", 2, false),
+            ("ENUM_SYSTEM_CODE_PAGES_FLAGS", 2, false),
+            ("COMPARESTRING_RESULT", 3, false),
         ];
         let mut native_members = BTreeMap::new();
-        for (name, count) in enums {
+        for (name, count, _) in enums {
             let matches = snapshot
                 .facts()
                 .iter()
@@ -4013,8 +4012,15 @@ mod tests {
         let index = Index::read(&winmd).unwrap();
         let namespace = "Windows.Win32.Globalization";
         let mut member_count = 0;
+        let mut actual_flags = BTreeMap::new();
         for (name, expected) in &native_members {
             let definition = index.expect(namespace, name);
+            actual_flags.insert(
+                *name,
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+            );
             let underlying = definition
                 .fields()
                 .find(|field| field.name() == "value__")
@@ -4076,7 +4082,19 @@ mod tests {
                 "{name} must belong to COMPARESTRING_RESULT, not a standalone constant");
         }
         index.expect("Windows.Win32.Graphics.Dxgi", "DXGI_ENUM_MODES");
-        let result = "PASS: partitioned NLS 9 enums / 41 members / 19 bound associations / 3 CSTR fields; nonempty WinRT references and independent DXGI namespace owner.\n";
+        let contracts = "9 enums / 41 source-valued members / 19 bound associations / 3 CSTR fields; native widths, nonempty WinRT references, and independent DXGI namespace owner.\n";
+        std::fs::write(output.join("native-contracts.txt"), contracts).unwrap();
+        println!("Verified native contracts: {contracts}");
+        std::fs::write(output.join("flags.txt"), format!("{actual_flags:#?}\n")).unwrap();
+        let expected_flags = enums
+            .into_iter()
+            .map(|(name, _, flags)| (name, flags))
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(
+            actual_flags, expected_flags,
+            "only the four native [[clang::flag_enum]] vocabularies must have System.FlagsAttribute"
+        );
+        let result = "PASS: partitioned NLS 9 enums / 41 members / 19 bound associations / 3 CSTR fields / 4 Flags enums / 5 plain enums; nonempty WinRT references and independent DXGI namespace owner.\n";
         std::fs::write(output.join("result.txt"), result).unwrap();
         println!("{result}Evidence: {}", output.display());
     }

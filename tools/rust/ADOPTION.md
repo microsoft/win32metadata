@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`f62037957d26e2300e17ada4c5ca9a8f8a9d3b50`](https://github.com/jevansaks/windows-rs/commit/f62037957d26e2300e17ada4c5ca9a8f8a9d3b50),
+[`0680de9b2b53985fd031b155cbc2c66c357ed10f`](https://github.com/jevansaks/windows-rs/commit/0680de9b2b53985fd031b155cbc2c66c357ed10f),
 published in `jevansaks/windows-rs`. It directly follows the previously adopted
+`f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` namespace-container fix, which follows
 `0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`, whose parent is the pipeline baseline
 `a71662f435eaf24dde7346b684cb4cffc64ca376`. This ledger does not claim that every
 historical fork change has been upstreamed.
@@ -111,10 +112,11 @@ cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
     sdk_partitioned_nls_preserves_enum_contracts -- --ignored --nocapture
 ```
 
-The test retains input, native-member, RDL, and WinMD evidence. It requires nine
-NLS definitions, 41 source-valued members, 19 associations resolving to those
-definitions, three CSTR fields owned by `COMPARESTRING_RESULT`, and the
-independently owned DXGI vocabulary. Existing evidence directories are rejected
+The test retains input, native-member, Flags, RDL, and WinMD evidence. It requires
+nine NLS definitions, 41 source-valued members, 19 associations resolving to those
+definitions, three CSTR fields owned by `COMPARESTRING_RESULT`, four native
+Flags enums, five plain enums, and the independently owned DXGI vocabulary.
+Existing evidence directories are rejected
 rather than overwritten. This bounded integration gate is not a full SDK run
 or a substitute for the producer's generic collision/eligibility regressions.
 
@@ -134,7 +136,7 @@ namespace-container handling, keeping both the producer controls and the
 real-header integration gate. The producer's full `windows-clang` suite is also
 required; passing focused emission alone is insufficient.
 
-## Native `flag_enum` regression
+## Native `flag_enum` adoption
 
 **Upstream issue:** <https://github.com/microsoft/windows-rs/issues/5047>.
 
@@ -145,20 +147,32 @@ Clang cursor, production extraction and RDL emission, then compiled WinMD.
 It requires `System.FlagsAttribute` only on the annotated enum while preserving
 both enums' unsigned 32-bit backing types and member values.
 
-**Known failure:** with producer
+**Known failure before adoption:** with producer
 `f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` and pinned libclang 22.1.8, Clang
 recognizes `CXCursor_FlagEnum` only on the annotated enum, but extraction loses
 the marker before the snapshot. Neither the emitted RDL nor the WinMD retains
-flags. The plain-enum, backing-type, and member-value controls pass. No local
-producer patch, dependency change, or product workaround is applied for this
-issue.
+flags. The plain-enum, backing-type, and member-value controls pass.
 
-The desired C++ assertion is explicitly ignored in normal runs pending an adopted
-upstream fix; invoking it explicitly **fails**, rather than accepting missing flags:
+**Local workaround and adoption:** producer
+`0680de9b2b53985fd031b155cbc2c66c357ed10f` records the native attribute as private
+Snapshot source metadata keyed by the enum's `Origin`. Emission then uses the
+existing RDL `#[flags]` and `System.FlagsAttribute` support. The public
+`FactData` API is unchanged. The fix lives entirely in windows-rs; this repository
+adopts its exact dependency revision rather than reparsing headers, inferring
+flags from values, or maintaining a production enum-name list.
+
+Source attributes preserve the declared representation, including signed
+32-bit enums with negative values. The existing `DEFINE_ENUM_FLAG_OPERATORS`
+and `RootPartition::with_flags` paths retain their established same-width
+unsigned projection. The producer regressions distinguish these policies and
+cover high-bit/all-bit values, plain enums, and same-leaf names under different
+namespace owners with nonempty WinRT references.
+
+The previously ignored desired C++ regression is enabled in normal runs:
 
 ```powershell
 cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
-    clang_flag_enum_preserves_flags_attribute -- --ignored --nocapture
+    clang_flag_enum_preserves_flags_attribute -- --nocapture
 ```
 
 The test prints its evidence directory and retains the fixture, extracted facts,
@@ -172,6 +186,19 @@ cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
     rdl_flags_attribute_preserves_plain_enum_control
 ```
 
-**Removal condition:** remove the ignore when an adopted producer revision passes
-the unchanged C++ regression, retaining both the annotated/plain native controls
-and the enabled direct-RDL control.
+From the adopted windows-rs checkout, run the source-attribute and existing-path
+controls:
+
+```powershell
+cargo test -p windows-clang --test header_partitions `
+    clang_flag_enum_preserves_partition_ownership_and_representation -- --nocapture
+cargo test -p windows-clang --test checkpoint6 enum_flag_macro_controls_projection --quiet
+cargo test -p windows-clang --test partitioned owner_flags_force_unsigned_flag_enum_projection --quiet
+cargo test -p windows-clang --test language_features preserves_cpp_types_and_declaration_attributes --quiet
+```
+
+**Removal condition:** replace the local producer workaround with an adopted
+upstream revision that passes the unchanged C++ regression, direct-RDL control,
+producer representation/ownership controls, and the real-header NLS gate above.
+Keep these tests enabled; removing the fork pin alone is not evidence that the
+source marker survives.
