@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h b/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
-index 5dee0e1fea..c97a6cf5be 100644
+index 5dee0e1fea..8a44e493a7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wia_lh.h
 @@ -1,3 +1,4 @@
@@ -85,7 +85,7 @@ index 5dee0e1fea..c97a6cf5be 100644
              /* [in] */ LONG lIntent,
 -            /* [out] */ LONG *plItemCount,
 -            /* [out] */ IWiaItem ***ppIWiaItem) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plItemCount,
++            /* [out] */ LONG *plItemCount,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") IWiaItem ***ppIWiaItem) = 0;
          
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE DeviceCommand( 
@@ -231,7 +231,7 @@ index 5dee0e1fea..c97a6cf5be 100644
              /* [in] */ BSTR bstrName,
              /* [in] */ REFIID riidExtensionInterface,
 -            /* [out] */ BOOL *pbExtensionExists) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pbExtensionExists) = 0;
++            /* [out] */ BOOL *pbExtensionExists) = 0;
          
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetExtension( 
              /* [in] */ LONG lFlags,
@@ -248,7 +248,7 @@ index 5dee0e1fea..c97a6cf5be 100644
              /* [in] */ BSTR bstrFilename,
 -            /* [out] */ LONG *plNumFiles,
 -            /* [size_is][size_is][out] */ BSTR **ppbstrFilePaths,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plNumFiles,
++            /* [out] */ LONG *plNumFiles,
 +            /* [size_is][size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR **ppbstrFilePaths,
              /* [out][in] */ IWiaItem2 **ppItem) = 0;
          

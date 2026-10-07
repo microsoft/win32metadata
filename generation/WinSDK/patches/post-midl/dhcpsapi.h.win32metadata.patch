@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
-index 5259993040..8db5b610f3 100644
+index 5259993040..6f18e902e9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
 @@ -13,6 +13,7 @@ Module Name:   dhcpsapi.h
@@ -1005,8 +1005,8 @@ index 5259993040..8db5b610f3 100644
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
 +             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
++             OUT     DWORD                 *OptionsRead,
++             OUT     DWORD                 *OptionsTotal
  ) ;
  
  
@@ -1092,8 +1092,8 @@ index 5259993040..8db5b610f3 100644
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
 +             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_VALUE_ARRAY *OptionValues,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
++             OUT     DWORD                 *OptionsRead,
++             OUT     DWORD                 *OptionsTotal
  ) ;
  
  
@@ -1162,8 +1162,8 @@ index 5259993040..8db5b610f3 100644
 -             OUT     DWORD                 *nRead,
 -             OUT     DWORD                 *nTotal
 +             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY *ClassInfoArray,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nRead,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nTotal
++             OUT     DWORD                 *nRead,
++             OUT     DWORD                 *nTotal
  ) ;
  
  
@@ -1362,8 +1362,8 @@ index 5259993040..8db5b610f3 100644
 -             OUT     DWORD                 *OptionsRead,
 -             OUT     DWORD                 *OptionsTotal
 +             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_OPTION_ARRAY   *Options,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsRead,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *OptionsTotal
++             OUT     DWORD                 *OptionsRead,
++             OUT     DWORD                 *OptionsTotal
  );
  
  DWORD DHCP_API_FUNCTION
@@ -1496,7 +1496,7 @@ index 5259993040..8db5b610f3 100644
 +_Windows_SupportedOS_Server2008_ DWORD
  DhcpGetThreadOptions(                             // get current thread options
 -    OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
++    OUT     LPDWORD                pFlags,        // this DWORD is filled with current optiosn..
      IN OUT  LPVOID                 Reserved       // must be NULL, reserved for future
  );
  
@@ -1548,9 +1548,9 @@ index 5259993040..8db5b610f3 100644
 -                    OUT     DWORD                 *DiskCheckInterval,
 -                    OUT     DWORD                 *MaxLogFilesSize,
 -                    OUT     DWORD                 *MinSpaceOnDisk
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *DiskCheckInterval,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *MaxLogFilesSize,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *MinSpaceOnDisk
++                    OUT     DWORD                 *DiskCheckInterval,
++                    OUT     DWORD                 *MaxLogFilesSize,
++                    OUT     DWORD                 *MinSpaceOnDisk
  );
  
  
@@ -1827,8 +1827,8 @@ index 5259993040..8db5b610f3 100644
 -             OUT     DWORD                 *nRead,
 -             OUT     DWORD                 *nTotal
 +             _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDHCP_CLASS_INFO_ARRAY_V6 *ClassInfoArray,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nRead,
-+             _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD                 *nTotal
++             OUT     DWORD                 *nRead,
++             OUT     DWORD                 *nTotal
  );
  
 -DWORD DHCP_API_FUNCTION

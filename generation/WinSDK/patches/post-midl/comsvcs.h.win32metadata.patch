@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
-index 607bf2048d..b0bc159036 100644
+index 607bf2048d..2e34b8baa3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 @@ -1,3 +1,4 @@
@@ -651,7 +651,7 @@ index 607bf2048d..b0bc159036 100644
          
          virtual HRESULT STDMETHODCALLTYPE IsReusable( 
 -            /* [out] */ BOOL *pfIsReusable) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsReusable) = 0;
++            /* [out] */ BOOL *pfIsReusable) = 0;
          
      };
      
@@ -660,7 +660,7 @@ index 607bf2048d..b0bc159036 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetPerimeterFlag( 
 -            /* [out] */ BOOL *pFlag) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pFlag) = 0;
++            /* [out] */ BOOL *pFlag) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetPerimeterFlag( 
              /* [in] */ BOOL fFlag) = 0;
@@ -721,8 +721,8 @@ index 607bf2048d..b0bc159036 100644
              /* [in] */ unsigned long celt,
 -            /* [size_is][out] */ BSTR *rgname,
 -            /* [retval][out] */ unsigned long *pceltFetched) = 0;
-+            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *rgname,
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned long *pceltFetched) = 0;
++            /* [size_is][out] */ BSTR *rgname,
++            /* [retval][out] */ unsigned long *pceltFetched) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [in] */ unsigned long celt) = 0;
@@ -962,7 +962,7 @@ index 607bf2048d..b0bc159036 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDeactivateOnReturn( 
 -            /* [out] */ VARIANT_BOOL *pbDeactivate) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbDeactivate) = 0;
++            /* [out] */ VARIANT_BOOL *pbDeactivate) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetMyTransactionVote( 
              TransactionVote txVote) = 0;

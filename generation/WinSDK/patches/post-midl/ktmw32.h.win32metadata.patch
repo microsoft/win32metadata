@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
-index c62087e6b5..8e96c0ce4a 100644
+index c62087e6b5..2ee26a90e3 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ktmw32.h
 @@ -22,6 +22,7 @@ Revision History:
@@ -236,7 +236,7 @@ index c62087e6b5..8e96c0ce4a 100644
      IN  ULONG                         TransactionNotificationLength,
 -    OUT PULONG                        ReturnLength,
 -    IN  LPOVERLAPPED                  lpOverlapped
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG                        ReturnLength,
++    OUT PULONG                        ReturnLength,
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN  LPOVERLAPPED                  lpOverlapped
      );
      

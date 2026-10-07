@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
-index 0150fb5596..4eaad77e32 100644
+index 0150fb5596..19d8763ee7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMat.h
 @@ -33,6 +33,7 @@ Revision History:
@@ -39,7 +39,7 @@ index 0150fb5596..4eaad77e32 100644
 -    IN      LPBYTE          Buffer,
 -    OUT     LPDWORD         JobId
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN      LPBYTE          Buffer,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         JobId
++    OUT     LPDWORD         JobId
      );
  
 +_Windows_SupportedOS_Windows2000_  
@@ -59,8 +59,8 @@ index 0150fb5596..4eaad77e32 100644
      IN      DWORD           PrefferedMaximumLength,
 -    OUT     LPDWORD         EntriesRead,
 -    OUT     LPDWORD         TotalEntries,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         EntriesRead,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD         TotalEntries,
++    OUT     LPDWORD         EntriesRead,
++    OUT     LPDWORD         TotalEntries,
      IN OUT  LPDWORD         ResumeHandle
      );
  

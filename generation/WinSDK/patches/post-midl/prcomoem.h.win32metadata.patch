@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
-index 663a5f2e3f..6af4181692 100644
+index 663a5f2e3f..ba7a712ae9 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/prcomoem.h
 @@ -1,3 +1,4 @@
@@ -19,8 +19,8 @@ index 663a5f2e3f..6af4181692 100644
                             IN  DWORD                        cPairs,
 -                           OUT PDWORD                       pcPairsWritten,
 -                           OUT PDWORD                       pdwResult) PURE;
-+                           _WIN32META_ANNOTATION_("win32metadata:in") OUT PDWORD                       pcPairsWritten,
-+                           _WIN32META_ANNOTATION_("win32metadata:in") OUT PDWORD                       pdwResult) PURE;
++                           OUT PDWORD                       pcPairsWritten,
++                           OUT PDWORD                       pdwResult) PURE;
  
      //
      // EnumConstrainedOptions
@@ -29,7 +29,7 @@ index 663a5f2e3f..6af4181692 100644
                                         IN  PCSTR            pszFeatureKeyword,
                                         OUT PCSTR           *pConstrainedOptionList[],
 -                                       OUT DWORD           *pdwNumOptions) PURE;
-+                                       _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD           *pdwNumOptions) PURE;
++                                       OUT DWORD           *pdwNumOptions) PURE;
  
      //
      // WhyConstrained

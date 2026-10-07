@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
-index f907576fa1..d6db8957e5 100644
+index f907576fa1..b2572b66ac 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/WtsApi32.h
 @@ -15,6 +15,7 @@
@@ -395,7 +395,7 @@ index f907576fa1..d6db8957e5 100644
 -    OUT PWTS_PROCESS_INFOW * ppProcessInfo,
 -    OUT DWORD * pCount
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOW * ppProcessInfo,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pCount
++    OUT DWORD * pCount
      );
  
 +_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_  
@@ -408,7 +408,7 @@ index f907576fa1..d6db8957e5 100644
 -    OUT PWTS_PROCESS_INFOA * ppProcessInfo,
 -    OUT DWORD * pCount
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT PWTS_PROCESS_INFOA * ppProcessInfo,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pCount
++    OUT DWORD * pCount
      );
  
  #ifdef UNICODE
@@ -539,7 +539,7 @@ index f907576fa1..d6db8957e5 100644
      IN HANDLE hServer,
      IN DWORD EventMask,
 -    OUT DWORD * pEventFlags
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD * pEventFlags
++    OUT DWORD * pEventFlags
      );
  
  /*------------------------------------------------*/
@@ -619,7 +619,7 @@ index f907576fa1..d6db8957e5 100644
 -    OUT PVOID *ppBuffer,
 -    OUT DWORD *pBytesReturned
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppBuffer,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pBytesReturned
++    OUT DWORD *pBytesReturned
      );
  
  /*------------------------------------------------*/

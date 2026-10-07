@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
-index 9c914cd297..cd54ae6c67 100644
+index 9c914cd297..f9088a38f7 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
 @@ -1,3 +1,4 @@
@@ -21,7 +21,7 @@ index 9c914cd297..cd54ae6c67 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetHurryup( 
 -            /* [out] */ LONG *plHurryup) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plHurryup) = 0;
++            /* [out] */ LONG *plHurryup) = 0;
          
      };
      
@@ -50,7 +50,7 @@ index 9c914cd297..cd54ae6c67 100644
              /* [annotation][size_is][unique][out][in] */ 
              _Out_writes_to_opt_(cchLength, *pcchLength)  LPWSTR szName,
 -            /* [out] */ ULONG *pcchLength) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcchLength) = 0;
++            /* [out] */ ULONG *pcchLength) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetDescription( 
 -            /* [in] */ DMO_MEDIA_TYPE *pmt,
@@ -59,7 +59,7 @@ index 9c914cd297..cd54ae6c67 100644
              /* [annotation][size_is][unique][out][in] */ 
              _Out_writes_to_opt_(cchLength, *pcchLength)  LPWSTR szDescription,
 -            /* [out] */ ULONG *pcchLength) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcchLength) = 0;
++            /* [out] */ ULONG *pcchLength) = 0;
          
      };
      
@@ -103,14 +103,14 @@ index 9c914cd297..cd54ae6c67 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetBufferSizeBits( 
 -            /* [out] */ ULONG *pulBufferSize) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulBufferSize) = 0;
++            /* [out] */ ULONG *pulBufferSize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetBufferFullnessBits( 
              /* [in] */ ULONG ulBufferFullness) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetBufferFullnessBits( 
 -            /* [out] */ ULONG *pulBufferFullness) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulBufferFullness) = 0;
++            /* [out] */ ULONG *pulBufferFullness) = 0;
          
      };
      
@@ -140,7 +140,7 @@ index 9c914cd297..cd54ae6c67 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetReconstructedVideoFrameSize( 
 -            /* [out] */ DWORD *pdwSize) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwSize) = 0;
++            /* [out] */ DWORD *pdwSize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetReconstructedVideoFrame( 
              /* [out] */ IMediaBuffer *pBuf) = 0;
@@ -207,14 +207,14 @@ index 9c914cd297..cd54ae6c67 100644
 -            /* [out] */ LONG *lClipOriYDst,
 -            /* [out] */ LONG *lClipWidthDst,
 -            /* [out] */ LONG *lClipHeightDst) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipOriXSrc,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipOriYSrc,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipWidthSrc,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipHeightSrc,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipOriXDst,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipOriYDst,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipWidthDst,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *lClipHeightDst) = 0;
++            /* [out] */ LONG *lClipOriXSrc,
++            /* [out] */ LONG *lClipOriYSrc,
++            /* [out] */ LONG *lClipWidthSrc,
++            /* [out] */ LONG *lClipHeightSrc,
++            /* [out] */ LONG *lClipOriXDst,
++            /* [out] */ LONG *lClipOriYDst,
++            /* [out] */ LONG *lClipWidthDst,
++            /* [out] */ LONG *lClipHeightDst) = 0;
          
      };
      
@@ -255,7 +255,7 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE GetSubEntries( 
              /* [out][in] */ DWORD *pdwNumSubEntries,
 -            /* [out] */ WORD *pwSubEntryIndices) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WORD *pwSubEntryIndices) = 0;
++            /* [out] */ WORD *pwSubEntryIndices) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetDescriptionData( 
              /* [in] */ DWORD dwDescriptionDataSize,
@@ -268,7 +268,7 @@ index 9c914cd297..cd54ae6c67 100644
              /* [out][in] */ DWORD *pdwDescriptionDataSize,
 -            /* [out] */ BYTE *pbtDescriptionData,
 -            /* [out] */ GUID *pGuidType) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BYTE *pbtDescriptionData,
++            /* [out] */ BYTE *pbtDescriptionData,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuidType) = 0;
          
      };
@@ -284,7 +284,7 @@ index 9c914cd297..cd54ae6c67 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEntryCount( 
 -            /* [out] */ DWORD *pdwEntryCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwEntryCount) = 0;
++            /* [out] */ DWORD *pdwEntryCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetEntryByIndex( 
              /* [in] */ DWORD dwEntryIndex,
@@ -293,7 +293,7 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE AddEntry( 
              /* [in] */ ITocEntry *pEntry,
 -            /* [out] */ DWORD *pdwEntryIndex) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwEntryIndex) = 0;
++            /* [out] */ DWORD *pdwEntryIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE AddEntryByIndex( 
              /* [in] */ DWORD dwEntryIndex,
@@ -326,11 +326,11 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE GetContext( 
              /* [out][in] */ DWORD *pdwContextSize,
 -            /* [out] */ BYTE *pbtContext) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BYTE *pbtContext) = 0;
++            /* [out] */ BYTE *pbtContext) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetEntryListCount( 
 -            /* [out] */ WORD *pwCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WORD *pwCount) = 0;
++            /* [out] */ WORD *pwCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetEntryListByIndex( 
              /* [in] */ WORD wEntryListIndex,
@@ -339,7 +339,7 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE AddEntryList( 
              /* [in] */ ITocEntryList *pEntryList,
 -            /* [out] */ WORD *pwEntryListIndex) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WORD *pwEntryListIndex) = 0;
++            /* [out] */ WORD *pwEntryListIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE AddEntryListByIndex( 
              /* [in] */ WORD wEntryListIndex,
@@ -354,7 +354,7 @@ index 9c914cd297..cd54ae6c67 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetEntryCount( 
 -            /* [out] */ DWORD *pdwEntryCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwEntryCount) = 0;
++            /* [out] */ DWORD *pdwEntryCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetEntryByIndex( 
              /* [in] */ DWORD dwEntryIndex,
@@ -363,7 +363,7 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE AddEntry( 
              /* [in] */ IToc *pToc,
 -            /* [out] */ DWORD *pdwEntryIndex) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwEntryIndex) = 0;
++            /* [out] */ DWORD *pdwEntryIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE AddEntryByIndex( 
              /* [in] */ DWORD dwEntryIndex,
@@ -381,7 +381,7 @@ index 9c914cd297..cd54ae6c67 100644
          virtual HRESULT STDMETHODCALLTYPE GetTocCount( 
              /* [in] */ enum TOC_POS_TYPE enumTocPosType,
 -            /* [out] */ DWORD *pdwTocCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwTocCount) = 0;
++            /* [out] */ DWORD *pdwTocCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetTocByIndex( 
              /* [in] */ enum TOC_POS_TYPE enumTocPosType,
@@ -390,7 +390,7 @@ index 9c914cd297..cd54ae6c67 100644
              /* [in] */ enum TOC_POS_TYPE enumTocPosType,
              /* [in] */ IToc *pToc,
 -            /* [out] */ DWORD *pdwTocIndex) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwTocIndex) = 0;
++            /* [out] */ DWORD *pdwTocIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE RemoveTocByIndex( 
              /* [in] */ enum TOC_POS_TYPE enumTocPosType,
@@ -399,42 +399,42 @@ index 9c914cd297..cd54ae6c67 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetLength( 
 -            /* [out] */ QWORD *pqwLength) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") QWORD *pqwLength) = 0;
++            /* [out] */ QWORD *pqwLength) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetLength( 
              /* [in] */ QWORD qwLength) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetCurrentPosition( 
 -            /* [out] */ QWORD *pqwPosition) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") QWORD *pqwPosition) = 0;
++            /* [out] */ QWORD *pqwPosition) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetCurrentPosition( 
              /* [in] */ QWORD qwPosition) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsEndOfStream( 
 -            /* [out] */ BOOL *pbEndOfStream) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pbEndOfStream) = 0;
++            /* [out] */ BOOL *pbEndOfStream) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Read( 
 -            /* [in] */ BYTE *pbt,
 +            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pbt,
              /* [in] */ ULONG ul,
 -            /* [out] */ ULONG *pulRead) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulRead) = 0;
++            /* [out] */ ULONG *pulRead) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Write( 
 -            /* [in] */ BYTE *pbt,
 +            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pbt,
              /* [in] */ ULONG ul,
 -            /* [out] */ ULONG *pulWritten) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pulWritten) = 0;
++            /* [out] */ ULONG *pulWritten) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Seek( 
              /* [in] */ enum SEEK_ORIGIN eSeekOrigin,
              /* [in] */ QWORD qwSeekOffset,
              /* [in] */ DWORD dwSeekFlags,
 -            /* [out] */ QWORD *pqwCurrentPosition) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") QWORD *pqwCurrentPosition) = 0;
++            /* [out] */ QWORD *pqwCurrentPosition) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Close( void) = 0;
          
@@ -443,7 +443,7 @@ index 9c914cd297..cd54ae6c67 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetObjectDiskSize( 
 -            /* [out] */ QWORD *pqwSize) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") QWORD *pqwSize) = 0;
++            /* [out] */ QWORD *pqwSize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Write( 
              /* [in] */ IFileIo *pFio) = 0;

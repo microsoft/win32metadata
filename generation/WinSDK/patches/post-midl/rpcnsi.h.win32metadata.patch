@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
-index 84f72a0add..7048998941 100644
+index 84f72a0add..f725e0c59b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 @@ -1,3 +1,4 @@
@@ -394,7 +394,7 @@ index 84f72a0add..7048998941 100644
 +_Windows_SupportedOS_Windows2000_ RPCNSAPI RPC_STATUS RPC_ENTRY
  RpcNsMgmtInqExpAge(
 -    OUT unsigned long __RPC_FAR * ExpirationAge
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT unsigned long __RPC_FAR * ExpirationAge
++    OUT unsigned long __RPC_FAR * ExpirationAge
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY

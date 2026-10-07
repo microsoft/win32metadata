@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMaudit.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMaudit.h
-index b80506543f..b83e68d93f 100644
+index b80506543f..cc71932610 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMaudit.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMaudit.h
 @@ -1,3 +1,4 @@
@@ -22,8 +22,8 @@ index b80506543f..b83e68d93f 100644
      IN  DWORD   prefmaxlen,
 -    OUT LPDWORD bytesread,
 -    OUT LPDWORD totalavailable
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD bytesread,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD totalavailable
++    OUT LPDWORD bytesread,
++    OUT LPDWORD totalavailable
      );
  
  NET_API_STATUS NET_API_FUNCTION

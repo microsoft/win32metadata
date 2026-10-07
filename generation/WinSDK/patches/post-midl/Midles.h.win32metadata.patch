@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
-index 89b4c7034c..2f399dac21 100644
+index 89b4c7034c..c1c0aeb678 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Midles.h
 @@ -20,6 +20,7 @@ Abstract:
@@ -171,7 +171,7 @@ index 89b4c7034c..2f399dac21 100644
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
      const MIDL_STUB_DESC *  pStubDesc,
 -    PFORMAT_STRING          pFormatString,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING          pFormatString,
      const void           *  pObject );
  
  void  RPC_ENTRY
@@ -180,7 +180,7 @@ index 89b4c7034c..2f399dac21 100644
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") handle_t                Handle,
      const MIDL_STUB_DESC *  pStubDesc,
 -    PFORMAT_STRING          pFormatString,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING          pFormatString,
      const void           *  pObject );
  
  void  RPC_ENTRY
@@ -190,7 +190,7 @@ index 89b4c7034c..2f399dac21 100644
      const MIDL_STUB_DESC *  pStubDesc,
 -    PFORMAT_STRING          pFormatString,
 -    void                 *  pObject );
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING          pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING          pFormatString,
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *  pObject );
  
  size_t  RPC_ENTRY
@@ -200,7 +200,7 @@ index 89b4c7034c..2f399dac21 100644
      const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,
      const MIDL_STUB_DESC *          pStubDesc,
 -    PFORMAT_STRING                  pFormatString,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING                  pFormatString,
      const void           *          pObject );
  
  void  RPC_ENTRY
@@ -210,7 +210,7 @@ index 89b4c7034c..2f399dac21 100644
      const MIDL_TYPE_PICKLING_INFO * pPicklingInfo,    
      const MIDL_STUB_DESC *          pStubDesc,
 -    PFORMAT_STRING                  pFormatString,
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING                  pFormatString,
      const void           *          pObject );
  
  void  RPC_ENTRY
@@ -221,7 +221,7 @@ index 89b4c7034c..2f399dac21 100644
      const MIDL_STUB_DESC *          pStubDesc,
 -    PFORMAT_STRING                  pFormatString,
 -    void                 *          pObject );
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING                  pFormatString,
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *          pObject );
  
  void RPC_ENTRY
@@ -232,7 +232,7 @@ index 89b4c7034c..2f399dac21 100644
      const MIDL_STUB_DESC          * pStubDesc,
 -    PFORMAT_STRING                  pFormatString,
 -    void                 *          pObject );
-+    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFORMAT_STRING                  pFormatString,
++    _WIN32META_ANNOTATION_("win32metadata:in") PFORMAT_STRING                  pFormatString,
 +    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void                 *          pObject );
  
  void  RPC_VAR_ENTRY

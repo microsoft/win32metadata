@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
-index 6de24f3b0b..a6a14fc7c2 100644
+index 6de24f3b0b..a15960344e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
 @@ -1,4 +1,5 @@
@@ -60,7 +60,7 @@ index 6de24f3b0b..a6a14fc7c2 100644
 -Dhcpv6CApiInitialize(
 -    OUT     LPDWORD                Version
 +  Dhcpv6CApiInitialize(
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                Version
++    OUT     LPDWORD                Version
  );
  
 -VOID

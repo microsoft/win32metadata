@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
-index 8c44a207d4..aff2f09cc2 100644
+index 8c44a207d4..553cb7c329 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mscoree.h
 @@ -1,3 +1,4 @@
@@ -181,19 +181,19 @@ index 8c44a207d4..aff2f09cc2 100644
          virtual HRESULT STDMETHODCALLTYPE GetCurrentAllocated( 
              /* [in] */ DWORD dwAppDomainId,
 -            /* [out] */ ULONGLONG *pBytesAllocated) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pBytesAllocated) = 0;
++            /* [out] */ ULONGLONG *pBytesAllocated) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetCurrentSurvived( 
              /* [in] */ DWORD dwAppDomainId,
 -            /* [out] */ ULONGLONG *pAppDomainBytesSurvived,
 -            /* [out] */ ULONGLONG *pTotalBytesSurvived) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pAppDomainBytesSurvived,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pTotalBytesSurvived) = 0;
++            /* [out] */ ULONGLONG *pAppDomainBytesSurvived,
++            /* [out] */ ULONGLONG *pTotalBytesSurvived) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetCurrentCpuTime( 
              /* [in] */ DWORD dwAppDomainId,
 -            /* [out] */ ULONGLONG *pMilliseconds) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pMilliseconds) = 0;
++            /* [out] */ ULONGLONG *pMilliseconds) = 0;
          
      };
      

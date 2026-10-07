@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
-index e1d5d309c3..17ee7483ff 100644
+index e1d5d309c3..41fdba5a0a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vpnotify.h
 @@ -11,6 +11,7 @@
@@ -61,7 +61,7 @@ index e1d5d309c3..17ee7483ff 100644
 +    
      STDMETHOD (GetVPSyncMaster)(THIS_ 
 -				   OUT BOOL *pbVPSyncMaster
-+				   _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL *pbVPSyncMaster
++				   OUT BOOL *pbVPSyncMaster
  				  ) PURE;
  
      /*

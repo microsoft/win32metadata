@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
-index d6bf1c4c39..55452943b3 100644
+index d6bf1c4c39..3ab54e6b88 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMaccess.h
 @@ -1,3 +1,4 @@
@@ -422,7 +422,7 @@ index d6bf1c4c39..55452943b3 100644
      IN DWORD PreferredMaximumLength,
 -    OUT LPDWORD ReturnedEntryCount,
 -    OUT PVOID   *SortedBuffer );
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD ReturnedEntryCount,
++    OUT LPDWORD ReturnedEntryCount,
 +    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID   *SortedBuffer );
  
 -NET_API_STATUS NET_API_FUNCTION
@@ -432,7 +432,7 @@ index d6bf1c4c39..55452943b3 100644
      IN DWORD Level,
      IN LPCWSTR Prefix,
 -    OUT LPDWORD Index );
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD Index );
++    OUT LPDWORD Index );
  
  //
  // QueryDisplayInformation levels
@@ -508,7 +508,7 @@ index d6bf1c4c39..55452943b3 100644
      IN  LPCWSTR   UGname,
      IN  LPCWSTR   resource,
 -    OUT LPDWORD  Perms
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LPDWORD  Perms
++    OUT LPDWORD  Perms
      );
  
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)

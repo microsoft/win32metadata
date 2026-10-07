@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h b/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
-index bef6c05e3e..0a5c42dd77 100644
+index bef6c05e3e..945de2d038 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mpconfig.h
 @@ -11,6 +11,7 @@
@@ -37,10 +37,10 @@ index bef6c05e3e..0a5c42dd77 100644
 -				    OUT DWORD *pdwTop,
 -				    OUT DWORD *pdwRight,
 -				    OUT DWORD *pdwBottom
-+				    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwLeft,
-+				    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwTop,
-+				    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwRight,
-+				    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwBottom
++				    OUT DWORD *pdwLeft,
++				    OUT DWORD *pdwTop,
++				    OUT DWORD *pdwRight,
++				    OUT DWORD *pdwBottom
  				   ) PURE;
  
      // this function sets the ZOrder of the stream. The ZOrder of 0 is the closest
@@ -58,7 +58,7 @@ index bef6c05e3e..0a5c42dd77 100644
 +    
      STDMETHOD (GetZOrder)(THIS_ 
 -			  OUT DWORD *pdwZOrder
-+			  _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwZOrder
++			  OUT DWORD *pdwZOrder
  			 ) PURE;
  
      // this function sets the colorkey being used by the stream. Setting this value on the 
@@ -83,7 +83,7 @@ index bef6c05e3e..0a5c42dd77 100644
 -			    OUT COLORKEY *pColorKey,
 -			    OUT DWORD *pColor
 +			    _WIN32META_ANNOTATION_("win32metadata:in") OUT COLORKEY *pColorKey,
-+			    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pColor
++			    OUT DWORD *pColor
  			   ) PURE;
  
      // this function sets the blending parameter which in turn defines, how the secondary stream 
@@ -103,7 +103,7 @@ index bef6c05e3e..0a5c42dd77 100644
 +    
      STDMETHOD (GetBlendingParameter)(THIS_ 
 -				     OUT DWORD *pdwBlendingParameter
-+				     _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *pdwBlendingParameter
++				     OUT DWORD *pdwBlendingParameter
  				    ) PURE;
  
  
@@ -138,7 +138,7 @@ index bef6c05e3e..0a5c42dd77 100644
 +    
      STDMETHOD (GetStreamTransparent)(THIS_ 
 -				     OUT BOOL *pbStreamTransparent
-+				     _WIN32META_ANNOTATION_("win32metadata:in") OUT BOOL *pbStreamTransparent
++				     OUT BOOL *pbStreamTransparent
  				    ) PURE;
  };
  

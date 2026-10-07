@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
-index 381c04598d..c5c4423357 100644
+index 381c04598d..1caf48b333 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/madcapcl.h
 @@ -7,6 +7,7 @@ extern "C" {
@@ -93,7 +93,7 @@ index 381c04598d..c5c4423357 100644
      IN OUT PMCAST_SCOPE_ENTRY   pScopeList,
      IN OUT PDWORD               pScopeLen,
 -    OUT    PDWORD               pScopeCount
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT    PDWORD               pScopeCount
++    OUT    PDWORD               pScopeCount
      );
  
 -DWORD

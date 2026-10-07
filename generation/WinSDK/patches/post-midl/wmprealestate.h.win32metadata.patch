@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
-index bc6e444863..131af159f6 100644
+index bc6e444863..c27f4a8941 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
 @@ -1,3 +1,4 @@
@@ -32,14 +32,14 @@ index bc6e444863..131af159f6 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetWindowless( 
 -            /* [out] */ BOOL *pfWindowless) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfWindowless) = 0;
++            /* [out] */ BOOL *pfWindowless) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetFullScreen( 
              /* [in] */ BOOL fFullScreen) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFullScreen( 
 -            /* [out] */ BOOL *pfFullScreen) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfFullScreen) = 0;
++            /* [out] */ BOOL *pfFullScreen) = 0;
          
      };
      
@@ -68,7 +68,7 @@ index bc6e444863..131af159f6 100644
 -            /* [out] */ LRESULT *plRet,
 -            /* [out] */ BOOL *pfHandled) = 0;
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LRESULT *plRet,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfHandled) = 0;
++            /* [out] */ BOOL *pfHandled) = 0;
          
      };
      
@@ -88,7 +88,7 @@ index bc6e444863..131af159f6 100644
          
          virtual HRESULT STDMETHODCALLTYPE get_inProcOnly( 
 -            /* [out] */ BOOL *pfInProc) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfInProc) = 0;
++            /* [out] */ BOOL *pfInProc) = 0;
          
      };
      

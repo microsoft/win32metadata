@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
-index 6bf90f1d64..84225ba787 100644
+index 6bf90f1d64..2f0ad55373 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsync.h
 @@ -556,10 +556,11 @@ extern "C"{
@@ -26,11 +26,11 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetReplicaKey( 
 -            /* [out] */ DWORD *pdwReplicaKey) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
++            /* [out] */ DWORD *pdwReplicaKey) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetTickCount( 
 -            /* [out] */ ULONGLONG *pullTickCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTickCount) = 0;
++            /* [out] */ ULONGLONG *pullTickCount) = 0;
          
      };
      
@@ -49,7 +49,7 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [out] */ BYTE *pbFlags) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BYTE *pbFlags) = 0;
++            /* [out] */ BYTE *pbFlags) = 0;
          
      };
      
@@ -69,7 +69,7 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetClockVectorElementCount( 
 -            /* [out] */ DWORD *pdwCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCount) = 0;
++            /* [out] */ DWORD *pdwCount) = 0;
          
      };
      
@@ -84,11 +84,11 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetUpdateCount( 
 -            /* [out] */ DWORD *pdwUpdateCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwUpdateCount) = 0;
++            /* [out] */ DWORD *pdwUpdateCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsNoConflictsSpecified( 
 -            /* [out] */ BOOL *pfIsNoConflictsSpecified) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsNoConflictsSpecified) = 0;
++            /* [out] */ BOOL *pfIsNoConflictsSpecified) = 0;
          
      };
      
@@ -124,11 +124,11 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetColumnCount( 
 -            /* [out] */ DWORD *pColumnCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pColumnCount) = 0;
++            /* [out] */ DWORD *pColumnCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetRangeCount( 
 -            /* [out] */ DWORD *pRangeCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pRangeCount) = 0;
++            /* [out] */ DWORD *pRangeCount) = 0;
          
      };
      
@@ -216,7 +216,7 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE LookupReplicaKey( 
              /* [in] */ const BYTE *pbReplicaId,
 -            /* [out] */ DWORD *pdwReplicaKey) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
++            /* [out] */ DWORD *pdwReplicaKey) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE LookupReplicaId( 
              /* [in] */ DWORD dwReplicaKey,
@@ -232,7 +232,7 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE FindOrAddReplica( 
              /* [in] */ const BYTE *pbReplicaId,
 -            /* [out] */ DWORD *pdwReplicaKey) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwReplicaKey) = 0;
++            /* [out] */ DWORD *pdwReplicaKey) = 0;
          
      };
      
@@ -268,7 +268,7 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE FindMinTickCountForReplica( 
              /* [in] */ const BYTE *pbReplicaId,
 -            /* [out] */ ULONGLONG *pullReplicaTickCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullReplicaTickCount) = 0;
++            /* [out] */ ULONGLONG *pullReplicaTickCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetRangeExceptions( 
              /* [in] */ REFIID riid,
@@ -300,7 +300,7 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetVersion( 
 -            /* [out] */ DWORD *pdwVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwVersion) = 0;
++            /* [out] */ DWORD *pdwVersion) = 0;
          
      };
      
@@ -342,7 +342,7 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE GetStatistics( 
              /* [in] */ SYNC_STATISTICS which,
 -            /* [out] */ DWORD *pValue) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pValue) = 0;
++            /* [out] */ DWORD *pValue) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE ContainsKnowledgeForItem( 
              /* [in] */ ISyncKnowledge *pKnowledge,
@@ -386,13 +386,13 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetRecoverableErrorDataForChange( 
 -            /* [out] */ HRESULT *phrError,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HRESULT *phrError,
++            /* [out] */ HRESULT *phrError,
              /* [out] */ IRecoverableErrorData **ppErrorData) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetRecoverableErrorDataForChangeUnit( 
              /* [in] */ ISyncChangeUnit *pChangeUnit,
 -            /* [out] */ HRESULT *phrError,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HRESULT *phrError,
++            /* [out] */ HRESULT *phrError,
              /* [out] */ IRecoverableErrorData **ppErrorData) = 0;
          
      };
@@ -500,7 +500,7 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE IsCanceled( 
 -            /* [out] */ BOOL *pfIsCanceled) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsCanceled) = 0;
++            /* [out] */ BOOL *pfIsCanceled) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetInfoForChangeApplication( 
              /* [size_is][unique][out][in] */ BYTE *pbChangeApplierInfo,
@@ -551,7 +551,7 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [out] */ DWORD *pdwFlags) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFlags) = 0;
++            /* [out] */ DWORD *pdwFlags) = 0;
          
      };
      
@@ -578,7 +578,7 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetFilterCount( 
 -            /* [out] */ DWORD *pdwFilterCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterCount) = 0;
++            /* [out] */ DWORD *pdwFilterCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFilterInfo( 
              /* [in] */ DWORD dwFilterIndex,
@@ -622,15 +622,15 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetIsLastBatch( 
 -            /* [out] */ BOOL *pfLastBatch) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfLastBatch) = 0;
++            /* [out] */ BOOL *pfLastBatch) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetWorkEstimateForBatch( 
 -            /* [out] */ DWORD *pdwWorkForBatch) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwWorkForBatch) = 0;
++            /* [out] */ DWORD *pdwWorkForBatch) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetRemainingWorkEstimateForSession( 
 -            /* [out] */ DWORD *pdwRemainingWorkForSession) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwRemainingWorkForSession) = 0;
++            /* [out] */ DWORD *pdwRemainingWorkForSession) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE BeginOrderedGroup( 
              /* [in] */ const BYTE *pbLowerBound) = 0;
@@ -684,7 +684,7 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetBatchLevelKnowledgeShouldBeApplied( 
 -            /* [out] */ BOOL *pfBatchKnowledgeShouldBeApplied) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfBatchKnowledgeShouldBeApplied) = 0;
++            /* [out] */ BOOL *pfBatchKnowledgeShouldBeApplied) = 0;
          
      };
      
@@ -702,7 +702,7 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE GetSyncBatchParameters( 
              /* [out] */ ISyncKnowledge **ppSyncKnowledge,
 -            /* [out] */ DWORD *pdwRequestedBatchSize) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwRequestedBatchSize) = 0;
++            /* [out] */ DWORD *pdwRequestedBatchSize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetChangeBatch( 
              /* [in] */ DWORD dwBatchSize,
@@ -756,11 +756,11 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [out] */ DWORD *pdwFlags) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFlags) = 0;
++            /* [out] */ DWORD *pdwFlags) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetWorkEstimate( 
 -            /* [out] */ DWORD *pdwWork) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwWork) = 0;
++            /* [out] */ DWORD *pdwWork) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetChangeUnits( 
              /* [out] */ IEnumSyncChangeUnits **ppEnum) = 0;
@@ -787,12 +787,12 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetCount( 
 -            /* [out] */ DWORD *pdwCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCount) = 0;
++            /* [out] */ DWORD *pdwCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE AddFilter( 
              /* [in] */ ISyncFilter *pISyncFilter,
 -            /* [out] */ DWORD *pdwFilterKey) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterKey) = 0;
++            /* [out] */ DWORD *pdwFilterKey) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFilter( 
              /* [in] */ DWORD dwFilterKey,
@@ -801,7 +801,7 @@ index 6bf90f1d64..84225ba787 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetFilterCount( 
 -            /* [out] */ DWORD *pdwFilterCount) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwFilterCount) = 0;
++            /* [out] */ DWORD *pdwFilterCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFilterChange( 
              /* [in] */ DWORD dwFilterKey,
@@ -810,7 +810,7 @@ index 6bf90f1d64..84225ba787 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetAllChangeUnitsPresentFlag( 
 -            /* [out] */ BOOL *pfAllChangeUnitsPresent) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfAllChangeUnitsPresent) = 0;
++            /* [out] */ BOOL *pfAllChangeUnitsPresent) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFilterForgottenKnowledge( 
              /* [in] */ DWORD dwFilterKey,
@@ -901,13 +901,13 @@ index 6bf90f1d64..84225ba787 100644
          virtual HRESULT STDMETHODCALLTYPE GetItemChangeTime( 
              /* [in] */ const BYTE *pbItemId,
 -            /* [out] */ ULONGLONG *pullTimestamp) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTimestamp) = 0;
++            /* [out] */ ULONGLONG *pullTimestamp) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetChangeUnitChangeTime( 
              /* [in] */ const BYTE *pbItemId,
              /* [in] */ const BYTE *pbChangeUnitId,
 -            /* [out] */ ULONGLONG *pullTimestamp) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONGLONG *pullTimestamp) = 0;
++            /* [out] */ ULONGLONG *pullTimestamp) = 0;
          
      };
      

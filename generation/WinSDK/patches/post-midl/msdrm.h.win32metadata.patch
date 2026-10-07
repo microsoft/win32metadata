@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msdrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/msdrm.h
-index 33a0894f55..d6adf34004 100644
+index 33a0894f55..86664ff85a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/msdrm.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/msdrm.h
 @@ -4,6 +4,7 @@
@@ -75,7 +75,7 @@ index 33a0894f55..d6adf34004 100644
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN BYTE* pbInData,
                      IN OUT UINT* pcNumOutBytes,
 -                    OUT BYTE* pbOutData);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE* pbOutData);
++                    OUT BYTE* pbOutData);
  
  DRMEXPORT HRESULT UDAPICALL DRMDecrypt (
                      IN DRMHANDLE hCryptoProvider,
@@ -85,7 +85,7 @@ index 33a0894f55..d6adf34004 100644
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN BYTE* pbInData,
                      IN OUT UINT* pcNumOutBytes,
 -                    OUT BYTE* pbOutData);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE* pbOutData);
++                    OUT BYTE* pbOutData);
  
  // license binding and enabling bits
  
@@ -130,7 +130,7 @@ index 33a0894f55..d6adf34004 100644
                      _In_ DRMENCODINGTYPE* peEncoding,
                      _Inout_ UINT* pcBuffer,
 -                    OUT BYTE* pbBuffer);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE* pbBuffer);
++                    OUT BYTE* pbBuffer);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetEnvironmentInfo(
                      IN DRMENVHANDLE handle,
@@ -139,7 +139,7 @@ index 33a0894f55..d6adf34004 100644
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT DRMENCODINGTYPE* peEncoding,
                      IN OUT UINT* pcBuffer,
 -                    OUT BYTE* pbBuffer);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE* pbBuffer);
++                    OUT BYTE* pbBuffer);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetProcAddress(
                      IN DRMHANDLE hLibrary,
@@ -153,7 +153,7 @@ index 33a0894f55..d6adf34004 100644
                      IN DRMHANDLE hQueryRoot,
                      _In_ PWSTR wszSubObjectType,
 -                    OUT UINT* pcSubObjects);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT* pcSubObjects);
++                    OUT UINT* pcSubObjects);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetBoundLicenseObject(
                      IN DRMHANDLE hQueryRoot,
@@ -166,7 +166,7 @@ index 33a0894f55..d6adf34004 100644
                      IN DRMHANDLE hQueryRoot,
                      _In_ PWSTR wszAttribute,
 -                    OUT UINT* pcAttributes);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT UINT* pcAttributes);
++                    OUT UINT* pcAttributes);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetBoundLicenseAttribute(
                      IN DRMHANDLE hQueryRoot,
@@ -176,7 +176,7 @@ index 33a0894f55..d6adf34004 100644
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT DRMENCODINGTYPE* peEncoding,
                      IN OUT UINT* pcBuffer,
 -                    OUT BYTE* pbBuffer);
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE* pbBuffer);
++                    OUT BYTE* pbBuffer);
  
  
  
@@ -202,7 +202,7 @@ index 33a0894f55..d6adf34004 100644
 -                        IN DRM_ACTSERV_INFO* pActServInfo,  // Optional activation server info
 -                        IN VOID*          pvContext,          // Context used for callback
 +                        _WIN32META_ANNOTATION_("win32metadata:out") IN DRM_ACTSERV_INFO* pActServInfo,  // Optional activation server info
-+                        _WIN32META_ANNOTATION_("win32metadata:out") IN VOID*          pvContext,          // Context used for callback
++                        IN VOID*          pvContext,          // Context used for callback
                          IN HWND           hParentWnd);        // Parent window Handle
  
  
@@ -220,7 +220,7 @@ index 33a0894f55..d6adf34004 100644
                          _In_    PWSTR         wszLicense,
                          _In_opt_    PWSTR         wszURL,//Optional
 -                        IN    VOID*         pvContext);
-+                        _WIN32META_ANNOTATION_("win32metadata:out") IN    VOID*         pvContext);
++                        IN    VOID*         pvContext);
  
  
  
@@ -229,7 +229,7 @@ index 33a0894f55..d6adf34004 100644
                          _In_opt_    PWSTR        wszCustomData,      //Custom data that goes with the request
                          _In_opt_    PWSTR        wszURL,             //
 -                        IN    VOID*        pvContext );
-+                        _WIN32META_ANNOTATION_("win32metadata:out") IN    VOID*        pvContext );
++                        IN    VOID*        pvContext );
  
  DRMEXPORT HRESULT UDAPICALL DRMDeleteLicense( 
                          IN DRMHSESSION  hSession,           //Client/License Storage session
@@ -256,7 +256,7 @@ index 33a0894f55..d6adf34004 100644
                          _In_ PWSTR    wszEncodedString,
                          IN OUT UINT* puDecodedDataLen,
 -                        OUT BYTE*   pbDecodedData);
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT BYTE*   pbDecodedData);
++                        OUT BYTE*   pbDecodedData);
  
  DRMEXPORT HRESULT UDAPICALL DRMConstructCertificateChain(
                          IN      UINT cCertificates,
@@ -274,7 +274,7 @@ index 33a0894f55..d6adf34004 100644
                          IN      DRMQUERYHANDLE hQueryRoot,
                          _In_      PWSTR wszSubObjectType,
 -                        OUT     UINT* pcSubObjects);
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     UINT* pcSubObjects);
++                        OUT     UINT* pcSubObjects);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetUnboundLicenseObject(
                          IN      DRMQUERYHANDLE hQueryRoot,
@@ -287,7 +287,7 @@ index 33a0894f55..d6adf34004 100644
                          IN      DRMQUERYHANDLE hQueryRoot,
                          _In_      PWSTR wszAttributeType,
 -                        OUT     UINT* pcAttributes);
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     UINT* pcAttributes);
++                        OUT     UINT* pcAttributes);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetUnboundLicenseAttribute(
                          IN      DRMQUERYHANDLE hQueryRoot,
@@ -297,12 +297,12 @@ index 33a0894f55..d6adf34004 100644
 +                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     DRMENCODINGTYPE* peEncoding,
                          IN OUT   UINT* pcBuffer,
 -                        OUT     BYTE* pbBuffer);
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     BYTE* pbBuffer);
++                        OUT     BYTE* pbBuffer);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetCertificateChainCount(
                          _In_      PWSTR wszChain,
 -                        OUT     UINT* pcCertCount);
-+                        _WIN32META_ANNOTATION_("win32metadata:in") OUT     UINT* pcCertCount);
++                        OUT     UINT* pcCertCount);
  
  DRMEXPORT HRESULT UDAPICALL DRMDeconstructCertificateChain(
                          _In_      PWSTR wszChain,
@@ -391,7 +391,7 @@ index 33a0894f55..d6adf34004 100644
                                  _In_opt_      PWSTR        wszURL,//Mandatory if uFlags is DRM_SIGN_ONLINE
  
 -                                IN      VOID*        pvContext);//Optional
-+                                _WIN32META_ANNOTATION_("win32metadata:out") IN      VOID*        pvContext);//Optional
++                                IN      VOID*        pvContext);//Optional
  
 +_Windows_SupportedOS_Windows7_
  DRMEXPORT HRESULT UDAPICALL DRMGetSignedIssuanceLicenseEx(
@@ -449,7 +449,7 @@ index 33a0894f55..d6adf34004 100644
 -                                OUT     DRMPUBHANDLE*   phOwner,
 -                                OUT     BOOL*           pfOfficial);
 +                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     DRMPUBHANDLE*   phOwner,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     BOOL*           pfOfficial);
++                                OUT     BOOL*           pfOfficial);
  
  
  DRMEXPORT HRESULT UDAPICALL DRMGetRevocationPoint(
@@ -469,7 +469,7 @@ index 33a0894f55..d6adf34004 100644
 -                                OUT     DRM_USAGEPOLICY_TYPE* peUsagePolicyType,
 -                                OUT     BOOL*           pfExclusion,
 +                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     DRM_USAGEPOLICY_TYPE* peUsagePolicyType,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     BOOL*           pfExclusion,
++                                OUT     BOOL*           pfExclusion,
                                  IN OUT  UINT*           puNameLength,
                                  _Out_writes_opt_(*puNameLength)       PWSTR           wszName,
                                  IN OUT  UINT*           puMinVersionLength,
@@ -478,13 +478,13 @@ index 33a0894f55..d6adf34004 100644
                                  _Out_writes_opt_(*puDigestAlgorithmLength)  PWSTR     wszDigestAlgorithm,
                                  IN OUT  UINT*           pcbDigest,
 -                                OUT     BYTE*           pbDigest);
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     BYTE*           pbDigest);
++                                OUT     BYTE*           pbDigest);
  
  DRMEXPORT HRESULT UDAPICALL DRMGetNameAndDescription(
                                  IN      DRMPUBHANDLE    hIssuanceLicense,
                                  IN      UINT            uIndex,
 -                                OUT     UINT*           pulcid,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     UINT*           pulcid,
++                                OUT     UINT*           pulcid,
                                  IN OUT   UINT*          puNameLength,
                                  _Out_writes_opt_(*puNameLength)     PWSTR           wszName,
                                  IN OUT   UINT*          puDescriptionLength,
@@ -493,7 +493,7 @@ index 33a0894f55..d6adf34004 100644
  DRMEXPORT HRESULT UDAPICALL DRMGetIntervalTime(
                                  IN      DRMPUBHANDLE    hIssuanceLicense,
 -                                OUT     UINT*           pcDays);
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     UINT*           pcDays);
++                                OUT     UINT*           pcDays);
  
  
  DRMEXPORT HRESULT UDAPICALL DRMRepair();
@@ -509,19 +509,19 @@ index 33a0894f55..d6adf34004 100644
  DRMEXPORT HRESULT UDAPICALL DRMIsWindowProtected(
  								IN		HWND	hwnd,
 -								OUT		BOOL*	pfProtected);
-+								_WIN32META_ANNOTATION_("win32metadata:in") OUT		BOOL*	pfProtected);
++								OUT		BOOL*	pfProtected);
  
 -DRMEXPORT HRESULT UDAPICALL DRMAcquireIssuanceLicenseTemplate(
 +_Windows_SupportedOS_WindowsVista_ DRMEXPORT HRESULT UDAPICALL DRMAcquireIssuanceLicenseTemplate(
  								IN		DRMHSESSION	hClient,
  								IN		UINT uFlags,
 -								IN		VOID* pvReserved,
-+								_WIN32META_ANNOTATION_("win32metadata:out") IN		VOID* pvReserved,
++								IN		VOID* pvReserved,
  								IN		UINT cTemplates,
  								_In_reads_opt_(cTemplates) PWSTR* pwszTemplateIds,
  								_In_ PWSTR wszUrl,
 -								IN		VOID* pvContext);
-+								_WIN32META_ANNOTATION_("win32metadata:out") IN		VOID* pvContext);
++								IN		VOID* pvContext);
  
  
  

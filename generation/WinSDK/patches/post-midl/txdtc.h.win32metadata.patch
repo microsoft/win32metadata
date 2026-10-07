@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h b/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
-index 2fe6aba607..0654667c6d 100644
+index 2fe6aba607..e2fe6350ce 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
 @@ -1,3 +1,4 @@
@@ -21,7 +21,7 @@ index 2fe6aba607..0654667c6d 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetPrepareInfoSize( 
 -            /* [out] */ ULONG *pcbPrepInfo) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcbPrepInfo) = 0;
++            /* [out] */ ULONG *pcbPrepInfo) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetPrepareInfo( 
 -            /* [out] */ byte *pPrepInfo) = 0;
@@ -35,8 +35,8 @@ index 2fe6aba607..0654667c6d 100644
          virtual HRESULT STDMETHODCALLTYPE GetLogNameSizes( 
 -            /* [out] */ DWORD *pcbOurLogName,
 -            /* [out] */ DWORD *pcbRemoteLogName) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pcbOurLogName,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pcbRemoteLogName) = 0;
++            /* [out] */ DWORD *pcbOurLogName,
++            /* [out] */ DWORD *pcbRemoteLogName) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetOurXln( 
 -            /* [out] */ DTCLUXLN *pXln,
@@ -44,7 +44,7 @@ index 2fe6aba607..0654667c6d 100644
              /* [out][in] */ unsigned char *pOurLogName,
              /* [out][in] */ unsigned char *pRemoteLogName,
 -            /* [out] */ DWORD *pdwProtocol) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwProtocol) = 0;
++            /* [out] */ DWORD *pdwProtocol) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleConfirmationFromOurXln( 
              /* [in] */ DTCLUXLNCONFIRMATION Confirmation) = 0;
@@ -63,7 +63,7 @@ index 2fe6aba607..0654667c6d 100644
          
          virtual HRESULT STDMETHODCALLTYPE CheckForCompareStates( 
 -            /* [out] */ BOOL *fCompareStates) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *fCompareStates) = 0;
++            /* [out] */ BOOL *fCompareStates) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetOurTransIdSize( 
              /* [out][in] */ DWORD *pcbOurTransId) = 0;
@@ -85,7 +85,7 @@ index 2fe6aba607..0654667c6d 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetRecoverySeqNum( 
 -            /* [out] */ LONG *plRecoverySeqNum) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *plRecoverySeqNum) = 0;
++            /* [out] */ LONG *plRecoverySeqNum) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE ObsoleteRecoverySeqNum( 
              /* [in] */ LONG lNewRecoverySeqNum) = 0;
@@ -111,7 +111,7 @@ index 2fe6aba607..0654667c6d 100644
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUXLN *pXln,
              /* [out][in] */ unsigned char *pOurLogName,
 -            /* [out] */ DWORD *pdwProtocol) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwProtocol) = 0;
++            /* [out] */ DWORD *pdwProtocol) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleConfirmationOfOurXln( 
              /* [in] */ DTCLUXLNCONFIRMATION Confirmation) = 0;

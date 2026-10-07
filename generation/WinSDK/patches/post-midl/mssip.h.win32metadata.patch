@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
-index 9ba32f8775..4237617a7f 100644
+index 9ba32f8775..1d76a81803 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 @@ -1,3 +1,4 @@
@@ -43,11 +43,11 @@ index 9ba32f8775..4237617a7f 100644
 -                                OUT     DWORD           *pdwEncodingType,
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI CryptSIPGetSignedDataMsg(
 +                                _WIN32META_ANNOTATION_("win32metadata:out") IN      SIP_SUBJECTINFO *pSubjectInfo,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) OUT     DWORD           *pdwEncodingType,
++                                _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) OUT     DWORD           *pdwEncodingType,
                                  IN      DWORD           dwIndex,
                                  IN OUT  DWORD           *pcbSignedDataMsg,
 -                                OUT     BYTE            *pbSignedDataMsg);
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     BYTE            *pbSignedDataMsg);
++                                OUT     BYTE            *pbSignedDataMsg);
  
  typedef BOOL (WINAPI * pCryptSIPGetSignedDataMsg)(
 -                                IN      SIP_SUBJECTINFO *pSubjectInfo,
@@ -72,7 +72,7 @@ index 9ba32f8775..4237617a7f 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI CryptSIPPutSignedDataMsg(
 +                                _WIN32META_ANNOTATION_("win32metadata:out") IN      SIP_SUBJECTINFO *pSubjectInfo,
 +                                _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) IN      DWORD           dwEncodingType,
-+                                _WIN32META_ANNOTATION_("win32metadata:in") OUT     DWORD           *pdwIndex,
++                                OUT     DWORD           *pdwIndex,
                                  IN      DWORD           cbSignedDataMsg,
 -                                IN      BYTE            *pbSignedDataMsg);
 +                                _WIN32META_ANNOTATION_("win32metadata:out") IN      BYTE            *pbSignedDataMsg);

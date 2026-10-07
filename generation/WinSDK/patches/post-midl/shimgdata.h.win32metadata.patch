@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
-index 2f366dd110..9824c484a3 100644
+index 2f366dd110..6bb9e44b6e 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shimgdata.h
 @@ -1,3 +1,4 @@
@@ -41,11 +41,11 @@ index 2f366dd110..9824c484a3 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetCurrentPage( 
 -            /* [out] */ ULONG *pnPage) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pnPage) = 0;
++            /* [out] */ ULONG *pnPage) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetPageCount( 
 -            /* [out] */ ULONG *pcPages) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *pcPages) = 0;
++            /* [out] */ ULONG *pcPages) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SelectPage( 
              /* [in] */ ULONG iPage) = 0;
@@ -64,7 +64,7 @@ index 2f366dd110..9824c484a3 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetDelay( 
 -            /* [out] */ DWORD *pdwDelay) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwDelay) = 0;
++            /* [out] */ DWORD *pdwDelay) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetProperties( 
              /* [in] */ DWORD dwMode,
@@ -74,8 +74,8 @@ index 2f366dd110..9824c484a3 100644
          virtual HRESULT STDMETHODCALLTYPE GetResolution( 
 -            /* [out] */ ULONG *puResolutionX,
 -            /* [out] */ ULONG *puResolutionY) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *puResolutionX,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") ULONG *puResolutionY) = 0;
++            /* [out] */ ULONG *puResolutionX,
++            /* [out] */ ULONG *puResolutionY) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetEncoderParams( 
 -            /* [in] */ GUID *pguidFmt,

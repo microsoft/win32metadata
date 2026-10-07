@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/indexsrv.h b/generation/WinSDK/RecompiledIdlHeaders/um/indexsrv.h
-index 8f76ad4c69..d0d3175fa4 100644
+index 8f76ad4c69..8ff94f99f1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/indexsrv.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/indexsrv.h
 @@ -1,3 +1,4 @@
@@ -46,7 +46,7 @@ index 8f76ad4c69..d0d3175fa4 100644
 -            /* [out] */ unsigned int *puiWidth) = 0;
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBID **ppPropId,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBTYPE *pPropType,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned int *puiWidth) = 0;
++            /* [out] */ unsigned int *puiWidth) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetPropInfoFromId( 
              /* [in] */ const DBID *pPropId,
@@ -55,7 +55,7 @@ index 8f76ad4c69..d0d3175fa4 100644
 -            /* [out] */ unsigned int *puiWidth) = 0;
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") WCHAR **pwcsName,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBTYPE *pPropType,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned int *puiWidth) = 0;
++            /* [out] */ unsigned int *puiWidth) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE EnumPropInfo( 
              /* [in] */ ULONG iEntry,
@@ -65,7 +65,7 @@ index 8f76ad4c69..d0d3175fa4 100644
 -            /* [out] */ unsigned int *puiWidth) = 0;
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBID **ppPropId,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DBTYPE *pPropType,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned int *puiWidth) = 0;
++            /* [out] */ unsigned int *puiWidth) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsMapUpToDate( void) = 0;
          

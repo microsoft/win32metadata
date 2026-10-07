@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
-index d044f5d159..eb149b0237 100644
+index d044f5d159..9a31e56e3a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/DhcpCSdk.h
 @@ -1,4 +1,5 @@
@@ -36,7 +36,7 @@ index d044f5d159..eb149b0237 100644
 -DhcpCApiInitialize(
 -    OUT     LPDWORD                Version
 +  DhcpCApiInitialize(
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT     LPDWORD                Version
++    OUT     LPDWORD                Version
  );
  
 -VOID
@@ -120,7 +120,7 @@ index d044f5d159..eb149b0237 100644
  DhcpGetOriginalSubnetMask(
      IN LPCWSTR sAdapterName,
 -    OUT DWORD *dwSubnetMask
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT DWORD *dwSubnetMask
++    OUT DWORD *dwSubnetMask
  );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

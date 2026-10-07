@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Iadmw.h b/generation/WinSDK/RecompiledIdlHeaders/um/Iadmw.h
-index f5312fd468..45d5ad5fac 100644
+index f5312fd468..6bb817943b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/Iadmw.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/Iadmw.h
 @@ -1,3 +1,4 @@
@@ -19,7 +19,7 @@ index f5312fd468..45d5ad5fac 100644
              /* [string][in][unique] */ LPCWSTR pszMDPath,
              /* [out][in] */ PMETADATA_RECORD pmdrMDData,
 -            /* [out] */ DWORD *pdwMDRequiredDataLen) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMDRequiredDataLen) = 0;
++            /* [out] */ DWORD *pdwMDRequiredDataLen) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE DeleteData( 
              /* [in] */ METADATA_HANDLE hMDHandle,
@@ -28,7 +28,7 @@ index f5312fd468..45d5ad5fac 100644
              /* [out][in] */ PMETADATA_RECORD pmdrMDData,
              /* [in] */ DWORD dwMDEnumDataIndex,
 -            /* [out] */ DWORD *pdwMDRequiredDataLen) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMDRequiredDataLen) = 0;
++            /* [out] */ DWORD *pdwMDRequiredDataLen) = 0;
          
          virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetAllData( 
              /* [in] */ METADATA_HANDLE hMDHandle,
@@ -38,13 +38,13 @@ index f5312fd468..45d5ad5fac 100644
              /* [in] */ DWORD dwMDDataType,
 -            /* [out] */ DWORD *pdwMDNumDataEntries,
 -            /* [out] */ DWORD *pdwMDDataSetNumber,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMDNumDataEntries,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMDDataSetNumber,
++            /* [out] */ DWORD *pdwMDNumDataEntries,
++            /* [out] */ DWORD *pdwMDDataSetNumber,
              /* [in] */ DWORD dwMDBufferSize,
 -            /* [size_is][out] */ unsigned char *pbMDBuffer,
 -            /* [out] */ DWORD *pdwMDRequiredBufferSize) = 0;
-+            /* [size_is][out] */ _WIN32META_ANNOTATION_("win32metadata:in") unsigned char *pbMDBuffer,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMDRequiredBufferSize) = 0;
++            /* [size_is][out] */ unsigned char *pbMDBuffer,
++            /* [out] */ DWORD *pdwMDRequiredBufferSize) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE DeleteAllData( 
              /* [in] */ METADATA_HANDLE hMDHandle,

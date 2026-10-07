@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
-index 90d850f66c..96945221cd 100644
+index 90d850f66c..fed6703a94 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/clfsw32.h
 @@ -26,6 +26,7 @@
@@ -189,7 +189,7 @@ index 90d850f66c..96945221cd 100644
 -                    IN LONGLONG rgcbReservation [],
 -                    OUT PLONGLONG pcbAlignReservation
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN LONGLONG rgcbReservation [],
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PLONGLONG pcbAlignReservation
++                    OUT PLONGLONG pcbAlignReservation
                      );
  #endif /* _WIN32_WINNT */
  
@@ -242,7 +242,7 @@ index 90d850f66c..96945221cd 100644
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadLogRestartArea (
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID pvMarshal,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvRestartBuffer,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG pcbRestartBuffer,
++                    OUT PULONG pcbRestartBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsn,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppvContext,
                      IN OUT LPOVERLAPPED pOverlapped OPTIONAL
@@ -260,7 +260,7 @@ index 90d850f66c..96945221cd 100644
 +CLFSUSER_API BOOL WINAPI _Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ ReadPreviousLogRestartArea (
 +                    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID pvReadContext,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID *ppvRestartBuffer,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG pcbRestartBuffer,
++                    OUT PULONG pcbRestartBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnRestart,
                      IN OUT LPOVERLAPPED pOverlapped OPTIONAL
                      );
@@ -411,7 +411,7 @@ index 90d850f66c..96945221cd 100644
 -                    OUT PCLFS_LSN plsnPrevious,
 -                    OUT PVOID* ppvReadContext,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvReadBuffer,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG pcbReadBuffer,
++                    OUT PULONG pcbReadBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_RECORD_TYPE peRecordType,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnUndoNext,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PCLFS_LSN plsnPrevious,
@@ -429,7 +429,7 @@ index 90d850f66c..96945221cd 100644
 -                    OUT PVOID* ppvBuffer,
 -                    OUT PULONG pcbBuffer,
 +                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PVOID* ppvBuffer,
-+                    _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG pcbBuffer,
++                    OUT PULONG pcbBuffer,
                      IN OUT PCLFS_RECORD_TYPE peRecordType,
                      IN PCLFS_LSN plsnUser OPTIONAL,
 -                    OUT PCLFS_LSN plsnUndoNext,
@@ -480,7 +480,7 @@ index 90d850f66c..96945221cd 100644
                  IN ULONG     cbBytesToRead,
                  IN OUT PBYTE pbReadBuffer,
 -                OUT PULONG   pcbBytesRead
-+                _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG   pcbBytesRead
++                OUT PULONG   pcbBytesRead
                  );
  #endif /* _WIN32_WINNT */
  
@@ -495,7 +495,7 @@ index 90d850f66c..96945221cd 100644
                  IN OUT CLFS_ARCHIVE_DESCRIPTOR rgadExtent [],
                  IN ULONG cDescriptors,
 -                OUT PULONG pcDescriptorsReturned
-+                _WIN32META_ANNOTATION_("win32metadata:in") OUT PULONG pcDescriptorsReturned
++                OUT PULONG pcDescriptorsReturned
                  );
  #endif /* _WIN32_WINNT */
  
