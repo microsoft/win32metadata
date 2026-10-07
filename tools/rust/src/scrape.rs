@@ -3701,6 +3701,151 @@ mod tests {
     }
 
     #[test]
+    #[ignore = "windows-clang drops [[clang::flag_enum]] before RDL emission: https://github.com/microsoft/windows-rs/issues/5047"]
+    fn clang_flag_enum_preserves_flags_attribute() {
+        use clang_sys::*;
+        use std::ffi::{CStr, CString};
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        extern "C" fn visit(
+            cursor: CXCursor,
+            parent: CXCursor,
+            data: CXClientData,
+        ) -> CXChildVisitResult {
+            if cursor.kind == CXCursor_FlagEnum {
+                // libclang invokes this callback synchronously with the live set below.
+                unsafe {
+                    let name = clang_getCursorSpelling(parent);
+                    let spelling = CStr::from_ptr(clang_getCString(name))
+                        .to_string_lossy()
+                        .into_owned();
+                    clang_disposeString(name);
+                    (*data.cast::<BTreeSet<String>>()).insert(spelling);
+                }
+            }
+            CXChildVisit_Recurse
+        }
+
+        ensure_libclang();
+        clang_sys::load().unwrap();
+        let root = match std::env::var_os("WIN32METADATA_FLAGS_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("clang-flag-enum"),
+        };
+        let source = include_str!("../tests/fixtures/flag_enum.cpp");
+        let fixture = root.join("flag_enum.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let args = ["-x", "c++", "-std=c++20", "--target=x86_64-pc-windows-msvc"];
+        let file = CString::new(source_path.as_str()).unwrap();
+        let clang_args = args.map(|arg| CString::new(arg).unwrap());
+        let pointers = clang_args.each_ref().map(|arg| arg.as_ptr());
+        let mut flagged = BTreeSet::<String>::new();
+        let diagnostics = unsafe {
+            let index = clang_createIndex(0, 0);
+            assert!(!index.is_null());
+            let unit = clang_parseTranslationUnit(
+                index,
+                file.as_ptr(),
+                pointers.as_ptr(),
+                pointers.len().try_into().unwrap(),
+                std::ptr::null_mut(),
+                0,
+                0,
+            );
+            if unit.is_null() {
+                clang_disposeIndex(index);
+                panic!("libclang could not parse the flag-enum fixture");
+            }
+            let diagnostics = clang_getNumDiagnostics(unit);
+            clang_visitChildren(
+                clang_getTranslationUnitCursor(unit),
+                visit,
+                std::ptr::from_mut(&mut flagged).cast(),
+            );
+            clang_disposeTranslationUnit(unit);
+            clang_disposeIndex(index);
+            diagnostics
+        };
+        assert_eq!(
+            diagnostics, 0,
+            "the self-contained C++ fixture must parse cleanly"
+        );
+        assert_eq!(flagged, BTreeSet::from(["NativeFlags".to_string()]));
+
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args,
+        )
+        .unwrap();
+        std::fs::write(root.join("facts.txt"), format!("{:#?}\n", snapshot.facts())).unwrap();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        let emit = EmitOptions::new("Test.FlagEnum", references.types());
+        let partitions = snapshot.emit_by_header_with_options(&emit).unwrap();
+        assert_eq!(partitions.len(), 1);
+        let rdl = partitions.into_values().next().unwrap();
+        let rdl_flags = rdl.matches("#[flags]").count();
+        let input = root.join("actual.rdl");
+        std::fs::write(&input, &rdl).unwrap();
+        let output = root.join("FlagEnum.winmd");
+        compile_inputs(&[input], &[], "FlagEnum", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let mut actual_flags = BTreeMap::new();
+        for (name, prefix) in [("NativeFlags", "Native"), ("PlainEnum", "Plain")] {
+            let definition = index.expect("Test.FlagEnum", name);
+            assert_eq!(
+                definition
+                    .fields()
+                    .find(|field| field.name() == "value__")
+                    .unwrap()
+                    .ty(),
+                Type::U32,
+                "{name} underlying width"
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field
+                        .constant()
+                        .map(|constant| (field.name().to_string(), constant.value()))
+                })
+                .collect::<BTreeMap<_, _>>();
+            let expected = [("None", 0), ("Read", 1), ("Write", 2), ("All", 3)]
+                .map(|(suffix, value)| (format!("{prefix}{suffix}"), Value::U32(value)))
+                .into_iter()
+                .collect();
+            assert_eq!(actual, expected, "{name} native member values");
+            actual_flags.insert(
+                name,
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+            );
+        }
+        let observed = format!(
+            "Clang CXCursor_FlagEnum parents: {flagged:?}\nRDL #[flags] count: {rdl_flags}\nWinMD System.FlagsAttribute: {actual_flags:?}\nBoth enums retain u32 and values 0, 1, 2, 3.\n"
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
+        assert!(
+            !actual_flags["PlainEnum"],
+            "a plain enum must not acquire FlagsAttribute"
+        );
+        assert!(
+            actual_flags["NativeFlags"],
+            "[[clang::flag_enum]] was recognized by Clang but lost before WinMD; RDL #[flags] count: {rdl_flags}"
+        );
+        assert_eq!(rdl_flags, 1, "only the annotated enum must emit #[flags]");
+    }
+
+    #[test]
     #[ignore = "requires a repaired SDK cohort in WIN32METADATA_NLS_INPUT_ROOT and a fresh WIN32METADATA_NLS_OUTPUT_ROOT"]
     fn sdk_partitioned_nls_preserves_enum_contracts() {
         use windows_metadata::{HasAttributes, Type, Value};

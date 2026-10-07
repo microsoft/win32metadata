@@ -347,6 +347,53 @@ mod Windows {
     }
 
     #[test]
+    fn rdl_flags_attribute_preserves_plain_enum_control() {
+        use windows_metadata::HasAttributes;
+
+        let root =
+            crate::staging::create_directory(&std::env::temp_dir(), "rdl-flags-control").unwrap();
+        let input = root.join("flags.rdl");
+        let output = root.join("FlagsControl.winmd");
+        std::fs::write(
+            &input,
+            r#"
+#[win32]
+mod Test {
+    mod FlagsControl {
+        #[repr(u32)]
+        #[flags]
+        enum Annotated {
+            None = 0,
+            Read = 1,
+            Write = 2,
+            All = 3,
+        }
+        #[repr(u32)]
+        enum Plain {
+            None = 0,
+            Read = 1,
+            Write = 2,
+            All = 3,
+        }
+    }
+}
+"#,
+        )
+        .unwrap();
+        compile_inputs(&[input], &[], "FlagsControl", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        let annotated = index.expect("Test.FlagsControl", "Annotated");
+        let attribute = annotated.find_attribute("FlagsAttribute").unwrap();
+        assert_eq!(attribute.namespace(), "System");
+        assert!(
+            !index
+                .expect("Test.FlagsControl", "Plain")
+                .has_attribute("FlagsAttribute")
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
     fn concurrent_same_assembly_compiles_keep_outputs_isolated() {
         const WORKERS: usize = 4;
         let root = crate::staging::create_directory(

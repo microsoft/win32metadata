@@ -133,3 +133,45 @@ cargo test -p windows-clang --test header_partitions --quiet
 namespace-container handling, keeping both the producer controls and the
 real-header integration gate. The producer's full `windows-clang` suite is also
 required; passing focused emission alone is insufficient.
+
+## Native `flag_enum` regression
+
+**Upstream issue:** <https://github.com/microsoft/windows-rs/issues/5047>.
+
+The self-contained `tests\fixtures\flag_enum.cpp` pairs an enum with actual
+`[[clang::flag_enum]]` syntax and an otherwise equivalent plain enum. The
+`scrape::tests::clang_flag_enum_preserves_flags_attribute` test checks the native
+Clang cursor, production extraction and RDL emission, then compiled WinMD.
+It requires `System.FlagsAttribute` only on the annotated enum while preserving
+both enums' unsigned 32-bit backing types and member values.
+
+**Known failure:** with producer
+`f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` and pinned libclang 22.1.8, Clang
+recognizes `CXCursor_FlagEnum` only on the annotated enum, but extraction loses
+the marker before the snapshot. Neither the emitted RDL nor the WinMD retains
+flags. The plain-enum, backing-type, and member-value controls pass. No local
+producer patch, dependency change, or product workaround is applied for this
+issue.
+
+The desired C++ assertion is explicitly ignored in normal runs pending an adopted
+upstream fix; invoking it explicitly **fails**, rather than accepting missing flags:
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    clang_flag_enum_preserves_flags_attribute -- --ignored --nocapture
+```
+
+The test prints its evidence directory and retains the fixture, extracted facts,
+RDL, WinMD, and observations. Optionally set `WIN32METADATA_FLAGS_OUTPUT_ROOT` to
+a new directory whose parent already exists; existing directories are rejected.
+The enabled downstream control verifies that explicit RDL `#[flags]` already
+produces `System.FlagsAttribute`, without marking a plain enum:
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    rdl_flags_attribute_preserves_plain_enum_control
+```
+
+**Removal condition:** remove the ignore when an adopted producer revision passes
+the unchanged C++ regression, retaining both the annotated/plain native controls
+and the enabled direct-RDL control.
