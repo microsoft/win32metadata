@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.IO;
+using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.TypeSystem;
 using MetadataUtils;
 using Xunit;
@@ -12,14 +13,26 @@ namespace Windows.Win32.Tests
 
         public InterfaceTests()
         {
-            this.typeSystem = DecompilerUtils.LoadDecompilerTypeSystem(TestCommon.TestUtils.Win32WinmdPath);
+            this.typeSystem = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(
+                TestCommon.TestUtils.Win32WinmdPath,
+                new DecompilerSettings
+                {
+                    ThrowOnAssemblyResolveErrors = false,
+                    // WinRT projection changes the native HResult identity to System.Exception.
+                    ApplyWindowsRuntimeProjections = false,
+                });
         }
 
         [Theory]
         [MemberData(nameof(GetInterfaceData))]
         public void Interface_Layouts_Correct(InterfaceInfo info)
         {
-            var winmdInterface = WinmdTestUtils.GetInterfaceInfo(this.typeSystem, info.Name);
+            AssertInterfaceLayout(this.typeSystem, info);
+        }
+
+        public static void AssertInterfaceLayout(DecompilerTypeSystem typeSystem, InterfaceInfo info)
+        {
+            var winmdInterface = WinmdTestUtils.GetInterfaceInfo(typeSystem, info.Name);
             var jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(winmdInterface, formatting: Newtonsoft.Json.Formatting.Indented);
             System.Diagnostics.Debug.WriteLine($"Read {info.Name} from winmd as:\n{jsonText}");
 
