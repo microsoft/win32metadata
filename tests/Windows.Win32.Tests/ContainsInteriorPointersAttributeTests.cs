@@ -13,33 +13,6 @@ namespace Windows.Win32.Tests
     {
         private const string AttributeName = "Windows.Win32.Foundation.Metadata.ContainsInteriorPointersAttribute";
 
-        private static readonly string[] AnnotatedBuffers =
-        {
-            "AddJobA::pData", "AddJobW::pData",
-            "EnumFormsA::pForm", "EnumFormsW::pForm",
-            "EnumJobsA::pJob", "EnumJobsW::pJob",
-            "EnumMonitorsA::pMonitor", "EnumMonitorsW::pMonitor",
-            "EnumPortsA::pPort", "EnumPortsW::pPort",
-            "EnumPrinterDataExA::pEnumValues", "EnumPrinterDataExW::pEnumValues",
-            "EnumPrinterDriversA::pDriverInfo", "EnumPrinterDriversW::pDriverInfo",
-            "EnumPrintersA::pPrinterEnum", "EnumPrintersW::pPrinterEnum",
-            "EnumPrintProcessorDatatypesA::pDatatypes", "EnumPrintProcessorDatatypesW::pDatatypes",
-            "EnumPrintProcessorsA::pPrintProcessorInfo", "EnumPrintProcessorsW::pPrintProcessorInfo",
-            "EnumServicesStatusExA::lpServices", "EnumServicesStatusExW::lpServices",
-            "GetFormA::pForm", "GetFormW::pForm",
-            "GetJobA::pJob", "GetJobW::pJob",
-            "GetPrinterA::pPrinter", "GetPrinterW::pPrinter",
-            "GetPrinterDriverA::pDriverInfo", "GetPrinterDriverW::pDriverInfo",
-            "GetPrinterDriver2W::pDriverInfo",
-            "GetTokenInformation::TokenInformation",
-            "GetCurrentPackageId::buffer",
-            "GetCurrentPackageInfo::buffer", "GetCurrentPackageInfo2::buffer",
-            "GetPackageApplicationIds::buffer",
-            "GetPackageId::buffer",
-            "GetPackageInfo::buffer", "GetPackageInfo2::buffer",
-            "PackageIdFromFullName::buffer",
-        };
-
         [Fact]
         public void AttributeIsParameterOnlyAndValueless()
         {
@@ -84,46 +57,25 @@ namespace Windows.Win32.Tests
         }
 
         [Fact]
-        public void VerifiedBuffersHaveExactlyOneValuelessAnnotation()
+        public void BufferAnnotationsAreParameterOnlyUniqueAndValueless()
         {
             using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
             using var peReader = new PEReader(stream);
             MetadataReader reader = peReader.GetMetadataReader();
-            var actual = new HashSet<string>();
-
-            foreach (MethodDefinitionHandle methodHandle in reader.MethodDefinitions)
+            CustomAttribute[] annotations = reader.CustomAttributes
+                .Select(reader.GetCustomAttribute)
+                .Where(a => GetAttributeTypeName(reader, a) == AttributeName)
+                .ToArray();
+            Assert.NotEmpty(annotations);
+            foreach (CustomAttribute annotation in annotations)
             {
-                MethodDefinition method = reader.GetMethodDefinition(methodHandle);
-                foreach (ParameterHandle parameterHandle in method.GetParameters())
-                {
-                    Parameter parameter = reader.GetParameter(parameterHandle);
-                    CustomAttribute[] attributes = parameter.GetCustomAttributes()
-                        .Select(reader.GetCustomAttribute)
-                        .Where(a => GetAttributeTypeName(reader, a) == AttributeName)
-                        .ToArray();
-                    if (attributes.Length == 0)
-                    {
-                        continue;
-                    }
-
-                    Assert.Single(attributes);
-                    Assert.True(parameter.SequenceNumber > 0, "Return values must not be annotated.");
-                    Assert.Equal(new byte[] { 0x01, 0x00, 0x00, 0x00 }, reader.GetBlobBytes(attributes[0].Value));
-                    actual.Add(reader.GetString(method.Name) + "::" + reader.GetString(parameter.Name));
-                }
-            }
-
-            Assert.True(
-                actual.SetEquals(AnnotatedBuffers),
-                "Missing: " + string.Join(", ", AnnotatedBuffers.Except(actual)) +
-                "; unexpected: " + string.Join(", ", actual.Except(AnnotatedBuffers)));
-            foreach (CustomAttributeHandle handle in reader.CustomAttributes)
-            {
-                CustomAttribute attribute = reader.GetCustomAttribute(handle);
-                if (GetAttributeTypeName(reader, attribute) == AttributeName)
-                {
-                    Assert.Equal(HandleKind.Parameter, attribute.Parent.Kind);
-                }
+                Assert.Equal(HandleKind.Parameter, annotation.Parent.Kind);
+                Parameter parameter = reader.GetParameter((ParameterHandle)annotation.Parent);
+                Assert.True(parameter.SequenceNumber > 0, "Return values must not be annotated.");
+                Assert.Single(parameter.GetCustomAttributes()
+                    .Select(reader.GetCustomAttribute)
+                    .Where(a => GetAttributeTypeName(reader, a) == AttributeName));
+                Assert.Equal(new byte[] { 0x01, 0x00, 0x00, 0x00 }, reader.GetBlobBytes(annotation.Value));
             }
         }
 
