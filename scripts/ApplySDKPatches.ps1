@@ -32,11 +32,15 @@
 Param(
     [Parameter(Mandatory=$true)]
     [ValidateSet("pre-midl", "post-midl")]
-    [string]$Phase
+    [string]$Phase,
+
+    [string]$WinSdkRoot = "$PSScriptRoot\..\generation\WinSDK"
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
+$windowsWin32ProjectRoot = [System.IO.Path]::GetFullPath($WinSdkRoot)
+$recompiledIdlHeadersDir = Join-Path $windowsWin32ProjectRoot "obj\RecompiledIdlHeaders"
 $patchDir = Join-Path $windowsWin32ProjectRoot "patches\$Phase"
 $patchTarget = [System.IO.Path]::GetRelativePath($rootDir, $recompiledIdlHeadersDir).Replace("\", "/")
 
@@ -45,7 +49,7 @@ if (!(Test-Path $patchDir)) {
     return
 }
 
-$patchFiles = Get-ChildItem -Path $patchDir -Filter "*.patch" -Recurse | Sort-Object FullName
+$patchFiles = @(Get-ChildItem -LiteralPath $patchDir -Filter "*.patch" -File -Recurse -Force | Sort-Object FullName)
 if ($patchFiles.Count -eq 0) {
     Write-Host "No $Phase patch files found. Skipping."
     return
@@ -75,6 +79,5 @@ foreach ($patchFile in $patchFiles) {
 Write-Host "SDK $Phase patches: $appliedCount applied, $failedCount failed (of $($patchFiles.Count))."
 
 if ($failedCount -gt 0) {
-    Write-Error "$Phase patches failed. Regenerate failing patches against the new SDK headers."
-    exit 1
+    throw "$Phase patches failed. Regenerate failing patches against the new SDK headers."
 }

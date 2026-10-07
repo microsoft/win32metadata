@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+  <PropertyGroup>
+    <OutputWinmd Condition="'$(OutputWinmd)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\bin\Windows.Win32.winmd'))</OutputWinmd>
+    <WinmdUsePartitionAuthority Condition="'$(WinmdUsePartitionAuthority)' == ''">true</WinmdUsePartitionAuthority>
+  </PropertyGroup>
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.props"/>
 
   <PropertyGroup>
@@ -7,14 +11,13 @@
     <Win32MetadataToolsExe>$(Win32MetadataToolsDir)\win32metadata-tools.exe</Win32MetadataToolsExe>
     <LibClangPath>$(Win32MetadataToolsDir)</LibClangPath>
     <Win32MetadataToolsManifest>$(RepoRootPath)tools\rust\Cargo.toml</Win32MetadataToolsManifest>
-    <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(RepoRootPath)bin\Windows.Win32.winmd</OutputWinmd>
+    <Win32MetadataToolsCommand Condition="'$(WinmdUsePartitionAuthority)' == 'true'">pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(RepoRootPath)scripts\Prepare-WindowsRsHeaders.ps1&quot; -WinSdkRoot &quot;$(MSBuildProjectDirectory)&quot; -ToolPath &quot;$(Win32MetadataToolsExe)&quot;</Win32MetadataToolsCommand>
     <WinmdVersion Condition="'$(WinmdVersion)' == ''">1.0.0.0</WinmdVersion>
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
     <SdkIncRoot>$(PkgMicrosoft_Windows_SDK_CPP)\c\include\$(WindowsSdkHeaderVersion)</SdkIncRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <UseWinSDKAssets>true</UseWinSDKAssets>
     <WinmdUseSdkHeaderManifest>true</WinmdUseSdkHeaderManifest>
-    <WinmdUsePartitionAuthority Condition="'$(WinmdUsePartitionAuthority)' == ''">false</WinmdUsePartitionAuthority>
     <RestoreSources>https://api.nuget.org/v3/index.json</RestoreSources>
   </PropertyGroup>
 
@@ -23,7 +26,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="$(WindowsSdkCppPackageVersion)" GeneratePathProperty="true"/>
     <WinmdPartitionPolicyRoot Include="Partitions" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdNamespaceRoutes Include="requiredNamespacesForNames.rsp" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
-    <WinmdIncludeDir Include="RecompiledIdlHeaders" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
+    <WinmdIncludeDir Include="obj\RecompiledIdlHeaders" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="AdditionalHeaders\cpdk" Condition="'$(WinmdUsePartitionAuthority)' == 'true'"/>
     <WinmdIncludeDir Include="AdditionalHeaders"/>
     <WinmdIncludeDir Include="Partitions\Com.StructuredStorage"/>
@@ -42,4 +45,8 @@
   </Target>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets"/>
+
+  <Target Name="BeforeClean">
+    <Exec Command="pwsh -NoProfile -ExecutionPolicy Bypass -File &quot;$(RepoRootPath)scripts\Prepare-WindowsRsHeaders.ps1&quot; -WinSdkRoot &quot;$(MSBuildProjectDirectory)&quot; -Clean -CleanObjectDirectory &quot;$(WinmdObjDir)&quot; -CleanOutput &quot;$(OutputWinmd)&quot;"/>
+  </Target>
 </Project>

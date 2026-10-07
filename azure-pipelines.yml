@@ -14,6 +14,7 @@ pr:
     include:
     - main
     - feature/shift-left-annotations
+    - user/jevansa/windows-rs-pipeline-wrapper
   paths:
     exclude:
       - apidocs
@@ -69,6 +70,19 @@ jobs:
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
+      pwsh: true
+
+  - task: PowerShell@2
+    displayName: Verify prepared input and generated output provenance
+    inputs:
+      filePath: 'scripts\Prepare-WindowsRsHeaders.ps1'
+      arguments: '-VerifyOutput bin\Windows.Win32.winmd'
+      pwsh: true
+
+  - task: PowerShell@2
+    displayName: Test header preparation and patched generation
+    inputs:
+      filePath: 'scripts\Test-WindowsRsHeaders.ps1'
       pwsh: true
 
   - task: EsrpCodeSigning@1
@@ -172,17 +186,18 @@ jobs:
       pwsh: true
 
   - task: PowerShell@2
-    displayName: Do tests
+    displayName: Run strict metadata tests
     inputs:
-      targetType: inline
-      script: |
-        $arguments = @("-SkipInstallTools")
-        if ("$(Build.Reason)" -eq "PullRequest" -and
-            "$(System.PullRequest.TargetBranch)" -eq "refs/heads/feature/shift-left-annotations") {
-          $arguments += "-AllowKnownGeneratorGaps"
-        }
-        & "$(Build.SourcesDirectory)\scripts\DoTests.ps1" @arguments
+      filePath: 'scripts\DoTests.ps1'
+      arguments: '-SkipInstallTools'
       pwsh: true
+
+  - task: PublishTestResults@2
+    displayName: Publish strict metadata test results
+    condition: always()
+    inputs:
+      testResultsFormat: VSTest
+      testResultsFiles: 'obj\Windows.Win32.Tests\results\*.trx'
 
   - task: EsrpCodeSigning@1
     displayName: 'Sign nuget packages'
