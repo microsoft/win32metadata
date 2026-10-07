@@ -30,6 +30,16 @@ This is not general C++ class import: ordinary unselected classes remain
 unsupported, nontrivial by-value uses are rejected, and methods, constructors,
 destructors, and lifetime behavior are not projected.
 
+An explicitly annotated class definition can instead request pointer-only nominal
+identity: `class _Win32_NativeOpaque_ NativeClass { ... };`. The capture header emits
+the valueless `win32metadata:native_opaque` marker only for metadata generation
+with Clang; native metadata-off builds are unchanged. The producer retains an
+empty named pointee through pointers, references, and pointer typedefs without
+projecting fields, methods, bases, layout, inheritance, or lifetime behavior.
+Every by-value use is an error. The marker is valid only on a named non-COM C++ class
+definition, not a forward declaration, struct, union, template, typedef, function,
+or parameter. Unmarked classes keep their existing projection.
+
 Exact declaration matching includes the translation unit. An included-only declaration
 is not rewritten to another header's scoped alias merely because that alias is the only
 owned variant in its input. For example, a satellite `GetQueuedCompletionStatus` keeps

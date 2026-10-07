@@ -3845,6 +3845,67 @@ mod tests {
     }
 
     #[test]
+    fn retval_capture_supports_native_off_headers() {
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_NATIVE_RETVAL_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("retval-native"),
+        };
+        let source = include_str!("../tests/fixtures/retval_native.cpp");
+        let fixture = root.join("retval_native.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let mut args = CLANG_ARGS
+            .iter()
+            .filter(|argument| !argument.starts_with("-DWIN32METADATA"))
+            .map(|argument| argument.to_string())
+            .collect::<Vec<_>>();
+        for include in [win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")] {
+            args.extend([
+                "-isystem".to_string(),
+                path_arg(&include, "--include").unwrap(),
+            ]);
+        }
+        args.push("--target=x86_64-pc-windows-msvc".to_string());
+        for control in [
+            None,
+            Some("TEST_EXISTING_NATIVE_RETVAL"),
+            Some("TEST_NATIVE_RETVAL_EXPANSION"),
+        ] {
+            let mut case_args = args.clone();
+            if let Some(control) = control {
+                case_args.push(format!("-D{control}=1"));
+            }
+            let snapshot = windows_clang::extract(
+                [Input::new(&source_path, source).with_roots([source_path.clone()])],
+                &case_args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .unwrap();
+            assert!(
+                snapshot.annotations().is_empty(),
+                "native-off capture must not add metadata attributes"
+            );
+            if control.is_none() {
+                for name in ["NativeRetval", "NativeComRetval"] {
+                    assert!(
+                        snapshot.facts().iter().any(|fact| fact.name == name
+                            && matches!(fact.data, FactData::Function { .. })),
+                        "{name} must parse with an SDK lacking retval convenience macros"
+                    );
+                }
+            }
+        }
+        let result = "PASS: missing native retval macros use output contracts; existing SDK definitions remain unchanged; metadata-off annotations stay empty.\n";
+        std::fs::write(root.join("result.txt"), result).unwrap();
+        println!("{result}Evidence: {}", root.display());
+    }
+
+    #[test]
     fn retval_source_channels_emit_one_attribute() {
         use windows_metadata::{HasAttributes, MethodAttributes};
 
@@ -3936,6 +3997,143 @@ mod tests {
             "RetVal source channels must converge once"
         );
         assert_eq!(metadata_counts, expected, "physical RetVal attributes");
+    }
+
+    #[test]
+    fn native_opaque_class_annotations_preserve_pointer_identity() {
+        use windows_metadata::{HasAttributes, Type};
+
+        ensure_libclang();
+        let root = match std::env::var_os("WIN32METADATA_OPAQUE_OUTPUT_ROOT") {
+            Some(path) => {
+                let path = PathBuf::from(path);
+                std::fs::create_dir(&path).expect("the evidence directory must not already exist");
+                path
+            }
+            None => scratch("native-opaque"),
+        };
+        let source = include_str!("../tests/fixtures/native_opaque.cpp");
+        let fixture = root.join("native_opaque.cpp");
+        std::fs::write(&fixture, source).unwrap();
+        let source_path = path_arg(&fixture, "--partition").unwrap();
+        let win_sdk = checked_in_win_sdk();
+        let args = checked_in_clang_args(&[win_sdk.join("AdditionalHeaders"), win_sdk.join("inc")]);
+        let native_args = args
+            .iter()
+            .filter(|argument| !argument.starts_with("-DWIN32METADATA"))
+            .map(String::as_str)
+            .collect::<Vec<_>>();
+        let native = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &native_args,
+        )
+        .unwrap();
+        assert!(
+            native.annotations().is_empty(),
+            "metadata-off capture must not add annotations"
+        );
+        std::fs::write(
+            root.join("metadata-off.txt"),
+            "Native C++ layout, nontriviality, and inheritance assertions passed with no metadata annotations.\n",
+        )
+        .unwrap();
+        let snapshot = windows_clang::extract(
+            [Input::new(&source_path, source).with_roots([source_path.clone()])],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let namespace = "Test.NativeOpaque";
+        let policy = HeaderPartitionPolicy::new().with_traversed_header_for_input(
+            &source_path,
+            source_path.clone(),
+            RootPartition::new("NativeOpaque", namespace),
+        );
+        let authorities = NamespaceAuthorities::new();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(namespace, references.types());
+        emit.library = Some("opaque.dll");
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = root.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let output = root.join("NativeOpaque.winmd");
+        compile_inputs(&[rdl], &[], "NativeOpaque", None, &output).unwrap();
+        let index = Index::read(&output).unwrap();
+        for name in ["OpaqueBase", "OpaqueDerived"] {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition.category(),
+                windows_metadata::reader::TypeCategory::Struct,
+                "{name} must be nominal, not an inherited interface"
+            );
+            assert_eq!(definition.fields().count(), 0, "{name} fields");
+            assert_eq!(definition.methods().count(), 0, "{name} methods");
+            assert!(definition.class_layout().is_none(), "{name} native layout");
+            assert!(
+                !definition.has_attribute("NativeInheritanceAttribute"),
+                "{name} native inheritance"
+            );
+        }
+        assert!(
+            !index.contains(namespace, "PlainClass"),
+            "unmarked virtual classes must retain their existing void projection"
+        );
+        let Item::Fn(marked) = index.expect_item(namespace, "UseOpaque") else {
+            panic!("missing UseOpaque");
+        };
+        let nominal = Type::value_named(namespace, "OpaqueBase");
+        assert_eq!(
+            marked.signature(&[]).types,
+            [
+                Type::PtrMut(Box::new(nominal.clone()), 1),
+                Type::PtrConst(Box::new(nominal.clone()), 1),
+                Type::PtrMut(Box::new(nominal), 2),
+                Type::PtrMut(Box::new(Type::value_named(namespace, "OpaqueDerived")), 1),
+            ],
+            "marked native identity, constness, and pointer levels"
+        );
+        let Item::Fn(plain) = index.expect_item(namespace, "UsePlain") else {
+            panic!("missing UsePlain");
+        };
+        assert_eq!(
+            plain.signature(&[]).types,
+            [
+                Type::PtrMut(Box::new(Type::Void), 1),
+                Type::PtrConst(Box::new(Type::Void), 1),
+                Type::PtrMut(Box::new(Type::Void), 2),
+            ],
+            "plain-class negative control"
+        );
+        let mut rejections = BTreeMap::new();
+        for case in ["PARAMETER", "RETURN", "FIELD", "ARRAY"] {
+            let mut case_args = args.clone();
+            case_args.push(format!("-DTEST_OPAQUE_VALUE_{case}=1"));
+            let result = windows_clang::extract(
+                [Input::new(&source_path, source).with_roots([source_path.clone()])],
+                &case_args.iter().map(String::as_str).collect::<Vec<_>>(),
+            )
+            .map_err(|error| error.to_string())
+            .and_then(|snapshot| {
+                plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64")
+            });
+            let error = result.expect_err("opaque classes must never be projected by value");
+            std::fs::write(root.join(format!("rejected-{case}.txt")), &error).unwrap();
+            assert!(error.contains("native_opaque"), "{case}: {error}");
+            assert!(error.contains("by value"), "{case}: {error}");
+            rejections.insert(case, error);
+        }
+        let observed = format!(
+            "Marked: {:?}\nPlain: {:?}\nBy-value rejections: {rejections:#?}\n",
+            marked.signature(&[]).types,
+            plain.signature(&[]).types
+        );
+        std::fs::write(root.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", root.display());
     }
 
     #[test]
@@ -6889,18 +7087,152 @@ mod tests {
 
     #[test]
     fn checked_in_gdiplus_imports_emit_all_supported_native_functions() {
+        let win_sdk = checked_in_win_sdk();
         for target in ["x64", "x86"] {
-            check_gdiplus_imported_functions(target);
+            let root = scratch(&format!("gdiplus-imported-functions-{target}"));
+            let index = check_gdiplus_imported_functions(target, &win_sdk, &root);
+            assert_gdiplus_geometry_layouts(&index, target, false);
+            std::fs::remove_dir_all(root).unwrap();
         }
     }
 
-    fn check_gdiplus_imported_functions(target: &str) {
+    #[test]
+    #[ignore = "requires an annotated SDK cohort in WIN32METADATA_GDIPLUS_INPUT_ROOT and a fresh WIN32METADATA_GDIPLUS_OUTPUT_ROOT"]
+    fn sdk_partitioned_gdiplus_preserves_native_opaque_pointers() {
+        use windows_metadata::{HasAttributes, Type};
+
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_GDIPLUS_INPUT_ROOT")
+                .expect("set WIN32METADATA_GDIPLUS_INPUT_ROOT to the annotated generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_GDIPLUS_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_GDIPLUS_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let index = check_gdiplus_imported_functions("x64", &win_sdk, &output);
+        assert_gdiplus_geometry_layouts(&index, "x64", true);
+        let namespace = "Windows.Win32.Graphics.GdiPlus";
+        let opaque_types = [
+            "GpGraphics",
+            "GpBrush",
+            "GpTexture",
+            "GpSolidFill",
+            "GpLineGradient",
+            "GpPathGradient",
+            "GpHatch",
+            "GpPen",
+            "GpCustomLineCap",
+            "GpAdjustableArrowCap",
+            "GpImage",
+            "GpBitmap",
+            "GpMetafile",
+            "GpImageAttributes",
+            "GpPath",
+            "GpRegion",
+            "GpPathIterator",
+            "GpFontFamily",
+            "GpFont",
+            "GpStringFormat",
+            "GpFontCollection",
+        ];
+        for name in opaque_types {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition.category(),
+                windows_metadata::reader::TypeCategory::Struct,
+                "{name}"
+            );
+            assert_eq!(definition.fields().count(), 0, "{name} fields");
+            assert_eq!(definition.methods().count(), 0, "{name} methods");
+            assert!(definition.class_layout().is_none(), "{name} layout");
+            assert!(
+                !definition.has_attribute("NativeInheritanceAttribute"),
+                "{name} native inheritance"
+            );
+        }
+        let controls = [
+            ("GdipCreatePath", 1, "GpPath", 2),
+            ("GdipDeletePath", 0, "GpPath", 1),
+            ("GdipCreateBitmapFromFile", 1, "GpBitmap", 2),
+            ("GdipDisposeImage", 0, "GpImage", 1),
+            ("GdipGetImageGraphicsContext", 0, "GpImage", 1),
+            ("GdipGetImageGraphicsContext", 1, "GpGraphics", 2),
+            ("GdipDeleteGraphics", 0, "GpGraphics", 1),
+        ];
+        let mut observed = String::new();
+        for (name, position, pointee, depth) in controls {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing {name}");
+            };
+            let actual = method.signature(&[]).types[position].clone();
+            assert_eq!(
+                actual,
+                Type::PtrMut(Box::new(Type::value_named(namespace, pointee)), depth),
+                "{name}:{position}"
+            );
+            observed.push_str(&format!("{name}:{position}\t{actual:?}\n"));
+        }
+        let matrices = index
+            .types()
+            .filter(|definition| definition.name() == "Matrix")
+            .collect::<Vec<_>>();
+        let [matrix] = matrices.as_slice() else {
+            panic!(
+                "expected one nominal Matrix definition, got {}",
+                matrices.len()
+            );
+        };
+        assert_eq!(
+            matrix.category(),
+            windows_metadata::reader::TypeCategory::Struct,
+            "Matrix must not project native inheritance"
+        );
+        assert_eq!(matrix.fields().count(), 0, "Matrix fields");
+        assert_eq!(matrix.methods().count(), 0, "Matrix methods");
+        assert!(matrix.class_layout().is_none(), "Matrix layout");
+        assert!(
+            !matrix.has_attribute("NativeInheritanceAttribute"),
+            "Matrix native inheritance"
+        );
+        let matrix_type = Type::value_named(matrix.namespace(), matrix.name());
+        let matrix_pointee = if index.contains(namespace, "GpMatrix") {
+            assert_eq!(
+                index.expect(namespace, "GpMatrix").underlying_type(),
+                Some(matrix_type),
+                "the native typedef must lead to the marked Matrix definition"
+            );
+            Type::value_named(namespace, "GpMatrix")
+        } else {
+            matrix_type
+        };
+        let Item::Fn(create_matrix) = index.expect_item(namespace, "GdipCreateMatrix") else {
+            panic!("missing GdipCreateMatrix");
+        };
+        assert_eq!(
+            create_matrix.signature(&[]).types,
+            [Type::PtrMut(Box::new(matrix_pointee), 2)],
+            "native GpMatrix** must reach the marked Matrix definition"
+        );
+        observed.push_str(&format!(
+            "GdipCreateMatrix:0\t{:?}\nMatrix definition: {}.{}\n",
+            create_matrix.signature(&[]).types[0],
+            matrix.namespace(),
+            matrix.name()
+        ));
+        std::fs::write(output.join("opaque-pointers.txt"), &observed).unwrap();
+        let result = "PASS: 629 import-backed GDI+ functions, native calling conventions, geometry layouts/aliases, 22 nominal definitions, and eight native pointer slots.\n";
+        std::fs::write(output.join("result.txt"), result).unwrap();
+        println!("{observed}{result}Evidence: {}", output.display());
+    }
+
+    fn check_gdiplus_imported_functions(target: &str, win_sdk: &Path, root: &Path) -> Index {
         ensure_libclang();
         let architecture = arch(target).unwrap();
-        let root = scratch(&format!("gdiplus-imported-functions-{target}"));
-        let win_sdk = checked_in_win_sdk();
-        let include_dirs = checked_in_include_dirs(&win_sdk);
-        let traversal = checked_in_traversal_policy();
+        let include_dirs = checked_in_include_dirs(win_sdk);
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &include_dirs)
+                .unwrap();
         let gdiplus = logical_partition(&traversal, "Gdiplus").unwrap();
         let roots = gdiplus
             .roots
@@ -6946,6 +7278,9 @@ mod tests {
                 libclang::clang_resource_dir(&staged_tools).unwrap(),
             ]);
         }
+        std::fs::write(root.join("input.cpp"), &source).unwrap();
+        std::fs::write(root.join("arguments.txt"), args.join("\n")).unwrap();
+        std::fs::write(root.join("roots.txt"), roots.join("\n")).unwrap();
         let snapshot = windows_clang::extract(
             [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
             &args.iter().map(String::as_str).collect::<Vec<_>>(),
@@ -7012,6 +7347,11 @@ mod tests {
         let excluded = BTreeSet::new();
         let selected = implicit_selected_functions(&snapshot, &excluded, &libraries, |_| false);
         assert_eq!(selected.len(), 629);
+        std::fs::write(
+            root.join("selected.txt"),
+            selected.iter().cloned().collect::<Vec<_>>().join("\n"),
+        )
+        .unwrap();
         let unsupported = BTreeSet::from([
             "GdipSetImageAttributesICMMode",
             "GdipFontCollectionEnumerable",
@@ -7046,7 +7386,6 @@ mod tests {
         let winmd = root.join("GdiPlus.winmd");
         compile_inputs(&[rdl], &[], "GdiPlus", None, &winmd).unwrap();
         let index = Index::read(&winmd).unwrap();
-        assert_gdiplus_geometry_layouts(&index, target);
         let namespace = "Windows.Win32.Graphics.GdiPlus";
         let emitted = index
             .iter_items()
@@ -7100,10 +7439,10 @@ mod tests {
                 fact.name
             );
         }
-        std::fs::remove_dir_all(root).unwrap();
+        index
     }
 
-    fn assert_gdiplus_geometry_layouts(index: &Index, target: &str) {
+    fn assert_gdiplus_geometry_layouts(index: &Index, target: &str, opaque_classes: bool) {
         use windows_metadata::reader::TypeCategory;
         use windows_metadata::{Type, TypeAttributes};
 
@@ -7236,8 +7575,20 @@ mod tests {
                 panic!("missing `{name}`");
             };
             let signature = method.signature(&[]);
+            let path_type = if opaque_classes {
+                Type::value_named(
+                    namespace,
+                    if name.starts_with("GdipGetPathGradient") {
+                        "GpPathGradient"
+                    } else {
+                        "GpPath"
+                    },
+                )
+            } else {
+                Type::Void
+            };
             let mut expected = vec![
-                Type::PtrMut(Box::new(Type::Void), 1),
+                Type::PtrMut(Box::new(path_type), 1),
                 Type::PtrMut(Box::new(Type::value_named(namespace, alias)), 1),
             ];
             if has_count {
@@ -7254,7 +7605,12 @@ mod tests {
             panic!("missing GdipAddPathArc");
         };
         let signature = method.signature(&[]);
-        let mut expected = vec![Type::PtrMut(Box::new(Type::Void), 1)];
+        let path_type = if opaque_classes {
+            Type::value_named(namespace, "GpPath")
+        } else {
+            Type::Void
+        };
+        let mut expected = vec![Type::PtrMut(Box::new(path_type), 1)];
         expected.resize(7, Type::F32);
         assert_eq!(signature.types, expected);
         assert_eq!(

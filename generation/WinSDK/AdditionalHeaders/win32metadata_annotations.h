@@ -26,6 +26,15 @@
     _WIN32META_ANNOTATION_("win32metadata:associated_constant=" #name)
 #define _Win32_Retval_ \
     _WIN32META_ANNOTATION_("win32metadata:retval")
+#define _Win32_NativeOpaque_ \
+    _WIN32META_ANNOTATION_("win32metadata:native_opaque")
+
+#ifndef _Out_retval_
+#define _Out_retval_ _Out_
+#endif
+#ifndef _COM_Outptr_retval_
+#define _COM_Outptr_retval_ _COM_Outptr_
+#endif
 
 #if defined(WIN32METADATA) && defined(__clang__)
 #undef _Out_retval_

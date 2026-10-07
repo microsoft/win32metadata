@@ -4,8 +4,10 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`15ba1b7f96c770b9d425ebca00a3a73f74bb004e`](https://github.com/jevansaks/windows-rs/commit/15ba1b7f96c770b9d425ebca00a3a73f74bb004e),
-published in `jevansaks/windows-rs`. Its AssociatedEnum closure fixes follow
+[`ab1e9593dd421d3aa0d6a3710557b7789199d004`](https://github.com/jevansaks/windows-rs/commit/ab1e9593dd421d3aa0d6a3710557b7789199d004),
+published in `jevansaks/windows-rs`. Its redeclaration correction follows the
+native-opaque capability `1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355` and AssociatedEnum
+closure revision `15ba1b7f96c770b9d425ebca00a3a73f74bb004e`, whose fixes follow
 the RetVal fix `7f3e04f7cfeb2c31eea00f2330b0159572644828` and native Flags fix
 `0680de9b2b53985fd031b155cbc2c66c357ed10f`, which follows the previously adopted
 `f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` namespace-container fix, which follows
@@ -46,6 +48,12 @@ The tests use the SDK versions in `eng\Versions.props` and pinned libclang 22.1.
 They check extracted facts, physical WinMD direction/optional/count attributes,
 native alias chains, and binary/single-NUL negative controls. The package test
 checks the unchanged API golden and offline generation.
+
+For native metadata-off builds, the annotation header supplies `_Out_retval_`
+and `_COM_Outptr_retval_` only when the SDK has not defined them, using `_Out_`
+and `_COM_Outptr_` respectively. Existing SDK definitions are preserved; strict
+metadata-on capture overrides remain unchanged.
+`retval_capture_supports_native_off_headers` covers missing and existing macros.
 
 **Adoption:** consumer integration on the producer revision above. Optional-free
 capture preserves Optional; it does not infer cleanup ownership or a SafeHandle.
@@ -302,3 +310,70 @@ cargo test -p windows-clang --quiet
 producer ownership/eligibility controls and this cross-input native-header
 regression. Do not remove the fork fix based on same-input or focused by-header
 emission alone.
+
+## Explicit pointer-only native class identity
+
+**Upstream issue:** not filed. This is an explicitly opted-in local producer
+capability, not a claim that arbitrary C++ class projection is now supported.
+
+**Source and impact:** defined GDI+ implementation classes previously projected
+as `void` even when the native APIs use distinct class pointers. The SDK bridge
+now exposes `_Win32_NativeOpaque_`, placed after `class` and before the name on a
+named non-COM class definition. It carries the valueless
+`win32metadata:native_opaque` annotation only under Clang metadata generation.
+Native metadata-off builds retain their original definitions and ABI.
+
+**Local fix and adoption:** producer
+[`ab1e9593dd421d3aa0d6a3710557b7789199d004`](https://github.com/jevansaks/windows-rs/commit/ab1e9593dd421d3aa0d6a3710557b7789199d004)
+includes the capability introduced in
+[`1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355`](https://github.com/jevansaks/windows-rs/commit/1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355)
+to retain an empty nominal pointee through pointer, reference, and typedef paths.
+It emits no class fields, methods, bases, layout, or native inheritance.
+Unmarked implementation classes keep their existing projection. Marked by-value
+uses fail preflight, including parameters, returns, containing fields, and arrays.
+Forward declarations, structs, unions, templates, typedefs, functions, parameters,
+COM classes, and markers with a payload are not valid annotation targets.
+The wrapper does not reparse or special-case class names.
+
+Clang can propagate a definition's marker onto a later unannotated redeclaration.
+Revision `1dd86adb` rejected that valid source before RDL in actual GDI+ headers.
+The adopted correction resolves the definition and accepts such a copied
+attribute only when its original expansion lies inside that definition's source
+extent. An explicitly annotated forward declaration remains invalid.
+
+**Capture and regression:** `tests\fixtures\native_opaque.cpp` compares marked
+base/derived classes with an equivalent unmarked virtual class and includes a
+later unannotated redeclaration that reproduces the `1dd86adb` failure. The test checks
+metadata-off native layout/inheritance assertions, empty physical TypeDefs,
+constness and pointer depth, the plain void control, and four explicit by-value
+rejections. Set `WIN32METADATA_OPAQUE_OUTPUT_ROOT` to a fresh evidence directory.
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    native_opaque_class_annotations_preserve_pointer_identity -- --nocapture
+```
+
+The opt-in real-header GDI+ gate reuses the existing production aggregate prefix,
+12 traversal roots, nonempty WinRT references, and native library selection.
+It retains the 629 import-backed functions, calling conventions, and geometry
+layout/alias checks, then checks 22 nominal definitions and eight native pointer
+slots. `GpMatrix` is verified against the actual emitted `Matrix` definition,
+not assumed historical alias spelling.
+
+```powershell
+$env:WIN32METADATA_GDIPLUS_INPUT_ROOT = (Resolve-Path .\cohort\generation\WinSDK).Path
+$env:WIN32METADATA_GDIPLUS_OUTPUT_ROOT = Join-Path $PWD "obj\gdiplus-opaque-check"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_gdiplus_preserves_native_opaque_pointers -- --ignored --nocapture
+```
+
+This gate requires the marked native class definitions and the new capture
+header. When comparing raw and patched cohorts, both arms must receive identical
+capture-support bytes; that tooling-support delta is separate from the native
+header annotations. Existing unmarked x64/x86 GDI+ tests remain unchanged in
+their expected projection.
+
+**Removal condition:** replace the fork implementation only with a producer
+that passes these capture/native-header tests and the producer's `opaque_classes`
+target, ownership, same-leaf namespace, pointer-typedef, callback, and by-value
+controls. Preserve explicit opt-in and rejection semantics.
