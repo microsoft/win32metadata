@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
-index a480aab7e0..62e46cc9e7 100644
+index a480aab7e0..73c25c9882 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
 @@ -1,3 +1,4 @@
@@ -21,11 +21,11 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_openState( 
 -            /* [retval][out] */ WMPOpenState *pwmpos) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPOpenState *pwmpos) = 0;
++            /* [retval][out] */ WMPOpenState *pwmpos) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playState( 
 -            /* [retval][out] */ WMPPlayState *pwmpps) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPPlayState *pwmpps) = 0;
++            /* [retval][out] */ WMPPlayState *pwmpps) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_controls( 
              /* [retval][out] */ IWMPControls **ppControl) = 0;
@@ -65,11 +65,11 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_status( 
 -            /* [retval][out] */ WMPDeviceStatus *pwmpds) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPDeviceStatus *pwmpds) = 0;
++            /* [retval][out] */ WMPDeviceStatus *pwmpds) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_syncState( 
 -            /* [retval][out] */ WMPSyncState *pwmpss) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPSyncState *pwmpss) = 0;
++            /* [retval][out] */ WMPSyncState *pwmpss) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_progress( 
              /* [retval][out] */ long *plProgress) = 0;
@@ -78,7 +78,7 @@ index a480aab7e0..62e46cc9e7 100644
      public:
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripState( 
 -            /* [retval][out] */ WMPRipState *pwmprs) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPRipState *pwmprs) = 0;
++            /* [retval][out] */ WMPRipState *pwmprs) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripProgress( 
              /* [retval][out] */ long *plProgress) = 0;
@@ -87,7 +87,7 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnFormat( 
 -            /* [retval][out] */ WMPBurnFormat *pwmpbf) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPBurnFormat *pwmpbf) = 0;
++            /* [retval][out] */ WMPBurnFormat *pwmpbf) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_burnFormat( 
              /* [in] */ WMPBurnFormat wmpbf) = 0;
@@ -96,7 +96,7 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnState( 
 -            /* [retval][out] */ WMPBurnState *pwmpbs) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPBurnState *pwmpbs) = 0;
++            /* [retval][out] */ WMPBurnState *pwmpbs) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnProgress( 
              /* [retval][out] */ long *plProgress) = 0;
@@ -114,7 +114,7 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_type( 
 -            /* [retval][out] */ WMPLibraryType *pwmplt) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPLibraryType *pwmplt) = 0;
++            /* [retval][out] */ WMPLibraryType *pwmplt) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_mediaCollection( 
              /* [retval][out] */ IWMPMediaCollection **ppIWMPMediaCollection) = 0;
@@ -123,7 +123,7 @@ index a480aab7e0..62e46cc9e7 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_scanState( 
 -            /* [retval][out] */ WMPFolderScanState *pwmpfss) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") WMPFolderScanState *pwmpfss) = 0;
++            /* [retval][out] */ WMPFolderScanState *pwmpfss) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_currentFolder( 
              /* [retval][out] */ BSTR *pbstrFolder) = 0;

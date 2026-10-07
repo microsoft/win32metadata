@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h b/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
-index 2fe6aba607..e2fe6350ce 100644
+index 2fe6aba607..0559dddd1f 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/TxDtc.h
 @@ -1,3 +1,4 @@
@@ -40,7 +40,7 @@ index 2fe6aba607..e2fe6350ce 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetOurXln( 
 -            /* [out] */ DTCLUXLN *pXln,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUXLN *pXln,
++            /* [out] */ DTCLUXLN *pXln,
              /* [out][in] */ unsigned char *pOurLogName,
              /* [out][in] */ unsigned char *pRemoteLogName,
 -            /* [out] */ DWORD *pdwProtocol) = 0;
@@ -56,7 +56,7 @@ index 2fe6aba607..e2fe6350ce 100644
              /* [in] */ DWORD cbRemoteLogName,
              /* [in] */ DWORD dwProtocol,
 -            /* [out] */ DTCLUXLNCONFIRMATION *pConfirmation) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUXLNCONFIRMATION *pConfirmation) = 0;
++            /* [out] */ DTCLUXLNCONFIRMATION *pConfirmation) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleErrorFromOurXln( 
              /* [in] */ DTCLUXLNERROR Error) = 0;
@@ -71,12 +71,12 @@ index 2fe6aba607..e2fe6350ce 100644
          virtual HRESULT STDMETHODCALLTYPE GetOurCompareStates( 
              /* [out][in] */ unsigned char *pOurTransId,
 -            /* [out] */ DTCLUCOMPARESTATE *pCompareState) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUCOMPARESTATE *pCompareState) = 0;
++            /* [out] */ DTCLUCOMPARESTATE *pCompareState) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleTheirCompareStatesResponse( 
              /* [in] */ DTCLUCOMPARESTATE CompareState,
 -            /* [out] */ DTCLUCOMPARESTATESCONFIRMATION *pConfirmation) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUCOMPARESTATESCONFIRMATION *pConfirmation) = 0;
++            /* [out] */ DTCLUCOMPARESTATESCONFIRMATION *pConfirmation) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleErrorFromOurCompareStates( 
              /* [in] */ DTCLUCOMPARESTATESERROR Error) = 0;
@@ -101,14 +101,14 @@ index 2fe6aba607..e2fe6350ce 100644
              /* [in] */ DWORD cbOurLogName,
              /* [in] */ DWORD dwProtocol,
 -            /* [out] */ DTCLUXLNRESPONSE *pResponse) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUXLNRESPONSE *pResponse) = 0;
++            /* [out] */ DTCLUXLNRESPONSE *pResponse) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetOurLogNameSize( 
              /* [out][in] */ DWORD *pcbOurLogName) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetOurXln( 
 -            /* [out] */ DTCLUXLN *pXln,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUXLN *pXln,
++            /* [out] */ DTCLUXLN *pXln,
              /* [out][in] */ unsigned char *pOurLogName,
 -            /* [out] */ DWORD *pdwProtocol) = 0;
 +            /* [out] */ DWORD *pdwProtocol) = 0;
@@ -121,8 +121,8 @@ index 2fe6aba607..e2fe6350ce 100644
              /* [in] */ DTCLUCOMPARESTATE CompareState,
 -            /* [out] */ DTCLUCOMPARESTATESRESPONSE *pResponse,
 -            /* [out] */ DTCLUCOMPARESTATE *pCompareState) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUCOMPARESTATESRESPONSE *pResponse,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") DTCLUCOMPARESTATE *pCompareState) = 0;
++            /* [out] */ DTCLUCOMPARESTATESRESPONSE *pResponse,
++            /* [out] */ DTCLUCOMPARESTATE *pCompareState) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE HandleConfirmationOfOurCompareStates( 
              /* [in] */ DTCLUCOMPARESTATESCONFIRMATION Confirmation) = 0;

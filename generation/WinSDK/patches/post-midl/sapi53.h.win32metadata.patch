@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
-index 10cd1740df..8cb98d21bc 100644
+index 10cd1740df..ced94a52e1 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi53.h
 @@ -1,3 +1,4 @@
@@ -250,14 +250,14 @@ index 10cd1740df..8cb98d21bc 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetPriority( 
 -            /* [out] */ SPVPRIORITY *pePriority) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPVPRIORITY *pePriority) = 0;
++            /* [out] */ SPVPRIORITY *pePriority) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetAlertBoundary( 
              /* [in] */ SPEVENTENUM eBoundary) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetAlertBoundary( 
 -            /* [out] */ SPEVENTENUM *peBoundary) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPEVENTENUM *peBoundary) = 0;
++            /* [out] */ SPEVENTENUM *peBoundary) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetRate( 
              /* [in] */ long RateAdjust) = 0;
@@ -404,7 +404,7 @@ index 10cd1740df..8cb98d21bc 100644
          virtual HRESULT STDMETHODCALLTYPE IsPronounceable( 
              /* [string][in] */ LPCWSTR pszWord,
 -            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
++            /* [out] */ SPWORDPRONOUNCEABLE *pWordPronounceable) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetGrammarState( 
              /* [in] */ SPGRAMMARSTATE eGrammarState) = 0;
@@ -413,7 +413,7 @@ index 10cd1740df..8cb98d21bc 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetGrammarState( 
 -            /* [out] */ SPGRAMMARSTATE *peGrammarState) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPGRAMMARSTATE *peGrammarState) = 0;
++            /* [out] */ SPGRAMMARSTATE *peGrammarState) = 0;
          
      };
      
@@ -491,7 +491,7 @@ index 10cd1740df..8cb98d21bc 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetContextState( 
 -            /* [out] */ SPCONTEXTSTATE *peContextState) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPCONTEXTSTATE *peContextState) = 0;
++            /* [out] */ SPCONTEXTSTATE *peContextState) = 0;
          
      };
      
@@ -518,7 +518,7 @@ index 10cd1740df..8cb98d21bc 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetRecoState( 
 -            /* [out] */ SPRECOSTATE *pState) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SPRECOSTATE *pState) = 0;
++            /* [out] */ SPRECOSTATE *pState) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetRecoState( 
              /* [in] */ SPRECOSTATE NewState) = 0;
