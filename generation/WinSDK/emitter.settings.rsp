@@ -2417,6 +2417,142 @@ GetPackageInfo2::buffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageapplicationids
 # The pointer table and app ID strings share this single byte buffer.
 GetPackageApplicationIds::buffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersaddresses
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getperadapterinfo
+GetAdaptersAddresses::AdapterAddresses=[ContainsInteriorPointers]
+GetAdaptersInfo::AdapterInfo=[ContainsInteriorPointers]
+GetPerAdapterInfo::pPerAdapterInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcpentry
+GetOwnerModuleFromTcpEntry::pBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfigw
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w
+QueryServiceConfigA::lpServiceConfig=[ContainsInteriorPointers]
+QueryServiceConfigW::lpServiceConfig=[ContainsInteriorPointers]
+QueryServiceConfig2A::lpBuffer=[ContainsInteriorPointers]
+QueryServiceConfig2W::lpBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusw
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumdependentservicesw
+# https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryservicelockstatusw
+EnumServicesStatusA::lpServices=[ContainsInteriorPointers]
+EnumServicesStatusW::lpServices=[ContainsInteriorPointers]
+EnumDependentServicesA::lpServices=[ContainsInteriorPointers]
+EnumDependentServicesW::lpServices=[ContainsInteriorPointers]
+QueryServiceLockStatusA::lpLockStatus=[ContainsInteriorPointers]
+QueryServiceLockStatusW::lpLockStatus=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersw
+# https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsaenumnamespaceprovidersexw
+WSAEnumNameSpaceProvidersA::lpnspBuffer=[ContainsInteriorPointers]
+WSAEnumNameSpaceProvidersW::lpnspBuffer=[ContainsInteriorPointers]
+WSAEnumNameSpaceProvidersExA::lpnspBuffer=[ContainsInteriorPointers]
+WSAEnumNameSpaceProvidersExW::lpnspBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptdecodeobject
+CryptDecodeObject::pvStructInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetchannelconfigproperty
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetqueryinfo
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventinfo
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtrender
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetpublishermetadataproperty
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetobjectarrayproperty
+# https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventmetadataproperty
+EvtGetChannelConfigProperty::PropertyValueBuffer=[ContainsInteriorPointers]
+EvtGetQueryInfo::PropertyValueBuffer=[ContainsInteriorPointers]
+EvtGetEventInfo::PropertyValueBuffer=[ContainsInteriorPointers]
+EvtRender::Buffer=[ContainsInteriorPointers]
+EvtGetPublisherMetadataProperty::PublisherMetadataPropertyBuffer=[ContainsInteriorPointers]
+EvtGetObjectArrayProperty::PropertyValueBuffer=[ContainsInteriorPointers]
+EvtGetEventMetadataProperty::EventMetadataPropertyBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimageencoders
+# https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimagedecoders
+GdipGetImageEncoders::encoders=[ContainsInteriorPointers]
+GdipGetImageDecoders::decoders=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew
+WNetEnumResourceW::lpBuffer=[ContainsInteriorPointers]
+WNetGetResourceInformationW::lpBuffer=[ContainsInteriorPointers]
+WNetGetUniversalNameW::lpBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceivehttprequest
+HttpReceiveHttpRequest::RequestBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw
+# INTERNET_OPTION_PROXY returns packed INTERNET_PROXY_INFO and referenced strings.
+InternetQueryOptionA::lpBuffer=[ContainsInteriorPointers]
+InternetQueryOptionW::lpBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infoa
+# https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infow
+# https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreama
+RetrieveUrlCacheEntryFileA::lpCacheEntryInfo=[ContainsInteriorPointers]
+RetrieveUrlCacheEntryFileW::lpCacheEntryInfo=[ContainsInteriorPointers]
+RetrieveUrlCacheEntryStreamA::lpCacheEntryInfo=[ContainsInteriorPointers]
+RetrieveUrlCacheEntryStreamW::lpCacheEntryInfo=[ContainsInteriorPointers]
+GetUrlCacheEntryInfoA::lpCacheEntryInfo=[ContainsInteriorPointers]
+GetUrlCacheEntryInfoW::lpCacheEntryInfo=[ContainsInteriorPointers]
+GetUrlCacheEntryInfoExA::lpCacheEntryInfo=[ContainsInteriorPointers]
+GetUrlCacheEntryInfoExW::lpCacheEntryInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw
+# https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexw
+FindFirstUrlCacheEntryA::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
+FindFirstUrlCacheEntryW::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
+FindFirstUrlCacheEntryExA::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
+FindFirstUrlCacheEntryExW::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
+FindNextUrlCacheEntryA::lpNextCacheEntryInfo=[ContainsInteriorPointers]
+FindNextUrlCacheEntryW::lpNextCacheEntryInfo=[ContainsInteriorPointers]
+FindNextUrlCacheEntryExA::lpNextCacheEntryInfo=[ContainsInteriorPointers]
+FindNextUrlCacheEntryExW::lpNextCacheEntryInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetenhancedkeyusage
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatectlentryfromcertificatecontextproperties
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatecontextproperty
+CertGetEnhancedKeyUsage::pUsage=[ContainsInteriorPointers]
+CertCreateCTLEntryFromCertificateContextProperties::pCtlEntry=[ContainsInteriorPointers]
+CertGetCertificateContextProperty::pvData=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetobjecturl
+CryptGetObjectUrl::pUrlArray=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsggetparam
+CryptMsgGetParam::pvData=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfo
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfoex
+# https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfofrombcryptkeyhandle
+CryptExportPublicKeyInfo::pInfo=[ContainsInteriorPointers]
+CryptExportPublicKeyInfoEx::pInfo=[ContainsInteriorPointers]
+CryptExportPublicKeyInfoFromBCryptKeyHandle::pInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceproviders32
+# https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceprovidersex32
+WSCEnumNameSpaceProviders32::lpnspBuffer=[ContainsInteriorPointers]
+WSCEnumNameSpaceProvidersEx32::lpnspBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta
+# https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenextw
+WSALookupServiceNextA::lpqsResults=[ContainsInteriorPointers]
+WSALookupServiceNextW::lpqsResults=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudpentry
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcp6entry
+# https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudp6entry
+GetOwnerModuleFromUdpEntry::pBuffer=[ContainsInteriorPointers]
+GetOwnerModuleFromTcp6Entry::pBuffer=[ContainsInteriorPointers]
+GetOwnerModuleFromUdp6Entry::pBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration
+HttpQueryServiceConfiguration::pOutput=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate
+HttpReceiveClientCertificate::SslClientCertInfo=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpqueryheadersex
+WinHttpQueryHeadersEx::pBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho
+# https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
+# https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex
+# https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpparsereplies
+IcmpSendEcho::ReplyBuffer=[ContainsInteriorPointers]
+IcmpSendEcho2::ReplyBuffer=[ContainsInteriorPointers]
+IcmpSendEcho2Ex::ReplyBuffer=[ContainsInteriorPointers]
+IcmpParseReplies::ReplyBuffer=[ContainsInteriorPointers]
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcea
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationa
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamea
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparenta
+# https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparentw
+WNetEnumResourceA::lpBuffer=[ContainsInteriorPointers]
+WNetGetResourceInformationA::lpBuffer=[ContainsInteriorPointers]
+WNetGetUniversalNameA::lpBuffer=[ContainsInteriorPointers]
+WNetGetResourceParentA::lpBuffer=[ContainsInteriorPointers]
+WNetGetResourceParentW::lpBuffer=[ContainsInteriorPointers]
 PSCreateMemoryPropertyStore::ppv=[ComOutPtr]
 FwpmCalloutCreateEnumHandle0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE*
 FwpmCalloutEnum0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE
