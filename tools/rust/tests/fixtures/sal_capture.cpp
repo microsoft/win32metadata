@@ -21,6 +21,8 @@ typedef CAPTURE_HANDLE CAPTURE_LOCAL;
 typedef CAPTURE_HANDLE* CAPTURE_HANDLE_PTR;
 #if CAPTURE_INCLUDE_ORDER != 2
 typedef const wchar_t* PCWSTR;
+typedef void* LPVOID;
+typedef void* PVOID;
 #endif
 
 extern "C" {
@@ -41,4 +43,16 @@ void CapturePostOnly(_Post_ wchar_t* value);
 void CaptureSingleNull(_In_z_ const wchar_t* value);
 void CaptureCounted(_In_reads_(count) const int* value, unsigned int count);
 void CaptureBinary(_Out_writes_bytes_(count) void* value, unsigned int count);
+LPVOID CaptureRetainLpvoid(LPVOID const* value);
+PVOID CaptureRetainPvoid(PVOID const* value);
+void CaptureNamedLpvoidInput(_In_ LPVOID value);
+void CaptureNamedPvoidInput(_In_ PVOID value);
+void CaptureNamedLpvoidOutput(
+    _Out_writes_bytes_to_(count, *written) LPVOID value,
+    unsigned int count,
+    _Out_opt_ unsigned int* written);
+void CaptureNamedPvoidOutput(
+    _Out_writes_bytes_to_(count, *written) PVOID value,
+    unsigned int count,
+    _Out_opt_ unsigned int* written);
 }

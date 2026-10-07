@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`60b728861e6f6a0f25a52012934ca81041e710c8`](https://github.com/jevansaks/windows-rs/commit/60b728861e6f6a0f25a52012934ca81041e710c8),
-published in `jevansaks/windows-rs`. Its cross-input associated-enum ownership
+[`0138a2079ecce580789a072b52ea6f25df77a937`](https://github.com/jevansaks/windows-rs/commit/0138a2079ecce580789a072b52ea6f25df77a937),
+published in `jevansaks/windows-rs`. Its retained-pointer SAL direction correction
+follows `60b728861e6f6a0f25a52012934ca81041e710c8`, whose cross-input associated-enum ownership
 correction follows `6f9dcaef699630aacbae363b7f9766afc84b2d41`, whose explicitly terminated named-scalar
 correction follows `ab1e9593dd421d3aa0d6a3710557b7789199d004`, whose redeclaration correction follows the
 native-opaque capability `1dd86adb880fb4b1dc4ebe5f0dd2f6dc45b75355` and AssociatedEnum
@@ -23,6 +24,42 @@ historical fork change has been upstreamed.
 | `windows-rdl` | RDL compilation and WinMD-to-RDL emission. |
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
+
+## Explicit direction on retained canonical pointer aliases
+
+**Upstream issue:** not filed; this corrects the local pipeline producer.
+
+Producer `0138a207` reasons about the final planned projection, including the exact
+retained declaration, when deciding whether pointer syntax already carries output
+direction. A retained named `PVOID` or `LPVOID` needs an explicit RDL `#[out]`;
+treating its source spelling as an emitted `*mut void` incorrectly defaults the
+physical parameter to Input. Direct canonical `*mut void` behavior is unchanged.
+The SDK SAL capture header, namespace policies and cleanup annotations are unchanged.
+
+The producer's `retained_canonical_pointer_output_sal_preserves_direction`
+regression uses actual `_Out_writes_bytes_to_` / `_Out_opt_` spellings in a synthetic
+HeaderPartitionPlan fixture, with fact, RDL and physical WinMD assertions. The
+existing consumer `sdk_sal_capture_preserves_parameter_contracts` fixture additionally
+checks both retained aliases, byte-count relationships, optional output counts,
+explicit Input controls and the existing direct-pointer controls across two SAL
+header sources and three include orders. On `60b`, physical
+`CaptureNamedLpvoidOutput` incorrectly has `ParamAttributes(1)` (Input), not
+`ParamAttributes(2)` (Output).
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_sal_capture_ -- --nocapture
+.\scripts\Test-GeneratorSdkPackage.ps1
+```
+
+This adoption is separate from normal-build wiring at consumer `2fc829493f`.
+That wiring's fixtures and package were tested on `60b`. The prior actual SDK
+ReadProcessMemory first-loss evidence and these source-spelling fixtures are
+distinct; neither fixture is a new full SDK image or closure of other metadata
+integrity diagnostics.
+
+**Removal condition:** adopt an upstream revision preserving explicit direction
+on the same planned named aliases, retaining the physical metadata controls.
 
 ## Cross-input associated-enum ownership
 

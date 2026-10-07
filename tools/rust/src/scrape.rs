@@ -3428,6 +3428,12 @@ mod tests {
             ("CaptureSingleNull", true, false, false),
             ("CaptureCounted", true, false, false),
             ("CaptureBinary", false, true, false),
+            ("CaptureRetainLpvoid", false, false, false),
+            ("CaptureRetainPvoid", false, false, false),
+            ("CaptureNamedLpvoidInput", true, false, false),
+            ("CaptureNamedPvoidInput", true, false, false),
+            ("CaptureNamedLpvoidOutput", false, true, false),
+            ("CaptureNamedPvoidOutput", false, true, false),
         ];
         let selected = expected
             .iter()
@@ -3516,6 +3522,8 @@ mod tests {
                 assert_eq!(emitted, selected, "{label}");
                 for (name, expected_type) in [
                     ("CAPTURE_HANDLE", Type::PtrMut(Box::new(Type::Void), 1)),
+                    ("LPVOID", Type::PtrMut(Box::new(Type::Void), 1)),
+                    ("PVOID", Type::PtrMut(Box::new(Type::Void), 1)),
                     (
                         "CAPTURE_LOCAL",
                         Type::value_named("Test.Sal", "CAPTURE_HANDLE"),
@@ -3543,6 +3551,18 @@ mod tests {
                     }
                     let rows = method.params_by_sequence(signature.types.len()).unwrap();
                     let parameter = rows.params()[0].unwrap();
+                    if name.starts_with("CaptureNamed") {
+                        let alias = if name.contains("Lpvoid") {
+                            "LPVOID"
+                        } else {
+                            "PVOID"
+                        };
+                        assert_eq!(
+                            signature.types[0],
+                            Type::value_named("Test.Sal", alias),
+                            "{label}: retained {alias} on {name}"
+                        );
+                    }
                     let inferred_output =
                         matches!(name, "CaptureDoubleNullOnly" | "CapturePostOnly");
                     let mut flags = if output || inferred_output {
@@ -3581,7 +3601,10 @@ mod tests {
                             "{label}: {name} count {count:?}"
                         );
                     }
-                    if name == "CaptureBinary" {
+                    if matches!(
+                        name,
+                        "CaptureBinary" | "CaptureNamedLpvoidOutput" | "CaptureNamedPvoidOutput"
+                    ) {
                         let size = parameter
                             .find_attribute("MemorySizeAttribute")
                             .unwrap()
@@ -3590,6 +3613,15 @@ mod tests {
                             size.contains(&("BytesParamIndex".to_string(), Value::I16(1))),
                             "{label}: binary byte count {size:?}"
                         );
+                        if name != "CaptureBinary" {
+                            let written = rows.params()[2].unwrap();
+                            assert_eq!(
+                                written.flags(),
+                                ParamAttributes::Out | ParamAttributes::Optional,
+                                "{label}: optional written count on {name}"
+                            );
+                            assert!(!written.has_attribute("MemorySizeAttribute"));
+                        }
                     }
                 }
                 std::fs::remove_dir_all(root).unwrap();
