@@ -180,7 +180,7 @@ index ddcdcb381a..95ab8198a9 100644
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 -WINHTTPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(WinHttpCloseHandle, 0) WINHTTPAPI
  HINTERNET
  WINAPI
  WinHttpOpen
@@ -205,7 +205,7 @@ index ddcdcb381a..95ab8198a9 100644
  );
  
 -WINHTTPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(WinHttpCloseHandle, 0) WINHTTPAPI
  HINTERNET
  WINAPI
  WinHttpConnect
@@ -321,7 +321,7 @@ index ddcdcb381a..95ab8198a9 100644
  //
  
 -WINHTTPAPI
-+_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ WINHTTPAPI
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_RAIIFree_(WinHttpCloseHandle, 0) WINHTTPAPI
  HINTERNET
  WINAPI
  WinHttpOpenRequest
@@ -568,7 +568,7 @@ index ddcdcb381a..95ab8198a9 100644
  #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
  
 -WINHTTPAPI
-+_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ WINHTTPAPI
++_Windows_SupportedOS_Windows8_ _Win32_SetLastError_ _Win32_RAIIFree_(WinHttpCloseHandle, 0) WINHTTPAPI
  HINTERNET
  WINAPI
 -WinHttpWebSocketCompleteUpgrade
