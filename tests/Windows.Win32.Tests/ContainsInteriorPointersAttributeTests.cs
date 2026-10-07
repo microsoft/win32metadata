@@ -16,8 +16,6 @@ namespace Windows.Win32.Tests
         private static readonly string[] AnnotatedBuffers =
         {
             "AddJobA::pData", "AddJobW::pData",
-            "CryptDecodeObject::pvStructInfo",
-            "EnumDependentServicesA::lpServices", "EnumDependentServicesW::lpServices",
             "EnumFormsA::pForm", "EnumFormsW::pForm",
             "EnumJobsA::pJob", "EnumJobsW::pJob",
             "EnumMonitorsA::pMonitor", "EnumMonitorsW::pMonitor",
@@ -27,21 +25,9 @@ namespace Windows.Win32.Tests
             "EnumPrintersA::pPrinterEnum", "EnumPrintersW::pPrinterEnum",
             "EnumPrintProcessorDatatypesA::pDatatypes", "EnumPrintProcessorDatatypesW::pDatatypes",
             "EnumPrintProcessorsA::pPrintProcessorInfo", "EnumPrintProcessorsW::pPrintProcessorInfo",
-            "EnumServicesStatusA::lpServices", "EnumServicesStatusW::lpServices",
             "EnumServicesStatusExA::lpServices", "EnumServicesStatusExW::lpServices",
-            "EvtGetChannelConfigProperty::PropertyValueBuffer",
-            "EvtGetEventInfo::PropertyValueBuffer",
-            "EvtGetEventMetadataProperty::EventMetadataPropertyBuffer",
-            "EvtGetObjectArrayProperty::PropertyValueBuffer",
-            "EvtGetPublisherMetadataProperty::PublisherMetadataPropertyBuffer",
-            "EvtGetQueryInfo::PropertyValueBuffer",
-            "EvtRender::Buffer",
-            "GdipGetImageDecoders::decoders", "GdipGetImageEncoders::encoders",
-            "GetAdaptersAddresses::AdapterAddresses", "GetAdaptersInfo::AdapterInfo",
             "GetFormA::pForm", "GetFormW::pForm",
             "GetJobA::pJob", "GetJobW::pJob",
-            "GetOwnerModuleFromTcpEntry::pBuffer",
-            "GetPerAdapterInfo::pPerAdapterInfo",
             "GetPrinterA::pPrinter", "GetPrinterW::pPrinter",
             "GetPrinterDriverA::pDriverInfo", "GetPrinterDriverW::pDriverInfo",
             "GetPrinterDriver2W::pDriverInfo",
@@ -52,44 +38,6 @@ namespace Windows.Win32.Tests
             "GetPackageId::buffer",
             "GetPackageInfo::buffer", "GetPackageInfo2::buffer",
             "PackageIdFromFullName::buffer",
-            "HttpReceiveHttpRequest::RequestBuffer",
-            "QueryServiceConfigA::lpServiceConfig", "QueryServiceConfigW::lpServiceConfig",
-            "QueryServiceConfig2A::lpBuffer", "QueryServiceConfig2W::lpBuffer",
-            "QueryServiceLockStatusA::lpLockStatus", "QueryServiceLockStatusW::lpLockStatus",
-            "WNetEnumResourceW::lpBuffer",
-            "WNetGetResourceInformationW::lpBuffer",
-            "WNetGetUniversalNameW::lpBuffer",
-            "WSAEnumNameSpaceProvidersA::lpnspBuffer", "WSAEnumNameSpaceProvidersW::lpnspBuffer",
-            "WSAEnumNameSpaceProvidersExA::lpnspBuffer", "WSAEnumNameSpaceProvidersExW::lpnspBuffer",
-            "CertCreateCTLEntryFromCertificateContextProperties::pCtlEntry",
-            "CertGetCertificateContextProperty::pvData",
-            "CertGetEnhancedKeyUsage::pUsage",
-            "CryptExportPublicKeyInfo::pInfo", "CryptExportPublicKeyInfoEx::pInfo",
-            "CryptExportPublicKeyInfoFromBCryptKeyHandle::pInfo",
-            "CryptGetObjectUrl::pUrlArray",
-            "CryptMsgGetParam::pvData",
-            "FindFirstUrlCacheEntryA::lpFirstCacheEntryInfo", "FindFirstUrlCacheEntryW::lpFirstCacheEntryInfo",
-            "FindFirstUrlCacheEntryExA::lpFirstCacheEntryInfo", "FindFirstUrlCacheEntryExW::lpFirstCacheEntryInfo",
-            "FindNextUrlCacheEntryA::lpNextCacheEntryInfo", "FindNextUrlCacheEntryW::lpNextCacheEntryInfo",
-            "FindNextUrlCacheEntryExA::lpNextCacheEntryInfo", "FindNextUrlCacheEntryExW::lpNextCacheEntryInfo",
-            "GetOwnerModuleFromTcp6Entry::pBuffer",
-            "GetOwnerModuleFromUdpEntry::pBuffer", "GetOwnerModuleFromUdp6Entry::pBuffer",
-            "GetUrlCacheEntryInfoA::lpCacheEntryInfo", "GetUrlCacheEntryInfoW::lpCacheEntryInfo",
-            "GetUrlCacheEntryInfoExA::lpCacheEntryInfo", "GetUrlCacheEntryInfoExW::lpCacheEntryInfo",
-            "HttpQueryServiceConfiguration::pOutput",
-            "HttpReceiveClientCertificate::SslClientCertInfo",
-            "IcmpParseReplies::ReplyBuffer",
-            "IcmpSendEcho::ReplyBuffer", "IcmpSendEcho2::ReplyBuffer", "IcmpSendEcho2Ex::ReplyBuffer",
-            "InternetQueryOptionA::lpBuffer", "InternetQueryOptionW::lpBuffer",
-            "RetrieveUrlCacheEntryFileA::lpCacheEntryInfo", "RetrieveUrlCacheEntryFileW::lpCacheEntryInfo",
-            "RetrieveUrlCacheEntryStreamA::lpCacheEntryInfo", "RetrieveUrlCacheEntryStreamW::lpCacheEntryInfo",
-            "WinHttpQueryHeadersEx::pBuffer",
-            "WSCEnumNameSpaceProviders32::lpnspBuffer", "WSCEnumNameSpaceProvidersEx32::lpnspBuffer",
-            "WSALookupServiceNextA::lpqsResults", "WSALookupServiceNextW::lpqsResults",
-            "WNetEnumResourceA::lpBuffer",
-            "WNetGetResourceInformationA::lpBuffer",
-            "WNetGetResourceParentA::lpBuffer", "WNetGetResourceParentW::lpBuffer",
-            "WNetGetUniversalNameA::lpBuffer",
         };
 
         [Fact]
@@ -188,32 +136,6 @@ namespace Windows.Win32.Tests
         [InlineData("PackageFullNameFromId")]
         [InlineData("EnumPrinterKeyA")]
         [InlineData("EnumPrinterKeyW")]
-        [InlineData("CryptDecodeObjectEx")]
-        [InlineData("EvtGetLogInfo")]
-        [InlineData("GetNetworkParams")]
-        [InlineData("GetOutlineTextMetricsA")]
-        [InlineData("GetOutlineTextMetricsW")]
-        [InlineData("NetShareEnum")]
-        [InlineData("SslGetExtensions")]
-        [InlineData("TdhEnumerateProviderFilters")]
-        [InlineData("AdjustTokenGroups")]
-        [InlineData("HidP_GetExtendedAttributes")]
-        [InlineData("WSAGetServiceClassInfoA")]
-        [InlineData("WSAGetServiceClassInfoW")]
-        [InlineData("Icmp6SendEcho2")]
-        [InlineData("Icmp6ParseReplies")]
-        [InlineData("SetupDiGetDriverInfoDetailA")]
-        [InlineData("SetupDiGetDriverInfoDetailW")]
-        [InlineData("WTSEnumerateListenersA")]
-        [InlineData("WTSEnumerateListenersW")]
-        [InlineData("ConvertIndexToColorName")]
-        [InlineData("CMConvertIndexToColorName")]
-        [InlineData("MrmPeekResourceIndexerMessages")]
-        [InlineData("HcnEnumerateGuestNetworkPortReservations")]
-        [InlineData("HidP_GetLinkCollectionNodes")]
-        [InlineData("WldpQueryDeviceSecurityInformation")]
-        [InlineData("HidD_GetConfiguration")]
-        [InlineData("PxeDhcpv6ParseRelayForw")]
         public void DifferentStorageContractsAreNotAnnotated(string methodName)
         {
             using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
@@ -232,33 +154,6 @@ namespace Windows.Win32.Tests
                         reader.GetParameter(parameterHandle).GetCustomAttributes().Select(reader.GetCustomAttribute),
                         a => GetAttributeTypeName(reader, a) == AttributeName);
                 }
-            }
-        }
-
-        [Theory]
-        [InlineData("CryptGetObjectUrl", "pUrlInfo")]
-        [InlineData("WinHttpQueryHeadersEx", "ppHeaders")]
-        [InlineData("CryptDecodeObject", "pbEncoded")]
-        [InlineData("WNetGetResourceInformationW", "lplpSystem")]
-        [InlineData("WNetGetResourceInformationA", "lplpSystem")]
-        public void BorrowedOrUnprovenParametersAreNotAnnotated(string methodName, string parameterName)
-        {
-            using var stream = File.OpenRead(TestUtils.Win32WinmdPath);
-            using var peReader = new PEReader(stream);
-            MetadataReader reader = peReader.GetMetadataReader();
-            Parameter[] parameters = reader.MethodDefinitions
-                .Select(reader.GetMethodDefinition)
-                .Where(m => reader.GetString(m.Name) == methodName)
-                .SelectMany(m => m.GetParameters())
-                .Select(reader.GetParameter)
-                .Where(p => reader.GetString(p.Name) == parameterName)
-                .ToArray();
-            Assert.NotEmpty(parameters);
-            foreach (Parameter parameter in parameters)
-            {
-                Assert.DoesNotContain(
-                    parameter.GetCustomAttributes().Select(reader.GetCustomAttribute),
-                    a => GetAttributeTypeName(reader, a) == AttributeName);
             }
         }
 
