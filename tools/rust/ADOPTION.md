@@ -4,9 +4,10 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`](https://github.com/jevansaks/windows-rs/commit/0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9),
-published in `jevansaks/windows-rs`. Its parent is the existing pipeline baseline
-`a71662f435eaf24dde7346b684cb4cffc64ca376`; this ledger does not claim that every
+[`f62037957d26e2300e17ada4c5ca9a8f8a9d3b50`](https://github.com/jevansaks/windows-rs/commit/f62037957d26e2300e17ada4c5ca9a8f8a9d3b50),
+published in `jevansaks/windows-rs`. It directly follows the previously adopted
+`0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`, whose parent is the pipeline baseline
+`a71662f435eaf24dde7346b684cb4cffc64ca376`. This ledger does not claim that every
 historical fork change has been upstreamed.
 
 | Dependency | Role |
@@ -52,9 +53,10 @@ passes these same gates without it, including the absence of support-header APIs
 
 ## Local producer fixes
 
-Both defects were independently reproduced on public windows-rs
-`143aa57cf5c96c140c69758948b46eb9a2d8ede7`. Both local fixes are in the exact
-adoption commit above; no core implementation is duplicated in this repository.
+Both defects below were independently reproduced on public windows-rs
+`143aa57cf5c96c140c69758948b46eb9a2d8ede7`. Their local fixes were introduced in
+`0a4d025` and remain in the current adoption; no core implementation is duplicated
+in this repository.
 
 | Upstream issue and standalone repro | Local fix | Verification | Removal condition |
 | --- | --- | --- | --- |
@@ -79,3 +81,55 @@ cargo test --release --manifest-path .\tools\rust\Cargo.toml compiled_and_merged
 Two unrelated full `test_rdl` failures and three full `test_bindgen` failures also
 reproduce on the unchanged `a716` baseline. They are not fixes or passing gates
 claimed by this adoption.
+
+## Partitioned NLS adoption gate
+
+**Upstream issue:** not filed. This defect was demonstrated on the local pipeline
+base `0a4d025`; public-upstream reproduction is not claimed.
+
+**Local fix and adoption:** producer `f62037957d26e2300e17ada4c5ca9a8f8a9d3b50`
+excludes namespace containers from emitted-symbol collision indexing, scoping,
+and mutation. Source `Windows`/`ABI` ancestry remains intact without broadening
+root eligibility or disabling genuine emitted-symbol disambiguation. The fix
+lives entirely in windows-rs; this repository changes the dependency pin and
+adds integration coverage, not a planner workaround.
+
+The opt-in `sdk_partitioned_nls_preserves_enum_contracts` integration test uses
+a repaired SDK header cohort without modifying it. It extracts the real
+WinNls, StringApiSet, DateTimeApi, and DXGI declarations, applies their logical
+header owners through the production `HeaderPartitionPlan` wrapper, and supplies
+nonempty default WinRT references. A focused by-header test or an empty reference
+map does not cover the same namespace eligibility path.
+
+Provide a generated `generation\WinSDK` directory containing the populated NLS
+vocabularies and a new output directory whose parent already exists:
+
+```powershell
+$env:WIN32METADATA_NLS_INPUT_ROOT = (Resolve-Path .\cohort\generation\WinSDK).Path
+$env:WIN32METADATA_NLS_OUTPUT_ROOT = Join-Path $PWD "obj\nls-partitioned-check"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_nls_preserves_enum_contracts -- --ignored --nocapture
+```
+
+The test retains input, native-member, RDL, and WinMD evidence. It requires nine
+NLS definitions, 41 source-valued members, 19 associations resolving to those
+definitions, three CSTR fields owned by `COMPARESTRING_RESULT`, and the
+independently owned DXGI vocabulary. Existing evidence directories are rejected
+rather than overwritten. This bounded integration gate is not a full SDK run
+or a substitute for the producer's generic collision/eligibility regressions.
+
+The producer's `crates\libs\clang\tests\header_partitions.rs` regressions cover
+nonempty WinRT references, independent reopened Windows/ABI namespaces, real
+same-leaf symbol collisions and bound TypeRefs, namespace/symbol coexistence,
+signed-versus-unsigned macro consumption, and rejected native-namespace controls:
+
+```powershell
+cargo test -p windows-clang --test header_partitions `
+    namespace_containers_do_not_enter_partition_symbol_collisions -- --nocapture
+cargo test -p windows-clang --test header_partitions --quiet
+```
+
+**Removal condition:** adopt an upstream revision containing equivalent generic
+namespace-container handling, keeping both the producer controls and the
+real-header integration gate. The producer's full `windows-clang` suite is also
+required; passing focused emission alone is insufficient.

@@ -3700,6 +3700,242 @@ mod tests {
         std::fs::remove_dir_all(root).unwrap();
     }
 
+    #[test]
+    #[ignore = "requires a repaired SDK cohort in WIN32METADATA_NLS_INPUT_ROOT and a fresh WIN32METADATA_NLS_OUTPUT_ROOT"]
+    fn sdk_partitioned_nls_preserves_enum_contracts() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_NLS_INPUT_ROOT")
+                .expect("set WIN32METADATA_NLS_INPUT_ROOT to the repaired generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_NLS_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_NLS_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let includes = include_dirs(&Options {
+            includes: vec![
+                win_sdk.join("RecompiledIdlHeaders"),
+                win_sdk.join("AdditionalHeaders"),
+                win_sdk.join("inc"),
+                sdk_header_root(),
+            ],
+            ..Default::default()
+        })
+        .unwrap();
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let headers = [
+            ("WinNls.h", "Intl"),
+            ("stringapiset.h", "Intl"),
+            ("datetimeapi.h", "Intl"),
+            ("dxgi.h", "Dxgi"),
+        ];
+        let mut policy = HeaderPartitionPolicy::new();
+        let mut roots = Vec::new();
+        let mut source = WIN32_SDK_PRELUDE.to_string();
+        for (header, partition) in headers {
+            let path = includes
+                .iter()
+                .map(|directory| directory.join(header))
+                .find(|path| path.is_file())
+                .unwrap_or_else(|| panic!("missing {header}"));
+            let path = path_arg(&path, "--include").unwrap();
+            policy.add_traversed_header_for_input(
+                AGGREGATE_INPUT,
+                path.clone(),
+                convert_root_partition(logical_partition(&traversal, partition).unwrap()),
+            );
+            source.push_str(&format!("#include \"{path}\"\n"));
+            roots.push(path);
+        }
+        std::fs::write(output.join("input.cpp"), &source).unwrap();
+        let args = checked_in_clang_args(&includes);
+        let snapshot = windows_clang::extract(
+            [Input::new(AGGREGATE_INPUT, source).with_roots(roots)],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let enums = [
+            ("FOLD_STRING_MAP_FLAGS", 5),
+            ("ENUM_DATE_FORMATS_FLAGS", 8),
+            ("TIME_FORMAT_FLAGS", 5),
+            ("ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS", 2),
+            ("MULTI_BYTE_TO_WIDE_CHAR_FLAGS", 4),
+            ("COMPARE_STRING_FLAGS", 10),
+            ("IS_VALID_LOCALE_FLAGS", 2),
+            ("ENUM_SYSTEM_CODE_PAGES_FLAGS", 2),
+            ("COMPARESTRING_RESULT", 3),
+        ];
+        let mut native_members = BTreeMap::new();
+        for (name, count) in enums {
+            let matches = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.name == name && matches!(fact.data, FactData::Enum { .. }))
+                .collect::<Vec<_>>();
+            let [fact] = matches.as_slice() else {
+                panic!("expected one extracted {name}, found {}", matches.len());
+            };
+            let FactData::Enum {
+                variants, scoped, ..
+            } = &fact.data
+            else {
+                unreachable!()
+            };
+            assert!(!scoped, "{name} must retain unscoped vocabulary semantics");
+            assert_eq!(variants.len(), count, "{name} source members");
+            native_members.insert(
+                name,
+                variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>(),
+            );
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        let associations = [
+            ("CompareStringA", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringEx", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringEx", 2, "COMPARE_STRING_FLAGS"),
+            ("CompareStringOrdinal", 0, "COMPARESTRING_RESULT"),
+            ("CompareStringW", 0, "COMPARESTRING_RESULT"),
+            ("EnumDateFormatsExEx", 3, "ENUM_DATE_FORMATS_FLAGS"),
+            ("EnumSystemCodePagesA", 2, "ENUM_SYSTEM_CODE_PAGES_FLAGS"),
+            ("EnumSystemCodePagesW", 2, "ENUM_SYSTEM_CODE_PAGES_FLAGS"),
+            (
+                "EnumSystemLanguageGroupsA",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            (
+                "EnumSystemLanguageGroupsW",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            ("EnumTimeFormatsA", 3, "TIME_FORMAT_FLAGS"),
+            ("EnumTimeFormatsW", 3, "TIME_FORMAT_FLAGS"),
+            ("FoldStringA", 1, "FOLD_STRING_MAP_FLAGS"),
+            ("FoldStringW", 1, "FOLD_STRING_MAP_FLAGS"),
+            ("GetDateFormatEx", 2, "ENUM_DATE_FORMATS_FLAGS"),
+            ("GetTimeFormatEx", 2, "TIME_FORMAT_FLAGS"),
+            (
+                "IsValidLanguageGroup",
+                2,
+                "ENUM_SYSTEM_LANGUAGE_GROUPS_FLAGS",
+            ),
+            ("IsValidLocale", 2, "IS_VALID_LOCALE_FLAGS"),
+            ("MultiByteToWideChar", 2, "MULTI_BYTE_TO_WIDE_CHAR_FLAGS"),
+        ];
+        let selected = associations
+            .iter()
+            .map(|(name, ..)| name.to_string())
+            .collect();
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.functions = Some(&selected);
+        emit.library = Some("kernel32.dll");
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = output.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let winmd = output.join("Windows.Win32.winmd");
+        compile_inputs(
+            &[rdl],
+            &[],
+            DEFAULT_NAMESPACE,
+            Some([71, 0, 122, 35729]),
+            &winmd,
+        )
+        .unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.Globalization";
+        let mut member_count = 0;
+        for (name, expected) in &native_members {
+            let definition = index.expect(namespace, name);
+            let underlying = definition
+                .fields()
+                .find(|field| field.name() == "value__")
+                .unwrap();
+            assert_eq!(
+                underlying.ty(),
+                if *name == "COMPARESTRING_RESULT" {
+                    Type::I32
+                } else {
+                    Type::U32
+                }
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field.constant().map(|constant| {
+                        let value = match constant.value() {
+                            Value::I32(value) => i64::from(value),
+                            Value::U32(value) => i64::from(value),
+                            value => {
+                                panic!("{name}.{} has unexpected value {value:?}", field.name())
+                            }
+                        };
+                        (field.name().to_string(), value)
+                    })
+                })
+                .collect::<BTreeMap<_, _>>();
+            assert_eq!(&actual, expected, "{name} physical members");
+            member_count += actual.len();
+        }
+        assert_eq!(member_count, 41);
+        for (name, sequence, expected) in associations {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing {name}");
+            };
+            let parameter = method
+                .params()
+                .find(|parameter| parameter.sequence() == sequence)
+                .unwrap_or_else(|| panic!("missing {name} parameter {sequence}"));
+            let attribute = parameter
+                .find_attribute("AssociatedEnumAttribute")
+                .unwrap_or_else(|| panic!("missing {name}:{sequence} association"));
+            assert!(
+                attribute
+                    .value()
+                    .iter()
+                    .any(|(_, value)| *value == Value::Utf8(expected.to_string())),
+                "{name}:{sequence}: {:?}",
+                attribute.value()
+            );
+            assert!(
+                index.contains(namespace, expected),
+                "dangling {name}:{sequence} association"
+            );
+        }
+        for name in ["CSTR_LESS_THAN", "CSTR_EQUAL", "CSTR_GREATER_THAN"] {
+            assert!(native_members["COMPARESTRING_RESULT"].contains_key(name));
+            assert!(!index.iter_items().any(|(_, candidate, item)| candidate == name && matches!(item, Item::Const(_))),
+                "{name} must belong to COMPARESTRING_RESULT, not a standalone constant");
+        }
+        index.expect("Windows.Win32.Graphics.Dxgi", "DXGI_ENUM_MODES");
+        let result = "PASS: partitioned NLS 9 enums / 41 members / 19 bound associations / 3 CSTR fields; nonempty WinRT references and independent DXGI namespace owner.\n";
+        std::fs::write(output.join("result.txt"), result).unwrap();
+        println!("{result}Evidence: {}", output.display());
+    }
+
     fn scratch(name: &str) -> PathBuf {
         let path =
             std::env::temp_dir().join(format!("win32metadata-tools-{name}-{}", std::process::id()));

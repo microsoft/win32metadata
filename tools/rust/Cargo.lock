@@ -162,7 +162,7 @@ dependencies = [
 [[package]]
 name = "windows-clang"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9#0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f62037957d26e2300e17ada4c5ca9a8f8a9d3b50#f62037957d26e2300e17ada4c5ca9a8f8a9d3b50"
 dependencies = [
  "clang-sys",
  "windows-default",
@@ -172,7 +172,7 @@ dependencies = [
 [[package]]
 name = "windows-default"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9#0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f62037957d26e2300e17ada4c5ca9a8f8a9d3b50#f62037957d26e2300e17ada4c5ca9a8f8a9d3b50"
 
 [[package]]
 name = "windows-link"
@@ -183,12 +183,12 @@ checksum = "f0805222e57f7521d6a62e36fa9163bc891acd422f971defe97d64e70d0a4fe5"
 [[package]]
 name = "windows-metadata"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9#0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f62037957d26e2300e17ada4c5ca9a8f8a9d3b50#f62037957d26e2300e17ada4c5ca9a8f8a9d3b50"
 
 [[package]]
 name = "windows-rdl"
 version = "0.100.0"
-source = "git+https://github.com/jevansaks/windows-rs?rev=0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9#0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9"
+source = "git+https://github.com/jevansaks/windows-rs?rev=f62037957d26e2300e17ada4c5ca9a8f8a9d3b50#f62037957d26e2300e17ada4c5ca9a8f8a9d3b50"
 dependencies = [
  "proc-macro2",
  "quote",
