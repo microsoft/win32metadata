@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
-index d90b9fd62a..cd9e928e0e 100644
+index d90b9fd62a..a85651a30a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/taskschd.h
 @@ -1,3 +1,4 @@
@@ -93,14 +93,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
 -            /* [retval][out] */ BSTR *pName) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pName) = 0;
++            /* [retval][out] */ BSTR *pName) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
              /* [in] */ BSTR name) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Value( 
 -            /* [retval][out] */ BSTR *pValue) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pValue) = 0;
++            /* [retval][out] */ BSTR *pValue) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Value( 
              /* [in] */ BSTR value) = 0;
@@ -115,7 +115,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
 -            /* [retval][out] */ long *pCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pCount) = 0;
++            /* [retval][out] */ long *pCount) = 0;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
              /* [in] */ LONG index,
@@ -206,7 +206,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Id( 
 -            /* [retval][out] */ BSTR *pId) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pId) = 0;
++            /* [retval][out] */ BSTR *pId) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Id( 
              /* [in] */ BSTR id) = 0;
@@ -215,28 +215,28 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ExecutionTimeLimit( 
 -            /* [retval][out] */ BSTR *pTimeLimit) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTimeLimit) = 0;
++            /* [retval][out] */ BSTR *pTimeLimit) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ExecutionTimeLimit( 
              /* [in] */ BSTR timelimit) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StartBoundary( 
 -            /* [retval][out] */ BSTR *pStart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pStart) = 0;
++            /* [retval][out] */ BSTR *pStart) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StartBoundary( 
              /* [in] */ BSTR start) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_EndBoundary( 
 -            /* [retval][out] */ BSTR *pEnd) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pEnd) = 0;
++            /* [retval][out] */ BSTR *pEnd) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_EndBoundary( 
              /* [in] */ BSTR end) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
 -            /* [retval][out] */ VARIANT_BOOL *pEnabled) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pEnabled) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pEnabled) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
              /* [in] */ VARIANT_BOOL enabled) = 0;
@@ -260,14 +260,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Delay( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Delay( 
              /* [in] */ BSTR delay) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UserId( 
 -            /* [retval][out] */ BSTR *pUser) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pUser) = 0;
++            /* [retval][out] */ BSTR *pUser) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UserId( 
              /* [in] */ BSTR user) = 0;
@@ -282,14 +282,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Delay( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Delay( 
              /* [in] */ BSTR delay) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UserId( 
 -            /* [retval][out] */ BSTR *pUser) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pUser) = 0;
++            /* [retval][out] */ BSTR *pUser) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UserId( 
              /* [in] */ BSTR user) = 0;
@@ -311,14 +311,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Subscription( 
 -            /* [retval][out] */ BSTR *pQuery) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pQuery) = 0;
++            /* [retval][out] */ BSTR *pQuery) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Subscription( 
              /* [in] */ BSTR query) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Delay( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Delay( 
              /* [in] */ BSTR delay) = 0;
@@ -333,7 +333,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RandomDelay( 
 -            /* [retval][out] */ BSTR *pRandomDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRandomDelay) = 0;
++            /* [retval][out] */ BSTR *pRandomDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RandomDelay( 
              /* [in] */ BSTR randomDelay) = 0;
@@ -355,7 +355,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RandomDelay( 
 -            /* [retval][out] */ BSTR *pRandomDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRandomDelay) = 0;
++            /* [retval][out] */ BSTR *pRandomDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RandomDelay( 
              /* [in] */ BSTR randomDelay) = 0;
@@ -384,7 +384,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RandomDelay( 
 -            /* [retval][out] */ BSTR *pRandomDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRandomDelay) = 0;
++            /* [retval][out] */ BSTR *pRandomDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RandomDelay( 
              /* [in] */ BSTR randomDelay) = 0;
@@ -399,7 +399,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DaysOfMonth( 
 -            /* [retval][out] */ long *pDays) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pDays) = 0;
++            /* [retval][out] */ long *pDays) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DaysOfMonth( 
              /* [in] */ long days) = 0;
@@ -413,14 +413,14 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RunOnLastDayOfMonth( 
 -            /* [retval][out] */ VARIANT_BOOL *pLastDay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pLastDay) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pLastDay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RunOnLastDayOfMonth( 
              /* [in] */ VARIANT_BOOL lastDay) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RandomDelay( 
 -            /* [retval][out] */ BSTR *pRandomDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRandomDelay) = 0;
++            /* [retval][out] */ BSTR *pRandomDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RandomDelay( 
              /* [in] */ BSTR randomDelay) = 0;
@@ -456,14 +456,14 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RunOnLastWeekOfMonth( 
 -            /* [retval][out] */ VARIANT_BOOL *pLastWeek) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pLastWeek) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pLastWeek) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RunOnLastWeekOfMonth( 
              /* [in] */ VARIANT_BOOL lastWeek) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RandomDelay( 
 -            /* [retval][out] */ BSTR *pRandomDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRandomDelay) = 0;
++            /* [retval][out] */ BSTR *pRandomDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RandomDelay( 
              /* [in] */ BSTR randomDelay) = 0;
@@ -478,7 +478,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Delay( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Delay( 
              /* [in] */ BSTR delay) = 0;
@@ -493,7 +493,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Delay( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Delay( 
              /* [in] */ BSTR delay) = 0;
@@ -508,7 +508,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Id( 
 -            /* [retval][out] */ BSTR *pId) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pId) = 0;
++            /* [retval][out] */ BSTR *pId) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Id( 
              /* [in] */ BSTR Id) = 0;
@@ -530,21 +530,21 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Path( 
 -            /* [retval][out] */ BSTR *pPath) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pPath) = 0;
++            /* [retval][out] */ BSTR *pPath) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Path( 
              /* [in] */ BSTR path) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Arguments( 
 -            /* [retval][out] */ BSTR *pArgument) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pArgument) = 0;
++            /* [retval][out] */ BSTR *pArgument) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Arguments( 
              /* [in] */ BSTR argument) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_WorkingDirectory( 
 -            /* [retval][out] */ BSTR *pWorkingDirectory) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pWorkingDirectory) = 0;
++            /* [retval][out] */ BSTR *pWorkingDirectory) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_WorkingDirectory( 
              /* [in] */ BSTR workingDirectory) = 0;
@@ -559,14 +559,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Title( 
 -            /* [retval][out] */ BSTR *pTitle) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTitle) = 0;
++            /* [retval][out] */ BSTR *pTitle) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Title( 
              /* [in] */ BSTR title) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_MessageBody( 
 -            /* [retval][out] */ BSTR *pMessageBody) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pMessageBody) = 0;
++            /* [retval][out] */ BSTR *pMessageBody) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_MessageBody( 
              /* [in] */ BSTR messageBody) = 0;
@@ -581,14 +581,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ClassId( 
 -            /* [retval][out] */ BSTR *pClsid) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pClsid) = 0;
++            /* [retval][out] */ BSTR *pClsid) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ClassId( 
              /* [in] */ BSTR clsid) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Data( 
 -            /* [retval][out] */ BSTR *pData) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pData) = 0;
++            /* [retval][out] */ BSTR *pData) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Data( 
              /* [in] */ BSTR data) = 0;
@@ -603,49 +603,49 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Server( 
 -            /* [retval][out] */ BSTR *pServer) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pServer) = 0;
++            /* [retval][out] */ BSTR *pServer) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Server( 
              /* [in] */ BSTR server) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Subject( 
 -            /* [retval][out] */ BSTR *pSubject) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pSubject) = 0;
++            /* [retval][out] */ BSTR *pSubject) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Subject( 
              /* [in] */ BSTR subject) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_To( 
 -            /* [retval][out] */ BSTR *pTo) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTo) = 0;
++            /* [retval][out] */ BSTR *pTo) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_To( 
              /* [in] */ BSTR to) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Cc( 
 -            /* [retval][out] */ BSTR *pCc) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pCc) = 0;
++            /* [retval][out] */ BSTR *pCc) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Cc( 
              /* [in] */ BSTR cc) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Bcc( 
 -            /* [retval][out] */ BSTR *pBcc) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pBcc) = 0;
++            /* [retval][out] */ BSTR *pBcc) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Bcc( 
              /* [in] */ BSTR bcc) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ReplyTo( 
 -            /* [retval][out] */ BSTR *pReplyTo) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pReplyTo) = 0;
++            /* [retval][out] */ BSTR *pReplyTo) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ReplyTo( 
              /* [in] */ BSTR replyTo) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_From( 
 -            /* [retval][out] */ BSTR *pFrom) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pFrom) = 0;
++            /* [retval][out] */ BSTR *pFrom) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_From( 
              /* [in] */ BSTR from) = 0;
@@ -654,7 +654,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Body( 
 -            /* [retval][out] */ BSTR *pBody) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pBody) = 0;
++            /* [retval][out] */ BSTR *pBody) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Body( 
              /* [in] */ BSTR body) = 0;
@@ -680,7 +680,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
 -            /* [retval][out] */ long *pCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pCount) = 0;
++            /* [retval][out] */ long *pCount) = 0;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
              /* [in] */ long index,
@@ -695,7 +695,7 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Count( 
 -            /* [retval][out] */ long *pCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pCount) = 0;
++            /* [retval][out] */ long *pCount) = 0;
          
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Item( 
              /* [in] */ long index,
@@ -704,7 +704,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_XmlText( 
 -            /* [retval][out] */ BSTR *pText) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pText) = 0;
++            /* [retval][out] */ BSTR *pText) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_XmlText( 
              /* [in] */ BSTR text) = 0;
@@ -713,7 +713,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Context( 
 -            /* [retval][out] */ BSTR *pContext) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pContext) = 0;
++            /* [retval][out] */ BSTR *pContext) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Context( 
              /* [in] */ BSTR context) = 0;
@@ -728,21 +728,21 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Id( 
 -            /* [retval][out] */ BSTR *pId) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pId) = 0;
++            /* [retval][out] */ BSTR *pId) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Id( 
              /* [in] */ BSTR Id) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
 -            /* [retval][out] */ BSTR *pName) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pName) = 0;
++            /* [retval][out] */ BSTR *pName) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DisplayName( 
              /* [in] */ BSTR name) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UserId( 
 -            /* [retval][out] */ BSTR *pUser) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pUser) = 0;
++            /* [retval][out] */ BSTR *pUser) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UserId( 
              /* [in] */ BSTR user) = 0;
@@ -756,7 +756,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_GroupId( 
 -            /* [retval][out] */ BSTR *pGroup) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pGroup) = 0;
++            /* [retval][out] */ BSTR *pGroup) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_GroupId( 
              /* [in] */ BSTR group) = 0;
@@ -785,12 +785,12 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RequiredPrivilegeCount( 
 -            /* [retval][out] */ long *pCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *pCount) = 0;
++            /* [retval][out] */ long *pCount) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RequiredPrivilege( 
              /* [in] */ long index,
 -            /* [retval][out] */ BSTR *pPrivilege) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pPrivilege) = 0;
++            /* [retval][out] */ BSTR *pPrivilege) = 0;
          
          virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddRequiredPrivilege( 
              /* [in] */ BSTR privilege) = 0;
@@ -805,49 +805,49 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Description( 
 -            /* [retval][out] */ BSTR *pDescription) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDescription) = 0;
++            /* [retval][out] */ BSTR *pDescription) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Description( 
              /* [in] */ BSTR description) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Author( 
 -            /* [retval][out] */ BSTR *pAuthor) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pAuthor) = 0;
++            /* [retval][out] */ BSTR *pAuthor) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Author( 
              /* [in] */ BSTR author) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Version( 
 -            /* [retval][out] */ BSTR *pVersion) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pVersion) = 0;
++            /* [retval][out] */ BSTR *pVersion) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Version( 
              /* [in] */ BSTR version) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Date( 
 -            /* [retval][out] */ BSTR *pDate) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDate) = 0;
++            /* [retval][out] */ BSTR *pDate) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Date( 
              /* [in] */ BSTR date) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Documentation( 
 -            /* [retval][out] */ BSTR *pDocumentation) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDocumentation) = 0;
++            /* [retval][out] */ BSTR *pDocumentation) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Documentation( 
              /* [in] */ BSTR documentation) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_XmlText( 
 -            /* [retval][out] */ BSTR *pText) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pText) = 0;
++            /* [retval][out] */ BSTR *pText) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_XmlText( 
              /* [in] */ BSTR text) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_URI( 
 -            /* [retval][out] */ BSTR *pUri) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pUri) = 0;
++            /* [retval][out] */ BSTR *pUri) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_URI( 
              /* [in] */ BSTR uri) = 0;
@@ -861,7 +861,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Source( 
 -            /* [retval][out] */ BSTR *pSource) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pSource) = 0;
++            /* [retval][out] */ BSTR *pSource) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Source( 
              /* [in] */ BSTR source) = 0;
@@ -879,7 +879,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Data( 
 -            /* [retval][out] */ BSTR *pData) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pData) = 0;
++            /* [retval][out] */ BSTR *pData) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Data( 
              /* [in] */ BSTR data) = 0;
@@ -888,7 +888,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_XmlText( 
 -            /* [retval][out] */ BSTR *pXml) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pXml) = 0;
++            /* [retval][out] */ BSTR *pXml) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_XmlText( 
              /* [in] */ BSTR xml) = 0;
@@ -903,21 +903,21 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowDemandStart( 
 -            /* [retval][out] */ VARIANT_BOOL *pAllowDemandStart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pAllowDemandStart) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pAllowDemandStart) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowDemandStart( 
              /* [in] */ VARIANT_BOOL allowDemandStart) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RestartInterval( 
 -            /* [retval][out] */ BSTR *pRestartInterval) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pRestartInterval) = 0;
++            /* [retval][out] */ BSTR *pRestartInterval) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RestartInterval( 
              /* [in] */ BSTR restartInterval) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RestartCount( 
 -            /* [retval][out] */ int *pRestartCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") int *pRestartCount) = 0;
++            /* [retval][out] */ int *pRestartCount) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RestartCount( 
              /* [in] */ int restartCount) = 0;
@@ -931,70 +931,70 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StopIfGoingOnBatteries( 
 -            /* [retval][out] */ VARIANT_BOOL *pStopIfOnBatteries) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pStopIfOnBatteries) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pStopIfOnBatteries) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StopIfGoingOnBatteries( 
              /* [in] */ VARIANT_BOOL stopIfOnBatteries) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisallowStartIfOnBatteries( 
 -            /* [retval][out] */ VARIANT_BOOL *pDisallowStart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pDisallowStart) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pDisallowStart) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DisallowStartIfOnBatteries( 
              /* [in] */ VARIANT_BOOL disallowStart) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_AllowHardTerminate( 
 -            /* [retval][out] */ VARIANT_BOOL *pAllowHardTerminate) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pAllowHardTerminate) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pAllowHardTerminate) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_AllowHardTerminate( 
              /* [in] */ VARIANT_BOOL allowHardTerminate) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StartWhenAvailable( 
 -            /* [retval][out] */ VARIANT_BOOL *pStartWhenAvailable) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pStartWhenAvailable) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pStartWhenAvailable) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StartWhenAvailable( 
              /* [in] */ VARIANT_BOOL startWhenAvailable) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_XmlText( 
 -            /* [retval][out] */ BSTR *pText) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pText) = 0;
++            /* [retval][out] */ BSTR *pText) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_XmlText( 
              /* [in] */ BSTR text) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RunOnlyIfNetworkAvailable( 
 -            /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfNetworkAvailable) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pRunOnlyIfNetworkAvailable) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfNetworkAvailable) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RunOnlyIfNetworkAvailable( 
              /* [in] */ VARIANT_BOOL runOnlyIfNetworkAvailable) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_ExecutionTimeLimit( 
 -            /* [retval][out] */ BSTR *pExecutionTimeLimit) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pExecutionTimeLimit) = 0;
++            /* [retval][out] */ BSTR *pExecutionTimeLimit) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_ExecutionTimeLimit( 
              /* [in] */ BSTR executionTimeLimit) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Enabled( 
 -            /* [retval][out] */ VARIANT_BOOL *pEnabled) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pEnabled) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pEnabled) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Enabled( 
              /* [in] */ VARIANT_BOOL enabled) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DeleteExpiredTaskAfter( 
 -            /* [retval][out] */ BSTR *pExpirationDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pExpirationDelay) = 0;
++            /* [retval][out] */ BSTR *pExpirationDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DeleteExpiredTaskAfter( 
              /* [in] */ BSTR expirationDelay) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Priority( 
 -            /* [retval][out] */ int *pPriority) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") int *pPriority) = 0;
++            /* [retval][out] */ int *pPriority) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Priority( 
              /* [in] */ int priority) = 0;
@@ -1008,7 +1008,7 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Hidden( 
 -            /* [retval][out] */ VARIANT_BOOL *pHidden) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pHidden) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pHidden) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Hidden( 
              /* [in] */ VARIANT_BOOL hidden) = 0;
@@ -1017,14 +1017,14 @@ index d90b9fd62a..cd9e928e0e 100644
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RunOnlyIfIdle( 
 -            /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfIdle) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pRunOnlyIfIdle) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pRunOnlyIfIdle) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RunOnlyIfIdle( 
              /* [in] */ VARIANT_BOOL runOnlyIfIdle) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_WakeToRun( 
 -            /* [retval][out] */ VARIANT_BOOL *pWake) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pWake) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pWake) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_WakeToRun( 
              /* [in] */ VARIANT_BOOL wake) = 0;
@@ -1039,14 +1039,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_DisallowStartOnRemoteAppSession( 
 -            /* [retval][out] */ VARIANT_BOOL *pDisallowStart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pDisallowStart) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pDisallowStart) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_DisallowStartOnRemoteAppSession( 
              /* [in] */ VARIANT_BOOL disallowStart) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_UseUnifiedSchedulingEngine( 
 -            /* [retval][out] */ VARIANT_BOOL *pUseUnifiedEngine) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pUseUnifiedEngine) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pUseUnifiedEngine) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_UseUnifiedSchedulingEngine( 
              /* [in] */ VARIANT_BOOL useUnifiedEngine) = 0;
@@ -1098,28 +1098,28 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_IdleDuration( 
 -            /* [retval][out] */ BSTR *pDelay) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDelay) = 0;
++            /* [retval][out] */ BSTR *pDelay) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_IdleDuration( 
              /* [in] */ BSTR delay) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_WaitTimeout( 
 -            /* [retval][out] */ BSTR *pTimeout) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTimeout) = 0;
++            /* [retval][out] */ BSTR *pTimeout) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_WaitTimeout( 
              /* [in] */ BSTR timeout) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StopOnIdleEnd( 
 -            /* [retval][out] */ VARIANT_BOOL *pStop) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pStop) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pStop) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StopOnIdleEnd( 
              /* [in] */ VARIANT_BOOL stop) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_RestartOnIdle( 
 -            /* [retval][out] */ VARIANT_BOOL *pRestart) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pRestart) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pRestart) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_RestartOnIdle( 
              /* [in] */ VARIANT_BOOL restart) = 0;
@@ -1134,14 +1134,14 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
 -            /* [retval][out] */ BSTR *pName) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pName) = 0;
++            /* [retval][out] */ BSTR *pName) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Name( 
              /* [in] */ BSTR name) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Id( 
 -            /* [retval][out] */ BSTR *pId) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pId) = 0;
++            /* [retval][out] */ BSTR *pId) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Id( 
              /* [in] */ BSTR id) = 0;
@@ -1156,21 +1156,21 @@ index d90b9fd62a..cd9e928e0e 100644
      public:
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Interval( 
 -            /* [retval][out] */ BSTR *pInterval) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pInterval) = 0;
++            /* [retval][out] */ BSTR *pInterval) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Interval( 
              /* [in] */ BSTR interval) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Duration( 
 -            /* [retval][out] */ BSTR *pDuration) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pDuration) = 0;
++            /* [retval][out] */ BSTR *pDuration) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_Duration( 
              /* [in] */ BSTR duration) = 0;
          
          virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_StopAtDurationEnd( 
 -            /* [retval][out] */ VARIANT_BOOL *pStop) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pStop) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pStop) = 0;
          
          virtual /* [helpstring][propput][id] */ HRESULT STDMETHODCALLTYPE put_StopAtDurationEnd( 
              /* [in] */ VARIANT_BOOL stop) = 0;

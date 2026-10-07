@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
-index 607bf2048d..3264f12824 100644
+index 607bf2048d..b0bc159036 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/ComSvcs.h
 @@ -1,3 +1,4 @@
@@ -695,7 +695,7 @@ index 607bf2048d..3264f12824 100644
          virtual HRESULT STDMETHODCALLTYPE IsCallerInRole( 
              /* [in] */ BSTR bstrRole,
 -            /* [retval][out] */ BOOL *pfIsInRole) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfIsInRole) = 0;
++            /* [retval][out] */ BOOL *pfIsInRole) = 0;
          
      };
      
@@ -767,7 +767,7 @@ index 607bf2048d..3264f12824 100644
          
          virtual /* [helpstring][helpcontext] */ HRESULT STDMETHODCALLTYPE CanBePooled( 
 -            /* [retval][out] */ VARIANT_BOOL *pbPoolable) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT_BOOL *pbPoolable) = 0;
++            /* [retval][out] */ VARIANT_BOOL *pbPoolable) = 0;
          
      };
      
@@ -818,7 +818,7 @@ index 607bf2048d..3264f12824 100644
      public:
          virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ConstructString( 
 -            /* [retval][out] */ BSTR *pVal) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pVal) = 0;
++            /* [retval][out] */ BSTR *pVal) = 0;
          
      };
      
@@ -915,7 +915,7 @@ index 607bf2048d..3264f12824 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetTipUrl( 
 -            /* [retval][out] */ BSTR *pTipUrl) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pTipUrl) = 0;
++            /* [retval][out] */ BSTR *pTipUrl) = 0;
          
      };
      
@@ -939,7 +939,7 @@ index 607bf2048d..3264f12824 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Count( 
 -            /* [retval][out] */ long *plCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
++            /* [retval][out] */ long *plCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetProperty( 
              /* [in] */ BSTR name,
@@ -1293,28 +1293,28 @@ index 607bf2048d..3264f12824 100644
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MaxPoolSize( 
 -            /* [retval][out] */ DWORD *pdwMaxPool) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMaxPool) = 0;
++            /* [retval][out] */ DWORD *pdwMaxPool) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_MinPoolSize( 
              /* [in] */ DWORD dwMinPool) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MinPoolSize( 
 -            /* [retval][out] */ DWORD *pdwMinPool) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwMinPool) = 0;
++            /* [retval][out] */ DWORD *pdwMinPool) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CreationTimeout( 
              /* [in] */ DWORD dwCreationTimeout) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CreationTimeout( 
 -            /* [retval][out] */ DWORD *pdwCreationTimeout) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") DWORD *pdwCreationTimeout) = 0;
++            /* [retval][out] */ DWORD *pdwCreationTimeout) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TransactionAffinity( 
              /* [in] */ BOOL fTxAffinity) = 0;
          
          virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TransactionAffinity( 
 -            /* [retval][out] */ BOOL *pfTxAffinity) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BOOL *pfTxAffinity) = 0;
++            /* [retval][out] */ BOOL *pfTxAffinity) = 0;
          
          virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ClassFactory( 
              /* [in] */ IClassFactory *pFactory) = 0;
@@ -1453,7 +1453,7 @@ index 607bf2048d..3264f12824 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Count( 
 -            /* [retval][out] */ long *plCount) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") long *plCount) = 0;
++            /* [retval][out] */ long *plCount) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetProperty( 
              /* [in] */ BSTR name,

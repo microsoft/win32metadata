@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
-index f502afb650..83cbff3a5b 100644
+index f502afb650..ebce5f6b91 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertView.h
 @@ -102,6 +102,7 @@ extern "C"{
@@ -20,27 +20,27 @@ index f502afb650..83cbff3a5b 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
 -            /* [retval][out] */ LONG *pIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
++            /* [retval][out] */ LONG *pIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetName( 
 -            /* [retval][out] */ BSTR *pstrOut) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
++            /* [retval][out] */ BSTR *pstrOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
 -            /* [retval][out] */ BSTR *pstrOut) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
++            /* [retval][out] */ BSTR *pstrOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetType( 
 -            /* [retval][out] */ LONG *pType) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pType) = 0;
++            /* [retval][out] */ LONG *pType) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE IsIndexed( 
 -            /* [retval][out] */ LONG *pIndexed) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndexed) = 0;
++            /* [retval][out] */ LONG *pIndexed) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetMaxLength( 
 -            /* [retval][out] */ LONG *pMaxLength) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pMaxLength) = 0;
++            /* [retval][out] */ LONG *pMaxLength) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetValue( 
 -            /* [in] */ LONG Flags,
@@ -69,15 +69,15 @@ index f502afb650..83cbff3a5b 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
 -            /* [retval][out] */ LONG *pIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
++            /* [retval][out] */ LONG *pIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetName( 
 -            /* [retval][out] */ BSTR *pstrOut) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
++            /* [retval][out] */ BSTR *pstrOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetValue( 
 -            /* [retval][out] */ BSTR *pstrOut) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
++            /* [retval][out] */ BSTR *pstrOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Skip( 
              /* [in] */ LONG celt) = 0;
@@ -100,15 +100,15 @@ index f502afb650..83cbff3a5b 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
 -            /* [retval][out] */ LONG *pIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
++            /* [retval][out] */ LONG *pIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetName( 
 -            /* [retval][out] */ BSTR *pstrOut) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") BSTR *pstrOut) = 0;
++            /* [retval][out] */ BSTR *pstrOut) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetFlags( 
 -            /* [retval][out] */ LONG *pFlags) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pFlags) = 0;
++            /* [retval][out] */ LONG *pFlags) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetValue( 
 -            /* [in] */ LONG Type,
@@ -139,7 +139,7 @@ index f502afb650..83cbff3a5b 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE Next( 
 -            /* [retval][out] */ LONG *pIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
++            /* [retval][out] */ LONG *pIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE EnumCertViewColumn( 
              /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum) = 0;
@@ -148,7 +148,7 @@ index f502afb650..83cbff3a5b 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetMaxIndex( 
 -            /* [retval][out] */ LONG *pIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pIndex) = 0;
++            /* [retval][out] */ LONG *pIndex) = 0;
          
      };
      
@@ -181,14 +181,14 @@ index f502afb650..83cbff3a5b 100644
 -            /* [in] */ LONG fResultColumn,
 -            /* [retval][out] */ LONG *pcColumn) = 0;
 +            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pcColumn) = 0;
++            /* [retval][out] */ LONG *pcColumn) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE GetColumnIndex( 
 -            /* [in] */ LONG fResultColumn,
 +            /* [in] */ _Win32_AssociatedEnum_(CVRC_COLUMN) LONG fResultColumn,
              /* [in] */ const BSTR strColumnName,
 -            /* [retval][out] */ LONG *pColumnIndex) = 0;
-+            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") LONG *pColumnIndex) = 0;
++            /* [retval][out] */ LONG *pColumnIndex) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetResultColumnCount( 
              /* [in] */ LONG cResultColumn) = 0;
