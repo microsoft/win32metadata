@@ -4193,6 +4193,255 @@ mod tests {
         println!("{result}Evidence: {}", output.display());
     }
 
+    #[test]
+    #[ignore = "requires a frozen SDK cohort in WIN32METADATA_DEBUG_INPUT_ROOT and a fresh WIN32METADATA_DEBUG_OUTPUT_ROOT"]
+    fn sdk_partitioned_debug_retains_associated_enum_dependencies() {
+        use windows_metadata::{HasAttributes, Type, Value};
+
+        ensure_libclang();
+        let win_sdk = PathBuf::from(
+            std::env::var_os("WIN32METADATA_DEBUG_INPUT_ROOT")
+                .expect("set WIN32METADATA_DEBUG_INPUT_ROOT to the frozen generation/WinSDK"),
+        );
+        let output = PathBuf::from(
+            std::env::var_os("WIN32METADATA_DEBUG_OUTPUT_ROOT")
+                .expect("set WIN32METADATA_DEBUG_OUTPUT_ROOT to a new evidence directory"),
+        );
+        std::fs::create_dir(&output).expect("the evidence directory must not already exist");
+        let includes = include_dirs(&Options {
+            includes: vec![
+                win_sdk.join("RecompiledIdlHeaders"),
+                win_sdk.join("AdditionalHeaders"),
+                win_sdk.join("inc"),
+                sdk_header_root(),
+            ],
+            ..Default::default()
+        })
+        .unwrap();
+        let traversal =
+            crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &includes)
+                .unwrap();
+        let debug = logical_partition(&traversal, "Debug").unwrap();
+        let imagehlp = debug
+            .roots
+            .iter()
+            .find_map(|root| match root {
+                crate::partition::TraversalRoot::File(file)
+                    if file.path.file_name().unwrap() == "ImageHlp.h" =>
+                {
+                    Some(path_arg(&file.path, "--include").unwrap())
+                }
+                _ => None,
+            })
+            .expect("Debug settings must traverse ImageHlp.h");
+        let mut policy = HeaderPartitionPolicy::new();
+        policy.add_traversed_header_for_input(
+            AGGREGATE_INPUT,
+            imagehlp.clone(),
+            convert_root_partition(debug),
+        );
+        let public_source =
+            std::fs::read_to_string(win_sdk.join("Partitions").join("Debug").join("main.cpp"))
+                .unwrap();
+        let dependency_source = format!("{WIN32_SDK_PRELUDE}#include <DbgHelp.h>\n");
+        let dependency_path = output.join("dependency.cpp");
+        std::fs::write(output.join("public.cpp"), &public_source).unwrap();
+        std::fs::write(&dependency_path, &dependency_source).unwrap();
+        let dependency_path = path_arg(&dependency_path, "--partition").unwrap();
+        let args = checked_in_clang_args(&includes);
+        std::fs::write(output.join("arguments.txt"), args.join("\n")).unwrap();
+        let snapshot = windows_clang::extract(
+            [
+                Input::new(AGGREGATE_INPUT, public_source).with_roots([imagehlp]),
+                Input::new(&dependency_path, dependency_source)
+                    .with_roots([dependency_path.clone()]),
+            ],
+            &args.iter().map(String::as_str).collect::<Vec<_>>(),
+        )
+        .unwrap();
+        let enums = [
+            ("IMAGEHLP_CBA_EVENT_SEVERITY", false),
+            ("SYM_LOAD_FLAGS", true),
+            ("SYM_SRV_STORE_FILE_FLAGS", false),
+            ("SYM_FIND_ID_OPTION", false),
+            ("SYMBOL_INFO_FLAGS", true),
+            ("IMAGEHLP_GET_TYPE_INFO_FLAGS", false),
+            ("MODLOAD_DATA_TYPE", false),
+            ("IMAGE_FILE_CHARACTERISTICS2", true),
+        ];
+        let mut native_members = BTreeMap::new();
+        for (name, _) in enums {
+            let matches = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.name == name && matches!(fact.data, FactData::Enum { .. }))
+                .collect::<Vec<_>>();
+            let [fact] = matches.as_slice() else {
+                panic!("expected one extracted {name}, found {}", matches.len());
+            };
+            assert!(!fact.root, "{name} must remain dependency-only");
+            assert_eq!(fact.origin.tu, dependency_path, "{name} provider input");
+            let FactData::Enum {
+                variants, scoped, ..
+            } = &fact.data
+            else {
+                unreachable!()
+            };
+            assert!(!scoped, "{name}");
+            native_members.insert(
+                name,
+                variants
+                    .iter()
+                    .map(|member| (member.name.clone(), member.value))
+                    .collect::<BTreeMap<_, _>>(),
+            );
+        }
+        std::fs::write(
+            output.join("native-members.txt"),
+            format!("{native_members:#?}\n"),
+        )
+        .unwrap();
+        let mut native_libraries = LibraryMap::default();
+        for path in lib_files(&Options {
+            win32_sdk: true,
+            libs: vec![
+                sdk_package_root("microsoft.windows.sdk.cpp.x64")
+                    .join("c")
+                    .join("um")
+                    .join("x64"),
+            ],
+            ..Default::default()
+        })
+        .unwrap()
+        {
+            native_libraries.import_library(&path).unwrap();
+        }
+        apply_library_overrides(&mut native_libraries).unwrap();
+        let libraries = snapshot
+            .facts()
+            .iter()
+            .filter_map(|fact| {
+                let FactData::Function { link_name, .. } = &fact.data else {
+                    return None;
+                };
+                native_libraries
+                    .resolved_library(link_name)
+                    .map(|dll| (link_name.clone(), dll.to_string()))
+            })
+            .collect::<BTreeMap<_, _>>();
+        let selected =
+            implicit_selected_functions(&snapshot, &BTreeSet::new(), &libraries, |_| false);
+        let references = MetadataReferences::new([windows_metadata::reader::File::new(
+            windows_default::WINRT.to_vec(),
+        )
+        .unwrap()]);
+        assert!(!references.types().is_empty());
+        let mut emit = EmitOptions::new(DEFAULT_NAMESPACE, references.types());
+        emit.functions = Some(&selected);
+        emit.libraries = Some(&libraries);
+        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+            &win_sdk.join("requiredNamespacesForNames.rsp"),
+        )
+        .unwrap()
+        .authorities();
+        let partitions =
+            plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let rdl = output.join("rdl");
+        std::fs::create_dir(&rdl).unwrap();
+        write_partitioned_rdl(&rdl, partitions).unwrap();
+        let winmd = output.join("Windows.Win32.winmd");
+        compile_inputs(&[rdl], &[], DEFAULT_NAMESPACE, None, &winmd).unwrap();
+        let index = Index::read(&winmd).unwrap();
+        let namespace = "Windows.Win32.System.Diagnostics.Debug";
+        let present = enums
+            .iter()
+            .map(|(name, _)| (*name, index.contains(namespace, name)))
+            .collect::<BTreeMap<_, _>>();
+        let mut associations = BTreeMap::<String, Vec<String>>::new();
+        let mut record = |slot: String, values: Vec<(String, Value)>| {
+            for (_, value) in values {
+                if let Value::Utf8(name) = value
+                    && native_members.contains_key(name.as_str())
+                {
+                    associations.entry(name).or_default().push(slot.clone());
+                }
+            }
+        };
+        for definition in index.types().filter(|ty| ty.namespace() == namespace) {
+            for field in definition.fields() {
+                if let Some(attribute) = field.find_attribute("AssociatedEnumAttribute") {
+                    record(
+                        format!("{}.{}", definition.name(), field.name()),
+                        attribute.value(),
+                    );
+                }
+            }
+            for method in definition.methods() {
+                for parameter in method.params() {
+                    if let Some(attribute) = parameter.find_attribute("AssociatedEnumAttribute") {
+                        record(
+                            format!("{}:{}", method.name(), parameter.sequence()),
+                            attribute.value(),
+                        );
+                    }
+                }
+            }
+        }
+        let observed = format!("Definitions: {present:#?}\nAssociations: {associations:#?}\n");
+        std::fs::write(output.join("observed.txt"), &observed).unwrap();
+        println!("{observed}Evidence: {}", output.display());
+        assert_eq!(
+            associations.len(),
+            8,
+            "all eight source association families"
+        );
+        assert_eq!(
+            associations.values().map(Vec::len).sum::<usize>(),
+            13,
+            "retained field and parameter associations"
+        );
+        assert!(present.values().all(|present| *present), "{present:?}");
+        let mut member_count = 0;
+        for (name, flags) in enums {
+            let definition = index.expect(namespace, name);
+            assert_eq!(
+                definition
+                    .fields()
+                    .find(|field| field.name() == "value__")
+                    .unwrap()
+                    .ty(),
+                Type::U32,
+                "{name} native width"
+            );
+            let actual = definition
+                .fields()
+                .filter_map(|field| {
+                    field.constant().map(|constant| {
+                        let Value::U32(value) = constant.value() else {
+                            panic!("{name}.{} changed native representation", field.name());
+                        };
+                        (field.name().to_string(), i64::from(value))
+                    })
+                })
+                .collect::<BTreeMap<_, _>>();
+            assert_eq!(actual, native_members[name], "{name} native member values");
+            assert_eq!(
+                definition
+                    .find_attribute("FlagsAttribute")
+                    .is_some_and(|attribute| attribute.namespace() == "System"),
+                flags,
+                "{name} native Flags/plain control"
+            );
+            member_count += actual.len();
+        }
+        let result = format!(
+            "PASS: 8 dependency-only Debug enums / {member_count} native-valued u32 members / {} bound associations / 3 Flags / 5 plain; ImageHlp public roots and cross-TU DbgHelp providers, nonempty WinRT.\n",
+            associations.values().map(Vec::len).sum::<usize>()
+        );
+        std::fs::write(output.join("result.txt"), &result).unwrap();
+        println!("{result}");
+    }
+
     fn scratch(name: &str) -> PathBuf {
         let path =
             std::env::temp_dir().join(format!("win32metadata-tools-{name}-{}", std::process::id()));

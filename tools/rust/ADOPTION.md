@@ -4,8 +4,9 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`7f3e04f7cfeb2c31eea00f2330b0159572644828`](https://github.com/jevansaks/windows-rs/commit/7f3e04f7cfeb2c31eea00f2330b0159572644828),
-published in `jevansaks/windows-rs`. It directly follows the native Flags fix
+[`15ba1b7f96c770b9d425ebca00a3a73f74bb004e`](https://github.com/jevansaks/windows-rs/commit/15ba1b7f96c770b9d425ebca00a3a73f74bb004e),
+published in `jevansaks/windows-rs`. Its AssociatedEnum closure fixes follow
+the RetVal fix `7f3e04f7cfeb2c31eea00f2330b0159572644828` and native Flags fix
 `0680de9b2b53985fd031b155cbc2c66c357ed10f`, which follows the previously adopted
 `f62037957d26e2300e17ada4c5ca9a8f8a9d3b50` namespace-container fix, which follows
 `0a4d025f87a301eecf0eb9dce8bce8ae9e811eb9`, whose parent is the pipeline baseline
@@ -243,3 +244,61 @@ cargo test -p windows-clang --test annotations duplicate_retval_sources_emit_one
 dual-channel, single-channel, and ordinary-output controls, preserving native
 signatures and other attributes. Retain the regression when retiring the fork
 patch.
+
+## Cross-input AssociatedEnum dependency closure
+
+**Upstream issue:** not filed. This was reproduced on the local pipeline fork;
+public-upstream reproduction is not claimed.
+
+**Source and impact:** the production Debug authority traverses `ImageHlp.h`.
+Compatible declarations parsed from dependency-only `DbgHelp.h` in another
+translation unit carry AssociatedEnum annotations and enum providers. Before
+adoption, the 13 physical field/parameter association strings survived while
+all eight referenced vocabulary definitions were absent.
+
+**Local fix and adoption:** producer
+[`15ba1b7f96c770b9d425ebca00a3a73f74bb004e`](https://github.com/jevansaks/windows-rs/commit/15ba1b7f96c770b9d425ebca00a3a73f74bb004e)
+uses compatible annotated redeclarations across extraction inputs to retain
+enum or typedef-to-enum providers. Dependency-only providers inherit the
+resolved declaration owner; independently traversed providers retain their
+routes. Existing exclusions, namespace authorities, remaps, Flags policy,
+selected-function filtering, and conflict diagnostics still apply. Unrelated
+included declarations do not become roots. This repository adds no closure
+algorithm or header workaround.
+
+The intermediate `49d1d4d86a0d9471d1f9c2b49923054849bc4a21` handled only
+same-input providers and is not a sufficient adoption pin.
+
+**Consumer verification:** the opt-in Debug regression reads the frozen
+`Partitions\Debug\main.cpp` and its actual traversal settings. Only `ImageHlp.h`
+is rooted in its public input; a separate input includes canonical `DbgHelp.h`
+without rooting its declarations. One combined snapshot uses the production
+header planner, native import-library selection, and nonempty WinRT references.
+It requires eight physical Debug enums, their source member values and u32
+widths, 13 bound associations, three Flags enums, and five plain enums:
+
+```powershell
+$env:WIN32METADATA_DEBUG_INPUT_ROOT = (Resolve-Path .\cohort\generation\WinSDK).Path
+$env:WIN32METADATA_DEBUG_OUTPUT_ROOT = Join-Path $PWD "obj\debug-partitioned-check"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    sdk_partitioned_debug_retains_associated_enum_dependencies -- --ignored --nocapture
+```
+
+The fresh evidence directory retains both input texts, arguments, native enum
+members, RDL, WinMD, and association readback. This is not a full SDK run.
+
+Producer `header_partitions` regressions additionally cover duplicate cross-input
+providers, field/parameter slots, signed plain enums, high-bit native Flags,
+unrelated included-only negatives, selection, same-leaf distinct routes,
+exclusions, authorities, remaps, forced Flags, and deterministic conflicts:
+
+```powershell
+cargo test -p windows-clang --test header_partitions associated_enum -- --nocapture
+cargo test -p windows-clang --test header_partitions --quiet
+cargo test -p windows-clang --quiet
+```
+
+**Removal condition:** adopt upstream closure handling passing the unchanged
+producer ownership/eligibility controls and this cross-input native-header
+regression. Do not remove the fork fix based on same-input or focused by-header
+emission alone.
