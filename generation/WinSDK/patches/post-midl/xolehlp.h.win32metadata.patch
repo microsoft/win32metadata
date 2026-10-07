@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h b/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
-index d0d411a9e6..3f332a810b 100644
+index d0d411a9e6..721fc184bf 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/xoleHlp.h
 @@ -1,3 +1,4 @@
@@ -25,7 +25,7 @@ index d0d411a9e6..3f332a810b 100644
                                      );
  
 -EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
-+_WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
++_Win32_ImportLibrary_("XOLEHLP.dll") _WIN32META_ANNOTATION_("win32metadata:ansi") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExA(
                                      /* in */ _In_opt_ LPSTR i_pszHost,
                                      /* in */ _In_opt_ LPSTR i_pszTmName,
                                      /* in */ REFIID i_riid,
@@ -38,7 +38,7 @@ index d0d411a9e6..3f332a810b 100644
  
  
 -EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExW(
-+_WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExW(
++_Win32_ImportLibrary_("XOLEHLP.dll") _WIN32META_ANNOTATION_("win32metadata:unicode") EXTERN_C HRESULT __cdecl DtcGetTransactionManagerExW(
                                      /* in */ _In_opt_ LPWSTR i_pwszHost,
                                      /* in */ _In_opt_ LPWSTR i_pwszTmName,
                                      /* in */ REFIID i_riid,
