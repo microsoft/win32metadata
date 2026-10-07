@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
-index 9ba32f8775..1d76a81803 100644
+index 9ba32f8775..0cdf7e027a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/mssip.h
 @@ -1,3 +1,4 @@
@@ -184,7 +184,7 @@ index 9ba32f8775..1d76a81803 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI CryptSIPRetrieveSubjectGuid(IN LPCWSTR FileName,   // wide file name
                                                 IN OPTIONAL HANDLE hFileIn,     // or handle of open file
 -                                               OUT GUID *pgSubject);           // defined SIP's GUID
-+                                               _WIN32META_ANNOTATION_("win32metadata:in") OUT GUID *pgSubject);           // defined SIP's GUID
++                                               OUT GUID *pgSubject);           // defined SIP's GUID
  
  //////////////////////////////////////////////////////////////////////////////
  //
@@ -196,7 +196,7 @@ index 9ba32f8775..1d76a81803 100644
 +_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ extern BOOL WINAPI CryptSIPRetrieveSubjectGuidForCatalogFile(IN LPCWSTR FileName,   // wide file name
                                                               IN OPTIONAL HANDLE hFileIn,     // or handle of open file
 -                                                             OUT GUID *pgSubject);           // defined SIP's GUID
-+                                                             _WIN32META_ANNOTATION_("win32metadata:in") OUT GUID *pgSubject);           // defined SIP's GUID
++                                                             OUT GUID *pgSubject);           // defined SIP's GUID
  
  
  //////////////////////////////////////////////////////////////////////////////

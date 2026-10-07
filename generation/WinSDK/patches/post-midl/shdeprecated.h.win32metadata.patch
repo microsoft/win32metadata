@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
-index 0ad95321b8..192e01a4bb 100644
+index 0ad95321b8..161e7476c0 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/shdeprecated.h
 @@ -1,3 +1,4 @@
@@ -74,7 +74,7 @@ index 0ad95321b8..192e01a4bb 100644
          
          virtual HRESULT STDMETHODCALLTYPE _GetViewBorderRect( 
 -            /* [out] */ RECT *prc) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RECT *prc) = 0;
++            /* [out] */ RECT *prc) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE _UpdateViewRectSize( void) = 0;
          

@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
-index 9c914cd297..968a4a1da1 100644
+index 9c914cd297..586eb32c3a 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmcodecdsp.h
 @@ -1,3 +1,4 @@
@@ -125,7 +125,7 @@ index 9c914cd297..968a4a1da1 100644
      public:
          virtual HRESULT STDMETHODCALLTYPE GetNextOutputTime( 
 -            /* [out] */ REFERENCE_TIME *prtTime) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") REFERENCE_TIME *prtTime) = 0;
++            /* [out] */ REFERENCE_TIME *prtTime) = 0;
          
      };
      
@@ -269,7 +269,7 @@ index 9c914cd297..968a4a1da1 100644
 -            /* [out] */ BYTE *pbtDescriptionData,
 -            /* [out] */ GUID *pGuidType) = 0;
 +            /* [out] */ BYTE *pbtDescriptionData,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") GUID *pGuidType) = 0;
++            /* [out] */ GUID *pGuidType) = 0;
          
      };
      

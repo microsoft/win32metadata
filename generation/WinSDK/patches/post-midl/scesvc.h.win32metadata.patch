@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
-index af6fcb5bcc..b2069e4cf4 100644
+index af6fcb5bcc..9a61a9a2a4 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/scesvc.h
 @@ -1,3 +1,4 @@
@@ -89,7 +89,7 @@ index af6fcb5bcc..b2069e4cf4 100644
 -            /* [out] */ PVOID *ppvData,
 -            /* [out] */ PBOOL pbOverwriteAll ) = 0;
 +            /* [in] */  _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR lpTemplateName,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SCESVC_HANDLE *scesvcHandle,
++            /* [out] */ SCESVC_HANDLE *scesvcHandle,
 +            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") PVOID *ppvData,
 +            /* [out] */ PBOOL pbOverwriteAll ) = 0;
  
@@ -130,7 +130,7 @@ index af6fcb5bcc..b2069e4cf4 100644
 +            /* [in] */ _WIN32META_ANNOTATION_("win32metadata:out") LPCTSTR lpTemplateName,
              /* [in] */ LPSCESVCATTACHMENTPERSISTINFO lpSceSvcPersistInfo,
 -            /* [out] */ SCESVC_HANDLE *pscesvcHandle) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") SCESVC_HANDLE *pscesvcHandle) = 0;
++            /* [out] */ SCESVC_HANDLE *pscesvcHandle) = 0;
  
          virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE FreeBuffer(
 -            /* [in] */ PVOID pvData) = 0;

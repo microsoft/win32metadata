@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
-index 0ac2f8f91c..1ad52c4b1b 100644
+index 0ac2f8f91c..4216d1ee8d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/vswriter.h
 @@ -1,3 +1,4 @@
@@ -38,7 +38,7 @@ index 0ac2f8f91c..1ad52c4b1b 100644
 -    STDMETHOD(GetWriterId)(OUT VSS_ID *pWriterId) = 0;
 -    STDMETHOD(GetLogicalPath)(OUT BSTR *pbstrLogicalPath) = 0;
 -    STDMETHOD(GetComponentName)(OUT BSTR *pbstrComponentName) = 0;
-+    STDMETHOD(GetWriterId)(_WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pWriterId) = 0;
++    STDMETHOD(GetWriterId)(OUT VSS_ID *pWriterId) = 0;
 +    STDMETHOD(GetLogicalPath)(OUT BSTR *pbstrLogicalPath) = 0;
 +    STDMETHOD(GetComponentName)(OUT BSTR *pbstrComponentName) = 0;
  };
@@ -281,8 +281,8 @@ index 0ac2f8f91c..1ad52c4b1b 100644
          (
 -        OUT VSS_ID *pidInstance,
 -        OUT VSS_ID *pidWriter
-+        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pidInstance,
-+        _WIN32META_ANNOTATION_("win32metadata:in") OUT VSS_ID *pidWriter
++        OUT VSS_ID *pidInstance,
++        OUT VSS_ID *pidWriter
          ) = 0;
  
      // obtain a specific component

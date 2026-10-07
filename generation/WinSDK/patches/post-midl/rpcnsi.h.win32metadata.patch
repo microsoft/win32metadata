@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
-index 84f72a0add..f725e0c59b 100644
+index 84f72a0add..19c3fa498d 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/rpcnsi.h
 @@ -1,3 +1,4 @@
@@ -332,7 +332,7 @@ index 84f72a0add..f725e0c59b 100644
 -    IN  RPC_NS_HANDLE InquiryContext,
 -    OUT UUID __RPC_FAR * ObjUuid
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN  RPC_NS_HANDLE InquiryContext,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT UUID __RPC_FAR * ObjUuid
++    OUT UUID __RPC_FAR * ObjUuid
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -469,7 +469,7 @@ index 84f72a0add..f725e0c59b 100644
 -    IN RPC_NS_HANDLE ImportContext,
 -    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
 +    _WIN32META_ANNOTATION_("win32metadata:out") IN RPC_NS_HANDLE ImportContext,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
++    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
      );
  
 -RPCNSAPI RPC_STATUS RPC_ENTRY
@@ -483,7 +483,7 @@ index 84f72a0add..f725e0c59b 100644
  RpcNsBindingSelect(
      IN OUT RPC_BINDING_VECTOR __RPC_FAR * BindingVec,
 -    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
++    OUT RPC_BINDING_HANDLE  __RPC_FAR * Binding
      );
  
  #ifdef UNICODE

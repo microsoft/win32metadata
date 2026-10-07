@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
-index 8b038177ce..558c4ad771 100644
+index 8b038177ce..9510baa6fd 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcdcep.h
 @@ -1,3 +1,4 @@
@@ -243,7 +243,7 @@ index 8b038177ce..558c4ad771 100644
  RPC_ENTRY
  I_UuidCreate (
 -    OUT UUID __RPC_FAR * Uuid
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT UUID __RPC_FAR * Uuid
++    OUT UUID __RPC_FAR * Uuid
      );
  
  RPCRTAPI
@@ -254,7 +254,7 @@ index 8b038177ce..558c4ad771 100644
 -    IN RPC_BINDING_HANDLE SourceBinding,
 -    OUT RPC_BINDING_HANDLE __RPC_FAR * DestinationBinding
 +    IN RPC_BINDING_HANDLE SourceBinding,
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT RPC_BINDING_HANDLE __RPC_FAR * DestinationBinding
++    OUT RPC_BINDING_HANDLE __RPC_FAR * DestinationBinding
      );
  
  RPCRTAPI

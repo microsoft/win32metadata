@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
-index eebe909fa8..ab295231f5 100644
+index eebe909fa8..5e0056137b 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertBCli.h
 @@ -17,6 +17,7 @@
@@ -90,7 +90,7 @@ index eebe909fa8..ab295231f5 100644
      IN  WCHAR const *pwszAttachmentName,
      IN  DWORD cbReadHintSize,
 -    OUT LARGE_INTEGER *pliFileSize);
-+    _WIN32META_ANNOTATION_("win32metadata:in") OUT LARGE_INTEGER *pliFileSize);
++    OUT LARGE_INTEGER *pliFileSize);
  
  #ifdef _CERTBCLI_TYPECHECK
  FNCERTSRVBACKUPOPENFILEW *pfnCertSrvBackupOpenFile = CertSrvBackupOpenFile;

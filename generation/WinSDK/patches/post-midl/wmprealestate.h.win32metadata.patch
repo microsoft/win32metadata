@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
-index bc6e444863..c27f4a8941 100644
+index bc6e444863..b1dd7088c5 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmprealestate.h
 @@ -1,3 +1,4 @@
@@ -23,9 +23,9 @@ index bc6e444863..c27f4a8941 100644
 -            /* [out] */ RECT *pSrc,
 -            /* [out] */ RECT *pDest,
 -            /* [out] */ RECT *pClip) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RECT *pSrc,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RECT *pDest,
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") RECT *pClip) = 0;
++            /* [out] */ RECT *pSrc,
++            /* [out] */ RECT *pDest,
++            /* [out] */ RECT *pClip) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetWindowless( 
              /* [in] */ BOOL fWindowless) = 0;
@@ -57,7 +57,7 @@ index bc6e444863..c27f4a8941 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetOwnerWindow( 
 -            /* [out] */ OLE_HWND *phwnd) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") OLE_HWND *phwnd) = 0;
++            /* [out] */ OLE_HWND *phwnd) = 0;
          
      };
      
@@ -67,7 +67,7 @@ index bc6e444863..c27f4a8941 100644
              /* [in] */ LPARAM lparam,
 -            /* [out] */ LRESULT *plRet,
 -            /* [out] */ BOOL *pfHandled) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") LRESULT *plRet,
++            /* [out] */ LRESULT *plRet,
 +            /* [out] */ BOOL *pfHandled) = 0;
          
      };

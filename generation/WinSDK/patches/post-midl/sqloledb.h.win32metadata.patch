@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
-index b981cef443..849d2a461f 100644
+index b981cef443..d439b8d307 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/sqloledb.h
 @@ -1,3 +1,4 @@
@@ -55,7 +55,7 @@ index b981cef443..849d2a461f 100644
              /* [in] */ LOCKMODE lmMode,
 -            /* [out] */ HANDLE __RPC_FAR *phLockHandle,
 -            /* [out] */ ULONGLONG __RPC_FAR *pTableVersion) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HANDLE __RPC_FAR *phLockHandle,
++            /* [out] */ HANDLE __RPC_FAR *phLockHandle,
 +            /* [out] */ ULONGLONG __RPC_FAR *pTableVersion) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE ReleaseSchemaLock( 

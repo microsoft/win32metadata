@@ -1,5 +1,5 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
-index 769df188fd..8122e3e46a 100644
+index 769df188fd..86e2369251 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmpplug.h
 @@ -15,6 +15,7 @@
@@ -15,7 +15,7 @@ index 769df188fd..8122e3e46a 100644
          virtual HRESULT STDMETHODCALLTYPE Create( 
              /* [in] */ HWND hwndParent,
 -            /* [out] */ HWND *phwndWindow) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") HWND *phwndWindow) = 0;
++            /* [out] */ HWND *phwndWindow) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE Destroy( void) = 0;
          
