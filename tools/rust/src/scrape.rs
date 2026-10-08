@@ -7832,12 +7832,102 @@ mod tests {
     #[test]
     fn checked_in_gdiplus_imports_emit_all_supported_native_functions() {
         let win_sdk = checked_in_win_sdk();
+        let fixture = scratch("gdiplus-matrix-native-opaque");
+        let overlay = stage_native_matrix_fixture(&win_sdk, &fixture);
         for target in ["x64", "x86"] {
             let root = scratch(&format!("gdiplus-imported-functions-{target}"));
-            let index = check_gdiplus_imported_functions(target, &win_sdk, &root);
+            let index =
+                check_gdiplus_imported_functions(target, &win_sdk, &root, Some(&overlay)).unwrap();
             assert_gdiplus_geometry_layouts(&index, target, false);
+            assert_eq!(
+                index
+                    .expect("Windows.Win32.Graphics.GdiPlus", "GpMatrix")
+                    .underlying_type(),
+                Some(windows_metadata::Type::value_named(
+                    DEFAULT_NAMESPACE,
+                    "Matrix"
+                )),
+                "the included-only native definition retains the fixture's default namespace"
+            );
+            println!(
+                "{target}: {}",
+                assert_native_matrix_pointer_identity(&index)
+            );
             std::fs::remove_dir_all(root).unwrap();
         }
+        assert_eq!(
+            std::fs::read(win_sdk.join("RecompiledIdlHeaders/um/GdiplusMatrix.h")).unwrap(),
+            std::fs::read(fixture.join("original-matrix.h")).unwrap(),
+            "the fixture must not modify the pristine SDK header"
+        );
+        std::fs::remove_dir_all(fixture).unwrap();
+    }
+
+    #[test]
+    fn checked_in_gdiplus_unannotated_matrix_rejects_external_fallback() {
+        let root = scratch("gdiplus-unannotated-matrix");
+        let error = check_gdiplus_imported_functions("x64", &checked_in_win_sdk(), &root, None)
+            .err()
+            .expect("an unannotated native Matrix must not bind an unrelated reference");
+        assert!(error.contains("unsupported type `Matrix`"), "{error}");
+        assert!(
+            error.contains("class is not a public data-only record"),
+            "{error}"
+        );
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    fn stage_native_matrix_fixture(win_sdk: &Path, root: &Path) -> PathBuf {
+        use sha2::{Digest, Sha256};
+
+        let header = win_sdk.join("RecompiledIdlHeaders/um/GdiplusMatrix.h");
+        let source = std::fs::read_to_string(&header).unwrap();
+        assert_eq!(
+            format!(
+                "{:X}",
+                Sha256::digest(source.replace("\r\n", "\n").as_bytes())
+            ),
+            "A8F38B09E4A39783A7DDA33BC61CB30F628E218ABCC25CD466B6C77E1DF87894",
+            "review the fixture contract if the pinned native header changes"
+        );
+        let declaration = "class Matrix : public GdiplusBase";
+        assert_eq!(source.matches(declaration).count(), 1);
+        let newline = if source.contains("\r\n") {
+            "\r\n"
+        } else {
+            "\n"
+        };
+        let annotated = format!(
+            "#include <win32metadata_annotations.h>{newline}{}",
+            source.replacen(
+                declaration,
+                "class _Win32_NativeOpaque_ Matrix : public GdiplusBase",
+                1,
+            )
+        );
+        assert_eq!(
+            format!(
+                "{:X}",
+                Sha256::digest(annotated.replace("\r\n", "\n").as_bytes())
+            ),
+            "E37DBFA84859EAF4C749AD6A8C98BE0A29452060F78C1CDA0FFD12E8FAEC456B",
+            "the staged bytes must match the admitted native annotation"
+        );
+        std::fs::write(root.join("original-matrix.h"), &source).unwrap();
+        let staged = root.join("annotated-matrix.h");
+        std::fs::write(&staged, &annotated).unwrap();
+        let overlay = root.join("matrix-fixture.yaml");
+        std::fs::write(
+            &overlay,
+            format!(
+                "version: 0\ncase-sensitive: false\nuse-external-names: false\n\
+                 roots:\n  - type: file\n    name: {:?}\n    external-contents: {:?}\n",
+                path_arg(&header, "fixture header").unwrap(),
+                path_arg(&staged, "staged header").unwrap(),
+            ),
+        )
+        .unwrap();
+        overlay
     }
 
     #[test]
@@ -7880,7 +7970,7 @@ mod tests {
                 .expect("set WIN32METADATA_GDIPLUS_OUTPUT_ROOT to a new evidence directory"),
         );
         std::fs::create_dir(&output).expect("the evidence directory must not already exist");
-        let index = check_gdiplus_imported_functions("x64", &win_sdk, &output);
+        let index = check_gdiplus_imported_functions("x64", &win_sdk, &output, None).unwrap();
         assert_gdiplus_geometry_layouts(&index, "x64", true);
         let namespace = "Windows.Win32.Graphics.GdiPlus";
         let opaque_types = [
@@ -7943,6 +8033,18 @@ mod tests {
             );
             observed.push_str(&format!("{name}:{position}\t{actual:?}\n"));
         }
+        observed.push_str(&assert_native_matrix_pointer_identity(&index));
+        std::fs::write(output.join("opaque-pointers.txt"), &observed).unwrap();
+        let result = "PASS: 629 import-backed GDI+ functions, native calling conventions, geometry layouts/aliases, 22 nominal definitions, and nine native pointer slots.\n";
+        std::fs::write(output.join("result.txt"), result).unwrap();
+        println!("{observed}{result}Evidence: {}", output.display());
+        index
+    }
+
+    fn assert_native_matrix_pointer_identity(index: &Index) -> String {
+        use windows_metadata::{HasAttributes, Type};
+
+        let namespace = "Windows.Win32.Graphics.GdiPlus";
         let matrices = index
             .types()
             .filter(|definition| definition.name() == "Matrix")
@@ -7976,34 +8078,69 @@ mod tests {
         } else {
             matrix_type
         };
-        let Item::Fn(create_matrix) = index.expect_item(namespace, "GdipCreateMatrix") else {
-            panic!("missing GdipCreateMatrix");
-        };
-        assert_eq!(
-            create_matrix.signature(&[]).types,
-            [Type::PtrMut(Box::new(matrix_pointee), 2)],
-            "native GpMatrix** must reach the marked Matrix definition"
-        );
-        observed.push_str(&format!(
-            "GdipCreateMatrix:0\t{:?}\nMatrix definition: {}.{}\n",
-            create_matrix.signature(&[]).types[0],
+        let mut observed = format!(
+            "Matrix definition: {}.{}\n",
             matrix.namespace(),
             matrix.name()
-        ));
-        std::fs::write(output.join("opaque-pointers.txt"), &observed).unwrap();
-        let result = "PASS: 629 import-backed GDI+ functions, native calling conventions, geometry layouts/aliases, 22 nominal definitions, and eight native pointer slots.\n";
-        std::fs::write(output.join("result.txt"), result).unwrap();
-        println!("{observed}{result}Evidence: {}", output.display());
-        index
+        );
+        for (name, depth) in [("GdipCreateMatrix", 2), ("GdipDeleteMatrix", 1)] {
+            let Item::Fn(method) = index.expect_item(namespace, name) else {
+                panic!("missing {name}");
+            };
+            assert_eq!(
+                method.signature(&[]).types,
+                [Type::PtrMut(Box::new(matrix_pointee.clone()), depth)],
+                "{name} must reach the marked Matrix definition at its native pointer depth"
+            );
+            observed.push_str(&format!("{name}:0\t{:?}\n", method.signature(&[]).types[0]));
+        }
+        observed
     }
 
-    fn check_gdiplus_imported_functions(target: &str, win_sdk: &Path, root: &Path) -> Index {
+    fn check_gdiplus_imported_functions(
+        target: &str,
+        win_sdk: &Path,
+        root: &Path,
+        matrix_fixture: Option<&Path>,
+    ) -> Result<Index, String> {
         ensure_libclang();
         let architecture = arch(target).unwrap();
         let include_dirs = checked_in_include_dirs(win_sdk);
         let traversal =
             crate::partition::load_traversal_policy(&win_sdk.join("Partitions"), &include_dirs)
                 .unwrap();
+        if matrix_fixture.is_some() {
+            assert_eq!(traversal.partitions.len(), 321);
+            let header = path_arg(
+                &win_sdk.join("RecompiledIdlHeaders/um/GdiplusMatrix.h"),
+                "fixture header",
+            )
+            .unwrap();
+            assert!(
+                traversal
+                    .partitions
+                    .iter()
+                    .flat_map(|partition| &partition.roots)
+                    .all(|root| {
+                        match root {
+                            crate::partition::TraversalRoot::File(root) => !source_path_matches(
+                                &header,
+                                &path_arg(&root.path, "root").unwrap(),
+                            ),
+                            crate::partition::TraversalRoot::Directory(root) => {
+                                root.files.iter().all(|file| {
+                                    !source_path_matches(
+                                        &header,
+                                        &path_arg(&file.path, "root").unwrap(),
+                                    )
+                                })
+                            }
+                            _ => panic!("unexpected unresolved traversal root"),
+                        }
+                    }),
+                "the admitted Matrix definition must remain dependency-only"
+            );
+        }
         let gdiplus = logical_partition(&traversal, "Gdiplus").unwrap();
         let roots = gdiplus
             .roots
@@ -8041,6 +8178,12 @@ mod tests {
         args.retain(|argument| !argument.starts_with("--target="));
         args.push(format!("--target={}", architecture.triple));
         args.extend(architecture.defines.iter().cloned());
+        if let Some(overlay) = matrix_fixture {
+            args.extend([
+                "-ivfsoverlay".to_string(),
+                path_arg(overlay, "Matrix fixture overlay").unwrap(),
+            ]);
+        }
         if target == "x86" {
             let staged_tools =
                 Path::new(env!("CARGO_MANIFEST_DIR")).join(r"..\..\bin\GeneratorSdk\tools\win-x64");
@@ -8057,6 +8200,117 @@ mod tests {
             &args.iter().map(String::as_str).collect::<Vec<_>>(),
         )
         .unwrap();
+        if matrix_fixture.is_some() {
+            let native_facts = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| matches!(fact.name.as_str(), "Matrix" | "GpMatrix"))
+                .collect::<Vec<_>>();
+            let evidence = format!("{native_facts:#?}");
+            std::fs::write(root.join("matrix-native-facts.txt"), &evidence).unwrap();
+            println!("{target}: native Matrix declarations and typedef:\n{evidence}");
+            let header = path_arg(
+                &win_sdk.join("RecompiledIdlHeaders/um/GdiplusMatrix.h"),
+                "fixture header",
+            )
+            .unwrap();
+            assert!(
+                snapshot
+                    .included_files()
+                    .iter()
+                    .any(|included| { source_path_matches(&header, &included.path) })
+            );
+            let matrices = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| {
+                    fact.name == "Matrix" && source_path_matches(&header, &fact.spelling.file)
+                })
+                .collect::<Vec<_>>();
+            let [matrix] = matrices.as_slice() else {
+                panic!("expected exactly one Matrix fact from the admitted native definition");
+            };
+            assert!(
+                !matrix.root,
+                "the Matrix definition is included, not traversed"
+            );
+            assert!(matrix.definition);
+            assert_eq!(matrix.kind, windows_clang::FactKind::Class);
+            let FactData::Record {
+                base: None,
+                fields,
+                size,
+                align,
+                packing: None,
+                alignment: None,
+                union: false,
+            } = &matrix.data
+            else {
+                panic!("the marked definition must be a native opaque record");
+            };
+            assert!(fields.is_empty());
+            assert!(
+                *size < 0 && *align < 0,
+                "opaque definitions have no native layout"
+            );
+            let aliases = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| fact.name == "GpMatrix")
+                .collect::<Vec<_>>();
+            let [alias] = aliases.as_slice() else {
+                panic!("expected exactly one native GpMatrix typedef");
+            };
+            assert!(alias.root);
+            assert_eq!(alias.kind, windows_clang::FactKind::Typedef);
+            let FactData::Typedef {
+                target: windows_clang::TypeRef::Named { name, declaration },
+            } = &alias.data
+            else {
+                panic!("GpMatrix must retain its native named typedef target");
+            };
+            assert_eq!(name, "Matrix");
+            assert_eq!(
+                declaration, &matrix.spelling,
+                "the typedef must bind the admitted native definition, not a same-leaf reference"
+            );
+            assert_eq!(alias.origin.tu, matrix.origin.tu);
+            let forwards = snapshot
+                .facts()
+                .iter()
+                .filter(|fact| {
+                    fact.name == "Matrix"
+                        && !fact.definition
+                        && fact.spelling.file == alias.spelling.file
+                        && fact.origin.tu == alias.origin.tu
+                })
+                .collect::<Vec<_>>();
+            let [forward] = forwards.as_slice() else {
+                panic!("expected exactly one native Matrix forward declaration in GpStubs");
+            };
+            assert_eq!(forward.kind, windows_clang::FactKind::Class);
+            assert!(!forward.definition);
+            assert!(forward.root);
+            assert_eq!(forward.spelling.file, alias.spelling.file);
+            assert!(source_path_matches(
+                &path_arg(
+                    &win_sdk.join("RecompiledIdlHeaders/um/GdiplusGpStubs.h"),
+                    "typedef header"
+                )
+                .unwrap(),
+                &alias.spelling.file,
+            ));
+            for fact in [*matrix, *alias, *forward] {
+                let parent = fact
+                    .parent
+                    .as_ref()
+                    .and_then(|parent| snapshot.facts().iter().find(|fact| &fact.origin == parent))
+                    .expect("the native declaration must have an extracted parent");
+                assert_eq!(parent.kind, windows_clang::FactKind::Namespace);
+                assert_eq!(parent.name, "Gdiplus");
+                assert_eq!(fact.parent, alias.parent);
+            }
+        }
         let functions = snapshot
             .facts()
             .iter()
@@ -8144,13 +8398,28 @@ mod tests {
         emit.functions = Some(&selected);
         emit.libraries = Some(&libraries);
         let policy = convert_header_partition_policy(&traversal).unwrap();
-        let authorities = crate::namespace_routes::NamespaceRoutes::load(
+        let routes = crate::namespace_routes::NamespaceRoutes::load(
             &win_sdk.join("requiredNamespacesForNames.rsp"),
         )
-        .unwrap()
-        .authorities();
-        let partitions =
-            plan_header_partitions(&snapshot, &policy, &authorities, &emit, target).unwrap();
+        .unwrap();
+        if matrix_fixture.is_some() {
+            for name in ["Matrix", "GpMatrix", "Gdiplus::Matrix", "Gdiplus::GpMatrix"] {
+                assert!(
+                    !routes.exact.contains_key(name),
+                    "unexpected exact authority for {name}"
+                );
+                assert!(
+                    !routes
+                        .prefixes
+                        .keys()
+                        .any(|prefix| name.starts_with(prefix)),
+                    "unexpected wildcard authority for {name}"
+                );
+            }
+            assert!(!references.types().is_empty());
+        }
+        let authorities = routes.authorities();
+        let partitions = plan_header_partitions(&snapshot, &policy, &authorities, &emit, target)?;
         let rdl = root.join("rdl");
         std::fs::create_dir_all(&rdl).unwrap();
         write_partitioned_rdl(&rdl, partitions).unwrap();
@@ -8210,7 +8479,7 @@ mod tests {
                 fact.name
             );
         }
-        index
+        Ok(index)
     }
 
     fn assert_gdiplus_geometry_layouts(index: &Index, target: &str, opaque_classes: bool) {

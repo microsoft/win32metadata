@@ -4,8 +4,11 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`0138a2079ecce580789a072b52ea6f25df77a937`](https://github.com/jevansaks/windows-rs/commit/0138a2079ecce580789a072b52ea6f25df77a937),
-published in `jevansaks/windows-rs`. Its retained-pointer SAL direction correction
+[`af9baa81465036b8c64fb52c68226c4cc3f76c3e`](https://github.com/jevansaks/windows-rs/commit/af9baa81465036b8c64fb52c68226c4cc3f76c3e),
+published in `jevansaks/windows-rs`. Its native Color identity correction follows
+`2ee8ba6bb766a5a9b919f7b73222e6e01b981968`, whose source-identified interface,
+provider-IID, and macro-probe corrections follow `0138a2079ecce580789a072b52ea6f25df77a937`,
+whose retained-pointer SAL direction correction
 follows `60b728861e6f6a0f25a52012934ca81041e710c8`, whose cross-input associated-enum ownership
 correction follows `6f9dcaef699630aacbae363b7f9766afc84b2d41`, whose explicitly terminated named-scalar
 correction follows `ab1e9593dd421d3aa0d6a3710557b7789199d004`, whose redeclaration correction follows the
@@ -24,6 +27,91 @@ historical fork change has been upstreamed.
 | `windows-rdl` | RDL compilation and WinMD-to-RDL emission. |
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
+
+## Native embedded storage and external identity
+
+**Upstream issue:** not filed; this corrects the local pipeline producer.
+
+Producer `af9baa81` keeps an unsupported native declaration's exact identity from
+falling back to an unrelated external type with the same leaf name. In particular,
+native GDI+ `Color` must not become WinRT `Windows.UI.Color`. Explicitly qualified
+WinRT Color references remain external.
+
+In selected header-partition dependency closure, uniformly protected storage with
+no bases or virtual methods can be retained as a native record when embedded in
+another record. Direct `Color` by-value ABI and transitive outer `ColorMap`
+by-value ABI remain rejected. The producer's physical x86/x64 fixtures retain local
+ARGB/Color/ColorMap identities, fields and layout alongside the explicit WinRT
+control. This is not a general relaxation for C++ class ABI or proof of actual SDK
+Color output; that requires the coalesced normal product image.
+
+The checked-in GDI+ import fixture now stages only the admitted
+`_Win32_NativeOpaque_` annotation on `GdiplusMatrix.h`, using a test-only Clang
+VFS overlay that preserves the original logical header path. Normalized source
+hashes bind both the pristine and annotated headers; the SDK mirror is unchanged.
+The bare-header negative must still reject unsupported native `Matrix` rather
+than falling back to a same-leaf reference.
+
+The positive retains all 629 import-backed functions, native calling conventions,
+parameter counts and geometry checks on x64 and x86. It additionally binds the
+included opaque class definition, traversed forward declaration and `GpMatrix`
+typedef by canonical locations, translation unit and native namespace parent.
+Physical metadata must contain one empty nominal `Matrix`, with `GpMatrix` and
+both creation/deletion pointer signatures reaching that emitted type. Under the
+fixture's unchanged 321 policies and namespace authorities, the included-only
+definition uses the default `Windows.Win32` namespace; that is a current-policy
+assertion, not an OLD namespace compatibility claim or a new routing rule.
+
+**Removal condition:** adopt an upstream revision preserving exact native/external
+identity, embedded-only storage eligibility and the direct/transitive ABI negatives.
+
+## Source-identified interfaces and bounded macro probes
+
+**Upstream issue:** not filed; these correct the local pipeline producer.
+
+The coalesced `2ee8ba6b` revision retains identified native-namespaced interfaces
+as public roots in explicit header partition planning. Original source names and
+translation-unit identity survive collision scoping so provider-local interfaces
+keep their own IID values and methods. Unrelated same-spelling IID constants
+remain independent; shared GUIDs do not merge distinct interfaces. Legacy
+emission behavior is unchanged.
+
+Producer regressions
+`identified_native_namespaced_interfaces_remain_public_roots` and
+`colliding_identified_native_interfaces_retain_provider_iids` in
+`crates/libs/clang/tests/header_partitions.rs` check RDL and physical metadata,
+including methods, inheritance, GUIDs, nonempty references and negative controls.
+Consumer SAL and independent WinHTTP/WinInet controls remain separate.
+
+Macro evaluation now requires a complete initializer expression and localizes
+probe diagnostics to affected declaration ranges. Previously accepted diagnostics
+are matched by message and location, not ignored indiscriminately. Unlocalized
+cascades still use isolation. In the producer's fixed 2,050-candidate mixed fixture,
+the earlier `e3b63cb0` used one synthetic translation unit but admitted two partial
+constants; `2a7a7ef` used 2,186 translation units and recovered no values;
+`2ee8ba6b` uses one translation unit, no retries, and preserves the 2,040 correct
+survivors. These are bounded fixture measurements, not full-SDK timing claims.
+
+This revision also contains the typed COFF contract reader and its machine,
+malformed-input and anonymous/BigObj handling. The consumer still uses the legacy
+library transport and leaves `EmitOptions::native_imports` unset. Enabling typed
+contracts, ordinal/name modes and per-architecture machine filtering is a
+separate behavior checkpoint; pinning this revision does not recover imports by
+itself.
+
+```powershell
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml -- `
+    --skip checked_in_authority_compile_environment_sources_parse
+.\scripts\Test-GeneratorSdkPackage.ps1
+```
+
+Two existing producer `test_rdl` parameter-roundtrip failures remain tracked.
+Neither this adoption nor passing consumer/package controls waives those failures
+or establishes a clean full three-architecture strict product build.
+
+**Removal condition:** adopt an upstream revision preserving source-identified
+interfaces, provider-local IID identity, complete macro expressions and bounded
+mixed-cohort recovery, with the existing physical metadata controls.
 
 ## Explicit direction on retained canonical pointer aliases
 
