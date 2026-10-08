@@ -58,3 +58,12 @@ PTP_WORK_CALLBACK
 PTP_TIMER_CALLBACK
 PTP_WAIT_CALLBACK
 EXPERIMENTAL_WebAuthNPluginStatusChangeCallback
+Windows.Win32.Graphics.Printing.PRINTPROVIDOR_fpCanShutdown
+Windows.Win32.Security.Authentication.Identity.LSA_IMPERSONATE_CLIENT
+Windows.Win32.Security.Authentication.Identity.LSA_UNLOAD_PACKAGE
+Windows.Win32.System.Memory.BAD_MEMORY_CALLBACK_ROUTINE
+Windows.Win32.System.Time.AlertSamplesAvailFunc
+Windows.Win32.Web.InternetExplorer.IE80TabWindowExports_TLSFreeImmutableTabData
+Windows.Win32.Web.InternetExplorer.IE80TabWindowExports_TLSGetImmutableTabData
+Windows.Win32.Web.InternetExplorer.IEGetProcessModule_t
+Windows.Win32.Web.InternetExplorer.IEGetTabWindowExports_t

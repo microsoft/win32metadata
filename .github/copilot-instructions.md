@@ -11,6 +11,8 @@ dotnet build BuildTools -c Release
 `BuildMetadataBin.ps1` builds the packaged Rust tool when needed and generates
 `bin\Windows.Win32.winmd` from aggregate, satellite, two PSAPI variants and an independent
 WinHTTP input for each of x64, x86, and arm64. Architecture extraction runs in parallel.
+Use `-ArchitectureJobs 1` to process complete architecture workers sequentially;
+all three architectures remain selected.
 Normal builds copy the pristine mirror, apply sorted post-MIDL patches without
 MIDL rewriting, and consume `generation\WinSDK\obj\RecompiledIdlHeaders` under
 canonical partition authority. `-RawSdk` preserves the explicit raw SDK mode.

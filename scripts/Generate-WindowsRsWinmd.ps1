@@ -9,6 +9,9 @@
 .PARAMETER Architecture
     Target architectures to scrape and merge. Defaults to x64, x86, and arm64.
 
+.PARAMETER ArchitectureJobs
+    Maximum concurrent architecture workers, including extraction. Defaults to three.
+
 .PARAMETER UsePartitionAuthority
     Generate one aggregate plus one satellite input, plus the two PSAPI compile variants,
     and route them with the checked-in logical partition traversal policy.
@@ -48,7 +51,10 @@ param (
     [ValidateNotNullOrEmpty()]
     [string]$Namespace = "Windows.Win32",
 
-    [switch]$SkipBuild
+    [switch]$SkipBuild,
+
+    [ValidateRange(1, 2147483647)]
+    [int]$ArchitectureJobs = 3
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -157,6 +163,7 @@ else
 $arguments = @(
     "scrape",
     "--namespace", $Namespace,
+    "--architecture-jobs", "$ArchitectureJobs",
     "--obj", $objDir
 )
 

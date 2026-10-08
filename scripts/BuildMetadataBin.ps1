@@ -14,7 +14,11 @@ param
 
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
-    $arch = "crossarch"
+    $arch = "crossarch",
+
+    [ValidateRange(1, 2147483647)]
+    [int]
+    $ArchitectureJobs = 3
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -60,6 +64,7 @@ $buildArgs = @(
     "-t:EmitWinmd",
     "-p:WinmdVersion=$assemblyVersion",
     "-p:OutputWinmd=$outputWinmdFileName",
+    "-p:WinmdArchitectureJobs=$ArchitectureJobs",
     "-bl:$logFile",
     "--no-restore"
 )

@@ -164,100 +164,6 @@ namespace WinmdUtilsProgram
             return rootCommand.Invoke(args);
         }
 
-        private static bool TypeIsPointerToOneOfNames(HashSet<string> names, string type)
-        {
-            int starIndex = type.IndexOf('*');
-            if (starIndex == -1)
-            {
-                return false;
-            }
-
-            string typeOnly = type.Substring(0, starIndex);
-            return names.Contains(typeOnly);
-        }
-
-        private class PointerInfo
-        {
-            public PointerInfo(string name, string type)
-            {
-                this.Name = name;
-                this.Type = type;
-            }
-
-            public string Name { get; }
-            public string Type { get; }
-        }
-
-        private static string GetPointerTypeToOneOfNamesInUseByParameter(HashSet<string> typeNames, MethodSignature<string> methodSignature, IEnumerable<MetadataUtils.ParameterInfo> parameterInfos)
-        {
-            var parameters = parameterInfos.ToArray();
-            for (int i = 0; i < methodSignature.ParameterTypes.Length; i++)
-            {
-                var paramType = methodSignature.ParameterTypes[i];
-                var paramtTypeToTest = paramType;
-                var param = parameters[i];
-
-                if (param.Attributes.HasFlag(ParameterAttributes.Out) && paramtTypeToTest.EndsWith('*'))
-                {
-                    paramtTypeToTest = paramtTypeToTest.Substring(0, paramType.Length - 1);
-                }
-
-                if (TypeIsPointerToOneOfNames(typeNames, paramtTypeToTest))
-                {
-                    return paramType;
-                }
-            }
-
-            return null;
-        }
-
-        private static IEnumerable<PointerInfo> PointerToOneOfNamesInUse(HashSet<string> typeNames, MetadataUtils.TypeInfo typeInfo)
-        {
-            if (typeInfo is StructInfo structInfo)
-            {
-                foreach (var fieldInfo in structInfo.Fields)
-                {
-                    if (TypeIsPointerToOneOfNames(typeNames, fieldInfo.Type))
-                    {
-                        yield return new PointerInfo($"{typeInfo.Namespace}.{typeInfo.Name}.{fieldInfo.Name}", fieldInfo.Type);
-                    }
-                }
-            }
-            else if (typeInfo is InterfaceInfo interfaceInfo)
-            {
-                foreach (var methodInfo in interfaceInfo.Methods)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, methodInfo.MethodSignature, methodInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{interfaceInfo.Namespace}.{interfaceInfo.Name}.{methodInfo.Name}", paramType);
-                    }
-                }
-            }
-            else if (typeInfo is DelegateTypeInfo delegateInfo)
-            {
-                for (int i = 0; i < delegateInfo.MethodSignature.ParameterTypes.Length; i++)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, delegateInfo.MethodSignature, delegateInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{delegateInfo.Namespace}.{delegateInfo.Name}", paramType);
-                    }
-                }
-            }
-            else if (typeInfo is ClassInfo classInfo)
-            {
-                foreach (var methodInfo in classInfo.Methods)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, methodInfo.MethodSignature, methodInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{classInfo.Namespace}.{classInfo.Name}.{methodInfo.Name}", paramType);
-                    }
-                }
-            }
-        }
-
         public static int CreateLibRsp(string[] lib, string[] libDir, string[] exclude, FileInfo outputRsp, FileInfo inputRsp, IConsole console)
         {
             List<string> libPaths = new List<string>();
@@ -427,30 +333,22 @@ namespace WinmdUtilsProgram
 
         public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName, MetadataReaderOptions.None);
             List<WinmdUtils> allWinmds = new List<WinmdUtils>{ w1 };
             bool pointersFound = false;
 
-            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
-
-            foreach (var type in w1.GetTypes(allWinmds))
+            foreach (var pointerInUse in DelegateValidator.FindPointersToDelegates(w1.GetTypes(allWinmds), allowItem))
             {
-                foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
+                if (!pointersFound)
                 {
-                    if (allowTable.Contains(pointerInUse.Name))
-                    {
-                        continue;
-                    }
-
-                    if (!pointersFound)
-                    {
-                        console.Out.Write("Pointers to delegates detected:\r\n");
-                        pointersFound = true;
-                    }
-
-                    console?.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
+                    console.Out.Write("Pointers to delegates detected:\r\n");
+                    pointersFound = true;
                 }
+
+                string name = pointerInUse.ParameterSequence.HasValue
+                    ? $"{pointerInUse.Name}.{pointerInUse.ParameterName}"
+                    : pointerInUse.Name;
+                console?.Out.Write($"{pointerInUse.Type},{name}\r\n");
             }
 
             if (!pointersFound)
@@ -643,27 +541,18 @@ namespace WinmdUtilsProgram
 
         public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName, MetadataReaderOptions.None);
             List<WinmdUtils> allWinmds = new List<WinmdUtils> { w1 };
             bool emptyFound = false;
-            foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
+            foreach (var type in DelegateValidator.FindEmptyDelegates(w1.GetTypes(allWinmds), allowItem))
             {
-                if (!type.Parameters.Any())
+                if (!emptyFound)
                 {
-                    if (allowTable.Contains(type.Name))
-                    {
-                        continue;
-                    }
-
-                    if (!emptyFound)
-                    {
-                        emptyFound = true;
-                        console.Out.Write("Empty delegates detected:\r\n");
-                    }
-
-                    console?.Out.Write($"{type.Name}\r\n");
+                    emptyFound = true;
+                    console.Out.Write("Empty delegates detected:\r\n");
                 }
+
+                console?.Out.Write($"{type.Name}\r\n");
             }
 
 
