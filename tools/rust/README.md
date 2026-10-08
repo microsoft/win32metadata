@@ -279,6 +279,34 @@ reviewed expectation decisions, not widening that allowance. The separately reco
 Rust 103/104 authority-count discrepancy and held DXC ownership conflict are unchanged
 by build wiring.
 
+### Duplicate-type diagnostics
+
+The companion `WinmdUtils showDuplicateTypes --winmd <path>` command reports
+structural/native-semantic duplicate **candidates**, not proof that native declarations
+may be merged. Same-leaf names generate candidates; field and method signatures,
+referenced type identities, layout, ABI properties, constants, and native attributes
+determine whether they collide on overlapping architectures. Disjoint architecture
+variants do not collide. A type's own namespace does not make this comparison vacuous.
+
+Distinct resolved `RAIIFree` cleanup providers can distinguish otherwise matching
+definitions. Missing, incomplete, or ambiguous provider bindings remain conservative
+duplicate candidates; a namespace or usage site alone is not provider-identity proof.
+Diagnostics list full owner names and the overlapping architectures. For groups where
+not every owner collides with every other owner, explicit collision pairs identify the
+actual conflicts. A nonzero exit code still fails the strict integrity check.
+
+### Duplicate-constant diagnostics
+
+`WinmdUtils showDuplicateConstants --winmd <path>` groups native identifiers using
+ordinal, case-sensitive names and preserves their spelling in diagnostics.
+Case-distinct names remain separate; equal values do not exempt exact-name collisions.
+
+For backward compatibility, `--allowItem` matches the diagnostic name after
+current-culture `ToUpper()` against the existing exact, case-sensitive token set.
+For example, under `en-US`, a duplicate named `NativeConstant` still requires
+`--allowItem NATIVECONSTANT`, not `--allowItem NativeConstant`. This does not add
+invariant normalization, ignore-case matching, token migration, or new allowances.
+
 ### Merging cached architectures
 
 Keep each architecture's generated RDL with its matching WinMD. Supply x64 first

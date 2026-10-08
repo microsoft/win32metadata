@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -10,7 +11,7 @@ namespace MetadataUtils
     {
         public static IReadOnlyList<DuplicateConstantDiagnostic> FindDuplicates(IEnumerable<ITypeDefinition> definitions)
         {
-            var names = new Dictionary<string, List<Occurrence>>();
+            var names = new Dictionary<string, List<Occurrence>>(StringComparer.Ordinal);
             foreach (var type in definitions)
             {
                 if (type.Kind == TypeKind.Enum &&
@@ -66,11 +67,10 @@ namespace MetadataUtils
 
             void Add(string name, string owner, Architecture architectures)
             {
-                var key = name.ToUpper();
-                if (!names.TryGetValue(key, out var occurrences))
+                if (!names.TryGetValue(name, out var occurrences))
                 {
                     occurrences = new();
-                    names.Add(key, occurrences);
+                    names.Add(name, occurrences);
                 }
 
                 occurrences.Add(new(owner, architectures));

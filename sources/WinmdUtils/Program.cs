@@ -419,7 +419,8 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var duplicate in duplicates)
             {
-                if (allowTable.Contains(duplicate.Name))
+                // Preserve the legacy current-culture uppercase allowance key.
+                if (allowTable.Contains(duplicate.Name.ToUpper()))
                 {
                     continue;
                 }
@@ -448,85 +449,30 @@ namespace WinmdUtilsProgram
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
-
-            Dictionary<string, List<string>> nameToNamespaces = new Dictionary<string, List<string>>();
-
-            foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
-            {
-                if (type1.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type1.ParentModule != winmd1.MainModule)
-                {
-                    continue;
-                }
-
-                var typeName = type1.Name;
-                if (type1.Kind == TypeKind.Class && typeName == "Apis")
-                {
-                    continue;
-                }
-
-                StringBuilder members = new StringBuilder();
-                foreach (var m in type1.Members)
-                {
-                    if (type1.Kind == TypeKind.Enum && m.Name == "value__")
-                    {
-                        continue;
-                    }
-
-                    if (m.Name == ".ctor")
-                    {
-                        continue;
-                    }
-
-                    if (members.Length != 0)
-                    {
-                        members.Append(',');
-                    }
-
-                    members.Append(m.Name);
-                }
-
-                if (members.Length != 0)
-                {
-                    typeName += $"({members})";
-                }
-
-                string archInfo = GetArchInfo(type1.GetAttributes());
-                if (!string.IsNullOrEmpty(archInfo))
-                {
-                    typeName += $"({archInfo})";
-                }
-
-                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
-                {
-                    namespaces = new List<string>();
-                    nameToNamespaces[typeName] = namespaces;
-                }
-
-                namespaces.Add(type1.Namespace);
-            }
+            var duplicates = TypeDuplicateValidator.FindDuplicates(winmd1.GetTopLevelTypeDefinitions()
+                .Where(t => t.FullName != "<Module>" && t.ParentModule == winmd1.MainModule));
 
             bool dupsFound = false;
-            foreach (var pair in nameToNamespaces)
+            foreach (var duplicate in duplicates)
             {
-                if (pair.Value.Count > 1)
+                if (!dupsFound)
                 {
-                    if (dupsFound == false)
-                    {
-                        dupsFound = true;
-                        console.Out.Write("Duplicate types detected:\r\n");
-                    }
+                    dupsFound = true;
+                    console.Out.Write("Duplicate types detected:\r\n");
+                }
 
-                    pair.Value.Sort();
+                console.Out.Write($"{duplicate.Name} ({duplicate.Architectures})\r\n");
+                foreach (var owner in duplicate.Owners)
+                {
+                    console.Out.Write($"  {owner}\r\n");
+                }
 
-                    console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var ns in pair.Value)
+                if (duplicate.Collisions.Count != duplicate.Owners.Count * (duplicate.Owners.Count - 1) / 2 ||
+                    duplicate.Collisions.Any(c => c.Architectures != duplicate.Architectures))
+                {
+                    foreach (var collision in duplicate.Collisions)
                     {
-                        console?.Out.Write($"  {ns}\r\n");
+                        console.Out.Write($"    {collision.FirstOwner} <-> {collision.SecondOwner} ({collision.Architectures})\r\n");
                     }
                 }
             }
