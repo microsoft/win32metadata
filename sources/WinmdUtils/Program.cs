@@ -59,7 +59,7 @@ namespace WinmdUtilsProgram
 
             showDuplicateTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateTypes);
 
-            var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
+            var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constant names whose supported architectures overlap.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
@@ -515,88 +515,27 @@ namespace WinmdUtilsProgram
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
             HashSet<string> allowTable = new HashSet<string>(allowItem);
-            Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
-
-            foreach (var type in winmd1.GetTopLevelTypeDefinitions())
-            {
-                if (type.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type.ParentModule != winmd1.MainModule)
-                {
-                    continue;
-                }
-
-                // Skip enums marked as a scoped enum (like a C++ class enum).
-                // We don't count these in the duplicated constants
-                if (type.Kind == TypeKind.Enum)
-                {
-                    if (type.GetAttributes().Any(a => a.AttributeType.Name == "ScopedEnumAttribute"))
-                    {
-                        continue;
-                    }
-                }
-
-                // See if this is a guid-only struct. Count it as a guid constant so that we don't
-                // duplicate a guid between a struct and a const
-                if (type.Kind == TypeKind.Struct &&
-                    type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
-                    !type.GetFields().Any())
-                {
-                    if (!nameToOwner.TryGetValue(type.Name.ToUpper(), out var owners))
-                    {
-                        owners = new List<string>();
-                        nameToOwner[type.Name.ToUpper()] = owners;
-                    }
-
-                    owners.Add(type.FullName);
-                }
-
-                if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
-                {
-                    foreach (var field in type.GetFields(options: GetMemberOptions.IgnoreInheritedMembers))
-                    {
-                        if (field.Name == "value__")
-                        {
-                            continue;
-                        }
-
-                        if (!nameToOwner.TryGetValue(field.Name.ToUpper(), out var owners))
-                        {
-                            owners = new List<string>();
-                            nameToOwner[field.Name.ToUpper()] = owners;
-                        }
-
-                        owners.Add(type.FullName);
-                    }
-                }
-            }
+            var duplicates = ConstantValidator.FindDuplicates(winmd1.GetTopLevelTypeDefinitions()
+                .Where(t => t.FullName != "<Module>" && t.ParentModule == winmd1.MainModule));
 
             bool dupsFound = false;
-            foreach (var pair in nameToOwner)
+            foreach (var duplicate in duplicates)
             {
-                if (allowTable.Contains(pair.Key))
+                if (allowTable.Contains(duplicate.Name))
                 {
                     continue;
                 }
 
-                if (pair.Value.Count > 1)
+                if (dupsFound == false)
                 {
-                    if (dupsFound == false)
-                    {
-                        dupsFound = true;
-                        console.Out.Write("Duplicate constants/enum names detected:\r\n");
-                    }
+                    dupsFound = true;
+                    console.Out.Write("Duplicate constants/enum names detected:\r\n");
+                }
 
-                    pair.Value.Sort();
-
-                    console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var owner in pair.Value)
-                    {
-                        console?.Out.Write($"  {owner}\r\n");
-                    }
+                console?.Out.Write($"{duplicate.Name}\r\n");
+                foreach (var owner in duplicate.Owners)
+                {
+                    console?.Out.Write($"  {owner}\r\n");
                 }
             }
 

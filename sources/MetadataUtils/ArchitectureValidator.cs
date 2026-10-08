@@ -57,6 +57,17 @@ namespace MetadataUtils
             return attribute == null ? null : (Architecture)attribute.FixedArguments[0].Value;
         }
 
+        internal static Architecture EffectiveArchitectures(IEntity entity)
+        {
+            var supported = DeclaredArchitectures(entity) ?? Architecture.All;
+            for (var parent = entity.DeclaringTypeDefinition; parent != null; parent = parent.DeclaringTypeDefinition)
+            {
+                supported &= DeclaredArchitectures(parent) ?? Architecture.All;
+            }
+
+            return supported;
+        }
+
         private static IEnumerable<TypeVariant> GetVariants(ITypeDefinition type, Architecture parent)
         {
             var supported = parent & (DeclaredArchitectures(type) ?? Architecture.All);
