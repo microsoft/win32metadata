@@ -63,6 +63,13 @@ Parameter diagnostics enumerate every offending slot once, including separate
 `Callback` and `CleanupCallback` sites, and normalize only one pointer layer for
 an output slot. Existing whole-method/delegate allowance keys are unchanged.
 
+The metadata reader aligns optional `Param` rows by their sequence number against
+signature arity. Return rows are excluded from argument positions, unnamed rows
+retain their flags, and absent rows supply an empty name with no flags. Duplicate
+or out-of-range sequences are explicit metadata errors, not sparse-row errors.
+Raw metadata fixtures exercise this adapter through the callback validator for
+delegates, classes and interfaces; the validator's arity check remains strict.
+
 The NTSec redirected-logon callback fields must remain direct delegates; the four
 callback output parameters require exactly one additional pointer and explicit
 output direction. These sites are not allowlisted. The unadorned native
