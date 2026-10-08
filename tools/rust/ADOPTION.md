@@ -28,6 +28,25 @@ historical fork change has been upstreamed.
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
 
+## Physical metadata serialization integrity
+
+The strict product suite reads unprojected metadata tables and requires a
+`FieldLayout` row for every instance field of an `ExplicitLayout` type, including
+nested and architecture-specific definitions. Offset zero is a real row, not a
+missing-layout sentinel. Static fields and implicit layouts do not require rows.
+
+Module-scoped `TypeRef` rows must resolve to local `TypeDef` identities with the
+exact namespace, case and declaring-type chain. External assembly/module scopes
+and nested external references are not mistaken for missing local definitions.
+Same-name architecture variants remain valid; they do not exempt physical fields
+from layout validation. Neither guard uses an allowlist.
+
+These assertions detect serialization loss independently of a projected consumer
+view. They do not prove that native extraction, alias preservation or all external
+reference scopes are correct. In particular, passing package fixtures or a
+single-architecture image is not evidence that architecture merging preserves
+all physical layout and assembly-reference rows.
+
 ## Native embedded storage and external identity
 
 **Upstream issue:** not filed; this corrects the local pipeline producer.
