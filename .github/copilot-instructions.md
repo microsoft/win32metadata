@@ -9,8 +9,8 @@ dotnet build BuildTools -c Release
 ```
 
 `BuildMetadataBin.ps1` builds the packaged Rust tool when needed and generates
-`bin\Windows.Win32.winmd` from aggregate, satellite and two PSAPI variant inputs
-for each of x64, x86, and arm64. Architecture extraction runs in parallel.
+`bin\Windows.Win32.winmd` from aggregate, satellite, two PSAPI variants and an independent
+WinHTTP input for each of x64, x86, and arm64. Architecture extraction runs in parallel.
 Normal builds copy the pristine mirror, apply sorted post-MIDL patches without
 MIDL rewriting, and consume `generation\WinSDK\obj\RecompiledIdlHeaders` under
 canonical partition authority. `-RawSdk` preserves the explicit raw SDK mode.
@@ -52,7 +52,8 @@ Metadata semantics belong in SDK headers and import libraries. Do not add RSP,
 JSON, or manual C# metadata sidecars.
 
 Legacy focused inputs live in `generation/WinSDK/Partitions`. The production
-header manifest and its PSAPI variants are built by `generation/WinSDK/Windows.Win32.proj`.
+header manifest, PSAPI variants and independent WinHTTP context are built by
+`generation/WinSDK/Windows.Win32.proj`.
 
 After metadata changes, compare `bin/Windows.Win32.winmd` with the release
 baseline using `.\scripts\DiffWinmdToBaseline.ps1`.

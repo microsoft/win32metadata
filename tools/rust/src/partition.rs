@@ -2728,7 +2728,7 @@ mod tests {
         let counts = option_counts(&partitions);
         assert_eq!(counts["--namespace"], 321);
         assert_eq!(counts["--traverse"], 321);
-        assert_eq!(counts["--exclude"], 104);
+        assert_eq!(counts["--exclude"], 103);
         assert_eq!(counts["--remap"], 12);
         assert_eq!(counts["--with-attribute"], 23);
         assert_eq!(counts["--with-librarypath"], 6);
@@ -2744,14 +2744,14 @@ mod tests {
                 .iter()
                 .map(|policy| policy.exclusions.len())
                 .sum::<usize>(),
-            570
+            569
         );
         assert_eq!(
             partitions
                 .iter()
                 .map(|partition| partition.values("--exclude").count())
                 .sum::<usize>(),
-            571
+            570
         );
         assert_eq!(
             policies
