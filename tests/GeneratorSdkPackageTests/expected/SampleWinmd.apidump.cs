@@ -197,7 +197,7 @@ namespace Sample.Api;
 
 using System.Runtime.InteropServices;
 
-[UnmanagedFunctionPointer (/*Could not decode attribute arguments.*/)]
+[UnmanagedFunctionPointer (CallingConvention.Winapi)]
 public delegate int PSAMPLE_CALLBACK ([In] int code);
 
 namespace Sample.Api;
@@ -233,7 +233,7 @@ namespace Sample.Api;
 
 using System.Runtime.InteropServices;
 
-[UnmanagedFunctionPointer (/*Could not decode attribute arguments.*/)]
+[UnmanagedFunctionPointer (CallingConvention.Winapi)]
 public delegate int SAMPLE_CALLBACK ([In] int code);
 
 namespace Sample.Api;
@@ -253,14 +253,14 @@ namespace Sample.Api;
 
 using System.Runtime.InteropServices;
 
-[UnmanagedFunctionPointer (/*Could not decode attribute arguments.*/)]
+[UnmanagedFunctionPointer (CallingConvention.Winapi)]
 public delegate int SAMPLE_CALLBACKS_anonymous ([In] int arg0);
 
 namespace Sample.Api;
 
 using System.Runtime.InteropServices;
 
-[UnmanagedFunctionPointer (/*Could not decode attribute arguments.*/)]
+[UnmanagedFunctionPointer (CallingConvention.Winapi)]
 public delegate int SAMPLE_CALLBACKS_anonymous_2 ([In] int arg0);
 
 namespace Sample.Api;
