@@ -1,0 +1,190 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
+index f807be93c4..d054365dd2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/roerrorapi.h
+@@ -14,6 +14,7 @@
+ #endif
+ 
+ #include <apiset.h>
++#include <win32metadata_annotations.h>
+ #include <apisetcconv.h>
+ #include <hstring.h>
+ #include <restrictedErrorInfo.h>
+@@ -32,7 +33,11 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-typedef enum {
++typedef enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++   {
+         RO_ERROR_REPORTING_NONE               = 0x00000000,
+         RO_ERROR_REPORTING_SUPPRESSEXCEPTIONS = 0x00000001,
+         RO_ERROR_REPORTING_FORCEEXCEPTIONS    = 0x00000002,
+@@ -45,14 +50,18 @@ DEFINE_ENUM_FLAG_OPERATORS(RO_ERROR_REPORTING_FLAGS);
+ //not including the terminating null
+ #define MAX_ERROR_MESSAGE_CHARS 512
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI
+ RoGetErrorReportingFlags(
+-    _Out_ UINT32* pflags
++     _Out_ UINT32* pflags
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI
+ RoSetErrorReportingFlags(
+-    _In_ UINT32 flags
++     _In_ UINT32 flags
+     );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+@@ -61,6 +70,8 @@ RoSetErrorReportingFlags(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI
+ RoResolveRestrictedErrorInfoReference(
+     _In_ PCWSTR reference,
+@@ -73,16 +84,23 @@ RoResolveRestrictedErrorInfoReference(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI
+ SetRestrictedErrorInfo(
+     _In_opt_ IRestrictedErrorInfo* pRestrictedErrorInfo
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
++
+ STDAPI
+ GetRestrictedErrorInfo(
+     _Outptr_result_maybenull_ IRestrictedErrorInfo** ppRestrictedErrorInfo
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI_(BOOL)
+ RoOriginateErrorW(
+     _In_ HRESULT error,
+@@ -92,12 +110,16 @@ RoOriginateErrorW(
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI_(BOOL)
+ RoOriginateError(
+     _In_ HRESULT error,
+     _In_opt_ HSTRING message
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI_(BOOL)
+ RoTransformErrorW(
+     _In_ HRESULT oldError,
+@@ -108,6 +130,8 @@ RoTransformErrorW(
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI_(BOOL)
+ RoTransformError(
+     _In_ HRESULT oldError,
+@@ -115,11 +139,15 @@ RoTransformError(
+     _In_opt_ HSTRING message
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI
+ RoCaptureErrorContext(
+     HRESULT hr
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-0.dll") 
++
+ STDAPI_(void)
+ RoFailFastWithErrorContext(
+     HRESULT hrError
+@@ -324,6 +352,7 @@ namespace ABI
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") _Windows_SupportedOS_Windows81_
+ STDAPI_(BOOL)
+ RoOriginateLanguageException(
+     _In_ HRESULT error,
+@@ -331,12 +360,13 @@ RoOriginateLanguageException(
+     _In_opt_ IUnknown* languageException
+     );
+ 
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") _Windows_SupportedOS_Windows81_
+ STDAPI_(void)
+ RoClearError(
+     void
+     );
+ 
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") STDAPI
+ RoReportUnhandledError(
+     _In_ IRestrictedErrorInfo* pRestrictedErrorInfo
+     );
+@@ -347,12 +377,14 @@ RoReportUnhandledError(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++
+ typedef HRESULT (WINAPI *PINSPECT_MEMORY_CALLBACK)(
+     _In_opt_ void* context,
+     UINT_PTR readAddress,
+     UINT32 length,
+     _Out_writes_(length) BYTE* buffer);
+ 
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") _Windows_SupportedOS_Windows81_
+ STDAPI
+ RoInspectThreadErrorInfo(
+     _In_ UINT_PTR targetTebAddress,
+@@ -362,6 +394,7 @@ RoInspectThreadErrorInfo(
+     _Out_ UINT_PTR* targetErrorInfoAddress
+     );
+ 
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") _Windows_SupportedOS_Windows81_
+ STDAPI
+ RoInspectCapturedStackBackTrace(
+     _In_ UINT_PTR targetErrorInfoAddress,
+@@ -372,18 +405,20 @@ RoInspectCapturedStackBackTrace(
+     _Out_ UINT_PTR* targetBackTraceAddress
+     );
+ 
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") STDAPI
+ RoGetMatchingRestrictedErrorInfo(
+     _In_ HRESULT hrIn,
+     _COM_Outptr_ IRestrictedErrorInfo** ppRestrictedErrorInfo
+     );
+ 
+-STDAPI
++_Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") STDAPI
+ RoReportFailedDelegate(
+     _In_ IUnknown* punkDelegate,
+     _In_ IRestrictedErrorInfo* pRestrictedErrorInfo
+     );
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-core-winrt-error-l1-1-1.dll") 
++
+ STDAPI_(BOOL)
+ IsErrorPropagationEnabled(
+     void

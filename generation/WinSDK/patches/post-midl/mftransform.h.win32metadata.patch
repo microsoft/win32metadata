@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mftransform.h b/generation/WinSDK/RecompiledIdlHeaders/um/mftransform.h
+index 38a87fb3fe..e14bac05d4 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mftransform.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mftransform.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -186,7 +187,7 @@ enum _MFT_MESSAGE_TYPE
+         MFT_MESSAGE_COMMAND_MARKER	= 0x20000000
+     } 	MFT_MESSAGE_TYPE;
+ 
+-typedef struct _MFT_INPUT_STREAM_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MFT_INPUT_STREAM_INFO
+     {
+     LONGLONG hnsMaxLatency;
+     DWORD dwFlags;
+@@ -195,7 +196,7 @@ typedef struct _MFT_INPUT_STREAM_INFO
+     DWORD cbAlignment;
+     } 	MFT_INPUT_STREAM_INFO;
+ 
+-typedef struct _MFT_OUTPUT_STREAM_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _MFT_OUTPUT_STREAM_INFO
+     {
+     DWORD dwFlags;
+     DWORD cbSize;
+@@ -253,7 +254,7 @@ EXTERN_C const IID IID_IMFTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("bf94c121-5b05-4e6f-8000-ba598961414d")
++    MIDL_INTERFACE("bf94c121-5b05-4e6f-8000-ba598961414d") _Windows_SupportedOS_WindowsVista_ 
+     IMFTransform : public IUnknown
+     {
+     public:
+@@ -769,7 +770,7 @@ EXTERN_C const IID IID_IMFDeviceTransform;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D818FBD8-FC46-42F2-87AC-1EA2D1F9BF32")
++    MIDL_INTERFACE("D818FBD8-FC46-42F2-87AC-1EA2D1F9BF32") _Windows_SupportedOS_15063_ 
+     IMFDeviceTransform : public IUnknown
+     {
+     public:
+@@ -1568,7 +1569,7 @@ EXTERN_C const IID IID_IMFDeviceTransformCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6D5CB646-29EC-41FB-8179-8C4C6D750811")
++    MIDL_INTERFACE("6D5CB646-29EC-41FB-8179-8C4C6D750811") _Windows_SupportedOS_17134_ 
+     IMFDeviceTransformCallback : public IUnknown
+     {
+     public:
+@@ -1713,7 +1714,7 @@ EXTERN_C const DECLSPEC_SELECTANY GUID MFT_ENUM_TRANSCODE_ONLY_ATTRIBUTE = { 0x1
+ #pragma endregion
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+-STDAPI
++_Windows_SupportedOS_Windows7_ STDAPI
+ MFCreateTransformActivate(
+     _Out_ IMFActivate** ppActivate
+     );

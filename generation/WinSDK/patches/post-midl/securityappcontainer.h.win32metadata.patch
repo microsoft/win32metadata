@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/securityappcontainer.h b/generation/WinSDK/RecompiledIdlHeaders/um/securityappcontainer.h
+index 34cde711e2..96758900b3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/securityappcontainer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/securityappcontainer.h
+@@ -15,6 +15,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ 
+ #include <minwindef.h>
+ #include <minwinbase.h>
+@@ -32,6 +33,9 @@ extern "C" {
+ // Token Extension APIs
+ //
+ 
++_Windows_SupportedOS_Windows8_ 
++
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetAppContainerNamedObjectPath(

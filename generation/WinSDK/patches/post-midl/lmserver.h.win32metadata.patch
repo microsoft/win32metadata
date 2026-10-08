@@ -1,0 +1,339 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
+index a8f80c8f9e..0a527c3a74 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMServer.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD VERSION: 0007    // INCREMENT THIS IF A CHANGE HAS GLOBAL EFFECTS
+ 
+ Copyright (c) 1990-1999  Microsoft Corporation
+@@ -54,7 +55,7 @@ extern "C" {
+ // Function Prototypes - SERVER
+ //
+ 
+-NET_API_STATUS NET_API_FUNCTION
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
+ NetServerEnum (
+     _In_opt_ IN  LMCSTR      servername OPTIONAL,
+     _In_ IN  DWORD       level,
+@@ -62,7 +63,7 @@ NetServerEnum (
+     _In_ IN  DWORD       prefmaxlen,
+     _Out_ OUT LPDWORD     entriesread,
+     _Out_ OUT LPDWORD     totalentries,
+-    _In_ IN  DWORD       servertype,
++    _Win32_AssociatedEnum_(NET_SERVER_TYPE) _In_ IN  DWORD       servertype,
+     _In_opt_ IN  LMCSTR      domain OPTIONAL,
+     _Out_opt_ IN OUT LPDWORD  resume_handle OPTIONAL
+     );
+@@ -87,7 +88,7 @@ NetServerEnumEx (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerGetInfo (
+@@ -99,7 +100,7 @@ NetServerGetInfo (
+     LPBYTE *bufptr
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerSetInfo(
+     _In_opt_ LMSTR servername,
+@@ -139,7 +140,7 @@ NetServerSetInfoCommandLine (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerDiskEnum (
+@@ -152,7 +153,7 @@ NetServerDiskEnum (
+     _Inout_opt_ LPDWORD resume_handle
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerComputerNameAdd(
+     _In_opt_ LMSTR ServerName,
+@@ -160,14 +161,14 @@ NetServerComputerNameAdd(
+     _In_ LMSTR EmulatedServerName
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerComputerNameDel(
+     _In_opt_ LMSTR ServerName,
+     _In_ LMSTR EmulatedServerName
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportAdd (
+     _In_opt_ LMSTR servername,
+@@ -175,7 +176,7 @@ NetServerTransportAdd (
+     _In_reads_bytes_(sizeof(SERVER_TRANSPORT_INFO_0)) LPBYTE bufptr
+     );
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportAddEx(
+     _In_opt_ LMSTR servername,
+@@ -212,7 +213,7 @@ NetServerTransportAddForInstance(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportDel(
+     _In_opt_ LMSTR servername,
+@@ -245,7 +246,7 @@ NetServerTransportDelForInstance(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+-_Check_return_
++_Windows_SupportedOS_Windows2000_ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportEnum (
+@@ -273,7 +274,7 @@ NetServerTransportEnum (
+ // Therefore, if this is the only function called by that service, then
+ // it is not necessary to link to netapi32.lib.
+ //
+-BOOL NET_API_FUNCTION
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ BOOL NET_API_FUNCTION
+ SetServiceBits(
+     IN SERVICE_STATUS_HANDLE    hServiceStatus,
+     IN DWORD                    dwServiceBits,
+@@ -301,7 +302,7 @@ typedef struct _SERVER_INFO_101 {
+     LMSTR           sv101_name;
+     DWORD           sv101_version_major;
+     DWORD           sv101_version_minor;
+-    DWORD           sv101_type;
++    _Win32_AssociatedEnum_(NET_SERVER_TYPE) DWORD           sv101_type;
+     LMSTR           sv101_comment;
+ } SERVER_INFO_101, *PSERVER_INFO_101, *LPSERVER_INFO_101;
+ 
+@@ -310,11 +311,11 @@ typedef struct _SERVER_INFO_102 {
+      LMSTR          sv102_name;
+      DWORD          sv102_version_major;
+      DWORD          sv102_version_minor;
+-     DWORD          sv102_type;
++     _Win32_AssociatedEnum_(NET_SERVER_TYPE) DWORD          sv102_type;
+      LMSTR          sv102_comment;
+      DWORD          sv102_users;
+      LONG           sv102_disc;
+-     BOOL           sv102_hidden;
++     _Win32_AssociatedEnum_(SERVER_INFO_HIDDEN) BOOL           sv102_hidden;
+      DWORD          sv102_announce;
+      DWORD          sv102_anndelta;
+      DWORD          sv102_licenses;
+@@ -343,7 +344,7 @@ typedef struct _SERVER_INFO_402 {
+      DWORD          sv402_glist_mtime;
+      DWORD          sv402_alist_mtime;
+      LMSTR          sv402_alerts;
+-     DWORD          sv402_security;
++     _Win32_AssociatedEnum_(SERVER_INFO_SECURITY) DWORD          sv402_security;
+      DWORD          sv402_numadmin;
+      DWORD          sv402_lanmask;
+      LMSTR          sv402_guestacct;
+@@ -377,7 +378,7 @@ typedef struct _SERVER_INFO_403 {
+      DWORD          sv403_glist_mtime;
+      DWORD          sv403_alist_mtime;
+      LMSTR          sv403_alerts;
+-     DWORD          sv403_security;
++     _Win32_AssociatedEnum_(SERVER_INFO_SECURITY) DWORD          sv403_security;
+      DWORD          sv403_numadmin;
+      DWORD          sv403_lanmask;
+      LMSTR          sv403_guestacct;
+@@ -593,7 +594,7 @@ typedef struct _SERVER_INFO_1010 {
+ } SERVER_INFO_1010, *PSERVER_INFO_1010, *LPSERVER_INFO_1010;
+ 
+ typedef struct _SERVER_INFO_1016 {
+-    BOOL            sv1016_hidden;
++    _Win32_AssociatedEnum_(SERVER_INFO_HIDDEN) BOOL            sv1016_hidden;
+ } SERVER_INFO_1016, *PSERVER_INFO_1016, *LPSERVER_INFO_1016;
+ 
+ typedef struct _SERVER_INFO_1017 {
+@@ -1543,5 +1544,172 @@ typedef struct _SERVER_TRANSPORT_INFO_3 {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SV_TYPE_WORKSTATION")
++#undef SV_TYPE_WORKSTATION
++#pragma push_macro("SV_TYPE_SERVER")
++#undef SV_TYPE_SERVER
++#pragma push_macro("SV_TYPE_SQLSERVER")
++#undef SV_TYPE_SQLSERVER
++#pragma push_macro("SV_TYPE_DOMAIN_CTRL")
++#undef SV_TYPE_DOMAIN_CTRL
++#pragma push_macro("SV_TYPE_DOMAIN_BAKCTRL")
++#undef SV_TYPE_DOMAIN_BAKCTRL
++#pragma push_macro("SV_TYPE_TIME_SOURCE")
++#undef SV_TYPE_TIME_SOURCE
++#pragma push_macro("SV_TYPE_AFP")
++#undef SV_TYPE_AFP
++#pragma push_macro("SV_TYPE_NOVELL")
++#undef SV_TYPE_NOVELL
++#pragma push_macro("SV_TYPE_DOMAIN_MEMBER")
++#undef SV_TYPE_DOMAIN_MEMBER
++#pragma push_macro("SV_TYPE_PRINTQ_SERVER")
++#undef SV_TYPE_PRINTQ_SERVER
++#pragma push_macro("SV_TYPE_DIALIN_SERVER")
++#undef SV_TYPE_DIALIN_SERVER
++#pragma push_macro("SV_TYPE_XENIX_SERVER")
++#undef SV_TYPE_XENIX_SERVER
++#pragma push_macro("SV_TYPE_SERVER_UNIX")
++#undef SV_TYPE_SERVER_UNIX
++#pragma push_macro("SV_TYPE_NT")
++#undef SV_TYPE_NT
++#pragma push_macro("SV_TYPE_WFW")
++#undef SV_TYPE_WFW
++#pragma push_macro("SV_TYPE_SERVER_MFPN")
++#undef SV_TYPE_SERVER_MFPN
++#pragma push_macro("SV_TYPE_SERVER_NT")
++#undef SV_TYPE_SERVER_NT
++#pragma push_macro("SV_TYPE_POTENTIAL_BROWSER")
++#undef SV_TYPE_POTENTIAL_BROWSER
++#pragma push_macro("SV_TYPE_BACKUP_BROWSER")
++#undef SV_TYPE_BACKUP_BROWSER
++#pragma push_macro("SV_TYPE_MASTER_BROWSER")
++#undef SV_TYPE_MASTER_BROWSER
++#pragma push_macro("SV_TYPE_DOMAIN_MASTER")
++#undef SV_TYPE_DOMAIN_MASTER
++#pragma push_macro("SV_TYPE_SERVER_OSF")
++#undef SV_TYPE_SERVER_OSF
++#pragma push_macro("SV_TYPE_SERVER_VMS")
++#undef SV_TYPE_SERVER_VMS
++#pragma push_macro("SV_TYPE_WINDOWS")
++#undef SV_TYPE_WINDOWS
++#pragma push_macro("SV_TYPE_DFS")
++#undef SV_TYPE_DFS
++#pragma push_macro("SV_TYPE_CLUSTER_NT")
++#undef SV_TYPE_CLUSTER_NT
++#pragma push_macro("SV_TYPE_TERMINALSERVER")
++#undef SV_TYPE_TERMINALSERVER
++#pragma push_macro("SV_TYPE_CLUSTER_VS_NT")
++#undef SV_TYPE_CLUSTER_VS_NT
++#pragma push_macro("SV_TYPE_DCE")
++#undef SV_TYPE_DCE
++#pragma push_macro("SV_TYPE_ALTERNATE_XPORT")
++#undef SV_TYPE_ALTERNATE_XPORT
++#pragma push_macro("SV_TYPE_LOCAL_LIST_ONLY")
++#undef SV_TYPE_LOCAL_LIST_ONLY
++#pragma push_macro("SV_TYPE_DOMAIN_ENUM")
++#undef SV_TYPE_DOMAIN_ENUM
++#pragma push_macro("SV_TYPE_ALL")
++#undef SV_TYPE_ALL
++enum [[clang::flag_enum]] NET_SERVER_TYPE : unsigned int
++{
++    SV_TYPE_WORKSTATION = 1U,
++    SV_TYPE_SERVER = 2U,
++    SV_TYPE_SQLSERVER = 4U,
++    SV_TYPE_DOMAIN_CTRL = 8U,
++    SV_TYPE_DOMAIN_BAKCTRL = 16U,
++    SV_TYPE_TIME_SOURCE = 32U,
++    SV_TYPE_AFP = 64U,
++    SV_TYPE_NOVELL = 128U,
++    SV_TYPE_DOMAIN_MEMBER = 256U,
++    SV_TYPE_PRINTQ_SERVER = 512U,
++    SV_TYPE_DIALIN_SERVER = 1024U,
++    SV_TYPE_XENIX_SERVER = 2048U,
++    SV_TYPE_SERVER_UNIX = 2048U,
++    SV_TYPE_NT = 4096U,
++    SV_TYPE_WFW = 8192U,
++    SV_TYPE_SERVER_MFPN = 16384U,
++    SV_TYPE_SERVER_NT = 32768U,
++    SV_TYPE_POTENTIAL_BROWSER = 65536U,
++    SV_TYPE_BACKUP_BROWSER = 131072U,
++    SV_TYPE_MASTER_BROWSER = 262144U,
++    SV_TYPE_DOMAIN_MASTER = 524288U,
++    SV_TYPE_SERVER_OSF = 1048576U,
++    SV_TYPE_SERVER_VMS = 2097152U,
++    SV_TYPE_WINDOWS = 4194304U,
++    SV_TYPE_DFS = 8388608U,
++    SV_TYPE_CLUSTER_NT = 16777216U,
++    SV_TYPE_TERMINALSERVER = 33554432U,
++    SV_TYPE_CLUSTER_VS_NT = 67108864U,
++    SV_TYPE_DCE = 268435456U,
++    SV_TYPE_ALTERNATE_XPORT = 536870912U,
++    SV_TYPE_LOCAL_LIST_ONLY = 1073741824U,
++    SV_TYPE_DOMAIN_ENUM = 2147483648U,
++    SV_TYPE_ALL = 4294967295U,
++};
++#pragma pop_macro("SV_TYPE_ALL")
++#pragma pop_macro("SV_TYPE_DOMAIN_ENUM")
++#pragma pop_macro("SV_TYPE_LOCAL_LIST_ONLY")
++#pragma pop_macro("SV_TYPE_ALTERNATE_XPORT")
++#pragma pop_macro("SV_TYPE_DCE")
++#pragma pop_macro("SV_TYPE_CLUSTER_VS_NT")
++#pragma pop_macro("SV_TYPE_TERMINALSERVER")
++#pragma pop_macro("SV_TYPE_CLUSTER_NT")
++#pragma pop_macro("SV_TYPE_DFS")
++#pragma pop_macro("SV_TYPE_WINDOWS")
++#pragma pop_macro("SV_TYPE_SERVER_VMS")
++#pragma pop_macro("SV_TYPE_SERVER_OSF")
++#pragma pop_macro("SV_TYPE_DOMAIN_MASTER")
++#pragma pop_macro("SV_TYPE_MASTER_BROWSER")
++#pragma pop_macro("SV_TYPE_BACKUP_BROWSER")
++#pragma pop_macro("SV_TYPE_POTENTIAL_BROWSER")
++#pragma pop_macro("SV_TYPE_SERVER_NT")
++#pragma pop_macro("SV_TYPE_SERVER_MFPN")
++#pragma pop_macro("SV_TYPE_WFW")
++#pragma pop_macro("SV_TYPE_NT")
++#pragma pop_macro("SV_TYPE_SERVER_UNIX")
++#pragma pop_macro("SV_TYPE_XENIX_SERVER")
++#pragma pop_macro("SV_TYPE_DIALIN_SERVER")
++#pragma pop_macro("SV_TYPE_PRINTQ_SERVER")
++#pragma pop_macro("SV_TYPE_DOMAIN_MEMBER")
++#pragma pop_macro("SV_TYPE_NOVELL")
++#pragma pop_macro("SV_TYPE_AFP")
++#pragma pop_macro("SV_TYPE_TIME_SOURCE")
++#pragma pop_macro("SV_TYPE_DOMAIN_BAKCTRL")
++#pragma pop_macro("SV_TYPE_DOMAIN_CTRL")
++#pragma pop_macro("SV_TYPE_SQLSERVER")
++#pragma pop_macro("SV_TYPE_SERVER")
++#pragma pop_macro("SV_TYPE_WORKSTATION")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SV_SHARESECURITY")
++#undef SV_SHARESECURITY
++#pragma push_macro("SV_USERSECURITY")
++#undef SV_USERSECURITY
++enum SERVER_INFO_SECURITY : unsigned int
++{
++    SV_SHARESECURITY = 0U,
++    SV_USERSECURITY = 1U,
++};
++#pragma pop_macro("SV_USERSECURITY")
++#pragma pop_macro("SV_SHARESECURITY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SV_VISIBLE")
++#undef SV_VISIBLE
++#pragma push_macro("SV_HIDDEN")
++#undef SV_HIDDEN
++enum SERVER_INFO_HIDDEN : int
++{
++    SV_VISIBLE = 0,
++    SV_HIDDEN = 1,
++};
++#pragma pop_macro("SV_HIDDEN")
++#pragma pop_macro("SV_VISIBLE")
++#endif
++
+ #endif // _LMSERVER_
+ 

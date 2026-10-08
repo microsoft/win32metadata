@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/sapi.h
+index 955446497a..68b5198ecf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -5974,7 +5975,7 @@ enum SPPHRASERNG
+ typedef void *SPSTATEHANDLE;
+ 
+ #else
+-DECLARE_HANDLE(SPSTATEHANDLE);
++DECLARE_HANDLE(SPSTATEHANDLE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #endif
+ typedef /* [hidden] */ 
+ enum SPRECOEVENTFLAGS

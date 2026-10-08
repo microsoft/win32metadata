@@ -1,0 +1,17 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/appcompatapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/appcompatapi.h
+index 4a121c2416..c7bc8600b2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/appcompatapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/appcompatapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*************************************************************************************
+ *                                                                                    *
+ * AppCompat.h -- Appcompat procedure declarations, constant definitions and macros   *
+@@ -25,6 +26,7 @@ extern "C" {
+ 
+ BOOL
+ SDBAPI
++  _Win32_ImportLibrary_("Apphelp.dll")
+ ApphelpCheckShellObject(
+     _In_  REFCLSID    ObjectCLSID,
+     _In_  BOOL        bShimIfNecessary,

@@ -1,0 +1,149 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
+index 88e197e4df..1c580a0d6f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/lzexpand.h
+@@ -21,6 +21,7 @@ Revision History:
+ #define _LZEXPAND_
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -47,7 +48,7 @@ extern "C" {
+ ** Prototypes
+ */
+ 
+-_Success_(return >= 0)
++_Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+@@ -55,14 +56,14 @@ LZStart(
+     VOID
+     );
+ 
+-VOID
++_Win32_ImportLibrary_("kernel32.dll") VOID
+ APIENTRY
+ LZDone(
+     VOID
+     );
+ 
+ 
+-_Success_(return >= 0)
++_Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ LONG
+ APIENTRY
+@@ -71,36 +72,36 @@ CopyLZFile(
+     _In_ INT hfDest
+     );
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ LONG
+ APIENTRY
+-LZCopy(
++  LZCopy(
+     _In_ INT hfSource,
+     _In_ INT hfDest
+     );
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-LZInit(
++  LZInit(
+     _In_ INT hfSource
+     );
+ 
+-_Success_(return >= 0)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-GetExpandedNameA(
++  GetExpandedNameA(
+     _In_ LPSTR lpszSource,
+     _Out_writes_(MAX_PATH) LPSTR lpszBuffer
+     );
+-_Success_(return >= 0)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-GetExpandedNameW(
++  GetExpandedNameW(
+     _In_ LPWSTR lpszSource,
+     _Out_writes_(MAX_PATH) LPWSTR lpszBuffer
+     );
+@@ -110,23 +111,23 @@ GetExpandedNameW(
+ #define GetExpandedName  GetExpandedNameA
+ #endif // !UNICODE
+ 
+-_Success_(return >= 0)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-LZOpenFileA(
++  LZOpenFileA(
+     _In_ LPSTR lpFileName,
+     _Inout_ LPOFSTRUCT lpReOpenBuf,
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
+     );
+-_Success_(return >= 0)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-LZOpenFileW(
++  LZOpenFileW(
+     _In_ LPWSTR lpFileName,
+     _Inout_ LPOFSTRUCT lpReOpenBuf,
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
+     );
+ #ifdef UNICODE
+ #define LZOpenFile  LZOpenFileW
+@@ -134,29 +135,29 @@ LZOpenFileW(
+ #define LZOpenFile  LZOpenFileA
+ #endif // !UNICODE
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ LONG
+ APIENTRY
+-LZSeek(
++  LZSeek(
+     _In_ INT hFile,
+     _In_ LONG lOffset,
+     _In_ INT iOrigin
+     );
+ 
+-_Success_(return >= 0)
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") _Success_(return >= 0)
+ _Check_return_
+ INT
+ APIENTRY
+-LZRead(
++  LZRead(
+     _In_ INT hFile,
+     _Out_writes_bytes_to_(cbRead, return) CHAR* lpBuffer,
+     _In_ INT cbRead
+     );
+ 
+-VOID
++_Windows_SupportedOS_WindowsXP_ _Win32_ImportLibrary_("kernel32.dll") VOID
+ APIENTRY
+-LZClose(
++  LZClose(
+     _In_ INT hFile
+     );
+ 

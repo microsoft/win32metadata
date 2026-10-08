@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
+index b3d36e4871..91c8bac964 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObjectService.h
+@@ -78,6 +78,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -97,7 +98,7 @@ EXTERN_C const IID IID_IDocObjectService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3050f801-98b5-11cf-bb82-00aa00bdce0b")
+-    IDocObjectService : public IUnknown
++      IDocObjectService : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE FireBeforeNavigate2( 
+@@ -127,13 +128,13 @@ EXTERN_C const IID IID_IDocObjectService;
+             /* [in] */ __RPC__in_opt IHTMLWindow2 *pHTMLWindow) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPendingUrl( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrPendingUrl) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPendingUrl) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ActiveElementChanged( 
+             __RPC__in_opt IHTMLElement *pHTMLElement) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetUrlSearchComponent( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrSearch) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSearch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsErrorUrl( 
+             /* [in] */ __RPC__in LPCWSTR lpszUrl,

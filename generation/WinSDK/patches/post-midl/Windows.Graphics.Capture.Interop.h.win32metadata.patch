@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Graphics.Capture.Interop.h b/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Graphics.Capture.Interop.h
+index 99b308d470..aca1ba36a7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Graphics.Capture.Interop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Graphics.Capture.Interop.h
+@@ -9,17 +9,20 @@
+ #include <windows.ui.composition.h>
+ #include <windows.graphics.capture.h>
+ #include <sdkddkver.h>
++#include "win32metadata_annotations.h"
+ 
+ #undef INTERFACE
+ #define INTERFACE IGraphicsCaptureItemInterop
+ DECLARE_INTERFACE_IID_(IGraphicsCaptureItemInterop, IUnknown, "3628E81B-3CAC-4C60-B7F4-23CE0E0C3356")
+ {
++    
+     IFACEMETHOD(CreateForWindow)(
+         HWND window,
+         REFIID riid,
+         _COM_Outptr_ void ** result
+         ) PURE;
+ 
++    
+     IFACEMETHOD(CreateForMonitor)(
+         HMONITOR monitor,
+         REFIID riid,
+@@ -33,7 +36,7 @@ DECLARE_INTERFACE_IID_(IGraphicsCaptureItemInterop, IUnknown, "3628E81B-3CAC-4C6
+ DECLARE_INTERFACE_IID_(IWindowGraphicsCaptureItemInterop, IUnknown, "38E4C48B-94E6-4C44-9CFA-968193316C0C")
+ {
+     IFACEMETHOD(GetWindow)(
+-        HWND* window
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HWND* window
+         ) PURE;
+ };
+ 
+@@ -42,6 +45,6 @@ DECLARE_INTERFACE_IID_(IWindowGraphicsCaptureItemInterop, IUnknown, "38E4C48B-94
+ DECLARE_INTERFACE_IID_(IMonitorGraphicsCaptureItemInterop, IUnknown, "33274D14-A076-4048-8416-747E9B04DB7B")
+ {
+     IFACEMETHOD(GetMonitor)(
+-        HMONITOR* monitor
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HMONITOR* monitor
+         ) PURE;
+ };
+\ No newline at end of file

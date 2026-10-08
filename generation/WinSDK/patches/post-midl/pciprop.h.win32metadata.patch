@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h b/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
+index 909fbc73aa..466d6d837d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/pciprop.h
+@@ -615,4 +615,19 @@ DEFINE_PCI_DEVICE_DEVPKEY(DEVPKEY_PciDevice_IsTunneledDevice, 47);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++
++
++
++
++
++
++
++
++
++
++
++
++
++
+ #endif

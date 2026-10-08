@@ -1,0 +1,12 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RegStr.h b/generation/WinSDK/RecompiledIdlHeaders/um/RegStr.h
+index 025711bc69..75ca56ee3d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RegStr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RegStr.h
+@@ -1504,5 +1504,7 @@ typedef struct _DSKTLSYSTEMTIME {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++
+ #endif  //_INC_REGSTR
+ 

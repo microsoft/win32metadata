@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
+index cdc456c9ea..bb595f5eec 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTMSMli.h
+@@ -28,6 +28,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -39,7 +40,7 @@
+ 
+ #ifndef NTMS_NOREDEF
+ 
+-typedef struct
++typedef struct  
+ {
+         WCHAR   LabelType[NTMSMLI_MAXTYPE];
+         DWORD   LabelIDSize;
+@@ -49,11 +50,11 @@ typedef struct
+ 
+ #endif  // NTMS_NOREDEF
+ 
+-typedef DWORD ( WINAPI *MAXMEDIALABEL) (DWORD * const pMaxSize);
++typedef DWORD ( WINAPI *MAXMEDIALABEL) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD * const pMaxSize);
+ typedef DWORD ( WINAPI *CLAIMMEDIALABEL) (const BYTE * const pBuffer, const DWORD nBufferSize,
+-                                  MediaLabelInfo * const pLabelInfo);
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MediaLabelInfo * const pLabelInfo);
+ typedef DWORD ( WINAPI *CLAIMMEDIALABELEX) (const BYTE * const pBuffer, const DWORD nBufferSize,
+-                                  MediaLabelInfo * const pLabelInfo, GUID * LabelGuid);
++                                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") MediaLabelInfo * const pLabelInfo, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID * LabelGuid);
+ 
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */

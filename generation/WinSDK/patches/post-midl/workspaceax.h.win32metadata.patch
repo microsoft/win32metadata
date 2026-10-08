@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
+index 6613c04969..edcd59d3a1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceax.h
+@@ -73,6 +73,7 @@ extern "C"{
+ //
+ //--------------------------------------------------------------------------
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -92,7 +93,7 @@ EXTERN_C const IID IID_IWorkspaceResTypeRegistry;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1D428C79-6E2E-4351-A361-C0401A03A0BA")
+-    IWorkspaceResTypeRegistry : public IDispatch
++    _Windows_SupportedOS_Windows7_ IWorkspaceResTypeRegistry : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddResourceType( 
+@@ -111,7 +112,7 @@ EXTERN_C const IID IID_IWorkspaceResTypeRegistry;
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetResourceTypeInfo( 
+             /* [in] */ VARIANT_BOOL fMachineWide,
+             /* [in] */ __RPC__in BSTR bstrFileExtension,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLauncher) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLauncher) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ModifyResourceType( 
+             /* [in] */ VARIANT_BOOL fMachineWide,
+@@ -219,7 +220,7 @@ EXTERN_C const IID IID_IWorkspaceResTypeRegistry;
+         END_INTERFACE
+     } IWorkspaceResTypeRegistryVtbl;
+ 
+-    interface IWorkspaceResTypeRegistry
++    interface _Windows_SupportedOS_Windows7_ IWorkspaceResTypeRegistry
+     {
+         CONST_VTBL struct IWorkspaceResTypeRegistryVtbl *lpVtbl;
+     };

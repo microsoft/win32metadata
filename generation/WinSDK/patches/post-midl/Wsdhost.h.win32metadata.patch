@@ -1,0 +1,96 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdhost.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdhost.h
+index 708aead8e7..b8eeb81e34 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdhost.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdhost.h
+@@ -83,6 +83,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -90,12 +91,12 @@ extern "C"{
+ 
+ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDeviceHost(
+     _In_ LPCWSTR pszLocalId,
+     IWSDXMLContext* pContext,
+     _Outptr_ IWSDDeviceHost** ppDeviceHost);
+-HRESULT WINAPI
++_Windows_SupportedOS_WindowsVista_ HRESULT WINAPI
+ WSDCreateDeviceHostAdvanced(
+     _In_ LPCWSTR pszLocalId,
+     IWSDXMLContext* pContext,
+@@ -103,7 +104,7 @@ WSDCreateDeviceHostAdvanced(
+     DWORD dwHostAddressCount,
+     _Outptr_ IWSDDeviceHost** ppDeviceHost);
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-HRESULT WINAPI
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI
+ WSDCreateDeviceHost2(
+     _In_ LPCWSTR pszLocalId,
+     IWSDXMLContext* pContext,
+@@ -127,8 +128,8 @@ EXTERN_C const IID IID_IWSDDeviceHost;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("917fe891-3d13-4138-9809-934c8abeb12c")
+-    IWSDDeviceHost : public IUnknown
++    MIDL_INTERFACE("917fe891-3d13-4138-9809-934c8abeb12c") _Windows_SupportedOS_WindowsVista_ 
++      IWSDDeviceHost : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Init( 
+@@ -339,7 +340,7 @@ EXTERN_C const IID IID_IWSDDeviceHost;
+         END_INTERFACE
+     } IWSDDeviceHostVtbl;
+ 
+-    interface IWSDDeviceHost
++    interface _Windows_SupportedOS_WindowsVista_ IWSDDeviceHost
+     {
+         CONST_VTBL struct IWSDDeviceHostVtbl *lpVtbl;
+     };
+@@ -419,8 +420,8 @@ EXTERN_C const IID IID_IWSDDeviceHostNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b5bee9f9-eeda-41fe-96f7-f45e14990fb0")
+-    IWSDDeviceHostNotify : public IUnknown
++    MIDL_INTERFACE("b5bee9f9-eeda-41fe-96f7-f45e14990fb0") _Windows_SupportedOS_WindowsVista_ 
++      IWSDDeviceHostNotify : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetService( 
+@@ -465,7 +466,7 @@ EXTERN_C const IID IID_IWSDDeviceHostNotify;
+         END_INTERFACE
+     } IWSDDeviceHostNotifyVtbl;
+ 
+-    interface IWSDDeviceHostNotify
++    interface _Windows_SupportedOS_WindowsVista_ IWSDDeviceHostNotify
+     {
+         CONST_VTBL struct IWSDDeviceHostNotifyVtbl *lpVtbl;
+     };
+@@ -510,8 +511,8 @@ EXTERN_C const IID IID_IWSDServiceMessaging;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94974cf4-0cab-460d-a3f6-7a0ad623c0e6")
+-    IWSDServiceMessaging : public IUnknown
++    MIDL_INTERFACE("94974cf4-0cab-460d-a3f6-7a0ad623c0e6") _Windows_SupportedOS_WindowsVista_ 
++      IWSDServiceMessaging : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SendResponse( 
+@@ -578,7 +579,7 @@ EXTERN_C const IID IID_IWSDServiceMessaging;
+         END_INTERFACE
+     } IWSDServiceMessagingVtbl;
+ 
+-    interface IWSDServiceMessaging
++    interface _Windows_SupportedOS_WindowsVista_ IWSDServiceMessaging
+     {
+         CONST_VTBL struct IWSDServiceMessagingVtbl *lpVtbl;
+     };

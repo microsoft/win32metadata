@@ -1,0 +1,126 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WbemProv.h b/generation/WinSDK/RecompiledIdlHeaders/um/WbemProv.h
+index 527a93a5f8..daad7bebe8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WbemProv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WbemProv.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -343,7 +344,7 @@ EXTERN_C const IID IID_IWbemPropertyProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CE61E841-65BC-11d0-B6BD-00AA003240C7")
++    MIDL_INTERFACE("CE61E841-65BC-11d0-B6BD-00AA003240C7") _Windows_SupportedOS_WindowsVista_ 
+     IWbemPropertyProvider : public IUnknown
+     {
+     public:
+@@ -483,7 +484,7 @@ EXTERN_C const IID IID_IWbemUnboundObjectSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e246107b-b06e-11d0-ad61-00c04fd8fdff")
++    MIDL_INTERFACE("e246107b-b06e-11d0-ad61-00c04fd8fdff") _Windows_SupportedOS_WindowsVista_ 
+     IWbemUnboundObjectSink : public IUnknown
+     {
+     public:
+@@ -578,7 +579,7 @@ EXTERN_C const IID IID_IWbemEventProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e245105b-b06e-11d0-ad61-00c04fd8fdff")
++    MIDL_INTERFACE("e245105b-b06e-11d0-ad61-00c04fd8fdff") _Windows_SupportedOS_WindowsVista_ 
+     IWbemEventProvider : public IUnknown
+     {
+     public:
+@@ -669,7 +670,7 @@ EXTERN_C const IID IID_IWbemEventProviderQuerySink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("580acaf8-fa1c-11d0-ad72-00c04fd8fdff")
++    MIDL_INTERFACE("580acaf8-fa1c-11d0-ad72-00c04fd8fdff") _Windows_SupportedOS_WindowsVista_ 
+     IWbemEventProviderQuerySink : public IUnknown
+     {
+     public:
+@@ -777,7 +778,7 @@ EXTERN_C const IID IID_IWbemEventProviderSecurity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("631f7d96-d993-11d2-b339-00105a1f4aaf")
++    MIDL_INTERFACE("631f7d96-d993-11d2-b339-00105a1f4aaf") _Windows_SupportedOS_WindowsVista_ 
+     IWbemEventProviderSecurity : public IUnknown
+     {
+     public:
+@@ -876,7 +877,7 @@ EXTERN_C const IID IID_IWbemEventConsumerProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e246107a-b06e-11d0-ad61-00c04fd8fdff")
++    MIDL_INTERFACE("e246107a-b06e-11d0-ad61-00c04fd8fdff") _Windows_SupportedOS_WindowsVista_ 
+     IWbemEventConsumerProvider : public IUnknown
+     {
+     public:
+@@ -967,7 +968,7 @@ EXTERN_C const IID IID_IWbemProviderInitSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1be41571-91dd-11d1-aeb2-00c04fb68820")
++    MIDL_INTERFACE("1be41571-91dd-11d1-aeb2-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
+     IWbemProviderInitSink : public IUnknown
+     {
+     public:
+@@ -1058,7 +1059,7 @@ EXTERN_C const IID IID_IWbemProviderInit;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1be41572-91dd-11d1-aeb2-00c04fb68820")
++    MIDL_INTERFACE("1be41572-91dd-11d1-aeb2-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
+     IWbemProviderInit : public IUnknown
+     {
+     public:
+@@ -1169,7 +1170,7 @@ EXTERN_C const IID IID_IWbemHiPerfProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("49353c93-516b-11d1-aea6-00c04fb68820")
++    MIDL_INTERFACE("49353c93-516b-11d1-aea6-00c04fb68820") _Windows_SupportedOS_WindowsVista_ 
+     IWbemHiPerfProvider : public IUnknown
+     {
+     public:
+@@ -1417,7 +1418,7 @@ EXTERN_C const IID IID_IWbemDecoupledRegistrar;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1005cbcf-e64f-4646-bcd3-3a089d8a84b4")
++    MIDL_INTERFACE("1005cbcf-e64f-4646-bcd3-3a089d8a84b4") _Windows_SupportedOS_WindowsVista_ 
+     IWbemDecoupledRegistrar : public IUnknown
+     {
+     public:
+@@ -1578,7 +1579,7 @@ EXTERN_C const IID IID_IWbemProviderIdentity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("631f7d97-d993-11d2-b339-00105a1f4aaf")
++    MIDL_INTERFACE("631f7d97-d993-11d2-b339-00105a1f4aaf") _Windows_SupportedOS_WindowsVista_ 
+     IWbemProviderIdentity : public IUnknown
+     {
+     public:
+@@ -1694,7 +1695,7 @@ EXTERN_C const IID IID_IWbemDecoupledBasicEventProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("86336d20-ca11-4786-9ef1-bc8a946b42fc")
++    MIDL_INTERFACE("86336d20-ca11-4786-9ef1-bc8a946b42fc") _Windows_SupportedOS_WindowsVista_ 
+     IWbemDecoupledBasicEventProvider : public IWbemDecoupledRegistrar
+     {
+     public:
+@@ -1855,7 +1856,7 @@ EXTERN_C const IID IID_IWbemEventSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3ae0080a-7e3a-4366-bf89-0feedc931659")
++    MIDL_INTERFACE("3ae0080a-7e3a-4366-bf89-0feedc931659") _Windows_SupportedOS_WindowsVista_ 
+     IWbemEventSink : public IWbemObjectSink
+     {
+     public:

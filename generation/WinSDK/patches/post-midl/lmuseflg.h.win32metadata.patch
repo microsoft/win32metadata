@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/lmuseflg.h b/generation/WinSDK/RecompiledIdlHeaders/um/lmuseflg.h
+index 2b24767ade..d180a367f3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/lmuseflg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/lmuseflg.h
+@@ -49,4 +49,23 @@ Revision History:
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("USE_NOFORCE")
++#undef USE_NOFORCE
++#pragma push_macro("USE_FORCE")
++#undef USE_FORCE
++#pragma push_macro("USE_LOTS_OF_FORCE")
++#undef USE_LOTS_OF_FORCE
++enum FORCE_LEVEL_FLAGS : unsigned int
++{
++    USE_NOFORCE = 0U,
++    USE_FORCE = 1U,
++    USE_LOTS_OF_FORCE = 2U,
++};
++#pragma pop_macro("USE_LOTS_OF_FORCE")
++#pragma pop_macro("USE_FORCE")
++#pragma pop_macro("USE_NOFORCE")
++#endif
++
+ #endif // _LMUSEFLG_

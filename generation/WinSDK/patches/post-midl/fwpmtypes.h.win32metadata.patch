@@ -1,0 +1,105 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/fwpmtypes.h b/generation/WinSDK/RecompiledIdlHeaders/shared/fwpmtypes.h
+index e51edd6240..70425871b6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/fwpmtypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/fwpmtypes.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -347,7 +348,7 @@ typedef struct FWPM_PROVIDER_CONTEXT_CHANGE0_
+ typedef struct FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0_
+     {
+     /* [unique] */ FWPM_PROVIDER_CONTEXT_ENUM_TEMPLATE0 *enumTemplate;
+-    UINT32 flags;
++    _Win32_AssociatedEnum_(FWPM_SUBSCRIPTION_FLAGS) UINT32 flags;
+     GUID sessionKey;
+     } 	FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0;
+ 
+@@ -376,7 +377,7 @@ typedef struct FWPM_SUBLAYER_CHANGE0_
+ typedef struct FWPM_SUBLAYER_SUBSCRIPTION0_
+     {
+     /* [unique] */ FWPM_SUBLAYER_ENUM_TEMPLATE0 *enumTemplate;
+-    UINT32 flags;
++    _Win32_AssociatedEnum_(FWPM_SUBSCRIPTION_FLAGS) UINT32 flags;
+     GUID sessionKey;
+     } 	FWPM_SUBLAYER_SUBSCRIPTION0;
+ 
+@@ -487,7 +488,7 @@ typedef struct FWPM_FILTER0_
+     {
+     GUID filterKey;
+     FWPM_DISPLAY_DATA0 displayData;
+-    UINT32 flags;
++    _Win32_AssociatedEnum_(FWPM_FILTER_FLAGS) UINT32 flags;
+     /* [unique] */ GUID *providerKey;
+     FWP_BYTE_BLOB providerData;
+     GUID layerKey;
+@@ -697,7 +698,7 @@ typedef struct FWPM_NET_EVENT_HEADER1_
+         {
+         /* [case()] */ struct 
+             {
+-            FWP_AF reserved1;
++            _Win32_AssociatedEnum_(FWP_AF) FWP_AF reserved1;
+             /* [switch_is][switch_type] */ union 
+                 {
+                 /* [case()] */ struct 
+@@ -1334,6 +1335,59 @@ extern RPC_IF_HANDLE __MIDL_itf_fwpmtypes_0000_0000_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD")
++#undef FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD
++#pragma push_macro("FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE")
++#undef FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE
++enum FWPM_SUBSCRIPTION_FLAGS : unsigned int
++{
++    FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD = 1U,
++    FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE = 2U,
++};
++#pragma pop_macro("FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE")
++#pragma pop_macro("FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FWPM_FILTER_FLAG_NONE")
++#undef FWPM_FILTER_FLAG_NONE
++#pragma push_macro("FWPM_FILTER_FLAG_PERSISTENT")
++#undef FWPM_FILTER_FLAG_PERSISTENT
++#pragma push_macro("FWPM_FILTER_FLAG_BOOTTIME")
++#undef FWPM_FILTER_FLAG_BOOTTIME
++#pragma push_macro("FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT")
++#undef FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT
++#pragma push_macro("FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT")
++#undef FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT
++#pragma push_macro("FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED")
++#undef FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED
++#pragma push_macro("FWPM_FILTER_FLAG_DISABLED")
++#undef FWPM_FILTER_FLAG_DISABLED
++#pragma push_macro("FWPM_FILTER_FLAG_INDEXED")
++#undef FWPM_FILTER_FLAG_INDEXED
++enum [[clang::flag_enum]] FWPM_FILTER_FLAGS : unsigned int
++{
++    FWPM_FILTER_FLAG_NONE = 0U,
++    FWPM_FILTER_FLAG_PERSISTENT = 1U,
++    FWPM_FILTER_FLAG_BOOTTIME = 2U,
++    FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT = 4U,
++    FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT = 8U,
++    FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED = 16U,
++    FWPM_FILTER_FLAG_DISABLED = 32U,
++    FWPM_FILTER_FLAG_INDEXED = 64U,
++};
++#pragma pop_macro("FWPM_FILTER_FLAG_INDEXED")
++#pragma pop_macro("FWPM_FILTER_FLAG_DISABLED")
++#pragma pop_macro("FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED")
++#pragma pop_macro("FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT")
++#pragma pop_macro("FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT")
++#pragma pop_macro("FWPM_FILTER_FLAG_BOOTTIME")
++#pragma pop_macro("FWPM_FILTER_FLAG_PERSISTENT")
++#pragma pop_macro("FWPM_FILTER_FLAG_NONE")
++#endif
++
+ #endif
+ 
+ 

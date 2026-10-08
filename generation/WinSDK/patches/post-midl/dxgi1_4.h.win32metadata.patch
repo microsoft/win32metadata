@@ -1,0 +1,98 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_4.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_4.h
+index 5be709a612..4bc1db4023 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_4.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dxgi1_4.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -90,7 +91,11 @@ extern "C"{
+ #pragma region App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+ typedef 
+-enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
+     {
+         DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT	= 0x1,
+         DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT	= 0x2
+@@ -112,7 +117,7 @@ EXTERN_C const IID IID_IDXGISwapChain3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("94d99bdb-f1f8-4ab0-b236-7da0170edab1")
++    MIDL_INTERFACE("94d99bdb-f1f8-4ab0-b236-7da0170edab1") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_10240_ 
+     IDXGISwapChain3 : public IDXGISwapChain2
+     {
+     public:
+@@ -122,7 +127,7 @@ EXTERN_C const IID IID_IDXGISwapChain3;
+             /* [annotation][in] */ 
+             _In_  DXGI_COLOR_SPACE_TYPE ColorSpace,
+             /* [annotation][out] */ 
+-            _Out_  UINT *pColorSpaceSupport) = 0;
++            _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG) _Out_  UINT *pColorSpaceSupport) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetColorSpace1( 
+             /* [annotation][in] */ 
+@@ -138,7 +143,7 @@ EXTERN_C const IID IID_IDXGISwapChain3;
+             /* [annotation][in] */ 
+             _In_  DXGI_FORMAT Format,
+             /* [annotation][in] */ 
+-            _In_  UINT SwapChainFlags,
++            _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG) _In_  UINT SwapChainFlags,
+             /* [annotation][in] */ 
+             _In_reads_(BufferCount)  const UINT *pCreationNodeMask,
+             /* [annotation][in] */ 
+@@ -591,7 +596,11 @@ EXTERN_C const IID IID_IDXGISwapChain3;
+ /* [local] */ 
+ 
+ typedef 
+-enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+     {
+         DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT	= 0x1
+     } 	DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG;
+@@ -612,7 +621,7 @@ EXTERN_C const IID IID_IDXGIOutput4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("dc7dca35-2196-414d-9F53-617884032a60")
++    MIDL_INTERFACE("dc7dca35-2196-414d-9F53-617884032a60") _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_10240_ 
+     IDXGIOutput4 : public IDXGIOutput3
+     {
+     public:
+@@ -624,7 +633,7 @@ EXTERN_C const IID IID_IDXGIOutput4;
+             /* [annotation][in] */ 
+             _In_  IUnknown *pConcernedDevice,
+             /* [annotation][out] */ 
+-            _Out_  UINT *pFlags) = 0;
++            _Win32_AssociatedEnum_(DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG) _Out_  UINT *pFlags) = 0;
+         
+     };
+     
+@@ -947,7 +956,7 @@ EXTERN_C const IID IID_IDXGIFactory4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1bc6ea02-ef36-464f-bf0c-21ca39e5168a")
++    MIDL_INTERFACE("1bc6ea02-ef36-464f-bf0c-21ca39e5168a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIFactory4 : public IDXGIFactory3
+     {
+     public:
+@@ -1348,7 +1357,7 @@ EXTERN_C const IID IID_IDXGIAdapter3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("645967A4-1392-4310-A798-8053CE3E93FD")
++    MIDL_INTERFACE("645967A4-1392-4310-A798-8053CE3E93FD") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     IDXGIAdapter3 : public IDXGIAdapter2
+     {
+     public:

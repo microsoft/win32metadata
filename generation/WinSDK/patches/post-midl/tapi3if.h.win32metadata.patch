@@ -1,0 +1,328 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi3if.h b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi3if.h
+index a4ea101352..187fb01c15 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Tapi3if.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Tapi3if.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -2258,23 +2259,23 @@ EXTERN_C const IID IID_ITPluggableTerminalClassInfo;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Company( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pCompany) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pCompany) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVersion) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVersion) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_TerminalClass( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pTerminalClass) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pTerminalClass) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pCLSID) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Direction( 
+             /* [annotation][retval][out] */ 
+@@ -2485,11 +2486,11 @@ EXTERN_C const IID IID_ITPluggableTerminalSuperclassInfo;
+     public:
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_CLSID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pCLSID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pCLSID) = 0;
+         
+     };
+     
+@@ -3154,11 +3155,11 @@ EXTERN_C const IID IID_ITAddress;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AddressName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceProviderName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TAPIObject( 
+             /* [annotation][retval][out] */ 
+@@ -3184,7 +3185,7 @@ EXTERN_C const IID IID_ITAddress;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DialableAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pDialableAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pDialableAddress) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateForwardInfoObject( 
+             /* [annotation][retval][out] */ 
+@@ -3955,7 +3956,7 @@ EXTERN_C const IID IID_ITAddressCapabilities;
+             /* [annotation][in] */ 
+             _In_  ADDRESS_CAPABILITY_STRING AddressCapString,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCapabilityString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCapabilityString) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CallTreatments( 
+             /* [annotation][retval][out] */ 
+@@ -4217,7 +4218,7 @@ EXTERN_C const IID IID_ITPhone;
+             /* [annotation][in] */ 
+             _In_  PHONECAPS_STRING pcsCap,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCapability) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCapability) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Terminals( 
+             /* [annotation][in] */ 
+@@ -4259,7 +4260,7 @@ EXTERN_C const IID IID_ITPhone;
+             /* [annotation][in] */ 
+             _In_  long lButtonID,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppButtonText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppButtonText) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ButtonText( 
+             /* [annotation][in] */ 
+@@ -4333,7 +4334,7 @@ EXTERN_C const IID IID_ITPhone;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Display( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDisplay) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDisplay) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetDisplay( 
+             /* [annotation][in] */ 
+@@ -5450,7 +5451,7 @@ EXTERN_C const IID IID_ITBasicCallControl;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ParkIndirect( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppNonDirAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppNonDirAddress) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Unpark( void) = 0;
+         
+@@ -5804,7 +5805,7 @@ EXTERN_C const IID IID_ITCallInfo;
+             /* [annotation][in] */ 
+             _In_  CALLINFO_STRING CallInfoString,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCallInfoString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCallInfoString) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_CallInfoString( 
+             /* [annotation][in] */ 
+@@ -6429,7 +6430,7 @@ EXTERN_C const IID IID_ITTerminal;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [annotation][retval][out] */ 
+@@ -6441,7 +6442,7 @@ EXTERN_C const IID IID_ITTerminal;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TerminalClass( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppTerminalClass) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppTerminalClass) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MediaType( 
+             /* [annotation][retval][out] */ 
+@@ -7271,7 +7272,7 @@ EXTERN_C const IID IID_ITMediaRecord;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrFileName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrFileName) = 0;
+         
+     };
+     
+@@ -10452,7 +10453,7 @@ EXTERN_C const IID IID_IEnumBstr;
+             /* [annotation][in] */ 
+             _In_  ULONG celt,
+             /* [annotation][size_is][out] */ 
+-            _Out_writes_(celt)  BSTR *ppStrings,
++            _Win32_RAIIFree_(SysFreeString) _Out_writes_(celt)  BSTR *ppStrings,
+             /* [full][out][in] */ __RPC__inout_opt ULONG *pceltFetched) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+@@ -10862,7 +10863,7 @@ EXTERN_C const IID IID_ITPhoneEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_NumberGathered( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppNumber) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppNumber) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Call( 
+             /* [annotation][retval][out] */ 
+@@ -12070,7 +12071,7 @@ EXTERN_C const IID IID_ITDigitsGatheredEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Digits( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDigits) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDigits) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_GatherTermination( 
+             /* [annotation][retval][out] */ 
+@@ -14729,19 +14730,19 @@ EXTERN_C const IID IID_ITRequestEvent;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DestAddress( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDestAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDestAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_AppName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppAppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppAppName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CalledParty( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCalledParty) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCalledParty) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Comment( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppComment) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppComment) = 0;
+         
+     };
+     
+@@ -15328,21 +15329,21 @@ EXTERN_C const IID IID_ITForwardInformation;
+             /* [annotation][in] */ 
+             _In_  long ForwardType,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDestAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDestAddress) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ForwardTypeCaller( 
+             /* [annotation][in] */ 
+             _In_  long Forwardtype,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCallerAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCallerAddress) = 0;
+         
+         virtual /* [hidden][id] */ HRESULT STDMETHODCALLTYPE GetForwardType( 
+             /* [annotation][in] */ 
+             _In_  long ForwardType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *ppDestinationAddress,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *ppDestinationAddress,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *ppCallerAddress) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *ppCallerAddress) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Clear( void) = 0;
+         
+@@ -15571,11 +15572,11 @@ EXTERN_C const IID IID_ITForwardInformation2;
+             /* [annotation][in] */ 
+             _In_  long ForwardType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *ppDestinationAddress,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *ppDestinationAddress,
+             /* [annotation][out] */ 
+             _Out_  long *pDestAddressType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *ppCallerAddress,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *ppCallerAddress,
+             /* [annotation][out] */ 
+             _Out_  long *pCallerAddressType) = 0;
+         
+@@ -16089,11 +16090,11 @@ EXTERN_C const IID IID_ITAddressTranslationInfo;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DialableString( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDialableString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDialableString) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DisplayableString( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppDisplayableString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppDisplayableString) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CurrentCountryCode( 
+             /* [annotation][retval][out] */ 
+@@ -16310,27 +16311,27 @@ EXTERN_C const IID IID_ITLocationInfo;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocationName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppLocationName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppLocationName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CityCode( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCode) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LocalAccessCode( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCode) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongDistanceAccessCode( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCode) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TollPrefixList( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppTollList) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppTollList) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CancelCallWaitingCode( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCode) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCode) = 0;
+         
+     };
+     
+@@ -16709,19 +16710,19 @@ EXTERN_C const IID IID_ITCallingCard;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_CardName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppCardName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppCardName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SameAreaDialingRule( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppRule) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppRule) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LongDistanceDialingRule( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppRule) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppRule) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InternationalDialingRule( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppRule) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppRule) = 0;
+         
+     };
+     
+@@ -17588,7 +17589,7 @@ EXTERN_C const IID IID_ITStream;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *ppName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *ppName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartStream( void) = 0;
+         

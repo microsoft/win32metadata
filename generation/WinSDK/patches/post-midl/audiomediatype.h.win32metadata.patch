@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
+index cab0f940f6..8ddfb6a869 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/audiomediatype.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -72,7 +73,7 @@ extern "C"{
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if !defined( _UNCOMPRESSEDAUDIOFORMAT_ )
+ #define _UNCOMPRESSEDAUDIOFORMAT_
+-typedef struct _UNCOMPRESSEDAUDIOFORMAT
++typedef struct  _UNCOMPRESSEDAUDIOFORMAT
+     {
+     GUID guidFormatType;
+     DWORD dwSamplesPerFrame;
+@@ -104,18 +105,23 @@ EXTERN_C const IID IID_IAudioMediaType;
+     IAudioMediaType : public IUnknown
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE IsCompressedFormat( 
+             /* [annotation][out] */ 
+             _Out_  BOOL *pfCompressed) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE IsEqual( 
+             /* [annotation][in] */ 
+             _In_  IAudioMediaType *pIAudioType,
+             /* [annotation][out] */ 
+             _Out_  DWORD *pdwFlags) = 0;
+         
++        
+         virtual const WAVEFORMATEX *STDMETHODCALLTYPE GetAudioFormat( void) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE GetUncompressedAudioFormat( 
+             /* [annotation][out] */ 
+             _Out_  UNCOMPRESSEDAUDIOFORMAT *pUncompressedAudioFormat) = 0;
+@@ -221,6 +227,7 @@ EXTERN_C const IID IID_IAudioMediaType;
+ //
+ // CreateAudioMediaType
+ //
++_Windows_SupportedOS_WindowsVista_
+ STDAPI CreateAudioMediaType(
+     const WAVEFORMATEX* pAudioFormat,
+     UINT32 cbAudioFormatSize,
+@@ -229,6 +236,7 @@ STDAPI CreateAudioMediaType(
+ //
+ // CreateAudioMediaTypeFromUncompressedAudioFormat
+ //
++_Windows_SupportedOS_WindowsVista_
+ STDAPI CreateAudioMediaTypeFromUncompressedAudioFormat(
+     const UNCOMPRESSEDAUDIOFORMAT* pUncompressedAudioFormat,
+     IAudioMediaType** ppIAudioMediaType

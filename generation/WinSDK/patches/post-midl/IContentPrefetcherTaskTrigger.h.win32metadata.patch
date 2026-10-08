@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IContentPrefetcherTaskTrigger.h b/generation/WinSDK/RecompiledIdlHeaders/um/IContentPrefetcherTaskTrigger.h
+index 46794bf8b25774d12007577eced5b6264327268f..26a58bb4daff97bdfdb5a438ca658d56f07721cd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IContentPrefetcherTaskTrigger.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IContentPrefetcherTaskTrigger.h
+@@ -67,6 +67,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -86,7 +87,7 @@ EXTERN_C const IID IID_IContentPrefetcherTaskTrigger;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1b35a14a-6094-4799-a60e-e474e15d4dc9")
+-    IContentPrefetcherTaskTrigger : public IInspectable
++    _Windows_SupportedOS_Windows81_ IContentPrefetcherTaskTrigger : public IInspectable
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE TriggerContentPrefetcherTask( 
+@@ -161,7 +162,7 @@ EXTERN_C const IID IID_IContentPrefetcherTaskTrigger;
+         END_INTERFACE
+     } IContentPrefetcherTaskTriggerVtbl;
+ 
+-    interface IContentPrefetcherTaskTrigger
++    interface _Windows_SupportedOS_Windows81_ IContentPrefetcherTaskTrigger
+     {
+         CONST_VTBL struct IContentPrefetcherTaskTriggerVtbl *lpVtbl;
+     };

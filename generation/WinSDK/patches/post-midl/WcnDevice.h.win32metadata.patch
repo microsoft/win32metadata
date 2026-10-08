@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
+index e1218c7dc6..081dc87e80 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WcnDevice.h
+@@ -99,6 +99,7 @@ Abstract:
+ 
+ --*/
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if NTDDI_VERSION >= NTDDI_WIN7
+@@ -124,7 +125,7 @@ enum tagWCN_SESSION_STATUS
+         WCN_SESSION_STATUS_FAILURE_TIMEOUT	= ( WCN_SESSION_STATUS_FAILURE_GENERIC + 1 ) 
+     } 	WCN_SESSION_STATUS;
+ 
+-typedef struct tagWCN_VENDOR_EXTENSION_SPEC
++typedef struct   tagWCN_VENDOR_EXTENSION_SPEC
+     {
+     DWORD VendorId;
+     DWORD SubType;
+@@ -158,7 +159,7 @@ EXTERN_C const IID IID_IWCNDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C100BE9C-D33A-4a4b-BF23-BBEF4663D017")
++    MIDL_INTERFACE("C100BE9C-D33A-4a4b-BF23-BBEF4663D017") _Windows_SupportedOS_Windows7_ 
+     IWCNDevice : public IUnknown
+     {
+     public:
+@@ -392,7 +393,7 @@ EXTERN_C const IID IID_IWCNConnectNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C100BE9F-D33A-4a4b-BF23-BBEF4663D017")
++    MIDL_INTERFACE("C100BE9F-D33A-4a4b-BF23-BBEF4663D017") _Windows_SupportedOS_Windows7_ 
+     IWCNConnectNotify : public IUnknown
+     {
+     public:

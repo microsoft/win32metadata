@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h
+index d5dd7431a7..613390bd8c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h
+@@ -186,4 +186,28 @@ Revision History:
+ 
+ #endif // _DEVIOCTL_
+ 
++
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_DEVIOCTL_H_FILE_DEVICE_TYPE_)
++#define _WIN32METADATA_DEVIOCTL_H_FILE_DEVICE_TYPE_
++#pragma push_macro("FILE_DEVICE_CD_ROM")
++#undef FILE_DEVICE_CD_ROM
++#pragma push_macro("FILE_DEVICE_DISK")
++#undef FILE_DEVICE_DISK
++#pragma push_macro("FILE_DEVICE_TAPE")
++#undef FILE_DEVICE_TAPE
++#pragma push_macro("FILE_DEVICE_DVD")
++#undef FILE_DEVICE_DVD
++enum FILE_DEVICE_TYPE : unsigned int
++{
++    FILE_DEVICE_CD_ROM = 2U,
++    FILE_DEVICE_DISK = 7U,
++    FILE_DEVICE_TAPE = 31U,
++    FILE_DEVICE_DVD = 51U,
++};
++#pragma pop_macro("FILE_DEVICE_DVD")
++#pragma pop_macro("FILE_DEVICE_TAPE")
++#pragma pop_macro("FILE_DEVICE_DISK")
++#pragma pop_macro("FILE_DEVICE_CD_ROM")
++#endif
++
+ // end_winioctl

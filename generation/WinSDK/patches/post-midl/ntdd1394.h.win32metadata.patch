@@ -1,0 +1,13 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
+index 4b64434d23..8f65afca40 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntdd1394.h
+@@ -126,6 +126,8 @@ typedef struct _IEEE1394_API_REQUEST {
+ #define IEEE1394_API_DEVICE_ACCESS_TRANSFER         0x00000003
+ #define IEEE1394_API_SET_LOCAL_NODE_PROPERTIES      0x00000004
+ #endif
++#if(_WIN32_WINNT <= _WIN32_WINNT_WIN2K) // available in Win2K and below
++#endif
+ 
+ //
+ // flags for the add/remove requests

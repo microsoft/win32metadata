@@ -1,0 +1,177 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
+index c9c7603e27..097fcd9da3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Mobsync.h
+@@ -108,6 +108,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define SYNCMGRITEMID        GUID
+@@ -153,7 +154,7 @@ enum _tagSYNCMGRSTATUS
+         SYNCMGRSTATUS_DELETED	= 0x100
+     } 	SYNCMGRSTATUS;
+ 
+-typedef struct _tagSYNCMGRPROGRESSITEM
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRPROGRESSITEM
+     {
+     DWORD cbSize;
+     UINT mask;
+@@ -183,7 +184,7 @@ enum _tagSYNCMGRERRORFLAGS
+         SYNCMGRERRORFLAG_ENABLEJUMPTEXT	= 0x1
+     } 	SYNCMGRERRORFLAGS;
+ 
+-typedef struct _tagSYNCMGRLOGERRORINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRLOGERRORINFO
+     {
+     DWORD cbSize;
+     DWORD mask;
+@@ -199,8 +200,8 @@ EXTERN_C const IID IID_ISyncMgrSynchronizeCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6295DF41-35EE-11d1-8707-00C04FD93327")
+-    ISyncMgrSynchronizeCallback : public IUnknown
++    MIDL_INTERFACE("6295DF41-35EE-11d1-8707-00C04FD93327") _Windows_SupportedOS_Windows2000_ 
++      ISyncMgrSynchronizeCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE ShowPropertiesCompleted( 
+@@ -349,7 +350,7 @@ EXTERN_C const IID IID_ISyncMgrSynchronizeCallback;
+         END_INTERFACE
+     } ISyncMgrSynchronizeCallbackVtbl;
+ 
+-    interface ISyncMgrSynchronizeCallback
++    interface _Windows_SupportedOS_Windows2000_ ISyncMgrSynchronizeCallback
+     {
+         CONST_VTBL struct ISyncMgrSynchronizeCallbackVtbl *lpVtbl;
+     };
+@@ -429,7 +430,7 @@ enum _tagSYNCMGRITEMFLAGS
+ #define SYNCMGRITEM_ITEMFLAGMASK  0x007F
+ #define	MAX_SYNCMGRITEMNAME	( 128 )
+ 
+-typedef struct _tagSYNCMGRITEM
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRITEM
+     {
+     DWORD cbSize;
+     DWORD dwFlags;
+@@ -447,8 +448,8 @@ EXTERN_C const IID IID_ISyncMgrEnumItems;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6295DF2A-35EE-11d1-8707-00C04FD93327")
+-    ISyncMgrEnumItems : public IUnknown
++    MIDL_INTERFACE("6295DF2A-35EE-11d1-8707-00C04FD93327") _Windows_SupportedOS_Windows2000_ 
++      ISyncMgrEnumItems : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Next( 
+@@ -523,7 +524,7 @@ EXTERN_C const IID IID_ISyncMgrEnumItems;
+         END_INTERFACE
+     } ISyncMgrEnumItemsVtbl;
+ 
+-    interface ISyncMgrEnumItems
++    interface _Windows_SupportedOS_Windows2000_ ISyncMgrEnumItems
+     {
+         CONST_VTBL struct ISyncMgrEnumItemsVtbl *lpVtbl;
+     };
+@@ -600,7 +601,7 @@ enum _tagSYNCMGRHANDLERFLAGS
+ #define SYNCMGRHANDLERFLAG_MASK 0x000f
+ #define	MAX_SYNCMGRHANDLERNAME	( 32 )
+ 
+-typedef struct _tagSYNCMGRHANDLERINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSYNCMGRHANDLERINFO
+     {
+     DWORD cbSize;
+     HICON hIcon;
+@@ -622,8 +623,8 @@ EXTERN_C const IID IID_ISyncMgrSynchronize;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6295DF40-35EE-11d1-8707-00C04FD93327")
+-    ISyncMgrSynchronize : public IUnknown
++    MIDL_INTERFACE("6295DF40-35EE-11d1-8707-00C04FD93327") _Windows_SupportedOS_Windows2000_ 
++      ISyncMgrSynchronize : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -798,7 +799,7 @@ EXTERN_C const IID IID_ISyncMgrSynchronize;
+         END_INTERFACE
+     } ISyncMgrSynchronizeVtbl;
+ 
+-    interface ISyncMgrSynchronize
++    interface _Windows_SupportedOS_Windows2000_ ISyncMgrSynchronize
+     {
+         CONST_VTBL struct ISyncMgrSynchronizeVtbl *lpVtbl;
+     };
+@@ -879,8 +880,8 @@ EXTERN_C const IID IID_ISyncMgrSynchronizeInvoke;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6295DF2C-35EE-11d1-8707-00C04FD93327")
+-    ISyncMgrSynchronizeInvoke : public IUnknown
++    MIDL_INTERFACE("6295DF2C-35EE-11d1-8707-00C04FD93327") _Windows_SupportedOS_Windows2000_ 
++      ISyncMgrSynchronizeInvoke : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE UpdateItems( 
+@@ -939,7 +940,7 @@ EXTERN_C const IID IID_ISyncMgrSynchronizeInvoke;
+         END_INTERFACE
+     } ISyncMgrSynchronizeInvokeVtbl;
+ 
+-    interface ISyncMgrSynchronizeInvoke
++    interface _Windows_SupportedOS_Windows2000_ ISyncMgrSynchronizeInvoke
+     {
+         CONST_VTBL struct ISyncMgrSynchronizeInvokeVtbl *lpVtbl;
+     };
+@@ -998,8 +999,8 @@ EXTERN_C const IID IID_ISyncMgrRegister;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6295DF42-35EE-11d1-8707-00C04FD93327")
+-    ISyncMgrRegister : public IUnknown
++    MIDL_INTERFACE("6295DF42-35EE-11d1-8707-00C04FD93327") _Windows_SupportedOS_Windows2000_ 
++      ISyncMgrRegister : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE RegisterSyncMgrHandler( 
+@@ -1076,7 +1077,7 @@ EXTERN_C const IID IID_ISyncMgrRegister;
+         END_INTERFACE
+     } ISyncMgrRegisterVtbl;
+ 
+-    interface ISyncMgrRegister
++    interface _Windows_SupportedOS_Windows2000_ ISyncMgrRegister
+     {
+         CONST_VTBL struct ISyncMgrRegisterVtbl *lpVtbl;
+     };
+@@ -1147,20 +1148,20 @@ extern RPC_IF_HANDLE __MIDL_itf_mobsync_0000_0006_v0_0_s_ifspec;
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HWND * ); 
+ void                      __RPC_USER  HWND_UserFree(     __RPC__in unsigned long *, __RPC__in HWND * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 

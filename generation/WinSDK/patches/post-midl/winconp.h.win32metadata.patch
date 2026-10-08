@@ -1,0 +1,333 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
+index bbb3a033d8..434baa1750 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winconp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // Partially sourced from https://github.com/microsoft/terminal/blob/main/dep/Console/winconp.h
+ 
+ #ifndef _WINCONP_
+@@ -29,12 +30,12 @@ extern "C" {
+                                          CONSOLE_MOUSE_DOWN)
+ 
+ 
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("user32.dll") WINBASEAPI
+ BOOL
+ WINAPI
+ GetConsoleKeyboardLayoutNameA(
+     _Out_writes_(KL_NAMELENGTH) LPSTR pszLayout);
+-WINBASEAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("user32.dll") WINBASEAPI
+ BOOL
+ WINAPI
+ GetConsoleKeyboardLayoutNameW(
+@@ -68,13 +69,13 @@ typedef struct _CONSOLE_GRAPHICS_BUFFER_INFO {
+ 
+ #endif
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ InvalidateConsoleDIBits(
+     _In_ HANDLE hConsoleOutput,
+     _In_ PSMALL_RECT lpRect);
+ 
+-VOID
++_Win32_ImportLibrary_("kernel32.dll") VOID
+ WINAPI
+ SetLastConsoleEventActive(
+     VOID);
+@@ -88,27 +89,27 @@ SetLastConsoleEventActive(
+ #define VDM_FULLSCREEN_NOPAINT  7
+ #define VDM_SET_VIDEO_MODE      8
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ VDMConsoleOperation(
+     _In_ DWORD iFunction,
+     _Inout_opt_ LPVOID lpData);
+ 
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ SetConsoleIcon(
+     _In_ HICON hIcon);
+ 
+ // ...
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ SetConsoleFont(
+     _In_ HANDLE hConsoleOutput,
+     _In_ DWORD nFont);
+ 
+-DWORD
++_Win32_ImportLibrary_("kernel32.dll") DWORD
+ WINAPI
+ GetConsoleFontInfo(
+     _In_ HANDLE hConsoleOutput,
+@@ -116,7 +117,7 @@ GetConsoleFontInfo(
+     _In_ DWORD nLength,
+     _Out_ PCONSOLE_FONT_INFO lpConsoleFontInfo);
+ 
+-DWORD
++_Win32_ImportLibrary_("kernel32.dll") DWORD
+ WINAPI
+ GetNumberOfConsoleFonts(
+     VOID);
+@@ -127,20 +128,20 @@ SetConsoleCursor(
+     _In_ HANDLE hConsoleOutput,
+     _In_ HCURSOR hCursor);
+ 
+-int
++_Win32_ImportLibrary_("kernel32.dll") int
+ WINAPI
+ ShowConsoleCursor(
+     _In_ HANDLE hConsoleOutput,
+     _In_ BOOL bShow);
+ 
+-HMENU
++_Win32_ImportLibrary_("kernel32.dll") _Win32_RAIIFree_(DestroyMenu, -1, 0) HMENU
+ APIENTRY
+ ConsoleMenuControl(
+     _In_ HANDLE hConsoleOutput,
+     _In_ UINT dwCommandIdLow,
+     _In_ UINT dwCommandIdHigh);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ SetConsolePalette(
+     _In_ HANDLE hConsoleOutput,
+     _In_ HPALETTE hPalette,
+@@ -150,27 +151,27 @@ SetConsolePalette(
+ #define CONSOLE_REGISTER_VDM   1
+ #define CONSOLE_REGISTER_WOW   2
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ RegisterConsoleVDM(
+     _In_ DWORD dwRegisterFlags,
+     _In_ HANDLE hStartHardwareEvent,
+     _In_ HANDLE hEndHardwareEvent,
+     _In_ HANDLE hErrorhardwareEvent,
+-    _Reserved_ DWORD Reserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD Reserved,
+     _Out_ LPDWORD lpStateLength,
+     _Outptr_ PVOID *lpState,
+     _In_opt_ COORD VDMBufferSize,
+     _Outptr_ PVOID *lpVDMBuffer);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ GetConsoleHardwareState(
+     _In_ HANDLE hConsoleOutput,
+     _Out_ PCOORD lpResolution,
+     _Out_ PCOORD lpFontSize);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleHardwareState(
+     _In_ HANDLE hConsoleOutput,
+@@ -195,7 +196,7 @@ typedef struct _APPKEY {
+ #define CONSOLE_MODIFIER_CONTROL    0x0004   // Either Control shift key
+ #define CONSOLE_MODIFIER_ALT        0x0008   // Either Alt shift key
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleKeyShortcuts(
+     _In_ BOOL bSet,
+@@ -203,16 +204,16 @@ SetConsoleKeyShortcuts(
+     _In_reads_(dwNumAppKeys) LPAPPKEY lpAppKeys,
+     _In_ DWORD dwNumAppKeys);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleMenuClose(
+     _In_ BOOL bEnable);
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("kernel32.dll") DWORD
+ GetConsoleInputExeNameA(
+     _In_ DWORD nBufferLength,
+     _Out_writes_(nBufferLength) LPSTR lpBuffer);
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("kernel32.dll") DWORD
+ GetConsoleInputExeNameW(
+     _In_ DWORD nBufferLength,
+     _Out_writes_(nBufferLength) LPWSTR lpBuffer);
+@@ -222,10 +223,10 @@ GetConsoleInputExeNameW(
+ #define GetConsoleInputExeName  GetConsoleInputExeNameA
+ #endif // !UNICODE
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ SetConsoleInputExeNameA(
+     _In_ LPSTR lpExeName);
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ SetConsoleInputExeNameW(
+     _In_ LPWSTR lpExeName);
+ #ifdef UNICODE
+@@ -234,7 +235,7 @@ SetConsoleInputExeNameW(
+ #define SetConsoleInputExeName  SetConsoleInputExeNameA
+ #endif // !UNICODE
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ ReadConsoleInputExA(
+     _In_ HANDLE hConsoleInput,
+@@ -242,7 +243,7 @@ ReadConsoleInputExA(
+     _In_ DWORD nLength,
+     _Out_ LPDWORD lpNumberOfEventsRead,
+     _In_ USHORT wFlags);
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ ReadConsoleInputExW(
+     _In_ HANDLE hConsoleInput,
+@@ -256,14 +257,14 @@ ReadConsoleInputExW(
+ #define ReadConsoleInputEx  ReadConsoleInputExA
+ #endif // !UNICODE
+ 
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ WriteConsoleInputVDMA(
+     _In_ HANDLE hConsoleInput,
+     _In_reads_(nLength) PINPUT_RECORD lpBuffer,
+     _In_ DWORD nLength,
+     _Out_ LPDWORD lpNumberOfEventsWritten);
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_ImportLibrary_("kernel32.dll") BOOL
+ WINAPI
+ WriteConsoleInputVDMW(
+     _In_ HANDLE hConsoleInput,
+@@ -277,19 +278,19 @@ WriteConsoleInputVDMW(
+ #endif // !UNICODE
+ 
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ GetConsoleNlsMode(
+     _In_ HANDLE hConsole,
+     _Out_ PDWORD lpdwNlsMode);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleNlsMode(
+     _In_ HANDLE hConsole,
+     _In_ DWORD fdwNlsMode);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ GetConsoleCharType(
+     _In_ HANDLE hConsole,
+@@ -300,34 +301,34 @@ GetConsoleCharType(
+ #define CHAR_TYPE_LEADING  2   // Displayed leading byte of DBCS
+ #define CHAR_TYPE_TRAILING 3   // Displayed trailing byte of DBCS
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleLocalEUDC(
+     _In_ HANDLE hConsoleHandle,
+     _In_ WORD   wCodePoint,
+     _In_ COORD  cFontSize,
+-    _In_ PCHAR  lpSB);
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_ PCHAR  lpSB);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleCursorMode(
+     _In_ HANDLE hConsoleHandle,
+     _In_ BOOL   Blink,
+     _In_ BOOL   DBEnable);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ GetConsoleCursorMode(
+     _In_ HANDLE hConsoleHandle,
+     _Out_ PBOOL  pbBlink,
+     _Out_ PBOOL  pbDBEnable);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ RegisterConsoleOS2(
+     _In_ BOOL fOs2Register);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ SetConsoleOS2OemFormat(
+     _In_ BOOL fOs2OemFormat);
+@@ -335,13 +336,13 @@ SetConsoleOS2OemFormat(
+ // ...
+ 
+ #if defined(FE_IME)
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ RegisterConsoleIME(
+     _In_ HWND  hWndConsoleIME,
+     _Out_opt_ DWORD *lpdwConsoleThreadId);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ UnregisterConsoleIME(
+     VOID);
+@@ -373,7 +374,7 @@ UnregisterConsoleIME(
+ // subsystems (i.e. OpenFile routes to OpenConsoleW).
+ //
+ 
+-HANDLE
++_Win32_ImportLibrary_("kernel32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ APIENTRY
+ OpenConsoleW(
+     _In_ LPWSTR lpConsoleDevice,
+@@ -381,7 +382,7 @@ OpenConsoleW(
+     _In_ BOOL bInheritHandle,
+     _In_ DWORD dwShareMode);
+ 
+-HANDLE
++_Win32_ImportLibrary_("kernel32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ APIENTRY
+ DuplicateConsoleHandle(
+     _In_ HANDLE hSourceHandle,
+@@ -391,17 +392,17 @@ DuplicateConsoleHandle(
+ 
+ // ...
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ CloseConsoleHandle(
+     _In_ HANDLE hConsole);
+ 
+-BOOL
++_Win32_ImportLibrary_("kernel32.dll") BOOL
+ APIENTRY
+ VerifyConsoleIoHandle(
+     _In_ HANDLE hIoHandle);
+ 
+-HANDLE
++_Win32_ImportLibrary_("kernel32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE
+ APIENTRY
+ GetConsoleInputWaitHandle(
+     VOID);

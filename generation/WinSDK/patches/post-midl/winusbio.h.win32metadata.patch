@@ -1,0 +1,67 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/winusbio.h b/generation/WinSDK/RecompiledIdlHeaders/shared/winusbio.h
+index 344a28e9d7..8580bc1a97 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/winusbio.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/winusbio.h
+@@ -98,5 +98,62 @@ typedef struct _WINUSB_PIPE_INFORMATION_EX {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("SHORT_PACKET_TERMINATE")
++#undef SHORT_PACKET_TERMINATE
++#pragma push_macro("AUTO_CLEAR_STALL")
++#undef AUTO_CLEAR_STALL
++#pragma push_macro("PIPE_TRANSFER_TIMEOUT")
++#undef PIPE_TRANSFER_TIMEOUT
++#pragma push_macro("IGNORE_SHORT_PACKETS")
++#undef IGNORE_SHORT_PACKETS
++#pragma push_macro("ALLOW_PARTIAL_READS")
++#undef ALLOW_PARTIAL_READS
++#pragma push_macro("AUTO_FLUSH")
++#undef AUTO_FLUSH
++#pragma push_macro("RAW_IO")
++#undef RAW_IO
++#pragma push_macro("MAXIMUM_TRANSFER_SIZE")
++#undef MAXIMUM_TRANSFER_SIZE
++#pragma push_macro("RESET_PIPE_ON_RESUME")
++#undef RESET_PIPE_ON_RESUME
++enum WINUSB_PIPE_POLICY : unsigned int
++{
++    SHORT_PACKET_TERMINATE = 1U,
++    AUTO_CLEAR_STALL = 2U,
++    PIPE_TRANSFER_TIMEOUT = 3U,
++    IGNORE_SHORT_PACKETS = 4U,
++    ALLOW_PARTIAL_READS = 5U,
++    AUTO_FLUSH = 6U,
++    RAW_IO = 7U,
++    MAXIMUM_TRANSFER_SIZE = 8U,
++    RESET_PIPE_ON_RESUME = 9U,
++};
++#pragma pop_macro("RESET_PIPE_ON_RESUME")
++#pragma pop_macro("MAXIMUM_TRANSFER_SIZE")
++#pragma pop_macro("RAW_IO")
++#pragma pop_macro("AUTO_FLUSH")
++#pragma pop_macro("ALLOW_PARTIAL_READS")
++#pragma pop_macro("IGNORE_SHORT_PACKETS")
++#pragma pop_macro("PIPE_TRANSFER_TIMEOUT")
++#pragma pop_macro("AUTO_CLEAR_STALL")
++#pragma pop_macro("SHORT_PACKET_TERMINATE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("AUTO_SUSPEND")
++#undef AUTO_SUSPEND
++#pragma push_macro("SUSPEND_DELAY")
++#undef SUSPEND_DELAY
++enum WINUSB_POWER_POLICY : unsigned int
++{
++    AUTO_SUSPEND = 129U,
++    SUSPEND_DELAY = 131U,
++};
++#pragma pop_macro("SUSPEND_DELAY")
++#pragma pop_macro("AUTO_SUSPEND")
++#endif
++
+ #endif // __WUSBIO_H__
+ 

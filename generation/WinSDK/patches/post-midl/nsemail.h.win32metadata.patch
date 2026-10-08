@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h b/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
+index b23833ed8e..ce8483ab55 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/nsemail.h
+@@ -12,6 +12,7 @@
+ #ifndef _NSEMAIL_H_
+ #define _NSEMAIL_H_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -104,7 +105,7 @@ typedef struct napi_domain_description_blob_tag
+     DWORD   OffsetThisDomainName;
+ } NAPI_DOMAIN_DESCRIPTION_BLOB;
+ 
+-typedef struct napi_provider_installation_blob_tag
++typedef struct   napi_provider_installation_blob_tag
+ {
+     DWORD   dwVersion;
+     DWORD   dwProviderType;

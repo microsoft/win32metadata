@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dmemmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/dmemmgr.h
+index 5455bdb04f..1af25a03d1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dmemmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dmemmgr.h
+@@ -9,6 +9,7 @@
+ 
+ #ifndef __DMEMMGR_INCLUDED__
+ #define __DMEMMGR_INCLUDED__
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -182,6 +183,7 @@ extern FLATPTR WINAPI VidMemAlloc( LPVMEMHEAP pvmh, DWORD width, DWORD height );
+  * This export can be used by drivers to allocate aligned surfaces from heaps which
+  * they have previously exposed to DirectDraw. This function can allocate from nonlocal heaps.
+  */
++_Windows_SupportedOS_Windows2000_
+ extern FLATPTR WINAPI HeapVidMemAllocAligned(
+                 LPVIDMEM lpVidMem,
+                 DWORD dwWidth,
+@@ -192,6 +194,7 @@ extern FLATPTR WINAPI HeapVidMemAllocAligned(
+ /*
+  * This export can free memory allocated via either allocation function
+  */
++_Windows_SupportedOS_Windows2000_
+ extern void WINAPI VidMemFree( LPVMEMHEAP pvmh, FLATPTR ptr );
+ 
+ #ifdef __cplusplus
