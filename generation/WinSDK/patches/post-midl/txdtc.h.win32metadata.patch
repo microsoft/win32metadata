@@ -25,7 +25,7 @@ index 2fe6aba607..0559dddd1f 100644
          
          virtual HRESULT STDMETHODCALLTYPE GetPrepareInfo( 
 -            /* [out] */ byte *pPrepInfo) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") byte *pPrepInfo) = 0;
++            /* [out] */ byte *pPrepInfo) = 0;
          
      };
      

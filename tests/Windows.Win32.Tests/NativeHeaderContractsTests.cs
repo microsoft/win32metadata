@@ -146,6 +146,34 @@ namespace Windows.Win32.Tests
             NativeConstantContractAssertions.Verify(name, members, macros);
         }
 
+        [Theory]
+        [InlineData("Windows.Win32.Media.MediaPlayer", "IWMPPluginUI", "GetProperty",
+            new[] { "ushort* modreq(System.Runtime.CompilerServices.IsConst)", "Windows.Win32.System.Ole.VARIANT*" },
+            new[] { "pwszName", "pvarProperty" }, new[] { ParameterAttributes.In, ParameterAttributes.Out })]
+        [InlineData("Windows.Win32.System.DistributedTransactionCoordinator", "IPrepareInfo", "GetPrepareInfo",
+            new[] { "Windows.Win32.System.Rpc.byte*" }, new[] { "pPrepInfo" }, new[] { ParameterAttributes.Out })]
+        [InlineData("Windows.Win32.System.DistributedTransactionCoordinator", "IPrepareInfo", "GetPrepareInfoSize",
+            new[] { "uint*" }, new[] { "pcbPrepInfo" }, new[] { ParameterAttributes.Out })]
+        public void ReviewedComOutputsKeepNativePointeesAndDirections(
+            string typeNamespace, string typeName, string methodName, string[] parameterTypes, string[] parameterNames, ParameterAttributes[] directions)
+        {
+            var type = this.GetTypeDefinition(typeNamespace, typeName);
+            var methods = type.GetMethods().Select(this.reader.GetMethodDefinition)
+                .Where(method => this.reader.GetString(method.Name) == methodName).ToArray();
+            Assert.NotEmpty(methods);
+            foreach (var method in methods)
+            {
+                var signature = method.DecodeSignature(this.signatureProvider, null);
+                Assert.Equal("[Windows]Windows.Foundation.HResult", signature.ReturnType);
+                Assert.Equal(parameterTypes, signature.ParameterTypes.ToArray());
+                var parameters = method.GetParameters().Select(this.reader.GetParameter)
+                    .Where(parameter => parameter.SequenceNumber != 0).OrderBy(parameter => parameter.SequenceNumber).ToArray();
+                Assert.Equal(parameterNames, parameters.Select(parameter => this.reader.GetString(parameter.Name)).ToArray());
+                Assert.All(parameters, parameter => Assert.Empty(parameter.GetCustomAttributes()));
+                Assert.Equal(directions, parameters.Select(parameter => parameter.Attributes).ToArray());
+            }
+        }
+
         public void Dispose()
         {
             this.image.Dispose();

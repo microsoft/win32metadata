@@ -24,7 +24,7 @@ index 769df188fd..86e2369251 100644
          virtual HRESULT STDMETHODCALLTYPE GetProperty( 
              /* [in] */ const WCHAR *pwszName,
 -            /* [out] */ VARIANT *pvarProperty) = 0;
-+            /* [out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarProperty) = 0;
++            /* [out] */ VARIANT *pvarProperty) = 0;
          
          virtual HRESULT STDMETHODCALLTYPE SetProperty( 
              /* [in] */ const WCHAR *pwszName,
