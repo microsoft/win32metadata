@@ -47,6 +47,29 @@ reference scopes are correct. In particular, passing package fixtures or a
 single-architecture image is not evidence that architecture merging preserves
 all physical layout and assembly-reference rows.
 
+## Native callback integrity
+
+The callback checker supports exact fully qualified zero-argument delegate
+allowances while retaining the existing short-name allowances. Nine additional
+parameterless callbacks and six exact pointer-field sites are bound to native
+contracts in `CallbackContractTests`, using unprojected metadata and checking each
+physical architecture variant. Their target signatures, arity and unmanaged
+calling conventions remain strict; a parameterless allowance does not waive a
+calling-convention mismatch.
+
+A named delegate already represents one native function-pointer layer. The six
+field allowances preserve genuine native function-pointer-to-pointer storage.
+Parameter diagnostics enumerate every offending slot once, including separate
+`Callback` and `CleanupCallback` sites, and normalize only one pointer layer for
+an output slot. Existing whole-method/delegate allowance keys are unchanged.
+
+The NTSec redirected-logon callback fields must remain direct delegates; the four
+callback output parameters require exactly one additional pointer and explicit
+output direction. These sites are not allowlisted. The unadorned native
+`IEGetTabWindowExports_t` remains required to use cdecl, not Winapi. Passing the
+utility fixtures does not repair these product defects or establish a clean
+full-SDK build.
+
 ## Native embedded storage and external identity
 
 **Upstream issue:** not filed; this corrects the local pipeline producer.

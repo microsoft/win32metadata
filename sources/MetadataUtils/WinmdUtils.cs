@@ -16,16 +16,21 @@ namespace MetadataUtils
         private MetadataReader metadataReader;
         private GenericSignatureTypeProvider provider = new GenericSignatureTypeProvider();
 
-        private WinmdUtils(string fileName)
+        private WinmdUtils(string fileName, MetadataReaderOptions options)
         {
             this.stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
             this.peReader = new PEReader(this.stream);
-            this.metadataReader = this.peReader.GetMetadataReader();
+            this.metadataReader = this.peReader.GetMetadataReader(options);
         }
 
         public static WinmdUtils LoadFromFile(string fileName)
         {
-            return new WinmdUtils(fileName);
+            return LoadFromFile(fileName, MetadataReaderOptions.Default);
+        }
+
+        public static WinmdUtils LoadFromFile(string fileName, MetadataReaderOptions options)
+        {
+            return new WinmdUtils(fileName, options);
         }
 
         public void Dispose()
