@@ -55,10 +55,44 @@ jobs:
         shell: pwsh
         run: rustup show
 
+      - name: Test input fingerprint collection
+        id: fingerprint_tests
+        continue-on-error: true
+        shell: pwsh
+        run: .\scripts\Test-WindowsRsInputFingerprint.ps1
+
+      - name: Preserve checkout input fingerprint
+        id: fingerprint_before
+        continue-on-error: true
+        shell: pwsh
+        run: .\scripts\Save-WindowsRsInputFingerprint.ps1 -Phase Before -OutputPath .\bin\input-fingerprints\before.json
+
       - name: Build metadata binary
         id: metadata
         shell: pwsh
-        run: .\scripts\BuildMetadataBin.ps1
+        run: |
+          New-Item -ItemType Directory -Path .\bin\logs -Force | Out-Null
+          .\scripts\BuildMetadataBin.ps1 *>&1 | Tee-Object -FilePath .\bin\logs\metadata-generation.log
+
+      - name: Preserve configured and available generation input fingerprints
+        if: always()
+        id: fingerprint_after
+        continue-on-error: true
+        shell: pwsh
+        run: |
+          .\scripts\Save-WindowsRsInputFingerprint.ps1 -Phase After `
+            -OutputPath .\bin\input-fingerprints\after.json `
+            -GenerationLog .\bin\logs\metadata-generation.log
+
+      - name: Upload input fingerprints
+        if: always()
+        id: fingerprint_upload
+        continue-on-error: true
+        uses: ./.github/actions/upload-artifact-with-retry
+        with:
+          name: metadata-input-fingerprints
+          path: bin/input-fingerprints
+          retention-days: 90
 
       - name: Verify prepared input and generated output provenance
         shell: pwsh
@@ -270,3 +304,20 @@ jobs:
           name: NuGetPackages
           path: bin/Packages/Release/NuGet
           retention-days: 7
+
+      - name: Enforce fingerprint results
+        id: fingerprint_gate
+        if: always()
+        shell: pwsh
+        run: |
+          # Observe pre-continue-on-error outcomes without blocking ordinary product steps.
+          $outcomes = [ordered]@{
+            fingerprint_tests = '${{ steps.fingerprint_tests.outcome }}'
+            fingerprint_before = '${{ steps.fingerprint_before.outcome }}'
+            fingerprint_after = '${{ steps.fingerprint_after.outcome }}'
+            fingerprint_upload = '${{ steps.fingerprint_upload.outcome }}'
+          }
+          $failed = @($outcomes.Keys | Where-Object { $outcomes[$_] -eq 'failure' })
+          if ($failed.Count) {
+            throw "Fingerprint steps failed: $($failed -join ', '). Product steps retain their own results."
+          }

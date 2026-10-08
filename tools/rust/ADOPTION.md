@@ -4,10 +4,11 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`8c7eb5894075fb7aa3bfc82d3488650980e5025a`](https://github.com/jevansaks/windows-rs/commit/8c7eb5894075fb7aa3bfc82d3488650980e5025a),
-published in `jevansaks/windows-rs`. This coalesces the reviewed macro-domain,
+[`7a36508ff49ede6dc6d7113b716a37c18b191f33`](https://github.com/jevansaks/windows-rs/commit/7a36508ff49ede6dc6d7113b716a37c18b191f33),
+published in `jevansaks/windows-rs`. This adds reviewed callback and reference
+repairs to `8c7eb5894075fb7aa3bfc82d3488650980e5025a`, which coalesced the macro-domain,
 serialization, owned-planner and canonical-alias corrections described below.
-It follows `af9baa81465036b8c64fb52c68226c4cc3f76c3e`, whose native Color identity correction follows
+That revision follows `af9baa81465036b8c64fb52c68226c4cc3f76c3e`, whose native Color identity correction follows
 `2ee8ba6bb766a5a9b919f7b73222e6e01b981968`, whose source-identified interface,
 provider-IID, and macro-probe corrections follow `0138a2079ecce580789a072b52ea6f25df77a937`,
 whose retained-pointer SAL direction correction
@@ -29,6 +30,41 @@ historical fork change has been upstreamed.
 | `windows-rdl` | RDL compilation and WinMD-to-RDL emission. |
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
+
+## Callback and reference successor
+
+The adopted producer preserves native callback calling conventions and tracks
+source function-pointer shape so callback promotion does not add a second pointer
+layer. The IE cdecl contract and the six NTSec field/output contracts remain strict;
+the dependency update does not add consumer exceptions.
+
+Exact local TypeDef lookup is indexed by namespace and raw metadata name rather
+than scanning every definition for each reference. Inferred references and
+compiler-core references use separate caches, preserving both identities when a
+local type has the same qualified name as a core type. Callback attribute
+constructor signatures bind the explicit core `CallingConvention` reference.
+Both insertion orders and constant lookup work are covered by producer controls.
+The existing metadata APIs remain compatible.
+
+This adoption does not activate typed COFF import transport or change repository
+library selection. Those APIs and per-architecture inputs remain a separate
+checkpoint. Existing product images retain their original producer identity;
+bounded and package validation do not establish full-corpus acceptance of this pin.
+
+## CI input fingerprints
+
+`Save-WindowsRsInputFingerprint.ps1` preserves hash-only checkout and post-run
+input inventories alongside the existing successful invocation receipt. It records
+configured and reported paths separately, ordered include/import roots, available
+archive bytes, active policy and route inputs, Cargo dependency inputs, extracted
+fact counts, and existing premerge/final images. Partial manifests survive errors
+and existing evidence cannot be overwritten.
+
+These are filesystem snapshots, not proof of runtime consumption. Exact in-memory
+translation-unit bytes and final compiler arguments, loaded module/resource
+selection, and the actual archive subset still require native observations.
+Directory inventories must not be presented as selected inputs. A collection
+failure remains a CI failure, but does not suppress the ordinary product checks.
 
 ## Coalesced serialization, ownership and alias successor
 
