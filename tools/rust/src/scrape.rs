@@ -1,7 +1,7 @@
 //! `scrape`: Windows SDK headers or focused partition inputs -> WinMD.
 //!
 //! The production path uses the pinned producer's aggregate + satellite header manifest.
-//! Logical authority adds two PSAPI variants and an independent WinHTTP context. Focused partition
+//! Logical authority adds two PSAPI variants and independent WinHTTP, DTC, MMC, and WinSync contexts. Focused partition
 //! translation units remain available for package fixtures and inner-loop debugging. No path
 //! uses generated RSP, JSON, or extraction-checkpoint sidecars.
 
@@ -33,6 +33,9 @@ const SATELLITE_INPUT: &str = "win32metadata-satellites.cpp";
 const PSAPI_V1_INPUT: &str = "win32metadata-psapi-v1.cpp";
 const PSAPI_V2_INPUT: &str = "win32metadata-psapi-v2.cpp";
 const WINHTTP_INPUT: &str = "win32metadata-winhttp.cpp";
+const DTC_INPUT: &str = "win32metadata-dtc.cpp";
+const MMC_INPUT: &str = "win32metadata-mmc.cpp";
+const WINSYNC_INPUT: &str = "win32metadata-winsync.cpp";
 const CANONICAL_AUTHORITY_SHA256: &str =
     "F492BAA4D29D5B3F8BD3CC5971C0B9C32A541C92B82A1833B73B3125A96228F4";
 const WIN32_SDK_PRELUDE: &str = "#define SECURITY_WIN32\n#define WIN32_NO_STATUS\n#include <winsock2.h>\n#include <windows.h>\n#undef WIN32_NO_STATUS\n#include <ntstatus.h>\n";
@@ -557,15 +560,21 @@ enum AuthorityInput {
     PsApiV1,
     PsApiV2,
     WinHttp,
+    Dtc,
+    Mmc,
+    WinSync,
 }
 
 impl AuthorityInput {
-    const ALL: [Self; 5] = [
+    const ALL: [Self; 8] = [
         Self::Aggregate,
         Self::Satellite,
         Self::PsApiV1,
         Self::PsApiV2,
         Self::WinHttp,
+        Self::Dtc,
+        Self::Mmc,
+        Self::WinSync,
     ];
 
     fn name(self) -> &'static str {
@@ -575,6 +584,19 @@ impl AuthorityInput {
             Self::PsApiV1 => PSAPI_V1_INPUT,
             Self::PsApiV2 => PSAPI_V2_INPUT,
             Self::WinHttp => WINHTTP_INPUT,
+            Self::Dtc => DTC_INPUT,
+            Self::Mmc => MMC_INPUT,
+            Self::WinSync => WINSYNC_INPUT,
+        }
+    }
+
+    fn independent_partition(self) -> Option<&'static str> {
+        match self {
+            Self::WinHttp => Some("WinHttp"),
+            Self::Dtc => Some("DTC"),
+            Self::Mmc => Some("Mmc"),
+            Self::WinSync => Some("WinSync"),
+            Self::Aggregate | Self::Satellite | Self::PsApiV1 | Self::PsApiV2 => None,
         }
     }
 }
@@ -1113,8 +1135,13 @@ fn authority_owner_input(
     match partition {
         "PsApi1" => return Ok(AuthorityInput::PsApiV1),
         "PsApi2" => return Ok(AuthorityInput::PsApiV2),
-        "WinHttp" => return Ok(AuthorityInput::WinHttp),
         _ => {}
+    }
+    if let Some(input) = AuthorityInput::ALL
+        .into_iter()
+        .find(|input| input.independent_partition() == Some(partition))
+    {
+        return Ok(input);
     }
     if let Some(input) = shared_root_owner_input(partition, inventory_path)? {
         return Ok(input);
@@ -1327,9 +1354,14 @@ fn append_partition_source_headers(
 ) -> Result<(), String> {
     let owning_inputs = authority_owning_inputs_by_path(roots)?;
     for partition in &traversal.partitions {
-        if ["Kernel", "PsApi1", "PsApi2", "Threading", "WinHttp"]
+        if ["Kernel", "PsApi1", "PsApi2", "Threading"]
             .iter()
             .any(|candidate| partition.identity.eq_ignore_ascii_case(candidate))
+            || AuthorityInput::ALL.iter().any(|input| {
+                input
+                    .independent_partition()
+                    .is_some_and(|name| partition.identity.eq_ignore_ascii_case(name))
+            })
         {
             continue;
         }
@@ -1394,7 +1426,12 @@ fn append_partition_source_headers(
                 AuthorityInput::Satellite => {
                     satellite.push_str(&format!("\n#include \"{include}\"{GUID_RESET}"));
                 }
-                AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 | AuthorityInput::WinHttp => {}
+                AuthorityInput::PsApiV1
+                | AuthorityInput::PsApiV2
+                | AuthorityInput::WinHttp
+                | AuthorityInput::Dtc
+                | AuthorityInput::Mmc
+                | AuthorityInput::WinSync => {}
             }
         }
     }
@@ -1445,7 +1482,12 @@ fn append_authority_manifest(
             AuthorityInput::Satellite => {
                 satellite.push_str(&format!("\n#include \"{path}\"{GUID_RESET}"));
             }
-            AuthorityInput::PsApiV1 | AuthorityInput::PsApiV2 | AuthorityInput::WinHttp => {}
+            AuthorityInput::PsApiV1
+            | AuthorityInput::PsApiV2
+            | AuthorityInput::WinHttp
+            | AuthorityInput::Dtc
+            | AuthorityInput::Mmc
+            | AuthorityInput::WinSync => {}
         }
     }
     for header in crate::win32_headers::SATELLITE_HEADERS {
@@ -1519,14 +1561,7 @@ fn build_authority_source_plan(
         &cellular_header.path,
         AuthorityInput::Aggregate,
     )?;
-    let winhttp_input = &logical_partition(traversal, "WinHttp")?.input;
-    let winhttp_source = std::fs::read_to_string(winhttp_input).map_err(|error| {
-        format!(
-            "failed to read independent WinHTTP compile environment `{}`: {error}",
-            winhttp_input.display()
-        )
-    })?;
-    let raw_sources = [
+    let mut raw_sources = vec![
         (AuthorityInput::Aggregate, aggregate),
         (AuthorityInput::Satellite, satellite),
         (
@@ -1537,11 +1572,20 @@ fn build_authority_source_plan(
             AuthorityInput::PsApiV2,
             crate::aggregate::psapi_source(WIN32_SDK_PRELUDE, 2),
         ),
-        (
-            AuthorityInput::WinHttp,
-            format!("{WIN32_SDK_PRELUDE}\n{winhttp_source}"),
-        ),
     ];
+    for input in AuthorityInput::ALL {
+        let Some(partition) = input.independent_partition() else {
+            continue;
+        };
+        let path = &logical_partition(traversal, partition)?.input;
+        let source = std::fs::read_to_string(path).map_err(|error| {
+            format!(
+                "failed to read independent {partition} compile environment `{}`: {error}",
+                path.display()
+            )
+        })?;
+        raw_sources.push((input, format!("{WIN32_SDK_PRELUDE}\n{source}")));
+    }
     let mut sources = BTreeMap::new();
     let mut included = BTreeMap::<AuthorityInput, BTreeSet<String>>::new();
     let mut transitively_materialized = BTreeSet::new();
@@ -3301,8 +3345,9 @@ pub fn help_text() -> &'static str {
                 translation units. Repeatable.
   --partition-policy-root
                 Directory of logical WinSDK partitions whose settings.rsp traversal policy
-                routes aggregate + satellite, two PSAPI variants, and an independent WinHTTP
-                input. Requires --win32-sdk and cannot be combined with focused inputs.
+                routes eight inputs: aggregate + satellite, two PSAPI variants, and complete
+                WinHTTP, DTC, MMC, and WinSync provider contexts. Requires --win32-sdk and
+                cannot be combined with focused inputs.
   --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
@@ -3345,6 +3390,8 @@ RSP, JSON, or extraction-checkpoint inputs."
 mod tests {
     use super::*;
     use std::sync::OnceLock;
+
+    mod com_provider;
 
     fn parse_args(args: &[&str]) -> Result<Options, String> {
         parse(Args::new(args.iter().map(OsString::from).collect()))
@@ -6045,6 +6092,47 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
                     .find(&include_suffix("httprequest.h"))
                     .unwrap()
         );
+        for (input, partition) in [
+            (AuthorityInput::Dtc, "DTC"),
+            (AuthorityInput::Mmc, "Mmc"),
+            (AuthorityInput::WinSync, "WinSync"),
+        ] {
+            let source = source_plan
+                .sources
+                .get(&input)
+                .unwrap()
+                .to_ascii_lowercase();
+            let owner = logical_partition(&traversal, partition).unwrap();
+            let original = std::fs::read_to_string(&owner.input).unwrap();
+            for header in original.lines().filter_map(source_include_name) {
+                assert!(
+                    source.contains(&include_suffix(header)),
+                    "{partition}: {header}"
+                );
+            }
+            for root in &owner.roots {
+                let crate::partition::TraversalRoot::File(root) = root else {
+                    panic!("independent provider requires concrete native header roots");
+                };
+                assert_eq!(
+                    site(&root.inventory_path, input).unwrap().role,
+                    AuthorityIncludeRole::OwnedRoot
+                );
+                assert!(
+                    source_plan
+                        .roots
+                        .owner_inputs
+                        .get(&(partition.to_string(), root.canonical_path.clone()))
+                        == Some(&input)
+                );
+            }
+            for foreign in ["strmif.h", "tuner.h", "commoncontrols.h", "mshtml.h"] {
+                assert!(
+                    !source.contains(&include_suffix(foreign)),
+                    "{partition}: {foreign}"
+                );
+            }
+        }
         assert!(
             aggregate_lower
                 .find(&include_suffix("shellscalingapi.h"))
@@ -6113,7 +6201,7 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         else {
             panic!("aggregate authority unexpectedly created PartitionedInput values");
         };
-        assert_eq!(authority.len(), 5);
+        assert_eq!(authority.len(), 8);
         assert_eq!(
             authority
                 .iter()
@@ -6124,7 +6212,10 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
                 SATELLITE_INPUT,
                 PSAPI_V1_INPUT,
                 PSAPI_V2_INPUT,
-                WINHTTP_INPUT
+                WINHTTP_INPUT,
+                DTC_INPUT,
+                MMC_INPUT,
+                WINSYNC_INPUT
             ]
         );
         assert_eq!(traversal.partitions.len(), 321);
@@ -10307,7 +10398,7 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         else {
             panic!("expected the production common-input plan");
         };
-        assert_eq!(inputs.len(), 5);
+        assert_eq!(inputs.len(), 8);
         let wininet = logical_partition(&logical.traversal, "WinInet").unwrap();
         let wininet_source = std::fs::read_to_string(&wininet.input).unwrap();
         let inputs = inputs

@@ -13,8 +13,8 @@
     Maximum concurrent architecture workers, including extraction. Defaults to three.
 
 .PARAMETER UsePartitionAuthority
-    Generate one aggregate plus one satellite input, plus the two PSAPI compile variants,
-    and route them with the checked-in logical partition traversal policy.
+    Generate aggregate and satellite inputs, two PSAPI compile variants, and complete
+    WinHTTP, DTC, MMC, and WinSync contexts using the checked-in logical partition policy.
     This is the default for production generation.
 
 .PARAMETER RawSdk
@@ -149,7 +149,7 @@ if ($coveragePath -and ($Architecture.Count -ne 1 -or $Architecture[0] -ne "x64"
 $useSdkHeaderManifest = $Partition.Count -eq 0
 if ($authority)
 {
-    Write-Host "Generating aggregate + satellite + PSAPI variant inputs with checked-in logical partition authority for $($Architecture -join ', ')"
+    Write-Host "Generating aggregate + satellite + PSAPI variants + WinHTTP/DTC/MMC/WinSync inputs with checked-in logical partition authority for $($Architecture -join ', ')"
 }
 elseif ($useSdkHeaderManifest)
 {

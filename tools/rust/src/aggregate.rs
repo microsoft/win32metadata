@@ -537,7 +537,7 @@ fn append_speech(source: &mut String) {
     source.push_str("\n#pragma pop_macro(\"_SAPI_VER\")\n");
 }
 
-fn append_input_ime(source: &mut String) {
+pub(crate) fn append_input_ime(source: &mut String) {
     append_headers(
         source,
         &[
