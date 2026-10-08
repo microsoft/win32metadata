@@ -1,80 +1,19 @@
 use super::*;
 use windows_metadata::{HasAttributes, Type, Value};
 
-#[test]
-#[ignore = "requires normally prepared current SDK headers and a fresh WIN32METADATA_COM_OUTPUT_ROOT"]
-fn sdk_independent_com_provider_contexts_x64() {
-    ensure_libclang();
-    let output = PathBuf::from(
-        std::env::var_os("WIN32METADATA_COM_OUTPUT_ROOT")
-            .expect("set a fresh COM provider evidence directory"),
-    );
-    std::fs::create_dir(&output).unwrap();
-    let win_sdk = checked_in_win_sdk();
-    let prepared = win_sdk.join("obj").join("RecompiledIdlHeaders");
-    assert!(prepared.join("um").join("txdtc.h").is_file());
-    let options = Options {
-        win32_sdk: true,
-        partition_policy_root: Some(win_sdk.join("Partitions")),
-        namespace_routes: Some(win_sdk.join("requiredNamespacesForNames.rsp")),
-        includes: vec![
-            prepared,
-            win_sdk.join("AdditionalHeaders").join("cpdk"),
-            win_sdk.join("AdditionalHeaders"),
-            win_sdk.join("Partitions").join("Com.StructuredStorage"),
-            win_sdk.join("inc"),
-            sdk_header_root(),
-        ],
-        ..Default::default()
-    };
-    assert_eq!(options.includes.len(), 6);
-    let include_dirs = include_dirs(&options).unwrap();
-    let traversal = crate::partition::load_traversal_policy(
-        options.partition_policy_root.as_ref().unwrap(),
-        &include_dirs,
-    )
-    .unwrap();
-    validate_aggregate_compile_environment(&traversal).unwrap();
-    let headers = convert_header_partition_policy(&traversal).unwrap();
-    let ScrapeInputs::Common(inputs) =
-        build_inputs(&options, &include_dirs, &[], Some(&traversal)).unwrap()
-    else {
-        panic!("expected production authority inputs");
-    };
-    assert_eq!(inputs.len(), 8);
-    let raw = Options {
-        win32_sdk: true,
-        ..Default::default()
-    };
-    let ScrapeInputs::Common(raw_inputs) = build_inputs(&raw, &include_dirs, &[], None).unwrap()
-    else {
-        panic!("expected raw SDK common inputs");
-    };
-    assert_eq!(raw_inputs.len(), 2);
-    let inputs = inputs
-        .into_iter()
-        .filter(|input| {
-            [AGGREGATE_INPUT, DTC_INPUT, MMC_INPUT, WINSYNC_INPUT].contains(&input.name.as_str())
-        })
-        .map(|mut input| {
-            if input.name == AGGREGATE_INPUT {
-                input.source = crate::aggregate::main_prelude(WIN32_SDK_PRELUDE);
-                crate::aggregate::append_input_ime(&mut input.source);
-                input.source.push_str(
-                    "\n#include <ks.h>\n#include <ksmedia.h>\n\
-                     #include <strmif.h>\n#include <tuner.h>\n\
-                     #include <commctrl.h>\n#include <commoncontrols.h>\n\
-                     #include <mshtml.h>\n",
-                );
-            }
-            std::fs::write(output.join(&input.name), &input.source).unwrap();
-            input
-        })
-        .collect::<Vec<_>>();
-    assert_eq!(inputs.len(), 4);
-    let providers: [(&str, &str, &str, &str, &str, &[&str]); 8] = [
+type ComProvider = (
+    &'static str,
+    &'static str,
+    &'static str,
+    &'static str,
+    &'static str,
+    &'static [&'static str],
+);
+
+fn providers() -> [ComProvider; 8] {
+    [
         (
-            DTC_INPUT,
+            COM_INPUT,
             "txdtc.h",
             "Windows.Win32.System.DistributedTransactionCoordinator",
             "IResourceManager",
@@ -87,7 +26,7 @@ fn sdk_independent_com_provider_contexts_x64() {
             ],
         ),
         (
-            MMC_INPUT,
+            COM_INPUT,
             "mmc.h",
             "Windows.Win32.System.Mmc",
             "IComponent",
@@ -103,7 +42,7 @@ fn sdk_independent_com_provider_contexts_x64() {
             ],
         ),
         (
-            MMC_INPUT,
+            COM_INPUT,
             "mmc.h",
             "Windows.Win32.System.Mmc",
             "IImageList",
@@ -111,7 +50,7 @@ fn sdk_independent_com_provider_contexts_x64() {
             &["ImageListSetIcon", "ImageListSetStrip"],
         ),
         (
-            WINSYNC_INPUT,
+            COM_INPUT,
             "winsync.h",
             "Windows.Win32.System.WindowsSync",
             "IRangeException",
@@ -199,7 +138,89 @@ fn sdk_independent_com_provider_contexts_x64() {
             "3051072d-98b5-11cf-bb82-00aa00bdce0b",
             &["put_code", "get_code", "get_message"],
         ),
-    ];
+    ]
+}
+
+#[test]
+#[ignore = "reads WIN32METADATA_EXISTING_IMAGE; does not capture or generate metadata"]
+fn existing_image_preserves_com_providers() {
+    let path = PathBuf::from(
+        std::env::var_os("WIN32METADATA_EXISTING_IMAGE").expect("set an existing WinMD path"),
+    );
+    let index = Index::read(&path).unwrap();
+    assert_com_provider_metadata(&index);
+}
+
+#[test]
+#[ignore = "requires normally prepared current SDK headers and a fresh WIN32METADATA_COM_OUTPUT_ROOT"]
+fn sdk_independent_com_provider_contexts_x64() {
+    ensure_libclang();
+    let output = PathBuf::from(
+        std::env::var_os("WIN32METADATA_COM_OUTPUT_ROOT")
+            .expect("set a fresh COM provider evidence directory"),
+    );
+    std::fs::create_dir(&output).unwrap();
+    let win_sdk = checked_in_win_sdk();
+    let prepared = win_sdk.join("obj").join("RecompiledIdlHeaders");
+    assert!(prepared.join("um").join("txdtc.h").is_file());
+    let options = Options {
+        win32_sdk: true,
+        partition_policy_root: Some(win_sdk.join("Partitions")),
+        namespace_routes: Some(win_sdk.join("requiredNamespacesForNames.rsp")),
+        includes: vec![
+            prepared,
+            win_sdk.join("AdditionalHeaders").join("cpdk"),
+            win_sdk.join("AdditionalHeaders"),
+            win_sdk.join("Partitions").join("Com.StructuredStorage"),
+            win_sdk.join("inc"),
+            sdk_header_root(),
+        ],
+        ..Default::default()
+    };
+    assert_eq!(options.includes.len(), 6);
+    let include_dirs = include_dirs(&options).unwrap();
+    let traversal = crate::partition::load_traversal_policy(
+        options.partition_policy_root.as_ref().unwrap(),
+        &include_dirs,
+    )
+    .unwrap();
+    validate_aggregate_compile_environment(&traversal).unwrap();
+    let headers = convert_header_partition_policy(&traversal).unwrap();
+    let ScrapeInputs::Common(inputs) =
+        build_inputs(&options, &include_dirs, &[], Some(&traversal)).unwrap()
+    else {
+        panic!("expected production authority inputs");
+    };
+    assert_eq!(inputs.len(), 6);
+    let raw = Options {
+        win32_sdk: true,
+        ..Default::default()
+    };
+    let ScrapeInputs::Common(raw_inputs) = build_inputs(&raw, &include_dirs, &[], None).unwrap()
+    else {
+        panic!("expected raw SDK common inputs");
+    };
+    assert_eq!(raw_inputs.len(), 2);
+    let inputs = inputs
+        .into_iter()
+        .filter(|input| [AGGREGATE_INPUT, COM_INPUT].contains(&input.name.as_str()))
+        .map(|mut input| {
+            if input.name == AGGREGATE_INPUT {
+                input.source = crate::aggregate::main_prelude(WIN32_SDK_PRELUDE);
+                crate::aggregate::append_input_ime(&mut input.source);
+                input.source.push_str(
+                    "\n#include <ks.h>\n#include <ksmedia.h>\n\
+                     #include <strmif.h>\n#include <tuner.h>\n\
+                     #include <commctrl.h>\n#include <commoncontrols.h>\n\
+                     #include <mshtml.h>\n",
+                );
+            }
+            std::fs::write(output.join(&input.name), &input.source).unwrap();
+            input
+        })
+        .collect::<Vec<_>>();
+    assert_eq!(inputs.len(), 2);
+    let providers = providers();
     let references = MetadataReferences::new([windows_metadata::reader::File::new(
         windows_default::WINRT.to_vec(),
     )
@@ -407,7 +428,11 @@ fn sdk_independent_com_provider_contexts_x64() {
         dispatch_report.push_str(&format!("{namespace}.{name} physical bases: {bases:#?}\n"));
     }
     std::fs::write(output.join("lpdispatch-preservation.txt"), &dispatch_report).unwrap();
-    for (_, _, namespace, name, guid, methods) in providers {
+    assert_com_provider_metadata(&index);
+}
+
+fn assert_com_provider_metadata(index: &Index) {
+    for (_, _, namespace, name, guid, methods) in providers() {
         assert_eq!(
             index
                 .iter()
@@ -460,7 +485,7 @@ fn sdk_independent_com_provider_contexts_x64() {
                 .map(|implementation| implementation.interface(&[]))
                 .collect::<Vec<_>>(),
             [Type::class_named(namespace, base)],
-            "x64: {namespace}.{derived} physical base"
+            "{namespace}.{derived} physical base"
         );
     }
     for (namespace, owner, method, parameter, target) in [
@@ -501,9 +526,9 @@ fn sdk_independent_com_provider_contexts_x64() {
         assert_eq!(
             method.signature(&[]).types[parameter],
             Type::PtrMut(Box::new(Type::class_named(namespace, target)), 1),
-            "x64 {namespace}.{owner}.{}",
+            "{namespace}.{owner}.{}",
             method.name(),
         );
     }
-    eprintln!("COM provider control: x64 physical readback passed");
+    eprintln!("COM provider physical identities and references passed");
 }

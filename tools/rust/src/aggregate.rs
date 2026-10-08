@@ -106,16 +106,7 @@ pub fn main_prefix(prelude: &str, structured_storage_header: &Path) -> Result<St
     append_device_services(&mut source);
     append_sec_bitomet(&mut source);
 
-    append_headers(
-        &mut source,
-        &[
-            "comsvcs.h",
-            "combaseapi.h",
-            "eventsys.h",
-            "comadmin.h",
-            "mtxdm.h",
-        ],
-    );
+    append_headers(&mut source, &["combaseapi.h"]);
     append_com_structured_storage(&mut source, structured_storage_header)?;
     append_identity(&mut source);
     append_internet_explorer(&mut source);

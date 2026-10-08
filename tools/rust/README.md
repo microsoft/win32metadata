@@ -5,7 +5,7 @@ A command-line front end over the pinned windows-rs producer revision, providing
 
 The production `scrape --win32-sdk` path reads the pinned raw Windows SDK headers and
 constructs the producer-supported aggregate plus satellite inputs. Logical authority adds
-two `PSAPI_VERSION` compile variants and independent WinHTTP, DTC, MMC, and WinSync contexts; it never expands
+two `PSAPI_VERSION` compile variants, WinHTTP, and a shared COM exception context; it never expands
 into one input per partition. `--partition-policy-root` routes physical header provenance through the checked-in
 logical partition policies. Every physical owner is qualified to its assigned aggregate,
 satellite, PSAPI, or complete provider input, so the same header included elsewhere remains dependency
@@ -22,17 +22,28 @@ separate snapshots preserve native values, record identities, and provider-local
 without guard manipulation, aliases, or namespace changes. Explicit raw SDK mode retains
 its original two-input behavior.
 
-DTC, MMC, and WinSync likewise retain their complete existing partition compile
-environments in separate inputs. This preserves native interface and IID names,
+DTC, MMC, and WinSync retain their complete existing partition compile
+environments in one shared COM input. This preserves native interface and IID names,
 GUIDs, method bodies, and provider-local references when unrelated SDK headers
 declare interfaces with the same C++ name. Their roots remain assigned to the
 existing WinMD namespaces; no native C++ namespace or API renaming is introduced.
+Complete `Cos`, `Com.Events`, `TransactionServer`, and `ComOle` consumers join the
+COM input because `comsvcs.h` imports `txdtc.h`, including through `mtx.h`.
+Complete `TermServ` consumers join that same input because
+`tsuserex.h` imports `mmc.h`. Their logical roots and namespaces are unchanged.
+The aggregate retains the foreign DirectShow, TV, and Controls providers without
+also importing those native providers through their consumers.
+The existing OLE1 exclusion follows its OLE owner into the COM input; relocation
+does not enable the incompatible `ole.h` surface alongside `ole2.h`.
 
 The ignored `scrape::tests::com_provider::sdk_independent_com_provider_contexts_x64`
 control uses current headers produced by `scripts\Prepare-WindowsRsHeaders.ps1`
 and the normal six ordered include roots. Set `WIN32METADATA_COM_OUTPUT_ROOT` to a
 fresh output directory. It checks all eight native and emitted interface identities,
 provider-local parameters, and physical interface bases, stopping at the first error.
+The ignored `scrape::tests::com_provider::existing_image_preserves_com_providers`
+test reuses the physical identity and reference checks without capturing SDK headers.
+Set `WIN32METADATA_EXISTING_IMAGE` to the full or legacy WinMD to inspect.
 
 In logical authority mode, explicitly traversed headers retain their assigned namespaces.
 Required dependency types from other headers use the default `Windows.Win32` namespace
@@ -225,7 +236,7 @@ partition authority, and generates `bin\Windows.Win32.winmd` for x64, x86, and a
 Pass `-Architecture x64` for a single-architecture run. Passing `-Partition
 Foundation,Bluetooth` selects focused legacy partition inputs instead of the production
 header manifest. Production extraction uses aggregate + satellite, two PSAPI variants,
-and independent WinHTTP, DTC, MMC, and WinSync contexts, not one translation unit per partition.
+WinHTTP, and a shared COM exception context, not one translation unit per partition.
 `-UsePartitionAuthority` remains accepted explicitly. `-RawSdk` (or
 `-UsePartitionAuthority:$false`) selects the raw
 NuGet SDK manifest without checked-in header preparation or logical authority.
