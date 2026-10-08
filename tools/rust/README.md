@@ -9,8 +9,9 @@ two `PSAPI_VERSION` compile variants and an independent WinHTTP context; it neve
 into one input per partition. `--partition-policy-root` routes physical header provenance through the checked-in
 logical partition policies. Every physical owner is qualified to its assigned aggregate,
 satellite, PSAPI, or WinHTTP input, so the same header included elsewhere remains dependency
-closure rather than becoming a public root. x64, x86, and arm64 extraction runs in parallel, then the
-per-architecture WinMDs are merged into one output. Focused partition translation units remain
+closure rather than becoming a public root. x64, x86, and arm64 are extracted and compiled
+in parallel by default, then their WinMDs are merged into one output.
+`--architecture-jobs` can lower concurrent workloads. Focused partition translation units remain
 available for package fixtures and inner-loop debugging.
 
 WinHTTP uses the existing `WinHttp/main.cpp` compile environment in the fifth authority
@@ -310,6 +311,7 @@ order determines the first owner; paths within each input are sorted.
 | `--include <dir>` | Header root. Repeatable, searched in order. |
 | `--lib <dir-or-file>` | SDK import-library directory or file. Repeatable. |
 | `--arch <x64\|arm64\|x86>` | Repeatable. Defaults to `x64`. |
+| `--architecture-jobs <count>` | Positive maximum for concurrent architecture workers. Defaults to `3`. |
 | `--scope <segment>` | Header directory segment emitted unconditionally. Repeatable. |
 | `--scope-header <header>` | Header name emitted unconditionally. Repeatable. |
 | `--symbol <name>` | Emit a focused function and its dependencies. Repeatable. |
@@ -348,9 +350,35 @@ not every library in the directory. This includes `gdiplus.lib`, so supported
 GDI+ entry points are selected even from unannotated SDK headers. Declarations
 without an import mapping or explicit import annotation remain unselected.
 
-**`--arch`** may be repeated. Each architecture is extracted and compiled independently;
-multi-architecture runs execute those workers in parallel and merge their WinMDs so
-architecture-specific declarations are tagged.
+**`--arch`** may be repeated. Each architecture is extracted and compiled independently,
+then the WinMDs are merged so architecture-specific declarations are tagged. The first
+requested architecture remains canonical regardless of worker count.
+
+**`--architecture-jobs`** bounds each complete extraction/planning/emission/compilation
+worker, not just emission after all snapshots have been captured. The default remains
+three; `--architecture-jobs 1` explicitly selects sequential architecture processing.
+`BuildMetadataBin.ps1` and `Generate-WindowsRsWinmd.ps1` expose `-ArchitectureJobs`;
+MSBuild/packaged SDK consumers use `WinmdArchitectureJobs`. None of these settings
+changes the selected architectures, include roots, namespace authority or native inputs.
+Normal generation provenance records the worker option in the native argument list.
+Snapshots are released before compilation when emission borrows them; consuming legacy
+paths retain their existing ownership behavior.
+
+The limit reduces overlapping live workloads, not a guaranteed byte ceiling: libclang
+and allocator retention can still affect process memory. Small serial/parallel fixtures
+check all three per-architecture images and merged bytes; they do not establish a full-SDK
+memory bound or diagnose an earlier allocation/stack-overflow failure. The PR validation
+job allows 360 minutes; this checkpoint does not shorten that timeout.
+The opt-in native byte-parity test requires the complete staged resource tree:
+
+```powershell
+.\scripts\Build-Win32MetadataTools.ps1
+$env:CLANG_RESOURCE_DIR = "$PWD\bin\GeneratorSdk\tools\win-x64\clang-resource\22.1.8"
+cargo test --release --locked --manifest-path .\tools\rust\Cargo.toml `
+    architecture_jobs_keep_three_architecture_native_output_identical -- --ignored
+.\scripts\Test-WindowsRsHeaders.ps1
+```
+
 Compilation and cached architecture merging atomically reserve distinct staging directories.
 Process-local counters and collision retries prevent workers compiling the same assembly
 from sharing temporary files or deleting each other's output; wall-clock timestamps are

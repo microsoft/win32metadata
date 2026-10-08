@@ -7,6 +7,7 @@
 
 use std::collections::{BTreeMap, BTreeSet, HashMap};
 use std::ffi::OsString;
+use std::num::NonZeroUsize;
 use std::path::{Path, PathBuf};
 
 use windows_clang::{
@@ -22,6 +23,7 @@ use crate::libclang;
 use crate::merge_arch::merge_architecture_rdl;
 
 const DEFAULT_NAMESPACE: &str = "Windows.Win32";
+const DEFAULT_ARCHITECTURE_JOBS: NonZeroUsize = NonZeroUsize::new(3).unwrap();
 const ANNOTATION_HEADER: &str = "win32metadata_annotations.h";
 const SAL_HEADER: &str = "win32metadata_sal.h";
 const AGGREGATE_INPUT: &str = "win32metadata-aggregate.cpp";
@@ -92,6 +94,7 @@ pub struct Options {
     includes: Vec<PathBuf>,
     libs: Vec<PathBuf>,
     archs: Vec<String>,
+    architecture_jobs: Option<NonZeroUsize>,
     scopes: Vec<String>,
     scope_headers: Vec<String>,
     namespace_routes: Option<PathBuf>,
@@ -135,6 +138,13 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
             "--include" => options.includes.push(args.path(&option)?),
             "--lib" => options.libs.push(args.path(&option)?),
             "--arch" => options.archs.push(args.value(&option)?),
+            "--architecture-jobs" => {
+                let value = args.value(&option)?;
+                let jobs = value.parse::<NonZeroUsize>().map_err(|_| {
+                    format!("invalid `--architecture-jobs {value}`; expected a positive integer")
+                })?;
+                set_once(&mut options.architecture_jobs, jobs, &option)?;
+            }
             "--scope" => options.scopes.push(args.value(&option)?),
             "--scope-header" => options.scope_headers.push(args.value(&option)?),
             "--namespace-routes" => {
@@ -2457,49 +2467,33 @@ fn execute(options: &Options) -> Result<(), String> {
         None
     };
 
-    let merged = std::thread::scope(|scope| {
-        let handles = arch_names
-            .iter()
-            .enumerate()
-            .map(|(index, name)| {
-                let configuration = &configuration;
-                let resource_dir = resource_dir.as_deref();
-                let rdl_dir = &rdl_dir;
-                let obj = &obj;
-                scope.spawn(move || -> Result<Option<ArchInput>, String> {
-                    let arch = arch(name)?;
-                    let arch_rdl_dir = if index == 0 {
-                        rdl_dir.clone()
-                    } else {
-                        obj.join(name)
-                    };
-                    let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
-                    if scrape_arch(
-                        configuration,
-                        &arch,
-                        resource_dir,
-                        &arch_rdl_dir,
-                        &arch_winmd,
-                        options,
-                    )? {
-                        return Ok(None);
-                    }
-                    Ok(Some(ArchInput {
-                        rdl_dir: arch_rdl_dir,
-                        winmd: arch_winmd,
-                        bits: arch.bits,
-                    }))
-                })
-            })
-            .collect::<Vec<_>>();
-        handles
-            .into_iter()
-            .map(|handle| {
-                handle
-                    .join()
-                    .map_err(|_| "architecture scrape worker panicked".to_string())?
-            })
-            .collect::<Result<Vec<_>, String>>()
+    let jobs = options
+        .architecture_jobs
+        .unwrap_or(DEFAULT_ARCHITECTURE_JOBS);
+    println!("Architecture worker limit: {jobs}");
+    let merged = run_architecture_jobs(&arch_names, jobs, |index, name| {
+        let arch = arch(name)?;
+        let arch_rdl_dir = if index == 0 {
+            rdl_dir.clone()
+        } else {
+            obj.join(name)
+        };
+        let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
+        if scrape_arch(
+            &configuration,
+            &arch,
+            resource_dir.as_deref(),
+            &arch_rdl_dir,
+            &arch_winmd,
+            options,
+        )? {
+            return Ok(None);
+        }
+        Ok(Some(ArchInput {
+            rdl_dir: arch_rdl_dir,
+            winmd: arch_winmd,
+            bits: arch.bits,
+        }))
     })?
     .into_iter()
     .flatten()
@@ -2539,6 +2533,43 @@ fn execute(options: &Options) -> Result<(), String> {
 fn arch(name: &str) -> Result<Arch, String> {
     Arch::known(name)
         .ok_or_else(|| format!("unknown architecture `{name}`; expected x64, arm64, or x86"))
+}
+
+fn run_architecture_jobs<T: Send>(
+    names: &[String],
+    jobs: NonZeroUsize,
+    operation: impl Fn(usize, &str) -> Result<T, String> + Sync,
+) -> Result<Vec<T>, String> {
+    let mut output = Vec::with_capacity(names.len());
+    for (batch, names) in names.chunks(jobs.get()).enumerate() {
+        let results = std::thread::scope(|scope| {
+            let operation = &operation;
+            let handles = names
+                .iter()
+                .enumerate()
+                .map(|(index, name)| {
+                    let handle = std::thread::Builder::new()
+                        .name(format!("winmd-{name}"))
+                        .spawn_scoped(scope, move || operation(batch * jobs.get() + index, name));
+                    (name, handle)
+                })
+                .collect::<Vec<_>>();
+
+            // Join every started worker, including after a sibling failure or panic.
+            let results = handles
+                .into_iter()
+                .map(|(name, handle)| {
+                    handle
+                        .map_err(|error| format!("failed to start {name} scrape worker: {error}"))?
+                        .join()
+                        .map_err(|_| format!("{name} architecture scrape worker panicked"))?
+                })
+                .collect::<Vec<_>>();
+            results.into_iter().collect::<Result<Vec<_>, String>>()
+        })?;
+        output.extend(results);
+    }
+    Ok(output)
 }
 
 fn implicit_selected_functions(
@@ -2737,6 +2768,7 @@ fn scrape_arch(
         }
     }
 
+    drop(links_by_name);
     let mut emit = EmitOptions::new(namespace(options), configuration.references.types());
     emit.libraries = Some(&libraries);
     emit.library = (!configuration.has_import_libraries).then_some("");
@@ -2752,6 +2784,7 @@ fn scrape_arch(
             .unwrap_or_default();
         let partitions =
             plan_header_partitions(&snapshot, &logical.headers, &authorities, &emit, &arch.name)?;
+        drop(snapshot);
         write_partitioned_rdl(rdl_dir, partitions)?;
     } else if configuration.inputs.partitioned() {
         let partitions = if let Some(routes) = &configuration.namespace_routes {
@@ -2765,6 +2798,7 @@ fn scrape_arch(
         let partitions = snapshot
             .emit_by_header_with_options(&emit)
             .map_err(|error| format!("failed to plan {} metadata: {error}", arch.name))?;
+        drop(snapshot);
         let mut stems = BTreeSet::new();
         for (header, rdl) in partitions {
             let stem = Path::new(&header)
@@ -3233,6 +3267,7 @@ pub fn help_text() -> &'static str {
     --include <dir>... \\
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
+    [--architecture-jobs <count>] \\
     [--scope <path-segment>]... \\
     [--scope-header <header>]... \
     [--namespace-routes <routes.rsp>] \\
@@ -3259,6 +3294,9 @@ pub fn help_text() -> &'static str {
                 Repeatable. Without it, functions carry no import library.
   --arch        Architecture to scrape. Repeatable. Defaults to x64. The first is
                 canonical; the rest are merged into it.
+  --architecture-jobs
+                Maximum concurrent extraction/planning/emission/compilation workers.
+                Positive integer; defaults to 3. Does not change architecture selection.
   --scope       Header path segment whose declarations are emitted unconditionally.
                 Repeatable. Defaults to shared and um.
   --scope-header
@@ -5613,6 +5651,181 @@ mod tests {
         assert_eq!(arch("arm64").unwrap().triple, "aarch64-pc-windows-msvc");
         assert_eq!(arch("arm64").unwrap().bits, 4);
         assert_eq!(arch("x86").unwrap().bits, 1);
+    }
+
+    #[test]
+    fn architecture_jobs_preserve_parallel_default_and_reject_invalid_limits() {
+        assert_eq!(
+            parse_with(&[])
+                .unwrap()
+                .architecture_jobs
+                .unwrap_or(DEFAULT_ARCHITECTURE_JOBS)
+                .get(),
+            3
+        );
+        assert_eq!(
+            parse_with(&["--architecture-jobs", "3"])
+                .unwrap()
+                .architecture_jobs
+                .unwrap()
+                .get(),
+            3
+        );
+        for value in ["0", "-1", "invalid", "18446744073709551616"] {
+            let error = parse_with(&["--architecture-jobs", value]).unwrap_err();
+            assert!(error.contains("--architecture-jobs"), "{error}");
+        }
+        assert!(parse_with(&["--architecture-jobs", "2", "--architecture-jobs", "3"]).is_err());
+    }
+
+    #[test]
+    fn architecture_jobs_bound_whole_worker_lifetimes_and_preserve_order() {
+        use std::sync::Barrier;
+        use std::sync::atomic::{AtomicUsize, Ordering};
+
+        struct Lease<'a>(&'a AtomicUsize);
+        impl Drop for Lease<'_> {
+            fn drop(&mut self) {
+                self.0.fetch_sub(1, Ordering::SeqCst);
+            }
+        }
+
+        let names = ["x64", "x86", "arm64", "last"].map(str::to_string).to_vec();
+        for jobs in [1, 2, 3] {
+            let active = AtomicUsize::new(0);
+            let peak = AtomicUsize::new(0);
+            let barriers = names
+                .chunks(jobs)
+                .map(|batch| Barrier::new(batch.len()))
+                .collect::<Vec<_>>();
+            let output =
+                run_architecture_jobs(&names, NonZeroUsize::new(jobs).unwrap(), |index, name| {
+                    let count = active.fetch_add(1, Ordering::SeqCst) + 1;
+                    let _lease = Lease(&active);
+                    peak.fetch_max(count, Ordering::SeqCst);
+                    assert!(count <= jobs);
+                    for _phase in ["extract", "plan", "emit", "compile"] {
+                        barriers[index / jobs].wait();
+                        assert!(active.load(Ordering::SeqCst) <= jobs);
+                    }
+                    Ok((index, name.to_string()))
+                })
+                .unwrap();
+            assert_eq!(
+                output,
+                names.iter().cloned().enumerate().collect::<Vec<_>>()
+            );
+            assert_eq!(peak.load(Ordering::SeqCst), jobs);
+            assert_eq!(active.load(Ordering::SeqCst), 0);
+        }
+    }
+
+    #[test]
+    fn architecture_jobs_drain_failed_batches_and_do_not_start_later_work() {
+        use std::sync::Barrier;
+        use std::sync::atomic::{AtomicUsize, Ordering};
+
+        let names = ["x64", "x86", "arm64"].map(str::to_string).to_vec();
+        for panic in [false, true] {
+            let barrier = Barrier::new(2);
+            let started = AtomicUsize::new(0);
+            let finished = AtomicUsize::new(0);
+            let error = run_architecture_jobs(&names, NonZeroUsize::new(2).unwrap(), |index, _| {
+                started.fetch_add(1, Ordering::SeqCst);
+                barrier.wait();
+                if index == 0 {
+                    assert!(!panic, "intentional architecture worker panic");
+                    return Err("intentional extraction failure".to_string());
+                }
+                finished.fetch_add(1, Ordering::SeqCst);
+                Ok(())
+            })
+            .unwrap_err();
+            assert_eq!(
+                error,
+                if panic {
+                    "x64 architecture scrape worker panicked"
+                } else {
+                    "intentional extraction failure"
+                }
+            );
+            assert_eq!(started.load(Ordering::SeqCst), 2);
+            assert_eq!(finished.load(Ordering::SeqCst), 1);
+        }
+    }
+
+    #[test]
+    #[ignore = "requires the packaged Clang resource tree via LIBCLANG_PATH or CLANG_RESOURCE_DIR"]
+    fn architecture_jobs_keep_three_architecture_native_output_identical() {
+        ensure_libclang();
+        let root = scratch("architecture-jobs");
+        let headers = root.join("um");
+        std::fs::create_dir(&headers).unwrap();
+        std::fs::write(
+            headers.join("jobs.h"),
+            r#"
+struct JOB_RECORD { void* data; unsigned count; };
+enum JOB_ARCH {
+#if defined(_M_IX86)
+    JOB_MARKER = 1
+#elif defined(_M_ARM64)
+    JOB_MARKER = 4
+#else
+    JOB_MARKER = 2
+#endif
+};
+extern "C" int __stdcall JobApi(JOB_RECORD* record);
+"#,
+        )
+        .unwrap();
+        let input = root.join("main.cpp");
+        std::fs::write(&input, "#include <jobs.h>\n").unwrap();
+        let names = ["arm64", "x86", "x64"].map(str::to_string).to_vec();
+        let mut expected = None;
+        for jobs in [1, 2, 3] {
+            let obj = root.join(format!("jobs-{jobs}"));
+            let output = obj.join("Jobs.winmd");
+            execute(&Options {
+                partitions: vec![input.clone()],
+                includes: vec![
+                    headers.clone(),
+                    checked_in_win_sdk().join("AdditionalHeaders"),
+                ],
+                archs: names.clone(),
+                architecture_jobs: NonZeroUsize::new(jobs),
+                assembly_name: Some("Jobs".to_string()),
+                assembly_version: Some([1, 2, 3, 4]),
+                output: Some(output.clone()),
+                obj: Some(obj.clone()),
+                ..Default::default()
+            })
+            .unwrap();
+            let images = names
+                .iter()
+                .map(|name| obj.join(format!("Windows.Win32.{name}.winmd")))
+                .chain([output.clone()])
+                .map(|path| std::fs::read(path).unwrap())
+                .collect::<Vec<_>>();
+            assert!(
+                images[0] != images[1] && images[0] != images[2] && images[1] != images[2],
+                "the fixture must preserve three distinct native architecture outputs"
+            );
+            if let Some(expected) = &expected {
+                assert_eq!(&images, expected, "architecture worker limit {jobs}");
+            } else {
+                expected = Some(images);
+            }
+            let index = Index::read(&output).unwrap();
+            assert!(matches!(
+                index.expect_item(DEFAULT_NAMESPACE, "JobApi"),
+                Item::Fn(_)
+            ));
+            assert!(matches!(
+                index.expect_item(DEFAULT_NAMESPACE, "JOB_RECORD"),
+                Item::Type(_)
+            ));
+        }
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

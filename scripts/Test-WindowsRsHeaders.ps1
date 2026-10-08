@@ -50,7 +50,7 @@ function Assert-NativeFailure {
 function Get-ProjectEvaluation {
     param([switch]$Raw)
     $arguments = @("msbuild", (Join-Path $repo "generation\WinSDK\Windows.Win32.proj"),
-        "-nologo", "-getProperty:OutputWinmd,TargetArchitectures,WinmdUsePartitionAuthority,Win32MetadataToolsCommand",
+        "-nologo", "-getProperty:OutputWinmd,TargetArchitectures,WinmdArchitectureJobs,WinmdUsePartitionAuthority,Win32MetadataToolsCommand",
         "-getItem:WinmdIncludeDir,WinmdPartitionPolicyRoot,WinmdNamespaceRoutes")
     if ($Raw) { $arguments += "-p:WinmdUsePartitionAuthority=false" }
     $text = & dotnet @arguments | Out-String
@@ -181,12 +181,19 @@ class Relay
     Assert ($normal.Properties.WinmdUsePartitionAuthority -ceq "true") "Normal build did not select authority."
     Assert ($normal.Properties.OutputWinmd -ieq (Join-Path $repo "bin\Windows.Win32.winmd")) "Direct project output is not repo-root bin."
     Assert ($normal.Properties.TargetArchitectures -ceq "x64;x86;arm64") "Normal architecture scope changed."
+    Assert ($normal.Properties.WinmdArchitectureJobs -ceq "3") "Normal build changed default architecture concurrency."
     Assert ($normal.Items.WinmdIncludeDir.Count -eq 6) "Normal build did not retain exactly six include positions."
     Assert ($normal.Items.WinmdIncludeDir[0].FullPath -ieq (Join-Path $repo "generation\WinSDK\obj\RecompiledIdlHeaders")) "Normal build does not consume prepared headers first."
     Assert ($normal.Items.WinmdPartitionPolicyRoot.Count -eq 1 -and $normal.Items.WinmdNamespaceRoutes.Count -eq 1) "Normal authority inputs changed."
     $raw = Get-ProjectEvaluation -Raw
+    Assert ($raw.Properties.WinmdArchitectureJobs -ceq "3") "Raw build changed default architecture concurrency."
     Assert (!$raw.Properties.Win32MetadataToolsCommand -and !$raw.Items.WinmdPartitionPolicyRoot.Count -and
         !($raw.Items.WinmdIncludeDir.FullPath -contains $normal.Items.WinmdIncludeDir[0].FullPath)) "Raw mode acquired prepared inputs/authority."
+    foreach ($entrypoint in @("BuildMetadataBin.ps1", "Generate-WindowsRsWinmd.ps1")) {
+        Assert-NativeFailure {
+            & pwsh -NoProfile -File (Join-Path $PSScriptRoot $entrypoint) -ArchitectureJobs 0
+        } 1 "ArchitectureJobs"
+    }
 
     Assert (Test-Path $tool) "Build the native tool before running header-generation tests."
     if (!(Test-Path $utils)) {
@@ -220,10 +227,24 @@ class Relay
         & dotnet msbuild $project -nologo -t:EmitWinmd -verbosity:minimal
         Assert ($LASTEXITCODE -eq 0) "Fixture generation failed."
         & $prepare -WinSdkRoot $fixture -VerifyOutput $winmd
+        $receipt = Get-Content "$winmd.provenance.json" -Raw | ConvertFrom-Json
+        $jobOption = [Array]::IndexOf([string[]]$receipt.arguments, "--architecture-jobs")
+        Assert ($jobOption -ge 0 -and $receipt.arguments[$jobOption + 1] -ceq "3") "Default worker bound is missing from provenance."
         & dotnet $utils dump --winmd $winmd --output $dump
         Assert ($LASTEXITCODE -eq 0) "Fixture WinMD readback failed."
         Assert ((Get-Content $dump -Raw) -match "PREPARATION_MARKER\s*=\s*$expected\b") "Normal MSBuild generation ignored the changed patch."
     }
+    $parallelHash = (Get-FileHash $winmd).Hash
+    Assert-NativeFailure {
+        & dotnet msbuild $project -nologo -t:EmitWinmd -p:WinmdArchitectureJobs=0 -verbosity:minimal
+    } 1 "expected a positive integer"
+    & dotnet msbuild $project -nologo -t:EmitWinmd -p:WinmdArchitectureJobs=1 -verbosity:minimal
+    Assert ($LASTEXITCODE -eq 0) "Sequential fixture generation failed."
+    & $prepare -WinSdkRoot $fixture -VerifyOutput $winmd
+    $receipt = Get-Content "$winmd.provenance.json" -Raw | ConvertFrom-Json
+    $jobOption = [Array]::IndexOf([string[]]$receipt.arguments, "--architecture-jobs")
+    Assert ($jobOption -ge 0 -and $receipt.arguments[$jobOption + 1] -ceq "1") "Sequential override is missing from provenance."
+    Assert ((Get-FileHash $winmd).Hash -ceq $parallelHash) "Architecture worker count changed the normal output."
     Add-Content -LiteralPath $preparedHeader -Value "// unexpected modification"
     Assert-NativeFailure { & pwsh -NoProfile -File $prepare -WinSdkRoot $fixture -VerifyOutput $winmd } 1 "provenance is missing or stale"
     & $prepare -WinSdkRoot $fixture -Clean -CleanObjectDirectory (Join-Path $fixture "obj\winmd") -CleanOutput $winmd

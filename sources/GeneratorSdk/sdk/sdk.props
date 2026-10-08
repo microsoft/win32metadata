@@ -24,6 +24,7 @@
     <WinmdObjDir Condition="'$(WinmdObjDir)' == ''">$(ObjDir)\winmd</WinmdObjDir>
     <OutputWinmd Condition="'$(OutputWinmd)' == ''">$(MSBuildProjectDirectory)\bin\$(MSBuildProjectName).winmd</OutputWinmd>
     <TargetArchitectures Condition="'$(TargetArchitectures)' == ''">x64;x86;arm64</TargetArchitectures>
+    <WinmdArchitectureJobs Condition="'$(WinmdArchitectureJobs)' == ''">3</WinmdArchitectureJobs>
     <WinmdRootNamespace Condition="'$(WinmdRootNamespace)' == ''">Windows.Win32</WinmdRootNamespace>
     <WinmdAssemblyName Condition="'$(WinmdAssemblyName)' == ''">$([System.IO.Path]::GetFileNameWithoutExtension('$(OutputWinmd)'))</WinmdAssemblyName>
 

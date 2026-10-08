@@ -12,6 +12,10 @@ param
     [switch]
     $RawSdk,
 
+    [ValidateRange(1, 2147483647)]
+    [int]
+    $ArchitectureJobs = 3,
+
     [ValidateSet("crossarch", "x64", "x86", "arm64")]
     [string]
     $arch = "crossarch"
@@ -60,6 +64,7 @@ $buildArgs = @(
     "-t:EmitWinmd",
     "-p:WinmdVersion=$assemblyVersion",
     "-p:OutputWinmd=$outputWinmdFileName",
+    "-p:WinmdArchitectureJobs=$ArchitectureJobs",
     "-bl:$logFile",
     "--no-restore"
 )
