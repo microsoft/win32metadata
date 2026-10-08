@@ -4,8 +4,10 @@ Core extraction, RDL, and metadata algorithms belong in windows-rs. This reposit
 owns dependency adoption, SDK input configuration, annotation capture, and packaging.
 
 `Cargo.toml` and `Cargo.lock` currently pin all four git dependencies to
-[`af9baa81465036b8c64fb52c68226c4cc3f76c3e`](https://github.com/jevansaks/windows-rs/commit/af9baa81465036b8c64fb52c68226c4cc3f76c3e),
-published in `jevansaks/windows-rs`. Its native Color identity correction follows
+[`8c7eb5894075fb7aa3bfc82d3488650980e5025a`](https://github.com/jevansaks/windows-rs/commit/8c7eb5894075fb7aa3bfc82d3488650980e5025a),
+published in `jevansaks/windows-rs`. This coalesces the reviewed macro-domain,
+serialization, owned-planner and canonical-alias corrections described below.
+It follows `af9baa81465036b8c64fb52c68226c4cc3f76c3e`, whose native Color identity correction follows
 `2ee8ba6bb766a5a9b919f7b73222e6e01b981968`, whose source-identified interface,
 provider-IID, and macro-probe corrections follow `0138a2079ecce580789a072b52ea6f25df77a937`,
 whose retained-pointer SAL direction correction
@@ -27,6 +29,29 @@ historical fork change has been upstreamed.
 | `windows-rdl` | RDL compilation and WinMD-to-RDL emission. |
 | `windows-metadata` | Metadata identities, reading, writing, and merging. |
 | `windows-default` | Reference metadata; follows the same exact producer revision. |
+
+## Coalesced serialization, ownership and alias successor
+
+The producer preserves explicit field offsets through architecture merging and
+keeps offset differences in physical type identity. Reference scopes retain exact
+assembly identity rather than silently becoming unresolved module-local names.
+Strong-name token controls include an independent 160-byte public key and SHA-1
+padding boundaries. These corrections do not excuse pre-existing unresolved
+references or substitute for same-input premerge/merged physical validation.
+
+Normal authority generation now transfers its finished capture into
+`Snapshot::into_header_partition_plan`, avoiding the borrowed entry point's full
+initial snapshot clone. Borrowed planning remains compatible. Consumer controls
+compare emitted native-opaque RDL and by-value rejections across both entry points;
+raw/by-header and legacy consuming paths are unchanged. This removes one clone,
+not all planner allocations or a guaranteed full-SDK peak-memory limit.
+
+The indexed cross-TU typedef bridge requires equivalent source declarations,
+matching native parent qualification and matching semantic annotations for every
+exact candidate. Different scope, annotation or declaration evidence must not
+bridge merely because a leaf name matches. The corrected macro ownership gate
+also preserves scalar-domain and before-enum negatives. Neither correction adds
+namespace guesses or changes the native Matrix source contract.
 
 ## Physical metadata serialization integrity
 
@@ -100,6 +125,12 @@ VFS overlay that preserves the original logical header path. Normalized source
 hashes bind both the pristine and annotated headers; the SDK mirror is unchanged.
 The bare-header negative must still reject unsupported native `Matrix` rather
 than falling back to a same-leaf reference.
+
+Normal header preparation applies those same annotated bytes through
+`generation/WinSDK/patches/post-midl/gdiplusmatrix.h.win32metadata.patch`.
+This is the exact existing header-work patch, not a second annotation or a changed
+class policy. Its prepared header matches the native fixture; repeated preparation
+reuses the verified tree. The pristine mirror and other header changes remain separate.
 
 The positive retains all 629 import-backed functions, native calling conventions,
 parameter counts and geometry checks on x64 and x86. It additionally binds the

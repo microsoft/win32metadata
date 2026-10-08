@@ -10,9 +10,11 @@ use std::ffi::OsString;
 use std::num::NonZeroUsize;
 use std::path::{Path, PathBuf};
 
+#[cfg(test)]
+use windows_clang::NamespaceAuthorities;
 use windows_clang::{
     Annotation, AnnotationTarget, EmitOptions, FactData, HeaderPartitionPolicy, Input,
-    MetadataReferences, NamespaceAuthorities, PartitionedInput, RdlPartition, RootPartition,
+    MetadataReferences, PartitionedInput, RdlPartition, RootPartition,
 };
 use windows_metadata::reader::{Index, Item};
 use windows_rdl::ArchInput;
@@ -2782,9 +2784,11 @@ fn scrape_arch(
             .as_ref()
             .map(crate::namespace_routes::NamespaceRoutes::authorities)
             .unwrap_or_default();
-        let partitions =
-            plan_header_partitions(&snapshot, &logical.headers, &authorities, &emit, &arch.name)?;
-        drop(snapshot);
+        let partitions = emit_header_partition_plan(
+            || snapshot.into_header_partition_plan(&logical.headers, &authorities),
+            &emit,
+            &arch.name,
+        )?;
         write_partitioned_rdl(rdl_dir, partitions)?;
     } else if configuration.inputs.partitioned() {
         let partitions = if let Some(routes) = &configuration.namespace_routes {
@@ -2837,6 +2841,7 @@ fn timed_phase<T>(
     result
 }
 
+#[cfg(test)]
 fn plan_header_partitions(
     snapshot: &windows_clang::Snapshot,
     policy: &HeaderPartitionPolicy,
@@ -2844,10 +2849,20 @@ fn plan_header_partitions(
     emit: &EmitOptions<'_>,
     arch: &str,
 ) -> Result<BTreeMap<RdlPartition, String>, String> {
+    emit_header_partition_plan(
+        || snapshot.plan_header_partitions(policy, authorities),
+        emit,
+        arch,
+    )
+}
+
+fn emit_header_partition_plan(
+    build_plan: impl FnOnce() -> Result<windows_clang::HeaderPartitionPlan, windows_clang::Error>,
+    emit: &EmitOptions<'_>,
+    arch: &str,
+) -> Result<BTreeMap<RdlPartition, String>, String> {
     let plan = timed_phase("header-ownership", arch, || {
-        snapshot
-            .plan_header_partitions(policy, authorities)
-            .map_err(|error| format!("failed to plan {arch} metadata: {error}"))
+        build_plan().map_err(|error| format!("failed to plan {arch} metadata: {error}"))
     })?;
     timed_phase("header-emission", arch, || {
         plan.emit_with_options(emit)
@@ -4150,8 +4165,18 @@ mod tests {
         assert!(!references.types().is_empty());
         let mut emit = EmitOptions::new(namespace, references.types());
         emit.library = Some("opaque.dll");
-        let partitions =
+        let borrowed =
             plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64").unwrap();
+        let partitions = emit_header_partition_plan(
+            || snapshot.into_header_partition_plan(&policy, &authorities),
+            &emit,
+            "x64",
+        )
+        .unwrap();
+        assert_eq!(
+            partitions, borrowed,
+            "owned planning must preserve emitted RDL"
+        );
         let rdl = root.join("rdl");
         std::fs::create_dir(&rdl).unwrap();
         write_partitioned_rdl(&rdl, partitions).unwrap();
@@ -4213,7 +4238,15 @@ mod tests {
             )
             .map_err(|error| error.to_string())
             .and_then(|snapshot| {
-                plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64")
+                let borrowed =
+                    plan_header_partitions(&snapshot, &policy, &authorities, &emit, "x64");
+                let owned = emit_header_partition_plan(
+                    || snapshot.into_header_partition_plan(&policy, &authorities),
+                    &emit,
+                    "x64",
+                );
+                assert_eq!(owned, borrowed, "owned planning must preserve rejection");
+                owned
             });
             let error = result.expect_err("opaque classes must never be projected by value");
             std::fs::write(root.join(format!("rejected-{case}.txt")), &error).unwrap();

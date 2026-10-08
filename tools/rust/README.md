@@ -361,8 +361,9 @@ three; `--architecture-jobs 1` explicitly selects sequential architecture proces
 MSBuild/packaged SDK consumers use `WinmdArchitectureJobs`. None of these settings
 changes the selected architectures, include roots, namespace authority or native inputs.
 Normal generation provenance records the worker option in the native argument list.
-Snapshots are released before compilation when emission borrows them; consuming legacy
-paths retain their existing ownership behavior.
+Normal authority planning consumes the extracted snapshot without making a full initial
+clone. Other borrowed snapshots are released before compilation; consuming legacy paths
+retain their existing ownership behavior.
 
 The limit reduces overlapping live workloads, not a guaranteed byte ceiling: libclang
 and allocator retention can still affect process memory. Small serial/parallel fixtures
