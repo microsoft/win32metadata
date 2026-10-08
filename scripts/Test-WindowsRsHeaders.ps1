@@ -59,6 +59,13 @@ function Get-ProjectEvaluation {
 }
 
 try {
+    $buildPositionals = @((Get-Command (Join-Path $PSScriptRoot "BuildMetadataBin.ps1")).ParameterSets.Parameters |
+        Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
+    Assert (($buildPositionals -join ",") -ceq "arch,ArchitectureJobs") "BuildMetadataBin changed existing positional parameter bindings."
+    $generatePositionals = @((Get-Command (Join-Path $PSScriptRoot "Generate-WindowsRsWinmd.ps1")).ParameterSets.Parameters |
+        Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
+    Assert (($generatePositionals -join ",") -ceq "Partition,Architecture,ExtractionCoverage,OutputWinmd,Namespace,ArchitectureJobs") "Generate-WindowsRsWinmd changed existing positional parameter bindings."
+
     New-Item -ItemType Directory -Path $mirror -Force | Out-Null
     Set-Content -LiteralPath $header -Value "enum PREPARATION_VALUE { PREPARATION_MARKER = 1 };" -Encoding ascii
     Invoke-Preparation

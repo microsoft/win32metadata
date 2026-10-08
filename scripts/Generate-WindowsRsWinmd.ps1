@@ -40,9 +40,6 @@ param (
     [ValidateSet("x64", "arm64", "x86")]
     [string[]]$Architecture = @("x64", "x86", "arm64"),
 
-    [ValidateRange(1, 2147483647)]
-    [int]$ArchitectureJobs = 3,
-
     [switch]$UsePartitionAuthority,
 
     [switch]$RawSdk,
@@ -54,7 +51,10 @@ param (
     [ValidateNotNullOrEmpty()]
     [string]$Namespace = "Windows.Win32",
 
-    [switch]$SkipBuild
+    [switch]$SkipBuild,
+
+    [ValidateRange(1, 2147483647)]
+    [int]$ArchitectureJobs = 3
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
