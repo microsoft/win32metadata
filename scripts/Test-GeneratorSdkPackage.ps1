@@ -172,6 +172,36 @@ function Assert-InvalidAnnotation {
     $global:LASTEXITCODE = 0
 }
 
+function Assert-ConflictingAnnotationSelection {
+    $name = "ConflictingAnnotation"
+    $invalidRoot = Join-Path $sample "invalid"
+    $work = Join-Path $root "obj\GeneratorSdkPackageTests\invalid\$name"
+    $output = Join-Path $work "$name.winmd"
+    Remove-Item $work -Recurse -Force -ErrorAction SilentlyContinue
+    New-Item -ItemType Directory -Force -Path $work | Out-Null
+
+    & (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\win-x64\win32metadata-tools.exe") scrape `
+        --partition (Join-Path $invalidRoot "$name.cpp") `
+        --include $invalidRoot `
+        --include (Join-Path $packages "microsoft.windows.winmdgenerator\$version\tools\assets\WinSDK\inc") `
+        --arch x64 `
+        --scope-header $name `
+        --namespace "Sample.Invalid" `
+        --obj $work `
+        --output $output
+    if ($LASTEXITCODE -ne 0 -or !(Test-Path $output)) {
+        throw "Conflicting annotation declarations did not generate a WinMD."
+    }
+
+    $rdlText = (Get-ChildItem (Join-Path $work "rdl") -Filter "*.rdl" -Recurse |
+        ForEach-Object { [System.IO.File]::ReadAllText($_.FullName) }) -join "`n"
+    if ($rdlText -notmatch 'declaration selected=true.*RaiiFree\("CloseFirst"\)' -or
+        $rdlText -notmatch 'declaration selected=false.*RaiiFree\("CloseSecond"\)' -or
+        $rdlText -notmatch 'extern "C" fn ConflictingAnnotation\(\) -> #\[raii_free\("CloseFirst"\)\] i32;') {
+        throw "Conflicting annotation declarations did not preserve the deterministic winner and audit record."
+    }
+}
+
 function Assert-ResourceOverrideGeneration {
     param(
         [string]$Name,
@@ -271,7 +301,7 @@ try {
     Assert-InvalidAnnotation "InvalidAnnotationTarget" "(?i)(associated_constant|invalid target|enum)"
     Assert-InvalidAnnotation "MisplacedAnnotation" "(?i)(retained|not valid|invalid target)"
     Assert-InvalidAnnotation "UnresolvedAnnotation" "(?i)(invalid-handle|sentinel|MISSING_INVALID_HANDLE)"
-    Assert-InvalidAnnotation "ConflictingAnnotation" "(?i)(conflicting|raii_free)"
+    Assert-ConflictingAnnotationSelection
 }
 finally {
     $env:LIBCLANG_PATH = $previousLibClangPath
