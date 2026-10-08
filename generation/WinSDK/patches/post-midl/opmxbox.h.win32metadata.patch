@@ -7,18 +7,25 @@ index 54f5fafd53..be0dd79daa 100644
  //
  //---------------------------------------------------------------------------
  //
-@@ -46,12 +47,12 @@ HRESULT OPMXboxEnableHDCP(
+@@ -40,18 +41,18 @@ typedef enum OPM_HDCP_STATUS
+ //
+ // Request to Enable particular HDCP version
+ //
+-HRESULT OPMXboxEnableHDCP(
++_Win32_ImportLibrary_("opmxbox.dll") HRESULT OPMXboxEnableHDCP(
+     OPM_HDCP_TYPE HDCPType);
+ 
  //
  // Retrieve HDCP on/off status
  //
 -HRESULT OPMXboxGetHDCPStatus(OPM_HDCP_STATUS *pHDCPStatus);
-+HRESULT OPMXboxGetHDCPStatus(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus);
++_Win32_ImportLibrary_("opmxbox.dll") HRESULT OPMXboxGetHDCPStatus(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus);
  
  //
  // Retrieve HDCP on/off status and type
  //
 -HRESULT OPMXboxGetHDCPStatusAndType(OPM_HDCP_STATUS *pHDCPStatus, OPM_HDCP_TYPE *pHDCPType);
-+HRESULT OPMXboxGetHDCPStatusAndType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_TYPE *pHDCPType);
++_Win32_ImportLibrary_("opmxbox.dll") HRESULT OPMXboxGetHDCPStatusAndType(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_STATUS *pHDCPStatus, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") OPM_HDCP_TYPE *pHDCPType);
  
  #ifdef __cplusplus 
  }

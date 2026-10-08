@@ -2,12 +2,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h b/generati
 index d5dd7431a7..613390bd8c 100644
 --- a/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/shared/devioctl.h
-@@ -184,6 +184,29 @@ Revision History:
+@@ -186,4 +186,28 @@ Revision History:
  
- // end_ntddk end_wdm end_nthal end_ntifs
+ #endif // _DEVIOCTL_
  
 +
-+#ifdef WIN32METADATA
++#if defined(WIN32METADATA) && !defined(_WIN32METADATA_DEVIOCTL_H_FILE_DEVICE_TYPE_)
++#define _WIN32METADATA_DEVIOCTL_H_FILE_DEVICE_TYPE_
 +#pragma push_macro("FILE_DEVICE_CD_ROM")
 +#undef FILE_DEVICE_CD_ROM
 +#pragma push_macro("FILE_DEVICE_DISK")
@@ -29,6 +30,4 @@ index d5dd7431a7..613390bd8c 100644
 +#pragma pop_macro("FILE_DEVICE_CD_ROM")
 +#endif
 +
- #endif // _DEVIOCTL_
- 
  // end_winioctl

@@ -10,6 +10,17 @@ index f907576fa1..b2572b66ac 100644
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -111,8 +112,8 @@ extern "C" {
+ 
+ #define WTS_SECURITY_USER_ACCESS              (WTS_SECURITY_CURRENT_GUEST_ACCESS | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_CONNECT )
+ 
+-#define WTS_SECURITY_CURRENT_USER_ACCESS      (WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET \
+-                                               WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF \
++#define WTS_SECURITY_CURRENT_USER_ACCESS      (WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | \
++                                               WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF | \
+                                                WTS_SECURITY_DISCONNECT)
+ 
+ #define WTS_SECURITY_ALL_ACCESS               (STANDARD_RIGHTS_REQUIRED | WTS_SECURITY_QUERY_INFORMATION |       \
 @@ -126,7 +127,7 @@ extern "C" {
  ==   WTS_CONNECTSTATE_CLASS - Session connect state
  =====================================================================*/
