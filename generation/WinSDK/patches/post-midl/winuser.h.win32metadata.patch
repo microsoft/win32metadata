@@ -7646,7 +7646,7 @@ index f99e9294f5..819ac6e4c5 100644
  
  #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
  
-@@ -16485,7 +16496,6608 @@ EnterMoveSizeLoop(
+@@ -16485,7 +16496,6604 @@ EnterMoveSizeLoop(
  }
  #endif  /* __cplusplus */
  
@@ -8777,8 +8777,6 @@ index f99e9294f5..819ac6e4c5 100644
 +
 +
 +#ifdef WIN32METADATA
-+#pragma push_macro("GR_GLOBAL")
-+#undef GR_GLOBAL
 +#pragma push_macro("GR_GDIOBJECTS")
 +#undef GR_GDIOBJECTS
 +#pragma push_macro("GR_GDIOBJECTS_PEAK")
@@ -8789,7 +8787,6 @@ index f99e9294f5..819ac6e4c5 100644
 +#undef GR_USEROBJECTS_PEAK
 +enum GET_GUI_RESOURCES_FLAGS : unsigned int
 +{
-+    GR_GLOBAL = 4294967294U,
 +    GR_GDIOBJECTS = 0U,
 +    GR_GDIOBJECTS_PEAK = 2U,
 +    GR_USEROBJECTS = 1U,
@@ -8799,7 +8796,6 @@ index f99e9294f5..819ac6e4c5 100644
 +#pragma pop_macro("GR_USEROBJECTS")
 +#pragma pop_macro("GR_GDIOBJECTS_PEAK")
 +#pragma pop_macro("GR_GDIOBJECTS")
-+#pragma pop_macro("GR_GLOBAL")
 +#endif
 +
 +#ifdef WIN32METADATA

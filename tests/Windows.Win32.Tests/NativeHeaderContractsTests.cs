@@ -174,6 +174,78 @@ namespace Windows.Win32.Tests
             }
         }
 
+        [Fact]
+        public void GuiResourceFlagsContainOnlyTheFourNativeDwordFlags()
+        {
+            var type = this.GetTypeDefinition("Windows.Win32.UI.WindowsAndMessaging", "GET_GUI_RESOURCES_FLAGS");
+            var fields = type.GetFields().Select(this.reader.GetFieldDefinition).ToArray();
+            var underlying = Assert.Single(fields.Where(field => this.reader.GetString(field.Name) == "value__"));
+            Assert.Equal("uint", underlying.DecodeSignature(this.signatureProvider, null));
+            var literals = fields.Where(field => (field.Attributes & FieldAttributes.Literal) != 0).ToArray();
+            var expected = new Dictionary<string, uint>
+            {
+                { "GR_GDIOBJECTS", 0 },
+                { "GR_GDIOBJECTS_PEAK", 2 },
+                { "GR_USEROBJECTS", 1 },
+                { "GR_USEROBJECTS_PEAK", 4 },
+            };
+            Assert.Equal(expected.Keys.OrderBy(name => name), literals.Select(field => this.reader.GetString(field.Name)).OrderBy(name => name));
+            foreach (var field in literals)
+            {
+                var constant = this.reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                var value = this.reader.GetBlobReader(constant.Value);
+                Assert.Equal(expected[this.reader.GetString(field.Name)], value.ReadUInt32());
+                Assert.Equal(0, value.RemainingBytes);
+            }
+        }
+
+        [Fact]
+        public void GuiResourceGlobalConstantRemainsAPseudoHandle()
+        {
+            var type = this.GetTypeDefinition("Windows.Win32.UI.WindowsAndMessaging", "Apis");
+            var field = Assert.Single(type.GetFields().Select(this.reader.GetFieldDefinition)
+                .Where(field => this.reader.GetString(field.Name) == "GR_GLOBAL"));
+            Assert.Equal("Windows.Win32.System.SystemServices.HANDLE", field.DecodeSignature(this.signatureProvider, null));
+            var constant = this.reader.GetConstant(field.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
+            var value = this.reader.GetBlobReader(constant.Value);
+            Assert.Equal(-2, value.ReadInt32());
+            Assert.Equal(0, value.RemainingBytes);
+        }
+
+        [Fact]
+        public void GuiResourceMethodKeepsHandleAndFlagDomainsSeparate()
+        {
+            var type = this.GetTypeDefinition("Windows.Win32.System.Threading", "Apis");
+            var methods = type.GetMethods().Select(this.reader.GetMethodDefinition)
+                .Where(method => this.reader.GetString(method.Name) == "GetGuiResources").ToArray();
+            Assert.NotEmpty(methods);
+            foreach (var method in methods)
+            {
+                var signature = method.DecodeSignature(this.signatureProvider, null);
+                Assert.Equal("uint", signature.ReturnType);
+                Assert.Equal(new[] { "Windows.Win32.System.SystemServices.HANDLE", "uint" }, signature.ParameterTypes.ToArray());
+                var parameters = method.GetParameters().Select(this.reader.GetParameter)
+                    .Where(parameter => parameter.SequenceNumber != 0).OrderBy(parameter => parameter.SequenceNumber).ToArray();
+                Assert.Equal(new[] { "hProcess", "uiFlags" }, parameters.Select(parameter => this.reader.GetString(parameter.Name)).ToArray());
+                Assert.All(parameters, parameter => Assert.Equal(ParameterAttributes.In, parameter.Attributes));
+                Assert.Empty(parameters[0].GetCustomAttributes());
+                var attribute = this.reader.GetCustomAttribute(Assert.Single(parameters[1].GetCustomAttributes()));
+                Assert.Equal("Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute", this.GetAttributeTypeName(attribute));
+                var value = this.reader.GetBlobReader(attribute.Value);
+                Assert.Equal(1, value.ReadUInt16());
+                Assert.Equal("GET_GUI_RESOURCES_FLAGS", value.ReadSerializedString());
+                Assert.Equal(0, value.ReadUInt16());
+                Assert.Equal(0, value.RemainingBytes);
+                var import = method.GetImport();
+                Assert.Equal("user32.dll", this.reader.GetString(this.reader.GetModuleReference(import.Module).Name), ignoreCase: true);
+                Assert.Equal("GetGuiResources", this.reader.GetString(import.Name));
+                Assert.Equal(MethodImportAttributes.CallingConventionWinApi, import.Attributes & MethodImportAttributes.CallingConventionMask);
+                Assert.True((import.Attributes & MethodImportAttributes.SetLastError) != 0);
+            }
+        }
+
         public void Dispose()
         {
             this.image.Dispose();
