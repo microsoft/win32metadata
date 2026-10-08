@@ -30,7 +30,7 @@ namespace Windows.Win32.Tests
             AssertInterfaceLayout(this.typeSystem, info);
         }
 
-        public static void AssertInterfaceLayout(DecompilerTypeSystem typeSystem, InterfaceInfo info)
+        internal static void AssertInterfaceLayout(DecompilerTypeSystem typeSystem, InterfaceInfo info)
         {
             var winmdInterface = WinmdTestUtils.GetInterfaceInfo(typeSystem, info.Name);
             var jsonText = Newtonsoft.Json.JsonConvert.SerializeObject(winmdInterface, formatting: Newtonsoft.Json.Formatting.Indented);
