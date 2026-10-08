@@ -111,7 +111,7 @@ namespace Windows.Win32.Tests
                 Assert.Equal(MethodImportAttributes.CallingConventionCDecl, import.Attributes & MethodImportAttributes.CallingConventionMask);
 
                 var signature = method.DecodeSignature(this.signatureProvider, null);
-                Assert.Equal("Windows.Win32.Foundation.HRESULT", signature.ReturnType);
+                Assert.Equal("[Windows]Windows.Foundation.HResult", signature.ReturnType);
                 Assert.Equal(parameterTypes, signature.ParameterTypes.ToArray());
                 var parameters = method.GetParameters().Select(this.reader.GetParameter)
                     .Where(parameter => parameter.SequenceNumber != 0).OrderBy(parameter => parameter.SequenceNumber).ToArray();
@@ -139,27 +139,11 @@ namespace Windows.Win32.Tests
         [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_ALLEVENTS")]
         [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_ALLINPUT")]
         [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_INPUT")]
-        public void NativeEnumAliasesMatchNativeMacrosForEachArchitecture(string typeNamespace, string enumName, string name)
+        public void NativeEnumAliasesHaveNativeValuesForEachArchitecture(string typeNamespace, string enumName, string name)
         {
             var macros = this.GetConstantValues(typeNamespace, "Apis", name);
             var members = this.GetConstantValues(typeNamespace, enumName, name);
-            Assert.NotEmpty(macros);
-            Assert.NotEmpty(members);
-            foreach (var member in members)
-            {
-                var overlappingMacros = macros.Where(macro => (macro.Architectures & member.Architectures) != 0).ToArray();
-                Assert.NotEmpty(overlappingMacros);
-                foreach (var macro in overlappingMacros)
-                {
-                    Assert.Equal(macro.Value, member.Value);
-                }
-            }
-
-            foreach (var macro in macros)
-            {
-                var coveredArchitectures = members.Aggregate(0, (mask, member) => mask | member.Architectures);
-                Assert.Equal(macro.Architectures, macro.Architectures & coveredArchitectures);
-            }
+            NativeConstantContractAssertions.Verify(name, members, macros);
         }
 
         public void Dispose()
