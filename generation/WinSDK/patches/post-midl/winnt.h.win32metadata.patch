@@ -1039,7 +1039,7 @@ index f76840c470..50a105f3ed 100644
  
  #if defined(_M_AMD64) && !defined(_M_ARM64EC) && !defined(__midl)
  
-@@ -26606,5 +26607,3882 @@ NtReadCurrentTebPVOID (
+@@ -26606,5 +26607,3886 @@ NtReadCurrentTebPVOID (
  #pragma warning(default:4214) // bit field types other than int
  #endif
  
@@ -2483,10 +2483,14 @@ index f76840c470..50a105f3ed 100644
 +#undef IMAGE_ROM_OPTIONAL_HDR_MAGIC
 +enum IMAGE_OPTIONAL_HEADER_MAGIC : unsigned short
 +{
-+    IMAGE_NT_OPTIONAL_HDR_MAGIC = 523,
 +    IMAGE_NT_OPTIONAL_HDR32_MAGIC = 267,
 +    IMAGE_NT_OPTIONAL_HDR64_MAGIC = 523,
 +    IMAGE_ROM_OPTIONAL_HDR_MAGIC = 263,
++#ifdef _WIN64
++    IMAGE_NT_OPTIONAL_HDR_MAGIC = IMAGE_NT_OPTIONAL_HDR64_MAGIC,
++#else
++    IMAGE_NT_OPTIONAL_HDR_MAGIC = IMAGE_NT_OPTIONAL_HDR32_MAGIC,
++#endif
 +};
 +#pragma pop_macro("IMAGE_ROM_OPTIONAL_HDR_MAGIC")
 +#pragma pop_macro("IMAGE_NT_OPTIONAL_HDR64_MAGIC")

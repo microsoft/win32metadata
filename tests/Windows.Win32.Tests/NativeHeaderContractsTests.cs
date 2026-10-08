@@ -131,6 +131,37 @@ namespace Windows.Win32.Tests
             }
         }
 
+        [Theory]
+        [InlineData("Windows.Win32.System.SystemServices", "IMAGE_OPTIONAL_HEADER_MAGIC", "IMAGE_NT_OPTIONAL_HDR_MAGIC")]
+        [InlineData("Windows.Win32.UI.Shell", "SHCNF_FLAGS", "SHCNF_PATH")]
+        [InlineData("Windows.Win32.UI.Shell", "SHCNF_FLAGS", "SHCNF_PRINTER")]
+        [InlineData("Windows.Win32.UI.WindowsAndMessaging", "PEEK_MESSAGE_REMOVE_TYPE", "PM_QS_INPUT")]
+        [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_ALLEVENTS")]
+        [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_ALLINPUT")]
+        [InlineData("Windows.Win32.UI.WindowsAndMessaging", "QUEUE_STATUS_FLAGS", "QS_INPUT")]
+        public void NativeEnumAliasesMatchNativeMacrosForEachArchitecture(string typeNamespace, string enumName, string name)
+        {
+            var macros = this.GetConstantValues(typeNamespace, "Apis", name);
+            var members = this.GetConstantValues(typeNamespace, enumName, name);
+            Assert.NotEmpty(macros);
+            Assert.NotEmpty(members);
+            foreach (var member in members)
+            {
+                var overlappingMacros = macros.Where(macro => (macro.Architectures & member.Architectures) != 0).ToArray();
+                Assert.NotEmpty(overlappingMacros);
+                foreach (var macro in overlappingMacros)
+                {
+                    Assert.Equal(macro.Value, member.Value);
+                }
+            }
+
+            foreach (var macro in macros)
+            {
+                var coveredArchitectures = members.Aggregate(0, (mask, member) => mask | member.Architectures);
+                Assert.Equal(macro.Architectures, macro.Architectures & coveredArchitectures);
+            }
+        }
+
         public void Dispose()
         {
             this.image.Dispose();
@@ -140,6 +171,54 @@ namespace Windows.Win32.Tests
         {
             return Assert.Single(this.reader.TypeDefinitions.Select(this.reader.GetTypeDefinition)
                 .Where(type => this.reader.GetString(type.Namespace) == typeNamespace && this.reader.GetString(type.Name) == name));
+        }
+
+        private List<(int Architectures, long Value)> GetConstantValues(string typeNamespace, string owner, string name)
+        {
+            var result = new List<(int Architectures, long Value)>();
+            foreach (var type in this.reader.TypeDefinitions.Select(this.reader.GetTypeDefinition)
+                .Where(type => this.reader.GetString(type.Namespace) == typeNamespace && this.reader.GetString(type.Name) == owner))
+            {
+                foreach (var field in type.GetFields().Select(this.reader.GetFieldDefinition)
+                    .Where(field => this.reader.GetString(field.Name) == name))
+                {
+                    Assert.True((field.Attributes & FieldAttributes.Literal) != 0);
+                    var constant = this.reader.GetConstant(field.GetDefaultValue());
+                    var blob = this.reader.GetBlobReader(constant.Value);
+                    long value = constant.TypeCode switch
+                    {
+                        ConstantTypeCode.UInt16 => blob.ReadUInt16(),
+                        ConstantTypeCode.UInt32 => blob.ReadUInt32(),
+                        ConstantTypeCode.Int32 => blob.ReadInt32(),
+                        _ => throw new InvalidOperationException($"Unexpected constant representation for {name}: {constant.TypeCode}"),
+                    };
+                    Assert.Equal(0, blob.RemainingBytes);
+                    var architectures = this.GetArchitectureMask(type.GetCustomAttributes()) & this.GetArchitectureMask(field.GetCustomAttributes());
+                    Assert.NotEqual(0, architectures);
+                    result.Add((architectures, value));
+                }
+            }
+
+            return result;
+        }
+
+        private int GetArchitectureMask(CustomAttributeHandleCollection attributes)
+        {
+            var matches = attributes.Select(this.reader.GetCustomAttribute)
+                .Where(attribute => this.GetAttributeTypeName(attribute) == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute").ToArray();
+            if (matches.Length == 0)
+            {
+                return 7;
+            }
+
+            var attribute = Assert.Single(matches);
+            var value = this.reader.GetBlobReader(attribute.Value);
+            Assert.Equal(1, value.ReadUInt16());
+            var mask = value.ReadInt32();
+            Assert.InRange(mask, 1, 7);
+            Assert.Equal(0, value.ReadUInt16());
+            Assert.Equal(0, value.RemainingBytes);
+            return mask;
         }
 
         private string GetAttributeTypeName(CustomAttribute attribute)

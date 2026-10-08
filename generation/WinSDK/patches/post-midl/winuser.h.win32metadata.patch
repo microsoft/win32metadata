@@ -7646,7 +7646,7 @@ index f99e9294f5..819ac6e4c5 100644
  
  #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
  
-@@ -16485,7 +16496,6602 @@ EnterMoveSizeLoop(
+@@ -16485,7 +16496,6608 @@ EnterMoveSizeLoop(
  }
  #endif  /* __cplusplus */
  
@@ -13205,11 +13205,8 @@ index f99e9294f5..819ac6e4c5 100644
 +#undef QS_TIMER
 +enum [[clang::flag_enum]] QUEUE_STATUS_FLAGS : unsigned int
 +{
-+    QS_ALLEVENTS = 1215U,
-+    QS_ALLINPUT = 1279U,
 +    QS_ALLPOSTMESSAGE = 256U,
 +    QS_HOTKEY = 128U,
-+    QS_INPUT = 1031U,
 +    QS_KEY = 1U,
 +    QS_MOUSE = 6U,
 +    QS_MOUSEBUTTON = 4U,
@@ -13219,6 +13216,15 @@ index f99e9294f5..819ac6e4c5 100644
 +    QS_RAWINPUT = 1024U,
 +    QS_SENDMESSAGE = 64U,
 +    QS_TIMER = 16U,
++#if (_WIN32_WINNT >= 0x0602)
++    QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT | QS_TOUCH | QS_POINTER,
++#elif (_WIN32_WINNT >= 0x0501)
++    QS_INPUT = QS_MOUSE | QS_KEY | QS_RAWINPUT,
++#else
++    QS_INPUT = QS_MOUSE | QS_KEY,
++#endif
++    QS_ALLEVENTS = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY,
++    QS_ALLINPUT = QS_INPUT | QS_POSTMESSAGE | QS_TIMER | QS_PAINT | QS_HOTKEY | QS_SENDMESSAGE,
 +};
 +#pragma pop_macro("QS_TIMER")
 +#pragma pop_macro("QS_SENDMESSAGE")
@@ -13296,7 +13302,7 @@ index f99e9294f5..819ac6e4c5 100644
 +    PM_NOREMOVE = 0U,
 +    PM_REMOVE = 1U,
 +    PM_NOYIELD = 2U,
-+    PM_QS_INPUT = 67567616U,
++    PM_QS_INPUT = (QS_INPUT << 16),
 +    PM_QS_POSTMESSAGE = 9961472U,
 +    PM_QS_PAINT = 2097152U,
 +    PM_QS_SENDMESSAGE = 4194304U,

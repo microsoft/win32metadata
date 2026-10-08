@@ -1028,7 +1028,7 @@ index 04174f8702..5ad1a2cbc9 100644
  #endif // NTDDI_WIN7
  
  #if (_WIN32_IE >= _WIN32_IE_IE70)
-@@ -3599,5 +3610,742 @@ typedef enum tagIESHORTCUTFLAGS
+@@ -3599,5 +3610,747 @@ typedef enum tagIESHORTCUTFLAGS
  }
  #endif  /* __cplusplus */
  
@@ -1198,8 +1198,13 @@ index 04174f8702..5ad1a2cbc9 100644
 +    SHCNF_FLUSH = 4096U,
 +    SHCNF_FLUSHNOWAIT = 12288U,
 +    SHCNF_NOTIFYRECURSIVE = 65536U,
-+    SHCNF_PATH = 5U,
-+    SHCNF_PRINTER = 6U,
++#ifdef UNICODE
++    SHCNF_PATH = SHCNF_PATHW,
++    SHCNF_PRINTER = SHCNF_PRINTERW,
++#else
++    SHCNF_PATH = SHCNF_PATHA,
++    SHCNF_PRINTER = SHCNF_PRINTERA,
++#endif
 +};
 +#pragma pop_macro("SHCNF_PRINTER")
 +#pragma pop_macro("SHCNF_PATH")
