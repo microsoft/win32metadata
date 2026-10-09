@@ -394,8 +394,14 @@ if ($actualText -notmatch 'SampleOutputBuffers[\s\S]*?NativeArrayInfo[\s\S]*?Mem
 if ($actualText -notmatch 'SampleLegacyBuffers[\s\S]*?MemorySize[\s\S]*?NativeArrayInfo') {
     throw "Legacy buffer-size and terminated-string contracts were not emitted."
 }
-if ($actualText -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"[\s\S]*?SetLastError\s*=\s*true[\s\S]*?\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\][\s\S]*?SampleMergedContract') {
-    throw "Compatible redeclarations did not merge import, SetLastError, and availability metadata."
+$mergedContractAttributes = [System.Text.RegularExpressions.Regex]::Match(
+    $actualText,
+    '(?s)(\[DllImport[^\r\n]+\]\s*(?:\[[^\r\n]+\]\s*)*)public static extern int SampleMergedContract'
+).Groups[1].Value
+if ($mergedContractAttributes -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"' -or
+    $mergedContractAttributes -notmatch '\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\]' -or
+    $mergedContractAttributes -match 'SetLastError\s*=\s*true') {
+    throw "Callable selection did not preserve the selected availability, merged import, and selected-only SetLastError metadata."
 }
 if ($actualText -notmatch '\[SupportedArchitecture\s*\(\s*1\s*\)\][\s\S]*?struct SAMPLE_ARCH_VALUE[\s\S]*?public int value;' -or
     $actualText -notmatch '\[SupportedArchitecture\s*\(\s*6\s*\)\][\s\S]*?struct SAMPLE_ARCH_VALUE[\s\S]*?public long value;') {
