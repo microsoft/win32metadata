@@ -1190,12 +1190,21 @@ EXTERN_C const IID IID_IEnumJsStackFrames;
 /* interface __MIDL_itf_jscript9diag_0000_0008 */
 /* [local] */ 
 
+#ifdef WIN32METADATA_AGGREGATE_ROUTING
+enum class JsDebugReadMemoryFlags
+#else
 typedef /* [v1_enum] */ 
 enum JsDebugReadMemoryFlags
+#endif
     {
         None	= 0,
         JsDebugAllowPartialRead	= 0x1
-    } 	JsDebugReadMemoryFlags;
+    }
+#ifdef WIN32METADATA_AGGREGATE_ROUTING
+    ;
+#else
+    JsDebugReadMemoryFlags;
+#endif
 
 
 
@@ -1500,5 +1509,3 @@ extern RPC_IF_HANDLE __MIDL_itf_jscript9diag_0000_0009_v0_0_s_ifspec;
 #endif
 
 #endif
-
-

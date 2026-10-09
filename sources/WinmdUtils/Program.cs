@@ -59,7 +59,7 @@ namespace WinmdUtilsProgram
 
             showDuplicateTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowDuplicateTypes);
 
-            var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constants in a single winmd files.")
+            var showDuplicateConstants = new Command("showDuplicateConstants", "Show duplicate constant names whose supported architectures overlap.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
                 new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore)
@@ -128,7 +128,7 @@ namespace WinmdUtilsProgram
 
             showNamespaceCycles.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowNamespaceCycles);
 
-            var showBrokenArchTypes = new Command("showBrokenArchTypes", "Show broken architecture types.")
+            var showBrokenArchTypes = new Command("showBrokenArchTypes", "Validate type and method references using architecture-matched physical type variants.")
             {
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
             };
@@ -162,100 +162,6 @@ namespace WinmdUtilsProgram
             };
 
             return rootCommand.Invoke(args);
-        }
-
-        private static bool TypeIsPointerToOneOfNames(HashSet<string> names, string type)
-        {
-            int starIndex = type.IndexOf('*');
-            if (starIndex == -1)
-            {
-                return false;
-            }
-
-            string typeOnly = type.Substring(0, starIndex);
-            return names.Contains(typeOnly);
-        }
-
-        private class PointerInfo
-        {
-            public PointerInfo(string name, string type)
-            {
-                this.Name = name;
-                this.Type = type;
-            }
-
-            public string Name { get; }
-            public string Type { get; }
-        }
-
-        private static string GetPointerTypeToOneOfNamesInUseByParameter(HashSet<string> typeNames, MethodSignature<string> methodSignature, IEnumerable<MetadataUtils.ParameterInfo> parameterInfos)
-        {
-            var parameters = parameterInfos.ToArray();
-            for (int i = 0; i < methodSignature.ParameterTypes.Length; i++)
-            {
-                var paramType = methodSignature.ParameterTypes[i];
-                var paramtTypeToTest = paramType;
-                var param = parameters[i];
-
-                if (param.Attributes.HasFlag(ParameterAttributes.Out) && paramtTypeToTest.EndsWith('*'))
-                {
-                    paramtTypeToTest = paramtTypeToTest.Substring(0, paramType.Length - 1);
-                }
-
-                if (TypeIsPointerToOneOfNames(typeNames, paramtTypeToTest))
-                {
-                    return paramType;
-                }
-            }
-
-            return null;
-        }
-
-        private static IEnumerable<PointerInfo> PointerToOneOfNamesInUse(HashSet<string> typeNames, MetadataUtils.TypeInfo typeInfo)
-        {
-            if (typeInfo is StructInfo structInfo)
-            {
-                foreach (var fieldInfo in structInfo.Fields)
-                {
-                    if (TypeIsPointerToOneOfNames(typeNames, fieldInfo.Type))
-                    {
-                        yield return new PointerInfo($"{typeInfo.Namespace}.{typeInfo.Name}.{fieldInfo.Name}", fieldInfo.Type);
-                    }
-                }
-            }
-            else if (typeInfo is InterfaceInfo interfaceInfo)
-            {
-                foreach (var methodInfo in interfaceInfo.Methods)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, methodInfo.MethodSignature, methodInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{interfaceInfo.Namespace}.{interfaceInfo.Name}.{methodInfo.Name}", paramType);
-                    }
-                }
-            }
-            else if (typeInfo is DelegateTypeInfo delegateInfo)
-            {
-                for (int i = 0; i < delegateInfo.MethodSignature.ParameterTypes.Length; i++)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, delegateInfo.MethodSignature, delegateInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{delegateInfo.Namespace}.{delegateInfo.Name}", paramType);
-                    }
-                }
-            }
-            else if (typeInfo is ClassInfo classInfo)
-            {
-                foreach (var methodInfo in classInfo.Methods)
-                {
-                    var paramType = GetPointerTypeToOneOfNamesInUseByParameter(typeNames, methodInfo.MethodSignature, methodInfo.Parameters);
-                    if (paramType != null)
-                    {
-                        yield return new PointerInfo($"{classInfo.Namespace}.{classInfo.Name}.{methodInfo.Name}", paramType);
-                    }
-                }
-            }
         }
 
         public static int CreateLibRsp(string[] lib, string[] libDir, string[] exclude, FileInfo outputRsp, FileInfo inputRsp, IConsole console)
@@ -427,30 +333,22 @@ namespace WinmdUtilsProgram
 
         public static int ShowPointersToDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName, MetadataReaderOptions.None);
             List<WinmdUtils> allWinmds = new List<WinmdUtils>{ w1 };
             bool pointersFound = false;
 
-            HashSet<string> delegateNames = new HashSet<string>(w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo).Select(d => $"{d.Namespace}.{d.Name}"));
-
-            foreach (var type in w1.GetTypes(allWinmds))
+            foreach (var pointerInUse in DelegateValidator.FindPointersToDelegates(w1.GetTypes(allWinmds), allowItem))
             {
-                foreach (var pointerInUse in PointerToOneOfNamesInUse(delegateNames, type))
+                if (!pointersFound)
                 {
-                    if (allowTable.Contains(pointerInUse.Name))
-                    {
-                        continue;
-                    }
-
-                    if (!pointersFound)
-                    {
-                        console.Out.Write("Pointers to delegates detected:\r\n");
-                        pointersFound = true;
-                    }
-
-                    console?.Out.Write($"{pointerInUse.Type},{pointerInUse.Name}\r\n");
+                    console.Out.Write("Pointers to delegates detected:\r\n");
+                    pointersFound = true;
                 }
+
+                string name = pointerInUse.ParameterSequence.HasValue
+                    ? $"{pointerInUse.Name}.{pointerInUse.ParameterName}"
+                    : pointerInUse.Name;
+                console?.Out.Write($"{pointerInUse.Type},{name}\r\n");
             }
 
             if (!pointersFound)
@@ -470,7 +368,10 @@ namespace WinmdUtilsProgram
             var suggestedRemappingRegEx = new Regex(@"Recommended remapping: '([^\']*)'");
             bool suggestedRemappingsFound = false;
 
-            var files = Directory.GetFiles(Path.Combine(projectRoot, "obj/scratch"), "*.txt", SearchOption.AllDirectories);
+            var scratchDirectory = Path.Combine(projectRoot, "obj/scratch");
+            var files = Directory.Exists(scratchDirectory)
+                ? Directory.GetFiles(scratchDirectory, "*.txt", SearchOption.AllDirectories)
+                : Array.Empty<string>();
             foreach (var file in files)
             {
                 var lines = File.ReadLines(file);
@@ -512,88 +413,28 @@ namespace WinmdUtilsProgram
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
             HashSet<string> allowTable = new HashSet<string>(allowItem);
-            Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
-
-            foreach (var type in winmd1.GetTopLevelTypeDefinitions())
-            {
-                if (type.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type.ParentModule != winmd1.MainModule)
-                {
-                    continue;
-                }
-
-                // Skip enums marked as a scoped enum (like a C++ class enum).
-                // We don't count these in the duplicated constants
-                if (type.Kind == TypeKind.Enum)
-                {
-                    if (type.GetAttributes().Any(a => a.AttributeType.Name == "ScopedEnumAttribute"))
-                    {
-                        continue;
-                    }
-                }
-
-                // See if this is a guid-only struct. Count it as a guid constant so that we don't
-                // duplicate a guid between a struct and a const
-                if (type.Kind == TypeKind.Struct &&
-                    type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
-                    !type.GetFields().Any())
-                {
-                    if (!nameToOwner.TryGetValue(type.Name.ToUpper(), out var owners))
-                    {
-                        owners = new List<string>();
-                        nameToOwner[type.Name.ToUpper()] = owners;
-                    }
-
-                    owners.Add(type.FullName);
-                }
-
-                if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
-                {
-                    foreach (var field in type.GetFields(options: GetMemberOptions.IgnoreInheritedMembers))
-                    {
-                        if (field.Name == "value__")
-                        {
-                            continue;
-                        }
-
-                        if (!nameToOwner.TryGetValue(field.Name.ToUpper(), out var owners))
-                        {
-                            owners = new List<string>();
-                            nameToOwner[field.Name.ToUpper()] = owners;
-                        }
-
-                        owners.Add(type.FullName);
-                    }
-                }
-            }
+            var duplicates = ConstantValidator.FindDuplicates(winmd1.GetTopLevelTypeDefinitions()
+                .Where(t => t.FullName != "<Module>" && t.ParentModule == winmd1.MainModule));
 
             bool dupsFound = false;
-            foreach (var pair in nameToOwner)
+            foreach (var duplicate in duplicates)
             {
-                if (allowTable.Contains(pair.Key))
+                // Preserve the legacy current-culture uppercase allowance key.
+                if (allowTable.Contains(duplicate.Name.ToUpper()))
                 {
                     continue;
                 }
 
-                if (pair.Value.Count > 1)
+                if (dupsFound == false)
                 {
-                    if (dupsFound == false)
-                    {
-                        dupsFound = true;
-                        console.Out.Write("Duplicate constants/enum names detected:\r\n");
-                    }
+                    dupsFound = true;
+                    console.Out.Write("Duplicate constants/enum names detected:\r\n");
+                }
 
-                    pair.Value.Sort();
-
-                    console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var owner in pair.Value)
-                    {
-                        console?.Out.Write($"  {owner}\r\n");
-                    }
+                console?.Out.Write($"{duplicate.Name}\r\n");
+                foreach (var owner in duplicate.Owners)
+                {
+                    console?.Out.Write($"  {owner}\r\n");
                 }
             }
 
@@ -608,85 +449,30 @@ namespace WinmdUtilsProgram
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
-
-            Dictionary<string, List<string>> nameToNamespaces = new Dictionary<string, List<string>>();
-
-            foreach (var type1 in winmd1.GetTopLevelTypeDefinitions())
-            {
-                if (type1.FullName == "<Module>")
-                {
-                    continue;
-                }
-
-                if (type1.ParentModule != winmd1.MainModule)
-                {
-                    continue;
-                }
-
-                var typeName = type1.Name;
-                if (type1.Kind == TypeKind.Class && typeName == "Apis")
-                {
-                    continue;
-                }
-
-                StringBuilder members = new StringBuilder();
-                foreach (var m in type1.Members)
-                {
-                    if (type1.Kind == TypeKind.Enum && m.Name == "value__")
-                    {
-                        continue;
-                    }
-
-                    if (m.Name == ".ctor")
-                    {
-                        continue;
-                    }
-
-                    if (members.Length != 0)
-                    {
-                        members.Append(',');
-                    }
-
-                    members.Append(m.Name);
-                }
-
-                if (members.Length != 0)
-                {
-                    typeName += $"({members})";
-                }
-
-                string archInfo = GetArchInfo(type1.GetAttributes());
-                if (!string.IsNullOrEmpty(archInfo))
-                {
-                    typeName += $"({archInfo})";
-                }
-
-                if (!nameToNamespaces.TryGetValue(typeName, out var namespaces))
-                {
-                    namespaces = new List<string>();
-                    nameToNamespaces[typeName] = namespaces;
-                }
-
-                namespaces.Add(type1.Namespace);
-            }
+            var duplicates = TypeDuplicateValidator.FindDuplicates(winmd1.GetTopLevelTypeDefinitions()
+                .Where(t => t.FullName != "<Module>" && t.ParentModule == winmd1.MainModule));
 
             bool dupsFound = false;
-            foreach (var pair in nameToNamespaces)
+            foreach (var duplicate in duplicates)
             {
-                if (pair.Value.Count > 1)
+                if (!dupsFound)
                 {
-                    if (dupsFound == false)
-                    {
-                        dupsFound = true;
-                        console.Out.Write("Duplicate types detected:\r\n");
-                    }
+                    dupsFound = true;
+                    console.Out.Write("Duplicate types detected:\r\n");
+                }
 
-                    pair.Value.Sort();
+                console.Out.Write($"{duplicate.Name} ({duplicate.Architectures})\r\n");
+                foreach (var owner in duplicate.Owners)
+                {
+                    console.Out.Write($"  {owner}\r\n");
+                }
 
-                    console?.Out.Write($"{pair.Key}\r\n");
-                    foreach (var ns in pair.Value)
+                if (duplicate.Collisions.Count != duplicate.Owners.Count * (duplicate.Owners.Count - 1) / 2 ||
+                    duplicate.Collisions.Any(c => c.Architectures != duplicate.Architectures))
+                {
+                    foreach (var collision in duplicate.Collisions)
                     {
-                        console?.Out.Write($"  {ns}\r\n");
+                        console.Out.Write($"    {collision.FirstOwner} <-> {collision.SecondOwner} ({collision.Architectures})\r\n");
                     }
                 }
             }
@@ -701,27 +487,18 @@ namespace WinmdUtilsProgram
 
         public static int ShowEmptyDelegates(FileInfo winmd, string[] allowItem, IConsole console)
         {
-            HashSet<string> allowTable = new HashSet<string>(allowItem);
-            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName, MetadataReaderOptions.None);
             List<WinmdUtils> allWinmds = new List<WinmdUtils> { w1 };
             bool emptyFound = false;
-            foreach (DelegateTypeInfo type in w1.GetTypes(allWinmds).Where(t => t is DelegateTypeInfo))
+            foreach (var type in DelegateValidator.FindEmptyDelegates(w1.GetTypes(allWinmds), allowItem))
             {
-                if (!type.Parameters.Any())
+                if (!emptyFound)
                 {
-                    if (allowTable.Contains(type.Name))
-                    {
-                        continue;
-                    }
-
-                    if (!emptyFound)
-                    {
-                        emptyFound = true;
-                        console.Out.Write("Empty delegates detected:\r\n");
-                    }
-
-                    console?.Out.Write($"{type.Name}\r\n");
+                    emptyFound = true;
+                    console.Out.Write("Empty delegates detected:\r\n");
                 }
+
+                console?.Out.Write($"{type.Name}\r\n");
             }
 
 
@@ -745,137 +522,21 @@ namespace WinmdUtilsProgram
             return string.Empty;
         }
 
-        private static bool VerifyTypeHasRightArch(
-            Dictionary<string, List<ITypeDefinition>> namesToArchDefs,
-            IEntity owner,
-            IType type,
-            Architecture requiredArch,
-            IConsole console)
-        {
-            bool success = true;
-
-            if (owner != type)
-            {
-                var currentType = type;
-                while (currentType.Kind == TypeKind.Array)
-                {
-                    ArrayType arrayType = (ArrayType)currentType;
-                    currentType = arrayType.ElementType;
-                }
-
-                while (currentType.Kind == TypeKind.Pointer)
-                {
-                    PointerType pointerType = (PointerType)currentType;
-                    currentType = pointerType.ElementType;
-                }
-
-                // If the type isn't in the map, it's not arch-specific, so return success
-                if (!namesToArchDefs.TryGetValue(currentType.FullName, out var foundArchTypes))
-                {
-                    return true;
-                }
-
-                bool found = false;
-                Architecture typeArches = Architecture.None;
-                foreach (var archType in foundArchTypes)
-                {
-                    var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
-
-                    var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
-                    typeArches |= typeArch;
-                    if ((typeArches & requiredArch) == requiredArch)
-                    {
-                        found = true;
-                        break;
-                    }
-                }
-
-                if (!found)
-                {
-                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{typeArches}'");
-                    success = false;
-                }
-            }
-
-            if (type.Kind == TypeKind.Struct)
-            {
-                foreach (var field in type.GetFields())
-                {
-                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, field.Type, requiredArch, console))
-                    {
-                        success = false;
-                    }
-                }
-            }
-            else if (type.Kind == TypeKind.Delegate)
-            {
-                var invoke = type.GetMethods(m => m.Name == "Invoke").Single();
-                foreach (var param in invoke.Parameters)
-                {
-                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, param.Type, requiredArch, console))
-                    {
-                        success = false;
-                    }
-                }
-            }
-
-            return success;
-        }
-
         public static int ShowBrokenArchTypes(FileInfo winmd, IConsole console)
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
-
-            int badTopLevelTypes = 0;
-            Dictionary<string, List<ITypeDefinition>> namesToArchDefs = new Dictionary<string, List<ITypeDefinition>>();
-
-            foreach (var type in winmd1.GetTopLevelTypeDefinitions()
-                .Where(t => t.GetAttributes()
-                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
+            var diagnostics = ArchitectureValidator.FindMismatches(winmd1.GetTopLevelTypeDefinitions());
+            foreach (var diagnostic in diagnostics)
             {
-                if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
-                {
-                    list = new();
-                    namesToArchDefs[type.FullName] = list;
-                }
-
-                list.Add(type);
+                console.Out.Write($"{diagnostic.Owner} supports '{diagnostic.Required}' but referenced type {diagnostic.ReferencedType} only supports '{diagnostic.Supported}'\r\n");
             }
 
-            foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
-            {
-                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
-                Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
-
-                if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
-                {
-                    badTopLevelTypes++;
-                }
-            }
-
-            foreach (var apisClass in winmd1.GetTopLevelTypeDefinitions().Where(t => t.Kind == TypeKind.Class && t.Name == "Apis"))
-            {
-                foreach (var method in apisClass.Methods.Where(
-                    m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
-                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute")))
-                {
-                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
-                    Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
-
-                    foreach (var param in method.Parameters)
-                    {
-                        VerifyTypeHasRightArch(namesToArchDefs, method, param.Type, arch, console);
-                    }
-                }
-            }
-
-            if (badTopLevelTypes == 0)
+            if (diagnostics.Count == 0)
             {
                 console.Out.Write("No broken arch-specific types or methods found.\r\n");
             }
 
-            return badTopLevelTypes == 0 ? 0 : -1;
+            return diagnostics.Count == 0 ? 0 : -1;
         }
 
         public static int ShowNamespaceCycles(FileInfo winmd, IConsole console)
@@ -1930,8 +1591,12 @@ namespace WinmdUtilsProgram
 
                     try
                     {
-                        var fullTypeName = new ICSharpCode.Decompiler.TypeSystem.FullTypeName(fullName);
-                        var syntaxTree = decompiler.DecompileType(fullTypeName);
+                        var syntaxTree = decompiler.Decompile(handle);
+                        if (!string.IsNullOrEmpty(ns))
+                        {
+                            writer.WriteLine($"namespace {ns};");
+                            writer.WriteLine();
+                        }
                         writer.WriteLine(syntaxTree.ToString());
                     }
                     catch (Exception ex)

@@ -5,6 +5,9 @@ _LUID
 COMPARTMENT_ID
 _FLOAT128
 _OBJECT_ATTRIBUTES
+CCHAR
+NTSTATUS
+PLONG
 --traverse
 <IncludeRoot>/shared/ntdef.h
 --namespace

@@ -1,16 +1,24 @@
 param
 (
     [switch]
-    $assetsScrapedSeparately,
-
-    [switch]
     $skipInstallTools,
 
     [switch]
     $Clean,
 
     [switch]
-    $Debug
+    $Debug,
+
+    [switch]
+    $RawSdk,
+
+    [ValidateSet("crossarch", "x64", "x86", "arm64")]
+    [string]
+    $arch = "crossarch",
+
+    [ValidateRange(1, 2147483647)]
+    [int]
+    $ArchitectureJobs = 3
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -27,19 +35,10 @@ if (!$skipInstallTools.IsPresent)
 
 $assemblyVersion = nbgv get-version -v AssemblyVersion
 
-$arch = "crossarch"
-
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 
 Write-Host "`n"
 Write-Host "*** Creating $outputWinmdFileName..." -ForegroundColor Blue
-
-$skipScraping = "false"
-
-if ($assetsScrapedSeparately)
-{
-    $skipScraping = "true"
-}
 
 if ($Debug)
 {
@@ -54,8 +53,27 @@ $rootDir = [System.IO.Path]::GetFullPath("$PSScriptRoot\..")
 
 # Explicitly restore the Win32Metadata project to avoid issues restore happening during build
 & dotnet restore "$windowsWin32ProjectRoot" --configfile "$rootDir\nuget.Config"
+ThrowOnNativeProcessError
 
 $timestamp = Get-Date -Format "yyyyMMddHHmmss"
 $logFile = "$PSScriptRoot\..\bin\logs\BuildMetadataBin_$timestamp.binlog"
-& dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping "-bl:$logFile" --no-restore
+$buildArgs = @(
+    "build",
+    $windowsWin32ProjectRoot,
+    "-c", $configuration,
+    "-t:EmitWinmd",
+    "-p:WinmdVersion=$assemblyVersion",
+    "-p:OutputWinmd=$outputWinmdFileName",
+    "-p:WinmdArchitectureJobs=$ArchitectureJobs",
+    "-bl:$logFile",
+    "--no-restore"
+)
+if ($arch -ne "crossarch")
+{
+    $buildArgs += "-p:TargetArchitectures=$arch"
+}
+if ($RawSdk) {
+    $buildArgs += "-p:WinmdUsePartitionAuthority=false"
+}
+& dotnet @buildArgs
 ThrowOnNativeProcessError

@@ -8,7 +8,6 @@ DWRITE_PAINT_FEATURE_LEVEL
 <IncludeRoot>/um/d2d1_2helper.h
 <IncludeRoot>/um/d2d1_3helper.h
 <IncludeRoot>/um/d2d1_1helper.h
-<IncludeRoot>/um/dciddi.h
 <IncludeRoot>/um/d2dbasetypes.h
 <IncludeRoot>/um/d2d1.h
 <IncludeRoot>/um/d2d1_1.h

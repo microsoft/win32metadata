@@ -1,7 +1,5 @@
 --traverse
 <IncludeRoot>/shared/ntddvdeo.h
-<IncludeRoot>/um/dxcore_interface.h
-<IncludeRoot>/um/dxcore.h
 <IncludeRoot>/um/winddi.h
 --namespace
 Windows.Win32.Devices.Display

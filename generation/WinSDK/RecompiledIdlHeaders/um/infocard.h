@@ -32,14 +32,24 @@ typedef enum _HandleType
 // random bytes. "ANSI X.923" fills the bytes with zeros and puts the number of padding
 // bytes in the last byte.
 
+#ifdef WIN32METADATA_AGGREGATE_ROUTING
+enum class _PaddingMode
+#else
 typedef enum _PaddingMode
+#endif
 {
     None     = 1,
     PKCS7    = 2,
     Zeros    = 3,
     ANSIX923 = 4,
     ISO10126 = 5
-} PaddingMode;
+}
+#ifdef WIN32METADATA_AGGREGATE_ROUTING
+;
+typedef _PaddingMode PaddingMode;
+#else
+PaddingMode;
+#endif
 
 typedef enum _Direction
 {

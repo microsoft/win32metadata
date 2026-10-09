@@ -13,5 +13,3 @@
 <IncludeRoot>/um/gdiplusmem.h
 --namespace
 Windows.Win32.Graphics.GdiPlus
---exclude
-PathData
