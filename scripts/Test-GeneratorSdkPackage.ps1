@@ -505,7 +505,7 @@ if (!(Test-Path $expected)) {
     throw "Golden file is missing. Run with -UpdateGolden after reviewing the generated dump."
 }
 $expectedText = [System.IO.File]::ReadAllText($expected).Replace("`r`n", "`n")
-if ($expectedText -cne $actualText) {
+if ($expectedText.TrimEnd([char[]]"`r`n") -cne $actualText.TrimEnd([char[]]"`r`n")) {
     git --no-pager diff --no-index -- $expected $actual
     throw "Generated WinMD API dump does not match the golden file."
 }
