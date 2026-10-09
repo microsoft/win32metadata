@@ -10284,6 +10284,39 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         );
         assert_ne!(providers[0].origin.tu, providers[1].origin.tu);
         assert_ne!(providers[0].spelling.file, providers[1].spelling.file);
+        let provider_inventory = |snapshot: &windows_clang::Snapshot| {
+            snapshot
+                .facts()
+                .iter()
+                .filter_map(|fact| {
+                    let FactData::Enum { variants, .. } = &fact.data else {
+                        return None;
+                    };
+                    (fact.name == "INTERNET_SCHEME").then(|| {
+                        (
+                            normalize_audit_path(&fact.spelling.file),
+                            variants
+                                .iter()
+                                .map(|variant| (variant.name.clone(), variant.value))
+                                .collect::<Vec<_>>(),
+                        )
+                    })
+                })
+                .collect::<BTreeMap<_, _>>()
+        };
+        let expected_providers = families
+            .iter()
+            .map(|(_, header, _, _, first)| {
+                (
+                    normalize_audit_path(&path_arg(&root.join(header), "--include").unwrap()),
+                    vec![
+                        ("SCHEME_HTTP".to_string(), i64::from(*first)),
+                        ("SCHEME_HTTPS".to_string(), i64::from(*first + 1)),
+                    ],
+                )
+            })
+            .collect::<BTreeMap<_, _>>();
+        assert_eq!(provider_inventory(&snapshot), expected_providers);
         for (partition, header, _, _, first) in families {
             let path = root.join(header);
             let input = authority_owner_input(partition, &path, &format!("um/{header}")).unwrap();
@@ -10315,6 +10348,56 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         .unwrap()]);
         let mut emit = EmitOptions::new("Test", references.types());
         emit.library = Some("fixture.dll");
+        for order in [families, [families[1], families[0]]] {
+            let mut folded_source = String::new();
+            let mut folded_roots = Vec::new();
+            let mut folded_policy = HeaderPartitionPolicy::new();
+            for (partition, header, namespace, _, _) in order {
+                let path = path_arg(&root.join(header), "--include").unwrap();
+                folded_source.push_str(&format!("#include \"{path}\"\n"));
+                folded_roots.push(path.clone());
+                folded_policy.add_traversed_header_for_input(
+                    "incompatible-fold.cpp",
+                    path,
+                    RootPartition::new(partition, namespace),
+                );
+            }
+            let folded = windows_clang::extract(
+                [Input::new("incompatible-fold.cpp", folded_source).with_roots(folded_roots)],
+                &["-x", "c++", "--target=x86_64-pc-windows-msvc"],
+            )
+            .expect("shared guards make either folded include order compile successfully");
+            let observed = provider_inventory(&folded);
+            assert_eq!(observed.len(), 1);
+            assert_ne!(
+                observed, expected_providers,
+                "the isolated provider oracle must reject folding"
+            );
+            let suppressed =
+                normalize_audit_path(&path_arg(&root.join(order[1].1), "--include").unwrap());
+            assert!(!observed.contains_key(&suppressed));
+            let folded_partitions = plan_header_partitions(
+                &folded,
+                &folded_policy,
+                &NamespaceAuthorities::new(),
+                &emit,
+                "x64",
+            )
+            .unwrap();
+            let suppressed_namespace_rdl = folded_partitions
+                .iter()
+                .filter(|(partition, _)| partition.namespace == order[1].2)
+                .map(|(_, rdl)| rdl.as_str())
+                .collect::<String>();
+            assert!(
+                !suppressed_namespace_rdl.contains("enum INTERNET_SCHEME"),
+                "namespace coloring must not invent the suppressed native provider"
+            );
+            println!(
+                "Rejected incompatible fold: {} then {}; suppressed native provider {}",
+                order[0].1, order[1].1, order[1].1
+            );
+        }
         let partitions = plan_header_partitions(
             &snapshot,
             &policy,

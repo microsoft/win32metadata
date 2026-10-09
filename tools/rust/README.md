@@ -225,7 +225,7 @@ raw SDK headers + import libraries + annotation contracts
 
 ## Inner loop
 
-### Opt-in SDK TU folding failure reproducer
+### Opt-in SDK TU folding admission
 
 The ignored `scrape::tests::sdk_folding::sdk_split_and_folded_x64` regression uses
 the pinned raw x64 SDK's `synchapi.h` and `fileapi.h`, actual `kernel32.lib`, and
@@ -235,8 +235,9 @@ raw `void*` to named `LPVOID`. Both physical parameters retain Out and Optional;
 different `#[out]` spelling in reconstructed RDL does not establish direction loss.
 The test checks the compiler-observed SAL capture and exact same-TU typedef source
 against physical WinMD readback, then requires identical signatures and complete
-WinMD-derived RDL. It is a failing reproducer, not a successful folding proof or
-an optimization benchmark.
+WinMD-derived RDL and physical image bytes. The immutable producer candidate
+`dcebd2d50235ea9969956f033125599403663955` closes that narrow defect; this
+repository's product dependencies are not repinned by the harness.
 
 With the pinned SDK packages and Cargo dependencies already cached:
 
@@ -251,6 +252,41 @@ cargo test --release --locked --offline --manifest-path .\tools\rust\Cargo.toml 
 The output must be fresh. It preserves arguments, SDK-root/import-library hashes,
 native facts and a C++ signature probe, both images and their hashes, emitted RDL,
 and exact `ReadFile` RDL lines and physical parameter contracts.
+
+`WIN32METADATA_FOLDING_MODE` accepts `both` (default), `split`, or `folded`;
+`WIN32METADATA_FOLDING_ORDER` accepts `split-first` (default) or `folded-first`.
+Each image records one outer extraction -> ownership/planning -> RDL -> WinMD
+timer in `measurement.tsv`. Native signature probes, metadata oracle readback,
+hashing, and evidence reports are outside that interval. Compilation uses the
+existing RDL reader and metadata-attribute input directly so readback is not timed.
+
+Build the release test executable once with coherent sources for all four
+windows-rs crates. For candidate validation, use an exact `git archive` snapshot
+and transient Cargo overrides, preserve/restore the original lock bytes, and save
+the full `cargo metadata` and JSON build output. Supply a build-evidence JSON with
+`testExecutableSha256` and `sourceHashes` (`Path`/`Hash` entries for both Rust
+sources); include the effective producer commit, archive/override hashes and
+package manifest paths. Evidence comes from that source binding, not a hardcoded pin.
+Then run:
+
+```powershell
+.\scripts\Measure-SdkTuFolding.ps1 -TestExecutable <release-test-executable> `
+    -BuildEvidence <source-bound-build-evidence.json> -OutputRoot <fresh-directory>
+```
+
+The driver runs three fresh-process pairs in S/F, F/S, S/F order, preserving all
+inputs, contracts, images, RDL, logs, commands, binary/source hashes and raw
+timings. It requires identical complete image bytes and RDL within and across
+pairs and unchanged ReadFile flags. `runs.json` and `summary.json` report the
+timings, median and range without statistical claims. Sampled OS peak counters
+are observed lower bounds for the whole fresh process, including probe/readback,
+not pipeline-only or child-process aggregate memory. Build/setup is separate.
+
+The existing `authority_shared_guard_providers_keep_independent_domains` test
+also rejects both deliberately folded shared-guard include orders using the
+isolated providers' exact native source/value oracle. Native compilation succeeds
+but suppresses the second enum provider; namespace colors cannot restore it.
+This synthetic negative control is not a production WinHTTP/WinINet grouping rule.
 
 ### Generation
 

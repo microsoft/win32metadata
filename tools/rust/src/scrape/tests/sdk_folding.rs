@@ -1,5 +1,6 @@
 use super::*;
 use sha2::{Digest, Sha256};
+use std::time::Instant;
 use windows_metadata::{ParamAttributes, Type};
 
 const HEADERS: [(&str, &str, &str); 2] = [
@@ -44,7 +45,7 @@ fn sdk_split_and_folded_x64() {
     let mut native_libraries = LibraryMap::default();
     native_libraries.import_library(&lib).unwrap();
     let mut inputs_manifest = format!(
-        "producer\t90fede97db840d543635ceeddd018bfdeef023f1\nsdk\t{}\nlib\t{}\t{:X}\n",
+        "sdk\t{}\nlib\t{}\t{:X}\n",
         sdk.display(),
         lib.display(),
         Sha256::digest(std::fs::read(&lib).unwrap()),
@@ -65,10 +66,30 @@ fn sdk_split_and_folded_x64() {
         static_assert(__is_same(LPVOID, void *));\n";
     std::fs::write(output.join("native-probe.cpp"), native_probe).unwrap();
     windows_clang::extract([Input::new("native-probe.cpp", native_probe)], &args).unwrap();
+    let mode = std::env::var("WIN32METADATA_FOLDING_MODE").unwrap_or_else(|_| "both".into());
+    assert!(
+        ["both", "split", "folded"].contains(&mode.as_str()),
+        "invalid folding mode"
+    );
+    let order =
+        std::env::var("WIN32METADATA_FOLDING_ORDER").unwrap_or_else(|_| "split-first".into());
+    assert!(
+        ["split-first", "folded-first"].contains(&order.as_str()),
+        "invalid folding order"
+    );
+    let order = if order == "split-first" {
+        [false, true]
+    } else {
+        [true, false]
+    };
     let mut inventories = Vec::new();
     let mut readfile_signatures = Vec::new();
-    for folded in [false, true] {
+    let mut images = Vec::new();
+    for folded in order {
         let label = if folded { "folded" } else { "split" };
+        if mode != "both" && mode != label {
+            continue;
+        }
         let root = output.join(label);
         std::fs::create_dir(&root).unwrap();
         let mut policy = HeaderPartitionPolicy::new();
@@ -99,17 +120,9 @@ fn sdk_split_and_folded_x64() {
         for input in &inputs {
             std::fs::write(root.join(&input.name), &input.source).unwrap();
         }
+        let input_tus = inputs.len();
+        let started = Instant::now();
         let snapshot = windows_clang::extract(inputs, &args).unwrap();
-        let native_contracts = snapshot
-            .facts()
-            .iter()
-            .filter(|fact| ["ReadFile", "LPVOID"].contains(&fact.name.as_str()))
-            .collect::<Vec<_>>();
-        std::fs::write(
-            root.join("native-contracts.txt"),
-            format!("{native_contracts:#?}"),
-        )
-        .unwrap();
         let libraries = snapshot
             .facts()
             .iter()
@@ -128,11 +141,6 @@ fn sdk_split_and_folded_x64() {
             selected.contains("ReadFile"),
             "missing native root ReadFile"
         );
-        std::fs::write(
-            root.join("selected.txt"),
-            selected.iter().cloned().collect::<Vec<_>>().join("\n"),
-        )
-        .unwrap();
         let references = MetadataReferences::new([windows_metadata::reader::File::new(
             windows_default::WINRT.to_vec(),
         )
@@ -152,7 +160,34 @@ fn sdk_split_and_folded_x64() {
         std::fs::create_dir(&rdl).unwrap();
         write_partitioned_rdl(&rdl, partitions).unwrap();
         let image = root.join("SdkFolding.winmd");
-        compile_inputs(&[rdl], &[], "SdkFolding", None, &image).unwrap();
+        windows_rdl::reader()
+            .input(&rdl)
+            .input_text(crate::compile::METADATA_RDL)
+            .reference_default()
+            .output(&image)
+            .write()
+            .unwrap();
+        let elapsed = started.elapsed().as_secs_f64();
+        std::fs::write(
+            root.join("measurement.tsv"),
+            format!("mode\t{label}\ninput_tus\t{input_tus}\npipeline_seconds\t{elapsed:.9}\n"),
+        )
+        .unwrap();
+        let native_contracts = snapshot
+            .facts()
+            .iter()
+            .filter(|fact| ["ReadFile", "LPVOID"].contains(&fact.name.as_str()))
+            .collect::<Vec<_>>();
+        std::fs::write(
+            root.join("native-contracts.txt"),
+            format!("{native_contracts:#?}"),
+        )
+        .unwrap();
+        std::fs::write(
+            root.join("selected.txt"),
+            selected.iter().cloned().collect::<Vec<_>>().join("\n"),
+        )
+        .unwrap();
         let index = Index::read(&image).unwrap();
         let fact = snapshot
             .facts()
@@ -276,13 +311,20 @@ fn sdk_split_and_folded_x64() {
             format!("{:X}\n", Sha256::digest(std::fs::read(&image).unwrap())),
         )
         .unwrap();
+        images.push(std::fs::read(&image).unwrap());
     }
-    assert_eq!(
-        readfile_signatures[0], readfile_signatures[1],
-        "ReadFile's physical signature must not depend on TU grouping; inspect readfile-contract.txt and readfile-rdl.txt"
-    );
-    assert!(
-        inventories[0] == inventories[1],
-        "complete WinMD-derived RDL inventories differ; inspect split/folded inventory.rdl"
-    );
+    if mode == "both" {
+        assert_eq!(
+            readfile_signatures[0], readfile_signatures[1],
+            "ReadFile's physical signature must not depend on TU grouping; inspect readfile-contract.txt and readfile-rdl.txt"
+        );
+        assert!(
+            inventories[0] == inventories[1],
+            "complete WinMD-derived RDL inventories differ; inspect split/folded inventory.rdl"
+        );
+        assert!(
+            images[0] == images[1],
+            "complete physical WinMD images differ"
+        );
+    }
 }
