@@ -49,7 +49,7 @@ public sealed class Apis
 	[DllImport ("", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false)]
 	public unsafe static extern void SampleLegacyBuffers ([Optional][Out][MemorySize (BytesParamIndex = 1)] void* buffer, [In] uint capacity, [Out] uint* written, [In][NativeArrayInfo (CountParamIndex = 4)] PCSTR input, [In] uint characterCount, [Out] sbyte** output);
 
-	[DllImport ("samplemerged.dll", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false, SetLastError = true)]
+	[DllImport ("samplemerged.dll", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true, PreserveSig = false)]
 	[SupportedOSPlatform ("windows6.1")]
 	public unsafe static extern int SampleMergedContract ([Out] void* buffer, [In] uint length);
 
@@ -369,4 +369,3 @@ public struct SAMPLE_RESOURCE_HANDLE
 {
 	public SAMPLE_HANDLE Value;
 }
-

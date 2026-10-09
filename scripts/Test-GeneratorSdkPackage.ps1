@@ -396,7 +396,7 @@ if ($actualText -notmatch 'SampleLegacyBuffers[\s\S]*?MemorySize[\s\S]*?NativeAr
 }
 $mergedContractAttributes = [System.Text.RegularExpressions.Regex]::Match(
     $actualText,
-    '(?s)(\[DllImport[^\r\n]+\]\s*(?:\[[^\r\n]+\]\s*)*)public static extern int SampleMergedContract'
+    '(?s)(\[DllImport[^\r\n]+\]\s*(?:\[[^\r\n]+\]\s*)*)public (?:unsafe )?static extern int SampleMergedContract'
 ).Groups[1].Value
 if ($mergedContractAttributes -notmatch '\[DllImport\s*\(\s*"samplemerged\.dll"' -or
     $mergedContractAttributes -notmatch '\[SupportedOSPlatform\s*\(\s*"windows6\.1"\s*\)\]' -or
