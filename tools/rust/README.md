@@ -225,6 +225,35 @@ raw SDK headers + import libraries + annotation contracts
 
 ## Inner loop
 
+### Opt-in SDK TU folding failure reproducer
+
+The ignored `scrape::tests::sdk_folding::sdk_split_and_folded_x64` regression uses
+the pinned raw x64 SDK's `synchapi.h` and `fileapi.h`, actual `kernel32.lib`, and
+the same include context, roots, and namespace colors in two TUs versus one.
+It currently **fails** on the pinned producer: `ReadFile.lpBuffer` changes from
+raw `void*` to named `LPVOID`. Both physical parameters retain Out and Optional;
+different `#[out]` spelling in reconstructed RDL does not establish direction loss.
+The test checks the compiler-observed SAL capture and exact same-TU typedef source
+against physical WinMD readback, then requires identical signatures and complete
+WinMD-derived RDL. It is a failing reproducer, not a successful folding proof or
+an optimization benchmark.
+
+With the pinned SDK packages and Cargo dependencies already cached:
+
+```powershell
+.\scripts\Prepare-ClangResourceHeaders.ps1 -OutputDir .\tools\rust\target\folding-tools
+$env:CLANG_RESOURCE_DIR = "$PWD\tools\rust\target\folding-tools\clang-resource\22.1.8"
+$env:WIN32METADATA_FOLDING_OUTPUT = Join-Path $env:TEMP ("sdk-folding-" + [guid]::NewGuid())
+cargo test --release --locked --offline --manifest-path .\tools\rust\Cargo.toml `
+    sdk_split_and_folded_x64 -- --ignored --nocapture --test-threads=1
+```
+
+The output must be fresh. It preserves arguments, SDK-root/import-library hashes,
+native facts and a C++ signature probe, both images and their hashes, emitted RDL,
+and exact `ReadFile` RDL lines and physical parameter contracts.
+
+### Generation
+
 From the repository root:
 
 ```powershell
