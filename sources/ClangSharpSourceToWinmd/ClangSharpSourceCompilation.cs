@@ -316,6 +316,8 @@ namespace ClangSharpSourceToWinmd
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
             }
 
+            comp = ShadowedTypeNameQualifier.QualifyShadowedTypeNames(comp, tree => WriteTree(tree, tree.FilePath));
+
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
