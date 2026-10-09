@@ -1,7 +1,7 @@
 use super::*;
 use sha2::{Digest, Sha256};
 use std::time::Instant;
-use windows_metadata::{ParamAttributes, Type};
+use windows_metadata::{HasAttributes, ParamAttributes, Type, Value};
 
 const HEADERS: [(&str, &str, &str); 2] = [
     ("synchapi.h", "Threading", "Windows.Win32.System.Threading"),
@@ -246,6 +246,17 @@ fn sdk_split_and_folded_x64() {
             (false, true, true),
             "compiler-observed ReadFile.lpBuffer direction via the existing SAL capture bridge",
         );
+        let native_size = native_buffer.annotation.size.as_ref().unwrap();
+        assert!(
+            native_size.bytes,
+            "ReadFile's native count is bytes, not elements"
+        );
+        assert_eq!(
+            native_size.value,
+            windows_clang::SalSizeValue::Parameter(params[2].name.clone()),
+            "ReadFile's native byte size must reference parameter index 2",
+        );
+        assert_eq!(params[2].name, "nNumberOfBytesToRead");
         let Item::Fn(method) = index.expect_item("Windows.Win32.Storage.FileSystem", "ReadFile")
         else {
             panic!("missing emitted ReadFile");
@@ -253,9 +264,28 @@ fn sdk_split_and_folded_x64() {
         let signature = method.signature(&[]);
         assert_eq!(signature.return_type, Type::I32);
         assert_eq!(signature.types.len(), params.len());
+        assert_eq!(
+            signature.types[1],
+            Type::PtrMut(Box::new(Type::Void), 1),
+            "ReadFile's buffer use projects as raw void* without changing its native LPVOID fact",
+        );
+        assert_eq!(signature.types[2], Type::U32);
         let rows = method.params_by_sequence(signature.types.len()).unwrap();
         let buffer = rows.params()[1].unwrap();
         assert_eq!(buffer.name(), native_buffer.name);
+        assert_eq!(
+            buffer.flags(),
+            ParamAttributes::Out | ParamAttributes::Optional
+        );
+        let physical_size = buffer
+            .find_attribute("MemorySizeAttribute")
+            .unwrap()
+            .value();
+        assert_eq!(
+            physical_size,
+            [("BytesParamIndex".to_string(), Value::I16(2))],
+            "ReadFile's physical byte-size relationship must preserve the native parameter index",
+        );
         for (flag, observed) in [
             (ParamAttributes::In, native_buffer.annotation.input),
             (ParamAttributes::Out, native_buffer.annotation.output),
@@ -287,8 +317,8 @@ fn sdk_split_and_folded_x64() {
         std::fs::write(
             root.join("readfile-contract.txt"),
             format!(
-                "compiler_observed_typedef_source\t{:?}\ncompiler_observed_direction\t{:?}\nemitted_signature\t{:?}\nemitted_buffer_flags\t{:?}\n",
-                declaration, native_buffer.annotation, signature, buffer.flags(),
+                "compiler_observed_typedef_source\t{:?}\ncompiler_observed_direction\t{:?}\nemitted_signature\t{:?}\nemitted_buffer_flags\t{:?}\nemitted_byte_size\t{:?}\n",
+                declaration, native_buffer.annotation, signature, buffer.flags(), physical_size,
             ),
         ).unwrap();
         readfile_signatures.push((signature.return_type, signature.types));

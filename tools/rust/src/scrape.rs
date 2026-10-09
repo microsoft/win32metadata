@@ -11151,7 +11151,10 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
                 let Item::Fn(read) = index.expect_item(namespace, "ReadPointerRaw") else {
                     panic!("missing ReadPointerRaw");
                 };
-                assert_eq!(read.signature(&[]).return_type, pointer);
+                assert_eq!(
+                    read.signature(&[]).return_type,
+                    Type::PtrMut(Box::new(Type::Void), 1)
+                );
                 assert_eq!(
                     read.signature(&[]).types,
                     [Type::PtrConst(Box::new(pointer), 1)]

@@ -233,11 +233,17 @@ the same include context, roots, and namespace colors in two TUs versus one.
 It currently **fails** on the pinned producer: `ReadFile.lpBuffer` changes from
 raw `void*` to named `LPVOID`. Both physical parameters retain Out and Optional;
 different `#[out]` spelling in reconstructed RDL does not establish direction loss.
-The test checks the compiler-observed SAL capture and exact same-TU typedef source
-against physical WinMD readback, then requires identical signatures and complete
-WinMD-derived RDL and physical image bytes. The immutable producer candidate
-`dcebd2d50235ea9969956f033125599403663955` closes that narrow defect; this
-repository's product dependencies are not repinned by the harness.
+The test retains the compiler-observed native `Named LPVOID`, exact same-TU typedef
+source and mutable `void*` target, while independently requiring the physical
+ReadFile buffer use to project as raw `void*`. Its native byte-size count and
+physical `MemorySizeAttribute.BytesParamIndex` must both reference parameter
+index 2 (`nNumberOfBytesToRead`); physical flags remain Out | Optional (`18`).
+Signatures, complete WinMD-derived RDL and physical image bytes must match across
+grouping. The immutable producer candidate
+`bf19b67985098ec67f1a5c87ca175ceac52f8048` uses upstream per-use projection instead
+of the earlier `dcebd2d` declaration-retention workaround. Product dependencies
+are not repinned by this harness; native observations are never normalized to
+the chosen metadata representation.
 
 With the pinned SDK packages and Cargo dependencies already cached:
 
