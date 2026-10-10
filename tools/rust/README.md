@@ -5,7 +5,7 @@ A command-line front end over the pinned windows-rs producer revision, providing
 
 The production `scrape --win32-sdk` path reads the pinned raw Windows SDK headers and
 constructs the producer-supported aggregate plus satellite inputs. Logical authority adds
-two `PSAPI_VERSION` compile variants, WinHTTP, and a shared COM exception context; it never expands
+two `PSAPI_VERSION` compile variants, WinHTTP, and a shared COM exception context; by default it never expands
 into one input per partition. `--partition-policy-root` routes physical header provenance through the checked-in
 logical partition policies. Every physical owner is qualified to its assigned aggregate,
 satellite, PSAPI, or complete provider input, so the same header included elsewhere remains dependency
@@ -13,6 +13,17 @@ closure rather than becoming a public root. x64, x86, and arm64 are extracted an
 in parallel by default, then their WinMDs are merged into one output.
 `--architecture-jobs` can lower concurrent workloads. Focused partition translation units remain
 available for package fixtures and inner-loop debugging.
+
+`--original-compilation --partition-policy-root <dir>` explicitly selects one complete
+original source/profile per logical partition in original traversal order, even when
+profiles match. It shares source, profile, traversal-audit and header-claim validation
+with the candidate adapter, but creates no folded wrappers or authority recipes.
+Original main paths/bytes/roots remain unchanged, native owner maps stay empty, and
+the existing header policies, imports, exclusions and provenance remain active.
+It cannot be combined with `--candidate-compilation` or `--candidate-isolate`.
+This opt-in is not SDK admission and does not change production defaults.
+MSBuild uses `WinmdUseOriginalCompilation=true`; `BuildMetadataBin.ps1` exposes
+`-UseOriginalCompilation` (incompatible with `-RawSdk`).
 
 `partition::candidate_compilation_groups` and `scrape::build_candidate_source_plan`
 provide a separate, non-default whole-original-source candidate plan. Exact ordered
@@ -543,6 +554,14 @@ three; `--architecture-jobs 1` explicitly selects sequential architecture proces
 MSBuild/packaged SDK consumers use `WinmdArchitectureJobs`. None of these settings
 changes the selected architectures, include roots, namespace authority or native inputs.
 Normal generation provenance records the worker option in the native argument list.
+`--native-jobs` defaults to one and passes the producer's `ExtractionOptions` to
+common and partitioned extraction, including original and candidate modes.
+`WinmdNativeJobs` and `BuildMetadataBin.ps1 -NativeJobs` expose the same positive limit.
+This is a per-architecture original-TU limit: architecture-jobs times native-jobs
+bounds overlapping original workers, not global memory or synthetic probe work.
+The current pin parallelizes parsing only; the admitted successor bounds complete
+original extraction. Existing selected-constant probe batches retain their own
+inner scheduling (up to four); this option does not claim to cap them.
 Normal authority planning consumes the extracted snapshot without making a full initial
 clone. Other borrowed snapshots are released before compilation; consuming legacy paths
 retain their existing ownership behavior.

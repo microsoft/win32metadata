@@ -335,6 +335,56 @@ pub fn candidate_compilation_groups_with_isolation(
     traversal: &TraversalPolicy,
     isolated: &[String],
 ) -> Result<Vec<CandidateCompilationGroup>, String> {
+    let mut separate = validate_compilation_claims(traversal)?;
+    for identity in isolated {
+        let partition = traversal
+            .partitions
+            .iter()
+            .find(|partition| partition.identity == *identity)
+            .ok_or_else(|| format!("unknown candidate isolation partition `{identity}`"))?;
+        separate.insert(partition.identity.as_str());
+    }
+    let mut buckets = BTreeMap::<CompilationProfile, Vec<LogicalPartition>>::new();
+    let mut groups = Vec::new();
+    for partition in &traversal.partitions {
+        let profile = partition.compile_environment.compilation_profile();
+        if separate.contains(partition.identity.as_str()) {
+            groups.push(CandidateCompilationGroup {
+                profile,
+                partitions: vec![partition.clone()],
+            });
+        } else {
+            buckets.entry(profile).or_default().push(partition.clone());
+        }
+    }
+    groups.extend(buckets.into_iter().map(|(profile, mut partitions)| {
+        partitions.sort_by(|a, b| compare_case_insensitive(&a.identity, &b.identity));
+        CandidateCompilationGroup {
+            profile,
+            partitions,
+        }
+    }));
+    groups.sort_by(|a, b| {
+        compare_case_insensitive(&a.partitions[0].identity, &b.partitions[0].identity)
+    });
+    Ok(groups)
+}
+
+pub fn original_compilation_groups(
+    traversal: &TraversalPolicy,
+) -> Result<Vec<CandidateCompilationGroup>, String> {
+    validate_compilation_claims(traversal)?;
+    Ok(traversal
+        .partitions
+        .iter()
+        .map(|partition| CandidateCompilationGroup {
+            profile: partition.compile_environment.compilation_profile(),
+            partitions: vec![partition.clone()],
+        })
+        .collect())
+}
+
+fn validate_compilation_claims(traversal: &TraversalPolicy) -> Result<BTreeSet<&str>, String> {
     let mut by_name = BTreeMap::new();
     for partition in &traversal.partitions {
         if by_name.insert(partition.identity.as_str(), partition).is_some() {
@@ -342,12 +392,6 @@ pub fn candidate_compilation_groups_with_isolation(
         }
     }
     let mut separate = BTreeSet::new();
-    for identity in isolated {
-        let partition = by_name
-            .get(identity.as_str())
-            .ok_or_else(|| format!("unknown candidate isolation partition `{identity}`"))?;
-        separate.insert(partition.identity.as_str());
-    }
     for exception in &traversal.compile_environment_exceptions {
         if !by_name.contains_key(exception.partition.as_str()) {
             return Err(format!("compile exception has unknown partition `{}`", exception.partition));
@@ -379,27 +423,7 @@ pub fn candidate_compilation_groups_with_isolation(
             separate.extend(overlap.owners.iter().map(|owner| owner.partition.as_str()));
         }
     }
-    let mut buckets = BTreeMap::<CompilationProfile, Vec<LogicalPartition>>::new();
-    let mut groups = Vec::new();
-    for partition in &traversal.partitions {
-        let profile = partition.compile_environment.compilation_profile();
-        if separate.contains(partition.identity.as_str()) {
-            groups.push(CandidateCompilationGroup {
-                profile,
-                partitions: vec![partition.clone()],
-            });
-        } else {
-            buckets.entry(profile).or_default().push(partition.clone());
-        }
-    }
-    groups.extend(buckets.into_iter().map(|(profile, mut partitions)| {
-        partitions.sort_by(|a, b| compare_case_insensitive(&a.identity, &b.identity));
-        CandidateCompilationGroup { profile, partitions }
-    }));
-    groups.sort_by(|a, b| {
-        compare_case_insensitive(&a.partitions[0].identity, &b.partitions[0].identity)
-    });
-    Ok(groups)
+    Ok(separate)
 }
 
 #[derive(Clone, Debug)]

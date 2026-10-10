@@ -26,6 +26,7 @@
     <PropertyGroup>
       <_WinmdArgs>scrape</_WinmdArgs>
       <_WinmdArgs Condition="'$(WinmdUseSdkHeaderManifest)' == 'true'">$(_WinmdArgs) --win32-sdk</_WinmdArgs>
+      <_WinmdArgs Condition="'$(WinmdUseOriginalCompilation)' == 'true'">$(_WinmdArgs) --original-compilation</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdPartitionRoot->'--partition-root &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdPartitionPolicyRoot->'--partition-policy-root &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(Partition->'--partition &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
@@ -33,6 +34,7 @@
       <_WinmdArgs>$(_WinmdArgs) @(ImportLibs->'--lib &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(_WinmdArch->'--arch %(Identity)', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) --architecture-jobs &quot;$(WinmdArchitectureJobs)&quot;</_WinmdArgs>
+      <_WinmdArgs>$(_WinmdArgs) --native-jobs &quot;$(WinmdNativeJobs)&quot;</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdScope->'--scope &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdScopeHeader->'--scope-header &quot;%(Identity)&quot;', ' ')</_WinmdArgs>
       <_WinmdArgs>$(_WinmdArgs) @(WinmdNamespaceRoutes->'--namespace-routes &quot;%(FullPath)&quot;', ' ')</_WinmdArgs>

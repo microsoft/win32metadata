@@ -296,7 +296,7 @@ function Save-WindowsRsInputFingerprint {
             }
             $evaluation = $null
             Add-FingerprintGroup $manifest "projectEvaluation" {
-                $properties = "Win32MetadataToolsExe,Win32MetadataToolsManifest,Win32MetadataToolsCommand,LibClangPath,WinmdObjDir,OutputWinmd,TargetArchitectures,WinmdArchitectureJobs,WinmdUseSdkHeaderManifest,WinmdUsePartitionAuthority,WinmdRootNamespace,WinmdAssemblyName,WinmdVersion"
+                $properties = "Win32MetadataToolsExe,Win32MetadataToolsManifest,Win32MetadataToolsCommand,LibClangPath,WinmdObjDir,OutputWinmd,TargetArchitectures,WinmdArchitectureJobs,WinmdNativeJobs,WinmdUseOriginalCompilation,WinmdUseSdkHeaderManifest,WinmdUsePartitionAuthority,WinmdRootNamespace,WinmdAssemblyName,WinmdVersion"
                 $items = "WinmdIncludeDir,ImportLibs,Partition,WinmdPartitionRoot,WinmdPartitionPolicyRoot,WinmdNamespaceRoutes,WinmdScope,WinmdScopeHeader"
                 $text = & dotnet msbuild (Join-Path $Root "generation\WinSDK\Windows.Win32.proj") -nologo "-getProperty:$properties" "-getItem:$items" | Out-String
                 if ($LASTEXITCODE -ne 0) { throw "Restored project evaluation failed." }
