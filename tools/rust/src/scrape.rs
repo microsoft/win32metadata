@@ -94,6 +94,8 @@ pub struct Options {
     partitions: Vec<PathBuf>,
     partition_roots: Vec<PathBuf>,
     partition_policy_root: Option<PathBuf>,
+    candidate_compilation: bool,
+    candidate_isolate: Vec<String>,
     includes: Vec<PathBuf>,
     libs: Vec<PathBuf>,
     archs: Vec<String>,
@@ -138,6 +140,8 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
                 args.path(&option)?,
                 &option,
             )?,
+            "--candidate-compilation" => options.candidate_compilation = true,
+            "--candidate-isolate" => options.candidate_isolate.push(args.value(&option)?),
             "--include" => options.includes.push(args.path(&option)?),
             "--lib" => options.libs.push(args.path(&option)?),
             "--arch" => options.archs.push(args.value(&option)?),
@@ -200,6 +204,12 @@ pub fn parse(mut args: Args) -> Result<Options, String> {
 }
 
 fn validate(options: &Options) -> Result<(), String> {
+    if options.candidate_compilation && options.partition_policy_root.is_none() {
+        return Err("`--candidate-compilation` requires `--partition-policy-root`".to_string());
+    }
+    if !options.candidate_isolate.is_empty() && !options.candidate_compilation {
+        return Err("`--candidate-isolate` requires `--candidate-compilation`".to_string());
+    }
     if !options.win32_sdk
         && options.partitions.is_empty()
         && options.partition_roots.is_empty()
@@ -1004,20 +1014,23 @@ const PSAPI_V1_SYNTHESIZED_CONSTANTS: &[&str] = &[
 enum ScrapeInputs {
     Common(Vec<Input>),
     Partitioned(Vec<PartitionedInput>),
+    Candidate(Vec<PartitionedInput>),
 }
 
 impl ScrapeInputs {
     fn len(&self) -> usize {
         match self {
             Self::Common(inputs) => inputs.len(),
-            Self::Partitioned(inputs) => inputs.len(),
+            Self::Partitioned(inputs) | Self::Candidate(inputs) => inputs.len(),
         }
     }
 
     fn extract(&self, args: &[&str]) -> Result<windows_clang::Snapshot, windows_clang::Error> {
         match self {
             Self::Common(inputs) => windows_clang::extract(inputs.clone(), args),
-            Self::Partitioned(inputs) => windows_clang::extract_partitioned(inputs.clone(), args),
+            Self::Partitioned(inputs) | Self::Candidate(inputs) => {
+                windows_clang::extract_partitioned(inputs.clone(), args)
+            }
         }
     }
 
@@ -1027,7 +1040,7 @@ impl ScrapeInputs {
 
     fn policy_exclusions(&self) -> BTreeSet<String> {
         match self {
-            Self::Common(_) => BTreeSet::new(),
+            Self::Common(_) | Self::Candidate(_) => BTreeSet::new(),
             Self::Partitioned(inputs) => inputs
                 .iter()
                 .flat_map(|input| input.roots.values())
@@ -1500,20 +1513,28 @@ fn append_authority_manifest(
     Ok(())
 }
 
-#[allow(dead_code)]
 pub(crate) struct CandidateSourcePlan {
     pub groups: Vec<crate::partition::CandidateCompilationGroup>,
     pub inputs: Vec<Input>,
     pub include_directories: Vec<Vec<String>>,
     pub headers: HeaderPartitionPolicy,
     pub audit: crate::partition::TraversalPolicyAudit,
+    coverage_roots: Vec<CoverageRoot>,
 }
 
-#[allow(dead_code)]
 pub(crate) fn build_candidate_source_plan(
     traversal: &crate::partition::TraversalPolicy,
     include_dirs: &[PathBuf],
     output: &Path,
+) -> Result<CandidateSourcePlan, String> {
+    build_candidate_source_plan_with_isolation(traversal, include_dirs, output, &[])
+}
+
+fn build_candidate_source_plan_with_isolation(
+    traversal: &crate::partition::TraversalPolicy,
+    include_dirs: &[PathBuf],
+    output: &Path,
+    isolated: &[String],
 ) -> Result<CandidateSourcePlan, String> {
     if !output.is_absolute() {
         return Err("candidate source output must be an absolute path".to_string());
@@ -1521,10 +1542,15 @@ pub(crate) fn build_candidate_source_plan(
     if !traversal.audit.missing_roots.is_empty() || !traversal.audit.unsupported_roots.is_empty() {
         return Err("candidate compilation requires resolved traversal roots".to_string());
     }
-    let groups = crate::partition::candidate_compilation_groups(traversal)?;
+    let groups = if isolated.is_empty() {
+        crate::partition::candidate_compilation_groups(traversal)?
+    } else {
+        crate::partition::candidate_compilation_groups_with_isolation(traversal, isolated)?
+    };
     let mut inputs = Vec::new();
     let mut directories = Vec::new();
     let mut headers = HeaderPartitionPolicy::new();
+    let mut coverage = BTreeMap::<crate::partition::WindowsPathIdentity, CoverageRoot>::new();
     for (number, group) in groups.iter().enumerate() {
         for partition in &group.partitions {
             if !partition.input.is_absolute() {
@@ -1557,7 +1583,9 @@ pub(crate) fn build_candidate_source_plan(
             // A wrapper changes main-file role, not the original native extraction scope.
             roots.push(path_arg(&partition.input, "--partition")?);
             let owner = convert_root_partition(partition);
-            let mut add = |path: &Path, canonical: &crate::partition::WindowsPathIdentity| {
+            let mut add = |path: &Path,
+                           canonical: &crate::partition::WindowsPathIdentity,
+                           label: &str| {
                 if let Some(policy) = claims.insert(canonical.clone(), &partition.policy)
                     && policy != &partition.policy
                 {
@@ -1565,15 +1593,27 @@ pub(crate) fn build_candidate_source_plan(
                 }
                 let root = path_arg(path, "--partition-policy-root")?;
                 roots.push(root.clone());
+                let covered = coverage
+                    .entry(canonical.clone())
+                    .or_insert_with(|| CoverageRoot {
+                        configured: root.clone(),
+                        label: label.to_string(),
+                        owning_inputs: Vec::new(),
+                    });
+                if !covered.owning_inputs.contains(&name) {
+                    covered.owning_inputs.push(name.clone());
+                }
                 add_header_partition_owner(&mut headers, &name, root, owner.clone());
                 Ok(())
             };
             for root in &partition.roots {
                 match root {
-                    crate::partition::TraversalRoot::File(root) => add(&root.path, &root.canonical_path)?,
+                    crate::partition::TraversalRoot::File(root) => {
+                        add(&root.path, &root.canonical_path, &root.inventory_path)?
+                    }
                     crate::partition::TraversalRoot::Directory(root) => {
                         for file in &root.files {
-                            add(&file.path, &file.canonical_path)?;
+                            add(&file.path, &file.canonical_path, &file.inventory_path)?;
                         }
                     }
                     _ => return Err(format!("partition `{}` has an unresolved root", partition.identity)),
@@ -1594,7 +1634,37 @@ pub(crate) fn build_candidate_source_plan(
         include_directories: directories,
         headers,
         audit: traversal.audit.clone(),
+        coverage_roots: coverage.into_values().collect(),
     })
+}
+
+fn candidate_compilation_inputs(
+    plan: &CandidateSourcePlan,
+    include_dirs: &[PathBuf],
+) -> Result<Vec<PartitionedInput>, String> {
+    plan.inputs
+        .iter()
+        .zip(&plan.groups)
+        .zip(&plan.include_directories)
+        .map(|((source, group), directories)| {
+            // PartitionedInput transports per-input arguments; no roots acquire an owner.
+            let mut input = source.clone().partitioned(source.name.clone());
+            match group.profile.standard.as_deref() {
+                None => {}
+                Some("c++20") => input = input.with_cpp20(),
+                Some(standard) => {
+                    return Err(format!(
+                        "unsupported candidate language standard `{standard}`"
+                    ));
+                }
+            }
+            for directory in &directories[include_dirs.len()..] {
+                input = input.with_include_directory(directory);
+            }
+            // Defines and local includes stay in complete sources, including #undef/conditionals.
+            Ok(input)
+        })
+        .collect()
 }
 
 fn resolve_partition_include_directory(
@@ -1866,15 +1936,21 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
         })
         .map(|directory| path_arg(directory, "--include"))
         .collect::<Result<Vec<_>, _>>()?;
-    let logical_partitions = options
+    let mut logical_partitions = options
         .partition_policy_root
         .as_deref()
         .map(|root| -> Result<LogicalPartitionConfiguration, String> {
             let traversal = crate::partition::load_traversal_policy(root, &include_dirs)?;
             traversal.audit.ensure_clean()?;
-            validate_aggregate_compile_environment(&traversal)?;
-            let headers = convert_header_partition_policy(&traversal)?;
-            let coverage_roots = coverage_roots(&traversal)?;
+            let (headers, coverage_roots) = if options.candidate_compilation {
+                (HeaderPartitionPolicy::new(), Vec::new())
+            } else {
+                validate_aggregate_compile_environment(&traversal)?;
+                (
+                    convert_header_partition_policy(&traversal)?,
+                    coverage_roots(&traversal)?,
+                )
+            };
             Ok(LogicalPartitionConfiguration {
                 traversal,
                 headers,
@@ -1882,12 +1958,53 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
             })
         })
         .transpose()?;
-    let inputs = build_inputs(
-        options,
-        &include_dirs,
-        &root_dirs,
-        logical_partitions.as_ref().map(|policy| &policy.traversal),
-    )?;
+    let inputs = if options.candidate_compilation {
+        let logical = logical_partitions
+            .as_mut()
+            .expect("validated candidate policy root");
+        let output = std::path::absolute(obj_dir(options))
+            .map_err(|error| format!("failed to resolve candidate output: {error}"))?;
+        let plan = if options.candidate_isolate.is_empty() {
+            build_candidate_source_plan(&logical.traversal, &include_dirs, &output)?
+        } else {
+            build_candidate_source_plan_with_isolation(
+                &logical.traversal,
+                &include_dirs,
+                &output,
+                &options.candidate_isolate,
+            )?
+        };
+        plan.audit.ensure_clean()?;
+        let inputs = candidate_compilation_inputs(&plan, &include_dirs)?;
+        println!(
+            "Unvalidated candidate compilation: {} logical sources, {} profiles, {} contexts; largest group {}",
+            plan.groups
+                .iter()
+                .map(|group| group.partitions.len())
+                .sum::<usize>(),
+            plan.groups
+                .iter()
+                .map(|group| &group.profile)
+                .collect::<BTreeSet<_>>()
+                .len(),
+            plan.groups.len(),
+            plan.groups
+                .iter()
+                .map(|group| group.partitions.len())
+                .max()
+                .unwrap_or(0),
+        );
+        logical.headers = plan.headers;
+        logical.coverage_roots = plan.coverage_roots;
+        ScrapeInputs::Candidate(inputs)
+    } else {
+        build_inputs(
+            options,
+            &include_dirs,
+            &root_dirs,
+            logical_partitions.as_ref().map(|policy| &policy.traversal),
+        )?
+    };
     let mut policy_exclusions = inputs.policy_exclusions();
     if let Some(logical) = &logical_partitions {
         policy_exclusions.extend(
@@ -1897,12 +2014,14 @@ fn build_configuration(options: &Options) -> Result<ScrapeConfiguration, String>
                 .iter()
                 .flat_map(|partition| partition.policy.exclusions.iter().cloned()),
         );
-        policy_exclusions.extend(
-            HEADER_POLICY_OVERRIDE_CONTRACTS
-                .iter()
-                .flat_map(|contract| contract.excluded_names.iter().copied())
-                .map(str::to_string),
-        );
+        if !options.candidate_compilation {
+            policy_exclusions.extend(
+                HEADER_POLICY_OVERRIDE_CONTRACTS
+                    .iter()
+                    .flat_map(|contract| contract.excluded_names.iter().copied())
+                    .map(str::to_string),
+            );
+        }
     }
     let namespace_routes = options
         .namespace_routes
@@ -3410,6 +3529,8 @@ pub fn help_text() -> &'static str {
     [--partition <main.cpp>]... \\
     [--partition-root <dir>]... \\
     [--partition-policy-root <dir>] \\
+    [--candidate-compilation] \\
+    [--candidate-isolate <partition>]... \\
     --include <dir>... \\
     [--lib <dir-or-file>]... \\
     [--arch <x64|arm64|x86>]... \\
@@ -3437,6 +3558,13 @@ pub fn help_text() -> &'static str {
                 cannot be combined with focused inputs.
   --include     Header root. An SDK root is expanded into its shared/um/um\\cpdk/ucrt/winrt
                 subdirectories; any other directory is used as-is. Repeatable.
+  --candidate-compilation
+                Opt into unvalidated whole-original-source/profile contexts instead of
+                six authority inputs. Requires --partition-policy-root. Compiler errors
+                are fatal; equal profiles do not prove native header compatibility.
+  --candidate-isolate
+                Keep this exact logical partition in a separate candidate context.
+                Repeatable; unknown identities are errors. Requires --candidate-compilation.
   --lib         SDK import-library directory or file, read for symbol -> DLL mappings.
                 Repeatable. Without it, functions carry no import library.
   --arch        Architecture to scrape. Repeatable. Defaults to x64. The first is
@@ -5657,6 +5785,27 @@ mod tests {
         );
         assert!(options.partitions.is_empty());
         assert!(options.partition_roots.is_empty());
+        assert!(!options.candidate_compilation);
+        assert!(options.candidate_isolate.is_empty());
+    }
+
+    #[test]
+    fn candidate_compilation_cli_is_explicit_and_validated() {
+        let mut args = authority_args();
+        args.extend(["--candidate-compilation", "--candidate-isolate", "Edp"]);
+        let options = parse_args(&args).unwrap();
+        assert!(options.candidate_compilation);
+        assert_eq!(options.candidate_isolate, ["Edp"]);
+        assert!(
+            parse_with(&["--candidate-compilation"])
+                .unwrap_err()
+                .contains("requires `--partition-policy-root`")
+        );
+        assert!(
+            parse_with(&["--candidate-isolate", "Edp"])
+                .unwrap_err()
+                .contains("requires `--candidate-compilation`")
+        );
     }
 
     #[test]
@@ -7997,6 +8146,107 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         std::fs::write(&original.input, "changed source").unwrap();
         assert!(build_candidate_source_plan(&traversal, &[], &root.join("generated"))
             .err().unwrap().contains("source changed after traversal"));
+        std::fs::remove_dir_all(root).unwrap();
+    }
+
+    #[test]
+    fn candidate_compilation_adapter_passes_profile_without_root_ownership() {
+        ensure_libclang();
+        let root = scratch("candidate-profile-adapter");
+        let shared = root.join("shared");
+        let extra = root.join("extra includes");
+        let later = root.join("later includes");
+        std::fs::create_dir(&shared).unwrap();
+        std::fs::create_dir(&extra).unwrap();
+        std::fs::create_dir(&later).unwrap();
+        std::fs::write(shared.join(ANNOTATION_HEADER), "").unwrap();
+        std::fs::write(shared.join(SAL_HEADER), "").unwrap();
+        std::fs::write(extra.join("profile.h"), "#define PROFILE_VALUE 41\n").unwrap();
+        std::fs::write(later.join("profile.h"), "#define PROFILE_VALUE 99\n").unwrap();
+        for name in ["First", "Second"] {
+            let directory = root.join(name);
+            std::fs::create_dir(&directory).unwrap();
+            std::fs::write(directory.join("local.h"), "").unwrap();
+            std::fs::write(shared.join(format!("{name}.h")), "").unwrap();
+            std::fs::write(
+                directory.join("main.cpp"),
+                format!(
+                    "#define AUTHORED_VALUE 23\r\n#include \"local.h\"\r\n#include <profile.h>\r\n\
+                     static_assert(__cplusplus >= 202002L);\r\n\
+                     static_assert(PROFILE_VALUE == 41 && AUTHORED_VALUE == 23);\r\n\
+                     extern \"C\" int {name}Callable(int value);\r\n"
+                ),
+            )
+            .unwrap();
+            std::fs::write(
+                directory.join("settings.rsp"),
+                format!(
+                    "--traverse\n<IncludeRoot>/shared/{name}.h\n--namespace\nWindows.Win32.{name}\n\
+                     --std\nc++20\n--include-directory\n{}\n{}\n",
+                    extra.display(),
+                    later.display(),
+                ),
+            )
+            .unwrap();
+        }
+        let includes = vec![shared];
+        let traversal = crate::partition::load_traversal_policy(&root, &includes).unwrap();
+        let plan =
+            build_candidate_source_plan(&traversal, &includes, &root.join("generated")).unwrap();
+        let inputs = candidate_compilation_inputs(&plan, &includes).unwrap();
+        for (input, original) in inputs.iter().zip(&plan.inputs) {
+            assert!(input.roots.is_empty());
+            assert_eq!(input.input.roots, original.roots);
+            assert_eq!(input.input.source, original.source);
+            assert_eq!(
+                input.arguments,
+                [
+                    "-std=c++20".to_string(),
+                    format!("-I{}", path_arg(&extra, "--include").unwrap()),
+                    format!("-I{}", path_arg(&later, "--include").unwrap()),
+                ],
+            );
+        }
+        let configuration = build_configuration(&Options {
+            win32_sdk: true,
+            partition_policy_root: Some(root.clone()),
+            candidate_compilation: true,
+            includes: includes.clone(),
+            extraction_coverage: Some(root.join("coverage.tsv")),
+            obj: Some(root.join("generated")),
+            ..Default::default()
+        })
+        .unwrap();
+        assert!(matches!(configuration.inputs, ScrapeInputs::Candidate(_)));
+        assert!(!configuration.inputs.partitioned());
+        let logical = configuration.logical_partitions.as_ref().unwrap();
+        assert_eq!(logical.traversal, traversal);
+        assert_eq!(logical.headers, plan.headers);
+        assert_eq!(logical.coverage_roots, plan.coverage_roots);
+        let mut args = configuration.args.clone();
+        args.retain(|argument| !argument.starts_with("-std="));
+        args.extend([
+            "-std=c++14".to_string(),
+            "--target=x86_64-pc-windows-msvc".to_string(),
+        ]);
+        let snapshot = configuration
+            .inputs
+            .extract(&args.iter().map(String::as_str).collect::<Vec<_>>())
+            .unwrap();
+        for name in ["FirstCallable", "SecondCallable"] {
+            let fact = snapshot
+                .facts()
+                .iter()
+                .find(|fact| fact.name == name)
+                .unwrap();
+            assert!(fact.root);
+        }
+        let mut broken = plan.inputs[0].clone().partitioned("broken");
+        broken.arguments = vec!["-std=c++20".to_string()];
+        let error = ScrapeInputs::Candidate(vec![broken])
+            .extract(&["-x", "c++", "--target=x86_64-pc-windows-msvc"])
+            .unwrap_err();
+        assert!(error.to_string().contains("profile.h"), "{error}");
         std::fs::remove_dir_all(root).unwrap();
     }
 

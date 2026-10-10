@@ -30,8 +30,34 @@ the tracked producer; native integer-constant eligibility is a separate producer
 Those const values retain exact native locations/types/values, but their missing Fact-backed
 Origins still make the unchanged native contract incomplete; this is not gate admission.
 Single inputs keep their original identity, roots and source bytes. Policies and requested/
-resolved scope fallbacks remain in the plan. Per-group language and ordered include paths
-must be preserved by a future executor; the existing default aggregate emission is unchanged.
+resolved scope fallbacks remain in the plan. `--candidate-compilation` opts into execution
+with each original profile's C++ standard and ordered extra include directories, while
+defines, local includes and conditional context remain in the unchanged source files.
+The existing default six-input aggregate emission is unchanged. Candidate argument
+transport uses the producer's existing `PartitionedInput` API with an empty owner map;
+original main roots are observation scope only, and the original logical header policy
+alone colors declarations.
+
+Use `--candidate-isolate <exact-logical-partition>` repeatedly to split named sources
+out of their profile cohort without removing any source or changing its policy. Unknown
+identities fail. Expand measured family selections to their exact logical partition names,
+then supply each name, including `Edp` and `Wia`, through this option. The coarse 72-context
+plan is unvalidated and its 206-source group is known incompatible; compiler errors are
+fatal, not an admission to production. The executor reports profile/context counts before
+extraction; neither 72 nor a refined 173-context plan implies corpus validation.
+
+For a subsequent x64 candidate extraction using prepared headers:
+
+```powershell
+cargo run --release --offline --manifest-path tools\rust\Cargo.toml -- scrape `
+  --win32-sdk --partition-policy-root generation\WinSDK\Partitions `
+  --candidate-compilation --include generation\WinSDK\obj\RecompiledIdlHeaders `
+  --arch x64 --extraction-coverage bin\candidate-x64.tsv --obj bin\candidate-x64
+```
+
+Append the measured `--candidate-isolate` arguments to refine that run. This extraction
+does not emit a WinMD; complete corpus compilation, native retention and emitted metadata
+validation remain required before changing the production default.
 The model-only controls run without SDK extraction or producer overrides:
 `cargo test --release --offline --manifest-path tools\rust\Cargo.toml candidate_`.
 

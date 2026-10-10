@@ -328,6 +328,13 @@ pub struct CandidateCompilationGroup {
 pub fn candidate_compilation_groups(
     traversal: &TraversalPolicy,
 ) -> Result<Vec<CandidateCompilationGroup>, String> {
+    candidate_compilation_groups_with_isolation(traversal, &[])
+}
+
+pub fn candidate_compilation_groups_with_isolation(
+    traversal: &TraversalPolicy,
+    isolated: &[String],
+) -> Result<Vec<CandidateCompilationGroup>, String> {
     let mut by_name = BTreeMap::new();
     for partition in &traversal.partitions {
         if by_name.insert(partition.identity.as_str(), partition).is_some() {
@@ -335,6 +342,12 @@ pub fn candidate_compilation_groups(
         }
     }
     let mut separate = BTreeSet::new();
+    for identity in isolated {
+        let partition = by_name
+            .get(identity.as_str())
+            .ok_or_else(|| format!("unknown candidate isolation partition `{identity}`"))?;
+        separate.insert(partition.identity.as_str());
+    }
     for exception in &traversal.compile_environment_exceptions {
         if !by_name.contains_key(exception.partition.as_str()) {
             return Err(format!("compile exception has unknown partition `{}`", exception.partition));
@@ -2813,6 +2826,55 @@ mod tests {
         let mut changed = expected.clone();
         changed.partition_local_roots = vec!["<PartitionDir>/manual.h".into()];
         assert_ne!(changed, expected);
+    }
+
+    #[test]
+    fn candidate_isolation_preserves_sources_profiles_and_shared_owners() {
+        let traversal = checked_in_traversal_policy();
+        let original = candidate_compilation_groups(&traversal).unwrap();
+        let isolated = vec!["Edp".to_string(), "Wia".to_string()];
+        let groups = candidate_compilation_groups_with_isolation(&traversal, &isolated).unwrap();
+        for identity in &isolated {
+            let group = groups
+                .iter()
+                .find(|group| {
+                    group
+                        .partitions
+                        .iter()
+                        .any(|partition| &partition.identity == identity)
+                })
+                .unwrap();
+            assert_eq!(group.partitions.len(), 1);
+        }
+        let mut actual = groups
+            .iter()
+            .flat_map(|group| group.partitions.iter().cloned())
+            .collect::<Vec<_>>();
+        actual.sort_by(|a, b| compare_case_insensitive(&a.identity, &b.identity));
+        assert_eq!(actual, traversal.partitions);
+        assert!(groups.len() >= original.len());
+        for group in original.iter().filter(|group| group.partitions.len() == 1) {
+            assert!(groups.contains(group));
+        }
+        let error = candidate_compilation_groups_with_isolation(
+            &traversal,
+            &["not-a-partition".to_string()],
+        )
+        .unwrap_err();
+        assert!(
+            error.contains("unknown candidate isolation partition"),
+            "{error}"
+        );
+        println!(
+            "candidate profiles={} coarse={} Edp/Wia={}",
+            groups
+                .iter()
+                .map(|group| &group.profile)
+                .collect::<BTreeSet<_>>()
+                .len(),
+            original.len(),
+            groups.len()
+        );
     }
 
     #[test]
