@@ -28,6 +28,17 @@ must be preserved by a future executor; the existing default aggregate emission 
 The model-only controls run without SDK extraction or producer overrides:
 `cargo test --release --offline --manifest-path tools\rust\Cargo.toml candidate_`.
 
+The test-only `scrape::tests::native_contract::compare` gate compares split and folded
+native root observations, retaining original TU/ordinal provenance in diagnostics.
+Physical source/expansion locations, definition and semantic parents identify declarations;
+complete typed payloads and all annotation routes must agree across every alternative.
+Native named references keep their locations and must resolve in their own input.
+Unknown required bodies or unresolved parents/references fail closed. Folded-only extras
+are inventoried, not mistaken for loss. This is neither dependency-closure nor whole-SDK
+coverage admission, and does not replace the original logical owner policies. Compiler
+controls include unchanged original source files through wrappers:
+`cargo test --release --offline --manifest-path tools\rust\Cargo.toml native_contract`.
+
 WinHTTP uses the existing `WinHttp/main.cpp` compile environment in the fifth authority
 input, while WinInet and Winineti remain in the aggregate. Their incompatible
 `_INTERNET_SCHEME_` and `_URL_COMPONENTS_` provider guards must not share a preprocessing

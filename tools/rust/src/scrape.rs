@@ -3477,6 +3477,7 @@ mod tests {
     use std::sync::OnceLock;
 
     mod com_provider;
+    mod native_contract;
     mod sdk_folding;
 
     fn parse_args(args: &[&str]) -> Result<Options, String> {
