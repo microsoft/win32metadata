@@ -299,6 +299,96 @@ pub struct TraversalPolicy {
     pub compile_environment_exceptions: Vec<CompileEnvironmentException>,
 }
 
+#[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
+pub struct CompilationProfile {
+    pub standard: Option<String>,
+    pub include_directories: Vec<String>,
+    pub partition_local_roots: Vec<String>,
+    pub defines: Vec<SourceDefine>,
+}
+
+impl CompileEnvironmentIdentity {
+    pub fn compilation_profile(&self) -> CompilationProfile {
+        CompilationProfile {
+            standard: self.standard.clone(),
+            include_directories: self.include_directories.clone(),
+            partition_local_roots: self.partition_local_roots.clone(),
+            defines: self.defines.clone(),
+        }
+    }
+}
+
+#[derive(Clone, Debug, Eq, PartialEq)]
+pub struct CandidateCompilationGroup {
+    pub profile: CompilationProfile,
+    pub partitions: Vec<LogicalPartition>,
+}
+
+// Matching profiles are candidates, not evidence of compatible native headers.
+pub fn candidate_compilation_groups(
+    traversal: &TraversalPolicy,
+) -> Result<Vec<CandidateCompilationGroup>, String> {
+    let mut by_name = BTreeMap::new();
+    for partition in &traversal.partitions {
+        if by_name.insert(partition.identity.as_str(), partition).is_some() {
+            return Err(format!("duplicate logical partition `{}`", partition.identity));
+        }
+    }
+    let mut separate = BTreeSet::new();
+    for exception in &traversal.compile_environment_exceptions {
+        if !by_name.contains_key(exception.partition.as_str()) {
+            return Err(format!("compile exception has unknown partition `{}`", exception.partition));
+        }
+        separate.insert(exception.partition.as_str());
+    }
+    for overlap in &traversal.audit.physical_overlaps {
+        for owner in &overlap.owners {
+            let partition = by_name.get(owner.partition.as_str()).ok_or_else(|| {
+                format!("root `{}` has unknown owner `{}`", overlap.inventory_path, owner.partition)
+            })?;
+            if owner.namespace != partition.policy.namespace
+                || owner.policy != partition.policy
+                || owner.compile_environment != partition.compile_environment
+                || owner.compile_variant != compile_variant(&partition.compile_environment)
+            {
+                return Err(format!(
+                    "root `{}` disagrees with owner `{}` policy or compile context",
+                    overlap.inventory_path, owner.partition
+                ));
+            }
+        }
+        if overlap.owners.windows(2).any(|pair| {
+            pair[0].policy != pair[1].policy
+                || pair[0].compile_variant != pair[1].compile_variant
+                || pair[0].compile_environment.compilation_profile()
+                    != pair[1].compile_environment.compilation_profile()
+        }) {
+            separate.extend(overlap.owners.iter().map(|owner| owner.partition.as_str()));
+        }
+    }
+    let mut buckets = BTreeMap::<CompilationProfile, Vec<LogicalPartition>>::new();
+    let mut groups = Vec::new();
+    for partition in &traversal.partitions {
+        let profile = partition.compile_environment.compilation_profile();
+        if separate.contains(partition.identity.as_str()) {
+            groups.push(CandidateCompilationGroup {
+                profile,
+                partitions: vec![partition.clone()],
+            });
+        } else {
+            buckets.entry(profile).or_default().push(partition.clone());
+        }
+    }
+    groups.extend(buckets.into_iter().map(|(profile, mut partitions)| {
+        partitions.sort_by(|a, b| compare_case_insensitive(&a.identity, &b.identity));
+        CandidateCompilationGroup { profile, partitions }
+    }));
+    groups.sort_by(|a, b| {
+        compare_case_insensitive(&a.partitions[0].identity, &b.partitions[0].identity)
+    });
+    Ok(groups)
+}
+
 #[derive(Clone, Debug)]
 struct ResolvedRootClaim {
     partition: String,
@@ -2673,6 +2763,66 @@ mod tests {
             &checked_in_include_dirs(&win_sdk),
         )
         .unwrap()
+    }
+
+    #[test]
+    fn candidate_compilation_groups_preserve_every_logical_source() {
+        let traversal = checked_in_traversal_policy();
+        let groups = candidate_compilation_groups(&traversal).unwrap();
+        assert_eq!(groups.len(), 72);
+        assert_eq!(groups.iter().map(|g| g.partitions.len()).max(), Some(206));
+        let mut actual = groups.iter().flat_map(|g| g.partitions.iter().cloned()).collect::<Vec<_>>();
+        actual.sort_by(|a, b| compare_case_insensitive(&a.identity, &b.identity));
+        assert_eq!(actual, traversal.partitions);
+        for exception in &traversal.compile_environment_exceptions {
+            let group = groups.iter().find(|g| g.partitions.iter()
+                .any(|p| p.identity == exception.partition)).unwrap();
+            assert_eq!(group.partitions.len(), 1, "{}", exception.partition);
+        }
+        for overlap in &traversal.audit.physical_overlaps {
+            for owner in &overlap.owners {
+                let group = groups.iter().find(|g| g.partitions.iter()
+                    .any(|p| p.identity == owner.partition)).unwrap();
+                assert_eq!(group.partitions.len(), 1, "{}", owner.partition);
+            }
+        }
+        let mut reversed = traversal.clone();
+        reversed.partitions.reverse();
+        assert_eq!(candidate_compilation_groups(&reversed).unwrap(), groups);
+    }
+
+    #[test]
+    fn candidate_profiles_preserve_order_and_ignore_only_source_hash() {
+        let traversal = checked_in_traversal_policy();
+        let environment = &traversal.partitions.iter().find(|p| p.identity == "Fs")
+            .unwrap().compile_environment;
+        let expected = environment.compilation_profile();
+        let mut changed = environment.clone();
+        changed.source_sha256 = "different complete original source".into();
+        assert_eq!(changed.compilation_profile(), expected);
+        changed.defines.reverse();
+        assert_ne!(changed.compilation_profile(), expected);
+        let mut changed = expected.clone();
+        changed.standard = Some("c++20".into());
+        assert_ne!(changed, expected);
+        let mut changed = expected.clone();
+        changed.include_directories = vec!["first".into(), "second".into()];
+        let mut reordered = changed.clone();
+        reordered.include_directories.reverse();
+        assert_ne!(changed, reordered);
+        let mut changed = expected.clone();
+        changed.partition_local_roots = vec!["<PartitionDir>/manual.h".into()];
+        assert_ne!(changed, expected);
+    }
+
+    #[test]
+    fn candidate_compilation_groups_reject_stale_owner_contexts() {
+        let mut traversal = checked_in_traversal_policy();
+        let overlap = &mut traversal.audit.physical_overlaps[0];
+        let owner = &mut overlap.owners[0];
+        owner.policy.exclusions.insert("ConflictingPolicy".into());
+        assert!(candidate_compilation_groups(&traversal).unwrap_err()
+            .contains("policy or compile context"));
     }
 
     #[test]

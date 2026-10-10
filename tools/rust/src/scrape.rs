@@ -1500,6 +1500,123 @@ fn append_authority_manifest(
     Ok(())
 }
 
+#[allow(dead_code)]
+pub(crate) struct CandidateSourcePlan {
+    pub groups: Vec<crate::partition::CandidateCompilationGroup>,
+    pub inputs: Vec<Input>,
+    pub include_directories: Vec<Vec<String>>,
+    pub headers: HeaderPartitionPolicy,
+    pub audit: crate::partition::TraversalPolicyAudit,
+}
+
+#[allow(dead_code)]
+pub(crate) fn build_candidate_source_plan(
+    traversal: &crate::partition::TraversalPolicy,
+    include_dirs: &[PathBuf],
+    output: &Path,
+) -> Result<CandidateSourcePlan, String> {
+    if !output.is_absolute() {
+        return Err("candidate source output must be an absolute path".to_string());
+    }
+    if !traversal.audit.missing_roots.is_empty() || !traversal.audit.unsupported_roots.is_empty() {
+        return Err("candidate compilation requires resolved traversal roots".to_string());
+    }
+    let groups = crate::partition::candidate_compilation_groups(traversal)?;
+    let mut inputs = Vec::new();
+    let mut directories = Vec::new();
+    let mut headers = HeaderPartitionPolicy::new();
+    for (number, group) in groups.iter().enumerate() {
+        for partition in &group.partitions {
+            if !partition.input.is_absolute() {
+                return Err(format!("original source must be absolute: {}", partition.input.display()));
+            }
+            let bytes = std::fs::read(&partition.input).map_err(|error| {
+                format!("failed to read original source `{}`: {error}", partition.input.display())
+            })?;
+            if bytes != partition.source.as_bytes() {
+                return Err(format!("original source changed after traversal: {}", partition.input.display()));
+            }
+        }
+        let (name, source) = if let [partition] = group.partitions.as_slice() {
+            (path_arg(&partition.input, "--partition")?, partition.source.clone())
+        } else {
+            let name = path_arg(&output.join(format!("candidate-{number:03}.cpp")), "candidate input")?;
+            let mut source = String::new();
+            for partition in &group.partitions {
+                let path = path_arg(&partition.input, "--partition")?;
+                if path.contains(['"', '\r', '\n']) {
+                    return Err(format!("original source cannot be included safely: {path}"));
+                }
+                source.push_str(&format!("#include \"{path}\"\n"));
+            }
+            (name, source)
+        };
+        let mut roots = Vec::new();
+        let mut claims = BTreeMap::new();
+        for partition in &group.partitions {
+            let owner = convert_root_partition(partition);
+            let mut add = |path: &Path, canonical: &crate::partition::WindowsPathIdentity| {
+                if let Some(policy) = claims.insert(canonical.clone(), &partition.policy)
+                    && policy != &partition.policy
+                {
+                    return Err(format!("candidate `{name}` has conflicting policies for `{canonical}`"));
+                }
+                let root = path_arg(path, "--partition-policy-root")?;
+                roots.push(root.clone());
+                add_header_partition_owner(&mut headers, &name, root, owner.clone());
+                Ok(())
+            };
+            for root in &partition.roots {
+                match root {
+                    crate::partition::TraversalRoot::File(root) => add(&root.path, &root.canonical_path)?,
+                    crate::partition::TraversalRoot::Directory(root) => {
+                        for file in &root.files {
+                            add(&file.path, &file.canonical_path)?;
+                        }
+                    }
+                    _ => return Err(format!("partition `{}` has an unresolved root", partition.identity)),
+                }
+            }
+        }
+        inputs.push(Input::new(name, source).with_roots(roots));
+        let mut resolved = include_dirs.iter().map(|path| path_arg(path, "--include"))
+            .collect::<Result<Vec<_>, _>>()?;
+        resolved.extend(group.profile.include_directories.iter()
+            .map(|path| resolve_partition_include_directory(path, include_dirs))
+            .collect::<Result<Vec<_>, _>>()?);
+        directories.push(resolved);
+    }
+    Ok(CandidateSourcePlan {
+        groups,
+        inputs,
+        include_directories: directories,
+        headers,
+        audit: traversal.audit.clone(),
+    })
+}
+
+fn resolve_partition_include_directory(
+    value: &str,
+    include_dirs: &[PathBuf],
+) -> Result<String, String> {
+    let normalized = value.replace('\\', "/");
+    if let Some(relative) = normalized.strip_prefix("<RepoRoot>/") {
+        return path_arg(
+            &Path::new(env!("CARGO_MANIFEST_DIR")).join("..").join("..").join(relative),
+            "--include-directory",
+        );
+    }
+    if let Some(relative) = normalized.strip_prefix("<IncludeRoot>/") {
+        let relative = relative.to_ascii_lowercase();
+        return include_dirs.iter().find(|directory| {
+            directory.to_string_lossy().replace('\\', "/").to_ascii_lowercase()
+                .ends_with(&format!("/{relative}"))
+        }).map(|directory| path_arg(directory, "--include-directory")).transpose()?
+            .ok_or_else(|| format!("partition include directory `{value}` was not found in SDK includes"));
+    }
+    path_arg(Path::new(value), "--include-directory")
+}
+
 fn build_authority_source_plan(
     traversal: &crate::partition::TraversalPolicy,
     include_dirs: &[PathBuf],
@@ -2142,40 +2259,6 @@ fn build_inputs(
             .iter()
             .map(|directory| directory.join(header))
             .find(|path| path.is_file())
-    }
-
-    fn resolve_partition_include_directory(
-        value: &str,
-        include_dirs: &[PathBuf],
-    ) -> Result<String, String> {
-        let normalized = value.replace('\\', "/");
-        if let Some(relative) = normalized.strip_prefix("<RepoRoot>/") {
-            return path_arg(
-                &Path::new(env!("CARGO_MANIFEST_DIR"))
-                    .join("..")
-                    .join("..")
-                    .join(relative),
-                "--include-directory",
-            );
-        }
-        if let Some(relative) = normalized.strip_prefix("<IncludeRoot>/") {
-            let relative = relative.to_ascii_lowercase();
-            return include_dirs
-                .iter()
-                .find(|directory| {
-                    directory
-                        .to_string_lossy()
-                        .replace('\\', "/")
-                        .to_ascii_lowercase()
-                        .ends_with(&format!("/{relative}"))
-                })
-                .map(|directory| path_arg(directory, "--include-directory"))
-                .transpose()?
-                .ok_or_else(|| {
-                    format!("partition include directory `{value}` was not found in SDK includes")
-                });
-        }
-        path_arg(Path::new(value), "--include-directory")
     }
 
     if !options.partitions.is_empty() {
@@ -7812,6 +7895,91 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         for name in ["IEEE1394_VDEV_PNP_REQUEST", "IEEE1394_API_REQUEST"] {
             assert!(rdl.contains(name), "{rdl}");
         }
+    }
+
+    #[test]
+    fn candidate_source_plan_preserves_original_roots_and_colors() {
+        let traversal = checked_in_traversal_policy();
+        let includes = checked_in_include_dirs(&checked_in_win_sdk());
+        let output = std::env::temp_dir().join("win32metadata-candidate-source-plan");
+        let plan = build_candidate_source_plan(&traversal, &includes, &output).unwrap();
+        assert_eq!(plan.groups.len(), 72);
+        assert_eq!(plan.audit, traversal.audit);
+        let mut expected = HeaderPartitionPolicy::new();
+        for (group, input) in plan.groups.iter().zip(&plan.inputs) {
+            for partition in &group.partitions {
+                let owner = convert_root_partition(partition);
+                let mut add = |path: &Path| {
+                    expected.add_traversed_header_for_input(&input.name,
+                        path_arg(path, "--partition-policy-root").unwrap(), owner.clone());
+                };
+                for root in &partition.roots {
+                    match root {
+                        crate::partition::TraversalRoot::File(root) => add(&root.path),
+                        crate::partition::TraversalRoot::Directory(root) => {
+                            for file in &root.files { add(&file.path); }
+                        }
+                        _ => panic!("checked-in root must resolve"),
+                    }
+                }
+                assert_eq!(partition.source.as_bytes(), std::fs::read(&partition.input).unwrap());
+            }
+            if let [partition] = group.partitions.as_slice() {
+                assert_eq!(input.name, path_arg(&partition.input, "--partition").unwrap());
+                assert_eq!(input.source, partition.source);
+            } else {
+                let expected = group.partitions.iter().map(|p|
+                    format!("#include \"{}\"\n", path_arg(&p.input, "--partition").unwrap()))
+                    .collect::<String>();
+                assert_eq!(input.source, expected);
+            }
+        }
+        assert_eq!(plan.headers, expected);
+        let base = includes.iter().map(|p| path_arg(p, "--include").unwrap()).collect::<Vec<_>>();
+        for directories in &plan.include_directories {
+            assert_eq!(&directories[..base.len()], base);
+        }
+    }
+
+    #[test]
+    fn candidate_source_plan_keeps_noninclude_source_and_relative_includes() {
+        let root = scratch("candidate-source-preservation");
+        let shared = root.join("shared");
+        std::fs::create_dir(&shared).unwrap();
+        for name in ["First", "Second", "Nonordinary"] {
+            let directory = root.join(name);
+            std::fs::create_dir(&directory).unwrap();
+            std::fs::write(directory.join("local.h"), "").unwrap();
+            std::fs::write(shared.join(format!("{name}.h")), "").unwrap();
+            let source = if name == "Nonordinary" {
+                "\u{feff}#define FEATURE 1\r\n#undef FEATURE\r\n#if 1\r\ntypedef int NativeValue;\r\n#endif\r\n"
+            } else {
+                "#define SECURITY_WIN32\r\n#include \"local.h\"\r\n"
+            };
+            std::fs::write(directory.join("main.cpp"), source).unwrap();
+            std::fs::write(directory.join("settings.rsp"), format!(
+                "--traverse\n<IncludeRoot>/shared/{name}.h\n--namespace\nWindows.Win32.{name}\n")).unwrap();
+        }
+        let traversal = crate::partition::load_traversal_policy(&root, std::slice::from_ref(&shared)).unwrap();
+        let plan = build_candidate_source_plan(&traversal, &[shared], &root.join("generated")).unwrap();
+        assert_eq!(plan.groups.len(), 2);
+        let grouped = plan.groups.iter().position(|g| g.partitions.len() == 2).unwrap();
+        assert_eq!(plan.groups[grouped].partitions.iter().map(|p| p.identity.as_str())
+            .collect::<Vec<_>>(), ["First", "Second"]);
+        for partition in &plan.groups[grouped].partitions {
+            assert!(plan.inputs[grouped].source.contains(&format!("#include \"{}\"\n",
+                path_arg(&partition.input, "--partition").unwrap())));
+            assert!(partition.source.contains("#include \"local.h\""));
+            assert_eq!(partition.source.as_bytes(), std::fs::read(&partition.input).unwrap());
+        }
+        let single = plan.groups.iter().position(|g| g.partitions.len() == 1).unwrap();
+        let original = &plan.groups[single].partitions[0];
+        assert_eq!(plan.inputs[single].source.as_bytes(), std::fs::read(&original.input).unwrap());
+        assert!(plan.inputs[single].source.contains("#undef FEATURE\r\n#if 1\r\ntypedef"));
+        std::fs::write(&original.input, "changed source").unwrap();
+        assert!(build_candidate_source_plan(&traversal, &[], &root.join("generated"))
+            .err().unwrap().contains("source changed after traversal"));
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]

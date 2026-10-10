@@ -14,6 +14,20 @@ in parallel by default, then their WinMDs are merged into one output.
 `--architecture-jobs` can lower concurrent workloads. Focused partition translation units remain
 available for package fixtures and inner-loop debugging.
 
+`partition::candidate_compilation_groups` and `scrape::build_candidate_source_plan`
+provide a separate, non-default whole-original-source candidate plan. Exact ordered
+compile profiles exclude source hashes and namespaces; all 66 compiler/source exceptions
+remain single inputs. Shared physical roots with differing policies or compile contexts
+retain independent owners, including Audio/Audio.Endpoints and both PSAPI versions.
+The current inventory produces 72 candidate inputs; its largest common cohort has 206
+sources. These counts do not establish native header compatibility or declaration authority.
+Group wrappers include complete original absolute `main.cpp` paths in stable order;
+single inputs keep their original identity and source bytes. Roots, policies and requested/
+resolved scope fallbacks remain in the plan. Per-group language and ordered include paths
+must be preserved by a future executor; the existing default aggregate emission is unchanged.
+The model-only controls run without SDK extraction or producer overrides:
+`cargo test --release --offline --manifest-path tools\rust\Cargo.toml candidate_`.
+
 WinHTTP uses the existing `WinHttp/main.cpp` compile environment in the fifth authority
 input, while WinInet and Winineti remain in the aggregate. Their incompatible
 `_INTERNET_SCHEME_` and `_URL_COMPONENTS_` provider guards must not share a preprocessing
