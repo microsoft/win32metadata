@@ -440,10 +440,13 @@ when needed.
 
 Both GitHub Actions and Azure Pipelines explicitly invoke
 `BuildMetadataBin.ps1 -UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1`
-and retain strict metadata TRX results. This staged serial CI schedule preserves
+and retain strict metadata TRX results. This conservative original-worker schedule preserves
 all original sources and all three architectures; it is not evidence that the
 complete corpus fits either runner. Ordinary script/MSBuild defaults remain
-original compilation off, three architecture workers and one native worker.
+original compilation off, three architecture workers and one original native worker
+per architecture. The native limit does not cover additional SAL probe TUs or
+post-barrier macro probes, which can use up to four workers independently. It is
+not a whole-process CPU or memory bound.
 CI uses `Prepare-WindowsRsHeaders.ps1 -VerifyOutput <output> -VerifyCiInvocation`
 to check these exact, once-only switches, SDK/policy/routes and architecture scope
 in the hash-verified successful generation receipt, not evaluated defaults.
