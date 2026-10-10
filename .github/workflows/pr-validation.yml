@@ -72,7 +72,7 @@ jobs:
         shell: pwsh
         run: |
           New-Item -ItemType Directory -Path .\bin\logs -Force | Out-Null
-          .\scripts\BuildMetadataBin.ps1 *>&1 | Tee-Object -FilePath .\bin\logs\metadata-generation.log
+          .\scripts\BuildMetadataBin.ps1 -UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1 *>&1 | Tee-Object -FilePath .\bin\logs\metadata-generation.log
 
       - name: Preserve configured and available generation input fingerprints
         if: always()
@@ -96,16 +96,7 @@ jobs:
 
       - name: Verify prepared input and generated output provenance
         shell: pwsh
-        run: |
-          .\scripts\Prepare-WindowsRsHeaders.ps1 -VerifyOutput .\bin\Windows.Win32.winmd
-          $receipt = Get-Content .\bin\Windows.Win32.winmd.provenance.json -Raw | ConvertFrom-Json
-          foreach ($option in @("--partition-policy-root", "--namespace-routes", "--win32-sdk")) {
-            if ($option -cnotin $receipt.arguments) { throw "Normal build omitted $option." }
-          }
-          $architectures = for ($i = 0; $i -lt $receipt.arguments.Count; $i++) {
-            if ($receipt.arguments[$i] -ceq "--arch") { $receipt.arguments[++$i] }
-          }
-          if (($architectures -join ";") -cne "x64;x86;arm64") { throw "Normal build architecture scope changed." }
+        run: .\scripts\Prepare-WindowsRsHeaders.ps1 -VerifyOutput .\bin\Windows.Win32.winmd -VerifyCiInvocation
 
       - name: Test header preparation and patched generation
         shell: pwsh

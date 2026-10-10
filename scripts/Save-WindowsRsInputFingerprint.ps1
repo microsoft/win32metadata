@@ -266,8 +266,10 @@ function Save-WindowsRsInputFingerprint {
                 "generation\WinSDK\Windows.Win32.proj", "sources\GeneratorSdk\sdk\sdk.props",
                 "sources\GeneratorSdk\sdk\sdk.targets", "scripts\BuildMetadataBin.ps1",
                 "scripts\Build-Win32MetadataTools.ps1", "scripts\Prepare-WindowsRsHeaders.ps1",
+                "scripts\WindowsRsGenerationProvenance.ps1",
                 "scripts\Prepare-ClangResourceHeaders.ps1", "scripts\ClangResourceManifest.ps1",
-                "scripts\Save-WindowsRsInputFingerprint.ps1", ".github\workflows\pr-validation.yml")) {
+                "scripts\Save-WindowsRsInputFingerprint.ps1", ".github\workflows\pr-validation.yml",
+                "azure-pipelines.yml")) {
                 Get-FingerprintFile (Join-Path $Root $relative)
             }
             Get-FingerprintTree (Join-Path $Root "tools\rust\src")

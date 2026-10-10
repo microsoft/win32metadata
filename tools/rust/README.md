@@ -438,7 +438,18 @@ The tool builder stages pinned libclang 22.1.8 and its matching resource headers
 the lightweight Generate script expects nbgv available and restores SDK references
 when needed.
 
-CI builds this prepared authority path and retains strict metadata TRX results.
+Both GitHub Actions and Azure Pipelines explicitly invoke
+`BuildMetadataBin.ps1 -UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1`
+and retain strict metadata TRX results. This staged serial CI schedule preserves
+all original sources and all three architectures; it is not evidence that the
+complete corpus fits either runner. Ordinary script/MSBuild defaults remain
+original compilation off, three architecture workers and one native worker.
+CI uses `Prepare-WindowsRsHeaders.ps1 -VerifyOutput <output> -VerifyCiInvocation`
+to check these exact, once-only switches, SDK/policy/routes and architecture scope
+in the hash-verified successful generation receipt, not evaluated defaults.
+The receipt controls run in `Test-WindowsRsInputFingerprint.ps1` with isolated
+files and no SDK generation.
+
 The existing `-AllowKnownGeneratorGaps` option is a raw-era exact **nine failure
 fingerprints plus four passes**, not a strict product pass; CI no longer applies it
 automatically. Changed output requires native/architecture evidence and real fixes or

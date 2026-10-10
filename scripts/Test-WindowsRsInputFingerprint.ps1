@@ -2,6 +2,7 @@ param()
 
 $ErrorActionPreference = "Stop"
 . "$PSScriptRoot\Save-WindowsRsInputFingerprint.ps1"
+. "$PSScriptRoot\WindowsRsGenerationProvenance.ps1"
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..")
 $fixture = Join-Path $repo "obj\WindowsRsInputFingerprintTests\fixture with spaces-$([Guid]::NewGuid().ToString('N'))"
 $originalResourceOverride = $env:CLANG_RESOURCE_DIR
@@ -49,6 +50,7 @@ try {
         "tools\rust\Cargo.toml", "rust-toolchain.toml", "eng\Versions.props", "generation\WinSDK\Windows.Win32.proj",
         "sources\GeneratorSdk\sdk\sdk.props", "sources\GeneratorSdk\sdk\sdk.targets",
         "scripts\BuildMetadataBin.ps1", "scripts\Build-Win32MetadataTools.ps1", "scripts\Prepare-WindowsRsHeaders.ps1",
+        "scripts\WindowsRsGenerationProvenance.ps1", "azure-pipelines.yml",
         "scripts\Prepare-ClangResourceHeaders.ps1", "scripts\Save-WindowsRsInputFingerprint.ps1",
         ".github\workflows\pr-validation.yml", "tools\rust\src\scrape.rs")) {
         Write-Fixture (Join-Path $fixture $path) "fixture $path"
@@ -127,6 +129,7 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
             WinmdObjDir = Join-Path $fixture "objects"
             OutputWinmd = Join-Path $fixture "output.winmd"
             TargetArchitectures = "x64;x86;arm64"; WinmdArchitectureJobs = "3"
+            WinmdNativeJobs = "1"; WinmdUseOriginalCompilation = "false"
         }
         Items = @{
             WinmdIncludeDir = @(@{ FullPath = $include })
@@ -205,6 +208,7 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
         arguments = @(
             "scrape", "--include", $preparedRoot, "--include", $include, "--lib", $imports[0], "--lib", $imports[1],
             "--partition-policy-root", $policy, "--namespace-routes", $route, "--obj", (Join-Path $fixture "objects"),
+            "--win32-sdk", "--original-compilation", "--architecture-jobs", "1", "--native-jobs", "1",
             "--arch", "x64", "--arch", "x86", "--arch", "arm64"
         )
     }
@@ -214,6 +218,102 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
     Assert ($bound.groups.availableIncludeInputs[0].preparedManifest.sha256 -ceq (Get-FingerprintFile $preparation).sha256) "Prepared include tree did not reuse the existing manifest."
     Assert (!$bound.groups.availableIncludeInputs[0].Contains("files")) "Prepared file inventory was duplicated."
     Assert (($bound.groups.passedOptionsAndTranslationUnits[0].toolArguments -join "|") -ceq ($receipt.arguments -join "|")) "Actual receipt arguments were replaced by evaluated defaults."
+    $verified = Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+        -PreparedRoot $preparedRoot -VerifyCiInvocation
+    Assert (($verified.arguments -join "|") -ceq ($receipt.arguments -join "|")) "CI verification did not use the successful receipt."
+    $validArguments = [string[]]$receipt.arguments.Clone()
+    $receipt.arguments = @($validArguments | Where-Object { $_ -cne "--original-compilation" })
+    $receipt.arguments[[Array]::IndexOf([string[]]$receipt.arguments, "--architecture-jobs") + 1] = "3"
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    $ordinary = Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation -PreparedRoot $preparedRoot
+    Assert (($ordinary.arguments -join "|") -ceq ($receipt.arguments -join "|")) "Ordinary verification acquired the CI-only override."
+    foreach ($option in @("--original-compilation", "--win32-sdk", "--architecture-jobs", "--native-jobs",
+        "--partition-policy-root", "--namespace-routes", "--arch")) {
+        $index = [Array]::IndexOf($validArguments, $option)
+        $hasValue = $option -notin @("--original-compilation", "--win32-sdk")
+        $missing = [Collections.Generic.List[string]]::new($validArguments)
+        $missing.RemoveAt($index)
+        if ($hasValue) { $missing.RemoveAt($index) }
+        $receipt.arguments = $missing.ToArray()
+        Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+        Expect-Failure {
+            Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                -PreparedRoot $preparedRoot -VerifyCiInvocation
+        } "CI generation"
+        $receipt.arguments = @($validArguments) + $option
+        if ($hasValue) { $receipt.arguments += $validArguments[$index + 1] }
+        Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+        Expect-Failure {
+            Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                -PreparedRoot $preparedRoot -VerifyCiInvocation
+        } "CI generation"
+    }
+    foreach ($option in @("--architecture-jobs", "--native-jobs", "--arch")) {
+        foreach ($value in $(if ($option -ceq "--arch") { @("arm64", "invalid") } else { @("0", "2", "-1", "invalid") })) {
+            $receipt.arguments = $validArguments.Clone()
+            $receipt.arguments[[Array]::IndexOf($validArguments, $option) + 1] = $value
+            Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+            Expect-Failure {
+                Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                    -PreparedRoot $preparedRoot -VerifyCiInvocation
+            } "CI generation"
+        }
+    }
+    foreach ($option in @("--original-compilation=false", "--Original-Compilation")) {
+        $receipt.arguments = $validArguments.Clone()
+        $receipt.arguments[[Array]::IndexOf($validArguments, "--original-compilation")] = $option
+        Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+        Expect-Failure {
+            Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                -PreparedRoot $preparedRoot -VerifyCiInvocation
+        } "CI generation"
+    }
+    foreach ($option in @("--architecture-jobs", "--native-jobs")) {
+        $missingValue = [Collections.Generic.List[string]]::new($validArguments)
+        $missingValue.RemoveAt([Array]::IndexOf($validArguments, $option) + 1)
+        $receipt.arguments = $missingValue.ToArray()
+        Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+        Expect-Failure {
+            Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                -PreparedRoot $preparedRoot -VerifyCiInvocation
+        } "Missing value"
+    }
+    $receipt.arguments = @($validArguments) + "--native-jobs"
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    Expect-Failure {
+        Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+            -PreparedRoot $preparedRoot -VerifyCiInvocation
+    } "Missing value"
+    $receipt.arguments = $validArguments
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    foreach ($path in @($output, $preparation)) {
+        $originalBytes = [IO.File]::ReadAllBytes($path)
+        Write-Fixture $path "changed bound bytes"
+        Expect-Failure {
+            Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+                -PreparedRoot $preparedRoot -VerifyCiInvocation
+        } "prepared inputs/tool/output"
+        [IO.File]::WriteAllBytes($path, $originalBytes)
+    }
+    $receipt.arguments = $validArguments.Clone()
+    $receipt.arguments[[Array]::IndexOf($validArguments, "--include") + 1] = $include
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    Expect-Failure {
+        Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+            -PreparedRoot $preparedRoot -VerifyCiInvocation
+    } "prepared inputs/tool/output"
+    $receipt.arguments = $validArguments.Clone()
+    $receipt.arguments[0] = "compile"
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    Expect-Failure {
+        Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+            -PreparedRoot $preparedRoot -VerifyCiInvocation
+    } "prepared inputs/tool/output"
+    $receipt.arguments = $validArguments
+    Write-Fixture "$output.provenance.json" ($receipt | ConvertTo-Json -Depth 4)
+    Expect-Failure {
+        & (Join-Path $repo "scripts\Prepare-WindowsRsHeaders.ps1") -VerifyCiInvocation
+    } "-VerifyCiInvocation requires -VerifyOutput"
     Assert (@($bound.groups.ordinaryStageReceipts | Where-Object stage -eq "ordinary-premerge").Count -eq 3) "Ordinary premerge image hashes were not retained."
     Assert ($bound.groups.availableGeneratedInputArtifacts[0].files[0].relativePath -ceq "available-header-list.tsv") "Available emitted header-list binding was lost."
     Remove-Item -LiteralPath (Join-Path $fixture "objects\Windows.Win32.x86.winmd")
@@ -223,6 +323,10 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
     Write-Fixture (Join-Path $fixture "objects\Windows.Win32.x86.winmd") "x86 ordinary image"
     Write-Fixture $tool "changed executable bytes"
     Expect-Failure { Save-Fixture "stale-receipt" } "tool bytes changed"
+    Expect-Failure {
+        Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+            -PreparedRoot $preparedRoot -VerifyCiInvocation
+    } "prepared inputs/tool/output"
     Write-Fixture $tool "native tool fixture"
     Remove-Item -LiteralPath $preparation, $output, "$output.provenance.json"
     $sealedHash = (Get-FileHash (Join-Path $fixture "first.json")).Hash
@@ -250,7 +354,11 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
     Assert (!$partial.complete -and $partial.groups.nativeReportedPaths.Count -eq 1) "Evaluation failure lost native log evidence."
     $workflow = Get-Content -LiteralPath (Join-Path $repo ".github\workflows\pr-validation.yml") -Raw
     Assert ($workflow -match 'timeout-minutes: 360') "The normal CI timeout changed."
-    Assert ($workflow -match 'BuildMetadataBin\.ps1 \*>&1 \| Tee-Object') "Fingerprinting replaced the normal build command."
+    Assert ($workflow -match 'BuildMetadataBin\.ps1 -UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1 \*>&1 \| Tee-Object -FilePath \.\\bin\\logs\\metadata-generation\.log') "CI build invocation or fingerprint logging changed."
+    Assert ($workflow -match 'Prepare-WindowsRsHeaders\.ps1 -VerifyOutput \.\\bin\\Windows\.Win32\.winmd -VerifyCiInvocation') "GitHub CI no longer verifies the successful invocation."
+    $pipeline = Get-Content -LiteralPath (Join-Path $repo "azure-pipelines.yml") -Raw
+    Assert ($pipeline -match "filePath: 'scripts\\BuildMetadataBin\.ps1'\s+arguments: '-UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1'") "ADO CI build invocation changed."
+    Assert ($pipeline -match "filePath: 'scripts\\Prepare-WindowsRsHeaders\.ps1'\s+arguments: '-VerifyOutput bin\\Windows\.Win32\.winmd -VerifyCiInvocation'") "ADO CI no longer verifies the successful invocation."
     Assert ($workflow -match '(?s)name: Preserve configured and available generation input fingerprints\s+if: always\(\)') "Failed generation no longer collects fingerprints."
     Assert ($workflow -match '(?s)name: Upload input fingerprints\s+if: always\(\)') "Failed generation no longer uploads fingerprints."
 

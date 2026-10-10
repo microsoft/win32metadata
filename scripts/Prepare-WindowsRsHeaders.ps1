@@ -5,12 +5,15 @@
     Only obj\RecompiledIdlHeaders is recreated. A content-verified tree is reused.
     When ToolPath is supplied, the preparation lock is held until generation finishes.
     VerifyOutput checks the recorded preparation and WinMD without repairing either.
+    VerifyCiInvocation additionally requires the successful receipt to record original
+    compilation, architecture/native worker limits of one and all three architectures.
 #>
 [CmdletBinding(PositionalBinding = $false)]
 param(
     [string]$WinSdkRoot = "$PSScriptRoot\..\generation\WinSDK",
     [string]$ToolPath,
     [string]$VerifyOutput,
+    [switch]$VerifyCiInvocation,
     [switch]$Clean,
     [string]$CleanObjectDirectory,
     [string]$CleanOutput,
@@ -22,6 +25,7 @@ param(
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $false
+. "$PSScriptRoot\WindowsRsGenerationProvenance.ps1"
 $sdkRoot = [System.IO.Path]::GetFullPath($WinSdkRoot)
 $source = Join-Path $sdkRoot "RecompiledIdlHeaders"
 $patches = Join-Path $sdkRoot "patches\post-midl"
@@ -65,16 +69,9 @@ function Get-RecordsHash {
         [System.Text.Encoding]::UTF8.GetBytes($text)))
 }
 
-function Get-ArgumentValues {
-    param([string[]]$Arguments, [string]$Name)
-    for ($i = 0; $i -lt $Arguments.Count; $i++) {
-        if ($Arguments[$i] -ceq $Name) {
-            if (++$i -ge $Arguments.Count) { throw "Missing value for '$Name'." }
-            $Arguments[$i]
-        }
-    }
+if ($VerifyCiInvocation -and !$VerifyOutput) {
+    throw "-VerifyCiInvocation requires -VerifyOutput."
 }
-
 if ($VerifyOutput -and ($ToolPath -or $ToolArguments.Count)) {
     throw "-VerifyOutput cannot be combined with a tool invocation."
 }
@@ -107,7 +104,7 @@ if (!(Test-Path -LiteralPath $source -PathType Container)) {
 }
 if ($ToolPath) {
     $ToolPath = (Resolve-Path -LiteralPath $ToolPath).ProviderPath
-    $includes = @(Get-ArgumentValues $ToolArguments "--include")
+    $includes = @(Get-WindowsRsArgumentValues $ToolArguments "--include")
     if (!$includes.Count -or [System.IO.Path]::GetFullPath($includes[0]) -ine $destination) {
         throw "The first include root must be the prepared tree '$destination'."
     }
@@ -151,7 +148,8 @@ try {
     if (!$sourceFiles.Count) { throw "Pristine SDK mirror is empty: '$source'." }
     $patchFiles = @(Get-TreeRecords $patches "*.patch")
     $recipe = @(
-        foreach ($script in @($PSCommandPath, (Join-Path $PSScriptRoot "ApplySDKPatches.ps1"))) {
+        foreach ($script in @($PSCommandPath, (Join-Path $PSScriptRoot "ApplySDKPatches.ps1"),
+            (Join-Path $PSScriptRoot "WindowsRsGenerationProvenance.ps1"))) {
             [ordered]@{ path = [System.IO.Path]::GetFileName($script); sha256 = (Get-FileHash -LiteralPath $script).Hash }
         }
     )
@@ -199,7 +197,7 @@ try {
     }
 
     if ($ToolPath) {
-        $outputs = @(Get-ArgumentValues $ToolArguments "--output")
+        $outputs = @(Get-WindowsRsArgumentValues $ToolArguments "--output")
         if ($outputs.Count -gt 1) { throw "Expected at most one --output argument." }
         $output = if ($outputs.Count) { [System.IO.Path]::GetFullPath($outputs[0]) }
         $receiptPath = if ($output) { "$output.provenance.json" }
@@ -236,16 +234,8 @@ try {
     }
     if ($VerifyOutput) {
         $output = [System.IO.Path]::GetFullPath($VerifyOutput)
-        $receipt = Get-Content -LiteralPath "$output.provenance.json" -Raw | ConvertFrom-Json
-        $includes = @(Get-ArgumentValues $receipt.arguments "--include")
-        if ($receipt.schema -ne 1 -or $receipt.output -ine $output -or
-            $receipt.outputSha256 -cne (Get-FileHash -LiteralPath $output).Hash -or
-            $receipt.preparation -ine $manifestPath -or
-            $receipt.preparationSha256 -cne (Get-FileHash -LiteralPath $manifestPath).Hash -or
-            $receipt.toolSha256 -cne (Get-FileHash -LiteralPath $receipt.tool).Hash -or
-            !$includes.Count -or [System.IO.Path]::GetFullPath($includes[0]) -ine $destination) {
-            throw "Generation provenance does not match the prepared inputs/tool/output: '$output'."
-        }
+        $receipt = Get-WindowsRsGenerationProvenance -OutputPath $output `
+            -PreparationPath $manifestPath -PreparedRoot $destination -VerifyCiInvocation:$VerifyCiInvocation
         Write-Host "Verified generated output $output ($($receipt.outputSha256)); patch count: $($manifest.patchCount)."
     }
 }

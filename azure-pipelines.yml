@@ -70,13 +70,14 @@ jobs:
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
+      arguments: '-UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 1'
       pwsh: true
 
   - task: PowerShell@2
     displayName: Verify prepared input and generated output provenance
     inputs:
       filePath: 'scripts\Prepare-WindowsRsHeaders.ps1'
-      arguments: '-VerifyOutput bin\Windows.Win32.winmd'
+      arguments: '-VerifyOutput bin\Windows.Win32.winmd -VerifyCiInvocation'
       pwsh: true
 
   - task: PowerShell@2
