@@ -1554,6 +1554,8 @@ pub(crate) fn build_candidate_source_plan(
         let mut roots = Vec::new();
         let mut claims = BTreeMap::new();
         for partition in &group.partitions {
+            // A wrapper changes main-file role, not the original native extraction scope.
+            roots.push(path_arg(&partition.input, "--partition")?);
             let owner = convert_root_partition(partition);
             let mut add = |path: &Path, canonical: &crate::partition::WindowsPathIdentity| {
                 if let Some(policy) = claims.insert(canonical.clone(), &partition.policy)
@@ -3476,6 +3478,7 @@ mod tests {
     use super::*;
     use std::sync::OnceLock;
 
+    mod candidate_source_roots;
     mod com_provider;
     mod native_contract;
     mod sdk_folding;
@@ -7908,9 +7911,22 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         assert_eq!(plan.audit, traversal.audit);
         let mut expected = HeaderPartitionPolicy::new();
         for (group, input) in plan.groups.iter().zip(&plan.inputs) {
+            let mut expected_roots = Input::new(&input.name, "").roots;
             for partition in &group.partitions {
+                expected_roots.extend(
+                    Input::new(
+                        path_arg(&partition.input, "--partition").unwrap(),
+                        &partition.source,
+                    )
+                    .roots,
+                );
                 let owner = convert_root_partition(partition);
                 let mut add = |path: &Path| {
+                    expected_roots.extend(
+                        Input::new(&input.name, "")
+                            .with_roots([path_arg(path, "--partition-policy-root").unwrap()])
+                            .roots,
+                    );
                     expected.add_traversed_header_for_input(&input.name,
                         path_arg(path, "--partition-policy-root").unwrap(), owner.clone());
                 };
@@ -7925,6 +7941,7 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
                 }
                 assert_eq!(partition.source.as_bytes(), std::fs::read(&partition.input).unwrap());
             }
+            assert_eq!(input.roots, expected_roots);
             if let [partition] = group.partitions.as_slice() {
                 assert_eq!(input.name, path_arg(&partition.input, "--partition").unwrap());
                 assert_eq!(input.source, partition.source);

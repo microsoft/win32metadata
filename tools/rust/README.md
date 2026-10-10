@@ -22,7 +22,14 @@ retain independent owners, including Audio/Audio.Endpoints and both PSAPI versio
 The current inventory produces 72 candidate inputs; its largest common cohort has 206
 sources. These counts do not establish native header compatibility or declaration authority.
 Group wrappers include complete original absolute `main.cpp` paths in stable order;
-single inputs keep their original identity and source bytes. Roots, policies and requested/
+their native extraction roots include every original main input and declared traversal
+header, in addition to the wrapper's default root. Main-file role may change, but source
+observation scope does not; original main roots add no header namespace ownership.
+The root-composition compiler control uses authored `const double` values supported by
+the tracked producer; native integer-constant eligibility is a separate producer boundary.
+Those const values retain exact native locations/types/values, but their missing Fact-backed
+Origins still make the unchanged native contract incomplete; this is not gate admission.
+Single inputs keep their original identity, roots and source bytes. Policies and requested/
 resolved scope fallbacks remain in the plan. Per-group language and ordered include paths
 must be preserved by a future executor; the existing default aggregate emission is unchanged.
 The model-only controls run without SDK extraction or producer overrides:
