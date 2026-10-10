@@ -22,8 +22,10 @@ Original main paths/bytes/roots remain unchanged, native owner maps stay empty, 
 the existing header policies, imports, exclusions and provenance remain active.
 It cannot be combined with `--candidate-compilation` or `--candidate-isolate`.
 This opt-in is not SDK admission and does not change production defaults.
-MSBuild uses `WinmdUseOriginalCompilation=true`; `BuildMetadataBin.ps1` exposes
-`-UseOriginalCompilation` (incompatible with `-RawSdk`).
+MSBuild uses `WinmdUseOriginalCompilation=true`; `BuildMetadataBin.ps1` and
+`Generate-WindowsRsWinmd.ps1` expose `-UseOriginalCompilation` (incompatible with
+`-RawSdk`). The latter also rejects selected `-Partition` inputs and explicit
+`-UsePartitionAuthority:$false` instead of falling back to a different input mode.
 
 `partition::candidate_compilation_groups` and `scrape::build_candidate_source_plan`
 provide a separate, non-default whole-original-source candidate plan. Exact ordered
@@ -556,7 +558,13 @@ changes the selected architectures, include roots, namespace authority or native
 Normal generation provenance records the worker option in the native argument list.
 `--native-jobs` defaults to one and passes the producer's `ExtractionOptions` to
 common and partitioned extraction, including original and candidate modes.
-`WinmdNativeJobs` and `BuildMetadataBin.ps1 -NativeJobs` expose the same positive limit.
+`WinmdNativeJobs`, `BuildMetadataBin.ps1 -NativeJobs` and
+`Generate-WindowsRsWinmd.ps1 -NativeJobs` expose the same positive limit in every
+generation mode. For an admitted original-source run, explicitly select
+`-UseOriginalCompilation -ArchitectureJobs 1 -NativeJobs 4`; this is not the default.
+Entrypoint argument-only controls run with
+`.\scripts\Test-WindowsRsHeaders.ps1 -EntryPointArgumentsOnly`; they do not prepare
+SDK headers or invoke the native compiler.
 This is a per-architecture original-TU limit: architecture-jobs times native-jobs
 bounds overlapping original workers, not global memory or synthetic probe work.
 The current pin parallelizes parsing only; the admitted successor bounds complete

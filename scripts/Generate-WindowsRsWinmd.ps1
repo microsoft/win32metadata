@@ -12,6 +12,15 @@
 .PARAMETER ArchitectureJobs
     Maximum concurrent architecture workers, including extraction. Defaults to three.
 
+.PARAMETER NativeJobs
+    Positive per-architecture original-TU worker limit. Defaults to one.
+    ArchitectureJobs multiplies this bound; synthetic probe scheduling remains separate.
+
+.PARAMETER UseOriginalCompilation
+    Opt into one complete original source/profile per logical partition.
+    Requires partition authority; incompatible with RawSdk, selected Partition inputs,
+    or explicit UsePartitionAuthority false. Production defaults remain unchanged.
+
 .PARAMETER UsePartitionAuthority
     Generate aggregate and satellite inputs, two PSAPI compile variants, and complete
     WinHTTP and shared COM contexts using the checked-in logical partition policy.
@@ -54,8 +63,18 @@ param (
     [switch]$SkipBuild,
 
     [ValidateRange(1, 2147483647)]
-    [int]$ArchitectureJobs = 3
+    [int]$ArchitectureJobs = 3,
+
+    [ValidateRange(1, 2147483647)]
+    [int]$NativeJobs = 1,
+
+    [switch]$UseOriginalCompilation
 )
+
+if ($UseOriginalCompilation -and ($RawSdk -or $Partition.Count -or
+    ($PSBoundParameters.ContainsKey("UsePartitionAuthority") -and !$UsePartitionAuthority))) {
+    throw "-UseOriginalCompilation requires partition authority and cannot be combined with -RawSdk, -Partition, or -UsePartitionAuthority:`$false."
+}
 
 . "$PSScriptRoot\CommonUtils.ps1"
 
@@ -149,7 +168,11 @@ if ($coveragePath -and ($Architecture.Count -ne 1 -or $Architecture[0] -ne "x64"
 $useSdkHeaderManifest = $Partition.Count -eq 0
 if ($authority)
 {
-    Write-Host "Generating aggregate + satellite + PSAPI variants + WinHTTP/COM inputs with checked-in logical partition authority for $($Architecture -join ', ')"
+    if ($UseOriginalCompilation) {
+        Write-Host "Generating complete original source/profile inputs with checked-in logical header policy for $($Architecture -join ', ')"
+    } else {
+        Write-Host "Generating aggregate + satellite + PSAPI variants + WinHTTP/COM inputs with checked-in logical partition authority for $($Architecture -join ', ')"
+    }
 }
 elseif ($useSdkHeaderManifest)
 {
@@ -164,6 +187,7 @@ $arguments = @(
     "scrape",
     "--namespace", $Namespace,
     "--architecture-jobs", "$ArchitectureJobs",
+    "--native-jobs", "$NativeJobs",
     "--obj", $objDir
 )
 
@@ -191,6 +215,9 @@ if ($authority)
         "--partition-policy-root", (Join-Path $windowsWin32ProjectRoot "Partitions"),
         "--namespace-routes", $namespaceRoutes
     )
+    if ($UseOriginalCompilation) {
+        $arguments += "--original-compilation"
+    }
 }
 elseif ($useSdkHeaderManifest)
 {

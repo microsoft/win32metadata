@@ -1,4 +1,4 @@
-param()
+param([switch]$EntryPointArgumentsOnly)
 
 $ErrorActionPreference = "Stop"
 $PSNativeCommandUseErrorActionPreference = $false
@@ -58,13 +58,84 @@ function Get-ProjectEvaluation {
     $text | ConvertFrom-Json
 }
 
+function Test-GenerateEntryPointArguments {
+    $entryRoot = Join-Path $fixture "entrypoint"
+    $entryScripts = Join-Path $entryRoot "scripts"
+    $entryToolDir = Join-Path $entryRoot "bin\GeneratorSdk\tools\win-x64"
+    foreach ($directory in @($entryScripts, $entryToolDir,
+        (Join-Path $entryRoot "obj\BuildTools.proj"),
+        (Join-Path $entryRoot "sdk\c\include\fixture"),
+        (Join-Path $entryRoot "generation\WinSDK\Partitions\Foundation"))) {
+        New-Item -ItemType Directory -Path $directory -Force | Out-Null
+    }
+    Set-Content -LiteralPath (Join-Path $entryRoot "obj\BuildTools.proj\BuildTools.proj.nuget.g.props") -Value ""
+    Set-Content -LiteralPath (Join-Path $entryRoot "generation\WinSDK\Partitions\Foundation\main.cpp") -Value ""
+    $source = Get-Content (Join-Path $PSScriptRoot "Generate-WindowsRsWinmd.ps1") -Raw
+    # Only the test relay's file extension changes; argument construction executes unchanged.
+    Set-Content -LiteralPath (Join-Path $entryScripts "Generate.ps1") -Value $source.Replace("win32metadata-tools.exe", "win32metadata-tools.ps1")
+    @'
+$rootDir = [IO.Path]::GetFullPath("$PSScriptRoot\..")
+$windowsWin32ProjectRoot = Join-Path $rootDir "generation\WinSDK"
+$recompiledIdlHeadersDir = Join-Path $windowsWin32ProjectRoot "obj\RecompiledIdlHeaders"
+function Get-WinSdkCppPkgPath { Join-Path $rootDir "sdk" }
+function Get-WinSdkCppX64PkgPath { Join-Path $rootDir "sdk" }
+function Get-WinSdkHeaderVersion { "fixture" }
+function nbgv { "1.0.0.0" }
+function ThrowOnNativeProcessError {}
+'@ | Set-Content -LiteralPath (Join-Path $entryScripts "CommonUtils.ps1")
+    @'
+param([string]$ToolPath, [string[]]$ToolArguments)
+$ToolArguments | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\arguments.json"
+'@ | Set-Content -LiteralPath (Join-Path $entryScripts "Prepare-WindowsRsHeaders.ps1")
+    @'
+$args | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\..\..\..\arguments.json"
+'@ | Set-Content -LiteralPath (Join-Path $entryToolDir "win32metadata-tools.ps1")
+    $entry = Join-Path $entryScripts "Generate.ps1"
+    foreach ($case in @(
+        @{ arguments = @(); jobs = "1"; original = $false; policy = $true; focused = $false },
+        @{ arguments = @("-UseOriginalCompilation", "-NativeJobs", "4", "-ArchitectureJobs", "1"); jobs = "4"; original = $true; policy = $true; focused = $false },
+        @{ arguments = @("-Partition", "Foundation", "-NativeJobs", "2"); jobs = "2"; original = $false; policy = $false; focused = $true },
+        @{ arguments = @("-RawSdk"); jobs = "1"; original = $false; policy = $false; focused = $false },
+        @{ arguments = @("-UsePartitionAuthority:`$false", "-NativeJobs", "2"); jobs = "2"; original = $false; policy = $false; focused = $false }
+    )) {
+        $messages = & pwsh -NoProfile -File $entry -SkipBuild @($case.arguments) 2>&1 | Out-String
+        Assert ($LASTEXITCODE -eq 0) "Generation argument fixture failed: $messages"
+        $received = @(Get-Content (Join-Path $entryRoot "arguments.json") -Raw | ConvertFrom-Json)
+        $jobs = [Array]::IndexOf([string[]]$received, "--native-jobs")
+        Assert ($jobs -ge 0 -and $received[$jobs + 1] -ceq $case.jobs) "Native job argument changed."
+        $architectureJobs = [Array]::IndexOf([string[]]$received, "--architecture-jobs")
+        $expectedArchitectureJobs = if ($case.original) { "1" } else { "3" }
+        Assert ($architectureJobs -ge 0 -and $received[$architectureJobs + 1] -ceq $expectedArchitectureJobs) "Architecture worker settings changed."
+        Assert (($received -contains "--original-compilation") -eq $case.original) "Original opt-in changed."
+        Assert (!($received -contains "--candidate-compilation")) "Entrypoint acquired candidate grouping."
+        Assert (($received -contains "--partition-policy-root") -eq $case.policy) "Partition-policy selection changed."
+        Assert (($received -contains "--partition") -eq $case.focused) "Selected partition behavior changed."
+        $architectures = @($received | Where-Object { $_ -in @("x64", "x86", "arm64") })
+        Assert (($architectures -join ",") -ceq "x64,x86,arm64") "Default architecture selection changed."
+        Assert ($received -contains "--output" -and $received -contains "--obj") "Output/provenance inputs changed."
+    }
+    foreach ($arguments in @(
+        @("-NativeJobs", "0"),
+        @("-UseOriginalCompilation", "-RawSdk"),
+        @("-UseOriginalCompilation", "-Partition", "Foundation"),
+        @("-UseOriginalCompilation", "-UsePartitionAuthority:`$false")
+    )) {
+        $messages = & pwsh -NoProfile -File $entry -SkipBuild @arguments 2>&1 | Out-String
+        Assert ($LASTEXITCODE -eq 1 -and $messages -match "NativeJobs|requires partition authority") "Invalid generation mode was accepted: $messages"
+    }
+    $global:LASTEXITCODE = 0
+    Write-Host "Generation entrypoint default/original/focused/raw/native-job argument controls passed without SDK execution."
+}
+
 try {
     $buildPositionals = @((Get-Command (Join-Path $PSScriptRoot "BuildMetadataBin.ps1")).ParameterSets.Parameters |
         Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
     Assert (($buildPositionals -join ",") -ceq "arch,ArchitectureJobs,NativeJobs") "BuildMetadataBin changed existing positional parameter bindings."
     $generatePositionals = @((Get-Command (Join-Path $PSScriptRoot "Generate-WindowsRsWinmd.ps1")).ParameterSets.Parameters |
         Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
-    Assert (($generatePositionals -join ",") -ceq "Partition,Architecture,ExtractionCoverage,OutputWinmd,Namespace,ArchitectureJobs") "Generate-WindowsRsWinmd changed existing positional parameter bindings."
+    Assert (($generatePositionals -join ",") -ceq "Partition,Architecture,ExtractionCoverage,OutputWinmd,Namespace,ArchitectureJobs,NativeJobs") "Generate-WindowsRsWinmd changed existing positional parameter bindings."
+    Test-GenerateEntryPointArguments
+    if ($EntryPointArgumentsOnly) { return }
 
     New-Item -ItemType Directory -Path $mirror -Force | Out-Null
     Set-Content -LiteralPath $header -Value "enum PREPARATION_VALUE { PREPARATION_MARKER = 1 };" -Encoding ascii
