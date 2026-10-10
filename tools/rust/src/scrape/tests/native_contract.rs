@@ -1,7 +1,63 @@
 //! Root-observation proof gate, not an emission or dependency-closure authority.
 
 use super::*;
+use std::cell::Cell;
 use windows_clang::{Fact, FactKind, Location, Origin, Snapshot, TypeRef, Value};
+
+type DeclarationKey<'a> = (&'a str, &'a str, &'a Location);
+
+thread_local! {
+    static LOOKUP_BUILDS: Cell<usize> = const { Cell::new(0) };
+}
+
+#[derive(Debug)]
+struct NativeLookup<'a> {
+    by_origin: BTreeMap<&'a Origin, &'a Fact>,
+    by_declaration: BTreeMap<DeclarationKey<'a>, Vec<&'a Fact>>,
+    indexed_facts: usize,
+    inspected_candidates: Cell<usize>,
+}
+
+impl<'a> NativeLookup<'a> {
+    fn new(facts: &'a [Fact]) -> Result<Self, String> {
+        LOOKUP_BUILDS.with(|count| count.set(count.get() + 1));
+        let mut lookup = Self {
+            by_origin: BTreeMap::new(),
+            by_declaration: BTreeMap::new(),
+            indexed_facts: 0,
+            inspected_candidates: Cell::new(0),
+        };
+        for fact in facts {
+            lookup.indexed_facts += 1;
+            if lookup.by_origin.insert(&fact.origin, fact).is_some() {
+                return Err(format!("duplicate native Origin {:?}", fact.origin));
+            }
+            lookup
+                .by_declaration
+                .entry((&fact.origin.tu, &fact.name, &fact.spelling))
+                .or_default()
+                .push(fact);
+        }
+        Ok(lookup)
+    }
+
+    fn candidates<'b>(
+        &'b self,
+        origin: &'b Origin,
+        name: &'b str,
+        declaration: &'b Location,
+    ) -> impl Iterator<Item = &'a Fact> + 'b {
+        self.by_declaration
+            .get(&(origin.tu.as_str(), name, declaration))
+            .into_iter()
+            .flatten()
+            .copied()
+            .inspect(|_| {
+                self.inspected_candidates
+                    .set(self.inspected_candidates.get() + 1);
+            })
+    }
+}
 
 #[derive(Clone, Debug, Eq, Ord, PartialEq, PartialOrd)]
 pub(crate) struct Physical {
@@ -52,10 +108,11 @@ fn annotation_route(target: &AnnotationTarget) -> (&Origin, Route) {
 
 fn physical(
     origin: &Origin,
-    facts: &BTreeMap<Origin, &Fact>,
+    lookup: &NativeLookup<'_>,
     active: &mut BTreeSet<Origin>,
 ) -> Result<Physical, String> {
-    let fact = facts
+    let fact = lookup
+        .by_origin
         .get(origin)
         .ok_or_else(|| format!("unresolved native Origin {origin:?}"))?;
     if !active.insert(origin.clone()) {
@@ -64,7 +121,7 @@ fn physical(
     let parent = fact
         .parent
         .as_ref()
-        .map(|parent| physical(parent, facts, active).map(Box::new))
+        .map(|parent| physical(parent, lookup, active).map(Box::new))
         .transpose()?;
     active.remove(origin);
     Ok(Physical {
@@ -125,32 +182,23 @@ impl ContractReport {
     }
 }
 
-fn check_type(ty: &TypeRef, origin: &Origin, facts: &[Fact]) -> Result<(), String> {
+fn check_type(ty: &TypeRef, origin: &Origin, lookup: &NativeLookup<'_>) -> Result<(), String> {
     match ty {
         TypeRef::Named { name, declaration }
         | TypeRef::Generic {
             name, declaration, ..
         } => {
-            let matches = facts
-                .iter()
-                .filter(|fact| {
-                    fact.origin.tu == origin.tu
-                        && fact.name == *name
-                        && fact.spelling == *declaration
-                })
+            let matches = lookup
+                .candidates(origin, name, declaration)
                 .collect::<Vec<_>>();
             if matches.is_empty() {
                 return Err(format!(
                     "unresolved native reference {origin:?}: {name} at {declaration:?}"
                 ));
             }
-            let by_origin = facts
-                .iter()
-                .map(|fact| (fact.origin.clone(), fact))
-                .collect();
             let identities = matches
                 .iter()
-                .map(|fact| physical(&fact.origin, &by_origin, &mut BTreeSet::new()))
+                .map(|fact| physical(&fact.origin, lookup, &mut BTreeSet::new()))
                 .collect::<Result<BTreeSet<_>, _>>()?;
             if identities.len() != 1 || matches.iter().any(|fact| fact.data != matches[0].data) {
                 return Err(format!(
@@ -159,25 +207,25 @@ fn check_type(ty: &TypeRef, origin: &Origin, facts: &[Fact]) -> Result<(), Strin
             }
             if let TypeRef::Generic { args, .. } = ty {
                 for arg in args {
-                    check_type(arg, origin, facts)?;
+                    check_type(arg, origin, lookup)?;
                 }
             }
         }
         TypeRef::Pointer { target, .. }
         | TypeRef::Reference { target, .. }
-        | TypeRef::Array { target, .. } => check_type(target, origin, facts)?,
+        | TypeRef::Array { target, .. } => check_type(target, origin, lookup)?,
         TypeRef::FunctionPointer { params, result, .. } => {
             for param in params {
-                check_type(param, origin, facts)?;
+                check_type(param, origin, lookup)?;
             }
-            check_type(result, origin, facts)?;
+            check_type(result, origin, lookup)?;
         }
         TypeRef::InlineRecord(record) => {
             if let Some(base) = &record.base {
-                check_type(base, origin, facts)?;
+                check_type(base, origin, lookup)?;
             }
             for field in &record.fields {
-                check_type(&field.ty, origin, facts)?;
+                check_type(&field.ty, origin, lookup)?;
             }
         }
         TypeRef::Void
@@ -189,8 +237,8 @@ fn check_type(ty: &TypeRef, origin: &Origin, facts: &[Fact]) -> Result<(), Strin
     Ok(())
 }
 
-fn check_data(fact: &Fact, facts: &[Fact]) -> Result<(), String> {
-    let check = |ty: &TypeRef| check_type(ty, &fact.origin, facts);
+fn check_data(fact: &Fact, lookup: &NativeLookup<'_>) -> Result<(), String> {
+    let check = |ty: &TypeRef| check_type(ty, &fact.origin, lookup);
     match &fact.data {
         FactData::Function { params, result, .. } | FactData::Callback { params, result, .. } => {
             for param in params {
@@ -237,20 +285,15 @@ fn check_data(fact: &Fact, facts: &[Fact]) -> Result<(), String> {
 
 fn inventory(snapshot: &Snapshot) -> (Vec<Observation>, Vec<String>) {
     let mut incomplete = Vec::new();
-    let mut facts = BTreeMap::new();
-    for fact in snapshot.facts() {
-        if facts.insert(fact.origin.clone(), fact).is_some() {
-            return (
-                Vec::new(),
-                vec![format!("duplicate native Origin {:?}", fact.origin)],
-            );
-        }
-    }
+    let lookup = match NativeLookup::new(snapshot.facts()) {
+        Ok(lookup) => lookup,
+        Err(error) => return (Vec::new(), vec![error]),
+    };
     let mut observations = Vec::new();
     let mut sites = BTreeMap::<Origin, BTreeMap<Route, Vec<Annotation>>>::new();
     for (target, annotations) in snapshot.annotations() {
         let (origin, route) = annotation_route(target);
-        match physical(origin, &facts, &mut BTreeSet::new()) {
+        match physical(origin, &lookup, &mut BTreeSet::new()) {
             Ok(identity) => observations.push(Observation {
                 identity: Identity::Annotation(identity, route.clone()),
                 original_origin: origin.clone(),
@@ -264,10 +307,10 @@ fn inventory(snapshot: &Snapshot) -> (Vec<Observation>, Vec<String>) {
             .insert(route, annotations.clone());
     }
     for fact in snapshot.facts().iter().filter(|fact| fact.root) {
-        if let Err(error) = check_data(fact, snapshot.facts()) {
+        if let Err(error) = check_data(fact, &lookup) {
             incomplete.push(error);
         }
-        let identity = match physical(&fact.origin, &facts, &mut BTreeSet::new()) {
+        let identity = match physical(&fact.origin, &lookup, &mut BTreeSet::new()) {
             Ok(identity) => identity,
             Err(error) => {
                 incomplete.push(error);
@@ -285,11 +328,11 @@ fn inventory(snapshot: &Snapshot) -> (Vec<Observation>, Vec<String>) {
         });
     }
     for constant in snapshot.constants() {
-        if let Err(error) = check_type(&constant.ty, &constant.root, snapshot.facts()) {
+        if let Err(error) = check_type(&constant.ty, &constant.root, &lookup) {
             incomplete.push(error);
         }
-        let identities = physical(&constant.root, &facts, &mut BTreeSet::new()).and_then(|root| {
-            physical(&constant.definition, &facts, &mut BTreeSet::new())
+        let identities = physical(&constant.root, &lookup, &mut BTreeSet::new()).and_then(|root| {
+            physical(&constant.definition, &lookup, &mut BTreeSet::new())
                 .map(|definition| (root, definition))
         });
         let (root, definition) = match identities {
@@ -565,9 +608,13 @@ fn native_contract_unresolved_parent_is_not_lexical_fallback() {
         local: 1,
     };
     assert!(
-        physical(&origin, &BTreeMap::new(), &mut BTreeSet::new())
-            .unwrap_err()
-            .contains("unresolved native Origin")
+        physical(
+            &origin,
+            &NativeLookup::new(&[]).unwrap(),
+            &mut BTreeSet::new()
+        )
+        .unwrap_err()
+        .contains("unresolved native Origin")
     );
 }
 
@@ -763,14 +810,17 @@ fn native_contract_unknown_bodies_and_unresolvable_references_fail_closed() {
         data: FactData::None,
     };
     assert!(
-        check_data(&fact, std::slice::from_ref(&fact))
-            .unwrap_err()
-            .contains("unknown native body")
+        check_data(
+            &fact,
+            &NativeLookup::new(std::slice::from_ref(&fact)).unwrap()
+        )
+        .unwrap_err()
+        .contains("unknown native body")
     );
     assert!(
         physical(
             &origin,
-            &BTreeMap::from([(origin.clone(), &fact)]),
+            &NativeLookup::new(std::slice::from_ref(&fact)).unwrap(),
             &mut BTreeSet::new()
         )
         .unwrap_err()
@@ -784,8 +834,190 @@ fn native_contract_unknown_bodies_and_unresolvable_references_fail_closed() {
         },
     };
     assert!(
-        check_type(&reference, &origin, std::slice::from_ref(&fact))
+        check_type(
+            &reference,
+            &origin,
+            &NativeLookup::new(std::slice::from_ref(&fact)).unwrap()
+        )
+        .unwrap_err()
+        .contains("unresolved native reference")
+    );
+}
+
+fn lookup_fact(tu: &str, local: u32, name: &str, offset: u32) -> Fact {
+    let location = Location {
+        file: "physical.h".into(),
+        offset,
+    };
+    Fact {
+        origin: Origin {
+            tu: tu.into(),
+            local,
+        },
+        parent: None,
+        kind: FactKind::Typedef,
+        name: name.into(),
+        spelling: location.clone(),
+        expansion: location,
+        definition: true,
+        main_file: false,
+        root: true,
+        system: false,
+        data: FactData::Typedef {
+            target: TypeRef::Scalar(windows_clang::Scalar::I32),
+        },
+    }
+}
+
+#[test]
+fn native_contract_lookup_inspections_ignore_unrelated_fact_count() {
+    for unrelated in [0, 20_000] {
+        for conflicting in [false, true] {
+            let first = lookup_fact("original.cpp", 1, "Target", 42);
+            let mut second = lookup_fact("original.cpp", 2, "Target", 42);
+            if conflicting {
+                second.data = FactData::Typedef {
+                    target: TypeRef::Scalar(windows_clang::Scalar::I64),
+                };
+            }
+            let origin = first.origin.clone();
+            let named = TypeRef::Named {
+                name: first.name.clone(),
+                declaration: first.spelling.clone(),
+            };
+            let generic = TypeRef::Generic {
+                name: first.name.clone(),
+                declaration: first.spelling.clone(),
+                args: vec![TypeRef::Scalar(windows_clang::Scalar::U32)],
+            };
+            let mut facts = vec![first, second];
+            for index in 0..unrelated {
+                facts.push(lookup_fact(
+                    if index % 3 == 0 {
+                        "foreign.cpp"
+                    } else {
+                        "original.cpp"
+                    },
+                    index + 100,
+                    if index % 3 == 1 { "Other" } else { "Target" },
+                    if index % 3 == 2 { index + 100 } else { 42 },
+                ));
+            }
+            let previous_builds = LOOKUP_BUILDS.with(Cell::get);
+            let lookup = NativeLookup::new(&facts).unwrap();
+            assert_eq!(lookup.indexed_facts, unrelated as usize + 2);
+            assert_eq!(lookup.inspected_candidates.get(), 0);
+            for index in 0..256 {
+                let result = check_type(
+                    if index % 2 == 0 { &named } else { &generic },
+                    &origin,
+                    &lookup,
+                );
+                if conflicting {
+                    assert!(result.unwrap_err().contains("ambiguous native reference"));
+                } else {
+                    result.unwrap();
+                }
+            }
+            assert_eq!(lookup.inspected_candidates.get(), 512);
+            assert_eq!(lookup.indexed_facts, unrelated as usize + 2);
+            let builds = LOOKUP_BUILDS.with(Cell::get) - previous_builds;
+            assert_eq!(builds, 1);
+            println!(
+                "lookup cardinality: unrelated={unrelated} conflicting={conflicting} index_builds={builds} indexed_facts={} lookups=256 inspected_candidates={}",
+                lookup.indexed_facts,
+                lookup.inspected_candidates.get(),
+            );
+        }
+    }
+}
+
+#[test]
+fn native_contract_lookup_keeps_inputs_locations_and_parent_alternatives_exact() {
+    let first = lookup_fact("original.cpp", 1, "Target", 42);
+    let mut foreign = lookup_fact("foreign.cpp", 1, "Target", 42);
+    foreign.data = FactData::Typedef {
+        target: TypeRef::Scalar(windows_clang::Scalar::I64),
+    };
+    let reference = TypeRef::Named {
+        name: first.name.clone(),
+        declaration: first.spelling.clone(),
+    };
+    let inputs = [first.clone(), foreign.clone()];
+    let lookup = NativeLookup::new(&inputs).unwrap();
+    check_type(&reference, &first.origin, &lookup).unwrap();
+    check_type(&reference, &foreign.origin, &lookup).unwrap();
+    assert_eq!(lookup.inspected_candidates.get(), 2);
+    let missing = TypeRef::Named {
+        name: first.name.clone(),
+        declaration: Location {
+            file: first.spelling.file.clone(),
+            offset: 43,
+        },
+    };
+    assert!(
+        check_type(&missing, &first.origin, &lookup)
             .unwrap_err()
             .contains("unresolved native reference")
+    );
+    let other_input = Origin {
+        tu: "missing.cpp".into(),
+        local: 1,
+    };
+    assert!(
+        check_type(&reference, &other_input, &lookup)
+            .unwrap_err()
+            .contains("unresolved native reference")
+    );
+    assert_eq!(lookup.inspected_candidates.get(), 2);
+
+    let mut left_parent = lookup_fact("original.cpp", 3, "Left", 10);
+    left_parent.kind = FactKind::Namespace;
+    left_parent.data = FactData::None;
+    let mut right_parent = lookup_fact("original.cpp", 4, "Right", 20);
+    right_parent.kind = FactKind::Namespace;
+    right_parent.data = FactData::None;
+    let mut left = first.clone();
+    left.parent = Some(left_parent.origin.clone());
+    let mut right = first.clone();
+    right.origin.local = 2;
+    right.parent = Some(right_parent.origin.clone());
+    let facts = [left, right, left_parent, right_parent];
+    let lookup = NativeLookup::new(&facts).unwrap();
+    let error = check_type(&reference, &first.origin, &lookup).unwrap_err();
+    assert!(error.contains("ambiguous native reference"));
+    assert!(
+        error.contains("local: 3") && error.contains("local: 4"),
+        "{error}"
+    );
+    assert_eq!(lookup.inspected_candidates.get(), 2);
+    assert_eq!(lookup.indexed_facts, 4);
+
+    let mut missing_parent = first.clone();
+    missing_parent.parent = Some(Origin {
+        tu: first.origin.tu.clone(),
+        local: 99,
+    });
+    let facts = [missing_parent];
+    let lookup = NativeLookup::new(&facts).unwrap();
+    assert!(
+        check_type(&reference, &first.origin, &lookup)
+            .unwrap_err()
+            .contains("unresolved native Origin")
+    );
+    let mut cycle = first.clone();
+    cycle.parent = Some(cycle.origin.clone());
+    let facts = [cycle];
+    let lookup = NativeLookup::new(&facts).unwrap();
+    assert!(
+        check_type(&reference, &first.origin, &lookup)
+            .unwrap_err()
+            .contains("cyclic native parent")
+    );
+    let duplicate = [first.clone(), first];
+    assert!(
+        NativeLookup::new(&duplicate)
+            .unwrap_err()
+            .contains("duplicate native Origin")
     );
 }

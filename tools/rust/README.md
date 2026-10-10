@@ -33,6 +33,8 @@ native root observations, retaining original TU/ordinal provenance in diagnostic
 Physical source/expansion locations, definition and semantic parents identify declarations;
 complete typed payloads and all annotation routes must agree across every alternative.
 Native named references keep their locations and must resolve in their own input.
+Each snapshot builds one borrowed Origin and exact TU/name/spelling index; recursive
+type and parent checks reuse it and inspect every matching alternative, not unrelated facts.
 Unknown required bodies or unresolved parents/references fail closed. Folded-only extras
 are inventoried, not mistaken for loss. This is neither dependency-closure nor whole-SDK
 coverage admission, and does not replace the original logical owner policies. Compiler
