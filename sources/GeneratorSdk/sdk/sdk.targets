@@ -56,6 +56,6 @@
 
   <Target Name="BeforeClean">
     <RemoveDir Directories="$(ObjDir)"/>
-    <Delete Files="$(OutputWinmd)"/>
+    <Delete Files="$(OutputWinmd);$(OutputWinmd).enum-diagnostics.json"/>
   </Target>
 </Project>

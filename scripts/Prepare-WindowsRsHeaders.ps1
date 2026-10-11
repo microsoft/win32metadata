@@ -137,7 +137,8 @@ try {
         foreach ($directory in @($destination, $CleanObjectDirectory)) {
             if (Test-Path -LiteralPath $directory) { Remove-Item -LiteralPath $directory -Recurse -Force }
         }
-        foreach ($file in @($manifestPath, $CleanOutput, "$CleanOutput.provenance.json")) {
+        foreach ($file in @($manifestPath, $CleanOutput, "$CleanOutput.provenance.json",
+            "$CleanOutput.enum-diagnostics.json")) {
             if (Test-Path -LiteralPath $file -PathType Leaf) { Remove-Item -LiteralPath $file -Force }
         }
         Write-Host "Cleaned generated headers, native objects and '$CleanOutput'."
@@ -204,6 +205,9 @@ try {
         if ($receiptPath -and (Test-Path -LiteralPath $receiptPath)) {
             Remove-Item -LiteralPath $receiptPath -Force
         }
+        if ($output -and (Test-Path -LiteralPath "$output.enum-diagnostics.json")) {
+            Remove-Item -LiteralPath "$output.enum-diagnostics.json" -Force
+        }
         if ($output -and (Test-Path -LiteralPath $output -PathType Leaf)) {
             Remove-Item -LiteralPath $output -Force
         }
@@ -220,7 +224,7 @@ try {
             if ((Get-RecordsHash @(Get-TreeRecords $destination)) -cne $manifest.preparedSha256) {
                 throw "Prepared headers changed during generation; no output provenance was written."
             }
-            [ordered]@{
+            $receipt = [ordered]@{
                 schema = 1
                 output = $output
                 outputSha256 = (Get-FileHash -LiteralPath $output).Hash
@@ -229,7 +233,17 @@ try {
                 preparation = $manifestPath
                 preparationSha256 = $preparationHash
                 arguments = $ToolArguments
-            } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $receiptPath -Encoding utf8
+            }
+            if ($ToolArguments -ccontains "--win32-sdk" -and
+                @(Get-WindowsRsArgumentValues $ToolArguments "--partition-policy-root").Count) {
+                $architectures = @(Get-WindowsRsArgumentValues $ToolArguments "--arch")
+                if (!$architectures.Count) { $architectures = @("x64") }
+                $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures $architectures
+                $receipt.enumDiagnostics = $diagnostics
+                $receipt.metadataStatus = if ($diagnostics.partial) { "partial" } else { "complete" }
+                Write-Host "SDK metadata status: $($receipt.metadataStatus); $($diagnostics.omissionCount) omission entries; full report: $($diagnostics.path)"
+            }
+            $receipt | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath $receiptPath -Encoding utf8
         }
     }
     if ($VerifyOutput) {
@@ -237,6 +251,9 @@ try {
         $receipt = Get-WindowsRsGenerationProvenance -OutputPath $output `
             -PreparationPath $manifestPath -PreparedRoot $destination -VerifyCiInvocation:$VerifyCiInvocation
         Write-Host "Verified generated output $output ($($receipt.outputSha256)); patch count: $($manifest.patchCount)."
+        if ($receipt.enumDiagnostics) {
+            Write-Host "Verified SDK metadata status: $($receipt.metadataStatus); full report: $($receipt.enumDiagnostics.path)"
+        }
     }
 }
 finally {

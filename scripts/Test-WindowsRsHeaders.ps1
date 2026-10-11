@@ -70,6 +70,7 @@ function Test-GenerateEntryPointArguments {
     }
     Set-Content -LiteralPath (Join-Path $entryRoot "obj\BuildTools.proj\BuildTools.proj.nuget.g.props") -Value ""
     Set-Content -LiteralPath (Join-Path $entryRoot "generation\WinSDK\Partitions\Foundation\main.cpp") -Value ""
+    Copy-Item -LiteralPath (Join-Path $PSScriptRoot "WindowsRsGenerationProvenance.ps1") -Destination $entryScripts
     $source = Get-Content (Join-Path $PSScriptRoot "Generate-WindowsRsWinmd.ps1") -Raw
     # Only the test relay's file extension changes; argument construction executes unchanged.
     Set-Content -LiteralPath (Join-Path $entryScripts "Generate.ps1") -Value $source.Replace("win32metadata-tools.exe", "win32metadata-tools.ps1")
@@ -86,6 +87,13 @@ function ThrowOnNativeProcessError {}
     @'
 param([string]$ToolPath, [string[]]$ToolArguments)
 $ToolArguments | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\arguments.json"
+if ($ToolArguments -contains "--output" -and $ToolArguments -contains "--partition-policy-root") {
+    $position = [Array]::IndexOf($ToolArguments, "--output")
+    $output = [IO.Path]::GetFullPath($ToolArguments[$position + 1])
+    New-Item -ItemType Directory -Force -Path (Split-Path $output) | Out-Null
+    '{"schema":1,"partial":false,"omissionCount":0,"architectures":[{"arch":"x64","partial":false,"omissionCount":0,"omissions":[]},{"arch":"x86","partial":false,"omissionCount":0,"omissions":[]},{"arch":"arm64","partial":false,"omissionCount":0,"omissions":[]}]}' |
+        Set-Content -LiteralPath "$output.enum-diagnostics.json"
+}
 '@ | Set-Content -LiteralPath (Join-Path $entryScripts "Prepare-WindowsRsHeaders.ps1")
     @'
 $args | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\..\..\..\arguments.json"
@@ -113,6 +121,10 @@ $args | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\..\..\..\arg
         $architectures = @($received | Where-Object { $_ -in @("x64", "x86", "arm64") })
         Assert (($architectures -join ",") -ceq "x64,x86,arm64") "Default architecture selection changed."
         Assert ($received -contains "--output" -and $received -contains "--obj") "Output/provenance inputs changed."
+        if ($case.policy) {
+            Assert ($messages.Contains("Generated complete SDK WinMD:") -and
+                $messages.Contains("Enum omission entries: 0; full report:")) "SDK completeness summary was lost."
+        }
     }
     foreach ($arguments in @(
         @("-NativeJobs", "0"),
@@ -127,6 +139,111 @@ $args | ConvertTo-Json | Set-Content -LiteralPath "$PSScriptRoot\..\..\..\..\arg
     Write-Host "Generation entrypoint default/original/focused/raw/native-job argument controls passed without SDK execution."
 }
 
+function Test-EnumDiagnosticsReporting {
+    . (Join-Path $PSScriptRoot "WindowsRsGenerationProvenance.ps1")
+    $reportRoot = Join-Path $fixture "enum-report"
+    New-Item -ItemType Directory -Path $reportRoot -Force | Out-Null
+    $output = Join-Path $reportRoot "Windows.Win32.winmd"
+    $reportPath = "$output.enum-diagnostics.json"
+    $preparation = Join-Path $reportRoot "preparation.json"
+    $fakeTool = Join-Path $reportRoot "tool.txt"
+    Set-Content -LiteralPath $output -Value "portable output-binding fixture, not a WinMD"
+    Set-Content -LiteralPath $preparation -Value "{}"
+    Set-Content -LiteralPath $fakeTool -Value "portable tool-binding fixture"
+    $reportJson = @'
+{"schema":1,"partial":true,"omissionCount":1,"architectures":[{"arch":"x64","partial":true,"omissionCount":1,"omissions":[{"declaration":{"origin":{"tu":"original.cpp","local":17},"kind":null,"name":"Interface","source":{"file":"C:\\sdk\\header.h","offset":42},"namespace":"Windows.Win32.Test","methods":["First","Second\"Method"]},"cause":"ExcludedDependency","reason":"required excluded enum\n","dependencyChain":[{"origin":{"tu":"original.cpp","local":17},"kind":null,"name":"Interface","source":{"file":"C:\\sdk\\header.h","offset":42},"namespace":"Windows.Win32.Test","methods":["First","Second\"Method"]},{"origin":{"tu":"original.cpp","local":16},"kind":"Enum","name":"RequiredEnum","source":{"file":"C:\\sdk\\header.h","offset":12},"namespace":"Windows.Win32.Test","methods":[]}]}]}]}
+'@
+    Set-Content -LiteralPath $reportPath -Value $reportJson
+    $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64")
+    Assert ($diagnostics.partial -and $diagnostics.omissionCount -eq 1 -and
+        $diagnostics.sha256 -ceq (Get-FileHash -LiteralPath $reportPath).Hash) "Partial report was not fully validated and hash-bound."
+    $receipt = [ordered]@{
+        schema = 1
+        output = $output
+        outputSha256 = (Get-FileHash -LiteralPath $output).Hash
+        tool = $fakeTool
+        toolSha256 = (Get-FileHash -LiteralPath $fakeTool).Hash
+        preparation = $preparation
+        preparationSha256 = (Get-FileHash -LiteralPath $preparation).Hash
+        arguments = @("scrape", "--win32-sdk", "--partition-policy-root", $reportRoot,
+            "--include", $reportRoot, "--arch", "x64")
+        enumDiagnostics = $diagnostics
+        metadataStatus = "partial"
+    }
+    $receipt | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$output.provenance.json"
+    $verified = Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation -PreparedRoot $reportRoot
+    Assert ($verified.metadataStatus -ceq "partial") "Provenance lost explicit partial status."
+
+    $enumOnly = $reportJson | ConvertFrom-Json
+    $enumOmission = $enumOnly.architectures[0].omissions[0]
+    $enumOmission.declaration = $enumOmission.dependencyChain[-1]
+    $enumOmission.cause = "ConflictingDeclarations"
+    $enumOmission.dependencyChain = @($enumOmission.declaration)
+    $enumOnly | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $reportPath
+    $enumDiagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64")
+    Assert ($enumDiagnostics.partial -and $enumDiagnostics.omissionCount -eq 1) "One-entry conflicting enum chain was rejected."
+
+    foreach ($mutation in @("empty", "truncated", "first", "terminal", "methods")) {
+        $changed = $reportJson | ConvertFrom-Json
+        $chain = $changed.architectures[0].omissions[0].dependencyChain
+        if ($mutation -ceq "empty") { $changed.architectures[0].omissions[0].dependencyChain = @() }
+        if ($mutation -ceq "truncated") { $changed.architectures[0].omissions[0].dependencyChain = @($chain[0]) }
+        if ($mutation -ceq "first") { $chain[0].origin.local = 18 }
+        if ($mutation -ceq "terminal") { $chain[-1].kind = "Typedef" }
+        if ($mutation -ceq "methods") { $chain[0].methods = @("Second`"Method", "First") }
+        $changed | ConvertTo-Json -Depth 12 | Set-Content -LiteralPath $reportPath
+        $rejected = $false
+        try { Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64") | Out-Null }
+        catch { $rejected = $true }
+        Assert $rejected "Invalid $mutation dependency chain was accepted."
+    }
+
+    $invalidJson = @(
+        $reportJson.Replace('"schema":1', '"schema":"1"'),
+        $reportJson.Replace('"partial":true', '"partial":false'),
+        $reportJson.Replace('"omissionCount":1', '"omissionCount":2'),
+        $reportJson.Replace('"arch":"x64"', '"arch":"x86"'),
+        $reportJson.Replace('"kind":null,', ''),
+        $reportJson.Replace('"local":17', '"local":-1'),
+        $reportJson.Replace('"offset":42', '"offset":"42"'),
+        $reportJson.Replace('["First","Second\"Method"]', '[17]'),
+        $reportJson.Replace('"ExcludedDependency"', '"UnknownCause"'),
+        $reportJson.Replace('"dependencyChain":[', '"dependencyChain":null,"lostChain":['),
+        $reportJson.Replace('"name":"RequiredEnum"', '"name":null'),
+        '{"schema":1'
+    )
+    foreach ($invalid in $invalidJson) {
+        Set-Content -LiteralPath $reportPath -Value $invalid
+        $rejected = $false
+        try { Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64") | Out-Null }
+        catch { $rejected = $true }
+        Assert $rejected "Malformed, incomplete or mismatched report was accepted: $invalid"
+    }
+    Set-Content -LiteralPath $reportPath -Value $reportJson
+    foreach ($mutation in @("hash", "status", "image")) {
+        $changed = Get-Content -LiteralPath "$output.provenance.json" -Raw | ConvertFrom-Json
+        if ($mutation -ceq "hash") { $changed.enumDiagnostics.sha256 = "wrong" }
+        if ($mutation -ceq "status") { $changed.metadataStatus = "complete" }
+        if ($mutation -ceq "image") { $changed.outputSha256 = "wrong" }
+        $changed | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$output.provenance.json"
+        $rejected = $false
+        try { Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation -PreparedRoot $reportRoot | Out-Null }
+        catch { $rejected = $true }
+        Assert $rejected "Provenance accepted mismatched $mutation binding."
+        $receipt | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$output.provenance.json"
+    }
+    Remove-Item -LiteralPath $reportPath
+    $rejected = $false
+    try { Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64") | Out-Null }
+    catch { $rejected = $true }
+    Assert $rejected "Missing diagnostic report was treated as zero omissions."
+    '{"schema":1,"partial":false,"omissionCount":0,"architectures":[{"arch":"x64","partial":false,"omissionCount":0,"omissions":[]}]}' |
+        Set-Content -LiteralPath $reportPath
+    $complete = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64")
+    Assert (!$complete.partial -and $complete.omissionCount -eq 0) "Zero-omission report was rejected."
+    Write-Host "Portable SDK enum report shape/count/status/provenance negative controls passed without native execution."
+}
+
 try {
     $buildPositionals = @((Get-Command (Join-Path $PSScriptRoot "BuildMetadataBin.ps1")).ParameterSets.Parameters |
         Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
@@ -135,6 +252,7 @@ try {
         Where-Object Position -ge 0 | Sort-Object Position | ForEach-Object Name)
     Assert (($generatePositionals -join ",") -ceq "Partition,Architecture,ExtractionCoverage,OutputWinmd,Namespace,ArchitectureJobs,NativeJobs") "Generate-WindowsRsWinmd changed existing positional parameter bindings."
     Test-GenerateEntryPointArguments
+    Test-EnumDiagnosticsReporting
     if ($EntryPointArgumentsOnly) { return }
 
     New-Item -ItemType Directory -Path $mirror -Force | Out-Null

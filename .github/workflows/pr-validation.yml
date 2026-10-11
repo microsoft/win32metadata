@@ -98,6 +98,27 @@ jobs:
         shell: pwsh
         run: .\scripts\Prepare-WindowsRsHeaders.ps1 -VerifyOutput .\bin\Windows.Win32.winmd -VerifyCiInvocation
 
+      - name: Report SDK metadata completeness
+        if: always()
+        shell: pwsh
+        run: |
+          . .\scripts\WindowsRsGenerationProvenance.ps1
+          $report = ".\bin\Windows.Win32.winmd.enum-diagnostics.json"
+          if (Test-Path -LiteralPath $report) {
+            $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath .\bin\Windows.Win32.winmd -Architectures @("x64", "x86", "arm64")
+            $status = if ($diagnostics.partial) { "PARTIAL" } else { "complete" }
+            "SDK metadata status: **$status**; omitted declaration entries: **$($diagnostics.omissionCount)**." >> $env:GITHUB_STEP_SUMMARY
+            "Full enum/dependent API diagnostic report: ``Windows.Win32.winmd.enum-diagnostics.json`` in the ``winmd`` artifact." >> $env:GITHUB_STEP_SUMMARY
+            if ("${{ steps.metadata.outcome }}" -ne "success") {
+              "Generation did not succeed; this diagnostic report does not establish a usable final WinMD." >> $env:GITHUB_STEP_SUMMARY
+            }
+          } else {
+            "No final SDK enum diagnostic report was produced; completeness is not established. See generation logs and any per-architecture reports in the ``winmd`` artifact." >> $env:GITHUB_STEP_SUMMARY
+            if ("${{ steps.metadata.outcome }}" -eq "success") {
+              throw "Successful normal SDK generation must produce its enum diagnostic report, including zero omissions."
+            }
+          }
+
       - name: Test header preparation and patched generation
         shell: pwsh
         run: .\scripts\Test-WindowsRsHeaders.ps1
@@ -267,6 +288,8 @@ jobs:
           path: |
             bin/Windows.Win32.winmd
             bin/Windows.Win32.winmd.provenance.json
+            bin/Windows.Win32.winmd.enum-diagnostics.json
+            generation/WinSDK/obj/**/*.enum-diagnostics.json
             generation/WinSDK/obj/windows-rs-headers.json
             bin/current.apidump.cs
             bin/baseline.apidump.cs

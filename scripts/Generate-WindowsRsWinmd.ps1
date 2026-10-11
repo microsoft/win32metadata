@@ -77,6 +77,7 @@ if ($UseOriginalCompilation -and ($RawSdk -or $Partition.Count -or
 }
 
 . "$PSScriptRoot\CommonUtils.ps1"
+. "$PSScriptRoot\WindowsRsGenerationProvenance.ps1"
 
 $ErrorActionPreference = "Stop"
 if ($RawSdk -and ($UsePartitionAuthority -or $Partition.Count)) {
@@ -264,5 +265,12 @@ if ($coveragePath) {
     Write-Host "Generated extraction coverage report: $coveragePath"
 }
 else {
-    Write-Host "Generated WinMD: $outputPath"
+    if ($authority) {
+        $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $outputPath -Architectures $Architecture
+        $status = if ($diagnostics.partial) { "PARTIAL SDK" } else { "complete SDK" }
+        Write-Host "Generated $status WinMD: $outputPath"
+        Write-Host "Enum omission entries: $($diagnostics.omissionCount); full report: $($diagnostics.path)"
+    } else {
+        Write-Host "Generated WinMD: $outputPath"
+    }
 }

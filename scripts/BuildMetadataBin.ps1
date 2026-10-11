@@ -41,6 +41,7 @@ if ($RawSdk -and $UseOriginalCompilation) {
 }
 
 . "$PSScriptRoot\CommonUtils.ps1"
+. "$PSScriptRoot\WindowsRsGenerationProvenance.ps1"
 
 if ($Clean.IsPresent)
 {
@@ -100,3 +101,10 @@ if ($UseOriginalCompilation) {
 }
 & dotnet @buildArgs
 ThrowOnNativeProcessError
+if (!$RawSdk) {
+    $architectures = if ($arch -eq "crossarch") { @("x64", "x86", "arm64") } else { @($arch) }
+    $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $outputWinmdFileName -Architectures $architectures
+    $status = if ($diagnostics.partial) { "PARTIAL SDK" } else { "complete SDK" }
+    Write-Host "Generated $status WinMD: $outputWinmdFileName"
+    Write-Host "Enum omission entries: $($diagnostics.omissionCount); full report: $($diagnostics.path)"
+}

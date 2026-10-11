@@ -23,6 +23,31 @@ Both phases run automatically during `UpdateSDK.ps1` /
 pipeline consumes that generated tree. If a patch fails to apply, the script
 errors out; this signals the SDK changed and the patch needs regeneration.
 
+## SDK Enum Diagnostics
+
+Normal SDK header-policy generation emits valid remaining metadata when the
+producer identifies incompatible enums or required excluded enum dependencies.
+It does not choose a replacement provider or change SDK inputs. Focused and
+non-SDK generation, and the producer's strict emission helpers, remain strict.
+
+Every successful SDK header-plan emission writes an
+`<output>.enum-diagnostics.json` report, including zero omissions. The final
+report contains each architecture's `partial` status and every producer omission:
+declaration origin, kind, name, source file/byte offset, namespace, all omitted
+interface methods, cause, reason, and the ordered dependency chain. Every chain
+is nonempty, starts with the omitted declaration, and ends with the blocking enum;
+enum-only omissions have a one-entry chain. Per-architecture
+reports are written before RDL compilation so they remain available if a later
+compilation or merge fails. Only diagnostic output is sorted; compilation inputs
+and dependency chains are unchanged.
+
+Generation summaries explicitly label partial output. Prepared-input provenance
+binds the full report's path, hash, omission count, and metadata status. CI uploads
+the report with the WinMD and reports completeness in its summary; a missing
+report is not interpreted as zero omissions. Existing metadata integrity checks,
+API comparisons, and allowlists are not bypassed for partial output. These JSON
+files are output diagnostics, never metadata or compiler inputs.
+
 ## Naming Convention
 
 ```

@@ -13,8 +13,9 @@ use std::path::{Path, PathBuf};
 #[cfg(test)]
 use windows_clang::NamespaceAuthorities;
 use windows_clang::{
-    Annotation, AnnotationTarget, EmitOptions, ExtractionOptions, FactData, HeaderPartitionPolicy,
-    Input, MetadataReferences, PartitionedInput, RdlPartition, RootPartition,
+    Annotation, AnnotationTarget, EmitOptions, EnumOmissionCause, ExtractionOptions, FactData,
+    HeaderPartitionPolicy, Input, MetadataOmission, MetadataReferences, OmittedDeclaration,
+    PartitionedInput, RdlPartition, RootPartition,
 };
 use windows_metadata::reader::{Index, Item};
 use windows_rdl::ArchInput;
@@ -2758,6 +2759,12 @@ fn execute(options: &Options) -> Result<(), String> {
     let configuration = timed_phase("build-configuration", "all", || {
         build_configuration(options)
     })?;
+    if options.win32_sdk
+        && configuration.logical_partitions.is_some()
+        && let Some(output) = &options.output
+    {
+        clear_enum_diagnostics(output)?;
+    }
 
     println!(
         "Scraping {} as {} translation unit(s) for {} into {}",
@@ -2784,7 +2791,7 @@ fn execute(options: &Options) -> Result<(), String> {
         .architecture_jobs
         .unwrap_or(DEFAULT_ARCHITECTURE_JOBS);
     println!("Architecture worker limit: {jobs}");
-    let merged = run_architecture_jobs(&arch_names, jobs, |index, name| {
+    let generated = run_architecture_jobs(&arch_names, jobs, |index, name| {
         let arch = arch(name)?;
         let arch_rdl_dir = if index == 0 {
             rdl_dir.clone()
@@ -2792,25 +2799,37 @@ fn execute(options: &Options) -> Result<(), String> {
             obj.join(name)
         };
         let arch_winmd = obj.join(format!("Windows.Win32.{name}.winmd"));
-        if scrape_arch(
+        let (skipped, diagnostics) = scrape_arch(
             &configuration,
             &arch,
             resource_dir.as_deref(),
             &arch_rdl_dir,
             &arch_winmd,
             options,
-        )? {
+        )?;
+        if skipped {
             return Ok(None);
         }
-        Ok(Some(ArchInput {
-            rdl_dir: arch_rdl_dir,
-            winmd: arch_winmd,
-            bits: arch.bits,
-        }))
+        Ok(Some((
+            ArchInput {
+                rdl_dir: arch_rdl_dir,
+                winmd: arch_winmd,
+                bits: arch.bits,
+            },
+            diagnostics,
+        )))
     })?
     .into_iter()
     .flatten()
     .collect::<Vec<_>>();
+    let mut merged = Vec::with_capacity(generated.len());
+    let mut diagnostics = Vec::new();
+    for (input, report) in generated {
+        merged.push(input);
+        if let Some(report) = report {
+            diagnostics.push(report);
+        }
+    }
 
     if merged.is_empty() {
         if let Some(path) = &options.extraction_coverage {
@@ -2822,6 +2841,10 @@ fn execute(options: &Options) -> Result<(), String> {
     }
 
     let output = options.output.as_ref().expect("validated by `validate`");
+    let diagnostics_path = enum_diagnostics_path(output);
+    if !diagnostics.is_empty() {
+        write_enum_diagnostics(&diagnostics_path, &diagnostics)?;
+    }
     if merged.len() > 1 {
         // Merge the per-architecture binaries directly, then decompile that authoritative
         // result back into the defining-header partitions for inspection and caching.
@@ -2840,6 +2863,21 @@ fn execute(options: &Options) -> Result<(), String> {
     println!("RDL: {}", rdl_dir.display());
     println!("WinMD: {}", output.display());
     println!("{}", summarize(output)?);
+    if !diagnostics.is_empty() {
+        println!(
+            "SDK metadata {}: {} omission entries; full enum diagnostics: {}",
+            if diagnostics.iter().any(|report| report.partial) {
+                "PARTIAL"
+            } else {
+                "complete"
+            },
+            diagnostics
+                .iter()
+                .map(|report| report.omissions.len())
+                .sum::<usize>(),
+            diagnostics_path.display()
+        );
+    }
     Ok(())
 }
 
@@ -2913,9 +2951,12 @@ fn scrape_arch(
     rdl_dir: &Path,
     winmd: &Path,
     options: &Options,
-) -> Result<bool, String> {
+) -> Result<(bool, Option<EnumDiagnostics>), String> {
     if options.extraction_coverage.is_none() {
         clear_rdl_dir(rdl_dir)?;
+        if options.win32_sdk && configuration.logical_partitions.is_some() {
+            clear_enum_diagnostics(winmd)?;
+        }
     }
 
     let mut owned_args = configuration.args.clone();
@@ -2929,13 +2970,14 @@ fn scrape_arch(
     let args = owned_args.iter().map(String::as_str).collect::<Vec<_>>();
 
     let started = std::time::Instant::now();
+    let mut extraction_options = ExtractionOptions::new()
+        .with_parallelism(options.native_jobs.unwrap_or(NonZeroUsize::MIN).get());
+    if options.win32_sdk {
+        extraction_options = extraction_options.with_module_free_headers();
+    }
     let snapshot = configuration
         .inputs
-        .extract(
-            &args,
-            &ExtractionOptions::new()
-                .with_parallelism(options.native_jobs.unwrap_or(NonZeroUsize::MIN).get()),
-        )
+        .extract(&args, &extraction_options)
         .map_err(|error| format!("failed to extract {} metadata: {error}", arch.name))?;
     println!(
         "Extracted {} facts for {} in {:.2}s",
@@ -2949,12 +2991,12 @@ fn scrape_arch(
             .as_ref()
             .expect("validated extraction coverage mode");
         write_extraction_coverage(&snapshot, &logical.coverage_roots, path)?;
-        return Ok(true);
+        return Ok((true, None));
     }
     if let Some(path) = std::env::var_os("WIN32METADATA_FACT_AUDIT") {
         write_fact_audit(&snapshot, &PathBuf::from(path), &arch.name)?;
         if std::env::var_os("WIN32METADATA_FACT_AUDIT_ONLY").is_some() {
-            return Ok(true);
+            return Ok((true, None));
         }
     }
 
@@ -3093,17 +3135,37 @@ fn scrape_arch(
     emit.excluded_functions = Some(&excluded_functions);
     emit.excluded_constants = Some(&excluded_constants);
     emit.functions = selected_functions.as_ref();
+    let mut diagnostics = None;
     if let Some(logical) = &configuration.logical_partitions {
         let authorities = configuration
             .namespace_routes
             .as_ref()
             .map(crate::namespace_routes::NamespaceRoutes::authorities)
             .unwrap_or_default();
-        let partitions = emit_header_partition_plan(
-            || snapshot.into_header_partition_plan(&logical.headers, &authorities),
-            &emit,
-            &arch.name,
-        )?;
+        let build_plan =
+            || snapshot.into_header_partition_plan(&logical.headers, &authorities);
+        let partitions = if options.win32_sdk {
+            let plan = build_header_partition_plan(build_plan, &arch.name)?;
+            let report = timed_phase("header-emission", &arch.name, || {
+                plan.emit_with_enum_diagnostics(&emit).map_err(|error| {
+                    format!("failed to emit {} partitioned metadata: {error}", arch.name)
+                })
+            })?;
+            let report_partial = report.is_partial();
+            let arch_report = EnumDiagnostics {
+                arch: arch.name.clone(),
+                partial: report_partial,
+                omissions: report.omissions,
+            };
+            write_enum_diagnostics(
+                &enum_diagnostics_path(winmd),
+                std::slice::from_ref(&arch_report),
+            )?;
+            diagnostics = Some(arch_report);
+            report.partitions
+        } else {
+            emit_header_partition_plan(build_plan, &emit, &arch.name)?
+        };
         write_partitioned_rdl(rdl_dir, partitions)?;
     } else if configuration.inputs.partitioned() {
         let partitions = if let Some(routes) = &configuration.namespace_routes {
@@ -3136,7 +3198,7 @@ fn scrape_arch(
     }
 
     compile(rdl_dir, winmd, options)?;
-    Ok(false)
+    Ok((false, diagnostics))
 }
 
 fn timed_phase<T>(
@@ -3176,13 +3238,143 @@ fn emit_header_partition_plan(
     emit: &EmitOptions<'_>,
     arch: &str,
 ) -> Result<BTreeMap<RdlPartition, String>, String> {
-    let plan = timed_phase("header-ownership", arch, || {
-        build_plan().map_err(|error| format!("failed to plan {arch} metadata: {error}"))
-    })?;
+    let plan = build_header_partition_plan(build_plan, arch)?;
     timed_phase("header-emission", arch, || {
         plan.emit_with_options(emit)
             .map_err(|error| format!("failed to emit {arch} partitioned metadata: {error}"))
     })
+}
+
+fn build_header_partition_plan(
+    build_plan: impl FnOnce() -> Result<windows_clang::HeaderPartitionPlan, windows_clang::Error>,
+    arch: &str,
+) -> Result<windows_clang::HeaderPartitionPlan, String> {
+    timed_phase("header-ownership", arch, || {
+        build_plan().map_err(|error| format!("failed to plan {arch} metadata: {error}"))
+    })
+}
+
+struct EnumDiagnostics {
+    arch: String,
+    partial: bool,
+    omissions: Vec<MetadataOmission>,
+}
+
+fn enum_diagnostics_path(output: &Path) -> PathBuf {
+    let mut path = output.as_os_str().to_os_string();
+    path.push(".enum-diagnostics.json");
+    PathBuf::from(path)
+}
+
+fn clear_enum_diagnostics(output: &Path) -> Result<(), String> {
+    let path = enum_diagnostics_path(output);
+    match std::fs::remove_file(&path) {
+        Ok(()) => Ok(()),
+        Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(()),
+        Err(error) => Err(format!("failed to remove `{}`: {error}", path.display())),
+    }
+}
+
+fn json_string(value: &str) -> String {
+    let mut output = String::from("\"");
+    for character in value.chars() {
+        match character {
+            '"' => output.push_str("\\\""),
+            '\\' => output.push_str("\\\\"),
+            '\n' => output.push_str("\\n"),
+            '\r' => output.push_str("\\r"),
+            '\t' => output.push_str("\\t"),
+            '\u{0000}'..='\u{001f}' => {
+                output.push_str(&format!("\\u{:04x}", character as u32));
+            }
+            _ => output.push(character),
+        }
+    }
+    output.push('"');
+    output
+}
+
+fn omitted_declaration_json(declaration: &OmittedDeclaration) -> String {
+    let kind = declaration
+        .kind
+        .map_or_else(|| "null".to_string(), |kind| json_string(&format!("{kind:?}")));
+    let methods = declaration
+        .methods
+        .iter()
+        .map(|method| json_string(method))
+        .collect::<Vec<_>>()
+        .join(",");
+    format!(
+        "{{\"origin\":{{\"tu\":{},\"local\":{}}},\"kind\":{},\"name\":{},\"source\":{{\"file\":{},\"offset\":{}}},\"namespace\":{},\"methods\":[{}]}}",
+        json_string(&declaration.origin.tu),
+        declaration.origin.local,
+        kind,
+        json_string(&declaration.name),
+        json_string(&declaration.source.file),
+        declaration.source.offset,
+        json_string(&declaration.namespace),
+        methods
+    )
+}
+
+fn metadata_omission_json(omission: &MetadataOmission) -> String {
+    let cause = match omission.cause {
+        EnumOmissionCause::ConflictingDeclarations => "ConflictingDeclarations",
+        EnumOmissionCause::ExcludedDependency => "ExcludedDependency",
+    };
+    let chain = omission
+        .dependency_chain
+        .iter()
+        .map(omitted_declaration_json)
+        .collect::<Vec<_>>()
+        .join(",");
+    format!(
+        "{{\"declaration\":{},\"cause\":{},\"reason\":{},\"dependencyChain\":[{}]}}",
+        omitted_declaration_json(&omission.declaration),
+        json_string(cause),
+        json_string(&omission.reason),
+        chain
+    )
+}
+
+fn enum_diagnostics_json(reports: &[EnumDiagnostics]) -> String {
+    let mut architectures = reports
+        .iter()
+        .map(|report| {
+            let mut omissions = report
+                .omissions
+                .iter()
+                .map(metadata_omission_json)
+                .collect::<Vec<_>>();
+            omissions.sort();
+            format!(
+                "{{\"arch\":{},\"partial\":{},\"omissionCount\":{},\"omissions\":[{}]}}",
+                json_string(&report.arch),
+                report.partial,
+                omissions.len(),
+                omissions.join(",")
+            )
+        })
+        .collect::<Vec<_>>();
+    architectures.sort();
+    format!(
+        "{{\"schema\":1,\"partial\":{},\"omissionCount\":{},\"architectures\":[{}]}}\n",
+        reports.iter().any(|report| report.partial),
+        reports
+            .iter()
+            .map(|report| report.omissions.len())
+            .sum::<usize>(),
+        architectures.join(",")
+    )
+}
+
+fn write_enum_diagnostics(path: &Path, reports: &[EnumDiagnostics]) -> Result<(), String> {
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent)
+            .map_err(|error| format!("failed to create `{}`: {error}", parent.display()))?;
+    }
+    std::fs::write(path, enum_diagnostics_json(reports))
+        .map_err(|error| format!("failed to write `{}`: {error}", path.display()))
 }
 
 fn write_partitioned_rdl(
@@ -5820,6 +6012,7 @@ mod tests {
     #[test]
     fn minimal_command_line_parses() {
         let options = parse_with(&[]).unwrap();
+        assert!(!options.win32_sdk);
         assert_eq!(options.partitions.len(), 1);
         assert_eq!(options.includes.len(), 1);
         assert!(options.libs.is_empty());
@@ -5827,6 +6020,99 @@ mod tests {
         assert_eq!(scopes(&options), vec!["shared", "um"]);
         assert_eq!(namespace(&options), "Windows.Win32");
         assert_eq!(assembly_name(&options).unwrap(), "Windows.Win32");
+    }
+
+    #[test]
+    fn enum_diagnostics_json_escapes_text() {
+        assert_eq!(
+            json_string("\"\\\n\r\t\u{0000}\u{001f}\u{03bb}"),
+            "\"\\\"\\\\\\n\\r\\t\\u0000\\u001f\u{03bb}\""
+        );
+    }
+
+    #[test]
+    fn enum_diagnostics_preserves_entries_methods_and_dependency_chains() {
+        let declaration = |name: &str, kind, methods: &[&str]| OmittedDeclaration {
+            origin: windows_clang::Origin {
+                tu: "original.cpp".to_string(),
+                local: 17,
+            },
+            kind,
+            name: name.to_string(),
+            source: windows_clang::Location {
+                file: "C:\\sdk\\header.h".to_string(),
+                offset: 42,
+            },
+            namespace: "Windows.Win32.Test".to_string(),
+            methods: methods.iter().map(|name| name.to_string()).collect(),
+        };
+        let mut report = EnumDiagnostics {
+            arch: "x64".to_string(),
+            partial: true,
+            omissions: vec![
+                MetadataOmission {
+                    declaration: declaration("ConflictingEnum", Some(windows_clang::FactKind::Enum), &[]),
+                    cause: EnumOmissionCause::ConflictingDeclarations,
+                    reason: "different definitions\n".to_string(),
+                    dependency_chain: vec![
+                        declaration("ConflictingEnum", Some(windows_clang::FactKind::Enum), &[]),
+                    ],
+                },
+                MetadataOmission {
+                    declaration: declaration("Interface", None, &["First", "Second\"Method"]),
+                    cause: EnumOmissionCause::ExcludedDependency,
+                    reason: "required excluded enum".to_string(),
+                    dependency_chain: vec![
+                        declaration("Interface", None, &["First", "Second\"Method"]),
+                        declaration("IntermediateAlias", Some(windows_clang::FactKind::Typedef), &[]),
+                        declaration("RequiredEnum", Some(windows_clang::FactKind::Enum), &[]),
+                    ],
+                },
+            ],
+        };
+        let json = enum_diagnostics_json(std::slice::from_ref(&report));
+        report.omissions.reverse();
+        assert_eq!(json, enum_diagnostics_json(std::slice::from_ref(&report)));
+        assert!(json.starts_with("{\"schema\":1,\"partial\":true,\"omissionCount\":2,"));
+        assert_eq!(json.matches("\"cause\":").count(), 2);
+        assert!(json.contains("\"cause\":\"ConflictingDeclarations\""));
+        assert!(json.contains("\"cause\":\"ExcludedDependency\""));
+        assert!(json.contains("\"reason\":\"different definitions\\n\""));
+        assert!(json.contains("\"kind\":null,\"name\":\"Interface\""));
+        assert!(json.contains("\"file\":\"C:\\\\sdk\\\\header.h\",\"offset\":42"));
+        assert!(json.contains("\"origin\":{\"tu\":\"original.cpp\",\"local\":17}"));
+        assert!(json.contains("\"namespace\":\"Windows.Win32.Test\""));
+        assert!(json.contains("\"methods\":[\"First\",\"Second\\\"Method\"]"));
+        assert_eq!(json.matches("\"name\":").count(), 6);
+        assert!(
+            json.find("\"name\":\"IntermediateAlias\"").unwrap()
+                < json.find("\"name\":\"RequiredEnum\"").unwrap()
+        );
+    }
+
+    #[test]
+    fn enum_diagnostics_order_is_deterministic_and_empty_reports_are_written() {
+        let make_report = |arch: &str| EnumDiagnostics {
+            arch: arch.to_string(),
+            partial: false,
+            omissions: vec![],
+        };
+        assert_eq!(
+            enum_diagnostics_json(&[make_report("x86"), make_report("x64")]),
+            enum_diagnostics_json(&[make_report("x64"), make_report("x86")])
+        );
+        let root = scratch("enum-diagnostics-empty");
+        let output = root.join("Windows.Win32.winmd");
+        let report_path = enum_diagnostics_path(&output);
+        write_enum_diagnostics(&report_path, &[make_report("x64")]).unwrap();
+        assert_eq!(
+            std::fs::read_to_string(&report_path).unwrap(),
+            "{\"schema\":1,\"partial\":false,\"omissionCount\":0,\"architectures\":[{\"arch\":\"x64\",\"partial\":false,\"omissionCount\":0,\"omissions\":[]}]}\n"
+        );
+        clear_enum_diagnostics(&output).unwrap();
+        assert!(!report_path.exists());
+        clear_enum_diagnostics(&output).unwrap();
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
@@ -5870,6 +6156,7 @@ mod tests {
         let mut args = authority_args();
         args.extend(["--original-compilation", "--native-jobs", "4"]);
         let options = parse_args(&args).unwrap();
+        assert!(options.win32_sdk);
         assert!(options.original_compilation);
         assert!(!options.candidate_compilation);
         assert_eq!(options.native_jobs.unwrap().get(), 4);
@@ -8217,6 +8504,109 @@ extern "C" int __stdcall JobApi(JOB_RECORD* record);
         for directories in &plan.include_directories {
             assert_eq!(&directories[..base.len()], base);
         }
+    }
+
+    #[test]
+    fn original_compilation_preserves_input_qualified_owner_exclusions() {
+        let root = scratch("original-owner-exclusions");
+        let shared = root.join("shared");
+        std::fs::create_dir(&shared).unwrap();
+        let fixtures = [
+            (
+                "First",
+                "#define SOURCE_VALUE 11\r\n#include <First.h>\r\n#undef SOURCE_VALUE\r\n",
+                "--exclude\nSHARED_ALIAS\n--traverse\n<IncludeRoot>/shared/First.h\n\
+                 --namespace\nWindows.Win32.Test.First\n",
+                "typedef enum { FIRST_VALUE = 1 } SHARED_ALIAS;\n",
+            ),
+            (
+                "Second",
+                "#define SOURCE_VALUE 22\r\n#include <Second.h>\r\n#undef SOURCE_VALUE\r\n",
+                "--traverse\n<IncludeRoot>/shared/Second.h\n\
+                 --namespace\nWindows.Win32.Test.Second\n",
+                "typedef enum { SECOND_VALUE = 2 } SHARED_ALIAS;\n",
+            ),
+        ];
+        for (name, source, settings, header) in fixtures {
+            let directory = root.join(name);
+            std::fs::create_dir(&directory).unwrap();
+            std::fs::write(directory.join("main.cpp"), source).unwrap();
+            std::fs::write(directory.join("settings.rsp"), settings).unwrap();
+            std::fs::write(shared.join(format!("{name}.h")), header).unwrap();
+        }
+        let includes = vec![shared.clone()];
+        let traversal = crate::partition::load_traversal_policy(&root, &includes).unwrap();
+        let plan =
+            build_original_source_plan(&traversal, &includes, &root.join("generated")).unwrap();
+        let transported = candidate_compilation_inputs(&plan, &includes).unwrap();
+        assert_eq!(traversal.partitions.len(), 2);
+        assert_eq!(plan.groups.len(), 2);
+        assert_eq!(plan.inputs.len(), 2);
+        assert_eq!(transported.len(), 2);
+
+        let first = convert_root_partition(&traversal.partitions[0]);
+        assert_eq!(first.partition, "First");
+        assert_eq!(first.namespace, "Windows.Win32.Test.First");
+        assert_eq!(first.exclusions, BTreeSet::from(["SHARED_ALIAS".to_string()]));
+        let second = convert_root_partition(&traversal.partitions[1]);
+        assert_eq!(second.partition, "Second");
+        assert_eq!(second.namespace, "Windows.Win32.Test.Second");
+        assert_eq!(second.exclusions, BTreeSet::new());
+
+        let input_name = |name: &str| {
+            root.join(name)
+                .join("main.cpp")
+                .to_string_lossy()
+                .replace('\\', "/")
+        };
+        let header_name = |name: &str| {
+            shared
+                .join(format!("{name}.h"))
+                .to_string_lossy()
+                .replace('\\', "/")
+        };
+        let mut expected = HeaderPartitionPolicy::new();
+        expected.add_traversed_header_for_input(
+            &input_name("First"),
+            header_name("First"),
+            RootPartition::new("First", "Windows.Win32.Test.First").with_exclusion("SHARED_ALIAS"),
+        );
+        expected.add_traversed_header_for_input(
+            &input_name("Second"),
+            header_name("Second"),
+            RootPartition::new("Second", "Windows.Win32.Test.Second"),
+        );
+        assert_eq!(plan.headers, expected);
+        assert_eq!(plan.headers.traversed_headers().count(), 0);
+        assert_eq!(plan.headers.traversed_header_paths().count(), 2);
+
+        for (index, (name, source, _, header)) in fixtures.iter().enumerate() {
+            let expected_name = input_name(name);
+            let expected_roots = Input::new(&expected_name, *source)
+                .with_roots([expected_name.clone(), header_name(name)])
+                .roots;
+            assert_eq!(
+                plan.groups[index].partitions,
+                [traversal.partitions[index].clone()]
+            );
+            assert_eq!(plan.inputs[index].name, expected_name);
+            assert_eq!(plan.inputs[index].source.as_bytes(), source.as_bytes());
+            assert_eq!(
+                std::fs::read(root.join(name).join("main.cpp")).unwrap(),
+                source.as_bytes()
+            );
+            assert_eq!(
+                std::fs::read(shared.join(format!("{name}.h"))).unwrap(),
+                header.as_bytes()
+            );
+            assert_eq!(plan.inputs[index].roots, expected_roots);
+            assert!(transported[index].roots.is_empty());
+            assert_eq!(transported[index].identity, expected_name);
+            assert_eq!(transported[index].input.name, expected_name);
+            assert_eq!(transported[index].input.source.as_bytes(), source.as_bytes());
+            assert_eq!(transported[index].input.roots, expected_roots);
+        }
+        std::fs::remove_dir_all(root).unwrap();
     }
 
     #[test]
