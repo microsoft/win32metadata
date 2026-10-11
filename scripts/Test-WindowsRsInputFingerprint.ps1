@@ -201,10 +201,19 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
         Write-Fixture (Join-Path $fixture "objects\Windows.Win32.$architecture.winmd") "$architecture ordinary image"
     }
     Write-Fixture (Join-Path $fixture "objects\available-header-list.tsv") "already emitted fixture header list"
+    $enumReportPath = "$output.enum-diagnostics.json"
+    Write-Fixture $enumReportPath (@{
+        schema = 1; partial = $false; omissionCount = 0
+        architectures = @("x64", "x86", "arm64" | ForEach-Object {
+            @{ arch = $_; partial = $false; omissionCount = 0; omissions = @() }
+        })
+    } | ConvertTo-Json -Depth 5)
+    $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures @("x64", "x86", "arm64")
     $receipt = @{
         schema = 1; tool = $tool; toolSha256 = (Get-FingerprintFile $tool).sha256
         preparation = $preparation; preparationSha256 = (Get-FingerprintFile $preparation).sha256
         output = $output; outputSha256 = (Get-FingerprintFile $output).sha256
+        enumDiagnostics = $diagnostics; metadataStatus = "complete"
         arguments = @(
             "scrape", "--include", $preparedRoot, "--include", $include, "--lib", $imports[0], "--lib", $imports[1],
             "--partition-policy-root", $policy, "--namespace-routes", $route, "--obj", (Join-Path $fixture "objects"),
@@ -221,6 +230,16 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
     $verified = Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
         -PreparedRoot $preparedRoot -VerifyCiInvocation
     Assert (($verified.arguments -join "|") -ceq ($receipt.arguments -join "|")) "CI verification did not use the successful receipt."
+    Assert ($verified.metadataStatus -ceq "complete" -and !$verified.enumDiagnostics.partial -and
+        $verified.enumDiagnostics.omissionCount -eq 0 -and
+        $verified.enumDiagnostics.sha256 -ceq (Get-FileHash -LiteralPath $enumReportPath).Hash) "CI verification lost the complete SDK report binding."
+    $enumReportBytes = [IO.File]::ReadAllBytes($enumReportPath)
+    Remove-Item -LiteralPath $enumReportPath
+    Expect-Failure {
+        Get-WindowsRsGenerationProvenance -OutputPath $output -PreparationPath $preparation `
+            -PreparedRoot $preparedRoot -VerifyCiInvocation
+    } "\.enum-diagnostics\.json"
+    [IO.File]::WriteAllBytes($enumReportPath, $enumReportBytes)
     $validArguments = [string[]]$receipt.arguments.Clone()
     $receipt.arguments = @($validArguments | Where-Object { $_ -cne "--original-compilation" })
     $receipt.arguments[[Array]::IndexOf([string[]]$receipt.arguments, "--architecture-jobs") + 1] = "3"
@@ -328,7 +347,7 @@ UNRELATED_ENVIRONMENT=fixture-secret-not-for-the-manifest
             -PreparedRoot $preparedRoot -VerifyCiInvocation
     } "prepared inputs/tool/output"
     Write-Fixture $tool "native tool fixture"
-    Remove-Item -LiteralPath $preparation, $output, "$output.provenance.json"
+    Remove-Item -LiteralPath $preparation, $output, "$output.provenance.json", $enumReportPath
     $sealedHash = (Get-FileHash (Join-Path $fixture "first.json")).Hash
     Expect-Failure { Save-Fixture "first" } "already exists|exist"
     Assert ((Get-FileHash (Join-Path $fixture "first.json")).Hash -ceq $sealedHash) "Existing evidence was overwritten."

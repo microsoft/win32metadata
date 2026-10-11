@@ -112,23 +112,6 @@ function Get-WindowsRsGenerationProvenance {
         !$includes.Count -or [IO.Path]::GetFullPath($includes[0]) -ine [IO.Path]::GetFullPath($PreparedRoot)) {
         throw "Generation provenance does not match the prepared inputs/tool/output: '$output'."
     }
-    if ($receipt.arguments -ccontains "--win32-sdk" -and
-        @(Get-WindowsRsArgumentValues $receipt.arguments "--partition-policy-root").Count) {
-        $architectures = @(Get-WindowsRsArgumentValues $receipt.arguments "--arch")
-        if (!$architectures.Count) { $architectures = @("x64") }
-        $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures $architectures
-        $status = if ($diagnostics.partial) { "partial" } else { "complete" }
-        if (!$receipt.enumDiagnostics -or
-            $receipt.enumDiagnostics.path -ine $diagnostics.path -or
-            $receipt.enumDiagnostics.sha256 -cne $diagnostics.sha256 -or
-            $receipt.enumDiagnostics.partial -isnot [bool] -or
-            $receipt.enumDiagnostics.partial -ne $diagnostics.partial -or
-            ($receipt.enumDiagnostics.omissionCount -isnot [int] -and $receipt.enumDiagnostics.omissionCount -isnot [long]) -or
-            $receipt.enumDiagnostics.omissionCount -ne $diagnostics.omissionCount -or
-            $receipt.metadataStatus -cne $status) {
-            throw "Generation provenance does not match SDK enum diagnostics: '$output'."
-        }
-    }
     if ($VerifyCiInvocation) {
         foreach ($option in @("--original-compilation", "--win32-sdk")) {
             if (@($receipt.arguments | Where-Object { $_ -ceq $option }).Count -ne 1) {
@@ -150,6 +133,23 @@ function Get-WindowsRsGenerationProvenance {
         $architectures = @(Get-WindowsRsArgumentValues $receipt.arguments "--arch")
         if (($architectures -join ";") -cne "x64;x86;arm64") {
             throw "CI generation architecture scope must be exactly x64;x86;arm64."
+        }
+    }
+    if ($receipt.arguments -ccontains "--win32-sdk" -and
+        @(Get-WindowsRsArgumentValues $receipt.arguments "--partition-policy-root").Count) {
+        $architectures = @(Get-WindowsRsArgumentValues $receipt.arguments "--arch")
+        if (!$architectures.Count) { $architectures = @("x64") }
+        $diagnostics = Get-WindowsRsEnumDiagnostics -OutputPath $output -Architectures $architectures
+        $status = if ($diagnostics.partial) { "partial" } else { "complete" }
+        if (!$receipt.enumDiagnostics -or
+            $receipt.enumDiagnostics.path -ine $diagnostics.path -or
+            $receipt.enumDiagnostics.sha256 -cne $diagnostics.sha256 -or
+            $receipt.enumDiagnostics.partial -isnot [bool] -or
+            $receipt.enumDiagnostics.partial -ne $diagnostics.partial -or
+            ($receipt.enumDiagnostics.omissionCount -isnot [int] -and $receipt.enumDiagnostics.omissionCount -isnot [long]) -or
+            $receipt.enumDiagnostics.omissionCount -ne $diagnostics.omissionCount -or
+            $receipt.metadataStatus -cne $status) {
+            throw "Generation provenance does not match SDK enum diagnostics: '$output'."
         }
     }
     $receipt
