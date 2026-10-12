@@ -16,11 +16,20 @@ namespace MetadataUtils.Tests
         {
             NativeLibrary.SetDllImportResolver(typeof(OrdinalFixtureInvocationTests).Assembly, (name, assembly, searchPath) =>
                 name == Library
-                    ? NativeLibrary.Load(Path.Combine(TestUtils.GetAssetDir(), "x64", "ordinalfixture.dll"))
+                    ? NativeLibrary.Load(FixtureDllPath)
                     : IntPtr.Zero);
         }
 
-        private static bool CanRun => OperatingSystem.IsWindows() && RuntimeInformation.ProcessArchitecture == System.Runtime.InteropServices.Architecture.X64;
+        private static readonly string HostArch = RuntimeInformation.ProcessArchitecture switch
+        {
+            System.Runtime.InteropServices.Architecture.X64 => "x64",
+            System.Runtime.InteropServices.Architecture.Arm64 => "arm64",
+            _ => null,
+        };
+
+        private static string FixtureDllPath => Path.Combine(TestUtils.GetAssetDir(), HostArch ?? "x64", "ordinalfixture.dll");
+
+        private static bool CanRun => OperatingSystem.IsWindows() && HostArch != null;
 
         [DllImport(Library, EntryPoint = "FixtureByName", ExactSpelling = true)]
         private static extern int CallByName(int value);
@@ -49,7 +58,7 @@ namespace MetadataUtils.Tests
         [Fact]
         public void DllExports_ListsOnlyNamedExports()
         {
-            var names = DllExports.GetNamedExports(Path.Combine(TestUtils.GetAssetDir(), "x64", "ordinalfixture.dll"));
+            var names = DllExports.GetNamedExports(FixtureDllPath);
 
             Assert.Contains("FixtureByName", names);
             Assert.Contains("FixtureNamedWithOrdinal", names);

@@ -11,6 +11,9 @@ try {
 
     cl /nologo /LD /Fe:..\x64\ordinalfixture.dll ordinalfixture.c /link /DEF:ordinalfixture.def
     Remove-Item *.obj, ..\x64\ordinalfixture.exp, ..\x64\ordinalfixture.lib.tmp -ErrorAction SilentlyContinue
+
+    # The arm64 DLL must be built from an arm64-targeting environment (for example vcvarsamd64_arm64.bat)
+    # and copied to ..\arm64\ordinalfixture.dll, so the invocation tests can run on arm64 hosts.
 }
 finally { Pop-Location }
 
