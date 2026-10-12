@@ -2,8 +2,6 @@
 <IncludeRoot>/shared/usbprint.h
 <IncludeRoot>/um/BiDiSpl.h
 <IncludeRoot>/um/compstui.h
-<IncludeRoot>/um/d4drvif.h
-<IncludeRoot>/um/d4iface.h
 <IncludeRoot>/um/filterpipeline.h
 <IncludeRoot>/um/mxdc.h
 <IncludeRoot>/um/prcomoem.h
@@ -18,7 +16,6 @@
 <IncludeRoot>/um/winppi.h
 <IncludeRoot>/um/winsplp.h
 <IncludeRoot>/um/winspool.h
-<IncludeRoot>/um/wsdxcv.h
 <IncludeRoot>/um/xpsrassvc.h
 <IncludeRoot>/um/imgerror.h
 <IncludeRoot>/um/printerextensiondispid.h

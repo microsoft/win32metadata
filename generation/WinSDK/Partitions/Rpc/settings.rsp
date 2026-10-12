@@ -1,5 +1,3 @@
---exclude
-NDR_SCONTEXT
 --traverse
 <IncludeRoot>/shared/rpcdce.h
 <IncludeRoot>/shared/rpcasync.h

@@ -26,7 +26,7 @@ namespace Windows.Win32.Tests
         public static string GetMethodPrototype(IMethod method)
         {
             StringBuilder ret = new StringBuilder();
-            ret.AppendFormat($"{method.ReturnType.Name} {method.Name}(");
+            ret.AppendFormat($"{GetNativeTypeName(method.ReturnType.FullName, method.ReturnType.Name)} {method.Name}(");
 
             bool first = true;
             foreach (var p in method.Parameters)
@@ -40,12 +40,17 @@ namespace Windows.Win32.Tests
                     first = false;
                 }
 
-                ret.Append(p.Type.Name);
+                ret.Append(GetNativeTypeName(p.Type.FullName, p.Type.Name));
             }
 
             ret.Append(')');
 
             return ret.ToString();
+        }
+
+        public static string GetNativeTypeName(string fullName, string name)
+        {
+            return fullName == "Windows.Foundation.HResult" ? "HRESULT" : name;
         }
     }
 }

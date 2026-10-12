@@ -1,0 +1,154 @@
+// Hand-authored metadata vocabulary seed (NOT generated from headers).
+//
+// These attribute types live only in metadata, not in any C header, so the
+// scraper cannot derive them. They are the `Windows.Win32.Foundation.Metadata` attributes
+// that the converter emits and that bindgen consumes, making the merged
+// `Windows.Win32.winmd` self-contained without an upstream reference winmd.
+#[win32]
+mod Windows {
+    mod Win32 {
+        mod Foundation {
+            mod Metadata {
+            // Marks a function that never returns (`__declspec(noreturn)`). RDL: `#[noreturn]`.
+            attribute DoesNotReturnAttribute {
+                fn();
+            }
+            // Records the native character encoding of a string constant or field.
+            // RDL: `#[encoding("…")]`.
+            attribute NativeEncodingAttribute {
+                fn(encoding: String);
+            }
+            // Marks a typedef of a primitive that should retain its distinct identity.
+            // RDL: written as the `type NAME = TYPE;` form.
+            attribute NativeTypedefAttribute {
+                fn();
+            }
+            // Marks the return-value parameter of a COM method. RDL: `#[retval]`.
+            attribute RetValAttribute {
+                fn();
+            }
+            // Restricts a declaration to specific processor architectures.
+            // RDL: `#[arch(X86|X64|Arm64)]`.
+            attribute SupportedArchitectureAttribute {
+                fn(architecture: i32);
+            }
+            // Carries a raised structure alignment that packing alone cannot express.
+            // RDL: `#[align(N)]`.
+            attribute AlignmentAttribute {
+                fn(alignment: i32);
+            }
+            // Records that a pointer parameter/field is a counted array. The element
+            // count is either given by another parameter (`CountParamIndex`) or is a
+            // compile-time constant (`CountConst`); derived from SAL `_*_reads_`/
+            // `_*_writes_`/`_*_updates_` element-count macros.
+            // RDL: `#[len_param(N)]` (CountParamIndex) or `#[len_const(N)]` (CountConst).
+            attribute NativeArrayInfoAttribute {
+                fn();
+                CountParamIndex: i16,
+                CountConst: i32,
+                CountFieldName: String,
+            }
+            // Records that a pointer parameter is a byte buffer whose size in bytes is
+            // given by another parameter (`BytesParamIndex`); derived from SAL
+            // `_*_bytes_` buffer macros.
+            // RDL: `#[size_param(N)]`.
+            attribute MemorySizeAttribute {
+                fn();
+                BytesParamIndex: i16,
+            }
+            // Marks a parameter that is reserved and must be zero/null (SAL `_Reserved_`).
+            // RDL: `#[reserved]`.
+            attribute ReservedAttribute {
+                fn();
+            }
+            // Marks a COM out-pointer parameter (SAL `_COM_Outptr_` and variants).
+            // RDL: `#[iid_is]`.
+            attribute ComOutPtrAttribute {
+                fn();
+            }
+            // Marks an enum derived from a C++ scoped enum (`enum class`/`enum struct`),
+            // which has distinct name-lookup/conversion semantics from a plain C enum.
+            // RDL: `#[scoped]`.
+            attribute ScopedEnumAttribute {
+                fn();
+            }
+            // Records a bit-field member packed into a backing integer field. The C
+            // bit-field concept has no winmd representation, so consecutive bit-fields
+            // are coalesced into a single backing integer field (`_bitfield` /
+            // `_bitfield1` / …) and each logical member is recorded here — one
+            // attribute instance per member — carrying the member's name, its bit
+            // offset within the backing field, and its width in bits. bindgen reads
+            // these to generate typed get/set accessors. Signedness of a multi-bit
+            // member is taken from the backing field's own type.
+            // RDL: written as a C-like block on the backing field, e.g.
+            // `_bitfield: u8 { Name: 1, _: 3, Other: 4 }` (anonymous padding is `_`).
+            attribute NativeBitfieldAttribute {
+                fn(name: String, offset: i64, length: i64);
+            }
+            attribute RAIIFreeAttribute {
+                fn(name: String);
+            }
+            attribute InvalidHandleValueAttribute {
+                fn(value: i64);
+            }
+            attribute FreeWithAttribute {
+                fn(name: String);
+            }
+            attribute DoNotReleaseAttribute {
+                fn();
+            }
+            attribute NotNullTerminatedAttribute {
+                fn();
+            }
+            attribute NullNullTerminatedAttribute {
+                fn();
+            }
+            attribute CanReturnErrorsAsSuccessAttribute {
+                fn();
+            }
+            attribute CanReturnMultipleSuccessValuesAttribute {
+                fn();
+            }
+            attribute RetainedAttribute {
+                fn();
+            }
+            attribute IgnoreIfReturnAttribute {
+                fn(value: String);
+            }
+            attribute AlsoUsableForAttribute {
+                fn(otherType: String);
+            }
+            attribute AssociatedEnumAttribute {
+                fn(name: String);
+            }
+            attribute AssociatedConstantAttribute {
+                fn(name: String);
+            }
+            attribute NativeInheritanceAttribute {
+                fn(baseName: String);
+            }
+            attribute StructSizeFieldAttribute {
+                fn(field: String);
+            }
+            attribute AnsiAttribute {
+                fn();
+            }
+            attribute UnicodeAttribute {
+                fn();
+            }
+            attribute AgileAttribute {
+                fn();
+            }
+            attribute StaticLibraryAttribute {
+                fn(libName: String);
+            }
+            attribute ConstAttribute {
+                fn();
+            }
+            attribute SupportedOSPlatformAttribute {
+                fn(platform: String);
+            }
+            }
+        }
+    }
+}

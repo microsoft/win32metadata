@@ -44,6 +44,10 @@ Copy-Item "$d3dIncludeDir\dxgiformat.*" "$recompiledIdlHeadersDir\shared" -Recur
 Write-Host "Copying additional headers from $windowsWin32ProjectRoot\AdditionalHeaders to $recompiledIdlHeadersDir\um..."
 Copy-Item "$windowsWin32ProjectRoot\AdditionalHeaders\*" "$recompiledIdlHeadersDir\um" -Recurse
 
+Write-Host "Applying SDK patches to IDL files (pre-MIDL)..."
+& $PSScriptRoot\ApplySDKPatches.ps1 -Phase pre-midl
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
 Write-Host "Converting MIDL attributes to SAL annotations..."
 $idlFilesToRecompile = [System.Collections.ArrayList]@()
 $idlFilesToExclude = "cellularapi_oem", "certbcli", "dxgicommon", "dxgitype", "microsoft.diagnostics.appanalysis", "PortableDeviceConnectImports", "wincrypt" | ForEach-Object { "$_.idl" }
@@ -164,8 +168,8 @@ foreach ($deprecatedHeader in $deprecatedHeaders) {
         if (!(Test-Path $directory)) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
-        
-        git checkout origin/main $fullPath
+
+        Copy-Item (Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders\$deprecatedHeader") $fullPath
     }
 }
 
@@ -180,7 +184,11 @@ Write-Host "Restoring WinHv headers to older versions..."
 foreach ($winHvHeader in $winHvHeadersToRestore) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
     Write-Host "Restoring WinHv header: $winHvHeader"
-    git checkout origin/main $fullPath
+    Copy-Item (Join-Path $windowsWin32ProjectRoot "RecompiledIdlHeaders\$winHvHeader") $fullPath -Force
 }
+
+Write-Host "Applying SDK patches to header files (post-MIDL)..."
+& $PSScriptRoot\ApplySDKPatches.ps1 -Phase post-midl
+if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
 $ErrorActionPreference = "Stop"

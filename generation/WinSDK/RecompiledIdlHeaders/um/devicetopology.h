@@ -554,8 +554,12 @@ enum __MIDL___MIDL_itf_devicetopology_0000_0000_0012
         Subunit	= ( Connector + 1 ) 
     } 	PartType;
 
-typedef /* [public][public] */ 
+#if defined(WIN32METADATA_AGGREGATE_ROUTING) && defined(__cplusplus)
+enum class __MIDL___MIDL_itf_devicetopology_0000_0000_0013
+#else
+typedef /* [public][public] */
 enum __MIDL___MIDL_itf_devicetopology_0000_0000_0013
+#endif
     {
         Unknown_Connector	= 0,
         Physical_Internal	= ( Unknown_Connector + 1 ) ,
@@ -563,7 +567,13 @@ enum __MIDL___MIDL_itf_devicetopology_0000_0000_0013
         Software_IO	= ( Physical_External + 1 ) ,
         Software_Fixed	= ( Software_IO + 1 ) ,
         Network	= ( Software_Fixed + 1 ) 
-    } 	ConnectorType;
+    }
+#if defined(WIN32METADATA_AGGREGATE_ROUTING) && defined(__cplusplus)
+    ;
+typedef enum __MIDL___MIDL_itf_devicetopology_0000_0000_0013 ConnectorType;
+#else
+    ConnectorType;
+#endif
 
 
 
@@ -4024,5 +4034,4 @@ extern RPC_IF_HANDLE __MIDL_itf_devicetopology_0000_0028_v0_0_s_ifspec;
 #endif
 
 #endif
-
 

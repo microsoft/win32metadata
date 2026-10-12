@@ -4,7 +4,6 @@ SLDATATYPE=uint
 --exclude
 _CYPHER_BLOCK
 _LM_OWF_PASSWORD
-SslGetCipherSuitePRFHashAlgorithmFn
 --traverse
 <IncludeRoot>/um/casetup.h
 <IncludeRoot>/shared/bcrypt.h

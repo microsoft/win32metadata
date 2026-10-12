@@ -1,9 +1,5 @@
---config
-exclude-empty-records
 --exclude
 _LIST_ENTRY
-LIST_ENTRY32
-LIST_ENTRY64
 _SINGLE_LIST_ENTRY
 _PROCESSOR_NUMBER
 _GROUP_AFFINITY

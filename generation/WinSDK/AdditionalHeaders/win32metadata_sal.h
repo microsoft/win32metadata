@@ -1,0 +1,285 @@
+// SAL capture shim.
+//
+// The Windows SDK's <sal.h>, under a clang `*-windows-msvc` target, expands every
+// SAL macro to either nothing or to `[SAL_annotes(...)]` Microsoft attributes that
+// clang parses and then silently drops. The only annotation form clang reliably
+// surfaces is `__attribute__((annotate("...")))`.
+//
+// Force-include this shim before translation units. Load the SDK's strict SAL
+// rewrites before applying capture overrides, so later SDK includes cannot erase
+// them. Keep the SDK's strict level unchanged.
+
+#include <specstrings.h>
+
+#undef _Frees_ptr_
+#define _Frees_ptr_ __attribute__((annotate("_Frees_ptr_")))
+#undef _Frees_ptr_opt_
+#define _Frees_ptr_opt_ __attribute__((annotate("_Frees_ptr_opt_")))
+#undef _Post_
+#define _Post_ __attribute__((annotate("_Post_")))
+#undef _NullNull_terminated_
+#define _NullNull_terminated_ __attribute__((annotate("_NullNull_terminated_")))
+
+#undef _In_
+#define _In_ __attribute__((annotate("_In_")))
+#undef _In_z_
+#define _In_z_ __attribute__((annotate("_In_z_")))
+#undef _In_opt_
+#define _In_opt_ __attribute__((annotate("_In_opt_")))
+#undef _In_opt_z_
+#define _In_opt_z_ __attribute__((annotate("_In_opt_z_")))
+#undef _In_NLS_string_
+#define _In_NLS_string_(c) __attribute__((annotate("_In_reads_or_z_(" #c ")")))
+#undef _In_range_
+#define _In_range_(minimum, maximum) \
+    __attribute__((annotate("_In_range_(" #minimum "," #maximum ")")))
+#undef _Out_
+#define _Out_ __attribute__((annotate("_Out_")))
+#undef _Out_z_
+#define _Out_z_ __attribute__((annotate("_Out_z_")))
+#undef _Out_opt_
+#define _Out_opt_ __attribute__((annotate("_Out_opt_")))
+#undef _Inout_
+#define _Inout_ __attribute__((annotate("_Inout_")))
+#undef _Inout_z_
+#define _Inout_z_ __attribute__((annotate("_Inout_z_")))
+#undef _Inout_opt_
+#define _Inout_opt_ __attribute__((annotate("_Inout_opt_")))
+#undef _Inout_opt_z_
+#define _Inout_opt_z_ __attribute__((annotate("_Inout_opt_z_")))
+#undef _Outptr_
+#define _Outptr_ __attribute__((annotate("_Outptr_")))
+#undef _Outptr_opt_
+#define _Outptr_opt_ __attribute__((annotate("_Outptr_opt_")))
+#undef _Outptr_result_maybenull_
+#define _Outptr_result_maybenull_ __attribute__((annotate("_Outptr_result_maybenull_")))
+#undef _Outptr_opt_result_maybenull_
+#define _Outptr_opt_result_maybenull_ __attribute__((annotate("_Outptr_opt_result_maybenull_")))
+#undef _Outptr_result_z_
+#define _Outptr_result_z_ __attribute__((annotate("_Outptr_result_z_")))
+#undef _Outptr_result_maybenull_z_
+#define _Outptr_result_maybenull_z_ __attribute__((annotate("_Outptr_result_maybenull_z_")))
+#undef _Outptr_result_nullonfailure_
+#define _Outptr_result_nullonfailure_ \
+    __attribute__((annotate("_Outptr_result_maybenull_")))
+#undef _Outptr_opt_result_z_
+#define _Outptr_opt_result_z_ __attribute__((annotate("_Outptr_opt_result_z_")))
+#undef _Outptr_opt_result_maybenull_z_
+#define _Outptr_opt_result_maybenull_z_ \
+    __attribute__((annotate("_Outptr_opt_result_maybenull_z_")))
+#undef _Outptr_opt_result_nullonfailure_
+#define _Outptr_opt_result_nullonfailure_ \
+    __attribute__((annotate("_Outptr_opt_result_maybenull_")))
+#undef _COM_Outptr_
+#define _COM_Outptr_ __attribute__((annotate("_COM_Outptr_")))
+#undef _COM_Outptr_opt_
+#define _COM_Outptr_opt_ __attribute__((annotate("_COM_Outptr_opt_")))
+#undef _COM_Outptr_result_maybenull_
+#define _COM_Outptr_result_maybenull_ __attribute__((annotate("_COM_Outptr_result_maybenull_")))
+#undef _COM_Outptr_opt_result_maybenull_
+#define _COM_Outptr_opt_result_maybenull_ __attribute__((annotate("_COM_Outptr_opt_result_maybenull_")))
+#undef _Reserved_
+#define _Reserved_ __attribute__((annotate("_Reserved_")))
+#undef _Out_range_
+#define _Out_range_(minimum, maximum) \
+    __attribute__((annotate("_Out_range_(" #minimum "," #maximum ")")))
+
+#undef _In_reads_
+#define _In_reads_(c) __attribute__((annotate("_In_reads_(" #c ")")))
+#undef _In_reads_opt_
+#define _In_reads_opt_(c) __attribute__((annotate("_In_reads_opt_(" #c ")")))
+#undef _In_reads_bytes_
+#define _In_reads_bytes_(c) __attribute__((annotate("_In_reads_bytes_(" #c ")")))
+#undef _In_reads_bytes_opt_
+#define _In_reads_bytes_opt_(c) __attribute__((annotate("_In_reads_bytes_opt_(" #c ")")))
+#undef _In_reads_z_
+#define _In_reads_z_(c) __attribute__((annotate("_In_reads_z_(" #c ")")))
+#undef _In_reads_or_z_
+#define _In_reads_or_z_(c) __attribute__((annotate("_In_reads_or_z_(" #c ")")))
+#undef _In_reads_or_z_opt_
+#define _In_reads_or_z_opt_(c) __attribute__((annotate("_In_reads_or_z_opt_(" #c ")")))
+#undef _Out_writes_
+#define _Out_writes_(c) __attribute__((annotate("_Out_writes_(" #c ")")))
+#undef _Out_writes_z_
+#define _Out_writes_z_(c) __attribute__((annotate("_Out_writes_z_(" #c ")")))
+#undef _Out_writes_opt_
+#define _Out_writes_opt_(c) __attribute__((annotate("_Out_writes_opt_(" #c ")")))
+#undef _Out_writes_bytes_
+#define _Out_writes_bytes_(c) __attribute__((annotate("_Out_writes_bytes_(" #c ")")))
+#undef _Out_writes_bytes_opt_
+#define _Out_writes_bytes_opt_(c) __attribute__((annotate("_Out_writes_bytes_opt_(" #c ")")))
+#undef _Out_writes_bytes_all_
+#define _Out_writes_bytes_all_(c) __attribute__((annotate("_Out_writes_bytes_all_(" #c ")")))
+#undef _Outptr_result_buffer_
+#define _Outptr_result_buffer_(c) \
+    __attribute__((annotate("_Outptr_result_buffer_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_(" #c ")")))
+#undef _Outptr_result_buffer_all_
+#define _Outptr_result_buffer_all_(c) \
+    __attribute__((annotate("_Outptr_result_buffer_all_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_all_(" #c ")")))
+#undef _Outptr_result_buffer_maybenull_
+#define _Outptr_result_buffer_maybenull_(c) \
+    __attribute__((annotate("_Outptr_result_buffer_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_(" #c ")")))
+#undef _Outptr_result_buffer_all_maybenull_
+#define _Outptr_result_buffer_all_maybenull_(c) \
+    __attribute__((annotate("_Outptr_result_buffer_all_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_all_(" #c ")")))
+#undef _Outptr_result_buffer_to_
+#define _Outptr_result_buffer_to_(s, c) \
+    __attribute__((annotate("_Outptr_result_buffer_to_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_to_(" #s "," #c ")")))
+#undef _Outptr_result_buffer_to_maybenull_
+#define _Outptr_result_buffer_to_maybenull_(s, c) \
+    __attribute__((annotate("_Outptr_result_buffer_to_maybenull_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_to_(" #s "," #c ")")))
+#undef _Outptr_result_bytebuffer_
+#define _Outptr_result_bytebuffer_(c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_(" #c ")")))
+#undef _Outptr_result_bytebuffer_all_
+#define _Outptr_result_bytebuffer_all_(c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_all_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_all_(" #c ")")))
+#undef _Outptr_result_bytebuffer_maybenull_
+#define _Outptr_result_bytebuffer_maybenull_(c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_(" #c ")")))
+#undef _Outptr_result_bytebuffer_all_maybenull_
+#define _Outptr_result_bytebuffer_all_maybenull_(c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_all_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_all_(" #c ")")))
+#undef _Outptr_result_bytebuffer_to_
+#define _Outptr_result_bytebuffer_to_(s, c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_to_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_to_(" #s "," #c ")")))
+#undef _Outptr_result_bytebuffer_to_maybenull_
+#define _Outptr_result_bytebuffer_to_maybenull_(s, c) \
+    __attribute__((annotate("_Outptr_result_bytebuffer_to_maybenull_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_to_(" #s "," #c ")")))
+
+#undef _Outptr_opt_result_buffer_
+#define _Outptr_opt_result_buffer_(c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_opt_(" #c ")")))
+#undef _Outptr_opt_result_buffer_all_
+#define _Outptr_opt_result_buffer_all_(c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_all_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_all_opt_(" #c ")")))
+#undef _Outptr_opt_result_buffer_maybenull_
+#define _Outptr_opt_result_buffer_maybenull_(c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_opt_(" #c ")")))
+#undef _Outptr_opt_result_buffer_all_maybenull_
+#define _Outptr_opt_result_buffer_all_maybenull_(c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_all_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_all_opt_(" #c ")")))
+#undef _Outptr_opt_result_buffer_to_
+#define _Outptr_opt_result_buffer_to_(s, c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_to_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_to_opt_(" #s "," #c ")")))
+#undef _Outptr_opt_result_buffer_to_maybenull_
+#define _Outptr_opt_result_buffer_to_maybenull_(s, c) \
+    __attribute__((annotate("_Outptr_opt_result_buffer_to_maybenull_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_to_opt_(" #s "," #c ")")))
+#undef _Outptr_opt_result_bytebuffer_
+#define _Outptr_opt_result_bytebuffer_(c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_opt_(" #c ")")))
+#undef _Outptr_opt_result_bytebuffer_all_
+#define _Outptr_opt_result_bytebuffer_all_(c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_all_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_all_opt_(" #c ")")))
+#undef _Outptr_opt_result_bytebuffer_maybenull_
+#define _Outptr_opt_result_bytebuffer_maybenull_(c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_opt_(" #c ")")))
+#undef _Outptr_opt_result_bytebuffer_all_maybenull_
+#define _Outptr_opt_result_bytebuffer_all_maybenull_(c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_all_maybenull_(" #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_all_opt_(" #c ")")))
+#undef _Outptr_opt_result_bytebuffer_to_
+#define _Outptr_opt_result_bytebuffer_to_(s, c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_to_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_to_opt_(" #s "," #c ")")))
+#undef _Outptr_opt_result_bytebuffer_to_maybenull_
+#define _Outptr_opt_result_bytebuffer_to_maybenull_(s, c) \
+    __attribute__((annotate("_Outptr_opt_result_bytebuffer_to_maybenull_(" #s "," #c ")"))) \
+    __attribute__((annotate("_Out_writes_bytes_to_opt_(" #s "," #c ")")))
+#undef _Inout_updates_
+#define _Inout_updates_(c) __attribute__((annotate("_Inout_updates_(" #c ")")))
+#undef _Inout_updates_z_
+#define _Inout_updates_z_(c) __attribute__((annotate("_Inout_updates_z_(" #c ")")))
+#undef _Inout_updates_opt_
+#define _Inout_updates_opt_(c) __attribute__((annotate("_Inout_updates_opt_(" #c ")")))
+#undef _Inout_updates_bytes_
+#define _Inout_updates_bytes_(c) __attribute__((annotate("_Inout_updates_bytes_(" #c ")")))
+#undef _Inout_bytecount_
+#define _Inout_bytecount_(c) __attribute__((annotate("_Inout_updates_bytes_(" #c ")")))
+#undef _Inout_opt_bytecount_
+#define _Inout_opt_bytecount_(c) __attribute__((annotate("_Inout_updates_bytes_opt_(" #c ")")))
+#undef _Inout_count_
+#define _Inout_count_(c) __attribute__((annotate("_Inout_updates_(" #c ")")))
+
+#undef _Out_writes_all_
+#define _Out_writes_all_(c) __attribute__((annotate("_Out_writes_all_(" #c ")")))
+#undef _Out_writes_all_opt_
+#define _Out_writes_all_opt_(c) __attribute__((annotate("_Out_writes_all_opt_(" #c ")")))
+#undef _Out_writes_bytes_all_opt_
+#define _Out_writes_bytes_all_opt_(c) __attribute__((annotate("_Out_writes_bytes_all_opt_(" #c ")")))
+#undef _Out_bytecapcount_
+#define _Out_bytecapcount_(c) __attribute__((annotate("_Out_writes_bytes_(" #c ")")))
+#undef _Out_cap_post_count_
+#define _Out_cap_post_count_(s, c) __attribute__((annotate("_Out_writes_to_(" #s "," #c ")")))
+#undef _Out_opt_bytecap_post_bytecount_
+#define _Out_opt_bytecap_post_bytecount_(s, c) \
+    __attribute__((annotate("_Out_writes_bytes_to_opt_(" #s "," #c ")")))
+#undef _Out_opt_cap_post_count_
+#define _Out_opt_cap_post_count_(s, c) \
+    __attribute__((annotate("_Out_writes_to_opt_(" #s "," #c ")")))
+#undef _Out_z_cap_
+#define _Out_z_cap_(c) __attribute__((annotate("_Out_writes_z_(" #c ")")))
+#undef _Out_opt_z_cap_
+#define _Out_opt_z_cap_(c) __attribute__((annotate("_Out_writes_opt_z_(" #c ")")))
+#undef _Inout_updates_all_
+#define _Inout_updates_all_(c) __attribute__((annotate("_Inout_updates_all_(" #c ")")))
+#undef _Inout_updates_all_opt_
+#define _Inout_updates_all_opt_(c) __attribute__((annotate("_Inout_updates_all_opt_(" #c ")")))
+#undef _Inout_updates_bytes_all_
+#define _Inout_updates_bytes_all_(c) __attribute__((annotate("_Inout_updates_bytes_all_(" #c ")")))
+#undef _Inout_updates_bytes_all_opt_
+#define _Inout_updates_bytes_all_opt_(c) __attribute__((annotate("_Inout_updates_bytes_all_opt_(" #c ")")))
+#undef _Inout_updates_bytes_opt_
+#define _Inout_updates_bytes_opt_(c) __attribute__((annotate("_Inout_updates_bytes_opt_(" #c ")")))
+
+#undef _Out_writes_opt_z_
+#define _Out_writes_opt_z_(c) __attribute__((annotate("_Out_writes_opt_z_(" #c ")")))
+#undef _Inout_updates_opt_z_
+#define _Inout_updates_opt_z_(c) __attribute__((annotate("_Inout_updates_opt_z_(" #c ")")))
+
+#undef _Out_writes_to_
+#define _Out_writes_to_(s, c) __attribute__((annotate("_Out_writes_to_(" #s "," #c ")")))
+#undef _Out_writes_to_opt_
+#define _Out_writes_to_opt_(s, c) __attribute__((annotate("_Out_writes_to_opt_(" #s "," #c ")")))
+#undef _Out_writes_bytes_to_
+#define _Out_writes_bytes_to_(s, c) __attribute__((annotate("_Out_writes_bytes_to_(" #s "," #c ")")))
+#undef _Out_writes_bytes_to_opt_
+#define _Out_writes_bytes_to_opt_(s, c) __attribute__((annotate("_Out_writes_bytes_to_opt_(" #s "," #c ")")))
+#undef _Inout_updates_to_
+#define _Inout_updates_to_(s, c) __attribute__((annotate("_Inout_updates_to_(" #s "," #c ")")))
+#undef _Inout_updates_to_opt_
+#define _Inout_updates_to_opt_(s, c) __attribute__((annotate("_Inout_updates_to_opt_(" #s "," #c ")")))
+#undef _Inout_updates_bytes_to_
+#define _Inout_updates_bytes_to_(s, c) __attribute__((annotate("_Inout_updates_bytes_to_(" #s "," #c ")")))
+#undef _Inout_updates_bytes_to_opt_
+#define _Inout_updates_bytes_to_opt_(s, c) __attribute__((annotate("_Inout_updates_bytes_to_opt_(" #s "," #c ")")))
+
+#undef _Out_writes_to_ptr_
+#define _Out_writes_to_ptr_(p) __attribute__((annotate("_Out_writes_to_ptr_")))
+#undef _Out_writes_to_ptr_opt_
+#define _Out_writes_to_ptr_opt_(p) __attribute__((annotate("_Out_writes_to_ptr_opt_")))
+#undef _Out_writes_to_ptr_z_
+#define _Out_writes_to_ptr_z_(p) __attribute__((annotate("_Out_writes_to_ptr_z_")))
+#undef _Out_writes_to_ptr_opt_z_
+#define _Out_writes_to_ptr_opt_z_(p) __attribute__((annotate("_Out_writes_to_ptr_opt_z_")))

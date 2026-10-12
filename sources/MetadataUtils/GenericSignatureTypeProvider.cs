@@ -263,7 +263,7 @@ namespace MetadataUtils
 
         public string GetGenericInstantiation(string genericType, ImmutableArray<string> typeArguments)
         {
-            throw new NotImplementedException();
+            return $"{genericType}<{string.Join(", ", typeArguments)}>";
         }
     }
 }

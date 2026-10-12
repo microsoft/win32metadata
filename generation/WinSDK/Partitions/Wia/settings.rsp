@@ -4,7 +4,6 @@
 <IncludeRoot>/um/WiaVideo.h
 <IncludeRoot>/um/wiadevd.h
 <IncludeRoot>/um/wiaintfc.h
-<IncludeRoot>/um/wiamdef--.h
 <IncludeRoot>/um/wiamicro.h
 <IncludeRoot>/um/wiamindr_lh.h
 <IncludeRoot>/um/wiamindr.h

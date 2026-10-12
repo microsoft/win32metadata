@@ -1,0 +1,17 @@
+[package]
+name = "win32metadata-tools"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "win32metadata-tools"
+path = "src/main.rs"
+
+[dependencies]
+clang-sys = { version = "1.9.0", features = ["runtime"] }
+sha2 = "0.10.9"
+windows-clang = { git = "https://github.com/jevansaks/windows-rs", rev = "3be3d29b2fc7ed974b46523acf5deda3c1ab5325" }
+windows-default = { git = "https://github.com/jevansaks/windows-rs", rev = "3be3d29b2fc7ed974b46523acf5deda3c1ab5325" }
+windows-metadata = { git = "https://github.com/jevansaks/windows-rs", rev = "3be3d29b2fc7ed974b46523acf5deda3c1ab5325" }
+windows-rdl = { git = "https://github.com/jevansaks/windows-rs", rev = "3be3d29b2fc7ed974b46523acf5deda3c1ab5325" }

@@ -24,6 +24,7 @@ Abstract:
 #include <ctype.h>  // winnt ntndis
 #include <winapifamily.h>  // winnt
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_ntoshvp begin_ntddk
 
 //
@@ -41,6 +42,7 @@ Abstract:
 #endif
 
 // end_winnt end_ntoshvp end_ntddk
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 #if _MSC_VER >= 1200
 #pragma warning(push)
@@ -76,6 +78,7 @@ Abstract:
 #define ANYSIZE_ARRAY 1       // winnt
 #endif
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 //
@@ -222,11 +225,13 @@ Abstract:
 #include <basetsd.h>
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 #ifndef CONST
 #define CONST               const
 #endif
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 #ifndef DECLSPEC_IMPORT
@@ -358,6 +363,7 @@ Abstract:
 #endif
 
 // end_winnt end_ntminiport end_ntndis end_ntminitape
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 #ifndef DECLSPEC_GUARDIGNORE
 #if (_MSC_FULL_VER >= 170065501) || defined(_D1VERSIONLKG171_)
@@ -367,6 +373,7 @@ Abstract:
 #endif
 #endif
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_ntminiport begin_ntndis begin_ntminitape
 
 // begin_ntoshvp
@@ -497,6 +504,7 @@ typedef void *PVOID;
 typedef void * POINTER_64 PVOID64;
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_wudfwdm
 
 #ifndef _MANAGED
@@ -510,6 +518,7 @@ typedef void * POINTER_64 PVOID64;
 #endif
 
 // end_wudfwdm
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 #if (_MSC_VER >= 800) || defined(_STDCALL_SUPPORTED)
@@ -709,6 +718,7 @@ typedef PCNZCH PCNZTCH, PCUNZTCH;
 
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 //
 // The type QUAD and UQUAD are intended to use when a 8 byte aligned structure
@@ -788,6 +798,7 @@ typedef CONST SCHAR *PCSCHAR;
 #endif
 #endif
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 #define ALL_PROCESSOR_GROUPS        0xffff
@@ -974,6 +985,7 @@ typedef _Return_type_success_(return >= 0) long HRESULT;
 #define IFACEMETHODIMPV_(type)   __override STDMETHODIMPV_(type)
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 
 //
@@ -1021,6 +1033,7 @@ typedef ULONG LCID;         // DEPRECATED, use Locale Names.  See documentation 
 typedef PULONG PLCID;       // DEPRECATED, use Locale Names.  See documentation for GetLocaleInfoEx. // winnt
 typedef USHORT LANGID;      // DEPRECATED, use Locale Names.  See documentation for GetLocaleInfoEx. // winnt
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 #ifndef __COMPARTMENT_ID_DEFINED__
@@ -1038,6 +1051,7 @@ typedef enum {
 #endif // __COMPARTMENT_ID_DEFINED__
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 // begin_ntoshvp
 // begin_wudfpwdm
@@ -1122,6 +1136,7 @@ typedef CONST NTSTATUS *PCNTSTATUS;
 // end_wudfwdm
 // end_ntoshvp
 // end_windbgkd
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 #define APPLICATION_ERROR_MASK       0x20000000
 #define ERROR_SEVERITY_SUCCESS       0x00000000
@@ -1129,6 +1144,7 @@ typedef CONST NTSTATUS *PCNTSTATUS;
 #define ERROR_SEVERITY_WARNING       0x80000000
 #define ERROR_SEVERITY_ERROR         0xC0000000
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 #ifndef __SECSTATUS_DEFINED__
 typedef long SECURITY_STATUS;
@@ -1147,6 +1163,7 @@ typedef long SECURITY_STATUS;
 #define LowTime LowPart
 #define HighTime HighPart
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 // begin_ntoshvp
 
@@ -1175,8 +1192,10 @@ typedef struct _FLOAT128 {
 typedef FLOAT128 *PFLOAT128;
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_ntminiport begin_ntndis begin_ntminitape
 
 //
@@ -1280,6 +1299,7 @@ typedef ULONGLONG  DWORDLONG;
 typedef DWORDLONG *PDWORDLONG;
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 // begin_sdfwdm
 // begin_ntminiport begin_ntndis
@@ -1297,6 +1317,7 @@ typedef LARGE_INTEGER PHYSICAL_ADDRESS, *PPHYSICAL_ADDRESS;
 // end_ntminiport end_ntndis
 // end_sdfwdm
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 //
@@ -1525,6 +1546,7 @@ _rotr64 (
 #endif
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 // begin_wudfwdm
 //
@@ -1566,7 +1588,9 @@ typedef enum _WAIT_TYPE {
 //
 
 typedef _Null_terminated_ CHAR *PSZ;
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef _Null_terminated_ CONST char *PCSZ;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 // begin_ntndis
 //
@@ -1575,6 +1599,7 @@ typedef _Null_terminated_ CONST char *PCSZ;
 
 typedef USHORT RTL_STRING_LENGTH_TYPE;
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef struct _STRING {
     USHORT Length;
     USHORT MaximumLength;
@@ -1586,13 +1611,16 @@ typedef struct _STRING {
 typedef STRING *PSTRING;
 typedef STRING ANSI_STRING;
 typedef PSTRING PANSI_STRING;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 // end_sdfwdm
 // end_wudfwdm
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef STRING OEM_STRING;
 typedef PSTRING POEM_STRING;
 typedef CONST STRING* PCOEM_STRING;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 //
 // CONSTCounted String
@@ -1610,7 +1638,9 @@ typedef CSTRING *PCSTRING;
 // begin_sdfwdm
 
 typedef STRING CANSI_STRING;
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef PSTRING PCANSI_STRING;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 typedef STRING UTF8_STRING;
 typedef PSTRING PUTF8_STRING;
@@ -1620,6 +1650,7 @@ typedef PSTRING PUTF8_STRING;
 // NULL terminated, Length does not include trailing NULL.
 //
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef struct _UNICODE_STRING {
     USHORT Length;
     USHORT MaximumLength;
@@ -1631,6 +1662,7 @@ typedef struct _UNICODE_STRING {
 } UNICODE_STRING;
 typedef UNICODE_STRING *PUNICODE_STRING;
 typedef const UNICODE_STRING *PCUNICODE_STRING;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 // end_sdfwdm
 // end_wudfwdm
 
@@ -1678,6 +1710,7 @@ typedef BOOLEAN *PBOOLEAN;       // winnt
 
 // end_ntminiport end_ntminitape
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 //
 //  Doubly linked list structure.  Can be used as either a list head, or
@@ -1700,6 +1733,7 @@ typedef struct _SINGLE_LIST_ENTRY {
 
 // end_ntoshvp
 // end_winnt end_ntndis
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_wudfpwdm
 
 //
@@ -1734,6 +1768,7 @@ typedef struct _RTL_BALANCED_NODE {
                           ~RTL_BALANCED_NODE_RESERVED_PARENT_MASK))
 
 // end_wudfpwdm
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 // begin_ntoshvp
 
@@ -1754,6 +1789,7 @@ typedef struct LIST_ENTRY64 {
 typedef LIST_ENTRY64 *PLIST_ENTRY64;
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 typedef struct _SINGLE_LIST_ENTRY32 {
     ULONG Next;
@@ -1875,6 +1911,7 @@ typedef CONST OBJECT_ATTRIBUTES32 *PCOBJECT_ATTRIBUTES32;
 
 // begin_wudfwdm
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef struct _OBJECT_ATTRIBUTES {
     ULONG Length;
     HANDLE RootDirectory;
@@ -1884,6 +1921,7 @@ typedef struct _OBJECT_ATTRIBUTES {
     PVOID SecurityQualityOfService;  // Points to type SECURITY_QUALITY_OF_SERVICE
 } OBJECT_ATTRIBUTES;
 typedef OBJECT_ATTRIBUTES *POBJECT_ATTRIBUTES;
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 typedef CONST OBJECT_ATTRIBUTES *PCOBJECT_ATTRIBUTES;
 
 //++
@@ -1942,6 +1980,7 @@ typedef CONST OBJECT_ATTRIBUTES *PCOBJECT_ATTRIBUTES;
 // end_ntoshvp
 // end_ntminiport end_ntndis end_ntminitape
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_ntndis
 
 #include <guiddef.h>
@@ -1956,6 +1995,7 @@ typedef struct  _OBJECTID {     // size is 20
 #endif // !_OBJECTID_DEFINED
 
 // end_winnt end_ntndis
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_wudfpwdm
 
 #define MINCHAR     0x80        // winnt
@@ -1985,6 +2025,7 @@ typedef struct  _OBJECTID {     // size is 20
     (CHAR *)((ULONG_PTR)(ArgumentPointer)) != (CHAR *)(NULL) )
 
 // end_wudfwdm
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_ntminiport
 // begin_ntoshvp
 //
@@ -2174,6 +2215,7 @@ char (*RtlpNumberOf( UNALIGNED T (&)[N] ))[N];
 #endif
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 //
 // This works "generically" for Unicode and Ansi/Oem strings.
 // Usage:
@@ -2213,6 +2255,7 @@ char _RTL_CONSTANT_STRING_type_check(const void *s);
     sizeof( s ) / sizeof(_RTL_CONSTANT_STRING_type_check(s)), \
     _RTL_CONSTANT_STRING_remove_const_macro(s) \
 }
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 // like sizeof
@@ -2256,6 +2299,7 @@ EXCEPTION_ROUTINE (
 typedef EXCEPTION_ROUTINE *PEXCEPTION_ROUTINE;
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_ntminiport begin_ntndis
 // begin_wudfwdm
 // begin_ntoshvp
@@ -2272,6 +2316,7 @@ typedef KIRQL *PKIRQL;
 // end_wudfwdm
 // end_ntminiport end_ntndis
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 //
@@ -2282,6 +2327,7 @@ typedef KIRQL *PKIRQL;
 #define ENCLAVE_LONG_ID_LENGTH              32
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 //
 // Product types
@@ -2322,6 +2368,7 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
     MaxSuiteType
 } SUITE_TYPE;
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 #define VER_SERVER_NT                       0x80000000
@@ -2345,7 +2392,9 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 #define VER_SUITE_MULTIUSERTS               0x00020000
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 //
@@ -2543,11 +2592,15 @@ typedef _Enum_is_bitflag_ enum _SUITE_TYPE {
 #define PRODUCT_UNLICENSED                          0xABCDABCD
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_ntminiport begin_winnt begin_ntminitape
 #include <sdkddkver.h>
 // end_ntminiport end_winnt end_ntminitape
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt begin_r_winnt
 
 //
@@ -3412,6 +3465,7 @@ inline ENUMTYPE &operator ^= (ENUMTYPE &a, ENUMTYPE b) WIN_NOEXCEPT { return (EN
 #define COMPILETIME_OR_6FLAGS(a,b,c,d,e,f)  ((UINT)(a)|(UINT)(b)|(UINT)(c)|(UINT)(d)|(UINT)(e)|(UINT)(f))
 
 // end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 //
 //  Define standard min and max macros
@@ -3430,6 +3484,7 @@ inline ENUMTYPE &operator ^= (ENUMTYPE &a, ENUMTYPE b) WIN_NOEXCEPT { return (EN
 #endif  // NOMINMAX
 
 // end_ntndis end_ntminitape
+#ifndef WIN32METADATA_NTDEF_UNIQUE_ONLY
 // begin_winnt
 
 // Much of the Windows SDK assumes the default packing of structs.
@@ -3446,6 +3501,7 @@ C_ASSERT(TYPE_ALIGNMENT(LARGE_INTEGER) == 8);
 #endif
 
 // end_ntminiport end_winnt
+#endif // WIN32METADATA_NTDEF_UNIQUE_ONLY
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)
@@ -3453,4 +3509,3 @@ C_ASSERT(TYPE_ALIGNMENT(LARGE_INTEGER) == 8);
 
 
 #endif // _NTDEF_
-

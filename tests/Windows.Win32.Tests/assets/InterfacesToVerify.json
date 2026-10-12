@@ -46,7 +46,7 @@
       "HRESULT CreateGlyphRunAnalysis(DWRITE_GLYPH_RUN*, DWRITE_MATRIX*, DWRITE_RENDERING_MODE1, DWRITE_MEASURING_MODE, DWRITE_GRID_FIT_MODE, DWRITE_TEXT_ANTIALIAS_MODE, Single, Single, IDWriteGlyphRunAnalysis*)",
       "HRESULT CreateCustomRenderingParams(Single, Single, Single, Single, DWRITE_PIXEL_GEOMETRY, DWRITE_RENDERING_MODE1, DWRITE_GRID_FIT_MODE, IDWriteRenderingParams3*)",
       "HRESULT CreateFontFaceReference(IDWriteFontFile, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*)",
-      "HRESULT CreateFontFaceReference(PWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*)",
+      "HRESULT CreateFontFaceReference(PCWSTR, FILETIME*, UInt32, DWRITE_FONT_SIMULATIONS, IDWriteFontFaceReference*)",
       "HRESULT GetSystemFontSet(IDWriteFontSet*)",
       "HRESULT CreateFontSetBuilder(IDWriteFontSetBuilder*)",
       "HRESULT CreateFontCollectionFromFontSet(IDWriteFontSet, IDWriteFontCollection1*)",

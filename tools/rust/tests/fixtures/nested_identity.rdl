@@ -1,0 +1,11 @@
+#[win32]
+mod Test {
+    struct Outer {
+        Anonymous: union { value: i32 },
+    }
+    mod Other {
+        struct Outer {
+            Anonymous: union { value: i64 },
+        }
+    }
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.IO;
 using System.Linq;
@@ -16,16 +17,21 @@ namespace MetadataUtils
         private MetadataReader metadataReader;
         private GenericSignatureTypeProvider provider = new GenericSignatureTypeProvider();
 
-        private WinmdUtils(string fileName)
+        private WinmdUtils(string fileName, MetadataReaderOptions options)
         {
             this.stream = new System.IO.FileStream(fileName, System.IO.FileMode.Open, System.IO.FileAccess.Read);
             this.peReader = new PEReader(this.stream);
-            this.metadataReader = this.peReader.GetMetadataReader();
+            this.metadataReader = this.peReader.GetMetadataReader(options);
         }
 
         public static WinmdUtils LoadFromFile(string fileName)
         {
-            return new WinmdUtils(fileName);
+            return LoadFromFile(fileName, MetadataReaderOptions.Default);
+        }
+
+        public static WinmdUtils LoadFromFile(string fileName, MetadataReaderOptions options)
+        {
+            return new WinmdUtils(fileName, options);
         }
 
         public void Dispose()
@@ -101,17 +107,41 @@ namespace MetadataUtils
             }
         }
 
-        private IEnumerable<ParameterInfo> GetParams(ParameterHandleCollection parameterHandles)
+        private ParameterInfo[] GetParams(
+            ParameterHandleCollection parameterHandles, int arity, MethodDefinitionHandle methodHandle)
         {
+            var parameters = new ParameterInfo[arity];
+            var seen = new bool[arity + 1];
             foreach (var pH in parameterHandles)
             {
                 var p = this.metadataReader.GetParameter(pH);
-                string pName = this.metadataReader.GetString(p.Name);
-                if (!string.IsNullOrEmpty(pName))
+                int sequence = p.SequenceNumber;
+                if (sequence > arity)
                 {
-                    yield return new ParameterInfo(pName, p.Attributes);
+                    throw new BadImageFormatException(
+                        $"Method 0x{MetadataTokens.GetToken(methodHandle):X8} parameter sequence {sequence} exceeds signature arity {arity}.");
+                }
+
+                if (seen[sequence])
+                {
+                    throw new BadImageFormatException(
+                        $"Method 0x{MetadataTokens.GetToken(methodHandle):X8} contains duplicate parameter sequence {sequence}.");
+                }
+
+                seen[sequence] = true;
+                if (sequence != 0)
+                {
+                    parameters[sequence - 1] = new ParameterInfo(this.metadataReader.GetString(p.Name), p.Attributes);
                 }
             }
+
+            // Param rows are optional; sequence zero describes the return value.
+            for (int index = 0; index < parameters.Length; index++)
+            {
+                parameters[index] ??= new ParameterInfo(string.Empty, ParameterAttributes.None);
+            }
+
+            return parameters;
         }
 
         private MethodInfo GetMethod(MethodDefinitionHandle methodDefinitionHandle)
@@ -120,7 +150,8 @@ namespace MetadataUtils
             var methodSignature = methodDef.DecodeSignature<string, GenericContext>(this.provider, null);
             var paramHandles = methodDef.GetParameters();
 
-            return new MethodInfo(this.metadataReader.GetString(methodDef.Name), methodSignature, this.GetParams(paramHandles));
+            return new MethodInfo(this.metadataReader.GetString(methodDef.Name), methodSignature,
+                this.GetParams(paramHandles, methodSignature.ParameterTypes.Length, methodDefinitionHandle));
         }
 
         private IEnumerable<MethodInfo> GetMethodInfos(MethodDefinitionHandleCollection methodDefinitionHandles)

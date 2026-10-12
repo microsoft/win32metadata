@@ -8,6 +8,5 @@ AVIPALCHANGE
 <IncludeRoot>/um/timeapi.h
 <IncludeRoot>/um/mmsyscom.h
 <IncludeRoot>/um/mmiscapi2.h
-<IncludeRoot>/shared/uuids.h
 --namespace
 Windows.Win32.Media

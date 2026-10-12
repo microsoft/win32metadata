@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <WindowsSdkCppPackageVersion>10.0.28000.2270</WindowsSdkCppPackageVersion>
+    <WindowsSdkHeaderVersion>10.0.28000.0</WindowsSdkHeaderVersion>
+    <WinmdGeneratorTargetSdkPackageVersion>10.0.19041.5</WinmdGeneratorTargetSdkPackageVersion>
+  </PropertyGroup>
+</Project>

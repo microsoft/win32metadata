@@ -15,3 +15,9 @@ Windows.Win32.System.Rpc.MIDL_STUB_DESC.apfnNdrRundownRoutines
 Windows.Win32.System.Rpc.MIDL_STUB_DESC.NotifyRoutineTable
 Windows.Win32.System.Rpc.NDR_CS_ROUTINES.pTagGettingRoutines
 Windows.Win32.System.WinRT.Apis.RoRegisterActivationFactories
+Windows.Win32.Media.Audio.LPACMDRIVERPROC.Value
+Windows.Win32.NetworkManagement.Rras.PRTM_ENTITY_EXPORT_METHOD.Value
+Windows.Win32.NetworkManagement.Rras.PRTM_EVENT_CALLBACK.Value
+Windows.Win32.Networking.WinInet.LPINTERNET_STATUS_CALLBACK.Value
+Windows.Win32.System.ApplicationInstallationAndServicing.PINSTALLUI_HANDLER_RECORD.Value
+Windows.Win32.System.Rpc.RPC_DISPATCH_TABLE.DispatchTable

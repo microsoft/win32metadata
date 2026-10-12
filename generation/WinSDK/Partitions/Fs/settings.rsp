@@ -28,6 +28,5 @@ DumpLogRecords
 <IncludeRoot>/um/wofapi.h
 <IncludeRoot>/um/ioringapi.h
 <IncludeRoot>/um/ntioring_x.h
-<IncludeRoot>/shared/ntddstor.h
 --namespace
 Windows.Win32.Storage.FileSystem

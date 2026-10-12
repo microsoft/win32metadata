@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmatrix.h b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmatrix.h
+index ed415bf..75a752f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmatrix.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/gdiplusmatrix.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**************************************************************************\
+ * 
+ * Copyright (c) 1998-2001, Microsoft Corp.  All Rights Reserved.
+@@ -22,7 +23,7 @@
+ #pragma warning(disable:4820) /* padding added after data member */
+ #endif
+ 
+-class Matrix : public GdiplusBase
++class _Win32_NativeOpaque_ Matrix : public GdiplusBase
+ {
+ public:
+     friend class Graphics;

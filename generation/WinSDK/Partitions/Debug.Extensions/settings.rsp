@@ -1,7 +1,4 @@
 --exclude
-SymbolSearchInfo
-TypeSearchInfo
-EnumerateChildrenEx
 PDEBUG_ENTENSION_KNOWNSTRUCT
 --traverse
 <IncludeRoot>/um/DbgEng.h
