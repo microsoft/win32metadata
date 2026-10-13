@@ -1,0 +1,524 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winioctl.h b/generation/WinSDK/RecompiledIdlHeaders/um/winioctl.h
+index 8977b82902..d3bc3c23c2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winioctl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winioctl.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0032    // Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -9486,7 +9487,7 @@ typedef struct _PARTITION_INFORMATION_GPT {
+ 
+     GUID PartitionId;                   // Unique GUID for this partition.
+ 
+-    DWORD64 Attributes;                 // See table 16-4.
++    _Win32_AssociatedEnum_(GPT_ATTRIBUTES) DWORD64 Attributes;                 // See table 16-4.
+ 
+     WCHAR Name [36];                    // Partition Name in Unicode.
+ 
+@@ -10567,8 +10568,8 @@ typedef  struct _GET_CHANGER_PARAMETERS {
+     // See features bits, above.
+     //
+ 
+-    DWORD Features0;
+-    DWORD Features1;
++    _Win32_AssociatedEnum_(CHANGER_FEATURES) DWORD Features0;
++    _Win32_AssociatedEnum_(GET_CHANGER_PARAMETERS_FEATURES1) DWORD Features1;
+ 
+     //
+     // Bitmask defining Move from N element to element. Defined by Device Capabilities Page (or equivalent).
+@@ -10726,7 +10727,7 @@ typedef  struct _CHANGER_ELEMENT_STATUS {
+     // See below.
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(CHANGER_ELEMENT_STATUS_FLAGS) DWORD Flags;
+ 
+     //
+     // See below for possible values.
+@@ -10792,7 +10793,7 @@ typedef  struct _CHANGER_ELEMENT_STATUS_EX {
+     // See below.
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(CHANGER_ELEMENT_STATUS_FLAGS) DWORD Flags;
+ 
+     //
+     // See below for possible values.
+@@ -12099,7 +12100,7 @@ typedef struct {
+     FILE_ID_128 ParentFileReferenceNumber;
+     USN Usn;
+     DWORD Reason;
+-    DWORD SourceInfo;
++    _Win32_AssociatedEnum_(USN_SOURCE_INFO_ID) DWORD SourceInfo;
+     DWORD RemainingExtents;
+     WORD   NumberOfExtents;
+     WORD   ExtentSize;
+@@ -12204,7 +12205,7 @@ typedef USN_JOURNAL_DATA_V0 USN_JOURNAL_DATA, *PUSN_JOURNAL_DATA;
+ typedef struct {
+ 
+     DWORDLONG UsnJournalID;
+-    DWORD DeleteFlags;
++    _Win32_AssociatedEnum_(USN_DELETE_FLAGS) DWORD DeleteFlags;
+ 
+ } DELETE_USN_JOURNAL_DATA, *PDELETE_USN_JOURNAL_DATA;
+ 
+@@ -12487,7 +12488,7 @@ typedef struct _FILE_PREFETCH_EX {
+ 
+ typedef struct _FILESYSTEM_STATISTICS {
+ 
+-    WORD   FileSystemType;
++    _Win32_AssociatedEnum_(FILESYSTEM_STATISTICS_TYPE) WORD   FileSystemType;
+     WORD   Version;                     // currently version 1
+ 
+     DWORD SizeOfCompleteStructure;      // must by a multiple of 64 bytes
+@@ -12667,7 +12668,7 @@ typedef struct _NTFS_STATISTICS {
+ 
+ typedef struct _FILESYSTEM_STATISTICS_EX {
+ 
+-    WORD   FileSystemType;
++    _Win32_AssociatedEnum_(FILESYSTEM_STATISTICS_TYPE) WORD   FileSystemType;
+     WORD   Version;                     // currently version 1
+ 
+     DWORD SizeOfCompleteStructure;      // must by a multiple of 64 bytes
+@@ -13486,7 +13487,7 @@ typedef struct _TXFS_MODIFY_RM {
+     //  TXFS_RM_FLAG_* flags
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(TXFS_RMF_LAGS) DWORD Flags;
+ 
+     //
+     //  Maximum log container count if TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX is set.
+@@ -13660,7 +13661,7 @@ typedef struct _TXFS_QUERY_RM_INFORMATION {
+     //  what the flags here mean.
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(TXFS_RMF_LAGS) DWORD Flags;
+ 
+     //
+     //  Exactly one of TXFS_LOGGING_MODE_SIMPLE or TXFS_LOGGING_MODE_FULL.
+@@ -16360,7 +16361,7 @@ typedef _Struct_size_bytes_(Size) struct _FSCTL_QUERY_STORAGE_CLASSES_OUTPUT {
+     // Flags
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(FILE_STORAGE_TIER_FLAGS) DWORD Flags;
+ 
+     //
+     // The total number of available tiers for this disk
+@@ -16423,7 +16424,7 @@ typedef struct _STREAM_INFORMATION_ENTRY {
+             //  Class
+             //
+ 
+-            FILE_STORAGE_TIER_CLASS          Class;
++            _Win32_AssociatedEnum_(FILE_STORAGE_TIER_CLASS) FILE_STORAGE_TIER_CLASS          Class;
+ 
+             //
+             //  Flags
+@@ -17893,5 +17894,404 @@ typedef struct _IO_IRP_EXT_TRACK_OFFSET_HEADER {
+ #pragma warning(pop)
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("GPT_ATTRIBUTE_PLATFORM_REQUIRED")
++#undef GPT_ATTRIBUTE_PLATFORM_REQUIRED
++#pragma push_macro("GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER")
++#undef GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER
++#pragma push_macro("GPT_BASIC_DATA_ATTRIBUTE_HIDDEN")
++#undef GPT_BASIC_DATA_ATTRIBUTE_HIDDEN
++#pragma push_macro("GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY")
++#undef GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY
++#pragma push_macro("GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY")
++#undef GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY
++enum [[clang::flag_enum]] GPT_ATTRIBUTES : unsigned long long
++{
++    GPT_ATTRIBUTE_PLATFORM_REQUIRED = 1ULL,
++    GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER = 9223372036854775808ULL,
++    GPT_BASIC_DATA_ATTRIBUTE_HIDDEN = 4611686018427387904ULL,
++    GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY = 2305843009213693952ULL,
++    GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY = 1152921504606846976ULL,
++};
++#pragma pop_macro("GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY")
++#pragma pop_macro("GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY")
++#pragma pop_macro("GPT_BASIC_DATA_ATTRIBUTE_HIDDEN")
++#pragma pop_macro("GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER")
++#pragma pop_macro("GPT_ATTRIBUTE_PLATFORM_REQUIRED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("USN_DELETE_FLAG_DELETE")
++#undef USN_DELETE_FLAG_DELETE
++#pragma push_macro("USN_DELETE_FLAG_NOTIFY")
++#undef USN_DELETE_FLAG_NOTIFY
++enum [[clang::flag_enum]] USN_DELETE_FLAGS : unsigned int
++{
++    USN_DELETE_FLAG_DELETE = 1U,
++    USN_DELETE_FLAG_NOTIFY = 2U,
++};
++#pragma pop_macro("USN_DELETE_FLAG_NOTIFY")
++#pragma pop_macro("USN_DELETE_FLAG_DELETE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CHANGER_BAR_CODE_SCANNER_INSTALLED")
++#undef CHANGER_BAR_CODE_SCANNER_INSTALLED
++#pragma push_macro("CHANGER_CARTRIDGE_MAGAZINE")
++#undef CHANGER_CARTRIDGE_MAGAZINE
++#pragma push_macro("CHANGER_CLEANER_ACCESS_NOT_VALID")
++#undef CHANGER_CLEANER_ACCESS_NOT_VALID
++#pragma push_macro("CHANGER_CLEANER_SLOT")
++#undef CHANGER_CLEANER_SLOT
++#pragma push_macro("CHANGER_CLOSE_IEPORT")
++#undef CHANGER_CLOSE_IEPORT
++#pragma push_macro("CHANGER_DEVICE_REINITIALIZE_CAPABLE")
++#undef CHANGER_DEVICE_REINITIALIZE_CAPABLE
++#pragma push_macro("CHANGER_DRIVE_CLEANING_REQUIRED")
++#undef CHANGER_DRIVE_CLEANING_REQUIRED
++#pragma push_macro("CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS")
++#undef CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS
++#pragma push_macro("CHANGER_EXCHANGE_MEDIA")
++#undef CHANGER_EXCHANGE_MEDIA
++#pragma push_macro("CHANGER_INIT_ELEM_STAT_WITH_RANGE")
++#undef CHANGER_INIT_ELEM_STAT_WITH_RANGE
++#pragma push_macro("CHANGER_KEYPAD_ENABLE_DISABLE")
++#undef CHANGER_KEYPAD_ENABLE_DISABLE
++#pragma push_macro("CHANGER_LOCK_UNLOCK")
++#undef CHANGER_LOCK_UNLOCK
++#pragma push_macro("CHANGER_MEDIUM_FLIP")
++#undef CHANGER_MEDIUM_FLIP
++#pragma push_macro("CHANGER_OPEN_IEPORT")
++#undef CHANGER_OPEN_IEPORT
++#pragma push_macro("CHANGER_POSITION_TO_ELEMENT")
++#undef CHANGER_POSITION_TO_ELEMENT
++#pragma push_macro("CHANGER_PREDISMOUNT_EJECT_REQUIRED")
++#undef CHANGER_PREDISMOUNT_EJECT_REQUIRED
++#pragma push_macro("CHANGER_PREMOUNT_EJECT_REQUIRED")
++#undef CHANGER_PREMOUNT_EJECT_REQUIRED
++#pragma push_macro("CHANGER_REPORT_IEPORT_STATE")
++#undef CHANGER_REPORT_IEPORT_STATE
++#pragma push_macro("CHANGER_SERIAL_NUMBER_VALID")
++#undef CHANGER_SERIAL_NUMBER_VALID
++#pragma push_macro("CHANGER_STATUS_NON_VOLATILE")
++#undef CHANGER_STATUS_NON_VOLATILE
++#pragma push_macro("CHANGER_STORAGE_DRIVE")
++#undef CHANGER_STORAGE_DRIVE
++#pragma push_macro("CHANGER_STORAGE_IEPORT")
++#undef CHANGER_STORAGE_IEPORT
++#pragma push_macro("CHANGER_STORAGE_SLOT")
++#undef CHANGER_STORAGE_SLOT
++#pragma push_macro("CHANGER_STORAGE_TRANSPORT")
++#undef CHANGER_STORAGE_TRANSPORT
++#pragma push_macro("CHANGER_VOLUME_ASSERT")
++#undef CHANGER_VOLUME_ASSERT
++#pragma push_macro("CHANGER_VOLUME_IDENTIFICATION")
++#undef CHANGER_VOLUME_IDENTIFICATION
++#pragma push_macro("CHANGER_VOLUME_REPLACE")
++#undef CHANGER_VOLUME_REPLACE
++#pragma push_macro("CHANGER_VOLUME_SEARCH")
++#undef CHANGER_VOLUME_SEARCH
++#pragma push_macro("CHANGER_VOLUME_UNDEFINE")
++#undef CHANGER_VOLUME_UNDEFINE
++enum [[clang::flag_enum]] CHANGER_FEATURES : unsigned int
++{
++    CHANGER_BAR_CODE_SCANNER_INSTALLED = 1U,
++    CHANGER_CARTRIDGE_MAGAZINE = 256U,
++    CHANGER_CLEANER_ACCESS_NOT_VALID = 262144U,
++    CHANGER_CLEANER_SLOT = 64U,
++    CHANGER_CLOSE_IEPORT = 4U,
++    CHANGER_DEVICE_REINITIALIZE_CAPABLE = 134217728U,
++    CHANGER_DRIVE_CLEANING_REQUIRED = 65536U,
++    CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS = 536870912U,
++    CHANGER_EXCHANGE_MEDIA = 32U,
++    CHANGER_INIT_ELEM_STAT_WITH_RANGE = 2U,
++    CHANGER_KEYPAD_ENABLE_DISABLE = 268435456U,
++    CHANGER_LOCK_UNLOCK = 128U,
++    CHANGER_MEDIUM_FLIP = 512U,
++    CHANGER_OPEN_IEPORT = 8U,
++    CHANGER_POSITION_TO_ELEMENT = 1024U,
++    CHANGER_PREDISMOUNT_EJECT_REQUIRED = 131072U,
++    CHANGER_PREMOUNT_EJECT_REQUIRED = 524288U,
++    CHANGER_REPORT_IEPORT_STATE = 2048U,
++    CHANGER_SERIAL_NUMBER_VALID = 67108864U,
++    CHANGER_STATUS_NON_VOLATILE = 16U,
++    CHANGER_STORAGE_DRIVE = 4096U,
++    CHANGER_STORAGE_IEPORT = 8192U,
++    CHANGER_STORAGE_SLOT = 16384U,
++    CHANGER_STORAGE_TRANSPORT = 32768U,
++    CHANGER_VOLUME_ASSERT = 4194304U,
++    CHANGER_VOLUME_IDENTIFICATION = 1048576U,
++    CHANGER_VOLUME_REPLACE = 8388608U,
++    CHANGER_VOLUME_SEARCH = 2097152U,
++    CHANGER_VOLUME_UNDEFINE = 16777216U,
++};
++#pragma pop_macro("CHANGER_VOLUME_UNDEFINE")
++#pragma pop_macro("CHANGER_VOLUME_SEARCH")
++#pragma pop_macro("CHANGER_VOLUME_REPLACE")
++#pragma pop_macro("CHANGER_VOLUME_IDENTIFICATION")
++#pragma pop_macro("CHANGER_VOLUME_ASSERT")
++#pragma pop_macro("CHANGER_STORAGE_TRANSPORT")
++#pragma pop_macro("CHANGER_STORAGE_SLOT")
++#pragma pop_macro("CHANGER_STORAGE_IEPORT")
++#pragma pop_macro("CHANGER_STORAGE_DRIVE")
++#pragma pop_macro("CHANGER_STATUS_NON_VOLATILE")
++#pragma pop_macro("CHANGER_SERIAL_NUMBER_VALID")
++#pragma pop_macro("CHANGER_REPORT_IEPORT_STATE")
++#pragma pop_macro("CHANGER_PREMOUNT_EJECT_REQUIRED")
++#pragma pop_macro("CHANGER_PREDISMOUNT_EJECT_REQUIRED")
++#pragma pop_macro("CHANGER_POSITION_TO_ELEMENT")
++#pragma pop_macro("CHANGER_OPEN_IEPORT")
++#pragma pop_macro("CHANGER_MEDIUM_FLIP")
++#pragma pop_macro("CHANGER_LOCK_UNLOCK")
++#pragma pop_macro("CHANGER_KEYPAD_ENABLE_DISABLE")
++#pragma pop_macro("CHANGER_INIT_ELEM_STAT_WITH_RANGE")
++#pragma pop_macro("CHANGER_EXCHANGE_MEDIA")
++#pragma pop_macro("CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS")
++#pragma pop_macro("CHANGER_DRIVE_CLEANING_REQUIRED")
++#pragma pop_macro("CHANGER_DEVICE_REINITIALIZE_CAPABLE")
++#pragma pop_macro("CHANGER_CLOSE_IEPORT")
++#pragma pop_macro("CHANGER_CLEANER_SLOT")
++#pragma pop_macro("CHANGER_CLEANER_ACCESS_NOT_VALID")
++#pragma pop_macro("CHANGER_CARTRIDGE_MAGAZINE")
++#pragma pop_macro("CHANGER_BAR_CODE_SCANNER_INSTALLED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TXFS_RM_FLAG_LOGGING_MODE")
++#undef TXFS_RM_FLAG_LOGGING_MODE
++#pragma push_macro("TXFS_RM_FLAG_RENAME_RM")
++#undef TXFS_RM_FLAG_RENAME_RM
++#pragma push_macro("TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX")
++#undef TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX
++#pragma push_macro("TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN")
++#undef TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN
++#pragma push_macro("TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS")
++#undef TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS
++#pragma push_macro("TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT")
++#undef TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT
++#pragma push_macro("TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE")
++#undef TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE
++#pragma push_macro("TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX")
++#undef TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX
++#pragma push_macro("TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN")
++#undef TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN
++#pragma push_macro("TXFS_RM_FLAG_GROW_LOG")
++#undef TXFS_RM_FLAG_GROW_LOG
++#pragma push_macro("TXFS_RM_FLAG_SHRINK_LOG")
++#undef TXFS_RM_FLAG_SHRINK_LOG
++#pragma push_macro("TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE")
++#undef TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE
++#pragma push_macro("TXFS_RM_FLAG_PRESERVE_CHANGES")
++#undef TXFS_RM_FLAG_PRESERVE_CHANGES
++#pragma push_macro("TXFS_RM_FLAG_RESET_RM_AT_NEXT_START")
++#undef TXFS_RM_FLAG_RESET_RM_AT_NEXT_START
++#pragma push_macro("TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START")
++#undef TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START
++#pragma push_macro("TXFS_RM_FLAG_PREFER_CONSISTENCY")
++#undef TXFS_RM_FLAG_PREFER_CONSISTENCY
++#pragma push_macro("TXFS_RM_FLAG_PREFER_AVAILABILITY")
++#undef TXFS_RM_FLAG_PREFER_AVAILABILITY
++enum [[clang::flag_enum]] TXFS_RMF_LAGS : unsigned int
++{
++    TXFS_RM_FLAG_LOGGING_MODE = 1U,
++    TXFS_RM_FLAG_RENAME_RM = 2U,
++    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX = 4U,
++    TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN = 8U,
++    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS = 16U,
++    TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT = 32U,
++    TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE = 64U,
++    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX = 128U,
++    TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN = 256U,
++    TXFS_RM_FLAG_GROW_LOG = 1024U,
++    TXFS_RM_FLAG_SHRINK_LOG = 2048U,
++    TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE = 4096U,
++    TXFS_RM_FLAG_PRESERVE_CHANGES = 8192U,
++    TXFS_RM_FLAG_RESET_RM_AT_NEXT_START = 16384U,
++    TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START = 32768U,
++    TXFS_RM_FLAG_PREFER_CONSISTENCY = 65536U,
++    TXFS_RM_FLAG_PREFER_AVAILABILITY = 131072U,
++};
++#pragma pop_macro("TXFS_RM_FLAG_PREFER_AVAILABILITY")
++#pragma pop_macro("TXFS_RM_FLAG_PREFER_CONSISTENCY")
++#pragma pop_macro("TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START")
++#pragma pop_macro("TXFS_RM_FLAG_RESET_RM_AT_NEXT_START")
++#pragma pop_macro("TXFS_RM_FLAG_PRESERVE_CHANGES")
++#pragma pop_macro("TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE")
++#pragma pop_macro("TXFS_RM_FLAG_SHRINK_LOG")
++#pragma pop_macro("TXFS_RM_FLAG_GROW_LOG")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN")
++#pragma pop_macro("TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX")
++#pragma pop_macro("TXFS_RM_FLAG_RENAME_RM")
++#pragma pop_macro("TXFS_RM_FLAG_LOGGING_MODE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FILESYSTEM_STATISTICS_TYPE_EXFAT")
++#undef FILESYSTEM_STATISTICS_TYPE_EXFAT
++#pragma push_macro("FILESYSTEM_STATISTICS_TYPE_FAT")
++#undef FILESYSTEM_STATISTICS_TYPE_FAT
++#pragma push_macro("FILESYSTEM_STATISTICS_TYPE_NTFS")
++#undef FILESYSTEM_STATISTICS_TYPE_NTFS
++enum FILESYSTEM_STATISTICS_TYPE : unsigned short
++{
++    FILESYSTEM_STATISTICS_TYPE_EXFAT = 3,
++    FILESYSTEM_STATISTICS_TYPE_FAT = 2,
++    FILESYSTEM_STATISTICS_TYPE_NTFS = 1,
++};
++#pragma pop_macro("FILESYSTEM_STATISTICS_TYPE_NTFS")
++#pragma pop_macro("FILESYSTEM_STATISTICS_TYPE_FAT")
++#pragma pop_macro("FILESYSTEM_STATISTICS_TYPE_EXFAT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("USN_SOURCE_AUXILIARY_DATA")
++#undef USN_SOURCE_AUXILIARY_DATA
++#pragma push_macro("USN_SOURCE_DATA_MANAGEMENT")
++#undef USN_SOURCE_DATA_MANAGEMENT
++#pragma push_macro("USN_SOURCE_REPLICATION_MANAGEMENT")
++#undef USN_SOURCE_REPLICATION_MANAGEMENT
++#pragma push_macro("USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT")
++#undef USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT
++enum USN_SOURCE_INFO_ID : unsigned int
++{
++    USN_SOURCE_AUXILIARY_DATA = 2U,
++    USN_SOURCE_DATA_MANAGEMENT = 1U,
++    USN_SOURCE_REPLICATION_MANAGEMENT = 4U,
++    USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT = 8U,
++};
++#pragma pop_macro("USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT")
++#pragma pop_macro("USN_SOURCE_REPLICATION_MANAGEMENT")
++#pragma pop_macro("USN_SOURCE_DATA_MANAGEMENT")
++#pragma pop_macro("USN_SOURCE_AUXILIARY_DATA")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY")
++#undef FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY
++enum [[clang::flag_enum]] FILE_STORAGE_TIER_FLAGS : unsigned int
++{
++    FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY = 131072U,
++};
++#pragma pop_macro("FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ELEMENT_STATUS_ACCESS")
++#undef ELEMENT_STATUS_ACCESS
++#pragma push_macro("ELEMENT_STATUS_AVOLTAG")
++#undef ELEMENT_STATUS_AVOLTAG
++#pragma push_macro("ELEMENT_STATUS_EXCEPT")
++#undef ELEMENT_STATUS_EXCEPT
++#pragma push_macro("ELEMENT_STATUS_EXENAB")
++#undef ELEMENT_STATUS_EXENAB
++#pragma push_macro("ELEMENT_STATUS_FULL")
++#undef ELEMENT_STATUS_FULL
++#pragma push_macro("ELEMENT_STATUS_ID_VALID")
++#undef ELEMENT_STATUS_ID_VALID
++#pragma push_macro("ELEMENT_STATUS_IMPEXP")
++#undef ELEMENT_STATUS_IMPEXP
++#pragma push_macro("ELEMENT_STATUS_INENAB")
++#undef ELEMENT_STATUS_INENAB
++#pragma push_macro("ELEMENT_STATUS_INVERT")
++#undef ELEMENT_STATUS_INVERT
++#pragma push_macro("ELEMENT_STATUS_LUN_VALID")
++#undef ELEMENT_STATUS_LUN_VALID
++#pragma push_macro("ELEMENT_STATUS_NOT_BUS")
++#undef ELEMENT_STATUS_NOT_BUS
++#pragma push_macro("ELEMENT_STATUS_PVOLTAG")
++#undef ELEMENT_STATUS_PVOLTAG
++#pragma push_macro("ELEMENT_STATUS_SVALID")
++#undef ELEMENT_STATUS_SVALID
++#pragma push_macro("ELEMENT_STATUS_PRODUCT_DATA")
++#undef ELEMENT_STATUS_PRODUCT_DATA
++enum [[clang::flag_enum]] CHANGER_ELEMENT_STATUS_FLAGS : unsigned int
++{
++    ELEMENT_STATUS_ACCESS = 8U,
++    ELEMENT_STATUS_AVOLTAG = 536870912U,
++    ELEMENT_STATUS_EXCEPT = 4U,
++    ELEMENT_STATUS_EXENAB = 16U,
++    ELEMENT_STATUS_FULL = 1U,
++    ELEMENT_STATUS_ID_VALID = 8192U,
++    ELEMENT_STATUS_IMPEXP = 2U,
++    ELEMENT_STATUS_INENAB = 32U,
++    ELEMENT_STATUS_INVERT = 4194304U,
++    ELEMENT_STATUS_LUN_VALID = 4096U,
++    ELEMENT_STATUS_NOT_BUS = 32768U,
++    ELEMENT_STATUS_PVOLTAG = 268435456U,
++    ELEMENT_STATUS_SVALID = 8388608U,
++    ELEMENT_STATUS_PRODUCT_DATA = 64U,
++};
++#pragma pop_macro("ELEMENT_STATUS_PRODUCT_DATA")
++#pragma pop_macro("ELEMENT_STATUS_SVALID")
++#pragma pop_macro("ELEMENT_STATUS_PVOLTAG")
++#pragma pop_macro("ELEMENT_STATUS_NOT_BUS")
++#pragma pop_macro("ELEMENT_STATUS_LUN_VALID")
++#pragma pop_macro("ELEMENT_STATUS_INVERT")
++#pragma pop_macro("ELEMENT_STATUS_INENAB")
++#pragma pop_macro("ELEMENT_STATUS_IMPEXP")
++#pragma pop_macro("ELEMENT_STATUS_ID_VALID")
++#pragma pop_macro("ELEMENT_STATUS_FULL")
++#pragma pop_macro("ELEMENT_STATUS_EXENAB")
++#pragma pop_macro("ELEMENT_STATUS_EXCEPT")
++#pragma pop_macro("ELEMENT_STATUS_AVOLTAG")
++#pragma pop_macro("ELEMENT_STATUS_ACCESS")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CHANGER_CLEANER_AUTODISMOUNT")
++#undef CHANGER_CLEANER_AUTODISMOUNT
++#pragma push_macro("CHANGER_CLEANER_OPS_NOT_SUPPORTED")
++#undef CHANGER_CLEANER_OPS_NOT_SUPPORTED
++#pragma push_macro("CHANGER_IEPORT_USER_CONTROL_CLOSE")
++#undef CHANGER_IEPORT_USER_CONTROL_CLOSE
++#pragma push_macro("CHANGER_IEPORT_USER_CONTROL_OPEN")
++#undef CHANGER_IEPORT_USER_CONTROL_OPEN
++#pragma push_macro("CHANGER_MOVE_EXTENDS_IEPORT")
++#undef CHANGER_MOVE_EXTENDS_IEPORT
++#pragma push_macro("CHANGER_MOVE_RETRACTS_IEPORT")
++#undef CHANGER_MOVE_RETRACTS_IEPORT
++#pragma push_macro("CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE")
++#undef CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE
++#pragma push_macro("CHANGER_PREDISMOUNT_ALIGN_TO_SLOT")
++#undef CHANGER_PREDISMOUNT_ALIGN_TO_SLOT
++#pragma push_macro("CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR")
++#undef CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR
++#pragma push_macro("CHANGER_SLOTS_USE_TRAYS")
++#undef CHANGER_SLOTS_USE_TRAYS
++#pragma push_macro("CHANGER_TRUE_EXCHANGE_CAPABLE")
++#undef CHANGER_TRUE_EXCHANGE_CAPABLE
++enum [[clang::flag_enum]] GET_CHANGER_PARAMETERS_FEATURES1 : unsigned int
++{
++    CHANGER_CLEANER_AUTODISMOUNT = 2147483652U,
++    CHANGER_CLEANER_OPS_NOT_SUPPORTED = 2147483712U,
++    CHANGER_IEPORT_USER_CONTROL_CLOSE = 2147483904U,
++    CHANGER_IEPORT_USER_CONTROL_OPEN = 2147483776U,
++    CHANGER_MOVE_EXTENDS_IEPORT = 2147484160U,
++    CHANGER_MOVE_RETRACTS_IEPORT = 2147484672U,
++    CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE = 2147483650U,
++    CHANGER_PREDISMOUNT_ALIGN_TO_SLOT = 2147483649U,
++    CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR = 2147483680U,
++    CHANGER_SLOTS_USE_TRAYS = 2147483664U,
++    CHANGER_TRUE_EXCHANGE_CAPABLE = 2147483656U,
++};
++#pragma pop_macro("CHANGER_TRUE_EXCHANGE_CAPABLE")
++#pragma pop_macro("CHANGER_SLOTS_USE_TRAYS")
++#pragma pop_macro("CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR")
++#pragma pop_macro("CHANGER_PREDISMOUNT_ALIGN_TO_SLOT")
++#pragma pop_macro("CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE")
++#pragma pop_macro("CHANGER_MOVE_RETRACTS_IEPORT")
++#pragma pop_macro("CHANGER_MOVE_EXTENDS_IEPORT")
++#pragma pop_macro("CHANGER_IEPORT_USER_CONTROL_OPEN")
++#pragma pop_macro("CHANGER_IEPORT_USER_CONTROL_CLOSE")
++#pragma pop_macro("CHANGER_CLEANER_OPS_NOT_SUPPORTED")
++#pragma pop_macro("CHANGER_CLEANER_AUTODISMOUNT")
++#endif
++
+ #endif // _WINIOCTL_
+ 

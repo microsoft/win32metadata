@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/version.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/version.h
+index 745be1287e..305924c522 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/version.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/version.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file provides access to AllJoyn library version and build information.
+@@ -27,9 +28,9 @@
+ extern "C" {
+ #endif
+ 
+-extern AJ_API const char* AJ_CALL alljoyn_getversion();        /**< Gives the version of AllJoyn Library */
+-extern AJ_API const char* AJ_CALL alljoyn_getbuildinfo();      /**< Gives build information of AllJoyn Library */
+-extern AJ_API uint32_t AJ_CALL alljoyn_getnumericversion();    /**< Gives the version of AllJoyn Library as a single number */
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_getversion();        /**< Gives the version of AllJoyn Library */
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_getbuildinfo();      /**< Gives build information of AllJoyn Library */
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API uint32_t AJ_CALL alljoyn_getnumericversion();    /**< Gives the version of AllJoyn Library as a single number */
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

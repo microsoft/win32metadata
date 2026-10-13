@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/tdiinfo.h b/generation/WinSDK/RecompiledIdlHeaders/shared/tdiinfo.h
+index 74583d31e2..5c28196835 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/tdiinfo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/tdiinfo.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -38,7 +39,7 @@ typedef unsigned int uint;
+ 
+ //* Structure of an entity ID.
+ typedef struct TDIEntityID {
+-	ulong		tei_entity;
++	_Win32_AssociatedEnum_(TDIENTITY_ENTITY_TYPE) ulong		tei_entity;
+ 	ulong		tei_instance;
+ } TDIEntityID;
+ 
+@@ -197,5 +198,44 @@ typedef struct _TDI_TL_IO_CONTROL_ENDPOINT {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("GENERIC_ENTITY")
++#undef GENERIC_ENTITY
++#pragma push_macro("AT_ENTITY")
++#undef AT_ENTITY
++#pragma push_macro("CL_NL_ENTITY")
++#undef CL_NL_ENTITY
++#pragma push_macro("CO_NL_ENTITY")
++#undef CO_NL_ENTITY
++#pragma push_macro("CL_TL_ENTITY")
++#undef CL_TL_ENTITY
++#pragma push_macro("CO_TL_ENTITY")
++#undef CO_TL_ENTITY
++#pragma push_macro("ER_ENTITY")
++#undef ER_ENTITY
++#pragma push_macro("IF_ENTITY")
++#undef IF_ENTITY
++enum TDIENTITY_ENTITY_TYPE : unsigned int
++{
++    GENERIC_ENTITY = 0U,
++    AT_ENTITY = 640U,
++    CL_NL_ENTITY = 769U,
++    CO_NL_ENTITY = 768U,
++    CL_TL_ENTITY = 1025U,
++    CO_TL_ENTITY = 1024U,
++    ER_ENTITY = 896U,
++    IF_ENTITY = 512U,
++};
++#pragma pop_macro("IF_ENTITY")
++#pragma pop_macro("ER_ENTITY")
++#pragma pop_macro("CO_TL_ENTITY")
++#pragma pop_macro("CL_TL_ENTITY")
++#pragma pop_macro("CO_NL_ENTITY")
++#pragma pop_macro("CL_NL_ENTITY")
++#pragma pop_macro("AT_ENTITY")
++#pragma pop_macro("GENERIC_ENTITY")
++#endif
++
+ #endif // TDI_INFO_INCLUDED
+ 

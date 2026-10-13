@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
+index 0f150b877a..8cb19100e6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/homepagesetting.h
+@@ -90,6 +90,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -109,7 +110,7 @@ EXTERN_C const IID IID_IHomePageSetting;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("FDFC244F-18FA-4FF2-B08E-1D618F3FFBE4")
+-    IHomePageSetting : public IUnknown
++     IHomePageSetting : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetHomePage( 

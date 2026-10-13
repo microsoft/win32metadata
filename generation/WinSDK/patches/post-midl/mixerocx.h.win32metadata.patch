@@ -1,0 +1,106 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mixerocx.h b/generation/WinSDK/RecompiledIdlHeaders/um/mixerocx.h
+index 9a34c82e21..55d016c7bd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mixerocx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mixerocx.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __mixerocx_h__
+ #define __mixerocx_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -93,18 +94,24 @@ EXTERN_C const IID IID_IMixerOCXNotify;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81A3BD31-DEE1-11d1-8508-00A0C91F9CA0")
++    MIDL_INTERFACE("81A3BD31-DEE1-11d1-8508-00A0C91F9CA0") _Windows_SupportedOS_Windows2000_ 
+     IMixerOCXNotify : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE OnInvalidateRect( 
+             /* [annotation][in] */ 
+             _In_  LPCRECT lpcRect) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE OnStatusChange( 
+             /* [annotation][in] */ 
+             _In_  ULONG ulStatusFlags) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE OnDataChange( 
+             /* [annotation][in] */ 
+             _In_  ULONG ulDataFlags) = 0;
+@@ -206,10 +213,12 @@ EXTERN_C const IID IID_IMixerOCX;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81A3BD32-DEE1-11d1-8508-00A0C91F9CA0")
++    MIDL_INTERFACE("81A3BD32-DEE1-11d1-8508-00A0C91F9CA0") _Windows_SupportedOS_Windows2000_ 
+     IMixerOCX : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE OnDisplayChange( 
+             /* [annotation][in] */ 
+             _In_  ULONG ulBitsPerPixel,
+@@ -218,28 +227,38 @@ EXTERN_C const IID IID_IMixerOCX;
+             /* [annotation][in] */ 
+             _In_  ULONG ulScreenHeight) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetAspectRatio( 
+             /* [annotation][out] */ 
+             _Out_  LPDWORD pdwPictAspectRatioX,
+             /* [annotation][out] */ 
+             _Out_  LPDWORD pdwPictAspectRatioY) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetVideoSize( 
+             /* [annotation][out] */ 
+             _Out_  LPDWORD pdwVideoWidth,
+             /* [annotation][out] */ 
+             _Out_  LPDWORD pdwVideoHeight) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetStatus( 
+             /* [annotation][out] */ 
+             _Out_  LPDWORD *pdwStatus) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE OnDraw( 
+             /* [annotation][in] */ 
+             _In_  HDC hdcDraw,
+             /* [annotation][in] */ 
+             _In_  LPCRECT prcDraw) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE SetDrawRegion( 
+             /* [annotation][in] */ 
+             _In_  LPPOINT lpptTopLeftSC,
+@@ -248,10 +267,14 @@ EXTERN_C const IID IID_IMixerOCX;
+             /* [annotation][in] */ 
+             _In_  LPCRECT lprcClip) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE Advise( 
+             /* [annotation][in] */ 
+             _In_  IMixerOCXNotify *pmdns) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE UnAdvise( void) = 0;
+         
+     };

@@ -1,0 +1,32 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
+index 882ba05d1f..4f2294077b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsadmin.h
+@@ -87,6 +87,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -105,8 +106,8 @@ EXTERN_C const IID IID_IVssAdmin;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77ED5996-2F63-11d3-8A39-00C04F72D8E3")
+-    IVssAdmin : public IUnknown
++    MIDL_INTERFACE("77ED5996-2F63-11d3-8A39-00C04F72D8E3") _Windows_SupportedOS_WindowsVista_ 
++      IVssAdmin : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterProvider( 
+@@ -193,7 +194,7 @@ EXTERN_C const IID IID_IVssAdmin;
+         END_INTERFACE
+     } IVssAdminVtbl;
+ 
+-    interface IVssAdmin
++    interface _Windows_SupportedOS_WindowsVista_ IVssAdmin
+     {
+         CONST_VTBL struct IVssAdminVtbl *lpVtbl;
+     };

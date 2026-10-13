@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dxvahd.h b/generation/WinSDK/RecompiledIdlHeaders/um/dxvahd.h
+index 3725c2c8d0..39d2dcc831 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dxvahd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dxvahd.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -510,7 +511,7 @@ EXTERN_C const IID IID_IDXVAHD_Device;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95f12dfd-d77e-49be-815f-57d579634d6d")
++    MIDL_INTERFACE("95f12dfd-d77e-49be-815f-57d579634d6d") _Windows_SupportedOS_Windows7_ 
+     IDXVAHD_Device : public IUnknown
+     {
+     public:
+@@ -748,7 +749,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("95f4edf4-6e03-4cd7-be1b-3075d665aa52")
++    MIDL_INTERFACE("95f4edf4-6e03-4cd7-be1b-3075d665aa52") _Windows_SupportedOS_Windows7_ 
+     IDXVAHD_VideoProcessor : public IUnknown
+     {
+     public:
+@@ -935,7 +936,7 @@ EXTERN_C const IID IID_IDXVAHD_VideoProcessor;
+ 
+ typedef HRESULT (CALLBACK* PDXVAHDSW_CreateDevice)(
+     _In_ IDirect3DDevice9Ex* pD3DDevice,
+-    _Out_ HANDLE* phDevice
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phDevice
+     );
+ 
+ typedef HRESULT (CALLBACK* PDXVAHDSW_ProposeVideoPrivateFormat)(
+@@ -994,7 +995,7 @@ typedef HRESULT (CALLBACK* PDXVAHDSW_DestroyDevice)(
+ typedef HRESULT (CALLBACK* PDXVAHDSW_CreateVideoProcessor)(
+     _In_ HANDLE hDevice,
+     _In_ const GUID* pVPGuid,
+-    _Out_ HANDLE* phVideoProcessor
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* phVideoProcessor
+     );
+ 
+ typedef HRESULT (CALLBACK* PDXVAHDSW_SetVideoProcessBltState)(
+@@ -1132,7 +1133,7 @@ typedef struct _DXVAHDETW_DESTROYVIDEOPROCESSOR
+ 
+ 
+ 
+-HRESULT WINAPI
++_Windows_SupportedOS_Windows7_ HRESULT WINAPI
+ DXVAHD_CreateDevice(
+     _In_ IDirect3DDevice9Ex* pD3DDevice,
+     _In_ const DXVAHD_CONTENT_DESC* pContentDesc,

@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/PrintManagerInterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/PrintManagerInterop.h
+index a6202fb958..9ef8f1b909 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/PrintManagerInterop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/PrintManagerInterop.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -86,10 +87,12 @@ EXTERN_C const IID IID_IPrintManagerInterop;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c5435a42-8d43-4e7b-a68a-ef311e392087")
++    MIDL_INTERFACE("c5435a42-8d43-4e7b-a68a-ef311e392087") _Windows_SupportedOS_Windows8_ 
+     IPrintManagerInterop : public IInspectable
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetForWindow( 
+             /* [annotation][in] */ 
+             _In_  HWND appWindow,
+@@ -98,6 +101,8 @@ EXTERN_C const IID IID_IPrintManagerInterop;
+             /* [annotation][iid_is][retval][out] */ 
+             _COM_Outptr_retval_  void **printManager) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE ShowPrintUIForWindowAsync( 
+             /* [annotation][in] */ 
+             _In_  HWND appWindow,

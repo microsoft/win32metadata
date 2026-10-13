@@ -1,0 +1,447 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
+index 098cbbaad2..a80c733fe1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Wsdtypes.h
+@@ -14,6 +14,7 @@
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -35,7 +36,7 @@ typedef struct _WSD_EVENT WSD_EVENT;
+ typedef HRESULT (*WSD_STUB_FUNCTION) (   
+     IUnknown* server,
+     struct IWSDServiceMessaging* session,
+-    WSD_EVENT* event
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSD_EVENT* event
+ );
+ 
+ typedef enum _DeviceDiscoveryMechanism
+@@ -45,7 +46,7 @@ typedef enum _DeviceDiscoveryMechanism
+     SecureDirectedDiscovery
+ } DeviceDiscoveryMechanism;
+ 
+-typedef enum _WSD_PROTOCOL_TYPE
++typedef enum   _WSD_PROTOCOL_TYPE
+ {
+     WSD_PT_NONE  = 0x00,
+     WSD_PT_UDP   = 0x01,
+@@ -54,7 +55,7 @@ typedef enum _WSD_PROTOCOL_TYPE
+     WSD_PT_ALL   = 0xff,
+ } WSD_PROTOCOL_TYPE;
+ 
+-typedef struct _WSD_OPERATION
++typedef struct   _WSD_OPERATION
+ {
+     WSDXML_TYPE* RequestType;
+     WSDXML_TYPE* ResponseType;
+@@ -67,12 +68,12 @@ typedef struct _WSD_OPERATION
+ typedef 
+ HRESULT (*PWSD_SOAP_MESSAGE_HANDLER)(
+     IUnknown* thisUnknown,
+-    WSD_EVENT* event);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WSD_EVENT* event);
+ 
+ //
+ // Context for handling incoming messages.
+ //
+-struct _WSD_HANDLER_CONTEXT
++struct   _WSD_HANDLER_CONTEXT
+ {
+     PWSD_SOAP_MESSAGE_HANDLER Handler;
+     void* PVoid;
+@@ -82,7 +83,7 @@ struct _WSD_HANDLER_CONTEXT
+ //
+ // WSDEventType distinguishes types of events produced by the session layer.
+ //
+-typedef enum _WSDEventType
++typedef enum   _WSDEventType
+ {
+     WSDET_NONE                 = 0,
+     WSDET_INCOMING_MESSAGE     = 1,
+@@ -91,7 +92,7 @@ typedef enum _WSDEventType
+     WSDET_RESPONSE_TIMEOUT     = 4,
+ } WSDEventType;
+ 
+-typedef struct _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
++typedef struct   _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
+ {
+     HRESULT hr;
+     HANDLE eventHandle;
+@@ -99,7 +100,7 @@ typedef struct _WSD_SYNCHRONOUS_RESPONSE_CONTEXT
+     void* results;
+ } WSD_SYNCHRONOUS_RESPONSE_CONTEXT;
+ 
+-typedef struct _WSD_PORT_TYPE
++typedef struct   _WSD_PORT_TYPE
+ {
+     DWORD EncodedName;
+     DWORD OperationCount;
+@@ -151,7 +152,7 @@ typedef struct _WSD_LOCALIZED_STRING WSD_LOCALIZED_STRING;
+ // 
+ // Structure definition WSD_RELATIONSHIP_METADATA
+ // 
+-struct _WSD_RELATIONSHIP_METADATA
++struct   _WSD_RELATIONSHIP_METADATA
+ {
+     const WCHAR* Type;
+     WSD_HOST_METADATA* Data;
+@@ -161,7 +162,7 @@ struct _WSD_RELATIONSHIP_METADATA
+ // 
+ // Structure definition WSD_SERVICE_METADATA_LIST
+ // 
+-struct _WSD_SERVICE_METADATA_LIST
++struct   _WSD_SERVICE_METADATA_LIST
+ {
+     WSD_SERVICE_METADATA_LIST* Next;
+     WSD_SERVICE_METADATA* Element;
+@@ -170,7 +171,7 @@ struct _WSD_SERVICE_METADATA_LIST
+ // 
+ // Structure definition WSD_HOST_METADATA
+ // 
+-struct _WSD_HOST_METADATA
++struct   _WSD_HOST_METADATA
+ {
+     WSD_SERVICE_METADATA* Host; // optional
+     WSD_SERVICE_METADATA_LIST* Hosted; // optional
+@@ -179,7 +180,7 @@ struct _WSD_HOST_METADATA
+ // 
+ // Structure definition WSD_ENDPOINT_REFERENCE_LIST
+ // 
+-struct _WSD_ENDPOINT_REFERENCE_LIST
++struct   _WSD_ENDPOINT_REFERENCE_LIST
+ {
+     WSD_ENDPOINT_REFERENCE_LIST* Next;
+     WSD_ENDPOINT_REFERENCE* Element;
+@@ -188,7 +189,7 @@ struct _WSD_ENDPOINT_REFERENCE_LIST
+ // 
+ // Structure definition WSD_SERVICE_METADATA
+ // 
+-struct _WSD_SERVICE_METADATA
++struct   _WSD_SERVICE_METADATA
+ {
+     WSD_ENDPOINT_REFERENCE_LIST* EndpointReference;
+     WSD_NAME_LIST* Types; // optional
+@@ -199,7 +200,7 @@ struct _WSD_SERVICE_METADATA
+ // 
+ // Structure definition WSD_THIS_DEVICE_METADATA
+ // 
+-struct _WSD_THIS_DEVICE_METADATA
++struct   _WSD_THIS_DEVICE_METADATA
+ {
+     WSD_LOCALIZED_STRING_LIST* FriendlyName;
+     const WCHAR* FirmwareVersion; // optional
+@@ -210,7 +211,7 @@ struct _WSD_THIS_DEVICE_METADATA
+ // 
+ // Structure definition WSD_THIS_MODEL_METADATA
+ // 
+-struct _WSD_THIS_MODEL_METADATA
++struct   _WSD_THIS_MODEL_METADATA
+ {
+     WSD_LOCALIZED_STRING_LIST* Manufacturer;
+     const WCHAR* ManufacturerUrl; // optional
+@@ -224,7 +225,7 @@ struct _WSD_THIS_MODEL_METADATA
+ // 
+ // Structure definition WSD_LOCALIZED_STRING_LIST
+ // 
+-struct _WSD_LOCALIZED_STRING_LIST
++struct   _WSD_LOCALIZED_STRING_LIST
+ {
+     WSD_LOCALIZED_STRING_LIST* Next;
+     WSD_LOCALIZED_STRING* Element;
+@@ -233,7 +234,7 @@ struct _WSD_LOCALIZED_STRING_LIST
+ // 
+ // Structure definition WSD_SOAP_FAULT_REASON
+ // 
+-struct _WSD_SOAP_FAULT_REASON
++struct   _WSD_SOAP_FAULT_REASON
+ {
+     WSD_LOCALIZED_STRING_LIST* Text;
+ };
+@@ -241,7 +242,7 @@ struct _WSD_SOAP_FAULT_REASON
+ // 
+ // Structure definition WSD_SOAP_FAULT_SUBCODE
+ // 
+-struct _WSD_SOAP_FAULT_SUBCODE
++struct   _WSD_SOAP_FAULT_SUBCODE
+ {
+     WSDXML_NAME* Value;
+     WSD_SOAP_FAULT_SUBCODE* Subcode; // optional
+@@ -250,7 +251,7 @@ struct _WSD_SOAP_FAULT_SUBCODE
+ // 
+ // Structure definition WSD_SOAP_FAULT_CODE
+ // 
+-struct _WSD_SOAP_FAULT_CODE
++struct   _WSD_SOAP_FAULT_CODE
+ {
+     WSDXML_NAME* Value;
+     WSD_SOAP_FAULT_SUBCODE* Subcode; // optional
+@@ -259,7 +260,7 @@ struct _WSD_SOAP_FAULT_CODE
+ // 
+ // Structure definition WSD_SOAP_FAULT
+ // 
+-struct _WSD_SOAP_FAULT
++struct   _WSD_SOAP_FAULT
+ {
+     WSD_SOAP_FAULT_CODE* Code;
+     WSD_SOAP_FAULT_REASON* Reason;
+@@ -271,7 +272,7 @@ struct _WSD_SOAP_FAULT
+ // 
+ // Structure definition WSD_APP_SEQUENCE
+ // 
+-struct _WSD_APP_SEQUENCE
++struct   _WSD_APP_SEQUENCE
+ {
+     ULONGLONG InstanceId;
+     const WCHAR* SequenceId; // optional
+@@ -281,7 +282,7 @@ struct _WSD_APP_SEQUENCE
+ // 
+ // Structure definition WSD_HEADER_RELATESTO
+ // 
+-struct _WSD_HEADER_RELATESTO
++struct   _WSD_HEADER_RELATESTO
+ {
+     WSDXML_NAME* RelationshipType; // optional
+     const WCHAR* MessageID;
+@@ -290,7 +291,7 @@ struct _WSD_HEADER_RELATESTO
+ // 
+ // Structure definition WSD_SOAP_HEADER
+ // 
+-struct _WSD_SOAP_HEADER
++struct   _WSD_SOAP_HEADER
+ {
+     const WCHAR* To;
+     const WCHAR* Action;
+@@ -306,7 +307,7 @@ struct _WSD_SOAP_HEADER
+ // 
+ // Structure definition WSD_SOAP_MESSAGE
+ // 
+-struct _WSD_SOAP_MESSAGE
++struct   _WSD_SOAP_MESSAGE
+ {
+     WSD_SOAP_HEADER Header;
+     void* Body;
+@@ -316,7 +317,7 @@ struct _WSD_SOAP_MESSAGE
+ // 
+ // Structure definition WSD_RESOLVE_MATCHES
+ // 
+-struct _WSD_RESOLVE_MATCHES
++struct   _WSD_RESOLVE_MATCHES
+ {
+     WSD_RESOLVE_MATCH* ResolveMatch; // optional
+     WSDXML_ELEMENT* Any; // optional
+@@ -325,7 +326,7 @@ struct _WSD_RESOLVE_MATCHES
+ // 
+ // Structure definition WSD_RESOLVE_MATCH
+ // 
+-struct _WSD_RESOLVE_MATCH
++struct   _WSD_RESOLVE_MATCH
+ {
+     WSD_ENDPOINT_REFERENCE* EndpointReference;
+     WSD_NAME_LIST* Types; // optional
+@@ -338,7 +339,7 @@ struct _WSD_RESOLVE_MATCH
+ // 
+ // Structure definition WSD_RESOLVE
+ // 
+-struct _WSD_RESOLVE
++struct   _WSD_RESOLVE
+ {
+     WSD_ENDPOINT_REFERENCE* EndpointReference;
+     WSDXML_ELEMENT* Any; // optional
+@@ -347,7 +348,7 @@ struct _WSD_RESOLVE
+ // 
+ // Structure definition WSD_PROBE_MATCH
+ // 
+-struct _WSD_PROBE_MATCH
++struct   _WSD_PROBE_MATCH
+ {
+     WSD_ENDPOINT_REFERENCE* EndpointReference;
+     WSD_NAME_LIST* Types; // optional
+@@ -360,7 +361,7 @@ struct _WSD_PROBE_MATCH
+ // 
+ // Structure definition WSD_PROBE_MATCH_LIST
+ // 
+-struct _WSD_PROBE_MATCH_LIST
++struct   _WSD_PROBE_MATCH_LIST
+ {
+     WSD_PROBE_MATCH_LIST* Next;
+     WSD_PROBE_MATCH* Element;
+@@ -369,7 +370,7 @@ struct _WSD_PROBE_MATCH_LIST
+ // 
+ // Structure definition WSD_PROBE_MATCHES
+ // 
+-struct _WSD_PROBE_MATCHES
++struct   _WSD_PROBE_MATCHES
+ {
+     WSD_PROBE_MATCH_LIST* ProbeMatch;
+     WSDXML_ELEMENT* Any; // optional
+@@ -378,7 +379,7 @@ struct _WSD_PROBE_MATCHES
+ // 
+ // Structure definition WSD_PROBE
+ // 
+-struct _WSD_PROBE
++struct   _WSD_PROBE
+ {
+     WSD_NAME_LIST* Types; // optional
+     WSD_SCOPES* Scopes; // optional
+@@ -388,7 +389,7 @@ struct _WSD_PROBE
+ // 
+ // Structure definition WSD_BYE
+ // 
+-struct _WSD_BYE
++struct   _WSD_BYE
+ {
+     WSD_ENDPOINT_REFERENCE* EndpointReference;
+     WSDXML_ELEMENT* Any; // optional
+@@ -397,7 +398,7 @@ struct _WSD_BYE
+ // 
+ // Structure definition WSD_SCOPES
+ // 
+-struct _WSD_SCOPES
++struct   _WSD_SCOPES
+ {
+     const WCHAR* MatchBy; // optional
+     WSD_URI_LIST* Scopes; // optional
+@@ -406,7 +407,7 @@ struct _WSD_SCOPES
+ // 
+ // Structure definition WSD_NAME_LIST
+ // 
+-struct _WSD_NAME_LIST
++struct   _WSD_NAME_LIST
+ {
+     WSD_NAME_LIST* Next;
+     WSDXML_NAME* Element;
+@@ -415,7 +416,7 @@ struct _WSD_NAME_LIST
+ // 
+ // Structure definition WSD_HELLO
+ // 
+-struct _WSD_HELLO
++struct   _WSD_HELLO
+ {
+     WSD_ENDPOINT_REFERENCE* EndpointReference;
+     WSD_NAME_LIST* Types; // optional
+@@ -428,7 +429,7 @@ struct _WSD_HELLO
+ // 
+ // Structure definition WSD_REFERENCE_PARAMETERS
+ // 
+-struct _WSD_REFERENCE_PARAMETERS
++struct   _WSD_REFERENCE_PARAMETERS
+ {
+     WSDXML_ELEMENT* Any; // optional
+ };
+@@ -436,7 +437,7 @@ struct _WSD_REFERENCE_PARAMETERS
+ // 
+ // Structure definition WSD_REFERENCE_PROPERTIES
+ // 
+-struct _WSD_REFERENCE_PROPERTIES
++struct   _WSD_REFERENCE_PROPERTIES
+ {
+     WSDXML_ELEMENT* Any; // optional
+ };
+@@ -444,7 +445,7 @@ struct _WSD_REFERENCE_PROPERTIES
+ // 
+ // Structure definition WSD_ENDPOINT_REFERENCE
+ // 
+-struct _WSD_ENDPOINT_REFERENCE
++struct   _WSD_ENDPOINT_REFERENCE
+ {
+     const WCHAR* Address;
+     WSD_REFERENCE_PROPERTIES ReferenceProperties; // optional
+@@ -457,7 +458,7 @@ struct _WSD_ENDPOINT_REFERENCE
+ // 
+ // Structure definition WSD_METADATA_SECTION
+ // 
+-struct _WSD_METADATA_SECTION
++struct   _WSD_METADATA_SECTION
+ {
+     const WCHAR* Dialect;
+     const WCHAR* Identifier; // optional
+@@ -470,7 +471,7 @@ struct _WSD_METADATA_SECTION
+ // 
+ // Structure definition WSD_METADATA_SECTION_LIST
+ // 
+-struct _WSD_METADATA_SECTION_LIST
++struct   _WSD_METADATA_SECTION_LIST
+ {
+     WSD_METADATA_SECTION_LIST* Next;
+     WSD_METADATA_SECTION* Element;
+@@ -479,7 +480,7 @@ struct _WSD_METADATA_SECTION_LIST
+ // 
+ // Structure definition WSD_URI_LIST
+ // 
+-struct _WSD_URI_LIST
++struct   _WSD_URI_LIST
+ {
+     WSD_URI_LIST* Next;
+     const WCHAR* Element;
+@@ -488,7 +489,7 @@ struct _WSD_URI_LIST
+ // 
+ // Structure definition WSD_EVENTING_FILTER_ACTION
+ // 
+-struct _WSD_EVENTING_FILTER_ACTION
++struct   _WSD_EVENTING_FILTER_ACTION
+ {
+     WSD_URI_LIST* Actions;
+ };
+@@ -496,7 +497,7 @@ struct _WSD_EVENTING_FILTER_ACTION
+ // 
+ // Structure definition WSD_EVENTING_FILTER
+ // 
+-struct _WSD_EVENTING_FILTER
++struct   _WSD_EVENTING_FILTER
+ {
+     const WCHAR* Dialect; // optional
+     WSD_EVENTING_FILTER_ACTION* FilterAction;
+@@ -506,7 +507,7 @@ struct _WSD_EVENTING_FILTER
+ // 
+ // Structure definition WSD_EVENTING_EXPIRES
+ // 
+-struct _WSD_EVENTING_EXPIRES
++struct   _WSD_EVENTING_EXPIRES
+ {
+     WSD_DURATION* Duration;
+     WSD_DATETIME* DateTime;
+@@ -515,7 +516,7 @@ struct _WSD_EVENTING_EXPIRES
+ // 
+ // Structure definition WSD_EVENTING_DELIVERY_MODE_PUSH
+ // 
+-struct _WSD_EVENTING_DELIVERY_MODE_PUSH
++struct   _WSD_EVENTING_DELIVERY_MODE_PUSH
+ {
+     WSD_ENDPOINT_REFERENCE* NotifyTo;
+ };
+@@ -523,7 +524,7 @@ struct _WSD_EVENTING_DELIVERY_MODE_PUSH
+ // 
+ // Structure definition WSD_EVENTING_DELIVERY_MODE
+ // 
+-struct _WSD_EVENTING_DELIVERY_MODE
++struct   _WSD_EVENTING_DELIVERY_MODE
+ {
+     const WCHAR* Mode; // optional
+     WSD_EVENTING_DELIVERY_MODE_PUSH* Push;
+@@ -533,7 +534,7 @@ struct _WSD_EVENTING_DELIVERY_MODE
+ // 
+ // Structure definition WSD_LOCALIZED_STRING
+ // 
+-struct _WSD_LOCALIZED_STRING
++struct   _WSD_LOCALIZED_STRING
+ {
+     const WCHAR* lang; // optional
+     const WCHAR* String;
+@@ -746,12 +747,12 @@ RESPONSEBODY_SubscriptionEnd;
+ 
+  
+ 
+-typedef struct _WSD_UNKNOWN_LOOKUP
++typedef struct   _WSD_UNKNOWN_LOOKUP
+ {
+     WSDXML_ELEMENT* Any;
+ } WSD_UNKNOWN_LOOKUP;
+ 
+-struct _WSD_EVENT
++struct   _WSD_EVENT
+ {
+     HRESULT Hr;
+     DWORD EventType;

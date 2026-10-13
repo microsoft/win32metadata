@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/activdbg100.h b/generation/WinSDK/RecompiledIdlHeaders/um/activdbg100.h
+index 82019fad54..4a7c612d1d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/activdbg100.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/activdbg100.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1052,15 +1053,15 @@ EXTERN_C const IID IID_IActiveScriptWinRTErrorDebug;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetRestrictedErrorString( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *errorString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *errorString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRestrictedErrorReference( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *referenceString) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *referenceString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCapabilitySid( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *capabilitySid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *capabilitySid) = 0;
+         
+     };
+     
+@@ -1703,11 +1704,11 @@ EXTERN_C const IID IID_IRemoteDebugCriticalErrorEvent110;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetErrorInfo( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSource,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSource,
+             /* [annotation][out] */ 
+             _Out_  int *pMessageId,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrMessage,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrMessage,
+             /* [annotation][out] */ 
+             _Out_  IDebugDocumentContext **ppLocation) = 0;
+         
+@@ -1828,7 +1829,7 @@ EXTERN_C const IID IID_IScriptInvocationContext;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContextDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetContextObject( 
+             /* [annotation][out] */ 
+@@ -2122,9 +2123,9 @@ EXTERN_C const IID IID_IRemoteDebugInfoEvent110;
+             /* [annotation][out] */ 
+             _Out_  DEBUG_EVENT_INFO_TYPE *pMessageType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrMessage,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrMessage,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrUrl,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrUrl,
+             /* [annotation][out] */ 
+             _Out_  IDebugDocumentContext **ppLocation) = 0;
+         

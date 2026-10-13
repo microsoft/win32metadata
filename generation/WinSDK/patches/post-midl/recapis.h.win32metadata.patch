@@ -1,0 +1,285 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
+index 3969ac6c39..12a5f56694 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/recapis.h
+@@ -10,6 +10,7 @@
+ //--------------------------------------------------------------------------
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -23,30 +24,30 @@ extern "C" {
+ 
+ #ifndef __HRECOALT__
+ #define __HRECOALT__
+-DECLARE_HANDLE(HRECOALT); // definition of a handle for the alternate
++DECLARE_HANDLE(HRECOALT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyAlternate")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the alternate
+ #endif
+ 
+ #ifndef __HRECOCONTEXT__
+ #define __HRECOCONTEXT__
+-DECLARE_HANDLE(HRECOCONTEXT); // definition of a handle for the reco context
++DECLARE_HANDLE(HRECOCONTEXT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the reco context
+ #endif
+ 
+ #ifndef __HRECOGNIZER__
+ #define __HRECOGNIZER__
+-DECLARE_HANDLE(HRECOGNIZER); // definition of a handle for the recognizer
++DECLARE_HANDLE(HRECOGNIZER) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyRecognizer")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the recognizer
+ #endif
+ 
+ #ifndef __HRECOLATTICE__
+ #define __HRECOLATTICE__
+-DECLARE_HANDLE(HRECOLATTICE); // definition of a handle for the lattice
++DECLARE_HANDLE(HRECOLATTICE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the lattice
+ #endif
+ 
+ #ifndef __HRECOWORDLIST__
+ #define __HRECOWORDLIST__
+-DECLARE_HANDLE(HRECOWORDLIST); // definition of a handle for the lattice
++DECLARE_HANDLE(HRECOWORDLIST) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyWordList")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the lattice
+ #endif
+ 
+-typedef HRESULT (*PfnRecoCallback)(DWORD, LPBYTE, HRECOCONTEXT);
++typedef HRESULT (*PfnRecoCallback)(DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE, HRECOCONTEXT);
+ 
+ 
+ #ifndef __IID_DEFINED__
+@@ -70,50 +71,90 @@ typedef IID CLSID;
+ ////////////////////////
+ // IRecognizer
+ ////////////////////////
+-HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI CreateRecognizer(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLSID *pCLSID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOGNIZER *phrec);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyRecognizer(HRECOGNIZER hrec);
+-HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, RECO_ATTRS* pRecoAttrs);
+-HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_ATTRS* pRecoAttrs);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI CreateContext(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOCONTEXT *phrc);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyContext(HRECOCONTEXT hrc);
+-HRESULT WINAPI GetResultPropertyList(HRECOGNIZER hrec, ULONG* pPropertyCount, GUID*pPropertyGuid);
+-HRESULT WINAPI GetPreferredPacketDescription(HRECOGNIZER hrec, PACKET_DESCRIPTION* pPacketDescription);
+-HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, ULONG *pcRanges, CHARACTER_RANGE *pcr);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetResultPropertyList(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG* pPropertyCount, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID*pPropertyGuid);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetPreferredPacketDescription(_WIN32META_ANNOTATION_("win32metadata:in") HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PACKET_DESCRIPTION* pPacketDescription);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcRanges, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARACTER_RANGE *pcr);
+ 
+ ////////////////////////
+ // IRecoContext
+ ////////////////////////
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI AddStroke(HRECOCONTEXT hrc, const PACKET_DESCRIPTION* pPacketDesc, ULONG cbPacket, const BYTE *pPacket, const XFORM *pXForm);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetBestResultString(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_opt_ (*pcSize) WCHAR* pwcBestResult);
+-HRESULT WINAPI DestroyAlternate(HRECOALT hrcalt);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI DestroyAlternate(_WIN32META_ANNOTATION_("win32metadata:in") HRECOALT hrcalt);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetGuide(HRECOCONTEXT hrc, const RECO_GUIDE* pGuide, ULONG iIndex);
+-HRESULT WINAPI GetGuide(HRECOCONTEXT hrc, RECO_GUIDE* pGuide, ULONG *piIndex);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++
++HRESULT WINAPI GetGuide(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_GUIDE* pGuide, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *piIndex);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI AdviseInkChange(HRECOCONTEXT hrc, BOOL bNewStroke);
+-HRESULT WINAPI SetCACMode(HRECOCONTEXT hrc, int iMode);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI SetCACMode(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") int iMode);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI EndInkInput(HRECOCONTEXT hrc);
+-HRESULT WINAPI CloneContext(HRECOCONTEXT hrc, HRECOCONTEXT* pCloneHrc);
+-HRESULT WINAPI ResetContext(HRECOCONTEXT hrc);
+-HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI CloneContext(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOCONTEXT* pCloneHrc);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI ResetContext(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc);
++
++
++HRESULT WINAPI Process(HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbPartialProcessing);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetFactoid(HRECOCONTEXT hrc, ULONG cwcFactoid, const WCHAR *pwcFactoid);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetFlags(HRECOCONTEXT hrc, DWORD dwFlags);
+-HRESULT WINAPI GetLatticePtr(HRECOCONTEXT hrc, RECO_LATTICE **ppLattice);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetLatticePtr(HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_LATTICE **ppLattice);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetTextContext(HRECOCONTEXT hrc, ULONG cwcBefore, _In_reads_(cwcBefore) const WCHAR *pwcBefore, ULONG cwcAfter, _In_reads_(cwcAfter) const WCHAR *pwcAfter);
+-HRESULT WINAPI GetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG *pcRanges, CHARACTER_RANGE *pcr);
+-HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, CHARACTER_RANGE *pcr);
+-HRESULT WINAPI GetContextPropertyList(HRECOCONTEXT hrc, ULONG *pcProperties, GUID *pPropertyGUIDS);
+-HRESULT WINAPI GetContextPropertyValue(HRECOCONTEXT hrc, GUID *pGuid, ULONG *pcbSize, BYTE *pProperty);
+-HRESULT WINAPI SetContextPropertyValue(HRECOCONTEXT hrc, GUID *pGuid, ULONG cbSize, BYTE *pProperty);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetEnabledUnicodeRanges(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcRanges, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARACTER_RANGE *pcr);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARACTER_RANGE *pcr);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetContextPropertyList(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcProperties, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pPropertyGUIDS);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetContextPropertyValue(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pGuid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcbSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pProperty);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++
++HRESULT WINAPI SetContextPropertyValue(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID *pGuid, _WIN32META_ANNOTATION_("win32metadata:in") ULONG cbSize, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE *pProperty);
++_Windows_SupportedOS_WindowsXP_
++
+ HRESULT WINAPI IsStringSupported(HRECOCONTEXT hrc, ULONG wcString, const WCHAR *pwcString);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetWordList(HRECOCONTEXT hrc, HRECOWORDLIST hwl);
+-HRESULT WINAPI GetContextPreferenceFlags(HRECOCONTEXT hrc, DWORD *pdwContextPreferenceFlags);
++_Win32_ImportLibrary_("inkobjcore.dll") _Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetContextPreferenceFlags(_WIN32META_ANNOTATION_("win32metadata:in") HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pdwContextPreferenceFlags);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetRightSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcRightSeparator);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetLeftSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcLeftSeparator);
+ 
+ ////////////////////////
+ // IRecoWordList
+ ////////////////////////
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyWordList(HRECOWORDLIST hwl);
+-HRESULT WINAPI AddWordsToWordList(HRECOWORDLIST hwl, _NullNull_terminated_ WCHAR * pwcWords);
+-HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _NullNull_terminated_ WCHAR *pBuffer, HRECOWORDLIST *phwl);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI AddWordsToWordList(HRECOWORDLIST hwl, _WIN32META_ANNOTATION_("win32metadata:in") _NullNull_terminated_ WCHAR * pwcWords);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _NullNull_terminated_ WCHAR *pBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOWORDLIST *phwl);
+ 
+ #ifdef __cplusplus
+ }
+@@ -133,30 +174,30 @@ extern "C" {
+ 
+ #ifndef __HRECOALT__
+ #define __HRECOALT__
+-    DECLARE_HANDLE(HRECOALT); // definition of a handle for the alternate
++    DECLARE_HANDLE(HRECOALT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyAlternate")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the alternate
+ #endif
+ 
+ #ifndef __HRECOCONTEXT__
+ #define __HRECOCONTEXT__
+-    DECLARE_HANDLE(HRECOCONTEXT); // definition of a handle for the reco context
++    DECLARE_HANDLE(HRECOCONTEXT) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyContext")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the reco context
+ #endif
+ 
+ #ifndef __HRECOGNIZER__
+ #define __HRECOGNIZER__
+-    DECLARE_HANDLE(HRECOGNIZER); // definition of a handle for the recognizer
++    DECLARE_HANDLE(HRECOGNIZER) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyRecognizer")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the recognizer
+ #endif
+ 
+ #ifndef __HRECOLATTICE__
+ #define __HRECOLATTICE__
+-    DECLARE_HANDLE(HRECOLATTICE); // definition of a handle for the lattice
++    DECLARE_HANDLE(HRECOLATTICE) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the lattice
+ #endif
+ 
+ #ifndef __HRECOWORDLIST__
+ #define __HRECOWORDLIST__
+-    DECLARE_HANDLE(HRECOWORDLIST); // definition of a handle for the lattice
++    DECLARE_HANDLE(HRECOWORDLIST) _WIN32META_ANNOTATION_("win32metadata:raii_free=DestroyWordList")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ; // definition of a handle for the lattice
+ #endif
+ 
+-    typedef HRESULT(*PfnRecoCallback)(DWORD, LPBYTE, HRECOCONTEXT);
++    typedef HRESULT(*PfnRecoCallback)(DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBYTE, HRECOCONTEXT);
+ 
+ 
+ #ifndef __IID_DEFINED__
+@@ -180,45 +221,74 @@ extern "C" {
+ ////////////////////////
+ // IRecognizer
+ ////////////////////////
+-HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI CreateRecognizer(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLSID *pCLSID, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOGNIZER *phrec);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyRecognizer(HRECOGNIZER hrec);
+-HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, RECO_ATTRS* pRecoAttrs);
+-HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_ATTRS* pRecoAttrs);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI CreateContext(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOCONTEXT *phrc);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyContext(HRECOCONTEXT hrc);
+-HRESULT WINAPI GetResultPropertyList(HRECOGNIZER hrec, ULONG* pPropertyCount, GUID*pPropertyGuid);
+-HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, ULONG *pcRanges, CHARACTER_RANGE *pcr);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetResultPropertyList(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG* pPropertyCount, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") GUID*pPropertyGuid);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetUnicodeRanges(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG *pcRanges, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARACTER_RANGE *pcr);
+ 
+ ////////////////////////
+ // IRecoContext
+ ////////////////////////
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI AddStroke(HRECOCONTEXT hrc, const PACKET_DESCRIPTION* pPacketDesc, ULONG cbPacket, const BYTE *pPacket, const XFORM *pXForm);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetBestResultString(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_opt_(*pcSize) WCHAR* pwcBestResult);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetGuide(HRECOCONTEXT hrc, const RECO_GUIDE* pGuide, ULONG iIndex);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI AdviseInkChange(HRECOCONTEXT hrc, BOOL bNewStroke);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI EndInkInput(HRECOCONTEXT hrc);
+-HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
++
++
++HRESULT WINAPI Process(HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbPartialProcessing);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetFactoid(HRECOCONTEXT hrc, ULONG cwcFactoid, const WCHAR *pwcFactoid);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetFlags(HRECOCONTEXT hrc, DWORD dwFlags);
+-HRESULT WINAPI GetLatticePtr(HRECOCONTEXT hrc, RECO_LATTICE **ppLattice);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetLatticePtr(HRECOCONTEXT hrc, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_LATTICE **ppLattice);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetTextContext(HRECOCONTEXT hrc, ULONG cwcBefore, _In_reads_(cwcBefore) const WCHAR *pwcBefore, ULONG cwcAfter, _In_reads_(cwcAfter) const WCHAR *pwcAfter);
+-HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, CHARACTER_RANGE *pcr);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI SetEnabledUnicodeRanges(HRECOCONTEXT hrc, ULONG cRanges, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CHARACTER_RANGE *pcr);
++_Windows_SupportedOS_WindowsXP_
++
+ HRESULT WINAPI IsStringSupported(HRECOCONTEXT hrc, ULONG wcString, const WCHAR *pwcString);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI SetWordList(HRECOCONTEXT hrc, HRECOWORDLIST hwl);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetRightSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcRightSeparator);
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI GetLeftSeparator(HRECOCONTEXT hrc, _Inout_ ULONG *pcSize, _Out_writes_(*pcSize) OPTIONAL WCHAR* pwcLeftSeparator);
+ 
+ ////////////////////////
+ // IRecoWordList
+ ////////////////////////
++_Windows_SupportedOS_WindowsXP_
+ HRESULT WINAPI DestroyWordList(HRECOWORDLIST hwl);
+-HRESULT WINAPI AddWordsToWordList(HRECOWORDLIST hwl, _NullNull_terminated_ WCHAR * pwcWords);
+-HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _NullNull_terminated_ WCHAR *pBuffer, HRECOWORDLIST *phwl);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI AddWordsToWordList(HRECOWORDLIST hwl, _WIN32META_ANNOTATION_("win32metadata:in") _NullNull_terminated_ WCHAR * pwcWords);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _WIN32META_ANNOTATION_("win32metadata:in") _NullNull_terminated_ WCHAR *pBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HRECOWORDLIST *phwl);
+ 
+ ////////////////////////////
+ // Recognizer Broker APIs
+ ////////////////////////////
+-HRESULT WINAPI GetAllRecognizers(CLSID** recognizerClsids, ULONG* count);
+-HRESULT WINAPI LoadCachedAttributes(CLSID clsid, RECO_ATTRS *pRecoAttributes);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI GetAllRecognizers(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") CLSID** recognizerClsids, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG* count);
++_Windows_SupportedOS_WindowsXP_
++HRESULT WINAPI LoadCachedAttributes(CLSID clsid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") RECO_ATTRS *pRecoAttributes);
+ #ifdef __cplusplus
+ }
+ #endif

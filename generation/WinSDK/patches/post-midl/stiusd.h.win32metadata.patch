@@ -1,0 +1,45 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
+index 61e233670b..159dc76a3b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/stiusd.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #ifndef _STIUSD_
+ #define _STIUSD_
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -129,15 +130,15 @@ DECLARE_INTERFACE_(IStiDeviceControl, IUnknown)
+ 
+     /*** IStiDeviceControl methods ***/
+     STDMETHOD(Initialize) (THIS_ DWORD dwDeviceType,DWORD dwMode,LPCWSTR pwszPortName,DWORD dwFlags )PURE;
+-    STDMETHOD(RawReadData)(THIS_ LPVOID lpBuffer,LPDWORD lpdwNumberOfBytes,LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(RawWriteData)(THIS_ LPVOID lpBuffer,DWORD nNumberOfBytes,LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(RawReadCommand)(THIS_ LPVOID lpBuffer,LPDWORD lpdwNumberOfBytes,LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(RawWriteCommand)(THIS_ LPVOID lpBuffer,DWORD nNumberOfBytes,LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(RawDeviceControl)(THIS_ USD_CONTROL_CODE EscapeFunction,LPVOID  lpInData,DWORD   cbInDataSize,LPVOID pOutData,DWORD dwOutDataSize,LPDWORD pdwActualData) PURE ;
+-    STDMETHOD(GetLastError)(THIS_ LPDWORD     lpdwLastError) PURE;
++    STDMETHOD(RawReadData)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpBuffer,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpdwNumberOfBytes,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped) PURE;
++    STDMETHOD(RawWriteData)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpBuffer,DWORD nNumberOfBytes,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped) PURE;
++    STDMETHOD(RawReadCommand)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpBuffer,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpdwNumberOfBytes,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped) PURE;
++    STDMETHOD(RawWriteCommand)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID lpBuffer,DWORD nNumberOfBytes,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPOVERLAPPED lpOverlapped) PURE;
++    STDMETHOD(RawDeviceControl)(THIS_ USD_CONTROL_CODE EscapeFunction,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID  lpInData,DWORD   cbInDataSize,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pOutData,DWORD dwOutDataSize,_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwActualData) PURE ;
++    STDMETHOD(GetLastError)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD     lpdwLastError) PURE;
+     STDMETHOD(GetMyDevicePortName)(THIS_ _Out_writes_(cwDevicePathSize) LPWSTR lpszDevicePath, DWORD cwDevicePathSize ) PURE;
+-    STDMETHOD(GetMyDeviceHandle)(THIS_ LPHANDLE lph) PURE;
+-    STDMETHOD(GetMyDeviceOpenMode)(THIS_ LPDWORD pdwOpenMode ) PURE;
++    STDMETHOD(GetMyDeviceHandle)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPHANDLE lph) PURE;
++    STDMETHOD(GetMyDeviceOpenMode)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD pdwOpenMode ) PURE;
+     STDMETHOD(WriteToErrorLog)(THIS_ DWORD dwMessageType,LPCWSTR pszMessage,DWORD dwErrorCode) PURE;
+ } ;
+ 
+@@ -187,7 +188,7 @@ DECLARE_INTERFACE_(IStiUSD, IUnknown)
+     STDMETHOD(RawWriteData)(THIS_ _In_reads_bytes_(nNumberOfBytes) LPVOID lpBuffer, DWORD nNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+     STDMETHOD(RawReadCommand)(THIS_ _Out_writes_bytes_(*lpdwNumberOfBytes) LPVOID lpBuffer, _Inout_ LPDWORD lpdwNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+     STDMETHOD(RawWriteCommand)(THIS_ _In_reads_bytes_(nNumberOfBytes) LPVOID lpBuffer, DWORD nNumberOfBytes, _In_opt_ LPOVERLAPPED lpOverlapped) PURE;
+-    STDMETHOD(SetNotificationHandle)(THIS_ _In_opt_ HANDLE hEvent) PURE;
++    STDMETHOD(SetNotificationHandle)(THIS_  _In_opt_ HANDLE hEvent) PURE;
+     STDMETHOD(GetNotificationData)(THIS_ _Out_ LPSTINOTIFY lpNotify) PURE;
+     STDMETHOD(GetLastErrorInfo) (THIS_ _Out_ STI_ERROR_INFO *pLastErrorInfo) PURE;
+ } ;

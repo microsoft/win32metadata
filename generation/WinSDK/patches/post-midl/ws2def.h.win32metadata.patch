@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
+index 95fb10c5d3..e7b165ddc5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ws2def.h
+@@ -30,6 +30,7 @@ Environment:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if !defined(_WINSOCK_DEPRECATED_BY)
+ #if ((defined(_WINSOCK_DEPRECATED_NO_WARNINGS) || defined(BUILD_WINDOWS)) && !defined(_WINSOCK_DEPRECATE_WARNINGS)) || defined(MIDL_PASS)
+@@ -261,7 +262,7 @@ typedef struct sockaddr {
+ /*
+  * SockAddr Information
+  */
+-typedef struct _SOCKET_ADDRESS {
++typedef struct   _SOCKET_ADDRESS {
+     _Field_size_bytes_(iSockaddrLength) LPSOCKADDR lpSockaddr;
+ 
+ //  ESP: 791.
+@@ -295,7 +296,7 @@ typedef struct _SOCKET_ADDRESS_LIST {
+ /*
+  * CSAddr Information
+  */
+-typedef struct _CSADDR_INFO {
++typedef struct   _CSADDR_INFO {
+     SOCKET_ADDRESS LocalAddr ;
+     SOCKET_ADDRESS RemoteAddr ;
+     INT iSocketType ;
+@@ -368,7 +369,7 @@ typedef SOCKADDR_STORAGE *PSOCKADDR_STORAGE, FAR *LPSOCKADDR_STORAGE;
+ #endif
+ 
+ #if(_WIN32_WINNT >= 0x0602)
+-typedef struct _SOCKET_PROCESSOR_AFFINITY {
++typedef struct   _SOCKET_PROCESSOR_AFFINITY {
+     PROCESSOR_NUMBER Processor;
+     USHORT NumaNodeId;
+     USHORT Reserved;
+@@ -692,7 +693,7 @@ typedef struct sockaddr_dl {
+  * to pull in FLOWSPEC and related definitions
+  */
+ 
+-typedef struct _WSABUF {
++typedef struct   _WSABUF {
+     ULONG len;     /* the length of the buffer */
+     _Field_size_bytes_(len) CHAR FAR *buf; /* the pointer to the buffer */
+ } WSABUF, FAR * LPWSABUF;
+@@ -701,7 +702,7 @@ typedef struct _WSABUF {
+  * WSAMSG -- for WSASendMsg
+  */
+ 
+-typedef struct _WSAMSG {
++typedef struct   _WSAMSG {
+     _Field_size_bytes_(namelen) LPSOCKADDR       name;              /* Remote address */
+     INT              namelen;           /* Remote address length */
+     LPWSABUF         lpBuffers;         /* Data buffer array */
+@@ -913,7 +914,7 @@ typedef WSACMSGHDR CMSGHDR, *PCMSGHDR;
+ //  Structure used in getaddrinfo() call
+ //
+ 
+-typedef struct addrinfo
++typedef struct   addrinfo
+ {
+     int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                 ai_family;      // PF_xxx
+@@ -926,7 +927,7 @@ typedef struct addrinfo
+ }
+ ADDRINFOA, *PADDRINFOA;
+ 
+-typedef struct addrinfoW
++typedef struct  addrinfoW
+ {
+     int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                 ai_family;      // PF_xxx
+@@ -960,7 +961,7 @@ typedef struct _WINSOCK_DEPRECATED_BY("ADDRINFOEXW") addrinfoexA
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+-typedef struct addrinfoexW
++typedef struct   addrinfoexW
+ {
+     int                 ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                 ai_family;      // PF_xxx
+@@ -1007,7 +1008,7 @@ typedef struct _WINSOCK_DEPRECATED_BY("ADDRINFOEX2W") addrinfoex2A
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
+-typedef struct addrinfoex2W
++typedef struct   addrinfoex2W
+ {
+     int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                  ai_family;      // PF_xxx
+@@ -1024,7 +1025,7 @@ typedef struct addrinfoex2W
+     PWSTR                ai_fqdn;
+ } ADDRINFOEX2W, *PADDRINFOEX2W, *LPADDRINFOEX2W;
+ 
+-typedef struct addrinfoex3
++typedef struct   addrinfoex3
+ {
+     int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                  ai_family;      // PF_xxx
+@@ -1042,7 +1043,7 @@ typedef struct addrinfoex3
+     int                  ai_interfaceindex;
+ } ADDRINFOEX3, *PADDRINFOEX3, *LPADDRINFOEX3;
+ 
+-typedef struct addrinfoex4
++typedef struct   addrinfoex4
+ {
+     int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                  ai_family;      // PF_xxx
+@@ -1061,7 +1062,7 @@ typedef struct addrinfoex4
+     HANDLE               ai_resolutionhandle;
+ } ADDRINFOEX4, *PADDRINFOEX4, *LPADDRINFOEX4;
+ 
+-typedef struct addrinfoex5
++typedef struct   addrinfoex5
+ {
+     int                  ai_flags;       // AI_PASSIVE, AI_CANONNAME, AI_NUMERICHOST
+     int                  ai_family;      // PF_xxx

@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/windows.data.pdf.interop.h b/generation/WinSDK/RecompiledIdlHeaders/um/windows.data.pdf.interop.h
+index 89611c139a..cc5f279c68 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/windows.data.pdf.interop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/windows.data.pdf.interop.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -81,11 +82,12 @@ typedef HRESULT (WINAPI* PFN_PDF_CREATE_RENDERER)(
+     _In_ IDXGIDevice*,
+     _Out_ IPdfRendererNative**);
+ 
++
+ HRESULT WINAPI PdfCreateRenderer(
+     _In_ IDXGIDevice* pDevice,
+     _Out_ IPdfRendererNative** ppRenderer);
+ 
+-typedef struct PDF_RENDER_PARAMS
++typedef struct  PDF_RENDER_PARAMS
+     {
+     D2D_RECT_F SourceRect;
+     UINT32 DestinationWidth;
+@@ -125,6 +127,7 @@ EXTERN_C const IID IID_IPdfRendererNative;
+     IPdfRendererNative : public IUnknown
+     {
+     public:
++        
+         virtual HRESULT STDMETHODCALLTYPE RenderPageToSurface( 
+             /* [annotation][in] */ 
+             _In_  IUnknown *pdfPage,
+@@ -135,6 +138,7 @@ EXTERN_C const IID IID_IPdfRendererNative;
+             /* [annotation][in] */ 
+             _In_opt_  PDF_RENDER_PARAMS *pRenderParams) = 0;
+         
++        
+         virtual HRESULT STDMETHODCALLTYPE RenderPageToDeviceContext( 
+             /* [annotation][in] */ 
+             _In_  IUnknown *pdfPage,

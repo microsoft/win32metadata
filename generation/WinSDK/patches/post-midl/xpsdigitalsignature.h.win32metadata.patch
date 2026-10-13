@@ -1,0 +1,81 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/xpsdigitalsignature.h b/generation/WinSDK/RecompiledIdlHeaders/um/xpsdigitalsignature.h
+index a08b464350..17a63d545c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/xpsdigitalsignature.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/xpsdigitalsignature.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -197,7 +198,7 @@ EXTERN_C const IID IID_IXpsSigningOptions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7718eae4-3215-49be-af5b-594fef7fcfa6")
++    MIDL_INTERFACE("7718eae4-3215-49be-af5b-594fef7fcfa6") _Windows_SupportedOS_Windows7_ 
+     IXpsSigningOptions : public IUnknown
+     {
+     public:
+@@ -492,7 +493,7 @@ EXTERN_C const IID IID_IXpsSignatureCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A2D1D95D-ADD2-4DFF-AB27-6B9C645FF322")
++    MIDL_INTERFACE("A2D1D95D-ADD2-4DFF-AB27-6B9C645FF322") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureCollection : public IUnknown
+     {
+     public:
+@@ -607,7 +608,7 @@ EXTERN_C const IID IID_IXpsSignature;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6AE4C93E-1ADE-42FB-898B-3A5658284857")
++    MIDL_INTERFACE("6AE4C93E-1ADE-42FB-898B-3A5658284857") _Windows_SupportedOS_Windows7_ 
+     IXpsSignature : public IUnknown
+     {
+     public:
+@@ -853,7 +854,7 @@ EXTERN_C const IID IID_IXpsSignatureBlockCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23397050-FE99-467A-8DCE-9237F074FFE4")
++    MIDL_INTERFACE("23397050-FE99-467A-8DCE-9237F074FFE4") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureBlockCollection : public IUnknown
+     {
+     public:
+@@ -968,7 +969,7 @@ EXTERN_C const IID IID_IXpsSignatureBlock;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("151FAC09-0B97-4AC6-A323-5E4297D4322B")
++    MIDL_INTERFACE("151FAC09-0B97-4AC6-A323-5E4297D4322B") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureBlock : public IUnknown
+     {
+     public:
+@@ -1111,7 +1112,7 @@ EXTERN_C const IID IID_IXpsSignatureRequestCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F0253E68-9F19-412E-9B4F-54D3B0AC6CD9")
++    MIDL_INTERFACE("F0253E68-9F19-412E-9B4F-54D3B0AC6CD9") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureRequestCollection : public IUnknown
+     {
+     public:
+@@ -1228,7 +1229,7 @@ EXTERN_C const IID IID_IXpsSignatureRequest;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ac58950b-7208-4b2d-b2c4-951083d3b8eb")
++    MIDL_INTERFACE("ac58950b-7208-4b2d-b2c4-951083d3b8eb") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureRequest : public IUnknown
+     {
+     public:
+@@ -1478,7 +1479,7 @@ EXTERN_C const IID IID_IXpsSignatureManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d3e8d338-fdc4-4afc-80b5-d532a1782ee1")
++    MIDL_INTERFACE("d3e8d338-fdc4-4afc-80b5-d532a1782ee1") _Windows_SupportedOS_Windows7_ 
+     IXpsSignatureManager : public IUnknown
+     {
+     public:

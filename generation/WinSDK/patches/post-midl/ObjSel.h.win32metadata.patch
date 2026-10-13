@@ -1,0 +1,113 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+index 777e9002b1..13db712576 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ObjSel.h
+@@ -16,6 +16,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -382,14 +383,14 @@ flDownlevel
+     Flags to use for a downlevel scope.
+ */
+ 
+-typedef struct _DSOP_UPLEVEL_FILTER_FLAGS
++typedef struct   _DSOP_UPLEVEL_FILTER_FLAGS
+ {
+     ULONG       flBothModes;
+     ULONG       flMixedModeOnly;
+     ULONG       flNativeModeOnly;
+ } DSOP_UPLEVEL_FILTER_FLAGS;
+ 
+-typedef struct _DSOP_FILTER_FLAGS
++typedef struct   _DSOP_FILTER_FLAGS
+ {
+     DSOP_UPLEVEL_FILTER_FLAGS   Uplevel;
+     ULONG                       flDownlevel;
+@@ -433,7 +434,7 @@ hr
+     also be a success code.
+ */
+ 
+-typedef struct _DSOP_SCOPE_INIT_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _DSOP_SCOPE_INIT_INFO
+ {
+     ULONG               cbSize;
+     ULONG               flType;
+@@ -499,7 +500,7 @@ apwzAttributeNames
+     if cAttributesToFetch is 0.
+ */
+ 
+-typedef struct _DSOP_INIT_INFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")    _DSOP_INIT_INFO
+ {
+     ULONG                       cbSize;
+     PCWSTR                      pwzTargetComputer;
+@@ -555,7 +556,7 @@ aDsSelection
+ */
+ 
+ 
+-typedef struct _DS_SELECTION
++typedef struct   _DS_SELECTION
+ {
+     PWSTR      pwzName;
+     PWSTR      pwzADsPath;
+@@ -566,7 +567,7 @@ typedef struct _DS_SELECTION
+ } DS_SELECTION, *PDS_SELECTION;
+ 
+ 
+-typedef struct _DS_SELECTION_LIST
++typedef struct   _DS_SELECTION_LIST
+ {
+     ULONG           cItems;
+     ULONG           cFetchedAttributes;
+@@ -585,7 +586,7 @@ typedef struct _DS_SELECTION_LIST
+ #undef INTERFACE
+ #define INTERFACE IDsObjectPicker
+ 
+-DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IDsObjectPicker, IUnknown)
+ {
+     // *** IUnknown methods ***
+ 
+@@ -601,18 +602,22 @@ DECLARE_INTERFACE_(IDsObjectPicker, IUnknown)
+     // *** IDsObjectPicker methods ***
+ 
+     // Sets scope, filter, etc. for use with next invocation of dialog
++    
++    
+     STDMETHOD(Initialize)(
+         THIS_
+-        PDSOP_INIT_INFO pInitInfo) PURE;
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDSOP_INIT_INFO pInitInfo) PURE;
+ 
+     // Creates the modal DS Object Picker dialog.
++    
++    
+     STDMETHOD(InvokeDialog)(
+          THIS_
+          HWND               hwndParent,
+          IDataObject      **ppdoSelections) PURE;
+ };
+ 
+-DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
++DECLARE_INTERFACE_( _Windows_SupportedOS_Server2008_ IDsObjectPickerCredentials, IDsObjectPicker)
+ {
+     // *** IUnknown methods ***
+ 
+@@ -628,10 +633,11 @@ DECLARE_INTERFACE_(IDsObjectPickerCredentials, IDsObjectPicker)
+     // *** IDsObjectPickerCredentials methods ***
+     
+     // Sets credentials for use with next invocation of dialog
++    
+     STDMETHOD(SetCredentials)(
+         THIS_
+-        LPCWSTR szUserName,
+-        LPCWSTR szPassword);
++        _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szUserName,
++        _WIN32META_ANNOTATION_("win32metadata:in") LPCWSTR szPassword);
+ };
+ 
+ 

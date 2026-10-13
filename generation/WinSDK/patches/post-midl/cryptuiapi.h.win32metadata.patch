@@ -1,0 +1,548 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
+index 15570d3ced..418b2f99fc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cryptuiapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //+----------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -43,7 +44,7 @@ extern "C" {
+ //
+ //  dwFlags currently isn't used and should be set to 0.
+ //-----------------------------------------------------------------------------
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIDlgViewContext(
+@@ -75,7 +76,7 @@ CryptUIDlgViewContext(
+ //
+ //  dwFlags currently isn't used and should be set to 0.
+ //-----------------------------------------------------------------------------
+-PCCERT_CONTEXT
++_Windows_SupportedOS_WindowsXP_ PCCERT_CONTEXT
+ WINAPI
+ CryptUIDlgSelectCertificateFromStore(
+     _In_     HCERTSTORE hCertStore,
+@@ -108,8 +109,8 @@ CryptUIDlgSelectCertificateFromStore(
+ //-----------------------------------------------------------------------------
+ typedef BOOL (WINAPI * PFNCFILTERPROC) (
+         PCCERT_CONTEXT  pCertContext,
+-        BOOL            *pfInitialSelectedCert,
+-        void            *pvCallbackData
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL            *pfInitialSelectedCert,
++        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void            *pvCallbackData
+         );
+ 
+ typedef struct {
+@@ -126,7 +127,7 @@ typedef struct {
+ //
+ //
+ //-----------------------------------------------------------------------------
+-HRESULT
++_Windows_SupportedOS_Windows7_ HRESULT
+ WINAPI
+ CertSelectionGetSerializedBlob(
+             _In_                            PCERT_SELECTUI_INPUT pcsi,
+@@ -192,7 +193,7 @@ typedef const CRYPTUI_CERT_MGR_STRUCT *PCCRYPTUI_CERT_MGR_STRUCT;
+ //                                    structure.
+ //
+ //-----------------------------------------------------------------------------
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIDlgCertMgr(
+@@ -309,7 +310,7 @@ typedef struct _CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO
+ {
+     DWORD                                         dwSize;
+     LPWSTR                                        pwszSigningCertFileName;
+-    DWORD                                         dwPvkChoice;		
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION) DWORD                                         dwPvkChoice;		
+     union
+     {
+         PCCRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE_INFO  pPvkFileInfo;
+@@ -371,7 +372,7 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO *PCCRYPTUI_WIZ_DIGITAL_SIGN
+ typedef struct _CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO
+ {
+     DWORD                   dwSize;			
+-    DWORD                   dwAttrFlags;
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE) DWORD                   dwAttrFlags;
+     LPCWSTR                 pwszDescription;
+     LPCWSTR                 pwszMoreInfoLocation;		
+     LPCSTR                  pszHashAlg;
+@@ -469,21 +470,21 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO *PCCRYPTUI_WIZ_DIGITAL_SIGN
+ typedef struct _CRYPTUI_WIZ_DIGITAL_SIGN_INFO
+ {
+     DWORD                                           dwSize;			
+-    DWORD                                           dwSubjectChoice;	
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT) DWORD                                           dwSubjectChoice;	
+     union
+     {
+         LPCWSTR                                     pwszFileName;	
+         PCCRYPTUI_WIZ_DIGITAL_SIGN_BLOB_INFO        pSignBlobInfo;	
+     };
+-    DWORD                                           dwSigningCertChoice;
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_SIGN) DWORD                                           dwSigningCertChoice;
+     union
+     {
+-        PCCERT_CONTEXT                              pSigningCertContext;
++        _WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT                              pSigningCertContext;
+         PCCRYPTUI_WIZ_DIGITAL_SIGN_STORE_INFO       pSigningCertStore;
+         PCCRYPTUI_WIZ_DIGITAL_SIGN_CERT_PVK_INFO    pSigningCertPvkInfo;
+     };
+     LPCWSTR                                         pwszTimestampURL;
+-    DWORD                                           dwAdditionalCertChoice;
++    _Win32_AssociatedEnum_(CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE) DWORD                                           dwAdditionalCertChoice;
+     PCCRYPTUI_WIZ_DIGITAL_SIGN_EXTENDED_INFO        pSignExtInfo;
+ } CRYPTUI_WIZ_DIGITAL_SIGN_INFO, *PCRYPTUI_WIZ_DIGITAL_SIGN_INFO;
+ 
+@@ -542,7 +543,7 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT *PCCRYPTUI_WIZ_DIGITAL_SIGN_CONTE
+ //                                    blob.
+ //
+ //-----------------------------------------------------------------------------
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIWizDigitalSign(
+@@ -553,7 +554,7 @@ CryptUIWizDigitalSign(
+     _Outptr_opt_        PCCRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT  *ppSignContext
+     );
+ 
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIWizFreeDigitalSignContext(
+@@ -653,7 +654,7 @@ typedef struct tagCRYPTUI_INITDIALOG_STRUCT {
+ typedef struct tagCRYPTUI_VIEWCERTIFICATE_STRUCTW {
+     DWORD                       dwSize;
+     HWND                        hwndParent;                     // OPTIONAL
+-    DWORD                       dwFlags;                        // OPTIONAL
++    _Win32_AssociatedEnum_(CRYPTUI_VIEWCERTIFICATE_FLAGS) DWORD                       dwFlags;                        // OPTIONAL
+     LPCWSTR                     szTitle;                        // OPTIONAL
+     PCCERT_CONTEXT              pCertContext;
+     LPCSTR *                    rgszPurposes;                   // OPTIONAL
+@@ -680,7 +681,7 @@ typedef const CRYPTUI_VIEWCERTIFICATE_STRUCTW *PCCRYPTUI_VIEWCERTIFICATE_STRUCTW
+ typedef struct tagCRYPTUI_VIEWCERTIFICATE_STRUCTA {
+     DWORD                       dwSize;
+     HWND                        hwndParent;                     // OPTIONAL
+-    DWORD                       dwFlags;                        // OPTIONAL
++    _Win32_AssociatedEnum_(CRYPTUI_VIEWCERTIFICATE_FLAGS) DWORD                       dwFlags;                        // OPTIONAL
+     LPCSTR                      szTitle;                        // OPTIONAL
+     PCCERT_CONTEXT              pCertContext;
+     LPCSTR *                    rgszPurposes;                   // OPTIONAL
+@@ -708,7 +709,7 @@ typedef const CRYPTUI_VIEWCERTIFICATE_STRUCTA *PCCRYPTUI_VIEWCERTIFICATE_STRUCTA
+ //                                 if any properties have been changed on certs in the chain
+ //                                 while the dialog was open
+ //
+-_Success_(return == TRUE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIDlgViewCertificateW(
+@@ -716,7 +717,7 @@ CryptUIDlgViewCertificateW(
+         _Out_ BOOL                                *pfPropertiesChanged  // OPTIONAL
+         );
+ 
+-_Success_(return == TRUE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIDlgViewCertificateA(
+@@ -762,7 +763,7 @@ typedef struct _CRYPTUI_WIZ_EXPORT_INFO
+                                                 //The fully qualified file name to export to, if this is
+                                                 //non-NULL and the CRYPTUI_WIZ_NO_UI flag is NOT set, then it is
+                                                 //displayed to the user as the default file name
+-	DWORD					dwSubjectChoice;	//Required:	indicate the type of the subject:
++	_Win32_AssociatedEnum_(CRYPTUI_WIZ_EXPORT_SUBJECT) DWORD					dwSubjectChoice;	//Required:	indicate the type of the subject:
+                                                 //          If can one of the following:
+                                                 //          CRYPTUI_WIZ_EXPORT_CERT_CONTEXT
+                                                 //          CRYPTUI_WIZ_EXPORT_CTL_CONTEXT
+@@ -771,7 +772,7 @@ typedef struct _CRYPTUI_WIZ_EXPORT_INFO
+ 						                        //	        CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY
+     union
+ 	{
+-	PCCERT_CONTEXT      pCertContext;
++	_WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT      pCertContext;
+         PCCTL_CONTEXT       pCTLContext;
+         PCCRL_CONTEXT       pCRLContext;
+         HCERTSTORE          hCertStore;
+@@ -811,7 +812,7 @@ typedef const CRYPTUI_WIZ_EXPORT_INFO *PCCRYPTUI_WIZ_EXPORT_INFO;
+ typedef struct _CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO
+ {
+ 	DWORD					dwSize;				//Required: should be set to sizeof(CRYPTUI_WIZ_EXPORT_NOUI_INFO)
+-	DWORD					dwExportFormat;	    //Required:
++	_Win32_AssociatedEnum_(CRYPTUI_WIZ_EXPORT_FORMAT) DWORD					dwExportFormat;	    //Required:
+                                                 //          It can be one of the following:
+                                                 //          CRYPTUI_WIZ_EXPORT_FORMAT_DER
+                                                 //          CRYPTUI_WIZ_EXPORT_FORMAT_PFX
+@@ -862,11 +863,11 @@ typedef const CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO *PCCRYPTUI_WIZ_EXPORT_CERTCONT
+ //                                          is being exported.  See above table for values, if this is non-NULL
+ //                                          the values are displayed to the user as the default choices.
+ //------------------------------------------------------------------------
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIWizExport(
+-     _In_     DWORD                                  dwFlags,
++     _Win32_AssociatedEnum_(CRYPTUI_WIZ_FLAGS) _In_     DWORD                                  dwFlags,
+      _In_opt_ HWND                                   hwndParent,
+      _In_opt_ LPCWSTR                                pwszWizardTitle,
+      _In_     PCCRYPTUI_WIZ_EXPORT_INFO              pExportInfo,
+@@ -893,7 +894,7 @@ CryptUIWizExport(
+ typedef struct _CRYPTUI_WIZ_IMPORT_SUBJECT_INFO
+ {
+ 	DWORD					dwSize;				//Required: should be set to sizeof(IMPORT_SUBJECT_INFO)
+-	DWORD					dwSubjectChoice;	//Required:	indicate the type of the subject:
++	_Win32_AssociatedEnum_(CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION) DWORD					dwSubjectChoice;	//Required:	indicate the type of the subject:
+                                                 //          If can one of the following:
+                                                 //          CRYPTUI_WIZ_IMPORT_SUBJECT_FILE
+                                                 //          CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT
+@@ -903,13 +904,13 @@ typedef struct _CRYPTUI_WIZ_IMPORT_SUBJECT_INFO
+     union
+ 	{
+ 		LPCWSTR          	pwszFileName;	
+-        PCCERT_CONTEXT      pCertContext;
++        _WIN32META_ANNOTATION_("win32metadata:const") PCCERT_CONTEXT      pCertContext;
+         PCCTL_CONTEXT       pCTLContext;
+         PCCRL_CONTEXT       pCRLContext;
+         HCERTSTORE          hCertStore;
+     };
+ 
+-    DWORD                   dwFlags;            //Required if pwszFileName contains a PFX BLOB.
++    _Win32_AssociatedEnum_(CRYPT_KEY_FLAGS) DWORD                   dwFlags;            //Required if pwszFileName contains a PFX BLOB.
+                                                 //Ignored otherwise
+                                                 //This is the same flag for PFXImportCertStore
+     LPCWSTR                 pwszPassword;       //Required if pwszFileName contains a PFX BLOB.
+@@ -997,11 +998,11 @@ typedef const CRYPTUI_WIZ_IMPORT_SRC_INFO *PCCRYPTUI_WIZ_IMPORT_SRC_INFO;
+ //                                          flag CERT_STORE_SET_LOCALIZED_NAME_FLAG.  If NULL, the wizard will prompt user to select
+ //                                          a certificate store.
+ //------------------------------------------------------------------------
+-_Success_(return == TRUE)
++_Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+ CryptUIWizImport(
+-     _In_     DWORD                               dwFlags,
++     _Win32_AssociatedEnum_(CRYPTUI_WIZ_FLAGS) _In_     DWORD                               dwFlags,
+      _In_opt_ HWND                                hwndParent,
+      _In_opt_ LPCWSTR                             pwszWizardTitle,
+      _In_opt_ PCCRYPTUI_WIZ_IMPORT_SRC_INFO       pImportSrc,
+@@ -1018,4 +1019,313 @@ CryptUIWizImport(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_NO_UI")
++#undef CRYPTUI_WIZ_NO_UI
++#pragma push_macro("CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS")
++#undef CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS
++#pragma push_macro("CRYPTUI_WIZ_NO_UI_EXCEPT_CSP")
++#undef CRYPTUI_WIZ_NO_UI_EXCEPT_CSP
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CERT")
++#undef CRYPTUI_WIZ_IMPORT_ALLOW_CERT
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CRL")
++#undef CRYPTUI_WIZ_IMPORT_ALLOW_CRL
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CTL")
++#undef CRYPTUI_WIZ_IMPORT_ALLOW_CTL
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE")
++#undef CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE")
++#undef CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER")
++#undef CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE")
++#undef CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_PRIVATE_KEY")
++#undef CRYPTUI_WIZ_EXPORT_PRIVATE_KEY
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY")
++#undef CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY
++enum [[clang::flag_enum]] CRYPTUI_WIZ_FLAGS : unsigned int
++{
++    CRYPTUI_WIZ_NO_UI = 1U,
++    CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS = 2U,
++    CRYPTUI_WIZ_NO_UI_EXCEPT_CSP = 3U,
++    CRYPTUI_WIZ_IMPORT_ALLOW_CERT = 131072U,
++    CRYPTUI_WIZ_IMPORT_ALLOW_CRL = 262144U,
++    CRYPTUI_WIZ_IMPORT_ALLOW_CTL = 524288U,
++    CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE = 65536U,
++    CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE = 1048576U,
++    CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER = 2097152U,
++    CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE = 4194304U,
++    CRYPTUI_WIZ_EXPORT_PRIVATE_KEY = 256U,
++    CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY = 512U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_NO_DELETE_PRIVATE_KEY")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_PRIVATE_KEY")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CTL")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CRL")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_ALLOW_CERT")
++#pragma pop_macro("CRYPTUI_WIZ_NO_UI_EXCEPT_CSP")
++#pragma pop_macro("CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS")
++#pragma pop_macro("CRYPTUI_WIZ_NO_UI")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_HIDE_HIERARCHYPAGE")
++#undef CRYPTUI_HIDE_HIERARCHYPAGE
++#pragma push_macro("CRYPTUI_HIDE_DETAILPAGE")
++#undef CRYPTUI_HIDE_DETAILPAGE
++#pragma push_macro("CRYPTUI_DISABLE_EDITPROPERTIES")
++#undef CRYPTUI_DISABLE_EDITPROPERTIES
++#pragma push_macro("CRYPTUI_ENABLE_EDITPROPERTIES")
++#undef CRYPTUI_ENABLE_EDITPROPERTIES
++#pragma push_macro("CRYPTUI_DISABLE_ADDTOSTORE")
++#undef CRYPTUI_DISABLE_ADDTOSTORE
++#pragma push_macro("CRYPTUI_ENABLE_ADDTOSTORE")
++#undef CRYPTUI_ENABLE_ADDTOSTORE
++#pragma push_macro("CRYPTUI_ACCEPT_DECLINE_STYLE")
++#undef CRYPTUI_ACCEPT_DECLINE_STYLE
++#pragma push_macro("CRYPTUI_IGNORE_UNTRUSTED_ROOT")
++#undef CRYPTUI_IGNORE_UNTRUSTED_ROOT
++#pragma push_macro("CRYPTUI_DONT_OPEN_STORES")
++#undef CRYPTUI_DONT_OPEN_STORES
++#pragma push_macro("CRYPTUI_ONLY_OPEN_ROOT_STORE")
++#undef CRYPTUI_ONLY_OPEN_ROOT_STORE
++#pragma push_macro("CRYPTUI_WARN_UNTRUSTED_ROOT")
++#undef CRYPTUI_WARN_UNTRUSTED_ROOT
++#pragma push_macro("CRYPTUI_ENABLE_REVOCATION_CHECKING")
++#undef CRYPTUI_ENABLE_REVOCATION_CHECKING
++#pragma push_macro("CRYPTUI_WARN_REMOTE_TRUST")
++#undef CRYPTUI_WARN_REMOTE_TRUST
++#pragma push_macro("CRYPTUI_DISABLE_EXPORT")
++#undef CRYPTUI_DISABLE_EXPORT
++#pragma push_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT")
++#undef CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT
++#pragma push_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN")
++#undef CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN
++#pragma push_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#undef CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT
++#pragma push_macro("CRYPTUI_DISABLE_HTMLLINK")
++#undef CRYPTUI_DISABLE_HTMLLINK
++#pragma push_macro("CRYPTUI_DISABLE_ISSUERSTATEMENT")
++#undef CRYPTUI_DISABLE_ISSUERSTATEMENT
++#pragma push_macro("CRYPTUI_CACHE_ONLY_URL_RETRIEVAL")
++#undef CRYPTUI_CACHE_ONLY_URL_RETRIEVAL
++enum [[clang::flag_enum]] CRYPTUI_VIEWCERTIFICATE_FLAGS : unsigned int
++{
++    CRYPTUI_HIDE_HIERARCHYPAGE = 1U,
++    CRYPTUI_HIDE_DETAILPAGE = 2U,
++    CRYPTUI_DISABLE_EDITPROPERTIES = 4U,
++    CRYPTUI_ENABLE_EDITPROPERTIES = 8U,
++    CRYPTUI_DISABLE_ADDTOSTORE = 16U,
++    CRYPTUI_ENABLE_ADDTOSTORE = 32U,
++    CRYPTUI_ACCEPT_DECLINE_STYLE = 64U,
++    CRYPTUI_IGNORE_UNTRUSTED_ROOT = 128U,
++    CRYPTUI_DONT_OPEN_STORES = 256U,
++    CRYPTUI_ONLY_OPEN_ROOT_STORE = 512U,
++    CRYPTUI_WARN_UNTRUSTED_ROOT = 1024U,
++    CRYPTUI_ENABLE_REVOCATION_CHECKING = 2048U,
++    CRYPTUI_WARN_REMOTE_TRUST = 4096U,
++    CRYPTUI_DISABLE_EXPORT = 8192U,
++    CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT = 16384U,
++    CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN = 32768U,
++    CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT = 2048U,
++    CRYPTUI_DISABLE_HTMLLINK = 65536U,
++    CRYPTUI_DISABLE_ISSUERSTATEMENT = 131072U,
++    CRYPTUI_CACHE_ONLY_URL_RETRIEVAL = 262144U,
++};
++#pragma pop_macro("CRYPTUI_CACHE_ONLY_URL_RETRIEVAL")
++#pragma pop_macro("CRYPTUI_DISABLE_ISSUERSTATEMENT")
++#pragma pop_macro("CRYPTUI_DISABLE_HTMLLINK")
++#pragma pop_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT")
++#pragma pop_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_CHAIN")
++#pragma pop_macro("CRYPTUI_ENABLE_REVOCATION_CHECK_END_CERT")
++#pragma pop_macro("CRYPTUI_DISABLE_EXPORT")
++#pragma pop_macro("CRYPTUI_WARN_REMOTE_TRUST")
++#pragma pop_macro("CRYPTUI_ENABLE_REVOCATION_CHECKING")
++#pragma pop_macro("CRYPTUI_WARN_UNTRUSTED_ROOT")
++#pragma pop_macro("CRYPTUI_ONLY_OPEN_ROOT_STORE")
++#pragma pop_macro("CRYPTUI_DONT_OPEN_STORES")
++#pragma pop_macro("CRYPTUI_IGNORE_UNTRUSTED_ROOT")
++#pragma pop_macro("CRYPTUI_ACCEPT_DECLINE_STYLE")
++#pragma pop_macro("CRYPTUI_ENABLE_ADDTOSTORE")
++#pragma pop_macro("CRYPTUI_DISABLE_ADDTOSTORE")
++#pragma pop_macro("CRYPTUI_ENABLE_EDITPROPERTIES")
++#pragma pop_macro("CRYPTUI_DISABLE_EDITPROPERTIES")
++#pragma pop_macro("CRYPTUI_HIDE_DETAILPAGE")
++#pragma pop_macro("CRYPTUI_HIDE_HIERARCHYPAGE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_FILE")
++#undef CRYPTUI_WIZ_IMPORT_SUBJECT_FILE
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT")
++#undef CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT")
++#undef CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT")
++#undef CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE")
++#undef CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE
++enum CRYPTUI_WIZ_IMPORT_SUBJECT_OPTION : unsigned int
++{
++    CRYPTUI_WIZ_IMPORT_SUBJECT_FILE = 1U,
++    CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT = 2U,
++    CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT = 3U,
++    CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT = 4U,
++    CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE = 5U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_STORE")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CRL_CONTEXT")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CTL_CONTEXT")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_CERT_CONTEXT")
++#pragma pop_macro("CRYPTUI_WIZ_IMPORT_SUBJECT_FILE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE
++enum CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT : unsigned int
++{
++    CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB = 2U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE = 1U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE = 0U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_CERT")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_CERT
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_STORE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_STORE
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_PVK
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_NONE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_NONE
++enum CRYPTUI_WIZ_DIGITAL_SIGN : unsigned int
++{
++    CRYPTUI_WIZ_DIGITAL_SIGN_CERT = 1U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_STORE = 2U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_PVK = 3U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_NONE = 0U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_NONE")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_STORE")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_CERT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_CERT_CONTEXT")
++#undef CRYPTUI_WIZ_EXPORT_CERT_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_CTL_CONTEXT")
++#undef CRYPTUI_WIZ_EXPORT_CTL_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_CRL_CONTEXT")
++#undef CRYPTUI_WIZ_EXPORT_CRL_CONTEXT
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_CERT_STORE")
++#undef CRYPTUI_WIZ_EXPORT_CERT_STORE
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY")
++#undef CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY
++enum CRYPTUI_WIZ_EXPORT_SUBJECT : unsigned int
++{
++    CRYPTUI_WIZ_EXPORT_CERT_CONTEXT = 1U,
++    CRYPTUI_WIZ_EXPORT_CTL_CONTEXT = 2U,
++    CRYPTUI_WIZ_EXPORT_CRL_CONTEXT = 3U,
++    CRYPTUI_WIZ_EXPORT_CERT_STORE = 4U,
++    CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY = 5U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_CERT_STORE_CERTIFICATES_ONLY")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_CERT_STORE")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_CRL_CONTEXT")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_CTL_CONTEXT")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_CERT_CONTEXT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL
++enum CRYPTUI_WIZ_DIGITAL_SIGN_SIG_TYPE : unsigned int
++{
++    CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL = 1U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL = 2U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_INDIVIDUAL")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_COMMERCIAL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV
++enum CRYPTUI_WIZ_DIGITAL_SIGN_PVK_OPTION : unsigned int
++{
++    CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE = 1U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV = 2U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK_PROV")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_PVK_FILE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_DER")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_DER
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_PFX")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_PFX
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_BASE64")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_BASE64
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_CRL")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_CRL
++#pragma push_macro("CRYPTUI_WIZ_EXPORT_FORMAT_CTL")
++#undef CRYPTUI_WIZ_EXPORT_FORMAT_CTL
++enum CRYPTUI_WIZ_EXPORT_FORMAT : unsigned int
++{
++    CRYPTUI_WIZ_EXPORT_FORMAT_DER = 1U,
++    CRYPTUI_WIZ_EXPORT_FORMAT_PFX = 2U,
++    CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7 = 3U,
++    CRYPTUI_WIZ_EXPORT_FORMAT_BASE64 = 4U,
++    CRYPTUI_WIZ_EXPORT_FORMAT_CRL = 6U,
++    CRYPTUI_WIZ_EXPORT_FORMAT_CTL = 7U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_CTL")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_CRL")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_BASE64")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_PKCS7")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_PFX")
++#pragma pop_macro("CRYPTUI_WIZ_EXPORT_FORMAT_DER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT
++#pragma push_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE")
++#undef CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE
++enum CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE : unsigned int
++{
++    CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN = 1U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT = 2U,
++    CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE = 0U,
++};
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT")
++#pragma pop_macro("CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN")
++#endif
++
+ #endif // _CRYPTUIAPI_H_

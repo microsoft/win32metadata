@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h b/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
+index 79d118ca8c..f34ff4ebcd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vdslun.h
+@@ -56,6 +56,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if _MSC_VER >= 1200
+@@ -112,7 +113,7 @@ enum _VDS_STORAGE_BUS_TYPE
+         VDSBusTypeMaxReserved	= 0x7f
+     } 	VDS_STORAGE_BUS_TYPE;
+ 
+-typedef struct _VDS_STORAGE_IDENTIFIER
++typedef struct   _VDS_STORAGE_IDENTIFIER
+     {
+     VDS_STORAGE_IDENTIFIER_CODE_SET m_CodeSet;
+     VDS_STORAGE_IDENTIFIER_TYPE m_Type;
+@@ -120,7 +121,7 @@ typedef struct _VDS_STORAGE_IDENTIFIER
+     /* [size_is] */ BYTE *m_rgbIdentifier;
+     } 	VDS_STORAGE_IDENTIFIER;
+ 
+-typedef struct _VDS_STORAGE_DEVICE_ID_DESCRIPTOR
++typedef struct   _VDS_STORAGE_DEVICE_ID_DESCRIPTOR
+     {
+     ULONG m_version;
+     ULONG m_cIdentifiers;
+@@ -138,7 +139,7 @@ enum _VDS_INTERCONNECT_ADDRESS_TYPE
+         VDS_IA_SCSI	= 5
+     } 	VDS_INTERCONNECT_ADDRESS_TYPE;
+ 
+-typedef struct _VDS_INTERCONNECT
++typedef struct   _VDS_INTERCONNECT
+     {
+     VDS_INTERCONNECT_ADDRESS_TYPE m_addressType;
+     ULONG m_cbPort;
+@@ -147,7 +148,7 @@ typedef struct _VDS_INTERCONNECT
+     /* [size_is] */ BYTE *m_pbAddress;
+     } 	VDS_INTERCONNECT;
+ 
+-typedef struct _VDS_LUN_INFORMATION
++typedef struct   _VDS_LUN_INFORMATION
+     {
+     ULONG m_version;
+     BYTE m_DeviceType;

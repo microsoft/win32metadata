@@ -1,0 +1,213 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CluAdmEx.h b/generation/WinSDK/RecompiledIdlHeaders/um/CluAdmEx.h
+index 9980820c3e..af7f98630c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CluAdmEx.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CluAdmEx.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -210,21 +211,21 @@ EXTERN_C const IID IID_IGetClusterUIInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE50-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE50-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterUIInfo : public IUnknown
+     {
+     public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetClusterName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR lpszName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR lpszName,
+             /* [annotation][out][in] */ 
+             _Inout_  LONG *pcchName) = 0;
+         
+         virtual /* [local] */ LCID STDMETHODCALLTYPE GetLocale( void) = 0;
+         
+-        virtual /* [local] */ HFONT STDMETHODCALLTYPE GetFont( void) = 0;
++        _Win32_RAIIFree_(DeleteObject, -1, 0) virtual /* [local] */ HFONT STDMETHODCALLTYPE GetFont( void) = 0;
+         
+-        virtual /* [local] */ HICON STDMETHODCALLTYPE GetIcon( void) = 0;
++        _Win32_RAIIFree_(DestroyIcon, -1, 0) virtual /* [local] */ HICON STDMETHODCALLTYPE GetIcon( void) = 0;
+         
+     };
+     
+@@ -328,13 +329,13 @@ EXTERN_C const IID IID_IGetClusterDataInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE51-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE51-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterDataInfo : public IUnknown
+     {
+     public:
+         virtual /* [local] */ HRESULT STDMETHODCALLTYPE GetClusterName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR lpszName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR lpszName,
+             /* [annotation][out][in] */ 
+             _Inout_  LONG *pcchName) = 0;
+         
+@@ -437,7 +438,7 @@ EXTERN_C const IID IID_IGetClusterObjectInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE52-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE52-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterObjectInfo : public IUnknown
+     {
+     public:
+@@ -445,7 +446,7 @@ EXTERN_C const IID IID_IGetClusterObjectInfo;
+             /* [annotation][in] */ 
+             _In_  LONG lObjIndex,
+             /* [annotation][out] */ 
+-            _Out_  BSTR lpszName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR lpszName,
+             /* [annotation][out][in] */ 
+             _Inout_  LONG *pcchName) = 0;
+         
+@@ -545,7 +546,7 @@ EXTERN_C const IID IID_IGetClusterNodeInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE53-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE53-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterNodeInfo : public IUnknown
+     {
+     public:
+@@ -632,7 +633,7 @@ EXTERN_C const IID IID_IGetClusterGroupInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE54-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE54-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterGroupInfo : public IUnknown
+     {
+     public:
+@@ -719,7 +720,7 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE55-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE55-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterResourceInfo : public IUnknown
+     {
+     public:
+@@ -731,7 +732,7 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
+             /* [annotation][in] */ 
+             _In_  LONG lObjIndex,
+             /* [annotation][out] */ 
+-            _Out_  BSTR lpszResTypeName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR lpszResTypeName,
+             /* [annotation][out][in] */ 
+             _Inout_  LONG *pcchResTypeName) = 0;
+         
+@@ -739,7 +740,7 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
+             /* [annotation][in] */ 
+             _In_  LONG lObjIndex,
+             /* [annotation][out] */ 
+-            _Out_  BSTR lpszNetName,
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR lpszNetName,
+             /* [annotation][out][in] */ 
+             _Inout_  ULONG *pcchNetName) = 0;
+         
+@@ -848,7 +849,7 @@ EXTERN_C const IID IID_IGetClusterNetworkInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE56-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE56-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterNetworkInfo : public IUnknown
+     {
+     public:
+@@ -935,7 +936,7 @@ EXTERN_C const IID IID_IGetClusterNetInterfaceInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE57-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE57-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IGetClusterNetInterfaceInfo : public IUnknown
+     {
+     public:
+@@ -1022,7 +1023,7 @@ EXTERN_C const IID IID_IWCPropertySheetCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE60-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE60-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2008_ 
+     IWCPropertySheetCallback : public IUnknown
+     {
+     public:
+@@ -1109,7 +1110,7 @@ EXTERN_C const IID IID_IWEExtendPropertySheet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE61-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE61-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2008_ 
+     IWEExtendPropertySheet : public IUnknown
+     {
+     public:
+@@ -1200,7 +1201,7 @@ EXTERN_C const IID IID_IWCWizardCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE62-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE62-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWCWizardCallback : public IUnknown
+     {
+     public:
+@@ -1304,7 +1305,7 @@ EXTERN_C const IID IID_IWEExtendWizard;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE63-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE63-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWEExtendWizard : public IUnknown
+     {
+     public:
+@@ -1395,7 +1396,7 @@ EXTERN_C const IID IID_IWCContextMenuCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE64-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE64-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWCContextMenuCallback : public IUnknown
+     {
+     public:
+@@ -1498,7 +1499,7 @@ EXTERN_C const IID IID_IWEExtendContextMenu;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE65-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE65-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWEExtendContextMenu : public IUnknown
+     {
+     public:
+@@ -1589,7 +1590,7 @@ EXTERN_C const IID IID_IWEInvokeCommand;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE66-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE66-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWEInvokeCommand : public IUnknown
+     {
+     public:
+@@ -1680,7 +1681,7 @@ EXTERN_C const IID IID_IWCWizard97Callback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE67-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE67-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWCWizard97Callback : public IUnknown
+     {
+     public:
+@@ -1784,7 +1785,7 @@ EXTERN_C const IID IID_IWEExtendWizard97;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("97DEDE68-FC6B-11CF-B5F5-00A0C90AB505")
++    MIDL_INTERFACE("97DEDE68-FC6B-11CF-B5F5-00A0C90AB505") _Windows_SupportedOS_Server2003_ 
+     IWEExtendWizard97 : public IUnknown
+     {
+     public:

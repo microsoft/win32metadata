@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor_1.h
+index d1e03a0eba..1009989cea 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor_1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1effectauthor_1.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ //
+@@ -31,7 +32,7 @@ EXTERN_C CONST IID IID_ID2D1EffectContext2;
+ /// and any other operation tied to context which is not useful to the application
+ /// facing API.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("84ab595a-fc81-4546-bacd-e8ef4d8abe7a") ID2D1EffectContext1  : public ID2D1EffectContext
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("84ab595a-fc81-4546-bacd-e8ef4d8abe7a") ID2D1EffectContext1  : public ID2D1EffectContext
+ {
+     
+     /// <summary>
+@@ -56,7 +57,7 @@ interface DX_DECLARE_INTERFACE("84ab595a-fc81-4546-bacd-e8ef4d8abe7a") ID2D1Effe
+ /// and any other operation tied to context which is not useful to the application
+ /// facing API.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("577ad2a0-9fc7-4dda-8b18-dab810140052") ID2D1EffectContext2  : public ID2D1EffectContext1
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("577ad2a0-9fc7-4dda-8b18-dab810140052") ID2D1EffectContext2  : public ID2D1EffectContext1
+ {
+     
+     /// <summary>

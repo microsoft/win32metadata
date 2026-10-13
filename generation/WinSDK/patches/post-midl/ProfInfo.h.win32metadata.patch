@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h b/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
+index 1d3282510e..2b07c5c819 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ProfInfo.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //=============================================================================
+ //  profinfo.h   -   Header file for profile info structure.
+ //
+@@ -21,7 +22,7 @@
+ #define MIDL_STRING
+ #endif  // __midl
+ 
+-typedef struct _PROFILEINFOA {
++typedef struct   _PROFILEINFOA {
+     DWORD       dwSize;                 // Set to sizeof(PROFILEINFO) before calling
+     DWORD       dwFlags;                // See PI_ flags defined in userenv.h
+     MIDL_STRING LPSTR       lpUserName;             // User name (required)
+@@ -35,7 +36,7 @@ typedef struct _PROFILEINFOA {
+     HANDLE      hProfile;               // Filled in by the function.  Registry key handle open to the root.
+ #endif
+     } PROFILEINFOA, FAR * LPPROFILEINFOA;
+-typedef struct _PROFILEINFOW {
++typedef struct   _PROFILEINFOW {
+     DWORD       dwSize;                 // Set to sizeof(PROFILEINFO) before calling
+     DWORD       dwFlags;                // See PI_ flags defined in userenv.h
+     MIDL_STRING LPWSTR      lpUserName;             // User name (required)

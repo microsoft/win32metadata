@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
+index 1497971769..5a0a04329d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AtscPsipParser.h
+@@ -133,6 +133,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -1578,7 +1579,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1FF544D6-161D-4fae-9FAA-4F9F492AE999")
+-    ISCTE_EAS : public IUnknown
++    _Windows_SupportedOS_WindowsVista_ ISCTE_EAS : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -1614,7 +1615,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetNatureOfActivationText( 
+             /* [in] */ __RPC__in BSTR bstrIS0639code,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrString) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetTimeRemaining( 
+             /* [out] */ __RPC__out BYTE *pbVal) = 0;
+@@ -1642,7 +1643,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlertText( 
+             /* [in] */ __RPC__in BSTR bstrIS0639code,
+-            /* [out] */ __RPC__deref_out_opt BSTR *pbstrString) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrString) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRawAlertTextLen( 
+             /* [out] */ __RPC__out WORD *pwVal) = 0;
+@@ -1864,7 +1865,7 @@ EXTERN_C const IID IID_ISCTE_EAS;
+         END_INTERFACE
+     } ISCTE_EASVtbl;
+ 
+-    interface ISCTE_EAS
++    interface _Windows_SupportedOS_WindowsVista_ ISCTE_EAS
+     {
+         CONST_VTBL struct ISCTE_EASVtbl *lpVtbl;
+     };
+@@ -2320,7 +2321,7 @@ EXTERN_C const IID IID_IServiceLocationDescriptor;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("58C3C827-9D91-4215-BFF3-820A49F0904C")
+-    IServiceLocationDescriptor : public IUnknown
++    _Windows_SupportedOS_Windows7_ IServiceLocationDescriptor : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPCR_PID( 
+@@ -2396,7 +2397,7 @@ EXTERN_C const IID IID_IServiceLocationDescriptor;
+         END_INTERFACE
+     } IServiceLocationDescriptorVtbl;
+ 
+-    interface IServiceLocationDescriptor
++    interface _Windows_SupportedOS_Windows7_ IServiceLocationDescriptor
+     {
+         CONST_VTBL struct IServiceLocationDescriptorVtbl *lpVtbl;
+     };

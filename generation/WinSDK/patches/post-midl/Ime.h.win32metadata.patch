@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
+index 838b76e8e6..0a2585fafa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Ime.h
+@@ -15,6 +15,7 @@ Abstract:
+ 
+ #ifndef _IME_
+ #define _IME_
++#include <win32metadata_annotations.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -32,7 +33,11 @@ typedef unsigned int UINT;
+ 
+ #define IME_MAXPROCESS 32
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
++
+ LRESULT WINAPI SendIMEMessageExA( IN HWND, IN LPARAM);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
++
+ LRESULT WINAPI SendIMEMessageExW( IN HWND, IN LPARAM);
+ #ifdef UNICODE
+ #define SendIMEMessageEx  SendIMEMessageExW
+@@ -43,7 +48,7 @@ LRESULT WINAPI SendIMEMessageExW( IN HWND, IN LPARAM);
+ //
+ // IMESTRUCT structure for SendIMEMessageEx
+ //
+-typedef struct tagIMESTRUCT {
++typedef struct   tagIMESTRUCT {
+     UINT     fnc;        // function code
+     WPARAM   wParam;     // word parameter
+     UINT     wCount;     // word counter

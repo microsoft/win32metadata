@@ -1,0 +1,52 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/atlthunk.h b/generation/WinSDK/RecompiledIdlHeaders/um/atlthunk.h
+index 67558895b7..75276cdef0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/atlthunk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/atlthunk.h
+@@ -15,6 +15,7 @@ Author:
+ --*/
+ 
+ #pragma once
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -27,12 +28,20 @@ struct AtlThunkData_t; // opaque
+ typedef struct AtlThunkData_t AtlThunkData_t;
+ #endif
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_ImportLibrary_("Atlthunk.dll")
++_Win32_SetLastError_
++_Win32_RAIIFree_(AtlThunk_FreeData, 0)
+ AtlThunkData_t*
+ __stdcall
+ AtlThunk_AllocateData(
+     void
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_ImportLibrary_("Atlthunk.dll")
+ void
+ __stdcall
+ AtlThunk_InitData(
+@@ -41,12 +50,18 @@ AtlThunk_InitData(
+     size_t FirstParameter
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_ImportLibrary_("Atlthunk.dll")
+ WNDPROC
+ __stdcall
+ AtlThunk_DataToCode(
+     AtlThunkData_t*
+     );
+ 
++_Windows_SupportedOS_10240_
++_Windows_SupportedOS_Server2016_
++_Win32_ImportLibrary_("Atlthunk.dll")
+ void
+ __stdcall
+ AtlThunk_FreeData(

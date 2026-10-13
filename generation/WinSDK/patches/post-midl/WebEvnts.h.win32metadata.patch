@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
+index aac33dbfd3..a07dbdde2d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WebEvnts.h
+@@ -85,6 +85,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -113,7 +114,7 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("54A8F188-9EBD-4795-AD16-9B4945119636")
+-    IWebBrowserEventsService : public IUnknown
++     IWebBrowserEventsService : public IUnknown
+     {
+     public:
+         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE FireBeforeNavigate2Event( 
+@@ -236,12 +237,12 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("87CC5D04-EAFA-4833-9820-8F986530CC00")
+-    IWebBrowserEventsUrlService : public IUnknown
++     IWebBrowserEventsUrlService : public IUnknown
+     {
+     public:
+         virtual /* [helpcontext][helpstring] */ HRESULT STDMETHODCALLTYPE GetUrlForEvents( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pUrl) = 0;
+         
+     };
+     

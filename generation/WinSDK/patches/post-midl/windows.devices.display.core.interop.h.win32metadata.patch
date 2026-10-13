@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Devices.Display.Core.Interop.h b/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Devices.Display.Core.Interop.h
+index a07e0639d6..17562890ec 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Devices.Display.Core.Interop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Windows.Devices.Display.Core.Interop.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -140,7 +141,7 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
+             /* [annotation][in] */ 
+             _In_  HSTRING Name,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *pHandle) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *pHandle) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OpenSharedHandle( 
+             /* [annotation][in] */ 
+@@ -256,7 +257,7 @@ EXTERN_C const IID IID_IDisplayPathInterop;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateSourcePresentationHandle( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HANDLE *pValue) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_retval_  HANDLE *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSourceId( 
+             /* [annotation][retval][out] */ 

@@ -1,0 +1,33 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/storprop.h b/generation/WinSDK/RecompiledIdlHeaders/um/storprop.h
+index 4aa65c6ced..ea938ab2c3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/storprop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/storprop.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0001    // Increment this if a change has global effect
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -68,19 +69,23 @@ CdromCddaInfo(
+     );
+ 
+ BOOL
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ CdromKnownGoodDigitalPlayback(IN HDEVINFO HDevInfo,
+                               IN PSP_DEVINFO_DATA DevInfoData);
+ 
+ LONG
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ CdromEnableDigitalPlayback(IN HDEVINFO DevInfo,
+                            IN PSP_DEVINFO_DATA DevInfoData,
+                            IN BOOLEAN ForceUnknown);
+ 
+ LONG
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ CdromDisableDigitalPlayback( IN HDEVINFO DevInfo,
+                              IN PSP_DEVINFO_DATA DevInfoData);
+ 
+ LONG
++_Windows_SupportedOS_WindowsXP_ _Windows_SupportedOS_Server2003_
+ CdromIsDigitalPlaybackEnabled(
+     IN  HDEVINFO DevInfo,
+     IN  PSP_DEVINFO_DATA DevInfoData,

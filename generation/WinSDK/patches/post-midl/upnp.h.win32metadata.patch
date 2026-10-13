@@ -1,0 +1,297 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/UPnP.h b/generation/WinSDK/RecompiledIdlHeaders/um/UPnP.h
+index 8dda1e1591..4b32287e53 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/UPnP.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/UPnP.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -417,7 +418,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinder;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ADDA3D55-6F72-4319-BFF9-18600A539B10")
++    MIDL_INTERFACE("ADDA3D55-6F72-4319-BFF9-18600A539B10") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDeviceFinder : public IDispatch
+     {
+     public:
+@@ -642,7 +643,7 @@ EXTERN_C const IID IID_IUPnPAddressFamilyControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E3BF6178-694E-459F-A5A6-191EA0FFA1C7")
++    MIDL_INTERFACE("E3BF6178-694E-459F-A5A6-191EA0FFA1C7") _Windows_SupportedOS_WindowsVista_ 
+     IUPnPAddressFamilyControl : public IUnknown
+     {
+     public:
+@@ -742,7 +743,7 @@ EXTERN_C const IID IID_IUPnPHttpHeaderControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0405AF4F-8B5C-447C-80F2-B75984A31F3C")
++    MIDL_INTERFACE("0405AF4F-8B5C-447C-80F2-B75984A31F3C") _Windows_SupportedOS_Windows7_ 
+     IUPnPHttpHeaderControl : public IUnknown
+     {
+     public:
+@@ -829,7 +830,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinderCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("415A984A-88B3-49F3-92AF-0508BEDF0D6C")
++    MIDL_INTERFACE("415A984A-88B3-49F3-92AF-0508BEDF0D6C") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDeviceFinderCallback : public IUnknown
+     {
+     public:
+@@ -950,7 +951,7 @@ EXTERN_C const IID IID_IUPnPServices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3F8C8E9E-9A7A-4DC8-BC41-FF31FA374956")
++    MIDL_INTERFACE("3F8C8E9E-9A7A-4DC8-BC41-FF31FA374956") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPServices : public IDispatch
+     {
+     public:
+@@ -1129,7 +1130,7 @@ EXTERN_C const IID IID_IUPnPService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A295019C-DC65-47DD-90DC-7FE918A1AB44")
++    MIDL_INTERFACE("A295019C-DC65-47DD-90DC-7FE918A1AB44") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPService : public IDispatch
+     {
+     public:
+@@ -1151,7 +1152,7 @@ EXTERN_C const IID IID_IUPnPService;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeIdentifier( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE AddCallback( 
+             /* [annotation][in] */ 
+@@ -1159,7 +1160,7 @@ EXTERN_C const IID IID_IUPnPService;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Id( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastTransportStatus( 
+             /* [annotation][retval][out] */ 
+@@ -1359,7 +1360,7 @@ EXTERN_C const IID IID_IUPnPAsyncResult;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4D65FD08-D13E-4274-9C8B-DD8D028C8644")
++    MIDL_INTERFACE("4D65FD08-D13E-4274-9C8B-DD8D028C8644") _Windows_SupportedOS_Windows8_ 
+     IUPnPAsyncResult : public IUnknown
+     {
+     public:
+@@ -1446,7 +1447,7 @@ EXTERN_C const IID IID_IUPnPServiceAsync;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("098BDAF5-5EC1-49e7-A260-B3A11DD8680C")
++    MIDL_INTERFACE("098BDAF5-5EC1-49e7-A260-B3A11DD8680C") _Windows_SupportedOS_Windows8_ 
+     IUPnPServiceAsync : public IUnknown
+     {
+     public:
+@@ -1504,7 +1505,7 @@ EXTERN_C const IID IID_IUPnPServiceAsync;
+             /* [annotation][in] */ 
+             _In_  ULONG64 ullRequestID,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrSCPDDoc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrSCPDDoc) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CancelAsyncOperation( 
+             /* [annotation][in] */ 
+@@ -1685,7 +1686,7 @@ EXTERN_C const IID IID_IUPnPServiceCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("31fadca9-ab73-464b-b67d-5c1d0f83c8b8")
++    MIDL_INTERFACE("31fadca9-ab73-464b-b67d-5c1d0f83c8b8") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPServiceCallback : public IUnknown
+     {
+     public:
+@@ -1793,7 +1794,7 @@ EXTERN_C const IID IID_IUPnPServiceEnumProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38873B37-91BB-49f4-B249-2E8EFBB8A816")
++    MIDL_INTERFACE("38873B37-91BB-49f4-B249-2E8EFBB8A816") _Windows_SupportedOS_Windows8_ 
+     IUPnPServiceEnumProperty : public IUnknown
+     {
+     public:
+@@ -1880,17 +1881,17 @@ EXTERN_C const IID IID_IUPnPServiceDocumentAccess;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("21905529-0A5E-4589-825D-7E6D87EA6998")
++    MIDL_INTERFACE("21905529-0A5E-4589-825D-7E6D87EA6998") _Windows_SupportedOS_Windows8_ 
+     IUPnPServiceDocumentAccess : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDocumentURL( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDocUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDocUrl) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDoc) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDoc) = 0;
+         
+     };
+     
+@@ -1980,7 +1981,7 @@ EXTERN_C const IID IID_IUPnPDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FDBC0C73-BDA3-4C66-AC4F-F2D96FDAD68C")
++    MIDL_INTERFACE("FDBC0C73-BDA3-4C66-AC4F-F2D96FDAD68C") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDevices : public IDispatch
+     {
+     public:
+@@ -2159,7 +2160,7 @@ EXTERN_C const IID IID_IUPnPDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3D44D0D1-98C9-4889-ACD1-F9D674BF2221")
++    MIDL_INTERFACE("3D44D0D1-98C9-4889-ACD1-F9D674BF2221") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDevice : public IDispatch
+     {
+     public:
+@@ -2185,51 +2186,51 @@ EXTERN_C const IID IID_IUPnPDevice;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UniqueDeviceName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PresentationURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ManufacturerName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ManufacturerURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelNumber( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ModelURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UPC( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SerialNumber( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE IconURL( 
+             /* [annotation][in] */ 
+@@ -2241,7 +2242,7 @@ EXTERN_C const IID IID_IUPnPDevice;
+             /* [annotation][in] */ 
+             _In_  LONG lBitDepth,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrIconURL) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrIconURL) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Services( 
+             /* [annotation][retval][out] */ 
+@@ -2558,13 +2559,13 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccess;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E7772804-3287-418e-9072-CF2B47238981")
++    MIDL_INTERFACE("E7772804-3287-418e-9072-CF2B47238981") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDeviceDocumentAccess : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDocumentURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDocument) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDocument) = 0;
+         
+     };
+     
+@@ -2645,13 +2646,13 @@ EXTERN_C const IID IID_IUPnPDeviceDocumentAccessEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C4BC4050-6178-4BD1-A4B8-6398321F3247")
++    MIDL_INTERFACE("C4BC4050-6178-4BD1-A4B8-6398321F3247") _Windows_SupportedOS_Windows7_ 
+     IUPnPDeviceDocumentAccessEx : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetDocument( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDocument) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDocument) = 0;
+         
+     };
+     
+@@ -2732,7 +2733,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("11d1c1b2-7daa-4c9e-9595-7f82ed206d1e")
++    MIDL_INTERFACE("11d1c1b2-7daa-4c9e-9595-7f82ed206d1e") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDescriptionDocument : public IDispatch
+     {
+     public:
+@@ -2963,7 +2964,7 @@ EXTERN_C const IID IID_IUPnPDeviceFinderAddCallbackWithInterface;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("983dfc0b-1796-44df-8975-ca545b620ee5")
++    MIDL_INTERFACE("983dfc0b-1796-44df-8975-ca545b620ee5") _Windows_SupportedOS_WindowsVista_ 
+     IUPnPDeviceFinderAddCallbackWithInterface : public IUnknown
+     {
+     public:
+@@ -3058,7 +3059,7 @@ EXTERN_C const IID IID_IUPnPDescriptionDocumentCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("77394c69-5486-40d6-9bc3-4991983e02da")
++    MIDL_INTERFACE("77394c69-5486-40d6-9bc3-4991983e02da") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDescriptionDocumentCallback : public IUnknown
+     {
+     public:

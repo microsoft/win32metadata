@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
+index 9dbcd847e1..9c6ffdf283 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits1_5.h
+@@ -85,6 +85,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -98,21 +99,21 @@ extern RPC_IF_HANDLE __MIDL_itf_bits1_5_0000_0000_v0_0_s_ifspec;
+ /* interface IBackgroundCopyJob2 */
+ /* [object][helpstring][uuid] */ 
+ 
+-typedef struct _BG_JOB_REPLY_PROGRESS
++typedef struct   _BG_JOB_REPLY_PROGRESS
+     {
+     UINT64 BytesTotal;
+     UINT64 BytesTransferred;
+     } 	BG_JOB_REPLY_PROGRESS;
+ 
+ typedef 
+-enum BG_AUTH_TARGET
++enum   BG_AUTH_TARGET
+     {
+         BG_AUTH_TARGET_SERVER	= 1,
+         BG_AUTH_TARGET_PROXY	= ( BG_AUTH_TARGET_SERVER + 1 ) 
+     } 	BG_AUTH_TARGET;
+ 
+ typedef 
+-enum BG_AUTH_SCHEME
++enum   BG_AUTH_SCHEME
+     {
+         BG_AUTH_SCHEME_BASIC	= 1,
+         BG_AUTH_SCHEME_DIGEST	= ( BG_AUTH_SCHEME_BASIC + 1 ) ,
+@@ -149,8 +150,8 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54b50739-686f-45eb-9dff-d6a9a0faa9af")
+-    IBackgroundCopyJob2 : public IBackgroundCopyJob
++    MIDL_INTERFACE("54b50739-686f-45eb-9dff-d6a9a0faa9af") _Windows_SupportedOS_WindowsVista_ 
++      IBackgroundCopyJob2 : public IBackgroundCopyJob
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE SetNotifyCmdLine( 
+@@ -463,7 +464,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob2;
+         END_INTERFACE
+     } IBackgroundCopyJob2Vtbl;
+ 
+-    interface IBackgroundCopyJob2
++    interface _Windows_SupportedOS_WindowsVista_ IBackgroundCopyJob2
+     {
+         CONST_VTBL struct IBackgroundCopyJob2Vtbl *lpVtbl;
+     };

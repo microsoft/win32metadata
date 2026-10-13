@@ -1,0 +1,13 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
+index 9feefe6cbf..2d02352b74 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddstream.h
+@@ -528,6 +528,8 @@ extern RPC_IF_HANDLE __MIDL_itf_ddstream_0000_0002_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
+ #endif
+ 
+ 

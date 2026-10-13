@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
+index 66b7b85c33..cff53a5d70 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SubsMgr.h
+@@ -118,6 +118,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -141,7 +142,7 @@ extern RPC_IF_HANDLE __MIDL_itf_subsmgr_0000_0000_v0_0_s_ifspec;
+ 
+ typedef /* [unique] */  __RPC_unique_pointer IEnumItemProperties *LPENUMITEMPROPERTIES;
+ 
+-typedef struct _tagITEMPROP
++typedef struct  _tagITEMPROP
+     {
+     VARIANT variantValue;
+     LPWSTR pwszName;
+@@ -308,7 +309,7 @@ typedef /* [unique] */  __RPC_unique_pointer ISubscriptionItem *LPSUBSCRIPTIONIT
+ //  SUBSCRIPTIONITEMINFO flags                               
+ //  To specify that an item should only run on user idle     
+ //  use TASK_FLAG_START_ONLY_IF_IDLE                         
+-typedef struct tagSUBSCRIPTIONITEMINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  tagSUBSCRIPTIONITEMINFO
+     {
+     ULONG cbSize;
+     DWORD dwFlags;
+@@ -695,7 +696,7 @@ enum SUBSCRIPTIONSCHEDULE
+         SUBSSCHED_MANUAL	= 4
+     } 	SUBSCRIPTIONSCHEDULE;
+ 
+-typedef struct _tagSubscriptionInfo
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _tagSubscriptionInfo
+     {
+     DWORD cbSize;
+     DWORD fUpdateFlags;

@@ -1,0 +1,43 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dmdls.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dmdls.h
+index c04f9a9d2d..5cc0329d54 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dmdls.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dmdls.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /************************************************************************
+ *                                                                       *
+ *   dmdls.h -- DLS download definitions for DirectMusic API's           *
+@@ -34,7 +35,7 @@ typedef long            MUSIC_TIME;
+ typedef DWORD           FOURCC;         /* a four character code */
+ #endif
+ 
+-typedef struct _DMUS_DOWNLOADINFO
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DMUS_DOWNLOADINFO
+ {
+     DWORD dwDLType;                     /* Instrument or Wave */
+     DWORD dwDLId;                       /* Unique identifier to tag this download. */
+@@ -150,7 +151,7 @@ typedef struct _DMUS_ARTICULATION2          /* Articulation chunk for DMUS_DOWNL
+ #define DMUS_MIN_DATA_SIZE 4
+ /*  The actual number is determined by cbSize of struct _DMUS_EXTENSIONCHUNK */
+ 
+-typedef struct _DMUS_EXTENSIONCHUNK
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DMUS_EXTENSIONCHUNK
+ {
+     ULONG           cbSize;                      /*  Size of extension chunk  */
+     ULONG           ulNextExtCkIdx;              /*  If zero no more 3rd party entenstion chunks */
+@@ -160,13 +161,13 @@ typedef struct _DMUS_EXTENSIONCHUNK
+ 
+ /*  The actual number is determined by cbSize of struct _DMUS_COPYRIGHT */
+ 
+-typedef struct _DMUS_COPYRIGHT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DMUS_COPYRIGHT
+ {
+     ULONG           cbSize;                             /*  Size of copyright information */
+     BYTE            byCopyright[DMUS_MIN_DATA_SIZE];    /*  The actual number that follows is determined by cbSize */
+ } DMUS_COPYRIGHT;
+ 
+-typedef struct _DMUS_WAVEDATA
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DMUS_WAVEDATA
+ {
+     ULONG           cbSize;
+     BYTE            byData[DMUS_MIN_DATA_SIZE];

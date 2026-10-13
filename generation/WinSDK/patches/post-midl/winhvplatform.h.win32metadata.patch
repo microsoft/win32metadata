@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WinHvPlatform.h b/generation/WinSDK/RecompiledIdlHeaders/um/WinHvPlatform.h
+index ebcb80f474..1729aa63e5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WinHvPlatform.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WinHvPlatform.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -49,7 +50,7 @@ WHvGetCapability(
+ HRESULT
+ WINAPI
+ WHvCreatePartition(
+-    _Out_ WHV_PARTITION_HANDLE* Partition
++    _Win32_RAIIFree_(WHvDeletePartition, -1, 0) _Out_ WHV_PARTITION_HANDLE* Partition
+     );
+ 
+ HRESULT
+@@ -426,7 +427,7 @@ WHvAllocateVpciResource(
+     _In_ WHV_ALLOCATE_VPCI_RESOURCE_FLAGS Flags,
+     _In_reads_opt_(ResourceDescriptorSizeInBytes) const VOID* ResourceDescriptor,
+     _In_ UINT32 ResourceDescriptorSizeInBytes,
+-    _Out_ HANDLE* VpciResource
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* VpciResource
+     );
+ 
+ HRESULT
+@@ -569,7 +570,7 @@ WHvCreateTrigger(
+     _In_ WHV_PARTITION_HANDLE Partition,
+     _In_ const WHV_TRIGGER_PARAMETERS* Parameters,
+     _Out_ WHV_TRIGGER_HANDLE* TriggerHandle,
+-    _Out_ HANDLE* EventHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* EventHandle
+     );
+ 
+ HRESULT
+@@ -651,7 +652,7 @@ HRESULT
+ WINAPI
+ WHvStartPartitionMigration(
+     _In_ WHV_PARTITION_HANDLE Partition,
+-    _Out_ HANDLE* MigrationHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE* MigrationHandle
+     );
+ 
+ HRESULT
+@@ -668,7 +669,7 @@ HRESULT
+ WINAPI
+ WHvAcceptPartitionMigration(
+     _In_ HANDLE MigrationHandle,
+-    _Out_ WHV_PARTITION_HANDLE* Partition
++    _Win32_RAIIFree_(WHvDeletePartition, -1, 0) _Out_ WHV_PARTITION_HANDLE* Partition
+     );
+ 
+ #ifdef __cplusplus

@@ -1,0 +1,237 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
+index 5734a93b98..75948dad4f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winternl.h
+@@ -30,6 +30,7 @@
+ #ifndef _WINTERNL_
+ #define _WINTERNL_
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -55,7 +56,7 @@ typedef CONST char *PCSZ;
+ typedef struct _STRING {
+     USHORT Length;
+     USHORT MaximumLength;
+-    PCHAR Buffer;
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") PCHAR Buffer;
+ } STRING;
+ typedef STRING *PSTRING;
+ 
+@@ -235,8 +236,8 @@ typedef struct _IO_STATUS_BLOCK {
+ typedef
+ VOID
+ (NTAPI *PIO_APC_ROUTINE) (
+-    IN PVOID ApcContext,
+-    IN PIO_STATUS_BLOCK IoStatusBlock,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PVOID ApcContext,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PIO_STATUS_BLOCK IoStatusBlock,
+     IN ULONG Reserved
+     );
+ 
+@@ -620,7 +621,7 @@ NtWaitForSingleObject (
+ BOOLEAN
+ NTAPI
+ RtlIsNameLegalDOS8Dot3 (
+-    IN PUNICODE_STRING Name,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PUNICODE_STRING Name,
+     IN OUT POEM_STRING OemName OPTIONAL,
+     IN OUT PBOOLEAN NameContainsSpaces OPTIONAL
+     );
+@@ -629,7 +630,7 @@ RtlIsNameLegalDOS8Dot3 (
+ // This function might be needed for some of the internal Windows functions,
+ // defined in this header file.
+ //
+-_When_(Status < 0, _Out_range_(>, 0))
++_Windows_SupportedOS_WindowsXP_ _When_(Status < 0, _Out_range_(>, 0))
+ _When_(Status >= 0, _Out_range_(==, 0))
+ ULONG
+ NTAPI
+@@ -739,8 +740,8 @@ NtQueryTimerResolution (
+ NTSTATUS
+ NTAPI
+ RtlLocalTimeToSystemTime (
+-    IN PLARGE_INTEGER LocalTime,
+-    OUT PLARGE_INTEGER SystemTime
++    _WIN32META_ANNOTATION_("win32metadata:out") IN PLARGE_INTEGER LocalTime,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT PLARGE_INTEGER SystemTime
+     );
+ 
+ //
+@@ -752,88 +753,88 @@ RtlLocalTimeToSystemTime (
+ BOOLEAN
+ NTAPI
+ RtlTimeToSecondsSince1970 (
+-    PLARGE_INTEGER Time,
+-    PULONG ElapsedSeconds
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PLARGE_INTEGER Time,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG ElapsedSeconds
+     );
+ 
+ //
+ // These APIs might be need for some of the internal Windows functions,
+ // defined in this header file.
+ //
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeAnsiString (
+-    PANSI_STRING AnsiString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PANSI_STRING AnsiString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeUnicodeString (
+-    PUNICODE_STRING UnicodeString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING UnicodeString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlFreeOemString(
+-    POEM_STRING OemString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POEM_STRING OemString
+     );
+ 
+ VOID
+ NTAPI
+ RtlInitString (
+-    PSTRING DestinationString,
+-    PCSZ SourceString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSTRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCSZ SourceString
+     );
+ 
+ NTSTATUS
+ NTAPI
+ RtlInitStringEx (
+-    PSTRING DestinationString,
+-    PCSZ SourceString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PSTRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCSZ SourceString
+     );
+ 
+ VOID
+ NTAPI
+ RtlInitAnsiString (
+-    PANSI_STRING DestinationString,
+-    PCSZ SourceString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PANSI_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCSZ SourceString
+     );
+ 
+ NTSTATUS
+ NTAPI
+ RtlInitAnsiStringEx (
+-    PANSI_STRING DestinationString,
+-    PCSZ SourceString
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PANSI_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCSZ SourceString
+     );
+ 
+-VOID
++_Windows_SupportedOS_Windows2000_ VOID
+ NTAPI
+ RtlInitUnicodeString (
+-    PUNICODE_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING DestinationString,
+     PCWSTR SourceString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlAnsiStringToUnicodeString (
+-    PUNICODE_STRING DestinationString,
+-    PCANSI_STRING SourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCANSI_STRING SourceString,
+     BOOLEAN AllocateDestinationString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToAnsiString (
+-    PANSI_STRING DestinationString,
+-    PCUNICODE_STRING SourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PANSI_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCUNICODE_STRING SourceString,
+     BOOLEAN AllocateDestinationString
+     );
+ 
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeStringToOemString(
+-    POEM_STRING DestinationString,
+-    PCUNICODE_STRING SourceString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") POEM_STRING DestinationString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCUNICODE_STRING SourceString,
+     BOOLEAN AllocateDestinationString
+     );
+ 
+@@ -843,11 +844,11 @@ RtlUnicodeStringToOemString(
+ //     set CodePage to CP_ACP
+ //     set cbMultiByte to 0
+ //
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlUnicodeToMultiByteSize(
+     _Out_ PULONG BytesInMultiByteString,
+-    _In_reads_bytes_(BytesInUnicodeString) PWCH UnicodeString,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _In_reads_bytes_(BytesInUnicodeString) PWCH UnicodeString,
+     _In_ ULONG BytesInUnicodeString
+     );
+ 
+@@ -855,22 +856,22 @@ RtlUnicodeToMultiByteSize(
+ // Use the C runtime function instead
+ //     strtol
+ //
+-NTSTATUS
++_Windows_SupportedOS_Windows2000_ NTSTATUS
+ NTAPI
+ RtlCharToInteger (
+-    PCSZ String,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCSZ String,
+     ULONG Base,
+-    PULONG Value
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG Value
+     );
+ 
+ //
+ // use the Win32 API instead
+ //     ConvertSidToStringSid
+ //
+-NTSTATUS
++_Windows_SupportedOS_WindowsXP_ NTSTATUS
+ NTAPI
+ RtlConvertSidToUnicodeString (
+-    PUNICODE_STRING UnicodeString,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PUNICODE_STRING UnicodeString,
+     PSID Sid,
+     BOOLEAN AllocateDestinationString
+     );
+@@ -882,7 +883,7 @@ RtlConvertSidToUnicodeString (
+ ULONG
+ NTAPI
+ RtlUniform (
+-    PULONG Seed
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG Seed
+     );
+ 
+ 
+@@ -907,7 +908,7 @@ typedef struct _WINSTATIONINFORMATIONW {
+ // Using public api WTSQuerySessionInformation. Pass WTSSessionId as the WTSInfoClass parameter
+ //
+ typedef BOOLEAN (WINAPI * PWINSTATIONQUERYINFORMATIONW)(
+-    HANDLE, ULONG, WINSTATIONINFOCLASS, PVOID, ULONG, PULONG );
++    HANDLE, ULONG, WINSTATIONINFOCLASS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID, ULONG, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG );
+ 
+ //
+ // Generic test for success on any status value (non-negative numbers

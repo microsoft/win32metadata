@@ -1,0 +1,42 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmdxva.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmdxva.h
+index f26b2e48e5..b8895dbefa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmdxva.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmdxva.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __wmdxva_h__
+ #define __wmdxva_h__
++#include <win32metadata_annotations.h>
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -112,6 +113,8 @@ EXTERN_C const IID IID_IWMPlayerTimestampHook;
+     IWMPlayerTimestampHook : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE MapTimestamp( 
+             /* [annotation][in] */ 
+             _In_  REFERENCE_TIME rtIn,
+@@ -203,14 +206,20 @@ EXTERN_C const IID IID_IWMCodecAMVideoAccelerator;
+     IWMCodecAMVideoAccelerator : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE SetAcceleratorInterface( 
+             /* [annotation][in] */ 
+             _In_  IAMVideoAccelerator *pIAMVA) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE NegotiateConnection( 
+             /* [annotation][in] */ 
+             _In_  DMO_MEDIA_TYPE *pMediaType) = 0;
+         
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE SetPlayerNotify( 
+             /* [annotation][in] */ 
+             _In_  IWMPlayerTimestampHook *pHook) = 0;

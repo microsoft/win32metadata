@@ -1,0 +1,129 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
+index a480aab7e0..73c25c9882 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -645,7 +646,7 @@ EXTERN_C const IID IID_IWMPErrorItem;
+             /* [retval][out] */ BSTR *pbstrDescription) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_errorContext( 
+-            /* [retval][out] */ VARIANT *pvarContext) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarContext) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_remedy( 
+             /* [retval][out] */ long *plRemedy) = 0;
+@@ -4104,10 +4105,10 @@ EXTERN_C const IID IID_IWMPCore;
+             /* [in] */ BSTR bstrURL) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_openState( 
+-            /* [retval][out] */ WMPOpenState *pwmpos) = 0;
++            /* [retval][out] */ WMPOpenState *pwmpos) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_playState( 
+-            /* [retval][out] */ WMPPlayState *pwmpps) = 0;
++            /* [retval][out] */ WMPPlayState *pwmpps) = 0;
+         
+         virtual /* [helpstring][propget][id] */ HRESULT STDMETHODCALLTYPE get_controls( 
+             /* [retval][out] */ IWMPControls **ppControl) = 0;
+@@ -6923,17 +6924,17 @@ EXTERN_C const IID IID_IWMPRemoteMediaServices;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetServiceType( 
+-            /* [out] */ BSTR *pbstrType) = 0;
++            /* [out] */ BSTR *pbstrType) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetApplicationName( 
+-            /* [out] */ BSTR *pbstrName) = 0;
++            /* [out] */ BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetScriptableObject( 
+-            /* [out] */ BSTR *pbstrName,
++            /* [out] */ BSTR *pbstrName,
+             /* [out] */ IDispatch **ppDispatch) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCustomUIMode( 
+-            /* [out] */ BSTR *pbstrFile) = 0;
++            /* [out] */ BSTR *pbstrFile) = 0;
+         
+     };
+     
+@@ -7463,7 +7464,7 @@ EXTERN_C const IID IID_IWMPMedia3;
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+             /* [in] */ long lIndex,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+     };
+     
+@@ -9901,10 +9902,10 @@ EXTERN_C const IID IID_IWMPSyncDevice;
+             /* [retval][out] */ VARIANT_BOOL *pvbConnected) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_status( 
+-            /* [retval][out] */ WMPDeviceStatus *pwmpds) = 0;
++            /* [retval][out] */ WMPDeviceStatus *pwmpds) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_syncState( 
+-            /* [retval][out] */ WMPSyncState *pwmpss) = 0;
++            /* [retval][out] */ WMPSyncState *pwmpss) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_progress( 
+             /* [retval][out] */ long *plProgress) = 0;
+@@ -10386,7 +10387,7 @@ EXTERN_C const IID IID_IWMPCdromRip;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripState( 
+-            /* [retval][out] */ WMPRipState *pwmprs) = 0;
++            /* [retval][out] */ WMPRipState *pwmprs) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ripProgress( 
+             /* [retval][out] */ long *plProgress) = 0;
+@@ -10513,7 +10514,7 @@ EXTERN_C const IID IID_IWMPCdromBurn;
+             /* [in] */ BSTR bstrLabel) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnFormat( 
+-            /* [retval][out] */ WMPBurnFormat *pwmpbf) = 0;
++            /* [retval][out] */ WMPBurnFormat *pwmpbf) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_burnFormat( 
+             /* [in] */ WMPBurnFormat wmpbf) = 0;
+@@ -10527,7 +10528,7 @@ EXTERN_C const IID IID_IWMPCdromBurn;
+         virtual HRESULT STDMETHODCALLTYPE refreshStatus( void) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnState( 
+-            /* [retval][out] */ WMPBurnState *pwmpbs) = 0;
++            /* [retval][out] */ WMPBurnState *pwmpbs) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_burnProgress( 
+             /* [retval][out] */ long *plProgress) = 0;
+@@ -11206,7 +11207,7 @@ EXTERN_C const IID IID_IWMPStringCollection2;
+             /* [in] */ BSTR bstrType,
+             /* [in] */ BSTR bstrLanguage,
+             /* [in] */ long lAttributeIndex,
+-            /* [retval][out] */ VARIANT *pvarValue) = 0;
++            /* [retval][out] */ _WIN32META_ANNOTATION_("win32metadata:in") VARIANT *pvarValue) = 0;
+         
+     };
+     
+@@ -11418,7 +11419,7 @@ EXTERN_C const IID IID_IWMPLibrary;
+             /* [retval][out] */ BSTR *pbstrName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_type( 
+-            /* [retval][out] */ WMPLibraryType *pwmplt) = 0;
++            /* [retval][out] */ WMPLibraryType *pwmplt) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_mediaCollection( 
+             /* [retval][out] */ IWMPMediaCollection **ppIWMPMediaCollection) = 0;
+@@ -11769,7 +11770,7 @@ EXTERN_C const IID IID_IWMPFolderMonitorServices;
+             /* [in] */ long lIndex) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_scanState( 
+-            /* [retval][out] */ WMPFolderScanState *pwmpfss) = 0;
++            /* [retval][out] */ WMPFolderScanState *pwmpfss) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_currentFolder( 
+             /* [retval][out] */ BSTR *pbstrFolder) = 0;

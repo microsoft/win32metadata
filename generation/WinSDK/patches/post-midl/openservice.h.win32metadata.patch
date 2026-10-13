@@ -1,0 +1,143 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
+index b0ffeb0f3e..e420bec4bd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/openservice.h
+@@ -160,6 +160,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef 
+@@ -198,7 +199,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("75cb4db9-6da0-4da3-83ce-422b6a433346")
+-    IOpenServiceActivityInput : public IUnknown
++     IOpenServiceActivityInput : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetVariable( 
+@@ -207,7 +208,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
+             /* [annotation][unique][in] */ 
+             _In_  LPCWSTR pwzVariableType,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrVariableContent) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrVariableContent) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE HasVariable( 
+             /* [annotation][in] */ 
+@@ -327,7 +328,7 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e289deab-f709-49a9-b99e-282364074571")
+-    IOpenServiceActivityOutputContext : public IUnknown
++     IOpenServiceActivityOutputContext : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Navigate( 
+@@ -470,7 +471,7 @@ EXTERN_C const IID IID_IOpenService;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetID( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrID) = 0;
+         
+     };
+     
+@@ -767,45 +768,45 @@ EXTERN_C const IID IID_IOpenServiceActivity;
+             /* [annotation][in] */ 
+             _In_  IOpenServiceActivityInput *pInput,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrStatusText) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrStatusText) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetHomepageUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrHomepageUrl) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrHomepageUrl) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDisplayName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDisplayName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDisplayName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescription( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrDescription) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrDescription) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCategoryName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrCategoryName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrCategoryName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIconPath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrIconPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrIconPath) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIcon( 
+             /* [annotation][in] */ 
+             _In_  BOOL fSmallIcon,
+             /* [annotation][out] */ 
+-            _Out_  HICON *phIcon) = 0;
++            _Win32_RAIIFree_(DestroyIcon, -1, 0) _Out_  HICON *phIcon) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDescriptionFilePath( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrXmlPath) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrXmlPath) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDownloadUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrXmlUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrXmlUri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInstallUrl( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrInstallUri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrInstallUri) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsEnabled( 
+             /* [annotation][out] */ 
+@@ -1249,7 +1250,7 @@ EXTERN_C const IID IID_IOpenServiceActivityCategory;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrName) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetActivityEnumerator( 
+             /* [annotation][in] */ 
+@@ -1660,10 +1661,10 @@ unsigned char * __RPC_USER  BSTR_UserMarshal(  __RPC__in unsigned long *, __RPC_
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+ void                      __RPC_USER  BSTR_UserFree(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 
+@@ -1675,10 +1676,10 @@ unsigned char * __RPC_USER  BSTR_UserMarshal64(  __RPC__in unsigned long *, __RP
+ unsigned char * __RPC_USER  BSTR_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out BSTR * ); 
+ void                      __RPC_USER  BSTR_UserFree64(     __RPC__in unsigned long *, __RPC__in BSTR * ); 
+ 
+-unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
+-unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HICON * ); 
+-void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HICON_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned char * __RPC_USER  HICON_UserUnmarshal64(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, _Win32_RAIIFree_(DestroyIcon, -1, 0) __RPC__out HICON * ); 
++_Win32_ImportLibrary_("ole32.dll") void                      __RPC_USER  HICON_UserFree64(     __RPC__in unsigned long *, __RPC__in HICON * ); 
+ 
+ unsigned long             __RPC_USER  HWND_UserSize64(     __RPC__in unsigned long *, unsigned long            , __RPC__in HWND * ); 
+ unsigned char * __RPC_USER  HWND_UserMarshal64(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HWND * ); 

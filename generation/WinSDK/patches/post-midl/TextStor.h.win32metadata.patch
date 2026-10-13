@@ -1,0 +1,229 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h b/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
+index 86464299b5..fc05e2bce7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/TextStor.h
+@@ -101,6 +101,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+@@ -183,13 +184,13 @@ DEFINE_GUID (GUID_TS_SERVICE_ACTIVEX,    0xea937a50, 0xc9a6, 0x4b7d, 0x89, 0x4a,
+ 
+ #define	TS_IAS_QUERYONLY	( 0x2 )
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("fec4f516-c503-45b1-a5fd-7a3d8ab07049") struct TS_STATUS
++typedef /* [uuid] */  DECLSPEC_UUID("fec4f516-c503-45b1-a5fd-7a3d8ab07049") struct   TS_STATUS
+     {
+     DWORD dwDynamicFlags;
+     DWORD dwStaticFlags;
+     } 	TS_STATUS;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("f3181bd6-bcf0-41d3-a81c-474b17ec38fb") struct TS_TEXTCHANGE
++typedef /* [uuid] */  DECLSPEC_UUID("f3181bd6-bcf0-41d3-a81c-474b17ec38fb") struct   TS_TEXTCHANGE
+     {
+     LONG acpStart;
+     LONG acpOldEnd;
+@@ -204,20 +205,20 @@ enum __MIDL___MIDL_itf_textstor_0000_0000_0001
+         TS_AE_END	= 2
+     } 	TsActiveSelEnd;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("7ecc3ffa-8f73-4d91-98ed-76f8ac5b1600") struct TS_SELECTIONSTYLE
++typedef /* [uuid] */  DECLSPEC_UUID("7ecc3ffa-8f73-4d91-98ed-76f8ac5b1600") struct   TS_SELECTIONSTYLE
+     {
+     TsActiveSelEnd ase;
+     BOOL fInterimChar;
+     } 	TS_SELECTIONSTYLE;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("c4b9c33b-8a0d-4426-bebe-d444a4701fe9") struct TS_SELECTION_ACP
++typedef /* [uuid] */  DECLSPEC_UUID("c4b9c33b-8a0d-4426-bebe-d444a4701fe9") struct   TS_SELECTION_ACP
+     {
+     LONG acpStart;
+     LONG acpEnd;
+     TS_SELECTIONSTYLE style;
+     } 	TS_SELECTION_ACP;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") struct TS_SELECTION_ANCHOR
++typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") struct   TS_SELECTION_ANCHOR
+     {
+     IAnchor *paStart;
+     IAnchor *paEnd;
+@@ -238,7 +239,7 @@ typedef /* [uuid] */  DECLSPEC_UUID("b03413d2-0723-4c4e-9e08-2e9c1ff3772b") stru
+ 
+ typedef /* [uuid] */  DECLSPEC_UUID("ef3457d9-8446-49a7-a9e6-b50d9d5f3fd9") GUID TS_ATTRID;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("2cc2b33f-1174-4507-b8d9-5bc0eb37c197") struct TS_ATTRVAL
++typedef /* [uuid] */  DECLSPEC_UUID("2cc2b33f-1174-4507-b8d9-5bc0eb37c197") struct   TS_ATTRVAL
+     {
+     TS_ATTRID idAttr;
+     DWORD dwOverlapId;
+@@ -277,7 +278,7 @@ enum __MIDL___MIDL_itf_textstor_0000_0000_0003
+         TS_RT_OPAQUE	= ( TS_RT_HIDDEN + 1 ) 
+     } 	TsRunType;
+ 
+-typedef /* [uuid] */  DECLSPEC_UUID("a6231949-37c5-4b74-a24e-2a26c327201d") struct TS_RUNINFO
++typedef /* [uuid] */  DECLSPEC_UUID("a6231949-37c5-4b74-a24e-2a26c327201d") struct   TS_RUNINFO
+     {
+     ULONG uCount;
+     TsRunType type;
+@@ -303,7 +304,7 @@ EXTERN_C const IID IID_ITextStoreACP;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d")
++    MIDL_INTERFACE("28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d") _Windows_SupportedOS_Windows2000_ 
+     ITextStoreACP : public IUnknown
+     {
+     public:
+@@ -1007,7 +1008,7 @@ EXTERN_C const IID IID_ITextStoreACP2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f")
++    MIDL_INTERFACE("f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f") _Windows_SupportedOS_Windows8_ 
+     ITextStoreACP2 : public IUnknown
+     {
+     public:
+@@ -1682,13 +1683,13 @@ EXTERN_C const IID IID_ITextStoreACPSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("22d44c94-a419-4542-a272-ae26093ececf")
++    MIDL_INTERFACE("22d44c94-a419-4542-a272-ae26093ececf") _Windows_SupportedOS_Windows2000_ 
+     ITextStoreACPSink : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnTextChange( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(TEXT_STORE_TEXT_CHANGE_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][in] */ 
+             _In_  const TS_TEXTCHANGE *pChange) = 0;
+         
+@@ -1716,7 +1717,7 @@ EXTERN_C const IID IID_ITextStoreACPSink;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnLockGranted( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwLockFlags) = 0;
++            _Win32_AssociatedEnum_(TEXT_STORE_LOCK_FLAGS) _In_  DWORD dwLockFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnStartEditTransaction( void) = 0;
+         
+@@ -1894,7 +1895,7 @@ EXTERN_C const IID IID_IAnchor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0feb7e34-5a60-4356-8ef7-abdec2ff7cf8")
++    MIDL_INTERFACE("0feb7e34-5a60-4356-8ef7-abdec2ff7cf8") _Windows_SupportedOS_Windows2000_ 
+     IAnchor : public IUnknown
+     {
+     public:
+@@ -1946,7 +1947,7 @@ EXTERN_C const IID IID_IAnchor;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetChangeHistory( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwHistory) = 0;
++            _Win32_AssociatedEnum_(ANCHOR_CHANGE_HISTORY_FLAGS) _Out_  DWORD *pdwHistory) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ClearChangeHistory( void) = 0;
+         
+@@ -2139,7 +2140,7 @@ EXTERN_C const IID IID_ITextStoreAnchor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9b2077b0-5f18-4dec-bee9-3cc722f5dfe0")
++    MIDL_INTERFACE("9b2077b0-5f18-4dec-bee9-3cc722f5dfe0") _Windows_SupportedOS_Windows2000_ 
+     ITextStoreAnchor : public IUnknown
+     {
+     public:
+@@ -2820,13 +2821,13 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aa80e905-2021-11d2-93e0-0060b067b86e")
++    MIDL_INTERFACE("aa80e905-2021-11d2-93e0-0060b067b86e") _Windows_SupportedOS_Windows2000_ 
+     ITextStoreAnchorSink : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnTextChange( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwFlags,
++            _Win32_AssociatedEnum_(TEXT_STORE_CHANGE_FLAGS) _In_  DWORD dwFlags,
+             /* [annotation][in] */ 
+             _In_  IAnchor *paStart,
+             /* [annotation][in] */ 
+@@ -2856,7 +2857,7 @@ EXTERN_C const IID IID_ITextStoreAnchorSink;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnLockGranted( 
+             /* [annotation][in] */ 
+-            _In_  DWORD dwLockFlags) = 0;
++            _Win32_AssociatedEnum_(TEXT_STORE_LOCK_FLAGS) _In_  DWORD dwLockFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE OnStartEditTransaction( void) = 0;
+         
+@@ -3047,6 +3048,63 @@ void                      __RPC_USER  VARIANT_UserFree64(     __RPC__in unsigned
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("TS_ST_NONE")
++#undef TS_ST_NONE
++#pragma push_macro("TS_ST_CORRECTION")
++#undef TS_ST_CORRECTION
++enum [[clang::flag_enum]] TEXT_STORE_TEXT_CHANGE_FLAGS : unsigned int
++{
++    TS_ST_NONE = 0U,
++    TS_ST_CORRECTION = 1U,
++};
++#pragma pop_macro("TS_ST_CORRECTION")
++#pragma pop_macro("TS_ST_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TS_TC_NONE")
++#undef TS_TC_NONE
++#pragma push_macro("TS_TC_CORRECTION")
++#undef TS_TC_CORRECTION
++enum [[clang::flag_enum]] TEXT_STORE_CHANGE_FLAGS : unsigned int
++{
++    TS_TC_NONE = 0U,
++    TS_TC_CORRECTION = 1U,
++};
++#pragma pop_macro("TS_TC_CORRECTION")
++#pragma pop_macro("TS_TC_NONE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TS_CH_PRECEDING_DEL")
++#undef TS_CH_PRECEDING_DEL
++#pragma push_macro("TS_CH_FOLLOWING_DEL")
++#undef TS_CH_FOLLOWING_DEL
++enum [[clang::flag_enum]] ANCHOR_CHANGE_HISTORY_FLAGS : unsigned int
++{
++    TS_CH_PRECEDING_DEL = 1U,
++    TS_CH_FOLLOWING_DEL = 2U,
++};
++#pragma pop_macro("TS_CH_FOLLOWING_DEL")
++#pragma pop_macro("TS_CH_PRECEDING_DEL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("TS_LF_READ")
++#undef TS_LF_READ
++#pragma push_macro("TS_LF_READWRITE")
++#undef TS_LF_READWRITE
++enum TEXT_STORE_LOCK_FLAGS : unsigned int
++{
++    TS_LF_READ = 2U,
++    TS_LF_READWRITE = 6U,
++};
++#pragma pop_macro("TS_LF_READWRITE")
++#pragma pop_macro("TS_LF_READ")
++#endif
++
+ #endif
+ 
+ 

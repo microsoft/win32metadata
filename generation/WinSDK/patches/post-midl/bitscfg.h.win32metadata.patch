@@ -1,0 +1,61 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
+index fd4af30f67..235be1c647 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bitscfg.h
+@@ -87,6 +87,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -105,8 +106,8 @@ EXTERN_C const IID IID_IBITSExtensionSetup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3")
+-    IBITSExtensionSetup : public IDispatch
++    MIDL_INTERFACE("29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3") _Windows_SupportedOS_WindowsVista_ 
++      IBITSExtensionSetup : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE EnableBITSUploads( void) = 0;
+@@ -115,7 +116,7 @@ EXTERN_C const IID IID_IBITSExtensionSetup;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCleanupTaskName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pTaskName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pTaskName) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetCleanupTask( 
+             /* [annotation][in] */ 
+@@ -222,7 +223,7 @@ EXTERN_C const IID IID_IBITSExtensionSetup;
+         END_INTERFACE
+     } IBITSExtensionSetupVtbl;
+ 
+-    interface IBITSExtensionSetup
++    interface _Windows_SupportedOS_WindowsVista_ IBITSExtensionSetup
+     {
+         CONST_VTBL struct IBITSExtensionSetupVtbl *lpVtbl;
+     };
+@@ -289,8 +290,8 @@ EXTERN_C const IID IID_IBITSExtensionSetupFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d5d2d542-5503-4e64-8b48-72ef91a32ee1")
+-    IBITSExtensionSetupFactory : public IDispatch
++    MIDL_INTERFACE("d5d2d542-5503-4e64-8b48-72ef91a32ee1") _Windows_SupportedOS_WindowsVista_ 
++      IBITSExtensionSetupFactory : public IDispatch
+     {
+     public:
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE GetObject( 
+@@ -382,7 +383,7 @@ EXTERN_C const IID IID_IBITSExtensionSetupFactory;
+         END_INTERFACE
+     } IBITSExtensionSetupFactoryVtbl;
+ 
+-    interface IBITSExtensionSetupFactory
++    interface _Windows_SupportedOS_WindowsVista_ IBITSExtensionSetupFactory
+     {
+         CONST_VTBL struct IBITSExtensionSetupFactoryVtbl *lpVtbl;
+     };

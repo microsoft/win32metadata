@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h b/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
+index 6222321bf1..04a0fb5e3a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/dcomptypes.h
+@@ -7,6 +7,7 @@
+ #include <dxgitype.h>   // for DXGI_RATIONAL
+ #include <dxgi1_5.h>    // for DXGI_ALPHA_MODE, DXGI_HDR_METADATA_TYPE
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ 
+ #pragma region Desktop Family
+@@ -19,7 +20,7 @@
+ // DirectComposition types
+ //
+ 
+-enum DCOMPOSITION_BITMAP_INTERPOLATION_MODE
++enum   DCOMPOSITION_BITMAP_INTERPOLATION_MODE
+ {
+     DCOMPOSITION_BITMAP_INTERPOLATION_MODE_NEAREST_NEIGHBOR = 0,
+     DCOMPOSITION_BITMAP_INTERPOLATION_MODE_LINEAR           = 1,
+@@ -27,7 +28,7 @@ enum DCOMPOSITION_BITMAP_INTERPOLATION_MODE
+     DCOMPOSITION_BITMAP_INTERPOLATION_MODE_INHERIT          = 0xffffffff
+ };
+ 
+-enum DCOMPOSITION_BORDER_MODE
++enum   DCOMPOSITION_BORDER_MODE
+ {
+     DCOMPOSITION_BORDER_MODE_SOFT       = 0,
+     DCOMPOSITION_BORDER_MODE_HARD       = 1,
+@@ -35,7 +36,7 @@ enum DCOMPOSITION_BORDER_MODE
+     DCOMPOSITION_BORDER_MODE_INHERIT    = 0xffffffff
+ };
+ 
+-enum DCOMPOSITION_COMPOSITE_MODE
++enum   DCOMPOSITION_COMPOSITE_MODE
+ {
+     DCOMPOSITION_COMPOSITE_MODE_SOURCE_OVER        = 0,
+     DCOMPOSITION_COMPOSITE_MODE_DESTINATION_INVERT = 1,
+@@ -47,7 +48,7 @@ enum DCOMPOSITION_COMPOSITE_MODE
+ };
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+-enum DCOMPOSITION_BACKFACE_VISIBILITY
++enum  DCOMPOSITION_BACKFACE_VISIBILITY
+ {
+     DCOMPOSITION_BACKFACE_VISIBILITY_VISIBLE    = 0,
+     DCOMPOSITION_BACKFACE_VISIBILITY_HIDDEN     = 1,

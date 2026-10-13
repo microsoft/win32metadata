@@ -1,0 +1,56 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/activprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/activprof.h
+index 965326a923..16bc4eaa9a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/activprof.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/activprof.h
+@@ -172,7 +172,11 @@ enum __MIDL___MIDL_itf_activprof_0000_0000_0001
+     } 	PROFILER_SCRIPT_TYPE;
+ 
+ typedef /* [public] */ 
+-enum __MIDL___MIDL_itf_activprof_0000_0000_0002
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_activprof_0000_0000_0002
+     {
+         PROFILER_EVENT_MASK_TRACE_SCRIPT_FUNCTION_CALL	= 0x1,
+         PROFILER_EVENT_MASK_TRACE_NATIVE_FUNCTION_CALL	= 0x2,
+@@ -443,7 +447,11 @@ typedef UINT PROFILER_HEAP_OBJECT_NAME_ID;
+ typedef void *PROFILER_EXTERNAL_OBJECT_ADDRESS;
+ 
+ typedef /* [public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_activprof_0000_0002_0001
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_activprof_0000_0002_0001
+     {
+         PROFILER_HEAP_OBJECT_FLAGS_NEW_OBJECT	= 0x1,
+         PROFILER_HEAP_OBJECT_FLAGS_IS_ROOT	= 0x2,
+@@ -480,7 +488,11 @@ enum __MIDL___MIDL_itf_activprof_0000_0002_0002
+     } 	PROFILER_HEAP_OBJECT_OPTIONAL_INFO_TYPE;
+ 
+ typedef /* [public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_activprof_0000_0002_0003
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_activprof_0000_0002_0003
+     {
+         PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_NONE	= 0,
+         PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS_IS_GET_ACCESSOR	= 0x10000,
+@@ -490,7 +502,11 @@ enum __MIDL___MIDL_itf_activprof_0000_0002_0003
+     } 	PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS;
+ 
+ typedef /* [public][public][v1_enum] */ 
+-enum __MIDL___MIDL_itf_activprof_0000_0002_0004
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL___MIDL_itf_activprof_0000_0002_0004
+     {
+         PROFILER_HEAP_ENUM_FLAGS_NONE	= 0,
+         PROFILER_HEAP_ENUM_FLAGS_STORE_RELATIONSHIP_FLAGS	= 0x1,

@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/cspdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/cspdk.h
+index e1038b311c..a3678eaf5b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/cspdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/cspdk.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (C) Microsoft Corporation, 2000
+@@ -52,12 +53,12 @@ typedef struct _OFFLOAD_PRIVATE_KEY
+ #define CUR_OFFLOAD_VERSION             1
+ 
+ typedef BOOL (WINAPI *PFN_OFFLOAD_MOD_EXPO)(
+-    IN              PBYTE pbBase,
+-    IN              PBYTE pbExponent,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PBYTE pbBase,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PBYTE pbExponent,
+     IN              DWORD cbExponent,
+-    IN              PBYTE pbModulus,
++    _WIN32META_ANNOTATION_("win32metadata:out") IN              PBYTE pbModulus,
+     IN              DWORD cbModulus,
+-    OUT             PBYTE pbResult,
++    _WIN32META_ANNOTATION_("win32metadata:in") OUT             PBYTE pbResult,
+     IN  OPTIONAL    PVOID pvOffloadPrivateKey,
+     IN              DWORD dwFlags);
+ 
+@@ -67,7 +68,7 @@ typedef BOOL (WINAPI *PFN_OFFLOAD_MOD_EXPO)(
+ 
+ typedef BOOL (WINAPI *CRYPT_VERIFY_IMAGE_A)(LPCSTR  szImage, CONST BYTE *pbSigData);
+ typedef BOOL (WINAPI *CRYPT_VERIFY_IMAGE_W)(LPCWSTR szImage, CONST BYTE *pbSigData);
+-typedef void (WINAPI *CRYPT_RETURN_HWND)(HWND *phWnd);
++typedef void (WINAPI *CRYPT_RETURN_HWND)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HWND *phWnd);
+ 
+ 
+ //

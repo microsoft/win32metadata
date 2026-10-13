@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IntShCut.h b/generation/WinSDK/RecompiledIdlHeaders/um/IntShCut.h
+index dc03a104f4..40f9063da2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IntShCut.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IntShCut.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ /*
+  * intshcut.h - Internet Shortcut interface definitions.
+@@ -241,7 +242,7 @@ DECLARE_INTERFACE_IID_(IUniformResourceLocatorA, IUnknown, "fbf23b80-e3f0-101b-8
+                      _Outptr_ LPSTR *ppszURL) PURE;
+ 
+    STDMETHOD(InvokeCommand)(THIS_
+-                            PURLINVOKECOMMANDINFOA purlici) PURE;
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PURLINVOKECOMMANDINFOA purlici) PURE;
+ };
+ 
+ #undef  INTERFACE
+@@ -264,7 +265,7 @@ DECLARE_INTERFACE_IID_(IUniformResourceLocatorW, IUnknown, "cabb0da0-da57-11cf-9
+                      _Outptr_ LPWSTR *ppszURL) PURE;
+ 
+    STDMETHOD(InvokeCommand)(THIS_
+-                            PURLINVOKECOMMANDINFOW purlici) PURE;
++                            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PURLINVOKECOMMANDINFOW purlici) PURE;
+ };
+ 
+ #ifdef UNICODE

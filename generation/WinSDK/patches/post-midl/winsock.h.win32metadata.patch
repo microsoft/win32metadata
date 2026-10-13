@@ -1,0 +1,376 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h b/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
+index e3bee0acd0..08aa832d7e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winsock.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ 
+@@ -48,7 +49,7 @@ typedef unsigned long   u_long;
+  * instances which refer to sockets.
+  */
+ 
+-typedef UINT_PTR        SOCKET;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=closesocket") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") typedef UINT_PTR        SOCKET;
+ 
+ /*
+  * Select uses arrays of SOCKETs.  These macros manipulate such
+@@ -71,7 +72,7 @@ typedef struct fd_set {
+ extern "C" {
+ #endif
+ 
+-extern int PASCAL FAR __WSAFDIsSet(SOCKET, fd_set FAR *);
++extern int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") __WSAFDIsSet(SOCKET, fd_set FAR *);
+ 
+ #ifdef __cplusplus
+ }
+@@ -736,68 +737,68 @@ struct  linger {
+ extern "C" {
+ #endif
+ 
+-SOCKET PASCAL FAR accept (
++SOCKET PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ accept (
+                           _In_ SOCKET s,
+                           _Out_writes_bytes_opt_(*addrlen) struct sockaddr FAR *addr,
+                           _Inout_opt_ int FAR *addrlen);
+ 
+-int PASCAL FAR bind (
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ bind (
+                      _In_ SOCKET s,
+                      _In_reads_bytes_(namelen) const struct sockaddr FAR *addr,
+                      _In_ int namelen);
+ 
+-int PASCAL FAR closesocket ( IN SOCKET s);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR closesocket ( IN SOCKET s);
+ 
+-int PASCAL FAR connect (
++int PASCAL FAR _Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ connect (
+                         _In_ SOCKET s,
+                         _In_reads_bytes_(namelen) const struct sockaddr FAR *name,
+                         _In_ int namelen);
+ 
+-int PASCAL FAR ioctlsocket (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR ioctlsocket (
+                             _In_ SOCKET s,
+                             _In_ long cmd,
+                             _Inout_ u_long FAR *argp);
+ 
+-int PASCAL FAR getpeername (
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getpeername (
+                             _In_ SOCKET s,
+                             _Out_writes_bytes_to_(*namelen, *namelen) struct sockaddr FAR *name,
+                             _Inout_ int FAR * namelen);
+ 
+-int PASCAL FAR getsockname (
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getsockname (
+                             _In_ SOCKET s,
+                             _Out_writes_bytes_to_(*namelen, *namelen) struct sockaddr FAR *name,
+                             _Inout_ int FAR * namelen);
+ 
+-int PASCAL FAR getsockopt (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR getsockopt (
+                            _In_ SOCKET s,
+                            _In_ int level,
+                            _In_ int optname,
+                            _Out_writes_bytes_(*optlen) char FAR * optval,
+                            _Inout_ int FAR *optlen);
+ 
+-u_long PASCAL FAR htonl ( _In_ u_long hostlong);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") u_long PASCAL FAR htonl ( _In_ u_long hostlong);
+ 
+-u_short PASCAL FAR htons (_In_ u_short hostshort);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") u_short PASCAL FAR htons (_In_ u_short hostshort);
+ 
+-unsigned long PASCAL FAR inet_addr (_In_z_ const char FAR * cp);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") unsigned long PASCAL FAR inet_addr (_In_z_ const char FAR * cp);
+ 
+-char FAR * PASCAL FAR inet_ntoa (_In_ struct in_addr in);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") char FAR * PASCAL FAR inet_ntoa (_In_ struct in_addr in);
+ 
+-int PASCAL FAR listen (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR listen (
+                        _In_ SOCKET s,
+                        _In_ int backlog);
+ 
+-u_long PASCAL FAR ntohl (_In_ u_long netlong);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") u_long PASCAL FAR ntohl (_In_ u_long netlong);
+ 
+-u_short PASCAL FAR ntohs (_In_ u_short netshort);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") u_short PASCAL FAR ntohs (_In_ u_short netshort);
+ 
+-int PASCAL FAR recv (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR recv (
+                      _In_ SOCKET s,
+                      _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
+                      _In_ int len,
+-                     _In_ int flags);
++                     _Win32_AssociatedEnum_(SEND_RECV_FLAGS) _In_ int flags);
+ 
+-int PASCAL FAR recvfrom (
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ recvfrom (
+                          _In_ SOCKET s,
+                          _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
+                          _In_ int len,
+@@ -805,20 +806,20 @@ int PASCAL FAR recvfrom (
+                          _Out_writes_bytes_to_opt_(*fromlen, *fromlen) struct sockaddr FAR * from,
+                          _Inout_opt_ int FAR * fromlen);
+ 
+-int PASCAL FAR select (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR select (
+                         _In_ int nfds,
+                         _Inout_opt_ fd_set FAR *readfds,
+                         _Inout_opt_ fd_set FAR *writefds,
+                         _Inout_opt_ fd_set FAR *exceptfds,
+                         _In_opt_  const struct timeval FAR *timeout);
+ 
+-int PASCAL FAR send (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR send (
+                      _In_ SOCKET s,
+                      _In_reads_bytes_(len) const char FAR * buf,
+                      _In_ int len,
+-                     _In_ int flags);
++                     _Win32_AssociatedEnum_(SEND_RECV_FLAGS) _In_ int flags);
+ 
+-int PASCAL FAR sendto (
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ sendto (
+                        _In_ SOCKET s,
+                        _In_reads_bytes_(len) const char FAR * buf,
+                        _In_ int len,
+@@ -826,68 +827,68 @@ int PASCAL FAR sendto (
+                        _In_reads_bytes_opt_(tolen) const struct sockaddr FAR *to,
+                        _In_ int tolen);
+ 
+-int PASCAL FAR setsockopt (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR setsockopt (
+                            _In_ SOCKET s,
+                            _In_ int level,
+                            _In_ int optname,
+                            _In_reads_bytes_opt_(optlen) const char FAR * optval,
+                            _In_ int optlen);
+ 
+-int PASCAL FAR shutdown (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR shutdown (
+                          _In_ SOCKET s,
+-                         _In_ int how);
++                         _Win32_AssociatedEnum_(WINSOCK_SHUTDOWN_HOW) _In_ int how);
+ 
+-SOCKET PASCAL FAR socket (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(closesocket, -1) SOCKET PASCAL FAR socket (
+                           _In_ int af,
+-                          _In_ int type,
++                          _Win32_AssociatedEnum_(WINSOCK_SOCKET_TYPE) _In_ int type,
+                           _In_ int protocol);
+ 
+ /* Database function prototypes */
+ 
+-struct hostent FAR * PASCAL FAR gethostbyaddr(
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") struct hostent FAR * PASCAL FAR gethostbyaddr(
+                                               _In_reads_bytes_(len) const char FAR * addr,
+                                               _In_ int len,
+                                               _In_ int type);
+ 
+-struct hostent FAR * PASCAL FAR gethostbyname(_In_z_ const char FAR * name);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") struct hostent FAR * PASCAL FAR gethostbyname(_In_z_ const char FAR * name);
+ 
+-int PASCAL FAR gethostname (
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR gethostname (
+                             _Out_writes_bytes_to_(namelen, return) char FAR * name,
+                             _In_ int namelen);
+ 
+-struct servent FAR * PASCAL FAR getservbyport(
++struct servent FAR * PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getservbyport(
+                                               _In_ int port,
+                                               _In_z_ const char FAR * proto);
+ 
+-struct servent FAR * PASCAL FAR getservbyname(
++struct servent FAR * PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getservbyname(
+                                               _In_z_ const char FAR * name,
+                                               _In_z_ const char FAR * proto);
+ 
+-struct protoent FAR * PASCAL FAR getprotobynumber(_In_ int proto);
++struct protoent FAR * PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ getprotobynumber(_In_ int proto);
+ 
+-struct protoent FAR * PASCAL FAR getprotobyname(_In_z_ const char FAR * name);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") struct protoent FAR * PASCAL FAR getprotobyname(_In_z_ const char FAR * name);
+ 
+ /* Microsoft Windows Extension function prototypes */
+ 
+-int PASCAL FAR WSAStartup(
++int PASCAL FAR _Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAStartup(
+                           _In_ WORD wVersionRequired,
+                           _Out_ LPWSADATA lpWSAData);
+ 
+-int PASCAL FAR WSACleanup(void);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR WSACleanup(void);
+ 
+-void PASCAL FAR WSASetLastError(_In_ int iError);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") void PASCAL FAR WSASetLastError(_In_ int iError);
+ 
+-int PASCAL FAR WSAGetLastError(void);
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_AssociatedEnum_(WSA_ERROR) int PASCAL FAR WSAGetLastError(void);
+ 
+-BOOL PASCAL FAR WSAIsBlocking(void);
++_Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") BOOL PASCAL FAR WSAIsBlocking(void);
+ 
+-int PASCAL FAR WSAUnhookBlockingHook(void);
++_Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR WSAUnhookBlockingHook(void);
+ 
+-FARPROC PASCAL FAR WSASetBlockingHook(_In_ FARPROC lpBlockFunc);
++_Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") FARPROC PASCAL FAR WSASetBlockingHook(_In_ FARPROC lpBlockFunc);
+ 
+-int PASCAL FAR WSACancelBlockingCall(void);
++_Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR WSACancelBlockingCall(void);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetServByName(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE PASCAL FAR WSAAsyncGetServByName(
+                                         _In_ HWND hWnd,
+                                         _In_ u_int wMsg,
+                                         _In_z_ const char FAR * name,
+@@ -895,7 +896,7 @@ HANDLE PASCAL FAR WSAAsyncGetServByName(
+                                         _Out_writes_bytes_(buflen) char FAR * buf,
+                                         _In_ int buflen);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetServByPort(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE PASCAL FAR WSAAsyncGetServByPort(
+                                         _In_ HWND hWnd,
+                                         _In_ u_int wMsg,
+                                         _In_ int port,
+@@ -903,28 +904,28 @@ HANDLE PASCAL FAR WSAAsyncGetServByPort(
+                                         _Out_writes_bytes_(buflen) char FAR * buf,
+                                         _In_ int buflen);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetProtoByName(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE PASCAL FAR WSAAsyncGetProtoByName(
+                                          _In_ HWND hWnd,
+                                          _In_ u_int wMsg,
+                                          _In_z_ const char FAR * name,
+                                          _Out_writes_bytes_(buflen) char FAR * buf,
+                                          _In_ int buflen);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetProtoByNumber(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE PASCAL FAR WSAAsyncGetProtoByNumber(
+                                            _In_ HWND hWnd,
+                                            _In_ u_int wMsg,
+                                            _In_ int number,
+                                            _Out_writes_bytes_(buflen) char FAR * buf,
+                                            _In_ int buflen);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetHostByName(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_RAIIFree_(CloseHandle, -1, 0) HANDLE PASCAL FAR WSAAsyncGetHostByName(
+                                         _In_ HWND hWnd,
+                                         _In_ u_int wMsg,
+                                         _In_z_ const char FAR * name,
+                                         _Out_writes_bytes_(buflen) char FAR * buf,
+                                         _In_ int buflen);
+ 
+-HANDLE PASCAL FAR WSAAsyncGetHostByAddr(
++HANDLE PASCAL FAR _Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("ws2_32.dll") _Win32_SetLastError_ WSAAsyncGetHostByAddr(
+                                         _In_ HWND hWnd,
+                                         _In_ u_int wMsg,
+                                         _In_ const char FAR * addr,
+@@ -933,15 +934,15 @@ HANDLE PASCAL FAR WSAAsyncGetHostByAddr(
+                                         _Out_writes_bytes_(buflen) char FAR * buf,
+                                         _In_ int buflen);
+ 
+-int PASCAL FAR WSACancelAsyncRequest(_In_ HANDLE hAsyncTaskHandle);
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR WSACancelAsyncRequest(_In_ HANDLE hAsyncTaskHandle);
+ 
+-int PASCAL FAR WSAAsyncSelect(
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ _Win32_ImportLibrary_("ws2_32.dll") int PASCAL FAR WSAAsyncSelect(
+                               _In_ SOCKET s,
+                               _In_ HWND hWnd,
+                               _In_ u_int wMsg,
+                               _In_ long lEvent);
+ 
+-int PASCAL FAR WSARecvEx (
++_Windows_SupportedOS_Windows2000_ _Win32_ImportLibrary_("MSWSOCK.dll") _Win32_SetLastError_ int PASCAL FAR WSARecvEx (
+                           _In_ SOCKET s,
+                           _Out_writes_bytes_to_(len, return) __out_data_source(NETWORK) char FAR * buf,
+                           _In_ int len,
+@@ -960,7 +961,7 @@ typedef struct _TRANSMIT_FILE_BUFFERS {
+ 
+ BOOL
+ PASCAL FAR
+-TransmitFile (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") TransmitFile (
+     _In_ SOCKET hSocket,
+     _In_ HANDLE hFile,
+     _In_ DWORD nNumberOfBytesToWrite,
+@@ -972,7 +973,7 @@ TransmitFile (
+ 
+ BOOL
+ PASCAL FAR
+-AcceptEx (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") AcceptEx (
+     _In_ SOCKET sListenSocket,
+     _In_ SOCKET sAcceptSocket,
+     _Out_writes_bytes_to_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength,
+@@ -986,7 +987,7 @@ AcceptEx (
+ 
+ VOID
+ PASCAL FAR
+-GetAcceptExSockaddrs (
++_Windows_SupportedOS_Windows81_ _Win32_ImportLibrary_("mswsock.dll") GetAcceptExSockaddrs (
+     _In_reads_bytes_(dwReceiveDataLength+dwLocalAddressLength+dwRemoteAddressLength) PVOID lpOutputBuffer,
+     _In_ DWORD dwReceiveDataLength,
+     _In_ DWORD dwLocalAddressLength,
+@@ -1085,5 +1086,58 @@ typedef struct timeval FAR *LPTIMEVAL;
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("MSG_OOB")
++#undef MSG_OOB
++#pragma push_macro("MSG_PEEK")
++#undef MSG_PEEK
++#pragma push_macro("MSG_DONTROUTE")
++#undef MSG_DONTROUTE
++#pragma push_macro("MSG_WAITALL")
++#undef MSG_WAITALL
++#pragma push_macro("MSG_PUSH_IMMEDIATE")
++#undef MSG_PUSH_IMMEDIATE
++enum [[clang::flag_enum]] SEND_RECV_FLAGS : int
++{
++    MSG_OOB = 1,
++    MSG_PEEK = 2,
++    MSG_DONTROUTE = 4,
++    MSG_WAITALL = 8,
++    MSG_PUSH_IMMEDIATE = 32,
++};
++#pragma pop_macro("MSG_PUSH_IMMEDIATE")
++#pragma pop_macro("MSG_WAITALL")
++#pragma pop_macro("MSG_DONTROUTE")
++#pragma pop_macro("MSG_PEEK")
++#pragma pop_macro("MSG_OOB")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("SOCK_STREAM")
++#undef SOCK_STREAM
++#pragma push_macro("SOCK_DGRAM")
++#undef SOCK_DGRAM
++#pragma push_macro("SOCK_RAW")
++#undef SOCK_RAW
++#pragma push_macro("SOCK_RDM")
++#undef SOCK_RDM
++#pragma push_macro("SOCK_SEQPACKET")
++#undef SOCK_SEQPACKET
++enum WINSOCK_SOCKET_TYPE : int
++{
++    SOCK_STREAM = 1,
++    SOCK_DGRAM = 2,
++    SOCK_RAW = 3,
++    SOCK_RDM = 4,
++    SOCK_SEQPACKET = 5,
++};
++#pragma pop_macro("SOCK_SEQPACKET")
++#pragma pop_macro("SOCK_RDM")
++#pragma pop_macro("SOCK_RAW")
++#pragma pop_macro("SOCK_DGRAM")
++#pragma pop_macro("SOCK_STREAM")
++#endif
++
+ #endif  /* _WINSOCKAPI_ */
+ 

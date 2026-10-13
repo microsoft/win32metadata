@@ -1,0 +1,63 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h b/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
+index 0875971291..6ae00f8806 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NTQuery.h
+@@ -16,6 +16,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -55,6 +56,8 @@ extern "C"
+ // Minimal support for persistent handlers.
+ //
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ STDAPI LoadIFilter( PCWSTR pwcsPath,
+                     _In_ IUnknown * pUnkOuter,
+                     _Outptr_ void ** ppIUnk );
+@@ -68,10 +71,14 @@ STDAPI LoadIFilterEx( PCWSTR pwcsPath,
+                       REFIID riid,
+                       _Outptr_ void ** ppIUnk );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ STDAPI BindIFilterFromStorage(_In_ IStorage * pStg,
+                               _In_ IUnknown * pUnkOuter,
+                               _Outptr_ void ** ppIUnk );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ STDAPI BindIFilterFromStream(_In_ IStream * pStm,
+                              _In_ IUnknown * pUnkOuter,
+                              _Outptr_ void ** ppIUnk );
+@@ -223,6 +230,8 @@ STDAPI BindIFilterFromStream(_In_ IStream * pStm,
+ #define CICAT_GET_STATE   0x10
+ #define CICAT_ALL_OPENED  0x20
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ STDAPI SetCatalogState ( WCHAR const * pwcsCat,
+                          WCHAR const * pwcsMachine,
+                          DWORD dwNewState,
+@@ -255,7 +264,7 @@ STDAPI SetCatalogState ( WCHAR const * pwcsCat,
+ #ifndef CI_STATE_DEFINED
+ #define CI_STATE_DEFINED
+ #include <pshpack4.h>
+-typedef struct  _CI_STATE
++typedef struct    _CI_STATE
+     {
+     DWORD cbStruct;
+     DWORD cWordList;
+@@ -283,7 +292,7 @@ typedef struct  _CI_STATE
+ 
+ #ifndef __propertydef_h__
+ 
+-typedef struct tagCIPROPERTYDEF
++typedef struct _Windows_SupportedOS_Windows2000_ _Windows_SupportedOS_Server2000_ tagCIPROPERTYDEF
+ {
+     LPWSTR wcsFriendlyName;
+     DWORD  dbType;

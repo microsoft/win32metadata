@@ -1,0 +1,128 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmquota.h b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmquota.h
+index eb93ff8e90..a9c7be76fb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmquota.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmquota.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -180,7 +181,7 @@ EXTERN_C const IID IID_IFsrmQuotaBase;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1568a795-3924-4118-b74b-68d8f0fa5daf")
++    MIDL_INTERFACE("1568a795-3924-4118-b74b-68d8f0fa5daf") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaBase : public IFsrmObject
+     {
+     public:
+@@ -504,25 +505,25 @@ EXTERN_C const IID IID_IFsrmQuotaObject;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("42dc3511-61d5-48ae-b6dc-59fc00c0a8d6")
++    MIDL_INTERFACE("42dc3511-61d5-48ae-b6dc-59fc00c0a8d6") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaObject : public IFsrmQuotaBase
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Path( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserSid( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userSid) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userSid) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userAccount) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userAccount) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SourceTemplateName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *quotaTemplateName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *quotaTemplateName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MatchesSourceTemplate( 
+             /* [annotation][retval][out] */ 
+@@ -859,7 +860,7 @@ EXTERN_C const IID IID_IFsrmQuota;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("377f739d-9647-4b8e-97d2-5ffce6d759cd")
++    MIDL_INTERFACE("377f739d-9647-4b8e-97d2-5ffce6d759cd") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuota : public IFsrmQuotaObject
+     {
+     public:
+@@ -1248,7 +1249,7 @@ EXTERN_C const IID IID_IFsrmAutoApplyQuota;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f82e5729-6aba-4740-bfc7-c7f58f75fb7b")
++    MIDL_INTERFACE("f82e5729-6aba-4740-bfc7-c7f58f75fb7b") _Windows_SupportedOS_Server2008_ 
+     IFsrmAutoApplyQuota : public IFsrmQuotaObject
+     {
+     public:
+@@ -1627,7 +1628,7 @@ EXTERN_C const IID IID_IFsrmQuotaManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8bb68c7d-19d8-4ffb-809e-be4fc1734014")
++    MIDL_INTERFACE("8bb68c7d-19d8-4ffb-809e-be4fc1734014") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaManager : public IDispatch
+     {
+     public:
+@@ -1967,7 +1968,7 @@ EXTERN_C const IID IID_IFsrmQuotaManagerEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4846cb01-d430-494f-abb4-b1054999fb09")
++    MIDL_INTERFACE("4846cb01-d430-494f-abb4-b1054999fb09") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaManagerEx : public IFsrmQuotaManager
+     {
+     public:
+@@ -2257,13 +2258,13 @@ EXTERN_C const IID IID_IFsrmQuotaTemplate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a2efab31-295e-46bb-b976-e86d58b52e8b")
++    MIDL_INTERFACE("a2efab31-295e-46bb-b976-e86d58b52e8b") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaTemplate : public IFsrmQuotaBase
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2594,7 +2595,7 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateImported;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9a2bf113-a329-44cc-809a-5c00fce8da40")
++    MIDL_INTERFACE("9a2bf113-a329-44cc-809a-5c00fce8da40") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaTemplateImported : public IFsrmQuotaTemplate
+     {
+     public:
+@@ -2938,7 +2939,7 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4173ac41-172d-4d52-963c-fdc7e415f717")
++    MIDL_INTERFACE("4173ac41-172d-4d52-963c-fdc7e415f717") _Windows_SupportedOS_Server2008_ 
+     IFsrmQuotaTemplateManager : public IDispatch
+     {
+     public:
+@@ -2962,7 +2963,7 @@ EXTERN_C const IID IID_IFsrmQuotaTemplateManager;
+             /* [annotation][defaultvalue][in] */ 
+             _In_  VARIANT *quotaTemplateNamesArray,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *serializedQuotaTemplates) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *serializedQuotaTemplates) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE ImportTemplates( 
+             /* [annotation][in] */ 

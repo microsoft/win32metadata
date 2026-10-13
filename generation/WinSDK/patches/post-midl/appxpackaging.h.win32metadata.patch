@@ -1,0 +1,549 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/AppxPackaging.h b/generation/WinSDK/RecompiledIdlHeaders/um/AppxPackaging.h
+index 3ee1c417ea..18cc791820 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/AppxPackaging.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/AppxPackaging.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -987,7 +988,7 @@ EXTERN_C const IID IID_IAppxFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("beb94909-e451-438b-b5a7-d79e767b75d8")
++    MIDL_INTERFACE("beb94909-e451-438b-b5a7-d79e767b75d8") _Windows_SupportedOS_Windows8_ 
+     IAppxFactory : public IUnknown
+     {
+     public:
+@@ -1154,7 +1155,7 @@ EXTERN_C const IID IID_IAppxFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f1346df2-c282-4e22-b918-743a929a8d55")
++    MIDL_INTERFACE("f1346df2-c282-4e22-b918-743a929a8d55") _Windows_SupportedOS_10240_ 
+     IAppxFactory2 : public IUnknown
+     {
+     public:
+@@ -1505,7 +1506,7 @@ EXTERN_C const IID IID_IAppxPackageReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b5c49650-99bc-481c-9a34-3d53a4106708")
++    MIDL_INTERFACE("b5c49650-99bc-481c-9a34-3d53a4106708") _Windows_SupportedOS_Windows8_ 
+     IAppxPackageReader : public IUnknown
+     {
+     public:
+@@ -1652,7 +1653,7 @@ EXTERN_C const IID IID_IAppxPackageWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9099e33b-246f-41e4-881a-008eb613f858")
++    MIDL_INTERFACE("9099e33b-246f-41e4-881a-008eb613f858") _Windows_SupportedOS_Windows8_ 
+     IAppxPackageWriter : public IUnknown
+     {
+     public:
+@@ -1764,7 +1765,7 @@ EXTERN_C const IID IID_IAppxPackageWriter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2cf5c4fd-e54c-4ea5-ba4e-f8c4b105a8c8")
++    MIDL_INTERFACE("2cf5c4fd-e54c-4ea5-ba4e-f8c4b105a8c8") _Windows_SupportedOS_10240_ 
+     IAppxPackageWriter2 : public IUnknown
+     {
+     public:
+@@ -1855,7 +1856,7 @@ EXTERN_C const IID IID_IAppxPackageWriter3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a83aacd3-41c0-4501-b8a3-74164f50b2fd")
++    MIDL_INTERFACE("a83aacd3-41c0-4501-b8a3-74164f50b2fd") _Windows_SupportedOS_10240_ 
+     IAppxPackageWriter3 : public IUnknown
+     {
+     public:
+@@ -1950,7 +1951,7 @@ EXTERN_C const IID IID_IAppxFile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("91df827b-94fd-468f-827b-57f41b2f6f2e")
++    MIDL_INTERFACE("91df827b-94fd-468f-827b-57f41b2f6f2e") _Windows_SupportedOS_Windows8_ 
+     IAppxFile : public IUnknown
+     {
+     public:
+@@ -2222,7 +2223,7 @@ EXTERN_C const IID IID_IAppxFilesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f007eeaf-9831-411c-9847-917cdc62d1fe")
++    MIDL_INTERFACE("f007eeaf-9831-411c-9847-917cdc62d1fe") _Windows_SupportedOS_Windows8_ 
+     IAppxFilesEnumerator : public IUnknown
+     {
+     public:
+@@ -2335,7 +2336,7 @@ EXTERN_C const IID IID_IAppxBlockMapReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5efec991-bca3-42d1-9ec2-e92d609ec22a")
++    MIDL_INTERFACE("5efec991-bca3-42d1-9ec2-e92d609ec22a") _Windows_SupportedOS_Windows8_ 
+     IAppxBlockMapReader : public IUnknown
+     {
+     public:
+@@ -2465,7 +2466,7 @@ EXTERN_C const IID IID_IAppxBlockMapFile;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("277672ac-4f63-42c1-8abc-beae3600eb59")
++    MIDL_INTERFACE("277672ac-4f63-42c1-8abc-beae3600eb59") _Windows_SupportedOS_Windows8_ 
+     IAppxBlockMapFile : public IUnknown
+     {
+     public:
+@@ -2743,7 +2744,7 @@ EXTERN_C const IID IID_IAppxBlockMapFilesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("02b856a2-4262-4070-bacb-1a8cbbc42305")
++    MIDL_INTERFACE("02b856a2-4262-4070-bacb-1a8cbbc42305") _Windows_SupportedOS_Windows8_ 
+     IAppxBlockMapFilesEnumerator : public IUnknown
+     {
+     public:
+@@ -2856,7 +2857,7 @@ EXTERN_C const IID IID_IAppxBlockMapBlock;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("75cf3930-3244-4fe0-a8c8-e0bcb270b889")
++    MIDL_INTERFACE("75cf3930-3244-4fe0-a8c8-e0bcb270b889") _Windows_SupportedOS_Windows8_ 
+     IAppxBlockMapBlock : public IUnknown
+     {
+     public:
+@@ -2960,7 +2961,7 @@ EXTERN_C const IID IID_IAppxBlockMapBlocksEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6b429b5b-36ef-479e-b9eb-0c1482b49e16")
++    MIDL_INTERFACE("6b429b5b-36ef-479e-b9eb-0c1482b49e16") _Windows_SupportedOS_Windows8_ 
+     IAppxBlockMapBlocksEnumerator : public IUnknown
+     {
+     public:
+@@ -3073,7 +3074,7 @@ EXTERN_C const IID IID_IAppxManifestReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("4e1bd148-55a0-4480-a3d1-15544710637c")
++    MIDL_INTERFACE("4e1bd148-55a0-4480-a3d1-15544710637c") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestReader : public IUnknown
+     {
+     public:
+@@ -3268,7 +3269,7 @@ EXTERN_C const IID IID_IAppxManifestReader2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d06f67bc-b31d-4eba-a8af-638e73e77b4d")
++    MIDL_INTERFACE("d06f67bc-b31d-4eba-a8af-638e73e77b4d") _Windows_SupportedOS_Windows81_ 
+     IAppxManifestReader2 : public IAppxManifestReader
+     {
+     public:
+@@ -3839,7 +3840,7 @@ EXTERN_C const IID IID_IAppxManifestReader5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8D7AE132-A690-4C00-B75A-6AAE1FEAAC80")
++    MIDL_INTERFACE("8D7AE132-A690-4C00-B75A-6AAE1FEAAC80") _Windows_SupportedOS_10240_ 
+     IAppxManifestReader5 : public IUnknown
+     {
+     public:
+@@ -3926,7 +3927,7 @@ EXTERN_C const IID IID_IAppxManifestReader6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("34DEACA4-D3C0-4E3E-B312-E42625E3807E")
++    MIDL_INTERFACE("34DEACA4-D3C0-4E3E-B312-E42625E3807E") _Windows_SupportedOS_10240_ 
+     IAppxManifestReader6 : public IUnknown
+     {
+     public:
+@@ -5078,7 +5079,7 @@ EXTERN_C const IID IID_IAppxManifestOptionalPackageInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2634847D-5B5D-4FE5-A243-002FF95EDC7E")
++    MIDL_INTERFACE("2634847D-5B5D-4FE5-A243-002FF95EDC7E") _Windows_SupportedOS_10240_ 
+     IAppxManifestOptionalPackageInfo : public IUnknown
+     {
+     public:
+@@ -5178,7 +5179,7 @@ EXTERN_C const IID IID_IAppxManifestMainPackageDependenciesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A99C4F00-51D2-4F0F-BA46-7ED5255EBDFF")
++    MIDL_INTERFACE("A99C4F00-51D2-4F0F-BA46-7ED5255EBDFF") _Windows_SupportedOS_10240_ 
+     IAppxManifestMainPackageDependenciesEnumerator : public IUnknown
+     {
+     public:
+@@ -5291,7 +5292,7 @@ EXTERN_C const IID IID_IAppxManifestMainPackageDependency;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("05D0611C-BC29-46D5-97E2-84B9C79BD8AE")
++    MIDL_INTERFACE("05D0611C-BC29-46D5-97E2-84B9C79BD8AE") _Windows_SupportedOS_10240_ 
+     IAppxManifestMainPackageDependency : public IUnknown
+     {
+     public:
+@@ -5404,7 +5405,7 @@ EXTERN_C const IID IID_IAppxManifestPackageId;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("283ce2d7-7153-4a91-9649-7a0f7240945f")
++    MIDL_INTERFACE("283ce2d7-7153-4a91-9649-7a0f7240945f") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestPackageId : public IUnknown
+     {
+     public:
+@@ -5586,7 +5587,7 @@ EXTERN_C const IID IID_IAppxManifestPackageId2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2256999d-d617-42f1-880e-0ba4542319d5")
++    MIDL_INTERFACE("2256999d-d617-42f1-880e-0ba4542319d5") _Windows_SupportedOS_10240_ 
+     IAppxManifestPackageId2 : public IAppxManifestPackageId
+     {
+     public:
+@@ -5748,7 +5749,7 @@ EXTERN_C const IID IID_IAppxManifestProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("03faf64d-f26f-4b2c-aaf7-8fe7789b8bca")
++    MIDL_INTERFACE("03faf64d-f26f-4b2c-aaf7-8fe7789b8bca") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestProperties : public IUnknown
+     {
+     public:
+@@ -5969,7 +5970,7 @@ EXTERN_C const IID IID_IAppxManifestTargetDeviceFamily;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9091B09B-C8D5-4F31-8687-A338259FAEFB")
++    MIDL_INTERFACE("9091B09B-C8D5-4F31-8687-A338259FAEFB") _Windows_SupportedOS_10240_ 
+     IAppxManifestTargetDeviceFamily : public IUnknown
+     {
+     public:
+@@ -6082,7 +6083,7 @@ EXTERN_C const IID IID_IAppxManifestPackageDependenciesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4")
++    MIDL_INTERFACE("b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestPackageDependenciesEnumerator : public IUnknown
+     {
+     public:
+@@ -6195,7 +6196,7 @@ EXTERN_C const IID IID_IAppxManifestPackageDependency;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("e4946b59-733e-43f0-a724-3bde4c1285a0")
++    MIDL_INTERFACE("e4946b59-733e-43f0-a724-3bde4c1285a0") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestPackageDependency : public IUnknown
+     {
+     public:
+@@ -6308,7 +6309,7 @@ EXTERN_C const IID IID_IAppxManifestPackageDependency2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DDA0B713-F3FF-49D3-898A-2786780C5D98")
++    MIDL_INTERFACE("DDA0B713-F3FF-49D3-898A-2786780C5D98") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestPackageDependency2 : public IAppxManifestPackageDependency
+     {
+     public:
+@@ -6510,7 +6511,7 @@ EXTERN_C const IID IID_IAppxManifestResourcesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("de4dfbbd-881a-48bb-858c-d6f2baeae6ed")
++    MIDL_INTERFACE("de4dfbbd-881a-48bb-858c-d6f2baeae6ed") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestResourcesEnumerator : public IUnknown
+     {
+     public:
+@@ -6623,7 +6624,7 @@ EXTERN_C const IID IID_IAppxManifestDeviceCapabilitiesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("30204541-427b-4a1c-bacf-655bf463a540")
++    MIDL_INTERFACE("30204541-427b-4a1c-bacf-655bf463a540") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestDeviceCapabilitiesEnumerator : public IUnknown
+     {
+     public:
+@@ -6849,7 +6850,7 @@ EXTERN_C const IID IID_IAppxManifestApplicationsEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9eb8a55a-f04b-4d0d-808d-686185d4847a")
++    MIDL_INTERFACE("9eb8a55a-f04b-4d0d-808d-686185d4847a") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestApplicationsEnumerator : public IUnknown
+     {
+     public:
+@@ -6962,7 +6963,7 @@ EXTERN_C const IID IID_IAppxManifestApplication;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5da89bf4-3773-46be-b650-7e744863b7e8")
++    MIDL_INTERFACE("5da89bf4-3773-46be-b650-7e744863b7e8") _Windows_SupportedOS_Windows8_ 
+     IAppxManifestApplication : public IUnknown
+     {
+     public:
+@@ -7292,7 +7293,7 @@ EXTERN_C const IID IID_IAppxBundleFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BBA65864-965F-4A5F-855F-F074BDBF3A7B")
++    MIDL_INTERFACE("BBA65864-965F-4A5F-855F-F074BDBF3A7B") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleFactory : public IUnknown
+     {
+     public:
+@@ -7609,7 +7610,7 @@ EXTERN_C const IID IID_IAppxBundleWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EC446FE8-BFEC-4C64-AB4F-49F038F0C6D2")
++    MIDL_INTERFACE("EC446FE8-BFEC-4C64-AB4F-49F038F0C6D2") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleWriter : public IUnknown
+     {
+     public:
+@@ -7709,7 +7710,7 @@ EXTERN_C const IID IID_IAppxBundleWriter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6D8FE971-01CC-49A0-B685-233851279962")
++    MIDL_INTERFACE("6D8FE971-01CC-49A0-B685-233851279962") _Windows_SupportedOS_10240_ 
+     IAppxBundleWriter2 : public IUnknown
+     {
+     public:
+@@ -7800,7 +7801,7 @@ EXTERN_C const IID IID_IAppxBundleWriter3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("AD711152-F969-4193-82D5-9DDF2786D21A")
++    MIDL_INTERFACE("AD711152-F969-4193-82D5-9DDF2786D21A") _Windows_SupportedOS_10240_ 
+     IAppxBundleWriter3 : public IUnknown
+     {
+     public:
+@@ -7904,7 +7905,7 @@ EXTERN_C const IID IID_IAppxBundleWriter4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9CD9D523-5009-4C01-9882-DC029FBD47A3")
++    MIDL_INTERFACE("9CD9D523-5009-4C01-9882-DC029FBD47A3") _Windows_SupportedOS_10240_ 
+     IAppxBundleWriter4 : public IUnknown
+     {
+     public:
+@@ -8041,7 +8042,7 @@ EXTERN_C const IID IID_IAppxBundleReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("DD75B8C0-BA76-43B0-AE0F-68656A1DC5C8")
++    MIDL_INTERFACE("DD75B8C0-BA76-43B0-AE0F-68656A1DC5C8") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleReader : public IUnknown
+     {
+     public:
+@@ -8279,7 +8280,7 @@ EXTERN_C const IID IID_IAppxBundleManifestReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CF0EBBC1-CC99-4106-91EB-E67462E04FB0")
++    MIDL_INTERFACE("CF0EBBC1-CC99-4106-91EB-E67462E04FB0") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleManifestReader : public IUnknown
+     {
+     public:
+@@ -8392,7 +8393,7 @@ EXTERN_C const IID IID_IAppxBundleManifestReader2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5517DF70-033F-4AF2-8213-87D766805C02")
++    MIDL_INTERFACE("5517DF70-033F-4AF2-8213-87D766805C02") _Windows_SupportedOS_10240_ 
+     IAppxBundleManifestReader2 : public IUnknown
+     {
+     public:
+@@ -8479,7 +8480,7 @@ EXTERN_C const IID IID_IAppxBundleManifestPackageInfoEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F9B856EE-49A6-4E19-B2B0-6A2406D63A32")
++    MIDL_INTERFACE("F9B856EE-49A6-4E19-B2B0-6A2406D63A32") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleManifestPackageInfoEnumerator : public IUnknown
+     {
+     public:
+@@ -8592,7 +8593,7 @@ EXTERN_C const IID IID_IAppxBundleManifestPackageInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("54CD06C1-268F-40BB-8ED2-757A9EBAEC8D")
++    MIDL_INTERFACE("54CD06C1-268F-40BB-8ED2-757A9EBAEC8D") _Windows_SupportedOS_Windows81_ 
+     IAppxBundleManifestPackageInfo : public IUnknown
+     {
+     public:
+@@ -8744,7 +8745,7 @@ EXTERN_C const IID IID_IAppxBundleManifestPackageInfo2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("44C2ACBC-B2CF-4CCB-BBDB-9C6DA8C3BC9E")
++    MIDL_INTERFACE("44C2ACBC-B2CF-4CCB-BBDB-9C6DA8C3BC9E") _Windows_SupportedOS_10240_ 
+     IAppxBundleManifestPackageInfo2 : public IUnknown
+     {
+     public:
+@@ -9031,7 +9032,7 @@ EXTERN_C const IID IID_IAppxBundleManifestOptionalBundleInfoEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9A178793-F97E-46AC-AACA-DD5BA4C177C8")
++    MIDL_INTERFACE("9A178793-F97E-46AC-AACA-DD5BA4C177C8") _Windows_SupportedOS_10240_ 
+     IAppxBundleManifestOptionalBundleInfoEnumerator : public IUnknown
+     {
+     public:
+@@ -9144,7 +9145,7 @@ EXTERN_C const IID IID_IAppxBundleManifestOptionalBundleInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("515BF2E8-BCB0-4D69-8C48-E383147B6E12")
++    MIDL_INTERFACE("515BF2E8-BCB0-4D69-8C48-E383147B6E12") _Windows_SupportedOS_10240_ 
+     IAppxBundleManifestOptionalBundleInfo : public IUnknown
+     {
+     public:
+@@ -9257,7 +9258,7 @@ EXTERN_C const IID IID_IAppxContentGroupFilesEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1a09a2fd-7440-44eb-8c84-848205a6a1cc")
++    MIDL_INTERFACE("1a09a2fd-7440-44eb-8c84-848205a6a1cc") _Windows_SupportedOS_10240_ 
+     IAppxContentGroupFilesEnumerator : public IUnknown
+     {
+     public:
+@@ -9370,7 +9371,7 @@ EXTERN_C const IID IID_IAppxContentGroup;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("328f6468-c04f-4e3c-b6fa-6b8d27f3003a")
++    MIDL_INTERFACE("328f6468-c04f-4e3c-b6fa-6b8d27f3003a") _Windows_SupportedOS_10240_ 
+     IAppxContentGroup : public IUnknown
+     {
+     public:
+@@ -9470,7 +9471,7 @@ EXTERN_C const IID IID_IAppxContentGroupsEnumerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3264e477-16d1-4d63-823e-7d2984696634")
++    MIDL_INTERFACE("3264e477-16d1-4d63-823e-7d2984696634") _Windows_SupportedOS_10240_ 
+     IAppxContentGroupsEnumerator : public IUnknown
+     {
+     public:
+@@ -9583,7 +9584,7 @@ EXTERN_C const IID IID_IAppxContentGroupMapReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("418726d8-dd99-4f5d-9886-157add20de01")
++    MIDL_INTERFACE("418726d8-dd99-4f5d-9886-157add20de01") _Windows_SupportedOS_10240_ 
+     IAppxContentGroupMapReader : public IUnknown
+     {
+     public:
+@@ -9683,7 +9684,7 @@ EXTERN_C const IID IID_IAppxSourceContentGroupMapReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("f329791d-540b-4a9f-bc75-3282b7d73193")
++    MIDL_INTERFACE("f329791d-540b-4a9f-bc75-3282b7d73193") _Windows_SupportedOS_10240_ 
+     IAppxSourceContentGroupMapReader : public IUnknown
+     {
+     public:
+@@ -9783,7 +9784,7 @@ EXTERN_C const IID IID_IAppxContentGroupMapWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d07ab776-a9de-4798-8c14-3db31e687c78")
++    MIDL_INTERFACE("d07ab776-a9de-4798-8c14-3db31e687c78") _Windows_SupportedOS_10240_ 
+     IAppxContentGroupMapWriter : public IUnknown
+     {
+     public:
+@@ -10320,7 +10321,7 @@ EXTERN_C const IID IID_IAppxEncryptionFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("80E8E04D-8C88-44AE-A011-7CADF6FB2E72")
++    MIDL_INTERFACE("80E8E04D-8C88-44AE-A011-7CADF6FB2E72") _Windows_SupportedOS_14393_ 
+     IAppxEncryptionFactory : public IUnknown
+     {
+     public:
+@@ -10602,7 +10603,7 @@ EXTERN_C const IID IID_IAppxEncryptionFactory2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c1b11eee-c4ba-4ab2-a55d-d015fe8ff64f")
++    MIDL_INTERFACE("c1b11eee-c4ba-4ab2-a55d-d015fe8ff64f") _Windows_SupportedOS_10240_ 
+     IAppxEncryptionFactory2 : public IUnknown
+     {
+     public:
+@@ -10713,7 +10714,7 @@ EXTERN_C const IID IID_IAppxEncryptionFactory3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09edca37-cd64-47d6-b7e8-1cb11d4f7e05")
++    MIDL_INTERFACE("09edca37-cd64-47d6-b7e8-1cb11d4f7e05") _Windows_SupportedOS_10240_ 
+     IAppxEncryptionFactory3 : public IUnknown
+     {
+     public:
+@@ -10915,7 +10916,7 @@ EXTERN_C const IID IID_IAppxEncryptionFactory4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A879611F-12FD-41fe-85D5-06AE779BBAF5")
++    MIDL_INTERFACE("A879611F-12FD-41fe-85D5-06AE779BBAF5") _Windows_SupportedOS_10240_ 
+     IAppxEncryptionFactory4 : public IUnknown
+     {
+     public:
+@@ -11138,7 +11139,7 @@ EXTERN_C const IID IID_IAppxEncryptedPackageWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F43D0B0B-1379-40E2-9B29-682EA2BF42AF")
++    MIDL_INTERFACE("F43D0B0B-1379-40E2-9B29-682EA2BF42AF") _Windows_SupportedOS_14393_ 
+     IAppxEncryptedPackageWriter : public IUnknown
+     {
+     public:
+@@ -11242,7 +11243,7 @@ EXTERN_C const IID IID_IAppxEncryptedPackageWriter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3E475447-3A25-40b5-8AD2-F953AE50C92D")
++    MIDL_INTERFACE("3E475447-3A25-40b5-8AD2-F953AE50C92D") _Windows_SupportedOS_14393_ 
+     IAppxEncryptedPackageWriter2 : public IUnknown
+     {
+     public:
+@@ -11337,7 +11338,7 @@ EXTERN_C const IID IID_IAppxEncryptedBundleWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("80B0902F-7BF0-4117-B8C6-4279EF81EE77")
++    MIDL_INTERFACE("80B0902F-7BF0-4117-B8C6-4279EF81EE77") _Windows_SupportedOS_14393_ 
+     IAppxEncryptedBundleWriter : public IUnknown
+     {
+     public:
+@@ -11437,7 +11438,7 @@ EXTERN_C const IID IID_IAppxEncryptedBundleWriter2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E644BE82-F0FA-42B8-A956-8D1CB48EE379")
++    MIDL_INTERFACE("E644BE82-F0FA-42B8-A956-8D1CB48EE379") _Windows_SupportedOS_10240_ 
+     IAppxEncryptedBundleWriter2 : public IUnknown
+     {
+     public:
+@@ -11551,7 +11552,7 @@ EXTERN_C const IID IID_IAppxEncryptedBundleWriter3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0D34DEB3-5CAE-4DD3-977C-504932A51D31")
++    MIDL_INTERFACE("0D34DEB3-5CAE-4DD3-977C-504932A51D31") _Windows_SupportedOS_10240_ 
+     IAppxEncryptedBundleWriter3 : public IUnknown
+     {
+     public:
+@@ -11667,7 +11668,7 @@ EXTERN_C const IID IID_IAppxPackageEditor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E2ADB6DC-5E71-4416-86B6-86E5F5291A6B")
++    MIDL_INTERFACE("E2ADB6DC-5E71-4416-86B6-86E5F5291A6B") _Windows_SupportedOS_10240_ 
+     IAppxPackageEditor : public IUnknown
+     {
+     public:

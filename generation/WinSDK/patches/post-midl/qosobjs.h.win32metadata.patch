@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
+index 1564f3e750..96a1d93f9e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/qosobjs.h
+@@ -14,6 +14,7 @@ Abstract:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ extern  "C" {
+ // This structure is used to associate a friendly name with the flow
+ // 
+ 
+-typedef struct _QOS_FRIENDLY_NAME {
++typedef struct   _QOS_FRIENDLY_NAME {
+     QOS_OBJECT_HDR ObjectHdr;
+     WCHAR          FriendlyName[QOS_MAX_OBJECT_STRING_LENGTH];
+ } QOS_FRIENDLY_NAME, *LPQOS_FRIENDLY_NAME;
+@@ -64,7 +65,7 @@ typedef struct _QOS_FRIENDLY_NAME {
+ //
+ //
+ 
+-typedef struct _QOS_TRAFFIC_CLASS {
++typedef struct   _QOS_TRAFFIC_CLASS {
+ 
+     QOS_OBJECT_HDR   ObjectHdr;
+     ULONG            TrafficClass;
+@@ -79,7 +80,7 @@ typedef struct _QOS_TRAFFIC_CLASS {
+ // may select a value based on the standard Intserv mapping of ServiceType to DS Field 
+ //
+ 
+-typedef struct _QOS_DS_CLASS {
++typedef struct   _QOS_DS_CLASS {
+ 
+     QOS_OBJECT_HDR ObjectHdr;
+     ULONG          DSField;
+@@ -93,7 +94,7 @@ typedef struct _QOS_DS_CLASS {
+ // a variable length array of QOS_DIFFSERV_RULE, where each DS field is specified by a 
+ // QOS_DIFFSERV_RULE
+ //
+-typedef struct _QOS_DIFFSERV {
++typedef struct   _QOS_DIFFSERV {
+ 
+     QOS_OBJECT_HDR ObjectHdr;
+     ULONG          DSFieldCount;
+@@ -103,7 +104,7 @@ typedef struct _QOS_DIFFSERV {
+ //
+ // The rule for a Diffserv DS codepoint. 
+ //
+-typedef struct _QOS_DIFFSERV_RULE {
++typedef struct   _QOS_DIFFSERV_RULE {
+     UCHAR InboundDSField;
+     UCHAR ConformingOutboundDSField;
+     UCHAR NonConformingOutboundDSField;
+@@ -118,7 +119,7 @@ typedef struct _QOS_DIFFSERV_RULE {
+ // and QOS_OBJECT_TRAFFIC_CLASS will be ignored.
+ //
+ 
+-typedef struct _QOS_TCP_TRAFFIC {
++typedef struct   _QOS_TCP_TRAFFIC {
+     QOS_OBJECT_HDR ObjectHdr;
+ } QOS_TCP_TRAFFIC, *LPQOS_TCP_TRAFFIC;
+     

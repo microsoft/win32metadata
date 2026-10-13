@@ -1,0 +1,162 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
+index 40b5060ed5..bc7f534533 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -532,7 +533,7 @@ EXTERN_C const IID IID_IRdcGeneratorParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A71-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A71-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcGeneratorParameters : public IUnknown
+     {
+     public:
+@@ -670,7 +671,7 @@ EXTERN_C const IID IID_IRdcGeneratorFilterMaxParameters;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A72-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A72-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcGeneratorFilterMaxParameters : public IUnknown
+     {
+     public:
+@@ -796,7 +797,7 @@ EXTERN_C const IID IID_IRdcGenerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A73-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A73-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcGenerator : public IUnknown
+     {
+     public:
+@@ -920,7 +921,7 @@ EXTERN_C const IID IID_IRdcFileReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A74-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A74-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcFileReader : public IUnknown
+     {
+     public:
+@@ -1049,7 +1050,7 @@ EXTERN_C const IID IID_IRdcFileWriter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A75-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A75-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcFileWriter : public IRdcFileReader
+     {
+     public:
+@@ -1198,7 +1199,7 @@ EXTERN_C const IID IID_IRdcSignatureReader;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A76-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A76-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcSignatureReader : public IUnknown
+     {
+     public:
+@@ -1302,7 +1303,7 @@ EXTERN_C const IID IID_IRdcComparator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A77-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A77-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcComparator : public IUnknown
+     {
+     public:
+@@ -1405,7 +1406,7 @@ EXTERN_C const IID IID_IRdcLibrary;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A78-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A78-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcLibrary : public IUnknown
+     {
+     public:
+@@ -1614,7 +1615,7 @@ EXTERN_C const IID IID_ISimilarityReportProgress;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7A-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7A-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityReportProgress : public IUnknown
+     {
+     public:
+@@ -1701,7 +1702,7 @@ EXTERN_C const IID IID_ISimilarityTableDumpState;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7B-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7B-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityTableDumpState : public IUnknown
+     {
+     public:
+@@ -1800,7 +1801,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMappedView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7C-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7C-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityTraitsMappedView : public IUnknown
+     {
+     public:
+@@ -1934,7 +1935,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMapping;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7D-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7D-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityTraitsMapping : public IUnknown
+     {
+     public:
+@@ -2127,7 +2128,7 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7E-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7E-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityTraitsTable : public IUnknown
+     {
+     public:
+@@ -2330,7 +2331,7 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A7F-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A7F-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarityFileIdTable : public IUnknown
+     {
+     public:
+@@ -2529,7 +2530,7 @@ EXTERN_C const IID IID_IRdcSimilarityGenerator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A80-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A80-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IRdcSimilarityGenerator : public IUnknown
+     {
+     public:
+@@ -2625,7 +2626,7 @@ EXTERN_C const IID IID_IFindSimilarResults;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A81-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A81-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     IFindSimilarResults : public IUnknown
+     {
+     public:
+@@ -2729,7 +2730,7 @@ EXTERN_C const IID IID_ISimilarity;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96236A83-9DBC-11DA-9E3F-0011114AE311")
++    MIDL_INTERFACE("96236A83-9DBC-11DA-9E3F-0011114AE311") _Windows_SupportedOS_WindowsVista_ 
+     ISimilarity : public IUnknown
+     {
+     public:

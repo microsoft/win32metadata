@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
+index 2df437fc5c..585f454a5d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMalert.h
+@@ -32,6 +32,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -46,6 +47,8 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetAlertRaise(
+     _In_ LPCWSTR AlertType,
+@@ -53,6 +56,8 @@ NetAlertRaise(
+     _In_ DWORD   BufferSize
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetAlertRaiseEx(
+     _In_ LPCWSTR AlertType,
+@@ -66,7 +71,7 @@ NetAlertRaiseEx(
+ //  Data Structures
+ //
+ 
+-typedef struct _STD_ALERT {
++typedef struct   _STD_ALERT {
+     DWORD  alrt_timestamp;
+     WCHAR  alrt_eventname[EVLEN + 1];
+     WCHAR  alrt_servicename[SNLEN + 1];

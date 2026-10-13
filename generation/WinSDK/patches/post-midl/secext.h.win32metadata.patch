@@ -1,0 +1,66 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h b/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
+index 8353e4cdfc..0866db47d0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/secext.h
+@@ -22,6 +22,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -110,6 +111,8 @@ typedef enum
+ } EXTENDED_NAME_FORMAT, * PEXTENDED_NAME_FORMAT ;
+ 
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -119,6 +122,8 @@ GetUserNameExA(
+     _Inout_ PULONG nSize
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ _Success_(return != 0)
+ BOOLEAN
+ SEC_ENTRY
+@@ -140,6 +145,8 @@ GetUserNameExW(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ 
++
+ BOOLEAN
+ SEC_ENTRY
+ GetComputerObjectNameA(
+@@ -147,7 +154,7 @@ GetComputerObjectNameA(
+     _Out_writes_to_opt_(*nSize,*nSize) LPSTR lpNameBuffer,
+     _Inout_ PULONG nSize
+     );
+-BOOLEAN
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLEAN
+ SEC_ENTRY
+ GetComputerObjectNameW(
+     _In_ EXTENDED_NAME_FORMAT NameFormat,
+@@ -161,7 +168,7 @@ GetComputerObjectNameW(
+ #define GetComputerObjectName   GetComputerObjectNameA
+ #endif
+ 
+-BOOLEAN
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLEAN
+ SEC_ENTRY
+ TranslateNameA(
+     _In_ LPCSTR lpAccountName,
+@@ -170,7 +177,7 @@ TranslateNameA(
+     _Out_writes_to_opt_(*nSize,*nSize) LPSTR lpTranslatedName,
+     _Inout_ PULONG nSize
+     );
+-BOOLEAN
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOLEAN
+ SEC_ENTRY
+ TranslateNameW(
+     _In_ LPCWSTR lpAccountName,

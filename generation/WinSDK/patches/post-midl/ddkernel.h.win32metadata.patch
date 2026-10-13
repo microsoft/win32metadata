@@ -1,0 +1,29 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddkernel.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddkernel.h
+index 12bf52b612..d5f46173aa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddkernel.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddkernel.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*==========================================================================;
+  *
+  *  Copyright (C) Microsoft Corporation.  All Rights Reserved.
+@@ -69,8 +70,8 @@ DECLARE_INTERFACE_( IDirectDrawKernel, IUnknown )
+     STDMETHOD_(ULONG,AddRef) (THIS)  PURE;
+     STDMETHOD_(ULONG,Release) (THIS) PURE;
+     /*** IDirectDraw methods ***/
+-    STDMETHOD(GetCaps)(THIS_ LPDDKERNELCAPS) PURE;
+-    STDMETHOD(GetKernelHandle)(THIS_ PULONG_PTR) PURE;
++    STDMETHOD(GetCaps)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDKERNELCAPS) PURE;
++    STDMETHOD(GetKernelHandle)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG_PTR) PURE;
+     STDMETHOD(ReleaseKernelHandle)(THIS) PURE;
+ };
+ 
+@@ -95,7 +96,7 @@ DECLARE_INTERFACE_( IDirectDrawSurfaceKernel, IUnknown )
+     STDMETHOD_(ULONG,AddRef) (THIS)  PURE;
+     STDMETHOD_(ULONG,Release) (THIS) PURE;
+     /*** IDirectDraw methods ***/
+-    STDMETHOD(GetKernelHandle)(THIS_ PULONG_PTR) PURE;
++    STDMETHOD(GetKernelHandle)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PULONG_PTR) PURE;
+     STDMETHOD(ReleaseKernelHandle)(THIS) PURE;
+ };
+ 

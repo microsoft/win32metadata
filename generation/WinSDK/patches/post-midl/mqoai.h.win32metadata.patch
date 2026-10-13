@@ -1,0 +1,420 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MqOaI.h b/generation/WinSDK/RecompiledIdlHeaders/um/MqOaI.h
+index 1fce050bb1..5390187976 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MqOaI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MqOaI.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -1170,28 +1171,28 @@ EXTERN_C const IID IID_IMSMQQueueInfo;
+     {
+     public:
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_QueueGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ServiceTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidServiceType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_PathName( 
+             /* [in] */ __RPC__in BSTR bstrPathName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_FormatName( 
+             /* [in] */ __RPC__in BSTR bstrFormatName) = 0;
+@@ -1627,28 +1628,28 @@ EXTERN_C const IID IID_IMSMQQueueInfo2;
+     {
+     public:
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_QueueGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ServiceTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidServiceType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_PathName( 
+             /* [in] */ __RPC__in BSTR bstrPathName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_FormatName( 
+             /* [in] */ __RPC__in BSTR bstrFormatName) = 0;
+@@ -1717,7 +1718,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo2;
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE Update( void) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathNameDNS( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_Properties( 
+             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties) = 0;
+@@ -2128,28 +2129,28 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
+     {
+     public:
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_QueueGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ServiceTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidServiceType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_PathName( 
+             /* [in] */ __RPC__in BSTR bstrPathName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_FormatName( 
+             /* [in] */ __RPC__in BSTR bstrFormatName) = 0;
+@@ -2218,7 +2219,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE Update( void) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathNameDNS( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_Properties( 
+             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties) = 0;
+@@ -2236,13 +2237,13 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisWorldReadable) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_MulticastAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMulticastAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMulticastAddress) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_MulticastAddress( 
+             /* [in] */ __RPC__in BSTR bstrMulticastAddress) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ADsPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
+         
+     };
+     
+@@ -2684,28 +2685,28 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
+     {
+     public:
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_QueueGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidQueue) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ServiceTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidServiceType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ServiceTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidServiceType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_PathName( 
+             /* [in] */ __RPC__in BSTR bstrPathName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_FormatName( 
+             /* [in] */ __RPC__in BSTR bstrFormatName) = 0;
+@@ -2774,7 +2775,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE Update( void) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathNameDNS( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathNameDNS) = 0;
+         
+         virtual /* [id][propget][hidden] */ HRESULT STDMETHODCALLTYPE get_Properties( 
+             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties) = 0;
+@@ -2792,13 +2793,13 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisWorldReadable) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_MulticastAddress( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMulticastAddress) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMulticastAddress) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_MulticastAddress( 
+             /* [in] */ __RPC__in BSTR bstrMulticastAddress) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ADsPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
+         
+     };
+     
+@@ -5307,7 +5308,7 @@ EXTERN_C const IID IID_IMSMQMessage;
+             /* [in] */ long lAppSpecific) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SourceMachineGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_BodyLength( 
+             /* [retval][out] */ __RPC__out long *pcbBody) = 0;
+@@ -5340,7 +5341,7 @@ EXTERN_C const IID IID_IMSMQMessage;
+             /* [in] */ long lAck) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+@@ -8014,7 +8015,7 @@ EXTERN_C const IID IID_IMSMQMessage2;
+             /* [in] */ long lAppSpecific) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SourceMachineGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_BodyLength( 
+             /* [retval][out] */ __RPC__out long *pcbBody) = 0;
+@@ -8047,7 +8048,7 @@ EXTERN_C const IID IID_IMSMQMessage2;
+             /* [in] */ long lAck) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+@@ -8116,7 +8117,7 @@ EXTERN_C const IID IID_IMSMQMessage2;
+             /* [in] */ VARIANT varExtension) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ConnectorTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ConnectorTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidConnectorType) = 0;
+@@ -8143,7 +8144,7 @@ EXTERN_C const IID IID_IMSMQMessage2;
+             /* [in] */ long lAuthProvType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_AuthenticationProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_AuthenticationProviderName( 
+             /* [in] */ __RPC__in BSTR bstrAuthProvName) = 0;
+@@ -8966,7 +8967,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
+             /* [in] */ long lAppSpecific) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SourceMachineGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_BodyLength( 
+             /* [retval][out] */ __RPC__out long *pcbBody) = 0;
+@@ -8999,7 +9000,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
+             /* [in] */ long lAck) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+@@ -9068,7 +9069,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
+             /* [in] */ VARIANT varExtension) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ConnectorTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ConnectorTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidConnectorType) = 0;
+@@ -9095,7 +9096,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
+             /* [in] */ long lAuthProvType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_AuthenticationProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_AuthenticationProviderName( 
+             /* [in] */ __RPC__in BSTR bstrAuthProvName) = 0;
+@@ -9172,7 +9173,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE AttachCurrentSecurityContext2( void) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SoapEnvelope( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSoapEnvelope) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSoapEnvelope) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_CompoundMessage( 
+             /* [retval][out] */ __RPC__out VARIANT *pvarCompoundMessage) = 0;
+@@ -10092,7 +10093,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
+             /* [in] */ long lAppSpecific) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SourceMachineGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_BodyLength( 
+             /* [retval][out] */ __RPC__out long *pcbBody) = 0;
+@@ -10125,7 +10126,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
+             /* [in] */ long lAck) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Label( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrLabel) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_Label( 
+             /* [in] */ __RPC__in BSTR bstrLabel) = 0;
+@@ -10194,7 +10195,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
+             /* [in] */ VARIANT varExtension) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ConnectorTypeGuid( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuidConnectorType) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ConnectorTypeGuid( 
+             /* [in] */ __RPC__in BSTR bstrGuidConnectorType) = 0;
+@@ -10221,7 +10222,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
+             /* [in] */ long lAuthProvType) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_AuthenticationProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrAuthProvName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_AuthenticationProviderName( 
+             /* [in] */ __RPC__in BSTR bstrAuthProvName) = 0;
+@@ -10298,7 +10299,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE AttachCurrentSecurityContext2( void) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_SoapEnvelope( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSoapEnvelope) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrSoapEnvelope) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_CompoundMessage( 
+             /* [retval][out] */ __RPC__out VARIANT *pvarCompoundMessage) = 0;
+@@ -12473,7 +12474,7 @@ EXTERN_C const IID IID_IMSMQApplication;
+     public:
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE MachineIdOfMachineName( 
+             /* [in] */ __RPC__in BSTR MachineName,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuid) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrGuid) = 0;
+         
+     };
+     
+@@ -12617,7 +12618,7 @@ EXTERN_C const IID IID_IMSMQApplication2;
+         
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE MachineNameOfMachineId( 
+             /* [in] */ __RPC__in BSTR bstrGuid,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachineName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMachineName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_MSMQVersionMajor( 
+             /* [retval][out] */ __RPC__out short *psMSMQVersionMajor) = 0;
+@@ -12836,7 +12837,7 @@ EXTERN_C const IID IID_IMSMQApplication3;
+             /* [retval][out] */ __RPC__out VARIANT *pvPrivateQueues) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_DirectoryServiceServer( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDirectoryServiceServer) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrDirectoryServiceServer) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_IsConnected( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsConnected) = 0;
+@@ -12848,7 +12849,7 @@ EXTERN_C const IID IID_IMSMQApplication3;
+             /* [in] */ __RPC__in BSTR bstrMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Machine( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMachine) = 0;
+         
+         virtual /* [helpstringcontext] */ HRESULT STDMETHODCALLTYPE Connect( void) = 0;
+         
+@@ -13151,19 +13152,19 @@ EXTERN_C const IID IID_IMSMQDestination;
+             /* [in] */ __RPC__in_opt IDispatch *pIADs) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_ADsPath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrADsPath) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_ADsPath( 
+             /* [in] */ __RPC__in BSTR bstrADsPath) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_PathName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrPathName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_PathName( 
+             /* [in] */ __RPC__in BSTR bstrPathName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propput][helpstringcontext] */ HRESULT STDMETHODCALLTYPE put_FormatName( 
+             /* [in] */ __RPC__in BSTR bstrFormatName) = 0;
+@@ -13747,10 +13748,10 @@ EXTERN_C const IID IID_IMSMQManagement;
+             /* [optional][in] */ __RPC__in VARIANT *FormatName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_FormatName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrFormatName) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_Machine( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pbstrMachine) = 0;
+         
+         virtual /* [id][propget][helpstringcontext] */ HRESULT STDMETHODCALLTYPE get_MessageCount( 
+             /* [retval][out] */ __RPC__out long *plMessageCount) = 0;

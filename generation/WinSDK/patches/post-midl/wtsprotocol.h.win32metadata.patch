@@ -1,0 +1,300 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h b/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
+index dbecfb82c8..e997c595b1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wtsprotocol.h
+@@ -229,6 +229,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -255,7 +256,7 @@ EXTERN_C const IID IID_IWTSProtocolManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("F9EAF6CC-ED79-4f01-821D-1F881B9F66CC")
++    MIDL_INTERFACE("F9EAF6CC-ED79-4f01-821D-1F881B9F66CC") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolManager : public IUnknown
+     {
+     public:
+@@ -402,7 +403,7 @@ EXTERN_C const IID IID_IWTSProtocolListener;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-45f0-4394-8f69-32b2bc0ef4ca")
++    MIDL_INTERFACE("23083765-45f0-4394-8f69-32b2bc0ef4ca") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolListener : public IUnknown
+     {
+     public:
+@@ -498,7 +499,7 @@ EXTERN_C const IID IID_IWTSProtocolListenerCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-1a2d-4de2-97de-4a35f260f0b3")
++    MIDL_INTERFACE("23083765-1a2d-4de2-97de-4a35f260f0b3") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolListenerCallback : public IUnknown
+     {
+     public:
+@@ -589,7 +590,7 @@ EXTERN_C const IID IID_IWTSProtocolConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-9095-4648-98bf-ef81c914032d")
++    MIDL_INTERFACE("23083765-9095-4648-98bf-ef81c914032d") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolConnection : public IUnknown
+     {
+     public:
+@@ -1030,7 +1031,7 @@ EXTERN_C const IID IID_IWTSProtocolConnectionCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-75eb-41fe-b4fb-e086242afa0f")
++    MIDL_INTERFACE("23083765-75eb-41fe-b4fb-e086242afa0f") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolConnectionCallback : public IUnknown
+     {
+     public:
+@@ -1163,7 +1164,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf")
++    MIDL_INTERFACE("ee3b0c14-37fb-456b-bab3-6d6cd51e13bf") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolShadowConnection : public IUnknown
+     {
+     public:
+@@ -1320,7 +1321,7 @@ EXTERN_C const IID IID_IWTSProtocolShadowCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a")
++    MIDL_INTERFACE("503a2504-aae5-4ab1-93e0-6d1c4bc6f71a") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolShadowCallback : public IUnknown
+     {
+     public:
+@@ -1454,7 +1455,7 @@ EXTERN_C const IID IID_IWTSProtocolLicenseConnection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23083765-178c-4079-8e4a-fea6496a4d70")
++    MIDL_INTERFACE("23083765-178c-4079-8e4a-fea6496a4d70") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolLicenseConnection : public IUnknown
+     {
+     public:
+@@ -1600,7 +1601,7 @@ EXTERN_C const IID IID_IWTSProtocolLogonErrorRedirector;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FD9B61A7-2916-4627-8DEE-4328711AD6CB")
++    MIDL_INTERFACE("FD9B61A7-2916-4627-8DEE-4328711AD6CB") _Windows_SupportedOS_Server2008_ 
+     IWTSProtocolLogonErrorRedirector : public IUnknown
+     {
+     public:
+@@ -1777,7 +1778,7 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("654A5A6A-2550-47EB-B6F7-EBD637475265")
+-    IWRdsProtocolSettings : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolSettings : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSettings( 
+@@ -1838,7 +1839,7 @@ EXTERN_C const IID IID_IWRdsProtocolSettings;
+         END_INTERFACE
+     } IWRdsProtocolSettingsVtbl;
+ 
+-    interface IWRdsProtocolSettings
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolSettings
+     {
+         CONST_VTBL struct IWRdsProtocolSettingsVtbl *lpVtbl;
+     };
+@@ -1887,7 +1888,7 @@ EXTERN_C const IID IID_IWRdsProtocolManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DC796967-3ABB-40CD-A446-105276B58950")
+-    IWRdsProtocolManager : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -2006,7 +2007,7 @@ EXTERN_C const IID IID_IWRdsProtocolManager;
+         END_INTERFACE
+     } IWRdsProtocolManagerVtbl;
+ 
+-    interface IWRdsProtocolManager
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolManager
+     {
+         CONST_VTBL struct IWRdsProtocolManagerVtbl *lpVtbl;
+     };
+@@ -2073,7 +2074,7 @@ EXTERN_C const IID IID_IWRdsProtocolListener;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("FCBC131B-C686-451D-A773-E279E230F540")
+-    IWRdsProtocolListener : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolListener : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSettings( 
+@@ -2132,7 +2133,7 @@ EXTERN_C const IID IID_IWRdsProtocolListener;
+         END_INTERFACE
+     } IWRdsProtocolListenerVtbl;
+ 
+-    interface IWRdsProtocolListener
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolListener
+     {
+         CONST_VTBL struct IWRdsProtocolListenerVtbl *lpVtbl;
+     };
+@@ -2184,7 +2185,7 @@ EXTERN_C const IID IID_IWRdsProtocolListenerCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3AB27E5B-4449-4DC1-B74A-91621D4FE984")
+-    IWRdsProtocolListenerCallback : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolListenerCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnConnected( 
+@@ -2233,7 +2234,7 @@ EXTERN_C const IID IID_IWRdsProtocolListenerCallback;
+         END_INTERFACE
+     } IWRdsProtocolListenerCallbackVtbl;
+ 
+-    interface IWRdsProtocolListenerCallback
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolListenerCallback
+     {
+         CONST_VTBL struct IWRdsProtocolListenerCallbackVtbl *lpVtbl;
+     };
+@@ -2279,7 +2280,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("324ED94F-FDAF-4FF6-81A8-42ABE755830B")
+-    IWRdsProtocolConnection : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolConnection : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetLogonErrorRedirector( 
+@@ -2618,7 +2619,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnection;
+         END_INTERFACE
+     } IWRdsProtocolConnectionVtbl;
+ 
+-    interface IWRdsProtocolConnection
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolConnection
+     {
+         CONST_VTBL struct IWRdsProtocolConnectionVtbl *lpVtbl;
+     };
+@@ -2733,7 +2734,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F1D70332-D070-4EF1-A088-78313536C2D6")
+-    IWRdsProtocolConnectionCallback : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolConnectionCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnReady( void) = 0;
+@@ -2808,7 +2809,7 @@ EXTERN_C const IID IID_IWRdsProtocolConnectionCallback;
+         END_INTERFACE
+     } IWRdsProtocolConnectionCallbackVtbl;
+ 
+-    interface IWRdsProtocolConnectionCallback
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolConnectionCallback
+     {
+         CONST_VTBL struct IWRdsProtocolConnectionCallbackVtbl *lpVtbl;
+     };
+@@ -2866,7 +2867,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9AE85CE6-CADE-4548-8FEB-99016597F60A")
+-    IWRdsProtocolShadowConnection : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolShadowConnection : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Start( 
+@@ -2971,7 +2972,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowConnection;
+         END_INTERFACE
+     } IWRdsProtocolShadowConnectionVtbl;
+ 
+-    interface IWRdsProtocolShadowConnection
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolShadowConnection
+     {
+         CONST_VTBL struct IWRdsProtocolShadowConnectionVtbl *lpVtbl;
+     };
+@@ -3023,7 +3024,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowCallback;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E0667CE0-0372-40D6-ADB2-A0F3322674D6")
+-    IWRdsProtocolShadowCallback : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolShadowCallback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE StopShadow( void) = 0;
+@@ -3108,7 +3109,7 @@ EXTERN_C const IID IID_IWRdsProtocolShadowCallback;
+         END_INTERFACE
+     } IWRdsProtocolShadowCallbackVtbl;
+ 
+-    interface IWRdsProtocolShadowCallback
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolShadowCallback
+     {
+         CONST_VTBL struct IWRdsProtocolShadowCallbackVtbl *lpVtbl;
+     };
+@@ -3157,7 +3158,7 @@ EXTERN_C const IID IID_IWRdsProtocolLicenseConnection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("1D6A145F-D095-4424-957A-407FAE822D84")
+-    IWRdsProtocolLicenseConnection : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolLicenseConnection : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE RequestLicensingCapabilities( 
+@@ -3248,7 +3249,7 @@ EXTERN_C const IID IID_IWRdsProtocolLicenseConnection;
+         END_INTERFACE
+     } IWRdsProtocolLicenseConnectionVtbl;
+ 
+-    interface IWRdsProtocolLicenseConnection
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolLicenseConnection
+     {
+         CONST_VTBL struct IWRdsProtocolLicenseConnectionVtbl *lpVtbl;
+     };
+@@ -3303,7 +3304,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("519FE83B-142A-4120-A3D5-A405D315281A")
+-    IWRdsProtocolLogonErrorRedirector : public IUnknown
++    _Windows_SupportedOS_Server2012_ IWRdsProtocolLogonErrorRedirector : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnBeginPainting( void) = 0;
+@@ -3312,7 +3313,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR pszMessage,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RedirectMessage( 
+             /* [annotation][string][in] */ 
+@@ -3322,7 +3323,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][in] */ 
+             _In_  UINT uType,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RedirectLogonError( 
+             /* [annotation][in] */ 
+@@ -3336,7 +3337,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+             /* [annotation][in] */ 
+             _In_  UINT uType,
+             /* [annotation][out] */ 
+-            _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
++            _Win32_AssociatedEnum_(WTS_LOGON_ERROR_REDIRECTOR_RESPONSE) _Out_  WRDS_LOGON_ERROR_REDIRECTOR_RESPONSE *pResponse) = 0;
+         
+     };
+     
+@@ -3406,7 +3407,7 @@ EXTERN_C const IID IID_IWRdsProtocolLogonErrorRedirector;
+         END_INTERFACE
+     } IWRdsProtocolLogonErrorRedirectorVtbl;
+ 
+-    interface IWRdsProtocolLogonErrorRedirector
++    interface _Windows_SupportedOS_Server2012_ IWRdsProtocolLogonErrorRedirector
+     {
+         CONST_VTBL struct IWRdsProtocolLogonErrorRedirectorVtbl *lpVtbl;
+     };

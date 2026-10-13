@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h b/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
+index eb5e609b4b..7947e866b0 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ccgplugins.h
+@@ -32,6 +32,7 @@
+ 
+ #ifndef __ccgplugins_h__
+ #define __ccgplugins_h__
++#include "win32metadata_annotations.h"
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1020)
+ #pragma once
+@@ -74,7 +75,7 @@ EXTERN_C const IID IID_ICcgDomainAuthCredentials;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6ecda518-2010-4437-8bc3-46e752b7b172")
+-    ICcgDomainAuthCredentials : public IUnknown
++     ICcgDomainAuthCredentials : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetPasswordCredentials( 

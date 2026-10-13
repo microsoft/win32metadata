@@ -1,0 +1,148 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fltdefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/fltdefs.h
+index 8c586851dc..889703acac 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fltdefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fltdefs.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1995-1999  Microsoft Corporation
+@@ -250,76 +251,76 @@ PfCreateInterface(
+     PFFORWARD_ACTION outAction,
+     BOOL             bUseLog,
+     BOOL             bMustBeUnique,
+-    INTERFACE_HANDLE *ppInterface
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE *ppInterface
+     );
+ 
+ PFAPIENTRY
+ PfDeleteInterface(
+-    INTERFACE_HANDLE pInterface
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE pInterface
+     );
+ 
+ PFAPIENTRY
+ PfAddFiltersToInterface(
+-    INTERFACE_HANDLE      ih,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE      ih,
+     DWORD                 cInFilters,
+-    PPF_FILTER_DESCRIPTOR pfiltIn,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_FILTER_DESCRIPTOR pfiltIn,
+     DWORD                 cOutFilters,
+-    PPF_FILTER_DESCRIPTOR pfiltOut,
+-    PFILTER_HANDLE        pfHandle
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_FILTER_DESCRIPTOR pfiltOut,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFILTER_HANDLE        pfHandle
+     );
+ 
+ PFAPIENTRY
+ PfRemoveFiltersFromInterface(
+-    INTERFACE_HANDLE      ih,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE      ih,
+     DWORD                 cInFilters,
+-    PPF_FILTER_DESCRIPTOR pfiltIn,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_FILTER_DESCRIPTOR pfiltIn,
+     DWORD                 cOutFilters,
+-    PPF_FILTER_DESCRIPTOR pfiltOut
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_FILTER_DESCRIPTOR pfiltOut
+     );
+ 
+ PFAPIENTRY
+ PfRemoveFilterHandles(
+-    INTERFACE_HANDLE   pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE   pInterface,
+     DWORD              cFilters,
+-    PFILTER_HANDLE     pvHandles
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PFILTER_HANDLE     pvHandles
+     );
+ 
+ 
+ PFAPIENTRY
+ PfUnBindInterface(
+-    INTERFACE_HANDLE   pInterface
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE   pInterface
+     );
+ 
+ PFAPIENTRY
+ PfBindInterfaceToIndex(
+-    INTERFACE_HANDLE    pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE    pInterface,
+     DWORD               dwIndex,
+     PFADDRESSTYPE       pfatLinkType,
+-    PBYTE               LinkIPAddress
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE               LinkIPAddress
+     );
+ 
+ PFAPIENTRY
+ PfBindInterfaceToIPAddress(
+-    INTERFACE_HANDLE    pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE    pInterface,
+     PFADDRESSTYPE       pfatType,
+-    PBYTE               IPAddress
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE               IPAddress
+     );
+ 
+ PFAPIENTRY
+ PfRebindFilters(
+-    INTERFACE_HANDLE    pInterface,
+-    PPF_LATEBIND_INFO   pLateBindInfo
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE    pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_LATEBIND_INFO   pLateBindInfo
+     );
+ 
+ PFAPIENTRY
+ PfAddGlobalFilterToInterface(
+-    INTERFACE_HANDLE   pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE   pInterface,
+     GLOBAL_FILTER      gfFilter
+     );
+ 
+ PFAPIENTRY
+ PfRemoveGlobalFilterFromInterface(
+-    INTERFACE_HANDLE   pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE   pInterface,
+     GLOBAL_FILTER      gfFilter
+     );
+ 
+@@ -345,13 +346,13 @@ PfMakeLog(
+ 
+ PFAPIENTRY
+ PfSetLogBuffer(
+-    PBYTE   pbBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE   pbBuffer,
+     DWORD   dwSize,
+     DWORD   dwThreshold,
+     DWORD   dwEntries,
+-    PDWORD  pdwLoggedEntries,
+-    PDWORD  pdwLostEntries,
+-    PDWORD  pdwSizeUsed
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD  pdwLoggedEntries,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD  pdwLostEntries,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD  pdwSizeUsed
+     );
+ 
+ //
+@@ -386,9 +387,9 @@ PfDeleteLog(
+ 
+ PFAPIENTRY
+ PfGetInterfaceStatistics(
+-    INTERFACE_HANDLE    pInterface,
+-    PPF_INTERFACE_STATS ppfStats,
+-    PDWORD              pdwBufferSize,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACE_HANDLE    pInterface,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPF_INTERFACE_STATS ppfStats,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PDWORD              pdwBufferSize,
+     BOOL                fResetCounters
+     );
+ 
+@@ -406,8 +407,8 @@ PfTestPacket(
+     INTERFACE_HANDLE   pInInterface  OPTIONAL,
+     INTERFACE_HANDLE   pOutInterface OPTIONAL,
+     DWORD              cBytes,
+-    PBYTE              pbPacket,
+-    PPFFORWARD_ACTION  ppAction
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBYTE              pbPacket,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PPFFORWARD_ACTION  ppAction
+     );
+ 
+ 

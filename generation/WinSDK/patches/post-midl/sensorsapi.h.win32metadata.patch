@@ -1,0 +1,81 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/SensorsApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/SensorsApi.h
+index 4d9ee3d916..74d681eb00 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/SensorsApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/SensorsApi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -253,7 +254,7 @@ EXTERN_C const IID IID_ISensorManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("BD77DB67-45A8-42DC-8D00-6DCF15F8377A")
++    MIDL_INTERFACE("BD77DB67-45A8-42DC-8D00-6DCF15F8377A") _Windows_SupportedOS_Windows7_ 
+     ISensorManager : public IUnknown
+     {
+     public:
+@@ -391,7 +392,7 @@ EXTERN_C const IID IID_ILocationPermissions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D5FB0A7F-E74E-44f5-8E02-4806863A274F")
++    MIDL_INTERFACE("D5FB0A7F-E74E-44f5-8E02-4806863A274F") _Windows_SupportedOS_Windows8_ 
+     ILocationPermissions : public IUnknown
+     {
+     public:
+@@ -486,7 +487,7 @@ EXTERN_C const IID IID_ISensorCollection;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("23571E11-E545-4DD8-A337-B89BF44B10DF")
++    MIDL_INTERFACE("23571E11-E545-4DD8-A337-B89BF44B10DF") _Windows_SupportedOS_Windows7_ 
+     ISensorCollection : public IUnknown
+     {
+     public:
+@@ -625,7 +626,7 @@ EXTERN_C const IID IID_ISensor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5FA08F80-2657-458E-AF75-46F73FA6AC5C")
++    MIDL_INTERFACE("5FA08F80-2657-458E-AF75-46F73FA6AC5C") _Windows_SupportedOS_Windows7_ 
+     ISensor : public IUnknown
+     {
+     public:
+@@ -639,7 +640,7 @@ EXTERN_C const IID IID_ISensor;
+             /* [out] */ __RPC__out SENSOR_TYPE_ID *pSensorType) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetFriendlyName( 
+-            /* [out] */ __RPC__deref_out_opt BSTR *pFriendlyName) = 0;
++            /* [out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pFriendlyName) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetProperty( 
+             /* [in] */ __RPC__in REFPROPERTYKEY key,
+@@ -877,7 +878,7 @@ EXTERN_C const IID IID_ISensorDataReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0AB9DF9B-C4B5-4796-8898-0470706A2E1D")
++    MIDL_INTERFACE("0AB9DF9B-C4B5-4796-8898-0470706A2E1D") _Windows_SupportedOS_Windows7_ 
+     ISensorDataReport : public IUnknown
+     {
+     public:
+@@ -987,7 +988,7 @@ EXTERN_C const IID IID_ISensorManagerEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9B3B0B86-266A-4AAD-B21F-FDE5501001B7")
++    MIDL_INTERFACE("9B3B0B86-266A-4AAD-B21F-FDE5501001B7") _Windows_SupportedOS_Windows7_ 
+     ISensorManagerEvents : public IUnknown
+     {
+     public:
+@@ -1073,7 +1074,7 @@ EXTERN_C const IID IID_ISensorEvents;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5D8DCC91-4641-47E7-B7C3-B74F48A6C391")
++    MIDL_INTERFACE("5D8DCC91-4641-47E7-B7C3-B74F48A6C391") _Windows_SupportedOS_Windows7_ 
+     ISensorEvents : public IUnknown
+     {
+     public:

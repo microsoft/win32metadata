@@ -1,0 +1,257 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
+index ec10130845..f5c30135b6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d2d1_1.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //---------------------------------------------------------------------------
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ //
+@@ -670,7 +671,7 @@ EXTERN_C CONST IID IID_ID2D1Multithread;
+ /// <summary>
+ /// User-implementable interface for introspecting on a metafile.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("82237326-8111-4f7c-bcf4-b5c1175564fe") ID2D1GdiMetafileSink  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("82237326-8111-4f7c-bcf4-b5c1175564fe") ID2D1GdiMetafileSink  : public IUnknown
+ {
+     
+     /// <summary>
+@@ -687,7 +688,7 @@ interface DX_DECLARE_INTERFACE("82237326-8111-4f7c-bcf4-b5c1175564fe") ID2D1GdiM
+ /// <summary>
+ /// Interface encapsulating a GDI/GDI+ metafile.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2f543dc3-cfc1-4211-864f-cfd91c6f3395") ID2D1GdiMetafile  : public ID2D1Resource
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("2f543dc3-cfc1-4211-864f-cfd91c6f3395") ID2D1GdiMetafile  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -710,7 +711,7 @@ interface DX_DECLARE_INTERFACE("2f543dc3-cfc1-4211-864f-cfd91c6f3395") ID2D1GdiM
+ /// Caller-supplied implementation of an interface to receive the recorded command
+ /// list.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("54d7898a-a061-40a7-bec7-e465bcba2c4f") ID2D1CommandSink  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("54d7898a-a061-40a7-bec7-e465bcba2c4f") ID2D1CommandSink  : public IUnknown
+ {
+     
+     STDMETHOD(BeginDraw)(
+@@ -848,7 +849,7 @@ interface DX_DECLARE_INTERFACE("54d7898a-a061-40a7-bec7-e465bcba2c4f") ID2D1Comm
+ /// <summary>
+ /// The commandList interface.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("b4f34a19-2383-4d76-94f6-ec343657c3dc") ID2D1CommandList  : public ID2D1Image
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("b4f34a19-2383-4d76-94f6-ec343657c3dc") ID2D1CommandList  : public ID2D1Image
+ {
+     
+     /// <summary>
+@@ -870,7 +871,7 @@ interface DX_DECLARE_INTERFACE("b4f34a19-2383-4d76-94f6-ec343657c3dc") ID2D1Comm
+ /// Converts Direct2D primitives stored in an ID2D1CommandList into a fixed page
+ /// representation. The print sub-system then consumes the primitives.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("2c1d867d-c290-41c8-ae7e-34a98702e9a5") ID2D1PrintControl  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("2c1d867d-c290-41c8-ae7e-34a98702e9a5") ID2D1PrintControl  : public IUnknown
+ {
+     
+     STDMETHOD(AddPage)(
+@@ -890,7 +891,7 @@ interface DX_DECLARE_INTERFACE("2c1d867d-c290-41c8-ae7e-34a98702e9a5") ID2D1Prin
+ /// Provides a brush that can take any effect, command list or bitmap and use it to
+ /// fill a 2D shape.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("fe9e984d-3f95-407c-b5db-cb94d4e8f87c") ID2D1ImageBrush  : public ID2D1Brush
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("fe9e984d-3f95-407c-b5db-cb94d4e8f87c") ID2D1ImageBrush  : public ID2D1Brush
+ {
+     
+     STDMETHOD_(void, SetImage)(
+@@ -936,7 +937,7 @@ interface DX_DECLARE_INTERFACE("fe9e984d-3f95-407c-b5db-cb94d4e8f87c") ID2D1Imag
+ /// A bitmap brush allows a bitmap to be used to fill a geometry.  Interpolation
+ /// mode is specified with D2D1_INTERPOLATION_MODE
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("41343a53-e41a-49a2-91cd-21793bbb62e5") ID2D1BitmapBrush1  : public ID2D1BitmapBrush
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("41343a53-e41a-49a2-91cd-21793bbb62e5") ID2D1BitmapBrush1  : public ID2D1BitmapBrush
+ {
+     
+     /// <summary>
+@@ -954,7 +955,7 @@ interface DX_DECLARE_INTERFACE("41343a53-e41a-49a2-91cd-21793bbb62e5") ID2D1Bitm
+ /// <summary>
+ /// Extends a stroke style to allow nominal width strokes.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("10a72a66-e91c-43f4-993f-ddf4b82b0b4a") ID2D1StrokeStyle1  : public ID2D1StrokeStyle
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("10a72a66-e91c-43f4-993f-ddf4b82b0b4a") ID2D1StrokeStyle1  : public ID2D1StrokeStyle
+ {
+     
+     STDMETHOD_(D2D1_STROKE_TRANSFORM_TYPE, GetStrokeTransformType)(
+@@ -967,7 +968,7 @@ interface DX_DECLARE_INTERFACE("10a72a66-e91c-43f4-993f-ddf4b82b0b4a") ID2D1Stro
+ /// particular, it provides the path geometry-specific
+ /// ComputePointAndSegmentAtLength method.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("62baa2d2-ab54-41b7-b872-787e0106a421") ID2D1PathGeometry1  : public ID2D1PathGeometry
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("62baa2d2-ab54-41b7-b872-787e0106a421") ID2D1PathGeometry1  : public ID2D1PathGeometry
+ {
+     
+     STDMETHOD(ComputePointAndSegmentAtLength)(
+@@ -1021,7 +1022,7 @@ interface DX_DECLARE_INTERFACE("62baa2d2-ab54-41b7-b872-787e0106a421") ID2D1Path
+ /// Represents a set of run-time bindable and discoverable properties that allow a
+ /// data-driven application to modify the state of a Direct2D effect.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("483473d7-cd46-4f9d-9d3a-3112aa80159d") ID2D1Properties  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("483473d7-cd46-4f9d-9d3a-3112aa80159d") ID2D1Properties  : public IUnknown
+ {
+     
+     /// <summary>
+@@ -1296,7 +1297,7 @@ interface DX_DECLARE_INTERFACE("483473d7-cd46-4f9d-9d3a-3112aa80159d") ID2D1Prop
+ /// The effect interface. Properties control how the effect is rendered. The effect
+ /// is Drawn with the DrawImage call.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("28211a43-7d89-476f-8181-2d6159b220ad") ID2D1Effect  : public ID2D1Properties
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("28211a43-7d89-476f-8181-2d6159b220ad") ID2D1Effect  : public ID2D1Properties
+ {
+     
+     /// <summary>
+@@ -1367,7 +1368,7 @@ interface DX_DECLARE_INTERFACE("28211a43-7d89-476f-8181-2d6159b220ad") ID2D1Effe
+ /// Represents a bitmap that can be used as a surface for an ID2D1DeviceContext or
+ /// mapped into system memory, and can contain additional color context information.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("a898a84c-3873-4588-b08b-ebbf978df041") ID2D1Bitmap1  : public ID2D1Bitmap
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("a898a84c-3873-4588-b08b-ebbf978df041") ID2D1Bitmap1  : public ID2D1Bitmap
+ {
+     
+     /// <summary>
+@@ -1411,7 +1412,7 @@ interface DX_DECLARE_INTERFACE("a898a84c-3873-4588-b08b-ebbf978df041") ID2D1Bitm
+ /// <summary>
+ /// Represents a color context that can be used with an ID2D1Bitmap1 object.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("1c4820bb-5771-4518-a581-2fe4dd0ec657") ID2D1ColorContext  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("1c4820bb-5771-4518-a581-2fe4dd0ec657") ID2D1ColorContext  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -1440,7 +1441,7 @@ interface DX_DECLARE_INTERFACE("1c4820bb-5771-4518-a581-2fe4dd0ec657") ID2D1Colo
+ /// Represents an collection of gradient stops that can then be the source resource
+ /// for either a linear or radial gradient brush.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("ae1572f4-5dd0-4777-998b-9279472ae63b") ID2D1GradientStopCollection1  : public ID2D1GradientStopCollection
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("ae1572f4-5dd0-4777-998b-9279472ae63b") ID2D1GradientStopCollection1  : public ID2D1GradientStopCollection
+ {
+     
+     /// <summary>
+@@ -1492,7 +1493,7 @@ interface DX_DECLARE_INTERFACE("ae1572f4-5dd0-4777-998b-9279472ae63b") ID2D1Grad
+ /// <summary>
+ /// Represents drawing state.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("689f1f85-c72e-4e33-8f19-85754efd5ace") ID2D1DrawingStateBlock1  : public ID2D1DrawingStateBlock
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("689f1f85-c72e-4e33-8f19-85754efd5ace") ID2D1DrawingStateBlock1  : public ID2D1DrawingStateBlock
+ {
+     
+     /// <summary>
+@@ -1519,7 +1520,7 @@ interface DX_DECLARE_INTERFACE("689f1f85-c72e-4e33-8f19-85754efd5ace") ID2D1Draw
+ /// The device context represents a set of state and a command buffer that is used
+ /// to render to a target bitmap.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("e8f7fe7a-191c-466d-ad95-975678bda998") ID2D1DeviceContext  : public ID2D1RenderTarget
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("e8f7fe7a-191c-466d-ad95-975678bda998") ID2D1DeviceContext  : public ID2D1RenderTarget
+ {
+     
+     /// <summary>
+@@ -2161,7 +2162,7 @@ interface DX_DECLARE_INTERFACE("e8f7fe7a-191c-466d-ad95-975678bda998") ID2D1Devi
+ /// The device defines a resource domain whose objects and device contexts can be
+ /// used together.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("47dd575d-ac05-4cdd-8049-9b02cd16f44c") ID2D1Device  : public ID2D1Resource
++interface _WIN32META_ANNOTATION_("win32metadata:agile")  _Windows_SupportedOS_Windows8_  DX_DECLARE_INTERFACE("47dd575d-ac05-4cdd-8049-9b02cd16f44c") ID2D1Device  : public ID2D1Resource
+ {
+     
+     /// <summary>
+@@ -2220,7 +2221,7 @@ interface DX_DECLARE_INTERFACE("47dd575d-ac05-4cdd-8049-9b02cd16f44c") ID2D1Devi
+ /// <summary>
+ /// Creates Direct2D resources.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("bb12d362-daee-4b9a-aa1d-14ba401cfa1f") ID2D1Factory1  : public ID2D1Factory
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("bb12d362-daee-4b9a-aa1d-14ba401cfa1f") ID2D1Factory1  : public ID2D1Factory
+ {
+     
+     /// <summary>
+@@ -2368,7 +2369,7 @@ interface DX_DECLARE_INTERFACE("bb12d362-daee-4b9a-aa1d-14ba401cfa1f") ID2D1Fact
+ /// A locking mechanism from a Direct2D factory that Direct2D uses to control
+ /// exclusive resource access in an app that is uses multiple threads.
+ /// </summary>
+-interface DX_DECLARE_INTERFACE("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3") ID2D1Multithread  : public IUnknown
++interface _Windows_SupportedOS_Windows8_  _WIN32META_ANNOTATION_("win32metadata:agile")  DX_DECLARE_INTERFACE("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3") ID2D1Multithread  : public IUnknown
+ {
+     
+     /// <summary>
+@@ -2399,43 +2400,43 @@ interface DX_DECLARE_INTERFACE("31e6e7bc-e0ff-4d46-8c64-a0a8c41c15d3") ID2D1Mult
+ #ifdef D2D_USE_C_DEFINITIONS
+ 
+ 
+-typedef interface ID2D1GdiMetafileSink ID2D1GdiMetafileSink;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1GdiMetafileSink ID2D1GdiMetafileSink;
+ 
+-typedef interface ID2D1GdiMetafile ID2D1GdiMetafile;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1GdiMetafile ID2D1GdiMetafile;
+ 
+-typedef interface ID2D1CommandSink ID2D1CommandSink;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1CommandSink ID2D1CommandSink;
+ 
+-typedef interface ID2D1CommandList ID2D1CommandList;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1CommandList ID2D1CommandList;
+ 
+-typedef interface ID2D1PrintControl ID2D1PrintControl;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1PrintControl ID2D1PrintControl;
+ 
+-typedef interface ID2D1ImageBrush ID2D1ImageBrush;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1ImageBrush ID2D1ImageBrush;
+ 
+-typedef interface ID2D1BitmapBrush1 ID2D1BitmapBrush1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1BitmapBrush1 ID2D1BitmapBrush1;
+ 
+-typedef interface ID2D1StrokeStyle1 ID2D1StrokeStyle1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1StrokeStyle1 ID2D1StrokeStyle1;
+ 
+-typedef interface ID2D1PathGeometry1 ID2D1PathGeometry1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1PathGeometry1 ID2D1PathGeometry1;
+ 
+-typedef interface ID2D1Properties ID2D1Properties;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1Properties ID2D1Properties;
+ 
+ typedef interface ID2D1Effect ID2D1Effect;
+ 
+-typedef interface ID2D1Bitmap1 ID2D1Bitmap1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1Bitmap1 ID2D1Bitmap1;
+ 
+ typedef interface ID2D1ColorContext ID2D1ColorContext;
+ 
+-typedef interface ID2D1GradientStopCollection1 ID2D1GradientStopCollection1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1GradientStopCollection1 ID2D1GradientStopCollection1;
+ 
+-typedef interface ID2D1DrawingStateBlock1 ID2D1DrawingStateBlock1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1DrawingStateBlock1 ID2D1DrawingStateBlock1;
+ 
+-typedef interface ID2D1DeviceContext ID2D1DeviceContext;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1DeviceContext ID2D1DeviceContext;
+ 
+ typedef interface ID2D1Device ID2D1Device;
+ 
+-typedef interface ID2D1Factory1 ID2D1Factory1;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1Factory1 ID2D1Factory1;
+ 
+-typedef interface ID2D1Multithread ID2D1Multithread;
++_Windows_SupportedOS_Windows8_ typedef interface ID2D1Multithread ID2D1Multithread;
+ 
+ #endif
+ 
+@@ -2445,14 +2446,14 @@ extern "C"
+ {
+ #endif
+ 
+-    HRESULT WINAPI 
++    _Windows_SupportedOS_Windows8_ HRESULT WINAPI 
+     D2D1CreateDevice(
+         _In_ IDXGIDevice *dxgiDevice,
+         _In_opt_ CONST D2D1_CREATION_PROPERTIES *creationProperties,
+         _Outptr_ ID2D1Device **d2dDevice
+         ); 
+         
+-    HRESULT WINAPI 
++    _Windows_SupportedOS_Windows8_ HRESULT WINAPI 
+     D2D1CreateDeviceContext(
+         _In_ IDXGISurface *dxgiSurface,
+         _In_opt_ CONST D2D1_CREATION_PROPERTIES *creationProperties,

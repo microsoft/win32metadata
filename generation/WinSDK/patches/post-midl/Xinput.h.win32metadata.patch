@@ -1,0 +1,520 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
+index 4b51b443e0..62d574f0c3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
+@@ -12,6 +12,7 @@
+ #endif
+ 
+ #include <windef.h>
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Application Family
+@@ -193,7 +194,7 @@
+ //
+ typedef struct _XINPUT_GAMEPAD
+ {
+-    WORD                                wButtons;
++    _Win32_AssociatedEnum_(XINPUT_GAMEPAD_BUTTON_FLAGS) WORD                                wButtons;
+     BYTE                                bLeftTrigger;
+     BYTE                                bRightTrigger;
+     SHORT                               sThumbLX;
+@@ -216,9 +217,9 @@ typedef struct _XINPUT_VIBRATION
+ 
+ typedef struct _XINPUT_CAPABILITIES
+ {
+-    BYTE                                Type;
+-    BYTE                                SubType;
+-    WORD                                Flags;
++    _Win32_AssociatedEnum_(XINPUT_DEVTYPE) BYTE                                Type;
++    _Win32_AssociatedEnum_(XINPUT_DEVSUBTYPE) BYTE                                SubType;
++    _Win32_AssociatedEnum_(XINPUT_CAPABILITIES_FLAGS) WORD                                Flags;
+     XINPUT_GAMEPAD                      Gamepad;
+     XINPUT_VIBRATION                    Vibration;
+ } XINPUT_CAPABILITIES, *PXINPUT_CAPABILITIES;
+@@ -227,15 +228,15 @@ typedef struct _XINPUT_CAPABILITIES
+ 
+ typedef struct _XINPUT_BATTERY_INFORMATION
+ {
+-    BYTE BatteryType;
+-    BYTE BatteryLevel;
++    _Win32_AssociatedEnum_(BATTERY_TYPE) BYTE BatteryType;
++    _Win32_AssociatedEnum_(BATTERY_LEVEL) BYTE BatteryLevel;
+ } XINPUT_BATTERY_INFORMATION, *PXINPUT_BATTERY_INFORMATION;
+ 
+ typedef struct _XINPUT_KEYSTROKE
+ {
+-    WORD    VirtualKey;
++    _Win32_AssociatedEnum_(XINPUT_VIRTUAL_KEY) WORD    VirtualKey;
+     WCHAR   Unicode;
+-    WORD    Flags;
++    _Win32_AssociatedEnum_(XINPUT_KEYSTROKE_FLAGS) WORD    Flags;
+     BYTE    UserIndex;
+     BYTE    HidCode;
+ } XINPUT_KEYSTROKE, *PXINPUT_KEYSTROKE;
+@@ -255,28 +256,31 @@ extern "C" {
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
++_Win32_ImportLibrary_("xinput1_4.dll") 
+ DWORD WINAPI XInputGetState
+ (
+     _In_  DWORD         dwUserIndex,  // Index of the gamer associated with the device
+     _Out_ XINPUT_STATE* pState        // Receives the current state
+ ) WIN_NOEXCEPT;
+ 
++_Win32_ImportLibrary_("xinput1_4.dll") 
+ DWORD WINAPI XInputSetState
+ (
+     _In_ DWORD             dwUserIndex,  // Index of the gamer associated with the device
+     _In_ XINPUT_VIBRATION* pVibration    // The vibration information to send to the controller
+ ) WIN_NOEXCEPT;
+ 
++_Win32_ImportLibrary_("xinput1_4.dll") 
+ DWORD WINAPI XInputGetCapabilities
+ (
+     _In_  DWORD                dwUserIndex,   // Index of the gamer associated with the device
+-    _In_  DWORD                dwFlags,       // Input flags that identify the device type
++    _Win32_AssociatedEnum_(XINPUT_FLAG) _In_  DWORD                dwFlags,       // Input flags that identify the device type
+     _Out_ XINPUT_CAPABILITIES* pCapabilities  // Receives the capabilities
+ ) WIN_NOEXCEPT;
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
+-void WINAPI XInputEnable
++_Win32_ImportLibrary_("xinput1_4.dll") void WINAPI XInputEnable
+ (
+     _In_ BOOL enable     // [in] Indicates whether xinput is enabled or disabled. 
+ ) WIN_NOEXCEPT;
+@@ -285,6 +289,7 @@ void WINAPI XInputEnable
+ #pragma deprecated(XInputEnable)
+ #endif
+ 
++_Win32_ImportLibrary_("xinput1_4.dll") 
+ DWORD WINAPI XInputGetAudioDeviceIds
+ (
+     _In_  DWORD                             dwUserIndex,        // Index of the gamer associated with the device
+@@ -294,17 +299,18 @@ DWORD WINAPI XInputGetAudioDeviceIds
+     _Inout_opt_ UINT*                       pCaptureCount       // Size of capture device ID string buffer (in wide-chars)
+ ) WIN_NOEXCEPT;
+ 
+-DWORD WINAPI XInputGetBatteryInformation
++_Win32_ImportLibrary_("xinput1_4.dll") DWORD WINAPI XInputGetBatteryInformation
+ (
+     _In_  DWORD                       dwUserIndex,        // Index of the gamer associated with the device
+-    _In_  BYTE                        devType,            // Which device on this user index
++    _Win32_AssociatedEnum_(BATTERY_DEVTYPE) _In_  BYTE                        devType,            // Which device on this user index
+     _Out_ XINPUT_BATTERY_INFORMATION* pBatteryInformation // Contains the level and types of batteries
+ ) WIN_NOEXCEPT;
+ 
++_Win32_ImportLibrary_("xinput1_4.dll") 
+ DWORD WINAPI XInputGetKeystroke
+ (
+     _In_       DWORD dwUserIndex,              // Index of the gamer associated with the device
+-    _Reserved_ DWORD dwReserved,               // Reserved for future use
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD dwReserved,               // Reserved for future use
+     _Out_      PXINPUT_KEYSTROKE pKeystroke    // Pointer to an XINPUT_KEYSTROKE structure that receives an input event.
+ ) WIN_NOEXCEPT;
+ 
+@@ -318,6 +324,7 @@ DWORD WINAPI XInputGetKeystroke
+ 
+ #if(_WIN32_WINNT < _WIN32_WINNT_WIN8)
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ DWORD WINAPI XInputGetDSoundAudioDeviceGuids
+ (
+     _In_  DWORD     dwUserIndex,          // Index of the gamer associated with the device
+@@ -332,4 +339,393 @@ DWORD WINAPI XInputGetDSoundAudioDeviceGuids
+ 
+ #ifdef __cplusplus
+ }
++
++#ifdef WIN32METADATA
++#pragma push_macro("VK_PAD_A")
++#undef VK_PAD_A
++#pragma push_macro("VK_PAD_B")
++#undef VK_PAD_B
++#pragma push_macro("VK_PAD_X")
++#undef VK_PAD_X
++#pragma push_macro("VK_PAD_Y")
++#undef VK_PAD_Y
++#pragma push_macro("VK_PAD_RSHOULDER")
++#undef VK_PAD_RSHOULDER
++#pragma push_macro("VK_PAD_LSHOULDER")
++#undef VK_PAD_LSHOULDER
++#pragma push_macro("VK_PAD_LTRIGGER")
++#undef VK_PAD_LTRIGGER
++#pragma push_macro("VK_PAD_RTRIGGER")
++#undef VK_PAD_RTRIGGER
++#pragma push_macro("VK_PAD_DPAD_UP")
++#undef VK_PAD_DPAD_UP
++#pragma push_macro("VK_PAD_DPAD_DOWN")
++#undef VK_PAD_DPAD_DOWN
++#pragma push_macro("VK_PAD_DPAD_LEFT")
++#undef VK_PAD_DPAD_LEFT
++#pragma push_macro("VK_PAD_DPAD_RIGHT")
++#undef VK_PAD_DPAD_RIGHT
++#pragma push_macro("VK_PAD_START")
++#undef VK_PAD_START
++#pragma push_macro("VK_PAD_BACK")
++#undef VK_PAD_BACK
++#pragma push_macro("VK_PAD_LTHUMB_PRESS")
++#undef VK_PAD_LTHUMB_PRESS
++#pragma push_macro("VK_PAD_RTHUMB_PRESS")
++#undef VK_PAD_RTHUMB_PRESS
++#pragma push_macro("VK_PAD_LTHUMB_UP")
++#undef VK_PAD_LTHUMB_UP
++#pragma push_macro("VK_PAD_LTHUMB_DOWN")
++#undef VK_PAD_LTHUMB_DOWN
++#pragma push_macro("VK_PAD_LTHUMB_RIGHT")
++#undef VK_PAD_LTHUMB_RIGHT
++#pragma push_macro("VK_PAD_LTHUMB_LEFT")
++#undef VK_PAD_LTHUMB_LEFT
++#pragma push_macro("VK_PAD_LTHUMB_UPLEFT")
++#undef VK_PAD_LTHUMB_UPLEFT
++#pragma push_macro("VK_PAD_LTHUMB_UPRIGHT")
++#undef VK_PAD_LTHUMB_UPRIGHT
++#pragma push_macro("VK_PAD_LTHUMB_DOWNRIGHT")
++#undef VK_PAD_LTHUMB_DOWNRIGHT
++#pragma push_macro("VK_PAD_LTHUMB_DOWNLEFT")
++#undef VK_PAD_LTHUMB_DOWNLEFT
++#pragma push_macro("VK_PAD_RTHUMB_UP")
++#undef VK_PAD_RTHUMB_UP
++#pragma push_macro("VK_PAD_RTHUMB_DOWN")
++#undef VK_PAD_RTHUMB_DOWN
++#pragma push_macro("VK_PAD_RTHUMB_RIGHT")
++#undef VK_PAD_RTHUMB_RIGHT
++#pragma push_macro("VK_PAD_RTHUMB_LEFT")
++#undef VK_PAD_RTHUMB_LEFT
++#pragma push_macro("VK_PAD_RTHUMB_UPLEFT")
++#undef VK_PAD_RTHUMB_UPLEFT
++#pragma push_macro("VK_PAD_RTHUMB_UPRIGHT")
++#undef VK_PAD_RTHUMB_UPRIGHT
++#pragma push_macro("VK_PAD_RTHUMB_DOWNRIGHT")
++#undef VK_PAD_RTHUMB_DOWNRIGHT
++#pragma push_macro("VK_PAD_RTHUMB_DOWNLEFT")
++#undef VK_PAD_RTHUMB_DOWNLEFT
++enum XINPUT_VIRTUAL_KEY : unsigned short
++{
++    VK_PAD_A = 22528,
++    VK_PAD_B = 22529,
++    VK_PAD_X = 22530,
++    VK_PAD_Y = 22531,
++    VK_PAD_RSHOULDER = 22532,
++    VK_PAD_LSHOULDER = 22533,
++    VK_PAD_LTRIGGER = 22534,
++    VK_PAD_RTRIGGER = 22535,
++    VK_PAD_DPAD_UP = 22544,
++    VK_PAD_DPAD_DOWN = 22545,
++    VK_PAD_DPAD_LEFT = 22546,
++    VK_PAD_DPAD_RIGHT = 22547,
++    VK_PAD_START = 22548,
++    VK_PAD_BACK = 22549,
++    VK_PAD_LTHUMB_PRESS = 22550,
++    VK_PAD_RTHUMB_PRESS = 22551,
++    VK_PAD_LTHUMB_UP = 22560,
++    VK_PAD_LTHUMB_DOWN = 22561,
++    VK_PAD_LTHUMB_RIGHT = 22562,
++    VK_PAD_LTHUMB_LEFT = 22563,
++    VK_PAD_LTHUMB_UPLEFT = 22564,
++    VK_PAD_LTHUMB_UPRIGHT = 22565,
++    VK_PAD_LTHUMB_DOWNRIGHT = 22566,
++    VK_PAD_LTHUMB_DOWNLEFT = 22567,
++    VK_PAD_RTHUMB_UP = 22576,
++    VK_PAD_RTHUMB_DOWN = 22577,
++    VK_PAD_RTHUMB_RIGHT = 22578,
++    VK_PAD_RTHUMB_LEFT = 22579,
++    VK_PAD_RTHUMB_UPLEFT = 22580,
++    VK_PAD_RTHUMB_UPRIGHT = 22581,
++    VK_PAD_RTHUMB_DOWNRIGHT = 22582,
++    VK_PAD_RTHUMB_DOWNLEFT = 22583,
++};
++#pragma pop_macro("VK_PAD_RTHUMB_DOWNLEFT")
++#pragma pop_macro("VK_PAD_RTHUMB_DOWNRIGHT")
++#pragma pop_macro("VK_PAD_RTHUMB_UPRIGHT")
++#pragma pop_macro("VK_PAD_RTHUMB_UPLEFT")
++#pragma pop_macro("VK_PAD_RTHUMB_LEFT")
++#pragma pop_macro("VK_PAD_RTHUMB_RIGHT")
++#pragma pop_macro("VK_PAD_RTHUMB_DOWN")
++#pragma pop_macro("VK_PAD_RTHUMB_UP")
++#pragma pop_macro("VK_PAD_LTHUMB_DOWNLEFT")
++#pragma pop_macro("VK_PAD_LTHUMB_DOWNRIGHT")
++#pragma pop_macro("VK_PAD_LTHUMB_UPRIGHT")
++#pragma pop_macro("VK_PAD_LTHUMB_UPLEFT")
++#pragma pop_macro("VK_PAD_LTHUMB_LEFT")
++#pragma pop_macro("VK_PAD_LTHUMB_RIGHT")
++#pragma pop_macro("VK_PAD_LTHUMB_DOWN")
++#pragma pop_macro("VK_PAD_LTHUMB_UP")
++#pragma pop_macro("VK_PAD_RTHUMB_PRESS")
++#pragma pop_macro("VK_PAD_LTHUMB_PRESS")
++#pragma pop_macro("VK_PAD_BACK")
++#pragma pop_macro("VK_PAD_START")
++#pragma pop_macro("VK_PAD_DPAD_RIGHT")
++#pragma pop_macro("VK_PAD_DPAD_LEFT")
++#pragma pop_macro("VK_PAD_DPAD_DOWN")
++#pragma pop_macro("VK_PAD_DPAD_UP")
++#pragma pop_macro("VK_PAD_RTRIGGER")
++#pragma pop_macro("VK_PAD_LTRIGGER")
++#pragma pop_macro("VK_PAD_LSHOULDER")
++#pragma pop_macro("VK_PAD_RSHOULDER")
++#pragma pop_macro("VK_PAD_Y")
++#pragma pop_macro("VK_PAD_X")
++#pragma pop_macro("VK_PAD_B")
++#pragma pop_macro("VK_PAD_A")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("BATTERY_TYPE_DISCONNECTED")
++#undef BATTERY_TYPE_DISCONNECTED
++#pragma push_macro("BATTERY_TYPE_WIRED")
++#undef BATTERY_TYPE_WIRED
++#pragma push_macro("BATTERY_TYPE_ALKALINE")
++#undef BATTERY_TYPE_ALKALINE
++#pragma push_macro("BATTERY_TYPE_NIMH")
++#undef BATTERY_TYPE_NIMH
++#pragma push_macro("BATTERY_TYPE_UNKNOWN")
++#undef BATTERY_TYPE_UNKNOWN
++enum BATTERY_TYPE : unsigned char
++{
++    BATTERY_TYPE_DISCONNECTED = 0,
++    BATTERY_TYPE_WIRED = 1,
++    BATTERY_TYPE_ALKALINE = 2,
++    BATTERY_TYPE_NIMH = 3,
++    BATTERY_TYPE_UNKNOWN = 255,
++};
++#pragma pop_macro("BATTERY_TYPE_UNKNOWN")
++#pragma pop_macro("BATTERY_TYPE_NIMH")
++#pragma pop_macro("BATTERY_TYPE_ALKALINE")
++#pragma pop_macro("BATTERY_TYPE_WIRED")
++#pragma pop_macro("BATTERY_TYPE_DISCONNECTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("BATTERY_LEVEL_EMPTY")
++#undef BATTERY_LEVEL_EMPTY
++#pragma push_macro("BATTERY_LEVEL_LOW")
++#undef BATTERY_LEVEL_LOW
++#pragma push_macro("BATTERY_LEVEL_MEDIUM")
++#undef BATTERY_LEVEL_MEDIUM
++#pragma push_macro("BATTERY_LEVEL_FULL")
++#undef BATTERY_LEVEL_FULL
++enum BATTERY_LEVEL : unsigned char
++{
++    BATTERY_LEVEL_EMPTY = 0,
++    BATTERY_LEVEL_LOW = 1,
++    BATTERY_LEVEL_MEDIUM = 2,
++    BATTERY_LEVEL_FULL = 3,
++};
++#pragma pop_macro("BATTERY_LEVEL_FULL")
++#pragma pop_macro("BATTERY_LEVEL_MEDIUM")
++#pragma pop_macro("BATTERY_LEVEL_LOW")
++#pragma pop_macro("BATTERY_LEVEL_EMPTY")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("BATTERY_DEVTYPE_GAMEPAD")
++#undef BATTERY_DEVTYPE_GAMEPAD
++#pragma push_macro("BATTERY_DEVTYPE_HEADSET")
++#undef BATTERY_DEVTYPE_HEADSET
++enum BATTERY_DEVTYPE : unsigned char
++{
++    BATTERY_DEVTYPE_GAMEPAD = 0,
++    BATTERY_DEVTYPE_HEADSET = 1,
++};
++#pragma pop_macro("BATTERY_DEVTYPE_HEADSET")
++#pragma pop_macro("BATTERY_DEVTYPE_GAMEPAD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_DEVTYPE_GAMEPAD")
++#undef XINPUT_DEVTYPE_GAMEPAD
++enum XINPUT_DEVTYPE : unsigned char
++{
++    XINPUT_DEVTYPE_GAMEPAD = 1,
++};
++#pragma pop_macro("XINPUT_DEVTYPE_GAMEPAD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_DEVSUBTYPE_GAMEPAD")
++#undef XINPUT_DEVSUBTYPE_GAMEPAD
++#pragma push_macro("XINPUT_DEVSUBTYPE_UNKNOWN")
++#undef XINPUT_DEVSUBTYPE_UNKNOWN
++#pragma push_macro("XINPUT_DEVSUBTYPE_WHEEL")
++#undef XINPUT_DEVSUBTYPE_WHEEL
++#pragma push_macro("XINPUT_DEVSUBTYPE_ARCADE_STICK")
++#undef XINPUT_DEVSUBTYPE_ARCADE_STICK
++#pragma push_macro("XINPUT_DEVSUBTYPE_FLIGHT_STICK")
++#undef XINPUT_DEVSUBTYPE_FLIGHT_STICK
++#pragma push_macro("XINPUT_DEVSUBTYPE_DANCE_PAD")
++#undef XINPUT_DEVSUBTYPE_DANCE_PAD
++#pragma push_macro("XINPUT_DEVSUBTYPE_GUITAR")
++#undef XINPUT_DEVSUBTYPE_GUITAR
++#pragma push_macro("XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE")
++#undef XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE
++#pragma push_macro("XINPUT_DEVSUBTYPE_DRUM_KIT")
++#undef XINPUT_DEVSUBTYPE_DRUM_KIT
++#pragma push_macro("XINPUT_DEVSUBTYPE_GUITAR_BASS")
++#undef XINPUT_DEVSUBTYPE_GUITAR_BASS
++#pragma push_macro("XINPUT_DEVSUBTYPE_ARCADE_PAD")
++#undef XINPUT_DEVSUBTYPE_ARCADE_PAD
++enum XINPUT_DEVSUBTYPE : unsigned char
++{
++    XINPUT_DEVSUBTYPE_GAMEPAD = 1,
++    XINPUT_DEVSUBTYPE_UNKNOWN = 0,
++    XINPUT_DEVSUBTYPE_WHEEL = 2,
++    XINPUT_DEVSUBTYPE_ARCADE_STICK = 3,
++    XINPUT_DEVSUBTYPE_FLIGHT_STICK = 4,
++    XINPUT_DEVSUBTYPE_DANCE_PAD = 5,
++    XINPUT_DEVSUBTYPE_GUITAR = 6,
++    XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE = 7,
++    XINPUT_DEVSUBTYPE_DRUM_KIT = 8,
++    XINPUT_DEVSUBTYPE_GUITAR_BASS = 11,
++    XINPUT_DEVSUBTYPE_ARCADE_PAD = 19,
++};
++#pragma pop_macro("XINPUT_DEVSUBTYPE_ARCADE_PAD")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_GUITAR_BASS")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_DRUM_KIT")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_GUITAR")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_DANCE_PAD")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_FLIGHT_STICK")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_ARCADE_STICK")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_WHEEL")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_UNKNOWN")
++#pragma pop_macro("XINPUT_DEVSUBTYPE_GAMEPAD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_CAPS_VOICE_SUPPORTED")
++#undef XINPUT_CAPS_VOICE_SUPPORTED
++#pragma push_macro("XINPUT_CAPS_FFB_SUPPORTED")
++#undef XINPUT_CAPS_FFB_SUPPORTED
++#pragma push_macro("XINPUT_CAPS_WIRELESS")
++#undef XINPUT_CAPS_WIRELESS
++#pragma push_macro("XINPUT_CAPS_PMD_SUPPORTED")
++#undef XINPUT_CAPS_PMD_SUPPORTED
++#pragma push_macro("XINPUT_CAPS_NO_NAVIGATION")
++#undef XINPUT_CAPS_NO_NAVIGATION
++enum [[clang::flag_enum]] XINPUT_CAPABILITIES_FLAGS : unsigned short
++{
++    XINPUT_CAPS_VOICE_SUPPORTED = 4,
++    XINPUT_CAPS_FFB_SUPPORTED = 1,
++    XINPUT_CAPS_WIRELESS = 2,
++    XINPUT_CAPS_PMD_SUPPORTED = 8,
++    XINPUT_CAPS_NO_NAVIGATION = 16,
++};
++#pragma pop_macro("XINPUT_CAPS_NO_NAVIGATION")
++#pragma pop_macro("XINPUT_CAPS_PMD_SUPPORTED")
++#pragma pop_macro("XINPUT_CAPS_WIRELESS")
++#pragma pop_macro("XINPUT_CAPS_FFB_SUPPORTED")
++#pragma pop_macro("XINPUT_CAPS_VOICE_SUPPORTED")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_GAMEPAD_DPAD_UP")
++#undef XINPUT_GAMEPAD_DPAD_UP
++#pragma push_macro("XINPUT_GAMEPAD_DPAD_DOWN")
++#undef XINPUT_GAMEPAD_DPAD_DOWN
++#pragma push_macro("XINPUT_GAMEPAD_DPAD_LEFT")
++#undef XINPUT_GAMEPAD_DPAD_LEFT
++#pragma push_macro("XINPUT_GAMEPAD_DPAD_RIGHT")
++#undef XINPUT_GAMEPAD_DPAD_RIGHT
++#pragma push_macro("XINPUT_GAMEPAD_START")
++#undef XINPUT_GAMEPAD_START
++#pragma push_macro("XINPUT_GAMEPAD_BACK")
++#undef XINPUT_GAMEPAD_BACK
++#pragma push_macro("XINPUT_GAMEPAD_LEFT_THUMB")
++#undef XINPUT_GAMEPAD_LEFT_THUMB
++#pragma push_macro("XINPUT_GAMEPAD_RIGHT_THUMB")
++#undef XINPUT_GAMEPAD_RIGHT_THUMB
++#pragma push_macro("XINPUT_GAMEPAD_LEFT_SHOULDER")
++#undef XINPUT_GAMEPAD_LEFT_SHOULDER
++#pragma push_macro("XINPUT_GAMEPAD_RIGHT_SHOULDER")
++#undef XINPUT_GAMEPAD_RIGHT_SHOULDER
++#pragma push_macro("XINPUT_GAMEPAD_A")
++#undef XINPUT_GAMEPAD_A
++#pragma push_macro("XINPUT_GAMEPAD_B")
++#undef XINPUT_GAMEPAD_B
++#pragma push_macro("XINPUT_GAMEPAD_X")
++#undef XINPUT_GAMEPAD_X
++#pragma push_macro("XINPUT_GAMEPAD_Y")
++#undef XINPUT_GAMEPAD_Y
++#pragma push_macro("XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE")
++#undef XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE
++#pragma push_macro("XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE")
++#undef XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE
++#pragma push_macro("XINPUT_GAMEPAD_TRIGGER_THRESHOLD")
++#undef XINPUT_GAMEPAD_TRIGGER_THRESHOLD
++enum [[clang::flag_enum]] XINPUT_GAMEPAD_BUTTON_FLAGS : unsigned short
++{
++    XINPUT_GAMEPAD_DPAD_UP = 1,
++    XINPUT_GAMEPAD_DPAD_DOWN = 2,
++    XINPUT_GAMEPAD_DPAD_LEFT = 4,
++    XINPUT_GAMEPAD_DPAD_RIGHT = 8,
++    XINPUT_GAMEPAD_START = 16,
++    XINPUT_GAMEPAD_BACK = 32,
++    XINPUT_GAMEPAD_LEFT_THUMB = 64,
++    XINPUT_GAMEPAD_RIGHT_THUMB = 128,
++    XINPUT_GAMEPAD_LEFT_SHOULDER = 256,
++    XINPUT_GAMEPAD_RIGHT_SHOULDER = 512,
++    XINPUT_GAMEPAD_A = 4096,
++    XINPUT_GAMEPAD_B = 8192,
++    XINPUT_GAMEPAD_X = 16384,
++    XINPUT_GAMEPAD_Y = 32768,
++    XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE = 7849,
++    XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE = 8689,
++    XINPUT_GAMEPAD_TRIGGER_THRESHOLD = 30,
++};
++#pragma pop_macro("XINPUT_GAMEPAD_TRIGGER_THRESHOLD")
++#pragma pop_macro("XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE")
++#pragma pop_macro("XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE")
++#pragma pop_macro("XINPUT_GAMEPAD_Y")
++#pragma pop_macro("XINPUT_GAMEPAD_X")
++#pragma pop_macro("XINPUT_GAMEPAD_B")
++#pragma pop_macro("XINPUT_GAMEPAD_A")
++#pragma pop_macro("XINPUT_GAMEPAD_RIGHT_SHOULDER")
++#pragma pop_macro("XINPUT_GAMEPAD_LEFT_SHOULDER")
++#pragma pop_macro("XINPUT_GAMEPAD_RIGHT_THUMB")
++#pragma pop_macro("XINPUT_GAMEPAD_LEFT_THUMB")
++#pragma pop_macro("XINPUT_GAMEPAD_BACK")
++#pragma pop_macro("XINPUT_GAMEPAD_START")
++#pragma pop_macro("XINPUT_GAMEPAD_DPAD_RIGHT")
++#pragma pop_macro("XINPUT_GAMEPAD_DPAD_LEFT")
++#pragma pop_macro("XINPUT_GAMEPAD_DPAD_DOWN")
++#pragma pop_macro("XINPUT_GAMEPAD_DPAD_UP")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_KEYSTROKE_KEYDOWN")
++#undef XINPUT_KEYSTROKE_KEYDOWN
++#pragma push_macro("XINPUT_KEYSTROKE_KEYUP")
++#undef XINPUT_KEYSTROKE_KEYUP
++#pragma push_macro("XINPUT_KEYSTROKE_REPEAT")
++#undef XINPUT_KEYSTROKE_REPEAT
++enum [[clang::flag_enum]] XINPUT_KEYSTROKE_FLAGS : unsigned short
++{
++    XINPUT_KEYSTROKE_KEYDOWN = 1,
++    XINPUT_KEYSTROKE_KEYUP = 2,
++    XINPUT_KEYSTROKE_REPEAT = 4,
++};
++#pragma pop_macro("XINPUT_KEYSTROKE_REPEAT")
++#pragma pop_macro("XINPUT_KEYSTROKE_KEYUP")
++#pragma pop_macro("XINPUT_KEYSTROKE_KEYDOWN")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XINPUT_FLAG_ALL")
++#undef XINPUT_FLAG_ALL
++#pragma push_macro("XINPUT_FLAG_GAMEPAD")
++#undef XINPUT_FLAG_GAMEPAD
++enum [[clang::flag_enum]] XINPUT_FLAG : unsigned int
++{
++    XINPUT_FLAG_ALL = 0U,
++    XINPUT_FLAG_GAMEPAD = 1U,
++};
++#pragma pop_macro("XINPUT_FLAG_GAMEPAD")
++#pragma pop_macro("XINPUT_FLAG_ALL")
++#endif
++
+ #endif

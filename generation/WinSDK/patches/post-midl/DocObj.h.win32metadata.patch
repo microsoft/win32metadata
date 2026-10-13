@@ -1,0 +1,203 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
+index 9ad194222f..6ced05d7e7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DocObj.h
+@@ -140,6 +140,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #pragma comment(lib,"uuid.lib")
+@@ -186,7 +187,7 @@ EXTERN_C const IID IID_IOleDocument;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcc5-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcc5-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IOleDocument : public IUnknown
+     {
+     public:
+@@ -328,7 +329,7 @@ EXTERN_C const IID IID_IOleDocumentSite;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcc7-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcc7-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IOleDocumentSite : public IUnknown
+     {
+     public:
+@@ -428,7 +429,7 @@ EXTERN_C const IID IID_IOleDocumentView;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcc6-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcc6-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IOleDocumentView : public IUnknown
+     {
+     public:
+@@ -696,7 +697,7 @@ EXTERN_C const IID IID_IEnumOleDocumentViews;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcc8-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcc8-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IEnumOleDocumentViews : public IUnknown
+     {
+     public:
+@@ -856,7 +857,7 @@ EXTERN_C const IID IID_IContinueCallback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcca-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcca-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IContinueCallback : public IUnknown
+     {
+     public:
+@@ -969,7 +970,11 @@ extern RPC_IF_HANDLE __MIDL_itf_docobj_0000_0005_v0_0_s_ifspec;
+ typedef /* [unique] */  __RPC_unique_pointer IPrint *LPPRINT;
+ 
+ typedef /* [public] */ 
+-enum __MIDL_IPrint_0001
++enum
++#if defined(WIN32METADATA) && defined(__clang__)
++[[clang::flag_enum]]
++#endif
++ __MIDL_IPrint_0001
+     {
+         PRINTFLAG_MAYBOTHERUSER	= 1,
+         PRINTFLAG_PROMPTUSER	= 2,
+@@ -980,13 +985,13 @@ enum __MIDL_IPrint_0001
+         PRINTFLAG_PRINTTOFILE	= 64
+     } 	PRINTFLAG;
+ 
+-typedef struct tagPAGERANGE
++typedef struct   tagPAGERANGE
+     {
+     LONG nFromPage;
+     LONG nToPage;
+     } 	PAGERANGE;
+ 
+-typedef struct tagPAGESET
++typedef struct   tagPAGESET
+     {
+     ULONG cbStruct;
+     BOOL fOddPages;
+@@ -1001,7 +1006,7 @@ EXTERN_C const IID IID_IPrint;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bcc9-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bcc9-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IPrint : public IUnknown
+     {
+     public:
+@@ -1182,7 +1187,7 @@ extern RPC_IF_HANDLE __MIDL_itf_docobj_0000_0006_v0_0_s_ifspec;
+ typedef /* [unique] */  __RPC_unique_pointer IOleCommandTarget *LPOLECOMMANDTARGET;
+ 
+ typedef 
+-enum OLECMDF
++enum   OLECMDF
+     {
+         OLECMDF_SUPPORTED	= 0x1,
+         OLECMDF_ENABLED	= 0x2,
+@@ -1192,13 +1197,13 @@ enum OLECMDF
+         OLECMDF_DEFHIDEONCTXTMENU	= 0x20
+     } 	OLECMDF;
+ 
+-typedef struct _tagOLECMD
++typedef struct   _tagOLECMD
+     {
+-    ULONG cmdID;
+-    DWORD cmdf;
++    _Win32_AssociatedEnum_(OLECMDID) ULONG cmdID;
++    _Win32_AssociatedEnum_(OLECMDF) DWORD cmdf;
+     } 	OLECMD;
+ 
+-typedef struct _tagOLECMDTEXT
++typedef struct   _tagOLECMDTEXT
+     {
+     DWORD cmdtextf;
+     ULONG cwActual;
+@@ -1207,7 +1212,7 @@ typedef struct _tagOLECMDTEXT
+     } 	OLECMDTEXT;
+ 
+ typedef 
+-enum OLECMDTEXTF
++enum   OLECMDTEXTF
+     {
+         OLECMDTEXTF_NONE	= 0,
+         OLECMDTEXTF_NAME	= 1,
+@@ -1215,7 +1220,7 @@ enum OLECMDTEXTF
+     } 	OLECMDTEXTF;
+ 
+ typedef 
+-enum OLECMDEXECOPT
++enum   OLECMDEXECOPT
+     {
+         OLECMDEXECOPT_DODEFAULT	= 0,
+         OLECMDEXECOPT_PROMPTUSER	= 1,
+@@ -1225,7 +1230,7 @@ enum OLECMDEXECOPT
+ 
+ /* OLECMDID_STOPDOWNLOAD and OLECMDID_ALLOWUILESSSAVEAS are supported for QueryStatus Only */
+ typedef 
+-enum OLECMDID
++enum   OLECMDID
+     {
+         OLECMDID_OPEN	= 1,
+         OLECMDID_NEW	= 2,
+@@ -1366,7 +1371,7 @@ EXTERN_C const IID IID_IOleCommandTarget;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b722bccb-4e68-101b-a2bc-00aa00404770")
++    MIDL_INTERFACE("b722bccb-4e68-101b-a2bc-00aa00404770") _Windows_SupportedOS_Windows2000_ 
+     IOleCommandTarget : public IUnknown
+     {
+     public:
+@@ -1582,7 +1587,7 @@ typedef enum
+     PAGEACTION_UI_SILENT      = 3,
+ } PAGEACTION_UI;
+ #endif
+-typedef enum
++typedef enum  
+ {
+     OLECMDIDF_WINDOWSTATE_USERVISIBLE        = 0x00000001,
+     OLECMDIDF_WINDOWSTATE_ENABLED            = 0x00000002,
+@@ -1855,7 +1860,7 @@ EXTERN_C const IID IID_IProtectedModeMenuServices;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateMenu( 
+             /* [annotation][out] */ 
+-            _Out_  HMENU *phMenu) = 0;
++            _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_  HMENU *phMenu) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LoadMenu( 
+             /* [annotation][string][in] */ 
+@@ -1863,7 +1868,7 @@ EXTERN_C const IID IID_IProtectedModeMenuServices;
+             /* [annotation][string][in] */ 
+             _In_  LPCWSTR pszMenuName,
+             /* [annotation][out] */ 
+-            _Out_  HMENU *phMenu) = 0;
++            _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_  HMENU *phMenu) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE LoadMenuID( 
+             /* [annotation][string][in] */ 
+@@ -1871,7 +1876,7 @@ EXTERN_C const IID IID_IProtectedModeMenuServices;
+             /* [annotation][in] */ 
+             _In_  WORD wResourceID,
+             /* [annotation][out] */ 
+-            _Out_  HMENU *phMenu) = 0;
++            _Win32_RAIIFree_(DestroyMenu, -1, 0) _Out_  HMENU *phMenu) = 0;
+         
+     };
+     
+@@ -1983,7 +1988,7 @@ extern RPC_IF_HANDLE __MIDL_itf_docobj_0000_0010_v0_0_s_ifspec;
+ 
+ /* Additional Prototypes for ALL interfaces */
+ 
+-unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
++_Win32_ImportLibrary_("ole32.dll") unsigned long             __RPC_USER  HMENU_UserSize(     __RPC__in unsigned long *, unsigned long            , __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserMarshal(  __RPC__in unsigned long *, __RPC__inout_xcount(0) unsigned char *, __RPC__in HMENU * ); 
+ unsigned char * __RPC_USER  HMENU_UserUnmarshal(__RPC__in unsigned long *, __RPC__in_xcount(0) unsigned char *, __RPC__out HMENU * ); 
+ void                      __RPC_USER  HMENU_UserFree(     __RPC__in unsigned long *, __RPC__in HMENU * ); 

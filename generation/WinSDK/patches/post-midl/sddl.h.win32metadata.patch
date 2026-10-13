@@ -1,0 +1,95 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+index ac2b84be56..c2eb0cb6e1 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/sddl.h
+@@ -20,6 +20,7 @@ Revision History:
+ 
+ #ifndef __SDDL_H__
+ #define __SDDL_H__
++#include "win32metadata_annotations.h"
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -263,7 +264,7 @@ extern "C" {
+ #if !defined(_NTDDK_)
+ 
+ #if (_WIN32_WINNT >= 0x0500)
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertSidToStringSidA(
+@@ -271,6 +272,8 @@ ConvertSidToStringSidA(
+     _Outptr_ LPSTR  *StringSid
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -285,6 +288,8 @@ ConvertSidToStringSidW(
+ #define ConvertSidToStringSid  ConvertSidToStringSidA
+ #endif // !UNICODE
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -293,6 +298,8 @@ ConvertStringSidToSidA(
+     _Outptr_ PSID   *Sid
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ 
++
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -307,7 +314,7 @@ ConvertStringSidToSidW(
+ #define ConvertStringSidToSid  ConvertStringSidToSidA
+ #endif // !UNICODE
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertStringSecurityDescriptorToSecurityDescriptorA(
+@@ -317,7 +324,7 @@ ConvertStringSecurityDescriptorToSecurityDescriptorA(
+     _Out_opt_ PULONG  SecurityDescriptorSize
+     );
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertStringSecurityDescriptorToSecurityDescriptorW(
+@@ -333,24 +340,24 @@ ConvertStringSecurityDescriptorToSecurityDescriptorW(
+ #define ConvertStringSecurityDescriptorToSecurityDescriptor  ConvertStringSecurityDescriptorToSecurityDescriptorA
+ #endif // !UNICODE
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertSecurityDescriptorToStringSecurityDescriptorA(
+     _In_  PSECURITY_DESCRIPTOR  SecurityDescriptor,
+     _In_  DWORD RequestedStringSDRevision,
+-    _In_  SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_  SECURITY_INFORMATION SecurityInformation,
+     _Outptr_ LPSTR  *StringSecurityDescriptor,
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );
+ 
+-_Success_(return != FALSE)
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ _Win32_SetLastError_ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+ ConvertSecurityDescriptorToStringSecurityDescriptorW(
+     _In_ PSECURITY_DESCRIPTOR SecurityDescriptor,
+     _In_ DWORD RequestedStringSDRevision,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _Outptr_ LPWSTR* StringSecurityDescriptor,
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );

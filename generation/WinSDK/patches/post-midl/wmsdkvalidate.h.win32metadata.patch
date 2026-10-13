@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkvalidate.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkvalidate.h
+index 7cafa96eca..12c6739252 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkvalidate.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmsdkvalidate.h
+@@ -10,6 +10,7 @@
+ #define _WMSDK_VALIDATE_H
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -24,6 +25,8 @@
+ // handle a particular URL, as this cannot be known until the URL is opened.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ HRESULT STDMETHODCALLTYPE WMCheckURLExtension( /* [in] */ LPCWSTR pwszURL );
+ 
+ //
+@@ -36,6 +39,8 @@ HRESULT STDMETHODCALLTYPE WMCheckURLExtension( /* [in] */ LPCWSTR pwszURL );
+ // handle a particular URL, as this cannot be known until the URL is opened.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ HRESULT STDMETHODCALLTYPE WMCheckURLScheme( /* [in] */ LPCWSTR pwszURLScheme );
+ 
+ //
+@@ -44,6 +49,8 @@ HRESULT STDMETHODCALLTYPE WMCheckURLScheme( /* [in] */ LPCWSTR pwszURLScheme );
+ // This routine may return a false positive, but will not return a false negative.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ HRESULT STDMETHODCALLTYPE WMValidateData(
+     /* [in] */ BYTE *pbData,
+     /* [in, out] */ DWORD *pdwDataSize
+@@ -57,6 +64,8 @@ HRESULT STDMETHODCALLTYPE WMValidateData(
+ // played in Offline mode.
+ //
+ 
++_Windows_SupportedOS_Windows2000_
++_Windows_SupportedOS_Server2000_
+ HRESULT STDMETHODCALLTYPE WMIsAvailableOffline(
+     /* [in] */ LPCWSTR pwszURL,
+     /* [in] */ LPCWSTR pwszLanguage,

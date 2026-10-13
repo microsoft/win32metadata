@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
+index 1a53f1695f..828e2fd43d 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ksmedia.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -7301,7 +7302,7 @@ typedef struct tagTIMECODE_SAMPLE {
+     LONGLONG qwTick;
+     TIMECODE timecode;
+     DWORD dwUser;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(TIMECODE_SAMPLE_FLAGS) DWORD dwFlags;
+ } TIMECODE_SAMPLE;
+ 
+ typedef TIMECODE_SAMPLE *PTIMECODE_SAMPLE;

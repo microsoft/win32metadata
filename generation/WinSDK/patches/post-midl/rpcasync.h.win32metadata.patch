@@ -1,0 +1,240 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
+index 8597e21530..c5f6203fbb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/rpcasync.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ /*++
+@@ -93,8 +94,8 @@ struct _RPC_ASYNC_STATE;
+ 
+ typedef void RPC_ENTRY
+ RPCNOTIFICATION_ROUTINE (
+-                  struct _RPC_ASYNC_STATE *pAsync,
+-                  void *Context,
++                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _RPC_ASYNC_STATE *pAsync,
++                  _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *Context,
+                   RPC_ASYNC_EVENT Event);
+ typedef RPCNOTIFICATION_ROUTINE *PFN_RPCNOTIFICATION_ROUTINE;
+ 
+@@ -178,7 +179,7 @@ typedef struct _RPC_ASYNC_STATE {
+ #define RpcAsyncGetCallHandle(pAsync) (((PRPC_ASYNC_STATE) pAsync)->RuntimeInfo)
+ 
+ #if !defined(_KRPCENV_)
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -187,7 +188,7 @@ RpcAsyncRegisterInfo (
+     ) ;
+ #endif
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -196,7 +197,7 @@ RpcAsyncInitializeHandle (
+     _In_ unsigned int     Size
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -204,7 +205,7 @@ RpcAsyncGetCallStatus (
+     _In_ PRPC_ASYNC_STATE pAsync
+     ) ;
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -213,7 +214,7 @@ RpcAsyncCompleteCall (
+     _Out_opt_ void *Reply
+     ) ;
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -222,7 +223,7 @@ RpcAsyncAbortCall (
+     _In_ unsigned long ExceptionCode
+     ) ;
+ 
+-RPCRTAPI
++_Windows_SupportedOS_Windows2000_ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+ RPC_ENTRY
+@@ -308,14 +309,14 @@ typedef struct tagRPC_ERROR_ENUM_HANDLE
+     void *Head;
+ } RPC_ERROR_ENUM_HANDLE;
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorStartEnumeration (
+     _Out_ RPC_ERROR_ENUM_HANDLE *EnumHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorGetNextRecord (
+@@ -324,21 +325,21 @@ RpcErrorGetNextRecord (
+     _Out_ RPC_EXTENDED_ERROR_INFO *ErrorInfo
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorEndEnumeration (
+     _Inout_ RPC_ERROR_ENUM_HANDLE *EnumHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorResetEnumeration (
+     _Inout_ RPC_ERROR_ENUM_HANDLE *EnumHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorGetNumberOfRecords (
+@@ -346,7 +347,7 @@ RpcErrorGetNumberOfRecords (
+     _Out_ int *Records
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorSaveErrorInfo (
+@@ -355,7 +356,7 @@ RpcErrorSaveErrorInfo (
+     _Out_ size_t *BlobSize
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorLoadErrorInfo (
+@@ -364,14 +365,14 @@ RpcErrorLoadErrorInfo (
+     _Out_ RPC_ERROR_ENUM_HANDLE *EnumHandle
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcErrorAddRecord (
+     _In_ RPC_EXTENDED_ERROR_INFO *ErrorInfo
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ void 
+ RPC_ENTRY
+ RpcErrorClearInformation (
+@@ -395,7 +396,7 @@ RpcAsyncCleanupThread (
+     _In_ DWORD dwTimeout
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcGetAuthorizationContextForClient (
+@@ -409,14 +410,14 @@ RpcGetAuthorizationContextForClient (
+     _Out_ PVOID *pAuthzClientContext
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY
+ RpcFreeAuthorizationContext (
+     _Inout_ PVOID *pAuthzClientContext
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSsContextLockExclusive (
+@@ -424,7 +425,7 @@ RpcSsContextLockExclusive (
+     _In_ PVOID UserContext
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcSsContextLockShared (
+@@ -615,7 +616,7 @@ typedef struct tagRPC_CALL_ATTRIBUTES_V3_A
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcServerInqCallAttributesW (
+@@ -623,7 +624,7 @@ RpcServerInqCallAttributesW (
+     _Inout_ void *RpcCallAttributes
+     );
+ 
+-RPCRTAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsXP_ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+ RpcServerInqCallAttributesA (
+@@ -670,7 +671,7 @@ typedef enum _RPC_NOTIFICATIONS
+ 
+ #define RpcNotificationCallStatusChange    RpcNotificationClientDisconnect
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsVista_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY 
+ RpcServerSubscribeForNotification (
+@@ -680,7 +681,7 @@ RpcServerSubscribeForNotification (
+     _In_ RPC_ASYNC_NOTIFICATION_INFO *NotificationInfo
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsVista_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY 
+ RpcServerUnsubscribeForNotification (
+@@ -700,7 +701,7 @@ RpcServerUnsubscribeForNotification (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsVista_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY 
+ RpcBindingBind (
+@@ -709,7 +710,7 @@ RpcBindingBind (
+     _In_ RPC_IF_HANDLE IfSpec    
+     );
+ 
+-RPCRTAPI
++_Windows_SupportedOS_WindowsVista_ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY 
+ RpcBindingUnbind (

@@ -1,0 +1,269 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+index ed035f548e..25439b838f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WS2tcpip.h
+@@ -23,6 +23,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -115,7 +116,7 @@ typedef ADDRINFOEXA     ADDRINFOEX, *PADDRINFOEX;
+ extern "C" {
+ #endif
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ getaddrinfo(
+@@ -126,7 +127,7 @@ getaddrinfo(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ GetAddrInfoW(
+@@ -185,7 +186,7 @@ void
+ 
+ #pragma region Desktop Family or OneCore Family or Game Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+-_WINSOCK_DEPRECATED_BY("GetAddrInfoExW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _WINSOCK_DEPRECATED_BY("GetAddrInfoExW()")
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -199,11 +200,13 @@ GetAddrInfoExA(
+     _In_opt_    struct timeval *timeout,
+     _In_opt_    LPOVERLAPPED    lpOverlapped,
+     _In_opt_    LPLOOKUPSERVICE_COMPLETION_ROUTINE  lpCompletionRoutine,
+-    _Out_opt_   LPHANDLE        lpNameHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   LPHANDLE        lpNameHandle
+     );
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
++
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -217,9 +220,10 @@ GetAddrInfoExW(
+     _In_opt_    struct timeval *timeout,
+     _In_opt_    LPOVERLAPPED    lpOverlapped,
+     _In_opt_    LPLOOKUPSERVICE_COMPLETION_ROUTINE  lpCompletionRoutine,
+-    _Out_opt_   LPHANDLE        lpHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   LPHANDLE        lpHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_ 
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -227,6 +231,7 @@ GetAddrInfoExCancel(
+     _In_        LPHANDLE        lpHandle
+     );
+ 
++_Windows_SupportedOS_Windows81_ 
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -300,7 +305,7 @@ INT
+ #if (_WIN32_WINNT >= 0x0600)
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+-_WINSOCK_DEPRECATED_BY("SetAddrInfoExW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _WINSOCK_DEPRECATED_BY("SetAddrInfoExW()")
+ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+@@ -316,12 +321,12 @@ SetAddrInfoExA(
+     _In_opt_    struct timeval *timeout,
+     _In_opt_    LPOVERLAPPED    lpOverlapped,
+     _In_opt_    LPLOOKUPSERVICE_COMPLETION_ROUTINE  lpCompletionRoutine,
+-    _Out_opt_   LPHANDLE        lpNameHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   LPHANDLE        lpNameHandle
+     );
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+-WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ SetAddrInfoExW(
+@@ -336,7 +341,7 @@ SetAddrInfoExW(
+     _In_opt_    struct timeval *timeout,
+     _In_opt_    LPOVERLAPPED    lpOverlapped,
+     _In_opt_    LPLOOKUPSERVICE_COMPLETION_ROUTINE  lpCompletionRoutine,
+-    _Out_opt_   LPHANDLE        lpNameHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_opt_   LPHANDLE        lpNameHandle
+     );
+ 
+ #ifdef UNICODE
+@@ -393,7 +398,7 @@ INT
+ 
+ #endif
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ VOID
+ WSAAPI
+ freeaddrinfo(
+@@ -401,7 +406,7 @@ freeaddrinfo(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ WINSOCK_API_LINKAGE
+ VOID
+ WSAAPI
+ FreeAddrInfoW(
+@@ -443,7 +448,7 @@ VOID
+ 
+ #pragma region App Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+-_WINSOCK_DEPRECATED_BY("FreeAddrInfoExW()")
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows81_ _WINSOCK_DEPRECATED_BY("FreeAddrInfoExW()")
+ WINSOCK_API_LINKAGE
+ void
+ WSAAPI
+@@ -453,7 +458,7 @@ FreeAddrInfoEx(
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+-WINSOCK_API_LINKAGE
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows81_ WINSOCK_API_LINKAGE
+ void
+ WSAAPI
+ FreeAddrInfoExW(
+@@ -495,29 +500,29 @@ void
+ 
+ typedef int socklen_t;
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ getnameinfo(
+     _In_reads_bytes_(SockaddrLength)    const SOCKADDR *    pSockaddr,
+     _In_                                socklen_t           SockaddrLength,
+-    _Out_writes_opt_(NodeBufferSize)    PCHAR               pNodeBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(NodeBufferSize)    PCHAR               pNodeBuffer,
+     _In_                                DWORD               NodeBufferSize,
+-    _Out_writes_opt_(ServiceBufferSize) PCHAR               pServiceBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(ServiceBufferSize) PCHAR               pServiceBuffer,
+     _In_                                DWORD               ServiceBufferSize,
+     _In_                                INT                 Flags
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ GetNameInfoW(
+     _In_reads_bytes_(SockaddrLength)    const SOCKADDR *    pSockaddr,
+     _In_                                socklen_t           SockaddrLength,
+-    _Out_writes_opt_(NodeBufferSize)    PWCHAR              pNodeBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(NodeBufferSize)    PWCHAR              pNodeBuffer,
+     _In_                                DWORD               NodeBufferSize,
+-    _Out_writes_opt_(ServiceBufferSize) PWCHAR              pServiceBuffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_opt_(ServiceBufferSize) PWCHAR              pServiceBuffer,
+     _In_                                DWORD               ServiceBufferSize,
+     _In_                                INT                 Flags
+     );
+@@ -567,7 +572,7 @@ INT
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ inet_pton(
+@@ -578,7 +583,7 @@ inet_pton(
+                                               PVOID           pAddrBuf
+     );
+ 
+-INT
++_Windows_SupportedOS_Windows81_ INT
+ WSAAPI
+ InetPtonW(
+     _In_                                      INT             Family,
+@@ -588,7 +593,7 @@ InetPtonW(
+                                               PVOID           pAddrBuf
+     );
+ 
+-PCSTR
++_Windows_SupportedOS_Windows81_ _Win32_SetLastError_ PCSTR
+ WSAAPI
+ inet_ntop(
+     _In_                                INT             Family,
+@@ -597,7 +602,7 @@ inet_ntop(
+     _In_                                size_t          StringBufSize
+     );
+ 
+-PCWSTR
++_Windows_SupportedOS_Windows81_ PCWSTR
+ WSAAPI
+ InetNtopW(
+     _In_                                INT             Family,
+@@ -1229,7 +1234,7 @@ WSASetReceivedProcessorOption(
+ // Secure socket API definitions
+ //
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSASetSocketSecurity (
+@@ -1240,7 +1245,7 @@ WSASetSocketSecurity (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSAQuerySocketSecurity (
+@@ -1253,7 +1258,7 @@ WSAQuerySocketSecurity (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSASetSocketPeerTargetName (
+@@ -1264,7 +1269,7 @@ WSASetSocketPeerTargetName (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSADeleteSocketPeerTargetName (
+@@ -1275,7 +1280,7 @@ WSADeleteSocketPeerTargetName (
+    _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
+ );
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSAImpersonateSocketPeer (
+@@ -1284,7 +1289,7 @@ WSAImpersonateSocketPeer (
+    _In_ ULONG PeerAddrLen
+ );
+ 
+-WINSOCK_API_LINKAGE
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ WINSOCK_API_LINKAGE
+ INT
+ WSAAPI
+ WSARevertImpersonation ();

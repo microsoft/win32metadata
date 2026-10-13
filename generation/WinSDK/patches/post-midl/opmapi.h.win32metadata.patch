@@ -1,0 +1,59 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
+index a73e0f62aa..f1b34b762e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/opmapi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -441,7 +442,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D")
++    MIDL_INTERFACE("0A15159D-41C7-4456-93E1-284CD61D4E8D") _Windows_SupportedOS_WindowsVista_ 
+     IOPMVideoOutput : public IUnknown
+     {
+     public:
+@@ -618,20 +619,20 @@ typedef enum {
+ #define GetBusType( ulBusTypeAndImplementation )                        ((ulBusTypeAndImplementation) & OPM_BUS_TYPE_MASK)
+ #define GetBusImplementation( ulBusTypeAndImplementation )              (((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_MASK) >> 16) 
+ #define IsNonStandardBusImplementation( ulBusTypeAndImplementation )    ((ulBusTypeAndImplementation) & OPM_BUS_IMPLEMENTATION_MODIFIER_NON_STANDARD) 
+-STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      
+     _In_ HMONITOR hMonitor,                                                                 
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _Out_ ULONG* pulNumVideoOutputs,                                                        
+     _Outptr_result_buffer_(*pulNumVideoOutputs) IOPMVideoOutput*** pppOPMVideoOutputArray       
+     );                                                                                      
+-STDAPI OPMGetVideoOutputForTarget(                                                          
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputForTarget(                                                          
+     _In_ LUID* pAdapterLuid,                                                                
+     _In_ ULONG VidPnTarget,                                                                 
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _COM_Outptr_ IOPMVideoOutput** ppOPMVideoOutput                                         
+     );                                                                                      
+ #ifndef DO_NOT_USE_DIRECTX_OR_DXVA2
+-STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
++_Windows_SupportedOS_WindowsVista_ STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        
+     _In_ IDirect3DDevice9* pDirect3DDevice9,                                                
+     _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    
+     _Out_ ULONG* pulNumVideoOutputs,                                                        
+@@ -655,6 +656,16 @@ extern RPC_IF_HANDLE __MIDL_itf_opmapi_0000_0001_v0_0_s_ifspec;
+ }
+ #endif
+ 
++
++
++
++
++
++
++
++
++
++
+ #endif
+ 
+ 

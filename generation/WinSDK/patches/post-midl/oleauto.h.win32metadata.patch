@@ -1,0 +1,773 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
+index 7860ea3c60..02e8f46752 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/oleauto.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ #include <winapifamily.h>
+ 
+ #if _MSC_VER >= 1200
+@@ -71,18 +72,18 @@ typedef DWORD LCID;
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
++_Win32_RAIIFree_(SysFreeString) WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
+ WINOLEAUTAPI_(INT)  SysReAllocString(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(_String_length_(psz)+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz);
+-WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
++_Win32_RAIIFree_(SysFreeString) WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
+ _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
+-WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
+-WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
+-WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
++_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
++_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
++WINOLEAUTAPI_(void) SysFreeString(_WIN32META_ANNOTATION_("win32metadata:in") _Frees_ptr_opt_ BSTR bstrString);
+ WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
+ 
+ #if (defined (_WIN32) || defined (_WIN64))
+ WINOLEAUTAPI_(_Post_equal_to_(_String_length_(bstr) * sizeof(OLECHAR)) UINT) SysStringByteLen(_In_opt_ BSTR bstr);
+-WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_In_opt_z_ LPCSTR psz, _In_ UINT len);
++_Win32_RAIIFree_(SysFreeString) WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_WIN32META_ANNOTATION_("win32metadata:array_count_param=1") _In_opt_z_ LPCSTR psz, _In_ UINT len);
+ 
+ #endif /* (defined (_WIN32) || defined (_WIN64)) */
+ 
+@@ -125,17 +126,17 @@ WINOLEAUTAPI_(INT) VariantTimeToSystemTime(_In_ DOUBLE vtime, _Out_ LPSYSTEMTIME
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ WINOLEAUTAPI SafeArrayAllocDescriptor(_In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
+-WINOLEAUTAPI SafeArrayAllocDescriptorEx(_In_ VARTYPE vt, _In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
++WINOLEAUTAPI SafeArrayAllocDescriptorEx(_Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt, _In_ UINT cDims, _Outptr_ SAFEARRAY ** ppsaOut);
+ WINOLEAUTAPI SafeArrayAllocData(_In_ SAFEARRAY * psa);
+-WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound);
+-WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
++WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound);
++WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
+ _Check_return_
+ WINOLEAUTAPI SafeArrayCopyData(_In_ SAFEARRAY *psaSource, _In_ SAFEARRAY *psaTarget);
+-WINOLEAUTAPI_(void) SafeArrayReleaseDescriptor(_In_ SAFEARRAY * psa);
++_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI_(void) SafeArrayReleaseDescriptor(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayDestroyDescriptor(_In_ SAFEARRAY * psa);
+-WINOLEAUTAPI_(void) SafeArrayReleaseData(_In_ PVOID pData);
++_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI_(void) SafeArrayReleaseData(_In_ PVOID pData);
+ WINOLEAUTAPI SafeArrayDestroyData(_In_ SAFEARRAY * psa);
+-WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
++_Windows_SupportedOS_WindowsXP_ WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
+ WINOLEAUTAPI SafeArrayDestroy(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayRedim(_Inout_ SAFEARRAY * psa, _In_ SAFEARRAYBOUND * psaboundNew);
+ WINOLEAUTAPI_(UINT) SafeArrayGetDim(_In_ SAFEARRAY * psa);
+@@ -156,9 +157,9 @@ WINOLEAUTAPI SafeArraySetRecordInfo(_In_ SAFEARRAY * psa, _In_ IRecordInfo * pri
+ WINOLEAUTAPI SafeArrayGetRecordInfo(_In_ SAFEARRAY * psa, _Outptr_ IRecordInfo ** prinfo);
+ WINOLEAUTAPI SafeArraySetIID(_In_ SAFEARRAY * psa, _In_ REFGUID guid);
+ WINOLEAUTAPI SafeArrayGetIID(_In_ SAFEARRAY * psa, _Out_ GUID * pguid);
+-WINOLEAUTAPI SafeArrayGetVartype(_In_ SAFEARRAY * psa, _Out_ VARTYPE * pvt);
+-WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVector(_In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements);
+-WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVectorEx(_In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements, _In_ PVOID pvExtra);
++WINOLEAUTAPI SafeArrayGetVartype(_In_ SAFEARRAY * psa, _Win32_AssociatedEnum_(VARENUM) _Out_ VARTYPE * pvt);
++WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVector(_Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements);
++WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateVectorEx(_Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt, _In_ LONG lLbound, _In_ ULONG cElements, _In_ PVOID pvExtra);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -179,10 +180,10 @@ _Check_return_
+ WINOLEAUTAPI VariantCopyInd(_Inout_ VARIANT * pvarDest, _In_ const VARIANTARG * pvargSrc);
+ _Check_return_
+ WINOLEAUTAPI VariantChangeType(_Inout_ VARIANTARG * pvargDest,
+-               _In_ const VARIANTARG * pvarSrc, _In_ USHORT wFlags, _In_ VARTYPE vt);
++               _In_ const VARIANTARG * pvarSrc, _Win32_AssociatedEnum_(VAR_CHANGE_FLAGS) _In_ USHORT wFlags, _Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt);
+ _Check_return_
+ WINOLEAUTAPI VariantChangeTypeEx(_Inout_ VARIANTARG * pvargDest,
+-               _In_ const VARIANTARG * pvarSrc, _In_ LCID lcid, _In_ USHORT wFlags, _In_ VARTYPE vt);
++               _In_ const VARIANTARG * pvarSrc, _In_ LCID lcid, _Win32_AssociatedEnum_(VAR_CHANGE_FLAGS) _In_ USHORT wFlags, _Win32_AssociatedEnum_(VARENUM) _In_ VARTYPE vt);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -212,7 +213,7 @@ WINOLEAUTAPI VariantChangeTypeEx(_Inout_ VARIANTARG * pvargDest,
+ _Check_return_
+ WINOLEAUTAPI VectorFromBstr (_In_ BSTR bstr, _Outptr_ SAFEARRAY ** ppsa);
+ _Check_return_
+-WINOLEAUTAPI BstrFromVector (_In_ SAFEARRAY *psa, _Out_ BSTR *pbstr);
++WINOLEAUTAPI BstrFromVector (_In_ SAFEARRAY *psa, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstr);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -309,7 +310,7 @@ WINOLEAUTAPI VarI2FromI4(LONG lIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromI8(LONG64 i64In, _Out_ SHORT FAR* psOut);
+ WINOLEAUTAPI VarI2FromR4(FLOAT fltIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromR8(DOUBLE dblIn, _Out_ SHORT * psOut);
+-WINOLEAUTAPI VarI2FromCy(CY cyIn, SHORT * psOut);
++WINOLEAUTAPI VarI2FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") SHORT * psOut);
+ WINOLEAUTAPI VarI2FromDate(DATE dateIn, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ SHORT * psOut);
+ WINOLEAUTAPI VarI2FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ SHORT * psOut);
+@@ -362,7 +363,7 @@ WINOLEAUTAPI VarR4FromI2(SHORT sIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromI4(LONG lIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromI8(LONG64 i64In, _Out_ FLOAT FAR* pfltOut);
+ WINOLEAUTAPI VarR4FromR8(DOUBLE dblIn, _Out_ FLOAT * pfltOut);
+-WINOLEAUTAPI VarR4FromCy(CY cyIn, FLOAT * pfltOut);
++WINOLEAUTAPI VarR4FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromDate(DATE dateIn, _Out_ FLOAT * pfltOut);
+ WINOLEAUTAPI VarR4FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ FLOAT *pfltOut);
+ WINOLEAUTAPI VarR4FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ FLOAT * pfltOut);
+@@ -378,12 +379,12 @@ WINOLEAUTAPI VarR8FromI2(SHORT sIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromI4(LONG lIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromI8(LONG64 i64In, _Out_ DOUBLE FAR* pdblOut);
+ WINOLEAUTAPI VarR8FromR4(FLOAT fltIn, _Out_ DOUBLE * pdblOut);
+-WINOLEAUTAPI VarR8FromCy(CY cyIn, DOUBLE * pdblOut);
++WINOLEAUTAPI VarR8FromCy(CY cyIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromDate(DATE dateIn, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromStr(_In_ LPCOLESTR strIn, LCID lcid, ULONG dwFlags, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromDisp(IDispatch * pdispIn, LCID lcid, _Out_ DOUBLE * pdblOut);
+ WINOLEAUTAPI VarR8FromBool(VARIANT_BOOL boolIn, _Out_ DOUBLE * pdblOut);
+-WINOLEAUTAPI VarR8FromI1(CHAR cIn, DOUBLE *pdblOut);
++WINOLEAUTAPI VarR8FromI1(CHAR cIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI2(USHORT uiIn, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI4(ULONG ulIn, _Out_ DOUBLE *pdblOut);
+ WINOLEAUTAPI VarR8FromUI8(ULONG64 ui64In, _Out_ DOUBLE FAR* pdblOut);
+@@ -421,21 +422,21 @@ WINOLEAUTAPI VarCyFromUI4(ULONG ulIn, _Out_ CY *pcyOut);
+ WINOLEAUTAPI VarCyFromUI8(ULONG64 ui64In, _Out_ CY FAR* pcyOut);
+ WINOLEAUTAPI VarCyFromDec(_In_ const DECIMAL *pdecIn, _Out_ CY *pcyOut);
+ 
+-WINOLEAUTAPI VarBstrFromUI1(BYTE bVal, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI2(SHORT iVal, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI4(LONG lIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI8(LONG64 i64In, LCID lcid, ULONG dwFlags, _Out_ BSTR FAR* pbstrOut);
+-WINOLEAUTAPI VarBstrFromR4(FLOAT fltIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromR8(DOUBLE dblIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromCy(CY cyIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromDate(_In_ DATE dateIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromDisp(IDispatch * pdispIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromBool(VARIANT_BOOL boolIn, LCID lcid, ULONG dwFlags, _Out_ BSTR * pbstrOut);
+-WINOLEAUTAPI VarBstrFromI1(CHAR cIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI2(USHORT uiIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI4(ULONG ulIn, LCID lcid, ULONG dwFlags, _Out_ BSTR *pbstrOut);
+-WINOLEAUTAPI VarBstrFromUI8(ULONG64 ui64In, LCID lcid, ULONG dwFlags, _Out_ BSTR FAR* pbstrOut);
+-WINOLEAUTAPI VarBstrFromDec(_In_ const DECIMAL *pdecIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI1(BYTE bVal, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI2(SHORT iVal, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI4(LONG lIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI8(LONG64 i64In, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR FAR* pbstrOut);
++WINOLEAUTAPI VarBstrFromR4(FLOAT fltIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromR8(DOUBLE dblIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromCy(CY cyIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromDate(_In_ DATE dateIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromDisp(IDispatch * pdispIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromBool(VARIANT_BOOL boolIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR * pbstrOut);
++WINOLEAUTAPI VarBstrFromI1(CHAR cIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI2(USHORT uiIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI4(ULONG ulIn, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut);
++WINOLEAUTAPI VarBstrFromUI8(ULONG64 ui64In, LCID lcid, ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR FAR* pbstrOut);
++WINOLEAUTAPI VarBstrFromDec(_In_ const DECIMAL *pdecIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut);
+ 
+ WINOLEAUTAPI VarBoolFromUI1(BYTE bIn, _Out_ VARIANT_BOOL * pboolOut);
+ _Check_return_ WINOLEAUTAPI VarBoolFromI2(_In_ SHORT sIn, _Out_ VARIANT_BOOL * pboolOut);
+@@ -551,7 +552,7 @@ WINOLEAUTAPI VarUI2FromI2(SHORT uiIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromI4(LONG lIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromI8(LONG64 i64In, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromR4(FLOAT fltIn, _Out_ USHORT *puiOut);
+-WINOLEAUTAPI VarUI2FromR8(DOUBLE dblIn, USHORT *puiOut);
++WINOLEAUTAPI VarUI2FromR8(DOUBLE dblIn, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromDate(DATE dateIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromCy(CY cyIn, _Out_ USHORT *puiOut);
+ WINOLEAUTAPI VarUI2FromStr(_In_ LPCOLESTR strIn, _In_ LCID lcid, _In_ ULONG dwFlags, _Out_ USHORT *puiOut);
+@@ -734,8 +735,8 @@ WINOLEAUTAPI VarI4FromUI8(ULONG64 ui64In, _Out_ LONG *plOut);
+ 
+ typedef struct {
+     INT   cDig;
+-    ULONG dwInFlags;
+-    ULONG dwOutFlags;
++    _Win32_AssociatedEnum_(NUMPARSE_FLAGS) ULONG dwInFlags;
++    _Win32_AssociatedEnum_(NUMPARSE_FLAGS) ULONG dwOutFlags;
+     INT   cchUsed;
+     INT   nBaseShift;
+     INT   nPwr10;
+@@ -823,7 +824,7 @@ STDAPI VarNot(_In_ LPVARIANT pvarIn, _Out_ LPVARIANT pvarResult);
+ STDAPI VarRound(_In_ LPVARIANT pvarIn, _In_ int cDecimals, _Out_ LPVARIANT pvarResult);
+ 
+ // dwFlags passed to CompareString if a string compare
+-STDAPI VarCmp(_In_ LPVARIANT pvarLeft, _In_ LPVARIANT pvarRight, _In_ LCID lcid, _In_ ULONG dwFlags);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarCmp(_In_ LPVARIANT pvarLeft, _In_ LPVARIANT pvarRight, _In_ LCID lcid, _In_ ULONG dwFlags);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -869,8 +870,8 @@ STDAPI VarDecNeg(_In_ LPDECIMAL pdecIn, _Out_ LPDECIMAL pdecResult);
+ 
+ STDAPI VarDecRound(_In_ LPDECIMAL pdecIn, int cDecimals, _Out_ LPDECIMAL pdecResult);
+ 
+-STDAPI VarDecCmp(_In_ LPDECIMAL pdecLeft, _In_ LPDECIMAL pdecRight);
+-STDAPI VarDecCmpR8(_In_ LPDECIMAL pdecLeft, _In_ double dblRight);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarDecCmp(_In_ LPDECIMAL pdecLeft, _In_ LPDECIMAL pdecRight);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarDecCmpR8(_In_ LPDECIMAL pdecLeft, _In_ double dblRight);
+ 
+ 
+ // Currency math
+@@ -888,16 +889,16 @@ STDAPI VarCyNeg(_In_ CY cyIn, _Out_ LPCY pcyResult);
+ 
+ STDAPI VarCyRound(_In_ CY cyIn, _In_ int cDecimals, _Out_ LPCY pcyResult);
+ 
+-STDAPI VarCyCmp(_In_ CY cyLeft, _In_ CY cyRight);
+-STDAPI VarCyCmpR8(_In_ CY cyLeft, _In_ double dblRight);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarCyCmp(_In_ CY cyLeft, _In_ CY cyRight);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarCyCmpR8(_In_ CY cyLeft, _In_ double dblRight);
+ 
+ 
+ // Misc support functions
+ //
+-STDAPI VarBstrCat(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _Out_ LPBSTR pbstrResult);
++STDAPI VarBstrCat(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _Win32_RAIIFree_(SysFreeString) _Out_ LPBSTR pbstrResult);
+ STDAPI VarBstrCmp(_In_ BSTR bstrLeft, _In_ BSTR bstrRight, _In_ LCID lcid, _In_ ULONG dwFlags); // dwFlags passed to CompareString
+ STDAPI VarR8Pow(_In_ double dblLeft, _In_ double dblRight, _Out_ double *pdblResult);
+-STDAPI VarR4CmpR8(_In_ float fltLeft, _In_ double dblRight);
++_Win32_AssociatedEnum_(VARCMP) STDAPI VarR4CmpR8(_In_ float fltLeft, _In_ double dblRight);
+ STDAPI VarR8Round(_In_ double dblIn, _In_ int cDecimals, _Out_ double *pdblResult);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+@@ -971,37 +972,37 @@ WINOLEAUTAPI GetAltMonthNames(LCID lcid, _Outptr_result_buffer_maybenull_(13) LP
+ WINOLEAUTAPI VarFormat(
+ 	_In_ LPVARIANT pvarIn,
+ 	_In_opt_ LPOLESTR pstrFormat,
+-	int iFirstDay,
+-	int iFirstWeek,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_DAY) int iFirstDay,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_WEEK) int iFirstWeek,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatDateTime(
+ 	_In_ LPVARIANT pvarIn,
+-	int iNamedFormat,
++	_Win32_AssociatedEnum_(VARFORMAT_NAMED_FORMAT) int iNamedFormat,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatNumber(
+ 	_In_ LPVARIANT pvarIn,
+ 	int iNumDig,
+-	int iIncLead,
+-	int iUseParens,
+-	int iGroup,
++	_Win32_AssociatedEnum_(VARFORMAT_LEADING_DIGIT) int iIncLead,
++	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
++	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatPercent(
+ 	_In_ LPVARIANT pvarIn,
+ 	int iNumDig,
+-	int iIncLead,
+-	int iUseParens,
+-	int iGroup,
++	_Win32_AssociatedEnum_(VARFORMAT_LEADING_DIGIT) int iIncLead,
++	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
++	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatCurrency(
+@@ -1011,7 +1012,7 @@ WINOLEAUTAPI VarFormatCurrency(
+ 	int iUseParens,
+ 	int iGroup,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarWeekdayName(
+@@ -1019,14 +1020,14 @@ WINOLEAUTAPI VarWeekdayName(
+ 	int fAbbrev,
+ 	int iFirstDay,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarMonthName(
+ 	int iMonth,
+ 	int fAbbrev,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatFromTokens(
+@@ -1034,7 +1035,7 @@ WINOLEAUTAPI VarFormatFromTokens(
+ 	_In_opt_ LPOLESTR pstrFormat,
+ 	_In_reads_(_Inexpressible_("from VarTokenizeFormatString")) LPBYTE pbTokCur,
+ 	ULONG dwFlags,
+-	_Out_ BSTR *pbstrOut,
++	_Win32_RAIIFree_(SysFreeString) _Out_ BSTR *pbstrOut,
+ 	LCID lcid
+ 	);
+ 
+@@ -1042,8 +1043,8 @@ WINOLEAUTAPI VarTokenizeFormatString(
+ 	_In_opt_ LPOLESTR pstrFormat,
+ 	_Inout_updates_(cbTok) LPBYTE rgbTok,
+ 	int cbTok,
+-	int iFirstDay,
+-	int iFirstWeek,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_DAY) int iFirstDay,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_WEEK) int iFirstWeek,
+ 	LCID lcid,
+ 	_In_opt_ int *pcbActual
+ 	);
+@@ -1166,7 +1167,7 @@ WINOLEAUTAPI LoadRegTypeLib(REFGUID rguid, WORD wVerMajor, WORD wVerMinor,
+ /* get path to registered typelib
+  */
+ WINOLEAUTAPI QueryPathOfRegTypeLib(REFGUID guid, USHORT wMaj, USHORT wMin,
+-            LCID lcid, _Out_ LPBSTR lpbstrPathName);
++            LCID lcid, _Win32_RAIIFree_(SysFreeString) _Out_ LPBSTR lpbstrPathName);
+ 
+ /* add typelib to registry
+  */
+@@ -1212,7 +1213,7 @@ typedef /* [unique] */  __RPC_unique_pointer IDispatch *LPDISPATCH;
+ 
+ typedef struct tagPARAMDATA {
+     OLECHAR * szName;   /* parameter name */
+-    VARTYPE vt;         /* parameter type */
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vt;         /* parameter type */
+ } PARAMDATA, * LPPARAMDATA;
+ 
+ typedef struct tagMETHODDATA {
+@@ -1223,7 +1224,7 @@ typedef struct tagMETHODDATA {
+     CALLCONV cc;        /* calling convention */
+     UINT cArgs;         /* count of arguments */
+     WORD wFlags;        /* same wFlags as on IDispatch::Invoke() */
+-    VARTYPE vtReturn;
++    _Win32_AssociatedEnum_(VARENUM) VARTYPE vtReturn;
+ } METHODDATA, * LPMETHODDATA;
+ 
+ typedef struct tagINTERFACEDATA {
+@@ -1240,7 +1241,7 @@ _Check_return_
+ WINOLEAUTAPI DispGetParam(
+ 	_In_ DISPPARAMS * pdispparams,
+ 	UINT position,
+-	VARTYPE vtTarg,
++	_Win32_AssociatedEnum_(VARENUM) VARTYPE vtTarg,
+ 	_Out_ VARIANT * pvarResult,
+ 	_Out_opt_ UINT * puArgErr
+ 	);
+@@ -1260,9 +1261,9 @@ _Check_return_
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-WINOLEAUTAPI DispInvoke(void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
+-            WORD wFlags, DISPPARAMS * pparams, VARIANT * pvarResult,
+-            EXCEPINFO * pexcepinfo, UINT * puArgErr);
++WINOLEAUTAPI DispInvoke(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
++            WORD wFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DISPPARAMS * pparams, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") VARIANT * pvarResult,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") EXCEPINFO * pexcepinfo, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT * puArgErr);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -1273,21 +1274,21 @@ WINOLEAUTAPI DispInvoke(void * _this, ITypeInfo * ptinfo, DISPID dispidMember,
+ /* Construct a TypeInfo from an interface data description
+  */
+ _Check_return_
+-WINOLEAUTAPI CreateDispTypeInfo(INTERFACEDATA * pidata, LCID lcid,
++WINOLEAUTAPI CreateDispTypeInfo(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") INTERFACEDATA * pidata, LCID lcid,
+             ITypeInfo ** pptinfo);
+ 
+ /* Create an instance of the standard TypeInfo driven IDispatch
+  * implementation.
+  */
+ _Check_return_
+-WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, void * pvThis,
++WINOLEAUTAPI CreateStdDispatch(IUnknown * punkOuter, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * pvThis,
+             ITypeInfo * ptinfo, IUnknown ** ppunkStdDisp);
+ 
+ /* Low-level helper for IDispatch::Invoke() provides machine independence
+  * for customized Invoke().
+  */
+ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV cc,
+-            VARTYPE vtReturn, UINT  cActuals, _In_reads_(cActuals) VARTYPE * prgvt,
++            _Win32_AssociatedEnum_(VARENUM) VARTYPE vtReturn, UINT  cActuals, _In_reads_(cActuals) VARTYPE * prgvt,
+             _In_reads_(cActuals) VARIANTARG ** prgpvarg, _Out_ VARIANT * pvargResult);
+ 
+ 
+@@ -1301,11 +1302,11 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+ 
+ _Check_return_
+ WINOLEAUTAPI RegisterActiveObject(IUnknown * punk, REFCLSID rclsid,
+-            DWORD dwFlags, DWORD * pdwRegister);
++            _Win32_AssociatedEnum_(ACTIVEOBJECT_FLAGS) DWORD dwFlags, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD * pdwRegister);
+ 
+-WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, void * pvReserved);
++WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Reserved_ void * pvReserved);
+ 
+-WINOLEAUTAPI GetActiveObject(REFCLSID rclsid, void * pvReserved,
++WINOLEAUTAPI GetActiveObject(REFCLSID rclsid, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Reserved_ void * pvReserved,
+             IUnknown ** ppunk);
+ 
+ /*---------------------------------------------------------------------*/
+@@ -1335,7 +1336,7 @@ WINOLEAUTAPI GetRecordInfoFromGuids(REFGUID rGuidTypeLib,
+ 
+ WINOLEAUTAPI_(ULONG) OaBuildVersion(void);
+ 
+-WINOLEAUTAPI_(void) ClearCustData(LPCUSTDATA pCustData);
++WINOLEAUTAPI_(void) ClearCustData(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPCUSTDATA pCustData);
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
+ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
+@@ -1433,4 +1434,353 @@ WINOLEAUTAPI_(void) OaEnablePerUserTLibRegistration(void);
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(pop)
++
++#ifdef WIN32METADATA
++#pragma push_macro("DISPATCH_METHOD")
++#undef DISPATCH_METHOD
++#pragma push_macro("DISPATCH_PROPERTYGET")
++#undef DISPATCH_PROPERTYGET
++#pragma push_macro("DISPATCH_PROPERTYPUT")
++#undef DISPATCH_PROPERTYPUT
++#pragma push_macro("DISPATCH_PROPERTYPUTREF")
++#undef DISPATCH_PROPERTYPUTREF
++enum [[clang::flag_enum]] DISPATCH_FLAGS : unsigned short
++{
++    DISPATCH_METHOD = 1,
++    DISPATCH_PROPERTYGET = 2,
++    DISPATCH_PROPERTYPUT = 4,
++    DISPATCH_PROPERTYPUTREF = 8,
++};
++#pragma pop_macro("DISPATCH_PROPERTYPUTREF")
++#pragma pop_macro("DISPATCH_PROPERTYPUT")
++#pragma pop_macro("DISPATCH_PROPERTYGET")
++#pragma pop_macro("DISPATCH_METHOD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ACTIVEOBJECT_STRONG")
++#undef ACTIVEOBJECT_STRONG
++#pragma push_macro("ACTIVEOBJECT_WEAK")
++#undef ACTIVEOBJECT_WEAK
++enum [[clang::flag_enum]] ACTIVEOBJECT_FLAGS : unsigned int
++{
++    ACTIVEOBJECT_STRONG = 0U,
++    ACTIVEOBJECT_WEAK = 1U,
++};
++#pragma pop_macro("ACTIVEOBJECT_WEAK")
++#pragma pop_macro("ACTIVEOBJECT_STRONG")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("NUMPRS_LEADING_WHITE")
++#undef NUMPRS_LEADING_WHITE
++#pragma push_macro("NUMPRS_TRAILING_WHITE")
++#undef NUMPRS_TRAILING_WHITE
++#pragma push_macro("NUMPRS_LEADING_PLUS")
++#undef NUMPRS_LEADING_PLUS
++#pragma push_macro("NUMPRS_TRAILING_PLUS")
++#undef NUMPRS_TRAILING_PLUS
++#pragma push_macro("NUMPRS_LEADING_MINUS")
++#undef NUMPRS_LEADING_MINUS
++#pragma push_macro("NUMPRS_TRAILING_MINUS")
++#undef NUMPRS_TRAILING_MINUS
++#pragma push_macro("NUMPRS_HEX_OCT")
++#undef NUMPRS_HEX_OCT
++#pragma push_macro("NUMPRS_PARENS")
++#undef NUMPRS_PARENS
++#pragma push_macro("NUMPRS_DECIMAL")
++#undef NUMPRS_DECIMAL
++#pragma push_macro("NUMPRS_THOUSANDS")
++#undef NUMPRS_THOUSANDS
++#pragma push_macro("NUMPRS_CURRENCY")
++#undef NUMPRS_CURRENCY
++#pragma push_macro("NUMPRS_EXPONENT")
++#undef NUMPRS_EXPONENT
++#pragma push_macro("NUMPRS_USE_ALL")
++#undef NUMPRS_USE_ALL
++#pragma push_macro("NUMPRS_STD")
++#undef NUMPRS_STD
++#pragma push_macro("NUMPRS_NEG")
++#undef NUMPRS_NEG
++#pragma push_macro("NUMPRS_INEXACT")
++#undef NUMPRS_INEXACT
++enum [[clang::flag_enum]] NUMPARSE_FLAGS : unsigned int
++{
++    NUMPRS_LEADING_WHITE = 1U,
++    NUMPRS_TRAILING_WHITE = 2U,
++    NUMPRS_LEADING_PLUS = 4U,
++    NUMPRS_TRAILING_PLUS = 8U,
++    NUMPRS_LEADING_MINUS = 16U,
++    NUMPRS_TRAILING_MINUS = 32U,
++    NUMPRS_HEX_OCT = 64U,
++    NUMPRS_PARENS = 128U,
++    NUMPRS_DECIMAL = 256U,
++    NUMPRS_THOUSANDS = 512U,
++    NUMPRS_CURRENCY = 1024U,
++    NUMPRS_EXPONENT = 2048U,
++    NUMPRS_USE_ALL = 4096U,
++    NUMPRS_STD = 8191U,
++    NUMPRS_NEG = 65536U,
++    NUMPRS_INEXACT = 131072U,
++};
++#pragma pop_macro("NUMPRS_INEXACT")
++#pragma pop_macro("NUMPRS_NEG")
++#pragma pop_macro("NUMPRS_STD")
++#pragma pop_macro("NUMPRS_USE_ALL")
++#pragma pop_macro("NUMPRS_EXPONENT")
++#pragma pop_macro("NUMPRS_CURRENCY")
++#pragma pop_macro("NUMPRS_THOUSANDS")
++#pragma pop_macro("NUMPRS_DECIMAL")
++#pragma pop_macro("NUMPRS_PARENS")
++#pragma pop_macro("NUMPRS_HEX_OCT")
++#pragma pop_macro("NUMPRS_TRAILING_MINUS")
++#pragma pop_macro("NUMPRS_LEADING_MINUS")
++#pragma pop_macro("NUMPRS_TRAILING_PLUS")
++#pragma pop_macro("NUMPRS_LEADING_PLUS")
++#pragma pop_macro("NUMPRS_TRAILING_WHITE")
++#pragma pop_macro("NUMPRS_LEADING_WHITE")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("VARCMP_LT")
++#undef VARCMP_LT
++#pragma push_macro("VARCMP_EQ")
++#undef VARCMP_EQ
++#pragma push_macro("VARCMP_GT")
++#undef VARCMP_GT
++#pragma push_macro("VARCMP_NULL")
++#undef VARCMP_NULL
++enum VARCMP : unsigned int
++{
++    VARCMP_LT = 0U,
++    VARCMP_EQ = 1U,
++    VARCMP_GT = 2U,
++    VARCMP_NULL = 3U,
++};
++#pragma pop_macro("VARCMP_NULL")
++#pragma pop_macro("VARCMP_GT")
++#pragma pop_macro("VARCMP_EQ")
++#pragma pop_macro("VARCMP_LT")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("VARIANT_NOVALUEPROP")
++#undef VARIANT_NOVALUEPROP
++#pragma push_macro("VARIANT_ALPHABOOL")
++#undef VARIANT_ALPHABOOL
++#pragma push_macro("VARIANT_NOUSEROVERRIDE")
++#undef VARIANT_NOUSEROVERRIDE
++#pragma push_macro("VARIANT_CALENDAR_HIJRI")
++#undef VARIANT_CALENDAR_HIJRI
++#pragma push_macro("VARIANT_LOCALBOOL")
++#undef VARIANT_LOCALBOOL
++#pragma push_macro("VARIANT_CALENDAR_THAI")
++#undef VARIANT_CALENDAR_THAI
++#pragma push_macro("VARIANT_CALENDAR_GREGORIAN")
++#undef VARIANT_CALENDAR_GREGORIAN
++#pragma push_macro("VARIANT_USE_NLS")
++#undef VARIANT_USE_NLS
++enum [[clang::flag_enum]] VAR_CHANGE_FLAGS : unsigned short
++{
++    VARIANT_NOVALUEPROP = 1,
++    VARIANT_ALPHABOOL = 2,
++    VARIANT_NOUSEROVERRIDE = 4,
++    VARIANT_CALENDAR_HIJRI = 8,
++    VARIANT_LOCALBOOL = 16,
++    VARIANT_CALENDAR_THAI = 32,
++    VARIANT_CALENDAR_GREGORIAN = 64,
++    VARIANT_USE_NLS = 128,
++};
++#pragma pop_macro("VARIANT_USE_NLS")
++#pragma pop_macro("VARIANT_CALENDAR_GREGORIAN")
++#pragma pop_macro("VARIANT_CALENDAR_THAI")
++#pragma pop_macro("VARIANT_LOCALBOOL")
++#pragma pop_macro("VARIANT_CALENDAR_HIJRI")
++#pragma pop_macro("VARIANT_NOUSEROVERRIDE")
++#pragma pop_macro("VARIANT_ALPHABOOL")
++#pragma pop_macro("VARIANT_NOVALUEPROP")
++#endif
++
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_FIRST_DAY
++#define WIN32METADATA_ENUM_VARFORMAT_FIRST_DAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_SYSTEMDEFAULT")
++#undef VARFORMAT_FIRST_DAY_SYSTEMDEFAULT
++#pragma push_macro("VARFORMAT_FIRST_DAY_MONDAY")
++#undef VARFORMAT_FIRST_DAY_MONDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_TUESDAY")
++#undef VARFORMAT_FIRST_DAY_TUESDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_WEDNESDAY")
++#undef VARFORMAT_FIRST_DAY_WEDNESDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_THURSDAY")
++#undef VARFORMAT_FIRST_DAY_THURSDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_FRIDAY")
++#undef VARFORMAT_FIRST_DAY_FRIDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_SATURDAY")
++#undef VARFORMAT_FIRST_DAY_SATURDAY
++#pragma push_macro("VARFORMAT_FIRST_DAY_SUNDAY")
++#undef VARFORMAT_FIRST_DAY_SUNDAY
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_FIRST_DAYValues {
++enum VARFORMAT_FIRST_DAY : int
++{
++    VARFORMAT_FIRST_DAY_SYSTEMDEFAULT = 0,
++    VARFORMAT_FIRST_DAY_MONDAY = 1,
++    VARFORMAT_FIRST_DAY_TUESDAY = 2,
++    VARFORMAT_FIRST_DAY_WEDNESDAY = 3,
++    VARFORMAT_FIRST_DAY_THURSDAY = 4,
++    VARFORMAT_FIRST_DAY_FRIDAY = 5,
++    VARFORMAT_FIRST_DAY_SATURDAY = 6,
++    VARFORMAT_FIRST_DAY_SUNDAY = 7,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_FIRST_DAY_SUNDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_SATURDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_FRIDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_THURSDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_WEDNESDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_TUESDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_MONDAY")
++#pragma pop_macro("VARFORMAT_FIRST_DAY_SYSTEMDEFAULT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_FIRST_WEEK
++#define WIN32METADATA_ENUM_VARFORMAT_FIRST_WEEK
++#pragma push_macro("VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT")
++#undef VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT
++#pragma push_macro("VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST")
++#undef VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST
++#pragma push_macro("VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR")
++#undef VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR
++#pragma push_macro("VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS")
++#undef VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_FIRST_WEEKValues {
++enum VARFORMAT_FIRST_WEEK : int
++{
++    VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT = 0,
++    VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST = 1,
++    VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR = 2,
++    VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS = 3,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS")
++#pragma pop_macro("VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR")
++#pragma pop_macro("VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST")
++#pragma pop_macro("VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_NAMED_FORMAT
++#define WIN32METADATA_ENUM_VARFORMAT_NAMED_FORMAT
++#pragma push_macro("VARFORMAT_NAMED_FORMAT_GENERALDATE")
++#undef VARFORMAT_NAMED_FORMAT_GENERALDATE
++#pragma push_macro("VARFORMAT_NAMED_FORMAT_LONGDATE")
++#undef VARFORMAT_NAMED_FORMAT_LONGDATE
++#pragma push_macro("VARFORMAT_NAMED_FORMAT_SHORTDATE")
++#undef VARFORMAT_NAMED_FORMAT_SHORTDATE
++#pragma push_macro("VARFORMAT_NAMED_FORMAT_LONGTIME")
++#undef VARFORMAT_NAMED_FORMAT_LONGTIME
++#pragma push_macro("VARFORMAT_NAMED_FORMAT_SHORTTIME")
++#undef VARFORMAT_NAMED_FORMAT_SHORTTIME
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_NAMED_FORMATValues {
++enum VARFORMAT_NAMED_FORMAT : int
++{
++    VARFORMAT_NAMED_FORMAT_GENERALDATE = 0,
++    VARFORMAT_NAMED_FORMAT_LONGDATE = 1,
++    VARFORMAT_NAMED_FORMAT_SHORTDATE = 2,
++    VARFORMAT_NAMED_FORMAT_LONGTIME = 3,
++    VARFORMAT_NAMED_FORMAT_SHORTTIME = 4,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_NAMED_FORMAT_SHORTTIME")
++#pragma pop_macro("VARFORMAT_NAMED_FORMAT_LONGTIME")
++#pragma pop_macro("VARFORMAT_NAMED_FORMAT_SHORTDATE")
++#pragma pop_macro("VARFORMAT_NAMED_FORMAT_LONGDATE")
++#pragma pop_macro("VARFORMAT_NAMED_FORMAT_GENERALDATE")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_LEADING_DIGIT
++#define WIN32METADATA_ENUM_VARFORMAT_LEADING_DIGIT
++#pragma push_macro("VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT")
++#undef VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT
++#pragma push_macro("VARFORMAT_LEADING_DIGIT_INCLUDED")
++#undef VARFORMAT_LEADING_DIGIT_INCLUDED
++#pragma push_macro("VARFORMAT_LEADING_DIGIT_NOTINCLUDED")
++#undef VARFORMAT_LEADING_DIGIT_NOTINCLUDED
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_LEADING_DIGITValues {
++enum VARFORMAT_LEADING_DIGIT : int
++{
++    VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT = -2,
++    VARFORMAT_LEADING_DIGIT_INCLUDED = -1,
++    VARFORMAT_LEADING_DIGIT_NOTINCLUDED = 0,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_LEADING_DIGIT_NOTINCLUDED")
++#pragma pop_macro("VARFORMAT_LEADING_DIGIT_INCLUDED")
++#pragma pop_macro("VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_PARENTHESES
++#define WIN32METADATA_ENUM_VARFORMAT_PARENTHESES
++#pragma push_macro("VARFORMAT_PARENTHESES_SYSTEMDEFAULT")
++#undef VARFORMAT_PARENTHESES_SYSTEMDEFAULT
++#pragma push_macro("VARFORMAT_PARENTHESES_USED")
++#undef VARFORMAT_PARENTHESES_USED
++#pragma push_macro("VARFORMAT_PARENTHESES_NOTUSED")
++#undef VARFORMAT_PARENTHESES_NOTUSED
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_PARENTHESESValues {
++enum VARFORMAT_PARENTHESES : int
++{
++    VARFORMAT_PARENTHESES_SYSTEMDEFAULT = -2,
++    VARFORMAT_PARENTHESES_USED = -1,
++    VARFORMAT_PARENTHESES_NOTUSED = 0,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_PARENTHESES_NOTUSED")
++#pragma pop_macro("VARFORMAT_PARENTHESES_USED")
++#pragma pop_macro("VARFORMAT_PARENTHESES_SYSTEMDEFAULT")
++#endif
++#endif
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_VARFORMAT_GROUP
++#define WIN32METADATA_ENUM_VARFORMAT_GROUP
++#pragma push_macro("VARFORMAT_GROUP_SYSTEMDEFAULT")
++#undef VARFORMAT_GROUP_SYSTEMDEFAULT
++#pragma push_macro("VARFORMAT_GROUP_THOUSANDS")
++#undef VARFORMAT_GROUP_THOUSANDS
++#pragma push_macro("VARFORMAT_GROUP_NOTTHOUSANDS")
++#undef VARFORMAT_GROUP_NOTTHOUSANDS
++namespace Windows { namespace MetadataEnumValues {
++namespace VARFORMAT_GROUPValues {
++enum VARFORMAT_GROUP : int
++{
++    VARFORMAT_GROUP_SYSTEMDEFAULT = -2,
++    VARFORMAT_GROUP_THOUSANDS = -1,
++    VARFORMAT_GROUP_NOTTHOUSANDS = 0,
++};
++}
++} }
++#pragma pop_macro("VARFORMAT_GROUP_NOTTHOUSANDS")
++#pragma pop_macro("VARFORMAT_GROUP_THOUSANDS")
++#pragma pop_macro("VARFORMAT_GROUP_SYSTEMDEFAULT")
++#endif
+ #endif

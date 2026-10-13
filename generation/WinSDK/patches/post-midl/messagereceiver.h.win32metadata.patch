@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MessageReceiver.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MessageReceiver.h
+index 39a3d8c729..b832ca9cdb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MessageReceiver.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MessageReceiver.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * MessageReceiver is a base class implemented by any class
+@@ -45,9 +46,9 @@ typedef struct _alljoyn_busobject_handle*                   alljoyn_busobject;
+  * @param member    Method interface member entry.
+  * @param message   The received method call message.
+  */
+-typedef void (AJ_CALL * alljoyn_messagereceiver_methodhandler_ptr)(alljoyn_busobject bus,
++typedef void (AJ_CALL * alljoyn_messagereceiver_methodhandler_ptr)(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_busobject bus,
+                                                                    const alljoyn_interfacedescription_member* member,
+-                                                                   alljoyn_message message);
++                                                                   _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message message);
+ 
+ /**
+  * ReplyHandlers are %MessageReceiver functions which are called by AllJoyn library
+@@ -56,7 +57,7 @@ typedef void (AJ_CALL * alljoyn_messagereceiver_methodhandler_ptr)(alljoyn_busob
+  * @param message   The received message.
+  * @param context   User-defined context passed to MethodCall and returned upon reply.
+  */
+-typedef void (AJ_CALL * alljoyn_messagereceiver_replyhandler_ptr)(alljoyn_message message, void* context);
++typedef void (AJ_CALL * alljoyn_messagereceiver_replyhandler_ptr)(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message message, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void* context);
+ 
+ /**
+  * SignalHandlers are %MessageReceiver functions which are called by AllJoyn library
+@@ -67,7 +68,7 @@ typedef void (AJ_CALL * alljoyn_messagereceiver_replyhandler_ptr)(alljoyn_messag
+  * @param message   The received message.
+  */
+ typedef void (AJ_CALL * alljoyn_messagereceiver_signalhandler_ptr)(const alljoyn_interfacedescription_member* member,
+-                                                                   const char* srcPath, alljoyn_message message);
++                                                                   const char* srcPath, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_message message);
+ 
+ #ifdef __cplusplus
+ } /* extern "C" */

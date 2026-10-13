@@ -1,0 +1,171 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/directmanipulation.h b/generation/WinSDK/RecompiledIdlHeaders/um/directmanipulation.h
+index 9458340988..ef775a791b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/directmanipulation.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/directmanipulation.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -428,7 +429,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FBF5D3B4-70C7-4163-9322-5A6F660D6FBC")
++    MIDL_INTERFACE("FBF5D3B4-70C7-4163-9322-5A6F660D6FBC") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationManager : public IUnknown
+     {
+     public:
+@@ -633,7 +634,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FA1005E9-3D16-484C-BFC9-62B61E56EC4E")
++    MIDL_INTERFACE("FA1005E9-3D16-484C-BFC9-62B61E56EC4E") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationManager2 : public IDirectManipulationManager
+     {
+     public:
+@@ -812,7 +813,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2CB6B33D-FFE8-488C-B750-FBDFE88DCA8C")
++    MIDL_INTERFACE("2CB6B33D-FFE8-488C-B750-FBDFE88DCA8C") _Windows_SupportedOS_10240_ 
+     IDirectManipulationManager3 : public IDirectManipulationManager2
+     {
+     public:
+@@ -1005,7 +1006,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d")
++    MIDL_INTERFACE("28b85a3d-60a0-48bd-9ba1-5ce8d9ea3a6d") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationViewport : public IUnknown
+     {
+     public:
+@@ -1471,7 +1472,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("923CCAAC-61E1-4385-B726-017AF189882A")
++    MIDL_INTERFACE("923CCAAC-61E1-4385-B726-017AF189882A") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationViewport2 : public IDirectManipulationViewport
+     {
+     public:
+@@ -1851,7 +1852,7 @@ EXTERN_C const IID IID_IDirectManipulationViewportEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("952121DA-D69F-45F9-B0F9-F23944321A6D")
++    MIDL_INTERFACE("952121DA-D69F-45F9-B0F9-F23944321A6D") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationViewportEventHandler : public IUnknown
+     {
+     public:
+@@ -1976,7 +1977,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B89962CB-3D89-442B-BB58-5098FA0F9F16")
++    MIDL_INTERFACE("B89962CB-3D89-442B-BB58-5098FA0F9F16") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationContent : public IUnknown
+     {
+     public:
+@@ -2182,7 +2183,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C12851E4-1698-4625-B9B1-7CA3EC18630B")
++    MIDL_INTERFACE("C12851E4-1698-4625-B9B1-7CA3EC18630B") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationPrimaryContent : public IUnknown
+     {
+     public:
+@@ -2432,7 +2433,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1FA11B10-701B-41AE-B5F2-49E36BD595AA")
++    MIDL_INTERFACE("1FA11B10-701B-41AE-B5F2-49E36BD595AA") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationDragDropEventHandler : public IUnknown
+     {
+     public:
+@@ -2546,7 +2547,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropBehavior;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("814B5AF5-C2C8-4270-A9B7-A198CE8D02FA")
++    MIDL_INTERFACE("814B5AF5-C2C8-4270-A9B7-A198CE8D02FA") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationDragDropBehavior : public IUnknown
+     {
+     public:
+@@ -2666,7 +2667,7 @@ EXTERN_C const IID IID_IDirectManipulationInteractionEventHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E43F45B8-42B4-403E-B1F2-273B8F510830")
++    MIDL_INTERFACE("E43F45B8-42B4-403E-B1F2-273B8F510830") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationInteractionEventHandler : public IUnknown
+     {
+     public:
+@@ -2757,7 +2758,7 @@ EXTERN_C const IID IID_IDirectManipulationFrameInfoProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("fb759dba-6f4c-4c01-874e-19c8a05907f9")
++    MIDL_INTERFACE("fb759dba-6f4c-4c01-874e-19c8a05907f9") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationFrameInfoProvider : public IUnknown
+     {
+     public:
+@@ -2852,7 +2853,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("537A0825-0387-4EFA-B62F-71EB1F085A7E")
++    MIDL_INTERFACE("537A0825-0387-4EFA-B62F-71EB1F085A7E") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationCompositor : public IUnknown
+     {
+     public:
+@@ -2986,7 +2987,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D38C7822-F1CB-43CB-B4B9-AC0C767A412E")
++    MIDL_INTERFACE("D38C7822-F1CB-43CB-B4B9-AC0C767A412E") _Windows_SupportedOS_10240_ 
+     IDirectManipulationCompositor2 : public IDirectManipulationCompositor
+     {
+     public:
+@@ -3126,7 +3127,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateHandler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("790B6337-64F8-4FF5-A269-B32BC2AF27A7")
++    MIDL_INTERFACE("790B6337-64F8-4FF5-A269-B32BC2AF27A7") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationUpdateHandler : public IUnknown
+     {
+     public:
+@@ -3209,7 +3210,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("B0AE62FD-BE34-46E7-9CAA-D361FACBB9CC")
++    MIDL_INTERFACE("B0AE62FD-BE34-46E7-9CAA-D361FACBB9CC") _Windows_SupportedOS_Windows8_ 
+     IDirectManipulationUpdateManager : public IUnknown
+     {
+     public:
+@@ -3346,7 +3347,7 @@ EXTERN_C const IID IID_IDirectManipulationAutoScrollBehavior;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6D5954D4-2003-4356-9B31-D051C9FF0AF7")
++    MIDL_INTERFACE("6D5954D4-2003-4356-9B31-D051C9FF0AF7") _Windows_SupportedOS_Windows81_ 
+     IDirectManipulationAutoScrollBehavior : public IUnknown
+     {
+     public:
+@@ -3437,7 +3438,7 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("652D5C71-FE60-4A98-BE70-E5F21291E7F1")
++    MIDL_INTERFACE("652D5C71-FE60-4A98-BE70-E5F21291E7F1") _Windows_SupportedOS_10240_ 
+     IDirectManipulationDeferContactService : public IUnknown
+     {
+     public:

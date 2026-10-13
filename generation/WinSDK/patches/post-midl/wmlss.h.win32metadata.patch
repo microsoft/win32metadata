@@ -1,0 +1,98 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h b/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
+index 3a5f6527b7..c84f5db8ed 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wmlss.h
+@@ -102,6 +102,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+@@ -118,7 +119,7 @@ extern RPC_IF_HANDLE __MIDL_itf_wmlss_0000_0000_v0_0_s_ifspec;
+ /* [helpstring][version][uuid] */ 
+ 
+ typedef /* [public][v1_enum][helpstring][public] */ 
+-enum WindowsMediaLibrarySharingDeviceAuthorizationStatus
++enum  WindowsMediaLibrarySharingDeviceAuthorizationStatus
+     {
+         DEVICE_AUTHORIZATION_UNKNOWN	= 0,
+         DEVICE_AUTHORIZATION_ALLOWED	= 1,
+@@ -139,13 +140,13 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81E26927-7A7D-40A7-81D4-BDDC02960E3E")
++    MIDL_INTERFACE("81E26927-7A7D-40A7-81D4-BDDC02960E3E") _Windows_SupportedOS_Windows7_ 
+     IWindowsMediaLibrarySharingDeviceProperty : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+@@ -301,7 +302,7 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDeviceProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("C4623214-6B06-40C5-A623-B2FF4C076BFD")
++    MIDL_INTERFACE("C4623214-6B06-40C5-A623-B2FF4C076BFD") _Windows_SupportedOS_Windows7_ 
+     IWindowsMediaLibrarySharingDeviceProperties : public IDispatch
+     {
+     public:
+@@ -484,13 +485,13 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3DCCC293-4FD9-4191-A25B-8E57C5D27BD4")
++    MIDL_INTERFACE("3DCCC293-4FD9-4191-A25B-8E57C5D27BD4") _Windows_SupportedOS_Windows7_ 
+     IWindowsMediaLibrarySharingDevice : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_DeviceID( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *deviceID) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *deviceID) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Authorization( 
+             /* [annotation][retval][out] */ 
+@@ -672,7 +673,7 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingDevices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1803F9D6-FE6D-4546-BF5B-992FE8EC12D1")
++    MIDL_INTERFACE("1803F9D6-FE6D-4546-BF5B-992FE8EC12D1") _Windows_SupportedOS_Windows7_ 
+     IWindowsMediaLibrarySharingDevices : public IDispatch
+     {
+     public:
+@@ -855,7 +856,7 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("01F5F85E-0A81-40DA-A7C8-21EF3AF8440C")
++    MIDL_INTERFACE("01F5F85E-0A81-40DA-A7C8-21EF3AF8440C") _Windows_SupportedOS_Windows7_ 
+     IWindowsMediaLibrarySharingServices : public IDispatch
+     {
+     public:
+@@ -873,7 +874,7 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_userHomeMediaSharingLibraryName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *libraryName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *libraryName) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_userHomeMediaSharingLibraryName( 
+             /* [annotation][in] */ 
+@@ -905,7 +906,7 @@ EXTERN_C const IID IID_IWindowsMediaLibrarySharingServices;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_internetMediaSharingSecurityGroup( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *securityGroup) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *securityGroup) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_internetMediaSharingSecurityGroup( 
+             /* [annotation][in] */ 

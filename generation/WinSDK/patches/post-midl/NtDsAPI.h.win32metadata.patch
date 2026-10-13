@@ -1,0 +1,883 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
+index b6471c2900..934b00e23c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NtDsAPI.h
+@@ -27,6 +27,7 @@ Notes:
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -892,23 +893,23 @@ typedef struct
+ //      DsGetDcName for the domain specified - provided DnsDomainName
+ //      is a valid DNS domain name - i.e. not a NETBIOS domain name.
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsBindW(
+     _In_opt_ LPCWSTR         DomainControllerName,      // in, optional
+     _In_opt_ LPCWSTR         DnsDomainName,             // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsBindA(
+     _In_opt_ LPCSTR          DomainControllerName,      // in, optional
+     _In_opt_ LPCSTR          DnsDomainName,             // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBind DsBindW
+@@ -916,7 +917,7 @@ DsBindA(
+ #define DsBind DsBindA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -924,9 +925,9 @@ DsBindWithCredW(
+     _In_opt_ LPCWSTR         DomainControllerName,      // in, optional
+     _In_opt_ LPCWSTR         DnsDomainName,             // in, optional
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -934,7 +935,7 @@ DsBindWithCredA(
+     _In_opt_ LPCSTR          DomainControllerName,      // in, optional
+     _In_opt_ LPCSTR          DnsDomainName,             // in, optional
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBindWithCred DsBindWithCredW
+@@ -952,7 +953,7 @@ DsBindWithCredA(
+ // identical to DsBindWithCred{A|W}.
+ //
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -961,9 +962,9 @@ DsBindWithSpnW(
+     _In_opt_ LPCWSTR         DnsDomainName,             // in, optional
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCWSTR         ServicePrincipalName,      // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -972,7 +973,7 @@ DsBindWithSpnA(
+     _In_opt_ LPCSTR          DnsDomainName,             // in, optional
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCSTR          ServicePrincipalName,      // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBindWithSpn DsBindWithSpnW
+@@ -988,7 +989,7 @@ DsBindWithSpnA(
+ // should not specify this flag, see flag above for details.
+ //
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -998,9 +999,9 @@ DsBindWithSpnExW(
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCWSTR         ServicePrincipalName,      // in, optional
+     _In_opt_ DWORD           BindFlags,                 // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -1010,7 +1011,7 @@ DsBindWithSpnExA(
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCSTR          ServicePrincipalName,      // in, optional
+     _In_opt_ DWORD           BindFlags,                 // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBindWithSpnEx DsBindWithSpnExW
+@@ -1026,7 +1027,7 @@ DsBindWithSpnExA(
+ // to specify the AD/AM instance desired.
+ //
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -1038,9 +1039,9 @@ DsBindByInstanceW(
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCWSTR         ServicePrincipalName,      // in, optional
+     _In_opt_ DWORD           BindFlags,                 // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -1052,7 +1053,7 @@ DsBindByInstanceA(
+     _In_opt_ RPC_AUTH_IDENTITY_HANDLE AuthIdentity,     // in, optional
+     _In_opt_ LPCSTR         ServicePrincipalName,       // in, optional
+     _In_opt_ DWORD          BindFlags,                  // in, optional
+-    _Out_ HANDLE         *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE         *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBindByInstance DsBindByInstanceW
+@@ -1067,21 +1068,21 @@ DsBindByInstanceA(
+ // the function will try to bind to the ISTG in a nearby site.
+ //
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+ DsBindToISTGW(
+     _In_opt_ LPCWSTR         SiteName,                  // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+ DsBindToISTGA(
+     _In_opt_ LPCSTR          SiteName,                  // in, optional
+-    _Out_ HANDLE          *phDS);
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE          *phDS);
+ 
+ #ifdef UNICODE
+ #define DsBindToISTG DsBindToISTGW
+@@ -1095,7 +1096,7 @@ DsBindToISTGA(
+ // handle. RPC calls which take longer the timeout value are canceled.
+ //
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -1108,12 +1109,16 @@ DsBindingSetTimeout(
+ // DsUnBind
+ //
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
++
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsUnBindW(
+     _In_ HANDLE          *phDS);             // in
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ 
++
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1139,6 +1144,8 @@ DsUnBindA(
+ // null when the username is fully qualified, for example UPN format.
+ //
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ 
++
+ _Check_return_
+ NTDSAPI
+ DWORD
+@@ -1150,7 +1157,7 @@ DsMakePasswordCredentialsW(
+     _Out_ RPC_AUTH_IDENTITY_HANDLE *pAuthIdentity
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1167,7 +1174,7 @@ DsMakePasswordCredentialsA(
+ #define DsMakePasswordCredentials DsMakePasswordCredentialsA
+ #endif
+ 
+-NTDSAPI
++_Windows_SupportedOS_WindowsVista_ NTDSAPI
+ VOID
+ WINAPI
+ DsFreePasswordCredentials(
+@@ -1181,7 +1188,7 @@ DsFreePasswordCredentials(
+ // DsCrackNames
+ //
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1195,7 +1202,7 @@ DsCrackNamesW(
+     _Outptr_ PDS_NAME_RESULTW *ppResult);     // out
+ 
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1218,13 +1225,13 @@ DsCrackNamesA(
+ // DsFreeNameResult
+ //
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ void
+ WINAPI
+ DsFreeNameResultW(
+     _In_ DS_NAME_RESULTW *pResult);          // in
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ void
+ WINAPI
+ DsFreeNameResultA(
+@@ -1259,7 +1266,7 @@ DsFreeNameResultA(
+ //      IN OUT LPTSTR * prpszSPN[]
+ // a bunch of SPNs for this service; free with DsFreeSpnArray
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1275,7 +1282,7 @@ DsGetSpnA(
+     _Outptr_result_buffer_ (*pcSpn) LPSTR **prpszSpn
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1300,7 +1307,7 @@ DsGetSpnW(
+ // ==========================================================
+ // DsFreeSpnArray() -- Free array returned by DsGetSpn{A,W}
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ void
+ WINAPI
+ DsFreeSpnArrayA(
+@@ -1308,7 +1315,7 @@ DsFreeSpnArrayA(
+     _Inout_updates_to_(cSpn, 0) LPSTR *rpszSpn
+     );
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ void
+ WINAPI
+ DsFreeSpnArrayW(
+@@ -1342,7 +1349,7 @@ DsFreeSpnArrayW(
+ // IN int       cSPN,                   // count of SPNs to add to account
+ // IN LPCTSTR   rpszSPN[]               // SPNs to add to altSecID property
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1354,7 +1361,7 @@ DsWriteAccountSpnA(
+     _In_reads_(cSpn) LPCSTR *rpszSpn
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1414,7 +1421,7 @@ Return Value:
+ 
+ --*/
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1425,7 +1432,7 @@ DsClientMakeSpnForTargetServerW(
+     _Out_writes_to_ (*pcSpnLength, *pcSpnLength) LPWSTR pszSpn
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1480,7 +1487,7 @@ Return Value:
+ 
+ --*/
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1490,7 +1497,7 @@ DsServerRegisterSpnA(
+     _In_opt_ LPCSTR UserObjectDN
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1523,7 +1530,7 @@ DsServerRegisterSpnW(
+ //          Bitwise OR of zero or more flags
+ //   RETURNS: WIN32 STATUS
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1534,7 +1541,7 @@ DsReplicaSyncA(
+     ULONG Options
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1582,7 +1589,7 @@ Arguments:
+     RETURNS: WIN32 STATUS
+ */
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1596,7 +1603,7 @@ DsReplicaAddA(
+     DWORD Options
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1639,7 +1646,7 @@ DsReplicaAddW(
+ //
+ //   RETURNS: WIN32 STATUS
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1650,7 +1657,7 @@ DsReplicaDelA(
+     ULONG Options
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1716,7 +1723,7 @@ DsReplicaDelW(
+ //                  Perform this operation asynchronously.
+ //   RETURNS: WIN32 STATUS
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1724,15 +1731,15 @@ DsReplicaModifyA(
+     _In_ HANDLE hDS,
+     _In_ LPCSTR NameContext,
+     _In_opt_ const UUID *pUuidSourceDsa,
+-    _Reserved_ LPCSTR TransportDn,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCSTR TransportDn,
+     _In_ LPCSTR SourceDsaAddress,
+     _In_opt_ const PSCHEDULE pSchedule,
+-    _Reserved_ DWORD ReplicaFlags,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ReplicaFlags,
+     DWORD ModifyFields,
+     DWORD Options
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1740,7 +1747,7 @@ DsReplicaModifyW(
+     _In_ HANDLE hDS,
+     _In_ LPCWSTR NameContext,
+     _In_opt_ const UUID *pUuidSourceDsa,
+-    _Reserved_ LPCWSTR TransportDn,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ LPCWSTR TransportDn,
+     _In_ LPCWSTR SourceDsaAddress,
+     _In_opt_ const PSCHEDULE pSchedule,
+     DWORD ReplicaFlags,
+@@ -1785,7 +1792,7 @@ DsReplicaModifyW(
+ //
+ //   RETURNS: WIN32 STATUS
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1797,7 +1804,7 @@ DsReplicaUpdateRefsA(
+     ULONG Options
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1955,7 +1962,7 @@ typedef struct {
+ //	pErrors		(OUT, OPTIONAL) - Pointer to a (PDS_REPSYNCALL_ERRINFO *)
+ //				object that will hold an array of error structures.
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1963,12 +1970,12 @@ DsReplicaSyncAllA (
+     _In_ HANDLE				hDS,
+     _In_ LPCSTR				pszNameContext,
+     ULONG				ulFlags,
+-    __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEA),
++    _WIN32META_ANNOTATION_("win32metadata:in") __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEA),
+     _In_opt_ LPVOID				pCallbackData,
+     _Outptr_result_maybenull_z_ PDS_REPSYNCALL_ERRINFOA **		pErrors
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1976,7 +1983,7 @@ DsReplicaSyncAllW (
+     _In_ HANDLE				hDS,
+     _In_ LPCWSTR				pszNameContext,
+     ULONG				ulFlags,
+-    __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEW),
++    _WIN32META_ANNOTATION_("win32metadata:in") __callback BOOL (__stdcall *			pFnCallBack) (LPVOID, PDS_REPSYNCALL_UPDATEW),
+     _In_opt_ LPVOID				pCallbackData,
+     _Outptr_result_maybenull_z_ PDS_REPSYNCALL_ERRINFOW **		pErrors
+     );
+@@ -1987,7 +1994,7 @@ DsReplicaSyncAllW (
+ #define DsReplicaSyncAll DsReplicaSyncAllA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -1999,7 +2006,7 @@ DsRemoveDsServerW(
+     BOOL    fCommit          // in
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2017,7 +2024,7 @@ DsRemoveDsServerA(
+ #define DsRemoveDsServer DsRemoveDsServerA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2026,7 +2033,7 @@ DsRemoveDsDomainW(
+     _In_ LPWSTR  DomainDN           // in
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2041,7 +2048,7 @@ DsRemoveDsDomainA(
+ #define DsRemoveDsDomain DsRemoveDsDomainA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2049,7 +2056,7 @@ DsListSitesA(
+     _In_ HANDLE              hDs,            // in
+     _Outptr_ PDS_NAME_RESULTA    *ppSites);      // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2063,7 +2070,7 @@ DsListSitesW(
+ #define DsListSites DsListSitesA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2072,7 +2079,7 @@ DsListServersInSiteA(
+     _In_ LPCSTR              site,           // in
+     _Outptr_ PDS_NAME_RESULTA    *ppServers);    // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2087,7 +2094,7 @@ DsListServersInSiteW(
+ #define DsListServersInSite DsListServersInSiteA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2096,7 +2103,7 @@ DsListDomainsInSiteA(
+     _In_ LPCSTR              site,           // in
+     _Outptr_ PDS_NAME_RESULTA    *ppDomains);    // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2111,7 +2118,7 @@ DsListDomainsInSiteW(
+ #define DsListDomainsInSite DsListDomainsInSiteA
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2121,7 +2128,7 @@ DsListServersForDomainInSiteA(
+     _In_ LPCSTR              site,           // in
+     _Outptr_ PDS_NAME_RESULTA    *ppServers);    // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2144,7 +2151,7 @@ DsListServersForDomainInSiteW(
+ #define DS_LIST_DNS_HOST_NAME_FOR_SERVER    1
+ #define DS_LIST_ACCOUNT_OBJECT_FOR_SERVER   2
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2153,7 +2160,7 @@ DsListInfoForServerA(
+     _In_ LPCSTR              server,         // in
+     _Outptr_ PDS_NAME_RESULTA    *ppInfo);       // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2177,7 +2184,7 @@ DsListInfoForServerW(
+ #define DS_ROLE_RID_OWNER                   3
+ #define DS_ROLE_INFRASTRUCTURE_OWNER        4
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2186,7 +2193,7 @@ DsListRolesA(
+     _Outptr_ PDS_NAME_RESULTA    *ppRoles);      // out
+ 
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2216,7 +2223,7 @@ typedef struct {
+     DWORD               cost;
+ } DS_SITE_COST_INFO, *PDS_SITE_COST_INFO;
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -2225,11 +2232,11 @@ DsQuerySitesByCostW(
+     _In_ LPWSTR          pwszFromSite,   // in
+     _In_reads_ (cToSites) LPWSTR          *rgwszToSites,   // in
+     _In_ DWORD               cToSites,       // in
+-    _Reserved_ DWORD               dwFlags,        // in
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD               dwFlags,        // in
+     _Outptr_ PDS_SITE_COST_INFO *prgSiteInfo     // out
+     );
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI_POSTXP
+ DWORD
+ WINAPI
+@@ -2238,7 +2245,7 @@ DsQuerySitesByCostA(
+     _In_ LPSTR           pszFromSite,    // in
+     _In_reads_ (cToSites) LPSTR   *rgszToSites,    // in
+     DWORD               cToSites,       // in
+-    _Reserved_ DWORD               dwFlags,        // in
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD               dwFlags,        // in
+     _Outptr_ PDS_SITE_COST_INFO *prgSiteInfo     // out
+     );
+ 
+@@ -2252,7 +2259,7 @@ DsQuerySitesByCostA(
+ // DsQuerySitesByCost will free the site info array returned
+ // from DsQuerySitesByCost{A|W}.
+ //
+-VOID
++_Windows_SupportedOS_WindowsVista_ VOID
+ WINAPI
+ DsQuerySitesFree(
+     _In_ PDS_SITE_COST_INFO  rgSiteInfo
+@@ -2290,7 +2297,7 @@ typedef struct
+ 
+ } DS_SCHEMA_GUID_MAPW, *PDS_SCHEMA_GUID_MAPW;
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2300,13 +2307,13 @@ DsMapSchemaGuidsA(
+     _In_reads_(cGuids) GUID                    *rGuids,        // in
+     _Outptr_ DS_SCHEMA_GUID_MAPA     **ppGuidMap);   // out
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ VOID
+ WINAPI
+ DsFreeSchemaGuidMapA(
+     _In_ PDS_SCHEMA_GUID_MAPA    pGuidMap);      // in
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2316,7 +2323,7 @@ DsMapSchemaGuidsW(
+     _In_reads_(cGuids) GUID                    *rGuids,        // in
+     _Outptr_ DS_SCHEMA_GUID_MAPW     **ppGuidMap);   // out
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ VOID
+ WINAPI
+ DsFreeSchemaGuidMapW(
+@@ -2519,7 +2526,7 @@ typedef struct
+ // physical domain controller at all.  Use DsGetDcName (dsgetdc.h) to find
+ // live domain controllers for a domain.
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ _When_(InfoLevel == 1, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_1A))))
+ _When_(InfoLevel == 2, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_2A))))
+ _When_(InfoLevel == 3, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_3A))))
+@@ -2533,7 +2540,7 @@ DsGetDomainControllerInfoA(
+     _Out_ DWORD                          *pcOut,         // out
+     _Outptr_ VOID                     **ppInfo);      // out
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ _When_(InfoLevel == 1, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_1W))))
+ _When_(InfoLevel == 2, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_2W))))
+ _When_(InfoLevel == 3, _At_(ppInfo, _Outptr_result_bytebuffer_(*pcOut * sizeof(DS_DOMAIN_CONTROLLER_INFO_3W))))
+@@ -2547,7 +2554,7 @@ DsGetDomainControllerInfoW(
+     _Out_ DWORD                          *pcOut,         // out
+     _Outptr_ VOID                     **ppInfo);      // out
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ VOID
+ WINAPI
+ DsFreeDomainControllerInfoA(
+@@ -2555,7 +2562,7 @@ DsFreeDomainControllerInfoA(
+     DWORD                           cInfo,          // in
+     _In_reads_(cInfo) VOID                            *pInfo);        // in
+ 
+-NTDSAPI
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ NTDSAPI
+ VOID
+ WINAPI
+ DsFreeDomainControllerInfoW(
+@@ -2594,7 +2601,7 @@ typedef enum {
+ // Don't enqueue the task if another queued task will run soon.
+ #define DS_KCC_FLAG_DAMPED      (1 << 1)
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2603,7 +2610,7 @@ DsReplicaConsistencyCheck(
+     DS_KCC_TASKID   TaskID,     // in
+     DWORD           dwFlags);   // in
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2613,7 +2620,7 @@ DsReplicaVerifyObjectsW(
+     _In_ const UUID *    pUuidDsaSrc,// in
+     ULONG           ulOptions);   // in
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -2698,7 +2705,7 @@ typedef enum _DS_REPL_INFO_TYPE {
+         DS_REPL_NBR_NO_CHANGE_NOTIFICATIONS \
+         )
+ 
+-typedef struct _DS_REPL_NEIGHBORW {
++typedef struct   _DS_REPL_NEIGHBORW {
+     LPWSTR      pszNamingContext;
+     LPWSTR      pszSourceDsaDN;
+     LPWSTR      pszSourceDsaAddress;
+@@ -3082,7 +3089,7 @@ typedef struct _DS_REPL_QUEUE_STATISTICSW
+ typedef struct _DS_REPL_QUEUE_STATISTICSW DS_REPL_QUEUE_STATISTICSW_BLOB;
+ 
+ 
+-_Check_return_
++_Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -3094,7 +3101,7 @@ DsReplicaGetInfoW(
+     _Outptr_ VOID **             ppInfo);                    // out
+ 
+ // This API is not supported by Windows 2000 clients or Windows 2000 DCs.
+-_Check_return_
++_Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+@@ -3109,7 +3116,7 @@ DsReplicaGetInfo2W(
+     DWORD               dwEnumerationContext,       // in
+     _Outptr_ VOID **             ppInfo);                    // out
+ 
+-NTDSAPI
++_Windows_SupportedOS_WindowsVista_ NTDSAPI
+ void
+ WINAPI
+ DsReplicaFreeInfo(
+@@ -3132,13 +3139,13 @@ DsReplicaFreeInfo(
+ // No ANSI equivalents currently supported.
+ #endif
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsAddSidHistoryW(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCWSTR                 SrcDomain,              // in - DNS or NetBIOS
+     _In_ LPCWSTR                 SrcPrincipal,           // in - SAM account name
+     _In_opt_ LPCWSTR                 SrcDomainController,    // in, optional
+@@ -3146,13 +3153,13 @@ DsAddSidHistoryW(
+     _In_ LPCWSTR                 DstDomain,              // in - DNS or NetBIOS
+     _In_ LPCWSTR                 DstPrincipal);          // in - SAM account name
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsAddSidHistoryA(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCSTR                  SrcDomain,              // in - DNS or NetBIOS
+     _In_ LPCSTR                  SrcPrincipal,           // in - SAM account name
+     _In_opt_ LPCSTR                  SrcDomainController,    // in, optional
+@@ -3171,23 +3178,23 @@ DsAddSidHistoryA(
+ // THE SOURCE PRINCIPAL.  Source and destination principal must be in the
+ // same domain.
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsInheritSecurityIdentityW(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCWSTR                 SrcPrincipal,           // in - distinguished name
+     _In_ LPCWSTR                 DstPrincipal);          // in - distinguished name
+ 
+-_Check_return_
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_WindowsVista_ _Check_return_
+ NTDSAPI
+ DWORD
+ WINAPI
+ DsInheritSecurityIdentityA(
+     _In_ HANDLE                  hDS,                    // in
+-    _Reserved_ DWORD                   Flags,                  // in - sbz for now
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD                   Flags,                  // in - sbz for now
+     _In_ LPCSTR                  SrcPrincipal,           // in - distinguished name
+     _In_ LPCSTR                  DstPrincipal);          // in - distinguished name
+ 

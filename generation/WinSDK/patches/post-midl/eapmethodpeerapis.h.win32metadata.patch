@@ -1,0 +1,39 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
+index 42b34b6783..01150a7288 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eapmethodpeerapis.h
+@@ -12,6 +12,7 @@
+ #define EAPPEERMETHODAPIS_H
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -33,7 +34,7 @@
+ 
+ #define NGC_TICKET_PROPERTY_STRING_LENGTH (NCRYPT_PIN_CACHE_PIN_BYTE_LENGTH / sizeof(WCHAR))
+ 
+-typedef ULONG_PTR NCRYPT_KEY_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=NCryptFreeObject") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") _Win32_AlsoUsableFor_(NCRYPT_HANDLE) typedef ULONG_PTR NCRYPT_KEY_HANDLE;
+ 
+ typedef struct _NgcTicketContext
+ {
+@@ -98,7 +99,7 @@ extern "C"
+ 
+     // This structure is used in EapPeerGetResult API to convey the authentication result and pass
+     // additional information to the EapHost and Supplicant.
+-    typedef struct tagEapPeerMethodResult
++    typedef struct   tagEapPeerMethodResult
+     {
+         BOOL fIsSuccess;
+         DWORD dwFailureReasonCode;
+@@ -115,7 +116,7 @@ extern "C"
+     } EapPeerMethodResult;
+ 
+     // List of functions corresponding to the particular EAP method
+-    typedef struct _EAP_PEER_METHOD_ROUTINES
++    typedef struct   _EAP_PEER_METHOD_ROUTINES
+     {
+         DWORD dwVersion;
+         EAP_TYPE* pEapType;

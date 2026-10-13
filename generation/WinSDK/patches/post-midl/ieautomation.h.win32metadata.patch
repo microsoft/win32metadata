@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
+index 30ba0c5608..dca07514f5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ieautomation.h
+@@ -103,6 +103,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [helpstring][uuid] */  DECLSPEC_UUID("44EC9B57-DCAB-4CDE-B373-EE94962950E3") 
+@@ -273,7 +274,7 @@ EXTERN_C const IID IID_IInternetExplorerManager;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ACC84351-04FF-44F9-B23F-655ED168C6D5")
+-    IInternetExplorerManager : public IUnknown
++      IInternetExplorerManager : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateObject( 

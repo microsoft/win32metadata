@@ -1,0 +1,72 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
+index 589691ede1..904dbd3034 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/namespaceapi.h
+@@ -15,6 +15,7 @@
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
++#include <win32metadata_annotations.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+ 
+@@ -27,6 +28,9 @@ extern "C" {
+ 
+ #define PRIVATE_NAMESPACE_FLAG_DESTROY      0x00000001
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(ClosePrivateNamespace) 
++
++
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -36,6 +40,9 @@ CreatePrivateNamespaceW(
+     _In_ LPCWSTR lpAliasPrefix
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(ClosePrivateNamespace) 
++
++
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -44,6 +51,9 @@ OpenPrivateNamespaceW(
+     _In_ LPCWSTR lpAliasPrefix
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOLEAN
+ WINAPI
+@@ -52,6 +62,10 @@ ClosePrivateNamespace(
+     _In_ ULONG Flags
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Win32_RAIIFree_(DeleteBoundaryDescriptor) 
++
++
++
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -60,6 +74,9 @@ CreateBoundaryDescriptorW(
+     _In_ ULONG Flags
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -68,6 +85,8 @@ AddSIDToBoundaryDescriptor(
+     _In_ PSID RequiredSid
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ WINBASEAPI
+ VOID
+ WINAPI

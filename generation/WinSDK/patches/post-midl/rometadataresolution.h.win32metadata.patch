@@ -1,0 +1,77 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
+index 5e8dd7c3e9..9d5336f116 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/rometadataresolution.h
+@@ -6,6 +6,7 @@
+ //----------------------------------------------------------------------------
+ 
+ #pragma once
++#include "win32metadata_annotations.h"
+ 
+ #include <cor.h>
+ #include <activation.h>
+@@ -40,20 +41,24 @@ typedef __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer __IPropertySe
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+-_Check_return_ extern "C" HRESULT WINAPI RoGetMetaDataFile(
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-0.dll") _Check_return_ extern "C" HRESULT WINAPI RoGetMetaDataFile(
+     _In_ const HSTRING name,
+     _In_opt_ IMetaDataDispenserEx *metaDataDispenser,
+-    _Out_opt_ HSTRING *metaDataFilePath,
++    _Win32_RAIIFree_(WindowsDeleteString) _Out_opt_ HSTRING *metaDataFilePath,
+     _Outptr_opt_ IMetaDataImport2 **metaDataImport,
+     _Out_opt_ mdTypeDef *typeDefToken);
+ 
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-0.dll") 
++
+ _When_(return == S_OK, _At_(typeNameParts, _Outptr_result_buffer_(*partsCount)))
+ _When_(return != S_OK, _At_(typeNameParts, _Outptr_))
+ _Success_(return == S_OK)
+ _Check_return_  extern "C" HRESULT WINAPI RoParseTypeName(
+     _In_ HSTRING typeName,
+     _Out_ DWORD *partsCount,
+-    _Out_writes_(*partsCount) HSTRING **typeNameParts);
++    _Win32_RAIIFree_(WindowsDeleteString) _Out_writes_(*partsCount) HSTRING **typeNameParts);
++
++_Windows_SupportedOS_Windows8_ _Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-0.dll") 
+ 
+ _Check_return_ extern "C" HRESULT WINAPI RoResolveNamespace(
+     _In_opt_ const HSTRING name,
+@@ -61,18 +66,19 @@ _Check_return_ extern "C" HRESULT WINAPI RoResolveNamespace(
+     _In_ const DWORD packageGraphDirsCount,
+     _In_reads_opt_(packageGraphDirsCount) const HSTRING *packageGraphDirs,
+     _Out_opt_ DWORD *metaDataFilePathsCount,
+-    _Outptr_opt_result_buffer_(*metaDataFilePathsCount) HSTRING **metaDataFilePaths,
++    _Win32_RAIIFree_(WindowsDeleteString) _Outptr_opt_result_buffer_(*metaDataFilePathsCount) HSTRING **metaDataFilePaths,
+     _Out_opt_ DWORD *subNamespacesCount,
+-    _Outptr_opt_result_buffer_(*subNamespacesCount) HSTRING **subNamespaces);
++    _Win32_RAIIFree_(WindowsDeleteString) _Outptr_opt_result_buffer_(*subNamespacesCount) HSTRING **subNamespaces);
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+-_Check_return_ STDAPI RoIsApiContractPresent(
++_Windows_SupportedOS_10240_ _Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-1.dll") _Check_return_ STDAPI RoIsApiContractPresent(
+     _In_ PCWSTR name,
+     _In_ UINT16 majorVersion,
+     _In_ UINT16 minorVersion,
+     _Out_ BOOL* present);
+ 
++_Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-1.dll") _Windows_SupportedOS_10240_
+ _Check_return_ STDAPI RoIsApiContractMajorVersionPresent(
+     _In_ PCWSTR name,
+     _In_ UINT16 majorVersion,
+@@ -83,11 +89,11 @@ extern "C"
+ {
+ #endif // __cplusplus
+ 
+-_Check_return_ STDAPI RoCreateNonAgilePropertySet(
++_Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-1.dll") _Check_return_ STDAPI RoCreateNonAgilePropertySet(
+     _COM_Outptr_ __PropertySet__** ppPropertySet
+     );
+ 
+-_Check_return_ STDAPI RoCreatePropertySetSerializer(
++_Win32_ImportLibrary_("api-ms-win-ro-typeresolution-l1-1-1.dll") _Check_return_ STDAPI RoCreatePropertySetSerializer(
+     _COM_Outptr_ __IPropertySetSerializer__** ppPropertySetSerializer
+     );
+ 

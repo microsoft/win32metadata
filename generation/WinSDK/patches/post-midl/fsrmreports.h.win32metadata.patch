@@ -1,0 +1,227 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmreports.h b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmreports.h
+index 1402854e10..cb41fffdb7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fsrmreports.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fsrmreports.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -170,7 +171,7 @@ EXTERN_C const IID IID_IFsrmReportManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("27b899fe-6ffa-4481-a184-d3daade8a02b")
++    MIDL_INTERFACE("27b899fe-6ffa-4481-a184-d3daade8a02b") _Windows_SupportedOS_Server2008_ 
+     IFsrmReportManager : public IDispatch
+     {
+     public:
+@@ -194,7 +195,7 @@ EXTERN_C const IID IID_IFsrmReportManager;
+             /* [annotation][in] */ 
+             _In_  FsrmReportGenerationContext context,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SetOutputDirectory( 
+             /* [annotation][in] */ 
+@@ -484,13 +485,13 @@ EXTERN_C const IID IID_IFsrmReportJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("38e87280-715c-4c7d-a280-ea1651a19fef")
++    MIDL_INTERFACE("38e87280-715c-4c7d-a280-ea1651a19fef") _Windows_SupportedOS_Server2008_ 
+     IFsrmReportJob : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Task( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *taskName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *taskName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Task( 
+             /* [annotation][in] */ 
+@@ -514,7 +515,7 @@ EXTERN_C const IID IID_IFsrmReportJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
+             /* [annotation][in] */ 
+@@ -530,11 +531,11 @@ EXTERN_C const IID IID_IFsrmReportJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastError( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *lastError) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *lastError) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastGeneratedInDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE EnumReports( 
+             /* [annotation][retval][out] */ 
+@@ -887,7 +888,7 @@ EXTERN_C const IID IID_IFsrmReport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638")
++    MIDL_INTERFACE("d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638") _Windows_SupportedOS_Server2008_ 
+     IFsrmReport : public IDispatch
+     {
+     public:
+@@ -897,7 +898,7 @@ EXTERN_C const IID IID_IFsrmReport;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -905,7 +906,7 @@ EXTERN_C const IID IID_IFsrmReport;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *description) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *description) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [annotation][in] */ 
+@@ -913,7 +914,7 @@ EXTERN_C const IID IID_IFsrmReport;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastGeneratedFileNamePrefix( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *prefix) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *prefix) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetFilter( 
+             /* [annotation][in] */ 
+@@ -1144,7 +1145,7 @@ EXTERN_C const IID IID_IFsrmReportScheduler;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6879caf9-6617-4484-8719-71c3d8645f94")
++    MIDL_INTERFACE("6879caf9-6617-4484-8719-71c3d8645f94") _Windows_SupportedOS_Server2008_ 
+     IFsrmReportScheduler : public IDispatch
+     {
+     public:
+@@ -1348,7 +1349,7 @@ EXTERN_C const IID IID_IFsrmFileManagementJobManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("ee321ecb-d95e-48e9-907c-c7685a013235")
++    MIDL_INTERFACE("ee321ecb-d95e-48e9-907c-c7685a013235") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileManagementJobManager : public IDispatch
+     {
+     public:
+@@ -1561,13 +1562,13 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0770687e-9f36-4d6f-8778-599d188461c9")
++    MIDL_INTERFACE("0770687e-9f36-4d6f-8778-599d188461c9") _Windows_SupportedOS_Server2008_ 
+     IFsrmFileManagementJob : public IFsrmObject
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -1599,7 +1600,7 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ExpirationDirectory( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *expirationDirectory) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *expirationDirectory) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_ExpirationDirectory( 
+             /* [annotation][in] */ 
+@@ -1639,7 +1640,7 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_MailTo( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mailTo) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mailTo) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_MailTo( 
+             /* [annotation][in] */ 
+@@ -1683,7 +1684,7 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Task( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *taskName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *taskName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Task( 
+             /* [annotation][in] */ 
+@@ -1703,11 +1704,11 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastError( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *lastError) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *lastError) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastReportPathWithoutExtension( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *path) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *path) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LastRun( 
+             /* [annotation][retval][out] */ 
+@@ -1715,7 +1716,7 @@ EXTERN_C const IID IID_IFsrmFileManagementJob;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FileNamePattern( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *fileNamePattern) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *fileNamePattern) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FileNamePattern( 
+             /* [annotation][in] */ 
+@@ -2396,13 +2397,13 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("326af66f-2ac0-4f68-bf8c-4759f054fa29")
++    MIDL_INTERFACE("326af66f-2ac0-4f68-bf8c-4759f054fa29") _Windows_SupportedOS_Server2008_ 
+     IFsrmPropertyCondition : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Name( 
+             /* [annotation][in] */ 
+@@ -2418,7 +2419,7 @@ EXTERN_C const IID IID_IFsrmPropertyCondition;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *value) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *value) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_Value( 
+             /* [annotation][in] */ 
+@@ -2777,13 +2778,13 @@ EXTERN_C const IID IID_IFsrmFileConditionProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("81926775-B981-4479-988F-DA171D627360")
++    MIDL_INTERFACE("81926775-B981-4479-988F-DA171D627360") _Windows_SupportedOS_Server2012_ 
+     IFsrmFileConditionProperty : public IFsrmFileCondition
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_PropertyName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_PropertyName( 
+             /* [annotation][in] */ 

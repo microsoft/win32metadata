@@ -1,0 +1,760 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h b/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
+index 5a0cc11dfc..8dc5047d19 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sbtsv.h
+@@ -293,10 +293,11 @@ extern "C"{
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef /* [v1_enum] */ 
+-enum _TS_SB_SORT_BY
++enum  _TS_SB_SORT_BY
+     {
+         TS_SB_SORT_BY_NONE	= 0,
+         TS_SB_SORT_BY_NAME	= 0x1,
+@@ -358,7 +359,7 @@ EXTERN_C const IID IID_ITsSbPlugin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("48cd7406-caab-465f-a5d6-baa863b9ea4f")
+-    ITsSbPlugin : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbPlugin : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -417,7 +418,7 @@ EXTERN_C const IID IID_ITsSbPlugin;
+         END_INTERFACE
+     } ITsSbPluginVtbl;
+ 
+-    interface ITsSbPlugin
++    interface _Windows_SupportedOS_Server2012_ ITsSbPlugin
+     {
+         CONST_VTBL struct ITsSbPluginVtbl *lpVtbl;
+     };
+@@ -466,7 +467,7 @@ EXTERN_C const IID IID_ITsSbResourcePlugin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("EA8DB42C-98ED-4535-A88B-2A164F35490F")
+-    ITsSbResourcePlugin : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbResourcePlugin : public ITsSbPlugin
+     {
+     public:
+     };
+@@ -513,7 +514,7 @@ EXTERN_C const IID IID_ITsSbResourcePlugin;
+         END_INTERFACE
+     } ITsSbResourcePluginVtbl;
+ 
+-    interface ITsSbResourcePlugin
++    interface _Windows_SupportedOS_Server2012_ ITsSbResourcePlugin
+     {
+         CONST_VTBL struct ITsSbResourcePluginVtbl *lpVtbl;
+     };
+@@ -563,7 +564,7 @@ EXTERN_C const IID IID_ITsSbServiceNotification;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("86CB68AE-86E0-4F57-8A64-BB7406BC5550")
+-    ITsSbServiceNotification : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbServiceNotification : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifyServiceFailure( void) = 0;
+@@ -606,7 +607,7 @@ EXTERN_C const IID IID_ITsSbServiceNotification;
+         END_INTERFACE
+     } ITsSbServiceNotificationVtbl;
+ 
+-    interface ITsSbServiceNotification
++    interface _Windows_SupportedOS_Server2012_ ITsSbServiceNotification
+     {
+         CONST_VTBL struct ITsSbServiceNotificationVtbl *lpVtbl;
+     };
+@@ -655,7 +656,7 @@ EXTERN_C const IID IID_ITsSbLoadBalancing;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("24329274-9EB7-11DC-AE98-F2B456D89593")
+-    ITsSbLoadBalancing : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbLoadBalancing : public ITsSbPlugin
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE GetMostSuitableTarget( 
+@@ -716,7 +717,7 @@ EXTERN_C const IID IID_ITsSbLoadBalancing;
+         END_INTERFACE
+     } ITsSbLoadBalancingVtbl;
+ 
+-    interface ITsSbLoadBalancing
++    interface _Windows_SupportedOS_Server2012_ ITsSbLoadBalancing
+     {
+         CONST_VTBL struct ITsSbLoadBalancingVtbl *lpVtbl;
+     };
+@@ -769,7 +770,7 @@ EXTERN_C const IID IID_ITsSbPlacement;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DAADEE5F-6D32-480E-9E36-DDAB2329F06D")
+-    ITsSbPlacement : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbPlacement : public ITsSbPlugin
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryEnvironmentForTarget( 
+@@ -830,7 +831,7 @@ EXTERN_C const IID IID_ITsSbPlacement;
+         END_INTERFACE
+     } ITsSbPlacementVtbl;
+ 
+-    interface ITsSbPlacement
++    interface _Windows_SupportedOS_Server2012_ ITsSbPlacement
+     {
+         CONST_VTBL struct ITsSbPlacementVtbl *lpVtbl;
+     };
+@@ -883,7 +884,7 @@ EXTERN_C const IID IID_ITsSbOrchestration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("64FC1172-9EB7-11DC-8B00-3ABA56D89593")
+-    ITsSbOrchestration : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbOrchestration : public ITsSbPlugin
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE PrepareTargetForConnect( 
+@@ -944,7 +945,7 @@ EXTERN_C const IID IID_ITsSbOrchestration;
+         END_INTERFACE
+     } ITsSbOrchestrationVtbl;
+ 
+-    interface ITsSbOrchestration
++    interface _Windows_SupportedOS_Server2012_ ITsSbOrchestration
+     {
+         CONST_VTBL struct ITsSbOrchestrationVtbl *lpVtbl;
+     };
+@@ -997,12 +998,12 @@ EXTERN_C const IID IID_ITsSbEnvironment;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("8c87f7f7-bf51-4a5c-87bf-8e94fb6e2256")
+-    ITsSbEnvironment : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbEnvironment : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ServerWeight( 
+             /* [annotation][retval][out] */ 
+@@ -1068,7 +1069,7 @@ EXTERN_C const IID IID_ITsSbEnvironment;
+         END_INTERFACE
+     } ITsSbEnvironmentVtbl;
+ 
+-    interface ITsSbEnvironment
++    interface _Windows_SupportedOS_Server2012_ ITsSbEnvironment
+     {
+         CONST_VTBL struct ITsSbEnvironmentVtbl *lpVtbl;
+     };
+@@ -1123,12 +1124,12 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("24FDB7AC-FEA6-11DC-9672-9A8956D89593")
+-    ITsSbLoadBalanceResult : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbLoadBalanceResult : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+     };
+     
+@@ -1164,7 +1165,7 @@ EXTERN_C const IID IID_ITsSbLoadBalanceResult;
+         END_INTERFACE
+     } ITsSbLoadBalanceResultVtbl;
+ 
+-    interface ITsSbLoadBalanceResult
++    interface _Windows_SupportedOS_Server2012_ ITsSbLoadBalanceResult
+     {
+         CONST_VTBL struct ITsSbLoadBalanceResultVtbl *lpVtbl;
+     };
+@@ -1210,12 +1211,12 @@ EXTERN_C const IID IID_ITsSbTarget;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("16616ECC-272D-411D-B324-126893033856")
+-    ITsSbTarget : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbTarget : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
+             /* [annotation][in] */ 
+@@ -1223,7 +1224,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_FarmName( 
+             /* [annotation][in] */ 
+@@ -1231,7 +1232,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetFQDN( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TargetFqdnName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TargetFqdnName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetFQDN( 
+             /* [annotation][in] */ 
+@@ -1239,7 +1240,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetNetbios( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *TargetNetbiosName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *TargetNetbiosName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetNetbios( 
+             /* [annotation][in] */ 
+@@ -1275,7 +1276,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_EnvironmentName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_EnvironmentName( 
+             /* [annotation][in] */ 
+@@ -1439,7 +1440,7 @@ EXTERN_C const IID IID_ITsSbTarget;
+         END_INTERFACE
+     } ITsSbTargetVtbl;
+ 
+-    interface ITsSbTarget
++    interface _Windows_SupportedOS_Server2012_ ITsSbTarget
+     {
+         CONST_VTBL struct ITsSbTargetVtbl *lpVtbl;
+     };
+@@ -1539,7 +1540,7 @@ EXTERN_C const IID IID_ITsSbSession;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D453AAC7-B1D8-4C5E-BA34-9AFB4C8C5510")
+-    ITsSbSession : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbSession : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SessionId( 
+@@ -1548,7 +1549,7 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *targetName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *targetName) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_TargetName( 
+             /* [annotation][in] */ 
+@@ -1556,11 +1557,11 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Username( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *userName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *userName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *domain) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *domain) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_State( 
+             /* [annotation][retval][out] */ 
+@@ -1588,7 +1589,7 @@ EXTERN_C const IID IID_ITsSbSession;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *app) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *app) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_InitialProgram( 
+             /* [annotation][in] */ 
+@@ -1740,7 +1741,7 @@ EXTERN_C const IID IID_ITsSbSession;
+         END_INTERFACE
+     } ITsSbSessionVtbl;
+ 
+-    interface ITsSbSession
++    interface _Windows_SupportedOS_Server2012_ ITsSbSession
+     {
+         CONST_VTBL struct ITsSbSessionVtbl *lpVtbl;
+     };
+@@ -1834,7 +1835,7 @@ EXTERN_C const IID IID_ITsSbResourceNotification;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("65D3E85A-C39B-11DC-B92D-3CD255D89593")
+-    ITsSbResourceNotification : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbResourceNotification : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifySessionChange( 
+@@ -1907,7 +1908,7 @@ EXTERN_C const IID IID_ITsSbResourceNotification;
+         END_INTERFACE
+     } ITsSbResourceNotificationVtbl;
+ 
+-    interface ITsSbResourceNotification
++    interface _Windows_SupportedOS_Server2012_ ITsSbResourceNotification
+     {
+         CONST_VTBL struct ITsSbResourceNotificationVtbl *lpVtbl;
+     };
+@@ -1959,7 +1960,7 @@ EXTERN_C const IID IID_ITsSbResourceNotificationEx;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("A8A47FDE-CA91-44D2-B897-3AA28A43B2B7")
+-    ITsSbResourceNotificationEx : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbResourceNotificationEx : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE NotifySessionChangeEx( 
+@@ -2060,7 +2061,7 @@ EXTERN_C const IID IID_ITsSbResourceNotificationEx;
+         END_INTERFACE
+     } ITsSbResourceNotificationExVtbl;
+ 
+-    interface ITsSbResourceNotificationEx
++    interface _Windows_SupportedOS_Server2012_ ITsSbResourceNotificationEx
+     {
+         CONST_VTBL struct ITsSbResourceNotificationExVtbl *lpVtbl;
+     };
+@@ -2112,12 +2113,12 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("523D1083-89BE-48DD-99EA-04E82FFA7265")
+-    ITsSbTaskInfo : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbTaskInfo : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_TargetId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pName) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_StartTime( 
+             /* [annotation][retval][out] */ 
+@@ -2133,11 +2134,11 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Identifier( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pIdentifier) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pIdentifier) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Label( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pLabel) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pLabel) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Context( 
+             /* [annotation][retval][out] */ 
+@@ -2145,7 +2146,7 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Plugin( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pPlugin) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pPlugin) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Status( 
+             /* [annotation][retval][out] */ 
+@@ -2233,7 +2234,7 @@ EXTERN_C const IID IID_ITsSbTaskInfo;
+         END_INTERFACE
+     } ITsSbTaskInfoVtbl;
+ 
+-    interface ITsSbTaskInfo
++    interface _Windows_SupportedOS_Server2012_ ITsSbTaskInfo
+     {
+         CONST_VTBL struct ITsSbTaskInfoVtbl *lpVtbl;
+     };
+@@ -2303,7 +2304,7 @@ EXTERN_C const IID IID_ITsSbTaskPlugin;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("FA22EF0F-8705-41BE-93BC-44BDBCF1C9C4")
+-    ITsSbTaskPlugin : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbTaskPlugin : public ITsSbPlugin
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE InitializeTaskPlugin( 
+@@ -2378,7 +2379,7 @@ EXTERN_C const IID IID_ITsSbTaskPlugin;
+         END_INTERFACE
+     } ITsSbTaskPluginVtbl;
+ 
+-    interface ITsSbTaskPlugin
++    interface _Windows_SupportedOS_Server2012_ ITsSbTaskPlugin
+     {
+         CONST_VTBL struct ITsSbTaskPluginVtbl *lpVtbl;
+     };
+@@ -2434,7 +2435,7 @@ EXTERN_C const IID IID_ITsSbPropertySet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5c025171-bb1e-4baf-a212-6d5e9774b33b")
+-    ITsSbPropertySet : public IPropertyBag
++    _Windows_SupportedOS_Server2012_ ITsSbPropertySet : public IPropertyBag
+     {
+     public:
+     };
+@@ -2483,7 +2484,7 @@ EXTERN_C const IID IID_ITsSbPropertySet;
+         END_INTERFACE
+     } ITsSbPropertySetVtbl;
+ 
+-    interface ITsSbPropertySet
++    interface _Windows_SupportedOS_Server2012_ ITsSbPropertySet
+     {
+         CONST_VTBL struct ITsSbPropertySetVtbl *lpVtbl;
+     };
+@@ -2533,7 +2534,7 @@ EXTERN_C const IID IID_ITsSbPluginPropertySet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("95006e34-7eff-4b6c-bb40-49a4fda7cea6")
+-    ITsSbPluginPropertySet : public ITsSbPropertySet
++    _Windows_SupportedOS_Server2012_ ITsSbPluginPropertySet : public ITsSbPropertySet
+     {
+     public:
+     };
+@@ -2582,7 +2583,7 @@ EXTERN_C const IID IID_ITsSbPluginPropertySet;
+         END_INTERFACE
+     } ITsSbPluginPropertySetVtbl;
+ 
+-    interface ITsSbPluginPropertySet
++    interface _Windows_SupportedOS_Server2012_ ITsSbPluginPropertySet
+     {
+         CONST_VTBL struct ITsSbPluginPropertySetVtbl *lpVtbl;
+     };
+@@ -2633,7 +2634,7 @@ EXTERN_C const IID IID_ITsSbClientConnectionPropertySet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E51995B0-46D6-11DD-AA21-CEDC55D89593")
+-    ITsSbClientConnectionPropertySet : public ITsSbPropertySet
++    _Windows_SupportedOS_Server2012_ ITsSbClientConnectionPropertySet : public ITsSbPropertySet
+     {
+     public:
+     };
+@@ -2682,7 +2683,7 @@ EXTERN_C const IID IID_ITsSbClientConnectionPropertySet;
+         END_INTERFACE
+     } ITsSbClientConnectionPropertySetVtbl;
+ 
+-    interface ITsSbClientConnectionPropertySet
++    interface _Windows_SupportedOS_Server2012_ ITsSbClientConnectionPropertySet
+     {
+         CONST_VTBL struct ITsSbClientConnectionPropertySetVtbl *lpVtbl;
+     };
+@@ -2733,7 +2734,7 @@ EXTERN_C const IID IID_ITsSbTargetPropertySet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f7bda5d6-994c-4e11-a079-2763b61830ac")
+-    ITsSbTargetPropertySet : public ITsSbPropertySet
++    _Windows_SupportedOS_Server2012_ ITsSbTargetPropertySet : public ITsSbPropertySet
+     {
+     public:
+     };
+@@ -2782,7 +2783,7 @@ EXTERN_C const IID IID_ITsSbTargetPropertySet;
+         END_INTERFACE
+     } ITsSbTargetPropertySetVtbl;
+ 
+-    interface ITsSbTargetPropertySet
++    interface _Windows_SupportedOS_Server2012_ ITsSbTargetPropertySet
+     {
+         CONST_VTBL struct ITsSbTargetPropertySetVtbl *lpVtbl;
+     };
+@@ -2833,7 +2834,7 @@ EXTERN_C const IID IID_ITsSbEnvironmentPropertySet;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("D0D1BF7E-7ACF-11DD-A243-E51156D89593")
+-    ITsSbEnvironmentPropertySet : public ITsSbPropertySet
++    _Windows_SupportedOS_Server2012_ ITsSbEnvironmentPropertySet : public ITsSbPropertySet
+     {
+     public:
+     };
+@@ -2882,7 +2883,7 @@ EXTERN_C const IID IID_ITsSbEnvironmentPropertySet;
+         END_INTERFACE
+     } ITsSbEnvironmentPropertySetVtbl;
+ 
+-    interface ITsSbEnvironmentPropertySet
++    interface _Windows_SupportedOS_Server2012_ ITsSbEnvironmentPropertySet
+     {
+         CONST_VTBL struct ITsSbEnvironmentPropertySetVtbl *lpVtbl;
+     };
+@@ -2933,7 +2934,7 @@ EXTERN_C const IID IID_ITsSbBaseNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("808a6537-1282-4989-9e09-f43938b71722")
+-    ITsSbBaseNotifySink : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbBaseNotifySink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnError( 
+@@ -2988,7 +2989,7 @@ EXTERN_C const IID IID_ITsSbBaseNotifySink;
+         END_INTERFACE
+     } ITsSbBaseNotifySinkVtbl;
+ 
+-    interface ITsSbBaseNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbBaseNotifySink
+     {
+         CONST_VTBL struct ITsSbBaseNotifySinkVtbl *lpVtbl;
+     };
+@@ -3037,7 +3038,7 @@ EXTERN_C const IID IID_ITsSbPluginNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("44dfe30b-c3be-40f5-bf82-7a95bb795adf")
+-    ITsSbPluginNotifySink : public ITsSbBaseNotifySink
++    _Windows_SupportedOS_Server2012_ ITsSbPluginNotifySink : public ITsSbBaseNotifySink
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnInitialized( 
+@@ -3098,7 +3099,7 @@ EXTERN_C const IID IID_ITsSbPluginNotifySink;
+         END_INTERFACE
+     } ITsSbPluginNotifySinkVtbl;
+ 
+-    interface ITsSbPluginNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbPluginNotifySink
+     {
+         CONST_VTBL struct ITsSbPluginNotifySinkVtbl *lpVtbl;
+     };
+@@ -3154,7 +3155,7 @@ EXTERN_C const IID IID_ITsSbLoadBalancingNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5F8A8297-3244-4E6A-958A-27C822C1E141")
+-    ITsSbLoadBalancingNotifySink : public ITsSbBaseNotifySink
++    _Windows_SupportedOS_Server2012_ ITsSbLoadBalancingNotifySink : public ITsSbBaseNotifySink
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnGetMostSuitableTarget( 
+@@ -3213,7 +3214,7 @@ EXTERN_C const IID IID_ITsSbLoadBalancingNotifySink;
+         END_INTERFACE
+     } ITsSbLoadBalancingNotifySinkVtbl;
+ 
+-    interface ITsSbLoadBalancingNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbLoadBalancingNotifySink
+     {
+         CONST_VTBL struct ITsSbLoadBalancingNotifySinkVtbl *lpVtbl;
+     };
+@@ -3266,7 +3267,7 @@ EXTERN_C const IID IID_ITsSbPlacementNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("68A0C487-2B4F-46C2-94A1-6CE685183634")
+-    ITsSbPlacementNotifySink : public ITsSbBaseNotifySink
++    _Windows_SupportedOS_Server2012_ ITsSbPlacementNotifySink : public ITsSbBaseNotifySink
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnQueryEnvironmentCompleted( 
+@@ -3321,7 +3322,7 @@ EXTERN_C const IID IID_ITsSbPlacementNotifySink;
+         END_INTERFACE
+     } ITsSbPlacementNotifySinkVtbl;
+ 
+-    interface ITsSbPlacementNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbPlacementNotifySink
+     {
+         CONST_VTBL struct ITsSbPlacementNotifySinkVtbl *lpVtbl;
+     };
+@@ -3374,7 +3375,7 @@ EXTERN_C const IID IID_ITsSbOrchestrationNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("36c37d61-926b-442f-bca5-118c6d50dcf2")
+-    ITsSbOrchestrationNotifySink : public ITsSbBaseNotifySink
++    _Windows_SupportedOS_Server2012_ ITsSbOrchestrationNotifySink : public ITsSbBaseNotifySink
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnReadyToConnect( 
+@@ -3429,7 +3430,7 @@ EXTERN_C const IID IID_ITsSbOrchestrationNotifySink;
+         END_INTERFACE
+     } ITsSbOrchestrationNotifySinkVtbl;
+ 
+-    interface ITsSbOrchestrationNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbOrchestrationNotifySink
+     {
+         CONST_VTBL struct ITsSbOrchestrationNotifySinkVtbl *lpVtbl;
+     };
+@@ -3482,7 +3483,7 @@ EXTERN_C const IID IID_ITsSbTaskPluginNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("6AAF899E-C2EC-45EE-AA37-45E60895261A")
+-    ITsSbTaskPluginNotifySink : public ITsSbBaseNotifySink
++    _Windows_SupportedOS_Server2012_ ITsSbTaskPluginNotifySink : public ITsSbBaseNotifySink
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnSetTaskTime( 
+@@ -3611,7 +3612,7 @@ EXTERN_C const IID IID_ITsSbTaskPluginNotifySink;
+         END_INTERFACE
+     } ITsSbTaskPluginNotifySinkVtbl;
+ 
+-    interface ITsSbTaskPluginNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbTaskPluginNotifySink
+     {
+         CONST_VTBL struct ITsSbTaskPluginNotifySinkVtbl *lpVtbl;
+     };
+@@ -3673,20 +3674,20 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("18857499-AD61-4B1B-B7DF-CBCD41FB8338")
+-    ITsSbClientConnection : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbClientConnection : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_UserName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_Domain( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_InitialProgram( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_LoadBalanceResult( 
+             /* [annotation][retval][out] */ 
+@@ -3694,7 +3695,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_FarmName( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][local] */ HRESULT STDMETHODCALLTYPE PutContext( 
+             /* [annotation] */ 
+@@ -3718,7 +3719,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_SamUserAccount( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pVal) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ClientConnectionPropertySet( 
+             /* [annotation][retval][out] */ 
+@@ -3862,7 +3863,7 @@ EXTERN_C const IID IID_ITsSbClientConnection;
+         END_INTERFACE
+     } ITsSbClientConnectionVtbl;
+ 
+-    interface ITsSbClientConnection
++    interface _Windows_SupportedOS_Server2012_ ITsSbClientConnection
+     {
+         CONST_VTBL struct ITsSbClientConnectionVtbl *lpVtbl;
+     };
+@@ -3950,7 +3951,7 @@ EXTERN_C const IID IID_ITsSbProvider;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("87A4098F-6D7B-44DD-BC17-8CE44E370D52")
+-    ITsSbProvider : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbProvider : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateTargetObject( 
+@@ -4149,7 +4150,7 @@ EXTERN_C const IID IID_ITsSbProvider;
+         END_INTERFACE
+     } ITsSbProviderVtbl;
+ 
+-    interface ITsSbProvider
++    interface _Windows_SupportedOS_Server2012_ ITsSbProvider
+     {
+         CONST_VTBL struct ITsSbProviderVtbl *lpVtbl;
+     };
+@@ -4229,7 +4230,7 @@ EXTERN_C const IID IID_ITsSbResourcePluginStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("5C38F65F-BCF1-4036-A6BF-9E3CCCAE0B63")
+-    ITsSbResourcePluginStore : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbResourcePluginStore : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryTarget( 
+@@ -4718,7 +4719,7 @@ EXTERN_C const IID IID_ITsSbResourcePluginStore;
+         END_INTERFACE
+     } ITsSbResourcePluginStoreVtbl;
+ 
+-    interface ITsSbResourcePluginStore
++    interface _Windows_SupportedOS_Server2012_ ITsSbResourcePluginStore
+     {
+         CONST_VTBL struct ITsSbResourcePluginStoreVtbl *lpVtbl;
+     };
+@@ -4845,7 +4846,7 @@ EXTERN_C const IID IID_ITsSbFilterPluginStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("85b44b0f-ed78-413f-9702-fa6d3b5ee755")
+-    ITsSbFilterPluginStore : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbFilterPluginStore : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE SaveProperties( 
+@@ -4906,7 +4907,7 @@ EXTERN_C const IID IID_ITsSbFilterPluginStore;
+         END_INTERFACE
+     } ITsSbFilterPluginStoreVtbl;
+ 
+-    interface ITsSbFilterPluginStore
++    interface _Windows_SupportedOS_Server2012_ ITsSbFilterPluginStore
+     {
+         CONST_VTBL struct ITsSbFilterPluginStoreVtbl *lpVtbl;
+     };
+@@ -4958,7 +4959,7 @@ EXTERN_C const IID IID_ITsSbGlobalStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("9AB60F7B-BD72-4D9F-8A3A-A0EA5574E635")
+-    ITsSbGlobalStore : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbGlobalStore : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE QueryTarget( 
+@@ -5155,7 +5156,7 @@ EXTERN_C const IID IID_ITsSbGlobalStore;
+         END_INTERFACE
+     } ITsSbGlobalStoreVtbl;
+ 
+-    interface ITsSbGlobalStore
++    interface _Windows_SupportedOS_Server2012_ ITsSbGlobalStore
+     {
+         CONST_VTBL struct ITsSbGlobalStoreVtbl *lpVtbl;
+     };
+@@ -5219,7 +5220,7 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("aca87a8e-818b-4581-a032-49c3dfb9c701")
+-    ITsSbProvisioningPluginNotifySink : public IUnknown
++    _Windows_SupportedOS_Server2012_ ITsSbProvisioningPluginNotifySink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnJobCreated( 
+@@ -5334,7 +5335,7 @@ EXTERN_C const IID IID_ITsSbProvisioningPluginNotifySink;
+         END_INTERFACE
+     } ITsSbProvisioningPluginNotifySinkVtbl;
+ 
+-    interface ITsSbProvisioningPluginNotifySink
++    interface _Windows_SupportedOS_Server2012_ ITsSbProvisioningPluginNotifySink
+     {
+         CONST_VTBL struct ITsSbProvisioningPluginNotifySinkVtbl *lpVtbl;
+     };
+@@ -5395,7 +5396,7 @@ EXTERN_C const IID IID_ITsSbProvisioning;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("2f6f0dbb-9e4f-462b-9c3f-fccc3dcb6232")
+-    ITsSbProvisioning : public ITsSbPlugin
++    _Windows_SupportedOS_Server2012_ ITsSbProvisioning : public ITsSbPlugin
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE CreateVirtualMachines( 
+@@ -5508,7 +5509,7 @@ EXTERN_C const IID IID_ITsSbProvisioning;
+         END_INTERFACE
+     } ITsSbProvisioningVtbl;
+ 
+-    interface ITsSbProvisioning
++    interface _Windows_SupportedOS_Server2012_ ITsSbProvisioning
+     {
+         CONST_VTBL struct ITsSbProvisioningVtbl *lpVtbl;
+     };
+@@ -5570,7 +5571,7 @@ EXTERN_C const IID IID_ITsSbGenericNotifySink;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4c4c8c4f-300b-46ad-9164-8468a7e7568c")
+-    ITsSbGenericNotifySink : public IUnknown
++    _Windows_SupportedOS_Server2016_ ITsSbGenericNotifySink : public IUnknown
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE OnCompleted( 
+@@ -5621,7 +5622,7 @@ EXTERN_C const IID IID_ITsSbGenericNotifySink;
+         END_INTERFACE
+     } ITsSbGenericNotifySinkVtbl;
+ 
+-    interface ITsSbGenericNotifySink
++    interface _Windows_SupportedOS_Server2016_ ITsSbGenericNotifySink
+     {
+         CONST_VTBL struct ITsSbGenericNotifySinkVtbl *lpVtbl;
+     };

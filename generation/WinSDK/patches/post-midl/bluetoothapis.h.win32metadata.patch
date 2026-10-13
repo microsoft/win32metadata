@@ -1,0 +1,402 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+index 8e828074ec..addd44e7aa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+@@ -5,6 +5,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -48,7 +49,7 @@ typedef struct _BLUETOOTH_ADDRESS {
+ 
+ 
+ 
+-typedef struct _BLUETOOTH_LOCAL_SERVICE_INFO {
++typedef struct  _BLUETOOTH_LOCAL_SERVICE_INFO {
+     BOOL                Enabled;                        //  If TRUE, the enable the services
+ 
+     BLUETOOTH_ADDRESS   btAddr;                         //  If service is to be advertised for a particular remote device
+@@ -100,7 +101,7 @@ typedef struct _BLUETOOTH_FIND_RADIO_PARAMS {
+ 
+ } BLUETOOTH_FIND_RADIO_PARAMS;
+ 
+-typedef HANDLE      HBLUETOOTH_RADIO_FIND;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=BluetoothFindRadioClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE      HBLUETOOTH_RADIO_FIND;
+ 
+ //
+ //  Description:
+@@ -133,13 +134,13 @@ typedef HANDLE      HBLUETOOTH_RADIO_FIND;
+ //      any other
+ //          Success. The return handle is valid and phRadio points to a valid handle.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("bluetoothapis.dll") _Win32_RAIIFree_(BluetoothFindRadioClose, -1, 0) _Must_inspect_result_
+ _Success_(return != NULL)
+ HBLUETOOTH_RADIO_FIND
+ WINAPI
+ BluetoothFindFirstRadio(
+     _In_ const BLUETOOTH_FIND_RADIO_PARAMS * pbtfrp,
+-    _Out_ HANDLE * phRadio
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE * phRadio
+     );
+ 
+ //
+@@ -172,13 +173,13 @@ BluetoothFindFirstRadio(
+ //
+ //          other Win32 errors
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return)
+ BOOL
+ WINAPI
+-BluetoothFindNextRadio(
++_Win32_SetLastError_ BluetoothFindNextRadio(
+     _In_  HBLUETOOTH_RADIO_FIND hFind,
+-    _Out_ HANDLE * phRadio
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE * phRadio
+     );
+ 
+ //
+@@ -199,9 +200,9 @@ BluetoothFindNextRadio(
+ //          ERROR_INVALID_HANDLE
+ //              The handle is NULL.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") BOOL
+ WINAPI
+-BluetoothFindRadioClose(
++_Win32_SetLastError_ BluetoothFindRadioClose(
+     _In_ HBLUETOOTH_RADIO_FIND hFind
+     );
+ 
+@@ -251,7 +252,7 @@ typedef struct _BLUETOOTH_RADIO_INFO {
+ //
+ //      other Win32 error codes.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothGetRadioInfo(
+@@ -383,7 +384,7 @@ typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
+ 
+ } BLUETOOTH_DEVICE_SEARCH_PARAMS;
+ 
+-typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=BluetoothFindDeviceClose") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
+ 
+ //
+ //  Description:
+@@ -418,7 +419,7 @@ typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
+ //      any other value
+ //          Success. The return handle is valid and pbtdi points to valid data.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("bluetoothapis.dll") _Win32_RAIIFree_(BluetoothFindDeviceClose, -1, 0) _Must_inspect_result_
+ _Success_(return != NULL)
+ HBLUETOOTH_DEVICE_FIND
+ WINAPI
+@@ -462,10 +463,10 @@ BluetoothFindFirstDevice(
+ //
+ //          other Win32 errors
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothFindNextDevice(
++_Win32_SetLastError_ BluetoothFindNextDevice(
+     _In_    HBLUETOOTH_DEVICE_FIND  hFind,
+     _Inout_ BLUETOOTH_DEVICE_INFO * pbtdi
+     );
+@@ -488,9 +489,9 @@ BluetoothFindNextDevice(
+ //          ERROR_INVALID_HANDLE
+ //              The handle is NULL.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") BOOL
+ WINAPI
+-BluetoothFindDeviceClose(
++_Win32_SetLastError_ BluetoothFindDeviceClose(
+     _In_ HBLUETOOTH_DEVICE_FIND hFind
+     );
+ 
+@@ -532,7 +533,7 @@ BluetoothFindDeviceClose(
+ //
+ //      other error codes
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothGetDeviceInfo(
+@@ -567,7 +568,7 @@ BluetoothGetDeviceInfo(
+ //
+ //      other Win32 error codes.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothUpdateDeviceRecord(
+@@ -587,7 +588,7 @@ BluetoothUpdateDeviceRecord(
+ //          The device was not found. If no Bluetooth radio is installed,
+ //          the devices could not be enumerated or removed.
+ //
+-DWORD
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") DWORD
+ WINAPI
+ BluetoothRemoveDevice(
+     _In_ const BLUETOOTH_ADDRESS * pAddress
+@@ -644,7 +645,7 @@ typedef struct _BLUETOOTH_COD_PAIRS {
+ 
+ } BLUETOOTH_COD_PAIRS;
+ 
+-typedef BOOL (WINAPI *PFN_DEVICE_CALLBACK)(LPVOID pvParam, const BLUETOOTH_DEVICE_INFO * pDevice);
++typedef BOOL (WINAPI *PFN_DEVICE_CALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvParam, const BLUETOOTH_DEVICE_INFO * pDevice);
+ 
+ typedef struct _BLUETOOTH_SELECT_DEVICE_PARAMS {
+     DWORD   dwSize;                             //  IN  sizeof this structure
+@@ -706,10 +707,10 @@ typedef struct _BLUETOOTH_SELECT_DEVICE_PARAMS {
+ //
+ //          other WIN32 errors
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothSelectDevices(
++_Win32_SetLastError_ BluetoothSelectDevices(
+     _Inout_ BLUETOOTH_SELECT_DEVICE_PARAMS * pbtsdp
+     );
+ 
+@@ -727,7 +728,7 @@ BluetoothSelectDevices(
+ //      FALSE
+ //          Nothing to free.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ BOOL
+ WINAPI
+ BluetoothSelectDevicesFree(
+     _Inout_ BLUETOOTH_SELECT_DEVICE_PARAMS * pbtsdp
+@@ -761,9 +762,9 @@ BluetoothSelectDevicesFree(
+ //          Failure. The property page was not displayed. Check GetLastError
+ //          for more details.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ BOOL
+ WINAPI
+-BluetoothDisplayDeviceProperties(
++_Win32_SetLastError_ BluetoothDisplayDeviceProperties(
+     _In_opt_ HWND hwndParent,
+     _Inout_ BLUETOOTH_DEVICE_INFO * pbtdi
+     );
+@@ -849,7 +850,7 @@ BluetoothDisplayDeviceProperties(
+ //          { BTH_ERROR_UNSPECIFIED_ERROR,      ERROR_NOT_READY },
+ //          { BTH_ERROR_LOCAL_HOST_TERMINATED_CONNECTION, ERROR_VC_DISCONNECTED },
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateDevice(
+@@ -967,7 +968,7 @@ typedef struct _BLUETOOTH_PASSKEY_INFO {
+ //          { BTH_ERROR_UNSPECIFIED_ERROR,      ERROR_NOT_READY },
+ //          { BTH_ERROR_LOCAL_HOST_TERMINATED_CONNECTION, ERROR_VC_DISCONNECTED },
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsXP_ _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateDeviceEx(
+@@ -1023,7 +1024,7 @@ BluetoothAuthenticateDeviceEx(
+ //      other WIN32 error
+ //          Failure. Return value is the error code.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateMultipleDevices(
+@@ -1092,7 +1093,7 @@ BluetoothAuthenticateMultipleDevices(
+ //      other WIN32 error
+ //          The call failed.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothSetServiceState(
+@@ -1134,7 +1135,7 @@ BluetoothSetServiceState(
+ //      other WIN32 errors
+ //          The call failed.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -1175,7 +1176,7 @@ BluetoothEnumerateInstalledServices(
+ //          State was not changed. If the caller specified NULL for hRadio, all
+ //          of the radios did not accept the state change.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") BOOL
+ WINAPI
+ BluetoothEnableDiscovery(
+     _In_opt_ HANDLE hRadio,
+@@ -1200,7 +1201,7 @@ BluetoothEnableDiscovery(
+ //      FALSE
+ //          No radios are discoverable.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+ BluetoothIsDiscoverable(
+@@ -1236,7 +1237,7 @@ BluetoothIsDiscoverable(
+ //          State was not changed. If the caller specified NULL for hRadio, all
+ //          of the radios did not accept the state change.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+ BluetoothEnableIncomingConnections(
+@@ -1262,7 +1263,7 @@ BluetoothEnableIncomingConnections(
+ //      FALSE
+ //          No radios are allowing incoming connections.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+ BluetoothIsConnectable(
+@@ -1277,7 +1278,7 @@ BluetoothIsConnectable(
+ 
+ typedef HANDLE HBLUETOOTH_AUTHENTICATION_REGISTRATION;
+ 
+-typedef BOOL (CALLBACK *PFN_AUTHENTICATION_CALLBACK)(LPVOID pvParam, PBLUETOOTH_DEVICE_INFO pDevice);
++typedef BOOL (CALLBACK *PFN_AUTHENTICATION_CALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID pvParam, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PBLUETOOTH_DEVICE_INFO pDevice);
+ 
+ //
+ //  Description:
+@@ -1314,7 +1315,7 @@ typedef BOOL (CALLBACK *PFN_AUTHENTICATION_CALLBACK)(LPVOID pvParam, PBLUETOOTH_
+ //      other Win32 error.
+ //          Failure. The registration handle is invalid.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_SetLastError_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothRegisterForAuthentication(
+@@ -1372,7 +1373,7 @@ typedef BOOL (CALLBACK *PFN_AUTHENTICATION_CALLBACK_EX)(_In_opt_ LPVOID pvParam,
+ //      other Win32 error.
+ //          Failure. The registration handle is invalid.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothRegisterForAuthenticationEx(
+@@ -1407,9 +1408,9 @@ BluetoothRegisterForAuthenticationEx(
+ //
+ //          other Win32 errors.
+ //
+-BOOL
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") BOOL
+ WINAPI
+-BluetoothUnregisterAuthentication(
++_Win32_SetLastError_ BluetoothUnregisterAuthentication(
+     _In_ HBLUETOOTH_AUTHENTICATION_REGISTRATION hRegHandle
+     );
+ 
+@@ -1446,7 +1447,7 @@ BluetoothUnregisterAuthentication(
+ //
+ //      other Win32 error codes
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothSendAuthenticationResponse(
+@@ -1517,7 +1518,7 @@ typedef struct _BLUETOOTH_AUTHENTICATE_RESPONSE {
+ //
+ //      other Win32 error codes
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothSendAuthenticationResponseEx(
+@@ -1637,7 +1638,7 @@ typedef struct _SDP_ELEMENT_DATA {
+ //      ERROR_SUCCESS
+ //          the sdp element was parsed correctly
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -1708,7 +1709,7 @@ typedef HANDLE HBLUETOOTH_CONTAINER_ELEMENT;
+ // }
+ //
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -1762,7 +1763,7 @@ BluetoothSdpGetContainerElementData(
+ //      printf("record handle is 0x%x\n", data.data.uint32);
+ // }
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -1849,7 +1850,7 @@ typedef struct _SDP_STRING_TYPE_DATA {
+ //
+ //      Other HRESULTs returned by COM
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ _Success_(return == 0)
+ DWORD
+ WINAPI
+@@ -1898,10 +1899,10 @@ typedef BOOL (CALLBACK *PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK)(
+ //
+ #define BluetoothEnumAttributes BluetoothSdpEnumAttributes
+ 
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+-BluetoothSdpEnumAttributes(
++_Win32_SetLastError_ BluetoothSdpEnumAttributes(
+     _In_reads_bytes_(cbStreamSize) LPBYTE  pSDPStream,
+     _In_ ULONG   cbStreamSize,
+     _In_ PFN_BLUETOOTH_ENUM_ATTRIBUTES_CALLBACK pfnCallback,
+@@ -1916,7 +1917,7 @@ BluetoothSdpEnumAttributes(
+ // The following APIs are only available on Vista or later
+ //
+ 
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ DWORD
+ WINAPI
+ BluetoothSetLocalServiceInfo(
+@@ -1948,7 +1949,7 @@ BluetoothSetLocalServiceInfo(
+ //
+ // Note this function is only exported in version 2.1 and later.
+ //
+-_Must_inspect_result_
++_Windows_SupportedOS_WindowsVista_ _Win32_ImportLibrary_("bluetoothapis.dll") _Must_inspect_result_
+ BOOL
+ WINAPI
+ BluetoothIsVersionAvailable(

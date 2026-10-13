@@ -1,0 +1,158 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
+index badab97e5d..e869e97d1a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/iextag.h
+@@ -344,6 +344,7 @@ extern "C"{
+ //=--------------------------------------------------------------------------=
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -781,7 +782,7 @@ EXTERN_C const IID IID_Iwfolders;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrUrl,
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *pbstrRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrRetVal) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE navigateFrame( 
+             /* [annotation][in] */ 
+@@ -789,7 +790,7 @@ EXTERN_C const IID IID_Iwfolders;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrTargetFrame,
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *pbstrRetVal) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrRetVal) = 0;
+         
+         virtual /* [id] */ HRESULT STDMETHODCALLTYPE navigateNoSite( 
+             /* [annotation][in] */ 
+@@ -1155,7 +1156,7 @@ EXTERN_C const IID IID_IHTMLUserDataOM;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_expires( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstr) = 0;
+         
+     };
+     
+@@ -1857,7 +1858,7 @@ EXTERN_C const IID IID_ILayoutRect;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_nextRect( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *pbstrElementId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrElementId) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_contentSrc( 
+             /* [annotation][in] */ 
+@@ -2263,16 +2264,16 @@ EXTERN_C const IID IID_IHeaderFooter;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("3050f6ce-98b5-11cf-bb82-00aa00bdce0b")
+-    IHeaderFooter : public IDispatch
++      IHeaderFooter : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_htmlHead( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_htmlFoot( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_textHead( 
+             /* [annotation][in] */ 
+@@ -2280,7 +2281,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_textHead( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_textFoot( 
+             /* [annotation][in] */ 
+@@ -2288,7 +2289,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_textFoot( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_page( 
+             /* [annotation][in] */ 
+@@ -2312,7 +2313,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_URL( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_title( 
+             /* [annotation][in] */ 
+@@ -2320,7 +2321,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_title( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_dateShort( 
+             /* [annotation][in] */ 
+@@ -2328,7 +2329,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_dateShort( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_dateLong( 
+             /* [annotation][in] */ 
+@@ -2336,7 +2337,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_dateLong( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_timeShort( 
+             /* [annotation][in] */ 
+@@ -2344,7 +2345,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_timeShort( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_timeLong( 
+             /* [annotation][in] */ 
+@@ -2352,7 +2353,7 @@ EXTERN_C const IID IID_IHeaderFooter;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_timeLong( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+     };
+     
+@@ -2685,7 +2686,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("305104a5-98b5-11cf-bb82-00aa00bdce0b")
+-    IHeaderFooter2 : public IHeaderFooter
++     IHeaderFooter2 : public IHeaderFooter
+     {
+     public:
+         virtual /* [id][propput] */ HRESULT STDMETHODCALLTYPE put_font( 
+@@ -2694,7 +2695,7 @@ EXTERN_C const IID IID_IHeaderFooter2;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_font( 
+             /* [annotation][out][retval] */ 
+-            _Out_retval_  BSTR *p) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *p) = 0;
+         
+     };
+     

@@ -1,0 +1,142 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h b/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
+index 42696f7fbb..00d0f62450 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/corprof.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -404,12 +405,12 @@ typedef /* [public][public][public][public][public][public][public][public][publ
+ 
+ typedef UINT_PTR __stdcall __stdcall FunctionIDMapper( 
+     FunctionID funcId,
+-    BOOL *pbHookFunction);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbHookFunction);
+ 
+ typedef UINT_PTR __stdcall __stdcall FunctionIDMapper2( 
+     FunctionID funcId,
+-    void *clientData,
+-    BOOL *pbHookFunction);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *clientData,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbHookFunction);
+ 
+ typedef 
+ enum _COR_PRF_SNAPSHOT_INFO
+@@ -486,13 +487,13 @@ typedef void FunctionEnter2(
+     FunctionID funcId,
+     UINT_PTR clientData,
+     COR_PRF_FRAME_INFO func,
+-    COR_PRF_FUNCTION_ARGUMENT_INFO *argumentInfo);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COR_PRF_FUNCTION_ARGUMENT_INFO *argumentInfo);
+ 
+ typedef void FunctionLeave2( 
+     FunctionID funcId,
+     UINT_PTR clientData,
+     COR_PRF_FRAME_INFO func,
+-    COR_PRF_FUNCTION_ARGUMENT_RANGE *retvalRange);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COR_PRF_FUNCTION_ARGUMENT_RANGE *retvalRange);
+ 
+ typedef void FunctionTailcall2( 
+     FunctionID funcId,
+@@ -525,13 +526,13 @@ typedef HRESULT __stdcall __stdcall StackSnapshotCallback(
+     UINT_PTR ip,
+     COR_PRF_FRAME_INFO frameInfo,
+     ULONG32 contextSize,
+-    BYTE context[  ],
+-    void *clientData);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BYTE context[  ],
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *clientData);
+ 
+ typedef BOOL ObjectReferenceCallback( 
+     ObjectID root,
+-    ObjectID *reference,
+-    void *clientData);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ObjectID *reference,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *clientData);
+ 
+ typedef /* [public] */ 
+ enum __MIDL___MIDL_itf_corprof_0000_0000_0005
+@@ -721,8 +722,8 @@ typedef void EventPipeProviderCallback(
+     UINT8 level,
+     UINT64 match_any_keywords,
+     UINT64 match_all_keywords,
+-    COR_PRF_FILTER_DATA *filter_data,
+-    void *callback_data);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COR_PRF_FILTER_DATA *filter_data,
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *callback_data);
+ 
+ typedef 
+ enum _COR_PRF_HANDLE_TYPE
+@@ -10801,7 +10802,7 @@ EXTERN_C const IID IID_ICorProfilerCallback11;
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE LoadAsNotificationOnly( 
+-            BOOL *pbNotificationOnly) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbNotificationOnly) = 0;
+         
+     };
+     
+@@ -11937,7 +11938,7 @@ EXTERN_C const IID IID_ICorProfilerInfo;
+             /* [annotation][in] */ 
+             _In_  ThreadID threadId,
+             /* [annotation][out] */ 
+-            _Out_  HANDLE *phThread) = 0;
++            _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phThread) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetObjectSize( 
+             /* [annotation][in] */ 
+@@ -21373,20 +21374,20 @@ EXTERN_C const IID IID_ICorProfilerInfo9;
+             FunctionID functionID,
+             ReJITID reJitId,
+             ULONG32 cCodeStartAddresses,
+-            ULONG32 *pcCodeStartAddresses,
+-            UINT_PTR codeStartAddresses[  ]) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG32 *pcCodeStartAddresses,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") UINT_PTR codeStartAddresses[  ]) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetILToNativeMapping3( 
+             UINT_PTR pNativeCodeStartAddress,
+             ULONG32 cMap,
+-            ULONG32 *pcMap,
+-            COR_DEBUG_IL_TO_NATIVE_MAP map[  ]) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG32 *pcMap,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COR_DEBUG_IL_TO_NATIVE_MAP map[  ]) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCodeInfo4( 
+             UINT_PTR pNativeCodeStartAddress,
+             ULONG32 cCodeInfos,
+-            ULONG32 *pcCodeInfos,
+-            COR_PRF_CODE_INFO codeInfos[  ]) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG32 *pcCodeInfos,
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") COR_PRF_CODE_INFO codeInfos[  ]) = 0;
+         
+     };
+     
+@@ -22668,14 +22669,14 @@ EXTERN_C const IID IID_ICorProfilerInfo10;
+         virtual HRESULT STDMETHODCALLTYPE EnumerateObjectReferences( 
+             ObjectID objectId,
+             ObjectReferenceCallback callback,
+-            void *clientData) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *clientData) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE IsFrozenObject( 
+             ObjectID objectId,
+-            BOOL *pbFrozen) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") BOOL *pbFrozen) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLOHObjectSizeThreshold( 
+-            DWORD *pThreshold) = 0;
++            _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") DWORD *pThreshold) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RequestReJITWithInliners( 
+             /* [annotation][in] */ 
+@@ -24025,7 +24026,7 @@ EXTERN_C const IID IID_ICorProfilerInfo11;
+     ICorProfilerInfo11 : public ICorProfilerInfo10
+     {
+     public:
+-        virtual HRESULT STDMETHODCALLTYPE GetEnvironmentVariable( 
++        _WIN32META_ANNOTATION_("win32metadata:ansi") virtual HRESULT STDMETHODCALLTYPE GetEnvironmentVariable( 
+             /* [annotation][string][in] */ 
+             _In_  const WCHAR *szName,
+             /* [annotation][in] */ 

@@ -1,0 +1,667 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+index a6276573b6..97e9297124 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddeml.h
+@@ -1,6 +1,7 @@
+ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ /*++ BUILD Version: 0001 // Increment this if a change has global effects --*/
+ 
+@@ -32,15 +33,15 @@ extern "C" {
+ 
+ /******** public types ********/
+ 
+-DECLARE_HANDLE(HCONVLIST);
+-DECLARE_HANDLE(HCONV);
+-DECLARE_HANDLE(HSZ);
+-DECLARE_HANDLE(HDDEDATA);
++DECLARE_HANDLE(HCONVLIST) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeDisconnectList")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HCONV) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeDisconnect")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HSZ) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
++DECLARE_HANDLE(HDDEDATA) _WIN32META_ANNOTATION_("win32metadata:raii_free=DdeFreeDataHandle")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #define EXPENTRY        CALLBACK
+ 
+ /* the following structure is for use with XTYP_WILDCONNECT processing. */
+ 
+-typedef struct tagHSZPAIR {
++typedef struct   tagHSZPAIR {
+     HSZ hszSvc;
+     HSZ hszTopic;
+ } HSZPAIR, FAR *PHSZPAIR;
+@@ -70,9 +71,9 @@ typedef struct tagCONVINFO {
+     HSZ     hszTopic;      /* Topic name for conversation  */
+     HSZ     hszItem;       /* transaction item name or NULL if quiescent  */
+     UINT    wFmt;          /* transaction format or NULL if quiescent  */
+-    UINT    wType;         /* XTYP_ for current transaction  */
+-    UINT    wStatus;       /* ST_ constant for current conversation  */
+-    UINT    wConvst;       /* XST_ constant for current transaction  */
++    _Win32_AssociatedEnum_(DDE_CLIENT_TRANSACTION_TYPE) UINT    wType;         /* XTYP_ for current transaction  */
++    _Win32_AssociatedEnum_(CONVINFO_STATUS) UINT    wStatus;       /* ST_ constant for current conversation  */
++    _Win32_AssociatedEnum_(CONVINFO_CONVERSATION_STATE) UINT    wConvst;       /* XST_ constant for current transaction  */
+     UINT    wLastError;    /* last transaction error.  */
+     HCONVLIST hConvList;   /* parent hConvList if this conversation is in a list */
+     CONVCONTEXT ConvCtxt;  /* conversation context */
+@@ -211,27 +212,31 @@ typedef struct tagCONVINFO {
+ 
+ typedef HDDEDATA CALLBACK FNCALLBACK(UINT wType, UINT wFmt, HCONV hConv,
+         HSZ hsz1, HSZ hsz2, HDDEDATA hData, ULONG_PTR dwData1, ULONG_PTR dwData2);
+-typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
++_Win32_RAIIFree_(DdeFreeDataHandle, 0) typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
+         HSZ hsz1, HSZ hsz2, HDDEDATA hData, ULONG_PTR dwData1, ULONG_PTR dwData2);
+ 
+ #define     CBR_BLOCK           ((HDDEDATA)-1)
+ 
+ /* DLL registration functions */
+ 
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ 
++
+ UINT
+ WINAPI
+ DdeInitializeA(
+     _Inout_ LPDWORD pidInst,
+     _In_ PFNCALLBACK pfnCallback,
+-    _In_ DWORD afCmd,
+-    _Reserved_ DWORD ulRes);
++    _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) _In_ DWORD afCmd,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ulRes);
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ 
++
+ UINT
+ WINAPI
+ DdeInitializeW(
+     _Inout_ LPDWORD pidInst,
+     _In_ PFNCALLBACK pfnCallback,
+-    _In_ DWORD afCmd,
+-    _Reserved_ DWORD ulRes);
++    _Win32_AssociatedEnum_(DDE_INITIALIZE_COMMAND) _In_ DWORD afCmd,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ DWORD ulRes);
+ #ifdef UNICODE
+ #define DdeInitialize  DdeInitializeW
+ #else
+@@ -269,6 +274,8 @@ DdeInitializeW(
+ #define     APPCLASS_STANDARD            0x00000000L
+ #define     APPCLASS_MASK                0x0000000FL
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ BOOL
+ WINAPI
+ DdeUninitialize(
+@@ -277,7 +284,7 @@ DdeUninitialize(
+ /*
+  * conversation enumeration functions
+  */
+-HCONVLIST
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeDisconnectList, -1, 0) HCONVLIST
+ WINAPI
+ DdeConnectList(
+     _In_ DWORD idInst,
+@@ -286,12 +293,12 @@ DdeConnectList(
+     _In_ HCONVLIST hConvList,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
+-HCONV
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeDisconnect, -1, 0) HCONV
+ WINAPI
+ DdeQueryNextServer(
+     _In_ HCONVLIST hConvList,
+     _In_ HCONV hConvPrev);
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeDisconnectList(
+     _In_ HCONVLIST hConvList);
+@@ -299,7 +306,7 @@ DdeDisconnectList(
+ /*
+  * conversation control functions
+  */
+-HCONV
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeDisconnect, -1, 0) HCONV
+ WINAPI
+ DdeConnect(
+     _In_ DWORD idInst,
+@@ -307,31 +314,31 @@ DdeConnect(
+     _In_ HSZ hszTopic,
+     _In_opt_ PCONVCONTEXT pCC);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeDisconnect(
+     _In_ HCONV hConv);
+ 
+-HCONV
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeDisconnect, -1, 0) HCONV
+ WINAPI
+ DdeReconnect(
+     _In_ HCONV hConv);
+ 
+-UINT
++_Windows_SupportedOS_Windows2000_ UINT
+ WINAPI
+ DdeQueryConvInfo(
+     _In_ HCONV hConv,
+     _In_ DWORD idTransaction,
+     _Inout_ PCONVINFO pConvInfo);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeSetUserHandle(
+     _In_ HCONV hConv,
+     _In_ DWORD id,
+     _In_ DWORD_PTR hUser);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeAbandonTransaction(
+     _In_ DWORD idInst,
+@@ -342,21 +349,21 @@ DdeAbandonTransaction(
+ /*
+  * app server interface functions
+  */
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdePostAdvise(
+     _In_ DWORD idInst,
+     _In_ HSZ hszTopic,
+     _In_ HSZ hszItem);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeEnableCallback(
+     _In_ DWORD idInst,
+     _In_ HCONV hConv,
+-    _In_ UINT wCmd);
++    _Win32_AssociatedEnum_(DDE_ENABLE_CALLBACK_CMD) _In_ UINT wCmd);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ _Win32_SetLastError_ BOOL
+ WINAPI
+ DdeImpersonateClient(
+     _In_ HCONV hConv);
+@@ -367,13 +374,13 @@ DdeImpersonateClient(
+ #define EC_DISABLE              ST_BLOCKED
+ #define EC_QUERYWAITING         2
+ 
+-HDDEDATA
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeFreeDataHandle, 0) HDDEDATA
+ WINAPI
+ DdeNameService(
+     _In_ DWORD idInst,
+     _In_opt_ HSZ hsz1,
+     _In_opt_ HSZ hsz2,
+-    _In_ UINT afCmd);
++    _Win32_AssociatedEnum_(DDE_NAME_SERVICE_CMD) _In_ UINT afCmd);
+ 
+ #define DNS_REGISTER        0x0001
+ #define DNS_UNREGISTER      0x0002
+@@ -383,7 +390,7 @@ DdeNameService(
+ /*
+  * app client interface functions
+  */
+-HDDEDATA
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeFreeDataHandle, 0) HDDEDATA
+ WINAPI
+ DdeClientTransaction(
+     _In_opt_ LPBYTE pData,
+@@ -391,7 +398,7 @@ DdeClientTransaction(
+     _In_ HCONV hConv,
+     _In_opt_ HSZ hszItem,
+     _In_ UINT wFmt,
+-    _In_ UINT wType,
++    _Win32_AssociatedEnum_(DDE_CLIENT_TRANSACTION_TYPE) _In_ UINT wType,
+     _In_ DWORD dwTimeout,
+     _Out_opt_ LPDWORD pdwResult);
+ 
+@@ -400,7 +407,7 @@ DdeClientTransaction(
+  *data transfer functions
+  */
+ 
+-HDDEDATA
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeFreeDataHandle, 0) HDDEDATA
+ WINAPI
+ DdeCreateDataHandle(
+     _In_ DWORD idInst,
+@@ -411,7 +418,7 @@ DdeCreateDataHandle(
+     _In_ UINT wFmt,
+     _In_ UINT afCmd);
+ 
+-HDDEDATA
++_Windows_SupportedOS_Windows2000_ _Win32_RAIIFree_(DdeFreeDataHandle, 0) HDDEDATA
+ WINAPI
+ DdeAddData(
+     _In_ HDDEDATA hData,
+@@ -419,7 +426,7 @@ DdeAddData(
+     _In_ DWORD cb,
+     _In_ DWORD cbOff);
+ 
+-DWORD
++_Windows_SupportedOS_Windows2000_ DWORD
+ WINAPI
+ DdeGetData(
+     _In_ HDDEDATA hData,
+@@ -427,18 +434,18 @@ DdeGetData(
+     _In_ DWORD cbMax,
+     _In_ DWORD cbOff);
+ 
+-LPBYTE
++_Windows_SupportedOS_Windows2000_ LPBYTE
+ WINAPI
+ DdeAccessData(
+     _In_ HDDEDATA hData,
+     _Out_opt_ LPDWORD pcbDataSize);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeUnaccessData(
+     _In_ HDDEDATA hData);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeFreeDataHandle(
+     _In_ HDDEDATA hData);
+@@ -446,7 +453,7 @@ DdeFreeDataHandle(
+ #define     HDATA_APPOWNED          0x0001
+ 
+ 
+-UINT
++_Windows_SupportedOS_Windows2000_ UINT
+ WINAPI
+ DdeGetLastError(
+     _In_ DWORD idInst);
+@@ -477,13 +484,13 @@ DdeGetLastError(
+ 
+ #define     DMLERR_LAST                        0x4011
+ 
+-HSZ
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ HSZ
+ WINAPI
+ DdeCreateStringHandleA(
+     _In_ DWORD idInst,
+     _In_ LPCSTR psz,
+     _In_ int iCodePage);
+-HSZ
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ HSZ
+ WINAPI
+ DdeCreateStringHandleW(
+     _In_ DWORD idInst,
+@@ -495,7 +502,7 @@ DdeCreateStringHandleW(
+ #define DdeCreateStringHandle  DdeCreateStringHandleA
+ #endif // !UNICODE
+ 
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_ DWORD
+ WINAPI
+ DdeQueryStringA(
+     _In_ DWORD idInst,
+@@ -503,7 +510,7 @@ DdeQueryStringA(
+     _Out_writes_opt_(cchMax) LPSTR psz,
+     _In_ DWORD cchMax,
+     _In_ int iCodePage);
+-DWORD
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_ DWORD
+ WINAPI
+ DdeQueryStringW(
+     _In_ DWORD idInst,
+@@ -517,19 +524,19 @@ DdeQueryStringW(
+ #define DdeQueryString  DdeQueryStringA
+ #endif // !UNICODE
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeFreeStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
+-BOOL
++_Windows_SupportedOS_Windows2000_ BOOL
+ WINAPI
+ DdeKeepStringHandle(
+     _In_ DWORD idInst,
+     _In_ HSZ hsz);
+ 
+-int
++_Windows_SupportedOS_Windows2000_ int
+ WINAPI
+ DdeCmpStringHandles(
+     _In_ HSZ hsz1,
+@@ -671,4 +678,329 @@ typedef struct tagMONCONVSTRUCT {
+ #endif
+ 
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("EC_ENABLEALL")
++#undef EC_ENABLEALL
++#pragma push_macro("EC_ENABLEONE")
++#undef EC_ENABLEONE
++#pragma push_macro("EC_DISABLE")
++#undef EC_DISABLE
++#pragma push_macro("EC_QUERYWAITING")
++#undef EC_QUERYWAITING
++enum DDE_ENABLE_CALLBACK_CMD : unsigned int
++{
++    EC_ENABLEALL = 0U,
++    EC_ENABLEONE = 128U,
++    EC_DISABLE = 8U,
++    EC_QUERYWAITING = 2U,
++};
++#pragma pop_macro("EC_QUERYWAITING")
++#pragma pop_macro("EC_DISABLE")
++#pragma pop_macro("EC_ENABLEONE")
++#pragma pop_macro("EC_ENABLEALL")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("APPCLASS_MONITOR")
++#undef APPCLASS_MONITOR
++#pragma push_macro("APPCLASS_STANDARD")
++#undef APPCLASS_STANDARD
++#pragma push_macro("APPCMD_CLIENTONLY")
++#undef APPCMD_CLIENTONLY
++#pragma push_macro("APPCMD_FILTERINITS")
++#undef APPCMD_FILTERINITS
++#pragma push_macro("CBF_FAIL_ALLSVRXACTIONS")
++#undef CBF_FAIL_ALLSVRXACTIONS
++#pragma push_macro("CBF_FAIL_ADVISES")
++#undef CBF_FAIL_ADVISES
++#pragma push_macro("CBF_FAIL_CONNECTIONS")
++#undef CBF_FAIL_CONNECTIONS
++#pragma push_macro("CBF_FAIL_EXECUTES")
++#undef CBF_FAIL_EXECUTES
++#pragma push_macro("CBF_FAIL_POKES")
++#undef CBF_FAIL_POKES
++#pragma push_macro("CBF_FAIL_REQUESTS")
++#undef CBF_FAIL_REQUESTS
++#pragma push_macro("CBF_FAIL_SELFCONNECTIONS")
++#undef CBF_FAIL_SELFCONNECTIONS
++#pragma push_macro("CBF_SKIP_ALLNOTIFICATIONS")
++#undef CBF_SKIP_ALLNOTIFICATIONS
++#pragma push_macro("CBF_SKIP_CONNECT_CONFIRMS")
++#undef CBF_SKIP_CONNECT_CONFIRMS
++#pragma push_macro("CBF_SKIP_DISCONNECTS")
++#undef CBF_SKIP_DISCONNECTS
++#pragma push_macro("CBF_SKIP_REGISTRATIONS")
++#undef CBF_SKIP_REGISTRATIONS
++#pragma push_macro("CBF_SKIP_UNREGISTRATIONS")
++#undef CBF_SKIP_UNREGISTRATIONS
++#pragma push_macro("MF_CALLBACKS")
++#undef MF_CALLBACKS
++#pragma push_macro("MF_CONV")
++#undef MF_CONV
++#pragma push_macro("MF_ERRORS")
++#undef MF_ERRORS
++#pragma push_macro("MF_HSZ_INFO")
++#undef MF_HSZ_INFO
++#pragma push_macro("MF_LINKS")
++#undef MF_LINKS
++#pragma push_macro("MF_POSTMSGS")
++#undef MF_POSTMSGS
++#pragma push_macro("MF_SENDMSGS")
++#undef MF_SENDMSGS
++enum [[clang::flag_enum]] DDE_INITIALIZE_COMMAND : unsigned int
++{
++    APPCLASS_MONITOR = 1U,
++    APPCLASS_STANDARD = 0U,
++    APPCMD_CLIENTONLY = 16U,
++    APPCMD_FILTERINITS = 32U,
++    CBF_FAIL_ALLSVRXACTIONS = 258048U,
++    CBF_FAIL_ADVISES = 16384U,
++    CBF_FAIL_CONNECTIONS = 8192U,
++    CBF_FAIL_EXECUTES = 32768U,
++    CBF_FAIL_POKES = 65536U,
++    CBF_FAIL_REQUESTS = 131072U,
++    CBF_FAIL_SELFCONNECTIONS = 4096U,
++    CBF_SKIP_ALLNOTIFICATIONS = 3932160U,
++    CBF_SKIP_CONNECT_CONFIRMS = 262144U,
++    CBF_SKIP_DISCONNECTS = 2097152U,
++    CBF_SKIP_REGISTRATIONS = 524288U,
++    CBF_SKIP_UNREGISTRATIONS = 1048576U,
++    MF_CALLBACKS = 134217728U,
++    MF_CONV = 1073741824U,
++    MF_ERRORS = 268435456U,
++    MF_HSZ_INFO = 16777216U,
++    MF_LINKS = 536870912U,
++    MF_POSTMSGS = 67108864U,
++    MF_SENDMSGS = 33554432U,
++};
++#pragma pop_macro("MF_SENDMSGS")
++#pragma pop_macro("MF_POSTMSGS")
++#pragma pop_macro("MF_LINKS")
++#pragma pop_macro("MF_HSZ_INFO")
++#pragma pop_macro("MF_ERRORS")
++#pragma pop_macro("MF_CONV")
++#pragma pop_macro("MF_CALLBACKS")
++#pragma pop_macro("CBF_SKIP_UNREGISTRATIONS")
++#pragma pop_macro("CBF_SKIP_REGISTRATIONS")
++#pragma pop_macro("CBF_SKIP_DISCONNECTS")
++#pragma pop_macro("CBF_SKIP_CONNECT_CONFIRMS")
++#pragma pop_macro("CBF_SKIP_ALLNOTIFICATIONS")
++#pragma pop_macro("CBF_FAIL_SELFCONNECTIONS")
++#pragma pop_macro("CBF_FAIL_REQUESTS")
++#pragma pop_macro("CBF_FAIL_POKES")
++#pragma pop_macro("CBF_FAIL_EXECUTES")
++#pragma pop_macro("CBF_FAIL_CONNECTIONS")
++#pragma pop_macro("CBF_FAIL_ADVISES")
++#pragma pop_macro("CBF_FAIL_ALLSVRXACTIONS")
++#pragma pop_macro("APPCMD_FILTERINITS")
++#pragma pop_macro("APPCMD_CLIENTONLY")
++#pragma pop_macro("APPCLASS_STANDARD")
++#pragma pop_macro("APPCLASS_MONITOR")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("DNS_REGISTER")
++#undef DNS_REGISTER
++#pragma push_macro("DNS_UNREGISTER")
++#undef DNS_UNREGISTER
++#pragma push_macro("DNS_FILTERON")
++#undef DNS_FILTERON
++#pragma push_macro("DNS_FILTEROFF")
++#undef DNS_FILTEROFF
++enum DDE_NAME_SERVICE_CMD : unsigned int
++{
++    DNS_REGISTER = 1U,
++    DNS_UNREGISTER = 2U,
++    DNS_FILTERON = 4U,
++    DNS_FILTEROFF = 8U,
++};
++#pragma pop_macro("DNS_FILTEROFF")
++#pragma pop_macro("DNS_FILTERON")
++#pragma pop_macro("DNS_UNREGISTER")
++#pragma pop_macro("DNS_REGISTER")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XTYP_ADVSTART")
++#undef XTYP_ADVSTART
++#pragma push_macro("XTYP_ADVSTOP")
++#undef XTYP_ADVSTOP
++#pragma push_macro("XTYP_EXECUTE")
++#undef XTYP_EXECUTE
++#pragma push_macro("XTYP_POKE")
++#undef XTYP_POKE
++#pragma push_macro("XTYP_REQUEST")
++#undef XTYP_REQUEST
++#pragma push_macro("XTYP_ADVDATA")
++#undef XTYP_ADVDATA
++#pragma push_macro("XTYP_ADVREQ")
++#undef XTYP_ADVREQ
++#pragma push_macro("XTYP_CONNECT")
++#undef XTYP_CONNECT
++#pragma push_macro("XTYP_CONNECT_CONFIRM")
++#undef XTYP_CONNECT_CONFIRM
++#pragma push_macro("XTYP_DISCONNECT")
++#undef XTYP_DISCONNECT
++#pragma push_macro("XTYP_MONITOR")
++#undef XTYP_MONITOR
++#pragma push_macro("XTYP_REGISTER")
++#undef XTYP_REGISTER
++#pragma push_macro("XTYP_UNREGISTER")
++#undef XTYP_UNREGISTER
++#pragma push_macro("XTYP_WILDCONNECT")
++#undef XTYP_WILDCONNECT
++#pragma push_macro("XTYP_XACT_COMPLETE")
++#undef XTYP_XACT_COMPLETE
++enum DDE_CLIENT_TRANSACTION_TYPE : unsigned int
++{
++    XTYP_ADVSTART = 4144U,
++    XTYP_ADVSTOP = 32832U,
++    XTYP_EXECUTE = 16464U,
++    XTYP_POKE = 16528U,
++    XTYP_REQUEST = 8368U,
++    XTYP_ADVDATA = 16400U,
++    XTYP_ADVREQ = 8226U,
++    XTYP_CONNECT = 4194U,
++    XTYP_CONNECT_CONFIRM = 32882U,
++    XTYP_DISCONNECT = 32962U,
++    XTYP_MONITOR = 33010U,
++    XTYP_REGISTER = 32930U,
++    XTYP_UNREGISTER = 32978U,
++    XTYP_WILDCONNECT = 8418U,
++    XTYP_XACT_COMPLETE = 32896U,
++};
++#pragma pop_macro("XTYP_XACT_COMPLETE")
++#pragma pop_macro("XTYP_WILDCONNECT")
++#pragma pop_macro("XTYP_UNREGISTER")
++#pragma pop_macro("XTYP_REGISTER")
++#pragma pop_macro("XTYP_MONITOR")
++#pragma pop_macro("XTYP_DISCONNECT")
++#pragma pop_macro("XTYP_CONNECT_CONFIRM")
++#pragma pop_macro("XTYP_CONNECT")
++#pragma pop_macro("XTYP_ADVREQ")
++#pragma pop_macro("XTYP_ADVDATA")
++#pragma pop_macro("XTYP_REQUEST")
++#pragma pop_macro("XTYP_POKE")
++#pragma pop_macro("XTYP_EXECUTE")
++#pragma pop_macro("XTYP_ADVSTOP")
++#pragma pop_macro("XTYP_ADVSTART")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("XST_ADVACKRCVD")
++#undef XST_ADVACKRCVD
++#pragma push_macro("XST_ADVDATAACKRCVD")
++#undef XST_ADVDATAACKRCVD
++#pragma push_macro("XST_ADVDATASENT")
++#undef XST_ADVDATASENT
++#pragma push_macro("XST_ADVSENT")
++#undef XST_ADVSENT
++#pragma push_macro("XST_CONNECTED")
++#undef XST_CONNECTED
++#pragma push_macro("XST_DATARCVD")
++#undef XST_DATARCVD
++#pragma push_macro("XST_EXECACKRCVD")
++#undef XST_EXECACKRCVD
++#pragma push_macro("XST_EXECSENT")
++#undef XST_EXECSENT
++#pragma push_macro("XST_INCOMPLETE")
++#undef XST_INCOMPLETE
++#pragma push_macro("XST_INIT1")
++#undef XST_INIT1
++#pragma push_macro("XST_INIT2")
++#undef XST_INIT2
++#pragma push_macro("XST_NULL")
++#undef XST_NULL
++#pragma push_macro("XST_POKEACKRCVD")
++#undef XST_POKEACKRCVD
++#pragma push_macro("XST_POKESENT")
++#undef XST_POKESENT
++#pragma push_macro("XST_REQSENT")
++#undef XST_REQSENT
++#pragma push_macro("XST_UNADVACKRCVD")
++#undef XST_UNADVACKRCVD
++#pragma push_macro("XST_UNADVSENT")
++#undef XST_UNADVSENT
++enum CONVINFO_CONVERSATION_STATE : unsigned int
++{
++    XST_ADVACKRCVD = 13U,
++    XST_ADVDATAACKRCVD = 16U,
++    XST_ADVDATASENT = 15U,
++    XST_ADVSENT = 11U,
++    XST_CONNECTED = 2U,
++    XST_DATARCVD = 6U,
++    XST_EXECACKRCVD = 10U,
++    XST_EXECSENT = 9U,
++    XST_INCOMPLETE = 1U,
++    XST_INIT1 = 3U,
++    XST_INIT2 = 4U,
++    XST_NULL = 0U,
++    XST_POKEACKRCVD = 8U,
++    XST_POKESENT = 7U,
++    XST_REQSENT = 5U,
++    XST_UNADVACKRCVD = 14U,
++    XST_UNADVSENT = 12U,
++};
++#pragma pop_macro("XST_UNADVSENT")
++#pragma pop_macro("XST_UNADVACKRCVD")
++#pragma pop_macro("XST_REQSENT")
++#pragma pop_macro("XST_POKESENT")
++#pragma pop_macro("XST_POKEACKRCVD")
++#pragma pop_macro("XST_NULL")
++#pragma pop_macro("XST_INIT2")
++#pragma pop_macro("XST_INIT1")
++#pragma pop_macro("XST_INCOMPLETE")
++#pragma pop_macro("XST_EXECSENT")
++#pragma pop_macro("XST_EXECACKRCVD")
++#pragma pop_macro("XST_DATARCVD")
++#pragma pop_macro("XST_CONNECTED")
++#pragma pop_macro("XST_ADVSENT")
++#pragma pop_macro("XST_ADVDATASENT")
++#pragma pop_macro("XST_ADVDATAACKRCVD")
++#pragma pop_macro("XST_ADVACKRCVD")
++#endif
++
++#ifdef WIN32METADATA
++#pragma push_macro("ST_ADVISE")
++#undef ST_ADVISE
++#pragma push_macro("ST_BLOCKED")
++#undef ST_BLOCKED
++#pragma push_macro("ST_BLOCKNEXT")
++#undef ST_BLOCKNEXT
++#pragma push_macro("ST_CLIENT")
++#undef ST_CLIENT
++#pragma push_macro("ST_CONNECTED")
++#undef ST_CONNECTED
++#pragma push_macro("ST_INLIST")
++#undef ST_INLIST
++#pragma push_macro("ST_ISLOCAL")
++#undef ST_ISLOCAL
++#pragma push_macro("ST_ISSELF")
++#undef ST_ISSELF
++#pragma push_macro("ST_TERMINATED")
++#undef ST_TERMINATED
++enum [[clang::flag_enum]] CONVINFO_STATUS : unsigned int
++{
++    ST_ADVISE = 2U,
++    ST_BLOCKED = 8U,
++    ST_BLOCKNEXT = 128U,
++    ST_CLIENT = 16U,
++    ST_CONNECTED = 1U,
++    ST_INLIST = 64U,
++    ST_ISLOCAL = 4U,
++    ST_ISSELF = 256U,
++    ST_TERMINATED = 32U,
++};
++#pragma pop_macro("ST_TERMINATED")
++#pragma pop_macro("ST_ISSELF")
++#pragma pop_macro("ST_ISLOCAL")
++#pragma pop_macro("ST_INLIST")
++#pragma pop_macro("ST_CONNECTED")
++#pragma pop_macro("ST_CLIENT")
++#pragma pop_macro("ST_BLOCKNEXT")
++#pragma pop_macro("ST_BLOCKED")
++#pragma pop_macro("ST_ADVISE")
++#endif
++
+ #endif /* _INC_DDEMLH */

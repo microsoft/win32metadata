@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LpmApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/LpmApi.h
+index 1ed2c6be76..63a2468fdc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LpmApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LpmApi.h
+@@ -1,3 +1,4 @@
++#include "win32metadata_annotations.h"
+ 
+ 
+ /*++
+@@ -961,7 +962,7 @@ typedef struct {
+ 
+ DECLARE_HANDLE(LPM_HANDLE);
+ 
+-DECLARE_HANDLE(RHANDLE);
++DECLARE_HANDLE(RHANDLE)_WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ typedef ULONG   LPV;
+ 

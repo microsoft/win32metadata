@@ -1,0 +1,52 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
+index 7d01556725..9adaccfa96 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bits10_1.h
+@@ -105,6 +105,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -123,8 +124,8 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("98c97bd2-e32b-4ad8-a528-95fd8b16bd42")
+-    IBackgroundCopyCallback3 : public IBackgroundCopyCallback2
++    MIDL_INTERFACE("98c97bd2-e32b-4ad8-a528-95fd8b16bd42") _Windows_SupportedOS_15063_ 
++     IBackgroundCopyCallback3 : public IBackgroundCopyCallback2
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE FileRangesTransferred( 
+@@ -207,7 +208,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback3;
+         END_INTERFACE
+     } IBackgroundCopyCallback3Vtbl;
+ 
+-    interface IBackgroundCopyCallback3
++    interface _Windows_SupportedOS_15063_ IBackgroundCopyCallback3
+     {
+         CONST_VTBL struct IBackgroundCopyCallback3Vtbl *lpVtbl;
+     };
+@@ -266,8 +267,8 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("CF6784F7-D677-49FD-9368-CB47AEE9D1AD")
+-    IBackgroundCopyFile6 : public IBackgroundCopyFile5
++    MIDL_INTERFACE("CF6784F7-D677-49FD-9368-CB47AEE9D1AD") _Windows_SupportedOS_15063_ 
++     IBackgroundCopyFile6 : public IBackgroundCopyFile5
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE UpdateDownloadPosition( 
+@@ -411,7 +412,7 @@ EXTERN_C const IID IID_IBackgroundCopyFile6;
+         END_INTERFACE
+     } IBackgroundCopyFile6Vtbl;
+ 
+-    interface IBackgroundCopyFile6
++    interface _Windows_SupportedOS_15063_ IBackgroundCopyFile6
+     {
+         CONST_VTBL struct IBackgroundCopyFile6Vtbl *lpVtbl;
+     };

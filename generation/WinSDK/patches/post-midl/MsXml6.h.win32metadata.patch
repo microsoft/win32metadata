@@ -1,0 +1,403 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
+index 2a4df9e14a..a3d00ae4d2 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MsXml6.h
+@@ -940,6 +940,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ //+-------------------------------------------------------------------------
+ //
+ //  Microsoft Windows
+@@ -4526,7 +4527,7 @@ EXTERN_C const IID IID_IXMLDOMSchemaCollection;
+             /* [annotation][in] */ 
+             _In_  long index,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *length) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *length) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE addCollection( 
+             /* [annotation][in] */ 
+@@ -4944,7 +4945,7 @@ EXTERN_C const IID IID_IXMLDOMSelection;
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_expr( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *expression) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *expression) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_expr( 
+             /* [annotation][in] */ 
+@@ -13142,7 +13143,7 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_errorXPath( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *xpathexpr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *xpathexpr) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_allErrors( 
+             /* [annotation][retval][out] */ 
+@@ -13152,7 +13153,7 @@ EXTERN_C const IID IID_IXMLDOMParseError2;
+             /* [annotation][in] */ 
+             _In_  long index,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *param) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *param) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_errorParametersCount( 
+             /* [annotation][retval][out] */ 
+@@ -13617,11 +13618,11 @@ EXTERN_C const IID IID_IXSLProcessor;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_startMode( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *mode) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *mode) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_startModeURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *namespaceURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *namespaceURI) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_output( 
+             /* [annotation][in] */ 
+@@ -14121,11 +14122,11 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrHeader,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrValue) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getAllResponseHeaders( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrHeaders) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrHeaders) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE send( 
+             /* [optional][in] */ VARIANT varBody) = 0;
+@@ -14138,7 +14139,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_statusText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrStatus) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrStatus) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseXML( 
+             /* [annotation][retval][out] */ 
+@@ -14146,7 +14147,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseText( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrBody) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrBody) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_responseBody( 
+             /* [annotation][retval][out] */ 
+@@ -17409,7 +17410,7 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_baseURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strBaseURL) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strBaseURL) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_baseURL( 
+             /* [annotation][in] */ 
+@@ -17417,7 +17418,7 @@ EXTERN_C const IID IID_IVBSAXXMLReader;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_secureBaseURL( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strSecureBaseURL) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strSecureBaseURL) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_secureBaseURL( 
+             /* [annotation][in] */ 
+@@ -17907,11 +17908,11 @@ EXTERN_C const IID IID_IVBSAXLocator;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_publicId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strPublicId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strPublicId) = 0;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_systemId( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strSystemId) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strSystemId) = 0;
+         
+     };
+     
+@@ -19373,19 +19374,19 @@ EXTERN_C const IID IID_IVBSAXAttributes;
+             /* [annotation][in] */ 
+             _In_  int nIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strURI) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getLocalName( 
+             /* [annotation][in] */ 
+             _In_  int nIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strLocalName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strLocalName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getQName( 
+             /* [annotation][in] */ 
+             _In_  int nIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strQName) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strQName) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getIndexFromName( 
+             /* [annotation][in] */ 
+@@ -19405,7 +19406,7 @@ EXTERN_C const IID IID_IVBSAXAttributes;
+             /* [annotation][in] */ 
+             _In_  int nIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strType) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getTypeFromName( 
+             /* [annotation][in] */ 
+@@ -19413,19 +19414,19 @@ EXTERN_C const IID IID_IVBSAXAttributes;
+             /* [annotation][in] */ 
+             _In_  BSTR strLocalName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strType) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getTypeFromQName( 
+             /* [annotation][in] */ 
+             _In_  BSTR strQName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strType) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strType) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValue( 
+             /* [annotation][in] */ 
+             _In_  int nIndex,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strValue) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValueFromName( 
+             /* [annotation][in] */ 
+@@ -19433,13 +19434,13 @@ EXTERN_C const IID IID_IVBSAXAttributes;
+             /* [annotation][in] */ 
+             _In_  BSTR strLocalName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strValue) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE getValueFromQName( 
+             /* [annotation][in] */ 
+             _In_  BSTR strQName,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strValue) = 0;
+         
+     };
+     
+@@ -19727,7 +19728,7 @@ EXTERN_C const IID IID_IMXWriter;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_encoding( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strEncoding) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strEncoding) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_byteOrderMark( 
+             /* [annotation][in] */ 
+@@ -19767,7 +19768,7 @@ EXTERN_C const IID IID_IMXWriter;
+         
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *strVersion) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *strVersion) = 0;
+         
+         virtual /* [helpstring][id][propput] */ HRESULT STDMETHODCALLTYPE put_disableOutputEscaping( 
+             /* [annotation][in] */ 
+@@ -20717,7 +20718,7 @@ EXTERN_C const IID IID_IMXNamespacePrefixes;
+             /* [annotation][in] */ 
+             _In_  long index,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *prefix) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *prefix) = 0;
+         
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_length( 
+             /* [annotation][retval][out] */ 
+@@ -22156,7 +22157,7 @@ EXTERN_C const IID IID_ISchemaStringCollection;
+             /* [annotation][in] */ 
+             _In_  long index,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstr) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_length( 
+             /* [annotation][retval][out] */ 
+@@ -22550,11 +22551,11 @@ EXTERN_C const IID IID_ISchemaItem;
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_name( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *name) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *name) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_namespaceURI( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *namespaceURI) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *namespaceURI) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_schema( 
+             /* [annotation][retval][out] */ 
+@@ -22562,7 +22563,7 @@ EXTERN_C const IID IID_ISchemaItem;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_id( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *id) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *id) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_itemType( 
+             /* [annotation][retval][out] */ 
+@@ -22781,11 +22782,11 @@ EXTERN_C const IID IID_ISchema;
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_targetNamespace( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *targetNamespace) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *targetNamespace) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_version( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *version) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *version) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_types( 
+             /* [annotation][retval][out] */ 
+@@ -23336,11 +23337,11 @@ EXTERN_C const IID IID_ISchemaAttribute;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *defaultValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *defaultValue) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fixedValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *fixedValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *fixedValue) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_use( 
+             /* [annotation][retval][out] */ 
+@@ -23616,11 +23617,11 @@ EXTERN_C const IID IID_ISchemaElement;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_defaultValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *defaultValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *defaultValue) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fixedValue( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *fixedValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *fixedValue) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_isNillable( 
+             /* [annotation][retval][out] */ 
+@@ -23994,19 +23995,19 @@ EXTERN_C const IID IID_ISchemaType;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minExclusive( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *minExclusive) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *minExclusive) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_minInclusive( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *minInclusive) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *minInclusive) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxExclusive( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *maxExclusive) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *maxExclusive) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_maxInclusive( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *maxInclusive) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *maxInclusive) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_totalDigits( 
+             /* [annotation][retval][out] */ 
+@@ -25544,7 +25545,7 @@ EXTERN_C const IID IID_ISchemaIdentityConstraint;
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_selector( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *selector) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *selector) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_fields( 
+             /* [annotation][retval][out] */ 
+@@ -25785,11 +25786,11 @@ EXTERN_C const IID IID_ISchemaNotation;
+     public:
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_systemIdentifier( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *uri) = 0;
+         
+         virtual /* [propget][id] */ HRESULT STDMETHODCALLTYPE get_publicIdentifier( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *uri) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *uri) = 0;
+         
+     };
+     
+@@ -26430,8 +26431,8 @@ EXTERN_C const IID IID_IXMLHTTPRequest2Callback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("A44A9299-E321-40DE-8866-341B41669162")
+-    IXMLHTTPRequest2Callback : public IUnknown
++    MIDL_INTERFACE("A44A9299-E321-40DE-8866-341B41669162") _Windows_SupportedOS_Windows8_ 
++     IXMLHTTPRequest2Callback : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE OnRedirect( 
+@@ -26536,7 +26537,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2Callback;
+         END_INTERFACE
+     } IXMLHTTPRequest2CallbackVtbl;
+ 
+-    interface IXMLHTTPRequest2Callback
++    interface _Windows_SupportedOS_Windows8_ IXMLHTTPRequest2Callback
+     {
+         CONST_VTBL struct IXMLHTTPRequest2CallbackVtbl *lpVtbl;
+     };
+@@ -26593,8 +26594,8 @@ EXTERN_C const IID IID_IXMLHTTPRequest2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E5D37DC0-552A-4D52-9CC0-A14D546FBD04")
+-    IXMLHTTPRequest2 : public IUnknown
++    MIDL_INTERFACE("E5D37DC0-552A-4D52-9CC0-A14D546FBD04") _Windows_SupportedOS_Windows8_ 
++     IXMLHTTPRequest2 : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Open( 
+@@ -26769,7 +26770,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest2;
+         END_INTERFACE
+     } IXMLHTTPRequest2Vtbl;
+ 
+-    interface IXMLHTTPRequest2
++    interface _Windows_SupportedOS_Windows8_ IXMLHTTPRequest2
+     {
+         CONST_VTBL struct IXMLHTTPRequest2Vtbl *lpVtbl;
+     };
+@@ -26856,7 +26857,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest3Callback;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("b9e57830-8c6c-4a6f-9c13-47772bb047bb")
++    MIDL_INTERFACE("b9e57830-8c6c-4a6f-9c13-47772bb047bb") _Windows_SupportedOS_Windows81_ 
+     IXMLHTTPRequest3Callback : public IXMLHTTPRequest2Callback
+     {
+     public:
+@@ -27034,7 +27035,7 @@ EXTERN_C const IID IID_IXMLHTTPRequest3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a1c9feee-0617-4f23-9d58-8961ea43567c")
++    MIDL_INTERFACE("a1c9feee-0617-4f23-9d58-8961ea43567c") _Windows_SupportedOS_Windows81_ 
+     IXMLHTTPRequest3 : public IXMLHTTPRequest2
+     {
+     public:

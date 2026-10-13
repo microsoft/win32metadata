@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
+index 29320701fe..821336998c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dpapi.h
+@@ -11,6 +11,7 @@
+ 
+ #ifndef __DPAPI_H__
+ #define __DPAPI_H__
++#include <win32metadata_annotations.h>
+ 
+ #if (_MSC_VER > 1020)
+ #pragma once
+@@ -88,7 +89,7 @@ CRYPT_ATTR_BLOB, *PCRYPT_ATTR_BLOB;
+ //
+ // Prompt struct -- what to tell users about the access
+ //
+-typedef struct  _CRYPTPROTECT_PROMPTSTRUCT
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")     _CRYPTPROTECT_PROMPTSTRUCT
+ {
+     DWORD cbSize;
+     DWORD dwPromptFlags;
+@@ -178,6 +179,9 @@ typedef struct  _CRYPTPROTECT_PROMPTSTRUCT
+ #pragma region App Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ DPAPI_IMP
+ BOOL
+ WINAPI
+@@ -185,20 +189,23 @@ CryptProtectData(
+     _In_            DATA_BLOB*      pDataIn,
+     _In_opt_        LPCWSTR         szDataDescr,
+     _In_opt_        DATA_BLOB*      pOptionalEntropy,
+-    _Reserved_      PVOID           pvReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_      PVOID           pvReserved,
+     _In_opt_        CRYPTPROTECT_PROMPTSTRUCT*  pPromptStruct,
+     _In_            DWORD           dwFlags,
+     _Out_           DATA_BLOB*      pDataOut            // out encr blob
+     );
+ 
++_Windows_SupportedOS_WindowsXP_ 
++
++_Win32_SetLastError_
+ DPAPI_IMP
+ BOOL
+ WINAPI
+ CryptUnprotectData(
+     _In_            DATA_BLOB*      pDataIn,             // in encr blob
+-    _Outptr_opt_result_maybenull_ LPWSTR*     ppszDataDescr,       // out
++     _Outptr_opt_result_maybenull_ LPWSTR*     ppszDataDescr,       // out
+     _In_opt_        DATA_BLOB*      pOptionalEntropy,
+-    _Reserved_      PVOID           pvReserved,
++    _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_      PVOID           pvReserved,
+     _In_opt_        CRYPTPROTECT_PROMPTSTRUCT*  pPromptStruct,
+     _In_            DWORD           dwFlags,
+     _Out_           DATA_BLOB*      pDataOut
+@@ -250,6 +257,9 @@ CryptUnprotectDataNoUI(
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ DPAPI_IMP
+ BOOL
+ WINAPI
+@@ -306,6 +316,9 @@ CryptUpdateProtectedState(
+ #pragma region App Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ DPAPI_IMP
+ BOOL
+ WINAPI
+@@ -315,6 +328,9 @@ CryptProtectMemory(
+     _In_            DWORD           dwFlags
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
++_Win32_SetLastError_
+ DPAPI_IMP
+ BOOL
+ WINAPI

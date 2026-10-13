@@ -1,0 +1,48 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h b/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
+index d3993236e0..5b586ef90c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/httptrace.h
+@@ -5,6 +5,7 @@
+ #define _HTTP_TRACE_H
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -14,7 +15,7 @@
+ // the IIS trace infrastructure.
+ // The enum values match the equivalent VARIANT types.
+ //
+-enum HTTP_TRACE_TYPE
++enum   HTTP_TRACE_TYPE
+ { 
+     HTTP_TRACE_TYPE_BYTE = 17,         // mof type "uint8"
+     HTTP_TRACE_TYPE_USHORT = 18,       // mof type "uint16"
+@@ -58,7 +59,7 @@ struct HTTP_TRACE_EVENT_ITEM;
+ //
+ //
+ 
+-struct HTTP_TRACE_EVENT
++struct   HTTP_TRACE_EVENT
+ {
+     //
+     // Trace Provider (such as "WWW Server")
+@@ -127,7 +128,7 @@ struct HTTP_TRACE_EVENT
+ // Each HTTP_TRACE_EVENT can have multiple items or elements that describe the event
+ // (for example the "GENERAL_REQUEST_START" event contains an item with the Request URL)
+ 
+-struct HTTP_TRACE_EVENT_ITEM
++struct   HTTP_TRACE_EVENT_ITEM
+ {
+     //
+     // Friendly name of the item (for example "RequestUrl")
+@@ -163,7 +164,7 @@ struct HTTP_TRACE_EVENT_ITEM
+ // for a given provider
+ //
+ 
+-struct HTTP_TRACE_CONFIGURATION
++struct   HTTP_TRACE_CONFIGURATION
+ {
+     LPCGUID     pProviderGuid;
+     DWORD       dwAreas;

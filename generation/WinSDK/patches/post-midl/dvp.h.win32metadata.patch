@@ -1,0 +1,70 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dvp.h b/generation/WinSDK/RecompiledIdlHeaders/um/dvp.h
+index e5fafa29e3..4b5fb29592 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dvp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dvp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*==========================================================================;
+  *
+  *  Copyright (C) Microsoft Corporation.  All Rights Reserved.
+@@ -90,7 +91,7 @@ typedef struct IDirectDrawVideoPortNotifyVtbl   DIRECTDRAWVIDEOPORTNOTIFYCALLBAC
+ /*
+  * API's
+  */
+-typedef HRESULT (FAR PASCAL * LPDDENUMVIDEOCALLBACK)(LPDDVIDEOPORTCAPS, LPVOID);
++typedef HRESULT (FAR PASCAL * LPDDENUMVIDEOCALLBACK)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTCAPS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID);
+ 
+ 
+ /*
+@@ -112,10 +113,10 @@ DECLARE_INTERFACE_( IDDVideoPortContainer, IUnknown )
+     STDMETHOD_(ULONG,AddRef) (THIS)  PURE;
+     STDMETHOD_(ULONG,Release) (THIS) PURE;
+     /*** IDirectDrawVideoPort methods ***/
+-    STDMETHOD(CreateVideoPort)(THIS_ DWORD, LPDDVIDEOPORTDESC, LPDIRECTDRAWVIDEOPORT FAR *, IUnknown FAR *) PURE;
+-    STDMETHOD(EnumVideoPorts)(THIS_ DWORD, LPDDVIDEOPORTCAPS, LPVOID,LPDDENUMVIDEOCALLBACK ) PURE;
++    STDMETHOD(CreateVideoPort)(THIS_ DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTDESC, LPDIRECTDRAWVIDEOPORT FAR *, IUnknown FAR *) PURE;
++    STDMETHOD(EnumVideoPorts)(THIS_ DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTCAPS, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID,LPDDENUMVIDEOCALLBACK ) PURE;
+     STDMETHOD(GetVideoPortConnectInfo)(THIS_ DWORD, _Inout_ LPDWORD pcInfo, _Out_writes_to_opt_(*pcInfo, *pcInfo) LPDDVIDEOPORTCONNECT ) PURE;
+-    STDMETHOD(QueryVideoPortStatus)(THIS_ DWORD, LPDDVIDEOPORTSTATUS ) PURE;
++    STDMETHOD(QueryVideoPortStatus)(THIS_ DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTSTATUS ) PURE;
+ };
+ 
+ #if !defined(__cplusplus) || defined(CINTERFACE)
+@@ -153,18 +154,18 @@ DECLARE_INTERFACE_( IDirectDrawVideoPort, IUnknown )
+     STDMETHOD_(ULONG,Release) (THIS) PURE;
+     /*** IVideoPort methods ***/
+     STDMETHOD(Flip)(THIS_ LPDIRECTDRAWSURFACE, DWORD) PURE;
+-    STDMETHOD(GetBandwidthInfo)(THIS_ LPDDPIXELFORMAT, DWORD, DWORD, DWORD, LPDDVIDEOPORTBANDWIDTH) PURE;
+-    STDMETHOD(GetColorControls)(THIS_ LPDDCOLORCONTROL) PURE;
+-    STDMETHOD(GetInputFormats)(THIS_ LPDWORD lpNumFormats, _Out_writes_to_opt_(*lpNumFormats, *lpNumFormats) LPDDPIXELFORMAT, DWORD) PURE;
+-    STDMETHOD(GetOutputFormats)(THIS_ LPDDPIXELFORMAT, LPDWORD lpNumFormats, _Out_writes_to_opt_(*lpNumFormats, *lpNumFormats) LPDDPIXELFORMAT, DWORD) PURE;
+-    STDMETHOD(GetFieldPolarity)(THIS_ LPBOOL) PURE;
+-    STDMETHOD(GetVideoLine)(THIS_ LPDWORD) PURE;
+-    STDMETHOD(GetVideoSignalStatus)(THIS_ LPDWORD) PURE;
+-    STDMETHOD(SetColorControls)(THIS_ LPDDCOLORCONTROL) PURE;
++    STDMETHOD(GetBandwidthInfo)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDPIXELFORMAT, DWORD, DWORD, DWORD, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTBANDWIDTH) PURE;
++    STDMETHOD(GetColorControls)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDCOLORCONTROL) PURE;
++    STDMETHOD(GetInputFormats)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpNumFormats, _Out_writes_to_opt_(*lpNumFormats, *lpNumFormats) LPDDPIXELFORMAT, DWORD) PURE;
++    STDMETHOD(GetOutputFormats)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDPIXELFORMAT, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD lpNumFormats, _Out_writes_to_opt_(*lpNumFormats, *lpNumFormats) LPDDPIXELFORMAT, DWORD) PURE;
++    STDMETHOD(GetFieldPolarity)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPBOOL) PURE;
++    STDMETHOD(GetVideoLine)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD) PURE;
++    STDMETHOD(GetVideoSignalStatus)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDWORD) PURE;
++    STDMETHOD(SetColorControls)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDCOLORCONTROL) PURE;
+     STDMETHOD(SetTargetSurface)(THIS_ LPDIRECTDRAWSURFACE, DWORD) PURE;
+-    STDMETHOD(StartVideo)(THIS_ LPDDVIDEOPORTINFO) PURE;
++    STDMETHOD(StartVideo)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTINFO) PURE;
+     STDMETHOD(StopVideo)(THIS) PURE;
+-    STDMETHOD(UpdateVideo)(THIS_ LPDDVIDEOPORTINFO) PURE;
++    STDMETHOD(UpdateVideo)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTINFO) PURE;
+     STDMETHOD(WaitForSync)(THIS_ DWORD, DWORD, DWORD) PURE;
+ };
+ 
+@@ -222,7 +223,7 @@ DECLARE_INTERFACE_( IDirectDrawVideoPortNotify, IUnknown )
+     STDMETHOD_(ULONG,AddRef) (THIS)  PURE;
+     STDMETHOD_(ULONG,Release) (THIS) PURE;
+     /*** IVideoPort methods ***/
+-    STDMETHOD(AcquireNotification)(THIS_ HANDLE *, LPDDVIDEOPORTNOTIFY) PURE;
++    STDMETHOD(AcquireNotification)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") HANDLE *, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPDDVIDEOPORTNOTIFY) PURE;
+     STDMETHOD(ReleaseNotification)(THIS_ HANDLE) PURE;
+ };
+ 

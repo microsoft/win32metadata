@@ -1,0 +1,49 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h b/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
+index 9774ea3b65..e329095634 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tspubplugin2com.h
+@@ -68,6 +68,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -102,14 +103,14 @@ typedef /* [public][public][public] */ struct __MIDL_ItsPubPlugin2_0002
+     } 	pluginResource2;
+ 
+ typedef 
+-enum _TSPUB_PLUGIN_PD_RESOLUTION_TYPE
++enum   _TSPUB_PLUGIN_PD_RESOLUTION_TYPE
+     {
+         TSPUB_PLUGIN_PD_QUERY_OR_CREATE	= 0,
+         TSPUB_PLUGIN_PD_QUERY_EXISTING	= 1
+     } 	TSPUB_PLUGIN_PD_RESOLUTION_TYPE;
+ 
+ typedef 
+-enum _TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE
++enum   _TSPUB_PLUGIN_PD_ASSIGNMENT_TYPE
+     {
+         TSPUB_PLUGIN_PD_ASSIGNMENT_NEW	= 0,
+         TSPUB_PLUGIN_PD_ASSIGNMENT_EXISTING	= 1
+@@ -120,8 +121,8 @@ EXTERN_C const IID IID_ItsPubPlugin2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("FA4CE418-AAD7-4ec6-BAD1-0A321BA465D5")
+-    ItsPubPlugin2 : public ItsPubPlugin
++    MIDL_INTERFACE("FA4CE418-AAD7-4ec6-BAD1-0A321BA465D5") _Windows_SupportedOS_Windows8_ 
++      ItsPubPlugin2 : public ItsPubPlugin
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetResource2List( 
+@@ -281,7 +282,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
+         END_INTERFACE
+     } ItsPubPlugin2Vtbl;
+ 
+-    interface ItsPubPlugin2
++    interface _Windows_SupportedOS_Windows8_ ItsPubPlugin2
+     {
+         CONST_VTBL struct ItsPubPlugin2Vtbl *lpVtbl;
+     };

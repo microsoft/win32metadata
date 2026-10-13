@@ -1,0 +1,198 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12sdklayers.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12sdklayers.h
+index 0068db43e9..c901d9938f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d12sdklayers.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d12sdklayers.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -219,7 +220,7 @@ EXTERN_C const IID IID_ID3D12Debug;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("344488b7-6846-474b-b989-f027448245e0")
++    MIDL_INTERFACE("344488b7-6846-474b-b989-f027448245e0") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug : public IUnknown
+     {
+     public:
+@@ -318,7 +319,7 @@ EXTERN_C const IID IID_ID3D12Debug1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("affaa4ca-63fe-4d8e-b8ad-159000af4304")
++    MIDL_INTERFACE("affaa4ca-63fe-4d8e-b8ad-159000af4304") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug1 : public IUnknown
+     {
+     public:
+@@ -423,7 +424,7 @@ EXTERN_C const IID IID_ID3D12Debug2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("93a665c4-a3b2-4e5d-b692-a26ae14e3374")
++    MIDL_INTERFACE("93a665c4-a3b2-4e5d-b692-a26ae14e3374") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug2 : public IUnknown
+     {
+     public:
+@@ -508,7 +509,7 @@ EXTERN_C const IID IID_ID3D12Debug3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5cf4e58f-f671-4ff1-a542-3686e3d153d1")
++    MIDL_INTERFACE("5cf4e58f-f671-4ff1-a542-3686e3d153d1") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug3 : public ID3D12Debug
+     {
+     public:
+@@ -623,7 +624,7 @@ EXTERN_C const IID IID_ID3D12Debug4;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("014b816e-9ec5-4a2f-a845-ffbe441ce13a")
++    MIDL_INTERFACE("014b816e-9ec5-4a2f-a845-ffbe441ce13a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug4 : public ID3D12Debug3
+     {
+     public:
+@@ -739,7 +740,7 @@ EXTERN_C const IID IID_ID3D12Debug5;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("548d6b12-09fa-40e0-9069-5dcd589a52c9")
++    MIDL_INTERFACE("548d6b12-09fa-40e0-9069-5dcd589a52c9") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug5 : public ID3D12Debug4
+     {
+     public:
+@@ -865,7 +866,7 @@ EXTERN_C const IID IID_ID3D12Debug6;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("82a816d6-5d01-4157-97d0-4975463fd1ed")
++    MIDL_INTERFACE("82a816d6-5d01-4157-97d0-4975463fd1ed") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12Debug6 : public ID3D12Debug5
+     {
+     public:
+@@ -1081,7 +1082,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a9b71770-d099-4a65-a698-3dee10020f88")
++    MIDL_INTERFACE("a9b71770-d099-4a65-a698-3dee10020f88") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugDevice1 : public IUnknown
+     {
+     public:
+@@ -1200,7 +1201,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3febd6dd-4973-4787-8194-e45f9e28923e")
++    MIDL_INTERFACE("3febd6dd-4973-4787-8194-e45f9e28923e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugDevice : public IUnknown
+     {
+     public:
+@@ -1305,7 +1306,7 @@ EXTERN_C const IID IID_ID3D12DebugDevice2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("60eccbc1-378d-4df1-894c-f8ac5ce4d7dd")
++    MIDL_INTERFACE("60eccbc1-378d-4df1-894c-f8ac5ce4d7dd") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugDevice2 : public ID3D12DebugDevice
+     {
+     public:
+@@ -1446,7 +1447,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09e0bf36-54ac-484f-8847-4baeeab6053a")
++    MIDL_INTERFACE("09e0bf36-54ac-484f-8847-4baeeab6053a") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandQueue : public IUnknown
+     {
+     public:
+@@ -1537,7 +1538,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandQueue1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("16be35a2-bfd6-49f2-bcae-eaae4aff862d")
++    MIDL_INTERFACE("16be35a2-bfd6-49f2-bcae-eaae4aff862d") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandQueue1 : public ID3D12DebugCommandQueue
+     {
+     public:
+@@ -1676,7 +1677,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("102ca951-311b-4b01-b11f-ecb83e061b37")
++    MIDL_INTERFACE("102ca951-311b-4b01-b11f-ecb83e061b37") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandList1 : public IUnknown
+     {
+     public:
+@@ -1801,7 +1802,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("09e0bf36-54ac-484f-8847-4baeeab6053f")
++    MIDL_INTERFACE("09e0bf36-54ac-484f-8847-4baeeab6053f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandList : public IUnknown
+     {
+     public:
+@@ -1912,7 +1913,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("aeb575cf-4e06-48be-ba3b-c450fc96652e")
++    MIDL_INTERFACE("aeb575cf-4e06-48be-ba3b-c450fc96652e") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandList2 : public ID3D12DebugCommandList
+     {
+     public:
+@@ -2047,7 +2048,7 @@ EXTERN_C const IID IID_ID3D12DebugCommandList3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("197d5e15-4d37-4d34-af78-724cd70fdb1f")
++    MIDL_INTERFACE("197d5e15-4d37-4d34-af78-724cd70fdb1f") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12DebugCommandList3 : public ID3D12DebugCommandList2
+     {
+     public:
+@@ -2205,7 +2206,7 @@ EXTERN_C const IID IID_ID3D12SharingContract;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0adf7d52-929c-4e61-addb-ffed30de66ef")
++    MIDL_INTERFACE("0adf7d52-929c-4e61-addb-ffed30de66ef") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12SharingContract : public IUnknown
+     {
+     public:
+@@ -2339,7 +2340,7 @@ EXTERN_C const IID IID_ID3D12ManualWriteTrackingResource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("86ca3b85-49ad-4b6e-aed5-eddb18540f41")
++    MIDL_INTERFACE("86ca3b85-49ad-4b6e-aed5-eddb18540f41") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12ManualWriteTrackingResource : public IUnknown
+     {
+     public:
+@@ -3495,7 +3496,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0742a90b-c387-483f-b946-30a7e4e61458")
++    MIDL_INTERFACE("0742a90b-c387-483f-b946-30a7e4e61458") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12InfoQueue : public IUnknown
+     {
+     public:
+@@ -4001,7 +4002,7 @@ typedef void ( __stdcall *D3D12MessageFunc )(
+     D3D12_MESSAGE_SEVERITY Severity,
+     D3D12_MESSAGE_ID ID,
+     LPCSTR pDescription,
+-    void *pContext);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void *pContext);
+ 
+ 
+ 
+@@ -4019,7 +4020,7 @@ EXTERN_C const IID IID_ID3D12InfoQueue1;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2852dd88-b484-4c0c-b6b1-67168500e600")
++    MIDL_INTERFACE("2852dd88-b484-4c0c-b6b1-67168500e600") _WIN32META_ANNOTATION_("win32metadata:agile") 
+     ID3D12InfoQueue1 : public ID3D12InfoQueue
+     {
+     public:

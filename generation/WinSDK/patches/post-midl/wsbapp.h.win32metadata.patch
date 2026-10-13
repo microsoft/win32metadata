@@ -1,0 +1,36 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsbapp.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsbapp.h
+index 8e262e554a..902487d469 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wsbapp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsbapp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -100,7 +101,7 @@ EXTERN_C const IID IID_IWsbApplicationBackupSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1EFF3510-4A27-46ad-B9E0-08332F0F4F6D")
++    MIDL_INTERFACE("1EFF3510-4A27-46ad-B9E0-08332F0F4F6D") _Windows_SupportedOS_Server2008_ 
+     IWsbApplicationBackupSupport : public IUnknown
+     {
+     public:
+@@ -211,7 +212,7 @@ EXTERN_C const IID IID_IWsbApplicationRestoreSupport;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8D3BDB38-4EE8-4718-85F9-C7DBC4AB77AA")
++    MIDL_INTERFACE("8D3BDB38-4EE8-4718-85F9-C7DBC4AB77AA") _Windows_SupportedOS_Server2008_ 
+     IWsbApplicationRestoreSupport : public IUnknown
+     {
+     public:
+@@ -377,7 +378,7 @@ EXTERN_C const IID IID_IWsbApplicationAsync;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("0843F6F7-895C-44a6-B0C2-05A5022AA3A1")
++    MIDL_INTERFACE("0843F6F7-895C-44a6-B0C2-05A5022AA3A1") _Windows_SupportedOS_Server2008_ 
+     IWsbApplicationAsync : public IUnknown
+     {
+     public:

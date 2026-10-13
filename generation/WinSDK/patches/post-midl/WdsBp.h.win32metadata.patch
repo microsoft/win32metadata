@@ -1,0 +1,75 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h b/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
+index 8849f94de1..fc980cdf2a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WdsBp.h
+@@ -20,6 +20,7 @@ Environment:
+ #ifndef __WDSBP_H__
+ #define __WDSBP_H__
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -141,37 +142,43 @@ extern "C"
+ // APIs.
+ //
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSBPAPI
+ WdsBpParseInitialize (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+     _In_ ULONG uPacketLen,
+     _Out_opt_ PBYTE pbPacketType,
+-    _Out_ HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
+     );
+ 
++_Windows_SupportedOS_Windows8_ 
++
+ DWORD
+ WDSBPAPI
+ WdsBpParseInitializev6 (
+     _In_reads_bytes_(uPacketLen) PVOID pPacket,
+     _In_ ULONG uPacketLen,
+     _Out_opt_ PBYTE pbPacketType,
+-    _Out_ HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSBPAPI
+ WdsBpInitialize (
+     _In_ BYTE bPacketType,
+-    _Out_ HANDLE *phHandle
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_  HANDLE *phHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSBPAPI
+ WdsBpCloseHandle (
+     _In_ HANDLE hHandle
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WDSBPAPI
+@@ -183,6 +190,7 @@ WdsBpQueryOption (
+     _Out_opt_ PULONG puBytes
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ DWORD
+ WDSBPAPI
+ WdsBpAddOption (
+@@ -192,6 +200,7 @@ WdsBpAddOption (
+     _In_reads_bytes_(uValueLen) PVOID pValue
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WDSBPAPI

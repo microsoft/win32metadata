@@ -1,0 +1,121 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tnef.h b/generation/WinSDK/RecompiledIdlHeaders/um/tnef.h
+index d7e2254f77..1c5e50944c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tnef.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tnef.h
+@@ -18,6 +18,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -100,16 +101,16 @@ DECLARE_MAPI_INTERFACE_PTR(ITnef, LPITNEF);
+ 	MAPIMETHOD(AddProps)												\
+ 		(THIS_	ULONG						ulFlags,					\
+ 				ULONG						ulElemID,					\
+-				LPVOID						lpvData,					\
+-				LPSPropTagArray				lpPropList) IPURE;			\
+-	MAPIMETHOD(ExtractProps)											\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID						lpvData,					\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray				lpPropList) IPURE;			\
++	 MAPIMETHOD(ExtractProps)											\
+ 		(THIS_	ULONG						ulFlags,					\
+-				LPSPropTagArray				lpPropList,					\
+-				LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
+-	MAPIMETHOD(Finish)													\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray				lpPropList,					\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
++	 MAPIMETHOD(Finish)													\
+ 		(THIS_	ULONG						ulFlags,					\
+-				WORD FAR *					lpKey,						\
+-				LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") WORD FAR *					lpKey,						\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
+ 	MAPIMETHOD(OpenTaggedBody)											\
+ 		(THIS_	LPMESSAGE					lpMessage,					\
+ 				ULONG						ulFlags,					\
+@@ -118,17 +119,17 @@ DECLARE_MAPI_INTERFACE_PTR(ITnef, LPITNEF);
+ 		(THIS_	ULONG						ulFlags,					\
+ 				ULONG						ulElemID,					\
+ 				ULONG						cValues,					\
+-				LPSPropValue				lpProps) IPURE;				\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropValue				lpProps) IPURE;				\
+ 	MAPIMETHOD(EncodeRecips)											\
+ 		(THIS_	ULONG						ulFlags,					\
+ 				LPMAPITABLE					lpRecipientTable) IPURE;	\
+ 	MAPIMETHOD(FinishComponent)											\
+ 		(THIS_	ULONG						ulFlags,					\
+ 				ULONG						ulComponentID,				\
+-				LPSPropTagArray				lpCustomPropList,			\
+-				LPSPropValue				lpCustomProps,				\
+-				LPSPropTagArray				lpPropList,					\
+-				LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray				lpCustomPropList,			\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropValue				lpCustomProps,				\
++				_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSPropTagArray				lpPropList,					\
++				 _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPSTnefProblemArray FAR *	lpProblems) IPURE;			\
+ 
+ #undef		 INTERFACE
+ #define		 INTERFACE  ITnef
+@@ -141,7 +142,7 @@ DECLARE_MAPI_INTERFACE_(ITnef, IUnknown)
+ 
+ _Check_return_
+ STDMETHODIMP OpenTnefStream(
+-	LPVOID				lpvSupport,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID				lpvSupport,
+ 	LPSTREAM			lpStream,
+ 	_In_ LPTSTR			lpszStreamName,
+ 	ULONG				ulFlags,
+@@ -152,7 +153,7 @@ STDMETHODIMP OpenTnefStream(
+ typedef 
+ _Check_return_
+ HRESULT (STDMETHODCALLTYPE FAR * LPOPENTNEFSTREAM) (
+-	LPVOID				lpvSupport,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID				lpvSupport,
+ 	LPSTREAM			lpStream,
+ 	_In_ LPTSTR			lpszStreamName,
+ 	ULONG				ulFlags,
+@@ -162,34 +163,34 @@ HRESULT (STDMETHODCALLTYPE FAR * LPOPENTNEFSTREAM) (
+ 
+ _Check_return_
+ STDMETHODIMP OpenTnefStreamEx(
+-	LPVOID				lpvSupport,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID				lpvSupport,
+ 	LPSTREAM			lpStream,
+ 	_In_ LPTSTR			lpszStreamName,
+ 	ULONG				ulFlags,
+ 	LPMESSAGE			lpMessage,
+ 	WORD				wKeyVal,
+-	LPADRBOOK			lpAdressBook,
++	_WIN32META_ANNOTATION_("win32metadata:in") LPADRBOOK			lpAdressBook,
+ 	LPITNEF FAR *		lppTNEF) WIN_NOEXCEPT;
+ 
+ typedef HRESULT (STDMETHODCALLTYPE FAR * LPOPENTNEFSTREAMEX) (
+-	LPVOID				lpvSupport,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID				lpvSupport,
+ 	LPSTREAM			lpStream,
+ 	_In_ LPTSTR			lpszStreamName,
+ 	ULONG				ulFlags,
+ 	LPMESSAGE			lpMessage,
+ 	WORD				wKeyVal,
+-	LPADRBOOK			lpAdressBook,
++	_WIN32META_ANNOTATION_("win32metadata:in") LPADRBOOK			lpAdressBook,
+ 	LPITNEF FAR *		lppTNEF);
+ 
+ STDMETHODIMP GetTnefStreamCodepage (
+ 	LPSTREAM			lpStream,
+-	ULONG FAR *			lpulCodepage,
+-	ULONG FAR *			lpulSubCodepage) WIN_NOEXCEPT;
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *			lpulCodepage,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *			lpulSubCodepage) WIN_NOEXCEPT;
+ 
+ typedef HRESULT (STDMETHODCALLTYPE FAR * LPGETTNEFSTREAMCODEPAGE) (
+ 	LPSTREAM			lpStream,
+-	ULONG FAR *			lpulCodepage,
+-	ULONG FAR *			lpulSubCodepage);
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *			lpulCodepage,
++	_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") ULONG FAR *			lpulSubCodepage);
+ 
+ #define OPENTNEFSTREAM "OpenTnefStream"
+ #define OPENTNEFSTREAMEX "OpenTnefStreamEx"

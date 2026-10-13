@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/sas.h b/generation/WinSDK/RecompiledIdlHeaders/um/sas.h
+index cccd5b0c9e12091c9842cd8fbd333d6d878ad244..63b45510eb17c66ec9a3283b53971dcc26373230 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/sas.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/sas.h
+@@ -18,6 +18,7 @@ Author:
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -28,6 +29,7 @@ extern "C"
+ {
+ #endif
+ 
++_Windows_SupportedOS_Windows7_
+ VOID
+ WINAPI
+ SendSAS(

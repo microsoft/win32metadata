@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MLOperatorAuthor.h b/generation/WinSDK/RecompiledIdlHeaders/um/MLOperatorAuthor.h
+index e93773cd19..3efe8ad745 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MLOperatorAuthor.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MLOperatorAuthor.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ // Copyright (c) Microsoft Corporation. All rights reserved.
+ // Licensed under the MIT License.
+ 
+@@ -122,7 +123,7 @@ struct MLOperatorEdgeDescription
+ 
+         //! The data type of a tensor.  Used when edgeType is set to Tensor.
+         //! The data type of each tensor in a sequence of tensors.  Used when edgeType is set to Sequence.
+-        MLOperatorTensorDataType tensorDataType;
++        _Win32_AssociatedEnum_(MLOperatorTensorDataType) MLOperatorTensorDataType tensorDataType;
+     };
+ };
+ 

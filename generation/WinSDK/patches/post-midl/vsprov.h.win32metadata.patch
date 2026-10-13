@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
+index 9aca15352b..5ce20f97d7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/vsprov.h
+@@ -104,6 +104,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -126,8 +127,8 @@ EXTERN_C const IID IID_IVssSoftwareSnapshotProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("609e123e-2c5a-44d3-8f01-0b1d9a47d1ff")
+-    IVssSoftwareSnapshotProvider : public IUnknown
++    MIDL_INTERFACE("609e123e-2c5a-44d3-8f01-0b1d9a47d1ff") _Windows_SupportedOS_WindowsVista_ 
++      IVssSoftwareSnapshotProvider : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetContext( 
+@@ -326,7 +327,7 @@ EXTERN_C const IID IID_IVssSoftwareSnapshotProvider;
+         END_INTERFACE
+     } IVssSoftwareSnapshotProviderVtbl;
+ 
+-    interface IVssSoftwareSnapshotProvider
++    interface _Windows_SupportedOS_WindowsVista_ IVssSoftwareSnapshotProvider
+     {
+         CONST_VTBL struct IVssSoftwareSnapshotProviderVtbl *lpVtbl;
+     };
+@@ -398,8 +399,8 @@ EXTERN_C const IID IID_IVssProviderCreateSnapshotSet;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("5F894E5B-1E39-4778-8E23-9ABAD9F0E08C")
+-    IVssProviderCreateSnapshotSet : public IUnknown
++    MIDL_INTERFACE("5F894E5B-1E39-4778-8E23-9ABAD9F0E08C") _Windows_SupportedOS_WindowsVista_ 
++      IVssProviderCreateSnapshotSet : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE EndPrepareSnapshots( 
+@@ -504,7 +505,7 @@ EXTERN_C const IID IID_IVssProviderCreateSnapshotSet;
+         END_INTERFACE
+     } IVssProviderCreateSnapshotSetVtbl;
+ 
+-    interface IVssProviderCreateSnapshotSet
++    interface _Windows_SupportedOS_WindowsVista_ IVssProviderCreateSnapshotSet
+     {
+         CONST_VTBL struct IVssProviderCreateSnapshotSetVtbl *lpVtbl;
+     };
+@@ -567,7 +568,7 @@ EXTERN_C const IID IID_IVssProviderNotifications;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("E561901F-03A5-4afe-86D0-72BAEECE7004")
++    MIDL_INTERFACE("E561901F-03A5-4afe-86D0-72BAEECE7004") _Windows_SupportedOS_WindowsVista_ 
+     IVssProviderNotifications : public IUnknown
+     {
+     public:
+@@ -667,7 +668,7 @@ EXTERN_C const IID IID_IVssHardwareSnapshotProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("9593A157-44E9-4344-BBEB-44FBF9B06B10")
++    MIDL_INTERFACE("9593A157-44E9-4344-BBEB-44FBF9B06B10") _Windows_SupportedOS_Server2003_ 
+     IVssHardwareSnapshotProvider : public IUnknown
+     {
+     public:
+@@ -883,7 +884,7 @@ EXTERN_C const IID IID_IVssHardwareSnapshotProviderEx;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("7F5BA925-CDB1-4d11-A71F-339EB7E709FD")
++    MIDL_INTERFACE("7F5BA925-CDB1-4d11-A71F-339EB7E709FD") _Windows_SupportedOS_Server2008_ 
+     IVssHardwareSnapshotProviderEx : public IVssHardwareSnapshotProvider
+     {
+     public:
+@@ -1128,7 +1129,7 @@ EXTERN_C const IID IID_IVssFileShareSnapshotProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c8636060-7c2e-11df-8c4a-0800200c9a66")
++    MIDL_INTERFACE("c8636060-7c2e-11df-8c4a-0800200c9a66") _Windows_SupportedOS_Windows81_ 
+     IVssFileShareSnapshotProvider : public IUnknown
+     {
+     public:

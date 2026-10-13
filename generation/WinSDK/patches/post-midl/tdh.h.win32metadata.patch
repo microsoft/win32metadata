@@ -1,0 +1,261 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
+index 8842ce318f..326834cd67 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/tdh.h
+@@ -19,6 +19,7 @@ Abstract:
+ #ifndef __TDH_H__
+ #define __TDH_H__
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -42,7 +43,7 @@ extern "C" {
+ typedef _Return_type_success_(return == ERROR_SUCCESS) ULONG TDHSTATUS;
+ #define TDHAPI TDHSTATUS __stdcall
+ 
+-typedef HANDLE TDH_HANDLE, *PTDH_HANDLE;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=TdhCloseDecodingHandle") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1") _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") typedef HANDLE TDH_HANDLE, *PTDH_HANDLE;
+ 
+ typedef struct _EVENT_MAP_ENTRY {
+     ULONG OutputOffset;
+@@ -73,7 +74,7 @@ typedef struct _EVENT_MAP_INFO {
+     MAP_FLAGS Flag;
+     ULONG EntryCount;
+     union {
+-        MAP_VALUETYPE MapEntryValueType;
++        _Win32_AssociatedEnum_(MAP_VALUETYPE) MAP_VALUETYPE MapEntryValueType;
+         ULONG FormatStringOffset;
+     };
+     _Field_size_(EntryCount) EVENT_MAP_ENTRY MapEntryArray[ANYSIZE_ARRAY];
+@@ -638,7 +639,7 @@ typedef struct _TRACE_EVENT_INFO {
+     ULONG PropertyCount;
+     _Field_range_(0, PropertyCount) ULONG TopLevelPropertyCount;
+     union {
+-        TEMPLATE_FLAGS Flags;
++        _Win32_AssociatedEnum_(TEMPLATE_FLAGS) TEMPLATE_FLAGS Flags;
+         struct {
+             ULONG Reserved : 4; // TEMPLATE_FLAGS values
+             ULONG Tags : 28;
+@@ -720,6 +721,7 @@ typedef struct _PAYLOAD_FILTER_PREDICATE {
+ 
+ #if (WINVER >= _WIN32_WINNT_WINBLUE)
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhCreatePayloadFilter(
+@@ -731,12 +733,14 @@ TdhCreatePayloadFilter(
+     _Outptr_result_maybenull_ PVOID* PayloadFilter
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhDeletePayloadFilter(
+     _Inout_ PVOID* PayloadFilter
+     );
+ 
++_Windows_SupportedOS_Windows81_
+ TDHSTATUS
+ __stdcall
+ TdhAggregatePayloadFilters(
+@@ -746,7 +750,7 @@ TdhAggregatePayloadFilters(
+     _Out_ PEVENT_FILTER_DESCRIPTOR EventFilterDescriptor
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_Windows81_ TDHSTATUS
+ __stdcall
+ TdhCleanupPayloadEventFilterDescriptor(
+     _Inout_ PEVENT_FILTER_DESCRIPTOR EventFilterDescriptor
+@@ -857,7 +861,7 @@ typedef struct _TDH_CONTEXT {
+ } TDH_CONTEXT;
+ typedef TDH_CONTEXT *PTDH_CONTEXT;
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhGetEventInformation(
+     _In_ PEVENT_RECORD Event,
+@@ -867,7 +871,7 @@ TdhGetEventInformation(
+     _Inout_ PULONG BufferSize
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhGetEventMapInformation(
+     _In_ PEVENT_RECORD pEvent,
+@@ -876,7 +880,7 @@ TdhGetEventMapInformation(
+     _Inout_ ULONG* pBufferSize
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhGetPropertySize(
+     _In_ PEVENT_RECORD pEvent,
+@@ -887,7 +891,7 @@ TdhGetPropertySize(
+     _Out_ ULONG* pPropertySize
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhGetProperty(
+     _In_ PEVENT_RECORD pEvent,
+@@ -899,7 +903,7 @@ TdhGetProperty(
+     _Out_writes_bytes_(BufferSize) PBYTE pBuffer
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhEnumerateProviders(
+     _Out_writes_bytes_opt_(*pBufferSize) PPROVIDER_ENUMERATION_INFO pBuffer,
+@@ -929,7 +933,7 @@ TdhEnumerateProvidersForDecodingSource(
+     );
+ #endif
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhQueryProviderFieldInformation(
+     _In_ LPGUID pGuid,
+@@ -939,7 +943,7 @@ TdhQueryProviderFieldInformation(
+     _Inout_ ULONG* pBufferSize
+     );
+ 
+-TDHSTATUS
++_Windows_SupportedOS_WindowsVista_ TDHSTATUS
+ __stdcall
+ TdhEnumerateProviderFieldInformation(
+     _In_ LPGUID pGuid,
+@@ -955,7 +959,7 @@ TdhEnumerateProviderFieldInformation(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-TDHSTATUS
++_Windows_SupportedOS_Windows7_ TDHSTATUS
+ __stdcall
+ TdhEnumerateProviderFilters(
+     _In_ LPGUID Guid,
+@@ -973,7 +977,7 @@ TdhEnumerateProviderFilters(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-TDHSTATUS
++_Windows_SupportedOS_Windows7_ TDHSTATUS
+ __stdcall
+ TdhLoadManifest(
+     _In_ PWSTR Manifest
+@@ -990,7 +994,7 @@ TdhLoadManifestFromMemory(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-TDHSTATUS
++_Windows_SupportedOS_Windows7_ TDHSTATUS
+ __stdcall
+ TdhUnloadManifest(
+     _In_ PWSTR Manifest
+@@ -1007,7 +1011,7 @@ TdhUnloadManifestFromMemory(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+-TDHSTATUS
++_Windows_SupportedOS_Windows7_ TDHSTATUS
+ __stdcall
+ TdhFormatProperty(
+     _In_ PTRACE_EVENT_INFO EventInfo,
+@@ -1019,7 +1023,7 @@ TdhFormatProperty(
+     _In_ USHORT UserDataLength,
+     _In_reads_bytes_(UserDataLength) PBYTE UserData,
+     _Inout_ PULONG BufferSize,
+-    _Out_writes_bytes_opt_(*BufferSize) PWCHAR Buffer,
++    _WIN32META_ANNOTATION_("win32metadata:not_null_terminated") _Out_writes_bytes_opt_(*BufferSize) PWCHAR Buffer,
+     _Out_ PUSHORT UserDataConsumed
+     );
+ #endif
+@@ -1031,15 +1035,15 @@ TdhFormatProperty(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhOpenDecodingHandle(
+-    _Out_ PTDH_HANDLE Handle
++    _Win32_RAIIFree_(TdhCloseDecodingHandle, -1, 0) _Out_ PTDH_HANDLE Handle
+     );
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhSetDecodingParameter(
+     _In_ TDH_HANDLE Handle,
+@@ -1048,7 +1052,7 @@ TdhSetDecodingParameter(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhGetDecodingParameter(
+     _In_ TDH_HANDLE Handle,
+@@ -1057,7 +1061,7 @@ TdhGetDecodingParameter(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhGetWppProperty(
+     _In_ TDH_HANDLE Handle,
+@@ -1069,7 +1073,7 @@ TdhGetWppProperty(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhGetWppMessage(
+     _In_ TDH_HANDLE Handle,
+@@ -1080,7 +1084,7 @@ TdhGetWppMessage(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhCloseDecodingHandle(
+     _In_ TDH_HANDLE Handle
+@@ -1088,7 +1092,7 @@ TdhCloseDecodingHandle(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+-TDHSTATUS
++_Windows_SupportedOS_Windows8_ TDHSTATUS
+ __stdcall
+ TdhLoadManifestFromBinary(
+     _In_ PWSTR BinaryPath
+@@ -1102,7 +1106,7 @@ TdhLoadManifestFromBinary(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (WINVER >= _WIN32_WINNT_WINBLUE)
+-TDHSTATUS
++_Windows_SupportedOS_Windows81_ TDHSTATUS
+ __stdcall
+ TdhEnumerateManifestProviderEvents(
+     _In_ LPGUID ProviderGuid,
+@@ -1112,7 +1116,7 @@ TdhEnumerateManifestProviderEvents(
+ #endif
+ 
+ #if (WINVER >= _WIN32_WINNT_WINBLUE)
+-TDHSTATUS
++_Windows_SupportedOS_Windows81_ TDHSTATUS
+ __stdcall
+ TdhGetManifestEventInformation(
+     _In_ LPGUID ProviderGuid,

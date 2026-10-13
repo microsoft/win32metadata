@@ -1,0 +1,88 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
+index 6f1b2fe0c4..1f797e492a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/datetimeapi.h
+@@ -17,6 +17,7 @@
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
++#include <win32metadata_annotations.h>
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -26,6 +27,8 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ // For Windows Vista and above GetDateFormatEx is preferred
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -38,6 +41,8 @@ GetDateFormatA(
+     _In_ int cchDate
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -57,6 +62,8 @@ GetDateFormatW(
+ #endif // !UNICODE
+ 
+ // For Windows Vista and above GetTimeFormatEx is preferred
++_WIN32META_ANNOTATION_("win32metadata:ansi") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -69,6 +76,8 @@ GetTimeFormatA(
+     _In_ int cchTime
+     );
+ 
++_WIN32META_ANNOTATION_("win32metadata:unicode") _Windows_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -93,24 +102,28 @@ GetTimeFormatW(
+ #pragma region Application Family or OneCore or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+ GetTimeFormatEx(
+     _In_opt_ LPCWSTR lpLocaleName,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(TIME_FORMAT_FLAGS) _In_ DWORD dwFlags,
+     _In_opt_ CONST SYSTEMTIME* lpTime,
+     _In_opt_ LPCWSTR lpFormat,
+     _Out_writes_opt_(cchTime) LPWSTR lpTimeStr,
+     _In_ int cchTime
+     );
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI
+ GetDateFormatEx(
+     _In_opt_ LPCWSTR lpLocaleName,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(ENUM_DATE_FORMATS_FLAGS) _In_ DWORD dwFlags,
+     _In_opt_ CONST SYSTEMTIME* lpDate,
+     _In_opt_ LPCWSTR lpFormat,
+     _Out_writes_opt_(cchDate) LPWSTR lpDateStr,
+@@ -126,6 +139,8 @@ GetDateFormatEx(
+ 
+ #define GetDurationFormatEx_DEFINED
+ 
++_Windows_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ WINBASEAPI
+ int
+ WINAPI

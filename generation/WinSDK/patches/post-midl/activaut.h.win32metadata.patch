@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/activaut.h b/generation/WinSDK/RecompiledIdlHeaders/um/activaut.h
+index 6693848f95..4efbb96754 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/activaut.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/activaut.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -233,7 +234,7 @@ EXTERN_C const IID IID_IScriptNode;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetLanguage( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateChildEntry( 
+             /* [annotation][in] */ 
+@@ -455,7 +456,7 @@ EXTERN_C const IID IID_IScriptEntry;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetText( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetText( 
+             /* [annotation][in] */ 
+@@ -463,7 +464,7 @@ EXTERN_C const IID IID_IScriptEntry;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetBody( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetBody( 
+             /* [annotation][in] */ 
+@@ -471,7 +472,7 @@ EXTERN_C const IID IID_IScriptEntry;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetName( 
+             /* [annotation][in] */ 
+@@ -479,7 +480,7 @@ EXTERN_C const IID IID_IScriptEntry;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetItemName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetItemName( 
+             /* [annotation][in] */ 
+@@ -797,7 +798,7 @@ EXTERN_C const IID IID_IScriptScriptlet;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetSubItemName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetSubItemName( 
+             /* [annotation][in] */ 
+@@ -805,7 +806,7 @@ EXTERN_C const IID IID_IScriptScriptlet;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEventName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetEventName( 
+             /* [annotation][in] */ 
+@@ -813,7 +814,7 @@ EXTERN_C const IID IID_IScriptScriptlet;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSimpleEventName( 
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstr) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstr) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetSimpleEventName( 
+             /* [annotation][in] */ 
+@@ -1274,7 +1275,7 @@ EXTERN_C const IID IID_IActiveScriptAuthor;
+             /* [annotation][in] */ 
+             _In_  DWORD fRequestedList,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrChars) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrChars) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetInfoFromContext( 
+             /* [annotation][in] */ 

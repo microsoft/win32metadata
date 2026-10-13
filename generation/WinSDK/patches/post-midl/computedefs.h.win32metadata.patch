@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/computedefs.h b/generation/WinSDK/RecompiledIdlHeaders/um/computedefs.h
+index 4d945ad697..8476b8034c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/computedefs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/computedefs.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -23,16 +24,16 @@ Environment:
+ #endif
+ 
+ // Handle to a compute system
+-DECLARE_HANDLE(HCS_SYSTEM);
++DECLARE_HANDLE(HCS_SYSTEM) _WIN32META_ANNOTATION_("win32metadata:raii_free=HcsCloseComputeSystem")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ // Handle to a process running in a compute system
+-DECLARE_HANDLE(HCS_PROCESS);
++DECLARE_HANDLE(HCS_PROCESS) _WIN32META_ANNOTATION_("win32metadata:raii_free=HcsCloseProcess")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ // Handle to an operation on a compute system
+-DECLARE_HANDLE(HCS_OPERATION);
++DECLARE_HANDLE(HCS_OPERATION) _WIN32META_ANNOTATION_("win32metadata:raii_free=HcsCloseOperation")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ // Handle to a callback registered on a compute system or process handle.
+-DECLARE_HANDLE(HCS_CALLBACK);
++DECLARE_HANDLE(HCS_CALLBACK) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ 
+ // Type of an operation. These correspond to the functions that invoke the operation.
+ typedef enum HCS_OPERATION_TYPE

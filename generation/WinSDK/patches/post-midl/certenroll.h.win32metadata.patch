@@ -1,0 +1,3031 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h b/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
+index 6d1b04c233..ff59de16f8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/certenroll.h
+@@ -1679,6 +1679,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if defined(MIDL_PASS)
+@@ -1687,7 +1688,7 @@ typedef typedef void VOID;
+ 
+ #endif
+ typedef 
+-enum CERTENROLL_OBJECTID
++enum   CERTENROLL_OBJECTID
+     {
+         XCN_OID_NONE	= 0,
+         XCN_OID_RSA	= 1,
+@@ -2130,7 +2131,7 @@ enum CERTENROLL_OBJECTID
+     } 	CERTENROLL_OBJECTID;
+ 
+ typedef 
+-enum WebSecurityLevel
++enum   WebSecurityLevel
+     {
+         LevelUnsafe	= 0,
+         LevelSafe	= 1
+@@ -2139,7 +2140,7 @@ enum WebSecurityLevel
+ #define	CERTENROLL_INDEX_BASE	( 0 )
+ 
+ typedef 
+-enum EncodingType
++enum   EncodingType
+     {
+         XCN_CRYPT_STRING_BASE64HEADER	= 0,
+         XCN_CRYPT_STRING_BASE64	= 0x1,
+@@ -2166,7 +2167,7 @@ enum EncodingType
+     } 	EncodingType;
+ 
+ typedef 
+-enum PFXExportOptions
++enum   PFXExportOptions
+     {
+         PFXExportEEOnly	= 0,
+         PFXExportChainNoRoot	= 1,
+@@ -2174,7 +2175,7 @@ enum PFXExportOptions
+     } 	PFXExportOptions;
+ 
+ typedef 
+-enum ObjectIdGroupId
++enum   ObjectIdGroupId
+     {
+         XCN_CRYPT_ANY_GROUP_ID	= 0,
+         XCN_CRYPT_HASH_ALG_OID_GROUP_ID	= 1,
+@@ -2199,7 +2200,7 @@ enum ObjectIdGroupId
+     } 	ObjectIdGroupId;
+ 
+ typedef 
+-enum ObjectIdPublicKeyFlags
++enum   ObjectIdPublicKeyFlags
+     {
+         XCN_CRYPT_OID_INFO_PUBKEY_ANY	= 0,
+         XCN_CRYPT_OID_INFO_PUBKEY_SIGN_KEY_FLAG	= 0x80000000,
+@@ -2207,7 +2208,7 @@ enum ObjectIdPublicKeyFlags
+     } 	ObjectIdPublicKeyFlags;
+ 
+ typedef 
+-enum AlgorithmFlags
++enum   AlgorithmFlags
+     {
+         AlgorithmFlagsNone	= 0,
+         AlgorithmFlagsWrap	= 0x1
+@@ -2229,8 +2230,8 @@ EXTERN_C const IID IID_IObjectId;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab300-217d-11da-b2a4-000e7bbb2b09")
+-    IObjectId : public IDispatch
++    MIDL_INTERFACE("728ab300-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IObjectId : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeFromName( 
+@@ -2249,18 +2250,18 @@ EXTERN_C const IID IID_IObjectId;
+             /* [retval][out] */ __RPC__out CERTENROLL_OBJECTID *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAlgorithmName( 
+             /* [in] */ ObjectIdGroupId GroupId,
+             /* [in] */ ObjectIdPublicKeyFlags KeyFlags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrAlgorithmName) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrAlgorithmName) = 0;
+         
+     };
+     
+@@ -2375,7 +2376,7 @@ EXTERN_C const IID IID_IObjectId;
+         END_INTERFACE
+     } IObjectIdVtbl;
+ 
+-    interface IObjectId
++    interface _Windows_SupportedOS_WindowsVista_ IObjectId
+     {
+         CONST_VTBL struct IObjectIdVtbl *lpVtbl;
+     };
+@@ -2454,8 +2455,8 @@ EXTERN_C const IID IID_IObjectIds;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab301-217d-11da-b2a4-000e7bbb2b09")
+-    IObjectIds : public IDispatch
++    MIDL_INTERFACE("728ab301-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IObjectIds : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -2582,7 +2583,7 @@ EXTERN_C const IID IID_IObjectIds;
+         END_INTERFACE
+     } IObjectIdsVtbl;
+ 
+-    interface IObjectIds
++    interface _Windows_SupportedOS_WindowsVista_ IObjectIds
+     {
+         CONST_VTBL struct IObjectIdsVtbl *lpVtbl;
+     };
+@@ -2658,20 +2659,20 @@ EXTERN_C const IID IID_IBinaryConverter;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab302-217d-11da-b2a4-000e7bbb2b09")
+-    IBinaryConverter : public IDispatch
++    MIDL_INTERFACE("728ab302-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IBinaryConverter : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE StringToString( 
+             /* [in] */ __RPC__in BSTR strEncodedIn,
+             /* [in] */ EncodingType EncodingIn,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE VariantByteArrayToString( 
+             /* [in] */ __RPC__in VARIANT *pvarByteArray,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncoded) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE StringToVariantByteArray( 
+             /* [in] */ __RPC__in BSTR strEncoded,
+@@ -2768,7 +2769,7 @@ EXTERN_C const IID IID_IBinaryConverter;
+         END_INTERFACE
+     } IBinaryConverterVtbl;
+ 
+-    interface IBinaryConverter
++    interface _Windows_SupportedOS_WindowsVista_ IBinaryConverter
+     {
+         CONST_VTBL struct IBinaryConverterVtbl *lpVtbl;
+     };
+@@ -3010,7 +3011,7 @@ EXTERN_C const IID IID_IBinaryConverter2;
+ /* [local] */ 
+ 
+ typedef 
+-enum X500NameFlags
++enum   X500NameFlags
+     {
+         XCN_CERT_NAME_STR_NONE	= 0,
+         XCN_CERT_SIMPLE_NAME_STR	= 1,
+@@ -3050,8 +3051,8 @@ EXTERN_C const IID IID_IX500DistinguishedName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab303-217d-11da-b2a4-000e7bbb2b09")
+-    IX500DistinguishedName : public IDispatch
++    MIDL_INTERFACE("728ab303-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX500DistinguishedName : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Decode( 
+@@ -3064,11 +3065,11 @@ EXTERN_C const IID IID_IX500DistinguishedName;
+             /* [defaultvalue][in] */ X500NameFlags NameFlags = XCN_CERT_NAME_STR_NONE) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncodedName( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -3162,7 +3163,7 @@ EXTERN_C const IID IID_IX500DistinguishedName;
+         END_INTERFACE
+     } IX500DistinguishedNameVtbl;
+ 
+-    interface IX500DistinguishedName
++    interface _Windows_SupportedOS_WindowsVista_ IX500DistinguishedName
+     {
+         CONST_VTBL struct IX500DistinguishedNameVtbl *lpVtbl;
+     };
+@@ -3222,7 +3223,7 @@ EXTERN_C const IID IID_IX500DistinguishedName;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509CertificateEnrollmentContext
++enum   X509CertificateEnrollmentContext
+     {
+         ContextNone	= 0,
+         ContextUser	= 0x1,
+@@ -3231,7 +3232,7 @@ enum X509CertificateEnrollmentContext
+     } 	X509CertificateEnrollmentContext;
+ 
+ typedef 
+-enum EnrollmentEnrollStatus
++enum   EnrollmentEnrollStatus
+     {
+         Enrolled	= 0x1,
+         EnrollPended	= 0x2,
+@@ -3243,14 +3244,14 @@ enum EnrollmentEnrollStatus
+     } 	EnrollmentEnrollStatus;
+ 
+ typedef 
+-enum EnrollmentSelectionStatus
++enum   EnrollmentSelectionStatus
+     {
+         SelectedNo	= 0,
+         SelectedYes	= 1
+     } 	EnrollmentSelectionStatus;
+ 
+ typedef 
+-enum EnrollmentDisplayStatus
++enum   EnrollmentDisplayStatus
+     {
+         DisplayNo	= 0,
+         DisplayYes	= 1
+@@ -3272,15 +3273,15 @@ EXTERN_C const IID IID_IX509EnrollmentStatus;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab304-217d-11da-b2a4-000e7bbb2b09")
+-    IX509EnrollmentStatus : public IDispatch
++    MIDL_INTERFACE("728ab304-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509EnrollmentStatus : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE AppendText( 
+             /* [in] */ __RPC__in BSTR strText) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Text( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Text( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -3310,7 +3311,7 @@ EXTERN_C const IID IID_IX509EnrollmentStatus;
+             /* [in] */ HRESULT Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ErrorText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -3440,7 +3441,7 @@ EXTERN_C const IID IID_IX509EnrollmentStatus;
+         END_INTERFACE
+     } IX509EnrollmentStatusVtbl;
+ 
+-    interface IX509EnrollmentStatus
++    interface _Windows_SupportedOS_WindowsVista_ IX509EnrollmentStatus
+     {
+         CONST_VTBL struct IX509EnrollmentStatusVtbl *lpVtbl;
+     };
+@@ -3524,7 +3525,7 @@ EXTERN_C const IID IID_IX509EnrollmentStatus;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509ProviderType
++enum   X509ProviderType
+     {
+         XCN_PROV_NONE	= 0,
+         XCN_PROV_RSA_FULL	= 1,
+@@ -3554,7 +3555,7 @@ enum X509ProviderType
+ // XCN_BCRYPT_SECRET_AGREEMENT_INTERFACE: DH, ECDH_P* key agreement
+ // XCN_BCRYPT_RNG_INTERFACE: RNG
+ typedef 
+-enum AlgorithmType
++enum   AlgorithmType
+     {
+         XCN_BCRYPT_UNKNOWN_INTERFACE	= 0,
+         XCN_BCRYPT_CIPHER_INTERFACE	= 0x1,
+@@ -3567,7 +3568,7 @@ enum AlgorithmType
+     } 	AlgorithmType;
+ 
+ typedef 
+-enum AlgorithmOperationFlags
++enum   AlgorithmOperationFlags
+     {
+         XCN_NCRYPT_NO_OPERATION	= 0,
+         XCN_NCRYPT_CIPHER_OPERATION	= 0x1,
+@@ -3601,8 +3602,8 @@ EXTERN_C const IID IID_ICspAlgorithm;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab305-217d-11da-b2a4-000e7bbb2b09")
+-    ICspAlgorithm : public IDispatch
++    MIDL_INTERFACE("728ab305-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspAlgorithm : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE GetAlgorithmOid( 
+@@ -3617,7 +3618,7 @@ EXTERN_C const IID IID_ICspAlgorithm;
+             /* [retval][out] */ __RPC__out LONG *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LongName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Valid( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -3629,7 +3630,7 @@ EXTERN_C const IID IID_ICspAlgorithm;
+             /* [retval][out] */ __RPC__out LONG *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [retval][out] */ __RPC__out AlgorithmType *pValue) = 0;
+@@ -3757,7 +3758,7 @@ EXTERN_C const IID IID_ICspAlgorithm;
+         END_INTERFACE
+     } ICspAlgorithmVtbl;
+ 
+-    interface ICspAlgorithm
++    interface _Windows_SupportedOS_WindowsVista_ ICspAlgorithm
+     {
+         CONST_VTBL struct ICspAlgorithmVtbl *lpVtbl;
+     };
+@@ -3842,8 +3843,8 @@ EXTERN_C const IID IID_ICspAlgorithms;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab306-217d-11da-b2a4-000e7bbb2b09")
+-    ICspAlgorithms : public IDispatch
++    MIDL_INTERFACE("728ab306-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspAlgorithms : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -3982,7 +3983,7 @@ EXTERN_C const IID IID_ICspAlgorithms;
+         END_INTERFACE
+     } ICspAlgorithmsVtbl;
+ 
+-    interface ICspAlgorithms
++    interface _Windows_SupportedOS_WindowsVista_ ICspAlgorithms
+     {
+         CONST_VTBL struct ICspAlgorithmsVtbl *lpVtbl;
+     };
+@@ -4054,7 +4055,7 @@ EXTERN_C const IID IID_ICspAlgorithms;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509KeySpec
++enum   X509KeySpec
+     {
+         XCN_AT_NONE	= 0,
+         XCN_AT_KEYEXCHANGE	= 1,
+@@ -4079,8 +4080,8 @@ EXTERN_C const IID IID_ICspInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab307-217d-11da-b2a4-000e7bbb2b09")
+-    ICspInformation : public IDispatch
++    MIDL_INTERFACE("728ab307-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspInformation : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeFromName( 
+@@ -4113,7 +4114,7 @@ EXTERN_C const IID IID_ICspInformation;
+             /* [retval][out] */ __RPC__out LONG *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [retval][out] */ __RPC__out X509ProviderType *pValue) = 0;
+@@ -4129,7 +4130,7 @@ EXTERN_C const IID IID_ICspInformation;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetDefaultSecurityDescriptor( 
+             /* [in] */ VARIANT_BOOL MachineContext,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_LegacyCsp( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -4297,7 +4298,7 @@ EXTERN_C const IID IID_ICspInformation;
+         END_INTERFACE
+     } ICspInformationVtbl;
+ 
+-    interface ICspInformation
++    interface _Windows_SupportedOS_WindowsVista_ ICspInformation
+     {
+         CONST_VTBL struct ICspInformationVtbl *lpVtbl;
+     };
+@@ -4403,8 +4404,8 @@ EXTERN_C const IID IID_ICspInformations;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab308-217d-11da-b2a4-000e7bbb2b09")
+-    ICspInformations : public IDispatch
++    MIDL_INTERFACE("728ab308-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspInformations : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -4583,7 +4584,7 @@ EXTERN_C const IID IID_ICspInformations;
+         END_INTERFACE
+     } ICspInformationsVtbl;
+ 
+-    interface ICspInformations
++    interface _Windows_SupportedOS_WindowsVista_ ICspInformations
+     {
+         CONST_VTBL struct ICspInformationsVtbl *lpVtbl;
+     };
+@@ -4674,8 +4675,8 @@ EXTERN_C const IID IID_ICspStatus;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab309-217d-11da-b2a4-000e7bbb2b09")
+-    ICspStatus : public IDispatch
++    MIDL_INTERFACE("728ab309-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspStatus : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -4698,7 +4699,7 @@ EXTERN_C const IID IID_ICspStatus;
+             /* [retval][out] */ __RPC__deref_out_opt IX509EnrollmentStatus **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DisplayName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -4804,7 +4805,7 @@ EXTERN_C const IID IID_ICspStatus;
+         END_INTERFACE
+     } ICspStatusVtbl;
+ 
+-    interface ICspStatus
++    interface _Windows_SupportedOS_WindowsVista_ ICspStatus
+     {
+         CONST_VTBL struct ICspStatusVtbl *lpVtbl;
+     };
+@@ -4880,8 +4881,8 @@ EXTERN_C const IID IID_ICspStatuses;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30a-217d-11da-b2a4-000e7bbb2b09")
+-    ICspStatuses : public IDispatch
++    MIDL_INTERFACE("728ab30a-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICspStatuses : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -5046,7 +5047,7 @@ EXTERN_C const IID IID_ICspStatuses;
+         END_INTERFACE
+     } ICspStatusesVtbl;
+ 
+-    interface ICspStatuses
++    interface _Windows_SupportedOS_WindowsVista_ ICspStatuses
+     {
+         CONST_VTBL struct ICspStatusesVtbl *lpVtbl;
+     };
+@@ -5124,7 +5125,7 @@ EXTERN_C const IID IID_ICspStatuses;
+ /* [local] */ 
+ 
+ typedef 
+-enum KeyIdentifierHashAlgorithm
++enum   KeyIdentifierHashAlgorithm
+     {
+         SKIHashDefault	= 0,
+         SKIHashSha1	= 1,
+@@ -5149,8 +5150,8 @@ EXTERN_C const IID IID_IX509PublicKey;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30b-217d-11da-b2a4-000e7bbb2b09")
+-    IX509PublicKey : public IDispatch
++    MIDL_INTERFACE("728ab30b-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509PublicKey : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -5171,16 +5172,16 @@ EXTERN_C const IID IID_IX509PublicKey;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncodedKey( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncodedParameters( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ComputeKeyIdentifier( 
+             /* [in] */ KeyIdentifierHashAlgorithm Algorithm,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -5293,7 +5294,7 @@ EXTERN_C const IID IID_IX509PublicKey;
+         END_INTERFACE
+     } IX509PublicKeyVtbl;
+ 
+-    interface IX509PublicKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509PublicKey
+     {
+         CONST_VTBL struct IX509PublicKeyVtbl *lpVtbl;
+     };
+@@ -5362,7 +5363,7 @@ EXTERN_C const IID IID_IX509PublicKey;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509PrivateKeyExportFlags
++enum   X509PrivateKeyExportFlags
+     {
+         XCN_NCRYPT_ALLOW_EXPORT_NONE	= 0,
+         XCN_NCRYPT_ALLOW_EXPORT_FLAG	= 0x1,
+@@ -5372,7 +5373,7 @@ enum X509PrivateKeyExportFlags
+     } 	X509PrivateKeyExportFlags;
+ 
+ typedef 
+-enum X509PrivateKeyUsageFlags
++enum   X509PrivateKeyUsageFlags
+     {
+         XCN_NCRYPT_ALLOW_USAGES_NONE	= 0,
+         XCN_NCRYPT_ALLOW_DECRYPT_FLAG	= 0x1,
+@@ -5383,7 +5384,7 @@ enum X509PrivateKeyUsageFlags
+     } 	X509PrivateKeyUsageFlags;
+ 
+ typedef 
+-enum X509PrivateKeyProtection
++enum   X509PrivateKeyProtection
+     {
+         XCN_NCRYPT_UI_NO_PROTECTION_FLAG	= 0,
+         XCN_NCRYPT_UI_PROTECT_KEY_FLAG	= 0x1,
+@@ -5393,7 +5394,7 @@ enum X509PrivateKeyProtection
+     } 	X509PrivateKeyProtection;
+ 
+ typedef 
+-enum X509PrivateKeyVerify
++enum   X509PrivateKeyVerify
+     {
+         VerifyNone	= 0,
+         VerifySilent	= 1,
+@@ -5418,8 +5419,8 @@ EXTERN_C const IID IID_IX509PrivateKey;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30c-217d-11da-b2a4-000e7bbb2b09")
+-    IX509PrivateKey : public IDispatch
++    MIDL_INTERFACE("728ab30c-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509PrivateKey : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Open( void) = 0;
+@@ -5441,25 +5442,25 @@ EXTERN_C const IID IID_IX509PrivateKey;
+         virtual HRESULT STDMETHODCALLTYPE Export( 
+             /* [in] */ __RPC__in BSTR strExportType,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncodedKey) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEncodedKey) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ExportPublicKey( 
+             /* [retval][out] */ __RPC__deref_out_opt IX509PublicKey **ppPublicKey) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_ContainerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_ContainerName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ContainerNamePrefix( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ContainerNamePrefix( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ReaderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ReaderName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -5477,7 +5478,7 @@ EXTERN_C const IID IID_IX509PrivateKey;
+             /* [in] */ __RPC__in_opt ICspStatus *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_ProviderName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -5537,21 +5538,21 @@ EXTERN_C const IID IID_IX509PrivateKey;
+             /* [in] */ VARIANT_BOOL Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SecurityDescriptor( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SecurityDescriptor( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Certificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Certificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UniqueContainerName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Opened( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -5578,7 +5579,7 @@ EXTERN_C const IID IID_IX509PrivateKey;
+             /* [in] */ LONG Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UIContextMessage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_UIContextMessage( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -5587,13 +5588,13 @@ EXTERN_C const IID IID_IX509PrivateKey;
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_FriendlyName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Description( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -5958,7 +5959,7 @@ EXTERN_C const IID IID_IX509PrivateKey;
+         END_INTERFACE
+     } IX509PrivateKeyVtbl;
+ 
+-    interface IX509PrivateKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509PrivateKey
+     {
+         CONST_VTBL struct IX509PrivateKeyVtbl *lpVtbl;
+     };
+@@ -6226,20 +6227,20 @@ EXTERN_C const IID IID_IX509PrivateKey2;
+             /* [in] */ X509HardwareKeyUsageFlags Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AlternateStorageLocation( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AlternateStorageLocation( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_AlgorithmName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_AlgorithmName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AlgorithmParameters( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_AlgorithmParameters( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -6928,7 +6929,7 @@ EXTERN_C const IID IID_IX509EndorsementKey;
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ProviderName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -6951,7 +6952,7 @@ EXTERN_C const IID IID_IX509EndorsementKey;
+             /* [in] */ VARIANT_BOOL ManufacturerOnly,
+             /* [in] */ LONG dwIndex,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCertificateCount( 
+             /* [in] */ VARIANT_BOOL ManufacturerOnly,
+@@ -7179,8 +7180,8 @@ EXTERN_C const IID IID_IX509Extension;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30d-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Extension : public IDispatch
++    MIDL_INTERFACE("728ab30d-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509Extension : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -7193,7 +7194,7 @@ EXTERN_C const IID IID_IX509Extension;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Critical( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -7297,7 +7298,7 @@ EXTERN_C const IID IID_IX509Extension;
+         END_INTERFACE
+     } IX509ExtensionVtbl;
+ 
+-    interface IX509Extension
++    interface _Windows_SupportedOS_WindowsVista_ IX509Extension
+     {
+         CONST_VTBL struct IX509ExtensionVtbl *lpVtbl;
+     };
+@@ -7367,8 +7368,8 @@ EXTERN_C const IID IID_IX509Extensions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30e-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Extensions : public IDispatch
++    MIDL_INTERFACE("728ab30e-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509Extensions : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -7505,7 +7506,7 @@ EXTERN_C const IID IID_IX509Extensions;
+         END_INTERFACE
+     } IX509ExtensionsVtbl;
+ 
+-    interface IX509Extensions
++    interface _Windows_SupportedOS_WindowsVista_ IX509Extensions
+     {
+         CONST_VTBL struct IX509ExtensionsVtbl *lpVtbl;
+     };
+@@ -7577,7 +7578,7 @@ EXTERN_C const IID IID_IX509Extensions;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509KeyUsageFlags
++enum   X509KeyUsageFlags
+     {
+         XCN_CERT_NO_KEY_USAGE	= 0,
+         XCN_CERT_DIGITAL_SIGNATURE_KEY_USAGE	= 0x80,
+@@ -7608,8 +7609,8 @@ EXTERN_C const IID IID_IX509ExtensionKeyUsage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab30f-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionKeyUsage : public IX509Extension
++    MIDL_INTERFACE("728ab30f-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionKeyUsage : public IX509Extension
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -7734,7 +7735,7 @@ EXTERN_C const IID IID_IX509ExtensionKeyUsage;
+         END_INTERFACE
+     } IX509ExtensionKeyUsageVtbl;
+ 
+-    interface IX509ExtensionKeyUsage
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionKeyUsage
+     {
+         CONST_VTBL struct IX509ExtensionKeyUsageVtbl *lpVtbl;
+     };
+@@ -7814,8 +7815,8 @@ EXTERN_C const IID IID_IX509ExtensionEnhancedKeyUsage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab310-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionEnhancedKeyUsage : public IX509Extension
++    MIDL_INTERFACE("728ab310-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionEnhancedKeyUsage : public IX509Extension
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -7940,7 +7941,7 @@ EXTERN_C const IID IID_IX509ExtensionEnhancedKeyUsage;
+         END_INTERFACE
+     } IX509ExtensionEnhancedKeyUsageVtbl;
+ 
+-    interface IX509ExtensionEnhancedKeyUsage
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionEnhancedKeyUsage
+     {
+         CONST_VTBL struct IX509ExtensionEnhancedKeyUsageVtbl *lpVtbl;
+     };
+@@ -8020,8 +8021,8 @@ EXTERN_C const IID IID_IX509ExtensionTemplateName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab311-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionTemplateName : public IX509Extension
++    MIDL_INTERFACE("728ab311-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionTemplateName : public IX509Extension
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -8032,7 +8033,7 @@ EXTERN_C const IID IID_IX509ExtensionTemplateName;
+             /* [in] */ __RPC__in BSTR strEncodedData) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TemplateName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -8146,7 +8147,7 @@ EXTERN_C const IID IID_IX509ExtensionTemplateName;
+         END_INTERFACE
+     } IX509ExtensionTemplateNameVtbl;
+ 
+-    interface IX509ExtensionTemplateName
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionTemplateName
+     {
+         CONST_VTBL struct IX509ExtensionTemplateNameVtbl *lpVtbl;
+     };
+@@ -8226,8 +8227,8 @@ EXTERN_C const IID IID_IX509ExtensionTemplate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab312-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionTemplate : public IX509Extension
++    MIDL_INTERFACE("728ab312-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionTemplate : public IX509Extension
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -8372,7 +8373,7 @@ EXTERN_C const IID IID_IX509ExtensionTemplate;
+         END_INTERFACE
+     } IX509ExtensionTemplateVtbl;
+ 
+-    interface IX509ExtensionTemplate
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionTemplate
+     {
+         CONST_VTBL struct IX509ExtensionTemplateVtbl *lpVtbl;
+     };
+@@ -8451,7 +8452,7 @@ EXTERN_C const IID IID_IX509ExtensionTemplate;
+ /* [local] */ 
+ 
+ typedef 
+-enum AlternativeNameType
++enum   AlternativeNameType
+     {
+         XCN_CERT_ALT_NAME_UNKNOWN	= 0,
+         XCN_CERT_ALT_NAME_OTHER_NAME	= 1,
+@@ -8483,8 +8484,8 @@ EXTERN_C const IID IID_IAlternativeName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab313-217d-11da-b2a4-000e7bbb2b09")
+-    IAlternativeName : public IDispatch
++    MIDL_INTERFACE("728ab313-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IAlternativeName : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromString( 
+@@ -8506,14 +8507,14 @@ EXTERN_C const IID IID_IAlternativeName;
+             /* [retval][out] */ __RPC__out AlternativeNameType *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_StrValue( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ObjectId( 
+             /* [retval][out] */ __RPC__deref_out_opt IObjectId **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -8625,7 +8626,7 @@ EXTERN_C const IID IID_IAlternativeName;
+         END_INTERFACE
+     } IAlternativeNameVtbl;
+ 
+-    interface IAlternativeName
++    interface _Windows_SupportedOS_WindowsVista_ IAlternativeName
+     {
+         CONST_VTBL struct IAlternativeNameVtbl *lpVtbl;
+     };
+@@ -8701,8 +8702,8 @@ EXTERN_C const IID IID_IAlternativeNames;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab314-217d-11da-b2a4-000e7bbb2b09")
+-    IAlternativeNames : public IDispatch
++    MIDL_INTERFACE("728ab314-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IAlternativeNames : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -8821,7 +8822,7 @@ EXTERN_C const IID IID_IAlternativeNames;
+         END_INTERFACE
+     } IAlternativeNamesVtbl;
+ 
+-    interface IAlternativeNames
++    interface _Windows_SupportedOS_WindowsVista_ IAlternativeNames
+     {
+         CONST_VTBL struct IAlternativeNamesVtbl *lpVtbl;
+     };
+@@ -8894,8 +8895,8 @@ EXTERN_C const IID IID_IX509ExtensionAlternativeNames;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab315-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionAlternativeNames : public IX509Extension
++    MIDL_INTERFACE("728ab315-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionAlternativeNames : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -9020,7 +9021,7 @@ EXTERN_C const IID IID_IX509ExtensionAlternativeNames;
+         END_INTERFACE
+     } IX509ExtensionAlternativeNamesVtbl;
+ 
+-    interface IX509ExtensionAlternativeNames
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionAlternativeNames
+     {
+         CONST_VTBL struct IX509ExtensionAlternativeNamesVtbl *lpVtbl;
+     };
+@@ -9100,8 +9101,8 @@ EXTERN_C const IID IID_IX509ExtensionBasicConstraints;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab316-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionBasicConstraints : public IX509Extension
++    MIDL_INTERFACE("728ab316-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionBasicConstraints : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -9236,7 +9237,7 @@ EXTERN_C const IID IID_IX509ExtensionBasicConstraints;
+         END_INTERFACE
+     } IX509ExtensionBasicConstraintsVtbl;
+ 
+-    interface IX509ExtensionBasicConstraints
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionBasicConstraints
+     {
+         CONST_VTBL struct IX509ExtensionBasicConstraintsVtbl *lpVtbl;
+     };
+@@ -9319,8 +9320,8 @@ EXTERN_C const IID IID_IX509ExtensionSubjectKeyIdentifier;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab317-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionSubjectKeyIdentifier : public IX509Extension
++    MIDL_INTERFACE("728ab317-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionSubjectKeyIdentifier : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -9333,7 +9334,7 @@ EXTERN_C const IID IID_IX509ExtensionSubjectKeyIdentifier;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SubjectKeyIdentifier( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -9449,7 +9450,7 @@ EXTERN_C const IID IID_IX509ExtensionSubjectKeyIdentifier;
+         END_INTERFACE
+     } IX509ExtensionSubjectKeyIdentifierVtbl;
+ 
+-    interface IX509ExtensionSubjectKeyIdentifier
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionSubjectKeyIdentifier
+     {
+         CONST_VTBL struct IX509ExtensionSubjectKeyIdentifierVtbl *lpVtbl;
+     };
+@@ -9529,8 +9530,8 @@ EXTERN_C const IID IID_IX509ExtensionAuthorityKeyIdentifier;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab318-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionAuthorityKeyIdentifier : public IX509Extension
++    MIDL_INTERFACE("728ab318-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionAuthorityKeyIdentifier : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -9543,7 +9544,7 @@ EXTERN_C const IID IID_IX509ExtensionAuthorityKeyIdentifier;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_AuthorityKeyIdentifier( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -9659,7 +9660,7 @@ EXTERN_C const IID IID_IX509ExtensionAuthorityKeyIdentifier;
+         END_INTERFACE
+     } IX509ExtensionAuthorityKeyIdentifierVtbl;
+ 
+-    interface IX509ExtensionAuthorityKeyIdentifier
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionAuthorityKeyIdentifier
+     {
+         CONST_VTBL struct IX509ExtensionAuthorityKeyIdentifierVtbl *lpVtbl;
+     };
+@@ -9739,8 +9740,8 @@ EXTERN_C const IID IID_ISmimeCapability;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab319-217d-11da-b2a4-000e7bbb2b09")
+-    ISmimeCapability : public IDispatch
++    MIDL_INTERFACE("728ab319-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ISmimeCapability : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -9837,7 +9838,7 @@ EXTERN_C const IID IID_ISmimeCapability;
+         END_INTERFACE
+     } ISmimeCapabilityVtbl;
+ 
+-    interface ISmimeCapability
++    interface _Windows_SupportedOS_WindowsVista_ ISmimeCapability
+     {
+         CONST_VTBL struct ISmimeCapabilityVtbl *lpVtbl;
+     };
+@@ -9901,8 +9902,8 @@ EXTERN_C const IID IID_ISmimeCapabilities;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31a-217d-11da-b2a4-000e7bbb2b09")
+-    ISmimeCapabilities : public IDispatch
++    MIDL_INTERFACE("728ab31a-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ISmimeCapabilities : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -10037,7 +10038,7 @@ EXTERN_C const IID IID_ISmimeCapabilities;
+         END_INTERFACE
+     } ISmimeCapabilitiesVtbl;
+ 
+-    interface ISmimeCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ ISmimeCapabilities
+     {
+         CONST_VTBL struct ISmimeCapabilitiesVtbl *lpVtbl;
+     };
+@@ -10116,8 +10117,8 @@ EXTERN_C const IID IID_IX509ExtensionSmimeCapabilities;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31b-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionSmimeCapabilities : public IX509Extension
++    MIDL_INTERFACE("728ab31b-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionSmimeCapabilities : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -10242,7 +10243,7 @@ EXTERN_C const IID IID_IX509ExtensionSmimeCapabilities;
+         END_INTERFACE
+     } IX509ExtensionSmimeCapabilitiesVtbl;
+ 
+-    interface IX509ExtensionSmimeCapabilities
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionSmimeCapabilities
+     {
+         CONST_VTBL struct IX509ExtensionSmimeCapabilitiesVtbl *lpVtbl;
+     };
+@@ -10315,7 +10316,7 @@ EXTERN_C const IID IID_IX509ExtensionSmimeCapabilities;
+ /* [local] */ 
+ 
+ typedef 
+-enum PolicyQualifierType
++enum   PolicyQualifierType
+     {
+         PolicyQualifierTypeUnknown	= 0,
+         PolicyQualifierTypeUrl	= 1,
+@@ -10339,8 +10340,8 @@ EXTERN_C const IID IID_IPolicyQualifier;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31c-217d-11da-b2a4-000e7bbb2b09")
+-    IPolicyQualifier : public IDispatch
++    MIDL_INTERFACE("728ab31c-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IPolicyQualifier : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -10351,14 +10352,14 @@ EXTERN_C const IID IID_IPolicyQualifier;
+             /* [retval][out] */ __RPC__deref_out_opt IObjectId **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Qualifier( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Type( 
+             /* [retval][out] */ __RPC__out PolicyQualifierType *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -10455,7 +10456,7 @@ EXTERN_C const IID IID_IPolicyQualifier;
+         END_INTERFACE
+     } IPolicyQualifierVtbl;
+ 
+-    interface IPolicyQualifier
++    interface _Windows_SupportedOS_WindowsVista_ IPolicyQualifier
+     {
+         CONST_VTBL struct IPolicyQualifierVtbl *lpVtbl;
+     };
+@@ -10525,8 +10526,8 @@ EXTERN_C const IID IID_IPolicyQualifiers;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31d-217d-11da-b2a4-000e7bbb2b09")
+-    IPolicyQualifiers : public IDispatch
++    MIDL_INTERFACE("728ab31d-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IPolicyQualifiers : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -10645,7 +10646,7 @@ EXTERN_C const IID IID_IPolicyQualifiers;
+         END_INTERFACE
+     } IPolicyQualifiersVtbl;
+ 
+-    interface IPolicyQualifiers
++    interface _Windows_SupportedOS_WindowsVista_ IPolicyQualifiers
+     {
+         CONST_VTBL struct IPolicyQualifiersVtbl *lpVtbl;
+     };
+@@ -10718,8 +10719,8 @@ EXTERN_C const IID IID_ICertificatePolicy;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31e-217d-11da-b2a4-000e7bbb2b09")
+-    ICertificatePolicy : public IDispatch
++    MIDL_INTERFACE("728ab31e-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertificatePolicy : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -10814,7 +10815,7 @@ EXTERN_C const IID IID_ICertificatePolicy;
+         END_INTERFACE
+     } ICertificatePolicyVtbl;
+ 
+-    interface ICertificatePolicy
++    interface _Windows_SupportedOS_WindowsVista_ ICertificatePolicy
+     {
+         CONST_VTBL struct ICertificatePolicyVtbl *lpVtbl;
+     };
+@@ -10878,8 +10879,8 @@ EXTERN_C const IID IID_ICertificatePolicies;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab31f-217d-11da-b2a4-000e7bbb2b09")
+-    ICertificatePolicies : public IDispatch
++    MIDL_INTERFACE("728ab31f-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertificatePolicies : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -10998,7 +10999,7 @@ EXTERN_C const IID IID_ICertificatePolicies;
+         END_INTERFACE
+     } ICertificatePoliciesVtbl;
+ 
+-    interface ICertificatePolicies
++    interface _Windows_SupportedOS_WindowsVista_ ICertificatePolicies
+     {
+         CONST_VTBL struct ICertificatePoliciesVtbl *lpVtbl;
+     };
+@@ -11071,8 +11072,8 @@ EXTERN_C const IID IID_IX509ExtensionCertificatePolicies;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab320-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionCertificatePolicies : public IX509Extension
++    MIDL_INTERFACE("728ab320-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionCertificatePolicies : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -11197,7 +11198,7 @@ EXTERN_C const IID IID_IX509ExtensionCertificatePolicies;
+         END_INTERFACE
+     } IX509ExtensionCertificatePoliciesVtbl;
+ 
+-    interface IX509ExtensionCertificatePolicies
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionCertificatePolicies
+     {
+         CONST_VTBL struct IX509ExtensionCertificatePoliciesVtbl *lpVtbl;
+     };
+@@ -11277,8 +11278,8 @@ EXTERN_C const IID IID_IX509ExtensionMSApplicationPolicies;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab321-217d-11da-b2a4-000e7bbb2b09")
+-    IX509ExtensionMSApplicationPolicies : public IX509Extension
++    MIDL_INTERFACE("728ab321-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509ExtensionMSApplicationPolicies : public IX509Extension
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -11403,7 +11404,7 @@ EXTERN_C const IID IID_IX509ExtensionMSApplicationPolicies;
+         END_INTERFACE
+     } IX509ExtensionMSApplicationPoliciesVtbl;
+ 
+-    interface IX509ExtensionMSApplicationPolicies
++    interface _Windows_SupportedOS_WindowsVista_ IX509ExtensionMSApplicationPolicies
+     {
+         CONST_VTBL struct IX509ExtensionMSApplicationPoliciesVtbl *lpVtbl;
+     };
+@@ -11483,8 +11484,8 @@ EXTERN_C const IID IID_IX509Attribute;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab322-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Attribute : public IDispatch
++    MIDL_INTERFACE("728ab322-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509Attribute : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -11497,7 +11498,7 @@ EXTERN_C const IID IID_IX509Attribute;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -11585,7 +11586,7 @@ EXTERN_C const IID IID_IX509Attribute;
+         END_INTERFACE
+     } IX509AttributeVtbl;
+ 
+-    interface IX509Attribute
++    interface _Windows_SupportedOS_WindowsVista_ IX509Attribute
+     {
+         CONST_VTBL struct IX509AttributeVtbl *lpVtbl;
+     };
+@@ -11649,8 +11650,8 @@ EXTERN_C const IID IID_IX509Attributes;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab323-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Attributes : public IDispatch
++    MIDL_INTERFACE("728ab323-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509Attributes : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -11769,7 +11770,7 @@ EXTERN_C const IID IID_IX509Attributes;
+         END_INTERFACE
+     } IX509AttributesVtbl;
+ 
+-    interface IX509Attributes
++    interface _Windows_SupportedOS_WindowsVista_ IX509Attributes
+     {
+         CONST_VTBL struct IX509AttributesVtbl *lpVtbl;
+     };
+@@ -11842,8 +11843,8 @@ EXTERN_C const IID IID_IX509AttributeExtensions;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab324-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeExtensions : public IX509Attribute
++    MIDL_INTERFACE("728ab324-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeExtensions : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -11958,7 +11959,7 @@ EXTERN_C const IID IID_IX509AttributeExtensions;
+         END_INTERFACE
+     } IX509AttributeExtensionsVtbl;
+ 
+-    interface IX509AttributeExtensions
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeExtensions
+     {
+         CONST_VTBL struct IX509AttributeExtensionsVtbl *lpVtbl;
+     };
+@@ -12025,7 +12026,7 @@ EXTERN_C const IID IID_IX509AttributeExtensions;
+ /* [local] */ 
+ 
+ typedef 
+-enum RequestClientInfoClientId
++enum   RequestClientInfoClientId
+     {
+         ClientIdNone	= 0,
+         ClientIdXEnroll2003	= 1,
+@@ -12058,8 +12059,8 @@ EXTERN_C const IID IID_IX509AttributeClientId;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab325-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeClientId : public IX509Attribute
++    MIDL_INTERFACE("728ab325-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeClientId : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -12076,13 +12077,13 @@ EXTERN_C const IID IID_IX509AttributeClientId;
+             /* [retval][out] */ __RPC__out RequestClientInfoClientId *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_MachineDnsName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UserSamName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProcessName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -12204,7 +12205,7 @@ EXTERN_C const IID IID_IX509AttributeClientId;
+         END_INTERFACE
+     } IX509AttributeClientIdVtbl;
+ 
+-    interface IX509AttributeClientId
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeClientId
+     {
+         CONST_VTBL struct IX509AttributeClientIdVtbl *lpVtbl;
+     };
+@@ -12287,8 +12288,8 @@ EXTERN_C const IID IID_IX509AttributeRenewalCertificate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab326-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeRenewalCertificate : public IX509Attribute
++    MIDL_INTERFACE("728ab326-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeRenewalCertificate : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -12301,7 +12302,7 @@ EXTERN_C const IID IID_IX509AttributeRenewalCertificate;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RenewalCertificate( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -12407,7 +12408,7 @@ EXTERN_C const IID IID_IX509AttributeRenewalCertificate;
+         END_INTERFACE
+     } IX509AttributeRenewalCertificateVtbl;
+ 
+-    interface IX509AttributeRenewalCertificate
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeRenewalCertificate
+     {
+         CONST_VTBL struct IX509AttributeRenewalCertificateVtbl *lpVtbl;
+     };
+@@ -12481,8 +12482,8 @@ EXTERN_C const IID IID_IX509AttributeArchiveKey;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab327-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeArchiveKey : public IX509Attribute
++    MIDL_INTERFACE("728ab327-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeArchiveKey : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -12498,7 +12499,7 @@ EXTERN_C const IID IID_IX509AttributeArchiveKey;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncryptedKeyBlob( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncryptionAlgorithm( 
+             /* [retval][out] */ __RPC__deref_out_opt IObjectId **ppValue) = 0;
+@@ -12623,7 +12624,7 @@ EXTERN_C const IID IID_IX509AttributeArchiveKey;
+         END_INTERFACE
+     } IX509AttributeArchiveKeyVtbl;
+ 
+-    interface IX509AttributeArchiveKey
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeArchiveKey
+     {
+         CONST_VTBL struct IX509AttributeArchiveKeyVtbl *lpVtbl;
+     };
+@@ -12703,8 +12704,8 @@ EXTERN_C const IID IID_IX509AttributeArchiveKeyHash;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab328-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeArchiveKeyHash : public IX509Attribute
++    MIDL_INTERFACE("728ab328-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeArchiveKeyHash : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncodeFromEncryptedKeyBlob( 
+@@ -12717,7 +12718,7 @@ EXTERN_C const IID IID_IX509AttributeArchiveKeyHash;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncryptedKeyHashBlob( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -12823,7 +12824,7 @@ EXTERN_C const IID IID_IX509AttributeArchiveKeyHash;
+         END_INTERFACE
+     } IX509AttributeArchiveKeyHashVtbl;
+ 
+-    interface IX509AttributeArchiveKeyHash
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeArchiveKeyHash
+     {
+         CONST_VTBL struct IX509AttributeArchiveKeyHashVtbl *lpVtbl;
+     };
+@@ -12897,8 +12898,8 @@ EXTERN_C const IID IID_IX509AttributeOSVersion;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32a-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeOSVersion : public IX509Attribute
++    MIDL_INTERFACE("728ab32a-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeOSVersion : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -12909,7 +12910,7 @@ EXTERN_C const IID IID_IX509AttributeOSVersion;
+             /* [in] */ __RPC__in BSTR strEncodedData) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_OSVersion( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -13013,7 +13014,7 @@ EXTERN_C const IID IID_IX509AttributeOSVersion;
+         END_INTERFACE
+     } IX509AttributeOSVersionVtbl;
+ 
+-    interface IX509AttributeOSVersion
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeOSVersion
+     {
+         CONST_VTBL struct IX509AttributeOSVersionVtbl *lpVtbl;
+     };
+@@ -13087,8 +13088,8 @@ EXTERN_C const IID IID_IX509AttributeCspProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32b-217d-11da-b2a4-000e7bbb2b09")
+-    IX509AttributeCspProvider : public IX509Attribute
++    MIDL_INTERFACE("728ab32b-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509AttributeCspProvider : public IX509Attribute
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeEncode( 
+@@ -13105,11 +13106,11 @@ EXTERN_C const IID IID_IX509AttributeCspProvider;
+             /* [retval][out] */ __RPC__out X509KeySpec *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ProviderName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Signature( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -13227,7 +13228,7 @@ EXTERN_C const IID IID_IX509AttributeCspProvider;
+         END_INTERFACE
+     } IX509AttributeCspProviderVtbl;
+ 
+-    interface IX509AttributeCspProvider
++    interface _Windows_SupportedOS_WindowsVista_ IX509AttributeCspProvider
+     {
+         CONST_VTBL struct IX509AttributeCspProviderVtbl *lpVtbl;
+     };
+@@ -13307,8 +13308,8 @@ EXTERN_C const IID IID_ICryptAttribute;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32c-217d-11da-b2a4-000e7bbb2b09")
+-    ICryptAttribute : public IDispatch
++    MIDL_INTERFACE("728ab32c-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICryptAttribute : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromObjectId( 
+@@ -13411,7 +13412,7 @@ EXTERN_C const IID IID_ICryptAttribute;
+         END_INTERFACE
+     } ICryptAttributeVtbl;
+ 
+-    interface ICryptAttribute
++    interface _Windows_SupportedOS_WindowsVista_ ICryptAttribute
+     {
+         CONST_VTBL struct ICryptAttributeVtbl *lpVtbl;
+     };
+@@ -13478,8 +13479,8 @@ EXTERN_C const IID IID_ICryptAttributes;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32d-217d-11da-b2a4-000e7bbb2b09")
+-    ICryptAttributes : public IDispatch
++    MIDL_INTERFACE("728ab32d-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICryptAttributes : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -13616,7 +13617,7 @@ EXTERN_C const IID IID_ICryptAttributes;
+         END_INTERFACE
+     } ICryptAttributesVtbl;
+ 
+-    interface ICryptAttributes
++    interface _Windows_SupportedOS_WindowsVista_ ICryptAttributes
+     {
+         CONST_VTBL struct ICryptAttributesVtbl *lpVtbl;
+     };
+@@ -13688,7 +13689,7 @@ EXTERN_C const IID IID_ICryptAttributes;
+ /* [local] */ 
+ 
+ typedef 
+-enum CERTENROLL_PROPERTYID
++enum   CERTENROLL_PROPERTYID
+     {
+         XCN_PROPERTYID_NONE	= 0,
+         XCN_CERT_KEY_PROV_HANDLE_PROP_ID	= 1,
+@@ -13808,8 +13809,8 @@ EXTERN_C const IID IID_ICertProperty;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32e-217d-11da-b2a4-000e7bbb2b09")
+-    ICertProperty : public IDispatch
++    MIDL_INTERFACE("728ab32e-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertProperty : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromCertificate( 
+@@ -13829,7 +13830,7 @@ EXTERN_C const IID IID_ICertProperty;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RemoveFromCertificate( 
+             /* [in] */ VARIANT_BOOL MachineContext,
+@@ -13952,7 +13953,7 @@ EXTERN_C const IID IID_ICertProperty;
+         END_INTERFACE
+     } ICertPropertyVtbl;
+ 
+-    interface ICertProperty
++    interface _Windows_SupportedOS_WindowsVista_ ICertProperty
+     {
+         CONST_VTBL struct ICertPropertyVtbl *lpVtbl;
+     };
+@@ -14028,8 +14029,8 @@ EXTERN_C const IID IID_ICertProperties;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab32f-217d-11da-b2a4-000e7bbb2b09")
+-    ICertProperties : public IDispatch
++    MIDL_INTERFACE("728ab32f-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertProperties : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -14160,7 +14161,7 @@ EXTERN_C const IID IID_ICertProperties;
+         END_INTERFACE
+     } ICertPropertiesVtbl;
+ 
+-    interface ICertProperties
++    interface _Windows_SupportedOS_WindowsVista_ ICertProperties
+     {
+         CONST_VTBL struct ICertPropertiesVtbl *lpVtbl;
+     };
+@@ -14236,15 +14237,15 @@ EXTERN_C const IID IID_ICertPropertyFriendlyName;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab330-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyFriendlyName : public ICertProperty
++    MIDL_INTERFACE("728ab330-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyFriendlyName : public ICertProperty
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [in] */ __RPC__in BSTR strFriendlyName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -14367,7 +14368,7 @@ EXTERN_C const IID IID_ICertPropertyFriendlyName;
+         END_INTERFACE
+     } ICertPropertyFriendlyNameVtbl;
+ 
+-    interface ICertPropertyFriendlyName
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyFriendlyName
+     {
+         CONST_VTBL struct ICertPropertyFriendlyNameVtbl *lpVtbl;
+     };
+@@ -14450,15 +14451,15 @@ EXTERN_C const IID IID_ICertPropertyDescription;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab331-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyDescription : public ICertProperty
++    MIDL_INTERFACE("728ab331-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyDescription : public ICertProperty
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [in] */ __RPC__in BSTR strDescription) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Description( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -14581,7 +14582,7 @@ EXTERN_C const IID IID_ICertPropertyDescription;
+         END_INTERFACE
+     } ICertPropertyDescriptionVtbl;
+ 
+-    interface ICertPropertyDescription
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyDescription
+     {
+         CONST_VTBL struct ICertPropertyDescriptionVtbl *lpVtbl;
+     };
+@@ -14664,15 +14665,15 @@ EXTERN_C const IID IID_ICertPropertyAutoEnroll;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab332-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyAutoEnroll : public ICertProperty
++    MIDL_INTERFACE("728ab332-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyAutoEnroll : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [in] */ __RPC__in BSTR strTemplateName) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TemplateName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -14795,7 +14796,7 @@ EXTERN_C const IID IID_ICertPropertyAutoEnroll;
+         END_INTERFACE
+     } ICertPropertyAutoEnrollVtbl;
+ 
+-    interface ICertPropertyAutoEnroll
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyAutoEnroll
+     {
+         CONST_VTBL struct ICertPropertyAutoEnrollVtbl *lpVtbl;
+     };
+@@ -14878,8 +14879,8 @@ EXTERN_C const IID IID_ICertPropertyRequestOriginator;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab333-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyRequestOriginator : public ICertProperty
++    MIDL_INTERFACE("728ab333-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyRequestOriginator : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -14888,7 +14889,7 @@ EXTERN_C const IID IID_ICertPropertyRequestOriginator;
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromLocalRequestOriginator( void) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestOriginator( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -15015,7 +15016,7 @@ EXTERN_C const IID IID_ICertPropertyRequestOriginator;
+         END_INTERFACE
+     } ICertPropertyRequestOriginatorVtbl;
+ 
+-    interface ICertPropertyRequestOriginator
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyRequestOriginator
+     {
+         CONST_VTBL struct ICertPropertyRequestOriginatorVtbl *lpVtbl;
+     };
+@@ -15101,8 +15102,8 @@ EXTERN_C const IID IID_ICertPropertySHA1Hash;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab334-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertySHA1Hash : public ICertProperty
++    MIDL_INTERFACE("728ab334-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertySHA1Hash : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -15111,7 +15112,7 @@ EXTERN_C const IID IID_ICertPropertySHA1Hash;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SHA1Hash( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -15236,7 +15237,7 @@ EXTERN_C const IID IID_ICertPropertySHA1Hash;
+         END_INTERFACE
+     } ICertPropertySHA1HashVtbl;
+ 
+-    interface ICertPropertySHA1Hash
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertySHA1Hash
+     {
+         CONST_VTBL struct ICertPropertySHA1HashVtbl *lpVtbl;
+     };
+@@ -15319,8 +15320,8 @@ EXTERN_C const IID IID_ICertPropertyKeyProvInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab336-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyKeyProvInfo : public ICertProperty
++    MIDL_INTERFACE("728ab336-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyKeyProvInfo : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -15450,7 +15451,7 @@ EXTERN_C const IID IID_ICertPropertyKeyProvInfo;
+         END_INTERFACE
+     } ICertPropertyKeyProvInfoVtbl;
+ 
+-    interface ICertPropertyKeyProvInfo
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyKeyProvInfo
+     {
+         CONST_VTBL struct ICertPropertyKeyProvInfoVtbl *lpVtbl;
+     };
+@@ -15533,8 +15534,8 @@ EXTERN_C const IID IID_ICertPropertyArchived;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab337-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyArchived : public ICertProperty
++    MIDL_INTERFACE("728ab337-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyArchived : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -15664,7 +15665,7 @@ EXTERN_C const IID IID_ICertPropertyArchived;
+         END_INTERFACE
+     } ICertPropertyArchivedVtbl;
+ 
+-    interface ICertPropertyArchived
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyArchived
+     {
+         CONST_VTBL struct ICertPropertyArchivedVtbl *lpVtbl;
+     };
+@@ -15747,8 +15748,8 @@ EXTERN_C const IID IID_ICertPropertyBackedUp;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab338-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyBackedUp : public ICertProperty
++    MIDL_INTERFACE("728ab338-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyBackedUp : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromCurrentTime( 
+@@ -15896,7 +15897,7 @@ EXTERN_C const IID IID_ICertPropertyBackedUp;
+         END_INTERFACE
+     } ICertPropertyBackedUpVtbl;
+ 
+-    interface ICertPropertyBackedUp
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyBackedUp
+     {
+         CONST_VTBL struct ICertPropertyBackedUpVtbl *lpVtbl;
+     };
+@@ -15985,8 +15986,8 @@ EXTERN_C const IID IID_ICertPropertyEnrollment;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab339-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyEnrollment : public ICertProperty
++    MIDL_INTERFACE("728ab339-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyEnrollment : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -15999,13 +16000,13 @@ EXTERN_C const IID IID_ICertPropertyEnrollment;
+             /* [retval][out] */ __RPC__out LONG *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CADnsName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_FriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -16146,7 +16147,7 @@ EXTERN_C const IID IID_ICertPropertyEnrollment;
+         END_INTERFACE
+     } ICertPropertyEnrollmentVtbl;
+ 
+-    interface ICertPropertyEnrollment
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyEnrollment
+     {
+         CONST_VTBL struct ICertPropertyEnrollmentVtbl *lpVtbl;
+     };
+@@ -16238,8 +16239,8 @@ EXTERN_C const IID IID_ICertPropertyRenewal;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33a-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyRenewal : public ICertProperty
++    MIDL_INTERFACE("728ab33a-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyRenewal : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -16253,7 +16254,7 @@ EXTERN_C const IID IID_ICertPropertyRenewal;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Renewal( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -16385,7 +16386,7 @@ EXTERN_C const IID IID_ICertPropertyRenewal;
+         END_INTERFACE
+     } ICertPropertyRenewalVtbl;
+ 
+-    interface ICertPropertyRenewal
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyRenewal
+     {
+         CONST_VTBL struct ICertPropertyRenewalVtbl *lpVtbl;
+     };
+@@ -16471,8 +16472,8 @@ EXTERN_C const IID IID_ICertPropertyArchivedKeyHash;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33b-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyArchivedKeyHash : public ICertProperty
++    MIDL_INTERFACE("728ab33b-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ICertPropertyArchivedKeyHash : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -16481,7 +16482,7 @@ EXTERN_C const IID IID_ICertPropertyArchivedKeyHash;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ArchivedKeyHash( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -16606,7 +16607,7 @@ EXTERN_C const IID IID_ICertPropertyArchivedKeyHash;
+         END_INTERFACE
+     } ICertPropertyArchivedKeyHashVtbl;
+ 
+-    interface ICertPropertyArchivedKeyHash
++    interface _Windows_SupportedOS_WindowsVista_ ICertPropertyArchivedKeyHash
+     {
+         CONST_VTBL struct ICertPropertyArchivedKeyHashVtbl *lpVtbl;
+     };
+@@ -16682,14 +16683,14 @@ EXTERN_C const IID IID_ICertPropertyArchivedKeyHash;
+ /* [local] */ 
+ 
+ typedef 
+-enum EnrollmentPolicyServerPropertyFlags
++enum  EnrollmentPolicyServerPropertyFlags
+     {
+         DefaultNone	= 0,
+         DefaultPolicyServer	= 0x1
+     } 	EnrollmentPolicyServerPropertyFlags;
+ 
+ typedef 
+-enum PolicyServerUrlFlags
++enum  PolicyServerUrlFlags
+     {
+         PsfNone	= 0,
+         PsfLocationGroupPolicy	= 1,
+@@ -16716,7 +16717,7 @@ EXTERN_C const IID IID_ICertPropertyEnrollmentPolicyServer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab34a-217d-11da-b2a4-000e7bbb2b09")
+-    ICertPropertyEnrollmentPolicyServer : public ICertProperty
++    _Windows_SupportedOS_Windows7_ ICertPropertyEnrollmentPolicyServer : public ICertProperty
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -16730,16 +16731,16 @@ EXTERN_C const IID IID_ICertPropertyEnrollmentPolicyServer;
+             /* [in] */ __RPC__in BSTR strEnrollmentServerUrl) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPolicyServerUrl( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPolicyServerId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetEnrollmentServerUrl( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetRequestIdString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPropertyFlags( 
+             /* [retval][out] */ __RPC__out EnrollmentPolicyServerPropertyFlags *pValue) = 0;
+@@ -16916,7 +16917,7 @@ EXTERN_C const IID IID_ICertPropertyEnrollmentPolicyServer;
+         END_INTERFACE
+     } ICertPropertyEnrollmentPolicyServerVtbl;
+ 
+-    interface ICertPropertyEnrollmentPolicyServer
++    interface _Windows_SupportedOS_Windows7_ ICertPropertyEnrollmentPolicyServer
+     {
+         CONST_VTBL struct ICertPropertyEnrollmentPolicyServerVtbl *lpVtbl;
+     };
+@@ -17020,8 +17021,8 @@ EXTERN_C const IID IID_IX509SignatureInformation;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33c-217d-11da-b2a4-000e7bbb2b09")
+-    IX509SignatureInformation : public IDispatch
++    MIDL_INTERFACE("728ab33c-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509SignatureInformation : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_HashAlgorithm( 
+@@ -17038,7 +17039,7 @@ EXTERN_C const IID IID_IX509SignatureInformation;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Parameters( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Parameters( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -17202,7 +17203,7 @@ EXTERN_C const IID IID_IX509SignatureInformation;
+         END_INTERFACE
+     } IX509SignatureInformationVtbl;
+ 
+-    interface IX509SignatureInformation
++    interface _Windows_SupportedOS_WindowsVista_ IX509SignatureInformation
+     {
+         CONST_VTBL struct IX509SignatureInformationVtbl *lpVtbl;
+     };
+@@ -17296,8 +17297,8 @@ EXTERN_C const IID IID_ISignerCertificate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33d-217d-11da-b2a4-000e7bbb2b09")
+-    ISignerCertificate : public IDispatch
++    MIDL_INTERFACE("728ab33d-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ISignerCertificate : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -17308,7 +17309,7 @@ EXTERN_C const IID IID_ISignerCertificate;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Certificate( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_PrivateKey( 
+             /* [retval][out] */ __RPC__deref_out_opt IX509PrivateKey **ppValue) = 0;
+@@ -17326,7 +17327,7 @@ EXTERN_C const IID IID_ISignerCertificate;
+             /* [in] */ LONG Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UIContextMessage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_UIContextMessage( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -17464,7 +17465,7 @@ EXTERN_C const IID IID_ISignerCertificate;
+         END_INTERFACE
+     } ISignerCertificateVtbl;
+ 
+-    interface ISignerCertificate
++    interface _Windows_SupportedOS_WindowsVista_ ISignerCertificate
+     {
+         CONST_VTBL struct ISignerCertificateVtbl *lpVtbl;
+     };
+@@ -17552,8 +17553,8 @@ EXTERN_C const IID IID_ISignerCertificates;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33e-217d-11da-b2a4-000e7bbb2b09")
+-    ISignerCertificates : public IDispatch
++    MIDL_INTERFACE("728ab33e-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      ISignerCertificates : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget][custom] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -17682,7 +17683,7 @@ EXTERN_C const IID IID_ISignerCertificates;
+         END_INTERFACE
+     } ISignerCertificatesVtbl;
+ 
+-    interface ISignerCertificates
++    interface _Windows_SupportedOS_WindowsVista_ ISignerCertificates
+     {
+         CONST_VTBL struct ISignerCertificatesVtbl *lpVtbl;
+     };
+@@ -17758,8 +17759,8 @@ EXTERN_C const IID IID_IX509NameValuePair;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab33f-217d-11da-b2a4-000e7bbb2b09")
+-    IX509NameValuePair : public IDispatch
++    MIDL_INTERFACE("728ab33f-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509NameValuePair : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -17767,10 +17768,10 @@ EXTERN_C const IID IID_IX509NameValuePair;
+             /* [in] */ __RPC__in BSTR strValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Value( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Name( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -17856,7 +17857,7 @@ EXTERN_C const IID IID_IX509NameValuePair;
+         END_INTERFACE
+     } IX509NameValuePairVtbl;
+ 
+-    interface IX509NameValuePair
++    interface _Windows_SupportedOS_WindowsVista_ IX509NameValuePair
+     {
+         CONST_VTBL struct IX509NameValuePairVtbl *lpVtbl;
+     };
+@@ -17920,8 +17921,8 @@ EXTERN_C const IID IID_IX509NameValuePairs;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab340-217d-11da-b2a4-000e7bbb2b09")
+-    IX509NameValuePairs : public IDispatch
++    MIDL_INTERFACE("728ab340-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509NameValuePairs : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -18040,7 +18041,7 @@ EXTERN_C const IID IID_IX509NameValuePairs;
+         END_INTERFACE
+     } IX509NameValuePairsVtbl;
+ 
+-    interface IX509NameValuePairs
++    interface _Windows_SupportedOS_WindowsVista_ IX509NameValuePairs
+     {
+         CONST_VTBL struct IX509NameValuePairsVtbl *lpVtbl;
+     };
+@@ -18106,7 +18107,7 @@ EXTERN_C const IID IID_IX509NameValuePairs;
+ /* [local] */ 
+ 
+ typedef 
+-enum EnrollmentTemplateProperty
++enum  EnrollmentTemplateProperty
+     {
+         TemplatePropCommonName	= 1,
+         TemplatePropFriendlyName	= 2,
+@@ -18158,7 +18159,7 @@ EXTERN_C const IID IID_IX509CertificateTemplate;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("54244A13-555A-4e22-896D-1B0E52F76406")
+-    IX509CertificateTemplate : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509CertificateTemplate : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Property( 
+@@ -18239,7 +18240,7 @@ EXTERN_C const IID IID_IX509CertificateTemplate;
+         END_INTERFACE
+     } IX509CertificateTemplateVtbl;
+ 
+-    interface IX509CertificateTemplate
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateTemplate
+     {
+         CONST_VTBL struct IX509CertificateTemplateVtbl *lpVtbl;
+     };
+@@ -18298,7 +18299,7 @@ EXTERN_C const IID IID_IX509CertificateTemplates;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("13b79003-2181-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateTemplates : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509CertificateTemplates : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -18437,7 +18438,7 @@ EXTERN_C const IID IID_IX509CertificateTemplates;
+         END_INTERFACE
+     } IX509CertificateTemplatesVtbl;
+ 
+-    interface IX509CertificateTemplates
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateTemplates
+     {
+         CONST_VTBL struct IX509CertificateTemplatesVtbl *lpVtbl;
+     };
+@@ -18509,7 +18510,7 @@ EXTERN_C const IID IID_IX509CertificateTemplates;
+ /* [local] */ 
+ 
+ typedef 
+-enum CommitTemplateFlags
++enum  CommitTemplateFlags
+     {
+         CommitFlagSaveTemplateGenerateOID	= 1,
+         CommitFlagSaveTemplateUseCurrentOID	= 2,
+@@ -18534,7 +18535,7 @@ EXTERN_C const IID IID_IX509CertificateTemplateWritable;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F49466A7-395A-4e9e-B6E7-32B331600DC0")
+-    IX509CertificateTemplateWritable : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509CertificateTemplateWritable : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -18651,7 +18652,7 @@ EXTERN_C const IID IID_IX509CertificateTemplateWritable;
+         END_INTERFACE
+     } IX509CertificateTemplateWritableVtbl;
+ 
+-    interface IX509CertificateTemplateWritable
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateTemplateWritable
+     {
+         CONST_VTBL struct IX509CertificateTemplateWritableVtbl *lpVtbl;
+     };
+@@ -18714,7 +18715,7 @@ EXTERN_C const IID IID_IX509CertificateTemplateWritable;
+ /* [local] */ 
+ 
+ typedef 
+-enum EnrollmentCAProperty
++enum  EnrollmentCAProperty
+     {
+         CAPropCommonName	= 1,
+         CAPropDistinguishedName	= 2,
+@@ -18747,7 +18748,7 @@ EXTERN_C const IID IID_ICertificationAuthority;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("835D1F61-1E95-4bc8-B4D3-976C42B968F7")
+-    ICertificationAuthority : public IDispatch
++    _Windows_SupportedOS_Windows7_ ICertificationAuthority : public IDispatch
+     {
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Property( 
+@@ -18828,7 +18829,7 @@ EXTERN_C const IID IID_ICertificationAuthority;
+         END_INTERFACE
+     } ICertificationAuthorityVtbl;
+ 
+-    interface ICertificationAuthority
++    interface _Windows_SupportedOS_Windows7_ ICertificationAuthority
+     {
+         CONST_VTBL struct ICertificationAuthorityVtbl *lpVtbl;
+     };
+@@ -18887,7 +18888,7 @@ EXTERN_C const IID IID_ICertificationAuthorities;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("13b79005-2181-11da-b2a4-000e7bbb2b09")
+-    ICertificationAuthorities : public IDispatch
++    _Windows_SupportedOS_Windows7_ ICertificationAuthorities : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -19022,7 +19023,7 @@ EXTERN_C const IID IID_ICertificationAuthorities;
+         END_INTERFACE
+     } ICertificationAuthoritiesVtbl;
+ 
+-    interface ICertificationAuthorities
++    interface _Windows_SupportedOS_Windows7_ ICertificationAuthorities
+     {
+         CONST_VTBL struct ICertificationAuthoritiesVtbl *lpVtbl;
+     };
+@@ -19094,7 +19095,7 @@ EXTERN_C const IID IID_ICertificationAuthorities;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509EnrollmentPolicyLoadOption
++enum  X509EnrollmentPolicyLoadOption
+     {
+         LoadOptionDefault	= 0,
+         LoadOptionCacheOnly	= 1,
+@@ -19103,20 +19104,20 @@ enum X509EnrollmentPolicyLoadOption
+     } 	X509EnrollmentPolicyLoadOption;
+ 
+ 
+-enum EnrollmentPolicyFlags
++enum  EnrollmentPolicyFlags
+     {
+         DisableGroupPolicyList	= 0x2,
+         DisableUserServerList	= 0x4
+     } ;
+ typedef 
+-enum PolicyServerUrlPropertyID
++enum  PolicyServerUrlPropertyID
+     {
+         PsPolicyID	= 0,
+         PsFriendlyName	= 1
+     } 	PolicyServerUrlPropertyID;
+ 
+ typedef 
+-enum X509EnrollmentPolicyExportFlags
++enum  X509EnrollmentPolicyExportFlags
+     {
+         ExportTemplates	= 0x1,
+         ExportOIDs	= 0x2,
+@@ -19140,7 +19141,7 @@ EXTERN_C const IID IID_IX509EnrollmentPolicyServer;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("13b79026-2181-11da-b2a4-000e7bbb2b09")
+-    IX509EnrollmentPolicyServer : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509EnrollmentPolicyServer : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -19175,13 +19176,13 @@ EXTERN_C const IID IID_IX509EnrollmentPolicyServer;
+             /* [retval][out] */ __RPC__out DATE *pDate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPolicyServerUrl( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetPolicyServerId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetFriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetIsDefaultCEP( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -19193,10 +19194,10 @@ EXTERN_C const IID IID_IX509EnrollmentPolicyServer;
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCachePath( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCacheDir( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetAuthFlags( 
+             /* [retval][out] */ __RPC__out X509EnrollmentAuthFlags *pValue) = 0;
+@@ -19419,7 +19420,7 @@ EXTERN_C const IID IID_IX509EnrollmentPolicyServer;
+         END_INTERFACE
+     } IX509EnrollmentPolicyServerVtbl;
+ 
+-    interface IX509EnrollmentPolicyServer
++    interface _Windows_SupportedOS_Windows7_ IX509EnrollmentPolicyServer
+     {
+         CONST_VTBL struct IX509EnrollmentPolicyServerVtbl *lpVtbl;
+     };
+@@ -19547,14 +19548,14 @@ EXTERN_C const IID IID_IX509PolicyServerUrl;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("884e204a-217d-11da-b2a4-000e7bbb2b09")
+-    IX509PolicyServerUrl : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509PolicyServerUrl : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [in] */ X509CertificateEnrollmentContext context) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Url( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ppValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_Url( 
+             /* [in] */ __RPC__in BSTR pValue) = 0;
+@@ -19585,7 +19586,7 @@ EXTERN_C const IID IID_IX509PolicyServerUrl;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetStringProperty( 
+             /* [in] */ PolicyServerUrlPropertyID propertyId,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *ppValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *ppValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE SetStringProperty( 
+             /* [in] */ PolicyServerUrlPropertyID propertyId,
+@@ -19742,7 +19743,7 @@ EXTERN_C const IID IID_IX509PolicyServerUrl;
+         END_INTERFACE
+     } IX509PolicyServerUrlVtbl;
+ 
+-    interface IX509PolicyServerUrl
++    interface _Windows_SupportedOS_Windows7_ IX509PolicyServerUrl
+     {
+         CONST_VTBL struct IX509PolicyServerUrlVtbl *lpVtbl;
+     };
+@@ -19842,8 +19843,8 @@ EXTERN_C const IID IID_IX509PolicyServerListManager;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("884e204b-217d-11da-b2a4-000e7bbb2b09")
+-    IX509PolicyServerListManager : public IDispatch
++    MIDL_INTERFACE("884e204b-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509PolicyServerListManager : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id][propget] */ HRESULT STDMETHODCALLTYPE get_ItemByIndex( 
+@@ -19972,7 +19973,7 @@ EXTERN_C const IID IID_IX509PolicyServerListManager;
+         END_INTERFACE
+     } IX509PolicyServerListManagerVtbl;
+ 
+-    interface IX509PolicyServerListManager
++    interface _Windows_SupportedOS_WindowsVista_ IX509PolicyServerListManager
+     {
+         CONST_VTBL struct IX509PolicyServerListManagerVtbl *lpVtbl;
+     };
+@@ -20041,7 +20042,7 @@ EXTERN_C const IID IID_IX509PolicyServerListManager;
+ /* [local] */ 
+ 
+ typedef 
+-enum X509RequestType
++enum   X509RequestType
+     {
+         TypeAny	= 0,
+         TypePkcs10	= 1,
+@@ -20051,7 +20052,7 @@ enum X509RequestType
+     } 	X509RequestType;
+ 
+ typedef 
+-enum X509RequestInheritOptions
++enum   X509RequestInheritOptions
+     {
+         InheritDefault	= 0,
+         InheritNewDefaultKey	= 0x1,
+@@ -20070,7 +20071,7 @@ enum X509RequestInheritOptions
+     } 	X509RequestInheritOptions;
+ 
+ typedef 
+-enum InnerRequestLevel
++enum   InnerRequestLevel
+     {
+         LevelInnermost	= 0,
+         LevelNext	= 1
+@@ -20092,8 +20093,8 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab341-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequest : public IDispatch
++    MIDL_INTERFACE("728ab341-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509CertificateRequest : public IDispatch
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -20126,7 +20127,7 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+             /* [in] */ LONG Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_UIContextMessage( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_UIContextMessage( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -20139,7 +20140,7 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RenewalCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_RenewalCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -20171,7 +20172,7 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -20368,7 +20369,7 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+         END_INTERFACE
+     } IX509CertificateRequestVtbl;
+ 
+-    interface IX509CertificateRequest
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequest
+     {
+         CONST_VTBL struct IX509CertificateRequestVtbl *lpVtbl;
+     };
+@@ -20491,7 +20492,7 @@ EXTERN_C const IID IID_IX509CertificateRequest;
+ /* [local] */ 
+ 
+ typedef 
+-enum Pkcs10AllowedSignatureTypes
++enum   Pkcs10AllowedSignatureTypes
+     {
+         AllowedKeySignature	= 0x1,
+         AllowedNullSignature	= 0x2
+@@ -20513,8 +20514,8 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab342-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestPkcs10 : public IX509CertificateRequest
++    MIDL_INTERFACE("728ab342-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509CertificateRequestPkcs10 : public IX509CertificateRequest
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplateName( 
+@@ -20564,7 +20565,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_OldCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_Subject( 
+             /* [retval][out] */ __RPC__deref_out_opt IX500DistinguishedName **ppValue) = 0;
+@@ -20585,7 +20586,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10;
+             /* [retval][out] */ __RPC__deref_out_opt IX509SignatureInformation **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_KeyContainerNamePrefix( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_KeyContainerNamePrefix( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -20604,11 +20605,11 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawDataToBeSigned( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Signature( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetCspStatuses( 
+             /* [in] */ X509KeySpec KeySpec,
+@@ -20962,7 +20963,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10;
+         END_INTERFACE
+     } IX509CertificateRequestPkcs10Vtbl;
+ 
+-    interface IX509CertificateRequestPkcs10
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestPkcs10
+     {
+         CONST_VTBL struct IX509CertificateRequestPkcs10Vtbl *lpVtbl;
+     };
+@@ -21178,7 +21179,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10V2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab35b-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestPkcs10V2 : public IX509CertificateRequestPkcs10
++    _Windows_SupportedOS_Windows7_ IX509CertificateRequestPkcs10V2 : public IX509CertificateRequestPkcs10
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplate( 
+@@ -21585,7 +21586,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10V2;
+         END_INTERFACE
+     } IX509CertificateRequestPkcs10V2Vtbl;
+ 
+-    interface IX509CertificateRequestPkcs10V2
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateRequestPkcs10V2
+     {
+         CONST_VTBL struct IX509CertificateRequestPkcs10V2Vtbl *lpVtbl;
+     };
+@@ -21828,7 +21829,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10V3;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_AttestationEncryptionCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_AttestationEncryptionCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -21847,7 +21848,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs10V3;
+             /* [in] */ LONG Value) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ChallengePassword( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ChallengePassword( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -23328,8 +23329,8 @@ EXTERN_C const IID IID_IX509CertificateRequestCertificate;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab343-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestCertificate : public IX509CertificateRequestPkcs10
++    MIDL_INTERFACE("728ab343-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509CertificateRequestCertificate : public IX509CertificateRequestPkcs10
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CheckPublicKeySignature( 
+@@ -23355,7 +23356,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCertificate;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SerialNumber( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SerialNumber( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -23772,7 +23773,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCertificate;
+         END_INTERFACE
+     } IX509CertificateRequestCertificateVtbl;
+ 
+-    interface IX509CertificateRequestCertificate
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestCertificate
+     {
+         CONST_VTBL struct IX509CertificateRequestCertificateVtbl *lpVtbl;
+     };
+@@ -24022,7 +24023,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCertificate2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab35a-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestCertificate2 : public IX509CertificateRequestCertificate
++    _Windows_SupportedOS_Windows7_ IX509CertificateRequestCertificate2 : public IX509CertificateRequestCertificate
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplate( 
+@@ -24472,7 +24473,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCertificate2;
+         END_INTERFACE
+     } IX509CertificateRequestCertificate2Vtbl;
+ 
+-    interface IX509CertificateRequestCertificate2
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateRequestCertificate2
+     {
+         CONST_VTBL struct IX509CertificateRequestCertificate2Vtbl *lpVtbl;
+     };
+@@ -24734,8 +24735,8 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs7;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab344-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestPkcs7 : public IX509CertificateRequest
++    MIDL_INTERFACE("728ab344-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509CertificateRequestPkcs7 : public IX509CertificateRequest
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplateName( 
+@@ -24757,7 +24758,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs7;
+             /* [defaultvalue][in] */ EncodingType Encoding = XCN_CRYPT_STRING_BASE64) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_RequesterName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_RequesterName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -25009,7 +25010,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs7;
+         END_INTERFACE
+     } IX509CertificateRequestPkcs7Vtbl;
+ 
+-    interface IX509CertificateRequestPkcs7
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestPkcs7
+     {
+         CONST_VTBL struct IX509CertificateRequestPkcs7Vtbl *lpVtbl;
+     };
+@@ -25165,7 +25166,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs7V2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab35c-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestPkcs7V2 : public IX509CertificateRequestPkcs7
++    _Windows_SupportedOS_Windows7_ IX509CertificateRequestPkcs7V2 : public IX509CertificateRequestPkcs7
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplate( 
+@@ -25445,7 +25446,7 @@ EXTERN_C const IID IID_IX509CertificateRequestPkcs7V2;
+         END_INTERFACE
+     } IX509CertificateRequestPkcs7V2Vtbl;
+ 
+-    interface IX509CertificateRequestPkcs7V2
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateRequestPkcs7V2
+     {
+         CONST_VTBL struct IX509CertificateRequestPkcs7V2Vtbl *lpVtbl;
+     };
+@@ -25613,8 +25614,8 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab345-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestCmc : public IX509CertificateRequestPkcs7
++    MIDL_INTERFACE("728ab345-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509CertificateRequestCmc : public IX509CertificateRequestPkcs7
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromInnerRequestTemplateName( 
+@@ -25650,7 +25651,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SenderNonce( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_SenderNonce( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -25667,7 +25668,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_KeyArchivalCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_KeyArchivalCertificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -25687,7 +25688,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_EncryptedKeyHash( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_SignerCertificates( 
+             /* [retval][out] */ __RPC__deref_out_opt ISignerCertificates **ppValue) = 0;
+@@ -26054,7 +26055,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc;
+         END_INTERFACE
+     } IX509CertificateRequestCmcVtbl;
+ 
+-    interface IX509CertificateRequestCmc
++    interface _Windows_SupportedOS_WindowsVista_ IX509CertificateRequestCmc
+     {
+         CONST_VTBL struct IX509CertificateRequestCmcVtbl *lpVtbl;
+     };
+@@ -26280,7 +26281,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab35d-217d-11da-b2a4-000e7bbb2b09")
+-    IX509CertificateRequestCmc2 : public IX509CertificateRequestCmc
++    _Windows_SupportedOS_Windows7_ IX509CertificateRequestCmc2 : public IX509CertificateRequestCmc
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplate( 
+@@ -26703,7 +26704,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc2;
+         END_INTERFACE
+     } IX509CertificateRequestCmc2Vtbl;
+ 
+-    interface IX509CertificateRequestCmc2
++    interface _Windows_SupportedOS_Windows7_ IX509CertificateRequestCmc2
+     {
+         CONST_VTBL struct IX509CertificateRequestCmc2Vtbl *lpVtbl;
+     };
+@@ -26940,7 +26941,7 @@ EXTERN_C const IID IID_IX509CertificateRequestCmc2;
+ /* [local] */ 
+ 
+ typedef 
+-enum InstallResponseRestrictionFlags
++enum   InstallResponseRestrictionFlags
+     {
+         AllowNone	= 0,
+         AllowNoOutstandingRequest	= 0x1,
+@@ -26964,8 +26965,8 @@ EXTERN_C const IID IID_IX509Enrollment;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab346-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Enrollment : public IDispatch
++    MIDL_INTERFACE("728ab346-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509Enrollment : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE Initialize( 
+@@ -26980,7 +26981,7 @@ EXTERN_C const IID IID_IX509Enrollment;
+         
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE CreateRequest( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Enroll( void) = 0;
+         
+@@ -26994,7 +26995,7 @@ EXTERN_C const IID IID_IX509Enrollment;
+             /* [in] */ __RPC__in BSTR strPassword,
+             /* [in] */ PFXExportOptions ExportOptions,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Request( 
+             /* [retval][out] */ __RPC__deref_out_opt IX509CertificateRequest **pValue) = 0;
+@@ -27022,20 +27023,20 @@ EXTERN_C const IID IID_IX509Enrollment;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Certificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Response( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_CertificateFriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_CertificateFriendlyName( 
+             /* [in] */ __RPC__in BSTR strValue) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_CertificateDescription( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [custom][propput] */ HRESULT STDMETHODCALLTYPE put_CertificateDescription( 
+             /* [in] */ __RPC__in BSTR strValue) = 0;
+@@ -27044,7 +27045,7 @@ EXTERN_C const IID IID_IX509Enrollment;
+             /* [retval][out] */ __RPC__out LONG *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CAConfigString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -27238,7 +27239,7 @@ EXTERN_C const IID IID_IX509Enrollment;
+         END_INTERFACE
+     } IX509EnrollmentVtbl;
+ 
+-    interface IX509Enrollment
++    interface _Windows_SupportedOS_WindowsVista_ IX509Enrollment
+     {
+         CONST_VTBL struct IX509EnrollmentVtbl *lpVtbl;
+     };
+@@ -27363,7 +27364,7 @@ EXTERN_C const IID IID_IX509Enrollment2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab350-217d-11da-b2a4-000e7bbb2b09")
+-    IX509Enrollment2 : public IX509Enrollment
++    _Windows_SupportedOS_Windows7_ IX509Enrollment2 : public IX509Enrollment
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE InitializeFromTemplate( 
+@@ -27388,7 +27389,7 @@ EXTERN_C const IID IID_IX509Enrollment2;
+             /* [retval][out] */ __RPC__deref_out_opt IX509CertificateTemplate **ppTemplate) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RequestIdString( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -27616,7 +27617,7 @@ EXTERN_C const IID IID_IX509Enrollment2;
+         END_INTERFACE
+     } IX509Enrollment2Vtbl;
+ 
+-    interface IX509Enrollment2
++    interface _Windows_SupportedOS_Windows7_ IX509Enrollment2
+     {
+         CONST_VTBL struct IX509Enrollment2Vtbl *lpVtbl;
+     };
+@@ -27749,7 +27750,7 @@ EXTERN_C const IID IID_IX509Enrollment2;
+ /* [local] */ 
+ 
+ typedef 
+-enum WebEnrollmentFlags
++enum  WebEnrollmentFlags
+     {
+         EnrollPrompt	= 0x1
+     } 	WebEnrollmentFlags;
+@@ -27771,7 +27772,7 @@ EXTERN_C const IID IID_IX509EnrollmentHelper;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab351-217d-11da-b2a4-000e7bbb2b09")
+-    IX509EnrollmentHelper : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509EnrollmentHelper : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE AddPolicyServer( 
+@@ -27793,7 +27794,7 @@ EXTERN_C const IID IID_IX509EnrollmentHelper;
+             /* [in] */ __RPC__in BSTR strTemplateName,
+             /* [in] */ EncodingType Encoding,
+             /* [in] */ WebEnrollmentFlags enrollFlags,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrCertificate) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE Initialize( 
+             /* [in] */ X509CertificateEnrollmentContext Context) = 0;
+@@ -27898,7 +27899,7 @@ EXTERN_C const IID IID_IX509EnrollmentHelper;
+         END_INTERFACE
+     } IX509EnrollmentHelperVtbl;
+ 
+-    interface IX509EnrollmentHelper
++    interface _Windows_SupportedOS_Windows7_ IX509EnrollmentHelper
+     {
+         CONST_VTBL struct IX509EnrollmentHelperVtbl *lpVtbl;
+     };
+@@ -27965,8 +27966,8 @@ EXTERN_C const IID IID_IX509EnrollmentWebClassFactory;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("728ab349-217d-11da-b2a4-000e7bbb2b09")
+-    IX509EnrollmentWebClassFactory : public IDispatch
++    MIDL_INTERFACE("728ab349-217d-11da-b2a4-000e7bbb2b09") _Windows_SupportedOS_WindowsVista_ 
++      IX509EnrollmentWebClassFactory : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE CreateObject( 
+@@ -28047,7 +28048,7 @@ EXTERN_C const IID IID_IX509EnrollmentWebClassFactory;
+         END_INTERFACE
+     } IX509EnrollmentWebClassFactoryVtbl;
+ 
+-    interface IX509EnrollmentWebClassFactory
++    interface _Windows_SupportedOS_WindowsVista_ IX509EnrollmentWebClassFactory
+     {
+         CONST_VTBL struct IX509EnrollmentWebClassFactoryVtbl *lpVtbl;
+     };
+@@ -28106,7 +28107,7 @@ EXTERN_C const IID IID_IX509MachineEnrollmentFactory;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("728ab352-217d-11da-b2a4-000e7bbb2b09")
+-    IX509MachineEnrollmentFactory : public IDispatch
++    _Windows_SupportedOS_Windows7_ IX509MachineEnrollmentFactory : public IDispatch
+     {
+     public:
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE CreateObject( 
+@@ -28187,7 +28188,7 @@ EXTERN_C const IID IID_IX509MachineEnrollmentFactory;
+         END_INTERFACE
+     } IX509MachineEnrollmentFactoryVtbl;
+ 
+-    interface IX509MachineEnrollmentFactory
++    interface _Windows_SupportedOS_Windows7_ IX509MachineEnrollmentFactory
+     {
+         CONST_VTBL struct IX509MachineEnrollmentFactoryVtbl *lpVtbl;
+     };
+@@ -28279,7 +28280,7 @@ EXTERN_C const IID IID_IX509CertificateRevocationListEntry;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_SerialNumber( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RevocationDate( 
+             /* [retval][out] */ __RPC__out DATE *pValue) = 0;
+@@ -28751,7 +28752,7 @@ EXTERN_C const IID IID_IX509CertificateRevocationList;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CRLNumber( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CRLNumber( 
+             /* [in] */ EncodingType Encoding,
+@@ -28786,15 +28787,15 @@ EXTERN_C const IID IID_IX509CertificateRevocationList;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawData( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_RawDataToBeSigned( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Signature( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -29179,10 +29180,10 @@ EXTERN_C const IID IID_ICertificateAttestationChallenge;
+         
+         virtual /* [custom] */ HRESULT STDMETHODCALLTYPE DecryptChallenge( 
+             /* [in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEnvelopedPkcs7ReencryptedToCA) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrEnvelopedPkcs7ReencryptedToCA) = 0;
+         
+         virtual /* [custom][propget] */ HRESULT STDMETHODCALLTYPE get_RequestID( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrRequestID) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pstrRequestID) = 0;
+         
+     };
+     
+@@ -29527,11 +29528,11 @@ EXTERN_C const IID IID_IX509SCEPEnrollment;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateRequestMessage( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateRetrievePendingMessage( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE CreateRetrieveCertificateMessage( 
+             /* [in] */ X509CertificateEnrollmentContext Context,
+@@ -29540,7 +29541,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollment;
+             /* [in] */ __RPC__in BSTR strSerialNumber,
+             /* [defaultvalue][in] */ EncodingType SerialNumberEncoding,
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ProcessResponseMessage( 
+             /* [in] */ __RPC__in BSTR strResponse,
+@@ -29567,7 +29568,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollment;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_TransactionId( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_TransactionId( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+@@ -29577,7 +29578,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollment;
+             /* [retval][out] */ __RPC__deref_out_opt IX509CertificateRequestPkcs10 **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_CertificateFriendlyName( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_CertificateFriendlyName( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -29587,7 +29588,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollment;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Certificate( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_Silent( 
+             /* [retval][out] */ __RPC__out VARIANT_BOOL *pValue) = 0;
+@@ -29944,7 +29945,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollment2;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE CreateChallengeAnswerMessage( 
+             /* [defaultvalue][in] */ EncodingType Encoding,
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE ProcessResponseMessage2( 
+             /* [in] */ X509SCEPProcessMessageFlags Flags,
+@@ -29953,13 +29954,13 @@ EXTERN_C const IID IID_IX509SCEPEnrollment2;
+             /* [retval][out] */ __RPC__out X509SCEPDisposition *pDisposition) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ResultMessageText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_DelayRetry( 
+             /* [retval][out] */ __RPC__out DelayRetryAction *pValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ActivityId( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_ActivityId( 
+             /* [in] */ __RPC__in BSTR Value) = 0;
+@@ -30360,7 +30361,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollmentHelper;
+             /* [retval][out] */ __RPC__deref_out_opt IX509SCEPEnrollment **ppValue) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_ResultMessageText( 
+-            /* [retval][out] */ __RPC__deref_out_opt BSTR *pValue) = 0;
++            /* [retval][out] */ _Win32_RAIIFree_(SysFreeString) __RPC__deref_out_opt BSTR *pValue) = 0;
+         
+     };
+     
+@@ -30538,7 +30539,7 @@ EXTERN_C const IID IID_IX509SCEPEnrollmentHelper;
+ /* [helpstring][version][uuid] */ 
+ 
+ typedef 
+-enum X509CertificateTemplateGeneralFlag
++enum  X509CertificateTemplateGeneralFlag
+     {
+         GeneralMachineType	= 0x40,
+         GeneralCA	= 0x80,
+@@ -30549,7 +30550,7 @@ enum X509CertificateTemplateGeneralFlag
+     } 	X509CertificateTemplateGeneralFlag;
+ 
+ typedef 
+-enum X509CertificateTemplateEnrollmentFlag
++enum  X509CertificateTemplateEnrollmentFlag
+     {
+         EnrollmentIncludeSymmetricAlgorithms	= 0x1,
+         EnrollmentPendAllRequests	= 0x2,
+@@ -30573,7 +30574,7 @@ enum X509CertificateTemplateEnrollmentFlag
+     } 	X509CertificateTemplateEnrollmentFlag;
+ 
+ typedef 
+-enum X509CertificateTemplateSubjectNameFlag
++enum  X509CertificateTemplateSubjectNameFlag
+     {
+         SubjectNameEnrolleeSupplies	= 0x1,
+         SubjectNameRequireDirectoryPath	= 0x80000000,
+@@ -30591,7 +30592,7 @@ enum X509CertificateTemplateSubjectNameFlag
+     } 	X509CertificateTemplateSubjectNameFlag;
+ 
+ typedef 
+-enum X509CertificateTemplatePrivateKeyFlag
++enum  X509CertificateTemplatePrivateKeyFlag
+     {
+         PrivateKeyRequireArchival	= 0x1,
+         PrivateKeyExportable	= 0x10,

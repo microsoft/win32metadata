@@ -1,0 +1,11 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/bugcodes.h b/generation/WinSDK/RecompiledIdlHeaders/shared/bugcodes.h
+index 35889c9f9b..97ee156a0c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/bugcodes.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/bugcodes.h
+@@ -4899,4 +4899,6 @@ Notes:
+ #define WINLOGON_FATAL_ERROR ((ULONG)0xC000021AL)
+ #define MANUALLY_INITIATED_CRASH1 ((ULONG)0xDEADDEAD)
+ #define BUGCHECK_CONTEXT_MODIFIER 0x80000000
++
++
+ #endif // _BUGCODES_

@@ -1,0 +1,252 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
+index f987975a89..68dd9028dd 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/clfs.h
+@@ -21,6 +21,7 @@
+ =============================================================================*/
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -153,7 +154,7 @@ typedef CLFS_CONTAINER_ID           **PPCLFS_CONTAINER_ID;
+ // CLS_LSN
+ //
+ 
+-typedef struct _CLS_LSN
++typedef struct  _CLS_LSN
+ {
+ 
+     ULONGLONG               Internal;
+@@ -332,7 +333,7 @@ typedef enum _CLS_CONTEXT_MODE
+ // Alias all CLS prefixes with CLFS prefixes.
+ //
+ 
+-typedef enum _CLFS_CONTEXT_MODE
++typedef enum  _CLFS_CONTEXT_MODE
+ {
+     ClfsContextNone = 0x00,
+     ClfsContextUndoNext,
+@@ -352,7 +353,7 @@ typedef enum _CLFS_CONTEXT_MODE
+ // field while the size is used in for consistency checking.
+ //
+ 
+-typedef struct _CLFS_NODE_ID
++typedef struct  _CLFS_NODE_ID
+ {
+     ULONG   cType;                                      // CLFS node type.
+     ULONG   cbNode;                                     // CLFS node size.
+@@ -369,7 +370,7 @@ typedef struct _CLFS_NODE_ID
+ // marshaled in the space reservation and append interface of the CLS API.
+ //
+ 
+-typedef struct _CLS_WRITE_ENTRY
++typedef struct  _CLS_WRITE_ENTRY
+ {
+     PVOID Buffer;
+     ULONG ByteLength;
+@@ -403,7 +404,7 @@ typedef GUID CLFS_LOG_ID;
+ // file data, depending on the type of information queried.
+ //
+ 
+-typedef struct _CLS_INFORMATION
++typedef struct  _CLS_INFORMATION
+ {
+     LONGLONG TotalAvailable;                            // Total log data space available.
+     LONGLONG CurrentAvailable;                          // Usable space in the log file.
+@@ -592,7 +593,7 @@ const ULONG CLFS_MAX_CONTAINER_INFO = (256);
+ // attributes, state, minimum, and maximum LSNs.
+ //
+ 
+-typedef struct _CLS_CONTAINER_INFORMATION
++typedef struct  _CLS_CONTAINER_INFORMATION
+ {
+     ULONG FileAttributes;                    // File system attribute flag.
+     ULONGLONG CreationTime;                  // File creation time.
+@@ -670,7 +671,7 @@ typedef enum _CLS_IOSTATS_CLASS
+ // Alias all CLS prefixes with CLFS prefixes.
+ //
+ 
+-typedef enum _CLFS_IOSTATS_CLASS
++typedef enum  _CLFS_IOSTATS_CLASS
+ {
+     ClfsIoStatsDefault = 0x0000,
+     ClfsIoStatsMax     = 0xFFFF
+@@ -688,7 +689,7 @@ typedef enum _CLFS_IOSTATS_CLASS
+ // now.
+ //
+ 
+-typedef struct _CLS_IO_STATISTICS_HEADER
++typedef struct  _CLS_IO_STATISTICS_HEADER
+ {
+     UCHAR                ubMajorVersion;     // Major version of the statistics buffer.
+     UCHAR                ubMinorVersion;     // Minor version of the statistics buffer.
+@@ -708,7 +709,7 @@ typedef CLFS_IO_STATISTICS_HEADER *PCLFS_IO_STATISTICS_HEADER, **PPCLFS_IO_STATI
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+-typedef struct _CLS_IO_STATISTICS
++typedef struct  _CLS_IO_STATISTICS
+ {
+     CLS_IO_STATISTICS_HEADER hdrIoStats;    // Statistics buffer header.
+     ULONGLONG cFlush;                       // Flush count.
+@@ -848,7 +849,7 @@ typedef CLFS_SCAN_CONTEXT *PCLFS_SCAN_CONTEXT, **PPCLFS_SCAN_CONTEXT;
+ // for archiving and restoring a snapshot of the log.
+ //
+ 
+-typedef struct _CLS_ARCHIVE_DESCRIPTOR
++typedef struct  _CLS_ARCHIVE_DESCRIPTOR
+ {
+     ULONGLONG coffLow;
+     ULONGLONG coffHigh;
+@@ -871,7 +872,7 @@ typedef CLFS_ARCHIVE_DESCRIPTOR *PCLFS_ARCHIVE_DESCRIPTOR, **PPCLFS_ARCHIVE_DESC
+ // Allocate a blocks for marshaled reads or writes
+ //
+ 
+-typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, PVOID pvUserContext);
++typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvUserContext);
+ 
+ //
+ // CLFS_DEALLOCATION_ROUTINE
+@@ -879,7 +880,7 @@ typedef PVOID (* CLFS_BLOCK_ALLOCATION) (ULONG cbBufferLength, PVOID pvUserConte
+ // Deallocate buffers allocated by the CLFS_ALLOCATION_ROUTINE.
+ //
+ 
+-typedef void (* CLFS_BLOCK_DEALLOCATION) (PVOID pvBuffer, PVOID pvUserContext);
++typedef void (* CLFS_BLOCK_DEALLOCATION) (_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvBuffer, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PVOID pvUserContext);
+ #endif /* NTDDI_VERSION || _WIN32_WINNT */
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03SP1) || (_WIN32_WINNT >= _WIN32_WINNT_WS03)
+@@ -889,7 +890,7 @@ typedef void (* CLFS_BLOCK_DEALLOCATION) (PVOID pvBuffer, PVOID pvUserContext);
+ // Describes the archive support behavior for the log.
+ //
+ 
+-typedef enum _CLFS_LOG_ARCHIVE_MODE
++typedef enum  _CLFS_LOG_ARCHIVE_MODE
+ {
+ 
+     ClfsLogArchiveEnabled = 0x01,
+@@ -929,7 +930,7 @@ extern "C"
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnEqual
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -958,7 +959,7 @@ ClfsLsnEqual
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnLess
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -987,7 +988,7 @@ ClfsLsnLess
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnGreater
+ (
+     _In_ const CLFS_LSN* plsn1,
+@@ -1016,7 +1017,7 @@ ClfsLsnGreater
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnNull
+ (
+     _In_ const CLFS_LSN* plsn
+@@ -1043,7 +1044,7 @@ ClfsLsnNull
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API CLFS_CONTAINER_ID NTAPI
+-ClfsLsnContainer
++_Windows_SupportedOS_WindowsVista_ ClfsLsnContainer
+ (
+   _In_ const CLFS_LSN* plsn
+ );
+@@ -1074,7 +1075,7 @@ ClfsLsnContainer
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API CLFS_LSN NTAPI
+-ClfsLsnCreate
++_Windows_SupportedOS_WindowsVista_ ClfsLsnCreate
+ (
+     _In_ CLFS_CONTAINER_ID    cidContainer,
+     _In_ ULONG                offBlock,
+@@ -1102,7 +1103,7 @@ ClfsLsnCreate
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API ULONG NTAPI
+-ClfsLsnBlockOffset
++_Windows_SupportedOS_WindowsVista_ ClfsLsnBlockOffset
+ (
+   _In_ const CLFS_LSN* plsn
+ );
+@@ -1128,7 +1129,7 @@ ClfsLsnBlockOffset
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API ULONG NTAPI
+-ClfsLsnRecordSequence
++_Windows_SupportedOS_WindowsVista_ ClfsLsnRecordSequence
+ (
+     _In_ const CLFS_LSN* plsn
+ );
+@@ -1155,7 +1156,7 @@ ClfsLsnRecordSequence
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API BOOLEAN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API BOOLEAN NTAPI
+ ClfsLsnInvalid
+ (
+     _In_ const CLFS_LSN* plsn
+@@ -1183,7 +1184,7 @@ ClfsLsnInvalid
+ //
+ //-----------------------------------------------------------------------------
+ 
+-CLFSUSER_API CLFS_LSN NTAPI
++_Win32_ImportLibrary_("clfsw32.dll") CLFSUSER_API CLFS_LSN NTAPI
+ ClfsLsnIncrement (_In_ PCLFS_LSN  plsn);
+ #endif /* NTDDI_VERSION || _WIN32_WINNT */
+ 
+@@ -1301,6 +1302,32 @@ operator>=
+ // end_wdm
+ 
+ 
++
++#ifdef WIN32METADATA
++#ifndef WIN32METADATA_ENUM_CLFS_FLAG
++#define WIN32METADATA_ENUM_CLFS_FLAG
++#pragma push_macro("CLFS_FLAG_FORCE_APPEND")
++#undef CLFS_FLAG_FORCE_APPEND
++#pragma push_macro("CLFS_FLAG_FORCE_FLUSH")
++#undef CLFS_FLAG_FORCE_FLUSH
++#pragma push_macro("CLFS_FLAG_NO_FLAGS")
++#undef CLFS_FLAG_NO_FLAGS
++#pragma push_macro("CLFS_FLAG_USE_RESERVATION")
++#undef CLFS_FLAG_USE_RESERVATION
++enum [[clang::flag_enum]] CLFS_FLAG : unsigned int
++{
++    CLFS_FLAG_FORCE_APPEND = 1U,
++    CLFS_FLAG_FORCE_FLUSH = 2U,
++    CLFS_FLAG_NO_FLAGS = 0U,
++    CLFS_FLAG_USE_RESERVATION = 4U,
++};
++#pragma pop_macro("CLFS_FLAG_USE_RESERVATION")
++#pragma pop_macro("CLFS_FLAG_NO_FLAGS")
++#pragma pop_macro("CLFS_FLAG_FORCE_FLUSH")
++#pragma pop_macro("CLFS_FLAG_FORCE_APPEND")
++#endif
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU) */
+ #pragma endregion
+ 

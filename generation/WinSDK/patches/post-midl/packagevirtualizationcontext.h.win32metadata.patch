@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/packagevirtualizationcontext.h b/generation/WinSDK/RecompiledIdlHeaders/um/packagevirtualizationcontext.h
+index 4d8161aaa0..abb042281a 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/packagevirtualizationcontext.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/packagevirtualizationcontext.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*******************************************************************************************************
+ *                                                                                                      *
+ * PackageVirtualizationContext.h -- ApiSet Contract for ext-ms-win-packagevirtualizationcontext-l1-1-0 *
+@@ -64,7 +65,7 @@ STDAPI
+ GetProcessesInVirtualizationContext(
+     _In_ PCWSTR packageFamilyName,
+     _Out_ UINT* count,
+-    _Out_ HANDLE** processes
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_ HANDLE** processes
+     );
+ 
+ #endif

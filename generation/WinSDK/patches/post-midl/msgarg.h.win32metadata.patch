@@ -1,0 +1,719 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
+index d942f5855d..36841bd6f6 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/alljoyn_c/MsgArg.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /**
+  * @file
+  * This file defines a class for message bus data types and values
+@@ -93,7 +94,7 @@ typedef enum {
+  *
+  * @return the created message argument
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_create();
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_create();
+ 
+ /**
+  * Build a message argument that has its value already set. If the setting the
+@@ -108,14 +109,14 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_create();
+  *
+  * @return the created alljoyn_msgarg
+  */
+-extern AJ_API alljoyn_msgarg CDECL_CALL alljoyn_msgarg_create_and_set(const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg CDECL_CALL alljoyn_msgarg_create_and_set(_WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * Destroy a message argument.
+  *
+  * @param arg The message argument to destroy.
+  */
+-extern AJ_API void AJ_CALL alljoyn_msgarg_destroy(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_msgarg_destroy(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /**
+  * Create an array of message arguments
+@@ -156,7 +157,7 @@ extern AJ_API void AJ_CALL alljoyn_msgarg_destroy(alljoyn_msgarg arg);
+  *
+  * @return the created array of message arguments
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_create(size_t size);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_create(_WIN32META_ANNOTATION_("win32metadata:in") size_t size);
+ 
+ /**
+  * when working with an array of message arguments this will return the nth item
+@@ -166,7 +167,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_create(size_t size);
+  *
+  * @return the individual alljoyn_msgarg specified by the index
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_element(alljoyn_msgarg arg, size_t index);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_element(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t index);
+ 
+ /**
+  * Set value of a message arg from a signature and a list of values. Note that any values or
+@@ -246,7 +247,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_array_element(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * Matches a signature to the alljoyn_msgarg and if the signature matches unpacks the component
+@@ -345,7 +346,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set(alljoyn_msgarg arg, const ch
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * create a copy of a message argument.  This will create a new alljoyn_msgarg and
+@@ -355,7 +356,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_get(alljoyn_msgarg arg, const ch
+  *
+  * @return copy of the source message argument is returned
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_copy(const alljoyn_msgarg source);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_copy(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg source);
+ 
+ /**
+  * Copy the contents of the source alljoyn_msgarg into the Destination alljoyn_msgarg. If the
+@@ -365,7 +366,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_copy(const alljoyn_msgarg so
+  * @param destination the alljoyn_msgarg that will hold the copy
+  * @param source      the alljoyn_msgarg to be copied
+  */
+-extern AJ_API void AJ_CALL alljoyn_msgarg_clone(alljoyn_msgarg destination, const alljoyn_msgarg source);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_msgarg_clone(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg destination, _WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg source);
+ /**
+  * Equality operator.
+  *
+@@ -374,7 +375,7 @@ extern AJ_API void AJ_CALL alljoyn_msgarg_clone(alljoyn_msgarg destination, cons
+  *
+  * @return  Returns true if the two message args have the same signatures and values.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_equal(alljoyn_msgarg lhv, alljoyn_msgarg rhv);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_equal(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg lhv, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg rhv);
+ 
+ 
+ 
+@@ -394,7 +395,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_equal(alljoyn_msgarg lhv, alljoyn_
+  *       - #ER_BUS_TRUNCATED if the signature was longer than expected.
+  *       - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(alljoyn_msgarg args, size_t* numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg args, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* numArgs, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * Unpack an array of alljoyn_msgargs by applying the alljoyn_msgarg_get() function to each alljoyn_msgarg in turn.
+@@ -409,7 +410,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set(alljoyn_msgarg args, s
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(const alljoyn_msgarg args, size_t numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args, _WIN32META_ANNOTATION_("win32metadata:in") size_t numArgs, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * Returns an XML string representation of this type
+@@ -425,7 +426,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_get(const alljoyn_msgarg a
+  *          available.  Thus returning a value of buf or larger means the output
+  *          was truncated.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_tostring(alljoyn_msgarg arg, char* str, size_t buf, size_t indent);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_tostring(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf, _WIN32META_ANNOTATION_("win32metadata:in") size_t indent);
+ 
+ /**
+  * Returns an XML string representation for an array of message args.
+@@ -442,7 +443,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_tostring(alljoyn_msgarg arg, char* s
+  *          available.  Thus returning a value of buf or larger means the output
+  *          was truncated.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_tostring(const alljoyn_msgarg args, size_t numArgs, char* str, size_t buf, size_t indent);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_tostring(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg args, _WIN32META_ANNOTATION_("win32metadata:in") size_t numArgs, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf, _WIN32META_ANNOTATION_("win32metadata:in") size_t indent);
+ 
+ /**
+  * Returns a string for the signature of this value
+@@ -457,7 +458,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_tostring(const alljoyn_msgarg
+  *          available.  Thus returning a value of buf or larger means the output
+  *          was truncated.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_signature(alljoyn_msgarg arg, char* str, size_t buf);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_signature(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf);
+ 
+ /**
+  * Returns a string representation of the signature of an array of message args.
+@@ -473,7 +474,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_signature(alljoyn_msgarg arg, char*
+  *          available.  Thus returning a value of buf or larger means the output
+  *          was truncated.
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_signature(alljoyn_msgarg values, size_t numValues, char* str, size_t buf);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_signature(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg values, _WIN32META_ANNOTATION_("win32metadata:in") size_t numValues, _WIN32META_ANNOTATION_("win32metadata:in") char* str, _WIN32META_ANNOTATION_("win32metadata:in") size_t buf);
+ 
+ /**
+  * Checks the signature of this arg.
+@@ -483,7 +484,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_array_signature(alljoyn_msgarg value
+  *
+  * @return  true if this arg has the specified signature, otherwise returns false.
+  */
+-extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_hassignature(alljoyn_msgarg arg, const char* signature);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_hassignature(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature);
+ 
+ /**
+  * Helper function for accessing dictionary elements. The alljoyn_msgarg must be an array of dictionary
+@@ -515,7 +516,7 @@ extern AJ_API QCC_BOOL AJ_CALL alljoyn_msgarg_hassignature(alljoyn_msgarg arg, c
+  *      - #ER_BUS_ELEMENT_NOT_FOUND if the key was not found in the dictionary.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(alljoyn_msgarg arg, const char* elemSig, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* elemSig, ...);
+ 
+ /**
+  * Get the alljoyn_typeid of the alljoyn_msgarg
+@@ -524,7 +525,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_getdictelement(alljoyn_msgarg ar
+  *
+  * @return the alljoyn_typeid of the alljoyn_msgarg
+  */
+-extern AJ_API alljoyn_typeid AJ_CALL alljoyn_msgarg_gettype(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API alljoyn_typeid AJ_CALL alljoyn_msgarg_gettype(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /**
+  * Clear the alljoyn_msgarg setting the type to ALLJOYN_INVALID and freeing any memory allocated for the
+@@ -532,7 +533,7 @@ extern AJ_API alljoyn_typeid AJ_CALL alljoyn_msgarg_gettype(alljoyn_msgarg arg);
+  *
+  * @param arg the message argument to be cleared.
+  */
+-extern AJ_API void AJ_CALL alljoyn_msgarg_clear(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_msgarg_clear(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /**
+  * Makes an alljoyn_msgarg stable by completely copying the contents into locally
+@@ -541,7 +542,7 @@ extern AJ_API void AJ_CALL alljoyn_msgarg_clear(alljoyn_msgarg arg);
+  *
+  * @param arg the message argument to stabilize
+  */
+-extern AJ_API void AJ_CALL alljoyn_msgarg_stabilize(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL alljoyn_msgarg_stabilize(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /// @cond ALLJOYN_DEV
+ /*
+@@ -571,7 +572,7 @@ extern AJ_API void AJ_CALL alljoyn_msgarg_stabilize(alljoyn_msgarg arg);
+  *       - #ER_BUS_TRUNCATED if the signature was longer than expected.
+  *       - Other error status codes indicating a failure.
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(alljoyn_msgarg args, size_t argOffset, size_t* numArgs, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg args, _WIN32META_ANNOTATION_("win32metadata:in") size_t argOffset, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* numArgs, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ 
+ /**
+  * This function is identical to alljoyn_msgarg_set except after the values
+@@ -587,7 +588,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_array_set_offset(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg arg, const char* signature, ...);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, ...);
+ /*******************************************************************************
+  * MsgArg set functions for each of the basic data types
+  *******************************************************************************/
+@@ -605,7 +606,7 @@ extern AJ_API QStatus CDECL_CALL alljoyn_msgarg_set_and_stabilize(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg walljoyn_msgargcessfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8(alljoyn_msgarg arg, uint8_t y);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") uint8_t y);
+ /**
+  * Set the value of an alljoyn_msgarg to hold a QCC_BOOL.
+  * @remark This function exists for development of other language bindings and may
+@@ -620,7 +621,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8(alljoyn_msgarg arg, uint8
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool(alljoyn_msgarg arg, QCC_BOOL b);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") QCC_BOOL b);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an int16.
+  * @remark This function exists for development of other language bindings and may
+@@ -635,7 +636,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool(alljoyn_msgarg arg, QCC_BO
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16(alljoyn_msgarg arg, int16_t n);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") int16_t n);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an uint16.
+  * @remark This function exists for development of other language bindings and may
+@@ -650,7 +651,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16(alljoyn_msgarg arg, int16
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16(alljoyn_msgarg arg, uint16_t q);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") uint16_t q);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an int32.
+  * @remark This function exists for development of other language bindings and may
+@@ -665,7 +666,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16(alljoyn_msgarg arg, uint
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32(alljoyn_msgarg arg, int32_t i);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") int32_t i);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an uint32.
+  * @remark This function exists for development of other language bindings and may
+@@ -680,7 +681,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32(alljoyn_msgarg arg, int32
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32(alljoyn_msgarg arg, uint32_t u);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") uint32_t u);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an int64.
+  * @remark This function exists for development of other language bindings and may
+@@ -695,7 +696,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32(alljoyn_msgarg arg, uint
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64(alljoyn_msgarg arg, int64_t x);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") int64_t x);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an uint64.
+  * @remark This function exists for development of other language bindings and may
+@@ -710,7 +711,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64(alljoyn_msgarg arg, int64
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64(alljoyn_msgarg arg, uint64_t t);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") uint64_t t);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an double.
+  * @remark This function exists for development of other language bindings and may
+@@ -725,7 +726,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64(alljoyn_msgarg arg, uint
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double(alljoyn_msgarg arg, double d);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") double d);
+ /**
+  * Set the value of an alljoyn_msgarg to hold a string.
+  * @remark This function exists for development of other language bindings and may
+@@ -740,7 +741,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double(alljoyn_msgarg arg, doub
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string(alljoyn_msgarg arg, const char* s);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* s);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an object path
+  * @remark This function exists for development of other language bindings and may
+@@ -755,7 +756,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string(alljoyn_msgarg arg, cons
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath(alljoyn_msgarg arg, const char* o);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* o);
+ /**
+  * Set the value of an alljoyn_msgarg to hold a signature.
+  * @remark This function exists for development of other language bindings and may
+@@ -770,7 +771,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature(alljoyn_msgarg arg, const char* g);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* g);
+ 
+ /*******************************************************************************
+  * MsgArg get functions for each of the basic data types
+@@ -790,7 +791,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature(alljoyn_msgarg arg, c
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8(const alljoyn_msgarg arg, uint8_t* y);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint8_t* y);
+ /**
+  * Get a QCC_BOOL from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -806,7 +807,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8(const alljoyn_msgarg arg,
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool(const alljoyn_msgarg arg, QCC_BOOL* b);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") QCC_BOOL* b);
+ /**
+  * Get an int16 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -822,7 +823,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool(const alljoyn_msgarg arg,
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16(const alljoyn_msgarg arg, int16_t* n);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int16_t* n);
+ /**
+  * Get an uint16 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -838,7 +839,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16(const alljoyn_msgarg arg,
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16(const alljoyn_msgarg arg, uint16_t* q);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint16_t* q);
+ /**
+  * Get an int32 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -854,7 +855,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16(const alljoyn_msgarg arg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32(const alljoyn_msgarg arg, int32_t* i);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int32_t* i);
+ /**
+  * Get an uint32 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -870,7 +871,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32(const alljoyn_msgarg arg,
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32(const alljoyn_msgarg arg, uint32_t* u);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* u);
+ /**
+  * Get an int64 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -886,7 +887,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32(const alljoyn_msgarg arg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64(const alljoyn_msgarg arg, int64_t* x);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int64_t* x);
+ /**
+  * Get an uint64 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -902,7 +903,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64(const alljoyn_msgarg arg,
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64(const alljoyn_msgarg arg, uint64_t* t);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint64_t* t);
+ /**
+  * Get a double from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -918,7 +919,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64(const alljoyn_msgarg arg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double(const alljoyn_msgarg arg, double* d);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") double* d);
+ /**
+  * Get a string from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -934,7 +935,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double(const alljoyn_msgarg arg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_string(const alljoyn_msgarg arg, char** s);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_string(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") char** s);
+ /**
+  * Get an object path from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -950,7 +951,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_string(const alljoyn_msgarg arg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_objectpath(const alljoyn_msgarg arg, char** o);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_objectpath(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") char** o);
+ /**
+  * Get a signature from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -966,7 +967,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_objectpath(const alljoyn_msgarg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_signature(const alljoyn_msgarg arg, char** g);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_signature(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") char** g);
+ 
+ /**
+  * Get the alljoyn_msgarg from an variant alljoyn_msgarg
+@@ -983,7 +984,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_signature(const alljoyn_msgarg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant(const alljoyn_msgarg arg, alljoyn_msgarg v);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg v);
+ 
+ /*******************************************************************************
+  * MsgArg set function for arrays of each basic data type
+@@ -1003,7 +1004,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant(const alljoyn_msgarg ar
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8_array(alljoyn_msgarg arg, size_t length, uint8_t* ay);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint8_t* ay);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of QCC_BOOLs.
+  * @remark This function exists for development of other language bindings and may
+@@ -1019,7 +1020,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint8_array(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool_array(alljoyn_msgarg arg, size_t length, QCC_BOOL* ab);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") QCC_BOOL* ab);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of int16s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1035,7 +1036,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_bool_array(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16_array(alljoyn_msgarg arg, size_t length, int16_t* an);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int16_t* an);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of uint16s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1051,7 +1052,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int16_array(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16_array(alljoyn_msgarg arg, size_t length, uint16_t* aq);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint16_t* aq);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of int32s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1067,7 +1068,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint16_array(alljoyn_msgarg arg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32_array(alljoyn_msgarg arg, size_t length, int32_t* ai);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int32_t* ai);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of uint32s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1083,7 +1084,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int32_array(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32_array(alljoyn_msgarg arg, size_t length, uint32_t* au);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* au);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of int64s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1099,7 +1100,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint32_array(alljoyn_msgarg arg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64_array(alljoyn_msgarg arg, size_t length, int64_t* ax);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int64_t* ax);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of uint64s.
+  * @remark This function exists for development of other language bindings and may
+@@ -1115,7 +1116,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_int64_array(alljoyn_msgarg arg,
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64_array(alljoyn_msgarg arg, size_t length, uint64_t* at);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint64_t* at);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of doubles.
+  * @remark This function exists for development of other language bindings and may
+@@ -1131,7 +1132,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_uint64_array(alljoyn_msgarg arg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double_array(alljoyn_msgarg arg, size_t length, double* ad);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") double* ad);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of strings.
+  * @remark This function exists for development of other language bindings and may
+@@ -1147,7 +1148,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_double_array(alljoyn_msgarg arg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string_array(alljoyn_msgarg arg, size_t length, const char** as);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") const char** as);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of object paths.
+  * @remark This function exists for development of other language bindings and may
+@@ -1163,7 +1164,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_string_array(alljoyn_msgarg arg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath_array(alljoyn_msgarg arg, size_t length, const char** ao);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") const char** ao);
+ /**
+  * Set the value of an alljoyn_msgarg to hold an array of signatures.
+  * @remark This function exists for development of other language bindings and may
+@@ -1179,7 +1180,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_objectpath_array(alljoyn_msgarg
+  *      - #ER_OK if the alljoyn_msgarg was successfully set
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature_array(alljoyn_msgarg arg, size_t length, const char** ag);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature_array(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t length, _WIN32META_ANNOTATION_("win32metadata:in") const char** ag);
+ 
+ /*******************************************************************************
+  * MsgArg get function for arrays of each basic data type
+@@ -1200,7 +1201,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_set_signature_array(alljoyn_msgarg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8_array(const alljoyn_msgarg arg, size_t* length, uint8_t* ay);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint8_t* ay);
+ /**
+  * get an array of QCC_BOOLs from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1217,7 +1218,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint8_array(const alljoyn_msgar
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool_array(const alljoyn_msgarg arg, size_t* length, QCC_BOOL* ab);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") QCC_BOOL* ab);
+ /**
+  * get an array of int16 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1234,7 +1235,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_bool_array(const alljoyn_msgarg
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16_array(const alljoyn_msgarg arg, size_t* length, int16_t* an);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int16_t* an);
+ /**
+  * get an array of uint16s from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1251,7 +1252,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int16_array(const alljoyn_msgar
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16_array(const alljoyn_msgarg arg, size_t* length, uint16_t* aq);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint16_t* aq);
+ /**
+  * get an array of int32 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1268,7 +1269,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint16_array(const alljoyn_msga
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32_array(const alljoyn_msgarg arg, size_t* length, int32_t* ai);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int32_t* ai);
+ /**
+  * get an array of uint32 from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1285,7 +1286,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int32_array(const alljoyn_msgar
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32_array(const alljoyn_msgarg arg, size_t* length, uint32_t* au);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint32_t* au);
+ /**
+  * get an array of int64s from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1302,7 +1303,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint32_array(const alljoyn_msga
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64_array(const alljoyn_msgarg arg, size_t* length, int64_t* ax);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int64_t* ax);
+ /**
+  * get an array of uint64s from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1319,7 +1320,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_int64_array(const alljoyn_msgar
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64_array(const alljoyn_msgarg arg, size_t* length, uint64_t* at);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") uint64_t* at);
+ /**
+  * get an array of doubles from an alljoyn_msgarg
+  * @remark This function exists for development of other language bindings and may
+@@ -1336,7 +1337,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_uint64_array(const alljoyn_msga
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double_array(const alljoyn_msgarg arg, size_t* length, double* ad);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") double* ad);
+ 
+ /**
+  * get an array of alljoyn_msgargs from an alljoyn_msgarg.
+@@ -1359,7 +1360,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_double_array(const alljoyn_msga
+  *      - #ER_BUS_SIGNATURE_MISMATCH if the signature did not match.
+  *      - An error status otherwise
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant_array(const alljoyn_msgarg arg, const char* signature, size_t* length, alljoyn_msgarg* av);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant_array(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") const char* signature, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") size_t* length, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_msgarg* av);
+ 
+ /*******************************************************************************
+  * MsgArg get functions for Arrays of Arrays
+@@ -1376,7 +1377,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_get_variant_array(const alljoyn_msg
+  *
+  * @return the number of elements in the alljoyn_msgarg
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_get_array_numberofelements(const alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_get_array_numberofelements(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg);
+ /**
+  * Obtain a single alljoyn_msgarg element from an array of alljoyn_msgarg elements
+  * @remark This function exists for development of other language bindings and may
+@@ -1389,7 +1390,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_get_array_numberofelements(const all
+  * @param      index    The index value for the individual alljoyn_msgarg
+  * @param[out] element  The alljoyn_msgarg located at the index
+  */
+-extern AJ_API void AJ_CALL   alljoyn_msgarg_get_array_element(const alljoyn_msgarg arg, size_t index, alljoyn_msgarg* element);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API void AJ_CALL   alljoyn_msgarg_get_array_element(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t index, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") alljoyn_msgarg* element);
+ /**
+  * Obtain the signature of an element inside an array of alljoyn_msgargs
+  * @remark This function exists for development of other language bindings and may
+@@ -1403,7 +1404,7 @@ extern AJ_API void AJ_CALL   alljoyn_msgarg_get_array_element(const alljoyn_msga
+  *
+  * @return the string representing the signature of the element
+  */
+-extern AJ_API const char* AJ_CALL alljoyn_msgarg_get_array_elementsignature(const alljoyn_msgarg arg, size_t index);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API const char* AJ_CALL alljoyn_msgarg_get_array_elementsignature(_WIN32META_ANNOTATION_("win32metadata:in") const alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t index);
+ 
+ 
+ /*******************************************************************************
+@@ -1421,7 +1422,7 @@ extern AJ_API const char* AJ_CALL alljoyn_msgarg_get_array_elementsignature(cons
+  *
+  * @return an alljoyn_msgarg containing the key portion of a key/value pair
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getkey(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getkey(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /*
+  * Obtain the alljoyn_msgarg used as the value for a key/value pair in an AllJoyn
+@@ -1435,7 +1436,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getkey(alljoyn_msgarg arg);
+  *
+  * @return an alljoyn_msgarg containing the value portion of a key/value pair
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getvalue(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getvalue(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ 
+ /*
+  * Create a key/value pair for an AllJoyn dictionary entry.
+@@ -1452,7 +1453,7 @@ extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getvalue(alljoyn_msgarg arg)
+  *
+  * @return #ER_OK
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setdictentry(alljoyn_msgarg arg, alljoyn_msgarg key, alljoyn_msgarg value);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setdictentry(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg key, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg value);
+ 
+ /*******************************************************************************
+  * MsgArg functions for structs
+@@ -1471,7 +1472,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setdictentry(alljoyn_msgarg arg, al
+  *
+  * @return #ER_OK
+  */
+-extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setstruct(alljoyn_msgarg arg, alljoyn_msgarg struct_members, size_t num_members);
++_Win32_ImportLibrary_("msajapi.dll")  extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setstruct(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg struct_members, _WIN32META_ANNOTATION_("win32metadata:in") size_t num_members);
+ 
+ /*
+  * Obtain the number of members in an AllJoyn struct
+@@ -1483,7 +1484,7 @@ extern AJ_API QStatus AJ_CALL alljoyn_msgarg_setstruct(alljoyn_msgarg arg, alljo
+  *
+  * @return the number of members contained in the struct
+  */
+-extern AJ_API size_t AJ_CALL alljoyn_msgarg_getnummembers(alljoyn_msgarg arg);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API size_t AJ_CALL alljoyn_msgarg_getnummembers(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg);
+ /*
+  * obtain the member of an AllJoyn struct at the index location
+  * @remark This function exists for development of other language bindings and may
+@@ -1495,7 +1496,7 @@ extern AJ_API size_t AJ_CALL alljoyn_msgarg_getnummembers(alljoyn_msgarg arg);
+  *
+  * @return the alljoyn_msgarg at the index
+  */
+-extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getmember(alljoyn_msgarg arg, size_t index);
++_Win32_ImportLibrary_("msajapi.dll") extern AJ_API alljoyn_msgarg AJ_CALL alljoyn_msgarg_getmember(_WIN32META_ANNOTATION_("win32metadata:in") alljoyn_msgarg arg, _WIN32META_ANNOTATION_("win32metadata:in") size_t index);
+ 
+ /// @endcond
+ #ifdef __cplusplus

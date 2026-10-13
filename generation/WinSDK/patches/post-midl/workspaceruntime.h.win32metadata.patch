@@ -1,0 +1,191 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
+index ea6e42e01c..8b34912985 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/workspaceruntime.h
+@@ -141,6 +141,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define WKS_FLAG_CLEAR_CREDS_ON_LAST_RESOURCE 1
+@@ -163,7 +164,7 @@ EXTERN_C const IID IID_IWorkspace;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("B922BBB8-4C55-4FEA-8496-BEB0B44285E5")
+-    IWorkspace : public IUnknown
++    _Windows_SupportedOS_Windows7_ IWorkspace : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetWorkspaceNames( 
+@@ -228,7 +229,7 @@ EXTERN_C const IID IID_IWorkspace;
+         END_INTERFACE
+     } IWorkspaceVtbl;
+ 
+-    interface IWorkspace
++    interface _Windows_SupportedOS_Windows7_ IWorkspace
+     {
+         CONST_VTBL struct IWorkspaceVtbl *lpVtbl;
+     };
+@@ -279,8 +280,8 @@ EXTERN_C const IID IID_IWorkspace2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("96D8D7CF-783E-4286-834C-EBC0E95F783C")
+-    IWorkspace2 : public IWorkspace
++    MIDL_INTERFACE("96D8D7CF-783E-4286-834C-EBC0E95F783C") _Windows_SupportedOS_Windows8_ 
++      IWorkspace2 : public IWorkspace
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE StartRemoteApplicationEx( 
+@@ -361,7 +362,7 @@ EXTERN_C const IID IID_IWorkspace2;
+         END_INTERFACE
+     } IWorkspace2Vtbl;
+ 
+-    interface IWorkspace2
++    interface _Windows_SupportedOS_Windows8_ IWorkspace2
+     {
+         CONST_VTBL struct IWorkspace2Vtbl *lpVtbl;
+     };
+@@ -416,8 +417,8 @@ EXTERN_C const IID IID_IWorkspace3;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("1BECBE4A-D654-423B-AFEB-BE8D532C13C6")
+-    IWorkspace3 : public IWorkspace2
++    MIDL_INTERFACE("1BECBE4A-D654-423B-AFEB-BE8D532C13C6") _Windows_SupportedOS_10240_ 
++      IWorkspace3 : public IWorkspace2
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE GetClaimsToken2( 
+@@ -432,7 +433,7 @@ EXTERN_C const IID IID_IWorkspace3;
+             /* [annotation][in] */ 
+             _In_  RECT rectCredUiParent,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrAccessToken) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrAccessToken) = 0;
+         
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE SetClaimsToken( 
+             /* [annotation][in] */ 
+@@ -532,7 +533,7 @@ EXTERN_C const IID IID_IWorkspace3;
+         END_INTERFACE
+     } IWorkspace3Vtbl;
+ 
+-    interface IWorkspace3
++    interface _Windows_SupportedOS_10240_ IWorkspace3
+     {
+         CONST_VTBL struct IWorkspace3Vtbl *lpVtbl;
+     };
+@@ -595,7 +596,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("B922BBB8-4C55-4FEA-8496-BEB0B44285E6")
+-    IWorkspaceRegistration : public IUnknown
++    _Windows_SupportedOS_Windows7_ IWorkspaceRegistration : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddResource( 
+@@ -650,7 +651,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration;
+         END_INTERFACE
+     } IWorkspaceRegistrationVtbl;
+ 
+-    interface IWorkspaceRegistration
++    interface _Windows_SupportedOS_Windows7_ IWorkspaceRegistration
+     {
+         CONST_VTBL struct IWorkspaceRegistrationVtbl *lpVtbl;
+     };
+@@ -699,7 +700,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration2;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("CF59F654-39BB-44D8-94D0-4635728957E9")
+-    IWorkspaceRegistration2 : public IWorkspaceRegistration
++    _Windows_SupportedOS_Windows81_ IWorkspaceRegistration2 : public IWorkspaceRegistration
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE AddResourceEx( 
+@@ -780,7 +781,7 @@ EXTERN_C const IID IID_IWorkspaceRegistration2;
+         END_INTERFACE
+     } IWorkspaceRegistration2Vtbl;
+ 
+-    interface IWorkspaceRegistration2
++    interface _Windows_SupportedOS_Windows81_ IWorkspaceRegistration2
+     {
+         CONST_VTBL struct IWorkspaceRegistration2Vtbl *lpVtbl;
+     };
+@@ -836,7 +837,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("EFEA49A2-DDA5-429D-8F42-B23B92C4C347")
+-    IWorkspaceScriptable : public IDispatch
++    _Windows_SupportedOS_Windows7_ IWorkspaceScriptable : public IDispatch
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE DisconnectWorkspace( 
+@@ -1018,7 +1019,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable;
+         END_INTERFACE
+     } IWorkspaceScriptableVtbl;
+ 
+-    interface IWorkspaceScriptable
++    interface _Windows_SupportedOS_Windows7_ IWorkspaceScriptable
+     {
+         CONST_VTBL struct IWorkspaceScriptableVtbl *lpVtbl;
+     };
+@@ -1094,8 +1095,8 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("EFEA49A2-DDA5-429D-8F42-B33BA2C4C348")
+-    IWorkspaceScriptable2 : public IWorkspaceScriptable
++    MIDL_INTERFACE("EFEA49A2-DDA5-429D-8F42-B33BA2C4C348") _Windows_SupportedOS_Windows8_ 
++      IWorkspaceScriptable2 : public IWorkspaceScriptable
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartWorkspaceEx( 
+@@ -1289,7 +1290,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable2;
+         END_INTERFACE
+     } IWorkspaceScriptable2Vtbl;
+ 
+-    interface IWorkspaceScriptable2
++    interface _Windows_SupportedOS_Windows8_ IWorkspaceScriptable2
+     {
+         CONST_VTBL struct IWorkspaceScriptable2Vtbl *lpVtbl;
+     };
+@@ -1373,7 +1374,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("531E6512-2CBF-4BD2-80A5-D90A71636A9A")
+-    IWorkspaceScriptable3 : public IWorkspaceScriptable2
++    _Windows_SupportedOS_Windows81_ IWorkspaceScriptable3 : public IWorkspaceScriptable2
+     {
+     public:
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE StartWorkspaceEx2( 
+@@ -1591,7 +1592,7 @@ EXTERN_C const IID IID_IWorkspaceScriptable3;
+         END_INTERFACE
+     } IWorkspaceScriptable3Vtbl;
+ 
+-    interface IWorkspaceScriptable3
++    interface _Windows_SupportedOS_Windows81_ IWorkspaceScriptable3
+     {
+         CONST_VTBL struct IWorkspaceScriptable3Vtbl *lpVtbl;
+     };
+@@ -1678,8 +1679,8 @@ EXTERN_C const IID IID_IWorkspaceReportMessage;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("a7c06739-500f-4e8c-99a8-2bd6955899eb")
+-    IWorkspaceReportMessage : public IUnknown
++    MIDL_INTERFACE("a7c06739-500f-4e8c-99a8-2bd6955899eb") _Windows_SupportedOS_Windows8_ 
++      IWorkspaceReportMessage : public IUnknown
+     {
+     public:
+         virtual /* [helpstring] */ HRESULT STDMETHODCALLTYPE RegisterErrorLogMessage( 
+@@ -1768,7 +1769,7 @@ EXTERN_C const IID IID_IWorkspaceReportMessage;
+         END_INTERFACE
+     } IWorkspaceReportMessageVtbl;
+ 
+-    interface IWorkspaceReportMessage
++    interface _Windows_SupportedOS_Windows8_ IWorkspaceReportMessage
+     {
+         CONST_VTBL struct IWorkspaceReportMessageVtbl *lpVtbl;
+     };

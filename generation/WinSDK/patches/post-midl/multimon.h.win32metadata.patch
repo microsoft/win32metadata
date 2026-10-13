@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/MultiMon.h b/generation/WinSDK/RecompiledIdlHeaders/um/MultiMon.h
+index 284f2f5ac6..68da024437 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/MultiMon.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/MultiMon.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //=============================================================================
+ //
+ // multimon.h -- Stub module that fakes multiple monitor apis on Win32 OSes
+@@ -40,7 +41,7 @@ extern "C" {            // Assume C declarations for C++
+ // This is for components built with an older version number.
+ //
+ #if !defined(HMONITOR_DECLARED) && (WINVER < 0x0500)
+-DECLARE_HANDLE(HMONITOR);
++DECLARE_HANDLE(HMONITOR) _WIN32META_ANNOTATION_("win32metadata:invalid_handle=-1")  _WIN32META_ANNOTATION_("win32metadata:invalid_handle=0") ;
+ #define HMONITOR_DECLARED
+ #endif
+ 

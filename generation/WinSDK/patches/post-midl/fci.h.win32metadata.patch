@@ -1,0 +1,95 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fci.h b/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
+index fcc34ce87e..43f957bf2e 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fci.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /***    fci_int.h - File Compression Interface definitions
+  *
+  *      Copyright (C) Microsoft Corporation 1993-1994
+@@ -154,17 +155,17 @@ typedef CCAB *PCCAB; /* pccab */
+ typedef void HUGE * (FAR DIAMONDAPI *PFNFCIALLOC)(ULONG cb); /* pfna */
+ #define FNFCIALLOC(fn) void HUGE * FAR DIAMONDAPI fn(ULONG cb)
+ 
+-typedef void (FAR DIAMONDAPI *PFNFCIFREE)(void HUGE *memory); /* pfnf */
++typedef void (FAR DIAMONDAPI *PFNFCIFREE)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void HUGE *memory); /* pfnf */
+ #define FNFCIFREE(fn) void FAR DIAMONDAPI fn(void HUGE *memory)
+ 
+ 
+ //** File I/O functions for FCI
+-typedef INT_PTR (FAR DIAMONDAPI *PFNFCIOPEN) (_In_ LPSTR pszFile, int oflag, int pmode, int FAR *err, void FAR *pv);
+-typedef UINT (FAR DIAMONDAPI *PFNFCIREAD) (INT_PTR hf, void FAR *memory, UINT cb, int FAR *err, void FAR *pv);
+-typedef UINT (FAR DIAMONDAPI *PFNFCIWRITE)(INT_PTR hf, void FAR *memory, UINT cb, int FAR *err, void FAR *pv);
+-typedef int  (FAR DIAMONDAPI *PFNFCICLOSE)(INT_PTR hf, int FAR *err, void FAR *pv);
+-typedef long (FAR DIAMONDAPI *PFNFCISEEK) (INT_PTR hf, long dist, int seektype, int FAR *err, void FAR *pv);
+-typedef int  (FAR DIAMONDAPI *PFNFCIDELETE) (_In_ LPSTR pszFile, int FAR *err, void FAR *pv);
++typedef INT_PTR (FAR DIAMONDAPI *PFNFCIOPEN) (_In_ LPSTR pszFile, int oflag, int pmode, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
++typedef UINT (FAR DIAMONDAPI *PFNFCIREAD) (INT_PTR hf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *memory, UINT cb, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
++typedef UINT (FAR DIAMONDAPI *PFNFCIWRITE)(INT_PTR hf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *memory, UINT cb, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
++typedef int  (FAR DIAMONDAPI *PFNFCICLOSE)(INT_PTR hf, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
++typedef long (FAR DIAMONDAPI *PFNFCISEEK) (INT_PTR hf, long dist, int seektype, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
++typedef int  (FAR DIAMONDAPI *PFNFCIDELETE) (_In_ LPSTR pszFile, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv);
+ 
+ #define FNFCIOPEN(fn) INT_PTR FAR DIAMONDAPI fn(_In_ LPSTR pszFile, int oflag, int pmode, int FAR *err, void FAR *pv)
+ #define FNFCIREAD(fn) UINT FAR DIAMONDAPI fn(INT_PTR hf, void FAR *memory, UINT cb, int FAR *err, void FAR *pv)
+@@ -187,9 +188,9 @@ typedef int  (FAR DIAMONDAPI *PFNFCIDELETE) (_In_ LPSTR pszFile, int FAR *err, v
+  *  Exit-Failure:
+  *      returns FALSE;
+  */
+-typedef BOOL (DIAMONDAPI *PFNFCIGETNEXTCABINET)(PCCAB  pccab,
++typedef BOOL (DIAMONDAPI *PFNFCIGETNEXTCABINET)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCCAB  pccab,
+                                                 ULONG  cbPrevCab,
+-                                                void FAR *pv); /* pfnfcignc */
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv); /* pfnfcignc */
+ 
+ #define FNFCIGETNEXTCABINET(fn) BOOL DIAMONDAPI fn(PCCAB  pccab,     \
+                                                    ULONG  cbPrevCab, \
+@@ -211,11 +212,11 @@ typedef BOOL (DIAMONDAPI *PFNFCIGETNEXTCABINET)(PCCAB  pccab,
+  *  Exit-Failure:
+  *      return value -1 means to abort
+  */
+-typedef int (DIAMONDAPI *PFNFCIFILEPLACED)(PCCAB pccab,
++typedef int (DIAMONDAPI *PFNFCIFILEPLACED)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") PCCAB pccab,
+                                            _In_ LPSTR pszFile,
+                                            long  cbFile,
+                                            BOOL  fContinuation,
+-                                           void FAR *pv); /* pfnfcifp */
++                                           _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv); /* pfnfcifp */
+ 
+ #define FNFCIFILEPLACED(fn) int DIAMONDAPI fn(PCCAB pccab,              \
+                                               _In_ LPSTR pszFile,   \
+@@ -240,11 +241,11 @@ typedef int (DIAMONDAPI *PFNFCIFILEPLACED)(PCCAB pccab,
+  *      Return value is -1
+  */
+ typedef INT_PTR (DIAMONDAPI *PFNFCIGETOPENINFO)(_In_ LPSTR pszName,
+-                                                USHORT *pdate,
+-                                                USHORT *ptime,
+-                                                USHORT *pattribs,
+-                                                int FAR *err,
+-                                                void FAR *pv); /* pfnfcigoi */
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") USHORT *pdate,
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") USHORT *ptime,
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") USHORT *pattribs,
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") int FAR *err,
++                                                _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv); /* pfnfcigoi */
+ 
+ #define FNFCIGETOPENINFO(fn) INT_PTR DIAMONDAPI fn(_In_ LPSTR pszName,  \
+                                                    USHORT *pdate,    \
+@@ -291,7 +292,7 @@ typedef INT_PTR (DIAMONDAPI *PFNFCIGETOPENINFO)(_In_ LPSTR pszName,
+ typedef long (DIAMONDAPI *PFNFCISTATUS)(UINT   typeStatus,
+                                         ULONG  cb1,
+                                         ULONG  cb2,
+-                                        void FAR *pv); /* pfnfcis */
++                                        _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv); /* pfnfcis */
+ 
+ #define FNFCISTATUS(fn) long DIAMONDAPI fn(UINT   typeStatus, \
+                                            ULONG  cb1,        \
+@@ -319,7 +320,7 @@ typedef long (DIAMONDAPI *PFNFCISTATUS)(UINT   typeStatus,
+  */
+ typedef BOOL (DIAMONDAPI *PFNFCIGETTEMPFILE)(_Out_writes_bytes_(cbTempName) char *pszTempName,
+                                              _In_range_(<=, 260) int   cbTempName,
+-                                             void FAR *pv); /* pfnfcigtf */
++                                             _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR *pv); /* pfnfcigtf */
+ 
+ #define FNFCIGETTEMPFILE(fn) BOOL DIAMONDAPI fn(_Out_writes_bytes_(cbTempName) char *pszTempName, \
+                                                 _In_range_(<=, 260) int   cbTempName, \

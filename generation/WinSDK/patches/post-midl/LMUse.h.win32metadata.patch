@@ -1,0 +1,104 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h b/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
+index 56cfb2b96d..048c8eb1c7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/LMUse.h
+@@ -32,6 +32,7 @@ Notes:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include "win32metadata_annotations.h"
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -60,6 +61,8 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseAdd (
+     _In_opt_ LPTSTR servername,
+@@ -74,13 +77,17 @@ NetUseAdd (
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseDel (
+     _In_opt_ LMSTR  UncServerName OPTIONAL,
+     _In_ LMSTR  UseName,
+-    _In_ DWORD ForceLevelFlags
++    _Win32_AssociatedEnum_(FORCE_LEVEL_FLAGS) _In_ DWORD ForceLevelFlags
+     );
+ 
++_Windows_SupportedOS_Windows2000_ 
++
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseEnum (
+     _In_opt_ LMSTR  UncServerName,
+@@ -92,7 +99,7 @@ NetUseEnum (
+     _Inout_opt_ LPDWORD ResumeHandle
+     );
+ 
+-NET_API_STATUS NET_API_FUNCTION
++_Windows_SupportedOS_Windows2000_ NET_API_STATUS NET_API_FUNCTION
+ NetUseGetInfo (
+     _In_opt_ LMSTR  UncServerName,
+     _In_ LMSTR  UseName,
+@@ -110,7 +117,7 @@ NetUseGetInfo (
+ //  Data Structures
+ //
+ 
+-typedef struct _USE_INFO_0 {
++typedef struct   _USE_INFO_0 {
+     LMSTR   ui0_local;
+     LMSTR   ui0_remote;
+ }USE_INFO_0, *PUSE_INFO_0, *LPUSE_INFO_0;
+@@ -120,7 +127,7 @@ typedef struct _USE_INFO_1 {
+     LMSTR   ui1_remote;
+     LMSTR   ui1_password;
+     DWORD   ui1_status;
+-    DWORD   ui1_asg_type;
++    _Win32_AssociatedEnum_(USE_INFO_ASG_TYPE) DWORD   ui1_asg_type;
+     DWORD   ui1_refcount;
+     DWORD   ui1_usecount;
+ }USE_INFO_1, *PUSE_INFO_1, *LPUSE_INFO_1;
+@@ -130,7 +137,7 @@ typedef struct _USE_INFO_2 {
+     LMSTR    ui2_remote;
+     LMSTR    ui2_password;
+     DWORD    ui2_status;
+-    DWORD    ui2_asg_type;
++    _Win32_AssociatedEnum_(USE_INFO_ASG_TYPE) DWORD    ui2_asg_type;
+     DWORD    ui2_refcount;
+     DWORD    ui2_usecount;
+     LMSTR    ui2_username;
+@@ -339,4 +346,27 @@ typedef struct _USE_OPTION_PROPERTIES {
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("USE_WILDCARD")
++#undef USE_WILDCARD
++#pragma push_macro("USE_DISKDEV")
++#undef USE_DISKDEV
++#pragma push_macro("USE_SPOOLDEV")
++#undef USE_SPOOLDEV
++#pragma push_macro("USE_IPC")
++#undef USE_IPC
++enum USE_INFO_ASG_TYPE : unsigned int
++{
++    USE_WILDCARD = 4294967295U,
++    USE_DISKDEV = 0U,
++    USE_SPOOLDEV = 1U,
++    USE_IPC = 3U,
++};
++#pragma pop_macro("USE_IPC")
++#pragma pop_macro("USE_SPOOLDEV")
++#pragma pop_macro("USE_DISKDEV")
++#pragma pop_macro("USE_WILDCARD")
++#endif
++
+ #endif // _LMUSE_

@@ -1,0 +1,113 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EmptyVC.h b/generation/WinSDK/RecompiledIdlHeaders/um/EmptyVC.h
+index fa2ed1ccf6..087c95e6f7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EmptyVC.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EmptyVC.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -138,7 +139,7 @@ EXTERN_C const IID IID_IEmptyVolumeCacheCallBack;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("6E793361-73C6-11D0-8469-00AA00442901")
++    MIDL_INTERFACE("6E793361-73C6-11D0-8469-00AA00442901") _Windows_SupportedOS_Windows2000_ 
+     IEmptyVolumeCacheCallBack : public IUnknown
+     {
+     public:
+@@ -271,7 +272,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("8FCE5227-04DA-11d1-A004-00805F8ABE06")
++    MIDL_INTERFACE("8FCE5227-04DA-11d1-A004-00805F8ABE06") _Windows_SupportedOS_Windows2000_ 
+     IEmptyVolumeCache : public IUnknown
+     {
+     public:
+@@ -285,7 +286,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
+             /* [annotation][out] */ 
+             _Out_  LPWSTR *ppwszDescription,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwFlags) = 0;
++            _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS) _Out_  DWORD *pdwFlags) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetSpaceUsed( 
+             /* [annotation][out] */ 
+@@ -305,7 +306,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache;
+         
+         virtual HRESULT STDMETHODCALLTYPE Deactivate( 
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwFlags) = 0;
++            _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS) _Out_  DWORD *pdwFlags) = 0;
+         
+     };
+     
+@@ -447,7 +448,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache2;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c")
++    MIDL_INTERFACE("02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c") _Windows_SupportedOS_Windows2000_ 
+     IEmptyVolumeCache2 : public IEmptyVolumeCache
+     {
+     public:
+@@ -465,7 +466,7 @@ EXTERN_C const IID IID_IEmptyVolumeCache2;
+             /* [annotation][out] */ 
+             _Out_  LPWSTR *ppwszBtnText,
+             /* [annotation][out] */ 
+-            _Out_  DWORD *pdwFlags) = 0;
++            _Win32_AssociatedEnum_(EMPTY_VOLUME_CACHE_FLAGS) _Out_  DWORD *pdwFlags) = 0;
+         
+     };
+     
+@@ -634,6 +635,49 @@ void                      __RPC_USER  HWND_UserFree64(     __RPC__in unsigned lo
+ }
+ #endif
+ 
++
++#ifdef WIN32METADATA
++#pragma push_macro("EVCF_HASSETTINGS")
++#undef EVCF_HASSETTINGS
++#pragma push_macro("EVCF_ENABLEBYDEFAULT")
++#undef EVCF_ENABLEBYDEFAULT
++#pragma push_macro("EVCF_REMOVEFROMLIST")
++#undef EVCF_REMOVEFROMLIST
++#pragma push_macro("EVCF_ENABLEBYDEFAULT_AUTO")
++#undef EVCF_ENABLEBYDEFAULT_AUTO
++#pragma push_macro("EVCF_DONTSHOWIFZERO")
++#undef EVCF_DONTSHOWIFZERO
++#pragma push_macro("EVCF_SETTINGSMODE")
++#undef EVCF_SETTINGSMODE
++#pragma push_macro("EVCF_OUTOFDISKSPACE")
++#undef EVCF_OUTOFDISKSPACE
++#pragma push_macro("EVCF_USERCONSENTOBTAINED")
++#undef EVCF_USERCONSENTOBTAINED
++#pragma push_macro("EVCF_SYSTEMAUTORUN")
++#undef EVCF_SYSTEMAUTORUN
++enum EMPTY_VOLUME_CACHE_FLAGS : unsigned int
++{
++    EVCF_HASSETTINGS = 1U,
++    EVCF_ENABLEBYDEFAULT = 2U,
++    EVCF_REMOVEFROMLIST = 4U,
++    EVCF_ENABLEBYDEFAULT_AUTO = 8U,
++    EVCF_DONTSHOWIFZERO = 16U,
++    EVCF_SETTINGSMODE = 32U,
++    EVCF_OUTOFDISKSPACE = 64U,
++    EVCF_USERCONSENTOBTAINED = 128U,
++    EVCF_SYSTEMAUTORUN = 256U,
++};
++#pragma pop_macro("EVCF_SYSTEMAUTORUN")
++#pragma pop_macro("EVCF_USERCONSENTOBTAINED")
++#pragma pop_macro("EVCF_OUTOFDISKSPACE")
++#pragma pop_macro("EVCF_SETTINGSMODE")
++#pragma pop_macro("EVCF_DONTSHOWIFZERO")
++#pragma pop_macro("EVCF_ENABLEBYDEFAULT_AUTO")
++#pragma pop_macro("EVCF_REMOVEFROMLIST")
++#pragma pop_macro("EVCF_ENABLEBYDEFAULT")
++#pragma pop_macro("EVCF_HASSETTINGS")
++#endif
++
+ #endif
+ 
+ 

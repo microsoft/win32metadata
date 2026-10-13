@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WindowsCeip.h b/generation/WinSDK/RecompiledIdlHeaders/um/WindowsCeip.h
+index dcfabac7e7..6725d0ac8c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WindowsCeip.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WindowsCeip.h
+@@ -17,6 +17,7 @@ Abstract:
+ #endif // _MSC_VER
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -27,6 +28,7 @@ extern "C" {
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ 
++_Windows_SupportedOS_Windows81_
+ BOOL
+ WINAPI
+ CeipIsOptedIn();

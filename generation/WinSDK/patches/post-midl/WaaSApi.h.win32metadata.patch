@@ -1,0 +1,22 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/WaaSApi.h b/generation/WinSDK/RecompiledIdlHeaders/um/WaaSApi.h
+index 714bada954..548c670f49 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/WaaSApi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/WaaSApi.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -105,10 +106,11 @@ EXTERN_C const IID IID_IWaaSAssessor;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("2347bbef-1a3b-45a4-902d-3e09c269b45e")
++    MIDL_INTERFACE("2347bbef-1a3b-45a4-902d-3e09c269b45e") _Windows_SupportedOS_15063_ 
+     IWaaSAssessor : public IUnknown
+     {
+     public:
++         
+         virtual HRESULT STDMETHODCALLTYPE GetOSUpdateAssessment( 
+             /* [annotation][retval][out] */ 
+             _Out_retval_  OSUpdateAssessment *result) = 0;

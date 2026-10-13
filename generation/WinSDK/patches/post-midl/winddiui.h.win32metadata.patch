@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winddiui.h b/generation/WinSDK/RecompiledIdlHeaders/um/winddiui.h
+index af9633fa2d..96bc6e7b13 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winddiui.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winddiui.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++
+ 
+ Copyright (c) 1990-2004  Microsoft Corporation
+@@ -48,7 +49,7 @@ DrvDevicePropertySheets(
+     LPARAM              lParam
+     );
+ 
+-typedef struct _DEVICEPROPERTYHEADER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DEVICEPROPERTYHEADER {
+     WORD    cbSize;
+     WORD    Flags;
+     HANDLE  hPrinter;
+@@ -71,7 +72,7 @@ DrvDocumentPropertySheets(
+     LPARAM              lParam
+     );
+ 
+-typedef struct _DOCUMENTPROPERTYHEADER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DOCUMENTPROPERTYHEADER {
+     WORD        cbSize;
+     WORD        Reserved;
+     HANDLE      hPrinter;
+@@ -118,7 +119,7 @@ DrvConvertDevMode(
+ // This is for DevQueryPrintEx()
+ //
+ 
+-typedef struct _DEVQUERYPRINT_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DEVQUERYPRINT_INFO {
+     WORD    cbSize;         // size of this structure in bytes
+     WORD    Level;          // Level of this info, 1 for this version
+     HANDLE  hPrinter;       // handle to the printer for the query
+@@ -238,7 +239,7 @@ DrvUpgradePrinter(
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+-typedef struct _DOCEVENT_FILTER {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _DOCEVENT_FILTER {
+     UINT    cbSize;
+     UINT    cElementsAllocated;
+     UINT    cElementsNeeded;
+@@ -474,7 +475,7 @@ DrvDocumentEvent(
+ //
+ // lParam of PRINTER_EVENT_ATTRIBUTES_CHANGED points to this structure.
+ //
+-typedef struct _PRINTER_EVENT_ATTRIBUTES_INFO {
++typedef struct _WIN32META_ANNOTATION_("win32metadata:struct_size_field=cbSize")  _PRINTER_EVENT_ATTRIBUTES_INFO {
+     DWORD       cbSize;
+     DWORD       dwOldAttributes;
+     DWORD       dwNewAttributes;

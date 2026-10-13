@@ -1,0 +1,57 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DtcHelp.h b/generation/WinSDK/RecompiledIdlHeaders/um/DtcHelp.h
+index 224e95ea27..64f7671349 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DtcHelp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DtcHelp.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /* ----------------------------------------------------------------------------
+ Microsoft	D.T.C (Distributed Transaction Coordinator)
+ 
+@@ -48,34 +49,34 @@ typedef enum DTC_STATUS_
+ #endif
+ 
+ typedef HRESULT  (__cdecl * DTC_GET_TRANSACTION_MANAGER)(
+-									/* in */ char * pszHost,
+-									/* in */ char * pszTmName,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") char * pszHost,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") char * pszTmName,
+ 									/* in */ REFIID rid,
+ 									/* in */ DWORD	dwReserved1,
+ 									/* in */ WORD	wcbReserved2,
+-									/* in */ void FAR * pvReserved2,
+-									/*out */ void** ppvObject )	;
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void FAR * pvReserved2,
++									/*out */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void** ppvObject )	;
+ 
+ typedef HRESULT  (__cdecl * DTC_GET_TRANSACTION_MANAGER_EX_A)(
+-									/* in */ char * i_pszHost,
+-									/* in */ char * i_pszTmName,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") char * i_pszHost,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") char * i_pszTmName,
+ 									/* in */ REFIID i_riid,
+ 									/* in */ DWORD i_grfOptions,
+-									/* in */ void * i_pvConfigParams,
+-									/* out */ void ** o_ppvObject
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * i_pvConfigParams,
++									/* out */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void ** o_ppvObject
+ 									);
+ 
+ typedef HRESULT  (__cdecl * DTC_GET_TRANSACTION_MANAGER_EX_W)(
+-									/* in */ WCHAR * i_pwszHost,
+-									/* in */ WCHAR * i_pwszTmName,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") WCHAR * i_pwszHost,
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") WCHAR * i_pwszTmName,
+ 									/* in */ REFIID i_riid,
+ 									/* in */ DWORD i_grfOptions,
+-									/* in */ void * i_pvConfigParams,
+-									/* out */ void ** o_ppvObject
++									/* in */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void * i_pvConfigParams,
++									/* out */ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") void ** o_ppvObject
+ 									);
+ 
+ typedef HRESULT	( * DTC_INSTALL_CLIENT ) ( 
+-									   LPTSTR i_pszRemoteTmHostName, 
++									   _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPTSTR i_pszRemoteTmHostName, 
+ 									   DWORD i_dwProtocol,
+ 									   DWORD i_dwOverwrite );
+ 

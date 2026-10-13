@@ -1,0 +1,60 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/CertPolEng.h b/generation/WinSDK/RecompiledIdlHeaders/um/CertPolEng.h
+index f2b2b06b8779954f0a178a9b19387a4206b924a6..e8a45acaa8693683da57dd4c5860386e2d40b1eb 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/CertPolEng.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/CertPolEng.h
+@@ -3,6 +3,7 @@
+ //
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -12,6 +13,7 @@
+ extern "C" {
+ #endif
+ 
++_Windows_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetTrustAnchors(
+@@ -39,6 +41,7 @@ PstGetCertificateChain(
+     _Out_                                   PCCERT_CHAIN_CONTEXT*               ppCertChainContext
+     );
+     
++_Windows_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetCertificates(
+@@ -50,6 +53,7 @@ PstGetCertificates(
+     _Outptr_result_buffer_(*pdwCertChainContextCount) PCCERT_CHAIN_CONTEXT**    ppCertChainContexts
+     );
+     
++_Windows_SupportedOS_Windows7_
+ NTSTATUS
+ NTAPI
+ PstAcquirePrivateKey(
+@@ -57,6 +61,7 @@ PstAcquirePrivateKey(
+     );
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstValidate(
+@@ -68,6 +73,7 @@ PstValidate(
+     _Out_opt_                               GUID*                               pProvGUID
+    );
+ 
++_Windows_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstMapCertificate(
+@@ -76,6 +82,7 @@ PstMapCertificate(
+     _Outptr_                             PVOID*                              ppTokenInformation
+   );
+ 
++_Windows_SupportedOS_Windows7_
+ NTSTATUS 
+ NTAPI
+ PstGetUserNameForCertificate(

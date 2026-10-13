@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h b/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
+index d21e508ddf..e36ffafdda 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/winrt/midlbase.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -130,7 +131,7 @@ EXTERN_C const IID IID_IUnknown;
+     {
+     public:
+         BEGIN_INTERFACE
+-        virtual HRESULT STDMETHODCALLTYPE QueryInterface( 
++        virtual HRESULT STDMETHODCALLTYPE _WIN32META_ANNOTATION_("win32metadata:can_return_errors_as_success") QueryInterface( 
+             /* [in] */ const GUID *riid,
+             /* [annotation][iid_is][out] */ 
+             __RPC__deref_out  void **ppvObject) = 0;
+@@ -193,7 +194,7 @@ EXTERN_C const IID IID_IUnknown;
+ 
+ 
+ 
+-HRESULT STDMETHODCALLTYPE IUnknown_QueryInterface_Proxy( 
++_Windows_SupportedOS_Windows2000_ HRESULT STDMETHODCALLTYPE IUnknown_QueryInterface_Proxy( 
+     IUnknown * This,
+     /* [in] */ const GUID *riid,
+     /* [annotation][iid_is][out] */ 
+@@ -207,7 +208,7 @@ void __RPC_STUB IUnknown_QueryInterface_Stub(
+     DWORD *_pdwStubPhase);
+ 
+ 
+-ULONG STDMETHODCALLTYPE IUnknown_AddRef_Proxy( 
++_Windows_SupportedOS_Windows2000_ ULONG STDMETHODCALLTYPE IUnknown_AddRef_Proxy( 
+     IUnknown * This);
+ 
+ 
+@@ -218,7 +219,7 @@ void __RPC_STUB IUnknown_AddRef_Stub(
+     DWORD *_pdwStubPhase);
+ 
+ 
+-ULONG STDMETHODCALLTYPE IUnknown_Release_Proxy( 
++_Windows_SupportedOS_Windows2000_ ULONG STDMETHODCALLTYPE IUnknown_Release_Proxy( 
+     IUnknown * This);
+ 
+ 
+@@ -250,7 +251,7 @@ typedef struct _FLAGGED_WORD_BLOB
+ 
+ typedef /* [unique] */  __RPC_unique_pointer FLAGGED_WORD_BLOB *wireBSTR;
+ 
+-typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
++_WIN32META_ANNOTATION_("win32metadata:raii_free=WindowsDeleteString") typedef /* [unique][wire_marshal] */  __RPC_unique_pointer HSTRING__ *HSTRING;
+ 
+ typedef struct EventRegistrationToken
+     {

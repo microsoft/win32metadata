@@ -1,0 +1,11 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
+index c6c0b3a5b6..d1cfef0025 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntstatus.h
+@@ -27725,4 +27725,6 @@ __inline NTSTATUS_FROM_WIN32(long x) { return x <= 0 ? (NTSTATUS)x : (NTSTATUS)
+ // end_ntsecapi
+ 
+ #endif // WIN32_NO_STATUS // winnt
++
++
+ #endif // _NTSTATUS_

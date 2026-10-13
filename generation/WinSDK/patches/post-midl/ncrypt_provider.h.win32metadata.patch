@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
+index 614a93fd7e..f8738464e8 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/cpdk/ncrypt_provider.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ //
+ #include <winapifamily.h>
+@@ -15,7 +16,7 @@ extern "C" {
+ //
+ typedef _Check_return_ SECURITY_STATUS
+ (WINAPI * NCryptOpenStorageProviderFn)(
+-    _Out_   NCRYPT_PROV_HANDLE *phProvider,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_PROV_HANDLE *phProvider,
+     _In_opt_ LPCWSTR pszProviderName,
+     _In_    DWORD   dwFlags);
+ 
+@@ -64,7 +65,7 @@ typedef _Check_return_ SECURITY_STATUS
+ 
+ typedef SECURITY_STATUS
+ (WINAPI * NCryptFreeBufferFn)(
+-    _Pre_notnull_ PVOID   pvInput);
++    _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") _Pre_notnull_ PVOID   pvInput);
+ 
+ //
+ //
+@@ -72,7 +73,7 @@ typedef SECURITY_STATUS
+ typedef _Check_return_ SECURITY_STATUS
+ (WINAPI * NCryptOpenKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszKeyName,
+     _In_opt_ DWORD  dwLegacyKeySpec,
+     _In_    DWORD   dwFlags);
+@@ -83,7 +84,7 @@ typedef _Check_return_ SECURITY_STATUS
+ typedef _Check_return_ SECURITY_STATUS
+ (WINAPI * NCryptCreatePersistedKeyFn)(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszAlgId,
+     _In_opt_ LPCWSTR pszKeyName,
+     _In_    DWORD   dwLegacyKeySpec,
+@@ -193,7 +194,7 @@ typedef _Check_return_ SECURITY_STATUS
+     _In_opt_ NCRYPT_KEY_HANDLE hImportKey,
+     _In_    LPCWSTR pszBlobType,
+     _In_opt_ NCryptBufferDesc *pParameterList,
+-    _Out_   NCRYPT_KEY_HANDLE *phKey,
++    _Win32_RAIIFree_(NCryptFreeObject, 0) _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_reads_bytes_(cbData) PBYTE pbData,
+     _In_    DWORD   cbData,
+     _In_    DWORD   dwFlags);

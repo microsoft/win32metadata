@@ -1,0 +1,72 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
+index 3df390971e..6e09a9d403 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ElsCore.h
+@@ -16,6 +16,7 @@ Abstract:
+ #define __ELS_CORE__
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #ifdef __cplusplus
+ extern "C" {
+@@ -26,7 +27,7 @@ extern "C" {
+ 
+ struct _MAPPING_PROPERTY_BAG;
+ 
+-typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(struct _MAPPING_PROPERTY_BAG *pBag, LPVOID data, DWORD dwDataSize, HRESULT Result);
++typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(_WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") struct _MAPPING_PROPERTY_BAG *pBag, _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") LPVOID data, DWORD dwDataSize, HRESULT Result);
+ 
+ //
+ // Service types constants used in MAPPING_ENUM_OPTIONS (ServiceType field)
+@@ -47,7 +48,7 @@ typedef void (CALLBACK* PFN_MAPPINGCALLBACKPROC)(struct _MAPPING_PROPERTY_BAG *p
+ // Public ELS structures
+ //
+ 
+-typedef struct _MAPPING_SERVICE_INFO
++typedef struct  _MAPPING_SERVICE_INFO
+ {
+     size_t      Size;
+     LPWSTR      pszCopyright;
+@@ -149,6 +150,7 @@ typedef struct _MAPPING_PROPERTY_BAG
+ // Public ELS APIs
+ //
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingGetServices(
+@@ -158,6 +160,7 @@ MappingGetServices(
+     );
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingFreeServices(
+@@ -165,6 +168,7 @@ MappingFreeServices(
+     );
+ 
+ 
++_Windows_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ MappingRecognizeText(
+@@ -182,7 +186,7 @@ MappingRecognizeText(
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-HRESULT
++_Windows_SupportedOS_Windows7_ HRESULT
+ WINAPI
+ MappingDoAction(
+     _Inout_ PMAPPING_PROPERTY_BAG pBag,
+@@ -196,7 +200,7 @@ MappingDoAction(
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+-HRESULT
++_Windows_SupportedOS_Windows7_ HRESULT
+ WINAPI
+ MappingFreePropertyBag(
+     _In_ PMAPPING_PROPERTY_BAG pBag

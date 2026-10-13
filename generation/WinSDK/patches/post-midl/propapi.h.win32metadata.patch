@@ -1,0 +1,28 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
+index 858a29dbe1..d14230f632 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/propapi.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ //+-------------------------------------------------------------------------
+ //
+@@ -30,14 +31,14 @@ typedef VOID* NTPROP;
+ 
+ #include <propidl.h>
+ 
+-EXTERN_C
++_Windows_SupportedOS_Windows2000_ EXTERN_C
+ _Success_(TRUE)  /* Raises status on failure */
+ ULONG __stdcall
+-StgPropertyLengthAsVariant(
++  StgPropertyLengthAsVariant(
+             _In_reads_bytes_(cbProp) const SERIALIZEDPROPERTYVALUE* pProp,
+             _In_ ULONG cbProp,
+             _In_ USHORT CodePage,
+-            _Reserved_ BYTE bReserved);
++            _WIN32META_ANNOTATION_("win32metadata:optional") _Reserved_ BYTE bReserved);
+ 
+ #ifdef __cplusplus
+ }

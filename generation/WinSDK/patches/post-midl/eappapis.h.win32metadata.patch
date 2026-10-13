@@ -1,0 +1,145 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/eappapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/eappapis.h
+index b7cb176d00..1c08f33a0c 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/eappapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/eappapis.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ // Copyright (c) Microsoft Corporation
+@@ -68,12 +69,12 @@ extern "C"
+     // So the client should not initialize a conflicting COM environment.
+     // If the client really needs a different COM environment, it should use the
+     // COM APIs directly instead of using this C style APIs.
+-    DWORD APIENTRY EapHostPeerInitialize();
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerInitialize();
+ 
+     // Must call this after it is done calling any other EapHostPeer...
+     // functions.
+     // Inside this function it calls CoUninitialize().
+-    void APIENTRY EapHostPeerUninitialize();
++    _Windows_SupportedOS_WindowsVista_ void APIENTRY EapHostPeerUninitialize();
+ 
+     // If this function succeeds, no matter the calls to other functions
+     // succeed or fail, the caller MUST call EapHostPeerEndSession() to end
+@@ -136,7 +137,7 @@ extern "C"
+     //
+     // - pSessionId:
+     //   Return session ID in it. This is used to identify the authentication session.
+-    DWORD APIENTRY EapHostPeerBeginSession(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerBeginSession(
+         _In_ DWORD dwFlags,
+         _In_ EAP_METHOD_TYPE eapType,
+         _In_ const EapAttributes* const pAttributeArray,
+@@ -177,7 +178,7 @@ extern "C"
+     //
+     // - pEapOutput:
+     //   It will tell the supplicant what's the next EAPHost API that it should call.
+-    DWORD APIENTRY EapHostPeerProcessReceivedPacket(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerProcessReceivedPacket(
+         _In_ EAP_SESSIONID sessionHandle,
+         _In_ DWORD cbReceivePacket,
+         _In_reads_(cbReceivePacket) const BYTE* const pReceivePacket,
+@@ -196,7 +197,7 @@ extern "C"
+     //
+     // - ppSendPacket:
+     //   pointer to a buffer that contains the packet to send upon return
+-    DWORD APIENTRY EapHostPeerGetSendPacket(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetSendPacket(
+         _In_ EAP_SESSIONID sessionHandle,
+         _Out_ DWORD* pcbSendPacket,
+         _Outptr_result_buffer_(*pcbSendPacket) BYTE** ppSendPacket,
+@@ -213,7 +214,7 @@ extern "C"
+     // - ppResult:
+     //   EAPHost will fill this struct with related information as defined
+     //   by EapHostPeerMethodResult
+-    DWORD APIENTRY EapHostPeerGetResult(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetResult(
+         _In_ EAP_SESSIONID sessionHandle,
+         _In_ EapHostPeerMethodResultReason reason,
+         _Out_ EapHostPeerMethodResult* ppResult,
+@@ -232,7 +233,7 @@ extern "C"
+     // - ppUIContextData:
+     //   It will be passed to EapHostPeerInvokeInteractiveUI() as _In_ parameter
+     //   pUIContextData
+-    DWORD APIENTRY EapHostPeerGetUIContext(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetUIContext(
+         _In_ EAP_SESSIONID sessionHandle,
+         _Out_ DWORD* pdwSizeOfUIContextData,
+         _Outptr_result_buffer_(*pdwSizeOfUIContextData) BYTE** ppUIContextData,
+@@ -255,7 +256,7 @@ extern "C"
+     //
+     // - pEapOutput:
+     //   It will tell the supplicant what's the next EAPHost API that it should call.
+-    DWORD APIENTRY EapHostPeerSetUIContext(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerSetUIContext(
+         _In_ EAP_SESSIONID sessionHandle,
+         _In_ DWORD dwSizeOfUIContextData,
+         _In_reads_(dwSizeOfUIContextData) const BYTE* const pUIContextData,
+@@ -272,7 +273,7 @@ extern "C"
+     //
+     // - pAttributes:
+     //   EAP attributes returned to supplicant.
+-    DWORD APIENTRY EapHostPeerGetResponseAttributes(_In_ EAP_SESSIONID sessionHandle, _Out_ EapAttributes* pAttribs, _Outptr_ EAP_ERROR** ppEapError);
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetResponseAttributes(_In_ EAP_SESSIONID sessionHandle, _Out_ EapAttributes* pAttribs, _Outptr_ EAP_ERROR** ppEapError);
+ 
+     // See EapHostPeerGetResponseAttributes() for when this function will be called.
+     // Even if supplicant doesn't care about or doesn't understand the attributes
+@@ -285,7 +286,7 @@ extern "C"
+     //
+     // - pAttribs:
+     //   EAP attributes that the supplicant passes to EAPHost
+-    DWORD APIENTRY EapHostPeerSetResponseAttributes(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerSetResponseAttributes(
+         _In_ EAP_SESSIONID sessionHandle,
+         _In_ const EapAttributes* const pAttribs,
+         _Out_ EapHostPeerResponseAction* pEapOutput,
+@@ -306,7 +307,7 @@ extern "C"
+     // - ppAuthData:
+     //   contains the returned authentication data. Interpretation of the data
+     //   depends on the "authParam" passed in
+-    DWORD APIENTRY EapHostPeerGetAuthStatus(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetAuthStatus(
+         _In_ EAP_SESSIONID sessionHandle,
+         _In_ EapHostPeerAuthParams authParam,
+         _Out_ DWORD* pcbAuthData,
+@@ -319,9 +320,9 @@ extern "C"
+     // Parameters:
+     // - sessionHandle:
+     //   the value returned through *pSessionId from EapHostPeerBeginSession()
+-    DWORD APIENTRY EapHostPeerEndSession(_In_ EAP_SESSIONID sessionHandle, _Outptr_ EAP_ERROR** ppEapError);
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerEndSession(_In_ EAP_SESSIONID sessionHandle, _Outptr_ EAP_ERROR** ppEapError);
+ 
+-    DWORD APIENTRY EapHostPeerGetDataToUnplumbCredentials(
++    _Windows_SupportedOS_10240_ DWORD APIENTRY EapHostPeerGetDataToUnplumbCredentials(
+         _Out_ GUID* pConnectionIdThatLastSavedCreds,
+         _Out_ __int3264* phCredentialImpersonationToken,
+         _In_ EAP_SESSIONID sessionHandle,
+@@ -337,15 +338,15 @@ extern "C"
+     //   the same connection GUID passed into EapHostPeerBeginSession(). If
+     //   a NULL is passed to EapHostPeerBeginSession() as the connection id,
+     //   then there is no need to call this API.
+-    DWORD APIENTRY EapHostPeerClearConnection(_In_ GUID* pConnectionId, _Outptr_ EAP_ERROR** ppEapError);
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerClearConnection(_In_ GUID* pConnectionId, _Outptr_ EAP_ERROR** ppEapError);
+ 
+     // If any of the previous function is called, and an EAP_ERROR is returned,
+     // this function must be called to free the memory.
+-    void APIENTRY EapHostPeerFreeEapError(_In_ EAP_ERROR* pEapError);
++    _Windows_SupportedOS_WindowsVista_ void APIENTRY EapHostPeerFreeEapError(_In_ EAP_ERROR* pEapError);
+ 
+     // EAPHost will call this function, and it would return user data and user identity.
+ 
+-    DWORD APIENTRY EapHostPeerGetIdentity(
++    _Windows_SupportedOS_WindowsVista_ DWORD APIENTRY EapHostPeerGetIdentity(
+         // API's version number for ease of interoperability. It must be 0.
+         _In_ DWORD dwVersion,
+         // EAP_FLAG_xxx defined in eaptypes.w
+@@ -381,7 +382,7 @@ extern "C"
+         _In_ DWORD dwSizeofPassword, _In_reads_bytes_(dwSizeofPassword) LPWSTR szPassword, _Outptr_ LPWSTR* ppszEncPassword);
+ 
+     // In case of GetInentity returned memory needs to be released using this API
+-    void APIENTRY EapHostPeerFreeRuntimeMemory(_In_ BYTE* pData);
++    _Windows_SupportedOS_WindowsVista_ void APIENTRY EapHostPeerFreeRuntimeMemory(_In_ BYTE* pData);
+ 
+ #ifdef __cplusplus
+ }

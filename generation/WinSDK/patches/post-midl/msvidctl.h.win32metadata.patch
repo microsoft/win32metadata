@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msvidctl.h b/generation/WinSDK/RecompiledIdlHeaders/um/msvidctl.h
+index bcacab84fcc7e0db067c2d5ec210ade31614f4fb..42cadea091d712302cdae9a0a406c759f82a91c3 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msvidctl.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msvidctl.h
+@@ -844,6 +844,7 @@ extern "C"{
+ //--------------------------------------------------------------------------
+ #pragma once
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ typedef 
+@@ -919,7 +920,7 @@ EXTERN_C const IID IID_IMSVidCtl;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("B0EDF162-910A-11D2-B632-00C04F79498E")
+-    IMSVidCtl : public IDispatch
++    _Windows_SupportedOS_WindowsXP_ IMSVidCtl : public IDispatch
+     {
+     public:
+         virtual /* [id][propget] */ HRESULT STDMETHODCALLTYPE get_AutoSize( 
+@@ -1413,7 +1414,7 @@ EXTERN_C const IID IID_IMSVidCtl;
+         END_INTERFACE
+     } IMSVidCtlVtbl;
+ 
+-    interface IMSVidCtl
++    interface _Windows_SupportedOS_WindowsXP_ IMSVidCtl
+     {
+         CONST_VTBL struct IMSVidCtlVtbl *lpVtbl;
+     };

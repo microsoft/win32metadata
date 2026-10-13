@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h b/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
+index fe36433191..756e12f3f7 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EapAuthenticatorActionDefine.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ ////////////////////////////////////////////////////////////
+ //
+ // Copyright (c) Microsoft Corporation.
+@@ -26,7 +27,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
++enum   _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
+ {
+    // Discard the request as EAP cannot use it.
+    EAP_METHOD_AUTHENTICATOR_RESPONSE_DISCARD = 0,
+@@ -42,7 +43,7 @@ enum _EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION
+    //EAP_METHOD_AUTHENTICATOR_RESPONSE_NONE
+ } EAP_METHOD_AUTHENTICATOR_RESPONSE_ACTION;
+ 
+-typedef struct _EAP_METHOD_AUTHENTICATOR_RESULT
++typedef struct   _EAP_METHOD_AUTHENTICATOR_RESULT
+ {
+    BOOL fIsSuccess;
+    DWORD dwFailureReason;
+@@ -53,7 +54,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum tagEapPeerMethodResponseAction
++enum   tagEapPeerMethodResponseAction
+ {
+         // Discard the request as EAP cannot use it.
+         EapPeerMethodResponseActionDiscard = 0,
+@@ -71,7 +72,7 @@ enum tagEapPeerMethodResponseAction
+ 
+ // Structures used by EAP methods on the peer to communicate with the host.
+ 
+-typedef struct tagEapPeerMethodOuput 
++typedef struct   tagEapPeerMethodOuput 
+ {
+         //EapPeerMethodDecision decision;
+         //EapPeerMethodState state;
+@@ -86,7 +87,7 @@ typedef
+ #ifdef __midl
+    [v1_enum]
+ #endif
+-enum tagEapPeerMethodResultReason
++enum   tagEapPeerMethodResultReason
+ {
+    EapPeerMethodResultUnknown = 1,
+    EapPeerMethodResultSuccess,

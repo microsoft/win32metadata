@@ -1,0 +1,156 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h b/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
+index ab0ef556ea..33e33e81aa 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/prnasnot.h
+@@ -15,6 +15,7 @@ Revision History:
+ --*/
+ #ifndef _PRINTASYNCNOTIFY_H_
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -57,14 +58,14 @@ DEFINE_GUID(PRINT_PORT_MONITOR_NOTIFY_CHANNEL, 0x25df3b0e, 0x74a9, 0x47f5, 0x80,
+ extern "C" {
+ #endif
+ 
+-typedef enum
++typedef enum  
+ {
+     kPerUser,
+     kAllUsers,
+ 
+ } PrintAsyncNotifyUserFilter;
+ 
+-typedef enum
++typedef enum  
+ {
+     kBiDirectional,
+     kUniDirectional
+@@ -77,7 +78,7 @@ typedef GUID PrintAsyncNotificationType;
+ 
+ #undef  INTERFACE
+ #define INTERFACE IPrintAsyncNotifyDataObject
+-DECLARE_INTERFACE_(IPrintAsyncNotifyDataObject, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IPrintAsyncNotifyDataObject, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(
+         THIS_
+@@ -93,6 +94,8 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyDataObject, IUnknown)
+         THIS
+         ) PURE;
+ 
++    
++    
+     STDMETHOD(AcquireData)(
+          THIS_
+          _Outptr_opt_result_buffer_(*pSize) BYTE             **ppNotificationData,
+@@ -100,6 +103,8 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyDataObject, IUnknown)
+          _Outptr_opt_                   PrintAsyncNotificationType **ppSchema
+          ) PURE;
+ 
++    
++    
+     STDMETHOD(ReleaseData)(
+         THIS
+         ) PURE;
+@@ -109,7 +114,7 @@ typedef interface IPrintAsyncNotifyCallback IPrintAsyncNotifyCallback;
+ 
+ #undef  INTERFACE
+ #define INTERFACE IPrintAsyncNotifyChannel
+-DECLARE_INTERFACE_(IPrintAsyncNotifyChannel, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IPrintAsyncNotifyChannel, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(
+         THIS_
+@@ -125,11 +130,17 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyChannel, IUnknown)
+         THIS
+         ) PURE;
+ 
++    
++    
++    
+     STDMETHOD(SendNotification)(
+          THIS_
+          _In_ IPrintAsyncNotifyDataObject *pData
+          ) PURE;
+ 
++    
++    
++    
+     STDMETHOD(CloseChannel)(
+          THIS_
+          _In_ IPrintAsyncNotifyDataObject *pData
+@@ -139,7 +150,7 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyChannel, IUnknown)
+ 
+ #undef  INTERFACE
+ #define INTERFACE IPrintAsyncNotifyCallback
+-DECLARE_INTERFACE_(IPrintAsyncNotifyCallback, IUnknown)
++DECLARE_INTERFACE_( _Windows_SupportedOS_WindowsVista_ IPrintAsyncNotifyCallback, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(
+         THIS_
+@@ -155,12 +166,18 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyCallback, IUnknown)
+         THIS
+         ) PURE;
+ 
++    
++    
++    
+     STDMETHOD(OnEventNotify)(
+          THIS_
+          _In_ IPrintAsyncNotifyChannel    *pChannel,
+          _In_ IPrintAsyncNotifyDataObject *pData
+          ) PURE;
+ 
++    
++    
++    
+     STDMETHOD(ChannelClosed)(
+          THIS_
+          _In_ IPrintAsyncNotifyChannel    *pChannel,
+@@ -170,25 +187,34 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyCallback, IUnknown)
+ 
+ #undef INTERFACE
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
++
+ RegisterForPrintAsyncNotifications(
+     _In_opt_ PCWSTR                            pszName,
+     _In_     PrintAsyncNotificationType*       pNotificationType,
+              PrintAsyncNotifyUserFilter        eUserFilter,
+              PrintAsyncNotifyConversationStyle eConversationStyle,
+     _In_     IPrintAsyncNotifyCallback*        pCallback,
+-    _Out_    HANDLE*                           phNotify
++    _Win32_RAIIFree_(CloseHandle, -1, 0) _Out_     HANDLE*                           phNotify
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
++
+ UnRegisterForPrintAsyncNotifications(
+     _In_     HANDLE
+     );
+ 
++_Windows_SupportedOS_WindowsVista_ 
++
+ HRESULT
+ WINAPI
++
+ CreatePrintAsyncNotifyChannel(
+     _In_opt_ PCWSTR                            pszName,
+     _In_     PrintAsyncNotificationType*       pNotificationType,
+@@ -198,7 +224,7 @@ CreatePrintAsyncNotifyChannel(
+     _Out_    IPrintAsyncNotifyChannel**        ppIAsynchNotification
+     );
+ 
+-typedef enum
++typedef enum  
+ {
+     CHANNEL_CLOSED_BY_SERVER                    = 0x01,
+     CHANNEL_CLOSED_BY_ANOTHER_LISTENER          = 0x02,

@@ -1,0 +1,54 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h b/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
+index be518561df..74ea4cb810 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/mfmediacapture.h
+@@ -19,6 +19,7 @@
+ #endif
+ 
+ #include "rpc.h"
++#include <win32metadata_annotations.h>
+ #include "rpcndr.h"
+ 
+ #ifndef __RPCNDR_H_VERSION__
+@@ -98,10 +99,12 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureInitializationSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("3DE21209-8BA6-4f2a-A577-2819B56FF14D")
++    MIDL_INTERFACE("3DE21209-8BA6-4f2a-A577-2819B56FF14D") _Windows_SupportedOS_Windows8_ 
+     IAdvancedMediaCaptureInitializationSettings : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE SetDirectxDeviceManager( 
+             /* [annotation][in] */ 
+             _In_  IMFDXGIDeviceManager *value) = 0;
+@@ -185,10 +188,12 @@ EXTERN_C const IID IID_IAdvancedMediaCaptureSettings;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("24E0485F-A33E-4aa1-B564-6019B1D14F65")
++    MIDL_INTERFACE("24E0485F-A33E-4aa1-B564-6019B1D14F65") _Windows_SupportedOS_Windows8_ 
+     IAdvancedMediaCaptureSettings : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetDirectxDeviceManager( 
+             /* [annotation][out] */ 
+             _Out_  IMFDXGIDeviceManager **value) = 0;
+@@ -272,10 +277,12 @@ EXTERN_C const IID IID_IAdvancedMediaCapture;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("D0751585-D216-4344-B5BF-463B68F977BB")
++    MIDL_INTERFACE("D0751585-D216-4344-B5BF-463B68F977BB") _Windows_SupportedOS_Windows8_ 
+     IAdvancedMediaCapture : public IUnknown
+     {
+     public:
++        
++        
+         virtual HRESULT STDMETHODCALLTYPE GetAdvancedMediaCaptureSettings( 
+             /* [annotation][out] */ 
+             _Out_  IAdvancedMediaCaptureSettings **value) = 0;

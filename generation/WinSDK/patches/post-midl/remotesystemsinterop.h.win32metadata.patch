@@ -1,0 +1,23 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RemoteSystemsInterop.h b/generation/WinSDK/RecompiledIdlHeaders/um/RemoteSystemsInterop.h
+index 6a844c198f..db21e1920b 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RemoteSystemsInterop.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RemoteSystemsInterop.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -92,11 +93,11 @@ EXTERN_C const IID IID_ICorrelationVectorInformation;
+     public:
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_LastCorrelationVectorForThread( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HSTRING *cv) = 0;
++            _Win32_RAIIFree_(WindowsDeleteString) _Out_retval_  HSTRING *cv) = 0;
+         
+         virtual /* [propget] */ HRESULT STDMETHODCALLTYPE get_NextCorrelationVectorForThread( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  HSTRING *cv) = 0;
++            _Win32_RAIIFree_(WindowsDeleteString) _Out_retval_  HSTRING *cv) = 0;
+         
+         virtual /* [propput] */ HRESULT STDMETHODCALLTYPE put_NextCorrelationVectorForThread( 
+             /* [annotation][in] */ 

@@ -1,0 +1,90 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msdelta.h b/generation/WinSDK/RecompiledIdlHeaders/um/msdelta.h
+index e8e1cc55ae..60eb627bbf 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msdelta.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msdelta.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /* Copyright (c) Microsoft Corporation.  All rights reserved. */
+ 
+ #pragma once
+@@ -34,7 +35,7 @@ typedef struct _DELTA_INPUT
+     union
+     {
+         /** Start of memory block, if it is not Editable. */
+-        LPCVOID lpcStart;
++        _WIN32META_ANNOTATION_("win32metadata:const") LPCVOID lpcStart;
+ 
+         /** Start of memory block, if it is Editable. */
+         LPVOID lpStart;
+@@ -356,7 +357,7 @@ GetDeltaInfoB(
+  * @param lpHeaderInfo  Header information for given Delta.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ WINAPI
+ GetDeltaInfoA(
+     _In_ LPCSTR lpDeltaName,
+@@ -369,7 +370,7 @@ GetDeltaInfoA(
+  * @param lpHeaderInfo  Header information for given Delta.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ WINAPI
+ GetDeltaInfoW(
+     _In_ LPCWSTR lpDeltaName,
+@@ -452,7 +453,7 @@ ApplyDeltaProvidedB(
+  * @param lpTargetName  Target file name, ASCII.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ WINAPI
+ ApplyDeltaA(
+     _In_ DELTA_FLAG_TYPE ApplyFlags,
+@@ -470,7 +471,7 @@ ApplyDeltaA(
+  * @param lpTargetName  Target file name, Unicode.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ WINAPI
+ ApplyDeltaW(
+     _In_ DELTA_FLAG_TYPE ApplyFlags,
+@@ -533,7 +534,7 @@ CreateDeltaB(
+  * @param lpDeltaName   Result delta file name, ASCII.
+  * @return              TRUE if sucess, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ WINAPI
+ CreateDeltaA(
+     _In_ DELTA_FILE_TYPE FileTypeSet,
+@@ -565,7 +566,7 @@ CreateDeltaA(
+  * @param lpDeltaName   Result delta file name, Unicode.
+  * @return              TRUE if sucess, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ WINAPI
+ CreateDeltaW(
+     _In_ DELTA_FILE_TYPE FileTypeSet,
+@@ -617,7 +618,7 @@ GetDeltaSignatureB(
+  * @param lpHash        Result hash.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:ansi") BOOL
+ WINAPI
+ GetDeltaSignatureA(
+     _In_ DELTA_FILE_TYPE FileTypeSet,
+@@ -636,7 +637,7 @@ GetDeltaSignatureA(
+  * @param lpHash        Result hash.
+  * @return              TRUE if success, FALSE otherwise.
+  */
+-BOOL
++_WIN32META_ANNOTATION_("win32metadata:unicode") BOOL
+ WINAPI
+ GetDeltaSignatureW(
+     _In_ DELTA_FILE_TYPE FileTypeSet,

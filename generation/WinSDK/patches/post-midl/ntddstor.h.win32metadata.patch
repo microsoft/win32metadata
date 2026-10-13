@@ -1,0 +1,18 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddstor.h b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddstor.h
+index 183ef49c0c..6f2806df47 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/ntddstor.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/ntddstor.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ /*++ BUILD Version: 0001    // Increment this if a change has global effects
+ 
+ Copyright (c) Microsoft Corporation. All rights reserved.
+@@ -846,7 +847,7 @@ typedef struct _DEVICE_MEDIA_INFO {
+             STORAGE_MEDIA_TYPE MediaType;
+             ULONG   MediaCharacteristics; // Bitmask of MEDIA_XXX values.
+             ULONG   CurrentBlockSize;
+-            STORAGE_BUS_TYPE BusType;
++            _Win32_AssociatedEnum_(STORAGE_BUS_TYPE) STORAGE_BUS_TYPE BusType;
+ 
+             //
+             // Bus specific information describing the medium supported.

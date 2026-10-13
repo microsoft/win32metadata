@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h b/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
+index ad3e9af54a..36e5a5cd16 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/shared/nvme.h
+@@ -20,6 +20,7 @@ Revision:
+ #define NVME_INCLUDED
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family or Storage Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_STORAGE)
+@@ -255,7 +256,7 @@ typedef union {
+ //
+ // Offset 0020h: NvmePropNSSR (NVM Subsystem Reset)
+ //
+-typedef struct _NVME_NVM_SUBSYSTEM_RESET {
++typedef struct  _NVME_NVM_SUBSYSTEM_RESET {
+ 
+     ULONG   NSSRC;                  // RW - NVM Subsystem Reset Control (NSSRC)
+ 

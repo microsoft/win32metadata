@@ -1,0 +1,20 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h b/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
+index cb54c28507..fe7ad33060 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bcp47mrm.h
+@@ -3,6 +3,7 @@
+ 
+ #ifndef _BCP47MRM_H_
+ #define _BCP47MRM_H_
++#include "win32metadata_annotations.h"
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+ STDAPI GetDistanceOfClosestLanguageInList(
+@@ -11,6 +12,7 @@ STDAPI GetDistanceOfClosestLanguageInList(
+     _In_ wchar_t wchListDelimiter,
+     _Out_ double * pClosestDistance);
+  
++
+ STDAPI_(bool) IsWellFormedTag(_In_ PCWSTR pszTag);
+ #endif
+ 

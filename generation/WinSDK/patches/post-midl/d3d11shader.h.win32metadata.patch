@@ -1,0 +1,120 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shader.h b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shader.h
+index 2f1eaa8f8c..5773f90806 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shader.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/d3d11shader.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ //////////////////////////////////////////////////////////////////////////////
+ //
+ //  Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -266,7 +267,7 @@ DEFINE_GUID(IID_ID3D11ShaderReflectionType,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionType
+ 
+-DECLARE_INTERFACE(ID3D11ShaderReflectionType)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11ShaderReflectionType)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_SHADER_TYPE_DESC *pDesc) PURE;
+     
+@@ -291,7 +292,7 @@ DEFINE_GUID(IID_ID3D11ShaderReflectionVariable,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionVariable
+ 
+-DECLARE_INTERFACE(ID3D11ShaderReflectionVariable)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11ShaderReflectionVariable)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_SHADER_VARIABLE_DESC *pDesc) PURE;
+     
+@@ -309,9 +310,9 @@ DEFINE_GUID(IID_ID3D11ShaderReflectionConstantBuffer,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflectionConstantBuffer
+ 
+-DECLARE_INTERFACE(ID3D11ShaderReflectionConstantBuffer)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11ShaderReflectionConstantBuffer)
+ {
+-    STDMETHOD(GetDesc)(THIS_ D3D11_SHADER_BUFFER_DESC *pDesc) PURE;
++    STDMETHOD(GetDesc)(THIS_ _WIN32META_ANNOTATION_("win32metadata:in") _WIN32META_ANNOTATION_("win32metadata:out") D3D11_SHADER_BUFFER_DESC *pDesc) PURE;
+     
+     STDMETHOD_(ID3D11ShaderReflectionVariable*, GetVariableByIndex)(THIS_ _In_ UINT Index) PURE;
+     STDMETHOD_(ID3D11ShaderReflectionVariable*, GetVariableByName)(THIS_ _In_ LPCSTR Name) PURE;
+@@ -330,7 +331,7 @@ DEFINE_GUID(IID_ID3D11ShaderReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflection
+ 
+-DECLARE_INTERFACE_(ID3D11ShaderReflection, IUnknown)
++DECLARE_INTERFACE_(  _WIN32META_ANNOTATION_("win32metadata:agile") _Windows_SupportedOS_Windows7_ ID3D11ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid,
+                               _Out_ LPVOID *ppv) PURE;
+@@ -384,7 +385,7 @@ DEFINE_GUID(IID_ID3D11LibraryReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D11LibraryReflection
+ 
+-DECLARE_INTERFACE_(ID3D11LibraryReflection, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11LibraryReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -403,7 +404,7 @@ DEFINE_GUID(IID_ID3D11FunctionReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D11FunctionReflection
+ 
+-DECLARE_INTERFACE(ID3D11FunctionReflection)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11FunctionReflection)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_FUNCTION_DESC * pDesc) PURE;
+     
+@@ -430,7 +431,7 @@ DEFINE_GUID(IID_ID3D11FunctionParameterReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D11FunctionParameterReflection
+ 
+-DECLARE_INTERFACE(ID3D11FunctionParameterReflection)
++DECLARE_INTERFACE( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11FunctionParameterReflection)
+ {
+     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_PARAMETER_DESC * pDesc) PURE;
+ };
+@@ -444,7 +445,7 @@ DEFINE_GUID(IID_ID3D11ModuleInstance,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ModuleInstance
+ 
+-DECLARE_INTERFACE_(ID3D11ModuleInstance, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11ModuleInstance, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -477,7 +478,7 @@ DEFINE_GUID(IID_ID3D11Module,
+ #undef INTERFACE
+ #define INTERFACE ID3D11Module
+ 
+-DECLARE_INTERFACE_(ID3D11Module, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11Module, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -497,7 +498,7 @@ DEFINE_GUID(IID_ID3D11Linker,
+ #undef INTERFACE
+ #define INTERFACE ID3D11Linker
+ 
+-DECLARE_INTERFACE_(ID3D11Linker, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11Linker, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -527,7 +528,7 @@ DEFINE_GUID(IID_ID3D11LinkingNode,
+ #undef INTERFACE
+ #define INTERFACE ID3D11LinkingNode
+ 
+-DECLARE_INTERFACE_(ID3D11LinkingNode, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11LinkingNode, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+@@ -543,7 +544,7 @@ DEFINE_GUID(IID_ID3D11FunctionLinkingGraph,
+ #undef INTERFACE
+ #define INTERFACE ID3D11FunctionLinkingGraph
+ 
+-DECLARE_INTERFACE_(ID3D11FunctionLinkingGraph, IUnknown)
++DECLARE_INTERFACE_( _WIN32META_ANNOTATION_("win32metadata:agile") ID3D11FunctionLinkingGraph, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+     STDMETHOD_(ULONG, AddRef)(THIS) PURE;

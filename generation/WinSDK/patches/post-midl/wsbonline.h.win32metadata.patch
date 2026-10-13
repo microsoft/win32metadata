@@ -1,0 +1,67 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wsbonline.h b/generation/WinSDK/RecompiledIdlHeaders/um/wsbonline.h
+index 02bb298713..698cf941c5 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wsbonline.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wsbonline.h
+@@ -16,6 +16,7 @@ Abstract:
+ #pragma once
+ #endif // _MSC_VER
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -25,7 +26,7 @@ Abstract:
+ #define WSB_MAX_OB_STATUS_ENTRY             (5)
+ 
+ //Enums and structures needed for UpdateOBStatusInWindowsServerBackup
+-typedef enum _WSB_OB_STATUS_ENTRY_PAIR_TYPE
++typedef enum  _WSB_OB_STATUS_ENTRY_PAIR_TYPE
+ {
+     WSB_OB_ET_UNDEFINED      = 0,
+     WSB_OB_ET_STRING         = 1,
+@@ -36,13 +37,13 @@ typedef enum _WSB_OB_STATUS_ENTRY_PAIR_TYPE
+     WSB_OB_ET_MAX            = 6
+ } WSB_OB_STATUS_ENTRY_PAIR_TYPE;
+ 
+-typedef struct _WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR 
++typedef struct  _WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR 
+ {
+     LPWSTR                              m_wszObStatusEntryPairValue;
+     WSB_OB_STATUS_ENTRY_PAIR_TYPE       m_ObStatusEntryPairType;
+ } WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR;
+ 
+-typedef struct _WSB_OB_STATUS_ENTRY 
++typedef struct  _WSB_OB_STATUS_ENTRY 
+ {
+     DWORD                   m_dwIcon;
+     DWORD                   m_dwStatusEntryName;
+@@ -51,7 +52,7 @@ typedef struct _WSB_OB_STATUS_ENTRY
+     WSB_OB_STATUS_ENTRY_VALUE_TYPE_PAIR     *m_rgValueTypePair;
+ } WSB_OB_STATUS_ENTRY;
+ 
+-typedef struct _WSB_OB_STATUS_INFO 
++typedef struct  _WSB_OB_STATUS_INFO 
+ {
+     GUID                 m_guidSnapinId;
+     DWORD                m_cStatusEntry;
+@@ -59,7 +60,7 @@ typedef struct _WSB_OB_STATUS_INFO
+ } WSB_OB_STATUS_INFO;
+ 
+ //Struct needed for RegisterOnlineBackupWithWindowsServerBackup
+-typedef struct _WSB_OB_REGISTRATION_INFO {
++typedef struct  _WSB_OB_REGISTRATION_INFO {
+     LPWSTR                  m_wszResourceDLL;
+     GUID                    m_guidSnapinId;
+     DWORD                   m_dwProviderName;
+@@ -68,8 +69,11 @@ typedef struct _WSB_OB_REGISTRATION_INFO {
+ } WSB_OB_REGISTRATION_INFO;
+ 
+ //APIs
++_Windows_SupportedOS_Server2012_
+ HRESULT WINAPI RegisterOnlineBackupWithWindowsServerBackup(_In_ IN WSB_OB_REGISTRATION_INFO  *pOBRegistrationInfo);
++_Windows_SupportedOS_Server2012_
+ HRESULT WINAPI DeregisterOnlineBackupFromWindowsServerBackup(_In_ IN GUID guidSnapinId);
++_Windows_SupportedOS_Server2012_
+ HRESULT WINAPI UpdateOBStatusInWindowsServerBackup(_In_ IN WSB_OB_STATUS_INFO *pOBRegistrationInfo);
+ 
+ 

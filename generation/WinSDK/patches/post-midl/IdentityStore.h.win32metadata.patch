@@ -1,0 +1,30 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityStore.h b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityStore.h
+index 4b71a29125f0b6b2edeeec4c39a8db1c4710110e..bae6276b380bb65e91a173a7dc30f11be3470abc 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IdentityStore.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IdentityStore.h
+@@ -114,6 +114,7 @@ extern "C"{
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include "win32metadata_annotations.h"
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -133,7 +134,7 @@ EXTERN_C const IID IID_IIdentityStore;
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("df586fa5-6f35-44f1-b209-b38e169772eb")
+-    IIdentityStore : public IUnknown
++    _Windows_SupportedOS_Windows7_ IIdentityStore : public IUnknown
+     {
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetCount( 
+@@ -229,7 +230,7 @@ EXTERN_C const IID IID_IIdentityStore;
+         END_INTERFACE
+     } IIdentityStoreVtbl;
+ 
+-    interface IIdentityStore
++    interface _Windows_SupportedOS_Windows7_ IIdentityStore
+     {
+         CONST_VTBL struct IIdentityStoreVtbl *lpVtbl;
+     };

@@ -1,0 +1,117 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/upnphost.h b/generation/WinSDK/RecompiledIdlHeaders/um/upnphost.h
+index c11e87ebb8..2c2f8bb732 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/upnphost.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/upnphost.h
+@@ -1,3 +1,4 @@
++#include <win32metadata_annotations.h>
+ 
+ 
+ /* this ALWAYS GENERATED file contains the definitions for the interfaces */
+@@ -244,7 +245,7 @@ EXTERN_C const IID IID_IUPnPEventSink;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810b4-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810b4-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPEventSink : public IUnknown
+     {
+     public:
+@@ -348,7 +349,7 @@ EXTERN_C const IID IID_IUPnPEventSource;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810b5-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810b5-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPEventSource : public IUnknown
+     {
+     public:
+@@ -448,7 +449,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810b6-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810b6-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPRegistrar : public IUnknown
+     {
+     public:
+@@ -466,7 +467,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
+             /* [annotation][in] */ 
+             _In_  long nLifeTime,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDeviceIdentifier) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDeviceIdentifier) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RegisterRunningDevice( 
+             /* [annotation][in] */ 
+@@ -480,7 +481,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
+             /* [annotation][in] */ 
+             _In_  long nLifeTime,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrDeviceIdentifier) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrDeviceIdentifier) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE RegisterDeviceProvider( 
+             /* [annotation][in] */ 
+@@ -498,7 +499,7 @@ EXTERN_C const IID IID_IUPnPRegistrar;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrTemplateUDN,
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *pbstrUDN) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *pbstrUDN) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE UnregisterDevice( 
+             /* [annotation][in] */ 
+@@ -668,7 +669,7 @@ EXTERN_C const IID IID_IUPnPReregistrar;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810b7-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810b7-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPReregistrar : public IUnknown
+     {
+     public:
+@@ -812,7 +813,7 @@ EXTERN_C const IID IID_IUPnPDeviceControl;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810ba-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810ba-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDeviceControl : public IUnknown
+     {
+     public:
+@@ -934,7 +935,7 @@ EXTERN_C const IID IID_IUPnPDeviceControlHttpHeaders;
+     public:
+         virtual HRESULT STDMETHODCALLTYPE GetAdditionalResponseHeaders( 
+             /* [annotation][retval][out] */ 
+-            _Out_retval_  BSTR *bstrHttpResponseHeaders) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_retval_  BSTR *bstrHttpResponseHeaders) = 0;
+         
+     };
+     
+@@ -1015,7 +1016,7 @@ EXTERN_C const IID IID_IUPnPDeviceProvider;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("204810b8-73b2-11d4-bf42-00b0d0118b56")
++    MIDL_INTERFACE("204810b8-73b2-11d4-bf42-00b0d0118b56") _Windows_SupportedOS_WindowsXP_ 
+     IUPnPDeviceProvider : public IUnknown
+     {
+     public:
+@@ -1111,7 +1112,7 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
+ 
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+-    MIDL_INTERFACE("c92eb863-0269-4aff-9c72-75321bba2952")
++    MIDL_INTERFACE("c92eb863-0269-4aff-9c72-75321bba2952") _Windows_SupportedOS_WindowsVista_ 
+     IUPnPRemoteEndpointInfo : public IUnknown
+     {
+     public:
+@@ -1125,7 +1126,7 @@ EXTERN_C const IID IID_IUPnPRemoteEndpointInfo;
+             /* [annotation][in] */ 
+             _In_  BSTR bstrValueName,
+             /* [annotation][out] */ 
+-            _Out_  BSTR *pbstrValue) = 0;
++            _Win32_RAIIFree_(SysFreeString) _Out_  BSTR *pbstrValue) = 0;
+         
+         virtual HRESULT STDMETHODCALLTYPE GetGuidValue( 
+             /* [annotation][in] */ 
