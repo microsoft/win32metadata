@@ -173,7 +173,10 @@ try {
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
     $firstInputs = Get-SelectedInputs $selectedObj $overlays
-    Remove-Item -LiteralPath "$selectedObj\generated\scannedheaders.crossarch.txt"
+    $scrapeMarker = "$selectedObj\generated\scannedheaders.crossarch.txt"
+    if (Test-Path -LiteralPath $scrapeMarker) {
+        Remove-Item -LiteralPath $scrapeMarker
+    }
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\repeat-scrape.log"
     $repeatedInputs = Get-SelectedInputs $selectedObj $overlays
     if (($firstInputs | ConvertTo-Json -Depth 3) -cne ($repeatedInputs | ConvertTo-Json -Depth 3)) {
