@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.Windows.WinmdGenerator">
+  <PropertyGroup>
+    <OutputWinmd>bin\PackageIntegration.winmd</OutputWinmd>
+    <WinmdVersion>1.2.3.4</WinmdVersion>
+    <GenerateAssemblyVersionInfo>false</GenerateAssemblyVersionInfo>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Update="Microsoft.Windows.SDK.Win32Metadata" Version="70.0.11-preview" />
+    <Partition Include="main.cpp">
+      <TraverseFiles>Sample.h</TraverseFiles>
+      <Namespace>PackageIntegration</Namespace>
+    </Partition>
+  </ItemGroup>
+
+  <Target Name="RecordPackagePaths" AfterTargets="Build">
+    <WriteLinesToFile File="bin\package-paths.txt"
+                      Lines="$(Win32MetadataSdkRoot);$(TaskBinDir);$(ToolsBinDir);$(ScriptsDir);$(Win32MetadataAssetsDir)"
+                      Overwrite="true" />
+  </Target>
+</Project>

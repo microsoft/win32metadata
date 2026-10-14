@@ -148,7 +148,8 @@ jobs:
     name: 'Build, test, package'
     needs: [changes, scrape]
     if: always() && needs.changes.result == 'success'
-    runs-on: windows-2022
+    # Packaging needs the VS 2026 redistributable used by the native Clang libraries.
+    runs-on: windows-2025-vs2026
     timeout-minutes: 60
 
     steps:

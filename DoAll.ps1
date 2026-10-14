@@ -46,5 +46,5 @@ if (!$ExcludeSamples)
 
 if (!$ExcludeTests)
 {
-    .\scripts\DoTests.ps1 -SkipInstallTools
+    .\scripts\DoTests.ps1 -SkipInstallTools -SkipPackageTests:$ExcludePackages
 }

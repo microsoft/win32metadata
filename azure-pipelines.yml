@@ -123,15 +123,25 @@ jobs:
   variables:
     OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
   pool:
-    vmImage: windows-2022
+    # Packaging needs the VS 2026 redistributable used by the native Clang libraries.
+    vmImage: windows-2025-vs2026
   steps:
   - checkout: self
     lfs: true
 
+  - task: PowerShell@2
+    displayName: Resolve VS installation
+    inputs:
+      targetType: inline
+      script: |
+        $vsPath = & .\scripts\Get-VSPath.ps1
+        Write-Host "##vso[task.setvariable variable=VisualStudioPath]$vsPath"
+      pwsh: true
+
   - task: BatchScript@1
     displayName: Set up VS environment
     inputs:
-      filename: 'C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat'
+      filename: '$(VisualStudioPath)\Common7\Tools\VsDevCmd.bat'
       modifyEnvironment: true
 
   - task: UseDotNet@2

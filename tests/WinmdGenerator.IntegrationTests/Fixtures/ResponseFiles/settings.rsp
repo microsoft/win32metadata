@@ -1,0 +1,5 @@
+--remap
+ORIGINAL_RECORD=REMAPPED_RECORD
+--requiredNamespaceForName
+PackageFunction=PackageIntegration.Remapped
+SAMPLE_VALUE=PackageIntegration.Remapped

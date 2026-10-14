@@ -240,6 +240,51 @@ Run a [full build](#full-builds), fix any metadata issues that surface, then upd
 
 ## Validating changes
 
+### WinmdGenerator package integration tests
+
+The integration tests consume the actual `Microsoft.Windows.WinmdGenerator`
+NuGet package, not project references or repository SDK imports. After building
+the tools, pack the SDK and run:
+
+```powershell
+dotnet build buildtools -c Release
+dotnet pack sources\GeneratorSdk\nuget\BuildSdk.proj -c Release
+.\scripts\TestWinmdGeneratorPackage.ps1
+```
+
+Packing requires the compatible Visual C++ redistributable described in
+[the README](README.md#winmdgenerator-native-runtime-dependencies). To test an
+explicit build artifact, pass `-PackagePath <path-to-nupkg>`. Without that
+argument, the script selects the exact version for the current checkout and
+fails if it has not been packed; it does not pick an arbitrary older package.
+
+Each run copies the package into a temporary local feed and uses empty,
+run-specific NuGet package and HTTP caches. Package source mapping restricts
+WinmdGenerator to that local feed; dependencies use the repository's configured
+feed. Consumer projects run outside the repository and resolve the SDK through
+`global.json`. Tests verify the restored nupkg's hash and SDK/tool paths, then
+build headers through the normal scrape/constants/emit pipeline and inspect the
+resulting WinMD with `System.Reflection.Metadata`. The consumer pins its reference
+Win32 metadata to a released version so these tests do not require generating or
+packing the full Windows SDK metadata first.
+
+Coverage includes x86, x64, arm64 and cross-architecture generation, named imports,
+struct layout, constants, and a project `.rsp` that remaps a type and moves APIs to
+another namespace. It also checks the packaged x64 native libraries and app-local
+CRT files. This is a package-consumption smoke test, not proof of compatibility
+with an older machine-wide runtime.
+
+Add consumer inputs under `tests\WinmdGenerator.IntegrationTests\Fixtures` and
+metadata assertions in `PackageConsumptionTests.cs` for new scenarios (for
+example, an import-library/`.rsp` fixture for an ordinal-only export). No
+repository tool-path overrides should be added to consumers. Restore logs, build
+logs, binlogs, generated WinMDs and test results are retained under
+`bin\logs\WinmdGeneratorIntegration`; temporary feeds and caches are removed.
+
+Both CI pipelines run these tests via `scripts\DoTests.ps1` after packaging.
+`DoAll.ps1 -ExcludePackages` explicitly skips package tests; to run the other
+tests independently without packaging, use `scripts\DoTests.ps1 -SkipPackageTests`.
+
 ### Full builds
 
 Run `./DoAll.ps1 -Clean` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.

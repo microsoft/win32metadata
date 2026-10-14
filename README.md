@@ -78,6 +78,12 @@ linker version is a packaging guard, not a definitive determination of the
 minimum runtime supported by every native code path. Keep the selected runtime
 compatible with the native dependencies' actual build toolchain.
 
+The CI build/package jobs use `windows-2025-vs2026` to supply that redistributable;
+the header-scraping jobs remain on `windows-2022`. Package-backed
+[integration tests](CONTRIBUTING.md#winmdgenerator-package-integration-tests)
+restore the just-built SDK from an isolated local feed and exercise its normal
+MSBuild pipeline.
+
 The bundled VC runtime libraries retain their Microsoft license terms; see
 `ThirdPartyNotices.txt` in the package. Package maintainers are responsible for
 updating these app-local copies, which are not serviced by Windows Update.

@@ -1,6 +1,8 @@
 param
 (
-    [switch]$SkipInstallTools
+    [switch]$SkipInstallTools,
+
+    [switch]$SkipPackageTests
 )
 
 . $PSScriptRoot\CommonUtils.ps1
@@ -19,5 +21,10 @@ Write-Host "*** Running scraper discovery tests..." -ForegroundColor Blue
 
 dotnet test "$PSScriptRoot\..\tests\Win32MetadataScraperTests" -c Release
 ThrowOnNativeProcessError
+
+if (!$SkipPackageTests)
+{
+    & $PSScriptRoot\TestWinmdGeneratorPackage.ps1
+}
 
 & $PSScriptRoot\TestWinmdBinary.ps1 -SkipInstallTools
