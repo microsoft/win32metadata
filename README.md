@@ -47,6 +47,17 @@ See [PROJECTIONS.md](docs/projections.md).
 
 See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
+## Comparing generated metadata
+
+Run `.\scripts\CompareBinToLastRelease.ps1 -SkipInstallTools` after building to
+compare the generated winmd with the previous release. For a compiler upgrade,
+use `WinmdUtils compare --first <old.winmd> --second <new.winmd>` with both images
+generated from the same SDK and unchanged annotation inputs.
+
+The comparison checks positional parameter types, sequential instance-field
+order, interface method order and base types. Reordering repeated custom
+attributes does not count as a change, but their values and multiplicity do.
+
 # Licensing
 
 ## MIT
