@@ -67,11 +67,32 @@ function Get-PointerReductions([IO.FileInfo[]]$Remaps) {
 
 function Get-SelectedInputs([string]$Obj, [string[]]$Overlays) {
     $paths = @($Overlays | ForEach-Object { "$Obj\generated\$_" })
+    $paths += "$Obj\generated\scraper.autoRemaps.generated.rsp", "$Obj\generated\emitter.autoFnPtr.crossarch.generated.rsp"
     $paths += @(Get-ChildItem "$Obj\scratch" -Recurse -Filter '*.remaps' -File | ForEach-Object { $_.FullName })
     @($paths | Sort-Object -CaseSensitive | ForEach-Object {
         [ordered]@{ path = [IO.Path]::GetRelativePath($Obj, $_); sha256 = Get-Sha256 $_ }
     })
 }
+
+$sourceCommit = & git -C $repo rev-parse HEAD
+if ($LASTEXITCODE -ne 0) {
+    throw 'The producer commit could not be resolved.'
+}
+function Assert-CommittedProducer {
+    $currentCommit = & git -C $repo rev-parse HEAD
+    if ($LASTEXITCODE -ne 0 -or $currentCommit -cne $sourceCommit) {
+        throw 'The producer commit changed during image generation.'
+    }
+    & git -C $repo diff --quiet HEAD
+    if ($LASTEXITCODE -ne 0) {
+        throw 'Commit producer inputs before publishing an immutable migration image.'
+    }
+    $untracked = & git -C $repo ls-files --others --exclude-standard
+    if ($LASTEXITCODE -ne 0 -or $untracked) {
+        throw 'Untracked producer inputs must be committed before image generation.'
+    }
+}
+Assert-CommittedProducer
 
 $provenancePath = "$BaselineDirectory\provenance.json"
 $baseline = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
@@ -149,14 +170,15 @@ try {
         Invoke-Dotnet $arguments "$OutputDirectory\emit.log"
         Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
             '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd) "$OutputDirectory\comparison.log"
+        Assert-CommittedProducer
         $receipt = [ordered]@{
             kind = 'tooling-control'
-            toolingCommit = $baseline.toolingCommit
+            baselineToolingCommit = $baseline.toolingCommit
             sdkPackageVersion = $baseline.sdkPackageVersion
             baselineProvenanceSha256 = Get-Sha256 $provenancePath
             oldWinmdSha256 = $baseline.winmdSha256
             newWinmdSha256 = Get-Sha256 $winmd
-            sourceCommit = (& git rev-parse HEAD)
+            sourceCommit = $sourceCommit
             toolFiles = $toolFiles
             frozenEmitterInputs = @(Get-ChildItem -LiteralPath $inputs -File | ForEach-Object {
                 [ordered]@{ path = $_.Name; sha256 = Get-Sha256 $_.FullName }
@@ -252,8 +274,10 @@ try {
     Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
         '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd,
         '--knownDiffsFile', "$project\patches\WinHttp.expected-differences.txt") "$OutputDirectory\comparison.log"
+    Assert-CommittedProducer
     $receipt = [ordered]@{
-        toolingCommit = $baseline.toolingCommit
+        kind = 'winhttp-migration'
+        baselineToolingCommit = $baseline.toolingCommit
         sdkPackageVersion = $baseline.sdkPackageVersion
         baselineProvenanceSha256 = Get-Sha256 $provenancePath
         oldWinmdSha256 = $baseline.winmdSha256
@@ -262,12 +286,10 @@ try {
         preparedManifestSha256 = Get-Sha256 ([IO.Path]::Combine([IO.Path]::GetDirectoryName($includeRoot), 'manifest.json'))
         overlaidHeaderSources = $overlays
         repeatedSelectionInputs = $repeatedInputs
-        sourceCommit = (& git rev-parse HEAD)
+        sourceCommit = $sourceCommit
         toolFiles = $toolFiles
         toolingControl = $ToolingControlDirectory
         expectedDifferencesSha256 = Get-Sha256 "$project\patches\WinHttp.expected-differences.txt"
-        sourceDiffSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData(
-            [Text.Encoding]::UTF8.GetBytes((& git diff --binary HEAD | Out-String))))
         generatedFiles = @(Get-ChildItem -LiteralPath $generated -Recurse -File | ForEach-Object {
             [ordered]@{ path = [IO.Path]::GetRelativePath($generated, $_.FullName); sha256 = Get-Sha256 $_.FullName }
         })

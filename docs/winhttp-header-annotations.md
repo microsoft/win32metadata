@@ -155,6 +155,10 @@ selection's aggregate discovery present, requiring byte-identical selected C#
 sources and pointer discoveries. The frozen discovery inputs must reproduce the
 pinned complete pointer-fixup response file before the selected discoveries are overlaid.
 `PartitionFilter` alone is not a complete constants/manual/emission closure.
+Producer inputs must be committed before image generation and remain unchanged
+through receipt publication. The receipt distinguishes the frozen baseline tooling
+commit from the current producer commit and binds the actual tool, header, generated
+source, discovery, and expected-difference hashes.
 
 ```powershell
 . .\scripts\CommonUtils.ps1
