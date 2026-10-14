@@ -173,12 +173,21 @@ try {
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
     $firstInputs = Get-SelectedInputs $selectedObj $overlays
+    [IO.File]::WriteAllText("$OutputDirectory\first-selection.json", ($firstInputs | ConvertTo-Json -Depth 3),
+        [Text.UTF8Encoding]::new($false))
+    foreach ($entry in $firstInputs) {
+        $target = "$OutputDirectory\first-selection\$($entry.path)"
+        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
+        [IO.File]::Copy("$selectedObj\$($entry.path)", $target)
+    }
     $scrapeMarker = "$selectedObj\generated\scannedheaders.crossarch.txt"
     if (Test-Path -LiteralPath $scrapeMarker) {
         Remove-Item -LiteralPath $scrapeMarker
     }
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\repeat-scrape.log"
     $repeatedInputs = Get-SelectedInputs $selectedObj $overlays
+    [IO.File]::WriteAllText("$OutputDirectory\repeated-selection.json", ($repeatedInputs | ConvertTo-Json -Depth 3),
+        [Text.UTF8Encoding]::new($false))
     if (($firstInputs | ConvertTo-Json -Depth 3) -cne ($repeatedInputs | ConvertTo-Json -Depth 3)) {
         throw 'A repeated normal SDK scrape changed selected declarations or pointer discoveries.'
     }

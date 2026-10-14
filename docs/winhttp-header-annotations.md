@@ -131,6 +131,8 @@ It is retained as OLD evidence, not described as physically valid. The tooling
 layer corrects this separately. A frozen-input tooling control must prove that
 only those missing instance bits change and that the corrected image has exact
 local constructor binding; the NEW image does not receive a waiver.
+The physical control requires exactly 39 constructor rows in 39 types to gain
+`HASTHIS`, with every other frozen-input type snapshot unchanged.
 
 ```powershell
 dotnet build BuildTools -c Release
@@ -150,8 +152,8 @@ overwriting an existing consumer-fixture or selection directory. Each image gets
 a fresh selected scrape so prior aggregate discoveries cannot become configured
 remap authority. Before emission it forces a second normal SDK scrape with that
 selection's aggregate discovery present, requiring byte-identical selected C#
-sources and pointer discoveries. The frozen discovery inputs must reproduce the pinned complete
-pointer-fixup response file before the selected discoveries are overlaid.
+sources and pointer discoveries. The frozen discovery inputs must reproduce the
+pinned complete pointer-fixup response file before the selected discoveries are overlaid.
 `PartitionFilter` alone is not a complete constants/manual/emission closure.
 
 ```powershell
@@ -179,6 +181,15 @@ alignment. Physical readback covers DLL/entrypoint/import flags, attribute targe
 associations, enum values/types, ports, callback identity, architecture coverage,
 and local type/attribute-constructor closure, with missing-type/constructor mutation
 controls. HttpServer and WinInet snapshots must remain unchanged.
+
+The repository SDK integrity suite reads `bin\Windows.Win32.winmd` and the default
+`generation\WinSDK\obj\scratch` diagnostic tree. Stage the complete frozen OLD
+nonselected diagnostics plus NEW WinHttp/HttpServer diagnostics there, preserving
+their architecture-relative paths, and copy the complete NEW winmd to that local
+bin path before running `dotnet test tests\Windows.Win32.Tests -c Release`.
+`NoSuggestedRemappings` consumes the actual `*.txt` scraper diagnostics, not just
+`*.remaps` or an empty scratch directory. The pinned full closure contains 393
+diagnostic files. Do not substitute the selected partition output for that closure.
 
 The full-image decompiler comparison must consume exact symbol/value-scoped expected
 differences, with no unknown or unused expectations. It complements these narrow
