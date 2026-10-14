@@ -98,7 +98,12 @@ was not emitted. The new group preserves the three actually emitted members;
 genuine `WINHTTP_AUTH_SCHEME_DIGEST` remains a loose constant. The scheme group uses
 the actual SDK's `INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS`, not fabricated
 `WINHTTP_INTERNET_SCHEME_*` names. These four old member spellings are an explicit
-consumer source-compatibility concern, not a reason to falsify native declarations.
+measured source break. The candidate follows the specification's native-member
+spelling rule; the rename is not an integer ABI necessity. A metadata-only logical
+enum could retain the old labels while deriving values from genuine native macros
+and leaving native use-site types intact. That naming-policy exception and the
+representation of the genuine constants need review before changing this candidate.
+The four renames are not accepted as unavoidable.
 
 CsWin32 generated-source compatibility is the primary acceptance gate. A metadata
 declaration diff is supporting evidence, not a substitute for generating both
@@ -181,8 +186,11 @@ transactions, and lock contention.
 Native controls parse the real WinHttp and HttpServer translation units for
 x86, x64, and ARM64 with metadata disabled, comparing native signatures, calling
 conventions, typedef pointer depth, enum values, field offsets, record sizes, and
-alignment. Their exclusive test collection prevents SDK-sized AST walks from
-overlapping the generator fixtures that share the native Clang runtime.
+alignment. Each control owns its raw Clang translation unit and cursors rather
+than reusing managed AST wrappers from earlier generator fixtures. Exact fact
+counts and hashes are pinned: 969 facts for WinHttp and 3,669 for HttpServer per
+architecture. An exclusive test collection also keeps these SDK-sized AST walks
+separate from the generator fixtures that share the native Clang runtime.
 Physical readback covers DLL/entrypoint/import flags, attribute targets,
 associations, enum values/types, ports, callback identity, architecture coverage,
 and local type/attribute-constructor closure, with missing-type/constructor mutation
@@ -234,7 +242,9 @@ admits all 24 expected differences, with no unknown or unused expectations.
 NEW has 1,640 C# files / 1,652 generated inputs: the old synthetic
 `Networking.WinHttp.enums.cs` and its processed copy are replaced by declarations
 in the native header output, not by missing final metadata.
-All 38 pilot cases executed without skips, including the six native ABI legs.
+The complete scraper suite executed all 191 cases without skips: 153 inherited
+tooling cases and 38 pilot cases, including all six native ABI legs in the same
+test host. The emitter and utility suites passed 46 and 37 cases respectively.
 The full SDK integrity suite executed and passed all 14 cases using the complete
 393-file diagnostic closure. Strict physical readback finds 37,314 TypeDefs and
 37,248 unchanged snapshots outside WinHttp; the frozen-input control changes only
@@ -267,6 +277,54 @@ visibility, `useSafeHandles=true`, and `emitSingleFile=true`. Run both
 Compare OLD + baseline consumer, OLD + proposed consumer, and NEW + proposed
 consumer, pinning both consumer revisions explicitly. Public-surface comparison
 and actual caller compilation are required; generated text alone is not the gate.
-The four old `WINHTTP_INTERNET_SCHEME_*` member spellings remain a specific
-source-break candidate until those unchanged callers are compiled. The metadata
-does not add compatibility aliases or automatic `HINTERNET` ownership to hide it.
+
+### Measured consumer prototype
+
+The three-way consumer proof pins baseline CsWin32 commit
+`f3f5a69aa4823466ef7b55bbdc8e5ba41ec021e6` and prototype commit
+`41ffdb9f4cf445d224d4477ec674a4039308c724`, using Roslyn `5.9.0.0`.
+Both generator assemblies report version `0.3.0+D`; their immutable commit/binary
+pins, not that shared development-version label, identify the implementations.
+
+| Consumer assembly | SHA256 |
+| --- | --- |
+| Baseline | `8DD41E7CEB160F2B2C89A20848831C58EE91D42C84787B9103D80CF06D88B9FA` |
+| Prototype | `7F42F29E63541A9E238A66131ED3D0797C187072BA828B8F6762BA1A4BA98972` |
+
+OLD + prototype generates identical code to OLD + baseline in both marshaling
+modes, with the unchanged caller compiling successfully. NEW + prototype has the
+same public-symbol counts (187 with marshaling, 186 without); the only public and
+generated-code deltas are the four scheme member names below. Signatures, direct
+enum fields and `ref` field use, callbacks, buffers, and raw `void*` handles otherwise
+match the baseline.
+
+In both modes the unchanged caller fails with exactly four `CS0117` errors:
+
+| Unchanged caller location | Missing member of `WINHTTP_INTERNET_SCHEME` | Current NEW member | Value |
+| --- | --- | --- | --- |
+| `(16,47)` | `WINHTTP_INTERNET_SCHEME_HTTP` | `INTERNET_SCHEME_HTTP` | 1 |
+| `(17,47)` | `WINHTTP_INTERNET_SCHEME_HTTPS` | `INTERNET_SCHEME_HTTPS` | 2 |
+| `(18,53)` | `WINHTTP_INTERNET_SCHEME_FTP` | `INTERNET_SCHEME_FTP` | 3 |
+| `(19,53)` | `WINHTTP_INTERNET_SCHEME_SOCKS` | `INTERNET_SCHEME_SOCKS` | 4 |
+
+A separate adjusted-caller check compiles in both modes after only these four
+member substitutions. It is not substituted for the mandatory unchanged-caller
+result. The consumer evidence comprises 41 compatibility checks and two targeted
+mutation controls, all executed without skips. An evidence-only follow-up at
+`a47f3d6744275382234f60beddb2b04664a80242` verifies the exact public/text delta and
+adjusted-caller result without changing projection behavior.
+
+Frozen copies of the prototype reports are kept under the private
+`artifacts\winhttp-migration\consumer-prototype-41ff` directory:
+
+| Report | SHA256 |
+| --- | --- |
+| `winhttp-marshaling.json` | `264D34F24456D3782F76FA754DAD6A78A1BD733076286CA1CE554A0E8C0B8936` |
+| `winhttp-no-marshaling.json` | `9FEC77BF7799D6F2BE89678BDB8487D48CCFDB424D5E8635BADC17A07959F60E` |
+
+This is scoped prototype evidence for the 16 requests, not approved shipping
+consumer support, runtime/network testing, or general fabricated-handle migration
+coverage. Enabling `useSafeHandles` does not invent ownership for this scope.
+The current image and header member names remain unchanged pending the naming
+decision. The patch migration is reviewable; source-compatibility acceptance is
+still blocked on those four measured breaks and review of the consumer prototype.
