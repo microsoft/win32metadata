@@ -60,6 +60,55 @@ namespace Test { public static unsafe class Apis {
                 .SelectMany(list => list.Attributes).Count(attribute => attribute.Name.ToString() == "Const"));
         }
 
+        [DataTestMethod]
+        [DataRow("[RetVal]")]
+        [DataRow("[RetValAttribute]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.RetVal]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.RetValAttribute]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.RetVal]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.RetValAttribute]")]
+        [DataRow("[Optional, global::Windows.Win32.Foundation.Metadata.RetValAttribute]")]
+        [DataRow("[param: global::Windows.Win32.Foundation.Metadata.RetValAttribute]")]
+        public void SalRetvalDoesNotDuplicateExistingRetval(string attributes)
+        {
+            var tree = Clean($@"
+namespace Test {{ public unsafe delegate int D(
+    [CppAttributeList(""Name=SAL_post^Name=SAL_valid^Name=SAL_retval"")]
+    {attributes} int* value); }}");
+            var actual = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, actual.Count(attribute => attribute.Name.ToString().Contains("RetVal")));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == "Out"));
+            Assert.IsFalse(actual.Any(attribute => attribute.Name.ToString() == "CppAttributeList"));
+            if (attributes.Contains("Optional"))
+                Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == "Optional"));
+        }
+
+        [TestMethod]
+        public void SalRetvalStillAddsMissingRetval()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int D(
+    [CppAttributeList(""Name=SAL_post^Name=SAL_valid^Name=SAL_retval^Name=SAL_retval"")] int* value); }");
+            var actual = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            CollectionAssert.AreEquivalent(new[] { "Out", "RetVal" },
+                actual.Select(attribute => attribute.Name.ToString()).ToArray());
+        }
+
+        [TestMethod]
+        public void SalRetvalDoesNotEraseAuthoredDuplicates()
+        {
+            var tree = Clean(@"
+namespace Test { public unsafe delegate int D(
+    [RetVal, global::Windows.Win32.Foundation.Metadata.RetValAttribute]
+    [CppAttributeList(""Name=SAL_post^Name=SAL_valid^Name=SAL_retval"")] int* value); }");
+            var actual = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(2, actual.Count(attribute => attribute.Name.ToString().Contains("RetVal")));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == "Out"));
+        }
+
         [TestMethod]
         public void HeaderAndIdenticalLegacyFactsAreDeduplicated()
         {

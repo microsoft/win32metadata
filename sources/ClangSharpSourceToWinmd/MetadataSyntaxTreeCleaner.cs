@@ -1189,7 +1189,8 @@ namespace ClangSharpSourceToWinmd
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("NullNullTerminated")));
                 }
 
-                if (isRetVal)
+                if (isRetVal && !paramNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Any(attribute => GetAttributeName(attribute) == "RetVal"))
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("RetVal")));
                 }

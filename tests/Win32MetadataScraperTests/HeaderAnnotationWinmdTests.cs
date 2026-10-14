@@ -154,6 +154,62 @@ struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Windows_Suppo
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void MidlAndSalRetvalReachFinalWinmdOnce(string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+typedef wchar_t* BSTR;
+extern ""C"" HRESULT __stdcall NativeRetval(/* [retval][out] */ _Out_retval_ BSTR* Value);
+typedef HRESULT (__stdcall* PFN_RETVAL)(/* [retval][out] */ _Out_retval_ BSTR* Value);
+struct __declspec(uuid(""5a076bce-18f2-49bb-861f-48850743e9d3"")) IRetvalSample {
+    virtual HRESULT __stdcall Combined(/* [retval][out] */ _Out_retval_ BSTR* Value) = 0;
+    virtual HRESULT __stdcall SalOnly(_Out_retval_ BSTR* Value) = 0;
+    virtual HRESULT __stdcall HeaderAndSal(_Out_retval_ _Win32_Retval_ BSTR* Value) = 0;
+    virtual HRESULT __stdcall MidlOnly(/* [retval][out] */ _Out_ BSTR* Value) = 0;
+    virtual HRESULT __stdcall RepeatedSal(/* [retval][out] */ _Out_retval_ _Out_retval_ BSTR* Value) = 0;
+    virtual HRESULT __stdcall Ordinary(_Out_ BSTR* Value) = 0;
+};
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("Name=SAL_retval", source);
+            if (annotationsEnabled)
+                Assert.Contains("global::Windows.Win32.Foundation.Metadata.RetVal", source);
+
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            foreach (string methodName in new[] { "Combined", "SalOnly", "HeaderAndSal", "MidlOnly", "RepeatedSal", "Ordinary" })
+            {
+                var method = FindMethod(reader, "IRetvalSample", methodName);
+                var parameter = method.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1);
+                int expected = methodName == "Ordinary" || (methodName == "MidlOnly" && !annotationsEnabled) ? 0 : 1;
+                Assert.Equal(expected, parameter.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "RetValAttribute"));
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.In));
+                Assert.Equal(new[] { "UInt16**" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            }
+            foreach (var method in new[] { FindMethod(reader, "Apis", "NativeRetval"), FindMethod(reader, "PFN_RETVAL", "Invoke") })
+            {
+                var parameter = method.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1);
+                Assert.Equal(1, parameter.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "RetValAttribute"));
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                Assert.Equal(new[] { "UInt16**" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            }
+            foreach (var parameter in reader.MethodDefinitions.Select(reader.GetMethodDefinition)
+                .SelectMany(method => method.GetParameters()).Select(reader.GetParameter))
+            {
+                Assert.InRange(parameter.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "RetValAttribute"), 0, 1);
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]

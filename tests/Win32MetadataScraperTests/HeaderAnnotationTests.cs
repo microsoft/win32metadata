@@ -106,6 +106,8 @@ int __stdcall Retval(_Win32_Retval_ int* result);
         [InlineData("_Windows_SupportedOS_10240_ typedef int VALUES[4];")]
         [InlineData("int Bad(_Win32_Retained_ _Win32_Retained_ void* value);")]
         [InlineData("#define DOUBLE _Win32_Retained_ _Win32_Retained_\nint Bad(DOUBLE void* value);")]
+        [InlineData("int Bad(_Win32_Retval_ _Win32_Retval_ int* value);")]
+        [InlineData("#define DOUBLE _Win32_Retval_ _Win32_Retval_\nint Bad(DOUBLE int* value);")]
         [InlineData("int Bad(void*) _Win32_SetLastError_;")]
         [InlineData("#define _Win32_Unknown_ _WIN32META_ANNOTATION_(\"Alien\")\n_Win32_Unknown_ int Bad();")]
         [InlineData("_WIN32META_ANNOTATION_(\"Alien\") int Bad();")]
