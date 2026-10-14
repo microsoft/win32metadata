@@ -1036,8 +1036,8 @@ namespace ClangSharpSourceToWinmd
 
             this.EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType, out var wasEnum);
 
-            // Don't try to fix up an enum
-            if (wasEnum)
+            // AssociatedEnum describes values without replacing the declared native type.
+            if (wasEnum || ownerAttributes.Any(attribute => attribute.AttributeClass.Name == "AssociatedEnumAttribute"))
             {
                 return;
             }

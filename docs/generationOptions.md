@@ -84,6 +84,18 @@ SHGetKnownFolderPath::ppszPath=[FreeWith("CoTaskMemFree")]
 The first statement changes the type of the field LimitFlags on the struct JOBOBJECT_BASIC_LIMIT_INFORMATION from a uint to an enum named JOB_OBJECT_LIMIT.
 The second statement adds an attribute to the ppszPath parameter of the SHGetKnownFolderPath function.
 
+### Header-associated enums
+
+With `parse-win32-annotations` enabled, `_Win32_AssociatedEnum_(EnumName)` adds
+`AssociatedEnum("EnumName")` to a field, parameter, or return value. The winmd
+signature retains its declared native type, including pointer and array shapes;
+an unrelated type with the same native typedef name must not replace it.
+
+The association instructs projections to generate the enum with the native use
+site's underlying type and use that enum in the generated field or function
+signature. This preserves the enum-valued consumer API without substituting a
+logical enum into the winmd signature.
+
 ## Emitting Options
 
 Once ClangSharp has scraped the files, the emitter turns the scraped data into a .winmd. Like ClangSharp, options are passed to the emitter via .rsp files. These options allow for further fine-tuning of metadata.

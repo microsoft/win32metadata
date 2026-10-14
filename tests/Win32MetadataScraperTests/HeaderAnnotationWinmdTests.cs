@@ -156,6 +156,62 @@ struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Windows_Suppo
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AssociatedEnumPreservesNativeTypesDespiteForeignShortNames(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int INTERNET_SCHEME;
+enum WINHTTP_INTERNET_SCHEME : unsigned { WinHttpHttp = 1, WinHttpHttps = 2 };
+struct COMPONENTS {
+    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME Scheme;
+    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME* Schemes;
+    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME FixedSchemes[2];
+    INTERNET_SCHEME LegacyScheme;
+};
+_Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME AssociatedReturn();
+_Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME* AssociatedPointerReturn();
+void UseSchemes(_Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME Scheme,
+    _Win32_AssociatedEnum_(WINHTTP_INTERNET_SCHEME) INTERNET_SCHEME* Schemes);
+INTERNET_SCHEME LegacyReturn(INTERNET_SCHEME Scheme, INTERNET_SCHEME* Schemes);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Foreign.manual.cs"), @"
+namespace Foreign {
+    public enum INTERNET_SCHEME : int { ForeignHttp = 3, ForeignHttps = 4 }
+}");
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var provider = new SignatureNames(qualifiedNames: true);
+            var fields = FindType(reader, "COMPONENTS").GetFields().Select(reader.GetFieldDefinition)
+                .ToDictionary(field => reader.GetString(field.Name));
+            foreach (var pair in new[] { ("Scheme", "Int32"), ("Schemes", "Int32*"), ("FixedSchemes", "Int32[]") })
+            {
+                var field = fields[pair.Item1];
+                Assert.Equal(pair.Item2, field.DecodeSignature(provider, null));
+                AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "WINHTTP_INTERNET_SCHEME");
+            }
+            Assert.Equal("Foreign.INTERNET_SCHEME", fields["LegacyScheme"].DecodeSignature(provider, null));
+
+            foreach (var pair in new[] { ("AssociatedReturn", "Int32"), ("AssociatedPointerReturn", "Int32*") })
+            {
+                var method = FindMethod(reader, "Apis", pair.Item1);
+                Assert.Equal(pair.Item2, method.DecodeSignature(provider, null).ReturnType);
+                var result = method.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "WINHTTP_INTERNET_SCHEME");
+            }
+            var use = FindMethod(reader, "Apis", "UseSchemes");
+            Assert.Equal(new[] { "Int32", "Int32*" }, use.DecodeSignature(provider, null).ParameterTypes);
+            foreach (var parameter in use.GetParameters().Select(reader.GetParameter))
+                AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", "WINHTTP_INTERNET_SCHEME");
+            var legacy = FindMethod(reader, "Apis", "LegacyReturn").DecodeSignature(provider, null);
+            Assert.Equal("Foreign.INTERNET_SCHEME", legacy.ReturnType);
+            Assert.Equal(new[] { "Foreign.INTERNET_SCHEME", "Foreign.INTERNET_SCHEME*" }, legacy.ParameterTypes);
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
