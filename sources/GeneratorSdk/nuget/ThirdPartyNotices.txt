@@ -1,0 +1,14 @@
+Microsoft Visual C++ Runtime Libraries
+
+Microsoft.Windows.WinmdGenerator includes app-local x64 Visual C++ runtime
+libraries from Visual Studio's Microsoft.VC*.CRT redistributable directory.
+These Microsoft components are not licensed under this project's MIT license.
+Their redistribution and use are subject to the applicable Microsoft Visual
+Studio Software License Terms and Distributable Code list:
+
+https://visualstudio.microsoft.com/license-terms/
+https://learn.microsoft.com/cpp/windows/redistributing-visual-cpp-files
+
+Package maintainers must keep the bundled runtime libraries updated for
+security and compatibility; Windows Update does not service these app-local
+copies.

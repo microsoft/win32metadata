@@ -49,6 +49,39 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 # Licensing
 
+## WinmdGenerator native runtime dependencies
+
+`Microsoft.Windows.WinmdGenerator` bundles x64 Visual C++ runtime DLLs beside
+`libclang.dll` and `libClangSharp.dll` in `tools\net10.0\win-x64`. Consumers do not
+need to update the machine-wide VC runtime or adjust `PATH` for these dependencies.
+The runtime architecture matches the scraper host, not the generated metadata.
+
+Packing `sources\GeneratorSdk\nuget\BuildSdk.proj` requires an x64 Visual Studio
+redistributable at least as new as the native libraries' recorded linker versions.
+The packaging step uses `VCToolsRedistDir` when set, otherwise the default
+redistributable of the Visual Studio installation selected by `scripts\Get-VSPath.ps1`.
+It packages all DLLs from that installation's `x64\Microsoft.VC*.CRT` directory,
+including the companion STL runtime libraries, and rejects missing, non-x64, or
+older files. It does not copy DLLs from the compiler directory or System32,
+and it does not bundle the Windows-provided UCRT.
+
+To select a particular installed redistributable, pass its CRT directory:
+
+```powershell
+dotnet pack sources\GeneratorSdk\nuget\BuildSdk.proj -c Release `
+    "-p:VcRuntimeDirectory=C:\Program Files\Microsoft Visual Studio\18\Enterprise\VC\Redist\MSVC\<version>\x64\Microsoft.VC145.CRT"
+```
+
+With the current Clang binaries, packaging agents need a 14.50 or newer
+redistributable; an older VS 2022 installation alone is insufficient. The recorded
+linker version is a packaging guard, not a definitive determination of the
+minimum runtime supported by every native code path. Keep the selected runtime
+compatible with the native dependencies' actual build toolchain.
+
+The bundled VC runtime libraries retain their Microsoft license terms; see
+`ThirdPartyNotices.txt` in the package. Package maintainers are responsible for
+updating these app-local copies, which are not serviced by Windows Update.
+
 ## MIT
 * All metadata assemblies (e.g. `Windows.Win32.winmd`)
 * All tooling in this repository and in the [Microsoft.Windows.SDK.Win32Metadata NuGet package](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/)

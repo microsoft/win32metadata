@@ -3,6 +3,20 @@
     <PowerShell># 2>nul || type %~df0|find /v "setlocal"|find /v "errorlevel"|powershell.exe -noninteractive -&amp; exit %errorlevel% || #</PowerShell>
   </PropertyGroup>
 
+  <Target Name="ResolveVcRuntimeDirectory" BeforeTargets="GenerateNuspec">
+    <PropertyGroup>
+      <VcRuntimeDirectoryArgument Condition="'$(VcRuntimeDirectory)' != ''">-RuntimeDirectory &quot;$(VcRuntimeDirectory)&quot;</VcRuntimeDirectoryArgument>
+    </PropertyGroup>
+    <Exec Command="powershell.exe -NoProfile -NonInteractive -ExecutionPolicy Bypass -File &quot;$(RepoRootPath)scripts\Get-VcRuntimeDirectory.ps1&quot; -NativeDirectory &quot;$(RepoRootPath)bin\$(Configuration)\net10.0\win-x64&quot; $(VcRuntimeDirectoryArgument)"
+          ConsoleToMSBuild="true" StandardOutputImportance="Low">
+      <Output TaskParameter="ConsoleOutput" PropertyName="VcRuntimeDirectory" />
+    </Exec>
+    <Error Condition="!Exists('$(VcRuntimeDirectory)\MSVCP140.dll')" Text="Unable to resolve the app-local VC runtime directory." />
+    <PropertyGroup>
+      <NuspecProperties>$(NuspecProperties);VcRuntimeDirectory=$(VcRuntimeDirectory)</NuspecProperties>
+    </PropertyGroup>
+  </Target>
+
   <Target Name="StampPropsFile" BeforeTargets="GenerateNuspec" DependsOnTargets="GetBuildVersion">
     <PropertyGroup>
       <StampPropsScript>
