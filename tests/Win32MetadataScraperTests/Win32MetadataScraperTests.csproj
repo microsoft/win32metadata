@@ -20,6 +20,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\sources\Win32MetadataScraper\Win32MetadataScraper.csproj" />
+    <ProjectReference Include="..\..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
+          Link="assets\win32metadata_annotations.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\manual\Metadata.cs"
+          Link="assets\Metadata.cs" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\inc\sal.h"
+          Link="assets\sal.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\generation\WinSDK\RecompiledIdlHeaders\shared\concurrencysal.h"
+          Link="assets\concurrencysal.h" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\scraper.header.txt"
+          Link="assets\scraper.header.txt" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>

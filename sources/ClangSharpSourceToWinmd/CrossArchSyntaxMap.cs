@@ -65,6 +65,11 @@ namespace ClangSharpSourceToWinmd
             return node.Parent is NamespaceDeclarationSyntax;
         }
 
+        public static bool IsPotentialCrossArch(EnumDeclarationSyntax node)
+        {
+            return node.Parent is NamespaceDeclarationSyntax;
+        }
+
         public static bool IsPotentialCrossArch(MethodDeclarationSyntax node)
         {
             var dllImportAttr = SyntaxUtils.GetAttribute(node.AttributeLists, "DllImport");
@@ -84,7 +89,7 @@ namespace ClangSharpSourceToWinmd
             {
                 if (this.x86StructsNeed64BitAttrs.Contains(name))
                 {
-                    return x86Node.AddAttributeLists(this.namesTo64BitStructs[name].AttributeLists.ToArray());
+                    return x86Node.AddAttributeLists(GetLayoutAttributes(this.namesTo64BitStructs[name].AttributeLists).ToArray());
                 }
             }
 
@@ -109,6 +114,11 @@ namespace ClangSharpSourceToWinmd
 
             return ret;
         }
+
+        private static SyntaxList<AttributeListSyntax> GetLayoutAttributes(SyntaxList<AttributeListSyntax> lists)
+            => SyntaxFactory.List(lists.Select(list => list.WithAttributes(SyntaxFactory.SeparatedList(
+                list.Attributes.Where(attribute => attribute.Name.ToString().Split('.').Last()
+                    is "StructLayout" or "StructLayoutAttribute")))).Where(list => list.Attributes.Count != 0));
 
         public void AddTree(SyntaxTree tree)
         {
@@ -159,42 +169,10 @@ namespace ClangSharpSourceToWinmd
             string name, SyntaxList<AttributeListSyntax> attributeLists, TypeSyntax returnType, ParameterListSyntax parameterList)
         {
             StringBuilder ret = new StringBuilder();
-            foreach (var list in attributeLists)
-            {
-                if (list.Target != null && list.Target.Identifier.Text == "return")
-                {
-                    continue;
-                }
+            AppendAttributes(ret, attributeLists);
 
-                foreach (var attr in list.Attributes)
-                {
-                    var attrText = attr.ToString();
-
-                    // Skip return attributes
-                    if (attrText.StartsWith("return:"))
-                    {
-                        continue;
-                    }
-
-                    // Skip UnmanagedFunctionPointer attributes because they can have calling
-                    // conventions that will only be accurate on x86
-                    if (attrText.StartsWith("UnmanagedFunctionPointer"))
-                    {
-                        continue;
-                    }
-
-                    // Skip DllImport attributes because they can have calling
-                    // conventions that will only be accurate on x86
-                    if (attrText.StartsWith("DllImport"))
-                    {
-                        continue;
-                    }
-
-                    ret.Append($"[{attrText}]");
-                }
-            }
-
-            var retType = GetTypeName(returnType.ToString(), attributeLists);
+            var returnAttributes = SyntaxFactory.List(attributeLists.Where(list => list.Target?.Identifier.ValueText == "return"));
+            var retType = GetTypeName(returnType.ToString(), returnAttributes);
             if (retType == null)
             {
                 retType = returnType.ToString();
@@ -217,6 +195,8 @@ namespace ClangSharpSourceToWinmd
                     ret.Append(',');
                 }
 
+                AppendAttributes(ret, param.AttributeLists);
+                ret.Append(param.Modifiers.ToString());
                 if (param.Type != null)
                 {
                     var typeName = GetTypeName(param.Type.ToString(), param.AttributeLists);
@@ -230,6 +210,31 @@ namespace ClangSharpSourceToWinmd
             ret.Append(')');
 
             return ret.ToString();
+        }
+
+        private static void AppendAttributes(StringBuilder signature, SyntaxList<AttributeListSyntax> lists)
+        {
+            var attributes = new List<string>();
+            foreach (var list in lists)
+            {
+                foreach (var attribute in list.Attributes)
+                {
+                    string name = attribute.Name.ToString().Split('.').Last().Replace("global::", string.Empty);
+                    if (name is "NativeTypeName" or "UnmanagedFunctionPointer")
+                        continue;
+                    var value = attribute;
+                    if (name == "DllImport" && value.ArgumentList != null)
+                    {
+                        // Windows calling conventions are only meaningful on x86.
+                        value = value.WithArgumentList(value.ArgumentList.WithArguments(
+                            SyntaxFactory.SeparatedList(value.ArgumentList.Arguments.Where(argument =>
+                                argument.NameEquals?.Name.Identifier.ValueText != "CallingConvention"))));
+                    }
+                    attributes.Add($"[{list.Target}{value.NormalizeWhitespace()}]");
+                }
+            }
+            foreach (string attribute in attributes.OrderBy(value => value, StringComparer.Ordinal))
+                signature.Append(attribute);
         }
 
         private static string GetTypeName(string type, SyntaxList<AttributeListSyntax> attributeList)
@@ -257,8 +262,9 @@ namespace ClangSharpSourceToWinmd
             if (node is StructDeclarationSyntax s)
             {
                 StringBuilder ret = new StringBuilder();
-                ret.Append(s.AttributeLists.ToString());
+                AppendAttributes(ret, s.AttributeLists);
                 ret.Append(s.Identifier.ValueText);
+                ret.Append(s.BaseList?.ToString());
                 ret.Append(':');
 
                 bool firstField = true;
@@ -282,9 +288,26 @@ namespace ClangSharpSourceToWinmd
 
                         var firstVar = field.Declaration.Variables.First();
                         var typeName = GetTypeName(field.Declaration.Type.ToString(), field.AttributeLists);
+                        AppendAttributes(ret, field.AttributeLists);
+                        ret.Append(field.Modifiers.ToString());
                         ret.Append(typeName);
                         ret.Append(' ');
                         ret.Append(firstVar.ToString());
+                    }
+                    else if (member is MethodDeclarationSyntax method)
+                    {
+                        ret.Append(GetMethodSignature(method.Identifier.ValueText, method.AttributeLists, method.ReturnType, method.ParameterList));
+                    }
+                    else if (member is DelegateDeclarationSyntax callback)
+                    {
+                        ret.Append(GetMethodSignature(callback.Identifier.ValueText, callback.AttributeLists, callback.ReturnType, callback.ParameterList));
+                    }
+                    else if ((member is StructDeclarationSyntax or EnumDeclarationSyntax) &&
+                        member.DescendantNodesAndSelf().OfType<AttributeSyntax>().Any(attribute =>
+                            attribute.Name.ToString().StartsWith("global::Windows.Win32.Foundation.Metadata.", StringComparison.Ordinal) ||
+                            attribute.Name.ToString() is "global::System.Flags" or "global::System.Runtime.InteropServices.PreserveSig"))
+                    {
+                        ret.Append('{').Append(GetFullSignature(member)).Append('}');
                     }
                 }
 
@@ -312,19 +335,18 @@ namespace ClangSharpSourceToWinmd
             {
                 if (node is StructDeclarationSyntax structNode)
                 {
-                    // Cache the non-x86 struct attributes in case the x86 doesn't have any.
+                    // Cache non-x86 layout in case Clang omits x86 packing information.
                     // Clang doesn't seem to always know the packing for -m32 but does better with -m64
-                    if (arch != Architecture.X86 && structNode.AttributeLists.Count != 0 && !this.namesTo64BitStructs.ContainsKey(name))
+                    if (arch != Architecture.X86 && GetLayoutAttributes(structNode.AttributeLists).Count != 0 && !this.namesTo64BitStructs.ContainsKey(name))
                     {
                         this.namesTo64BitStructs[name] = structNode;
                     }
 
                     if (arch == Architecture.X86)
                     {
-                        // If the x86 node doesn't have any attributes, try using the ones cached from the non-x86 version
                         if (structNode.AttributeLists.Count == 0 && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
                         {
-                            var tempNode = structNode.WithAttributeLists(nonX86Node.AttributeLists);
+                            var tempNode = structNode.AddAttributeLists(GetLayoutAttributes(nonX86Node.AttributeLists).ToArray());
 
                             // Save these off to see if we match with previous items
                             altSignatureForX86 = GetFullSignature(tempNode);
@@ -412,6 +434,13 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 base.VisitDelegateDeclaration(node);
+            }
+
+            public override void VisitEnumDeclaration(EnumDeclarationSyntax node)
+            {
+                if (IsPotentialCrossArch(node))
+                    this.map.AddNode(this.currentArch, node);
+                base.VisitEnumDeclaration(node);
             }
         }
     }

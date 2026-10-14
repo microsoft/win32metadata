@@ -125,6 +125,9 @@ class Program
             }
 
             var clangArgs = BuildClangArgs(settings);
+            bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
+            if (parseHeaderAnnotations)
+                clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA", "-DWIN32METADATA_CSHARP" }).ToArray();
             var configOptions = BuildOptionsFlags(settings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
@@ -136,6 +139,8 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
+            if (parseHeaderAnnotations)
+                translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
             // ── Parse translation unit ──
             // We parse once with our own CXIndex, walk the AST to discover remaps,
@@ -210,6 +215,12 @@ class Program
             }
 
             // ── Run PInvokeGenerator with merged remaps on the same TranslationUnit ──
+            var annotations = parseHeaderAnnotations
+                ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
+                    settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes))
+                : null;
+            annotations?.PrepareTypedefs();
+            annotations?.EvaluateInvalidValues(translationUnit, sourceFile, clangArgs);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
@@ -228,16 +239,26 @@ class Program
 
                 generator.Close();
 
-                // Write output to disk
+                var generatedFiles = new Dictionary<string, string>();
                 foreach (var kvp in capturedStreams)
                 {
-                    var dir = Path.GetDirectoryName(kvp.Key);
-                    if (!string.IsNullOrEmpty(dir))
-                        Directory.CreateDirectory(dir);
-
                     string generatedSource = Encoding.UTF8.GetString(kvp.Value.ToArray());
-                    File.WriteAllText(kvp.Key, NormalizeGeneratedSource(generatedSource, kvp.Key), new UTF8Encoding(false));
+                    generatedSource = NormalizeGeneratedSource(generatedSource, kvp.Key);
+                    generatedFiles[kvp.Key] = generatedSource;
                 }
+                if (annotations != null)
+                {
+                    annotations.PrepareProjections(generatedFiles.Values);
+                    foreach (string path in generatedFiles.Keys.ToArray())
+                        generatedFiles[path] = annotations.Rewrite(generatedFiles[path]);
+                }
+                string additionalTypes = annotations?.GetAdditionalTypes();
+                annotations?.ValidateProjection();
+                string additionalTypesPath = configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.GenerateMultipleFiles)
+                    ? Path.Combine(outputFile, "header-types.cs")
+                    : Path.ChangeExtension(outputFile, ".header-types.cs");
+                if (!string.IsNullOrEmpty(additionalTypes))
+                    generatedFiles[additionalTypesPath] = additionalTypes;
 
                 // Write diagnostics
                 foreach (var diag in generator.Diagnostics)
@@ -251,6 +272,28 @@ class Program
                         else exitCode--;
                     }
                 }
+                if (exitCode < 0)
+                    return exitCode;
+
+                foreach (var file in generatedFiles)
+                {
+                    string directory = Path.GetDirectoryName(file.Key);
+                    if (!string.IsNullOrEmpty(directory))
+                        Directory.CreateDirectory(directory);
+                    string temporaryPath = file.Key + "." + Guid.NewGuid().ToString("N") + ".tmp";
+                    try
+                    {
+                        File.WriteAllText(temporaryPath, file.Value, new UTF8Encoding(false));
+                        File.Move(temporaryPath, file.Key, overwrite: true);
+                    }
+                    finally
+                    {
+                        if (File.Exists(temporaryPath))
+                            File.Delete(temporaryPath);
+                    }
+                }
+                if (string.IsNullOrEmpty(additionalTypes) && File.Exists(additionalTypesPath))
+                    File.Delete(additionalTypesPath);
             }
 
             // Write auto-discovered remaps + fn ptr remaps to sidecar file
@@ -294,7 +337,7 @@ class Program
         {
             Console.Error.WriteLine($"Error: {ex.Message}");
             Console.Error.WriteLine(ex.StackTrace);
-            return 1;
+            return -1;
         }
     }
 
@@ -423,6 +466,7 @@ class Program
                     "generate-latest-code" => PInvokeGeneratorConfigurationOptions.GenerateLatestCode,
                     "generate-template-bindings" => PInvokeGeneratorConfigurationOptions.GenerateTemplateBindings,
                     "generate-source-location-attribute" => PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute,
+                    "parse-win32-annotations" => PInvokeGeneratorConfigurationOptions.GenerateSourceLocationAttribute,
                     "generate-callconv-member-function" => PInvokeGeneratorConfigurationOptions.GenerateCallConvMemberFunction,
                     "generate-doc-includes" => PInvokeGeneratorConfigurationOptions.GenerateDocIncludes,
                     "preview-codegen" => PInvokeGeneratorConfigurationOptions.GeneratePreviewCode,

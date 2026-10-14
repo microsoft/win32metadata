@@ -116,16 +116,34 @@ namespace ClangSharpSourceToWinmd
                 foreach (var attrNode in remappedListAttributes)
                 {
                     var attrName = attrNode.Name.ToString();
+                    bool remove = attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix);
+                    string semanticName = GetAttributeName(attrNode);
+                    if (remove)
+                    {
+                        semanticName = semanticName[..^EncodeHelpers.AttributeToRemoveSuffix.Length];
+                        if (semanticName.EndsWith("Attribute", StringComparison.Ordinal))
+                            semanticName = semanticName[..^"Attribute".Length];
+                    }
+                    var headerAttributes = existingAttrList
+                        .Where(list => list.Target?.Identifier.ValueText == target?.Identifier.ValueText)
+                        .SelectMany(list => list.Attributes)
+                        .Where(attribute => IsHeaderAttribute(attribute) && GetAttributeName(attribute) == semanticName)
+                        .ToArray();
+                    if (headerAttributes.Length != 0)
+                    {
+                        if (remove || !headerAttributes.Any(attribute =>
+                            NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(attrNode)))
+                            throw new InvalidOperationException($"WMA002: Legacy remapping '{attrNode}' conflicts with header annotation '{headerAttributes[0]}'.");
+                        continue;
+                    }
                     if (attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix))
                     {
-                        var attrNameToRemove = attrName.Substring(0, attrName.Length - EncodeHelpers.AttributeToRemoveSuffix.Length);
-
-                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrNameToRemove);
+                        existingAttrList = RemoveTargetAttributes(existingAttrList, semanticName, target);
                     }
                     else
                     {
                         // Remove any existing attribute with the same name
-                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrName);
+                        existingAttrList = RemoveTargetAttributes(existingAttrList, GetAttributeName(attrNode), target);
 
                         var attrListNode =
                             SyntaxFactory.AttributeList(
@@ -140,6 +158,40 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return existingAttrList;
+            }
+
+            private static string GetAttributeName(AttributeSyntax attribute)
+            {
+                string name = attribute.Name.ToString().Split('.').Last().Replace("global::", string.Empty);
+                return name.EndsWith("Attribute", StringComparison.Ordinal) ? name[..^"Attribute".Length] : name;
+            }
+
+            private static bool IsHeaderAttribute(AttributeSyntax attribute)
+                => attribute.Name.ToString().StartsWith("global::Windows.Win32.Foundation.Metadata.", StringComparison.Ordinal) ||
+                    attribute.Name.ToString() is "global::System.Runtime.InteropServices.PreserveSig" or "global::System.Flags";
+
+            private static string NormalizeAttributeArguments(AttributeSyntax attribute)
+                => new AttributeLiteralNormalizer().Visit(attribute.ArgumentList)?.NormalizeWhitespace().ToString();
+
+            private static SyntaxList<AttributeListSyntax> RemoveTargetAttributes(
+                SyntaxList<AttributeListSyntax> lists, string name, AttributeTargetSpecifierSyntax target)
+                => SyntaxFactory.List(lists.Select(list =>
+                    list.Target?.Identifier.ValueText == target?.Identifier.ValueText
+                        ? list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(attribute => GetAttributeName(attribute) != name)))
+                        : list).Where(list => list.Attributes.Count != 0));
+
+            private sealed class AttributeLiteralNormalizer : CSharpSyntaxRewriter
+            {
+                public override SyntaxNode VisitLiteralExpression(LiteralExpressionSyntax node)
+                {
+                    if (node.IsKind(SyntaxKind.StringLiteralExpression))
+                        return node.WithToken(SyntaxFactory.Literal(node.Token.ValueText));
+                    if (node.IsKind(SyntaxKind.NumericLiteralExpression) &&
+                        node.Token.Value is byte or sbyte or short or ushort or int or uint or long or ulong)
+                        return SyntaxFactory.ParseExpression(Convert.ToDecimal(node.Token.Value, System.Globalization.CultureInfo.InvariantCulture)
+                            .ToString(System.Globalization.CultureInfo.InvariantCulture));
+                    return base.VisitLiteralExpression(node);
+                }
             }
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
@@ -293,7 +345,7 @@ namespace ClangSharpSourceToWinmd
 
                     node = node.WithModifiers(newModifiers).WithLeadingTrivia(node.GetLeadingTrivia());
 
-                    return node;
+                    return base.VisitFieldDeclaration(node);
                 }
 
                 if (node.Modifiers.ToString() == "public static readonly")
@@ -337,7 +389,7 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
 
-                        return node;
+                        return base.VisitFieldDeclaration(node);
                     }
                     // Some constants get scraped as public static readonly.
                     // If we see the prefix, force it to be a const
@@ -354,7 +406,7 @@ namespace ClangSharpSourceToWinmd
                         variable = variable.WithIdentifier(SyntaxFactory.ParseToken(localName.Substring(ForceConstPrefix.Length)));
                         node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(variable)));
 
-                        return node;
+                        return base.VisitFieldDeclaration(node);
                     }
                 }
 
@@ -399,7 +451,18 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitAttributeList(AttributeListSyntax node)
             {
-                var firstAttr = node.Attributes[0];
+                var attributes = new List<AttributeSyntax>();
+                foreach (var attribute in node.Attributes)
+                {
+                    var result = this.ProcessAttribute(node, attribute) as AttributeListSyntax;
+                    if (result != null)
+                        attributes.AddRange(result.Attributes);
+                }
+                return attributes.Count == 0 ? null : node.WithAttributes(SyntaxFactory.SeparatedList(attributes));
+            }
+
+            private SyntaxNode ProcessAttribute(AttributeListSyntax node, AttributeSyntax firstAttr)
+            {
                 var attrName = firstAttr.Name.ToString();
 
                 switch (attrName)
@@ -458,13 +521,19 @@ namespace ClangSharpSourceToWinmd
 
                     case "NativeTypeName":
                     {
-                        bool alreadyConst = 
-                            node.Parent is FieldDeclarationSyntax parentField &&
-                            parentField.Modifiers.Any(m => m.ToString() == "const");
+                        bool alreadyConst =
+                            (node.Parent is FieldDeclarationSyntax parentField &&
+                             (parentField.Modifiers.Any(m => m.ToString() == "const") ||
+                              parentField.AttributeLists.SelectMany(list => list.Attributes)
+                                  .Any(attribute => GetAttributeName(attribute) == "Guid"))) ||
+                            node.Parent.ChildNodes().OfType<AttributeListSyntax>()
+                                .Where(list => list.Target?.Identifier.ValueText == node.Target?.Identifier.ValueText)
+                                .SelectMany(list => list.Attributes)
+                                .Any(attribute => GetAttributeName(attribute) == "Const");
 
                         var ret = this.ProcessNativeTypeNameAttr(alreadyConst, firstAttr);
 
-                        return ret == null ? node : ret;
+                        return ret ?? SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(firstAttr));
                     }
 
                     case "NativeAnnotation":
@@ -474,11 +543,11 @@ namespace ClangSharpSourceToWinmd
 
                     case "CppAttributeList":
                     {
-                        return this.CreateAttributeListForSal(node);
+                        return this.CreateAttributeListForSal(node, firstAttr);
                     }
                 }
 
-                return base.VisitAttributeList(node);
+                return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(firstAttr));
             }
 
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
@@ -509,7 +578,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (this.enumsToMakeFlags.Contains(enumName))
                 {
-                    bool hasFlags = SyntaxUtils.GetAttribute(node.AttributeLists, "Flags") != null;
+                    bool hasFlags = node.AttributeLists.SelectMany(list => list.Attributes).Any(attribute => GetAttributeName(attribute) == "Flags");
                     if (!hasFlags)
                     {
                         node =
@@ -894,7 +963,7 @@ namespace ClangSharpSourceToWinmd
                 return ret;
             }
 
-            private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList)
+            private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList, AttributeSyntax cppAttr)
             {
                 if (cppAttrList.Parent is not ParameterSyntax paramNode)
                 {
@@ -903,7 +972,6 @@ namespace ClangSharpSourceToWinmd
 
                 bool marshalAsAdded = this.nodesWithMarshalAs.Contains(paramNode);
 
-                AttributeSyntax cppAttr = cppAttrList.Attributes[0];
                 List<AttributeSyntax> attributesList = new List<AttributeSyntax>();
 
                 string salText = cppAttr.ArgumentList.Arguments[0].ToString();
