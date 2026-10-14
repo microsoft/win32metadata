@@ -181,7 +181,9 @@ transactions, and lock contention.
 Native controls parse the real WinHttp and HttpServer translation units for
 x86, x64, and ARM64 with metadata disabled, comparing native signatures, calling
 conventions, typedef pointer depth, enum values, field offsets, record sizes, and
-alignment. Physical readback covers DLL/entrypoint/import flags, attribute targets,
+alignment. Their exclusive test collection prevents SDK-sized AST walks from
+overlapping the generator fixtures that share the native Clang runtime.
+Physical readback covers DLL/entrypoint/import flags, attribute targets,
 associations, enum values/types, ports, callback identity, architecture coverage,
 and local type/attribute-constructor closure, with missing-type/constructor mutation
 controls. HttpServer and WinInet snapshots must remain unchanged.
@@ -207,3 +209,64 @@ four genuine scheme member additions and four fabricated-member removals. It
 does not admit callback renames, import changes, dependent changes, additional
 constants, or changed values. The image builder applies this grade before publishing
 its provenance receipt.
+
+## Pinned pilot evidence
+
+The complete migrated image was produced by commit
+`9faf8a24831e1ef0a44d4ccfe4cd972f380452b3`, above tooling commit
+`00ade0afc94c965522ccdbac54a06fc1bcbd01a1`. The supported pins remain
+ClangSharp/Interop/PInvokeGenerator `21.1.8.4`, libclang `21.1.8`, and
+libClangSharp `21.1.8.2`.
+
+All three images are `Windows.Win32.winmd` under
+`artifacts\winhttp-migration`; none is a selected-partition-only assembly.
+
+| Image | Directory | SHA256 |
+| --- | --- | --- |
+| Frozen OLD | `old` | `1361407C2888102CB5161D83503235C09C36F917837C7107CA0A80E5CF4FAC43` |
+| Frozen-input corrected-tooling control | `tooling-control-final` | `274A288E622B840552934AE74FE2A33FEC4E7D4E47E3D3454B92A147A13B0CDA` |
+| Migrated NEW | `new-final` | `C7AEC280B0CBB19CDAD6B94FFED8473B2B22E4042BF886FCF33DCBDD92274258` |
+
+The normal SDK first/repeated selection has ten byte-identical inputs: four native
+C# files, four per-TU discovery files, and two aggregate response files. The
+complete pointer-reduction set contains 155 entries. The declared OLD/NEW grade
+admits all 24 expected differences, with no unknown or unused expectations.
+NEW has 1,640 C# files / 1,652 generated inputs: the old synthetic
+`Networking.WinHttp.enums.cs` and its processed copy are replaced by declarations
+in the native header output, not by missing final metadata.
+All 38 pilot cases executed without skips, including the six native ABI legs.
+The full SDK integrity suite executed and passed all 14 cases using the complete
+393-file diagnostic closure. Strict physical readback finds 37,314 TypeDefs and
+37,248 unchanged snapshots outside WinHttp; the frozen-input control changes only
+the 39 acknowledged constructor instance bits.
+
+The companion CsWin32 gate requests these APIs/types:
+
+```text
+WinHttpOpen
+WinHttpConnect
+WinHttpOpenRequest
+WinHttpCloseHandle
+WinHttpCreateUrl
+WinHttpCrackUrl
+WinHttpSetStatusCallback
+WinHttpQueryHeadersEx
+WinHttpReadData
+WinHttpGetProxyForUrl
+WinHttpCreateProxyResolver
+WINHTTP_CREDS
+WINHTTP_CREDS_EX
+WINHTTP_PROXY_RESULT_ENTRY
+WINHTTP_PROXY_INFO
+URL_COMPONENTS
+```
+
+The pinned compilation context is x64, `net8.0-windows`, C# 12, unsafe, public
+visibility, `useSafeHandles=true`, and `emitSingleFile=true`. Run both
+`allowMarshaling=true` and `false`, with the same unchanged caller source per leg.
+Compare OLD + baseline consumer, OLD + proposed consumer, and NEW + proposed
+consumer, pinning both consumer revisions explicitly. Public-surface comparison
+and actual caller compilation are required; generated text alone is not the gate.
+The four old `WINHTTP_INTERNET_SCHEME_*` member spellings remain a specific
+source-break candidate until those unchanged callers are compiled. The metadata
+does not add compatibility aliases or automatic `HINTERNET` ownership to hide it.

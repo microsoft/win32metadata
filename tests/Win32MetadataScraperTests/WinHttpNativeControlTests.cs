@@ -12,6 +12,7 @@ using Xunit.Abstractions;
 
 namespace Win32MetadataScraperTests
 {
+    [Collection(nameof(WinHttpNativeControlCollection))]
     public class WinHttpNativeControlTests
     {
         private readonly ITestOutputHelper output;
@@ -121,6 +122,12 @@ namespace Win32MetadataScraperTests
                 }
             }
         }
+    }
+
+    // SDK-sized AST walks must not overlap the generator fixtures sharing the native Clang runtime.
+    [CollectionDefinition(nameof(WinHttpNativeControlCollection), DisableParallelization = true)]
+    public sealed class WinHttpNativeControlCollection
+    {
     }
 
     public sealed class NativeMigrationTheoryAttribute : TheoryAttribute
