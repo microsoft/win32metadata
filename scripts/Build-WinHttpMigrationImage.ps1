@@ -65,6 +65,14 @@ function Get-PointerReductions([IO.FileInfo[]]$Remaps) {
     return ,$reduce
 }
 
+function Get-SelectedInputs([string]$Obj, [string[]]$Overlays) {
+    $paths = @($Overlays | ForEach-Object { "$Obj\generated\$_" })
+    $paths += @(Get-ChildItem "$Obj\scratch" -Recurse -Filter '*.remaps' -File | ForEach-Object { $_.FullName })
+    @($paths | Sort-Object -CaseSensitive | ForEach-Object {
+        [ordered]@{ path = [IO.Path]::GetRelativePath($Obj, $_); sha256 = Get-Sha256 $_ }
+    })
+}
+
 $provenancePath = "$BaselineDirectory\provenance.json"
 $baseline = Get-Content -LiteralPath $provenancePath -Raw | ConvertFrom-Json
 if ($baseline.toolingCommit -ne 'b5b7b26ed09d648766f07449af48c64ef0e99d13' -or
@@ -158,16 +166,27 @@ try {
         return [pscustomobject]@{ Winmd = $winmd; Sha256 = $receipt.newWinmdSha256; Provenance = "$OutputDirectory\provenance.json" }
     }
     $selectedObj = "$SelectionDirectory\obj"
-    Invoke-Dotnet @('build', 'generation\WinSDK', '-c', 'Release', '-t:ScrapeHeaders',
+    $overlays = @('x86\WinHttp.cs', 'x64\WinHttp.cs', 'arm64\WinHttp.cs', 'common\HttpServer.cs')
+    $scrapeArguments = @('build', 'generation\WinSDK', '-c', 'Release', '-t:ScrapeHeaders',
         "-p:ObjDir=$selectedObj", '-p:PartitionFilter=WinHttp%3BHttpServer', '-p:MaxProcessors=2',
-        '--no-restore', '--verbosity', 'minimal') "$OutputDirectory\scrape.log"
+        '-p:ScanArch=crossarch', '--no-restore', '--verbosity', 'minimal')
+    Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
+    $firstInputs = Get-SelectedInputs $selectedObj $overlays
+    Remove-Item -LiteralPath "$selectedObj\generated\scannedheaders.crossarch.txt"
+    Invoke-Dotnet $scrapeArguments "$OutputDirectory\repeat-scrape.log"
+    $repeatedInputs = Get-SelectedInputs $selectedObj $overlays
+    if (($firstInputs | ConvertTo-Json -Depth 3) -cne ($repeatedInputs | ConvertTo-Json -Depth 3)) {
+        throw 'A repeated normal SDK scrape changed selected declarations or pointer discoveries.'
+    }
+    if ((Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim() -cne $includeRoot) {
+        throw 'The selected scrape changed its pinned prepared-header root.'
+    }
 
     $obj = "$OutputDirectory\obj"
     [IO.Directory]::CreateDirectory($obj) | Out-Null
     Copy-Item -LiteralPath $oldGenerated -Destination $obj -Recurse
     $generated = "$obj\generated"
-    $overlays = @('x86\WinHttp.cs', 'x64\WinHttp.cs', 'arm64\WinHttp.cs', 'common\HttpServer.cs')
     foreach ($path in $overlays) {
         [IO.File]::Copy("$selectedObj\generated\$path", "$generated\$path", $true)
     }
@@ -230,6 +249,7 @@ try {
         preparedIncludeRoot = $includeRoot
         preparedManifestSha256 = Get-Sha256 ([IO.Path]::Combine([IO.Path]::GetDirectoryName($includeRoot), 'manifest.json'))
         overlaidHeaderSources = $overlays
+        repeatedSelectionInputs = $repeatedInputs
         sourceCommit = (& git rev-parse HEAD)
         toolFiles = $toolFiles
         toolingControl = $ToolingControlDirectory
