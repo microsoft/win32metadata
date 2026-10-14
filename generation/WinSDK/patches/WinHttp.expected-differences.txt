@@ -1,0 +1,28 @@
+# Same-SDK b5b7b26 OLD to the complete WinHttp header-annotation NEW.
+# Native integer ABI plus eight authored logical-enum relationships.
+# Four genuine SDK scheme spellings replace fabricated old enum member names.
+# No import, OS, last-error, callback, port, dependent-partition, or value changes.
+Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags) : [In] => [AssociatedEnum(WIN_HTTP_CREATE_URL_FLAGS),In]
+Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags)...Windows.Win32.Networking.WinHttp.WIN_HTTP_CREATE_URL_FLAGS => System.UInt32
+Windows.Win32.Networking.WinHttp.Apis.WinHttpOpen : parameter 2 (dwAccessType) : [In] => [AssociatedEnum(WINHTTP_ACCESS_TYPE),In]
+Windows.Win32.Networking.WinHttp.Apis.WinHttpOpen : parameter 2 (dwAccessType)...Windows.Win32.Networking.WinHttp.WINHTTP_ACCESS_TYPE => System.UInt32
+Windows.Win32.Networking.WinHttp.Apis.WinHttpOpenRequest : parameter 7 (dwFlags) : [In] => [AssociatedEnum(WINHTTP_OPEN_REQUEST_FLAGS),In]
+Windows.Win32.Networking.WinHttp.Apis.WinHttpOpenRequest : parameter 7 (dwFlags)...Windows.Win32.Networking.WinHttp.WINHTTP_OPEN_REQUEST_FLAGS => System.UInt32
+Windows.Win32.Networking.WinHttp.URL_COMPONENTS.nScheme :  => [AssociatedEnum(WINHTTP_INTERNET_SCHEME)]
+Windows.Win32.Networking.WinHttp.URL_COMPONENTS.nScheme...Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME => System.Int32
+Windows.Win32.Networking.WinHttp.WINHTTP_CREDS_EX.dwAuthScheme :  => [AssociatedEnum(WINHTTP_CREDS_AUTHSCHEME)]
+Windows.Win32.Networking.WinHttp.WINHTTP_CREDS_EX.dwAuthScheme...Windows.Win32.Networking.WinHttp.WINHTTP_CREDS_AUTHSCHEME => System.UInt32
+Windows.Win32.Networking.WinHttp.WINHTTP_CREDS.dwAuthScheme :  => [AssociatedEnum(WINHTTP_CREDS_AUTHSCHEME)]
+Windows.Win32.Networking.WinHttp.WINHTTP_CREDS.dwAuthScheme...Windows.Win32.Networking.WinHttp.WINHTTP_CREDS_AUTHSCHEME => System.UInt32
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.INTERNET_SCHEME_FTP added
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.INTERNET_SCHEME_HTTP added
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.INTERNET_SCHEME_HTTPS added
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.INTERNET_SCHEME_SOCKS added
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_FTP removed
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_HTTP removed
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_HTTPS removed
+Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME.WINHTTP_INTERNET_SCHEME_SOCKS removed
+Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_INFO.dwAccessType :  => [AssociatedEnum(WINHTTP_ACCESS_TYPE)]
+Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_INFO.dwAccessType...Windows.Win32.Networking.WinHttp.WINHTTP_ACCESS_TYPE => System.UInt32
+Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyScheme :  => [AssociatedEnum(WINHTTP_INTERNET_SCHEME)]
+Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyScheme...Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME => System.Int32

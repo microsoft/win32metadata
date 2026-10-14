@@ -65,4 +65,25 @@
   </ItemGroup>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
+
+  <Target Name="PrepareWinHttpHeaders" BeforeTargets="ScrapeHeaders">
+    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1').IncludeRoot&quot;"
+          ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" ItemName="_PreparedSdkIncludeRoot" />
+    </Exec>
+    <Error Condition="'@(_PreparedSdkIncludeRoot->Count())' != '1'"
+           Text="Header preparation did not return exactly one private include root." />
+    <ReadLinesFromFile File="$(ObjDir)\prepared-sdk.txt" Condition="Exists('$(ObjDir)\prepared-sdk.txt')">
+      <Output TaskParameter="Lines" ItemName="_PreviousSdkIncludeRoot" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <SdkIncRoot>@(_PreparedSdkIncludeRoot)</SdkIncRoot>
+    </PropertyGroup>
+    <Error Condition="'$(SdkIncRoot)' != '@(_PreparedSdkIncludeRoot)'"
+           Text="SdkIncRoot must use the pinned prepared headers returned by Prepare-SdkHeaders.ps1." />
+    <Delete Files="$(ScrapedHeadersMarker);$(ScrapedConstantsMarker)"
+            Condition="'@(_PreviousSdkIncludeRoot)' != '$(SdkIncRoot)'" />
+    <WriteLinesToFile File="$(ObjDir)\prepared-sdk.txt" Lines="$(SdkIncRoot)" Overwrite="true"
+                      WriteOnlyWhenDifferent="true" />
+  </Target>
 </Project>

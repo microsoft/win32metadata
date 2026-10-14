@@ -1,0 +1,298 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+@@ -1586,6 +1586,7 @@
+ //
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ WINHTTP_STATUS_CALLBACK
+ WINAPI
+@@ -1598,6 +1599,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1608,6 +1610,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1618,6 +1621,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1631,6 +1635,7 @@
+ 
+ _Success_(return != FALSE)
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1649,11 +1654,14 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+@@ -1663,6 +1671,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1676,6 +1685,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1685,6 +1695,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1697,6 +1708,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1724,6 +1736,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1736,6 +1749,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1747,6 +1761,7 @@
+ 
+ _Success_(return != FALSE)
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1759,6 +1774,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1786,6 +1802,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1827,6 +1844,7 @@
+ //
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1842,6 +1860,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1870,6 +1889,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1885,6 +1905,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1906,6 +1927,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1940,6 +1962,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1951,6 +1974,7 @@
+ 
+ _Success_(return != FALSE)
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2010,6 +2034,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2020,6 +2045,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2032,6 +2058,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2042,6 +2069,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2068,6 +2096,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2088,6 +2117,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ VOID
+ WINAPI
+@@ -2106,6 +2136,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2116,6 +2147,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_WindowsXP_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2228,6 +2260,7 @@
+ #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -2238,6 +2271,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2250,6 +2284,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2263,6 +2298,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2275,6 +2311,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI
+@@ -2287,6 +2324,7 @@
+ );
+ 
+ _Win32_ImportLibrary_("WINHTTP.dll")
++_Windows_SupportedOS_Windows8_
+ WINHTTPAPI
+ DWORD
+ WINAPI

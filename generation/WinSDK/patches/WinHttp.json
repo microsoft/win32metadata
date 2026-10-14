@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "sdkPackageVersion": "10.0.26100.7705",
+  "sourceStage": "post-midl",
+  "sourceGitTree": "77817f12308e29ec8bf77dc6fe56786e65ff9e08",
+  "headers": [
+    {
+      "path": "um\\winhttp.h",
+      "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winhttp.h",
+      "sdkSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2"
+    },
+    {
+      "path": "um\\httprequest.h",
+      "sourceSha256": "84D9B00F3AC18FAC5A97DB772FE486CA80BF80BDCF6F46F98CA31D3FD1636F93",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\httprequest.idl",
+      "sdkSha256": "671F997E30FF1108FF4C7FB03631B3E4B1CABF05B8A31D14F5E4802D6FA997AE"
+    }
+  ],
+  "partitions": [
+    "WinHttp",
+    "HttpServer"
+  ],
+  "patches": [
+    "post-midl\\um\\winhttp.imports.patch",
+    "post-midl\\um\\winhttp.supported-os.patch",
+    "post-midl\\um\\winhttp.last-error.patch",
+    "post-midl\\um\\winhttp.callback-alias.patch",
+    "post-midl\\um\\winhttp.interior-pointers.patch",
+    "post-midl\\um\\winhttp.port-constant-types.patch",
+    "post-midl\\um\\winhttp.logical-enums.patch"
+  ]
+}

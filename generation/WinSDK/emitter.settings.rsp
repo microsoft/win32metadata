@@ -2533,8 +2533,6 @@ GetOwnerModuleFromUdp6Entry::pBuffer=[ContainsInteriorPointers]
 HttpQueryServiceConfiguration::pOutput=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate
 HttpReceiveClientCertificate::SslClientCertInfo=[ContainsInteriorPointers]
-# https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpqueryheadersex
-WinHttpQueryHeadersEx::pBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex

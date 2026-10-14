@@ -9095,39 +9095,6 @@
     ]
   },
   {
-    "name": "WINHTTP_OPEN_REQUEST_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "WINHTTP_FLAG_BYPASS_PROXY_CACHE"
-      },
-      {
-        "name": "WINHTTP_FLAG_ESCAPE_DISABLE"
-      },
-      {
-        "name": "WINHTTP_FLAG_ESCAPE_DISABLE_QUERY"
-      },
-      {
-        "name": "WINHTTP_FLAG_ESCAPE_PERCENT"
-      },
-      {
-        "name": "WINHTTP_FLAG_NULL_CODEPAGE"
-      },
-      {
-        "name": "WINHTTP_FLAG_REFRESH"
-      },
-      {
-        "name": "WINHTTP_FLAG_SECURE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinHttpOpenRequest",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "addUsesTo": "NtmsDismountOptions",
     "members": [],
     "uses": [
@@ -11622,23 +11589,9 @@
     ]
   },
   {
-    "name": "WIN_HTTP_CREATE_URL_FLAGS",
-    "members": [
-      {
-        "name": "ICU_ESCAPE"
-      },
-      {
-        "name": "ICU_REJECT_USERPWD"
-      },
-      {
-        "name": "ICU_DECODE"
-      }
-    ],
+    "addUsesTo": "WIN_HTTP_CREATE_URL_FLAGS",
+    "members": [],
     "uses": [
-      {
-        "method": "WinHttpCreateUrl",
-        "parameter": "dwFlags"
-      },
       {
         "method": "InternetCrackUrlA",
         "parameter": "dwFlags"
@@ -18902,33 +18855,6 @@
       {
         "method": "EnumerateNtmsObject",
         "parameter": "dwType"
-      }
-    ]
-  },
-  {
-    "name": "WINHTTP_ACCESS_TYPE",
-    "members": [
-      {
-        "name": "WINHTTP_ACCESS_TYPE_NO_PROXY"
-      },
-      {
-        "name": "WINHTTP_ACCESS_TYPE_DEFAULT_PROXY"
-      },
-      {
-        "name": "WINHTTP_ACCESS_TYPE_NAMED_PROXY"
-      },
-      {
-        "name": "WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinHttpOpen",
-        "parameter": "dwAccessType"
-      },
-      {
-        "struct": "WINHTTP_PROXY_INFO",
-        "field": "dwAccessType"
       }
     ]
   },
@@ -26897,33 +26823,6 @@
     ]
   },
   {
-    "name": "WINHTTP_CREDS_AUTHSCHEME",
-    "members": [
-      {
-        "name": "WINHTTP_AUTH_SCHEME_BASIC"
-      },
-      {
-        "name": "WINHTTP_AUTH_SCHEME_NTLM"
-      },
-      {
-        "name": "INHTTP_AUTH_SCHEME_DIGEST"
-      },
-      {
-        "name": "WINHTTP_AUTH_SCHEME_NEGOTIATE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "WINHTTP_CREDS",
-        "field": "dwAuthScheme"
-      },
-      {
-        "struct": "WINHTTP_CREDS_EX",
-        "field": "dwAuthScheme"
-      }
-    ]
-  },
-  {
     "name": "DEV_BROADCAST_HDR_DEVICE_TYPE",
     "members": [
       {
@@ -28899,39 +28798,6 @@
       {
         "struct": "XINPUT_KEYSTROKE",
         "field": "VirtualKey"
-      }
-    ]
-  },
-  {
-    "name": "WINHTTP_INTERNET_SCHEME",
-    "type": "int",
-    "flags": false,
-    "members": [
-      {
-        "name": "WINHTTP_INTERNET_SCHEME_HTTP",
-        "value": "(1)"
-      },
-      {
-        "name": "WINHTTP_INTERNET_SCHEME_HTTPS",
-        "value": "(2)"
-      },
-      {
-        "name": "WINHTTP_INTERNET_SCHEME_FTP",
-        "value": "(3)"
-      },
-      {
-        "name": "WINHTTP_INTERNET_SCHEME_SOCKS",
-        "value": "(4)"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "URL_COMPONENTS",
-        "field": "nScheme"
-      },
-      {
-        "struct": "WINHTTP_PROXY_RESULT_ENTRY",
-        "field": "ProxyScheme"
       }
     ]
   },
