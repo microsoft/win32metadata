@@ -430,6 +430,39 @@ DERIVED_ONLY_RECORD
             Assert.False(File.Exists(fixture.Output));
         }
 
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void DiscoveryUsesAuthoredSettingsNotCachedBindingSettings(bool authoredAliasExcluded)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct _RECORD { int value; } RECORD;
+typedef int (__stdcall SIMPLE_CALLBACK)(int value);
+typedef SIMPLE_CALLBACK* LPSIMPLE_CALLBACK;
+int __stdcall UseCallback(LPSIMPLE_CALLBACK callback);
+", annotationsEnabled: false, extraSettings: "--auto-remaps-file\nderived.rsp\n"
+                + (authoredAliasExcluded ? "--exclude\nLPSIMPLE_CALLBACK\n" : ""));
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "derived.rsp"), @"--remap
+_RECORD=RECORD
+SIMPLE_CALLBACK=LPSIMPLE_CALLBACK
+--exclude
+LPSIMPLE_CALLBACK
+");
+            string firstDiscovery = null;
+            for (int repeat = 0; repeat < 2; repeat++)
+            {
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                string discovery = File.ReadAllText(Path.Combine(fixture.DirectoryPath, "remaps.txt"));
+                Assert.Contains("_RECORD=RECORD|HEADER:", discovery);
+                foreach (string row in new[] { "SIMPLE_CALLBACK=LPSIMPLE_CALLBACK", "FNPTR_EXCLUDE:LPSIMPLE_CALLBACK", "REDUCE_PTR_LEVEL:LPSIMPLE_CALLBACK" })
+                    Assert.Equal(!authoredAliasExcluded, discovery.Contains(row, StringComparison.Ordinal));
+                if (repeat == 0)
+                    firstDiscovery = discovery;
+                else
+                    Assert.Equal(firstDiscovery, discovery);
+            }
+        }
+
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,

@@ -36,6 +36,9 @@ The SDK also collects cross-partition discoveries in
 `scraper.autoRemaps.generated.rsp`. It passes this cache separately through
 `--auto-remaps-file`, not as authored response-file settings. Legacy partitions
 continue using its remaps and exclusions, with authored settings taking priority.
+These cached settings affect binding generation only: native remap and
+function-pointer discovery use authored settings, so repeated builds retain the
+same discovery sidecars and pointer-reduction inputs.
 Partitions using `parse-win32-annotations` ignore this aggregate and derive
 remaps from their current translation unit instead. This prevents a previous
 build or an unconverted partition from renaming types hidden by annotated

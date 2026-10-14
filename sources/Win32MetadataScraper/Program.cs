@@ -127,7 +127,7 @@ class Program
 
             var clangArgs = BuildClangArgs(settings);
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
-            ApplyAutoRemaps(settings, parseHeaderAnnotations);
+            var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
                 clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA", "-DWIN32METADATA_CSHARP" }).ToArray();
             var configOptions = BuildOptionsFlags(settings);
@@ -201,20 +201,18 @@ class Program
                 fnPtrResult.ReducePointerLevel.Remove(name);
             }
 
-            // Merge all remaps: auto tag remaps + fn ptr remaps + configured (configured wins)
+            // Cached settings affect bindings, not discovery; authored settings win.
             var mergedRemaps = new Dictionary<string, string>(autoRemaps);
             foreach (var kv in fnPtrResult.FnPtrRemaps)
+                mergedRemaps[kv.Key] = kv.Value;
+            foreach (var kv in ParseKeyValuePairs(derivedSettings.GetValueOrDefault("--remap")))
                 mergedRemaps[kv.Key] = kv.Value;
             foreach (var kv in configuredRemaps)
                 mergedRemaps[kv.Key] = kv.Value;
 
-            // Merge excludes from function pointer fixups into the configured excludes
-            var allExcludes = new List<string>(settings.GetValueOrDefault("--exclude") ?? new List<string>());
-            foreach (var excl in fnPtrResult.FnPtrExcludes)
-            {
-                if (!allExcludes.Contains(excl))
-                    allExcludes.Add(excl);
-            }
+            var allExcludes = (settings.GetValueOrDefault("--exclude") ?? new List<string>())
+                .Concat(derivedSettings.GetValueOrDefault("--exclude") ?? new List<string>())
+                .Concat(fnPtrResult.FnPtrExcludes).Distinct(StringComparer.Ordinal).ToList();
 
             // ── Run PInvokeGenerator with merged remaps on the same TranslationUnit ──
             var annotations = parseHeaderAnnotations
@@ -484,14 +482,14 @@ class Program
         return options;
     }
 
-    static void ApplyAutoRemaps(Dictionary<string, List<string>> settings, bool parseHeaderAnnotations)
+    static Dictionary<string, List<string>> LoadAutoRemaps(Dictionary<string, List<string>> settings, bool parseHeaderAnnotations)
     {
+        var derivedSettings = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
         if (!settings.TryGetValue("--auto-remaps-file", out var paths))
-            return;
+            return derivedSettings;
         if (paths.Count == 0)
             throw new InvalidDataException("Missing path for --auto-remaps-file.");
 
-        var derivedSettings = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
         foreach (string value in paths)
         {
             string path = value.Trim('"');
@@ -510,8 +508,8 @@ class Program
             if (!pair.Key.Equals("--remap", StringComparison.OrdinalIgnoreCase)
                 && !pair.Key.Equals("--exclude", StringComparison.OrdinalIgnoreCase))
                 throw new InvalidDataException($"Unsupported auto-remaps option: {pair.Key}");
-            settings[pair.Key] = pair.Value.Concat(settings.GetValueOrDefault(pair.Key) ?? new List<string>()).ToList();
         }
+        return derivedSettings;
     }
 
     static void ParseRspFile(string path, Dictionary<string, List<string>> settings)

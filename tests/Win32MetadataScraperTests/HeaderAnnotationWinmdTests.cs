@@ -504,7 +504,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
             => Emit(fixture.DirectoryPath, architecture);
 
-        internal static MetadataImage Emit(string directory, string architecture)
+        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"));
@@ -515,7 +515,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string path = Path.Combine(directory, "Test.winmd");
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
-                new Dictionary<string, string>(), new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
+                new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
             Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
             return new MetadataImage(path);
         }
