@@ -1389,7 +1389,7 @@ namespace ClangSharpSourceToWinmd
                         symbol,
                         MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
                         methodImplAttributes,
-                        false,
+                        !symbol.IsStatic,
                         false);
 
                 if (firstMethod.IsNil)

@@ -77,6 +77,8 @@ struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Windows_Suppo
             var import = imported.GetImport();
             Assert.Equal("header.dll", reader.GetString(reader.GetModuleReference(import.Module).Name));
             Assert.True(import.Attributes.HasFlag(MethodImportAttributes.SetLastError));
+            Assert.True(imported.Attributes.HasFlag(MethodAttributes.Static));
+            Assert.False(imported.DecodeSignature(new SignatureNames(), null).Header.IsInstance);
             AssertStringAttribute(reader, imported.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows10.0.10240");
             var parameters = imported.GetParameters().Select(reader.GetParameter).ToArray();
             Assert.True(parameters[0].Attributes.HasFlag(ParameterAttributes.In));
@@ -522,6 +524,32 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             {
                 string name = AttributeName(reader, handle);
                 Assert.DoesNotContain(name, new[] { "NativeAnnotationAttribute", "SourceLocationAttribute", "CppAttributeList" });
+                var constructor = reader.GetCustomAttribute(handle).Constructor;
+                if (constructor.Kind != HandleKind.MemberReference)
+                    continue;
+                var reference = reader.GetMemberReference((MemberReferenceHandle)constructor);
+                if (reference.Parent.Kind != HandleKind.TypeReference)
+                    continue;
+                var type = reader.GetTypeReference((TypeReferenceHandle)reference.Parent);
+                if (type.ResolutionScope.Kind != HandleKind.ModuleDefinition)
+                    continue;
+
+                string fullName = reader.GetString(type.Namespace) + "." + reader.GetString(type.Name);
+                var definition = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(candidate =>
+                    reader.GetString(candidate.Namespace) + "." + reader.GetString(candidate.Name) == fullName);
+                var provider = new SignatureNames(qualifiedNames: true);
+                var expected = reference.DecodeMethodSignature(provider, null);
+                Assert.True(expected.Header.IsInstance);
+                var actual = Assert.Single(definition.GetMethods().Select(reader.GetMethodDefinition)
+                    .Where(method => reader.GetString(method.Name) == ".ctor")
+                    .Select(method => (Method: method, Signature: method.DecodeSignature(provider, null)))
+                    .Where(candidate => candidate.Signature.Header.RawValue == expected.Header.RawValue
+                        && candidate.Signature.GenericParameterCount == expected.GenericParameterCount
+                        && candidate.Signature.RequiredParameterCount == expected.RequiredParameterCount
+                        && candidate.Signature.ReturnType == expected.ReturnType
+                        && candidate.Signature.ParameterTypes.SequenceEqual(expected.ParameterTypes)));
+                Assert.False(actual.Method.Attributes.HasFlag(MethodAttributes.Static));
+                Assert.True(actual.Method.Attributes.HasFlag(MethodAttributes.SpecialName | MethodAttributes.RTSpecialName));
             }
         }
 
@@ -541,6 +569,9 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
 
         private sealed class SignatureNames : ISignatureTypeProvider<string, object>
         {
+            private readonly bool qualifiedNames;
+            internal SignatureNames(bool qualifiedNames = false) => this.qualifiedNames = qualifiedNames;
+
             public string GetArrayType(string elementType, ArrayShape shape) => elementType + "[]";
             public string GetByReferenceType(string elementType) => elementType + "&";
             public string GetFunctionPointerType(MethodSignature<string> signature) => "fnptr";
@@ -552,10 +583,20 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             public string GetPointerType(string elementType) => elementType + "*";
             public string GetPrimitiveType(PrimitiveTypeCode type) => type.ToString();
             public string GetSZArrayType(string elementType) => elementType + "[]";
-            public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte kind) => reader.GetString(reader.GetTypeDefinition(handle).Name);
-            public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte kind) => reader.GetString(reader.GetTypeReference(handle).Name);
+            public string GetTypeFromDefinition(MetadataReader reader, TypeDefinitionHandle handle, byte kind)
+            {
+                var type = reader.GetTypeDefinition(handle);
+                return this.GetTypeName(reader, type.Namespace, type.Name);
+            }
+            public string GetTypeFromReference(MetadataReader reader, TypeReferenceHandle handle, byte kind)
+            {
+                var type = reader.GetTypeReference(handle);
+                return this.GetTypeName(reader, type.Namespace, type.Name);
+            }
             public string GetTypeFromSpecification(MetadataReader reader, object context, TypeSpecificationHandle handle, byte kind)
                 => reader.GetTypeSpecification(handle).DecodeSignature(this, context);
+            private string GetTypeName(MetadataReader reader, StringHandle @namespace, StringHandle name)
+                => this.qualifiedNames ? reader.GetString(@namespace) + "." + reader.GetString(name) : reader.GetString(name);
         }
     }
 }
