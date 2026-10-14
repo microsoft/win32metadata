@@ -58,6 +58,7 @@ class Program
     static readonly HashSet<string> SupportedOptions = new(StringComparer.OrdinalIgnoreCase)
     {
         "--additional",
+        "--auto-remaps-file",
         "--config",
         "--exclude",
         "--exclude-auto-remap",
@@ -126,6 +127,7 @@ class Program
 
             var clangArgs = BuildClangArgs(settings);
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
+            ApplyAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
                 clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA", "-DWIN32METADATA_CSHARP" }).ToArray();
             var configOptions = BuildOptionsFlags(settings);
@@ -330,6 +332,10 @@ class Program
                 foreach (var preserved in preservedFnPtrLevels.OrderBy(x => x, StringComparer.OrdinalIgnoreCase))
                     writer.WriteLine($"PRESERVE_PTR_LEVEL:{preserved}");
             }
+            else if (File.Exists(remapsOutputPath))
+            {
+                File.Delete(remapsOutputPath);
+            }
 
             return exitCode;
         }
@@ -476,6 +482,36 @@ class Program
             }
         }
         return options;
+    }
+
+    static void ApplyAutoRemaps(Dictionary<string, List<string>> settings, bool parseHeaderAnnotations)
+    {
+        if (!settings.TryGetValue("--auto-remaps-file", out var paths))
+            return;
+        if (paths.Count == 0)
+            throw new InvalidDataException("Missing path for --auto-remaps-file.");
+
+        var derivedSettings = new Dictionary<string, List<string>>(StringComparer.OrdinalIgnoreCase);
+        foreach (string value in paths)
+        {
+            string path = value.Trim('"');
+            if (!File.Exists(path))
+                throw new FileNotFoundException("Auto-remaps response file not found.", path);
+            if (parseHeaderAnnotations)
+            {
+                Console.WriteLine($"Ignoring globally discovered remaps for annotated headers: {path}");
+                continue;
+            }
+            ParseRspFile(path, derivedSettings);
+        }
+
+        foreach (var pair in derivedSettings)
+        {
+            if (!pair.Key.Equals("--remap", StringComparison.OrdinalIgnoreCase)
+                && !pair.Key.Equals("--exclude", StringComparison.OrdinalIgnoreCase))
+                throw new InvalidDataException($"Unsupported auto-remaps option: {pair.Key}");
+            settings[pair.Key] = pair.Value.Concat(settings.GetValueOrDefault(pair.Key) ?? new List<string>()).ToList();
+        }
     }
 
     static void ParseRspFile(string path, Dictionary<string, List<string>> settings)

@@ -32,6 +32,14 @@ typedef struct fooTag {
 
 It's not obvious to the scraper that you would rather see FOO instead of fooTag in the metadata, but adding "fooTag=FOO" under the --remap section in baseRemap.rsp will make sure it's scraped as FOO instead of fooTag.
 
+The SDK also collects cross-partition discoveries in
+`scraper.autoRemaps.generated.rsp`. It passes this cache separately through
+`--auto-remaps-file`, not as authored response-file settings. Legacy partitions
+continue using its remaps and exclusions, with authored settings taking priority.
+Partitions using `parse-win32-annotations` ignore this aggregate and derive
+remaps from their current translation unit instead. This prevents a previous
+build or an unconverted partition from renaming types hidden by annotated
+headers; authored manual/global settings still apply.
 
 ### With type
 

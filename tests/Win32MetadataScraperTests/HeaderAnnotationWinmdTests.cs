@@ -502,15 +502,18 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         }
 
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
+            => Emit(fixture.DirectoryPath, architecture);
+
+        internal static MetadataImage Emit(string directory, string architecture)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
-                Path.Combine(fixture.DirectoryPath, "Metadata.manual.cs"));
-            var compilation = ClangSharpSourceCompilation.Create(fixture.DirectoryPath, architecture,
+                Path.Combine(directory, "Metadata.manual.cs"));
+            var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
                 new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
                 Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
-            string path = Path.Combine(fixture.DirectoryPath, "Test.winmd");
+            string path = Path.Combine(directory, "Test.winmd");
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
                 new Dictionary<string, string>(), new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
             Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
@@ -609,7 +612,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             }
         }
 
-        private sealed class MetadataImage : IDisposable
+        internal sealed class MetadataImage : IDisposable
         {
             private readonly FileStream stream;
             private readonly PEReader image;
@@ -623,7 +626,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             public void Dispose() { image.Dispose(); stream.Dispose(); }
         }
 
-        private sealed class SignatureNames : ISignatureTypeProvider<string, object>
+        internal sealed class SignatureNames : ISignatureTypeProvider<string, object>
         {
             private readonly bool qualifiedNames;
             internal SignatureNames(bool qualifiedNames = false) => this.qualifiedNames = qualifiedNames;

@@ -40,6 +40,8 @@ namespace MetadataTasks
 
         public ITaskItem[] ResponseFiles { get; set; }
 
+        public string AutoRemapsResponseFile { get; set; }
+
         [Required]
         public string ScraperFunctionPointerFixupsRsp { get; set; }
 
@@ -232,6 +234,11 @@ namespace MetadataTasks
         private bool AreNonPartitionFilesUpToDate()
         {
             IEnumerable<string> files = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
+            string autoRemaps = this.GetAbsolutePath(this.AutoRemapsResponseFile);
+            if (File.Exists(autoRemaps))
+            {
+                files = files.Append(autoRemaps);
+            }
 
             return TaskUtils.IsUpToDate(files, this.MarkerFileName);
         }
@@ -372,6 +379,13 @@ $@"--file
                 foreach (var traverseFile in traverseFiles)
                 {
                     rspWriter.WriteLine(traverseFile);
+                }
+
+                string autoRemaps = this.GetAbsolutePath(this.AutoRemapsResponseFile);
+                if (File.Exists(autoRemaps))
+                {
+                    rspWriter.WriteLine("--auto-remaps-file");
+                    rspWriter.WriteLine(autoRemaps);
                 }
 
                 var settingsFile = partition.SettingsFile;

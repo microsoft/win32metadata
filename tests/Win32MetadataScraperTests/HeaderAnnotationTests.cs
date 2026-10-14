@@ -352,6 +352,84 @@ DISTINCT UseAlias(DISTINCT value, DISTINCT* output);
             Assert.Contains("Name=SAL_name", source);
         }
 
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void DerivedRemapsDoNotOverrideAuthoredSettings(bool annotationsEnabled)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct _PRIVATE_RECORD { int value; };
+struct EXCLUDED_RECORD { int value; };
+struct DERIVED_ONLY_RECORD { int value; };
+typedef struct _CURRENT_RECORD { int value; } CURRENT_RECORD;
+", annotationsEnabled: annotationsEnabled, extraSettings: @"--auto-remaps-file
+derived.rsp
+--remap
+_PRIVATE_RECORD=AUTHORED_RECORD
+--exclude
+EXCLUDED_RECORD
+");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "derived.rsp"), @"--remap
+_PRIVATE_RECORD=DERIVED_RECORD
+--exclude
+DERIVED_ONLY_RECORD
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var names = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<StructDeclarationSyntax>().Select(node => node.Identifier.ValueText).ToArray();
+            Assert.Contains("AUTHORED_RECORD", names);
+            Assert.Contains("CURRENT_RECORD", names);
+            Assert.DoesNotContain("DERIVED_RECORD", names);
+            Assert.DoesNotContain("EXCLUDED_RECORD", names);
+            Assert.Equal(annotationsEnabled, names.Contains("DERIVED_ONLY_RECORD"));
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void MissingDerivedRemapsFailExplicitly(bool annotationsEnabled)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "int F();",
+                annotationsEnabled: annotationsEnabled, extraSettings: "--auto-remaps-file\nmissing.rsp\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Auto-remaps response file not found.", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void SuccessfulScrapeRemovesObsoleteDiscoveries()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "int F();",
+                extraSettings: "--exclude-auto-remap\n__NSConstantString_tag\n");
+            string remaps = Path.Combine(fixture.DirectoryPath, "remaps.txt");
+            File.WriteAllText(remaps, "OLD_CALLBACK=LPOLD_CALLBACK\nREDUCE_PTR_LEVEL:LPOLD_CALLBACK\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.False(File.Exists(remaps), File.Exists(remaps) ? File.ReadAllText(remaps) : "");
+        }
+
+        [Theory]
+        [InlineData("--config\nparse-win32-annotations\n")]
+        [InlineData("--with-type\nTYPE=uint\n")]
+        public void DerivedRemapsCannotSupplyOtherConfiguration(string settings)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "int F();",
+                annotationsEnabled: false, extraSettings: "--auto-remaps-file\nderived.rsp\n");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "derived.rsp"), settings);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Unsupported auto-remaps option:", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void MissingDerivedRemapsPathFailsExplicitly()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "int F();",
+                extraSettings: "--auto-remaps-file\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Missing path for --auto-remaps-file.", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,
@@ -408,6 +486,7 @@ generate-cpp-attributes
             {
                 var start = new ProcessStartInfo("dotnet")
                 {
+                    WorkingDirectory = DirectoryPath,
                     UseShellExecute = false,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,

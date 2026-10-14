@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\sources\Win32MetadataScraper\Win32MetadataScraper.csproj" />
     <ProjectReference Include="..\..\sources\ClangSharpSourceToWinmd\ClangSharpSourceToWinmd.csproj" />
+    <ProjectReference Include="..\..\sources\GeneratorSdk\MetadataTasks\MetadataTasks.csproj" />
   </ItemGroup>
 
   <ItemGroup>
@@ -34,6 +35,12 @@
           Link="assets\concurrencysal.h" CopyToOutputDirectory="PreserveNewest" />
     <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\scraper.header.txt"
           Link="assets\scraper.header.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\scraper.header.txt"
+          Link="assets\scraper\scraper.header.txt" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\tools\assets\scraper\baseSettings*.rsp"
+          Link="assets\scraper\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <None Include="..\..\sources\GeneratorSdk\sdk\sdk.targets"
+          Link="assets\scraper.sdk.targets" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
 </Project>
