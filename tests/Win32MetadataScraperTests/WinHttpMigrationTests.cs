@@ -41,6 +41,16 @@ namespace Win32MetadataScraperTests
                 new EnumUse("Windows.Win32.UI.Magnification", "MagGetWindowFilterList", "pdwFilterMode", "MW_FILTERMODE", "UInt32*"),
                 new EnumUse("Windows.Win32.System.Diagnostics.ToolHelp", "CreateToolhelp32Snapshot", "dwFlags", "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "UInt32"),
                 new EnumUse("Windows.Win32.System.Diagnostics.ToolHelp", "HEAPENTRY32", "dwFlags", "HEAPENTRY32_FLAGS", "UInt32"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XInputGetBatteryInformation", "devType", "BATTERY_DEVTYPE", "Byte"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XInputGetCapabilities", "dwFlags", "XINPUT_FLAG", "UInt32"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_BATTERY_INFORMATION", "BatteryType", "BATTERY_TYPE", "Byte"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_BATTERY_INFORMATION", "BatteryLevel", "BATTERY_LEVEL", "Byte"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_CAPABILITIES", "Type", "XINPUT_DEVTYPE", "Byte"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_CAPABILITIES", "SubType", "XINPUT_DEVSUBTYPE", "Byte"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_CAPABILITIES", "Flags", "XINPUT_CAPABILITIES_FLAGS", "UInt16"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_GAMEPAD", "wButtons", "XINPUT_GAMEPAD_BUTTON_FLAGS", "UInt16"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "VirtualKey", "XINPUT_VIRTUAL_KEY", "UInt16"),
+                new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "Flags", "XINPUT_KEYSTROKE_FLAGS", "UInt16"),
             }).ToArray();
         private static readonly string[] AdditionalOwnedMethods =
         {
@@ -68,15 +78,24 @@ namespace Win32MetadataScraperTests
             "CreateToolhelp32Snapshot", "Heap32First", "Heap32ListFirst", "Heap32ListNext", "Heap32Next",
             "Module32First", "Module32FirstW", "Module32Next", "Module32NextW", "Process32First", "Process32FirstW",
             "Process32Next", "Process32NextW", "Thread32First", "Thread32Next", "Toolhelp32ReadProcessMemory",
+            "WslIsDistributionRegistered", "WslRegisterDistribution", "WslUnregisterDistribution",
+            "WslConfigureDistribution", "WslGetDistributionConfiguration", "WslLaunchInteractive", "WslLaunch",
+            "XInputGetState", "XInputSetState", "XInputGetCapabilities", "XInputEnable",
+            "XInputGetAudioDeviceIds", "XInputGetBatteryInformation", "XInputGetKeystroke",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
             "HEAPENTRY32", "IWaaSAssessor",
+            "WSL_DISTRIBUTION_FLAGS", "XINPUT_BATTERY_INFORMATION", "XINPUT_CAPABILITIES",
+            "XINPUT_GAMEPAD", "XINPUT_KEYSTROKE",
         };
         private static readonly string[] AdditionalLogicalEnums =
         {
             "VERIFIER_ENUM_RESOURCE_FLAGS", "ENUM_PROCESS_MODULES_EX_FLAGS", "MW_FILTERMODE",
             "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "HEAPENTRY32_FLAGS",
+            "XINPUT_VIRTUAL_KEY", "BATTERY_TYPE", "BATTERY_LEVEL", "BATTERY_DEVTYPE",
+            "XINPUT_DEVTYPE", "XINPUT_DEVSUBTYPE", "XINPUT_CAPABILITIES_FLAGS",
+            "XINPUT_GAMEPAD_BUTTON_FLAGS", "XINPUT_KEYSTROKE_FLAGS", "XINPUT_FLAG",
         };
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
@@ -429,8 +448,9 @@ namespace Win32MetadataScraperTests
                     File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
-                "ToolHelp", "UpdateAssessment" })
+                "ToolHelp", "UpdateAssessment", "Wsl", "Xinput" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
+            Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
             foreach (string partition in new[] { "PsApi2", "SecurityCenter", "WinSat" })
                 Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
         }

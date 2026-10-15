@@ -75,6 +75,18 @@
       "sourceSha256": "D61D87E4A316ECF0CBA6529A38CB48F148ADD0D94C7C81EADC44D9B4D1867738",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapitypes.idl",
       "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+    },
+    {
+      "path": "um\\wslapi.h",
+      "sourceSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wslapi.h",
+      "sdkSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49"
+    },
+    {
+      "path": "um\\Xinput.h",
+      "sourceSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Xinput.h",
+      "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
     }
   ],
   "partitions": [
@@ -90,7 +102,9 @@
     "Time",
     "Ual",
     "ToolHelp",
-    "UpdateAssessment"
+    "UpdateAssessment",
+    "Wsl",
+    "Xinput"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -106,6 +120,8 @@
     "post-midl\\um\\timezoneapi.annotations.patch",
     "post-midl\\um\\ual.annotations.patch",
     "post-midl\\um\\tlhelp32.annotations.patch",
-    "post-midl\\um\\waasapi.annotations.patch"
+    "post-midl\\um\\waasapi.annotations.patch",
+    "post-midl\\um\\wslapi.annotations.patch",
+    "post-midl\\um\\xinput.annotations.patch"
   ]
 }

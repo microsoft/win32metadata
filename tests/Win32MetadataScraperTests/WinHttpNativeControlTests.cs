@@ -101,6 +101,98 @@ static_assert(LF32_FIXED == 1);
 static_assert(LF32_FREE == 2);
 static_assert(LF32_MOVEABLE == 4);
 ",
+                "Wsl" => @"
+static_assert(WSL_DISTRIBUTION_FLAGS_NONE == 0);
+static_assert(WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP == 1);
+static_assert(WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH == 2);
+static_assert(WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING == 4);
+",
+                "Xinput" => @"
+#ifdef XINPUT_FLAG_ALL
+#error Metadata-only XINPUT_FLAG_ALL must not become a native macro
+#endif
+static_assert(VK_PAD_A == 22528);
+static_assert(VK_PAD_B == 22529);
+static_assert(VK_PAD_X == 22530);
+static_assert(VK_PAD_Y == 22531);
+static_assert(VK_PAD_RSHOULDER == 22532);
+static_assert(VK_PAD_LSHOULDER == 22533);
+static_assert(VK_PAD_LTRIGGER == 22534);
+static_assert(VK_PAD_RTRIGGER == 22535);
+static_assert(VK_PAD_DPAD_UP == 22544);
+static_assert(VK_PAD_DPAD_DOWN == 22545);
+static_assert(VK_PAD_DPAD_LEFT == 22546);
+static_assert(VK_PAD_DPAD_RIGHT == 22547);
+static_assert(VK_PAD_START == 22548);
+static_assert(VK_PAD_BACK == 22549);
+static_assert(VK_PAD_LTHUMB_PRESS == 22550);
+static_assert(VK_PAD_RTHUMB_PRESS == 22551);
+static_assert(VK_PAD_LTHUMB_UP == 22560);
+static_assert(VK_PAD_LTHUMB_DOWN == 22561);
+static_assert(VK_PAD_LTHUMB_RIGHT == 22562);
+static_assert(VK_PAD_LTHUMB_LEFT == 22563);
+static_assert(VK_PAD_LTHUMB_UPLEFT == 22564);
+static_assert(VK_PAD_LTHUMB_UPRIGHT == 22565);
+static_assert(VK_PAD_LTHUMB_DOWNRIGHT == 22566);
+static_assert(VK_PAD_LTHUMB_DOWNLEFT == 22567);
+static_assert(VK_PAD_RTHUMB_UP == 22576);
+static_assert(VK_PAD_RTHUMB_DOWN == 22577);
+static_assert(VK_PAD_RTHUMB_RIGHT == 22578);
+static_assert(VK_PAD_RTHUMB_LEFT == 22579);
+static_assert(VK_PAD_RTHUMB_UPLEFT == 22580);
+static_assert(VK_PAD_RTHUMB_UPRIGHT == 22581);
+static_assert(VK_PAD_RTHUMB_DOWNRIGHT == 22582);
+static_assert(VK_PAD_RTHUMB_DOWNLEFT == 22583);
+static_assert(BATTERY_TYPE_DISCONNECTED == 0);
+static_assert(BATTERY_TYPE_WIRED == 1);
+static_assert(BATTERY_TYPE_ALKALINE == 2);
+static_assert(BATTERY_TYPE_NIMH == 3);
+static_assert(BATTERY_TYPE_UNKNOWN == 255);
+static_assert(BATTERY_LEVEL_EMPTY == 0);
+static_assert(BATTERY_LEVEL_LOW == 1);
+static_assert(BATTERY_LEVEL_MEDIUM == 2);
+static_assert(BATTERY_LEVEL_FULL == 3);
+static_assert(BATTERY_DEVTYPE_GAMEPAD == 0);
+static_assert(BATTERY_DEVTYPE_HEADSET == 1);
+static_assert(XINPUT_DEVTYPE_GAMEPAD == 1);
+static_assert(XINPUT_DEVSUBTYPE_GAMEPAD == 1);
+static_assert(XINPUT_DEVSUBTYPE_UNKNOWN == 0);
+static_assert(XINPUT_DEVSUBTYPE_WHEEL == 2);
+static_assert(XINPUT_DEVSUBTYPE_ARCADE_STICK == 3);
+static_assert(XINPUT_DEVSUBTYPE_FLIGHT_STICK == 4);
+static_assert(XINPUT_DEVSUBTYPE_DANCE_PAD == 5);
+static_assert(XINPUT_DEVSUBTYPE_GUITAR == 6);
+static_assert(XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE == 7);
+static_assert(XINPUT_DEVSUBTYPE_DRUM_KIT == 8);
+static_assert(XINPUT_DEVSUBTYPE_GUITAR_BASS == 11);
+static_assert(XINPUT_DEVSUBTYPE_ARCADE_PAD == 19);
+static_assert(XINPUT_CAPS_VOICE_SUPPORTED == 4);
+static_assert(XINPUT_CAPS_FFB_SUPPORTED == 1);
+static_assert(XINPUT_CAPS_WIRELESS == 2);
+static_assert(XINPUT_CAPS_PMD_SUPPORTED == 8);
+static_assert(XINPUT_CAPS_NO_NAVIGATION == 16);
+static_assert(XINPUT_GAMEPAD_DPAD_UP == 1);
+static_assert(XINPUT_GAMEPAD_DPAD_DOWN == 2);
+static_assert(XINPUT_GAMEPAD_DPAD_LEFT == 4);
+static_assert(XINPUT_GAMEPAD_DPAD_RIGHT == 8);
+static_assert(XINPUT_GAMEPAD_START == 16);
+static_assert(XINPUT_GAMEPAD_BACK == 32);
+static_assert(XINPUT_GAMEPAD_LEFT_THUMB == 64);
+static_assert(XINPUT_GAMEPAD_RIGHT_THUMB == 128);
+static_assert(XINPUT_GAMEPAD_LEFT_SHOULDER == 256);
+static_assert(XINPUT_GAMEPAD_RIGHT_SHOULDER == 512);
+static_assert(XINPUT_GAMEPAD_A == 4096);
+static_assert(XINPUT_GAMEPAD_B == 8192);
+static_assert(XINPUT_GAMEPAD_X == 16384);
+static_assert(XINPUT_GAMEPAD_Y == 32768);
+static_assert(XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE == 7849);
+static_assert(XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE == 8689);
+static_assert(XINPUT_GAMEPAD_TRIGGER_THRESHOLD == 30);
+static_assert(XINPUT_KEYSTROKE_KEYDOWN == 1);
+static_assert(XINPUT_KEYSTROKE_KEYUP == 2);
+static_assert(XINPUT_KEYSTROKE_REPEAT == 4);
+static_assert(XINPUT_FLAG_GAMEPAD == 1);
+",
                 _ => "",
             };
             var before = Surface(root, original, partition, architecture, target, headers, checks);

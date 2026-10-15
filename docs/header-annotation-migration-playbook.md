@@ -25,6 +25,15 @@ Bind each physical header to one owner. Include all physical-header and semantic
 dependents in the validation closure, without migrating their unrelated facts.
 An API absent from the selected SDK must not be recreated as a fake declaration.
 
+Before authoring patches, enable annotation parsing alone for the candidate with
+unmodified headers and current authored inputs. Use the existing scoped scrape
+to compare its declarations with the matched OLD output, separately accounting
+for formatter trivia and constants-stage root imports. Parser-activation changes
+such as native-comment `RetVal` additions are not annotation relocation. Reject
+or defer out-of-policy changes at this cheap admission boundary, before migrating
+sidecars; do not add another preparation framework or a full SDK build per
+candidate.
+
 ## 2. Prepare headers once before toolchain consumption
 
 Add reviewed deltas to the SDK-wide `generation\WinSDK\patches\SdkHeaders.json`
@@ -146,7 +155,7 @@ Each batch must pass the preceding producer gates before the next is admitted.
 | --- | --- | --- |
 | 1 | CEIP, ApplicationVerifier | `windowsceip.h`, `avrfsdk.h` |
 | 2 | MagApi, PsApi1, Time, Ual | `magnification.h`, `psapi.h`, `timezoneapi.h`, `timeprov.h`, `ual.h` |
-| 3 | ToolHelp, UpdateAssessment; two replacements pending | `tlhelp32.h`, `waasapi.h`, `waasapitypes.h` |
+| 3 | ToolHelp, UpdateAssessment, Wsl, Xinput | `tlhelp32.h`, `waasapi.h`, `waasapitypes.h`, `wslapi.h`, `xinput.h` |
 
 The image helper reads the recipe's complete owner/dependent partition list and
 overlays the sources actually produced for those partitions. `Base` and
@@ -207,6 +216,15 @@ reductions remain. Artifacts are in `artifacts\header-annotation-wave\batch2`.
 These overlapping run counts are not a unique-test total. Consumer compatibility
 remains unverified.
 
+The complete batch-2 [CI regeneration](https://github.com/microsoft/win32metadata/actions/runs/38695188241)
+at `1e97e92d386492806928f84587e3073adc89033c` is also green. Its winmd SHA256 is
+`D8593620542480E34B03691F53AC63314C78A4F17B4B5E17D458705C68F32946`;
+all 24 exact expectations are used with zero unknown differences. This is
+independent of the local selected-source overlay. In particular, `WinBase.h`
+includes `timezoneapi.h`, so selected native cases alone do not cover every
+transitive SDK translation unit. Final expanded-head full regeneration and
+strict artifact grading remain required.
+
 Batch 3 moves 16 ToolHelp XP floors and 15 last-error facts, retaining the
 non-error-annotated `Toolhelp32ReadProcessMemory` contract. Its two existing
 logical groups retain unsigned 32-bit storage and all ten members: only
@@ -227,6 +245,30 @@ or ownership assumption is invented.
 The 16 emitted ToolHelp DLL bindings are independently reproduced
 by the preference-free SDK scan and remain derived bindings, not header overrides.
 
+Wsl relocates seven genuinely missing-scan API-set library overrides from its
+partition settings to native declarations. The complete pinned SDK scan contains
+none of those entrypoints. Their exact `Api-ms-win-wsl-api-l1-1-0.dll` binding is
+retained, as specified by the native header's contract. Its real
+`WSL_DISTRIBUTION_FLAGS` enum and native typed uses stay unchanged; no ownership
+assumption is added for standard handles or the process output.
+
+Xinput relocates exactly ten existing logical groups, 82 members and ten uses.
+Five groups use byte storage, four use unsigned 16-bit storage, and `XINPUT_FLAG`
+uses unsigned 32-bit storage. Only its four existing flags groups carry `Flags`;
+in particular, `XINPUT_VIRTUAL_KEY` remains nonflags. The three threshold members
+already present in `XINPUT_GAMEPAD_BUTTON_FLAGS` and the explicit
+`XINPUT_FLAG_ALL = 0` member are preserved, not repaired or repopulated by prefix.
+No ordinary `XINPUT_FLAG_ALL` macro is invented. Eight fields and two parameters
+retain native byte/WORD/DWORD types plus associations. Its seven DLL bindings
+remain SDK-derived; no binding is copied into header overrides.
+
+Both replacement candidates passed opt-in-only admission before patches: all
+2,501 Wsl and 2,115 Xinput namespace declaration tokens match frozen OLD.
+Only formatter trivia and the existing constants-stage root usings differ.
+`replacement-opt-in-admission.json` records that bounded grade; final winmd and
+physical validation remain separate gates. Both SDK headers match their pinned
+native preimages byte-for-byte, and each has only its owning direct partition.
+
 ### Deferred COM opt-in finding
 
 The proposed SecurityCenter/WinSat conversions are not admitted. Producer
@@ -244,5 +286,11 @@ The rejected image and exact difference log remain in
 `artifacts\header-annotation-wave\batch3`; the separate
 `batch3-rejected-grade.json` receipt records the rejection. Successful
 native/preparation controls and repeatability do not override this failed
-metadata gate. Two flat-C
-replacements are selected separately; consumer compatibility remains unverified.
+metadata gate. Wsl and Xinput replace these candidates without widening allowed
+differences; consumer compatibility remains unverified.
+
+Sens is also deferred, not migrated. Its existing logical
+`SENS_CONNECTION_TYPE` members encode `CONNECTION_LAN = 0` and
+`CONNECTION_WAN = 1`, whereas native `sens.h` defines them as 1 and 2.
+That needs a separate compatibility/design decision. No SDK value, metadata
+value, macro or alias is changed to force this candidate through the playbook.
