@@ -93,6 +93,7 @@ namespace Win32MetadataScraperTests
             ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_DesiredAccuracy", "pDesiredAccuracy"),
             ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_ReportInterval", "pMilliseconds"),
             ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_Status", "pVal"),
+            ("Windows.Win32.Networking.NetworkListManager", "INetworkConnection2", "IsDomainAuthenticatedBy", "pValue"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Description", "description"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Score", "score"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Title", "title"),
@@ -122,6 +123,8 @@ namespace Win32MetadataScraperTests
             ("Windows.Win32.System.SecurityCenter", "IWSCProductList", "get_Count", "pVal"),
             ("Windows.Win32.System.SecurityCenter", "IWSCProductList", "get_Item", "pVal"),
         };
+        private static readonly (string Namespace, string Owner, string Method) ReviewedPreservedResult =
+            ("Windows.Win32.System.Com.Events", "IEnumEventObject", "Reset");
         private static readonly string[] AdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
@@ -155,6 +158,7 @@ namespace Win32MetadataScraperTests
             "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
             "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
             "WcmQueryProperty", "WcmSetProperty", "WcmGetProfileList", "WcmSetProfileList", "WcmFreeMemory",
+            "CoGetInterceptor",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
@@ -171,6 +175,18 @@ namespace Win32MetadataScraperTests
             "ILocationPower", "IDefaultLocation", "ILocationEvents",
             "IDispLatLongReport", "IDispCivicAddressReport", "ILocationReportFactory",
             "ILatLongReportFactory", "ICivicAddressReportFactory",
+            "IRdcGeneratorParameters", "IRdcGeneratorFilterMaxParameters", "IRdcGenerator",
+            "IRdcFileReader", "IRdcFileWriter", "IRdcSignatureReader", "IRdcComparator", "IRdcLibrary",
+            "ISimilarityReportProgress", "ISimilarityTableDumpState", "ISimilarityTraitsMappedView",
+            "ISimilarityTraitsMapping", "ISimilarityTraitsTable", "ISimilarityFileIdTable",
+            "IRdcSimilarityGenerator", "IFindSimilarResults", "ISimilarity",
+            "INetworkListManager", "INetworkListManagerEvents", "INetwork", "IEnumNetworks", "INetworkEvents",
+            "INetworkConnection", "INetworkConnection2", "IEnumNetworkConnections", "INetworkConnectionEvents",
+            "INetworkCostManager", "INetworkCostManagerEvents", "INetworkConnectionCost", "INetworkConnectionCostEvents",
+            "ICallFrame", "ICallIndirect", "ICallInterceptor", "ICallFrameEvents", "ICallUnmarshal", "ICallFrameWalker",
+            "IEventSystem", "IEventPublisher", "IEventClass", "IEventClass2", "IEventSubscription", "IFiringControl",
+            "IPublisherFilter", "IMultiInterfacePublisherFilter", "IEventObjectChange", "IEventObjectChange2",
+            "IEnumEventObject", "IEventObjectCollection", "IEventProperty", "IEventControl", "IMultiInterfaceEventControl",
         };
         private static readonly string[] AdditionalLogicalEnums =
         {
@@ -239,11 +255,12 @@ namespace Win32MetadataScraperTests
             Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
             var used = new HashSet<string>(StringComparer.Ordinal);
             var usedRetvals = new HashSet<string>(StringComparer.Ordinal);
+            var usedPreservedResults = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
             foreach (var entry in before)
             {
                 string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedChanges: true,
-                    usedEnumSites: used, usedRetvalSites: usedRetvals);
+                    usedEnumSites: used, usedRetvalSites: usedRetvals, usedPreservedResultSites: usedPreservedResults);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
@@ -251,8 +268,11 @@ namespace Win32MetadataScraperTests
             Assert.Equal(ReviewedEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
             Assert.Equal(NativeRetvalUses.Select(value => $"{value.Namespace}.{value.Owner}.{value.Method}.{value.Parameter}")
                 .OrderBy(value => value), usedRetvals.OrderBy(value => value));
+            Assert.Equal(new[] { $"{ReviewedPreservedResult.Namespace}.{ReviewedPreservedResult.Owner}.{ReviewedPreservedResult.Method}" },
+                usedPreservedResults.OrderBy(value => value));
             this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; " +
-                $"{used.Count} exact native-type/AssociatedEnum sites and {usedRetvals.Count} native MIDL retval sites normalized.");
+                $"{used.Count} exact native-type/AssociatedEnum sites, {usedRetvals.Count} native MIDL retval sites " +
+                $"and {usedPreservedResults.Count} reviewed preserved-result site normalized.");
         }
 
         [MigrationTheory]
@@ -280,6 +300,30 @@ namespace Win32MetadataScraperTests
                 Assert.Equal(new byte[] { 1, 0, 0, 0 }, current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(attribute).Value));
             }
             this.output.WriteLine($"{NativeRetvalUses.Length} exact native MIDL RetValAttribute additions on architecture {architecture}; CLI parameter flags and signatures unchanged.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void ReviewedPreservedResultReplacesOnlyTheLegacySuccessAttribute(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var use = ReviewedPreservedResult;
+            var before = Methods(old.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+            var after = Methods(current.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+            Assert.Equal(Signature(before.DecodeSignature(Signatures, null)), Signature(after.DecodeSignature(Signatures, null)));
+            Assert.Equal(before.Attributes, after.Attributes);
+            Assert.False(before.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.Equal(before.ImplAttributes | MethodImplAttributes.PreserveSig, after.ImplAttributes);
+            var attribute = Assert.Single(before.GetCustomAttributes()
+                .Where(handle => AttributeName(old.Reader, handle) == "CanReturnMultipleSuccessValuesAttribute"));
+            Assert.Equal(new byte[] { 1, 0, 0, 0 }, old.Reader.GetBlobBytes(old.Reader.GetCustomAttribute(attribute).Value));
+            Assert.DoesNotContain(after.GetCustomAttributes(), handle => AttributeName(current.Reader, handle)
+                is "CanReturnMultipleSuccessValuesAttribute" or "CanReturnErrorsAsSuccessAttribute" or "PreserveSigAttribute");
+            this.output.WriteLine($"IEnumEventObject.Reset/{architecture}: reviewed legacy custom attribute removed; " +
+                "CLI PreserveSig set; signature and method flags unchanged.");
         }
 
         [MigrationTheory]
@@ -564,10 +608,11 @@ namespace Win32MetadataScraperTests
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
                 "ToolHelp", "UpdateAssessment", "Wsl", "Xinput", "SecurityCenter", "WinSat",
-                "Wcm", "InputRadial", "WinContacts", "WinLocation" })
+                "Wcm", "InputRadial", "WinContacts", "WinLocation", "Rdc", "Nla", "Com.CallObj", "Com.Events" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
-            foreach (string partition in new[] { "PsApi2" })
+            foreach (string partition in new[] { "Base", "FileHistory", "PsApi2", "HttpServer",
+                "ComOle", "WindowsConnectionManager", "TransactionServer", "Enstor" })
                 Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
         }
 
@@ -699,9 +744,11 @@ namespace Win32MetadataScraperTests
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
-            bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null)
+            bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null,
+            ISet<string> usedPreservedResultSites = null)
         {
-            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false)
+            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false,
+                bool preservedResult = false)
             {
                 var attributes = values.Select(handle => AttributeTypeName(reader, handle) + ":" +
                     Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))).ToList();
@@ -718,6 +765,12 @@ namespace Win32MetadataScraperTests
                 {
                     Assert.DoesNotContain(values, handle => AttributeName(reader, handle) == "RetValAttribute");
                     attributes.Add(MetadataNamespace + ".RetValAttribute:01000000");
+                }
+                if (preservedResult)
+                {
+                    var attribute = Assert.Single(values.Where(handle => AttributeName(reader, handle) == "CanReturnMultipleSuccessValuesAttribute"));
+                    Assert.Equal(new byte[] { 1, 0, 0, 0 }, reader.GetBlobBytes(reader.GetCustomAttribute(attribute).Value));
+                    Assert.True(attributes.Remove(MetadataNamespace + ".CanReturnMultipleSuccessValuesAttribute:01000000"));
                 }
                 return string.Join(",", attributes.OrderBy(value => value, StringComparer.Ordinal));
             }
@@ -777,8 +830,16 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(0, header);
                     header |= 0x20;
                 }
-                rows.Add($"M|{methodName}|{method.Attributes}|{method.ImplAttributes}|{Signature(signature, header, parameterTypes)}|" +
-                    $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes())}");
+                bool preservedResult = normalizeReviewedChanges && (ns, typeName, methodName) == ReviewedPreservedResult;
+                var implementation = method.ImplAttributes;
+                if (preservedResult)
+                {
+                    Assert.False(implementation.HasFlag(MethodImplAttributes.PreserveSig));
+                    implementation |= MethodImplAttributes.PreserveSig;
+                    usedPreservedResultSites?.Add($"{ns}.{typeName}.{methodName}");
+                }
+                rows.Add($"M|{methodName}|{method.Attributes}|{implementation}|{Signature(signature, header, parameterTypes)}|" +
+                    $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes(), preservedResult: preservedResult)}");
                 foreach (var parameter in parameters)
                 {
                     string parameterName = reader.GetString(parameter.Name);

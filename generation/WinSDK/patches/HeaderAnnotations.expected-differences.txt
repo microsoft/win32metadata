@@ -118,3 +118,6 @@ Windows.Win32.Devices.Geolocation.ILocationReport.GetValue : parameter 2 (pValue
 Windows.Win32.Devices.Geolocation.ILocationReportFactory.get_DesiredAccuracy : parameter 1 (pDesiredAccuracy) : [Out] => [Out,RetVal]
 Windows.Win32.Devices.Geolocation.ILocationReportFactory.get_ReportInterval : parameter 1 (pMilliseconds) : [Out] => [Out,RetVal]
 Windows.Win32.Devices.Geolocation.ILocationReportFactory.get_Status : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.Networking.NetworkListManager.INetworkConnection2.IsDomainAuthenticatedBy : parameter 2 (pValue) : [Out] => [Out,RetVal]
+# Review-approved authored-result representation, not native annotation discovery.
+Windows.Win32.System.Com.Events.IEnumEventObject.Reset : [CanReturnMultipleSuccessValues,Documentation(https://learn.microsoft.com/windows/win32/api/eventsys/nf-eventsys-ienumeventobject-reset)] => [Documentation(https://learn.microsoft.com/windows/win32/api/eventsys/nf-eventsys-ienumeventobject-reset),PreserveSig]

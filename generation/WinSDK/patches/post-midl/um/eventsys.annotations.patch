@@ -1,0 +1,139 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/EventSys.h
+@@ -244,6 +244,7 @@
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define PROGID_EventSystem OLESTR("EventSystem.EventSystem")
+@@ -280,6 +281,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4E14FB9F-2E22-11D1-9964-00C04FBBB345")
++    _Windows_SupportedOS_Windows2000_
+     IEventSystem : public IDispatch
+     {
+     public:
+@@ -533,6 +535,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("E341516B-2E32-11D1-9964-00C04FBBB345")
++    _Windows_SupportedOS_Windows2000_
+     IEventPublisher : public IDispatch
+     {
+     public:
+@@ -859,6 +862,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("fb2b72a0-7a68-11d1-88f9-0080c7d771bf")
++    _Windows_SupportedOS_Windows2000_
+     IEventClass : public IDispatch
+     {
+     public:
+@@ -1177,6 +1181,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("fb2b72a1-7a68-11d1-88f9-0080c7d771bf")
++    _Windows_SupportedOS_Windows2000_
+     IEventClass2 : public IEventClass
+     {
+     public:
+@@ -1544,6 +1549,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("4A6B0E15-2E38-11D1-9965-00C04FBBB345")
++    _Windows_SupportedOS_Windows2000_
+     IEventSubscription : public IDispatch
+     {
+     public:
+@@ -2138,6 +2144,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("e0498c93-4efe-11d1-9971-00c04fbbb345")
++    _Windows_SupportedOS_Windows2000_
+     IFiringControl : public IDispatch
+     {
+     public:
+@@ -2290,6 +2297,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("465e5cc0-7b26-11d1-88fb-0080c7d771bf")
++    _Windows_SupportedOS_Windows2000_
+     IPublisherFilter : public IUnknown
+     {
+     public:
+@@ -2398,6 +2406,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("465e5cc1-7b26-11d1-88fb-0080c7d771bf")
++    _Windows_SupportedOS_Windows2000_
+     IMultiInterfacePublisherFilter : public IUnknown
+     {
+     public:
+@@ -2514,6 +2523,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F4A07D70-2E25-11D1-9964-00C04FBBB345")
++    _Windows_SupportedOS_Windows2000_
+     IEventObjectChange : public IUnknown
+     {
+     public:
+@@ -2660,6 +2670,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7701A9C3-BD68-438f-83E0-67BF4F53A422")
++    _Windows_SupportedOS_Windows2000_
+     IEventObjectChange2 : public IUnknown
+     {
+     public:
+@@ -2760,6 +2771,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F4A07D63-2E25-11D1-9964-00C04FBBB345")
++    _Windows_SupportedOS_Windows2000_
+     IEnumEventObject : public IUnknown
+     {
+     public:
+@@ -2775,6 +2787,7 @@
+             /* [annotation][out] */ 
+             _Out_  ULONG *cRetElem) = 0;
+         
++        _Win32_PreserveResult_
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Reset( void) = 0;
+         
+         virtual /* [helpstring][id] */ HRESULT STDMETHODCALLTYPE Skip( 
+@@ -2890,6 +2903,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("f89ac270-d4eb-11d1-b682-00805fc79216")
++    _Windows_SupportedOS_Windows2000_
+     IEventObjectCollection : public IDispatch
+     {
+     public:
+@@ -3112,6 +3126,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("da538ee2-f4de-11d1-b6bb-00805fc79216")
++    _Windows_SupportedOS_Windows2000_
+     IEventProperty : public IDispatch
+     {
+     public:
+@@ -3303,6 +3318,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0343e2f4-86f6-11d1-b760-00c04fb926af")
++    _Windows_SupportedOS_Windows2000_
+     IEventControl : public IDispatch
+     {
+     public:
+@@ -3528,6 +3544,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("0343e2f5-86f6-11d1-b760-00c04fb926af")
++    _Windows_SupportedOS_Windows2000_
+     IMultiInterfaceEventControl : public IUnknown
+     {
+     public:

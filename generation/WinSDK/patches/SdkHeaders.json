@@ -147,6 +147,30 @@
       "sourceSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\locationapi.h",
       "sdkSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471"
+    },
+    {
+      "path": "um\\msrdc.h",
+      "sourceSha256": "F5D0B91C185535A176E91A5D8F2076BB4124EA76DE5D8E4A7FB814CF65CDD19D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msrdc.idl",
+      "sdkSha256": "4470145098F210805D6893F68D438911C647FE814B5E7E3138C2BFC6453C2177"
+    },
+    {
+      "path": "um\\netlistmgr.h",
+      "sourceSha256": "61D5529E64622D1B47C8BC1700FDA8EABA6818A4B76DCC7CE1575D41DCF87AAF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\netlistmgr.idl",
+      "sdkSha256": "C334776532B435450D5DA0E0EF4F92B5A8B639B13E737221CC1B47A5787D8E54"
+    },
+    {
+      "path": "um\\callobj.h",
+      "sourceSha256": "ABAC062F0ADDAF42B97B72BA556785169ECBA23188015423A460BA7A5AF3B305",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\callobj.idl",
+      "sdkSha256": "CEF9673107F25AEEC0FDD86A62F69A4C897D2455603F6E95D4E3A8F1DD4EEFC0"
+    },
+    {
+      "path": "um\\EventSys.h",
+      "sourceSha256": "4F728FEF9AA5666482B448DCDCB908078429ACE810C388D430EEB46C17824016",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\EventSys.idl",
+      "sdkSha256": "FB9D8FCAB51FF13E259E06D4B899FE12C2399557FA16827F2876B6451028D728"
     }
   ],
   "partitions": [
@@ -170,7 +194,14 @@
     "Wcm",
     "InputRadial",
     "WinContacts",
-    "WinLocation"
+    "WinLocation",
+    "Rdc",
+    "Nla",
+    "Com.CallObj",
+    "Com.Events",
+    "ComOle",
+    "WindowsConnectionManager",
+    "TransactionServer"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -195,6 +226,10 @@
     "post-midl\\um\\wcmapi.annotations.patch",
     "post-midl\\um\\radialcontrollerinterop.annotations.patch",
     "post-midl\\um\\icontact.annotations.patch",
-    "post-midl\\um\\locationapi.annotations.patch"
+    "post-midl\\um\\locationapi.annotations.patch",
+    "post-midl\\um\\msrdc.annotations.patch",
+    "post-midl\\um\\netlistmgr.annotations.patch",
+    "post-midl\\um\\callobj.annotations.patch",
+    "post-midl\\um\\eventsys.annotations.patch"
   ]
 }

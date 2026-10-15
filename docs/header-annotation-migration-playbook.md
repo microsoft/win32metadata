@@ -420,7 +420,45 @@ patches: Wcm 5, InputRadial 2, WinContacts 5 and WinLocation 7. Exact native
 `ILocationReport.GetTimestamp.pCreationTime` and
 `ILocation.GetReport.ppLocationReport`. WinContacts' injected source annotations
 repeat final metadata already supplied by SAL; source occurrence counts are not
-new final-attribute counts. Checkpoint two's full-image grade remains pending.
+new final-attribute counts. The verified second checkpoint is producer
+`7f7dd082e6d9ecf6b308620e5bf2b41c85541543`, image SHA256
+`8EDA57048DC25ED5C97844991B17CEE94B498005E941000EB6D1A14B9EAC7A02`.
+Its strict first-checkpoint delta is 39; B9-CI-to-checkpoint is 67 and cumulative
+OLD-to-checkpoint is 115, each with zero unknown and zero unused expectations.
+All physical types and enum identities remain unchanged. Actual execution is
+26 preparation/retval/ownership, 63 native architecture, 26 physical/no-fallback/
+mutation and 14 full-SDK cases, with zero skipped. Its immutable receipt is
+`artifacts\next-header-annotation-wave\checkpoint2-review-grade.json`, SHA256
+`06BF5961603134C7AE57FC0B145065FD50CB846AFF5E2D5D9332038186EECEAE`.
+
+Checkpoint three relocates another 51 emitted OS floors: Rdc 17, Nla 12,
+Com.CallObj 7 and Com.Events 15. Four ordinary per-header patches preserve all
+existing declarations. The original `netlistmgr.h:1860` MIDL
+`/* [retval][out] */ __RPC__out BOOL *pValue` contract identifies the single additional
+site `INetworkConnection2.IsDomainAuthenticatedBy.pValue`. Com.Events' source
+injections repeat final SAL-derived attributes rather than introducing new ones.
+ComOle, WindowsConnectionManager and TransactionServer join the preparation and
+native-control closure as explicitly opted-out physical-header dependents.
+
+Com.Events also relocates the existing
+`IEnumEventObject::Reset=[CanReturnMultipleSuccessValues]` authored contract to
+`_Win32_PreserveResult_` on the same native method in `EventSys.h`. The explicitly
+review-approved representation removes that legacy custom attribute and sets the
+CLI `MethodImplAttributes.PreserveSig` bit. This is an authored-fact representation
+change, not a newly discovered native annotation or a conflicting SDK contract.
+The existing reader and vocabulary already support it; no tooling expansion is
+needed. It has its own exact declaration expectation and physical checks on x86,
+x64 and arm64. HRESULT, signature and vtable order stay unchanged; fresh consumer
+compatibility remains **UNVERIFIED**.
+
+The bounded wave therefore relocates 82 OS floors, one existing association and
+one existing success-value contract through 11 patches; it does not author new
+enum representations or library overrides. The exact expected native additions
+are SecurityCenter 16, WinSat 12, WinLocation 39 and Nla 1. B9-to-final expectations
+are 68 native additions plus the single reviewed preserved-result representation;
+the cumulative OLD-to-final total is 117, including the 48 enum representation
+differences from the preceding reviewed layer, not this new wave. Final-checkpoint
+local and actual CI grades are still pending.
 
 The existing image helper now relocates a copied frozen traversal map to its
 owning worktree and prepared headers. It verifies one original SDK project root,
