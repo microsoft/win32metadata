@@ -147,7 +147,8 @@ WinHttp/WinInet duplicate-constant exceptions. Physical checks require the exact
 OLD WinHttp enum identities, names, values, and attributes, and the existing
 WinInet owner set stays unchanged.
 
-For example, OLD `enums.json` defines `WINHTTP_ACCESS_TYPE` with
+For example, OLD `enums.json` lists the four `WINHTTP_ACCESS_TYPE` members; the
+same-SDK macros and frozen OLD metadata give their values:
 `WINHTTP_ACCESS_TYPE_DEFAULT_PROXY=0`, `WINHTTP_ACCESS_TYPE_NO_PROXY=1`,
 `WINHTTP_ACCESS_TYPE_NAMED_PROXY=3`, and
 `WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY=4`. The guarded header enum declares those
@@ -367,7 +368,7 @@ four renames are not carried into the naming-preserved candidate.
 ## Naming-preserved candidate
 
 The fresh candidate is named `new-preserved-names`, with a separately emitted
-`tooling-control-preserved-names`. Its `provenance.json` must bind the committed
+`tooling-control-preserved-names`. Its `provenance.json` binds the committed
 producer, prepared-header manifest, exact 16-difference grade, complete generated
 closure, and first/repeated selected inputs. These outputs do not overwrite
 `new-final` or any original consumer receipts. The original patch, expectations,
@@ -379,6 +380,29 @@ minimal-delta decision removes those expectations and their obsolete owner
 exceptions, rather than changing the producer to manufacture additions.
 Emission and final grading commits are recorded separately; correcting the
 diagnostic policy does not require regenerating unchanged metadata.
+
+| Current evidence | Identity |
+| --- | --- |
+| Naming-preserved NEW | `368ECA3E68D89BBCAABC0696FAA32E13CBB04F7C92F51C5046440D506A9341B4` |
+| Matching frozen-input tooling control | `9E6D95E42197BE2409807B8F93A27950192D57F455906A8F70F257B1CA6D932B` |
+| Emission producer commit | `3d62ae750f7cd0079f39b14447c6a9af2b18d03c` |
+| Final diagnostic-policy/grading commit | `d3c2c0a1a88229c191540955bffecf7eb6da12aa` |
+| Provenance SHA256 | `A50A2B9AD1A3306E04C34A388AB7748358E24738A784298D417D38E57BD8D8A1` |
+
+The split receipt verifies that only documentation, tests, and diagnostic
+expectations changed between emission and grading; header patches, emitter
+inputs, and controlled tool binaries did not change. The strict final grade
+uses all 16 expected differences with zero unknown or unused entries.
+There are zero added API symbols, enum types, or enum members; all 7,791 complete
+enum identities match OLD, including the five migrated logical groups and their
+21 unchanged members. All 37,248 non-WinHttp physical snapshots remain unchanged.
+First/repeated normal SDK scraping retains ten byte-identical inputs and 155
+complete pointer reductions.
+
+The final existing suites passed 191 scraper/pilot, 46 emitter, 40 utilities, and
+14 SDK integrity cases, without skips. The native legs retain all original ABI
+hashes and compile explicit native scheme macro assertions on x86/x64/ARM64.
+No in-scope semantic fallback or additional duplicate-constant exception is used.
 
 The original three-way consumer reports do not prove this fresh image. Replaying
 them requires the existing pinned consumer binaries copied read-only to isolated
@@ -397,3 +421,8 @@ The a47 reports and this mismatch are frozen privately in
 for the recorded runtime closure or relabeled as 41ff. The CsWin32 cleanup
 checkout is not modified or rebuilt for this proof. Fresh unchanged-caller
 acceptance remains pending an available immutable matching prototype closure.
+No further consumer search, rebuild, or implementation is part of this pilot.
+The next review decision belongs to the consumer owner: verify generic
+`AssociatedEnum` projection separately when an agreed runnable consumer is
+available. A missing-member improvement would likewise require a separate,
+demonstrated OLD caller case and user approval; this migration adds no membership.
