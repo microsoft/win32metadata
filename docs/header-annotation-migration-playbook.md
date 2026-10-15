@@ -146,7 +146,7 @@ Each batch must pass the preceding producer gates before the next is admitted.
 | --- | --- | --- |
 | 1 | CEIP, ApplicationVerifier | `windowsceip.h`, `avrfsdk.h` |
 | 2 | MagApi, PsApi1, Time, Ual | `magnification.h`, `psapi.h`, `timezoneapi.h`, `timeprov.h`, `ual.h` |
-| 3 | ToolHelp, UpdateAssessment, SecurityCenter, WinSat | `tlhelp32.h`, `waasapi.h`, `waasapitypes.h`, `iwscapi.h`, `wscapi.h`, `winsatcominterfacei.h` |
+| 3 | ToolHelp, UpdateAssessment; two replacements pending | `tlhelp32.h`, `waasapi.h`, `waasapitypes.h` |
 
 The image helper reads the recipe's complete owner/dependent partition list and
 overlays the sources actually produced for those partitions. `Base` and
@@ -214,25 +214,35 @@ logical groups retain unsigned 32-bit storage and all ten members: only
 become associated rather than substituted enum types.
 
 UpdateAssessment moves only `IWaaSAssessor`'s Windows 10 build 15063 floor.
-SecurityCenter moves two Windows 8 interface floors and three Vista API floors;
-its existing `IWSCProductList::Initialize::provider` association moves from the
-emitter to the native parameter without a declared-output difference. WinSat
-moves precisely seven Vista interface floors, not every interface in its header.
-`FileHistory` remains an unchanged dependent of the SecurityCenter headers.
 
 These floors agree with the published requirements for
-[ToolHelp](https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot),
-[IWaaSAssessor](https://learn.microsoft.com/windows/win32/api/waasapi/nn-waasapi-iwaasassessor),
-[IWSCProductList](https://learn.microsoft.com/windows/win32/api/iwscapi/nn-iwscapi-iwscproductlist),
-[WscRegisterForChanges](https://learn.microsoft.com/windows/win32/api/wscapi/nf-wscapi-wscregisterforchanges)
-and [WinSAT](https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iinitiatewinsatassessment).
-SDK-header identities bind SecurityCenter and WinSat directly; the selected
-package supplies their generated headers, not IDLs. UpdateAssessment separately
-pins its supplied IDLs and checked-in post-MIDL headers.
+[ToolHelp](https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot)
+and [IWaaSAssessor](https://learn.microsoft.com/windows/win32/api/waasapi/nn-waasapi-iwaasassessor).
+UpdateAssessment separately pins its supplied IDLs and checked-in post-MIDL
+headers.
 
 Global `IUnknown`/`IDispatch`, BSTR/VARIANT helpers, and Foundation `HANDLE`
-definitions remain outside these physical owners. No snapshot or registration
-handle identity is invented, and a SecurityCenter registration is not assumed to
-use `CloseHandle`: its native API contract specifies `WscUnRegisterChanges`.
-The 22 emitted ToolHelp/SecurityCenter DLL bindings are independently reproduced
+definitions remain outside these physical owners. No snapshot handle identity
+or ownership assumption is invented.
+The 16 emitted ToolHelp DLL bindings are independently reproduced
 by the preference-free SDK scan and remain derived bindings, not header overrides.
+
+### Deferred COM opt-in finding
+
+The proposed SecurityCenter/WinSat conversions are not admitted. Producer
+`ab29038d22518c027d2cedab33ea747353ddd2d8` emitted a rejected image with SHA256
+`37CB3A49C657F9787CEC85749EBEFECCEC4C3BB9319070752FDFF7AFB3B7677C`.
+Its strict comparison found 28 additional parameter-flag changes:
+16 in SecurityCenter and 12 in WinSat gain `RetVal` from existing native
+`[retval]` comments, for example `IWscProduct.get_ProductName.pVal` and
+`IProvideWinSATAssessmentInfo.get_Score.score`.
+
+These changes are outside the approved representation categories. The three
+COM header patches and opt-ins are removed and their authored facts restored;
+neither native comments nor SAL/parser policy is changed to hide the finding.
+The rejected image and exact difference log remain in
+`artifacts\header-annotation-wave\batch3`; the separate
+`batch3-rejected-grade.json` receipt records the rejection. Successful
+native/preparation controls and repeatability do not override this failed
+metadata gate. Two flat-C
+replacements are selected separately; consumer compatibility remains unverified.

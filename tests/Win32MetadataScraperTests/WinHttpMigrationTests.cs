@@ -68,15 +68,10 @@ namespace Win32MetadataScraperTests
             "CreateToolhelp32Snapshot", "Heap32First", "Heap32ListFirst", "Heap32ListNext", "Heap32Next",
             "Module32First", "Module32FirstW", "Module32Next", "Module32NextW", "Process32First", "Process32FirstW",
             "Process32Next", "Process32NextW", "Thread32First", "Thread32Next", "Toolhelp32ReadProcessMemory",
-            "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
-            "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
-            "HEAPENTRY32", "IWaaSAssessor", "IWscProduct", "IWSCProductList",
-            "IInitiateWinSATAssessment", "IProvideWinSATAssessmentInfo", "IProvideWinSATResultsInfo",
-            "IProvideWinSATVisuals", "IQueryAllWinSATAssessments", "IQueryRecentWinSATAssessment",
-            "IWinSATInitiateEvents",
+            "HEAPENTRY32", "IWaaSAssessor",
         };
         private static readonly string[] AdditionalLogicalEnums =
         {
@@ -434,9 +429,10 @@ namespace Win32MetadataScraperTests
                     File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
-                "ToolHelp", "UpdateAssessment", "SecurityCenter", "WinSat" })
+                "ToolHelp", "UpdateAssessment" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
-            Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", "PsApi2", "settings.rsp")));
+            foreach (string partition in new[] { "PsApi2", "SecurityCenter", "WinSat" })
+                Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
         }
 
         [Theory]

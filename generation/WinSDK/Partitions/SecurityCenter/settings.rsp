@@ -3,5 +3,3 @@
 <IncludeRoot>/um/Wscapi.h
 --namespace
 Windows.Win32.System.SecurityCenter
---config
-parse-win32-annotations
