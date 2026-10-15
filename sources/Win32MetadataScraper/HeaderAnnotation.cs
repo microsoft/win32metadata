@@ -83,7 +83,7 @@ namespace Win32MetadataScraper
                 string version = ReadString(arguments[0], requireQuotes: true);
                 if (!SupportedVersions.Contains(version))
                 {
-                    throw new FormatException($"Unsupported OS annotation version '{version}'; use a reviewed _Windows_SupportedOS_*_ macro.");
+                    throw new FormatException($"Unsupported OS annotation version '{version}'; use a reviewed _Win32_SupportedOS_*_ macro.");
                 }
             }
             else if (name == "ImportLibrary")
