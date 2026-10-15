@@ -105,6 +105,48 @@
       "sourceSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winsatcominterfacei.h",
       "sdkSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3"
+    },
+    {
+      "path": "um\\wcmapi.h",
+      "sourceSha256": "06BF23E24924AF388A1039E9441E3A00569B1F63B2BACD30AEFF1155D17B14FE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcmapi.h",
+      "sdkSha256": "06BF23E24924AF388A1039E9441E3A00569B1F63B2BACD30AEFF1155D17B14FE"
+    },
+    {
+      "path": "um\\RadialControllerInterop.h",
+      "sourceSha256": "33B813E9A18CA0CC098D8D5D068B72BF76D42FA228F622449685399D6EABA14D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\RadialControllerInterop.idl",
+      "sdkSha256": "FD6A57358A3B3527076A6D982C0BDCDC47B0150DD769962731E8C268B7EF9EEF"
+    },
+    {
+      "path": "um\\IContact.h",
+      "sourceSha256": "B9E7611C0328B160E3E7B62AACECFCE82FACBB00681AD281730452322F9BFA13",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IContact.idl",
+      "sdkSha256": "DCC9C8D2A58B422BF4515494C3028A366687DDC875F9250FAE574E1298DC6ABD"
+    },
+    {
+      "path": "um\\contactaggregation.h",
+      "sourceSha256": "4D0949D0E0400070BE16C0B72C51A71AFBF7D5FD4EA0BFCC5E1B3798E079575A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\contactaggregation.idl",
+      "sdkSha256": "20BA280603DD19B48AEF891596073769916317802F5A0AA21297F02350EE6159"
+    },
+    {
+      "path": "um\\icontactproperties.h",
+      "sourceSha256": "19A449C82651190007CCC4B56AEBDEBF7CEB95251BBA60F30E4F619FDC64DB26",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\icontactproperties.h",
+      "sdkSha256": "19A449C82651190007CCC4B56AEBDEBF7CEB95251BBA60F30E4F619FDC64DB26"
+    },
+    {
+      "path": "shared\\gnssdriver.h",
+      "sourceSha256": "EF03674C6ECA66C55D65F3C1AA6B419DDF24D76CD227EDA95B60AF1B356A8F11",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\gnssdriver.h",
+      "sdkSha256": "EF03674C6ECA66C55D65F3C1AA6B419DDF24D76CD227EDA95B60AF1B356A8F11"
+    },
+    {
+      "path": "um\\locationapi.h",
+      "sourceSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\locationapi.h",
+      "sdkSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471"
     }
   ],
   "partitions": [
@@ -124,7 +166,11 @@
     "Wsl",
     "Xinput",
     "SecurityCenter",
-    "WinSat"
+    "WinSat",
+    "Wcm",
+    "InputRadial",
+    "WinContacts",
+    "WinLocation"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -145,6 +191,10 @@
     "post-midl\\um\\xinput.annotations.patch",
     "post-midl\\um\\iwscapi.annotations.patch",
     "post-midl\\um\\wscapi.annotations.patch",
-    "post-midl\\um\\winsatcominterfacei.annotations.patch"
+    "post-midl\\um\\winsatcominterfacei.annotations.patch",
+    "post-midl\\um\\wcmapi.annotations.patch",
+    "post-midl\\um\\radialcontrollerinterop.annotations.patch",
+    "post-midl\\um\\icontact.annotations.patch",
+    "post-midl\\um\\locationapi.annotations.patch"
   ]
 }

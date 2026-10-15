@@ -54,6 +54,45 @@ namespace Win32MetadataScraperTests
             }).ToArray();
         private static readonly (string Namespace, string Owner, string Method, string Parameter)[] NativeRetvalUses =
         {
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetAddressLine1", "pbstrAddress1"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetAddressLine2", "pbstrAddress2"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetCity", "pbstrCity"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetCountryRegion", "pbstrCountryRegion"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetDetailLevel", "pDetailLevel"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetPostalCode", "pbstrPostalCode"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetStateProvince", "pbstrStateProvince"),
+            ("Windows.Win32.Devices.Geolocation", "ICivicAddressReportFactory", "get_CivicAddressReport", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDefaultLocation", "GetReport", "ppLocationReport"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_AddressLine1", "pAddress1"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_AddressLine2", "pAddress2"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_City", "pCity"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_CountryRegion", "pCountryRegion"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_DetailLevel", "pDetailLevel"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_PostalCode", "pPostalCode"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_StateProvince", "pStateProvince"),
+            ("Windows.Win32.Devices.Geolocation", "IDispCivicAddressReport", "get_Timestamp", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_Altitude", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_AltitudeError", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_ErrorRadius", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_Latitude", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_Longitude", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "IDispLatLongReport", "get_Timestamp", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReport", "GetAltitude", "pAltitude"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReport", "GetAltitudeError", "pAltitudeError"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReport", "GetErrorRadius", "pErrorRadius"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReport", "GetLatitude", "pLatitude"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReport", "GetLongitude", "pLongitude"),
+            ("Windows.Win32.Devices.Geolocation", "ILatLongReportFactory", "get_LatLongReport", "pVal"),
+            ("Windows.Win32.Devices.Geolocation", "ILocation", "GetDesiredAccuracy", "pDesiredAccuracy"),
+            ("Windows.Win32.Devices.Geolocation", "ILocation", "GetReport", "ppLocationReport"),
+            ("Windows.Win32.Devices.Geolocation", "ILocation", "GetReportInterval", "pMilliseconds"),
+            ("Windows.Win32.Devices.Geolocation", "ILocation", "GetReportStatus", "pStatus"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReport", "GetSensorID", "pSensorID"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReport", "GetTimestamp", "pCreationTime"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReport", "GetValue", "pValue"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_DesiredAccuracy", "pDesiredAccuracy"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_ReportInterval", "pMilliseconds"),
+            ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_Status", "pVal"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Description", "description"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Score", "score"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Title", "title"),
@@ -115,6 +154,7 @@ namespace Win32MetadataScraperTests
             "XInputGetAudioDeviceIds", "XInputGetBatteryInformation", "XInputGetKeystroke",
             "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
             "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
+            "WcmQueryProperty", "WcmSetProperty", "WcmGetProfileList", "WcmSetProfileList", "WcmFreeMemory",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
@@ -125,6 +165,12 @@ namespace Win32MetadataScraperTests
             "IInitiateWinSATAssessment", "IProvideWinSATAssessmentInfo", "IProvideWinSATResultsInfo",
             "IProvideWinSATVisuals", "IQueryAllWinSATAssessments", "IQueryRecentWinSATAssessment",
             "IWinSATInitiateEvents", "IQueryOEMWinSATCustomization",
+            "IRadialControllerInterop", "IRadialControllerConfigurationInterop",
+            "IContact", "IContactManager", "IContactCollection", "IContactProperties", "IContactPropertyCollection",
+            "ILocationReport", "ILatLongReport", "ICivicAddressReport", "ILocation",
+            "ILocationPower", "IDefaultLocation", "ILocationEvents",
+            "IDispLatLongReport", "IDispCivicAddressReport", "ILocationReportFactory",
+            "ILatLongReportFactory", "ICivicAddressReportFactory",
         };
         private static readonly string[] AdditionalLogicalEnums =
         {
@@ -517,7 +563,8 @@ namespace Win32MetadataScraperTests
                     File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
-                "ToolHelp", "UpdateAssessment", "Wsl", "Xinput", "SecurityCenter", "WinSat" })
+                "ToolHelp", "UpdateAssessment", "Wsl", "Xinput", "SecurityCenter", "WinSat",
+                "Wcm", "InputRadial", "WinContacts", "WinLocation" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
             foreach (string partition in new[] { "PsApi2" })

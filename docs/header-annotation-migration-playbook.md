@@ -374,10 +374,18 @@ enum conflict or manufacture new enums or members.
 This separate draft starts at `162f8118a7da2ecb38d410a66b729dda64ca6767`;
 the reviewed tooling and WinHttp-plus-ten branches are unchanged. Its checkpoints
 are SecurityCenter/WinSat, then Wcm/InputRadial/WinContacts/WinLocation, then
-Rdc/Nla/Com.CallObj/Enstor. The latter eight have real emitted authored OS facts,
+Rdc/Nla/Com.CallObj/Com.Events. The latter eight have real emitted authored OS facts,
 not just parser opt-ins. Their unmodified-header admission compares exact C#
 declaration tokens after removing only the explicitly identified native MIDL
 `RetVal` additions. This admission is not a final-winmd or consumer grade.
+
+Enstor is excluded as a **Learn-versus-legacy-sidecar discrepancy**: its existing
+Vista RTM floor differs from the published Vista SP2 requirement. This is not a
+conflicting native-header annotation and does not qualify acceptance of native
+SDK/SAL/MIDL contracts. Its header, floor and sidecars remain unchanged; there is
+no further Enstor investigation in this wave. Com.Events is the routine
+replacement, admitted against unmodified headers with 15 actual emitted
+Windows 2000 floors and no predicted new final retval metadata.
 
 SecurityCenter relocates five OS floors and the existing
 `IWSCProductList.Initialize.provider` association; WinSat relocates seven
@@ -393,6 +401,26 @@ sources. These are not newly authored retval assertions. Exact expectations and
 physical architecture cases distinguish the custom attribute from raw CLI
 `ParameterAttributes.Retval`, retain `Out`, and check unchanged signatures.
 The earlier rejected receipt is historical evidence and is not relabeled.
+
+The first pair's immutable local checkpoint is producer
+`e559be49e2d2dc064874a815cbf81846074c42ae`, image SHA256
+`B45712BFF48B652A6A304AB043D599EBB086E5CE145A986F900E1404E8362F23`.
+Strict B9-CI-to-checkpoint grading uses exactly 28 native additions; cumulative
+OLD-to-checkpoint grading uses 76 differences, including the prior layer's 48
+enum representation entries. Both have zero unknown and zero unused
+expectations. All 37,314 physical types and 7,791 enum identities are graded;
+25 preparation/retval, 51 native architecture, 26 physical/no-fallback/mutation
+and 14 full-SDK cases executed with zero skipped. The owning receipt is
+`artifacts\next-header-annotation-wave\checkpoint1-review-grade.json`, SHA256
+`A939C4740676722D2500A10BD98290301BF27CB0D2679C49CEC41ADE8DE79E61`.
+
+Checkpoint two relocates 19 existing OS floors through four ordinary per-header
+patches: Wcm 5, InputRadial 2, WinContacts 5 and WinLocation 7. Exact native
+`locationapi.h` MIDL declarations identify 39 additional retval sites, including
+`ILocationReport.GetTimestamp.pCreationTime` and
+`ILocation.GetReport.ppLocationReport`. WinContacts' injected source annotations
+repeat final metadata already supplied by SAL; source occurrence counts are not
+new final-attribute counts. Checkpoint two's full-image grade remains pending.
 
 The existing image helper now relocates a copied frozen traversal map to its
 owning worktree and prepared headers. It verifies one original SDK project root,
