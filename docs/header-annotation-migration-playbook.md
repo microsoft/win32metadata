@@ -1,0 +1,131 @@
+# Header-annotation migration playbook
+
+Move authored semantic facts to reviewed header patches without changing native
+contracts. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
+The [annotation specification](copilot/plans/shift-left-annotation-spec.md) defines
+the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
+complete example and its immutable evidence.
+
+## 1. Bound the partition and its authorities
+
+Inventory the actual same-SDK OLD metadata, native declarations and every applicable
+sidecar, including non-prefix names, enum uses, callbacks, handles, manual code and
+documentation mappings. Count emitted symbols, not just library-map rows.
+
+| Input | Treatment |
+| --- | --- |
+| SDK import-library scan / generated `libMappings.rsp` | Retain as derived binding data. Do not copy correct scan results into header annotations. |
+| Native declarations, SAL and MIDL | Retain as native authority; do not duplicate direction, size, string or optionality information. |
+| Current-TU discovery and derived aggregate remaps | Retain discovery, with the tooling's annotated/legacy precedence. Do not turn cached discoveries into authored facts. |
+| Authored OS/error, logical-enum, ownership, callback and buffer overrides | Review each contract, migrate supported facts, and remove only the matching authored fallback. |
+| Manual import overrides | Use `ImportLibrary` only for demonstrated missing/incorrect scan data; retain generic override support. |
+| Namespace/traversal/architecture/schema configuration and documentation tooling | Keep separate from functional semantic migration. |
+
+Bind each physical header to one owner. Include all physical-header and semantic
+dependents in the validation closure, without migrating their unrelated facts.
+An API absent from the selected SDK must not be recreated as a fake declaration.
+
+## 2. Prepare headers once before toolchain consumption
+
+Add reviewed deltas to the SDK-wide `generation\WinSDK\patches\SdkHeaders.json`
+recipe, with explicit patch order, admitted headers, SDK package identity,
+preimages and post-MIDL source identity. Keep physical-header ownership and
+dependencies explicit. The tracked SDK mirror is never an output.
+
+The single generic `PrepareSdkHeaders` stage supplies an explicit recipe to
+`Prepare-SdkHeaders.ps1` before native toolchain consumption. Ordinary builds,
+selected scraping and constants use the same private include root. Do not add
+partition hooks or partition-default recipes to orchestration.
+
+Preserve byte encodings and line endings, transactional publication, deterministic
+caching, path/preimage checks and rejection of modified caches. A changed root
+invalidates constants and every architecture's header marker; an unchanged root
+retains them. Prove this with the existing preparation controls.
+
+Respect the MIDL boundary. The current preparation script admits post-MIDL
+recipes; it is not permission to rerun broad SDK/IDL update scripts or silently
+introduce a pre-MIDL pipeline. Surface a bounded blocker if that is required.
+
+## 3. Admit only the approved representation changes
+
+| Change | Required grade |
+| --- | --- |
+| Existing enum use site becomes its native type plus `AssociatedEnum` | Exact owning parameter/field, native width/signedness and existing enum identity/member/value checks. |
+| Justified fabricated-handle removal and producer return/output ownership relocation | Exact removed type and affected signatures, cleanup API, invalid values and attribute targets; no invented ownership for borrowed handles. |
+| All other migrated facts | Same signatures, layouts, callback identity, imports, OS floors, last-error and SAL contracts. |
+
+No new enum types, enum members, loose constants, API families, compatibility
+aliases or broad difference/duplicate allowlists. Preserve existing logical
+member names and values while leaving native macros intact. Document any
+user-approved metadata-only naming exception at the header boundary.
+
+Remove matching authored fallback rather than annotating on top of it.
+SDK-derived bindings and discoveries are not semantic fallback. Keep import
+module/entrypoint/flags checks even when no header import override is needed.
+
+## 4. Pin OLD, tooling control and NEW separately
+
+Freeze a complete OLD image and generated-source/discovery closure from one SDK
+and an exact tooling commit. Emit a matched frozen-input tooling control when
+tool binaries change. Attribute tooling-only differences to that control, not to
+the partition migration; never waive a known OLD defect on NEW.
+
+Commit producer inputs before publishing a fresh named NEW artifact. Record SDK,
+producer/tooling commits, binary hashes, recipe/prepared-header identity, complete
+source/reference closure and expected-difference hashes. Do not overwrite previous
+images or receipts.
+
+Use the existing selected scrape/full-source overlay loop where appropriate.
+`PartitionFilter` alone does not narrow constants, manual files or emission
+closure. Recompute complete constants and pointer discoveries, retaining
+unselected inputs. Reject success-shaped partial images with dangling references.
+
+## 5. Validate the actual output, not a proxy
+
+- Compile metadata-disabled native owner/dependent translation units on x86,
+  x64 and ARM64; check signatures, calling conventions, pointer levels, constants
+  and record layout.
+- Read the final full winmd for imports, attribute targets/constructors,
+  associations, ownership, enum identities/membership, signatures, layout,
+  callbacks, architecture coverage and reference closure. Preserve unrelated
+  physical snapshots and existing mutation controls.
+- Compare OLD/control/NEW with exact symbol-scoped expectations: zero unknown
+  differences and zero unused expectations. Investigate any unapproved category
+  before admitting the candidate. A declaration comparer plus scoped physical
+  checks is not a comprehensive typed-equivalence oracle.
+- Repeat the normal SDK build with prior discoveries present. Require identical
+  selected source/discovery inputs, shared prepared roots and complete SDK
+  diagnostic inputs.
+- Run the smallest affected existing suites and full-SDK integrity checks.
+  Verify nonzero executed counts and no skipped acceptance legs. Build tools
+  before emission; never rebuild DLLs while an emitter is using them.
+
+## 6. Report consumer compatibility independently
+
+CsWin32 source compatibility is the primary consumer gate, not identical winmd
+encoding. When an agreed immutable consumer is available, pin its version,
+requests, options, target framework and unchanged caller source; compare public
+surfaces and compile both OLD and NEW callers in both marshaling modes.
+
+Separate identical output, source-compatible differences and exact source breaks.
+Do not infer compatibility from a producer comparison. If the consumer cannot be
+run under the agreed ownership constraints, report **unverified**. Do not search,
+rebuild or modify another owner's consumer checkout to manufacture proof.
+
+## 7. Publish a reviewable checkpoint
+
+Keep the migration separate from the independently reviewable tooling layer.
+Use the owning branch and existing draft PR, with a short WHAT/WHY description,
+the current approved delta and links to durable details. Do not merge or change
+native stack metadata.
+
+Require full CI green on the final exact head of both tooling and migration PRs;
+record check/run links and SHAs. Earlier successful heads and local tests do not
+substitute. Do not skip checks or weaken gates to obtain green.
+
+For a correctness/design problem, capture one bounded reproducer and correct it
+within established patterns. Otherwise report the exact blocker, owner and
+smallest decision, or replace the candidate through the agreed selection process.
+Do not expand into parser frameworks, consumer features or prolonged speculative
+investigations. Summarize each partition as relocated facts, exact representation
+changes, unchanged native/dependent contracts, and an honest consumer grade.
