@@ -173,7 +173,7 @@ namespace Win32MetadataScraperTests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(4)]
-        public void HeaderEnumsUseNativeNamesValuesAndUnderlyingTypes(int architecture)
+        public void HeaderEnumsPreserveLogicalNamesNativeValuesAndUnderlyingTypes(int architecture)
         {
             using var image = Open("WINHTTP_MIGRATION_NEW");
             var reader = image.Reader;
@@ -198,10 +198,23 @@ namespace Win32MetadataScraperTests
             });
             Check("WINHTTP_INTERNET_SCHEME", "Int32", false, new Dictionary<string, long>
             {
-                ["INTERNET_SCHEME_HTTP"] = 1, ["INTERNET_SCHEME_HTTPS"] = 2,
-                ["INTERNET_SCHEME_FTP"] = 3, ["INTERNET_SCHEME_SOCKS"] = 4,
+                ["WINHTTP_INTERNET_SCHEME_HTTP"] = 1, ["WINHTTP_INTERNET_SCHEME_HTTPS"] = 2,
+                ["WINHTTP_INTERNET_SCHEME_FTP"] = 3, ["WINHTTP_INTERNET_SCHEME_SOCKS"] = 4,
             });
             var apis = Type(reader, "Apis", architecture);
+            foreach (var scheme in new[] { ("HTTP", 1u), ("HTTPS", 2u), ("FTP", 3u), ("SOCKS", 4u) })
+            {
+                string name = "INTERNET_SCHEME_" + scheme.Item1;
+                var field = apis.GetFields().Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == name);
+                Assert.Equal("UInt32", field.DecodeSignature(Signatures, null));
+                var constant = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                Assert.Equal(scheme.Item2, reader.GetBlobReader(constant.Value).ReadUInt32());
+                var owners = reader.TypeDefinitions.Where(handle => reader.GetTypeDefinition(handle).GetFields()
+                        .Select(reader.GetFieldDefinition).Any(value => reader.GetString(value.Name) == name))
+                    .Select(handle => FullName(reader, handle)).Distinct().OrderBy(value => value, StringComparer.Ordinal);
+                Assert.Equal(new[] { WinHttpNamespace + ".Apis", "Windows.Win32.Networking.WinInet.INTERNET_SCHEME" }, owners);
+            }
             foreach (var port in new[] { ("INTERNET_DEFAULT_PORT", 0), ("INTERNET_DEFAULT_HTTP_PORT", 80), ("INTERNET_DEFAULT_HTTPS_PORT", 443) })
             {
                 var field = apis.GetFields().Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == port.Item1);

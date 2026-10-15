@@ -109,6 +109,25 @@ namespace Beta { public enum NativeScheme { SCHEME_HTTP = 3 } }";
                 Assert.Contains("SCHEME_HTTP", console.Out.ToString());
         }
 
+        [Theory]
+        [InlineData("SCHEME_HTTP=Alpha.Apis,Beta.NativeScheme", false, 0)]
+        [InlineData("SCHEME_HTTP=Alpha.NativeScheme,Beta.NativeScheme", false, -1)]
+        [InlineData("SCHEME_HTTP=Alpha.Apis,Beta.NativeScheme", true, -1)]
+        public void NativeConstantExceptionsDoNotAdmitTheOldLogicalEnumOwner(string allowed, bool thirdOwner, int expected)
+        {
+            using var fixture = new ComparisonFixture();
+            const string source = @"
+namespace Alpha { public static class Apis { public const uint SCHEME_HTTP = 1; } }
+namespace Beta { public enum NativeScheme { SCHEME_HTTP = 3 } }";
+            var image = fixture.Emit("native-duplicates", source + (thirdOwner
+                ? "namespace Gamma { public enum NativeScheme { SCHEME_HTTP = 9 } }"
+                : ""));
+            var console = new TestConsole();
+            Assert.Equal(expected, WinmdUtilsProgram.Program.ShowDuplicateConstants(image, new[] { allowed }, console));
+            if (expected != 0)
+                Assert.Contains("SCHEME_HTTP", console.Out.ToString());
+        }
+
         private sealed class ComparisonFixture : IDisposable
         {
             private readonly string directory = Path.Combine(Path.GetTempPath(), "WinmdComparisonTests-" + Guid.NewGuid().ToString("N"));

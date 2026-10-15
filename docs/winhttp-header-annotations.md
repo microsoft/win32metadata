@@ -49,7 +49,7 @@ WinHttp library-map candidates are outside the emitted scope and remain unmigrat
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
 | Five logical enums, 21 emitted members, eight uses | Guarded native enums plus `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
 | Three port constant types | Guarded `constexpr INTERNET_PORT` declarations | Three `ushort` constant overrides |
-| Four scheme constant spellings | Genuine `INTERNET_SCHEME_*` members | Four constants-scraper exclusions |
+| Four native scheme constants | Untouched `INTERNET_SCHEME_*` macros emitted as loose constants | Four constants-scraper exclusions |
 | One pointer-adding callback alias | Metadata-only guard around `LPWINHTTP_STATUS_CALLBACK` | Partition callback exclusion |
 
 All 59 bindings independently match the selected SDK's x64 `winhttp.lib`
@@ -95,15 +95,18 @@ unmigrated WinInet `addUsesTo` relationships, not another definition.
 
 The old authentication JSON's `INHTTP_AUTH_SCHEME_DIGEST` is a nonexistent typo and
 was not emitted. The new group preserves the three actually emitted members;
-genuine `WINHTTP_AUTH_SCHEME_DIGEST` remains a loose constant. The scheme group uses
-the actual SDK's `INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS`, not fabricated
-`WINHTTP_INTERNET_SCHEME_*` names. These four old member spellings are an explicit
-measured source break. The candidate follows the specification's native-member
-spelling rule; the rename is not an integer ABI necessity. A metadata-only logical
-enum could retain the old labels while deriving values from genuine native macros
-and leaving native use-site types intact. That naming-policy exception and the
-representation of the genuine constants need review before changing this candidate.
-The four renames are not accepted as unavoidable.
+genuine `WINHTTP_AUTH_SCHEME_DIGEST` remains a loose constant.
+
+The user-selected naming policy preserves the existing C# members
+`WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` in the metadata-only logical enum.
+Each initializer references its genuine `INTERNET_SCHEME_*` macro, yielding
+1/2/3/4 respectively. Those macros are neither undefined nor renamed; ordinary
+native declarations and integer ABI stay intact. The four genuine constants are
+also emitted independently on WinHttp `Apis`, not hidden or replaced by aliases.
+This is a bounded header-side exception to the specification's native-member
+spelling rule for these four existing logical members, not a general renaming rule.
+No semantic sidecar, consumer alias, WinHttp-specific consumer behavior, or
+fabricated handle is introduced to preserve source compatibility.
 
 CsWin32 generated-source compatibility is the primary acceptance gate. A metadata
 declaration diff is supporting evidence, not a substitute for generating both
@@ -117,7 +120,7 @@ this pilot has one consistent underlying type across all its use sites.
 
 The genuine scheme spellings are also present in the distinct WinInet native enum,
 with different values. The duplicate-constant gate admits only the exact
-WinHttp/WinInet owner pair for each of these four names, not unqualified name-wide
+WinHttp `Apis`/WinInet native-enum owner pair for each of these four names, not unqualified name-wide
 exceptions. Its mutation controls reject a wrong owner and an additional owner;
 the physical enum checks still require the exact WinHttp values.
 
@@ -142,11 +145,11 @@ The physical control requires exactly 39 constructor rows in 39 types to gain
 ```powershell
 dotnet build BuildTools -c Release
 .\scripts\Build-WinHttpMigrationImage.ps1 -ToolingControl `
-    -OutputDirectory .\artifacts\winhttp-migration\tooling-control
+    -OutputDirectory .\artifacts\winhttp-migration\tooling-control-preserved-names
 .\scripts\Build-WinHttpMigrationImage.ps1 `
     -BaselineDirectory .\artifacts\winhttp-migration\old `
-    -OutputDirectory .\artifacts\winhttp-migration\new `
-    -ToolingControlDirectory .\artifacts\winhttp-migration\tooling-control
+    -OutputDirectory .\artifacts\winhttp-migration\new-preserved-names `
+    -ToolingControlDirectory .\artifacts\winhttp-migration\tooling-control-preserved-names
 ```
 
 The image builder verifies the frozen inputs and tools, scrapes only WinHttp and
@@ -169,9 +172,9 @@ source, discovery, and expected-difference hashes.
 . .\scripts\CommonUtils.ps1
 Install-VsDevShell
 $env:WINHTTP_MIGRATION_OLD = (Resolve-Path .\artifacts\winhttp-migration\old\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\winhttp-migration\new\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\winhttp-migration\tooling-control\Windows.Win32.winmd).Path
-$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\winhttp-migration\new\selection\obj\prepared-sdk.txt -Raw).Trim()
+$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\winhttp-migration\new-preserved-names\Windows.Win32.winmd).Path
+$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\winhttp-migration\tooling-control-preserved-names\Windows.Win32.winmd).Path
+$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\winhttp-migration\new-preserved-names\selection\obj\prepared-sdk.txt -Raw).Trim()
 dotnet test tests\Win32MetadataScraperTests -c Release `
     --filter "FullyQualifiedName~PreparedSdkHeadersTests|FullyQualifiedName~WinHttpMigrationTests|FullyQualifiedName~WinHttpNativeControlTests" `
     --logger "console;verbosity=normal"
@@ -186,7 +189,8 @@ transactions, and lock contention.
 Native controls parse the real WinHttp and HttpServer translation units for
 x86, x64, and ARM64 with metadata disabled, comparing native signatures, calling
 conventions, typedef pointer depth, enum values, field offsets, record sizes, and
-alignment. Each control owns its raw Clang translation unit and cursors rather
+alignment. They also compile explicit assertions for the four original native
+scheme macro values. Each control owns its raw Clang translation unit and cursors rather
 than reusing managed AST wrappers from earlier generator fixtures. Exact fact
 counts and hashes are pinned: 969 facts for WinHttp and 3,669 for HttpServer per
 architecture. An exclusive test collection also keeps these SDK-sized AST walks
@@ -211,16 +215,17 @@ SRM checks; neither is presented as a comprehensive typed metadata equivalence
 oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
 must not appear as new WinHttp migration differences.
 
-`patches\WinHttp.expected-differences.txt` admits exactly 24 declaration differences:
+`patches\WinHttp.expected-differences.txt` admits exactly 20 declaration differences:
 native integer types and `AssociatedEnum` at eight sites (16 differences), plus
-four genuine scheme member additions and four fabricated-member removals. It
+four genuine native scheme constants on `Apis`. Existing logical enum member
+names and values are preserved. It
 does not admit callback renames, import changes, dependent changes, additional
 constants, or changed values. The image builder applies this grade before publishing
 its provenance receipt.
 
-## Pinned pilot evidence
+## Original native-name candidate (immutable)
 
-The complete migrated image was produced by commit
+The original complete migrated image was produced by commit
 `9faf8a24831e1ef0a44d4ccfe4cd972f380452b3`, above tooling commit
 `00ade0afc94c965522ccdbac54a06fc1bcbd01a1`. The supported pins remain
 ClangSharp/Interop/PInvokeGenerator `21.1.8.4`, libclang `21.1.8`, and
@@ -233,7 +238,7 @@ All three images are `Windows.Win32.winmd` under
 | --- | --- | --- |
 | Frozen OLD | `old` | `1361407C2888102CB5161D83503235C09C36F917837C7107CA0A80E5CF4FAC43` |
 | Frozen-input corrected-tooling control | `tooling-control-final` | `274A288E622B840552934AE74FE2A33FEC4E7D4E47E3D3454B92A147A13B0CDA` |
-| Migrated NEW | `new-final` | `C7AEC280B0CBB19CDAD6B94FFED8473B2B22E4042BF886FCF33DCBDD92274258` |
+| Original native-name NEW | `new-final` | `C7AEC280B0CBB19CDAD6B94FFED8473B2B22E4042BF886FCF33DCBDD92274258` |
 
 The normal SDK first/repeated selection has ten byte-identical inputs: four native
 C# files, four per-TU discovery files, and two aggregate response files. The
@@ -278,7 +283,7 @@ Compare OLD + baseline consumer, OLD + proposed consumer, and NEW + proposed
 consumer, pinning both consumer revisions explicitly. Public-surface comparison
 and actual caller compilation are required; generated text alone is not the gate.
 
-### Measured consumer prototype
+### Measured consumer prototype for the original candidate
 
 The three-way consumer proof pins baseline CsWin32 commit
 `f3f5a69aa4823466ef7b55bbdc8e5ba41ec021e6` and prototype commit
@@ -291,7 +296,7 @@ pins, not that shared development-version label, identify the implementations.
 | Baseline | `8DD41E7CEB160F2B2C89A20848831C58EE91D42C84787B9103D80CF06D88B9FA` |
 | Prototype | `7F42F29E63541A9E238A66131ED3D0797C187072BA828B8F6762BA1A4BA98972` |
 
-OLD + prototype generates identical code to OLD + baseline in both marshaling
+For the original image, OLD + prototype generates identical code to OLD + baseline in both marshaling
 modes, with the unchanged caller compiling successfully. NEW + prototype has the
 same public-symbol counts (187 with marshaling, 186 without); the only public and
 generated-code deltas are the four scheme member names below. Signatures, direct
@@ -300,7 +305,7 @@ match the baseline.
 
 In both modes the unchanged caller fails with exactly four `CS0117` errors:
 
-| Unchanged caller location | Missing member of `WINHTTP_INTERNET_SCHEME` | Current NEW member | Value |
+| Unchanged caller location | Missing member of `WINHTTP_INTERNET_SCHEME` | Original NEW member | Value |
 | --- | --- | --- | --- |
 | `(16,47)` | `WINHTTP_INTERNET_SCHEME_HTTP` | `INTERNET_SCHEME_HTTP` | 1 |
 | `(17,47)` | `WINHTTP_INTERNET_SCHEME_HTTPS` | `INTERNET_SCHEME_HTTPS` | 2 |
@@ -325,6 +330,32 @@ Frozen copies of the prototype reports are kept under the private
 This is scoped prototype evidence for the 16 requests, not approved shipping
 consumer support, runtime/network testing, or general fabricated-handle migration
 coverage. Enabling `useSafeHandles` does not invent ownership for this scope.
-The current image and header member names remain unchanged pending the naming
-decision. The patch migration is reviewable; source-compatibility acceptance is
-still blocked on those four measured breaks and review of the consumer prototype.
+The original image and receipts remain unchanged as historical evidence; its
+four renames are not carried into the naming-preserved candidate.
+
+## Naming-preserved candidate
+
+The fresh candidate is named `new-preserved-names`, with a separately emitted
+`tooling-control-preserved-names`. Its `provenance.json` must bind the committed
+producer, prepared-header manifest, exact 20-difference grade, complete generated
+closure, and first/repeated selected inputs. These outputs do not overwrite
+`new-final` or any original consumer receipts. The original patch, expectations,
+and owner exceptions are also frozen privately in `original-C7AEC280-inputs`.
+
+The original three-way consumer reports do not prove this fresh image. Replaying
+them requires the existing pinned consumer binaries copied read-only to isolated
+migration artifacts, both marshaling modes, and the same unchanged callers.
+The original TRX's test-output path no longer contains the pinned 41ff prototype
+assembly. The separate a47 follow-up does match the currently available prototype
+binary, but its recorded baseline does not match the adjacent baseline file:
+
+| a47 replay input | Recorded SHA256 | Available SHA256 |
+| --- | --- | --- |
+| Prototype | `C239B5F8ACED3A68FCB2AD373A244F064D25E2E9DCD031013C4CCB13E9BDAF38` | `C239B5F8ACED3A68FCB2AD373A244F064D25E2E9DCD031013C4CCB13E9BDAF38` |
+| Baseline | `C3DD28F89F38A94CD877A29572A1E3648BAB2EF2D07F13C50FC1133EFD792424` | `CCA02C2360C452E19654800F3B27F763FD30E7BAAE5F0BB7842218E7A7F8B5AB` |
+
+The a47 reports and this mismatch are frozen privately in
+`consumer-prototype-a47-evidence`. Changed live outputs must not be substituted
+for the recorded runtime closure or relabeled as 41ff. The CsWin32 cleanup
+checkout is not modified or rebuilt for this proof. Fresh unchanged-caller
+acceptance remains pending an available immutable matching prototype closure.

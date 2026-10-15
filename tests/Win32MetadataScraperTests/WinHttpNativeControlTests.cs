@@ -75,9 +75,15 @@ namespace Win32MetadataScraperTests
                     }
                 }
                 Assert.DoesNotContain(arguments, argument => argument.Contains("WIN32METADATA", StringComparison.Ordinal));
+                using var unsaved = CXUnsavedFile.Create(source, File.ReadAllText(source) + @"
+static_assert(INTERNET_SCHEME_HTTP == 1);
+static_assert(INTERNET_SCHEME_HTTPS == 2);
+static_assert(INTERNET_SCHEME_FTP == 3);
+static_assert(INTERNET_SCHEME_SOCKS == 4);
+");
                 using var index = CXIndex.Create(false, false);
                 Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
-                    ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
+                    new[] { unsaved }, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
                 // Own raw cursors so earlier generator fixtures cannot supply a cached managed AST wrapper.
                 using var unit = handle;
                 for (uint i = 0; i < handle.NumDiagnostics; i++)

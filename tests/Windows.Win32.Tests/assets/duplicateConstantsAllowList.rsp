@@ -15,7 +15,7 @@ EALL
 NONE
 NETWORK
 RESERVED1
-INTERNET_SCHEME_FTP=Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
-INTERNET_SCHEME_HTTP=Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
-INTERNET_SCHEME_HTTPS=Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
-INTERNET_SCHEME_SOCKS=Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
+INTERNET_SCHEME_FTP=Windows.Win32.Networking.WinHttp.Apis,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
+INTERNET_SCHEME_HTTP=Windows.Win32.Networking.WinHttp.Apis,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
+INTERNET_SCHEME_HTTPS=Windows.Win32.Networking.WinHttp.Apis,Windows.Win32.Networking.WinInet.INTERNET_SCHEME
+INTERNET_SCHEME_SOCKS=Windows.Win32.Networking.WinHttp.Apis,Windows.Win32.Networking.WinInet.INTERNET_SCHEME

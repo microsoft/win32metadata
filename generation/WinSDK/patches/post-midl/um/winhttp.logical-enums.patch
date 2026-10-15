@@ -73,7 +73,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  );
  
  _Win32_ImportLibrary_("WINHTTP.dll")
-@@ -2653,6 +2653,114 @@
+@@ -2653,6 +2653,102 @@
  #endif
  
  
@@ -162,25 +162,13 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 +#pragma pop_macro("WINHTTP_AUTH_SCHEME_NTLM")
 +#pragma pop_macro("WINHTTP_AUTH_SCHEME_BASIC")
 +
-+#pragma push_macro("INTERNET_SCHEME_HTTP")
-+#undef INTERNET_SCHEME_HTTP
-+#pragma push_macro("INTERNET_SCHEME_HTTPS")
-+#undef INTERNET_SCHEME_HTTPS
-+#pragma push_macro("INTERNET_SCHEME_FTP")
-+#undef INTERNET_SCHEME_FTP
-+#pragma push_macro("INTERNET_SCHEME_SOCKS")
-+#undef INTERNET_SCHEME_SOCKS
 +enum WINHTTP_INTERNET_SCHEME : INTERNET_SCHEME
 +{
-+    INTERNET_SCHEME_HTTP = (1),
-+    INTERNET_SCHEME_HTTPS = (2),
-+    INTERNET_SCHEME_FTP = (3),
-+    INTERNET_SCHEME_SOCKS = (4),
++    WINHTTP_INTERNET_SCHEME_HTTP = INTERNET_SCHEME_HTTP,
++    WINHTTP_INTERNET_SCHEME_HTTPS = INTERNET_SCHEME_HTTPS,
++    WINHTTP_INTERNET_SCHEME_FTP = INTERNET_SCHEME_FTP,
++    WINHTTP_INTERNET_SCHEME_SOCKS = INTERNET_SCHEME_SOCKS,
 +};
-+#pragma pop_macro("INTERNET_SCHEME_SOCKS")
-+#pragma pop_macro("INTERNET_SCHEME_FTP")
-+#pragma pop_macro("INTERNET_SCHEME_HTTPS")
-+#pragma pop_macro("INTERNET_SCHEME_HTTP")
 +
 +#endif
 +
