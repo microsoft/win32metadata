@@ -1,5 +1,6 @@
 # Same-SDK b5b7b26 OLD to the complete header-annotation NEW.
-# Only existing logical-enum use sites become native integers plus AssociatedEnum.
+# Existing logical-enum use sites become native integers plus AssociatedEnum.
+# Exact native MIDL retval comments add RetValAttribute; CLI parameter flags stay unchanged.
 # Preserve OLD logical scheme members and ordinary native constants.
 # No import, OS, last-error, callback, port, dependent-partition, or value changes.
 Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags) : [In] => [AssociatedEnum(WIN_HTTP_CREATE_URL_FLAGS),In]
@@ -50,3 +51,31 @@ Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE.VirtualKey :  => [Associa
 Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE.VirtualKey...Windows.Win32.UI.Input.XboxController.XINPUT_VIRTUAL_KEY => System.UInt16
 Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE.Flags :  => [AssociatedEnum(XINPUT_KEYSTROKE_FLAGS)]
 Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE.Flags...Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS => System.UInt16
+Windows.Win32.System.AssessmentTool.IProvideWinSATAssessmentInfo.get_Description : parameter 1 (description) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATAssessmentInfo.get_Score : parameter 1 (score) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATAssessmentInfo.get_Title : parameter 1 (title) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATResultsInfo.get_AssessmentDateTime : parameter 1 (fileTime) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATResultsInfo.get_AssessmentState : parameter 1 (state) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATResultsInfo.get_RatingStateDesc : parameter 1 (description) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATResultsInfo.get_SystemRating : parameter 1 (level) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IProvideWinSATResultsInfo.GetAssessmentInfo : parameter 2 (ppinfo) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IQueryAllWinSATAssessments.get_AllXML : parameter 3 (ppDomNodeList) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IQueryOEMWinSATCustomization.GetOEMPrePopulationInfo : parameter 1 (state) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IQueryRecentWinSATAssessment.get_Info : parameter 1 (ppWinSATAssessmentInfo) : [Out] => [Out,RetVal]
+Windows.Win32.System.AssessmentTool.IQueryRecentWinSATAssessment.get_XML : parameter 3 (ppDomNodeList) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_ProductGuid : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_ProductIsDefault : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_ProductName : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_ProductState : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_ProductStateTimestamp : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_RemediationPath : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct.get_SignatureStatus : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_AntivirusProtectionUpdateSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_AntivirusScanSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_AntivirusSettingsSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_FirewallDomainProfileSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_FirewallPrivateProfileSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct2.get_FirewallPublicProfileSubstatus : parameter 1 (peStatus) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWscProduct3.get_AntivirusDaysUntilExpired : parameter 1 (pdwDays) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWSCProductList.get_Count : parameter 1 (pVal) : [Out] => [Out,RetVal]
+Windows.Win32.System.SecurityCenter.IWSCProductList.get_Item : parameter 2 (pVal) : [Out] => [Out,RetVal]

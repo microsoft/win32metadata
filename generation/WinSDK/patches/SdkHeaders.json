@@ -87,6 +87,24 @@
       "sourceSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\Xinput.h",
       "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
+    },
+    {
+      "path": "um\\iwscapi.h",
+      "sourceSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iwscapi.h",
+      "sdkSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8"
+    },
+    {
+      "path": "um\\wscapi.h",
+      "sourceSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wscapi.h",
+      "sdkSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B"
+    },
+    {
+      "path": "um\\winsatcominterfacei.h",
+      "sourceSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsatcominterfacei.h",
+      "sdkSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3"
     }
   ],
   "partitions": [
@@ -104,7 +122,9 @@
     "ToolHelp",
     "UpdateAssessment",
     "Wsl",
-    "Xinput"
+    "Xinput",
+    "SecurityCenter",
+    "WinSat"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -122,6 +142,9 @@
     "post-midl\\um\\tlhelp32.annotations.patch",
     "post-midl\\um\\waasapi.annotations.patch",
     "post-midl\\um\\wslapi.annotations.patch",
-    "post-midl\\um\\xinput.annotations.patch"
+    "post-midl\\um\\xinput.annotations.patch",
+    "post-midl\\um\\iwscapi.annotations.patch",
+    "post-midl\\um\\wscapi.annotations.patch",
+    "post-midl\\um\\winsatcominterfacei.annotations.patch"
   ]
 }

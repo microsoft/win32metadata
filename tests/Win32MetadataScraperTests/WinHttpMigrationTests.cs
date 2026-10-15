@@ -52,6 +52,37 @@ namespace Win32MetadataScraperTests
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "VirtualKey", "XINPUT_VIRTUAL_KEY", "UInt16"),
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "Flags", "XINPUT_KEYSTROKE_FLAGS", "UInt16"),
             }).ToArray();
+        private static readonly (string Namespace, string Owner, string Method, string Parameter)[] NativeRetvalUses =
+        {
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Description", "description"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Score", "score"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Title", "title"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATResultsInfo", "get_AssessmentDateTime", "fileTime"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATResultsInfo", "get_AssessmentState", "state"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATResultsInfo", "get_RatingStateDesc", "description"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATResultsInfo", "get_SystemRating", "level"),
+            ("Windows.Win32.System.AssessmentTool", "IProvideWinSATResultsInfo", "GetAssessmentInfo", "ppinfo"),
+            ("Windows.Win32.System.AssessmentTool", "IQueryAllWinSATAssessments", "get_AllXML", "ppDomNodeList"),
+            ("Windows.Win32.System.AssessmentTool", "IQueryOEMWinSATCustomization", "GetOEMPrePopulationInfo", "state"),
+            ("Windows.Win32.System.AssessmentTool", "IQueryRecentWinSATAssessment", "get_Info", "ppWinSATAssessmentInfo"),
+            ("Windows.Win32.System.AssessmentTool", "IQueryRecentWinSATAssessment", "get_XML", "ppDomNodeList"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_ProductGuid", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_ProductIsDefault", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_ProductName", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_ProductState", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_ProductStateTimestamp", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_RemediationPath", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct", "get_SignatureStatus", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_AntivirusProtectionUpdateSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_AntivirusScanSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_AntivirusSettingsSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_FirewallDomainProfileSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_FirewallPrivateProfileSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct2", "get_FirewallPublicProfileSubstatus", "peStatus"),
+            ("Windows.Win32.System.SecurityCenter", "IWscProduct3", "get_AntivirusDaysUntilExpired", "pdwDays"),
+            ("Windows.Win32.System.SecurityCenter", "IWSCProductList", "get_Count", "pVal"),
+            ("Windows.Win32.System.SecurityCenter", "IWSCProductList", "get_Item", "pVal"),
+        };
         private static readonly string[] AdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
@@ -82,12 +113,18 @@ namespace Win32MetadataScraperTests
             "WslConfigureDistribution", "WslGetDistributionConfiguration", "WslLaunchInteractive", "WslLaunch",
             "XInputGetState", "XInputSetState", "XInputGetCapabilities", "XInputEnable",
             "XInputGetAudioDeviceIds", "XInputGetBatteryInformation", "XInputGetKeystroke",
+            "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
+            "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
             "HEAPENTRY32", "IWaaSAssessor",
             "WSL_DISTRIBUTION_FLAGS", "XINPUT_BATTERY_INFORMATION", "XINPUT_CAPABILITIES",
             "XINPUT_GAMEPAD", "XINPUT_KEYSTROKE",
+            "IWscProduct", "IWscProduct2", "IWscProduct3", "IWSCProductList",
+            "IInitiateWinSATAssessment", "IProvideWinSATAssessmentInfo", "IProvideWinSATResultsInfo",
+            "IProvideWinSATVisuals", "IQueryAllWinSATAssessments", "IQueryRecentWinSATAssessment",
+            "IWinSATInitiateEvents", "IQueryOEMWinSATCustomization",
         };
         private static readonly string[] AdditionalLogicalEnums =
         {
@@ -147,7 +184,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void EveryPhysicalTypeHasOnlyReviewedEnumUseSiteChanges()
+        public void EveryPhysicalTypeHasOnlyReviewedHeaderChanges()
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
@@ -155,16 +192,48 @@ namespace Win32MetadataScraperTests
             var after = Types(current.Reader);
             Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
             var used = new HashSet<string>(StringComparer.Ordinal);
+            var usedRetvals = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
             foreach (var entry in before)
             {
-                string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedEnumUses: true, usedEnumSites: used);
+                string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedChanges: true,
+                    usedEnumSites: used, usedRetvalSites: usedRetvals);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
             }
             Assert.Equal(ReviewedEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
-            this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; only {used.Count} exact native-type/AssociatedEnum sites normalized.");
+            Assert.Equal(NativeRetvalUses.Select(value => $"{value.Namespace}.{value.Owner}.{value.Method}.{value.Parameter}")
+                .OrderBy(value => value), usedRetvals.OrderBy(value => value));
+            this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; " +
+                $"{used.Count} exact native-type/AssociatedEnum sites and {usedRetvals.Count} native MIDL retval sites normalized.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NativeMidlRetvalsReachEveryPhysicalArchitectureWithoutChangingCliFlags(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var use in NativeRetvalUses)
+            {
+                var before = Methods(old.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+                var after = Methods(current.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+                Assert.Equal(Signature(before.DecodeSignature(Signatures, null)), Signature(after.DecodeSignature(Signatures, null)));
+                var original = before.GetParameters().Select(old.Reader.GetParameter)
+                    .Single(value => old.Reader.GetString(value.Name) == use.Parameter);
+                var parameter = after.GetParameters().Select(current.Reader.GetParameter)
+                    .Single(value => current.Reader.GetString(value.Name) == use.Parameter);
+                Assert.Equal(original.Attributes, parameter.Attributes);
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Retval));
+                Assert.DoesNotContain(original.GetCustomAttributes(), handle => AttributeName(old.Reader, handle) == "RetValAttribute");
+                var attribute = Assert.Single(parameter.GetCustomAttributes().Where(handle => AttributeName(current.Reader, handle) == "RetValAttribute"));
+                Assert.Equal(new byte[] { 1, 0, 0, 0 }, current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(attribute).Value));
+            }
+            this.output.WriteLine($"{NativeRetvalUses.Length} exact native MIDL RetValAttribute additions on architecture {architecture}; CLI parameter flags and signatures unchanged.");
         }
 
         [MigrationTheory]
@@ -448,10 +517,10 @@ namespace Win32MetadataScraperTests
                     File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
-                "ToolHelp", "UpdateAssessment", "Wsl", "Xinput" })
+                "ToolHelp", "UpdateAssessment", "Wsl", "Xinput", "SecurityCenter", "WinSat" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
-            foreach (string partition in new[] { "PsApi2", "SecurityCenter", "WinSat" })
+            foreach (string partition in new[] { "PsApi2" })
                 Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
         }
 
@@ -583,9 +652,9 @@ namespace Win32MetadataScraperTests
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
-            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null)
+            bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null)
         {
-            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null)
+            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false)
             {
                 var attributes = values.Select(handle => AttributeTypeName(reader, handle) + ":" +
                     Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))).ToList();
@@ -598,12 +667,17 @@ namespace Win32MetadataScraperTests
                     value.WriteUInt16(0);
                     attributes.Add(MetadataNamespace + ".AssociatedEnumAttribute:" + Convert.ToHexString(value.ToArray()));
                 }
+                if (nativeRetval)
+                {
+                    Assert.DoesNotContain(values, handle => AttributeName(reader, handle) == "RetValAttribute");
+                    attributes.Add(MetadataNamespace + ".RetValAttribute:01000000");
+                }
                 return string.Join(",", attributes.OrderBy(value => value, StringComparer.Ordinal));
             }
             string Blob(BlobHandle blob) => blob.IsNil ? "" : Convert.ToHexString(reader.GetBlobBytes(blob));
             string ns = reader.GetString(type.Namespace);
             string typeName = reader.GetString(type.Name);
-            var uses = normalizeReviewedEnumUses ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
+            var uses = normalizeReviewedChanges ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
             var rows = new List<string>
             {
                 reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
@@ -660,7 +734,11 @@ namespace Win32MetadataScraperTests
                     $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes())}");
                 foreach (var parameter in parameters)
                 {
-                    string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber));
+                    string parameterName = reader.GetString(parameter.Name);
+                    bool nativeRetval = normalizeReviewedChanges && NativeRetvalUses.Contains((ns, typeName, methodName, parameterName));
+                    if (nativeRetval)
+                        usedRetvalSites?.Add($"{ns}.{typeName}.{methodName}.{parameterName}");
+                    string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber), nativeRetval);
                     rows.Add($"P|{parameter.SequenceNumber}|{reader.GetString(parameter.Name)}|{parameter.Attributes}|" +
                         $"{Blob(parameter.GetMarshallingDescriptor())}|{attributes}");
                 }

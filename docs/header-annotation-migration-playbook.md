@@ -368,3 +368,35 @@ That needs a separate compatibility/design decision. No SDK value, metadata
 value, macro or alias is changed to force this candidate through the playbook.
 Accepting existing native annotations is not approval to repair that logical
 enum conflict or manufacture new enums or members.
+
+## Next bounded wave above PR 2365
+
+This separate draft starts at `162f8118a7da2ecb38d410a66b729dda64ca6767`;
+the reviewed tooling and WinHttp-plus-ten branches are unchanged. Its checkpoints
+are SecurityCenter/WinSat, then Wcm/InputRadial/WinContacts/WinLocation, then
+Rdc/Nla/Com.CallObj/Enstor. The latter eight have real emitted authored OS facts,
+not just parser opt-ins. Their unmodified-header admission compares exact C#
+declaration tokens after removing only the explicitly identified native MIDL
+`RetVal` additions. This admission is not a final-winmd or consumer grade.
+
+SecurityCenter relocates five OS floors and the existing
+`IWSCProductList.Initialize.provider` association; WinSat relocates seven
+interface OS floors. Three reviewed patches preserve the original native types,
+macros, method order and signatures. Shared Foundation, COM, BSTR/VARIANT and RPC
+facts remain under their existing owners, and FileHistory remains an opted-out
+physical-header dependent.
+
+The first pair deliberately captures 28 native-derived `RetValAttribute`
+additions: 16 SecurityCenter and 12 WinSat parameters. The existing
+`iwscapi.h:189` and `winsatcominterfacei.h:259` MIDL comments are representative
+sources. These are not newly authored retval assertions. Exact expectations and
+physical architecture cases distinguish the custom attribute from raw CLI
+`ParameterAttributes.Retval`, retain `Out`, and check unchanged signatures.
+The earlier rejected receipt is historical evidence and is not relabeled.
+
+The existing image helper now relocates a copied frozen traversal map to its
+owning worktree and prepared headers. It verifies one original SDK project root,
+keeps the frozen OLD files/provenance unchanged, and records that original root
+in the new receipt; it never reads the previous owner's checkout while emitting.
+Fresh consumer compatibility remains **UNVERIFIED**; no consumer work or merging
+is part of this wave.

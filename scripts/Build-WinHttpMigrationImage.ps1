@@ -273,12 +273,20 @@ try {
         [string[]](@('--reducePointerLevel') + @($reduce | Sort-Object)), [Text.UTF8Encoding]::new($false))
 
     $mapping = [IO.File]::ReadAllText("$oldGenerated\traversedFileToNamespace.rsp")
-    $oldRoot = "$repo\generation\WinSDK\RecompiledIdlHeaders"
-    if (!$mapping.Contains($oldRoot)) {
-        throw 'The frozen traversal map is not rooted in this baseline worktree.'
+    $oldRoots = @([regex]::Matches($mapping, '(?m)^([^\r\n=]+[\\/]generation[\\/]WinSDK[\\/]RecompiledIdlHeaders)[\\/][^\r\n=]+=') |
+        ForEach-Object { $_.Groups[1].Value } | Sort-Object -Unique -CaseSensitive)
+    if ($oldRoots.Count -ne 1) {
+        throw 'The frozen traversal map must have exactly one SDK mirror root.'
+    }
+    $oldRoot = $oldRoots[0]
+    $oldProjectRoot = [IO.Path]::GetDirectoryName($oldRoot)
+    if (@([IO.File]::ReadAllLines("$oldGenerated\traversedFileToNamespace.rsp") |
+            Where-Object { $_ -and !$_.StartsWith('--') -and !$_.StartsWith($oldProjectRoot + '/', [StringComparison]::Ordinal) -and
+                !$_.StartsWith($oldProjectRoot + '\', [StringComparison]::Ordinal) }).Count) {
+        throw 'Every frozen traversal input must belong to the same SDK project.'
     }
     [IO.File]::WriteAllText("$generated\traversedFileToNamespace.rsp",
-        $mapping.Replace($oldRoot, $includeRoot), [Text.UTF8Encoding]::new($false))
+        $mapping.Replace($oldRoot, $includeRoot).Replace($oldProjectRoot, $project), [Text.UTF8Encoding]::new($false))
     $constantArguments = @("$repo\bin\Release\net10.0\ConstantsScraper.dll",
         '--headerTextFile', "$generated\ConstantsScraper.header.generated.txt",
         '--scraperOutputDir', $generated,
@@ -305,6 +313,7 @@ try {
         baselineToolingCommit = $baseline.toolingCommit
         sdkPackageVersion = $baseline.sdkPackageVersion
         baselineProvenanceSha256 = Get-Sha256 $provenancePath
+        baselineTraversalRoot = $oldRoot
         oldWinmdSha256 = $baseline.winmdSha256
         newWinmdSha256 = Get-Sha256 $winmd
         preparedIncludeRoot = $includeRoot
