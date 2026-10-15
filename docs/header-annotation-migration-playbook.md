@@ -453,12 +453,48 @@ compatibility remains **UNVERIFIED**.
 
 The bounded wave therefore relocates 82 OS floors, one existing association and
 one existing success-value contract through 11 patches; it does not author new
-enum representations or library overrides. The exact expected native additions
+enum representations or library overrides. The exact measured native additions
 are SecurityCenter 16, WinSat 12, WinLocation 39 and Nla 1. B9-to-final expectations
 are 68 native additions plus the single reviewed preserved-result representation;
 the cumulative OLD-to-final total is 117, including the 48 enum representation
-differences from the preceding reviewed layer, not this new wave. Final-checkpoint
-local and actual CI grades are still pending.
+differences from the preceding reviewed layer, not this new wave.
+
+| Owner | OS floors relocated | Other existing facts relocated | Native RetVal additions | Patches |
+| --- | ---: | --- | ---: | ---: |
+| SecurityCenter | 5 | 1 provider association | 16 | 2 |
+| WinSat | 7 | None | 12 | 1 |
+| Wcm | 5 | None | 0 | 1 |
+| InputRadial | 2 | None | 0 | 1 |
+| WinContacts | 5 | None | 0 | 1 |
+| WinLocation | 7 | None | 39 | 1 |
+| Rdc | 17 | None | 0 | 1 |
+| Nla | 12 | None | 1 | 1 |
+| Com.CallObj | 7 | None | 0 | 1 |
+| Com.Events | 15 | 1 preserved-result contract | 0 | 1 |
+
+The verified final local producer is
+`b61b71256b05d09c3a7f51cf7f823856ba6bbf2b`, image SHA256
+`9F95FBD1913EAF47F1E0D4C495AD0247F6642F6F9F545A4F80B0F682409DF8A8`.
+Strict checkpoint-two-to-final grading uses 2 differences; B9-CI-to-final uses
+69 and cumulative OLD-to-final uses 117, each with zero unknown and zero unused
+expectations. All 37,314 physical types and 7,791 enum identities/content are
+graded, with no new types, enums, members, values or native ABI changes.
+The 29 preparation/retval/preserved-result/ownership, 84 native architecture,
+29 physical/no-fallback/mutation and 14 full-SDK cases actually executed with
+zero skipped. The SDK integrity suite used 786 hash-recorded diagnostic inputs.
+The immutable local receipt is
+`artifacts\next-header-annotation-wave\checkpoint3-review-grade.json`, SHA256
+`3DA0A4DA1B29FC0A5412CD0F4BD677AE410A88619169659209CE7D134A1AE825`.
+
+The complete tracked SDK mirror remains tree
+`77817f12308e29ec8bf77dc6fe56786e65ff9e08`. Derived `libMappings.rsp` is
+byte-identical to the filtered starting baseline, SHA256
+`BE92DDDD387279BEA0BDF8F3D838B1466A5465A694BFFB6B6FAAE94447F9EC7A`.
+Final CI acceptance is a separate mandatory gate: the
+[draft review report](https://github.com/microsoft/win32metadata/pull/2367)
+records the exact review head, actual checkout commit/tree, green run, downloaded
+artifact and independent artifact grade. A documentation-only review head is not
+the local emission producer, and this local receipt is not CI provenance.
 
 The existing image helper now relocates a copied frozen traversal map to its
 owning worktree and prepared headers. It verifies one original SDK project root,
