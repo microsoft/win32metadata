@@ -216,7 +216,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | --- | --- | --- |
 | `SetLastError` / P/Invoke `SupportsLastError` | `_Win32_SetLastError_` | Function. No existing SAL annotation means that an API sets thread last error; sets the ECMA-335 P/Invoke flag. |
 | P/Invoke module override | `_Win32_ImportLibrary_("name.dll")` | Function. Overrides import-library scan results. |
-| `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below, or a [proposed scoped default](#scoped-supportedos-defaults-proposed) | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. An explicit declaration annotation overrides scoped defaults. |
+| `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below, or `_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` for a [scoped default](#scoped-supportedos-defaults) | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. An explicit declaration annotation overrides scoped defaults. |
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
@@ -263,7 +263,7 @@ _Windows_SupportedOS_Server2016_
 
 New versions require a reviewed entry in the canonical version table and the
 corresponding fixed macro, rather than a free-form version on individual declarations
-or scopes. The proposed scope lookup must share that table, not introduce a divergent
+or scopes. The scope lookup must share that table, not introduce a divergent
 version menu.
 
 Existing compiler/SAL facts remain the preferred source for attributes already expressed
@@ -271,27 +271,28 @@ by native syntax, including `noreturn`, architecture guards, alignment, native t
 identity, bitfields, UUIDs, packing, parameter direction, optionality, and array sizes.
 The custom annotations are fallbacks where existing syntax is absent or wrong.
 
-### Scoped SupportedOS defaults (proposed)
+### Scoped SupportedOS defaults
 
-`_Windows_SupportedOS_BEGIN_(WindowsVista)` pushes an authored supported-OS default;
-`_Windows_SupportedOS_END_()` pops it and restores the enclosing default. Nested scopes
+`_Win32_SupportedOS_BEGIN_(WindowsVista)` pushes an authored supported-OS default;
+`_Win32_SupportedOS_END_()` pops it and restores the enclosing default. Nested scopes
 override, rather than combine, defaults. An explicit per-declaration
 `_Windows_SupportedOS_*_` annotation wins over every scoped default. The innermost
 applicable scope wins otherwise, not the greatest version.
 
-This is a proposed authoring and reader contract, not current end-to-end reader
-support. Scopes factor reviewed availability facts already being migrated; grouping
+Implementations must provide end-to-end reader resolution before enabling scope
+authoring. Scopes factor reviewed availability facts already being migrated; grouping
 declarations must not infer new OS floors. The emitted annotation remains the existing
 `SupportedOSPlatform` payload; no new emitted metadata schema or runtime attribute is
 required.
 
 #### Macro definition
 
-The generic `BEGIN` argument is a token from the existing menu, without the
-`_Windows_SupportedOS_` prefix or trailing underscore. This definition illustrates the
-Vista and Windows7 entries of the shared canonical version table, including their
-unchanged per-declaration spellings. The complete table must retain the other reviewed
-entries above. `_WIN32META_ANNOTATION_` is the existing transport helper.
+The `_Win32_SupportedOS_BEGIN_` argument is a token from the existing per-declaration
+menu, without the `_Windows_SupportedOS_` prefix or trailing underscore. This definition
+illustrates the Vista and Windows7 entries of the shared canonical version table,
+including their unchanged per-declaration spellings. The complete table must retain
+the other reviewed entries above. `_WIN32META_ANNOTATION_` is the existing transport
+helper.
 
 ```cpp
 #define _WIN32META_OS_STRINGIFY_RAW(...) #__VA_ARGS__
@@ -309,15 +310,15 @@ entries above. `_WIN32META_ANNOTATION_` is the existing transport helper.
     _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(Windows7))
 
 #if defined(WIN32METADATA) && defined(__clang__)
-#define _Windows_SupportedOS_BEGIN_(os) \
+#define _Win32_SupportedOS_BEGIN_(os) \
     _WIN32META_OS_PRAGMA(clang attribute win32_os.push( \
         __attribute__((annotate(_WIN32META_OS_VERSION(os)))), \
         apply_to = any(function, record, enum, type_alias)))
-#define _Windows_SupportedOS_END_() \
+#define _Win32_SupportedOS_END_() \
     _WIN32META_OS_PRAGMA(clang attribute win32_os.pop)
 #else
-#define _Windows_SupportedOS_BEGIN_(os)
-#define _Windows_SupportedOS_END_()
+#define _Win32_SupportedOS_BEGIN_(os)
+#define _Win32_SupportedOS_END_()
 #endif
 ```
 
@@ -342,17 +343,17 @@ resolution, not a change to native declarations:
 ```cpp
 void ExampleBeforeScope(void); // No scoped default.
 
-_Windows_SupportedOS_BEGIN_(WindowsVista)
+_Win32_SupportedOS_BEGIN_(WindowsVista)
 void ExampleVista(void); // Vista default.
 
-_Windows_SupportedOS_BEGIN_(Windows7)
+_Win32_SupportedOS_BEGIN_(Windows7)
 void ExampleWindows7(void); // Windows7 default.
 _Windows_SupportedOS_Windows8_
 void ExampleExplicitWindows8(void); // Explicit Windows8 wins.
-_Windows_SupportedOS_END_()
+_Win32_SupportedOS_END_()
 
 void ExampleVistaAgain(void); // Vista default restored.
-_Windows_SupportedOS_END_()
+_Win32_SupportedOS_END_()
 
 void ExampleAfterScope(void); // No scoped default.
 ```
@@ -514,7 +515,7 @@ duplicating the complete scan-derived mapping.
 | Existing source | Header representation |
 | --- | --- |
 | `WithSetLastError.rsp` | `_Win32_SetLastError_` on each function. |
-| `supportedOS.rsp` | The matching fixed `_Windows_SupportedOS_*_` macro on the owning declaration, or a reviewed [scoped default](#scoped-supportedos-defaults-proposed) in the owning header after reader support and acceptance coverage exist. |
+| `supportedOS.rsp` | The matching fixed `_Windows_SupportedOS_*_` macro on the owning declaration, or a reviewed [scoped default](#scoped-supportedos-defaults) in the owning header after reader support and acceptance coverage exist. |
 | `libMappingsManual.rsp` | `_Win32_ImportLibrary_`; scanning remains default. |
 | `libMappings.rsp` | Import-library scan, with header override only where needed. |
 | `autoTypes.json` | Move cleanup and invalid-value semantics to producer returns/output parameters; no typedef ownership and no pseudo handles. |
@@ -781,7 +782,7 @@ The windows-rs consumer must:
   constants, and typedefs;
 - preserve repeated attributes;
 - validate annotation names, values, and targets;
-- implement the [proposed scoped SupportedOS reader contract](#reader-obligations)
+- implement the [scoped SupportedOS reader contract](#reader-obligations)
   before enabling scope authoring, normalizing defaults before duplicate/conflict
   validation without weakening explicit assertions;
 - preserve calling conventions and pointer depths unless an explicit metadata annotation
@@ -836,7 +837,7 @@ requires a source syntax, consumer behavior, patch, and regression test.
 5. Keep explicit annotations only for producer ownership/invalid values, retained
    parameters, exact-result behavior, guarded enum associations, and other
    semantics that existing C/C++/SAL/MIDL cannot express.
-6. Gate the proposed scoped SupportedOS form on its reader provenance, normalization,
+6. Gate the scoped SupportedOS form on its reader provenance, normalization,
    diagnostics, and [acceptance coverage](#future-acceptance-coverage); macro transport
    alone is not sufficient to migrate declarations to scopes.
 
