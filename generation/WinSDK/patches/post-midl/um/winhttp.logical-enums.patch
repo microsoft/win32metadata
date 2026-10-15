@@ -72,7 +72,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 +    IN _Win32_AssociatedEnum_(WINHTTP_OPEN_REQUEST_FLAGS) DWORD dwFlags
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 @@ -2594,6 +2594,102 @@
  #endif
  

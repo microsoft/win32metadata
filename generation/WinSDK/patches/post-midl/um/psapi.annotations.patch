@@ -14,7 +14,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #endif
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -25,7 +25,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -36,7 +36,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -57,7 +57,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -68,7 +68,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -79,7 +79,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  _Success_(return != 0)
  _Ret_range_(1, nSize)
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -90,7 +90,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  _Success_(return != 0)
  _Ret_range_(1, nSize)
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -101,7 +101,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  } MODULEINFO, *LPMODULEINFO;
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -112,7 +112,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -123,7 +123,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -134,7 +134,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  } PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -145,7 +145,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -156,7 +156,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -167,7 +167,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -178,7 +178,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #endif // !UNICODE
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -189,7 +189,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -200,7 +200,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -211,7 +211,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #endif // !UNICODE
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -222,7 +222,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -233,7 +233,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #endif
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -244,7 +244,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -255,7 +255,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #endif
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -266,7 +266,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -277,7 +277,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -288,7 +288,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -299,7 +299,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
@@ -310,7 +310,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
      );
  
 +#if PSAPI_VERSION == 1
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD

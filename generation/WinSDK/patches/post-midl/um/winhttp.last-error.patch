@@ -4,7 +4,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1586,6 +1586,7 @@
  //
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  WINHTTP_STATUS_CALLBACK
@@ -12,7 +12,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1598,6 +1599,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -20,7 +20,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1608,6 +1610,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -28,7 +28,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1618,6 +1621,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -36,7 +36,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1631,6 +1635,7 @@
  
  _Success_(return != FALSE)
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -44,14 +44,14 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1649,11 +1654,14 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
  
@@ -59,7 +59,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1663,6 +1671,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
@@ -67,7 +67,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1676,6 +1685,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -75,7 +75,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1685,6 +1695,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
@@ -83,7 +83,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1697,6 +1708,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -91,7 +91,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1723,6 +1735,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -99,7 +99,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1735,6 +1748,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -107,7 +107,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1746,6 +1760,7 @@
  
  _Success_(return != FALSE)
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -115,7 +115,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1758,6 +1773,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -123,7 +123,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1785,6 +1801,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -131,7 +131,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1826,6 +1843,7 @@
  //
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
@@ -139,7 +139,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1841,6 +1859,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -147,7 +147,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1868,6 +1887,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -155,7 +155,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1883,6 +1903,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -163,7 +163,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1904,6 +1925,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -171,7 +171,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1938,6 +1960,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -179,7 +179,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1949,6 +1972,7 @@
  
  _Success_(return != FALSE)
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -187,7 +187,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -2005,6 +2029,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -195,7 +195,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -2015,6 +2040,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -203,7 +203,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -2108,6 +2134,7 @@
  );
  
- _Windows_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
@@ -211,7 +211,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -2215,6 +2242,7 @@
  #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
  
- _Windows_SupportedOS_Windows8_
+ _Win32_SupportedOS_Windows8_
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET

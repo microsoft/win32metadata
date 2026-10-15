@@ -13,25 +13,25 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h b/generation/WinSDK
      WCHAR               UserName[MAX_PATH];
  } UAL_DATA_BLOB, *PUAL_DATA_BLOB;
  
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  HRESULT
  WINAPI
  UalStart(
      _In_ PUAL_DATA_BLOB Data);
  
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  HRESULT
  WINAPI
  UalStop(
      _In_ PUAL_DATA_BLOB Data);
      
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  HRESULT
  WINAPI
  UalInstrument(
      _In_ PUAL_DATA_BLOB Data);
      
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  HRESULT
  WINAPI
  UalRegisterProduct(

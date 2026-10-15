@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  
  /****** Shapshot function **********************************************/
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  HANDLE
  WINAPI
@@ -27,7 +27,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  #define HF32_DEFAULT      1  // process's default heap
  #define HF32_SHARED       2  // is shared heap
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -36,7 +36,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPHEAPLIST32 lphl
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -54,7 +54,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  #define LF32_FREE     0x00000002
  #define LF32_MOVEABLE 0x00000004
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -63,7 +63,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      ULONG_PTR th32HeapID
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -71,7 +71,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPHEAPENTRY32 lphe
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
  BOOL
  WINAPI
  Toolhelp32ReadProcessMemory(
@@ -79,7 +79,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
  typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -88,7 +88,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPPROCESSENTRY32W lppe
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -97,7 +97,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  typedef PROCESSENTRY32 *  PPROCESSENTRY32;
  typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -106,7 +106,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPPROCESSENTRY32 lppe
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -115,7 +115,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  typedef THREADENTRY32 *  PTHREADENTRY32;
  typedef THREADENTRY32 *  LPTHREADENTRY32;
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -124,7 +124,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPTHREADENTRY32 lpte
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -133,7 +133,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  typedef MODULEENTRY32W *  PMODULEENTRY32W;
  typedef MODULEENTRY32W *  LPMODULEENTRY32W;
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -142,7 +142,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPMODULEENTRY32W lpme
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -151,7 +151,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  // in th32ProcessID's process context.
  //
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -160,7 +160,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
      LPMODULEENTRY32 lpme
      );
  
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI

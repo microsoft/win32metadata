@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_
++_Win32_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -22,7 +22,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -31,7 +31,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsXP_
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -40,7 +40,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_Windows2000_
++_Win32_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -49,7 +49,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != TIME_ZONE_ID_INVALID)
-+_Windows_SupportedOS_Windows2000_
++_Win32_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  DWORD
  WINAPI
@@ -58,7 +58,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
      );
  
  WINBASEAPI
-+_Windows_SupportedOS_Windows2000_
++_Win32_SupportedOS_Windows2000_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -67,7 +67,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  #if (_WIN32_WINNT >= 0x0600)
  
  WINBASEAPI
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -76,7 +76,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != TIME_ZONE_ID_INVALID)
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  DWORD
  WINAPI
@@ -85,7 +85,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  #if (_WIN32_WINNT >= 0x0601)
  
  _Success_(return != FALSE)
-+_Windows_SupportedOS_WindowsVista_
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -94,7 +94,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  DWORD
  WINAPI
  EnumDynamicTimeZoneInformation(
@@ -102,7 +102,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return == ERROR_SUCCESS)
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_Windows8_
  DWORD
  WINAPI
  GetDynamicTimeZoneInformationEffectiveYears(
@@ -110,7 +110,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_Windows7_
++_Win32_SupportedOS_Windows7_
 +_Win32_SetLastError_
  BOOL
  WINAPI
@@ -119,7 +119,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generatio
  
  WINBASEAPI
  _Success_(return != FALSE)
-+_Windows_SupportedOS_Windows7_
++_Win32_SupportedOS_Windows7_
 +_Win32_SetLastError_
  BOOL
  WINAPI
