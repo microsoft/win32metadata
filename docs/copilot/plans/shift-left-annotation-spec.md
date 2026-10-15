@@ -370,38 +370,6 @@ file and include instance, not merely the file where its replacement text was sp
 Pair every `BEGIN` and `END` within the same file and include instance, balanced in
 each active preprocessing path; an included file cannot pop its caller's scope.
 
-#### Reader obligations
-
-Macro expansion alone does not implement default precedence. Raw Clang pushes
-accumulate attributes, and a declaration's explicit attribute does not override them.
-Pragma-injected attributes are not implicit, so `IsImplicit` cannot identify scoped
-defaults. Raw defaults also reach declarations in included headers, and inherited
-attributes persist across redeclarations.
-
-1. Track scope and attribute provenance through include instances, macro expansions,
-   and canonical redeclarations. Filename-plus-offset matching or regex scanning alone
-   is insufficient. Recognize the owned `BEGIN` and `END` macros as scope controls,
-   including classifying `END` so annotation-name validation does not reject it.
-2. Before duplicate/conflict validation, normalize synthetic scope applications to the
-   applicable innermost default and explicit precedence. Discard foreign-file scope
-   applications only when their provenance proves them synthetic; never discard genuine
-   explicit annotations, including those authored through macros or included headers.
-   Preserve existing strict explicit duplicate, value, and target assertions.
-3. Resolve each canonical entity independently of parse order or numeric version
-   comparison. One consistent explicit value across its redeclarations overrides
-   defaults; multiple differing explicit values are errors. Without an explicit
-   resolution, differing effective scoped defaults on that entity are errors. An
-   out-of-scope redeclaration contributes no default and does not negate a previously
-   scoped fact. Inherited copies must not become new explicit facts or hide conflicts.
-4. Diagnose unknown OS tokens, unmatched pops, unclosed scopes, invalid annotation
-   targets, and genuinely conflicting explicit OS facts with source locations. Emit
-   the single resolved `SupportedOSPlatform` value through the existing winmd path.
-   Declarations without an authored fact remain unannotated.
-
-These rules do not suppress existing native SDK, SAL, or MIDL annotations to preserve
-old winmd omissions. Capture those facts and review their exact metadata differences,
-while preserving native type, layout, calling convention, and vtable behavior.
-
 #### Future acceptance coverage
 
 These are implementation acceptance cases, not completed broad validation. The small
@@ -411,9 +379,8 @@ PCH behavior.
 | Case | Required result |
 | --- | --- |
 | Nesting and explicit precedence | Verify Vista -> Windows7 -> Vista -> no default, plus before/after absence and an explicit later-version annotation inside a scope. Also nest an earlier version inside a later one and use an earlier explicit value: lexical/explicit precedence must win, not greatest-version selection. |
-| Pairing and diagnostics | Cover active/inactive conditional paths, unknown tokens, unmatched pops, unclosed scopes, cross-file pairing, invalid targets, and conflicting explicit annotations. Errors retain source locations and strict explicit assertions. |
-| Includes and expansions | Cover transitive and repeated includes, independently scoped included headers, and declaration-producing macros expanded in another file. No caller-default leakage or lost genuine explicit annotations; preserve include-instance provenance. |
-| Redeclarations | Cover matching and differing defaults, consistent and conflicting explicit values, inherited attributes, and scoped/out-of-scope declarations in both parse orders. A consistent explicit value resolves defaults; unresolved differing defaults fail; absence does not erase a fact. |
+| Pairing and diagnostics | Cover active/inactive conditional paths, unknown tokens, unmatched pops, unclosed scopes, cross-file pairing, invalid targets, and conflicting explicit annotations. Errors retain source locations. |
+| Includes and expansions | Cover transitive and repeated includes, independently scoped included headers, and declaration-producing macros expanded in another file. No caller-default leakage or lost genuine explicit annotations. |
 | Declaration shapes | Cover C and C++ functions, records, enums, genuine typedefs/callbacks, eligible nested types, and COM methods, without inferring member inheritance from a container annotation. Do not count AST-only C++ `using` coverage as reader support. |
 | Native no-op behavior | Compile ordinary C/C++ with MSVC with and without `WIN32METADATA`, and Clang without it. Preserve native types, layouts, calling conventions, symbols, and vtables. |
 | Final metadata | Read back effective annotations and required absence from final x86, x64, and ARM64 winmds, including COM methods and callbacks. Validate full-SDK and PCH/include reuse separately rather than extrapolating from a small fixture. |
@@ -782,9 +749,6 @@ The windows-rs consumer must:
   constants, and typedefs;
 - preserve repeated attributes;
 - validate annotation names, values, and targets;
-- implement the [scoped SupportedOS reader contract](#reader-obligations)
-  before enabling scope authoring, normalizing defaults before duplicate/conflict
-  validation without weakening explicit assertions;
 - preserve calling conventions and pointer depths unless an explicit metadata annotation
   changes the emitted type;
 - resolve canonical callback aliases consistently at declarations and references;
@@ -837,9 +801,6 @@ requires a source syntax, consumer behavior, patch, and regression test.
 5. Keep explicit annotations only for producer ownership/invalid values, retained
    parameters, exact-result behavior, guarded enum associations, and other
    semantics that existing C/C++/SAL/MIDL cannot express.
-6. Gate the scoped SupportedOS form on its reader provenance, normalization,
-   diagnostics, and [acceptance coverage](#future-acceptance-coverage); macro transport
-   alone is not sufficient to migrate declarations to scopes.
 
 ### Phase 2: complete windows-rs source fidelity
 
