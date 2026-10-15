@@ -15,9 +15,9 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, Dictionary<string, string> importEntryPoints = null)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, importEntryPoints ?? new Dictionary<string, string>());
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
@@ -35,6 +35,7 @@ namespace ClangSharpSourceToWinmd
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private Dictionary<string, string> staticLibs;
+            private Dictionary<string, string> importEntryPoints;
             private Dictionary<string, string> apiNamesToNamespaces;
             private HashSet<string> visitedDelegateNames = new HashSet<string>();
             private HashSet<string> visitedStaticMethodNames = new HashSet<string>();
@@ -43,8 +44,9 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, Dictionary<string, string> importEntryPoints)
             {
+                this.importEntryPoints = importEntryPoints;
                 this.remaps = remaps;
                 this.InitRegexRemaps();
 
@@ -662,6 +664,12 @@ namespace ClangSharpSourceToWinmd
                     node = node.AddAttributeLists(attributeList);
                 }
 
+                // Import by the native entry point (e.g. "#7" for an ordinal-only export) while keeping the callable name.
+                if (dllImportAttr != null && this.importEntryPoints.TryGetValue(name.Replace("____1", string.Empty).Replace("____2", string.Empty), out string entryPoint))
+                {
+                    node = SetDllImportEntryPoint(node, entryPoint);
+                }
+
                 // Add the StaticLibrary attribute if one was specified for this DLL.
                 if (!string.IsNullOrEmpty(dllName) && this.staticLibs.TryGetValue(dllName, out string staticLib))
                 {
@@ -695,6 +703,31 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return node;
+            }
+
+            private static MethodDeclarationSyntax SetDllImportEntryPoint(MethodDeclarationSyntax node, string entryPoint)
+            {
+                AttributeSyntax dllImport = SyntaxUtils.GetAttribute(node.AttributeLists, "DllImport");
+                if (dllImport?.ArgumentList == null)
+                {
+                    return node;
+                }
+
+                AttributeArgumentSyntax[] keptArguments = dllImport.ArgumentList.Arguments
+                    .Where(a => a.NameEquals?.Name.Identifier.Text != "EntryPoint")
+                    .ToArray();
+
+                AttributeArgumentSyntax entryPointArgument =
+                    SyntaxFactory.AttributeArgument(
+                        SyntaxFactory.NameEquals("EntryPoint"),
+                        null,
+                        SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(entryPoint)));
+
+                AttributeSyntax newDllImport = dllImport.WithArgumentList(
+                    SyntaxFactory.AttributeArgumentList(
+                        SyntaxFactory.SeparatedList(keptArguments.Append(entryPointArgument))));
+
+                return node.ReplaceNode(dllImport, newDllImport);
             }
 
             private static string GetEnclosingNamespace(SyntaxNode node)

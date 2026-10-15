@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -10,19 +10,39 @@ namespace MetadataUtils
     public class ImportInfo
     {
         public ImportInfo(string dll, string procName)
+            : this(dll, procName, null)
+        {
+        }
+
+        public ImportInfo(string dll, string procName, ushort? ordinal)
         {
             this.Dll = dll;
             this.ProcName = procName;
+            this.Ordinal = ordinal;
         }
 
         public string Dll { get; }
+
+        /// <summary>
+        /// Gets the callable (managed) name of the import.
+        /// </summary>
         public string ProcName { get; }
+
+        /// <summary>
+        /// Gets the export ordinal when the DLL exports this symbol by ordinal only; otherwise null.
+        /// </summary>
+        public ushort? Ordinal { get; }
+
+        /// <summary>
+        /// Gets the native entry point to import, either the name or "#ordinal".
+        /// </summary>
+        public string EntryPoint => this.Ordinal.HasValue ? $"#{this.Ordinal.Value}" : this.ProcName;
 
         public override bool Equals(object obj)
         {
             if (obj is ImportInfo other)
             {
-                return this.Dll == other.Dll && this.ProcName == other.ProcName;
+                return this.Dll == other.Dll && this.ProcName == other.ProcName && this.Ordinal == other.Ordinal;
             }
 
             return false;
@@ -30,7 +50,7 @@ namespace MetadataUtils
 
         public override string ToString()
         {
-            return $"{this.ProcName}={this.Dll}";
+            return this.Ordinal.HasValue ? $"{this.ProcName}={this.Dll}#{this.Ordinal.Value}" : $"{this.ProcName}={this.Dll}";
         }
 
         public override int GetHashCode()
@@ -122,7 +142,9 @@ namespace MetadataUtils
                     }
                 }
 
-                yield return new ImportInfo(dllName, procName);
+                ushort? ordinal = importHeader.NameType == NameType.Ordinal ? importHeader.ordinalHint : null;
+
+                yield return new ImportInfo(dllName, procName, ordinal);
             }
         }
 
