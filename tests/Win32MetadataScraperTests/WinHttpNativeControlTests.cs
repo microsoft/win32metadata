@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using ClangSharp.Interop;
 using Xunit;
@@ -30,8 +31,15 @@ namespace Win32MetadataScraperTests
             string root = WinHttpMigrationTests.RepositoryRoot;
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
-            var before = Surface(original);
-            var after = Surface(prepared);
+            string[] headers = partition == "WinHttp" ? new[] { "winhttp.h", "httprequest.h" } : new[] { "winhttp.h", "httprequest.h", "http.h" };
+            const string checks = @"
+static_assert(INTERNET_SCHEME_HTTP == 1);
+static_assert(INTERNET_SCHEME_HTTPS == 2);
+static_assert(INTERNET_SCHEME_FTP == 3);
+static_assert(INTERNET_SCHEME_SOCKS == 4);
+";
+            var before = Surface(root, original, partition, architecture, target, headers, checks);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
             Assert.Equal(61, before.Count(value => value.StartsWith("function WinHttp", StringComparison.Ordinal)));
             Assert.True(before.Count(value => value.StartsWith("field ", StringComparison.Ordinal)) > 50);
             Assert.Contains(before, value => value.StartsWith("typedef LPWINHTTP_STATUS_CALLBACK ", StringComparison.Ordinal));
@@ -49,104 +57,135 @@ namespace Win32MetadataScraperTests
             Assert.Equal(expectedHash, hash);
             this.output.WriteLine($"{partition}/{architecture}: {before.Length} native facts; OLD=NEW SHA256 " +
                 hash);
+        }
 
-            string[] Surface(string includeRoot)
+        [NativeMigrationTheory]
+        [MemberData(nameof(AdditionalPartitions))]
+        public void AdditionalPreparedPartitionsKeepOrdinaryNativeAbi(string partition, string architecture, string target)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "SdkHeaders.json")));
+            var patched = recipe.RootElement.GetProperty("headers").EnumerateArray()
+                .Select(value => Path.GetFileName(value.GetProperty("path").GetString()));
+            var headers = File.ReadLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"))
+                .Where(line => line.StartsWith("<IncludeRoot>/", StringComparison.Ordinal))
+                .Select(line => Path.GetFileName(line.Replace('/', '\\'))).Concat(patched).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            Assert.NotEmpty(headers);
+            var before = Surface(root, original, partition, architecture, target, headers, "");
+            var after = Surface(root, prepared, partition, architecture, target, headers, "");
+            Assert.NotEmpty(before);
+            Assert.Contains(before, value => value.StartsWith("function ", StringComparison.Ordinal) || value.StartsWith("record ", StringComparison.Ordinal));
+            Assert.Equal(before, after);
+            this.output.WriteLine($"{partition}/{architecture}: {before.Length} native facts; OLD=NEW SHA256 " +
+                Convert.ToHexString(SHA256.HashData(Encoding.UTF8.GetBytes(string.Join("\n", before)))));
+        }
+
+        public static IEnumerable<object[]> AdditionalPartitions()
+        {
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "patches", "SdkHeaders.json")));
+            foreach (string partition in recipe.RootElement.GetProperty("partitions").EnumerateArray().Select(value => value.GetString())
+                .Where(value => value != "WinHttp" && value != "HttpServer"))
             {
-                string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
-                var arguments = new List<string>
+                yield return new object[] { partition, "x86", "i686-pc-windows-msvc" };
+                yield return new object[] { partition, "x64", "x86_64-pc-windows-msvc" };
+                yield return new object[] { partition, "arm64", "aarch64-pc-windows-msvc" };
+            }
+        }
+
+        private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
+            string target, string[] headers, string checks)
+        {
+            string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
+            var arguments = new List<string>
                 {
                     "--language=c++", "--std=c++17", "--target=" + target,
                     "--include-directory=" + Path.Combine(root, "generation", "WinSDK", "inc"),
                 };
-                arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
-                    .Select(directory => "--include-directory=" + Path.Combine(includeRoot, directory)));
-                arguments.AddRange((Environment.GetEnvironmentVariable("INCLUDE") ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries)
-                    .Select(directory => "--include-directory=" + directory));
-                string settings = Path.Combine(root, "sources", "GeneratorSdk", "tools", "assets", "scraper");
-                foreach (string path in new[] { Path.Combine(settings, "baseSettings.rsp"), Path.Combine(settings, "baseSettings." + architecture + ".rsp") })
+            arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
+                .Select(directory => "--include-directory=" + Path.Combine(includeRoot, directory)));
+            arguments.AddRange((Environment.GetEnvironmentVariable("INCLUDE") ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries)
+                .Select(directory => "--include-directory=" + directory));
+            string settings = Path.Combine(root, "sources", "GeneratorSdk", "tools", "assets", "scraper");
+            foreach (string path in new[] { Path.Combine(settings, "baseSettings.rsp"), Path.Combine(settings, "baseSettings." + architecture + ".rsp") })
+            {
+                bool additional = false;
+                foreach (string line in File.ReadLines(path).Select(value => value.Trim()).Where(value => value.Length != 0))
                 {
-                    bool additional = false;
-                    foreach (string line in File.ReadLines(path).Select(value => value.Trim()).Where(value => value.Length != 0))
-                    {
-                        if (line.StartsWith("--", StringComparison.Ordinal))
-                            additional = line == "--additional";
-                        else if (additional)
-                            arguments.Add(line);
-                    }
-                }
-                Assert.DoesNotContain(arguments, argument => argument.Contains("WIN32METADATA", StringComparison.Ordinal));
-                using var unsaved = CXUnsavedFile.Create(source, File.ReadAllText(source) + @"
-static_assert(INTERNET_SCHEME_HTTP == 1);
-static_assert(INTERNET_SCHEME_HTTPS == 2);
-static_assert(INTERNET_SCHEME_FTP == 3);
-static_assert(INTERNET_SCHEME_SOCKS == 4);
-");
-                using var index = CXIndex.Create(false, false);
-                Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
-                    new[] { unsaved }, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
-                // Own raw cursors so earlier generator fixtures cannot supply a cached managed AST wrapper.
-                using var unit = handle;
-                for (uint i = 0; i < handle.NumDiagnostics; i++)
-                {
-                    using var diagnostic = handle.GetDiagnostic(i);
-                    Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
-                        diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
-                }
-                var result = new List<string>();
-                // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
-                var anonymous = new Dictionary<string, string>(StringComparer.Ordinal);
-                var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
-                Walk(unit.Cursor, "");
-                return result.Select(value => Regex.Replace(value,
-                    @"\((?:anonymous|unnamed) (?:struct|union|enum) at (?<location>[^)]+:\d+:\d+)\)",
-                    match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]))
-                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
-
-                void Walk(CXCursor cursor, string owner)
-                {
-                    cursor.Location.GetExpansionLocation(out var file, out var line, out var column, out _);
-                    string header = Path.GetFileName(file.ToString());
-                    string childOwner = owner;
-                    var kind = cursor.DeclKind;
-                    bool record = kind is CX_DeclKind.CX_DeclKind_Record or CX_DeclKind.CX_DeclKind_CXXRecord;
-                    bool enumeration = kind == CX_DeclKind.CX_DeclKind_Enum;
-                    string name = Text(cursor.Spelling);
-                    if (record || enumeration)
-                    {
-                        if (name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
-                        {
-                            ordinals.TryGetValue(header, out int ordinal);
-                            ordinals[header] = ordinal + 1;
-                            anonymous[file.ToString().Replace('\\', '/') + ":" + line + ":" + column] = header + ":anonymous#" + ordinal;
-                        }
-                        childOwner = owner + name + "::";
-                    }
-                    if (header is "winhttp.h" or "httprequest.h" || (partition == "HttpServer" && header == "http.h"))
-                    {
-                        if (kind is CX_DeclKind.CX_DeclKind_Function or CX_DeclKind.CX_DeclKind_CXXMethod or
-                            CX_DeclKind.CX_DeclKind_CXXConstructor or CX_DeclKind.CX_DeclKind_CXXDestructor or
-                            CX_DeclKind.CX_DeclKind_CXXConversion or CX_DeclKind.CX_DeclKind_CXXDeductionGuide)
-                            result.Add("function " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling));
-                        else if (kind is CX_DeclKind.CX_DeclKind_Field or CX_DeclKind.CX_DeclKind_ObjCAtDefsField)
-                            result.Add("field " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling) + " " + cursor.OffsetOfField);
-                        else if (record && cursor.IsCompleteDefinition)
-                            result.Add("record " + owner + name + " " + cursor.Type.SizeOf + " " + cursor.Type.AlignOf);
-                        else if (kind == CX_DeclKind.CX_DeclKind_Typedef)
-                            result.Add("typedef " + owner + name + " " + Text(cursor.TypedefDeclUnderlyingType.CanonicalType.Spelling));
-                        else if (enumeration)
-                            result.Add("enum " + owner + name + " " + Text(cursor.EnumDecl_IntegerType.Spelling));
-                        else if (kind == CX_DeclKind.CX_DeclKind_EnumConstant)
-                            result.Add("value " + owner + name + " " + cursor.EnumConstantDeclValue);
-                    }
-                    cursor.VisitChildren((child, parent, data) =>
-                    {
-                        if (child.IsDeclaration || child.IsTranslationUnit)
-                            Walk(child, childOwner);
-                        return CXChildVisitResult.CXChildVisit_Continue;
-                    }, default);
+                    if (line.StartsWith("--", StringComparison.Ordinal))
+                        additional = line == "--additional";
+                    else if (additional)
+                        arguments.Add(line);
                 }
             }
+            Assert.DoesNotContain(arguments, argument => argument.Contains("WIN32METADATA", StringComparison.Ordinal));
+            using var unsaved = CXUnsavedFile.Create(source, File.ReadAllText(source) + checks);
+            using var index = CXIndex.Create(false, false);
+            Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
+                new[] { unsaved }, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
+            // Own raw cursors so earlier generator fixtures cannot supply a cached managed AST wrapper.
+            using var unit = handle;
+            for (uint i = 0; i < handle.NumDiagnostics; i++)
+            {
+                using var diagnostic = handle.GetDiagnostic(i);
+                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
+                    diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+            }
+            var result = new List<string>();
+            // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
+            var anonymous = new Dictionary<string, string>(StringComparer.Ordinal);
+            var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
+            Walk(unit.Cursor, "");
+            return result.Select(value => Regex.Replace(value,
+                @"\((?:anonymous|unnamed) (?:struct|union|enum) at (?<location>[^)]+:\d+:\d+)\)",
+                match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
+            void Walk(CXCursor cursor, string owner)
+            {
+                cursor.Location.GetExpansionLocation(out var file, out var line, out var column, out _);
+                string header = Path.GetFileName(file.ToString());
+                string childOwner = owner;
+                var kind = cursor.DeclKind;
+                bool record = kind is CX_DeclKind.CX_DeclKind_Record or CX_DeclKind.CX_DeclKind_CXXRecord;
+                bool enumeration = kind == CX_DeclKind.CX_DeclKind_Enum;
+                string name = Text(cursor.Spelling);
+                if (record || enumeration)
+                {
+                    if (name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
+                    {
+                        ordinals.TryGetValue(header, out int ordinal);
+                        ordinals[header] = ordinal + 1;
+                        anonymous[file.ToString().Replace('\\', '/') + ":" + line + ":" + column] = header + ":anonymous#" + ordinal;
+                    }
+                    childOwner = owner + name + "::";
+                }
+                if (headers.Contains(header, StringComparer.OrdinalIgnoreCase))
+                {
+                    if (kind is CX_DeclKind.CX_DeclKind_Function or CX_DeclKind.CX_DeclKind_CXXMethod or
+                        CX_DeclKind.CX_DeclKind_CXXConstructor or CX_DeclKind.CX_DeclKind_CXXDestructor or
+                        CX_DeclKind.CX_DeclKind_CXXConversion or CX_DeclKind.CX_DeclKind_CXXDeductionGuide)
+                        result.Add("function " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling));
+                    else if (kind is CX_DeclKind.CX_DeclKind_Field or CX_DeclKind.CX_DeclKind_ObjCAtDefsField)
+                        result.Add("field " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling) + " " + cursor.OffsetOfField);
+                    else if (record && cursor.IsCompleteDefinition)
+                        result.Add("record " + owner + name + " " + cursor.Type.SizeOf + " " + cursor.Type.AlignOf);
+                    else if (kind == CX_DeclKind.CX_DeclKind_Typedef)
+                        result.Add("typedef " + owner + name + " " + Text(cursor.TypedefDeclUnderlyingType.CanonicalType.Spelling));
+                    else if (enumeration)
+                        result.Add("enum " + owner + name + " " + Text(cursor.EnumDecl_IntegerType.Spelling));
+                    else if (kind == CX_DeclKind.CX_DeclKind_EnumConstant)
+                        result.Add("value " + owner + name + " " + cursor.EnumConstantDeclValue);
+                }
+                cursor.VisitChildren((child, parent, data) =>
+                {
+                    if (child.IsDeclaration || child.IsTranslationUnit)
+                        Walk(child, childOwner);
+                    return CXChildVisitResult.CXChildVisit_Continue;
+                }, default);
+            }
             static string Text(CXString text)
             {
                 using (text) return text.ToString();

@@ -129,3 +129,31 @@ smallest decision, or replace the candidate through the agreed selection process
 Do not expand into parser frameworks, consumer features or prolonged speculative
 investigations. Summarize each partition as relocated facts, exact representation
 changes, unchanged native/dependent contracts, and an honest consumer grade.
+
+## Selected follow-on partitions
+
+The bounded follow-on to WinHttp uses these batches in the same migration PR.
+Each batch must pass the preceding producer gates before the next is admitted.
+
+| Batch | Owners | Physical headers |
+| --- | --- | --- |
+| 1 | CEIP, ApplicationVerifier | `windowsceip.h`, `avrfsdk.h` |
+| 2 | MagApi, PsApi1, Time, Ual | `magnification.h`, `psapi.h`, `timezoneapi.h`, `timeprov.h`, `ual.h` |
+| 3 | ToolHelp, UpdateAssessment, SecurityCenter, WinSat | `tlhelp32.h`, `waasapi.h`, `waasapitypes.h`, `iwscapi.h`, `wscapi.h`, `winsatcominterfacei.h` |
+
+The image helper reads the recipe's complete owner/dependent partition list and
+overlays the sources actually produced for those partitions. `Base` and
+`FileHistory` also include batch-1 headers; they remain unconverted dependents.
+`PsApi2` shares `psapi.h` with `PsApi1` and must remain unchanged. A shared
+namespace is not evidence of shared semantic ownership.
+
+Batch 1 relocates the emitted `CeipIsOptedIn` Windows 8.1 floor, independently
+confirmed by its published requirements, while retaining its SDK-derived
+`KERNEL32.dll` binding. `VerifierEnumerateResource` relocates its genuine
+`verifier.dll` override and existing `ResourceType` association; its existing
+`VERIFIER_ENUM_RESOURCE_FLAGS` group retains both names, values, order and
+unsigned 32-bit storage, with `Flags` becoming native `ULONG` plus
+`AssociatedEnum`. That is two additional declaration differences, not a new enum.
+A complete selected-SDK import-library scan found neither verifier entrypoint.
+`VerifierIsPerUserSettingsEnabled` is absent from compiled OLD, so its unused OS
+row is explicitly outside emitted-owner migration accounting and is retained.

@@ -5,6 +5,7 @@ param(
     [string]$BaselineDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\old",
     [string]$OutputDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\new",
     [string]$SelectionDirectory,
+    [string]$ExpectedDifferencesFile = "$PSScriptRoot\..\generation\WinSDK\patches\HeaderAnnotations.expected-differences.txt",
     [switch]$ToolingControl,
     [string]$ToolingControlDirectory
 )
@@ -14,6 +15,7 @@ Set-StrictMode -Version Latest
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..").TrimEnd('\')
 $BaselineDirectory = [IO.Path]::GetFullPath($BaselineDirectory).TrimEnd('\')
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
+$ExpectedDifferencesFile = [IO.Path]::GetFullPath($ExpectedDifferencesFile)
 if (!$SelectionDirectory) {
     $SelectionDirectory = "$OutputDirectory\selection"
 }
@@ -187,12 +189,36 @@ try {
         [IO.File]::WriteAllText("$OutputDirectory\provenance.json", ($receipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
         return [pscustomobject]@{ Winmd = $winmd; Sha256 = $receipt.newWinmdSha256; Provenance = "$OutputDirectory\provenance.json" }
     }
+    $project = "$repo\generation\WinSDK"
+    $recipePath = "$project\patches\SdkHeaders.json"
+    $recipe = Get-Content -LiteralPath $recipePath -Raw | ConvertFrom-Json
+    $partitions = @($recipe.partitions)
+    if (!$partitions.Count -or @($partitions | Sort-Object -Unique).Count -ne $partitions.Count) {
+        throw 'The preparation recipe must list each owner and affected dependent exactly once.'
+    }
+    foreach ($partition in $partitions) {
+        if ($partition -cnotmatch '^[A-Za-z0-9_.]+$' -or !(Test-Path -LiteralPath "$project\Partitions\$partition\main.cpp")) {
+            throw "Invalid selected partition in the preparation recipe: $partition"
+        }
+    }
     $selectedObj = "$SelectionDirectory\obj"
-    $overlays = @('x86\WinHttp.cs', 'x64\WinHttp.cs', 'arm64\WinHttp.cs', 'common\HttpServer.cs')
     $scrapeArguments = @('build', 'generation\WinSDK', '-c', 'Release', '-t:ScrapeHeaders',
-        "-p:ObjDir=$selectedObj", '-p:PartitionFilter=WinHttp%3BHttpServer', '-p:MaxProcessors=2',
+        "-p:ObjDir=$selectedObj", "-p:PartitionFilter=$($partitions -join '%3B')", '-p:MaxProcessors=2',
         '-p:ScanArch=crossarch', '--no-restore', '--verbosity', 'minimal')
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
+    $overlays = @($partitions | ForEach-Object {
+        $partition = $_
+        $sources = @(foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
+            $relative = "$architecture\$partition.cs"
+            if (Test-Path -LiteralPath "$selectedObj\generated\$relative") {
+                $relative
+            }
+        })
+        if (!$sources.Count) {
+            throw "The selected scrape produced no source for $partition."
+        }
+        $sources
+    })
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
     $firstInputs = Get-SelectedInputs $selectedObj $overlays
     [IO.File]::WriteAllText("$OutputDirectory\first-selection.json", ($firstInputs | ConvertTo-Json -Depth 3),
@@ -240,7 +266,7 @@ try {
         !$baselineReductions.SetEquals([string[]]($frozenReductions | Select-Object -Skip 1))) {
         throw 'The baseline discovery inputs do not reproduce the frozen complete pointer-fixup response file.'
     }
-    $remaps = @($baselineRemaps | Where-Object { $_.BaseName -notin @('WinHttp', 'HttpServer') })
+    $remaps = @($baselineRemaps | Where-Object { $_.BaseName -notin $partitions })
     $remaps += @(Get-ChildItem "$selectedObj\scratch" -Recurse -Filter '*.remaps' -File)
     $reduce = Get-PointerReductions $remaps
     [IO.File]::WriteAllLines("$generated\emitter.autoFnPtr.crossarch.generated.rsp",
@@ -253,7 +279,6 @@ try {
     }
     [IO.File]::WriteAllText("$generated\traversedFileToNamespace.rsp",
         $mapping.Replace($oldRoot, $includeRoot), [Text.UTF8Encoding]::new($false))
-    $project = "$repo\generation\WinSDK"
     $constantArguments = @("$repo\bin\Release\net10.0\ConstantsScraper.dll",
         '--headerTextFile', "$generated\ConstantsScraper.header.generated.txt",
         '--scraperOutputDir', $generated,
@@ -273,10 +298,10 @@ try {
         '--no-restore', '--verbosity', 'minimal') "$OutputDirectory\emit.log"
     Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
         '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd,
-        '--knownDiffsFile', "$project\patches\WinHttp.expected-differences.txt") "$OutputDirectory\comparison.log"
+        '--knownDiffsFile', $ExpectedDifferencesFile) "$OutputDirectory\comparison.log"
     Assert-CommittedProducer
     $receipt = [ordered]@{
-        kind = 'winhttp-migration'
+        kind = 'header-annotation-migration'
         baselineToolingCommit = $baseline.toolingCommit
         sdkPackageVersion = $baseline.sdkPackageVersion
         baselineProvenanceSha256 = Get-Sha256 $provenancePath
@@ -284,12 +309,14 @@ try {
         newWinmdSha256 = Get-Sha256 $winmd
         preparedIncludeRoot = $includeRoot
         preparedManifestSha256 = Get-Sha256 ([IO.Path]::Combine([IO.Path]::GetDirectoryName($includeRoot), 'manifest.json'))
+        preparationRecipeSha256 = Get-Sha256 $recipePath
+        selectedPartitions = $partitions
         overlaidHeaderSources = $overlays
         repeatedSelectionInputs = $repeatedInputs
         sourceCommit = $sourceCommit
         toolFiles = $toolFiles
         toolingControl = $ToolingControlDirectory
-        expectedDifferencesSha256 = Get-Sha256 "$project\patches\WinHttp.expected-differences.txt"
+        expectedDifferencesSha256 = Get-Sha256 $ExpectedDifferencesFile
         generatedFiles = @(Get-ChildItem -LiteralPath $generated -Recurse -File | ForEach-Object {
             [ordered]@{ path = [IO.Path]::GetRelativePath($generated, $_.FullName); sha256 = Get-Sha256 $_.FullName }
         })

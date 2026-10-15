@@ -269,7 +269,7 @@ SRM checks; neither is presented as a comprehensive typed metadata equivalence
 oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
 must not appear as new WinHttp migration differences.
 
-`patches\WinHttp.expected-differences.txt` admits exactly 16 declaration differences:
+The WinHttp entries in `patches\HeaderAnnotations.expected-differences.txt` admit exactly 16 declaration differences:
 eight native integer use-site types and eight corresponding `AssociatedEnum`
 additions. Existing logical enum identities, member names, and values are
 preserved. It

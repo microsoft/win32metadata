@@ -1,5 +1,5 @@
-# Same-SDK b5b7b26 OLD to the complete WinHttp header-annotation NEW.
-# Native integer ABI plus eight authored logical-enum relationships.
+# Same-SDK b5b7b26 OLD to the complete header-annotation NEW.
+# Only existing logical-enum use sites become native integers plus AssociatedEnum.
 # Preserve OLD logical scheme members and ordinary native constants.
 # No import, OS, last-error, callback, port, dependent-partition, or value changes.
 Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags) : [In] => [AssociatedEnum(WIN_HTTP_CREATE_URL_FLAGS),In]
@@ -18,3 +18,5 @@ Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_INFO.dwAccessType :  => [Associat
 Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_INFO.dwAccessType...Windows.Win32.Networking.WinHttp.WINHTTP_ACCESS_TYPE => System.UInt32
 Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyScheme :  => [AssociatedEnum(WINHTTP_INTERNET_SCHEME)]
 Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyScheme...Windows.Win32.Networking.WinHttp.WINHTTP_INTERNET_SCHEME => System.Int32
+Windows.Win32.System.ApplicationVerifier.Apis.VerifierEnumerateResource : parameter 2 (Flags) : [In] => [AssociatedEnum(VERIFIER_ENUM_RESOURCE_FLAGS),In]
+Windows.Win32.System.ApplicationVerifier.Apis.VerifierEnumerateResource : parameter 2 (Flags)...Windows.Win32.System.ApplicationVerifier.VERIFIER_ENUM_RESOURCE_FLAGS => System.UInt32

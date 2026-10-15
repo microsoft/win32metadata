@@ -15,11 +15,27 @@
       "sourceSha256": "84D9B00F3AC18FAC5A97DB772FE486CA80BF80BDCF6F46F98CA31D3FD1636F93",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\httprequest.idl",
       "sdkSha256": "671F997E30FF1108FF4C7FB03631B3E4B1CABF05B8A31D14F5E4802D6FA997AE"
+    },
+    {
+      "path": "um\\windowsceip.h",
+      "sourceSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\windowsceip.h",
+      "sdkSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A"
+    },
+    {
+      "path": "um\\avrfsdk.h",
+      "sourceSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\avrfsdk.h",
+      "sdkSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8"
     }
   ],
   "partitions": [
     "WinHttp",
-    "HttpServer"
+    "HttpServer",
+    "CEIP",
+    "ApplicationVerifier",
+    "Base",
+    "FileHistory"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -27,6 +43,8 @@
     "post-midl\\um\\winhttp.callback-alias.patch",
     "post-midl\\um\\winhttp.interior-pointers.patch",
     "post-midl\\um\\winhttp.port-constant-types.patch",
-    "post-midl\\um\\winhttp.logical-enums.patch"
+    "post-midl\\um\\winhttp.logical-enums.patch",
+    "post-midl\\um\\windowsceip.annotations.patch",
+    "post-midl\\um\\avrfsdk.annotations.patch"
   ]
 }

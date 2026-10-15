@@ -31,6 +31,18 @@ namespace Win32MetadataScraperTests
             ("URL_COMPONENTS", "nScheme", "WINHTTP_INTERNET_SCHEME", "Int32"),
             ("WINHTTP_PROXY_RESULT_ENTRY", "ProxyScheme", "WINHTTP_INTERNET_SCHEME", "Int32"),
         };
+        private static readonly EnumUse[] ReviewedEnumUses = Associations
+            .Select(value => new EnumUse(WinHttpNamespace, value.Owner, value.Member, value.Enum, value.Native))
+            .Concat(new[]
+            {
+                new EnumUse("Windows.Win32.System.ApplicationVerifier", "VerifierEnumerateResource", "Flags", "VERIFIER_ENUM_RESOURCE_FLAGS", "UInt32"),
+            }).ToArray();
+        private static readonly string[] AdditionalOwnedMethods =
+        {
+            "CeipIsOptedIn",
+            "VerifierEnumerateResource",
+        };
+        private static readonly string[] AdditionalLogicalEnums = { "VERIFIER_ENUM_RESOURCE_FLAGS" };
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
@@ -81,20 +93,24 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void EveryPhysicalTypeOutsideWinHttpMatchesTheCorrectedToolingControl()
+        public void EveryPhysicalTypeHasOnlyReviewedEnumUseSiteChanges()
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
             var before = Types(control.Reader);
             var after = Types(current.Reader);
             Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            var used = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
-            foreach (var entry in before.Where(entry => !entry.Key.StartsWith(WinHttpNamespace + ".", StringComparison.Ordinal)))
+            foreach (var entry in before)
             {
-                Assert.Equal(SnapshotType(control.Reader, entry.Value), SnapshotType(current.Reader, after[entry.Key]));
-                unchanged++;
+                string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedEnumUses: true, usedEnumSites: used);
+                string actual = SnapshotType(current.Reader, after[entry.Key]);
+                Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
+                unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
             }
-            this.output.WriteLine($"Unmigrated physical type snapshots unchanged: {unchanged}.");
+            Assert.Equal(ReviewedEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
+            this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; only {used.Count} exact native-type/AssociatedEnum sites normalized.");
         }
 
         [MigrationTheory]
@@ -187,27 +203,39 @@ namespace Win32MetadataScraperTests
             var reader = image.Reader;
             Check("WINHTTP_OPEN_REQUEST_FLAGS", "UInt32", true, new Dictionary<string, long>
             {
-                ["WINHTTP_FLAG_BYPASS_PROXY_CACHE"] = 0x100, ["WINHTTP_FLAG_ESCAPE_DISABLE"] = 0x40,
-                ["WINHTTP_FLAG_ESCAPE_DISABLE_QUERY"] = 0x80, ["WINHTTP_FLAG_ESCAPE_PERCENT"] = 4,
-                ["WINHTTP_FLAG_NULL_CODEPAGE"] = 8, ["WINHTTP_FLAG_REFRESH"] = 0x100, ["WINHTTP_FLAG_SECURE"] = 0x800000,
+                ["WINHTTP_FLAG_BYPASS_PROXY_CACHE"] = 0x100,
+                ["WINHTTP_FLAG_ESCAPE_DISABLE"] = 0x40,
+                ["WINHTTP_FLAG_ESCAPE_DISABLE_QUERY"] = 0x80,
+                ["WINHTTP_FLAG_ESCAPE_PERCENT"] = 4,
+                ["WINHTTP_FLAG_NULL_CODEPAGE"] = 8,
+                ["WINHTTP_FLAG_REFRESH"] = 0x100,
+                ["WINHTTP_FLAG_SECURE"] = 0x800000,
             });
             Check("WIN_HTTP_CREATE_URL_FLAGS", "UInt32", false, new Dictionary<string, long>
             {
-                ["ICU_ESCAPE"] = 0x80000000, ["ICU_REJECT_USERPWD"] = 0x4000, ["ICU_DECODE"] = 0x10000000,
+                ["ICU_ESCAPE"] = 0x80000000,
+                ["ICU_REJECT_USERPWD"] = 0x4000,
+                ["ICU_DECODE"] = 0x10000000,
             });
             Check("WINHTTP_ACCESS_TYPE", "UInt32", false, new Dictionary<string, long>
             {
-                ["WINHTTP_ACCESS_TYPE_NO_PROXY"] = 1, ["WINHTTP_ACCESS_TYPE_DEFAULT_PROXY"] = 0,
-                ["WINHTTP_ACCESS_TYPE_NAMED_PROXY"] = 3, ["WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY"] = 4,
+                ["WINHTTP_ACCESS_TYPE_NO_PROXY"] = 1,
+                ["WINHTTP_ACCESS_TYPE_DEFAULT_PROXY"] = 0,
+                ["WINHTTP_ACCESS_TYPE_NAMED_PROXY"] = 3,
+                ["WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY"] = 4,
             });
             Check("WINHTTP_CREDS_AUTHSCHEME", "UInt32", false, new Dictionary<string, long>
             {
-                ["WINHTTP_AUTH_SCHEME_BASIC"] = 1, ["WINHTTP_AUTH_SCHEME_NTLM"] = 2, ["WINHTTP_AUTH_SCHEME_NEGOTIATE"] = 16,
+                ["WINHTTP_AUTH_SCHEME_BASIC"] = 1,
+                ["WINHTTP_AUTH_SCHEME_NTLM"] = 2,
+                ["WINHTTP_AUTH_SCHEME_NEGOTIATE"] = 16,
             });
             Check("WINHTTP_INTERNET_SCHEME", "Int32", false, new Dictionary<string, long>
             {
-                ["WINHTTP_INTERNET_SCHEME_HTTP"] = 1, ["WINHTTP_INTERNET_SCHEME_HTTPS"] = 2,
-                ["WINHTTP_INTERNET_SCHEME_FTP"] = 3, ["WINHTTP_INTERNET_SCHEME_SOCKS"] = 4,
+                ["WINHTTP_INTERNET_SCHEME_HTTP"] = 1,
+                ["WINHTTP_INTERNET_SCHEME_HTTPS"] = 2,
+                ["WINHTTP_INTERNET_SCHEME_FTP"] = 3,
+                ["WINHTTP_INTERNET_SCHEME_SOCKS"] = 4,
             });
             var apis = Type(reader, "Apis", architecture);
             foreach (string name in new[] { "INTERNET_SCHEME_HTTP", "INTERNET_SCHEME_HTTPS", "INTERNET_SCHEME_FTP", "INTERNET_SCHEME_SOCKS" })
@@ -311,6 +339,44 @@ namespace Win32MetadataScraperTests
                 File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", "WinHttp", "settings.rsp")));
         }
 
+        [MigrationFact]
+        public void AdditionalEmittedOwnersHaveNoAuthoredSemanticFallback()
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            var emitted = old.Reader.MethodDefinitions.Select(old.Reader.GetMethodDefinition)
+                .Select(method => old.Reader.GetString(method.Name)).ToHashSet(StringComparer.Ordinal);
+            Assert.All(AdditionalOwnedMethods, name => Assert.Contains(name, emitted));
+            Assert.DoesNotContain("VerifierIsPerUserSettingsEnabled", emitted);
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            foreach (string file in new[] { "libMappingsManual.rsp", "scraper.settings.rsp", "supportedOS.rsp",
+                "WithSetLastError.rsp", "emitter.settings.rsp", "ConstantsScraper.settings.rsp" })
+            {
+                foreach (string line in File.ReadLines(Path.Combine(project, file)))
+                {
+                    string target = line.Split('=')[0].Split(new[] { "::" }, StringSplitOptions.None)[0];
+                    Assert.DoesNotContain(target, AdditionalOwnedMethods);
+                    Assert.DoesNotContain(target, AdditionalLogicalEnums);
+                }
+            }
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            foreach (var item in enums.RootElement.GetProperty("items").EnumerateArray())
+            {
+                if (item.TryGetProperty("name", out var name))
+                    Assert.DoesNotContain(name.GetString(), AdditionalLogicalEnums);
+                if (item.TryGetProperty("uses", out var uses))
+                    foreach (var use in uses.EnumerateArray())
+                        if (use.TryGetProperty("method", out var method))
+                            Assert.DoesNotContain(method.GetString(), AdditionalOwnedMethods);
+            }
+            string bindings = File.ReadAllText(Path.Combine(project, "libMappings.rsp"));
+            Assert.Contains("CeipIsOptedIn=KERNEL32.dll", bindings);
+            Assert.DoesNotContain("VerifierEnumerateResource=", bindings);
+            Assert.Contains("VerifierIsPerUserSettingsEnabled=SupportedOSPlatform(\"windows6.0.6000\")",
+                File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
+            foreach (string partition in new[] { "CEIP", "ApplicationVerifier" })
+                Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
+        }
+
         [Theory]
         [InlineData("valid")]
         [InlineData("missing-type")]
@@ -389,12 +455,28 @@ namespace Win32MetadataScraperTests
                 .Select(reader.GetTypeDefinition)
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
-        internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false)
+        internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
+            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null)
         {
-            string Attributes(CustomAttributeHandleCollection values) => string.Join(",", values.Select(handle =>
-                AttributeTypeName(reader, handle) + ":" + Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
-                .OrderBy(value => value, StringComparer.Ordinal));
+            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null)
+            {
+                var attributes = values.Select(handle => AttributeTypeName(reader, handle) + ":" +
+                    Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))).ToList();
+                if (associatedEnum != null)
+                {
+                    Assert.DoesNotContain(values, handle => AttributeName(reader, handle) == "AssociatedEnumAttribute");
+                    var value = new BlobBuilder();
+                    value.WriteUInt16(1);
+                    value.WriteSerializedString(associatedEnum);
+                    value.WriteUInt16(0);
+                    attributes.Add(MetadataNamespace + ".AssociatedEnumAttribute:" + Convert.ToHexString(value.ToArray()));
+                }
+                return string.Join(",", attributes.OrderBy(value => value, StringComparer.Ordinal));
+            }
             string Blob(BlobHandle blob) => blob.IsNil ? "" : Convert.ToHexString(reader.GetBlobBytes(blob));
+            string ns = reader.GetString(type.Namespace);
+            string typeName = reader.GetString(type.Name);
+            var uses = normalizeReviewedEnumUses ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
             var rows = new List<string>
             {
                 reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
@@ -403,15 +485,37 @@ namespace Win32MetadataScraperTests
             foreach (var handle in type.GetFields())
             {
                 var field = reader.GetFieldDefinition(handle);
+                string name = reader.GetString(field.Name);
+                string fieldType = field.DecodeSignature(Signatures, null);
+                var use = uses.SingleOrDefault(value => value.Owner == typeName && value.Member == name);
+                if (use != null)
+                {
+                    Assert.Equal(use.Namespace + "." + use.Enum, fieldType);
+                    fieldType = use.Native;
+                    usedEnumSites?.Add(use.Site);
+                }
                 string constant = field.GetDefaultValue().IsNil ? "" :
                     reader.GetConstant(field.GetDefaultValue()).TypeCode + ":" + Blob(reader.GetConstant(field.GetDefaultValue()).Value);
-                rows.Add($"F|{reader.GetString(field.Name)}|{field.Attributes}|{field.DecodeSignature(Signatures, null)}|{field.GetOffset()}|" +
-                    $"{constant}|{Blob(field.GetMarshallingDescriptor())}|{Attributes(field.GetCustomAttributes())}");
+                rows.Add($"F|{name}|{field.Attributes}|{fieldType}|{field.GetOffset()}|" +
+                    $"{constant}|{Blob(field.GetMarshallingDescriptor())}|{Attributes(field.GetCustomAttributes(), use?.Enum)}");
             }
             foreach (var handle in type.GetMethods())
             {
                 var method = reader.GetMethodDefinition(handle);
                 var signature = method.DecodeSignature(Signatures, null);
+                string methodName = reader.GetString(method.Name);
+                var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
+                var parameterTypes = signature.ParameterTypes.ToArray();
+                var parameterEnums = new Dictionary<int, string>();
+                foreach (var use in uses.Where(value => typeName == "Apis" && value.Owner == methodName))
+                {
+                    var parameter = parameters.Single(value => reader.GetString(value.Name) == use.Member);
+                    Assert.True(parameter.SequenceNumber > 0);
+                    Assert.Equal(use.Namespace + "." + use.Enum, parameterTypes[parameter.SequenceNumber - 1]);
+                    parameterTypes[parameter.SequenceNumber - 1] = use.Native;
+                    parameterEnums.Add(parameter.SequenceNumber, use.Enum);
+                    usedEnumSites?.Add(use.Site);
+                }
                 int header = signature.Header.RawValue;
                 if (correctConstructorInstanceBits && reader.GetString(method.Name) == ".ctor" &&
                     !method.Attributes.HasFlag(MethodAttributes.Static) && !signature.Header.IsInstance)
@@ -419,11 +523,14 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(0, header);
                     header |= 0x20;
                 }
-                rows.Add($"M|{reader.GetString(method.Name)}|{method.Attributes}|{method.ImplAttributes}|{Signature(signature, header)}|" +
+                rows.Add($"M|{methodName}|{method.Attributes}|{method.ImplAttributes}|{Signature(signature, header, parameterTypes)}|" +
                     $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes())}");
-                foreach (var parameter in method.GetParameters().Select(reader.GetParameter))
+                foreach (var parameter in parameters)
+                {
+                    string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber));
                     rows.Add($"P|{parameter.SequenceNumber}|{reader.GetString(parameter.Name)}|{parameter.Attributes}|" +
-                        $"{Blob(parameter.GetMarshallingDescriptor())}|{Attributes(parameter.GetCustomAttributes())}");
+                        $"{Blob(parameter.GetMarshallingDescriptor())}|{attributes}");
+                }
             }
             return string.Join("\n", rows);
         }
@@ -520,9 +627,14 @@ namespace Win32MetadataScraperTests
             throw new InvalidDataException("Unsupported type handle: " + handle.Kind);
         }
 
-        private static string Signature(MethodSignature<string> signature, int? header = null)
+        private static string Signature(MethodSignature<string> signature, int? header = null, IEnumerable<string> parameterTypes = null)
             => $"{header ?? signature.Header.RawValue}|{signature.GenericParameterCount}|{signature.RequiredParameterCount}|{signature.ReturnType}|" +
-                string.Join(",", signature.ParameterTypes);
+                string.Join(",", parameterTypes ?? signature.ParameterTypes);
+
+        private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native)
+        {
+            internal string Site => Namespace + "." + Owner + "::" + Member;
+        }
 
         private static Image Open(string variable) => new Image(Environment.GetEnvironmentVariable(variable));
 

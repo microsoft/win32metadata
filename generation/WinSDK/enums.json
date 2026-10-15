@@ -6341,24 +6341,6 @@
     ]
   },
   {
-    "name": "VERIFIER_ENUM_RESOURCE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES"
-      },
-      {
-        "name": "AVRF_ENUM_RESOURCES_FLAGS_SUSPEND"
-      }
-    ],
-    "uses": [
-      {
-        "method": "VerifierEnumerateResource",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "name": "CACHE_CONFIG",
     "members": [
       {
