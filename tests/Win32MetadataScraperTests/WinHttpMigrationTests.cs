@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using System.Text.Json;
 using Xunit;
 using Xunit.Abstractions;
@@ -100,6 +101,15 @@ namespace Win32MetadataScraperTests
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
+        [Fact]
+        public void HeaderPatchAvailabilityUsesCanonicalPublicMacros()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "SdkHeaders.json")));
+            foreach (string patch in recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()))
+                Assert.DoesNotContain("_Windows_SupportedOS_", File.ReadAllText(Path.Combine(root, patch)));
+        }
+
         [MigrationFact]
         public void CompleteNewImageClosesConstructorsAndFrozenOldDefectIsExplicit()
         {
@@ -165,6 +175,28 @@ namespace Win32MetadataScraperTests
             }
             Assert.Equal(ReviewedEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
             this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; only {used.Count} exact native-type/AssociatedEnum sites normalized.");
+        }
+
+        [MigrationFact("WINHTTP_MIGRATION_ACCEPTED")]
+        public void ScopedSupportedOSPreservesEveryAcceptedPhysicalType()
+        {
+            string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_ACCEPTED");
+            Assert.Equal("A0C321735141D55C98BCD7D048F822AAA0DA1D9434309ABA1782F79C220773BB",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
+            using var accepted = Open("WINHTTP_MIGRATION_ACCEPTED");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(accepted.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (var entry in before)
+            {
+                string expected = SnapshotType(accepted.Reader, entry.Value);
+                string actual = SnapshotType(current.Reader, after[entry.Key]);
+                Assert.True(expected == actual,
+                    $"Scoped SupportedOS changed accepted metadata in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
+            }
+            this.output.WriteLine($"All {before.Count} accepted B9 physical types unchanged; no scope-adoption normalization or allowances.");
         }
 
         [MigrationTheory]
@@ -853,12 +885,14 @@ namespace Win32MetadataScraperTests
 
     public sealed class MigrationFactAttribute : FactAttribute
     {
-        public MigrationFactAttribute()
+        public MigrationFactAttribute(string additionalFixture = null)
         {
             if (Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") == null ||
                 Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_NEW") == null ||
                 Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_TOOLING_CONTROL") == null)
                 Skip = "Set WINHTTP_MIGRATION_OLD, WINHTTP_MIGRATION_NEW and WINHTTP_MIGRATION_TOOLING_CONTROL to the pinned full-image fixtures.";
+            else if (additionalFixture != null && Environment.GetEnvironmentVariable(additionalFixture) == null)
+                Skip = "Set " + additionalFixture + " to the pinned full-image fixture.";
         }
     }
 
