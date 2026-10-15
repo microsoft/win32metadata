@@ -15,7 +15,7 @@ stages:
   jobs:
   - deployment: create
     pool:
-      vmImage: windows-2019
+      vmImage: windows-2025-vs2026
     environment: No-Approval 2
     strategy:
       runOnce:
@@ -51,7 +51,7 @@ stages:
   jobs:
   - deployment: push
     pool:
-      vmImage: windows-2019
+      vmImage: windows-2025-vs2026
     environment: No-Approval 2
     strategy:
       runOnce:
@@ -70,4 +70,3 @@ stages:
               }
             displayName: Push packages to nuget.org
             workingDirectory: $(Pipeline.Workspace)/win32metadata
-

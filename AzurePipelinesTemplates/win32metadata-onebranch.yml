@@ -156,11 +156,19 @@ stages:
         RepoDirectory: ${{ parameters.RepoDirectory }}
 
     - task: PowerShell@2
-      displayName: Set up VS environment
+      displayName: Resolve VS installation
       inputs:
         targetType: 'inline'
         script: |
-          & "C:\Program Files\Microsoft Visual Studio\2022\Enterprise\Common7\Tools\VsDevCmd.bat"
+          $vsPath = & "$(Build.SourcesDirectory)\${{parameters.RepoDirectory}}\scripts\Get-VSPath.ps1"
+          Write-Host "##vso[task.setvariable variable=VisualStudioPath]$vsPath"
+        pwsh: true
+
+    - task: BatchScript@1
+      displayName: Set up VS environment
+      inputs:
+        filename: '$(VisualStudioPath)\Common7\Tools\VsDevCmd.bat'
+        modifyEnvironment: true
 
     - task: UseDotNet@2
       displayName: ⚙ Install SDK from global.json

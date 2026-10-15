@@ -1,6 +1,6 @@
 $vswherePath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
 if (-not (Test-Path $vswherePath)) {
-    throw "Unable to find vswhere.exe. Is VS 2017 15.3 or later installed? Use $PSScriptRoot\Install-VS.ps1 to acquire VS with the required components."
+    throw "Unable to find vswhere.exe. Is Visual Studio 2026 installed? Use $PSScriptRoot\Install-VS.ps1 to acquire VS with the required components."
     exit 1
 }
 
@@ -19,7 +19,7 @@ if ($lastexitcode -eq 87) {
     $vswhere = [xml]$output
 }
 if ($vswhere.instances.length -eq 0) {
-    throw "No VS installation detected that has all the required workloads installed ($workloadsRequired). Use $PSScriptRoot\Install-VS.ps1 to acquire VS with the required components."
+    throw "No Visual Studio 2026 installation detected that has all the required workloads installed ($workloadsRequired). Use $PSScriptRoot\Install-VS.ps1 to acquire VS with the required components."
     exit 2
 }
 

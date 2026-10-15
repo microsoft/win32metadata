@@ -34,6 +34,13 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Set up your development environment
 
+Builds require Visual Studio 2026 with the `v145` C++ tools for x86, x64 and ARM64,
+Windows SDK 10.0.26100, the .NET 10 SDK selected by `global.json`, and PowerShell 7.
+The .NET 8 runtime is also installed for build-tool compatibility. VS 2022 and its
+older C++ toolsets are not required. Windows CI uses `windows-2025-vs2026`; callers
+of the shared OneBranch templates must likewise provide an image with VS 2026
+and the components listed in `scripts\Get-RequiredWorkloads.ps1`.
+
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run `winget configure configurations\configuration.dsc.yaml` from the repo root
 * Run a [full build](#Full-builds)

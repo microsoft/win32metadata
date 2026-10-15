@@ -86,7 +86,7 @@ jobs:
     name: 'Scrape headers: ${{ matrix.arch }}'
     needs: [changes]
     if: needs.changes.outputs.build_needed == 'true'
-    runs-on: windows-2022
+    runs-on: windows-2025-vs2026
     timeout-minutes: 60
 
     strategy:

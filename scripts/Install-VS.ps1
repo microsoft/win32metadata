@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-    Installs VS or modifies an existing installation such that it includes all the required components to build this repo.
+    Installs Visual Studio 2026 or modifies an existing VS 2026 installation to include all required components.
 .PARAMETER VSInstallPath
     The path to the VS install to modify. This should be the root path (not including the Common7 directory).
     Should not be used in combination with -Nickname. If neither is specified, the 'latest' install of VS is modified.
@@ -28,11 +28,6 @@ $VSInstallPath = $VSInstallPath.TrimEnd('\')
 $installerArgs = @()
 
 $vsInstallerPath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vs_installer.exe"
-if (!(Test-Path $vsInstallerPath)) {
-    $vsInstallerPath = "$env:TEMP\vs_enterprise.exe"
-    (New-Object System.Net.WebClient).DownloadFile("https://aka.ms/vs/17/release/vs_enterprise.exe", $vsInstallerPath)
-}
-
 $vswherePath = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
 if (Test-Path $vswherePath) {
     $vswhereArgs = & "$PSScriptRoot\Get-VSWhereBaseArgs.ps1"
@@ -51,6 +46,11 @@ if (Test-Path $vswherePath) {
     }
 
     $vsInstallPath = $vsInstallInstance.installationPath
+}
+
+if (!$vsInstallPath -or !(Test-Path $vsInstallerPath)) {
+    $vsInstallerPath = "$env:TEMP\vs2026_enterprise.exe"
+    (New-Object System.Net.WebClient).DownloadFile("https://aka.ms/vs/18/release/vs_enterprise.exe", $vsInstallerPath)
 }
 
 if ($vsInstallPath) {

@@ -15,7 +15,7 @@ stages:
   jobs:
   - deployment: push
     pool:
-      vmImage: windows-2019
+      vmImage: windows-2025-vs2026
     environment: No-Approval 2
     strategy:
       runOnce:

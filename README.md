@@ -78,8 +78,9 @@ linker version is a packaging guard, not a definitive determination of the
 minimum runtime supported by every native code path. Keep the selected runtime
 compatible with the native dependencies' actual build toolchain.
 
-The CI build/package jobs use `windows-2025-vs2026` to supply that redistributable;
-the header-scraping jobs remain on `windows-2022`. Package-backed
+Windows CI and release jobs use `windows-2025-vs2026`. Native samples and test
+fixtures use the VS 2026 `v145` toolset; local VS discovery requires VS 2026.
+Package-backed
 [integration tests](CONTRIBUTING.md#winmdgenerator-package-integration-tests)
 restore the just-built SDK from an isolated local feed and exercise its normal
 MSBuild pipeline.

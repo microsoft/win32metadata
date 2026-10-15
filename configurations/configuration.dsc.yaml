@@ -4,21 +4,22 @@ properties:
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       id: vsPackage
       directives:
-        description: Install Visual Studio 2022 Community
+        description: Install Visual Studio 2026 Community
         allowPrerelease: true
       settings:
-        id: Microsoft.VisualStudio.2022.Community
+        id: Microsoft.VisualStudio.Community
         source: winget
     - resource: Microsoft.VisualStudio.DSC/VSComponents
       dependsOn:
         - vsPackage
       directives:
-        description: Install Visual Studio 2022 Community Components
+        description: Install Visual Studio 2026 Community Components
         allowPrerelease: true
       settings:
         productId: Microsoft.VisualStudio.Product.Community
-        channelId: VisualStudio.17.Release
+        channelId: VisualStudio.18.Release
         components:
+          - Microsoft.NetCore.Component.Runtime.10.0
           - Microsoft.NetCore.Component.Runtime.8.0
           - Microsoft.NetCore.Component.SDK
           - Microsoft.VisualStudio.Component.VC.Tools.ARM64
@@ -27,10 +28,10 @@ properties:
         includeRecommended: true
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:
-        description: Install .NET 8 SDK
+        description: Install .NET 10 SDK
         allowPrerelease: true
       settings:
-        id: Microsoft.DotNet.SDK.8
+        id: Microsoft.DotNet.SDK.10
         source: winget
     - resource: Microsoft.WinGet.DSC/WinGetPackage
       directives:

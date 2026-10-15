@@ -25,7 +25,7 @@ jobs:
   displayName: "Scrape headers: x64"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2022
+    vmImage: windows-2025-vs2026
   workspace:
     clean: all
 
@@ -63,7 +63,7 @@ jobs:
   displayName: "Scrape headers: x86"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2022
+    vmImage: windows-2025-vs2026
   workspace:
     clean: all
   steps:
@@ -91,7 +91,7 @@ jobs:
   displayName: "Scrape headers: arm64"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2022
+    vmImage: windows-2025-vs2026
   workspace:
     clean: all
   steps:
