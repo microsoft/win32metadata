@@ -1,6 +1,6 @@
 # WinHttp header annotations
 
-This pilot moves the functional WinHttp sidecars into reviewed header patches while
+This pilot moves authored functional WinHttp sidecars into reviewed header patches while
 retaining the C# scraper/emitter and the matched ClangSharp 21 stack. It is a separate
 migration layer above the tooling PR, not a replacement for that tooling. No other
 partition is migrated.
@@ -24,13 +24,13 @@ another owner's checkout.
 | --- | --- |
 | Three method parameters and five struct fields use native integers | For example, `WinHttpOpenRequest::dwFlags` changes from `WINHTTP_OPEN_REQUEST_FLAGS` to `UInt32`; `URL_COMPONENTS::nScheme` changes from `WINHTTP_INTERNET_SCHEME` to `Int32`. Native width, calling convention, and layout are unchanged. |
 | Eight `AssociatedEnum` additions at those same sites | Preserve the logical relationship for a capable consumer; not eight additional APIs. |
-| Import, OS, last-error, buffer, port, and callback facts relocated | Existing final contracts stay unchanged; the matching legacy semantics are removed. |
+| OS, last-error, buffer, port, and callback facts relocated | Existing final contracts stay unchanged; the matching authored legacy semantics are removed. SDK-scanned import bindings remain derived inputs. |
 | Zero added/removed enum types, members, or API symbols | The five logical groups already exist in OLD. Native scheme macros remain in the ordinary header, not as newly manufactured WinHttp winmd constants. |
 | Fresh CsWin32 experience: unverified | The original C7 prototype measured four scheme-name breaks; this candidate restores the old names, but has not been regenerated against a complete matching frozen consumer closure. |
 
 ## Inputs and ownership
 
-`generation\WinSDK\patches\WinHttp.json` pins SDK CPP `10.0.26100.7705`, the
+`generation\WinSDK\patches\SdkHeaders.json` pins SDK CPP `10.0.26100.7705`, the
 post-MIDL mirror Git tree, exact header preimages, their selected-SDK inputs, and
 patch order. `winhttp.h` is byte-identical to the selected package. The package
 supplies `httprequest.idl`, not `httprequest.h`; the recipe separately pins the
@@ -44,7 +44,13 @@ direct or transitive includes of these headers. WinInet is a semantic dependent:
 its two existing create-URL flag uses refer to the WinHttp-owned enum, and its
 existing `HTTP_VERSION_INFO` exclusion preserves that type's WinHttp ownership.
 
-`Prepare-SdkHeaders.ps1` copies the complete mirror into a private,
+The single project-wide `PrepareSdkHeaders` stage runs before native toolchain
+consumption, including the first `CompileIdls` dependency. Both ordinary and
+partition-filtered direct SDK builds use this same stage; constants depend on
+header scraping and consume the same private root. The orchestration has no
+partition hook or WinHttp default recipe. The project supplies the SDK-wide
+recipe explicitly to the generic `Prepare-SdkHeaders.ps1` script, which copies
+the complete mirror into a private,
 content-addressed include tree and applies the ordered post-MIDL patches there.
 It checks SDK/preimage identity, admitted patch targets, source/cache hashes,
 ordinary paths, patch ordering, and strict patch applicability. Publication is
@@ -52,8 +58,9 @@ transactional and serialized; a modified published cache is rejected, not repair
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
 
-The repository project prepares this tree before scraping and uses the same root
-for constants. Changing its identity invalidates both scrape markers. Namespace,
+Changing its identity invalidates the constants marker and every architecture's
+header-scrape marker before any consumer runs. An unchanged identity retains the
+markers. Namespace,
 traversal, architecture, schema, and cross-partition declaration-ownership
 configuration remain build inputs, not replacements for functional annotations.
 
@@ -62,11 +69,12 @@ configuration remain build inputs, not replacements for functional annotations.
 The scraper sees 61 native WinHttp functions; the final OLD winmd emits 59 API
 methods. The other two native declarations lack an import binding and are not
 emitted as APIs. Import-library names alone are not declarations: 20 additional
-WinHttp library-map candidates are outside the emitted scope and remain unmigrated.
+WinHttp library-map candidates are outside the emitted scope. Their SDK-derived
+entries remain in the generated mapping.
 
-| Functional fact | Migrated source | Legacy input removed |
+| Functional fact | Current authority | Authored legacy input removed |
 | --- | --- | --- |
-| 59 DLL bindings | `_Win32_ImportLibrary_("WINHTTP.dll")` | 59 emitted-function `libMappings.rsp` rows |
+| 59 DLL bindings | SDK `.lib` scan in generated `libMappings.rsp` | None: derived scan entries remain; there is no WinHttp header override |
 | 38 OS floors: 27 XP, 11 Windows 8 | Fixed `_Windows_SupportedOS_*_` macros | All 38 WinHttp `supportedOS.rsp` rows |
 | 28 thread-last-error contracts | `_Win32_SetLastError_` | All 28 WinHttp `WithSetLastError.rsp` rows |
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
@@ -77,6 +85,13 @@ WinHttp library-map candidates are outside the emitted scope and remain unmigrat
 
 All 59 bindings independently match the selected SDK's x64 `winhttp.lib`
 (`SHA256 6873F0B8893E8E7BD86CB7A8310631B3FCDE99A85486196FE61CE9F1A352906A`).
+`scripts\CreateProcLibMappingForAllLibs.ps1` generates `libMappings.rsp` from SDK
+libraries. Library scanning is the default import authority, not an authored
+semantic fallback. `_Win32_ImportLibrary_` is reserved for necessary corrections
+to missing/incorrect scan data; none is needed for these 59 APIs. Generic parser
+support and override controls remain unchanged. The six header patches contain
+no `ImportLibrary` annotations, and import entrypoint/module/flags checks remain
+mandatory on all three architectures.
 `WinHttpIsHostInProxyBypassList` and `WinHttpQueryAuthParams` have native declarations
 but no binding in that library or OLD metadata; neither is a final-winmd API, and
 the migration does not invent a binding or synthetic declaration.
@@ -177,11 +192,11 @@ The physical control requires exactly 39 constructor rows in 39 types to gain
 ```powershell
 dotnet build BuildTools -c Release
 .\scripts\Build-WinHttpMigrationImage.ps1 -ToolingControl `
-    -OutputDirectory .\artifacts\winhttp-migration\tooling-control-preserved-names
+    -OutputDirectory .\artifacts\winhttp-migration\tooling-control-review-cleanup
 .\scripts\Build-WinHttpMigrationImage.ps1 `
     -BaselineDirectory .\artifacts\winhttp-migration\old `
-    -OutputDirectory .\artifacts\winhttp-migration\new-preserved-names `
-    -ToolingControlDirectory .\artifacts\winhttp-migration\tooling-control-preserved-names
+    -OutputDirectory .\artifacts\winhttp-migration\new-review-cleanup `
+    -ToolingControlDirectory .\artifacts\winhttp-migration\tooling-control-review-cleanup
 ```
 
 The image builder verifies the frozen inputs and tools, scrapes only WinHttp and
@@ -204,9 +219,9 @@ source, discovery, and expected-difference hashes.
 . .\scripts\CommonUtils.ps1
 Install-VsDevShell
 $env:WINHTTP_MIGRATION_OLD = (Resolve-Path .\artifacts\winhttp-migration\old\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\winhttp-migration\new-preserved-names\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\winhttp-migration\tooling-control-preserved-names\Windows.Win32.winmd).Path
-$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\winhttp-migration\new-preserved-names\selection\obj\prepared-sdk.txt -Raw).Trim()
+$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\winhttp-migration\new-review-cleanup\Windows.Win32.winmd).Path
+$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\winhttp-migration\tooling-control-review-cleanup\Windows.Win32.winmd).Path
+$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\winhttp-migration\new-review-cleanup\selection\obj\prepared-sdk.txt -Raw).Trim()
 dotnet test tests\Win32MetadataScraperTests -c Release `
     --filter "FullyQualifiedName~PreparedSdkHeadersTests|FullyQualifiedName~WinHttpMigrationTests|FullyQualifiedName~WinHttpNativeControlTests" `
     --logger "console;verbosity=normal"
@@ -217,6 +232,10 @@ are not acceptance. Record nonzero executed counts and require no skipped pilot
 legs. Preparation controls cover cache reuse/tampering, preimage/SDK/MIDL mismatch,
 path escapes, unadmitted targets, mode/identity changes, duplicate patches, failed
 transactions, and lock contention.
+SDK-stage controls import the actual project and exercise direct headers/constants,
+with and without a partition filter. Each invocation prepares exactly once before
+the consumers, all consumers observe the same root, cache reuse retains markers,
+and a changed patch invalidates every architecture's marker.
 
 Native controls parse the real WinHttp and HttpServer translation units for
 x86, x64, and ARM64 with metadata disabled, comparing native signatures, calling
@@ -365,9 +384,9 @@ coverage. Enabling `useSafeHandles` does not invent ownership for this scope.
 The original image and receipts remain unchanged as historical evidence; its
 four renames are not carried into the naming-preserved candidate.
 
-## Naming-preserved candidate
+## Naming-preserved candidate before review cleanup (immutable)
 
-The fresh candidate is named `new-preserved-names`, with a separately emitted
+The pre-cleanup candidate is named `new-preserved-names`, with a separately emitted
 `tooling-control-preserved-names`. Its `provenance.json` binds the committed
 producer, prepared-header manifest, exact 16-difference grade, complete generated
 closure, and first/repeated selected inputs. These outputs do not overwrite
@@ -381,7 +400,7 @@ exceptions, rather than changing the producer to manufacture additions.
 Emission and final grading commits are recorded separately; correcting the
 diagnostic policy does not require regenerating unchanged metadata.
 
-| Current evidence | Identity |
+| Pre-cleanup evidence | Identity |
 | --- | --- |
 | Naming-preserved NEW | `368ECA3E68D89BBCAABC0696FAA32E13CBB04F7C92F51C5046440D506A9341B4` |
 | Matching frozen-input tooling control | `9E6D95E42197BE2409807B8F93A27950192D57F455906A8F70F257B1CA6D932B` |

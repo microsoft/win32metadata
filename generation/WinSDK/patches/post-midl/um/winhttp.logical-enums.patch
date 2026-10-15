@@ -46,7 +46,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
      LPSTR lpszHostName;
      DWORD dwPort;
      LPSTR lpszUrl;
-@@ -1649,7 +1649,7 @@
+@@ -1644,7 +1644,7 @@
  WinHttpCreateUrl
  (
      _In_ LPURL_COMPONENTS lpUrlComponents,
@@ -55,7 +55,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
      _Out_writes_to_opt_(*pdwUrlLength, *pdwUrlLength) LPWSTR pwszUrl,
      _Inout_ LPDWORD pdwUrlLength
  );
-@@ -1689,7 +1689,7 @@
+@@ -1680,7 +1680,7 @@
  WinHttpOpen
  (
      _In_opt_z_ LPCWSTR pszAgentW,
@@ -64,7 +64,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
      _In_opt_z_ LPCWSTR pszProxyW,
      _In_opt_z_ LPCWSTR pszProxyBypassW,
      _In_ DWORD dwFlags
-@@ -1876,7 +1876,7 @@
+@@ -1857,7 +1857,7 @@
      IN LPCWSTR pwszVersion,
      IN LPCWSTR pwszReferrer OPTIONAL,
      IN LPCWSTR FAR * ppwszAcceptTypes OPTIONAL,
@@ -72,8 +72,8 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 +    IN _Win32_AssociatedEnum_(WINHTTP_OPEN_REQUEST_FLAGS) DWORD dwFlags
  );
  
- _Win32_ImportLibrary_("WINHTTP.dll")
-@@ -2653,6 +2653,102 @@
+ _Windows_SupportedOS_WindowsXP_
+@@ -2594,6 +2594,102 @@
  #endif
  
  

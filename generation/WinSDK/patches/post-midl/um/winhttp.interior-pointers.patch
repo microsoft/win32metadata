@@ -1,7 +1,7 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-@@ -2026,7 +2026,7 @@
+@@ -1999,7 +1999,7 @@
      _In_ UINT uiCodePage,
      _Inout_opt_ PDWORD pdwIndex,
      _In_opt_ PWINHTTP_HEADER_NAME pHeaderName,

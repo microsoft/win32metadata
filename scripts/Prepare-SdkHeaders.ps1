@@ -2,7 +2,8 @@
 
 [CmdletBinding()]
 param(
-    [string]$Recipe = "$PSScriptRoot\..\generation\WinSDK\patches\WinHttp.json",
+    [Parameter(Mandatory)]
+    [string]$Recipe,
     [string]$SourceRoot = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders",
     [string]$SdkPackageRoot,
     [string]$OutputRoot = "$PSScriptRoot\..\artifacts\prepared-sdk"

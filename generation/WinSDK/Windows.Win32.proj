@@ -46,6 +46,9 @@
 
   <PropertyGroup>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
+    <SdkHeaderRecipe Condition="'$(SdkHeaderRecipe)' == ''">$(MSBuildThisFileDirectory)patches\SdkHeaders.json</SdkHeaderRecipe>
+    <SdkHeaderSourceRoot Condition="'$(SdkHeaderSourceRoot)' == ''">$(SdkIncRoot)</SdkHeaderSourceRoot>
+    <SdkHeaderOutputRoot Condition="'$(SdkHeaderOutputRoot)' == ''">$(RepoRootPath)artifacts\prepared-sdk</SdkHeaderOutputRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
 
@@ -66,8 +69,9 @@
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
 
-  <Target Name="PrepareWinHttpHeaders" BeforeTargets="ScrapeHeaders">
-    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1').IncludeRoot&quot;"
+  <Target Name="PrepareSdkHeaders" BeforeTargets="CompileIdls">
+    <Message Text="Preparing SDK headers..." Importance="high" />
+    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)').IncludeRoot&quot;"
           ConsoleToMSBuild="true" StandardOutputImportance="low">
       <Output TaskParameter="ConsoleOutput" ItemName="_PreparedSdkIncludeRoot" />
     </Exec>
@@ -81,8 +85,11 @@
     </PropertyGroup>
     <Error Condition="'$(SdkIncRoot)' != '@(_PreparedSdkIncludeRoot)'"
            Text="SdkIncRoot must use the pinned prepared headers returned by Prepare-SdkHeaders.ps1." />
-    <Delete Files="$(ScrapedHeadersMarker);$(ScrapedConstantsMarker)"
-            Condition="'@(_PreviousSdkIncludeRoot)' != '$(SdkIncRoot)'" />
+    <ItemGroup Condition="'@(_PreviousSdkIncludeRoot)' != '$(SdkIncRoot)'">
+      <_StaleSdkScrapeMarker Include="$(GeneratedDir)\scannedheaders.*.txt;$(ScrapedConstantsMarker)" />
+    </ItemGroup>
+    <Delete Files="@(_StaleSdkScrapeMarker)" />
+    <MakeDir Directories="$(ObjDir)" />
     <WriteLinesToFile File="$(ObjDir)\prepared-sdk.txt" Lines="$(SdkIncRoot)" Overwrite="true"
                       WriteOnlyWhenDifferent="true" />
   </Target>

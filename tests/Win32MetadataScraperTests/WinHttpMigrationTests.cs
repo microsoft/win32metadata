@@ -259,12 +259,24 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void EmittedWinHttpScopeHasNoLegacySemanticFallback()
+        public void EmittedWinHttpScopeUsesSdkBindingsWithoutAuthoredSemanticFallback()
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");
             string root = RepositoryRoot;
             var names = Methods(old.Reader, WinHttpNamespace, "Apis", 2).Keys.ToHashSet(StringComparer.Ordinal);
-            foreach (string file in new[] { "libMappings.rsp", "libMappingsManual.rsp", "supportedOS.rsp", "WithSetLastError.rsp", "emitter.settings.rsp" })
+            var bindings = File.ReadLines(Path.Combine(root, "generation", "WinSDK", "libMappings.rsp"))
+                .Where(line => line.Contains('=')).Select(line => line.Split('='))
+                .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            Assert.Equal(59, names.Count);
+            foreach (string name in names)
+                Assert.Equal("WINHTTP.dll", bindings[name]);
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "SdkHeaders.json")));
+            var patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString())
+                .Where(path => Path.GetFileName(path).StartsWith("winhttp.", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(6, patches.Length);
+            foreach (string patch in patches)
+                Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", patch)));
+            foreach (string file in new[] { "libMappingsManual.rsp", "supportedOS.rsp", "WithSetLastError.rsp", "emitter.settings.rsp" })
             {
                 foreach (string line in File.ReadLines(Path.Combine(root, "generation", "WinSDK", file)))
                 {

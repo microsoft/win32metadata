@@ -22,7 +22,6 @@
     "HttpServer"
   ],
   "patches": [
-    "post-midl\\um\\winhttp.imports.patch",
     "post-midl\\um\\winhttp.supported-os.patch",
     "post-midl\\um\\winhttp.last-error.patch",
     "post-midl\\um\\winhttp.callback-alias.patch",

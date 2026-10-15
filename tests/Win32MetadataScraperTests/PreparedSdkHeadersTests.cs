@@ -1,8 +1,10 @@
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Xml.Linq;
 using Xunit;
 
 namespace Win32MetadataScraperTests
@@ -146,6 +148,44 @@ namespace Win32MetadataScraperTests
             Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
         }
 
+        [Theory]
+        [InlineData("ScrapeHeaders", "")]
+        [InlineData("ScrapeHeaders", "Sample")]
+        [InlineData("ScrapeConstants", "")]
+        [InlineData("ScrapeConstants", "Sample")]
+        public void OneSdkPreparationPrecedesAllConsumersAndInvalidatesEveryArchitecture(string target, string filter)
+        {
+            using var fixture = new Fixture();
+            string previous = null;
+            for (int pass = 0; pass < 3; pass++)
+            {
+                foreach (string marker in fixture.ScrapeMarkers)
+                {
+                    Directory.CreateDirectory(Path.GetDirectoryName(marker));
+                    File.WriteAllText(marker, "old marker");
+                }
+                if (pass == 2)
+                    fixture.WritePatch(3);
+
+                var result = fixture.RunSdkBuild(target, filter);
+                Assert.True(result.ExitCode == 0, result.Error + result.Output);
+                string[][] events = File.ReadAllLines(fixture.BuildEvents).Select(line => line.Split('|')).ToArray();
+                Assert.Equal(target == "ScrapeConstants" ? new[] { "prepare", "idl", "headers", "constants" } :
+                    new[] { "prepare", "idl", "headers" }, events.Select(entry => entry[0]));
+                string includeRoot = events[0][1];
+                Assert.All(events, entry => Assert.Equal(includeRoot, entry[1]));
+                Assert.NotEqual(Path.GetDirectoryName(Path.GetDirectoryName(fixture.Header)), includeRoot);
+                Assert.Contains(pass == 2 ? "VALUE 3" : "VALUE 2",
+                    File.ReadAllText(Path.Combine(includeRoot, "um", "sample.h")));
+                Assert.All(fixture.ScrapeMarkers, marker => Assert.Equal(pass == 1, File.Exists(marker)));
+                if (pass == 1)
+                    Assert.Equal(previous, includeRoot);
+                if (pass == 2)
+                    Assert.NotEqual(previous, includeRoot);
+                previous = includeRoot;
+            }
+        }
+
         private sealed class Fixture : IDisposable
         {
             internal const string Before = "#ifndef SAMPLE_H\r\n#define SAMPLE_H\r\n#define VALUE 1\r\n#endif\r\n";
@@ -193,6 +233,10 @@ namespace Win32MetadataScraperTests
             internal string Unrelated { get; }
             internal string SdkHeader { get; }
             internal string Output { get; }
+            internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
+            internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
+                "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
+                .Select(name => Path.Combine(this.root, "obj", "generated", name)).ToArray();
 
             internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null)
             {
@@ -254,13 +298,58 @@ namespace Win32MetadataScraperTests
                     " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
                     " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(Output) +
                     " | ConvertTo-Json -Compress");
+                return Execute(start);
+            }
+
+            internal ProcessResult RunSdkBuild(string target, string filter)
+            {
+                File.Delete(BuildEvents);
+                string project = Path.Combine(this.root, "fixture.proj");
+                new XDocument(new XElement("Project",
+                    new XElement("PropertyGroup",
+                        new XElement("RepoRootPath", RepositoryRoot + Path.DirectorySeparatorChar),
+                        new XElement("ObjDir", Path.Combine(this.root, "obj"))),
+                    new XElement("Import", new XAttribute("Project",
+                        Path.Combine(RepositoryRoot, "generation", "WinSDK", "Windows.Win32.proj"))),
+                    new XElement("PropertyGroup",
+                        new XElement("SdkHeaderRecipe", this.recipe),
+                        new XElement("SdkHeaderSourceRoot", this.source),
+                        new XElement("SdkHeaderOutputRoot", Output),
+                        new XElement("SdkHeaderSdkPackageRoot", this.sdk)),
+                    Consumer("CompileIdls", "idl"),
+                    Consumer("ScrapeHeaders", "headers", "CompileIdls"),
+                    Consumer("ScrapeConstants", "constants", "ScrapeHeaders"),
+                    new XElement("Target", new XAttribute("Name", "RecordPreparation"),
+                        new XAttribute("AfterTargets", "PrepareSdkHeaders"), Record("prepare")))).Save(project);
+                var start = new ProcessStartInfo("dotnet")
+                {
+                    WorkingDirectory = RepositoryRoot,
+                    UseShellExecute = false,
+                    CreateNoWindow = true,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                };
+                foreach (string argument in new[] { "msbuild", project, "-nologo", "-v:minimal", "-t:" + target,
+                    "-p:PartitionFilter=" + filter })
+                    start.ArgumentList.Add(argument);
+                return Execute(start);
+
+                XElement Record(string name) => new XElement("WriteLinesToFile",
+                    new XAttribute("File", BuildEvents), new XAttribute("Lines", name + "|$(SdkIncRoot)"));
+
+                XElement Consumer(string name, string label, string dependencies = "") => new XElement("Target",
+                    new XAttribute("Name", name), new XAttribute("DependsOnTargets", dependencies), Record(label));
+            }
+
+            private static ProcessResult Execute(ProcessStartInfo start)
+            {
                 using var process = Process.Start(start);
                 var output = process.StandardOutput.ReadToEndAsync();
                 var error = process.StandardError.ReadToEndAsync();
                 if (!process.WaitForExit(30000))
                 {
                     process.Kill(entireProcessTree: true);
-                    throw new TimeoutException("Header preparation did not terminate.");
+                    throw new TimeoutException("Header preparation/build did not terminate.");
                 }
 
                 return new ProcessResult(process.ExitCode, output.GetAwaiter().GetResult(), error.GetAwaiter().GetResult());
