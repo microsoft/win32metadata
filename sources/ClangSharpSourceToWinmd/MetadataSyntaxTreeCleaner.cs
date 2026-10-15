@@ -15,9 +15,9 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
@@ -42,8 +42,9 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
+            private readonly bool nativeFieldArrayInfo;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo)
             {
                 this.remaps = remaps;
                 this.InitRegexRemaps();
@@ -55,6 +56,7 @@ namespace ClangSharpSourceToWinmd
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
+                this.nativeFieldArrayInfo = nativeFieldArrayInfo;
             }
 
             private void InitRegexRemaps()
@@ -965,7 +967,7 @@ namespace ClangSharpSourceToWinmd
 
             private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList, AttributeSyntax cppAttr)
             {
-                if (cppAttrList.Parent is FieldDeclarationSyntax fieldNode)
+                if (this.nativeFieldArrayInfo && cppAttrList.Parent is FieldDeclarationSyntax fieldNode)
                 {
                     return this.CreateAttributeListForFieldSal(fieldNode, cppAttr);
                 }
@@ -1272,6 +1274,13 @@ namespace ClangSharpSourceToWinmd
             private SyntaxNode CreateAttributeListForFieldSal(FieldDeclarationSyntax fieldNode, AttributeSyntax cppAttr)
             {
                 if (fieldNode.Parent is not TypeDeclarationSyntax containingType)
+                {
+                    return null;
+                }
+
+                string nativeTypeName = SyntaxUtils.GetNativeTypeNameFromAttributesLists(fieldNode.AttributeLists);
+                if (fieldNode.Declaration.Type is not PointerTypeSyntax and not ArrayTypeSyntax
+                    && (nativeTypeName == null || !NativeTypeNameArrayRegex.IsMatch(nativeTypeName)))
                 {
                     return null;
                 }

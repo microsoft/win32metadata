@@ -230,10 +230,13 @@ int After(void);
         }
 
         [Theory]
-        [InlineData("x86", "i686-pc-windows-msvc")]
-        [InlineData("x64", "x86_64-pc-windows-msvc")]
-        [InlineData("arm64", "aarch64-pc-windows-msvc")]
-        public void NativeFieldCountSalReachesFinalWinmd(string architecture, string target)
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void NativeFieldCountSalReachesFinalWinmd(string architecture, string target, bool nativeFieldArrayInfo)
         {
             const string declarations = @"
 typedef unsigned long DHCP_IP_ADDRESS;
@@ -245,13 +248,20 @@ struct DHCP_IP_ARRAY {
 ";
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            using var image = Emit(fixture, architecture);
+            using var image = Emit(fixture.DirectoryPath, architecture, nativeFieldArrayInfo: nativeFieldArrayInfo);
             var reader = image.Reader;
             var fields = FindType(reader, "DHCP_IP_ARRAY").GetFields().Select(reader.GetFieldDefinition).ToArray();
             Assert.Equal(new[] { "NumElements", "Elements" }, fields.Select(field => reader.GetString(field.Name)));
             Assert.Equal(new[] { "UInt32", "UInt32*" },
                 fields.Select(field => field.DecodeSignature(new SignatureNames(), null)));
             AssertDoesNotHaveAttribute(reader, fields[0].GetCustomAttributes(), "NativeArrayInfoAttribute");
+            if (!nativeFieldArrayInfo)
+            {
+                AssertDoesNotHaveAttribute(reader, fields[1].GetCustomAttributes(), "NativeArrayInfoAttribute");
+                AssertMetadataClosure(reader);
+                return;
+            }
+
             var attribute = reader.GetCustomAttribute(Assert.Single(fields[1].GetCustomAttributes()
                 .Where(handle => AttributeName(reader, handle) == "NativeArrayInfoAttribute")));
             var blob = reader.GetBlobReader(attribute.Value);
@@ -716,14 +726,14 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
             => Emit(fixture.DirectoryPath, architecture);
 
-        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null)
+        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null, bool nativeFieldArrayInfo = false)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"));
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
                 new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
-                Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
+                Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string path = Path.Combine(directory, "Test.winmd");
             var generator = ClangSharpSourceWinmdGenerator.GenerateWindmdForCompilation(compilation,
