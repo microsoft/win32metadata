@@ -15,7 +15,7 @@ documentation mappings. Count emitted symbols, not just library-map rows.
 | Input | Treatment |
 | --- | --- |
 | SDK import-library scan / generated `libMappings.rsp` | Retain as derived binding data. Do not copy correct scan results into header annotations. |
-| Native declarations, SAL and MIDL | Retain as native authority; do not duplicate direction, size, string or optionality information. |
+| Native declarations, SAL and MIDL | Capture their existing annotations faithfully, including facts OLD omitted; do not author redundant direction, size, string or optionality information. |
 | Current-TU discovery and derived aggregate remaps | Retain discovery, with the tooling's annotated/legacy precedence. Do not turn cached discoveries into authored facts. |
 | Authored OS/error, logical-enum, ownership, callback and buffer overrides | Review each contract, migrate supported facts, and remove only the matching authored fallback. |
 | Manual import overrides | Use `ImportLibrary` only for demonstrated missing/incorrect scan data; retain generic override support. |
@@ -28,11 +28,13 @@ An API absent from the selected SDK must not be recreated as a fake declaration.
 Before authoring patches, enable annotation parsing alone for the candidate with
 unmodified headers and current authored inputs. Use the existing scoped scrape
 to compare its declarations with the matched OLD output, separately accounting
-for formatter trivia and constants-stage root imports. Parser-activation changes
-such as native-comment `RetVal` additions are not annotation relocation. Reject
-or defer out-of-policy changes at this cheap admission boundary, before migrating
-sidecars; do not add another preparation framework or a full SDK build per
-candidate.
+for formatter trivia and constants-stage root imports. Parser activation can
+faithfully expose existing native annotations that OLD omitted, such as MIDL
+`[retval]` comments. Classify these separately from annotation relocation, record
+their exact source and metadata changes, and surface meaningful consumer effects
+for review. Do not suppress those facts or reject/replace a candidate merely to
+preserve OLD omissions. Keep this a cheap classification boundary before patch
+authoring, not another preparation framework or a full SDK build per candidate.
 
 ## 2. Prepare headers once before toolchain consumption
 
@@ -55,18 +57,37 @@ Respect the MIDL boundary. The current preparation script admits post-MIDL
 recipes; it is not permission to rerun broad SDK/IDL update scripts or silently
 introduce a pre-MIDL pipeline. Surface a bounded blocker if that is required.
 
-## 3. Admit only the approved representation changes
+## 3. Capture native facts and classify every difference
+
+Faithfully capturing existing SDK, SAL and MIDL annotations is always acceptable,
+even when it changes OLD metadata. This is a general rule, not a `RetVal` exemption.
+OLD is a comparison baseline, not authority to suppress the native contract.
+Classify and present exact OLD-to-NEW metadata and consumer differences to the
+user for review instead of excluding a migration solely to retain OLD omissions.
+
+A source-derived addition must be traceable to an existing fact in the pinned
+native sources, with its exact declaration, owner, target, payload and architecture
+coverage. Verify that interpretation rather than inventing API/type/ownership
+claims or authoring arbitrary annotations to force a comparison grade. Newly
+authored header patches still require independent contract review; calling a
+patch a header does not make every added assertion source-derived.
 
 | Change | Required grade |
 | --- | --- |
+| Existing SDK/SAL/MIDL annotation absent or differently represented in OLD | Exact source-backed expectations for each affected symbol, attribute/parameter flag, target and payload; classify metadata and consumer effects for review. |
 | Existing enum use site becomes its native type plus `AssociatedEnum` | Exact owning parameter/field, native width/signedness and existing enum identity/member/value checks. |
 | Justified fabricated-handle removal and producer return/output ownership relocation | Exact removed type and affected signatures, cleanup API, invalid values and attribute targets; no invented ownership for borrowed handles. |
-| All other migrated facts | Same signatures, layouts, callback identity, imports, OS floors, last-error and SAL contracts. |
+| Other relocated facts | Preserve signatures, layouts, callback identity, imports, OS floors, last-error and SAL contracts unless an individually source-backed correction is identified and presented as above. |
 
-No new enum types, enum members, loose constants, API families, compatibility
-aliases or broad difference/duplicate allowlists. Preserve existing logical
-member names and values while leaving native macros intact. Document any
+This rule does not authorize manufacturing logical enum types or members, loose
+constants, API families or compatibility aliases, or silently repairing logical
+value conflicts. Preserve existing logical member names and values while leaving
+native macros intact unless a separate review resolves a conflict. Document any
 user-approved metadata-only naming exception at the header boundary.
+
+Keep expectations exact and source-backed, with zero unknown differences and zero
+unused expectations. There is no blanket native-derived difference or duplicate
+allowlist, and no assumption that faithful capture implies consumer compatibility.
 
 Remove matching authored fallback rather than annotating on top of it.
 SDK-derived bindings and discoveries are not semantic fallback. Keep import
@@ -82,7 +103,9 @@ the partition migration; never waive a known OLD defect on NEW.
 Commit producer inputs before publishing a fresh named NEW artifact. Record SDK,
 producer/tooling commits, binary hashes, recipe/prepared-header identity, complete
 source/reference closure and expected-difference hashes. Do not overwrite previous
-images or receipts.
+images or receipts. If only documentation advances the branch, retain the actual
+producer and CI-run labels on those frozen artifacts; a documentation head is not
+a new emission or a fresh image grade.
 
 Use the existing selected scrape/full-source overlay loop where appropriate.
 `PartitionFilter` alone does not narrow constants, manual files or emission
@@ -99,9 +122,12 @@ unselected inputs. Reject success-shaped partial images with dangling references
   callbacks, architecture coverage and reference closure. Preserve unrelated
   physical snapshots and existing mutation controls.
 - Compare OLD/control/NEW with exact symbol-scoped expectations: zero unknown
-  differences and zero unused expectations. Investigate any unapproved category
-  before admitting the candidate. A declaration comparer plus scoped physical
-  checks is not a comprehensive typed-equivalence oracle.
+  differences and zero unused expectations. Investigate every unclassified
+  difference and record the source evidence for native-derived additions;
+  surface meaningful metadata and consumer changes to the user for review.
+  Do not suppress faithful native facts or use a blanket allowance to make the
+  grade pass. A declaration comparer plus scoped physical checks is not a
+  comprehensive typed-equivalence oracle.
 - Repeat the normal SDK build with prior discoveries present. Require identical
   selected source/discovery inputs, shared prepared roots and complete SDK
   diagnostic inputs.
@@ -124,9 +150,11 @@ requests, options, target framework and unchanged caller source; compare public
 surfaces and compile both OLD and NEW callers in both marshaling modes.
 
 Separate identical output, source-compatible differences and exact source breaks.
-Do not infer compatibility from a producer comparison. If the consumer cannot be
-run under the agreed ownership constraints, report **unverified**. Do not search,
-rebuild or modify another owner's consumer checkout to manufacture proof.
+Include the consumer effects of newly captured native annotations in that review;
+their source authority is not proof of source compatibility. Do not infer
+compatibility from a producer comparison. If the consumer cannot be run under the
+agreed ownership constraints, report **unverified**. Do not search, rebuild or
+modify another owner's consumer checkout to manufacture proof.
 
 ## 7. Publish a reviewable checkpoint
 
@@ -136,12 +164,17 @@ the current approved delta and links to durable details. Do not merge or change
 native stack metadata.
 
 Require full CI green on the final exact head of both tooling and migration PRs;
-record check/run links and SHAs. Earlier successful heads and local tests do not
-substitute. Do not skip checks or weaken gates to obtain green.
+record check/run links and SHAs according to repository CI policy, including for
+documentation-only follow-ups. Earlier successful checks do not substitute for
+required current-head checks. Keep image evidence pinned to its actual producer
+and run, rather than relabeling it as a grade of a later documentation head.
+Do not skip checks or weaken gates to obtain green.
 
 For a correctness/design problem, capture one bounded reproducer and correct it
 within established patterns. Otherwise report the exact blocker, owner and
 smallest decision, or replace the candidate through the agreed selection process.
+Do not treat faithful capture of an existing native annotation as such a blocker
+merely because OLD omitted it; classify and review the exact difference instead.
 Do not expand into parser frameworks, consumer features or prolonged speculative
 investigations. Summarize each partition as relocated facts, exact representation
 changes, unchanged native/dependent contracts, and an honest consumer grade.
@@ -223,7 +256,7 @@ all 24 exact expectations are used with zero unknown differences. This is
 independent of the local selected-source overlay. In particular, `WinBase.h`
 includes `timezoneapi.h`, so selected native cases alone do not cover every
 transitive SDK translation unit. Final expanded-head full regeneration and
-strict artifact grading remain required.
+strict artifact grading are recorded for the completed B9 producer below.
 
 Batch 3 moves 16 ToolHelp XP floors and 15 last-error facts, retaining the
 non-error-annotated `Toolhelp32ReadProcessMemory` contract. Its two existing
@@ -269,28 +302,69 @@ Only formatter trivia and the existing constants-stage root usings differ.
 physical validation remain separate gates. Both SDK headers match their pinned
 native preimages byte-for-byte, and each has only its owning direct partition.
 
-### Deferred COM opt-in finding
+### Completed producer checkpoint (B9, immutable)
 
-The proposed SecurityCenter/WinSat conversions are not admitted. Producer
-`ab29038d22518c027d2cedab33ea747353ddd2d8` emitted a rejected image with SHA256
+The completed WinHttp-plus-ten producer is
+`b9fae9d6cb315a93cb342beb2e79a6aa33a64f5d`, above tooling
+`00ade0afc94c965522ccdbac54a06fc1bcbd01a1`. This evidence belongs to that
+producer, not a later documentation-only branch head.
+
+| Frozen evidence | Identity |
+| --- | --- |
+| Local full image SHA256 | `A0C321735141D55C98BCD7D048F822AAA0DA1D9434309ABA1782F79C220773BB` |
+| Local provenance SHA256 | `A1379DFE6BD4AB2301356A723007FBD248D51E612D35E1441622456EE7327AF3` |
+| Full-regeneration CI | [38703254017](https://github.com/microsoft/win32metadata/actions/runs/38703254017), exact B9 producer, successful |
+| Downloaded CI image SHA256 | `BF78829E239721F8DCCD865CBC1F15D3A9D8CD749826A169ADF2B9FF51C24CA0` |
+| Final review receipt SHA256 | `317644536D5FDB1B9129E5F1137C2636C245944733126CB7DD79F2837CC42091` |
+
+Both images use all 48 exact declaration expectations at 24 existing enum-use
+sites (10 parameters and 14 fields), with zero unknown or unused differences.
+All 37,314 physical types are graded, and 7,791 enum identities and contents
+are preserved. The downloaded CI image independently passes all 23
+physical/no-fallback/mutation cases and has the same declared surface as the
+local image without allowances. Dedicated native, preparation and SDK runs
+execute 45, 26 and 14 cases respectively without skips; 36 repeated
+source/discovery inputs are identical. These overlapping counts are not a unique
+test total. The artifacts and original receipts under
+`artifacts\header-annotation-wave\batch3-final` and
+`artifacts\header-annotation-wave\ci-final-38703254017` remain immutable.
+Fresh consumer compatibility remains unverified.
+
+### Historical COM finding under the earlier policy
+
+The proposed SecurityCenter/WinSat conversions were excluded under the earlier,
+narrower difference policy. Producer
+`ab29038d22518c027d2cedab33ea747353ddd2d8` emitted the historically rejected image
+with SHA256
 `37CB3A49C657F9787CEC85749EBEFECCEC4C3BB9319070752FDFF7AFB3B7677C`.
 Its strict comparison found 28 additional parameter-flag changes:
 16 in SecurityCenter and 12 in WinSat gain `RetVal` from existing native
 `[retval]` comments, for example `IWscProduct.get_ProductName.pVal` and
 `IProvideWinSATAssessmentInfo.get_Score.score`.
 
-These changes are outside the approved representation categories. The three
-COM header patches and opt-ins are removed and their authored facts restored;
-neither native comments nor SAL/parser policy is changed to hide the finding.
-The rejected image and exact difference log remain in
+The behavior comes from the C# `HeaderAnnotationProcessor.HasRetvalComment`
+implementation introduced in tooling commit
+`b5b7b26ed09d648766f07449af48c64ef0e99d13`, not a new Clang feature. Enabling the
+annotation path makes that existing C# lowering visible for these declarations.
+No production suppression was added: the two whole migrations were excluded,
+their three header patches and opt-ins were removed, and their authored facts
+were restored. Native comments and SAL/parser behavior were not changed to hide
+the finding.
+
+The general source-derived-annotation policy above resolves that earlier policy
+objection. Faithful capture is acceptable; the exact metadata and consumer
+effects should be classified and surfaced for review, not rejected merely to
+retain OLD omissions. The historical image and exact difference log remain in
 `artifacts\header-annotation-wave\batch3`; the separate
-`batch3-rejected-grade.json` receipt records the rejection. Successful
-native/preparation controls and repeatability do not override this failed
-metadata gate. Wsl and Xinput replace these candidates without widening allowed
-differences; consumer compatibility remains unverified.
+`batch3-rejected-grade.json` receipt still records the earlier rejection, not a
+new successful grade. This documentation update neither re-enables those
+migrations nor changes producer inputs or expectations. Wsl and Xinput remain
+the completed batch-3 owners; fresh consumer compatibility remains unverified.
 
 Sens is also deferred, not migrated. Its existing logical
 `SENS_CONNECTION_TYPE` members encode `CONNECTION_LAN = 0` and
 `CONNECTION_WAN = 1`, whereas native `sens.h` defines them as 1 and 2.
 That needs a separate compatibility/design decision. No SDK value, metadata
 value, macro or alias is changed to force this candidate through the playbook.
+Accepting existing native annotations is not approval to repair that logical
+enum conflict or manufacture new enums or members.

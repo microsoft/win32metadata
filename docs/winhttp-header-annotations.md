@@ -15,12 +15,25 @@ run the prepared-header scrape/emission and exact diagnostic grade; separately
 report the consumer experience as measured or unverified. A known-difference
 entry is not authorization to add an API, enum family, or enum member.
 
+Faithfully capturing existing SDK, SAL and MIDL annotations is always acceptable,
+even when OLD omitted them. Classify their exact source-backed metadata and consumer
+differences and surface meaningful changes for user review; do not suppress
+native facts or reject/replace migrations merely to preserve OLD omissions.
+This general rule is not a special `RetVal` allowance and does not authorize
+invented API/type/ownership claims, arbitrary authored annotations, new logical
+enum membership or automatic value repairs. Keep zero unknown and zero unused
+expectations, not a blanket difference allowlist.
+
 At a design boundary, capture one bounded reproducer, name the owner and smallest
 decision, and ask the user before expanding scope. Do not turn a partition pilot
 into parser work, consumer implementation, or new test infrastructure. For this
-pilot the user chose to preserve existing logical member names and minimize the
-winmd delta; fresh consumer replay is unverified, not an invitation to rebuild
-another owner's checkout.
+pilot the user chose to preserve existing logical member names and minimize
+avoidable source breaks, not to suppress native annotations for a smaller
+winmd delta. Fresh consumer replay is unverified, not an invitation to rebuild
+another owner's checkout. The playbook records the
+[historical COM finding and policy clarification](header-annotation-migration-playbook.md#historical-com-finding-under-the-earlier-policy);
+SecurityCenter/WinSat remain outside the completed ten, and the Sens logical
+value conflict still requires its own decision.
 
 | Current OLD-to-candidate review delta | Meaning |
 | --- | --- |
@@ -275,13 +288,13 @@ SRM checks; neither is presented as a comprehensive typed metadata equivalence
 oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
 must not appear as new WinHttp migration differences.
 
-The WinHttp entries in `patches\HeaderAnnotations.expected-differences.txt` admit exactly 16 declaration differences:
+The WinHttp entries in `patches\HeaderAnnotations.expected-differences.txt` grade exactly 16 declaration differences for this checkpoint:
 eight native integer use-site types and eight corresponding `AssociatedEnum`
 additions. Existing logical enum identities, member names, and values are
-preserved. It
-does not admit callback renames, import changes, dependent changes, additional
-constants, or changed values. The image builder applies this grade before publishing
-its provenance receipt.
+preserved. This image has no callback renames, import changes, dependent changes,
+additional constants or changed values. The image builder applies this exact
+grade before publishing its provenance receipt; it is not a general prohibition
+on faithfully capturing existing native annotations in future migrations.
 
 ## Original native-name candidate (immutable)
 
@@ -469,7 +482,7 @@ and constants share one private root. Four actual-project controls cover
 once-before-consumers ordering, cache reuse, and stale-marker invalidation for
 every architecture.
 
-| Current cleanup evidence | Identity |
+| Isolated WinHttp cleanup evidence | Identity |
 | --- | --- |
 | Full image | `artifacts\winhttp-migration\new-review-cleanup\Windows.Win32.winmd` |
 | Image SHA256 | `C81BECE2DFE770979BEA3EE805E5B0CDD31EFAE6CD42546A5E1B632D1F8D389E` |
@@ -490,3 +503,9 @@ remap files (389 frozen nonselected and four new selected files per extension).
 The original C7 and naming-preserved images and receipts remain unchanged.
 Fresh CsWin32 verification is still explicitly unverified; no consumer work is
 part of this cleanup. CI must be checked separately on the final published head.
+
+The [completed combined producer checkpoint](header-annotation-migration-playbook.md#completed-producer-checkpoint-b9-immutable)
+is B9 (`b9fae9d6cb315a93cb342beb2e79a6aa33a64f5d`) and CI run `38703254017`.
+Its images and original receipts remain pinned to that producer. Later
+documentation-only policy updates do not change emission inputs or claim a new
+code/image grade; their current-head checks follow repository CI policy.
