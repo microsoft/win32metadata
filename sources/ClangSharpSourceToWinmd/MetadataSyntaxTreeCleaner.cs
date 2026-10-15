@@ -965,6 +965,11 @@ namespace ClangSharpSourceToWinmd
 
             private SyntaxNode CreateAttributeListForSal(AttributeListSyntax cppAttrList, AttributeSyntax cppAttr)
             {
+                if (cppAttrList.Parent is FieldDeclarationSyntax fieldNode)
+                {
+                    return this.CreateAttributeListForFieldSal(fieldNode, cppAttr);
+                }
+
                 if (cppAttrList.Parent is not ParameterSyntax paramNode)
                 {
                     return null;
@@ -973,9 +978,6 @@ namespace ClangSharpSourceToWinmd
                 bool marshalAsAdded = this.nodesWithMarshalAs.Contains(paramNode);
 
                 List<AttributeSyntax> attributesList = new List<AttributeSyntax>();
-
-                string salText = cppAttr.ArgumentList.Arguments[0].ToString();
-                salText = salText.Substring(1, salText.Length - 2);
 
                 string nativeArrayInfoParams = null;
                 bool isIn = false;
@@ -989,7 +991,7 @@ namespace ClangSharpSourceToWinmd
                 bool? pre = null;
                 bool? post = null;
 
-                var salAttrs = GetSalAttributes(salText);
+                var salAttrs = GetSalAttributes(cppAttr);
                 isNullNullTerminated = salAttrs.Any(a => a.Name == "SAL_name" && a.P1 == "_NullNull_terminated_");
 
                 foreach (var salAttr in salAttrs)
@@ -1265,16 +1267,116 @@ namespace ClangSharpSourceToWinmd
 
                 }
 
-                IEnumerable<SalAttribute> GetSalAttributes(string salArgsText)
+            }
+
+            private SyntaxNode CreateAttributeListForFieldSal(FieldDeclarationSyntax fieldNode, AttributeSyntax cppAttr)
+            {
+                if (fieldNode.Parent is not TypeDeclarationSyntax containingType)
                 {
-                    foreach (var attr in salArgsText.Split('^'))
+                    return null;
+                }
+
+                var cppAttributes = fieldNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => GetAttributeName(attribute) == "CppAttributeList").ToArray();
+                if (cppAttributes[0] != cppAttr)
+                {
+                    return null;
+                }
+
+                AttributeSyntax arrayInfo = null;
+                foreach (var salAttr in cppAttributes.SelectMany(GetSalAttributes))
+                {
+                    if (salAttr.Name != "SAL_readableTo" && salAttr.Name != "SAL_writableTo")
                     {
-                        var salAttr = SalAttribute.CreateFromCppAttribute(attr);
-                        if (salAttr != null)
+                        continue;
+                    }
+
+                    string countExpression = salAttr.P1;
+                    if (countExpression == null || !countExpression.StartsWith("elementCount(", StringComparison.Ordinal))
+                    {
+                        continue;
+                    }
+
+                    var match = ElementCountRegex.Match(countExpression);
+                    string count = match.Success && match.Length == countExpression.Length
+                        && !countExpression.StartsWith("elementCount(_Old_(", StringComparison.Ordinal)
+                        ? match.Groups[1].Value.Trim()
+                        : null;
+                    AttributeArgumentSyntax argument = null;
+                    if (int.TryParse(count, out int size) && size >= 0)
+                    {
+                        argument = SyntaxFactory.AttributeArgument(
+                            SyntaxFactory.LiteralExpression(SyntaxKind.NumericLiteralExpression, SyntaxFactory.Literal(size)))
+                            .WithNameEquals(SyntaxFactory.NameEquals("CountConst"));
+                    }
+                    else
+                    {
+                        var countField = containingType.Members.OfType<FieldDeclarationSyntax>()
+                            .FirstOrDefault(field => !field.Modifiers.Any(SyntaxKind.StaticKeyword)
+                                && !field.Modifiers.Any(SyntaxKind.ConstKeyword)
+                                && field.Declaration.Variables.Count == 1
+                                && field.Declaration.Variables[0].Identifier.ValueText == count);
+                        if (countField != null)
                         {
-                            yield return salAttr;
+                            this.GetRemapInfo(GetFullNameWithoutArchSuffix(countField), countField.AttributeLists,
+                                out _, countField.Declaration.Type.ToString(), out _, out string newName);
+                            string countFieldName = newName ?? count;
+                            argument = SyntaxFactory.AttributeArgument(
+                                SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(countFieldName)))
+                                .WithNameEquals(SyntaxFactory.NameEquals("CountFieldName"));
                         }
                     }
+
+                    if (argument == null)
+                    {
+                        ReportUnsupportedCount(countExpression);
+                        return null;
+                    }
+
+                    var attribute = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeArrayInfo"),
+                        SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(argument)));
+                    if (arrayInfo != null && NormalizeAttributeArguments(arrayInfo) != NormalizeAttributeArguments(attribute))
+                    {
+                        ReportUnsupportedCount("multiple distinct element counts");
+                        return null;
+                    }
+
+                    arrayInfo = attribute;
+                }
+
+                if (arrayInfo == null)
+                {
+                    return null;
+                }
+
+                var existing = fieldNode.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => GetAttributeName(attribute) == "NativeArrayInfo").ToArray();
+                if (existing.Length != 0)
+                {
+                    if (existing.All(attribute => NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(arrayInfo)))
+                    {
+                        return null;
+                    }
+
+                    throw new InvalidOperationException($"WMA002: Native SAL array count on '{GetFullNameWithoutArchSuffix(fieldNode)}' conflicts with '{existing[0]}'.");
+                }
+
+                return SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(arrayInfo));
+
+                void ReportUnsupportedCount(string expression)
+                {
+                    Console.WriteLine($"ClangSharpSourceToWinmd : warning CSSW002: Cannot represent native SAL element count '{expression}' on field '{GetFullNameWithoutArchSuffix(fieldNode)}'.");
+                }
+            }
+
+            private static IEnumerable<SalAttribute> GetSalAttributes(AttributeSyntax cppAttr)
+            {
+                string salText = cppAttr.ArgumentList.Arguments[0].ToString();
+                salText = salText.Substring(1, salText.Length - 2);
+
+                foreach (var attr in salText.Split('^'))
+                {
+                    yield return SalAttribute.CreateFromCppAttribute(attr);
                 }
             }
 
@@ -1389,7 +1491,7 @@ namespace ClangSharpSourceToWinmd
                 var parts = attr.Split(';');
                 foreach (var part in parts)
                 {
-                    var nameAndValue = part.Split('=');
+                    var nameAndValue = part.Split('=', 2);
                     var name = nameAndValue[0].Trim();
                     var value = nameAndValue[1].Replace("\\\"", string.Empty);
                     switch (name)

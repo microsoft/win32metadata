@@ -21,21 +21,21 @@ namespace Win32MetadataScraperTests
         private const string Declarations = @"
 typedef void* HANDLE;
 typedef int HRESULT;
-enum _Windows_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A)
+enum _Win32_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A)
     _Win32_AssociatedConstant_(LOOSE_B) Options : unsigned { OptionA = 1, OptionB = 2 };
 enum class [[clang::flag_enum]] ScopedOptions : unsigned { None = 0, A = 1, B = 2 };
-struct _Windows_SupportedOS_10240_ DESCRIPTION {
+struct _Win32_SupportedOS_10240_ DESCRIPTION {
     _Win32_AssociatedEnum_(Options) unsigned flags;
     int size;
 };
-_Windows_SupportedOS_Windows7_ _Win32_AlsoUsableFor_(OTHER_TOKEN)
+_Win32_SupportedOS_Windows7_ _Win32_AlsoUsableFor_(OTHER_TOKEN)
 typedef unsigned long TOKEN;
-_Windows_SupportedOS_10240_
+_Win32_SupportedOS_10240_
 typedef int (__stdcall* PFN_BASE)(_Win32_Retained_ void* context, unsigned count);
-_Windows_SupportedOS_Windows7_
+_Win32_SupportedOS_Windows7_
 typedef PFN_BASE PFN_ALIAS;
 extern ""C"" {
-_Win32_SetLastError_ _Win32_ImportLibrary_(""header.dll"") _Windows_SupportedOS_10240_
+_Win32_SetLastError_ _Win32_ImportLibrary_(""header.dll"") _Win32_SupportedOS_10240_
 int __stdcall Imported(_In_ _Win32_Retained_ void* context,
     _Out_writes_bytes_opt_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* buffer,
     unsigned capacity);
@@ -49,14 +49,221 @@ int __stdcall MidlRetval(/* [out] [retval] */ _Out_ int* result);
 TOKEN __stdcall UseToken(TOKEN value, TOKEN* output);
 int __stdcall UseCallback(PFN_ALIAS callback);
 }
-struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Windows_SupportedOS_10240_ IHeaderSample {
-    _Win32_PreserveResult_ _Windows_SupportedOS_Windows7_
+struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Win32_SupportedOS_10240_ IHeaderSample {
+    _Win32_PreserveResult_ _Win32_SupportedOS_Windows7_
     virtual HRESULT __stdcall Exact(_Out_ _Win32_Retval_ int* result) = 0;
     _Win32_RAIIFree_(CloseThing, 0, ((HANDLE)-1))
     virtual HANDLE __stdcall Produce() = 0;
     virtual HRESULT __stdcall Buffer(_Out_writes_bytes_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* data, unsigned capacity) = 0;
 };
 ";
+
+        private const string ScopedDeclarations = @"
+typedef int HRESULT;
+int BeforeScope();
+_Win32_SupportedOS_BEGIN_(WindowsVista)
+struct SCOPED_RECORD {
+    int size;
+    unsigned flags;
+    struct NESTED_RECORD { int value; };
+    enum NESTED_ENUM { NestedValue = 1 };
+};
+enum SCOPED_ENUM : unsigned { ScopedValue = 1 };
+typedef unsigned SCOPED_TOKEN;
+typedef int (__stdcall* PFN_SCOPED)(_In_ _Win32_Retained_ void* context, _Out_ int* result);
+using USING_TOKEN = unsigned;
+using DIRECT_TOKEN _Win32_SupportedOS_Windows7_ = unsigned;
+using PFN_USING = SCOPED_TOKEN (__stdcall*)(_In_ _Win32_Retained_ void* context, _Out_ _Win32_Retval_ int* result);
+using PFN_USING_ALIAS = PFN_USING;
+using PFN_USING_NATIVE_ALIAS = PFN_SCOPED;
+typedef PFN_USING PFN_TYPEDEF_USING_ALIAS;
+_Win32_SupportedOS_Windows7_ typedef struct _PRIMARY_SCOPED { unsigned value; } PRIMARY_SCOPED;
+SCOPED_TOKEN UseScopedToken(SCOPED_TOKEN value);
+USING_TOKEN UseUsingToken(USING_TOKEN value);
+void UseScopedCallbacks(PFN_SCOPED first, PFN_USING second, PFN_USING_ALIAS third, PFN_TYPEDEF_USING_ALIAS fourth);
+_Win32_SupportedOS_BEGIN_(Windows7)
+int Seven();
+_Win32_SupportedOS_Windows8_ int ExplicitLater();
+_Win32_SupportedOS_Windows7_ int ExplicitEqual();
+_Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
+_Win32_SupportedOS_BEGIN_(Windows2000)
+int OlderNested();
+_Win32_SupportedOS_END_()
+_Win32_SupportedOS_END_()
+struct __declspec(uuid(""4d0ea686-f54d-4b53-aeec-bf6154950080"")) IScoped {
+    virtual HRESULT __stdcall VistaMethod(_Out_ _Win32_Retval_ int* result) = 0;
+    _Win32_SupportedOS_Windows7_ virtual HRESULT __stdcall SevenMethod() = 0;
+    _Win32_SupportedOS_Windows2000_ virtual HRESULT __stdcall ExplicitMethod() = 0;
+    virtual HRESULT __stdcall VistaAgainMethod() = 0;
+};
+_Win32_SupportedOS_END_()
+int AfterScope();
+struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_SupportedOS_Windows7_ IContainerOnly {
+    virtual HRESULT __stdcall UnannotatedMember(_Out_ _Win32_Retval_ int* result) = 0;
+};
+";
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void ScopedSupportedOSReachFinalWinmd(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, ScopedDeclarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            foreach (string name in new[] { "BeforeScope", "AfterScope" })
+                AssertDoesNotHaveAttribute(reader, FindMethod(reader, "Apis", name).GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            foreach (var item in new[]
+            {
+                ("Seven", "windows6.1"), ("ExplicitLater", "windows8.0"), ("ExplicitEqual", "windows6.1"),
+                ("ExplicitEarlier", "windows5.0"), ("OlderNested", "windows5.0"),
+            })
+                AssertStringAttribute(reader, FindMethod(reader, "Apis", item.Item1).GetCustomAttributes(), "SupportedOSPlatformAttribute", item.Item2);
+            foreach (string name in new[] { "SCOPED_RECORD", "NESTED_RECORD", "NESTED_ENUM", "SCOPED_ENUM",
+                "SCOPED_TOKEN", "USING_TOKEN", "PFN_SCOPED", "PFN_USING", "PFN_USING_ALIAS", "PFN_TYPEDEF_USING_ALIAS", "IScoped" })
+                AssertStringAttribute(reader, FindType(reader, name).GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.0.6000");
+            AssertStringAttribute(reader, FindType(reader, "PRIMARY_SCOPED").GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+            AssertStringAttribute(reader, FindType(reader, "DIRECT_TOKEN").GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+            Assert.Equal(new[] { "Int32", "UInt32" }, FindType(reader, "SCOPED_RECORD").GetFields().Select(reader.GetFieldDefinition)
+                .Select(field => field.DecodeSignature(new SignatureNames(), null)));
+            foreach (string name in new[] { "SCOPED_TOKEN", "USING_TOKEN" })
+                Assert.Equal("UInt32", reader.GetFieldDefinition(FindType(reader, name).GetFields().Single()).DecodeSignature(new SignatureNames(), null));
+            Assert.Equal("SCOPED_TOKEN", FindMethod(reader, "Apis", "UseScopedToken").DecodeSignature(new SignatureNames(), null).ReturnType);
+            Assert.Equal("USING_TOKEN", FindMethod(reader, "Apis", "UseUsingToken").DecodeSignature(new SignatureNames(), null).ReturnType);
+            foreach (string name in new[] { "PFN_SCOPED", "PFN_USING", "PFN_USING_ALIAS", "PFN_TYPEDEF_USING_ALIAS", "PFN_USING_NATIVE_ALIAS" })
+            {
+                var invoke = FindMethod(reader, name, "Invoke");
+                Assert.Equal(ReadCallingConvention("PFN_SCOPED"), ReadCallingConvention(name));
+                var signature = invoke.DecodeSignature(new SignatureNames(), null);
+                bool nativeOrigin = name is "PFN_SCOPED" or "PFN_USING_NATIVE_ALIAS";
+                Assert.Equal(nativeOrigin ? "Int32" : "SCOPED_TOKEN", signature.ReturnType);
+                Assert.Equal(new[] { "Void*", "Int32*" }, signature.ParameterTypes);
+                var parameters = invoke.GetParameters().Select(reader.GetParameter).Where(parameter => parameter.SequenceNumber != 0).ToArray();
+                Assert.Equal(new[] { "context", "result" }, parameters.Select(parameter => reader.GetString(parameter.Name)));
+                Assert.True(parameters[0].Attributes.HasFlag(ParameterAttributes.In));
+                AssertHasAttribute(reader, parameters[0].GetCustomAttributes(), "RetainedAttribute");
+                Assert.True(parameters[1].Attributes.HasFlag(ParameterAttributes.Out));
+                if (!nativeOrigin)
+                    AssertHasAttribute(reader, parameters[1].GetCustomAttributes(), "RetValAttribute");
+            }
+            var com = FindType(reader, "IScoped");
+            Assert.True(com.Attributes.HasFlag(TypeAttributes.Interface));
+            Assert.Equal(new[] { "VistaMethod", "SevenMethod", "ExplicitMethod", "VistaAgainMethod" },
+                com.GetMethods().Select(reader.GetMethodDefinition).Select(method => reader.GetString(method.Name)));
+            foreach (var item in new[] { ("VistaMethod", "windows6.0.6000"), ("SevenMethod", "windows6.1"),
+                ("ExplicitMethod", "windows5.0"), ("VistaAgainMethod", "windows6.0.6000") })
+                AssertStringAttribute(reader, FindMethod(reader, "IScoped", item.Item1).GetCustomAttributes(), "SupportedOSPlatformAttribute", item.Item2);
+            AssertStringAttribute(reader, FindType(reader, "IContainerOnly").GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+            var member = FindMethod(reader, "IContainerOnly", "UnannotatedMember");
+            AssertDoesNotHaveAttribute(reader, member.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            AssertHasAttribute(reader, member.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1)
+                .GetCustomAttributes(), "RetValAttribute");
+            foreach (var attributes in reader.FieldDefinitions.Select(reader.GetFieldDefinition).Select(field => field.GetCustomAttributes())
+                .Concat(reader.MethodDefinitions.Select(reader.GetMethodDefinition).SelectMany(method => method.GetParameters())
+                    .Select(reader.GetParameter).Select(parameter => parameter.GetCustomAttributes())))
+                AssertDoesNotHaveAttribute(reader, attributes, "SupportedOSPlatformAttribute");
+            AssertMetadataClosure(reader);
+
+            byte[] ReadCallingConvention(string name) => reader.GetBlobBytes(reader.GetCustomAttribute(
+                FindType(reader, name).GetCustomAttributes().Single(handle => AttributeName(reader, handle) == "UnmanagedFunctionPointerAttribute")).Value);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void CSupportedOSScopesReachFinalWinmd(string architecture, string target)
+        {
+            const string declarations = @"
+int Before(void);
+_Win32_SupportedOS_BEGIN_(WindowsVista)
+struct C_RECORD { int value; void* context; };
+enum C_ENUM { C_VALUE = 1 };
+typedef unsigned C_TOKEN;
+typedef int (__stdcall* C_CALLBACK)(_In_ _Win32_Retained_ void* context);
+_Win32_ImportLibrary_(""native.dll"") _Win32_SetLastError_ int Within(void);
+_Win32_SupportedOS_BEGIN_(Windows7)
+int Nested(void);
+_Win32_SupportedOS_Windows2000_ int Explicit(void);
+_Win32_SupportedOS_END_()
+int Restored(void);
+_Win32_SupportedOS_END_()
+int After(void);
+";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations,
+                extraSettings: "--language\nc\n--std\nc11\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false, language: "c"),
+                NativeSurface(fixture, target, metadataEnabled: true, language: "c"));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            foreach (string name in new[] { "C_RECORD", "C_ENUM", "C_TOKEN", "C_CALLBACK" })
+                AssertStringAttribute(reader, FindType(reader, name).GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.0.6000");
+            foreach (var item in new[] { ("Within", "windows6.0.6000"), ("Nested", "windows6.1"),
+                ("Explicit", "windows5.0"), ("Restored", "windows6.0.6000") })
+                AssertStringAttribute(reader, FindMethod(reader, "Apis", item.Item1).GetCustomAttributes(), "SupportedOSPlatformAttribute", item.Item2);
+            foreach (string name in new[] { "Before", "After" })
+                AssertDoesNotHaveAttribute(reader, FindMethod(reader, "Apis", name).GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            var import = FindMethod(reader, "Apis", "Within").GetImport();
+            Assert.Equal("native.dll", reader.GetString(reader.GetModuleReference(import.Module).Name));
+            Assert.True(import.Attributes.HasFlag(MethodImportAttributes.SetLastError));
+            AssertHasAttribute(reader, FindMethod(reader, "C_CALLBACK", "Invoke").GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 1).GetCustomAttributes(), "RetainedAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void SupportedOSScopesPreserveNativeAbiAndTheOptInGate(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, ScopedDeclarations);
+            Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false), NativeSurface(fixture, target, metadataEnabled: true));
+            using var disabled = new HeaderAnnotationTests.NativeFixture(architecture, target, ScopedDeclarations, annotationsEnabled: false);
+            Assert.True(disabled.Run() == 0, disabled.Diagnostics);
+            Assert.DoesNotContain("SupportedOSPlatform", disabled.ReadSource());
+            Assert.DoesNotContain("NativeAnnotation(\"SupportedOSPlatform", disabled.ReadSource());
+            Assert.Contains("NativeAnnotation(\"Name=SAL_name", disabled.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void NativeFieldCountSalReachesFinalWinmd(string architecture, string target)
+        {
+            const string declarations = @"
+typedef unsigned long DHCP_IP_ADDRESS;
+typedef DHCP_IP_ADDRESS* LPDHCP_IP_ADDRESS;
+struct DHCP_IP_ARRAY {
+    unsigned long NumElements;
+    _Field_size_(NumElements) LPDHCP_IP_ADDRESS Elements;
+};
+";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var fields = FindType(reader, "DHCP_IP_ARRAY").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "NumElements", "Elements" }, fields.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new[] { "UInt32", "UInt32*" },
+                fields.Select(field => field.DecodeSignature(new SignatureNames(), null)));
+            AssertDoesNotHaveAttribute(reader, fields[0].GetCustomAttributes(), "NativeArrayInfoAttribute");
+            var attribute = reader.GetCustomAttribute(Assert.Single(fields[1].GetCustomAttributes()
+                .Where(handle => AttributeName(reader, handle) == "NativeArrayInfoAttribute")));
+            var blob = reader.GetBlobReader(attribute.Value);
+            Assert.Equal(1, blob.ReadUInt16());
+            Assert.Equal(1, blob.ReadUInt16());
+            Assert.Equal(0x53, blob.ReadByte());
+            Assert.Equal(0x0e, blob.ReadByte());
+            Assert.Equal("CountFieldName", blob.ReadSerializedString());
+            Assert.Equal("NumElements", blob.ReadSerializedString());
+            Assert.Equal(0, blob.RemainingBytes);
+            AssertMetadataClosure(reader);
+        }
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
@@ -302,13 +509,18 @@ struct __declspec(uuid(""5a076bce-18f2-49bb-861f-48850743e9d3"")) IRetvalSample 
                 ["Server2012"] = "windowsserver2012", ["Server2016"] = "windowsserver2016",
             };
             string declarations = string.Join("\n", versions.Keys.Select(version =>
-                $"_Windows_SupportedOS_{version}_ int OS_{version}();"));
+                $"_Win32_SupportedOS_{version}_ int OS_{version}();\n" +
+                $"_Win32_SupportedOS_BEGIN_({version})\nint SCOPED_OS_{version}();\n_Win32_SupportedOS_END_()"));
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             using var image = Emit(fixture, "x64");
             foreach (var version in versions)
+            {
                 AssertStringAttribute(image.Reader, FindMethod(image.Reader, "Apis", "OS_" + version.Key).GetCustomAttributes(),
                     "SupportedOSPlatformAttribute", version.Value);
+                AssertStringAttribute(image.Reader, FindMethod(image.Reader, "Apis", "SCOPED_OS_" + version.Key).GetCustomAttributes(),
+                    "SupportedOSPlatformAttribute", version.Value);
+            }
         }
 
         [Fact]
@@ -390,9 +602,9 @@ int Imported();
 _Win32_SetLastError_ int Imported();
 int Retain(_Win32_Retained_ void* context);
 int Retain(void* context);
-enum _Windows_SupportedOS_10240_ E : unsigned;
+enum _Win32_SupportedOS_10240_ E : unsigned;
 enum E : unsigned { A = 1 };
-struct _Windows_SupportedOS_Windows7_ RECORD;
+struct _Win32_SupportedOS_Windows7_ RECORD;
 struct RECORD { unsigned value; };
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
@@ -410,9 +622,9 @@ struct RECORD { unsigned value; };
         public void CallbackAliasAcrossGeneratedFilesKeepsCanonicalSignature()
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
-_Windows_SupportedOS_10240_ typedef unsigned long TOKEN;
+_Win32_SupportedOS_10240_ typedef unsigned long TOKEN;
 typedef TOKEN (__stdcall* PFN_BASE)(_Win32_Retained_ void* context, unsigned count);
-_Windows_SupportedOS_Windows7_ typedef PFN_BASE PFN_ALIAS;
+_Win32_SupportedOS_Windows7_ typedef PFN_BASE PFN_ALIAS;
 int UseCallback(PFN_ALIAS callback);
 ", multipleFiles: true);
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
@@ -457,12 +669,12 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             AssertMetadataClosure(reader);
         }
 
-        private static string[] NativeSurface(HeaderAnnotationTests.NativeFixture fixture, string target, bool metadataEnabled)
+        private static string[] NativeSurface(HeaderAnnotationTests.NativeFixture fixture, string target, bool metadataEnabled, string language = "c++")
         {
             string source = Path.Combine(fixture.DirectoryPath, "test.cpp");
             var arguments = new List<string>
             {
-                "--language=c++", "--std=c++17", "--target=" + target,
+                "--language=" + language, "--std=" + (language == "c" ? "c11" : "c++17"), "--target=" + target,
                 "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
                 "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1", "-Wno-ignored-attributes",
             };

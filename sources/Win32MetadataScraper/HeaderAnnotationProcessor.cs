@@ -28,12 +28,15 @@ namespace Win32MetadataScraper
         private readonly TranslationUnit translationUnit;
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
-        private readonly Dictionary<NativeLocation, CXSourceRange> macroExpansions = new();
-        private readonly Dictionary<TypedefDecl, TypedefDecl> callbackOrigins = new();
-        private readonly Dictionary<TypedefDecl, DelegateDeclarationSyntax> callbackTemplates = new();
+        private readonly Dictionary<NativeLocation, List<CXSourceRange>> macroExpansions = new();
+        private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
+        private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly Dictionary<string, CXCursor> macroDefinitions = new(StringComparer.Ordinal);
         private readonly Dictionary<CXCursor, string[]> macroIdentifiers = new();
         private readonly Dictionary<CXCursor, bool> macroOwnership = new();
+        private readonly Dictionary<CXCursor, ScopeControl> scopeControls = new();
+        private readonly Dictionary<CXSourceLocation, SupportedOSScope> supportedOSScopes = new();
+        private readonly Dictionary<string, List<SourceFileInstance>> sourceFiles = new(StringComparer.Ordinal);
         private readonly HashSet<Cursor> visited = new();
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
@@ -50,15 +53,24 @@ namespace Win32MetadataScraper
                 {
                     macroDefinitions[cursor.Spelling] = cursor.Handle;
                     macroOwnership.Clear();
+                    scopeControls.Clear();
                 }
                 if (cursor.CursorKind == CXCursorKind.CXCursor_MacroExpansion)
                 {
                     var location = GetLocation(cursor.Location);
-                    macroExpansions[location] = cursor.Extent;
-                    if (IsOwnedMacro(cursor.Spelling) || ReferencesOwnedMacro(cursor.Handle.Referenced, new HashSet<CXCursor>()))
+                    if (!macroExpansions.TryGetValue(location, out var expansions))
+                        macroExpansions[location] = expansions = new();
+                    expansions.Add(cursor.Extent);
+                    var control = GetScopeControl(cursor.Handle.Referenced, new HashSet<CXCursor>());
+                    if (control != ScopeControl.None)
+                        ProcessScopeControl(cursor, control);
+                    else if (IsOwnedMacro(cursor.Spelling) || ReferencesOwnedMacro(cursor.Handle.Referenced, new HashSet<CXCursor>()))
                         ownedMacroLocations.Add(location);
                 }
             }
+            foreach (var file in sourceFiles.Values.SelectMany(files => files))
+                if (file.Scopes.Count != 0)
+                    throw Error(GetLocation(file.Scopes.Peek().Begin), "SupportedOS BEGIN requires an END in the same file and include instance.");
             Walk(translationUnit.TranslationUnitDecl);
             MergeRedeclarationFacts();
             foreach (var location in ownedMacroLocations)
@@ -81,16 +93,15 @@ namespace Win32MetadataScraper
         }
 
         private static bool IsOwnedMacro(string name)
-            => name == "_WIN32META_ANNOTATION_" || name.StartsWith("_Win32_", StringComparison.Ordinal) ||
-                name.StartsWith("_Windows_SupportedOS_", StringComparison.Ordinal);
+            => name == "_WIN32META_ANNOTATION_" || name.StartsWith("_Win32_", StringComparison.Ordinal);
 
         internal void PrepareTypedefs()
         {
             foreach (var facts in annotatedTypedefs)
             {
-                var alias = (TypedefDecl)facts.Declaration;
+                var alias = (TypedefNameDecl)facts.Declaration;
                 bool primaryRecord = alias.UnderlyingType.CanonicalType is RecordType record && Remap(record.Decl.Name) == Remap(alias.Name);
-                if (GetFunctionType(alias.UnderlyingType) == null && !primaryRecord)
+                if ((GetFunctionType(alias.UnderlyingType) == null || alias is TypeAliasDecl) && !primaryRecord)
                     remaps.TryAdd(alias.Name, alias.Name);
             }
         }
@@ -273,7 +284,7 @@ namespace Win32MetadataScraper
             var members = new List<MemberDeclarationSyntax>();
             foreach (var facts in annotatedTypedefs)
             {
-                var alias = (TypedefDecl)facts.Declaration;
+                var alias = (TypedefNameDecl)facts.Declaration;
                 string name = Remap(alias.Name);
                 if (projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
                     continue;
@@ -281,7 +292,16 @@ namespace Win32MetadataScraper
                     continue;
                 var functionType = GetFunctionType(alias.UnderlyingType);
                 if (functionType != null)
-                    throw Error(facts.Location, $"Annotated callback typedef '{alias.Name}' was not projected by ClangSharp.");
+                {
+                    var template = (DelegateDeclarationSyntax)new ProjectionRewriter(this).Visit(GetCallbackTemplate(alias, facts.Location));
+                    var callback = template.WithIdentifier(SyntaxFactory.Identifier(name))
+                        .WithAttributeLists(SyntaxFactory.List(template.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return" ||
+                            list.Attributes.Any(attribute => attribute.Name.ToString().EndsWith("UnmanagedFunctionPointer", StringComparison.Ordinal)))))
+                        .AddAttributeLists(GetAttributes(facts).ToArray());
+                    members.Add(callback);
+                    projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
+                    continue;
+                }
                 string valueType = GetManagedType(alias.UnderlyingType.CanonicalType, facts.Location);
                 var declaration = (StructDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
                     $"[{MetadataNamespace}NativeTypedef] public unsafe partial struct {name} {{ public {valueType} Value; }}");
@@ -291,7 +311,9 @@ namespace Win32MetadataScraper
             }
             if (members.Count == 0)
                 return string.Empty;
-            return SyntaxFactory.CompilationUnit().AddMembers(
+            return SyntaxFactory.CompilationUnit().AddUsings(
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Runtime.InteropServices")),
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata"))).AddMembers(
                 SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(generatedNamespace)).AddMembers(members.ToArray()))
                 .NormalizeWhitespace().ToFullString() + Environment.NewLine;
         }
@@ -332,7 +354,26 @@ namespace Win32MetadataScraper
                     {
                         throw Error(attributeLocation, exception.Message);
                     }
-                    if (attributeLocation.File == location.File && attributeLocation.Offset > location.Offset)
+                    if (annotation.Name == "SupportedOSPlatform")
+                    {
+                        attribute.Location.GetSpellingLocation(out var spellingFile, out _, out _, out _);
+                        // _Pragma spells its attribute in a scratch buffer; a direct macro in the same expansion remains explicit.
+                        if (spellingFile.Handle == IntPtr.Zero && supportedOSScopes.TryGetValue(attribute.Extent.End, out var scope))
+                        {
+                            var site = GetExpansionSite(declaration.Location);
+                            if (!IsInheritedAnnotation(declaration, attribute.Location) && IsBefore(scope.Begin, declaration.Location) &&
+                                GetLocation(scope.Begin).File == location.File && GetSourceFile(site) == scope.File &&
+                                (facts.SupportedOSScope == null || facts.SupportedOSScope.Depth < scope.Depth))
+                            {
+                                facts.SupportedOSDefault = annotation;
+                                facts.SupportedOSScope = scope;
+                            }
+                            continue;
+                        }
+                        if (IsInheritedAnnotation(declaration, attribute.Location))
+                            continue;
+                    }
+                    if (declaration is not TypeAliasDecl && attributeLocation.File == location.File && attributeLocation.Offset > location.Offset)
                         throw Error(attributeLocation, "Win32 metadata annotations must use prefix placement, not a post-declarator attribute.");
                     ValidatePlacement(declaration, attributeLocation);
                     ValidateTarget(facts, annotation, attributeLocation);
@@ -352,18 +393,18 @@ namespace Win32MetadataScraper
                     facts.IsScopedEnum = enumDeclaration.IsScoped;
                     facts.IsFlagsEnum = declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_FlagEnum);
                 }
-                if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or TypedefDecl)
+                if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or TypedefNameDecl)
                 {
                     var raii = facts.Annotations.SingleOrDefault(annotation => annotation.Name == "RAIIFree");
                     var expanded = facts.Annotations.SingleOrDefault(annotation => annotation.Name == HeaderAnnotation.ExpandedRaiiName);
                     if (expanded != null && (raii == null || raii.Arguments.Count != expanded.Arguments.Count))
                         throw Error(location, "Expanded RAIIFree transport does not match the authored annotation.");
                     declarations[declaration] = facts;
-                    if (declaration is TypedefDecl alias)
+                    if (declaration is TypedefNameDecl alias)
                     {
-                        if (facts.Annotations.Count != 0)
+                        if (facts.Annotations.Count != 0 || facts.SupportedOSDefault != null)
                             annotatedTypedefs.Add(facts);
-                        if (GetCallbackOrigin(alias) is TypedefDecl origin)
+                        if (GetCallbackOrigin(alias) is TypedefNameDecl origin)
                             callbackOrigins[alias] = origin;
                     }
                 }
@@ -379,6 +420,15 @@ namespace Win32MetadataScraper
         {
             foreach (var group in declarations.Values.GroupBy(facts => GetNativeIdentity(facts.Declaration)))
             {
+                var explicitOS = group.SelectMany(facts => facts.Annotations)
+                    .Where(annotation => annotation.Name == "SupportedOSPlatform").ToArray();
+                var osValues = explicitOS.Length != 0 ? explicitOS
+                    : group.Select(facts => facts.SupportedOSDefault).Where(annotation => annotation != null).ToArray();
+                var supportedOS = osValues.FirstOrDefault();
+                if (osValues.Any(annotation => !annotation.Arguments.SequenceEqual(supportedOS.Arguments)))
+                    throw Error(group.First().Location, $"Conflicting 'SupportedOSPlatform' annotations on redeclarations of '{group.First().Declaration.Name}'.");
+                foreach (var facts in group)
+                    facts.Annotations.RemoveAll(annotation => annotation.Name == "SupportedOSPlatform");
                 var owner = group.FirstOrDefault(facts => facts.Annotations.Count != 0) ?? group.First();
                 foreach (var facts in group.Where(facts => facts != owner))
                 {
@@ -397,6 +447,8 @@ namespace Win32MetadataScraper
                     owner.IsScopedEnum |= facts.IsScopedEnum;
                     owner.IsFlagsEnum |= facts.IsFlagsEnum;
                 }
+                if (supportedOS != null)
+                    owner.Annotations.Add(supportedOS);
                 foreach (var facts in group)
                 {
                     facts.AnnotationOwner = owner;
@@ -404,6 +456,7 @@ namespace Win32MetadataScraper
                     facts.InvalidValues = owner.InvalidValues;
                     facts.IsScopedEnum = owner.IsScopedEnum;
                     facts.IsFlagsEnum = owner.IsFlagsEnum;
+                    facts.HasExplicitSupportedOS = explicitOS.Length != 0;
                 }
             }
         }
@@ -423,7 +476,7 @@ namespace Win32MetadataScraper
             bool function = declaration is FunctionDecl;
             bool parameter = declaration is ParmVarDecl;
             bool record = declaration is RecordDecl;
-            bool typedef = declaration is TypedefDecl;
+            bool typedef = declaration is TypedefNameDecl;
             bool field = declaration is FieldDecl;
             bool valid = annotation.Name switch
             {
@@ -477,7 +530,7 @@ namespace Win32MetadataScraper
         {
             foreach (var facts in annotatedTypedefs)
             {
-                var alias = (TypedefDecl)facts.Declaration;
+                var alias = (TypedefNameDecl)facts.Declaration;
                 if (alias.UnderlyingType.CanonicalType is not RecordType record)
                     continue;
                 var recordLocation = GetLocation(record.Decl.Location);
@@ -492,10 +545,18 @@ namespace Win32MetadataScraper
                 {
                     var existing = recordFacts.Annotations.SingleOrDefault(item => item.Name == annotation.Name);
                     if (existing != null && !existing.Arguments.SequenceEqual(annotation.Arguments))
-                        throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on a record and its typedef.");
+                    {
+                        if (annotation.Name != "SupportedOSPlatform" || recordFacts.HasExplicitSupportedOS == facts.HasExplicitSupportedOS)
+                            throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on a record and its typedef.");
+                        if (!facts.HasExplicitSupportedOS)
+                            continue;
+                        recordFacts.Annotations.Remove(existing);
+                        existing = null;
+                    }
                     if (existing == null)
                         recordFacts.Annotations.Add(annotation);
                 }
+                recordFacts.HasExplicitSupportedOS |= facts.HasExplicitSupportedOS;
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
             }
         }
@@ -573,22 +634,39 @@ namespace Win32MetadataScraper
 
         private static FunctionProtoType GetFunctionType(ClangSharp.Type type)
         {
-            type = type.CanonicalType;
+            type = UnwrapSignatureType(type);
             if (type is PointerType pointer)
-                type = pointer.PointeeType.CanonicalType;
+                type = UnwrapSignatureType(pointer.PointeeType);
             return type as FunctionProtoType;
         }
 
-        private static TypedefDecl GetCallbackOrigin(TypedefDecl alias)
+        private static ClangSharp.Type UnwrapSignatureType(ClangSharp.Type type)
+        {
+            while (true)
+            {
+                type = type switch
+                {
+                    ElaboratedType elaborated => elaborated.NamedType,
+                    AttributedType attributed => attributed.EquivalentType,
+                    ParenType parentheses => parentheses.InnerType,
+                    TypedefType typedef => ((TypedefNameDecl)typedef.Decl).UnderlyingType,
+                    _ => null,
+                } ?? type;
+                if (type is not ElaboratedType and not AttributedType and not ParenType and not TypedefType)
+                    return type;
+            }
+        }
+
+        private static TypedefNameDecl GetCallbackOrigin(TypedefNameDecl alias)
         {
             var type = RemapDiscovery.UnwrapType(alias.UnderlyingType);
             if (type is TypedefType typedef)
-                return GetCallbackOrigin((TypedefDecl)typedef.Decl);
+                return GetCallbackOrigin((TypedefNameDecl)typedef.Decl);
             if (type is PointerType pointer)
             {
                 type = RemapDiscovery.UnwrapType(pointer.PointeeType);
                 if (type is TypedefType typedefPointer)
-                    return GetCallbackOrigin((TypedefDecl)typedefPointer.Decl);
+                    return GetCallbackOrigin((TypedefNameDecl)typedefPointer.Decl);
             }
             return type is FunctionProtoType ? alias : null;
         }
@@ -618,6 +696,92 @@ namespace Win32MetadataScraper
             };
         }
 
+        private DelegateDeclarationSyntax CreateCallbackTemplate(TypedefNameDecl alias, FunctionProtoType signature, NativeLocation location)
+        {
+            var parameters = alias.CursorChildren.OfType<ParmVarDecl>().ToArray();
+            if (parameters.Length != signature.ParamTypes.Count || signature.Handle.IsFunctionTypeVariadic)
+                throw Error(location, $"Unsupported callback alias signature '{alias.Name}'.");
+            string convention = GetCallbackConvention(alias.UnderlyingType, location);
+            var callback = (DelegateDeclarationSyntax)SyntaxFactory.ParseMemberDeclaration(
+                $"public unsafe delegate {GetSignatureType(signature.ReturnType, location)} {Remap(alias.Name)}();");
+            callback = callback.AddAttributeLists(MakeAttribute(
+                $"UnmanagedFunctionPointer(CallingConvention.{convention})"),
+                MakeAttribute($"NativeTypeName({HeaderAnnotation.Quote(signature.ReturnType.AsString)})", returnTarget: true));
+            for (int i = 0; i < parameters.Length; i++)
+            {
+                var native = parameters[i];
+                string name = string.IsNullOrEmpty(native.Name) ? $"param{i}" : Remap(native.Name);
+                if (SyntaxFacts.GetKeywordKind(name) != SyntaxKind.None)
+                    name = "@" + name;
+                var parameter = SyntaxFactory.Parameter(SyntaxFactory.Identifier(name))
+                    .WithType(SyntaxFactory.ParseTypeName(GetSignatureType(native.Type, location)))
+                    .AddAttributeLists(MakeAttribute($"NativeTypeName({HeaderAnnotation.Quote(native.Type.AsString)})"));
+                string attributes = string.Join("^", native.Attrs.Select(attribute => attribute.Spelling)
+                    .Where(payload => !HeaderAnnotation.IsKnownPayload(payload)));
+                if (attributes.Length != 0)
+                    parameter = parameter.AddAttributeLists(MakeAttribute($"CppAttributeList({HeaderAnnotation.Quote(attributes)})"));
+                if (declarations.TryGetValue(native, out var facts))
+                {
+                    parameter = parameter.AddAttributeLists(GetAttributes(facts).ToArray());
+                    projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
+                }
+                callback = callback.AddParameterListParameters(parameter);
+            }
+            return callback;
+        }
+
+        private static string GetCallbackConvention(ClangSharp.Type type, NativeLocation location) => type switch
+        {
+            AttributedType attributed => attributed.AttrKind switch
+            {
+                CX_AttrKind.CX_AttrKind_CDecl => "Cdecl",
+                CX_AttrKind.CX_AttrKind_StdCall => "StdCall",
+                CX_AttrKind.CX_AttrKind_FastCall => "FastCall",
+                CX_AttrKind.CX_AttrKind_ThisCall => "ThisCall",
+                _ => GetCallbackConvention(attributed.ModifiedType, location),
+            },
+            ElaboratedType elaborated => GetCallbackConvention(elaborated.NamedType, location),
+            ParenType parentheses => GetCallbackConvention(parentheses.InnerType, location),
+            TypedefType typedef => GetCallbackConvention(((TypedefNameDecl)typedef.Decl).UnderlyingType, location),
+            PointerType pointer => GetCallbackConvention(pointer.PointeeType, location),
+            FunctionProtoType signature => signature.CallConv switch
+            {
+                CXCallingConv.CXCallingConv_C => "Cdecl",
+                CXCallingConv.CXCallingConv_X86StdCall => "StdCall",
+                CXCallingConv.CXCallingConv_X86FastCall => "FastCall",
+                CXCallingConv.CXCallingConv_X86ThisCall => "ThisCall",
+                CXCallingConv.CXCallingConv_Default or CXCallingConv.CXCallingConv_Win64 or
+                    CXCallingConv.CXCallingConv_AAPCS or CXCallingConv.CXCallingConv_AAPCS_VFP => "Winapi",
+                _ => throw Error(location, $"Unsupported callback alias calling convention '{signature.CallConv}'."),
+            },
+            _ => throw Error(location, $"Unsupported callback alias type '{type.AsString}'."),
+        };
+
+        private DelegateDeclarationSyntax GetCallbackTemplate(TypedefNameDecl alias, NativeLocation location)
+        {
+            var origin = callbackOrigins.GetValueOrDefault(alias) ?? alias;
+            if (!callbackTemplates.TryGetValue(origin, out var template))
+            {
+                if (origin is not TypeAliasDecl)
+                    throw Error(location, $"Canonical signature for callback alias '{alias.Name}' was not generated.");
+                callbackTemplates[origin] = template = CreateCallbackTemplate(origin, GetFunctionType(origin.UnderlyingType), location);
+            }
+            return template;
+        }
+
+        private string GetSignatureType(ClangSharp.Type type, NativeLocation location)
+        {
+            type = RemapDiscovery.UnwrapType(type);
+            if (type is TypedefType typedef)
+            {
+                var alias = (TypedefNameDecl)typedef.Decl;
+                return remaps.ContainsKey(alias.Name) ? Remap(alias.Name) : GetSignatureType(alias.UnderlyingType, location);
+            }
+            if (type is PointerType pointer)
+                return GetSignatureType(pointer.PointeeType, location) + "*";
+            return GetManagedType(type, location);
+        }
+
         private bool ReferencesOwnedMacro(CXCursor definition, HashSet<CXCursor> visiting)
         {
             if (definition.IsNull)
@@ -628,27 +792,7 @@ namespace Win32MetadataScraper
                 return false;
             try
             {
-                if (!macroIdentifiers.TryGetValue(definition, out var identifiers))
-                {
-                    var tokens = translationUnit.Handle.Tokenize(definition.Extent);
-                    try
-                    {
-                        var names = new List<string>();
-                        foreach (var token in tokens)
-                            if (token.Kind == CXTokenKind.CXToken_Identifier)
-                            {
-                                using var spelling = token.GetSpelling(translationUnit.Handle);
-                                names.Add(spelling.ToString());
-                            }
-                        identifiers = names.Skip(1).ToArray();
-                        macroIdentifiers[definition] = identifiers;
-                    }
-                    finally
-                    {
-                        translationUnit.Handle.DisposeTokens(tokens);
-                    }
-                }
-                owned = identifiers.Any(name => IsOwnedMacro(name) ||
+                owned = GetMacroIdentifiers(definition).Any(name => IsOwnedMacro(name) ||
                     (macroDefinitions.TryGetValue(name, out var nested) && ReferencesOwnedMacro(nested, visiting)));
                 if (owned || visiting.Count == 1)
                     macroOwnership[definition] = owned;
@@ -660,16 +804,136 @@ namespace Win32MetadataScraper
             }
         }
 
+        private string[] GetMacroIdentifiers(CXCursor definition)
+        {
+            if (macroIdentifiers.TryGetValue(definition, out var identifiers))
+                return identifiers;
+            var tokens = translationUnit.Handle.Tokenize(definition.Extent);
+            try
+            {
+                var names = new List<string>();
+                foreach (var token in tokens)
+                    if (token.Kind == CXTokenKind.CXToken_Identifier)
+                    {
+                        using var spelling = token.GetSpelling(translationUnit.Handle);
+                        names.Add(spelling.ToString());
+                    }
+                return macroIdentifiers[definition] = names.Skip(1).ToArray();
+            }
+            finally
+            {
+                translationUnit.Handle.DisposeTokens(tokens);
+            }
+        }
+
+        private ScopeControl GetScopeControl(CXCursor definition, HashSet<CXCursor> visiting)
+        {
+            if (definition.IsNull)
+                return ScopeControl.None;
+            if (scopeControls.TryGetValue(definition, out var cached))
+                return cached;
+            if (!visiting.Add(definition))
+                return ScopeControl.None;
+            try
+            {
+                if (definition.Spelling.ToString() == "_Win32_SupportedOS_BEGIN_")
+                    return ScopeControl.Begin;
+                if (definition.Spelling.ToString() == "_Win32_SupportedOS_END_")
+                    return ScopeControl.End;
+                var control = ScopeControl.None;
+                foreach (string name in GetMacroIdentifiers(definition))
+                    if (macroDefinitions.TryGetValue(name, out var nested))
+                        control |= GetScopeControl(nested, visiting);
+                return scopeControls[definition] = control;
+            }
+            finally
+            {
+                visiting.Remove(definition);
+            }
+        }
+
+        private void ProcessScopeControl(Cursor cursor, ScopeControl control)
+        {
+            var file = GetSourceFile(cursor.Location);
+            if (control == ScopeControl.Begin)
+            {
+                var scope = new SupportedOSScope(file, cursor.Location, file.Scopes.Count);
+                file.Scopes.Push(scope);
+                supportedOSScopes.Add(cursor.Extent.End, scope);
+            }
+            else if (control == ScopeControl.End)
+            {
+                if (file.Scopes.Count == 0)
+                    throw Error(GetLocation(cursor.Location), "SupportedOS END has no BEGIN in the same file and include instance.");
+                file.Scopes.Pop();
+            }
+            else
+                throw Error(GetLocation(cursor.Location), "Expand SupportedOS BEGIN and END as separate scope controls.");
+        }
+
+        private CXSourceLocation GetExpansionSite(CXSourceLocation location)
+        {
+            if (macroExpansions.TryGetValue(GetLocation(location), out var expansions))
+                for (int i = expansions.Count - 1; i >= 0; i--)
+                    if (expansions[i].Start == location || IsBefore(expansions[i].Start, location))
+                        return expansions[i].Start;
+            return location;
+        }
+
+        private SourceFileInstance GetSourceFile(CXSourceLocation site)
+        {
+            var location = GetLocation(site);
+            if (!sourceFiles.TryGetValue(location.File, out var instances))
+                sourceFiles[location.File] = instances = new();
+            foreach (var instance in instances)
+            {
+                var previous = instance.LastLocation;
+                if (site != previous)
+                {
+                    uint offset = GetLocation(previous).Offset;
+                    var range = offset < location.Offset ? CXSourceRange.Create(previous, site) : CXSourceRange.Create(site, previous);
+                    // Tokenization cannot cross Clang file IDs, even for repeated includes of the same physical file.
+                    var tokens = translationUnit.Handle.Tokenize(range);
+                    try
+                    {
+                        if (tokens.Length == 0)
+                            continue;
+                    }
+                    finally
+                    {
+                        translationUnit.Handle.DisposeTokens(tokens);
+                    }
+                }
+                instance.LastLocation = site;
+                return instance;
+            }
+            var created = new SourceFileInstance(site);
+            instances.Add(created);
+            return created;
+        }
+
+        private static bool IsBefore(CXSourceLocation left, CXSourceLocation right)
+            => clang.isBeforeInTranslationUnit(left, right) != 0;
+
+        private static bool IsInheritedAnnotation(NamedDecl declaration, CXSourceLocation location)
+        {
+            for (var previous = declaration.Handle.PreviousDecl; !previous.IsNull; previous = previous.PreviousDecl)
+                for (uint i = 0; i < previous.NumAttrs; i++)
+                    if (previous.GetAttr(i).Location == location)
+                        return true;
+            return false;
+        }
+
         private void ValidatePlacement(NamedDecl declaration, NativeLocation annotation)
         {
-            if (declaration is RecordDecl or EnumDecl)
+            if (declaration is RecordDecl or EnumDecl or TypeAliasDecl)
                 return;
             var start = GetLocation(declaration.Extent.Start);
             if (start.File != annotation.File || annotation.Offset <= start.Offset)
                 return;
             var attributeLocations = declaration.Attrs.Select(attribute => GetLocation(attribute.Location)).ToHashSet();
             var prefixMacros = macroExpansions.Where(item => attributeLocations.Contains(item.Key))
-                .Select(item => (Start: item.Key, End: GetLocation(item.Value.End))).ToArray();
+                .SelectMany(item => item.Value.Select(range => (Start: item.Key, End: GetLocation(range.End)))).ToArray();
             var range = CXSourceRange.Create(declaration.Extent.Start, declaration.Location);
             var tokens = translationUnit.Handle.Tokenize(range);
             try
@@ -756,6 +1020,29 @@ namespace Win32MetadataScraper
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
         private sealed record InvalidValue(DeclarationFacts Facts, string Expression, int Index);
 
+        [Flags]
+        private enum ScopeControl { None = 0, Begin = 1, End = 2 }
+
+        private sealed class SourceFileInstance
+        {
+            internal SourceFileInstance(CXSourceLocation location) => LastLocation = location;
+            internal CXSourceLocation LastLocation { get; set; }
+            internal Stack<SupportedOSScope> Scopes { get; } = new();
+        }
+
+        private sealed class SupportedOSScope
+        {
+            internal SupportedOSScope(SourceFileInstance file, CXSourceLocation begin, int depth)
+            {
+                File = file;
+                Begin = begin;
+                Depth = depth;
+            }
+            internal SourceFileInstance File { get; }
+            internal CXSourceLocation Begin { get; }
+            internal int Depth { get; }
+        }
+
         private sealed class DeclarationFacts
         {
             internal DeclarationFacts(NamedDecl declaration, NativeLocation location)
@@ -771,6 +1058,9 @@ namespace Win32MetadataScraper
             internal List<long> InvalidValues { get; set; } = new();
             internal bool IsScopedEnum { get; set; }
             internal bool IsFlagsEnum { get; set; }
+            internal HeaderAnnotation SupportedOSDefault { get; set; }
+            internal SupportedOSScope SupportedOSScope { get; set; }
+            internal bool HasExplicitSupportedOS { get; set; }
         }
 
         private sealed class ProjectionRewriter : CSharpSyntaxRewriter
@@ -784,7 +1074,7 @@ namespace Win32MetadataScraper
             internal void AddCallbackTemplate(DelegateDeclarationSyntax node)
             {
                 var declaration = FindFacts(node.AttributeLists, node)?.Declaration;
-                if (declaration is TypedefDecl alias &&
+                if (declaration is TypedefNameDecl alias &&
                     owner.callbackOrigins.TryGetValue(alias, out var origin) && origin == alias)
                     owner.callbackTemplates[origin] = node;
             }
@@ -844,7 +1134,7 @@ namespace Win32MetadataScraper
                 FieldDeclarationSyntax => declaration is FieldDecl,
                 StructDeclarationSyntax => declaration is RecordDecl,
                 EnumDeclarationSyntax => declaration is EnumDecl,
-                DelegateDeclarationSyntax => declaration is TypedefDecl or FunctionDecl,
+                DelegateDeclarationSyntax => declaration is TypedefNameDecl or FunctionDecl,
                 _ => false,
             };
 
@@ -959,10 +1249,9 @@ namespace Win32MetadataScraper
             public override SyntaxNode VisitDelegateDeclaration(DelegateDeclarationSyntax node)
             {
                 var facts = FindFacts(node.AttributeLists, node);
-                if (facts?.Declaration is TypedefDecl alias && owner.callbackOrigins.TryGetValue(alias, out var origin) && alias != origin)
+                if (facts?.Declaration is TypedefNameDecl alias && owner.callbackOrigins.TryGetValue(alias, out var origin) && alias != origin)
                 {
-                    if (!owner.callbackTemplates.TryGetValue(origin, out var template))
-                        throw Error(facts.Location, $"Canonical signature for callback alias '{alias.Name}' was not generated.");
+                    var template = owner.GetCallbackTemplate(alias, facts.Location);
                     node = node.WithParameterList(template.ParameterList).WithReturnType(template.ReturnType)
                         .WithAttributeLists(SyntaxFactory.List(node.AttributeLists.Where(list => list.Target?.Identifier.ValueText != "return")))
                         .AddAttributeLists(template.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return").ToArray());
