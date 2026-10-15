@@ -85,9 +85,8 @@ Package-backed
 restore the just-built SDK from an isolated local feed and exercise its normal
 MSBuild pipeline.
 
-The bundled VC runtime libraries retain their Microsoft license terms; see
-`ThirdPartyNotices.txt` in the package. Package maintainers are responsible for
-updating these app-local copies, which are not serviced by Windows Update.
+Package maintainers are responsible for updating the bundled app-local VC
+runtime libraries, which are not serviced by Windows Update.
 
 ## MIT
 * All metadata assemblies (e.g. `Windows.Win32.winmd`)

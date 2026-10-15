@@ -68,7 +68,6 @@ namespace WinmdGenerator.IntegrationTests
                 Assert.Equal(Machine.Amd64, nativePe.PEHeaders.CoffHeader.Machine);
             }
 
-            Assert.True(File.Exists(Path.Combine(package.PackageDirectory, "ThirdPartyNotices.txt")));
             Assert.Empty(Directory.GetFiles(nativeDirectory, "ucrtbase.dll"));
             Assert.Empty(Directory.GetFiles(nativeDirectory, "api-ms-win-crt-*.dll"));
         }
