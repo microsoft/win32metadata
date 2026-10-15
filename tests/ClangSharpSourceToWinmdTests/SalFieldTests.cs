@@ -142,6 +142,31 @@ namespace ClangSharpSourceToWinmdTests
             Assert.IsFalse(GetElements(tree).AttributeLists.ToString().Contains("NativeArrayInfo"));
         }
 
+        [TestMethod]
+        public void FieldArrayInferenceRequiresExplicitOptIn()
+        {
+            var tree = Clean(Source(DhcpFieldSal), nativeFieldArrayInfo: false);
+            Assert.IsFalse(GetElements(tree).AttributeLists.ToString().Contains("NativeArrayInfo"));
+        }
+
+        [TestMethod]
+        public void ScalarAccessSpansDoNotBecomeArrayAttributes()
+        {
+            var tree = Clean("namespace Test { public struct S { " +
+                "[NativeTypeName(\"USHORT\")]" + CppAttribute("Name=SAL_writableTo; p1=elementCount(1)") +
+                " public ushort Elements; } }");
+            Assert.IsFalse(GetElements(tree).AttributeLists.ToString().Contains("NativeArrayInfo"));
+        }
+
+        [TestMethod]
+        public void NativeFixedArraysRemainEligible()
+        {
+            var tree = Clean("namespace Test { public unsafe struct S { public uint NumElements; " +
+                "[NativeTypeName(\"ULONG[4]\")]" + CppAttribute("Name=SAL_readableTo; p1=elementCount(NumElements)") +
+                " public fixed uint Elements[4]; } }");
+            Assert.AreEqual("NumElements", ((LiteralExpressionSyntax)GetArrayArgument(tree).Expression).Token.ValueText);
+        }
+
         [DataTestMethod]
         [DataRow("elementCount", "NativeArrayInfo", "CountParamIndex")]
         [DataRow("byteCount", "MemorySize", "BytesParamIndex")]
@@ -176,11 +201,11 @@ namespace ClangSharpSourceToWinmdTests
             GetElements(tree).AttributeLists.SelectMany(list => list.Attributes)
                 .Single(attribute => attribute.Name.ToString() == "NativeArrayInfo").ArgumentList!.Arguments.Single();
 
-        private static SyntaxTree Clean(string source, Dictionary<string, string>? remaps = null) =>
+        private static SyntaxTree Clean(string source, Dictionary<string, string>? remaps = null, bool nativeFieldArrayInfo = true) =>
             MetadataSyntaxTreeCleaner.CleanSyntaxTree(CSharpSyntaxTree.ParseText(source),
                 remaps ?? new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(),
                 new HashSet<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(),
-                new Dictionary<string, string>(), new HashSet<string>(), new HashSet<string>(), "native-field.cs");
+                new Dictionary<string, string>(), new HashSet<string>(), new HashSet<string>(), "native-field.cs", nativeFieldArrayInfo);
 
         private static SyntaxTree CleanWithDiagnostics(string source, out string diagnostics)
         {
