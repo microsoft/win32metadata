@@ -2,8 +2,10 @@
 
 This pilot moves authored functional WinHttp sidecars into reviewed header patches while
 retaining the C# scraper/emitter and the matched ClangSharp 21 stack. It is a separate
-migration layer above the tooling PR, not a replacement for that tooling. No other
-partition is migrated.
+migration layer above the tooling PR, not a replacement for that tooling. This
+document's inventory and image grades describe the isolated WinHttp checkpoint.
+The [migration playbook](header-annotation-migration-playbook.md) records the
+subsequently authorized ten partitions and their combined-image grades.
 
 ## Partition review playbook
 
@@ -28,7 +30,7 @@ another owner's checkout.
 | Zero added/removed enum types, members, or API symbols | The five logical groups already exist in OLD. Native scheme macros remain in the ordinary header, not as newly manufactured WinHttp winmd constants. |
 | Fresh CsWin32 experience: unverified | The original C7 prototype measured four scheme-name breaks; this candidate restores the old names, but has not been regenerated against a complete matching frozen consumer closure. |
 
-The current producer is the [review-cleanup candidate](#review-cleanup-candidate).
+The isolated WinHttp producer is the [review-cleanup candidate](#review-cleanup-candidate).
 Earlier images and receipts below are immutable historical evidence.
 
 ## Inputs and ownership
@@ -195,16 +197,20 @@ The physical control requires exactly 39 constructor rows in 39 types to gain
 ```powershell
 dotnet build BuildTools -c Release
 .\scripts\Build-WinHttpMigrationImage.ps1 -ToolingControl `
-    -OutputDirectory .\artifacts\winhttp-migration\tooling-control-review-cleanup
+    -OutputDirectory .\artifacts\header-annotation-wave\tooling-control-reproduction
 .\scripts\Build-WinHttpMigrationImage.ps1 `
     -BaselineDirectory .\artifacts\winhttp-migration\old `
-    -OutputDirectory .\artifacts\winhttp-migration\new-review-cleanup `
-    -ToolingControlDirectory .\artifacts\winhttp-migration\tooling-control-review-cleanup
+    -OutputDirectory .\artifacts\header-annotation-wave\reproduction `
+    -ToolingControlDirectory .\artifacts\header-annotation-wave\tooling-control-reproduction
 ```
 
-The image builder verifies the frozen inputs and tools, scrapes only WinHttp and
-HttpServer, overlays their four native source files onto the complete source
-closure, recomputes constants with all partition inputs, preserves the other
+Use fresh output names; previous images and receipts must not be overwritten.
+The image builder verifies the frozen inputs and tools, reads the recipe's owner
+and affected-dependent partition list, and overlays their actual generated common
+and architecture-specific sources onto the complete source closure. The isolated
+WinHttp recipe selected WinHttp/HttpServer; the expanded recipe also includes the
+playbook's additional owners and dependents. It recomputes constants with all
+partition inputs, preserves the other
 partitions' discovered pointer fixes, and emits `Windows.Win32.winmd`. It rejects
 overwriting an existing consumer-fixture or selection directory. Each image gets
 a fresh selected scrape so prior aggregate discoveries cannot become configured
@@ -222,9 +228,9 @@ source, discovery, and expected-difference hashes.
 . .\scripts\CommonUtils.ps1
 Install-VsDevShell
 $env:WINHTTP_MIGRATION_OLD = (Resolve-Path .\artifacts\winhttp-migration\old\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\winhttp-migration\new-review-cleanup\Windows.Win32.winmd).Path
-$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\winhttp-migration\tooling-control-review-cleanup\Windows.Win32.winmd).Path
-$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\winhttp-migration\new-review-cleanup\selection\obj\prepared-sdk.txt -Raw).Trim()
+$env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\header-annotation-wave\reproduction\Windows.Win32.winmd).Path
+$env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\header-annotation-wave\tooling-control-reproduction\Windows.Win32.winmd).Path
+$env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\header-annotation-wave\reproduction\selection\obj\prepared-sdk.txt -Raw).Trim()
 dotnet test tests\Win32MetadataScraperTests -c Release `
     --filter "FullyQualifiedName~PreparedSdkHeadersTests|FullyQualifiedName~WinHttpMigrationTests|FullyQualifiedName~WinHttpNativeControlTests" `
     --logger "console;verbosity=normal"

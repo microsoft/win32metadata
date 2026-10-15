@@ -191,3 +191,18 @@ logical group. The version-2 `K32*` declarations are not annotated or migrated;
 PsApi2 remains opted out and is regenerated as an unchanged dependent. Time's
 `timeprov.h` is pinned and compiled but has no emitted DLL-function facts to
 relocate. Its three unused provider-export OS rows remain outside this scope.
+
+Batch-2 checkpoint: producer `7d89f8e7f10176f3bdaa1490ae917b65be710175`,
+full image SHA256
+`E3177B33ED5F48879431BE7FF0446E183F873A97E1DB1EE677665D4F8FCA826F`,
+receipt SHA256
+`2BD8090F5CEBFF554FF9E4C85D3B24D28652D35C0EFA4A1A6EB2E83A1F252E07`.
+All 24 declaration expectations are used, with zero unknown/unused differences.
+All 37,314 physical types are graded: 37,305 unchanged and 12 exact enum-use
+sites normalized; all 7,791 enum identities and contents remain unchanged.
+Thirty-three native legs, 23 physical/no-fallback/mutation checks, 26
+preparation/closure/fallback checks and 14 full-SDK checks pass without skips.
+The 28 repeated source/discovery inputs are byte-identical; all 155 pointer
+reductions remain. Artifacts are in `artifacts\header-annotation-wave\batch2`.
+These overlapping run counts are not a unique-test total. Consumer compatibility
+remains unverified.
