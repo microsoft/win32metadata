@@ -393,6 +393,55 @@ namespace Win32MetadataScraperTests
                 Assert.ThrowsAny<XunitException>(() => AssertClosure(metadata.GetMetadataReader()));
         }
 
+        [Theory]
+        [InlineData("order")]
+        [InlineData("value")]
+        [InlineData("type")]
+        [InlineData("name")]
+        [InlineData("owner")]
+        public void ApiLiteralComparisonIgnoresOnlyRowOrder(string mutation)
+        {
+            using var baseline = Fixture("");
+            using var changed = Fixture(mutation);
+            var before = baseline.GetMetadataReader();
+            var after = changed.GetMetadataReader();
+            string expected = SnapshotType(before, before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)));
+            string actual = SnapshotType(after, after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)));
+            if (mutation == "order")
+                Assert.Equal(expected, actual);
+            else
+                Assert.NotEqual(expected, actual);
+
+            static MetadataReaderProvider Fixture(string mutation)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("Constants.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed,
+                    metadata.GetOrAddString("Pilot"), metadata.GetOrAddString("Apis"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                metadata.AddTypeDefinition(TypeAttributes.Public, metadata.GetOrAddString("Pilot"),
+                    metadata.GetOrAddString("Other"), default, MetadataTokens.FieldDefinitionHandle(mutation == "owner" ? 2 : 3),
+                    MetadataTokens.MethodDefinitionHandle(1));
+                foreach (string name in mutation == "order" ? new[] { "Second", "First" } : new[] { "First", "Second" })
+                {
+                    var signature = new BlobBuilder();
+                    var fieldType = new BlobEncoder(signature).FieldSignature();
+                    bool signed = mutation == "type" && name == "Second";
+                    if (signed) fieldType.Int32();
+                    else fieldType.UInt32();
+                    var field = metadata.AddFieldDefinition(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault,
+                        metadata.GetOrAddString(mutation == "name" && name == "Second" ? "Different" : name), metadata.GetOrAddBlob(signature));
+                    uint value = name == "First" ? 1u : mutation == "value" ? 3u : 2u;
+                    metadata.AddConstant(field, signed ? (object)(int)value : value);
+                }
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+            }
+        }
+
         internal static string RepositoryRoot
         {
             get
@@ -482,7 +531,13 @@ namespace Win32MetadataScraperTests
                 reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
                 $"{type.Attributes}|{FullName(reader, type.BaseType)}|{type.GetLayout().PackingSize}|{type.GetLayout().Size}|{Attributes(type.GetCustomAttributes())}",
             };
-            foreach (var handle in type.GetFields())
+            IEnumerable<FieldDefinitionHandle> fields = type.GetFields();
+            if (typeName == "Apis" && fields.All(handle =>
+                reader.GetFieldDefinition(handle).Attributes.HasFlag(FieldAttributes.Static | FieldAttributes.Literal)))
+            {
+                fields = fields.OrderBy(handle => reader.GetString(reader.GetFieldDefinition(handle).Name), StringComparer.Ordinal);
+            }
+            foreach (var handle in fields)
             {
                 var field = reader.GetFieldDefinition(handle);
                 string name = reader.GetString(field.Name);

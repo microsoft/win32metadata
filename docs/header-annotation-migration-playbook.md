@@ -100,6 +100,13 @@ unselected inputs. Reject success-shaped partial images with dangling references
   Verify nonzero executed counts and no skipped acceptance legs. Build tools
   before emission; never rebuild DLLs while an emitter is using them.
 
+Physical snapshots match literal-only `Apis` fields by owning type and name,
+not incidental metadata row order. Moving WinHttp's three typed port constants
+from constant overrides to header declarations changes that order but not their
+names, unsigned 16-bit types or values. Actual metadata mutation controls must
+still reject changed names, owners, types and values. Instance-field layout,
+enum-member order and method/vtable order are not canonicalized.
+
 ## 6. Report consumer compatibility independently
 
 CsWin32 source compatibility is the primary consumer gate, not identical winmd
@@ -157,3 +164,17 @@ unsigned 32-bit storage, with `Flags` becoming native `ULONG` plus
 A complete selected-SDK import-library scan found neither verifier entrypoint.
 `VerifierIsPerUserSettingsEnabled` is absent from compiled OLD, so its unused OS
 row is explicitly outside emitted-owner migration accounting and is retained.
+
+Batch-1 checkpoint: producer `0a01605e37ace4128c8cc01cd6efadb1add02525`,
+full image SHA256
+`F1B647FC43E28D546B5991EFE695C6C1D678092BEEB7127747F41B7A41B8240D`,
+receipt SHA256
+`96FFBCA0F352BBF8E074A8A965844BF5038047D6A976D5779922C104F8999570`.
+The strict declaration grade uses all 18 expectations with zero unknown/unused
+differences. All 37,314 physical types and 7,791 enum identities are accounted for;
+only nine exact enum-use sites differ. Eighteen owner/dependent native legs,
+23 physical/no-fallback/mutation checks, 25 preparation/closure controls and
+14 full-SDK integrity checks pass. Eighteen repeated source/discovery inputs are
+byte-identical, and all 155 pointer reductions remain present. Artifacts are in
+`artifacts\header-annotation-wave\batch1`; prior immutable candidates are retained.
+Fresh consumer compatibility remains unverified.
