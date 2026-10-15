@@ -6577,45 +6577,6 @@
     ]
   },
   {
-    "name": "CREATE_TOOLHELP_SNAPSHOT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "TH32CS_INHERIT",
-        "value": "2147483648"
-      },
-      {
-        "name": "TH32CS_SNAPALL"
-      },
-      {
-        "name": "TH32CS_SNAPHEAPLIST",
-        "value": "1"
-      },
-      {
-        "name": "TH32CS_SNAPMODULE",
-        "value": "8"
-      },
-      {
-        "name": "TH32CS_SNAPMODULE32",
-        "value": "16"
-      },
-      {
-        "name": "TH32CS_SNAPPROCESS",
-        "value": "2"
-      },
-      {
-        "name": "TH32CS_SNAPTHREAD",
-        "value": "4"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CreateToolhelp32Snapshot",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "UNC_INFO_LEVEL",
     "members": [
       {
@@ -27992,26 +27953,6 @@
       {
         "struct": "PARAFORMAT",
         "field": "wAlignment"
-      }
-    ]
-  },
-  {
-    "name": "HEAPENTRY32_FLAGS",
-    "members": [
-      {
-        "name": "LF32_FIXED"
-      },
-      {
-        "name": "LF32_FREE"
-      },
-      {
-        "name": "LF32_MOVEABLE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "HEAPENTRY32",
-        "field": "dwFlags"
       }
     ]
   },

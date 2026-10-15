@@ -2,3 +2,5 @@
 <IncludeRoot>/um/winsatcominterfacei.h
 --namespace
 Windows.Win32.System.AssessmentTool
+--config
+parse-win32-annotations

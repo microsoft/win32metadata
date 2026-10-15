@@ -39,6 +39,8 @@ namespace Win32MetadataScraperTests
                 new EnumUse("Windows.Win32.System.ProcessStatus", "EnumProcessModulesEx", "dwFilterFlag", "ENUM_PROCESS_MODULES_EX_FLAGS", "UInt32"),
                 new EnumUse("Windows.Win32.UI.Magnification", "MagSetWindowFilterList", "dwFilterMode", "MW_FILTERMODE", "UInt32"),
                 new EnumUse("Windows.Win32.UI.Magnification", "MagGetWindowFilterList", "pdwFilterMode", "MW_FILTERMODE", "UInt32*"),
+                new EnumUse("Windows.Win32.System.Diagnostics.ToolHelp", "CreateToolhelp32Snapshot", "dwFlags", "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "UInt32"),
+                new EnumUse("Windows.Win32.System.Diagnostics.ToolHelp", "HEAPENTRY32", "dwFlags", "HEAPENTRY32_FLAGS", "UInt32"),
             }).ToArray();
         private static readonly string[] AdditionalOwnedMethods =
         {
@@ -63,8 +65,24 @@ namespace Win32MetadataScraperTests
             "SetTimeZoneInformation", "SystemTimeToFileTime", "SystemTimeToTzSpecificLocalTime",
             "SystemTimeToTzSpecificLocalTimeEx", "TzSpecificLocalTimeToSystemTime", "TzSpecificLocalTimeToSystemTimeEx",
             "UalStart", "UalStop", "UalInstrument", "UalRegisterProduct",
+            "CreateToolhelp32Snapshot", "Heap32First", "Heap32ListFirst", "Heap32ListNext", "Heap32Next",
+            "Module32First", "Module32FirstW", "Module32Next", "Module32NextW", "Process32First", "Process32FirstW",
+            "Process32Next", "Process32NextW", "Thread32First", "Thread32Next", "Toolhelp32ReadProcessMemory",
+            "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
+            "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
         };
-        private static readonly string[] AdditionalLogicalEnums = { "VERIFIER_ENUM_RESOURCE_FLAGS", "ENUM_PROCESS_MODULES_EX_FLAGS", "MW_FILTERMODE" };
+        private static readonly string[] AdditionalOwnedTypes =
+        {
+            "HEAPENTRY32", "IWaaSAssessor", "IWscProduct", "IWSCProductList",
+            "IInitiateWinSATAssessment", "IProvideWinSATAssessmentInfo", "IProvideWinSATResultsInfo",
+            "IProvideWinSATVisuals", "IQueryAllWinSATAssessments", "IQueryRecentWinSATAssessment",
+            "IWinSATInitiateEvents",
+        };
+        private static readonly string[] AdditionalLogicalEnums =
+        {
+            "VERIFIER_ENUM_RESOURCE_FLAGS", "ENUM_PROCESS_MODULES_EX_FLAGS", "MW_FILTERMODE",
+            "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "HEAPENTRY32_FLAGS",
+        };
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
@@ -368,6 +386,9 @@ namespace Win32MetadataScraperTests
             var emitted = old.Reader.MethodDefinitions.Select(old.Reader.GetMethodDefinition)
                 .Select(method => old.Reader.GetString(method.Name)).ToHashSet(StringComparer.Ordinal);
             Assert.All(AdditionalOwnedMethods, name => Assert.Contains(name, emitted));
+            var emittedTypes = old.Reader.TypeDefinitions.Select(old.Reader.GetTypeDefinition)
+                .Select(type => old.Reader.GetString(type.Name)).ToHashSet(StringComparer.Ordinal);
+            Assert.All(AdditionalOwnedTypes, name => Assert.Contains(name, emittedTypes));
             Assert.DoesNotContain("VerifierIsPerUserSettingsEnabled", emitted);
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             foreach (string file in new[] { "libMappingsManual.rsp", "scraper.settings.rsp", "supportedOS.rsp",
@@ -378,6 +399,7 @@ namespace Win32MetadataScraperTests
                     string target = line.Split('=')[0].Split(new[] { "::" }, StringSplitOptions.None)[0];
                     Assert.DoesNotContain(target, AdditionalOwnedMethods);
                     Assert.DoesNotContain(target, AdditionalLogicalEnums);
+                    Assert.DoesNotContain(target, AdditionalOwnedTypes);
                 }
             }
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
@@ -386,9 +408,19 @@ namespace Win32MetadataScraperTests
                 if (item.TryGetProperty("name", out var name))
                     Assert.DoesNotContain(name.GetString(), AdditionalLogicalEnums);
                 if (item.TryGetProperty("uses", out var uses))
+                {
                     foreach (var use in uses.EnumerateArray())
+                    {
                         if (use.TryGetProperty("method", out var method))
-                            Assert.DoesNotContain(method.GetString(), AdditionalOwnedMethods);
+                        {
+                            string owner = method.GetString().Split(new[] { "::" }, StringSplitOptions.None)[0];
+                            Assert.DoesNotContain(owner, AdditionalOwnedMethods);
+                            Assert.DoesNotContain(owner, AdditionalOwnedTypes);
+                        }
+                        if (use.TryGetProperty("struct", out var record))
+                            Assert.DoesNotContain(record.GetString(), AdditionalOwnedTypes);
+                    }
+                }
             }
             string bindings = File.ReadAllText(Path.Combine(project, "libMappings.rsp"));
             Assert.Contains("CeipIsOptedIn=KERNEL32.dll", bindings);
@@ -401,7 +433,8 @@ namespace Win32MetadataScraperTests
                 Assert.Contains(name + "=SupportedOSPlatform(\"windows5.1.2600\")",
                     File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
             }
-            foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual" })
+            foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
+                "ToolHelp", "UpdateAssessment", "SecurityCenter", "WinSat" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", "PsApi2", "settings.rsp")));
         }

@@ -73,8 +73,38 @@ static_assert(INTERNET_SCHEME_SOCKS == 4);
                 .Where(line => line.StartsWith("<IncludeRoot>/", StringComparison.Ordinal))
                 .Select(line => Path.GetFileName(line.Replace('/', '\\'))).Concat(patched).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
             Assert.NotEmpty(headers);
-            var before = Surface(root, original, partition, architecture, target, headers, "");
-            var after = Surface(root, prepared, partition, architecture, target, headers, "");
+            string checks = partition switch
+            {
+                "ApplicationVerifier" => @"
+static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
+static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);
+",
+                "MagApi" => @"
+static_assert(MW_FILTERMODE_EXCLUDE == 0);
+static_assert(MW_FILTERMODE_INCLUDE == 1);
+",
+                "PsApi1" or "PsApi2" => @"
+static_assert(LIST_MODULES_ALL == 3);
+static_assert(LIST_MODULES_DEFAULT == 0);
+static_assert(LIST_MODULES_32BIT == 1);
+static_assert(LIST_MODULES_64BIT == 2);
+",
+                "ToolHelp" => @"
+static_assert(TH32CS_INHERIT == 0x80000000u);
+static_assert(TH32CS_SNAPALL == 15);
+static_assert(TH32CS_SNAPHEAPLIST == 1);
+static_assert(TH32CS_SNAPMODULE == 8);
+static_assert(TH32CS_SNAPMODULE32 == 16);
+static_assert(TH32CS_SNAPPROCESS == 2);
+static_assert(TH32CS_SNAPTHREAD == 4);
+static_assert(LF32_FIXED == 1);
+static_assert(LF32_FREE == 2);
+static_assert(LF32_MOVEABLE == 4);
+",
+                _ => "",
+            };
+            var before = Surface(root, original, partition, architecture, target, headers, checks);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
             Assert.NotEmpty(before);
             Assert.Contains(before, value => value.StartsWith("function ", StringComparison.Ordinal) || value.StartsWith("record ", StringComparison.Ordinal));
             Assert.Equal(before, after);

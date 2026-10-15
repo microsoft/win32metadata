@@ -26,3 +26,7 @@ Windows.Win32.UI.Magnification.Apis.MagSetWindowFilterList : parameter 2 (dwFilt
 Windows.Win32.UI.Magnification.Apis.MagSetWindowFilterList : parameter 2 (dwFilterMode)...Windows.Win32.UI.Magnification.MW_FILTERMODE => System.UInt32
 Windows.Win32.UI.Magnification.Apis.MagGetWindowFilterList : parameter 2 (pdwFilterMode) : [In,Out] => [AssociatedEnum(MW_FILTERMODE),In,Out]
 Windows.Win32.UI.Magnification.Apis.MagGetWindowFilterList : parameter 2 (pdwFilterMode)...Windows.Win32.UI.Magnification.MW_FILTERMODE* => System.UInt32*
+Windows.Win32.System.Diagnostics.ToolHelp.Apis.CreateToolhelp32Snapshot : parameter 1 (dwFlags) : [In] => [AssociatedEnum(CREATE_TOOLHELP_SNAPSHOT_FLAGS),In]
+Windows.Win32.System.Diagnostics.ToolHelp.Apis.CreateToolhelp32Snapshot : parameter 1 (dwFlags)...Windows.Win32.System.Diagnostics.ToolHelp.CREATE_TOOLHELP_SNAPSHOT_FLAGS => System.UInt32
+Windows.Win32.System.Diagnostics.ToolHelp.HEAPENTRY32.dwFlags :  => [AssociatedEnum(HEAPENTRY32_FLAGS)]
+Windows.Win32.System.Diagnostics.ToolHelp.HEAPENTRY32.dwFlags...Windows.Win32.System.Diagnostics.ToolHelp.HEAPENTRY32_FLAGS => System.UInt32

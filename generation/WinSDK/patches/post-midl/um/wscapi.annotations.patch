@@ -1,0 +1,35 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wscapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/wscapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/wscapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/wscapi.h
+@@ -3,6 +3,7 @@
+ //
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -69,6 +70,7 @@
+ 
+ 
+ 
++_Windows_SupportedOS_WindowsVista_
+ STDAPI WscRegisterForChanges(LPVOID Reserved, 
+                              PHANDLE phCallbackRegistration,
+                              LPTHREAD_START_ROUTINE lpCallbackAddress, 
+@@ -84,6 +86,7 @@
+ // Return Values:
+ // Returns S_OK if the function succeeds, otherwise returns an error code.
+ 
++_Windows_SupportedOS_WindowsVista_
+ STDAPI WscUnRegisterChanges(HANDLE hRegistrationHandle);
+ 
+ // The WscRegisterForUserNotifications function registers a callback function to be run when the Security Center service
+@@ -111,6 +114,7 @@
+ // is always S_FALSE and the pHealth out parameter is always set to WSC_SECURITY_PROVIDER_HEALTH_POOR.
+ // 
+ 
++_Windows_SupportedOS_WindowsVista_
+ STDAPI WscGetSecurityProviderHealth(DWORD Providers,
+                                     PWSC_SECURITY_PROVIDER_HEALTH pHealth);
+ 

@@ -206,3 +206,33 @@ The 28 repeated source/discovery inputs are byte-identical; all 155 pointer
 reductions remain. Artifacts are in `artifacts\header-annotation-wave\batch2`.
 These overlapping run counts are not a unique-test total. Consumer compatibility
 remains unverified.
+
+Batch 3 moves 16 ToolHelp XP floors and 15 last-error facts, retaining the
+non-error-annotated `Toolhelp32ReadProcessMemory` contract. Its two existing
+logical groups retain unsigned 32-bit storage and all ten members: only
+`CREATE_TOOLHELP_SNAPSHOT_FLAGS` is a flags enum. The two native DWORD use sites
+become associated rather than substituted enum types.
+
+UpdateAssessment moves only `IWaaSAssessor`'s Windows 10 build 15063 floor.
+SecurityCenter moves two Windows 8 interface floors and three Vista API floors;
+its existing `IWSCProductList::Initialize::provider` association moves from the
+emitter to the native parameter without a declared-output difference. WinSat
+moves precisely seven Vista interface floors, not every interface in its header.
+`FileHistory` remains an unchanged dependent of the SecurityCenter headers.
+
+These floors agree with the published requirements for
+[ToolHelp](https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot),
+[IWaaSAssessor](https://learn.microsoft.com/windows/win32/api/waasapi/nn-waasapi-iwaasassessor),
+[IWSCProductList](https://learn.microsoft.com/windows/win32/api/iwscapi/nn-iwscapi-iwscproductlist),
+[WscRegisterForChanges](https://learn.microsoft.com/windows/win32/api/wscapi/nf-wscapi-wscregisterforchanges)
+and [WinSAT](https://learn.microsoft.com/windows/win32/api/winsatcominterfacei/nn-winsatcominterfacei-iinitiatewinsatassessment).
+SDK-header identities bind SecurityCenter and WinSat directly; the selected
+package supplies their generated headers, not IDLs. UpdateAssessment separately
+pins its supplied IDLs and checked-in post-MIDL headers.
+
+Global `IUnknown`/`IDispatch`, BSTR/VARIANT helpers, and Foundation `HANDLE`
+definitions remain outside these physical owners. No snapshot or registration
+handle identity is invented, and a SecurityCenter registration is not assumed to
+use `CloseHandle`: its native API contract specifies `WscUnRegisterChanges`.
+The 22 emitted ToolHelp/SecurityCenter DLL bindings are independently reproduced
+by the preference-free SDK scan and remain derived bindings, not header overrides.

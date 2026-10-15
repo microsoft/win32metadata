@@ -503,7 +503,6 @@ CreateThreadpoolWork
 CreateTimerQueue
 CreateTimerQueueTimer
 CreateToolbarEx
-CreateToolhelp32Snapshot
 CreateTransaction
 CreateTransactionManager
 CreateUmsCompletionList
@@ -1638,10 +1637,6 @@ GopherOpenFileA
 GopherOpenFileW
 HandleLogFull
 HasOverlappedIoCompleted
-Heap32First
-Heap32ListFirst
-Heap32ListNext
-Heap32Next
 HeapCompact
 HeapCreate
 HeapDestroy
@@ -1919,10 +1914,6 @@ MessageBoxW
 MiniDumpWriteDump
 ModifyMenuA
 ModifyMenuW
-Module32First
-Module32FirstW
-Module32Next
-Module32NextW
 MoveFile
 MoveFileA
 MoveFileExA
@@ -2045,10 +2036,6 @@ PrePrepareComplete
 PrePrepareEnlistment
 PrivilegeCheck
 PrivilegedServiceAuditAlarmA
-Process32First
-Process32FirstW
-Process32Next
-Process32NextW
 ProcessIdToSessionId
 PropertySheetA
 PropertySheetW
@@ -2973,8 +2960,6 @@ TerminateLogArchive
 TerminateProcess
 TerminateReadLog
 TerminateThread
-Thread32First
-Thread32Next
 TileWindows
 TlsAlloc
 TlsFree

@@ -57,6 +57,42 @@
       "sourceSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\ual.h",
       "sdkSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB"
+    },
+    {
+      "path": "um\\TlHelp32.h",
+      "sourceSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\TlHelp32.h",
+      "sdkSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1"
+    },
+    {
+      "path": "um\\waasapi.h",
+      "sourceSha256": "4BF901F1C9E8E407925DBADE8E022B1EB4D1946CCACA0FF7DEA5F88D8E4A4D45",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+      "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+    },
+    {
+      "path": "um\\waasapitypes.h",
+      "sourceSha256": "D61D87E4A316ECF0CBA6529A38CB48F148ADD0D94C7C81EADC44D9B4D1867738",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapitypes.idl",
+      "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+    },
+    {
+      "path": "um\\iwscapi.h",
+      "sourceSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iwscapi.h",
+      "sdkSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8"
+    },
+    {
+      "path": "um\\wscapi.h",
+      "sourceSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wscapi.h",
+      "sdkSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B"
+    },
+    {
+      "path": "um\\winsatcominterfacei.h",
+      "sourceSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsatcominterfacei.h",
+      "sdkSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3"
     }
   ],
   "partitions": [
@@ -70,7 +106,11 @@
     "PsApi1",
     "PsApi2",
     "Time",
-    "Ual"
+    "Ual",
+    "ToolHelp",
+    "UpdateAssessment",
+    "SecurityCenter",
+    "WinSat"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -84,6 +124,11 @@
     "post-midl\\um\\magnification.annotations.patch",
     "post-midl\\um\\psapi.annotations.patch",
     "post-midl\\um\\timezoneapi.annotations.patch",
-    "post-midl\\um\\ual.annotations.patch"
+    "post-midl\\um\\ual.annotations.patch",
+    "post-midl\\um\\tlhelp32.annotations.patch",
+    "post-midl\\um\\waasapi.annotations.patch",
+    "post-midl\\um\\iwscapi.annotations.patch",
+    "post-midl\\um\\wscapi.annotations.patch",
+    "post-midl\\um\\winsatcominterfacei.annotations.patch"
   ]
 }
