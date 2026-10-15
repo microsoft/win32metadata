@@ -28,6 +28,9 @@ another owner's checkout.
 | Zero added/removed enum types, members, or API symbols | The five logical groups already exist in OLD. Native scheme macros remain in the ordinary header, not as newly manufactured WinHttp winmd constants. |
 | Fresh CsWin32 experience: unverified | The original C7 prototype measured four scheme-name breaks; this candidate restores the old names, but has not been regenerated against a complete matching frozen consumer closure. |
 
+The current producer is the [review-cleanup candidate](#review-cleanup-candidate).
+Earlier images and receipts below are immutable historical evidence.
+
 ## Inputs and ownership
 
 `generation\WinSDK\patches\SdkHeaders.json` pins SDK CPP `10.0.26100.7705`, the
@@ -445,3 +448,39 @@ The next review decision belongs to the consumer owner: verify generic
 `AssociatedEnum` projection separately when an agreed runnable consumer is
 available. A missing-member improvement would likewise require a separate,
 demonstrated OLD caller case and user approval; this migration adds no membership.
+
+## Review-cleanup candidate
+
+`new-review-cleanup` removes the redundant import patch and all 59 WinHttp
+`ImportLibrary` annotations. The restored `libMappings.rsp` is byte-identical to
+the tooling parent's generated file. A fresh SDK `winhttp.lib` scan independently
+reproduces all 79 retained WinHttp mappings, including the 59 emitted methods;
+this does not add a handwritten map or waive physical import checks.
+
+Header preparation is one generic SDK stage with the explicit `SdkHeaders.json`
+recipe, before native toolchain consumption. Ordinary/selected header scraping
+and constants share one private root. Four actual-project controls cover
+once-before-consumers ordering, cache reuse, and stale-marker invalidation for
+every architecture.
+
+| Current cleanup evidence | Identity |
+| --- | --- |
+| Full image | `artifacts\winhttp-migration\new-review-cleanup\Windows.Win32.winmd` |
+| Image SHA256 | `C81BECE2DFE770979BEA3EE805E5B0CDD31EFAE6CD42546A5E1B632D1F8D389E` |
+| Emission producer commit | `bb83dc967aacb82906d25e898338e703602502a1` |
+| Adjacent provenance SHA256 | `37F2F002F5FDE4D0232CCD3E485D45C8EBA63B321C2F177D14865A20B1BC1CF7` |
+| Reused unchanged-tool control | `9E6D95E42197BE2409807B8F93A27950192D57F455906A8F70F257B1CA6D932B` |
+
+The unchanged tool-binary hashes permit reuse of the prior frozen-input control.
+The fresh image has no declared differences from `new-preserved-names` and uses
+exactly the same 16 OLD-to-NEW expectations, with zero unknown/unused entries and
+no new APIs, enums, or members. First/repeated normal SDK scraping retains ten
+identical inputs and the complete 155 pointer reductions.
+
+Focused local checks passed 119 preparation/generic-annotation controls, six
+native ABI legs, 17 physical/no-authored-fallback cases, and all 14 SDK integrity
+cases, without skips. The SDK input closure is 393 actual diagnostics plus 393
+remap files (389 frozen nonselected and four new selected files per extension).
+The original C7 and naming-preserved images and receipts remain unchanged.
+Fresh CsWin32 verification is still explicitly unverified; no consumer work is
+part of this cleanup. CI must be checked separately on the final published head.
