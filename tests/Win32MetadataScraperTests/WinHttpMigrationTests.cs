@@ -36,13 +36,35 @@ namespace Win32MetadataScraperTests
             .Concat(new[]
             {
                 new EnumUse("Windows.Win32.System.ApplicationVerifier", "VerifierEnumerateResource", "Flags", "VERIFIER_ENUM_RESOURCE_FLAGS", "UInt32"),
+                new EnumUse("Windows.Win32.System.ProcessStatus", "EnumProcessModulesEx", "dwFilterFlag", "ENUM_PROCESS_MODULES_EX_FLAGS", "UInt32"),
+                new EnumUse("Windows.Win32.UI.Magnification", "MagSetWindowFilterList", "dwFilterMode", "MW_FILTERMODE", "UInt32"),
+                new EnumUse("Windows.Win32.UI.Magnification", "MagGetWindowFilterList", "pdwFilterMode", "MW_FILTERMODE", "UInt32*"),
             }).ToArray();
         private static readonly string[] AdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
             "VerifierEnumerateResource",
+            "MagGetColorEffect", "MagGetFullscreenColorEffect", "MagGetFullscreenTransform",
+            "MagGetImageScalingCallback", "MagGetInputTransform", "MagGetWindowFilterList",
+            "MagGetWindowSource", "MagGetWindowTransform", "MagInitialize", "MagSetColorEffect",
+            "MagSetFullscreenColorEffect", "MagSetFullscreenTransform", "MagSetImageScalingCallback",
+            "MagSetInputTransform", "MagSetWindowFilterList", "MagSetWindowSource", "MagSetWindowTransform",
+            "MagShowSystemCursor", "MagUninitialize",
+            "EmptyWorkingSet", "EnumDeviceDrivers", "EnumPageFilesA", "EnumPageFilesW", "EnumProcesses",
+            "EnumProcessModules", "EnumProcessModulesEx", "GetDeviceDriverBaseNameA", "GetDeviceDriverBaseNameW",
+            "GetDeviceDriverFileNameA", "GetDeviceDriverFileNameW", "GetMappedFileNameA", "GetMappedFileNameW",
+            "GetModuleBaseNameA", "GetModuleBaseNameW", "GetModuleFileNameExA", "GetModuleFileNameExW",
+            "GetModuleInformation", "GetPerformanceInfo", "GetProcessImageFileNameA", "GetProcessImageFileNameW",
+            "GetProcessMemoryInfo", "GetWsChanges", "GetWsChangesEx", "InitializeProcessForWsWatch",
+            "QueryWorkingSet", "QueryWorkingSetEx",
+            "EnumDynamicTimeZoneInformation", "FileTimeToSystemTime", "GetDynamicTimeZoneInformation",
+            "GetDynamicTimeZoneInformationEffectiveYears", "GetTimeZoneInformation", "GetTimeZoneInformationForYear",
+            "LocalFileTimeToLocalSystemTime", "LocalSystemTimeToLocalFileTime", "SetDynamicTimeZoneInformation",
+            "SetTimeZoneInformation", "SystemTimeToFileTime", "SystemTimeToTzSpecificLocalTime",
+            "SystemTimeToTzSpecificLocalTimeEx", "TzSpecificLocalTimeToSystemTime", "TzSpecificLocalTimeToSystemTimeEx",
+            "UalStart", "UalStop", "UalInstrument", "UalRegisterProduct",
         };
-        private static readonly string[] AdditionalLogicalEnums = { "VERIFIER_ENUM_RESOURCE_FLAGS" };
+        private static readonly string[] AdditionalLogicalEnums = { "VERIFIER_ENUM_RESOURCE_FLAGS", "ENUM_PROCESS_MODULES_EX_FLAGS", "MW_FILTERMODE" };
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
@@ -373,8 +395,15 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("VerifierEnumerateResource=", bindings);
             Assert.Contains("VerifierIsPerUserSettingsEnabled=SupportedOSPlatform(\"windows6.0.6000\")",
                 File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
-            foreach (string partition in new[] { "CEIP", "ApplicationVerifier" })
+            foreach (string name in new[] { "TimeProvOpen", "TimeProvCommand", "TimeProvClose" })
+            {
+                Assert.DoesNotContain(name, emitted);
+                Assert.Contains(name + "=SupportedOSPlatform(\"windows5.1.2600\")",
+                    File.ReadAllText(Path.Combine(project, "supportedOS.rsp")));
+            }
+            foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
+            Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", "PsApi2", "settings.rsp")));
         }
 
         [Theory]
@@ -545,7 +574,7 @@ namespace Win32MetadataScraperTests
                 var use = uses.SingleOrDefault(value => value.Owner == typeName && value.Member == name);
                 if (use != null)
                 {
-                    Assert.Equal(use.Namespace + "." + use.Enum, fieldType);
+                    Assert.Equal(use.OldType, fieldType);
                     fieldType = use.Native;
                     usedEnumSites?.Add(use.Site);
                 }
@@ -566,7 +595,7 @@ namespace Win32MetadataScraperTests
                 {
                     var parameter = parameters.Single(value => reader.GetString(value.Name) == use.Member);
                     Assert.True(parameter.SequenceNumber > 0);
-                    Assert.Equal(use.Namespace + "." + use.Enum, parameterTypes[parameter.SequenceNumber - 1]);
+                    Assert.Equal(use.OldType, parameterTypes[parameter.SequenceNumber - 1]);
                     parameterTypes[parameter.SequenceNumber - 1] = use.Native;
                     parameterEnums.Add(parameter.SequenceNumber, use.Enum);
                     usedEnumSites?.Add(use.Site);
@@ -689,6 +718,7 @@ namespace Win32MetadataScraperTests
         private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native)
         {
             internal string Site => Namespace + "." + Owner + "::" + Member;
+            internal string OldType => Namespace + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
         }
 
         private static Image Open(string variable) => new Image(Environment.GetEnvironmentVariable(variable));

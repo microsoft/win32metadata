@@ -27,6 +27,36 @@
       "sourceSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\avrfsdk.h",
       "sdkSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8"
+    },
+    {
+      "path": "um\\magnification.h",
+      "sourceSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\magnification.h",
+      "sdkSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84"
+    },
+    {
+      "path": "um\\Psapi.h",
+      "sourceSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Psapi.h",
+      "sdkSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9"
+    },
+    {
+      "path": "um\\timezoneapi.h",
+      "sourceSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timezoneapi.h",
+      "sdkSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50"
+    },
+    {
+      "path": "um\\timeprov.h",
+      "sourceSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timeprov.h",
+      "sdkSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0"
+    },
+    {
+      "path": "um\\ual.h",
+      "sourceSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ual.h",
+      "sdkSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB"
     }
   ],
   "partitions": [
@@ -35,7 +65,12 @@
     "CEIP",
     "ApplicationVerifier",
     "Base",
-    "FileHistory"
+    "FileHistory",
+    "MagApi",
+    "PsApi1",
+    "PsApi2",
+    "Time",
+    "Ual"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -45,6 +80,10 @@
     "post-midl\\um\\winhttp.port-constant-types.patch",
     "post-midl\\um\\winhttp.logical-enums.patch",
     "post-midl\\um\\windowsceip.annotations.patch",
-    "post-midl\\um\\avrfsdk.annotations.patch"
+    "post-midl\\um\\avrfsdk.annotations.patch",
+    "post-midl\\um\\magnification.annotations.patch",
+    "post-midl\\um\\psapi.annotations.patch",
+    "post-midl\\um\\timezoneapi.annotations.patch",
+    "post-midl\\um\\ual.annotations.patch"
   ]
 }

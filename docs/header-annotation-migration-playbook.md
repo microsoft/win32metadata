@@ -178,3 +178,16 @@ only nine exact enum-use sites differ. Eighteen owner/dependent native legs,
 byte-identical, and all 155 pointer reductions remain present. Artifacts are in
 `artifacts\header-annotation-wave\batch1`; prior immutable candidates are retained.
 Fresh consumer compatibility remains unverified.
+
+Batch 2 moves only emitted owners: MagApi's 19 OS floors, one last-error fact
+and two existing `MW_FILTERMODE` uses; PsApi1's 27 OS floors, 27 last-error facts
+and `EnumProcessModulesEx` filter use; Time's 13 OS floors and 11 last-error
+facts; and Ual's four OS floors. Correct SDK-scanned bindings remain untouched.
+Both logical groups retain precisely OLD membership, order and unsigned 32-bit
+storage; `MW_FILTERMODE` includes an annotated pointer parameter.
+
+The existing native `PSAPI_VERSION == 1` branch owns the PsApi1 annotations and
+logical group. The version-2 `K32*` declarations are not annotated or migrated;
+PsApi2 remains opted out and is regenerated as an unchanged dependent. Time's
+`timeprov.h` is pinned and compiled but has no emitted DLL-function facts to
+relocate. Its three unused provider-export OS rows remain outside this scope.

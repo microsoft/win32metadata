@@ -1,0 +1,37 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
+@@ -9,6 +9,7 @@
+ #define _UAL_H_INCLUDED
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #include <winsock2.h>
+ 
+ #if defined (_MSC_VER)
+@@ -33,21 +34,25 @@
+     WCHAR               UserName[MAX_PATH];
+ } UAL_DATA_BLOB, *PUAL_DATA_BLOB;
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ UalStart(
+     _In_ PUAL_DATA_BLOB Data);
+ 
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ UalStop(
+     _In_ PUAL_DATA_BLOB Data);
+     
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ UalInstrument(
+     _In_ PUAL_DATA_BLOB Data);
+     
++_Windows_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ UalRegisterProduct(

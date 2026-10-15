@@ -28416,26 +28416,6 @@
     ]
   },
   {
-    "name": "ENUM_PROCESS_MODULES_EX_FLAGS",
-    "flags": false,
-    "autoPopulate": {
-      "filter": "LIST_MODULES_",
-      "header": "psapi.h"
-    },
-    "members": [
-      {
-        "name": "LIST_MODULES_ALL",
-        "value": "3"
-      }
-    ],
-    "uses": [
-      {
-        "method": "EnumProcessModulesEx",
-        "parameter": "dwFilterFlag"
-      }
-    ]
-  },
-  {
     "name": "PAGE_TYPE",
     "flags": true,
     "members": [
@@ -31430,24 +31410,6 @@
         "interface": "IEmptyVolumeCache",
         "method": "Deactivate",
         "parameter": "pdwFlags"
-      }
-    ]
-  },
-  {
-    "name": "MW_FILTERMODE",
-    "autoPopulate": {
-      "filter": "MW_FILTERMODE_",
-      "header": "magnification.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "MagSetWindowFilterList",
-        "parameter": "dwFilterMode"
-      },
-      {
-        "method": "MagGetWindowFilterList",
-        "parameter": "pdwFilterMode"
       }
     ]
   },

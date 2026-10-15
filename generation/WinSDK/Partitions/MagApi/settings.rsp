@@ -2,3 +2,5 @@
 <IncludeRoot>/um/magnification.h
 --namespace
 Windows.Win32.UI.Magnification
+--config
+parse-win32-annotations
