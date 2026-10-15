@@ -1,11 +1,7 @@
 # Same-SDK b5b7b26 OLD to the complete WinHttp header-annotation NEW.
 # Native integer ABI plus eight authored logical-enum relationships.
-# Preserve OLD logical scheme members; add the four genuine native constants.
+# Preserve OLD logical scheme members and ordinary native constants.
 # No import, OS, last-error, callback, port, dependent-partition, or value changes.
-Windows.Win32.Networking.WinHttp.Apis.INTERNET_SCHEME_FTP added
-Windows.Win32.Networking.WinHttp.Apis.INTERNET_SCHEME_HTTP added
-Windows.Win32.Networking.WinHttp.Apis.INTERNET_SCHEME_HTTPS added
-Windows.Win32.Networking.WinHttp.Apis.INTERNET_SCHEME_SOCKS added
 Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags) : [In] => [AssociatedEnum(WIN_HTTP_CREATE_URL_FLAGS),In]
 Windows.Win32.Networking.WinHttp.Apis.WinHttpCreateUrl : parameter 2 (dwFlags)...Windows.Win32.Networking.WinHttp.WIN_HTTP_CREATE_URL_FLAGS => System.UInt32
 Windows.Win32.Networking.WinHttp.Apis.WinHttpOpen : parameter 2 (dwAccessType) : [In] => [AssociatedEnum(WINHTTP_ACCESS_TYPE),In]

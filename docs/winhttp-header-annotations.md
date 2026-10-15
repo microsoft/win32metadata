@@ -5,6 +5,29 @@ retaining the C# scraper/emitter and the matched ClangSharp 21 stack. It is a se
 migration layer above the tooling PR, not a replacement for that tooling. No other
 partition is migrated.
 
+## Partition review playbook
+
+Review the patch and matching legacy removals first, then distinguish actual
+signature changes from relocated facts. Bind OLD and the candidate to one SDK;
+run the prepared-header scrape/emission and exact diagnostic grade; separately
+report the consumer experience as measured or unverified. A known-difference
+entry is not authorization to add an API, enum family, or enum member.
+
+At a design boundary, capture one bounded reproducer, name the owner and smallest
+decision, and ask the user before expanding scope. Do not turn a partition pilot
+into parser work, consumer implementation, or new test infrastructure. For this
+pilot the user chose to preserve existing logical member names and minimize the
+winmd delta; fresh consumer replay is unverified, not an invitation to rebuild
+another owner's checkout.
+
+| Current OLD-to-candidate review delta | Meaning |
+| --- | --- |
+| Three method parameters and five struct fields use native integers | For example, `WinHttpOpenRequest::dwFlags` changes from `WINHTTP_OPEN_REQUEST_FLAGS` to `UInt32`; `URL_COMPONENTS::nScheme` changes from `WINHTTP_INTERNET_SCHEME` to `Int32`. Native width, calling convention, and layout are unchanged. |
+| Eight `AssociatedEnum` additions at those same sites | Preserve the logical relationship for a capable consumer; not eight additional APIs. |
+| Import, OS, last-error, buffer, port, and callback facts relocated | Existing final contracts stay unchanged; the matching legacy semantics are removed. |
+| Zero added/removed enum types, members, or API symbols | The five logical groups already exist in OLD. Native scheme macros remain in the ordinary header, not as newly manufactured WinHttp winmd constants. |
+| Fresh CsWin32 experience: unverified | The original C7 prototype measured four scheme-name breaks; this candidate restores the old names, but has not been regenerated against a complete matching frozen consumer closure. |
+
 ## Inputs and ownership
 
 `generation\WinSDK\patches\WinHttp.json` pins SDK CPP `10.0.26100.7705`, the
@@ -49,7 +72,7 @@ WinHttp library-map candidates are outside the emitted scope and remain unmigrat
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
 | Five logical enums, 21 emitted members, eight uses | Guarded native enums plus `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
 | Three port constant types | Guarded `constexpr INTERNET_PORT` declarations | Three `ushort` constant overrides |
-| Four native scheme constants | Untouched `INTERNET_SCHEME_*` macros emitted as loose constants | Four constants-scraper exclusions |
+| Four native scheme macros | Untouched native macros initialize the preserved logical members | Four constants-scraper exclusions; no new winmd constants |
 | One pointer-adding callback alias | Metadata-only guard around `LPWINHTTP_STATUS_CALLBACK` | Partition callback exclusion |
 
 All 59 bindings independently match the selected SDK's x64 `winhttp.lib`
@@ -101,8 +124,8 @@ The user-selected naming policy preserves the existing C# members
 `WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` in the metadata-only logical enum.
 Each initializer references its genuine `INTERNET_SCHEME_*` macro, yielding
 1/2/3/4 respectively. Those macros are neither undefined nor renamed; ordinary
-native declarations and integer ABI stay intact. The four genuine constants are
-also emitted independently on WinHttp `Apis`, not hidden or replaced by aliases.
+native declarations and integer ABI stay intact. There are no new loose WinHttp
+winmd constants: ordinary native macros are not the same as added metadata symbols.
 This is a bounded header-side exception to the specification's native-member
 spelling rule for these four existing logical members, not a general renaming rule.
 No semantic sidecar, consumer alias, WinHttp-specific consumer behavior, or
@@ -118,11 +141,19 @@ fields, matching OLD synthetic-enum C#. It does not request an enum-valued prope
 an interface-property shim, or a legacy projection mode. Each associated group in
 this pilot has one consistent underlying type across all its use sites.
 
-The genuine scheme spellings are also present in the distinct WinInet native enum,
-with different values. The duplicate-constant gate admits only the exact
-WinHttp `Apis`/WinInet native-enum owner pair for each of these four names, not unqualified name-wide
-exceptions. Its mutation controls reject a wrong owner and an additional owner;
-the physical enum checks still require the exact WinHttp values.
+The genuine scheme spellings remain present in the distinct WinInet native enum,
+with different values. The candidate adds no duplicate owner and needs no
+WinHttp/WinInet duplicate-constant exceptions. Physical checks require the exact
+OLD WinHttp enum identities, names, values, and attributes, and the existing
+WinInet owner set stays unchanged.
+
+For example, OLD `enums.json` defines `WINHTTP_ACCESS_TYPE` with
+`WINHTTP_ACCESS_TYPE_DEFAULT_PROXY=0`, `WINHTTP_ACCESS_TYPE_NO_PROXY=1`,
+`WINHTTP_ACCESS_TYPE_NAMED_PROXY=3`, and
+`WINHTTP_ACCESS_TYPE_AUTOMATIC_PROXY=4`. The guarded header enum declares those
+same four members and values; `WinHttpOpen::dwAccessType` keeps native `DWORD`
+plus `AssociatedEnum(WINHTTP_ACCESS_TYPE)`. This relocates existing membership,
+not a demonstrated fix for a missing `NONE` member or an earlier required cast.
 
 ## Reproducing the image and controls
 
@@ -215,10 +246,10 @@ SRM checks; neither is presented as a comprehensive typed metadata equivalence
 oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
 must not appear as new WinHttp migration differences.
 
-`patches\WinHttp.expected-differences.txt` admits exactly 20 declaration differences:
-native integer types and `AssociatedEnum` at eight sites (16 differences), plus
-four genuine native scheme constants on `Apis`. Existing logical enum member
-names and values are preserved. It
+`patches\WinHttp.expected-differences.txt` admits exactly 16 declaration differences:
+eight native integer use-site types and eight corresponding `AssociatedEnum`
+additions. Existing logical enum identities, member names, and values are
+preserved. It
 does not admit callback renames, import changes, dependent changes, additional
 constants, or changed values. The image builder applies this grade before publishing
 its provenance receipt.
@@ -337,10 +368,17 @@ four renames are not carried into the naming-preserved candidate.
 
 The fresh candidate is named `new-preserved-names`, with a separately emitted
 `tooling-control-preserved-names`. Its `provenance.json` must bind the committed
-producer, prepared-header manifest, exact 20-difference grade, complete generated
+producer, prepared-header manifest, exact 16-difference grade, complete generated
 closure, and first/repeated selected inputs. These outputs do not overwrite
 `new-final` or any original consumer receipts. The original patch, expectations,
 and owner exceptions are also frozen privately in `original-C7AEC280-inputs`.
+
+The first strict comparison rejected four unused expectations for extra loose
+WinHttp constants. The emitted image did not contain those symbols. The user's
+minimal-delta decision removes those expectations and their obsolete owner
+exceptions, rather than changing the producer to manufacture additions.
+Emission and final grading commits are recorded separately; correcting the
+diagnostic policy does not require regenerating unchanged metadata.
 
 The original three-way consumer reports do not prove this fresh image. Replaying
 them requires the existing pinned consumer binaries copied read-only to isolated

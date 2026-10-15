@@ -41,10 +41,17 @@ namespace Win32MetadataScraperTests
             using var current = Open("WINHTTP_MIGRATION_NEW");
             Assert.Equal(37314, old.Reader.TypeDefinitions.Count);
             Assert.Equal(old.Reader.TypeDefinitions.Count, current.Reader.TypeDefinitions.Count);
+            string[] beforeEnums = EnumIdentities(old.Reader);
+            Assert.Equal(beforeEnums, EnumIdentities(current.Reader));
+            this.output.WriteLine($"Complete enum identity set unchanged: {beforeEnums.Length}; added 0, removed 0.");
             var defect = Assert.ThrowsAny<XunitException>(() => AssertClosure(old.Reader));
             Assert.Contains("Unresolved local attribute constructor: " + MetadataNamespace + ".SupportedOSPlatformAttribute", defect.Message);
             Assert.Contains("definitions: 0|0|1|Void|String", defect.Message);
             AssertClosure(current.Reader);
+
+            static string[] EnumIdentities(MetadataReader reader) => Types(reader)
+                .Where(entry => !entry.Value.BaseType.IsNil && FullName(reader, entry.Value.BaseType) == "System.Enum")
+                .Select(entry => entry.Key).OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
         [MigrationFact]
@@ -175,6 +182,7 @@ namespace Win32MetadataScraperTests
         [InlineData(4)]
         public void HeaderEnumsPreserveLogicalNamesNativeValuesAndUnderlyingTypes(int architecture)
         {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
             using var image = Open("WINHTTP_MIGRATION_NEW");
             var reader = image.Reader;
             Check("WINHTTP_OPEN_REQUEST_FLAGS", "UInt32", true, new Dictionary<string, long>
@@ -202,18 +210,13 @@ namespace Win32MetadataScraperTests
                 ["WINHTTP_INTERNET_SCHEME_FTP"] = 3, ["WINHTTP_INTERNET_SCHEME_SOCKS"] = 4,
             });
             var apis = Type(reader, "Apis", architecture);
-            foreach (var scheme in new[] { ("HTTP", 1u), ("HTTPS", 2u), ("FTP", 3u), ("SOCKS", 4u) })
+            foreach (string name in new[] { "INTERNET_SCHEME_HTTP", "INTERNET_SCHEME_HTTPS", "INTERNET_SCHEME_FTP", "INTERNET_SCHEME_SOCKS" })
             {
-                string name = "INTERNET_SCHEME_" + scheme.Item1;
-                var field = apis.GetFields().Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == name);
-                Assert.Equal("UInt32", field.DecodeSignature(Signatures, null));
-                var constant = reader.GetConstant(field.GetDefaultValue());
-                Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
-                Assert.Equal(scheme.Item2, reader.GetBlobReader(constant.Value).ReadUInt32());
+                Assert.DoesNotContain(apis.GetFields().Select(reader.GetFieldDefinition), value => reader.GetString(value.Name) == name);
                 var owners = reader.TypeDefinitions.Where(handle => reader.GetTypeDefinition(handle).GetFields()
                         .Select(reader.GetFieldDefinition).Any(value => reader.GetString(value.Name) == name))
                     .Select(handle => FullName(reader, handle)).Distinct().OrderBy(value => value, StringComparer.Ordinal);
-                Assert.Equal(new[] { WinHttpNamespace + ".Apis", "Windows.Win32.Networking.WinInet.INTERNET_SCHEME" }, owners);
+                Assert.Equal(new[] { "Windows.Win32.Networking.WinInet.INTERNET_SCHEME" }, owners);
             }
             foreach (var port in new[] { ("INTERNET_DEFAULT_PORT", 0), ("INTERNET_DEFAULT_HTTP_PORT", 80), ("INTERNET_DEFAULT_HTTPS_PORT", 443) })
             {
@@ -225,6 +228,7 @@ namespace Win32MetadataScraperTests
             void Check(string name, string underlying, bool flags, Dictionary<string, long> expected)
             {
                 var type = Type(reader, name, architecture);
+                Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, name, architecture)), SnapshotType(reader, type));
                 Assert.Equal("System.Enum", FullName(reader, type.BaseType));
                 Assert.Equal(flags, type.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "FlagsAttribute"));
                 Assert.DoesNotContain(type.GetCustomAttributes(), handle => AttributeName(reader, handle) == "ScopedEnumAttribute");
