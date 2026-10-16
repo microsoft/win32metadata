@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iwscapi.h b/generation/Wi
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("8C38232E-3A45-4A27-92B0-1A16A975F669")
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      IWscProduct : public IDispatch
      {
      public:
@@ -21,7 +21,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/iwscapi.h b/generation/Wi
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("722A338C-6E8E-4E72-AC27-1417FB0C81C2")
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      IWSCProductList : public IDispatch
      {
      public:

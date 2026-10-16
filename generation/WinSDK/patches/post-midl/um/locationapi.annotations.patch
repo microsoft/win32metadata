@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("C8B7F7EE-75D0-4db9-B62D-7A0F369CA456")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      ILocationReport : public IUnknown
      {
      public:
@@ -21,7 +21,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("7FED806D-0EF8-4f07-80AC-36A0BEAE3134")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      ILatLongReport : public ILocationReport
      {
      public:
@@ -29,7 +29,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("C0B19F70-4ADF-445d-87F2-CAD8FD711792")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      ICivicAddressReport : public ILocationReport
      {
      public:
@@ -37,7 +37,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("AB2ECE69-56D9-4F28-B525-DE1B0EE44237")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      ILocation : public IUnknown
      {
      public:
@@ -45,7 +45,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("193E7729-AB6B-4b12-8617-7596E1BB191C")
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      ILocationPower : public IUnknown
      {
      public:
@@ -53,7 +53,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("A65AF77E-969A-4a2e-8ACA-33BB7CBB1235")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      IDefaultLocation : public IUnknown
      {
      public:
@@ -61,7 +61,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/locationapi.h b/generatio
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("CAE02BBF-798B-4508-A207-35A7906DC73D")
-+    _Windows_SupportedOS_Windows7_
++    _Win32_SupportedOS_Windows7_
      ILocationEvents : public IUnknown
      {
      public:

@@ -9,29 +9,19 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h b/generation/WinSDK
  #include <winsock2.h>
  
  #if defined (_MSC_VER)
-@@ -33,21 +34,25 @@
+@@ -33,6 +34,7 @@
      WCHAR               UserName[MAX_PATH];
  } UAL_DATA_BLOB, *PUAL_DATA_BLOB;
  
-+_Windows_SupportedOS_Windows8_
++_Win32_SupportedOS_BEGIN_(Windows8)
  HRESULT
  WINAPI
  UalStart(
-     _In_ PUAL_DATA_BLOB Data);
+@@ -54,6 +56,7 @@
+     _In_z_ const WCHAR* wszProductName,
+     _In_z_ const WCHAR* wszRoleName,
+     _In_z_ const WCHAR* wszGuid);
++_Win32_SupportedOS_END_()
  
-+_Windows_SupportedOS_Windows8_
- HRESULT
- WINAPI
- UalStop(
-     _In_ PUAL_DATA_BLOB Data);
-     
-+_Windows_SupportedOS_Windows8_
- HRESULT
- WINAPI
- UalInstrument(
-     _In_ PUAL_DATA_BLOB Data);
-     
-+_Windows_SupportedOS_Windows8_
- HRESULT
- WINAPI
- UalRegisterProduct(
+ #endif /* NTDDI_VERSION >= NTDDI_WIN8 */
+ 

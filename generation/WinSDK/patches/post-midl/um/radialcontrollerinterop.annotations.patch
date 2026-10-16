@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("1B0535C9-57AD-45C1-9D79-AD5C34360513")
-+    _Windows_SupportedOS_14393_
++    _Win32_SupportedOS_14393_
      IRadialControllerInterop : public IInspectable
      {
      public:
@@ -21,7 +21,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RadialControllerInterop.h
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("787cdaac-3186-476d-87e4-b9374a7b9970")
-+    _Windows_SupportedOS_14393_
++    _Win32_SupportedOS_14393_
      IRadialControllerConfigurationInterop : public IInspectable
      {
      public:

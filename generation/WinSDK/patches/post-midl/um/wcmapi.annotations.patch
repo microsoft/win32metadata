@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h b/generation/Win
  
  #ifndef __midl
  
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      DWORD WINAPI WcmQueryProperty(
          _In_opt_ const GUID* pInterface, // NULL for global properties
          _In_opt_ LPCWSTR strProfileName,
@@ -21,7 +21,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h b/generation/Win
          _Out_ PDWORD pdwDataSize,
          _Outptr_result_buffer_maybenull_(*pdwDataSize) PBYTE* ppData);
  
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      DWORD WINAPI WcmSetProperty(
          _In_opt_ const GUID* pInterface, // NULL for global properties
          _In_opt_ LPCWSTR strProfileName,
@@ -29,15 +29,15 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/wcmapi.h b/generation/Win
          _In_ DWORD dwDataSize,
          _In_reads_opt_(dwDataSize) const BYTE* pbData);
  
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      DWORD WINAPI WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_ WCM_PROFILE_INFO_LIST** ppProfileList);
  
      // Ethernet pseudo-profiles should not be included in pProfileList
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      DWORD WINAPI WcmSetProfileList(
          _In_ WCM_PROFILE_INFO_LIST* pProfileList, _In_ DWORD dwPosition, _In_ BOOL fIgnoreUnknownProfiles, _Reserved_ void* pReserved);
  
-+    _Windows_SupportedOS_Windows8_
++    _Win32_SupportedOS_Windows8_
      void WINAPI WcmFreeMemory(__deallocate(Mem) void* pMemory);
  
  #endif // not __midl

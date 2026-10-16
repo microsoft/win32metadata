@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/windowsceip.h b/generatio
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  
-+_Windows_SupportedOS_Windows81_
++_Win32_SupportedOS_Windows81_
  BOOL
  WINAPI
  CeipIsOptedIn();

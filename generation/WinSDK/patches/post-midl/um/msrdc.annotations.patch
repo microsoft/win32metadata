@@ -13,7 +13,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A71-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcGeneratorParameters : public IUnknown
      {
      public:
@@ -21,7 +21,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A72-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcGeneratorFilterMaxParameters : public IUnknown
      {
      public:
@@ -29,7 +29,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A73-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcGenerator : public IUnknown
      {
      public:
@@ -37,7 +37,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A74-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcFileReader : public IUnknown
      {
      public:
@@ -45,7 +45,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A75-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcFileWriter : public IRdcFileReader
      {
      public:
@@ -53,7 +53,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A76-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcSignatureReader : public IUnknown
      {
      public:
@@ -61,7 +61,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A77-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcComparator : public IUnknown
      {
      public:
@@ -69,7 +69,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A78-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcLibrary : public IUnknown
      {
      public:
@@ -77,7 +77,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7A-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityReportProgress : public IUnknown
      {
      public:
@@ -85,7 +85,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7B-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityTableDumpState : public IUnknown
      {
      public:
@@ -93,7 +93,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7C-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityTraitsMappedView : public IUnknown
      {
      public:
@@ -101,7 +101,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7D-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityTraitsMapping : public IUnknown
      {
      public:
@@ -109,7 +109,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7E-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityTraitsTable : public IUnknown
      {
      public:
@@ -117,7 +117,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A7F-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarityFileIdTable : public IUnknown
      {
      public:
@@ -125,7 +125,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A80-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IRdcSimilarityGenerator : public IUnknown
      {
      public:
@@ -133,7 +133,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A81-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      IFindSimilarResults : public IUnknown
      {
      public:
@@ -141,7 +141,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinS
  #if defined(__cplusplus) && !defined(CINTERFACE)
      
      MIDL_INTERFACE("96236A83-9DBC-11DA-9E3F-0011114AE311")
-+    _Windows_SupportedOS_WindowsVista_
++    _Win32_SupportedOS_WindowsVista_
      ISimilarity : public IUnknown
      {
      public:

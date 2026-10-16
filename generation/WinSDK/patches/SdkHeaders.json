@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.26100.7705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "77817f12308e29ec8bf77dc6fe56786e65ff9e08",
+  "sourceGitTree": "d3dc662e56c715c1e0c000a0300ff3088e9a9f17",
   "headers": [
     {
       "path": "um\\winhttp.h",
