@@ -703,3 +703,74 @@ source details are not additional authored facts or a full-image grade.
 Broad physical closure, final OLD/control/NEW images and exact-head full-SDK CI
 remain integration-owner gates after ordered tooling/pilot adoption. Consumer
 compatibility remains **UNVERIFIED**.
+
+## Combined canonical image local grade
+
+The ordered owning inputs through Proc_Snap/Monitor/IdentityProvider are emitted
+from two independent, unfiltered SDK scrapes at
+`92fdfdc45ba7cd35b34ecc8e55034ce3eb78575b`: 321 actual owners and 393 scan legs
+each. Their 813 generated C# files and eight discovery response files match
+byte-for-byte. After the generic constant-alias correction and namespace
+preservation, committed tooling/configuration
+`89a2ad02cda4f6eee30d639bf8707cf3902d594c` re-emits separate hash-bound copies
+without a frozen OLD source overlay. This is source reuse after emitter changes,
+not a claim that a new scrape ran at that tooling commit.
+
+| Local image | SHA256 |
+| --- | --- |
+| Canonical full SDK | `B1F987EA8E7B78A6DA30480FD72B08B397464B1C601301B3A951EE3B7D3842CC` |
+| Independent canonical repeat | `9437ADC219899CE777E6856A01F9AC685ED7DFC2DADA5FBAC9E2A2FD35DE7725` |
+| Matched frozen OLD tooling control | `26B5BCBB4914575956788D47E77C2E9CF9540A231D9537673F1D4DBB5428696A` |
+
+Both full images have 37,310 physical types, 247,659 fields, 70,740 methods and
+152,513 attributes. Their physical snapshots are literally identical without
+reviewed-change normalization. All 7,791 enum identities, member order, values,
+underlying types and flags remain unchanged, including the retained
+`System.Power.POWER_PLATFORM_ROLE_VERSION` namespace. The control differs from
+OLD only in the 39 known constructor instance-bit corrections.
+
+The exact declaration grade preserves all original 117 expectations and adds
+320 measured entries, with zero unknown or unused differences:
+
+| Classification | Exact declaration entries |
+| --- | ---: |
+| Previously reviewed enum uses, native MIDL retval capture and preserved result | 117 |
+| 140 further native-type/AssociatedEnum sites | 280 |
+| Native `DhcpEnumSubnets.EnumInfo` In/Out contract | 1 |
+| Native signatures at 23 exact handle-use sites | 23 |
+| Eight producer lifecycle targets, three retained-type lifecycle removals and four fabricated typedef removals | 15 |
+| Genuine native `WER_SUBMIT_DISCARD_IF_QUEUED` constant | 1 |
+
+The removed fabricated types are the two Bluetooth search handles and
+`HREPORT`/`HREPORTSTORE`. Their exact signatures retain native `IntPtr`,
+`Void*` and corresponding output pointer levels rather than imposing a uniform
+handle representation. Every relocated producer keeps its complete authored
+cleanup and invalid-value set `[-1,0]`; borrowed inputs gain no ownership.
+`WEB_SOCKET_HANDLE`, `FH_SERVICE_PIPE_HANDLE` and `HPSSWALK` retain their
+structural identities. `HPSS` remains invalid-only because `PssFreeSnapshot`
+requires both process and snapshot handles, not a unary cleanup.
+
+The WER addition is the existing macro alias in `WerApi.h:294` to
+`WER_SUBMIT_NO_QUEUE` at line 284: UInt32, value 128, all three architectures.
+Its 14-member unscoped UInt32/Flags logical enum remains unchanged.
+`AF_BTH` remains UInt16/value 32 and `HIDP_STATUS_I8242_TRANS_UNKNOWN` remains
+the same native NTSTATUS/Int32 bit pattern `0xC0110009`. Their field-table position
+adjustments name only these two static literals; every other field's order, type,
+value, attributes and layout in those two mixed-field API holders remains
+strictly graded. Existing API-only literal-row-order handling is unchanged;
+instance and enum field order remains strict.
+
+Each full image passes all 76 actual physical/no-fallback/mutation cases without
+skips. The primary image passes all 14 SDK integrity cases against the complete
+fresh 1,179-file scratch set, including all 393 scan diagnostics. The first
+combined test invocation's three wrong-namespace Restart Manager lookups and
+overbroad DHCP fallback assertion are preserved as failed evidence; the tests
+are corrected rather than changing metadata or removing the held DHCP row.
+
+Native field inference remains absent/default-off; the rejected 563-field image
+is not admitted. The exact `DHCP_IP_ARRAY::Elements` CountParamIndex=0 sidecar
+and the held DWM storage override remain. Root `7ea6c85d` is not implicitly
+inherited. These local receipts do not replace final-head CI and downloaded-image
+qualification in the draft review report. Managed projection/source effects of
+the native signatures, output ownership and newly captured native facts remain
+**UNVERIFIED**; no consumer work is implied by producer equivalence.

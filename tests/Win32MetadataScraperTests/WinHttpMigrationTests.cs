@@ -32,6 +32,7 @@ namespace Win32MetadataScraperTests
         private const string ProcessSnapshotNamespace = "Windows.Win32.System.Diagnostics.ProcessSnapshotting";
         private const string HidConstant = "HIDP_STATUS_I8242_TRANS_UNKNOWN";
         private const string WerAlias = "WER_SUBMIT_DISCARD_IF_QUEUED";
+        private const string HeldDhcpArrayRow = "DHCP_IP_ARRAY::Elements=[NativeArrayInfo(CountParamIndex=0)]";
         private const string WerAliasField = "F|" + WerAlias +
             "|Public, Static, Literal, HasDefault|UInt32|-1|UInt32:80000000||";
         private readonly ITestOutputHelper output;
@@ -584,6 +585,15 @@ namespace Win32MetadataScraperTests
                     transfer.Member == "return" ? value.SequenceNumber == 0 : current.Reader.GetString(value.Name) == transfer.Member);
                 Assert.Equal(transfer.Member == "return" ? ParameterAttributes.None : ParameterAttributes.Out, parameter.Attributes);
                 Assert.Equal(originalOwnership, Ownership(current.Reader, parameter.GetCustomAttributes()));
+                var signature = method.DecodeSignature(Signatures, null);
+                string producedType = transfer.Member == "return" ? signature.ReturnType : signature.ParameterTypes[parameter.SequenceNumber - 1];
+                if (transfer.Member != "return")
+                {
+                    Assert.EndsWith("*", producedType);
+                    producedType = producedType.Substring(0, producedType.Length - 1);
+                }
+                var cleanup = Methods(current.Reader, transfer.Namespace, "Apis", architecture)[transfer.Cleanup].DecodeSignature(Signatures, null);
+                Assert.Equal(producedType, Assert.Single(cleanup.ParameterTypes));
                 foreach (var other in method.GetParameters().Select(current.Reader.GetParameter)
                     .Where(value => value.SequenceNumber != parameter.SequenceNumber))
                     Assert.Empty(Ownership(current.Reader, other.GetCustomAttributes()));
@@ -682,8 +692,11 @@ namespace Win32MetadataScraperTests
                     AttributeValues(current.Reader, result.GetCustomAttributes(), "AssociatedEnumAttribute"));
             }
             foreach (string name in new[] { "RM_PROCESS_INFO", "RM_APP_STATUS", "WIN32_ERROR" })
-                Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, name, architecture)),
-                    SnapshotType(current.Reader, Type(current.Reader, name, architecture)));
+            {
+                string ns = name == "WIN32_ERROR" ? "Windows.Win32.Foundation" : RestartManagerNamespace;
+                Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, name, architecture, ns)),
+                    SnapshotType(current.Reader, Type(current.Reader, name, architecture, ns)));
+            }
         }
 
         [Fact]
@@ -1185,7 +1198,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void AdditionalEmittedOwnersHaveNoAuthoredSemanticFallback()
+        public void AdditionalEmittedOwnersHaveOnlyTheExplicitDhcpArrayResidual()
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");
             var emitted = old.Reader.MethodDefinitions.Select(old.Reader.GetMethodDefinition)
@@ -1201,12 +1214,15 @@ namespace Win32MetadataScraperTests
             {
                 foreach (string line in File.ReadLines(Path.Combine(project, file)))
                 {
+                    if (file == "emitter.settings.rsp" && line == HeldDhcpArrayRow)
+                        continue;
                     string target = line.Split('=')[0].Split(new[] { "::" }, StringSplitOptions.None)[0];
                     Assert.DoesNotContain(target, AdditionalOwnedMethods);
                     Assert.DoesNotContain(target, AdditionalLogicalEnums);
                     Assert.DoesNotContain(target, AdditionalOwnedTypes);
                 }
             }
+            Assert.Single(File.ReadLines(Path.Combine(project, "emitter.settings.rsp")).Where(line => line == HeldDhcpArrayRow));
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
             foreach (var item in enums.RootElement.GetProperty("items").EnumerateArray())
             {
