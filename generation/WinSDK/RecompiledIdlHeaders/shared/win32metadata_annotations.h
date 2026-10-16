@@ -1,31 +1,46 @@
-#pragma once
+#ifndef WIN32METADATA_ANNOTATIONS_H
+#define WIN32METADATA_ANNOTATIONS_H
 
 #if defined(WIN32METADATA) && defined(__clang__)
-#define _WIN32META_ANNOTATION_(text) __attribute__((annotate(text)))
+#define _WIN32META_ANNOTATION_(...) \
+    _Pragma("clang diagnostic push") \
+    _Pragma("clang diagnostic error \"-Wignored-attributes\"") \
+    __attribute__((annotate("Win32Metadata." __VA_ARGS__))) \
+    _Pragma("clang diagnostic pop")
 #define _WIN32META_STRINGIFY_(...) #__VA_ARGS__
 #define _WIN32META_EXPAND_STRINGIFY_(...) _WIN32META_STRINGIFY_(__VA_ARGS__)
-#if defined(WIN32METADATA_CSHARP)
-// Private C# transport preserves the declaration-time expansion of invalid values.
-#define _Win32_RAIIFree_(...) \
-    _WIN32META_ANNOTATION_("RAIIFree(" #__VA_ARGS__ ")") \
-    _WIN32META_ANNOTATION_("__win32metadata_RAIIFree_expanded(" _WIN32META_EXPAND_STRINGIFY_(__VA_ARGS__) ")")
+#define _Win32_RAIIFree_(cleanup, ...) \
+    _WIN32META_ANNOTATION_("RAIIFree", sizeof(&(cleanup)), ##__VA_ARGS__)
+#define _Win32_ImportLibrary_(...) _WIN32META_ANNOTATION_("ImportLibrary", __VA_ARGS__)
+#define _Win32_AssociatedEnum_(name) _WIN32META_ANNOTATION_("AssociatedEnum", (name)0)
+#define _Win32_Enum_(name, storage, ...) \
+    typedef _WIN32META_ANNOTATION_("Enum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
+#define _Win32_FlagsEnum_(name, storage, ...) \
+    typedef _WIN32META_ANNOTATION_("FlagsEnum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
 #else
-#define _Win32_RAIIFree_(...) _WIN32META_ANNOTATION_("RAIIFree(" #__VA_ARGS__ ")")
-#endif
-#else
-#define _WIN32META_ANNOTATION_(text)
+#define _WIN32META_ANNOTATION_(...)
 #define _Win32_RAIIFree_(...)
+#define _Win32_ImportLibrary_(...)
+#define _Win32_AssociatedEnum_(name)
+#define _Win32_Enum_(name, storage, ...)
+#define _Win32_FlagsEnum_(name, storage, ...)
 #endif
 
+#define _Win32_RAIIFree_Handle_(cleanup) _Win32_RAIIFree_(cleanup, -1, 0)
 #define _Win32_SetLastError_ _WIN32META_ANNOTATION_("SetLastError")
-#define _Win32_ImportLibrary_(name) _WIN32META_ANNOTATION_("ImportLibrary(" name ")")
 #define _Win32_PreserveResult_ _WIN32META_ANNOTATION_("PreserveResult")
 #define _Win32_Retained_ _WIN32META_ANNOTATION_("Retained")
 #define _Win32_ContainsInteriorPointers_ _WIN32META_ANNOTATION_("ContainsInteriorPointers")
 #define _Win32_Retval_ _WIN32META_ANNOTATION_("RetVal")
 #define _Win32_AlsoUsableFor_(name) _WIN32META_ANNOTATION_("AlsoUsableFor(" #name ")")
-#define _Win32_AssociatedEnum_(name) _WIN32META_ANNOTATION_("AssociatedEnum(" #name ")")
 #define _Win32_AssociatedConstant_(name) _WIN32META_ANNOTATION_("AssociatedConstant(" #name ")")
+
+#if defined(MIDL_PASS)
+#define _Win32_AnnotateInterface_(name, annotation) \
+    cpp_quote("#if defined(__cplusplus)") \
+    cpp_quote("struct " #annotation " " #name ";") \
+    cpp_quote("#endif")
+#endif
 
 #define _WIN32META_OS_VERSION_Windows2000 "SupportedOSPlatform(\"windows5.0\")"
 #define _WIN32META_OS_VERSION_WindowsXP "SupportedOSPlatform(\"windows5.1.2600\")"
@@ -71,16 +86,17 @@
 #define _Win32_SupportedOS_Server2012_ _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(Server2012))
 #define _Win32_SupportedOS_Server2016_ _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(Server2016))
 
-// Balance scope controls within each header, outside record/interface bodies.
-// The metadata reader resolves the innermost default and explicit declaration overrides.
+// Clang owns lexical scope, including includes. Attributes accumulate, not override.
 #if defined(WIN32METADATA) && defined(__clang__)
 #define _WIN32META_OS_PRAGMA(...) _Pragma(_WIN32META_EXPAND_STRINGIFY_(__VA_ARGS__))
 #define _Win32_SupportedOS_BEGIN_(os) \
     _WIN32META_OS_PRAGMA(clang attribute win32_os.push( \
-        __attribute__((annotate(_WIN32META_OS_VERSION(os)))), \
+        __attribute__((annotate("Win32Metadata." _WIN32META_OS_VERSION(os)))), \
         apply_to = any(function, record, enum, type_alias)))
 #define _Win32_SupportedOS_END_() _WIN32META_OS_PRAGMA(clang attribute win32_os.pop)
 #else
 #define _Win32_SupportedOS_BEGIN_(os)
 #define _Win32_SupportedOS_END_()
+#endif
+
 #endif

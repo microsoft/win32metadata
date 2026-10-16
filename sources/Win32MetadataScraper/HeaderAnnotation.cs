@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
@@ -10,13 +11,13 @@ namespace Win32MetadataScraper
 {
     internal sealed record HeaderAnnotation(string Name, IReadOnlyList<string> Arguments)
     {
-        internal const string ExpandedRaiiName = "__win32metadata_RAIIFree_expanded";
+        internal const string OwnerPrefix = "Win32Metadata.";
 
         private static readonly HashSet<string> Names = new(StringComparer.Ordinal)
         {
             "SetLastError", "ImportLibrary", "SupportedOSPlatform", "PreserveResult",
             "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal",
-            "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", ExpandedRaiiName,
+            "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", "Enum", "FlagsEnum",
         };
 
         private static readonly HashSet<string> SupportedVersions = new(StringComparer.Ordinal)
@@ -30,12 +31,18 @@ namespace Win32MetadataScraper
 
         internal static bool IsKnownPayload(string payload)
         {
+            if (payload.StartsWith(OwnerPrefix, StringComparison.Ordinal))
+                return true;
             int end = payload.IndexOfAny(new[] { '(', '=', ' ', '\t', '\r', '\n' });
             return Names.Contains(end < 0 ? payload : payload[..end]);
         }
 
+        internal static string RemoveOwnerPrefix(string payload)
+            => payload.StartsWith(OwnerPrefix, StringComparison.Ordinal) ? payload[OwnerPrefix.Length..] : payload;
+
         internal static HeaderAnnotation Parse(string payload)
         {
+            payload = RemoveOwnerPrefix(payload);
             int open = payload.IndexOf('(');
             string name = (open < 0 ? payload : payload[..open]).Trim();
             if (!Names.Contains(name))
@@ -56,11 +63,15 @@ namespace Win32MetadataScraper
             switch (name)
             {
                 case "RAIIFree":
-                case ExpandedRaiiName:
+                case "Enum":
+                case "FlagsEnum":
                     minimum = 1;
                     maximum = int.MaxValue;
                     break;
                 case "ImportLibrary":
+                    minimum = 1;
+                    maximum = 2;
+                    break;
                 case "SupportedOSPlatform":
                 case "AlsoUsableFor":
                 case "AssociatedEnum":
@@ -75,7 +86,10 @@ namespace Win32MetadataScraper
             if (valued != (minimum != 0) || arguments.Count < minimum || arguments.Count > maximum)
             {
                 throw new FormatException($"Annotation '{name}' expects " +
-                    (minimum == 0 ? "no value or parentheses." : minimum == maximum ? "one value." : "a cleanup name and optional invalid values."));
+                    (minimum == 0 ? "no value or parentheses." : minimum == maximum ? "one value." :
+                    name is "Enum" or "FlagsEnum" ? "one or more member names." :
+                    name == "ImportLibrary" ? "a module and an optional import entry point." :
+                    "a cleanup name and optional invalid values."));
             }
 
             if (name == "SupportedOSPlatform")
@@ -93,6 +107,15 @@ namespace Win32MetadataScraper
                 {
                     throw new FormatException($"Invalid import module '{module}'.");
                 }
+                if (arguments.Count == 2)
+                {
+                    string entryPoint = ReadString(arguments[1], requireQuotes: true);
+                    if (entryPoint.Length == 0 || entryPoint.Any(char.IsControl))
+                        throw new FormatException("An import entry point must be a nonempty export name or ordinal.");
+                    if (entryPoint[0] == '#' && (!ushort.TryParse(entryPoint.AsSpan(1),
+                        NumberStyles.None, CultureInfo.InvariantCulture, out ushort ordinal) || ordinal == 0))
+                        throw new FormatException("An import ordinal must be between 1 and 65535.");
+                }
             }
             else if (name is "RAIIFree" or "AlsoUsableFor" or "AssociatedEnum" or "AssociatedConstant")
             {
@@ -100,6 +123,12 @@ namespace Win32MetadataScraper
                 {
                     throw new FormatException($"Annotation '{name}' requires a native declaration name, not '{arguments[0]}'.");
                 }
+            }
+            else if (name is "Enum" or "FlagsEnum")
+            {
+                if (arguments.Any(argument => !Regex.IsMatch(argument, @"^[A-Za-z_]\w*$")) ||
+                    arguments.Distinct(StringComparer.Ordinal).Count() != arguments.Count)
+                    throw new FormatException("Enum groups require distinct member identifiers.");
             }
 
             return new HeaderAnnotation(name, arguments);
