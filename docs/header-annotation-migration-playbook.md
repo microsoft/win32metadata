@@ -85,6 +85,13 @@ value conflicts. Preserve existing logical member names and values while leaving
 native macros intact unless a separate review resolves a conflict. Document any
 user-approved metadata-only naming exception at the header boundary.
 
+Retain genuine native macro aliases when a logical enum moves into headers.
+Removing a duplicate loose enum-member constant must not leave a surviving alias
+initializer unbound. The emitter qualifies a simple alias to the unique enum
+member in the same namespace and applicable architecture, preserving the alias's
+declared constant type. Ambiguous bindings remain errors; do not add enum members,
+rewrite native values or suppress aliases merely because OLD omitted them.
+
 Keep expectations exact and source-backed, with zero unknown differences and zero
 unused expectations. There is no blanket native-derived difference or duplicate
 allowlist, and no assumption that faithful capture implies consumer compatibility.

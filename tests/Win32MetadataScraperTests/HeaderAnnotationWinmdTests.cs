@@ -726,6 +726,108 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
             => Emit(fixture.DirectoryPath, architecture);
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void NativeEnumConstantAliasesReachFinalWinmd(string architecture, string target, bool common)
+        {
+            string[] names =
+            {
+                "WER_SUBMIT_ADD_REGISTERED_DATA", "WER_SUBMIT_HONOR_RECOVERY", "WER_SUBMIT_HONOR_RESTART",
+                "WER_SUBMIT_NO_ARCHIVE", "WER_SUBMIT_NO_CLOSE_UI", "WER_SUBMIT_NO_QUEUE",
+                "WER_SUBMIT_OUTOFPROCESS", "WER_SUBMIT_OUTOFPROCESS_ASYNC", "WER_SUBMIT_QUEUE",
+                "WER_SUBMIT_SHOW_DEBUG", "WER_SUBMIT_START_MINIMIZED", "WER_SUBMIT_BYPASS_DATA_THROTTLING",
+                "WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY", "WER_SUBMIT_REPORT_MACHINE_ID",
+            };
+            uint[] values = { 16, 1, 2, 256, 64, 128, 32, 1024, 4, 8, 512, 2048, 4096, 8192 };
+            string declarations = "enum [[clang::flag_enum]] WER_SUBMIT_FLAGS : unsigned { "
+                + string.Join(", ", names.Zip(values, (name, value) => $"{name} = {value}")) + " };"
+                + " enum SIGNED_FLAGS : int { SIGNED_ALL = -1 };";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            if (common)
+            {
+                string commonDirectory = Path.Combine(fixture.DirectoryPath, "common");
+                Directory.CreateDirectory(commonDirectory);
+                File.Move(fixture.Output, Path.Combine(commonDirectory, "Bindings.cs"));
+            }
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.constants.cs"), @"
+namespace Other { public enum OtherFlags : uint { WER_SUBMIT_NO_QUEUE = 7 } }
+namespace Test { public static class Apis {
+    public const uint WER_SUBMIT_NO_QUEUE = 128;
+    public const uint WER_SUBMIT_DISCARD_IF_QUEUED = WER_SUBMIT_NO_QUEUE;
+    public const uint ALIAS_CHAIN = WER_SUBMIT_DISCARD_IF_QUEUED;
+    public const uint SIGNED_ALL = 0xffffffff;
+    public const uint UNSIGNED_ALIAS = SIGNED_ALL;
+    public const uint UNRELATED = 9;
+    public const uint UNRELATED_ALIAS = UNRELATED;
+}}");
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var flags = FindType(reader, "WER_SUBMIT_FLAGS");
+            AssertHasAttribute(reader, flags.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(reader, flags.GetCustomAttributes(), "ScopedEnumAttribute");
+            var fields = flags.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(names, fields.Skip(1).Select(field => reader.GetString(field.Name)));
+            Assert.Equal(values, fields.Skip(1).Select(ReadUInt32));
+            var constants = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
+                .ToDictionary(field => reader.GetString(field.Name));
+            Assert.All(constants.Values, field =>
+                Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
+            Assert.DoesNotContain("WER_SUBMIT_NO_QUEUE", constants.Keys);
+            Assert.DoesNotContain("SIGNED_ALL", constants.Keys);
+            Assert.Equal(128u, ReadUInt32(constants["WER_SUBMIT_DISCARD_IF_QUEUED"]));
+            Assert.Equal(128u, ReadUInt32(constants["ALIAS_CHAIN"]));
+            Assert.Equal(uint.MaxValue, ReadUInt32(constants["UNSIGNED_ALIAS"]));
+            Assert.Equal(9u, ReadUInt32(constants["UNRELATED_ALIAS"]));
+            Assert.Equal(7u, ReadUInt32(FindType(reader, "OtherFlags").GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "WER_SUBMIT_NO_QUEUE")));
+            AssertMetadataClosure(reader);
+
+            uint ReadUInt32(FieldDefinition field)
+            {
+                var value = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
+                return reader.GetBlobReader(value.Value).ReadUInt32();
+            }
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void EnumConstantAliasesDoNotGuessAnotherNamespaceOrAmbiguousEnum(bool ambiguous)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", "");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Bindings.cs"), ambiguous ? @"
+namespace Test {
+public enum First { SHARED = 1 }
+public enum Second { SHARED = 2 }
+public static class Apis { public const int ALIAS = SHARED; }
+}" : @"
+namespace Other { public enum First { SHARED = 1 } }
+namespace Test { public static class Apis { public const int ALIAS = SHARED; } }");
+            if (ambiguous)
+            {
+                var exception = Assert.Throws<AggregateException>(Create);
+                Assert.Contains(exception.Flatten().InnerExceptions, error =>
+                    error is InvalidOperationException && error.Message.Contains("Ambiguous enum constant alias 'Test.SHARED'"));
+            }
+            else
+            {
+                Assert.Contains(Create().GetDiagnostics(), diagnostic => diagnostic.Id == "CS0103");
+            }
+
+            ClangSharpSourceCompilation Create() => ClangSharpSourceCompilation.Create(fixture.DirectoryPath, "x64",
+                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
+                Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
+        }
+
         [ServiceApiMigrationTheory]
         [InlineData("x86")]
         [InlineData("x64")]
