@@ -1,0 +1,19 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/DirectML.h b/generation/WinSDK/RecompiledIdlHeaders/um/DirectML.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/DirectML.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/DirectML.h
+@@ -11,6 +11,7 @@
+ #else
+ #include "d3d12.h"
+ #endif
++#include <win32metadata_annotations.h>
+ 
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+ 
+@@ -2284,6 +2285,7 @@
+ 
+ DEFINE_ENUM_FLAG_OPERATORS(DML_CREATE_DEVICE_FLAGS)
+ 
++_Win32_SupportedOS_10240_
+ STDAPI DMLCreateDevice(
+     ID3D12Device* d3d12Device,
+     DML_CREATE_DEVICE_FLAGS flags,

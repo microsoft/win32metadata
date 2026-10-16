@@ -2,3 +2,5 @@
 <IncludeRoot>/um/rendezvoussession.h
 --namespace
 Windows.Win32.System.RemoteAssistance
+--config
+parse-win32-annotations

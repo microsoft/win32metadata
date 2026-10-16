@@ -1,0 +1,27 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ddpbackup.h
+@@ -86,6 +86,7 @@
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -126,6 +127,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("7BACC67A-2F1D-42D0-897E-6FF62DD533BB")
++    _Win32_SupportedOS_Server2012_
+     IDedupReadFileCallback : public IUnknown
+     {
+     public:
+@@ -279,6 +281,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("C719D963-2B2D-415E-ACF7-7EB7CA596FF4")
++    _Win32_SupportedOS_Server2012_
+     IDedupBackupSupport : public IUnknown
+     {
+     public:

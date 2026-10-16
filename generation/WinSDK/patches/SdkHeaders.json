@@ -501,6 +501,66 @@
       "sourceSha256": "8E570084A94B27294E49C024FFF4718DEC9FE9AA8742E153B199991B24A594FD",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\wnvapi.h",
       "sdkSha256": "8E570084A94B27294E49C024FFF4718DEC9FE9AA8742E153B199991B24A594FD"
+    },
+    {
+      "path": "um\\DirectML.h",
+      "sourceSha256": "3DAEED73AA64905C07B6F5394C7B45EABF0AC17BBCA54B1584C871E03E4F54AD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\DirectML.h",
+      "sdkSha256": "3DAEED73AA64905C07B6F5394C7B45EABF0AC17BBCA54B1584C871E03E4F54AD"
+    },
+    {
+      "path": "um\\ddpbackup.h",
+      "sourceSha256": "997E069DEFCAE330BDDB040403C58D5A76C207B8CD06A565D9E3EB0D929A7B90",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddpbackup.idl",
+      "sdkSha256": "20DD5778F6D5BE1CC225A014C8BF4D2F7D4261B7053D6DCBFB0EA14662AAD0C6"
+    },
+    {
+      "path": "um\\ddpchunk.h",
+      "sourceSha256": "BA68E4B34F0763E526EC05978B89D3266938AC30EDC5B516F084A8A354EFE717",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddpchunk.idl",
+      "sdkSha256": "FC2EAD46CD946725116A35E65C82C8D0F5F4C2C98D8BA21E9A55FFEF8B11B74D"
+    },
+    {
+      "path": "um\\ddpcommon.h",
+      "sourceSha256": "75CD20BD96CBF267215381478CABDBF4FBD66AE7053E3544DA28DC120959A902",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddpcommon.idl",
+      "sdkSha256": "A2CCE6535A68AE840B6D26833FFE6BB86A1A1D7368BF0318217DC449D21A7DF2"
+    },
+    {
+      "path": "um\\ddpdataport.h",
+      "sourceSha256": "C18819FCB1DDB0F9215EE7AB0D9EE318B2CABBB3CFB3E811E880A8A15CDA632B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddpdataport.idl",
+      "sdkSha256": "C685AF71B7B2E5D6B9B32A829667BB757F73C2E4D21E1549677592847CDF10EE"
+    },
+    {
+      "path": "um\\rendezvoussession.h",
+      "sourceSha256": "D681E95EC4C9F227060ABBC7C4C1A907CA848F0558A0A2CE55A51ECCFCE24925",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rendezvoussession.h",
+      "sdkSha256": "D681E95EC4C9F227060ABBC7C4C1A907CA848F0558A0A2CE55A51ECCFCE24925"
+    },
+    {
+      "path": "um\\wsbapp.h",
+      "sourceSha256": "DCC075EA32FDB9396D4847984F11F58375AB41C99C25429504B7EF01152933BA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbapp.idl",
+      "sdkSha256": "F8DCC85EA4BB30395A45423ACE0E2E78189C461D82671486E546D10170B01871"
+    },
+    {
+      "path": "um\\wsbonline.h",
+      "sourceSha256": "1A85654C0B368DC5F7AE5AB9943B285FF20C650F3D256249D430098076C0417E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbonline.h",
+      "sdkSha256": "1A85654C0B368DC5F7AE5AB9943B285FF20C650F3D256249D430098076C0417E"
+    },
+    {
+      "path": "um\\wsbapperror.h",
+      "sourceSha256": "C20F49CE0DF51434314C03B5C88E14F8F3C3B74FD47073E4AD4C9BB956D133E5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbapperror.h",
+      "sdkSha256": "C20F49CE0DF51434314C03B5C88E14F8F3C3B74FD47073E4AD4C9BB956D133E5"
+    },
+    {
+      "path": "um\\wsbonlineerror.h",
+      "sourceSha256": "320142FA791F045D5DBBA476421881B05F64DA4646981FC815E0201CD7DD16BE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbonlineerror.h",
+      "sdkSha256": "320142FA791F045D5DBBA476421881B05F64DA4646981FC815E0201CD7DD16BE"
     }
   ],
   "partitions": [
@@ -562,7 +622,11 @@
     "Media.DShow.Xml",
     "Media.DShow",
     "Win32_Tile_Badge_Notif",
-    "wnv"
+    "wnv",
+    "DirectML",
+    "Dedup",
+    "RemoteAssist",
+    "Wsb"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -632,6 +696,11 @@
     "post-midl\\um\\rrascfg.annotations.patch",
     "post-midl\\um\\amxmlgraphbuilder.annotations.patch",
     "post-midl\\um\\notificationactivationcallback.annotations.patch",
-    "post-midl\\um\\wnvapi.annotations.patch"
+    "post-midl\\um\\wnvapi.annotations.patch",
+    "post-midl\\um\\directml.annotations.patch",
+    "post-midl\\um\\ddpbackup.annotations.patch",
+    "post-midl\\um\\rendezvoussession.annotations.patch",
+    "post-midl\\um\\wsbapp.annotations.patch",
+    "post-midl\\um\\wsbonline.annotations.patch"
   ]
 }

@@ -818,3 +818,41 @@ These are bounded source/component/native inputs to the combined full-SDK
 migration, not a new OLD/control/NEW image, broad physical-closure grade,
 consumer-compatibility claim or final-head CI acceptance. Those gates remain
 with the combined migration integrator. `--nativeFieldArrayInfo` stays absent.
+
+## Bounded full-SDK input: DirectML, Dedup, RemoteAssist and Wsb
+
+This private input batch relocates twelve owned SupportedOS facts from
+`supportedOS.rsp` into five post-MIDL header patches. Eight COM interface floors
+and `DMLCreateDevice` use direct annotations. A Server 2012 scope covers exactly
+the three adjacent native functions in `wsbonline.h`, not its preceding records
+or typedefs. `DMLCreateDevice1` remains without an OS floor. The recipe admits all
+ten cluster headers and enables annotation parsing only for these four owners;
+neither the installed SDK nor `RecompiledIdlHeaders` is modified.
+
+The unmodified-header activation control exposes three existing native
+`[retval][out]` contracts on `IRendezvousSession`: `get_State.pSessionState`,
+`get_RemoteUser.bstrUserName` and `get_Flags.pFlags`. Bounded component emission
+captures exactly three `RetValAttribute` additions, with blob `01000000`, and no
+other parameter flag or attribute changes. Prepared headers and this activation
+control have identical physical snapshots across all 255 selected component
+types on each of x86, x64 and ARM64. These are component images using frozen OLD
+only for external references, not independent full-SDK images or an OLD-to-NEW
+full-SDK acceptance claim. Ordinary native ABI controls cover all four owners
+on all three architectures; anonymous `NativeTypeName` coordinate changes are
+inventoried separately rather than allowed by the metadata comparison.
+
+Three relocated Wsb function floors still have no physical methods: their
+existing empty DLL mappings cause the emitter to omit them. No module is
+guessed and no API is recreated. Shared COM/RPC declarations and their authored
+floors remain outside this batch. The existing global `LocalSize` OS row also
+continues to reach the two DirectML normalization descriptor fields; this shared
+name collision is a central-review residual, not permission to edit the global
+row or invent a field annotation. Dedup's `_DEDUP_SET_PARAM_TYPE` remap remains
+parser configuration.
+
+The private handoff pins the parent, payload, exact source/input preimages,
+per-fact dispositions and bounded command/evidence receipts under ignored
+`artifacts\sdk-component-migration`. The combined migration integrator owns
+original OLD/control/NEW full images, broad physical/transitive closure,
+final exact-head CI and downloaded-image qualification. Consumer compatibility
+remains unverified.
