@@ -3105,8 +3105,6 @@ WinUsb_WriteIsochPipe
 WinUsb_WriteIsochPipeAsap
 WinUsb_WritePipe
 WlanAllocateMemory
-WNetGetLastErrorA
-WNetGetLastErrorW
 Wow64DisableWow64FsRedirection
 Wow64GetThreadContext
 Wow64GetThreadSelectorEntry

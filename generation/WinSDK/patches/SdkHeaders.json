@@ -171,6 +171,54 @@
       "sourceSha256": "4F728FEF9AA5666482B448DCDCB908078429ACE810C388D430EEB46C17824016",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\EventSys.idl",
       "sdkSha256": "FB9D8FCAB51FF13E259E06D4B899FE12C2399557FA16827F2876B6451028D728"
+    },
+    {
+      "path": "um\\nb30.h",
+      "sourceSha256": "69759909F41583263F20CADFE1A013F023BA89A6A7752DCCC16240B1E9B5FC1B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\nb30.h",
+      "sdkSha256": "69759909F41583263F20CADFE1A013F023BA89A6A7752DCCC16240B1E9B5FC1B"
+    },
+    {
+      "path": "um\\winnetwk.h",
+      "sourceSha256": "7C7412DF502FB6EA390C96D7C9F805A2A211609B95B8FDB4740540F789D9C4CE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winnetwk.h",
+      "sdkSha256": "7C7412DF502FB6EA390C96D7C9F805A2A211609B95B8FDB4740540F789D9C4CE"
+    },
+    {
+      "path": "um\\Npapi.h",
+      "sourceSha256": "78986BC3A057E7FC0B6D10FDC4D0E1B1FF54B5B2F5BC198598ED1F224002F0DC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Npapi.h",
+      "sdkSha256": "78986BC3A057E7FC0B6D10FDC4D0E1B1FF54B5B2F5BC198598ED1F224002F0DC"
+    },
+    {
+      "path": "um\\Dhcpv6cSdk.h",
+      "sourceSha256": "1018C3FBEAF08B3B11DA6E9AF89BBCC98724561EEB363F4CA2F61D14FB8415A6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Dhcpv6cSdk.h",
+      "sdkSha256": "1018C3FBEAF08B3B11DA6E9AF89BBCC98724561EEB363F4CA2F61D14FB8415A6"
+    },
+    {
+      "path": "um\\DhcpCSdk.h",
+      "sourceSha256": "0A5B9BD25AD8D9079506229D06DD5A16999DE9177EFABCBE5E1C569F2E4BECFB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\DhcpCSdk.h",
+      "sdkSha256": "0A5B9BD25AD8D9079506229D06DD5A16999DE9177EFABCBE5E1C569F2E4BECFB"
+    },
+    {
+      "path": "um\\DhcpSSdk.h",
+      "sourceSha256": "7A1821118531FD531E211E6ECB69E7BA283D2A24E71202691F04B12B58F3023A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\DhcpSSdk.h",
+      "sdkSha256": "7A1821118531FD531E211E6ECB69E7BA283D2A24E71202691F04B12B58F3023A"
+    },
+    {
+      "path": "um\\dhcpsapi.h",
+      "sourceSha256": "A2CFDA0309F30B167D08218C6FFE89E57B860A2690A6F49650D4A252A8A0AC4D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dhcpsapi.h",
+      "sdkSha256": "A2CFDA0309F30B167D08218C6FFE89E57B860A2690A6F49650D4A252A8A0AC4D"
+    },
+    {
+      "path": "um\\NetSh.h",
+      "sourceSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\NetSh.h",
+      "sdkSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B"
     }
   ],
   "partitions": [
@@ -201,7 +249,15 @@
     "Com.Events",
     "ComOle",
     "WindowsConnectionManager",
-    "TransactionServer"
+    "TransactionServer",
+    "NetBios",
+    "Wnet",
+    "Dhcp",
+    "NetShell",
+    "Foundation",
+    "Com",
+    "Rpc",
+    "WinSock"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -230,6 +286,13 @@
     "post-midl\\um\\msrdc.annotations.patch",
     "post-midl\\um\\netlistmgr.annotations.patch",
     "post-midl\\um\\callobj.annotations.patch",
-    "post-midl\\um\\eventsys.annotations.patch"
+    "post-midl\\um\\eventsys.annotations.patch",
+    "post-midl\\um\\nb30.annotations.patch",
+    "post-midl\\um\\winnetwk.annotations.patch",
+    "post-midl\\um\\npapi.annotations.patch",
+    "post-midl\\um\\dhcpv6csdk.annotations.patch",
+    "post-midl\\um\\dhcpcsdk.annotations.patch",
+    "post-midl\\um\\dhcpsapi.annotations.patch",
+    "post-midl\\um\\netsh.annotations.patch"
   ]
 }

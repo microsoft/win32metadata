@@ -1,0 +1,41 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Dhcpv6cSdk.h
+@@ -1,4 +1,5 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ /*++
+ 
+@@ -150,6 +151,7 @@
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ VOID
+ APIENTRY
+ Dhcpv6CApiInitialize(
+@@ -173,6 +175,7 @@
+ IN      LPBYTE                 		buffer,
+ IN OUT  LPDWORD                		pSize
+ );
++_Win32_SupportedOS_END_()
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+@@ -180,6 +183,7 @@
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ DWORD
+ APIENTRY
+ Dhcpv6RequestPrefix(
+@@ -206,6 +210,7 @@
+ IN LPDHCPV6CAPI_CLASSID     		classId,
+ IN LPDHCPV6PrefixLeaseInformation	leaseInfo
+ );
++_Win32_SupportedOS_END_()
+ 
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
