@@ -1,0 +1,123 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
+index 9148a814..e1b1a339 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/highlevelmonitorconfigurationapi.h
+@@ -5,6 +5,7 @@
+ #define HighLevelMonitorConfigurationAPI_h
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -109,6 +110,7 @@ typedef enum _MC_COLOR_TEMPERATURE
+ /******************************************************************************
+     Monitor capability functions 
+ ******************************************************************************/
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ _BOOL WINAPI GetMonitorCapabilities
+     ( 
+     HANDLE hMonitor, 
+@@ -119,16 +121,19 @@ _BOOL WINAPI GetMonitorCapabilities
+ /******************************************************************************
+     Monitor setting persistence functions 
+ ******************************************************************************/
++_Win32_SetLastError_
+ _BOOL WINAPI SaveCurrentMonitorSettings( HANDLE hMonitor );
+ 
+ /******************************************************************************
+     Monitor meta-data functions
+ ******************************************************************************/
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorTechnologyType( HANDLE hMonitor, LPMC_DISPLAY_TECHNOLOGY_TYPE pdtyDisplayTechnologyType );
+ 
+ /******************************************************************************
+     Monitor image calibration functions 
+ ******************************************************************************/
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorBrightness
+     ( 
+     HANDLE hMonitor, 
+@@ -136,6 +141,7 @@ _BOOL WINAPI GetMonitorBrightness
+     _Out_ LPDWORD pdwCurrentBrightness, 
+     _Out_ LPDWORD pdwMaximumBrightness 
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorContrast
+     ( 
+     HANDLE hMonitor, 
+@@ -143,7 +149,9 @@ _BOOL WINAPI GetMonitorContrast
+     _Out_ LPDWORD pdwCurrentContrast, 
+     _Out_ LPDWORD pdwMaximumContrast 
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorColorTemperature( HANDLE hMonitor, _Out_ LPMC_COLOR_TEMPERATURE pctCurrentColorTemperature );
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorRedGreenOrBlueDrive
+     ( 
+     HANDLE hMonitor, 
+@@ -152,6 +160,7 @@ _BOOL WINAPI GetMonitorRedGreenOrBlueDrive
+     _Out_ LPDWORD pdwCurrentDrive,
+     _Out_ LPDWORD pdwMaximumDrive
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorRedGreenOrBlueGain
+     ( 
+     HANDLE hMonitor, 
+@@ -161,16 +170,21 @@ _BOOL WINAPI GetMonitorRedGreenOrBlueGain
+     _Out_ LPDWORD pdwMaximumGain
+     );
+ 
++_Win32_SetLastError_
+ _BOOL WINAPI SetMonitorBrightness( HANDLE hMonitor, DWORD dwNewBrightness );
++_Win32_SetLastError_
+ _BOOL WINAPI SetMonitorContrast( HANDLE hMonitor, DWORD dwNewContrast );
++_Win32_SetLastError_
+ _BOOL WINAPI SetMonitorColorTemperature( HANDLE hMonitor, MC_COLOR_TEMPERATURE ctCurrentColorTemperature );
+ _BOOL WINAPI SetMonitorRedGreenOrBlueDrive( HANDLE hMonitor, MC_DRIVE_TYPE dtDriveType, DWORD dwNewDrive );
+ _BOOL WINAPI SetMonitorRedGreenOrBlueGain( HANDLE hMonitor, MC_GAIN_TYPE gtGainType, DWORD dwNewGain );
++_Win32_SetLastError_
+ _BOOL WINAPI DegaussMonitor( HANDLE hMonitor );
+ 
+ /******************************************************************************
+     Monitor image size and position calibration functions 
+ ******************************************************************************/
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorDisplayAreaSize
+     ( 
+     HANDLE hMonitor, 
+@@ -179,6 +193,7 @@ _BOOL WINAPI GetMonitorDisplayAreaSize
+     _Out_ LPDWORD pdwCurrentWidthOrHeight,
+     _Out_ LPDWORD pdwMaximumWidthOrHeight
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI GetMonitorDisplayAreaPosition
+     ( 
+     HANDLE hMonitor, 
+@@ -187,12 +202,14 @@ _BOOL WINAPI GetMonitorDisplayAreaPosition
+     _Out_ LPDWORD pdwCurrentPosition,
+     _Out_ LPDWORD pdwMaximumPosition
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI SetMonitorDisplayAreaSize
+     (
+     HANDLE hMonitor,
+     MC_SIZE_TYPE stSizeType,
+     DWORD dwNewDisplayAreaWidthOrHeight
+     );
++_Win32_SetLastError_
+ _BOOL WINAPI SetMonitorDisplayAreaPosition
+     (
+     HANDLE hMonitor,
+@@ -203,8 +220,11 @@ _BOOL WINAPI SetMonitorDisplayAreaPosition
+ /******************************************************************************
+     Restore to defaults functions
+ ******************************************************************************/
++_Win32_SetLastError_
+ _BOOL WINAPI RestoreMonitorFactoryColorDefaults( HANDLE hMonitor );
++_Win32_SetLastError_
+ _BOOL WINAPI RestoreMonitorFactoryDefaults( HANDLE hMonitor );
++_Win32_SupportedOS_END_()
+ 
+ #pragma pack( pop )
+ 

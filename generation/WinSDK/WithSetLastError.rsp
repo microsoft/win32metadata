@@ -32,8 +32,6 @@ AddConditionalAce
 AddConsoleAliasA
 AddConsoleAliasW
 AddDllDirectory
-AddERExcludedApplicationA
-AddERExcludedApplicationW
 AddIntegrityLabelToBoundaryDescriptor
 AddLogContainer
 AddLogContainerSet
@@ -164,18 +162,6 @@ BindImageEx
 BindIoCompletionCallback
 BitBlt
 BlockInput
-BluetoothDisplayDeviceProperties
-BluetoothFindDeviceClose
-BluetoothFindFirstDevice
-BluetoothFindFirstRadio
-BluetoothFindNextDevice
-BluetoothFindNextRadio
-BluetoothFindRadioClose
-BluetoothGetRadioInfo
-BluetoothRegisterForAuthentication
-BluetoothSdpEnumAttributes
-BluetoothSelectDevices
-BluetoothUnregisterAuthentication
 BringWindowToTop
 BroadcastSystemMessage
 BroadcastSystemMessageExA
@@ -192,8 +178,6 @@ CancelIo
 CancelIoEx
 CancelSynchronousIo
 CancelWaitableTimer
-CanUserWritePwrScheme
-CapabilitiesRequestAndCapabilitiesReply
 CascadeWindows
 CertAddCertificateContextToStore
 CertAddCertificateLinkToStore
@@ -705,7 +689,6 @@ DecryptFileW
 DeferWindowPos
 DefineDosDeviceA
 DefineDosDeviceW
-DegaussMonitor
 DeleteAce
 DeleteAtom
 DeleteEnclave
@@ -725,7 +708,6 @@ DeletePortW
 DeletePrinter
 DeleteProfileA
 DeleteProfileW
-DeletePwrScheme
 DeleteService
 DeleteTimerQueue
 DeleteTimerQueueEx
@@ -750,13 +732,10 @@ DestroyCursor
 DestroyEnvironmentBlock
 DestroyIcon
 DestroyMenu
-DestroyPhysicalMonitor
-DestroyPhysicalMonitors
 DestroyPrivateObjectSecurity
 DestroyWindow
 DetectAutoProxyUrl
 DeviceIoControl
-DevicePowerSetDeviceState
 DialogBoxIndirectParamA
 DialogBoxIndirectParamW
 DialogBoxParamA
@@ -795,8 +774,6 @@ DumpLogRecords
 DuplicateHandle
 DuplicateToken
 DuplicateTokenEx
-EcOpenSubscription
-EcOpenSubscriptionEnum
 EditSecurity
 EmptyClipboard
 EnableMouseInPointer
@@ -846,7 +823,6 @@ EnumPrintersA
 EnumPrintersW
 EnumProtocolsA
 EnumProtocolsW
-EnumPwrSchemes
 EnumResourceLanguagesA
 EnumResourceLanguagesExA
 EnumResourceLanguagesExW
@@ -1108,7 +1084,6 @@ GenerateConsoleCtrlEvent
 GetAce
 GetAclInformation
 GetActiveProcessorCount
-GetActivePwrScheme
 GetAddressByNameA
 GetAddressByNameW
 getaddrinfo
@@ -1124,7 +1099,6 @@ GetBinaryTypeW
 GetCalendarInfoA
 GetCalendarInfoEx
 GetCalendarInfoW
-GetCapabilitiesStringLength
 GetCaretBlinkTime
 GetCaretPos
 GetClassInfoA
@@ -1217,7 +1191,6 @@ GetCurrentDirectory
 GetCurrentHwProfileA
 GetCurrentHwProfileW
 GetCurrentInputMessageSource
-GetCurrentPowerPolicies
 GetCurrentUmsThread
 GetCursorInfo
 GetCursorPos
@@ -1353,14 +1326,6 @@ GetModuleHandleA
 GetModuleHandleExA
 GetModuleHandleExW
 GetModuleHandleW
-GetMonitorBrightness
-GetMonitorColorTemperature
-GetMonitorContrast
-GetMonitorDisplayAreaPosition
-GetMonitorDisplayAreaSize
-GetMonitorRedGreenOrBlueDrive
-GetMonitorRedGreenOrBlueGain
-GetMonitorTechnologyType
 GetMouseMovePointsEx
 GetNameByTypeA
 GetNameByTypeW
@@ -1394,7 +1359,6 @@ GetNumberFormatW
 GetNumberOfConsoleInputEvents
 GetNumberOfConsoleMouseButtons
 GetNumberOfEventLogRecords
-GetNumberOfPhysicalMonitorsFromHMONITOR
 GetOldestEventLogRecord
 GetOpenClipboardWindow
 GetOverlappedResult
@@ -1403,7 +1367,6 @@ GetParent
 getpeername
 GetPhysicalCursorPos
 GetPhysicallyInstalledSystemMemory
-GetPhysicalMonitorsFromHMONITOR
 GetPixelFormat
 GetPointerCursorId
 GetPointerDevice
@@ -1458,8 +1421,6 @@ GetProfilesDirectoryW
 GetProfileType
 getprotobyname
 getprotobynumber
-GetPwrCapabilities
-GetPwrDiskSpindownRange
 GetQueuedCompletionStatus
 GetQueuedCompletionStatusEx
 GetRawInputBuffer
@@ -1542,7 +1503,6 @@ GetTimeFormatA
 GetTimeFormatEx
 GetTimeFormatW
 GetTimestampForLoadedLibrary
-GetTimingReport
 GetTitleBarInfo
 GetTokenInformation
 GetTopWindow
@@ -1579,7 +1539,6 @@ GetUserObjectSecurity
 GetUserPreferredUILanguages
 GetUserProfileDirectoryA
 GetUserProfileDirectoryW
-GetVCPFeatureAndVCPFeatureReply
 GetVersionExA
 GetVersionExW
 GetVolumeInformationA
@@ -2095,7 +2054,6 @@ ReadEventLogW
 ReadFile
 ReadFileEx
 ReadFileScatter
-ReadGlobalPwrPolicy
 ReadLogArchiveMetadata
 ReadLogNotification
 ReadLogRecord
@@ -2104,8 +2062,6 @@ ReadNextLogRecord
 ReadOnlyEnlistment
 ReadPreviousLogRestartArea
 ReadProcessMemory
-ReadProcessorPwrScheme
-ReadPwrScheme
 ReadUrlCacheEntryStream
 RealGetWindowClassW
 ReBaseImage
@@ -2174,8 +2130,6 @@ ResetCompressor
 ResetDecompressor
 ResetEvent
 ResolveLocaleName
-RestoreMonitorFactoryColorDefaults
-RestoreMonitorFactoryDefaults
 ResumeSuspendedDownload
 ResumeThread
 ResUtilDupString
@@ -2213,8 +2167,6 @@ SaferIdentifyLevel
 SaferRecordEventLogEntry
 SaferSetLevelInformation
 SaferSetPolicyInformation
-SaveCurrentMonitorSettings
-SaveCurrentSettings
 ScanLogContainers
 SCardAccessStartedEvent
 ScrollConsoleScreenBufferA
@@ -2240,7 +2192,6 @@ SendNotifyMessageA
 SendNotifyMessageW
 sendto
 SetAclInformation
-SetActivePwrScheme
 SetActiveWindow
 SetCalendarInfoA
 SetCalendarInfoW
@@ -2345,11 +2296,6 @@ SetMenuInfo
 SetMenuItemBitmaps
 SetMenuItemInfoA
 SetMenuItemInfoW
-SetMonitorBrightness
-SetMonitorColorTemperature
-SetMonitorContrast
-SetMonitorDisplayAreaPosition
-SetMonitorDisplayAreaSize
 SetNamedPipeHandleState
 SetParent
 SetPhysicalCursorPos
@@ -2396,7 +2342,6 @@ SetServiceStatus
 SetServiceW
 setsockopt
 SetStdHandle
-SetSuspendState
 SetSysColors
 SetSystemCursor
 SetSystemFileCacheSize
@@ -3105,8 +3050,6 @@ WinUsb_WriteIsochPipe
 WinUsb_WriteIsochPipeAsap
 WinUsb_WritePipe
 WlanAllocateMemory
-WNetGetLastErrorA
-WNetGetLastErrorW
 Wow64DisableWow64FsRedirection
 Wow64GetThreadContext
 Wow64GetThreadSelectorEntry
@@ -3125,7 +3068,6 @@ WriteConsoleW
 WriteFile
 WriteFileEx
 WriteFileGather
-WriteGlobalPwrPolicy
 WriteLogRestartArea
 WritePrivateProfileSectionA
 WritePrivateProfileSectionW
@@ -3134,12 +3076,10 @@ WritePrivateProfileStringW
 WritePrivateProfileStructA
 WritePrivateProfileStructW
 WriteProcessMemory
-WriteProcessorPwrScheme
 WriteProfileSectionA
 WriteProfileSectionW
 WriteProfileStringA
 WriteProfileStringW
-WritePwrScheme
 WSAAccept
 WSAAddressToStringA
 WSAAddressToStringW

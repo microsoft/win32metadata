@@ -87,6 +87,390 @@
       "sourceSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\Xinput.h",
       "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
+    },
+    {
+      "path": "um\\iwscapi.h",
+      "sourceSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iwscapi.h",
+      "sdkSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8"
+    },
+    {
+      "path": "um\\wscapi.h",
+      "sourceSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wscapi.h",
+      "sdkSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B"
+    },
+    {
+      "path": "um\\winsatcominterfacei.h",
+      "sourceSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsatcominterfacei.h",
+      "sdkSha256": "1EEDA1A0FB95BA15479F6FD702B712B979D01100D328F1CF0C20418D004677B3"
+    },
+    {
+      "path": "um\\wcmapi.h",
+      "sourceSha256": "06BF23E24924AF388A1039E9441E3A00569B1F63B2BACD30AEFF1155D17B14FE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcmapi.h",
+      "sdkSha256": "06BF23E24924AF388A1039E9441E3A00569B1F63B2BACD30AEFF1155D17B14FE"
+    },
+    {
+      "path": "um\\RadialControllerInterop.h",
+      "sourceSha256": "33B813E9A18CA0CC098D8D5D068B72BF76D42FA228F622449685399D6EABA14D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\RadialControllerInterop.idl",
+      "sdkSha256": "FD6A57358A3B3527076A6D982C0BDCDC47B0150DD769962731E8C268B7EF9EEF"
+    },
+    {
+      "path": "um\\IContact.h",
+      "sourceSha256": "B9E7611C0328B160E3E7B62AACECFCE82FACBB00681AD281730452322F9BFA13",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IContact.idl",
+      "sdkSha256": "DCC9C8D2A58B422BF4515494C3028A366687DDC875F9250FAE574E1298DC6ABD"
+    },
+    {
+      "path": "um\\contactaggregation.h",
+      "sourceSha256": "4D0949D0E0400070BE16C0B72C51A71AFBF7D5FD4EA0BFCC5E1B3798E079575A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\contactaggregation.idl",
+      "sdkSha256": "20BA280603DD19B48AEF891596073769916317802F5A0AA21297F02350EE6159"
+    },
+    {
+      "path": "um\\icontactproperties.h",
+      "sourceSha256": "19A449C82651190007CCC4B56AEBDEBF7CEB95251BBA60F30E4F619FDC64DB26",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\icontactproperties.h",
+      "sdkSha256": "19A449C82651190007CCC4B56AEBDEBF7CEB95251BBA60F30E4F619FDC64DB26"
+    },
+    {
+      "path": "shared\\gnssdriver.h",
+      "sourceSha256": "EF03674C6ECA66C55D65F3C1AA6B419DDF24D76CD227EDA95B60AF1B356A8F11",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\gnssdriver.h",
+      "sdkSha256": "EF03674C6ECA66C55D65F3C1AA6B419DDF24D76CD227EDA95B60AF1B356A8F11"
+    },
+    {
+      "path": "um\\locationapi.h",
+      "sourceSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\locationapi.h",
+      "sdkSha256": "565800816BE42A0B059BE0B5296C84E85F8FEF59E0E98CAD83BC6F7C5C935471"
+    },
+    {
+      "path": "um\\msrdc.h",
+      "sourceSha256": "F5D0B91C185535A176E91A5D8F2076BB4124EA76DE5D8E4A7FB814CF65CDD19D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msrdc.idl",
+      "sdkSha256": "4470145098F210805D6893F68D438911C647FE814B5E7E3138C2BFC6453C2177"
+    },
+    {
+      "path": "um\\netlistmgr.h",
+      "sourceSha256": "61D5529E64622D1B47C8BC1700FDA8EABA6818A4B76DCC7CE1575D41DCF87AAF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\netlistmgr.idl",
+      "sdkSha256": "C334776532B435450D5DA0E0EF4F92B5A8B639B13E737221CC1B47A5787D8E54"
+    },
+    {
+      "path": "um\\callobj.h",
+      "sourceSha256": "ABAC062F0ADDAF42B97B72BA556785169ECBA23188015423A460BA7A5AF3B305",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\callobj.idl",
+      "sdkSha256": "CEF9673107F25AEEC0FDD86A62F69A4C897D2455603F6E95D4E3A8F1DD4EEFC0"
+    },
+    {
+      "path": "um\\EventSys.h",
+      "sourceSha256": "4F728FEF9AA5666482B448DCDCB908078429ACE810C388D430EEB46C17824016",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\EventSys.idl",
+      "sdkSha256": "FB9D8FCAB51FF13E259E06D4B899FE12C2399557FA16827F2876B6451028D728"
+    },
+    {
+      "path": "um\\nb30.h",
+      "sourceSha256": "69759909F41583263F20CADFE1A013F023BA89A6A7752DCCC16240B1E9B5FC1B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\nb30.h",
+      "sdkSha256": "69759909F41583263F20CADFE1A013F023BA89A6A7752DCCC16240B1E9B5FC1B"
+    },
+    {
+      "path": "um\\winnetwk.h",
+      "sourceSha256": "7C7412DF502FB6EA390C96D7C9F805A2A211609B95B8FDB4740540F789D9C4CE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winnetwk.h",
+      "sdkSha256": "7C7412DF502FB6EA390C96D7C9F805A2A211609B95B8FDB4740540F789D9C4CE"
+    },
+    {
+      "path": "um\\Npapi.h",
+      "sourceSha256": "78986BC3A057E7FC0B6D10FDC4D0E1B1FF54B5B2F5BC198598ED1F224002F0DC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Npapi.h",
+      "sdkSha256": "78986BC3A057E7FC0B6D10FDC4D0E1B1FF54B5B2F5BC198598ED1F224002F0DC"
+    },
+    {
+      "path": "um\\Dhcpv6cSdk.h",
+      "sourceSha256": "1018C3FBEAF08B3B11DA6E9AF89BBCC98724561EEB363F4CA2F61D14FB8415A6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Dhcpv6cSdk.h",
+      "sdkSha256": "1018C3FBEAF08B3B11DA6E9AF89BBCC98724561EEB363F4CA2F61D14FB8415A6"
+    },
+    {
+      "path": "um\\DhcpCSdk.h",
+      "sourceSha256": "0A5B9BD25AD8D9079506229D06DD5A16999DE9177EFABCBE5E1C569F2E4BECFB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\DhcpCSdk.h",
+      "sdkSha256": "0A5B9BD25AD8D9079506229D06DD5A16999DE9177EFABCBE5E1C569F2E4BECFB"
+    },
+    {
+      "path": "um\\DhcpSSdk.h",
+      "sourceSha256": "7A1821118531FD531E211E6ECB69E7BA283D2A24E71202691F04B12B58F3023A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\DhcpSSdk.h",
+      "sdkSha256": "7A1821118531FD531E211E6ECB69E7BA283D2A24E71202691F04B12B58F3023A"
+    },
+    {
+      "path": "um\\dhcpsapi.h",
+      "sourceSha256": "A2CFDA0309F30B167D08218C6FFE89E57B860A2690A6F49650D4A252A8A0AC4D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dhcpsapi.h",
+      "sdkSha256": "A2CFDA0309F30B167D08218C6FFE89E57B860A2690A6F49650D4A252A8A0AC4D"
+    },
+    {
+      "path": "um\\NetSh.h",
+      "sourceSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\NetSh.h",
+      "sdkSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B"
+    },
+    {
+      "path": "um\\bluetoothapis.h",
+      "sourceSha256": "9253AB24097AFC6BDFC9C01D4E1AF404AD3C07E2C40DFD00A5772F7455AD9CBF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bluetoothapis.h",
+      "sdkSha256": "9253AB24097AFC6BDFC9C01D4E1AF404AD3C07E2C40DFD00A5772F7455AD9CBF"
+    },
+    {
+      "path": "um\\bluetoothleapis.h",
+      "sourceSha256": "17EFD0367A3EC5A6FD2D61318AEBA69ED5F7AE5DBB3BC24AF0014FB0A5476D99",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bluetoothleapis.h",
+      "sdkSha256": "17EFD0367A3EC5A6FD2D61318AEBA69ED5F7AE5DBB3BC24AF0014FB0A5476D99"
+    },
+    {
+      "path": "um\\ws2bth.h",
+      "sourceSha256": "E4A7B6EF2DCFFBB736F826E475046916AF6C26C96282D5411EA71350CCCC5271",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ws2bth.h",
+      "sdkSha256": "E4A7B6EF2DCFFBB736F826E475046916AF6C26C96282D5411EA71350CCCC5271"
+    },
+    {
+      "path": "um\\dinput.h",
+      "sourceSha256": "FF440B043BB853835E6BD3E641EE3BFD11B63FC08AF7A935BAB2983F2A52070A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dinput.h",
+      "sdkSha256": "FF440B043BB853835E6BD3E641EE3BFD11B63FC08AF7A935BAB2983F2A52070A"
+    },
+    {
+      "path": "shared\\hidpi.h",
+      "sourceSha256": "0A2A18C3F6347B0CA5D33DC74ABC4A81160B2F5C5A23A83AEE063421BA87D09C",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\hidpi.h",
+      "sdkSha256": "0A2A18C3F6347B0CA5D33DC74ABC4A81160B2F5C5A23A83AEE063421BA87D09C"
+    },
+    {
+      "path": "um\\devfiltertypes.h",
+      "sourceSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\devfiltertypes.h",
+      "sdkSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896"
+    },
+    {
+      "path": "um\\dwmapi.h",
+      "sourceSha256": "CB7AA3810F0676539FB8222D70A04D3F934D0ED0E7CA226531820C650FF6E314",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwmapi.h",
+      "sdkSha256": "CB7AA3810F0676539FB8222D70A04D3F934D0ED0E7CA226531820C650FF6E314"
+    },
+    {
+      "path": "um\\WerApi.h",
+      "sourceSha256": "0CF852DAF581826BEB6F5D3C3F60B759E143B72CA958C74B7057F5003F546F46",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WerApi.h",
+      "sdkSha256": "0CF852DAF581826BEB6F5D3C3F60B759E143B72CA958C74B7057F5003F546F46"
+    },
+    {
+      "path": "um\\ErrorRep.h",
+      "sourceSha256": "2EEB745D0BE079168310A031514C04AAD7C2E818D762069EDB41B34C67B1E8A5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ErrorRep.h",
+      "sdkSha256": "2EEB745D0BE079168310A031514C04AAD7C2E818D762069EDB41B34C67B1E8A5"
+    },
+    {
+      "path": "um\\EvColl.h",
+      "sourceSha256": "F50C9DBCB7B7B52C5171A77DA8779AF378304AB344E7B30D909EF32D909763EB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\EvColl.h",
+      "sdkSha256": "F50C9DBCB7B7B52C5171A77DA8779AF378304AB344E7B30D909EF32D909763EB"
+    },
+    {
+      "path": "um\\powrprof.h",
+      "sourceSha256": "2075A213F792A8206C510E26D94A81FF4E1A59F0168A3FD900822D14E863CEB1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powrprof.h",
+      "sdkSha256": "2075A213F792A8206C510E26D94A81FF4E1A59F0168A3FD900822D14E863CEB1"
+    },
+    {
+      "path": "um\\powersetting.h",
+      "sourceSha256": "68FDCDB5586156AE65DE15738FF040C5FD303B5EF97CDC7EE448D96EEC0488E6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powersetting.h",
+      "sdkSha256": "68FDCDB5586156AE65DE15738FF040C5FD303B5EF97CDC7EE448D96EEC0488E6"
+    },
+    {
+      "path": "um\\powerbase.h",
+      "sourceSha256": "66082F57FF576850899FA3DEB4779C0B762163A70946D0BE4DF78F3A2A506FB2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powerbase.h",
+      "sdkSha256": "66082F57FF576850899FA3DEB4779C0B762163A70946D0BE4DF78F3A2A506FB2"
+    },
+    {
+      "path": "shared\\poclass.h",
+      "sourceSha256": "77D0D1F11EC072568818F4D82217EF22BADBD39747FF2729553A7F619C27CE31",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\poclass.h",
+      "sdkSha256": "77D0D1F11EC072568818F4D82217EF22BADBD39747FF2729553A7F619C27CE31"
+    },
+    {
+      "path": "shared\\batclass.h",
+      "sourceSha256": "C2F7DF9B22D2C2C606805AF85C08327AC424F409F639DC0670DEF6F177BCC451",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\batclass.h",
+      "sdkSha256": "C2F7DF9B22D2C2C606805AF85C08327AC424F409F639DC0670DEF6F177BCC451"
+    },
+    {
+      "path": "shared\\emi.h",
+      "sourceSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\emi.h",
+      "sdkSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305"
+    },
+    {
+      "path": "um\\wcnapi.h",
+      "sourceSha256": "071CBD5761C166CC48CB8AD559E9B794CF3A02ADC1D34EB3B7C64F854C47B34A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcnapi.h",
+      "sdkSha256": "071CBD5761C166CC48CB8AD559E9B794CF3A02ADC1D34EB3B7C64F854C47B34A"
+    },
+    {
+      "path": "um\\WcnTypes.h",
+      "sourceSha256": "4D72A8E38AF50C110BD68C4A863936F92EC97F936403E7AA02CFBEDCB07A2C99",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WcnTypes.h",
+      "sdkSha256": "4D72A8E38AF50C110BD68C4A863936F92EC97F936403E7AA02CFBEDCB07A2C99"
+    },
+    {
+      "path": "um\\WcnDevice.h",
+      "sourceSha256": "54AD4BAD1B3326E46E6CAB2DDDEDA117B9AC6749BEDB234B11E78CC935225588",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WcnDevice.h",
+      "sdkSha256": "54AD4BAD1B3326E46E6CAB2DDDEDA117B9AC6749BEDB234B11E78CC935225588"
+    },
+    {
+      "path": "um\\wcnfunctiondiscoverykeys.h",
+      "sourceSha256": "2ADA6D7422140E198EFC405962B7D74FB8206FFE9270FB5C9DA10C304F81590D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcnfunctiondiscoverykeys.h",
+      "sdkSha256": "2ADA6D7422140E198EFC405962B7D74FB8206FFE9270FB5C9DA10C304F81590D"
+    },
+    {
+      "path": "um\\fci.h",
+      "sourceSha256": "91A44645F72D776E4E0FCF8F97EA53A9BF73F356CD5ADFFCCB79316A75942B37",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fci.h",
+      "sdkSha256": "91A44645F72D776E4E0FCF8F97EA53A9BF73F356CD5ADFFCCB79316A75942B37"
+    },
+    {
+      "path": "um\\fdi_fci_types.h",
+      "sourceSha256": "27A1F6F7728F5DB64D11E434D101819D646CA49270930606BB76C7989EBE0254",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fdi_fci_types.h",
+      "sdkSha256": "27A1F6F7728F5DB64D11E434D101819D646CA49270930606BB76C7989EBE0254"
+    },
+    {
+      "path": "um\\fdi.h",
+      "sourceSha256": "F85A2D27CB0F286EA6CB2964CE81F28F58971FE0E40581CD7540437229C8D8D3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fdi.h",
+      "sdkSha256": "F85A2D27CB0F286EA6CB2964CE81F28F58971FE0E40581CD7540437229C8D8D3"
+    },
+    {
+      "path": "um\\MDMRegistration.h",
+      "sourceSha256": "9CED99DB4C56E2AF8F8A77437EE1E657CE904F9383406E26E893F98D5DFD3233",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\MDMRegistration.h",
+      "sdkSha256": "9CED99DB4C56E2AF8F8A77437EE1E657CE904F9383406E26E893F98D5DFD3233"
+    },
+    {
+      "path": "um\\mdmlocalmanagement.h",
+      "sourceSha256": "22B6B2BF8C61EC7A2CF4B961AE3F9E378CA338C11F223D010B42CD8466C7F47D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mdmlocalmanagement.h",
+      "sdkSha256": "22B6B2BF8C61EC7A2CF4B961AE3F9E378CA338C11F223D010B42CD8466C7F47D"
+    },
+    {
+      "path": "um\\davclnt.h",
+      "sourceSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\davclnt.h",
+      "sdkSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132"
+    },
+    {
+      "path": "shared\\tbs.h",
+      "sourceSha256": "27522D3315474402723D83375BA6CDE07D40AB2B952F36C64B48C153A707C2EA",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\tbs.h",
+      "sdkSha256": "27522D3315474402723D83375BA6CDE07D40AB2B952F36C64B48C153A707C2EA"
+    },
+    {
+      "path": "um\\FhCfg.h",
+      "sourceSha256": "1BE428193494C7C6FFA98EA2DE61748F54351F5741BCA6404F2514D6FF4B2F75",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\FhCfg.idl",
+      "sdkSha256": "EE64E8CCA3D20B51AA58023C2C8561000A722B3A0CD39786ABF5835584B4DF3C"
+    },
+    {
+      "path": "um\\FhSvcCtl.h",
+      "sourceSha256": "7E0C895E8FC27B22646D01E6D8D73F8989682F592B872C5A74A0D0D3EED9BF59",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\FhSvcCtl.h",
+      "sdkSha256": "7E0C895E8FC27B22646D01E6D8D73F8989682F592B872C5A74A0D0D3EED9BF59"
+    },
+    {
+      "path": "um\\fherrors.h",
+      "sourceSha256": "A4A1E4ED07785A0568C8A08EB37900AFDE1DC2F14FD76FED7E6F42D9E56A475B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fherrors.h",
+      "sdkSha256": "A4A1E4ED07785A0568C8A08EB37900AFDE1DC2F14FD76FED7E6F42D9E56A475B"
+    },
+    {
+      "path": "um\\fhstatus.h",
+      "sourceSha256": "83AD5BD5559360FCFC816F4D7740EC7801779F39DE3690845D760E6CD014779F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fhstatus.h",
+      "sdkSha256": "83AD5BD5559360FCFC816F4D7740EC7801779F39DE3690845D760E6CD014779F"
+    },
+    {
+      "path": "um\\amsi.h",
+      "sourceSha256": "9B3F9C3AE71FDEB1EC2A948EE98EABD74C3D9FCC355A754881D89A3C53C838CE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amsi.idl",
+      "sdkSha256": "17D39F2A78E7D3DCF0E10AC146F11070BFE9374004199F424E194568C7B62EAC"
+    },
+    {
+      "path": "um\\websocket.h",
+      "sourceSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\websocket.h",
+      "sdkSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114"
+    },
+    {
+      "path": "um\\RestartManager.h",
+      "sourceSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\RestartManager.h",
+      "sdkSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8"
+    },
+    {
+      "path": "um\\ProcessSnapshot.h",
+      "sourceSha256": "93C20675D17F18B1945A5B05D44FA9BFBCF091EEB27687FBCCBCDA072D5C32CC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ProcessSnapshot.h",
+      "sdkSha256": "93C20675D17F18B1945A5B05D44FA9BFBCF091EEB27687FBCCBCDA072D5C32CC"
+    },
+    {
+      "path": "um\\lowlevelmonitorconfigurationapi.h",
+      "sourceSha256": "058DFA39D9B1FF05FFDF14DE7B0B11E67640C4BA7A40B2A198DF98F26A159501",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lowlevelmonitorconfigurationapi.h",
+      "sdkSha256": "058DFA39D9B1FF05FFDF14DE7B0B11E67640C4BA7A40B2A198DF98F26A159501"
+    },
+    {
+      "path": "um\\highlevelmonitorconfigurationapi.h",
+      "sourceSha256": "E61B41906C1A32A729D0F461A53DD9AB4A630C4853948A4EFE8F91082FE39E5A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\highlevelmonitorconfigurationapi.h",
+      "sdkSha256": "E61B41906C1A32A729D0F461A53DD9AB4A630C4853948A4EFE8F91082FE39E5A"
+    },
+    {
+      "path": "um\\physicalmonitorenumerationapi.h",
+      "sourceSha256": "66131CE43587F3C254733E7DC618C48ACDE735E90CB9C24FA654AA3B62F6731A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\physicalmonitorenumerationapi.h",
+      "sdkSha256": "66131CE43587F3C254733E7DC618C48ACDE735E90CB9C24FA654AA3B62F6731A"
+    },
+    {
+      "path": "um\\cloneviewhelper.h",
+      "sourceSha256": "1C2F9082CF784E3C30DDECEF6836E3F9C5457B6EB246BF8B4457CD05058E50DC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cloneviewhelper.idl",
+      "sdkSha256": "1F6798B72D5E14812538C70A35E532CA53809893D1DB2B4799E69F615BEE1A95"
+    },
+    {
+      "path": "um\\IdentityCommon.h",
+      "sourceSha256": "259C4D59C5162FB190C729003D7BDF74E63A2AED7FF1CBC75B323447C77F779A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityCommon.h",
+      "sdkSha256": "259C4D59C5162FB190C729003D7BDF74E63A2AED7FF1CBC75B323447C77F779A"
+    },
+    {
+      "path": "um\\IdentityProvider.h",
+      "sourceSha256": "24A3462C7B117F8D3C59382E0F94F911FF764C20182936EF2CDCA5EF9D7E77BE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityProvider.h",
+      "sdkSha256": "24A3462C7B117F8D3C59382E0F94F911FF764C20182936EF2CDCA5EF9D7E77BE"
+    },
+    {
+      "path": "um\\IdentityStore.h",
+      "sourceSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityStore.h",
+      "sdkSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774"
     }
   ],
   "partitions": [
@@ -104,7 +488,46 @@
     "ToolHelp",
     "UpdateAssessment",
     "Wsl",
-    "Xinput"
+    "Xinput",
+    "SecurityCenter",
+    "WinSat",
+    "Wcm",
+    "InputRadial",
+    "WinContacts",
+    "WinLocation",
+    "Rdc",
+    "Nla",
+    "Com.CallObj",
+    "Com.Events",
+    "ComOle",
+    "WindowsConnectionManager",
+    "TransactionServer",
+    "NetBios",
+    "Wnet",
+    "Dhcp",
+    "NetShell",
+    "Foundation",
+    "Com",
+    "Rpc",
+    "WinSock",
+    "Bluetooth",
+    "Hid",
+    "DeviceQuery",
+    "Dwm",
+    "Wer",
+    "Wec",
+    "Power",
+    "Wcn",
+    "Cabinets",
+    "MdmReg",
+    "WebDav",
+    "Tbs",
+    "Antimalware",
+    "WebSock",
+    "RstMgr",
+    "Proc_Snap",
+    "Monitor",
+    "IdentityProvider"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -122,6 +545,53 @@
     "post-midl\\um\\tlhelp32.annotations.patch",
     "post-midl\\um\\waasapi.annotations.patch",
     "post-midl\\um\\wslapi.annotations.patch",
-    "post-midl\\um\\xinput.annotations.patch"
+    "post-midl\\um\\xinput.annotations.patch",
+    "post-midl\\um\\iwscapi.annotations.patch",
+    "post-midl\\um\\wscapi.annotations.patch",
+    "post-midl\\um\\winsatcominterfacei.annotations.patch",
+    "post-midl\\um\\wcmapi.annotations.patch",
+    "post-midl\\um\\radialcontrollerinterop.annotations.patch",
+    "post-midl\\um\\icontact.annotations.patch",
+    "post-midl\\um\\locationapi.annotations.patch",
+    "post-midl\\um\\msrdc.annotations.patch",
+    "post-midl\\um\\netlistmgr.annotations.patch",
+    "post-midl\\um\\callobj.annotations.patch",
+    "post-midl\\um\\eventsys.annotations.patch",
+    "post-midl\\um\\nb30.annotations.patch",
+    "post-midl\\um\\winnetwk.annotations.patch",
+    "post-midl\\um\\npapi.annotations.patch",
+    "post-midl\\um\\dhcpv6csdk.annotations.patch",
+    "post-midl\\um\\dhcpcsdk.annotations.patch",
+    "post-midl\\um\\dhcpsapi.annotations.patch",
+    "post-midl\\um\\netsh.annotations.patch",
+    "post-midl\\um\\bluetoothapis.annotations.patch",
+    "post-midl\\um\\bluetoothleapis.annotations.patch",
+    "post-midl\\um\\ws2bth.annotations.patch",
+    "post-midl\\um\\dinput.annotations.patch",
+    "post-midl\\shared\\hidpi.annotations.patch",
+    "post-midl\\um\\devfiltertypes.annotations.patch",
+    "post-midl\\um\\dwmapi.annotations.patch",
+    "post-midl\\um\\werapi.annotations.patch",
+    "post-midl\\um\\errorrep.annotations.patch",
+    "post-midl\\um\\evcoll.annotations.patch",
+    "post-midl\\um\\powrprof.annotations.patch",
+    "post-midl\\um\\powersetting.annotations.patch",
+    "post-midl\\um\\powerbase.annotations.patch",
+    "post-midl\\um\\wcndevice.annotations.patch",
+    "post-midl\\um\\fdi.annotations.patch",
+    "post-midl\\um\\mdmregistration.annotations.patch",
+    "post-midl\\um\\davclnt.annotations.patch",
+    "post-midl\\shared\\tbs.annotations.patch",
+    "post-midl\\um\\fhcfg.annotations.patch",
+    "post-midl\\um\\fhsvcctl.annotations.patch",
+    "post-midl\\um\\amsi.annotations.patch",
+    "post-midl\\um\\websocket.annotations.patch",
+    "post-midl\\um\\restartmanager.annotations.patch",
+    "post-midl\\um\\processsnapshot.annotations.patch",
+    "post-midl\\um\\lowlevelmonitorconfigurationapi.annotations.patch",
+    "post-midl\\um\\highlevelmonitorconfigurationapi.annotations.patch",
+    "post-midl\\um\\physicalmonitorenumerationapi.annotations.patch",
+    "post-midl\\um\\identityprovider.annotations.patch",
+    "post-midl\\um\\identitystore.annotations.patch"
   ]
 }

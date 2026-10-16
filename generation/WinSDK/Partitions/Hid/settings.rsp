@@ -11,3 +11,5 @@
 <IncludeRoot>/um/gpiobuttontypes.h
 --namespace
 Windows.Win32.Devices.HumanInterfaceDevice
+--config
+parse-win32-annotations

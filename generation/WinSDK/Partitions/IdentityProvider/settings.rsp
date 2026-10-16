@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --with-type
 _tagSLDATATYPE=uint
 SLDATATYPE=uint

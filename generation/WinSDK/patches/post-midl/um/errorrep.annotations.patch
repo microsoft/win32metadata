@@ -1,0 +1,34 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h b/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/ErrorRep.h
+@@ -18,6 +18,7 @@
+ #endif
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -38,10 +39,14 @@
+     frrvErrDoubleFault,
+ } EFaultRepRetVal;
+ 
++_Win32_SupportedOS_BEGIN_(WindowsXP)
+ EFaultRepRetVal APIENTRY ReportFault(_In_ LPEXCEPTION_POINTERS pep, _In_ DWORD dwOpt);
+ 
++_Win32_SetLastError_
+ BOOL            APIENTRY AddERExcludedApplicationA(_In_ LPCSTR szApplication);
++_Win32_SetLastError_
+ BOOL            APIENTRY AddERExcludedApplicationW(_In_ LPCWSTR wszApplication);
++_Win32_SupportedOS_END_()
+ 
+ 
+ typedef EFaultRepRetVal (APIENTRY *pfn_REPORTFAULT)(_In_ LPEXCEPTION_POINTERS, _In_ DWORD);
+@@ -59,6 +64,7 @@
+ // 
+ //+++++++++++++++++++++ Hang reporting api ++++++++++++++++++++++++++++++++
+ //
++_Win32_SupportedOS_WindowsVista_
+ HRESULT 
+ WINAPI
+ WerReportHang(

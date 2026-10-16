@@ -85,6 +85,21 @@ value conflicts. Preserve existing logical member names and values while leaving
 native macros intact unless a separate review resolves a conflict. Document any
 user-approved metadata-only naming exception at the header boundary.
 
+Retain genuine native macro aliases when a logical enum moves into headers.
+Removing a duplicate loose enum-member constant must not leave a surviving alias
+initializer unbound. The emitter qualifies a simple alias to the unique enum
+member in the same namespace and applicable architecture, preserving the alias's
+declared constant type. Ambiguous bindings remain errors; do not add enum members,
+rewrite native values or suppress aliases merely because OLD omitted them.
+
+Removing an authored enum use can also remove the namespace inference of a
+retained, unmigrated logical enum. Preserve its existing namespace through the
+existing global namespace-resolution configuration; do not retain a semantic
+fallback use, duplicate the enum or allow a namespace change in the grade.
+For a typed native constant that changes source-emission position, any physical
+comparison adjustment must name that exact static literal, assert its complete
+type/value/attribute shape, and preserve every other field's order and layout.
+
 Keep expectations exact and source-backed, with zero unknown differences and zero
 unused expectations. There is no blanket native-derived difference or duplicate
 allowlist, and no assumption that faithful capture implies consumer compatibility.
@@ -166,6 +181,33 @@ Use the existing selected scrape/full-source overlay loop where appropriate.
 closure. Recompute complete constants and pointer discoveries, retaining
 unselected inputs. Reject success-shaped partial images with dangling references.
 
+For expanded integration, an emitted overlay image is not proof that every
+physical dependent was freshly scraped. `Windows.h` unconditionally includes
+`winnetwk.h`; at least 308 direct Windows-header-dependent partitions require
+fresh source closure in the actual full-SDK producer run. They are physical
+dependents, not additional semantic owner migrations.
+
+RstMgr relocates eleven existing `WIN32_ERROR` return substitutions to native
+`DWORD` returns with exact enum associations, and the existing
+`RM_PROCESS_INFO.AppStatus` association stays on native `ULONG` storage. The
+native `RM_APP_STATUS` enum, its nine members and non-Flags representation stay
+unchanged. One bounded Vista scope covers exactly the eleven owned functions,
+replacing eleven matching OS sidecar rows. Correct SDK library bindings remain
+derived. `CCH_RM_SESSION_KEY` remains a separately held native-expression parser
+gap; no native macro or manual constant shape is changed. This source integration
+does not constitute actual architecture/image/full-SDK/CI acceptance.
+
+The Proc_Snap/Monitor/IdentityProvider input preserves native handle projection,
+the `PSS_CAPTURE_FLAGS=uint` storage repair, four Monitor `_BOOL` return-alias
+repairs and Identity parser/name configuration. Only HPSSWALK's complete
+`PssWalkMarkerFree`/`[-1,0]` contract moves to its actual creator output. HPSS's
+invalid-only row stays: `PssFreeSnapshot` takes both a process and snapshot handle,
+so it is not a unary cleanup contract. Native `IdentityUpdateEvent` stays
+unscoped with its original eight members; its Flags designation and two
+native-DWORD associations move into headers. Seven anonymous source-coordinate
+shifts are transport details, not permissions to change physical field metadata.
+The private input counts are source accounting, not final emitted admission.
+
 ## 5. Validate the actual output, not a proxy
 
 - Compile metadata-disabled native owner/dependent translation units on x86,
@@ -246,7 +288,8 @@ Each batch must pass the preceding producer gates before the next is admitted.
 
 The image helper reads the recipe's complete owner/dependent partition list and
 overlays the sources actually produced for those partitions. `Base` and
-`FileHistory` also include batch-1 headers; they remain unconverted dependents.
+`FileHistory` also include batch-1 headers; at that checkpoint they remained
+unconverted dependents.
 `PsApi2` shares `psapi.h` with `PsApi1` and must remain unchanged. A shared
 namespace is not evidence of shared semantic ownership.
 
@@ -455,3 +498,279 @@ That needs a separate compatibility/design decision. No SDK value, metadata
 value, macro or alias is changed to force this candidate through the playbook.
 Accepting existing native annotations is not approval to repair that logical
 enum conflict or manufacture new enums or members.
+
+## Next bounded wave above PR 2365
+
+This separate draft starts at `162f8118a7da2ecb38d410a66b729dda64ca6767`;
+the reviewed tooling and WinHttp-plus-ten branches are unchanged. Its checkpoints
+are SecurityCenter/WinSat, then Wcm/InputRadial/WinContacts/WinLocation, then
+Rdc/Nla/Com.CallObj/Com.Events. The latter eight have real emitted authored OS facts,
+not just parser opt-ins. Their unmodified-header admission compares exact C#
+declaration tokens after removing only the explicitly identified native MIDL
+`RetVal` additions. This admission is not a final-winmd or consumer grade.
+
+Enstor is excluded as a **Learn-versus-legacy-sidecar discrepancy**: its existing
+Vista RTM floor differs from the published Vista SP2 requirement. This is not a
+conflicting native-header annotation and does not qualify acceptance of native
+SDK/SAL/MIDL contracts. Its header, floor and sidecars remain unchanged; there is
+no further Enstor investigation in this wave. Com.Events is the routine
+replacement, admitted against unmodified headers with 15 actual emitted
+Windows 2000 floors and no predicted new final retval metadata.
+
+SecurityCenter relocates five OS floors and the existing
+`IWSCProductList.Initialize.provider` association; WinSat relocates seven
+interface OS floors. Three reviewed patches preserve the original native types,
+macros, method order and signatures. Shared Foundation, COM, BSTR/VARIANT and RPC
+facts remain under their existing owners, and FileHistory remains an opted-out
+physical-header dependent.
+
+The first pair deliberately captures 28 native-derived `RetValAttribute`
+additions: 16 SecurityCenter and 12 WinSat parameters. The existing
+`iwscapi.h:189` and `winsatcominterfacei.h:259` MIDL comments are representative
+sources. These are not newly authored retval assertions. Exact expectations and
+physical architecture cases distinguish the custom attribute from raw CLI
+`ParameterAttributes.Retval`, retain `Out`, and check unchanged signatures.
+The earlier rejected receipt is historical evidence and is not relabeled.
+
+The first pair's immutable local checkpoint is producer
+`e559be49e2d2dc064874a815cbf81846074c42ae`, image SHA256
+`B45712BFF48B652A6A304AB043D599EBB086E5CE145A986F900E1404E8362F23`.
+Strict B9-CI-to-checkpoint grading uses exactly 28 native additions; cumulative
+OLD-to-checkpoint grading uses 76 differences, including the prior layer's 48
+enum representation entries. Both have zero unknown and zero unused
+expectations. All 37,314 physical types and 7,791 enum identities are graded;
+25 preparation/retval, 51 native architecture, 26 physical/no-fallback/mutation
+and 14 full-SDK cases executed with zero skipped. The owning receipt is
+`artifacts\next-header-annotation-wave\checkpoint1-review-grade.json`, SHA256
+`A939C4740676722D2500A10BD98290301BF27CB0D2679C49CEC41ADE8DE79E61`.
+
+Checkpoint two relocates 19 existing OS floors through four ordinary per-header
+patches: Wcm 5, InputRadial 2, WinContacts 5 and WinLocation 7. Exact native
+`locationapi.h` MIDL declarations identify 39 additional retval sites, including
+`ILocationReport.GetTimestamp.pCreationTime` and
+`ILocation.GetReport.ppLocationReport`. WinContacts' injected source annotations
+repeat final metadata already supplied by SAL; source occurrence counts are not
+new final-attribute counts. The verified second checkpoint is producer
+`7f7dd082e6d9ecf6b308620e5bf2b41c85541543`, image SHA256
+`8EDA57048DC25ED5C97844991B17CEE94B498005E941000EB6D1A14B9EAC7A02`.
+Its strict first-checkpoint delta is 39; B9-CI-to-checkpoint is 67 and cumulative
+OLD-to-checkpoint is 115, each with zero unknown and zero unused expectations.
+All physical types and enum identities remain unchanged. Actual execution is
+26 preparation/retval/ownership, 63 native architecture, 26 physical/no-fallback/
+mutation and 14 full-SDK cases, with zero skipped. Its immutable receipt is
+`artifacts\next-header-annotation-wave\checkpoint2-review-grade.json`, SHA256
+`06BF5961603134C7AE57FC0B145065FD50CB846AFF5E2D5D9332038186EECEAE`.
+
+Checkpoint three relocates another 51 emitted OS floors: Rdc 17, Nla 12,
+Com.CallObj 7 and Com.Events 15. Four ordinary per-header patches preserve all
+existing declarations. The original `netlistmgr.h:1860` MIDL
+`/* [retval][out] */ __RPC__out BOOL *pValue` contract identifies the single additional
+site `INetworkConnection2.IsDomainAuthenticatedBy.pValue`. Com.Events' source
+injections repeat final SAL-derived attributes rather than introducing new ones.
+ComOle, WindowsConnectionManager and TransactionServer join the preparation and
+native-control closure as explicitly opted-out physical-header dependents.
+
+Com.Events also relocates the existing
+`IEnumEventObject::Reset=[CanReturnMultipleSuccessValues]` authored contract to
+`_Win32_PreserveResult_` on the same native method in `EventSys.h`. The explicitly
+review-approved representation removes that legacy custom attribute and sets the
+CLI `MethodImplAttributes.PreserveSig` bit. This is an authored-fact representation
+change, not a newly discovered native annotation or a conflicting SDK contract.
+The existing reader and vocabulary already support it; no tooling expansion is
+needed. It has its own exact declaration expectation and physical checks on x86,
+x64 and arm64. HRESULT, signature and vtable order stay unchanged; fresh consumer
+compatibility remains **UNVERIFIED**.
+
+The bounded wave therefore relocates 82 OS floors, one existing association and
+one existing success-value contract through 11 patches; it does not author new
+enum representations or library overrides. The exact measured native additions
+are SecurityCenter 16, WinSat 12, WinLocation 39 and Nla 1. B9-to-final expectations
+are 68 native additions plus the single reviewed preserved-result representation;
+the cumulative OLD-to-final total is 117, including the 48 enum representation
+differences from the preceding reviewed layer, not this new wave.
+
+| Owner | OS floors relocated | Other existing facts relocated | Native RetVal additions | Patches |
+| --- | ---: | --- | ---: | ---: |
+| SecurityCenter | 5 | 1 provider association | 16 | 2 |
+| WinSat | 7 | None | 12 | 1 |
+| Wcm | 5 | None | 0 | 1 |
+| InputRadial | 2 | None | 0 | 1 |
+| WinContacts | 5 | None | 0 | 1 |
+| WinLocation | 7 | None | 39 | 1 |
+| Rdc | 17 | None | 0 | 1 |
+| Nla | 12 | None | 1 | 1 |
+| Com.CallObj | 7 | None | 0 | 1 |
+| Com.Events | 15 | 1 preserved-result contract | 0 | 1 |
+
+The verified final local producer is
+`b61b71256b05d09c3a7f51cf7f823856ba6bbf2b`, image SHA256
+`9F95FBD1913EAF47F1E0D4C495AD0247F6642F6F9F545A4F80B0F682409DF8A8`.
+Strict checkpoint-two-to-final grading uses 2 differences; B9-CI-to-final uses
+69 and cumulative OLD-to-final uses 117, each with zero unknown and zero unused
+expectations. All 37,314 physical types and 7,791 enum identities/content are
+graded, with no new types, enums, members, values or native ABI changes.
+The 29 preparation/retval/preserved-result/ownership, 84 native architecture,
+29 physical/no-fallback/mutation and 14 full-SDK cases actually executed with
+zero skipped. The SDK integrity suite used 786 hash-recorded diagnostic inputs.
+The immutable local receipt is
+`artifacts\next-header-annotation-wave\checkpoint3-review-grade.json`, SHA256
+`3DA0A4DA1B29FC0A5412CD0F4BD677AE410A88619169659209CE7D134A1AE825`.
+
+The complete tracked SDK mirror remains tree
+`77817f12308e29ec8bf77dc6fe56786e65ff9e08`. Derived `libMappings.rsp` is
+byte-identical to the filtered starting baseline, SHA256
+`BE92DDDD387279BEA0BDF8F3D838B1466A5465A694BFFB6B6FAAE94447F9EC7A`.
+Final CI acceptance is a separate mandatory gate: the
+[draft review report](https://github.com/microsoft/win32metadata/pull/2367)
+records the exact review head, actual checkout commit/tree, green run, downloaded
+artifact and independent artifact grade. A documentation-only review head is not
+the local emission producer, and this local receipt is not CI provenance.
+
+The existing image helper now relocates a copied frozen traversal map to its
+owning worktree and prepared headers. It verifies one original SDK project root,
+keeps the frozen OLD files/provenance unchanged, and records that original root
+in the new receipt; it never reads the previous owner's checkout while emitting.
+Fresh consumer compatibility remains **UNVERIFIED**; no consumer work or merging
+is part of this wave.
+
+## Ordered full-SDK integration checkpoint
+
+The owning integration branch adopts qualified dependency
+`c5879a778bfbf0463e3c96beadab4b2d56658ffe`, including tooling
+`43af342a3dd63803bf12a7c834cd0fd516df74ab`, by ordinary merge. The existing native
+stack and both reviewed lower branches are preserved. The SDK mirror is now
+tree `d3dc662e56c715c1e0c000a0300ff3088e9a9f17`; its annotation helper changes,
+not the selected SDK declaration preimages.
+
+The ten-owner patches receive exactly 82 prefix-only changes from
+`_Windows_SupportedOS_` to `_Win32_SupportedOS_`. Their named aliases, payloads,
+declaration membership and authored facts are unchanged. Prior local and CI
+receipts remain historical evidence; the synchronized checkpoint requires its
+own actual image grade before queued owner payloads are admitted.
+
+`--nativeFieldArrayInfo` remains absent/default-off. The rejected 563-field
+diagnostic is not an accepted control, and no field sidecar is removed by this
+synchronization. Native field activation, fresh physical dependency closure and
+final full-SDK image/CI acceptance remain separate gates.
+
+Selected-image assembly checks every fresh input before removing any frozen
+source. It replaces the selected partitions' entire common/x86/x64/arm64 file
+set, preserves unselected and non-header bytes, and records the exact removed
+paths in `removedBaselineHeaderSources`. The existing preparation-test fixture
+exercises architecture-shape changes, missing-input safety and overlapping-root
+rejection against the actual helper function. This corrects selected-source
+replacement, not stale unselected dependencies: the Network layer still needs
+a fresh canonical SDK scrape for its full physical include closure.
+
+## Parallel small API patch input
+
+The Wcn, Cabinets, MdmReg and WebDav input relocates 28 existing emitted OS
+floors through four physical header patches. The two Wcn interface floors stay
+direct annotations. The four FDI functions and eleven WebDav functions use
+bounded same-floor scopes; MdmReg uses three scopes plus direct annotations to
+avoid assigning floors to intervening, previously unannotated functions.
+
+Cabinets also relocates the existing unscoped, nonflags `FDICREATE_CPU_TYPE`,
+preserving signed 32-bit storage and member order/values `cpuUNKNOWN = -1`,
+`cpu80286 = 0`, `cpu80386 = 1`. Native macros are restored after the metadata-only
+enum declaration. `FDICreate.cpuType` remains native `int` plus its existing enum
+association rather than a substituted native enum. The two exact declaration
+expectations describe that representation change, not a new enum identity.
+
+The recipe pins all ten owner-cluster headers to matching selected-SDK
+preimages; only four are patched. Generated DLL mappings, callback identities,
+SAL, ABI and unrelated authored settings stay unchanged. The adjacent manual
+`RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials` import row has no
+declaration in these selected headers and remains explicitly unbound rather than
+being recreated. Global native field-array inference remains absent/default-off.
+
+The private handoff is bounded patch-production evidence, not a final full-image grade.
+Artifacts under `artifacts\parallel-small-api-migration` separate unmodified
+parser activation, isolated owner controls and combined-recipe preparation.
+Its private combined recipe prepared and reused its immutable cache successfully.
+Bounded native and scraper controls used only these four patches because its
+historical inherited patches still referenced `_Windows_SupportedOS_*`.
+The owning integration now inherits qualified `c5879a77`/`43af342a` and applies
+the canonical spelling overlay to its inherited patches. The private handoff
+does not qualify the combined owning recipe or its physical include closure.
+
+The source controls separately check OS targets/payloads, their qualified
+attribute spelling/order and removal of an unused versioning import. Four
+`FDIDECRYPT` anonymous-record `NativeTypeName` coordinates move by one line
+after the new include; that attribute is not emitted into the winmd. These
+source details are not additional authored facts or a full-image grade.
+
+Broad physical closure, final OLD/control/NEW images and exact-head full-SDK CI
+remain integration-owner gates after ordered tooling/pilot adoption. Consumer
+compatibility remains **UNVERIFIED**.
+
+## Combined canonical image local grade
+
+The ordered owning inputs through Proc_Snap/Monitor/IdentityProvider are emitted
+from two independent, unfiltered SDK scrapes at
+`92fdfdc45ba7cd35b34ecc8e55034ce3eb78575b`: 321 actual owners and 393 scan legs
+each. Their 813 generated C# files and eight discovery response files match
+byte-for-byte. After the generic constant-alias correction and namespace
+preservation, committed tooling/configuration
+`89a2ad02cda4f6eee30d639bf8707cf3902d594c` re-emits separate hash-bound copies
+without a frozen OLD source overlay. This is source reuse after emitter changes,
+not a claim that a new scrape ran at that tooling commit.
+
+| Local image | SHA256 |
+| --- | --- |
+| Canonical full SDK | `B1F987EA8E7B78A6DA30480FD72B08B397464B1C601301B3A951EE3B7D3842CC` |
+| Independent canonical repeat | `9437ADC219899CE777E6856A01F9AC685ED7DFC2DADA5FBAC9E2A2FD35DE7725` |
+| Matched frozen OLD tooling control | `26B5BCBB4914575956788D47E77C2E9CF9540A231D9537673F1D4DBB5428696A` |
+
+Both full images have 37,310 physical types, 247,659 fields, 70,740 methods and
+152,513 attributes. Their physical snapshots are literally identical without
+reviewed-change normalization. All 7,791 enum identities, member order, values,
+underlying types and flags remain unchanged, including the retained
+`System.Power.POWER_PLATFORM_ROLE_VERSION` namespace. The control differs from
+OLD only in the 39 known constructor instance-bit corrections.
+
+The exact declaration grade preserves all original 117 expectations and adds
+320 measured entries, with zero unknown or unused differences:
+
+| Classification | Exact declaration entries |
+| --- | ---: |
+| Previously reviewed enum uses, native MIDL retval capture and preserved result | 117 |
+| 140 further native-type/AssociatedEnum sites | 280 |
+| Native `DhcpEnumSubnets.EnumInfo` In/Out contract | 1 |
+| Native signatures at 23 exact handle-use sites | 23 |
+| Eight producer lifecycle targets, three retained-type lifecycle removals and four fabricated typedef removals | 15 |
+| Genuine native `WER_SUBMIT_DISCARD_IF_QUEUED` constant | 1 |
+
+The removed fabricated types are the two Bluetooth search handles and
+`HREPORT`/`HREPORTSTORE`. Their exact signatures retain native `IntPtr`,
+`Void*` and corresponding output pointer levels rather than imposing a uniform
+handle representation. Every relocated producer keeps its complete authored
+cleanup and invalid-value set `[-1,0]`; borrowed inputs gain no ownership.
+`WEB_SOCKET_HANDLE`, `FH_SERVICE_PIPE_HANDLE` and `HPSSWALK` retain their
+structural identities. `HPSS` remains invalid-only because `PssFreeSnapshot`
+requires both process and snapshot handles, not a unary cleanup.
+
+The WER addition is the existing macro alias in `WerApi.h:294` to
+`WER_SUBMIT_NO_QUEUE` at line 284: UInt32, value 128, all three architectures.
+Its 14-member unscoped UInt32/Flags logical enum remains unchanged.
+`AF_BTH` remains UInt16/value 32 and `HIDP_STATUS_I8242_TRANS_UNKNOWN` remains
+the same native NTSTATUS/Int32 bit pattern `0xC0110009`. Their field-table position
+adjustments name only these two static literals; every other field's order, type,
+value, attributes and layout in those two mixed-field API holders remains
+strictly graded. Existing API-only literal-row-order handling is unchanged;
+instance and enum field order remains strict.
+
+Each full image passes all 76 actual physical/no-fallback/mutation cases without
+skips. The primary image passes all 14 SDK integrity cases against the complete
+fresh 1,179-file scratch set, including all 393 scan diagnostics. The first
+combined test invocation's three wrong-namespace Restart Manager lookups and
+overbroad DHCP fallback assertion are preserved as failed evidence; the tests
+are corrected rather than changing metadata or removing the held DHCP row.
+
+Native field inference remains absent/default-off; the rejected 563-field image
+is not admitted. The exact `DHCP_IP_ARRAY::Elements` CountParamIndex=0 sidecar
+and the held DWM storage override remain. Root `7ea6c85d` is not implicitly
+inherited. These local receipts do not replace final-head CI and downloaded-image
+qualification in the draft review report. Managed projection/source effects of
+the native signatures, output ownership and newly captured native facts remain
+**UNVERIFIED**; no consumer work is implied by producer equivalence.

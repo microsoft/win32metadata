@@ -1,0 +1,62 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+index 271b4b96..407ec49f 100644
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/fdi.h
+@@ -187,6 +187,7 @@
+ #define INCLUDED_FDI    1
+ 
+ #include <specstrings.h>
++#include <win32metadata_annotations.h>
+ typedef _Null_terminated_ char* LPSTR;
+ 
+ #ifdef __cplusplus
+@@ -925,6 +926,24 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
+ #define     cpu80286           (0)     /* '286 opcodes only */
+ #define     cpu80386           (1)     /* '386 opcodes used */
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("cpuUNKNOWN")
++#pragma push_macro("cpu80286")
++#pragma push_macro("cpu80386")
++#undef cpuUNKNOWN
++#undef cpu80286
++#undef cpu80386
++enum FDICREATE_CPU_TYPE : int
++{
++    cpuUNKNOWN = -1,
++    cpu80286 = 0,
++    cpu80386 = 1,
++};
++#pragma pop_macro("cpu80386")
++#pragma pop_macro("cpu80286")
++#pragma pop_macro("cpuUNKNOWN")
++#endif
++
+ 
+ /***    FDICreate - Create an FDI context
+  *
+@@ -957,6 +976,7 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
+  *      FDICreate(), and then free it up afterwards (or do all your allocation
+  *      before calling FDICreate().
+  */
++_Win32_SupportedOS_BEGIN_(Windows2000)
+ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+                               __callback PFNFREE  pfnfree,
+                               __callback PFNOPEN  pfnopen,
+@@ -964,7 +984,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+                               __callback PFNWRITE pfnwrite,
+                               __callback PFNCLOSE pfnclose,
+                               __callback PFNSEEK  pfnseek,
+-                              int                 cpuType,
++                              _Win32_AssociatedEnum_(FDICREATE_CPU_TYPE) int cpuType,
+                               _Inout_    PERF     perf);
+ 
+ 
+@@ -1035,6 +1055,7 @@ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+  *      Returns FALSE;
+  */
+ BOOL FAR DIAMONDAPI FDIDestroy(_In_ HFDI hfdi);
++_Win32_SupportedOS_END_()
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion

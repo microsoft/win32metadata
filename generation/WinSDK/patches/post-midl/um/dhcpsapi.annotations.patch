@@ -1,0 +1,398 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/dhcpsapi.h
+@@ -13,6 +13,7 @@
+ 
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -1825,6 +1826,7 @@
+ //
+ 
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpAddFilterV4(
+     _In_opt_z_ DHCP_CONST WCHAR     *ServerIpAddress,
+@@ -1860,12 +1862,14 @@
+     _Out_      DWORD                   *ElementsRead,
+     _Out_      DWORD                   *ElementsTotal
+     );
++_Win32_SupportedOS_END_()
+ 
+ 
+ //
+ // Subnet APIs
+ //
+ 
++_Win32_SupportedOS_BEGIN_(Server2000)
+ DWORD DHCP_API_FUNCTION
+ DhcpCreateSubnet(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+@@ -1896,7 +1900,9 @@
+     _Out_        DWORD               *ElementsRead,
+     _Out_        DWORD               *ElementsTotal
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_Server2008_
+ DWORD DHCP_API_FUNCTION
+ DhcpAddSubnetElement(
+     _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
+@@ -1904,6 +1910,7 @@
+     DHCP_CONST DHCP_SUBNET_ELEMENT_DATA * AddElementInfo
+     );
+ 
++_Win32_SupportedOS_Server2000_
+ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetElements(
+     _In_opt_z_ DHCP_CONST WCHAR                 *ServerIpAddress,
+@@ -1916,6 +1923,7 @@
+                DWORD                            *ElementsTotal
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD DHCP_API_FUNCTION
+ DhcpRemoveSubnetElement(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+@@ -1924,6 +1932,7 @@
+                DHCP_FORCE_FLAG           ForceFlag
+     );
+ 
++_Win32_SupportedOS_Server2000_
+ DWORD DHCP_API_FUNCTION
+ DhcpDeleteSubnet(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+@@ -1935,6 +1944,7 @@
+ // Option APIs
+ //
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpCreateOption(
+     _In_opt_z_ DHCP_CONST WCHAR        *ServerIpAddress,
+@@ -1986,7 +1996,9 @@
+     DHCP_CONST DHCP_OPTION_SCOPE_INFO  *ScopeInfo,
+     DHCP_CONST DHCP_OPTION_VALUE_ARRAY *OptionValues
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_Server2000_
+ DWORD DHCP_API_FUNCTION
+ DhcpGetOptionValue(
+     _In_opt_z_ DHCP_CONST WCHAR       *ServerIpAddress,
+@@ -1995,6 +2007,7 @@
+     LPDHCP_OPTION_VALUE *OptionValue
+     );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpEnumOptionValues(
+     _In_opt_z_ DHCP_CONST WCHAR          *ServerIpAddress,
+@@ -2056,7 +2069,9 @@
+                DWORD                                  *ClientsRead,
+                DWORD                                  *ClientsTotal
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_BEGIN_(Server2000)
+ DWORD DHCP_API_FUNCTION
+ DhcpCreateClientInfo(
+     _In_opt_z_ DHCP_CONST WCHAR *ServerIpAddress,
+@@ -2092,7 +2107,9 @@
+                DWORD                    *ClientsRead,
+                DWORD                    *ClientsTotal
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_Server2008_
+ DWORD DHCP_API_FUNCTION
+ DhcpGetClientOptions(
+     _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
+@@ -2107,6 +2124,7 @@
+     LPDHCP_MIB_INFO *MibInfo
+     );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpServerSetConfig(
+     _In_opt_z_ DHCP_CONST WCHAR         *ServerIpAddress,
+@@ -2129,7 +2147,9 @@
+                DWORD             FixFlag,
+                LPDHCP_SCAN_LIST *ScanList
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_BEGIN_(Server2000)
+ VOID DHCP_API_FUNCTION
+ DhcpRpcFreeMemory(
+     PVOID BufferPointer
+@@ -2141,10 +2161,12 @@
+              LPDWORD MajorVersion,
+              LPDWORD MinorVersion
+     );
+-
+-
+-
+-
++_Win32_SupportedOS_END_()
++
++
++
++
++_Win32_SupportedOS_Server2008_
+ DWORD DHCP_API_FUNCTION
+ DhcpAddSubnetElementV4(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+@@ -2152,6 +2174,7 @@
+     DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V4 *AddElementInfo
+     );
+ 
++_Win32_SupportedOS_Server2000_
+ DWORD DHCP_API_FUNCTION
+ DhcpEnumSubnetElementsV4(
+     _In_opt_z_ DHCP_CONST WCHAR                    *ServerIpAddress,
+@@ -2164,6 +2187,7 @@
+                DWORD                               *ElementsTotal
+     );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpRemoveSubnetElementV4(
+     _In_opt_z_ DHCP_CONST WCHAR            *ServerIpAddress,
+@@ -2315,8 +2339,10 @@
+     _In_opt_ IN      LPWSTR                 ClassName,
+     _In_opt_ IN      LPWSTR                 VendorName
+ ) ;
+-
+-
++_Win32_SupportedOS_END_()
++
++
++_Win32_SupportedOS_Server2000_
+ DWORD                                             // OPTION_NOT_PRESENT if option is not defined
+ DhcpSetOptionValueV5(                             // replace or add a new option value
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2329,6 +2355,7 @@
+ ) ;
+ 
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD
+ DhcpSetOptionValuesV5(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2376,8 +2403,10 @@
+              OUT     DWORD                 *OptionsRead,
+              OUT     DWORD                 *OptionsTotal
+ ) ;
+-
+-
++_Win32_SupportedOS_END_()
++
++
++_Win32_SupportedOS_Server2000_
+ DWORD
+ DhcpRemoveOptionValueV5(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2389,6 +2418,7 @@
+ ) ;
+ 
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD
+ DhcpCreateClass(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2464,6 +2494,7 @@
+            IN      LPDHCP_OPTION_SCOPE_INFO6 ScopeInfo,
+            OUT     LPDHCP_ALL_OPTION_VALUES *Values
+ );
++_Win32_SupportedOS_END_()
+ 
+ 
+ 
+@@ -2473,6 +2504,7 @@
+ //DOC DhcpEnumServers enumerates the list of servers found in the DS.  If the DS
+ //DOC is not accessible, it returns an error. The only currently used parameter
+ //DOC is the out parameter Servers.  This is a SLOW call.
++_Win32_SupportedOS_BEGIN_(Server2000)
+ DWORD
+ DhcpEnumServers(
+     IN      DWORD                  Flags,         // must be zero
+@@ -2555,8 +2587,10 @@
+     DHCP_CONST DHCP_SUBNET_ELEMENT_DATA_V5 *RemoveElementInfo,
+                DHCP_FORCE_FLAG             ForceFlag
+     );
+-
+-
++_Win32_SupportedOS_END_()
++
++
++_Win32_SupportedOS_Server2012_
+ DWORD DHCP_API_FUNCTION
+ DhcpV4EnumSubnetReservations(
+     _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
+@@ -2572,6 +2606,7 @@
+ 
+ 
+ //V6 Api's
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpCreateOptionV6(
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2679,12 +2714,14 @@
+                DWORD                     *OptionsRead,
+                DWORD                     *OptionsTotal
+     );
++_Win32_SupportedOS_END_()
+ 
+ #endif
+ 
+ //DOC DhcpDsInit must be called exactly once per process.. this initializes the
+ //DOC memory and other structures for this process.  This initializes some DS
+ //DOC object handles (memory), and hence is slow as this has to read from DS.
++_Win32_SupportedOS_BEGIN_(Server2000)
+ DWORD
+ DhcpDsInit(
+     VOID
+@@ -2697,8 +2734,10 @@
+ DhcpDsCleanup(
+     VOID
+ );
+-
+-
++_Win32_SupportedOS_END_()
++
++
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD
+ DhcpSetThreadOptions(                             // set options for current thread
+     IN      DWORD                  Flags,         // options, currently 0 or DHCP_FLAGS_DONT_ACCESS_DS
+@@ -2730,13 +2769,16 @@
+              IN      DHCP_ATTRIB_ID         pDhcpAttribs[],// array of attribs
+              OUT     LPDHCP_ATTRIB_ARRAY   *pDhcpAttribArr // Ptr is filled w/ array
+ );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_Server2000_
+ DWORD                                             // Status code
+ DhcpServerRedoAuthorization(                      // retry the rogue server stuff
+     _In_opt_ IN      LPWSTR                 ServerIpAddr,  // String form of server IP
+              IN      ULONG                  dwReserved     // reserved for future
+ );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD
+ DhcpAuditLogSetParams(                            // set some auditlogging params
+     _In_opt_ IN      LPWSTR                 ServerIpAddress,
+@@ -2768,6 +2810,7 @@
+              IN              ULONG  DomainSize, // in BYTES
+     _Out_writes_(DomainSize) LPWSTR Domain
+     );
++_Win32_SupportedOS_END_()
+ 
+ DWORD
+ DhcpServerSetDnsRegCredentials(
+@@ -2777,6 +2820,7 @@
+     _In_opt_ IN LPWSTR Passwd
+     );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD
+ DhcpServerSetDnsRegCredentialsV5(
+     _In_opt_ IN LPWSTR ServerIpAddress,
+@@ -2819,12 +2863,14 @@
+     _In_opt_z_ DHCP_CONST WCHAR               *ServerIpAddress,
+                LPDHCP_SERVER_SPECIFIC_STRINGS *ServerSpecificStrings
+     );
++_Win32_SupportedOS_END_()
+ 
+ void DHCP_API_FUNCTION
+ DhcpServerAuditlogParamsFree(
+     DHCP_SERVER_CONFIG_INFO_VQ *ConfigInfo
+     );
+ 
++_Win32_SupportedOS_BEGIN_(Server2008)
+ DWORD DHCP_API_FUNCTION
+ DhcpCreateSubnetV6(
+     _In_opt_ LPWSTR                ServerIpAddress,
+@@ -3003,6 +3049,7 @@
+ _In_opt_z_ DHCP_CONST WCHAR   *ServerIpAddress,
+ OUT        LPDHCP_MIB_INFO_V5 *MibInfo
+     );
++_Win32_SupportedOS_END_()
+ 
+ DWORD DHCP_API_FUNCTION
+ DhcpAddSecurityGroup(
+@@ -3010,6 +3057,7 @@
+ );
+ 
+ 
++_Win32_SupportedOS_BEGIN_(Server2012)
+ DWORD DHCP_API_FUNCTION
+ DhcpV4GetOptionValue (
+     _In_opt_    IN  LPWSTR                      ServerIpAddress,
+@@ -3059,6 +3107,7 @@
+                 IN  LPDHCP_OPTION_SCOPE_INFO        ScopeInfo,
+                 OUT LPDHCP_ALL_OPTION_VALUES_PB    *Values
+         );
++_Win32_SupportedOS_END_()
+ 
+ 
+ 
+@@ -3210,6 +3259,7 @@
+ #define     PREVSTATE           0x00000020
+ #define     SHAREDSECRET        0x00000040
+ 
++_Win32_SupportedOS_BEGIN_(Server2012)
+ DWORD DHCP_API_FUNCTION
+ DhcpV4FailoverCreateRelationship(
+  _In_opt_ LPWSTR  ServerIpAddress,
+@@ -3317,6 +3367,7 @@
+         _In_        BOOL                    Enabled,
+         _Out_       LPDHCP_POLICY           *Policy
+ );
++_Win32_SupportedOS_END_()
+ 
+ DWORD DHCP_API_FUNCTION
+ DhcpHlprCreateV4PolicyEx (
+@@ -3330,6 +3381,7 @@
+         _Out_       LPDHCP_POLICY_EX        *Policy
+ );
+ 
++_Win32_SupportedOS_BEGIN_(Server2012)
+ DWORD DHCP_API_FUNCTION
+ DhcpHlprAddV4PolicyExpr (
+         _Inout_         LPDHCP_POLICY           Policy,
+@@ -3373,6 +3425,7 @@
+ DhcpHlprFreeV4Policy (
+     _Inout_         LPDHCP_POLICY           Policy
+ );
++_Win32_SupportedOS_END_()
+ 
+ VOID DHCP_API_FUNCTION
+ DhcpHlprFreeV4PolicyArray (
+@@ -3406,6 +3459,7 @@
+     _In_       DHCP_PROPERTY_TYPE    Type
+ );
+ 
++_Win32_SupportedOS_BEGIN_(Server2012)
+ BOOL DHCP_API_FUNCTION
+ DhcpHlprIsV4PolicySingleUC(
+     _In_        LPDHCP_POLICY           Policy
+@@ -3575,6 +3629,7 @@
+         _In_           DWORD                 NumFreeAddrReq,
+         _Out_          LPDHCPV6_IP_ARRAY     *IPAddrList
+ );
++_Win32_SupportedOS_END_()
+ 
+ 
+ 

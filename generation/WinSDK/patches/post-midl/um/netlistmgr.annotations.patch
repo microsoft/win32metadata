@@ -1,0 +1,107 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h b/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/netlistmgr.h
+@@ -179,6 +179,7 @@
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -327,6 +328,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00000-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetworkListManager : public IDispatch
+     {
+     public:
+@@ -588,6 +590,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00001-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetworkListManagerEvents : public IUnknown
+     {
+     public:
+@@ -683,6 +686,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00002-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetwork : public IDispatch
+     {
+     public:
+@@ -1277,6 +1281,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00003-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     IEnumNetworks : public IDispatch
+     {
+     public:
+@@ -1490,6 +1495,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00004-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetworkEvents : public IUnknown
+     {
+     public:
+@@ -1624,6 +1630,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00005-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetworkConnection : public IDispatch
+     {
+     public:
+@@ -2066,6 +2073,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00006-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     IEnumNetworkConnections : public IDispatch
+     {
+     public:
+@@ -2275,6 +2283,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00007-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_WindowsVista_
+     INetworkConnectionEvents : public IUnknown
+     {
+     public:
+@@ -2383,6 +2392,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00008-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_Windows8_
+     INetworkCostManager : public IUnknown
+     {
+     public:
+@@ -2510,6 +2520,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB00009-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_Windows8_
+     INetworkCostManagerEvents : public IUnknown
+     {
+     public:
+@@ -2614,6 +2625,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB0000a-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_Windows8_
+     INetworkConnectionCost : public IUnknown
+     {
+     public:
+@@ -2714,6 +2726,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("DCB0000b-570F-4A9B-8D69-199FDBA5723B")
++    _Win32_SupportedOS_Windows8_
+     INetworkConnectionCostEvents : public IUnknown
+     {
+     public:

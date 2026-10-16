@@ -1,0 +1,51 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h b/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/IContact.h
+@@ -119,6 +119,7 @@
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+@@ -142,6 +143,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ad553d98-deb1-474a-8e17-fc0c2075b738")
++    _Win32_SupportedOS_WindowsVista_
+     IContactManager : public IUnknown
+     {
+     public:
+@@ -306,6 +308,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("b6afa338-d779-11d9-8bde-f66bad1e3f3a")
++    _Win32_SupportedOS_WindowsVista_
+     IContactCollection : public IUnknown
+     {
+     public:
+@@ -412,6 +415,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("70dd27dd-5cbd-46e8-bef0-23b6b346288f")
++    _Win32_SupportedOS_WindowsVista_
+     IContactProperties : public IUnknown
+     {
+     public:
+@@ -775,6 +779,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("F941B671-BDA7-4f77-884A-F46462F226A7")
++    _Win32_SupportedOS_WindowsVista_
+     IContact : public IUnknown
+     {
+     public:
+@@ -909,6 +914,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("ffd3adf8-fa64-4328-b1b6-2e0db509cb3c")
++    _Win32_SupportedOS_WindowsVista_
+     IContactPropertyCollection : public IUnknown
+     {
+     public:

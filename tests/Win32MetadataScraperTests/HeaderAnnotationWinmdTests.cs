@@ -782,12 +782,284 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
             => Emit(fixture.DirectoryPath, architecture);
 
-        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null, bool nativeFieldArrayInfo = false)
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void NativeEnumConstantAliasesReachFinalWinmd(string architecture, string target, bool common)
+        {
+            string[] names =
+            {
+                "WER_SUBMIT_ADD_REGISTERED_DATA", "WER_SUBMIT_HONOR_RECOVERY", "WER_SUBMIT_HONOR_RESTART",
+                "WER_SUBMIT_NO_ARCHIVE", "WER_SUBMIT_NO_CLOSE_UI", "WER_SUBMIT_NO_QUEUE",
+                "WER_SUBMIT_OUTOFPROCESS", "WER_SUBMIT_OUTOFPROCESS_ASYNC", "WER_SUBMIT_QUEUE",
+                "WER_SUBMIT_SHOW_DEBUG", "WER_SUBMIT_START_MINIMIZED", "WER_SUBMIT_BYPASS_DATA_THROTTLING",
+                "WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY", "WER_SUBMIT_REPORT_MACHINE_ID",
+            };
+            uint[] values = { 16, 1, 2, 256, 64, 128, 32, 1024, 4, 8, 512, 2048, 4096, 8192 };
+            string declarations = "enum [[clang::flag_enum]] WER_SUBMIT_FLAGS : unsigned { "
+                + string.Join(", ", names.Zip(values, (name, value) => $"{name} = {value}")) + " };"
+                + " enum SIGNED_FLAGS : int { SIGNED_ALL = -1 };";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            if (common)
+            {
+                string commonDirectory = Path.Combine(fixture.DirectoryPath, "common");
+                Directory.CreateDirectory(commonDirectory);
+                File.Move(fixture.Output, Path.Combine(commonDirectory, "Bindings.cs"));
+            }
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.constants.cs"), @"
+namespace Other { public enum OtherFlags : uint { WER_SUBMIT_NO_QUEUE = 7 } }
+namespace Test { public static class Apis {
+    public const uint WER_SUBMIT_NO_QUEUE = 128;
+    public const uint WER_SUBMIT_DISCARD_IF_QUEUED = WER_SUBMIT_NO_QUEUE;
+    public const uint ALIAS_CHAIN = WER_SUBMIT_DISCARD_IF_QUEUED;
+    public const uint SIGNED_ALL = 0xffffffff;
+    public const uint UNSIGNED_ALIAS = SIGNED_ALL;
+    public const uint UNRELATED = 9;
+    public const uint UNRELATED_ALIAS = UNRELATED;
+}}");
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var flags = FindType(reader, "WER_SUBMIT_FLAGS");
+            AssertHasAttribute(reader, flags.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(reader, flags.GetCustomAttributes(), "ScopedEnumAttribute");
+            var fields = flags.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(names, fields.Skip(1).Select(field => reader.GetString(field.Name)));
+            Assert.Equal(values, fields.Skip(1).Select(ReadUInt32));
+            var constants = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
+                .ToDictionary(field => reader.GetString(field.Name));
+            Assert.All(constants.Values, field =>
+                Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
+            Assert.DoesNotContain("WER_SUBMIT_NO_QUEUE", constants.Keys);
+            Assert.DoesNotContain("SIGNED_ALL", constants.Keys);
+            Assert.Equal(128u, ReadUInt32(constants["WER_SUBMIT_DISCARD_IF_QUEUED"]));
+            Assert.Equal(128u, ReadUInt32(constants["ALIAS_CHAIN"]));
+            Assert.Equal(uint.MaxValue, ReadUInt32(constants["UNSIGNED_ALIAS"]));
+            Assert.Equal(9u, ReadUInt32(constants["UNRELATED_ALIAS"]));
+            Assert.Equal(7u, ReadUInt32(FindType(reader, "OtherFlags").GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "WER_SUBMIT_NO_QUEUE")));
+            AssertMetadataClosure(reader);
+
+            uint ReadUInt32(FieldDefinition field)
+            {
+                var value = reader.GetConstant(field.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, value.TypeCode);
+                return reader.GetBlobReader(value.Value).ReadUInt32();
+            }
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void EnumConstantAliasesDoNotGuessAnotherNamespaceOrAmbiguousEnum(bool ambiguous)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", "");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Bindings.cs"), ambiguous ? @"
+namespace Test {
+public enum First { SHARED = 1 }
+public enum Second { SHARED = 2 }
+public static class Apis { public const int ALIAS = SHARED; }
+}" : @"
+namespace Other { public enum First { SHARED = 1 } }
+namespace Test { public static class Apis { public const int ALIAS = SHARED; } }");
+            if (ambiguous)
+            {
+                var exception = Assert.Throws<AggregateException>(Create);
+                Assert.Contains(exception.Flatten().InnerExceptions, error =>
+                    error is InvalidOperationException && error.Message.Contains("Ambiguous enum constant alias 'Test.SHARED'"));
+            }
+            else
+            {
+                Assert.Contains(Create().GetDiagnostics(), diagnostic => diagnostic.Id == "CS0103");
+            }
+
+            ClangSharpSourceCompilation Create() => ClangSharpSourceCompilation.Create(fixture.DirectoryPath, "x64",
+                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
+                Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
+        }
+
+        [ServiceApiMigrationTheory]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ServiceApiHeaderMigrationMatchesBoundedComponent(string architecture)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("SERVICE_API_MIGRATION_ARTIFACTS");
+            string[] owners = { "Tbs", "FileHistory", "Antimalware", "WebSock" };
+            foreach (string owner in owners)
+                Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(
+                    WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "Partitions", owner, "settings.rsp")));
+            string constants = Path.Combine(artifacts, "constants");
+            var remaps = File.ReadLines(Path.Combine(constants, "enumsRemap.rsp"))
+                .Where(line => line.Contains('=')).Select(line => line.Split('=', 2))
+                .ToDictionary(pair => pair[0], pair => pair[1]);
+            var namespaces = new HashSet<string>(new[]
+            {
+                "Windows.Win32.Foundation", "Windows.Win32.Foundation.Metadata",
+                "Windows.Win32.System.Com",
+                "Windows.Win32.System.TpmBaseServices", "Windows.Win32.Storage.FileHistory",
+                "Windows.Win32.System.Antimalware", "Windows.Win32.Networking.WebSocket",
+            });
+            var dependencies = new Dictionary<string, CompilationUnitSyntax>();
+            foreach (var item in new[] { (File: "Foundation", Type: "FILETIME"), (File: "Com", Type: "IUnknown") })
+            {
+                var dependency = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                    Path.Combine(artifacts, "dependencies", item.File + ".cs"))).GetCompilationUnitRoot();
+                var type = dependency.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Single(value => value.Identifier.ValueText == item.Type);
+                var ns = type.Ancestors().OfType<NamespaceDeclarationSyntax>().Single()
+                    .WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(type));
+                dependencies.Add(item.File, dependency.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(ns)));
+            }
+            var movements = new[]
+            {
+                (Type: "FH_SERVICE_PIPE_HANDLE", Owner: "FileHistory", Method: "FhServiceOpenPipe", Parameter: "Pipe"),
+                (Type: "WEB_SOCKET_HANDLE", Owner: "WebSock", Method: "WebSocketCreateClientHandle", Parameter: "phWebSocket"),
+                (Type: "WEB_SOCKET_HANDLE", Owner: "WebSock", Method: "WebSocketCreateServerHandle", Parameter: "phWebSocket"),
+            };
+            string directory = Path.Combine(artifacts, "components", architecture);
+            foreach (string state in new[] { "original", "parser-control", "migrated", "expected" })
+            {
+                string output = Path.Combine(directory, state);
+                string sources = Path.Combine(output, architecture);
+                Directory.CreateDirectory(sources);
+                File.Delete(Path.Combine(output, "Metadata.manual.cs"));
+                string aliases = Path.Combine(sources, "autotypes.cs");
+                File.Delete(aliases);
+                foreach (string owner in owners)
+                {
+                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(artifacts,
+                        state == "expected" ? "parser-control" : state, architecture, owner + ".cs"))).GetCompilationUnitRoot();
+                    source = source.WithUsings(SyntaxFactory.List(source.Usings.Where(value =>
+                        !value.Name.ToString().StartsWith("Windows.Win32.", StringComparison.Ordinal)
+                        || namespaces.Contains(value.Name.ToString()))));
+                    File.WriteAllText(Path.Combine(sources, owner + ".cs"), source.ToFullString());
+                }
+                foreach (var dependency in dependencies)
+                    File.WriteAllText(Path.Combine(output, dependency.Key + ".dependency.cs"), dependency.Value.ToFullString());
+                foreach (string path in Directory.GetFiles(constants, "*.cs"))
+                    File.Copy(path, Path.Combine(output, Path.GetFileName(path)), overwrite: true);
+                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(new[]
+                {
+                    Path.Combine(artifacts, state == "migrated" ? "current-owned-autoTypes.json" : "original-owned-autoTypes.json"),
+                }).ToArray();
+                var names = MetadataUtils.ScraperUtils.GetNameToNamespaceMap(output,
+                    MetadataUtils.ScraperUtils.NameOptions.Methods | MetadataUtils.ScraperUtils.NameOptions.Structs);
+                using (var stream = File.Create(aliases))
+                    NativeTypedefStructsCreator.WriteToStream(names, autoTypes, stream);
+                if (state != "expected")
+                    continue;
+
+                var aliasesSource = CSharpSyntaxTree.ParseText(File.ReadAllText(aliases)).GetCompilationUnitRoot();
+                var lifecycle = new Dictionary<string, SyntaxList<AttributeListSyntax>>();
+                var types = aliasesSource.DescendantNodes().OfType<StructDeclarationSyntax>()
+                    .Where(type => movements.Any(value => value.Type == type.Identifier.ValueText)).ToArray();
+                aliasesSource = aliasesSource.ReplaceNodes(types, (original, rewritten) =>
+                {
+                    bool IsLifecycle(AttributeListSyntax list) => list.Attributes.All(attribute =>
+                        attribute.Name.ToString() is "RAIIFree" or "InvalidHandleValue");
+                    lifecycle.Add(original.Identifier.ValueText,
+                        SyntaxFactory.List(original.AttributeLists.Where(IsLifecycle)));
+                    return rewritten.WithAttributeLists(
+                        SyntaxFactory.List(rewritten.AttributeLists.Where(list => !IsLifecycle(list))));
+                });
+                File.WriteAllText(aliases, aliasesSource.ToFullString());
+                foreach (var movement in movements)
+                {
+                    string path = Path.Combine(sources, movement.Owner + ".cs");
+                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
+                    var method = source.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                        .Single(value => value.Identifier.ValueText == movement.Method);
+                    var parameter = method.ParameterList.Parameters.Single(value => value.Identifier.ValueText == movement.Parameter);
+                    Assert.DoesNotContain(parameter.AttributeLists.SelectMany(list => list.Attributes),
+                        attribute => attribute.Name.ToString() is "RAIIFree" or "InvalidHandleValue");
+                    source = source.ReplaceNode(parameter, parameter.AddAttributeLists(lifecycle[movement.Type].ToArray()));
+                    File.WriteAllText(path, source.ToFullString());
+                }
+            }
+
+            using var original = Emit(Path.Combine(directory, "original"), architecture, memberRemaps: remaps);
+            using var control = Emit(Path.Combine(directory, "parser-control"), architecture, memberRemaps: remaps);
+            using var current = Emit(Path.Combine(directory, "migrated"), architecture, memberRemaps: remaps);
+            using var expected = Emit(Path.Combine(directory, "expected"), architecture, memberRemaps: remaps);
+            foreach (var image in new[] { original, control, current, expected })
+                AssertMetadataClosure(image.Reader);
+            Assert.Equal(Snapshot(original.Reader), Snapshot(control.Reader));
+            Assert.Equal(Snapshot(expected.Reader), Snapshot(current.Reader));
+            foreach (var movement in movements)
+            {
+                var oldType = FindType(control.Reader, movement.Type);
+                Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(control.Reader, oldType.GetCustomAttributes()).OrderBy(value => value));
+                string cleanup = ReadStringAttribute(control.Reader, oldType.GetCustomAttributes(), "RAIIFreeAttribute");
+                var newType = FindType(current.Reader, movement.Type);
+                AssertDoesNotHaveAttribute(current.Reader, newType.GetCustomAttributes(), "RAIIFreeAttribute");
+                AssertDoesNotHaveAttribute(current.Reader, newType.GetCustomAttributes(), "InvalidHandleValueAttribute");
+                var method = current.Reader.MethodDefinitions.Select(current.Reader.GetMethodDefinition)
+                    .Single(value => current.Reader.GetString(value.Name) == movement.Method);
+                var parameter = method.GetParameters().Select(current.Reader.GetParameter)
+                    .Single(value => current.Reader.GetString(value.Name) == movement.Parameter);
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                AssertStringAttribute(current.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", cleanup);
+                Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(current.Reader, parameter.GetCustomAttributes()).OrderBy(value => value));
+            }
+            foreach (string name in new[] { "HAMSICONTEXT", "HAMSISESSION" })
+                Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(current.Reader, FindType(current.Reader, name).GetCustomAttributes()).OrderBy(value => value));
+            var getDeviceId = current.Reader.MethodDefinitions.Select(current.Reader.GetMethodDefinition)
+                .Single(method => current.Reader.GetString(method.Name) == "GetDeviceID").GetImport();
+            Assert.Equal("tbs.dll", current.Reader.GetString(current.Reader.GetModuleReference(getDeviceId.Module).Name));
+            Assert.DoesNotContain(current.Reader.MethodDefinitions.Select(current.Reader.GetMethodDefinition),
+                method => current.Reader.GetString(method.Name) == "AmsiResultIsMalware");
+            string[] sharedRpc = { "BSTR_UserSize64", "BSTR_UserMarshal64", "BSTR_UserUnmarshal64", "BSTR_UserFree64" };
+            foreach (string name in sharedRpc)
+            {
+                var method = current.Reader.MethodDefinitions.Select(current.Reader.GetMethodDefinition)
+                    .Single(value => current.Reader.GetString(value.Name) == name);
+                AssertStringAttribute(current.Reader, method.GetCustomAttributes(),
+                    "SupportedOSPlatformAttribute", "windows5.1.2600");
+            }
+            Assert.Equal(43 + sharedRpc.Length, current.Reader.CustomAttributes.Count(handle =>
+                AttributeName(current.Reader, handle) == "SupportedOSPlatformAttribute"));
+            foreach (var item in new[]
+            {
+                (Name: "TBS_COMMAND_PRIORITY", Members: new[] { "LOW", "NORMAL", "SYSTEM", "HIGH", "MAX" },
+                    Values: new uint[] { 100, 200, 400, 300, 0x80000000 }),
+                (Name: "TBS_COMMAND_LOCALITY", Members: new[] { "ZERO", "ONE", "TWO", "THREE", "FOUR" },
+                    Values: new uint[] { 0, 1, 2, 3, 4 }),
+            })
+            {
+                var type = FindType(current.Reader, item.Name);
+                AssertDoesNotHaveAttribute(current.Reader, type.GetCustomAttributes(), "FlagsAttribute");
+                AssertDoesNotHaveAttribute(current.Reader, type.GetCustomAttributes(), "ScopedEnumAttribute");
+                var fields = type.GetFields().Select(current.Reader.GetFieldDefinition).ToArray();
+                Assert.Equal("value__", current.Reader.GetString(fields[0].Name));
+                Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+                Assert.Equal(item.Members.Select(name => item.Name + "_" + name),
+                    fields.Skip(1).Select(field => current.Reader.GetString(field.Name)));
+                Assert.Equal(item.Values, fields.Skip(1).Select(field =>
+                {
+                    var constant = current.Reader.GetConstant(field.GetDefaultValue());
+                    Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                    return current.Reader.GetBlobReader(constant.Value).ReadUInt32();
+                }));
+            }
+
+            static string[] Snapshot(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Select(type => WinHttpMigrationTests.SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
+            bool nativeFieldArrayInfo = false, Dictionary<string, string> memberRemaps = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"));
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
-                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                memberRemaps ?? new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
                 Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
@@ -934,6 +1206,15 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
                 => reader.GetTypeSpecification(handle).DecodeSignature(this, context);
             private string GetTypeName(MetadataReader reader, StringHandle @namespace, StringHandle name)
                 => this.qualifiedNames ? reader.GetString(@namespace) + "." + reader.GetString(name) : reader.GetString(name);
+        }
+    }
+
+    public sealed class ServiceApiMigrationTheoryAttribute : TheoryAttribute
+    {
+        public ServiceApiMigrationTheoryAttribute()
+        {
+            if (Environment.GetEnvironmentVariable("SERVICE_API_MIGRATION_ARTIFACTS") == null)
+                Skip = "Set SERVICE_API_MIGRATION_ARTIFACTS to the bounded actual-header migration sources.";
         }
     }
 }

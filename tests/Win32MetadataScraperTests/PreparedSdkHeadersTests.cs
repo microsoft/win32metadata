@@ -186,6 +186,85 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        [Theory]
+        [InlineData(new[] { @"common\Sample.cs" },
+            new[] { @"x86\Sample.cs", @"x64\Sample.cs", @"arm64\Sample.cs" }, new[] { "Sample" })]
+        [InlineData(new[] { @"x86\Sample.cs", @"x64\Sample.cs", @"arm64\Sample.cs" },
+            new[] { @"common\Sample.cs" }, new[] { "Sample" })]
+        [InlineData(new[] { @"x64\Sample.cs" }, new[] { @"x64\Sample.cs" }, new[] { "Sample" })]
+        [InlineData(new string[0], new[] { @"arm64\Sample.cs" }, new[] { "Sample" })]
+        [InlineData(new[] { @"common\Sample.cs", @"x86\Second.cs", @"x64\Second.cs" },
+            new[] { @"x86\Sample.cs", @"x64\Sample.cs", @"arm64\Sample.cs", @"common\Second.cs" },
+            new[] { "Sample", "Second" })]
+        public void SelectedHeaderReplacementUsesTheCompleteFreshSetAndPreservesOtherInputs(
+            string[] before, string[] after, string[] partitions)
+        {
+            using var fixture = new Fixture();
+            string[] unrelated = { @"common\Other.cs", @"common\Manual.cs", "scraper.autoRemaps.generated.rsp" };
+            byte[] frozen = { 0xff, 0xfe, 0x61, 0, 0x0d, 0, 0x0a, 0 };
+            foreach (string relative in before.Concat(unrelated))
+                Fixture.WriteGeneratedFile(fixture.AssembledSources, relative, frozen);
+            foreach (string relative in after.Concat(new[] { @"common\Unselected.cs" }))
+                Fixture.WriteGeneratedFile(fixture.SelectedSources, relative,
+                    new byte[] { 0xef, 0xbb, 0xbf }.Concat(Encoding.UTF8.GetBytes("fresh:" + relative + "\r\n")).ToArray());
+
+            var selected = Directory.GetFiles(fixture.SelectedSources, "*", SearchOption.AllDirectories)
+                .ToDictionary(path => path, File.ReadAllBytes);
+            var result = fixture.ReplaceSelectedHeaders(partitions, after);
+            Assert.True(result.ExitCode == 0, result.Error + result.Output);
+            string[] removed = JsonSerializer.Deserialize<string[]>(result.Output);
+            Assert.NotNull(removed);
+            Assert.Equal(before.OrderBy(path => path, StringComparer.Ordinal),
+                removed.OrderBy(path => path, StringComparer.Ordinal));
+            Assert.Equal(after.Concat(unrelated).OrderBy(path => path, StringComparer.Ordinal),
+                Directory.GetFiles(fixture.AssembledSources, "*", SearchOption.AllDirectories)
+                    .Select(path => Path.GetRelativePath(fixture.AssembledSources, path))
+                    .OrderBy(path => path, StringComparer.Ordinal));
+            Assert.All(after, relative => Assert.Equal(selected[Path.Combine(fixture.SelectedSources, relative)],
+                File.ReadAllBytes(Path.Combine(fixture.AssembledSources, relative))));
+            Assert.All(unrelated, relative => Assert.Equal(frozen,
+                File.ReadAllBytes(Path.Combine(fixture.AssembledSources, relative))));
+            Assert.Equal(selected.Count, Directory.GetFiles(fixture.SelectedSources, "*", SearchOption.AllDirectories).Length);
+            Assert.All(selected, entry => Assert.Equal(entry.Value, File.ReadAllBytes(entry.Key)));
+        }
+
+        [Fact]
+        public void MissingFreshHeaderFailsBeforeAnyFrozenSourceIsRemoved()
+        {
+            using var fixture = new Fixture();
+            byte[] frozen = Encoding.ASCII.GetBytes("frozen\r\n");
+            byte[] fresh = Encoding.ASCII.GetBytes("fresh\r\n");
+            Fixture.WriteGeneratedFile(fixture.AssembledSources, @"common\Sample.cs", frozen);
+            Fixture.WriteGeneratedFile(fixture.AssembledSources, @"common\Other.cs", frozen);
+            Fixture.WriteGeneratedFile(fixture.SelectedSources, @"x86\Sample.cs", fresh);
+
+            var result = fixture.ReplaceSelectedHeaders(new[] { "Sample" },
+                new[] { @"x86\Sample.cs", @"x64\Sample.cs" });
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains(@"The selected header source is missing: x64\Sample.cs", result.Error);
+            Assert.Equal(2, Directory.GetFiles(fixture.AssembledSources, "*", SearchOption.AllDirectories).Length);
+            Assert.Equal(frozen, File.ReadAllBytes(Path.Combine(fixture.AssembledSources, @"common\Sample.cs")));
+            Assert.Equal(frozen, File.ReadAllBytes(Path.Combine(fixture.AssembledSources, @"common\Other.cs")));
+            Assert.Equal(fresh, File.ReadAllBytes(Path.Combine(fixture.SelectedSources, @"x86\Sample.cs")));
+        }
+
+        [Theory]
+        [InlineData("equal")]
+        [InlineData("source-contains-destination")]
+        [InlineData("destination-contains-source")]
+        public void SelectedHeaderReplacementRejectsOverlappingRoots(string relationship)
+        {
+            using var fixture = new Fixture();
+            string selected = relationship == "destination-contains-source"
+                ? Path.Combine(fixture.SelectedSources, "child") : fixture.SelectedSources;
+            string assembled = relationship == "source-contains-destination"
+                ? Path.Combine(fixture.SelectedSources, "child") : fixture.SelectedSources;
+            var result = fixture.ReplaceSelectedHeaders(new[] { "Sample" }, Array.Empty<string>(), selected, assembled);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Selected and assembled generated-source roots must not overlap.", result.Error);
+            Assert.False(Directory.Exists(fixture.SelectedSources));
+        }
+
         private sealed class Fixture : IDisposable
         {
             internal const string Before = "#ifndef SAMPLE_H\r\n#define SAMPLE_H\r\n#define VALUE 1\r\n#endif\r\n";
@@ -233,6 +312,8 @@ namespace Win32MetadataScraperTests
             internal string Unrelated { get; }
             internal string SdkHeader { get; }
             internal string Output { get; }
+            internal string SelectedSources => Path.Combine(this.root, "selected-sources");
+            internal string AssembledSources => Path.Combine(this.root, "assembled-sources");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
                 "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
@@ -279,7 +360,66 @@ namespace Win32MetadataScraperTests
 
             internal ProcessResult Run(string workingDirectory = null)
             {
-                static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
+                return RunPowerShell("$ErrorActionPreference = 'Stop'; & " +
+                    Quote(Path.Combine(RepositoryRoot, "scripts", "Prepare-SdkHeaders.ps1")) +
+                    " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
+                    " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(Output) +
+                    " | ConvertTo-Json -Compress", workingDirectory);
+            }
+
+            internal static void WriteGeneratedFile(string root, string relative, byte[] bytes)
+            {
+                string path = Path.Combine(root, relative);
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllBytes(path, bytes);
+            }
+
+            internal ProcessResult ReplaceSelectedHeaders(string[] partitions, string[] overlays,
+                string selected = null, string assembled = null)
+            {
+                string inputs = Path.Combine(this.root, "source-replacement.json");
+                File.WriteAllText(inputs, JsonSerializer.Serialize(new
+                {
+                    Selected = selected ?? SelectedSources,
+                    Assembled = assembled ?? AssembledSources,
+                    Partitions = partitions,
+                    Overlays = overlays,
+                }));
+                return RunPowerShell(@"
+                    $ErrorActionPreference = 'Stop'
+                    Set-StrictMode -Version Latest
+                    $tokens = $null
+                    $errors = $null
+                    $ast = [Management.Automation.Language.Parser]::ParseFile(
+                        " + Quote(Path.Combine(RepositoryRoot, "scripts", "Build-WinHttpMigrationImage.ps1")) + @",
+                        [ref]$tokens, [ref]$errors)
+                    if ($errors.Count) { throw ($errors.Message -join [Environment]::NewLine) }
+                    $definitions = @($ast.FindAll({
+                        param($node)
+                        $node -is [Management.Automation.Language.FunctionDefinitionAst] -and
+                            $node.Name -ceq 'Set-SelectedHeaderSources'
+                    }, $true))
+                    $calls = @($ast.FindAll({
+                        param($node)
+                        $node -is [Management.Automation.Language.CommandAst] -and
+                            $node.GetCommandName() -ceq 'Set-SelectedHeaderSources'
+                    }, $true))
+                    if ($definitions.Count -ne 1 -or $calls.Count -ne 1) {
+                        throw 'The image helper must define and invoke selected-source replacement exactly once.'
+                    }
+                    . ([ScriptBlock]::Create($definitions[0].Extent.Text))
+                    $fixture = Get-Content -LiteralPath " + Quote(inputs) + @" -Raw | ConvertFrom-Json
+                    $removed = Set-SelectedHeaderSources $fixture.Selected $fixture.Assembled `
+                        @($fixture.Partitions) @($fixture.Overlays)
+                    if ($null -eq $removed -or $removed.GetType() -ne [string[]]) {
+                        throw 'Removed-source provenance must be a string array, including when empty.'
+                    }
+                    ConvertTo-Json -InputObject $removed -Compress
+                    ");
+            }
+
+            private ProcessResult RunPowerShell(string command, string workingDirectory = null)
+            {
                 var start = new ProcessStartInfo("pwsh")
                 {
                     WorkingDirectory = workingDirectory ?? RepositoryRoot,
@@ -293,11 +433,7 @@ namespace Win32MetadataScraperTests
                     start.ArgumentList.Add(argument);
                 }
 
-                start.ArgumentList.Add("$ErrorActionPreference = 'Stop'; & " +
-                    Quote(Path.Combine(RepositoryRoot, "scripts", "Prepare-SdkHeaders.ps1")) +
-                    " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
-                    " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(Output) +
-                    " | ConvertTo-Json -Compress");
+                start.ArgumentList.Add(command);
                 return Execute(start);
             }
 
@@ -358,6 +494,7 @@ namespace Win32MetadataScraperTests
             public void Dispose() => Directory.Delete(this.root, recursive: true);
 
             private static string Hash(byte[] bytes) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));
+            private static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
         }
 
         public sealed class PreparationResult

@@ -8,3 +8,5 @@
 <IncludeRoot>/um/ws2bth.h
 --namespace
 Windows.Win32.Devices.Bluetooth
+--config
+parse-win32-annotations

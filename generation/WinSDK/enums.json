@@ -4395,10 +4395,6 @@
       {
         "method": "SetLastErrorEx",
         "parameter": "dwErrCode"
-      },
-      {
-        "struct": "NETINFOSTRUCT",
-        "field": "dwStatus"
       }
     ]
   },
@@ -6577,31 +6573,6 @@
     ]
   },
   {
-    "name": "UNC_INFO_LEVEL",
-    "members": [
-      {
-        "name": "UNIVERSAL_NAME_INFO_LEVEL"
-      },
-      {
-        "name": "REMOTE_NAME_INFO_LEVEL"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NPGetUniversalName",
-        "parameter": "dwInfoLevel"
-      },
-      {
-        "method": "WNetGetUniversalNameW",
-        "parameter": "dwInfoLevel"
-      },
-      {
-        "method": "WNetGetUniversalNameA",
-        "parameter": "dwInfoLevel"
-      }
-    ]
-  },
-  {
     "name": "GET_DCX_FLAGS",
     "flags": true,
     "members": [
@@ -7458,28 +7429,6 @@
     ]
   },
   {
-    "name": "WER_FILE",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_FILE_ANONYMOUS_DATA"
-      },
-      {
-        "name": "WER_FILE_DELETE_WHEN_DONE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerReportAddFile",
-        "parameter": "dwFileFlags"
-      },
-      {
-        "method": "WerRegisterFile",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "TRACE_MESSAGE_FLAGS",
     "flags": true,
     "members": [
@@ -8027,30 +7976,6 @@
       {
         "method": "PFSCE_LOG_INFO",
         "parameter": "ErrLevel"
-      }
-    ]
-  },
-  {
-    "name": "WNPERM_DLG",
-    "members": [
-      {
-        "name": "WNPERM_DLG_PERM"
-      },
-      {
-        "name": "WNPERM_DLG_AUDIT"
-      },
-      {
-        "name": "WNPERM_DLG_OWNER"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NPFMXGetPermHelp",
-        "parameter": "nDialogType"
-      },
-      {
-        "method": "NPFMXEditPerm",
-        "parameter": "nDialogType"
       }
     ]
   },
@@ -9731,38 +9656,6 @@
       {
         "method": "CryptStringToBinaryW",
         "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "WNET_OPEN_ENUM_USAGE",
-    "flags": true,
-    "members": [
-      {
-        "name": "RESOURCEUSAGE_NONE",
-        "value": "0"
-      },
-      {
-        "name": "RESOURCEUSAGE_CONNECTABLE"
-      },
-      {
-        "name": "RESOURCEUSAGE_CONTAINER"
-      },
-      {
-        "name": "RESOURCEUSAGE_ATTACHED"
-      },
-      {
-        "name": "RESOURCEUSAGE_ALL"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WNetOpenEnumA",
-        "parameter": "dwUsage"
-      },
-      {
-        "method": "WNetOpenEnumW",
-        "parameter": "dwUsage"
       }
     ]
   },
@@ -11524,12 +11417,7 @@
         "name": "POWER_PLATFORM_ROLE_V2"
       }
     ],
-    "uses": [
-      {
-        "method": "PowerDeterminePlatformRoleEx",
-        "parameter": "Version"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "WIN_HTTP_CREATE_URL_FLAGS",
@@ -11910,14 +11798,6 @@
         "parameter": "Flags"
       },
       {
-        "method": "PowerSettingRegisterNotification",
-        "parameter": "Flags"
-      },
-      {
-        "method": "PowerRegisterSuspendResumeNotification",
-        "parameter": "Flags"
-      },
-      {
         "method": "RegisterPowerSettingNotification",
         "parameter": "Flags"
       }
@@ -12147,64 +12027,6 @@
     ]
   },
   {
-    "name": "NET_CONNECT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CONNECT_",
-      "header": "winnetwk.h"
-    },
-    "uses": [
-      {
-        "method": "WNetAddConnection2A",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetAddConnection2W",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetAddConnection3A",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetAddConnection3W",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetAddConnection4A",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetAddConnection4W",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetCancelConnection2A",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetCancelConnection2W",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetUseConnectionW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WNetUseConnectionA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NPAddConnection3",
-        "parameter": "dwFlags"
-      },
-      {
-        "struct": "NOTIFYADD",
-        "field": "dwAddFlags"
-      }
-    ]
-  },
-  {
     "name": "VIRTUAL_ALLOCATION_TYPE",
     "flags": true,
     "members": [
@@ -12289,74 +12111,6 @@
       {
         "struct": "MEMORY_BASIC_INFORMATION64",
         "field": "State"
-      }
-    ]
-  },
-  {
-    "name": "WER_SUBMIT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_SUBMIT_ADD_REGISTERED_DATA",
-        "value": "16"
-      },
-      {
-        "name": "WER_SUBMIT_HONOR_RECOVERY",
-        "value": "1"
-      },
-      {
-        "name": "WER_SUBMIT_HONOR_RESTART",
-        "value": "2"
-      },
-      {
-        "name": "WER_SUBMIT_NO_ARCHIVE",
-        "value": "256"
-      },
-      {
-        "name": "WER_SUBMIT_NO_CLOSE_UI",
-        "value": "64"
-      },
-      {
-        "name": "WER_SUBMIT_NO_QUEUE",
-        "value": "128"
-      },
-      {
-        "name": "WER_SUBMIT_OUTOFPROCESS",
-        "value": "32"
-      },
-      {
-        "name": "WER_SUBMIT_OUTOFPROCESS_ASYNC",
-        "value": "1024"
-      },
-      {
-        "name": "WER_SUBMIT_QUEUE",
-        "value": "4"
-      },
-      {
-        "name": "WER_SUBMIT_SHOW_DEBUG",
-        "value": "8"
-      },
-      {
-        "name": "WER_SUBMIT_START_MINIMIZED",
-        "value": "512"
-      },
-      {
-        "name": "WER_SUBMIT_BYPASS_DATA_THROTTLING",
-        "value": "2048"
-      },
-      {
-        "name": "WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY",
-        "value": "4096"
-      },
-      {
-        "name": "WER_SUBMIT_REPORT_MACHINE_ID",
-        "value": "8192"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerReportSubmit",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -12499,50 +12253,6 @@
       {
         "method": "SetPrivateObjectSecurityEx",
         "parameter": "AutoInheritFlags"
-      }
-    ]
-  },
-  {
-    "name": "NP_PROPERTY_DIALOG_SELECTION",
-    "members": [
-      {
-        "name": "WNPS_FILE"
-      },
-      {
-        "name": "WNPS_DIR"
-      },
-      {
-        "name": "WNPS_MULT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NPPropertyDialog",
-        "parameter": "nPropSel"
-      },
-      {
-        "method": "NPGetPropertyText",
-        "parameter": "nPropSel"
-      }
-    ]
-  },
-  {
-    "name": "NPDIRECTORY_NOTIFY_OPERATION",
-    "members": [
-      {
-        "name": "WNDN_MKDIR"
-      },
-      {
-        "name": "WNDN_RMDIR"
-      },
-      {
-        "name": "WNDN_MVDIR"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NPDirectoryNotify",
-        "parameter": "dwOper"
       }
     ]
   },
@@ -13746,28 +13456,6 @@
     ]
   },
   {
-    "name": "FDICREATE_CPU_TYPE",
-    "members": [
-      {
-        "name": "cpuUNKNOWN"
-      },
-      {
-        "name": "cpu80286",
-        "value": "0"
-      },
-      {
-        "name": "cpu80386",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "FDICreate",
-        "parameter": "cpuType"
-      }
-    ]
-  },
-  {
     "name": "FONT_OUTPUT_PRECISION",
     "type": "byte",
     "members": [
@@ -14725,37 +14413,6 @@
     ]
   },
   {
-    "name": "WER_FAULT_REPORTING",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_NOHEAP"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_QUEUE"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_ALWAYS_SHOW_UI"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerSetFlags",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WerGetFlags",
-        "parameter": "pdwFlags"
-      }
-    ]
-  },
-  {
     "name": "SNMP_LOG",
     "type": "int",
     "members": [
@@ -15006,16 +14663,6 @@
       {
         "struct": "CRYPT_KEY_PROV_INFO",
         "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "REG_SAM_FLAGS",
-    "members": [],
-    "uses": [
-      {
-        "method": "PowerSettingAccessCheckEx",
-        "parameter": "AccessType"
       }
     ]
   },
@@ -15301,39 +14948,6 @@
         "interface": "ITextHost",
         "method": "TxGetSysColor",
         "parameter": "nIndex"
-      }
-    ]
-  },
-  {
-    "name": "NET_RESOURCE_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "RESOURCETYPE_ANY"
-      },
-      {
-        "name": "RESOURCETYPE_DISK"
-      },
-      {
-        "name": "RESOURCETYPE_PRINT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WNetOpenEnumA",
-        "parameter": "dwType"
-      },
-      {
-        "method": "WNetOpenEnumW",
-        "parameter": "dwType"
-      },
-      {
-        "struct": "NETRESOURCEA",
-        "field": "dwType"
-      },
-      {
-        "struct": "NETRESOURCEW",
-        "field": "dwType"
       }
     ]
   },
@@ -17292,23 +16906,6 @@
     ]
   },
   {
-    "name": "NETWORK_NAME_FORMAT_FLAGS",
-    "members": [
-      {
-        "name": "WNFMT_MULTILINE"
-      },
-      {
-        "name": "WNFMT_ABBREVIATED"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NPFormatNetworkName",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "EXECUTION_STATE",
     "flags": true,
     "members": [
@@ -17790,41 +17387,6 @@
       {
         "method": "WlxShutdown",
         "parameter": "ShutdownType"
-      }
-    ]
-  },
-  {
-    "name": "NET_RESOURCE_SCOPE",
-    "members": [
-      {
-        "name": "RESOURCE_CONNECTED"
-      },
-      {
-        "name": "RESOURCE_CONTEXT"
-      },
-      {
-        "name": "RESOURCE_GLOBALNET"
-      },
-      {
-        "name": "RESOURCE_REMEMBERED"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WNetOpenEnumW",
-        "parameter": "dwScope"
-      },
-      {
-        "method": "WNetOpenEnumA",
-        "parameter": "dwScope"
-      },
-      {
-        "struct": "NETRESOURCEA",
-        "field": "dwScope"
-      },
-      {
-        "struct": "NETRESOURCEW",
-        "field": "dwScope"
       }
     ]
   },
@@ -22862,27 +22424,6 @@
     ]
   },
   {
-    "name": "NETINFOSTRUCT_CHARACTERISTICS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NETINFO_DLL16"
-      },
-      {
-        "name": "NETINFO_DISKRED"
-      },
-      {
-        "name": "NETINFO_PRINTERRED"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NETINFOSTRUCT",
-        "field": "dwCharacteristics"
-      }
-    ]
-  },
-  {
     "name": "DROPEFFECT",
     "flags": true,
     "members": [
@@ -25970,40 +25511,6 @@
     ]
   },
   {
-    "name": "CONNECTDLGSTRUCT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CONNDLG_RO_PATH"
-      },
-      {
-        "name": "CONNDLG_CONN_POINT"
-      },
-      {
-        "name": "CONNDLG_USE_MRU"
-      },
-      {
-        "name": "CONNDLG_HIDE_BOX"
-      },
-      {
-        "name": "CONNDLG_PERSIST"
-      },
-      {
-        "name": "CONNDLG_NOT_PERSIST"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CONNECTDLGSTRUCTW",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "CONNECTDLGSTRUCTA",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "DRAWITEMSTRUCT_CTL_TYPE",
     "members": [
       {
@@ -26643,28 +26150,6 @@
       {
         "struct": "PROCESS_PROTECTION_LEVEL_INFORMATION",
         "field": "ProtectionLevel"
-      }
-    ]
-  },
-  {
-    "name": "DISCDLGSTRUCT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "DISC_UPDATE_PROFILE"
-      },
-      {
-        "name": "DISC_NO_FORCE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DISCDLGSTRUCTA",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "DISCDLGSTRUCTW",
-        "field": "dwFlags"
       }
     ]
   },
@@ -36577,16 +36062,6 @@
         "parameter": "CompressionType"
       }
     ]
-  },
-  {
-    "namespace": "Windows.Win32.System.Power",
-    "name": "DEVICE_POWER_CAPABILITIES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PDCAP_",
-      "header": "powrprof.h;winnt.h"
-    },
-    "uses": []
   },
   {
     "name": "DISPLAY_DEVICE_STATE_FLAGS",

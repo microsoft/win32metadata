@@ -1,0 +1,147 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h b/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/msrdc.h
+@@ -371,6 +371,7 @@
+ /* [local] */ 
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #define	RDCE_TABLE_FULL	( 0x80040001 )
+@@ -533,6 +534,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A71-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcGeneratorParameters : public IUnknown
+     {
+     public:
+@@ -671,6 +673,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A72-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcGeneratorFilterMaxParameters : public IUnknown
+     {
+     public:
+@@ -797,6 +800,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A73-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcGenerator : public IUnknown
+     {
+     public:
+@@ -921,6 +925,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A74-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcFileReader : public IUnknown
+     {
+     public:
+@@ -1050,6 +1055,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A75-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcFileWriter : public IRdcFileReader
+     {
+     public:
+@@ -1199,6 +1205,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A76-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcSignatureReader : public IUnknown
+     {
+     public:
+@@ -1303,6 +1310,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A77-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcComparator : public IUnknown
+     {
+     public:
+@@ -1406,6 +1414,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A78-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcLibrary : public IUnknown
+     {
+     public:
+@@ -1615,6 +1624,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7A-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityReportProgress : public IUnknown
+     {
+     public:
+@@ -1702,6 +1712,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7B-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityTableDumpState : public IUnknown
+     {
+     public:
+@@ -1801,6 +1812,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7C-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityTraitsMappedView : public IUnknown
+     {
+     public:
+@@ -1935,6 +1947,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7D-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityTraitsMapping : public IUnknown
+     {
+     public:
+@@ -2128,6 +2141,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7E-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityTraitsTable : public IUnknown
+     {
+     public:
+@@ -2331,6 +2345,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A7F-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarityFileIdTable : public IUnknown
+     {
+     public:
+@@ -2530,6 +2545,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A80-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IRdcSimilarityGenerator : public IUnknown
+     {
+     public:
+@@ -2626,6 +2642,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A81-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     IFindSimilarResults : public IUnknown
+     {
+     public:
+@@ -2730,6 +2747,7 @@
+ #if defined(__cplusplus) && !defined(CINTERFACE)
+     
+     MIDL_INTERFACE("96236A83-9DBC-11DA-9E3F-0011114AE311")
++    _Win32_SupportedOS_WindowsVista_
+     ISimilarity : public IUnknown
+     {
+     public:

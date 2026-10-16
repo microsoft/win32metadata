@@ -75,6 +75,58 @@ static_assert(INTERNET_SCHEME_SOCKS == 4);
             Assert.NotEmpty(headers);
             string checks = partition switch
             {
+                "RstMgr" => @"
+static_assert(sizeof(DWORD) == 4);
+static_assert(sizeof(((RM_PROCESS_INFO*)nullptr)->AppStatus) == 4);
+static_assert(RmStatusUnknown == 0);
+static_assert(RmStatusRunning == 1);
+static_assert(RmStatusStopped == 2);
+static_assert(RmStatusStoppedOther == 4);
+static_assert(RmStatusRestarted == 8);
+static_assert(RmStatusErrorOnStop == 0x10);
+static_assert(RmStatusErrorOnRestart == 0x20);
+static_assert(RmStatusShutdownMasked == 0x40);
+static_assert(RmStatusRestartMasked == 0x80);
+",
+                "Cabinets" => @"
+static_assert(cpuUNKNOWN == -1);
+static_assert(cpu80286 == 0);
+static_assert(cpu80386 == 1);
+static_assert(sizeof(int) == 4);
+",
+                "Proc_Snap" => @"
+static_assert(sizeof(HPSS) == sizeof(void*));
+static_assert(sizeof(HPSSWALK) == sizeof(void*));
+static_assert(sizeof(PSS_CAPTURE_FLAGS) == sizeof(DWORD));
+static_assert(PSS_CREATE_RELEASE_SECTION == 0x80000000u);
+static_assert(PSS_CREATE_MEASURE_PERFORMANCE == 0x40000000);
+",
+                "Monitor" => @"
+static_assert(sizeof(_BOOL) == sizeof(BOOL));
+static_assert(sizeof(PHYSICAL_MONITOR) == sizeof(HANDLE) + 128 * sizeof(WCHAR));
+static_assert(sizeof(MC_TIMING_REPORT) == 9);
+static_assert(MC_CAPS_NONE == 0);
+static_assert(MC_RESTORE_FACTORY_DEFAULTS_ENABLES_MONITOR_SETTINGS == 0x1000);
+static_assert(MC_SUPPORTED_COLOR_TEMPERATURE_11500K == 0x80);
+static_assert(GETCONNECTEDIDS_TARGET == 0);
+static_assert(GETCONNECTEDIDS_SOURCE == 1);
+static_assert(SETCONFIGURATION_STATUS_APPLIED == 0);
+static_assert(SETCONFIGURATION_STATUS_ADDITIONAL == 1);
+static_assert(SETCONFIGURATION_STATUS_OVERRIDDEN == 2);
+",
+                "IdentityProvider" => @"
+static_assert(IDENTITIES_ALL == 0);
+static_assert(IDENTITIES_ME_ONLY == 1);
+static_assert(sizeof(tag_IdentityUpdateEvent) == sizeof(DWORD));
+static_assert(IDENTITY_ASSOCIATED == 1);
+static_assert(IDENTITY_DISASSOCIATED == 2);
+static_assert(IDENTITY_CREATED == 4);
+static_assert(IDENTITY_IMPORTED == 8);
+static_assert(IDENTITY_DELETED == 16);
+static_assert(IDENTITY_PROPCHANGED == 32);
+static_assert(IDENTITY_CONNECTED == 64);
+static_assert(IDENTITY_DISCONNECTED == 128);
+",
                 "ApplicationVerifier" => @"
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);
@@ -100,6 +152,63 @@ static_assert(TH32CS_SNAPTHREAD == 4);
 static_assert(LF32_FIXED == 1);
 static_assert(LF32_FREE == 2);
 static_assert(LF32_MOVEABLE == 4);
+",
+                "Dwm" => @"
+static_assert(__is_same(__underlying_type(DWM_SHOWCONTACT), int));
+static_assert(sizeof(DWM_SHOWCONTACT) == 4);
+static_assert(DWMSC_DOWN == 1);
+static_assert(DWMSC_UP == 2);
+static_assert(DWMSC_DRAG == 4);
+static_assert(DWMSC_HOLD == 8);
+static_assert(DWMSC_PENBARREL == 16);
+static_assert(DWMSC_NONE == 0);
+static_assert(static_cast<unsigned int>(DWMSC_ALL) == 0xFFFFFFFFu);
+",
+                "Wer" => @"
+static_assert(__is_same(HREPORT, HANDLE));
+static_assert(__is_same(HREPORTSTORE, void*));
+static_assert(WER_FILE_ANONYMOUS_DATA == 2);
+static_assert(WER_FILE_DELETE_WHEN_DONE == 1);
+static_assert(WER_SUBMIT_ADD_REGISTERED_DATA == 16);
+static_assert(WER_SUBMIT_HONOR_RECOVERY == 1);
+static_assert(WER_SUBMIT_HONOR_RESTART == 2);
+static_assert(WER_SUBMIT_NO_ARCHIVE == 256);
+static_assert(WER_SUBMIT_NO_CLOSE_UI == 64);
+static_assert(WER_SUBMIT_NO_QUEUE == 128);
+static_assert(WER_SUBMIT_OUTOFPROCESS == 32);
+static_assert(WER_SUBMIT_OUTOFPROCESS_ASYNC == 1024);
+static_assert(WER_SUBMIT_QUEUE == 4);
+static_assert(WER_SUBMIT_SHOW_DEBUG == 8);
+static_assert(WER_SUBMIT_START_MINIMIZED == 512);
+static_assert(WER_SUBMIT_BYPASS_DATA_THROTTLING == 2048);
+static_assert(WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY == 4096);
+static_assert(WER_SUBMIT_REPORT_MACHINE_ID == 8192);
+static_assert(WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION == 4);
+static_assert(WER_FAULT_REPORTING_FLAG_NOHEAP == 1);
+static_assert(WER_FAULT_REPORTING_FLAG_QUEUE == 2);
+static_assert(WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD == 8);
+static_assert(WER_FAULT_REPORTING_ALWAYS_SHOW_UI == 16);
+",
+                "Power" => @"
+static_assert(PDCAP_D0_SUPPORTED == 0x00000001);
+static_assert(PDCAP_D1_SUPPORTED == 0x00000002);
+static_assert(PDCAP_D2_SUPPORTED == 0x00000004);
+static_assert(PDCAP_D3_SUPPORTED == 0x00000008);
+static_assert(PDCAP_WAKE_FROM_D0_SUPPORTED == 0x00000010);
+static_assert(PDCAP_WAKE_FROM_D1_SUPPORTED == 0x00000020);
+static_assert(PDCAP_WAKE_FROM_D2_SUPPORTED == 0x00000040);
+static_assert(PDCAP_WAKE_FROM_D3_SUPPORTED == 0x00000080);
+static_assert(PDCAP_WARM_EJECT_SUPPORTED == 0x00000100);
+static_assert(PDCAP_S0_SUPPORTED == 0x00010000);
+static_assert(PDCAP_S1_SUPPORTED == 0x00020000);
+static_assert(PDCAP_S2_SUPPORTED == 0x00040000);
+static_assert(PDCAP_S3_SUPPORTED == 0x00080000);
+static_assert(PDCAP_WAKE_FROM_S0_SUPPORTED == 0x00100000);
+static_assert(PDCAP_WAKE_FROM_S1_SUPPORTED == 0x00200000);
+static_assert(PDCAP_WAKE_FROM_S2_SUPPORTED == 0x00400000);
+static_assert(PDCAP_WAKE_FROM_S3_SUPPORTED == 0x00800000);
+static_assert(PDCAP_S4_SUPPORTED == 0x01000000);
+static_assert(PDCAP_S5_SUPPORTED == 0x02000000);
 ",
                 "Wsl" => @"
 static_assert(WSL_DISTRIBUTION_FLAGS_NONE == 0);
@@ -192,6 +301,65 @@ static_assert(XINPUT_KEYSTROKE_KEYDOWN == 1);
 static_assert(XINPUT_KEYSTROKE_KEYUP == 2);
 static_assert(XINPUT_KEYSTROKE_REPEAT == 4);
 static_assert(XINPUT_FLAG_GAMEPAD == 1);
+",
+                "Wnet" => @"
+#ifdef RESOURCEUSAGE_NONE
+#error Metadata-only RESOURCEUSAGE_NONE must not become a native macro
+#endif
+static_assert(UNIVERSAL_NAME_INFO_LEVEL == 1u);
+static_assert(REMOTE_NAME_INFO_LEVEL == 2u);
+static_assert(WNPERM_DLG_PERM == 0u);
+static_assert(WNPERM_DLG_AUDIT == 1u);
+static_assert(WNPERM_DLG_OWNER == 2u);
+static_assert(RESOURCEUSAGE_CONNECTABLE == 1u);
+static_assert(RESOURCEUSAGE_CONTAINER == 2u);
+static_assert(RESOURCEUSAGE_ATTACHED == 16u);
+static_assert(RESOURCEUSAGE_ALL == 19u);
+static_assert(CONNECT_UPDATE_PROFILE == 1u);
+static_assert(CONNECT_UPDATE_RECENT == 2u);
+static_assert(CONNECT_TEMPORARY == 4u);
+static_assert(CONNECT_INTERACTIVE == 8u);
+static_assert(CONNECT_PROMPT == 16u);
+static_assert(CONNECT_NEED_DRIVE == 32u);
+static_assert(CONNECT_REFCOUNT == 64u);
+static_assert(CONNECT_REDIRECT == 128u);
+static_assert(CONNECT_LOCALDRIVE == 256u);
+static_assert(CONNECT_CURRENT_MEDIA == 512u);
+static_assert(CONNECT_DEFERRED == 1024u);
+static_assert(CONNECT_RESERVED == 4278190080u);
+static_assert(CONNECT_COMMANDLINE == 2048u);
+static_assert(CONNECT_CMD_SAVECRED == 4096u);
+static_assert(CONNECT_CRED_RESET == 8192u);
+static_assert(CONNECT_REQUIRE_INTEGRITY == 16384u);
+static_assert(CONNECT_REQUIRE_PRIVACY == 32768u);
+static_assert(CONNECT_WRITE_THROUGH_SEMANTICS == 65536u);
+static_assert(CONNECT_GLOBAL_MAPPING == 262144u);
+static_assert(WNPS_FILE == 0u);
+static_assert(WNPS_DIR == 1u);
+static_assert(WNPS_MULT == 2u);
+static_assert(WNDN_MKDIR == 1u);
+static_assert(WNDN_RMDIR == 2u);
+static_assert(WNDN_MVDIR == 3u);
+static_assert(RESOURCETYPE_ANY == 0u);
+static_assert(RESOURCETYPE_DISK == 1u);
+static_assert(RESOURCETYPE_PRINT == 2u);
+static_assert(WNFMT_MULTILINE == 1u);
+static_assert(WNFMT_ABBREVIATED == 2u);
+static_assert(RESOURCE_CONNECTED == 1u);
+static_assert(RESOURCE_CONTEXT == 5u);
+static_assert(RESOURCE_GLOBALNET == 2u);
+static_assert(RESOURCE_REMEMBERED == 3u);
+static_assert(NETINFO_DLL16 == 1u);
+static_assert(NETINFO_DISKRED == 4u);
+static_assert(NETINFO_PRINTERRED == 8u);
+static_assert(CONNDLG_RO_PATH == 1u);
+static_assert(CONNDLG_CONN_POINT == 2u);
+static_assert(CONNDLG_USE_MRU == 4u);
+static_assert(CONNDLG_HIDE_BOX == 8u);
+static_assert(CONNDLG_PERSIST == 16u);
+static_assert(CONNDLG_NOT_PERSIST == 32u);
+static_assert(DISC_UPDATE_PROFILE == 1u);
+static_assert(DISC_NO_FORCE == 64u);
 ",
                 _ => "",
             };
