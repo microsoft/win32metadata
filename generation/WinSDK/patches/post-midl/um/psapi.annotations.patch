@@ -57,45 +57,52 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetModuleBaseNameA(
-@@ -176,6 +196,10 @@
+@@ -176,6 +196,9 @@
      _In_ DWORD nSize
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetModuleBaseNameW(
-@@ -193,6 +217,10 @@
+@@ -193,6 +216,9 @@
  
  _Success_(return != 0)
  _Ret_range_(1, nSize)
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetModuleFileNameExA(
-@@ -206,6 +234,10 @@
+@@ -206,6 +232,9 @@
  
  _Success_(return != 0)
  _Ret_range_(1, nSize)
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetModuleFileNameExW(
+@@ -216,6 +245,9 @@
+          LPWSTR lpFilename,
+     _In_ DWORD nSize
+     );
++#if PSAPI_VERSION == 1
++_Win32_SupportedOS_END_()
++#endif
+ 
+ #ifdef UNICODE
+ #define GetModuleFileNameEx  GetModuleFileNameExW
 @@ -229,6 +261,10 @@
      LPVOID EntryPoint;
  } MODULEINFO, *LPMODULEINFO;
@@ -134,7 +141,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  } PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
 +#endif
  BOOL
@@ -151,84 +158,87 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  BOOL
  WINAPI
  GetWsChangesEx(
-@@ -289,6 +341,10 @@
+@@ -289,6 +341,9 @@
      _Inout_ PDWORD cb
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetMappedFileNameW (
-@@ -298,6 +354,10 @@
+@@ -298,6 +353,9 @@
      _In_ DWORD nSize
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetMappedFileNameA (
-@@ -313,6 +373,10 @@
+@@ -313,6 +371,9 @@
  #define GetMappedFileName  GetMappedFileNameA
  #endif // !UNICODE
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
  WINAPI
  EnumDeviceDrivers (
-@@ -321,6 +385,10 @@
+@@ -321,6 +382,9 @@
      _Out_ LPDWORD lpcbNeeded
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetDeviceDriverBaseNameA (
-@@ -329,6 +397,10 @@
+@@ -329,6 +393,9 @@
      _In_ DWORD nSize
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetDeviceDriverBaseNameW (
-@@ -343,6 +415,10 @@
+@@ -343,6 +410,9 @@
  #define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
  #endif // !UNICODE
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetDeviceDriverFileNameA (
-@@ -351,6 +427,10 @@
+@@ -351,6 +421,9 @@
      _In_ DWORD nSize
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetDeviceDriverFileNameW (
-@@ -445,6 +525,10 @@
+@@ -358,6 +431,9 @@
+     _Out_writes_(nSize) LPWSTR lpFilename,
+     _In_ DWORD nSize
+     );
++#if PSAPI_VERSION == 1
++_Win32_SupportedOS_END_()
++#endif
+ 
+ #ifdef UNICODE
+ #define GetDeviceDriverFileName  GetDeviceDriverFileNameW
+@@ -445,6 +521,10 @@
  #pragma warning(default:4201)
  #endif
  
@@ -239,7 +249,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  BOOL
  WINAPI
  QueryWorkingSet(
-@@ -453,6 +537,10 @@
+@@ -453,6 +533,10 @@
      _In_ DWORD cb
      );
  
@@ -250,7 +260,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  BOOL
  WINAPI
  QueryWorkingSetEx(
-@@ -517,6 +605,10 @@
+@@ -517,6 +601,10 @@
  
  #endif
  
@@ -261,7 +271,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  BOOL
  WINAPI
  GetProcessMemoryInfo (
-@@ -548,6 +640,10 @@
+@@ -548,6 +636,10 @@
      DWORD ThreadCount;
  } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
  
@@ -272,50 +282,67 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinS
  BOOL
  WINAPI
  GetPerformanceInfo (
-@@ -573,6 +669,10 @@
+@@ -573,6 +665,10 @@
  
  typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
 +#endif
  BOOL
  WINAPI
  EnumPageFilesW (
-@@ -580,6 +680,10 @@
+@@ -580,12 +676,18 @@
      LPVOID pContext
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
  WINAPI
  EnumPageFilesA (
-@@ -601,6 +705,10 @@
+     PENUM_PAGE_FILE_CALLBACKA pCallBackRoutine,
+     LPVOID pContext
+     );
++#if PSAPI_VERSION == 1
++_Win32_SupportedOS_END_()
++#endif
+ 
+ #ifdef UNICODE
+ #define PENUM_PAGE_FILE_CALLBACK PENUM_PAGE_FILE_CALLBACKW
+@@ -601,6 +703,10 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetProcessImageFileNameA (
-@@ -609,6 +717,10 @@
+@@ -609,6 +715,9 @@
      _In_ DWORD nSize
      );
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetProcessImageFileNameW (
+@@ -616,6 +725,9 @@
+     _Out_writes_(nSize) LPWSTR lpImageFileName,
+     _In_ DWORD nSize
+     );
++#if PSAPI_VERSION == 1
++_Win32_SupportedOS_END_()
++#endif
+ 
+ #ifdef UNICODE
+ #define GetProcessImageFileName  GetProcessImageFileNameW
 @@ -630,6 +742,28 @@
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion

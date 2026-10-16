@@ -185,18 +185,18 @@ namespace Win32MetadataScraperTests
                 Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
             using var accepted = Open("WINHTTP_MIGRATION_ACCEPTED");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            var before = Types(accepted.Reader);
-            var after = Types(current.Reader);
-            Assert.Equal(37314, before.Count);
-            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
-            foreach (var entry in before)
-            {
-                string expected = SnapshotType(accepted.Reader, entry.Value);
-                string actual = SnapshotType(current.Reader, after[entry.Key]);
-                Assert.True(expected == actual,
-                    $"Scoped SupportedOS changed accepted metadata in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
-            }
-            this.output.WriteLine($"All {before.Count} accepted B9 physical types unchanged; no scope-adoption normalization or allowances.");
+            AssertEveryPhysicalTypeUnchanged(accepted.Reader, current.Reader, "accepted B9");
+        }
+
+        [MigrationFact("WINHTTP_MIGRATION_DIRECT_CONTROL")]
+        public void ScopedSupportedOSPreservesEveryMatchedDirectPhysicalType()
+        {
+            string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_DIRECT_CONTROL");
+            Assert.Equal("AA7B0D71E535787D2A5B623F8B144AEDCF66A464F1E769C7ADC56CF83EA2EE43",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
+            using var direct = Open("WINHTTP_MIGRATION_DIRECT_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            AssertEveryPhysicalTypeUnchanged(direct.Reader, current.Reader, "matched canonical-direct control");
         }
 
         [MigrationTheory]
@@ -613,6 +613,22 @@ namespace Win32MetadataScraperTests
             => reader.TypeDefinitions.Where(handle => FullName(reader, handle).StartsWith(ns + ".", StringComparison.Ordinal))
                 .Select(reader.GetTypeDefinition)
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+
+        private void AssertEveryPhysicalTypeUnchanged(MetadataReader expectedReader, MetadataReader actualReader, string baseline)
+        {
+            var before = Types(expectedReader);
+            var after = Types(actualReader);
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (var entry in before)
+            {
+                string expected = SnapshotType(expectedReader, entry.Value);
+                string actual = SnapshotType(actualReader, after[entry.Key]);
+                Assert.True(expected == actual,
+                    $"Scoped SupportedOS changed {baseline} metadata in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
+            }
+            this.output.WriteLine($"All {before.Count} {baseline} physical types unchanged; no scope-adoption normalization or allowances.");
+        }
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
             bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null)

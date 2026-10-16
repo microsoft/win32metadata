@@ -4,195 +4,201 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
 @@ -1586,6 +1586,7 @@
  //
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  WINHTTP_STATUS_CALLBACK
  WINAPI
-@@ -1598,6 +1599,7 @@
+@@ -1597,6 +1598,7 @@
+     IN DWORD_PTR dwReserved
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1608,6 +1610,7 @@
+@@ -1606,6 +1608,7 @@
+     _Out_writes_bytes_(WINHTTP_TIME_FORMAT_BUFSIZE) LPWSTR pwszTime // output string buffer
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1618,6 +1621,7 @@
+@@ -1615,6 +1618,7 @@
+     _Out_ SYSTEMTIME *pst           // output in GMT time
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1631,6 +1635,7 @@
+@@ -1627,6 +1631,7 @@
+ );
  
  _Success_(return != FALSE)
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1649,11 +1654,14 @@
+@@ -1646,9 +1651,12 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
+ _Win32_SupportedOS_END_()
  
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
-@@ -1663,6 +1671,7 @@
+@@ -1659,6 +1667,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
  WINAPI
-@@ -1676,6 +1685,7 @@
+@@ -1671,6 +1680,7 @@
+     _In_ DWORD dwFlags
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1685,6 +1695,7 @@
+@@ -1679,6 +1689,7 @@
+     IN HINTERNET hInternet
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
  WINAPI
-@@ -1697,6 +1708,7 @@
+@@ -1690,6 +1701,7 @@
+     IN DWORD dwReserved
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1723,6 +1735,7 @@
+@@ -1717,6 +1729,7 @@
  );
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1735,6 +1748,7 @@
+@@ -1728,6 +1741,7 @@
+     OUT LPDWORD lpdwNumberOfBytesWritten
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1746,6 +1760,7 @@
+@@ -1738,6 +1752,7 @@
+ );
  
  _Success_(return != FALSE)
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1758,6 +1773,7 @@
+@@ -1749,6 +1764,7 @@
+     IN OUT LPDWORD lpdwBufferLength
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1785,6 +1801,7 @@
+@@ -1775,6 +1791,7 @@
+     _In_ DWORD dwBufferLength
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1826,6 +1843,7 @@
+@@ -1817,6 +1834,7 @@
  //
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET
  WINAPI
-@@ -1841,6 +1859,7 @@
+@@ -1831,6 +1849,7 @@
+     IN DWORD dwFlags
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1868,6 +1887,7 @@
+@@ -1859,6 +1878,7 @@
  );
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1883,6 +1903,7 @@
+@@ -1873,6 +1893,7 @@
+     IN DWORD_PTR dwContext
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1904,6 +1925,7 @@
+@@ -1893,6 +1914,7 @@
+     IN LPVOID      pAuthParams
  );
  
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1938,6 +1960,7 @@
+@@ -1928,6 +1950,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -1949,6 +1972,7 @@
+@@ -1938,6 +1961,7 @@
+ );
  
  _Success_(return != FALSE)
- _Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -2005,6 +2029,7 @@
+@@ -1995,6 +2019,7 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
- _Win32_SupportedOS_WindowsXP_
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -2015,6 +2040,7 @@
+@@ -2004,6 +2029,7 @@
+     _Outptr_result_maybenull_ LPWSTR * ppwstrAutoConfigUrl
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2098,6 +2124,7 @@
  );
  
  _Win32_SupportedOS_WindowsXP_
@@ -200,18 +206,10 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/Wi
  WINHTTPAPI
  BOOL
  WINAPI
-@@ -2108,6 +2134,7 @@
- );
- 
- _Win32_SupportedOS_WindowsXP_
-+_Win32_SetLastError_
- WINHTTPAPI
- BOOL
- WINAPI
-@@ -2215,6 +2242,7 @@
+@@ -2205,6 +2232,7 @@
  #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
  
- _Win32_SupportedOS_Windows8_
+ _Win32_SupportedOS_BEGIN_(Windows8)
 +_Win32_SetLastError_
  WINHTTPAPI
  HINTERNET

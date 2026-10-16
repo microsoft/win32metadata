@@ -93,6 +93,60 @@ Remove matching authored fallback rather than annotating on top of it.
 SDK-derived bindings and discoveries are not semantic fallback. Keep import
 module/entrypoint/flags checks even when no header import override is needed.
 
+### Factor SupportedOS facts without broadening coverage
+
+Use only the canonical `_Win32_SupportedOS_*_` declaration macros and
+`_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` controls from the
+[adopted contract](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md#scoped-supportedos-defaults).
+There are no public `_Windows_` aliases. An explicit declaration fact wins over
+all defaults; otherwise the innermost applicable scope wins, not the greatest
+version. A scope applies only to eligible declarations lexically within that same
+physical header and include instance. Includes do not inherit a caller's default;
+a container's annotation does not imply inheritance by its methods or nested
+types. Balance controls on every active preprocessing path.
+
+Inventory existing facts before grouping them. End scopes before unannotated
+declarations, records, typedefs and metadata-only enums; retain direct annotations
+where grouping would add a floor. This adoption factors exactly the completed
+B9 producer's 119 authored OS facts, not every declaration in an annotated header:
+
+| Owner | Existing floors | Scopes | Direct annotations retained |
+| --- | --- | --- | --- |
+| WinHttp | 38 | 10 | 4 |
+| CEIP | 1 | 0 | 1 |
+| ApplicationVerifier | 0 | 0 | 0 |
+| MagApi | 19 | 2 | 0 |
+| PsApi1 | 27 | 4 | 11 |
+| Time | 13 | 5 | 1 |
+| Ual | 4 | 1 | 0 |
+| ToolHelp | 16 | 7 | 1 |
+| UpdateAssessment | 1 | 0 | 1 |
+| Wsl / Xinput | 0 | 0 | 0 |
+
+The 29 scopes cover 101 existing function declarations: 100 use their default,
+and `GetWsChangesEx` retains its explicit Vista floor inside an XP scope.
+PsApi1 controls remain conditional on `PSAPI_VERSION == 1`; PsApi2 stays
+unconverted and unchanged. Time's scopes stop before the unannotated `Local*`
+functions. ToolHelp's scopes exclude every record/typedef block. CEIP and
+`IWaaSAssessor` retain direct annotations rather than assigning floors to
+additional declarations or COM methods.
+
+The required net metadata change from this factoring step is zero versus the
+immutable B9 surface, in addition to the existing exact OLD-to-NEW grade.
+Compare all physical type snapshots without scope-specific normalization or
+allowances. Pin a fresh producer/image and matched frozen-input tooling control
+after adopting the tested tooling dependency; never relabel B9 receipts or infer
+semantic equivalence from line-count reduction.
+
+Build the same-tooling canonical-direct control before factoring, then compare
+the scoped candidate with both that control and B9. Keep
+`--nativeFieldArrayInfo` absent/default-off in this OS-only workflow. Its separate,
+SDK-wide source inventory and activation must not be hidden inside OS-scoping
+expectations. The rejected `efc20826` frozen-input image and its 563 exact
+field-annotation differences remain diagnostic evidence, not admitted changes;
+the normal `43af342a` follow-up restores the default-off boundary and excludes
+scalar access spans from array inference.
+
 ## 4. Pin OLD, tooling control and NEW separately
 
 Freeze a complete OLD image and generated-source/discovery closure from one SDK

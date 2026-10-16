@@ -27,20 +27,26 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  #define HF32_DEFAULT      1  // process's default heap
  #define HF32_SHARED       2  // is shared heap
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Heap32ListFirst(
-@@ -85,6 +90,8 @@
+@@ -85,12 +90,14 @@
      LPHEAPLIST32 lphl
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Heap32ListNext(
+     HANDLE hSnapshot,
+     LPHEAPLIST32 lphl
+     );
++_Win32_SupportedOS_END_()
+ 
+ typedef struct tagHEAPENTRY32
+ {
 @@ -98,7 +105,7 @@
      HANDLE hHandle;     // Handle of this heap block
      ULONG_PTR dwAddress;   // Linear address of start of block
@@ -54,118 +60,148 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/W
  #define LF32_FREE     0x00000002
  #define LF32_MOVEABLE 0x00000004
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Heap32First(
-@@ -121,12 +130,15 @@
+@@ -121,6 +130,7 @@
      ULONG_PTR th32HeapID
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Heap32Next(
-     LPHEAPENTRY32 lphe
+@@ -136,6 +146,7 @@
+     SIZE_T cbRead,
+     SIZE_T* lpNumberOfBytesRead
      );
++_Win32_SupportedOS_END_()
  
-+_Win32_SupportedOS_WindowsXP_
- BOOL
- WINAPI
- Toolhelp32ReadProcessMemory(
-@@ -155,6 +167,8 @@
+ /***** Process walking *************************************************/
+ 
+@@ -155,6 +166,8 @@
  typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
  typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Process32FirstW(
-@@ -162,6 +176,8 @@
+@@ -162,12 +175,14 @@
      LPPROCESSENTRY32W lppe
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Process32NextW(
-@@ -185,6 +201,8 @@
+     HANDLE hSnapshot,
+     LPPROCESSENTRY32W lppe
+     );
++_Win32_SupportedOS_END_()
+ 
+ typedef struct tagPROCESSENTRY32
+ {
+@@ -185,6 +200,8 @@
  typedef PROCESSENTRY32 *  PPROCESSENTRY32;
  typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Process32First(
-@@ -192,6 +210,8 @@
+@@ -192,12 +209,14 @@
      LPPROCESSENTRY32 lppe
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Process32Next(
-@@ -222,6 +242,8 @@
+     HANDLE hSnapshot,
+     LPPROCESSENTRY32 lppe
+     );
++_Win32_SupportedOS_END_()
+ 
+ #ifdef UNICODE
+ #define Process32First Process32FirstW
+@@ -222,6 +241,8 @@
  typedef THREADENTRY32 *  PTHREADENTRY32;
  typedef THREADENTRY32 *  LPTHREADENTRY32;
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Thread32First(
-@@ -229,6 +251,8 @@
+@@ -229,12 +250,14 @@
      LPTHREADENTRY32 lpte
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Thread32Next(
-@@ -254,6 +278,8 @@
+     HANDLE hSnapshot,
+     LPTHREADENTRY32 lpte
+     );
++_Win32_SupportedOS_END_()
+ 
+ /***** Module walking *************************************************/
+ 
+@@ -254,6 +277,8 @@
  typedef MODULEENTRY32W *  PMODULEENTRY32W;
  typedef MODULEENTRY32W *  LPMODULEENTRY32W;
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Module32FirstW(
-@@ -261,6 +287,8 @@
+@@ -261,12 +286,14 @@
      LPMODULEENTRY32W lpme
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Module32NextW(
-@@ -289,6 +317,8 @@
+     HANDLE hSnapshot,
+     LPMODULEENTRY32W lpme
+     );
++_Win32_SupportedOS_END_()
+ 
+ typedef struct tagMODULEENTRY32
+ {
+@@ -289,6 +316,8 @@
  // in th32ProcessID's process context.
  //
  
-+_Win32_SupportedOS_WindowsXP_
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Module32First(
-@@ -296,6 +326,8 @@
+@@ -296,12 +325,14 @@
      LPMODULEENTRY32 lpme
      );
  
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
  BOOL
  WINAPI
  Module32Next(
-@@ -311,6 +343,58 @@
+     HANDLE hSnapshot,
+     LPMODULEENTRY32 lpme
+     );
++_Win32_SupportedOS_END_()
+ 
+ #ifdef UNICODE
+ #define Module32First Module32FirstW
+@@ -311,6 +342,58 @@
  #define LPMODULEENTRY32 LPMODULEENTRY32W
  #endif  // !UNICODE
  

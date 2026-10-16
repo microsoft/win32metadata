@@ -1,7 +1,7 @@
 diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 --- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
 +++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
-@@ -2578,6 +2578,22 @@
+@@ -2564,6 +2564,22 @@
  
  
  

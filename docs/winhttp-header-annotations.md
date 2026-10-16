@@ -93,7 +93,7 @@ entries remain in the generated mapping.
 | Functional fact | Current authority | Authored legacy input removed |
 | --- | --- | --- |
 | 59 DLL bindings | SDK `.lib` scan in generated `libMappings.rsp` | None: derived scan entries remain; there is no WinHttp header override |
-| 38 OS floors: 27 XP, 11 Windows 8 | Fixed `_Windows_SupportedOS_*_` macros | All 38 WinHttp `supportedOS.rsp` rows |
+| 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` defaults | All 38 WinHttp `supportedOS.rsp` rows |
 | 28 thread-last-error contracts | `_Win32_SetLastError_` | All 28 WinHttp `WithSetLastError.rsp` rows |
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
 | Five logical enums, 21 emitted members, eight uses | Guarded native enums plus `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
@@ -117,6 +117,16 @@ The 38 OS contracts and 28 last-error contracts were checked against
 MicrosoftDocs/sdk-api revision `656e9656bfaef34dd29cd7ee9e1146aec17e924c`.
 The XP annotations retain the conservative in-box floor rather than asserting
 Windows 2000 redistributable availability as an unconditional OS guarantee.
+
+The scoped-OS adoption factors those same 38 WinHttp facts into ten lexical
+scopes and four direct annotations; it must not add floors to unannotated
+`Ex`/newer APIs, callback aliases, records or enums. All public direct and scoped
+names use `_Win32_`, without `_Windows_` aliases. Explicit facts override scoped
+defaults, and the innermost same-header/include-instance default wins otherwise;
+there is no include leakage or implicit container inheritance. The
+[playbook's scope inventory](header-annotation-migration-playbook.md#factor-supportedos-facts-without-broadening-coverage)
+requires zero net metadata changes from the immutable completed B9 image,
+separately from the unchanged 48-difference combined OLD-to-NEW grade.
 
 There are no emitted-scope ownership/invalid-value `autoTypes.json` entries,
 function-pointer fixups, or manual declarations to migrate. Native `HINTERNET`
@@ -243,6 +253,8 @@ Install-VsDevShell
 $env:WINHTTP_MIGRATION_OLD = (Resolve-Path .\artifacts\winhttp-migration\old\Windows.Win32.winmd).Path
 $env:WINHTTP_MIGRATION_NEW = (Resolve-Path .\artifacts\header-annotation-wave\reproduction\Windows.Win32.winmd).Path
 $env:WINHTTP_MIGRATION_TOOLING_CONTROL = (Resolve-Path .\artifacts\header-annotation-wave\tooling-control-reproduction\Windows.Win32.winmd).Path
+$env:WINHTTP_MIGRATION_ACCEPTED = (Resolve-Path .\artifacts\header-annotation-wave\batch3-final\Windows.Win32.winmd).Path
+$env:WINHTTP_MIGRATION_DIRECT_CONTROL = (Resolve-Path .\artifacts\supported-os-scopes\direct-control-a8e19262\Windows.Win32.winmd).Path
 $env:WINHTTP_PREPARED_HEADERS = (Get-Content .\artifacts\header-annotation-wave\reproduction\selection\obj\prepared-sdk.txt -Raw).Trim()
 dotnet test tests\Win32MetadataScraperTests -c Release `
     --filter "FullyQualifiedName~PreparedSdkHeadersTests|FullyQualifiedName~WinHttpMigrationTests|FullyQualifiedName~WinHttpNativeControlTests" `
