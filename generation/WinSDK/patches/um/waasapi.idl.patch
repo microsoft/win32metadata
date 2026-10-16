@@ -1,10 +1,12 @@
 diff --git a/um/waasapi.idl b/um/waasapi.idl
+index b1de0c62..568e917c 100644
 --- a/um/waasapi.idl
 +++ b/um/waasapi.idl
-@@ -15,12 +15,17 @@
+@@ -15,12 +15,16 @@ cpp_quote("#pragma once")
  cpp_quote("#endif")
  cpp_quote("")
  cpp_quote("#include <winapifamily.h>")
++#include <win32metadata_annotations.h>
 +cpp_quote("#include <win32metadata_annotations.h>")
  
  #pragma region Desktop Family
@@ -12,9 +14,7 @@ diff --git a/um/waasapi.idl b/um/waasapi.idl
  
  import "WaaSAPITypes.idl";
  
-+cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
-+cpp_quote("struct _Win32_SupportedOS_15063_ IWaaSAssessor;")
-+cpp_quote("#endif")
++_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)
 +
  [
      object,

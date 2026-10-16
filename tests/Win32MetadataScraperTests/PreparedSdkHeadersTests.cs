@@ -285,6 +285,134 @@ namespace Win32MetadataScraperTests
             Assert.Contains("/X", commands);
         }
 
+        [Fact]
+        public void SourcePinnedAnnotationHeaderAndMidlDefinesReachTheActualPreprocessor()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            byte[] original = File.ReadAllBytes(fixture.AnnotationHeader);
+            var prepared = fixture.Prepare();
+            string root = Path.GetDirectoryName(prepared.IncludeRoot);
+            const string relative = @"shared\win32metadata_annotations.h";
+            Assert.Equal(original, File.ReadAllBytes(Path.Combine(root, "midl", "source", relative)));
+            Assert.Equal(original, File.ReadAllBytes(Path.Combine(root, "midl", "sal", relative)));
+            Assert.Equal(original, File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, relative)));
+            Assert.Contains("shared\\\\win32metadata_annotations.h",
+                File.ReadAllText(Path.Combine(root, "midl", "preprocessed-inputs.json")));
+            using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "manifest.json")));
+            var helper = manifest.RootElement.GetProperty("midlInputs").EnumerateArray()
+                .Single(input => input.GetProperty("path").GetString() == relative);
+            Assert.Equal("repository", helper.GetProperty("sourceKind").GetString());
+            Assert.Equal(JsonValueKind.Null, helper.GetProperty("sdkPath").ValueKind);
+            using var commands = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "midl", "commands.json")));
+            foreach (var command in commands.RootElement.EnumerateArray())
+            {
+                string[] arguments = command.GetProperty("arguments").EnumerateArray().Select(value => value.GetString()).ToArray();
+                string cpp = arguments[Array.IndexOf(arguments, "/cpp_opt") + 1];
+                Assert.Contains("/DMIDL_PASS=1", cpp);
+                Assert.Contains("/I\"<prepared>\\midl\\sal\\shared\"", cpp);
+                foreach (string definition in arguments.Where(value => value.StartsWith("/D", StringComparison.Ordinal)))
+                    Assert.Contains(definition, cpp);
+            }
+            Assert.True(fixture.Prepare().Reused);
+            var repeated = fixture.Prepare(outputRoot: fixture.Output + "-repeat");
+            Assert.Equal(prepared.Identity, repeated.Identity);
+            Assert.Equal(File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "um", "generated.h")),
+                File.ReadAllBytes(Path.Combine(repeated.IncludeRoot, "um", "generated.h")));
+            Assert.Equal(original, File.ReadAllBytes(fixture.AnnotationHeader));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void ChangedRepositoryAnnotationHeaderCannotFallBackOrReuseACache(bool publishFirst)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            if (publishFirst) fixture.Prepare();
+            File.AppendAllText(fixture.AnnotationHeader, "// changed");
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Selected repository MIDL input mismatch", result.Error);
+        }
+
+        [Fact]
+        public void SourcePinnedAnnotationHeaderUsesQuotedPrivateIncludePaths()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            var prepared = fixture.Prepare(outputRoot: fixture.Output + " with spaces");
+            Assert.Contains("IDL_VALUE 2",
+                File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "generated.h")));
+            Assert.Equal(File.ReadAllBytes(fixture.AnnotationHeader),
+                File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "shared", "win32metadata_annotations.h")));
+            Assert.True(fixture.Prepare(outputRoot: fixture.Output + " with spaces").Reused);
+        }
+
+        [Fact]
+        public void AnUnusedRepositoryAnnotationHeaderCannotBeAdmittedAsAnActualInput()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            File.WriteAllText(fixture.MidlInput, File.ReadAllText(fixture.MidlInput)
+                .Replace("#include <win32metadata_annotations.h>\r\n", ""));
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(fixture.MidlInput)));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("declared MIDL input closure does not match the actual preprocessed inputs", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void UnpinnedRepositoryAnnotationHeaderCannotUseAmbientIncludes()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            fixture.MutateRecipe(recipe => recipe["midl"]["inputs"].AsArray().RemoveAt(2));
+            var result = fixture.Run(ambientInclude: Path.GetDirectoryName(fixture.AnnotationHeader));
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("MIDL failed", result.Error);
+            Assert.Contains("win32metadata_annotations.h", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("path")]
+        [InlineData("sdk")]
+        public void RepositoryMidlInputsCannotDisguiseAnotherArtifactOrSdkBinding(string mutation)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            fixture.MutateRecipe(recipe =>
+            {
+                var helper = recipe["midl"]["inputs"][2];
+                if (mutation == "path") helper["path"] = @"shared\unrelated.h";
+                else helper["sdkPath"] = @"c\include\um\sample.h";
+            });
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Only the canonical repository annotation header", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void DuplicateRepositoryMidlInputsAreRejected()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlAnnotationHeader();
+            fixture.MutateRecipe(recipe =>
+                recipe["midl"]["inputs"].AsArray().Add(recipe["midl"]["inputs"][2].DeepClone()));
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("contain no duplicate paths", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
         [Theory]
         [InlineData("source", "Selected SDK input mismatch")]
         [InlineData("import", "Selected SDK input mismatch")]
@@ -457,6 +585,7 @@ namespace Win32MetadataScraperTests
             internal string MidlInput => Path.Combine(this.sdk, "c", "include", "um", "generated.idl");
             internal string MidlDependency => Path.Combine(this.sdk, "c", "include", "um", "dependency.idl");
             internal string MidlCompiler => Path.Combine(this.sdk, "c", "bin", "x64", "midl.exe");
+            internal string AnnotationHeader => Path.Combine(this.source, "shared", "win32metadata_annotations.h");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
                 "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
@@ -560,6 +689,28 @@ namespace Win32MetadataScraperTests
                         }),
                     });
                     recipe["patches"] = JsonSerializer.SerializeToNode(new[] { IdlPatchPath, PatchPath });
+                });
+            }
+
+            internal void EnableMidlAnnotationHeader()
+            {
+                EnableMidl();
+                File.Copy(Path.Combine(RepositoryRoot, "generation", "WinSDK", "RecompiledIdlHeaders",
+                    "shared", "win32metadata_annotations.h"), AnnotationHeader);
+                File.AppendAllText(MidlInput,
+                    "\r\n#if !defined(MIDL_PASS) || MIDL_PASS != 1 || WINVER != 0x0A00 || !defined(UNICODE)\r\n" +
+                    "#error The pinned MIDL preprocessor definitions were not forwarded.\r\n#endif\r\n" +
+                    "#include <win32metadata_annotations.h>\r\n");
+                MutateRecipe(recipe =>
+                {
+                    string hash = Hash(File.ReadAllBytes(MidlInput));
+                    recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                    recipe["headers"][1]["sdkSha256"] = hash;
+                    recipe["midl"]["inputs"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                    {
+                        path = @"shared\win32metadata_annotations.h",
+                        sourceSha256 = Hash(File.ReadAllBytes(AnnotationHeader)),
+                    }));
                 });
             }
 

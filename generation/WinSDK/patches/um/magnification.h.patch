@@ -1,4 +1,5 @@
 diff --git a/um/magnification.h b/um/magnification.h
+index 1efaf5a4..d55c562a 100644
 --- a/um/magnification.h
 +++ b/um/magnification.h
 @@ -11,6 +11,7 @@
@@ -9,7 +10,7 @@ diff --git a/um/magnification.h b/um/magnification.h
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -72,6 +73,7 @@
+@@ -72,6 +73,7 @@ typedef struct tagMAGCOLOREFFECT
  typedef BOOL (CALLBACK* MagImageScalingCallback)(HWND hwnd, void * srcdata, MAGIMAGEHEADER srcheader, void * destdata, MAGIMAGEHEADER destheader, RECT unclipped, RECT clipped, HRGN dirty );
  
  // Public Functions
@@ -17,7 +18,7 @@ diff --git a/um/magnification.h b/um/magnification.h
  BOOL WINAPI MagInitialize();
  BOOL WINAPI MagUninitialize();
  
-@@ -79,19 +81,37 @@
+@@ -79,19 +81,27 @@ BOOL WINAPI MagSetWindowSource(HWND hwnd, RECT rect);
  BOOL WINAPI MagGetWindowSource(HWND hwnd, RECT *pRect);
  BOOL WINAPI MagSetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
  BOOL WINAPI MagGetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
@@ -41,19 +42,9 @@ diff --git a/um/magnification.h b/um/magnification.h
  BOOL WINAPI MagShowSystemCursor(_In_ BOOL fShowCursor);
 +_Win32_SupportedOS_END_()
 +
-+#ifdef WIN32METADATA
-+#pragma push_macro("MW_FILTERMODE_EXCLUDE")
-+#undef MW_FILTERMODE_EXCLUDE
-+#pragma push_macro("MW_FILTERMODE_INCLUDE")
-+#undef MW_FILTERMODE_INCLUDE
-+enum MW_FILTERMODE : DWORD
-+{
-+    MW_FILTERMODE_EXCLUDE = 0,
-+    MW_FILTERMODE_INCLUDE = 1,
-+};
-+#pragma pop_macro("MW_FILTERMODE_INCLUDE")
-+#pragma pop_macro("MW_FILTERMODE_EXCLUDE")
-+#endif
++_Win32_Enum_(MW_FILTERMODE, DWORD,
++    MW_FILTERMODE_EXCLUDE,
++    MW_FILTERMODE_INCLUDE);
  
  #ifdef __cplusplus
  }

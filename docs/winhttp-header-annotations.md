@@ -107,7 +107,7 @@ entries remain in the generated mapping.
 | 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` defaults | All 38 WinHttp `supportedOS.rsp` rows |
 | 28 thread-last-error contracts | `_Win32_SetLastError_` | All 28 WinHttp `WithSetLastError.rsp` rows |
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
-| Five logical enums, 21 emitted members, eight uses | Guarded native enums plus `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
+| Five logical enums, 21 emitted members, eight uses | Public enum-group macros, one explicit-name AST carrier, and `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
 | Three port constant types | Guarded `constexpr INTERNET_PORT` declarations | Three `ushort` constant overrides |
 | Four native scheme macros | Untouched native macros initialize the preserved logical members | Four constants-scraper exclusions; no new winmd constants |
 | One pointer-adding callback alias | Metadata-only guard around `LPWINHTTP_STATUS_CALLBACK` | Partition callback exclusion |
@@ -132,9 +132,10 @@ Windows 2000 redistributable availability as an unconditional OS guarantee.
 The scoped-OS adoption factors those same 38 WinHttp facts into ten lexical
 scopes and four direct annotations; it must not add floors to unannotated
 `Ex`/newer APIs, callback aliases, records or enums. All public direct and scoped
-names use `_Win32_`, without `_Windows_` aliases. Explicit facts override scoped
-defaults, and the innermost same-header/include-instance default wins otherwise;
-there is no include leakage or implicit container inheritance. The
+names use `_Win32_`, without `_Windows_` aliases. Scopes use Clang's lexical
+attribute accumulation: includes inherit active scopes, and distinct conflicting
+floors fail rather than being overridden. Keep direct container facts separate
+from lexical scopes; the former do not imply method inheritance. The
 [playbook's scope inventory](header-annotation-migration-playbook.md#factor-supportedos-facts-without-broadening-coverage)
 requires zero net metadata changes from the immutable completed B9 image,
 separately from the unchanged 48-difference combined OLD-to-NEW grade.
@@ -165,8 +166,11 @@ Logical enum relationships do not replace the native ABI type in metadata:
 | `URL_COMPONENTS` | `nScheme` | `WINHTTP_INTERNET_SCHEME` | `INTERNET_SCHEME` (`int`) |
 | `WINHTTP_PROXY_RESULT_ENTRY` | `ProxyScheme` | `WINHTTP_INTERNET_SCHEME` | `INTERNET_SCHEME` (`int`) |
 
-Only the open-request group is a flags enum, matching OLD. All five groups are
-unscoped. Macro push/pop pairs preserve genuine macro spellings and native values.
+Only the open-request group is a flags enum, matching OLD. Four groups use
+`_Win32_Enum_` / `_Win32_FlagsEnum_`; the scheme group uses the same AST transport
+with explicit historical labels. Compiled native constants remain authoritative,
+without macro push/pop or copied literal enumerators. Both public group macros
+are empty for ordinary consumers.
 The shared create-URL enum is owned by the header; `enums.json` retains only the two
 unmigrated WinInet `addUsesTo` relationships, not another definition.
 
@@ -175,8 +179,9 @@ was not emitted. The new group preserves the three actually emitted members;
 genuine `WINHTTP_AUTH_SCHEME_DIGEST` remains a loose constant.
 
 The user-selected naming policy preserves the existing C# members
-`WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` in the metadata-only logical enum.
-Each initializer references its genuine `INTERNET_SCHEME_*` macro, yielding
+`WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` through a metadata-only typedef
+carrier with explicit annotation labels. Each compiled expression references its
+genuine `INTERNET_SCHEME_*` macro, yielding
 1/2/3/4 respectively. Those macros are neither undefined nor renamed; ordinary
 native declarations and integer ABI stay intact. There are no new loose WinHttp
 winmd constants: ordinary native macros are not the same as added metadata symbols.
@@ -256,7 +261,11 @@ pinned complete pointer-fixup response file before the selected discoveries are 
 Producer inputs must be committed before image generation and remain unchanged
 through receipt publication. The receipt distinguishes the frozen baseline tooling
 commit from the current producer commit and binds the actual tool, header, generated
-source, discovery, and expected-difference hashes.
+source, discovery, and raw API-comparison hashes. The builder preserves the full
+unfiltered `comparison.log`, displays its output, and records `reviewStatus:
+required` when differences need review. It has no checked-in difference-allowance
+file or default acceptance list. Record concrete source-backed differences in PR
+comments; producing an image and receipt does not itself admit its differences.
 
 ```powershell
 . .\scripts\CommonUtils.ps1
@@ -308,19 +317,20 @@ bin path before running `dotnet test tests\Windows.Win32.Tests -c Release`.
 `*.remaps` or an empty scratch directory. The pinned full closure contains 393
 diagnostic files. Do not substitute the selected partition output for that closure.
 
-The full-image decompiler comparison must consume exact symbol/value-scoped expected
-differences, with no unknown or unused expectations. It complements these narrow
-SRM checks; neither is presented as a comprehensive typed metadata equivalence
-oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
-must not appear as new WinHttp migration differences.
+Review every difference in the unfiltered full-image decompiler comparison
+against exact symbols, values and source evidence; do not hide differences in a
+checked-in allowance file. It complements these narrow SRM checks; neither is
+presented as a comprehensive typed metadata equivalence oracle. The ten approved
+Printing fixes belong to the tooling OLD baseline and must not appear as new
+WinHttp migration differences.
 
-The WinHttp entries in `patches\HeaderAnnotations.expected-differences.txt` grade exactly 16 declaration differences for this checkpoint:
+The original WinHttp-only checkpoint admitted exactly 16 declaration differences:
 eight native integer use-site types and eight corresponding `AssociatedEnum`
 additions. Existing logical enum identities, member names, and values are
 preserved. This image has no callback renames, import changes, dependent changes,
-additional constants or changed values. The image builder applies this exact
-grade before publishing its provenance receipt; it is not a general prohibition
-on faithfully capturing existing native annotations in future migrations.
+additional constants or changed values. That historical measured result is not
+an automatic acceptance policy for a new producer. Faithfully capture existing
+native annotations and present meaningful differences for review.
 
 ## Original native-name candidate (immutable)
 

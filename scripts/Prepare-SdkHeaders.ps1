@@ -89,7 +89,7 @@ function Invoke-PreparedMidl([string]$Staging) {
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
         [IO.File]::Copy($input.fullPath, $target)
         if ((Get-Sha256 $target) -ne $input.sha256) {
-            throw "The SDK MIDL input changed while being copied: $($input.path)"
+            throw "A pinned MIDL input changed while being copied: $($input.path)"
         }
     }
     foreach ($patch in @($patches | Where-Object isIdl)) {
@@ -132,7 +132,10 @@ function Invoke-PreparedMidl([string]$Staging) {
             [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($header)) | Out-Null
             $arguments = @(Get-MidlHeaderArguments -InputFile (Resolve-Child $sal $output.source) `
                 -OutputDirectory $generated -OutputHeader $header -IncludeDirectories $includes)
-            $arguments += '/cpp_cmd', 'cl.exe', '/cpp_opt', '/nologo /E /TC /X', '/savePP'
+            $cppArguments = @('/nologo', '/E', '/TC', '/X') +
+                @($arguments | Where-Object { $_.StartsWith('/D', [StringComparison]::Ordinal) }) +
+                @($includes | ForEach-Object { "/I`"$_`"" })
+            $arguments += '/cpp_cmd', 'cl.exe', '/cpp_opt', ($cppArguments -join ' '), '/savePP'
             $log = "$generated\$([IO.Path]::GetFileNameWithoutExtension($output.source)).log"
             & $midlCompiler @arguments *> $log
             $exitCode = $LASTEXITCODE
@@ -255,11 +258,24 @@ if ($hasMidl) {
             throw "Unsupported MIDL input: $($_.path)"
         }
         Resolve-Child $SourceRoot $_.path | Out-Null
+        if ($null -ne $_.PSObject.Properties['sourceSha256']) {
+            if ($_.path -cne 'shared\win32metadata_annotations.h' -or
+                $null -ne $_.PSObject.Properties['sdkPath'] -or $null -ne $_.PSObject.Properties['sdkSha256']) {
+                throw 'Only the canonical repository annotation header may be a source-pinned MIDL input, without an SDK binding.'
+            }
+            $path = Resolve-Child $SourceRoot $_.path
+            if ((Get-Sha256 $path) -ne $_.sourceSha256) {
+                throw "Selected repository MIDL input mismatch: $($_.path)"
+            }
+            return [pscustomobject]@{
+                path = $_.path; fullPath = $path; sdkPath = $null; sourceKind = 'repository'; sha256 = $_.sourceSha256
+            }
+        }
         $path = Resolve-Child $SdkPackageRoot $_.sdkPath
         if ((Get-Sha256 $path) -ne $_.sdkSha256) {
             throw "Selected SDK MIDL input mismatch: $($_.sdkPath)"
         }
-        [pscustomobject]@{ path = $_.path; fullPath = $path; sdkPath = $_.sdkPath; sha256 = $_.sdkSha256 }
+        [pscustomobject]@{ path = $_.path; fullPath = $path; sdkPath = $_.sdkPath; sourceKind = 'sdk'; sha256 = $_.sdkSha256 }
     })
     if (!$midlInputs.Count -or @($midlInputs.path | Sort-Object -Unique).Count -ne $midlInputs.Count) {
         throw 'The MIDL input closure must be nonempty and contain no duplicate paths.'
@@ -267,7 +283,7 @@ if ($hasMidl) {
     foreach ($output in $config.midl.outputs) {
         $header = @($config.headers | Where-Object path -eq $output.path)
         $input = @($midlInputs | Where-Object path -eq $output.source)
-        if ($header.Count -ne 1 -or $input.Count -ne 1 -or
+        if ($header.Count -ne 1 -or $input.Count -ne 1 -or $input[0].sourceKind -ne 'sdk' -or
             [IO.Path]::GetExtension($output.source) -ne '.idl' -or
             $header[0].sdkPath -ne $input[0].sdkPath -or $header[0].sdkSha256 -ne $input[0].sha256) {
             throw "A MIDL output must bind one admitted header to its exact SDK IDL: $($output.path)"
@@ -422,7 +438,7 @@ try {
     }
     foreach ($input in $midlInputs) {
         if ((Get-Sha256 $input.fullPath) -ne $input.sha256) {
-            throw "The selected SDK MIDL input changed during preparation: $($input.path)"
+            throw "A pinned MIDL input changed during preparation: $($input.path)"
         }
     }
     foreach ($tool in @($midlTools + $midlScripts)) {
@@ -445,7 +461,7 @@ try {
         files = $prepared.files
     }
     if ($hasMidl) {
-        $manifest.midlInputs = @($midlInputs | Select-Object path, sdkPath, sha256)
+        $manifest.midlInputs = @($midlInputs | Select-Object path, sourceKind, sdkPath, sha256)
         $manifest.midlTools = $midlTools
         $manifest.midlScripts = $midlScripts
         $manifest.midlSha256 = (Get-DirectoryState "$staging\midl").sha256

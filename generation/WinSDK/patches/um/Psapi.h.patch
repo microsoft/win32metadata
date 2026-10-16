@@ -1,7 +1,8 @@
 diff --git a/um/Psapi.h b/um/Psapi.h
+index d68f6459..7ee851d5 100644
 --- a/um/Psapi.h
 +++ b/um/Psapi.h
-@@ -25,6 +25,7 @@
+@@ -25,6 +25,7 @@ Revision History:
  #pragma once
  #endif
  #include <winapifamily.h>
@@ -9,7 +10,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  
  #ifdef __cplusplus
  extern "C" {
-@@ -128,6 +129,10 @@
+@@ -128,6 +129,10 @@ extern "C" {
  
  #endif
  
@@ -20,7 +21,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EnumProcesses(
-@@ -142,6 +147,10 @@
+@@ -142,6 +147,10 @@ EnumProcesses(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -31,7 +32,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EnumProcessModules(
-@@ -151,6 +160,10 @@
+@@ -151,6 +160,10 @@ EnumProcessModules(
      _Out_ LPDWORD lpcbNeeded
      );
  
@@ -42,7 +43,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EnumProcessModulesEx(
-@@ -158,6 +171,9 @@
+@@ -158,6 +171,9 @@ EnumProcessModulesEx(
      _Out_writes_bytes_(cb) HMODULE* lphModule,
      _In_ DWORD cb,
      _Out_ LPDWORD lpcbNeeded,
@@ -52,7 +53,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
      _In_ DWORD dwFilterFlag
      );
  
-@@ -167,6 +183,10 @@
+@@ -167,6 +183,10 @@ EnumProcessModulesEx(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -63,7 +64,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetModuleBaseNameA(
-@@ -176,6 +196,9 @@
+@@ -176,6 +196,9 @@ GetModuleBaseNameA(
      _In_ DWORD nSize
      );
  
@@ -73,7 +74,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetModuleBaseNameW(
-@@ -193,6 +216,9 @@
+@@ -193,6 +216,9 @@ GetModuleBaseNameW(
  
  _Success_(return != 0)
  _Ret_range_(1, nSize)
@@ -83,7 +84,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetModuleFileNameExA(
-@@ -206,6 +232,9 @@
+@@ -206,6 +232,9 @@ GetModuleFileNameExA(
  
  _Success_(return != 0)
  _Ret_range_(1, nSize)
@@ -93,7 +94,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetModuleFileNameExW(
-@@ -216,6 +245,9 @@
+@@ -216,6 +245,9 @@ GetModuleFileNameExW(
           LPWSTR lpFilename,
      _In_ DWORD nSize
      );
@@ -103,7 +104,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  
  #ifdef UNICODE
  #define GetModuleFileNameEx  GetModuleFileNameExW
-@@ -229,6 +261,10 @@
+@@ -229,6 +261,10 @@ typedef struct _MODULEINFO {
      LPVOID EntryPoint;
  } MODULEINFO, *LPMODULEINFO;
  
@@ -114,7 +115,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  GetModuleInformation(
-@@ -244,6 +280,10 @@
+@@ -244,6 +280,10 @@ GetModuleInformation(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -125,7 +126,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EmptyWorkingSet(
-@@ -256,6 +296,10 @@
+@@ -256,6 +296,10 @@ EmptyWorkingSet(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -136,18 +137,18 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  InitializeProcessForWsWatch(
-@@ -273,6 +317,10 @@
+@@ -273,6 +317,10 @@ typedef struct _PSAPI_WS_WATCH_INFORMATION_EX {
      ULONG_PTR Flags;    // Reserved
  } PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
  
 +#if PSAPI_VERSION == 1
-+_Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
 +#endif
  BOOL
  WINAPI
  GetWsChanges(
-@@ -281,6 +329,10 @@
+@@ -281,6 +329,10 @@ GetWsChanges(
      _In_ DWORD cb
      );
  
@@ -158,17 +159,18 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  GetWsChangesEx(
-@@ -289,6 +341,9 @@
+@@ -289,6 +341,10 @@ GetWsChangesEx(
      _Inout_ PDWORD cb
      );
  
 +#if PSAPI_VERSION == 1
++_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
 +#endif
  DWORD
  WINAPI
  GetMappedFileNameW (
-@@ -298,6 +353,9 @@
+@@ -298,6 +354,9 @@ GetMappedFileNameW (
      _In_ DWORD nSize
      );
  
@@ -178,7 +180,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetMappedFileNameA (
-@@ -313,6 +371,9 @@
+@@ -313,6 +372,9 @@ GetMappedFileNameA (
  #define GetMappedFileName  GetMappedFileNameA
  #endif // !UNICODE
  
@@ -188,7 +190,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EnumDeviceDrivers (
-@@ -321,6 +382,9 @@
+@@ -321,6 +383,9 @@ EnumDeviceDrivers (
      _Out_ LPDWORD lpcbNeeded
      );
  
@@ -198,7 +200,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetDeviceDriverBaseNameA (
-@@ -329,6 +393,9 @@
+@@ -329,6 +394,9 @@ GetDeviceDriverBaseNameA (
      _In_ DWORD nSize
      );
  
@@ -208,7 +210,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetDeviceDriverBaseNameW (
-@@ -343,6 +410,9 @@
+@@ -343,6 +411,9 @@ GetDeviceDriverBaseNameW (
  #define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
  #endif // !UNICODE
  
@@ -218,7 +220,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetDeviceDriverFileNameA (
-@@ -351,6 +421,9 @@
+@@ -351,6 +422,9 @@ GetDeviceDriverFileNameA (
      _In_ DWORD nSize
      );
  
@@ -228,7 +230,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetDeviceDriverFileNameW (
-@@ -358,6 +431,9 @@
+@@ -358,6 +432,9 @@ GetDeviceDriverFileNameW (
      _Out_writes_(nSize) LPWSTR lpFilename,
      _In_ DWORD nSize
      );
@@ -238,7 +240,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  
  #ifdef UNICODE
  #define GetDeviceDriverFileName  GetDeviceDriverFileNameW
-@@ -445,6 +521,10 @@
+@@ -445,6 +522,10 @@ typedef struct _PSAPI_WORKING_SET_EX_INFORMATION {
  #pragma warning(default:4201)
  #endif
  
@@ -249,7 +251,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  QueryWorkingSet(
-@@ -453,6 +533,10 @@
+@@ -453,6 +534,10 @@ QueryWorkingSet(
      _In_ DWORD cb
      );
  
@@ -260,7 +262,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  QueryWorkingSetEx(
-@@ -517,6 +601,10 @@
+@@ -517,6 +602,10 @@ typedef PROCESS_MEMORY_COUNTERS_EX2 *PPROCESS_MEMORY_COUNTERS_EX2;
  
  #endif
  
@@ -271,7 +273,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  GetProcessMemoryInfo (
-@@ -548,6 +636,10 @@
+@@ -548,6 +637,10 @@ typedef struct _PERFORMANCE_INFORMATION {
      DWORD ThreadCount;
  } PERFORMANCE_INFORMATION, *PPERFORMANCE_INFORMATION, PERFORMACE_INFORMATION, *PPERFORMACE_INFORMATION;
  
@@ -282,7 +284,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  GetPerformanceInfo (
-@@ -573,6 +665,10 @@
+@@ -573,6 +666,10 @@ typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKW) (LPVOID pContext, PENUM_PAGE
  
  typedef BOOL (__stdcall *PENUM_PAGE_FILE_CALLBACKA) (LPVOID pContext, PENUM_PAGE_FILE_INFORMATION pPageFileInfo, LPCSTR lpFilename);
  
@@ -293,7 +295,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  BOOL
  WINAPI
  EnumPageFilesW (
-@@ -580,12 +676,18 @@
+@@ -580,12 +677,18 @@ EnumPageFilesW (
      LPVOID pContext
      );
  
@@ -312,7 +314,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  
  #ifdef UNICODE
  #define PENUM_PAGE_FILE_CALLBACK PENUM_PAGE_FILE_CALLBACKW
-@@ -601,6 +703,10 @@
+@@ -601,6 +704,10 @@ EnumPageFilesA (
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -323,7 +325,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetProcessImageFileNameA (
-@@ -609,6 +715,9 @@
+@@ -609,6 +716,9 @@ GetProcessImageFileNameA (
      _In_ DWORD nSize
      );
  
@@ -333,7 +335,7 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  DWORD
  WINAPI
  GetProcessImageFileNameW (
-@@ -616,6 +725,9 @@
+@@ -616,6 +726,9 @@ GetProcessImageFileNameW (
      _Out_writes_(nSize) LPWSTR lpImageFileName,
      _In_ DWORD nSize
      );
@@ -343,30 +345,16 @@ diff --git a/um/Psapi.h b/um/Psapi.h
  
  #ifdef UNICODE
  #define GetProcessImageFileName  GetProcessImageFileNameW
-@@ -630,6 +742,28 @@
+@@ -630,6 +743,14 @@ GetProcessImageFileNameW (
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
-+#if defined(WIN32METADATA) && PSAPI_VERSION == 1
-+#pragma push_macro("LIST_MODULES_ALL")
-+#undef LIST_MODULES_ALL
-+#pragma push_macro("LIST_MODULES_DEFAULT")
-+#undef LIST_MODULES_DEFAULT
-+#pragma push_macro("LIST_MODULES_32BIT")
-+#undef LIST_MODULES_32BIT
-+#pragma push_macro("LIST_MODULES_64BIT")
-+#undef LIST_MODULES_64BIT
-+enum ENUM_PROCESS_MODULES_EX_FLAGS : DWORD
-+{
-+    LIST_MODULES_ALL = 3,
-+    LIST_MODULES_DEFAULT = 0,
-+    LIST_MODULES_32BIT = 1,
-+    LIST_MODULES_64BIT = 2,
-+};
-+#pragma pop_macro("LIST_MODULES_64BIT")
-+#pragma pop_macro("LIST_MODULES_32BIT")
-+#pragma pop_macro("LIST_MODULES_DEFAULT")
-+#pragma pop_macro("LIST_MODULES_ALL")
++#if PSAPI_VERSION == 1
++_Win32_Enum_(ENUM_PROCESS_MODULES_EX_FLAGS, DWORD,
++    LIST_MODULES_ALL,
++    LIST_MODULES_DEFAULT,
++    LIST_MODULES_32BIT,
++    LIST_MODULES_64BIT);
 +#endif
 +
  #ifdef __cplusplus

@@ -5,7 +5,6 @@ param(
     [string]$BaselineDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\old",
     [string]$OutputDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\new",
     [string]$SelectionDirectory,
-    [string]$ExpectedDifferencesFile = "$PSScriptRoot\..\generation\WinSDK\patches\HeaderAnnotations.expected-differences.txt",
     [switch]$ToolingControl,
     [string]$ToolingControlDirectory
 )
@@ -15,7 +14,6 @@ Set-StrictMode -Version Latest
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..").TrimEnd('\')
 $BaselineDirectory = [IO.Path]::GetFullPath($BaselineDirectory).TrimEnd('\')
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
-$ExpectedDifferencesFile = [IO.Path]::GetFullPath($ExpectedDifferencesFile)
 if (!$SelectionDirectory) {
     $SelectionDirectory = "$OutputDirectory\selection"
 }
@@ -47,6 +45,29 @@ function Invoke-Dotnet([string[]]$Arguments, [string]$Log) {
     & dotnet @Arguments *> $Log
     if ($LASTEXITCODE -ne 0) {
         throw "dotnet failed; see $Log`n$((Get-Content -LiteralPath $Log -Tail 35) -join "`n")"
+    }
+}
+
+function Get-ApiComparison([string]$First, [string]$Second, [string]$Log) {
+    & dotnet "$repo\bin\Release\net10.0\WinmdUtils.dll" compare --first $First --second $Second *> $Log
+    $comparisonExitCode = $LASTEXITCODE
+    $comparisonLines = @(Get-Content -LiteralPath $Log)
+    $hasDifferences = $comparisonExitCode -eq -1 -and $comparisonLines.Count -gt 1 -and
+        $comparisonLines[0] -ceq 'Unknown differences found:'
+    if ((!$hasDifferences -and $comparisonExitCode -ne 0) -or
+        ($comparisonExitCode -eq 0 -and
+            ($comparisonLines.Count -ne 1 -or $comparisonLines[0] -cne 'No unknown differences found.'))) {
+        throw "Metadata comparison failed; see $Log`n$($comparisonLines -join "`n")"
+    }
+    $comparisonLines | ForEach-Object { Write-Host $_ }
+    if ($hasDifferences) {
+        Write-Warning 'Raw OLD-to-NEW API differences require source-backed review. This image has not been admitted by a difference allowlist.'
+    }
+    [pscustomobject]@{
+        exitCode = $comparisonExitCode
+        logSha256 = Get-Sha256 $Log
+        rawDifferenceLines = if ($hasDifferences) { $comparisonLines.Count - 1 } else { 0 }
+        reviewStatus = if ($hasDifferences) { 'required' } else { 'unchanged' }
     }
 }
 
@@ -296,9 +317,8 @@ try {
     Invoke-Dotnet @('build', 'generation\WinSDK', '-c', 'Release', '-t:EmitWinmd',
         "-p:ObjDir=$obj", "-p:OutputWinmd=$winmd", '-p:SkipScraping=true',
         '--no-restore', '--verbosity', 'minimal') "$OutputDirectory\emit.log"
-    Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
-        '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd,
-        '--knownDiffsFile', $ExpectedDifferencesFile) "$OutputDirectory\comparison.log"
+    $comparisonLog = "$OutputDirectory\comparison.log"
+    $comparison = Get-ApiComparison "$BaselineDirectory\Windows.Win32.winmd" $winmd $comparisonLog
     Assert-CommittedProducer
     $receipt = [ordered]@{
         kind = 'header-annotation-migration'
@@ -316,7 +336,7 @@ try {
         sourceCommit = $sourceCommit
         toolFiles = $toolFiles
         toolingControl = $ToolingControlDirectory
-        expectedDifferencesSha256 = Get-Sha256 $ExpectedDifferencesFile
+        apiComparison = $comparison
         generatedFiles = @(Get-ChildItem -LiteralPath $generated -Recurse -File | ForEach-Object {
             [ordered]@{ path = [IO.Path]::GetRelativePath($generated, $_.FullName); sha256 = Get-Sha256 $_.FullName }
         })
@@ -325,7 +345,13 @@ try {
         })
     }
     [IO.File]::WriteAllText("$OutputDirectory\provenance.json", ($receipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-    [pscustomobject]@{ Winmd = $winmd; Sha256 = $receipt.newWinmdSha256; Provenance = "$OutputDirectory\provenance.json" }
+    [pscustomobject]@{
+        Winmd = $winmd
+        Sha256 = $receipt.newWinmdSha256
+        Provenance = "$OutputDirectory\provenance.json"
+        RawApiDifferences = $comparisonLog
+        ReviewStatus = $receipt.apiComparison.reviewStatus
+    }
 }
 finally {
     Pop-Location

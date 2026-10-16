@@ -32,11 +32,17 @@ namespace Win32MetadataScraperTests
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string[] headers = partition == "WinHttp" ? new[] { "winhttp.h", "httprequest.h" } : new[] { "winhttp.h", "httprequest.h", "http.h" };
+            // Reusing group names rejects metadata-only types or symbols leaking into ordinary headers.
             const string checks = @"
 static_assert(INTERNET_SCHEME_HTTP == 1);
 static_assert(INTERNET_SCHEME_HTTPS == 2);
 static_assert(INTERNET_SCHEME_FTP == 3);
 static_assert(INTERNET_SCHEME_SOCKS == 4);
+using WINHTTP_OPEN_REQUEST_FLAGS = void;
+using WIN_HTTP_CREATE_URL_FLAGS = void;
+using WINHTTP_ACCESS_TYPE = void;
+using WINHTTP_CREDS_AUTHSCHEME = void;
+using WINHTTP_INTERNET_SCHEME = void;
 ";
             var before = Surface(root, original, partition, architecture, target, headers, checks);
             var after = Surface(root, prepared, partition, architecture, target, headers, checks);
@@ -78,16 +84,19 @@ static_assert(INTERNET_SCHEME_SOCKS == 4);
                 "ApplicationVerifier" => @"
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);
+using VERIFIER_ENUM_RESOURCE_FLAGS = void;
 ",
                 "MagApi" => @"
 static_assert(MW_FILTERMODE_EXCLUDE == 0);
 static_assert(MW_FILTERMODE_INCLUDE == 1);
+using MW_FILTERMODE = void;
 ",
                 "PsApi1" or "PsApi2" => @"
 static_assert(LIST_MODULES_ALL == 3);
 static_assert(LIST_MODULES_DEFAULT == 0);
 static_assert(LIST_MODULES_32BIT == 1);
 static_assert(LIST_MODULES_64BIT == 2);
+using ENUM_PROCESS_MODULES_EX_FLAGS = void;
 ",
                 "ToolHelp" => @"
 static_assert(TH32CS_INHERIT == 0x80000000u);
@@ -100,6 +109,8 @@ static_assert(TH32CS_SNAPTHREAD == 4);
 static_assert(LF32_FIXED == 1);
 static_assert(LF32_FREE == 2);
 static_assert(LF32_MOVEABLE == 4);
+using CREATE_TOOLHELP_SNAPSHOT_FLAGS = void;
+using HEAPENTRY32_FLAGS = void;
 ",
                 "Wsl" => @"
 static_assert(WSL_DISTRIBUTION_FLAGS_NONE == 0);
@@ -192,6 +203,16 @@ static_assert(XINPUT_KEYSTROKE_KEYDOWN == 1);
 static_assert(XINPUT_KEYSTROKE_KEYUP == 2);
 static_assert(XINPUT_KEYSTROKE_REPEAT == 4);
 static_assert(XINPUT_FLAG_GAMEPAD == 1);
+using XINPUT_VIRTUAL_KEY = void;
+using BATTERY_TYPE = void;
+using BATTERY_LEVEL = void;
+using BATTERY_DEVTYPE = void;
+using XINPUT_DEVTYPE = void;
+using XINPUT_DEVSUBTYPE = void;
+using XINPUT_CAPABILITIES_FLAGS = void;
+using XINPUT_GAMEPAD_BUTTON_FLAGS = void;
+using XINPUT_KEYSTROKE_FLAGS = void;
+using XINPUT_FLAG = void;
 ",
                 _ => "",
             };

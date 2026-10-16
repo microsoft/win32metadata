@@ -80,7 +80,14 @@ never fall back to an old generated header.
 
 Run the selected C preprocessor with closed include paths and cleared ambient
 compiler options; hash its executable/engine and the SAL/helper scripts into the
-preparation identity. Verify MIDL's actual saved preprocessor input set against
+preparation identity. When `/cpp_opt` overrides MIDL's forwarding, explicitly pass
+the same `/D` definitions and private `/I` paths, including `MIDL_PASS=1`.
+An IDL that uses `_Win32_AnnotateInterface_(name, annotation)` includes the
+canonical shared annotation header during preprocessing as well as emitting its
+ordinary generated-header include. Pin that repository header's exact
+`sourceSha256` in the existing MIDL input closure; do not pretend it came from the
+selected SDK or search an ambient include directory for it.
+Verify MIDL's actual saved preprocessor input set against
 the declared closure. Preserve raw inputs, converted IDLs, commands, diagnostics,
 outputs and their hashes in the private cache. Keep warnings enabled and compare
 the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
@@ -136,14 +143,13 @@ module/entrypoint/flags checks even when no header import override is needed.
 ### Factor SupportedOS facts without broadening coverage
 
 Use only the canonical `_Win32_SupportedOS_*_` declaration macros and
-`_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` controls from the
-[adopted contract](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md#scoped-supportedos-defaults).
-There are no public `_Windows_` aliases. An explicit declaration fact wins over
-all defaults; otherwise the innermost applicable scope wins, not the greatest
-version. A scope applies only to eligible declarations lexically within that same
-physical header and include instance. Includes do not inherit a caller's default;
-a container's annotation does not imply inheritance by its methods or nested
-types. Balance controls on every active preprocessing path.
+`_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` controls. There are no
+public `_Windows_` aliases. Scopes use Clang's lexical attribute accumulation:
+included declarations inherit an active scope, and distinct conflicting floors
+fail rather than selecting an explicit, innermost or greatest-version winner.
+A direct container attribute alone does not annotate its methods or nested
+types. Balance controls on every active preprocessing path, and move boundaries
+instead of relying on a reader-defined override policy.
 
 Inventory existing facts before grouping them. End scopes before unannotated
 declarations, records, typedefs and metadata-only enums; retain direct annotations
@@ -156,15 +162,19 @@ B9 producer's 119 authored OS facts, not every declaration in an annotated heade
 | CEIP | 1 | 0 | 1 |
 | ApplicationVerifier | 0 | 0 | 0 |
 | MagApi | 19 | 2 | 0 |
-| PsApi1 | 27 | 4 | 11 |
+| PsApi1 | 27 | 4 | 12 |
 | Time | 13 | 5 | 1 |
 | Ual | 4 | 1 | 0 |
 | ToolHelp | 16 | 7 | 1 |
 | UpdateAssessment | 1 | 0 | 1 |
 | Wsl / Xinput | 0 | 0 | 0 |
 
-The 29 scopes cover 101 existing function declarations: 100 use their default,
-and `GetWsChangesEx` retains its explicit Vista floor inside an XP scope.
+The planned placements retain 29 scopes and 20 direct annotations. In PsApi1,
+`GetWsChanges` uses a direct XP floor, `GetWsChangesEx` keeps its direct Vista
+floor, and the XP scope resumes at `GetMappedFileNameW`. No conflicting XP/Vista
+attributes accumulate on `GetWsChangesEx`; no active pilot scope encloses an
+include. These placements still require the qualified tooling and image gates
+below; source inspection is not a replacement metadata grade.
 PsApi1 controls remain conditional on `PSAPI_VERSION == 1`; PsApi2 stays
 unconverted and unchanged. Time's scopes stop before the unannotated `Local*`
 functions. ToolHelp's scopes exclude every record/typedef block. CEIP and
@@ -187,6 +197,25 @@ field-annotation differences remain diagnostic evidence, not admitted changes;
 the normal `43af342a` follow-up restores the default-off boundary and excludes
 scalar access spans from array inference.
 
+### Express existing logical groups without native symbol additions
+
+Use `_Win32_Enum_(name, storage, existing_constants...)` or
+`_Win32_FlagsEnum_(name, storage, existing_constants...)`, retaining native ABI
+types and `_Win32_AssociatedEnum_(group)` at the existing use sites. Both group
+macros expand to nothing when `WIN32METADATA` is absent. Their values come from
+compiled native expressions, not copied literals or a second source parse.
+
+Eighteen pilot groups use those public macros. Two existing groups need explicit
+historical labels through the same AST transport, guarded by `WIN32METADATA`:
+`WINHTTP_INTERNET_SCHEME` maps its four existing `WINHTTP_INTERNET_SCHEME_*`
+labels to genuine `INTERNET_SCHEME_*` expressions, and `XINPUT_FLAG` retains its
+reviewed `XINPUT_FLAG_ALL` member with compiled value `0` alongside
+`XINPUT_FLAG_GAMEPAD`. Use a
+`typedef _WIN32META_ANNOTATION_("Enum(labels...)", expressions...) storage GROUP`
+carrier (`FlagsEnum` for flags); do not create SDK `#define` aliases, ordinary
+consumer symbols or metadata-only constant globals. There are no authored RAII
+facts to add in this pilot.
+
 ## 4. Pin OLD, tooling control and NEW separately
 
 Freeze a complete OLD image and generated-source/discovery closure from one SDK
@@ -196,7 +225,7 @@ the partition migration; never waive a known OLD defect on NEW.
 
 Commit producer inputs before publishing a fresh named NEW artifact. Record SDK,
 producer/tooling commits, binary hashes, recipe/prepared-header identity, complete
-source/reference closure and expected-difference hashes. Do not overwrite previous
+source/reference closure and raw API-comparison hashes. Do not overwrite previous
 images or receipts. If only documentation advances the branch, retain the actual
 producer and CI-run labels on those frozen artifacts; a documentation head is not
 a new emission or a fresh image grade.
@@ -222,6 +251,11 @@ unselected inputs. Reject success-shaped partial images with dangling references
   Do not suppress faithful native facts or use a blanket allowance to make the
   grade pass. A declaration comparer plus scoped physical checks is not a
   comprehensive typed-equivalence oracle.
+- Preserve the complete unfiltered API-comparison output. Do not check in a
+  difference-allowance file or give the image builder a default acceptance list.
+  Record concrete source-backed differences for review in PR comments. An image
+  receipt marked `reviewStatus: required` reports differences; it does not admit
+  them. A failed comparison remains an error, not a review result.
 - Repeat the normal SDK build with prior discoveries present. Require identical
   selected source/discovery inputs, shared prepared roots and complete SDK
   diagnostic inputs.

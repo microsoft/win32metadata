@@ -106,7 +106,11 @@ namespace Win32MetadataScraperTests
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches");
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "SdkHeaders.json")));
-            foreach (string patch in recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()))
+            var patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
+            Assert.Equal(new[] { @"um\winhttp.h.patch" },
+                patches.Where(path => Path.GetFileName(path).StartsWith("winhttp.", StringComparison.Ordinal)));
+            Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, @"um\winhttp.h.patch")));
+            foreach (string patch in patches)
                 Assert.DoesNotContain("_Windows_SupportedOS_", File.ReadAllText(Path.Combine(root, patch)));
         }
 
@@ -440,12 +444,6 @@ namespace Win32MetadataScraperTests
             Assert.Equal(59, names.Count);
             foreach (string name in names)
                 Assert.Equal("WINHTTP.dll", bindings[name]);
-            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "SdkHeaders.json")));
-            var patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString())
-                .Where(path => Path.GetFileName(path).StartsWith("winhttp.", StringComparison.Ordinal)).ToArray();
-            Assert.Equal(6, patches.Length);
-            foreach (string patch in patches)
-                Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", patch)));
             foreach (string file in new[] { "libMappingsManual.rsp", "supportedOS.rsp", "WithSetLastError.rsp", "emitter.settings.rsp" })
             {
                 foreach (string line in File.ReadLines(Path.Combine(root, "generation", "WinSDK", file)))
