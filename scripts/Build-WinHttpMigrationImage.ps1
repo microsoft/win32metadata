@@ -88,6 +88,31 @@ function Get-PointerReductions([IO.FileInfo[]]$Remaps) {
     return ,$reduce
 }
 
+function Get-SelectedSources([string]$Obj, [string[]]$Partitions) {
+    foreach ($partition in $Partitions) {
+        $hasMainSource = $false
+        foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
+            $relative = "$architecture\$partition.cs"
+            $companion = "$architecture\$partition.header-types.cs"
+            $hasMain = Test-Path -LiteralPath "$Obj\generated\$relative" -PathType Leaf
+            $hasCompanion = Test-Path -LiteralPath "$Obj\generated\$companion" -PathType Leaf
+            if ($hasCompanion -and !$hasMain) {
+                throw "A selected header-types companion has no main source: $companion"
+            }
+            if ($hasMain) {
+                $hasMainSource = $true
+                $relative
+                if ($hasCompanion) {
+                    $companion
+                }
+            }
+        }
+        if (!$hasMainSource) {
+            throw "The selected scrape produced no source for $partition."
+        }
+    }
+}
+
 function Get-SelectedInputs([string]$Obj, [string[]]$Overlays) {
     $paths = @($Overlays | ForEach-Object { "$Obj\generated\$_" })
     $paths += "$Obj\generated\scraper.autoRemaps.generated.rsp", "$Obj\generated\emitter.autoFnPtr.crossarch.generated.rsp"
@@ -227,19 +252,7 @@ try {
         "-p:ObjDir=$selectedObj", "-p:PartitionFilter=$($partitions -join '%3B')", '-p:MaxProcessors=2',
         '-p:ScanArch=crossarch', '--no-restore', '--verbosity', 'minimal')
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
-    $overlays = @($partitions | ForEach-Object {
-        $partition = $_
-        $sources = @(foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
-            $relative = "$architecture\$partition.cs"
-            if (Test-Path -LiteralPath "$selectedObj\generated\$relative") {
-                $relative
-            }
-        })
-        if (!$sources.Count) {
-            throw "The selected scrape produced no source for $partition."
-        }
-        $sources
-    })
+    $overlays = @(Get-SelectedSources $selectedObj $partitions)
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
     $firstInputs = Get-SelectedInputs $selectedObj $overlays
     [IO.File]::WriteAllText("$OutputDirectory\first-selection.json", ($firstInputs | ConvertTo-Json -Depth 3),
@@ -254,7 +267,11 @@ try {
         Remove-Item -LiteralPath $scrapeMarker
     }
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\repeat-scrape.log"
-    $repeatedInputs = Get-SelectedInputs $selectedObj $overlays
+    $repeatedOverlays = @(Get-SelectedSources $selectedObj $partitions)
+    if (($overlays -join "`n") -cne ($repeatedOverlays -join "`n")) {
+        throw 'A repeated normal SDK scrape changed the selected source closure.'
+    }
+    $repeatedInputs = Get-SelectedInputs $selectedObj $repeatedOverlays
     [IO.File]::WriteAllText("$OutputDirectory\repeated-selection.json", ($repeatedInputs | ConvertTo-Json -Depth 3),
         [Text.UTF8Encoding]::new($false))
     if (($firstInputs | ConvertTo-Json -Depth 3) -cne ($repeatedInputs | ConvertTo-Json -Depth 3)) {

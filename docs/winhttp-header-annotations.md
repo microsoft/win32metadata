@@ -253,7 +253,9 @@ dotnet build BuildTools -c Release
 Use fresh output names; previous images and receipts must not be overwritten.
 The image builder verifies the frozen inputs and tools, reads the recipe's owner
 and affected-dependent partition list, and overlays their actual generated common
-and architecture-specific sources onto the complete source closure. The isolated
+and architecture-specific sources, including compiler-projected
+`partition.header-types.cs` companions, onto the complete source closure. A
+companion without its main partition source is an error. The isolated
 WinHttp recipe selected WinHttp/HttpServer; the expanded recipe also includes the
 playbook's additional owners and dependents. It recomputes constants with all
 partition inputs, preserves the other
@@ -262,7 +264,8 @@ overwriting an existing consumer-fixture or selection directory. Each image gets
 a fresh selected scrape so prior aggregate discoveries cannot become configured
 remap authority. Before emission it forces a second normal SDK scrape with that
 selection's aggregate discovery present, requiring byte-identical selected C#
-sources and pointer discoveries. The frozen discovery inputs must reproduce the
+sources and pointer discoveries. Recompute the source-file set after that repeat,
+so an added or removed companion cannot escape the grade. The frozen discovery inputs must reproduce the
 pinned complete pointer-fixup response file before the selected discoveries are overlaid.
 `PartitionFilter` alone is not a complete constants/manual/emission closure.
 Producer inputs must be committed before image generation and remain unchanged

@@ -243,7 +243,10 @@ a new emission or a fresh image grade.
 Use the existing selected scrape/full-source overlay loop where appropriate.
 `PartitionFilter` alone does not narrow constants, manual files or emission
 closure. Recompute complete constants and pointer discoveries, retaining
-unselected inputs. Reject success-shaped partial images with dangling references.
+unselected inputs. Include compiler-projected `partition.header-types.cs`
+companions in selected overlays, repeat-input hashes and source provenance;
+reject an orphan companion or a changed repeat source-file set. Reject
+success-shaped partial images with dangling references.
 
 ## 5. Validate the actual output, not a proxy
 
