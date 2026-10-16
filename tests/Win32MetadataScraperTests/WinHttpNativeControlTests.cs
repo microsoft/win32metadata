@@ -94,6 +94,39 @@ static_assert(cpu80286 == 0);
 static_assert(cpu80386 == 1);
 static_assert(sizeof(int) == 4);
 ",
+                "Proc_Snap" => @"
+static_assert(sizeof(HPSS) == sizeof(void*));
+static_assert(sizeof(HPSSWALK) == sizeof(void*));
+static_assert(sizeof(PSS_CAPTURE_FLAGS) == sizeof(DWORD));
+static_assert(PSS_CREATE_RELEASE_SECTION == 0x80000000u);
+static_assert(PSS_CREATE_MEASURE_PERFORMANCE == 0x40000000);
+",
+                "Monitor" => @"
+static_assert(sizeof(_BOOL) == sizeof(BOOL));
+static_assert(sizeof(PHYSICAL_MONITOR) == sizeof(HANDLE) + 128 * sizeof(WCHAR));
+static_assert(sizeof(MC_TIMING_REPORT) == 9);
+static_assert(MC_CAPS_NONE == 0);
+static_assert(MC_RESTORE_FACTORY_DEFAULTS_ENABLES_MONITOR_SETTINGS == 0x1000);
+static_assert(MC_SUPPORTED_COLOR_TEMPERATURE_11500K == 0x80);
+static_assert(GETCONNECTEDIDS_TARGET == 0);
+static_assert(GETCONNECTEDIDS_SOURCE == 1);
+static_assert(SETCONFIGURATION_STATUS_APPLIED == 0);
+static_assert(SETCONFIGURATION_STATUS_ADDITIONAL == 1);
+static_assert(SETCONFIGURATION_STATUS_OVERRIDDEN == 2);
+",
+                "IdentityProvider" => @"
+static_assert(IDENTITIES_ALL == 0);
+static_assert(IDENTITIES_ME_ONLY == 1);
+static_assert(sizeof(tag_IdentityUpdateEvent) == sizeof(DWORD));
+static_assert(IDENTITY_ASSOCIATED == 1);
+static_assert(IDENTITY_DISASSOCIATED == 2);
+static_assert(IDENTITY_CREATED == 4);
+static_assert(IDENTITY_IMPORTED == 8);
+static_assert(IDENTITY_DELETED == 16);
+static_assert(IDENTITY_PROPCHANGED == 32);
+static_assert(IDENTITY_CONNECTED == 64);
+static_assert(IDENTITY_DISCONNECTED == 128);
+",
                 "ApplicationVerifier" => @"
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);

@@ -178,7 +178,6 @@ CancelIo
 CancelIoEx
 CancelSynchronousIo
 CancelWaitableTimer
-CapabilitiesRequestAndCapabilitiesReply
 CascadeWindows
 CertAddCertificateContextToStore
 CertAddCertificateLinkToStore
@@ -690,7 +689,6 @@ DecryptFileW
 DeferWindowPos
 DefineDosDeviceA
 DefineDosDeviceW
-DegaussMonitor
 DeleteAce
 DeleteAtom
 DeleteEnclave
@@ -734,8 +732,6 @@ DestroyCursor
 DestroyEnvironmentBlock
 DestroyIcon
 DestroyMenu
-DestroyPhysicalMonitor
-DestroyPhysicalMonitors
 DestroyPrivateObjectSecurity
 DestroyWindow
 DetectAutoProxyUrl
@@ -1103,7 +1099,6 @@ GetBinaryTypeW
 GetCalendarInfoA
 GetCalendarInfoEx
 GetCalendarInfoW
-GetCapabilitiesStringLength
 GetCaretBlinkTime
 GetCaretPos
 GetClassInfoA
@@ -1331,14 +1326,6 @@ GetModuleHandleA
 GetModuleHandleExA
 GetModuleHandleExW
 GetModuleHandleW
-GetMonitorBrightness
-GetMonitorColorTemperature
-GetMonitorContrast
-GetMonitorDisplayAreaPosition
-GetMonitorDisplayAreaSize
-GetMonitorRedGreenOrBlueDrive
-GetMonitorRedGreenOrBlueGain
-GetMonitorTechnologyType
 GetMouseMovePointsEx
 GetNameByTypeA
 GetNameByTypeW
@@ -1372,7 +1359,6 @@ GetNumberFormatW
 GetNumberOfConsoleInputEvents
 GetNumberOfConsoleMouseButtons
 GetNumberOfEventLogRecords
-GetNumberOfPhysicalMonitorsFromHMONITOR
 GetOldestEventLogRecord
 GetOpenClipboardWindow
 GetOverlappedResult
@@ -1381,7 +1367,6 @@ GetParent
 getpeername
 GetPhysicalCursorPos
 GetPhysicallyInstalledSystemMemory
-GetPhysicalMonitorsFromHMONITOR
 GetPixelFormat
 GetPointerCursorId
 GetPointerDevice
@@ -1518,7 +1503,6 @@ GetTimeFormatA
 GetTimeFormatEx
 GetTimeFormatW
 GetTimestampForLoadedLibrary
-GetTimingReport
 GetTitleBarInfo
 GetTokenInformation
 GetTopWindow
@@ -1555,7 +1539,6 @@ GetUserObjectSecurity
 GetUserPreferredUILanguages
 GetUserProfileDirectoryA
 GetUserProfileDirectoryW
-GetVCPFeatureAndVCPFeatureReply
 GetVersionExA
 GetVersionExW
 GetVolumeInformationA
@@ -2147,8 +2130,6 @@ ResetCompressor
 ResetDecompressor
 ResetEvent
 ResolveLocaleName
-RestoreMonitorFactoryColorDefaults
-RestoreMonitorFactoryDefaults
 ResumeSuspendedDownload
 ResumeThread
 ResUtilDupString
@@ -2186,8 +2167,6 @@ SaferIdentifyLevel
 SaferRecordEventLogEntry
 SaferSetLevelInformation
 SaferSetPolicyInformation
-SaveCurrentMonitorSettings
-SaveCurrentSettings
 ScanLogContainers
 SCardAccessStartedEvent
 ScrollConsoleScreenBufferA
@@ -2317,11 +2296,6 @@ SetMenuInfo
 SetMenuItemBitmaps
 SetMenuItemInfoA
 SetMenuItemInfoW
-SetMonitorBrightness
-SetMonitorColorTemperature
-SetMonitorContrast
-SetMonitorDisplayAreaPosition
-SetMonitorDisplayAreaSize
 SetNamedPipeHandleState
 SetParent
 SetPhysicalCursorPos

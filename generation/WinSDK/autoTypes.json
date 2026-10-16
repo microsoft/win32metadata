@@ -896,8 +896,6 @@
     "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
     "Name": "HPSSWALK",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "PssWalkMarkerFree",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {

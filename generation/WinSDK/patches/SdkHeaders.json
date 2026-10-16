@@ -423,6 +423,54 @@
       "sourceSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\RestartManager.h",
       "sdkSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8"
+    },
+    {
+      "path": "um\\ProcessSnapshot.h",
+      "sourceSha256": "93C20675D17F18B1945A5B05D44FA9BFBCF091EEB27687FBCCBCDA072D5C32CC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ProcessSnapshot.h",
+      "sdkSha256": "93C20675D17F18B1945A5B05D44FA9BFBCF091EEB27687FBCCBCDA072D5C32CC"
+    },
+    {
+      "path": "um\\lowlevelmonitorconfigurationapi.h",
+      "sourceSha256": "058DFA39D9B1FF05FFDF14DE7B0B11E67640C4BA7A40B2A198DF98F26A159501",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lowlevelmonitorconfigurationapi.h",
+      "sdkSha256": "058DFA39D9B1FF05FFDF14DE7B0B11E67640C4BA7A40B2A198DF98F26A159501"
+    },
+    {
+      "path": "um\\highlevelmonitorconfigurationapi.h",
+      "sourceSha256": "E61B41906C1A32A729D0F461A53DD9AB4A630C4853948A4EFE8F91082FE39E5A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\highlevelmonitorconfigurationapi.h",
+      "sdkSha256": "E61B41906C1A32A729D0F461A53DD9AB4A630C4853948A4EFE8F91082FE39E5A"
+    },
+    {
+      "path": "um\\physicalmonitorenumerationapi.h",
+      "sourceSha256": "66131CE43587F3C254733E7DC618C48ACDE735E90CB9C24FA654AA3B62F6731A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\physicalmonitorenumerationapi.h",
+      "sdkSha256": "66131CE43587F3C254733E7DC618C48ACDE735E90CB9C24FA654AA3B62F6731A"
+    },
+    {
+      "path": "um\\cloneviewhelper.h",
+      "sourceSha256": "1C2F9082CF784E3C30DDECEF6836E3F9C5457B6EB246BF8B4457CD05058E50DC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cloneviewhelper.idl",
+      "sdkSha256": "1F6798B72D5E14812538C70A35E532CA53809893D1DB2B4799E69F615BEE1A95"
+    },
+    {
+      "path": "um\\IdentityCommon.h",
+      "sourceSha256": "259C4D59C5162FB190C729003D7BDF74E63A2AED7FF1CBC75B323447C77F779A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityCommon.h",
+      "sdkSha256": "259C4D59C5162FB190C729003D7BDF74E63A2AED7FF1CBC75B323447C77F779A"
+    },
+    {
+      "path": "um\\IdentityProvider.h",
+      "sourceSha256": "24A3462C7B117F8D3C59382E0F94F911FF764C20182936EF2CDCA5EF9D7E77BE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityProvider.h",
+      "sdkSha256": "24A3462C7B117F8D3C59382E0F94F911FF764C20182936EF2CDCA5EF9D7E77BE"
+    },
+    {
+      "path": "um\\IdentityStore.h",
+      "sourceSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityStore.h",
+      "sdkSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774"
     }
   ],
   "partitions": [
@@ -476,7 +524,10 @@
     "Tbs",
     "Antimalware",
     "WebSock",
-    "RstMgr"
+    "RstMgr",
+    "Proc_Snap",
+    "Monitor",
+    "IdentityProvider"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -535,6 +586,12 @@
     "post-midl\\um\\fhsvcctl.annotations.patch",
     "post-midl\\um\\amsi.annotations.patch",
     "post-midl\\um\\websocket.annotations.patch",
-    "post-midl\\um\\restartmanager.annotations.patch"
+    "post-midl\\um\\restartmanager.annotations.patch",
+    "post-midl\\um\\processsnapshot.annotations.patch",
+    "post-midl\\um\\lowlevelmonitorconfigurationapi.annotations.patch",
+    "post-midl\\um\\highlevelmonitorconfigurationapi.annotations.patch",
+    "post-midl\\um\\physicalmonitorenumerationapi.annotations.patch",
+    "post-midl\\um\\identityprovider.annotations.patch",
+    "post-midl\\um\\identitystore.annotations.patch"
   ]
 }

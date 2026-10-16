@@ -61,7 +61,6 @@ GETPROPERTYSTOREFLAGS
 HLBWIF_FLAGS
 HLFNAMEF
 HLNF
-IdentityUpdateEvent
 JOB_OBJECT_NET_RATE_CONTROL_FLAGS
 KSPROPERTY_IPSINK
 MERGE_VIRTUAL_DISK_FLAG
@@ -1417,8 +1416,6 @@ IDirectXVideoAccelerationService::CreateSurface::DxvaType=[AssociatedEnum("DXVA2
 IDirectXVideoDecoder::GetBuffer::BufferType=[AssociatedEnum("DXVA2_BufferfType")]
 IFolderView::ItemCount::uFlags=[AssociatedEnum("_SVGIO")]
 IFolderView::Items::uFlags=[AssociatedEnum("_SVGIO")]
-IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents=[AssociatedEnum("IdentityUpdateEvent")]
-IIdentityProvider::Advise::dwIdentityUpdateEvents=[AssociatedEnum("IdentityUpdateEvent")]
 IImePad::Request::reqId=[AssociatedEnum("IME_PAD_REQUEST_FLAGS")]
 IOleClientSite::GetMoniker::dwAssign=[AssociatedEnum("OLEGETMONIKER")]
 IOleClientSite::GetMoniker::dwWhichMoniker=[AssociatedEnum("OLEWHICHMK")]

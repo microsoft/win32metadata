@@ -182,6 +182,17 @@ derived. `CCH_RM_SESSION_KEY` remains a separately held native-expression parser
 gap; no native macro or manual constant shape is changed. This source integration
 does not constitute actual architecture/image/full-SDK/CI acceptance.
 
+The Proc_Snap/Monitor/IdentityProvider input preserves native handle projection,
+the `PSS_CAPTURE_FLAGS=uint` storage repair, four Monitor `_BOOL` return-alias
+repairs and Identity parser/name configuration. Only HPSSWALK's complete
+`PssWalkMarkerFree`/`[-1,0]` contract moves to its actual creator output. HPSS's
+invalid-only row stays: `PssFreeSnapshot` takes both a process and snapshot handle,
+so it is not a unary cleanup contract. Native `IdentityUpdateEvent` stays
+unscoped with its original eight members; its Flags designation and two
+native-DWORD associations move into headers. Seven anonymous source-coordinate
+shifts are transport details, not permissions to change physical field metadata.
+The private input counts are source accounting, not final emitted admission.
+
 ## 5. Validate the actual output, not a proxy
 
 - Compile metadata-disabled native owner/dependent translation units on x86,
