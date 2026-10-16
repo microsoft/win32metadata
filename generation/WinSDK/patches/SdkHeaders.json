@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.26100.7705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "d3dc662e56c715c1e0c000a0300ff3088e9a9f17",
+  "sourceGitTree": "d0db69b032faf7de0cf39fee599bc9827900f3e3",
   "headers": [
     {
       "path": "um\\winhttp.h",
@@ -101,6 +101,10 @@
       }
     ],
     "inputs": [
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "5C02968168112A7DA993056680041C458CEAFFEA31AFE37A8FE17444C3D1F246"
+      },
       {
         "path": "um\\waasapi.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
