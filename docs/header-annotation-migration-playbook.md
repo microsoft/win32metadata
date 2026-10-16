@@ -614,6 +614,27 @@ Preparation and native controls are not final-image admission: the new image,
 119-floor and physical-equivalence grades and exact-head CI must be recorded
 separately before publication is qualified.
 
+Local producer `5df1154cabb7bd30990d2c9bcd96a27ebc114f30` emits the complete
+pilot image, SHA256
+`7D63CE48046A6E4D759D206E0CF9493BAEBB97484FD32CE1735F0019BCEA6673`.
+Its two selected scrapes reproduce all 25 main/companion sources and discovery
+inputs byte-for-byte. The image preserves all 119 effective floors on all three
+architectures, all 7,791 enum identities and all 37,314 physical types against
+both the immutable accepted B9 and canonical-direct controls, without scope
+normalization. The frozen-input tooling control is declaration-zero against OLD
+and physically changes only the 39 previously measured constructor instance bits.
+
+The raw OLD comparison is still exactly 48 declaration differences at the 24
+existing native-integer/`AssociatedEnum` sites. There are no new API symbols,
+logical groups or members. The 140 focused preparation, comparison, native and
+physical-metadata cases and 14 integrity cases pass without skips, using the
+complete 393-file diagnostic closure. The local receipt is
+`artifacts\public-macro-adoption\locally-qualified-5df1154c.json`; it does not
+claim the separate current pilot CI/downloaded-image gate. Exact published-head
+CI and source-bound artifact qualification are recorded in draft PR #2365.
+The prerequisite's direct-source CI `38966888753` is independently green at
+`746d812dd15a93d77b24285708fd51727b293bba`, with zero image declaration changes.
+
 ### Historical COM finding under the earlier policy
 
 The proposed SecurityCenter/WinSat conversions were excluded under the earlier,
