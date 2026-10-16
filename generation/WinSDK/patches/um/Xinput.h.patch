@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/Xinput.h
+diff --git a/um/Xinput.h b/um/Xinput.h
+--- a/um/Xinput.h
++++ b/um/Xinput.h
 @@ -13,6 +13,7 @@
  
  #include <windef.h>

@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
+diff --git a/um/magnification.h b/um/magnification.h
+--- a/um/magnification.h
++++ b/um/magnification.h
 @@ -11,6 +11,7 @@
  #define _INC_MAGNIFIER
  

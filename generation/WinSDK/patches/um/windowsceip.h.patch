@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/windowsceip.h b/generation/WinSDK/RecompiledIdlHeaders/um/windowsceip.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/windowsceip.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/windowsceip.h
+diff --git a/um/windowsceip.h b/um/windowsceip.h
+--- a/um/windowsceip.h
++++ b/um/windowsceip.h
 @@ -17,6 +17,7 @@
  #endif // _MSC_VER
  

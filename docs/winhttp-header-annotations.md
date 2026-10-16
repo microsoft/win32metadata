@@ -50,7 +50,10 @@ Earlier images and receipts below are immutable historical evidence.
 
 `generation\WinSDK\patches\SdkHeaders.json` pins SDK CPP `10.0.26100.7705`, the
 post-MIDL mirror Git tree, exact header preimages, their selected-SDK inputs, and
-patch order. `winhttp.h` is byte-identical to the selected package. The package
+one cumulative patch per SDK artifact. `um\winhttp.h.patch` contains all WinHttp
+deltas against the pristine selected package header; its six earlier semantic
+layers are not separate patch inputs. Patch filenames and diff targets use the
+SDK-relative artifact path, without stage directories. The package
 supplies `httprequest.idl`, not `httprequest.h`; the recipe separately pins the
 checked-in post-MIDL header and the identical selected-SDK IDL. WinHttp itself
 needs no IDL patch or recompilation. In the expanded eleven-owner pilot,
@@ -72,12 +75,14 @@ header scraping and consume the same private root. The orchestration has no
 partition hook or WinHttp default recipe. The project supplies the SDK-wide
 recipe explicitly to the generic `Prepare-SdkHeaders.ps1` script, which copies
 the complete mirror into a private,
-content-addressed include tree. Its optional pinned MIDL closure applies
-pre-MIDL source patches and regenerates admitted headers/imported outputs before
-the direct-header post-MIDL patches. Both stages publish the same include root.
+content-addressed include tree. It applies direct SDK header patches privately;
+its optional pinned MIDL closure applies SDK IDL patches before converting SAL
+and regenerating admitted headers/imported outputs. Artifact identity determines
+the boundary, regardless of recipe order. There are no generated-header annotation
+patches. Both artifact kinds publish the same include root.
 It checks SDK/preimage and compiler/preprocessor identity, actual closed MIDL
 inputs, admitted patch targets, source/cache hashes,
-ordinary paths, patch ordering, and strict patch applicability. Publication is
+ordinary paths, unique canonical artifact targets, and strict patch applicability. Publication is
 transactional and serialized; a modified published cache is rejected, not repaired
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
@@ -113,7 +118,7 @@ All 59 bindings independently match the selected SDK's x64 `winhttp.lib`
 libraries. Library scanning is the default import authority, not an authored
 semantic fallback. `_Win32_ImportLibrary_` is reserved for necessary corrections
 to missing/incorrect scan data; none is needed for these 59 APIs. Generic parser
-support and override controls remain unchanged. The six header patches contain
+support and override controls remain unchanged. The cumulative WinHttp patch contains
 no `ImportLibrary` annotations, and import entrypoint/module/flags checks remain
 mandatory on all three architectures.
 `WinHttpIsHostInProxyBypassList` and `WinHttpQueryAuthParams` have native declarations

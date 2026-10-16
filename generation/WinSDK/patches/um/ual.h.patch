@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/ual.h
+diff --git a/um/ual.h b/um/ual.h
+--- a/um/ual.h
++++ b/um/ual.h
 @@ -9,6 +9,7 @@
  #define _UAL_H_INCLUDED
  

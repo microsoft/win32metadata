@@ -63,10 +63,18 @@ mirror and restore removed SDK artifacts.
 The existing preparation path supports an explicit `midl` closure in the same
 recipe. Pin every SDK IDL/import/ACF/preprocessor input, `midl.exe` and `midlc.exe`,
 and bind each regenerated output to its admitted mirror header and exact SDK
-IDL. Apply ordered `pre-midl` patches to private copies, reuse the existing
-MIDL-to-SAL conversion and shared `MidlHeaderUtils.ps1` flags, regenerate only
-the admitted outputs, then apply direct-header `post-midl` patches. Scraping
-and constants still consume one private root. Reject wrong-stage patches,
+IDL. Keep one cumulative patch per SDK artifact, named with its SDK-relative path:
+`patches\um\winhttp.h.patch` or `patches\um\waasapi.idl.patch`. Each diff targets
+that same artifact (`a/um/winhttp.h` to `b/um/winhttp.h`), starting from its pristine
+admitted SDK bytes, not another patch's output. Reject repeated targets even
+under different filenames; do not stack semantic layers on a header.
+
+Artifact identity determines preparation, not a stage directory or recipe order.
+Apply direct-header patches to private SDK header copies and IDL patches to the
+pinned raw source closure before the existing MIDL-to-SAL conversion and shared
+`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. There are no
+post-MIDL annotation patches or patches on generated headers. Scraping
+and constants still consume one private root. Reject generated-header patches,
 unpinned imports, changed tools/preimages, failed generation and modified caches;
 never fall back to an old generated header.
 
@@ -460,7 +468,7 @@ an unpatched imported output regenerated with `waasapi.h`. All remaining
 annotation targets, including `winhttp.h`, remain direct-header patches.
 The eleven owners and fifteen owner/dependent partitions do not change.
 
-`pre-midl\um\waasapi.annotations.patch` applies to the actual shipped
+`um\waasapi.idl.patch` applies to the actual shipped
 `waasapi.idl` preimage
 `A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38`.
 It emits the annotation include and a C++-only forward declaration carrying
@@ -519,6 +527,26 @@ and 155 pointer reductions are retained. Artifacts are under
 final-head CI and its downloaded-image grade are recorded separately in the
 [draft PR](https://github.com/microsoft/win32metadata/pull/2365).
 No full-SDK migration or consumer work is resumed by this source-format change.
+
+### SDK-artifact patch consolidation
+
+The six WinHttp semantic layers are folded into `um\winhttp.h.patch`, starting
+from the pristine selected SDK header. The pilot now has eleven artifact-keyed
+patches, including `um\waasapi.idl.patch`; there are no stage directories or
+multiple patches on one canonical SDK artifact. The preparation guards reject
+layered targets, bundled artifact diffs, generated-header targets and
+intermediate direct-header preimages.
+
+The layout-only control against qualified `129b900d` compares every byte of all
+3,443 prepared headers and retains tree SHA256
+`E8BED2C71FD18503B44A6B55B5D2DBE2B41E856888DA7AAC38A19FD97EFB6249`.
+All twelve raw and SAL-converted MIDL inputs, both regenerated headers, commands,
+actual import closure and baseline warnings are unchanged; cache reuse and cold
+regeneration retain those header bytes. The focused 38 preparation cases and
+13 directly affected native/layout cases pass without skips. No new local
+all-partition scrape or emission is needed for this mechanical cleanup, and no
+API-difference expectations change. Historical image qualification remains tied
+to its original producer; the new head's CI state is recorded in the draft PR.
 
 ### Historical COM finding under the earlier policy
 

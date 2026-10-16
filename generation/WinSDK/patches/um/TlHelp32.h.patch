@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/TlHelp32.h
+diff --git a/um/TlHelp32.h b/um/TlHelp32.h
+--- a/um/TlHelp32.h
++++ b/um/TlHelp32.h
 @@ -17,6 +17,7 @@
  #pragma once
  #endif

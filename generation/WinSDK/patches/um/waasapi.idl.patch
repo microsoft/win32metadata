@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl b/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
---- a/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
+diff --git a/um/waasapi.idl b/um/waasapi.idl
+--- a/um/waasapi.idl
++++ b/um/waasapi.idl
 @@ -15,12 +15,17 @@
  cpp_quote("#endif")
  cpp_quote("")

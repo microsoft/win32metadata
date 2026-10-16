@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/Psapi.h
+diff --git a/um/Psapi.h b/um/Psapi.h
+--- a/um/Psapi.h
++++ b/um/Psapi.h
 @@ -25,6 +25,7 @@
  #pragma once
  #endif

@@ -1,6 +1,6 @@
-diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
---- a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
-+++ b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+diff --git a/um/timezoneapi.h b/um/timezoneapi.h
+--- a/um/timezoneapi.h
++++ b/um/timezoneapi.h
 @@ -15,6 +15,7 @@
  #define _TIMEZONEAPI_H_
  

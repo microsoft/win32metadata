@@ -119,10 +119,67 @@ namespace Win32MetadataScraperTests
             Assert.NotEqual(0, duplicate.ExitCode);
             Assert.Contains("more than once", duplicate.Error);
 
-            fixture.WriteRecipe(patches: new[] { @"post-midl\..\..\outside.patch" });
+            fixture.WriteRecipe(patches: new[] { @"..\outside.patch" });
             var escape = fixture.Run();
             Assert.NotEqual(0, escape.ExitCode);
             Assert.Contains("escapes its root", escape.Error);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void DifferentPatchFilesCannotLayerChangesOnOneSdkArtifact(bool idl)
+        {
+            using var fixture = new Fixture();
+            if (idl)
+                fixture.EnableMidl();
+            const string second = @"um\second.patch";
+            fixture.CopyPatch(idl ? Fixture.IdlPatchPath : Fixture.PatchPath, second);
+            fixture.MutateRecipe(recipe => recipe["patches"].AsArray().Add(second));
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("SDK artifact is patched more than once", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+        }
+
+        [Theory]
+        [InlineData(@"um\sample.patch")]
+        [InlineData(@"post-midl\um\sample.h.patch")]
+        [InlineData(@"um\um\sample.h.patch")]
+        public void PatchFilenamesMustIdentifyTheirCanonicalSdkArtifact(string path)
+        {
+            using var fixture = new Fixture();
+            fixture.CopyPatch(Fixture.PatchPath, path);
+            fixture.WriteRecipe(patches: new[] { path });
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("must be named after its SDK artifact", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void OnePatchCannotContainRepeatedArtifactDiffs()
+        {
+            using var fixture = new Fixture();
+            fixture.RepeatPatch();
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("exactly one SDK artifact", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void DirectHeaderPatchesCannotDependOnAnIntermediateMirrorPreimage()
+        {
+            using var fixture = new Fixture();
+            File.AppendAllText(fixture.Header, "// intermediate\r\n");
+            fixture.MutateRecipe(recipe => recipe["headers"][0]["sourceSha256"] =
+                Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(fixture.Header))));
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("requires the pristine SDK preimage", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
         }
 
         [Fact]
@@ -262,7 +319,7 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
-        public void ShippedIdlPatchesCannotMoveBackAfterMidlOrFollowHeaderPatches()
+        public void SdkArtifactKindsDeterminePreparationOrderRatherThanRecipeOrder()
         {
             using var fixture = new Fixture();
             fixture.EnableMidl();
@@ -273,10 +330,16 @@ namespace Win32MetadataScraperTests
                 patches.RemoveAt(0);
                 patches.Add(first);
             });
-            var ordering = fixture.Run();
-            Assert.NotEqual(0, ordering.ExitCode);
-            Assert.Contains("wrong side of the MIDL boundary", ordering.Error);
+            var prepared = fixture.Prepare();
+            Assert.Contains("#define IDL_VALUE 2",
+                File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "generated.h")));
+            Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", "sample.h")));
+        }
 
+        [Fact]
+        public void ShippedIdlBackedHeadersCannotBeAnnotationPatchTargets()
+        {
+            using var fixture = new Fixture();
             fixture.EnableMidl();
             fixture.WriteGeneratedHeaderPatch();
             var stage = fixture.Run();
@@ -346,7 +409,8 @@ namespace Win32MetadataScraperTests
         private sealed class Fixture : IDisposable
         {
             internal const string Before = "#ifndef SAMPLE_H\r\n#define SAMPLE_H\r\n#define VALUE 1\r\n#endif\r\n";
-            internal const string PatchPath = @"post-midl\um\sample.patch";
+            internal const string PatchPath = @"um\sample.h.patch";
+            internal const string IdlPatchPath = @"um\generated.idl.patch";
             private readonly string root;
             private readonly string source;
             private readonly string sdk;
@@ -369,7 +433,7 @@ namespace Win32MetadataScraperTests
                 this.patch = Path.Combine(this.root, PatchPath);
                 Header = Path.Combine(this.source, "um", "sample.h");
                 Unrelated = Path.Combine(this.source, "shared", "unrelated.h");
-                SdkHeader = Path.Combine(this.sdk, "c", "include", "sample.h");
+                SdkHeader = Path.Combine(this.sdk, "c", "include", "um", "sample.h");
                 Output = Path.Combine(this.root, "output");
                 foreach (string path in new[] { Header, Unrelated, SdkHeader, this.patch, Path.Combine(Output, "placeholder") })
                 {
@@ -400,13 +464,21 @@ namespace Win32MetadataScraperTests
 
             internal void WritePatch(int after, int before = 1, string path = "um/sample.h", string metadata = null, string originalPath = null)
             {
-                string prefix = "generation/WinSDK/RecompiledIdlHeaders/" + path;
-                string oldPrefix = "generation/WinSDK/RecompiledIdlHeaders/" + (originalPath ?? path);
-                string text = $"diff --git a/{oldPrefix} b/{prefix}\n{metadata}" +
-                    $"--- a/{oldPrefix}\n+++ b/{prefix}\n@@ -1,4 +1,4 @@\n #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" +
+                string oldPath = originalPath ?? path;
+                string text = $"diff --git a/{oldPath} b/{path}\n{metadata}" +
+                    $"--- a/{oldPath}\n+++ b/{path}\n@@ -1,4 +1,4 @@\n #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" +
                     $"-#define VALUE {before}\r\n+#define VALUE {after}\r\n #endif\r\n";
                 File.WriteAllText(this.patch, text, new UTF8Encoding(false));
             }
+
+            internal void CopyPatch(string source, string target)
+            {
+                string path = Path.Combine(this.root, target);
+                Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.Copy(Path.Combine(this.root, source), path);
+            }
+
+            internal void RepeatPatch() => File.AppendAllText(this.patch, File.ReadAllText(this.patch));
 
             internal void WriteRecipe(string stage = "post-midl", string version = "10.0.26100.7705", string[] patches = null)
             {
@@ -422,7 +494,7 @@ namespace Win32MetadataScraperTests
                         {
                             path = @"um\sample.h",
                             sourceSha256 = Hash(Encoding.ASCII.GetBytes(Before)),
-                            sdkPath = @"c\include\sample.h",
+                            sdkPath = @"c\include\um\sample.h",
                             sdkSha256 = Hash(Encoding.ASCII.GetBytes(Before)),
                         },
                     },
@@ -450,12 +522,11 @@ namespace Win32MetadataScraperTests
                 const string beforeHeader = "/* File created by MIDL compiler */\r\n";
                 foreach (string name in new[] { "generated", "dependency" })
                     File.WriteAllText(Path.Combine(this.source, "um", name + ".h"), beforeHeader);
-                const string prePatch = @"pre-midl\um\generated.patch";
-                string patchFile = Path.Combine(this.root, prePatch);
+                string patchFile = Path.Combine(this.root, IdlPatchPath);
                 Directory.CreateDirectory(Path.GetDirectoryName(patchFile));
                 File.WriteAllText(patchFile,
-                    "diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl b/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n" +
-                    "--- a/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n+++ b/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n" +
+                    "diff --git a/um/generated.idl b/um/generated.idl\n" +
+                    "--- a/um/generated.idl\n+++ b/um/generated.idl\n" +
                     "@@ -1,3 +1,3 @@\n-cpp_quote(\"#define IDL_VALUE 1\")\r\n+cpp_quote(\"#define IDL_VALUE 2\")\r\n" +
                     " import \"dependency.idl\";\r\n [uuid(7a22f761-442c-4260-9d80-4c937dce56b6), version(1.0), pointer_default(unique)]\r\n",
                     new UTF8Encoding(false));
@@ -488,7 +559,7 @@ namespace Win32MetadataScraperTests
                             path = @"um\" + name + ".h",
                         }),
                     });
-                    recipe["patches"] = JsonSerializer.SerializeToNode(new[] { prePatch, PatchPath });
+                    recipe["patches"] = JsonSerializer.SerializeToNode(new[] { IdlPatchPath, PatchPath });
                 });
             }
 
@@ -501,10 +572,10 @@ namespace Win32MetadataScraperTests
 
             internal void WriteGeneratedHeaderPatch()
             {
-                const string relative = @"post-midl\um\generated.patch";
+                const string relative = @"um\generated.h.patch";
                 File.WriteAllText(Path.Combine(this.root, relative),
-                    "diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/generated.h b/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n" +
-                    "--- a/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n+++ b/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n" +
+                    "diff --git a/um/generated.h b/um/generated.h\n" +
+                    "--- a/um/generated.h\n+++ b/um/generated.h\n" +
                     "@@ -1 +1,2 @@\n /* File created by MIDL compiler */\r\n+// annotation\r\n");
                 MutateRecipe(recipe => recipe["patches"].AsArray().Add(relative));
             }

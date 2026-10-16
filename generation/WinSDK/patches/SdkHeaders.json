@@ -191,21 +191,16 @@
     "Xinput"
   ],
   "patches": [
-    "pre-midl\\um\\waasapi.annotations.patch",
-    "post-midl\\um\\winhttp.supported-os.patch",
-    "post-midl\\um\\winhttp.last-error.patch",
-    "post-midl\\um\\winhttp.callback-alias.patch",
-    "post-midl\\um\\winhttp.interior-pointers.patch",
-    "post-midl\\um\\winhttp.port-constant-types.patch",
-    "post-midl\\um\\winhttp.logical-enums.patch",
-    "post-midl\\um\\windowsceip.annotations.patch",
-    "post-midl\\um\\avrfsdk.annotations.patch",
-    "post-midl\\um\\magnification.annotations.patch",
-    "post-midl\\um\\psapi.annotations.patch",
-    "post-midl\\um\\timezoneapi.annotations.patch",
-    "post-midl\\um\\ual.annotations.patch",
-    "post-midl\\um\\tlhelp32.annotations.patch",
-    "post-midl\\um\\wslapi.annotations.patch",
-    "post-midl\\um\\xinput.annotations.patch"
+    "um\\waasapi.idl.patch",
+    "um\\winhttp.h.patch",
+    "um\\windowsceip.h.patch",
+    "um\\avrfsdk.h.patch",
+    "um\\magnification.h.patch",
+    "um\\Psapi.h.patch",
+    "um\\timezoneapi.h.patch",
+    "um\\ual.h.patch",
+    "um\\TlHelp32.h.patch",
+    "um\\wslapi.h.patch",
+    "um\\Xinput.h.patch"
   ]
 }

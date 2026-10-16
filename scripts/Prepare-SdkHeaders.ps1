@@ -66,7 +66,7 @@ function Resolve-Child([string]$Root, [string]$RelativePath) {
 }
 
 function Invoke-HeaderPatch($Patch, [string]$Root) {
-    $arguments = @('-C', $repoRoot, 'apply', '--unsafe-paths', '-p4', "--directory=$Root", '--whitespace=error-all')
+    $arguments = @('-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
     $output = & git @arguments --check -- $Patch.fullPath 2>&1
     if ($LASTEXITCODE -ne 0) {
         throw "Patch preflight failed for $($Patch.path):`n$($output -join "`n")"
@@ -92,7 +92,7 @@ function Invoke-PreparedMidl([string]$Staging) {
             throw "The SDK MIDL input changed while being copied: $($input.path)"
         }
     }
-    foreach ($patch in @($patches | Where-Object stage -eq 'pre-midl')) {
+    foreach ($patch in @($patches | Where-Object isIdl)) {
         Invoke-HeaderPatch $patch $raw
     }
     foreach ($input in $midlInputs) {
@@ -304,14 +304,8 @@ if ($hasMidl) {
         [pscustomobject]@{ path = "$PSScriptRoot\$_"; sha256 = Get-Sha256 "$PSScriptRoot\$_" }
     }
 }
-$sawPostMidl = $false
+$patchedArtifacts = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
 $patches = @($config.patches | ForEach-Object {
-    $stage = $_.Split('\')[0]
-    if ($stage -notin @('pre-midl', 'post-midl') -or ($stage -eq 'pre-midl' -and (!$hasMidl -or $sawPostMidl))) {
-        throw "Patch is on the wrong side of the MIDL boundary: $_"
-    }
-    $sawPostMidl = $stage -eq 'post-midl'
-    $admitted = if ($stage -eq 'pre-midl') { @($midlInputs.path | Where-Object { $_.EndsWith('.idl') }) } else { @($config.headers.path) }
     $path = Resolve-Child $recipeRoot $_
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
         throw "Missing patch: $path"
@@ -321,50 +315,65 @@ $patches = @($config.patches | ForEach-Object {
         throw "A header patch must not change file identity or mode: $_"
     }
     $fileHeaders = [regex]::Matches($text, '(?m)^(---|\+\+\+) ([^\r\n]+)')
-    if (!$fileHeaders.Count -or $fileHeaders.Count % 2) {
-        throw "A patch must contain complete old/new header pairs: $_"
+    if ($fileHeaders.Count -ne 2) {
+        throw "A patch must contain exactly one SDK artifact's old/new pair: $_"
     }
-    for ($index = 0; $index -lt $fileHeaders.Count; $index += 2) {
-        $before = $fileHeaders[$index]
-        $after = $fileHeaders[$index + 1]
-        $oldPrefix = 'a/generation/WinSDK/RecompiledIdlHeaders/'
-        $newPrefix = 'b/generation/WinSDK/RecompiledIdlHeaders/'
-        if ($before.Groups[1].Value -ne '---' -or $after.Groups[1].Value -ne '+++' -or
-            !$before.Groups[2].Value.StartsWith($oldPrefix, [StringComparison]::Ordinal) -or
-            !$after.Groups[2].Value.StartsWith($newPrefix, [StringComparison]::Ordinal)) {
-            throw "Patch headers are not rooted in the admitted SDK mirror: $_"
+    $before = $fileHeaders[0]
+    $after = $fileHeaders[1]
+    if ($before.Groups[1].Value -ne '---' -or $after.Groups[1].Value -ne '+++' -or
+        !$before.Groups[2].Value.StartsWith('a/', [StringComparison]::Ordinal) -or
+        !$after.Groups[2].Value.StartsWith('b/', [StringComparison]::Ordinal)) {
+        throw "Patch targets must be SDK-relative artifact paths: $_"
+    }
+    $oldPath = $before.Groups[2].Value.Substring(2)
+    $newPath = $after.Groups[2].Value.Substring(2)
+    if ($oldPath -cne $newPath) {
+        throw "A patch must modify one admitted SDK artifact without changing its identity: $_"
+    }
+    $artifact = $newPath.Replace('/', '\')
+    $input = @($midlInputs | Where-Object { $_.path -eq $artifact -and [IO.Path]::GetExtension($_.path) -eq '.idl' })
+    $isIdl = $input.Count -eq 1
+    if ($isIdl) {
+        $sdk = $input[0].fullPath
+    }
+    else {
+        $headers = @($config.headers | Where-Object path -eq $artifact)
+        if ($headers.Count -ne 1) {
+            throw "A patch must target one admitted SDK artifact: $_"
         }
-        $oldPath = $before.Groups[2].Value.Substring($oldPrefix.Length)
-        $newPath = $after.Groups[2].Value.Substring($newPrefix.Length)
-        if ($oldPath -cne $newPath -or $newPath.Replace('/', '\') -notin $admitted) {
-            throw "A patch must modify one admitted header without changing its identity: $_"
+        $header = $headers[0]
+        $sdk = Resolve-Child $SdkPackageRoot $header.sdkPath
+        $sdkIdl = [IO.Path]::ChangeExtension($sdk, '.idl')
+        if ([IO.Path]::GetExtension($header.sdkPath) -eq '.idl' -or
+            ([IO.File]::ReadAllText((Resolve-Child $SourceRoot $header.path)).Contains('File created by MIDL compiler') -and
+                (Test-Path -LiteralPath $sdkIdl -PathType Leaf))) {
+            throw "A shipped-IDL-backed annotation patch belongs before MIDL, on its SDK IDL artifact: $_"
         }
-        if ($stage -eq 'post-midl') {
-            $header = $config.headers | Where-Object path -eq $newPath.Replace('/', '\')
-            $sdkIdl = [IO.Path]::ChangeExtension((Resolve-Child $SdkPackageRoot $header.sdkPath), '.idl')
-            if ([IO.Path]::GetExtension($header.sdkPath) -eq '.idl' -or
-                ([IO.File]::ReadAllText((Resolve-Child $SourceRoot $header.path)).Contains('File created by MIDL compiler') -and
-                    (Test-Path -LiteralPath $sdkIdl -PathType Leaf))) {
-                throw "A shipped-IDL-backed annotation patch belongs before MIDL: $_"
-            }
+        if ($header.sourceSha256 -ne $header.sdkSha256) {
+            throw "A direct SDK header patch requires the pristine SDK preimage: $_"
         }
     }
-    $statistics = @(& git -C $repoRoot apply -p4 --numstat -- $path)
-    if ($LASTEXITCODE -ne 0 -or !$statistics.Count) {
+    if (!$sdk.EndsWith("\$artifact", [StringComparison]::OrdinalIgnoreCase)) {
+        throw "Patch target does not match its canonical SDK artifact: $_"
+    }
+    if (!$patchedArtifacts.Add($sdk)) {
+        throw "An SDK artifact is patched more than once; consolidate its deltas into one patch: $artifact"
+    }
+    if ($_ -cne "$artifact.patch") {
+        throw "A patch must be named after its SDK artifact: $artifact.patch"
+    }
+    $statistics = @(& git -C $repoRoot apply -p1 --numstat -- $path)
+    if ($LASTEXITCODE -ne 0 -or $statistics.Count -ne 1) {
         throw "Invalid or empty patch: $_"
     }
     foreach ($statistic in $statistics) {
         if ($statistic -notmatch '^\d+\t\d+\t(.+)$' -or
-            $Matches[1].Replace('/', '\') -notin $admitted) {
-            throw "Patch changes a path outside its reviewed header set: $statistic"
+            $Matches[1].Replace('/', '\') -cne $artifact) {
+            throw "Patch changes a path other than its admitted SDK artifact: $statistic"
         }
     }
-    [pscustomobject]@{ path = $_; fullPath = $path; sha256 = Get-Sha256 $path; stage = $stage }
+    [pscustomobject]@{ path = $_; fullPath = $path; sha256 = Get-Sha256 $path; isIdl = $isIdl }
 })
-if (@($patches.path | Sort-Object -Unique).Count -ne $patches.Count) {
-    throw 'A patch is listed more than once.'
-}
-
 [IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
 $lock = [IO.File]::Open("$OutputRoot\prepare.lock", [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
 $staging = $null
@@ -402,11 +411,11 @@ try {
     if ((Get-DirectoryState "$staging\headers").sha256 -ne $sourceState.sha256) {
         throw 'The source header tree changed while it was being copied.'
     }
+    foreach ($patch in @($patches | Where-Object { !$_.isIdl })) {
+        Invoke-HeaderPatch $patch "$staging\headers"
+    }
     if ($hasMidl) {
         Invoke-PreparedMidl $staging
-    }
-    foreach ($patch in @($patches | Where-Object stage -eq 'post-midl')) {
-        Invoke-HeaderPatch $patch "$staging\headers"
     }
     if ((Get-DirectoryState $SourceRoot).sha256 -ne $sourceState.sha256) {
         throw 'The source header tree changed during preparation.'
