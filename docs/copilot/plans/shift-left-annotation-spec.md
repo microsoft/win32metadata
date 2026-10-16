@@ -31,7 +31,9 @@ ships in the SDK.
    ingestion mechanism, not a generated patch series under `docs`.
 8. Existing C/C++, SAL, MIDL, and compiler semantics are preferred over custom
    annotations. Do not add redundant `_In_` to scalars or `_Inout_` to unannotated
-   pointers: those are the SAL semantic defaults.
+   pointers: those are the SAL semantic defaults. Capture existing native SDK/SAL/MIDL
+   facts even when old metadata omitted them; review exact metadata differences rather
+   than suppressing those facts to retain old omissions.
 9. Logical equivalence to the NuGet winmd is the target only where the NuGet metadata is
    correct. Direct windows-rs fixes for native alignment, compiler-typed constants,
    `EnumWindows`, and `LocalFree` must not be regressed.
@@ -188,13 +190,13 @@ same-allocation relationship from the API contract, not infer it from pointer fi
 Attributes appear between the declaration keyword and name.
 
 ```cpp
-struct _Windows_SupportedOS_10240_ DESCRIPTION {
+struct _Win32_SupportedOS_10240_ DESCRIPTION {
     DWORD cbSize;
 };
 ```
 
 ```cpp
-enum class _Windows_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long {
+enum class _Win32_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned long {
     OPTION_NONE = 0,
 };
 ```
@@ -204,7 +206,7 @@ enum class _Windows_SupportedOS_10240_ [[clang::flag_enum]] OPTION : unsigned lo
 Type metadata precedes the typedef.
 
 ```cpp
-_Windows_SupportedOS_10240_
+_Win32_SupportedOS_10240_
 typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 ```
 
@@ -214,7 +216,7 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 | --- | --- | --- |
 | `SetLastError` / P/Invoke `SupportsLastError` | `_Win32_SetLastError_` | Function. No existing SAL annotation means that an API sets thread last error; sets the ECMA-335 P/Invoke flag. |
 | P/Invoke module override | `_Win32_ImportLibrary_("name.dll")` | Function. Overrides import-library scan results. |
-| `SupportedOSPlatform("windows...")` | One fixed `_Windows_SupportedOS_*_` macro from the menu below | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. |
+| `SupportedOSPlatform("windows...")` | One fixed `_Win32_SupportedOS_*_` macro from the menu below, or `_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` for a [scoped default](#scoped-supportedos-defaults) | Function, method, record, enum, or typedef. The macro expands to the canonical version string so authors cannot mistype it. An explicit declaration annotation overrides scoped defaults. |
 | preserve exact return/result | `_Win32_PreserveResult_` | Function or method. The projection must preserve the exact result; COM metadata uses standard `MethodImplAttributes.PreserveSig`. |
 | `RAIIFree("CloseX")` and repeated `InvalidHandleValue(value)` | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer function/method return or output parameter only. The first argument identifies the cleanup function. The remaining arguments are optional integer literals or object-like macros such as `INVALID_HANDLE_VALUE`. The consumer resolves macros in the declaration's preprocessor context, evaluates each constant expression, and emits one `RAIIFree` attribute plus one `InvalidHandleValue` attribute for each supplied invalid value. |
 | `NullNullTerminated` | Existing SAL `_NullNull_terminated_` | Return, parameter, field, or typedef. No custom annotation is required. |
@@ -234,38 +236,154 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 ### Supported OS macro menu
 
 The annotation header defines only the versions currently present in
-`supportedOS.rsp`. Each macro expands to a fixed annotation payload:
+`supportedOS.rsp`. Each per-declaration macro expands to a fixed annotation payload:
 
 ```cpp
-_Windows_SupportedOS_Windows2000_
-_Windows_SupportedOS_WindowsXP_
-_Windows_SupportedOS_WindowsVista_
-_Windows_SupportedOS_Windows7_
-_Windows_SupportedOS_Windows8_
-_Windows_SupportedOS_Windows81_
-_Windows_SupportedOS_10240_
-_Windows_SupportedOS_10586_
-_Windows_SupportedOS_14393_
-_Windows_SupportedOS_15063_
-_Windows_SupportedOS_16299_
-_Windows_SupportedOS_17134_
-_Windows_SupportedOS_17763_
-_Windows_SupportedOS_18362_
-_Windows_SupportedOS_19041_
-_Windows_SupportedOS_Server2000_
-_Windows_SupportedOS_Server2003_
-_Windows_SupportedOS_Server2008_
-_Windows_SupportedOS_Server2012_
-_Windows_SupportedOS_Server2016_
+_Win32_SupportedOS_Windows2000_
+_Win32_SupportedOS_WindowsXP_
+_Win32_SupportedOS_WindowsVista_
+_Win32_SupportedOS_Windows7_
+_Win32_SupportedOS_Windows8_
+_Win32_SupportedOS_Windows81_
+_Win32_SupportedOS_10240_
+_Win32_SupportedOS_10586_
+_Win32_SupportedOS_14393_
+_Win32_SupportedOS_15063_
+_Win32_SupportedOS_16299_
+_Win32_SupportedOS_17134_
+_Win32_SupportedOS_17763_
+_Win32_SupportedOS_18362_
+_Win32_SupportedOS_19041_
+_Win32_SupportedOS_Server2000_
+_Win32_SupportedOS_Server2003_
+_Win32_SupportedOS_Server2008_
+_Win32_SupportedOS_Server2012_
+_Win32_SupportedOS_Server2016_
 ```
 
-New versions require adding a reviewed macro definition rather than placing a free-form
-version token on individual declarations.
+New versions require a reviewed entry in the canonical version table and the
+corresponding fixed macro, rather than a free-form version on individual declarations
+or scopes. The scope lookup must share that table, not introduce a divergent
+version menu.
 
 Existing compiler/SAL facts remain the preferred source for attributes already expressed
 by native syntax, including `noreturn`, architecture guards, alignment, native typedef
 identity, bitfields, UUIDs, packing, parameter direction, optionality, and array sizes.
 The custom annotations are fallbacks where existing syntax is absent or wrong.
+
+### Scoped SupportedOS defaults
+
+`_Win32_SupportedOS_BEGIN_(WindowsVista)` pushes an authored supported-OS default;
+`_Win32_SupportedOS_END_()` pops it and restores the enclosing default. Nested scopes
+override, rather than combine, defaults. An explicit per-declaration
+`_Win32_SupportedOS_*_` annotation wins over every scoped default. The innermost
+applicable scope wins otherwise, not the greatest version.
+
+Implementations must provide end-to-end reader resolution before enabling scope
+authoring. Scopes factor reviewed availability facts already being migrated; grouping
+declarations must not infer new OS floors. The emitted annotation remains the existing
+`SupportedOSPlatform` payload; no new emitted metadata schema or runtime attribute is
+required.
+
+#### Macro definition
+
+The `_Win32_SupportedOS_BEGIN_` argument is a token from the existing per-declaration
+menu, without the `_Win32_SupportedOS_` prefix or trailing underscore. This definition
+illustrates the Vista and Windows7 entries of the shared canonical version table,
+including their per-declaration spellings. The complete table must retain
+the other reviewed entries above. `_WIN32META_ANNOTATION_` is the existing transport
+helper.
+
+```cpp
+#define _WIN32META_OS_STRINGIFY_RAW(...) #__VA_ARGS__
+#define _WIN32META_OS_STRINGIFY(...) _WIN32META_OS_STRINGIFY_RAW(__VA_ARGS__)
+#define _WIN32META_OS_PRAGMA(...) _Pragma(_WIN32META_OS_STRINGIFY(__VA_ARGS__))
+
+#define _WIN32META_OS_VERSION_WindowsVista "SupportedOSPlatform(\"windows6.0.6000\")"
+#define _WIN32META_OS_VERSION_Windows7 "SupportedOSPlatform(\"windows6.1\")"
+#define _WIN32META_OS_VERSION_RAW(os) _WIN32META_OS_VERSION_##os
+#define _WIN32META_OS_VERSION(os) _WIN32META_OS_VERSION_RAW(os)
+
+#define _Win32_SupportedOS_WindowsVista_ \
+    _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(WindowsVista))
+#define _Win32_SupportedOS_Windows7_ \
+    _WIN32META_ANNOTATION_(_WIN32META_OS_VERSION(Windows7))
+
+#if defined(WIN32METADATA) && defined(__clang__)
+#define _Win32_SupportedOS_BEGIN_(os) \
+    _WIN32META_OS_PRAGMA(clang attribute win32_os.push( \
+        __attribute__((annotate(_WIN32META_OS_VERSION(os)))), \
+        apply_to = any(function, record, enum, type_alias)))
+#define _Win32_SupportedOS_END_() \
+    _WIN32META_OS_PRAGMA(clang attribute win32_os.pop)
+#else
+#define _Win32_SupportedOS_BEGIN_(os)
+#define _Win32_SupportedOS_END_()
+#endif
+```
+
+The two-stage variadic stringification expands the payload before `_Pragma`
+stringification; the two-stage token lookup also permits an OS token supplied by a
+macro. Push and pop use the same `win32_os` pragma namespace. Both public scope macros
+are empty outside Clang metadata compilation, including ordinary MSVC builds with or
+without `WIN32METADATA`; the fixed declaration macros retain their existing no-op
+behavior.
+
+ClangSharp 21.1.8.4 with native Clang 21.1.8 supports this namespaced pragma transport.
+The subject filter is exactly `any(function, record, enum, type_alias)`: `typedef` is
+not a valid pragma matcher; `type_alias` covers genuine typedefs and callback typedefs.
+C++ `using` aliases can reach the compiler AST, but the current reader does not support
+`TypeAliasDecl`; the matcher alone does not establish end-to-end alias support.
+
+#### Nesting and applicability
+
+These APIs are fictional; comments describe the effective metadata after reader
+resolution, not a change to native declarations:
+
+```cpp
+void ExampleBeforeScope(void); // No scoped default.
+
+_Win32_SupportedOS_BEGIN_(WindowsVista)
+void ExampleVista(void); // Vista default.
+
+_Win32_SupportedOS_BEGIN_(Windows7)
+void ExampleWindows7(void); // Windows7 default.
+_Win32_SupportedOS_Windows8_
+void ExampleExplicitWindows8(void); // Explicit Windows8 wins.
+_Win32_SupportedOS_END_()
+
+void ExampleVistaAgain(void); // Vista default restored.
+_Win32_SupportedOS_END_()
+
+void ExampleAfterScope(void); // No scoped default.
+```
+
+A default applies to eligible declarations lexically inside the scope in the same
+physical header/expansion file and include instance. Eligible COM methods and nested
+types receive the default independently when their declarations are within that scope.
+An annotation on a record or interface alone does not imply inheritance by its members;
+parameters and fields are not scope targets.
+
+An included header does not inherit the including header's default. It may establish
+its own balanced scopes. A declaration-producing macro is evaluated at its expansion
+file and include instance, not merely the file where its replacement text was spelled.
+Pair every `BEGIN` and `END` within the same file and include instance, balanced in
+each active preprocessing path; an included file cannot pop its caller's scope.
+
+#### Future acceptance coverage
+
+These are implementation acceptance cases, not completed broad validation. The small
+x64 transport/final-winmd fixture does not establish cross-architecture, full-SDK, or
+PCH behavior.
+
+| Case | Required result |
+| --- | --- |
+| Nesting and explicit precedence | Verify Vista -> Windows7 -> Vista -> no default, plus before/after absence and an explicit later-version annotation inside a scope. Also nest an earlier version inside a later one and use an earlier explicit value: lexical/explicit precedence must win, not greatest-version selection. |
+| Pairing and diagnostics | Cover active/inactive conditional paths, unknown tokens, unmatched pops, unclosed scopes, cross-file pairing, invalid targets, and conflicting explicit annotations. Errors retain source locations. |
+| Includes and expansions | Cover transitive and repeated includes, independently scoped included headers, and declaration-producing macros expanded in another file. No caller-default leakage or lost genuine explicit annotations. |
+| Declaration shapes | Cover C and C++ functions, records, enums, genuine typedefs/callbacks, eligible nested types, and COM methods, without inferring member inheritance from a container annotation. Do not count AST-only C++ `using` coverage as reader support. |
+| Native no-op behavior | Compile ordinary C/C++ with MSVC with and without `WIN32METADATA`, and Clang without it. Preserve native types, layouts, calling conventions, symbols, and vtables. |
+| Final metadata | Read back effective annotations and required absence from final x86, x64, and ARM64 winmds, including COM methods and callbacks. Validate full-SDK and PCH/include reuse separately rather than extrapolating from a small fixture. |
 
 ### Vocabulary not included in the initial implementation
 
@@ -364,7 +482,7 @@ duplicating the complete scan-derived mapping.
 | Existing source | Header representation |
 | --- | --- |
 | `WithSetLastError.rsp` | `_Win32_SetLastError_` on each function. |
-| `supportedOS.rsp` | The matching fixed `_Windows_SupportedOS_*_` macro on the owning declaration. |
+| `supportedOS.rsp` | The matching fixed `_Win32_SupportedOS_*_` macro on the owning declaration, or a reviewed [scoped default](#scoped-supportedos-defaults) in the owning header after reader support and acceptance coverage exist. |
 | `libMappingsManual.rsp` | `_Win32_ImportLibrary_`; scanning remains default. |
 | `libMappings.rsp` | Import-library scan, with header override only where needed. |
 | `autoTypes.json` | Move cleanup and invalid-value semantics to producer returns/output parameters; no typedef ownership and no pseudo handles. |
