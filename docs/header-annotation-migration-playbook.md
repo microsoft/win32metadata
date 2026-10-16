@@ -78,6 +78,10 @@ outputs and their hashes in the private cache. Keep warnings enabled and compare
 the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
 accounting only for source line shifts. Do not add native `[local]` attributes or
 suppress diagnostics to make an annotation compile.
+The same SDK stage copies its verified manifest and MIDL evidence to
+`obj\prepared-sdk-provenance\<architecture>\<identity>` so existing generated-asset
+CI artifacts preserve actual compiler identities and closed inputs, not just an
+ephemeral include-root pathname.
 
 Metadata must compose with native SAL. The converter does not skip a parameter
 line merely because it also contains metadata annotations. Consolidate adjacent
@@ -492,6 +496,29 @@ real MIDL, import/tool/preimage rejection, wrong-stage and syntax failures,
 ambient-include isolation, repeat bytes and cache tampering. These native and
 preparation results are separate from final-image and exact-head CI admission;
 the immutable B9 and scoped-adoption evidence above is not relabeled.
+
+The committed local producer is
+`8125cddd2ec2fbf20c6e58a58f233ac95599dd82`, normally synchronized to qualified
+tooling `7ea6c85d85f6e54ba39273f9ef4897d3301d42e1`.
+
+| Immutable local pre-MIDL evidence | SHA256 |
+| --- | --- |
+| Full pilot image | `9F8BA94A4376998FD177240CEA541F616672AB7C96CC9893B8C55A5E371AE35E` |
+| Image provenance | `2D83ECDC7E8A94BD424E0FC7C33C7A512D92903F1E93FB527122D985E5AB553C` |
+| Fresh frozen-input tooling control | `C4C5081A2CD62F9E2ED300E2841617672E866A84B8AD8142CE80FA243DEC281D` |
+
+This actual image has zero declared and physical differences from accepted B9
+and the matched canonical-direct control, and zero declared differences from
+qualified c587. All 119 effective OS floors match OLD on every architecture;
+the existing OLD-to-NEW grade remains exactly 48 differences at 24 existing
+enum-use sites, with zero unknown or unused expectations. All 30
+physical/no-fallback/OS-floor cases and 14 SDK integrity cases execute and pass.
+The complete 393-file diagnostic closure, 36 repeated source/discovery inputs
+and 155 pointer reductions are retained. Artifacts are under
+`artifacts\pre-midl-pilot`. These local receipts retain their actual producer;
+final-head CI and its downloaded-image grade are recorded separately in the
+[draft PR](https://github.com/microsoft/win32metadata/pull/2365).
+No full-SDK migration or consumer work is resumed by this source-format change.
 
 ### Historical COM finding under the earlier policy
 

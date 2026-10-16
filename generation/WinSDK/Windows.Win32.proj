@@ -92,5 +92,16 @@
     <MakeDir Directories="$(ObjDir)" />
     <WriteLinesToFile File="$(ObjDir)\prepared-sdk.txt" Lines="$(SdkIncRoot)" Overwrite="true"
                       WriteOnlyWhenDifferent="true" />
+    <PropertyGroup>
+      <_PreparedSdkCache>$([System.IO.Path]::GetDirectoryName('$(SdkIncRoot)'))</_PreparedSdkCache>
+      <_PreparedSdkIdentity>$([System.IO.Path]::GetFileName('$(_PreparedSdkCache)'))</_PreparedSdkIdentity>
+      <_PreparedSdkProvenance>$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\$(_PreparedSdkIdentity)</_PreparedSdkProvenance>
+    </PropertyGroup>
+    <ItemGroup>
+      <_PreparedMidlEvidence Include="$(_PreparedSdkCache)\midl\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="$(_PreparedSdkCache)\manifest.json" DestinationFolder="$(_PreparedSdkProvenance)" />
+    <Copy SourceFiles="@(_PreparedMidlEvidence)"
+          DestinationFiles="@(_PreparedMidlEvidence->'$(_PreparedSdkProvenance)\midl\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
 </Project>

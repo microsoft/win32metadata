@@ -183,8 +183,20 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(previous, includeRoot);
                 if (pass == 2)
                     Assert.NotEqual(previous, includeRoot);
+                fixture.AssertPublishedProvenance(includeRoot);
                 previous = includeRoot;
             }
+        }
+
+        [Fact]
+        public void SdkBuildPreservesTheActualMidlClosureBesideGeneratedAssets()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            var result = fixture.RunSdkBuild("ScrapeConstants", "Sample");
+            Assert.True(result.ExitCode == 0, result.Error + result.Output);
+            string includeRoot = File.ReadAllLines(fixture.BuildEvents)[0].Split('|')[1];
+            fixture.AssertPublishedProvenance(includeRoot, hasMidl: true);
         }
 
         [Fact]
@@ -523,6 +535,26 @@ namespace Win32MetadataScraperTests
                 var result = Execute(start);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
                 return File.ReadAllText(target);
+            }
+
+            internal void AssertPublishedProvenance(string includeRoot, bool hasMidl = false)
+            {
+                string cache = Path.GetDirectoryName(includeRoot);
+                string published = Path.Combine(this.root, "obj", "prepared-sdk-provenance", "crossarch", Path.GetFileName(cache));
+                Assert.Equal(File.ReadAllBytes(Path.Combine(cache, "manifest.json")),
+                    File.ReadAllBytes(Path.Combine(published, "manifest.json")));
+                string source = Path.Combine(cache, "midl");
+                string target = Path.Combine(published, "midl");
+                Assert.Equal(hasMidl, Directory.Exists(target));
+                if (!hasMidl) return;
+                string[] files = Directory.GetFiles(source, "*", SearchOption.AllDirectories)
+                    .Select(path => Path.GetRelativePath(source, path)).OrderBy(path => path, StringComparer.Ordinal).ToArray();
+                Assert.Contains(Path.Combine("sal", "um", "generated.idl"), files);
+                Assert.Contains("commands.json", files);
+                Assert.Equal(files, Directory.GetFiles(target, "*", SearchOption.AllDirectories)
+                    .Select(path => Path.GetRelativePath(target, path)).OrderBy(path => path, StringComparer.Ordinal));
+                foreach (string path in files)
+                    Assert.Equal(File.ReadAllBytes(Path.Combine(source, path)), File.ReadAllBytes(Path.Combine(target, path)));
             }
 
             internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null)
