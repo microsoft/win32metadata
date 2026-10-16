@@ -574,7 +574,8 @@ namespace WinmdUtilsProgram
             bool dupsFound = false;
             foreach (var pair in nameToOwner)
             {
-                if (allowTable.Contains(pair.Key))
+                string ownedName = $"{pair.Key}={string.Join(",", pair.Value.OrderBy(owner => owner, StringComparer.Ordinal))}";
+                if (allowTable.Contains(pair.Key) || allowTable.Contains(ownedName))
                 {
                     continue;
                 }

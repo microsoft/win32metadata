@@ -2,3 +2,5 @@
 <IncludeRoot>/um/ual.h
 --namespace
 Windows.Win32.System.UserAccessLogging
+--config
+parse-win32-annotations

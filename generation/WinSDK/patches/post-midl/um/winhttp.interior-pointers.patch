@@ -1,0 +1,12 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+@@ -1989,7 +1989,7 @@
+     _In_ UINT uiCodePage,
+     _Inout_opt_ PDWORD pdwIndex,
+     _In_opt_ PWINHTTP_HEADER_NAME pHeaderName,
+-    _Out_writes_bytes_to_opt_(*pdwBufferLength, *pdwBufferLength) PVOID pBuffer,
++    _Out_writes_bytes_to_opt_(*pdwBufferLength, *pdwBufferLength) _Win32_ContainsInteriorPointers_ PVOID pBuffer,
+     _Inout_ PDWORD pdwBufferLength,
+     _Out_writes_opt_(*pdwHeadersCount) PWINHTTP_EXTENDED_HEADER *ppHeaders,
+     _Out_ PDWORD pdwHeadersCount

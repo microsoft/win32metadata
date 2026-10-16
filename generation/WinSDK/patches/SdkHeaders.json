@@ -1,0 +1,127 @@
+{
+  "schemaVersion": 1,
+  "sdkPackageVersion": "10.0.26100.7705",
+  "sourceStage": "post-midl",
+  "sourceGitTree": "d3dc662e56c715c1e0c000a0300ff3088e9a9f17",
+  "headers": [
+    {
+      "path": "um\\winhttp.h",
+      "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winhttp.h",
+      "sdkSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2"
+    },
+    {
+      "path": "um\\httprequest.h",
+      "sourceSha256": "84D9B00F3AC18FAC5A97DB772FE486CA80BF80BDCF6F46F98CA31D3FD1636F93",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\httprequest.idl",
+      "sdkSha256": "671F997E30FF1108FF4C7FB03631B3E4B1CABF05B8A31D14F5E4802D6FA997AE"
+    },
+    {
+      "path": "um\\windowsceip.h",
+      "sourceSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\windowsceip.h",
+      "sdkSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A"
+    },
+    {
+      "path": "um\\avrfsdk.h",
+      "sourceSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\avrfsdk.h",
+      "sdkSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8"
+    },
+    {
+      "path": "um\\magnification.h",
+      "sourceSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\magnification.h",
+      "sdkSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84"
+    },
+    {
+      "path": "um\\Psapi.h",
+      "sourceSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Psapi.h",
+      "sdkSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9"
+    },
+    {
+      "path": "um\\timezoneapi.h",
+      "sourceSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timezoneapi.h",
+      "sdkSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50"
+    },
+    {
+      "path": "um\\timeprov.h",
+      "sourceSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timeprov.h",
+      "sdkSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0"
+    },
+    {
+      "path": "um\\ual.h",
+      "sourceSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ual.h",
+      "sdkSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB"
+    },
+    {
+      "path": "um\\TlHelp32.h",
+      "sourceSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\TlHelp32.h",
+      "sdkSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1"
+    },
+    {
+      "path": "um\\waasapi.h",
+      "sourceSha256": "4BF901F1C9E8E407925DBADE8E022B1EB4D1946CCACA0FF7DEA5F88D8E4A4D45",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+      "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+    },
+    {
+      "path": "um\\waasapitypes.h",
+      "sourceSha256": "D61D87E4A316ECF0CBA6529A38CB48F148ADD0D94C7C81EADC44D9B4D1867738",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapitypes.idl",
+      "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+    },
+    {
+      "path": "um\\wslapi.h",
+      "sourceSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wslapi.h",
+      "sdkSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49"
+    },
+    {
+      "path": "um\\Xinput.h",
+      "sourceSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Xinput.h",
+      "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
+    }
+  ],
+  "partitions": [
+    "WinHttp",
+    "HttpServer",
+    "CEIP",
+    "ApplicationVerifier",
+    "Base",
+    "FileHistory",
+    "MagApi",
+    "PsApi1",
+    "PsApi2",
+    "Time",
+    "Ual",
+    "ToolHelp",
+    "UpdateAssessment",
+    "Wsl",
+    "Xinput"
+  ],
+  "patches": [
+    "post-midl\\um\\winhttp.supported-os.patch",
+    "post-midl\\um\\winhttp.last-error.patch",
+    "post-midl\\um\\winhttp.callback-alias.patch",
+    "post-midl\\um\\winhttp.interior-pointers.patch",
+    "post-midl\\um\\winhttp.port-constant-types.patch",
+    "post-midl\\um\\winhttp.logical-enums.patch",
+    "post-midl\\um\\windowsceip.annotations.patch",
+    "post-midl\\um\\avrfsdk.annotations.patch",
+    "post-midl\\um\\magnification.annotations.patch",
+    "post-midl\\um\\psapi.annotations.patch",
+    "post-midl\\um\\timezoneapi.annotations.patch",
+    "post-midl\\um\\ual.annotations.patch",
+    "post-midl\\um\\tlhelp32.annotations.patch",
+    "post-midl\\um\\waasapi.annotations.patch",
+    "post-midl\\um\\wslapi.annotations.patch",
+    "post-midl\\um\\xinput.annotations.patch"
+  ]
+}

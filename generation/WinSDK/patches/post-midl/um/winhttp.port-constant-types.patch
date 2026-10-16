@@ -1,0 +1,26 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+@@ -2564,6 +2564,22 @@
+ 
+ 
+ 
++#ifdef WIN32METADATA
++#pragma push_macro("INTERNET_DEFAULT_PORT")
++#undef INTERNET_DEFAULT_PORT
++constexpr INTERNET_PORT INTERNET_DEFAULT_PORT = 0;
++#pragma pop_macro("INTERNET_DEFAULT_PORT")
++#pragma push_macro("INTERNET_DEFAULT_HTTP_PORT")
++#undef INTERNET_DEFAULT_HTTP_PORT
++constexpr INTERNET_PORT INTERNET_DEFAULT_HTTP_PORT = 80;
++#pragma pop_macro("INTERNET_DEFAULT_HTTP_PORT")
++#pragma push_macro("INTERNET_DEFAULT_HTTPS_PORT")
++#undef INTERNET_DEFAULT_HTTPS_PORT
++constexpr INTERNET_PORT INTERNET_DEFAULT_HTTPS_PORT = 443;
++#pragma pop_macro("INTERNET_DEFAULT_HTTPS_PORT")
++#endif
++
++
+ #if defined(__cplusplus)
+ }
+ #endif

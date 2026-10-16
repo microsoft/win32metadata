@@ -1,0 +1,216 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/winhttp.h
+@@ -1586,6 +1586,7 @@
+ //
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ WINHTTP_STATUS_CALLBACK
+ WINAPI
+@@ -1597,6 +1598,7 @@
+     IN DWORD_PTR dwReserved
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1606,6 +1608,7 @@
+     _Out_writes_bytes_(WINHTTP_TIME_FORMAT_BUFSIZE) LPWSTR pwszTime // output string buffer
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1615,6 +1618,7 @@
+     _Out_ SYSTEMTIME *pst           // output in GMT time
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1627,6 +1631,7 @@
+ );
+ 
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1646,9 +1651,12 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI BOOL WINAPI WinHttpCheckPlatform(void);
+ 
++_Win32_SetLastError_
+ WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
++_Win32_SetLastError_
+ WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
+ _Win32_SupportedOS_END_()
+ 
+@@ -1659,6 +1667,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1671,6 +1680,7 @@
+     _In_ DWORD dwFlags
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1679,6 +1689,7 @@
+     IN HINTERNET hInternet
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1690,6 +1701,7 @@
+     IN DWORD dwReserved
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1717,6 +1729,7 @@
+ );
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1728,6 +1741,7 @@
+     OUT LPDWORD lpdwNumberOfBytesWritten
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1738,6 +1752,7 @@
+ );
+ 
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1749,6 +1764,7 @@
+     IN OUT LPDWORD lpdwBufferLength
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1775,6 +1791,7 @@
+     _In_ DWORD dwBufferLength
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1817,6 +1834,7 @@
+ //
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI
+@@ -1831,6 +1849,7 @@
+     IN DWORD dwFlags
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1859,6 +1878,7 @@
+ );
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1873,6 +1893,7 @@
+     IN DWORD_PTR dwContext
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1893,6 +1914,7 @@
+     IN LPVOID      pAuthParams
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1928,6 +1950,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1938,6 +1961,7 @@
+ );
+ 
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -1995,6 +2019,7 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ _Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2004,6 +2029,7 @@
+     _Outptr_result_maybenull_ LPWSTR * ppwstrAutoConfigUrl
+ );
+ 
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2098,6 +2124,7 @@
+ );
+ 
+ _Win32_SupportedOS_WindowsXP_
++_Win32_SetLastError_
+ WINHTTPAPI
+ BOOL
+ WINAPI
+@@ -2205,6 +2232,7 @@
+ #define WINHTTP_WEB_SOCKET_MIN_KEEPALIVE_VALUE 15000
+ 
+ _Win32_SupportedOS_BEGIN_(Windows8)
++_Win32_SetLastError_
+ WINHTTPAPI
+ HINTERNET
+ WINAPI

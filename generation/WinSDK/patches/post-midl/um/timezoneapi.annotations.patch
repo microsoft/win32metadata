@@ -1,0 +1,147 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/timezoneapi.h
+@@ -15,6 +15,7 @@
+ #define _TIMEZONEAPI_H_
+ 
+ #include <apiset.h>
++#include <win32metadata_annotations.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+ #include <minwinbase.h>
+@@ -56,6 +57,8 @@
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Win32_SupportedOS_Windows2000_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToTzSpecificLocalTime(
+@@ -64,8 +67,10 @@
+     _Out_ LPSYSTEMTIME lpLocalTime
+     );
+ 
+-WINBASEAPI
+-_Success_(return != FALSE)
++_Win32_SupportedOS_BEGIN_(WindowsXP)
++WINBASEAPI
++_Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TzSpecificLocalTimeToSystemTime(
+@@ -76,15 +81,19 @@
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ FileTimeToSystemTime(
+     _In_ CONST FILETIME* lpFileTime,
+     _Out_ LPSYSTEMTIME lpSystemTime
+     );
+-
+-WINBASEAPI
+-_Success_(return != FALSE)
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_BEGIN_(Windows2000)
++WINBASEAPI
++_Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToFileTime(
+@@ -94,6 +103,7 @@
+ 
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetTimeZoneInformation(
+@@ -101,15 +111,19 @@
+     );
+ 
+ WINBASEAPI
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetTimeZoneInformation(
+     _In_ CONST TIME_ZONE_INFORMATION* lpTimeZoneInformation
+     );
+-
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ #if (_WIN32_WINNT >= 0x0600)
+ 
+ WINBASEAPI
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SetDynamicTimeZoneInformation(
+@@ -122,6 +136,7 @@
+ 
+ WINBASEAPI
+ _Success_(return != TIME_ZONE_ID_INVALID)
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ GetDynamicTimeZoneInformation(
+@@ -133,6 +148,7 @@
+ #if (_WIN32_WINNT >= 0x0601)
+ 
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ GetTimeZoneInformationForYear(
+@@ -142,11 +158,13 @@
+     );
+ 
+ #endif // _WIN32_WINNT >= 0x0601
++_Win32_SupportedOS_END_()
+ 
+ // end_1_0
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SupportedOS_BEGIN_(Windows8)
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+@@ -165,9 +183,12 @@
+     _Out_ LPDWORD FirstYear,
+     _Out_ LPDWORD LastYear
+     );
+-
+-WINBASEAPI
+-_Success_(return != FALSE)
++_Win32_SupportedOS_END_()
++
++_Win32_SupportedOS_BEGIN_(Windows7)
++WINBASEAPI
++_Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ SystemTimeToTzSpecificLocalTimeEx(
+@@ -178,6 +199,7 @@
+ 
+ WINBASEAPI
+ _Success_(return != FALSE)
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ TzSpecificLocalTimeToSystemTimeEx(
+@@ -185,6 +207,7 @@
+     _In_ CONST SYSTEMTIME* lpLocalTime,
+     _Out_ LPSYSTEMTIME lpUniversalTime
+     );
++_Win32_SupportedOS_END_()
+ 
+ #endif /* (_WIN32_WINNT >= _WIN32_WINNT_WIN8) */
+ 

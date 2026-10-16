@@ -1,0 +1,59 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/magnification.h
+@@ -11,6 +11,7 @@
+ #define _INC_MAGNIFIER
+ 
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -72,6 +73,7 @@
+ typedef BOOL (CALLBACK* MagImageScalingCallback)(HWND hwnd, void * srcdata, MAGIMAGEHEADER srcheader, void * destdata, MAGIMAGEHEADER destheader, RECT unclipped, RECT clipped, HRGN dirty );
+ 
+ // Public Functions
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ BOOL WINAPI MagInitialize();
+ BOOL WINAPI MagUninitialize();
+ 
+@@ -79,19 +81,37 @@
+ BOOL WINAPI MagGetWindowSource(HWND hwnd, RECT *pRect);
+ BOOL WINAPI MagSetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
+ BOOL WINAPI MagGetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
+-BOOL WINAPI MagSetWindowFilterList(HWND hwnd, DWORD dwFilterMode, int count, HWND *pHWND );
+-int  WINAPI MagGetWindowFilterList(HWND hwnd, DWORD *pdwFilterMode, int count, HWND *pHWND );
++BOOL WINAPI MagSetWindowFilterList(HWND hwnd, _Win32_AssociatedEnum_(MW_FILTERMODE) DWORD dwFilterMode, int count, HWND *pHWND );
++int  WINAPI MagGetWindowFilterList(HWND hwnd, _Win32_AssociatedEnum_(MW_FILTERMODE) DWORD *pdwFilterMode, int count, HWND *pHWND );
+ BOOL WINAPI MagSetImageScalingCallback(HWND hwnd, MagImageScalingCallback callback );
+ MagImageScalingCallback WINAPI MagGetImageScalingCallback(HWND hwnd );
+ BOOL WINAPI MagSetColorEffect(HWND hwnd, PMAGCOLOREFFECT pEffect);
+ BOOL WINAPI MagGetColorEffect(HWND hwnd, PMAGCOLOREFFECT pEffect);
++_Win32_SupportedOS_END_()
++_Win32_SupportedOS_BEGIN_(Windows8)
+ BOOL WINAPI MagSetFullscreenTransform(_In_ float magLevel, _In_ int xOffset, _In_ int yOffset);
+ BOOL WINAPI MagGetFullscreenTransform(_Out_ float *pMagLevel, _Out_ int *pxOffset, _Out_ int *pyOffset);
+ BOOL WINAPI MagSetFullscreenColorEffect(_In_ PMAGCOLOREFFECT pEffect);
+ BOOL WINAPI MagGetFullscreenColorEffect(_Out_ PMAGCOLOREFFECT pEffect);
++_Win32_SetLastError_
+ BOOL WINAPI MagSetInputTransform(_In_ BOOL fEnabled, _In_ const LPRECT pRectSource, _In_ const LPRECT pRectDest);
+ BOOL WINAPI MagGetInputTransform(_Out_ BOOL *pfEnabled, _Out_ LPRECT pRectSource, _Out_ LPRECT pRectDest);
+ BOOL WINAPI MagShowSystemCursor(_In_ BOOL fShowCursor);
++_Win32_SupportedOS_END_()
++
++#ifdef WIN32METADATA
++#pragma push_macro("MW_FILTERMODE_EXCLUDE")
++#undef MW_FILTERMODE_EXCLUDE
++#pragma push_macro("MW_FILTERMODE_INCLUDE")
++#undef MW_FILTERMODE_INCLUDE
++enum MW_FILTERMODE : DWORD
++{
++    MW_FILTERMODE_EXCLUDE = 0,
++    MW_FILTERMODE_INCLUDE = 1,
++};
++#pragma pop_macro("MW_FILTERMODE_INCLUDE")
++#pragma pop_macro("MW_FILTERMODE_EXCLUDE")
++#endif
+ 
+ #ifdef __cplusplus
+ }
