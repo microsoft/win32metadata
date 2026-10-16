@@ -462,6 +462,42 @@ struct Record { FIELDS };
         }
 
         [Fact]
+        public void MacroConstantsKeepDistinctNativeOwners()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define CONSTANTS _Win32_SupportedOS_Windows7_ const unsigned FIRST = 1; _Win32_SupportedOS_Windows8_ const unsigned SECOND = 2;
+CONSTANTS
+#define MEMBERS FirstMember _Win32_SupportedOS_Windows7_ = 1, SecondMember _Win32_SupportedOS_Windows8_ = 2
+enum Constants { MEMBERS };
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var root = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot();
+            var fields = root.DescendantNodes().OfType<FieldDeclarationSyntax>()
+                .ToDictionary(field => field.Declaration.Variables.Single().Identifier.ValueText);
+            Assert.Contains("SupportedOSPlatform(\"windows6.1\")", fields["FIRST"].ToString());
+            Assert.Contains("SupportedOSPlatform(\"windows8.0\")", fields["SECOND"].ToString());
+            var members = root.DescendantNodes().OfType<EnumMemberDeclarationSyntax>()
+                .ToDictionary(member => member.Identifier.ValueText);
+            Assert.Contains("SupportedOSPlatform(\"windows6.1\")", members["FirstMember"].ToString());
+            Assert.Contains("SupportedOSPlatform(\"windows8.0\")", members["SecondMember"].ToString());
+        }
+
+        [Theory]
+        [InlineData("enum E { Value _Win32_SetLastError_ = 1 };", "not valid")]
+        [InlineData("_Win32_SupportedOS_Windows8_ int mutableValue;", "not valid")]
+        [InlineData("int F(_Win32_SupportedOS_Windows8_ const int value);", "not valid")]
+        [InlineData("void F() { _Win32_SupportedOS_Windows8_ const int localValue = 1; }", "not valid")]
+        [InlineData("const unsigned Value _Win32_SupportedOS_Windows8_ = 42;", "prefix placement")]
+        [InlineData("enum E { Value _Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ = 1 };", "Duplicate")]
+        public void ConstantTargetsDoNotRelaxOtherAnnotationRules(string declarations, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+        }
+
+        [Fact]
         public void LineDirectivesDoNotChangeNativeAnnotationOwnership()
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"

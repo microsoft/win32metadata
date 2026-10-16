@@ -373,7 +373,7 @@ namespace Win32MetadataScraper
                         if (IsInheritedAnnotation(declaration, attribute.Location))
                             continue;
                     }
-                    if (declaration is not TypeAliasDecl && attributeLocation.File == location.File && attributeLocation.Offset > location.Offset)
+                    if (declaration is not TypeAliasDecl and not EnumConstantDecl && attributeLocation.File == location.File && attributeLocation.Offset > location.Offset)
                         throw Error(attributeLocation, "Win32 metadata annotations must use prefix placement, not a post-declarator attribute.");
                     ValidatePlacement(declaration, attributeLocation);
                     ValidateTarget(facts, annotation, attributeLocation);
@@ -393,7 +393,8 @@ namespace Win32MetadataScraper
                     facts.IsScopedEnum = enumDeclaration.IsScoped;
                     facts.IsFlagsEnum = declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_FlagEnum);
                 }
-                if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or TypedefNameDecl)
+                if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or EnumConstantDecl or TypedefNameDecl ||
+                    IsConstantVariable(declaration))
                 {
                     var raii = facts.Annotations.SingleOrDefault(annotation => annotation.Name == "RAIIFree");
                     var expanded = facts.Annotations.SingleOrDefault(annotation => annotation.Name == HeaderAnnotation.ExpandedRaiiName);
@@ -482,7 +483,7 @@ namespace Win32MetadataScraper
             {
                 "SetLastError" or "ImportLibrary" => function && declaration is not CXXMethodDecl,
                 "PreserveResult" => function,
-                "SupportedOSPlatform" => function || record || typedef || declaration is EnumDecl,
+                "SupportedOSPlatform" => function || record || typedef || declaration is EnumDecl or EnumConstantDecl || IsConstantVariable(declaration),
                 "AssociatedEnum" => function || parameter || field,
                 "AssociatedConstant" => declaration is EnumDecl,
                 "AlsoUsableFor" => typedef,
@@ -525,6 +526,10 @@ namespace Win32MetadataScraper
                     throw Error(location, $"'{annotation.Name}' cannot describe a void return.");
             }
         }
+
+        private static bool IsConstantVariable(NamedDecl declaration)
+            => declaration is VarDecl variable and not ParmVarDecl &&
+                variable.Type.Handle.IsConstQualified && variable.SemanticParentCursor is not FunctionDecl;
 
         private void TransferRecordTypedefFacts()
         {
@@ -926,7 +931,7 @@ namespace Win32MetadataScraper
 
         private void ValidatePlacement(NamedDecl declaration, NativeLocation annotation)
         {
-            if (declaration is RecordDecl or EnumDecl or TypeAliasDecl)
+            if (declaration is RecordDecl or EnumDecl or EnumConstantDecl or TypeAliasDecl)
                 return;
             var start = GetLocation(declaration.Extent.Start);
             if (start.File != annotation.File || annotation.Offset <= start.Offset)
@@ -1110,6 +1115,7 @@ namespace Win32MetadataScraper
                         MethodDeclarationSyntax method => method.Identifier.ValueText,
                         ParameterSyntax parameter => parameter.Identifier.ValueText,
                         FieldDeclarationSyntax field => field.Declaration.Variables.Single().Identifier.ValueText,
+                        EnumMemberDeclarationSyntax member => member.Identifier.ValueText,
                         BaseTypeDeclarationSyntax type => type.Identifier.ValueText,
                         DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
                         _ => string.Empty,
@@ -1131,7 +1137,8 @@ namespace Win32MetadataScraper
             {
                 MethodDeclarationSyntax => declaration is FunctionDecl,
                 ParameterSyntax => declaration is ParmVarDecl,
-                FieldDeclarationSyntax => declaration is FieldDecl,
+                FieldDeclarationSyntax => declaration is FieldDecl || IsConstantVariable(declaration),
+                EnumMemberDeclarationSyntax => declaration is EnumConstantDecl,
                 StructDeclarationSyntax => declaration is RecordDecl,
                 EnumDeclarationSyntax => declaration is EnumDecl,
                 DelegateDeclarationSyntax => declaration is TypedefNameDecl or FunctionDecl,
@@ -1238,6 +1245,18 @@ namespace Win32MetadataScraper
             {
                 var facts = FindFacts(node.AttributeLists, node);
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
+                if (facts != null)
+                {
+                    owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
+                    node = node.AddAttributeLists(owner.GetAttributes(facts).ToArray());
+                }
+                return node;
+            }
+
+            public override SyntaxNode VisitEnumMemberDeclaration(EnumMemberDeclarationSyntax node)
+            {
+                var facts = FindFacts(node.AttributeLists, node);
+                node = (EnumMemberDeclarationSyntax)base.VisitEnumMemberDeclaration(node);
                 if (facts != null)
                 {
                     owner.projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
