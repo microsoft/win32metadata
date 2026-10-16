@@ -471,6 +471,36 @@
       "sourceSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\IdentityStore.h",
       "sdkSha256": "EE96A96BA3DA324BC971E272DB518AC2B4808D6A452A3444E438CDCC22816774"
+    },
+    {
+      "path": "um\\Raseapif.h",
+      "sourceSha256": "476F1B7AF021A4F4B3333B1852828DA8BED141797CECDACF46AE97E720CF94F3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Raseapif.h",
+      "sdkSha256": "476F1B7AF021A4F4B3333B1852828DA8BED141797CECDACF46AE97E720CF94F3"
+    },
+    {
+      "path": "um\\RrasCfg.h",
+      "sourceSha256": "C988EDF5C815940E235E2C0021AFD11F980C4939AB0D98486277CD1C7EEDD9AD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\RrasCfg.idl",
+      "sdkSha256": "BE0FDA967666B91306A115EE91A158C0D83BBF1676251F0F68CE59B9DDE13FFF"
+    },
+    {
+      "path": "um\\amxmlgraphbuilder.h",
+      "sourceSha256": "224E3F1C96C8B482818E94174496DFB9027364ECA3D6F41A17D77135859D857E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amxmlgraphbuilder.h",
+      "sdkSha256": "224E3F1C96C8B482818E94174496DFB9027364ECA3D6F41A17D77135859D857E"
+    },
+    {
+      "path": "um\\NotificationActivationCallback.h",
+      "sourceSha256": "BF3B984ED6FD9099C6DDD38F1B6CD98F878CFA767F814054FA61C7E2E9739034",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\NotificationActivationCallback.idl",
+      "sdkSha256": "BC3CA30AB53317683AFABF4BAD532E8FCEBC4F90BA6D8B3BB068C82205FDBA6E"
+    },
+    {
+      "path": "um\\wnvapi.h",
+      "sourceSha256": "8E570084A94B27294E49C024FFF4718DEC9FE9AA8742E153B199991B24A594FD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wnvapi.h",
+      "sdkSha256": "8E570084A94B27294E49C024FFF4718DEC9FE9AA8742E153B199991B24A594FD"
     }
   ],
   "partitions": [
@@ -527,7 +557,12 @@
     "RstMgr",
     "Proc_Snap",
     "Monitor",
-    "IdentityProvider"
+    "IdentityProvider",
+    "Eap",
+    "Media.DShow.Xml",
+    "Media.DShow",
+    "Win32_Tile_Badge_Notif",
+    "wnv"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -592,6 +627,11 @@
     "post-midl\\um\\highlevelmonitorconfigurationapi.annotations.patch",
     "post-midl\\um\\physicalmonitorenumerationapi.annotations.patch",
     "post-midl\\um\\identityprovider.annotations.patch",
-    "post-midl\\um\\identitystore.annotations.patch"
+    "post-midl\\um\\identitystore.annotations.patch",
+    "post-midl\\um\\raseapif.annotations.patch",
+    "post-midl\\um\\rrascfg.annotations.patch",
+    "post-midl\\um\\amxmlgraphbuilder.annotations.patch",
+    "post-midl\\um\\notificationactivationcallback.annotations.patch",
+    "post-midl\\um\\wnvapi.annotations.patch"
   ]
 }

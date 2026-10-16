@@ -774,3 +774,47 @@ inherited. These local receipts do not replace final-head CI and downloaded-imag
 qualification in the draft review report. Managed projection/source effects of
 the native signatures, output ownership and newly captured native facts remain
 **UNVERIFIED**; no consumer work is implied by producer equivalence.
+
+### Bounded interop OS-floor input
+
+The Eap, Media.DShow.Xml, Win32_Tile_Badge_Notif and wnv owners relocate ten
+authored OS rows to five admitted post-MIDL headers:
+
+| Owner | Native header | Exact existing OS targets |
+| --- | --- | --- |
+| Eap | `Raseapif.h`, `RrasCfg.h` | Five `RasEap*` provider exports and `IEAPProviderConfig`: Windows 2000 |
+| Media.DShow.Xml | `amxmlgraphbuilder.h` | `IXMLGraphBuilder`: Windows 2000 |
+| Win32_Tile_Badge_Notif | `NotificationActivationCallback.h` | `INotificationActivationCallback`: Windows 10 build 10240 |
+| wnv | `wnvapi.h` | `WnvOpen`, `WnvRequestNotification`: Server 2012 |
+
+Two scopes cover only the seven existing function declarations. The three COM
+interfaces keep direct annotations; no method, nested type, forward declaration
+or neighboring interface acquires a floor. `Media.DShow` directly includes
+`amxmlgraphbuilder.h` and remains an unconverted native-control dependent.
+
+The five Eap provider exports exist in the selected native SDK but have no
+fixed DLL import: their implementations are supplied by registered third-party
+Eap DLLs. Their authored floors move faithfully to those declarations without
+inventing an import or adding methods to the winmd. They are not five additional
+emitted APIs. Shared `NCRYPT_KEY_HANDLE` ownership/invalid-value facts, shared
+`NgcTicketContext`, the `IKsPropertySet`/`_DL_EUI48` parser exclusions, SDK-scanned
+Wnv imports and documentation mappings remain unchanged and separately owned.
+
+`InteropOsHeaderMigrationTests` reuses the existing cleaner and native ABI
+controls. Set `INTEROP_OS_SOURCE_CONTROLS` to the bounded artifact directory
+containing `legacy`, `activation` and `prepared` three-architecture scrapes,
+`INTEROP_OS_OLD_GENERATED` to the original OLD generated-source directory, and
+`WINHTTP_PREPARED_HEADERS` to the private prepared include root. The source
+controls check exact OS targets/payloads and declarations against original OLD,
+parser-only activation and prepared headers with no authored OS fallback.
+They enumerate the two Wnv anonymous `NativeTypeName` coordinate changes
+(`L64` to `L65`, `L97` to `L98`, both column 5) separately; the emitter does not
+serialize `NativeTypeNameAttribute`. Native controls cover each owner and the
+direct dependent on x86, x64 and ARM64. The existing native control honors the
+partition's explicit C++ standard: `Media.DShow` requires its configured C++20
+for the SDK's signed-shift constant expressions; the default remains C++17.
+
+These are bounded source/component/native inputs to the combined full-SDK
+migration, not a new OLD/control/NEW image, broad physical-closure grade,
+consumer-compatibility claim or final-head CI acceptance. Those gates remain
+with the combined migration integrator. `--nativeFieldArrayInfo` stays absent.

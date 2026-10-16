@@ -389,9 +389,12 @@ static_assert(DISC_NO_FORCE == 64u);
             string target, string[] headers, string checks)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
+            string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
+            int standardIndex = Array.IndexOf(partitionOptions, "--std");
+            string standard = standardIndex < 0 ? "c++17" : partitionOptions[standardIndex + 1];
             var arguments = new List<string>
                 {
-                    "--language=c++", "--std=c++17", "--target=" + target,
+                    "--language=c++", "--std=" + standard, "--target=" + target,
                     "--include-directory=" + Path.Combine(root, "generation", "WinSDK", "inc"),
                 };
             arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }

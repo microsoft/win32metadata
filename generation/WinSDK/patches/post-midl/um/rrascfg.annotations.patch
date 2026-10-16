@@ -1,0 +1,14 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/RrasCfg.h b/generation/WinSDK/RecompiledIdlHeaders/um/RrasCfg.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/RrasCfg.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/RrasCfg.h
+@@ -116,3 +116,4 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -722,4 +723,5 @@
+     MIDL_INTERFACE("66A2DB19-D706-11D0-A37B-00C04FC9DA04")
++    _Win32_SupportedOS_Windows2000_
+     IEAPProviderConfig : public IUnknown
+     {
+     public:

@@ -1,0 +1,24 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/Raseapif.h b/generation/WinSDK/RecompiledIdlHeaders/um/Raseapif.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/Raseapif.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/Raseapif.h
+@@ -20,6 +20,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -688,6 +689,7 @@
+     // registry via the Path value.
+     //
+ 
++    _Win32_SupportedOS_BEGIN_(Windows2000)
+     DWORD APIENTRY RasEapGetInfo(_In_ DWORD dwEapTypeId, _Out_ PPP_EAP_INFO* pEapInfo);
+ 
+     //
+@@ -746,3 +748,4 @@
+         _Outptr_ LPWSTR* ppwszIdentityOut);
++    _Win32_SupportedOS_END_()
+ 
+ #endif /* WINVER >= 0x0500 */

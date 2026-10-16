@@ -1,0 +1,14 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h b/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/NotificationActivationCallback.h
+@@ -68,3 +68,4 @@
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ #if (NTDDI_VERSION >= NTDDI_WIN10)
+@@ -93,4 +94,5 @@
+     MIDL_INTERFACE("53E31837-6600-4A81-9395-75CFFE746F94")
++    _Win32_SupportedOS_10240_
+     INotificationActivationCallback : public IUnknown
+     {
+     public:
