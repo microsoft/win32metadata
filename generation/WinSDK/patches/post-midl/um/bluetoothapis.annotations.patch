@@ -12,7 +12,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h b/generat
 @@ -138,3 +139,6 @@
 +_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(BluetoothFindRadioClose, 0)
++_Win32_RAIIFree_(BluetoothFindRadioClose, -1, 0)
  HBLUETOOTH_RADIO_FIND
  WINAPI
  BluetoothFindFirstRadio(
@@ -37,7 +37,7 @@ diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h b/generat
 @@ -423,3 +433,6 @@
 +_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
-+_Win32_RAIIFree_(BluetoothFindDeviceClose, 0)
++_Win32_RAIIFree_(BluetoothFindDeviceClose, -1, 0)
  HBLUETOOTH_DEVICE_FIND
  WINAPI
  BluetoothFindFirstDevice(
