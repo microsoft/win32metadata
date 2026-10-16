@@ -129,7 +129,7 @@ class Program
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
             var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
-                clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA", "-DWIN32METADATA_CSHARP" }).ToArray();
+                clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA" }).ToArray();
             var configOptions = BuildOptionsFlags(settings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
@@ -141,8 +141,6 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
-            if (parseHeaderAnnotations)
-                translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
             // ── Parse translation unit ──
             // We parse once with our own CXIndex, walk the AST to discover remaps,
@@ -220,7 +218,6 @@ class Program
                     settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes))
                 : null;
             annotations?.PrepareTypedefs();
-            annotations?.EvaluateInvalidValues(translationUnit, sourceFile, clangArgs);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();

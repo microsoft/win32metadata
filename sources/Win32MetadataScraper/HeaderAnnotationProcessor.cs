@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using ClangSharp;
@@ -21,65 +20,29 @@ namespace Win32MetadataScraper
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
         private readonly List<DeclarationFacts> annotatedTypedefs = new();
-        private readonly HashSet<NativeLocation> annotationLocations = new();
-        private readonly HashSet<NativeLocation> ownedMacroLocations = new();
         private readonly HashSet<NamedDecl> projectedDeclarations = new();
         private readonly string generatedNamespace;
-        private readonly TranslationUnit translationUnit;
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
-        private readonly Dictionary<NativeLocation, List<CXSourceRange>> macroExpansions = new();
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
-        private readonly Dictionary<string, CXCursor> macroDefinitions = new(StringComparer.Ordinal);
-        private readonly Dictionary<CXCursor, string[]> macroIdentifiers = new();
-        private readonly Dictionary<CXCursor, bool> macroOwnership = new();
-        private readonly Dictionary<CXCursor, ScopeControl> scopeControls = new();
-        private readonly Dictionary<CXSourceLocation, SupportedOSScope> supportedOSScopes = new();
-        private readonly Dictionary<string, List<SourceFileInstance>> sourceFiles = new(StringComparer.Ordinal);
+        private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
         private readonly HashSet<Cursor> visited = new();
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames)
         {
-            this.translationUnit = translationUnit;
             this.remaps = remaps;
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
-            foreach (var cursor in translationUnit.TranslationUnitDecl.CursorChildren)
-            {
-                if (cursor.CursorKind == CXCursorKind.CXCursor_MacroDefinition)
-                {
-                    macroDefinitions[cursor.Spelling] = cursor.Handle;
-                    macroOwnership.Clear();
-                    scopeControls.Clear();
-                }
-                if (cursor.CursorKind == CXCursorKind.CXCursor_MacroExpansion)
-                {
-                    var location = GetLocation(cursor.Location);
-                    if (!macroExpansions.TryGetValue(location, out var expansions))
-                        macroExpansions[location] = expansions = new();
-                    expansions.Add(cursor.Extent);
-                    var control = GetScopeControl(cursor.Handle.Referenced, new HashSet<CXCursor>());
-                    if (control != ScopeControl.None)
-                        ProcessScopeControl(cursor, control);
-                    else if (IsOwnedMacro(cursor.Spelling) || ReferencesOwnedMacro(cursor.Handle.Referenced, new HashSet<CXCursor>()))
-                        ownedMacroLocations.Add(location);
-                }
-            }
-            foreach (var file in sourceFiles.Values.SelectMany(files => files))
-                if (file.Scopes.Count != 0)
-                    throw Error(GetLocation(file.Scopes.Peek().Begin), "SupportedOS BEGIN requires an END in the same file and include instance.");
             Walk(translationUnit.TranslationUnitDecl);
             MergeRedeclarationFacts();
-            foreach (var location in ownedMacroLocations)
-            {
-                if (!annotationLocations.Contains(location))
-                {
-                    throw Error(location, "Win32 metadata annotation was ignored by Clang or is not attached to a supported declaration.");
-                }
-            }
+            foreach (var association in enumAssociations)
+                if (association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
+                    !declarations.Values.Any(facts => facts.LogicalEnumMembers != null &&
+                        facts.Declaration.Handle.CanonicalCursor == association.Declaration.CanonicalCursor))
+                    throw Error(association.Location, "AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.");
             TransferRecordTypedefFacts();
             foreach (var facts in declarations.Values)
             {
@@ -92,178 +55,137 @@ namespace Win32MetadataScraper
             }
         }
 
-        private static bool IsOwnedMacro(string name)
-            => name == "_WIN32META_ANNOTATION_" || name.StartsWith("_Win32_", StringComparison.Ordinal);
-
         internal void PrepareTypedefs()
         {
             foreach (var facts in annotatedTypedefs)
             {
                 var alias = (TypedefNameDecl)facts.Declaration;
+                if (facts.LogicalEnumMembers != null)
+                    continue;
                 bool primaryRecord = alias.UnderlyingType.CanonicalType is RecordType record && Remap(record.Decl.Name) == Remap(alias.Name);
                 if ((GetFunctionType(alias.UnderlyingType) == null || alias is TypeAliasDecl) && !primaryRecord)
                     remaps.TryAdd(alias.Name, alias.Name);
             }
         }
 
-        internal void EvaluateInvalidValues(TranslationUnit translationUnit, string sourceFile, string[] clangArguments)
+        private HeaderAnnotation ReadAnnotation(Attr attribute, DeclarationFacts facts, NativeLocation location)
         {
-            var evaluations = declarations.Values.Select(facts => facts.AnnotationOwner).Distinct().SelectMany(facts =>
-                facts.Annotations.Where(annotation => annotation.Name == "RAIIFree")
-                    .SelectMany(annotation => annotation.Arguments.Skip(1)
-                        .Select((argument, index) => new InvalidValue(facts, argument, index)))).ToArray();
-            if (evaluations.Length == 0)
-                return;
-
-            var insertions = new Dictionary<string, List<(uint Offset, string Text)>>(StringComparer.Ordinal);
-            var queryLocations = new Dictionary<NamedDecl, NativeLocation>();
-            for (int i = 0; i < evaluations.Length; i++)
+            string payload = HeaderAnnotation.RemoveOwnerPrefix(attribute.Spelling);
+            var arguments = attribute.CursorChildren.ToArray();
+            if (payload == "RAIIFree")
             {
-                var evaluation = evaluations[i];
-                var expanded = evaluation.Facts.Annotations.SingleOrDefault(annotation => annotation.Name == HeaderAnnotation.ExpandedRaiiName);
-                if (expanded == null)
-                    throw Error(evaluation.Facts.Location, "RAIIFree invalid values require declaration-time expansion transport; include win32metadata_annotations.h.");
-                string expression = expanded.Arguments[evaluation.Index + 1];
-                var declaration = evaluation.Facts.Declaration;
-                if (declaration is ParmVarDecl)
-                    declaration = (NamedDecl)declaration.SemanticParentCursor;
-                if (!queryLocations.TryGetValue(declaration, out var start))
-                    queryLocations[declaration] = start = GetCompleteDeclarationStart(declaration);
-                bool classMember = declaration.SemanticParentCursor is RecordDecl;
-                string storage = classMember ? "inline static const" : "static const";
-                string query = $"\nstatic_assert(__is_integral(decltype({expression})) || __is_enum(decltype({expression})) || __is_pointer(decltype({expression})), \"Invalid handle values must be integral, enum, or pointer constants\");\n" +
-                    $"{storage} long long __win32metadata_invalid_{i} = __is_pointer(decltype({expression})) ? (long long)(__INTPTR_TYPE__)({expression}) : (long long)({expression});\n";
-                if (!insertions.TryGetValue(start.File, out var items))
-                    insertions[start.File] = items = new();
-                items.Add((start.Offset, query));
+                if (arguments.Length == 0)
+                    throw Error(location, "RAIIFree requires a cleanup function and optional integral constant arguments.");
+                var cleanup = ReadCleanupReference(arguments[0], location);
+                var values = arguments.Skip(1).Select(argument => ReadInteger(argument, location)).ToArray();
+                facts.InvalidValues.AddRange(values.Select(value => unchecked((long)value)));
+                return new HeaderAnnotation("RAIIFree", new[] { cleanup.Spelling.ToString() }
+                    .Concat(facts.InvalidValues.Select(value => value.ToString(CultureInfo.InvariantCulture))).ToArray());
             }
-
-            unsafe
+            if (payload == "ImportLibrary")
             {
-                var unsavedFiles = new List<CXUnsavedFile>();
-                try
+                if (arguments.Length is < 1 or > 2)
+                    throw Error(location, "ImportLibrary requires a module string and optional export-name string or ordinal.");
+                var values = new List<string> { HeaderAnnotation.Quote(ReadStringArgument(arguments[0], location)) };
+                if (arguments.Length == 2)
                 {
-                    foreach (var insertion in insertions)
+                    string entryPoint;
+                    if (UnwrapArgument(arguments[1]) is StringLiteral)
+                        entryPoint = ReadStringArgument(arguments[1], location);
+                    else
                     {
-                        var file = translationUnit.Handle.GetFile(insertion.Key);
-                        var bytes = translationUnit.Handle.GetFileContents(file, out _);
-                        using var contents = new MemoryStream();
-                        int offset = 0;
-                        foreach (var item in insertion.Value.OrderBy(item => item.Offset))
-                        {
-                            int position = checked((int)item.Offset);
-                            contents.Write(bytes.Slice(offset, position - offset));
-                            contents.Write(Encoding.UTF8.GetBytes(item.Text));
-                            offset = position;
-                        }
-                        contents.Write(bytes[offset..]);
-                        unsavedFiles.Add(CreateUnsavedFile(insertion.Key, contents.ToArray()));
+                        ulong ordinal = ReadInteger(arguments[1], location);
+                        if (ordinal is < 1 or > ushort.MaxValue)
+                            throw Error(location, "An import ordinal must be between 1 and 65535.");
+                        entryPoint = "#" + ordinal.ToString(CultureInfo.InvariantCulture);
                     }
-                    using var index = CXIndex.Create(false, false);
-                    var error = CXTranslationUnit.TryParse(index, sourceFile, clangArguments,
-                        unsavedFiles.ToArray(), CXTranslationUnit_Flags.CXTranslationUnit_None, out var handle);
-                    if (error != CXErrorCode.CXError_Success)
-                        throw Error(evaluations[0].Facts.Location, $"Failed to evaluate invalid values: {error}.");
-                    using var queryUnit = TranslationUnit.GetOrCreate(handle);
-                    for (uint i = 0; i < handle.NumDiagnostics; i++)
-                    {
-                        using var diagnostic = handle.GetDiagnostic(i);
-                        if (diagnostic.Severity is CXDiagnosticSeverity.CXDiagnostic_Error or CXDiagnosticSeverity.CXDiagnostic_Fatal)
-                            throw Error(evaluations[0].Facts.Location, $"Invalid handle expression: {diagnostic.Format(CXDiagnostic.DefaultDisplayOptions)}");
-                    }
-                    var variables = FindQueryVariables(queryUnit.TranslationUnitDecl).ToDictionary(variable => variable.Name);
-                    for (int i = 0; i < evaluations.Length; i++)
-                    {
-                        if (!variables.TryGetValue($"__win32metadata_invalid_{i}", out var variable))
-                            throw Error(evaluations[i].Facts.Location, "Invalid value evaluation declaration was not produced.");
-                        using var result = variable.Handle.Evaluate;
-                        if (result.Handle == IntPtr.Zero || result.Kind != CXEvalResultKind.CXEval_Int)
-                            throw Error(evaluations[i].Facts.Location, $"Invalid value '{evaluations[i].Expression}' is not an integer constant expression.");
-                        evaluations[i].Facts.InvalidValues.Add(result.AsLongLong);
-                    }
+                    values.Add(HeaderAnnotation.Quote(entryPoint));
                 }
-                finally
-                {
-                    foreach (var unsaved in unsavedFiles)
-                        unsaved.Dispose();
-                }
+                return HeaderAnnotation.Parse("ImportLibrary(" + string.Join(",", values) + ")");
             }
+            if (payload == "AssociatedEnum")
+            {
+                if (arguments.Length != 1)
+                    throw Error(location, "AssociatedEnum requires one enum or metadata group type.");
+                var declaration = clang.getTypeDeclaration(arguments[0].Handle.Type);
+                if (declaration.IsNull)
+                    throw Error(location, "AssociatedEnum requires a named native enum or metadata group type.");
+                if (arguments[0] is Expr expression && expression.Type.CanonicalType is EnumType nativeEnum)
+                    declaration = nativeEnum.Decl.Handle;
+                enumAssociations.Add((declaration, location));
+                return new HeaderAnnotation("AssociatedEnum", new[] { Remap(declaration.Spelling.ToString()) });
+            }
+            var annotation = HeaderAnnotation.Parse(payload);
+            if (annotation.Name is "Enum" or "FlagsEnum")
+            {
+                if (facts.Declaration is not TypedefNameDecl alias || !IsEnumStorage(alias.UnderlyingType.CanonicalType.Kind))
+                    throw Error(location, "Enum groups require an integral typedef storage type of at most 64 bits.");
+                if (facts.LogicalEnumMembers != null || arguments.Length != annotation.Arguments.Count)
+                    throw Error(location, "An enum group requires exactly one compiled value for each member name.");
+                string storage = GetManagedType(alias.UnderlyingType, location);
+                facts.LogicalEnumMembers = annotation.Arguments.Zip(arguments, (name, argument) =>
+                    new LogicalEnumMember(name, $"unchecked(({storage}){ReadInteger(argument, location).ToString(CultureInfo.InvariantCulture)}UL)")).ToArray();
+                facts.IsFlagsEnum = annotation.Name == "FlagsEnum";
+            }
+            else if (arguments.Length != 0 || annotation.Name is "RAIIFree" or "ImportLibrary" or "AssociatedEnum")
+                throw Error(location, $"'{annotation.Name}' requires compiler-parsed annotation arguments; include win32metadata_annotations.h.");
+            return annotation;
         }
 
-        private NativeLocation GetCompleteDeclarationStart(NamedDecl declaration)
+        private static Cursor UnwrapArgument(Cursor argument)
         {
-            var start = GetLocation(declaration.Extent.Start);
-            var attributes = declaration.Attrs.Where(attribute => !attribute.IsImplicit)
-                .Select(attribute => GetLocation(attribute.Extent.Start))
-                .Where(location => location.File == start.File && location.Offset < start.Offset).ToArray();
-            if (attributes.Length == 0)
-                return start;
-
-            var file = translationUnit.Handle.GetFile(start.File);
-            var range = CXSourceRange.Create(translationUnit.Handle.GetLocationForOffset(file, 0),
-                translationUnit.Handle.GetLocationForOffset(file, start.Offset));
-            var tokens = translationUnit.Handle.Tokenize(range);
-            try
+            while (argument.CursorKind is CXCursorKind.CXCursor_UnexposedExpr or CXCursorKind.CXCursor_ParenExpr)
             {
-                var prefix = new List<(NativeLocation Location, string Text)>();
-                foreach (var token in tokens)
-                {
-                    if (token.Kind == CXTokenKind.CXToken_Comment)
-                        continue;
-                    using var text = token.GetSpelling(translationUnit.Handle);
-                    prefix.Add((GetLocation(token.GetLocation(translationUnit.Handle)), text.ToString()));
-                }
-                uint boundary = prefix.Where(token => token.Text is ";" or "{" or "}")
-                    .Select(token => token.Location.Offset).DefaultIfEmpty(0u).Max();
-                var first = attributes.Where(location => location.Offset > boundary).OrderBy(location => location.Offset).FirstOrDefault();
-                if (first == null)
-                    return start;
-
-                int squareDepth = 0;
-                NativeLocation open = null;
-                for (int i = 0; i < prefix.Count; i++)
-                {
-                    string text = prefix[i].Text;
-                    if (squareDepth == 0 && text == "[" && i + 1 < prefix.Count && prefix[i + 1].Text == "[")
-                        open = prefix[i].Location;
-                    if (open == null)
-                        continue;
-                    if (text == "[")
-                        squareDepth++;
-                    else if (text == "]")
-                        squareDepth--;
-                    if (squareDepth == 0)
-                    {
-                        if (open.Offset <= first.Offset && first.Offset <= prefix[i].Location.Offset)
-                            return open;
-                        open = null;
-                    }
-                }
-                return first;
+                var children = argument.CursorChildren.ToArray();
+                if (children.Length != 1)
+                    break;
+                argument = children[0];
             }
-            finally
-            {
-                translationUnit.Handle.DisposeTokens(tokens);
-            }
+            return argument;
         }
 
-        private static unsafe CXUnsavedFile CreateUnsavedFile(string filename, ReadOnlySpan<byte> contents)
+        private static CXCursor ReadCleanupReference(Cursor argument, NativeLocation location)
         {
-            var file = CXUnsavedFile.Create(filename, string.Empty);
-            try
+            var references = new HashSet<CXCursor>();
+            var pending = new Stack<Cursor>();
+            pending.Push(argument);
+            while (pending.TryPop(out var cursor))
             {
-                file.Contents = (sbyte*)NativeMemory.Alloc(checked((nuint)contents.Length + 1));
-                contents.CopyTo(new Span<byte>(file.Contents, contents.Length));
-                file.Contents[contents.Length] = 0;
-                file.Length = (nuint)contents.Length;
-                return file;
+                if (cursor is DeclRefExpr)
+                    references.Add(cursor.Handle.Referenced.CanonicalCursor);
+                foreach (var child in cursor.CursorChildren)
+                    pending.Push(child);
             }
-            catch
-            {
-                file.Dispose();
-                throw;
-            }
+            if (references.Count != 1 || references.Single().Kind != CXCursorKind.CXCursor_FunctionDecl)
+                throw Error(location, "RAIIFree requires a reference to a declared native cleanup function.");
+            return references.Single();
         }
+
+        private static string ReadStringArgument(Cursor argument, NativeLocation location)
+        {
+            if (UnwrapArgument(argument) is not StringLiteral literal || literal.Kind != CX_StringKind.CX_SLK_Ordinary)
+                throw Error(location, "Import metadata requires ordinary narrow string literals.");
+            return literal.String;
+        }
+
+        private static ulong ReadInteger(Cursor argument, NativeLocation location)
+        {
+            var type = argument is Expr expression ? expression.Type.CanonicalType : null;
+            if (type is EnumType enumeration)
+                type = enumeration.Decl.IntegerType.CanonicalType;
+            if (type == null || !IsEnumStorage(type.Kind))
+                throw Error(location, "Annotation values must be integral constant expressions of at most 64 bits; use -1, not a pointer-cast INVALID_HANDLE_VALUE.");
+            using var result = argument.Handle.Evaluate;
+            if (result.Handle == IntPtr.Zero || result.Kind != CXEvalResultKind.CXEval_Int)
+                throw Error(location, "Annotation value is not an integral constant expression.");
+            return result.IsUnsignedInt ? result.AsUnsigned : unchecked((ulong)result.AsLongLong);
+        }
+
+        private static bool IsEnumStorage(CXTypeKind kind) => kind is
+            CXTypeKind.CXType_Char_S or CXTypeKind.CXType_SChar or CXTypeKind.CXType_Char_U or CXTypeKind.CXType_UChar or
+            CXTypeKind.CXType_Short or CXTypeKind.CXType_UShort or CXTypeKind.CXType_WChar or
+            CXTypeKind.CXType_Int or CXTypeKind.CXType_UInt or CXTypeKind.CXType_Long or CXTypeKind.CXType_ULong or
+            CXTypeKind.CXType_LongLong or CXTypeKind.CXType_ULongLong;
 
         internal void PrepareProjections(IEnumerable<string> sources)
         {
@@ -290,6 +212,20 @@ namespace Win32MetadataScraper
                     continue;
                 if (!ShouldEmit(alias, facts.Location))
                     continue;
+                if (facts.LogicalEnumMembers != null)
+                {
+                    var logicalEnum = SyntaxFactory.EnumDeclaration(name)
+                        .AddModifiers(SyntaxFactory.Token(SyntaxKind.PublicKeyword))
+                        .AddBaseListTypes(SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName(
+                            GetManagedType(alias.UnderlyingType, facts.Location))))
+                        .AddAttributeLists(GetAttributes(facts).ToArray())
+                        .AddMembers(facts.LogicalEnumMembers.Select(member =>
+                            SyntaxFactory.EnumMemberDeclaration(Remap(member.Name))
+                                .WithEqualsValue(SyntaxFactory.EqualsValueClause(SyntaxFactory.ParseExpression(member.Value)))).ToArray());
+                    members.Add(logicalEnum);
+                    projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
+                    continue;
+                }
                 var functionType = GetFunctionType(alias.UnderlyingType);
                 if (functionType != null)
                 {
@@ -335,53 +271,47 @@ namespace Win32MetadataScraper
                 var location = GetLocation(declaration.Location);
                 var facts = new DeclarationFacts(declaration, location);
                 var occurrences = new HashSet<CXCursor>();
-                foreach (var attribute in declaration.Attrs.Where(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate))
+                // Group carriers must be known before validating annotations on the emitted enum.
+                var attributes = declaration.Attrs.Where(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate)
+                    .OrderBy(attribute =>
+                    {
+                        string payload = HeaderAnnotation.RemoveOwnerPrefix(attribute.Spelling);
+                        return payload.StartsWith("Enum(", StringComparison.Ordinal) ||
+                            payload.StartsWith("FlagsEnum(", StringComparison.Ordinal) ? 0 : 1;
+                    });
+                foreach (var attribute in attributes)
                 {
                     var attributeLocation = GetLocation(attribute.Location);
                     string payload = attribute.Spelling;
-                    bool owned = ownedMacroLocations.Contains(attributeLocation);
-                    if (!HeaderAnnotation.IsKnownPayload(payload) && !owned)
+                    if (!HeaderAnnotation.IsKnownPayload(payload))
                         continue;
-                    annotationLocations.Add(attributeLocation);
                     if (!occurrences.Add(attribute.Handle))
                         continue;
                     HeaderAnnotation annotation;
                     try
                     {
-                        annotation = HeaderAnnotation.Parse(payload);
+                        annotation = ReadAnnotation(attribute, facts, attributeLocation);
                     }
                     catch (FormatException exception)
                     {
                         throw Error(attributeLocation, exception.Message);
                     }
-                    if (annotation.Name == "SupportedOSPlatform")
+                    ValidateTarget(facts, annotation, attributeLocation);
+                    if (annotation.Name != "AssociatedConstant")
                     {
-                        attribute.Location.GetSpellingLocation(out var spellingFile, out _, out _, out _);
-                        // _Pragma spells its attribute in a scratch buffer; a direct macro in the same expansion remains explicit.
-                        if (spellingFile.Handle == IntPtr.Zero && supportedOSScopes.TryGetValue(attribute.Extent.End, out var scope))
+                        var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
+                        if (existing != null)
                         {
-                            var site = GetExpansionSite(declaration.Location);
-                            if (!IsInheritedAnnotation(declaration, attribute.Location) && IsBefore(scope.Begin, declaration.Location) &&
-                                GetLocation(scope.Begin).File == location.File && GetSourceFile(site) == scope.File &&
-                                (facts.SupportedOSScope == null || facts.SupportedOSScope.Depth < scope.Depth))
-                            {
-                                facts.SupportedOSDefault = annotation;
-                                facts.SupportedOSScope = scope;
-                            }
+                            if (annotation.Name != "SupportedOSPlatform")
+                                throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
+                            if (!existing.Arguments.SequenceEqual(annotation.Arguments))
+                                throw Error(attributeLocation, $"Conflicting 'SupportedOSPlatform' annotations on '{declaration.Name}'. Clang scopes accumulate; close the prior scope before changing floors.");
                             continue;
                         }
-                        if (IsInheritedAnnotation(declaration, attribute.Location))
-                            continue;
                     }
-                    if (declaration is not TypeAliasDecl and not EnumConstantDecl && attributeLocation.File == location.File && attributeLocation.Offset > location.Offset)
-                        throw Error(attributeLocation, "Win32 metadata annotations must use prefix placement, not a post-declarator attribute.");
-                    ValidatePlacement(declaration, attributeLocation);
-                    ValidateTarget(facts, annotation, attributeLocation);
-                    if (annotation.Name != "AssociatedConstant" && facts.Annotations.Any(existing => existing.Name == annotation.Name))
-                        throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
                     facts.Annotations.Add(annotation);
                 }
-                if (declaration is ParmVarDecl && HasRetvalComment(declaration))
+                if (declaration is ParmVarDecl && HasLegacyRetvalComment(declaration))
                 {
                     var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
                     ValidateTarget(facts, retval, location);
@@ -396,14 +326,10 @@ namespace Win32MetadataScraper
                 if (declaration is FunctionDecl or ParmVarDecl or FieldDecl or RecordDecl or EnumDecl or EnumConstantDecl or TypedefNameDecl ||
                     IsConstantVariable(declaration))
                 {
-                    var raii = facts.Annotations.SingleOrDefault(annotation => annotation.Name == "RAIIFree");
-                    var expanded = facts.Annotations.SingleOrDefault(annotation => annotation.Name == HeaderAnnotation.ExpandedRaiiName);
-                    if (expanded != null && (raii == null || raii.Arguments.Count != expanded.Arguments.Count))
-                        throw Error(location, "Expanded RAIIFree transport does not match the authored annotation.");
                     declarations[declaration] = facts;
                     if (declaration is TypedefNameDecl alias)
                     {
-                        if (facts.Annotations.Count != 0 || facts.SupportedOSDefault != null)
+                        if (facts.Annotations.Count != 0)
                             annotatedTypedefs.Add(facts);
                         if (GetCallbackOrigin(alias) is TypedefNameDecl origin)
                             callbackOrigins[alias] = origin;
@@ -421,10 +347,8 @@ namespace Win32MetadataScraper
         {
             foreach (var group in declarations.Values.GroupBy(facts => GetNativeIdentity(facts.Declaration)))
             {
-                var explicitOS = group.SelectMany(facts => facts.Annotations)
+                var osValues = group.SelectMany(facts => facts.Annotations)
                     .Where(annotation => annotation.Name == "SupportedOSPlatform").ToArray();
-                var osValues = explicitOS.Length != 0 ? explicitOS
-                    : group.Select(facts => facts.SupportedOSDefault).Where(annotation => annotation != null).ToArray();
                 var supportedOS = osValues.FirstOrDefault();
                 if (osValues.Any(annotation => !annotation.Arguments.SequenceEqual(supportedOS.Arguments)))
                     throw Error(group.First().Location, $"Conflicting 'SupportedOSPlatform' annotations on redeclarations of '{group.First().Declaration.Name}'.");
@@ -447,6 +371,19 @@ namespace Win32MetadataScraper
                     }
                     owner.IsScopedEnum |= facts.IsScopedEnum;
                     owner.IsFlagsEnum |= facts.IsFlagsEnum;
+                    if (facts.InvalidValues.Count != 0)
+                    {
+                        if (owner.InvalidValues.Count != 0 && !owner.InvalidValues.SequenceEqual(facts.InvalidValues))
+                            throw Error(facts.Location, $"Conflicting RAIIFree invalid values on redeclarations of '{facts.Declaration.Name}'.");
+                        if (owner.InvalidValues.Count == 0)
+                            owner.InvalidValues.AddRange(facts.InvalidValues);
+                    }
+                    if (facts.LogicalEnumMembers != null)
+                    {
+                        if (owner.LogicalEnumMembers != null && !owner.LogicalEnumMembers.SequenceEqual(facts.LogicalEnumMembers))
+                            throw Error(facts.Location, $"Conflicting enum group values on redeclarations of '{facts.Declaration.Name}'.");
+                        owner.LogicalEnumMembers = facts.LogicalEnumMembers;
+                    }
                 }
                 if (supportedOS != null)
                     owner.Annotations.Add(supportedOS);
@@ -457,7 +394,7 @@ namespace Win32MetadataScraper
                     facts.InvalidValues = owner.InvalidValues;
                     facts.IsScopedEnum = owner.IsScopedEnum;
                     facts.IsFlagsEnum = owner.IsFlagsEnum;
-                    facts.HasExplicitSupportedOS = explicitOS.Length != 0;
+                    facts.LogicalEnumMembers = owner.LogicalEnumMembers;
                 }
             }
         }
@@ -485,9 +422,10 @@ namespace Win32MetadataScraper
                 "PreserveResult" => function,
                 "SupportedOSPlatform" => function || record || typedef || declaration is EnumDecl or EnumConstantDecl || IsConstantVariable(declaration),
                 "AssociatedEnum" => function || parameter || field,
-                "AssociatedConstant" => declaration is EnumDecl,
-                "AlsoUsableFor" => typedef,
-                "RAIIFree" or HeaderAnnotation.ExpandedRaiiName => function || parameter,
+                "AssociatedConstant" => declaration is EnumDecl || facts.LogicalEnumMembers != null,
+                "Enum" or "FlagsEnum" => typedef,
+                "AlsoUsableFor" => typedef && facts.LogicalEnumMembers == null,
+                "RAIIFree" => function || parameter,
                 "Retained" or "ContainsInteriorPointers" or "RetVal" => parameter,
                 _ => false,
             };
@@ -550,18 +488,10 @@ namespace Win32MetadataScraper
                 {
                     var existing = recordFacts.Annotations.SingleOrDefault(item => item.Name == annotation.Name);
                     if (existing != null && !existing.Arguments.SequenceEqual(annotation.Arguments))
-                    {
-                        if (annotation.Name != "SupportedOSPlatform" || recordFacts.HasExplicitSupportedOS == facts.HasExplicitSupportedOS)
-                            throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on a record and its typedef.");
-                        if (!facts.HasExplicitSupportedOS)
-                            continue;
-                        recordFacts.Annotations.Remove(existing);
-                        existing = null;
-                    }
+                        throw Error(facts.Location, $"Conflicting '{annotation.Name}' annotations on a record and its typedef.");
                     if (existing == null)
                         recordFacts.Annotations.Add(annotation);
                 }
-                recordFacts.HasExplicitSupportedOS |= facts.HasExplicitSupportedOS;
                 projectedDeclarations.Add(facts.AnnotationOwner.Declaration);
             }
         }
@@ -581,7 +511,8 @@ namespace Win32MetadataScraper
                 {
                     case "SetLastError":
                     case "ImportLibrary":
-                    case HeaderAnnotation.ExpandedRaiiName:
+                    case "Enum":
+                    case "FlagsEnum":
                         continue;
                     case "SupportedOSPlatform":
                         name += "(" + HeaderAnnotation.Quote(HeaderAnnotation.ReadString(annotation.Arguments[0])) + ")";
@@ -609,18 +540,6 @@ namespace Win32MetadataScraper
             var declaration = SyntaxFactory.ParseCompilationUnit($"[{(returnTarget ? "return: " : "")}{text}] public class C {{ }}")
                 .Members.OfType<ClassDeclarationSyntax>().Single();
             return declaration.AttributeLists.Single();
-        }
-
-        private static IEnumerable<VarDecl> FindQueryVariables(Cursor cursor)
-        {
-            if (cursor is VarDecl variable && variable.Name.StartsWith("__win32metadata_invalid_", StringComparison.Ordinal))
-                yield return variable;
-            foreach (var child in cursor.CursorChildren)
-            {
-                if (child.Handle.IsDeclaration || child.Handle.IsTranslationUnit)
-                    foreach (var nested in FindQueryVariables(child))
-                        yield return nested;
-            }
         }
 
         private bool ShouldEmit(NamedDecl declaration, NativeLocation location)
@@ -787,217 +706,14 @@ namespace Win32MetadataScraper
             return GetManagedType(type, location);
         }
 
-        private bool ReferencesOwnedMacro(CXCursor definition, HashSet<CXCursor> visiting)
-        {
-            if (definition.IsNull)
-                return false;
-            if (macroOwnership.TryGetValue(definition, out bool owned))
-                return owned;
-            if (!visiting.Add(definition))
-                return false;
-            try
-            {
-                owned = GetMacroIdentifiers(definition).Any(name => IsOwnedMacro(name) ||
-                    (macroDefinitions.TryGetValue(name, out var nested) && ReferencesOwnedMacro(nested, visiting)));
-                if (owned || visiting.Count == 1)
-                    macroOwnership[definition] = owned;
-                return owned;
-            }
-            finally
-            {
-                visiting.Remove(definition);
-            }
-        }
-
-        private string[] GetMacroIdentifiers(CXCursor definition)
-        {
-            if (macroIdentifiers.TryGetValue(definition, out var identifiers))
-                return identifiers;
-            var tokens = translationUnit.Handle.Tokenize(definition.Extent);
-            try
-            {
-                var names = new List<string>();
-                foreach (var token in tokens)
-                    if (token.Kind == CXTokenKind.CXToken_Identifier)
-                    {
-                        using var spelling = token.GetSpelling(translationUnit.Handle);
-                        names.Add(spelling.ToString());
-                    }
-                return macroIdentifiers[definition] = names.Skip(1).ToArray();
-            }
-            finally
-            {
-                translationUnit.Handle.DisposeTokens(tokens);
-            }
-        }
-
-        private ScopeControl GetScopeControl(CXCursor definition, HashSet<CXCursor> visiting)
-        {
-            if (definition.IsNull)
-                return ScopeControl.None;
-            if (scopeControls.TryGetValue(definition, out var cached))
-                return cached;
-            if (!visiting.Add(definition))
-                return ScopeControl.None;
-            try
-            {
-                if (definition.Spelling.ToString() == "_Win32_SupportedOS_BEGIN_")
-                    return ScopeControl.Begin;
-                if (definition.Spelling.ToString() == "_Win32_SupportedOS_END_")
-                    return ScopeControl.End;
-                var control = ScopeControl.None;
-                foreach (string name in GetMacroIdentifiers(definition))
-                    if (macroDefinitions.TryGetValue(name, out var nested))
-                        control |= GetScopeControl(nested, visiting);
-                return scopeControls[definition] = control;
-            }
-            finally
-            {
-                visiting.Remove(definition);
-            }
-        }
-
-        private void ProcessScopeControl(Cursor cursor, ScopeControl control)
-        {
-            var file = GetSourceFile(cursor.Location);
-            if (control == ScopeControl.Begin)
-            {
-                var scope = new SupportedOSScope(file, cursor.Location, file.Scopes.Count);
-                file.Scopes.Push(scope);
-                supportedOSScopes.Add(cursor.Extent.End, scope);
-            }
-            else if (control == ScopeControl.End)
-            {
-                if (file.Scopes.Count == 0)
-                    throw Error(GetLocation(cursor.Location), "SupportedOS END has no BEGIN in the same file and include instance.");
-                file.Scopes.Pop();
-            }
-            else
-                throw Error(GetLocation(cursor.Location), "Expand SupportedOS BEGIN and END as separate scope controls.");
-        }
-
-        private CXSourceLocation GetExpansionSite(CXSourceLocation location)
-        {
-            if (macroExpansions.TryGetValue(GetLocation(location), out var expansions))
-                for (int i = expansions.Count - 1; i >= 0; i--)
-                    if (expansions[i].Start == location || IsBefore(expansions[i].Start, location))
-                        return expansions[i].Start;
-            return location;
-        }
-
-        private SourceFileInstance GetSourceFile(CXSourceLocation site)
-        {
-            var location = GetLocation(site);
-            if (!sourceFiles.TryGetValue(location.File, out var instances))
-                sourceFiles[location.File] = instances = new();
-            foreach (var instance in instances)
-            {
-                var previous = instance.LastLocation;
-                if (site != previous)
-                {
-                    uint offset = GetLocation(previous).Offset;
-                    var range = offset < location.Offset ? CXSourceRange.Create(previous, site) : CXSourceRange.Create(site, previous);
-                    // Tokenization cannot cross Clang file IDs, even for repeated includes of the same physical file.
-                    var tokens = translationUnit.Handle.Tokenize(range);
-                    try
-                    {
-                        if (tokens.Length == 0)
-                            continue;
-                    }
-                    finally
-                    {
-                        translationUnit.Handle.DisposeTokens(tokens);
-                    }
-                }
-                instance.LastLocation = site;
-                return instance;
-            }
-            var created = new SourceFileInstance(site);
-            instances.Add(created);
-            return created;
-        }
-
-        private static bool IsBefore(CXSourceLocation left, CXSourceLocation right)
-            => clang.isBeforeInTranslationUnit(left, right) != 0;
-
-        private static bool IsInheritedAnnotation(NamedDecl declaration, CXSourceLocation location)
-        {
-            for (var previous = declaration.Handle.PreviousDecl; !previous.IsNull; previous = previous.PreviousDecl)
-                for (uint i = 0; i < previous.NumAttrs; i++)
-                    if (previous.GetAttr(i).Location == location)
-                        return true;
-            return false;
-        }
-
-        private void ValidatePlacement(NamedDecl declaration, NativeLocation annotation)
-        {
-            if (declaration is RecordDecl or EnumDecl or EnumConstantDecl or TypeAliasDecl)
-                return;
-            var start = GetLocation(declaration.Extent.Start);
-            if (start.File != annotation.File || annotation.Offset <= start.Offset)
-                return;
-            var attributeLocations = declaration.Attrs.Select(attribute => GetLocation(attribute.Location)).ToHashSet();
-            var prefixMacros = macroExpansions.Where(item => attributeLocations.Contains(item.Key))
-                .SelectMany(item => item.Value.Select(range => (Start: item.Key, End: GetLocation(range.End)))).ToArray();
-            var range = CXSourceRange.Create(declaration.Extent.Start, declaration.Location);
-            var tokens = translationUnit.Handle.Tokenize(range);
-            try
-            {
-                int attributeDepth = 0;
-                int squareDepth = 0;
-                bool rawAttribute = false;
-                foreach (var token in tokens)
-                {
-                    var location = GetLocation(token.GetLocation(translationUnit.Handle));
-                    if (token.Kind == CXTokenKind.CXToken_Comment || prefixMacros.Any(macro =>
-                        macro.Start.File == location.File && location.Offset >= macro.Start.Offset && location.Offset < macro.End.Offset))
-                        continue;
-                    using var text = token.GetSpelling(translationUnit.Handle);
-                    string spelling = text.ToString();
-                    if (squareDepth != 0)
-                    {
-                        if (spelling == "[")
-                            squareDepth++;
-                        else if (spelling == "]")
-                            squareDepth--;
-                        continue;
-                    }
-                    if (!rawAttribute && spelling == "[")
-                    {
-                        squareDepth = 1;
-                        continue;
-                    }
-                    if (spelling is "__declspec" or "__attribute__")
-                    {
-                        rawAttribute = true;
-                        continue;
-                    }
-                    if (rawAttribute)
-                    {
-                        if (spelling == "(")
-                            attributeDepth++;
-                        else if (spelling == ")" && --attributeDepth == 0)
-                            rawAttribute = false;
-                        continue;
-                    }
-                    if (annotation.Offset > location.Offset)
-                        throw Error(annotation, "Win32 metadata annotations must precede the complete declaration type or typedef, not occur inside its declarator.");
-                    break;
-                }
-            }
-            finally
-            {
-                translationUnit.Handle.DisposeTokens(tokens);
-            }
-        }
-
-        private bool HasRetvalComment(NamedDecl declaration)
+        // Existing generated SDK headers still need this bridge until their original IDL is prepared with retval SAL.
+        private bool HasLegacyRetvalComment(NamedDecl declaration)
         {
             var start = GetLocation(declaration.Extent.Start);
             if (start.File.Length == 0)
                 return false;
-            var file = translationUnit.Handle.GetFile(start.File);
-            var contents = translationUnit.Handle.GetFileContents(file, out _);
+            var file = declaration.TranslationUnit.Handle.GetFile(start.File);
+            var contents = declaration.TranslationUnit.Handle.GetFileContents(file, out _);
             int position = checked((int)start.Offset);
             while (position > 0 && char.IsWhiteSpace((char)contents[position - 1]))
                 position--;
@@ -1012,6 +728,7 @@ namespace Win32MetadataScraper
             string comment = Encoding.UTF8.GetString(contents.Slice(position - 2, end - position + 2));
             return comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase);
         }
+
         private static NativeLocation GetLocation(CXSourceLocation location)
         {
             location.GetExpansionLocation(out var file, out uint line, out uint column, out uint offset);
@@ -1023,30 +740,7 @@ namespace Win32MetadataScraper
             => new($"{location.File}({location.Line},{location.Column})", message);
 
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
-        private sealed record InvalidValue(DeclarationFacts Facts, string Expression, int Index);
-
-        [Flags]
-        private enum ScopeControl { None = 0, Begin = 1, End = 2 }
-
-        private sealed class SourceFileInstance
-        {
-            internal SourceFileInstance(CXSourceLocation location) => LastLocation = location;
-            internal CXSourceLocation LastLocation { get; set; }
-            internal Stack<SupportedOSScope> Scopes { get; } = new();
-        }
-
-        private sealed class SupportedOSScope
-        {
-            internal SupportedOSScope(SourceFileInstance file, CXSourceLocation begin, int depth)
-            {
-                File = file;
-                Begin = begin;
-                Depth = depth;
-            }
-            internal SourceFileInstance File { get; }
-            internal CXSourceLocation Begin { get; }
-            internal int Depth { get; }
-        }
+        private sealed record LogicalEnumMember(string Name, string Value);
 
         private sealed class DeclarationFacts
         {
@@ -1063,9 +757,7 @@ namespace Win32MetadataScraper
             internal List<long> InvalidValues { get; set; } = new();
             internal bool IsScopedEnum { get; set; }
             internal bool IsFlagsEnum { get; set; }
-            internal HeaderAnnotation SupportedOSDefault { get; set; }
-            internal SupportedOSScope SupportedOSScope { get; set; }
-            internal bool HasExplicitSupportedOS { get; set; }
+            internal LogicalEnumMember[] LogicalEnumMembers { get; set; }
         }
 
         private sealed class ProjectionRewriter : CSharpSyntaxRewriter
@@ -1192,8 +884,17 @@ namespace Win32MetadataScraper
                     var arguments = import.ArgumentList.Arguments;
                     var module = facts.Annotations.SingleOrDefault(annotation => annotation.Name == "ImportLibrary");
                     if (module != null)
+                    {
                         arguments = arguments.Replace(arguments[0], SyntaxFactory.AttributeArgument(
                             SyntaxFactory.LiteralExpression(SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(HeaderAnnotation.ReadString(module.Arguments[0])))));
+                        if (module.Arguments.Count == 2)
+                        {
+                            arguments = SyntaxFactory.SeparatedList(arguments.Where(argument => argument.NameEquals?.Name.Identifier.ValueText != "EntryPoint"));
+                            arguments = arguments.Add(SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
+                                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(HeaderAnnotation.ReadString(module.Arguments[1]))))
+                                .WithNameEquals(SyntaxFactory.NameEquals("EntryPoint")));
+                        }
+                    }
                     if (facts.Annotations.Any(annotation => annotation.Name == "SetLastError"))
                     {
                         arguments = SyntaxFactory.SeparatedList(arguments.Where(argument => argument.NameEquals?.Name.Identifier.ValueText != "SetLastError"));
