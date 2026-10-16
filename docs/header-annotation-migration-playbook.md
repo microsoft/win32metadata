@@ -609,3 +609,12 @@ own actual image grade before queued owner payloads are admitted.
 diagnostic is not an accepted control, and no field sidecar is removed by this
 synchronization. Native field activation, fresh physical dependency closure and
 final full-SDK image/CI acceptance remain separate gates.
+
+Selected-image assembly checks every fresh input before removing any frozen
+source. It replaces the selected partitions' entire common/x86/x64/arm64 file
+set, preserves unselected and non-header bytes, and records the exact removed
+paths in `removedBaselineHeaderSources`. The existing preparation-test fixture
+exercises architecture-shape changes, missing-input safety and overlapping-root
+rejection against the actual helper function. This corrects selected-source
+replacement, not stale unselected dependencies: the Network layer still needs
+a fresh canonical SDK scrape for its full physical include closure.

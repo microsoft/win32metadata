@@ -76,6 +76,40 @@ function Get-SelectedInputs([string]$Obj, [string[]]$Overlays) {
     })
 }
 
+function Set-SelectedHeaderSources([string]$SelectedGenerated, [string]$Generated,
+    [string[]]$Partitions, [string[]]$Overlays) {
+    $SelectedGenerated = [IO.Path]::GetFullPath($SelectedGenerated).TrimEnd('\')
+    $Generated = [IO.Path]::GetFullPath($Generated).TrimEnd('\')
+    if ($SelectedGenerated.Equals($Generated, [StringComparison]::OrdinalIgnoreCase) -or
+        $SelectedGenerated.StartsWith("$Generated\", [StringComparison]::OrdinalIgnoreCase) -or
+        $Generated.StartsWith("$SelectedGenerated\", [StringComparison]::OrdinalIgnoreCase)) {
+        throw 'Selected and assembled generated-source roots must not overlap.'
+    }
+    foreach ($relative in $Overlays) {
+        if (![IO.File]::Exists("$SelectedGenerated\$relative")) {
+            throw "The selected header source is missing: $relative"
+        }
+    }
+
+    $removed = [Collections.Generic.List[string]]::new()
+    foreach ($partition in $Partitions) {
+        foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
+            $relative = "$architecture\$partition.cs"
+            $target = "$Generated\$relative"
+            if ([IO.File]::Exists($target)) {
+                [IO.File]::Delete($target)
+                $removed.Add($relative)
+            }
+        }
+    }
+    foreach ($relative in $Overlays) {
+        $target = "$Generated\$relative"
+        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
+        [IO.File]::Copy("$SelectedGenerated\$relative", $target)
+    }
+    return ,$removed.ToArray()
+}
+
 $sourceCommit = & git -C $repo rev-parse HEAD
 if ($LASTEXITCODE -ne 0) {
     throw 'The producer commit could not be resolved.'
@@ -247,9 +281,7 @@ try {
     [IO.Directory]::CreateDirectory($obj) | Out-Null
     Copy-Item -LiteralPath $oldGenerated -Destination $obj -Recurse
     $generated = "$obj\generated"
-    foreach ($path in $overlays) {
-        [IO.File]::Copy("$selectedObj\generated\$path", "$generated\$path", $true)
-    }
+    $removedBaselineHeaderSources = Set-SelectedHeaderSources "$selectedObj\generated" $generated $partitions $overlays
     foreach ($name in @('filtered.headers.generated.rsp', 'filtered.constants.generated.rsp', 'filtered.emitter.generated.rsp')) {
         if (Test-Path -LiteralPath "$selectedObj\generated\$name") {
             [IO.File]::Copy("$selectedObj\generated\$name", "$generated\$name", $true)
@@ -321,6 +353,7 @@ try {
         preparationRecipeSha256 = Get-Sha256 $recipePath
         selectedPartitions = $partitions
         overlaidHeaderSources = $overlays
+        removedBaselineHeaderSources = $removedBaselineHeaderSources
         repeatedSelectionInputs = $repeatedInputs
         sourceCommit = $sourceCommit
         toolFiles = $toolFiles

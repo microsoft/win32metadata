@@ -336,6 +336,17 @@ namespace Win32MetadataScraperTests
                 "CLI PreserveSig set; signature and method flags unchanged.");
         }
 
+        [MigrationFact("WINHTTP_MIGRATION_PRIOR_CHECKPOINT")]
+        public void QualifiedToolingSynchronizationPreservesTheAcceptedOwningCheckpoint()
+        {
+            string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_PRIOR_CHECKPOINT");
+            Assert.Equal("A8017542A473F502837A488628431B6D11B325C6CABAAA1F674A3C9176711199",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
+            using var accepted = Open("WINHTTP_MIGRATION_PRIOR_CHECKPOINT");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            AssertEveryPhysicalTypeUnchanged(accepted.Reader, current.Reader, "accepted owning checkpoint");
+        }
+
         [MigrationFact("WINHTTP_MIGRATION_ACCEPTED")]
         public void ScopedSupportedOSPreservesEveryAcceptedPhysicalType()
         {
