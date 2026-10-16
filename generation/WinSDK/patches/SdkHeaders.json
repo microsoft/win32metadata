@@ -315,6 +315,66 @@
       "sourceSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\emi.h",
       "sdkSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305"
+    },
+    {
+      "path": "um\\wcnapi.h",
+      "sourceSha256": "071CBD5761C166CC48CB8AD559E9B794CF3A02ADC1D34EB3B7C64F854C47B34A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcnapi.h",
+      "sdkSha256": "071CBD5761C166CC48CB8AD559E9B794CF3A02ADC1D34EB3B7C64F854C47B34A"
+    },
+    {
+      "path": "um\\WcnTypes.h",
+      "sourceSha256": "4D72A8E38AF50C110BD68C4A863936F92EC97F936403E7AA02CFBEDCB07A2C99",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WcnTypes.h",
+      "sdkSha256": "4D72A8E38AF50C110BD68C4A863936F92EC97F936403E7AA02CFBEDCB07A2C99"
+    },
+    {
+      "path": "um\\WcnDevice.h",
+      "sourceSha256": "54AD4BAD1B3326E46E6CAB2DDDEDA117B9AC6749BEDB234B11E78CC935225588",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WcnDevice.h",
+      "sdkSha256": "54AD4BAD1B3326E46E6CAB2DDDEDA117B9AC6749BEDB234B11E78CC935225588"
+    },
+    {
+      "path": "um\\wcnfunctiondiscoverykeys.h",
+      "sourceSha256": "2ADA6D7422140E198EFC405962B7D74FB8206FFE9270FB5C9DA10C304F81590D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wcnfunctiondiscoverykeys.h",
+      "sdkSha256": "2ADA6D7422140E198EFC405962B7D74FB8206FFE9270FB5C9DA10C304F81590D"
+    },
+    {
+      "path": "um\\fci.h",
+      "sourceSha256": "91A44645F72D776E4E0FCF8F97EA53A9BF73F356CD5ADFFCCB79316A75942B37",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fci.h",
+      "sdkSha256": "91A44645F72D776E4E0FCF8F97EA53A9BF73F356CD5ADFFCCB79316A75942B37"
+    },
+    {
+      "path": "um\\fdi_fci_types.h",
+      "sourceSha256": "27A1F6F7728F5DB64D11E434D101819D646CA49270930606BB76C7989EBE0254",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fdi_fci_types.h",
+      "sdkSha256": "27A1F6F7728F5DB64D11E434D101819D646CA49270930606BB76C7989EBE0254"
+    },
+    {
+      "path": "um\\fdi.h",
+      "sourceSha256": "F85A2D27CB0F286EA6CB2964CE81F28F58971FE0E40581CD7540437229C8D8D3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fdi.h",
+      "sdkSha256": "F85A2D27CB0F286EA6CB2964CE81F28F58971FE0E40581CD7540437229C8D8D3"
+    },
+    {
+      "path": "um\\MDMRegistration.h",
+      "sourceSha256": "9CED99DB4C56E2AF8F8A77437EE1E657CE904F9383406E26E893F98D5DFD3233",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\MDMRegistration.h",
+      "sdkSha256": "9CED99DB4C56E2AF8F8A77437EE1E657CE904F9383406E26E893F98D5DFD3233"
+    },
+    {
+      "path": "um\\mdmlocalmanagement.h",
+      "sourceSha256": "22B6B2BF8C61EC7A2CF4B961AE3F9E378CA338C11F223D010B42CD8466C7F47D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mdmlocalmanagement.h",
+      "sdkSha256": "22B6B2BF8C61EC7A2CF4B961AE3F9E378CA338C11F223D010B42CD8466C7F47D"
+    },
+    {
+      "path": "um\\davclnt.h",
+      "sourceSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\davclnt.h",
+      "sdkSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132"
     }
   ],
   "partitions": [
@@ -360,7 +420,11 @@
     "Dwm",
     "Wer",
     "Wec",
-    "Power"
+    "Power",
+    "Wcn",
+    "Cabinets",
+    "MdmReg",
+    "WebDav"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -409,6 +473,10 @@
     "post-midl\\um\\evcoll.annotations.patch",
     "post-midl\\um\\powrprof.annotations.patch",
     "post-midl\\um\\powersetting.annotations.patch",
-    "post-midl\\um\\powerbase.annotations.patch"
+    "post-midl\\um\\powerbase.annotations.patch",
+    "post-midl\\um\\wcndevice.annotations.patch",
+    "post-midl\\um\\fdi.annotations.patch",
+    "post-midl\\um\\mdmregistration.annotations.patch",
+    "post-midl\\um\\davclnt.annotations.patch"
   ]
 }

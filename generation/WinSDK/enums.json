@@ -13456,28 +13456,6 @@
     ]
   },
   {
-    "name": "FDICREATE_CPU_TYPE",
-    "members": [
-      {
-        "name": "cpuUNKNOWN"
-      },
-      {
-        "name": "cpu80286",
-        "value": "0"
-      },
-      {
-        "name": "cpu80386",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "FDICreate",
-        "parameter": "cpuType"
-      }
-    ]
-  },
-  {
     "name": "FONT_OUTPUT_PRECISION",
     "type": "byte",
     "members": [

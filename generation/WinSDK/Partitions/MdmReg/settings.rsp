@@ -3,3 +3,5 @@
 <IncludeRoot>/um/mdmlocalmanagement.h
 --namespace
 Windows.Win32.Management.MobileDeviceManagementRegistration
+--config
+parse-win32-annotations

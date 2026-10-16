@@ -75,6 +75,12 @@ static_assert(INTERNET_SCHEME_SOCKS == 4);
             Assert.NotEmpty(headers);
             string checks = partition switch
             {
+                "Cabinets" => @"
+static_assert(cpuUNKNOWN == -1);
+static_assert(cpu80286 == 0);
+static_assert(cpu80386 == 1);
+static_assert(sizeof(int) == 4);
+",
                 "ApplicationVerifier" => @"
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);

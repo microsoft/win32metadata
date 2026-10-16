@@ -618,3 +618,45 @@ exercises architecture-shape changes, missing-input safety and overlapping-root
 rejection against the actual helper function. This corrects selected-source
 replacement, not stale unselected dependencies: the Network layer still needs
 a fresh canonical SDK scrape for its full physical include closure.
+
+## Parallel small API patch input
+
+The Wcn, Cabinets, MdmReg and WebDav input relocates 28 existing emitted OS
+floors through four physical header patches. The two Wcn interface floors stay
+direct annotations. The four FDI functions and eleven WebDav functions use
+bounded same-floor scopes; MdmReg uses three scopes plus direct annotations to
+avoid assigning floors to intervening, previously unannotated functions.
+
+Cabinets also relocates the existing unscoped, nonflags `FDICREATE_CPU_TYPE`,
+preserving signed 32-bit storage and member order/values `cpuUNKNOWN = -1`,
+`cpu80286 = 0`, `cpu80386 = 1`. Native macros are restored after the metadata-only
+enum declaration. `FDICreate.cpuType` remains native `int` plus its existing enum
+association rather than a substituted native enum. The two exact declaration
+expectations describe that representation change, not a new enum identity.
+
+The recipe pins all ten owner-cluster headers to matching selected-SDK
+preimages; only four are patched. Generated DLL mappings, callback identities,
+SAL, ABI and unrelated authored settings stay unchanged. The adjacent manual
+`RegisterDeviceDualEnrollMmpcUsingAADDeviceCredentials` import row has no
+declaration in these selected headers and remains explicitly unbound rather than
+being recreated. Global native field-array inference remains absent/default-off.
+
+The private handoff is bounded patch-production evidence, not a final full-image grade.
+Artifacts under `artifacts\parallel-small-api-migration` separate unmodified
+parser activation, isolated owner controls and combined-recipe preparation.
+Its private combined recipe prepared and reused its immutable cache successfully.
+Bounded native and scraper controls used only these four patches because its
+historical inherited patches still referenced `_Windows_SupportedOS_*`.
+The owning integration now inherits qualified `c5879a77`/`43af342a` and applies
+the canonical spelling overlay to its inherited patches. The private handoff
+does not qualify the combined owning recipe or its physical include closure.
+
+The source controls separately check OS targets/payloads, their qualified
+attribute spelling/order and removal of an unused versioning import. Four
+`FDIDECRYPT` anonymous-record `NativeTypeName` coordinates move by one line
+after the new include; that attribute is not emitted into the winmd. These
+source details are not additional authored facts or a full-image grade.
+
+Broad physical closure, final OLD/control/NEW images and exact-head full-SDK CI
+remain integration-owner gates after ordered tooling/pilot adoption. Consumer
+compatibility remains **UNVERIFIED**.
