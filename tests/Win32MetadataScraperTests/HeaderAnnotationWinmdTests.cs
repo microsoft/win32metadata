@@ -104,6 +104,62 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
 ";
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void SupportedOSOnConstantsPreservesIndividualTargets(string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+enum _Win32_SupportedOS_Windows7_ REG_NOTIFY_FILTER {
+    REG_NOTIFY_DEFAULT = 0,
+    REG_NOTIFY_THREAD_AGNOSTIC _Win32_SupportedOS_Windows8_ = 0x10000000,
+    REG_NOTIFY_AFTER = 1
+};
+_Win32_SupportedOS_Windows8_ const unsigned CONSTANT_VALUE = 42;
+const unsigned CONSTANT_AFTER = 43;
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var type = FindType(reader, "REG_NOTIFY_FILTER");
+            var storage = type.GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "value__");
+            Assert.Equal("Int32", storage.DecodeSignature(new SignatureNames(), null));
+            var fields = type.GetFields().Select(reader.GetFieldDefinition)
+                .Where(field => reader.GetString(field.Name) != "value__").ToArray();
+            Assert.All(fields, field => Assert.Equal(ConstantTypeCode.Int32, reader.GetConstant(field.GetDefaultValue()).TypeCode));
+            Assert.Equal(new[] { "REG_NOTIFY_DEFAULT", "REG_NOTIFY_THREAD_AGNOSTIC", "REG_NOTIFY_AFTER" },
+                fields.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new[] { 0, 0x10000000, 1 }, fields.Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32()));
+            var constants = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "CONSTANT_VALUE", "CONSTANT_AFTER" },
+                constants.Select(field => reader.GetString(field.Name)));
+            Assert.All(constants, field => Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
+            Assert.Equal(new uint[] { 42, 43 }, constants.Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32()));
+            if (annotationsEnabled)
+            {
+                AssertStringAttribute(reader, type.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+                AssertStringAttribute(reader, fields[1].GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows8.0");
+                AssertStringAttribute(reader, constants[0].GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows8.0");
+            }
+            else
+            {
+                AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                AssertDoesNotHaveAttribute(reader, fields[1].GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                AssertDoesNotHaveAttribute(reader, constants[0].GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            }
+            AssertDoesNotHaveAttribute(reader, fields[0].GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            AssertDoesNotHaveAttribute(reader, fields[2].GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            AssertDoesNotHaveAttribute(reader, constants[1].GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]

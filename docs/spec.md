@@ -215,6 +215,13 @@ Native field element-count inference is disabled by default. The emitter's globa
 `[NativeArrayInfo(CountConst = ...)]` for nonnegative constant counts. Scalar
 access spans do not become array attributes. Parameter SAL processing is unchanged.
 
+### SupportedOS declaration placement
+
+The `_Win32_SupportedOS_*_` macros support individual enum members using postfix
+placement, for example `Value _Win32_SupportedOS_Windows8_ = 1`. Const-qualified
+native variables use prefix placement. A member's OS floor does not change the
+enum's floor or annotate its other members.
+
 ### Custom metadata annotations (`w32m:` prefix)
 
 Additional metadata that isn't in the SDK headers today can be expressed as
