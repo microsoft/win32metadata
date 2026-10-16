@@ -255,6 +255,66 @@
       "sourceSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\devfiltertypes.h",
       "sdkSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896"
+    },
+    {
+      "path": "um\\dwmapi.h",
+      "sourceSha256": "CB7AA3810F0676539FB8222D70A04D3F934D0ED0E7CA226531820C650FF6E314",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwmapi.h",
+      "sdkSha256": "CB7AA3810F0676539FB8222D70A04D3F934D0ED0E7CA226531820C650FF6E314"
+    },
+    {
+      "path": "um\\WerApi.h",
+      "sourceSha256": "0CF852DAF581826BEB6F5D3C3F60B759E143B72CA958C74B7057F5003F546F46",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\WerApi.h",
+      "sdkSha256": "0CF852DAF581826BEB6F5D3C3F60B759E143B72CA958C74B7057F5003F546F46"
+    },
+    {
+      "path": "um\\ErrorRep.h",
+      "sourceSha256": "2EEB745D0BE079168310A031514C04AAD7C2E818D762069EDB41B34C67B1E8A5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ErrorRep.h",
+      "sdkSha256": "2EEB745D0BE079168310A031514C04AAD7C2E818D762069EDB41B34C67B1E8A5"
+    },
+    {
+      "path": "um\\EvColl.h",
+      "sourceSha256": "F50C9DBCB7B7B52C5171A77DA8779AF378304AB344E7B30D909EF32D909763EB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\EvColl.h",
+      "sdkSha256": "F50C9DBCB7B7B52C5171A77DA8779AF378304AB344E7B30D909EF32D909763EB"
+    },
+    {
+      "path": "um\\powrprof.h",
+      "sourceSha256": "2075A213F792A8206C510E26D94A81FF4E1A59F0168A3FD900822D14E863CEB1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powrprof.h",
+      "sdkSha256": "2075A213F792A8206C510E26D94A81FF4E1A59F0168A3FD900822D14E863CEB1"
+    },
+    {
+      "path": "um\\powersetting.h",
+      "sourceSha256": "68FDCDB5586156AE65DE15738FF040C5FD303B5EF97CDC7EE448D96EEC0488E6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powersetting.h",
+      "sdkSha256": "68FDCDB5586156AE65DE15738FF040C5FD303B5EF97CDC7EE448D96EEC0488E6"
+    },
+    {
+      "path": "um\\powerbase.h",
+      "sourceSha256": "66082F57FF576850899FA3DEB4779C0B762163A70946D0BE4DF78F3A2A506FB2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\powerbase.h",
+      "sdkSha256": "66082F57FF576850899FA3DEB4779C0B762163A70946D0BE4DF78F3A2A506FB2"
+    },
+    {
+      "path": "shared\\poclass.h",
+      "sourceSha256": "77D0D1F11EC072568818F4D82217EF22BADBD39747FF2729553A7F619C27CE31",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\poclass.h",
+      "sdkSha256": "77D0D1F11EC072568818F4D82217EF22BADBD39747FF2729553A7F619C27CE31"
+    },
+    {
+      "path": "shared\\batclass.h",
+      "sourceSha256": "C2F7DF9B22D2C2C606805AF85C08327AC424F409F639DC0670DEF6F177BCC451",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\batclass.h",
+      "sdkSha256": "C2F7DF9B22D2C2C606805AF85C08327AC424F409F639DC0670DEF6F177BCC451"
+    },
+    {
+      "path": "shared\\emi.h",
+      "sourceSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\emi.h",
+      "sdkSha256": "7C9E06256A91F7D2B0F77FAC8FC6FE04934FBC615147CE1945A0FBA7BB25C305"
     }
   ],
   "partitions": [
@@ -296,7 +356,11 @@
     "WinSock",
     "Bluetooth",
     "Hid",
-    "DeviceQuery"
+    "DeviceQuery",
+    "Dwm",
+    "Wer",
+    "Wec",
+    "Power"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -338,6 +402,13 @@
     "post-midl\\um\\ws2bth.annotations.patch",
     "post-midl\\um\\dinput.annotations.patch",
     "post-midl\\shared\\hidpi.annotations.patch",
-    "post-midl\\um\\devfiltertypes.annotations.patch"
+    "post-midl\\um\\devfiltertypes.annotations.patch",
+    "post-midl\\um\\dwmapi.annotations.patch",
+    "post-midl\\um\\werapi.annotations.patch",
+    "post-midl\\um\\errorrep.annotations.patch",
+    "post-midl\\um\\evcoll.annotations.patch",
+    "post-midl\\um\\powrprof.annotations.patch",
+    "post-midl\\um\\powersetting.annotations.patch",
+    "post-midl\\um\\powerbase.annotations.patch"
   ]
 }

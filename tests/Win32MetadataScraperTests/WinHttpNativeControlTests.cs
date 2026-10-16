@@ -101,6 +101,63 @@ static_assert(LF32_FIXED == 1);
 static_assert(LF32_FREE == 2);
 static_assert(LF32_MOVEABLE == 4);
 ",
+                "Dwm" => @"
+static_assert(__is_same(__underlying_type(DWM_SHOWCONTACT), int));
+static_assert(sizeof(DWM_SHOWCONTACT) == 4);
+static_assert(DWMSC_DOWN == 1);
+static_assert(DWMSC_UP == 2);
+static_assert(DWMSC_DRAG == 4);
+static_assert(DWMSC_HOLD == 8);
+static_assert(DWMSC_PENBARREL == 16);
+static_assert(DWMSC_NONE == 0);
+static_assert(static_cast<unsigned int>(DWMSC_ALL) == 0xFFFFFFFFu);
+",
+                "Wer" => @"
+static_assert(__is_same(HREPORT, HANDLE));
+static_assert(__is_same(HREPORTSTORE, void*));
+static_assert(WER_FILE_ANONYMOUS_DATA == 2);
+static_assert(WER_FILE_DELETE_WHEN_DONE == 1);
+static_assert(WER_SUBMIT_ADD_REGISTERED_DATA == 16);
+static_assert(WER_SUBMIT_HONOR_RECOVERY == 1);
+static_assert(WER_SUBMIT_HONOR_RESTART == 2);
+static_assert(WER_SUBMIT_NO_ARCHIVE == 256);
+static_assert(WER_SUBMIT_NO_CLOSE_UI == 64);
+static_assert(WER_SUBMIT_NO_QUEUE == 128);
+static_assert(WER_SUBMIT_OUTOFPROCESS == 32);
+static_assert(WER_SUBMIT_OUTOFPROCESS_ASYNC == 1024);
+static_assert(WER_SUBMIT_QUEUE == 4);
+static_assert(WER_SUBMIT_SHOW_DEBUG == 8);
+static_assert(WER_SUBMIT_START_MINIMIZED == 512);
+static_assert(WER_SUBMIT_BYPASS_DATA_THROTTLING == 2048);
+static_assert(WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY == 4096);
+static_assert(WER_SUBMIT_REPORT_MACHINE_ID == 8192);
+static_assert(WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION == 4);
+static_assert(WER_FAULT_REPORTING_FLAG_NOHEAP == 1);
+static_assert(WER_FAULT_REPORTING_FLAG_QUEUE == 2);
+static_assert(WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD == 8);
+static_assert(WER_FAULT_REPORTING_ALWAYS_SHOW_UI == 16);
+",
+                "Power" => @"
+static_assert(PDCAP_D0_SUPPORTED == 0x00000001);
+static_assert(PDCAP_D1_SUPPORTED == 0x00000002);
+static_assert(PDCAP_D2_SUPPORTED == 0x00000004);
+static_assert(PDCAP_D3_SUPPORTED == 0x00000008);
+static_assert(PDCAP_WAKE_FROM_D0_SUPPORTED == 0x00000010);
+static_assert(PDCAP_WAKE_FROM_D1_SUPPORTED == 0x00000020);
+static_assert(PDCAP_WAKE_FROM_D2_SUPPORTED == 0x00000040);
+static_assert(PDCAP_WAKE_FROM_D3_SUPPORTED == 0x00000080);
+static_assert(PDCAP_WARM_EJECT_SUPPORTED == 0x00000100);
+static_assert(PDCAP_S0_SUPPORTED == 0x00010000);
+static_assert(PDCAP_S1_SUPPORTED == 0x00020000);
+static_assert(PDCAP_S2_SUPPORTED == 0x00040000);
+static_assert(PDCAP_S3_SUPPORTED == 0x00080000);
+static_assert(PDCAP_WAKE_FROM_S0_SUPPORTED == 0x00100000);
+static_assert(PDCAP_WAKE_FROM_S1_SUPPORTED == 0x00200000);
+static_assert(PDCAP_WAKE_FROM_S2_SUPPORTED == 0x00400000);
+static_assert(PDCAP_WAKE_FROM_S3_SUPPORTED == 0x00800000);
+static_assert(PDCAP_S4_SUPPORTED == 0x01000000);
+static_assert(PDCAP_S5_SUPPORTED == 0x02000000);
+",
                 "Wsl" => @"
 static_assert(WSL_DISTRIBUTION_FLAGS_NONE == 0);
 static_assert(WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP == 1);

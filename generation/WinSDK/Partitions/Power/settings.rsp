@@ -7,3 +7,5 @@
 <IncludeRoot>/um/powrprof.h
 --namespace
 Windows.Win32.System.Power
+--config
+parse-win32-annotations

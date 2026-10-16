@@ -32,8 +32,6 @@ AddConditionalAce
 AddConsoleAliasA
 AddConsoleAliasW
 AddDllDirectory
-AddERExcludedApplicationA
-AddERExcludedApplicationW
 AddIntegrityLabelToBoundaryDescriptor
 AddLogContainer
 AddLogContainerSet
@@ -180,7 +178,6 @@ CancelIo
 CancelIoEx
 CancelSynchronousIo
 CancelWaitableTimer
-CanUserWritePwrScheme
 CapabilitiesRequestAndCapabilitiesReply
 CascadeWindows
 CertAddCertificateContextToStore
@@ -713,7 +710,6 @@ DeletePortW
 DeletePrinter
 DeleteProfileA
 DeleteProfileW
-DeletePwrScheme
 DeleteService
 DeleteTimerQueue
 DeleteTimerQueueEx
@@ -744,7 +740,6 @@ DestroyPrivateObjectSecurity
 DestroyWindow
 DetectAutoProxyUrl
 DeviceIoControl
-DevicePowerSetDeviceState
 DialogBoxIndirectParamA
 DialogBoxIndirectParamW
 DialogBoxParamA
@@ -783,8 +778,6 @@ DumpLogRecords
 DuplicateHandle
 DuplicateToken
 DuplicateTokenEx
-EcOpenSubscription
-EcOpenSubscriptionEnum
 EditSecurity
 EmptyClipboard
 EnableMouseInPointer
@@ -834,7 +827,6 @@ EnumPrintersA
 EnumPrintersW
 EnumProtocolsA
 EnumProtocolsW
-EnumPwrSchemes
 EnumResourceLanguagesA
 EnumResourceLanguagesExA
 EnumResourceLanguagesExW
@@ -1096,7 +1088,6 @@ GenerateConsoleCtrlEvent
 GetAce
 GetAclInformation
 GetActiveProcessorCount
-GetActivePwrScheme
 GetAddressByNameA
 GetAddressByNameW
 getaddrinfo
@@ -1205,7 +1196,6 @@ GetCurrentDirectory
 GetCurrentHwProfileA
 GetCurrentHwProfileW
 GetCurrentInputMessageSource
-GetCurrentPowerPolicies
 GetCurrentUmsThread
 GetCursorInfo
 GetCursorPos
@@ -1446,8 +1436,6 @@ GetProfilesDirectoryW
 GetProfileType
 getprotobyname
 getprotobynumber
-GetPwrCapabilities
-GetPwrDiskSpindownRange
 GetQueuedCompletionStatus
 GetQueuedCompletionStatusEx
 GetRawInputBuffer
@@ -2083,7 +2071,6 @@ ReadEventLogW
 ReadFile
 ReadFileEx
 ReadFileScatter
-ReadGlobalPwrPolicy
 ReadLogArchiveMetadata
 ReadLogNotification
 ReadLogRecord
@@ -2092,8 +2079,6 @@ ReadNextLogRecord
 ReadOnlyEnlistment
 ReadPreviousLogRestartArea
 ReadProcessMemory
-ReadProcessorPwrScheme
-ReadPwrScheme
 ReadUrlCacheEntryStream
 RealGetWindowClassW
 ReBaseImage
@@ -2228,7 +2213,6 @@ SendNotifyMessageA
 SendNotifyMessageW
 sendto
 SetAclInformation
-SetActivePwrScheme
 SetActiveWindow
 SetCalendarInfoA
 SetCalendarInfoW
@@ -2384,7 +2368,6 @@ SetServiceStatus
 SetServiceW
 setsockopt
 SetStdHandle
-SetSuspendState
 SetSysColors
 SetSystemCursor
 SetSystemFileCacheSize
@@ -3111,7 +3094,6 @@ WriteConsoleW
 WriteFile
 WriteFileEx
 WriteFileGather
-WriteGlobalPwrPolicy
 WriteLogRestartArea
 WritePrivateProfileSectionA
 WritePrivateProfileSectionW
@@ -3120,12 +3102,10 @@ WritePrivateProfileStringW
 WritePrivateProfileStructA
 WritePrivateProfileStructW
 WriteProcessMemory
-WriteProcessorPwrScheme
 WriteProfileSectionA
 WriteProfileSectionW
 WriteProfileStringA
 WriteProfileStringW
-WritePwrScheme
 WSAAccept
 WSAAddressToStringA
 WSAAddressToStringW

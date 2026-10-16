@@ -7429,28 +7429,6 @@
     ]
   },
   {
-    "name": "WER_FILE",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_FILE_ANONYMOUS_DATA"
-      },
-      {
-        "name": "WER_FILE_DELETE_WHEN_DONE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerReportAddFile",
-        "parameter": "dwFileFlags"
-      },
-      {
-        "method": "WerRegisterFile",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "TRACE_MESSAGE_FLAGS",
     "flags": true,
     "members": [
@@ -11439,12 +11417,7 @@
         "name": "POWER_PLATFORM_ROLE_V2"
       }
     ],
-    "uses": [
-      {
-        "method": "PowerDeterminePlatformRoleEx",
-        "parameter": "Version"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "WIN_HTTP_CREATE_URL_FLAGS",
@@ -11825,14 +11798,6 @@
         "parameter": "Flags"
       },
       {
-        "method": "PowerSettingRegisterNotification",
-        "parameter": "Flags"
-      },
-      {
-        "method": "PowerRegisterSuspendResumeNotification",
-        "parameter": "Flags"
-      },
-      {
         "method": "RegisterPowerSettingNotification",
         "parameter": "Flags"
       }
@@ -12146,74 +12111,6 @@
       {
         "struct": "MEMORY_BASIC_INFORMATION64",
         "field": "State"
-      }
-    ]
-  },
-  {
-    "name": "WER_SUBMIT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_SUBMIT_ADD_REGISTERED_DATA",
-        "value": "16"
-      },
-      {
-        "name": "WER_SUBMIT_HONOR_RECOVERY",
-        "value": "1"
-      },
-      {
-        "name": "WER_SUBMIT_HONOR_RESTART",
-        "value": "2"
-      },
-      {
-        "name": "WER_SUBMIT_NO_ARCHIVE",
-        "value": "256"
-      },
-      {
-        "name": "WER_SUBMIT_NO_CLOSE_UI",
-        "value": "64"
-      },
-      {
-        "name": "WER_SUBMIT_NO_QUEUE",
-        "value": "128"
-      },
-      {
-        "name": "WER_SUBMIT_OUTOFPROCESS",
-        "value": "32"
-      },
-      {
-        "name": "WER_SUBMIT_OUTOFPROCESS_ASYNC",
-        "value": "1024"
-      },
-      {
-        "name": "WER_SUBMIT_QUEUE",
-        "value": "4"
-      },
-      {
-        "name": "WER_SUBMIT_SHOW_DEBUG",
-        "value": "8"
-      },
-      {
-        "name": "WER_SUBMIT_START_MINIMIZED",
-        "value": "512"
-      },
-      {
-        "name": "WER_SUBMIT_BYPASS_DATA_THROTTLING",
-        "value": "2048"
-      },
-      {
-        "name": "WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY",
-        "value": "4096"
-      },
-      {
-        "name": "WER_SUBMIT_REPORT_MACHINE_ID",
-        "value": "8192"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerReportSubmit",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -14538,37 +14435,6 @@
     ]
   },
   {
-    "name": "WER_FAULT_REPORTING",
-    "flags": true,
-    "members": [
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_NOHEAP"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_QUEUE"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD"
-      },
-      {
-        "name": "WER_FAULT_REPORTING_ALWAYS_SHOW_UI"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WerSetFlags",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WerGetFlags",
-        "parameter": "pdwFlags"
-      }
-    ]
-  },
-  {
     "name": "SNMP_LOG",
     "type": "int",
     "members": [
@@ -14819,16 +14685,6 @@
       {
         "struct": "CRYPT_KEY_PROV_INFO",
         "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "REG_SAM_FLAGS",
-    "members": [],
-    "uses": [
-      {
-        "method": "PowerSettingAccessCheckEx",
-        "parameter": "AccessType"
       }
     ]
   },
@@ -36228,16 +36084,6 @@
         "parameter": "CompressionType"
       }
     ]
-  },
-  {
-    "namespace": "Windows.Win32.System.Power",
-    "name": "DEVICE_POWER_CAPABILITIES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PDCAP_",
-      "header": "powrprof.h;winnt.h"
-    },
-    "uses": []
   },
   {
     "name": "DISPLAY_DEVICE_STATE_FLAGS",
