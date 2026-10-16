@@ -25,6 +25,7 @@ namespace Win32MetadataScraperTests
         private const string BluetoothNamespace = "Windows.Win32.Devices.Bluetooth";
         private const string HidNamespace = "Windows.Win32.Devices.HumanInterfaceDevice";
         private const string WerNamespace = "Windows.Win32.System.ErrorReporting";
+        private const string DwmNamespace = "Windows.Win32.Graphics.Dwm";
         private const string PowerNamespace = "Windows.Win32.System.Power";
         private const string CabinetsNamespace = "Windows.Win32.Storage.Cabinets";
         private const string WebSocketNamespace = "Windows.Win32.Networking.WebSocket";
@@ -37,6 +38,16 @@ namespace Win32MetadataScraperTests
             "|Public, Static, Literal, HasDefault|UInt32|-1|UInt32:80000000||";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
+        private static readonly (string Name, uint Bits)[] DwmContactMembers =
+        {
+            ("DWMSC_DOWN", 1),
+            ("DWMSC_UP", 2),
+            ("DWMSC_DRAG", 4),
+            ("DWMSC_HOLD", 8),
+            ("DWMSC_PENBARREL", 16),
+            ("DWMSC_NONE", 0),
+            ("DWMSC_ALL", uint.MaxValue),
+        };
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
         {
             ("WinHttpOpenRequest", "dwFlags", "WINHTTP_OPEN_REQUEST_FLAGS", "UInt32"),
@@ -269,6 +280,9 @@ namespace Win32MetadataScraperTests
             ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_ReportInterval", "pMilliseconds"),
             ("Windows.Win32.Devices.Geolocation", "ILocationReportFactory", "get_Status", "pVal"),
             ("Windows.Win32.Networking.NetworkListManager", "INetworkConnection2", "IsDomainAuthenticatedBy", "pValue"),
+            ("Windows.Win32.System.RemoteAssistance", "IRendezvousSession", "get_State", "pSessionState"),
+            ("Windows.Win32.System.RemoteAssistance", "IRendezvousSession", "get_RemoteUser", "bstrUserName"),
+            ("Windows.Win32.System.RemoteAssistance", "IRendezvousSession", "get_Flags", "pFlags"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Description", "description"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Score", "score"),
             ("Windows.Win32.System.AssessmentTool", "IProvideWinSATAssessmentInfo", "get_Title", "title"),
@@ -472,6 +486,13 @@ namespace Win32MetadataScraperTests
                 Assert.DoesNotContain("_Windows_SupportedOS_", File.ReadAllText(Path.Combine(root, patch)));
         }
 
+        [Fact]
+        public void NativeDwmContactStorageHasNoAuthoredUnderlyingTypeOverride()
+        {
+            Assert.DoesNotContain(File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "scraper.settings.rsp")),
+                line => line.TrimStart().StartsWith("DWM_SHOWCONTACT=", StringComparison.Ordinal));
+        }
+
         [MigrationFact]
         public void CompleteNewImageClosesConstructorsAndFrozenOldDefectIsExplicit()
         {
@@ -537,13 +558,15 @@ namespace Win32MetadataScraperTests
             var usedHandles = new HashSet<string>(StringComparer.Ordinal);
             var usedLifecycles = new HashSet<string>(StringComparer.Ordinal);
             var usedConstants = new HashSet<string>(StringComparer.Ordinal);
+            var usedEnumStorage = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
             foreach (var entry in before.Where(value => !removed.Contains(value.Key)))
             {
                 string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedChanges: true,
                     usedEnumSites: used, usedRetvalSites: usedRetvals, usedPreservedResultSites: usedPreservedResults,
                     usedNativeDirectionSites: usedNativeDirections, usedHandleSites: usedHandles,
-                    usedLifecycleSites: usedLifecycles, usedNativeConstantSites: usedConstants);
+                    usedLifecycleSites: usedLifecycles, usedNativeConstantSites: usedConstants,
+                    usedEnumStorageSites: usedEnumStorage);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
@@ -560,11 +583,42 @@ namespace Win32MetadataScraperTests
                 .Concat(ReviewedLifecycleTransfers.Where(value => !value.Synthetic).Select(value => value.TypeSite)).Distinct()
                 .OrderBy(value => value), usedLifecycles.OrderBy(value => value));
             Assert.Equal(ReviewedNativeConstantSites.OrderBy(value => value), usedConstants.OrderBy(value => value));
+            Assert.Equal(new[] { DwmNamespace + ".DWM_SHOWCONTACT" }, usedEnumStorage);
             this.output.WriteLine($"All {after.Count} surviving physical types graded; exactly {removed.Count} verified synthetic handles removed, 0 types added; " +
                 $"{unchanged} surviving types unchanged; " +
                 $"{used.Count} exact native-type/AssociatedEnum sites, {usedRetvals.Count} native MIDL retval sites " +
                 $"{usedPreservedResults.Count} reviewed preserved-result site, {usedNativeDirections.Count} exact native SAL direction site, " +
-                $"{usedHandles.Count} native handle signature sites, {usedLifecycles.Count} lifecycle targets and {usedConstants.Count} exact native constant sites normalized.");
+                $"{usedHandles.Count} native handle signature sites, {usedLifecycles.Count} lifecycle targets, " +
+                $"{usedConstants.Count} exact native constant sites and {usedEnumStorage.Count} approved native enum storage correction normalized.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void ApprovedDwmContactStorageUsesIntAndPreservesEveryNativeBit(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Type(old.Reader, "DWM_SHOWCONTACT", architecture, DwmNamespace);
+            var after = Type(current.Reader, "DWM_SHOWCONTACT", architecture, DwmNamespace);
+            AssertDwmContactStorage(old.Reader, before, signed: false);
+            AssertDwmContactStorage(current.Reader, after, signed: true);
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            Assert.Equal(SnapshotType(old.Reader, before, normalizeReviewedChanges: true, usedEnumStorageSites: used),
+                SnapshotType(current.Reader, after));
+            Assert.Equal(new[] { DwmNamespace + ".DWM_SHOWCONTACT" }, used);
+            var all = after.GetFields().Select(current.Reader.GetFieldDefinition)
+                .Single(field => current.Reader.GetString(field.Name) == "DWMSC_ALL");
+            Assert.Equal(-1, current.Reader.GetBlobReader(current.Reader.GetConstant(all.GetDefaultValue()).Value).ReadInt32());
+            var originalMethod = Methods(old.Reader, DwmNamespace, "Apis", architecture)["DwmShowContact"];
+            var method = Methods(current.Reader, DwmNamespace, "Apis", architecture)["DwmShowContact"];
+            var signature = method.DecodeSignature(Signatures, null);
+            Assert.Equal(Signature(originalMethod.DecodeSignature(Signatures, null)), Signature(signature));
+            Assert.Equal(DwmNamespace + ".DWM_SHOWCONTACT", signature.ParameterTypes[1]);
+            Assert.Equal(Import(old.Reader, originalMethod), Import(current.Reader, method));
+            this.output.WriteLine($"DWM_SHOWCONTACT/{architecture}: Int32 storage, seven ordered members and unchanged flags/attributes; " +
+                "DWMSC_ALL=-1 retains FFFFFFFF; native DwmShowContact signature/import unchanged.");
         }
 
         [MigrationTheory]
@@ -1555,6 +1609,92 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData("valid")]
+        [InlineData("old-signed-storage")]
+        [InlineData("old-wrong-all")]
+        [InlineData("old-reordered-members")]
+        [InlineData("old-missing-flags")]
+        [InlineData("new-unsigned-storage")]
+        [InlineData("new-unsigned-constants")]
+        [InlineData("new-wrong-all")]
+        [InlineData("new-reordered-members")]
+        [InlineData("new-missing-member")]
+        [InlineData("new-missing-flags")]
+        [InlineData("unrelated-enum")]
+        public void ApprovedDwmStorageNormalizationRequiresTheExactOldEnumAndNewBits(string mutation)
+        {
+            using var old = Fixture(native: false);
+            using var current = Fixture(native: true);
+            var before = old.GetMetadataReader();
+            var after = current.GetMetadataReader();
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            var original = before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2));
+            if (mutation.StartsWith("old-", StringComparison.Ordinal))
+            {
+                Assert.ThrowsAny<XunitException>(() => SnapshotType(before, original,
+                    normalizeReviewedChanges: true, usedEnumStorageSites: used));
+                Assert.Empty(used);
+                return;
+            }
+            string expected = SnapshotType(before, original, normalizeReviewedChanges: true, usedEnumStorageSites: used);
+            string actual = SnapshotType(after, after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)));
+            Assert.Equal(mutation == "valid", expected == actual);
+            if (mutation == "unrelated-enum")
+                Assert.Empty(used);
+            else
+                Assert.Equal(new[] { DwmNamespace + ".DWM_SHOWCONTACT" }, used);
+
+            MetadataReaderProvider Fixture(bool native)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("DwmContact.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                var runtime = metadata.AddAssemblyReference(metadata.GetOrAddString("System.Runtime"),
+                    new Version(10, 0), default, default, 0, default);
+                var enumType = metadata.AddTypeReference(runtime, metadata.GetOrAddString("System"), metadata.GetOrAddString("Enum"));
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var type = metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(DwmNamespace),
+                    metadata.GetOrAddString(mutation == "unrelated-enum" ? "OTHER_DWM_SHOWCONTACT" : "DWM_SHOWCONTACT"), enumType,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                if (mutation != (native ? "new-missing-flags" : "old-missing-flags"))
+                {
+                    var flags = metadata.AddTypeReference(runtime, metadata.GetOrAddString("System"), metadata.GetOrAddString("FlagsAttribute"));
+                    var signature = new BlobBuilder();
+                    new BlobEncoder(signature).MethodSignature(isInstanceMethod: true).Parameters(0, result => result.Void(), _ => { });
+                    var constructor = metadata.AddMemberReference(flags, metadata.GetOrAddString(".ctor"), metadata.GetOrAddBlob(signature));
+                    metadata.AddCustomAttribute(type, constructor, metadata.GetOrAddBlob(new byte[] { 1, 0, 0, 0 }));
+                }
+                var storage = new BlobBuilder();
+                var storageType = new BlobEncoder(storage).FieldSignature();
+                if (native && mutation != "new-unsigned-storage" || !native && mutation == "old-signed-storage")
+                    storageType.Int32();
+                else
+                    storageType.UInt32();
+                metadata.AddFieldDefinition(FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName,
+                    metadata.GetOrAddString("value__"), metadata.GetOrAddBlob(storage));
+                var members = DwmContactMembers.ToArray();
+                if (mutation == (native ? "new-reordered-members" : "old-reordered-members"))
+                    (members[0], members[1]) = (members[1], members[0]);
+                foreach (var member in members)
+                {
+                    if (native && mutation == "new-missing-member" && member.Name == "DWMSC_NONE")
+                        continue;
+                    uint bits = member.Name == "DWMSC_ALL" && mutation == (native ? "new-wrong-all" : "old-wrong-all")
+                        ? uint.MaxValue - 1 : member.Bits;
+                    var signature = new BlobBuilder();
+                    new BlobEncoder(signature).FieldSignature().Type(type, isValueType: true);
+                    var field = metadata.AddFieldDefinition(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault,
+                        metadata.GetOrAddString(member.Name), metadata.GetOrAddBlob(signature));
+                    metadata.AddConstant(field, native && mutation != "new-unsigned-constants" ? unchecked((int)bits) : (object)bits);
+                }
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+            }
+        }
+
+        [Theory]
         [InlineData(3, true)]
         [InlineData(2, false)]
         [InlineData(1, false)]
@@ -1769,7 +1909,8 @@ namespace Win32MetadataScraperTests
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
             bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null,
             ISet<string> usedPreservedResultSites = null, ISet<string> usedNativeDirectionSites = null,
-            ISet<string> usedHandleSites = null, ISet<string> usedLifecycleSites = null, ISet<string> usedNativeConstantSites = null)
+            ISet<string> usedHandleSites = null, ISet<string> usedLifecycleSites = null, ISet<string> usedNativeConstantSites = null,
+            ISet<string> usedEnumStorageSites = null)
         {
             string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false,
                 bool preservedResult = false, string cleanup = null, bool removeLifecycle = false)
@@ -1820,6 +1961,12 @@ namespace Win32MetadataScraperTests
             string Blob(BlobHandle blob) => blob.IsNil ? "" : Convert.ToHexString(reader.GetBlobBytes(blob));
             string ns = reader.GetString(type.Namespace);
             string typeName = reader.GetString(type.Name);
+            bool signedDwmContact = normalizeReviewedChanges && ns == DwmNamespace && typeName == "DWM_SHOWCONTACT";
+            if (signedDwmContact)
+            {
+                AssertDwmContactStorage(reader, type, signed: false);
+                usedEnumStorageSites?.Add(DwmNamespace + ".DWM_SHOWCONTACT");
+            }
             var uses = normalizeReviewedChanges ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
             var handleUses = normalizeReviewedChanges
                 ? ReviewedHandleUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<HandleUse>();
@@ -1861,6 +2008,8 @@ namespace Win32MetadataScraperTests
                 var field = reader.GetFieldDefinition(handle);
                 string name = reader.GetString(field.Name);
                 string fieldType = field.DecodeSignature(Signatures, null);
+                if (signedDwmContact && name == "value__")
+                    fieldType = "Int32";
                 var use = uses.SingleOrDefault(value => value.Owner == typeName && value.Member == name);
                 if (use != null)
                 {
@@ -1870,6 +2019,8 @@ namespace Win32MetadataScraperTests
                 }
                 string constant = field.GetDefaultValue().IsNil ? "" :
                     reader.GetConstant(field.GetDefaultValue()).TypeCode + ":" + Blob(reader.GetConstant(field.GetDefaultValue()).Value);
+                if (signedDwmContact && !field.GetDefaultValue().IsNil)
+                    constant = ConstantTypeCode.Int32 + ":" + Blob(reader.GetConstant(field.GetDefaultValue()).Value);
                 fieldRows.Add($"F|{name}|{field.Attributes}|{fieldType}|{field.GetOffset()}|" +
                     $"{constant}|{Blob(field.GetMarshallingDescriptor())}|{Attributes(field.GetCustomAttributes(), use?.Enum)}");
             }
@@ -1997,6 +2148,31 @@ namespace Win32MetadataScraperTests
 
         private static void AssertHidConstant(MetadataReader reader, FieldDefinition field)
             => AssertNativeLiteral(reader, field, "Windows.Win32.Foundation.NTSTATUS", ConstantTypeCode.Int32, new byte[] { 9, 0, 0x11, 0xc0 });
+
+        private static void AssertDwmContactStorage(MetadataReader reader, TypeDefinition type, bool signed)
+        {
+            Assert.Equal(DwmNamespace, reader.GetString(type.Namespace));
+            Assert.Equal("DWM_SHOWCONTACT", reader.GetString(type.Name));
+            Assert.Equal("System.Enum", FullName(reader, type.BaseType));
+            Assert.Equal(TypeAttributes.Public | TypeAttributes.Sealed, type.Attributes);
+            Assert.Equal(0, type.GetLayout().PackingSize);
+            Assert.Equal(0, type.GetLayout().Size);
+            Assert.Empty(type.GetMethods());
+            var flags = Assert.Single(type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "FlagsAttribute"));
+            Assert.Equal(new byte[] { 1, 0, 0, 0 }, reader.GetBlobBytes(reader.GetCustomAttribute(flags).Value));
+            var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "value__" }.Concat(DwmContactMembers.Select(value => value.Name)),
+                fields.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName, fields[0].Attributes);
+            Assert.Equal(signed ? "Int32" : "UInt32", fields[0].DecodeSignature(Signatures, null));
+            Assert.Equal(-1, fields[0].GetOffset());
+            Assert.True(fields[0].GetDefaultValue().IsNil);
+            Assert.True(fields[0].GetMarshallingDescriptor().IsNil);
+            Assert.Empty(fields[0].GetCustomAttributes());
+            for (int index = 0; index < DwmContactMembers.Length; index++)
+                AssertNativeLiteral(reader, fields[index + 1], DwmNamespace + ".DWM_SHOWCONTACT",
+                    signed ? ConstantTypeCode.Int32 : ConstantTypeCode.UInt32, BitConverter.GetBytes(DwmContactMembers[index].Bits));
+        }
 
         private static void AssertNativeLiteral(MetadataReader reader, FieldDefinition field, string signature, ConstantTypeCode typeCode, byte[] bytes)
         {

@@ -346,6 +346,41 @@ reductions remain. Artifacts are in `artifacts\header-annotation-wave\batch2`.
 These overlapping run counts are not a unique-test total. Consumer compatibility
 remains unverified.
 
+## Later qualified tooling, native DWM storage and SDK artifact form
+
+The owning branch explicitly ordinary-merges qualified root `7ea6c85d` at
+`80477883`, then serially integrates the interop and component inputs at
+`b05c91ea` and `a5bb02fb`. The earlier `89a2ad02`/`9a1fd6f8` images and their
+437-difference receipts remain historical controls, not new-tooling, new-input
+or DWM acceptance. The eight new owners relocate 22 OS rows: 14 existing
+emitted targets and eight intentionally unmapped native exports. Configuration
+and recipe counts are source inventory, not accepted semantic-fact totals.
+
+The approved DWM correction removes only `DWM_SHOWCONTACT=uint`. The native
+SDK enum and `DwmShowContact(DWORD, enum DWM_SHOWCONTACT)` declaration remain
+unchanged. A fresh Dwm scrape without that override produces default `int`
+storage and `DWMSC_ALL = unchecked((int)(0xFFFFFFFF))`, meaning `-1` with the
+same 32 bits. The exact physical gate permits this one enum's storage and
+constant type codes to change from UInt32 to Int32, while preserving all seven
+member names, order, values/bits, flags, attributes and the function signature.
+All other enum storage remains literal. This approved change can affect managed
+source that assumes an unsigned underlying type; actual consumer effects remain
+unverified and no consumer work is part of this migration.
+
+The combined native-retval expectation also includes the three existing
+`IRendezvousSession` contracts documented above, separately from relocated facts.
+No field inference is activated, the DHCP array sidecar stays, and the shared
+LocalSize/DirectML effects remain outside these owners.
+
+The final upstream patch payload must match the artifact shipped in the SDK.
+Declarations shipped as IDL require pre-MIDL patches against that IDL and
+regenerated headers; direct-header patches remain only for actual header-source
+artifacts. The existing post-MIDL patches and images are retained as controls,
+not described as the final upstream-ready form. The coordinated artifact-form
+conversion and the resulting fresh source, matched OLD/control/NEW physical
+grades, strict comparison, and actual final-head CI image qualification remain
+prerequisites for final acceptance.
+
 The complete batch-2 [CI regeneration](https://github.com/microsoft/win32metadata/actions/runs/38695188241)
 at `1e97e92d386492806928f84587e3073adc89033c` is also green. Its winmd SHA256 is
 `D8593620542480E34B03691F53AC63314C78A4F17B4B5E17D458705C68F32946`;
