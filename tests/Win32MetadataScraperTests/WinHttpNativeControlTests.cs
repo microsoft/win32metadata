@@ -193,6 +193,65 @@ static_assert(XINPUT_KEYSTROKE_KEYUP == 2);
 static_assert(XINPUT_KEYSTROKE_REPEAT == 4);
 static_assert(XINPUT_FLAG_GAMEPAD == 1);
 ",
+                "Wnet" => @"
+#ifdef RESOURCEUSAGE_NONE
+#error Metadata-only RESOURCEUSAGE_NONE must not become a native macro
+#endif
+static_assert(UNIVERSAL_NAME_INFO_LEVEL == 1u);
+static_assert(REMOTE_NAME_INFO_LEVEL == 2u);
+static_assert(WNPERM_DLG_PERM == 0u);
+static_assert(WNPERM_DLG_AUDIT == 1u);
+static_assert(WNPERM_DLG_OWNER == 2u);
+static_assert(RESOURCEUSAGE_CONNECTABLE == 1u);
+static_assert(RESOURCEUSAGE_CONTAINER == 2u);
+static_assert(RESOURCEUSAGE_ATTACHED == 16u);
+static_assert(RESOURCEUSAGE_ALL == 19u);
+static_assert(CONNECT_UPDATE_PROFILE == 1u);
+static_assert(CONNECT_UPDATE_RECENT == 2u);
+static_assert(CONNECT_TEMPORARY == 4u);
+static_assert(CONNECT_INTERACTIVE == 8u);
+static_assert(CONNECT_PROMPT == 16u);
+static_assert(CONNECT_NEED_DRIVE == 32u);
+static_assert(CONNECT_REFCOUNT == 64u);
+static_assert(CONNECT_REDIRECT == 128u);
+static_assert(CONNECT_LOCALDRIVE == 256u);
+static_assert(CONNECT_CURRENT_MEDIA == 512u);
+static_assert(CONNECT_DEFERRED == 1024u);
+static_assert(CONNECT_RESERVED == 4278190080u);
+static_assert(CONNECT_COMMANDLINE == 2048u);
+static_assert(CONNECT_CMD_SAVECRED == 4096u);
+static_assert(CONNECT_CRED_RESET == 8192u);
+static_assert(CONNECT_REQUIRE_INTEGRITY == 16384u);
+static_assert(CONNECT_REQUIRE_PRIVACY == 32768u);
+static_assert(CONNECT_WRITE_THROUGH_SEMANTICS == 65536u);
+static_assert(CONNECT_GLOBAL_MAPPING == 262144u);
+static_assert(WNPS_FILE == 0u);
+static_assert(WNPS_DIR == 1u);
+static_assert(WNPS_MULT == 2u);
+static_assert(WNDN_MKDIR == 1u);
+static_assert(WNDN_RMDIR == 2u);
+static_assert(WNDN_MVDIR == 3u);
+static_assert(RESOURCETYPE_ANY == 0u);
+static_assert(RESOURCETYPE_DISK == 1u);
+static_assert(RESOURCETYPE_PRINT == 2u);
+static_assert(WNFMT_MULTILINE == 1u);
+static_assert(WNFMT_ABBREVIATED == 2u);
+static_assert(RESOURCE_CONNECTED == 1u);
+static_assert(RESOURCE_CONTEXT == 5u);
+static_assert(RESOURCE_GLOBALNET == 2u);
+static_assert(RESOURCE_REMEMBERED == 3u);
+static_assert(NETINFO_DLL16 == 1u);
+static_assert(NETINFO_DISKRED == 4u);
+static_assert(NETINFO_PRINTERRED == 8u);
+static_assert(CONNDLG_RO_PATH == 1u);
+static_assert(CONNDLG_CONN_POINT == 2u);
+static_assert(CONNDLG_USE_MRU == 4u);
+static_assert(CONNDLG_HIDE_BOX == 8u);
+static_assert(CONNDLG_PERSIST == 16u);
+static_assert(CONNDLG_NOT_PERSIST == 32u);
+static_assert(DISC_UPDATE_PROFILE == 1u);
+static_assert(DISC_NO_FORCE == 64u);
+",
                 _ => "",
             };
             var before = Surface(root, original, partition, architecture, target, headers, checks);

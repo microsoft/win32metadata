@@ -19,6 +19,8 @@ namespace Win32MetadataScraperTests
     {
         internal const string WinHttpNamespace = "Windows.Win32.Networking.WinHttp";
         private const string MetadataNamespace = "Windows.Win32.Foundation.Metadata";
+        private const string WNetNamespace = "Windows.Win32.NetworkManagement.WNet";
+        private const string DhcpNamespace = "Windows.Win32.NetworkManagement.Dhcp";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
@@ -52,6 +54,81 @@ namespace Win32MetadataScraperTests
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_GAMEPAD", "wButtons", "XINPUT_GAMEPAD_BUTTON_FLAGS", "UInt16"),
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "VirtualKey", "XINPUT_VIRTUAL_KEY", "UInt16"),
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "Flags", "XINPUT_KEYSTROKE_FLAGS", "UInt16"),
+                new EnumUse(WNetNamespace, "CONNECTDLGSTRUCTA", "dwFlags", "CONNECTDLGSTRUCT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "CONNECTDLGSTRUCTW", "dwFlags", "CONNECTDLGSTRUCT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "DISCDLGSTRUCTA", "dwFlags", "DISCDLGSTRUCT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "DISCDLGSTRUCTW", "dwFlags", "DISCDLGSTRUCT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "NETINFOSTRUCT", "dwCharacteristics", "NETINFOSTRUCT_CHARACTERISTICS", "UInt32"),
+                new EnumUse(WNetNamespace, "NETINFOSTRUCT", "dwStatus", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "NETRESOURCEA", "dwScope", "NET_RESOURCE_SCOPE", "UInt32"),
+                new EnumUse(WNetNamespace, "NETRESOURCEA", "dwType", "NET_RESOURCE_TYPE", "UInt32"),
+                new EnumUse(WNetNamespace, "NETRESOURCEW", "dwScope", "NET_RESOURCE_SCOPE", "UInt32"),
+                new EnumUse(WNetNamespace, "NETRESOURCEW", "dwType", "NET_RESOURCE_TYPE", "UInt32"),
+                new EnumUse(WNetNamespace, "NOTIFYADD", "dwAddFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "NPAddConnection3", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "NPFormatNetworkName", "dwFlags", "NETWORK_NAME_FORMAT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "NPGetUniversalName", "dwInfoLevel", "UNC_INFO_LEVEL", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection2A", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection2A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnection2W", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection2W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnection3A", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection3A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnection3W", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection3W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnection4A", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection4A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnection4W", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetAddConnection4W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnectionA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetAddConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetCancelConnection2A", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetCancelConnection2A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetCancelConnection2W", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetCancelConnection2W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetCancelConnectionA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetCancelConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetCloseEnum", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetConnectionDialog", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetConnectionDialog1A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetConnectionDialog1W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetDisconnectDialog", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetDisconnectDialog1A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetDisconnectDialog1W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetEnumResourceA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetEnumResourceW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetConnectionA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetLastErrorA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetLastErrorW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetNetworkInformationA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetNetworkInformationW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetProviderNameA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetProviderNameW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetResourceInformationA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetResourceInformationW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetResourceParentA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetResourceParentW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetUniversalNameA", "dwInfoLevel", "UNC_INFO_LEVEL", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetGetUniversalNameA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetUniversalNameW", "dwInfoLevel", "UNC_INFO_LEVEL", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetGetUniversalNameW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetUserA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetGetUserW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumA", "dwScope", "NET_RESOURCE_SCOPE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumA", "dwType", "NET_RESOURCE_TYPE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumA", "dwUsage", "WNET_OPEN_ENUM_USAGE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumW", "dwScope", "NET_RESOURCE_SCOPE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumW", "dwType", "NET_RESOURCE_TYPE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumW", "dwUsage", "WNET_OPEN_ENUM_USAGE", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetOpenEnumW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetUseConnection4A", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetUseConnection4W", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetUseConnectionA", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetUseConnectionA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
+                new EnumUse(WNetNamespace, "WNetUseConnectionW", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
+                new EnumUse(WNetNamespace, "WNetUseConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
             }).ToArray();
         private static readonly (string Namespace, string Owner, string Method, string Parameter)[] NativeRetvalUses =
         {
@@ -126,6 +203,12 @@ namespace Win32MetadataScraperTests
         };
         private static readonly (string Namespace, string Owner, string Method) ReviewedPreservedResult =
             ("Windows.Win32.System.Com.Events", "IEnumEventObject", "Reset");
+        private static readonly (string Namespace, string Owner, string Method, string Parameter,
+            ParameterAttributes Before, ParameterAttributes After)[] NativeDirectionUses =
+        {
+            (DhcpNamespace, "Apis", "DhcpEnumSubnets", "EnumInfo",
+                ParameterAttributes.Out, ParameterAttributes.In | ParameterAttributes.Out),
+        };
         private static readonly string[] AdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
@@ -160,6 +243,77 @@ namespace Win32MetadataScraperTests
             "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
             "WcmQueryProperty", "WcmSetProperty", "WcmGetProfileList", "WcmSetProfileList", "WcmFreeMemory",
             "CoGetInterceptor",
+            "DhcpAddFilterV4", "DhcpAddSecurityGroup", "DhcpAddServer", "DhcpAddSubnetElement",
+            "DhcpAddSubnetElementV4", "DhcpAddSubnetElementV5", "DhcpAddSubnetElementV6", "DhcpAuditLogGetParams",
+            "DhcpAuditLogSetParams", "DhcpCApiCleanup", "DhcpCApiInitialize", "DhcpCreateClass",
+            "DhcpCreateClassV6", "DhcpCreateClientInfo", "DhcpCreateClientInfoV4", "DhcpCreateClientInfoVQ",
+            "DhcpCreateOption", "DhcpCreateOptionV5", "DhcpCreateOptionV6", "DhcpCreateSubnet",
+            "DhcpCreateSubnetV6", "DhcpCreateSubnetVQ", "DhcpDeRegisterParamChange", "DhcpDeleteClass",
+            "DhcpDeleteClassV6", "DhcpDeleteClientInfo", "DhcpDeleteClientInfoV6", "DhcpDeleteFilterV4",
+            "DhcpDeleteServer", "DhcpDeleteSubnet", "DhcpDeleteSubnetV6", "DhcpDeleteSuperScopeV4",
+            "DhcpDsCleanup", "DhcpDsInit", "DhcpEnumClasses", "DhcpEnumClassesV6",
+            "DhcpEnumFilterV4", "DhcpEnumOptionValues", "DhcpEnumOptionValuesV5", "DhcpEnumOptionValuesV6",
+            "DhcpEnumOptions", "DhcpEnumOptionsV5", "DhcpEnumOptionsV6", "DhcpEnumServers",
+            "DhcpEnumSubnetClients", "DhcpEnumSubnetClientsFilterStatusInfo", "DhcpEnumSubnetClientsV4", "DhcpEnumSubnetClientsV5",
+            "DhcpEnumSubnetClientsV6", "DhcpEnumSubnetClientsVQ", "DhcpEnumSubnetElements", "DhcpEnumSubnetElementsV4",
+            "DhcpEnumSubnetElementsV5", "DhcpEnumSubnetElementsV6", "DhcpEnumSubnets", "DhcpEnumSubnetsV6",
+            "DhcpGetAllOptionValues", "DhcpGetAllOptionValuesV6", "DhcpGetAllOptions", "DhcpGetAllOptionsV6",
+            "DhcpGetClassInfo", "DhcpGetClientInfo", "DhcpGetClientInfoV4", "DhcpGetClientInfoV6",
+            "DhcpGetClientInfoVQ", "DhcpGetClientOptions", "DhcpGetFilterV4", "DhcpGetMibInfo",
+            "DhcpGetMibInfoV5", "DhcpGetMibInfoV6", "DhcpGetOptionInfo", "DhcpGetOptionInfoV5",
+            "DhcpGetOptionInfoV6", "DhcpGetOptionValue", "DhcpGetOptionValueV5", "DhcpGetOptionValueV6",
+            "DhcpGetOriginalSubnetMask", "DhcpGetServerBindingInfo", "DhcpGetServerBindingInfoV6", "DhcpGetServerSpecificStrings",
+            "DhcpGetSubnetDelayOffer", "DhcpGetSubnetInfo", "DhcpGetSubnetInfoV6", "DhcpGetSubnetInfoVQ",
+            "DhcpGetSuperScopeInfoV4", "DhcpGetThreadOptions", "DhcpGetVersion", "DhcpHlprAddV4PolicyCondition",
+            "DhcpHlprAddV4PolicyExpr", "DhcpHlprAddV4PolicyRange", "DhcpHlprCreateV4Policy", "DhcpHlprCreateV4PolicyEx",
+            "DhcpHlprFindV4DhcpProperty", "DhcpHlprFreeV4DhcpProperty", "DhcpHlprFreeV4DhcpPropertyArray", "DhcpHlprFreeV4Policy",
+            "DhcpHlprFreeV4PolicyArray", "DhcpHlprFreeV4PolicyEx", "DhcpHlprFreeV4PolicyExArray", "DhcpHlprIsV4PolicySingleUC",
+            "DhcpHlprIsV4PolicyValid", "DhcpHlprIsV4PolicyWellFormed", "DhcpHlprModifyV4PolicyExpr", "DhcpHlprResetV4PolicyExpr",
+            "DhcpModifyClass", "DhcpModifyClassV6", "DhcpRegisterParamChange", "DhcpRemoveDNSRegistrations",
+            "DhcpRemoveOption", "DhcpRemoveOptionV5", "DhcpRemoveOptionV6", "DhcpRemoveOptionValue",
+            "DhcpRemoveOptionValueV5", "DhcpRemoveOptionValueV6", "DhcpRemoveSubnetElement", "DhcpRemoveSubnetElementV4",
+            "DhcpRemoveSubnetElementV5", "DhcpRemoveSubnetElementV6", "DhcpRequestParams", "DhcpRpcFreeMemory",
+            "DhcpScanDatabase", "DhcpServerAuditlogParamsFree", "DhcpServerBackupDatabase", "DhcpServerGetConfig",
+            "DhcpServerGetConfigV4", "DhcpServerGetConfigV6", "DhcpServerGetConfigVQ", "DhcpServerQueryAttribute",
+            "DhcpServerQueryAttributes", "DhcpServerQueryDnsRegCredentials", "DhcpServerRedoAuthorization", "DhcpServerRestoreDatabase",
+            "DhcpServerSetConfig", "DhcpServerSetConfigV4", "DhcpServerSetConfigV6", "DhcpServerSetConfigVQ",
+            "DhcpServerSetDnsRegCredentials", "DhcpServerSetDnsRegCredentialsV5", "DhcpSetClientInfo", "DhcpSetClientInfoV4",
+            "DhcpSetClientInfoV6", "DhcpSetClientInfoVQ", "DhcpSetFilterV4", "DhcpSetOptionInfo",
+            "DhcpSetOptionInfoV5", "DhcpSetOptionInfoV6", "DhcpSetOptionValue", "DhcpSetOptionValueV5",
+            "DhcpSetOptionValueV6", "DhcpSetOptionValues", "DhcpSetOptionValuesV5", "DhcpSetServerBindingInfo",
+            "DhcpSetServerBindingInfoV6", "DhcpSetSubnetDelayOffer", "DhcpSetSubnetInfo", "DhcpSetSubnetInfoV6",
+            "DhcpSetSubnetInfoVQ", "DhcpSetSuperScopeV4", "DhcpSetThreadOptions", "DhcpUndoRequestParams",
+            "DhcpV4AddPolicyRange", "DhcpV4CreateClientInfo", "DhcpV4CreateClientInfoEx", "DhcpV4CreatePolicy",
+            "DhcpV4CreatePolicyEx", "DhcpV4DeletePolicy", "DhcpV4EnumPolicies", "DhcpV4EnumPoliciesEx",
+            "DhcpV4EnumSubnetClients", "DhcpV4EnumSubnetClientsEx", "DhcpV4EnumSubnetReservations", "DhcpV4FailoverAddScopeToRelationship",
+            "DhcpV4FailoverCreateRelationship", "DhcpV4FailoverDeleteRelationship", "DhcpV4FailoverDeleteScopeFromRelationship", "DhcpV4FailoverEnumRelationship",
+            "DhcpV4FailoverGetAddressStatus", "DhcpV4FailoverGetClientInfo", "DhcpV4FailoverGetRelationship", "DhcpV4FailoverGetScopeRelationship",
+            "DhcpV4FailoverGetScopeStatistics", "DhcpV4FailoverGetSystemTime", "DhcpV4FailoverSetRelationship", "DhcpV4FailoverTriggerAddrAllocation",
+            "DhcpV4GetAllOptionValues", "DhcpV4GetClientInfo", "DhcpV4GetClientInfoEx", "DhcpV4GetFreeIPAddress",
+            "DhcpV4GetOptionValue", "DhcpV4GetPolicy", "DhcpV4GetPolicyEx", "DhcpV4QueryPolicyEnforcement",
+            "DhcpV4RemoveOptionValue", "DhcpV4RemovePolicyRange", "DhcpV4SetOptionValue", "DhcpV4SetOptionValues",
+            "DhcpV4SetPolicy", "DhcpV4SetPolicyEnforcement", "DhcpV4SetPolicyEx", "DhcpV6CreateClientInfo",
+            "DhcpV6GetFreeIPAddress", "DhcpV6GetStatelessStatistics", "DhcpV6GetStatelessStoreParams", "DhcpV6SetStatelessStoreParams",
+            "Dhcpv6CApiCleanup", "Dhcpv6CApiInitialize", "Dhcpv6ReleasePrefix", "Dhcpv6RenewPrefix",
+            "Dhcpv6RequestParams", "Dhcpv6RequestPrefix", "MatchEnumTag", "MatchToken",
+            "MultinetGetConnectionPerformanceA", "MultinetGetConnectionPerformanceW", "NPAddConnection", "NPAddConnection3",
+            "NPAddConnection4", "NPCancelConnection", "NPCancelConnection2", "NPCloseEnum",
+            "NPEnumResource", "NPFormatNetworkName", "NPGetCaps", "NPGetConnection",
+            "NPGetConnection3", "NPGetConnectionPerformance", "NPGetPersistentUseOptionsForConnection", "NPGetResourceInformation",
+            "NPGetResourceParent", "NPGetUniversalName", "NPGetUser", "NPOpenEnum",
+            "Netbios", "PreprocessCommand", "PrintError", "PrintMessage",
+            "PrintMessageFromModule", "RegisterContext", "RegisterHelper", "WNetAddConnection2A",
+            "WNetAddConnection2W", "WNetAddConnection3A", "WNetAddConnection3W", "WNetAddConnection4A",
+            "WNetAddConnection4W", "WNetAddConnectionA", "WNetAddConnectionW", "WNetCancelConnection2A",
+            "WNetCancelConnection2W", "WNetCancelConnectionA", "WNetCancelConnectionW", "WNetCloseEnum",
+            "WNetConnectionDialog", "WNetConnectionDialog1A", "WNetConnectionDialog1W", "WNetDisconnectDialog",
+            "WNetDisconnectDialog1A", "WNetDisconnectDialog1W", "WNetEnumResourceA", "WNetEnumResourceW",
+            "WNetGetConnectionA", "WNetGetConnectionW", "WNetGetLastErrorA", "WNetGetLastErrorW",
+            "WNetGetNetworkInformationA", "WNetGetNetworkInformationW", "WNetGetProviderNameA", "WNetGetProviderNameW",
+            "WNetGetResourceInformationA", "WNetGetResourceInformationW", "WNetGetResourceParentA", "WNetGetResourceParentW",
+            "WNetGetUniversalNameA", "WNetGetUniversalNameW", "WNetGetUserA", "WNetGetUserW",
+            "WNetOpenEnumA", "WNetOpenEnumW", "WNetSetLastErrorA", "WNetSetLastErrorW",
+            "WNetUseConnection4A", "WNetUseConnection4W", "WNetUseConnectionA", "WNetUseConnectionW",
         };
         private static readonly string[] AdditionalOwnedTypes =
         {
@@ -188,15 +342,27 @@ namespace Win32MetadataScraperTests
             "IEventSystem", "IEventPublisher", "IEventClass", "IEventClass2", "IEventSubscription", "IFiringControl",
             "IPublisherFilter", "IMultiInterfacePublisherFilter", "IEventObjectChange", "IEventObjectChange2",
             "IEnumEventObject", "IEventObjectCollection", "IEventProperty", "IEventControl", "IMultiInterfaceEventControl",
+            "CONNECTDLGSTRUCTA", "CONNECTDLGSTRUCTW", "CONNECTDLGSTRUCT_FLAGS", "DHCP_IP_ARRAY",
+            "DISCDLGSTRUCTA", "DISCDLGSTRUCTW", "DISCDLGSTRUCT_FLAGS", "NETINFOSTRUCT",
+            "NETINFOSTRUCT_CHARACTERISTICS", "NETRESOURCEA", "NETRESOURCEW", "NETWORK_NAME_FORMAT_FLAGS",
+            "NET_CONNECT_FLAGS", "NET_RESOURCE_SCOPE", "NET_RESOURCE_TYPE", "NOTIFYADD",
+            "NPDIRECTORY_NOTIFY_OPERATION", "NP_PROPERTY_DIALOG_SELECTION", "UNC_INFO_LEVEL", "WNET_OPEN_ENUM_USAGE",
+            "WNPERM_DLG",
         };
-        private static readonly string[] AdditionalLogicalEnums =
+        private static readonly string[] NetworkLogicalEnums =
+        {
+            "UNC_INFO_LEVEL", "WNPERM_DLG", "WNET_OPEN_ENUM_USAGE", "NET_CONNECT_FLAGS",
+            "NP_PROPERTY_DIALOG_SELECTION", "NPDIRECTORY_NOTIFY_OPERATION", "NET_RESOURCE_TYPE", "NETWORK_NAME_FORMAT_FLAGS",
+            "NET_RESOURCE_SCOPE", "NETINFOSTRUCT_CHARACTERISTICS", "CONNECTDLGSTRUCT_FLAGS", "DISCDLGSTRUCT_FLAGS",
+        };
+        private static readonly string[] AdditionalLogicalEnums = new[]
         {
             "VERIFIER_ENUM_RESOURCE_FLAGS", "ENUM_PROCESS_MODULES_EX_FLAGS", "MW_FILTERMODE",
             "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "HEAPENTRY32_FLAGS",
             "XINPUT_VIRTUAL_KEY", "BATTERY_TYPE", "BATTERY_LEVEL", "BATTERY_DEVTYPE",
             "XINPUT_DEVTYPE", "XINPUT_DEVSUBTYPE", "XINPUT_CAPABILITIES_FLAGS",
             "XINPUT_GAMEPAD_BUTTON_FLAGS", "XINPUT_KEYSTROKE_FLAGS", "XINPUT_FLAG",
-        };
+        }.Concat(NetworkLogicalEnums).ToArray();
 
         public WinHttpMigrationTests(ITestOutputHelper output) => this.output = output;
 
@@ -266,11 +432,13 @@ namespace Win32MetadataScraperTests
             var used = new HashSet<string>(StringComparer.Ordinal);
             var usedRetvals = new HashSet<string>(StringComparer.Ordinal);
             var usedPreservedResults = new HashSet<string>(StringComparer.Ordinal);
+            var usedNativeDirections = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
             foreach (var entry in before)
             {
                 string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedChanges: true,
-                    usedEnumSites: used, usedRetvalSites: usedRetvals, usedPreservedResultSites: usedPreservedResults);
+                    usedEnumSites: used, usedRetvalSites: usedRetvals, usedPreservedResultSites: usedPreservedResults,
+                    usedNativeDirectionSites: usedNativeDirections);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
@@ -280,9 +448,11 @@ namespace Win32MetadataScraperTests
                 .OrderBy(value => value), usedRetvals.OrderBy(value => value));
             Assert.Equal(new[] { $"{ReviewedPreservedResult.Namespace}.{ReviewedPreservedResult.Owner}.{ReviewedPreservedResult.Method}" },
                 usedPreservedResults.OrderBy(value => value));
+            Assert.Equal(NativeDirectionUses.Select(value => $"{value.Namespace}.{value.Owner}.{value.Method}.{value.Parameter}")
+                .OrderBy(value => value), usedNativeDirections.OrderBy(value => value));
             this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; " +
                 $"{used.Count} exact native-type/AssociatedEnum sites, {usedRetvals.Count} native MIDL retval sites " +
-                $"and {usedPreservedResults.Count} reviewed preserved-result site normalized.");
+                $"{usedPreservedResults.Count} reviewed preserved-result site and {usedNativeDirections.Count} exact native SAL direction site normalized.");
         }
 
         [MigrationTheory]
@@ -446,6 +616,125 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain(current.Reader.TypeDefinitions, handle => FullName(current.Reader, handle) == WinHttpNamespace + ".LPWINHTTP_STATUS_CALLBACK");
             Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, "WINHTTP_STATUS_CALLBACK", architecture)),
                 SnapshotType(current.Reader, Type(current.Reader, "WINHTTP_STATUS_CALLBACK", architecture)));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NetworkHeaderFactsPreserveBindingsFloorsAndOwnedRepresentations(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            int imports = 0, floors = 0, lastError = 0;
+            foreach (var (suffix, methodCount, floorCount) in new[]
+            {
+                ("NetBios", 1, 1), ("WNet", 65, 57), ("Dhcp", 210, 191), ("NetShell", 8, 8),
+            })
+            {
+                string ns = "Windows.Win32.NetworkManagement." + suffix;
+                var before = Methods(old.Reader, ns, "Apis", architecture);
+                var after = Methods(current.Reader, ns, "Apis", architecture);
+                Assert.Equal(methodCount, before.Count);
+                Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+                int ownedFloors = 0;
+                foreach (var entry in before)
+                {
+                    var original = entry.Value;
+                    var method = after[entry.Key];
+                    Assert.Equal(original.Attributes, method.Attributes);
+                    Assert.Equal(original.ImplAttributes, method.ImplAttributes);
+                    Assert.Equal(Import(old.Reader, original), Import(current.Reader, method));
+                    Assert.Equal(AttributeValues(old.Reader, original.GetCustomAttributes(), "SupportedOSPlatformAttribute"),
+                        AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    ownedFloors += AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute").Length;
+                    imports++;
+                    lastError += method.GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError) ? 1 : 0;
+                    var originalParameters = original.GetParameters().Select(old.Reader.GetParameter)
+                        .ToDictionary(value => value.SequenceNumber);
+                    var parameters = method.GetParameters().Select(current.Reader.GetParameter)
+                        .ToDictionary(value => value.SequenceNumber);
+                    Assert.Equal(originalParameters.Keys.OrderBy(value => value), parameters.Keys.OrderBy(value => value));
+                    foreach (var parameter in originalParameters)
+                    {
+                        string name = old.Reader.GetString(parameter.Value.Name);
+                        Assert.Equal(name, current.Reader.GetString(parameters[parameter.Key].Name));
+                        var direction = NativeDirectionUses.SingleOrDefault(value =>
+                            (value.Namespace, value.Owner, value.Method, value.Parameter) == (ns, "Apis", entry.Key, name));
+                        if (direction.Parameter == null)
+                            Assert.Equal(parameter.Value.Attributes, parameters[parameter.Key].Attributes);
+                        else
+                        {
+                            Assert.Equal(direction.Before, parameter.Value.Attributes);
+                            Assert.Equal(direction.After, parameters[parameter.Key].Attributes);
+                        }
+                    }
+                }
+                Assert.Equal(floorCount, ownedFloors);
+                floors += ownedFloors;
+            }
+            Assert.Equal(284, imports);
+            Assert.Equal(257, floors);
+            Assert.Equal(2, lastError);
+
+            var oldApis = Methods(old.Reader, WNetNamespace, "Apis", architecture);
+            var apis = Methods(current.Reader, WNetNamespace, "Apis", architecture);
+            var uses = ReviewedEnumUses.Where(value => value.Namespace == WNetNamespace).ToArray();
+            Assert.Equal(75, uses.Length);
+            foreach (var use in uses)
+            {
+                if (apis.TryGetValue(use.Owner, out var method))
+                {
+                    var original = oldApis[use.Owner];
+                    var beforeSignature = original.DecodeSignature(Signatures, null);
+                    var signature = method.DecodeSignature(Signatures, null);
+                    var parameter = use.Member == "return"
+                        ? method.GetParameters().Select(current.Reader.GetParameter).Single(value => value.SequenceNumber == 0)
+                        : method.GetParameters().Select(current.Reader.GetParameter)
+                            .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                    if (use.Member == "return")
+                    {
+                        Assert.Equal(use.OldType, beforeSignature.ReturnType);
+                        Assert.Equal(use.Native, signature.ReturnType);
+                        Assert.DoesNotContain(method.GetCustomAttributes(), handle => AttributeName(current.Reader, handle) == "AssociatedEnumAttribute");
+                    }
+                    else
+                    {
+                        Assert.Equal(use.OldType, beforeSignature.ParameterTypes[parameter.SequenceNumber - 1]);
+                        Assert.Equal(use.Native, signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                    }
+                }
+                else
+                {
+                    var before = Type(old.Reader, use.Owner, architecture, WNetNamespace);
+                    var after = Type(current.Reader, use.Owner, architecture, WNetNamespace);
+                    var original = before.GetFields().Select(old.Reader.GetFieldDefinition)
+                        .Single(value => old.Reader.GetString(value.Name) == use.Member);
+                    var field = after.GetFields().Select(current.Reader.GetFieldDefinition)
+                        .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                    Assert.Equal(use.OldType, original.DecodeSignature(Signatures, null));
+                    Assert.Equal(use.Native, field.DecodeSignature(Signatures, null));
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, field.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                }
+            }
+
+            int members = 0;
+            foreach (string name in NetworkLogicalEnums)
+            {
+                var before = Type(old.Reader, name, architecture, WNetNamespace);
+                var after = Type(current.Reader, name, architecture, WNetNamespace);
+                Assert.Equal(SnapshotType(old.Reader, before), SnapshotType(current.Reader, after));
+                Assert.Equal("System.Enum", FullName(current.Reader, after.BaseType));
+                Assert.DoesNotContain(after.GetCustomAttributes(), handle => AttributeName(current.Reader, handle) == "ScopedEnumAttribute");
+                var fields = after.GetFields().Select(current.Reader.GetFieldDefinition).ToArray();
+                Assert.Equal("UInt32", fields.Single(value => current.Reader.GetString(value.Name) == "value__").DecodeSignature(Signatures, null));
+                members += fields.Count(value => !value.GetDefaultValue().IsNil);
+            }
+            Assert.Equal(12, NetworkLogicalEnums.Length);
+            Assert.Equal(55, members);
+            this.output.WriteLine($"Network/{architecture}: {imports} exact DLL bindings, {floors} unchanged OS floors, " +
+                $"{lastError} last-error imports, {uses.Length} exact associations, and 12 unchanged logical enums/{members} members.");
         }
 
         [MigrationTheory]
@@ -651,12 +940,154 @@ namespace Win32MetadataScraperTests
             }
             foreach (string partition in new[] { "CEIP", "ApplicationVerifier", "MagApi", "PsApi1", "Time", "Ual",
                 "ToolHelp", "UpdateAssessment", "Wsl", "Xinput", "SecurityCenter", "WinSat",
-                "Wcm", "InputRadial", "WinContacts", "WinLocation", "Rdc", "Nla", "Com.CallObj", "Com.Events" })
+                "Wcm", "InputRadial", "WinContacts", "WinLocation", "Rdc", "Nla", "Com.CallObj", "Com.Events",
+                "NetBios", "Wnet", "Dhcp", "NetShell" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
             foreach (string partition in new[] { "Base", "FileHistory", "PsApi2", "HttpServer",
                 "ComOle", "WindowsConnectionManager", "TransactionServer", "Enstor" })
                 Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
+        }
+
+        [Theory]
+        [InlineData("valid")]
+        [InlineData("wrong-enum")]
+        [InlineData("wrong-target")]
+        [InlineData("wrong-native-type")]
+        [InlineData("wrong-old-enum-namespace")]
+        [InlineData("missing-return-parameter")]
+        [InlineData("changed-import")]
+        public void ReturnAssociationNormalizationRequiresExactMetadata(string mutation)
+        {
+            using var old = Fixture(native: false, mutation);
+            using var current = Fixture(native: true, mutation);
+            var before = old.GetMetadataReader();
+            var after = current.GetMetadataReader();
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            var original = before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(3));
+            if (mutation == "wrong-old-enum-namespace")
+            {
+                Assert.ThrowsAny<XunitException>(() => SnapshotType(before, original,
+                    normalizeReviewedChanges: true, usedEnumSites: used));
+                Assert.Empty(used);
+                return;
+            }
+            string expected = SnapshotType(before, original, normalizeReviewedChanges: true, usedEnumSites: used);
+            string actual = SnapshotType(after, after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(3)));
+            Assert.Equal(new[] { WNetNamespace + ".WNetAddConnectionA::return" }, used);
+            if (mutation == "valid")
+                Assert.Equal(expected, actual);
+            else
+                Assert.NotEqual(expected, actual);
+
+            static MetadataReaderProvider Fixture(bool native, string mutation)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("Return.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                var runtime = metadata.AddAssemblyReference(metadata.GetOrAddString("System.Runtime"),
+                    new Version(10, 0), default, default, 0, default);
+                var enumBase = metadata.AddTypeReference(runtime, metadata.GetOrAddString("System"), metadata.GetOrAddString("Enum"));
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var enumeration = metadata.AddTypeDefinition(TypeAttributes.Public,
+                    metadata.GetOrAddString(!native && mutation == "wrong-old-enum-namespace" ? WNetNamespace : "Windows.Win32.Foundation"),
+                    metadata.GetOrAddString("WIN32_ERROR"), enumBase,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var fieldSignature = new BlobBuilder();
+                new BlobEncoder(fieldSignature).FieldSignature().UInt32();
+                metadata.AddFieldDefinition(FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName,
+                    metadata.GetOrAddString("value__"), metadata.GetOrAddBlob(fieldSignature));
+                metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(WNetNamespace), metadata.GetOrAddString("Apis"), default,
+                    MetadataTokens.FieldDefinitionHandle(2), MetadataTokens.MethodDefinitionHandle(1));
+                var signature = new BlobBuilder();
+                new BlobEncoder(signature).MethodSignature().Parameters(0, result =>
+                {
+                    var type = result.Type();
+                    if (!native)
+                        type.Type(enumeration, isValueType: true);
+                    else if (mutation == "wrong-native-type")
+                        type.Int32();
+                    else
+                        type.UInt32();
+                }, parameters => { });
+                var method = metadata.AddMethodDefinition(MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl,
+                    MethodImplAttributes.PreserveSig, metadata.GetOrAddString("WNetAddConnectionA"), metadata.GetOrAddBlob(signature), -1,
+                    MetadataTokens.ParameterHandle(1));
+                var module = metadata.AddModuleReference(metadata.GetOrAddString(native && mutation == "changed-import" ? "other.dll" : "MPR.dll"));
+                metadata.AddMethodImport(method, MethodImportAttributes.CallingConventionWinApi, metadata.GetOrAddString("WNetAddConnectionA"), module);
+                if (!native || mutation != "missing-return-parameter")
+                {
+                    var parameter = metadata.AddParameter(0, metadata.GetOrAddString(""), 0);
+                    if (native)
+                    {
+                        var attribute = metadata.AddTypeReference(MetadataTokens.EntityHandle(1),
+                            metadata.GetOrAddString(MetadataNamespace), metadata.GetOrAddString("AssociatedEnumAttribute"));
+                        var constructorSignature = new BlobBuilder();
+                        new BlobEncoder(constructorSignature).MethodSignature(isInstanceMethod: true).Parameters(1,
+                            result => result.Void(), parameters => parameters.AddParameter().Type().String());
+                        var constructor = metadata.AddMemberReference(attribute, metadata.GetOrAddString(".ctor"),
+                            metadata.GetOrAddBlob(constructorSignature));
+                        var value = new BlobBuilder();
+                        value.WriteUInt16(1);
+                        value.WriteSerializedString(mutation == "wrong-enum" ? "NET_CONNECT_FLAGS" : "WIN32_ERROR");
+                        value.WriteUInt16(0);
+                        metadata.AddCustomAttribute(mutation == "wrong-target" ? (EntityHandle)method : parameter,
+                            constructor, metadata.GetOrAddBlob(value));
+                    }
+                }
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+            }
+        }
+
+        [Theory]
+        [InlineData(3, true)]
+        [InlineData(2, false)]
+        [InlineData(1, false)]
+        [InlineData(19, false)]
+        [InlineData(11, false)]
+        public void NativeDirectionNormalizationChangesOnlyTheExactSdkFlags(int flags, bool equal)
+        {
+            using var old = Fixture(ParameterAttributes.Out);
+            using var current = Fixture((ParameterAttributes)flags);
+            var before = old.GetMetadataReader();
+            var after = current.GetMetadataReader();
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            string expected = SnapshotType(before, before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)),
+                normalizeReviewedChanges: true, usedNativeDirectionSites: used);
+            string actual = SnapshotType(after, after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)));
+            Assert.Equal(new[] { DhcpNamespace + ".Apis.DhcpEnumSubnets.EnumInfo" }, used);
+            Assert.Equal(equal, expected == actual);
+
+            static MetadataReaderProvider Fixture(ParameterAttributes direction)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("Direction.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(DhcpNamespace), metadata.GetOrAddString("Apis"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var signature = new BlobBuilder();
+                new BlobEncoder(signature).MethodSignature().Parameters(6, result => result.Type().UInt32(), parameters =>
+                {
+                    for (int index = 0; index < 6; index++)
+                        parameters.AddParameter().Type().UInt32();
+                });
+                var method = metadata.AddMethodDefinition(MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.PinvokeImpl,
+                    MethodImplAttributes.PreserveSig, metadata.GetOrAddString("DhcpEnumSubnets"), metadata.GetOrAddBlob(signature), -1,
+                    MetadataTokens.ParameterHandle(1));
+                var module = metadata.AddModuleReference(metadata.GetOrAddString("dhcpsapi.dll"));
+                metadata.AddMethodImport(method, MethodImportAttributes.CallingConventionWinApi, metadata.GetOrAddString("DhcpEnumSubnets"), module);
+                var names = new[] { "ServerIpAddress", "ResumeHandle", "PreferredMaximum", "EnumInfo", "ElementsRead", "ElementsTotal" };
+                for (int index = 0; index < names.Length; index++)
+                    metadata.AddParameter(index == 3 ? direction : ParameterAttributes.In, metadata.GetOrAddString(names[index]), index + 1);
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+            }
         }
 
         [Theory]
@@ -804,7 +1235,7 @@ namespace Win32MetadataScraperTests
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
             bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null,
-            ISet<string> usedPreservedResultSites = null)
+            ISet<string> usedPreservedResultSites = null, ISet<string> usedNativeDirectionSites = null)
         {
             string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false,
                 bool preservedResult = false)
@@ -872,10 +1303,22 @@ namespace Win32MetadataScraperTests
                 string methodName = reader.GetString(method.Name);
                 var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
                 var parameterTypes = signature.ParameterTypes.ToArray();
+                string returnType = signature.ReturnType;
                 var parameterEnums = new Dictionary<int, string>();
                 foreach (var use in uses.Where(value => typeName == "Apis" && value.Owner == methodName))
                 {
-                    var parameter = parameters.Single(value => reader.GetString(value.Name) == use.Member);
+                    var parameter = use.Member == "return"
+                        ? parameters.Single(value => value.SequenceNumber == 0)
+                        : parameters.Single(value => reader.GetString(value.Name) == use.Member);
+                    if (use.Member == "return")
+                    {
+                        Assert.Equal("", reader.GetString(parameter.Name));
+                        Assert.Equal(use.OldType, returnType);
+                        returnType = use.Native;
+                        parameterEnums.Add(0, use.Enum);
+                        usedEnumSites?.Add(use.Site);
+                        continue;
+                    }
                     Assert.True(parameter.SequenceNumber > 0);
                     Assert.Equal(use.OldType, parameterTypes[parameter.SequenceNumber - 1]);
                     parameterTypes[parameter.SequenceNumber - 1] = use.Native;
@@ -897,7 +1340,7 @@ namespace Win32MetadataScraperTests
                     implementation |= MethodImplAttributes.PreserveSig;
                     usedPreservedResultSites?.Add($"{ns}.{typeName}.{methodName}");
                 }
-                rows.Add($"M|{methodName}|{method.Attributes}|{implementation}|{Signature(signature, header, parameterTypes)}|" +
+                rows.Add($"M|{methodName}|{method.Attributes}|{implementation}|{Signature(signature, header, parameterTypes, returnType)}|" +
                     $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes(), preservedResult: preservedResult)}");
                 foreach (var parameter in parameters)
                 {
@@ -905,8 +1348,19 @@ namespace Win32MetadataScraperTests
                     bool nativeRetval = normalizeReviewedChanges && NativeRetvalUses.Contains((ns, typeName, methodName, parameterName));
                     if (nativeRetval)
                         usedRetvalSites?.Add($"{ns}.{typeName}.{methodName}.{parameterName}");
+                    var direction = normalizeReviewedChanges
+                        ? NativeDirectionUses.SingleOrDefault(value =>
+                            (value.Namespace, value.Owner, value.Method, value.Parameter) == (ns, typeName, methodName, parameterName))
+                        : default;
+                    var parameterAttributes = parameter.Attributes;
+                    if (direction.Parameter != null)
+                    {
+                        Assert.Equal(direction.Before, parameterAttributes);
+                        parameterAttributes = direction.After;
+                        usedNativeDirectionSites?.Add($"{ns}.{typeName}.{methodName}.{parameterName}");
+                    }
                     string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber), nativeRetval);
-                    rows.Add($"P|{parameter.SequenceNumber}|{reader.GetString(parameter.Name)}|{parameter.Attributes}|" +
+                    rows.Add($"P|{parameter.SequenceNumber}|{reader.GetString(parameter.Name)}|{parameterAttributes}|" +
                         $"{Blob(parameter.GetMarshallingDescriptor())}|{attributes}");
                 }
             }
@@ -941,8 +1395,8 @@ namespace Win32MetadataScraperTests
                 }
             }, reader.GetTypeDefinition, StringComparer.Ordinal);
 
-        private static TypeDefinition Type(MetadataReader reader, string name, int architecture)
-            => reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type => reader.GetString(type.Namespace) == WinHttpNamespace &&
+        private static TypeDefinition Type(MetadataReader reader, string name, int architecture, string ns = WinHttpNamespace)
+            => reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type => reader.GetString(type.Namespace) == ns &&
                 reader.GetString(type.Name) == name && Supports(reader, type.GetCustomAttributes(), architecture));
 
         private static bool Supports(MetadataReader reader, CustomAttributeHandleCollection attributes, int architecture)
@@ -1005,14 +1459,15 @@ namespace Win32MetadataScraperTests
             throw new InvalidDataException("Unsupported type handle: " + handle.Kind);
         }
 
-        private static string Signature(MethodSignature<string> signature, int? header = null, IEnumerable<string> parameterTypes = null)
-            => $"{header ?? signature.Header.RawValue}|{signature.GenericParameterCount}|{signature.RequiredParameterCount}|{signature.ReturnType}|" +
+        private static string Signature(MethodSignature<string> signature, int? header = null, IEnumerable<string> parameterTypes = null,
+            string returnType = null)
+            => $"{header ?? signature.Header.RawValue}|{signature.GenericParameterCount}|{signature.RequiredParameterCount}|{returnType ?? signature.ReturnType}|" +
                 string.Join(",", parameterTypes ?? signature.ParameterTypes);
 
-        private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native)
+        private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native, string EnumNamespace = null)
         {
             internal string Site => Namespace + "." + Owner + "::" + Member;
-            internal string OldType => Namespace + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
+            internal string OldType => (EnumNamespace ?? Namespace) + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
         }
 
         private static Image Open(string variable) => new Image(Environment.GetEnvironmentVariable(variable));
