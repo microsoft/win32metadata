@@ -75,6 +75,19 @@ static_assert(INTERNET_SCHEME_SOCKS == 4);
             Assert.NotEmpty(headers);
             string checks = partition switch
             {
+                "RstMgr" => @"
+static_assert(sizeof(DWORD) == 4);
+static_assert(sizeof(((RM_PROCESS_INFO*)nullptr)->AppStatus) == 4);
+static_assert(RmStatusUnknown == 0);
+static_assert(RmStatusRunning == 1);
+static_assert(RmStatusStopped == 2);
+static_assert(RmStatusStoppedOther == 4);
+static_assert(RmStatusRestarted == 8);
+static_assert(RmStatusErrorOnStop == 0x10);
+static_assert(RmStatusErrorOnRestart == 0x20);
+static_assert(RmStatusShutdownMasked == 0x40);
+static_assert(RmStatusRestartMasked == 0x80);
+",
                 "Cabinets" => @"
 static_assert(cpuUNKNOWN == -1);
 static_assert(cpu80286 == 0);

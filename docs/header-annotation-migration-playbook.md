@@ -166,6 +166,22 @@ Use the existing selected scrape/full-source overlay loop where appropriate.
 closure. Recompute complete constants and pointer discoveries, retaining
 unselected inputs. Reject success-shaped partial images with dangling references.
 
+For expanded integration, an emitted overlay image is not proof that every
+physical dependent was freshly scraped. `Windows.h` unconditionally includes
+`winnetwk.h`; at least 308 direct Windows-header-dependent partitions require
+fresh source closure in the actual full-SDK producer run. They are physical
+dependents, not additional semantic owner migrations.
+
+RstMgr relocates eleven existing `WIN32_ERROR` return substitutions to native
+`DWORD` returns with exact enum associations, and the existing
+`RM_PROCESS_INFO.AppStatus` association stays on native `ULONG` storage. The
+native `RM_APP_STATUS` enum, its nine members and non-Flags representation stay
+unchanged. One bounded Vista scope covers exactly the eleven owned functions,
+replacing eleven matching OS sidecar rows. Correct SDK library bindings remain
+derived. `CCH_RM_SESSION_KEY` remains a separately held native-expression parser
+gap; no native macro or manual constant shape is changed. This source integration
+does not constitute actual architecture/image/full-SDK/CI acceptance.
+
 ## 5. Validate the actual output, not a proxy
 
 - Compile metadata-disabled native owner/dependent translation units on x86,

@@ -21,6 +21,7 @@ namespace Win32MetadataScraperTests
         private const string MetadataNamespace = "Windows.Win32.Foundation.Metadata";
         private const string WNetNamespace = "Windows.Win32.NetworkManagement.WNet";
         private const string DhcpNamespace = "Windows.Win32.NetworkManagement.Dhcp";
+        private const string RestartManagerNamespace = "Windows.Win32.System.RestartManager";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
@@ -33,6 +34,11 @@ namespace Win32MetadataScraperTests
             ("WINHTTP_CREDS_EX", "dwAuthScheme", "WINHTTP_CREDS_AUTHSCHEME", "UInt32"),
             ("URL_COMPONENTS", "nScheme", "WINHTTP_INTERNET_SCHEME", "Int32"),
             ("WINHTTP_PROXY_RESULT_ENTRY", "ProxyScheme", "WINHTTP_INTERNET_SCHEME", "Int32"),
+        };
+        private static readonly string[] RestartManagerFunctions =
+        {
+            "RmStartSession", "RmJoinSession", "RmEndSession", "RmRegisterResources", "RmGetList",
+            "RmShutdown", "RmRestart", "RmCancelCurrentTask", "RmAddFilter", "RmRemoveFilter", "RmGetFilterList",
         };
         private static readonly EnumUse[] ReviewedEnumUses = Associations
             .Select(value => new EnumUse(WinHttpNamespace, value.Owner, value.Member, value.Enum, value.Native))
@@ -129,7 +135,9 @@ namespace Win32MetadataScraperTests
                 new EnumUse(WNetNamespace, "WNetUseConnectionA", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
                 new EnumUse(WNetNamespace, "WNetUseConnectionW", "dwFlags", "NET_CONNECT_FLAGS", "UInt32"),
                 new EnumUse(WNetNamespace, "WNetUseConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
-            }).ToArray();
+            })
+            .Concat(RestartManagerFunctions.Select(name => new EnumUse(RestartManagerNamespace, name,
+                "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"))).ToArray();
         private static readonly (string Namespace, string Owner, string Method, string Parameter)[] NativeRetvalUses =
         {
             ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetAddressLine1", "pbstrAddress1"),
@@ -453,6 +461,69 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; " +
                 $"{used.Count} exact native-type/AssociatedEnum sites, {usedRetvals.Count} native MIDL retval sites " +
                 $"{usedPreservedResults.Count} reviewed preserved-result site and {usedNativeDirections.Count} exact native SAL direction site normalized.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void RestartManagerAssociationsPreserveNativeContracts(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(old.Reader, RestartManagerNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, RestartManagerNamespace, "Apis", architecture);
+            Assert.Equal(RestartManagerFunctions.OrderBy(value => value), before.Keys.OrderBy(value => value));
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (string name in RestartManagerFunctions)
+            {
+                var original = before[name];
+                var method = after[name];
+                var oldSignature = original.DecodeSignature(Signatures, null);
+                var newSignature = method.DecodeSignature(Signatures, null);
+                Assert.Equal("Windows.Win32.Foundation.WIN32_ERROR", oldSignature.ReturnType);
+                Assert.Equal("UInt32", newSignature.ReturnType);
+                Assert.Equal(Signature(oldSignature, returnType: "UInt32"), Signature(newSignature));
+                Assert.Equal(original.Attributes, method.Attributes);
+                Assert.Equal(original.ImplAttributes, method.ImplAttributes);
+                Assert.Equal(Import(old.Reader, original), Import(current.Reader, method));
+                Assert.Equal(new[] { "windows6.0.6000" },
+                    AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(AttributeValues(old.Reader, original.GetCustomAttributes(), "SupportedOSPlatformAttribute"),
+                    AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                var oldParameters = original.GetParameters().Select(old.Reader.GetParameter).ToArray();
+                var parameters = method.GetParameters().Select(current.Reader.GetParameter).ToArray();
+                Assert.Equal(oldParameters.Select(value => value.SequenceNumber), parameters.Select(value => value.SequenceNumber));
+                Assert.Equal(oldParameters.Select(value => value.Attributes), parameters.Select(value => value.Attributes));
+                var result = parameters.Single(value => value.SequenceNumber == 0);
+                Assert.Single(result.GetCustomAttributes());
+                Assert.Equal(new[] { "WIN32_ERROR" },
+                    AttributeValues(current.Reader, result.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            }
+            foreach (string name in new[] { "RM_PROCESS_INFO", "RM_APP_STATUS", "WIN32_ERROR" })
+                Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, name, architecture)),
+                    SnapshotType(current.Reader, Type(current.Reader, name, architecture)));
+        }
+
+        [Fact]
+        public void RestartManagerHeaderFactsHaveNoAuthoredFallback()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string[] rows = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
+            string[] osRows = File.ReadAllLines(Path.Combine(project, "supportedOS.rsp"));
+            Assert.DoesNotContain(rows, row => row.StartsWith("RM_PROCESS_INFO::AppStatus=", StringComparison.Ordinal));
+            foreach (string name in RestartManagerFunctions)
+            {
+                Assert.DoesNotContain(rows, row => row.StartsWith(name + "::return=", StringComparison.Ordinal));
+                Assert.DoesNotContain(osRows, row => row.StartsWith(name + "=", StringComparison.Ordinal));
+            }
+            Assert.Contains("parse-win32-annotations",
+                File.ReadAllText(Path.Combine(project, "Partitions", "RstMgr", "settings.rsp")));
+            string patch = File.ReadAllText(Path.Combine(project, "patches", "post-midl", "um", "restartmanager.annotations.patch"));
+            Assert.Single(patch.Split('\n').Where(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_BEGIN_(WindowsVista)"));
+            Assert.Single(patch.Split('\n').Where(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_END_()"));
+            Assert.DoesNotContain("_Win32_DllImport_", patch);
+            Assert.DoesNotContain("_Win32_ImportLibrary_", patch);
         }
 
         [MigrationTheory]

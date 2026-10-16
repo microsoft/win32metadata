@@ -417,6 +417,12 @@
       "sourceSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\websocket.h",
       "sdkSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114"
+    },
+    {
+      "path": "um\\RestartManager.h",
+      "sourceSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\RestartManager.h",
+      "sdkSha256": "C7094C7B308BE0CA37E2BD5C77CF7D793F324FDE10BF306660B09B9641F093F8"
     }
   ],
   "partitions": [
@@ -469,7 +475,8 @@
     "WebDav",
     "Tbs",
     "Antimalware",
-    "WebSock"
+    "WebSock",
+    "RstMgr"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -527,6 +534,7 @@
     "post-midl\\um\\fhcfg.annotations.patch",
     "post-midl\\um\\fhsvcctl.annotations.patch",
     "post-midl\\um\\amsi.annotations.patch",
-    "post-midl\\um\\websocket.annotations.patch"
+    "post-midl\\um\\websocket.annotations.patch",
+    "post-midl\\um\\restartmanager.annotations.patch"
   ]
 }
