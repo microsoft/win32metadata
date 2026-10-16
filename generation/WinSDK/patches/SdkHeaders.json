@@ -375,6 +375,48 @@
       "sourceSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\davclnt.h",
       "sdkSha256": "9E9032F6463B611F3BCF049B95A2E8E44793428368887C2C65607975F5EDD132"
+    },
+    {
+      "path": "shared\\tbs.h",
+      "sourceSha256": "27522D3315474402723D83375BA6CDE07D40AB2B952F36C64B48C153A707C2EA",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\tbs.h",
+      "sdkSha256": "27522D3315474402723D83375BA6CDE07D40AB2B952F36C64B48C153A707C2EA"
+    },
+    {
+      "path": "um\\FhCfg.h",
+      "sourceSha256": "1BE428193494C7C6FFA98EA2DE61748F54351F5741BCA6404F2514D6FF4B2F75",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\FhCfg.idl",
+      "sdkSha256": "EE64E8CCA3D20B51AA58023C2C8561000A722B3A0CD39786ABF5835584B4DF3C"
+    },
+    {
+      "path": "um\\FhSvcCtl.h",
+      "sourceSha256": "7E0C895E8FC27B22646D01E6D8D73F8989682F592B872C5A74A0D0D3EED9BF59",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\FhSvcCtl.h",
+      "sdkSha256": "7E0C895E8FC27B22646D01E6D8D73F8989682F592B872C5A74A0D0D3EED9BF59"
+    },
+    {
+      "path": "um\\fherrors.h",
+      "sourceSha256": "A4A1E4ED07785A0568C8A08EB37900AFDE1DC2F14FD76FED7E6F42D9E56A475B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fherrors.h",
+      "sdkSha256": "A4A1E4ED07785A0568C8A08EB37900AFDE1DC2F14FD76FED7E6F42D9E56A475B"
+    },
+    {
+      "path": "um\\fhstatus.h",
+      "sourceSha256": "83AD5BD5559360FCFC816F4D7740EC7801779F39DE3690845D760E6CD014779F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fhstatus.h",
+      "sdkSha256": "83AD5BD5559360FCFC816F4D7740EC7801779F39DE3690845D760E6CD014779F"
+    },
+    {
+      "path": "um\\amsi.h",
+      "sourceSha256": "9B3F9C3AE71FDEB1EC2A948EE98EABD74C3D9FCC355A754881D89A3C53C838CE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amsi.idl",
+      "sdkSha256": "17D39F2A78E7D3DCF0E10AC146F11070BFE9374004199F424E194568C7B62EAC"
+    },
+    {
+      "path": "um\\websocket.h",
+      "sourceSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\websocket.h",
+      "sdkSha256": "7F7EE5D2FDBE9623A0D10DA5E49986485820684BACE387184BA30F1836FDB114"
     }
   ],
   "partitions": [
@@ -424,7 +466,10 @@
     "Wcn",
     "Cabinets",
     "MdmReg",
-    "WebDav"
+    "WebDav",
+    "Tbs",
+    "Antimalware",
+    "WebSock"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -477,6 +522,11 @@
     "post-midl\\um\\wcndevice.annotations.patch",
     "post-midl\\um\\fdi.annotations.patch",
     "post-midl\\um\\mdmregistration.annotations.patch",
-    "post-midl\\um\\davclnt.annotations.patch"
+    "post-midl\\um\\davclnt.annotations.patch",
+    "post-midl\\shared\\tbs.annotations.patch",
+    "post-midl\\um\\fhcfg.annotations.patch",
+    "post-midl\\um\\fhsvcctl.annotations.patch",
+    "post-midl\\um\\amsi.annotations.patch",
+    "post-midl\\um\\websocket.annotations.patch"
   ]
 }

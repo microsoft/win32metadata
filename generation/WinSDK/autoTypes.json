@@ -771,8 +771,6 @@
     "Namespace": "Windows.Win32.Storage.FileHistory",
     "Name": "FH_SERVICE_PIPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "FhServiceClosePipe",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
@@ -990,8 +988,6 @@
     "Namespace": "Windows.Win32.Networking.WebSocket",
     "Name": "WEB_SOCKET_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "WebSocketDeleteHandle",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {

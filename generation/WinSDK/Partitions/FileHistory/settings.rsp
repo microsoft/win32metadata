@@ -5,3 +5,5 @@
 <IncludeRoot>/um/fhstatus.h
 --namespace
 Windows.Win32.Storage.FileHistory
+--config
+parse-win32-annotations

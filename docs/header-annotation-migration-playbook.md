@@ -246,7 +246,8 @@ Each batch must pass the preceding producer gates before the next is admitted.
 
 The image helper reads the recipe's complete owner/dependent partition list and
 overlays the sources actually produced for those partitions. `Base` and
-`FileHistory` also include batch-1 headers; they remain unconverted dependents.
+`FileHistory` also include batch-1 headers; at that checkpoint they remained
+unconverted dependents.
 `PsApi2` shares `psapi.h` with `PsApi1` and must remain unchanged. A shared
 namespace is not evidence of shared semantic ownership.
 

@@ -944,7 +944,7 @@ namespace Win32MetadataScraperTests
                 "NetBios", "Wnet", "Dhcp", "NetShell" })
                 Assert.Contains("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
             Assert.DoesNotContain("--with-librarypath", File.ReadAllText(Path.Combine(project, "Partitions", "Wsl", "settings.rsp")));
-            foreach (string partition in new[] { "Base", "FileHistory", "PsApi2", "HttpServer",
+            foreach (string partition in new[] { "Base", "PsApi2", "HttpServer",
                 "ComOle", "WindowsConnectionManager", "TransactionServer", "Enstor" })
                 Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(Path.Combine(project, "Partitions", partition, "settings.rsp")));
         }
