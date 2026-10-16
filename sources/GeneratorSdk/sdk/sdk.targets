@@ -182,7 +182,6 @@
     <!-- Generated settings must come before project/manual RSPs so manual overrides win. -->
     <FinalScraperRsp Include="$(ScraperFunctionPointerFixupsRsp)"/>
     <FinalScraperRsp Include="$(ScraperAutoTypesRsp)"/>
-    <FinalScraperRsp Condition="Exists('$(ScraperAutoRemapsRsp)')" Include="$(ScraperAutoRemapsRsp)"/>
     <FinalScraperRsp Include="@(ScraperRsp)"/>
     <FinalScraperRsp Include="$(FilteredRspForHeaders)"/>
     <FinalScraperRsp Include="$(WithLibsRsp)"/>
@@ -201,6 +200,7 @@
       Condition="'$(SkipScraping)' != 'true'"
       Partitions="@(Partition)"
       ResponseFiles="@(FinalScraperRsp)"
+      AutoRemapsResponseFile="$(ScraperAutoRemapsRsp)"
       ScraperFunctionPointerFixupsRsp="$(ScraperFunctionPointerFixupsRsp)"
       EmitterFunctionPointerFixupsRsp="$(EmitterFunctionPointerFixupsRsp)"
       HeaderTextFile="$(FinalScraperHeaderFile)"

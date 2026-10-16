@@ -698,7 +698,7 @@ namespace ClangSharpSourceToWinmd
                 this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
                     this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()),
-                    this.metadataBuilder.GetOrAddString(node.Identifier.ValueText),
+                    this.metadataBuilder.GetOrAddString(FixArchSpecificName(node.Identifier.ValueText)),
                     this.GetTypeReference("System", "Enum"),
                     fieldList: valueFieldDef,
                     methodList: MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));
@@ -1036,8 +1036,8 @@ namespace ClangSharpSourceToWinmd
 
             this.EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType, out var wasEnum);
 
-            // Don't try to fix up an enum
-            if (wasEnum)
+            // AssociatedEnum describes values without replacing the declared native type.
+            if (wasEnum || ownerAttributes.Any(attribute => attribute.AttributeClass.Name == "AssociatedEnumAttribute"))
             {
                 return;
             }
@@ -1389,7 +1389,7 @@ namespace ClangSharpSourceToWinmd
                         symbol,
                         MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
                         methodImplAttributes,
-                        false,
+                        !symbol.IsStatic,
                         false);
 
                 if (firstMethod.IsNil)

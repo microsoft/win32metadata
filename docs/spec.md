@@ -209,6 +209,19 @@ are already in SDK headers. ClangSharp preserves them as `[CppAttributeList]` at
 (v17) or `[NativeAnnotation]` attributes (v18+). The emitter processes these to generate
 managed attributes like `[In]`, `[Out]`, etc.
 
+Native field element-count inference is disabled by default. The emitter's global
+`--nativeFieldArrayInfo` option enables it for pointer and array fields, producing
+`[NativeArrayInfo(CountFieldName = "...")]` for sibling-field counts or
+`[NativeArrayInfo(CountConst = ...)]` for nonnegative constant counts. Scalar
+access spans do not become array attributes. Parameter SAL processing is unchanged.
+
+### SupportedOS declaration placement
+
+The `_Win32_SupportedOS_*_` macros support individual enum members using postfix
+placement, for example `Value _Win32_SupportedOS_Windows8_ = 1`. Const-qualified
+native variables use prefix placement. A member's OS floor does not change the
+enum's floor or annotate its other members.
+
 ### Custom metadata annotations (`w32m:` prefix)
 
 Additional metadata that isn't in the SDK headers today can be expressed as

@@ -3,7 +3,7 @@
 ## Status
 
 This document defines how Windows SDK C/C++ headers represent win32metadata semantics
-and how the windows-rs metadata toolchain consumes them.
+for the C# and windows-rs metadata toolchains.
 
 Metadata is generated from Windows SDKs that ship. The SDK selected for a metadata
 release defines its API surface. Headers and APIs absent from that SDK, including
@@ -74,16 +74,25 @@ the resulting constant expression. It emits one `RAIIFreeAttribute` plus one
 `InvalidHandleValueAttribute` for each supplied value. An unresolved or non-constant
 value is an error.
 
-windows-rs enables `WIN32METADATA` while scraping annotated headers. Unknown,
+Metadata consumers enable `WIN32METADATA` while scraping annotated headers. Unknown,
 malformed, valued-versus-valueless, and incorrectly placed annotations are errors with
 source locations.
+
+The C# scraper opts in with `--config parse-win32-annotations` and also defines the
+private `WIN32METADATA_CSHARP` transport gate. Under that gate, the canonical header
+adds a companion payload containing the declaration-time expansion of the RAII
+arguments. This lets ClangSharp evaluate constants in unsaved, byte-preserving
+header buffers at their original declaration scope, including macros redefined
+later in the file. The companion is consumed before emission and does not add a
+public annotation or winmd attribute. Consumers defining only `WIN32METADATA`
+continue to receive the single authored `RAIIFree(...)` payload above.
 
 Custom names use an explicit `_Win32_` owner prefix and PascalCase semantic names. For
 example, use `_Win32_SetLastError_`, `_Win32_ImportLibrary_(...)`,
 `_Win32_Retval_`, and `_Win32_Retained_`.
 
 IDL `[retval]` does not survive in MIDL-generated headers as SAL. It remains in comments
-such as `/* [retval] */`, which windows-rs parses. C/C++-authored declarations without
+such as `/* [retval] */`, which metadata consumers parse. C/C++-authored declarations without
 that comment combine ordinary direction SAL with `_Win32_Retval_`:
 
 ```cpp
@@ -97,7 +106,7 @@ virtual HRESULT STDMETHODCALLTYPE GetDesc(
 
 Function metadata and metadata describing the return value precede the complete
 declaration. Clang attaches a prefix `annotate` attribute to the `FunctionDecl`; the
-windows-rs consumer maps return-oriented annotations from that declaration to the
+metadata consumer maps return-oriented annotations from that declaration to the
 metadata return parameter. The annotation must not be inserted between `WINAPI` and
 the function name.
 
