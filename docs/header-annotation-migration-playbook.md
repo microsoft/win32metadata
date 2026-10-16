@@ -92,6 +92,14 @@ member in the same namespace and applicable architecture, preserving the alias's
 declared constant type. Ambiguous bindings remain errors; do not add enum members,
 rewrite native values or suppress aliases merely because OLD omitted them.
 
+Removing an authored enum use can also remove the namespace inference of a
+retained, unmigrated logical enum. Preserve its existing namespace through the
+existing global namespace-resolution configuration; do not retain a semantic
+fallback use, duplicate the enum or allow a namespace change in the grade.
+For a typed native constant that changes source-emission position, any physical
+comparison adjustment must name that exact static literal, assert its complete
+type/value/attribute shape, and preserve every other field's order and layout.
+
 Keep expectations exact and source-backed, with zero unknown differences and zero
 unused expectations. There is no blanket native-derived difference or duplicate
 allowlist, and no assumption that faithful capture implies consumer compatibility.

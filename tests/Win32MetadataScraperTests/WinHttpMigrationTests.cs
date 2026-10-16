@@ -22,6 +22,18 @@ namespace Win32MetadataScraperTests
         private const string WNetNamespace = "Windows.Win32.NetworkManagement.WNet";
         private const string DhcpNamespace = "Windows.Win32.NetworkManagement.Dhcp";
         private const string RestartManagerNamespace = "Windows.Win32.System.RestartManager";
+        private const string BluetoothNamespace = "Windows.Win32.Devices.Bluetooth";
+        private const string HidNamespace = "Windows.Win32.Devices.HumanInterfaceDevice";
+        private const string WerNamespace = "Windows.Win32.System.ErrorReporting";
+        private const string PowerNamespace = "Windows.Win32.System.Power";
+        private const string CabinetsNamespace = "Windows.Win32.Storage.Cabinets";
+        private const string WebSocketNamespace = "Windows.Win32.Networking.WebSocket";
+        private const string FileHistoryNamespace = "Windows.Win32.Storage.FileHistory";
+        private const string ProcessSnapshotNamespace = "Windows.Win32.System.Diagnostics.ProcessSnapshotting";
+        private const string HidConstant = "HIDP_STATUS_I8242_TRANS_UNKNOWN";
+        private const string WerAlias = "WER_SUBMIT_DISCARD_IF_QUEUED";
+        private const string WerAliasField = "F|" + WerAlias +
+            "|Public, Static, Literal, HasDefault|UInt32|-1|UInt32:80000000||";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
@@ -39,6 +51,21 @@ namespace Win32MetadataScraperTests
         {
             "RmStartSession", "RmJoinSession", "RmEndSession", "RmRegisterResources", "RmGetList",
             "RmShutdown", "RmRestart", "RmCancelCurrentTask", "RmAddFilter", "RmRemoveFilter", "RmGetFilterList",
+        };
+        private static readonly string[] PowerErrorFunctions =
+        {
+            "PowerRegisterSuspendResumeNotification", "PowerUnregisterSuspendResumeNotification", "PowerGetActiveScheme",
+            "PowerReadACValue", "PowerReadDCValue", "PowerSetActiveScheme", "PowerSettingRegisterNotification",
+            "PowerSettingUnregisterNotification", "PowerCanRestoreIndividualDefaultPowerScheme", "PowerCreatePossibleSetting",
+            "PowerCreateSetting", "PowerDeleteScheme", "PowerDuplicateScheme", "PowerEnumerate", "PowerImportPowerScheme",
+            "PowerReadACValueIndex", "PowerReadDescription", "PowerReadFriendlyName", "PowerReadIconResourceSpecifier",
+            "PowerReadPossibleDescription", "PowerReadPossibleFriendlyName", "PowerReadPossibleValue", "PowerReadValueIncrement",
+            "PowerReadValueMax", "PowerReadValueMin", "PowerReadValueUnitsSpecifier", "PowerRemovePowerSetting",
+            "PowerReportThermalEvent", "PowerRestoreDefaultPowerSchemes", "PowerRestoreIndividualDefaultPowerScheme",
+            "PowerSettingAccessCheck", "PowerSettingAccessCheckEx", "PowerWriteACValueIndex", "PowerWriteDescription",
+            "PowerWriteFriendlyName", "PowerWriteIconResourceSpecifier", "PowerWritePossibleDescription",
+            "PowerWritePossibleFriendlyName", "PowerWritePossibleValue", "PowerWriteSettingAttributes",
+            "PowerWriteValueIncrement", "PowerWriteValueMax", "PowerWriteValueMin", "PowerWriteValueUnitsSpecifier",
         };
         private static readonly EnumUse[] ReviewedEnumUses = Associations
             .Select(value => new EnumUse(WinHttpNamespace, value.Owner, value.Member, value.Enum, value.Native))
@@ -137,7 +164,68 @@ namespace Win32MetadataScraperTests
                 new EnumUse(WNetNamespace, "WNetUseConnectionW", "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"),
             })
             .Concat(RestartManagerFunctions.Select(name => new EnumUse(RestartManagerNamespace, name,
-                "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation"))).ToArray();
+                "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation")))
+            .Concat(PowerErrorFunctions.Select(name => new EnumUse(PowerNamespace, name,
+                "return", "WIN32_ERROR", "UInt32", "Windows.Win32.Foundation")))
+            .Concat(new[]
+            {
+                new EnumUse(WerNamespace, "WerRegisterFile", "dwFlags", "WER_FILE", "UInt32"),
+                new EnumUse(WerNamespace, "WerReportAddFile", "dwFileFlags", "WER_FILE", "UInt32"),
+                new EnumUse(WerNamespace, "WerReportSubmit", "dwFlags", "WER_SUBMIT_FLAGS", "UInt32"),
+                new EnumUse(WerNamespace, "WerGetFlags", "pdwFlags", "WER_FAULT_REPORTING", "UInt32*"),
+                new EnumUse(WerNamespace, "WerSetFlags", "dwFlags", "WER_FAULT_REPORTING", "UInt32"),
+                new EnumUse(PowerNamespace, "PowerDeterminePlatformRoleEx", "Version", "POWER_PLATFORM_ROLE_VERSION", "UInt32"),
+                new EnumUse(PowerNamespace, "PowerRegisterSuspendResumeNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
+                    "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
+                new EnumUse(PowerNamespace, "PowerSettingRegisterNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
+                    "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
+                new EnumUse(PowerNamespace, "PowerSettingAccessCheckEx", "AccessType", "REG_SAM_FLAGS",
+                    "UInt32", "Windows.Win32.System.Registry"),
+                new EnumUse(CabinetsNamespace, "FDICreate", "cpuType", "FDICREATE_CPU_TYPE", "Int32"),
+            }).ToArray();
+        private static readonly HandleUse[] ReviewedHandleUses =
+        {
+            new HandleUse(BluetoothNamespace, "BluetoothFindDeviceClose", "hFind", "HBLUETOOTH_DEVICE_FIND", "IntPtr"),
+            new HandleUse(BluetoothNamespace, "BluetoothFindFirstDevice", "return", "HBLUETOOTH_DEVICE_FIND", "IntPtr"),
+            new HandleUse(BluetoothNamespace, "BluetoothFindFirstRadio", "return", "HBLUETOOTH_RADIO_FIND", "IntPtr"),
+            new HandleUse(BluetoothNamespace, "BluetoothFindNextDevice", "hFind", "HBLUETOOTH_DEVICE_FIND", "IntPtr"),
+            new HandleUse(BluetoothNamespace, "BluetoothFindNextRadio", "hFind", "HBLUETOOTH_RADIO_FIND", "IntPtr"),
+            new HandleUse(BluetoothNamespace, "BluetoothFindRadioClose", "hFind", "HBLUETOOTH_RADIO_FIND", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportAddDump", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportAddFile", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportCloseHandle", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportCreate", "phReportHandle", "HREPORT*", "IntPtr*"),
+            new HandleUse(WerNamespace, "WerReportSetParameter", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportSetUIOption", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerReportSubmit", "hReportHandle", "HREPORT", "IntPtr"),
+            new HandleUse(WerNamespace, "WerStoreClose", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreGetFirstReportKey", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreGetNextReportKey", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreGetReportCount", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreGetSizeOnDisk", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreOpen", "phReportStore", "HREPORTSTORE*", "Void**"),
+            new HandleUse(WerNamespace, "WerStoreQueryReportMetadataV1", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreQueryReportMetadataV2", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreQueryReportMetadataV3", "hReportStore", "HREPORTSTORE", "Void*"),
+            new HandleUse(WerNamespace, "WerStoreUploadReport", "hReportStore", "HREPORTSTORE", "Void*"),
+        };
+        private static readonly LifecycleTransfer[] ReviewedLifecycleTransfers =
+        {
+            new LifecycleTransfer(BluetoothNamespace, "HBLUETOOTH_DEVICE_FIND", "BluetoothFindFirstDevice", "return", "BluetoothFindDeviceClose", true),
+            new LifecycleTransfer(BluetoothNamespace, "HBLUETOOTH_RADIO_FIND", "BluetoothFindFirstRadio", "return", "BluetoothFindRadioClose", true),
+            new LifecycleTransfer(WerNamespace, "HREPORT", "WerReportCreate", "phReportHandle", "WerReportCloseHandle", true),
+            new LifecycleTransfer(WerNamespace, "HREPORTSTORE", "WerStoreOpen", "phReportStore", "WerStoreClose", true),
+            new LifecycleTransfer(WebSocketNamespace, "WEB_SOCKET_HANDLE", "WebSocketCreateClientHandle", "phWebSocket", "WebSocketDeleteHandle"),
+            new LifecycleTransfer(WebSocketNamespace, "WEB_SOCKET_HANDLE", "WebSocketCreateServerHandle", "phWebSocket", "WebSocketDeleteHandle"),
+            new LifecycleTransfer(FileHistoryNamespace, "FH_SERVICE_PIPE_HANDLE", "FhServiceOpenPipe", "Pipe", "FhServiceClosePipe"),
+            new LifecycleTransfer(ProcessSnapshotNamespace, "HPSSWALK", "PssWalkMarkerCreate", "WalkMarkerHandle", "PssWalkMarkerFree"),
+        };
+        private static readonly string[] ReviewedNativeConstantSites =
+        {
+            BluetoothNamespace + ".Apis.AF_BTH",
+            HidNamespace + ".Apis." + HidConstant,
+            WerNamespace + ".Apis." + WerAlias,
+        };
         private static readonly (string Namespace, string Owner, string Method, string Parameter)[] NativeRetvalUses =
         {
             ("Windows.Win32.Devices.Geolocation", "ICivicAddressReport", "GetAddressLine1", "pbstrAddress1"),
@@ -389,7 +477,9 @@ namespace Win32MetadataScraperTests
             using var old = Open("WINHTTP_MIGRATION_OLD");
             using var current = Open("WINHTTP_MIGRATION_NEW");
             Assert.Equal(37314, old.Reader.TypeDefinitions.Count);
-            Assert.Equal(old.Reader.TypeDefinitions.Count, current.Reader.TypeDefinitions.Count);
+            AssertReviewedTypeSet(old.Reader, current.Reader);
+            Assert.Equal(old.Reader.MethodDefinitions.Count, current.Reader.MethodDefinitions.Count);
+            Assert.Equal(old.Reader.FieldDefinitions.Count - 4 + 1, current.Reader.FieldDefinitions.Count);
             string[] beforeEnums = EnumIdentities(old.Reader);
             Assert.Equal(beforeEnums, EnumIdentities(current.Reader));
             this.output.WriteLine($"Complete enum identity set unchanged: {beforeEnums.Length}; added 0, removed 0.");
@@ -436,17 +526,23 @@ namespace Win32MetadataScraperTests
             using var current = Open("WINHTTP_MIGRATION_NEW");
             var before = Types(control.Reader);
             var after = Types(current.Reader);
-            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            AssertReviewedTypeSet(control.Reader, current.Reader);
+            var removed = ReviewedLifecycleTransfers.Where(value => value.Synthetic)
+                .Select(value => value.TypeSite + "#124").ToHashSet(StringComparer.Ordinal);
             var used = new HashSet<string>(StringComparer.Ordinal);
             var usedRetvals = new HashSet<string>(StringComparer.Ordinal);
             var usedPreservedResults = new HashSet<string>(StringComparer.Ordinal);
             var usedNativeDirections = new HashSet<string>(StringComparer.Ordinal);
+            var usedHandles = new HashSet<string>(StringComparer.Ordinal);
+            var usedLifecycles = new HashSet<string>(StringComparer.Ordinal);
+            var usedConstants = new HashSet<string>(StringComparer.Ordinal);
             int unchanged = 0;
-            foreach (var entry in before)
+            foreach (var entry in before.Where(value => !removed.Contains(value.Key)))
             {
                 string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedChanges: true,
                     usedEnumSites: used, usedRetvalSites: usedRetvals, usedPreservedResultSites: usedPreservedResults,
-                    usedNativeDirectionSites: usedNativeDirections);
+                    usedNativeDirectionSites: usedNativeDirections, usedHandleSites: usedHandles,
+                    usedLifecycleSites: usedLifecycles, usedNativeConstantSites: usedConstants);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
@@ -458,9 +554,94 @@ namespace Win32MetadataScraperTests
                 usedPreservedResults.OrderBy(value => value));
             Assert.Equal(NativeDirectionUses.Select(value => $"{value.Namespace}.{value.Owner}.{value.Method}.{value.Parameter}")
                 .OrderBy(value => value), usedNativeDirections.OrderBy(value => value));
-            this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; " +
+            Assert.Equal(ReviewedHandleUses.Select(value => value.Site).OrderBy(value => value), usedHandles.OrderBy(value => value));
+            Assert.Equal(ReviewedLifecycleTransfers.Select(value => value.Site)
+                .Concat(ReviewedLifecycleTransfers.Where(value => !value.Synthetic).Select(value => value.TypeSite)).Distinct()
+                .OrderBy(value => value), usedLifecycles.OrderBy(value => value));
+            Assert.Equal(ReviewedNativeConstantSites.OrderBy(value => value), usedConstants.OrderBy(value => value));
+            this.output.WriteLine($"All {after.Count} surviving physical types graded; exactly {removed.Count} verified synthetic handles removed, 0 types added; " +
+                $"{unchanged} surviving types unchanged; " +
                 $"{used.Count} exact native-type/AssociatedEnum sites, {usedRetvals.Count} native MIDL retval sites " +
-                $"{usedPreservedResults.Count} reviewed preserved-result site and {usedNativeDirections.Count} exact native SAL direction site normalized.");
+                $"{usedPreservedResults.Count} reviewed preserved-result site, {usedNativeDirections.Count} exact native SAL direction site, " +
+                $"{usedHandles.Count} native handle signature sites, {usedLifecycles.Count} lifecycle targets and {usedConstants.Count} exact native constant sites normalized.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NativeHandleContractsReachOnlyTheExactProducerTargets(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var transfer in ReviewedLifecycleTransfers)
+            {
+                var original = Type(old.Reader, transfer.Type, architecture, transfer.Namespace);
+                string[] originalOwnership = Ownership(old.Reader, original.GetCustomAttributes());
+                Assert.Equal(LifecycleAttributes(transfer.Cleanup), originalOwnership);
+                var method = Methods(current.Reader, transfer.Namespace, "Apis", architecture)[transfer.Method];
+                var parameter = method.GetParameters().Select(current.Reader.GetParameter).Single(value =>
+                    transfer.Member == "return" ? value.SequenceNumber == 0 : current.Reader.GetString(value.Name) == transfer.Member);
+                Assert.Equal(transfer.Member == "return" ? ParameterAttributes.None : ParameterAttributes.Out, parameter.Attributes);
+                Assert.Equal(originalOwnership, Ownership(current.Reader, parameter.GetCustomAttributes()));
+                foreach (var other in method.GetParameters().Select(current.Reader.GetParameter)
+                    .Where(value => value.SequenceNumber != parameter.SequenceNumber))
+                    Assert.Empty(Ownership(current.Reader, other.GetCustomAttributes()));
+                if (!transfer.Synthetic)
+                    Assert.Empty(Ownership(current.Reader, Type(current.Reader, transfer.Type, architecture, transfer.Namespace).GetCustomAttributes()));
+            }
+            var snapshot = Type(current.Reader, "HPSS", architecture, ProcessSnapshotNamespace);
+            Assert.Empty(AttributeValues(current.Reader, snapshot.GetCustomAttributes(), "RAIIFreeAttribute"));
+            Assert.Equal(new[]
+            {
+                MetadataNamespace + ".InvalidHandleValueAttribute:010000000000000000000000",
+                MetadataNamespace + ".InvalidHandleValueAttribute:0100FFFFFFFFFFFFFFFF0000",
+            }, Ownership(current.Reader, snapshot.GetCustomAttributes()));
+
+            static string[] Ownership(MetadataReader reader, CustomAttributeHandleCollection attributes)
+                => attributes.Where(handle => AttributeName(reader, handle) is "RAIIFreeAttribute" or "InvalidHandleValueAttribute")
+                    .Select(handle => AttributeTypeName(reader, handle) + ":" +
+                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NativeConstantTransportPreservesExactTypesValuesAndLogicalMembers(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var original = Type(old.Reader, "Apis", architecture, WerNamespace);
+            var after = Type(current.Reader, "Apis", architecture, WerNamespace);
+            Assert.DoesNotContain(original.GetFields(), handle => old.Reader.GetString(old.Reader.GetFieldDefinition(handle).Name) == WerAlias);
+            var alias = after.GetFields().Select(current.Reader.GetFieldDefinition).Single(value => current.Reader.GetString(value.Name) == WerAlias);
+            Assert.Equal(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault, alias.Attributes);
+            Assert.Equal("UInt32", alias.DecodeSignature(Signatures, null));
+            Assert.Equal(-1, alias.GetOffset());
+            Assert.True(alias.GetMarshallingDescriptor().IsNil);
+            Assert.Empty(alias.GetCustomAttributes());
+            var constant = current.Reader.GetConstant(alias.GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+            Assert.Equal(new byte[] { 128, 0, 0, 0 }, current.Reader.GetBlobBytes(constant.Value));
+            var flags = Type(current.Reader, "WER_SUBMIT_FLAGS", architecture, WerNamespace);
+            Assert.Equal(14, flags.GetFields().Select(current.Reader.GetFieldDefinition)
+                .Count(value => value.Attributes.HasFlag(FieldAttributes.Literal)));
+            Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, "WER_SUBMIT_FLAGS", architecture, WerNamespace)),
+                SnapshotType(current.Reader, flags));
+            foreach (var image in new[] { old, current })
+            {
+                var apis = Type(image.Reader, "Apis", architecture, HidNamespace);
+                AssertHidConstant(image.Reader, apis.GetFields().Select(image.Reader.GetFieldDefinition)
+                    .Single(value => image.Reader.GetString(value.Name) == HidConstant));
+                apis = Type(image.Reader, "Apis", architecture, BluetoothNamespace);
+                AssertNativeLiteral(image.Reader, apis.GetFields().Select(image.Reader.GetFieldDefinition)
+                    .Single(value => image.Reader.GetString(value.Name) == "AF_BTH"),
+                    "UInt16", ConstantTypeCode.UInt16, new byte[] { 32, 0 });
+            }
+            Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, "POWER_PLATFORM_ROLE_VERSION", architecture, PowerNamespace)),
+                SnapshotType(current.Reader, Type(current.Reader, "POWER_PLATFORM_ROLE_VERSION", architecture, PowerNamespace)));
         }
 
         [MigrationTheory]
@@ -524,6 +705,54 @@ namespace Win32MetadataScraperTests
             Assert.Single(patch.Split('\n').Where(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_END_()"));
             Assert.DoesNotContain("_Win32_DllImport_", patch);
             Assert.DoesNotContain("_Win32_ImportLibrary_", patch);
+        }
+
+        [Fact]
+        public void IntegratedEnumAndLifecycleFactsHaveNoSemanticSidecarFallback()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string[] emitter = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
+            foreach (var use in ReviewedEnumUses)
+                Assert.DoesNotContain(emitter, row => row.StartsWith(use.Owner + "::" + use.Member + "=", StringComparison.Ordinal));
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            string[] relocated = { "WER_FILE", "WER_SUBMIT_FLAGS", "WER_FAULT_REPORTING",
+                "DEVICE_POWER_CAPABILITIES", "FDICREATE_CPU_TYPE", "RM_APP_STATUS" };
+            foreach (var item in enums.RootElement.GetProperty("items").EnumerateArray())
+            {
+                if (item.TryGetProperty("name", out var name))
+                    Assert.DoesNotContain(name.GetString(), relocated);
+                if (!item.TryGetProperty("uses", out var uses))
+                    continue;
+                foreach (var use in uses.EnumerateArray())
+                {
+                    string owner = use.TryGetProperty("method", out var method) ? method.GetString()
+                        : use.TryGetProperty("struct", out var record) ? record.GetString() : null;
+                    string member = use.TryGetProperty("parameter", out var parameter) ? parameter.GetString()
+                        : use.TryGetProperty("field", out var field) ? field.GetString() : null;
+                    Assert.DoesNotContain(ReviewedEnumUses, expected => expected.Owner == owner && expected.Member == member);
+                }
+            }
+            using var types = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "autoTypes.json")));
+            foreach (var transfer in ReviewedLifecycleTransfers)
+            {
+                var matches = types.RootElement.EnumerateArray()
+                    .Where(value => value.GetProperty("Name").GetString() == transfer.Type).ToArray();
+                if (transfer.Synthetic)
+                    Assert.Empty(matches);
+                else
+                {
+                    var type = Assert.Single(matches);
+                    Assert.Equal("DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
+                    Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
+                    Assert.False(type.TryGetProperty("CloseApi", out _));
+                    Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
+                }
+            }
+            var snapshot = types.RootElement.EnumerateArray().Single(value => value.GetProperty("Name").GetString() == "HPSS");
+            Assert.False(snapshot.TryGetProperty("CloseApi", out _));
+            Assert.Equal(new[] { -1, 0 }, snapshot.GetProperty("InvalidHandleValues").EnumerateArray().Select(value => value.GetInt32()));
+            Assert.Contains("POWER_PLATFORM_ROLE_VERSION=" + PowerNamespace,
+                File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
         }
 
         [MigrationTheory]
@@ -1022,6 +1251,202 @@ namespace Win32MetadataScraperTests
 
         [Theory]
         [InlineData("valid")]
+        [InlineData("wrong-value")]
+        [InlineData("wrong-type")]
+        [InlineData("wrong-flags")]
+        [InlineData("wrong-other-field-order")]
+        [InlineData("wrong-other-field-type")]
+        [InlineData("wrong-namespace")]
+        [InlineData("incomplete-old")]
+        [InlineData("instance-old")]
+        public void NativeConstantOrderNormalizationMovesOnlyTheExactStaticLiteral(string mutation)
+        {
+            using var old = Fixture(false, mutation);
+            using var current = Fixture(true, mutation);
+            var before = old.GetMetadataReader();
+            var after = current.GetMetadataReader();
+            var original = before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2));
+            if (mutation is "incomplete-old" or "instance-old")
+            {
+                Assert.ThrowsAny<XunitException>(() => SnapshotType(before, original, normalizeReviewedChanges: true));
+                return;
+            }
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            string expected = SnapshotType(before, original, normalizeReviewedChanges: true, usedNativeConstantSites: used);
+            string actual = SnapshotType(after, after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2)));
+            if (mutation == "valid")
+            {
+                Assert.Equal(expected, actual);
+                Assert.Equal(new[] { BluetoothNamespace + ".Apis.AF_BTH" }, used);
+            }
+            else
+                Assert.NotEqual(expected, actual);
+            if (mutation == "wrong-namespace")
+                Assert.Empty(used);
+
+            static MetadataReaderProvider Fixture(bool native, string mutation)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("Constants.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(mutation == "wrong-namespace" ? BluetoothNamespace + ".Other" : BluetoothNamespace),
+                    metadata.GetOrAddString("Apis"), default, MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                string[] names = native
+                    ? mutation == "wrong-other-field-order" ? new[] { "One", "Three", "Two", "AF_BTH" } : new[] { "One", "Two", "Three", "AF_BTH" }
+                    : new[] { "One", "AF_BTH", "Two", "Three" };
+                foreach (string name in names)
+                {
+                    var signature = new BlobBuilder();
+                    var encoder = new BlobEncoder(signature).FieldSignature();
+                    var attributes = FieldAttributes.Public | FieldAttributes.Static;
+                    bool wide = native && mutation == "wrong-type";
+                    if (name == "AF_BTH")
+                    {
+                        if (wide) encoder.UInt32(); else encoder.UInt16();
+                        attributes |= FieldAttributes.Literal | FieldAttributes.HasDefault;
+                        if (native && mutation == "wrong-flags")
+                            attributes &= ~FieldAttributes.Literal;
+                        if (!native && mutation == "instance-old")
+                            attributes &= ~FieldAttributes.Static;
+                    }
+                    else if (native && mutation == "wrong-other-field-type" && name == "Two")
+                        encoder.Int64();
+                    else
+                        encoder.Int32();
+                    var field = metadata.AddFieldDefinition(attributes, metadata.GetOrAddString(name), metadata.GetOrAddBlob(signature));
+                    if (name == "AF_BTH")
+                    {
+                        if (wide)
+                            metadata.AddConstant(field, 32U);
+                        else
+                            metadata.AddConstant(field, (ushort)((native && mutation == "wrong-value") || (!native && mutation == "incomplete-old") ? 33 : 32));
+                    }
+                }
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+            }
+        }
+
+        [Theory]
+        [InlineData("valid")]
+        [InlineData("missing-zero")]
+        [InlineData("missing-minus-one")]
+        [InlineData("duplicate-invalid")]
+        [InlineData("wrong-free")]
+        [InlineData("wrong-target")]
+        [InlineData("borrowed-input")]
+        [InlineData("missing-out")]
+        [InlineData("retained-type-ownership")]
+        [InlineData("wrong-native-type")]
+        [InlineData("incomplete-old")]
+        public void LifecycleNormalizationRequiresCompleteContractsAndExactTargets(string mutation)
+        {
+            using var old = Fixture(false, mutation);
+            using var current = Fixture(true, mutation);
+            var before = old.GetMetadataReader();
+            var after = current.GetMetadataReader();
+            var original = before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(2));
+            if (mutation == "incomplete-old")
+            {
+                Assert.ThrowsAny<XunitException>(() => SnapshotType(before, original, normalizeReviewedChanges: true));
+                return;
+            }
+            var expected = new[] { 2, 3 }.Select(row => SnapshotType(before,
+                before.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(row)), normalizeReviewedChanges: true)).ToArray();
+            var actual = new[] { 2, 3 }.Select(row => SnapshotType(after,
+                after.GetTypeDefinition(MetadataTokens.TypeDefinitionHandle(row)))).ToArray();
+            if (mutation == "valid")
+                Assert.Equal(expected, actual);
+            else
+                Assert.NotEqual(expected, actual);
+
+            static MetadataReaderProvider Fixture(bool native, string mutation)
+            {
+                var metadata = new MetadataBuilder();
+                metadata.AddModule(0, metadata.GetOrAddString("Ownership.winmd"), metadata.GetOrAddGuid(Guid.NewGuid()), default, default);
+                var runtime = metadata.AddAssemblyReference(metadata.GetOrAddString("System.Runtime"),
+                    new Version(10, 0), default, default, 0, default);
+                var valueType = metadata.AddTypeReference(runtime, metadata.GetOrAddString("System"), metadata.GetOrAddString("ValueType"));
+                metadata.AddTypeDefinition(TypeAttributes.NotPublic, default, metadata.GetOrAddString("<Module>"), default,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var handle = metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.SequentialLayout | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(WebSocketNamespace), metadata.GetOrAddString("WEB_SOCKET_HANDLE"), valueType,
+                    MetadataTokens.FieldDefinitionHandle(1), MetadataTokens.MethodDefinitionHandle(1));
+                var field = new BlobBuilder();
+                new BlobEncoder(field).FieldSignature().IntPtr();
+                metadata.AddFieldDefinition(FieldAttributes.Public, metadata.GetOrAddString("Value"), metadata.GetOrAddBlob(field));
+                if (!native || mutation == "retained-type-ownership")
+                    AddOwnership(handle, "WebSocketDeleteHandle", includeZero: mutation != "incomplete-old");
+                metadata.AddTypeDefinition(TypeAttributes.Public | TypeAttributes.Abstract | TypeAttributes.Sealed,
+                    metadata.GetOrAddString(WebSocketNamespace), metadata.GetOrAddString("Apis"), default,
+                    MetadataTokens.FieldDefinitionHandle(2), MetadataTokens.MethodDefinitionHandle(1));
+                var signature = new BlobBuilder();
+                new BlobEncoder(signature).MethodSignature().Parameters(3, result => result.Type().Int32(), parameters =>
+                {
+                    parameters.AddParameter().Type().IntPtr();
+                    parameters.AddParameter().Type().UInt32();
+                    var output = parameters.AddParameter().Type();
+                    if (native && mutation == "wrong-native-type")
+                        output.IntPtr();
+                    else
+                        output.Pointer().Type(handle, isValueType: true);
+                });
+                metadata.AddMethodDefinition(MethodAttributes.Public | MethodAttributes.Static, MethodImplAttributes.IL,
+                    metadata.GetOrAddString("WebSocketCreateClientHandle"), metadata.GetOrAddBlob(signature), -1,
+                    MetadataTokens.ParameterHandle(1));
+                metadata.AddParameter(ParameterAttributes.None, default, 0);
+                var input = metadata.AddParameter(ParameterAttributes.In, metadata.GetOrAddString("pProperties"), 1);
+                metadata.AddParameter(ParameterAttributes.In, metadata.GetOrAddString("ulPropertyCount"), 2);
+                var result = metadata.AddParameter(native && mutation == "missing-out" ? ParameterAttributes.None : ParameterAttributes.Out,
+                    metadata.GetOrAddString("phWebSocket"), 3);
+                if (native)
+                {
+                    var target = mutation == "wrong-target" ? input : result;
+                    AddOwnership(target, mutation == "wrong-free" ? "OtherFree" : "WebSocketDeleteHandle",
+                        includeZero: mutation != "missing-zero", includeMinusOne: mutation != "missing-minus-one");
+                    if (mutation == "borrowed-input")
+                        AddOwnership(input, "WebSocketDeleteHandle");
+                    if (mutation == "duplicate-invalid")
+                        AddAttribute(result, "InvalidHandleValueAttribute", 0L);
+                }
+                var image = new BlobBuilder();
+                new MetadataRootBuilder(metadata).Serialize(image, 0, 0);
+                return MetadataReaderProvider.FromMetadataImage(image.ToImmutableArray());
+
+                void AddOwnership(EntityHandle target, string cleanup, bool includeZero = true, bool includeMinusOne = true)
+                {
+                    AddAttribute(target, "RAIIFreeAttribute", cleanup);
+                    if (includeMinusOne)
+                        AddAttribute(target, "InvalidHandleValueAttribute", -1L);
+                    if (includeZero)
+                        AddAttribute(target, "InvalidHandleValueAttribute", 0L);
+                }
+
+                void AddAttribute(EntityHandle target, string name, object value)
+                {
+                    var attribute = metadata.AddTypeReference(MetadataTokens.EntityHandle(1),
+                        metadata.GetOrAddString(MetadataNamespace), metadata.GetOrAddString(name));
+                    var signature = new BlobBuilder();
+                    new BlobEncoder(signature).MethodSignature(isInstanceMethod: true).Parameters(1, result => result.Void(), parameters =>
+                    {
+                        var type = parameters.AddParameter().Type();
+                        if (value is string) type.String(); else type.Int64();
+                    });
+                    var constructor = metadata.AddMemberReference(attribute, metadata.GetOrAddString(".ctor"), metadata.GetOrAddBlob(signature));
+                    var bytes = new BlobBuilder();
+                    bytes.WriteUInt16(1);
+                    if (value is string text) bytes.WriteSerializedString(text); else bytes.WriteInt64((long)value);
+                    bytes.WriteUInt16(0);
+                    metadata.AddCustomAttribute(target, constructor, metadata.GetOrAddBlob(bytes));
+                }
+            }
+        }
+
+        [Theory]
+        [InlineData("valid")]
         [InlineData("wrong-enum")]
         [InlineData("wrong-target")]
         [InlineData("wrong-native-type")]
@@ -1304,12 +1729,34 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"All {before.Count} {baseline} physical types unchanged; no scope-adoption normalization or allowances.");
         }
 
+        private static void AssertReviewedTypeSet(MetadataReader expectedReader, MetadataReader actualReader)
+        {
+            var before = Types(expectedReader);
+            var after = Types(actualReader);
+            var removed = ReviewedLifecycleTransfers.Where(value => value.Synthetic).ToArray();
+            Assert.Equal(4, removed.Length);
+            foreach (var transfer in removed)
+            {
+                string key = transfer.TypeSite + "#124";
+                Assert.True(before.ContainsKey(key), "Missing original synthetic handle: " + key);
+                Assert.DoesNotContain(key, after.Keys);
+                var attributes = LifecycleAttributes(transfer.Cleanup)
+                    .Append(MetadataNamespace + ".NativeTypedefAttribute:01000000").OrderBy(value => value, StringComparer.Ordinal);
+                string expected = transfer.TypeSite + "\nPublic, SequentialLayout, Sealed, BeforeFieldInit|System.ValueType|0|0|" +
+                    string.Join(",", attributes) + "\nF|Value|Public|Void*|-1|||";
+                Assert.Equal(expected, SnapshotType(expectedReader, before[key]));
+            }
+            Assert.Equal(before.Keys.Except(removed.Select(value => value.TypeSite + "#124")).OrderBy(value => value),
+                after.Keys.OrderBy(value => value));
+        }
+
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
             bool normalizeReviewedChanges = false, ISet<string> usedEnumSites = null, ISet<string> usedRetvalSites = null,
-            ISet<string> usedPreservedResultSites = null, ISet<string> usedNativeDirectionSites = null)
+            ISet<string> usedPreservedResultSites = null, ISet<string> usedNativeDirectionSites = null,
+            ISet<string> usedHandleSites = null, ISet<string> usedLifecycleSites = null, ISet<string> usedNativeConstantSites = null)
         {
             string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool nativeRetval = false,
-                bool preservedResult = false)
+                bool preservedResult = false, string cleanup = null, bool removeLifecycle = false)
             {
                 var attributes = values.Select(handle => AttributeTypeName(reader, handle) + ":" +
                     Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))).ToList();
@@ -1333,23 +1780,66 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(new byte[] { 1, 0, 0, 0 }, reader.GetBlobBytes(reader.GetCustomAttribute(attribute).Value));
                     Assert.True(attributes.Remove(MetadataNamespace + ".CanReturnMultipleSuccessValuesAttribute:01000000"));
                 }
+                if (cleanup != null)
+                {
+                    string[] ownership = values.Where(handle => AttributeName(reader, handle) is "RAIIFreeAttribute" or "InvalidHandleValueAttribute")
+                        .Select(handle => AttributeTypeName(reader, handle) + ":" +
+                            Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                        .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                    string[] expected = LifecycleAttributes(cleanup);
+                    if (removeLifecycle)
+                    {
+                        Assert.Equal(expected, ownership);
+                        foreach (string value in expected)
+                            Assert.True(attributes.Remove(value));
+                    }
+                    else
+                    {
+                        Assert.Empty(ownership);
+                        attributes.AddRange(expected);
+                    }
+                }
                 return string.Join(",", attributes.OrderBy(value => value, StringComparer.Ordinal));
             }
             string Blob(BlobHandle blob) => blob.IsNil ? "" : Convert.ToHexString(reader.GetBlobBytes(blob));
             string ns = reader.GetString(type.Namespace);
             string typeName = reader.GetString(type.Name);
             var uses = normalizeReviewedChanges ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
+            var handleUses = normalizeReviewedChanges
+                ? ReviewedHandleUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<HandleUse>();
+            var transfers = normalizeReviewedChanges
+                ? ReviewedLifecycleTransfers.Where(value => value.Namespace == ns).ToArray() : Array.Empty<LifecycleTransfer>();
+            var typeTransfer = transfers.FirstOrDefault(value => value.Type == typeName);
+            if (typeTransfer != null)
+                usedLifecycleSites?.Add(typeTransfer.TypeSite);
             var rows = new List<string>
             {
                 reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
-                $"{type.Attributes}|{FullName(reader, type.BaseType)}|{type.GetLayout().PackingSize}|{type.GetLayout().Size}|{Attributes(type.GetCustomAttributes())}",
+                $"{type.Attributes}|{FullName(reader, type.BaseType)}|{type.GetLayout().PackingSize}|{type.GetLayout().Size}|" +
+                    Attributes(type.GetCustomAttributes(), cleanup: typeTransfer?.Cleanup, removeLifecycle: true),
             };
             IEnumerable<FieldDefinitionHandle> fields = type.GetFields();
-            if (typeName == "Apis" && fields.All(handle =>
-                reader.GetFieldDefinition(handle).Attributes.HasFlag(FieldAttributes.Static | FieldAttributes.Literal)))
+            bool sortedLiteralFields = typeName == "Apis" && fields.All(handle =>
+                reader.GetFieldDefinition(handle).Attributes.HasFlag(FieldAttributes.Static | FieldAttributes.Literal));
+            if (sortedLiteralFields)
             {
                 fields = fields.OrderBy(handle => reader.GetString(reader.GetFieldDefinition(handle).Name), StringComparer.Ordinal);
             }
+            if (normalizeReviewedChanges && ns == HidNamespace && typeName == "Apis")
+            {
+                var field = fields.Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == HidConstant);
+                AssertHidConstant(reader, field);
+                fields = fields.OrderBy(handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == HidConstant);
+                usedNativeConstantSites?.Add(HidNamespace + ".Apis." + HidConstant);
+            }
+            if (normalizeReviewedChanges && ns == BluetoothNamespace && typeName == "Apis")
+            {
+                var field = fields.Select(reader.GetFieldDefinition).Single(value => reader.GetString(value.Name) == "AF_BTH");
+                AssertNativeLiteral(reader, field, "UInt16", ConstantTypeCode.UInt16, new byte[] { 32, 0 });
+                fields = fields.OrderBy(handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == "AF_BTH");
+                usedNativeConstantSites?.Add(BluetoothNamespace + ".Apis.AF_BTH");
+            }
+            var fieldRows = new List<string>();
             foreach (var handle in fields)
             {
                 var field = reader.GetFieldDefinition(handle);
@@ -1364,9 +1854,19 @@ namespace Win32MetadataScraperTests
                 }
                 string constant = field.GetDefaultValue().IsNil ? "" :
                     reader.GetConstant(field.GetDefaultValue()).TypeCode + ":" + Blob(reader.GetConstant(field.GetDefaultValue()).Value);
-                rows.Add($"F|{name}|{field.Attributes}|{fieldType}|{field.GetOffset()}|" +
+                fieldRows.Add($"F|{name}|{field.Attributes}|{fieldType}|{field.GetOffset()}|" +
                     $"{constant}|{Blob(field.GetMarshallingDescriptor())}|{Attributes(field.GetCustomAttributes(), use?.Enum)}");
             }
+            if (normalizeReviewedChanges && ns == WerNamespace && typeName == "Apis")
+            {
+                Assert.True(sortedLiteralFields);
+                Assert.DoesNotContain(fields, handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == WerAlias);
+                fieldRows.Add(WerAliasField);
+                usedNativeConstantSites?.Add(WerNamespace + ".Apis." + WerAlias);
+            }
+            rows.AddRange(sortedLiteralFields
+                ? fieldRows.OrderBy(value => value.Split('|')[1], StringComparer.Ordinal)
+                : fieldRows);
             foreach (var handle in type.GetMethods())
             {
                 var method = reader.GetMethodDefinition(handle);
@@ -1395,6 +1895,25 @@ namespace Win32MetadataScraperTests
                     parameterTypes[parameter.SequenceNumber - 1] = use.Native;
                     parameterEnums.Add(parameter.SequenceNumber, use.Enum);
                     usedEnumSites?.Add(use.Site);
+                }
+                foreach (var use in handleUses.Where(value => typeName == "Apis" && value.Method == methodName))
+                {
+                    var parameter = use.Member == "return"
+                        ? parameters.Single(value => value.SequenceNumber == 0)
+                        : parameters.Single(value => reader.GetString(value.Name) == use.Member);
+                    if (use.Member == "return")
+                    {
+                        Assert.Equal("", reader.GetString(parameter.Name));
+                        Assert.Equal(use.OldType, returnType);
+                        returnType = use.Native;
+                    }
+                    else
+                    {
+                        Assert.True(parameter.SequenceNumber > 0);
+                        Assert.Equal(use.OldType, parameterTypes[parameter.SequenceNumber - 1]);
+                        parameterTypes[parameter.SequenceNumber - 1] = use.Native;
+                    }
+                    usedHandleSites?.Add(use.Site);
                 }
                 int header = signature.Header.RawValue;
                 if (correctConstructorInstanceBits && reader.GetString(method.Name) == ".ctor" &&
@@ -1430,12 +1949,49 @@ namespace Win32MetadataScraperTests
                         parameterAttributes = direction.After;
                         usedNativeDirectionSites?.Add($"{ns}.{typeName}.{methodName}.{parameterName}");
                     }
-                    string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber), nativeRetval);
+                    var transfer = transfers.SingleOrDefault(value => typeName == "Apis" && value.Method == methodName &&
+                        (value.Member == "return" ? parameter.SequenceNumber == 0 : value.Member == parameterName));
+                    if (transfer != null)
+                    {
+                        Assert.Equal(transfer.Member == "return" ? ParameterAttributes.None : ParameterAttributes.Out, parameter.Attributes);
+                        usedLifecycleSites?.Add(transfer.Site);
+                    }
+                    string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber),
+                        nativeRetval, cleanup: transfer?.Cleanup);
                     rows.Add($"P|{parameter.SequenceNumber}|{reader.GetString(parameter.Name)}|{parameterAttributes}|" +
                         $"{Blob(parameter.GetMarshallingDescriptor())}|{attributes}");
                 }
             }
             return string.Join("\n", rows);
+        }
+
+        private static string[] LifecycleAttributes(string cleanup)
+        {
+            var value = new BlobBuilder();
+            value.WriteUInt16(1);
+            value.WriteSerializedString(cleanup);
+            value.WriteUInt16(0);
+            return new[]
+            {
+                MetadataNamespace + ".InvalidHandleValueAttribute:010000000000000000000000",
+                MetadataNamespace + ".InvalidHandleValueAttribute:0100FFFFFFFFFFFFFFFF0000",
+                MetadataNamespace + ".RAIIFreeAttribute:" + Convert.ToHexString(value.ToArray()),
+            };
+        }
+
+        private static void AssertHidConstant(MetadataReader reader, FieldDefinition field)
+            => AssertNativeLiteral(reader, field, "Windows.Win32.Foundation.NTSTATUS", ConstantTypeCode.Int32, new byte[] { 9, 0, 0x11, 0xc0 });
+
+        private static void AssertNativeLiteral(MetadataReader reader, FieldDefinition field, string signature, ConstantTypeCode typeCode, byte[] bytes)
+        {
+            Assert.Equal(FieldAttributes.Public | FieldAttributes.Static | FieldAttributes.Literal | FieldAttributes.HasDefault, field.Attributes);
+            Assert.Equal(signature, field.DecodeSignature(Signatures, null));
+            Assert.Equal(-1, field.GetOffset());
+            Assert.True(field.GetMarshallingDescriptor().IsNil);
+            Assert.Empty(field.GetCustomAttributes());
+            var constant = reader.GetConstant(field.GetDefaultValue());
+            Assert.Equal(typeCode, constant.TypeCode);
+            Assert.Equal(bytes, reader.GetBlobBytes(constant.Value));
         }
 
         private static string Import(MetadataReader reader, MethodDefinition method)
@@ -1539,6 +2095,18 @@ namespace Win32MetadataScraperTests
         {
             internal string Site => Namespace + "." + Owner + "::" + Member;
             internal string OldType => (EnumNamespace ?? Namespace) + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
+        }
+
+        private sealed record HandleUse(string Namespace, string Method, string Member, string Type, string Native)
+        {
+            internal string Site => Namespace + "." + Method + "::" + Member;
+            internal string OldType => Namespace + "." + Type;
+        }
+
+        private sealed record LifecycleTransfer(string Namespace, string Type, string Method, string Member, string Cleanup, bool Synthetic = false)
+        {
+            internal string Site => Namespace + ".Apis." + Method + "::" + Member;
+            internal string TypeSite => Namespace + "." + Type;
         }
 
         private static Image Open(string variable) => new Image(Environment.GetEnvironmentVariable(variable));
