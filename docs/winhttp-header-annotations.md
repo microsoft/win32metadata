@@ -52,8 +52,11 @@ Earlier images and receipts below are immutable historical evidence.
 post-MIDL mirror Git tree, exact header preimages, their selected-SDK inputs, and
 patch order. `winhttp.h` is byte-identical to the selected package. The package
 supplies `httprequest.idl`, not `httprequest.h`; the recipe separately pins the
-checked-in post-MIDL header and the identical selected-SDK IDL. There are no
-pre-MIDL changes or IDL recompilation in this migration.
+checked-in post-MIDL header and the identical selected-SDK IDL. WinHttp itself
+needs no IDL patch or recompilation. In the expanded eleven-owner pilot,
+UpdateAssessment instead patches shipped `waasapi.idl` before private MIDL
+regeneration; see the
+[source-artifact audit and provenance](header-annotation-migration-playbook.md#pre-midl-source-adoption).
 
 Only WinHttp traverses these two headers. HttpServer also includes `winhttp.h`,
 but traverses `http.h`, so it is an affected physical-header dependent rather than
@@ -69,8 +72,11 @@ header scraping and consume the same private root. The orchestration has no
 partition hook or WinHttp default recipe. The project supplies the SDK-wide
 recipe explicitly to the generic `Prepare-SdkHeaders.ps1` script, which copies
 the complete mirror into a private,
-content-addressed include tree and applies the ordered post-MIDL patches there.
-It checks SDK/preimage identity, admitted patch targets, source/cache hashes,
+content-addressed include tree. Its optional pinned MIDL closure applies
+pre-MIDL source patches and regenerates admitted headers/imported outputs before
+the direct-header post-MIDL patches. Both stages publish the same include root.
+It checks SDK/preimage and compiler/preprocessor identity, actual closed MIDL
+inputs, admitted patch targets, source/cache hashes,
 ordinary paths, patch ordering, and strict patch applicability. Publication is
 transactional and serialized; a modified published cache is rejected, not repaired
 while a scraper might be reading it. Unmodified files retain their exact bytes.
@@ -266,6 +272,9 @@ are not acceptance. Record nonzero executed counts and require no skipped pilot
 legs. Preparation controls cover cache reuse/tampering, preimage/SDK/MIDL mismatch,
 path escapes, unadmitted targets, mode/identity changes, duplicate patches, failed
 transactions, and lock contention.
+Pre-MIDL controls also run the selected real SDK MIDL compiler, preserve native
+SAL alongside metadata, reject ambient imports and syntax failures without header
+fallback, verify imported outputs and compare cold-regeneration bytes.
 SDK-stage controls import the actual project and exercise direct headers/constants,
 with and without a partition filter. Each invocation prepares exactly once before
 the consumers, all consumers observe the same root, cache reuse retains markers,

@@ -89,6 +89,90 @@
       "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
     }
   ],
+  "midl": {
+    "tools": [
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midl.exe",
+        "sha256": "53CCBCBC2FF14B2D08D029AD07B3D1AA4FF3B103F712199A15248A6CCCF6D2A3"
+      },
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midlc.exe",
+        "sha256": "D12AFF8A74397601041BEC46552FC8DEE1206DAA97E39600E72A7B1B1A5EF6AB"
+      }
+    ],
+    "inputs": [
+      {
+        "path": "um\\waasapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+        "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+      },
+      {
+        "path": "um\\waasapitypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\WaaSAPITypes.idl",
+        "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+      },
+      {
+        "path": "um\\oaidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.idl",
+        "sdkSha256": "5F5A2B0508AFFC22C30289D6F44B08792CE047CD7F41303EBBB7470E2217D6BC"
+      },
+      {
+        "path": "um\\objidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidl.idl",
+        "sdkSha256": "09C1AB7AEF7C01D1552BAA826AAC549C15D1806E9C696B99814FCFF0241DE539"
+      },
+      {
+        "path": "um\\objidlbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidlbase.idl",
+        "sdkSha256": "A31AD8BCEB15641FA625EE1DE35657269B1449BB84DB4F11553D68B410F59E71"
+      },
+      {
+        "path": "um\\unknwn.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwn.idl",
+        "sdkSha256": "2E146DA78625D05E345E7D480A61C5CC54696DD7C713B8FF07D9D36D95363C6C"
+      },
+      {
+        "path": "um\\unknwnbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwnbase.idl",
+        "sdkSha256": "797B7267F24259A02A14455203F9B11309B504C1BFFAF879AF7BC05B8B67A5BC"
+      },
+      {
+        "path": "shared\\wtypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypes.idl",
+        "sdkSha256": "F850757CCEF6092F20A97E955DD64AE2A595E0BF71C09A826A0BDE7C21B36E81"
+      },
+      {
+        "path": "shared\\wtypesbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypesbase.idl",
+        "sdkSha256": "5DFF65DAA90EC39AAE0EB89EC2E7DF1ACD8A8D22E49514E5E062F13DD9B4B564"
+      },
+      {
+        "path": "shared\\basetsd.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\basetsd.h",
+        "sdkSha256": "D35B73F885D7EF7DFD27FCE3762C190C1C952A21E10A3945BCB3D1860C673B12"
+      },
+      {
+        "path": "shared\\guiddef.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\guiddef.h",
+        "sdkSha256": "0C08463FBC5A23A8862E57699E2F30DD14CD3DB4A40903E4FCA9392A57942DAE"
+      },
+      {
+        "path": "um\\oaidl.acf",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.acf",
+        "sdkSha256": "333B0D33450F70D2FB5288D79B11ECF6C4043B933ECB7B7A2A996E3185F714BF"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "um\\waasapitypes.idl",
+        "path": "um\\waasapitypes.h"
+      },
+      {
+        "source": "um\\waasapi.idl",
+        "path": "um\\waasapi.h"
+      }
+    ]
+  },
   "partitions": [
     "WinHttp",
     "HttpServer",
@@ -107,6 +191,7 @@
     "Xinput"
   ],
   "patches": [
+    "pre-midl\\um\\waasapi.annotations.patch",
     "post-midl\\um\\winhttp.supported-os.patch",
     "post-midl\\um\\winhttp.last-error.patch",
     "post-midl\\um\\winhttp.callback-alias.patch",
@@ -120,7 +205,6 @@
     "post-midl\\um\\timezoneapi.annotations.patch",
     "post-midl\\um\\ual.annotations.patch",
     "post-midl\\um\\tlhelp32.annotations.patch",
-    "post-midl\\um\\waasapi.annotations.patch",
     "post-midl\\um\\wslapi.annotations.patch",
     "post-midl\\um\\xinput.annotations.patch"
   ]

@@ -111,6 +111,62 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
+        public void RegeneratedAssessorKeepsItsSingleTypeFloorWithoutMethodInheritance()
+        {
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var reader = current.Reader;
+            var types = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Namespace) == "Windows.Win32.System.UpdateAssessment" &&
+                    reader.GetString(type.Name) == "IWaaSAssessor").ToArray();
+            Assert.NotEmpty(types);
+            foreach (var type in types)
+            {
+                Assert.Equal(new[] { "windows10.0.15063" },
+                    AttributeValues(reader, type.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.All(type.GetMethods().Select(reader.GetMethodDefinition),
+                    method => Assert.Empty(AttributeValues(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute")));
+            }
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void All119EffectivePilotFloorsMatchOldOnEveryArchitecture(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            string[] before = Floors(old.Reader);
+            string[] after = Floors(current.Reader);
+            Assert.Equal(119, before.Length);
+            Assert.Equal(before, after);
+            this.output.WriteLine($"Architecture {architecture}: all 119 exact effective pilot OS floors unchanged.");
+
+            string[] Floors(MetadataReader reader)
+            {
+                var result = new List<string>();
+                foreach (var type in reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => Supports(reader, type.GetCustomAttributes(), architecture)))
+                {
+                    string ns = reader.GetString(type.Namespace), name = reader.GetString(type.Name);
+                    if (ns == "Windows.Win32.System.UpdateAssessment" && name == "IWaaSAssessor")
+                        result.AddRange(AttributeValues(reader, type.GetCustomAttributes(), "SupportedOSPlatformAttribute")
+                            .Select(floor => ns + "." + name + "=" + floor));
+                    if (name != "Apis") continue;
+                    foreach (var method in type.GetMethods().Select(reader.GetMethodDefinition)
+                        .Where(method => Supports(reader, method.GetCustomAttributes(), architecture)))
+                    {
+                        string methodName = reader.GetString(method.Name);
+                        if (ns == WinHttpNamespace || AdditionalOwnedMethods.Contains(methodName, StringComparer.Ordinal))
+                            result.AddRange(AttributeValues(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute")
+                                .Select(floor => ns + "." + methodName + "=" + floor));
+                    }
+                }
+                return result.OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            }
+        }
+
+        [MigrationFact]
         public void CompleteNewImageClosesConstructorsAndFrozenOldDefectIsExplicit()
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");

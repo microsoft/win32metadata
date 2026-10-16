@@ -217,8 +217,34 @@ static_assert(XINPUT_FLAG_GAMEPAD == 1);
             }
         }
 
+        [NativeMigrationTheory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void RegeneratedSdkIdlKeepsNativeAbiAndOnlyTheIntendedAnnotation(string architecture, string target, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string[] headers = { "waasapi.h", "waasapitypes.h" };
+            var annotations = new List<string>();
+            var before = Surface(root, original, "UpdateAssessment", architecture, target, headers, "");
+            var after = Surface(root, prepared, "UpdateAssessment", architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: annotations);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.Equal(enabled ? new[] { "IWaaSAssessor|SupportedOSPlatform(\"windows10.0.15063\")" } :
+                Array.Empty<string>(), annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Contains("_Out_retval_  OSUpdateAssessment *result", File.ReadAllText(Path.Combine(prepared, "um", "waasapi.h")));
+            this.output.WriteLine($"Regenerated waasapi/{architecture}/metadata={enabled}: {after.Length} unchanged native facts; " +
+                $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact type-only OS annotation.");
+        }
+
         private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
-            string target, string[] headers, string checks)
+            string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             var arguments = new List<string>
@@ -243,6 +269,8 @@ static_assert(XINPUT_FLAG_GAMEPAD == 1);
                 }
             }
             Assert.DoesNotContain(arguments, argument => argument.Contains("WIN32METADATA", StringComparison.Ordinal));
+            if (metadataEnabled)
+                arguments.Add("-DWIN32METADATA=1");
             using var unsaved = CXUnsavedFile.Create(source, File.ReadAllText(source) + checks);
             using var index = CXIndex.Create(false, false);
             Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
@@ -303,6 +331,13 @@ static_assert(XINPUT_FLAG_GAMEPAD == 1);
                 }
                 cursor.VisitChildren((child, parent, data) =>
                 {
+                    if (annotations != null && headers.Contains(header, StringComparer.OrdinalIgnoreCase) &&
+                        child.Kind == CXCursorKind.CXCursor_AnnotateAttr)
+                    {
+                        string value = Text(child.Spelling);
+                        if (value.StartsWith("SupportedOSPlatform(", StringComparison.Ordinal))
+                            annotations.Add(owner + name + "|" + value);
+                    }
                     if (child.IsDeclaration || child.IsTranslationUnit)
                         Walk(child, childOwner);
                     return CXChildVisitResult.CXChildVisit_Continue;

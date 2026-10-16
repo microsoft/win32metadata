@@ -53,9 +53,37 @@ caching, path/preimage checks and rejection of modified caches. A changed root
 invalidates constants and every architecture's header marker; an unchanged root
 retains them. Prove this with the existing preparation controls.
 
-Respect the MIDL boundary. The current preparation script admits post-MIDL
-recipes; it is not permission to rerun broad SDK/IDL update scripts or silently
-introduce a pre-MIDL pipeline. Surface a bounded blocker if that is required.
+Respect the SDK artifact boundary, not just a recipe filename extension. Patch a
+shipped source IDL before MIDL when its corresponding generated header owns the
+fact; keep real direct-shipped header artifacts as header patches. A generated
+dependency is not automatically another annotation target. Never run broad
+SDK/IDL update scripts to implement a bounded migration: those scripts reset the
+mirror and restore removed SDK artifacts.
+
+The existing preparation path supports an explicit `midl` closure in the same
+recipe. Pin every SDK IDL/import/ACF/preprocessor input, `midl.exe` and `midlc.exe`,
+and bind each regenerated output to its admitted mirror header and exact SDK
+IDL. Apply ordered `pre-midl` patches to private copies, reuse the existing
+MIDL-to-SAL conversion and shared `MidlHeaderUtils.ps1` flags, regenerate only
+the admitted outputs, then apply direct-header `post-midl` patches. Scraping
+and constants still consume one private root. Reject wrong-stage patches,
+unpinned imports, changed tools/preimages, failed generation and modified caches;
+never fall back to an old generated header.
+
+Run the selected C preprocessor with closed include paths and cleared ambient
+compiler options; hash its executable/engine and the SAL/helper scripts into the
+preparation identity. Verify MIDL's actual saved preprocessor input set against
+the declared closure. Preserve raw inputs, converted IDLs, commands, diagnostics,
+outputs and their hashes in the private cache. Keep warnings enabled and compare
+the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
+accounting only for source line shifts. Do not add native `[local]` attributes or
+suppress diagnostics to make an annotation compile.
+
+Metadata must compose with native SAL. The converter does not skip a parameter
+line merely because it also contains metadata annotations. Consolidate adjacent
+SAL and metadata annotation payloads: MIDL otherwise emits only the last
+`annotation(...)` attribute and silently drops the preceding SAL. Check the
+actual regenerated header and final metadata, not just converted IDL text.
 
 ## 3. Capture native facts and classify every difference
 
@@ -319,12 +347,14 @@ logical groups retain unsigned 32-bit storage and all ten members: only
 become associated rather than substituted enum types.
 
 UpdateAssessment moves only `IWaaSAssessor`'s Windows 10 build 15063 floor.
+Its current patch is authored in shipped `waasapi.idl`, not the generated header;
+the [pre-MIDL source adoption](#pre-midl-source-adoption) retains the same fact.
 
 These floors agree with the published requirements for
 [ToolHelp](https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot)
 and [IWaaSAssessor](https://learn.microsoft.com/windows/win32/api/waasapi/nn-waasapi-iwaasassessor).
 UpdateAssessment separately pins its supplied IDLs and checked-in post-MIDL
-headers.
+header preimages.
 
 Global `IUnknown`/`IDispatch`, BSTR/VARIANT helpers, and Foundation `HANDLE`
 definitions remain outside these physical owners. No snapshot handle identity
@@ -416,6 +446,52 @@ preserved. Artifacts are under `artifacts\supported-os-scopes`; the grade is
 about a later CI image. Final-head CI and downloaded-image qualification are
 recorded separately in the [draft PR](https://github.com/microsoft/win32metadata/pull/2365).
 Fresh CsWin32 compatibility remains unverified.
+
+### Pre-MIDL source adoption
+
+The SDK CPP `10.0.26100.7705` artifact audit covers every recipe header and
+actual patch target. Only the patched `waasapi.h` is generated from a shipped
+IDL. `httprequest.h` is an unpatched IDL-backed dependency; `waasapitypes.h` is
+an unpatched imported output regenerated with `waasapi.h`. All remaining
+annotation targets, including `winhttp.h`, remain direct-header patches.
+The eleven owners and fifteen owner/dependent partitions do not change.
+
+`pre-midl\um\waasapi.annotations.patch` applies to the actual shipped
+`waasapi.idl` preimage
+`A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38`.
+It emits the annotation include and a C++-only forward declaration carrying
+`_Win32_SupportedOS_15063_` specifically on `IWaaSAssessor`. MIDL rejects a
+direct interface annotation, and a surrounding scope would also annotate
+methods. This target-specific `cpp_quote` preserves the existing type-only
+floor, UUID, method, native `[out, retval]` and library contract without a
+reader change or a generated-header fallback.
+
+The closed source set is nine IDLs (`waasapi`, `waasapitypes`, `oaidl`,
+`objidl`, `objidlbase`, `unknwn`, `unknwnbase`, `wtypes`, `wtypesbase`),
+`oaidl.acf`, `basetsd.h` and `guiddef.h`. MIDL's saved preprocessing proves
+all twelve inputs, including the two base-IDL `#include`s and automatic ACF.
+The selected SDK x64 MIDL is 8.01.0628, executable SHA256
+`53CCBCBC2FF14B2D08D029AD07B3D1AA4FF3B103F712199A15248A6CCCF6D2A3`;
+its engine is pinned separately. Each preparation records the actual selected
+Visual C++ preprocessor/engine identities rather than assuming every machine
+has the same Visual Studio installation.
+
+Unmodified-IDL regeneration reproduces both mirror headers byte-for-byte.
+The candidate leaves `waasapitypes.h` byte-identical and preserves native SAL
+in `waasapi.h`. Baseline and candidate retain the same 497 native warnings for
+the types compilation and 498 for the assessor compilation, with zero added
+diagnostic/target/payload entries. There is no warning suppression or native
+`[local]` workaround. Cold regeneration produces the same complete prepared
+header bytes; cache reuse verifies rather than repairs the published tree.
+
+The actual regenerated SDK translation unit passes metadata off/on controls on
+x86, x64 and ARM64: native signatures/layout remain unchanged, with exactly
+the intended type-level OS annotation enabled and no method/unrelated-type
+annotation. Permanent preparation controls exercise mixed SAL/metadata through
+real MIDL, import/tool/preimage rejection, wrong-stage and syntax failures,
+ambient-include isolation, repeat bytes and cache tampering. These native and
+preparation results are separate from final-image and exact-head CI admission;
+the immutable B9 and scoped-adoption evidence above is not relabeled.
 
 ### Historical COM finding under the earlier policy
 

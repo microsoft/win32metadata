@@ -1,0 +1,21 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl b/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/waasapi.idl
+@@ -15,12 +15,17 @@
+ cpp_quote("#endif")
+ cpp_quote("")
+ cpp_quote("#include <winapifamily.h>")
++cpp_quote("#include <win32metadata_annotations.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ import "WaaSAPITypes.idl";
+ 
++cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
++cpp_quote("struct _Win32_SupportedOS_15063_ IWaaSAssessor;")
++cpp_quote("#endif")
++
+ [
+     object,
+     uuid(2347bbef-1a3b-45a4-902d-3e09c269b45e),

@@ -6,6 +6,7 @@ param(
     [string]$Recipe,
     [string]$SourceRoot = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders",
     [string]$SdkPackageRoot,
+    [string]$MidlPreprocessorPath,
     [string]$OutputRoot = "$PSScriptRoot\..\artifacts\prepared-sdk"
 )
 
@@ -64,6 +65,122 @@ function Resolve-Child([string]$Root, [string]$RelativePath) {
     $path
 }
 
+function Invoke-HeaderPatch($Patch, [string]$Root) {
+    $arguments = @('-C', $repoRoot, 'apply', '--unsafe-paths', '-p4', "--directory=$Root", '--whitespace=error-all')
+    $output = & git @arguments --check -- $Patch.fullPath 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "Patch preflight failed for $($Patch.path):`n$($output -join "`n")"
+    }
+    $output = & git @arguments -- $Patch.fullPath 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "Patch failed for $($Patch.path):`n$($output -join "`n")"
+    }
+}
+
+function Invoke-PreparedMidl([string]$Staging) {
+    $raw = "$Staging\midl\source"
+    $sal = "$Staging\midl\sal"
+    $generated = "$Staging\midl\generated"
+    foreach ($directory in @($raw, $sal, $generated)) {
+        [IO.Directory]::CreateDirectory($directory) | Out-Null
+    }
+    foreach ($input in $midlInputs) {
+        $target = Resolve-Child $raw $input.path
+        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
+        [IO.File]::Copy($input.fullPath, $target)
+        if ((Get-Sha256 $target) -ne $input.sha256) {
+            throw "The SDK MIDL input changed while being copied: $($input.path)"
+        }
+    }
+    foreach ($patch in @($patches | Where-Object stage -eq 'pre-midl')) {
+        Invoke-HeaderPatch $patch $raw
+    }
+    foreach ($input in $midlInputs) {
+        $target = Resolve-Child $sal $input.path
+        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
+        if ([IO.Path]::GetExtension($input.path) -eq '.idl') {
+            & "$PSScriptRoot\ConvertMidlAttributesToSalAnnotations.ps1" (Resolve-Child $raw $input.path) $target
+        }
+        else {
+            [IO.File]::Copy((Resolve-Child $raw $input.path), $target)
+        }
+    }
+
+    . "$PSScriptRoot\MidlHeaderUtils.ps1"
+    $includes = @($midlInputs | ForEach-Object { [IO.Path]::GetDirectoryName((Resolve-Child $sal $_.path)) } |
+        Sort-Object -Unique)
+    $environment = @{}
+    foreach ($name in @('PATH', 'INCLUDE', 'LIB', 'LIBPATH', 'CL', '_CL_', 'TEMP', 'TMP', 'VSLANG')) {
+        $environment[$name] = [Environment]::GetEnvironmentVariable($name, 'Process')
+    }
+    $commands = @()
+    $usedInputs = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+    Push-Location $generated
+    try {
+        foreach ($name in @('INCLUDE', 'LIB', 'LIBPATH', 'CL', '_CL_')) {
+            [Environment]::SetEnvironmentVariable($name, '', 'Process')
+        }
+        $env:PATH = "$([IO.Path]::GetDirectoryName($MidlPreprocessorPath));$([IO.Path]::GetDirectoryName($midlCompiler));$env:SystemRoot\System32;$env:SystemRoot"
+        $env:TEMP = $generated
+        $env:TMP = $generated
+        $env:VSLANG = '1033'
+        if ((Get-Command cl.exe -CommandType Application).Source -ne $MidlPreprocessorPath) {
+            throw 'MIDL did not resolve the pinned C preprocessor.'
+        }
+        foreach ($output in $config.midl.outputs) {
+            $header = Resolve-Child $generated $output.path
+            [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($header)) | Out-Null
+            $arguments = @(Get-MidlHeaderArguments -InputFile (Resolve-Child $sal $output.source) `
+                -OutputDirectory $generated -OutputHeader $header -IncludeDirectories $includes)
+            $arguments += '/cpp_cmd', 'cl.exe', '/cpp_opt', '/nologo /E /TC /X', '/savePP'
+            $log = "$generated\$([IO.Path]::GetFileNameWithoutExtension($output.source)).log"
+            & $midlCompiler @arguments *> $log
+            $exitCode = $LASTEXITCODE
+            $text = [IO.File]::ReadAllText($log)
+            if ($exitCode -ne 0 -or $text -match '(?im)\b(?:fatal\s+)?error\s+(?:MIDL|C)\d+') {
+                throw "MIDL failed for $($output.source) (exit $exitCode):`n$text"
+            }
+            if (!(Test-Path -LiteralPath $header -PathType Leaf)) {
+                throw "MIDL did not produce its admitted header: $($output.path)"
+            }
+            $commands += [ordered]@{
+                source = $output.source
+                header = $output.path
+                arguments = @($arguments | ForEach-Object { $_.Replace($Staging, '<prepared>') })
+                warnings = @([regex]::Matches($text, '(?im)^.*\bwarning\s+MIDL\d+.*$') |
+                    ForEach-Object { $_.Value.Replace($Staging, '<prepared>') })
+                headerSha256 = Get-Sha256 $header
+            }
+        }
+        foreach ($file in @(Get-ChildItem -LiteralPath $generated -Filter '*.tmp' -File)) {
+            foreach ($match in [regex]::Matches([IO.File]::ReadAllText($file.FullName), '(?m)^\s*#line\s+\d+\s+"([^"]+)"')) {
+                $path = $match.Groups[1].Value.Replace('\\', '\')
+                $relative = [IO.Path]::GetRelativePath($sal, $path)
+                if ($relative -notin @($midlInputs.path) -or (Resolve-Child $sal $relative) -ne $path) {
+                    throw "MIDL preprocessing read an unpinned input: $path"
+                }
+                $usedInputs.Add($relative) | Out-Null
+            }
+            Remove-Item -LiteralPath $file.FullName
+        }
+        if (!$usedInputs.SetEquals([string[]]$midlInputs.path)) {
+            throw 'The declared MIDL input closure does not match the actual preprocessed inputs.'
+        }
+        foreach ($output in $config.midl.outputs) {
+            [IO.File]::Copy((Resolve-Child $generated $output.path), (Resolve-Child "$Staging\headers" $output.path), $true)
+        }
+        [IO.File]::WriteAllText("$Staging\midl\commands.json", ($commands | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
+        [IO.File]::WriteAllText("$Staging\midl\preprocessed-inputs.json",
+            (@($usedInputs | Sort-Object -CaseSensitive) | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
+    }
+    finally {
+        foreach ($name in $environment.Keys) {
+            [Environment]::SetEnvironmentVariable($name, $environment[$name], 'Process')
+        }
+        Pop-Location
+    }
+}
+
 $Recipe = [IO.Path]::GetFullPath($Recipe)
 $SourceRoot = [IO.Path]::GetFullPath($SourceRoot).TrimEnd('\')
 $OutputRoot = [IO.Path]::GetFullPath($OutputRoot).TrimEnd('\')
@@ -80,7 +197,7 @@ if (!(Test-Path -LiteralPath $SourceRoot -PathType Container)) {
 
 $config = Get-Content -LiteralPath $Recipe -Raw | ConvertFrom-Json
 if ($config.schemaVersion -ne 1 -or $config.sourceStage -ne 'post-midl') {
-    throw 'Only schema 1 post-MIDL mirror recipes are supported. Apply pre-MIDL changes before compiling their IDL closure.'
+    throw 'Only schema 1 post-MIDL mirror recipes are supported; pre-MIDL patches require an explicit pinned MIDL closure.'
 }
 if (!$SdkPackageRoot) {
     $propsPath = "$repoRoot\obj\BuildTools\BuildTools.proj.nuget.g.props"
@@ -128,10 +245,73 @@ foreach ($header in $config.headers) {
         throw "Selected SDK input mismatch: $($header.sdkPath)"
     }
 }
+$midlInputs = @()
+$midlTools = @()
+$midlScripts = @()
+$hasMidl = $null -ne $config.PSObject.Properties['midl']
+if ($hasMidl) {
+    $midlInputs = @($config.midl.inputs | ForEach-Object {
+        if ([IO.Path]::GetExtension($_.path) -notin @('.idl', '.acf', '.h')) {
+            throw "Unsupported MIDL input: $($_.path)"
+        }
+        Resolve-Child $SourceRoot $_.path | Out-Null
+        $path = Resolve-Child $SdkPackageRoot $_.sdkPath
+        if ((Get-Sha256 $path) -ne $_.sdkSha256) {
+            throw "Selected SDK MIDL input mismatch: $($_.sdkPath)"
+        }
+        [pscustomobject]@{ path = $_.path; fullPath = $path; sdkPath = $_.sdkPath; sha256 = $_.sdkSha256 }
+    })
+    if (!$midlInputs.Count -or @($midlInputs.path | Sort-Object -Unique).Count -ne $midlInputs.Count) {
+        throw 'The MIDL input closure must be nonempty and contain no duplicate paths.'
+    }
+    foreach ($output in $config.midl.outputs) {
+        $header = @($config.headers | Where-Object path -eq $output.path)
+        $input = @($midlInputs | Where-Object path -eq $output.source)
+        if ($header.Count -ne 1 -or $input.Count -ne 1 -or
+            [IO.Path]::GetExtension($output.source) -ne '.idl' -or
+            $header[0].sdkPath -ne $input[0].sdkPath -or $header[0].sdkSha256 -ne $input[0].sha256) {
+            throw "A MIDL output must bind one admitted header to its exact SDK IDL: $($output.path)"
+        }
+    }
+    if (!$config.midl.outputs.Count -or
+        @($config.midl.outputs.path | Sort-Object -Unique).Count -ne $config.midl.outputs.Count) {
+        throw 'MIDL outputs must be nonempty and contain no duplicate headers.'
+    }
+    $midlTools = @($config.midl.tools | ForEach-Object {
+        $path = Resolve-Child $SdkPackageRoot $_.sdkPath
+        if ((Get-Sha256 $path) -ne $_.sha256) {
+            throw "Selected SDK MIDL compiler mismatch: $($_.sdkPath)"
+        }
+        [pscustomobject]@{ path = $path; sha256 = $_.sha256 }
+    })
+    if (($midlTools.path | ForEach-Object { [IO.Path]::GetFileName($_) } | Sort-Object) -join ',' -ne 'midl.exe,midlc.exe' -or
+        @($midlTools.path | ForEach-Object { [IO.Path]::GetDirectoryName($_) } | Sort-Object -Unique).Count -ne 1) {
+        throw 'Pin both midl.exe and midlc.exe from the same selected SDK compiler directory.'
+    }
+    $midlCompiler = ($midlTools | Where-Object { [IO.Path]::GetFileName($_.path) -eq 'midl.exe' }).path
+    if (!$MidlPreprocessorPath) {
+        . "$PSScriptRoot\CommonUtils.ps1"
+        $MidlPreprocessorPath = Join-Path (Get-VcDirPath -Arch x64 -HostArch x64) 'cl.exe'
+    }
+    $MidlPreprocessorPath = [IO.Path]::GetFullPath($MidlPreprocessorPath)
+    Assert-OrdinaryPath $MidlPreprocessorPath
+    if ([IO.Path]::GetFileName($MidlPreprocessorPath) -ne 'cl.exe') {
+        throw 'The selected MIDL preprocessor must be cl.exe.'
+    }
+    $midlTools += @($MidlPreprocessorPath, (Join-Path ([IO.Path]::GetDirectoryName($MidlPreprocessorPath)) 'c1.dll')) |
+        ForEach-Object { [pscustomobject]@{ path = $_; sha256 = Get-Sha256 $_ } }
+    $midlScripts = @('MidlHeaderUtils.ps1', 'ConvertMidlAttributesToSalAnnotations.ps1') | ForEach-Object {
+        [pscustomobject]@{ path = "$PSScriptRoot\$_"; sha256 = Get-Sha256 "$PSScriptRoot\$_" }
+    }
+}
+$sawPostMidl = $false
 $patches = @($config.patches | ForEach-Object {
-    if (!$_.StartsWith('post-midl\', [StringComparison]::Ordinal)) {
+    $stage = $_.Split('\')[0]
+    if ($stage -notin @('pre-midl', 'post-midl') -or ($stage -eq 'pre-midl' -and (!$hasMidl -or $sawPostMidl))) {
         throw "Patch is on the wrong side of the MIDL boundary: $_"
     }
+    $sawPostMidl = $stage -eq 'post-midl'
+    $admitted = if ($stage -eq 'pre-midl') { @($midlInputs.path | Where-Object { $_.EndsWith('.idl') }) } else { @($config.headers.path) }
     $path = Resolve-Child $recipeRoot $_
     if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
         throw "Missing patch: $path"
@@ -156,8 +336,17 @@ $patches = @($config.patches | ForEach-Object {
         }
         $oldPath = $before.Groups[2].Value.Substring($oldPrefix.Length)
         $newPath = $after.Groups[2].Value.Substring($newPrefix.Length)
-        if ($oldPath -cne $newPath -or $newPath.Replace('/', '\') -notin @($config.headers.path)) {
+        if ($oldPath -cne $newPath -or $newPath.Replace('/', '\') -notin $admitted) {
             throw "A patch must modify one admitted header without changing its identity: $_"
+        }
+        if ($stage -eq 'post-midl') {
+            $header = $config.headers | Where-Object path -eq $newPath.Replace('/', '\')
+            $sdkIdl = [IO.Path]::ChangeExtension((Resolve-Child $SdkPackageRoot $header.sdkPath), '.idl')
+            if ([IO.Path]::GetExtension($header.sdkPath) -eq '.idl' -or
+                ([IO.File]::ReadAllText((Resolve-Child $SourceRoot $header.path)).Contains('File created by MIDL compiler') -and
+                    (Test-Path -LiteralPath $sdkIdl -PathType Leaf))) {
+                throw "A shipped-IDL-backed annotation patch belongs before MIDL: $_"
+            }
         }
     }
     $statistics = @(& git -C $repoRoot apply -p4 --numstat -- $path)
@@ -166,11 +355,11 @@ $patches = @($config.patches | ForEach-Object {
     }
     foreach ($statistic in $statistics) {
         if ($statistic -notmatch '^\d+\t\d+\t(.+)$' -or
-            $Matches[1].Replace('/', '\') -notin @($config.headers.path)) {
+            $Matches[1].Replace('/', '\') -notin $admitted) {
             throw "Patch changes a path outside its reviewed header set: $statistic"
         }
     }
-    [pscustomobject]@{ path = $_; fullPath = $path; sha256 = Get-Sha256 $path }
+    [pscustomobject]@{ path = $_; fullPath = $path; sha256 = Get-Sha256 $path; stage = $stage }
 })
 if (@($patches.path | Sort-Object -Unique).Count -ne $patches.Count) {
     throw 'A patch is listed more than once.'
@@ -182,7 +371,8 @@ $staging = $null
 try {
     $sourceState = Get-DirectoryState $SourceRoot
     $identity = Get-TextHash ((Get-Sha256 $Recipe) + (Get-Sha256 $PSCommandPath) + $sourceState.sha256 +
-        (($patches | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n"))
+        (($patches | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n") +
+        (($midlTools + $midlScripts | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n"))
     $destination = "$OutputRoot\$identity"
     $manifestPath = "$destination\manifest.json"
     Assert-OrdinaryPath $manifestPath
@@ -195,6 +385,9 @@ try {
         $actual = Get-DirectoryState "$destination\headers"
         if ($manifest.identity -ne $identity -or $manifest.preparedSha256 -ne $actual.sha256) {
             throw "Published header cache was modified: $destination. Do not repair a tree that a scraper may be reading."
+        }
+        if ($hasMidl -and $manifest.midlSha256 -ne (Get-DirectoryState "$destination\midl").sha256) {
+            throw "Published MIDL cache was modified: $destination."
         }
         return [pscustomobject]@{ IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity; Reused = $true }
     }
@@ -209,19 +402,24 @@ try {
     if ((Get-DirectoryState "$staging\headers").sha256 -ne $sourceState.sha256) {
         throw 'The source header tree changed while it was being copied.'
     }
-    foreach ($patch in $patches) {
-        $arguments = @('-C', $repoRoot, 'apply', '--unsafe-paths', '-p4', "--directory=$staging\headers", '--whitespace=error-all')
-        $output = & git @arguments --check -- $patch.fullPath 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            throw "Patch preflight failed for $($patch.path):`n$($output -join "`n")"
-        }
-        $output = & git @arguments -- $patch.fullPath 2>&1
-        if ($LASTEXITCODE -ne 0) {
-            throw "Patch failed for $($patch.path):`n$($output -join "`n")"
-        }
+    if ($hasMidl) {
+        Invoke-PreparedMidl $staging
+    }
+    foreach ($patch in @($patches | Where-Object stage -eq 'post-midl')) {
+        Invoke-HeaderPatch $patch "$staging\headers"
     }
     if ((Get-DirectoryState $SourceRoot).sha256 -ne $sourceState.sha256) {
         throw 'The source header tree changed during preparation.'
+    }
+    foreach ($input in $midlInputs) {
+        if ((Get-Sha256 $input.fullPath) -ne $input.sha256) {
+            throw "The selected SDK MIDL input changed during preparation: $($input.path)"
+        }
+    }
+    foreach ($tool in @($midlTools + $midlScripts)) {
+        if ((Get-Sha256 $tool.path) -ne $tool.sha256) {
+            throw "A MIDL tool or SAL converter changed during preparation: $($tool.path)"
+        }
     }
     $prepared = Get-DirectoryState "$staging\headers"
     $manifest = [ordered]@{
@@ -236,6 +434,12 @@ try {
         patches = @($patches | Select-Object path, sha256)
         preparedSha256 = $prepared.sha256
         files = $prepared.files
+    }
+    if ($hasMidl) {
+        $manifest.midlInputs = @($midlInputs | Select-Object path, sdkPath, sha256)
+        $manifest.midlTools = $midlTools
+        $manifest.midlScripts = $midlScripts
+        $manifest.midlSha256 = (Get-DirectoryState "$staging\midl").sha256
     }
     [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
     [IO.Directory]::Move($staging, $destination)

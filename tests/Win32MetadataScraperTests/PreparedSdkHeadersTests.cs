@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using System.Xml.Linq;
 using Xunit;
 
@@ -186,6 +187,150 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        [Fact]
+        public void PreMidlRegenerationPreservesSalImportsSourcesAndRepeatBytes()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            byte[] original = File.ReadAllBytes(fixture.MidlInput);
+            var first = fixture.Prepare();
+            string header = Path.Combine(first.IncludeRoot, "um", "generated.h");
+            Assert.Contains("#define IDL_VALUE 2", File.ReadAllText(header));
+            Assert.Contains("_Out_", File.ReadAllText(header));
+            Assert.Contains("_Win32_Retval_", File.ReadAllText(header));
+            Assert.Contains("typedef long DEPENDENCY", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "dependency.h")));
+            Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "sample.h")));
+            Assert.Equal(original, File.ReadAllBytes(fixture.MidlInput));
+            Assert.True(fixture.Prepare().Reused);
+
+            var repeated = fixture.Prepare(outputRoot: fixture.Output + "-repeat");
+            Assert.False(repeated.Reused);
+            Assert.Equal(first.Identity, repeated.Identity);
+            foreach (string name in new[] { "generated.h", "dependency.h", "sample.h" })
+                Assert.Equal(File.ReadAllBytes(Path.Combine(first.IncludeRoot, "um", name)),
+                    File.ReadAllBytes(Path.Combine(repeated.IncludeRoot, "um", name)));
+            string commands = File.ReadAllText(Path.Combine(Path.GetDirectoryName(first.IncludeRoot), "midl", "commands.json"));
+            Assert.DoesNotContain("/no_warn", commands);
+            Assert.DoesNotContain("/WX", commands);
+            Assert.Contains("MIDL2495", commands);
+            Assert.Contains("/X", commands);
+        }
+
+        [Theory]
+        [InlineData("source", "Selected SDK input mismatch")]
+        [InlineData("import", "Selected SDK input mismatch")]
+        [InlineData("compiler", "Selected SDK MIDL compiler mismatch")]
+        public void ChangedMidlInputsCannotReuseAPublishedCache(string mutation, string diagnostic)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.Prepare();
+            File.AppendAllText(mutation == "source" ? fixture.MidlInput :
+                mutation == "import" ? fixture.MidlDependency : fixture.MidlCompiler, "// changed");
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains(diagnostic, result.Error);
+        }
+
+        [Fact]
+        public void UnpinnedMidlImportsCannotFallBackToAmbientSdkPaths()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.MutateRecipe(recipe =>
+            {
+                recipe["midl"]["inputs"].AsArray().RemoveAt(1);
+                recipe["midl"]["outputs"].AsArray().RemoveAt(0);
+            });
+            var result = fixture.Run(ambientInclude: Path.GetDirectoryName(fixture.MidlDependency));
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("MIDL failed", result.Error);
+            Assert.Contains("dependency.idl", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void ShippedIdlPatchesCannotMoveBackAfterMidlOrFollowHeaderPatches()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.MutateRecipe(recipe =>
+            {
+                var patches = recipe["patches"].AsArray();
+                var first = patches[0].DeepClone();
+                patches.RemoveAt(0);
+                patches.Add(first);
+            });
+            var ordering = fixture.Run();
+            Assert.NotEqual(0, ordering.ExitCode);
+            Assert.Contains("wrong side of the MIDL boundary", ordering.Error);
+
+            fixture.EnableMidl();
+            fixture.WriteGeneratedHeaderPatch();
+            var stage = fixture.Run();
+            Assert.NotEqual(0, stage.ExitCode);
+            Assert.Contains("belongs before MIDL", stage.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void PublishedMidlClosureTamperingIsRejected()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            var prepared = fixture.Prepare();
+            string converted = Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot), "midl", "sal", "um", "generated.idl");
+            File.AppendAllText(converted, "// changed");
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("Published MIDL cache was modified", result.Error);
+        }
+
+        [Fact]
+        public void MidlSyntaxFailurePublishesNothingAndDoesNotReuseMirrorHeaders()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            File.AppendAllText(fixture.MidlInput, "\r\nnot valid IDL;\r\n");
+            fixture.MutateRecipe(recipe =>
+            {
+                string hash = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(fixture.MidlInput)));
+                recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                recipe["headers"][1]["sdkSha256"] = hash;
+            });
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("MIDL failed", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void GeneratedHeaderCannotHideItsShippedIdlBehindAHeaderSdkPath()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.DisguiseGeneratedHeaderAsSdkHeader();
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("belongs before MIDL", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void SalConversionDoesNotSkipParametersBesideMetadataOrOtherAnnotations()
+        {
+            using var fixture = new Fixture();
+            const string input = "void F([out, retval][annotation(\"_Win32_Retval_\")] long* value, [in] long count);\r\n" +
+                "void G([out][retval][annotation(\"_Out_retval_\")] long* value, [in] long count);\r\n" +
+                "void H([annotation(\"_Win32_Retval_\")][out][retval] long* value);\r\n" +
+                "cpp_quote(\"void Native([out] long* value);\")\r\n";
+            string converted = fixture.ConvertSal(input);
+            Assert.Contains("[out, retval][annotation(\"_Out_retval_ _Win32_Retval_\")]", converted);
+            Assert.Equal(3, converted.Split("_Out_retval_").Length - 1);
+            Assert.Equal(2, converted.Split("[annotation(\"_In_\")]").Length - 1);
+            Assert.Contains("cpp_quote(\"void Native([out] long* value);\")", converted);
+        }
+
         private sealed class Fixture : IDisposable
         {
             internal const string Before = "#ifndef SAMPLE_H\r\n#define SAMPLE_H\r\n#define VALUE 1\r\n#endif\r\n";
@@ -233,6 +378,9 @@ namespace Win32MetadataScraperTests
             internal string Unrelated { get; }
             internal string SdkHeader { get; }
             internal string Output { get; }
+            internal string MidlInput => Path.Combine(this.sdk, "c", "include", "um", "generated.idl");
+            internal string MidlDependency => Path.Combine(this.sdk, "c", "include", "um", "dependency.idl");
+            internal string MidlCompiler => Path.Combine(this.sdk, "c", "bin", "x64", "midl.exe");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
                 "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
@@ -270,14 +418,121 @@ namespace Win32MetadataScraperTests
                 }));
             }
 
-            internal PreparationResult Prepare(string workingDirectory = null)
+            internal void EnableMidl()
             {
-                var result = Run(workingDirectory);
+                WriteRecipe();
+                string input = "cpp_quote(\"#define IDL_VALUE 1\")\r\nimport \"dependency.idl\";\r\n" +
+                    "[uuid(7a22f761-442c-4260-9d80-4c937dce56b6), version(1.0), pointer_default(unique)]\r\n" +
+                    "interface IMidlFixture { void Read([out][annotation(\"_Win32_Retval_\")] DEPENDENCY* result); };\r\n";
+                const string dependency = "typedef long DEPENDENCY;\r\n";
+                foreach (string path in new[] { MidlInput, MidlCompiler })
+                    Directory.CreateDirectory(Path.GetDirectoryName(path));
+                File.WriteAllText(MidlInput, input, new UTF8Encoding(false));
+                File.WriteAllText(MidlDependency, dependency, new UTF8Encoding(false));
+                var props = XDocument.Load(Path.Combine(RepositoryRoot, "obj", "BuildTools", "BuildTools.proj.nuget.g.props"));
+                string package = props.Descendants().Single(element => element.Name.LocalName == "PkgMicrosoft_Windows_SDK_CPP").Value;
+                foreach (string name in new[] { "midl.exe", "midlc.exe" })
+                    File.Copy(Path.Combine(package, "c", "bin", "10.0.26100.0", "x64", name),
+                        Path.Combine(Path.GetDirectoryName(MidlCompiler), name), overwrite: true);
+
+                const string beforeHeader = "/* File created by MIDL compiler */\r\n";
+                foreach (string name in new[] { "generated", "dependency" })
+                    File.WriteAllText(Path.Combine(this.source, "um", name + ".h"), beforeHeader);
+                const string prePatch = @"pre-midl\um\generated.patch";
+                string patchFile = Path.Combine(this.root, prePatch);
+                Directory.CreateDirectory(Path.GetDirectoryName(patchFile));
+                File.WriteAllText(patchFile,
+                    "diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl b/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n" +
+                    "--- a/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n+++ b/generation/WinSDK/RecompiledIdlHeaders/um/generated.idl\n" +
+                    "@@ -1,3 +1,3 @@\n-cpp_quote(\"#define IDL_VALUE 1\")\r\n+cpp_quote(\"#define IDL_VALUE 2\")\r\n" +
+                    " import \"dependency.idl\";\r\n [uuid(7a22f761-442c-4260-9d80-4c937dce56b6), version(1.0), pointer_default(unique)]\r\n",
+                    new UTF8Encoding(false));
+                MutateRecipe(recipe =>
+                {
+                    foreach (string name in new[] { "generated", "dependency" })
+                        recipe["headers"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                        {
+                            path = @"um\" + name + ".h",
+                            sourceSha256 = Hash(Encoding.UTF8.GetBytes(beforeHeader)),
+                            sdkPath = @"c\include\um\" + name + ".idl",
+                            sdkSha256 = Hash(File.ReadAllBytes(Path.Combine(this.sdk, "c", "include", "um", name + ".idl"))),
+                        }));
+                    recipe["midl"] = JsonSerializer.SerializeToNode(new
+                    {
+                        tools = new[] { "midl.exe", "midlc.exe" }.Select(name => new
+                        {
+                            sdkPath = @"c\bin\x64\" + name,
+                            sha256 = Hash(File.ReadAllBytes(Path.Combine(Path.GetDirectoryName(MidlCompiler), name))),
+                        }),
+                        inputs = new[] { "generated", "dependency" }.Select(name => new
+                        {
+                            path = @"um\" + name + ".idl",
+                            sdkPath = @"c\include\um\" + name + ".idl",
+                            sdkSha256 = Hash(File.ReadAllBytes(Path.Combine(this.sdk, "c", "include", "um", name + ".idl"))),
+                        }),
+                        outputs = new[] { "dependency", "generated" }.Select(name => new
+                        {
+                            source = @"um\" + name + ".idl",
+                            path = @"um\" + name + ".h",
+                        }),
+                    });
+                    recipe["patches"] = JsonSerializer.SerializeToNode(new[] { prePatch, PatchPath });
+                });
+            }
+
+            internal void MutateRecipe(Action<JsonObject> mutate)
+            {
+                var recipe = JsonNode.Parse(File.ReadAllText(this.recipe)).AsObject();
+                mutate(recipe);
+                File.WriteAllText(this.recipe, recipe.ToJsonString());
+            }
+
+            internal void WriteGeneratedHeaderPatch()
+            {
+                const string relative = @"post-midl\um\generated.patch";
+                File.WriteAllText(Path.Combine(this.root, relative),
+                    "diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/generated.h b/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n" +
+                    "--- a/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n+++ b/generation/WinSDK/RecompiledIdlHeaders/um/generated.h\n" +
+                    "@@ -1 +1,2 @@\n /* File created by MIDL compiler */\r\n+// annotation\r\n");
+                MutateRecipe(recipe => recipe["patches"].AsArray().Add(relative));
+            }
+
+            internal void DisguiseGeneratedHeaderAsSdkHeader()
+            {
+                WriteGeneratedHeaderPatch();
+                string target = Path.ChangeExtension(MidlInput, ".h");
+                File.Copy(Path.Combine(this.source, "um", "generated.h"), target);
+                MutateRecipe(recipe =>
+                {
+                    recipe.Remove("midl");
+                    recipe["patches"].AsArray().RemoveAt(0);
+                    recipe["headers"][1]["sdkPath"] = @"c\include\um\generated.h";
+                    recipe["headers"][1]["sdkSha256"] = Hash(File.ReadAllBytes(target));
+                });
+            }
+
+            internal string ConvertSal(string input)
+            {
+                string source = Path.Combine(this.root, "sal.idl");
+                string target = Path.Combine(this.root, "sal-converted.idl");
+                File.WriteAllText(source, input);
+                var start = new ProcessStartInfo("pwsh") { UseShellExecute = false, RedirectStandardError = true, RedirectStandardOutput = true };
+                foreach (string argument in new[] { "-NoProfile", "-NonInteractive", "-File",
+                    Path.Combine(RepositoryRoot, "scripts", "ConvertMidlAttributesToSalAnnotations.ps1"), source, target })
+                    start.ArgumentList.Add(argument);
+                var result = Execute(start);
+                Assert.True(result.ExitCode == 0, result.Error + result.Output);
+                return File.ReadAllText(target);
+            }
+
+            internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null)
+            {
+                var result = Run(workingDirectory, outputRoot: outputRoot);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
                 return JsonSerializer.Deserialize<PreparationResult>(result.Output);
             }
 
-            internal ProcessResult Run(string workingDirectory = null)
+            internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null)
             {
                 static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
                 var start = new ProcessStartInfo("pwsh")
@@ -288,6 +543,11 @@ namespace Win32MetadataScraperTests
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                 };
+                if (ambientInclude != null)
+                {
+                    start.Environment["INCLUDE"] = ambientInclude;
+                    start.Environment["CL"] = "/I\"" + ambientInclude + "\"";
+                }
                 foreach (string argument in new[] { "-NoLogo", "-NoProfile", "-NonInteractive", "-Command" })
                 {
                     start.ArgumentList.Add(argument);
@@ -296,7 +556,7 @@ namespace Win32MetadataScraperTests
                 start.ArgumentList.Add("$ErrorActionPreference = 'Stop'; & " +
                     Quote(Path.Combine(RepositoryRoot, "scripts", "Prepare-SdkHeaders.ps1")) +
                     " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
-                    " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(Output) +
+                    " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(outputRoot ?? Output) +
                     " | ConvertTo-Json -Compress");
                 return Execute(start);
             }
