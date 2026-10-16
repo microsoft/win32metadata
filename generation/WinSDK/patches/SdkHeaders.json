@@ -219,6 +219,42 @@
       "sourceSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\NetSh.h",
       "sdkSha256": "5AFA73066E9F0875B348F082FF9F158B33812B566DECE3D0A338CEC9961D940B"
+    },
+    {
+      "path": "um\\bluetoothapis.h",
+      "sourceSha256": "9253AB24097AFC6BDFC9C01D4E1AF404AD3C07E2C40DFD00A5772F7455AD9CBF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bluetoothapis.h",
+      "sdkSha256": "9253AB24097AFC6BDFC9C01D4E1AF404AD3C07E2C40DFD00A5772F7455AD9CBF"
+    },
+    {
+      "path": "um\\bluetoothleapis.h",
+      "sourceSha256": "17EFD0367A3EC5A6FD2D61318AEBA69ED5F7AE5DBB3BC24AF0014FB0A5476D99",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bluetoothleapis.h",
+      "sdkSha256": "17EFD0367A3EC5A6FD2D61318AEBA69ED5F7AE5DBB3BC24AF0014FB0A5476D99"
+    },
+    {
+      "path": "um\\ws2bth.h",
+      "sourceSha256": "E4A7B6EF2DCFFBB736F826E475046916AF6C26C96282D5411EA71350CCCC5271",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ws2bth.h",
+      "sdkSha256": "E4A7B6EF2DCFFBB736F826E475046916AF6C26C96282D5411EA71350CCCC5271"
+    },
+    {
+      "path": "um\\dinput.h",
+      "sourceSha256": "FF440B043BB853835E6BD3E641EE3BFD11B63FC08AF7A935BAB2983F2A52070A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dinput.h",
+      "sdkSha256": "FF440B043BB853835E6BD3E641EE3BFD11B63FC08AF7A935BAB2983F2A52070A"
+    },
+    {
+      "path": "shared\\hidpi.h",
+      "sourceSha256": "0A2A18C3F6347B0CA5D33DC74ABC4A81160B2F5C5A23A83AEE063421BA87D09C",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\hidpi.h",
+      "sdkSha256": "0A2A18C3F6347B0CA5D33DC74ABC4A81160B2F5C5A23A83AEE063421BA87D09C"
+    },
+    {
+      "path": "um\\devfiltertypes.h",
+      "sourceSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\devfiltertypes.h",
+      "sdkSha256": "2F37EFE3FC233B830BAC96E9733D269847200D5E85586E67A1423B699C642896"
     }
   ],
   "partitions": [
@@ -257,7 +293,10 @@
     "Foundation",
     "Com",
     "Rpc",
-    "WinSock"
+    "WinSock",
+    "Bluetooth",
+    "Hid",
+    "DeviceQuery"
   ],
   "patches": [
     "post-midl\\um\\winhttp.supported-os.patch",
@@ -293,6 +332,12 @@
     "post-midl\\um\\dhcpv6csdk.annotations.patch",
     "post-midl\\um\\dhcpcsdk.annotations.patch",
     "post-midl\\um\\dhcpsapi.annotations.patch",
-    "post-midl\\um\\netsh.annotations.patch"
+    "post-midl\\um\\netsh.annotations.patch",
+    "post-midl\\um\\bluetoothapis.annotations.patch",
+    "post-midl\\um\\bluetoothleapis.annotations.patch",
+    "post-midl\\um\\ws2bth.annotations.patch",
+    "post-midl\\um\\dinput.annotations.patch",
+    "post-midl\\shared\\hidpi.annotations.patch",
+    "post-midl\\um\\devfiltertypes.annotations.patch"
   ]
 }

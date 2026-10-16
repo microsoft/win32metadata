@@ -1,0 +1,190 @@
+diff --git a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+--- a/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
++++ b/generation/WinSDK/RecompiledIdlHeaders/um/bluetoothapis.h
+@@ -5,6 +5,7 @@
+
+ #pragma once
+ #include <winapifamily.h>
++#include <win32metadata_annotations.h>
+
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -138,3 +139,6 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++_Win32_RAIIFree_(BluetoothFindRadioClose, 0)
+ HBLUETOOTH_RADIO_FIND
+ WINAPI
+ BluetoothFindFirstRadio(
+@@ -177,3 +181,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothFindNextRadio(
+@@ -202,3 +208,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothFindRadioClose(
+@@ -255,3 +263,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ BluetoothGetRadioInfo(
+@@ -423,3 +433,6 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++_Win32_RAIIFree_(BluetoothFindDeviceClose, 0)
+ HBLUETOOTH_DEVICE_FIND
+ WINAPI
+ BluetoothFindFirstDevice(
+@@ -466,3 +479,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothFindNextDevice(
+@@ -491,3 +506,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothFindDeviceClose(
+@@ -536,3 +553,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothGetDeviceInfo(
+@@ -571,3 +589,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothUpdateDeviceRecord(
+@@ -590,3 +609,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothRemoveDevice(
+@@ -710,3 +730,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothSelectDevices(
+@@ -730,3 +752,4 @@
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ BluetoothSelectDevicesFree(
+@@ -764,3 +787,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothDisplayDeviceProperties(
+@@ -853,3 +878,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateDevice(
+@@ -971,3 +997,4 @@
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateDeviceEx(
+@@ -1027,3 +1054,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothAuthenticateMultipleDevices(
+@@ -1096,3 +1124,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSetServiceState(
+@@ -1139,3 +1168,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothEnumerateInstalledServices(
+@@ -1178,3 +1208,5 @@
++_Win32_SupportedOS_BEGIN_(WindowsVista)
++
+ BOOL
+ WINAPI
+ BluetoothEnableDiscovery(
+@@ -1268,6 +1300,8 @@
+ BluetoothIsConnectable(
+     _In_opt_ HANDLE hRadio
+     );
++
++_Win32_SupportedOS_END_()
+
+ // ***************************************************************************
+ //
+@@ -1318,3 +1352,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ DWORD
+ WINAPI
+ BluetoothRegisterForAuthentication(
+@@ -1376,3 +1412,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothRegisterForAuthenticationEx(
+@@ -1410,3 +1447,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothUnregisterAuthentication(
+@@ -1450,3 +1489,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSendAuthenticationResponse(
+@@ -1521,3 +1561,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSendAuthenticationResponseEx(
+@@ -1642,3 +1683,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSdpGetElementData(
+@@ -1713,3 +1755,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSdpGetContainerElementData(
+@@ -1767,3 +1810,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSdpGetAttributeValue(
+@@ -1854,3 +1898,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSdpGetString(
+@@ -1902,3 +1947,5 @@
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
+ BOOL
+ WINAPI
+ BluetoothSdpEnumAttributes(
+@@ -1920,3 +1967,4 @@
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ BluetoothSetLocalServiceInfo(
+@@ -1952,3 +2000,4 @@
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ BluetoothIsVersionAvailable(

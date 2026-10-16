@@ -1693,20 +1693,6 @@
     "NativeTypedef": true
   },
   {
-    "Name": "HBLUETOOTH_DEVICE_FIND",
-    "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "BluetoothFindDeviceClose",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypedef": true
-  },
-  {
-    "Name": "HBLUETOOTH_RADIO_FIND",
-    "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "BluetoothFindRadioClose",
-    "InvalidHandleValues": [ -1, 0 ],
-    "NativeTypedef": true
-  },
-  {
     "Name": "HDEVNOTIFY",
     "ValueType": "void*",
     "CloseApi": "UnregisterDeviceNotification",
