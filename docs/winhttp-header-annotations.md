@@ -287,7 +287,7 @@ controls. HttpServer and WinInet snapshots must remain unchanged.
 
 The repository SDK integrity suite reads `bin\Windows.Win32.winmd` and the default
 `generation\WinSDK\obj\scratch` diagnostic tree. Stage the complete frozen OLD
-nonselected diagnostics plus NEW WinHttp/HttpServer diagnostics there, preserving
+nonselected diagnostics plus NEW recipe-selected owner/dependent diagnostics there, preserving
 their architecture-relative paths, and copy the complete NEW winmd to that local
 bin path before running `dotnet test tests\Windows.Win32.Tests -c Release`.
 `NoSuggestedRemappings` consumes the actual `*.txt` scraper diagnostics, not just

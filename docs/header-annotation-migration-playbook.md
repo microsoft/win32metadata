@@ -2,7 +2,7 @@
 
 Move authored semantic facts to reviewed header patches without changing native
 contracts. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
-The [annotation specification](copilot/plans/shift-left-annotation-spec.md) defines
+The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md) defines
 the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
 complete example and its immutable evidence.
 
@@ -384,6 +384,39 @@ test total. The artifacts and original receipts under
 `artifacts\header-annotation-wave\ci-final-38703254017` remain immutable.
 Fresh consumer compatibility remains unverified.
 
+### Scoped SupportedOS adoption checkpoint
+
+Tooling `43af342a3dd63803bf12a7c834cd0fd516df74ab` supplies the canonical
+direct/scoped contract. The same-tooling canonical-direct producer
+`a8e192627d90f71f8de080efb38a09f5bc67fb1e` was emitted and admitted before
+factoring: every one of B9's 37,314 physical type snapshots is unchanged.
+The scoped producer is `a18ba84473ceedf53bfe8e3a94a2bc5c6eb962cf`.
+
+| Immutable local evidence | SHA256 |
+| --- | --- |
+| Canonical-direct full image | `AA7B0D71E535787D2A5B623F8B144AEDCF66A464F1E769C7ADC56CF83EA2EE43` |
+| Scoped full image | `374318BB6239DA59F6B00E7C69E46C1C7D94C4FFF3F206CBE1281E38722E1B90` |
+| Scoped provenance | `F8ACECD6B5E761D857388FED33060F15D8938661B98545769770204F7124886B` |
+| Local scope-adoption grade | `EFC149644CD5141B0968B9B6CF2C05135FD5C260166B161CE5E862DA80943AEC` |
+
+The scoped image is physically identical to both the canonical-direct control
+and B9: all 119 OS floors, signatures, layouts, attributes and existing
+7,791 enum identities/contents remain unchanged. The 29 scopes and 19 direct
+annotations add no new OS coverage, API symbols, enums or members. The combined
+OLD-to-NEW grade remains the original 48 exact differences at 24 enum-use sites,
+with zero unknown differences or unused expectations; no scope allowance was
+added.
+
+Actual-image admission passes 26 physical/no-fallback/mutation cases, 45 native
+architecture legs, 19 preparation controls, three mixed-partition closure cases
+and 14 full-SDK integrity cases without skips. The complete 393-file diagnostic
+closure, 36 repeated source/discovery inputs and all 155 pointer reductions are
+preserved. Artifacts are under `artifacts\supported-os-scopes`; the grade is
+`local-scope-grade-a18ba844.json`. These are local producer receipts, not a claim
+about a later CI image. Final-head CI and downloaded-image qualification are
+recorded separately in the [draft PR](https://github.com/microsoft/win32metadata/pull/2365).
+Fresh CsWin32 compatibility remains unverified.
+
 ### Historical COM finding under the earlier policy
 
 The proposed SecurityCenter/WinSat conversions were excluded under the earlier,
@@ -411,8 +444,8 @@ effects should be classified and surfaced for review, not rejected merely to
 retain OLD omissions. The historical image and exact difference log remain in
 `artifacts\header-annotation-wave\batch3`; the separate
 `batch3-rejected-grade.json` receipt still records the earlier rejection, not a
-new successful grade. This documentation update neither re-enables those
-migrations nor changes producer inputs or expectations. Wsl and Xinput remain
+new successful grade. That policy clarification did not re-enable those
+migrations or change their producer inputs or expectations. Wsl and Xinput remain
 the completed batch-3 owners; fresh consumer compatibility remains unverified.
 
 Sens is also deferred, not migrated. Its existing logical
