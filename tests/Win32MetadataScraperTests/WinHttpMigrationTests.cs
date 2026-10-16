@@ -9,6 +9,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -110,8 +111,18 @@ namespace Win32MetadataScraperTests
             Assert.Equal(new[] { @"um\winhttp.h.patch" },
                 patches.Where(path => Path.GetFileName(path).StartsWith("winhttp.", StringComparison.Ordinal)));
             Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, @"um\winhttp.h.patch")));
+            string[] patchTexts = patches.Select(path => File.ReadAllText(Path.Combine(root, path)).Replace("\r\n", "\n")).ToArray();
+            Assert.Equal(18, patchTexts.Sum(text => Regex.Matches(text, @"(?m)^\+_Win32_(?:FlagsEnum|Enum)_\(").Count));
+            Assert.Equal(2, patchTexts.Sum(text => Regex.Matches(text, @"(?m)^\+typedef _WIN32META_ANNOTATION_\(""(?:FlagsEnum|Enum)\(").Count));
+            foreach (string group in new[] { "WINHTTP_ACCESS_TYPE", "WINHTTP_CREDS_AUTHSCHEME",
+                "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "HEAPENTRY32_FLAGS" })
+                Assert.Contains(patchTexts, text => text.Contains("+#ifdef WIN32METADATA\n+typedef DWORD " + group + ";\n+#endif\n",
+                    StringComparison.Ordinal));
             foreach (string patch in patches)
+            {
                 Assert.DoesNotContain("_Windows_SupportedOS_", File.ReadAllText(Path.Combine(root, patch)));
+                Assert.DoesNotContain("WIN32METADATA_CSHARP", File.ReadAllText(Path.Combine(root, patch)));
+            }
         }
 
         [MigrationFact]

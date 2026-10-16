@@ -1,5 +1,5 @@
 diff --git a/um/Xinput.h b/um/Xinput.h
-index 4b51b443..eaeaad70 100644
+index 4b51b443..1d4d2cbf 100644
 --- a/um/Xinput.h
 +++ b/um/Xinput.h
 @@ -13,6 +13,7 @@
@@ -10,48 +10,7 @@ index 4b51b443..eaeaad70 100644
  
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
-@@ -193,7 +194,7 @@
- //
- typedef struct _XINPUT_GAMEPAD
- {
--    WORD                                wButtons;
-+    _Win32_AssociatedEnum_(XINPUT_GAMEPAD_BUTTON_FLAGS) WORD                                wButtons;
-     BYTE                                bLeftTrigger;
-     BYTE                                bRightTrigger;
-     SHORT                               sThumbLX;
-@@ -216,9 +217,9 @@ typedef struct _XINPUT_VIBRATION
- 
- typedef struct _XINPUT_CAPABILITIES
- {
--    BYTE                                Type;
--    BYTE                                SubType;
--    WORD                                Flags;
-+    _Win32_AssociatedEnum_(XINPUT_DEVTYPE) BYTE                                Type;
-+    _Win32_AssociatedEnum_(XINPUT_DEVSUBTYPE) BYTE                                SubType;
-+    _Win32_AssociatedEnum_(XINPUT_CAPABILITIES_FLAGS) WORD                                Flags;
-     XINPUT_GAMEPAD                      Gamepad;
-     XINPUT_VIBRATION                    Vibration;
- } XINPUT_CAPABILITIES, *PXINPUT_CAPABILITIES;
-@@ -227,21 +228,124 @@ typedef struct _XINPUT_CAPABILITIES
- 
- typedef struct _XINPUT_BATTERY_INFORMATION
- {
--    BYTE BatteryType;
--    BYTE BatteryLevel;
-+    _Win32_AssociatedEnum_(BATTERY_TYPE) BYTE BatteryType;
-+    _Win32_AssociatedEnum_(BATTERY_LEVEL) BYTE BatteryLevel;
- } XINPUT_BATTERY_INFORMATION, *PXINPUT_BATTERY_INFORMATION;
- 
- typedef struct _XINPUT_KEYSTROKE
- {
--    WORD    VirtualKey;
-+    _Win32_AssociatedEnum_(XINPUT_VIRTUAL_KEY) WORD    VirtualKey;
-     WCHAR   Unicode;
--    WORD    Flags;
-+    _Win32_AssociatedEnum_(XINPUT_KEYSTROKE_FLAGS) WORD    Flags;
-     BYTE    UserIndex;
-     BYTE    HidCode;
- } XINPUT_KEYSTROKE, *PXINPUT_KEYSTROKE;
+@@ -188,12 +189,125 @@
  
  #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -89,6 +48,7 @@ index 4b51b443..eaeaad70 100644
 +    VK_PAD_RTHUMB_DOWNRIGHT,
 +    VK_PAD_RTHUMB_DOWNLEFT);
 +
++
 +_Win32_Enum_(BATTERY_TYPE, BYTE,
 +    BATTERY_TYPE_DISCONNECTED,
 +    BATTERY_TYPE_WIRED,
@@ -96,18 +56,22 @@ index 4b51b443..eaeaad70 100644
 +    BATTERY_TYPE_NIMH,
 +    BATTERY_TYPE_UNKNOWN);
 +
++
 +_Win32_Enum_(BATTERY_LEVEL, BYTE,
 +    BATTERY_LEVEL_EMPTY,
 +    BATTERY_LEVEL_LOW,
 +    BATTERY_LEVEL_MEDIUM,
 +    BATTERY_LEVEL_FULL);
 +
++
 +_Win32_Enum_(BATTERY_DEVTYPE, BYTE,
 +    BATTERY_DEVTYPE_GAMEPAD,
 +    BATTERY_DEVTYPE_HEADSET);
 +
++
 +_Win32_Enum_(XINPUT_DEVTYPE, BYTE,
 +    XINPUT_DEVTYPE_GAMEPAD);
++
 +
 +_Win32_Enum_(XINPUT_DEVSUBTYPE, BYTE,
 +    XINPUT_DEVSUBTYPE_GAMEPAD,
@@ -122,12 +86,14 @@ index 4b51b443..eaeaad70 100644
 +    XINPUT_DEVSUBTYPE_GUITAR_BASS,
 +    XINPUT_DEVSUBTYPE_ARCADE_PAD);
 +
++
 +_Win32_FlagsEnum_(XINPUT_CAPABILITIES_FLAGS, WORD,
 +    XINPUT_CAPS_VOICE_SUPPORTED,
 +    XINPUT_CAPS_FFB_SUPPORTED,
 +    XINPUT_CAPS_WIRELESS,
 +    XINPUT_CAPS_PMD_SUPPORTED,
 +    XINPUT_CAPS_NO_NAVIGATION);
++
 +
 +_Win32_FlagsEnum_(XINPUT_GAMEPAD_BUTTON_FLAGS, WORD,
 +    XINPUT_GAMEPAD_DPAD_UP,
@@ -148,20 +114,63 @@ index 4b51b443..eaeaad70 100644
 +    XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE,
 +    XINPUT_GAMEPAD_TRIGGER_THRESHOLD);
 +
++
 +_Win32_FlagsEnum_(XINPUT_KEYSTROKE_FLAGS, WORD,
 +    XINPUT_KEYSTROKE_KEYDOWN,
 +    XINPUT_KEYSTROKE_KEYUP,
 +    XINPUT_KEYSTROKE_REPEAT);
++
 +
 +#ifdef WIN32METADATA
 +typedef _WIN32META_ANNOTATION_("FlagsEnum(XINPUT_FLAG_ALL, XINPUT_FLAG_GAMEPAD)",
 +    0, XINPUT_FLAG_GAMEPAD) DWORD XINPUT_FLAG;
 +#endif
 +
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
- #pragma endregion
++
+ //
+ // Structures used by XInput APIs
+ //
+ typedef struct _XINPUT_GAMEPAD
+ {
+-    WORD                                wButtons;
++    _Win32_AssociatedEnum_(XINPUT_GAMEPAD_BUTTON_FLAGS) WORD                                wButtons;
+     BYTE                                bLeftTrigger;
+     BYTE                                bRightTrigger;
+     SHORT                               sThumbLX;
+@@ -216,9 +330,9 @@ typedef struct _XINPUT_VIBRATION
  
-@@ -270,7 +374,7 @@ DWORD WINAPI XInputSetState
+ typedef struct _XINPUT_CAPABILITIES
+ {
+-    BYTE                                Type;
+-    BYTE                                SubType;
+-    WORD                                Flags;
++    _Win32_AssociatedEnum_(XINPUT_DEVTYPE) BYTE                                Type;
++    _Win32_AssociatedEnum_(XINPUT_DEVSUBTYPE) BYTE                                SubType;
++    _Win32_AssociatedEnum_(XINPUT_CAPABILITIES_FLAGS) WORD                                Flags;
+     XINPUT_GAMEPAD                      Gamepad;
+     XINPUT_VIBRATION                    Vibration;
+ } XINPUT_CAPABILITIES, *PXINPUT_CAPABILITIES;
+@@ -227,15 +341,15 @@ typedef struct _XINPUT_CAPABILITIES
+ 
+ typedef struct _XINPUT_BATTERY_INFORMATION
+ {
+-    BYTE BatteryType;
+-    BYTE BatteryLevel;
++    _Win32_AssociatedEnum_(BATTERY_TYPE) BYTE BatteryType;
++    _Win32_AssociatedEnum_(BATTERY_LEVEL) BYTE BatteryLevel;
+ } XINPUT_BATTERY_INFORMATION, *PXINPUT_BATTERY_INFORMATION;
+ 
+ typedef struct _XINPUT_KEYSTROKE
+ {
+-    WORD    VirtualKey;
++    _Win32_AssociatedEnum_(XINPUT_VIRTUAL_KEY) WORD    VirtualKey;
+     WCHAR   Unicode;
+-    WORD    Flags;
++    _Win32_AssociatedEnum_(XINPUT_KEYSTROKE_FLAGS) WORD    Flags;
+     BYTE    UserIndex;
+     BYTE    HidCode;
+ } XINPUT_KEYSTROKE, *PXINPUT_KEYSTROKE;
+@@ -270,7 +384,7 @@ DWORD WINAPI XInputSetState
  DWORD WINAPI XInputGetCapabilities
  (
      _In_  DWORD                dwUserIndex,   // Index of the gamer associated with the device
@@ -170,7 +179,7 @@ index 4b51b443..eaeaad70 100644
      _Out_ XINPUT_CAPABILITIES* pCapabilities  // Receives the capabilities
  ) WIN_NOEXCEPT;
  
-@@ -297,7 +401,7 @@ DWORD WINAPI XInputGetAudioDeviceIds
+@@ -297,7 +411,7 @@ DWORD WINAPI XInputGetAudioDeviceIds
  DWORD WINAPI XInputGetBatteryInformation
  (
      _In_  DWORD                       dwUserIndex,        // Index of the gamer associated with the device

@@ -356,8 +356,9 @@ using XINPUT_FLAG = void;
                         child.Kind == CXCursorKind.CXCursor_AnnotateAttr)
                     {
                         string value = Text(child.Spelling);
-                        if (value.StartsWith("SupportedOSPlatform(", StringComparison.Ordinal))
-                            annotations.Add(owner + name + "|" + value);
+                        const string prefix = "Win32Metadata.";
+                        if (value.StartsWith(prefix + "SupportedOSPlatform(", StringComparison.Ordinal))
+                            annotations.Add(owner + name + "|" + value.Substring(prefix.Length));
                     }
                     if (child.IsDeclaration || child.IsTranslationUnit)
                         Walk(child, childOwner);

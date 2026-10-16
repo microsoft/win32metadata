@@ -216,6 +216,16 @@ carrier (`FlagsEnum` for flags); do not create SDK `#define` aliases, ordinary
 consumer symbols or metadata-only constant globals. There are no authored RAII
 facts to add in this pilot.
 
+Place each group before its first associated use, after its native constants.
+Four SDK source-order exceptions instead use an early, unannotated
+`typedef DWORD GROUP;` under `WIN32METADATA`, followed by the one annotated
+public group typedef at the existing constants: `WINHTTP_ACCESS_TYPE`,
+`WINHTTP_CREDS_AUTHSCHEME`, `CREATE_TOOLHELP_SNAPSHOT_FLAGS` and
+`HEAPENTRY32_FLAGS`. Keep the same native storage and declaration scope, outside
+unintended OS scopes. This is a compiler-bound redeclaration of the same
+metadata-only type, not another logical group or an SDK alias. Do not move
+native constant blocks to accommodate the annotation.
+
 ## 4. Pin OLD, tooling control and NEW separately
 
 Freeze a complete OLD image and generated-source/discovery closure from one SDK
@@ -581,6 +591,25 @@ regeneration retain those header bytes. The focused 38 preparation cases and
 all-partition scrape or emission is needed for this mechanical cleanup, and no
 API-difference expectations change. Historical image qualification remains tied
 to its original producer; the new head's CI state is recorded in the draft PR.
+
+### First-parse public-macro adoption
+
+The adoption source is tooling commit
+`746d812dd15a93d77b24285708fd51727b293bba`, merged without rewriting the pilot's
+history. Its canonical shared helper is pinned as a thirteenth MIDL input,
+SHA256 `5C02968168112A7DA993056680041C458CEAFFEA31AFE37A8FE17444C3D1F246`.
+The twelve original selected-SDK inputs remain separately hash-bound.
+`_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)` expands
+during MIDL preprocessing to the existing C++ target-specific forward carrier;
+the same helper bytes are included by the regenerated header.
+
+MIDL's explicit C-preprocessor options retain every required define, including
+`MIDL_PASS=1`, and each quoted private include directory. Saved preprocessing
+must read exactly the declared SDK/helper closure. There is no ambient SDK or
+environment fallback, second parse, or backend-specific transport gate.
+Preparation and native controls are not final-image admission: the new image,
+119-floor and physical-equivalence grades and exact-head CI must be recorded
+separately before publication is qualified.
 
 ### Historical COM finding under the earlier policy
 

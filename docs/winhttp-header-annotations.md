@@ -104,7 +104,7 @@ entries remain in the generated mapping.
 | Functional fact | Current authority | Authored legacy input removed |
 | --- | --- | --- |
 | 59 DLL bindings | SDK `.lib` scan in generated `libMappings.rsp` | None: derived scan entries remain; there is no WinHttp header override |
-| 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` defaults | All 38 WinHttp `supportedOS.rsp` rows |
+| 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` lexical scopes | All 38 WinHttp `supportedOS.rsp` rows |
 | 28 thread-last-error contracts | `_Win32_SetLastError_` | All 28 WinHttp `WithSetLastError.rsp` rows |
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
 | Five logical enums, 21 emitted members, eight uses | Public enum-group macros, one explicit-name AST carrier, and `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
@@ -189,6 +189,13 @@ This is a bounded header-side exception to the specification's native-member
 spelling rule for these four existing logical members, not a general renaming rule.
 No semantic sidecar, consumer alias, WinHttp-specific consumer behavior, or
 fabricated handle is introduced to preserve source compatibility.
+
+Group types precede their associated uses. Where the SDK defines the constants
+after a use, `WINHTTP_ACCESS_TYPE` and `WINHTTP_CREDS_AUTHSCHEME` have an early,
+unannotated `typedef DWORD` under `WIN32METADATA`; the single annotated group
+typedef follows the existing native constants. The corresponding ToolHelp
+exceptions are documented in the playbook. Native constant blocks are neither
+moved nor copied, and no group declaration is visible to ordinary consumers.
 
 CsWin32 generated-source compatibility is the primary acceptance gate. A metadata
 declaration diff is supporting evidence, not a substitute for generating both
