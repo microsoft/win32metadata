@@ -1012,6 +1012,261 @@ void F(_Win32_AssociatedEnum_(OPTIONS) unsigned options);
             AssertMetadataClosure(reader);
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void LogicalGroupContributionsFromIndependentPartitionsReachFinalWinmd(string architecture, string target, bool flags)
+        {
+            string firstDeclarations = @"
+#define FIRST 1U
+#define SHARED (-1)
+const unsigned LOOSE_A = 8U;
+_Win32_AssociatedConstant_(LOOSE_A) _Win32_Enum_(ERROR_GROUP, unsigned, FIRST, SHARED);
+void First(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+";
+            string extraDeclarations = @"
+#define SHARED 0xFFFFFFFFU
+#define EXTRA 4U
+const unsigned LOOSE_B = 16U;
+_Win32_AssociatedConstant_(LOOSE_B) _Win32_Enum_(ERROR_GROUP, unsigned, SHARED, EXTRA);
+void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+";
+            using var first = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                flags ? firstDeclarations.Replace("_Win32_Enum_", "_Win32_FlagsEnum_", StringComparison.Ordinal) : firstDeclarations);
+            using var extra = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                flags ? extraDeclarations.Replace("_Win32_Enum_", "_Win32_FlagsEnum_", StringComparison.Ordinal) : extraDeclarations);
+            Assert.True(first.Run() == 0, first.Diagnostics);
+            Assert.True(extra.Run() == 0, extra.Diagnostics);
+            string directory = Path.GetDirectoryName(first.Output);
+            File.Copy(extra.Output, Path.Combine(directory, "Extra.cs"));
+            File.Copy(Path.ChangeExtension(extra.Output, ".header-types.cs"), Path.Combine(directory, "Extra.header-types.cs"));
+            using var image = Emit(first, architecture);
+            var reader = image.Reader;
+            var group = FindType(reader, "ERROR_GROUP");
+            var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "value__", "FIRST", "SHARED", "EXTRA" }, fields.Select(field => reader.GetString(field.Name)));
+            Assert.Equal("UInt32", fields[0].DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(new uint[] { 1, uint.MaxValue, 4 }, fields.Skip(1).Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32()));
+            Assert.Equal(flags ? 1 : 0, group.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "FlagsAttribute"));
+            Assert.Equal(2, group.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "AssociatedConstantAttribute"));
+            Assert.Contains(FindType(reader, "Apis").GetFields(), handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == "LOOSE_A");
+            Assert.Contains(FindType(reader, "Apis").GetFields(), handle => reader.GetString(reader.GetFieldDefinition(handle).Name) == "LOOSE_B");
+            foreach (string methodName in new[] { "First", "Extra" })
+            {
+                var method = FindMethod(reader, "Apis", methodName);
+                Assert.Equal(new[] { "UInt32" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                AssertStringAttribute(reader, reader.GetParameter(method.GetParameters().Single()).GetCustomAttributes(),
+                    "AssociatedEnumAttribute", "ERROR_GROUP");
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Fact]
+        public void CrossArchitectureLogicalGroupContributionsIncludeCommonMembers()
+        {
+            using var common = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc", @"
+#define COMMON 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, COMMON);
+void Common(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+");
+            const string declarations = @"
+#ifdef _M_IX86
+#define EXTRA 2U
+#else
+#define EXTRA 4U
+#endif
+_Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
+void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+";
+            using var x86 = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc", declarations);
+            using var x64 = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
+            using var arm64 = new HeaderAnnotationTests.NativeFixture("arm64", "aarch64-pc-windows-msvc", declarations);
+            Assert.True(common.Run() == 0, common.Diagnostics);
+            foreach (var fixture in new[] { x86, x64, arm64 })
+            {
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                string architecture = Path.GetFileName(Path.GetDirectoryName(fixture.Output));
+                string directory = Path.Combine(common.DirectoryPath, architecture);
+                Directory.CreateDirectory(directory);
+                File.Copy(fixture.Output, Path.Combine(directory, "Extra.cs"));
+                File.Copy(Path.ChangeExtension(fixture.Output, ".header-types.cs"), Path.Combine(directory, "Extra.header-types.cs"));
+            }
+            using var image = Emit(common, "crossarch");
+            var reader = image.Reader;
+            var groups = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "ERROR_GROUP").ToArray();
+            Assert.Equal(2, groups.Length);
+            Assert.Equal(new uint[] { 2, 4 }, groups.Select(group =>
+            {
+                AssertHasAttribute(reader, group.GetCustomAttributes(), "SupportedArchitectureAttribute");
+                var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                Assert.Equal(new[] { "value__", "COMMON", "EXTRA" }, fields.Select(field => reader.GetString(field.Name)));
+                Assert.Equal(1U, reader.GetBlobReader(reader.GetConstant(fields[1].GetDefaultValue()).Value).ReadUInt32());
+                return reader.GetBlobReader(reader.GetConstant(fields[2].GetDefaultValue()).Value).ReadUInt32();
+            }).OrderBy(value => value));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("uint", "2", "", "Conflicting logical group values")]
+        [InlineData("int", "1", "", "Conflicting logical group storage")]
+        [InlineData("uint", "1", "[global::System.Flags]", "Conflicting logical group flags")]
+        public void ConflictingLogicalGroupContributionsCannotBeUnioned(
+            string storage, string value, string attributes, string diagnostic)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "Extra.header-types.cs"),
+                $"namespace Test {{ {attributes} public enum ERROR_GROUP : {storage} {{ FIRST = unchecked(({storage}){value}UL) }} }}");
+            var exception = Assert.Throws<InvalidOperationException>(() => Emit(fixture, "x64"));
+            Assert.Contains("WMA003", exception.Message);
+            Assert.Contains(diagnostic, exception.Message);
+        }
+
+        [Fact]
+        public void LogicalGroupUnionDoesNotAbsorbLegacyOrNativeEnumDefinitions()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "Extra.header-types.cs"),
+                "namespace Test { public enum ERROR_GROUP : uint { EXTRA = unchecked((uint)2UL) } }");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Residual.enums.cs"),
+                "namespace Test { public enum ERROR_GROUP : uint { EXTRA = 2 } }");
+            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+            Assert.Contains("CS0101", exception.Message);
+        }
+
+        [Fact]
+        public void LogicalGroupUnionPreservesExistingResidualEnumUsesWithoutALegacyDefinition()
+        {
+            using var first = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+struct LEGACY_RECORD { unsigned status; };
+unsigned Legacy(unsigned error);
+_Win32_AssociatedEnum_(ERROR_GROUP) unsigned Migrated();
+");
+            using var extra = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define EXTRA 4U
+_Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
+void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+");
+            Assert.True(first.Run() == 0, first.Diagnostics);
+            Assert.True(extra.Run() == 0, extra.Diagnostics);
+            string directory = Path.GetDirectoryName(first.Output);
+            File.Copy(extra.Output, Path.Combine(directory, "Extra.cs"));
+            File.Copy(Path.ChangeExtension(extra.Output, ".header-types.cs"), Path.Combine(directory, "Extra.header-types.cs"));
+            string residual = Path.Combine(first.DirectoryPath, "residual-uses.json");
+            File.WriteAllText(residual, @"
+{ ""items"": [{
+    ""addUsesTo"": ""ERROR_GROUP"",
+    ""uses"": [
+        { ""method"": ""Legacy"", ""parameter"": ""return"" },
+        { ""method"": ""Legacy"", ""parameter"": ""error"" },
+        { ""struct"": ""LEGACY_RECORD"", ""field"": ""status"" }
+    ]
+}] }");
+            var remaps = new Dictionary<string, string>();
+            MetadataUtils.ConstantsScraper.ScrapeConstants(new[] { residual }, "Test", first.DirectoryPath, "",
+                new HashSet<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), remaps,
+                new Dictionary<string, string>(), new Dictionary<string, string>());
+            Assert.Equal(3, remaps.Count);
+            foreach (string use in new[] { "Legacy::return", "Legacy::error", "LEGACY_RECORD::status" })
+                Assert.Equal("ERROR_GROUP", remaps[use]);
+            foreach (string source in Directory.GetFiles(first.DirectoryPath, "*.enums.cs"))
+                Assert.Empty(CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot()
+                    .DescendantNodes().OfType<EnumDeclarationSyntax>());
+            using var image = Emit(first.DirectoryPath, "x64", remaps: remaps);
+            var reader = image.Reader;
+            Assert.Equal("Test", reader.GetString(FindType(reader, "ERROR_GROUP").Namespace));
+            Assert.Equal(new[] { "value__", "FIRST", "EXTRA" }, FindType(reader, "ERROR_GROUP").GetFields()
+                .Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            var legacy = FindMethod(reader, "Apis", "Legacy").DecodeSignature(new SignatureNames(), null);
+            Assert.Equal("ERROR_GROUP", legacy.ReturnType);
+            Assert.Equal(new[] { "ERROR_GROUP" }, legacy.ParameterTypes);
+            Assert.Equal("ERROR_GROUP", FindType(reader, "LEGACY_RECORD").GetFields()
+                .Select(reader.GetFieldDefinition).Single().DecodeSignature(new SignatureNames(), null));
+            var migrated = FindMethod(reader, "Apis", "Migrated");
+            Assert.Equal("UInt32", migrated.DecodeSignature(new SignatureNames(), null).ReturnType);
+            AssertStringAttribute(reader, migrated.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 0).GetCustomAttributes(), "AssociatedEnumAttribute", "ERROR_GROUP");
+            AssertMetadataClosure(reader);
+        }
+
+        [Fact]
+        public void LogicalGroupContributionsAreUnionedAfterNamespaceAssignment()
+        {
+            using var first = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+void First(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
+");
+            using var extra = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define EXTRA 4U
+_Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
+");
+            Assert.True(first.Run() == 0, first.Diagnostics);
+            Assert.True(extra.Run() == 0, extra.Diagnostics);
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(first.Output), "Extra.header-types.cs"),
+                File.ReadAllText(Path.ChangeExtension(extra.Output, ".header-types.cs"))
+                    .Replace("namespace Test", "namespace AnotherPartition", StringComparison.Ordinal));
+            using var image = Emit(first.DirectoryPath, "x64", requiredNamespaces: new Dictionary<string, string>
+            {
+                ["ERROR_GROUP"] = "Windows.Win32.Foundation",
+            });
+            var reader = image.Reader;
+            var group = FindType(reader, "ERROR_GROUP");
+            Assert.Equal("Windows.Win32.Foundation", reader.GetString(group.Namespace));
+            Assert.Equal(new[] { "value__", "FIRST", "EXTRA" }, group.GetFields()
+                .Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            AssertMetadataClosure(reader);
+        }
+
+        [Fact]
+        public void LogicalGroupUnionRejectsConflictingTypeAnnotations()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_SupportedOS_Windows7_ _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "Extra.header-types.cs"), @"
+namespace Test {
+    [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(""windows6.2"")]
+    public enum ERROR_GROUP : uint { FIRST = unchecked((uint)1UL) }
+}");
+            var exception = Assert.Throws<InvalidOperationException>(() => Emit(fixture, "x64"));
+            Assert.Contains("WMA003", exception.Message);
+            Assert.Contains("Conflicting", exception.Message);
+            Assert.Contains("SupportedOSPlatform", exception.Message);
+        }
+
+        [Fact]
+        public void DistinctNativeLogicalGroupsInOneTranslationUnitCannotBeUnioned()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+#define SECOND 2U
+namespace First { _Win32_Enum_(ERROR_GROUP, unsigned, FIRST); }
+namespace Second { _Win32_Enum_(ERROR_GROUP, unsigned, SECOND); }
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var exception = Assert.Throws<InvalidOperationException>(() => Emit(fixture, "x64"));
+            Assert.Contains("WMA003", exception.Message);
+            Assert.Contains("Distinct native declarations", exception.Message);
+        }
+
         [Fact]
         public void HeaderImportRescuesUnmappedMethod()
         {
@@ -1153,13 +1408,14 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             => Emit(fixture.DirectoryPath, architecture);
 
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
-            bool nativeFieldArrayInfo = false, Dictionary<string, string> remaps = null)
+            bool nativeFieldArrayInfo = false, Dictionary<string, string> remaps = null,
+            Dictionary<string, string> requiredNamespaces = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"));
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
                 remaps ?? new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
-                new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
+                new Dictionary<string, string>(), requiredNamespaces ?? new Dictionary<string, string>(), new HashSet<string>(),
                 Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
             string path = Path.Combine(directory, "Test.winmd");

@@ -86,6 +86,53 @@ struct S { _Win32_AssociatedEnum_(FLAGS) unsigned flags; };
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void LogicalEnumGroupRedeclarationsUnionCompiledMembers(
+            string architecture, string target, string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#define FIRST 0x80000000U
+#define SHARED (-1)
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST, SHARED);
+_Win32_AssociatedEnum_(ERROR_GROUP) unsigned GetError();
+#include ""extra-errors.h""
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "extra-errors.h"), @"
+#undef SHARED
+#define SHARED 0xFFFFFFFFU
+#define EXTRA (FIRST | 4U)
+_Win32_Enum_(ERROR_GROUP, unsigned, SHARED, EXTRA);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var group = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            Assert.Equal("ERROR_GROUP", group.Identifier.ValueText);
+            Assert.Equal(new[] { "FIRST", "SHARED", "EXTRA" },
+                group.Members.Select(member => member.Identifier.ValueText));
+            Assert.Contains("EXTRA = unchecked((uint)2147483652UL)", group.ToString());
+            Assert.Contains("uint GetError()", fixture.ReadSource());
+            Assert.Contains("AssociatedEnum(\"ERROR_GROUP\")", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("_Win32_FlagsEnum_(ERROR_GROUP, unsigned, FIRST);", "Conflicting enum group kinds")]
+        [InlineData("#undef FIRST\n#define FIRST 2U\n_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);", "Conflicting enum group values")]
+        public void LogicalEnumGroupRedeclarationsRejectContradictions(string redeclaration, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "#define FIRST 1U\n_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);\n" + redeclaration);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(S::value, _Win32_PreserveResult_);", "declared native interface method")]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(Free, _Win32_PreserveResult_);", "declared native interface method")]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SetLastError_);", "not valid on")]
