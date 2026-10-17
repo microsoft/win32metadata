@@ -433,7 +433,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
-            if (header is "amxmlgraphbuilder.h" or "wnvapi.h")
+            if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h")
                 Assert.Empty(beforeSal);
             else
                 Assert.NotEmpty(beforeSal);
@@ -453,7 +453,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell",
             })
             {
                 string[] expected = partition switch
@@ -507,6 +507,12 @@ static_assert(DISC_NO_FORCE == 64u);
                         "DavGetTheLockOwnerOfTheFile", "DavGetExtendedError", "DavFlushFile", "DavInvalidateCache",
                         "DavCancelConnectionsToServer", "DavRegisterAuthCallback", "DavUnregisterAuthCallback",
                     }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray(),
+                    "NetBios" => new[] { "Netbios|SupportedOSPlatform(\"windows5.0\")" },
+                    "NetShell" => new[]
+                    {
+                        "MatchEnumTag", "MatchToken", "PreprocessCommand", "PrintError", "PrintMessageFromModule",
+                        "PrintMessage", "RegisterContext", "RegisterHelper",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows5.1.2600\")").ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -520,6 +526,8 @@ static_assert(DISC_NO_FORCE == 64u);
                     "Wec" => "EvColl.h",
                     "Tbs" => "tbs.h",
                     "WebDav" => "davclnt.h",
+                    "NetBios" => "nb30.h",
+                    "NetShell" => "NetSh.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]

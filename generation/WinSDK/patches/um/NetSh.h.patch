@@ -1,20 +1,59 @@
 diff --git a/um/NetSh.h b/um/NetSh.h
-index 86446dfb..069d95ae 100644
+index 86446dfb..1ece87ed 100644
 --- a/um/NetSh.h
 +++ b/um/NetSh.h
 @@ -310,6 +310,7 @@ DWORD
  
  typedef NS_DLL_INIT_FN *PNS_DLL_INIT_FN;
  
-+_Win32_SupportedOS_BEGIN_(WindowsXP)
++_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI MatchEnumTag(
      IN  HANDLE             hModule,
      IN  LPCWSTR            pwcArg,
-@@ -360,6 +361,7 @@ DWORD WINAPI RegisterHelper(
+@@ -318,11 +319,13 @@ DWORD WINAPI MatchEnumTag(
+     OUT PDWORD             pdwValue
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL WINAPI MatchToken(
+     IN  LPCWSTR  pwszUserToken,
+     IN  LPCWSTR  pwszCmdToken
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI PreprocessCommand(
+     _In_opt_                   HANDLE    hModule,
+     _Inout_updates_(dwArgCount) LPWSTR   *ppwcArguments,
+@@ -335,27 +338,32 @@ DWORD WINAPI PreprocessCommand(
+     _Out_writes_opt_(dwArgCount-dwCurrentIndex)    DWORD    *pdwTagType
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD PrintError(
+     IN  HANDLE  hModule, OPTIONAL
+     IN  DWORD   dwErrId,
+     ...
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD PrintMessageFromModule(
+     IN  HANDLE  hModule,
+     IN  DWORD   dwMsgId,
+     ...
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD PrintMessage(
+     IN  LPCWSTR  pwszFormat,
+     ...
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI RegisterContext(
+     IN    CONST NS_CONTEXT_ATTRIBUTES *pChildContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI RegisterHelper(
      IN    CONST GUID                 *pguidParentContext,
      IN    CONST NS_HELPER_ATTRIBUTES *pfnRegisterSubContext
-     );
-+_Win32_SupportedOS_END_()
- 
- #ifdef __cplusplus
- }

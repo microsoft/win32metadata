@@ -918,12 +918,41 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "EvColl.h", 15)]
         [InlineData("shared", "tbs.h", 9)]
         [InlineData("um", "davclnt.h", 11)]
-        public void AuthoredServiceHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
+        [InlineData("um", "nb30.h", 1)]
+        [InlineData("um", "NetSh.h", 8)]
+        public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
             Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
             Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
             Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+_Win32_SupportedOS_", StringComparison.Ordinal)));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void SixthAuthoredNetworkBatchPreservesItsNineExactFloors(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var group in new[]
+            {
+                ("Windows.Win32.NetworkManagement.NetBios", "windows5.0", new[] { "Netbios" }),
+                ("Windows.Win32.NetworkManagement.NetShell", "windows5.1.2600", new[]
+                {
+                    "MatchEnumTag", "MatchToken", "PreprocessCommand", "PrintError", "PrintMessageFromModule",
+                    "PrintMessage", "RegisterContext", "RegisterHelper",
+                }),
+            })
+                foreach (var image in new[] { control, current })
+                {
+                    var methods = Methods(image.Reader, group.Item1, "Apis", architecture);
+                    foreach (string name in group.Item3)
+                        Assert.Equal(new[] { group.Item2 },
+                            AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            this.output.WriteLine($"Architecture {architecture}: the exact Netbios floor and eight NetShell floors remain unchanged.");
         }
 
         [MigrationTheory]
@@ -980,7 +1009,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void FifthAuthoredServiceBatchPreservesEveryPhysicalTypeAndLiteralOrder()
+        public void AuthoredHeaderBatchPreservesEveryPhysicalTypeAndLiteralOrder()
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
