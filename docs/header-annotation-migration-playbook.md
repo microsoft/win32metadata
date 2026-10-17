@@ -2627,3 +2627,84 @@ Eap source `E31A1344...`. This source draft does not itself count as
 native/source/full-image/repeat qualification. Local qualified
 coverage remains 30/50 until those independent gates finish; no
 shared tooling, publication or PR/stack change is introduced.
+
+### Qualified Dwm original-header cohort
+
+The bounded Dwm continuation completes local original-source
+qualification at actual producer
+`3306320f718f90f833249d791869602196ec2ec1`,
+tree `82d231e7f349ba9e73b1df724d0900bcdbc8e70d`. All 31 fixed
+floors and both existing associations are preserved. Removing
+only those 33 annotation sites recovers the selected original
+SDK `CB7AA381...` literally, including native declarations,
+enum members and their order. No native type, cast, alias,
+handle, ownership assertion or new annotation vocabulary is authored.
+
+Fresh preparations at `44E742DD...` contain 48 selected headers,
+43 patches and 43 eligible partitions. Each actual 3,443-header
+closure is independently rehashed and first/repeat literal; exactly
+`um\dwmapi.h` changes relative to the qualified DeviceQuery
+preparation. Both ordinary complete Dwm traversals succeed with
+zero warnings/errors. All seven normal outputs repeat literally.
+The 1,484 raw scratch line differences remain retained, not
+normalized. Constants and prior native/MIDL preparation context
+are frozen rather than freshly rerun stages.
+
+The fresh whole-owner C17/C++17 metadata-off/on matrix passes all
+twelve cases across x86, x64 and arm64 without skips. Native
+declarations, calling conventions, types, layouts, SAL and
+diagnostics remain exact. All 24 before/after vectors establish
+signed `int` for the original `DWM_SHOWCONTACT`, and all 168
+native/physical member comparisons match signed values and
+four-byte patterns. The DWORD attribute parameters stay native
+UInt32 despite their signed native enum association.
+
+Actual complete images `D4FF3976...` and `F6F838BD...` each use
+831 archived pre-emission inputs, including 824 C# files. Only
+the entire normal `common\Dwm.cs` at `F3C81B4C...` is overlaid.
+All 830 unowned inputs are literal to sealed DeviceQuery
+`5032F47C...`, retaining DeviceQuery `6670E513...` and Eap
+`E31A1344...`. All full emitter configurations/constants and the
+actual three-architecture pointer-fixup union remain frozen;
+all ten selected normal reductions are covered. Every one of
+the 1,662 archived entries is independently rehashed with
+membership, case and order preserved.
+
+The one public representation correction is native/API-faithful
+Int32 `DWM_SHOWCONTACT`: seven literal type codes and `value__`
+become Int32; `DWMSC_ALL` becomes -1 rather than 4294967295.
+All seven original four-byte values, names, member positions,
+flags and attributes remain exact. `DwmShowContact` retains its
+enum-typed parameter and unchanged signature/import. Both
+`DWMWINDOWATTRIBUTE` association targets and parameter placements
+remain exact without replacing their native DWORD types.
+This is not nine separate API blockers or a new approval gate
+for an erroneous legacy storage type. Actual downstream consumer
+effects remain unmeasured.
+
+Each unfiltered comparison to `5032F47C...` has the same nine raw
+rows at `A552C7D7...`; the historical comparison has seventy rows
+at `FD91B7DB...`, retaining the earlier sixteen custom-RetVal and
+45 DeviceQuery rows. First-to-repeat is raw-zero at `9E2542A8...`.
+All 37,314 literal type positions, 247,662 field positions,
+70,740 method positions and every method signature byte actually
+remain equal. Reports and raw physical sequences are not sorted
+or normalized to obtain that result.
+
+Each image passes 32 exact storage/API/physical/source/blocker
+cases and the entire fourteen-case integrity/interface/RAII suite.
+Together with the twelve native cases, all **104 qualification
+cases pass with zero skips**. Fourteen separate permanent
+source/storage guards pass; four retained wrong-UInt32-target
+cases fail for exactly Int32 versus UInt32. All new failure
+messages are plain text. The original shared `B1F987EA...`
+fixture is restored; the existing `CSSW001` warning remains explicit.
+
+Local resumed-original-artifact coverage is now **31/50**:
+twelve original IDLs and nineteen headers, fifteen additional
+original headers since `12279c76...`. Nineteen header drafts
+remain outside the qualified cohorts. Seven missing original
+IDL sources and their thirty preserved legacy facts remain
+separate blockers. This does not claim whole owning production
+integration, current-head CI or publication; no push, PR/stack
+mutation or merge is performed.
