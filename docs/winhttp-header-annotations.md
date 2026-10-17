@@ -6,6 +6,9 @@ migration layer above the tooling PR, not a replacement for that tooling. This
 document's inventory and image grades describe the isolated WinHttp checkpoint.
 The [migration playbook](header-annotation-migration-playbook.md) records the
 subsequently authorized ten partitions and their combined-image grades.
+The [SDK-wide adoption playbook](copilot/plans/header-annotation-migration-playbook.md)
+defines the current rollout procedure; this document retains the pilot's
+bounded ownership and historical evidence.
 
 ## Partition review playbook
 

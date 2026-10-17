@@ -219,7 +219,7 @@ namespace Win32MetadataScraperTests
             {
                 var before = Find(old.Reader, PropertyStorageNamespace + "." + name);
                 var after = Find(current.Reader, PropertyStorageNamespace + "." + name);
-                Assert.Equal(SnapshotType(old.Reader, before), SnapshotType(current.Reader, after));
+                Assert.Equal(SnapshotType(old.Reader, before, canonicalizeLegacyResults: true), SnapshotType(current.Reader, after));
                 Assert.Equal(new[] { "windows5.0" },
                     AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
                 foreach (var method in after.GetMethods().Select(current.Reader.GetMethodDefinition))
@@ -227,8 +227,8 @@ namespace Win32MetadataScraperTests
                     string methodName = current.Reader.GetString(method.Name);
                     Assert.Empty(AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
                     bool preserve = name.StartsWith("IEnum", StringComparison.Ordinal) && (methodName == "Next" || methodName == "Skip");
-                    Assert.Equal(preserve ? 1 : 0,
-                        method.GetCustomAttributes().Count(handle => AttributeName(current.Reader, handle) == "CanReturnMultipleSuccessValuesAttribute"));
+                    Assert.Equal(preserve, method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+                    Assert.DoesNotContain(method.GetCustomAttributes(), handle => IsLegacyResultAttribute(current.Reader, handle));
                 }
             }
             var group = Find(current.Reader, PropertyStorageNamespace + ".PROPSPEC_KIND");
@@ -260,7 +260,7 @@ namespace Win32MetadataScraperTests
             foreach (string name in new[] { "STATPROPSETSTG", "VERSIONEDSTREAM" })
                 Assert.Equal(SnapshotType(old.Reader, Find(old.Reader, PropertyStorageNamespace + "." + name)),
                     SnapshotType(current.Reader, Find(current.Reader, PropertyStorageNamespace + "." + name)));
-            this.output.WriteLine($"Architecture {architecture}: four unchanged type-only floors and method contracts, " +
+            this.output.WriteLine($"Architecture {architecture}: four unchanged type-only floors, canonical PreserveSig on four Next/Skip methods, " +
                 "one unchanged two-member enum, and exactly three native-storage/AssociatedEnum field uses.");
 
             TypeDefinition Find(MetadataReader reader, string name) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
@@ -343,7 +343,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void FrozenInputToolingControlChangesOnlyMissingConstructorInstanceBits()
+        public void FrozenInputToolingControlChangesOnlyConstructorBitsAndCanonicalResultEncoding()
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
@@ -352,20 +352,28 @@ namespace Win32MetadataScraperTests
             var before = Types(old.Reader);
             var after = Types(control.Reader);
             Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
-            int corrected = 0, constructors = 0;
+            int corrected = 0, constructors = 0, resultSites = 0, resultAttributes = 0;
             foreach (var entry in before)
             {
                 var original = SnapshotType(old.Reader, entry.Value);
-                var expected = SnapshotType(old.Reader, entry.Value, correctConstructorInstanceBits: true);
+                var constructorControl = SnapshotType(old.Reader, entry.Value, correctConstructorInstanceBits: true);
+                var expected = SnapshotType(old.Reader, entry.Value, correctConstructorInstanceBits: true, canonicalizeLegacyResults: true);
                 Assert.Equal(expected, SnapshotType(control.Reader, after[entry.Key]));
-                corrected += original == expected ? 0 : 1;
-                constructors += entry.Value.GetMethods().Select(old.Reader.GetMethodDefinition).Count(method =>
+                corrected += original == constructorControl ? 0 : 1;
+                var methods = entry.Value.GetMethods().Select(old.Reader.GetMethodDefinition).ToArray();
+                constructors += methods.Count(method =>
                     old.Reader.GetString(method.Name) == ".ctor" && !method.Attributes.HasFlag(MethodAttributes.Static) &&
                     !method.DecodeSignature(Signatures, null).Header.IsInstance);
+                resultSites += methods.Count(method => method.GetCustomAttributes().Any(handle => IsLegacyResultAttribute(old.Reader, handle)));
+                resultAttributes += methods.Sum(method => method.GetCustomAttributes().Count(handle => IsLegacyResultAttribute(old.Reader, handle)));
             }
             Assert.Equal(39, constructors);
             Assert.Equal(39, corrected);
-            this.output.WriteLine($"Frozen-input tooling control: {constructors} constructor rows in {corrected} types gain HASTHIS; all other type snapshots are identical.");
+            Assert.Equal(149, resultSites);
+            Assert.Equal(resultSites, resultAttributes);
+            Assert.DoesNotContain(control.Reader.CustomAttributes, handle => IsLegacyResultAttribute(control.Reader, handle));
+            this.output.WriteLine($"Frozen-input tooling control: {constructors} constructor rows in {corrected} types gain HASTHIS; " +
+                $"all {resultSites} legacy success-marker sites use PreserveSig, with no other physical changes.");
         }
 
         [MigrationFact]
@@ -392,25 +400,25 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact("WINHTTP_MIGRATION_ACCEPTED")]
-        public void ExpandedPilotPreservesAcceptedScopeFactsExceptThreeSourceIdlFieldUses()
+        public void ExpandedPilotPreservesAcceptedScopeFactsApartFromReviewedFieldsAndCanonicalResults()
         {
             string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_ACCEPTED");
             Assert.Equal("A0C321735141D55C98BCD7D048F822AAA0DA1D9434309ABA1782F79C220773BB",
                 Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
             using var accepted = Open("WINHTTP_MIGRATION_ACCEPTED");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            AssertOnlyPropertyStorageFieldTransitions(accepted.Reader, current.Reader, "accepted B9");
+            AssertOnlyPropertyStorageFieldsAndCanonicalResults(accepted.Reader, current.Reader, "accepted B9");
         }
 
         [MigrationFact("WINHTTP_MIGRATION_DIRECT_CONTROL")]
-        public void ExpandedPilotPreservesMatchedDirectScopeFactsExceptThreeSourceIdlFieldUses()
+        public void ExpandedPilotPreservesMatchedDirectScopeFactsApartFromReviewedFieldsAndCanonicalResults()
         {
             string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_DIRECT_CONTROL");
             Assert.Equal("AA7B0D71E535787D2A5B623F8B144AEDCF66A464F1E769C7ADC56CF83EA2EE43",
                 Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
             using var direct = Open("WINHTTP_MIGRATION_DIRECT_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            AssertOnlyPropertyStorageFieldTransitions(direct.Reader, current.Reader, "matched canonical-direct control");
+            AssertOnlyPropertyStorageFieldsAndCanonicalResults(direct.Reader, current.Reader, "matched canonical-direct control");
         }
 
         [MigrationTheory]
@@ -822,7 +830,7 @@ namespace Win32MetadataScraperTests
                 .Select(reader.GetTypeDefinition)
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
-        private void AssertOnlyPropertyStorageFieldTransitions(MetadataReader expectedReader, MetadataReader actualReader, string baseline)
+        private void AssertOnlyPropertyStorageFieldsAndCanonicalResults(MetadataReader expectedReader, MetadataReader actualReader, string baseline)
         {
             var before = Types(expectedReader);
             var after = Types(actualReader);
@@ -832,22 +840,24 @@ namespace Win32MetadataScraperTests
             foreach (var entry in before)
             {
                 string expected = SnapshotType(expectedReader, entry.Value,
-                    usedEnumSites: used, normalizePropertyStorageEnumUses: true);
+                    usedEnumSites: used, normalizePropertyStorageEnumUses: true, canonicalizeLegacyResults: true);
                 string actual = SnapshotType(actualReader, after[entry.Key]);
                 Assert.True(expected == actual,
                     $"Unexpected expanded-pilot change against {baseline} in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
             }
             Assert.Equal(PropertyStorageEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
             this.output.WriteLine($"All {before.Count} {baseline} physical types graded: zero scope-adoption changes, " +
-                "only the three separately asserted source-IDL native-storage/AssociatedEnum field transitions.");
+                "only canonical result encoding and the three separately asserted source-IDL native-storage/AssociatedEnum field transitions.");
         }
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
-            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null, bool normalizePropertyStorageEnumUses = false)
+            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null, bool normalizePropertyStorageEnumUses = false,
+            bool canonicalizeLegacyResults = false)
         {
-            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null)
+            string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null, bool omitLegacyResults = false)
             {
-                var attributes = values.Select(handle => AttributeTypeName(reader, handle) + ":" +
+                var attributes = values.Where(handle => !omitLegacyResults || !IsLegacyResultAttribute(reader, handle))
+                    .Select(handle => AttributeTypeName(reader, handle) + ":" +
                     Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))).ToList();
                 if (associatedEnum != null)
                 {
@@ -919,8 +929,11 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(0, header);
                     header |= 0x20;
                 }
-                rows.Add($"M|{methodName}|{method.Attributes}|{method.ImplAttributes}|{Signature(signature, header, parameterTypes)}|" +
-                    $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes())}");
+                bool canonicalResult = canonicalizeLegacyResults &&
+                    method.GetCustomAttributes().Any(handle => IsLegacyResultAttribute(reader, handle));
+                var implementation = canonicalResult ? method.ImplAttributes | MethodImplAttributes.PreserveSig : method.ImplAttributes;
+                rows.Add($"M|{methodName}|{method.Attributes}|{implementation}|{Signature(signature, header, parameterTypes)}|" +
+                    $"{Import(reader, method)}|{Attributes(method.GetCustomAttributes(), omitLegacyResults: canonicalResult)}");
                 foreach (var parameter in parameters)
                 {
                     string attributes = Attributes(parameter.GetCustomAttributes(), parameterEnums.GetValueOrDefault(parameter.SequenceNumber));
@@ -989,6 +1002,13 @@ namespace Win32MetadataScraperTests
 
         private static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
             => AttributeTypeName(reader, handle).Split('.').Last();
+
+        private static bool IsLegacyResultAttribute(MetadataReader reader, CustomAttributeHandle handle)
+        {
+            string name = AttributeTypeName(reader, handle);
+            return name == MetadataNamespace + ".CanReturnErrorsAsSuccessAttribute" ||
+                name == MetadataNamespace + ".CanReturnMultipleSuccessValuesAttribute";
+        }
 
         private static string AttributeTypeName(MetadataReader reader, CustomAttributeHandle handle)
         {

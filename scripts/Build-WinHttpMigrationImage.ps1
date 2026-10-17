@@ -216,8 +216,7 @@ try {
             "@$generated\emitter.functionPointerFixups.generated.rsp", "@$generated\emitter.autoFnPtr.crossarch.generated.rsp",
             "@$generated\enumsMakeFlags.generated.rsp", "@$generated\enumsRemap.rsp")
         Invoke-Dotnet $arguments "$OutputDirectory\emit.log"
-        Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
-            '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd) "$OutputDirectory\comparison.log"
+        $comparison = Get-ApiComparison "$BaselineDirectory\Windows.Win32.winmd" $winmd "$OutputDirectory\comparison.log"
         Assert-CommittedProducer
         $receipt = [ordered]@{
             kind = 'tooling-control'
@@ -228,6 +227,7 @@ try {
             newWinmdSha256 = Get-Sha256 $winmd
             sourceCommit = $sourceCommit
             toolFiles = $toolFiles
+            comparison = $comparison
             frozenEmitterInputs = @(Get-ChildItem -LiteralPath $inputs -File | ForEach-Object {
                 [ordered]@{ path = $_.Name; sha256 = Get-Sha256 $_.FullName }
             })

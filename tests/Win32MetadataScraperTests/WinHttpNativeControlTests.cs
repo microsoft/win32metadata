@@ -44,8 +44,12 @@ using WINHTTP_ACCESS_TYPE = void;
 using WINHTTP_CREDS_AUTHSCHEME = void;
 using WINHTTP_INTERNET_SCHEME = void;
 ";
-            var before = Surface(root, original, partition, architecture, target, headers, checks);
-            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, checks, diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks, diagnostics: preparedDiagnostics);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(61, before.Count(value => value.StartsWith("function WinHttp", StringComparison.Ordinal)));
             Assert.True(before.Count(value => value.StartsWith("field ", StringComparison.Ordinal)) > 50);
             Assert.Contains(before, value => value.StartsWith("typedef LPWINHTTP_STATUS_CALLBACK ", StringComparison.Ordinal));
@@ -216,8 +220,12 @@ using XINPUT_FLAG = void;
 ",
                 _ => "",
             };
-            var before = Surface(root, original, partition, architecture, target, headers, checks);
-            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, checks, diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks, diagnostics: preparedDiagnostics);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.NotEmpty(before);
             Assert.Contains(before, value => value.StartsWith("function ", StringComparison.Ordinal) || value.StartsWith("record ", StringComparison.Ordinal));
             Assert.Equal(before, after);
@@ -252,11 +260,15 @@ using XINPUT_FLAG = void;
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string[] headers = { "waasapi.h", "waasapitypes.h" };
             var annotations = new List<string>();
-            var before = Surface(root, original, "UpdateAssessment", architecture, target, headers, "");
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, "UpdateAssessment", architecture, target, headers, "", diagnostics: originalDiagnostics);
             var after = Surface(root, prepared, "UpdateAssessment", architecture, target, headers, "",
-                metadataEnabled: enabled, annotations: annotations);
+                metadataEnabled: enabled, annotations: annotations, diagnostics: preparedDiagnostics);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(enabled ? new[] { "IWaaSAssessor|SupportedOSPlatform(\"windows10.0.15063\")" } :
                 Array.Empty<string>(), annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
             Assert.Contains("_Out_retval_  OSUpdateAssessment *result", File.ReadAllText(Path.Combine(prepared, "um", "waasapi.h")));
@@ -289,16 +301,20 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
             var annotations = new List<string>();
             var originalSal = new List<string>();
             var preparedSal = new List<string>();
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
             var before = Surface(root, original, "Com.StructuredStorage", architecture, target, headers, checks,
-                sourceText: source, salAnnotations: originalSal);
+                sourceText: source, salAnnotations: originalSal, diagnostics: originalDiagnostics);
             var after = Surface(root, prepared, "Com.StructuredStorage", architecture, target, headers,
                 checks + (enabled ? "" : "\nusing PROPSPEC_KIND = void;\n"), metadataEnabled: enabled,
-                annotations: annotations, sourceText: source, salAnnotations: preparedSal);
+                annotations: annotations, sourceText: source, salAnnotations: preparedSal, diagnostics: preparedDiagnostics);
             const string group = "typedef PROPSPEC_KIND unsigned long";
             Assert.Equal(enabled ? new[] { group } : Array.Empty<string>(), after.Where(value => value == group));
             Assert.Equal(before, after.Where(value => value != group));
             Assert.Equal(originalSal.OrderBy(value => value, StringComparer.Ordinal),
                 preparedSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Contains(before, value => value.StartsWith("field ", StringComparison.Ordinal) &&
                 value.Contains("::wReserved1 unsigned short ", StringComparison.Ordinal));
             Assert.Contains(before, value => value.StartsWith("field ", StringComparison.Ordinal) &&
@@ -354,7 +370,7 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
 
         private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
-            string sourceText = null, List<string> salAnnotations = null)
+            string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             var arguments = new List<string>
@@ -390,8 +406,10 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
             for (uint i = 0; i < handle.NumDiagnostics; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
-                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
-                    diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+                string text = Text(diagnostic.Format(CXDiagnostic.DefaultDisplayOptions));
+                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error, text);
+                diagnostics?.Add(Regex.Replace(text.Replace(includeRoot, "<headers>", StringComparison.OrdinalIgnoreCase),
+                    @":\d+:\d+:", ":<source-location>:"));
             }
             var result = new List<string>();
             // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
