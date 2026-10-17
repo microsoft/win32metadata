@@ -665,35 +665,40 @@ static_assert(DISC_NO_FORCE == 64u);
         [NativeMigrationTheory]
         [MemberData(nameof(PropertyStorageIdlControls))]
         public void RegeneratedPropertyStorageIdlKeepsNativeLayoutsSalAndRpc(string header, string architecture,
-            string target, bool enabled)
+            string target, bool enabled, string language, bool cInterface)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
-            // Make either generated artifact the first owner of the guarded property-storage declarations.
+            // Make either generated artifact the first owner, then include the other guarded declaration copy.
+            string otherHeader = header == "PropIdl.h" ? "PropIdlBase.h" : "PropIdl.h";
             string source = "#define WIN32_LEAN_AND_MEAN 1\n#define COM_NO_WINDOWS_H 1\n" +
                 "#include <intrinfix.h>\n#include <windows.fixed.h>\n#include <sdkddkver.h>\n" +
                 "#include <wtypes.h>\n#include <objidl.h>\n#include <oaidl.h>\n" +
-                "#include <" + header + ">\n";
-            string checks = @"
-static_assert(PRSPEC_INVALID == 0xffffffffu);
-static_assert(PRSPEC_LPWSTR == 0);
-static_assert(PRSPEC_PROPID == 1);
-static_assert(sizeof(((PROPSPEC*)0)->ulKind) == 4);
-static_assert(sizeof(((STATPROPSTG*)0)->vt) == 2);
-static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
+                "#include <" + header + ">\n#include <" + otherHeader + ">\n";
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            string checks = $@"
+{assertion}(PRSPEC_INVALID == 0xffffffffu, ""PRSPEC_INVALID"");
+{assertion}(PRSPEC_LPWSTR == 0, ""PRSPEC_LPWSTR"");
+{assertion}(PRSPEC_PROPID == 1, ""PRSPEC_PROPID"");
+{assertion}(sizeof(((PROPSPEC*)0)->ulKind) == 4, ""PROPSPEC::ulKind"");
+{assertion}(sizeof(((STATPROPSTG*)0)->vt) == 2, ""STATPROPSTG::vt"");
+{assertion}(sizeof(((PROPVARIANT*)0)->vt) == 2, ""PROPVARIANT::vt"");
+{assertion}(sizeof(enum VARENUM) == 4, ""native enum VARENUM"");
 ";
-            string[] headers = { header };
+            string[] headers = { header, otherHeader };
             var annotations = new List<string>();
             var originalSal = new List<string>();
             var preparedSal = new List<string>();
             var originalDiagnostics = new List<string>();
             var preparedDiagnostics = new List<string>();
             var before = Surface(root, original, "Com.StructuredStorage", architecture, target, headers, checks,
-                sourceText: source, salAnnotations: originalSal, diagnostics: originalDiagnostics);
+                sourceText: source, salAnnotations: originalSal, diagnostics: originalDiagnostics,
+                language: language, cInterface: cInterface);
             var after = Surface(root, prepared, "Com.StructuredStorage", architecture, target, headers,
-                checks + (enabled ? "" : "\nusing PROPSPEC_KIND = void;\n"), metadataEnabled: enabled,
-                annotations: annotations, sourceText: source, salAnnotations: preparedSal, diagnostics: preparedDiagnostics);
+                checks + (enabled ? "" : language == "c" ? "\ntypedef void PROPSPEC_KIND;\n" : "\nusing PROPSPEC_KIND = void;\n"),
+                metadataEnabled: enabled, annotations: annotations, sourceText: source, salAnnotations: preparedSal,
+                diagnostics: preparedDiagnostics, language: language, cInterface: cInterface);
             const string group = "typedef PROPSPEC_KIND unsigned long";
             Assert.Equal(enabled ? new[] { group } : Array.Empty<string>(), after.Where(value => value == group));
             Assert.Equal(before, after.Where(value => value != group));
@@ -707,7 +712,9 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                 value.Contains("::wReserved3 unsigned short ", StringComparison.Ordinal));
             foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
             {
-                Assert.Contains(before, value => value.StartsWith("function " + name + "::Skip ", StringComparison.Ordinal));
+                string skip = language == "c++" && !cInterface ? "function " + name + "::Skip " :
+                    "field " + name + "Vtbl::Skip ";
+                Assert.Contains(before, value => value.StartsWith(skip, StringComparison.Ordinal));
                 Assert.Contains(before, value => value.StartsWith("function " + name + "_Next_Proxy ", StringComparison.Ordinal));
                 Assert.Contains(before, value => value.StartsWith("function " + name + "_Next_Stub ", StringComparison.Ordinal));
             }
@@ -717,13 +724,13 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                 Assert.Empty(facts);
             else
             {
-                Assert.Equal(new[]
+                Assert.Equal(language == "c++" ? new[]
                 {
                     "IEnumSTATPROPSETSTG|SupportedOSPlatform(\"windows5.0\")",
                     "IEnumSTATPROPSTG|SupportedOSPlatform(\"windows5.0\")",
                     "IPropertySetStorage|SupportedOSPlatform(\"windows5.0\")",
                     "IPropertyStorage|SupportedOSPlatform(\"windows5.0\")",
-                }, facts.Where(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal)));
+                } : Array.Empty<string>(), facts.Where(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal)));
                 Assert.Contains("PROPSPEC_KIND|Enum(PRSPEC_LPWSTR, PRSPEC_PROPID)", facts);
                 string[] associations = facts.Where(value => value.EndsWith("|AssociatedEnum", StringComparison.Ordinal)).ToArray();
                 Assert.Equal(3, associations.Length);
@@ -731,12 +738,12 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                 Assert.Contains("tagSTATPROPSTG::vt|AssociatedEnum", associations);
                 Assert.Single(associations.Where(value => value.Contains("PROPVARIANT::", StringComparison.Ordinal) &&
                     value.EndsWith("::vt|AssociatedEnum", StringComparison.Ordinal)));
-                Assert.Equal(8, facts.Count(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal) ||
+                Assert.Equal(language == "c++" ? 8 : 4, facts.Count(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal) ||
                     value.EndsWith("|AssociatedEnum", StringComparison.Ordinal) || value.Contains("|Enum(", StringComparison.Ordinal)));
                 foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
                     Assert.DoesNotContain(facts, value => value.StartsWith(name + "_Next_Proxy|", StringComparison.Ordinal));
             }
-            this.output.WriteLine($"{header}/{architecture}/metadata={enabled}: " +
+            this.output.WriteLine($"{header} then {otherHeader}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
                 $"{before.Length} identical native/layout/RPC facts, {originalSal.Count} unchanged SAL attributes, " +
                 $"{facts.Length} native AST metadata facts; method targets are checked in the physical winmd.");
         }
@@ -751,12 +758,14 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                     ("arm64", "aarch64-pc-windows-msvc"),
                 })
                     foreach (bool enabled in new[] { false, true })
-                        yield return new object[] { header, architecture.Item1, architecture.Item2, enabled };
+                        foreach (var mode in new[] { ("c++", false), ("c++", true), ("c", false) })
+                            yield return new object[] { header, architecture.Item1, architecture.Item2, enabled, mode.Item1, mode.Item2 };
         }
 
         private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
-            string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null, string language = "c++")
+            string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
+            string language = "c++", bool cInterface = false)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
@@ -769,8 +778,12 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                 };
             arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
                 .Select(directory => "--include-directory=" + Path.Combine(includeRoot, directory)));
-            arguments.AddRange((Environment.GetEnvironmentVariable("INCLUDE") ?? "").Split(';', StringSplitOptions.RemoveEmptyEntries)
-                .Select(directory => "--include-directory=" + directory));
+            string toolsetInclude = Environment.GetEnvironmentVariable("WINHTTP_NATIVE_TOOLSET_INCLUDE");
+            Assert.True(!string.IsNullOrEmpty(toolsetInclude) && Directory.Exists(toolsetInclude),
+                "Set WINHTTP_NATIVE_TOOLSET_INCLUDE to the pinned MSVC include directory; ambient INCLUDE is not used.");
+            arguments.Add("--include-directory=" + toolsetInclude);
+            if (cInterface)
+                arguments.Add("-DCINTERFACE=1");
             string settings = Path.Combine(root, "sources", "GeneratorSdk", "tools", "assets", "scraper");
             foreach (string path in new[] { Path.Combine(settings, "baseSettings.rsp"), Path.Combine(settings, "baseSettings." + architecture + ".rsp") })
             {
@@ -806,7 +819,7 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
             var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
             Walk(unit.Cursor, "");
             return result.Select(value => Regex.Replace(value,
-                @"\((?:anonymous|unnamed) (?:struct|union|enum) at (?<location>[^)]+:\d+:\d+)\)",
+                @"\((?:anonymous|unnamed)(?: (?:struct|union|enum))? at (?<location>[^)]+:\d+:\d+)\)",
                 match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]))
                 .OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
@@ -821,7 +834,7 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
                 string name = Text(cursor.Spelling);
                 if (record || enumeration)
                 {
-                    if (name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
+                    if (cursor.IsAnonymousRecordDecl || name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
                     {
                         ordinals.TryGetValue(header, out int ordinal);
                         ordinals[header] = ordinal + 1;

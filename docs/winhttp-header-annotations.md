@@ -117,8 +117,11 @@ It does not migrate other APIs in this partition or add structure OS floors.
 remains owned by the Variant partition.
 
 The fields use MIDL `annotation(...)` while retaining their native `ULONG` and
-`VARTYPE` declarations. Interface carriers share the existing opening quote
-region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
+`VARTYPE` declarations. The two native enum associations spell their compiled
+target `enum VARENUM`: the SDK declares an enum tag, not a C typedef named
+`VARENUM`. This works in both C and C++ and resolves the same `VARENUM` metadata
+declaration without introducing an alias. Interface carriers share the existing
+opening quote region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
 region after the complete interfaces: their compiled method references identify
 the intended C++ declarations without copying a signature or annotating a proxy.
 This handles the non-local `Skip` methods without changing RPC locality; direct
@@ -132,6 +135,12 @@ control inputs, not annotation targets. Generated documentation mappings and
 global type-storage/namespace fixups remain derived or shared configuration.
 Actual source/header/native/image qualification is recorded separately; the
 earlier eleven-owner receipts do not qualify the expanded source.
+
+The property native matrix covers C, C++, and C++ `CINTERFACE`, metadata off/on,
+both property-header include orders, and x86/x64/ARM64. Set
+`WINHTTP_NATIVE_TOOLSET_INCLUDE` to the pinned MSVC standard-library include
+directory when running the native controls; they do not consume ambient
+`INCLUDE`.
 
 Changing its identity invalidates the constants marker and every architecture's
 header-scrape marker before any consumer runs. An unchanged identity retains the

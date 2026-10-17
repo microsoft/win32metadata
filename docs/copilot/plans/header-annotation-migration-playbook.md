@@ -60,6 +60,11 @@ either output without claiming to have migrated their APIs.
 | Agile | Do not migrate the old Agile fact into SDK headers; its intentional removal is not a missing annotation to restore. |
 | Removed SDK APIs | Do not restore headers or declarations missing from the selected shipped SDK. Compare same-SDK controls so SDK surface changes are not mistaken for annotation omissions. |
 
+For an existing native enum with only a C tag, use its actual C type spelling in
+the association carrier: `_Win32_AssociatedEnum_(enum VARENUM)`, not the nonexistent
+C typedef `VARENUM`. The compiled target must still resolve to the same canonical
+enum; do not add a typedef or helper workaround. Test metadata-on C as well as C++.
+
 The helper is an SDK asset. Exercise both packaged and repository-backed
 GeneratorSdk samples when changing the common bootstrap: a helper available through
 the main SDK's include paths can still be missing from another asset layout.

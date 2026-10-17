@@ -619,6 +619,8 @@ namespace Win32MetadataScraperTests
 
             string patch = File.ReadAllText(Path.Combine(project, "patches", @"um\propidlbase.idl.patch"));
             Assert.Contains("+cpp_quote(\"_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);\")", patch);
+            Assert.Equal(2, Regex.Matches(patch, Regex.Escape("[annotation(\"_Win32_AssociatedEnum_(enum VARENUM)\")]")).Count);
+            Assert.DoesNotContain("_Win32_AssociatedEnum_(VARENUM)", patch);
             Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateInterface_\(").Count);
             Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateMethod_\(").Count);
             Assert.DoesNotContain("+    [local", patch);
