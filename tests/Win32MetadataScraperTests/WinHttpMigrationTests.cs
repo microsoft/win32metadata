@@ -158,16 +158,25 @@ namespace Win32MetadataScraperTests
             var reader = current.Reader;
             const string ns = "Windows.Win32.System.ApplicationVerifier";
             var currentTypes = Types(reader);
-            var method = currentTypes[ns + ".Apis"].GetMethods().Select(reader.GetMethodDefinition)
-                .Single(value => reader.GetString(value.Name) == "VerifierEnumerateResource");
-            var parameter = method.GetParameters().Select(reader.GetParameter)
-                .Single(value => reader.GetString(value.Name) == "ResourceType");
-            Assert.Equal("UInt32", method.DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
-            Assert.Equal(new[] { "eAvrfResourceTypes" },
-                AttributeValues(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            foreach (int architecture in new[] { 1, 2, 4 })
+            {
+                var method = Methods(reader, ns, "Apis", architecture)["VerifierEnumerateResource"];
+                var parameter = method.GetParameters().Select(reader.GetParameter)
+                    .Single(value => reader.GetString(value.Name) == "ResourceType");
+                Assert.Equal("UInt32", method.DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+                Assert.Equal(new[] { "eAvrfResourceTypes" },
+                    AttributeValues(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            }
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
-            Assert.Equal(SnapshotType(control.Reader, Types(control.Reader)[ns + ".eAvrfResourceTypes"]),
-                SnapshotType(reader, currentTypes[ns + ".eAvrfResourceTypes"]));
+            var controlTypes = Types(control.Reader);
+            string enumPrefix = ns + ".eAvrfResourceTypes#";
+            var enumKeys = currentTypes.Keys.Where(key => key.StartsWith(enumPrefix, StringComparison.Ordinal))
+                .OrderBy(key => key, StringComparer.Ordinal).ToArray();
+            Assert.NotEmpty(enumKeys);
+            Assert.Equal(controlTypes.Keys.Where(key => key.StartsWith(enumPrefix, StringComparison.Ordinal))
+                .OrderBy(key => key, StringComparer.Ordinal), enumKeys);
+            foreach (string key in enumKeys)
+                Assert.Equal(SnapshotType(control.Reader, controlTypes[key]), SnapshotType(reader, currentTypes[key]));
         }
 
         [MigrationFact]
