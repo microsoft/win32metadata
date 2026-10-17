@@ -1373,3 +1373,48 @@ unmeasured. It is not suppressed to preserve the older reader's omission.
 The full literal per-site image grade, source-backed cleanup relocation and
 own current-head CI remain required. The seven unavailable original-IDL
 artifacts and all 30 legacy residual units remain untouched.
+
+### Disjoint original-IDL image with the qualified logical-group tooling
+
+Exact qualified root `217cda9c335e10ce9b3c902423ff468ce901f549` is
+ordinary-merged at `6df2ed791700b7dcaec1552496fb1623ed5c1f82`, retaining
+the accepted `e263...` correction and the unchanged `082E...` helper.
+The reconciled tools build; 306 permanent annotation/source controls and
+70 emitter controls pass. The one optional component fixture remains explicitly
+unprovided, not counted as coverage.
+
+The complete frozen `e263...` replay is materialized again from its three
+actual CI archives, not a post-emission directory. All 830 consumed files,
+including 824 C# files, are rehashed before emission. Current tooling produces
+`329CF9F02B6F65B45424E432738352F5C5FEEDEA8D4B126F6EB1F00201584E95`,
+with unfiltered API-zero against actual `7C1175B3...`.
+
+The independent second-batch owners are IContact, Nla and Rdc: their five,
+twelve and seventeen interface floors are qualified separately from the held
+whole FileHistory owner. Their current native C/C++/CINTERFACE, three-architecture
+and metadata-off/on matrix passes all 54 cases without skips. Their previously
+executed 18 actual MIDL commands, nine matched pairs and 36 unchanged native
+outputs are retained as source-bound reuse, not relabeled current-tooling MIDL
+replays. The shared 47-input/12-output preparation does not admit FileHistory.
+
+All eleven cumulative selected sources match fresh normal-scrape repeats under
+the newly inherited tooling. The complete bounded image is
+`FE8B37D57A5DEFEFFF32E2779F06D64BC92F974D4D578CD0AF3A9BAEC143D913`.
+Its unmodified raw comparison reports only the native Nla parameter addition,
+SHA256 `4DCE34EFBCF4FF9232C977935C8790A7E58BFBFA0C4B6AE95AC465379EF1F7A1`.
+All 37,314 physical type snapshots compare literally: the only changed row is
+`INetworkConnection2.IsDomainAuthenticatedBy::pValue`, from
+`P|2|pValue|Out||` to
+`P|2|pValue|Out||Windows.Win32.Foundation.Metadata.RetValAttribute:01000000`.
+The architecture-specific CLI flags and full signature checks also pass.
+
+All 24 exact physical/source cases and 14 standard integrity cases pass without
+skips, including the 119 pilot floors and all 30 source-blocked residual units.
+The complete FileHistory source remains actual-parent bytes, SHA256
+`EFCE728DADDED0B408187EA2D8E7ADDD71FA00AF5A98150241E3B730777BD053`;
+its preserved floors are not credited as a FileHistory migration.
+The earlier raw-eight result and both native failures remain retained evidence.
+FileHistory's inherited Avrf C-on correction, its producer-cleanup relocation
+and this owner's exact-current-head production CI admission remain separate
+gates. No difference file, raw/snapshot normalization or constant-order
+allowance is used.
