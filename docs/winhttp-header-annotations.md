@@ -120,8 +120,8 @@ The fields use MIDL `annotation(...)` while retaining their native `ULONG` and
 `VARTYPE` declarations. The two native enum associations spell their compiled
 target `enum VARENUM`: the SDK declares an enum tag, not a C typedef named
 `VARENUM`. This works in both C and C++ and resolves the same `VARENUM` metadata
-declaration without introducing an alias. Interface carriers share the existing opening quote
-region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
+declaration without introducing an alias. Interface carriers share the existing
+opening quote region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
 region after the complete interfaces: their compiled method references identify
 the intended C++ declarations without copying a signature or annotating a proxy.
 This handles the non-local `Skip` methods without changing RPC locality; direct
