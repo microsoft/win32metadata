@@ -127,15 +127,28 @@ the method local, invent a comment payload, or add an API-specific sidecar.
 Use the existing build commands; do not create another build wrapper:
 
 ```powershell
+.\scripts\Prepare-SdkHeaders.ps1 -Recipe .\generation\WinSDK\patches\SdkHeaders.json -SdkPackageRoot '<pinned-package-root>' -MidlPreprocessorPath '<pinned-cl.exe>' -OutputRoot '<fresh-private-root>'
 dotnet build BuildTools -c Release
-dotnet build generation\WinSDK -c Release -t:ScrapeHeaders -p:ScanArch=crossarch -p:PartitionFilter=Foundation
+dotnet build generation\WinSDK -c Release -t:ScrapeHeaders -p:ScanArch=crossarch -p:ObjDir='<fresh-obj>' -p:PartitionFilter=Foundation
 dotnet build generation\WinSDK -c Release -t:EmitWinmd
 dotnet test tests\Win32MetadataScraperTests -c Release --filter "HeaderAnnotation"
 dotnet .\bin\Release\net10.0\WinmdUtils.dll compare --first <same-sdk-old.winmd> --second <candidate.winmd>
 ```
 
 Replace `Foundation` with the claimed partition selection and use the pinned pilot
-preparation/admission configuration. Scraper-only response-file edits can miss the
+preparation recipe. Join multiple partition names with `%3B`. The normal scrape
+target invokes the same preparation stage; its override properties are
+`SdkHeaderRecipe`, `SdkHeaderSourceRoot`, `SdkHeaderOutputRoot`, and
+`SdkHeaderSdkPackageRoot`. The standalone preparer returns `IncludeRoot`,
+`Manifest`, `Identity`, and `Reused`; record those identities rather than guessing a
+prepared path.
+
+Enable a migrated partition with `parse-win32-annotations` under its existing
+`--config`. There is no automatic annotation-admission command.
+`Build-WinHttpMigrationImage.ps1` is the pilot's frozen complete-source
+overlay/repeat/comparison harness, not a general full-SDK admission shortcut.
+
+Scraper-only response-file edits can miss the
 incremental emitter inputs: invalidate only the relevant known scrape stamps and
 stale image in the private qualification workspace, and prove the producer really
 ran. Do not treat an old output's existence as a result.
