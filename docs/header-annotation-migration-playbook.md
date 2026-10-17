@@ -1717,3 +1717,39 @@ execution dependency, not original-source admission. Fresh source emissions
 must use the corrected `E2F66BB2...` four-use configuration. The original
 43/49-error, 50-row, RPC representation/branch and literal-order evidence
 remains unchanged and unwaived; WNet remains independently held.
+
+The first merged regression run retains seven private-prototype expectation
+failures and one missing optional ServiceApi fixture: six native-enum
+fixtures had expected implicit unchecked scalar aliases, and one had
+expected a namespace-reconstruction exception. These are not header-group
+fixtures. The qualified replacement intentionally leaves native enums and
+unbound identifiers to the compiler. The owning tests now preserve the
+exact native flag-enum member order/values/storage/attributes and signed
+enum value in a successful physical image, and separately require both
+original unbound scalar aliases to remain `CS0103` errors. Both
+namespace/ambiguity cases likewise retain the compiler error rather than
+expecting private reconstruction. The qualified logical-group positive,
+checked-overflow and unrelated-error cases remain unchanged. No shared
+tooling, native declaration or production scalar type changes for this
+test correction; the failed run remains evidence.
+
+The exact ordinarily merged `40b5c82a...` native replay then passes all
+216 original-IDL cases without skips: 144 retained cases and 72 for the
+four new owners. The successful test binary and native-test source are
+preserved separately from later test-only edits. A genuinely fresh
+same-patched preparation in a distinct root reproduces all 3,443 header
+entries literally. The normal stock four-owner source scrape and its
+independent repeat also produce four byte-identical C# files; no generated
+source is repaired or rewritten.
+
+The corrected applicable annotation suite actually passes 316 cases,
+including the six native-enum physical/rejection cases, both
+namespace/ambiguity negatives and 32 unchanged qualified logical-group
+cases. The existing emitter and utility suites pass 70 and 40 cases,
+respectively, all without skips. The optional ServiceApi image fixture
+is explicitly not selected, rather than counted as native coverage. The
+intermediate negative-fixture invocation omitted the same standard
+metadata source copied by the existing `Emit` helper; that invocation is
+retained, and the corrected fixture supplies it before compilation.
+These remain bounded local controls, not complete-image or production-CI
+admission for the four original IDLs or the held global source batch.

@@ -1639,7 +1639,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
-        public void NativeEnumConstantAliasesReachFinalWinmd(string architecture, string target, bool common)
+        public void NativeEnumsRetainPhysicalFactsWithoutImplicitScalarAliasLowering(string architecture, string target, bool common)
         {
             string[] names =
             {
@@ -1664,11 +1664,6 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.constants.cs"), @"
 namespace Other { public enum OtherFlags : uint { WER_SUBMIT_NO_QUEUE = 7 } }
 namespace Test { public static class Apis {
-    public const uint WER_SUBMIT_NO_QUEUE = 128;
-    public const uint WER_SUBMIT_DISCARD_IF_QUEUED = WER_SUBMIT_NO_QUEUE;
-    public const uint ALIAS_CHAIN = WER_SUBMIT_DISCARD_IF_QUEUED;
-    public const uint SIGNED_ALL = 0xffffffff;
-    public const uint UNSIGNED_ALIAS = SIGNED_ALL;
     public const uint UNRELATED = 9;
     public const uint UNRELATED_ALIAS = UNRELATED;
 }}");
@@ -1687,13 +1682,46 @@ namespace Test { public static class Apis {
                 Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
             Assert.DoesNotContain("WER_SUBMIT_NO_QUEUE", constants.Keys);
             Assert.DoesNotContain("SIGNED_ALL", constants.Keys);
-            Assert.Equal(128u, ReadUInt32(constants["WER_SUBMIT_DISCARD_IF_QUEUED"]));
-            Assert.Equal(128u, ReadUInt32(constants["ALIAS_CHAIN"]));
-            Assert.Equal(uint.MaxValue, ReadUInt32(constants["UNSIGNED_ALIAS"]));
             Assert.Equal(9u, ReadUInt32(constants["UNRELATED_ALIAS"]));
             Assert.Equal(7u, ReadUInt32(FindType(reader, "OtherFlags").GetFields().Select(reader.GetFieldDefinition)
                 .Single(field => reader.GetString(field.Name) == "WER_SUBMIT_NO_QUEUE")));
+            var signed = FindType(reader, "SIGNED_FLAGS").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("Int32", signed[0].DecodeSignature(new SignatureNames(), null));
+            var signedValue = reader.GetConstant(signed.Single(field => reader.GetString(field.Name) == "SIGNED_ALL").GetDefaultValue());
+            Assert.Equal(ConstantTypeCode.Int32, signedValue.TypeCode);
+            Assert.Equal(-1, reader.GetBlobReader(signedValue.Value).ReadInt32());
             AssertMetadataClosure(reader);
+
+            using var aliases = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
+            Assert.True(aliases.Run() == 0, aliases.Diagnostics);
+            if (common)
+            {
+                string commonDirectory = Path.Combine(aliases.DirectoryPath, "common");
+                Directory.CreateDirectory(commonDirectory);
+                File.Move(aliases.Output, Path.Combine(commonDirectory, "Bindings.cs"));
+            }
+            File.WriteAllText(Path.Combine(aliases.DirectoryPath, "Aliases.constants.cs"), @"
+namespace Other { public enum OtherFlags : uint { WER_SUBMIT_NO_QUEUE = 7 } }
+namespace Test { public static class Apis {
+    public const uint WER_SUBMIT_NO_QUEUE = 128;
+    public const uint WER_SUBMIT_DISCARD_IF_QUEUED = WER_SUBMIT_NO_QUEUE;
+    public const uint ALIAS_CHAIN = WER_SUBMIT_DISCARD_IF_QUEUED;
+    public const uint SIGNED_ALL = 0xffffffff;
+    public const uint UNSIGNED_ALIAS = SIGNED_ALL;
+    public const uint UNRELATED = 9;
+    public const uint UNRELATED_ALIAS = UNRELATED;
+}}");
+            File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
+                Path.Combine(aliases.DirectoryPath, "Metadata.manual.cs"));
+            var compilation = ClangSharpSourceCompilation.Create(aliases.DirectoryPath, architecture,
+                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
+                Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>());
+            var errors = compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error).ToArray();
+            Assert.Equal(2, errors.Length);
+            Assert.All(errors, diagnostic => Assert.Equal("CS0103", diagnostic.Id));
+            Assert.Contains(errors, diagnostic => diagnostic.GetMessage().Contains("'WER_SUBMIT_NO_QUEUE'", StringComparison.Ordinal));
+            Assert.Contains(errors, diagnostic => diagnostic.GetMessage().Contains("'SIGNED_ALL'", StringComparison.Ordinal));
 
             uint ReadUInt32(FieldDefinition field)
             {
@@ -1717,16 +1745,7 @@ public static class Apis { public const int ALIAS = SHARED; }
 }" : @"
 namespace Other { public enum First { SHARED = 1 } }
 namespace Test { public static class Apis { public const int ALIAS = SHARED; } }");
-            if (ambiguous)
-            {
-                var exception = Assert.Throws<AggregateException>(Create);
-                Assert.Contains(exception.Flatten().InnerExceptions, error =>
-                    error is InvalidOperationException && error.Message.Contains("Ambiguous enum constant alias 'Test.SHARED'"));
-            }
-            else
-            {
-                Assert.Contains(Create().GetDiagnostics(), diagnostic => diagnostic.Id == "CS0103");
-            }
+            Assert.Contains(Create().GetDiagnostics(), diagnostic => diagnostic.Id == "CS0103");
 
             ClangSharpSourceCompilation Create() => ClangSharpSourceCompilation.Create(fixture.DirectoryPath, "x64",
                 new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
