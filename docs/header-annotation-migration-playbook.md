@@ -911,6 +911,28 @@ floor, native alias or replacement authoring source is invented. Natural SDK
 SAL/MIDL facts may still be read from unchanged consumption headers; that does
 not authorize annotating the generated files.
 
+### Original-source request inventory
+
+The following exact lookup targets were checked across all 930 IDL files in
+SDK package `10.0.26100.7705`, include version `10.0.26100.0`. None of the
+47 interface names or seven filename probes matched. The IDL filenames below
+are search terms, not reconstructed source artifacts or proof of their original
+authoring filenames. Use the shipped header and its interface names when
+requesting the matching original SDK source; preserve its legacy metadata until
+that source is available and qualified.
+
+| Shipped generated header | IDL filename probe | Exact interface-name probes |
+| --- | --- | --- |
+| `um\iwscapi.h` | `iwscapi.idl` | `IWSCDefaultProduct`, `IWscProduct`, `IWscProduct2`, `IWscProduct3`, `IWSCProductList` |
+| `um\winsatcominterfacei.h` | `winsatcominterfacei.idl` | `IAccessibleWinSAT`, `IInitiateWinSATAssessment`, `IProvideWinSATAssessmentInfo`, `IProvideWinSATResultsInfo`, `IProvideWinSATVisuals`, `IQueryAllWinSATAssessments`, `IQueryOEMWinSATCustomization`, `IQueryRecentWinSATAssessment`, `IWinSATInitiateEvents` |
+| `um\locationapi.h` | `locationapi.idl` | `_ICivicAddressReportFactoryEvents`, `_ILatLongReportFactoryEvents`, `ICivicAddressReport`, `ICivicAddressReportFactory`, `IDefaultLocation`, `IDispCivicAddressReport`, `IDispLatLongReport`, `ILatLongReport`, `ILatLongReportFactory`, `ILocation`, `ILocationEvents`, `ILocationPower`, `ILocationReport`, `ILocationReportFactory` |
+| `um\WcnDevice.h` | `WcnDevice.idl` | `IWCNConnectNotify`, `IWCNDevice` |
+| `um\IdentityProvider.h` | `IdentityProvider.idl` | `AsyncIAssociatedIdentityProvider`, `AsyncIConnectedIdentityProvider`, `AsyncIIdentityAdvise`, `AsyncIIdentityAuthentication`, `AsyncIIdentityProvider`, `IAssociatedIdentityProvider`, `IConnectedIdentityProvider`, `IIdentityAdvise`, `IIdentityAuthentication`, `IIdentityProvider` |
+| `um\IdentityStore.h` | `IdentityStore.idl` | `AsyncIIdentityStore`, `AsyncIIdentityStoreEx`, `IIdentityStore`, `IIdentityStoreEx` |
+| `um\rendezvoussession.h` | `rendezvoussession.idl` | `DRendezvousSessionEvents`, `IRendezvousApplication`, `IRendezvousSession` |
+
+### Independent original-artifact batches
+
 The first independent original-header authoring inputs are `wscapi.h` and
 `wcmapi.h`, with their three and five existing availability targets. SecurityCenter
 remains a mixed owner: authored Wsc functions do not imply admission of its
