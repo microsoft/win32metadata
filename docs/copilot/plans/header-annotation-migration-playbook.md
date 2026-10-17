@@ -33,6 +33,11 @@ banner and the selected SDK's original IDL, including `#include` and `import` ed
 Patch identity is the SDK-relative original artifact path, not the partition name.
 Multiple partitions sharing a header share one patch and one writer.
 
+If a generated header ships without its owning IDL, block that conversion. Preserve
+its unmigrated facts on the existing legacy path as explicit residuals: do not drop
+the APIs, author a generated-header patch, or let partition-wide admission filter
+the still-needed facts.
+
 The property-storage pilot is the important closure example: `propidl.idl` defines
 `BUILDING_PROPIDL_IDL` and includes `propidlbase.idl`. Its generated `PropIdl.h`
 contains the base declarations behind `_PROPIDLBASE_`. Regenerating only
@@ -54,6 +59,10 @@ either output without claiming to have migrated their APIs.
 | Exact results | `_Win32_PreserveResult_`, legacy `CanReturnMultipleSuccessValues`, and legacy `CanReturnErrorsAsSuccess` converge on CLR `PreserveSig`. Do not introduce a separate multiple-success annotation or preserve the legacy custom-attribute instances. |
 | Agile | Do not migrate the old Agile fact into SDK headers; its intentional removal is not a missing annotation to restore. |
 | Removed SDK APIs | Do not restore headers or declarations missing from the selected shipped SDK. Compare same-SDK controls so SDK surface changes are not mistaken for annotation omissions. |
+
+The helper is an SDK asset. Exercise both packaged and repository-backed
+GeneratorSdk samples when changing the common bootstrap: a helper available through
+the main SDK's include paths can still be missing from another asset layout.
 
 For the selected pilot SDK `10.0.26100.7705` x64 import package, all 462 libraries were checked for
 the seven WSL entrypoints and API-set DLL. None supplies them. The actual processing
