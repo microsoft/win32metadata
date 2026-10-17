@@ -21146,23 +21146,6 @@
     ]
   },
   {
-    "name": "PROPSPEC_KIND",
-    "members": [
-      {
-        "name": "PRSPEC_LPWSTR"
-      },
-      {
-        "name": "PRSPEC_PROPID"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PROPSPEC",
-        "field": "ulKind"
-      }
-    ]
-  },
-  {
     "name": "CLAIM_SECURITY_ATTRIBUTE_FLAGS",
     "flags": true,
     "members": [

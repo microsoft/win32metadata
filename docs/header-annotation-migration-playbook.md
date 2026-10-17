@@ -77,6 +77,12 @@ post-MIDL annotation patches or patches on generated headers. Scraping
 and constants still consume one private root. Reject generated-header patches,
 unpinned imports, changed tools/preimages, failed generation and modified caches;
 never fall back to an old generated header.
+Every admitted header whose source IDL participates in the MIDL input closure
+must have its own pinned output, including an unpatched IDL that includes a
+patched source. A shared declaration guard can otherwise make an unchanged
+including header hide all of the regenerated base header's annotations.
+Unrelated pinned IDL-backed dependencies outside that closure retain their mirror
+bytes; this check does not expand the bounded regeneration scope.
 
 Run the selected C preprocessor with closed include paths and cleared ambient
 compiler options; hash its executable/engine and the SAL/helper scripts into the
@@ -93,6 +99,15 @@ outputs and their hashes in the private cache. Keep warnings enabled and compare
 the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
 accounting only for source line shifts. Do not add native `[local]` attributes or
 suppress diagnostics to make an annotation compile.
+For source-IDL methods that cannot legally carry native MIDL annotations, use
+the shared `_Win32_AnnotateMethod_(Interface::Method, annotation)` helper after
+the complete interface declarations. Keep related calls in an existing trailing
+quote region. Do not place a bare annotation or documentation comment in
+`cpp_quote` inside an interface: MIDL hoists it outside the method. Do not
+change a remotable method to `[local]`. Even legal annotations on a local method
+also decorate its generated proxy, so verify the actual target in final metadata.
+Group interface forward carriers in an existing opening quote region to avoid
+creating new compiler-generated standard-interface regions between interfaces.
 The same SDK stage copies its verified manifest and MIDL evidence to
 `obj\prepared-sdk-provenance\<architecture>\<identity>` so existing generated-asset
 CI artifacts preserve actual compiler identities and closed inputs, not just an

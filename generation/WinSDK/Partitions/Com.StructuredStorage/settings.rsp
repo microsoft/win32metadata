@@ -15,3 +15,5 @@ PMemoryAllocator=IMemoryAllocator
 <PartitionDir>/manual.h
 --namespace
 Windows.Win32.System.Com.StructuredStorage
+--config
+parse-win32-annotations

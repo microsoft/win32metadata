@@ -19,6 +19,7 @@ namespace Win32MetadataScraperTests
     public class WinHttpMigrationTests
     {
         internal const string WinHttpNamespace = "Windows.Win32.Networking.WinHttp";
+        private const string PropertyStorageNamespace = "Windows.Win32.System.Com.StructuredStorage";
         private const string MetadataNamespace = "Windows.Win32.Foundation.Metadata";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
@@ -54,6 +55,13 @@ namespace Win32MetadataScraperTests
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "VirtualKey", "XINPUT_VIRTUAL_KEY", "UInt16"),
                 new EnumUse("Windows.Win32.UI.Input.XboxController", "XINPUT_KEYSTROKE", "Flags", "XINPUT_KEYSTROKE_FLAGS", "UInt16"),
             }).ToArray();
+        private static readonly EnumUse[] PropertyStorageEnumUses =
+        {
+            new EnumUse(PropertyStorageNamespace, "PROPSPEC", "ulKind", "PROPSPEC_KIND", "UInt32"),
+            new EnumUse(PropertyStorageNamespace, "STATPROPSTG", "vt", "VARENUM", "UInt16", "Windows.Win32.System.Variant"),
+            new EnumUse(PropertyStorageNamespace, "PROPVARIANT+_Anonymous_e__Union+_Anonymous_e__Struct", "vt",
+                "VARENUM", "UInt16", "Windows.Win32.System.Variant"),
+        };
         private static readonly string[] AdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
@@ -113,6 +121,8 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, @"um\winhttp.h.patch")));
             string[] patchTexts = patches.Select(path => File.ReadAllText(Path.Combine(root, path)).Replace("\r\n", "\n")).ToArray();
             Assert.Equal(18, patchTexts.Sum(text => Regex.Matches(text, @"(?m)^\+_Win32_(?:FlagsEnum|Enum)_\(").Count));
+            Assert.Single(patchTexts.Where(text => text.Contains(
+                "+cpp_quote(\"_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);\")", StringComparison.Ordinal)));
             Assert.Equal(2, patchTexts.Sum(text => Regex.Matches(text, @"(?m)^\+typedef _WIN32META_ANNOTATION_\(""(?:FlagsEnum|Enum)\(").Count));
             foreach (string group in new[] { "WINHTTP_ACCESS_TYPE", "WINHTTP_CREDS_AUTHSCHEME",
                 "CREATE_TOOLHELP_SNAPSHOT_FLAGS", "HEAPENTRY32_FLAGS" })
@@ -141,6 +151,124 @@ namespace Win32MetadataScraperTests
                 Assert.All(type.GetMethods().Select(reader.GetMethodDefinition),
                     method => Assert.Empty(AttributeValues(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute")));
             }
+        }
+
+        [Fact]
+        public void PropertyStorageIdlFactsHaveOneOriginalArtifactAndNoSemanticFallback()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            var patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
+            Assert.Equal(new[] { @"um\propidlbase.idl.patch" },
+                patches.Where(path => Path.GetFileName(path).StartsWith("propidl", StringComparison.OrdinalIgnoreCase)));
+            foreach (var pair in new[] { ("propidlbase.idl", "PropIdlBase.h"), ("propidl.idl", "PropIdl.h") })
+            {
+                var output = recipe.RootElement.GetProperty("midl").GetProperty("outputs").EnumerateArray()
+                    .Single(value => value.GetProperty("source").GetString() == @"um\" + pair.Item1);
+                Assert.Equal(@"um\" + pair.Item2, output.GetProperty("path").GetString());
+            }
+            string emitter = File.ReadAllText(Path.Combine(project, "emitter.settings.rsp"));
+            string os = File.ReadAllText(Path.Combine(project, "supportedOS.rsp"));
+            foreach (string name in new[] { "IPropertyStorage", "IPropertySetStorage", "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+                Assert.DoesNotContain(name + "=", os);
+            foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+                foreach (string method in new[] { "Next", "Skip" })
+                    Assert.DoesNotContain(name + "::" + method + "=", emitter);
+            Assert.DoesNotContain("PROPVARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=", emitter);
+            Assert.DoesNotContain("STATPROPSTG::vt=", emitter);
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            Assert.DoesNotContain(enums.RootElement.GetProperty("items").EnumerateArray(),
+                item => item.TryGetProperty("name", out var name) && name.GetString() == "PROPSPEC_KIND");
+            Assert.Contains("parse-win32-annotations",
+                File.ReadAllText(Path.Combine(project, "Partitions", "Com.StructuredStorage", "settings.rsp")));
+
+            string patch = File.ReadAllText(Path.Combine(project, "patches", @"um\propidlbase.idl.patch"));
+            Assert.Contains("+cpp_quote(\"_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);\")", patch);
+            Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateInterface_\(").Count);
+            Assert.Equal(4, Regex.Matches(patch, @"(?m)^\+_Win32_AnnotateMethod_\(").Count);
+            Assert.DoesNotContain("+    [local", patch);
+            Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
+            Assert.DoesNotContain("PRSPEC_INVALID);", patch);
+            Assert.Contains("VARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM", emitter);
+            Assert.Contains("IEnumString::Next=[CanReturnMultipleSuccessValues]", emitter);
+            Assert.Contains("PropVariantInit=SupportedOSPlatform(\"windows5.0\")", os);
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void SourceIdlPropertyStorageFactsReachOnlyTheirExistingPhysicalTargets(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (string name in new[] { "IPropertyStorage", "IPropertySetStorage", "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+            {
+                var before = Find(old.Reader, PropertyStorageNamespace + "." + name);
+                var after = Find(current.Reader, PropertyStorageNamespace + "." + name);
+                Assert.Equal(SnapshotType(old.Reader, before), SnapshotType(current.Reader, after));
+                Assert.Equal(new[] { "windows5.0" },
+                    AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                foreach (var method in after.GetMethods().Select(current.Reader.GetMethodDefinition))
+                {
+                    string methodName = current.Reader.GetString(method.Name);
+                    Assert.Empty(AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    bool preserve = name.StartsWith("IEnum", StringComparison.Ordinal) && (methodName == "Next" || methodName == "Skip");
+                    Assert.Equal(preserve ? 1 : 0,
+                        method.GetCustomAttributes().Count(handle => AttributeName(current.Reader, handle) == "CanReturnMultipleSuccessValuesAttribute"));
+                }
+            }
+            var group = Find(current.Reader, PropertyStorageNamespace + ".PROPSPEC_KIND");
+            Assert.Equal(SnapshotType(old.Reader, Find(old.Reader, PropertyStorageNamespace + ".PROPSPEC_KIND")),
+                SnapshotType(current.Reader, group));
+            var values = group.GetFields().Select(current.Reader.GetFieldDefinition).Where(field => !field.GetDefaultValue().IsNil)
+                .Select(field => current.Reader.GetString(field.Name) + "=" +
+                    current.Reader.GetBlobReader(current.Reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32());
+            Assert.Equal(new[] { "PRSPEC_LPWSTR=0", "PRSPEC_PROPID=1" }, values);
+            foreach (var use in PropertyStorageEnumUses)
+            {
+                var beforeType = Find(old.Reader, use.Namespace + "." + use.Owner);
+                var afterType = Find(current.Reader, use.Namespace + "." + use.Owner);
+                var before = beforeType.GetFields().Select(old.Reader.GetFieldDefinition)
+                    .Single(field => old.Reader.GetString(field.Name) == use.Member);
+                var after = afterType.GetFields().Select(current.Reader.GetFieldDefinition)
+                    .Single(field => current.Reader.GetString(field.Name) == use.Member);
+                Assert.Equal(use.OldType, before.DecodeSignature(Signatures, null));
+                Assert.Equal(use.Native, after.DecodeSignature(Signatures, null));
+                Assert.Empty(AttributeValues(old.Reader, before.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, after.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                Assert.Equal(before.Attributes, after.Attributes);
+                Assert.Equal(before.GetOffset(), after.GetOffset());
+                Assert.Equal(beforeType.Attributes, afterType.Attributes);
+                Assert.Equal(beforeType.GetLayout().PackingSize, afterType.GetLayout().PackingSize);
+                Assert.Equal(beforeType.GetLayout().Size, afterType.GetLayout().Size);
+                Assert.Equal(FieldAttributes(old.Reader, before), FieldAttributes(current.Reader, after));
+            }
+            foreach (string name in new[] { "STATPROPSETSTG", "VERSIONEDSTREAM" })
+                Assert.Equal(SnapshotType(old.Reader, Find(old.Reader, PropertyStorageNamespace + "." + name)),
+                    SnapshotType(current.Reader, Find(current.Reader, PropertyStorageNamespace + "." + name)));
+            this.output.WriteLine($"Architecture {architecture}: four unchanged type-only floors and method contracts, " +
+                "one unchanged two-member enum, and exactly three native-storage/AssociatedEnum field uses.");
+
+            TypeDefinition Find(MetadataReader reader, string name) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => (type.GetDeclaringType().IsNil ? reader.GetString(type.Namespace) + "." + reader.GetString(type.Name) :
+                    FullName(reader, type.GetDeclaringType()) + "+" + reader.GetString(type.Name)) == name && Applies(reader, type));
+
+            bool Applies(MetadataReader reader, TypeDefinition type)
+            {
+                while (true)
+                {
+                    if (!Supports(reader, type.GetCustomAttributes(), architecture)) return false;
+                    if (type.GetDeclaringType().IsNil) return true;
+                    type = reader.GetTypeDefinition(type.GetDeclaringType());
+                }
+            }
+
+            string[] FieldAttributes(MetadataReader reader, FieldDefinition field) => field.GetCustomAttributes()
+                .Where(handle => AttributeName(reader, handle) != "AssociatedEnumAttribute")
+                .Select(handle => AttributeTypeName(reader, handle) + ":" +
+                    Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
         [MigrationTheory]
@@ -239,35 +367,37 @@ namespace Win32MetadataScraperTests
             int unchanged = 0;
             foreach (var entry in before)
             {
-                string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedEnumUses: true, usedEnumSites: used);
+                string expected = SnapshotType(control.Reader, entry.Value, normalizeReviewedEnumUses: true,
+                    usedEnumSites: used, normalizePropertyStorageEnumUses: true);
                 string actual = SnapshotType(current.Reader, after[entry.Key]);
                 Assert.True(expected == actual, $"Unexpected physical metadata change in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
                 unchanged += SnapshotType(control.Reader, entry.Value) == actual ? 1 : 0;
             }
-            Assert.Equal(ReviewedEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
+            Assert.Equal(ReviewedEnumUses.Concat(PropertyStorageEnumUses).Select(value => value.Site).OrderBy(value => value),
+                used.OrderBy(value => value));
             this.output.WriteLine($"All {before.Count} physical types graded: {unchanged} unchanged; only {used.Count} exact native-type/AssociatedEnum sites normalized.");
         }
 
         [MigrationFact("WINHTTP_MIGRATION_ACCEPTED")]
-        public void ScopedSupportedOSPreservesEveryAcceptedPhysicalType()
+        public void ExpandedPilotPreservesAcceptedScopeFactsExceptThreeSourceIdlFieldUses()
         {
             string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_ACCEPTED");
             Assert.Equal("A0C321735141D55C98BCD7D048F822AAA0DA1D9434309ABA1782F79C220773BB",
                 Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
             using var accepted = Open("WINHTTP_MIGRATION_ACCEPTED");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            AssertEveryPhysicalTypeUnchanged(accepted.Reader, current.Reader, "accepted B9");
+            AssertOnlyPropertyStorageFieldTransitions(accepted.Reader, current.Reader, "accepted B9");
         }
 
         [MigrationFact("WINHTTP_MIGRATION_DIRECT_CONTROL")]
-        public void ScopedSupportedOSPreservesEveryMatchedDirectPhysicalType()
+        public void ExpandedPilotPreservesMatchedDirectScopeFactsExceptThreeSourceIdlFieldUses()
         {
             string path = Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_DIRECT_CONTROL");
             Assert.Equal("AA7B0D71E535787D2A5B623F8B144AEDCF66A464F1E769C7ADC56CF83EA2EE43",
                 Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(path))));
             using var direct = Open("WINHTTP_MIGRATION_DIRECT_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            AssertEveryPhysicalTypeUnchanged(direct.Reader, current.Reader, "matched canonical-direct control");
+            AssertOnlyPropertyStorageFieldTransitions(direct.Reader, current.Reader, "matched canonical-direct control");
         }
 
         [MigrationTheory]
@@ -679,24 +809,28 @@ namespace Win32MetadataScraperTests
                 .Select(reader.GetTypeDefinition)
                 .Select(type => SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
-        private void AssertEveryPhysicalTypeUnchanged(MetadataReader expectedReader, MetadataReader actualReader, string baseline)
+        private void AssertOnlyPropertyStorageFieldTransitions(MetadataReader expectedReader, MetadataReader actualReader, string baseline)
         {
             var before = Types(expectedReader);
             var after = Types(actualReader);
+            var used = new HashSet<string>(StringComparer.Ordinal);
             Assert.Equal(37314, before.Count);
             Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
             foreach (var entry in before)
             {
-                string expected = SnapshotType(expectedReader, entry.Value);
+                string expected = SnapshotType(expectedReader, entry.Value,
+                    usedEnumSites: used, normalizePropertyStorageEnumUses: true);
                 string actual = SnapshotType(actualReader, after[entry.Key]);
                 Assert.True(expected == actual,
-                    $"Scoped SupportedOS changed {baseline} metadata in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
+                    $"Unexpected expanded-pilot change against {baseline} in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
             }
-            this.output.WriteLine($"All {before.Count} {baseline} physical types unchanged; no scope-adoption normalization or allowances.");
+            Assert.Equal(PropertyStorageEnumUses.Select(value => value.Site).OrderBy(value => value), used.OrderBy(value => value));
+            this.output.WriteLine($"All {before.Count} {baseline} physical types graded: zero scope-adoption changes, " +
+                "only the three separately asserted source-IDL native-storage/AssociatedEnum field transitions.");
         }
 
         internal static string SnapshotType(MetadataReader reader, TypeDefinition type, bool correctConstructorInstanceBits = false,
-            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null)
+            bool normalizeReviewedEnumUses = false, ISet<string> usedEnumSites = null, bool normalizePropertyStorageEnumUses = false)
         {
             string Attributes(CustomAttributeHandleCollection values, string associatedEnum = null)
             {
@@ -716,7 +850,10 @@ namespace Win32MetadataScraperTests
             string Blob(BlobHandle blob) => blob.IsNil ? "" : Convert.ToHexString(reader.GetBlobBytes(blob));
             string ns = reader.GetString(type.Namespace);
             string typeName = reader.GetString(type.Name);
-            var uses = normalizeReviewedEnumUses ? ReviewedEnumUses.Where(value => value.Namespace == ns).ToArray() : Array.Empty<EnumUse>();
+            string fullTypeName = type.GetDeclaringType().IsNil ? ns + "." + typeName :
+                FullName(reader, type.GetDeclaringType()) + "+" + typeName;
+            var uses = (normalizeReviewedEnumUses ? ReviewedEnumUses : Array.Empty<EnumUse>())
+                .Concat(normalizePropertyStorageEnumUses ? PropertyStorageEnumUses : Array.Empty<EnumUse>()).ToArray();
             var rows = new List<string>
             {
                 reader.GetString(type.Namespace) + "." + reader.GetString(type.Name),
@@ -733,7 +870,7 @@ namespace Win32MetadataScraperTests
                 var field = reader.GetFieldDefinition(handle);
                 string name = reader.GetString(field.Name);
                 string fieldType = field.DecodeSignature(Signatures, null);
-                var use = uses.SingleOrDefault(value => value.Owner == typeName && value.Member == name);
+                var use = uses.SingleOrDefault(value => value.Namespace + "." + value.Owner == fullTypeName && value.Member == name);
                 if (use != null)
                 {
                     Assert.Equal(use.OldType, fieldType);
@@ -753,7 +890,7 @@ namespace Win32MetadataScraperTests
                 var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
                 var parameterTypes = signature.ParameterTypes.ToArray();
                 var parameterEnums = new Dictionary<int, string>();
-                foreach (var use in uses.Where(value => typeName == "Apis" && value.Owner == methodName))
+                foreach (var use in uses.Where(value => typeName == "Apis" && value.Namespace == ns && value.Owner == methodName))
                 {
                     var parameter = parameters.Single(value => reader.GetString(value.Name) == use.Member);
                     Assert.True(parameter.SequenceNumber > 0);
@@ -877,10 +1014,10 @@ namespace Win32MetadataScraperTests
             => $"{header ?? signature.Header.RawValue}|{signature.GenericParameterCount}|{signature.RequiredParameterCount}|{signature.ReturnType}|" +
                 string.Join(",", parameterTypes ?? signature.ParameterTypes);
 
-        private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native)
+        private sealed record EnumUse(string Namespace, string Owner, string Member, string Enum, string Native, string EnumNamespace = null)
         {
             internal string Site => Namespace + "." + Owner + "::" + Member;
-            internal string OldType => Namespace + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
+            internal string OldType => (EnumNamespace ?? Namespace) + "." + Enum + new string('*', Native.Length - Native.TrimEnd('*').Length);
         }
 
         private static Image Open(string variable) => new Image(Environment.GetEnvironmentVariable(variable));

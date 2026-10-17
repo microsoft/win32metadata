@@ -56,7 +56,7 @@ layers are not separate patch inputs. Patch filenames and diff targets use the
 SDK-relative artifact path, without stage directories. The package
 supplies `httprequest.idl`, not `httprequest.h`; the recipe separately pins the
 checked-in post-MIDL header and the identical selected-SDK IDL. WinHttp itself
-needs no IDL patch or recompilation. In the expanded eleven-owner pilot,
+needs no IDL patch or recompilation. In the original eleven-owner pilot,
 UpdateAssessment instead patches shipped `waasapi.idl` before private MIDL
 regeneration; see the
 [source-artifact audit and provenance](header-annotation-migration-playbook.md#pre-midl-source-adoption).
@@ -86,6 +86,35 @@ ordinary paths, unique canonical artifact targets, and strict patch applicabilit
 transactional and serialized; a modified published cache is rejected, not repaired
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
+
+The bounded Com.StructuredStorage addition patches only shipped
+`um\propidlbase.idl`. Shipped `propidl.idl` includes that source and generates
+another complete copy of its declarations. Both `PropIdl.h` and `PropIdlBase.h`
+therefore regenerate from the same pinned closure; updating only the base header
+would lose the annotations whenever the including header defines `_PROPIDLBASE_`
+first. An admitted header in that MIDL input closure without its pinned output
+is rejected instead of silently retaining its mirror copy. Unrelated pinned
+IDL-backed dependencies, including `httprequest.h`, are not regenerated.
+
+This addition moves the existing `PROPSPEC_KIND` group and `PROPSPEC::ulKind`
+relationship, the two existing `VARENUM` field relationships, four Windows 2000
+interface floors, and the four enumerator `Next`/`Skip` multiple-success facts.
+It does not migrate other APIs in this partition or add structure OS floors.
+`PRSPEC_INVALID` remains outside the two-member logical group, and `VARENUM`
+remains owned by the Variant partition.
+
+The fields use MIDL `annotation(...)` while retaining their native `ULONG` and
+`VARTYPE` declarations. Interface carriers share the existing opening quote
+region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
+region after the complete interfaces: their compiled method references identify
+the intended C++ declarations without copying a signature or annotating a proxy.
+This handles the non-local `Skip` methods without changing RPC locality; direct
+annotations on local `Next` would also reach generated proxy declarations.
+Native SAL, `call_as` relationships, union branches and wire layouts remain
+control inputs, not annotation targets. Generated documentation mappings and
+global type-storage/namespace fixups remain derived or shared configuration.
+Actual source/header/native/image qualification is recorded separately; the
+earlier eleven-owner receipts do not qualify the expanded source.
 
 Changing its identity invalidates the constants marker and every architecture's
 header-scrape marker before any consumer runs. An unchanged identity retains the

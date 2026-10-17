@@ -293,6 +293,13 @@ if ($hasMidl) {
         @($config.midl.outputs.path | Sort-Object -Unique).Count -ne $config.midl.outputs.Count) {
         throw 'MIDL outputs must be nonempty and contain no duplicate headers.'
     }
+    foreach ($header in $config.headers | Where-Object {
+        [IO.Path]::GetExtension($_.sdkPath) -eq '.idl' -and $_.sdkPath -in $midlInputs.sdkPath
+    }) {
+        if (@($config.midl.outputs | Where-Object path -eq $header.path).Count -ne 1) {
+            throw "A header in the admitted MIDL input closure must have one pinned MIDL output: $($header.path)"
+        }
+    }
     $midlTools = @($config.midl.tools | ForEach-Object {
         $path = Resolve-Child $SdkPackageRoot $_.sdkPath
         if ((Get-Sha256 $path) -ne $_.sha256) {

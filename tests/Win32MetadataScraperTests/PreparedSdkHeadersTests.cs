@@ -286,6 +286,65 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void IncludedIdlPatchRegeneratesBothOriginalArtifactOwners()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableIncludedMidl();
+            byte[] original = File.ReadAllBytes(fixture.MidlInput);
+            var prepared = fixture.Prepare();
+            foreach (string name in new[] { "generated", "including" })
+            {
+                string header = File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", name + ".h"));
+                Assert.Contains("#define IDL_VALUE 2", header);
+                Assert.Contains("_Out_", header);
+                Assert.Contains("_Win32_Retval_", header);
+            }
+            using var inputs = JsonDocument.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot),
+                "midl", "preprocessed-inputs.json")));
+            Assert.Equal(new[] { @"um\dependency.idl", @"um\generated.idl", @"um\including.idl" },
+                inputs.RootElement.EnumerateArray().Select(value => value.GetString()));
+            Assert.Equal(original, File.ReadAllBytes(fixture.MidlInput));
+            Assert.True(fixture.Prepare().Reused);
+            var repeated = fixture.Prepare(outputRoot: fixture.Output + "-repeat");
+            Assert.False(repeated.Reused);
+            Assert.Equal(prepared.Identity, repeated.Identity);
+            foreach (string name in new[] { "generated", "including", "dependency" })
+                Assert.Equal(File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "um", name + ".h")),
+                    File.ReadAllBytes(Path.Combine(repeated.IncludeRoot, "um", name + ".h")));
+        }
+
+        [Fact]
+        public void HeaderInTheMidlInputClosureCannotFallBackToItsMirrorWhenItsOutputIsMissing()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableIncludedMidl();
+            fixture.MutateRecipe(recipe => recipe["midl"]["outputs"].AsArray().RemoveAt(2));
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("A header in the admitted MIDL input closure must have one pinned MIDL output: um\\including.h", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
+        public void UnrelatedIdlBackedHeaderRetainsItsPinnedMirrorWithoutExpandingTheMidlClosure()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            byte[] original = fixture.AddUnrelatedIdlBackedHeader();
+            var prepared = fixture.Prepare();
+            string header = Path.Combine(prepared.IncludeRoot, "um", "unrelated.h");
+            Assert.Equal(original, File.ReadAllBytes(header));
+            using var inputs = JsonDocument.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot),
+                "midl", "preprocessed-inputs.json")));
+            Assert.Equal(new[] { @"um\dependency.idl", @"um\generated.idl" },
+                inputs.RootElement.EnumerateArray().Select(value => value.GetString()));
+            Assert.True(fixture.Prepare().Reused);
+            var repeated = fixture.Prepare(outputRoot: fixture.Output + "-repeat");
+            Assert.Equal(prepared.Identity, repeated.Identity);
+            Assert.Equal(original, File.ReadAllBytes(Path.Combine(repeated.IncludeRoot, "um", "unrelated.h")));
+        }
+
+        [Fact]
         public void SourcePinnedAnnotationHeaderAndMidlDefinesReachTheActualPreprocessor()
         {
             using var fixture = new Fixture();
@@ -712,6 +771,54 @@ namespace Win32MetadataScraperTests
                         sourceSha256 = Hash(File.ReadAllBytes(AnnotationHeader)),
                     }));
                 });
+            }
+
+            internal void EnableIncludedMidl()
+            {
+                EnableMidl();
+                const string input = "#include \"generated.idl\"\r\n";
+                const string preimage = "/* File created by MIDL compiler */\r\n";
+                string path = Path.Combine(this.sdk, "c", "include", "um", "including.idl");
+                File.WriteAllText(path, input, new UTF8Encoding(false));
+                File.WriteAllText(Path.Combine(this.source, "um", "including.h"), preimage, new UTF8Encoding(false));
+                MutateRecipe(recipe =>
+                {
+                    recipe["headers"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                    {
+                        path = @"um\including.h",
+                        sourceSha256 = Hash(Encoding.UTF8.GetBytes(preimage)),
+                        sdkPath = @"c\include\um\including.idl",
+                        sdkSha256 = Hash(File.ReadAllBytes(path)),
+                    }));
+                    recipe["midl"]["inputs"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                    {
+                        path = @"um\including.idl",
+                        sdkPath = @"c\include\um\including.idl",
+                        sdkSha256 = Hash(File.ReadAllBytes(path)),
+                    }));
+                    recipe["midl"]["outputs"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                    {
+                        source = @"um\including.idl",
+                        path = @"um\including.h",
+                    }));
+                });
+            }
+
+            internal byte[] AddUnrelatedIdlBackedHeader()
+            {
+                string input = Path.Combine(this.sdk, "c", "include", "um", "unrelated.idl");
+                const string idl = "typedef long UNRELATED;\r\n";
+                byte[] header = Encoding.ASCII.GetBytes("/* File created by MIDL compiler */\r\ntypedef long UNRELATED;\r\n");
+                File.WriteAllText(input, idl, new UTF8Encoding(false));
+                File.WriteAllBytes(Path.Combine(this.source, "um", "unrelated.h"), header);
+                MutateRecipe(recipe => recipe["headers"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                {
+                    path = @"um\unrelated.h",
+                    sourceSha256 = Hash(header),
+                    sdkPath = @"c\include\um\unrelated.idl",
+                    sdkSha256 = Hash(File.ReadAllBytes(input)),
+                })));
+                return header;
             }
 
             internal void MutateRecipe(Action<JsonObject> mutate)
