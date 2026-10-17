@@ -2126,3 +2126,109 @@ missing-IDL artifacts, WNet/RPC's 49 raw rows and representation/branch
 and literal-order gates, excluded field-array activation, and owning
 production/current-head CI/publication remain separate. No reviewed
 branch, stack membership, merge state or consumer code is changed.
+
+## Seventh authored-header cohort: Monitor
+
+This cohort qualifies the three original SDK headers
+`um\lowlevelmonitorconfigurationapi.h`,
+`um\highlevelmonitorconfigurationapi.h` and
+`um\physicalmonitorenumerationapi.h`. Their repository preimages
+byte-match the selected shipped SDK originals. The normal owning
+partition is `Monitor`, whose complete translation unit also includes
+the unchanged generated consumption header `cloneviewhelper.h`. That
+header is neither an authoring source nor a partial replacement owner.
+
+The three patches now use fixed per-declaration Vista macros, not scope
+transport. They relocate exactly 32 existing floors and 26 existing
+last-error facts. Six deliberate last-error omissions remain on
+`SetVCPFeature`, `GetMonitorCapabilities`,
+`SetMonitorRedGreenOrBlueDrive`, `SetMonitorRedGreenOrBlueGain`,
+`GetNumberOfPhysicalMonitorsFromIDirect3DDevice9` and
+`GetPhysicalMonitorsFromIDirect3DDevice9`. No enum, association,
+ownership assertion or new native fact was added. Removing precisely
+the 58 inserted CRLF annotation lines reproduces every original SDK
+byte, including declaration order.
+
+The initial authoring diff used ambient autocrlf and lost native CRLF
+hunk contexts. This was caught before actual preparation. Both initial
+diffs and the corrected transport are retained; the effective recipe
+binding supersedes the historical preflight patch hashes. Each actual
+production patch was independently applied strictly to its original
+fixture and reproduced the exact authored bytes. No native source
+change was needed to correct patch transport.
+
+The ordinary bounded recipe has 45 header bindings, 41 patches and 41
+partitions. Both independent fresh preparations identify as
+`6F1E3968...`. All 3,443 actual headers in each were independently
+rehashed with literal paths and bytes. Against the explicitly reused
+network preparation `854FD92D...`, exactly these three original headers
+differ. The 51 MIDL input, four tool and two script bindings are literal;
+the selected tool/script bytes were rehashed. The independent MIDL
+evidence directories each contain 174 files: 158 literal files and 16
+different generated logs, with both full inventories and all untouched
+raw differences retained. This is not whole-evidence-directory
+equality or a fresh all-architecture native MIDL replay.
+
+Exactly 36 fresh C17/C++17, metadata-off/on, x86/x64/ARM64 compiler/AST
+cases pass without skips, using the complete actual Monitor translation
+unit. They preserve the measured native ABI, SAL and diagnostic facts
+and require the exact selected-header metadata when enabled and none
+when disabled. The preceding 138 native cases were not rerun. An initial
+prior-control invocation omitted the required OLD fixture and produced
+one optional skip; its exact-count guard rejected that result. The
+retained corrected invocation supplies every fixture and passes eight
+source guards plus three actual prior-control architecture cases.
+
+Fresh stock first/repeat traversals produce the entire common
+`Monitor.cs`, five RSP files and one preamble: seven literal files.
+All ten normal pointer-reduction names are covered by the actual union
+of the three complete frozen architecture RSPs; the complete global
+function-pointer fixups remain literal. The raw scratch remap file is
+not byte-equal: 1,469 rows retain independent absolute preparation
+origins. Mapping prefixes, targets, relative header spelling, positions
+and actual referenced header bytes match. Every raw row and untouched
+diff remains available without normalization or source repair.
+
+Source commit `5dd0e8cf...` preserves the exact executed source bytes.
+Native, preparation and normal-traversal commands ran precommit on
+identical source, not in a freshly checked-out committed tree. Both
+complete images were actually emitted at that committed producer:
+candidate `7E8A1453...` and independent repeat `F182C554...`. Each
+preserves an exact 831-entry archive containing 824 C# files, overlays
+only the entire normal `common\Monitor.cs`, including unchanged
+cloneviewhelper output, and keeps all 830 other inputs and full frozen
+configurations literal. The separate display constants remain frozen;
+other owners and constants were not freshly traversed.
+
+Both images compare unfiltered raw API-zero to qualified network
+`FC3B4A51...` and to each other; network repeat `B4645AC4...` also
+compares raw-zero to the candidate. Against historical `7279E5A3...`,
+each retains exactly the existing 16 native SecurityCenter custom-retval
+rows, byte-identical SHA256
+`EEEEC8409DADD43282B6D4C42AE33F9EE2895EE97BC4FCD68355F0488E378112`.
+These are custom metadata, not a CLI Retval-bit claim. An initial
+validation assertion incorrectly expected positive 1 for differences;
+the existing comparer returns -1. That rejected assertion and its
+already byte-correct raw report are retained; only the exit-code proxy
+was corrected. No difference was suppressed or normalized.
+
+Both images pass sixteen actual physical/source cases and the entire
+fourteen-case integrity/interface/RAII suite without skips. These
+preserve all physical type snapshots and literal type/field/method
+sequences, all 32 exact floors, 26 last-error flags and six omissions
+across three architectures, and all 30 legacy facts for the seven
+missing-IDL artifacts. The original shared binary fixture was restored
+byte-for-byte. All 1,662 input ZIP entries were independently rehashed
+with original membership, case and order. Processed `.modified.cs`
+files are not archival inputs. The existing `CSSW001`
+WebAuthn/WinHttp.header-types warning remains explicit.
+
+Local resumed-original-artifact coverage is **28 of 50**: twelve
+original IDLs and sixteen authored headers, twelve more headers than at
+`12279c76...`. The other 22 header drafts remain outside these
+qualified cohorts. The seven missing-IDL artifacts and their 30
+retained legacy facts, WNet/RPC's 49 raw rows and representation/branch
+and literal-order gates, excluded field-array activation, and owning
+production/current-head CI/publication are still separate. This local
+cohort neither changes those dispositions nor claims consumer effects
+or a PR merge.
