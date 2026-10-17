@@ -146,6 +146,28 @@ namespace Win32MetadataScraperTests
                 Assert.DoesNotContain("_Windows_SupportedOS_", File.ReadAllText(Path.Combine(root, patch)));
                 Assert.DoesNotContain("WIN32METADATA_CSHARP", File.ReadAllText(Path.Combine(root, patch)));
             }
+            string verifierPatch = File.ReadAllText(Path.Combine(root, @"um\avrfsdk.h.patch"));
+            Assert.Contains("_Win32_AssociatedEnum_(enum eAvrfResourceTypes) ULONG  ResourceType", verifierPatch);
+            Assert.DoesNotContain("_Win32_AssociatedEnum_(eAvrfResourceTypes)", verifierPatch);
+        }
+
+        [MigrationFact]
+        public void ApplicationVerifierNativeEnumTagKeepsCanonicalIdentityAndParameterStorage()
+        {
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var reader = current.Reader;
+            const string ns = "Windows.Win32.System.ApplicationVerifier";
+            var currentTypes = Types(reader);
+            var method = currentTypes[ns + ".Apis"].GetMethods().Select(reader.GetMethodDefinition)
+                .Single(value => reader.GetString(value.Name) == "VerifierEnumerateResource");
+            var parameter = method.GetParameters().Select(reader.GetParameter)
+                .Single(value => reader.GetString(value.Name) == "ResourceType");
+            Assert.Equal("UInt32", method.DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+            Assert.Equal(new[] { "eAvrfResourceTypes" },
+                AttributeValues(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            Assert.Equal(SnapshotType(control.Reader, Types(control.Reader)[ns + ".eAvrfResourceTypes"]),
+                SnapshotType(reader, currentTypes[ns + ".eAvrfResourceTypes"]));
         }
 
         [MigrationFact]

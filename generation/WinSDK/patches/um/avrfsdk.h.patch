@@ -18,7 +18,7 @@ index a2c5a112..4d23b1f7 100644
 -    ULONG  Flags,    
 -    ULONG  ResourceType,
 +    _Win32_AssociatedEnum_(VERIFIER_ENUM_RESOURCE_FLAGS) ULONG  Flags,
-+    _Win32_AssociatedEnum_(eAvrfResourceTypes) ULONG  ResourceType,
++    _Win32_AssociatedEnum_(enum eAvrfResourceTypes) ULONG  ResourceType,
      AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
      PVOID  EnumerationContext
      );

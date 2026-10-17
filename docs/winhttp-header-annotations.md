@@ -142,6 +142,12 @@ both property-header include orders, and x86/x64/ARM64. Set
 directory when running the native controls; they do not consume ambient
 `INCLUDE`.
 
+ApplicationVerifier's existing native tag likewise requires
+`_Win32_AssociatedEnum_(enum eAvrfResourceTypes)` on `ResourceType`; it is not a
+C typedef. Its original-header C controls cover metadata off/on on all three
+architectures, and compiler-to-physical controls preserve the canonical enum
+identity and native `ULONG` parameter storage without an alias or helper change.
+
 Changing its identity invalidates the constants marker and every architecture's
 header-scrape marker before any consumer runs. An unchanged identity retains the
 markers. Namespace,
