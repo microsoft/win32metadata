@@ -1263,9 +1263,45 @@ completed against that accepted correction before final admission.
 
 WNet has a separate source dependency. Moving its unchanged eight-enum block
 before first use fixes declaration order, but metadata-on compilation still
-needs the complete existing `WIN32_ERROR` group. Its 3,376 generated members and
-91 explicit legacy members span original `WinError.h` and `SetupAPI.h` ownership.
+needs the complete existing `WIN32_ERROR` group. The actual qualified root
+contains 3,378 members: 3,288 from original `WinError.h` and 90 from original
+`SetupAPI.h`. The preliminary uppercase-only source count of 3,376 missed
+`ERROR_ITERATED_DATA_EXCEEDS_64k` and `ERROR_AUTODATASEG_EXCEEDS_64k`.
 A partial group, placeholder, forward declaration or inclusion of all SetupAPI
 is not a solution. Only this admission is held for the owning global-source
 resolution; independent original-source work continues. The seven unavailable
 original-IDL artifacts and all their legacy facts remain source-blocked.
+
+### Disjoint authored-header controls
+
+The next local batch adds only the existing `MDMRegistration.h` and
+`amxmlgraphbuilder.h` original-header drafts. The eleven MdmReg function floors
+remain `windows8.1`; the `IXMLGraphBuilder` interface floor remains `windows5.0`.
+Both real including partitions, `Media.DShow` and `Media.DShow.Xml`, are exercised
+and freshly scraped. No generated header or pilot-owned source is patched.
+
+Two distinct fresh preparations have identity
+`004AABF185DD7B7BB408D983A8000B9C01DDD5569110BB3763D60A8A83BA91F9`
+and 3,443 literally identical prepared files. All 37 actual MIDL input bindings,
+tools and eight regenerated headers match the preceding first-IDL control
+exactly. Its three-architecture native-output evidence is explicitly reused
+under that unchanged-input binding, not relabeled a fresh native MIDL run.
+
+All 18 C++ metadata-off/on libclang controls pass on x86, x64 and ARM64.
+MdmReg preserves 54 native facts and 381 SAL attributes; each XML context
+preserves four native facts and its genuinely empty own-header SAL set. The
+control requires that set to remain empty rather than inventing SAL contracts.
+Expected metadata payloads are ordered by their complete literal strings,
+including the separator after prefix-related function names.
+
+The three ordinary selected scrape outputs match their distinct fresh repeats.
+The cumulative complete image has SHA256
+`4F8BE2B61C27D113282791039D4119F7E2EA637BFA4F83764BFD8DAF56C02817`.
+It replaces eight selected C# files in freshly materialized actual pilot sources,
+without modifying their bytes. Unfiltered comparisons against both actual
+`E284...` and the preceding `AF76...` control are zero. All 37,314 physical types
+remain literal matches; 16 physical cases cover the twelve new targets and all
+earlier bounded/pilot/source-blocked facts, and all 14 standard integrity cases
+pass with no skips. The root 54-row and same-SDK OLD 203-row logs retain the exact
+hashes above. These are local controls, not current-head CI or a waiver of the
+inherited C metadata-on gate. No consumer compatibility claim is made.

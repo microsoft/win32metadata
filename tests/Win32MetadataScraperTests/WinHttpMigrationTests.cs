@@ -816,6 +816,42 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"Architecture {architecture}: all eight original-IDL interface availability targets retain their exact floors.");
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void AuthoredAvailabilityBatchPreservesItsTwelveExactTargets(int architecture)
+        {
+            const string ns = "Windows.Win32.Management.MobileDeviceManagementRegistration";
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, ns, "Apis", architecture);
+            var after = Methods(current.Reader, ns, "Apis", architecture);
+            foreach (string name in new[]
+            {
+                "DiscoverManagementService", "DiscoverManagementServiceEx", "GetDeviceRegistrationInfo",
+                "GetManagementAppHyperlink", "IsDeviceRegisteredWithManagement", "IsManagementRegistrationAllowed",
+                "RegisterDeviceWithManagement", "RegisterDeviceWithManagementUsingAADCredentials",
+                "RegisterDeviceWithManagementUsingAADDeviceCredentials", "SetManagedExternally", "UnregisterDeviceWithManagement",
+            })
+            {
+                Assert.Contains(name, before.Keys);
+                Assert.Contains(name, after.Keys);
+                Assert.Equal(new[] { "windows8.1" },
+                    AttributeValues(control.Reader, before[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(new[] { "windows8.1" },
+                    AttributeValues(current.Reader, after[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+            const string xml = "Windows.Win32.Media.DirectShow.Xml";
+            var originalGraph = Type(control.Reader, "IXMLGraphBuilder", architecture, xml);
+            var currentGraph = Type(current.Reader, "IXMLGraphBuilder", architecture, xml);
+            Assert.Equal(new[] { "windows5.0" },
+                AttributeValues(control.Reader, originalGraph.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            Assert.Equal(new[] { "windows5.0" },
+                AttributeValues(current.Reader, currentGraph.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            this.output.WriteLine($"Architecture {architecture}: all eleven MdmReg function floors and the XML graph interface floor remain exact.");
+        }
+
         [Fact]
         public void NativeDwmContactStorageHasNoAuthoredUnderlyingTypeOverride()
         {

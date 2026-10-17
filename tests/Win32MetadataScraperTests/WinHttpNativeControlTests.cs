@@ -414,6 +414,67 @@ static_assert(DISC_NO_FORCE == 64u);
             }
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(AuthoredAvailabilityHeaderControls))]
+        public void AuthoredAvailabilityHeadersPreserveNativeAbiAndSalWithExactMetadata(
+            string partition, string header, string architecture, string target, bool enabled, string[] expected)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, new[] { header }, "",
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
+            var after = Surface(root, prepared, partition, architecture, target, new[] { header }, "", metadataEnabled: enabled,
+                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            if (header == "amxmlgraphbuilder.h")
+                Assert.Empty(beforeSal);
+            else
+                Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal((enabled ? expected : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
+                annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{partition}/{architecture}/C++/metadata={enabled}: " +
+                $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
+                $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact availability facts.");
+        }
+
+        public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
+        {
+            foreach (string partition in new[] { "MdmReg", "Media.DShow", "Media.DShow.Xml" })
+            {
+                string[] expected = partition == "MdmReg" ? new[]
+                {
+                    "DiscoverManagementService", "DiscoverManagementServiceEx", "GetDeviceRegistrationInfo",
+                    "GetManagementAppHyperlink", "IsDeviceRegisteredWithManagement", "IsManagementRegistrationAllowed",
+                    "RegisterDeviceWithManagement", "RegisterDeviceWithManagementUsingAADCredentials",
+                    "RegisterDeviceWithManagementUsingAADDeviceCredentials", "SetManagedExternally", "UnregisterDeviceWithManagement",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows8.1\")").ToArray() :
+                    new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" };
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[]
+                        {
+                            partition, partition == "MdmReg" ? "MDMRegistration.h" : "amxmlgraphbuilder.h",
+                            architecture.Item1, architecture.Item2, enabled, expected,
+                        };
+            }
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlHeaderControls))]
         public void OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
@@ -444,7 +505,8 @@ static_assert(DISC_NO_FORCE == 64u);
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             string[] facts = annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
-            Assert.Equal(enabled && language == "c++" ? expected : Array.Empty<string>(), facts);
+            Assert.Equal((enabled && language == "c++" ? expected : Array.Empty<string>())
+                .OrderBy(value => value, StringComparer.Ordinal), facts);
             this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{facts.Length} exact interface availability facts.");
@@ -474,6 +536,30 @@ static_assert(DISC_NO_FORCE == 64u);
                     "IWsbApplicationBackupSupport|SupportedOSPlatform(\"windowsserver2008\")",
                     "IWsbApplicationRestoreSupport|SupportedOSPlatform(\"windowsserver2008\")",
                 }),
+                ("WinContacts", "IContact.h", new[]
+                {
+                    "IContactManager", "IContactCollection", "IContactProperties", "IContact", "IContactPropertyCollection",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray()),
+                ("FileHistory", "FhCfg.h", new[]
+                {
+                    "IFhTarget", "IFhScopeIterator", "IFhConfigMgr", "IFhReassociation",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows8.0\")").ToArray()),
+                ("Nla", "netlistmgr.h", new[]
+                {
+                    "INetworkListManager", "INetworkListManagerEvents", "INetwork", "IEnumNetworks", "INetworkEvents",
+                    "INetworkConnection", "IEnumNetworkConnections", "INetworkConnectionEvents",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").Concat(new[]
+                {
+                    "INetworkCostManager", "INetworkCostManagerEvents", "INetworkConnectionCost", "INetworkConnectionCostEvents",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows8.0\")")).ToArray()),
+                ("Rdc", "msrdc.h", new[]
+                {
+                    "IRdcGeneratorParameters", "IRdcGeneratorFilterMaxParameters", "IRdcGenerator",
+                    "IRdcFileReader", "IRdcFileWriter", "IRdcSignatureReader", "IRdcComparator", "IRdcLibrary",
+                    "ISimilarityReportProgress", "ISimilarityTableDumpState", "ISimilarityTraitsMappedView",
+                    "ISimilarityTraitsMapping", "ISimilarityTraitsTable", "ISimilarityFileIdTable",
+                    "IRdcSimilarityGenerator", "IFindSimilarResults", "ISimilarity",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray()),
             };
             foreach (var owner in owners)
                 foreach (var architecture in new[]
