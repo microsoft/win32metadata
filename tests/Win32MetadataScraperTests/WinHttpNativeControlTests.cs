@@ -717,6 +717,42 @@ static_assert(DISC_NO_FORCE == 64u);
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void ApplicationVerifierNativeEnumTagCompilesInCWithoutChangingAbiOrSal(
+            string architecture, string target, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string[] headers = { "avrfsdk.h" };
+            var originalSal = new List<string>();
+            var preparedSal = new List<string>();
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, "ApplicationVerifier", architecture, target, headers, "",
+                salAnnotations: originalSal, diagnostics: originalDiagnostics, language: "c");
+            var after = Surface(root, prepared, "ApplicationVerifier", architecture, target, headers, "",
+                metadataEnabled: enabled, salAnnotations: preparedSal, diagnostics: preparedDiagnostics, language: "c");
+            const string metadataCarrier = "typedef VERIFIER_ENUM_RESOURCE_FLAGS unsigned long";
+            Assert.Equal(enabled ? new[] { metadataCarrier } : Array.Empty<string>(), after.Except(before));
+            Assert.Equal(before, after.Where(value => value != metadataCarrier));
+            Assert.Equal(originalSal.OrderBy(value => value, StringComparer.Ordinal),
+                preparedSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Contains("value eAvrfResourceTypes::AvrfResourceHeapAllocation 0", before);
+            Assert.Contains("value eAvrfResourceTypes::AvrfResourceHandleTrace 1", before);
+            Assert.Contains("value eAvrfResourceTypes::AvrfResourceMax 2", before);
+            this.output.WriteLine($"ApplicationVerifier/{architecture}/C/metadata={enabled}: " +
+                $"{before.Length} unchanged native facts, {originalSal.Count} unchanged SAL facts.");
+        }
+
+        [NativeMigrationTheory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
         public void RegeneratedSdkIdlKeepsNativeAbiAndOnlyTheIntendedAnnotation(string architecture, string target, bool enabled)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
