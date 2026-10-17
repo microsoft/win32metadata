@@ -376,6 +376,54 @@ namespace Win32MetadataScraperTests
                 $"all {resultSites} legacy success-marker sites use PreserveSig, with no other physical changes.");
         }
 
+        [MigrationFact("WINHTTP_MIGRATION_QUALIFIED_ROOT")]
+        public void HistoricalFrozenOldConstructorDefectsAreAlreadyFixedInQualifiedRoot()
+        {
+            Assert.Equal("1361407C2888102CB5161D83503235C09C36F917837C7107CA0A80E5CF4FAC43",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD")))));
+            Assert.Equal("D2C9C2BD1ECECB9371773FB3888FB88BD3F56E301F146FC7F6FE029B13140A67",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_QUALIFIED_ROOT")))));
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var root = Open("WINHTTP_MIGRATION_QUALIFIED_ROOT");
+            var before = Types(old.Reader);
+            var after = Types(root.Reader);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            var sites = new List<string>();
+            foreach (var entry in before)
+            {
+                Assert.Equal(SnapshotType(old.Reader, entry.Value, correctConstructorInstanceBits: true),
+                    SnapshotType(root.Reader, after[entry.Key]));
+                foreach (var method in entry.Value.GetMethods().Select(old.Reader.GetMethodDefinition))
+                {
+                    var signature = method.DecodeSignature(Signatures, null);
+                    if (old.Reader.GetString(method.Name) == ".ctor" &&
+                        !method.Attributes.HasFlag(MethodAttributes.Static) && !signature.Header.IsInstance)
+                        sites.Add(entry.Key + "::.ctor|" + Signature(signature) + "|OLD header=0x00; qualified8d6 header=0x20");
+                }
+            }
+            Assert.Equal(39, sites.Count);
+            this.output.WriteLine("All39 defects belong only to the historical b5b7 frozen OLD image; actual qualified8d6 already fixes them:");
+            foreach (string site in sites.OrderBy(value => value, StringComparer.Ordinal))
+                this.output.WriteLine(site);
+        }
+
+        [MigrationFact("WINHTTP_MIGRATION_CANONICAL_ROOT")]
+        public void ActualCanonicalRootMatchesTheCompleteToolingControlWithoutAdditionalConstructorChanges()
+        {
+            Assert.Equal("41A9406EE85E90FBD68BEC29C03405CC3B1A8436FB78344FC3D480F6DAC437B1",
+                Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_CANONICAL_ROOT")))));
+            using var root = Open("WINHTTP_MIGRATION_CANONICAL_ROOT");
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            var before = Types(root.Reader);
+            var after = Types(control.Reader);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (var entry in before)
+                Assert.Equal(SnapshotType(root.Reader, entry.Value), SnapshotType(control.Reader, after[entry.Key]));
+            AssertClosure(root.Reader);
+            this.output.WriteLine($"All {before.Count} physical types match the actual canonical3dc root image exactly; " +
+                "zero additional constructor, method-flag, signature or attribute changes.");
+        }
+
         [MigrationFact]
         public void EveryPhysicalTypeHasOnlyReviewedEnumUseSiteChanges()
         {
