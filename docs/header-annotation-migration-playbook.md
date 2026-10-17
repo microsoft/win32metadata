@@ -1305,3 +1305,71 @@ earlier bounded/pilot/source-blocked facts, and all 14 standard integrity cases
 pass with no skips. The root 54-row and same-SDK OLD 203-row logs retain the exact
 hashes above. These are local controls, not current-head CI or a waiver of the
 inherited C metadata-on gate. No consumer compatibility claim is made.
+
+### Corrected bootstrap and the second original-IDL control
+
+The exact qualified C-enum correction `e263bb3bcadcb0da5915e18caf91d1b69250cd88`
+is ordinary-merged in local checkpoint
+`c2d142988ad6898987ea8c54b0bab501eb902449`. Both immutable qualification receipts
+and actual CI image `7C1175B3...` are independently rehashed. The explicit Wcm
+matrix now passes all 18 cases, including its three former C metadata-on failures.
+All eight original-IDL owners pass 144 C/C++/CINTERFACE, architecture and off/on
+cases. The authored Mdm/XML and property controls pass another 60 cases, including
+plain-C Mdm coverage and both property include orders. All have zero skips.
+These controls bind root `afdb...` and the unchanged `082E...` helper; the separate
+qualified logical-group tooling release is not silently included in them.
+
+The second original-IDL group uses the previously measured original SDK inputs,
+not another transport investigation. Fresh matched controls enforce exactly
+47 used inputs and 12 regenerated headers. All 24 actual three-architecture
+MIDL commands preserve 48 proxy/IID/dlldata/TLB outputs byte-for-byte.
+
+| Original IDL | Actual inputs, pristine to patched | Unchanged warning contexts per architecture | Interface floors |
+| --- | --- | ---: | ---: |
+| `IContact.idl` | 25 to 28 | 1,193 | 5 |
+| `FhCfg.idl` | 36 to 36 | 2,652 | 4 |
+| `netlistmgr.idl` | 25 to 28 | 1,204 | 12 |
+| `msrdc.idl` | 25 to 28 | 1,139 | 17 |
+
+All twelve cumulative selected sources match distinct fresh normal-scrape
+repeats. The three actual `e263...` CI source archives are retained independently;
+a fresh complete replay of their 824 C# inputs has image SHA256
+`33042E79ECAD2130568C7FAF1176F218078B92BF29C3D64D62C899DDEB75BAB1`
+and zero unfiltered differences against actual `7C1175B3...`.
+The initial twelve-source image `35C49CBD...` instead reports eight untouched
+raw rows, SHA256
+`E6FA73C5B9D86191912540C360880A75D90BE0193979E203CBCE7D1DB035CFD3`.
+Those rows have two distinct dispositions, not a difference allowance.
+
+Seven rows lose existing `windows8.0` FhSvcCtl function floors: a whole
+FileHistory partition cannot be admitted from the FhCfg IDL patch alone.
+Its coupled authored `FhSvcCtl.h` draft must carry all seven floors and the
+existing producer-only cleanup facts. A single native probe identified that
+the cleanup annotation references `FhServiceClosePipe` before its original
+declaration. The complete existing ClosePipe declaration block is moved before
+OpenPipe, with deprecation, SAL, guards and the Windows8 range retained. Its
+original block SHA256 is
+`AE94DE35B3FB96D9F11FD51D56E54D8AE060D4CC0921C3EE2B9DA88131767994`;
+all bytes outside that exact block remain unchanged from the preceding draft.
+No declaration, alias, helper, carrier or include is added.
+
+The moved-header native matrix passes nine cases but retains three actual
+plain-C metadata-on failures in the inherited pilot `avrfsdk.h` carrier:
+`eAvrfResourceTypes` is a native enum tag, and the association omits `enum`.
+The whole actual FileHistory input includes that header. Its failed matrix and
+independent source witness are retained outside the checkout and routed to the
+pilot owner; that artifact is not patched independently or bypassed here.
+FileHistory admission remains held, without accepting the seven floor losses.
+
+The eighth raw row is a source-backed addition:
+`INetworkConnection2.IsDomainAuthenticatedBy::pValue` gains exactly one
+`RetValAttribute`. Original `netlistmgr.idl` already declares `[ out, retval ]`
+on `BOOL * pValue`, and the existing generated header carries `[retval][out]`.
+All three physical architecture cases preserve sequence 2, raw CLI `Out` flags,
+the unset CLI `Retval` bit and the entire HRESULT/parameter signature; the new
+custom-attribute payload is exactly `01000000`. Managed consumer effects remain
+unmeasured. It is not suppressed to preserve the older reader's omission.
+
+The full literal per-site image grade, source-backed cleanup relocation and
+own current-head CI remain required. The seven unavailable original-IDL
+artifacts and all 30 legacy residual units remain untouched.

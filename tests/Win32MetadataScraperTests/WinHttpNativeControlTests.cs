@@ -417,7 +417,7 @@ static_assert(DISC_NO_FORCE == 64u);
         [NativeMigrationTheory]
         [MemberData(nameof(AuthoredAvailabilityHeaderControls))]
         public void AuthoredAvailabilityHeadersPreserveNativeAbiAndSalWithExactMetadata(
-            string partition, string header, string architecture, string target, bool enabled, string[] expected)
+            string partition, string header, string architecture, string target, string language, bool enabled, string[] expected)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
@@ -428,9 +428,9 @@ static_assert(DISC_NO_FORCE == 64u);
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
             var before = Surface(root, original, partition, architecture, target, new[] { header }, "",
-                salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
             var after = Surface(root, prepared, partition, architecture, target, new[] { header }, "", metadataEnabled: enabled,
-                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics);
+                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
             if (header == "amxmlgraphbuilder.h")
@@ -443,35 +443,52 @@ static_assert(DISC_NO_FORCE == 64u);
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal((enabled ? expected : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
                 annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
-            this.output.WriteLine($"{partition}/{architecture}/C++/metadata={enabled}: " +
+            this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact availability facts.");
         }
 
         public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
         {
-            foreach (string partition in new[] { "MdmReg", "Media.DShow", "Media.DShow.Xml" })
+            foreach (string partition in new[] { "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory" })
             {
-                string[] expected = partition == "MdmReg" ? new[]
+                string[] expected = partition switch
                 {
-                    "DiscoverManagementService", "DiscoverManagementServiceEx", "GetDeviceRegistrationInfo",
-                    "GetManagementAppHyperlink", "IsDeviceRegisteredWithManagement", "IsManagementRegistrationAllowed",
-                    "RegisterDeviceWithManagement", "RegisterDeviceWithManagementUsingAADCredentials",
-                    "RegisterDeviceWithManagementUsingAADDeviceCredentials", "SetManagedExternally", "UnregisterDeviceWithManagement",
-                }.Select(name => name + "|SupportedOSPlatform(\"windows8.1\")").ToArray() :
-                    new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" };
+                    "MdmReg" => new[]
+                    {
+                        "DiscoverManagementService", "DiscoverManagementServiceEx", "GetDeviceRegistrationInfo",
+                        "GetManagementAppHyperlink", "IsDeviceRegisteredWithManagement", "IsManagementRegistrationAllowed",
+                        "RegisterDeviceWithManagement", "RegisterDeviceWithManagementUsingAADCredentials",
+                        "RegisterDeviceWithManagementUsingAADDeviceCredentials", "SetManagedExternally", "UnregisterDeviceWithManagement",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows8.1\")").ToArray(),
+                    "FileHistory" => new[]
+                    {
+                        "FhServiceOpenPipe", "FhServiceClosePipe", "FhServiceStartBackup", "FhServiceStopBackup",
+                        "FhServiceReloadConfiguration", "FhServiceBlockBackup", "FhServiceUnblockBackup",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows8.0\")")
+                        .Append("Pipe|RAIIFree").ToArray(),
+                    _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
+                };
+                string header = partition switch
+                {
+                    "MdmReg" => "MDMRegistration.h",
+                    "FileHistory" => "FhSvcCtl.h",
+                    _ => "amxmlgraphbuilder.h",
+                };
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"),
                     ("x64", "x86_64-pc-windows-msvc"),
                     ("arm64", "aarch64-pc-windows-msvc"),
                 })
-                    foreach (bool enabled in new[] { false, true })
-                        yield return new object[]
-                        {
-                            partition, partition == "MdmReg" ? "MDMRegistration.h" : "amxmlgraphbuilder.h",
-                            architecture.Item1, architecture.Item2, enabled, expected,
-                        };
+                    foreach (string language in partition.StartsWith("Media.", StringComparison.Ordinal) ?
+                        new[] { "c++" } : new[] { "c", "c++" })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                partition, header,
+                                architecture.Item1, architecture.Item2, language, enabled, expected,
+                            };
             }
         }
 

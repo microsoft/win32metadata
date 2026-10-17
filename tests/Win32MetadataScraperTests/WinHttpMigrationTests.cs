@@ -854,6 +854,116 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"Architecture {architecture}: all eleven MdmReg function floors and the XML graph interface floor remain exact.");
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void SecondOriginalIdlBatchPreservesItsThirtyEightExactTargets(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var groups = new[]
+            {
+                ("Windows.Win32.System.Contacts", "windows6.0.6000", new[]
+                {
+                    "IContactManager", "IContactCollection", "IContactProperties", "IContact", "IContactPropertyCollection",
+                }),
+                ("Windows.Win32.Storage.FileHistory", "windows8.0", new[]
+                {
+                    "IFhTarget", "IFhScopeIterator", "IFhConfigMgr", "IFhReassociation",
+                }),
+                ("Windows.Win32.Networking.NetworkListManager", "windows6.0.6000", new[]
+                {
+                    "INetworkListManager", "INetworkListManagerEvents", "INetwork", "IEnumNetworks", "INetworkEvents",
+                    "INetworkConnection", "IEnumNetworkConnections", "INetworkConnectionEvents",
+                }),
+                ("Windows.Win32.Networking.NetworkListManager", "windows8.0", new[]
+                {
+                    "INetworkCostManager", "INetworkCostManagerEvents", "INetworkConnectionCost", "INetworkConnectionCostEvents",
+                }),
+                ("Windows.Win32.Networking.RemoteDifferentialCompression", "windows6.0.6000", new[]
+                {
+                    "IRdcGeneratorParameters", "IRdcGeneratorFilterMaxParameters", "IRdcGenerator",
+                    "IRdcFileReader", "IRdcFileWriter", "IRdcSignatureReader", "IRdcComparator", "IRdcLibrary",
+                    "ISimilarityReportProgress", "ISimilarityTableDumpState", "ISimilarityTraitsMappedView",
+                    "ISimilarityTraitsMapping", "ISimilarityTraitsTable", "ISimilarityFileIdTable",
+                    "IRdcSimilarityGenerator", "IFindSimilarResults", "ISimilarity",
+                }),
+            };
+            Assert.Equal(38, groups.Sum(group => group.Item3.Length));
+            foreach (var group in groups)
+                foreach (string name in group.Item3)
+                {
+                    var before = Type(control.Reader, name, architecture, group.Item1);
+                    var after = Type(current.Reader, name, architecture, group.Item1);
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(control.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            this.output.WriteLine($"Architecture {architecture}: all 38 second-batch original-IDL interface floors remain exact.");
+        }
+
+        [MigrationFact]
+        public void SecondOriginalIdlBatchHasOnlyItsOneLiteralNativeRetvalDelta()
+        {
+            const string site = "Windows.Win32.Networking.NetworkListManager.INetworkConnection2#124";
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            var changed = new List<string>();
+            foreach (var entry in before)
+            {
+                string expected = SnapshotType(control.Reader, entry.Value);
+                string actual = SnapshotType(current.Reader, after[entry.Key]);
+                if (expected == actual) continue;
+                Assert.Equal(site, entry.Key);
+                string[] oldRows = expected.Split('\n'), newRows = actual.Split('\n');
+                Assert.Equal(oldRows.Length, newRows.Length);
+                int index = Assert.Single(Enumerable.Range(0, oldRows.Length).Where(row => oldRows[row] != newRows[row]));
+                Assert.StartsWith("M|IsDomainAuthenticatedBy|", oldRows.Take(index)
+                    .Last(row => row.StartsWith("M|", StringComparison.Ordinal)));
+                Assert.Equal("P|2|pValue|Out||", oldRows[index]);
+                Assert.Equal("P|2|pValue|Out||" + MetadataNamespace + ".RetValAttribute:01000000", newRows[index]);
+                changed.Add(entry.Key);
+            }
+            Assert.Equal(new[] { site }, changed);
+            this.output.WriteLine("All 37,314 physical type snapshots compared literally: exactly one native " +
+                "INetworkConnection2.IsDomainAuthenticatedBy::pValue RetValAttribute addition; no other row changed.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NativeDomainAuthenticationRetvalPreservesCliFlagsAndSignature(int architecture)
+        {
+            const string ns = "Windows.Win32.Networking.NetworkListManager";
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, ns, "INetworkConnection2", architecture)["IsDomainAuthenticatedBy"];
+            var after = Methods(current.Reader, ns, "INetworkConnection2", architecture)["IsDomainAuthenticatedBy"];
+            Assert.Equal(Signature(before.DecodeSignature(Signatures, null)), Signature(after.DecodeSignature(Signatures, null)));
+            var original = Assert.Single(before.GetParameters().Select(control.Reader.GetParameter)
+                .Where(parameter => control.Reader.GetString(parameter.Name) == "pValue"));
+            var parameter = Assert.Single(after.GetParameters().Select(current.Reader.GetParameter)
+                .Where(value => current.Reader.GetString(value.Name) == "pValue"));
+            Assert.Equal(2, original.SequenceNumber);
+            Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+            Assert.Equal(ParameterAttributes.Out, original.Attributes);
+            Assert.Equal(original.Attributes, parameter.Attributes);
+            Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Retval));
+            Assert.Empty(original.GetCustomAttributes());
+            var attribute = Assert.Single(parameter.GetCustomAttributes());
+            Assert.Equal(MetadataNamespace + ".RetValAttribute", AttributeTypeName(current.Reader, attribute));
+            Assert.Equal(new byte[] { 1, 0, 0, 0 }, current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(attribute).Value));
+            this.output.WriteLine($"Architecture {architecture}: native retval/out adds exactly one RetValAttribute; " +
+                "raw CLI Out flags, sequence and complete HRESULT/parameter signature remain unchanged.");
+        }
+
         [Fact]
         public void NativeDwmContactStorageHasNoAuthoredUnderlyingTypeOverride()
         {

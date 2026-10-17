@@ -1,23 +1,37 @@
 diff --git a/um/FhSvcCtl.h b/um/FhSvcCtl.h
-index 9c81aab7..bb0d4e0e 100644
+index 9c81aab7..c20e0c62 100644
 --- a/um/FhSvcCtl.h
 +++ b/um/FhSvcCtl.h
-@@ -49,12 +49,14 @@ typedef enum {
+@@ -49,13 +49,7 @@ typedef enum {
  
  DECLARE_HANDLE (FH_SERVICE_PIPE_HANDLE);
  
-+_Win32_SupportedOS_BEGIN_(Windows8)
-+
- __declspec(deprecated("FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN."))
- HRESULT
- WINAPI
- FhServiceOpenPipe(
-     _In_ BOOL StartServiceIfStopped,
+-__declspec(deprecated("FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN."))
+-HRESULT
+-WINAPI
+-FhServiceOpenPipe(
+-    _In_ BOOL StartServiceIfStopped,
 -    _Out_ FH_SERVICE_PIPE_HANDLE *Pipe
-+    _Out_ _Win32_RAIIFree_(FhServiceClosePipe, -1, 0) FH_SERVICE_PIPE_HANDLE *Pipe
-     );
+-    );
++_Win32_SupportedOS_BEGIN_(Windows8)
  
  __declspec(deprecated("FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+@@ -64,6 +58,14 @@ FhServiceClosePipe(
+     _In_ FH_SERVICE_PIPE_HANDLE Pipe
+     );
+ 
++__declspec(deprecated("FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN."))
++HRESULT
++WINAPI
++FhServiceOpenPipe(
++    _In_ BOOL StartServiceIfStopped,
++    _Out_ _Win32_RAIIFree_(FhServiceClosePipe, -1, 0) FH_SERVICE_PIPE_HANDLE *Pipe
++    );
++
+ __declspec(deprecated("FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN."))
+ HRESULT
+ WINAPI
 @@ -101,6 +103,7 @@ FhServiceUnblockBackup(
      _In_ FH_SERVICE_PIPE_HANDLE Pipe
      );
