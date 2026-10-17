@@ -404,6 +404,22 @@ void SetMode(_Win32_AssociatedEnum_(MODE) DWORD mode);
 _Win32_Enum_(MODE, DWORD, MODE_A, MODE_B);
 ```
 
+A group whose constants have multiple original-header owners may repeat
+`_Win32_Enum_` or `_Win32_FlagsEnum_` on the same native typedef, with the same
+storage and kind. Each owner lists its own existing constants after their native
+definitions. The original Clang declaration graph combines contributions in one
+translation unit; the emitter combines the generated `.header-types.cs` contributions
+by qualified metadata identity after namespace assignment. Keep those producer
+filenames when staging sources for emission.
+
+The complete group is the union of those source-owned contributions, not an empty
+typedef or a replacement native enum. Repeated members must have identical compiled
+values after conversion to the group's storage. Conflicting values, storage, flags,
+or non-repeatable annotations are errors. Ordinary native enums and legacy enum
+definitions are not group contributions and are never merged this way. Keep the
+group declaration visible before an associated use; do not include an unrelated
+API surface merely to borrow its constants.
+
 Rules:
 
 - Use the original underlying integral type, not a type chosen to reproduce a sidecar.

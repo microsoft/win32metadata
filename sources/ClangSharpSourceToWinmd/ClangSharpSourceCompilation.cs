@@ -71,7 +71,7 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
-        private static Architecture GetArchitectureForFileName(string fileName)
+        internal static Architecture GetArchitectureForFileName(string fileName)
         {
             string potentialArch = Path.GetFileName(Path.GetDirectoryName(fileName));
 
@@ -199,6 +199,8 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine($"  {OutputUtils.FormatTimespan(elapsed)}");
 
             ShowMemory();
+
+            HeaderEnumGroupMerger.Merge(modifiedFiles, objDir, arch);
 
             Console.WriteLine($"  Cleaning syntax trees...");
 
