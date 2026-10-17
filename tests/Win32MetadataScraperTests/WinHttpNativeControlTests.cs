@@ -445,7 +445,7 @@ using XINPUT_FLAG = void;
                 string name = Text(cursor.Spelling);
                 if (record || enumeration)
                 {
-                    if (name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
+                    if (cursor.IsAnonymousRecordDecl || name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
                     {
                         ordinals.TryGetValue(header, out int ordinal);
                         ordinals[header] = ordinal + 1;
