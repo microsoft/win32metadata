@@ -1204,6 +1204,186 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
             AssertMetadataClosure(reader);
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void LogicalGroupUnionPreservesPrimitiveAliasesFromConstantsScraper(string architecture, string target)
+        {
+            using var first = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define SUCCESS 0L
+#define NOT_SUPPORTED 50UL
+#define LOCAL_ZERO_1 SUCCESS
+#define LOCAL_ZERO_2 SUCCESS
+#define LOCAL_ZERO_3 SUCCESS
+#define LOCAL_ALIAS_1 NOT_SUPPORTED
+#define LOCAL_ALIAS_2 NOT_SUPPORTED
+#define LOCAL_ALIAS_3 NOT_SUPPORTED
+_Win32_Enum_(ERROR_GROUP, unsigned, SUCCESS, NOT_SUPPORTED);
+");
+            using var extra = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define EXTRA 100U
+_Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
+");
+            Assert.True(first.Run() == 0, first.Diagnostics);
+            Assert.True(extra.Run() == 0, extra.Diagnostics);
+            File.Copy(Path.ChangeExtension(extra.Output, ".header-types.cs"),
+                Path.Combine(Path.GetDirectoryName(first.Output), "Extra.header-types.cs"));
+            string networkHeader = Path.Combine(first.DirectoryPath, "network.h");
+            string printingHeader = Path.Combine(first.DirectoryPath, "printing.h");
+            File.WriteAllText(networkHeader, "#define NETWORK_SUCCESS SUCCESS\n#define NETWORK_NO_ERROR SUCCESS\n" +
+                string.Join("\n", Enumerable.Range(1, 40).Select(index => $"#define NETWORK_ALIAS_{index} NOT_SUPPORTED")));
+            File.WriteAllText(printingHeader, "#define PRINTING_ALIAS NOT_SUPPORTED\n");
+            MetadataUtils.ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", first.DirectoryPath,
+                "using static Test.ERROR_GROUP;\n", new HashSet<string>(), new Dictionary<string, string>
+                {
+                    [first.Header] = "Test",
+                    [networkHeader] = "Network",
+                    [printingHeader] = "Printing",
+                }, new Dictionary<string, string>(), new Dictionary<string, string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>());
+            Assert.Contains("public const int NETWORK_SUCCESS = SUCCESS;",
+                File.ReadAllText(Path.Combine(first.DirectoryPath, "Network.constants.cs")));
+            Assert.Contains("public const uint PRINTING_ALIAS = NOT_SUPPORTED;",
+                File.ReadAllText(Path.Combine(first.DirectoryPath, "Printing.constants.cs")));
+            using var image = Emit(first, architecture);
+            var reader = image.Reader;
+            Assert.Equal(new[] { "value__", "SUCCESS", "NOT_SUPPORTED", "EXTRA" },
+                FindType(reader, "ERROR_GROUP").GetFields().Select(handle =>
+                    reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            var aliases = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "Apis" &&
+                    reader.GetString(type.Namespace) is "Test" or "Network" or "Printing")
+                .SelectMany(type => type.GetFields()).Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(49, aliases.Length);
+            foreach (var alias in aliases)
+            {
+                var constant = reader.GetConstant(alias.GetDefaultValue());
+                var blob = reader.GetBlobReader(constant.Value);
+                string name = reader.GetString(alias.Name);
+                if (name is "NETWORK_SUCCESS" or "NETWORK_NO_ERROR" || name.StartsWith("LOCAL_ZERO_", StringComparison.Ordinal))
+                {
+                    Assert.Equal("Int32", alias.DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(ConstantTypeCode.Int32, constant.TypeCode);
+                    Assert.Equal(0, blob.ReadInt32());
+                }
+                else
+                {
+                    Assert.Equal("UInt32", alias.DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                    Assert.Equal(50U, blob.ReadUInt32());
+                }
+                Assert.True(alias.Attributes.HasFlag(FieldAttributes.Literal));
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Fact]
+        public void LogicalGroupsDoNotImplicitlyConvertOrdinaryNativeEnumConstants()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
+enum class NATIVE_GROUP : unsigned { NativeFirst = 2 };
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "NativeAlias.constants.cs"),
+                "namespace Test { public static partial class Apis { public const uint NativeAlias = NATIVE_GROUP.NativeFirst; } }");
+            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+            Assert.Contains("CS0266", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void LogicalGroupScalarAliasesPreserveIntegralStorageAndExpressions(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define ONE 1ULL
+#define BYTE_MAX 255ULL
+#define SHORT_MAX 32767ULL
+#define USHORT_MAX 65535ULL
+#define INT_MAX 2147483647ULL
+#define UINT_MAX 4294967295ULL
+#define LONG_MAX 9223372036854775807ULL
+#define ULONG_MAX 18446744073709551615ULL
+#define NEGATIVE -1LL
+_Win32_Enum_(WIDE_GROUP, unsigned long long, ONE, BYTE_MAX, SHORT_MAX, USHORT_MAX, INT_MAX, UINT_MAX, LONG_MAX, ULONG_MAX);
+_Win32_Enum_(SIGNED_GROUP, long long, NEGATIVE);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.manual.cs"), @"
+using Scalar = System.UInt32;
+using static Test.WIDE_GROUP;
+namespace Consumers {
+public static partial class Apis {
+    public const sbyte SmallSigned = ONE + 126;
+    public const byte SmallUnsigned = BYTE_MAX;
+    public const short Short = SHORT_MAX;
+    public const ushort UShort = USHORT_MAX;
+    public const char Character = USHORT_MAX;
+    public const int Int = INT_MAX;
+    public const Scalar UInt = UINT_MAX;
+    public const long Long = LONG_MAX;
+    public const ulong ULong = ULONG_MAX;
+    public const int Negative = Test.SIGNED_GROUP.NEGATIVE;
+    public const uint AlreadyCast = (uint)UINT_MAX;
+    public const uint AliasChain = UInt;
+}}
+");
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var expected = new Dictionary<string, (ConstantTypeCode Code, string Signature, object Value)>
+            {
+                ["SmallSigned"] = (ConstantTypeCode.SByte, "SByte", sbyte.MaxValue),
+                ["SmallUnsigned"] = (ConstantTypeCode.Byte, "Byte", byte.MaxValue),
+                ["Short"] = (ConstantTypeCode.Int16, "Int16", short.MaxValue),
+                ["UShort"] = (ConstantTypeCode.UInt16, "UInt16", ushort.MaxValue),
+                ["Character"] = (ConstantTypeCode.Char, "Char", char.MaxValue),
+                ["Int"] = (ConstantTypeCode.Int32, "Int32", int.MaxValue),
+                ["UInt"] = (ConstantTypeCode.UInt32, "UInt32", uint.MaxValue),
+                ["Long"] = (ConstantTypeCode.Int64, "Int64", long.MaxValue),
+                ["ULong"] = (ConstantTypeCode.UInt64, "UInt64", ulong.MaxValue),
+                ["Negative"] = (ConstantTypeCode.Int32, "Int32", -1),
+                ["AlreadyCast"] = (ConstantTypeCode.UInt32, "UInt32", uint.MaxValue),
+                ["AliasChain"] = (ConstantTypeCode.UInt32, "UInt32", uint.MaxValue),
+            };
+            var aliases = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Namespace) == "Consumers")
+                .SelectMany(type => type.GetFields()).Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(expected.Count, aliases.Length);
+            foreach (var alias in aliases)
+            {
+                var actual = expected[reader.GetString(alias.Name)];
+                var constant = reader.GetConstant(alias.GetDefaultValue());
+                Assert.Equal(actual.Signature, alias.DecodeSignature(new SignatureNames(), null));
+                Assert.Equal(actual.Code, constant.TypeCode);
+                Assert.Equal(actual.Value, reader.GetBlobReader(constant.Value).ReadConstant(constant.TypeCode));
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("byte", "ERROR_GROUP.TOO_LARGE", "CS0221")]
+        [InlineData("bool", "ERROR_GROUP.FIRST", "CS0029")]
+        [InlineData("OTHER_GROUP", "ERROR_GROUP.FIRST", "CS0266")]
+        [InlineData("uint", "ERROR_GROUP.UNDECLARED", "CS0117")]
+        public void LogicalGroupScalarAliasConversionPreservesErrors(string type, string value, string diagnostic)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 1U
+#define TOO_LARGE 256U
+_Win32_Enum_(ERROR_GROUP, unsigned, FIRST, TOO_LARGE);
+enum class OTHER_GROUP : unsigned { Other = 2 };
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Rejected.constants.cs"),
+                $"namespace Test {{ public static partial class Apis {{ public const {type} Rejected = {value}; }} }}");
+            var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+            Assert.Contains(diagnostic, exception.Message);
+        }
+
         [Fact]
         public void LogicalGroupContributionsAreUnionedAfterNamespaceAssignment()
         {

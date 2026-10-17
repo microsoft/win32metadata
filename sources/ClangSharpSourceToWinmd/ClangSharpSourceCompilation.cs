@@ -319,6 +319,8 @@ namespace ClangSharpSourceToWinmd
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
             }
 
+            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
+
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
 
