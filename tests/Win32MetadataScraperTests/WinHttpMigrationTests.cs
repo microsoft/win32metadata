@@ -33,6 +33,7 @@ namespace Win32MetadataScraperTests
         private const string WebSocketNamespace = "Windows.Win32.Networking.WebSocket";
         private const string FileHistoryNamespace = "Windows.Win32.Storage.FileHistory";
         private const string ProcessSnapshotNamespace = "Windows.Win32.System.Diagnostics.ProcessSnapshotting";
+        private const string DeviceQueryNamespace = "Windows.Win32.Devices.DeviceQuery";
         private const string HidConstant = "HIDP_STATUS_I8242_TRANS_UNKNOWN";
         private const string WerAlias = "WER_SUBMIT_DISCARD_IF_QUEUED";
         private const string HeldDhcpArrayRow = "DHCP_IP_ARRAY::Elements=[NativeArrayInfo(CountParamIndex=0)]";
@@ -40,6 +41,57 @@ namespace Win32MetadataScraperTests
             "|Public, Static, Literal, HasDefault|UInt32|-1|UInt32:80000000||";
         private readonly ITestOutputHelper output;
         private static readonly SignatureNames Signatures = new SignatureNames();
+        internal static readonly string[] DeviceQueryFilterMethods =
+        {
+            "DevCreateObjectQuery", "DevCreateObjectQueryEx", "DevCreateObjectQueryFromId",
+            "DevCreateObjectQueryFromIdEx", "DevCreateObjectQueryFromIds", "DevCreateObjectQueryFromIdsEx",
+            "DevGetObjects", "DevGetObjectsEx",
+        };
+        private static readonly (string Name, int Value)[] DeviceQueryOperatorMembers =
+        {
+            ("DEVPROP_OPERATOR_MODIFIER_NOT", 0x00010000),
+            ("DEVPROP_OPERATOR_MODIFIER_IGNORE_CASE", 0x00020000),
+            ("DEVPROP_OPERATOR_NONE", 0x00000000),
+            ("DEVPROP_OPERATOR_EXISTS", 0x00000001),
+            ("DEVPROP_OPERATOR_NOT_EXISTS", 0x00010001),
+            ("DEVPROP_OPERATOR_EQUALS", 0x00000002),
+            ("DEVPROP_OPERATOR_NOT_EQUALS", 0x00010002),
+            ("DEVPROP_OPERATOR_GREATER_THAN", 0x00000003),
+            ("DEVPROP_OPERATOR_LESS_THAN", 0x00000004),
+            ("DEVPROP_OPERATOR_GREATER_THAN_EQUALS", 0x00000005),
+            ("DEVPROP_OPERATOR_LESS_THAN_EQUALS", 0x00000006),
+            ("DEVPROP_OPERATOR_EQUALS_IGNORE_CASE", 0x00020002),
+            ("DEVPROP_OPERATOR_NOT_EQUALS_IGNORE_CASE", 0x00030002),
+            ("DEVPROP_OPERATOR_BITWISE_AND", 0x00000007),
+            ("DEVPROP_OPERATOR_BITWISE_OR", 0x00000008),
+            ("DEVPROP_OPERATOR_BEGINS_WITH", 0x00000009),
+            ("DEVPROP_OPERATOR_ENDS_WITH", 0x0000000a),
+            ("DEVPROP_OPERATOR_CONTAINS", 0x0000000b),
+            ("DEVPROP_OPERATOR_BEGINS_WITH_IGNORE_CASE", 0x00020009),
+            ("DEVPROP_OPERATOR_ENDS_WITH_IGNORE_CASE", 0x0002000a),
+            ("DEVPROP_OPERATOR_CONTAINS_IGNORE_CASE", 0x0002000b),
+            ("DEVPROP_OPERATOR_LIST_CONTAINS", 0x00001000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH", 0x00002000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH", 0x00003000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS", 0x00004000),
+            ("DEVPROP_OPERATOR_LIST_CONTAINS_IGNORE_CASE", 0x00021000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_BEGINS_WITH_IGNORE_CASE", 0x00022000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_ENDS_WITH_IGNORE_CASE", 0x00023000),
+            ("DEVPROP_OPERATOR_LIST_ELEMENT_CONTAINS_IGNORE_CASE", 0x00024000),
+            ("DEVPROP_OPERATOR_AND_OPEN", 0x00100000),
+            ("DEVPROP_OPERATOR_AND_CLOSE", 0x00200000),
+            ("DEVPROP_OPERATOR_OR_OPEN", 0x00300000),
+            ("DEVPROP_OPERATOR_OR_CLOSE", 0x00400000),
+            ("DEVPROP_OPERATOR_NOT_OPEN", 0x00500000),
+            ("DEVPROP_OPERATOR_NOT_CLOSE", 0x00600000),
+            ("DEVPROP_OPERATOR_ARRAY_CONTAINS", 0x10000000),
+            ("DEVPROP_OPERATOR_MASK_EVAL", 0x00000FFF),
+            ("DEVPROP_OPERATOR_MASK_LIST", 0x0000F000),
+            ("DEVPROP_OPERATOR_MASK_MODIFIER", 0x000F0000),
+            ("DEVPROP_OPERATOR_MASK_NOT_LOGICAL", -267386881),
+            ("DEVPROP_OPERATOR_MASK_LOGICAL", 0x0FF00000),
+            ("DEVPROP_OPERATOR_MASK_ARRAY", -268435456),
+        };
         private static readonly (string Name, uint Bits)[] DwmContactMembers =
         {
             ("DWMSC_DOWN", 1),
@@ -958,13 +1010,59 @@ namespace Win32MetadataScraperTests
                     "RasEapInvokeConfigUI", "RasEapGetIdentity",
                 })
                     Assert.DoesNotContain(name, names);
-                var operators = Type(image.Reader, "DEVPROP_OPERATOR", architecture, "Windows.Win32.Devices.DeviceQuery");
-                var storage = operators.GetFields().Select(image.Reader.GetFieldDefinition)
-                    .Single(field => image.Reader.GetString(field.Name) == "value__");
-                Assert.Equal("UInt32", storage.DecodeSignature(Signatures, null));
             }
-            this.output.WriteLine($"Architecture {architecture}: the existing Eap interface floor and UInt32 device operator " +
-                "storage remain exact; five native third-party provider exports are not invented as imported APIs.");
+            var operators = Type(current.Reader, "DEVPROP_OPERATOR", architecture, DeviceQueryNamespace);
+            AssertDeviceQueryOperatorStorage(current.Reader, operators, signed: true);
+            this.output.WriteLine($"Architecture {architecture}: the existing Eap interface floor remains exact; " +
+                "the device operator uses its API-faithful native Int32 contract, and five third-party provider exports are not invented as imports.");
+        }
+
+        [Fact]
+        public void DeviceQueryRetainsItsOriginalNativeEnumWithoutAnUnsignedOverride()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            Assert.DoesNotContain("um\\devfiltertypes.h.patch",
+                recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()));
+            Assert.False(File.Exists(Path.Combine(root, "patches", "um", "devfiltertypes.h.patch")));
+            Assert.DoesNotContain(File.ReadLines(Path.Combine(root, "scraper.settings.rsp")),
+                line => line.TrimStart().StartsWith("DEVPROP_OPERATOR=", StringComparison.Ordinal));
+            Assert.Contains("enum _DEVPROP_OPERATOR {",
+                File.ReadAllText(Path.Combine(root, "RecompiledIdlHeaders", "um", "devfiltertypes.h")));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void DeviceQueryFilterApisKeepTheNativeOperatorAndExpressionTypes(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var image in new[] { control, current })
+            {
+                var expression = Type(image.Reader, "DEVPROP_FILTER_EXPRESSION", architecture, DeviceQueryNamespace);
+                var field = expression.GetFields().Select(image.Reader.GetFieldDefinition)
+                    .Single(value => image.Reader.GetString(value.Name) == "Operator");
+                Assert.Equal(DeviceQueryNamespace + ".DEVPROP_OPERATOR", field.DecodeSignature(Signatures, null));
+                var methods = Methods(image.Reader, DeviceQueryNamespace, "Apis", architecture);
+                foreach (string name in DeviceQueryFilterMethods)
+                {
+                    var method = methods[name];
+                    var signature = method.DecodeSignature(Signatures, null);
+                    var filter = method.GetParameters().Select(image.Reader.GetParameter)
+                        .Single(value => image.Reader.GetString(value.Name) == "pFilter");
+                    Assert.Equal(DeviceQueryNamespace + ".DEVPROP_FILTER_EXPRESSION*",
+                        signature.ParameterTypes[filter.SequenceNumber - 1]);
+                    var flags = method.GetParameters().Select(image.Reader.GetParameter)
+                        .Single(value => image.Reader.GetString(value.Name) == "QueryFlags");
+                    Assert.NotEqual(DeviceQueryNamespace + ".DEVPROP_OPERATOR", signature.ParameterTypes[flags.SequenceNumber - 1]);
+                }
+            }
+            AssertDeviceQueryOperatorStorage(current.Reader,
+                Type(current.Reader, "DEVPROP_OPERATOR", architecture, DeviceQueryNamespace), signed: true);
+            this.output.WriteLine($"Architecture {architecture}: all eight filter APIs retain expression pointers; " +
+                "Operator retains DEVPROP_OPERATOR, separate from QueryFlags, with all 42 exact signed values and raw bits.");
         }
 
         internal static IEnumerable<(string Header, string[] Functions, string[] WithoutLastError)> AuthoredMonitorHeaderContracts()
@@ -1110,9 +1208,26 @@ namespace Win32MetadataScraperTests
                 var next = after[entry.Key];
                 Assert.Equal(original.GetFields().Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
                     next.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
-                Assert.Equal(SnapshotType(control.Reader, original), SnapshotType(current.Reader, next));
+                if (entry.Key == DeviceQueryNamespace + ".DEVPROP_OPERATOR#124")
+                {
+                    var storage = original.GetFields().Select(control.Reader.GetFieldDefinition)
+                        .Single(field => control.Reader.GetString(field.Name) == "value__");
+                    string signature = storage.DecodeSignature(Signatures, null);
+                    Assert.Contains(signature, new[] { "UInt32", "Int32" });
+                    AssertDeviceQueryOperatorStorage(control.Reader, original, signed: signature == "Int32");
+                    AssertDeviceQueryOperatorStorage(current.Reader, next, signed: true);
+                    Assert.Equal(original.GetCustomAttributes().Select(handle =>
+                        AttributeTypeName(control.Reader, handle) + ":" +
+                        Convert.ToHexString(control.Reader.GetBlobBytes(control.Reader.GetCustomAttribute(handle).Value))),
+                        next.GetCustomAttributes().Select(handle =>
+                            AttributeTypeName(current.Reader, handle) + ":" +
+                            Convert.ToHexString(current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(handle).Value))));
+                }
+                else
+                    Assert.Equal(SnapshotType(control.Reader, original), SnapshotType(current.Reader, next));
             }
-            this.output.WriteLine("All physical type snapshots and literal type/field/method sequences match without normalization.");
+            this.output.WriteLine("Every other physical type snapshot and all literal sequences match without normalization; " +
+                "only DEVPROP_OPERATOR's explicitly checked Int32 storage/constant-type correction is accepted, with all 42 member bytes unchanged.");
         }
 
         [MigrationTheory]
@@ -3561,6 +3676,34 @@ namespace Win32MetadataScraperTests
 
         private static void AssertHidConstant(MetadataReader reader, FieldDefinition field)
             => AssertNativeLiteral(reader, field, "Windows.Win32.Foundation.NTSTATUS", ConstantTypeCode.Int32, new byte[] { 9, 0, 0x11, 0xc0 });
+
+        private static void AssertDeviceQueryOperatorStorage(MetadataReader reader, TypeDefinition type, bool signed)
+        {
+            Assert.Equal(DeviceQueryNamespace, reader.GetString(type.Namespace));
+            Assert.Equal("DEVPROP_OPERATOR", reader.GetString(type.Name));
+            Assert.Equal("System.Enum", FullName(reader, type.BaseType));
+            Assert.Equal(TypeAttributes.Public | TypeAttributes.Sealed, type.Attributes);
+            Assert.Equal(0, type.GetLayout().PackingSize);
+            Assert.Equal(0, type.GetLayout().Size);
+            Assert.Empty(type.GetMethods());
+            Assert.Empty(type.GetProperties());
+            Assert.Empty(type.GetEvents());
+            Assert.Empty(type.GetGenericParameters());
+            Assert.Empty(type.GetInterfaceImplementations());
+            Assert.Empty(type.GetNestedTypes());
+            var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "value__" }.Concat(DeviceQueryOperatorMembers.Select(value => value.Name)),
+                fields.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(FieldAttributes.Public | FieldAttributes.SpecialName | FieldAttributes.RTSpecialName, fields[0].Attributes);
+            Assert.Equal(signed ? "Int32" : "UInt32", fields[0].DecodeSignature(Signatures, null));
+            Assert.Equal(-1, fields[0].GetOffset());
+            Assert.True(fields[0].GetDefaultValue().IsNil);
+            Assert.True(fields[0].GetMarshallingDescriptor().IsNil);
+            Assert.Empty(fields[0].GetCustomAttributes());
+            for (int index = 0; index < DeviceQueryOperatorMembers.Length; index++)
+                AssertNativeLiteral(reader, fields[index + 1], DeviceQueryNamespace + ".DEVPROP_OPERATOR",
+                    signed ? ConstantTypeCode.Int32 : ConstantTypeCode.UInt32, BitConverter.GetBytes(DeviceQueryOperatorMembers[index].Value));
+        }
 
         private static void AssertDwmContactStorage(MetadataReader reader, TypeDefinition type, bool signed)
         {

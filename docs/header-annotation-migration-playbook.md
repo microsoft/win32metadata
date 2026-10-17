@@ -2449,3 +2449,42 @@ rows, native branch/value/type and literal-order gates, missing-IDL
 originals, field-array exclusions and the other source blockers retain
 their existing dispositions. No PR, branch or stack publication is
 changed by this local cohort.
+
+### DeviceQuery API-faithful Int32 target
+
+The native Int32 representation is now the specifically authorized
+DeviceQuery compatibility correction. Original `devfiltertypes.h`
+declares `DEVPROP_FILTER_EXPRESSION.Operator` as `DEVPROP_OPERATOR`;
+the six `DevCreateObjectQuery` variants and `DevGetObjects`/`Ex`
+accept pointers to that expression. This operator is not the
+separate ULONG `QueryFlags`. The documented UInt32 property operand
+for bitwise operations does not redefine the operator enum's storage.
+The original SDK and all three native targets establish signed
+32-bit storage.
+
+The unsigned-native-retyping patch and its recipe reference are
+removed. The SDK header is unchanged, and the already-absent
+`DEVPROP_OPERATOR=uint` override is not restored. No projection-only
+annotation, native cast, alias, helper or shared-tooling feature is
+introduced. The accepted compatibility boundary is exactly the
+previously measured **45 raw rows**: 42 constant type codes and
+`value__` storage change from UInt32 to Int32, while
+`MASK_NOT_LOGICAL` becomes -267386881 and `MASK_ARRAY` becomes
+-268435456. All 42 four-byte values, identities, order and flags
+must remain unchanged.
+
+Fresh acceptance requires that explicit Int32 target, the exact
+42-member native value/bit-pattern vector, unchanged operator field
+and eight filter-API signatures, and strict equality for every other
+physical type and API. Whole-owner native controls now include
+`devfiltertypes.h`, `devquery.h` and `devquerydef.h`, preserving the
+full native/SAL contract. The original `E731FA60...` failures and
+`BF8E6745...` measured negative receipt remain immutable historical
+evidence; they are not rewritten as passing cases.
+
+Corresponding committed-source preparation, complete-owner traversal
+and full-image first/repeat qualification remain required before
+counting DeviceQuery locally qualified. Until that evidence closes,
+the ledger remains **29 of 50**. This decision does not change
+WNet/RPC, other source blockers, consumer-effect grades, owning
+current-head CI or publication.

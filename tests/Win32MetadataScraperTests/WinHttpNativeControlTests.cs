@@ -428,13 +428,14 @@ static_assert(DISC_NO_FORCE == 64u);
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
-            var before = Surface(root, original, partition, architecture, target, new[] { header }, "",
+            string[] headers = header == "devfiltertypes.h" ? new[] { header, "devquery.h", "devquerydef.h" } : new[] { header };
+            var before = Surface(root, original, partition, architecture, target, headers, "",
                 salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
-            var after = Surface(root, prepared, partition, architecture, target, new[] { header }, "", metadataEnabled: enabled,
+            var after = Surface(root, prepared, partition, architecture, target, headers, "", metadataEnabled: enabled,
                 annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
-            if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h" or "devfiltertypes.h")
+            if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h")
                 Assert.Empty(beforeSal);
             else
                 Assert.NotEmpty(beforeSal);
@@ -445,9 +446,26 @@ static_assert(DISC_NO_FORCE == 64u);
             Assert.Equal((enabled ? expected : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
                 annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
             if (header == "devfiltertypes.h")
+            {
+                Assert.Contains("enum _DEVPROP_OPERATOR int", before);
+                Assert.Contains(before, value => value.StartsWith("field _DEVPROP_FILTER_EXPRESSION::Operator ",
+                    StringComparison.Ordinal) && value.Contains("_DEVPROP_OPERATOR", StringComparison.Ordinal) &&
+                    value.EndsWith(" 0", StringComparison.Ordinal));
+                foreach (string name in WinHttpMigrationTests.DeviceQueryFilterMethods)
+                {
+                    var functions = before.Where(value => value.StartsWith("function " + name + " ",
+                        StringComparison.Ordinal)).ToArray();
+                    Assert.NotEmpty(functions);
+                    Assert.All(functions, value => Assert.True(
+                        value.Contains("const struct _DEVPROP_FILTER_EXPRESSION *", StringComparison.Ordinal) ||
+                        value.Contains("const _DEVPROP_FILTER_EXPRESSION *", StringComparison.Ordinal), value));
+                    foreach (string fact in functions)
+                        this.output.WriteLine("native-filter-api " + fact);
+                }
                 foreach (var side in new[] { ("before", before), ("after", after) })
                     foreach (string fact in side.Item2.Where(value =>
-                        value.StartsWith("enum ", StringComparison.Ordinal) || value.StartsWith("value ", StringComparison.Ordinal)))
+                        value.StartsWith("enum ", StringComparison.Ordinal) || value.StartsWith("value ", StringComparison.Ordinal) ||
+                        value.StartsWith("field _DEVPROP_FILTER_EXPRESSION::Operator ", StringComparison.Ordinal)))
                     {
                         string detail = fact;
                         if (fact.StartsWith("value ", StringComparison.Ordinal))
@@ -459,6 +477,7 @@ static_assert(DISC_NO_FORCE == 64u);
                         }
                         this.output.WriteLine(side.Item1 + " " + detail);
                     }
+            }
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
