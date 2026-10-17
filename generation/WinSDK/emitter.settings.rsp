@@ -443,14 +443,10 @@ IDirectorySearch::GetNextColumnName=[CanReturnMultipleSuccessValues]
 IEnumSpellingError::Next=[CanReturnMultipleSuccessValues]
 IEnumString::Next=[CanReturnMultipleSuccessValues]
 IEnumString::Skip=[CanReturnMultipleSuccessValues]
-IEnumSTATPROPSTG::Next=[CanReturnMultipleSuccessValues]
-IEnumSTATPROPSTG::Skip=[CanReturnMultipleSuccessValues]
 IEnumMoniker::Next=[CanReturnMultipleSuccessValues]
 IEnumMoniker::Skip=[CanReturnMultipleSuccessValues]
 IEnumWorkItems::Next=[CanReturnMultipleSuccessValues]
 IEnumWorkItems::Skip=[CanReturnMultipleSuccessValues]
-IEnumSTATPROPSETSTG::Next=[CanReturnMultipleSuccessValues]
-IEnumSTATPROPSETSTG::Skip=[CanReturnMultipleSuccessValues]
 IEnumVARIANT::Next=[CanReturnMultipleSuccessValues]
 IEnumVARIANT::Skip=[CanReturnMultipleSuccessValues]
 IEnumGUID::Next=[CanReturnMultipleSuccessValues]
@@ -836,8 +832,6 @@ IDebugFormatter::GetStringForVarType::vt=VARENUM
 DBPROPINFO::vtType=VARENUM
 KAGREQDIAG::vt=VARENUM
 SHCOLUMNINFO::vt=VARENUM
-PROPVARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM
-STATPROPSTG::vt=VARENUM
 TYPEDESC::vt=VARENUM
 PARAMDATA::vt=VARENUM
 METHODDATA::vtReturn=VARENUM
@@ -1602,7 +1596,6 @@ SymGetHomeDirectory::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
 SymGetHomeDirectoryW::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
 SymGetSymbolFile::Type=[AssociatedEnum("IMAGEHLP_SF_TYPE")]
 SymGetSymbolFileW::Type=[AssociatedEnum("IMAGEHLP_SF_TYPE")]
-VerifierEnumerateResource::ResourceType=[AssociatedEnum("eAvrfResourceTypes")]
 VS_FIXEDFILEINFO::dwFileSubtype=[AssociatedEnum("VS_FIXEDFILEINFO_FILE_SUBTYPE")]
 VS_FIXEDFILEINFO::dwFileType=[AssociatedEnum("VS_FIXEDFILEINFO_FILE_TYPE")]
 WINDOWPLACEMENT::showCmd=[AssociatedEnum("SHOW_WINDOW_CMD")]
@@ -2533,8 +2526,6 @@ GetOwnerModuleFromUdp6Entry::pBuffer=[ContainsInteriorPointers]
 HttpQueryServiceConfiguration::pOutput=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate
 HttpReceiveClientCertificate::SslClientCertInfo=[ContainsInteriorPointers]
-# https://learn.microsoft.com/windows/win32/api/winhttp/nf-winhttp-winhttpqueryheadersex
-WinHttpQueryHeadersEx::pBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex

@@ -1,0 +1,24 @@
+diff --git a/um/avrfsdk.h b/um/avrfsdk.h
+index a2c5a112..4d23b1f7 100644
+--- a/um/avrfsdk.h
++++ b/um/avrfsdk.h
+@@ -140,11 +140,17 @@ typedef ULONG
+ #define AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             0x00000001
+ #define AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES 0x00000002
+ 
++
++_Win32_FlagsEnum_(VERIFIER_ENUM_RESOURCE_FLAGS, ULONG,
++    AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES,
++    AVRF_ENUM_RESOURCES_FLAGS_SUSPEND);
++
++_Win32_ImportLibrary_("verifier.dll")
+ ULONG NTAPI
+ VerifierEnumerateResource(
+     HANDLE Process,
+-    ULONG  Flags,    
+-    ULONG  ResourceType,
++    _Win32_AssociatedEnum_(VERIFIER_ENUM_RESOURCE_FLAGS) ULONG  Flags,
++    _Win32_AssociatedEnum_(enum eAvrfResourceTypes) ULONG  ResourceType,
+     AVRF_RESOURCE_ENUMERATE_CALLBACK ResourceCallback,
+     PVOID  EnumerationContext
+     );

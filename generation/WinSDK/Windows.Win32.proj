@@ -46,6 +46,9 @@
 
   <PropertyGroup>
     <SdkIncRoot>$(MSBuildThisFileDirectory)RecompiledIdlHeaders</SdkIncRoot>
+    <SdkHeaderRecipe Condition="'$(SdkHeaderRecipe)' == ''">$(MSBuildThisFileDirectory)patches\SdkHeaders.json</SdkHeaderRecipe>
+    <SdkHeaderSourceRoot Condition="'$(SdkHeaderSourceRoot)' == ''">$(SdkIncRoot)</SdkHeaderSourceRoot>
+    <SdkHeaderOutputRoot Condition="'$(SdkHeaderOutputRoot)' == ''">$(RepoRootPath)artifacts\prepared-sdk</SdkHeaderOutputRoot>
     <AdditionalIncludes>$(MSBuildProjectDirectory)\inc</AdditionalIncludes>
     <ShowEmitWinmdOutputDetails>true</ShowEmitWinmdOutputDetails>
 
@@ -65,4 +68,40 @@
   </ItemGroup>
 
   <Import Project="..\..\sources\GeneratorSdk\sdk\sdk.targets" />
+
+  <Target Name="PrepareSdkHeaders" BeforeTargets="CompileIdls">
+    <Message Text="Preparing SDK headers..." Importance="high" />
+    <Exec Command="pwsh -NoLogo -NoProfile -NonInteractive -Command &quot;(&amp; '$(RepoRootPath)scripts\Prepare-SdkHeaders.ps1' -Recipe '$(SdkHeaderRecipe)' -SourceRoot '$(SdkHeaderSourceRoot)' -OutputRoot '$(SdkHeaderOutputRoot)' -SdkPackageRoot '$(SdkHeaderSdkPackageRoot)').IncludeRoot&quot;"
+          ConsoleToMSBuild="true" StandardOutputImportance="low">
+      <Output TaskParameter="ConsoleOutput" ItemName="_PreparedSdkIncludeRoot" />
+    </Exec>
+    <Error Condition="'@(_PreparedSdkIncludeRoot->Count())' != '1'"
+           Text="Header preparation did not return exactly one private include root." />
+    <ReadLinesFromFile File="$(ObjDir)\prepared-sdk.txt" Condition="Exists('$(ObjDir)\prepared-sdk.txt')">
+      <Output TaskParameter="Lines" ItemName="_PreviousSdkIncludeRoot" />
+    </ReadLinesFromFile>
+    <PropertyGroup>
+      <SdkIncRoot>@(_PreparedSdkIncludeRoot)</SdkIncRoot>
+    </PropertyGroup>
+    <Error Condition="'$(SdkIncRoot)' != '@(_PreparedSdkIncludeRoot)'"
+           Text="SdkIncRoot must use the pinned prepared headers returned by Prepare-SdkHeaders.ps1." />
+    <ItemGroup Condition="'@(_PreviousSdkIncludeRoot)' != '$(SdkIncRoot)'">
+      <_StaleSdkScrapeMarker Include="$(GeneratedDir)\scannedheaders.*.txt;$(ScrapedConstantsMarker)" />
+    </ItemGroup>
+    <Delete Files="@(_StaleSdkScrapeMarker)" />
+    <MakeDir Directories="$(ObjDir)" />
+    <WriteLinesToFile File="$(ObjDir)\prepared-sdk.txt" Lines="$(SdkIncRoot)" Overwrite="true"
+                      WriteOnlyWhenDifferent="true" />
+    <PropertyGroup>
+      <_PreparedSdkCache>$([System.IO.Path]::GetDirectoryName('$(SdkIncRoot)'))</_PreparedSdkCache>
+      <_PreparedSdkIdentity>$([System.IO.Path]::GetFileName('$(_PreparedSdkCache)'))</_PreparedSdkIdentity>
+      <_PreparedSdkProvenance>$(ObjDir)\prepared-sdk-provenance\$(ScanArch)\$(_PreparedSdkIdentity)</_PreparedSdkProvenance>
+    </PropertyGroup>
+    <ItemGroup>
+      <_PreparedMidlEvidence Include="$(_PreparedSdkCache)\midl\**\*" />
+    </ItemGroup>
+    <Copy SourceFiles="$(_PreparedSdkCache)\manifest.json" DestinationFolder="$(_PreparedSdkProvenance)" />
+    <Copy SourceFiles="@(_PreparedMidlEvidence)"
+          DestinationFiles="@(_PreparedMidlEvidence->'$(_PreparedSdkProvenance)\midl\%(RecursiveDir)%(Filename)%(Extension)')" />
+  </Target>
 </Project>

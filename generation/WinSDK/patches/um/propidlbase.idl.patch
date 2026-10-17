@@ -1,0 +1,66 @@
+diff --git a/um/propidlbase.idl b/um/propidlbase.idl
+index ad551dd7..d0332652 100644
+--- a/um/propidlbase.idl
++++ b/um/propidlbase.idl
+@@ -1,4 +1,5 @@
+ cpp_quote("#include <winapifamily.h>")
++#include <sal.h>
+ 
+ //+---------------------------------------------------------------------------
+ //
+@@ -44,6 +45,11 @@ cpp_quote("#ifndef _PROPIDLBASE_")
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IPropertyStorage, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(IPropertySetStorage, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(IEnumSTATPROPSTG, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(IEnumSTATPROPSETSTG, _Win32_SupportedOS_Windows2000_)
++
+ interface IPropertyStorage;
+ interface IEnumSTATPROPSTG;
+ interface IEnumSTATPROPSETSTG;
+@@ -159,7 +165,7 @@ cpp_quote("  union {")
+ cpp_quote("#endif")
+ struct tag_inner_PROPVARIANT
+ {
+-    VARTYPE vt;
++    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE vt;
+     PROPVAR_PAD1   wReserved1;
+     PROPVAR_PAD2   wReserved2;
+     PROPVAR_PAD3   wReserved3;
+@@ -323,10 +329,12 @@ const ULONG PRSPEC_INVALID = 0xffffffff;
+ const ULONG PRSPEC_LPWSTR = 0;
+ const ULONG PRSPEC_PROPID = 1;
+ 
++cpp_quote("_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);")
++
+ typedef struct tagPROPSPEC
+ {
+ 
+-    ULONG   ulKind;
++    [annotation("_Win32_AssociatedEnum_(PROPSPEC_KIND)")] ULONG   ulKind;
+     [switch_is(ulKind)] union
+     {
+         [case(PRSPEC_PROPID)]
+@@ -343,7 +351,7 @@ typedef struct tagSTATPROPSTG
+ 
+     LPOLESTR    lpwstrName;
+     PROPID      propid;
+-    VARTYPE     vt;
++    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE     vt;
+ 
+ } STATPROPSTG;
+ 
+@@ -617,6 +625,11 @@ interface IEnumSTATPROPSETSTG : IUnknown
+ 
+ typedef [unique] IPropertyStorage * LPPROPERTYSTORAGE;
+ 
++_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Next, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Skip, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumSTATPROPSETSTG::Next, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumSTATPROPSETSTG::Skip, _Win32_PreserveResult_)
++
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
+ #pragma endregion
+ cpp_quote("")

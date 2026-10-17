@@ -1,0 +1,259 @@
+{
+  "schemaVersion": 1,
+  "sdkPackageVersion": "10.0.26100.7705",
+  "sourceStage": "post-midl",
+  "sourceGitTree": "8b7d1b2d7806c4767ac056cc9c8d2db3a6ab677d",
+  "headers": [
+    {
+      "path": "shared\\sal.h",
+      "sourceSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+      "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+    },
+    {
+      "path": "um\\winhttp.h",
+      "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winhttp.h",
+      "sdkSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2"
+    },
+    {
+      "path": "um\\httprequest.h",
+      "sourceSha256": "84D9B00F3AC18FAC5A97DB772FE486CA80BF80BDCF6F46F98CA31D3FD1636F93",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\httprequest.idl",
+      "sdkSha256": "671F997E30FF1108FF4C7FB03631B3E4B1CABF05B8A31D14F5E4802D6FA997AE"
+    },
+    {
+      "path": "um\\windowsceip.h",
+      "sourceSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\windowsceip.h",
+      "sdkSha256": "E36C721AC6CFB49C05C88380C3A9557C75A7E564DB52C5E039565FE0FEC8E98A"
+    },
+    {
+      "path": "um\\avrfsdk.h",
+      "sourceSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\avrfsdk.h",
+      "sdkSha256": "6E92EEEE0F2C2D18D05662C9E7DB623E4BB0E005384FC86FD53C6525AFB75BB8"
+    },
+    {
+      "path": "um\\magnification.h",
+      "sourceSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\magnification.h",
+      "sdkSha256": "886BA6F9181C1B747FF704E3181BC64980FD60B828366F2B3CC3DD10E8EB7A84"
+    },
+    {
+      "path": "um\\Psapi.h",
+      "sourceSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Psapi.h",
+      "sdkSha256": "4166FBCE43622F469AA46CD1CEA27A73171353DF8101643C2E850124622D5EF9"
+    },
+    {
+      "path": "um\\timezoneapi.h",
+      "sourceSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timezoneapi.h",
+      "sdkSha256": "621C0252A8A831813592C4A95E183A2E7AE55EFBBD7B8AD886AF7D8871FC4D50"
+    },
+    {
+      "path": "um\\timeprov.h",
+      "sourceSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timeprov.h",
+      "sdkSha256": "1B6D2B953BDEB46646F652EF90746911A51891DC32A83A3468EBA502A509F6D0"
+    },
+    {
+      "path": "um\\ual.h",
+      "sourceSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ual.h",
+      "sdkSha256": "8F6F6100CDC709892961807F820DEF6D73101FB1020227EDD9CF1C317560D6EB"
+    },
+    {
+      "path": "um\\TlHelp32.h",
+      "sourceSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\TlHelp32.h",
+      "sdkSha256": "1E9CFA226EDA9E8767EB6A3CDC300DB2CC0986744913D524B6C0C80C435FC9A1"
+    },
+    {
+      "path": "um\\waasapi.h",
+      "sourceSha256": "4BF901F1C9E8E407925DBADE8E022B1EB4D1946CCACA0FF7DEA5F88D8E4A4D45",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+      "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+    },
+    {
+      "path": "um\\waasapitypes.h",
+      "sourceSha256": "D61D87E4A316ECF0CBA6529A38CB48F148ADD0D94C7C81EADC44D9B4D1867738",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapitypes.idl",
+      "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+    },
+    {
+      "path": "um\\PropIdlBase.h",
+      "sourceSha256": "D5F5F8E552BE2D9E7313CA0D4522B02A071ADCA0507642299A2D2293CFBBDD01",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propidlbase.idl",
+      "sdkSha256": "0C7803172E592422CB636DD6E6224F61381CD3D1E043041D0A94854A0C51252C"
+    },
+    {
+      "path": "um\\PropIdl.h",
+      "sourceSha256": "8B76E3D535F092F914F8B82B020318AEC557049E98A6C327419321873868FCE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propidl.idl",
+      "sdkSha256": "6F81BD32D2160425665A7EFB79C16D8FF327BFE0F070E4F2E7DED05817409A6A"
+    },
+    {
+      "path": "um\\wslapi.h",
+      "sourceSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wslapi.h",
+      "sdkSha256": "8FC3666F77C58986F0F6E8427536F4AE301239C8C31844117ED22162EB6D5D49"
+    },
+    {
+      "path": "um\\Xinput.h",
+      "sourceSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Xinput.h",
+      "sdkSha256": "EE657D80B788EEAE76ED0D63932ED8AD619E001D8C2BBA5BF670837F07DDB3B4"
+    }
+  ],
+  "midl": {
+    "tools": [
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midl.exe",
+        "sha256": "53CCBCBC2FF14B2D08D029AD07B3D1AA4FF3B103F712199A15248A6CCCF6D2A3"
+      },
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midlc.exe",
+        "sha256": "D12AFF8A74397601041BEC46552FC8DEE1206DAA97E39600E72A7B1B1A5EF6AB"
+      }
+    ],
+    "inputs": [
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "082E725995B988C14B66FA79FEF3B1E2373529EC3E8AE5703B57293579BC1C07"
+      },
+      {
+        "path": "shared\\sal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+        "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+      },
+      {
+        "path": "shared\\concurrencysal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\concurrencysal.h",
+        "sdkSha256": "1EA9A2E32A6FF298AD7904610CC71028CAA9B172399A579CA90A120D1B1AEC12"
+      },
+      {
+        "path": "um\\waasapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+        "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+      },
+      {
+        "path": "um\\waasapitypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\WaaSAPITypes.idl",
+        "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+      },
+      {
+        "path": "um\\propidlbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\propidlbase.idl",
+        "sdkSha256": "0C7803172E592422CB636DD6E6224F61381CD3D1E043041D0A94854A0C51252C"
+      },
+      {
+        "path": "um\\propidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\propidl.idl",
+        "sdkSha256": "6F81BD32D2160425665A7EFB79C16D8FF327BFE0F070E4F2E7DED05817409A6A"
+      },
+      {
+        "path": "um\\oaidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.idl",
+        "sdkSha256": "5F5A2B0508AFFC22C30289D6F44B08792CE047CD7F41303EBBB7470E2217D6BC"
+      },
+      {
+        "path": "um\\objidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidl.idl",
+        "sdkSha256": "09C1AB7AEF7C01D1552BAA826AAC549C15D1806E9C696B99814FCFF0241DE539"
+      },
+      {
+        "path": "um\\objidlbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidlbase.idl",
+        "sdkSha256": "A31AD8BCEB15641FA625EE1DE35657269B1449BB84DB4F11553D68B410F59E71"
+      },
+      {
+        "path": "um\\unknwn.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwn.idl",
+        "sdkSha256": "2E146DA78625D05E345E7D480A61C5CC54696DD7C713B8FF07D9D36D95363C6C"
+      },
+      {
+        "path": "um\\unknwnbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwnbase.idl",
+        "sdkSha256": "797B7267F24259A02A14455203F9B11309B504C1BFFAF879AF7BC05B8B67A5BC"
+      },
+      {
+        "path": "shared\\wtypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypes.idl",
+        "sdkSha256": "F850757CCEF6092F20A97E955DD64AE2A595E0BF71C09A826A0BDE7C21B36E81"
+      },
+      {
+        "path": "shared\\wtypesbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypesbase.idl",
+        "sdkSha256": "5DFF65DAA90EC39AAE0EB89EC2E7DF1ACD8A8D22E49514E5E062F13DD9B4B564"
+      },
+      {
+        "path": "shared\\basetsd.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\basetsd.h",
+        "sdkSha256": "D35B73F885D7EF7DFD27FCE3762C190C1C952A21E10A3945BCB3D1860C673B12"
+      },
+      {
+        "path": "shared\\guiddef.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\guiddef.h",
+        "sdkSha256": "0C08463FBC5A23A8862E57699E2F30DD14CD3DB4A40903E4FCA9392A57942DAE"
+      },
+      {
+        "path": "um\\oaidl.acf",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.acf",
+        "sdkSha256": "333B0D33450F70D2FB5288D79B11ECF6C4043B933ECB7B7A2A996E3185F714BF"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "um\\waasapitypes.idl",
+        "path": "um\\waasapitypes.h"
+      },
+      {
+        "source": "um\\waasapi.idl",
+        "path": "um\\waasapi.h"
+      },
+      {
+        "source": "um\\propidlbase.idl",
+        "path": "um\\PropIdlBase.h"
+      },
+      {
+        "source": "um\\propidl.idl",
+        "path": "um\\PropIdl.h"
+      }
+    ]
+  },
+  "partitions": [
+    "WinHttp",
+    "HttpServer",
+    "CEIP",
+    "ApplicationVerifier",
+    "Base",
+    "FileHistory",
+    "MagApi",
+    "PsApi1",
+    "PsApi2",
+    "Time",
+    "Ual",
+    "ToolHelp",
+    "UpdateAssessment",
+    "Com.StructuredStorage",
+    "Wsl",
+    "Xinput"
+  ],
+  "patches": [
+    "shared\\sal.h.patch",
+    "um\\waasapi.idl.patch",
+    "um\\propidlbase.idl.patch",
+    "um\\winhttp.h.patch",
+    "um\\windowsceip.h.patch",
+    "um\\avrfsdk.h.patch",
+    "um\\magnification.h.patch",
+    "um\\Psapi.h.patch",
+    "um\\timezoneapi.h.patch",
+    "um\\ual.h.patch",
+    "um\\TlHelp32.h.patch",
+    "um\\wslapi.h.patch",
+    "um\\Xinput.h.patch"
+  ]
+}
