@@ -935,6 +935,163 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"Architecture {architecture}: all 38 second-batch original-IDL interface floors remain exact.");
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void FileHistoryPreservesAllElevenFloorsAndItsExactProducerOwnership(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, FileHistoryNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, FileHistoryNamespace, "Apis", architecture);
+            string[] methods =
+            {
+                "FhServiceOpenPipe", "FhServiceClosePipe", "FhServiceStartBackup", "FhServiceStopBackup",
+                "FhServiceReloadConfiguration", "FhServiceBlockBackup", "FhServiceUnblockBackup",
+            };
+            Assert.Equal(methods, before.Keys);
+            Assert.Equal(new[]
+            {
+                "FhServiceClosePipe", "FhServiceOpenPipe", "FhServiceStartBackup", "FhServiceStopBackup",
+                "FhServiceReloadConfiguration", "FhServiceBlockBackup", "FhServiceUnblockBackup",
+            }, after.Keys);
+            foreach (string name in methods)
+            {
+                var original = before[name];
+                var method = after[name];
+                Assert.Equal(new[] { "windows8.0" },
+                    AttributeValues(control.Reader, original.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(new[] { "windows8.0" },
+                    AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(original.Attributes, method.Attributes);
+                Assert.Equal(original.ImplAttributes, method.ImplAttributes);
+                Assert.Equal(Signature(original.DecodeSignature(Signatures, null)), Signature(method.DecodeSignature(Signatures, null)));
+                Assert.Equal(Import(control.Reader, original), Import(current.Reader, method));
+                var originalParameters = original.GetParameters().Select(control.Reader.GetParameter).ToArray();
+                var parameters = method.GetParameters().Select(current.Reader.GetParameter).ToArray();
+                Assert.Equal(originalParameters.Length, parameters.Length);
+                for (int i = 0; i < parameters.Length; i++)
+                {
+                    var parameter = parameters[i];
+                    Assert.Equal(originalParameters[i].SequenceNumber, parameter.SequenceNumber);
+                    Assert.Equal(control.Reader.GetString(originalParameters[i].Name), current.Reader.GetString(parameter.Name));
+                    Assert.Equal(originalParameters[i].Attributes, parameter.Attributes);
+                    Assert.Empty(Ownership(control.Reader, originalParameters[i].GetCustomAttributes()));
+                    bool producer = name == "FhServiceOpenPipe" && current.Reader.GetString(parameter.Name) == "Pipe";
+                    Assert.Equal(producer ? LifecycleAttributes("FhServiceClosePipe") : Array.Empty<string>(),
+                        Ownership(current.Reader, parameter.GetCustomAttributes()));
+                    if (producer)
+                    {
+                        Assert.Equal(2, parameter.SequenceNumber);
+                        Assert.Equal(ParameterAttributes.Out, parameter.Attributes);
+                    }
+                }
+            }
+            foreach (string name in new[] { "IFhTarget", "IFhScopeIterator", "IFhConfigMgr", "IFhReassociation" })
+                foreach (var image in new[] { control, current })
+                    Assert.Equal(new[] { "windows8.0" },
+                        AttributeValues(image.Reader, Type(image.Reader, name, architecture, FileHistoryNamespace).GetCustomAttributes(),
+                            "SupportedOSPlatformAttribute"));
+
+            var originalHandle = Type(control.Reader, "FH_SERVICE_PIPE_HANDLE", architecture, FileHistoryNamespace);
+            var handle = Type(current.Reader, "FH_SERVICE_PIPE_HANDLE", architecture, FileHistoryNamespace);
+            Assert.Equal(LifecycleAttributes("FhServiceClosePipe"), Ownership(control.Reader, originalHandle.GetCustomAttributes()));
+            Assert.Empty(Ownership(current.Reader, handle.GetCustomAttributes()));
+            Assert.Equal(originalHandle.Attributes, handle.Attributes);
+            Assert.Equal(FullName(control.Reader, originalHandle.BaseType), FullName(current.Reader, handle.BaseType));
+            Assert.Equal(originalHandle.GetLayout().PackingSize, handle.GetLayout().PackingSize);
+            Assert.Equal(originalHandle.GetLayout().Size, handle.GetLayout().Size);
+            Assert.Equal(OtherAttributes(control.Reader, originalHandle.GetCustomAttributes()),
+                OtherAttributes(current.Reader, handle.GetCustomAttributes()));
+            Assert.Equal(SnapshotType(control.Reader, originalHandle).Split('\n').Skip(2),
+                SnapshotType(current.Reader, handle).Split('\n').Skip(2));
+            var produced = after["FhServiceOpenPipe"].DecodeSignature(Signatures, null).ParameterTypes[1];
+            var cleanup = after["FhServiceClosePipe"].DecodeSignature(Signatures, null);
+            Assert.Equal(FileHistoryNamespace + ".FH_SERVICE_PIPE_HANDLE*", produced);
+            Assert.Equal(FileHistoryNamespace + ".FH_SERVICE_PIPE_HANDLE", Assert.Single(cleanup.ParameterTypes));
+            this.output.WriteLine($"FileHistory/{architecture}: seven function and four interface floors retained; " +
+                "unchanged native signatures/imports/CLI flags and handle representation; exact cleanup/invalid values only on OpenPipe::Pipe. " +
+                "The approved original ClosePipe/OpenPipe move also changes their physical method order; it is asserted, not sorted away.");
+
+            static string[] OtherAttributes(MetadataReader reader, CustomAttributeHandleCollection attributes)
+                => attributes.Where(value => AttributeName(reader, value) is not ("RAIIFreeAttribute" or "InvalidHandleValueAttribute"))
+                    .Select(value => AttributeTypeName(reader, value) + ":" +
+                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(value).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        [MigrationFact]
+        public void WholeFileHistoryAndSecondIdlBatchHaveOnlyTheirExactLiteralTypeChanges()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            var changed = new List<string>();
+            foreach (var entry in before)
+            {
+                string expected = SnapshotType(control.Reader, entry.Value);
+                string actual = SnapshotType(current.Reader, after[entry.Key]);
+                if (expected == actual) continue;
+                changed.Add(entry.Key);
+                if (entry.Key == "Windows.Win32.Networking.NetworkListManager.INetworkConnection2#124")
+                    AssertDomainAuthenticationRetvalRows(expected.Split('\n'), actual.Split('\n'));
+                else if (entry.Key == FileHistoryNamespace + ".Apis#124")
+                {
+                    string[] oldRows = expected.Split('\n'), newRows = actual.Split('\n');
+                    Assert.Equal(oldRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)),
+                        newRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)));
+                    var oldMethods = MethodRows(oldRows);
+                    var newMethods = MethodRows(newRows);
+                    Assert.Equal(oldMethods.Keys.OrderBy(value => value), newMethods.Keys.OrderBy(value => value));
+                    foreach (var method in oldMethods)
+                    {
+                        var rows = newMethods[method.Key];
+                        Assert.Equal(method.Value.Count, rows.Count);
+                        if (method.Key != "FhServiceOpenPipe")
+                        {
+                            Assert.Equal(method.Value, rows);
+                            continue;
+                        }
+                        int index = Assert.Single(Enumerable.Range(0, rows.Count)
+                            .Where(i => method.Value[i] != rows[i]));
+                        Assert.Equal("P|2|Pipe|Out||", method.Value[index]);
+                        Assert.Equal("P|2|Pipe|Out||" + string.Join(",", LifecycleAttributes("FhServiceClosePipe")), rows[index]);
+                    }
+                }
+                else
+                    Assert.Equal(FileHistoryNamespace + ".FH_SERVICE_PIPE_HANDLE#124", entry.Key);
+            }
+            Assert.Equal(new[]
+            {
+                "Windows.Win32.Networking.NetworkListManager.INetworkConnection2#124",
+                FileHistoryNamespace + ".Apis#124",
+                FileHistoryNamespace + ".FH_SERVICE_PIPE_HANDLE#124",
+            }.OrderBy(value => value), changed.OrderBy(value => value));
+            this.output.WriteLine("All 37,314 physical type snapshots compared literally. The native Nla RetVal addition, " +
+                "exact FileHistory producer/type lifecycle relocation and approved ClosePipe/OpenPipe physical order are distinct; " +
+                "the per-architecture FileHistory gate checks every affected floor/signature/ownership/header fact.");
+
+            static Dictionary<string, List<string>> MethodRows(string[] rows)
+            {
+                var result = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+                List<string> method = null;
+                foreach (string row in rows)
+                {
+                    if (row.StartsWith("M|", StringComparison.Ordinal))
+                    {
+                        method = new List<string>();
+                        result.Add(row.Split('|')[1], method);
+                    }
+                    method?.Add(row);
+                }
+                return result;
+            }
+        }
+
         [MigrationFact]
         public void SecondOriginalIdlBatchHasOnlyItsOneLiteralNativeRetvalDelta()
         {
@@ -953,12 +1110,7 @@ namespace Win32MetadataScraperTests
                 if (expected == actual) continue;
                 Assert.Equal(site, entry.Key);
                 string[] oldRows = expected.Split('\n'), newRows = actual.Split('\n');
-                Assert.Equal(oldRows.Length, newRows.Length);
-                int index = Assert.Single(Enumerable.Range(0, oldRows.Length).Where(row => oldRows[row] != newRows[row]));
-                Assert.StartsWith("M|IsDomainAuthenticatedBy|", oldRows.Take(index)
-                    .Last(row => row.StartsWith("M|", StringComparison.Ordinal)));
-                Assert.Equal("P|2|pValue|Out||", oldRows[index]);
-                Assert.Equal("P|2|pValue|Out||" + MetadataNamespace + ".RetValAttribute:01000000", newRows[index]);
+                AssertDomainAuthenticationRetvalRows(oldRows, newRows);
                 changed.Add(entry.Key);
             }
             Assert.Equal(new[] { site }, changed);
@@ -1410,11 +1562,6 @@ namespace Win32MetadataScraperTests
                 MetadataNamespace + ".InvalidHandleValueAttribute:0100FFFFFFFFFFFFFFFF0000",
             }, Ownership(current.Reader, snapshot.GetCustomAttributes()));
 
-            static string[] Ownership(MetadataReader reader, CustomAttributeHandleCollection attributes)
-                => attributes.Where(handle => AttributeName(reader, handle) is "RAIIFreeAttribute" or "InvalidHandleValueAttribute")
-                    .Select(handle => AttributeTypeName(reader, handle) + ":" +
-                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
-                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
         [MigrationTheory]
@@ -2908,6 +3055,22 @@ namespace Win32MetadataScraperTests
             }
             return string.Join("\n", rows);
         }
+
+        private static void AssertDomainAuthenticationRetvalRows(string[] before, string[] after)
+        {
+            Assert.Equal(before.Length, after.Length);
+            int index = Assert.Single(Enumerable.Range(0, before.Length).Where(row => before[row] != after[row]));
+            Assert.StartsWith("M|IsDomainAuthenticatedBy|", before.Take(index)
+                .Last(row => row.StartsWith("M|", StringComparison.Ordinal)));
+            Assert.Equal("P|2|pValue|Out||", before[index]);
+            Assert.Equal("P|2|pValue|Out||" + MetadataNamespace + ".RetValAttribute:01000000", after[index]);
+        }
+
+        private static string[] Ownership(MetadataReader reader, CustomAttributeHandleCollection attributes)
+            => attributes.Where(handle => AttributeName(reader, handle) is "RAIIFreeAttribute" or "InvalidHandleValueAttribute")
+                .Select(handle => AttributeTypeName(reader, handle) + ":" +
+                    Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
         private static string[] LifecycleAttributes(string cleanup)
         {

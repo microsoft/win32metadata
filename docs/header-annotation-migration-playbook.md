@@ -1385,7 +1385,8 @@ unprovided, not counted as coverage.
 
 The complete frozen `e263...` replay is materialized again from its three
 actual CI archives, not a post-emission directory. All 830 consumed files,
-including 824 C# files, are rehashed before emission. Current tooling produces
+including 824 C# files, are rehashed before emission. The owning merged tooling,
+including the unpublished alias prototype distinguished below, produces
 `329CF9F02B6F65B45424E432738352F5C5FEEDEA8D4B126F6EB1F00201584E95`,
 with unfiltered API-zero against actual `7C1175B3...`.
 
@@ -1467,3 +1468,117 @@ candidate physical membership/value/flags, raw API and declaration-order
 grades remain unverified. The known source-group declaration-order
 difference remains a separate strict gate, with no normalization or
 allowance. Other original-source batches remain independent.
+
+The retained 43-error witness uses the owning tree's preexisting private
+enum-alias prototype, not the unmodified qualified `217c...` emitter.
+An independent root-tooling replay of the same 836 frozen candidate inputs
+reports 49 errors: those exact 43 plus `DS_S_SUCCESS`,
+`DNS_STATUS_PACKET_UNSECURE`, `SCARD_S_SUCCESS`, `RPC_X_SS_CONTEXT_MISMATCH`,
+`RPC_X_INVALID_BUFFER` and `RPC_X_PIPE_APP_MEMORY`. The six-error boundary
+does not change the original witness. That 58-line prototype remains
+unpublished and must be superseded by the exact qualified generic root
+replacement before publication; neither the pending root implementation
+nor this owning candidate is admitted by focused tests alone. Shared
+tooling remains owned by the root layer, and its forthcoming qualification
+does not waive this layer's original-source or declaration-order gates.
+
+### Whole FileHistory after the qualified native-C correction
+
+Exact released pilot `3767ccd6f10c9b1a4af717bb660cb964a620519b`, including
+qualified root `217c...`, is ordinary-merged at
+`7dc92ae373a28be82687e5110c5bf1bebc4ab64a`. The released receipts and actual
+CI image `1E1AC98A...` are independently rehashed; its unfiltered comparison
+against actual `7C1175B3...` is zero. Both `enum VARENUM` carriers and helper
+`082E...` remain unchanged. The sole inherited production correction is
+the original `avrfsdk.h` association's native `enum eAvrfResourceTypes`
+spelling, not a new alias, generated-header edit or tooling workaround.
+
+Fresh bounded preparation identity
+`D1A8EFF6AC7845E4AABCC3AAE4C6AF4103EAD010AA706C0489342D453F9B15B5`
+uses 25 exact current patches, 47 actual MIDL inputs and 12 regenerated
+headers. It excludes the two held global error-owner contributions.
+The approved moved `FhSvcCtl.h` bytes reproduce SHA256
+`8170172E4D6F515E77430E9D4ACAD3EFB41A9E40F31228EA258A7704DDD53864`.
+No ClosePipe declaration is duplicated or synthesized.
+
+The actual owning FileHistory C17/C++, three-architecture, metadata-off/on
+matrix now passes all 12 cases, including the three retained inherited
+C-on failures. These are libclang native ABI/SAL/diagnostic controls,
+not a claim of an MSVC object-code compilation. They preserve every native
+fact and the exact SAL/diagnostic multisets, expose all seven Windows8
+function floors and the one OpenPipe producer annotation, and require no
+unknown or unused annotation. The same run passes six owning Avrf C17
+controls and 24 Mdm/XML including-context controls: 42 passes, zero skips.
+The separate matched-pristine FhCfg C17/C++/CINTERFACE matrix passes all
+18 cases with its four exact interface floors.
+
+The six previously executed actual FhCfg MIDL commands remain explicitly
+unchanged-source reuse, not a fresh merged-head all-architecture RPC replay.
+All 36 inputs per command, tools, raw logs and preprocessed streams are
+rehashed. All three matched pairs preserve four proxy/IID/dlldata/TLB
+outputs each. Every one of 2,652 file/code/full warning contexts per
+architecture remains literal; 2,617 retain their original source line,
+while the 35 FhCfg warnings move exactly six lines after the one SAL
+include, four interface-annotation lines and separating blank line.
+Original line numbers and raw logs remain recorded rather than rewritten.
+
+The fresh normal FileHistory scrape and its distinct repeat produce one
+literal matching `common\FileHistory.cs`, SHA256
+`F0C3EDD05D86A629E9728B94BB8223B42EE2B907E1FB5CE101EC6C41E2BBE629`.
+All seven selected auxiliary remap/pointer/header inputs also match literally.
+The independent complete constants control again reproduces all 830
+actual parent inputs, including 824 C# files, byte-for-byte. Both complete
+image materializations retain all 1,577 traversal rows and the nine
+explicit absent selected-SDK paths. The candidate combines only the
+eleven previously qualified disjoint sources and this whole FileHistory
+source. Its private frozen-parent autoTypes selection removes only
+FileHistory's type-level cleanup/invalid values, so a global cleanup fact
+cannot mask a missing producer annotation. No production legacy enum is
+restored, and the held global source group is not smuggled into this batch.
+
+The fresh complete control is
+`C57B89E2A93B04A06F63384F2E3465C0AD302BFE78C3943FD6C712573DF9161A`;
+its untouched raw comparison against actual `1E1AC98A...` is zero.
+The complete bounded candidate is
+`33B82E6FF050ED9020B03DFF62285ACB0BDACEB97773990CDF314388E8019066`.
+Against either that actual pilot or the fresh control it has exactly three
+raw rows, SHA256
+`6A72488AEB1930FC0BEB17FE3F493006628D5A51CC770BD42BF34FEE0C55247E`:
+the unchanged native Nla RetVal addition, the existing cleanup/invalid
+values moving onto `FhServiceOpenPipe::Pipe`, and their removal from the
+global `FH_SERVICE_PIPE_HANDLE` type. Against the disjoint `FE8B37D5...`
+image only the latter two rows remain, SHA256
+`747B04B12CC53067650E763A4AAFC93630A38B9A5BC4F5AEEE286301688509D4`.
+The unfiltered same-SDK OLD comparison retains all 206 rows; no difference
+file or normalization is used.
+
+All 37,314 physical type snapshots are compared literally: 37,311 remain
+identical. The three changed physical owners are the Nla interface,
+FileHistory Apis and the FileHistory handle. Exact per-architecture checks
+preserve all eleven FileHistory floors, every signature/import/CLI flag,
+the native handle's layout/fields/methods/nonownership attributes and the
+cleanup function's matching handle argument. Exactly OpenPipe's sequence-2
+Out parameter receives the existing three ownership attributes; every
+nonproducer remains free of them and the global handle loses exactly those
+facts. The original ClosePipe/OpenPipe source move also changes their
+physical method order. That exact swap is measured and asserted, with all
+other method blocks literal; the API comparer alone does not report it.
+No enum or method order is sorted away. Managed projection effects of the
+lifecycle relocation and method ordering remain unmeasured.
+
+The final 32 whole-batch physical/source cases, one retained-disjoint
+literal regression and 14 standard integrity cases pass without skips.
+The earlier regression invocation omitted its required OLD fixture and
+skipped; that invocation is retained as noncoverage, and the fully supplied
+invocation actually passes. The standard bin fixture is restored to its
+original hash. Together with the 60 fresh native cases above these are
+bounded local controls, not a claim of current-head production CI or of
+qualification for the private alias prototype. That prototype stays
+unpublished pending its exact qualified generic replacement.
+
+The earlier raw-eight and native failures remain evidence. All seven lost
+floors are now physically retained, and the Nla CLI Retval bit remains
+unset; neither was waived. The native Nla custom-attribute addition and
+unmeasured consumer effects remain explicit and separate. Global
+WinError/SetupAPI/WNet admission, its declaration-order gate and this
+owner's eventual current-head production CI remain held independently.
