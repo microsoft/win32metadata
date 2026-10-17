@@ -25,7 +25,7 @@ index ad551dd7..d0332652 100644
  struct tag_inner_PROPVARIANT
  {
 -    VARTYPE vt;
-+    [annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt;
++    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE vt;
      PROPVAR_PAD1   wReserved1;
      PROPVAR_PAD2   wReserved2;
      PROPVAR_PAD3   wReserved3;
@@ -48,7 +48,7 @@ index ad551dd7..d0332652 100644
      LPOLESTR    lpwstrName;
      PROPID      propid;
 -    VARTYPE     vt;
-+    [annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE     vt;
++    [annotation("_Win32_AssociatedEnum_(enum VARENUM)")] VARTYPE     vt;
  
  } STATPROPSTG;
  

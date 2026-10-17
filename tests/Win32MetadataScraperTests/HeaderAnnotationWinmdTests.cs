@@ -104,6 +104,37 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
 ";
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void NativeEnumTagsResolveAssociationDeclarationsInCAndCpp(
+            string architecture, string target, string language, string standard)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+enum VARENUM { VT_EMPTY = 0, VT_I4 = 3 };
+typedef struct NATIVE_VARIANT
+{
+    _Win32_AssociatedEnum_(enum VARENUM) unsigned short vt;
+} NATIVE_VARIANT;
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var field = FindType(reader, "NATIVE_VARIANT").GetFields().Select(reader.GetFieldDefinition).Single();
+            Assert.Equal("UInt16", field.DecodeSignature(new SignatureNames(), null));
+            AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "VARENUM");
+            var values = FindType(reader, "VARENUM").GetFields().Select(reader.GetFieldDefinition)
+                .Where(value => !value.GetDefaultValue().IsNil)
+                .Select(value => reader.GetString(value.Name) + "=" +
+                    reader.GetBlobReader(reader.GetConstant(value.GetDefaultValue()).Value).ReadInt32());
+            Assert.Equal(new[] { "VT_EMPTY=0", "VT_I4=3" }, values);
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
