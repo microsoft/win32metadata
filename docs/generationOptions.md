@@ -13,6 +13,24 @@ There are different options you can pass to the scraping and emitting stages to 
 
 Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 metadata project, all partitions share the [generation/WinSDK/scraper.settings.rsp](/generation/WinSDK/scraper.settings.rsp) file. This allows partitions to interpret the headers in the same way.
 
+### Header annotations
+
+```text
+--config
+parse-win32-annotations
+```
+
+This enables all supported header annotations, not just enum associations. The
+scraper reads the annotations from the original Clang AST and emits their metadata
+semantics: supported OS, imports, ownership and invalid values, result and lifetime
+behavior, logical enum groups and associations, and the rest of the supported
+vocabulary. Native declarations and existing SAL remain authoritative.
+
+Use the [annotation specification](copilot/plans/shift-left-annotation-spec.md#attribute-reference)
+for the complete vocabulary, valid targets, and examples. The options below describe
+the existing response-file configuration; API-specific metadata moves into the owning
+SDK header or original IDL.
+
 ### Remapping
 
 ````
@@ -31,7 +49,6 @@ typedef struct fooTag {
 ````
 
 It's not obvious to the scraper that you would rather see FOO instead of fooTag in the metadata, but adding "fooTag=FOO" under the --remap section in baseRemap.rsp will make sure it's scraped as FOO instead of fooTag.
-
 
 ### With type
 

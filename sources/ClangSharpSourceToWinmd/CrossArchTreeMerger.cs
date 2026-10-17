@@ -65,11 +65,16 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
-                if (this.currentArch != Architecture.X86)
+                if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
                 {
-                    return null;
+                    string name = node.Identifier.ValueText;
+                    this.HandleArchSpecific(node, out bool removeNode, out var attributes, ref name);
+                    if (removeNode)
+                        return null;
+                    node = node.WithIdentifier(SyntaxFactory.Identifier(name));
+                    if (attributes != null)
+                        node = node.AddAttributeLists(attributes);
                 }
-
                 return base.VisitEnumDeclaration(node);
             }
 
