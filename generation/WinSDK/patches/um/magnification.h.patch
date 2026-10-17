@@ -1,16 +1,8 @@
 diff --git a/um/magnification.h b/um/magnification.h
-index 1efaf5a4..f2170ba2 100644
+index 1efaf5a4..014c8bf9 100644
 --- a/um/magnification.h
 +++ b/um/magnification.h
-@@ -11,6 +11,7 @@
- #define _INC_MAGNIFIER
- 
- #include <winapifamily.h>
-+#include <win32metadata_annotations.h>
- 
- #pragma region Desktop Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -49,6 +50,11 @@ extern "C" {          // we need to export the C interface
+@@ -49,6 +49,11 @@ extern "C" {          // we need to export the C interface
  #define MW_FILTERMODE_EXCLUDE   0
  #define MW_FILTERMODE_INCLUDE   1
  
@@ -22,7 +14,7 @@ index 1efaf5a4..f2170ba2 100644
  typedef struct tagMAGTRANSFORM
  {
      float v[3][3];
-@@ -72,6 +78,7 @@ typedef struct tagMAGCOLOREFFECT
+@@ -72,6 +77,7 @@ typedef struct tagMAGCOLOREFFECT
  typedef BOOL (CALLBACK* MagImageScalingCallback)(HWND hwnd, void * srcdata, MAGIMAGEHEADER srcheader, void * destdata, MAGIMAGEHEADER destheader, RECT unclipped, RECT clipped, HRGN dirty );
  
  // Public Functions
@@ -30,7 +22,7 @@ index 1efaf5a4..f2170ba2 100644
  BOOL WINAPI MagInitialize();
  BOOL WINAPI MagUninitialize();
  
-@@ -79,19 +86,23 @@ BOOL WINAPI MagSetWindowSource(HWND hwnd, RECT rect);
+@@ -79,19 +85,23 @@ BOOL WINAPI MagSetWindowSource(HWND hwnd, RECT rect);
  BOOL WINAPI MagGetWindowSource(HWND hwnd, RECT *pRect);
  BOOL WINAPI MagSetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);
  BOOL WINAPI MagGetWindowTransform(HWND hwnd, PMAGTRANSFORM pTransform);

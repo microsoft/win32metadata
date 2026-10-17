@@ -1,16 +1,8 @@
 diff --git a/um/TlHelp32.h b/um/TlHelp32.h
-index c712ccb4..15284e50 100644
+index c712ccb4..d4202bf5 100644
 --- a/um/TlHelp32.h
 +++ b/um/TlHelp32.h
-@@ -17,6 +17,7 @@
- #pragma once
- #endif
- #include <winapifamily.h>
-+#include <win32metadata_annotations.h>
- 
- #pragma region Desktop Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -29,10 +30,16 @@ extern "C" {            /* Assume C declarations for C++ */
+@@ -29,10 +29,16 @@ extern "C" {            /* Assume C declarations for C++ */
  
  /****** Shapshot function **********************************************/
  
@@ -28,7 +20,7 @@ index c712ccb4..15284e50 100644
      DWORD th32ProcessID
      );
  
-@@ -57,6 +64,16 @@ CreateToolhelp32Snapshot(
+@@ -57,6 +63,16 @@ CreateToolhelp32Snapshot(
  #define TH32CS_SNAPMODULE32 0x00000010
  #define TH32CS_SNAPALL      (TH32CS_SNAPHEAPLIST | TH32CS_SNAPPROCESS | TH32CS_SNAPTHREAD | TH32CS_SNAPMODULE)
  #define TH32CS_INHERIT      0x80000000
@@ -45,7 +37,7 @@ index c712ccb4..15284e50 100644
  //
  // Use CloseHandle to destroy the snapshot
  //
-@@ -78,6 +95,8 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
+@@ -78,6 +94,8 @@ typedef HEAPLIST32 *  LPHEAPLIST32;
  #define HF32_DEFAULT      1  // process's default heap
  #define HF32_SHARED       2  // is shared heap
  
@@ -54,7 +46,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Heap32ListFirst(
-@@ -85,12 +104,18 @@ Heap32ListFirst(
+@@ -85,12 +103,18 @@ Heap32ListFirst(
      LPHEAPLIST32 lphl
      );
  
@@ -73,7 +65,7 @@ index c712ccb4..15284e50 100644
  
  typedef struct tagHEAPENTRY32
  {
-@@ -98,7 +123,7 @@ typedef struct tagHEAPENTRY32
+@@ -98,7 +122,7 @@ typedef struct tagHEAPENTRY32
      HANDLE hHandle;     // Handle of this heap block
      ULONG_PTR dwAddress;   // Linear address of start of block
      SIZE_T dwBlockSize; // Size of block in bytes
@@ -82,7 +74,7 @@ index c712ccb4..15284e50 100644
      DWORD  dwLockCount;
      DWORD  dwResvd;
      DWORD  th32ProcessID;   // owning process
-@@ -113,6 +138,14 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
+@@ -113,6 +137,14 @@ typedef HEAPENTRY32 *  LPHEAPENTRY32;
  #define LF32_FREE     0x00000002
  #define LF32_MOVEABLE 0x00000004
  
@@ -97,7 +89,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Heap32First(
-@@ -121,6 +154,7 @@ Heap32First(
+@@ -121,6 +153,7 @@ Heap32First(
      ULONG_PTR th32HeapID
      );
  
@@ -105,7 +97,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Heap32Next(
-@@ -136,6 +170,7 @@ Toolhelp32ReadProcessMemory(
+@@ -136,6 +169,7 @@ Toolhelp32ReadProcessMemory(
      SIZE_T cbRead,
      SIZE_T* lpNumberOfBytesRead
      );
@@ -113,7 +105,7 @@ index c712ccb4..15284e50 100644
  
  /***** Process walking *************************************************/
  
-@@ -155,6 +190,8 @@ typedef struct tagPROCESSENTRY32W
+@@ -155,6 +189,8 @@ typedef struct tagPROCESSENTRY32W
  typedef PROCESSENTRY32W *  PPROCESSENTRY32W;
  typedef PROCESSENTRY32W *  LPPROCESSENTRY32W;
  
@@ -122,7 +114,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Process32FirstW(
-@@ -162,12 +199,14 @@ Process32FirstW(
+@@ -162,12 +198,14 @@ Process32FirstW(
      LPPROCESSENTRY32W lppe
      );
  
@@ -137,7 +129,7 @@ index c712ccb4..15284e50 100644
  
  typedef struct tagPROCESSENTRY32
  {
-@@ -185,6 +224,8 @@ typedef struct tagPROCESSENTRY32
+@@ -185,6 +223,8 @@ typedef struct tagPROCESSENTRY32
  typedef PROCESSENTRY32 *  PPROCESSENTRY32;
  typedef PROCESSENTRY32 *  LPPROCESSENTRY32;
  
@@ -146,7 +138,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Process32First(
-@@ -192,12 +233,14 @@ Process32First(
+@@ -192,12 +232,14 @@ Process32First(
      LPPROCESSENTRY32 lppe
      );
  
@@ -161,7 +153,7 @@ index c712ccb4..15284e50 100644
  
  #ifdef UNICODE
  #define Process32First Process32FirstW
-@@ -222,6 +265,8 @@ typedef struct tagTHREADENTRY32
+@@ -222,6 +264,8 @@ typedef struct tagTHREADENTRY32
  typedef THREADENTRY32 *  PTHREADENTRY32;
  typedef THREADENTRY32 *  LPTHREADENTRY32;
  
@@ -170,7 +162,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Thread32First(
-@@ -229,12 +274,14 @@ Thread32First(
+@@ -229,12 +273,14 @@ Thread32First(
      LPTHREADENTRY32 lpte
      );
  
@@ -185,7 +177,7 @@ index c712ccb4..15284e50 100644
  
  /***** Module walking *************************************************/
  
-@@ -254,6 +301,8 @@ typedef struct tagMODULEENTRY32W
+@@ -254,6 +300,8 @@ typedef struct tagMODULEENTRY32W
  typedef MODULEENTRY32W *  PMODULEENTRY32W;
  typedef MODULEENTRY32W *  LPMODULEENTRY32W;
  
@@ -194,7 +186,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Module32FirstW(
-@@ -261,12 +310,14 @@ Module32FirstW(
+@@ -261,12 +309,14 @@ Module32FirstW(
      LPMODULEENTRY32W lpme
      );
  
@@ -209,7 +201,7 @@ index c712ccb4..15284e50 100644
  
  typedef struct tagMODULEENTRY32
  {
-@@ -289,6 +340,8 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
+@@ -289,6 +339,8 @@ typedef MODULEENTRY32 *  LPMODULEENTRY32;
  // in th32ProcessID's process context.
  //
  
@@ -218,7 +210,7 @@ index c712ccb4..15284e50 100644
  BOOL
  WINAPI
  Module32First(
-@@ -296,12 +349,14 @@ Module32First(
+@@ -296,12 +348,14 @@ Module32First(
      LPMODULEENTRY32 lpme
      );
  

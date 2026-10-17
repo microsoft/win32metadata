@@ -5,6 +5,12 @@
   "sourceGitTree": "8b7d1b2d7806c4767ac056cc9c8d2db3a6ab677d",
   "headers": [
     {
+      "path": "shared\\sal.h",
+      "sourceSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+      "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+    },
+    {
       "path": "um\\winhttp.h",
       "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winhttp.h",
@@ -118,6 +124,16 @@
         "sourceSha256": "082E725995B988C14B66FA79FEF3B1E2373529EC3E8AE5703B57293579BC1C07"
       },
       {
+        "path": "shared\\sal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+        "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+      },
+      {
+        "path": "shared\\concurrencysal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\concurrencysal.h",
+        "sdkSha256": "1EA9A2E32A6FF298AD7904610CC71028CAA9B172399A579CA90A120D1B1AEC12"
+      },
+      {
         "path": "um\\waasapi.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
         "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
@@ -226,6 +242,7 @@
     "Xinput"
   ],
   "patches": [
+    "shared\\sal.h.patch",
     "um\\waasapi.idl.patch",
     "um\\propidlbase.idl.patch",
     "um\\winhttp.h.patch",

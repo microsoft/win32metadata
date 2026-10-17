@@ -1,15 +1,8 @@
 diff --git a/um/windowsceip.h b/um/windowsceip.h
+index dcfabac7..bb114e21 100644
 --- a/um/windowsceip.h
 +++ b/um/windowsceip.h
-@@ -17,6 +17,7 @@
- #endif // _MSC_VER
- 
- #include <winapifamily.h>
-+#include <win32metadata_annotations.h>
- 
- #ifdef __cplusplus
- extern "C" {
-@@ -27,6 +28,7 @@
+@@ -27,6 +27,7 @@ extern "C" {
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
  

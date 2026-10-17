@@ -1,13 +1,12 @@
 diff --git a/um/waasapi.idl b/um/waasapi.idl
-index b1de0c62..568e917c 100644
+index b1de0c62..6ddd4689 100644
 --- a/um/waasapi.idl
 +++ b/um/waasapi.idl
-@@ -15,12 +15,16 @@ cpp_quote("#pragma once")
+@@ -15,12 +15,15 @@ cpp_quote("#pragma once")
  cpp_quote("#endif")
  cpp_quote("")
  cpp_quote("#include <winapifamily.h>")
-+#include <win32metadata_annotations.h>
-+cpp_quote("#include <win32metadata_annotations.h>")
++#include <sal.h>
  
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")

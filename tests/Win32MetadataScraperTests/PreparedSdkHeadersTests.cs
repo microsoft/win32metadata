@@ -345,6 +345,38 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void SharedSdkHeaderPatchReachesBothNativeAndMidlInputs()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlSharedHeader();
+            byte[] original = File.ReadAllBytes(fixture.SdkHeader);
+            var prepared = fixture.Prepare();
+            byte[] header = File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "um", "sample.h"));
+            Assert.Contains("#define VALUE 2", Encoding.UTF8.GetString(header));
+            string midl = Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot), "midl");
+            foreach (string stage in new[] { "source", "sal" })
+                Assert.Equal(header, File.ReadAllBytes(Path.Combine(midl, stage, "um", "sample.h")));
+            Assert.Equal(original, File.ReadAllBytes(fixture.SdkHeader));
+            Assert.Equal(original, File.ReadAllBytes(fixture.Header));
+            using var inputs = JsonDocument.Parse(File.ReadAllText(Path.Combine(midl, "preprocessed-inputs.json")));
+            Assert.Contains(@"um\sample.h", inputs.RootElement.EnumerateArray().Select(value => value.GetString()));
+            Assert.True(fixture.Prepare().Reused);
+        }
+
+        [Fact]
+        public void SharedSdkHeaderCannotBindDifferentNativeAndMidlArtifacts()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidlSharedHeader();
+            File.Copy(fixture.SdkHeader, Path.Combine(Path.GetDirectoryName(fixture.SdkHeader), "other.h"));
+            fixture.MutateRecipe(recipe => recipe["midl"]["inputs"][2]["sdkPath"] = @"c\include\um\other.h");
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("same pristine SDK input", result.Error);
+            Assert.Empty(Directory.GetDirectories(fixture.Output));
+        }
+
+        [Fact]
         public void SourcePinnedAnnotationHeaderAndMidlDefinesReachTheActualPreprocessor()
         {
             using var fixture = new Fixture();
@@ -748,6 +780,26 @@ namespace Win32MetadataScraperTests
                         }),
                     });
                     recipe["patches"] = JsonSerializer.SerializeToNode(new[] { IdlPatchPath, PatchPath });
+                });
+            }
+
+            internal void EnableMidlSharedHeader()
+            {
+                EnableMidl();
+                File.AppendAllText(MidlInput,
+                    "\r\n#include \"sample.h\"\r\n#if VALUE != 2\r\n" +
+                    "#error The shared SDK header patch did not reach MIDL preprocessing.\r\n#endif\r\n");
+                MutateRecipe(recipe =>
+                {
+                    string hash = Hash(File.ReadAllBytes(MidlInput));
+                    recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                    recipe["headers"][1]["sdkSha256"] = hash;
+                    recipe["midl"]["inputs"].AsArray().Add(JsonSerializer.SerializeToNode(new
+                    {
+                        path = @"um\sample.h",
+                        sdkPath = @"c\include\um\sample.h",
+                        sdkSha256 = Hash(File.ReadAllBytes(SdkHeader)),
+                    }));
                 });
             }
 

@@ -1,16 +1,8 @@
 diff --git a/um/Xinput.h b/um/Xinput.h
-index 4b51b443..1d4d2cbf 100644
+index 4b51b443..af301890 100644
 --- a/um/Xinput.h
 +++ b/um/Xinput.h
-@@ -13,6 +13,7 @@
- 
- #include <windef.h>
- #include <winapifamily.h>
-+#include <win32metadata_annotations.h>
- 
- #pragma region Application Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
-@@ -188,12 +189,125 @@
+@@ -188,12 +188,127 @@
  
  #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -122,6 +114,8 @@ index 4b51b443..1d4d2cbf 100644
 +
 +
 +#ifdef WIN32METADATA
++// The SDK defines GAMEPAD but no ALL token. Preserve the historical metadata-only
++// XINPUT_FLAG_ALL=0 explicitly; the compact macro requires native identifiers.
 +typedef _WIN32META_ANNOTATION_("FlagsEnum(XINPUT_FLAG_ALL, XINPUT_FLAG_GAMEPAD)",
 +    0, XINPUT_FLAG_GAMEPAD) DWORD XINPUT_FLAG;
 +#endif
@@ -137,7 +131,7 @@ index 4b51b443..1d4d2cbf 100644
      BYTE                                bLeftTrigger;
      BYTE                                bRightTrigger;
      SHORT                               sThumbLX;
-@@ -216,9 +330,9 @@ typedef struct _XINPUT_VIBRATION
+@@ -216,9 +331,9 @@ typedef struct _XINPUT_VIBRATION
  
  typedef struct _XINPUT_CAPABILITIES
  {
@@ -150,7 +144,7 @@ index 4b51b443..1d4d2cbf 100644
      XINPUT_GAMEPAD                      Gamepad;
      XINPUT_VIBRATION                    Vibration;
  } XINPUT_CAPABILITIES, *PXINPUT_CAPABILITIES;
-@@ -227,15 +341,15 @@ typedef struct _XINPUT_CAPABILITIES
+@@ -227,15 +342,15 @@ typedef struct _XINPUT_CAPABILITIES
  
  typedef struct _XINPUT_BATTERY_INFORMATION
  {
@@ -170,7 +164,7 @@ index 4b51b443..1d4d2cbf 100644
      BYTE    UserIndex;
      BYTE    HidCode;
  } XINPUT_KEYSTROKE, *PXINPUT_KEYSTROKE;
-@@ -270,7 +384,7 @@ DWORD WINAPI XInputSetState
+@@ -270,7 +385,7 @@ DWORD WINAPI XInputSetState
  DWORD WINAPI XInputGetCapabilities
  (
      _In_  DWORD                dwUserIndex,   // Index of the gamer associated with the device
@@ -179,7 +173,7 @@ index 4b51b443..1d4d2cbf 100644
      _Out_ XINPUT_CAPABILITIES* pCapabilities  // Receives the capabilities
  ) WIN_NOEXCEPT;
  
-@@ -297,7 +411,7 @@ DWORD WINAPI XInputGetAudioDeviceIds
+@@ -297,7 +412,7 @@ DWORD WINAPI XInputGetAudioDeviceIds
  DWORD WINAPI XInputGetBatteryInformation
  (
      _In_  DWORD                       dwUserIndex,        // Index of the gamer associated with the device

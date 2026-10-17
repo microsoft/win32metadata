@@ -88,11 +88,16 @@ Run the selected C preprocessor with closed include paths and cleared ambient
 compiler options; hash its executable/engine and the SAL/helper scripts into the
 preparation identity. When `/cpp_opt` overrides MIDL's forwarding, explicitly pass
 the same `/D` definitions and private `/I` paths, including `MIDL_PASS=1`.
-An IDL that uses `_Win32_AnnotateInterface_(name, annotation)` includes the
-canonical shared annotation header during preprocessing as well as emitting its
-ordinary generated-header include. Pin that repository header's exact
-`sourceSha256` in the existing MIDL input closure; do not pretend it came from the
-selected SDK or search an ambient include directory for it.
+The shared SDK SAL patch and metadata SAL shim provide the common annotation
+bootstrap; do not repeat annotation-header includes in individual API patches.
+An original IDL must obtain SAL before using annotation carriers. MIDL imports
+do not establish C-preprocessor macro visibility, so the two annotated pilot
+IDLs need ordinary `#include <sal.h>` directives. Their generated headers already
+obtain SAL through native RPC headers. Pin every actual SAL dependency and the
+canonical repository helper's exact `sourceSha256` in the MIDL closure; do not
+pretend the helper came from the selected SDK or search ambient include paths.
+A header patch consumed by MIDL must bind the same pristine SDK input as its
+native-header copy and apply to both private snapshots before conversion.
 Verify MIDL's actual saved preprocessor input set against
 the declared closure. Preserve raw inputs, converted IDLs, commands, diagnostics,
 outputs and their hashes in the private cache. Keep warnings enabled and compare

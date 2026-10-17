@@ -1,16 +1,8 @@
 diff --git a/um/avrfsdk.h b/um/avrfsdk.h
-index a2c5a112..d9cbb9b0 100644
+index a2c5a112..4d23b1f7 100644
 --- a/um/avrfsdk.h
 +++ b/um/avrfsdk.h
-@@ -24,6 +24,7 @@ Revision History:
- #ifndef _AVRFSDK_
- #define _AVRFSDK_
- #include <winapifamily.h>
-+#include <win32metadata_annotations.h>
- 
- #pragma region Desktop Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -140,11 +141,17 @@ typedef ULONG
+@@ -140,11 +140,17 @@ typedef ULONG
  #define AVRF_ENUM_RESOURCES_FLAGS_SUSPEND             0x00000001
  #define AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES 0x00000002
  

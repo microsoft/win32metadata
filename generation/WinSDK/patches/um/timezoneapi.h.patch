@@ -1,15 +1,8 @@
 diff --git a/um/timezoneapi.h b/um/timezoneapi.h
+index 7b72887b..50dcde4f 100644
 --- a/um/timezoneapi.h
 +++ b/um/timezoneapi.h
-@@ -15,6 +15,7 @@
- #define _TIMEZONEAPI_H_
- 
- #include <apiset.h>
-+#include <win32metadata_annotations.h>
- #include <apisetcconv.h>
- #include <minwindef.h>
- #include <minwinbase.h>
-@@ -56,6 +57,8 @@
+@@ -56,6 +56,8 @@ typedef struct _TIME_DYNAMIC_ZONE_INFORMATION {
  
  WINBASEAPI
  _Success_(return != FALSE)
@@ -18,20 +11,18 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  BOOL
  WINAPI
  SystemTimeToTzSpecificLocalTime(
-@@ -64,8 +67,10 @@
+@@ -64,8 +66,10 @@ SystemTimeToTzSpecificLocalTime(
      _Out_ LPSYSTEMTIME lpLocalTime
      );
  
--WINBASEAPI
--_Success_(return != FALSE)
 +_Win32_SupportedOS_BEGIN_(WindowsXP)
-+WINBASEAPI
-+_Success_(return != FALSE)
+ WINBASEAPI
+ _Success_(return != FALSE)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  TzSpecificLocalTimeToSystemTime(
-@@ -76,15 +81,19 @@
+@@ -76,15 +80,19 @@ TzSpecificLocalTimeToSystemTime(
  
  WINBASEAPI
  _Success_(return != FALSE)
@@ -42,19 +33,16 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
      _In_ CONST FILETIME* lpFileTime,
      _Out_ LPSYSTEMTIME lpSystemTime
      );
--
--WINBASEAPI
--_Success_(return != FALSE)
 +_Win32_SupportedOS_END_()
-+
+ 
 +_Win32_SupportedOS_BEGIN_(Windows2000)
-+WINBASEAPI
-+_Success_(return != FALSE)
+ WINBASEAPI
+ _Success_(return != FALSE)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  SystemTimeToFileTime(
-@@ -94,6 +103,7 @@
+@@ -94,6 +102,7 @@ SystemTimeToFileTime(
  
  WINBASEAPI
  _Success_(return != TIME_ZONE_ID_INVALID)
@@ -62,7 +50,7 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  DWORD
  WINAPI
  GetTimeZoneInformation(
-@@ -101,15 +111,19 @@
+@@ -101,15 +110,19 @@ GetTimeZoneInformation(
      );
  
  WINBASEAPI
@@ -72,9 +60,8 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  SetTimeZoneInformation(
      _In_ CONST TIME_ZONE_INFORMATION* lpTimeZoneInformation
      );
--
 +_Win32_SupportedOS_END_()
-+
+ 
 +_Win32_SupportedOS_BEGIN_(WindowsVista)
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -83,7 +70,7 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  BOOL
  WINAPI
  SetDynamicTimeZoneInformation(
-@@ -122,6 +136,7 @@
+@@ -122,6 +135,7 @@ SetDynamicTimeZoneInformation(
  
  WINBASEAPI
  _Success_(return != TIME_ZONE_ID_INVALID)
@@ -91,7 +78,7 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  DWORD
  WINAPI
  GetDynamicTimeZoneInformation(
-@@ -133,6 +148,7 @@
+@@ -133,6 +147,7 @@ GetDynamicTimeZoneInformation(
  #if (_WIN32_WINNT >= 0x0601)
  
  _Success_(return != FALSE)
@@ -99,7 +86,7 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  BOOL
  WINAPI
  GetTimeZoneInformationForYear(
-@@ -142,11 +158,13 @@
+@@ -142,11 +157,13 @@ GetTimeZoneInformationForYear(
      );
  
  #endif // _WIN32_WINNT >= 0x0601
@@ -113,23 +100,20 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  WINBASEAPI
  _Success_(return == ERROR_SUCCESS)
  DWORD
-@@ -165,9 +183,12 @@
+@@ -165,9 +182,12 @@ GetDynamicTimeZoneInformationEffectiveYears(
      _Out_ LPDWORD FirstYear,
      _Out_ LPDWORD LastYear
      );
--
--WINBASEAPI
--_Success_(return != FALSE)
 +_Win32_SupportedOS_END_()
-+
+ 
 +_Win32_SupportedOS_BEGIN_(Windows7)
-+WINBASEAPI
-+_Success_(return != FALSE)
+ WINBASEAPI
+ _Success_(return != FALSE)
 +_Win32_SetLastError_
  BOOL
  WINAPI
  SystemTimeToTzSpecificLocalTimeEx(
-@@ -178,6 +199,7 @@
+@@ -178,6 +198,7 @@ SystemTimeToTzSpecificLocalTimeEx(
  
  WINBASEAPI
  _Success_(return != FALSE)
@@ -137,7 +121,7 @@ diff --git a/um/timezoneapi.h b/um/timezoneapi.h
  BOOL
  WINAPI
  TzSpecificLocalTimeToSystemTimeEx(
-@@ -185,6 +207,7 @@
+@@ -185,6 +206,7 @@ TzSpecificLocalTimeToSystemTimeEx(
      _In_ CONST SYSTEMTIME* lpLocalTime,
      _Out_ LPSYSTEMTIME lpUniversalTime
      );

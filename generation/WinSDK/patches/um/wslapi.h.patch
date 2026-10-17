@@ -1,15 +1,8 @@
 diff --git a/um/wslapi.h b/um/wslapi.h
+index 2531a6f8..2c61ca6f 100644
 --- a/um/wslapi.h
 +++ b/um/wslapi.h
-@@ -15,6 +15,7 @@
- 
- #include <apiset.h>
- #include <apisetcconv.h>
-+#include <win32metadata_annotations.h>
- 
- #ifdef _CONTRACT_GEN
- #include <nt.h>
-@@ -31,12 +32,14 @@
+@@ -31,12 +31,14 @@ extern "C" {
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SERVER)
  
  /* Determines if a distribution is already registered */
@@ -24,7 +17,7 @@ diff --git a/um/wslapi.h b/um/wslapi.h
  HRESULT
  WslRegisterDistribution(
      _In_ PCWSTR distributionName,
-@@ -44,6 +47,7 @@
+@@ -44,6 +46,7 @@ WslRegisterDistribution(
      );
  
  /* Unregisters the specified distribution */
@@ -32,7 +25,7 @@ diff --git a/um/wslapi.h b/um/wslapi.h
  HRESULT
  WslUnregisterDistribution(
      _In_ PCWSTR distributionName
-@@ -63,6 +67,7 @@
+@@ -63,6 +66,7 @@ DEFINE_ENUM_FLAG_OPERATORS(WSL_DISTRIBUTION_FLAGS);
  #define WSL_DISTRIBUTION_FLAGS_DEFAULT (WSL_DISTRIBUTION_FLAGS_ENABLE_INTEROP | WSL_DISTRIBUTION_FLAGS_APPEND_NT_PATH | WSL_DISTRIBUTION_FLAGS_ENABLE_DRIVE_MOUNTING)
  
  /* Configure the given distribution */
@@ -40,7 +33,7 @@ diff --git a/um/wslapi.h b/um/wslapi.h
  HRESULT
  WslConfigureDistribution(
      _In_ PCWSTR distributionName,
-@@ -71,6 +76,7 @@
+@@ -71,6 +75,7 @@ WslConfigureDistribution(
      );
  
  /* Get the given distribution's configuration info */
@@ -48,7 +41,7 @@ diff --git a/um/wslapi.h b/um/wslapi.h
  HRESULT
  WslGetDistributionConfiguration(
      _In_ PCWSTR distributionName,
-@@ -81,6 +87,7 @@
+@@ -81,6 +86,7 @@ WslGetDistributionConfiguration(
      _Out_ ULONG* defaultEnvironmentVariableCount
      );
  
@@ -56,7 +49,7 @@ diff --git a/um/wslapi.h b/um/wslapi.h
  HRESULT
  WslLaunchInteractive(
      _In_ PCWSTR distributionName,
-@@ -89,6 +96,7 @@
+@@ -89,6 +95,7 @@ WslLaunchInteractive(
      _Out_ DWORD* exitCode
      );
  

@@ -120,6 +120,19 @@ namespace Win32MetadataScraperTests
                 patches.Where(path => Path.GetFileName(path).StartsWith("winhttp.", StringComparison.Ordinal)));
             Assert.DoesNotContain("_Win32_ImportLibrary_", File.ReadAllText(Path.Combine(root, @"um\winhttp.h.patch")));
             string[] patchTexts = patches.Select(path => File.ReadAllText(Path.Combine(root, path)).Replace("\r\n", "\n")).ToArray();
+            Assert.Equal(new[] { @"shared\sal.h.patch" }, patches.Where(path =>
+                File.ReadAllText(Path.Combine(root, path)).Contains("win32metadata_annotations.h", StringComparison.Ordinal)));
+            Assert.Contains("+#include <win32metadata_annotations.h>",
+                File.ReadAllText(Path.Combine(root, @"shared\sal.h.patch")));
+            foreach (string idl in new[] { "waasapi", "propidlbase" })
+            {
+                string text = File.ReadAllText(Path.Combine(root, @"um\" + idl + ".idl.patch"));
+                Assert.Contains("+#include <sal.h>", text);
+                Assert.DoesNotContain("win32metadata_annotations.h", text);
+            }
+            foreach (string input in new[] { @"shared\sal.h", @"shared\concurrencysal.h" })
+                Assert.Single(recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray()
+                    .Where(value => value.GetProperty("path").GetString() == input));
             Assert.Equal(18, patchTexts.Sum(text => Regex.Matches(text, @"(?m)^\+_Win32_(?:FlagsEnum|Enum)_\(").Count));
             Assert.Single(patchTexts.Where(text => text.Contains(
                 "+cpp_quote(\"_Win32_Enum_(PROPSPEC_KIND, ULONG, PRSPEC_LPWSTR, PRSPEC_PROPID);\")", StringComparison.Ordinal)));

@@ -87,6 +87,16 @@ transactional and serialized; a modified published cache is rejected, not repair
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
 
+The annotation header is bootstrapped by the cumulative `shared\sal.h.patch`
+and the scraper's metadata SAL shim, not repeated in every API patch.
+The two annotated original IDLs include ordinary `sal.h` before their first
+carrier: MIDL imports have separate C-preprocessor streams and do not make
+macros visible to their importer. Their generated headers already obtain SAL
+through the native RPC headers and need no quoted helper include.
+The pinned SDK SAL and concurrency-SAL inputs join the closed MIDL input set.
+The same original SAL patch applies to both the private native-header and
+MIDL-source snapshots, which must bind the identical pristine SDK artifact.
+
 The bounded Com.StructuredStorage addition patches only shipped
 `um\propidlbase.idl`. Shipped `propidl.idl` includes that source and generates
 another complete copy of its declarations. Both `PropIdl.h` and `PropIdlBase.h`
@@ -110,6 +120,10 @@ region after the complete interfaces: their compiled method references identify
 the intended C++ declarations without copying a signature or annotating a proxy.
 This handles the non-local `Skip` methods without changing RPC locality; direct
 annotations on local `Next` would also reach generated proxy declarations.
+The four methods use the canonical `PreserveResult` encoding, CLR `PreserveSig`,
+rather than retaining the legacy `CanReturnMultipleSuccessValues` custom
+attribute. This intentional representation change follows the same encoding
+for both legacy success-marker forms; it is not a consumer-equivalence claim.
 Native SAL, `call_as` relationships, union branches and wire layouts remain
 control inputs, not annotation targets. Generated documentation mappings and
 global type-storage/namespace fixups remain derived or shared configuration.

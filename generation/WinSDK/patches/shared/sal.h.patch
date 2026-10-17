@@ -1,0 +1,13 @@
+diff --git a/shared/sal.h b/shared/sal.h
+index 23ff7c79..add3e91a 100644
+--- a/shared/sal.h
++++ b/shared/sal.h
+@@ -15,6 +15,8 @@
+ ****/
+ #pragma once
+ 
++#include <win32metadata_annotations.h>
++
+ /*==========================================================================
+ 
+    The comments in this file are intended to give basic understanding of

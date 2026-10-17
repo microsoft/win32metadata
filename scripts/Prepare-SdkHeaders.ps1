@@ -92,7 +92,7 @@ function Invoke-PreparedMidl([string]$Staging) {
             throw "A pinned MIDL input changed while being copied: $($input.path)"
         }
     }
-    foreach ($patch in @($patches | Where-Object isIdl)) {
+    foreach ($patch in @($patches | Where-Object isMidlInput)) {
         Invoke-HeaderPatch $patch $raw
     }
     foreach ($input in $midlInputs) {
@@ -354,8 +354,8 @@ $patches = @($config.patches | ForEach-Object {
         throw "A patch must modify one admitted SDK artifact without changing its identity: $_"
     }
     $artifact = $newPath.Replace('/', '\')
-    $input = @($midlInputs | Where-Object { $_.path -eq $artifact -and [IO.Path]::GetExtension($_.path) -eq '.idl' })
-    $isIdl = $input.Count -eq 1
+    $input = @($midlInputs | Where-Object path -eq $artifact)
+    $isIdl = $input.Count -eq 1 -and [IO.Path]::GetExtension($artifact) -eq '.idl'
     if ($isIdl) {
         $sdk = $input[0].fullPath
     }
@@ -374,6 +374,10 @@ $patches = @($config.patches | ForEach-Object {
         }
         if ($header.sourceSha256 -ne $header.sdkSha256) {
             throw "A direct SDK header patch requires the pristine SDK preimage: $_"
+        }
+        if ($input.Count -eq 1 -and ($input[0].sourceKind -ne 'sdk' -or
+            $input[0].fullPath -ne $sdk -or $input[0].sha256 -ne $header.sdkSha256)) {
+            throw "A patched header shared with MIDL must bind the same pristine SDK input: $artifact"
         }
     }
     if (!$sdk.EndsWith("\$artifact", [StringComparison]::OrdinalIgnoreCase)) {
@@ -395,7 +399,9 @@ $patches = @($config.patches | ForEach-Object {
             throw "Patch changes a path other than its admitted SDK artifact: $statistic"
         }
     }
-    [pscustomobject]@{ path = $_; fullPath = $path; sha256 = Get-Sha256 $path; isIdl = $isIdl }
+    [pscustomobject]@{
+        path = $_; fullPath = $path; sha256 = Get-Sha256 $path; isIdl = $isIdl; isMidlInput = $input.Count -eq 1
+    }
 })
 [IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
 $lock = [IO.File]::Open("$OutputRoot\prepare.lock", [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
