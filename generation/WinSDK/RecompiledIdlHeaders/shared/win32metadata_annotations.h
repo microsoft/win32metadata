@@ -2,11 +2,10 @@
 #define WIN32METADATA_ANNOTATIONS_H
 
 #if defined(WIN32METADATA) && defined(__clang__)
+#ifndef _WIN32META_ANNOTATION_
 #define _WIN32META_ANNOTATION_(...) \
-    _Pragma("clang diagnostic push") \
-    _Pragma("clang diagnostic error \"-Wignored-attributes\"") \
-    __attribute__((annotate("Win32Metadata." __VA_ARGS__))) \
-    _Pragma("clang diagnostic pop")
+    __attribute__((annotate("Win32Metadata." __VA_ARGS__)))
+#endif
 #define _WIN32META_STRINGIFY_(...) #__VA_ARGS__
 #define _WIN32META_EXPAND_STRINGIFY_(...) _WIN32META_STRINGIFY_(__VA_ARGS__)
 #define _Win32_RAIIFree_(cleanup, ...) \

@@ -192,18 +192,47 @@ _Win32_SupportedOS_10240_
 typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 ```
 
-### IDL-owned interfaces
+### IDL-owned declarations
 
-Patch the original SDK IDL, not its generated header. Place the helper before the
-interface declaration, passing its name and the desired public annotation:
+Patch the original SDK IDL, not its generated header. Ordinary C/C++ prefix macros
+do not automatically survive MIDL. Use native IDL attributes for direction, counts,
+and retval; use MIDL's `[annotation("...")]` transport on fields and local
+methods/parameters for metadata that those native attributes cannot express.
+
+For example, a field can carry its enum association:
+
+```idl
+typedef struct DESCRIPTION {
+    [annotation("_Win32_AssociatedEnum_(DESCRIPTION_KIND)")]
+    long kind;
+} DESCRIPTION;
+```
+
+On an already-local method, combine additional metadata with the parameter's
+native SAL in one annotation payload:
+
+```idl
+[annotation("_Win32_PreserveResult_")]
+HRESULT Read(
+    [in, annotation("_In_ _Win32_Retained_")] byte* input,
+    [out, retval, annotation("_Out_retval_")] long* result);
+```
+
+Include the SDK annotation header in the generated C/C++ through `cpp_quote`.
+Do not use `[annotation]` as a blanket substitute for native MIDL attributes or
+assume it supports every IDL target. In particular, interfaces need the dedicated
+helper before the interface declaration:
 
 ```cpp
 _Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)
 ```
 
-Keep the native interface attributes, methods, and vtable unchanged. Use IDL `[retval]`
-on the appropriate output parameter. For a C/C++-authored declaration, combine direction
-SAL with `_Win32_Retval_`:
+Keep native interface attributes, methods, and vtables unchanged. MIDL has additional
+limitations for type-level annotations and non-local methods; see the
+[verified transport limits](#native-idl-annotation-limits) before migrating another
+IDL declaration kind.
+
+For a C/C++-authored declaration, combine direction SAL with `_Win32_Retval_`:
 
 ```cpp
 virtual HRESULT STDMETHODCALLTYPE GetDesc(
@@ -584,38 +613,38 @@ add public annotation syntax or change the authoring contract above.
 
 ### Annotation encoding and diagnostic policy
 
-The annotation remains an ordinary Clang `annotate` attribute. Its core encoding is:
-
-```cpp
-#define _WIN32META_ANNOTATION_(...) \
-    __attribute__((annotate("Win32Metadata." __VA_ARGS__)))
-```
-
-The current shared header,
-`RecompiledIdlHeaders/shared/win32metadata_annotations.h`, surrounds that attribute
-with a local diagnostic guard:
+The shared header, `RecompiledIdlHeaders/shared/win32metadata_annotations.h`, uses
+an ordinary Clang `annotate` attribute and does not set compiler diagnostic policy:
 
 ```cpp
 #if defined(WIN32METADATA) && defined(__clang__)
+#ifndef _WIN32META_ANNOTATION_
 #define _WIN32META_ANNOTATION_(...) \
-    _Pragma("clang diagnostic push") \
-    _Pragma("clang diagnostic error \"-Wignored-attributes\"") \
-    __attribute__((annotate("Win32Metadata." __VA_ARGS__))) \
-    _Pragma("clang diagnostic pop")
+    __attribute__((annotate("Win32Metadata." __VA_ARGS__)))
+#endif
 #else
 #define _WIN32META_ANNOTATION_(...)
 #endif
 ```
 
-The pragmas do not carry metadata and are not required to parse an annotation.
-They make an ignored metadata attribute an error instead of silently losing it. For
-example, an attribute placed before `struct` rather than after it can be ignored and
+With `--config parse-win32-annotations`, the C# scraper predefines this private
+transport macro in its Clang arguments, adding diagnostic push/error/pop around the
+same attribute. These diagnostic pragmas live in the tool, not the SDK header.
+Other consumers can use the plain header definition or supply their own diagnostic
+policy.
+
+The tool-owned guard makes an ignored metadata attribute an error instead of silently
+losing it. For example, an attribute placed before `struct` rather than after it can
 leave no annotation in the AST for the reader to validate. Existing SDK/SAL headers
-also produce legitimate ignored-attribute warnings, so globally treating that warning
-as an error breaks ordinary SDK parsing. The push/error/pop limits the stricter policy
-to the metadata attribute and restores the surrounding diagnostic state immediately.
-This is an implementation diagnostic policy, not a requirement for the public macros'
-spelling or meaning.
+also produce legitimate ignored-attribute warnings, so the tool must not globally
+promote that warning to an error. Its guard limits the stricter policy to the metadata
+attribute and restores the surrounding diagnostic state immediately. Clang performs
+this check in the original parse, including through macro aliases; there is no
+diagnostic-text filter or source-token parser. Annotation parsing rejects Clang's
+global `-w` option because it suppresses even this check; use specific `-Wno-` options
+for native warnings instead. This policy is not part of the public macros' spelling
+or meaning. Native lexical availability scope still uses Clang's attribute push/pop,
+independently of diagnostic policy.
 
 The `Win32Metadata.` owner prefix lets the reader reject unknown owned annotations
 from AST attributes without inspecting macro definitions. Prefix placement is the
@@ -713,13 +742,39 @@ legacy generated SDK headers whose retval appears only in MIDL comments. Remove 
 bridge only when original-IDL preparation supplies native SAL for every affected
 declaration and equivalence is established.
 
+#### Native IDL annotation limits
+
+Actual selected-SDK MIDL output distinguishes the following cases; successful
+C/C++ header annotation tests alone do not establish IDL transport support.
+
+| IDL target | Native transport and qualification limit |
+| --- | --- |
+| Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies the C++ forward declaration instead. |
+| Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
+| Method and parameter | `[annotation("...")]` emits the requested prefix. Non-local methods/parameters produce MIDL2495; do not change an RPC interface to local or suppress the warning just to carry metadata. |
+| Scalar typedef | `typedef [annotation("...")]` emits an annotated typedef, with MIDL2525 warning that a SAL override on a typedef is not recommended. |
+| Struct or enum written as a typedef | MIDL emits the annotation on the typedef, not directly on the tag, and produces MIDL2525. The C# reader transfers primary-record typedef facts to the record; do not infer arbitrary type/tag coverage from that compatibility behavior. |
+
+`[annotation]` is a SAL override, not an automatically composed list of independent
+metadata and native SAL facts. Preserve the declaration's native SAL in the same
+payload or through the qualified preparation converter; a separate metadata-only
+payload can replace it. The interface carrier does not solve these other IDL
+grammar, placement, or SAL-composition issues.
+
+The existing interface pilot is qualified; this is not blanket admission of every
+IDL target. A type-level migration that cannot use a warning-free native form needs
+an explicitly qualified source-IDL carrier before admission, not a generated-header
+patch or a new warning suppression.
+
 ### C# integration and compatibility bridges
 
-The C# scraper opts in with `--config parse-win32-annotations` and defines only
-`WIN32METADATA`. There is no backend-specific header gate, private expanded-expression
-payload, second parse, or detailed-preprocessing-record dependency. Header annotation
-ingestion is implemented; remaining sidecar migrations must still be qualified against
-their actual headers and output.
+The C# scraper opts in with `--config parse-win32-annotations` and uses
+`WIN32METADATA` as the public header feature gate. Its private transport override
+supplies diagnostic policy as described above. There is no backend-specific header
+gate, private expanded-expression payload, second parse, or
+detailed-preprocessing-record dependency. Header annotation ingestion is implemented;
+remaining sidecar migrations must still be qualified against their actual headers and
+output.
 
 Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabulary.
 `SetLastError` sets the ECMA-335 P/Invoke `SupportsLastError` flag; COM exact-result
@@ -749,6 +804,23 @@ Documentation attributes are not required for functional winmd equivalence. The
 separate follow-up is to revisit windows-docs scraping and the stale
 `Microsoft.Windows.SDK.Win32Docs` package process, including its manual
 merge/cross-reference step.
+
+#### Generated remap cache
+
+The SDK already collects cross-partition discoveries in
+`scraper.autoRemaps.generated.rsp`. The header-annotation integration changes how
+that existing cache is consumed: it passes the cache separately through
+`--auto-remaps-file`, rather than treating it as authored response-file settings.
+Legacy partitions continue using its remaps and exclusions for binding generation,
+with authored settings taking priority. Native remap and function-pointer discovery
+use authored settings, so repeated builds retain the same discovery sidecars and
+pointer-reduction inputs.
+
+Partitions using `parse-win32-annotations` ignore this aggregate and derive remaps
+from their current translation unit instead. This prevents a previous build or an
+unconverted partition from renaming types hidden by annotated headers; authored
+manual/global settings still apply. This is cache isolation for the complete
+annotation mode, not an enum-only mode or a new source of API-specific annotations.
 
 ### Sidecar migration matrix
 
