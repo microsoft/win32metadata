@@ -1,656 +1,10 @@
 diff --git a/um/winnetwk.h b/um/winnetwk.h
-index 1cd6d53c..3a9b8213 100644
+index 1cd6d53c..979e0394 100644
 --- a/um/winnetwk.h
 +++ b/um/winnetwk.h
-@@ -98,8 +98,8 @@ extern "C" {
- #endif /* WINVER >= 0x0400 */
+@@ -50,6 +50,228 @@ extern "C" {
  
- typedef struct  _NETRESOURCEA {
--    DWORD    dwScope;
--    DWORD    dwType;
-+    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
-+    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
-     DWORD    dwDisplayType;
-     DWORD    dwUsage;
-     LPSTR    lpLocalName;
-@@ -108,8 +108,8 @@ typedef struct  _NETRESOURCEA {
-     LPSTR    lpProvider;
- }NETRESOURCEA, *LPNETRESOURCEA;
- typedef struct  _NETRESOURCEW {
--    DWORD    dwScope;
--    DWORD    dwType;
-+    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
-+    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
-     DWORD    dwDisplayType;
-     DWORD    dwUsage;
-     LPWSTR   lpLocalName;
-@@ -162,6 +162,8 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
- 
- #endif
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnectionA(
-@@ -169,6 +171,7 @@ WNetAddConnectionA(
-     _In_opt_ LPCSTR   lpPassword,
-     _In_opt_ LPCSTR   lpLocalName
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnectionW(
-@@ -176,34 +179,41 @@ WNetAddConnectionW(
-     _In_opt_ LPCWSTR   lpPassword,
-     _In_opt_ LPCWSTR   lpLocalName
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetAddConnection  WNetAddConnectionW
- #else
- #define WNetAddConnection  WNetAddConnectionA
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection2A(
-     _In_     LPNETRESOURCEA lpNetResource,
-     _In_opt_ LPCSTR       lpPassword,
-     _In_opt_ LPCSTR       lpUserName,
--    _In_     DWORD          dwFlags
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection2W(
-     _In_     LPNETRESOURCEW lpNetResource,
-     _In_opt_ LPCWSTR       lpPassword,
-     _In_opt_ LPCWSTR       lpUserName,
--    _In_     DWORD          dwFlags
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetAddConnection2  WNetAddConnection2W
- #else
- #define WNetAddConnection2  WNetAddConnection2A
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection3A(
-@@ -211,8 +221,9 @@ WNetAddConnection3A(
-     _In_     LPNETRESOURCEA lpNetResource,
-     _In_opt_ LPCSTR       lpPassword,
-     _In_opt_ LPCSTR       lpUserName,
--    _In_     DWORD          dwFlags
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection3W(
-@@ -220,8 +231,9 @@ WNetAddConnection3W(
-     _In_     LPNETRESOURCEW lpNetResource,
-     _In_opt_ LPCWSTR       lpPassword,
-     _In_opt_ LPCWSTR       lpUserName,
--    _In_     DWORD          dwFlags
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetAddConnection3  WNetAddConnection3W
- #else
-@@ -229,6 +241,7 @@ WNetAddConnection3W(
- #endif // !UNICODE
- 
- #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection4A(
-@@ -236,10 +249,11 @@ WNetAddConnection4A(
-     _In_     LPNETRESOURCEA lpNetResource,
-     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
-     _In_     DWORD          cbAuthBuffer,
--    _In_     DWORD          dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
-     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
-     _In_     DWORD          cbUseOptions
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetAddConnection4W(
-@@ -247,7 +261,7 @@ WNetAddConnection4W(
-     _In_     LPNETRESOURCEW lpNetResource,
-     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
-     _In_     DWORD          cbAuthBuffer,
--    _In_     DWORD          dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
-     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
-     _In_     DWORD          cbUseOptions
-     );
-@@ -258,44 +272,54 @@ WNetAddConnection4W(
- #endif // !UNICODE
- #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetCancelConnectionA(
-     _In_ LPCSTR lpName,
-     _In_ BOOL     fForce
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetCancelConnectionW(
-     _In_ LPCWSTR lpName,
-     _In_ BOOL     fForce
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetCancelConnection  WNetCancelConnectionW
- #else
- #define WNetCancelConnection  WNetCancelConnectionA
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetCancelConnection2A(
-     _In_ LPCSTR lpName,
--    _In_ DWORD    dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
-     _In_ BOOL     fForce
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetCancelConnection2W(
-     _In_ LPCWSTR lpName,
--    _In_ DWORD    dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
-     _In_ BOOL     fForce
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetCancelConnection2  WNetCancelConnection2W
- #else
- #define WNetCancelConnection2  WNetCancelConnection2A
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetConnectionA(
-@@ -303,6 +327,7 @@ WNetGetConnectionA(
-     _Out_writes_opt_(*lpnLength) LPSTR  lpRemoteName,
-     _Inout_ LPDWORD lpnLength
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetConnectionW(
-@@ -310,6 +335,7 @@ WNetGetConnectionW(
-     _Out_writes_opt_(*lpnLength) LPWSTR  lpRemoteName,
-     _Inout_ LPDWORD lpnLength
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetConnection  WNetGetConnectionW
- #else
-@@ -349,6 +375,8 @@ WNetRestoreConnectionW(
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
- 
- #if(WINVER >= 0x0400)
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetUseConnectionA(
-@@ -356,11 +384,12 @@ WNetUseConnectionA(
-     _In_     LPNETRESOURCEA  lpNetResource,
-     _In_opt_ LPCSTR        lpPassword,
-     _In_opt_ LPCSTR        lpUserId,
--    _In_     DWORD           dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
-     _Out_writes_opt_(*lpBufferSize) LPSTR lpAccessName,
-     _Inout_opt_ LPDWORD lpBufferSize,
-     _Out_opt_ LPDWORD   lpResult
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetUseConnectionW(
-@@ -368,11 +397,12 @@ WNetUseConnectionW(
-     _In_     LPNETRESOURCEW  lpNetResource,
-     _In_opt_ LPCWSTR        lpPassword,
-     _In_opt_ LPCWSTR        lpUserId,
--    _In_     DWORD           dwFlags,
-+    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
-     _Out_writes_opt_(*lpBufferSize) LPWSTR lpAccessName,
-     _Inout_opt_ LPDWORD lpBufferSize,
-     _Out_opt_ LPDWORD   lpResult
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetUseConnection  WNetUseConnectionW
- #else
-@@ -381,6 +411,7 @@ WNetUseConnectionW(
- #endif /* WINVER >= 0x0400 */
- 
- #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetUseConnection4A(
-@@ -395,6 +426,7 @@ WNetUseConnection4A(
-     _Inout_opt_ LPDWORD lpBufferSize,
-     _Out_opt_ LPDWORD   lpResult
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetUseConnection4W(
-@@ -420,6 +452,8 @@ WNetUseConnection4W(
- //
- //  Network Connection Dialogs.
- //
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetConnectionDialog(
-@@ -427,26 +461,28 @@ WNetConnectionDialog(
-     _In_ DWORD dwType
-     );
- 
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetDisconnectDialog(
-     _In_opt_ HWND hwnd,
-     _In_ DWORD dwType
-     );
-+_Win32_SupportedOS_END_()
- 
- #if(WINVER >= 0x0400)
- typedef struct _CONNECTDLGSTRUCTA{
-     DWORD cbStructure;       /* size of this structure in bytes */
-     HWND hwndOwner;          /* owner window for the dialog */
-     LPNETRESOURCEA lpConnRes;/* Requested Resource info    */
--    DWORD dwFlags;           /* flags (see below) */
-+    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
-     DWORD dwDevNum;          /* number of devices connected to */
- } CONNECTDLGSTRUCTA, FAR *LPCONNECTDLGSTRUCTA;
- typedef struct _CONNECTDLGSTRUCTW{
-     DWORD cbStructure;       /* size of this structure in bytes */
-     HWND hwndOwner;          /* owner window for the dialog */
-     LPNETRESOURCEW lpConnRes;/* Requested Resource info    */
--    DWORD dwFlags;           /* flags (see below) */
-+    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
-     DWORD dwDevNum;          /* number of devices connected to */
- } CONNECTDLGSTRUCTW, FAR *LPCONNECTDLGSTRUCTW;
- #ifdef UNICODE
-@@ -470,16 +506,20 @@ typedef LPCONNECTDLGSTRUCTA LPCONNECTDLGSTRUCT;
- #define CONNDLG_PERSIST     0x00000010 /* Force persistent connection */
- #define CONNDLG_NOT_PERSIST 0x00000020 /* Force connection NOT persistent */
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetConnectionDialog1A(
-     _Inout_ LPCONNECTDLGSTRUCTA lpConnDlgStruct
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetConnectionDialog1W(
-     _Inout_ LPCONNECTDLGSTRUCTW lpConnDlgStruct
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetConnectionDialog1  WNetConnectionDialog1W
- #else
-@@ -491,14 +531,14 @@ typedef struct _DISCDLGSTRUCTA{
-     HWND            hwndOwner;        /* owner window for the dialog */
-     LPSTR           lpLocalName;      /* local device name */
-     LPSTR           lpRemoteName;     /* network resource name */
--    DWORD           dwFlags;          /* flags */
-+    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
- } DISCDLGSTRUCTA, FAR *LPDISCDLGSTRUCTA;
- typedef struct _DISCDLGSTRUCTW{
-     DWORD           cbStructure;      /* size of this structure in bytes */
-     HWND            hwndOwner;        /* owner window for the dialog */
-     LPWSTR          lpLocalName;      /* local device name */
-     LPWSTR          lpRemoteName;     /* network resource name */
--    DWORD           dwFlags;          /* flags */
-+    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
- } DISCDLGSTRUCTW, FAR *LPDISCDLGSTRUCTW;
- #ifdef UNICODE
- typedef DISCDLGSTRUCTW DISCDLGSTRUCT;
-@@ -511,16 +551,20 @@ typedef LPDISCDLGSTRUCTA LPDISCDLGSTRUCT;
- #define DISC_UPDATE_PROFILE         0x00000001
- #define DISC_NO_FORCE               0x00000040
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetDisconnectDialog1A(
-     _In_ LPDISCDLGSTRUCTA lpConnDlgStruct
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetDisconnectDialog1W(
-     _In_ LPDISCDLGSTRUCTW lpConnDlgStruct
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetDisconnectDialog1  WNetDisconnectDialog1W
- #else
-@@ -532,52 +576,62 @@ WNetDisconnectDialog1W(
- //  Network Browsing.
- //
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetOpenEnumA(
--    _In_  DWORD          dwScope,
--    _In_  DWORD          dwType,
--    _In_  DWORD          dwUsage,
-+    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
-+    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
-+    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
-     _In_opt_ LPNETRESOURCEA lpNetResource,
--    _Out_ LPHANDLE       lphEnum
-+    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetOpenEnumW(
--    _In_  DWORD          dwScope,
--    _In_  DWORD          dwType,
--    _In_  DWORD          dwUsage,
-+    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
-+    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
-+    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
-     _In_opt_ LPNETRESOURCEW lpNetResource,
--    _Out_ LPHANDLE       lphEnum
-+    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetOpenEnum  WNetOpenEnumW
- #else
- #define WNetOpenEnum  WNetOpenEnumA
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetEnumResourceA(
-     _In_    HANDLE  hEnum,
-     _Inout_ LPDWORD lpcCount,
--    _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetEnumResourceW(
-     _In_    HANDLE  hEnum,
-     _Inout_ LPDWORD lpcCount,
--    _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetEnumResource  WNetEnumResourceW
- #else
- #define WNetEnumResource  WNetEnumResourceA
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_Windows2000_
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetCloseEnum(
-@@ -585,42 +639,50 @@ WNetCloseEnum(
-     );
- 
- #if(WINVER >= 0x0400)
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetResourceParentA(
-     _In_ LPNETRESOURCEA lpNetResource,
--    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpcbBuffer
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetResourceParentW(
-     _In_ LPNETRESOURCEW lpNetResource,
--    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpcbBuffer
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetResourceParent  WNetGetResourceParentW
- #else
- #define WNetGetResourceParent  WNetGetResourceParentA
- #endif // !UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetResourceInformationA(
-     _In_ LPNETRESOURCEA  lpNetResource,
--    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpcbBuffer,
-     _Outptr_ LPSTR *lplpSystem
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetResourceInformationW(
-     _In_ LPNETRESOURCEW  lpNetResource,
--    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpcbBuffer,
-     _Outptr_ LPWSTR *lplpSystem
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetResourceInformation  WNetGetResourceInformationW
- #else
-@@ -667,22 +729,26 @@ typedef REMOTE_NAME_INFOA REMOTE_NAME_INFO;
- typedef LPREMOTE_NAME_INFOA LPREMOTE_NAME_INFO;
- #endif // UNICODE
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetUniversalNameA(
-     _In_ LPCSTR lpLocalPath,
--    _In_ DWORD    dwInfoLevel,
--    _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
-+    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetUniversalNameW(
-     _In_ LPCWSTR lpLocalPath,
--    _In_ DWORD    dwInfoLevel,
--    _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
-+    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
-+    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetUniversalName  WNetGetUniversalNameW
- #else
-@@ -692,6 +758,8 @@ WNetGetUniversalNameW(
- //
- //  Authentication and Logon/Logoff.
- //
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetUserA(
-@@ -702,6 +770,7 @@ WNetGetUserA(
- //
- //  Authentication and Logon/Logoff.
- //
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetUserW(
-@@ -709,6 +778,7 @@ WNetGetUserW(
-     _Out_writes_(*lpnLength) LPWSTR lpUserName,
-     _Inout_  LPDWORD lpnLength
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetUser  WNetGetUserW
- #else
-@@ -730,6 +800,8 @@ WNetGetUserW(
- 
- 
- #if(WINVER >= 0x0400)
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetProviderNameA(
-@@ -737,6 +809,7 @@ WNetGetProviderNameA(
-     _Out_writes_(*lpBufferSize) LPSTR lpProviderName,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetProviderNameW(
-@@ -744,6 +817,7 @@ WNetGetProviderNameW(
-     _Out_writes_(*lpBufferSize) LPWSTR lpProviderName,
-     _Inout_ LPDWORD lpBufferSize
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetProviderName  WNetGetProviderNameW
- #else
-@@ -753,8 +827,8 @@ WNetGetProviderNameW(
- typedef struct _NETINFOSTRUCT{
-     DWORD cbStructure;
-     DWORD dwProviderVersion;
--    DWORD dwStatus;
--    DWORD dwCharacteristics;
-+    _Win32_AssociatedEnum_(WIN32_ERROR) DWORD dwStatus;
-+    _Win32_AssociatedEnum_(NETINFOSTRUCT_CHARACTERISTICS) DWORD dwCharacteristics;
-     ULONG_PTR dwHandle;
-     WORD  wNetType;
-     DWORD dwPrinters;
-@@ -765,18 +839,22 @@ typedef struct _NETINFOSTRUCT{
- #define NETINFO_DISKRED     0x00000004  /* Provider requires disk redirections to connect */
- #define NETINFO_PRINTERRED  0x00000008  /* Provider requires printer redirections to connect */
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetNetworkInformationA(
-     _In_  LPCSTR        lpProvider,
-     _Out_ LPNETINFOSTRUCT lpNetInfoStruct
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
- _Check_return_
- DWORD APIENTRY
- WNetGetNetworkInformationW(
-     _In_  LPCWSTR        lpProvider,
-     _Out_ LPNETINFOSTRUCT lpNetInfoStruct
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetNetworkInformation  WNetGetNetworkInformationW
- #else
-@@ -789,6 +867,9 @@ WNetGetNetworkInformationW(
- //  Error handling.
- //
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
- _Check_return_
- DWORD APIENTRY
- WNetGetLastErrorA(
-@@ -798,6 +879,8 @@ WNetGetLastErrorA(
-     _Out_writes_(nNameBufSize) LPSTR  lpNameBuf,
-     _In_ DWORD      nNameBufSize
-     );
-+_Win32_AssociatedEnum_(WIN32_ERROR)
-+_Win32_SetLastError_
- _Check_return_
- DWORD APIENTRY
- WNetGetLastErrorW(
-@@ -807,6 +890,7 @@ WNetGetLastErrorW(
-     _Out_writes_(nNameBufSize) LPWSTR  lpNameBuf,
-     _In_ DWORD      nNameBufSize
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define WNetGetLastError  WNetGetLastErrorW
- #else
-@@ -895,6 +979,7 @@ typedef struct _NETCONNECTINFOSTRUCT{
- #define WNCON_SLOWLINK          0x00000004
- #define WNCON_DYNAMIC           0x00000008
- 
-+_Win32_SupportedOS_BEGIN_(Windows2000)
- _Check_return_
- DWORD APIENTRY
- MultinetGetConnectionPerformanceA(
-@@ -907,6 +992,7 @@ MultinetGetConnectionPerformanceW(
-     _In_  LPNETRESOURCEW lpNetResource,
-     _Out_ LPNETCONNECTINFOSTRUCT lpNetConnectInfoStruct
-     );
-+_Win32_SupportedOS_END_()
- #ifdef UNICODE
- #define MultinetGetConnectionPerformance  MultinetGetConnectionPerformanceW
- #else
-@@ -915,6 +1001,228 @@ MultinetGetConnectionPerformanceW(
- #endif /* WINVER >= 0x0400 */
- 
+ #include <wnnc.h>
  
 +#ifdef WIN32METADATA
 +#pragma push_macro("UNIVERSAL_NAME_INFO_LEVEL")
@@ -874,6 +228,652 @@ index 1cd6d53c..3a9b8213 100644
 +#pragma pop_macro("DISC_UPDATE_PROFILE")
 +#endif
 +
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
- #pragma endregion
+ //
+ //  Network Resources.
+ //
+@@ -98,8 +320,8 @@ extern "C" {
+ #endif /* WINVER >= 0x0400 */
  
+ typedef struct  _NETRESOURCEA {
+-    DWORD    dwScope;
+-    DWORD    dwType;
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
+     DWORD    dwDisplayType;
+     DWORD    dwUsage;
+     LPSTR    lpLocalName;
+@@ -108,8 +330,8 @@ typedef struct  _NETRESOURCEA {
+     LPSTR    lpProvider;
+ }NETRESOURCEA, *LPNETRESOURCEA;
+ typedef struct  _NETRESOURCEW {
+-    DWORD    dwScope;
+-    DWORD    dwType;
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) DWORD    dwScope;
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) DWORD    dwType;
+     DWORD    dwDisplayType;
+     DWORD    dwUsage;
+     LPWSTR   lpLocalName;
+@@ -162,6 +384,8 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
+ 
+ #endif
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnectionA(
+@@ -169,6 +393,7 @@ WNetAddConnectionA(
+     _In_opt_ LPCSTR   lpPassword,
+     _In_opt_ LPCSTR   lpLocalName
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnectionW(
+@@ -176,34 +401,41 @@ WNetAddConnectionW(
+     _In_opt_ LPCWSTR   lpPassword,
+     _In_opt_ LPCWSTR   lpLocalName
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetAddConnection  WNetAddConnectionW
+ #else
+ #define WNetAddConnection  WNetAddConnectionA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection2A(
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_opt_ LPCSTR       lpPassword,
+     _In_opt_ LPCSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection2W(
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPCWSTR       lpPassword,
+     _In_opt_ LPCWSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetAddConnection2  WNetAddConnection2W
+ #else
+ #define WNetAddConnection2  WNetAddConnection2A
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection3A(
+@@ -211,8 +443,9 @@ WNetAddConnection3A(
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_opt_ LPCSTR       lpPassword,
+     _In_opt_ LPCSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection3W(
+@@ -220,8 +453,9 @@ WNetAddConnection3W(
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_opt_ LPCWSTR       lpPassword,
+     _In_opt_ LPCWSTR       lpUserName,
+-    _In_     DWORD          dwFlags
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetAddConnection3  WNetAddConnection3W
+ #else
+@@ -229,6 +463,7 @@ WNetAddConnection3W(
+ #endif // !UNICODE
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection4A(
+@@ -236,10 +471,11 @@ WNetAddConnection4A(
+     _In_     LPNETRESOURCEA lpNetResource,
+     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
+     _In_     DWORD          cbAuthBuffer,
+-    _In_     DWORD          dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
+     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
+     _In_     DWORD          cbUseOptions
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetAddConnection4W(
+@@ -247,7 +483,7 @@ WNetAddConnection4W(
+     _In_     LPNETRESOURCEW lpNetResource,
+     _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
+     _In_     DWORD          cbAuthBuffer,
+-    _In_     DWORD          dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD          dwFlags,
+     _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
+     _In_     DWORD          cbUseOptions
+     );
+@@ -258,44 +494,54 @@ WNetAddConnection4W(
+ #endif // !UNICODE
+ #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnectionA(
+     _In_ LPCSTR lpName,
+     _In_ BOOL     fForce
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnectionW(
+     _In_ LPCWSTR lpName,
+     _In_ BOOL     fForce
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetCancelConnection  WNetCancelConnectionW
+ #else
+ #define WNetCancelConnection  WNetCancelConnectionA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnection2A(
+     _In_ LPCSTR lpName,
+-    _In_ DWORD    dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
+     _In_ BOOL     fForce
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetCancelConnection2W(
+     _In_ LPCWSTR lpName,
+-    _In_ DWORD    dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_ DWORD    dwFlags,
+     _In_ BOOL     fForce
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetCancelConnection2  WNetCancelConnection2W
+ #else
+ #define WNetCancelConnection2  WNetCancelConnection2A
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetConnectionA(
+@@ -303,6 +549,7 @@ WNetGetConnectionA(
+     _Out_writes_opt_(*lpnLength) LPSTR  lpRemoteName,
+     _Inout_ LPDWORD lpnLength
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetConnectionW(
+@@ -310,6 +557,7 @@ WNetGetConnectionW(
+     _Out_writes_opt_(*lpnLength) LPWSTR  lpRemoteName,
+     _Inout_ LPDWORD lpnLength
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetConnection  WNetGetConnectionW
+ #else
+@@ -349,6 +597,8 @@ WNetRestoreConnectionW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if(WINVER >= 0x0400)
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetUseConnectionA(
+@@ -356,11 +606,12 @@ WNetUseConnectionA(
+     _In_     LPNETRESOURCEA  lpNetResource,
+     _In_opt_ LPCSTR        lpPassword,
+     _In_opt_ LPCSTR        lpUserId,
+-    _In_     DWORD           dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
+     _Out_writes_opt_(*lpBufferSize) LPSTR lpAccessName,
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetUseConnectionW(
+@@ -368,11 +619,12 @@ WNetUseConnectionW(
+     _In_     LPNETRESOURCEW  lpNetResource,
+     _In_opt_ LPCWSTR        lpPassword,
+     _In_opt_ LPCWSTR        lpUserId,
+-    _In_     DWORD           dwFlags,
++    _Win32_AssociatedEnum_(NET_CONNECT_FLAGS) _In_     DWORD           dwFlags,
+     _Out_writes_opt_(*lpBufferSize) LPWSTR lpAccessName,
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetUseConnection  WNetUseConnectionW
+ #else
+@@ -381,6 +633,7 @@ WNetUseConnectionW(
+ #endif /* WINVER >= 0x0400 */
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetUseConnection4A(
+@@ -395,6 +648,7 @@ WNetUseConnection4A(
+     _Inout_opt_ LPDWORD lpBufferSize,
+     _Out_opt_ LPDWORD   lpResult
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetUseConnection4W(
+@@ -420,6 +674,8 @@ WNetUseConnection4W(
+ //
+ //  Network Connection Dialogs.
+ //
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog(
+@@ -427,26 +683,28 @@ WNetConnectionDialog(
+     _In_ DWORD dwType
+     );
+ 
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog(
+     _In_opt_ HWND hwnd,
+     _In_ DWORD dwType
+     );
++_Win32_SupportedOS_END_()
+ 
+ #if(WINVER >= 0x0400)
+ typedef struct _CONNECTDLGSTRUCTA{
+     DWORD cbStructure;       /* size of this structure in bytes */
+     HWND hwndOwner;          /* owner window for the dialog */
+     LPNETRESOURCEA lpConnRes;/* Requested Resource info    */
+-    DWORD dwFlags;           /* flags (see below) */
++    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
+     DWORD dwDevNum;          /* number of devices connected to */
+ } CONNECTDLGSTRUCTA, FAR *LPCONNECTDLGSTRUCTA;
+ typedef struct _CONNECTDLGSTRUCTW{
+     DWORD cbStructure;       /* size of this structure in bytes */
+     HWND hwndOwner;          /* owner window for the dialog */
+     LPNETRESOURCEW lpConnRes;/* Requested Resource info    */
+-    DWORD dwFlags;           /* flags (see below) */
++    _Win32_AssociatedEnum_(CONNECTDLGSTRUCT_FLAGS) DWORD dwFlags;           /* flags (see below) */
+     DWORD dwDevNum;          /* number of devices connected to */
+ } CONNECTDLGSTRUCTW, FAR *LPCONNECTDLGSTRUCTW;
+ #ifdef UNICODE
+@@ -470,16 +728,20 @@ typedef LPCONNECTDLGSTRUCTA LPCONNECTDLGSTRUCT;
+ #define CONNDLG_PERSIST     0x00000010 /* Force persistent connection */
+ #define CONNDLG_NOT_PERSIST 0x00000020 /* Force connection NOT persistent */
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog1A(
+     _Inout_ LPCONNECTDLGSTRUCTA lpConnDlgStruct
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetConnectionDialog1W(
+     _Inout_ LPCONNECTDLGSTRUCTW lpConnDlgStruct
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetConnectionDialog1  WNetConnectionDialog1W
+ #else
+@@ -491,14 +753,14 @@ typedef struct _DISCDLGSTRUCTA{
+     HWND            hwndOwner;        /* owner window for the dialog */
+     LPSTR           lpLocalName;      /* local device name */
+     LPSTR           lpRemoteName;     /* network resource name */
+-    DWORD           dwFlags;          /* flags */
++    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
+ } DISCDLGSTRUCTA, FAR *LPDISCDLGSTRUCTA;
+ typedef struct _DISCDLGSTRUCTW{
+     DWORD           cbStructure;      /* size of this structure in bytes */
+     HWND            hwndOwner;        /* owner window for the dialog */
+     LPWSTR          lpLocalName;      /* local device name */
+     LPWSTR          lpRemoteName;     /* network resource name */
+-    DWORD           dwFlags;          /* flags */
++    _Win32_AssociatedEnum_(DISCDLGSTRUCT_FLAGS) DWORD           dwFlags;          /* flags */
+ } DISCDLGSTRUCTW, FAR *LPDISCDLGSTRUCTW;
+ #ifdef UNICODE
+ typedef DISCDLGSTRUCTW DISCDLGSTRUCT;
+@@ -511,16 +773,20 @@ typedef LPDISCDLGSTRUCTA LPDISCDLGSTRUCT;
+ #define DISC_UPDATE_PROFILE         0x00000001
+ #define DISC_NO_FORCE               0x00000040
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog1A(
+     _In_ LPDISCDLGSTRUCTA lpConnDlgStruct
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetDisconnectDialog1W(
+     _In_ LPDISCDLGSTRUCTW lpConnDlgStruct
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetDisconnectDialog1  WNetDisconnectDialog1W
+ #else
+@@ -532,52 +798,62 @@ WNetDisconnectDialog1W(
+ //  Network Browsing.
+ //
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetOpenEnumA(
+-    _In_  DWORD          dwScope,
+-    _In_  DWORD          dwType,
+-    _In_  DWORD          dwUsage,
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
++    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEA lpNetResource,
+-    _Out_ LPHANDLE       lphEnum
++    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetOpenEnumW(
+-    _In_  DWORD          dwScope,
+-    _In_  DWORD          dwType,
+-    _In_  DWORD          dwUsage,
++    _Win32_AssociatedEnum_(NET_RESOURCE_SCOPE) _In_  DWORD          dwScope,
++    _Win32_AssociatedEnum_(NET_RESOURCE_TYPE) _In_  DWORD          dwType,
++    _Win32_AssociatedEnum_(WNET_OPEN_ENUM_USAGE) _In_  DWORD          dwUsage,
+     _In_opt_ LPNETRESOURCEW lpNetResource,
+-    _Out_ LPHANDLE       lphEnum
++    _Win32_RAIIFree_(WNetCloseEnum) _Out_ LPHANDLE       lphEnum
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetOpenEnum  WNetOpenEnumW
+ #else
+ #define WNetOpenEnum  WNetOpenEnumA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetEnumResourceA(
+     _In_    HANDLE  hEnum,
+     _Inout_ LPDWORD lpcCount,
+-    _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetEnumResourceW(
+     _In_    HANDLE  hEnum,
+     _Inout_ LPDWORD lpcCount,
+-    _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID  lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetEnumResource  WNetEnumResourceW
+ #else
+ #define WNetEnumResource  WNetEnumResourceA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetCloseEnum(
+@@ -585,42 +861,50 @@ WNetCloseEnum(
+     );
+ 
+ #if(WINVER >= 0x0400)
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceParentA(
+     _In_ LPNETRESOURCEA lpNetResource,
+-    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpcbBuffer
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceParentW(
+     _In_ LPNETRESOURCEW lpNetResource,
+-    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpcbBuffer
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetResourceParent  WNetGetResourceParentW
+ #else
+ #define WNetGetResourceParent  WNetGetResourceParentA
+ #endif // !UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceInformationA(
+     _In_ LPNETRESOURCEA  lpNetResource,
+-    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpcbBuffer,
+     _Outptr_ LPSTR *lplpSystem
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetResourceInformationW(
+     _In_ LPNETRESOURCEW  lpNetResource,
+-    _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpcbBuffer) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpcbBuffer,
+     _Outptr_ LPWSTR *lplpSystem
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetResourceInformation  WNetGetResourceInformationW
+ #else
+@@ -667,22 +951,26 @@ typedef REMOTE_NAME_INFOA REMOTE_NAME_INFO;
+ typedef LPREMOTE_NAME_INFOA LPREMOTE_NAME_INFO;
+ #endif // UNICODE
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetUniversalNameA(
+     _In_ LPCSTR lpLocalPath,
+-    _In_ DWORD    dwInfoLevel,
+-    _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
++    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetUniversalNameW(
+     _In_ LPCWSTR lpLocalPath,
+-    _In_ DWORD    dwInfoLevel,
+-    _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
++    _Win32_AssociatedEnum_(UNC_INFO_LEVEL) _In_ DWORD    dwInfoLevel,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetUniversalName  WNetGetUniversalNameW
+ #else
+@@ -692,6 +980,8 @@ WNetGetUniversalNameW(
+ //
+ //  Authentication and Logon/Logoff.
+ //
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetUserA(
+@@ -702,6 +992,7 @@ WNetGetUserA(
+ //
+ //  Authentication and Logon/Logoff.
+ //
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetUserW(
+@@ -709,6 +1000,7 @@ WNetGetUserW(
+     _Out_writes_(*lpnLength) LPWSTR lpUserName,
+     _Inout_  LPDWORD lpnLength
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetUser  WNetGetUserW
+ #else
+@@ -730,6 +1022,8 @@ WNetGetUserW(
+ 
+ 
+ #if(WINVER >= 0x0400)
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetProviderNameA(
+@@ -737,6 +1031,7 @@ WNetGetProviderNameA(
+     _Out_writes_(*lpBufferSize) LPSTR lpProviderName,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetProviderNameW(
+@@ -744,6 +1039,7 @@ WNetGetProviderNameW(
+     _Out_writes_(*lpBufferSize) LPWSTR lpProviderName,
+     _Inout_ LPDWORD lpBufferSize
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetProviderName  WNetGetProviderNameW
+ #else
+@@ -753,8 +1049,8 @@ WNetGetProviderNameW(
+ typedef struct _NETINFOSTRUCT{
+     DWORD cbStructure;
+     DWORD dwProviderVersion;
+-    DWORD dwStatus;
+-    DWORD dwCharacteristics;
++    _Win32_AssociatedEnum_(WIN32_ERROR) DWORD dwStatus;
++    _Win32_AssociatedEnum_(NETINFOSTRUCT_CHARACTERISTICS) DWORD dwCharacteristics;
+     ULONG_PTR dwHandle;
+     WORD  wNetType;
+     DWORD dwPrinters;
+@@ -765,18 +1061,22 @@ typedef struct _NETINFOSTRUCT{
+ #define NETINFO_DISKRED     0x00000004  /* Provider requires disk redirections to connect */
+ #define NETINFO_PRINTERRED  0x00000008  /* Provider requires printer redirections to connect */
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetNetworkInformationA(
+     _In_  LPCSTR        lpProvider,
+     _Out_ LPNETINFOSTRUCT lpNetInfoStruct
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetNetworkInformationW(
+     _In_  LPCWSTR        lpProvider,
+     _Out_ LPNETINFOSTRUCT lpNetInfoStruct
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetNetworkInformation  WNetGetNetworkInformationW
+ #else
+@@ -789,6 +1089,9 @@ WNetGetNetworkInformationW(
+ //  Error handling.
+ //
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorA(
+@@ -798,6 +1101,8 @@ WNetGetLastErrorA(
+     _Out_writes_(nNameBufSize) LPSTR  lpNameBuf,
+     _In_ DWORD      nNameBufSize
+     );
++_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SetLastError_
+ _Check_return_
+ DWORD APIENTRY
+ WNetGetLastErrorW(
+@@ -807,6 +1112,7 @@ WNetGetLastErrorW(
+     _Out_writes_(nNameBufSize) LPWSTR  lpNameBuf,
+     _In_ DWORD      nNameBufSize
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define WNetGetLastError  WNetGetLastErrorW
+ #else
+@@ -895,6 +1201,7 @@ typedef struct _NETCONNECTINFOSTRUCT{
+ #define WNCON_SLOWLINK          0x00000004
+ #define WNCON_DYNAMIC           0x00000008
+ 
++_Win32_SupportedOS_BEGIN_(Windows2000)
+ _Check_return_
+ DWORD APIENTRY
+ MultinetGetConnectionPerformanceA(
+@@ -907,6 +1214,7 @@ MultinetGetConnectionPerformanceW(
+     _In_  LPNETRESOURCEW lpNetResource,
+     _Out_ LPNETCONNECTINFOSTRUCT lpNetConnectInfoStruct
+     );
++_Win32_SupportedOS_END_()
+ #ifdef UNICODE
+ #define MultinetGetConnectionPerformance  MultinetGetConnectionPerformanceW
+ #else

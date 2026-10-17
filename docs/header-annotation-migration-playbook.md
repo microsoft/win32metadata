@@ -1191,3 +1191,81 @@ qualified tooling, common native/MIDL SAL bootstrap, measured input/including-ID
 closure, actual native/MIDL output checks, fresh source/image grading and final
 current-head CI remain required. No historical 437-row expectation or physical
 normalization is an admission waiver for the resumed work.
+
+## Bounded original-artifact qualification after paired inheritance
+
+Local source checkpoint `2978a7fe20df7cceb156a519c0215fae89d6ce5f` ordinary-merges
+the qualified pilot `4d276d050137a8239ba24c17de797128bd887ae6`, including qualified
+root `afdb1fe7d6e14d8247b9d87498887fcd7eeed92c`. The shared SAL bootstrap and helper
+remain inherited, not independently rewritten. The canonical recipe contains
+13 pilot patches plus 50 original-artifact drafts. This records source coverage,
+**not 50 admissions**. Both distinct fresh canonical preparations prove the same
+51 actual inputs, 16 regenerated outputs and 3,443 byte-identical prepared headers.
+Those receipts bind the checkpoint's exact patch inputs, before the later WNet
+declaration-order correction.
+
+The first bounded qualification uses `wcmapi.h` and four original IDL streams.
+The IDL controls use matched pristine and patched private recipes with exactly
+37 inputs and eight outputs, including the inherited property including-IDL
+closure. All 24 pinned MIDL commands execute on x86, x64 and ARM64; their 12
+matched pairs preserve all 39 actually produced proxy/IID/dlldata/TLB files
+byte-for-byte. A TLB is counted only where MIDL actually produces it.
+
+| Original IDL | Actual inputs, pristine to patched, per architecture | Unchanged warning contexts per pair | Relocated interface floors |
+| --- | --- | ---: | --- |
+| `RadialControllerInterop.idl` | 9 to 12 | 7 | Two at `windows10.0.14393` |
+| `ddpbackup.idl` | 25 to 28 | 1,150 | Two at `windowsserver2012` |
+| `NotificationActivationCallback.idl` | 11 to 14 | 501 | One at `windows10.0.10240` |
+| `wsbapp.idl` | 25 to 28 | 1,154 | Three at `windowsserver2008` |
+
+Raw logs, saved preprocessor streams, actual input/tool hashes and commands are
+retained. Diagnostic file/code/context multisets are compared structurally;
+raw diagnostic text is not rewritten. The existing libclang AST surface controls
+pass all 48 C++/CINTERFACE metadata-off/on cases and all 12 plain-C metadata-off
+cases, with positive native/SAL coverage and exactly the eight interface facts.
+These are real libclang ABI/SAL observations, not claims of MSVC object-code
+equivalence or a fresh plain-C metadata-on qualification.
+
+Ordinary selected scrapes and distinct fresh repeats produce four literally
+identical IDL-owner sources and the identical Wcm source. Complete images use
+824 unmodified actual pilot-archive C# inputs, replacing only those fresh selected
+sources; they never copy an emitter-mutated generated tree or rewrite generated
+C#. The emitter settings are frozen from the qualified pilot.
+
+| Bounded local image | SHA256 |
+| --- | --- |
+| Wcm only | `815BD72AC97A6C6FC6B015B146451BA5C7C57B31285FA08CB362E7E062C6ED45` |
+| First four original IDLs plus Wcm | `AF76A701D55E5DEA6E878E33FB7466A848FA988FCE5DDF72415B96B26884DC4A` |
+
+Both images have zero unfiltered API differences against the actual qualified
+pilot image `E284F31134B8AD8740A78386890A5AE102B2B674B7F3BC7B799EC387DC4408F5`.
+The first-IDL image also has zero against the Wcm-only image. Its 13 physical
+cases preserve all 37,314 type snapshots literally, all eight IDL interface
+floors, five Wcm floors, 119 pilot floors and the 30 source-blocked residual
+units on every architecture; all 14 standard integrity cases pass. The Wcm-only
+image separately passes ten physical cases and the same 14 integrity cases.
+The raw root comparison remains exactly the inherited 54 enum-use rows, with
+SHA256 `64575A4777A9FF54AB10EC96545228C9356377324F83B5B42C6CCF27F7D27F2F`.
+The immutable same-SDK OLD comparison remains exactly the inherited 203 rows,
+with SHA256 `E6B27077C636425307FFEB779F1517A9C18A70BD770809CB7259781B14264ED6`.
+There is no new native-fidelity delta, expected-difference file, physical
+normalization or historical 437-row allowance.
+
+**Native admission and current-head CI remain outstanding.** Wcm's pinned
+native controls retain 15 passes and three inherited plain-C metadata-on
+failures: the qualified pilot's association carrier spells the native C tag as
+`VARENUM` instead of `enum VARENUM`. The minimal six-case, two-include-order
+witness is retained outside the checkout and has been delivered to the pilot
+owner. Its published correction is not inherited until the exact final
+actual-artifact qualification arrives; neither the helper nor pilot source is
+patched independently here. The first-IDL C metadata-on leg must likewise be
+completed against that accepted correction before final admission.
+
+WNet has a separate source dependency. Moving its unchanged eight-enum block
+before first use fixes declaration order, but metadata-on compilation still
+needs the complete existing `WIN32_ERROR` group. Its 3,376 generated members and
+91 explicit legacy members span original `WinError.h` and `SetupAPI.h` ownership.
+A partial group, placeholder, forward declaration or inclusion of all SetupAPI
+is not a solution. Only this admission is held for the owning global-source
+resolution; independent original-source work continues. The seven unavailable
+original-IDL artifacts and all their legacy facts remain source-blocked.

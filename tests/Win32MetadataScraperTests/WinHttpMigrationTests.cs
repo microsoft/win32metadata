@@ -364,7 +364,7 @@ namespace Win32MetadataScraperTests
             new EnumUse(PropertyStorageNamespace, "PROPVARIANT+_Anonymous_e__Union+_Anonymous_e__Struct", "vt",
                 "VARENUM", "UInt16", "Windows.Win32.System.Variant"),
         };
-        private static readonly string[] AdditionalOwnedMethods =
+        private static readonly string[] PilotAdditionalOwnedMethods =
         {
             "CeipIsOptedIn",
             "VerifierEnumerateResource",
@@ -394,6 +394,9 @@ namespace Win32MetadataScraperTests
             "WslConfigureDistribution", "WslGetDistributionConfiguration", "WslLaunchInteractive", "WslLaunch",
             "XInputGetState", "XInputSetState", "XInputGetCapabilities", "XInputEnable",
             "XInputGetAudioDeviceIds", "XInputGetBatteryInformation", "XInputGetKeystroke",
+        };
+        private static readonly string[] AdditionalOwnedMethods = PilotAdditionalOwnedMethods.Concat(new[]
+        {
             "WscRegisterForChanges", "WscUnRegisterChanges", "WscRegisterForUserNotifications",
             "WscGetSecurityProviderHealth", "WscQueryAntiMalwareUri", "WscGetAntiMalwareUri",
             "WcmQueryProperty", "WcmSetProperty", "WcmGetProfileList", "WcmSetProfileList", "WcmFreeMemory",
@@ -469,7 +472,7 @@ namespace Win32MetadataScraperTests
             "WNetGetUniversalNameA", "WNetGetUniversalNameW", "WNetGetUserA", "WNetGetUserW",
             "WNetOpenEnumA", "WNetOpenEnumW", "WNetSetLastErrorA", "WNetSetLastErrorW",
             "WNetUseConnection4A", "WNetUseConnection4W", "WNetUseConnectionA", "WNetUseConnectionW",
-        };
+        }).ToArray();
         private static readonly string[] AdditionalOwnedTypes =
         {
             "HEAPENTRY32", "IWaaSAssessor",
@@ -732,13 +735,85 @@ namespace Win32MetadataScraperTests
                         .Where(method => Supports(reader, method.GetCustomAttributes(), architecture)))
                     {
                         string methodName = reader.GetString(method.Name);
-                        if (ns == WinHttpNamespace || AdditionalOwnedMethods.Contains(methodName, StringComparer.Ordinal))
+                        if (ns == WinHttpNamespace || PilotAdditionalOwnedMethods.Contains(methodName, StringComparer.Ordinal))
                             result.AddRange(AttributeValues(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute")
                                 .Select(floor => ns + "." + methodName + "=" + floor));
                     }
                 }
                 return result.OrderBy(value => value, StringComparer.Ordinal).ToArray();
             }
+        }
+
+        [MigrationFact]
+        public void OriginalWcmBatchPreservesEveryPhysicalType()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "qualified pilot Wcm control");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalWcmBatchPreservesItsFiveExactAvailabilityTargets(int architecture)
+        {
+            const string ns = "Windows.Win32.NetworkManagement.WindowsConnectionManager";
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, ns, "Apis", architecture);
+            var after = Methods(current.Reader, ns, "Apis", architecture);
+            foreach (string name in new[]
+            {
+                "WcmFreeMemory", "WcmGetProfileList", "WcmQueryProperty", "WcmSetProfileList", "WcmSetProperty",
+            })
+            {
+                Assert.Contains(name, before.Keys);
+                Assert.Contains(name, after.Keys);
+                Assert.Equal(new[] { "windows8.0" },
+                    AttributeValues(control.Reader, before[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(new[] { "windows8.0" },
+                    AttributeValues(current.Reader, after[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+            this.output.WriteLine($"Architecture {architecture}: exactly the five existing Wcm availability targets remain windows8.0.");
+        }
+
+        [MigrationFact]
+        public void OriginalIdlBatchPreservesEveryPhysicalType()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "first four original-IDL control");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalIdlBatchPreservesItsEightExactAvailabilityTargets(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var fact in new[]
+            {
+                ("Windows.Win32.UI.Input.Radial", "IRadialControllerConfigurationInterop", "windows10.0.14393"),
+                ("Windows.Win32.UI.Input.Radial", "IRadialControllerInterop", "windows10.0.14393"),
+                ("Windows.Win32.Storage.DataDeduplication", "IDedupBackupSupport", "windowsserver2012"),
+                ("Windows.Win32.Storage.DataDeduplication", "IDedupReadFileCallback", "windowsserver2012"),
+                ("Windows.Win32.UI.Notifications", "INotificationActivationCallback", "windows10.0.10240"),
+                ("Windows.Win32.System.ServerBackup", "IWsbApplicationAsync", "windowsserver2008"),
+                ("Windows.Win32.System.ServerBackup", "IWsbApplicationBackupSupport", "windowsserver2008"),
+                ("Windows.Win32.System.ServerBackup", "IWsbApplicationRestoreSupport", "windowsserver2008"),
+            })
+            {
+                var before = Type(control.Reader, fact.Item2, architecture, fact.Item1);
+                var after = Type(current.Reader, fact.Item2, architecture, fact.Item1);
+                Assert.Equal(new[] { fact.Item3 },
+                    AttributeValues(control.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(new[] { fact.Item3 },
+                    AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+            this.output.WriteLine($"Architecture {architecture}: all eight original-IDL interface availability targets retain their exact floors.");
         }
 
         [Fact]
@@ -2272,7 +2347,7 @@ namespace Win32MetadataScraperTests
                 string expected = SnapshotType(expectedReader, entry.Value);
                 string actual = SnapshotType(actualReader, after[entry.Key]);
                 Assert.True(expected == actual,
-                    $"Scoped SupportedOS changed {baseline} metadata in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
+                    $"Unexpected physical change against {baseline} in {entry.Key}.\nExpected:\n{expected}\nActual:\n{actual}");
             }
             this.output.WriteLine($"All {before.Count} {baseline} physical types unchanged; no scope-adoption normalization or allowances.");
         }

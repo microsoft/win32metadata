@@ -414,6 +414,83 @@ static_assert(DISC_NO_FORCE == 64u);
             }
         }
 
+        [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
+        [MemberData(nameof(OriginalIdlHeaderControls))]
+        public void OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
+            string partition, string header, string architecture, string target, string language,
+            bool cInterface, bool enabled, string[] expected)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
+                (cInterface ? "#define CINTERFACE 1\n" : "") +
+                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, new[] { header }, "",
+                sourceText: source, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, partition, architecture, target, new[] { header }, "", metadataEnabled: enabled,
+                annotations: annotations, sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics,
+                language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] facts = annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(enabled && language == "c++" ? expected : Array.Empty<string>(), facts);
+            this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
+                $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
+                $"{facts.Length} exact interface availability facts.");
+        }
+
+        public static IEnumerable<object[]> OriginalIdlHeaderControls()
+        {
+            var owners = new[]
+            {
+                ("InputRadial", "RadialControllerInterop.h", new[]
+                {
+                    "IRadialControllerConfigurationInterop|SupportedOSPlatform(\"windows10.0.14393\")",
+                    "IRadialControllerInterop|SupportedOSPlatform(\"windows10.0.14393\")",
+                }),
+                ("Dedup", "ddpbackup.h", new[]
+                {
+                    "IDedupBackupSupport|SupportedOSPlatform(\"windowsserver2012\")",
+                    "IDedupReadFileCallback|SupportedOSPlatform(\"windowsserver2012\")",
+                }),
+                ("Win32_Tile_Badge_Notif", "NotificationActivationCallback.h", new[]
+                {
+                    "INotificationActivationCallback|SupportedOSPlatform(\"windows10.0.10240\")",
+                }),
+                ("Wsb", "wsbapp.h", new[]
+                {
+                    "IWsbApplicationAsync|SupportedOSPlatform(\"windowsserver2008\")",
+                    "IWsbApplicationBackupSupport|SupportedOSPlatform(\"windowsserver2008\")",
+                    "IWsbApplicationRestoreSupport|SupportedOSPlatform(\"windowsserver2008\")",
+                }),
+            };
+            foreach (var owner in owners)
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (var mode in new[] { ("c", false), ("c++", false), ("c++", true) })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                owner.Item1, owner.Item2, architecture.Item1, architecture.Item2,
+                                mode.Item1, mode.Item2, enabled, owner.Item3,
+                            };
+        }
+
         [NativeMigrationTheory]
         [MemberData(nameof(WcmOriginalHeaderControls))]
         public void OriginalWcmHeaderPreservesNativeAbiAndSalWithExactMetadata(
@@ -437,6 +514,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
+            Assert.NotEmpty(beforeSal);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
@@ -714,10 +792,12 @@ static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
 
     public sealed class NativeMigrationTheoryAttribute : TheoryAttribute
     {
-        public NativeMigrationTheoryAttribute()
+        public NativeMigrationTheoryAttribute(string additionalFixture = null)
         {
             if (Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS") == null)
                 Skip = "Set WINHTTP_PREPARED_HEADERS to the pinned private prepared-header tree.";
+            else if (additionalFixture != null && Environment.GetEnvironmentVariable(additionalFixture) == null)
+                Skip = "Set " + additionalFixture + " to the pinned private prepared-header tree.";
         }
     }
 }
