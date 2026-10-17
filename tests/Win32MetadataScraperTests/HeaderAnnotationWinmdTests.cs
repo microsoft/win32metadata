@@ -222,6 +222,78 @@ _WIN32META_ANNOTATE_METHOD_(IMethodReferences::Skip, _Win32_SupportedOS_Windows8
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LegacyAndHeaderResultsUseOnlyPreserveSig(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+_Win32_PreserveResult_ HRESULT __stdcall HeaderResult(unsigned value);
+HRESULT __stdcall LegacyMultiple(unsigned value);
+HRESULT __stdcall LegacyErrors(unsigned value);
+HRESULT __stdcall LegacyMixed(unsigned value);
+HRESULT __stdcall OrdinaryResult(unsigned value);
+typedef HRESULT (__stdcall* ORDINARY_RESULT_CALLBACK)(unsigned value);
+void UseResultCallback(ORDINARY_RESULT_CALLBACK callback);
+struct __declspec(uuid(""898ef5f4-bbf4-42f8-9707-a7b6b6214f9e"")) ILegacyResults
+{
+    virtual HRESULT __stdcall Next(unsigned count) = 0;
+    virtual HRESULT __stdcall Skip(unsigned count) = 0;
+    virtual HRESULT __stdcall Reset() = 0;
+};
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "LegacyCallbacks.manual.cs"), @"
+namespace Test
+{
+    [Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValues]
+    public delegate int LegacyMultipleCallback(uint value);
+    [Windows.Win32.Foundation.Metadata.CanReturnErrorsAsSuccess]
+    public delegate int LegacyErrorsCallback(uint value);
+}");
+            using var image = Emit(fixture.DirectoryPath, architecture, remaps: new Dictionary<string, string>
+            {
+                ["LegacyMultiple"] = "[CanReturnMultipleSuccessValues]",
+                ["LegacyErrors"] = "[CanReturnErrorsAsSuccess]",
+                ["LegacyMixed"] = "[CanReturnErrorsAsSuccess] [CanReturnMultipleSuccessValues] [PreserveSig]",
+                ["ILegacyResults::Next"] = "[CanReturnMultipleSuccessValues]",
+                ["ILegacyResults::Skip"] = "[CanReturnErrorsAsSuccess]",
+            });
+            var reader = image.Reader;
+            Assert.Equal(annotationsEnabled, FindMethod(reader, "Apis", "HeaderResult")
+                .ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            foreach (string name in new[] { "LegacyMultiple", "LegacyErrors", "LegacyMixed" })
+            {
+                var method = FindMethod(reader, "Apis", name);
+                Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+                Assert.Equal("Int32", method.DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "UInt32" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            }
+            foreach (string name in new[] { "Next", "Skip" })
+                Assert.True(FindMethod(reader, "ILegacyResults", name).ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.False(FindMethod(reader, "ILegacyResults", "Reset").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.False(FindMethod(reader, "Apis", "OrdinaryResult").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            foreach (string name in new[] { "LegacyMultipleCallback", "LegacyErrorsCallback" })
+            {
+                var invoke = FindMethod(reader, name, "Invoke");
+                Assert.True(invoke.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+                Assert.True(invoke.ImplAttributes.HasFlag(MethodImplAttributes.Runtime));
+                Assert.Equal("Int32", invoke.DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "UInt32" }, invoke.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                Assert.False(FindMethod(reader, name, ".ctor").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            }
+            Assert.False(FindMethod(reader, "ORDINARY_RESULT_CALLBACK", "Invoke").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.DoesNotContain(reader.CustomAttributes, handle => AttributeName(reader, handle) is
+                "CanReturnErrorsAsSuccessAttribute" or "CanReturnMultipleSuccessValuesAttribute" or "PreserveSigAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void LogicalEnumGroupsReachFinalWinmdWithoutChangingNativeTypes(string architecture, string target, bool enabled)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
@@ -1080,12 +1152,13 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
         private static MetadataImage Emit(HeaderAnnotationTests.NativeFixture fixture, string architecture)
             => Emit(fixture.DirectoryPath, architecture);
 
-        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null, bool nativeFieldArrayInfo = false)
+        internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
+            bool nativeFieldArrayInfo = false, Dictionary<string, string> remaps = null)
         {
             File.Copy(Path.Combine(AppContext.BaseDirectory, "assets", "Metadata.cs"),
                 Path.Combine(directory, "Metadata.manual.cs"));
             var compilation = ClangSharpSourceCompilation.Create(directory, architecture,
-                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                remaps ?? new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
                 new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
                 Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>(), nativeFieldArrayInfo);
             Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));

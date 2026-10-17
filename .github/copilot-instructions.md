@@ -66,6 +66,10 @@ Each arch job scrapes ALL partitions for that architecture.
 
 **NuGet feed:** The repo uses a private ADO Artifact Feed (`Win32Metadata-Dependencies`) as its sole package source. New packages from nuget.org must be saved to this feed first.
 
+**Import discovery before header overrides:** Before adding `_Win32_ImportLibrary_` or a manual DLL mapping, inspect the selected SDK's import libraries and the library-processing set in `scripts\CreateProcLibMappingForAllLibs.ps1`. Use `WinmdUtils dumpImports --lib <path>` to verify the actual symbols and DLL, not just the library filename. If a matching `.lib` was omitted or its imports were missed, fix shared discovery instead of adding a redundant header annotation. Use an authored override only when no authoritative SDK library mapping is available or the native contract genuinely requires an override; record the SDK/library search evidence.
+
+**Header-annotation migration:** Follow `docs\copilot\plans\header-annotation-migration-playbook.md`. Classify the original artifact before editing: patch authored `.h` files directly, but patch original `.idl` and regenerate all affected outputs for IDL-owned declarations. Never patch a generated `.h` or independently patch the same shared artifact in different partitions. Use exact qualified tooling/pilot pins and keep raw OLD-to-NEW differences visible.
+
 **Winmd equivalence:** After any change, the winmd must be compared against the baseline. The `NoSuggestedRemappings` test in `Windows.Win32.Tests` validates that no new unhandled remappings were introduced. API diffs are automatically posted as PR comments by CI. Run `.\scripts\DiffWinmdToBaseline.ps1` locally to see a full C# declaration diff against the last release.
 
 **Cross-partition remaps:** Remaps in `scraper.settings.rsp` are global — they apply to all partitions. Auto-discovered remaps (from `Win32MetadataScraper`) are per-partition. If a tag name is used across partitions but the typedef is only in one partition's headers, the remap must be global (in `scraper.settings.rsp`) OR the referencing partition must `#include` the header with the typedef.
