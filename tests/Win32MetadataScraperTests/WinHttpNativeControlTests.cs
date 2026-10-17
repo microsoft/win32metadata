@@ -445,7 +445,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
-                $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact availability facts.");
+                $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
         }
 
         public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
@@ -453,6 +453,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
+                "Wec", "Tbs", "WebDav",
             })
             {
                 string[] expected = partition switch
@@ -482,6 +483,30 @@ static_assert(DISC_NO_FORCE == 64u);
                         "RegisterOnlineBackupWithWindowsServerBackup", "DeregisterOnlineBackupFromWindowsServerBackup",
                         "UpdateOBStatusInWindowsServerBackup",
                     }.Select(name => name + "|SupportedOSPlatform(\"windowsserver2012\")").ToArray(),
+                    "Wec" => new[]
+                    {
+                        "EcOpenSubscriptionEnum", "EcEnumNextSubscription", "EcOpenSubscription",
+                        "EcSetSubscriptionProperty", "EcGetSubscriptionProperty", "EcSaveSubscription",
+                        "EcDeleteSubscription", "EcGetObjectArraySize", "EcSetObjectArrayProperty",
+                        "EcGetObjectArrayProperty", "EcInsertObjectArrayElement", "EcRemoveObjectArrayElement",
+                        "EcGetSubscriptionRunTimeStatus", "EcRetrySubscription", "EcClose",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")")
+                        .Append("EcOpenSubscriptionEnum|SetLastError").Append("EcOpenSubscription|SetLastError").ToArray(),
+                    "Tbs" => new[]
+                    {
+                        "Tbsi_Context_Create", "Tbsip_Context_Close", "Tbsip_Submit_Command",
+                        "Tbsip_Cancel_Commands", "Tbsi_Physical_Presence_Command",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")")
+                        .Concat(new[] { "Tbsi_GetDeviceInfo", "Tbsi_Get_OwnerAuth", "Tbsi_Revoke_Attestation" }
+                            .Select(name => name + "|SupportedOSPlatform(\"windows8.0\")"))
+                        .Append("Tbsi_Get_TCG_Log_Ex|SupportedOSPlatform(\"windows10.0.17134\")")
+                        .Append("GetDeviceID|ImportLibrary").ToArray(),
+                    "WebDav" => new[]
+                    {
+                        "DavAddConnection", "DavDeleteConnection", "DavGetUNCFromHTTPPath", "DavGetHTTPFromUNCPath",
+                        "DavGetTheLockOwnerOfTheFile", "DavGetExtendedError", "DavFlushFile", "DavInvalidateCache",
+                        "DavCancelConnectionsToServer", "DavRegisterAuthCallback", "DavUnregisterAuthCallback",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -492,6 +517,9 @@ static_assert(DISC_NO_FORCE == 64u);
                     "DirectML" => "DirectML.h",
                     "wnv" => "wnvapi.h",
                     "Wsb" => "wsbonline.h",
+                    "Wec" => "EvColl.h",
+                    "Tbs" => "tbs.h",
+                    "WebDav" => "davclnt.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]

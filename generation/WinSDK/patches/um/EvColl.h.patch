@@ -1,29 +1,111 @@
 diff --git a/um/EvColl.h b/um/EvColl.h
-index 75c4bc62..739e95a6 100644
+index 75c4bc62..d16f6358 100644
 --- a/um/EvColl.h
 +++ b/um/EvColl.h
-@@ -179,6 +179,8 @@ typedef enum _EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS
+@@ -179,10 +179,13 @@ typedef enum _EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS
  } EC_SUBSCRIPTION_RUNTIME_STATUS_ACTIVE_STATUS;
  
  
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  EC_HANDLE WINAPI EcOpenSubscriptionEnum(
      DWORD Flags 
      );
-@@ -191,6 +193,7 @@ BOOL WINAPI EcEnumNextSubscription(
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcEnumNextSubscription( 
+     EC_HANDLE SubscriptionEnum,
+     DWORD SubscriptionNameBufferSize,
+@@ -191,12 +194,15 @@ BOOL WINAPI EcEnumNextSubscription(
      _Out_ PDWORD SubscriptionNameBufferUsed
      );
  
++_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  EC_HANDLE WINAPI EcOpenSubscription(
      LPCWSTR SubscriptionName,
      DWORD AccessMask,
-@@ -275,6 +278,7 @@ BOOL WINAPI EcRetrySubscription(
+     DWORD Flags 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcSetSubscriptionProperty( 
+     EC_HANDLE Subscription,
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -204,6 +210,7 @@ BOOL WINAPI EcSetSubscriptionProperty(
+     PEC_VARIANT PropertyValue
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcGetSubscriptionProperty( 
+     EC_HANDLE Subscription,
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -213,21 +220,25 @@ BOOL WINAPI EcGetSubscriptionProperty(
+     _Out_ PDWORD PropertyValueBufferUsed 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcSaveSubscription( 
+     EC_HANDLE Subscription,
+     DWORD Flags
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcDeleteSubscription(
+     LPCWSTR SubscriptionName,
+     DWORD   Flags 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcGetObjectArraySize( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray,
+     _Out_ PDWORD ObjectArraySize 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcSetObjectArrayProperty( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -236,6 +247,7 @@ BOOL WINAPI EcSetObjectArrayProperty(
+     PEC_VARIANT PropertyValue
+     );
+  
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcGetObjectArrayProperty( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     EC_SUBSCRIPTION_PROPERTY_ID PropertyId,
+@@ -246,16 +258,19 @@ BOOL WINAPI EcGetObjectArrayProperty(
+     _Out_ PDWORD PropertyValueBufferUsed 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcInsertObjectArrayElement( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     DWORD ArrayIndex 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcRemoveObjectArrayElement( 
+     EC_OBJECT_ARRAY_PROPERTY_HANDLE ObjectArray, 
+     DWORD ArrayIndex 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcGetSubscriptionRunTimeStatus( 
+     LPCWSTR SubscriptionName,
+     EC_SUBSCRIPTION_RUNTIME_STATUS_INFO_ID StatusInfoId,
+@@ -266,12 +281,14 @@ BOOL WINAPI EcGetSubscriptionRunTimeStatus(
+     _Out_ PDWORD StatusValueBufferUsed 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ BOOL WINAPI EcRetrySubscription(
+     LPCWSTR SubscriptionName,
+     LPCWSTR EventSourceName,
+     DWORD Flags 
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
  BOOL WINAPI EcClose( 
      EC_HANDLE Object
      );
-+_Win32_SupportedOS_END_()
- 
- 
- #ifdef __cplusplus

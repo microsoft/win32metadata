@@ -914,6 +914,90 @@ namespace Win32MetadataScraperTests
             Assert.Equal(count, patch.Split('\n').Count(line => line.TrimEnd('\r') == "+" + annotation));
         }
 
+        [Theory]
+        [InlineData("um", "EvColl.h", 15)]
+        [InlineData("shared", "tbs.h", 9)]
+        [InlineData("um", "davclnt.h", 11)]
+        public void AuthoredServiceHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
+        {
+            string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
+            Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
+            Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
+            Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+_Win32_SupportedOS_", StringComparison.Ordinal)));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void FifthAuthoredServiceBatchPreservesFloorsLastErrorAndImport(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var group in new[]
+            {
+                ("Windows.Win32.System.EventCollector", "windows6.0.6000", new[]
+                {
+                    "EcOpenSubscriptionEnum", "EcEnumNextSubscription", "EcOpenSubscription",
+                    "EcSetSubscriptionProperty", "EcGetSubscriptionProperty", "EcSaveSubscription",
+                    "EcDeleteSubscription", "EcGetObjectArraySize", "EcSetObjectArrayProperty",
+                    "EcGetObjectArrayProperty", "EcInsertObjectArrayElement", "EcRemoveObjectArrayElement",
+                    "EcGetSubscriptionRunTimeStatus", "EcRetrySubscription", "EcClose",
+                }),
+                ("Windows.Win32.System.TpmBaseServices", "windows6.0.6000", new[]
+                {
+                    "Tbsi_Context_Create", "Tbsip_Context_Close", "Tbsip_Submit_Command",
+                    "Tbsip_Cancel_Commands", "Tbsi_Physical_Presence_Command",
+                }),
+                ("Windows.Win32.System.TpmBaseServices", "windows8.0",
+                    new[] { "Tbsi_GetDeviceInfo", "Tbsi_Get_OwnerAuth", "Tbsi_Revoke_Attestation" }),
+                ("Windows.Win32.System.TpmBaseServices", "windows10.0.17134", new[] { "Tbsi_Get_TCG_Log_Ex" }),
+                ("Windows.Win32.NetworkManagement.WebDav", "windows6.0.6000", new[]
+                {
+                    "DavAddConnection", "DavDeleteConnection", "DavGetUNCFromHTTPPath", "DavGetHTTPFromUNCPath",
+                    "DavGetTheLockOwnerOfTheFile", "DavGetExtendedError", "DavFlushFile", "DavInvalidateCache",
+                    "DavCancelConnectionsToServer", "DavRegisterAuthCallback", "DavUnregisterAuthCallback",
+                }),
+            })
+                foreach (var image in new[] { control, current })
+                {
+                    var methods = Methods(image.Reader, group.Item1, "Apis", architecture);
+                    foreach (string name in group.Item3)
+                        Assert.Equal(new[] { group.Item2 },
+                            AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            foreach (var image in new[] { control, current })
+            {
+                var methods = Methods(image.Reader, "Windows.Win32.System.EventCollector", "Apis", architecture);
+                foreach (string name in new[] { "EcOpenSubscriptionEnum", "EcOpenSubscription" })
+                    Assert.True(methods[name].GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError));
+                var deviceId = Methods(image.Reader, "Windows.Win32.System.TpmBaseServices", "Apis", architecture)["GetDeviceID"];
+                Assert.Equal("tbs.dll", image.Reader.GetString(image.Reader.GetModuleReference(deviceId.GetImport().Module).Name));
+                Assert.Equal("GetDeviceID", image.Reader.GetString(deviceId.GetImport().Name));
+            }
+            this.output.WriteLine($"Architecture {architecture}: all 35 exact function floors, two explicit last-error flags " +
+                "and the existing GetDeviceID import remain unchanged.");
+        }
+
+        [MigrationFact]
+        public void FifthAuthoredServiceBatchPreservesEveryPhysicalTypeAndLiteralOrder()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(before.Keys, after.Keys);
+            foreach (var entry in before)
+            {
+                var original = entry.Value;
+                var next = after[entry.Key];
+                Assert.Equal(original.GetFields().Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    next.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                Assert.Equal(SnapshotType(control.Reader, original), SnapshotType(current.Reader, next));
+            }
+            this.output.WriteLine("All physical type snapshots and literal type/field/method sequences match without normalization.");
+        }
+
         [MigrationTheory]
         [InlineData(1)]
         [InlineData(2)]
