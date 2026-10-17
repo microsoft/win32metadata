@@ -125,9 +125,9 @@
       "sdkSha256": "FA56628E0426D07A7E5CC93E0F0D09821C805D4519B28BAF11B03EE8BA6AA0F8"
     },
     {
-      "path": "um\\wscapi.h",
+      "path": "um\\Wscapi.h",
       "sourceSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B",
-      "sdkPath": "c\\include\\10.0.26100.0\\um\\wscapi.h",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\Wscapi.h",
       "sdkSha256": "34E079E0DDF931DDD634BB8E99EE0FC467D134531920C40E25C233427E182B5B"
     },
     {
@@ -1011,7 +1011,7 @@
     "um\\wslapi.h.patch",
     "um\\Xinput.h.patch",
     "um\\wcmapi.h.patch",
-    "um\\wscapi.h.patch",
+    "um\\Wscapi.h.patch",
     "um\\DhcpCSdk.h.patch",
     "um\\dhcpsapi.h.patch",
     "um\\Dhcpv6cSdk.h.patch",

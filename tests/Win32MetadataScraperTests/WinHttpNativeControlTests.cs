@@ -433,7 +433,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
-            if (header == "amxmlgraphbuilder.h")
+            if (header is "amxmlgraphbuilder.h" or "wnvapi.h")
                 Assert.Empty(beforeSal);
             else
                 Assert.NotEmpty(beforeSal);
@@ -450,7 +450,10 @@ static_assert(DISC_NO_FORCE == 64u);
 
         public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
         {
-            foreach (string partition in new[] { "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory" })
+            foreach (string partition in new[]
+            {
+                "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
+            })
             {
                 string[] expected = partition switch
                 {
@@ -467,12 +470,28 @@ static_assert(DISC_NO_FORCE == 64u);
                         "FhServiceReloadConfiguration", "FhServiceBlockBackup", "FhServiceUnblockBackup",
                     }.Select(name => name + "|SupportedOSPlatform(\"windows8.0\")")
                         .Append("Pipe|RAIIFree").ToArray(),
+                    "SecurityCenter" => new[]
+                    {
+                        "WscRegisterForChanges", "WscUnRegisterChanges", "WscGetSecurityProviderHealth",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray(),
+                    "DirectML" => new[] { "DMLCreateDevice|SupportedOSPlatform(\"windows10.0.10240\")" },
+                    "wnv" => new[] { "WnvOpen", "WnvRequestNotification" }
+                        .Select(name => name + "|SupportedOSPlatform(\"windowsserver2012\")").ToArray(),
+                    "Wsb" => new[]
+                    {
+                        "RegisterOnlineBackupWithWindowsServerBackup", "DeregisterOnlineBackupFromWindowsServerBackup",
+                        "UpdateOBStatusInWindowsServerBackup",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windowsserver2012\")").ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
                 {
                     "MdmReg" => "MDMRegistration.h",
                     "FileHistory" => "FhSvcCtl.h",
+                    "SecurityCenter" => "wscapi.h",
+                    "DirectML" => "DirectML.h",
+                    "wnv" => "wnvapi.h",
+                    "Wsb" => "wsbonline.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]
@@ -481,7 +500,7 @@ static_assert(DISC_NO_FORCE == 64u);
                     ("x64", "x86_64-pc-windows-msvc"),
                     ("arm64", "aarch64-pc-windows-msvc"),
                 })
-                    foreach (string language in partition.StartsWith("Media.", StringComparison.Ordinal) ?
+                    foreach (string language in partition == "DirectML" || partition.StartsWith("Media.", StringComparison.Ordinal) ?
                         new[] { "c++" } : new[] { "c", "c++" })
                         foreach (bool enabled in new[] { false, true })
                             yield return new object[]

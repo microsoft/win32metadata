@@ -1,7 +1,7 @@
-diff --git a/um/wscapi.h b/um/wscapi.h
+diff --git a/um/Wscapi.h b/um/Wscapi.h
 index 369f82da..dbf78f37 100644
---- a/um/wscapi.h
-+++ b/um/wscapi.h
+--- a/um/Wscapi.h
++++ b/um/Wscapi.h
 @@ -69,6 +69,7 @@ typedef enum _WSC_SECURITY_PROVIDER_HEALTH
  
  

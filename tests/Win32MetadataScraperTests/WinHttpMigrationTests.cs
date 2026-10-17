@@ -885,6 +885,139 @@ namespace Win32MetadataScraperTests
             this.output.WriteLine($"Architecture {architecture}: all eleven MdmReg function floors and the XML graph interface floor remain exact.");
         }
 
+        [Fact]
+        public void SecurityCenterAuthoredHeaderPreservesItsOriginalPathSpelling()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            var header = Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray()
+                .Where(value => value.GetProperty("path").GetString().Equals("um\\Wscapi.h", StringComparison.OrdinalIgnoreCase)));
+            Assert.Equal("um\\Wscapi.h", header.GetProperty("path").GetString());
+            Assert.Equal("c\\include\\10.0.26100.0\\um\\Wscapi.h", header.GetProperty("sdkPath").GetString());
+            Assert.Contains("Wscapi.h", Directory.EnumerateFiles(Path.Combine(project, "RecompiledIdlHeaders", "um"))
+                .Select(Path.GetFileName));
+            string[] patch = File.ReadAllLines(Path.Combine(project, "patches", "um", "Wscapi.h.patch"));
+            Assert.Equal("--- a/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("--- ", StringComparison.Ordinal))));
+            Assert.Equal("+++ b/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("+++ ", StringComparison.Ordinal))));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void FourthAuthoredAvailabilityBatchPreservesFloorsOmissionsAndNativeRetvalFlags(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            const string securityCenter = "Windows.Win32.System.SecurityCenter";
+            const string directML = "Windows.Win32.AI.MachineLearning.DirectML";
+            foreach (var group in new[]
+            {
+                (securityCenter, "windows6.0.6000", new[]
+                {
+                    "WscRegisterForChanges", "WscUnRegisterChanges", "WscGetSecurityProviderHealth",
+                }),
+                (directML, "windows10.0.10240", new[] { "DMLCreateDevice" }),
+                ("Windows.Win32.NetworkManagement.WindowsNetworkVirtualization", "windowsserver2012",
+                    new[] { "WnvOpen", "WnvRequestNotification" }),
+            })
+            {
+                var before = Methods(control.Reader, group.Item1, "Apis", architecture);
+                var after = Methods(current.Reader, group.Item1, "Apis", architecture);
+                foreach (string name in group.Item3)
+                {
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(control.Reader, before[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(current.Reader, after[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            }
+            foreach (var image in new[] { control, current })
+            {
+                var direct = Methods(image.Reader, directML, "Apis", architecture);
+                Assert.Empty(AttributeValues(image.Reader, direct["DMLCreateDevice1"].GetCustomAttributes(),
+                    "SupportedOSPlatformAttribute"));
+                var backup = Methods(image.Reader, "Windows.Win32.System.ServerBackup", "Apis", architecture);
+                foreach (string name in new[]
+                {
+                    "RegisterOnlineBackupWithWindowsServerBackup", "DeregisterOnlineBackupFromWindowsServerBackup",
+                    "UpdateOBStatusInWindowsServerBackup",
+                })
+                    Assert.DoesNotContain(name, backup.Keys);
+            }
+            var sites = NativeRetvalUses.Where(value => value.Namespace == securityCenter).ToArray();
+            Assert.Equal(16, sites.Length);
+            foreach (var use in sites)
+            {
+                var before = Methods(control.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+                var after = Methods(current.Reader, use.Namespace, use.Owner, architecture)[use.Method];
+                Assert.Equal(before.Attributes, after.Attributes);
+                Assert.Equal(before.ImplAttributes, after.ImplAttributes);
+                Assert.Equal(Signature(before.DecodeSignature(Signatures, null)), Signature(after.DecodeSignature(Signatures, null)));
+                var original = before.GetParameters().Select(control.Reader.GetParameter)
+                    .Single(value => control.Reader.GetString(value.Name) == use.Parameter);
+                var parameter = after.GetParameters().Select(current.Reader.GetParameter)
+                    .Single(value => current.Reader.GetString(value.Name) == use.Parameter);
+                Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+                Assert.Equal(original.Attributes, parameter.Attributes);
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Retval));
+                Assert.DoesNotContain(original.GetCustomAttributes(),
+                    handle => AttributeName(control.Reader, handle) == "RetValAttribute");
+                var attribute = Assert.Single(parameter.GetCustomAttributes()
+                    .Where(handle => AttributeName(current.Reader, handle) == "RetValAttribute"));
+                Assert.Equal(MetadataNamespace + ".RetValAttribute", AttributeTypeName(current.Reader, attribute));
+                Assert.Equal(new byte[] { 1, 0, 0, 0 },
+                    current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(attribute).Value));
+            }
+            this.output.WriteLine($"Architecture {architecture}: six exact floors, three unchanged unmapped omissions, " +
+                "unannotated DMLCreateDevice1, and 16 native custom retval additions with identical signatures and CLI flags.");
+        }
+
+        [MigrationFact]
+        public void FourthAuthoredAvailabilityBatchHasOnlySixteenExactNativeRetvalRows()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(before.Keys, after.Keys);
+            var sites = NativeRetvalUses.Where(value => value.Namespace == "Windows.Win32.System.SecurityCenter")
+                .ToHashSet();
+            Assert.Equal(16, sites.Count);
+            var used = new HashSet<(string Namespace, string Owner, string Method, string Parameter)>();
+            foreach (var entry in before)
+            {
+                var original = entry.Value;
+                var next = after[entry.Key];
+                Assert.Equal(original.GetFields()
+                    .Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    next.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                string[] oldRows = SnapshotType(control.Reader, original).Split('\n');
+                string[] newRows = SnapshotType(current.Reader, next).Split('\n');
+                Assert.Equal(oldRows.Length, newRows.Length);
+                foreach (int index in Enumerable.Range(0, oldRows.Length).Where(value => oldRows[value] != newRows[value]))
+                {
+                    string[] parameter = oldRows[index].Split('|');
+                    Assert.Equal(6, parameter.Length);
+                    Assert.Equal("P", parameter[0]);
+                    string method = oldRows.Take(index).Last(row => row.StartsWith("M|", StringComparison.Ordinal)).Split('|')[1];
+                    var site = (control.Reader.GetString(original.Namespace), control.Reader.GetString(original.Name), method, parameter[2]);
+                    Assert.Contains(site, sites);
+                    Assert.True(used.Add(site));
+                    string[] attributes = parameter[5].Split(',', StringSplitOptions.RemoveEmptyEntries);
+                    Assert.DoesNotContain(attributes, value => value.StartsWith(MetadataNamespace + ".RetValAttribute:",
+                        StringComparison.Ordinal));
+                    parameter[5] = string.Join(",", attributes.Append(MetadataNamespace + ".RetValAttribute:01000000")
+                        .OrderBy(value => value, StringComparer.Ordinal));
+                    Assert.Equal(string.Join("|", parameter), newRows[index]);
+                }
+            }
+            Assert.True(sites.SetEquals(used));
+            this.output.WriteLine("All physical type snapshots and literal type/field/method sequences compared; " +
+                "only the 16 exact SecurityCenter retval parameter rows changed.");
+        }
+
         [MigrationTheory]
         [InlineData(1)]
         [InlineData(2)]

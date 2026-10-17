@@ -1848,3 +1848,87 @@ FileHistory placement/floor negatives and Nla custom-RetVal physical audit
 remain separate evidence. This is a locally verified four-owner source
 checkpoint, not production admission of all authored drafts or the held
 global source batch, and not owning current-head CI qualification.
+
+### Four authored availability headers: original-source local results
+
+The next disjoint cohort qualifies the existing patches on original SDK
+`Wscapi.h`, `DirectML.h`, `wnvapi.h` and `wsbonline.h`. Its nine relocated
+availability facts are the three Wsc functions, `DMLCreateDevice` at
+`windows10.0.10240`, both Wnv functions, and the three online-backup functions.
+`DMLCreateDevice1` remains without an availability floor. The online-backup
+functions remain absent from metadata because their existing imports are
+unmapped; no DLL mapping, declaration or replacement API is invented.
+
+The first strict inventory check retained a literal `Wscapi.h` to `wscapi.h`
+path difference, despite Windows resolving both spellings. The source binding,
+patch target and patch artifact now preserve the original SDK's `Wscapi`
+spelling. The stock preparer's separate patch-filename rejection is also
+retained. Original mixed patch-context line endings are preserved; only the
+three patch-wrapper target spellings change. Neither paths nor declaration
+order are normalized to make these checks pass.
+
+The matched recipe has 37 header bindings and 29 pristine/33 patched source
+patches. Pristine `504BC1E4...` explicitly reuses the byte-identical fresh
+control from the preceding spelling preflight. Distinct final patched and
+repeat preparations both identify as `94437AAD...`. All three actual
+3,443-header trees were rehashed: the pristine tree equals the preceding
+original-IDL control, exactly four original headers change, and all patched
+and repeat paths and bytes match literally. Removing only the eight exact
+inserted annotation lines reproduces every original SDK byte. The 51 MIDL
+inputs, four tools and two scripts remain literal matches to the preceding
+IDL cohort; this does not claim a new all-architecture MIDL/native replay.
+
+The final exact-source native run passes 78 cases without skips: 42 new
+SecurityCenter/DirectML/Wnv/Wsb controls and 36 retained MdmReg/DirectShow/XML/
+FileHistory controls. They compare native ABI, SAL, diagnostics and exact
+annotation sites on x86, x64 and ARM64, metadata off/on. The new headers are
+checked as C17 and C++17 where supported; DirectML is C++ only. Existing
+DirectShow standard selection remains unchanged. Earlier successful native
+runs and the spelling/format preflights remain separately identified evidence,
+not substitutes for this final run.
+
+Fresh normal first/repeat traversals produce four C# files, five generated
+RSP files and one header preamble, all literal matches. Their complete
+function-pointer fixup file matches the frozen full configuration; all 13
+normal common pointer reductions are present in each architecture's complete
+rule set. No generated source or rule is repaired.
+
+Complete images rematerialize the exact 831-entry third-IDL source archive
+(824 C# inputs), replacing only those four complete normal C# outputs.
+Control `7279E5A3...` is unfiltered raw API-zero against the preceding
+`1D0E2188...` image. Candidate `900AC677...` and independent repeat
+`AF8AA892...` each have exactly the same 16 untouched raw difference rows,
+SHA256 `EEEEC8409DADD43282B6D4C42AE33F9EE2895EE97BC4FCD68355F0488E378112`.
+Candidate to repeat is raw-zero. All other owners and constants remain
+explicit frozen context; the held WinError/SetupAPI contributions are not
+included or restored to production.
+
+These 16 additions faithfully capture existing `[retval][out]` comments in
+the unchanged shipped `iwscapi.h` consumption header. They are source-backed
+additions, not availability relocation or new annotation vocabulary, and
+their native-source policy was already reviewed. Each image passes nine
+physical/source cases without skips: all 37,314 physical type snapshots and
+literal type/field/method sequences, exactly six emitted floors and three
+unmapped omissions, and all 30 legacy facts for the seven missing-IDL
+artifacts. All 16 exact parameter sites have one custom `RetValAttribute`
+with blob `01000000`, unchanged method signatures/flags and parameter
+sequences/Out flags, and an unset CLI `ParameterAttributes.Retval` bit on
+all three architectures. The comparer spelling `[Out,RetVal]` alone is not
+evidence of a CLI flag change. Consumer projection effects remain unmeasured.
+
+Both images also pass all 14 existing integrity/interface/RAII tests without
+skips. An initial 13-case class-filtered run omitted the existing RAII test;
+its incomplete-selection failure is retained, and the complete suite was
+rerun. The original shared binary fixture was restored byte-for-byte after
+every run.
+
+This raises bounded local resumed-original-artifact coverage to 20 of the
+50 authored drafts: 12 original IDLs and eight authored headers, separately
+from the 13 inherited pilot/bootstrap patch units and two held global
+dependency patches. These are source-artifact/cohort counts, not complete
+partition admissions or fresh replays of every earlier native witness.
+Thirty authored-header drafts still await original-source qualification.
+The seven missing-IDL migrations, WNet/RPC representation and literal-order
+gates, excluded field-array activation and owning current-head production/CI
+admission remain separate. Draft authoring and old green CI do not satisfy
+those gates.
