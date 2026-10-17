@@ -434,7 +434,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
-            if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h")
+            if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h" or "devfiltertypes.h")
                 Assert.Empty(beforeSal);
             else
                 Assert.NotEmpty(beforeSal);
@@ -454,7 +454,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav", "NetBios", "NetShell",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery",
             })
             {
                 string[] expected = partition switch
@@ -514,6 +514,12 @@ static_assert(DISC_NO_FORCE == 64u);
                         "MatchEnumTag", "MatchToken", "PreprocessCommand", "PrintError", "PrintMessageFromModule",
                         "PrintMessage", "RegisterContext", "RegisterHelper",
                     }.Select(name => name + "|SupportedOSPlatform(\"windows5.1.2600\")").ToArray(),
+                    "Eap" => new[]
+                    {
+                        "RasEapGetInfo", "RasEapFreeMemory", "RasEapInvokeInteractiveUI",
+                        "RasEapInvokeConfigUI", "RasEapGetIdentity",
+                    }.Select(name => name + "|SupportedOSPlatform(\"windows5.0\")").ToArray(),
+                    "DeviceQuery" => Array.Empty<string>(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -529,6 +535,8 @@ static_assert(DISC_NO_FORCE == 64u);
                     "WebDav" => "davclnt.h",
                     "NetBios" => "nb30.h",
                     "NetShell" => "NetSh.h",
+                    "Eap" => "Raseapif.h",
+                    "DeviceQuery" => "devfiltertypes.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]

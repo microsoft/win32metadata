@@ -2232,3 +2232,51 @@ and literal-order gates, excluded field-array activation, and owning
 production/current-head CI/publication are still separate. This local
 cohort neither changes those dispositions nor claims consumer effects
 or a PR merge.
+
+### Next bounded native gate: Eap and DeviceQuery remain unadmitted
+
+The next independent original-header controls select `Raseapif.h`
+(Eap, alongside already-qualified original `RrasCfg.idl`) and
+`devfiltertypes.h` (DeviceQuery). Raseapif now spells its five existing
+Windows 2000 floors on the exact declarations rather than a scope.
+These are third-party provider exports, not fixed-DLL imports; none
+may be invented as new winmd methods. The existing DeviceQuery patch
+is unchanged.
+
+One fresh C17/C++17, metadata-off/on, three-architecture native run
+executes 24 cases without skips. Eap passes all twelve. DeviceQuery
+passes its six metadata-off controls but **fails all six metadata-on
+controls**. The first exact native-fact mismatch is:
+
+```text
+original:         enum _DEVPROP_OPERATOR int
+metadata enabled: enum _DEVPROP_OPERATOR unsigned int
+```
+
+The existing conditional `: unsigned int` in `devfiltertypes.h.patch`
+therefore changes the measured native enum contract. The previous
+qualified physical `Windows.Win32.Devices.DeviceQuery.DEVPROP_OPERATOR`
+already has UInt32 storage. Three actual prior-control architecture
+cases confirm that representation, the existing Eap interface floor
+and the absence of invented provider imports. Preserving the old
+physical representation is not proof that the unsigned native carrier
+is faithful. The failing comparison stops at the first mismatch; it
+does not establish equality of every other fact, a calling-ABI change,
+or a consumer effect.
+
+Strict actual production-patch round trips reproduce both authored
+originals. Ordinary first/repeat preparation and whole-owner traversal
+both succeed without warnings or errors at identity `80DC65DE...`.
+All 3,443 actual headers in each preparation and all eight normal
+generated files are literal between runs. That source success does
+not override the native contradiction. Untouched scratch outputs
+remain retained without a normalized-equality claim; no fresh
+all-architecture native MIDL claim is made.
+
+DeviceQuery is held for an explicit native/projection disposition after
+this single bounded repro. No cast, native retyping, new annotation
+vocabulary, shared-tooling change, weakened comparison or source repair
+is selected. Eap has native evidence but has not completed its own
+full-image qualification. Neither original increases the qualified
+count above **28 of 50**, and no new complete image, current-head CI
+or publication admission is claimed for this experiment.

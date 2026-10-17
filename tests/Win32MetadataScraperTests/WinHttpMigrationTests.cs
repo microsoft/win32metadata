@@ -923,12 +923,48 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "lowlevelmonitorconfigurationapi.h", 6)]
         [InlineData("um", "highlevelmonitorconfigurationapi.h", 20)]
         [InlineData("um", "physicalmonitorenumerationapi.h", 6)]
+        [InlineData("um", "Raseapif.h", 5)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
             Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
             Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
-            Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+_Win32_SupportedOS_", StringComparison.Ordinal)));
+            Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                line.Substring(1).TrimStart().StartsWith("_Win32_SupportedOS_", StringComparison.Ordinal)));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void EighthAuthoredEapAndDeviceQueryBatchPreservesItsExactExistingShape(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            const string eapNamespace = "Windows.Win32.Security.ExtensibleAuthenticationProtocol";
+            foreach (var image in new[] { control, current })
+            {
+                var provider = Type(image.Reader, "IEAPProviderConfig", architecture, eapNamespace);
+                Assert.Equal(new[] { "windows5.0" },
+                    AttributeValues(image.Reader, provider.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                var names = image.Reader.TypeDefinitions.Select(image.Reader.GetTypeDefinition)
+                    .Where(type => image.Reader.GetString(type.Namespace) == eapNamespace &&
+                        Supports(image.Reader, type.GetCustomAttributes(), architecture))
+                    .SelectMany(type => type.GetMethods())
+                    .Select(handle => image.Reader.GetString(image.Reader.GetMethodDefinition(handle).Name)).ToArray();
+                foreach (string name in new[]
+                {
+                    "RasEapGetInfo", "RasEapFreeMemory", "RasEapInvokeInteractiveUI",
+                    "RasEapInvokeConfigUI", "RasEapGetIdentity",
+                })
+                    Assert.DoesNotContain(name, names);
+                var operators = Type(image.Reader, "DEVPROP_OPERATOR", architecture, "Windows.Win32.Devices.DeviceQuery");
+                var storage = operators.GetFields().Select(image.Reader.GetFieldDefinition)
+                    .Single(field => image.Reader.GetString(field.Name) == "value__");
+                Assert.Equal("UInt32", storage.DecodeSignature(Signatures, null));
+            }
+            this.output.WriteLine($"Architecture {architecture}: the existing Eap interface floor and UInt32 device operator " +
+                "storage remain exact; five native third-party provider exports are not invented as imported APIs.");
         }
 
         internal static IEnumerable<(string Header, string[] Functions, string[] WithoutLastError)> AuthoredMonitorHeaderContracts()
