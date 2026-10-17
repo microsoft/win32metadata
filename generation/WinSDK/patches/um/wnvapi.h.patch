@@ -2,19 +2,18 @@ diff --git a/um/wnvapi.h b/um/wnvapi.h
 index 292b8512..92ec58b0 100644
 --- a/um/wnvapi.h
 +++ b/um/wnvapi.h
-@@ -114,6 +114,7 @@ typedef struct _WNV_REDIRECT_PARAM {
+@@ -114,12 +114,14 @@ typedef struct _WNV_REDIRECT_PARAM {
  #ifdef __cplusplus
  extern "C" {
  #endif  // __cplusplus
-+_Win32_SupportedOS_BEGIN_(Server2012)
++_Win32_SupportedOS_Server2012_
  HANDLE
  WINAPI
  WnvOpen(
-@@ -127,6 +128,7 @@ WnvRequestNotification (
-     LPOVERLAPPED Overlapped,
-     PULONG BytesTransferred
      );
-+_Win32_SupportedOS_END_()
  
- #ifdef __cplusplus
- }
++_Win32_SupportedOS_Server2012_
+ ULONG
+ WINAPI
+ WnvRequestNotification (
+     HANDLE WnvHandle,

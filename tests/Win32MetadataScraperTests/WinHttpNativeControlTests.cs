@@ -488,7 +488,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 {
                     "MdmReg" => "MDMRegistration.h",
                     "FileHistory" => "FhSvcCtl.h",
-                    "SecurityCenter" => "wscapi.h",
+                    "SecurityCenter" => "Wscapi.h",
                     "DirectML" => "DirectML.h",
                     "wnv" => "wnvapi.h",
                     "Wsb" => "wsbonline.h",

@@ -1859,6 +1859,14 @@ availability facts are the three Wsc functions, `DMLCreateDevice` at
 functions remain absent from metadata because their existing imports are
 unmapped; no DLL mapping, declaration or replacement API is invented.
 
+All nine facts now use fixed per-declaration macros. The earlier Wnv and
+online-backup scope blocks are replaced by five existing
+`_Win32_SupportedOS_Server2012_` annotations. Four permanent source guards
+require the exact declaration counts and prohibit BEGIN/END scope transport
+in this cohort. This avoids depending on the unimplemented file-local,
+explicit/innermost scoped-default resolver; the canonical helper and shared
+tooling remain unchanged.
+
 The first strict inventory check retained a literal `Wscapi.h` to `wscapi.h`
 path difference, despite Windows resolving both spellings. The source binding,
 patch target and patch artifact now preserve the original SDK's `Wscapi`
@@ -1870,11 +1878,11 @@ order are normalized to make these checks pass.
 The matched recipe has 37 header bindings and 29 pristine/33 patched source
 patches. Pristine `504BC1E4...` explicitly reuses the byte-identical fresh
 control from the preceding spelling preflight. Distinct final patched and
-repeat preparations both identify as `94437AAD...`. All three actual
+repeat preparations both identify as `5D3CBC46...`. All three actual
 3,443-header trees were rehashed: the pristine tree equals the preceding
 original-IDL control, exactly four original headers change, and all patched
-and repeat paths and bytes match literally. Removing only the eight exact
-inserted annotation lines reproduces every original SDK byte. The 51 MIDL
+and repeat paths and bytes match literally. Removing only the nine exact
+inserted declaration-annotation lines reproduces every original SDK byte. The 51 MIDL
 inputs, four tools and two scripts remain literal matches to the preceding
 IDL cohort; this does not claim a new all-architecture MIDL/native replay.
 
@@ -1884,29 +1892,34 @@ FileHistory controls. They compare native ABI, SAL, diagnostics and exact
 annotation sites on x86, x64 and ARM64, metadata off/on. The new headers are
 checked as C17 and C++17 where supported; DirectML is C++ only. Existing
 DirectShow standard selection remains unchanged. Earlier successful native
-runs and the spelling/format preflights remain separately identified evidence,
-not substitutes for this final run.
+runs, spelling/format preflights and earlier scope-source controls remain
+separately identified evidence, not substitutes for this final
+explicit-declaration replay. Six source guards also pass without skips.
 
 Fresh normal first/repeat traversals produce four C# files, five generated
 RSP files and one header preamble, all literal matches. Their complete
 function-pointer fixup file matches the frozen full configuration; all 13
 normal common pointer reductions are present in each architecture's complete
-rule set. No generated source or rule is repaired.
+rule set. All ten outputs also byte-match their retained scope-source
+predecessors. No generated source or rule is repaired.
 
 Complete images rematerialize the exact 831-entry third-IDL source archive
 (824 C# inputs), replacing only those four complete normal C# outputs.
-Control `7279E5A3...` is unfiltered raw API-zero against the preceding
-`1D0E2188...` image. Candidate `900AC677...` and independent repeat
-`AF8AA892...` each have exactly the same 16 untouched raw difference rows,
+Control `7279E5A3...` is the explicitly reused actual image, previously
+unfiltered raw API-zero against the preceding `1D0E2188...` image.
+Fresh candidate `BD8EA0A8...` and independent repeat `7CC277D4...` each
+have exactly the same 16 untouched raw difference rows,
 SHA256 `EEEEC8409DADD43282B6D4C42AE33F9EE2895EE97BC4FCD68355F0488E378112`.
-Candidate to repeat is raw-zero. All other owners and constants remain
+Candidate to repeat is raw-zero. Earlier scope-source images `900AC677...`
+and `AF8AA892...` remain retained; `900AC677...` to the new explicit-floor
+candidate is also unfiltered raw-zero. All other owners and constants remain
 explicit frozen context; the held WinError/SetupAPI contributions are not
 included or restored to production.
 
 These 16 additions faithfully capture existing `[retval][out]` comments in
 the unchanged shipped `iwscapi.h` consumption header. They are source-backed
 additions, not availability relocation or new annotation vocabulary, and
-their native-source policy was already reviewed. Each image passes nine
+their native-source policy was already reviewed. Each image passes thirteen
 physical/source cases without skips: all 37,314 physical type snapshots and
 literal type/field/method sequences, exactly six emitted floors and three
 unmapped omissions, and all 30 legacy facts for the seven missing-IDL

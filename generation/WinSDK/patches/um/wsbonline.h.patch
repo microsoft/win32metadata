@@ -2,15 +2,16 @@ diff --git a/um/wsbonline.h b/um/wsbonline.h
 index 02bb2987..54f338e1 100644
 --- a/um/wsbonline.h
 +++ b/um/wsbonline.h
-@@ -68,9 +68,11 @@ typedef struct _WSB_OB_REGISTRATION_INFO {
+@@ -68,9 +68,12 @@ typedef struct _WSB_OB_REGISTRATION_INFO {
  } WSB_OB_REGISTRATION_INFO;
  
  //APIs
-+_Win32_SupportedOS_BEGIN_(Server2012)
++_Win32_SupportedOS_Server2012_
  HRESULT WINAPI RegisterOnlineBackupWithWindowsServerBackup(_In_ IN WSB_OB_REGISTRATION_INFO  *pOBRegistrationInfo);
++_Win32_SupportedOS_Server2012_
  HRESULT WINAPI DeregisterOnlineBackupFromWindowsServerBackup(_In_ IN GUID guidSnapinId);
++_Win32_SupportedOS_Server2012_
  HRESULT WINAPI UpdateOBStatusInWindowsServerBackup(_In_ IN WSB_OB_STATUS_INFO *pOBRegistrationInfo);
-+_Win32_SupportedOS_END_()
  
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */

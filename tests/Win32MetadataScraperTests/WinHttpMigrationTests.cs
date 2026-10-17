@@ -901,6 +901,19 @@ namespace Win32MetadataScraperTests
             Assert.Equal("+++ b/um/Wscapi.h", Assert.Single(patch.Where(value => value.StartsWith("+++ ", StringComparison.Ordinal))));
         }
 
+        [Theory]
+        [InlineData("Wscapi.h", "_Win32_SupportedOS_WindowsVista_", 3)]
+        [InlineData("DirectML.h", "_Win32_SupportedOS_10240_", 1)]
+        [InlineData("wnvapi.h", "_Win32_SupportedOS_Server2012_", 2)]
+        [InlineData("wsbonline.h", "_Win32_SupportedOS_Server2012_", 3)]
+        public void FourthAuthoredAvailabilityHeadersUseOnlyExplicitDeclarationFloors(string header, string annotation, int count)
+        {
+            string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "um", header + ".patch"));
+            Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
+            Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
+            Assert.Equal(count, patch.Split('\n').Count(line => line.TrimEnd('\r') == "+" + annotation));
+        }
+
         [MigrationTheory]
         [InlineData(1)]
         [InlineData(2)]
