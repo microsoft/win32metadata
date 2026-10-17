@@ -478,6 +478,24 @@ static_assert(DISC_NO_FORCE == 64u);
                         this.output.WriteLine(side.Item1 + " " + detail);
                     }
             }
+            if (header == "dwmapi.h")
+            {
+                Assert.Contains("enum DWM_SHOWCONTACT int", before);
+                Assert.Equal(enabled ? 2 : 0, annotations.Count(value => value == "dwAttribute|AssociatedEnum"));
+                foreach (string name in new[] { "DwmGetWindowAttribute", "DwmSetWindowAttribute" })
+                    Assert.Contains(before, value => value.StartsWith("function " + name + " ", StringComparison.Ordinal) &&
+                        value.Contains("unsigned long", StringComparison.Ordinal));
+                Assert.Contains(before, value => value.StartsWith("function DwmShowContact ", StringComparison.Ordinal) &&
+                    value.Contains("DWM_SHOWCONTACT", StringComparison.Ordinal));
+                foreach (var side in new[] { ("before", before), ("after", after) })
+                    foreach (string fact in side.Item2.Where(value =>
+                        value.StartsWith("enum DWM_SHOWCONTACT ", StringComparison.Ordinal) ||
+                        value.StartsWith("value DWM_SHOWCONTACT::", StringComparison.Ordinal) ||
+                        value.StartsWith("function DwmGetWindowAttribute ", StringComparison.Ordinal) ||
+                        value.StartsWith("function DwmSetWindowAttribute ", StringComparison.Ordinal) ||
+                        value.StartsWith("function DwmShowContact ", StringComparison.Ordinal)))
+                        this.output.WriteLine(side.Item1 + " " + fact);
+            }
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
@@ -488,7 +506,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm",
             })
             {
                 string[] expected = partition switch
@@ -554,6 +572,10 @@ static_assert(DISC_NO_FORCE == 64u);
                         "RasEapInvokeConfigUI", "RasEapGetIdentity",
                     }.Select(name => name + "|SupportedOSPlatform(\"windows5.0\")").ToArray(),
                     "DeviceQuery" => Array.Empty<string>(),
+                    "Dwm" => WinHttpMigrationTests.AuthoredDwmHeaderContracts()
+                        .SelectMany(contract => contract.Functions.Select(name =>
+                            name + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
+                        .Append("dwAttribute|AssociatedEnum").ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -571,6 +593,7 @@ static_assert(DISC_NO_FORCE == 64u);
                     "NetShell" => "NetSh.h",
                     "Eap" => "Raseapif.h",
                     "DeviceQuery" => "devfiltertypes.h",
+                    "Dwm" => "dwmapi.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]

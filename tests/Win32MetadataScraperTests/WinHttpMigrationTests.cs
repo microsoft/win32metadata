@@ -976,6 +976,7 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "highlevelmonitorconfigurationapi.h", 20)]
         [InlineData("um", "physicalmonitorenumerationapi.h", 6)]
         [InlineData("um", "Raseapif.h", 5)]
+        [InlineData("um", "dwmapi.h", 31)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
@@ -1063,6 +1064,69 @@ namespace Win32MetadataScraperTests
                 Type(current.Reader, "DEVPROP_OPERATOR", architecture, DeviceQueryNamespace), signed: true);
             this.output.WriteLine($"Architecture {architecture}: all eight filter APIs retain expression pointers; " +
                 "Operator retains DEVPROP_OPERATOR, separate from QueryFlags, with all 42 exact signed values and raw bits.");
+        }
+
+        internal static IEnumerable<(string OS, string[] Functions)> AuthoredDwmHeaderContracts()
+        {
+            yield return ("windows6.0.6000", new[]
+            {
+                "DwmDefWindowProc", "DwmEnableBlurBehindWindow", "DwmEnableComposition", "DwmEnableMMCSS",
+                "DwmExtendFrameIntoClientArea", "DwmGetColorizationColor", "DwmGetCompositionTimingInfo",
+                "DwmGetWindowAttribute", "DwmIsCompositionEnabled", "DwmModifyPreviousDxFrameDuration",
+                "DwmQueryThumbnailSourceSize", "DwmRegisterThumbnail", "DwmSetDxFrameDuration",
+                "DwmSetPresentParameters", "DwmSetWindowAttribute", "DwmUnregisterThumbnail",
+                "DwmUpdateThumbnailProperties", "DwmAttachMilContent", "DwmDetachMilContent", "DwmFlush",
+                "DwmGetGraphicsStreamTransformHint", "DwmGetGraphicsStreamClient", "DwmGetTransportAttributes",
+            });
+            yield return ("windows6.1", new[]
+            {
+                "DwmSetIconicThumbnail", "DwmSetIconicLivePreviewBitmap", "DwmInvalidateIconicBitmaps",
+            });
+            yield return ("windows8.0", new[]
+            {
+                "DwmTransitionOwnedWindow", "DwmRenderGesture", "DwmTetherContact", "DwmShowContact",
+            });
+            yield return ("windows10.0.17134", new[] { "DwmGetUnmetTabRequirements" });
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void NinthAuthoredDwmHeaderPreservesFloorsAssociationsAndNativeTypes(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, DwmNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, DwmNamespace, "Apis", architecture);
+            foreach (var image in new[] { control, current })
+            {
+                var methods = Methods(image.Reader, DwmNamespace, "Apis", architecture);
+                foreach (var contract in AuthoredDwmHeaderContracts())
+                    foreach (string name in contract.Functions)
+                        Assert.Equal(new[] { contract.OS },
+                            AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                foreach (string name in new[] { "DwmGetWindowAttribute", "DwmSetWindowAttribute" })
+                {
+                    var method = methods[name];
+                    var parameter = Assert.Single(method.GetParameters().Select(image.Reader.GetParameter)
+                        .Where(value => image.Reader.GetString(value.Name) == "dwAttribute"));
+                    Assert.Equal(2, parameter.SequenceNumber);
+                    Assert.Equal("UInt32", method.DecodeSignature(Signatures, null).ParameterTypes[1]);
+                    Assert.Equal(new[] { "DWMWINDOWATTRIBUTE" },
+                        AttributeValues(image.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                    Type(image.Reader, "DWMWINDOWATTRIBUTE", architecture, DwmNamespace);
+                    Assert.Equal(Signature(before[name].DecodeSignature(Signatures, null)),
+                        Signature(after[name].DecodeSignature(Signatures, null)));
+                }
+                var show = methods["DwmShowContact"];
+                Assert.Equal(DwmNamespace + ".DWM_SHOWCONTACT", show.DecodeSignature(Signatures, null).ParameterTypes[1]);
+                Assert.Equal(Signature(before["DwmShowContact"].DecodeSignature(Signatures, null)),
+                    Signature(after["DwmShowContact"].DecodeSignature(Signatures, null)));
+            }
+            AssertDwmContactStorage(current.Reader, Type(current.Reader, "DWM_SHOWCONTACT", architecture, DwmNamespace), signed: true);
+            this.output.WriteLine($"Architecture {architecture}: 31 exact floors and both existing AssociatedEnum targets/placements " +
+                "preserved independently of native DWORD parameters; DwmShowContact keeps its native enum with all seven Int32 member bits.");
         }
 
         internal static IEnumerable<(string Header, string[] Functions, string[] WithoutLastError)> AuthoredMonitorHeaderContracts()
@@ -1208,7 +1272,22 @@ namespace Win32MetadataScraperTests
                 var next = after[entry.Key];
                 Assert.Equal(original.GetFields().Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
                     next.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
-                if (entry.Key == DeviceQueryNamespace + ".DEVPROP_OPERATOR#124")
+                if (entry.Key == DwmNamespace + ".DWM_SHOWCONTACT#124")
+                {
+                    var storage = original.GetFields().Select(control.Reader.GetFieldDefinition)
+                        .Single(field => control.Reader.GetString(field.Name) == "value__");
+                    string signature = storage.DecodeSignature(Signatures, null);
+                    Assert.Contains(signature, new[] { "UInt32", "Int32" });
+                    AssertDwmContactStorage(control.Reader, original, signed: signature == "Int32");
+                    AssertDwmContactStorage(current.Reader, next, signed: true);
+                    Assert.Equal(original.GetCustomAttributes().Select(handle =>
+                        AttributeTypeName(control.Reader, handle) + ":" +
+                        Convert.ToHexString(control.Reader.GetBlobBytes(control.Reader.GetCustomAttribute(handle).Value))),
+                        next.GetCustomAttributes().Select(handle =>
+                            AttributeTypeName(current.Reader, handle) + ":" +
+                            Convert.ToHexString(current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(handle).Value))));
+                }
+                else if (entry.Key == DeviceQueryNamespace + ".DEVPROP_OPERATOR#124")
                 {
                     var storage = original.GetFields().Select(control.Reader.GetFieldDefinition)
                         .Single(field => control.Reader.GetString(field.Name) == "value__");
@@ -1227,7 +1306,8 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(SnapshotType(control.Reader, original), SnapshotType(current.Reader, next));
             }
             this.output.WriteLine("Every other physical type snapshot and all literal sequences match without normalization; " +
-                "only DEVPROP_OPERATOR's explicitly checked Int32 storage/constant-type correction is accepted, with all 42 member bytes unchanged.");
+                "only the explicitly checked DEVPROP_OPERATOR and DWM_SHOWCONTACT Int32 storage/constant-type targets " +
+                "are accepted, with every member byte unchanged.");
         }
 
         [MigrationTheory]

@@ -2600,3 +2600,30 @@ and cause. Native struct layout and field order, pointer widths and
 COM/vtable method order remain strict. This clarification does not
 dispose of WNet/RPC's actual branch/value/type questions or the
 other independent source blockers.
+
+### Bounded Dwm original-header continuation
+
+The next independent cohort is the original selected SDK `dwmapi.h`.
+Its source draft replaces the old scope carriers with 31 fixed
+per-declaration floors: 23 Vista, three Windows 7, four Windows 8
+and one build 17134. Both existing `DWMWINDOWATTRIBUTE` associations
+remain on the DWORD `dwAttribute` parameters of
+`DwmGetWindowAttribute` and `DwmSetWindowAttribute`. Their source
+arguments use `enum DWMWINDOWATTRIBUTE`, following the existing
+C/C++-compatible enum-tag qualification, not a native retyping.
+
+The native `DWM_SHOWCONTACT` declaration and all seven members remain
+original. Its API-facing use is the enum parameter of
+`DwmShowContact`. Existing native-int controls and the normal scrape
+will grade the representation against the clarified enum policy,
+without requiring legacy UInt32 storage merely for OLD equality.
+The UInt32 and Int32 paths remain explicit, exhaustive seven-member
+targets rather than a blanket physical-type exclusion.
+
+The authoritative frozen complete-image context is the sealed
+DeviceQuery `380180E4...` receipt and its `5032F47C...` image/source
+archive, retaining qualified DeviceQuery source `6670E513...` and
+Eap source `E31A1344...`. This source draft does not itself count as
+native/source/full-image/repeat qualification. Local qualified
+coverage remains 30/50 until those independent gates finish; no
+shared tooling, publication or PR/stack change is introduced.
