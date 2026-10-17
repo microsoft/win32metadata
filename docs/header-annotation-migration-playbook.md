@@ -2372,3 +2372,80 @@ managed consumer effects remain unmeasured. Eap, WNet/RPC, the seven
 missing-IDL blockers and other disjoint work keep their existing
 grades. Qualified local coverage stays **28 of 50**; no owning
 current-head CI, push, publication or PR merge is claimed.
+
+### Independent Eap original-header qualification
+
+The complete Eap owner now qualifies original `Raseapif.h` separately
+from the held DeviceQuery experiment. Its five existing Windows 2000
+floors are fixed on `RasEapGetInfo`, `RasEapFreeMemory`,
+`RasEapInvokeInteractiveUI`, `RasEapInvokeConfigUI` and
+`RasEapGetIdentity`. Removing exactly those five annotation lines from
+the prepared header recovers every selected SDK byte and declaration
+position. The original header hashes to `476F1B7A...`; the production
+and private patches are literal at `B71349CE...`.
+
+Both ordinary traversals, the fresh native controls and both complete
+emissions execute at `13fe685609cfa947a274285712062968bba102c2`,
+tree `455a89b0a3073c3b07fc59e8199906891c6e7ad8`. This qualification
+does not propagate the private DeviceQuery original-enum candidate.
+The recipe is exactly the previous eligible 47-header, 43-patch
+recipe, with 42 eligible partitions, at preparation identity
+`80DC65DE...`. All 3,443 actual prepared headers are independently
+rehashed in each run and literal between runs.
+
+Actual whole-owner C17/C++17, metadata-off/on controls pass all
+twelve three-architecture cases without skips. Native declarations,
+canonical types, layouts, calling conventions and SAL remain exact;
+only the five supported-OS facts are added. Ordinary generated C#
+retains all five Windows 5.0 annotations and the existing empty DLL
+mappings. These are provider exports, not newly discovered fixed-DLL
+imports: no library name, invented method or entrypoint is added to
+the winmd. The already-qualified original `RrasCfg.idl` remains
+whole-owner consumption context, not another newly counted original
+or fresh all-architecture native MIDL claim.
+
+All seven normal first/repeat outputs are literal. The complete raw
+scratch differences retain 1,309 source-origin lines; no normalized
+scratch equality is claimed. Both actual full images use 831 inputs,
+including 824 C# files: only the entire normal `common\Eap.cs` is
+overlaid, while 830 other inputs, constants and complete emitter
+configurations remain frozen. Every selected pointer reduction is
+present in the actual union of the three architecture response files.
+Both pre-emission ZIPs retain membership, case, entry order and
+independently rehashed bytes, rather than processed `.modified.cs`
+files.
+
+The actual first image is `C327A66FB43A7D72...` and the independently
+emitted repeat is `DAD068A6F0ED1823...`. Each unfiltered comparison
+against qualified `7E8A1453...` is raw-zero, as is first-to-repeat,
+with exact report hash `9E2542A8...`. Each comparison from historical
+`7279E5A3...` retains the same sixteen native custom-RetVal rows,
+byte-for-byte at `EEEEC840...`; they are not suppressed or new Eap
+deltas. Independent complete metadata extraction preserves all
+37,314 type positions, 247,662 field positions, 70,740 method
+positions and every method signature byte across all three images,
+without sorting or normalization.
+
+Each image passes twenty unchanged physical/source/blocker cases,
+including every physical type snapshot and literal sequence, the
+existing Eap interface floor and absence of invented imports, prior
+Monitor contracts, fixed-floor source guards and all 30 legacy facts
+for seven missing-IDL artifacts. Frozen DeviceQuery UInt32 shape is
+preserved, not newly qualified from source. Each image also passes
+the entire fourteen-case integrity/interface/RAII suite. Including
+the fresh twelve-case native matrix, all **80 actual cases pass
+without skips**. The shared `B1F987EA...` binary fixture is restored
+byte-for-byte; the existing `CSSW001` warning remains explicit.
+
+Local resumed-original-artifact coverage is now **29 of 50**:
+twelve original IDLs and seventeen authored headers, thirteen more
+original headers than at `12279c76...`. Twenty-one header drafts
+remain outside the qualified cohorts. This is bounded original-source
+and frozen-context full-image qualification, not owning production
+integration, current-head CI, publication or measured consumer effects.
+The DeviceQuery six native failures and separate Int32/45-row/eight-
+failure measurement remain sealed and unadmitted. WNet/RPC's 49 raw
+rows, native branch/value/type and literal-order gates, missing-IDL
+originals, field-array exclusions and the other source blockers retain
+their existing dispositions. No PR, branch or stack publication is
+changed by this local cohort.
