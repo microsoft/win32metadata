@@ -2280,3 +2280,95 @@ is selected. Eap has native evidence but has not completed its own
 full-image qualification. Neither original increases the qualified
 count above **28 of 50**, and no new complete image, current-head CI
 or publication admission is claimed for this experiment.
+
+### DeviceQuery original-native enum follow-up: measured, not admitted
+
+The six original metadata-on failures remain sealed unchanged in the
+`E731FA60...` receipt. One separately authorized bounded experiment
+omits only the private `devfiltertypes.h.patch`, leaving the selected
+SDK enum declaration byte-for-byte original (`2F37EFE3...`). The
+production patch is not edited. The private recipe retains 47 selected
+headers and 42 other patches.
+
+The qualified root's `DEVPROP_OPERATOR=uint` setting was already absent
+from the owning configuration before this experiment. Both actual
+whole-owner traversals use that same configuration with zero active
+overrides; no fresh one-line removal or import of different root
+sidecar facts is claimed. No native casts, generated-source repair,
+new vocabulary, aliases or shared-tooling changes are introduced.
+The only test change adds native enum/value reporting after every
+existing strict assertion.
+
+Fresh actual DeviceQuery C17/C++17, metadata-off/on controls pass all
+twelve three-architecture cases without skips. Every original and
+prepared enum remains `enum _DEVPROP_OPERATOR int`. All 42 native
+member values and 32-bit patterns are recorded for every before/after
+case, including all repeated raw cursor occurrences. The actual
+normal generated declaration is `public enum DEVPROP_OPERATOR`,
+with implicit Int32 storage. It is not an assumed consequence of
+removing a setting.
+
+Both complete source traversals succeed without compiler errors.
+All 3,443 prepared headers and all seven normal outputs are literal
+between the independent runs at identity `3712A328...`; exactly
+`um\devfiltertypes.h` differs from the held preparation, now matching
+the SDK original. The untouched scratch files still differ at 1,312
+source-origin lines; those raw differences are retained, not
+normalized. No fresh all-architecture native MIDL claim is made.
+
+The actual complete first/repeat images are `3E0301A2...` and
+`7F060F4E...`, emitted at the reporting-only producer `136bb932...`.
+Each uses 831 inputs, including 824 C# files, with only the entire
+normal `common\DeviceQuery.cs` owner overlaid; 830 other inputs and all
+full emitter configurations remain frozen. The frozen Eap source is
+not a fresh Eap qualification. The first normal traversal predates
+the reporting-only commit with identical production bytes; the repeat,
+native matrix and both complete emissions actually execute at that
+commit. Both pre-emission archives preserve literal membership, case
+and entry order, with every entry independently rehashed.
+
+Physical metadata measures **UInt32 to Int32**, not representation
+equality. All 42 member constant type codes likewise change from
+UInt32 to Int32. Forty numeric values remain equal; the two signed
+values change as follows:
+
+| Member | Prior UInt32 value | Native/candidate Int32 value | Unchanged 32-bit pattern |
+| --- | ---: | ---: | --- |
+| `DEVPROP_OPERATOR_MASK_NOT_LOGICAL` | 4027580415 | -267386881 | `0xF00FFFFF` |
+| `DEVPROP_OPERATOR_MASK_ARRAY` | 4026531840 | -268435456 | `0xF0000000` |
+
+Every member's four raw constant bytes and bit pattern remain equal.
+All candidate physical values match the native signed values on every
+case. Enum identity, all member names and positions, type/field flags
+and custom-attribute blobs remain exact.
+
+The unfiltered qualified-`7E8A1453...` comparisons each produce
+**45 raw rows**, byte-identical at
+`C97C86A14D02621DA989F4F23ACC5E5A4410E99E35253587C743806BECA11834`:
+42 constant-type rows, one `value__` storage row and two numeric-value
+rows. The historical `7279E5A3...` comparisons each retain 61 raw rows,
+including the previously measured sixteen native custom-RetVal rows.
+Actual candidate-to-repeat comparison is raw-zero. All 37,314 literal
+type positions, 247,662 field positions, 70,740 method positions and
+method signature bytes remain exact across the three images, without
+sorting or normalization. The unchanged complete physical-snapshot
+assertion also passes candidate-to-repeat.
+
+Each image passes sixteen fixed-floor, prior-Monitor and missing-IDL
+source/blocker controls, and all fourteen existing integrity/interface/
+RAII cases, without skips. The shared `B1F987EA...` fixture is restored
+byte-for-byte. The existing `CSSW001` warning remains explicit.
+Conversely, all four unchanged OLD-representation assertions fail on
+each image: three UInt32 shape cases and the complete OLD physical
+snapshot comparison. Those eight failures remain explicit and
+unwaived, with TRX error messages extracted as plain text. A separate
+plain-text re-extraction also preserves the original six failures
+without rewriting their sealed receipt.
+
+This completes the bounded measurement, not DeviceQuery admission.
+The native-fidelity improvement and the managed enum storage/value
+changes require their separate representation disposition; actual
+managed consumer effects remain unmeasured. Eap, WNet/RPC, the seven
+missing-IDL blockers and other disjoint work keep their existing
+grades. Qualified local coverage stays **28 of 50**; no owning
+current-head CI, push, publication or PR merge is claimed.
