@@ -207,19 +207,9 @@ namespace ClangSharpSourceToWinmd
             watch.Restart();
 
             HashSet<string> enumsMakeFlagsHashSet = enumsMakeFlags != null ? new HashSet<string>(enumsMakeFlags) : new HashSet<string>();
-            Architecture compilationArchitecture = arch switch
-            {
-                "x86" => Architecture.X86,
-                "x64" => Architecture.X64,
-                "arm64" => Architecture.Arm64,
-                _ => Architecture.None,
-            };
             System.Threading.Tasks.Parallel.ForEach(FilesToTrees(modifiedFiles), opt, (tree) =>
             {
-                var treeArchitecture = GetArchitectureForFileName(tree.FilePath);
-                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, nativeFieldArrayInfo,
-                    (namespaceName, memberName) => infoFinder.GetEnumMemberReference(namespaceName, memberName,
-                        treeArchitecture == Architecture.None ? compilationArchitecture : treeArchitecture));
+                var cleanedTree = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree, remaps, enumAdditions, enumsMakeFlagsHashSet, requiredNamespaces, staticLibs, apiNamesToNamespaces, infoFinder.EmptyStructs, infoFinder.EnumMemberNames, tree.FilePath, nativeFieldArrayInfo);
                 WriteTree(cleanedTree, cleanedTree.FilePath);
             });
 
@@ -328,6 +318,8 @@ namespace ClangSharpSourceToWinmd
 
                 comp = comp.AddReferences(MetadataReference.CreateFromFile(netstandardPath));
             }
+
+            comp = HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases(comp);
 
             Console.WriteLine($"  {OutputUtils.FormatTimespan(watch.Elapsed)}");
             ShowMemory();
@@ -455,7 +447,6 @@ namespace ClangSharpSourceToWinmd
 
             public HashSet<string> EnumMemberNames { get; } = new HashSet<string>();
 
-            private readonly Dictionary<(string Namespace, string Name, Architecture Architecture), HashSet<string>> enumMemberReferences = new();
 
             public void AnalyzeTree(SyntaxTree tree)
             {
@@ -467,37 +458,9 @@ namespace ClangSharpSourceToWinmd
                 lock (this.EnumMemberNames)
                 {
                     this.EnumMemberNames.Add(node.Identifier.ValueText);
-                    var key = (SyntaxUtils.GetEnclosingNamespace(node) ?? string.Empty,
-                        node.Identifier.ValueText, GetArchitectureForFileName(node.SyntaxTree.FilePath));
-                    if (!this.enumMemberReferences.TryGetValue(key, out var references))
-                    {
-                        references = new HashSet<string>();
-                        this.enumMemberReferences.Add(key, references);
-                    }
-
-                    references.Add("global::" + SyntaxUtils.GetFullName(node, true).Replace("::", "."));
                 }
 
                 base.VisitEnumMemberDeclaration(node);
-            }
-
-            public string GetEnumMemberReference(string namespaceName, string memberName, Architecture architecture)
-            {
-                var references = new HashSet<string>();
-                foreach (var candidate in new[] { Architecture.None, architecture }.Distinct())
-                {
-                    if (this.enumMemberReferences.TryGetValue((namespaceName, memberName, candidate), out var matches))
-                    {
-                        references.UnionWith(matches);
-                    }
-                }
-
-                if (references.Count > 1)
-                {
-                    throw new InvalidOperationException($"Ambiguous enum constant alias '{namespaceName}.{memberName}': {string.Join(", ", references.OrderBy(value => value, StringComparer.Ordinal))}.");
-                }
-
-                return references.SingleOrDefault();
             }
 
             public override void VisitStructDeclaration(StructDeclarationSyntax node)

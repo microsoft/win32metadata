@@ -15,9 +15,9 @@ namespace ClangSharpSourceToWinmd
     {
         public const string ArgListVarName = "__arglist__";
 
-        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false, Func<string, string, string> enumMemberReference = null)
+        public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath, bool nativeFieldArrayInfo = false)
         {
-            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo, enumMemberReference);
+            TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, apiNamesToNamespaces, nonEmptyStructs, enumMemberNames, nativeFieldArrayInfo);
             var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
             var ret = CSharpSyntaxTree.Create(newRoot, null, filePath);
             return ret;
@@ -43,9 +43,8 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
             private readonly bool nativeFieldArrayInfo;
-            private readonly Func<string, string, string> enumMemberReference;
 
-            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo, Func<string, string, string> enumMemberReference)
+            public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, Dictionary<string, string> apiNamesToNamespaces, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, bool nativeFieldArrayInfo)
             {
                 this.remaps = remaps;
                 this.InitRegexRemaps();
@@ -58,7 +57,6 @@ namespace ClangSharpSourceToWinmd
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
                 this.nativeFieldArrayInfo = nativeFieldArrayInfo;
-                this.enumMemberReference = enumMemberReference;
             }
 
             private void InitRegexRemaps()
@@ -431,19 +429,6 @@ namespace ClangSharpSourceToWinmd
 
                             node = node.AddAttributeLists(attributeList);
                         }
-                    }
-                }
-
-                var initializer = node.Declaration.Variables.First().Initializer;
-                if (node.Modifiers.ToString() == "public const" && initializer?.Value is IdentifierNameSyntax alias &&
-                    this.enumMemberNames.Contains(alias.Identifier.ValueText) && this.enumMemberReference != null)
-                {
-                    string reference = this.enumMemberReference(SyntaxUtils.GetEnclosingNamespace(node) ?? string.Empty, alias.Identifier.ValueText);
-                    if (reference != null)
-                    {
-                        // The duplicate loose constant is removed, but its native alias must still bind.
-                        var value = SyntaxFactory.ParseExpression($"unchecked(({newType ?? node.Declaration.Type.ToString()}){reference})");
-                        node = node.ReplaceNode(initializer.Value, value.WithTriviaFrom(initializer.Value));
                     }
                 }
 

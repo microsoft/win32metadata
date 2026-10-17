@@ -80,6 +80,60 @@ namespace ClangSharpSourceToWinmd
             return name == "header-types.modified.cs" || name.EndsWith(".header-types.modified.cs", StringComparison.Ordinal);
         }
 
+        internal static CSharpCompilation ConvertPrimitiveConstantAliases(CSharpCompilation compilation)
+        {
+            var groups = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+            foreach (var tree in compilation.SyntaxTrees.Where(tree => IsHeaderTypesFile(tree.FilePath) ||
+                Path.GetFileName(tree.FilePath) == "header-enum-groups.modified.cs"))
+            {
+                var model = compilation.GetSemanticModel(tree);
+                foreach (var declaration in tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
+                    if (model.GetDeclaredSymbol(declaration) is INamedTypeSymbol symbol)
+                        groups.Add(symbol);
+            }
+            if (groups.Count == 0)
+                return compilation;
+
+            var converted = compilation;
+            foreach (var tree in compilation.SyntaxTrees)
+            {
+                var root = tree.GetRoot();
+                var aliases = root.DescendantNodes().OfType<FieldDeclarationSyntax>()
+                    .Where(field => field.Modifiers.Any(SyntaxKind.ConstKeyword))
+                    .SelectMany(field => field.Declaration.Variables).Where(variable => variable.Initializer != null).ToArray();
+                if (aliases.Length == 0)
+                    continue;
+                var model = compilation.GetSemanticModel(tree);
+                var replacements = new Dictionary<ExpressionSyntax, ExpressionSyntax>();
+                foreach (var alias in aliases)
+                {
+                    if (model.GetDeclaredSymbol(alias) is not IFieldSymbol field ||
+                        field.Type.SpecialType is not (SpecialType.System_SByte or SpecialType.System_Byte or
+                            SpecialType.System_Int16 or SpecialType.System_UInt16 or SpecialType.System_Char or
+                            SpecialType.System_Int32 or SpecialType.System_UInt32 or
+                            SpecialType.System_Int64 or SpecialType.System_UInt64))
+                        continue;
+                    var value = alias.Initializer.Value;
+                    if (model.GetTypeInfo(value).Type is not INamedTypeSymbol source || !groups.Contains(source) ||
+                        !model.GetConstantValue(value).HasValue)
+                        continue;
+                    var type = ((VariableDeclarationSyntax)alias.Parent).Type.WithoutTrivia();
+                    // Metadata-only groups must not change scalar types or hide constant overflow.
+                    replacements.Add(value, SyntaxFactory.CheckedExpression(SyntaxKind.CheckedExpression,
+                        SyntaxFactory.CastExpression(type, SyntaxFactory.ParenthesizedExpression(value.WithoutTrivia())))
+                        .WithTriviaFrom(value));
+                }
+                if (replacements.Count == 0)
+                    continue;
+
+                var rewritten = tree.WithRootAndOptions(root.ReplaceNodes(replacements.Keys,
+                    (original, _) => replacements[original]), tree.Options);
+                File.WriteAllText(tree.FilePath, rewritten.GetText().ToString());
+                converted = converted.ReplaceSyntaxTree(tree, rewritten);
+            }
+            return converted;
+        }
+
         private static Architecture GetArchitectures(string file, HashSet<string> files)
         {
             var architecture = ClangSharpSourceCompilation.GetArchitectureForFileName(file);

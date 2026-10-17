@@ -87,6 +87,17 @@ the existing `addUsesTo` form can retain those existing uses without `name`, `me
 or `autoPopulate`; it emits remaps, not another enum definition. Do not add new
 API-specific sidecar facts as part of that bridge.
 
+Include the complete normal constants scrape and emission in that dependency batch.
+Scalar macro aliases outside the group must keep their own primitive storage and
+values; do not absorb them into the group or add casts to native headers. The emitter
+uses Roslyn-bound header-group identities to add checked scalar conversions in its
+private compiler inputs. Ordinary native enums, enum-typed aliases, and unrelated
+compiler errors are unchanged; out-of-range constants still fail. A small group-only
+image does not qualify the full alias closure or waive declaration-order differences.
+Successful alias compilation preserves the candidate's declared scalar facts, not
+OLD API equivalence. Grade newly exposed aliases, changed conditional macro
+selections, and retained use-site remaps separately in the unfiltered full image.
+
 For the selected pilot SDK `10.0.26100.7705` x64 import package, all 462 libraries were checked for
 the seven WSL entrypoints and API-set DLL. None supplies them. The actual processing
 set covers all 453 `um\x64` libraries and likewise finds none; the other nine

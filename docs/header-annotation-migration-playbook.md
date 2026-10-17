@@ -1693,3 +1693,27 @@ metadata expectation changes for that correction. The original six
 failures remain evidence; a fresh native rerun, normal source first/repeat,
 physical result-target check, complete image and owning current-head CI
 remain required before admission.
+
+### Released generic scalar-alias tooling inheritance
+
+Ordinary inheritance now uses exact qualified root
+`d8262ba4751dbf637f3a860071e1ca344fd5adc7`, tree
+`311d2e49b2d4d8b59d27f4e76419ed5947ab55c7`, not a floating tooling tip.
+The released receipt `A21430FC...` and all 18 bound evidence files were
+independently rehashed here. The five exact-source CI jobs are successful;
+the actual image artifact `12102643644` independently hashes to
+`A4A49BE868156249E0A59609E8D8B64333BFD59682B0C9A80B9D5C98E1A9B133`.
+The existing unfiltered comparer independently reproduces raw API-zero
+against both actual `945C75BD...` and `46990689...`, and the unchanged
+54-row pilot report with SHA256 `64575A47...` against actual `1E1AC98A...`.
+
+Only the supplied private alias-prototype hunks are superseded: the
+namespace/name/architecture reference reconstruction, callback plumbing and
+unchecked identifier-alias block. The qualified post-compilation
+`HeaderEnumGroupMerger.ConvertPrimitiveConstantAliases` implementation and
+call remain intact, as do the existing owning tests, native-field-array
+opt-in plumbing and other source changes. This clears the shared tooling
+execution dependency, not original-source admission. Fresh source emissions
+must use the corrected `E2F66BB2...` four-use configuration. The original
+43/49-error, 50-row, RPC representation/branch and literal-order evidence
+remains unchanged and unwaived; WNet remains independently held.
