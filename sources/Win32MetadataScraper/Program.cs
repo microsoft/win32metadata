@@ -129,7 +129,21 @@ class Program
             bool parseHeaderAnnotations = settings.GetValueOrDefault("--config")?.Contains("parse-win32-annotations") == true;
             var derivedSettings = LoadAutoRemaps(settings, parseHeaderAnnotations);
             if (parseHeaderAnnotations)
-                clangArgs = clangArgs.Concat(new[] { "-DWIN32METADATA" }).ToArray();
+            {
+                if (clangArgs.Contains("-w", StringComparer.Ordinal))
+                {
+                    Console.Error.WriteLine("Error: -w suppresses ignored metadata attribute diagnostics and cannot be used with parse-win32-annotations. Use specific -Wno- options for native warnings.");
+                    return 1;
+                }
+                clangArgs = clangArgs.Concat(new[]
+                {
+                    "-DWIN32METADATA",
+                    "-D_WIN32META_ANNOTATION_(...)=_Pragma(\"clang diagnostic push\") " +
+                        "_Pragma(\"clang diagnostic error \\\"-Wignored-attributes\\\"\") " +
+                        $"__attribute__((annotate(\"{HeaderAnnotation.OwnerPrefix}\" __VA_ARGS__))) " +
+                        "_Pragma(\"clang diagnostic pop\")",
+                }).ToArray();
+            }
             var configOptions = BuildOptionsFlags(settings);
             var configuredRemaps = ParseKeyValuePairs(settings.GetValueOrDefault("--remap"));
             var configuredAutoRemapExcludes = new HashSet<string>(
@@ -218,6 +232,8 @@ class Program
                     settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes))
                 : null;
             annotations?.PrepareTypedefs();
+            if (annotations != null)
+                allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();
