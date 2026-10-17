@@ -2488,3 +2488,115 @@ counting DeviceQuery locally qualified. Until that evidence closes,
 the ledger remains **29 of 50**. This decision does not change
 WNet/RPC, other source blockers, consumer-effect grades, owning
 current-head CI or publication.
+
+### Qualified DeviceQuery original-native Int32 correction
+
+The specifically authorized DeviceQuery correction now completes its
+separate local original-source qualification. The actual source,
+native matrix and both full emissions execute at
+`2268ca770023aec7e87908ed8257112ba896093c`,
+tree `4dd3e07ebc978e1ad43af504bf6e94f1b3f6288f`. The only
+production change removes the unsigned-native-retyping patch and its
+recipe reference. Original `devfiltertypes.h` remains byte-for-byte
+the selected SDK at `2F37EFE3...`; no unsigned override, helper,
+shared emitter change or generated-source repair is introduced.
+
+Both independent ordinary traversals succeed without warnings or
+errors, using fresh preparations at `3712A328...` with 47 selected
+headers, 42 remaining patches and 42 eligible partitions. All 3,443
+actual headers in each run are independently rehashed and literal
+between runs. Relative to the previous Eap preparation, exactly
+`um\devfiltertypes.h` changes, now matching the native SDK original.
+All seven normal outputs repeat literally. The 1,321 raw differing
+scratch lines remain retained without normalization. Constants and
+previous all-architecture native MIDL evidence are frozen context,
+not freshly rerun stages.
+
+Fresh C17/C++17, metadata-off/on controls pass all twelve cases across
+x86, x64 and arm64. Their complete selected-header surface includes
+`devfiltertypes.h`, `devquery.h` and `devquerydef.h`, with unchanged
+native declarations, canonical types, layouts, calling conventions,
+SAL and diagnostics. Every native operator remains signed `int`.
+All 42 member values and bit patterns match both before and after,
+including every repeated raw cursor occurrence. Native and physical
+measurements bind 1,008 distinct case/member comparisons and 3,024
+raw member occurrences. The operator field and all eight filter-API
+expression-pointer contracts are explicitly checked.
+
+The actual complete images are `5032F47C...` and `AFE74DCD...`.
+Each uses 831 pre-emission inputs, including 824 C# files, with only
+the entire normal `common\DeviceQuery.cs` overlaid. All 830 unowned
+inputs are literal to the **sealed qualified Eap `C327A66F...` source
+archive**, including `common\Eap.cs` at `E31A1344...`; the older
+`7E8A1453...` Eap source is not substituted. Full constants and all
+emitter configurations remain frozen. All 1,662 archived entries
+are independently rehashed, preserving original membership, case
+and entry order rather than processed `.modified.cs` output.
+
+The public compatibility change is confined to one existing enum:
+`Windows.Win32.Devices.DeviceQuery.DEVPROP_OPERATOR` becomes Int32,
+matching the native API's operator contract. All 42 literal constant
+type codes become Int32. Forty numeric values are unchanged;
+`MASK_NOT_LOGICAL` becomes -267386881 and `MASK_ARRAY` becomes
+-268435456. Every member's four raw bytes, identity, position,
+flags and custom attributes remain exact. The existing operator
+field retains its enum type; neither it nor the separate QueryFlags
+parameter is widened, narrowed or replaced with a different domain.
+Actual downstream consumer behavior remains unmeasured.
+
+Each unfiltered `C327A66F...` comparison reproduces the same
+**45 raw rows**, byte-for-byte at `C97C86A1...`. Each historical
+`7279E5A3...` comparison retains 61 rows at `E34258A1...`, including
+the earlier sixteen native custom-RetVal rows. First-to-repeat and
+the measured original-header variant-to-first comparisons are
+raw-zero at `9E2542A8...`. No row is suppressed or normalized.
+All 37,314 literal type positions, 247,662 field positions,
+70,740 method positions and method signature bytes also remain
+exact in this cohort.
+
+Each image passes twenty-four explicit-target physical/API/source/
+blocker cases and the entire fourteen-case integrity/interface/RAII
+suite, without skips. With the twelve fresh native controls, all
+**88 qualification cases pass without skips**; a separate committed
+source guard also passes. Seven retained wrong-UInt32-target cases
+all fail for the exact Int32/UInt32 mismatch, demonstrating that the
+new target is required. The original six `E731FA60...` native
+failures and eight `BF8E6745...` OLD-shape failures remain sealed,
+not rewritten or reported as passing assertions. The shared
+`B1F987EA...` fixture is restored literally; the existing `CSSW001`
+warning remains explicit.
+
+Local resumed-original-artifact coverage is now **30 of 50**:
+twelve original IDLs and eighteen headers, fourteen more original
+headers than at `12279c76...`. Twenty header drafts remain outside
+these locally qualified cohorts. DeviceQuery is counted once as a
+qualified original-source/native-enum correction, not as new
+annotation vocabulary or another patch unit. This is not owning
+full-production integration, current-head CI or publication.
+No push, PR/stack mutation or merge is performed.
+
+### Clarified enum-use and functional-equivalence boundaries
+
+For continuing migration, choose enum storage from actual API
+contracts rather than reproducing erroneous legacy storage. Preserve
+each resolved `AssociatedEnum` target and placement independently of
+the native parameter, return or field type. Width or signedness
+disagreement is permitted by the documented advisory relationship;
+it is not permission to retype native declarations, widen narrow
+fields or pointers, or substitute an enum directly for an associated
+primitive. The broader [#2371](https://github.com/microsoft/win32metadata/issues/2371)
+cleanup is not a migration prerequisite.
+
+The corrected four-use WIN32_ERROR witness preserves existing
+enum-typed signatures: GetLastError's return, SetLastError's and
+SetLastErrorEx's `dwErrCode`, and `NETINFOSTRUCT.dwStatus`. These
+are not four physical AssociatedEnum blobs, and that witness does
+not establish attribute parity.
+
+Raw type-table positions and synthetic enum declaration order remain
+diagnostics, not functional blockers by themselves. Keep the raw
+reports and classify developer-visible changes by affected API/type
+and cause. Native struct layout and field order, pointer widths and
+COM/vtable method order remain strict. This clarification does not
+dispose of WNet/RPC's actual branch/value/type questions or the
+other independent source blockers.
