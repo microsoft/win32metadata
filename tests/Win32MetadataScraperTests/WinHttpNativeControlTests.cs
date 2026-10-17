@@ -416,6 +416,7 @@ static_assert(DISC_NO_FORCE == 64u);
 
         [NativeMigrationTheory]
         [MemberData(nameof(AuthoredAvailabilityHeaderControls))]
+        [MemberData(nameof(AuthoredMonitorHeaderControls))]
         public void AuthoredAvailabilityHeadersPreserveNativeAbiAndSalWithExactMetadata(
             string partition, string header, string architecture, string target, string language, bool enabled, string[] expected)
         {
@@ -542,6 +543,30 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[]
                             {
                                 partition, header,
+                                architecture.Item1, architecture.Item2, language, enabled, expected,
+                            };
+            }
+        }
+
+        public static IEnumerable<object[]> AuthoredMonitorHeaderControls()
+        {
+            foreach (var contract in WinHttpMigrationTests.AuthoredMonitorHeaderContracts())
+            {
+                string[] expected = contract.Functions
+                    .Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")")
+                    .Concat(contract.Functions.Except(contract.WithoutLastError, StringComparer.Ordinal)
+                        .Select(name => name + "|SetLastError")).ToArray();
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (string language in new[] { "c", "c++" })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                "Monitor", contract.Header,
                                 architecture.Item1, architecture.Item2, language, enabled, expected,
                             };
             }

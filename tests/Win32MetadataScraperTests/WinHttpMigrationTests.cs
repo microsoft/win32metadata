@@ -920,12 +920,64 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "davclnt.h", 11)]
         [InlineData("um", "nb30.h", 1)]
         [InlineData("um", "NetSh.h", 8)]
+        [InlineData("um", "lowlevelmonitorconfigurationapi.h", 6)]
+        [InlineData("um", "highlevelmonitorconfigurationapi.h", 20)]
+        [InlineData("um", "physicalmonitorenumerationapi.h", 6)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
             Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
             Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
             Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+_Win32_SupportedOS_", StringComparison.Ordinal)));
+        }
+
+        internal static IEnumerable<(string Header, string[] Functions, string[] WithoutLastError)> AuthoredMonitorHeaderContracts()
+        {
+            yield return ("lowlevelmonitorconfigurationapi.h", new[]
+            {
+                "GetVCPFeatureAndVCPFeatureReply", "SetVCPFeature", "SaveCurrentSettings",
+                "GetCapabilitiesStringLength", "CapabilitiesRequestAndCapabilitiesReply", "GetTimingReport",
+            }, new[] { "SetVCPFeature" });
+            yield return ("highlevelmonitorconfigurationapi.h", new[]
+            {
+                "GetMonitorCapabilities", "SaveCurrentMonitorSettings", "GetMonitorTechnologyType",
+                "GetMonitorBrightness", "GetMonitorContrast", "GetMonitorColorTemperature",
+                "GetMonitorRedGreenOrBlueDrive", "GetMonitorRedGreenOrBlueGain", "SetMonitorBrightness",
+                "SetMonitorContrast", "SetMonitorColorTemperature", "SetMonitorRedGreenOrBlueDrive",
+                "SetMonitorRedGreenOrBlueGain", "DegaussMonitor", "GetMonitorDisplayAreaSize",
+                "GetMonitorDisplayAreaPosition", "SetMonitorDisplayAreaSize", "SetMonitorDisplayAreaPosition",
+                "RestoreMonitorFactoryColorDefaults", "RestoreMonitorFactoryDefaults",
+            }, new[] { "GetMonitorCapabilities", "SetMonitorRedGreenOrBlueDrive", "SetMonitorRedGreenOrBlueGain" });
+            yield return ("physicalmonitorenumerationapi.h", new[]
+            {
+                "GetNumberOfPhysicalMonitorsFromHMONITOR", "GetNumberOfPhysicalMonitorsFromIDirect3DDevice9",
+                "GetPhysicalMonitorsFromHMONITOR", "GetPhysicalMonitorsFromIDirect3DDevice9",
+                "DestroyPhysicalMonitor", "DestroyPhysicalMonitors",
+            }, new[] { "GetNumberOfPhysicalMonitorsFromIDirect3DDevice9", "GetPhysicalMonitorsFromIDirect3DDevice9" });
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void SeventhAuthoredMonitorBatchPreservesItsExactFloorsAndLastErrorOmissions(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var image in new[] { control, current })
+            {
+                var methods = Methods(image.Reader, "Windows.Win32.Devices.Display", "Apis", architecture);
+                foreach (var contract in AuthoredMonitorHeaderContracts())
+                    foreach (string name in contract.Functions)
+                    {
+                        Assert.Equal(new[] { "windows6.0.6000" },
+                            AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                        Assert.Equal(!contract.WithoutLastError.Contains(name, StringComparer.Ordinal),
+                            methods[name].GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError));
+                    }
+            }
+            this.output.WriteLine($"Architecture {architecture}: 32 exact Vista floors, 26 last-error flags " +
+                "and six deliberate last-error omissions preserved.");
         }
 
         [MigrationTheory]
