@@ -1,0 +1,22 @@
+diff --git a/um/ddpbackup.idl b/um/ddpbackup.idl
+index f8578964..c2303ce4 100644
+--- a/um/ddpbackup.idl
++++ b/um/ddpbackup.idl
+@@ -6,6 +6,7 @@
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -13,6 +14,9 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+ 
++_Win32_AnnotateInterface_(IDedupBackupSupport, _Win32_SupportedOS_Server2012_)
++_Win32_AnnotateInterface_(IDedupReadFileCallback, _Win32_SupportedOS_Server2012_)
++
+ typedef struct _DEDUP_CONTAINER_EXTENT {
+     ULONG      ContainerIndex;      // index of the container
+     hyper      StartOffset;         // start of the range

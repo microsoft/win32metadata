@@ -6,6 +6,9 @@ migration layer above the tooling PR, not a replacement for that tooling. This
 document's inventory and image grades describe the isolated WinHttp checkpoint.
 The [migration playbook](header-annotation-migration-playbook.md) records the
 subsequently authorized ten partitions and their combined-image grades.
+The [SDK-wide adoption playbook](copilot/plans/header-annotation-migration-playbook.md)
+defines the current rollout procedure; this document retains the pilot's
+bounded ownership and historical evidence.
 
 ## Partition review playbook
 
@@ -50,10 +53,16 @@ Earlier images and receipts below are immutable historical evidence.
 
 `generation\WinSDK\patches\SdkHeaders.json` pins SDK CPP `10.0.26100.7705`, the
 post-MIDL mirror Git tree, exact header preimages, their selected-SDK inputs, and
-patch order. `winhttp.h` is byte-identical to the selected package. The package
+one cumulative patch per SDK artifact. `um\winhttp.h.patch` contains all WinHttp
+deltas against the pristine selected package header; its six earlier semantic
+layers are not separate patch inputs. Patch filenames and diff targets use the
+SDK-relative artifact path, without stage directories. The package
 supplies `httprequest.idl`, not `httprequest.h`; the recipe separately pins the
-checked-in post-MIDL header and the identical selected-SDK IDL. There are no
-pre-MIDL changes or IDL recompilation in this migration.
+checked-in post-MIDL header and the identical selected-SDK IDL. WinHttp itself
+needs no IDL patch or recompilation. In the original eleven-owner pilot,
+UpdateAssessment instead patches shipped `waasapi.idl` before private MIDL
+regeneration; see the
+[source-artifact audit and provenance](header-annotation-migration-playbook.md#pre-midl-source-adoption).
 
 Only WinHttp traverses these two headers. HttpServer also includes `winhttp.h`,
 but traverses `http.h`, so it is an affected physical-header dependent rather than
@@ -69,12 +78,60 @@ header scraping and consume the same private root. The orchestration has no
 partition hook or WinHttp default recipe. The project supplies the SDK-wide
 recipe explicitly to the generic `Prepare-SdkHeaders.ps1` script, which copies
 the complete mirror into a private,
-content-addressed include tree and applies the ordered post-MIDL patches there.
-It checks SDK/preimage identity, admitted patch targets, source/cache hashes,
-ordinary paths, patch ordering, and strict patch applicability. Publication is
+content-addressed include tree. It applies direct SDK header patches privately;
+its optional pinned MIDL closure applies SDK IDL patches before converting SAL
+and regenerating admitted headers/imported outputs. Artifact identity determines
+the boundary, regardless of recipe order. There are no generated-header annotation
+patches. Both artifact kinds publish the same include root.
+It checks SDK/preimage and compiler/preprocessor identity, actual closed MIDL
+inputs, admitted patch targets, source/cache hashes,
+ordinary paths, unique canonical artifact targets, and strict patch applicability. Publication is
 transactional and serialized; a modified published cache is rejected, not repaired
 while a scraper might be reading it. Unmodified files retain their exact bytes.
 The tracked SDK mirror is never an output.
+
+The annotation header is bootstrapped by the cumulative `shared\sal.h.patch`
+and the scraper's metadata SAL shim, not repeated in every API patch.
+The two annotated original IDLs include ordinary `sal.h` before their first
+carrier: MIDL imports have separate C-preprocessor streams and do not make
+macros visible to their importer. Their generated headers already obtain SAL
+through the native RPC headers and need no quoted helper include.
+The pinned SDK SAL and concurrency-SAL inputs join the closed MIDL input set.
+The same original SAL patch applies to both the private native-header and
+MIDL-source snapshots, which must bind the identical pristine SDK artifact.
+
+The bounded Com.StructuredStorage addition patches only shipped
+`um\propidlbase.idl`. Shipped `propidl.idl` includes that source and generates
+another complete copy of its declarations. Both `PropIdl.h` and `PropIdlBase.h`
+therefore regenerate from the same pinned closure; updating only the base header
+would lose the annotations whenever the including header defines `_PROPIDLBASE_`
+first. An admitted header in that MIDL input closure without its pinned output
+is rejected instead of silently retaining its mirror copy. Unrelated pinned
+IDL-backed dependencies, including `httprequest.h`, are not regenerated.
+
+This addition moves the existing `PROPSPEC_KIND` group and `PROPSPEC::ulKind`
+relationship, the two existing `VARENUM` field relationships, four Windows 2000
+interface floors, and the four enumerator `Next`/`Skip` multiple-success facts.
+It does not migrate other APIs in this partition or add structure OS floors.
+`PRSPEC_INVALID` remains outside the two-member logical group, and `VARENUM`
+remains owned by the Variant partition.
+
+The fields use MIDL `annotation(...)` while retaining their native `ULONG` and
+`VARTYPE` declarations. Interface carriers share the existing opening quote
+region. All four `_Win32_AnnotateMethod_` calls share the existing trailing quote
+region after the complete interfaces: their compiled method references identify
+the intended C++ declarations without copying a signature or annotating a proxy.
+This handles the non-local `Skip` methods without changing RPC locality; direct
+annotations on local `Next` would also reach generated proxy declarations.
+The four methods use the canonical `PreserveResult` encoding, CLR `PreserveSig`,
+rather than retaining the legacy `CanReturnMultipleSuccessValues` custom
+attribute. This intentional representation change follows the same encoding
+for both legacy success-marker forms; it is not a consumer-equivalence claim.
+Native SAL, `call_as` relationships, union branches and wire layouts remain
+control inputs, not annotation targets. Generated documentation mappings and
+global type-storage/namespace fixups remain derived or shared configuration.
+Actual source/header/native/image qualification is recorded separately; the
+earlier eleven-owner receipts do not qualify the expanded source.
 
 Changing its identity invalidates the constants marker and every architecture's
 header-scrape marker before any consumer runs. An unchanged identity retains the
@@ -93,10 +150,10 @@ entries remain in the generated mapping.
 | Functional fact | Current authority | Authored legacy input removed |
 | --- | --- | --- |
 | 59 DLL bindings | SDK `.lib` scan in generated `libMappings.rsp` | None: derived scan entries remain; there is no WinHttp header override |
-| 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` defaults | All 38 WinHttp `supportedOS.rsp` rows |
+| 38 OS floors: 27 XP, 11 Windows 8 | Canonical `_Win32_SupportedOS_*_` direct facts and narrowly bounded `_Win32_SupportedOS_BEGIN_` / `_Win32_SupportedOS_END_` lexical scopes | All 38 WinHttp `supportedOS.rsp` rows |
 | 28 thread-last-error contracts | `_Win32_SetLastError_` | All 28 WinHttp `WithSetLastError.rsp` rows |
 | One same-allocation buffer | `_Win32_ContainsInteriorPointers_` on `WinHttpQueryHeadersEx::pBuffer`, with its original byte-count SAL | Interior-pointer member remap |
-| Five logical enums, 21 emitted members, eight uses | Guarded native enums plus `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
+| Five logical enums, 21 emitted members, eight uses | Public enum-group macros, one explicit-name AST carrier, and `_Win32_AssociatedEnum_` at each native use | WinHttp enum definitions and all eight enum substitutions |
 | Three port constant types | Guarded `constexpr INTERNET_PORT` declarations | Three `ushort` constant overrides |
 | Four native scheme macros | Untouched native macros initialize the preserved logical members | Four constants-scraper exclusions; no new winmd constants |
 | One pointer-adding callback alias | Metadata-only guard around `LPWINHTTP_STATUS_CALLBACK` | Partition callback exclusion |
@@ -107,7 +164,7 @@ All 59 bindings independently match the selected SDK's x64 `winhttp.lib`
 libraries. Library scanning is the default import authority, not an authored
 semantic fallback. `_Win32_ImportLibrary_` is reserved for necessary corrections
 to missing/incorrect scan data; none is needed for these 59 APIs. Generic parser
-support and override controls remain unchanged. The six header patches contain
+support and override controls remain unchanged. The cumulative WinHttp patch contains
 no `ImportLibrary` annotations, and import entrypoint/module/flags checks remain
 mandatory on all three architectures.
 `WinHttpIsHostInProxyBypassList` and `WinHttpQueryAuthParams` have native declarations
@@ -121,9 +178,10 @@ Windows 2000 redistributable availability as an unconditional OS guarantee.
 The scoped-OS adoption factors those same 38 WinHttp facts into ten lexical
 scopes and four direct annotations; it must not add floors to unannotated
 `Ex`/newer APIs, callback aliases, records or enums. All public direct and scoped
-names use `_Win32_`, without `_Windows_` aliases. Explicit facts override scoped
-defaults, and the innermost same-header/include-instance default wins otherwise;
-there is no include leakage or implicit container inheritance. The
+names use `_Win32_`, without `_Windows_` aliases. Scopes use Clang's lexical
+attribute accumulation: includes inherit active scopes, and distinct conflicting
+floors fail rather than being overridden. Keep direct container facts separate
+from lexical scopes; the former do not imply method inheritance. The
 [playbook's scope inventory](header-annotation-migration-playbook.md#factor-supportedos-facts-without-broadening-coverage)
 requires zero net metadata changes from the immutable completed B9 image,
 separately from the unchanged 48-difference combined OLD-to-NEW grade.
@@ -154,8 +212,11 @@ Logical enum relationships do not replace the native ABI type in metadata:
 | `URL_COMPONENTS` | `nScheme` | `WINHTTP_INTERNET_SCHEME` | `INTERNET_SCHEME` (`int`) |
 | `WINHTTP_PROXY_RESULT_ENTRY` | `ProxyScheme` | `WINHTTP_INTERNET_SCHEME` | `INTERNET_SCHEME` (`int`) |
 
-Only the open-request group is a flags enum, matching OLD. All five groups are
-unscoped. Macro push/pop pairs preserve genuine macro spellings and native values.
+Only the open-request group is a flags enum, matching OLD. Four groups use
+`_Win32_Enum_` / `_Win32_FlagsEnum_`; the scheme group uses the same AST transport
+with explicit historical labels. Compiled native constants remain authoritative,
+without macro push/pop or copied literal enumerators. Both public group macros
+are empty for ordinary consumers.
 The shared create-URL enum is owned by the header; `enums.json` retains only the two
 unmigrated WinInet `addUsesTo` relationships, not another definition.
 
@@ -164,8 +225,9 @@ was not emitted. The new group preserves the three actually emitted members;
 genuine `WINHTTP_AUTH_SCHEME_DIGEST` remains a loose constant.
 
 The user-selected naming policy preserves the existing C# members
-`WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` in the metadata-only logical enum.
-Each initializer references its genuine `INTERNET_SCHEME_*` macro, yielding
+`WINHTTP_INTERNET_SCHEME_HTTP/HTTPS/FTP/SOCKS` through a metadata-only typedef
+carrier with explicit annotation labels. Each compiled expression references its
+genuine `INTERNET_SCHEME_*` macro, yielding
 1/2/3/4 respectively. Those macros are neither undefined nor renamed; ordinary
 native declarations and integer ABI stay intact. There are no new loose WinHttp
 winmd constants: ordinary native macros are not the same as added metadata symbols.
@@ -173,6 +235,13 @@ This is a bounded header-side exception to the specification's native-member
 spelling rule for these four existing logical members, not a general renaming rule.
 No semantic sidecar, consumer alias, WinHttp-specific consumer behavior, or
 fabricated handle is introduced to preserve source compatibility.
+
+Group types precede their associated uses. Where the SDK defines the constants
+after a use, `WINHTTP_ACCESS_TYPE` and `WINHTTP_CREDS_AUTHSCHEME` have an early,
+unannotated `typedef DWORD` under `WIN32METADATA`; the single annotated group
+typedef follows the existing native constants. The corresponding ToolHelp
+exceptions are documented in the playbook. Native constant blocks are neither
+moved nor copied, and no group declaration is visible to ordinary consumers.
 
 CsWin32 generated-source compatibility is the primary acceptance gate. A metadata
 declaration diff is supporting evidence, not a substitute for generating both
@@ -230,7 +299,9 @@ dotnet build BuildTools -c Release
 Use fresh output names; previous images and receipts must not be overwritten.
 The image builder verifies the frozen inputs and tools, reads the recipe's owner
 and affected-dependent partition list, and overlays their actual generated common
-and architecture-specific sources onto the complete source closure. The isolated
+and architecture-specific sources, including compiler-projected
+`partition.header-types.cs` companions, onto the complete source closure. A
+companion without its main partition source is an error. The isolated
 WinHttp recipe selected WinHttp/HttpServer; the expanded recipe also includes the
 playbook's additional owners and dependents. It recomputes constants with all
 partition inputs, preserves the other
@@ -239,13 +310,18 @@ overwriting an existing consumer-fixture or selection directory. Each image gets
 a fresh selected scrape so prior aggregate discoveries cannot become configured
 remap authority. Before emission it forces a second normal SDK scrape with that
 selection's aggregate discovery present, requiring byte-identical selected C#
-sources and pointer discoveries. The frozen discovery inputs must reproduce the
+sources and pointer discoveries. Recompute the source-file set after that repeat,
+so an added or removed companion cannot escape the grade. The frozen discovery inputs must reproduce the
 pinned complete pointer-fixup response file before the selected discoveries are overlaid.
 `PartitionFilter` alone is not a complete constants/manual/emission closure.
 Producer inputs must be committed before image generation and remain unchanged
 through receipt publication. The receipt distinguishes the frozen baseline tooling
 commit from the current producer commit and binds the actual tool, header, generated
-source, discovery, and expected-difference hashes.
+source, discovery, and raw API-comparison hashes. The builder preserves the full
+unfiltered `comparison.log`, displays its output, and records `reviewStatus:
+required` when differences need review. It has no checked-in difference-allowance
+file or default acceptance list. Record concrete source-backed differences in PR
+comments; producing an image and receipt does not itself admit its differences.
 
 ```powershell
 . .\scripts\CommonUtils.ps1
@@ -266,6 +342,9 @@ are not acceptance. Record nonzero executed counts and require no skipped pilot
 legs. Preparation controls cover cache reuse/tampering, preimage/SDK/MIDL mismatch,
 path escapes, unadmitted targets, mode/identity changes, duplicate patches, failed
 transactions, and lock contention.
+Pre-MIDL controls also run the selected real SDK MIDL compiler, preserve native
+SAL alongside metadata, reject ambient imports and syntax failures without header
+fallback, verify imported outputs and compare cold-regeneration bytes.
 SDK-stage controls import the actual project and exercise direct headers/constants,
 with and without a partition filter. Each invocation prepares exactly once before
 the consumers, all consumers observe the same root, cache reuse retains markers,
@@ -294,19 +373,20 @@ bin path before running `dotnet test tests\Windows.Win32.Tests -c Release`.
 `*.remaps` or an empty scratch directory. The pinned full closure contains 393
 diagnostic files. Do not substitute the selected partition output for that closure.
 
-The full-image decompiler comparison must consume exact symbol/value-scoped expected
-differences, with no unknown or unused expectations. It complements these narrow
-SRM checks; neither is presented as a comprehensive typed metadata equivalence
-oracle. The ten approved Printing fixes belong to the tooling OLD baseline and
-must not appear as new WinHttp migration differences.
+Review every difference in the unfiltered full-image decompiler comparison
+against exact symbols, values and source evidence; do not hide differences in a
+checked-in allowance file. It complements these narrow SRM checks; neither is
+presented as a comprehensive typed metadata equivalence oracle. The ten approved
+Printing fixes belong to the tooling OLD baseline and must not appear as new
+WinHttp migration differences.
 
-The WinHttp entries in `patches\HeaderAnnotations.expected-differences.txt` grade exactly 16 declaration differences for this checkpoint:
+The original WinHttp-only checkpoint admitted exactly 16 declaration differences:
 eight native integer use-site types and eight corresponding `AssociatedEnum`
 additions. Existing logical enum identities, member names, and values are
 preserved. This image has no callback renames, import changes, dependent changes,
-additional constants or changed values. The image builder applies this exact
-grade before publishing its provenance receipt; it is not a general prohibition
-on faithfully capturing existing native annotations in future migrations.
+additional constants or changed values. That historical measured result is not
+an automatic acceptance policy for a new producer. Faithfully capture existing
+native annotations and present meaningful differences for review.
 
 ## Original native-name candidate (immutable)
 

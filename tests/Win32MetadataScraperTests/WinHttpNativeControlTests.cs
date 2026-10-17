@@ -32,14 +32,24 @@ namespace Win32MetadataScraperTests
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string[] headers = partition == "WinHttp" ? new[] { "winhttp.h", "httprequest.h" } : new[] { "winhttp.h", "httprequest.h", "http.h" };
+            // Reusing group names rejects metadata-only types or symbols leaking into ordinary headers.
             const string checks = @"
 static_assert(INTERNET_SCHEME_HTTP == 1);
 static_assert(INTERNET_SCHEME_HTTPS == 2);
 static_assert(INTERNET_SCHEME_FTP == 3);
 static_assert(INTERNET_SCHEME_SOCKS == 4);
+using WINHTTP_OPEN_REQUEST_FLAGS = void;
+using WIN_HTTP_CREATE_URL_FLAGS = void;
+using WINHTTP_ACCESS_TYPE = void;
+using WINHTTP_CREDS_AUTHSCHEME = void;
+using WINHTTP_INTERNET_SCHEME = void;
 ";
-            var before = Surface(root, original, partition, architecture, target, headers, checks);
-            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, checks, diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks, diagnostics: preparedDiagnostics);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(61, before.Count(value => value.StartsWith("function WinHttp", StringComparison.Ordinal)));
             Assert.True(before.Count(value => value.StartsWith("field ", StringComparison.Ordinal)) > 50);
             Assert.Contains(before, value => value.StartsWith("typedef LPWINHTTP_STATUS_CALLBACK ", StringComparison.Ordinal));
@@ -130,16 +140,19 @@ static_assert(IDENTITY_DISCONNECTED == 128);
                 "ApplicationVerifier" => @"
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_DONT_RESOLVE_TRACES == 2);
 static_assert(AVRF_ENUM_RESOURCES_FLAGS_SUSPEND == 1);
+using VERIFIER_ENUM_RESOURCE_FLAGS = void;
 ",
                 "MagApi" => @"
 static_assert(MW_FILTERMODE_EXCLUDE == 0);
 static_assert(MW_FILTERMODE_INCLUDE == 1);
+using MW_FILTERMODE = void;
 ",
                 "PsApi1" or "PsApi2" => @"
 static_assert(LIST_MODULES_ALL == 3);
 static_assert(LIST_MODULES_DEFAULT == 0);
 static_assert(LIST_MODULES_32BIT == 1);
 static_assert(LIST_MODULES_64BIT == 2);
+using ENUM_PROCESS_MODULES_EX_FLAGS = void;
 ",
                 "ToolHelp" => @"
 static_assert(TH32CS_INHERIT == 0x80000000u);
@@ -152,6 +165,8 @@ static_assert(TH32CS_SNAPTHREAD == 4);
 static_assert(LF32_FIXED == 1);
 static_assert(LF32_FREE == 2);
 static_assert(LF32_MOVEABLE == 4);
+using CREATE_TOOLHELP_SNAPSHOT_FLAGS = void;
+using HEAPENTRY32_FLAGS = void;
 ",
                 "Dwm" => @"
 static_assert(__is_same(__underlying_type(DWM_SHOWCONTACT), int));
@@ -301,6 +316,16 @@ static_assert(XINPUT_KEYSTROKE_KEYDOWN == 1);
 static_assert(XINPUT_KEYSTROKE_KEYUP == 2);
 static_assert(XINPUT_KEYSTROKE_REPEAT == 4);
 static_assert(XINPUT_FLAG_GAMEPAD == 1);
+using XINPUT_VIRTUAL_KEY = void;
+using BATTERY_TYPE = void;
+using BATTERY_LEVEL = void;
+using BATTERY_DEVTYPE = void;
+using XINPUT_DEVTYPE = void;
+using XINPUT_DEVSUBTYPE = void;
+using XINPUT_CAPABILITIES_FLAGS = void;
+using XINPUT_GAMEPAD_BUTTON_FLAGS = void;
+using XINPUT_KEYSTROKE_FLAGS = void;
+using XINPUT_FLAG = void;
 ",
                 "Wnet" => @"
 #ifdef RESOURCEUSAGE_NONE
@@ -363,8 +388,12 @@ static_assert(DISC_NO_FORCE == 64u);
 ",
                 _ => "",
             };
-            var before = Surface(root, original, partition, architecture, target, headers, checks);
-            var after = Surface(root, prepared, partition, architecture, target, headers, checks);
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, checks, diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks, diagnostics: preparedDiagnostics);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.NotEmpty(before);
             Assert.Contains(before, value => value.StartsWith("function ", StringComparison.Ordinal) || value.StartsWith("record ", StringComparison.Ordinal));
             Assert.Equal(before, after);
@@ -385,16 +414,193 @@ static_assert(DISC_NO_FORCE == 64u);
             }
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(WcmOriginalHeaderControls))]
+        public void OriginalWcmHeaderPreservesNativeAbiAndSalWithExactMetadata(
+            string architecture, string target, string language, bool cInterface, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string source = (cInterface ? "#define CINTERFACE 1\n" : "") +
+                File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", "Wcm", "main.cpp"));
+            string[] headers = { "wcmapi.h" };
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, "Wcm", architecture, target, headers, "",
+                sourceText: source, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "Wcm", architecture, target, headers, "", metadataEnabled: enabled,
+                annotations: annotations, sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics,
+                language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expected = enabled ? new[]
+            {
+                "WcmFreeMemory|SupportedOSPlatform(\"windows8.0\")",
+                "WcmGetProfileList|SupportedOSPlatform(\"windows8.0\")",
+                "WcmQueryProperty|SupportedOSPlatform(\"windows8.0\")",
+                "WcmSetProfileList|SupportedOSPlatform(\"windows8.0\")",
+                "WcmSetProperty|SupportedOSPlatform(\"windows8.0\")",
+            } : Array.Empty<string>();
+            Assert.Equal(expected, annotations.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
+                $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
+                $"{expected.Length} exact availability facts.");
+        }
+
+        public static IEnumerable<object[]> WcmOriginalHeaderControls()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"),
+                ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (var mode in new[] { ("c", false), ("c++", false), ("c++", true) })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { architecture.Item1, architecture.Item2, mode.Item1, mode.Item2, enabled };
+        }
+
+        [NativeMigrationTheory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void RegeneratedSdkIdlKeepsNativeAbiAndOnlyTheIntendedAnnotation(string architecture, string target, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string[] headers = { "waasapi.h", "waasapitypes.h" };
+            var annotations = new List<string>();
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, "UpdateAssessment", architecture, target, headers, "", diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, "UpdateAssessment", architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: annotations, diagnostics: preparedDiagnostics);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(enabled ? new[] { "IWaaSAssessor|SupportedOSPlatform(\"windows10.0.15063\")" } :
+                Array.Empty<string>(), annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Contains("_Out_retval_  OSUpdateAssessment *result", File.ReadAllText(Path.Combine(prepared, "um", "waasapi.h")));
+            this.output.WriteLine($"Regenerated waasapi/{architecture}/metadata={enabled}: {after.Length} unchanged native facts; " +
+                $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact type-only OS annotation.");
+        }
+
+        [NativeMigrationTheory]
+        [MemberData(nameof(PropertyStorageIdlControls))]
+        public void RegeneratedPropertyStorageIdlKeepsNativeLayoutsSalAndRpc(string header, string architecture,
+            string target, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            // Make either generated artifact the first owner of the guarded property-storage declarations.
+            string source = "#define WIN32_LEAN_AND_MEAN 1\n#define COM_NO_WINDOWS_H 1\n" +
+                "#include <intrinfix.h>\n#include <windows.fixed.h>\n#include <sdkddkver.h>\n" +
+                "#include <wtypes.h>\n#include <objidl.h>\n#include <oaidl.h>\n" +
+                "#include <" + header + ">\n";
+            string checks = @"
+static_assert(PRSPEC_INVALID == 0xffffffffu);
+static_assert(PRSPEC_LPWSTR == 0);
+static_assert(PRSPEC_PROPID == 1);
+static_assert(sizeof(((PROPSPEC*)0)->ulKind) == 4);
+static_assert(sizeof(((STATPROPSTG*)0)->vt) == 2);
+static_assert(sizeof(((PROPVARIANT*)0)->vt) == 2);
+";
+            string[] headers = { header };
+            var annotations = new List<string>();
+            var originalSal = new List<string>();
+            var preparedSal = new List<string>();
+            var originalDiagnostics = new List<string>();
+            var preparedDiagnostics = new List<string>();
+            var before = Surface(root, original, "Com.StructuredStorage", architecture, target, headers, checks,
+                sourceText: source, salAnnotations: originalSal, diagnostics: originalDiagnostics);
+            var after = Surface(root, prepared, "Com.StructuredStorage", architecture, target, headers,
+                checks + (enabled ? "" : "\nusing PROPSPEC_KIND = void;\n"), metadataEnabled: enabled,
+                annotations: annotations, sourceText: source, salAnnotations: preparedSal, diagnostics: preparedDiagnostics);
+            const string group = "typedef PROPSPEC_KIND unsigned long";
+            Assert.Equal(enabled ? new[] { group } : Array.Empty<string>(), after.Where(value => value == group));
+            Assert.Equal(before, after.Where(value => value != group));
+            Assert.Equal(originalSal.OrderBy(value => value, StringComparer.Ordinal),
+                preparedSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(originalDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                preparedDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Contains(before, value => value.StartsWith("field ", StringComparison.Ordinal) &&
+                value.Contains("::wReserved1 unsigned short ", StringComparison.Ordinal));
+            Assert.Contains(before, value => value.StartsWith("field ", StringComparison.Ordinal) &&
+                value.Contains("::wReserved3 unsigned short ", StringComparison.Ordinal));
+            foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+            {
+                Assert.Contains(before, value => value.StartsWith("function " + name + "::Skip ", StringComparison.Ordinal));
+                Assert.Contains(before, value => value.StartsWith("function " + name + "_Next_Proxy ", StringComparison.Ordinal));
+                Assert.Contains(before, value => value.StartsWith("function " + name + "_Next_Stub ", StringComparison.Ordinal));
+            }
+
+            string[] facts = annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            if (!enabled)
+                Assert.Empty(facts);
+            else
+            {
+                Assert.Equal(new[]
+                {
+                    "IEnumSTATPROPSETSTG|SupportedOSPlatform(\"windows5.0\")",
+                    "IEnumSTATPROPSTG|SupportedOSPlatform(\"windows5.0\")",
+                    "IPropertySetStorage|SupportedOSPlatform(\"windows5.0\")",
+                    "IPropertyStorage|SupportedOSPlatform(\"windows5.0\")",
+                }, facts.Where(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal)));
+                Assert.Contains("PROPSPEC_KIND|Enum(PRSPEC_LPWSTR, PRSPEC_PROPID)", facts);
+                string[] associations = facts.Where(value => value.EndsWith("|AssociatedEnum", StringComparison.Ordinal)).ToArray();
+                Assert.Equal(3, associations.Length);
+                Assert.Contains("tagPROPSPEC::ulKind|AssociatedEnum", associations);
+                Assert.Contains("tagSTATPROPSTG::vt|AssociatedEnum", associations);
+                Assert.Single(associations.Where(value => value.Contains("PROPVARIANT::", StringComparison.Ordinal) &&
+                    value.EndsWith("::vt|AssociatedEnum", StringComparison.Ordinal)));
+                Assert.Equal(8, facts.Count(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal) ||
+                    value.EndsWith("|AssociatedEnum", StringComparison.Ordinal) || value.Contains("|Enum(", StringComparison.Ordinal)));
+                foreach (string name in new[] { "IEnumSTATPROPSTG", "IEnumSTATPROPSETSTG" })
+                    Assert.DoesNotContain(facts, value => value.StartsWith(name + "_Next_Proxy|", StringComparison.Ordinal));
+            }
+            this.output.WriteLine($"{header}/{architecture}/metadata={enabled}: " +
+                $"{before.Length} identical native/layout/RPC facts, {originalSal.Count} unchanged SAL attributes, " +
+                $"{facts.Length} native AST metadata facts; method targets are checked in the physical winmd.");
+        }
+
+        public static IEnumerable<object[]> PropertyStorageIdlControls()
+        {
+            foreach (string header in new[] { "PropIdl.h", "PropIdlBase.h" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { header, architecture.Item1, architecture.Item2, enabled };
+        }
+
         private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
-            string target, string[] headers, string checks)
+            string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
+            string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null, string language = "c++")
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
             int standardIndex = Array.IndexOf(partitionOptions, "--std");
-            string standard = standardIndex < 0 ? "c++17" : partitionOptions[standardIndex + 1];
+            string standard = language == "c" ? "c17" : standardIndex < 0 ? "c++17" : partitionOptions[standardIndex + 1];
             var arguments = new List<string>
                 {
-                    "--language=c++", "--std=" + standard, "--target=" + target,
+                    "--language=" + language, "--std=" + standard, "--target=" + target,
                     "--include-directory=" + Path.Combine(root, "generation", "WinSDK", "inc"),
                 };
             arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
@@ -414,7 +620,9 @@ static_assert(DISC_NO_FORCE == 64u);
                 }
             }
             Assert.DoesNotContain(arguments, argument => argument.Contains("WIN32METADATA", StringComparison.Ordinal));
-            using var unsaved = CXUnsavedFile.Create(source, File.ReadAllText(source) + checks);
+            if (metadataEnabled)
+                arguments.Add("-DWIN32METADATA=1");
+            using var unsaved = CXUnsavedFile.Create(source, (sourceText ?? File.ReadAllText(source)) + checks);
             using var index = CXIndex.Create(false, false);
             Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
                 new[] { unsaved }, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));
@@ -423,8 +631,10 @@ static_assert(DISC_NO_FORCE == 64u);
             for (uint i = 0; i < handle.NumDiagnostics; i++)
             {
                 using var diagnostic = handle.GetDiagnostic(i);
-                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error,
-                    diagnostic.Format(CXDiagnostic.DefaultDisplayOptions).ToString());
+                string text = Text(diagnostic.Format(CXDiagnostic.DefaultDisplayOptions));
+                Assert.True(diagnostic.Severity < CXDiagnosticSeverity.CXDiagnostic_Error, text);
+                diagnostics?.Add(Regex.Replace(text.Replace(includeRoot, "<headers>", StringComparison.OrdinalIgnoreCase),
+                    @":\d+:\d+:", ":<source-location>:"));
             }
             var result = new List<string>();
             // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
@@ -474,6 +684,16 @@ static_assert(DISC_NO_FORCE == 64u);
                 }
                 cursor.VisitChildren((child, parent, data) =>
                 {
+                    if ((annotations != null || salAnnotations != null) && headers.Contains(header, StringComparer.OrdinalIgnoreCase) &&
+                        child.Kind == CXCursorKind.CXCursor_AnnotateAttr)
+                    {
+                        string value = Text(child.Spelling);
+                        const string prefix = "Win32Metadata.";
+                        if (value.StartsWith(prefix, StringComparison.Ordinal))
+                            annotations?.Add(owner + name + "|" + value.Substring(prefix.Length));
+                        else
+                            salAnnotations?.Add(owner + name + "|" + value);
+                    }
                     if (child.IsDeclaration || child.IsTranslationUnit)
                         Walk(child, childOwner);
                     return CXChildVisitResult.CXChildVisit_Continue;

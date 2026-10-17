@@ -2,8 +2,14 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.26100.7705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "d3dc662e56c715c1e0c000a0300ff3088e9a9f17",
+  "sourceGitTree": "8b7d1b2d7806c4767ac056cc9c8d2db3a6ab677d",
   "headers": [
+    {
+      "path": "shared\\sal.h",
+      "sourceSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+      "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+    },
     {
       "path": "um\\winhttp.h",
       "sourceSha256": "45B2CCF904EEAA904E773E90A1E677BD04E41FB57E003F3F398CDE0195C2FDD2",
@@ -75,6 +81,18 @@
       "sourceSha256": "D61D87E4A316ECF0CBA6529A38CB48F148ADD0D94C7C81EADC44D9B4D1867738",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapitypes.idl",
       "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+    },
+    {
+      "path": "um\\PropIdlBase.h",
+      "sourceSha256": "D5F5F8E552BE2D9E7313CA0D4522B02A071ADCA0507642299A2D2293CFBBDD01",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propidlbase.idl",
+      "sdkSha256": "0C7803172E592422CB636DD6E6224F61381CD3D1E043041D0A94854A0C51252C"
+    },
+    {
+      "path": "um\\PropIdl.h",
+      "sourceSha256": "8B76E3D535F092F914F8B82B020318AEC557049E98A6C327419321873868FCE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propidl.idl",
+      "sdkSha256": "6F81BD32D2160425665A7EFB79C16D8FF327BFE0F070E4F2E7DED05817409A6A"
     },
     {
       "path": "um\\wslapi.h",
@@ -563,6 +581,340 @@
       "sdkSha256": "320142FA791F045D5DBBA476421881B05F64DA4646981FC815E0201CD7DD16BE"
     }
   ],
+  "midl": {
+    "tools": [
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midl.exe",
+        "sha256": "53CCBCBC2FF14B2D08D029AD07B3D1AA4FF3B103F712199A15248A6CCCF6D2A3"
+      },
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midlc.exe",
+        "sha256": "D12AFF8A74397601041BEC46552FC8DEE1206DAA97E39600E72A7B1B1A5EF6AB"
+      }
+    ],
+    "inputs": [
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "082E725995B988C14B66FA79FEF3B1E2373529EC3E8AE5703B57293579BC1C07"
+      },
+      {
+        "path": "shared\\sal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
+        "sdkSha256": "A2B3EE38BC3B998D7162A38D1AA1C8D19EB3F72EEA64EB5EE68FB6497B65E7F1"
+      },
+      {
+        "path": "shared\\concurrencysal.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\concurrencysal.h",
+        "sdkSha256": "1EA9A2E32A6FF298AD7904610CC71028CAA9B172399A579CA90A120D1B1AEC12"
+      },
+      {
+        "path": "um\\waasapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\waasapi.idl",
+        "sdkSha256": "A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38"
+      },
+      {
+        "path": "um\\waasapitypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\WaaSAPITypes.idl",
+        "sdkSha256": "225C8859217E03DD4A00DD5D93449995C97E6281B7D148121B9B0440EA4F9822"
+      },
+      {
+        "path": "um\\propidlbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\propidlbase.idl",
+        "sdkSha256": "0C7803172E592422CB636DD6E6224F61381CD3D1E043041D0A94854A0C51252C"
+      },
+      {
+        "path": "um\\propidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\propidl.idl",
+        "sdkSha256": "6F81BD32D2160425665A7EFB79C16D8FF327BFE0F070E4F2E7DED05817409A6A"
+      },
+      {
+        "path": "um\\oaidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.idl",
+        "sdkSha256": "5F5A2B0508AFFC22C30289D6F44B08792CE047CD7F41303EBBB7470E2217D6BC"
+      },
+      {
+        "path": "um\\objidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidl.idl",
+        "sdkSha256": "09C1AB7AEF7C01D1552BAA826AAC549C15D1806E9C696B99814FCFF0241DE539"
+      },
+      {
+        "path": "um\\objidlbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objidlbase.idl",
+        "sdkSha256": "A31AD8BCEB15641FA625EE1DE35657269B1449BB84DB4F11553D68B410F59E71"
+      },
+      {
+        "path": "um\\unknwn.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwn.idl",
+        "sdkSha256": "2E146DA78625D05E345E7D480A61C5CC54696DD7C713B8FF07D9D36D95363C6C"
+      },
+      {
+        "path": "um\\unknwnbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\unknwnbase.idl",
+        "sdkSha256": "797B7267F24259A02A14455203F9B11309B504C1BFFAF879AF7BC05B8B67A5BC"
+      },
+      {
+        "path": "shared\\wtypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypes.idl",
+        "sdkSha256": "F850757CCEF6092F20A97E955DD64AE2A595E0BF71C09A826A0BDE7C21B36E81"
+      },
+      {
+        "path": "shared\\wtypesbase.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypesbase.idl",
+        "sdkSha256": "5DFF65DAA90EC39AAE0EB89EC2E7DF1ACD8A8D22E49514E5E062F13DD9B4B564"
+      },
+      {
+        "path": "shared\\basetsd.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\basetsd.h",
+        "sdkSha256": "D35B73F885D7EF7DFD27FCE3762C190C1C952A21E10A3945BCB3D1860C673B12"
+      },
+      {
+        "path": "shared\\guiddef.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\guiddef.h",
+        "sdkSha256": "0C08463FBC5A23A8862E57699E2F30DD14CD3DB4A40903E4FCA9392A57942DAE"
+      },
+      {
+        "path": "um\\oaidl.acf",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.acf",
+        "sdkSha256": "333B0D33450F70D2FB5288D79B11ECF6C4043B933ECB7B7A2A996E3185F714BF"
+      },
+      {
+        "path": "shared\\winapifamily.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\winapifamily.h",
+        "sdkSha256": "BDA507D14F2E40023D344CB943CBD98AF26DE8A47F3B0F5FAC694D2025711AF1"
+      },
+      {
+        "path": "shared\\winpackagefamily.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\winpackagefamily.h",
+        "sdkSha256": "8F74E254896094A3884E6975FD24B3493846514065F47D2666DF53CDEA45B8EA"
+      },
+      {
+        "path": "um\\amsi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\amsi.idl",
+        "sdkSha256": "17D39F2A78E7D3DCF0E10AC146F11070BFE9374004199F424E194568C7B62EAC"
+      },
+      {
+        "path": "um\\callobj.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\callobj.idl",
+        "sdkSha256": "CEF9673107F25AEEC0FDD86A62F69A4C897D2455603F6E95D4E3A8F1DD4EEFC0"
+      },
+      {
+        "path": "um\\comcat.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\comcat.idl",
+        "sdkSha256": "04AD4E13812214C3D1C9925A3535E6744F6704E2B614636AC7FA74BB32F84B9E"
+      },
+      {
+        "path": "um\\ddpbackup.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ddpbackup.idl",
+        "sdkSha256": "20DD5778F6D5BE1CC225A014C8BF4D2F7D4261B7053D6DCBFB0EA14662AAD0C6"
+      },
+      {
+        "path": "um\\EventSys.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\EventSys.idl",
+        "sdkSha256": "FB9D8FCAB51FF13E259E06D4B899FE12C2399557FA16827F2876B6451028D728"
+      },
+      {
+        "path": "um\\FhCfg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\FhCfg.idl",
+        "sdkSha256": "EE64E8CCA3D20B51AA58023C2C8561000A722B3A0CD39786ABF5835584B4DF3C"
+      },
+      {
+        "path": "um\\IContact.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\IContact.idl",
+        "sdkSha256": "DCC9C8D2A58B422BF4515494C3028A366687DDC875F9250FAE574E1298DC6ABD"
+      },
+      {
+        "path": "um\\idispids.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\idispids.h",
+        "sdkSha256": "B27CFD71F6D05146E26CC88DBE8AE47E7914DEEF6E2D160776B74F9AC70B0648"
+      },
+      {
+        "path": "um\\msrdc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msrdc.idl",
+        "sdkSha256": "4470145098F210805D6893F68D438911C647FE814B5E7E3138C2BFC6453C2177"
+      },
+      {
+        "path": "um\\msxml.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msxml.idl",
+        "sdkSha256": "F9AA42962221A91808AC85D4907D8B65BF6004B4E08A9B6FC89FAA2560D65E84"
+      },
+      {
+        "path": "um\\msxmldid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msxmldid.h",
+        "sdkSha256": "8A06E4B75AD47835A2205C9AC57684BA438ADD05607D0DE43DA91E8F822416EC"
+      },
+      {
+        "path": "um\\netlistmgr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\netlistmgr.idl",
+        "sdkSha256": "C334776532B435450D5DA0E0EF4F92B5A8B639B13E737221CC1B47A5787D8E54"
+      },
+      {
+        "path": "um\\NotificationActivationCallback.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\NotificationActivationCallback.idl",
+        "sdkSha256": "BC3CA30AB53317683AFABF4BAD532E8FCEBC4F90BA6D8B3BB068C82205FDBA6E"
+      },
+      {
+        "path": "um\\ObjectArray.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ObjectArray.idl",
+        "sdkSha256": "62C10FEC9CCEE38D307576665C42BBD5D44A567519CCC6A8243C33F7B3404F4E"
+      },
+      {
+        "path": "um\\ocidl.acf",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ocidl.acf",
+        "sdkSha256": "06208BC3FDCB4CA966E42468103EA353EA192FE4FE2221C45040AC3222D972EB"
+      },
+      {
+        "path": "um\\ocidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ocidl.idl",
+        "sdkSha256": "D22A5326B0AB61D61C6475C4047F164DF0F1F2B568A0AC32EE9F0F2025451514"
+      },
+      {
+        "path": "um\\oleidl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oleidl.idl",
+        "sdkSha256": "6736D03509172C9D3E79D6D94BA07DF6A8942E8FAB0B32228BE6F78ACF8DACFC"
+      },
+      {
+        "path": "um\\propsys.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\propsys.idl",
+        "sdkSha256": "1D53E43BDC74CD3884B637B8BA30E2FB6D87F9557904A1AF69C46F75182A41E2"
+      },
+      {
+        "path": "um\\RadialControllerInterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\RadialControllerInterop.idl",
+        "sdkSha256": "FD6A57358A3B3527076A6D982C0BDCDC47B0150DD769962731E8C268B7EF9EEF"
+      },
+      {
+        "path": "um\\RrasCfg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\RrasCfg.idl",
+        "sdkSha256": "BE0FDA967666B91306A115EE91A158C0D83BBF1676251F0F68CE59B9DDE13FFF"
+      },
+      {
+        "path": "um\\servprov.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\servprov.idl",
+        "sdkSha256": "81F0EA15DF697A868EF0419A90332D9B4EC79D71FDDBC9F38E5823F67F87EC74"
+      },
+      {
+        "path": "um\\shobjidl_core.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\shobjidl_core.idl",
+        "sdkSha256": "43DAAA97DE4C359BACB8BAA0DF4813C950ED2C29BF8474CBED2131633BB1A101"
+      },
+      {
+        "path": "um\\shtypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\shtypes.idl",
+        "sdkSha256": "3CA5EB53FA1D076619ADEC1A848FA09795C8B6BDF375F189FA0D0D401ED2A45A"
+      },
+      {
+        "path": "um\\StructuredQueryCondition.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\StructuredQueryCondition.idl",
+        "sdkSha256": "6D3BBED903B6FB49F4BD50D572B324F2F9AC6A7FF38D79DD4BABBD9314134054"
+      },
+      {
+        "path": "um\\urlmon.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\urlmon.idl",
+        "sdkSha256": "EBCB44AB8A595A0B8987E0045EE34603A1DDAAB4A832F20ACDDCE3B06F7ED07B"
+      },
+      {
+        "path": "um\\wsbapp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbapp.idl",
+        "sdkSha256": "F8DCC85EA4BB30395A45423ACE0E2E78189C461D82671486E546D10170B01871"
+      },
+      {
+        "path": "um\\xmldom.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xmldom.idl",
+        "sdkSha256": "45E067B4FDCEA51EA3537DF70BE5907EF61BE3A938ABBED0F5F3C7BC3DD85C98"
+      },
+      {
+        "path": "um\\xmldomdid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xmldomdid.h",
+        "sdkSha256": "5115AE295678E9F74239CB006DCB7130F280D905324E204B450EFAF0C0E4BE02"
+      },
+      {
+        "path": "um\\xmldso.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xmldso.idl",
+        "sdkSha256": "A84F38B92A8243BDDCA3ED62CA1E106CE2FAB7244AD9739F213975E4E0860261"
+      },
+      {
+        "path": "um\\xmldsodid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xmldsodid.h",
+        "sdkSha256": "31D2427CDD51E33401D6F863236073C091C500C30159E1D1F04080FE8F0DE13A"
+      },
+      {
+        "path": "winrt\\hstring.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\hstring.idl",
+        "sdkSha256": "E10ED2CE9A0101D4D2DE71E17B01D3C066ECB87D793607467CD4554E2D649213"
+      },
+      {
+        "path": "winrt\\inspectable.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\inspectable.idl",
+        "sdkSha256": "D7C278B83B622613E8FBFDE119B7B9F0FAD1515E1001E55C3F82DFE1FFAB8874"
+      }
+    ],
+    "outputs": [
+      {
+        "source": "um\\waasapitypes.idl",
+        "path": "um\\waasapitypes.h"
+      },
+      {
+        "source": "um\\waasapi.idl",
+        "path": "um\\waasapi.h"
+      },
+      {
+        "source": "um\\propidlbase.idl",
+        "path": "um\\PropIdlBase.h"
+      },
+      {
+        "source": "um\\propidl.idl",
+        "path": "um\\PropIdl.h"
+      },
+      {
+        "source": "um\\RadialControllerInterop.idl",
+        "path": "um\\RadialControllerInterop.h"
+      },
+      {
+        "source": "um\\ddpbackup.idl",
+        "path": "um\\ddpbackup.h"
+      },
+      {
+        "source": "um\\NotificationActivationCallback.idl",
+        "path": "um\\NotificationActivationCallback.h"
+      },
+      {
+        "source": "um\\wsbapp.idl",
+        "path": "um\\wsbapp.h"
+      },
+      {
+        "source": "um\\IContact.idl",
+        "path": "um\\IContact.h"
+      },
+      {
+        "source": "um\\FhCfg.idl",
+        "path": "um\\FhCfg.h"
+      },
+      {
+        "source": "um\\netlistmgr.idl",
+        "path": "um\\netlistmgr.h"
+      },
+      {
+        "source": "um\\msrdc.idl",
+        "path": "um\\msrdc.h"
+      },
+      {
+        "source": "um\\callobj.idl",
+        "path": "um\\callobj.h"
+      },
+      {
+        "source": "um\\EventSys.idl",
+        "path": "um\\EventSys.h"
+      },
+      {
+        "source": "um\\amsi.idl",
+        "path": "um\\amsi.h"
+      },
+      {
+        "source": "um\\RrasCfg.idl",
+        "path": "um\\RrasCfg.h"
+      }
+    ]
+  },
   "partitions": [
     "WinHttp",
     "HttpServer",
@@ -577,6 +929,7 @@
     "Ual",
     "ToolHelp",
     "UpdateAssessment",
+    "Com.StructuredStorage",
     "Wsl",
     "Xinput",
     "SecurityCenter",
@@ -629,71 +982,68 @@
     "Wsb"
   ],
   "patches": [
-    "post-midl\\um\\winhttp.supported-os.patch",
-    "post-midl\\um\\winhttp.last-error.patch",
-    "post-midl\\um\\winhttp.callback-alias.patch",
-    "post-midl\\um\\winhttp.interior-pointers.patch",
-    "post-midl\\um\\winhttp.port-constant-types.patch",
-    "post-midl\\um\\winhttp.logical-enums.patch",
-    "post-midl\\um\\windowsceip.annotations.patch",
-    "post-midl\\um\\avrfsdk.annotations.patch",
-    "post-midl\\um\\magnification.annotations.patch",
-    "post-midl\\um\\psapi.annotations.patch",
-    "post-midl\\um\\timezoneapi.annotations.patch",
-    "post-midl\\um\\ual.annotations.patch",
-    "post-midl\\um\\tlhelp32.annotations.patch",
-    "post-midl\\um\\waasapi.annotations.patch",
-    "post-midl\\um\\wslapi.annotations.patch",
-    "post-midl\\um\\xinput.annotations.patch",
-    "post-midl\\um\\wscapi.annotations.patch",
-    "post-midl\\um\\wcmapi.annotations.patch",
-    "post-midl\\um\\radialcontrollerinterop.annotations.patch",
-    "post-midl\\um\\icontact.annotations.patch",
-    "post-midl\\um\\msrdc.annotations.patch",
-    "post-midl\\um\\netlistmgr.annotations.patch",
-    "post-midl\\um\\callobj.annotations.patch",
-    "post-midl\\um\\eventsys.annotations.patch",
-    "post-midl\\um\\nb30.annotations.patch",
-    "post-midl\\um\\winnetwk.annotations.patch",
-    "post-midl\\um\\npapi.annotations.patch",
-    "post-midl\\um\\dhcpv6csdk.annotations.patch",
-    "post-midl\\um\\dhcpcsdk.annotations.patch",
-    "post-midl\\um\\dhcpsapi.annotations.patch",
-    "post-midl\\um\\netsh.annotations.patch",
-    "post-midl\\um\\bluetoothapis.annotations.patch",
-    "post-midl\\um\\bluetoothleapis.annotations.patch",
-    "post-midl\\um\\ws2bth.annotations.patch",
-    "post-midl\\um\\dinput.annotations.patch",
-    "post-midl\\shared\\hidpi.annotations.patch",
-    "post-midl\\um\\devfiltertypes.annotations.patch",
-    "post-midl\\um\\dwmapi.annotations.patch",
-    "post-midl\\um\\werapi.annotations.patch",
-    "post-midl\\um\\errorrep.annotations.patch",
-    "post-midl\\um\\evcoll.annotations.patch",
-    "post-midl\\um\\powrprof.annotations.patch",
-    "post-midl\\um\\powersetting.annotations.patch",
-    "post-midl\\um\\powerbase.annotations.patch",
-    "post-midl\\um\\fdi.annotations.patch",
-    "post-midl\\um\\mdmregistration.annotations.patch",
-    "post-midl\\um\\davclnt.annotations.patch",
-    "post-midl\\shared\\tbs.annotations.patch",
-    "post-midl\\um\\fhcfg.annotations.patch",
-    "post-midl\\um\\fhsvcctl.annotations.patch",
-    "post-midl\\um\\amsi.annotations.patch",
-    "post-midl\\um\\websocket.annotations.patch",
-    "post-midl\\um\\restartmanager.annotations.patch",
-    "post-midl\\um\\processsnapshot.annotations.patch",
-    "post-midl\\um\\lowlevelmonitorconfigurationapi.annotations.patch",
-    "post-midl\\um\\highlevelmonitorconfigurationapi.annotations.patch",
-    "post-midl\\um\\physicalmonitorenumerationapi.annotations.patch",
-    "post-midl\\um\\raseapif.annotations.patch",
-    "post-midl\\um\\rrascfg.annotations.patch",
-    "post-midl\\um\\amxmlgraphbuilder.annotations.patch",
-    "post-midl\\um\\notificationactivationcallback.annotations.patch",
-    "post-midl\\um\\wnvapi.annotations.patch",
-    "post-midl\\um\\directml.annotations.patch",
-    "post-midl\\um\\ddpbackup.annotations.patch",
-    "post-midl\\um\\wsbapp.annotations.patch",
-    "post-midl\\um\\wsbonline.annotations.patch"
+    "shared\\sal.h.patch",
+    "um\\waasapi.idl.patch",
+    "um\\propidlbase.idl.patch",
+    "um\\winhttp.h.patch",
+    "um\\windowsceip.h.patch",
+    "um\\avrfsdk.h.patch",
+    "um\\magnification.h.patch",
+    "um\\Psapi.h.patch",
+    "um\\timezoneapi.h.patch",
+    "um\\ual.h.patch",
+    "um\\TlHelp32.h.patch",
+    "um\\wslapi.h.patch",
+    "um\\Xinput.h.patch",
+    "um\\wcmapi.h.patch",
+    "um\\wscapi.h.patch",
+    "um\\DhcpCSdk.h.patch",
+    "um\\dhcpsapi.h.patch",
+    "um\\Dhcpv6cSdk.h.patch",
+    "um\\nb30.h.patch",
+    "um\\NetSh.h.patch",
+    "um\\Npapi.h.patch",
+    "um\\winnetwk.h.patch",
+    "shared\\hidpi.h.patch",
+    "um\\bluetoothapis.h.patch",
+    "um\\bluetoothleapis.h.patch",
+    "um\\devfiltertypes.h.patch",
+    "um\\dinput.h.patch",
+    "um\\ws2bth.h.patch",
+    "um\\dwmapi.h.patch",
+    "um\\ErrorRep.h.patch",
+    "um\\EvColl.h.patch",
+    "um\\powerbase.h.patch",
+    "um\\powersetting.h.patch",
+    "um\\powrprof.h.patch",
+    "um\\WerApi.h.patch",
+    "shared\\tbs.h.patch",
+    "um\\davclnt.h.patch",
+    "um\\fdi.h.patch",
+    "um\\FhSvcCtl.h.patch",
+    "um\\MDMRegistration.h.patch",
+    "um\\websocket.h.patch",
+    "um\\amxmlgraphbuilder.h.patch",
+    "um\\DirectML.h.patch",
+    "um\\highlevelmonitorconfigurationapi.h.patch",
+    "um\\lowlevelmonitorconfigurationapi.h.patch",
+    "um\\physicalmonitorenumerationapi.h.patch",
+    "um\\ProcessSnapshot.h.patch",
+    "um\\Raseapif.h.patch",
+    "um\\RestartManager.h.patch",
+    "um\\wnvapi.h.patch",
+    "um\\wsbonline.h.patch",
+    "um\\RadialControllerInterop.idl.patch",
+    "um\\ddpbackup.idl.patch",
+    "um\\NotificationActivationCallback.idl.patch",
+    "um\\wsbapp.idl.patch",
+    "um\\IContact.idl.patch",
+    "um\\FhCfg.idl.patch",
+    "um\\netlistmgr.idl.patch",
+    "um\\msrdc.idl.patch",
+    "um\\callobj.idl.patch",
+    "um\\EventSys.idl.patch",
+    "um\\amsi.idl.patch",
+    "um\\RrasCfg.idl.patch"
   ]
 }

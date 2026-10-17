@@ -1,0 +1,35 @@
+diff --git a/um/msrdc.idl b/um/msrdc.idl
+index 692cd9db..76eaf0df 100644
+--- a/um/msrdc.idl
++++ b/um/msrdc.idl
+@@ -5,11 +5,30 @@
+ // This file will be processed by the MIDL tool to
+ // produce the type library (MSRDC.tlb) and marshalling code.
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IRdcGeneratorParameters, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcGeneratorFilterMaxParameters, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcGenerator, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcFileReader, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcFileWriter, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcSignatureReader, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcComparator, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcLibrary, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityReportProgress, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityTableDumpState, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityTraitsMappedView, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityTraitsMapping, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityTraitsTable, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarityFileIdTable, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IRdcSimilarityGenerator, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IFindSimilarResults, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(ISimilarity, _Win32_SupportedOS_WindowsVista_)
++
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 

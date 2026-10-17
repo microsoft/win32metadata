@@ -1,0 +1,20 @@
+diff --git a/um/Raseapif.h b/um/Raseapif.h
+index 860a9bce..28c3f431 100644
+--- a/um/Raseapif.h
++++ b/um/Raseapif.h
+@@ -688,6 +688,7 @@ extern "C"
+     // registry via the Path value.
+     //
+ 
++    _Win32_SupportedOS_BEGIN_(Windows2000)
+     DWORD APIENTRY RasEapGetInfo(_In_ DWORD dwEapTypeId, _Out_ PPP_EAP_INFO* pEapInfo);
+ 
+     //
+@@ -744,6 +745,7 @@ extern "C"
+         _Outptr_result_buffer_(*pdwSizeOfUserDataOut) BYTE** ppUserDataOut,
+         _Out_ DWORD* pdwSizeOfUserDataOut,
+         _Outptr_ LPWSTR* ppwszIdentityOut);
++    _Win32_SupportedOS_END_()
+ 
+ #endif /* WINVER >= 0x0500 */
+ 

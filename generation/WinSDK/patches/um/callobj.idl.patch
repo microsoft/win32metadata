@@ -1,0 +1,32 @@
+diff --git a/um/callobj.idl b/um/callobj.idl
+index 1b2716fc..12d0c7a8 100644
+--- a/um/callobj.idl
++++ b/um/callobj.idl
+@@ -5,11 +5,19 @@
+    Copyright (c) Microsoft Corporation. All rights reserved.
+ 
+ */
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(ICallFrame, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(ICallIndirect, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(ICallInterceptor, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(ICallFrameEvents, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(ICallUnmarshal, _Win32_SupportedOS_Windows2000_)
++_Win32_AnnotateInterface_(ICallFrameWalker, _Win32_SupportedOS_Windows2000_)
++
+ 
+ import "oaidl.idl";
+ 
+@@ -339,6 +347,7 @@ cpp_quote("#define CALLFRAME_E_COULDNTMAKECALL _HRESULT_TYPEDEF_(  0x8004d091 )"
+ [uuid(15B51D8B-9BF6-11d1-B888-00C04FB9618A), local] 
+ interface ICallFrameAPIs {
+ 
++	[annotation("_Win32_SupportedOS_Windows2000_")]
+ 	HRESULT __stdcall CoGetInterceptor
+ 	(
+ 		[in]   REFIID iidIntercepted,

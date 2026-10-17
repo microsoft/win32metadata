@@ -1,0 +1,23 @@
+diff --git a/um/IContact.idl b/um/IContact.idl
+index 663ee4c1..1b268e78 100644
+--- a/um/IContact.idl
++++ b/um/IContact.idl
+@@ -11,11 +11,18 @@
+ //--------------------------------------------------------------------------
+ // Includes
+ //--------------------------------------------------------------------------
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IContactManager, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IContactCollection, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IContactProperties, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IContact, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IContactPropertyCollection, _Win32_SupportedOS_WindowsVista_)
++
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "objidl.idl";

@@ -1,0 +1,57 @@
+diff --git a/um/amsi.idl b/um/amsi.idl
+index f072bc93..b64b79f6 100644
+--- a/um/amsi.idl
++++ b/um/amsi.idl
+@@ -4,12 +4,17 @@
+  *                                                     *
+  *******************************************************/
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IAmsiStream, _Win32_SupportedOS_10240_)
++_Win32_AnnotateInterface_(IAntimalwareProvider, _Win32_SupportedOS_10240_)
++_Win32_AnnotateInterface_(IAntimalware, _Win32_SupportedOS_10240_)
++
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
+@@ -313,21 +318,26 @@ cpp_quote("")
+ cpp_quote("DECLARE_HANDLE(HAMSICONTEXT);")
+ cpp_quote("DECLARE_HANDLE(HAMSISESSION);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI AmsiInitialize(")
+ cpp_quote("    _In_  LPCWSTR appName,")
+ cpp_quote("    _Outptr_ HAMSICONTEXT* amsiContext);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI_(VOID) AmsiUninitialize(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI AmsiOpenSession(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _Out_ HAMSISESSION* amsiSession);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI_(VOID) AmsiCloseSession(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_  HAMSISESSION amsiSession);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI AmsiScanBuffer(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_reads_bytes_(length) PVOID buffer,")
+@@ -343,6 +353,7 @@ cpp_quote("    _In_  ULONG length,")
+ cpp_quote("    _In_opt_  LPCWSTR contentName,")
+ cpp_quote("    _Out_ AMSI_RESULT* result);")
+ cpp_quote("")
++cpp_quote("_Win32_SupportedOS_10240_")
+ cpp_quote("STDAPI AmsiScanString(")
+ cpp_quote("    _In_  HAMSICONTEXT amsiContext,")
+ cpp_quote("    _In_  LPCWSTR string,")

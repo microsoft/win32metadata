@@ -1,0 +1,20 @@
+diff --git a/um/NetSh.h b/um/NetSh.h
+index 86446dfb..069d95ae 100644
+--- a/um/NetSh.h
++++ b/um/NetSh.h
+@@ -310,6 +310,7 @@ DWORD
+ 
+ typedef NS_DLL_INIT_FN *PNS_DLL_INIT_FN;
+ 
++_Win32_SupportedOS_BEGIN_(WindowsXP)
+ DWORD WINAPI MatchEnumTag(
+     IN  HANDLE             hModule,
+     IN  LPCWSTR            pwcArg,
+@@ -360,6 +361,7 @@ DWORD WINAPI RegisterHelper(
+     IN    CONST GUID                 *pguidParentContext,
+     IN    CONST NS_HELPER_ATTRIBUTES *pfnRegisterSubContext
+     );
++_Win32_SupportedOS_END_()
+ 
+ #ifdef __cplusplus
+ }

@@ -1,0 +1,24 @@
+diff --git a/um/FhCfg.idl b/um/FhCfg.idl
+index 5a38677f..a956a572 100644
+--- a/um/FhCfg.idl
++++ b/um/FhCfg.idl
+@@ -6,6 +6,7 @@ cpp_quote("/*    IDL source for File History Configuration Manager COM API.
+ cpp_quote("/*                                                                             */" )
+ cpp_quote("/*******************************************************************************/" )
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -17,6 +18,11 @@ import "shobjidl_core.idl";
+ 
+ cpp_quote("#if NTDDI_VERSION >= NTDDI_WIN8")
+ 
++_Win32_AnnotateInterface_(IFhTarget, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(IFhScopeIterator, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(IFhConfigMgr, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(IFhReassociation, _Win32_SupportedOS_Windows8_)
++
+ typedef enum _FH_TARGET_PROPERTY_TYPE {
+     FH_TARGET_NAME,
+     FH_TARGET_URL,

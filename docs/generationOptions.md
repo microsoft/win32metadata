@@ -13,6 +13,24 @@ There are different options you can pass to the scraping and emitting stages to 
 
 Scraping options are passed to ClangSharp via .rsp files. For the Windows Win32 metadata project, all partitions share the [generation/WinSDK/scraper.settings.rsp](/generation/WinSDK/scraper.settings.rsp) file. This allows partitions to interpret the headers in the same way.
 
+### Header annotations
+
+```text
+--config
+parse-win32-annotations
+```
+
+This enables all supported header annotations, not just enum associations. The
+scraper reads the annotations from the original Clang AST and emits their metadata
+semantics: supported OS, imports, ownership and invalid values, result and lifetime
+behavior, logical enum groups and associations, and the rest of the supported
+vocabulary. Native declarations and existing SAL remain authoritative.
+
+Use the [annotation specification](copilot/plans/shift-left-annotation-spec.md#attribute-reference)
+for the complete vocabulary, valid targets, and examples. The options below describe
+the existing response-file configuration; API-specific metadata moves into the owning
+SDK header or original IDL.
+
 ### Remapping
 
 ````
@@ -31,18 +49,6 @@ typedef struct fooTag {
 ````
 
 It's not obvious to the scraper that you would rather see FOO instead of fooTag in the metadata, but adding "fooTag=FOO" under the --remap section in baseRemap.rsp will make sure it's scraped as FOO instead of fooTag.
-
-The SDK also collects cross-partition discoveries in
-`scraper.autoRemaps.generated.rsp`. It passes this cache separately through
-`--auto-remaps-file`, not as authored response-file settings. Legacy partitions
-continue using its remaps and exclusions, with authored settings taking priority.
-These cached settings affect binding generation only: native remap and
-function-pointer discovery use authored settings, so repeated builds retain the
-same discovery sidecars and pointer-reduction inputs.
-Partitions using `parse-win32-annotations` ignore this aggregate and derive
-remaps from their current translation unit instead. This prevents a previous
-build or an unconverted partition from renaming types hidden by annotated
-headers; authored manual/global settings still apply.
 
 ### With type
 
@@ -94,18 +100,6 @@ SHGetKnownFolderPath::ppszPath=[FreeWith("CoTaskMemFree")]
 
 The first statement changes the type of the field LimitFlags on the struct JOBOBJECT_BASIC_LIMIT_INFORMATION from a uint to an enum named JOB_OBJECT_LIMIT.
 The second statement adds an attribute to the ppszPath parameter of the SHGetKnownFolderPath function.
-
-### Header-associated enums
-
-With `parse-win32-annotations` enabled, `_Win32_AssociatedEnum_(EnumName)` adds
-`AssociatedEnum("EnumName")` to a field, parameter, or return value. The winmd
-signature retains its declared native type, including pointer and array shapes;
-an unrelated type with the same native typedef name must not replace it.
-
-The association instructs projections to generate the enum with the native use
-site's underlying type and use that enum in the generated field or function
-signature. This preserves the enum-valued consumer API without substituting a
-logical enum into the winmd signature.
 
 ## Emitting Options
 

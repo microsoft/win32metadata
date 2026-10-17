@@ -39,20 +39,20 @@ _Win32_SetLastError_ _Win32_ImportLibrary_(""header.dll"") _Win32_SupportedOS_10
 int __stdcall Imported(_In_ _Win32_Retained_ void* context,
     _Out_writes_bytes_opt_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* buffer,
     unsigned capacity);
-_Win32_RAIIFree_(CloseThing, 0, ((HANDLE)-1)) HANDLE __stdcall OpenThing();
+_Win32_RAIIFree_(CloseThing, 0, -1) HANDLE __stdcall OpenThing();
 int __stdcall CreateThing(_Out_ _Win32_RAIIFree_(CloseThing, 0) HANDLE* output);
 _Win32_AssociatedEnum_(Options) unsigned __stdcall AssociatedReturn();
 int __stdcall ReadOption(_In_ _Win32_AssociatedEnum_(Options) unsigned option);
 _Win32_PreserveResult_ HRESULT __stdcall ExactResult();
 int __stdcall Retval(_Out_ _Win32_Retval_ int* result);
-int __stdcall MidlRetval(/* [out] [retval] */ _Out_ int* result);
+int __stdcall MidlRetval(/* [out] [retval] */ _Out_retval_ int* result);
 TOKEN __stdcall UseToken(TOKEN value, TOKEN* output);
 int __stdcall UseCallback(PFN_ALIAS callback);
 }
 struct __declspec(uuid(""b2051485-7dfd-41a0-af5c-1b351bfb1297"")) _Win32_SupportedOS_10240_ IHeaderSample {
     _Win32_PreserveResult_ _Win32_SupportedOS_Windows7_
     virtual HRESULT __stdcall Exact(_Out_ _Win32_Retval_ int* result) = 0;
-    _Win32_RAIIFree_(CloseThing, 0, ((HANDLE)-1))
+    _Win32_RAIIFree_(CloseThing, 0, -1)
     virtual HANDLE __stdcall Produce() = 0;
     virtual HRESULT __stdcall Buffer(_Out_writes_bytes_(capacity) _Win32_ContainsInteriorPointers_ unsigned char* data, unsigned capacity) = 0;
 };
@@ -72,36 +72,331 @@ enum SCOPED_ENUM : unsigned { ScopedValue = 1 };
 typedef unsigned SCOPED_TOKEN;
 typedef int (__stdcall* PFN_SCOPED)(_In_ _Win32_Retained_ void* context, _Out_ int* result);
 using USING_TOKEN = unsigned;
-using DIRECT_TOKEN _Win32_SupportedOS_Windows7_ = unsigned;
 using PFN_USING = SCOPED_TOKEN (__stdcall*)(_In_ _Win32_Retained_ void* context, _Out_ _Win32_Retval_ int* result);
 using PFN_USING_ALIAS = PFN_USING;
 using PFN_USING_NATIVE_ALIAS = PFN_SCOPED;
 typedef PFN_USING PFN_TYPEDEF_USING_ALIAS;
-_Win32_SupportedOS_Windows7_ typedef struct _PRIMARY_SCOPED { unsigned value; } PRIMARY_SCOPED;
 SCOPED_TOKEN UseScopedToken(SCOPED_TOKEN value);
 USING_TOKEN UseUsingToken(USING_TOKEN value);
 void UseScopedCallbacks(PFN_SCOPED first, PFN_USING second, PFN_USING_ALIAS third, PFN_TYPEDEF_USING_ALIAS fourth);
+_Win32_SupportedOS_END_()
+using DIRECT_TOKEN _Win32_SupportedOS_Windows7_ = unsigned;
+_Win32_SupportedOS_Windows7_ typedef struct _PRIMARY_SCOPED { unsigned value; } PRIMARY_SCOPED;
 _Win32_SupportedOS_BEGIN_(Windows7)
 int Seven();
-_Win32_SupportedOS_Windows8_ int ExplicitLater();
 _Win32_SupportedOS_Windows7_ int ExplicitEqual();
+_Win32_SupportedOS_END_()
+_Win32_SupportedOS_Windows8_ int ExplicitLater();
 _Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
 _Win32_SupportedOS_BEGIN_(Windows2000)
 int OlderNested();
 _Win32_SupportedOS_END_()
-_Win32_SupportedOS_END_()
-struct __declspec(uuid(""4d0ea686-f54d-4b53-aeec-bf6154950080"")) IScoped {
-    virtual HRESULT __stdcall VistaMethod(_Out_ _Win32_Retval_ int* result) = 0;
+struct __declspec(uuid(""4d0ea686-f54d-4b53-aeec-bf6154950080"")) _Win32_SupportedOS_WindowsVista_ IScoped {
+    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaMethod(_Out_ _Win32_Retval_ int* result) = 0;
     _Win32_SupportedOS_Windows7_ virtual HRESULT __stdcall SevenMethod() = 0;
     _Win32_SupportedOS_Windows2000_ virtual HRESULT __stdcall ExplicitMethod() = 0;
-    virtual HRESULT __stdcall VistaAgainMethod() = 0;
+    _Win32_SupportedOS_WindowsVista_ virtual HRESULT __stdcall VistaAgainMethod() = 0;
 };
-_Win32_SupportedOS_END_()
 int AfterScope();
 struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_SupportedOS_Windows7_ IContainerOnly {
     virtual HRESULT __stdcall UnannotatedMember(_Out_ _Win32_Retval_ int* result) = 0;
 };
 ";
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void MidlGeneratedAnnotationsReachTypesAndMembersWithoutChangingNativeSignatures(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+typedef enum MIDL_FIELD_KIND { MidlFirst = 0, MidlSecond = 1 } MIDL_FIELD_KIND;
+typedef /* [annotation] */ _Win32_SupportedOS_Windows7_ struct MIDL_RECORD
+{
+    _Win32_AssociatedEnum_(MIDL_FIELD_KIND) int value;
+} MIDL_RECORD;
+struct _Win32_SupportedOS_Windows7_ IMidlAnnotations;
+struct __declspec(uuid(""e4994cce-f062-4613-9dc4-70e3e60cf711"")) IMidlAnnotations
+{
+    virtual /* [annotation] */ _Win32_SupportedOS_Windows8_
+    HRESULT __stdcall Read(
+        /* [in][annotation] */ _In_ _Win32_Retained_ void* input,
+        /* [out][retval][annotation] */ _Out_retval_ int* result) = 0;
+};
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var record = FindType(reader, "MIDL_RECORD");
+            var contract = FindType(reader, "IMidlAnnotations");
+            var method = FindMethod(reader, "IMidlAnnotations", "Read");
+            var field = record.GetFields().Select(reader.GetFieldDefinition).Single();
+            var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
+            var input = parameters.Single(parameter => reader.GetString(parameter.Name) == "input");
+            var result = parameters.Single(parameter => reader.GetString(parameter.Name) == "result");
+            Assert.Equal("Int32", field.DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(new[] { "Void*", "Int32*" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            Assert.True(input.Attributes.HasFlag(ParameterAttributes.In));
+            Assert.True(result.Attributes.HasFlag(ParameterAttributes.Out));
+            Assert.Equal(1, result.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "RetValAttribute"));
+            if (annotationsEnabled)
+            {
+                AssertStringAttribute(reader, record.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+                AssertStringAttribute(reader, contract.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows6.1");
+                AssertStringAttribute(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows8.0");
+                AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "MIDL_FIELD_KIND");
+                AssertHasAttribute(reader, input.GetCustomAttributes(), "RetainedAttribute");
+            }
+            else
+            {
+                AssertDoesNotHaveAttribute(reader, record.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                AssertDoesNotHaveAttribute(reader, contract.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                AssertDoesNotHaveAttribute(reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                AssertDoesNotHaveAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute");
+                AssertDoesNotHaveAttribute(reader, input.GetCustomAttributes(), "RetainedAttribute");
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void MethodReferencesReachFinalWinmdWithoutChangingNativeSignatures(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+struct __declspec(uuid(""6292cdba-4274-446e-99da-7fe23885266c"")) IMethodReferences
+{
+    virtual HRESULT __stdcall Next(_Out_writes_(count) int* values, unsigned count) = 0;
+    virtual HRESULT __stdcall Skip(unsigned count) = 0;
+    virtual HRESULT __stdcall Reset() = 0;
+};
+typedef IMethodReferences IMethodAlias;
+_WIN32META_ANNOTATE_METHOD_(IMethodAlias::Next, _Win32_PreserveResult_);
+_Win32_SupportedOS_BEGIN_(Windows7)
+int ScopedSentinel();
+_WIN32META_ANNOTATE_METHOD_(IMethodReferences::Skip, _Win32_PreserveResult_);
+_Win32_SupportedOS_END_()
+_WIN32META_ANNOTATE_METHOD_(IMethodReferences::Skip, _Win32_SupportedOS_Windows8_);
+", annotationsEnabled: annotationsEnabled, extraSettings: "--exclude\nIMethodAlias\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("_WIN32META_METHOD_", fixture.ReadSource());
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var contract = FindType(reader, "IMethodReferences");
+            Assert.Equal(new[] { "Next", "Skip", "Reset" },
+                contract.GetMethods().Select(reader.GetMethodDefinition).Select(method => reader.GetString(method.Name)));
+            var next = FindMethod(reader, "IMethodReferences", "Next");
+            var skip = FindMethod(reader, "IMethodReferences", "Skip");
+            var reset = FindMethod(reader, "IMethodReferences", "Reset");
+            Assert.Equal("Int32", skip.DecodeSignature(new SignatureNames(), null).ReturnType);
+            Assert.Equal(new[] { "UInt32" }, skip.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            Assert.Equal(new[] { "Int32*", "UInt32" }, next.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            Assert.True(next.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => reader.GetString(parameter.Name) == "values").Attributes.HasFlag(ParameterAttributes.Out));
+            Assert.Equal(annotationsEnabled, next.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.Equal(annotationsEnabled, skip.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.False(reset.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            AssertDoesNotHaveAttribute(reader, next.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            if (annotationsEnabled)
+                AssertStringAttribute(reader, skip.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows8.0");
+            else
+                AssertDoesNotHaveAttribute(reader, skip.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LegacyAndHeaderResultsUseOnlyPreserveSig(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+_Win32_PreserveResult_ HRESULT __stdcall HeaderResult(unsigned value);
+HRESULT __stdcall LegacyMultiple(unsigned value);
+HRESULT __stdcall LegacyErrors(unsigned value);
+HRESULT __stdcall LegacyMixed(unsigned value);
+HRESULT __stdcall OrdinaryResult(unsigned value);
+typedef HRESULT (__stdcall* ORDINARY_RESULT_CALLBACK)(unsigned value);
+void UseResultCallback(ORDINARY_RESULT_CALLBACK callback);
+struct __declspec(uuid(""898ef5f4-bbf4-42f8-9707-a7b6b6214f9e"")) ILegacyResults
+{
+    virtual HRESULT __stdcall Next(unsigned count) = 0;
+    virtual HRESULT __stdcall Skip(unsigned count) = 0;
+    virtual HRESULT __stdcall Reset() = 0;
+};
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "LegacyCallbacks.manual.cs"), @"
+namespace Test
+{
+    [Windows.Win32.Foundation.Metadata.CanReturnMultipleSuccessValues]
+    public delegate int LegacyMultipleCallback(uint value);
+    [Windows.Win32.Foundation.Metadata.CanReturnErrorsAsSuccess]
+    public delegate int LegacyErrorsCallback(uint value);
+}");
+            using var image = Emit(fixture.DirectoryPath, architecture, memberRemaps: new Dictionary<string, string>
+            {
+                ["LegacyMultiple"] = "[CanReturnMultipleSuccessValues]",
+                ["LegacyErrors"] = "[CanReturnErrorsAsSuccess]",
+                ["LegacyMixed"] = "[CanReturnErrorsAsSuccess] [CanReturnMultipleSuccessValues] [PreserveSig]",
+                ["ILegacyResults::Next"] = "[CanReturnMultipleSuccessValues]",
+                ["ILegacyResults::Skip"] = "[CanReturnErrorsAsSuccess]",
+            });
+            var reader = image.Reader;
+            Assert.Equal(annotationsEnabled, FindMethod(reader, "Apis", "HeaderResult")
+                .ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            foreach (string name in new[] { "LegacyMultiple", "LegacyErrors", "LegacyMixed" })
+            {
+                var method = FindMethod(reader, "Apis", name);
+                Assert.True(method.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+                Assert.Equal("Int32", method.DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "UInt32" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            }
+            foreach (string name in new[] { "Next", "Skip" })
+                Assert.True(FindMethod(reader, "ILegacyResults", name).ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.False(FindMethod(reader, "ILegacyResults", "Reset").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.False(FindMethod(reader, "Apis", "OrdinaryResult").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            foreach (string name in new[] { "LegacyMultipleCallback", "LegacyErrorsCallback" })
+            {
+                var invoke = FindMethod(reader, name, "Invoke");
+                Assert.True(invoke.ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+                Assert.True(invoke.ImplAttributes.HasFlag(MethodImplAttributes.Runtime));
+                Assert.Equal("Int32", invoke.DecodeSignature(new SignatureNames(), null).ReturnType);
+                Assert.Equal(new[] { "UInt32" }, invoke.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+                Assert.False(FindMethod(reader, name, ".ctor").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            }
+            Assert.False(FindMethod(reader, "ORDINARY_RESULT_CALLBACK", "Invoke").ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            Assert.DoesNotContain(reader.CustomAttributes, handle => AttributeName(reader, handle) is
+                "CanReturnErrorsAsSuccessAttribute" or "CanReturnMultipleSuccessValuesAttribute" or "PreserveSigAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LogicalEnumGroupsReachFinalWinmdWithoutChangingNativeTypes(string architecture, string target, bool enabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define FIRST 2U
+#define SECOND 1U
+#define ALIAS FIRST
+#define ALL 0xffffffffU
+#define HIGH (1ULL << 63)
+#define WIDE_ALL (~0ULL)
+_Win32_FlagsEnum_(OPTIONS, unsigned, FIRST, SECOND, ALIAS, ALL);
+_Win32_Enum_(SIGNED, int, ALL);
+_Win32_Enum_(WIDE, unsigned long long, HIGH, WIDE_ALL);
+#ifdef WIN32METADATA
+typedef _WIN32META_ANNOTATION_(""Enum(HISTORICAL_FIRST, HISTORICAL_SECOND)"", FIRST, SECOND) unsigned NAMED;
+typedef _WIN32META_ANNOTATION_(""FlagsEnum(FLAG_ALL, FLAG_FIRST)"", 0, FIRST) unsigned NAMED_FLAGS;
+#endif
+_Win32_AssociatedEnum_(OPTIONS) unsigned GetOptions();
+void SetOptions(_Win32_AssociatedEnum_(OPTIONS) unsigned options,
+    _Win32_AssociatedEnum_(OPTIONS) unsigned* output);
+struct HOLDER { _Win32_AssociatedEnum_(OPTIONS) unsigned options; unsigned after; };
+", annotationsEnabled: enabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var get = FindMethod(reader, "Apis", "GetOptions");
+            Assert.Equal("UInt32", get.DecodeSignature(new SignatureNames(), null).ReturnType);
+            var set = FindMethod(reader, "Apis", "SetOptions");
+            Assert.Equal(new[] { "UInt32", "UInt32*" }, set.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var field = FindType(reader, "HOLDER").GetFields().Select(reader.GetFieldDefinition).First();
+            Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null));
+            if (enabled)
+            {
+                var options = FindType(reader, "OPTIONS");
+                AssertHasAttribute(reader, options.GetCustomAttributes(), "FlagsAttribute");
+                AssertDoesNotHaveAttribute(reader, options.GetCustomAttributes(), "ScopedEnumAttribute");
+                CheckEnum("OPTIONS", "UInt32", ConstantTypeCode.UInt32, new[] { "FIRST", "SECOND", "ALIAS", "ALL" },
+                    new ulong[] { 2, 1, 2, uint.MaxValue });
+                CheckEnum("SIGNED", "Int32", ConstantTypeCode.Int32, new[] { "ALL" }, new[] { (ulong)uint.MaxValue });
+                CheckEnum("WIDE", "UInt64", ConstantTypeCode.UInt64, new[] { "HIGH", "WIDE_ALL" },
+                    new[] { 1UL << 63, ulong.MaxValue });
+                CheckEnum("NAMED", "UInt32", ConstantTypeCode.UInt32, new[] { "HISTORICAL_FIRST", "HISTORICAL_SECOND" },
+                    new ulong[] { 2, 1 });
+                CheckEnum("NAMED_FLAGS", "UInt32", ConstantTypeCode.UInt32, new[] { "FLAG_ALL", "FLAG_FIRST" },
+                    new ulong[] { 0, 2 });
+                AssertDoesNotHaveAttribute(reader, FindType(reader, "NAMED").GetCustomAttributes(), "FlagsAttribute");
+                AssertHasAttribute(reader, FindType(reader, "NAMED_FLAGS").GetCustomAttributes(), "FlagsAttribute");
+                var result = get.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "OPTIONS");
+                foreach (var parameter in set.GetParameters().Select(reader.GetParameter))
+                    AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", "OPTIONS");
+                AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "OPTIONS");
+            }
+            else
+            {
+                Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                    type => new[] { "OPTIONS", "SIGNED", "WIDE", "NAMED", "NAMED_FLAGS" }.Contains(reader.GetString(type.Name)));
+                AssertDoesNotHaveAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute");
+            }
+            AssertMetadataClosure(reader);
+
+            void CheckEnum(string name, string storageName, ConstantTypeCode typeCode, string[] names, ulong[] values)
+            {
+                var fields = FindType(reader, name).GetFields().Select(reader.GetFieldDefinition).ToArray();
+                Assert.Equal(storageName, fields.Single(item => reader.GetString(item.Name) == "value__")
+                    .DecodeSignature(new SignatureNames(), null));
+                var members = fields.Where(item => reader.GetString(item.Name) != "value__").ToArray();
+                Assert.Equal(names, members.Select(item => reader.GetString(item.Name)));
+                Assert.Equal(values, members.Select(item =>
+                {
+                    var constant = reader.GetConstant(item.GetDefaultValue());
+                    Assert.Equal(typeCode, constant.TypeCode);
+                    var blob = reader.GetBlobReader(constant.Value);
+                    return typeCode == ConstantTypeCode.UInt64 ? blob.ReadUInt64() : blob.ReadUInt32();
+                }));
+            }
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void TypedImportOverridesReachActualImplMap(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+extern ""C"" {
+_Win32_ImportLibrary_(""actual.dll"") int Ordinary();
+_Win32_ImportLibrary_(""actual.dll"", ""ActualExport"") int PublicName();
+_Win32_ImportLibrary_(""actual.dll"", 660) int OrdinalOnly();
+_Win32_ImportLibrary_(""actual.dll"", 65535) int HighestOrdinal();
+_Win32_ImportLibrary_(""actual.dll"", ""#660"") int ExplicitOrdinal();
+}
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            foreach (var item in new[] { ("Ordinary", "Ordinary"), ("PublicName", "ActualExport"),
+                ("OrdinalOnly", "#660"), ("HighestOrdinal", "#65535"), ("ExplicitOrdinal", "#660") })
+            {
+                var import = FindMethod(image.Reader, "Apis", item.Item1).GetImport();
+                Assert.Equal("actual.dll", image.Reader.GetString(image.Reader.GetModuleReference(import.Module).Name));
+                Assert.Equal(item.Item2, image.Reader.GetString(import.Name));
+            }
+            AssertMetadataClosure(image.Reader);
+        }
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", false)]
@@ -240,10 +535,12 @@ enum C_ENUM { C_VALUE = 1 };
 typedef unsigned C_TOKEN;
 typedef int (__stdcall* C_CALLBACK)(_In_ _Win32_Retained_ void* context);
 _Win32_ImportLibrary_(""native.dll"") _Win32_SetLastError_ int Within(void);
+_Win32_SupportedOS_END_()
 _Win32_SupportedOS_BEGIN_(Windows7)
 int Nested(void);
-_Win32_SupportedOS_Windows2000_ int Explicit(void);
 _Win32_SupportedOS_END_()
+_Win32_SupportedOS_Windows2000_ int Explicit(void);
+_Win32_SupportedOS_BEGIN_(WindowsVista)
 int Restored(void);
 _Win32_SupportedOS_END_()
 int After(void);
@@ -649,6 +946,73 @@ enum _Win32_AssociatedConstant_(SecondA) E { A = 1 };
         }
 
         [Fact]
+        public void CrossArchitectureEmissionRetainsLogicalGroupValues()
+        {
+            const string declarations = @"
+#ifdef _M_IX86
+#define FIRST 1U
+#else
+#define FIRST 2U
+#endif
+#define SECOND 4U
+_Win32_FlagsEnum_(OPTIONS, unsigned, FIRST, SECOND);
+void F(_Win32_AssociatedEnum_(OPTIONS) unsigned options);
+";
+            using var x86 = new HeaderAnnotationTests.NativeFixture("x86", "i686-pc-windows-msvc", declarations);
+            using var x64 = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
+            using var arm64 = new HeaderAnnotationTests.NativeFixture("arm64", "aarch64-pc-windows-msvc", declarations);
+            foreach (var fixture in new[] { x86, x64, arm64 })
+            {
+                Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+                if (fixture == x86)
+                    continue;
+                string architecture = Path.GetFileName(Path.GetDirectoryName(fixture.Output));
+                string directory = Path.Combine(x86.DirectoryPath, architecture);
+                Directory.CreateDirectory(directory);
+                foreach (string path in new[] { fixture.Output, Path.ChangeExtension(fixture.Output, ".header-types.cs") })
+                    File.Copy(path, Path.Combine(directory, Path.GetFileName(path)));
+            }
+            using var image = Emit(x86, "crossarch");
+            var reader = image.Reader;
+            var groups = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "OPTIONS").ToArray();
+            Assert.Equal(2, groups.Length);
+            Assert.Equal(new uint[] { 1, 2 }, groups.Select(group =>
+            {
+                AssertHasAttribute(reader, group.GetCustomAttributes(), "FlagsAttribute");
+                AssertHasAttribute(reader, group.GetCustomAttributes(), "SupportedArchitectureAttribute");
+                AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+                var first = group.GetFields().Select(reader.GetFieldDefinition)
+                    .Single(field => reader.GetString(field.Name) == "FIRST");
+                return reader.GetBlobReader(reader.GetConstant(first.GetDefaultValue()).Value).ReadUInt32();
+            }).OrderBy(value => value));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void LogicalGroupsAcrossGeneratedFilesReachFinalWinmd(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define FIRST 1U
+#define SECOND 2U
+_Win32_Enum_(OPTIONS, unsigned, FIRST, SECOND);
+void F(_Win32_AssociatedEnum_(OPTIONS) unsigned options);
+", multipleFiles: true);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            Assert.Equal("OPTIONS", reader.GetString(FindType(reader, "OPTIONS").Name));
+            var method = FindMethod(reader, "Apis", "F");
+            Assert.Equal(new[] { "UInt32" }, method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var parameter = reader.GetParameter(method.GetParameters().Single());
+            AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", "OPTIONS");
+            AssertMetadataClosure(reader);
+        }
+
+        [Fact]
         public void HeaderImportRescuesUnmappedMethod()
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc",
@@ -714,9 +1078,11 @@ int UseCallback(PFN_ALIAS callback);
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
 typedef void* HANDLE;
+__declspec(dllimport) int __stdcall ImportedCleanup(void*);
+_Win32_RAIIFree_Handle_(ImportedCleanup) HANDLE ImportedProducer();
 namespace N {
 enum Value { Invalid = 7 };
-_Win32_RAIIFree_(CloseThing, Invalid, (1 ^ 2), ~0ULL, (HANDLE)-1) HANDLE Produce();
+_Win32_RAIIFree_(CloseThing, Invalid, (1 ^ 2), ~0ULL, -1) HANDLE Produce();
 }
 struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
     static const int Invalid = 19;
@@ -732,6 +1098,10 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             var memberResult = FindMethod(reader, "Producer", "ProduceMember").GetParameters().Select(reader.GetParameter)
                 .Single(parameter => parameter.SequenceNumber == 0);
             Assert.Equal(new long[] { 19 }, ReadInvalidValues(reader, memberResult.GetCustomAttributes()));
+            var importedResult = FindMethod(reader, "Apis", "ImportedProducer").GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 0);
+            AssertStringAttribute(reader, importedResult.GetCustomAttributes(), "RAIIFreeAttribute", "ImportedCleanup");
+            Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(reader, importedResult.GetCustomAttributes()));
             AssertMetadataClosure(reader);
         }
 
@@ -745,7 +1115,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
                 "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1", "-Wno-ignored-attributes",
             };
             if (metadataEnabled)
-                arguments.AddRange(new[] { "-DWIN32METADATA", "-DWIN32METADATA_CSHARP" });
+                arguments.Add("-DWIN32METADATA");
             using var index = CXIndex.Create(false, false);
             Assert.Equal(CXErrorCode.CXError_Success, CXTranslationUnit.TryParse(index, source, arguments.ToArray(),
                 ReadOnlySpan<CXUnsavedFile>.Empty, CXTranslationUnit_Flags.CXTranslationUnit_IncludeAttributedTypes, out var handle));

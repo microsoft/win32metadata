@@ -1,0 +1,28 @@
+diff --git a/um/wscapi.h b/um/wscapi.h
+index 369f82da..dbf78f37 100644
+--- a/um/wscapi.h
++++ b/um/wscapi.h
+@@ -69,6 +69,7 @@ typedef enum _WSC_SECURITY_PROVIDER_HEALTH
+ 
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ STDAPI WscRegisterForChanges(LPVOID Reserved, 
+                              PHANDLE phCallbackRegistration,
+                              LPTHREAD_START_ROUTINE lpCallbackAddress, 
+@@ -84,6 +85,7 @@ STDAPI WscRegisterForChanges(LPVOID Reserved,
+ // Return Values:
+ // Returns S_OK if the function succeeds, otherwise returns an error code.
+ 
++_Win32_SupportedOS_WindowsVista_
+ STDAPI WscUnRegisterChanges(HANDLE hRegistrationHandle);
+ 
+ // The WscRegisterForUserNotifications function registers a callback function to be run when the Security Center service
+@@ -111,6 +113,7 @@ STDAPI WscRegisterForUserNotifications();
+ // is always S_FALSE and the pHealth out parameter is always set to WSC_SECURITY_PROVIDER_HEALTH_POOR.
+ // 
+ 
++_Win32_SupportedOS_WindowsVista_
+ STDAPI WscGetSecurityProviderHealth(DWORD Providers,
+                                     PWSC_SECURITY_PROVIDER_HEALTH pHealth);
+ 

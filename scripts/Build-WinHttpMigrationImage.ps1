@@ -5,7 +5,6 @@ param(
     [string]$BaselineDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\old",
     [string]$OutputDirectory = "$PSScriptRoot\..\artifacts\winhttp-migration\new",
     [string]$SelectionDirectory,
-    [string]$ExpectedDifferencesFile = "$PSScriptRoot\..\generation\WinSDK\patches\HeaderAnnotations.expected-differences.txt",
     [switch]$ToolingControl,
     [string]$ToolingControlDirectory
 )
@@ -15,7 +14,6 @@ Set-StrictMode -Version Latest
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..").TrimEnd('\')
 $BaselineDirectory = [IO.Path]::GetFullPath($BaselineDirectory).TrimEnd('\')
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
-$ExpectedDifferencesFile = [IO.Path]::GetFullPath($ExpectedDifferencesFile)
 if (!$SelectionDirectory) {
     $SelectionDirectory = "$OutputDirectory\selection"
 }
@@ -50,6 +48,29 @@ function Invoke-Dotnet([string[]]$Arguments, [string]$Log) {
     }
 }
 
+function Get-ApiComparison([string]$First, [string]$Second, [string]$Log) {
+    & dotnet "$repo\bin\Release\net10.0\WinmdUtils.dll" compare --first $First --second $Second *> $Log
+    $comparisonExitCode = $LASTEXITCODE
+    $comparisonLines = @(Get-Content -LiteralPath $Log)
+    $hasDifferences = $comparisonExitCode -eq -1 -and $comparisonLines.Count -gt 1 -and
+        $comparisonLines[0] -ceq 'Unknown differences found:'
+    if ((!$hasDifferences -and $comparisonExitCode -ne 0) -or
+        ($comparisonExitCode -eq 0 -and
+            ($comparisonLines.Count -ne 1 -or $comparisonLines[0] -cne 'No unknown differences found.'))) {
+        throw "Metadata comparison failed; see $Log`n$($comparisonLines -join "`n")"
+    }
+    $comparisonLines | ForEach-Object { Write-Host $_ }
+    if ($hasDifferences) {
+        Write-Warning 'Raw OLD-to-NEW API differences require source-backed review. This image has not been admitted by a difference allowlist.'
+    }
+    [pscustomobject]@{
+        exitCode = $comparisonExitCode
+        logSha256 = Get-Sha256 $Log
+        rawDifferenceLines = if ($hasDifferences) { $comparisonLines.Count - 1 } else { 0 }
+        reviewStatus = if ($hasDifferences) { 'required' } else { 'unchanged' }
+    }
+}
+
 function Get-PointerReductions([IO.FileInfo[]]$Remaps) {
     $reduce = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
     $preserve = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -65,6 +86,31 @@ function Get-PointerReductions([IO.FileInfo[]]$Remaps) {
     }
     $reduce.ExceptWith($preserve)
     return ,$reduce
+}
+
+function Get-SelectedSources([string]$Obj, [string[]]$Partitions) {
+    foreach ($partition in $Partitions) {
+        $hasMainSource = $false
+        foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
+            $relative = "$architecture\$partition.cs"
+            $companion = "$architecture\$partition.header-types.cs"
+            $hasMain = Test-Path -LiteralPath "$Obj\generated\$relative" -PathType Leaf
+            $hasCompanion = Test-Path -LiteralPath "$Obj\generated\$companion" -PathType Leaf
+            if ($hasCompanion -and !$hasMain) {
+                throw "A selected header-types companion has no main source: $companion"
+            }
+            if ($hasMain) {
+                $hasMainSource = $true
+                $relative
+                if ($hasCompanion) {
+                    $companion
+                }
+            }
+        }
+        if (!$hasMainSource) {
+            throw "The selected scrape produced no source for $partition."
+        }
+    }
 }
 
 function Get-SelectedInputs([string]$Obj, [string[]]$Overlays) {
@@ -204,8 +250,7 @@ try {
             "@$generated\emitter.functionPointerFixups.generated.rsp", "@$generated\emitter.autoFnPtr.crossarch.generated.rsp",
             "@$generated\enumsMakeFlags.generated.rsp", "@$generated\enumsRemap.rsp")
         Invoke-Dotnet $arguments "$OutputDirectory\emit.log"
-        Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
-            '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd) "$OutputDirectory\comparison.log"
+        $comparison = Get-ApiComparison "$BaselineDirectory\Windows.Win32.winmd" $winmd "$OutputDirectory\comparison.log"
         Assert-CommittedProducer
         $receipt = [ordered]@{
             kind = 'tooling-control'
@@ -216,6 +261,7 @@ try {
             newWinmdSha256 = Get-Sha256 $winmd
             sourceCommit = $sourceCommit
             toolFiles = $toolFiles
+            comparison = $comparison
             frozenEmitterInputs = @(Get-ChildItem -LiteralPath $inputs -File | ForEach-Object {
                 [ordered]@{ path = $_.Name; sha256 = Get-Sha256 $_.FullName }
             })
@@ -240,19 +286,7 @@ try {
         "-p:ObjDir=$selectedObj", "-p:PartitionFilter=$($partitions -join '%3B')", '-p:MaxProcessors=2',
         '-p:ScanArch=crossarch', '--no-restore', '--verbosity', 'minimal')
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\scrape.log"
-    $overlays = @($partitions | ForEach-Object {
-        $partition = $_
-        $sources = @(foreach ($architecture in @('common', 'x86', 'x64', 'arm64')) {
-            $relative = "$architecture\$partition.cs"
-            if (Test-Path -LiteralPath "$selectedObj\generated\$relative") {
-                $relative
-            }
-        })
-        if (!$sources.Count) {
-            throw "The selected scrape produced no source for $partition."
-        }
-        $sources
-    })
+    $overlays = @(Get-SelectedSources $selectedObj $partitions)
     $includeRoot = (Get-Content -LiteralPath "$selectedObj\prepared-sdk.txt" -Raw).Trim()
     $firstInputs = Get-SelectedInputs $selectedObj $overlays
     [IO.File]::WriteAllText("$OutputDirectory\first-selection.json", ($firstInputs | ConvertTo-Json -Depth 3),
@@ -267,7 +301,11 @@ try {
         Remove-Item -LiteralPath $scrapeMarker
     }
     Invoke-Dotnet $scrapeArguments "$OutputDirectory\repeat-scrape.log"
-    $repeatedInputs = Get-SelectedInputs $selectedObj $overlays
+    $repeatedOverlays = @(Get-SelectedSources $selectedObj $partitions)
+    if (($overlays -join "`n") -cne ($repeatedOverlays -join "`n")) {
+        throw 'A repeated normal SDK scrape changed the selected source closure.'
+    }
+    $repeatedInputs = Get-SelectedInputs $selectedObj $repeatedOverlays
     [IO.File]::WriteAllText("$OutputDirectory\repeated-selection.json", ($repeatedInputs | ConvertTo-Json -Depth 3),
         [Text.UTF8Encoding]::new($false))
     if (($firstInputs | ConvertTo-Json -Depth 3) -cne ($repeatedInputs | ConvertTo-Json -Depth 3)) {
@@ -336,9 +374,8 @@ try {
     Invoke-Dotnet @('build', 'generation\WinSDK', '-c', 'Release', '-t:EmitWinmd',
         "-p:ObjDir=$obj", "-p:OutputWinmd=$winmd", '-p:SkipScraping=true',
         '--no-restore', '--verbosity', 'minimal') "$OutputDirectory\emit.log"
-    Invoke-Dotnet @("$repo\bin\Release\net10.0\WinmdUtils.dll", 'compare',
-        '--first', "$BaselineDirectory\Windows.Win32.winmd", '--second', $winmd,
-        '--knownDiffsFile', $ExpectedDifferencesFile) "$OutputDirectory\comparison.log"
+    $comparisonLog = "$OutputDirectory\comparison.log"
+    $comparison = Get-ApiComparison "$BaselineDirectory\Windows.Win32.winmd" $winmd $comparisonLog
     Assert-CommittedProducer
     $receipt = [ordered]@{
         kind = 'header-annotation-migration'
@@ -358,7 +395,7 @@ try {
         sourceCommit = $sourceCommit
         toolFiles = $toolFiles
         toolingControl = $ToolingControlDirectory
-        expectedDifferencesSha256 = Get-Sha256 $ExpectedDifferencesFile
+        apiComparison = $comparison
         generatedFiles = @(Get-ChildItem -LiteralPath $generated -Recurse -File | ForEach-Object {
             [ordered]@{ path = [IO.Path]::GetRelativePath($generated, $_.FullName); sha256 = Get-Sha256 $_.FullName }
         })
@@ -367,7 +404,13 @@ try {
         })
     }
     [IO.File]::WriteAllText("$OutputDirectory\provenance.json", ($receipt | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-    [pscustomobject]@{ Winmd = $winmd; Sha256 = $receipt.newWinmdSha256; Provenance = "$OutputDirectory\provenance.json" }
+    [pscustomobject]@{
+        Winmd = $winmd
+        Sha256 = $receipt.newWinmdSha256
+        Provenance = "$OutputDirectory\provenance.json"
+        RawApiDifferences = $comparisonLog
+        ReviewStatus = $receipt.apiComparison.reviewStatus
+    }
 }
 finally {
     Pop-Location

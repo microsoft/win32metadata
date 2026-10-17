@@ -1,0 +1,36 @@
+diff --git a/um/websocket.h b/um/websocket.h
+index eaf19371..d6d91b49 100644
+--- a/um/websocket.h
++++ b/um/websocket.h
+@@ -120,10 +120,12 @@ typedef union _WEB_SOCKET_BUFFER
+     } CloseStatus;
+ } WEB_SOCKET_BUFFER, *PWEB_SOCKET_BUFFER;
+ 
++_Win32_SupportedOS_BEGIN_(Windows8)
++
+ HRESULT WINAPI WebSocketCreateClientHandle(
+     _In_reads_(ulPropertyCount) const PWEB_SOCKET_PROPERTY pProperties,
+     _In_ ULONG ulPropertyCount,
+-    _Out_ WEB_SOCKET_HANDLE *phWebSocket);
++    _Out_ _Win32_RAIIFree_(WebSocketDeleteHandle, -1, 0) WEB_SOCKET_HANDLE *phWebSocket);
+ 
+ HRESULT WINAPI WebSocketBeginClientHandshake(
+     _In_ WEB_SOCKET_HANDLE hWebSocket,
+@@ -147,7 +149,7 @@ HRESULT WINAPI WebSocketEndClientHandshake(
+ HRESULT WINAPI WebSocketCreateServerHandle(
+     _In_reads_(ulPropertyCount) const PWEB_SOCKET_PROPERTY pProperties,
+     _In_ ULONG ulPropertyCount,
+-    _Out_ WEB_SOCKET_HANDLE *phWebSocket);
++    _Out_ _Win32_RAIIFree_(WebSocketDeleteHandle, -1, 0) WEB_SOCKET_HANDLE *phWebSocket);
+ 
+ HRESULT WINAPI WebSocketBeginServerHandshake(
+     _In_ WEB_SOCKET_HANDLE hWebSocket,
+@@ -199,6 +201,8 @@ HRESULT WINAPI WebSocketGetGlobalProperty(
+     _Inout_updates_to_(*ulSize, *ulSize) PVOID pvValue,
+     _Inout_ ULONG* ulSize);
+ 
++_Win32_SupportedOS_END_()
++
+ #endif //NTDDI_VERSION >= NTDDI_WIN8
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */

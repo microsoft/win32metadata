@@ -1,0 +1,22 @@
+diff --git a/um/bluetoothleapis.h b/um/bluetoothleapis.h
+index 69cd0501..6103dd21 100644
+--- a/um/bluetoothleapis.h
++++ b/um/bluetoothleapis.h
+@@ -31,6 +31,8 @@ extern "C"{
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN8
+ 
++_Win32_SupportedOS_BEGIN_(Windows8)
++
+ 
+ 
+ //
+@@ -713,6 +715,8 @@ BluetoothGATTUnregisterEvent(
+     );
+ 
+ 
++_Win32_SupportedOS_END_()
++
+ #endif //NTDDI_WIN8
+ 
+ #ifdef __cplusplus

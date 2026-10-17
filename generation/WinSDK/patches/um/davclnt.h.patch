@@ -1,0 +1,20 @@
+diff --git a/um/davclnt.h b/um/davclnt.h
+index c369d61a..48b49f5f 100644
+--- a/um/davclnt.h
++++ b/um/davclnt.h
+@@ -80,6 +80,7 @@ typedef DWORD (CALLBACK *PFNDAVAUTHCALLBACK)(
+     _Out_ PFNDAVAUTHCALLBACK_FREECRED *pFreeCred    // Callback to free the memory allocated for creds by the callback
+ );
+ 
++_Win32_SupportedOS_BEGIN_(WindowsVista)
+ _Success_(return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -166,6 +167,7 @@ DavRegisterAuthCallback(_In_ PFNDAVAUTHCALLBACK CallBack,
+ VOID
+ WINAPI
+ DavUnregisterAuthCallback(_In_ OPAQUE_HANDLE hCallback);
++_Win32_SupportedOS_END_()
+ 
+ #ifdef __cplusplus
+ }

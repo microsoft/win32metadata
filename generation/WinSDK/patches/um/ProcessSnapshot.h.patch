@@ -1,0 +1,29 @@
+diff --git a/um/ProcessSnapshot.h b/um/ProcessSnapshot.h
+index ea1e95f7..0f342ac3 100644
+--- a/um/ProcessSnapshot.h
++++ b/um/ProcessSnapshot.h
+@@ -370,6 +370,7 @@ typedef struct
+ #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+ 
+ // Win32 APIs.
++_Win32_SupportedOS_BEGIN_(Windows81)
+ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssCaptureSnapshot(
+@@ -420,7 +421,7 @@ _Success_(return == ERROR_SUCCESS)
+ STDAPI_(DWORD)
+ PssWalkMarkerCreate(
+     _In_opt_ PSS_ALLOCATOR const *Allocator,
+-    _Out_ HPSSWALK* WalkMarkerHandle
++    _Out_ _Win32_RAIIFree_(PssWalkMarkerFree, -1, 0) HPSSWALK* WalkMarkerHandle
+     );
+ 
+ _Success_(return == ERROR_SUCCESS)
+@@ -448,6 +449,7 @@ STDAPI_(DWORD)
+ PssWalkMarkerSeekToBeginning(
+     _In_ HPSSWALK WalkMarkerHandle
+     );
++_Win32_SupportedOS_END_()
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */

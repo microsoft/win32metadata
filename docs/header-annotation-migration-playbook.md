@@ -2,7 +2,7 @@
 
 Move authored semantic facts to reviewed header patches without changing native
 contracts. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
-The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md) defines
+The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/8d6d5290e8a5421ba6e565752e79c011ea40d470/docs/copilot/plans/shift-left-annotation-spec.md) defines
 the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
 complete example and its immutable evidence.
 
@@ -53,9 +53,76 @@ caching, path/preimage checks and rejection of modified caches. A changed root
 invalidates constants and every architecture's header marker; an unchanged root
 retains them. Prove this with the existing preparation controls.
 
-Respect the MIDL boundary. The current preparation script admits post-MIDL
-recipes; it is not permission to rerun broad SDK/IDL update scripts or silently
-introduce a pre-MIDL pipeline. Surface a bounded blocker if that is required.
+Respect the SDK artifact boundary, not just a recipe filename extension. Patch a
+shipped source IDL before MIDL when its corresponding generated header owns the
+fact; keep real direct-shipped header artifacts as header patches. A generated
+dependency is not automatically another annotation target. Never run broad
+SDK/IDL update scripts to implement a bounded migration: those scripts reset the
+mirror and restore removed SDK artifacts.
+
+The existing preparation path supports an explicit `midl` closure in the same
+recipe. Pin every SDK IDL/import/ACF/preprocessor input, `midl.exe` and `midlc.exe`,
+and bind each regenerated output to its admitted mirror header and exact SDK
+IDL. Keep one cumulative patch per SDK artifact, named with its SDK-relative path:
+`patches\um\winhttp.h.patch` or `patches\um\waasapi.idl.patch`. Each diff targets
+that same artifact (`a/um/winhttp.h` to `b/um/winhttp.h`), starting from its pristine
+admitted SDK bytes, not another patch's output. Reject repeated targets even
+under different filenames; do not stack semantic layers on a header.
+
+Artifact identity determines preparation, not a stage directory or recipe order.
+Apply direct-header patches to private SDK header copies and IDL patches to the
+pinned raw source closure before the existing MIDL-to-SAL conversion and shared
+`MidlHeaderUtils.ps1` flags regenerate only the admitted outputs. There are no
+post-MIDL annotation patches or patches on generated headers. Scraping
+and constants still consume one private root. Reject generated-header patches,
+unpinned imports, changed tools/preimages, failed generation and modified caches;
+never fall back to an old generated header.
+Every admitted header whose source IDL participates in the MIDL input closure
+must have its own pinned output, including an unpatched IDL that includes a
+patched source. A shared declaration guard can otherwise make an unchanged
+including header hide all of the regenerated base header's annotations.
+Unrelated pinned IDL-backed dependencies outside that closure retain their mirror
+bytes; this check does not expand the bounded regeneration scope.
+
+Run the selected C preprocessor with closed include paths and cleared ambient
+compiler options; hash its executable/engine and the SAL/helper scripts into the
+preparation identity. When `/cpp_opt` overrides MIDL's forwarding, explicitly pass
+the same `/D` definitions and private `/I` paths, including `MIDL_PASS=1`.
+The shared SDK SAL patch and metadata SAL shim provide the common annotation
+bootstrap; do not repeat annotation-header includes in individual API patches.
+An original IDL must obtain SAL before using annotation carriers. MIDL imports
+do not establish C-preprocessor macro visibility, so the two annotated pilot
+IDLs need ordinary `#include <sal.h>` directives. Their generated headers already
+obtain SAL through native RPC headers. Pin every actual SAL dependency and the
+canonical repository helper's exact `sourceSha256` in the MIDL closure; do not
+pretend the helper came from the selected SDK or search ambient include paths.
+A header patch consumed by MIDL must bind the same pristine SDK input as its
+native-header copy and apply to both private snapshots before conversion.
+Verify MIDL's actual saved preprocessor input set against
+the declared closure. Preserve raw inputs, converted IDLs, commands, diagnostics,
+outputs and their hashes in the private cache. Keep warnings enabled and compare
+the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
+accounting only for source line shifts. Do not add native `[local]` attributes or
+suppress diagnostics to make an annotation compile.
+For source-IDL methods that cannot legally carry native MIDL annotations, use
+the shared `_Win32_AnnotateMethod_(Interface::Method, annotation)` helper after
+the complete interface declarations. Keep related calls in an existing trailing
+quote region. Do not place a bare annotation or documentation comment in
+`cpp_quote` inside an interface: MIDL hoists it outside the method. Do not
+change a remotable method to `[local]`. Even legal annotations on a local method
+also decorate its generated proxy, so verify the actual target in final metadata.
+Group interface forward carriers in an existing opening quote region to avoid
+creating new compiler-generated standard-interface regions between interfaces.
+The same SDK stage copies its verified manifest and MIDL evidence to
+`obj\prepared-sdk-provenance\<architecture>\<identity>` so existing generated-asset
+CI artifacts preserve actual compiler identities and closed inputs, not just an
+ephemeral include-root pathname.
+
+Metadata must compose with native SAL. The converter does not skip a parameter
+line merely because it also contains metadata annotations. Consolidate adjacent
+SAL and metadata annotation payloads: MIDL otherwise emits only the last
+`annotation(...)` attribute and silently drops the preceding SAL. Check the
+actual regenerated header and final metadata, not just converted IDL text.
 
 ## 3. Capture native facts and classify every difference
 
@@ -111,14 +178,13 @@ module/entrypoint/flags checks even when no header import override is needed.
 ### Factor SupportedOS facts without broadening coverage
 
 Use only the canonical `_Win32_SupportedOS_*_` declaration macros and
-`_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` controls from the
-[adopted contract](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md#scoped-supportedos-defaults).
-There are no public `_Windows_` aliases. An explicit declaration fact wins over
-all defaults; otherwise the innermost applicable scope wins, not the greatest
-version. A scope applies only to eligible declarations lexically within that same
-physical header and include instance. Includes do not inherit a caller's default;
-a container's annotation does not imply inheritance by its methods or nested
-types. Balance controls on every active preprocessing path.
+`_Win32_SupportedOS_BEGIN_(os)` / `_Win32_SupportedOS_END_()` controls. There are no
+public `_Windows_` aliases. Scopes use Clang's lexical attribute accumulation:
+included declarations inherit an active scope, and distinct conflicting floors
+fail rather than selecting an explicit, innermost or greatest-version winner.
+A direct container attribute alone does not annotate its methods or nested
+types. Balance controls on every active preprocessing path, and move boundaries
+instead of relying on a reader-defined override policy.
 
 Inventory existing facts before grouping them. End scopes before unannotated
 declarations, records, typedefs and metadata-only enums; retain direct annotations
@@ -131,15 +197,19 @@ B9 producer's 119 authored OS facts, not every declaration in an annotated heade
 | CEIP | 1 | 0 | 1 |
 | ApplicationVerifier | 0 | 0 | 0 |
 | MagApi | 19 | 2 | 0 |
-| PsApi1 | 27 | 4 | 11 |
+| PsApi1 | 27 | 4 | 12 |
 | Time | 13 | 5 | 1 |
 | Ual | 4 | 1 | 0 |
 | ToolHelp | 16 | 7 | 1 |
 | UpdateAssessment | 1 | 0 | 1 |
 | Wsl / Xinput | 0 | 0 | 0 |
 
-The 29 scopes cover 101 existing function declarations: 100 use their default,
-and `GetWsChangesEx` retains its explicit Vista floor inside an XP scope.
+The planned placements retain 29 scopes and 20 direct annotations. In PsApi1,
+`GetWsChanges` uses a direct XP floor, `GetWsChangesEx` keeps its direct Vista
+floor, and the XP scope resumes at `GetMappedFileNameW`. No conflicting XP/Vista
+attributes accumulate on `GetWsChangesEx`; no active pilot scope encloses an
+include. These placements still require the qualified tooling and image gates
+below; source inspection is not a replacement metadata grade.
 PsApi1 controls remain conditional on `PSAPI_VERSION == 1`; PsApi2 stays
 unconverted and unchanged. Time's scopes stop before the unannotated `Local*`
 functions. ToolHelp's scopes exclude every record/typedef block. CEIP and
@@ -162,6 +232,35 @@ field-annotation differences remain diagnostic evidence, not admitted changes;
 the normal `43af342a` follow-up restores the default-off boundary and excludes
 scalar access spans from array inference.
 
+### Express existing logical groups without native symbol additions
+
+Use `_Win32_Enum_(name, storage, existing_constants...)` or
+`_Win32_FlagsEnum_(name, storage, existing_constants...)`, retaining native ABI
+types and `_Win32_AssociatedEnum_(group)` at the existing use sites. Both group
+macros expand to nothing when `WIN32METADATA` is absent. Their values come from
+compiled native expressions, not copied literals or a second source parse.
+
+Eighteen pilot groups use those public macros. Two existing groups need explicit
+historical labels through the same AST transport, guarded by `WIN32METADATA`:
+`WINHTTP_INTERNET_SCHEME` maps its four existing `WINHTTP_INTERNET_SCHEME_*`
+labels to genuine `INTERNET_SCHEME_*` expressions, and `XINPUT_FLAG` retains its
+reviewed `XINPUT_FLAG_ALL` member with compiled value `0` alongside
+`XINPUT_FLAG_GAMEPAD`. Use a
+`typedef _WIN32META_ANNOTATION_("Enum(labels...)", expressions...) storage GROUP`
+carrier (`FlagsEnum` for flags); do not create SDK `#define` aliases, ordinary
+consumer symbols or metadata-only constant globals. There are no authored RAII
+facts to add in this pilot.
+
+Place each group before its first associated use, after its native constants.
+Four SDK source-order exceptions instead use an early, unannotated
+`typedef DWORD GROUP;` under `WIN32METADATA`, followed by the one annotated
+public group typedef at the existing constants: `WINHTTP_ACCESS_TYPE`,
+`WINHTTP_CREDS_AUTHSCHEME`, `CREATE_TOOLHELP_SNAPSHOT_FLAGS` and
+`HEAPENTRY32_FLAGS`. Keep the same native storage and declaration scope, outside
+unintended OS scopes. This is a compiler-bound redeclaration of the same
+metadata-only type, not another logical group or an SDK alias. Do not move
+native constant blocks to accommodate the annotation.
+
 ## 4. Pin OLD, tooling control and NEW separately
 
 Freeze a complete OLD image and generated-source/discovery closure from one SDK
@@ -171,7 +270,7 @@ the partition migration; never waive a known OLD defect on NEW.
 
 Commit producer inputs before publishing a fresh named NEW artifact. Record SDK,
 producer/tooling commits, binary hashes, recipe/prepared-header identity, complete
-source/reference closure and expected-difference hashes. Do not overwrite previous
+source/reference closure and raw API-comparison hashes. Do not overwrite previous
 images or receipts. If only documentation advances the branch, retain the actual
 producer and CI-run labels on those frozen artifacts; a documentation head is not
 a new emission or a fresh image grade.
@@ -179,7 +278,10 @@ a new emission or a fresh image grade.
 Use the existing selected scrape/full-source overlay loop where appropriate.
 `PartitionFilter` alone does not narrow constants, manual files or emission
 closure. Recompute complete constants and pointer discoveries, retaining
-unselected inputs. Reject success-shaped partial images with dangling references.
+unselected inputs. Include compiler-projected `partition.header-types.cs`
+companions in selected overlays, repeat-input hashes and source provenance;
+reject an orphan companion or a changed repeat source-file set. Reject
+success-shaped partial images with dangling references.
 
 For expanded integration, an emitted overlay image is not proof that every
 physical dependent was freshly scraped. `Windows.h` unconditionally includes
@@ -224,6 +326,11 @@ The private input counts are source accounting, not final emitted admission.
   Do not suppress faithful native facts or use a blanket allowance to make the
   grade pass. A declaration comparer plus scoped physical checks is not a
   comprehensive typed-equivalence oracle.
+- Preserve the complete unfiltered API-comparison output. Do not check in a
+  difference-allowance file or give the image builder a default acceptance list.
+  Record concrete source-backed differences for review in PR comments. An image
+  receipt marked `reviewStatus: required` reports differences; it does not admit
+  them. A failed comparison remains an error, not a review result.
 - Repeat the normal SDK build with prior discoveries present. Require identical
   selected source/discovery inputs, shared prepared roots and complete SDK
   diagnostic inputs.
@@ -397,12 +504,14 @@ logical groups retain unsigned 32-bit storage and all ten members: only
 become associated rather than substituted enum types.
 
 UpdateAssessment moves only `IWaaSAssessor`'s Windows 10 build 15063 floor.
+Its current patch is authored in shipped `waasapi.idl`, not the generated header;
+the [pre-MIDL source adoption](#pre-midl-source-adoption) retains the same fact.
 
 These floors agree with the published requirements for
 [ToolHelp](https://learn.microsoft.com/windows/win32/api/tlhelp32/nf-tlhelp32-createtoolhelp32snapshot)
 and [IWaaSAssessor](https://learn.microsoft.com/windows/win32/api/waasapi/nn-waasapi-iwaasassessor).
 UpdateAssessment separately pins its supplied IDLs and checked-in post-MIDL
-headers.
+header preimages.
 
 Global `IUnknown`/`IDispatch`, BSTR/VARIANT helpers, and Foundation `HANDLE`
 definitions remain outside these physical owners. No snapshot handle identity
@@ -494,6 +603,135 @@ preserved. Artifacts are under `artifacts\supported-os-scopes`; the grade is
 about a later CI image. Final-head CI and downloaded-image qualification are
 recorded separately in the [draft PR](https://github.com/microsoft/win32metadata/pull/2365).
 Fresh CsWin32 compatibility remains unverified.
+
+### Pre-MIDL source adoption
+
+The SDK CPP `10.0.26100.7705` artifact audit covers every recipe header and
+actual patch target. Only the patched `waasapi.h` is generated from a shipped
+IDL. `httprequest.h` is an unpatched IDL-backed dependency; `waasapitypes.h` is
+an unpatched imported output regenerated with `waasapi.h`. All remaining
+annotation targets, including `winhttp.h`, remain direct-header patches.
+The eleven owners and fifteen owner/dependent partitions do not change.
+
+`um\waasapi.idl.patch` applies to the actual shipped
+`waasapi.idl` preimage
+`A29CC19E76CFC63B284E24F2B81BFBF523436B9F29C51121882D255B82A51C38`.
+It emits the annotation include and a C++-only forward declaration carrying
+`_Win32_SupportedOS_15063_` specifically on `IWaaSAssessor`. MIDL rejects a
+direct interface annotation, and a surrounding scope would also annotate
+methods. This target-specific `cpp_quote` preserves the existing type-only
+floor, UUID, method, native `[out, retval]` and library contract without a
+reader change or a generated-header fallback.
+
+The closed source set is nine IDLs (`waasapi`, `waasapitypes`, `oaidl`,
+`objidl`, `objidlbase`, `unknwn`, `unknwnbase`, `wtypes`, `wtypesbase`),
+`oaidl.acf`, `basetsd.h` and `guiddef.h`. MIDL's saved preprocessing proves
+all twelve inputs, including the two base-IDL `#include`s and automatic ACF.
+The selected SDK x64 MIDL is 8.01.0628, executable SHA256
+`53CCBCBC2FF14B2D08D029AD07B3D1AA4FF3B103F712199A15248A6CCCF6D2A3`;
+its engine is pinned separately. Each preparation records the actual selected
+Visual C++ preprocessor/engine identities rather than assuming every machine
+has the same Visual Studio installation.
+
+Unmodified-IDL regeneration reproduces both mirror headers byte-for-byte.
+The candidate leaves `waasapitypes.h` byte-identical and preserves native SAL
+in `waasapi.h`. Baseline and candidate retain the same 497 native warnings for
+the types compilation and 498 for the assessor compilation, with zero added
+diagnostic/target/payload entries. There is no warning suppression or native
+`[local]` workaround. Cold regeneration produces the same complete prepared
+header bytes; cache reuse verifies rather than repairs the published tree.
+
+The actual regenerated SDK translation unit passes metadata off/on controls on
+x86, x64 and ARM64: native signatures/layout remain unchanged, with exactly
+the intended type-level OS annotation enabled and no method/unrelated-type
+annotation. Permanent preparation controls exercise mixed SAL/metadata through
+real MIDL, import/tool/preimage rejection, wrong-stage and syntax failures,
+ambient-include isolation, repeat bytes and cache tampering. These native and
+preparation results are separate from final-image and exact-head CI admission;
+the immutable B9 and scoped-adoption evidence above is not relabeled.
+
+The committed local producer is
+`8125cddd2ec2fbf20c6e58a58f233ac95599dd82`, normally synchronized to qualified
+tooling `7ea6c85d85f6e54ba39273f9ef4897d3301d42e1`.
+
+| Immutable local pre-MIDL evidence | SHA256 |
+| --- | --- |
+| Full pilot image | `9F8BA94A4376998FD177240CEA541F616672AB7C96CC9893B8C55A5E371AE35E` |
+| Image provenance | `2D83ECDC7E8A94BD424E0FC7C33C7A512D92903F1E93FB527122D985E5AB553C` |
+| Fresh frozen-input tooling control | `C4C5081A2CD62F9E2ED300E2841617672E866A84B8AD8142CE80FA243DEC281D` |
+
+This actual image has zero declared and physical differences from accepted B9
+and the matched canonical-direct control, and zero declared differences from
+qualified c587. All 119 effective OS floors match OLD on every architecture;
+the existing OLD-to-NEW grade remains exactly 48 differences at 24 existing
+enum-use sites, with zero unknown or unused expectations. All 30
+physical/no-fallback/OS-floor cases and 14 SDK integrity cases execute and pass.
+The complete 393-file diagnostic closure, 36 repeated source/discovery inputs
+and 155 pointer reductions are retained. Artifacts are under
+`artifacts\pre-midl-pilot`. These local receipts retain their actual producer;
+final-head CI and its downloaded-image grade are recorded separately in the
+[draft PR](https://github.com/microsoft/win32metadata/pull/2365).
+No full-SDK migration or consumer work is resumed by this source-format change.
+
+### SDK-artifact patch consolidation
+
+The six WinHttp semantic layers are folded into `um\winhttp.h.patch`, starting
+from the pristine selected SDK header. The pilot now has eleven artifact-keyed
+patches, including `um\waasapi.idl.patch`; there are no stage directories or
+multiple patches on one canonical SDK artifact. The preparation guards reject
+layered targets, bundled artifact diffs, generated-header targets and
+intermediate direct-header preimages.
+
+The layout-only control against qualified `129b900d` compares every byte of all
+3,443 prepared headers and retains tree SHA256
+`E8BED2C71FD18503B44A6B55B5D2DBE2B41E856888DA7AAC38A19FD97EFB6249`.
+All twelve raw and SAL-converted MIDL inputs, both regenerated headers, commands,
+actual import closure and baseline warnings are unchanged; cache reuse and cold
+regeneration retain those header bytes. The focused 38 preparation cases and
+13 directly affected native/layout cases pass without skips. No new local
+all-partition scrape or emission is needed for this mechanical cleanup, and no
+API-difference expectations change. Historical image qualification remains tied
+to its original producer; the new head's CI state is recorded in the draft PR.
+
+### First-parse public-macro adoption
+
+The adoption source is tooling commit
+`746d812dd15a93d77b24285708fd51727b293bba`, merged without rewriting the pilot's
+history. Its canonical shared helper is pinned as a thirteenth MIDL input,
+SHA256 `5C02968168112A7DA993056680041C458CEAFFEA31AFE37A8FE17444C3D1F246`.
+The twelve original selected-SDK inputs remain separately hash-bound.
+`_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)` expands
+during MIDL preprocessing to the existing C++ target-specific forward carrier;
+the same helper bytes are included by the regenerated header.
+
+MIDL's explicit C-preprocessor options retain every required define, including
+`MIDL_PASS=1`, and each quoted private include directory. Saved preprocessing
+must read exactly the declared SDK/helper closure. There is no ambient SDK or
+environment fallback, second parse, or backend-specific transport gate.
+Preparation and native controls are not final-image admission: the new image,
+119-floor and physical-equivalence grades and exact-head CI must be recorded
+separately before publication is qualified.
+
+Local producer `5df1154cabb7bd30990d2c9bcd96a27ebc114f30` emits the complete
+pilot image, SHA256
+`7D63CE48046A6E4D759D206E0CF9493BAEBB97484FD32CE1735F0019BCEA6673`.
+Its two selected scrapes reproduce all 25 main/companion sources and discovery
+inputs byte-for-byte. The image preserves all 119 effective floors on all three
+architectures, all 7,791 enum identities and all 37,314 physical types against
+both the immutable accepted B9 and canonical-direct controls, without scope
+normalization. The frozen-input tooling control is declaration-zero against OLD
+and physically changes only the 39 previously measured constructor instance bits.
+
+The raw OLD comparison is still exactly 48 declaration differences at the 24
+existing native-integer/`AssociatedEnum` sites. There are no new API symbols,
+logical groups or members. The 140 focused preparation, comparison, native and
+physical-metadata cases and 14 integrity cases pass without skips, using the
+complete 393-file diagnostic closure. The local receipt is
+`artifacts\public-macro-adoption\locally-qualified-5df1154c.json`; it does not
+claim the separate current pilot CI/downloaded-image gate. Exact published-head
+CI and source-bound artifact qualification are recorded in draft PR #2365.
+The prerequisite's direct-source CI `38966888753` is independently green at
+`746d812dd15a93d77b24285708fd51727b293bba`, with zero image declaration changes.
 
 ### Historical COM finding under the earlier policy
 

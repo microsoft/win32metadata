@@ -1,0 +1,17 @@
+diff --git a/um/devfiltertypes.h b/um/devfiltertypes.h
+index 30c37388..65af4974 100644
+--- a/um/devfiltertypes.h
++++ b/um/devfiltertypes.h
+@@ -31,7 +31,11 @@ typedef
+ #ifdef MIDL_PASS
+ [v1_enum] 
+ #endif
+-enum _DEVPROP_OPERATOR {
++enum _DEVPROP_OPERATOR
++#ifdef WIN32METADATA
++    : unsigned int
++#endif
++{
+     // operator modifiers
+     DEVPROP_OPERATOR_MODIFIER_NOT               = 0x00010000,
+     DEVPROP_OPERATOR_MODIFIER_IGNORE_CASE       = 0x00020000,

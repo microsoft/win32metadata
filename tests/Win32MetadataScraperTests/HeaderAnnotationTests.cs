@@ -22,6 +22,9 @@ namespace Win32MetadataScraperTests
         [InlineData("RAIIFree(Close, [))")]
         [InlineData("AssociatedEnum")]
         [InlineData("ImportLibrary(\"\")")]
+        [InlineData("ImportLibrary(\"x.dll\", \"#0\")")]
+        [InlineData("ImportLibrary(\"x.dll\", \"#65536\")")]
+        [InlineData("ImportLibrary(\"x.dll\", \"#not-an-ordinal\")")]
         [InlineData("SupportedOSPlatform(\"windows10.0.99999\")")]
         [InlineData("Unsupported")]
         public void RejectsMalformedPayload(string payload)
@@ -45,6 +48,346 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        public void LogicalEnumGroupsUseCompiledValuesAndNativeSignatures(string architecture, string target, string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#define FIRST 0x80000000U
+#define SECOND (FIRST | 2U)
+#define ALIAS SECOND
+_Win32_Enum_(MODE, unsigned, FIRST, SECOND, ALIAS);
+_Win32_FlagsEnum_(FLAGS, unsigned, FIRST, SECOND);
+_Win32_AssociatedEnum_(MODE) unsigned ReturnMode();
+void SetMode(_Win32_AssociatedEnum_(MODE) unsigned value);
+struct S { _Win32_AssociatedEnum_(FLAGS) unsigned flags; };
+#undef FIRST
+#define FIRST 7
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string additional = fixture.ReadAdditionalTypes();
+            Assert.Contains("enum MODE : uint", additional);
+            Assert.Contains("FIRST = unchecked((uint)2147483648UL)", additional);
+            Assert.Contains("SECOND = unchecked((uint)2147483650UL)", additional);
+            Assert.Contains("ALIAS = unchecked((uint)2147483650UL)", additional);
+            Assert.Contains("enum FLAGS : uint", additional);
+            Assert.Contains("global::System.Flags", additional);
+            Assert.DoesNotContain("struct MODE", additional);
+            string source = fixture.ReadSource();
+            Assert.Contains("uint ReturnMode()", source);
+            Assert.Contains("SetMode(", source);
+            Assert.Contains("uint value", source);
+            Assert.Contains("AssociatedEnum(\"MODE\")", source);
+            Assert.DoesNotContain("NativeAnnotation(", source + additional);
+        }
+
+        [Theory]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::value, _Win32_PreserveResult_);", "declared native interface method")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(Free, _Win32_PreserveResult_);", "declared native interface method")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SetLastError_);", "not valid on")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_Retained_);", "not valid on")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, );", "at least one metadata annotation")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_PreserveResult_);\n_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_PreserveResult_);", "Duplicate")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SupportedOS_Windows7_);\n_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SupportedOS_Windows8_);", "Conflicting")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Method\", sizeof(&S::Run)) _Win32_PreserveResult_ int NotACarrier;", "metadata-only")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Method\") _Win32_PreserveResult_ static const unsigned char _WIN32META_METHOD_bad = 0;", "one compiler-parsed")]
+        public void MethodCarriersRejectInvalidFactsAndReferences(string declaration, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+int Free();
+struct __declspec(uuid(""135cc76d-5edc-468c-b418-060f8c43435c"")) S
+{
+    int value;
+    virtual int __stdcall Run() = 0;
+};
+" + declaration);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void MethodReferencesAreResolvedByTheOriginalCompilerParse()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "_WIN32META_ANNOTATE_METHOD_(Undeclared::Missing, _Win32_PreserveResult_);");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Undeclared", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void HoistedMidlMethodAttributesDoNotAnnotateInterfaceIdentifiers()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+_Win32_PreserveResult_
+extern ""C"" const int IID_MidlMethod;
+struct __declspec(uuid(""70873e41-fc54-4a7c-bf68-6f43263e6b81"")) IMidlMethod
+{
+    virtual int __stdcall Skip(unsigned count) = 0;
+};
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("IID_MidlMethod", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("c", "c11", true, false)]
+        [InlineData("c++", "c++17", false, false)]
+        [InlineData("c++", "c++17", true, true)]
+        public void InactiveMethodCarriersDoNotReferenceOrDeclareSymbols(
+            string language, string standard, bool annotationsEnabled, bool cInterface)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+_WIN32META_ANNOTATE_METHOD_(Undeclared::Missing, _Win32_PreserveResult_);
+enum { _WIN32META_METHOD_0 = 7 };
+int F();
+", annotationsEnabled: annotationsEnabled,
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n" + (cInterface ? "--additional=-DCINTERFACE\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+        }
+
+        [Theory]
+        [InlineData(true)]
+        [InlineData(false)]
+        public void LogicalGroupAnnotationsDoNotDependOnAttributeOrder(bool associationFirst)
+        {
+            string group = "_Win32_Enum_(OPTIONS, unsigned, FIRST, SECOND)";
+            string declaration = associationFirst
+                ? "_Win32_AssociatedConstant_(LOOSE) " + group + ";"
+                : "typedef _WIN32META_ANNOTATION_(\"Enum(FIRST, SECOND)\", FIRST, SECOND) " +
+                    "_Win32_AssociatedConstant_(LOOSE) unsigned OPTIONS;";
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "#define FIRST 1\n#define SECOND 2\n" + declaration);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadAdditionalTypes();
+            Assert.Contains("enum OPTIONS : uint", source);
+            Assert.Contains("AssociatedConstant(\"LOOSE\")", source);
+        }
+
+        [Fact]
+        public void RemovingAGroupRemovesItsStaleGeneratedType()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "#define FIRST 1\n_Win32_Enum_(OPTIONS, unsigned, FIRST);\nint F();");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("enum OPTIONS", fixture.ReadAdditionalTypes());
+            File.WriteAllText(fixture.Header, "int F();\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+        }
+
+        [Fact]
+        public void WideEnumArgumentsAreNotSilentlyTruncated()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum class WIDE : unsigned __int128 { Invalid = (unsigned __int128)1 << 100 };
+_Win32_RAIIFree_(CloseThing, WIDE::Invalid) void* Bad();
+", extraSettings: "--exclude\nWIDE\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("at most 64 bits", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void DisabledGroupMacrosIntroduceNoSymbols(string architecture, string target, string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#define FIRST 1
+#define SECOND 2
+_Win32_Enum_(MODE, unsigned, FIRST, SECOND);
+_Win32_FlagsEnum_(FLAGS, unsigned, FIRST, SECOND);
+enum { MODE = 3, FLAGS = 4 };
+int F(_Win32_AssociatedEnum_(MODE) unsigned value);
+", annotationsEnabled: false, extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("MODE = 3", source);
+            Assert.Contains("FLAGS = 4", source);
+            Assert.DoesNotContain("AssociatedEnum", source);
+            Assert.False(File.Exists(Path.ChangeExtension(fixture.Output, ".header-types.cs")));
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void TypedRaiiReadsTheOriginalExpressionContext(string architecture, string target)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+namespace Values { constexpr int Invalid = (1 << 5) ^ 1; }
+struct Limits { static constexpr int Invalid = -3; };
+#define CLEANUP CloseThing
+_Win32_RAIIFree_Handle_(CLEANUP) void* CommonHandle();
+_Win32_RAIIFree_(CLEANUP, Values::Invalid, Limits::Invalid, ~0ULL) void* OtherHandle();
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("RAIIFree(\"CloseThing\")", source);
+            foreach (long value in new long[] { -1, 0, 33, -3 })
+                Assert.Contains($"InvalidHandleValue({value}L)", source);
+            Assert.DoesNotContain("expanded", source);
+            Assert.DoesNotContain("CppAttributeList", source);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11", false)]
+        public void ImportedCleanupReferencesPreserveNativeDiagnosticPolicy(string architecture, string target,
+            string language, string standard, bool suppressNativeWarnings)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+__declspec(dllimport) int __stdcall ImportedCleanup(void*);
+__attribute__((annotate(""NativeSAL""))) struct NATIVE_IGNORED { int value; };
+_Win32_RAIIFree_Handle_(ImportedCleanup) void* CommonHandle(void);
+_Win32_RAIIFree_(ImportedCleanup) void* WithoutInvalidValues(void);
+__attribute__((annotate(""NativeSAL""))) struct NATIVE_IGNORED_AFTER { int value; };
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n" +
+                (suppressNativeWarnings ? "--additional\n-Wno-ignored-attributes\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(suppressNativeWarnings ? 0 : 2,
+                fixture.Diagnostics.Split("attribute 'annotate' is ignored").Length - 1);
+            string source = fixture.ReadSource();
+            Assert.Equal(2, source.Split("RAIIFree(\"ImportedCleanup\")").Length - 1);
+            Assert.Contains("InvalidHandleValue(-1L)", source);
+            Assert.Contains("InvalidHandleValue(0L)", source);
+        }
+
+        [Theory]
+        [InlineData("_Win32_RAIIFree_(42, 0) void* Bad();")]
+        [InlineData("_Win32_RAIIFree_(LaterCleanup, 0) void* Bad();\nint LaterCleanup(void*);")]
+        [InlineData("_Win32_RAIIFree_(CloseThing, ((void*)-1)) void* Bad();")]
+        [InlineData("_Win32_RAIIFree_(CloseThing, 1.5) void* Bad();")]
+        [InlineData("int (*Cleanup)(void*) = CloseThing;\n_Win32_RAIIFree_(Cleanup, 0) void* Bad();")]
+        [InlineData("_WIN32META_ANNOTATION_(\"RAIIFree(CloseThing, 0)\") void* Bad();")]
+        [InlineData("_Win32_Enum_(E, float, VALUE);")]
+        [InlineData("_Win32_Enum_(E, unsigned, VALUE, VALUE);")]
+        [InlineData("_Win32_AlsoUsableFor_(OTHER) _Win32_Enum_(E, unsigned, VALUE);")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Enum(A, B)\", 1) typedef unsigned E;")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Enum(A)\", 1.5) typedef unsigned E;")]
+        [InlineData("_Win32_AssociatedEnum_(unsigned) unsigned Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", 0) int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", 65536) int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", -1) int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", \"\") int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", \"#0\") int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", \"#65536\") int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(\"x.dll\", \"#bad\") int Bad();")]
+        [InlineData("_Win32_ImportLibrary_(L\"x.dll\") int Bad();")]
+        public void TypedAnnotationsRejectInvalidCompilerArguments(string declaration)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "#define VALUE 1\n" + declaration);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("error", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("int _Win32_SetLastError_ F();")]
+        [InlineData("int __stdcall _Win32_SetLastError_ F();")]
+        [InlineData("int F() _Win32_SetLastError_;")]
+        public void ValidCompilerAttachmentDoesNotRequireSourceTokenParsing(string declaration)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declaration);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("SetLastError = true", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void IgnoredMetadataAttributesFailThroughToolDiagnostics(string architecture, string target,
+            string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target,
+                "_Win32_SupportedOS_Windows7_ struct Bad { int value; };",
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n--additional\n-Wno-ignored-attributes\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("error: attribute 'annotate' is ignored", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("_Win32_SupportedOS_Windows7_ struct Bad { int value; };", "-Wno-ignored-attributes")]
+        [InlineData("_Win32_SupportedOS_Windows7_ union Bad { int value; };", "-Wno-everything")]
+        [InlineData("_Win32_SupportedOS_Windows7_ enum Bad { Value };", "-Wno-ignored-attributes")]
+        [InlineData("#define FIRST _Win32_SupportedOS_Windows7_\n#define SECOND FIRST\nSECOND struct Bad { int value; };", "-Wno-ignored-attributes")]
+        public void ToolDiagnosticsRejectIgnoredAnnotationsDespiteWarningSuppression(string declaration, string warningOption)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declaration,
+                extraSettings: $"--additional\n{warningOption}\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("error: attribute 'annotate' is ignored", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void SharedHeaderLeavesIgnoredAttributePolicyToTheConsumer(bool suppressWarnings)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "_Win32_SupportedOS_Windows7_ struct Bad { int value; };",
+                annotationsEnabled: false,
+                extraSettings: "--additional\n-DWIN32METADATA\n" +
+                    (suppressWarnings ? "-Wno-ignored-attributes\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(!suppressWarnings,
+                fixture.Diagnostics.Contains("warning: attribute 'annotate' is ignored", StringComparison.Ordinal));
+            Assert.DoesNotContain("error:", fixture.Diagnostics);
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void GlobalWarningSuppressionIsRejectedOnlyForAnnotationParsing(bool annotationsEnabled)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "_Win32_SupportedOS_Windows7_ struct Bad { int value; };",
+                annotationsEnabled: annotationsEnabled, extraSettings: "--additional\n-w\n");
+            int exitCode = fixture.Run();
+            if (annotationsEnabled)
+            {
+                Assert.NotEqual(0, exitCode);
+                Assert.Contains("-w suppresses ignored metadata attribute diagnostics", fixture.Diagnostics);
+                Assert.False(File.Exists(fixture.Output));
+            }
+            else
+            {
+                Assert.True(exitCode == 0, fixture.Diagnostics);
+                Assert.True(File.Exists(fixture.Output));
+            }
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]
@@ -55,12 +398,12 @@ typedef void* HANDLE;
 #define INVALID_HANDLE_VALUE ((HANDLE)(long long)-1)
 _Win32_ImportLibrary_(""header.dll"") _Win32_SetLastError_ _Win32_SupportedOS_10240_
 int __stdcall Imported(_Win32_Retained_ void* input, _Win32_ContainsInteriorPointers_ void* output);
-_Win32_RAIIFree_(CloseThing, 0, INVALID_HANDLE_VALUE) HANDLE __stdcall OpenThing();
+_Win32_RAIIFree_(CloseThing, 0, -1) HANDLE __stdcall OpenThing();
 int __stdcall CreateThing(_Win32_RAIIFree_(CloseThing, 0) HANDLE* output);
 _Win32_PreserveResult_ int __stdcall Result();
+enum _Win32_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A) _Win32_AssociatedConstant_(LOOSE_B) Flags : unsigned { FlagA = 1 };
 _Win32_AssociatedEnum_(Flags) unsigned __stdcall AssociatedReturn();
 struct _Win32_SupportedOS_10240_ Record { _Win32_AssociatedEnum_(Flags) unsigned flags; };
-enum _Win32_SupportedOS_10240_ _Win32_AssociatedConstant_(LOOSE_A) _Win32_AssociatedConstant_(LOOSE_B) Flags : unsigned { FlagA = 1 };
 enum class [[clang::flag_enum]] ScopedFlags : unsigned { None = 0, A = 1 };
 _Win32_SupportedOS_10240_ typedef unsigned NATIVE_ALIAS;
 int __stdcall Retval(_Win32_Retval_ int* result);
@@ -89,35 +432,43 @@ int __stdcall Retval(_Win32_Retval_ int* result);
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]
-        public void SupportedOSScopesChooseLexicalDefaults(string architecture, string target)
+        public void SupportedOSScopesAccumulateAndCollapseIdenticalFacts(string architecture, string target)
         {
             using var fixture = new NativeFixture(architecture, target, @"
 int Before();
 _Win32_SupportedOS_BEGIN_(WindowsVista)
 int Vista();
+_Win32_SupportedOS_BEGIN_(WindowsVista)
+int VistaNested();
+_Win32_SupportedOS_WindowsVista_ int VistaExplicit();
+_Win32_SupportedOS_END_()
+_Win32_SupportedOS_END_()
 _Win32_SupportedOS_BEGIN_(Windows7)
 int Seven();
-_Win32_SupportedOS_Windows8_ int ExplicitLater();
 _Win32_SupportedOS_Windows7_ int ExplicitEqual();
-_Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
-_Win32_SupportedOS_BEGIN_(Windows2000)
-int OlderNested();
+_Win32_SupportedOS_BEGIN_(Windows7)
+int SevenNested();
 _Win32_SupportedOS_END_()
 int SevenAgain();
 _Win32_SupportedOS_END_()
+_Win32_SupportedOS_BEGIN_(WindowsVista)
 int VistaAgain();
 _Win32_SupportedOS_END_()
+_Win32_SupportedOS_Windows8_ int ExplicitLater();
+_Win32_SupportedOS_Windows2000_ int ExplicitEarlier();
 int After();
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             string source = fixture.ReadSource();
             AssertSupportedOS(source, "Before", null);
             AssertSupportedOS(source, "Vista", "windows6.0.6000");
+            AssertSupportedOS(source, "VistaNested", "windows6.0.6000");
+            AssertSupportedOS(source, "VistaExplicit", "windows6.0.6000");
             AssertSupportedOS(source, "Seven", "windows6.1");
             AssertSupportedOS(source, "ExplicitLater", "windows8.0");
             AssertSupportedOS(source, "ExplicitEqual", "windows6.1");
             AssertSupportedOS(source, "ExplicitEarlier", "windows5.0");
-            AssertSupportedOS(source, "OlderNested", "windows5.0");
+            AssertSupportedOS(source, "SevenNested", "windows6.1");
             AssertSupportedOS(source, "SevenAgain", "windows6.1");
             AssertSupportedOS(source, "VistaAgain", "windows6.0.6000");
             AssertSupportedOS(source, "After", null);
@@ -161,20 +512,20 @@ END()
         public void SupportedOSControlAliasesKeepExplicitFactsAndDeclarationTiming()
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
-#define BEGIN_WITH_OVERRIDE(os) _Win32_SupportedOS_BEGIN_(os) _Win32_SupportedOS_Windows7_
+#define BEGIN_WITH_OVERRIDE(os) _Win32_SupportedOS_BEGIN_(os) _Win32_SupportedOS_WindowsVista_
 #define END_AFTER_DECLARATION(name) int name(); _Win32_SupportedOS_END_()
 BEGIN_WITH_OVERRIDE(WindowsVista) int Explicit();
 END_AFTER_DECLARATION(Within)
 int After();
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            AssertSupportedOS(fixture.ReadSource(), "Explicit", "windows6.1");
+            AssertSupportedOS(fixture.ReadSource(), "Explicit", "windows6.0.6000");
             AssertSupportedOS(fixture.ReadSource(), "Within", "windows6.0.6000");
             AssertSupportedOS(fixture.ReadSource(), "After", null);
         }
 
         [Fact]
-        public void SupportedOSScopesStayInTheirExpansionFile()
+        public void SupportedOSScopesPropagateThroughIncludes()
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 #include ""macros.h""
@@ -187,12 +538,12 @@ PRODUCE(After)
 ", extraSettings: "--traverse\nchild.h\ngrandchild.h\n");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "macros.h"), @"
 #define PRODUCE(name) int name();
-#define EXPLICIT(name) _Win32_SupportedOS_Windows7_ _Win32_SetLastError_ int name();
+#define EXPLICIT(name) _Win32_SupportedOS_WindowsVista_ _Win32_SetLastError_ int name();
 ");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "child.h"), @"
 PRODUCE(Child)
 EXPLICIT(ExplicitChild)
-_Win32_SupportedOS_BEGIN_(Windows8)
+_Win32_SupportedOS_BEGIN_(WindowsVista)
 PRODUCE(ChildScoped)
 #include ""grandchild.h""
 _Win32_SupportedOS_END_()
@@ -207,12 +558,12 @@ EXPLICIT(ExplicitGrandchild)
             AssertSupportedOS(source, "Parent", "windows6.0.6000");
             AssertSupportedOS(source, "ParentAgain", "windows6.0.6000");
             AssertSupportedOS(source, "After", null);
-            AssertSupportedOS(source, "Child", null);
-            AssertSupportedOS(source, "ExplicitChild", "windows6.1");
-            AssertSupportedOS(source, "ChildScoped", "windows8.0");
-            AssertSupportedOS(source, "ChildAfter", null);
-            AssertSupportedOS(source, "Grandchild", null);
-            AssertSupportedOS(source, "ExplicitGrandchild", "windows6.1");
+            AssertSupportedOS(source, "Child", "windows6.0.6000");
+            AssertSupportedOS(source, "ExplicitChild", "windows6.0.6000");
+            AssertSupportedOS(source, "ChildScoped", "windows6.0.6000");
+            AssertSupportedOS(source, "ChildAfter", "windows6.0.6000");
+            AssertSupportedOS(source, "Grandchild", "windows6.0.6000");
+            AssertSupportedOS(source, "ExplicitGrandchild", "windows6.0.6000");
             Assert.Equal(2, source.Split("SetLastError = true").Length - 1);
         }
 
@@ -240,12 +591,13 @@ _Win32_SupportedOS_END_()
         }
 
         [Theory]
-        [InlineData("_Win32_SupportedOS_BEGIN_(UnknownVersion)\nint F();\n_Win32_SupportedOS_END_()", "expected string literal")]
+        [InlineData("_Win32_SupportedOS_BEGIN_(UnknownVersion)\nint F();\n_Win32_SupportedOS_END_()", "expected")]
         [InlineData("_Win32_SupportedOS_END_()", "with no matching")]
         [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\nint F();", "unterminated")]
         [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n#if 0\n_Win32_SupportedOS_END_()\n#endif", "unterminated")]
-        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ int F();\n_Win32_SupportedOS_END_()", "Duplicate")]
-        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows7_ int F();\n_Win32_SupportedOS_END_()", "Duplicate")]
+        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ int F();\n_Win32_SupportedOS_END_()", "Conflicting")]
+        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n_Win32_SupportedOS_BEGIN_(Windows8)\nint F();\n_Win32_SupportedOS_END_()\n_Win32_SupportedOS_END_()", "Conflicting")]
+        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\n_Win32_SupportedOS_Windows2000_ int F();\n_Win32_SupportedOS_END_()", "Conflicting")]
         public void MalformedSupportedOSScopesFail(string declarations, string diagnostic)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
@@ -257,38 +609,39 @@ _Win32_SupportedOS_END_()
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void SupportedOSScopesCannotCloseAnotherFilesOrIncludeInstancesScope(bool repeatedInclude)
+        public void ClangCanBalanceSupportedOSScopesAcrossIncludes(bool repeatedInclude)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", repeatedInclude ? @"
 #define FIRST
 #include ""pair.h""
 #undef FIRST
 #include ""pair.h""
+int After();
 " : @"
 _Win32_SupportedOS_BEGIN_(Windows7)
+int Within();
 #include ""pair.h""
+int After();
 ");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "pair.h"), repeatedInclude ? @"
 #ifdef FIRST
 _Win32_SupportedOS_BEGIN_(Windows7)
+int Within();
 #else
 _Win32_SupportedOS_END_()
 #endif
 " : "_Win32_SupportedOS_END_()\n");
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
-            Assert.Contains("same file and include instance", fixture.Diagnostics);
-            Assert.False(File.Exists(fixture.Output));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            AssertSupportedOS(fixture.ReadSource(), "After", null);
         }
 
         [Theory]
         [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\nint F();\n_Win32_SupportedOS_END_()\nint F();")]
         [InlineData("int F();\n_Win32_SupportedOS_BEGIN_(Windows7)\nint F();\n_Win32_SupportedOS_END_()")]
         [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\nint F();\nint F();\n_Win32_SupportedOS_END_()")]
-        [InlineData("_Win32_SupportedOS_BEGIN_(Windows7)\nint F();\n_Win32_SupportedOS_BEGIN_(Windows8)\nint F();\n_Win32_SupportedOS_END_()\n_Win32_SupportedOS_END_()\n_Win32_SupportedOS_Windows7_ int F();")]
-        [InlineData("_Win32_SupportedOS_Windows7_ int F();\n_Win32_SupportedOS_BEGIN_(Windows8)\nint F();\n_Win32_SupportedOS_END_()")]
         [InlineData("_Win32_SupportedOS_Windows7_ int F();\n_Win32_SupportedOS_Windows7_ int F();")]
-        public void SupportedOSRedeclarationsResolveExplicitFactsBeforeDefaults(string declarations)
+        [InlineData("_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows7_ int F();")]
+        public void SupportedOSRedeclarationsCollapseIdenticalFacts(string declarations)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
@@ -361,9 +714,6 @@ _Win32_SupportedOS_END_()
         [InlineData("_Win32_ContainsInteriorPointers_ int Bad(void* buffer);")]
         [InlineData("struct Bad { _Win32_ContainsInteriorPointers_ void* field; };")]
         [InlineData("int Bad(_Win32_ContainsInteriorPointers_ int value);")]
-        [InlineData("int _Win32_SetLastError_ Bad();")]
-        [InlineData("int __stdcall _Win32_SetLastError_ Bad();")]
-        [InlineData("typedef _Win32_SupportedOS_10240_ int Bad;")]
         [InlineData("struct S { unsigned _Win32_AssociatedEnum_(E) value; };")]
         [InlineData("int Bad(_In_ _Win32_ContainsInteriorPointers_ void* value);")]
         [InlineData("int Bad(_In_reads_(count) _Win32_ContainsInteriorPointers_ void* value, unsigned count);")]
@@ -378,19 +728,17 @@ _Win32_SupportedOS_END_()
         [InlineData("struct S { _Win32_SupportedOS_Windows7_ int field; };")]
         [InlineData("int Bad(_Win32_SupportedOS_Windows7_ int value);")]
         [InlineData("_Win32_SupportedOS_Windows7_ int variable;")]
-        [InlineData("_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows7_ int Bad();")]
         [InlineData("int Bad(_Win32_Retained_ _Win32_Retained_ void* value);")]
         [InlineData("#define DOUBLE _Win32_Retained_ _Win32_Retained_\nint Bad(DOUBLE void* value);")]
         [InlineData("int Bad(_Win32_Retval_ _Win32_Retval_ int* value);")]
         [InlineData("#define DOUBLE _Win32_Retval_ _Win32_Retval_\nint Bad(DOUBLE int* value);")]
-        [InlineData("int Bad(void*) _Win32_SetLastError_;")]
         [InlineData("#define _Win32_Unknown_ _WIN32META_ANNOTATION_(\"Alien\")\n_Win32_Unknown_ int Bad();")]
         [InlineData("_WIN32META_ANNOTATION_(\"Alien\") int Bad();")]
         public void NativeValidationFailsBeforeProjection(string declaration)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declaration);
             Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("error", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
         }
 
@@ -452,6 +800,8 @@ PRODUCER(Second, CloseSecond, 7)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 #define FIELDS _Win32_AssociatedEnum_(FirstEnum) unsigned first; _Win32_AssociatedEnum_(SecondEnum) unsigned second;
+enum FirstEnum { FirstValue = 1 };
+enum SecondEnum { SecondValue = 2 };
 struct Record { FIELDS };
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
@@ -487,8 +837,7 @@ enum Constants { MEMBERS };
         [InlineData("_Win32_SupportedOS_Windows8_ int mutableValue;", "not valid")]
         [InlineData("int F(_Win32_SupportedOS_Windows8_ const int value);", "not valid")]
         [InlineData("void F() { _Win32_SupportedOS_Windows8_ const int localValue = 1; }", "not valid")]
-        [InlineData("const unsigned Value _Win32_SupportedOS_Windows8_ = 42;", "prefix placement")]
-        [InlineData("enum E { Value _Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ = 1 };", "Duplicate")]
+        [InlineData("enum E { Value _Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ = 1 };", "Conflicting")]
         public void ConstantTargetsDoNotRelaxOtherAnnotationRules(string declarations, string diagnostic)
         {
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
@@ -528,7 +877,7 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", "");
             string annotations = Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h");
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "test.cpp"),
-                $"#include \"{annotations.Replace('\\', '/')}\"\n#include \"test.h\"\n");
+                $"#include \"{annotations.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n#include \"test.h\"\n");
             File.WriteAllText(fixture.Header, "[[nodiscard]] _Win32_RAIIFree_(CloseThing, 0) void* Produce();");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
@@ -542,7 +891,7 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
                 $"{annotation} inline int F() {{ return 0; }}");
             Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("error", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
         }
 
@@ -583,7 +932,7 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
             using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
                 "_Win32_RAIIFree_(CloseThing, UNKNOWN_VALUE) void* Bad();");
             Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("error", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
         }
 
@@ -599,7 +948,7 @@ _Win32_RAIIFree_(CloseThing, {invalid}) long long Before();
 const int LATER_VALUE = 7;
 ");
             Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("error", fixture.Diagnostics);
         }
 
         [Fact]
@@ -786,7 +1135,9 @@ LPSIMPLE_CALLBACK
                 Directory.CreateDirectory(DirectoryPath);
                 Header = Path.Combine(DirectoryPath, "test.h");
                 string sal = Path.Combine(AppContext.BaseDirectory, "assets", "sal.h");
-                File.WriteAllText(Header, $"#include \"{annotations.Replace('\\', '/')}\"\n#include \"{sal.Replace('\\', '/')}\"\n" + declarations);
+                File.WriteAllText(Path.Combine(DirectoryPath, "cleanup.h"),
+                    "int CloseThing(void*);\nint CloseFirst(void*);\nint CloseSecond(void*);\n");
+                File.WriteAllText(Header, $"#include \"{sal.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n" + declarations);
                 string main = Path.Combine(DirectoryPath, "test.cpp");
                 File.WriteAllText(main, "#include \"test.h\"\n");
                 Output = multipleFiles ? Path.Combine(DirectoryPath, architecture) : Path.Combine(DirectoryPath, architecture, "Bindings.cs");

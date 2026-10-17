@@ -1,0 +1,27 @@
+diff --git a/um/ErrorRep.h b/um/ErrorRep.h
+index b3b706b1..fd6fca48 100644
+--- a/um/ErrorRep.h
++++ b/um/ErrorRep.h
+@@ -38,10 +38,14 @@ typedef enum tagEFaultRepRetVal
+     frrvErrDoubleFault,
+ } EFaultRepRetVal;
+ 
++_Win32_SupportedOS_BEGIN_(WindowsXP)
+ EFaultRepRetVal APIENTRY ReportFault(_In_ LPEXCEPTION_POINTERS pep, _In_ DWORD dwOpt);
+ 
++_Win32_SetLastError_
+ BOOL            APIENTRY AddERExcludedApplicationA(_In_ LPCSTR szApplication);
++_Win32_SetLastError_
+ BOOL            APIENTRY AddERExcludedApplicationW(_In_ LPCWSTR wszApplication);
++_Win32_SupportedOS_END_()
+ 
+ 
+ typedef EFaultRepRetVal (APIENTRY *pfn_REPORTFAULT)(_In_ LPEXCEPTION_POINTERS, _In_ DWORD);
+@@ -59,6 +63,7 @@ typedef EFaultRepRetVal (APIENTRY *pfn_ADDEREXCLUDEDAPPLICATIONW)(_In_ LPCWSTR);
+ // 
+ //+++++++++++++++++++++ Hang reporting api ++++++++++++++++++++++++++++++++
+ //
++_Win32_SupportedOS_WindowsVista_
+ HRESULT 
+ WINAPI
+ WerReportHang(

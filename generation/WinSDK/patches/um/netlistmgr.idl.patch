@@ -1,0 +1,30 @@
+diff --git a/um/netlistmgr.idl b/um/netlistmgr.idl
+index 97fe9420..6bc95f1e 100644
+--- a/um/netlistmgr.idl
++++ b/um/netlistmgr.idl
+@@ -2,11 +2,25 @@
+ 
+ // Interface definitions for Network List Manager.
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(INetworkListManager, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetworkListManagerEvents, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetwork, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IEnumNetworks, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetworkEvents, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetworkConnection, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(IEnumNetworkConnections, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetworkConnectionEvents, _Win32_SupportedOS_WindowsVista_)
++_Win32_AnnotateInterface_(INetworkCostManager, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(INetworkCostManagerEvents, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(INetworkConnectionCost, _Win32_SupportedOS_Windows8_)
++_Win32_AnnotateInterface_(INetworkConnectionCostEvents, _Win32_SupportedOS_Windows8_)
++
+ import "unknwn.idl";
+ import "wtypes.idl";
+ import "objidl.idl";
