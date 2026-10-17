@@ -285,7 +285,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.PrintTicket.WorkflowPrintTicket)]
-                [experimental]
                 [uuid(966D1166-D9C7-569E-B7D8-F2B341C8F976)]
                 interface IWorkflowPrintTicketFactory : IInspectable
                 {

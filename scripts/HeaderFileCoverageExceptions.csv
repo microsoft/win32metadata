@@ -22,13 +22,10 @@ File,Skipping,Reason
 /shared/intsafe.h,true,Int helpers
 /shared/ipv6prefast.h,true,SAL annotations
 /shared/kernelspecs.h,true,Ignoring kernel stuff
-/shared/ksarm.h,true,Ignoring kernel stuff
 /shared/ksarm64.h,true,Ignoring kernel stuff
 /shared/ksguid.h,true,Ignoring kernel stuff
-/shared/kxarm.h,true,Ignoring kernel stuff
 /shared/kxarm64.h,true,Ignoring kernel stuff
 /shared/kxarm64unw.h,true,Ignoring kernel stuff
-/shared/kxarmunw.h,true,Ignoring kernel stuff
 /shared/lamp.h,false,Need lamp partition
 /shared/math3dhelper.h,true,Math stuff that doesn't scrape
 /shared/mprapidef.h,true,Max constants we don't need
@@ -136,6 +133,7 @@ File,Skipping,Reason
 /um/d3d.h,false,Need D3D
 /um/d3dhal.h,true,Ignoring kernel stuff
 /um/d3dhalex.h,true,Ignoring kernel stuff
+/um/dbgcredentialproviderimpl.h,true,C++ credential-provider class with implementation code we can't scrape
 /um/ddkmapi.h,true,Ignoring kernel stuff
 /um/devicecategories.h,true,DEVICEDISPLAY_CATEGORY_* -- no documentation for them
 /um/directxcollision.h,true,Inlined code
@@ -298,9 +296,6 @@ File,Skipping,Reason
 /um/xmldomdid.h,true,For XmlDom.idl which we don't use
 /um/xmldsodid.h,true,For XmlDom.idl which we don't use
 /um/zmouse.h,true,Duplicate constants
-/um/qcc/platform.h,true,No usable content
-/um/qcc/windows/mapping.h,true,No usable content
-/um/qcc/windows/platform_types.h,true,No usable content
 /um/dbdao.h,true,Can't use C++ classes
 /um/daogetrw.h,true,Can't use C++ classes
 /um/dbdaoerr.h,true,Can't use C++ classes

@@ -4939,6 +4939,14 @@ DEFINE_PROPERTYKEY(PKEY_Devices_WiaDeviceType, 0x6BDD1FC6, 0x810F, 0x11D0, 0xBE,
 DEFINE_PROPERTYKEY(PKEY_Devices_WiFi_InterfaceGuid, 0xEF1167EB, 0xCBFC, 0x4341, 0xA5, 0x68, 0xA7, 0xC9, 0x1A, 0x68, 0x98, 0x2C, 2);
 #define INIT_PKEY_Devices_WiFi_InterfaceGuid { { 0xEF1167EB, 0xCBFC, 0x4341, 0xA5, 0x68, 0xA7, 0xC9, 0x1A, 0x68, 0x98, 0x2C }, 2 }
 
+//  Name:     System.Devices.WiFiAware.IsSupported -- PKEY_Devices_WiFiAware_IsSupported
+//  Type:     Boolean -- VT_BOOL
+//  FormatID: {9D2E9E67-70D4-4D1A-AEFD-113CF6A7DFCA}, 2
+//
+//  Wi-Fi Aware Is Supported
+DEFINE_PROPERTYKEY(PKEY_Devices_WiFiAware_IsSupported, 0x9D2E9E67, 0x70D4, 0x4D1A, 0xAE, 0xFD, 0x11, 0x3C, 0xF6, 0xA7, 0xDF, 0xCA, 2);
+#define INIT_PKEY_Devices_WiFiAware_IsSupported { { 0x9D2E9E67, 0x70D4, 0x4D1A, 0xAE, 0xFD, 0x11, 0x3C, 0xF6, 0xA7, 0xDF, 0xCA }, 2 }
+
 //  Name:     System.Devices.WiFiDirect.DeviceAddress -- PKEY_Devices_WiFiDirect_DeviceAddress
 //  Type:     Buffer -- VT_VECTOR | VT_UI1  (For variants: VT_ARRAY | VT_UI1)
 //  FormatID: {1506935D-E3E7-450F-8637-82233EBE5F6E}, 13

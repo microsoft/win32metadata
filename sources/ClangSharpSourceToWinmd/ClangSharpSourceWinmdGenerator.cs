@@ -698,7 +698,7 @@ namespace ClangSharpSourceToWinmd
                 this.metadataBuilder.AddTypeDefinition(
                     typeAttributes,
                     this.metadataBuilder.GetOrAddString(symbol.ContainingNamespace.ToString()),
-                    this.metadataBuilder.GetOrAddString(node.Identifier.ValueText),
+                    this.metadataBuilder.GetOrAddString(FixArchSpecificName(node.Identifier.ValueText)),
                     this.GetTypeReference("System", "Enum"),
                     fieldList: valueFieldDef,
                     methodList: MetadataTokens.MethodDefinitionHandle(this.metadataBuilder.GetRowCount(TableIndex.MethodDef) + 1));

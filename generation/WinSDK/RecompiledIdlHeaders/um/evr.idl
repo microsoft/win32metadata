@@ -344,28 +344,6 @@ typedef enum MFVideoRenderPrefs {
 //=============================================================================
 // Description:
 //
-//  A Normalized relative rectangle where the coordinates exist in the rate [0,1].
-//
-// Remarks: 
-//
-//  When the rectangle refers to a video stream, the following restrictions apply
-//  o  left <= right. 
-//  o  top <= bottom.
-//
-cpp_quote("#ifndef _MFVideoNormalizedRect_")
-cpp_quote("#define _MFVideoNormalizedRect_")
-typedef struct MFVideoNormalizedRect
-{
-    float left;
-    float top;
-    float right;
-    float bottom;
-} MFVideoNormalizedRect;
-cpp_quote("#endif")
-
-//=============================================================================
-// Description:
-//
 //  The IMFVideoDisplayControl interface supports window-based rendering.  
 //
 //  If a video renderer supports this functionality it is accessible to the 

@@ -150,6 +150,8 @@ field if a provider has opted-in via a call to EventSetInformation.
     64-bit event timestamp override. For use when relogging. Note that logging
     events out of timestamp order may lead to event ordering issues during
     trace processing. */
+#define EVENT_DATA_DESCRIPTOR_TYPE_RESERVED1          (4) /*
+    Reserved. */
 
 /*
 EVENT_WRITE_FLAG values for the Flag parameter of EventWriteEx and EtwWriteEx.
@@ -431,6 +433,8 @@ typedef enum _EVENT_INFO_CLASS {
         Configures whether the ETW runtime should respect the Type field of the
         EVENT_DATA_DESCRIPTOR. The data for this control code is a BOOLEAN
         (1 byte, value FALSE or TRUE). */
+    EventProviderSetReserved2, /*
+        Reserved. */
     MaxEventInfo
 } EVENT_INFO_CLASS;
 

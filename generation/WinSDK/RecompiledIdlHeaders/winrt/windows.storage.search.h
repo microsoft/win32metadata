@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -202,6 +202,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptions ABI::Windows::Storage::Search::IQueryOptions
 
 #endif // ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
+#define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Storage {
+            namespace Search {
+                interface IQueryOptionsAdditionalSearchSources;
+            } /* Search */
+        } /* Storage */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources ABI::Windows::Storage::Search::IQueryOptionsAdditionalSearchSources
+
+#endif // ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsFactory_FWD_DEFINED__
@@ -2581,6 +2596,55 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CSearch_CIQueryOptions;
 
 /*
  *
+ * Interface Windows.Storage.Search.IQueryOptionsAdditionalSearchSources
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Storage.Search.QueryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Storage_Search_IQueryOptionsAdditionalSearchSources[] = L"Windows.Storage.Search.IQueryOptionsAdditionalSearchSources";
+namespace ABI {
+    namespace Windows {
+        namespace Storage {
+            namespace Search {
+                MIDL_INTERFACE("8d342d6b-8800-426e-b5cf-4b328f824e7e")
+                IQueryOptionsAdditionalSearchSources : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IncludeLocalSemanticIndex(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IncludeLocalSemanticIndex(
+                        boolean value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IncludeCloudProviders(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_IncludeCloudProviders(
+                        boolean value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IQueryOptionsAdditionalSearchSources = __uuidof(IQueryOptionsAdditionalSearchSources);
+            } /* Search */
+        } /* Storage */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources;
+#endif /* !defined(____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Storage.Search.IQueryOptionsFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -3191,6 +3255,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Storage.Search.IQueryOptions ** Default Interface **
  *    Windows.Storage.Search.IQueryOptionsWithProviderFilter
+ *    Windows.Storage.Search.IQueryOptionsAdditionalSearchSources
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -3368,6 +3433,12 @@ typedef interface __x_ABI_CWindows_CStorage_CSearch_CIIndexableContent __x_ABI_C
 typedef interface __x_ABI_CWindows_CStorage_CSearch_CIQueryOptions __x_ABI_CWindows_CStorage_CSearch_CIQueryOptions;
 
 #endif // ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptions_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
+#define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources;
+
+#endif // ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsFactory_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsFactory_FWD_DEFINED__
@@ -8143,6 +8214,94 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CSearch_CIQueryOptions;
 
 /*
  *
+ * Interface Windows.Storage.Search.IQueryOptionsAdditionalSearchSources
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.Storage.Search.QueryOptions
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Storage_Search_IQueryOptionsAdditionalSearchSources[] = L"Windows.Storage.Search.IQueryOptionsAdditionalSearchSources";
+typedef struct __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSourcesVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IncludeLocalSemanticIndex)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IncludeLocalSemanticIndex)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        boolean value);
+    HRESULT (STDMETHODCALLTYPE* get_IncludeCloudProviders)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* put_IncludeCloudProviders)(__x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources* This,
+        boolean value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSourcesVtbl;
+
+interface __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources
+{
+    CONST_VTBL struct __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSourcesVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_get_IncludeLocalSemanticIndex(This, value) \
+    ((This)->lpVtbl->get_IncludeLocalSemanticIndex(This, value))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_put_IncludeLocalSemanticIndex(This, value) \
+    ((This)->lpVtbl->put_IncludeLocalSemanticIndex(This, value))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_get_IncludeCloudProviders(This, value) \
+    ((This)->lpVtbl->get_IncludeCloudProviders(This, value))
+
+#define __x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_put_IncludeCloudProviders(This, value) \
+    ((This)->lpVtbl->put_IncludeCloudProviders(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources;
+#endif /* !defined(____x_ABI_CWindows_CStorage_CSearch_CIQueryOptionsAdditionalSearchSources_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Interface Windows.Storage.Search.IQueryOptionsFactory
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -9182,6 +9341,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class implements the following interfaces:
  *    Windows.Storage.Search.IQueryOptions ** Default Interface **
  *    Windows.Storage.Search.IQueryOptionsWithProviderFilter
+ *    Windows.Storage.Search.IQueryOptionsAdditionalSearchSources
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

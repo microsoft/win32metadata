@@ -53,7 +53,8 @@ enum class DXCoreAdapterState : uint32_t
     AdapterInUseProcessCount = 7,
     AdapterInUseProcessSet = 8,
     AdapterEngineFrequencyHertz = 9,
-    AdapterMemoryFrequencyHertz = 10
+    AdapterMemoryFrequencyHertz = 10,
+    SingleAdapterHybridMode = 11
 };
 
 enum class DXCoreSegmentGroup : uint32_t
@@ -77,6 +78,13 @@ enum class DXCoreAdapterPreference : uint32_t
     HighPerformance = 2
 };
 
+enum class DXCoreSingleAdapterHybridMode : uint32_t
+{
+    Unspecified = 0,
+    MinimumPower = 1,
+    HighPerformance = 2
+};
+
 enum class DXCoreWorkload : uint32_t
 {
     Graphics = 0,
@@ -92,7 +100,7 @@ enum class DXCoreRuntimeFilterFlags : uint32_t
     D3D12 = 0x2
 };
 
-DEFINE_ENUM_FLAG_OPERATORS(DXCoreRuntimeFilterFlags);
+DEFINE_ENUM_FLAG_OPERATORS(DXCoreRuntimeFilterFlags)
 
 enum class DXCoreHardwareTypeFilterFlags : uint32_t
 {
@@ -103,7 +111,7 @@ enum class DXCoreHardwareTypeFilterFlags : uint32_t
     MediaAccelerator = 0x8
 };
 
-DEFINE_ENUM_FLAG_OPERATORS(DXCoreHardwareTypeFilterFlags);
+DEFINE_ENUM_FLAG_OPERATORS(DXCoreHardwareTypeFilterFlags)
 
 struct DXCoreHardwareID
 {

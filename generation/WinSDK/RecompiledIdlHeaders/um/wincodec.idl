@@ -2194,7 +2194,6 @@ interface IWICDisplayAdaptationControl2 : IWICDisplayAdaptationControl
         );
 }
 
-
 /*=========================================================================*\
     IWICD3DTextureSource -
     For decoding a bitmap using a Direct3D Device, such as ID3D11Device.

@@ -637,7 +637,6 @@ DwmShowContact(
     );
 #endif // NTDDI_WIN8
 
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS4)
 
 enum DWM_TAB_WINDOW_REQUIREMENTS

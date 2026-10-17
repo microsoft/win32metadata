@@ -705,6 +705,7 @@ typedef struct _SECPKG_CALL_INFO {
 #define SECPKG_CALL_BUFFER_MARSHAL  0x00010000  // Buffer passed is marshaled (by RPC)
 #define SECPKG_CALL_UNLOCK          0x00020000  // Unlock
 #define SECPKG_CALL_CLOUDAP_CONNECT 0x00040000  // the caller of LsaLogonuser() is CloudAP during connection flow
+#define SECPKG_CALL_AGENT_LOGON     0x00080000  // Logon is for an agent account via the agent APIs
 
 //
 // WOWXX: Additional defines to determine which type of WoW guest we are dealing with.
@@ -733,6 +734,7 @@ typedef enum _SECPKG_FAILURE_SPECIAL_REASON {
     SecpkgFailureReason_NoLineOfSight,  // The secpkg needed a line-of-sight to a Domain Controller, but none could be found. 
     SecpkgFailureReason_Loopback,       // The secpkg does not support loopback authentication.
     SecpkgFailureReason_NullSession,    // The secpkg does not handle null sessions.
+    SecpkgFailureReason_GlobalSPN,      // The targetname used during InitializeSecurityContext resolved to a global SPN. E.g cifs/contoso.com.
 } SECPKG_FAILURE_SPECIAL_REASON, * PSECPKG_FAILURE_SPECIAL_REASON;
 
 typedef struct _SECPKG_FAILURE_REASON {
@@ -2679,7 +2681,7 @@ KSEC_LOCATE_PKG_BY_ID KSecLocatePackageById;
 #endif // not valid for MIDL_PASS
 
 typedef struct _SECPKG_KERNEL_FUNCTIONS {
-    PLSA_ALLOCATE_LSA_HEAP AllocateHeap;
+    PLSA_ALLOCATE_LSA_HEAP AllocateHeap; // Actually allocates VM - used to pass data back to usermode
     PLSA_FREE_LSA_HEAP FreeHeap;
     PKSEC_CREATE_CONTEXT_LIST CreateContextList;
     PKSEC_INSERT_LIST_ENTRY InsertListEntry;
@@ -2798,6 +2800,10 @@ typedef struct _SECPKG_KERNEL_FUNCTION_TABLE {
     KspSerializeAuthDataFn * SerializeAuthData;
 } SECPKG_KERNEL_FUNCTION_TABLE, *PSECPKG_KERNEL_FUNCTION_TABLE;
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 SECURITY_STATUS
 SEC_ENTRY
 KSecRegisterSecurityProvider(
@@ -2812,6 +2818,17 @@ KSecLocatePackage(
     _Outptr_ PSECPKG_KERNEL_FUNCTION_TABLE * Package,
     _Out_ PULONG_PTR PackageId
     );
+
+// Routine for kernel packages to allocate memory that callers will free with ksecdd!FreeContextBuffer
+// The allocated memory will be paged pool using the KSEC_PACKAGE_TAG_DEFAULT pool tag
+PVOID SEC_ENTRY
+KSecAllocateContextBuffer(
+    ULONG cbMemory
+    );
+
+#ifdef __cplusplus
+}
+#endif
 
 extern SECPKG_KERNEL_FUNCTIONS KspKernelFunctions;
 

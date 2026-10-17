@@ -64,7 +64,7 @@ template<typename> extern const DelegateCheckMode DefaultDelegateCheckModeTrait;
 #endif
 
 // Enum to specify the behavior when firing event delegates
-enum InvokeMode
+enum InvokeMode : int
 {
    StopOnFirstError = 1,
    FireAll = 2,
@@ -81,6 +81,10 @@ struct InvokeModeOptions
 template<InvokeMode invokeMode> struct InvokeTraits;
 template<typename TDelegateInterface, typename EventSourceOptions>
 class EventSource;
+
+#ifdef BUILD_WINDOWS
+template <typename> extern const InvokeMode DefaultInvokeModeTrait;
+#endif
 
 namespace Details
 {
@@ -662,13 +666,82 @@ class EventTargetArray WrlFinal : public ::Microsoft::WRL::RuntimeClass< ::Micro
         void **bucketAssists_;
 };
 
+template <typename TEventSourceOptions>
+struct EventSourceTraits
+{
+private:
+
+    template <typename Options>
+    static TrueType HasCustomTokenMappingImpl(
+        decltype(Options::EventTokenFromDelegate(Declval<IUnknown*>())), // I.e. EventRegistrationToken
+        decltype(Options::DelegateFromEventToken(Declval<::EventRegistrationToken>()))); // I.e. IUnknown*
+    template <typename Options>
+    static FalseType HasCustomTokenMappingImpl(...);
+
+    template <typename Options>
+    static decltype(HasCustomTokenMappingImpl<Options>(Declval<::EventRegistrationToken>(), Declval<IUnknown*>())) HasCustomTokenMapping();
+
+public:
+
+    // Functions provided by TEventSourceOptions
+    template <
+        typename Options = TEventSourceOptions,
+        typename Details::EnableIf<decltype(HasCustomTokenMapping<Options>())::value, int>::type = 0>
+    static ::EventRegistrationToken EventTokenFromDelegate(IUnknown* delegate)
+    {
+        return Options::EventTokenFromDelegate(delegate);
+    }
+
+    template <
+        typename Options = TEventSourceOptions,
+        typename Details::EnableIf<decltype(HasCustomTokenMapping<Options>())::value, int>::type = 0>
+    static IUnknown* DelegateFromEventToken(::EventRegistrationToken token)
+    {
+        return Options::DelegateFromEventToken(token);
+    }
+
+    // Default functions - use pointer values for event token values
+    template <
+        typename Options = TEventSourceOptions,
+        typename Details::EnableIf<!decltype(HasCustomTokenMapping<Options>())::value, int>::type = 0>
+    static ::EventRegistrationToken EventTokenFromDelegate(IUnknown* delegate)
+    {
+        return ::EventRegistrationToken{ reinterpret_cast<__int64>(delegate) };
+    }
+
+    template <
+        typename Options = TEventSourceOptions,
+        typename Details::EnableIf<!decltype(HasCustomTokenMapping<Options>())::value, int>::type = 0>
+    static IUnknown* DelegateFromEventToken(::EventRegistrationToken token)
+    {
+        return reinterpret_cast<IUnknown*>(token.value);
+    }
+};
+
 } // namespace Details
+
+template<InvokeMode invokeModeValue>
+struct HardenedInvokeModeOptions
+{
+    static const InvokeMode invokeMode = invokeModeValue;
+
+    // Use EncodePointer/DecodePointer to avoid leaking heap addresses to external processes
+    static EventRegistrationToken EventTokenFromDelegate(IUnknown* delegate)
+    {
+        return EventRegistrationToken{ reinterpret_cast<__int64>(::EncodePointer(delegate)) };
+    }
+
+    static IUnknown* DelegateFromEventToken(EventRegistrationToken token)
+    {
+        return static_cast<IUnknown*>(::DecodePointer(reinterpret_cast<void*>(token.value)));
+    }
+};
 
 template<>
 struct InvokeTraits<FireAll>
 {
-   template<typename TInvokeMethod, typename TDelegateInterface>
-   static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, InvokeModeOptions<FireAll>>* pEvent)
+   template<typename TInvokeMethod, typename TDelegateInterface, typename TEventSourceOptions>
+   static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, TEventSourceOptions>* pEvent)
    {
       ComPtr<Details::EventTargetArray> targets;
       targets = targetArray;
@@ -682,9 +755,7 @@ struct InvokeTraits<FireAll>
               // Remove event that is already disconnected
               if (hr == RPC_E_DISCONNECTED || hr == HRESULT_FROM_WIN32(RPC_S_SERVER_UNAVAILABLE) || hr == JSCRIPT_E_CANTEXECUTE)
               {
-                  EventRegistrationToken token;
-                  token.value = reinterpret_cast<__int64>(element->Get());
-                  pEvent->Remove(token);
+                  pEvent->RemoveDelegate(element->Get());
               }
           }
       }
@@ -695,8 +766,8 @@ struct InvokeTraits<FireAll>
 template<>
 struct InvokeTraits<StopOnFirstError>
 {
-   template<typename TInvokeMethod, typename TDelegateInterface>
-   static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, InvokeModeOptions<StopOnFirstError>>* pEvent)
+   template<typename TInvokeMethod, typename TDelegateInterface, typename TEventSourceOptions>
+   static HRESULT InvokeDelegates(TInvokeMethod invokeOne, Details::EventTargetArray *targetArray, EventSource<TDelegateInterface, TEventSourceOptions>* pEvent)
    {
       HRESULT hr = S_OK;
       ComPtr<Details::EventTargetArray> targets;
@@ -710,9 +781,7 @@ struct InvokeTraits<StopOnFirstError>
            {
                // if we get the above errors, treat it as success and unregister the delegate
                ::RoTransformError(hr, S_OK, nullptr);
-               EventRegistrationToken token;
-               token.value = reinterpret_cast<__int64>(element->Get());
-               pEvent->Remove(token);
+               pEvent->RemoveDelegate(element->Get());
                hr = S_OK;
            }
            if (FAILED(hr))
@@ -725,15 +794,28 @@ struct InvokeTraits<StopOnFirstError>
    }
 };
 
+#ifdef WRL_HARDENED_EVENT_SOURCE
 #if (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
-template<typename TDelegateInterface, typename TEventSourceOptions = InvokeModeOptions<ReportUnhandledOnFirstErrorWithWin8Quirk>>
+template<typename TDelegateInterface, typename TEventSourceOptions = HardenedInvokeModeOptions<DefaultInvokeModeTrait<TDelegateInterface>>>
+#else
+template<typename TDelegateInterface, typename TEventSourceOptions = HardenedInvokeModeOptions<FireAll>>
+#endif // (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
+#else
+#if (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
+template<typename TDelegateInterface, typename TEventSourceOptions = InvokeModeOptions<DefaultInvokeModeTrait<TDelegateInterface>>>
 #else
 template<typename TDelegateInterface, typename TEventSourceOptions = InvokeModeOptions<FireAll>>
 #endif // (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
+#endif
 
 // Source events for non-agile single threaded components. Agile components should use AgileEventSource
 class EventSource
 {
+    using Traits = Details::EventSourceTraits<TEventSourceOptions>;
+
+    template <InvokeMode>
+    friend struct InvokeTraits;
+
 public:
     EventSource() throw() :
          targets_(nullptr)
@@ -753,6 +835,13 @@ public:
 
     HRESULT Remove(EventRegistrationToken token) throw()
     {
+        return RemoveDelegate(Traits::DelegateFromEventToken(token));
+    }
+
+protected:
+
+    HRESULT RemoveDelegate(_In_ IUnknown* delegateInterface) throw()
+    {
         // Used for deleting the current array without holding the addRemoveLock.
         ComPtr<Details::EventTargetArray> pTempList;
         { // lock scope for addRemoveLock_
@@ -762,7 +851,7 @@ public:
 
             if (targets_ == nullptr)
             {
-                return S_OK; // List is currently empty - thus token wasn't found, just return
+                return S_OK; // List is currently empty - thus delegateInterface wasn't found, just return
             }
 
             ComPtr<Details::EventTargetArray> pNewList;
@@ -771,7 +860,7 @@ public:
             // If one element in the array
             if (availableSlots == 0)
             {
-                if (reinterpret_cast<__int64>(targets_->Begin()->Get()) == token.value)
+                if (targets_->Begin()->Get() == delegateInterface)
                 {
                     removed = true;
                 }
@@ -789,7 +878,7 @@ public:
 
                 for (auto element = targets_->Begin(); element != targets_->End(); element++)
                 {
-                    if (!removed && token.value == reinterpret_cast<__int64>(element->Get()))
+                    if (!removed && delegateInterface == element->Get())
                     {
                         removed = true;
                         continue;
@@ -803,7 +892,7 @@ public:
                         // We don't have any availableSlots left in the target array, hence every item was copied
                         // from the source array.
                         // This means we didn't find the item in the list - just return.
-                        __WRL_ASSERT__(!removed && "Attempt to remove token that was not added to this EventSource<>");
+                        __WRL_ASSERT__(!removed && "Attempt to remove delegate that was not added to this EventSource<>");
                         break;
                     }
 
@@ -843,8 +932,6 @@ public:
 
         return S_OK;
     }
-
-protected:
 
     HRESULT Add(_In_opt_ TDelegateInterface* delegateInterface, _In_opt_ void *bucketAssist, _Out_ EventRegistrationToken* token) throw()
     {
@@ -901,7 +988,7 @@ private:
             }
 
             // Get unique token value
-            token->value = reinterpret_cast<__int64>(delegateInterface);
+            *token = Traits::EventTokenFromDelegate(delegateInterface);
 
             // AddTail operation will take a reference which will result in
             // this function adding one reference count on delegateInterface.
@@ -980,6 +1067,14 @@ protected:
     mutable Wrappers::SRWLock targetsPointerLock_;
     Wrappers::SRWLock addRemoveLock_;
 };
+
+#if (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
+template<typename TDelegateInterface>
+using HardenedEventSource = EventSource<TDelegateInterface, HardenedInvokeModeOptions<DefaultInvokeModeTrait<TDelegateInterface>>>;
+#else
+template<typename TDelegateInterface>
+using HardenedEventSource = EventSource<TDelegateInterface, HardenedInvokeModeOptions<FireAll>>;
+#endif // (defined(BUILD_WINDOWS) && (NTDDI_VERSION >= NTDDI_WINBLUE))
 
 #ifdef __windows2Efoundation_h__
 
@@ -1086,11 +1181,19 @@ private:
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 #if (NTDDI_VERSION >= NTDDI_WINBLUE)
+#ifdef WRL_HARDENED_EVENT_SOURCE
 #if defined(BUILD_WINDOWS)
-template<typename TDelegateInterface, typename TEventSourceOptions = Microsoft::WRL::InvokeModeOptions<Microsoft::WRL::ReportUnhandledOnFirstErrorWithWin8Quirk>>
+template<typename TDelegateInterface, typename TEventSourceOptions = Microsoft::WRL::HardenedInvokeModeOptions<Microsoft::WRL::DefaultInvokeModeTrait<TDelegateInterface>>>
+#else
+template<typename TDelegateInterface, typename TEventSourceOptions = Microsoft::WRL::HardenedInvokeModeOptions<FireAll>>
+#endif  // defined(BUILD_WINDOWS)
+#else
+#if defined(BUILD_WINDOWS)
+template<typename TDelegateInterface, typename TEventSourceOptions = Microsoft::WRL::InvokeModeOptions<Microsoft::WRL::DefaultInvokeModeTrait<TDelegateInterface>>>
 #else
 template<typename TDelegateInterface, typename TEventSourceOptions = Microsoft::WRL::InvokeModeOptions<FireAll>>
 #endif  // defined(BUILD_WINDOWS)
+#endif
 
 // WinRT event source implementation for agile/multi-threaded components.
 class AgileEventSource : public Microsoft::WRL::EventSource<TDelegateInterface, TEventSourceOptions>
@@ -1116,6 +1219,14 @@ public:
         return hr;
     }
 };
+
+#if defined(BUILD_WINDOWS)
+template<typename TDelegateInterface>
+using HardenedAgileEventSource = AgileEventSource<TDelegateInterface, Microsoft::WRL::HardenedInvokeModeOptions<Microsoft::WRL::DefaultInvokeModeTrait<TDelegateInterface>>>;
+#else
+template<typename TDelegateInterface>
+using HardenedAgileEventSource = AgileEventSource<TDelegateInterface, Microsoft::WRL::HardenedInvokeModeOptions<FireAll>>;
+#endif  // defined(BUILD_WINDOWS)
 #endif // (NTDDI_VERSION >= NTDDI_WINBLUE)
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */

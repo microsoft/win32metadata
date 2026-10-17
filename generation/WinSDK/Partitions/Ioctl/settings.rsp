@@ -1,7 +1,10 @@
 --exclude
 _VIRTUAL_STORAGE_TYPE
 --traverse
-<IncludeRoot>/shared/ntddstor.h
+# Device types must be scraped before ntddmtm.h aliases them.
 <IncludeRoot>/um/winioctl.h
+<IncludeRoot>/shared/cxl.h
+<IncludeRoot>/shared/ntddmtm.h
+<IncludeRoot>/shared/ntddstor.h
 --namespace
 Windows.Win32.System.Ioctl

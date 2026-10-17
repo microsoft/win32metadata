@@ -62,6 +62,8 @@
 //  between different RMs.
 //
 
+#pragma warning(push)
+#pragma warning(disable:4201)  // nonstandard extension used: nameless struct/union
 
 typedef struct _TXF_ID {
     struct {
@@ -69,6 +71,8 @@ typedef struct _TXF_ID {
         LONGLONG HighPart;
     };
 } TXF_ID, *PTXF_ID;
+
+#pragma warning(pop)
 
 typedef GUID *PGUID;
 

@@ -178,6 +178,8 @@ namespace Windows
 
                 interface IPrintWorkflowPrinterJob2;
 
+                interface IPrintWorkflowPrinterJob3;
+
                 interface IPrintWorkflowPrinterJobStatusChangedEventArgs;
 
                 interface IPrintWorkflowSourceContent;
@@ -524,7 +526,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowJobBackgroundSession)]
-                [experimental]
                 [uuid(5757086C-EDCC-5A94-90EC-A0A87C1115E7)]
                 interface IPrintWorkflowJobBackgroundSession3 : IInspectable
                 {
@@ -610,7 +611,6 @@ namespace Windows
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [experimental]
                 [uuid(E3A9F883-6A2D-489B-BC1F-7AAB44249622)]
                 interface IPrintWorkflowObjectModelProvider : IInspectable
                 {
@@ -656,7 +656,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPdlConverter)]
-                [experimental]
                 [uuid(6B556B4F-3756-5DA6-B1F7-8F9E89F629FB)]
                 interface IPrintWorkflowPdlConverter3 : IInspectable
                 {
@@ -701,7 +700,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPdlModificationRequestedEventArgs)]
-                [experimental]
                 [uuid(1F50A7D4-DB49-5D3E-BA27-B366CB25CD7E)]
                 interface IPrintWorkflowPdlModificationRequestedEventArgs3 : IInspectable
                 {
@@ -751,8 +749,17 @@ namespace Windows
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPrinterJob)]
+                [uuid(F0C8EEEC-66AC-5E14-8906-0DE610769368)]
+                interface IPrintWorkflowPrinterJob3 : IInspectable
+                {
+                    [propget] HRESULT IsPassthroughJobWithAttributes([out] [retval] boolean* value);
+                    HRESULT GetPassthroughJobAttributes([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.Devices.Printers.IppAttributeValue*>** result);
+                    HRESULT GetPassthroughJobOperationAttributes([out] [retval] Windows.Foundation.Collections.IMap<HSTRING, Windows.Devices.Printers.IppAttributeValue*>** result);
+                }
+
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowPrinterJobStatusChangedEventArgs)]
-                [experimental]
                 [uuid(4A6275B9-BE67-5718-921A-348C56F9D25F)]
                 interface IPrintWorkflowPrinterJobStatusChangedEventArgs : IInspectable
                 {
@@ -901,7 +908,6 @@ namespace Windows
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
                 [exclusiveto(Windows.Graphics.Printing.Workflow.PrintWorkflowXpsObjectModelProvider)]
-                [experimental]
                 [uuid(97D8C1AD-96D7-56CC-B660-A71495632CEB)]
                 interface IPrintWorkflowXpsObjectModelProvider : IInspectable
                 {
@@ -962,7 +968,7 @@ namespace Windows
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession;
                     [contract(Windows.Foundation.UniversalApiContract, 17.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession3;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowJobBackgroundSession3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 17.0)]
@@ -1025,7 +1031,7 @@ namespace Windows
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter;
                     [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter3;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlConverter3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -1041,7 +1047,7 @@ namespace Windows
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs;
                     [contract(Windows.Foundation.UniversalApiContract, 15.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs2;
-                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs3;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPdlModificationRequestedEventArgs3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 13.0)]
@@ -1064,14 +1070,14 @@ namespace Windows
                 {
                     [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJob;
                     [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJob2;
+                    [contract(Windows.Foundation.UniversalApiContract, 19.0)] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJob3;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [experimental]
                 [marshaling_behavior(agile)]
                 runtimeclass PrintWorkflowPrinterJobStatusChangedEventArgs
                 {
-                    [default] [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJobStatusChangedEventArgs;
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowPrinterJobStatusChangedEventArgs;
                 }
 
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -1185,13 +1191,12 @@ namespace Windows
 
                 [activatable(Windows.Foundation.UniversalApiContract, 19.0)]
                 [contract(Windows.Foundation.UniversalApiContract, 19.0)]
-                [experimental]
                 [marshaling_behavior(agile)]
                 [threading(both)]
                 runtimeclass PrintWorkflowXpsObjectModelProvider
                 {
-                    [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowXpsObjectModelProvider;
-                    [default] [experimental] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowObjectModelProvider;
+                    interface Windows.Graphics.Printing.Workflow.IPrintWorkflowXpsObjectModelProvider;
+                    [default] interface Windows.Graphics.Printing.Workflow.IPrintWorkflowObjectModelProvider;
                 }
             }
         }

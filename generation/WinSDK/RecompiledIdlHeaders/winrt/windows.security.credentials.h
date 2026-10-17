@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -1862,12 +1862,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCa
  *
  * Interface Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
  *
  */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerCreateWithWindowStatics[] = L"Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics";
@@ -1895,7 +1895,7 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 
 /*
  *
@@ -2087,12 +2087,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialRe
  *
  * Interface Windows.Security.Credentials.IKeyCredentialWithWindow
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredential
  *
  */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialWithWindow[] = L"Windows.Security.Credentials.IKeyCredentialWithWindow";
@@ -2119,7 +2119,7 @@ namespace ABI {
 
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 
 /*
  *
@@ -2634,9 +2634,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics interface starting with version 20.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5367,12 +5367,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialCa
  *
  * Interface Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredentialManager
  *
  */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialManagerCreateWithWindowStatics[] = L"Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics";
@@ -5433,7 +5433,7 @@ interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWi
 
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialManagerCreateWithWindowStatics_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 
 /*
  *
@@ -5773,12 +5773,12 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialRe
  *
  * Interface Windows.Security.Credentials.IKeyCredentialWithWindow
  *
- * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ * Introduced to Windows.Foundation.UniversalApiContract in version 20.0
  *
  * Interface is a part of the implementation of type Windows.Security.Credentials.KeyCredential
  *
  */
-#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 #if !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__
 extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Security_Credentials_IKeyCredentialWithWindow[] = L"Windows.Security.Credentials.IKeyCredentialWithWindow";
@@ -5838,7 +5838,7 @@ interface __x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow
 
 EXTERN_C const IID IID___x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow;
 #endif /* !defined(____x_ABI_CWindows_CSecurity_CCredentials_CIKeyCredentialWithWindow_INTERFACE_DEFINED__) */
-#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x140000
 
 /*
  *
@@ -6729,9 +6729,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerCreateWithWindowStatics interface starting with version 20.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Security.Credentials.IKeyCredentialManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

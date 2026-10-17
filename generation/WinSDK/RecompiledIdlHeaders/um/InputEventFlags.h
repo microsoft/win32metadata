@@ -46,4 +46,6 @@ enum InputEventFlag2
     InputEventFlag2_RawCustomText           = 0x00000002,
     InputEventFlag2_TelemetrySamplePicked   = 0x00000004,
     InputEventFlag2_TelemetryVirtualKey     = 0x00000008,
+
+    InputEventFlag2_AltNumpad               = 0x00000010,
 };

@@ -63,6 +63,7 @@ const DWORD TS_SD_UIINTEGRATIONENABLE   = 0x020;   // indicates that text contro
 const DWORD TS_SD_INPUTPANEMANUALDISPLAYENABLE = 0x040;     // used by UWP text controls to disable default automatic SIP invocation
 const DWORD TS_SD_EMBEDDEDHANDWRITINGVIEW_ENABLED = 0x080;  // used by UWP text controls to enable embedded handwriting 
 const DWORD TS_SD_EMBEDDEDHANDWRITINGVIEW_VISIBLE = 0x100;  // used by UWP text controls to show/hide embedded handwriting view
+const DWORD TS_SD_DISABLEWRITINGSUGGESTIONS = 0x200;        // used by controls to opt-out from writing suggestions services
 
 // bit values for TS_STATUS's dwStaticFlags field
 const DWORD TS_SS_DISJOINTSEL           = 0x001;   // if set, the document supports multiple selections
@@ -72,6 +73,7 @@ const DWORD TS_SS_NOHIDDENTEXT          = 0x008;   // if set, the document will 
 const DWORD TS_SS_TKBAUTOCORRECTENABLE  = 0x010;   // document owner sets this flag in order to receive auto-correction from the Windows touch keyboard
 const DWORD TS_SS_TKBPREDICTIONENABLE   = 0x020;   // document owner sets this flag in order to receive prediction from the Windows touch keyboard
 const DWORD TS_SS_UWPCONTROL            = 0x040;   // document is provided on behalf of a UWP control
+const DWORD TS_SS_MULTILINE             = 0x080;   // multiline text control
 
 const DWORD TS_SD_MASKALL = (TS_SD_READONLY | TS_SD_LOADING);
 

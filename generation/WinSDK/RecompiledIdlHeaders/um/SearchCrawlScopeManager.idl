@@ -268,7 +268,12 @@ typedef enum {
     //
     // By group policy
     //
-    CLUSIONREASON_GROUPPOLICY = 3
+    CLUSIONREASON_GROUPPOLICY = 3,
+
+    //
+    // By an intelligently-added scope expansion rule
+    //
+    CLUSIONREASON_USAGE = 4
 } CLUSION_REASON;
 
 

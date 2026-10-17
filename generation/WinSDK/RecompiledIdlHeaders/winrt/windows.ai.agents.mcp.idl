@@ -35,6 +35,8 @@ namespace Windows
 
                 interface IMcpMessageFilterExperimental;
 
+                interface IMcpMessageFilterExperimental2;
+
                 interface IMcpMessageFilterResponse;
 
                 interface IMcpMessageFilterResponseExperimental;
@@ -72,6 +74,15 @@ namespace Windows
                 interface IMcpMessageFilterExperimental : IInspectable
                 {
                     HRESULT Initialize([in] HSTRING clientAppUserModelId, [in] UINT32 clientProcessId, [in] HSTRING serverIdentity, [in] HSTRING serverName, [in] UINT32 serverProcessId);
+                    HRESULT OnMessage([in] HSTRING message, [in] Windows.AI.Agents.Mcp.McpMessageDirection direction, [in] Windows.AI.Agents.Mcp.McpMessageFilterResponse* filterResponse);
+                }
+
+                [contract(Windows.AI.Agents.AgentsContract, 2.0)]
+                [experimental]
+                [uuid(8127E075-4652-5645-B2EB-0E5772EE5C6F)]
+                interface IMcpMessageFilterExperimental2 : IInspectable
+                {
+                    HRESULT Initialize([in] HSTRING clientProcessIdentifier, [in] UINT32 clientProcessId, [in] HSTRING serverProcessIdentifier, [in] UINT32 serverProcessId, [in] HSTRING serverId, [out] [retval] boolean* result);
                     HRESULT OnMessage([in] HSTRING message, [in] Windows.AI.Agents.Mcp.McpMessageDirection direction, [in] Windows.AI.Agents.Mcp.McpMessageFilterResponse* filterResponse);
                 }
 

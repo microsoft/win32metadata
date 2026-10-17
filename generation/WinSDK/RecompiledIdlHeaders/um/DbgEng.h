@@ -8167,7 +8167,7 @@ typedef struct _DEBUG_STACK_FRAME_EX
 
     // Extended DEBUG_STACK_FRAME fields.
     ULONG InlineFrameContext;
-    ULONG Reserved1; // For alignment purpose.
+    ULONG FrameMachine;
 } DEBUG_STACK_FRAME_EX, *PDEBUG_STACK_FRAME_EX;
 
 // The types of inline frame context.
@@ -8250,6 +8250,20 @@ typedef struct _STACK_SYM_FRAME_INFO
 #define DEBUG_STACK_PROVIDER                0x00002000
 // The architecture of the frame (for mixed architecture stacks)
 #define DEBUG_STACK_FRAME_ARCH              0x00004000
+
+// IMAGE_FILE_MACHINE_* constants which can be returned in emulated processes 
+// by various APIs that return architecture constants
+#ifndef IMAGE_FILE_MACHINE_CHPE_X86
+#define IMAGE_FILE_MACHINE_CHPE_X86 0x3A64
+#endif // IMAGE_FILE_MACHINE_CHPE_X86
+
+#ifndef IMAGE_FILE_MACHINE_ARM64EC
+#define IMAGE_FILE_MACHINE_ARM64EC 0xA641
+#endif // IMAGE_FILE_MACHINE_ARM64EC
+
+#ifndef IMAGE_FILE_MACHINE_ARM64X
+#define IMAGE_FILE_MACHINE_ARM64X 0xA64E
+#endif // IMAGE_FILE_MACHINE_ARM64X
 
 // Classes of debuggee.  Each class
 // has different qualifiers for specific
@@ -18762,6 +18776,14 @@ DECLARE_INTERFACE_(IDebugDataSpaces4, IUnknown)
 #define DEBUG_CES_EXPRESSION_SYNTAX   0x00002000
 // Text replacements have changed.
 #define DEBUG_CES_TEXT_REPLACEMENTS   0x00004000
+// Client views have changed.  Argument is
+// always DEBUG_ANY_ID and view state must be
+// explicitly queried
+#define DEBUG_CES_VIEWS               0x00008000
+// Step filters have changed.  If only a single step filter
+// changed, argument is the ID of the step filter.
+// Otherwise it is DEBUG_ANY_ID
+#define DEBUG_CES_STEP_FILTERS        0x00010000
 
 // ChangeSymbolState flags.
 // Symbol state has changed generally, such
@@ -26306,6 +26328,20 @@ typedef HRESULT (CALLBACK* PDEBUG_EXTENSION_CANUNLOAD)
 // debugger actually unloads the extension DLL.
 typedef void (CALLBACK* PDEBUG_EXTENSION_UNLOAD)
     (void);
+// IsExtensionApi routine.  If and only if DebugExtensionIsExtensionApi
+// is present in the debugger extension, this will be called
+// prior to matching any export as an extension API.  If the method returns
+// true for any given name, the export with the given name is considered
+// an extension API; otherwise, it is not.  Note that this will never
+// be called for known export names which are debugger reserved 
+// (e.g.: DebugExtension*).  Such are never considered to be extension
+// methods.  If the debugger extension does not include a 
+// DebugExtensionIsExtensionApi method, all exports
+// that are not otherwise debugger reserved names are considered
+// extension APIs (such is the way the debugger operated prior to the
+// introduction of this method).
+typedef BOOL (CALLBACK* PDEBUG_EXTENSION_ISEXTENSIONAPI)
+    (_In_ PCSTR Name);
 
 // A debuggee has been discovered for the session.  It
 // is not necessarily halted.

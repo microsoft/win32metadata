@@ -101,49 +101,49 @@ ULONG64
 typedef
 VOID
 (WDBGAPI*PWINDBG_GET_SYMBOL)(
-    PVOID      offset,
-    PCHAR      pchBuffer,
-    ULONG_PTR *pDisplacement
+    _In_                PVOID      offset,
+    _Out_writes_z_(256) PCHAR      pchBuffer,
+    _Out_               ULONG_PTR *pDisplacement
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_GET_SYMBOL32)(
-    ULONG      offset,
-    PCHAR      pchBuffer,
-    PULONG     pDisplacement
+    _In_                ULONG      offset,
+    _Out_writes_z_(256) PCHAR      pchBuffer,
+    _Out_               PULONG     pDisplacement
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_GET_SYMBOL64)(
-    ULONG64    offset,
-    PCHAR      pchBuffer,
-    PULONG64   pDisplacement
+    _In_                ULONG64    offset,
+    _Out_writes_z_(256) PCHAR      pchBuffer,
+    _Out_               PULONG64   pDisplacement
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_DISASM)(
-    ULONG_PTR *lpOffset,
-    PCSTR      lpBuffer,
-    ULONG      fShowEffectiveAddress
+    _Inout_              ULONG_PTR *lpOffset,
+    _Out_writes_z_(2000) PCSTR      lpBuffer,
+    _In_                 ULONG      fShowEffectiveAddress
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_DISASM32)(
-    ULONG     *lpOffset,
-    PCSTR      lpBuffer,
-    ULONG      fShowEffectiveAddress
+    _Inout_              ULONG     *lpOffset,
+    _Out_writes_z_(2000) PCSTR      lpBuffer,
+    _In_                 ULONG      fShowEffectiveAddress
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_DISASM64)(
-    ULONG64   *lpOffset,
-    PCSTR      lpBuffer,
-    ULONG      fShowEffectiveAddress
+    _Inout_              ULONG64   *lpOffset,
+    _Out_writes_z_(2000) PCSTR      lpBuffer,
+    _In_                 ULONG      fShowEffectiveAddress
     );
 
 typedef
@@ -155,97 +155,97 @@ ULONG
 typedef
 ULONG
 (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE)(
-    ULONG_PTR  offset,
-    PVOID      lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesRead
+    _In_                                      ULONG_PTR  offset,
+    _Out_writes_bytes_to_(cb, *lpcbBytesRead) PVOID      lpBuffer,
+    _In_                                      ULONG      cb,
+    _Out_                                     PULONG     lpcbBytesRead
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE32)(
-    ULONG      offset,
-    PVOID      lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesRead
+    _In_                                      ULONG      offset,
+    _Out_writes_bytes_to_(cb, *lpcbBytesRead) PVOID      lpBuffer,
+    _In_                                      ULONG      cb,
+    _Out_                                     PULONG     lpcbBytesRead
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_READ_PROCESS_MEMORY_ROUTINE64)(
-    ULONG64    offset,
-    PVOID      lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesRead
+    _In_                                      ULONG64    offset,
+    _Out_writes_bytes_to_(cb, *lpcbBytesRead) PVOID      lpBuffer,
+    _In_                                      ULONG      cb,
+    _Out_                                     PULONG     lpcbBytesRead
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE)(
-    ULONG_PTR  offset,
-    LPCVOID    lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesWritten
+    _In_                 ULONG_PTR  offset,
+    _In_reads_bytes_(cb) LPCVOID    lpBuffer,
+    _In_                 ULONG      cb,
+    _Out_                PULONG     lpcbBytesWritten
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE32)(
-    ULONG      offset,
-    LPCVOID    lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesWritten
+    _In_                 ULONG      offset,
+    _In_reads_bytes_(cb) LPCVOID    lpBuffer,
+    _In_                 ULONG      cb,
+    _Out_                PULONG     lpcbBytesWritten
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_WRITE_PROCESS_MEMORY_ROUTINE64)(
-    ULONG64    offset,
-    LPCVOID    lpBuffer,
-    ULONG      cb,
-    PULONG     lpcbBytesWritten
+    _In_                 ULONG64    offset,
+    _In_reads_bytes_(cb) LPCVOID    lpBuffer,
+    _In_                 ULONG      cb,
+    _Out_                PULONG     lpcbBytesWritten
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_GET_THREAD_CONTEXT_ROUTINE)(
-    ULONG       Processor,
-    PCONTEXT    lpContext,
-    ULONG       cbSizeOfContext
+    _In_                                ULONG       Processor,
+    _Out_writes_bytes_(cbSizeOfContext) PCONTEXT    lpContext,
+    _In_                                ULONG       cbSizeOfContext
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_SET_THREAD_CONTEXT_ROUTINE)(
-    ULONG       Processor,
-    PCONTEXT    lpContext,
-    ULONG       cbSizeOfContext
+    _In_                              ULONG       Processor,
+    _In_reads_bytes_(cbSizeOfContext) PCONTEXT    lpContext,
+    _In_                              ULONG       cbSizeOfContext
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_IOCTL_ROUTINE)(
-    USHORT   IoctlType,
-    PVOID    lpvData,
-    ULONG    cbSize
+    _In_                  USHORT   IoctlType,
+    _Pre_bytecap_(cbSize) PVOID    lpvData,
+    _In_                  ULONG    cbSize
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_OLDKD_READ_PHYSICAL_MEMORY)(
-    ULONGLONG        address,
-    PVOID            buffer,
-    ULONG            count,
-    PULONG           bytesread
+    _In_                                     ULONGLONG        address,
+    _Out_writes_bytes_to_(count, *bytesread) PVOID            buffer,
+    _In_                                     ULONG            count,
+    _Out_                                    PULONG           bytesread
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_OLDKD_WRITE_PHYSICAL_MEMORY)(
-    ULONGLONG        address,
-    PVOID            buffer,
-    ULONG            length,
-    PULONG           byteswritten
+    _In_                     ULONGLONG        address,
+    _In_reads_bytes_(length) PVOID            buffer,
+    _In_                     ULONG            length,
+    _Out_                    PULONG           byteswritten
     );
 
 
@@ -274,31 +274,31 @@ typedef struct _EXTSTACKTRACE64 {
 typedef
 ULONG
 (WDBGAPI*PWINDBG_STACKTRACE_ROUTINE)(
-    ULONG             FramePointer,
-    ULONG             StackPointer,
-    ULONG             ProgramCounter,
-    PEXTSTACKTRACE    StackFrames,
-    ULONG             Frames
+    _In_                            ULONG             FramePointer,
+    _In_                            ULONG             StackPointer,
+    _In_                            ULONG             ProgramCounter,
+    _Out_writes_to_(Frames, return) PEXTSTACKTRACE    StackFrames,
+    _In_                            ULONG             Frames
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_STACKTRACE_ROUTINE32)(
-    ULONG             FramePointer,
-    ULONG             StackPointer,
-    ULONG             ProgramCounter,
-    PEXTSTACKTRACE32  StackFrames,
-    ULONG             Frames
+    _In_                            ULONG             FramePointer,
+    _In_                            ULONG             StackPointer,
+    _In_                            ULONG             ProgramCounter,
+    _Out_writes_to_(Frames, return) PEXTSTACKTRACE32  StackFrames,
+    _In_                            ULONG             Frames
     );
 
 typedef
 ULONG
 (WDBGAPI*PWINDBG_STACKTRACE_ROUTINE64)(
-    ULONG64           FramePointer,
-    ULONG64           StackPointer,
-    ULONG64           ProgramCounter,
-    PEXTSTACKTRACE64  StackFrames,
-    ULONG             Frames
+    _In_                            ULONG64           FramePointer,
+    _In_                            ULONG64           StackPointer,
+    _In_                            ULONG64           ProgramCounter,
+    _Out_writes_to_(Frames, return) PEXTSTACKTRACE64  StackFrames,
+    _In_                            ULONG             Frames
     );
 
 typedef struct _WINDBG_EXTENSION_APIS {
@@ -372,71 +372,71 @@ typedef struct _WINDBG_OLDKD_EXTENSION_APIS {
 typedef
 VOID
 (WDBGAPI*PWINDBG_OLD_EXTENSION_ROUTINE)(
-    ULONG                   dwCurrentPc,
-    PWINDBG_EXTENSION_APIS  lpExtensionApis,
-    PCSTR                   lpArgumentString
+    _In_ ULONG                   dwCurrentPc,
+    _In_ PWINDBG_EXTENSION_APIS  lpExtensionApis,
+    _In_ PCSTR                   lpArgumentString
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_ROUTINE)(
-    HANDLE                  hCurrentProcess,
-    HANDLE                  hCurrentThread,
-    ULONG                   dwCurrentPc,
-    ULONG                   dwProcessor,
-    PCSTR                   lpArgumentString
+    _In_ HANDLE                  hCurrentProcess,
+    _In_ HANDLE                  hCurrentThread,
+    _In_ ULONG                   dwCurrentPc,
+    _In_ ULONG                   dwProcessor,
+    _In_ PCSTR                   lpArgumentString
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_ROUTINE32)(
-    HANDLE                  hCurrentProcess,
-    HANDLE                  hCurrentThread,
-    ULONG                   dwCurrentPc,
-    ULONG                   dwProcessor,
-    PCSTR                   lpArgumentString
+    _In_ HANDLE                  hCurrentProcess,
+    _In_ HANDLE                  hCurrentThread,
+    _In_ ULONG                   dwCurrentPc,
+    _In_ ULONG                   dwProcessor,
+    _In_ PCSTR                   lpArgumentString
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_ROUTINE64)(
-    HANDLE                  hCurrentProcess,
-    HANDLE                  hCurrentThread,
-    ULONG64                 dwCurrentPc,
-    ULONG                   dwProcessor,
-    PCSTR                   lpArgumentString
+    _In_ HANDLE                  hCurrentProcess,
+    _In_ HANDLE                  hCurrentThread,
+    _In_ ULONG64                 dwCurrentPc,
+    _In_ ULONG                   dwProcessor,
+    _In_ PCSTR                   lpArgumentString
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_OLDKD_EXTENSION_ROUTINE)(
-    ULONG                        dwCurrentPc,
-    PWINDBG_OLDKD_EXTENSION_APIS lpExtensionApis,
-    PCSTR                        lpArgumentString
+    _In_ ULONG                        dwCurrentPc,
+    _In_ PWINDBG_OLDKD_EXTENSION_APIS lpExtensionApis,
+    _In_ PCSTR                        lpArgumentString
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT)(
-    PWINDBG_EXTENSION_APIS lpExtensionApis,
-    USHORT                 MajorVersion,
-    USHORT                 MinorVersion
+    _In_ PWINDBG_EXTENSION_APIS lpExtensionApis,
+    _In_ USHORT                 MajorVersion,
+    _In_ USHORT                 MinorVersion
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT32)(
-    PWINDBG_EXTENSION_APIS32 lpExtensionApis,
-    USHORT                   MajorVersion,
-    USHORT                   MinorVersion
+    _In_ PWINDBG_EXTENSION_APIS32 lpExtensionApis,
+    _In_ USHORT                   MajorVersion,
+    _In_ USHORT                   MinorVersion
     );
 
 typedef
 VOID
 (WDBGAPI*PWINDBG_EXTENSION_DLL_INIT64)(
-    PWINDBG_EXTENSION_APIS64 lpExtensionApis,
-    USHORT                   MajorVersion,
-    USHORT                   MinorVersion
+    _In_ PWINDBG_EXTENSION_APIS64 lpExtensionApis,
+    _In_ USHORT                   MajorVersion,
+    _In_ USHORT                   MinorVersion
     );
 
 typedef
@@ -1509,6 +1509,12 @@ typedef struct _KDDEBUGGER_DATA64 {
     ULONG64 PointerAuthMask;
     USHORT  OffsetPrcbExceptionStack;
 
+    //
+    // Windows 11 Selenium Addition
+    //
+
+    ULONG64 PointerIgnoreBits;
+
 } KDDEBUGGER_DATA64, *PKDDEBUGGER_DATA64;
 
 
@@ -1671,6 +1677,7 @@ typedef struct _KDDEBUGGER_DATA64 {
 
 //////////////////////////////////////////////////////////////////////////*/
 
+struct _FIELD_INFO;
 
 typedef
 ULONG
@@ -2739,9 +2746,9 @@ GetPoolHeaderSizeFieldValue (
     )
 {
     ULONG64 StateLoc;
-    ULONG PoolKey;
+    ULONG PoolKey = 0;
     POOL_HEADER_SIZE_64 PoolSizes = {0};
-    ULONG PlainPoolHeader;
+    ULONG PlainPoolHeader = 1;
     ULONG FieldValueTmp = 0;
     PCSTR FieldNameStr;
     ULONG Status = ERROR_SUCCESS;
@@ -2750,15 +2757,12 @@ GetPoolHeaderSizeFieldValue (
 
     StateLoc = GetExpression("nt!ExPoolState");
 
-    if (StateLoc == 0) {
-        dprintf("Unable to get global pool state.\n");
-        return ERROR_INVALID_DATA;
+    if (StateLoc != 0) {
+        PlainPoolHeader = GetFieldValue(StateLoc,
+                                        "nt!_EX_POOL_HEAP_MANAGER_STATE",
+                                        "PoolKey",
+                                        PoolKey);
     }
-
-    PlainPoolHeader = GetFieldValue(StateLoc,
-                                    "nt!_EX_POOL_HEAP_MANAGER_STATE",
-                                    "PoolKey",
-                                    PoolKey);
 
     if (PlainPoolHeader) {
         switch (FieldName) {

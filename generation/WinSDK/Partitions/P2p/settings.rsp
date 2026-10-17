@@ -1,7 +1,6 @@
 --traverse
 <IncludeRoot>/um/pnrpns.h
 <IncludeRoot>/um/pnrpdef.h
-<IncludeRoot>/um/p2p.h
 <IncludeRoot>/um/drt.h
 <IncludeRoot>/um/PeerDist.h
 --namespace

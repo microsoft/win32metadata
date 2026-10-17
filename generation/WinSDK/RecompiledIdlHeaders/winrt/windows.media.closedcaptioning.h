@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -137,6 +137,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2 ABI::Windows::Media::ClosedCaptioning::IClosedCaptionPropertiesStatics2
 
 #endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                interface IClosedCaptionTheme;
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme ABI::Windows::Media::ClosedCaptioning::IClosedCaptionTheme
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                interface IClosedCaptionThemeStatics;
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics ABI::Windows::Media::ClosedCaptioning::IClosedCaptionThemeStatics
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -219,6 +249,16 @@ namespace ABI {
         namespace Media {
             namespace ClosedCaptioning {
                 typedef enum ClosedCaptionStyle : int ClosedCaptionStyle;
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                class ClosedCaptionTheme;
             } /* ClosedCaptioning */
         } /* Media */
     } /* Windows */
@@ -473,6 +513,139 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
 
 /*
  *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionTheme
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionTheme[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionTheme";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                MIDL_INTERFACE("d3974055-b9b5-52a4-b655-30661f73d1c1")
+                IClosedCaptionTheme : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Id(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_DisplayName(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontColor(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionColor* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ComputedFontColor(
+                        ABI::Windows::UI::Color* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontOpacity(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontSize(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionSize* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontStyle(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionStyle* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_FontEffect(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionEdgeEffect* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_BackgroundColor(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionColor* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ComputedBackgroundColor(
+                        ABI::Windows::UI::Color* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_BackgroundOpacity(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RegionColor(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionColor* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ComputedRegionColor(
+                        ABI::Windows::UI::Color* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_RegionOpacity(
+                        ABI::Windows::Media::ClosedCaptioning::ClosedCaptionOpacity* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IClosedCaptionTheme = __uuidof(IClosedCaptionTheme);
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionThemeStatics[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace ClosedCaptioning {
+                MIDL_INTERFACE("0938ae0f-214e-5760-88c9-bb3f1b54f3c7")
+                IClosedCaptionThemeStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetAvailableThemes(
+                        UINT32* resultLength,
+                        ABI::Windows::Media::ClosedCaptioning::IClosedCaptionTheme*** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetSelectedTheme(
+                        ABI::Windows::Media::ClosedCaptioning::IClosedCaptionTheme** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySetSelectedTheme(
+                        ABI::Windows::Media::ClosedCaptioning::IClosedCaptionTheme* value,
+                        boolean* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_ThemesChanged(
+                        __FIEventHandler_1_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_ThemesChanged(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_SelectedThemeChanged(
+                        __FIEventHandler_1_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_SelectedThemeChanged(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IClosedCaptionThemeStatics = __uuidof(IClosedCaptionThemeStatics);
+            } /* ClosedCaptioning */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Media.ClosedCaptioning.ClosedCaptionProperties
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -493,6 +666,30 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
+/*
+ *
+ * Class Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.ClosedCaptioning.IClosedCaptionTheme ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Media_ClosedCaptioning_ClosedCaptionTheme_DEFINED
+#define RUNTIMECLASS_Windows_Media_ClosedCaptioning_ClosedCaptionTheme_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_ClosedCaptioning_ClosedCaptionTheme[] = L"Windows.Media.ClosedCaptioning.ClosedCaptionTheme";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
 #else // !defined(__cplusplus)
 /* Forward Declarations */
 #ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics_FWD_DEFINED__
@@ -506,6 +703,18 @@ typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPrope
 typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2 __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2;
 
 #endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionPropertiesStatics2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme;
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics;
+
+#endif // ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -869,6 +1078,243 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
 
 /*
  *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionTheme
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionTheme[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionTheme";
+typedef struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Id)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_DisplayName)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_FontColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_ComputedFontColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        struct __x_ABI_CWindows_CUI_CColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_FontOpacity)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionOpacity* value);
+    HRESULT (STDMETHODCALLTYPE* get_FontSize)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionSize* value);
+    HRESULT (STDMETHODCALLTYPE* get_FontStyle)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionStyle* value);
+    HRESULT (STDMETHODCALLTYPE* get_FontEffect)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionEdgeEffect* value);
+    HRESULT (STDMETHODCALLTYPE* get_BackgroundColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_ComputedBackgroundColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        struct __x_ABI_CWindows_CUI_CColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_BackgroundOpacity)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionOpacity* value);
+    HRESULT (STDMETHODCALLTYPE* get_RegionColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_ComputedRegionColor)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        struct __x_ABI_CWindows_CUI_CColor* value);
+    HRESULT (STDMETHODCALLTYPE* get_RegionOpacity)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* This,
+        enum __x_ABI_CWindows_CMedia_CClosedCaptioning_CClosedCaptionOpacity* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeVtbl;
+
+interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_Id(This, value) \
+    ((This)->lpVtbl->get_Id(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_DisplayName(This, value) \
+    ((This)->lpVtbl->get_DisplayName(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_FontColor(This, value) \
+    ((This)->lpVtbl->get_FontColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_ComputedFontColor(This, value) \
+    ((This)->lpVtbl->get_ComputedFontColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_FontOpacity(This, value) \
+    ((This)->lpVtbl->get_FontOpacity(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_FontSize(This, value) \
+    ((This)->lpVtbl->get_FontSize(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_FontStyle(This, value) \
+    ((This)->lpVtbl->get_FontStyle(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_FontEffect(This, value) \
+    ((This)->lpVtbl->get_FontEffect(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_BackgroundColor(This, value) \
+    ((This)->lpVtbl->get_BackgroundColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_ComputedBackgroundColor(This, value) \
+    ((This)->lpVtbl->get_ComputedBackgroundColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_BackgroundOpacity(This, value) \
+    ((This)->lpVtbl->get_BackgroundOpacity(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_RegionColor(This, value) \
+    ((This)->lpVtbl->get_RegionColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_ComputedRegionColor(This, value) \
+    ((This)->lpVtbl->get_ComputedRegionColor(This, value))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_get_RegionOpacity(This, value) \
+    ((This)->lpVtbl->get_RegionOpacity(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
+ * Interface Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#if !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_ClosedCaptioning_IClosedCaptionThemeStatics[] = L"Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics";
+typedef struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAvailableThemes)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        UINT32* resultLength,
+        __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme*** result);
+    HRESULT (STDMETHODCALLTYPE* GetSelectedTheme)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme** result);
+    HRESULT (STDMETHODCALLTYPE* TrySetSelectedTheme)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionTheme* value,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* add_ThemesChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_ThemesChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_SelectedThemeChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_SelectedThemeChanged)(__x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStaticsVtbl;
+
+interface __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_GetAvailableThemes(This, resultLength, result) \
+    ((This)->lpVtbl->GetAvailableThemes(This, resultLength, result))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_GetSelectedTheme(This, result) \
+    ((This)->lpVtbl->GetSelectedTheme(This, result))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_TrySetSelectedTheme(This, value, result) \
+    ((This)->lpVtbl->TrySetSelectedTheme(This, value, result))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_add_ThemesChanged(This, handler, token) \
+    ((This)->lpVtbl->add_ThemesChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_remove_ThemesChanged(This, token) \
+    ((This)->lpVtbl->remove_ThemesChanged(This, token))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_add_SelectedThemeChanged(This, handler, token) \
+    ((This)->lpVtbl->add_SelectedThemeChanged(This, handler, token))
+
+#define __x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_remove_SelectedThemeChanged(This, token) \
+    ((This)->lpVtbl->remove_SelectedThemeChanged(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaptionThemeStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+/*
+ *
  * Class Windows.Media.ClosedCaptioning.ClosedCaptionProperties
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -888,6 +1334,30 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CClosedCaptioning_CIClosedCaption
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_ClosedCaptioning_ClosedCaptionProperties[] = L"Windows.Media.ClosedCaptioning.ClosedCaptionProperties";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.Media.ClosedCaptioning.ClosedCaptionTheme
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.ClosedCaptioning.IClosedCaptionThemeStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.Media.ClosedCaptioning.IClosedCaptionTheme ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+#ifndef RUNTIMECLASS_Windows_Media_ClosedCaptioning_ClosedCaptionTheme_DEFINED
+#define RUNTIMECLASS_Windows_Media_ClosedCaptioning_ClosedCaptionTheme_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_Media_ClosedCaptioning_ClosedCaptionTheme[] = L"Windows.Media.ClosedCaptioning.ClosedCaptionTheme";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 
 #endif // defined(__cplusplus)
 #pragma pop_macro("MIDL_CONST_ID")

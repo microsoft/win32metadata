@@ -103,7 +103,7 @@
 #define XAUDIO2_MAX_BUFFERS_SYSTEM      2             // Maximum buffers allowed for system threads (Xbox 360 only)
 #define XAUDIO2_MAX_AUDIO_CHANNELS      64            // Maximum channels in an audio stream
 #define XAUDIO2_MIN_SAMPLE_RATE         1000          // Minimum audio sample rate supported
-#define XAUDIO2_MAX_SAMPLE_RATE         200000        // Maximum audio sample rate supported
+#define XAUDIO2_MAX_SAMPLE_RATE         384000        // Maximum audio sample rate supported
 #define XAUDIO2_MAX_VOLUME_LEVEL        16777216.0f   // Maximum acceptable volume level (2^24)
 #define XAUDIO2_MIN_FREQ_RATIO          (1/1024.0f)   // Minimum SetFrequencyRatio argument
 #define XAUDIO2_MAX_FREQ_RATIO          1024.0f       // Maximum MaxFrequencyRatio argument

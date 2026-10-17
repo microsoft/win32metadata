@@ -204,10 +204,60 @@ extern "C" {
 #define SIPAEV_AMD_PSP_DF_RIB14 (0x00008265)
 #define SIPAEV_AMD_PSP_DF_RIB15 (0x00008266)
 #define SIPAEV_AMD_SECURE_DEBUG_UNLOCK (0x00008267)
+#define SIPAEV_AMD_PROMONTORY_21 (0x00008268)
+#define SIPAEV_AMD_MPIO_E32_PHY_FW (0x00008269)
+#define SIPAEV_AMD_MPIO_C20_PHY_FW (0x0000826A)
+#define SIPAEV_AMD_PMU3_DATA (0x0000826B)
+#define SIPAEV_AMD_PMU4_DATA (0x0000826C)
+#define SIPAEV_AMD_PMU5_DATA (0x0000826D)
+#define SIPAEV_AMD_PMU6_DATA (0x0000826E)
+#define SIPAEV_AMD_PMU7_DATA (0x0000826F)
+#define SIPAEV_AMD_PMU8_DATA (0x00008270)
+#define SIPAEV_AMD_PMU9_DATA (0x00008271)
+#define SIPAEV_AMD_PMU10_DATA (0x00008272)
+#define SIPAEV_AMD_PMU11_DATA (0x00008273)
+#define SIPAEV_AMD_PMU12_DATA (0x00008274)
+#define SIPAEV_AMD_PMU13_DATA (0x00008275)
+#define SIPAEV_AMD_PMU14_DATA (0x00008276)
+#define SIPAEV_AMD_PMU15_DATA (0x00008277)
+#define SIPAEV_AMD_PMU3 (0x00008278)
+#define SIPAEV_AMD_PMU4 (0x00008279)
+#define SIPAEV_AMD_PMU5 (0x0000827A)
+#define SIPAEV_AMD_PMU6 (0x0000827B)
+#define SIPAEV_AMD_PMU7 (0x0000827C)
+#define SIPAEV_AMD_PMU8 (0x0000827D)
+#define SIPAEV_AMD_PMU9 (0x0000827E)
+#define SIPAEV_AMD_PMU10 (0x0000827F)
+#define SIPAEV_AMD_PMU11 (0x00008280)
+#define SIPAEV_AMD_PMU12 (0x00008281)
+#define SIPAEV_AMD_PMU13 (0x00008282)
+#define SIPAEV_AMD_PMU14 (0x00008283)
+#define SIPAEV_AMD_PMU15 (0x00008284)
+#define SIPAEV_AMD_MINIZSC_MSMU (0x00008285)
+#define SIPAEV_AMD_DMCU_ERAM (0x00008286)
+#define SIPAEV_AMD_DMCU_ISR (0x00008287)
+#define SIPAEV_AMD_DMUB_ERAM (0x00008288)
+#define SIPAEV_AMD_DMUB_ISR (0x00008289)
+#define SIPAEV_AMD_UZSC_MSMU (0x0000828A)
+#define SIPAEV_AMD_MINIZSC_MSMU_1 (0x0000828B)
+#define SIPAEV_AMD_S3_IMAGE (0x0000828C)
 #define SIPAEV_AMD_PSP_BL_END (0x000082FF)
 #define SIPAEV_AMD_FTPM_DRV (0x00008300)
 #define SIPAEV_AMD_DRTM_DRV (0x00008301)
 #define SIPAEV_AMD_AGESA_DRV (0x00008302)
+#define SIPAEV_AMD_PSP_SOC_DRIVER (0x00008303)
+#define SIPAEV_AMD_PSP_HAD_DRIVER (0x00008304)
+#define SIPAEV_AMD_PSP_BOOT_DRIVER (0x00008305)
+#define SIPAEV_AMD_PSP_INTERFACE_DRIVER (0x00008306)
+#define SIPAEV_AMD_PSP_SFDR_DRIVER (0x00008307)
+#define SIPAEV_AMD_DRV_SEV (0x00008308)
+#define SIPAEV_AMD_DRV_RAS (0x00008309)
+#define SIPAEV_AMD_DRV_ASD (0x0000830A)
+#define SIPAEV_AMD_DRV_MFD (0x0000830B)
+#define SIPAEV_AMD_DRV_FHP (0x0000830C)
+#define SIPAEV_AMD_DRV_SPDM (0x0000830D)
+#define SIPAEV_AMD_DRV_PLAT (0x0000830E)
+#define SIPAEV_AMD_DRV_IPKEYMGR (0x0000830F)
 #define SIPAEV_AMD_PSP_END (0x000083FF)
 //----------------------------------PCR Event Types for ARM DRTM
 #define SIPAEV_ARM_BASE (0x00009000)
@@ -546,21 +596,31 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_GE
 
-//TODO:: need to talk to someone about what this is for
-//and if we need it
 #if NTDDI_VERSION >= NTDDI_WIN11_DT
+
+//
+// These events contain details of the signers allowed to supplement the
+// associated SIPAEVENT_SI_POLICY Application Control policy event, or the
+// PolicyID that the associated SIPAEVENT_SI_POLICY Application Control policy
+// event supplements.
+//
+#define SIPAEVENT_SI_POLICY_SUPPLEMENTAL_SIGNER         (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x0038)
+
+#define SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY         (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x0039)
 
 //
 // This event contains the details of the sealed SI policy - namely what the
 //  sealed package will contain. (In other words, what the minimum values going
 //  forward will be.)
 //
-
 #define SIPAEVENT_VSM_SEALED_SI_POLICY                  (SIPAEVENTTYPE_OSPARAMETER + \
                                                          0x003A)
 
 #define SIPAEVENT_VSM_DRTM_KEYROLL_DETECTED             (SIPAEVENTTYPE_OSPARAMETER + \
                                                          0x003B)
+
 //
 // This event is used in Hope Chest SRTM scenarios. It contains the anti-rollback UnsesalPolicy
 // associated with sealed protector.
@@ -578,12 +638,159 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
                                                          0x003D)
 
 //
-// Note: 0x3D...0x39 are currently unused; new events can be added in this range
+//  When an ReFS volume attests via PKCS7 certificate, the fingerprint of the
+//  leaf certificate.
+//
+
+#define SIPAEVENT_REFS_ATTESTATION_SUMMARY              (SIPAEVENTTYPE_OSPARAMETER + \
+                                                         0x003E)
+
+//
+// Note: [0x3F, 0x40) are currently unused; new events can be added in this range
 //
 
 #define SIPAEVENT_VTL1_DUMP_CONFIG                      (SIPAEVENTTYPE_OSPARAMETER + \
                                                          0x0040)
 
+typedef enum _SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE {
+
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_NONE        = 0x00000000,
+
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_CERTIFICATE = 0x00000001,
+
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_TPM         = 0x00000002,
+
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE_KEY_RING    = 0x00000004,
+
+} SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE;
+
+DEFINE_ENUM_FLAG_OPERATORS(SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE)
+
+#define SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER_VERSION (1)
+#define SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER_VERSION (1)
+
+typedef struct _SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER {
+
+    //
+    //  The total size of this structure.
+    //
+
+    ULONG Size;
+
+    //
+    //  Version field.
+    //
+
+    ULONG Version;
+
+    //
+    //  The SHA256 fingerprint of both the leaf and root
+    //  certificates. In the case of the certificate being
+    //  self-signed, the below values are equal.
+    //
+
+    ULONG LeafCertificateFingerprintSize;
+    BYTE LeafCertificateFingerprint[64];
+
+    ULONG RootCertificateFingerprintSize;
+    BYTE RootCertificateFingerprint[64];
+
+    //
+    //  The hash that attested with this certificate.
+    //
+
+    ULONG AttestedHashSize;
+    BYTE AttestedHash[64];
+
+    //
+    //  Offset and size of the user payload provided with this
+    //  certificate. 0 if not present.
+    //
+
+    ULONG UserPayloadOffset;
+    ULONG UserPayloadSize;
+
+    //
+    // Leaf certificate X500 DER Issuer.
+    //
+
+    ULONG LeafCertificateIssuerBlobOffset;
+    ULONG LeafCertificateIssuerBlobSize;
+
+    //
+    //  Leaf certificate X500 DER Subject.
+    //
+
+    ULONG LeafCertificateSubjectBlobOffset;
+    ULONG LeafCertificateSubjectBlobSize;
+
+    //
+    //  Some reserved fields for future proofing. These can be used to
+    //  f.e. include the full certificate or the supplemental info in
+    //  this structure.
+    //
+    //  We reserve ULONGLONGs to enforce quad alignment on this structure.
+    //
+
+    ULONGLONG Reserved[2];
+
+    BYTE Data[ANYSIZE_ARRAY];
+
+} SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER, * PSIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER;
+
+typedef struct _SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER {
+
+    //
+    //  The total size of this structure, since the Certificate field is
+    //  variably sized.
+    //
+
+    ULONG Size;
+
+    //
+    //  Version field.
+    //
+
+    ULONG Version;
+
+    //
+    //  The attestation state of the volume as per this mount.
+    //
+
+    SIPAEVENT_REFS_ATTESTATION_ATTESTED_TYPE AttestedType;
+
+    //
+    //  The attested hash of the volume as of this mount.
+    //
+
+    ULONG AttestedHashSize;
+    BYTE AttestedHash[64];
+
+    //
+    //  The proof of origin hash.
+    //
+
+    ULONG ProofOfOriginHashSize;
+    BYTE ProofOfOriginHash[64];
+
+    //
+    //  Some reserved fields for future proofing. These can be used to
+    //  f.e. include the full certificate or the supplemental info in
+    //  this structure.
+    //
+    //  We reserve ULONGLONGs to enforce quad alignment on this structure.
+    //
+
+    ULONGLONG Reserved[4];
+
+    //
+    //  If a certificate was used to sign the volume, a header describing
+    //  said certificate and the optional user payload associated with it.
+    //
+
+    SIPAEVENT_REFS_ATTESTATION_CERTIFICATE_HEADER CertificateHeader;
+
+} SIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER, *PSIPAEVENT_REFS_ATTESTATION_SUMMARY_HEADER;
 
 #endif// NTDDI_VERSION >= NTDDI_WIN11_DT
 
@@ -631,10 +838,13 @@ typedef struct _SIPAEVENT_REFS_ROLLBACK_PROTECTION_USER_PAYLOAD_HASH_DATA {
 
 #define SIPAEVENT_MODULE_VERSION           (SIPAEVENTTYPE_LOADEDMODULE + \
                                             0x000e)
+#endif //NTDDI_VERSION >= NTDDI_WIN10_GE
+
+#if NTDDI_VERSION >= NTDDI_WIN11_DT
 
 #define SIPAEVENT_PUBLISHER_OEMNAME        (SIPAEVENTTYPE_LOADEDMODULE + \
                                             0x000f)
-#endif //NTDDI_VERSION >= NTDDI_WIN10_GE
+#endif //NTDDI_VERSION >= NTDDI_WIN11_DT
 
 //SIPAEVENTTYPE_TRUSTPOINT
 #define SIPAEVENT_QUOTE                    (SIPAEVENTTYPE_NONMEASURED + \
@@ -1154,6 +1364,50 @@ typedef struct tag_SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD
 } SIPAEVENT_SI_POLICY_SIGNER_PAYLOAD, *PSIPAEVENT_SI_POLICY_SIGNER_PAYLOAD;
 
 #endif // NTDDI_VERSION >= NTDDI_WIN11_GA
+
+#if NTDDI_VERSION >= NTDDI_WIN11_DT
+
+//
+// Payload structure used to carry additional information for a supplemental
+// policy
+//
+typedef struct tag_SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1
+{
+    //
+    // Version of this structure.
+    // For tag_SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1 this value is going to be set to 1.
+    //
+    UINT32 PayloadVersion;
+
+    //
+    // Offset in bytes from the start of this structure to the first byte
+    // of VarData.
+    //
+    UINT32 VarDataOffset;
+
+    //
+    // Indicates the length (in bytes) of the policy name stored as part of VarData.
+    // This is the same name as the corresponding SIPAEVENT_SI_POLICY_PAYLOAD PolicyName.
+    //
+    UINT16 PolicyNameLength;
+
+    //
+    // Indicates the length (in bytes) of the base policy id stored as part of VarData.
+    //
+    UINT16 BasePolicyIDLength;
+
+    //
+    // Trailing data layout is:
+    //
+    // WCHAR PolicyName[PolicyNameLength / sizeof(WCHAR)]
+    // WCHAR BasePolicyID[BasePolicyIDLength / sizeof(WCHAR)]
+    //
+    // _Field_size_bytes_(PolicyNameLength + BasePolicyIDLength)
+    // BYTE VarData[ANYSIZE_ARRAY];
+} SIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1, *PSIPAEVENT_SI_POLICY_SUPPLEMENTAL_POLICY_INFO_V1;
+
+
+#endif // NTDDI_VERSION >= NTDDI_WIN11_DT
 
 //
 // Payload structure used to carry information about revocation lists.

@@ -6,7 +6,6 @@ using Windows.Win32.Data.HtmlHelp;
 using Windows.Win32.Data.RightsManagement;
 using Windows.Win32.Data.Xml.MsXml;
 using Windows.Win32.Data.Xml.XmlLite;
-using Windows.Win32.Devices.AllJoyn;
 using Windows.Win32.Devices.BiometricFramework;
 using Windows.Win32.Devices.Bluetooth;
 using Windows.Win32.Devices.Communication;

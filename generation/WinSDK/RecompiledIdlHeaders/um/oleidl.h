@@ -4000,6 +4000,15 @@ typedef /* [unique] */  __RPC_unique_pointer IDropTarget *LPDROPTARGET;
 
 #define	DROPEFFECT_SCROLL	( 0x80000000 )
 
+// NEWTARGET and BACKGROUNDTARGET are hints to the system about the logical target within your drop target.
+// NEWTARGET: The drag is now over a new logical target (e.g., individual files and folders on the Desktop)
+// BACKGROUNDTARGET: The drag is now over a logical target that represents the background (e.g., the Desktop itself)
+// The system uses these flags as hints when determining whether to trigger additional feedback during the drag.
+// They should only be set when the drop target can accept the current drop (i.e. COPY/MOVE/LINK is also returned).
+#define	DROPEFFECT_NEWTARGET	( 0x40000000 )
+
+#define	DROPEFFECT_BACKGROUNDTARGET	( 0x20000000 )
+
 // default inset-width of the hot zone, in pixels
 //   typical use: GetProfileInt("windows","DragScrollInset",DD_DEFSCROLLINSET)
 #define	DD_DEFSCROLLINSET	( 11 )

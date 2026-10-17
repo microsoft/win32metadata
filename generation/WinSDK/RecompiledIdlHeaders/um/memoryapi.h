@@ -1157,7 +1157,7 @@ QueryPartitionInformation(
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 #pragma region Desktop Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -1166,36 +1166,12 @@ WINBASEAPI
 _Success_(return != FALSE)
 BOOL
 WINAPI
-GetMemoryNumaClosestInitiatorNode(
-    _In_ ULONG TargetNodeNumber,
-    _Out_ ULONG* InitiatorNodeNumber
+GetNumaNodeMemoryClosestInitiatorNode(
+    _In_ USHORT TargetNodeNumber,
+    _Out_ USHORT* InitiatorNodeNumber
     );
 
-#define WIN32_MEMORY_NUMA_PERFORMANCE_ALL_TARGET_NODE   0xffffffff
-
-#define WIN32_MEMORY_NUMA_PERFORMANCE_READ_LATENCY      0x1
-#define WIN32_MEMORY_NUMA_PERFORMANCE_READ_BANDWIDTH    0x2
-#define WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_LATENCY     0x4
-#define WIN32_MEMORY_NUMA_PERFORMANCE_WRITE_BANDWIDTH   0x8
-
-typedef struct _WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY {
-
-    //
-    // The initiator processor node. The performance value is the measurement of operations from the
-    // initiator processor node to the target memory node.
-    // This value is 0-based.
-    //
-    ULONG InitiatorNodeNumber;
-
-    //
-    // The target memory node. This value is 0-based.
-    //
-    ULONG TargetNodeNumber;
-
-    //
-    // DataType should be one of the WIN32_MEMROY_NUMA_PERFORMANCE_* types
-    //
-    UCHAR DataType;
+typedef struct NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION {
 
     struct {
 
@@ -1218,31 +1194,66 @@ typedef struct _WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY {
     //
     ULONGLONG MinTransferSizeInBytes;
 
-    //
-    // EntryValue is latency or bandwidth depends on the DataType.
-    // Latency unit is picoseconds. Bandwidth unit is MB/s.
-    //
-    ULONGLONG EntryValue;
-} WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY;
+} NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION;
 
-typedef struct _WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT {
-    ULONG EntryCount;
+typedef struct NUMA_NODE_MEMORY_PERFORMANCE_LATENCY {
 
-    WIN32_MEMORY_NUMA_PERFORMANCE_ENTRY PerformanceEntries[ANYSIZE_ARRAY];
-} WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT;
+    NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION Condition;
+
+    //
+    // Latency unit is in picoseconds.
+    //
+    ULONGLONG Latency;
+
+} NUMA_NODE_MEMORY_PERFORMANCE_LATENCY;
+
+typedef struct NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH {
+
+    NUMA_NODE_MEMORY_PERFORMANCE_MEASUREMENT_CONDITION Condition;
+
+    //
+    // Bandwidth unit is in MB/s.
+    //
+    ULONGLONG Bandwidth;
+
+} NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH;
 
 BOOL
 WINAPI
-GetMemoryNumaPerformanceInformation(
-    _In_ ULONG NodeNumber,
-    _In_ UCHAR DataType,
-    _Outptr_ WIN32_MEMORY_NUMA_PERFORMANCE_INFORMATION_OUTPUT** PerfInfo
+GetNumaNodeMemoryReadLatency(
+    _In_ USHORT TargetNodeNumber,
+    _In_ USHORT InitiatorNodeNumber,
+    _Out_ NUMA_NODE_MEMORY_PERFORMANCE_LATENCY* Latency
+    );
+
+BOOL
+WINAPI
+GetNumaNodeMemoryWriteLatency(
+    _In_ USHORT TargetNodeNumber,
+    _In_ USHORT InitiatorNodeNumber,
+    _Out_ NUMA_NODE_MEMORY_PERFORMANCE_LATENCY* Latency
+    );
+
+BOOL
+WINAPI
+GetNumaNodeMemoryReadBandwidth(
+    _In_ USHORT TargetNodeNumber,
+    _In_ USHORT InitiatorNodeNumber,
+    _Out_ NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH* Bandwidth
+    );
+
+BOOL
+WINAPI
+GetNumaNodeMemoryWriteBandwidth(
+    _In_ USHORT TargetNodeNumber,
+    _In_ USHORT InitiatorNodeNumber,
+    _Out_ NUMA_NODE_MEMORY_PERFORMANCE_BANDWIDTH* Bandwidth
     );
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
+#endif // (NTDDI_VERSION >= NTDDI_WIN11_GE)
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)

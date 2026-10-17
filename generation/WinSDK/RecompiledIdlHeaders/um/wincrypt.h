@@ -3746,6 +3746,17 @@ CryptDecodeObject(
 // TPM line specific EK CA KeyId
 #define szOID_ENROLL_EK_CA_KEYID            "1.3.6.1.4.1.311.21.43" // blob
 
+// V2 attestation challenge attributes (pkcs10/CMC)
+#define szOID_ENROLL_V2_CONTAINER_NAME      "1.3.6.1.4.1.311.21.44"
+#define szOID_ENROLL_V2_EK_ALGORITHM        "1.3.6.1.4.1.311.21.45"
+#define szOID_ENROLL_V2_EK_PARAMETER        "1.3.6.1.4.1.311.21.46"
+#define szOID_ENROLL_V2_AIK_INFO            "1.3.6.1.4.1.311.21.47"
+#define szOID_ENROLL_V2_ATTESTATION_STATEMENT "1.3.6.1.4.1.311.21.48"
+
+// V2 attestation extension OID: present in issued certificates that completed
+// the HMAC-based attestation protocol.  Value is ASN.1 NULL; presence-only.
+#define szOID_CERTSRV_V2_ATTESTATION_VERIFIED  "1.3.6.1.4.1.311.21.49"
+
 // Subject Directory Attributes
 #define szOID_ATTR_SUPPORTED_ALGORITHMS     "2.5.4.52"
 #define szOID_ATTR_TPM_SPECIFICATION        "2.23.133.2.16"

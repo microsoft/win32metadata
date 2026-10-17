@@ -1,7 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO.Abstractions.TestingHelpers;
+using System.Linq;
 using System.Reflection;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Moq;
 using Xunit;
 
@@ -99,6 +103,60 @@ namespace MetadataUtils.Tests
             );
         }
 
+        [Theory]
+        [InlineData("MTMBUS_FUNCTION(0x00)", "FILE_ANY_ACCESS", 0x00660000u)]
+        [InlineData("MTM_PHYSICAL_DEVICE_FUNCTION(0x00)", "FILE_ANY_ACCESS", 0x00660c00u)]
+        [InlineData("MTM_PHYSICAL_DEVICE_FUNCTION(0x01)", "FILE_ANY_ACCESS", 0x00660c04u)]
+        [InlineData("MTM_PHYSICAL_DEVICE_FUNCTION(0x02)", "FILE_WRITE_ACCESS", 0x00668c08u)]
+        [InlineData("MTM_PHYSICAL_DEVICE_FUNCTION(0x03)", "FILE_WRITE_ACCESS", 0x00668c0cu)]
+        [InlineData("MTM_PHYSICAL_DEVICE_FUNCTION(0x04)", "FILE_WRITE_ACCESS", 0x00668c10u)]
+        public void ScrapeConstantsFromTraversedFiles_MultiTierMemoryIoctl_ProducesCorrectValue(string function, string access, uint expected)
+        {
+            var mockFileSystem = new MockFileSystem(new Dictionary<string, MockFileData>
+            {
+                {
+                    @"C:\test.h",
+                    new MockFileData($@"
+#define FILE_DEVICE_MULTITIER_MEMORY 0x66
+#define FILE_ANY_ACCESS 0
+#define FILE_WRITE_ACCESS 2
+#define METHOD_BUFFERED 0
+#define IOCTL_MTMBUS_BASE FILE_DEVICE_MULTITIER_MEMORY
+#define IOCTL_MTMBUS_DEVICE_FUNCTION_BASE 0
+#define IOCTL_MTM_PHYSICAL_DEVICE_FUNCTION_BASE 0x300
+#define IOCTL_TEST CTL_CODE(IOCTL_MTMBUS_BASE, {function}, METHOD_BUFFERED, {access})
+")
+                }
+            });
+            var fileMap = new Dictionary<string, string>
+            {
+                { "test.h", "Test.Namespace.Win32" }
+            };
+
+            using (var scraper = new TestableConstantsScraper(mockFileSystem))
+            {
+                scraper.ScrapeConstantsFromTraversedFiles(fileMap);
+            }
+
+            SyntaxTree tree = CSharpSyntaxTree.ParseText(mockFileSystem.GetFile("output.txt").TextContents);
+            CSharpCompilation compilation = CSharpCompilation.Create(
+                "IoctlConstantsTest",
+                new[] { tree },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            Diagnostic[] errors = compilation.GetDiagnostics()
+                .Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error)
+                .ToArray();
+            Assert.Empty(errors);
+
+            VariableDeclaratorSyntax constant = tree.GetRoot().DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single(variable => variable.Identifier.ValueText == "IOCTL_TEST");
+            var value = compilation.GetSemanticModel(tree).GetConstantValue(constant.Initializer.Value);
+            Assert.True(value.HasValue);
+            Assert.Equal(expected, Assert.IsType<uint>(value.Value));
+        }
+
         private class TestableConstantsScraper : IDisposable
         {
             private readonly object _instance;
@@ -123,6 +181,9 @@ namespace MetadataUtils.Tests
                 var writtenConstants = new Dictionary<string, string>();
                 var writtenConstantsField = scraperImplType.GetField("writtenConstants", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField);
                 writtenConstantsField.SetValue(this._instance, writtenConstants);
+
+                var withTypesField = scraperImplType.GetField("withTypes", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField);
+                withTypesField.SetValue(this._instance, new Dictionary<string, string>());
 
                 var requiredNamespaces = new WildcardDictionary(new());
                 var requiredNamespacesField = scraperImplType.GetField("requiredNamespaces", BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.SetField);

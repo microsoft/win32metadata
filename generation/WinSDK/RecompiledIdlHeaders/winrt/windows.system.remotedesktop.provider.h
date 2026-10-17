@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -263,6 +263,23 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Provider {
+                    interface IRemoteDesktopRegistrarStatics2;
+                } /* Provider */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2 ABI::Windows::System::RemoteDesktop::Provider::IRemoteDesktopRegistrarStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
@@ -385,6 +402,31 @@ typedef IVector<ABI::Windows::System::RemoteDesktop::Provider::RemoteDesktopInfo
 #endif /* DEF___FIVector_1_Windows__CSystem__CRemoteDesktop__CProvider__CRemoteDesktopInfo_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+
+#ifndef DEF___FIEventHandler_1_IInspectable_USE
+#define DEF___FIEventHandler_1_IInspectable_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("c50898f6-c536-5f47-8583-8b2c2438a13b"))
+IEventHandler<IInspectable*> : IEventHandler_impl<IInspectable*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.EventHandler`1<Object>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IEventHandler<IInspectable*> __FIEventHandler_1_IInspectable_t;
+#define __FIEventHandler_1_IInspectable ABI::Windows::Foundation::__FIEventHandler_1_IInspectable_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIEventHandler_1_IInspectable_USE */
+
 
 namespace ABI {
     namespace Windows {
@@ -970,6 +1012,52 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemot
 
 /*
  *
+ * Interface Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Provider.RemoteDesktopRegistrar
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Provider_IRemoteDesktopRegistrarStatics2[] = L"Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace RemoteDesktop {
+                namespace Provider {
+                    MIDL_INTERFACE("4139976d-4f8e-5bb4-b953-d6447cac4e5f")
+                    IRemoteDesktopRegistrarStatics2 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE add_ConnectionCenterRequested(
+                            __FIEventHandler_1_IInspectable* handler,
+                            EventRegistrationToken* token
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE remove_ConnectionCenterRequested(
+                            EventRegistrationToken token
+                            ) = 0;
+                    };
+
+                    MIDL_CONST_ID IID& IID_IRemoteDesktopRegistrarStatics2 = __uuidof(IRemoteDesktopRegistrarStatics2);
+                } /* Provider */
+            } /* RemoteDesktop */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.System.RemoteDesktop.Provider.PerformLocalActionRequestedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -1069,6 +1157,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1137,6 +1226,12 @@ typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesk
 typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2 __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -1497,6 +1592,53 @@ interface __FIVector_1_Windows__CSystem__CRemoteDesktop__CProvider__CRemoteDeskt
 
 #endif // ____FIVector_1_Windows__CSystem__CRemoteDesktop__CProvider__CRemoteDesktopInfo_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
+
+#if !defined(____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__)
+#define ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
+
+typedef interface __FIEventHandler_1_IInspectable __FIEventHandler_1_IInspectable;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIEventHandler_1_IInspectable;
+
+typedef struct __FIEventHandler_1_IInspectableVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIEventHandler_1_IInspectable* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIEventHandler_1_IInspectable* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIEventHandler_1_IInspectable* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIEventHandler_1_IInspectable* This,
+        IInspectable* sender,
+        IInspectable* args);
+
+    END_INTERFACE
+} __FIEventHandler_1_IInspectableVtbl;
+
+interface __FIEventHandler_1_IInspectable
+{
+    CONST_VTBL struct __FIEventHandler_1_IInspectableVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIEventHandler_1_IInspectable_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIEventHandler_1_IInspectable_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIEventHandler_1_IInspectable_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIEventHandler_1_IInspectable_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIEventHandler_1_IInspectable_INTERFACE_DEFINED__
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xf0000
 #if !defined(____FITypedEventHandler_2_Windows__CSystem__CRemoteDesktop__CProvider__CRemoteDesktopConnectionRemoteInfo_IInspectable_INTERFACE_DEFINED__)
@@ -2319,6 +2461,85 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemot
 
 /*
  *
+ * Interface Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.System.RemoteDesktop.Provider.RemoteDesktopRegistrar
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_RemoteDesktop_Provider_IRemoteDesktopRegistrarStatics2[] = L"Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* add_ConnectionCenterRequested)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_ConnectionCenterRequested)(__x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_add_ConnectionCenterRequested(This, handler, token) \
+    ((This)->lpVtbl->add_ConnectionCenterRequested(This, handler, token))
+
+#define __x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_remove_ConnectionCenterRequested(This, token) \
+    ((This)->lpVtbl->remove_ConnectionCenterRequested(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CRemoteDesktop_CProvider_CIRemoteDesktopRegistrarStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
  * Class Windows.System.RemoteDesktop.Provider.PerformLocalActionRequestedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 15.0
@@ -2418,6 +2639,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics interface starting with version 15.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

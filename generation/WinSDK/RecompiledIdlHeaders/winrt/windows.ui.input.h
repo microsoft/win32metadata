@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -256,6 +256,36 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics ABI::Windows::UI::Input::IEdgeGestureStatics
 
 #endif // ____x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                interface IGamepadNavigationConfiguration;
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration ABI::Windows::UI::Input::IGamepadNavigationConfiguration
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                interface IGamepadNavigationConfigurationStatics;
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics ABI::Windows::UI::Input::IGamepadNavigationConfigurationStatics
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CInput_CIGestureRecognizer_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CInput_CIGestureRecognizer_FWD_DEFINED__
@@ -2078,7 +2108,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2107,9 +2136,7 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::PhysicalGestureRecognizer*, 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2138,9 +2165,7 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::PhysicalGestureRecognizer*, 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2169,9 +2194,7 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::PhysicalGestureRecognizer*, 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2200,9 +2223,7 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::PhysicalGestureRecognizer*, 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2231,7 +2252,6 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::PhysicalGestureRecognizer*, 
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 namespace ABI {
     namespace Windows {
@@ -2771,7 +2791,6 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CUI_CCore_CIPointerEventArgs_FWD_DEFINED__
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
@@ -2800,7 +2819,6 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::TouchpadGesturesController*,
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 namespace ABI {
     namespace Windows {
@@ -2812,7 +2830,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
@@ -2841,7 +2858,6 @@ typedef ITypedEventHandler<ABI::Windows::UI::Input::TouchpadGesturesController*,
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 namespace ABI {
     namespace Windows {
@@ -3145,6 +3161,16 @@ namespace ABI {
         namespace UI {
             namespace Input {
                 typedef struct ManipulationVelocities ManipulationVelocities;
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                class GamepadNavigationConfiguration;
             } /* Input */
         } /* UI */
     } /* Windows */
@@ -3497,10 +3523,7 @@ namespace ABI {
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 namespace ABI {
     namespace Windows {
@@ -3511,19 +3534,18 @@ namespace ABI {
                     TouchpadGlobalAction_ThreeFingerTap = 0,
                     TouchpadGlobalAction_FourFingerTap = 1,
                     TouchpadGlobalAction_FiveFingerTap = 2,
-                    TouchpadGlobalAction_ThreeFingerPressDown = 3,
-                    TouchpadGlobalAction_FourFingerPressDown = 4,
-                    TouchpadGlobalAction_FiveFingerPressDown = 5,
-                    TouchpadGlobalAction_ThreeFingerPressUp = 6,
-                    TouchpadGlobalAction_FourFingerPressUp = 7,
-                    TouchpadGlobalAction_FiveFingerPressUp = 8,
+                    TouchpadGlobalAction_ThreeFingerPress = 3,
+                    TouchpadGlobalAction_FourFingerPress = 4,
+                    TouchpadGlobalAction_FiveFingerPress = 5,
+                    TouchpadGlobalAction_ThreeFingerRelease = 6,
+                    TouchpadGlobalAction_FourFingerRelease = 7,
+                    TouchpadGlobalAction_FiveFingerRelease = 8,
                 };
             } /* Input */
         } /* UI */
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3531,10 +3553,7 @@ namespace ABI {
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 namespace ABI {
     namespace Windows {
@@ -3557,7 +3576,6 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -3980,6 +3998,93 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Input.IGamepadNavigationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_IGamepadNavigationConfiguration[] = L"Windows.UI.Input.IGamepadNavigationConfiguration";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                MIDL_INTERFACE("b8abab2d-e7f5-59a7-a3d5-9746bfbf224d")
+                IGamepadNavigationConfiguration : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_NavigationEnabled(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE TrySetNavigationEnabled(
+                        boolean enabled,
+                        boolean* result
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IGamepadNavigationConfiguration = __uuidof(IGamepadNavigationConfiguration);
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.UI.Input.IGamepadNavigationConfigurationStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_IGamepadNavigationConfigurationStatics[] = L"Windows.UI.Input.IGamepadNavigationConfigurationStatics";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Input {
+                MIDL_INTERFACE("9c7c3e1d-2aff-5de0-88f1-904acc561f68")
+                IGamepadNavigationConfigurationStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE TryGetForCurrentProcess(
+                        ABI::Windows::UI::Input::IGamepadNavigationConfiguration** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsSupported(
+                        boolean* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IGamepadNavigationConfigurationStatics = __uuidof(IGamepadNavigationConfigurationStatics);
+            } /* Input */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -4922,12 +5027,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIMouseWheelParameters;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.PhysicalGestureRecognizer
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__
@@ -5053,7 +5155,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -6976,12 +7077,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITappedEventArgs2;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGesturesController
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__
@@ -7045,7 +7143,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7053,12 +7150,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGesturesController
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__
@@ -7088,7 +7182,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7096,12 +7189,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerS
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGlobalActionEventArgs
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__
@@ -7131,7 +7221,6 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7237,6 +7326,34 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_EdgeGestureEventArgs[] = L"Windows.UI.Input.EdgeGestureEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Input.IGamepadNavigationConfigurationStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Input.IGamepadNavigationConfiguration ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_UI_Input_GamepadNavigationConfiguration_DEFINED
+#define RUNTIMECLASS_Windows_UI_Input_GamepadNavigationConfiguration_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_GamepadNavigationConfiguration[] = L"Windows.UI.Input.GamepadNavigationConfiguration";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7450,8 +7567,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -7463,14 +7578,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  None - Class cannot be marshaled
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_PhysicalGestureRecognizer_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_PhysicalGestureRecognizer_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_PhysicalGestureRecognizer[] = L"Windows.UI.Input.PhysicalGestureRecognizer";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7644,8 +7757,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.IRadialControllerConfiguration ** Default Interface **
@@ -7707,8 +7820,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.IRadialControllerMenuItem ** Default Interface **
@@ -7948,8 +8061,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Input.ITouchpadGesturesControllerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -7961,14 +8072,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_TouchpadGesturesController_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_TouchpadGesturesController_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_TouchpadGesturesController[] = L"Windows.UI.Input.TouchpadGesturesController";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -7976,22 +8085,18 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Class implements the following interfaces:
  *    Windows.UI.Input.ITouchpadGlobalActionEventArgs ** Default Interface **
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_TouchpadGlobalActionEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_TouchpadGlobalActionEventArgs_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_TouchpadGlobalActionEventArgs[] = L"Windows.UI.Input.TouchpadGlobalActionEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #else // !defined(__cplusplus)
 /* Forward Declarations */
@@ -8048,6 +8153,18 @@ typedef interface __x_ABI_CWindows_CUI_CInput_CIEdgeGestureEventArgs __x_ABI_CWi
 typedef interface __x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics __x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics;
 
 #endif // ____x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration;
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics;
+
+#endif // ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CInput_CIGestureRecognizer_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CInput_CIGestureRecognizer_FWD_DEFINED__
@@ -9976,7 +10093,6 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CKeyboardDeliveryInterce
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CHoldingEventArgs_INTERFACE_DEFINED__)
@@ -10027,9 +10143,7 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecogniz
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CHoldingEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationCompletedEventArgs_INTERFACE_DEFINED__)
@@ -10080,9 +10194,7 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecogniz
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationCompletedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationStartedEventArgs_INTERFACE_DEFINED__)
@@ -10133,9 +10245,7 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecogniz
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationStartedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationUpdatedEventArgs_INTERFACE_DEFINED__)
@@ -10186,9 +10296,7 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecogniz
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CManipulationUpdatedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CTappedEventArgs_INTERFACE_DEFINED__)
@@ -10239,7 +10347,6 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecogniz
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CPhysicalGestureRecognizer_Windows__CUI__CInput__CTappedEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x30000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CRadialController_IInspectable_INTERFACE_DEFINED__)
@@ -10906,7 +11013,6 @@ typedef interface __x_ABI_CWindows_CUI_CCore_CIPointerEventArgs __x_ABI_CWindows
 
 #endif // ____x_ABI_CWindows_CUI_CCore_CIPointerEventArgs_FWD_DEFINED__
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesController_Windows__CUI__CCore__CPointerEventArgs_INTERFACE_DEFINED__)
@@ -10957,9 +11063,7 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesControl
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesController_Windows__CUI__CCore__CPointerEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesController_Windows__CUI__CInput__CTouchpadGlobalActionEventArgs_INTERFACE_DEFINED__)
@@ -11010,7 +11114,6 @@ interface __FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesControl
 #endif // ____FITypedEventHandler_2_Windows__CUI__CInput__CTouchpadGesturesController_Windows__CUI__CInput__CTouchpadGlobalActionEventArgs_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #ifndef ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
@@ -11293,25 +11396,21 @@ enum __x_ABI_CWindows_CUI_CInput_CRadialControllerSystemMenuItemKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 enum __x_ABI_CWindows_CUI_CInput_CTouchpadGlobalAction
 {
     TouchpadGlobalAction_ThreeFingerTap = 0,
     TouchpadGlobalAction_FourFingerTap = 1,
     TouchpadGlobalAction_FiveFingerTap = 2,
-    TouchpadGlobalAction_ThreeFingerPressDown = 3,
-    TouchpadGlobalAction_FourFingerPressDown = 4,
-    TouchpadGlobalAction_FiveFingerPressDown = 5,
-    TouchpadGlobalAction_ThreeFingerPressUp = 6,
-    TouchpadGlobalAction_FourFingerPressUp = 7,
-    TouchpadGlobalAction_FiveFingerPressUp = 8,
+    TouchpadGlobalAction_ThreeFingerPress = 3,
+    TouchpadGlobalAction_FourFingerPress = 4,
+    TouchpadGlobalAction_FiveFingerPress = 5,
+    TouchpadGlobalAction_ThreeFingerRelease = 6,
+    TouchpadGlobalAction_FourFingerRelease = 7,
+    TouchpadGlobalAction_FiveFingerRelease = 8,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -11319,10 +11418,7 @@ enum __x_ABI_CWindows_CUI_CInput_CTouchpadGlobalAction
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 enum __x_ABI_CWindows_CUI_CInput_CTouchpadGlobalGestureKinds
 {
@@ -11335,7 +11431,6 @@ enum __x_ABI_CWindows_CUI_CInput_CTouchpadGlobalGestureKinds
     TouchpadGlobalGestureKinds_FiveFingerActions = 0x20,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -12045,6 +12140,163 @@ interface __x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIEdgeGestureStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Input.IGamepadNavigationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_IGamepadNavigationConfiguration[] = L"Windows.UI.Input.IGamepadNavigationConfiguration";
+typedef struct __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_NavigationEnabled)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* TrySetNavigationEnabled)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration* This,
+        boolean enabled,
+        boolean* result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationVtbl;
+
+interface __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_get_NavigationEnabled(This, value) \
+    ((This)->lpVtbl->get_NavigationEnabled(This, value))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_TrySetNavigationEnabled(This, enabled, result) \
+    ((This)->lpVtbl->TrySetNavigationEnabled(This, enabled, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+
+/*
+ *
+ * Interface Windows.UI.Input.IGamepadNavigationConfigurationStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * Interface is a part of the implementation of type Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Input_IGamepadNavigationConfigurationStatics[] = L"Windows.UI.Input.IGamepadNavigationConfigurationStatics";
+typedef struct __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* TryGetForCurrentProcess)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfiguration** result);
+    HRESULT (STDMETHODCALLTYPE* get_IsSupported)(__x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStaticsVtbl;
+
+interface __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_TryGetForCurrentProcess(This, result) \
+    ((This)->lpVtbl->TryGetForCurrentProcess(This, result))
+
+#define __x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_get_IsSupported(This, value) \
+    ((This)->lpVtbl->get_IsSupported(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIGamepadNavigationConfigurationStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -13758,12 +14010,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIMouseWheelParameters;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.PhysicalGestureRecognizer
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__
@@ -13987,7 +14236,6 @@ interface __x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CIPhysicalGestureRecognizer_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17550,12 +17798,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITappedEventArgs2;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGesturesController
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__
@@ -17674,7 +17919,6 @@ interface __x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17682,12 +17926,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesController;
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGesturesController
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__
@@ -17752,7 +17993,6 @@ interface __x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerStatics_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17760,12 +18000,9 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGesturesControllerS
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Interface is a part of the implementation of type Windows.UI.Input.TouchpadGlobalActionEventArgs
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #if !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__)
 #define ____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__
@@ -17830,7 +18067,6 @@ interface __x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs;
 #endif /* !defined(____x_ABI_CWindows_CUI_CInput_CITouchpadGlobalActionEventArgs_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -17936,6 +18172,34 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_EdgeGestureEventArgs[] = L"Windows.UI.Input.EdgeGestureEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.UI.Input.GamepadNavigationConfiguration
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Type is for evaluation purposes and is subject to change or removal in future updates.
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Input.IGamepadNavigationConfigurationStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Input.IGamepadNavigationConfiguration ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#ifndef RUNTIMECLASS_Windows_UI_Input_GamepadNavigationConfiguration_DEFINED
+#define RUNTIMECLASS_Windows_UI_Input_GamepadNavigationConfiguration_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_GamepadNavigationConfiguration[] = L"Windows.UI.Input.GamepadNavigationConfiguration";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18149,8 +18413,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass can be activated.
  *   Type can be activated via RoActivateInstance starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -18162,14 +18424,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  None - Class cannot be marshaled
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_PhysicalGestureRecognizer_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_PhysicalGestureRecognizer_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_PhysicalGestureRecognizer[] = L"Windows.UI.Input.PhysicalGestureRecognizer";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18343,8 +18603,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics2 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.IRadialControllerConfigurationStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.IRadialControllerConfiguration ** Default Interface **
@@ -18406,8 +18666,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Input.IRadialControllerMenuItemStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Input.IRadialControllerMenuItem ** Default Interface **
@@ -18647,8 +18907,6 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Input.ITouchpadGesturesControllerStatics interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
@@ -18660,14 +18918,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_TouchpadGesturesController_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_TouchpadGesturesController_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_TouchpadGesturesController[] = L"Windows.UI.Input.TouchpadGesturesController";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 /*
  *
@@ -18675,22 +18931,18 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
  *
- * Type is for evaluation purposes and is subject to change or removal in future updates.
- *
  * Class implements the following interfaces:
  *    Windows.UI.Input.ITouchpadGlobalActionEventArgs ** Default Interface **
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
  */
-#if defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 #ifndef RUNTIMECLASS_Windows_UI_Input_TouchpadGlobalActionEventArgs_DEFINED
 #define RUNTIMECLASS_Windows_UI_Input_TouchpadGlobalActionEventArgs_DEFINED
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Input_TouchpadGlobalActionEventArgs[] = L"Windows.UI.Input.TouchpadGlobalActionEventArgs";
 #endif
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
-#endif // defined(ENABLE_WINRT_EXPERIMENTAL_TYPES)
 
 #endif // defined(__cplusplus)
 #pragma pop_macro("MIDL_CONST_ID")

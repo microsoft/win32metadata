@@ -1494,7 +1494,7 @@ interface IConnector : IUnknown
     //      S_OK if successful
     //
     [id(7), helpstring("method GetConnectorIdConnectedTo")]
-    HRESULT GetConnectorIdConnectedTo([out,annotation("_Outptr_")] LPWSTR* ppwstrConnectorId);
+    HRESULT GetConnectorIdConnectedTo([out,annotation("_Outptr_result_z_")] LPWSTR* ppwstrConnectorId);
     //-------------------------------------------------------------------------
     // Description:
     //
@@ -1515,7 +1515,7 @@ interface IConnector : IUnknown
     //      S_OK if successful
     //
     [id(8), helpstring("method GetDeviceIdConnectedTo")]
-    HRESULT GetDeviceIdConnectedTo([out,annotation("_Outptr_")] LPWSTR* ppwstrDeviceId);
+    HRESULT GetDeviceIdConnectedTo([out,annotation("_Outptr_result_z_")] LPWSTR* ppwstrDeviceId);
 };
 
 // ----------------------------------------------------------------------

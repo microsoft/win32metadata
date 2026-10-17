@@ -612,6 +612,15 @@ BatteryClassStatusNotify (
     );
 
 _IRQL_requires_max_(DISPATCH_LEVEL)
+typedef 
+NTSTATUS
+(BATTERY_CLASS_PEAK_POWER_NOTIFY) (
+    _In_ PVOID ClassData
+    );
+
+typedef BATTERY_CLASS_PEAK_POWER_NOTIFY *PBATTERY_CLASS_PEAK_POWER_NOTIFY;
+
+_IRQL_requires_max_(DISPATCH_LEVEL)
 NTSTATUS
 BATTERYCLASSAPI
 BatteryClassPeakPowerNotify (
@@ -628,6 +637,16 @@ BatteryClassUpdateData (
     );
 
 _IRQL_requires_max_(PASSIVE_LEVEL)
+typedef 
+NTSTATUS
+(ADAPTER_CLASS_INITIALIZE_DEVICE) (
+    _In_ PADAPTER_MINIPORT_INFO MiniportInfo,
+    _Out_ PVOID *ClassData
+    );
+
+typedef ADAPTER_CLASS_INITIALIZE_DEVICE *PADAPTER_CLASS_INITIALIZE_DEVICE;
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
 _Check_return_
 NTSTATUS
 BATTERYCLASSAPI
@@ -637,11 +656,29 @@ AdapterClassInitializeDevice (
     );
 
 _IRQL_requires_max_(DISPATCH_LEVEL)
+typedef 
+NTSTATUS
+(ADAPTER_CLASS_STATUS_NOTIFY) (
+    _In_ PVOID ClassData
+    );
+
+typedef ADAPTER_CLASS_STATUS_NOTIFY *PADAPTER_CLASS_STATUS_NOTIFY;
+
+_IRQL_requires_max_(DISPATCH_LEVEL)
 NTSTATUS
 BATTERYCLASSAPI
 AdapterClassStatusNotify (
     _In_ PVOID ClassData
     );
+
+_IRQL_requires_max_(PASSIVE_LEVEL)
+typedef 
+NTSTATUS
+(ADAPTER_CLASS_UNLOAD) (
+    _In_ PVOID ClassData
+    );
+
+typedef ADAPTER_CLASS_UNLOAD *PADAPTER_CLASS_UNLOAD;
 
 _IRQL_requires_max_(PASSIVE_LEVEL)
 NTSTATUS

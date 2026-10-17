@@ -124,7 +124,7 @@ DEFINE_GUID(IID_IXAPOParameters, 0x26D95C66, 0x80F2, 0x499A, 0xAD, 0x54, 0x5A, 0
 
     // supported framerate range
     #define XAPO_MIN_FRAMERATE 1000
-    #define XAPO_MAX_FRAMERATE 200000
+    #define XAPO_MAX_FRAMERATE 384000
 
     // unicode string length, including terminator, used with XAPO_REGISTRATION_PROPERTIES
     #define XAPO_REGISTRATION_STRING_LENGTH 256

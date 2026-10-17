@@ -1,5 +1,4 @@
 #define SECURITY_WIN32 // For sspi.h
-#define QCC_OS_GROUP_WINDOWS
 
 #include "intrinfix.h"
 
@@ -33,7 +32,6 @@
 #include <activation.h>
 #include <weakreference.h>
 
-#include <msajtransport.h>
 #include <systemmediatransportcontrolsinterop.h>
 #include <sharewindowcommandsourceinterop.h>
 #include <messagedispatcherapi.h>

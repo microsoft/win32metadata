@@ -469,7 +469,7 @@ FindPackagesByPackageFamily(
     _Out_writes_opt_(*count) UINT32* packageProperties
     );
 
-typedef enum PackageOrigin
+typedef enum _PackageOrigin
 {
     PackageOrigin_Unknown           = 0,
     PackageOrigin_Unsigned          = 1,
@@ -477,7 +477,8 @@ typedef enum PackageOrigin
     PackageOrigin_Store             = 3,
     PackageOrigin_DeveloperUnsigned = 4,
     PackageOrigin_DeveloperSigned   = 5,
-    PackageOrigin_LineOfBusiness    = 6
+    PackageOrigin_LineOfBusiness    = 6,
+    PackageOrigin_SignedSBOM        = 7
 } PackageOrigin;
 
 WINBASEAPI
@@ -488,6 +489,44 @@ WINAPI
 GetStagedPackageOrigin(
     _In_ PCWSTR packageFullName,
     _Out_ PackageOrigin* origin
+    );
+
+typedef enum _PackageOrigin2
+{
+    PackageOrigin2_Unknown           = 0,
+    PackageOrigin2_Unsigned          = 1,
+    PackageOrigin2_Inbox             = 2,
+    PackageOrigin2_Store             = 3,
+    PackageOrigin2_DeveloperUnsigned = 4,
+    PackageOrigin2_DeveloperSigned   = 5,
+    PackageOrigin2_LineOfBusiness    = 6,
+    PackageOrigin2_SignedSBOM        = 7,
+} PackageOrigin2;
+
+WINBASEAPI
+_Check_return_
+_Success_(SUCCEEDED(return))
+HRESULT
+WINAPI
+GetStagedPackageOrigin2(
+    _In_ PCWSTR packageFullName,
+    _Out_ PackageOrigin2* origin
+    );
+
+/// Features can be queried if currently available/enabled.
+/// @see IsPackageFeatureSupported()
+typedef enum AppModelPackageFeature
+{
+    AppModelPackageFeature_SignedSBOM = 1,
+} AppModelPackageFeature;
+
+/// Query if a Package feature is currently available/enabled.
+/// @note FALSE is returned if a feature is unknown to the current system.
+WINBASEAPI
+BOOL
+WINAPI
+IsPackageFeatureSupported(
+    _In_ AppModelPackageFeature feature
     );
 
 /* ---------------------------------------------------------------- */

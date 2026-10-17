@@ -6,6 +6,7 @@ _D3DCOLORVALUE
 <IncludeRoot>/shared/dxgi1_2.h
 <IncludeRoot>/shared/dxgi1_4.h
 <IncludeRoot>/shared/dxgi1_6.h
+<IncludeRoot>/shared/dxgi1_7.h
 <IncludeRoot>/um/dxgidebug.h
 <IncludeRoot>/shared/dxgi1_3.h
 <IncludeRoot>/shared/dxgi1_5.h

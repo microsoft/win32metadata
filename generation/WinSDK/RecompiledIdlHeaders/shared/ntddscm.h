@@ -1199,7 +1199,7 @@ typedef struct _SCM_PD_FIRMWARE_INFO {
     // Sizeof() of this structure serves as the version.
     //
     ULONG Version;
-    
+
     //
     // Size of the data contained in this structure, including the Slots
     // array. If the output buffer is too small to contain the requested information,

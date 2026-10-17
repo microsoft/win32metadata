@@ -120,7 +120,7 @@ typedef const EXPERIMENTAL_WEBAUTHN_PLUGIN_OPERATION_RESPONSE *EXPERIMENTAL_PCWE
 typedef struct _WEBAUTHN_PLUGIN_OPERATION_RESPONSE
     {
     DWORD cbEncodedResponse;
-    /* [size_is] */ byte *pbEncodedResponse;
+    /* [size_is][unique] */ byte *pbEncodedResponse;
     } 	WEBAUTHN_PLUGIN_OPERATION_RESPONSE;
 
 typedef struct _WEBAUTHN_PLUGIN_OPERATION_RESPONSE *PWEBAUTHN_PLUGIN_OPERATION_RESPONSE;

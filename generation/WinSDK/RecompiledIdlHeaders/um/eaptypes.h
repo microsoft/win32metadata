@@ -406,6 +406,9 @@ typedef struct _EAP_ATTRIBUTES
 
 #define EAP_FLAG_SERVER_VALIDATION_REQUIRED 0x02000000
 
+// Disable TLS session resumption
+#define EAP_FLAG_DISABLE_SESSION_RESUMPTION 0x04000000
+
 // the various states of the input fields
 #define EAP_CONFIG_INPUT_FIELD_PROPS_DEFAULT                0X00000000
 #define EAP_CONFIG_INPUT_FIELD_PROPS_NON_DISPLAYABLE        0X00000001

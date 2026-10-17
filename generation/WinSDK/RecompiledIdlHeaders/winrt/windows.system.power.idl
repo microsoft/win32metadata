@@ -31,6 +31,8 @@ namespace Windows
 
             typedef enum EnergySaverStatus EnergySaverStatus;
 
+            typedef enum EnergySaverStatus2 EnergySaverStatus2;
+
             typedef enum PowerSupplyStatus PowerSupplyStatus;
 
             interface IBackgroundEnergyManagerStatics;
@@ -38,6 +40,8 @@ namespace Windows
             interface IForegroundEnergyManagerStatics;
 
             interface IPowerManagerStatics;
+
+            interface IPowerManagerStatics2;
 
             runtimeclass BackgroundEnergyManager;
 
@@ -72,6 +76,15 @@ namespace Windows
                 Disabled = 0,
                 Off      = 1,
                 On       = 2
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            enum EnergySaverStatus2
+            {
+                Unknown     = 0,
+                Off         = 1,
+                Standard    = 2,
+                HighSavings = 3
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -142,6 +155,17 @@ namespace Windows
                 [eventremove] HRESULT RemainingDischargeTimeChanged([in] EventRegistrationToken token);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.System.Power.PowerManager)]
+            [uuid(67A446C3-4F2E-5D56-B2E8-7707C264745B)]
+            interface IPowerManagerStatics2 : IInspectable
+            {
+                [propget] HRESULT EnergySaverStatus2([out] [retval] Windows.System.Power.EnergySaverStatus2* value);
+                [propget] HRESULT IsEnergySaverStatus2Supported([out] [retval] boolean* value);
+                [eventadd] HRESULT EnergySaverStatus2Changed([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT EnergySaverStatus2Changed([in] EventRegistrationToken token);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [deprecated("Background Energy Manager has been deprecated. For more info, see MSDN.", deprecate, Windows.Foundation.UniversalApiContract, 6.0)]
             [marshaling_behavior(agile)]
@@ -161,6 +185,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             [static(Windows.System.Power.IPowerManagerStatics, Windows.Foundation.UniversalApiContract, 1.0)]
+            [static(Windows.System.Power.IPowerManagerStatics2, Windows.Foundation.UniversalApiContract, 19.0)]
             [threading(both)]
             runtimeclass PowerManager
             {

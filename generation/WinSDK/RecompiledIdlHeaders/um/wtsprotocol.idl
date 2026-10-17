@@ -1376,6 +1376,7 @@ interface IWRdsEnhancedFastReconnectArbitrator : IUnknown
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN11_GE)")
 
 interface IWRdsProtocolConnection2;
+interface IWRdsProtocolConnection3_Experimental;
 
 // Optionally implemented by the RDP protocol stack, QIed from IWRdsProtocolConnection
 [
@@ -1386,6 +1387,22 @@ interface IWRdsProtocolConnection2;
 interface IWRdsProtocolConnection2 : IWRdsProtocolConnection
 {
     HRESULT GetSerializedUserCredential(
+        [out] WRDS_SERIALIZED_USER_CREDENTIAL** userCredential
+        );
+};
+
+// Optionally implemented by the RDP protocol stack, QIed from IWRdsProtocolConnection.
+// Adds interactive Entra ID authentication over a DVC.
+[
+    object,
+    uuid(3AA87DA3-F60B-4280-B385-F1CC22AD5D9F),
+    pointer_default(unique)
+]
+interface IWRdsProtocolConnection3_Experimental : IWRdsProtocolConnection2
+{
+    HRESULT GetSerializedUserCredentialInteractively(
+        [in] const GUID* scenarioId,
+        [in, string] const wchar_t* usernameHint,
         [out] WRDS_SERIALIZED_USER_CREDENTIAL** userCredential
         );
 };

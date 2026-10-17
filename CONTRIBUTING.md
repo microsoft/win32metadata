@@ -214,7 +214,9 @@ Win32 Metadata depends on the following:
 
 ### Windows SDK
 
-To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.22621.2428).
+To update the Windows SDK dependency, run [scripts/UpdateSDK.ps1](scripts/UpdateSDK.ps1) with the desired SDK version (e.g. 10.0.28000.2705).
+
+Use the headers shipped in the selected SDK. Do not restore headers from older SDKs when APIs have been retired; remove their partition references and review the resulting API removals instead.
 
 Run a [full build](#full-builds), fix any metadata issues that surface, address failures from tests, then update the baseline.
 

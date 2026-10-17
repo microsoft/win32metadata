@@ -727,21 +727,21 @@ typedef struct _MIDL_STUB_MESSAGE
 
     unsigned long                   PointerLength;
 
-    int                             fInDontFree       :1;
-    int                             fDontCallFreeInst :1;
-    int                             fUnused1          :1;
-    int                             fHasReturn        :1;
-    int                             fHasExtensions    :1;
-    int                             fHasNewCorrDesc   :1;
-    int                             fIsIn             :1;
-    int                             fIsOut            :1;
-    int                             fIsOicf           :1;
-    int                             fBufferValid      :1;
-    int                             fHasMemoryValidateCallback: 1;
-    int                             fInFree             :1;
-    int                             fNeedMCCP         :1;
-    int                             fUnused2          :3;
-    int                             fUnused3          :16;
+    unsigned int                    fInDontFree       :1;
+    unsigned int                    fDontCallFreeInst :1;
+    unsigned int                    fUnused1          :1;
+    unsigned int                    fHasReturn        :1;
+    unsigned int                    fHasExtensions    :1;
+    unsigned int                    fHasNewCorrDesc   :1;
+    unsigned int                    fIsIn             :1;
+    unsigned int                    fIsOut            :1;
+    unsigned int                    fIsOicf           :1;
+    unsigned int                    fBufferValid      :1;
+    unsigned int                    fHasMemoryValidateCallback: 1;
+    unsigned int                    fInFree             :1;
+    unsigned int                    fNeedMCCP         :1;
+    unsigned int                    fUnused2          :3;
+    unsigned int                    fUnused3          :16;
 
 
     unsigned long                   dwDestContext;
@@ -924,6 +924,13 @@ typedef struct _USER_MARSHAL_CB
 
 #define USER_CALL_IS_ASYNC              0x0100  /* aux flag: in an [async] call */
 #define USER_CALL_NEW_CORRELATION_DESC  0x0200
+// Output aux flag returned from pfnUnmarshall.
+// For caller-owned unmarshalled objects (e.g., inout BYREF variants), RPC should
+// not perform cleanup. By the time pfnFree is called to clean up, that context
+// has already been lost, and pfnFree has no way to know if the unmarshalled object is owned
+// by the caller anymore. The pfnUnmarshall function signals this flag to RPC that the
+// caller owns the unmarshalled object, so RPC should not clean it up.
+#define USER_MARSHALUNMARSHAL_DONT_CLEANUP_UNMARSHALLED_OBJECT 0X8000
 
 typedef struct _MALLOC_FREE_STRUCT
     {

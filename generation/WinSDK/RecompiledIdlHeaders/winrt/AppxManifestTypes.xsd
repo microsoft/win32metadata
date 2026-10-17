@@ -518,6 +518,12 @@
     </xs:restriction>
   </xs:simpleType>
 
+  <xs:simpleType name="ST_Capability_TextInput">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="foregroundTextAccess"/>
+    </xs:restriction>
+  </xs:simpleType>
+
   <xs:simpleType name="ST_DeviceFunction">
     <xs:restriction base="ST_NonEmptyString">
       <xs:maxLength value="100"/>
