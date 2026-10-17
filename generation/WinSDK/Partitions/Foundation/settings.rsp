@@ -11,3 +11,5 @@
 <IncludeRoot>/um/winsdkver.h
 --namespace
 Windows.Win32.Foundation
+--config
+parse-win32-annotations

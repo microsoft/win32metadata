@@ -1,4 +1,5 @@
 --requiredNamespaceForName
+WIN32_ERROR=Windows.Win32.Foundation
 # region amvideo.h
 VIDEOINFOHEADER=Windows.Win32.Media.MediaFoundation
 MPEG1VIDEOINFO=Windows.Win32.Media.MediaFoundation

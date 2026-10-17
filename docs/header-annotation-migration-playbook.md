@@ -1418,3 +1418,52 @@ FileHistory's inherited Avrf C-on correction, its producer-cleanup relocation
 and this owner's exact-current-head production CI admission remain separate
 gates. No difference file, raw/snapshot normalization or constant-order
 allowance is used.
+
+### Complete original error owners: full constants-stage blocker
+
+The complete `WIN32_ERROR` source candidate contributes 3,288 names from
+original `shared\winerror.h` and 90 from original `um\SetupAPI.h`, including
+both lowercase `64k` spellings. Both owners opt into the existing parser;
+the global namespace remains `Windows.Win32.Foundation`. The legacy
+definition is removed, retaining exactly the three existing `addUsesTo`
+sites. No helper, alias, forward declaration or unrelated WNet include is
+introduced.
+
+All 12 actual C/C++, three-architecture, metadata-off/on native controls
+pass with unchanged native facts, SAL and diagnostics. Two transport
+typedefs expose two distinct contributions; Clang also inherits the
+byte-identical 3,288-name annotation onto the redeclaration. The initial
+six enabled-case annotation-count assertion failures are retained, not
+reported as native compiler failures. All eight opted-in Foundation/DevInst
+source files match their fresh normal-scrape repeats.
+
+The complete constants-stage replay retains all 1,577 actual CI traversal
+rows, relocating only input roots. Its 1,568 existing inputs are hashed;
+nine absent selected-SDK paths remain explicit and are handled by the
+unchanged scraper's existing `File.Exists` behavior, not filtered from the
+map or replaced with manufactured headers. With the qualified parent enum
+definition, all 830 consumed files, including 824 C# files, reproduce
+byte-for-byte after constants scraping. The fresh control image
+`AFC3BE4A9D6C506B0AD4E8AA6129F3B10F62A8111D3F123AD97019BA3CFE8DE3`
+is unfiltered API-zero against both actual `7C1175B3...` and replay
+`329CF9F0...`. Its 12 physical/source harness controls pass without skips;
+these are control-only results.
+
+With both original-owner contributions and only the scoped definition/use
+and namespace changes, the normal complete emission fails with 43
+`CS0266` errors: 42 WNet constant declarations and one Printing declaration
+use enum-valued expressions as primitive `int`/`uint` constants. Examples
+are native `WN_SUCCESS = NO_ERROR`, `WN_NOT_SUPPORTED = ERROR_NOT_SUPPORTED`
+and `ERROR_BIDI_NOT_SUPPORTED = ERROR_NOT_SUPPORTED`. The unmodified log
+has SHA256
+`2CAEB43D893FB6FE39AB887003ECA0274C1EE1961ED385B12F0FB648FB3252B6`.
+The normal constants output and processed compiler inputs are retained.
+
+This bounded repro blocks the two-original-header source admission and
+WNet; it does not justify restoring the legacy definition, adding casts
+to native headers, changing enum membership, suppressing native aliases,
+or editing generated production output. There is no candidate winmd, so
+candidate physical membership/value/flags, raw API and declaration-order
+grades remain unverified. The known source-group declaration-order
+difference remains a separate strict gate, with no normalization or
+allowance. Other original-source batches remain independent.

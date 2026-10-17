@@ -492,6 +492,67 @@ static_assert(DISC_NO_FORCE == 64u);
             }
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(OriginalErrorOwnerControls))]
+        public void OriginalErrorOwnersPreserveNativeAbiAndSalWithCompleteGroupContributions(
+            string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            string[] headers = { "winerror.h", "SetupAPI.h" };
+            var before = Surface(root, original, "DevInst", architecture, target, headers, "",
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "DevInst", architecture, target, headers, "", metadataEnabled: enabled,
+                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.NotEmpty(beforeSal);
+            string[] carriers = enabled ? new[]
+            {
+                "typedef WIN32_ERROR unsigned long", "typedef WIN32_ERROR unsigned long",
+            } : Array.Empty<string>();
+            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            const string prefix = "WIN32_ERROR|Enum(";
+            foreach (string annotation in annotations)
+            {
+                Assert.StartsWith(prefix, annotation);
+                Assert.EndsWith(")", annotation);
+            }
+            Assert.Equal(enabled ? new[] { 90, 3288, 3288 } : Array.Empty<int>(),
+                annotations.Select(value => value.Substring(prefix.Length, value.Length - prefix.Length - 1)
+                    .Split(',').Length).OrderBy(value => value));
+            if (enabled)
+            {
+                var inherited = annotations.Where(value => value.Substring(prefix.Length, value.Length - prefix.Length - 1)
+                    .Split(',').Length == 3288).ToArray();
+                Assert.Equal(inherited[0], inherited[1]);
+            }
+            this.output.WriteLine($"{architecture}/{language}/metadata={enabled}: {before.Length} unchanged native facts, " +
+                $"{beforeSal.Count} unchanged SAL attributes; two UInt32 group carriers and one exact inherited annotation when enabled.");
+        }
+
+        public static IEnumerable<object[]> OriginalErrorOwnerControls()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"),
+                ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (string language in new[] { "c", "c++" })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { architecture.Item1, architecture.Item2, language, enabled };
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlHeaderControls))]
         public void OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(

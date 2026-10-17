@@ -972,6 +972,107 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainTheirThreeResidualUses()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && name.GetString() == "WIN32_ERROR");
+            var residual = Assert.Single(items.Where(item =>
+                item.TryGetProperty("addUsesTo", out var name) && name.GetString() == "WIN32_ERROR"));
+            Assert.Equal(new[] { "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode" },
+                residual.GetProperty("uses").EnumerateArray()
+                    .Select(use => use.GetProperty("method").GetString() + "::" + use.GetProperty("parameter").GetString()));
+            Assert.Equal("WIN32_ERROR=Windows.Win32.Foundation",
+                Assert.Single(File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp"))
+                    .Where(row => row.StartsWith("WIN32_ERROR=", StringComparison.Ordinal))));
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
+            Assert.Single(patches.Where(path => path == @"shared\winerror.h.patch"));
+            Assert.Single(patches.Where(path => path == @"um\SetupAPI.h.patch"));
+            foreach (string partition in new[] { "Foundation", "DevInst" })
+                Assert.Single(File.ReadAllLines(Path.Combine(project, "Partitions", partition, "settings.rsp"))
+                    .Where(row => row == "parse-win32-annotations"));
+            Assert.DoesNotContain("setupapi", File.ReadAllText(Path.Combine(project, "Partitions", "Wnet", "main.cpp")),
+                StringComparison.OrdinalIgnoreCase);
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalErrorGroupPreservesEveryLiteralMemberAndDeclarationOrder(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Type(control.Reader, "WIN32_ERROR", architecture, "Windows.Win32.Foundation");
+            var after = Type(current.Reader, "WIN32_ERROR", architecture, "Windows.Win32.Foundation");
+            Assert.Equal(3379, before.GetFields().Count);
+            Assert.Equal(3379, after.GetFields().Count);
+            foreach (var pair in new[] { (control.Reader, before), (current.Reader, after) })
+            {
+                string[] names = pair.Item2.GetFields().Select(handle => pair.Item1.GetString(pair.Item1.GetFieldDefinition(handle).Name)).ToArray();
+                Assert.Contains("ERROR_ITERATED_DATA_EXCEEDS_64k", names);
+                Assert.Contains("ERROR_AUTODATASEG_EXCEEDS_64k", names);
+            }
+            Assert.Equal(SnapshotType(control.Reader, before), SnapshotType(current.Reader, after));
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalErrorGroupRetainsAllNativeValuesAndExistingResidualSignatureUses(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Type(control.Reader, "WIN32_ERROR", architecture, "Windows.Win32.Foundation");
+            var after = Type(current.Reader, "WIN32_ERROR", architecture, "Windows.Win32.Foundation");
+            Assert.DoesNotContain(current.Reader.TypeDefinitions.Select(current.Reader.GetTypeDefinition),
+                type => current.Reader.GetString(type.Name) == "WIN32_ERROR" &&
+                    current.Reader.GetString(type.Namespace) != "Windows.Win32.Foundation");
+            string[] expected = SnapshotType(control.Reader, before).Split('\n');
+            string[] actual = SnapshotType(current.Reader, after).Split('\n');
+            Assert.Equal(expected.Take(2), actual.Take(2));
+            var fields = actual.Where(row => row.StartsWith("F|", StringComparison.Ordinal))
+                .ToDictionary(row => row.Split('|')[1], StringComparer.Ordinal);
+            Assert.Equal(3379, fields.Count);
+            foreach (string row in expected.Where(value => value.StartsWith("F|", StringComparison.Ordinal)))
+                Assert.Equal(row, fields[row.Split('|')[1]]);
+            var storage = Assert.Single(after.GetFields().Select(current.Reader.GetFieldDefinition)
+                .Where(field => current.Reader.GetString(field.Name) == "value__"));
+            Assert.Equal("UInt32", storage.DecodeSignature(Signatures, null));
+            foreach (string name in new[] { "GetLastError", "SetLastError", "SetLastErrorEx" })
+            {
+                var original = Method(control.Reader, name);
+                var method = Method(current.Reader, name);
+                var signature = original.DecodeSignature(Signatures, null);
+                Assert.Equal(Signature(signature), Signature(method.DecodeSignature(Signatures, null)));
+                Assert.Equal(Import(control.Reader, original), Import(current.Reader, method));
+                Assert.Equal(original.Attributes, method.Attributes);
+                Assert.Equal(original.ImplAttributes, method.ImplAttributes);
+                Assert.EndsWith("WIN32_ERROR", name == "GetLastError" ? signature.ReturnType : signature.ParameterTypes[0],
+                    StringComparison.Ordinal);
+            }
+            this.output.WriteLine($"Architecture {architecture}: 3378 exact named constant rows, UInt32 storage, type facts " +
+                "and all three existing residual signature uses; declaration order remains a separate strict gate.");
+
+            MethodDefinition Method(MetadataReader reader, string name) => Assert.Single(reader.TypeDefinitions
+                .Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "Apis" && Supports(reader, type.GetCustomAttributes(), architecture))
+                .SelectMany(type => type.GetMethods()).Select(reader.GetMethodDefinition)
+                .Where(method => reader.GetString(method.Name) == name && Supports(reader, method.GetCustomAttributes(), architecture)));
+        }
+
+        [MigrationFact]
+        public void OriginalErrorGroupBatchPreservesEveryPhysicalTypeWithoutOrderNormalization()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "complete original error-owner group control");
+        }
+
+        [Fact]
         public void SourceBlockedGeneratedArtifactsRetainTheirExactLegacyFacts()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
