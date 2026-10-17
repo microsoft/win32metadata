@@ -99,6 +99,12 @@ BOOL WINAPI Example(void);
 Return annotations use the same prefix position, preserving the calling-convention
 declarator and matching normal SAL reading order.
 
+Before adding an import override, check the selected SDK's import libraries and the
+library-processing inputs. A library missing from that processing set is a discovery
+fix, not a reason to annotate every affected API. Inspect its actual exported import
+names and DLL mapping rather than inferring a DLL from the `.lib` filename. Record
+the search evidence when no SDK import library supplies the mapping.
+
 ```cpp
 _Win32_RAIIFree_Handle_(CloseHandle)
 HANDLE WINAPI OpenThing(void);
@@ -218,7 +224,12 @@ HRESULT Read(
     [out, retval, annotation("_Out_retval_")] long* result);
 ```
 
-Include the SDK annotation header in the generated C/C++ through `cpp_quote`.
+The shared SAL bootstrap supplies the annotation definitions; do not add an
+annotation-header include to each API header or emit one through `cpp_quote`.
+An original IDL preprocessing stream that does not already include SAL must
+include `<sal.h>` before using the helpers. An IDL `import` does not establish
+CPP macro visibility.
+
 Do not use `[annotation]` as a blanket substitute for native MIDL attributes or
 assume it supports every IDL target. In particular, interfaces need the dedicated
 helper before the interface declaration:
@@ -842,6 +853,14 @@ Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabula
 `SetLastError` sets the ECMA-335 P/Invoke `SupportsLastError` flag; COM exact-result
 preservation uses `MethodImplAttributes.PreserveSig`. Native scoped enums retain
 `ScopedEnum`; logical flags groups emit `Flags`.
+
+Both legacy input attributes, `CanReturnErrorsAsSuccess` and
+`CanReturnMultipleSuccessValues`, also lower to `MethodImplAttributes.PreserveSig`.
+They are input-compatibility spellings, not separate emitted custom attributes.
+Free functions, interface methods, and callback `Invoke` methods use the same
+encoding; the callback constructor does not acquire the flag. Header
+`_Win32_PreserveResult_` and unmigrated legacy inputs therefore converge without
+adding another public annotation or changing native signatures.
 
 `ContainsInteriorPointersAttribute` is declared in `generation/WinSDK/manual/Metadata.cs`
 with `AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)`.

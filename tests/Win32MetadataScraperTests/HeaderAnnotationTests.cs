@@ -1137,7 +1137,7 @@ LPSIMPLE_CALLBACK
                 string sal = Path.Combine(AppContext.BaseDirectory, "assets", "sal.h");
                 File.WriteAllText(Path.Combine(DirectoryPath, "cleanup.h"),
                     "int CloseThing(void*);\nint CloseFirst(void*);\nint CloseSecond(void*);\n");
-                File.WriteAllText(Header, $"#include \"{annotations.Replace('\\', '/')}\"\n#include \"{sal.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n" + declarations);
+                File.WriteAllText(Header, $"#include \"{sal.Replace('\\', '/')}\"\n#include \"cleanup.h\"\n" + declarations);
                 string main = Path.Combine(DirectoryPath, "test.cpp");
                 File.WriteAllText(main, "#include \"test.h\"\n");
                 Output = multipleFiles ? Path.Combine(DirectoryPath, architecture) : Path.Combine(DirectoryPath, architecture, "Bindings.cs");
