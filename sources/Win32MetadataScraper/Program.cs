@@ -232,6 +232,8 @@ class Program
                     settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes))
                 : null;
             annotations?.PrepareTypedefs();
+            if (annotations != null)
+                allExcludes.AddRange(annotations.AnnotationCarrierNames);
             var config = CreateConfig(settings, ns, outputFile, headerFile, configOptions, mergedRemaps, allExcludes);
 
             var capturedStreams = new Dictionary<string, MemoryStream>();

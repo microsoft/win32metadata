@@ -232,6 +232,28 @@ limitations for type-level annotations and non-local methods; see the
 [verified transport limits](#native-idl-annotation-limits) before migrating another
 IDL declaration kind.
 
+For a non-local method, use the method helper **after the interface definition**:
+
+```idl
+_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Skip, _Win32_PreserveResult_)
+```
+
+Group these helpers with an existing trailing `cpp_quote` section when possible,
+after all referenced interfaces are complete.
+
+The method must already be declared, and the annotation must be valid on that
+method. This preserves the native RPC contract and SAL without adding a MIDL SAL
+override. The helper can also target a local method when its metadata must not
+propagate to the generated proxy function:
+
+```idl
+_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Next, _Win32_PreserveResult_)
+```
+
+These helpers do not create symbols for ordinary SDK consumers. The method helper
+does not annotate parameters or the C-interface vtable fields; those remain
+separate targets.
+
 For a C/C++-authored declaration, combine direction SAL with `_Win32_Retval_`:
 
 ```cpp
@@ -751,7 +773,8 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 | --- | --- |
 | Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies the C++ forward declaration instead. |
 | Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
-| Method and parameter | `[annotation("...")]` emits the requested prefix. Non-local methods/parameters produce MIDL2495; do not change an RPC interface to local or suppress the warning just to carry metadata. |
+| Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
+| Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |
 | Scalar typedef | `typedef [annotation("...")]` emits an annotated typedef, with MIDL2525 warning that a SAL override on a typedef is not recommended. |
 | Struct or enum written as a typedef | MIDL emits the annotation on the typedef, not directly on the tag, and produces MIDL2525. The C# reader transfers primary-record typedef facts to the record; do not infer arbitrary type/tag coverage from that compatibility behavior. |
 
@@ -765,6 +788,45 @@ The existing interface pilot is qualified; this is not blanket admission of ever
 IDL target. A type-level migration that cannot use a warning-free native form needs
 an explicitly qualified source-IDL carrier before admission, not a generated-header
 patch or a new warning suppression.
+
+#### Original-AST method references
+
+MIDL accepts a `cpp_quote` inside an interface but hoists its text before the
+interface identifier declaration, not into the method declaration. A standalone
+quoted attribute can therefore attach to `IID_Interface`; a quoted documentation
+comment is misplaced in the same way. MIDL rejects `cpp_quote` inside parameter
+and field lists. Successful MIDL compilation alone does not prove attachment.
+Creating a new quote region can also introduce MIDL's standard-interface
+bookkeeping; reusing an existing trailing region avoids that unrelated churn.
+
+`_Win32_AnnotateMethod_` emits a metadata-only C++ carrier after the complete
+interface. Its annotation arguments contain `sizeof(&Interface::Method)`, so
+Clang resolves the actual method in the original translation unit. The reader
+applies the ordinary attributes to that declaration and excludes the private
+carrier from generated bindings. There is no copied signature, name-based method
+lookup, token/comment attribution, or second parse. The carrier is a variable,
+not a typedef, so Clang's lexical type-annotation scopes do not accidentally add
+facts to it. Explicit attributes still undergo normal target, duplicate, and
+conflicting-floor validation.
+
+This transport is empty without `WIN32METADATA`, under a non-Clang compiler, or in
+the C-interface view. Referencing an undeclared or non-method target fails rather
+than producing unbound metadata.
+
+#### Upstream MIDL comment recovery
+
+The upstream `windows-clang` implementation in `microsoft/windows-rs` does read
+existing MIDL comments. At revision
+[`02ec1f06`](https://github.com/microsoft/windows-rs/blob/02ec1f06fcf9643f6dbcf1fe36f6668911c5c126/crates/libs/clang/src/extract/annotations/mod.rs#L20-L81),
+it tokenizes the enclosing callable and manually associates fixed comment markers
+with parameter positions. Its
+[decoder](https://github.com/microsoft/windows-rs/blob/02ec1f06fcf9643f6dbcf1fe36f6668911c5c126/crates/libs/clang/src/extract/annotations/mod.rs#L145-L171)
+recognizes `in`, `out`, `optional`, `retval`, and `iid_is`; it is not a generic
+transport for new type, field, or method attributes. Property accessor markers
+are a separate fixed case. This is useful legacy-marker recovery, but does not
+solve the quoted-comment placement problem or preserve arbitrary new metadata
+through MIDL. The C# pipeline therefore keeps its existing retval compatibility
+bridge without adding a new source-token parser for this pilot.
 
 ### C# integration and compatibility bridges
 

@@ -27,7 +27,10 @@ namespace Win32MetadataScraper
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
+        private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
         private readonly HashSet<Cursor> visited = new();
+
+        internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Select(carrier => carrier.Declaration.Name);
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
             IReadOnlyList<string> traversalNames, ISet<string> excludedNames)
@@ -37,6 +40,7 @@ namespace Win32MetadataScraper
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
             Walk(translationUnit.TranslationUnitDecl);
+            ApplyMethodAnnotations();
             MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
                 if (association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
@@ -145,6 +149,10 @@ namespace Win32MetadataScraper
         }
 
         private static CXCursor ReadCleanupReference(Cursor argument, NativeLocation location)
+            => ReadDeclarationReference(argument, CXCursorKind.CXCursor_FunctionDecl, location,
+                "RAIIFree requires a reference to a declared native cleanup function.");
+
+        private static CXCursor ReadDeclarationReference(Cursor argument, CXCursorKind kind, NativeLocation location, string message)
         {
             var references = new HashSet<CXCursor>();
             var pending = new Stack<Cursor>();
@@ -156,8 +164,8 @@ namespace Win32MetadataScraper
                 foreach (var child in cursor.CursorChildren)
                     pending.Push(child);
             }
-            if (references.Count != 1 || references.Single().Kind != CXCursorKind.CXCursor_FunctionDecl)
-                throw Error(location, "RAIIFree requires a reference to a declared native cleanup function.");
+            if (references.Count != 1 || references.Single().Kind != kind)
+                throw Error(location, message);
             return references.Single();
         }
 
@@ -269,48 +277,22 @@ namespace Win32MetadataScraper
             if (cursor is NamedDecl declaration)
             {
                 var location = GetLocation(declaration.Location);
-                var facts = new DeclarationFacts(declaration, location);
-                var occurrences = new HashSet<CXCursor>();
-                // Group carriers must be known before validating annotations on the emitted enum.
-                var attributes = declaration.Attrs.Where(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate)
-                    .OrderBy(attribute =>
-                    {
-                        string payload = HeaderAnnotation.RemoveOwnerPrefix(attribute.Spelling);
-                        return payload.StartsWith("Enum(", StringComparison.Ordinal) ||
-                            payload.StartsWith("FlagsEnum(", StringComparison.Ordinal) ? 0 : 1;
-                    });
-                foreach (var attribute in attributes)
+                var methodTargets = declaration.Attrs.Where(attribute =>
+                    attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                    attribute.Spelling == HeaderAnnotation.OwnerPrefix + "Method").ToArray();
+                if (methodTargets.Length != 0)
                 {
-                    var attributeLocation = GetLocation(attribute.Location);
-                    string payload = attribute.Spelling;
-                    if (!HeaderAnnotation.IsKnownPayload(payload))
-                        continue;
-                    if (!occurrences.Add(attribute.Handle))
-                        continue;
-                    HeaderAnnotation annotation;
-                    try
-                    {
-                        annotation = ReadAnnotation(attribute, facts, attributeLocation);
-                    }
-                    catch (FormatException exception)
-                    {
-                        throw Error(attributeLocation, exception.Message);
-                    }
-                    ValidateTarget(facts, annotation, attributeLocation);
-                    if (annotation.Name != "AssociatedConstant")
-                    {
-                        var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
-                        if (existing != null)
-                        {
-                            if (annotation.Name != "SupportedOSPlatform")
-                                throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
-                            if (!existing.Arguments.SequenceEqual(annotation.Arguments))
-                                throw Error(attributeLocation, $"Conflicting 'SupportedOSPlatform' annotations on '{declaration.Name}'. Clang scopes accumulate; close the prior scope before changing floors.");
-                            continue;
-                        }
-                    }
-                    facts.Annotations.Add(annotation);
+                    if (methodTargets.Length != 1 || declaration is not VarDecl variable ||
+                        variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
+                        variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
+                        !variable.Type.Handle.IsConstQualified ||
+                        !variable.Name.StartsWith("_WIN32META_METHOD_", StringComparison.Ordinal))
+                        throw Error(location, "Method annotations require the metadata-only _Win32_AnnotateMethod_ carrier.");
+                    methodCarriers.Add((variable, methodTargets[0]));
+                    return;
                 }
+                var facts = new DeclarationFacts(declaration, location);
+                ReadAnnotations(declaration, facts);
                 if (declaration is ParmVarDecl && HasLegacyRetvalComment(declaration))
                 {
                     var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
@@ -340,6 +322,73 @@ namespace Win32MetadataScraper
             {
                 if (!child.Handle.IsAttribute && !child.Handle.IsReference && !child.Handle.IsExpression)
                     Walk(child);
+            }
+        }
+
+        private void ApplyMethodAnnotations()
+        {
+            foreach (var carrier in methodCarriers)
+            {
+                var location = GetLocation(carrier.Target.Location);
+                var arguments = carrier.Target.CursorChildren.ToArray();
+                if (arguments.Length != 1)
+                    throw Error(location, "A method carrier requires one compiler-parsed native method reference.");
+                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_CXXMethod, location,
+                    "A method carrier requires a reference to a declared native interface method.");
+                var facts = declarations.Values.FirstOrDefault(item => item.Declaration.Handle.CanonicalCursor == target);
+                if (facts == null)
+                    throw Error(location, "The referenced method was not found in the original Clang AST.");
+                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Method" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                    throw Error(location, "A method carrier requires at least one metadata annotation.");
+                ReadAnnotations(carrier.Declaration, facts);
+            }
+        }
+
+        private void ReadAnnotations(NamedDecl declaration, DeclarationFacts facts)
+        {
+            var occurrences = new HashSet<CXCursor>();
+            // Group carriers must be known before validating annotations on the emitted enum.
+            var attributes = declaration.Attrs.Where(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate)
+                .OrderBy(attribute =>
+                {
+                    string payload = HeaderAnnotation.RemoveOwnerPrefix(attribute.Spelling);
+                    return payload.StartsWith("Enum(", StringComparison.Ordinal) ||
+                        payload.StartsWith("FlagsEnum(", StringComparison.Ordinal) ? 0 : 1;
+                });
+            foreach (var attribute in attributes)
+            {
+                var attributeLocation = GetLocation(attribute.Location);
+                string payload = attribute.Spelling;
+                if (payload == HeaderAnnotation.OwnerPrefix + "Method")
+                    continue;
+                if (!HeaderAnnotation.IsKnownPayload(payload))
+                    continue;
+                if (!occurrences.Add(attribute.Handle))
+                    continue;
+                HeaderAnnotation annotation;
+                try
+                {
+                    annotation = ReadAnnotation(attribute, facts, attributeLocation);
+                }
+                catch (FormatException exception)
+                {
+                    throw Error(attributeLocation, exception.Message);
+                }
+                ValidateTarget(facts, annotation, attributeLocation);
+                if (annotation.Name != "AssociatedConstant")
+                {
+                    var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
+                    if (existing != null)
+                    {
+                        if (annotation.Name != "SupportedOSPlatform")
+                            throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
+                        if (!existing.Arguments.SequenceEqual(annotation.Arguments))
+                            throw Error(attributeLocation, $"Conflicting 'SupportedOSPlatform' annotations on '{facts.Declaration.Name}'. Clang scopes accumulate; close the prior scope before changing floors.");
+                        continue;
+                    }
+                }
+                facts.Annotations.Add(annotation);
             }
         }
 

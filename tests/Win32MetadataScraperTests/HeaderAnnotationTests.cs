@@ -86,6 +86,75 @@ struct S { _Win32_AssociatedEnum_(FLAGS) unsigned flags; };
         }
 
         [Theory]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::value, _Win32_PreserveResult_);", "declared native interface method")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(Free, _Win32_PreserveResult_);", "declared native interface method")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SetLastError_);", "not valid on")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_Retained_);", "not valid on")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, );", "at least one metadata annotation")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_PreserveResult_);\n_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_PreserveResult_);", "Duplicate")]
+        [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SupportedOS_Windows7_);\n_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SupportedOS_Windows8_);", "Conflicting")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Method\", sizeof(&S::Run)) _Win32_PreserveResult_ int NotACarrier;", "metadata-only")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Method\") _Win32_PreserveResult_ static const unsigned char _WIN32META_METHOD_bad = 0;", "one compiler-parsed")]
+        public void MethodCarriersRejectInvalidFactsAndReferences(string declaration, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+int Free();
+struct __declspec(uuid(""135cc76d-5edc-468c-b418-060f8c43435c"")) S
+{
+    int value;
+    virtual int __stdcall Run() = 0;
+};
+" + declaration);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void MethodReferencesAreResolvedByTheOriginalCompilerParse()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "_WIN32META_ANNOTATE_METHOD_(Undeclared::Missing, _Win32_PreserveResult_);");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Undeclared", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void HoistedMidlMethodAttributesDoNotAnnotateInterfaceIdentifiers()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+_Win32_PreserveResult_
+extern ""C"" const int IID_MidlMethod;
+struct __declspec(uuid(""70873e41-fc54-4a7c-bf68-6f43263e6b81"")) IMidlMethod
+{
+    virtual int __stdcall Skip(unsigned count) = 0;
+};
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("IID_MidlMethod", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("c", "c11", true, false)]
+        [InlineData("c++", "c++17", false, false)]
+        [InlineData("c++", "c++17", true, true)]
+        public void InactiveMethodCarriersDoNotReferenceOrDeclareSymbols(
+            string language, string standard, bool annotationsEnabled, bool cInterface)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+_WIN32META_ANNOTATE_METHOD_(Undeclared::Missing, _Win32_PreserveResult_);
+enum { _WIN32META_METHOD_0 = 7 };
+int F();
+", annotationsEnabled: annotationsEnabled,
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n" + (cInterface ? "--additional=-DCINTERFACE\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+        }
+
+        [Theory]
         [InlineData(true)]
         [InlineData(false)]
         public void LogicalGroupAnnotationsDoNotDependOnAttributeOrder(bool associationFirst)

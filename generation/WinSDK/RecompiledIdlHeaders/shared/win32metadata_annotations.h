@@ -16,6 +16,15 @@
     typedef _WIN32META_ANNOTATION_("Enum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
 #define _Win32_FlagsEnum_(name, storage, ...) \
     typedef _WIN32META_ANNOTATION_("FlagsEnum(" #__VA_ARGS__ ")", __VA_ARGS__) storage name
+#if defined(__cplusplus) && !defined(CINTERFACE)
+#define _WIN32META_JOIN_RAW_(left, right) left##right
+#define _WIN32META_JOIN_(left, right) _WIN32META_JOIN_RAW_(left, right)
+#define _WIN32META_ANNOTATE_METHOD_(method, annotation) \
+    _WIN32META_ANNOTATION_("Method", sizeof(&method)) annotation \
+    static const unsigned char _WIN32META_JOIN_(_WIN32META_METHOD_, __COUNTER__) = 0
+#else
+#define _WIN32META_ANNOTATE_METHOD_(method, annotation)
+#endif
 #else
 #define _WIN32META_ANNOTATION_(...)
 #define _Win32_RAIIFree_(...)
@@ -23,6 +32,7 @@
 #define _Win32_AssociatedEnum_(name)
 #define _Win32_Enum_(name, storage, ...)
 #define _Win32_FlagsEnum_(name, storage, ...)
+#define _WIN32META_ANNOTATE_METHOD_(method, annotation)
 #endif
 
 #define _Win32_RAIIFree_Handle_(cleanup) _Win32_RAIIFree_(cleanup, -1, 0)
@@ -39,6 +49,8 @@
     cpp_quote("#if defined(__cplusplus)") \
     cpp_quote("struct " #annotation " " #name ";") \
     cpp_quote("#endif")
+#define _Win32_AnnotateMethod_(method, annotation) \
+    cpp_quote("_WIN32META_ANNOTATE_METHOD_(" #method ", " #annotation ");")
 #endif
 
 #define _WIN32META_OS_VERSION_Windows2000 "SupportedOSPlatform(\"windows5.0\")"
