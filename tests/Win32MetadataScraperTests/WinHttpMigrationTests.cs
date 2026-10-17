@@ -1155,7 +1155,7 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
-        public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainTheirThreeResidualUses()
+        public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainAllUnmigratedUses()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
@@ -1163,9 +1163,14 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && name.GetString() == "WIN32_ERROR");
             var residual = Assert.Single(items.Where(item =>
                 item.TryGetProperty("addUsesTo", out var name) && name.GetString() == "WIN32_ERROR"));
-            Assert.Equal(new[] { "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode" },
+            Assert.Equal(new[]
+            {
+                "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode", "NETINFOSTRUCT::dwStatus",
+            },
                 residual.GetProperty("uses").EnumerateArray()
-                    .Select(use => use.GetProperty("method").GetString() + "::" + use.GetProperty("parameter").GetString()));
+                    .Select(use => use.TryGetProperty("method", out var method)
+                        ? method.GetString() + "::" + use.GetProperty("parameter").GetString()
+                        : use.GetProperty("struct").GetString() + "::" + use.GetProperty("field").GetString()));
             Assert.Equal("WIN32_ERROR=Windows.Win32.Foundation",
                 Assert.Single(File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp"))
                     .Where(row => row.StartsWith("WIN32_ERROR=", StringComparison.Ordinal))));
@@ -1237,8 +1242,15 @@ namespace Win32MetadataScraperTests
                 Assert.EndsWith("WIN32_ERROR", name == "GetLastError" ? signature.ReturnType : signature.ParameterTypes[0],
                     StringComparison.Ordinal);
             }
+            var originalNetInfo = Type(control.Reader, "NETINFOSTRUCT", architecture, WNetNamespace);
+            var netInfo = Type(current.Reader, "NETINFOSTRUCT", architecture, WNetNamespace);
+            Assert.Equal(SnapshotType(control.Reader, originalNetInfo), SnapshotType(current.Reader, netInfo));
+            var status = Assert.Single(netInfo.GetFields().Select(current.Reader.GetFieldDefinition)
+                .Where(field => current.Reader.GetString(field.Name) == "dwStatus"));
+            Assert.Equal("Windows.Win32.Foundation.WIN32_ERROR", status.DecodeSignature(Signatures, null));
             this.output.WriteLine($"Architecture {architecture}: 3378 exact named constant rows, UInt32 storage, type facts " +
-                "and all three existing residual signature uses; declaration order remains a separate strict gate.");
+                "and all three method plus the existing NETINFOSTRUCT::dwStatus residual uses; " +
+                "WNet source admission and declaration order remain separate strict gates.");
 
             MethodDefinition Method(MetadataReader reader, string name) => Assert.Single(reader.TypeDefinitions
                 .Select(reader.GetTypeDefinition)

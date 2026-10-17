@@ -1426,9 +1426,10 @@ The complete `WIN32_ERROR` source candidate contributes 3,288 names from
 original `shared\winerror.h` and 90 from original `um\SetupAPI.h`, including
 both lowercase `64k` spellings. Both owners opt into the existing parser;
 the global namespace remains `Windows.Win32.Foundation`. The legacy
-definition is removed, retaining exactly the three existing `addUsesTo`
-sites. No helper, alias, forward declaration or unrelated WNet include is
-introduced.
+definition is removed. That checkpoint retained three method `addUsesTo`
+sites but incorrectly omitted the preexisting `NETINFOSTRUCT::dwStatus`
+field use; the follow-up below restores it while WNet remains unadmitted.
+No helper, alias, forward declaration or unrelated WNet include is introduced.
 
 All 12 actual C/C++, three-architecture, metadata-off/on native controls
 pass with unchanged native facts, SAL and diagnostics. Two transport
@@ -1582,3 +1583,72 @@ unset; neither was waived. The native Nla custom-attribute addition and
 unmeasured consumer effects remain explicit and separate. Global
 WinError/SetupAPI/WNet admission, its declaration-order gate and this
 owner's eventual current-head production CI remain held independently.
+
+### Existing WNet residual and original RPC alias contracts
+
+The two-original-header batch must retain all four preexisting
+`WIN32_ERROR` uses: `GetLastError::return`, `SetLastError::dwErrCode`,
+`SetLastErrorEx::dwErrCode` and `NETINFOSTRUCT::dwStatus`. The production
+residual and a new bounded frozen-parent configuration now retain the
+fourth use. This is preservation of an existing fact until WNet qualifies,
+not a new API sidecar fact, legacy group restoration or WNet admission.
+The original three-use configuration and 43-error witness remain unchanged,
+including original input SHA256 `78A42334...`. The follow-up input changes
+only that one use and has SHA256
+`E2F66BB20844A4C34E5DF2D079E255666A1CA55F0005C230DB79595FBF340829`.
+
+The permanent physical residual check now requires the entire
+`NETINFOSTRUCT` snapshot to remain literal and its `dwStatus` field to
+remain `Windows.Win32.Foundation.WIN32_ERROR` in all three architectures.
+Seven source, physical and literal-order harness controls actually pass on
+the complete `C57B89E2...` control image. Independently applying the updated
+harness to the supplied `216650FB...` candidate metadata produces exactly
+six expected failures: three expose that field's loss to `UInt32`, and
+three expose the changed group declaration order. Those are retained
+negative results, not passes or a waiver. The pending root's code is not
+inherited or executed; its image is used only as negative metadata data.
+
+The supplied generic-root candidate and repeat emit all frozen inputs but
+remain unadmitted. Their untouched 50-row report has SHA256
+`9498293B4FB88B48E87B0C5EDCDD5BAB9C6596137505831A795BDBD118132932`:
+46 added loose aliases, three existing RPC alias type/value changes and
+the missing WNet field residual. The supplied physical grade, independently
+rehashed as `FEDB8EC8...`, records equal facts for all 3,378 group members
+and all 49 aliases matching their candidate-declared scalar types/targets,
+with no absorption. Neither establishes baseline or native-source
+equivalence. Its 3,377 changed group field positions and 37,212 of 37,314
+changed type positions remain explicit, with no normalization or admission.
+The follow-up configuration has not yet been emitted with qualified
+replacement tooling.
+
+The three RPC macros in original `shared\rpcnterr.h` select distinct
+user and `_KRPCENV_` branches:
+
+| Original macro | Native user branch | Native kernel branch / old Int32 value | Candidate UInt32 value |
+| --- | --- | --- | --- |
+| `RPC_X_SS_CONTEXT_MISMATCH` | `ERROR_INVALID_HANDLE`, `6L` | `RPC_NT_SS_CONTEXT_MISMATCH`, `-1073545211` | `6` |
+| `RPC_X_INVALID_BUFFER` | `ERROR_INVALID_USER_BUFFER`, `1784L` | `STATUS_INVALID_BUFFER_SIZE`, `-1073741306` | `1784` |
+| `RPC_X_PIPE_APP_MEMORY` | `ERROR_OUTOFMEMORY`, `14L` | `STATUS_NO_MEMORY`, `-1073741801` | `14` |
+
+A permanent actual-source libclang control now asserts each macro's exact
+value and signed 32-bit Windows `LONG` type in both branches, for C17/C++17,
+all three architectures and metadata off/on: 24 cases pass without skips,
+each compiling original and prepared SDK contexts. The narrow probe uses
+the actual selected `ntdef.h`, `winerror.h`, `ntstatus.h` and `rpcnterr.h`;
+it introduces no declarations, header casts, substitute headers or new
+API shapes. The first broader Windows-including probe is retained
+separately: its 12 user cases passed and its 12 kernel cases could not find
+the unrelated WDK `ntddk.h` dependency. The narrow SDK macro-branch witness
+is not a complete WDK kernel-program or MSVC object-code compilation.
+
+The candidate values match the native user branch, while the old values
+match the native kernel branch. Both native branches are signed `LONG`;
+the candidate's `UInt32` representation is therefore a separate,
+unresolved representation/source-selection disposition, not a consequence
+of the checked alias conversion alone. These measured native facts do not
+choose one global projection for both branches or approve that type change.
+The 46 loose additions, three RPC changes, missing-field correction and
+declaration ordering stay separate from fact relocation. Their consumer
+effects remain unmeasured. The private alias prototype remains unpublished,
+and neither pending root `d8262ba4...` nor the complete original-source
+dependency is admitted by these controls.

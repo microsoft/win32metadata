@@ -4024,6 +4024,10 @@
       {
         "method": "SetLastErrorEx",
         "parameter": "dwErrCode"
+      },
+      {
+        "struct": "NETINFOSTRUCT",
+        "field": "dwStatus"
       }
     ]
   },

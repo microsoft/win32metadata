@@ -553,6 +553,57 @@ static_assert(DISC_NO_FORCE == 64u);
                         yield return new object[] { architecture.Item1, architecture.Item2, language, enabled };
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(OriginalRpcAliasControls))]
+        public void OriginalRpcAliasesHaveExplicitSignedUserAndKernelContracts(
+            string architecture, string target, string language, bool kernel, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            string source = (kernel ? "#define _KRPCENV_ 1\n" : "") +
+                "#include <ntdef.h>\n#include <winerror.h>\n#include <ntstatus.h>\n#include <rpcnterr.h>\n";
+            var aliases = new[]
+            {
+                ("RPC_X_SS_CONTEXT_MISMATCH", kernel ? unchecked((int)0xC0030005) : 6),
+                ("RPC_X_INVALID_BUFFER", kernel ? unchecked((int)0xC0000206) : 1784),
+                ("RPC_X_PIPE_APP_MEMORY", kernel ? unchecked((int)0xC0000017) : 14),
+            };
+            foreach (var alias in aliases)
+            {
+                string signedLong = language == "c"
+                    ? $"_Generic(({alias.Item1}), long: 1, default: 0)"
+                    : $"__is_same(decltype({alias.Item1}), long)";
+                source += $"{assertion}({alias.Item1} == {alias.Item2.ToString(System.Globalization.CultureInfo.InvariantCulture)}L, \"exact native alias value\");\n" +
+                    $"{assertion}(sizeof({alias.Item1}) == 4 && {signedLong}, \"native signed Windows LONG, not unsigned enum storage\");\n";
+            }
+            // This original header is macro-only; the compiler assertions, not invented declarations, witness its contracts.
+            Assert.Empty(Surface(root, original, "Foundation", architecture, target, new[] { "rpcnterr.h" }, "",
+                sourceText: source, language: language));
+            Assert.Empty(Surface(root, prepared, "Foundation", architecture, target, new[] { "rpcnterr.h" }, "",
+                sourceText: source, language: language, metadataEnabled: enabled));
+            this.output.WriteLine($"{architecture}/{language}/kernel={kernel}/metadata={enabled}: " +
+                string.Join(", ", aliases.Select(alias => alias.Item1 + "=" +
+                    alias.Item2.ToString(System.Globalization.CultureInfo.InvariantCulture))) +
+                "; all three original macros are signed 32-bit Windows LONG in both native branches. " +
+                "This source witness does not admit a metadata value/type change or choose a projection for both branches.");
+        }
+
+        public static IEnumerable<object[]> OriginalRpcAliasControls()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"),
+                ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (string language in new[] { "c", "c++" })
+                    foreach (bool kernel in new[] { false, true })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[] { architecture.Item1, architecture.Item2, language, kernel, enabled };
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlHeaderControls))]
         public void OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
