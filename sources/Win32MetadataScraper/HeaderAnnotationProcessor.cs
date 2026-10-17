@@ -124,11 +124,18 @@ namespace Win32MetadataScraper
             {
                 if (facts.Declaration is not TypedefNameDecl alias || !IsEnumStorage(alias.UnderlyingType.CanonicalType.Kind))
                     throw Error(location, "Enum groups require an integral typedef storage type of at most 64 bits.");
-                if (facts.LogicalEnumMembers != null || arguments.Length != annotation.Arguments.Count)
+                if (arguments.Length != annotation.Arguments.Count)
                     throw Error(location, "An enum group requires exactly one compiled value for each member name.");
+                if (facts.LogicalEnumMembers != null && facts.IsFlagsEnum != (annotation.Name == "FlagsEnum"))
+                    throw Error(location, $"Conflicting enum group kinds on '{facts.Declaration.Name}'.");
                 string storage = GetManagedType(alias.UnderlyingType, location);
-                facts.LogicalEnumMembers = annotation.Arguments.Zip(arguments, (name, argument) =>
-                    new LogicalEnumMember(name, $"unchecked(({storage}){ReadInteger(argument, location).ToString(CultureInfo.InvariantCulture)}UL)")).ToArray();
+                ulong mask = ulong.MaxValue >> checked((8 - (int)alias.UnderlyingType.CanonicalType.Handle.SizeOf) * 8);
+                var members = annotation.Arguments.Zip(arguments, (name, argument) =>
+                {
+                    ulong value = ReadInteger(argument, location);
+                    return new LogicalEnumMember(name, $"unchecked(({storage}){value.ToString(CultureInfo.InvariantCulture)}UL)", value & mask);
+                }).ToArray();
+                facts.LogicalEnumMembers = MergeEnumMembers(facts.LogicalEnumMembers, members, location);
                 facts.IsFlagsEnum = annotation.Name == "FlagsEnum";
             }
             else if (arguments.Length != 0 || annotation.Name is "RAIIFree" or "ImportLibrary" or "AssociatedEnum")
@@ -381,6 +388,8 @@ namespace Win32MetadataScraper
                     var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
                     if (existing != null)
                     {
+                        if (annotation.Name is "Enum" or "FlagsEnum")
+                            continue;
                         if (annotation.Name != "SupportedOSPlatform")
                             throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
                         if (!existing.Arguments.SequenceEqual(annotation.Arguments))
@@ -406,8 +415,13 @@ namespace Win32MetadataScraper
                 var owner = group.FirstOrDefault(facts => facts.Annotations.Count != 0) ?? group.First();
                 foreach (var facts in group.Where(facts => facts != owner))
                 {
+                    if (owner.LogicalEnumMembers != null && facts.LogicalEnumMembers != null &&
+                        owner.IsFlagsEnum != facts.IsFlagsEnum)
+                        throw Error(facts.Location, $"Conflicting enum group kinds on '{facts.Declaration.Name}'.");
                     foreach (var annotation in facts.Annotations)
                     {
+                        if (annotation.Name is "Enum" or "FlagsEnum" && owner.LogicalEnumMembers != null)
+                            continue;
                         var matching = owner.Annotations.Where(existing => existing.Name == annotation.Name).ToArray();
                         bool equal = matching.Any(existing => existing.Arguments.SequenceEqual(annotation.Arguments));
                         if (matching.Length != 0 && !equal && annotation.Name != "AssociatedConstant")
@@ -428,11 +442,7 @@ namespace Win32MetadataScraper
                             owner.InvalidValues.AddRange(facts.InvalidValues);
                     }
                     if (facts.LogicalEnumMembers != null)
-                    {
-                        if (owner.LogicalEnumMembers != null && !owner.LogicalEnumMembers.SequenceEqual(facts.LogicalEnumMembers))
-                            throw Error(facts.Location, $"Conflicting enum group values on redeclarations of '{facts.Declaration.Name}'.");
-                        owner.LogicalEnumMembers = facts.LogicalEnumMembers;
-                    }
+                        owner.LogicalEnumMembers = MergeEnumMembers(owner.LogicalEnumMembers, facts.LogicalEnumMembers, facts.Location);
                 }
                 if (supportedOS != null)
                     owner.Annotations.Add(supportedOS);
@@ -446,6 +456,25 @@ namespace Win32MetadataScraper
                     facts.LogicalEnumMembers = owner.LogicalEnumMembers;
                 }
             }
+        }
+
+        private static LogicalEnumMember[] MergeEnumMembers(
+            LogicalEnumMember[] existing, LogicalEnumMember[] incoming, NativeLocation location)
+        {
+            var members = (existing ?? Array.Empty<LogicalEnumMember>()).ToList();
+            var values = members.ToDictionary(member => member.Name, member => member.StorageBits, StringComparer.Ordinal);
+            foreach (var member in incoming)
+            {
+                if (values.TryGetValue(member.Name, out ulong value))
+                {
+                    if (value != member.StorageBits)
+                        throw Error(location, $"Conflicting enum group values for '{member.Name}'.");
+                    continue;
+                }
+                values.Add(member.Name, member.StorageBits);
+                members.Add(member);
+            }
+            return members.ToArray();
         }
 
         private static (CXCursor Declaration, int Parameter) GetNativeIdentity(NamedDecl declaration)
@@ -789,7 +818,7 @@ namespace Win32MetadataScraper
             => new($"{location.File}({location.Line},{location.Column})", message);
 
         private sealed record NativeLocation(string File, uint Line, uint Column, uint Offset);
-        private sealed record LogicalEnumMember(string Name, string Value);
+        private sealed record LogicalEnumMember(string Name, string Value, ulong StorageBits);
 
         private sealed class DeclarationFacts
         {

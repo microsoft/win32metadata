@@ -69,6 +69,24 @@ The helper is an SDK asset. Exercise both packaged and repository-backed
 GeneratorSdk samples when changing the common bootstrap: a helper available through
 the main SDK's include paths can still be missing from another asset layout.
 
+Treat a global logical group as a dependency batch before admitting its use sites.
+`WIN32_ERROR`, for example, includes both WinError constants and SetupAPI-owned error
+macros. Keep contributions in their original headers, using the same group name,
+storage, and kind; route them to the same metadata namespace through the existing
+global namespace mechanism. Preserve the complete physical member inventory across
+all owners, including mixed-case native names. A prefix-only or uppercase-only
+inventory is not a completeness check.
+
+Do not satisfy an association with an unbound typedef, subset group, generated C#
+enum, or broad include of another API's headers. Qualify the source-owned group and
+its native visibility first. Preserve `.header-types.cs` producer filenames in frozen
+source overlays so the emitter can distinguish group contributions from ordinary
+native or residual legacy enum definitions. Keep unmigrated use-site facts explicit
+until their own declaration owners qualify. After moving a complete group definition,
+the existing `addUsesTo` form can retain those existing uses without `name`, `members`,
+or `autoPopulate`; it emits remaps, not another enum definition. Do not add new
+API-specific sidecar facts as part of that bridge.
+
 For the selected pilot SDK `10.0.26100.7705` x64 import package, all 462 libraries were checked for
 the seven WSL entrypoints and API-set DLL. None supplies them. The actual processing
 set covers all 453 `um\x64` libraries and likewise finds none; the other nine
