@@ -501,6 +501,81 @@ static_assert(DISC_NO_FORCE == 64u);
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(WerOriginalHeaderControls))]
+        public void OriginalWerHeadersPreserveNativeAbiAndSalWithExactMetadata(
+            string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string[] headers = { "WerApi.h", "ErrorRep.h" };
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            string checks = string.Join("\n", WinHttpMigrationTests.AuthoredWerEnumGroups()
+                .SelectMany(group => group.Members)
+                .Select(member => $"{assertion}({member.Name} == {member.Value}, \"{member.Name}\");"));
+            var before = Surface(root, original, "Wer", architecture, target, headers, checks,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "Wer", architecture, target, headers, checks,
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            string[] carriers =
+            {
+                "typedef WER_FAULT_REPORTING unsigned long", "typedef WER_FILE unsigned long",
+                "typedef WER_SUBMIT_FLAGS unsigned long",
+            };
+            Assert.NotEmpty(before);
+            Assert.Equal(enabled ? carriers : Array.Empty<string>(), after.Where(value => carriers.Contains(value, StringComparer.Ordinal)));
+            Assert.Equal(before, after.Where(value => !carriers.Contains(value, StringComparer.Ordinal)));
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expected = WinHttpMigrationTests.AuthoredWerHeaderContracts()
+                .SelectMany(contract => contract.Functions.Select(name =>
+                    name + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
+                .Concat(WinHttpMigrationTests.AuthoredWerEnumGroups().Select(group =>
+                    group.Name + "|FlagsEnum(" + string.Join(", ", group.Members.Select(member => member.Name)) + ")"))
+                .Concat(new[]
+                {
+                    "dwFlags|AssociatedEnum", "dwFileFlags|AssociatedEnum", "pdwFlags|AssociatedEnum",
+                    "phReportHandle|RAIIFree", "phReportStore|RAIIFree",
+                    "AddERExcludedApplicationA|SetLastError", "AddERExcludedApplicationW|SetLastError",
+                }).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal((enabled ? expected : Array.Empty<string>()),
+                annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(enabled ? 47 : 0, annotations.Count);
+            foreach (string name in new[] { "WerRegisterFile", "WerReportAddFile", "WerReportSubmit", "WerSetFlags", "WerGetFlags" })
+                Assert.Contains(before, value => value.StartsWith("function " + name + " ", StringComparison.Ordinal) &&
+                    value.Contains("unsigned long", StringComparison.Ordinal));
+            foreach (var side in new[] { ("before", before), ("after", after) })
+                foreach (string fact in side.Item2.Where(value => value.StartsWith("function ", StringComparison.Ordinal) ||
+                    carriers.Contains(value, StringComparer.Ordinal)))
+                    this.output.WriteLine(side.Item1 + " " + fact);
+            this.output.WriteLine($"Wer/{architecture}/{language}/metadata={enabled}: " +
+                $"{before.Length} unchanged complete native facts, {beforeSal.Count} unchanged SAL attributes, " +
+                "21 original macro values, exactly three metadata-only uint32 typedef carriers when enabled; " +
+                $"{annotations.Count} exact metadata occurrences.");
+        }
+
+        public static IEnumerable<object[]> WerOriginalHeaderControls()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (string language in new[] { "c", "c++" })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { architecture.Item1, architecture.Item2, language, enabled };
+        }
+
         public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
         {
             foreach (string partition in new[]

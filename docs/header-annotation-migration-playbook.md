@@ -2708,3 +2708,29 @@ IDL sources and their thirty preserved legacy facts remain
 separate blockers. This does not claim whole owning production
 integration, current-head CI or publication; no push, PR/stack
 mutation or merge is performed.
+
+### Bounded Wer/ErrorRep source continuation, not yet qualified
+
+The next cohort keeps the coupled normal Wer owner intact: original
+`WerApi.h` and `ErrorRep.h` are considered together. The three existing
+logical flag bags use the released `_Win32_FlagsEnum_` typedef transport
+instead of C++-only metadata enum declarations. Their exact 21 member
+names, values, UInt32 storage, flags and existing memberships are retained;
+no additional native constants are absorbed into these groups.
+Thirty-five declaration-local floors replace the old scope blocks.
+The five existing associations retain their native DWORD/PDWORD contracts
+independently of their logical enum targets.
+
+The exact original `WerReportCloseHandle` and `WerStoreClose` declarations
+move before their producers, following the qualified FileHistory cleanup
+reference pattern. There are no new prototypes or native type changes.
+Stripping only the annotation sites and removing those two byte-identical
+declaration blocks from each side reproduces every other selected SDK byte,
+including original line endings and trailing blank lines. Both existing
+cleanup annotations remain on their precise producer parameters.
+
+Three permanent source guards pass without skips. Fresh whole-owner
+native controls, complete normal source traversal, full-image/repeat,
+physical/API/order evidence and immutable closure have **not** yet
+qualified this cohort. Coverage remains 31/50; neither original header
+is counted separately or admitted partially.

@@ -977,6 +977,8 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "physicalmonitorenumerationapi.h", 6)]
         [InlineData("um", "Raseapif.h", 5)]
         [InlineData("um", "dwmapi.h", 31)]
+        [InlineData("um", "WerApi.h", 31)]
+        [InlineData("um", "ErrorRep.h", 4)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
@@ -1064,6 +1066,67 @@ namespace Win32MetadataScraperTests
                 Type(current.Reader, "DEVPROP_OPERATOR", architecture, DeviceQueryNamespace), signed: true);
             this.output.WriteLine($"Architecture {architecture}: all eight filter APIs retain expression pointers; " +
                 "Operator retains DEVPROP_OPERATOR, separate from QueryFlags, with all 42 exact signed values and raw bits.");
+        }
+
+        internal static IEnumerable<(string OS, string[] Functions)> AuthoredWerHeaderContracts()
+        {
+            yield return ("windows6.0.6000", new[]
+            {
+                "WerReportCreate", "WerReportSetParameter", "WerReportAddFile", "WerReportSetUIOption",
+                "WerReportSubmit", "WerReportAddDump", "WerReportCloseHandle", "WerRegisterFile",
+                "WerUnregisterFile", "WerRegisterMemoryBlock", "WerUnregisterMemoryBlock", "WerSetFlags",
+                "WerGetFlags", "WerAddExcludedApplication", "WerRemoveExcludedApplication", "WerReportHang",
+            });
+            yield return ("windows6.1", new[] { "WerRegisterRuntimeExceptionModule", "WerUnregisterRuntimeExceptionModule" });
+            yield return ("windows10.0.15063", new[]
+            {
+                "WerRegisterExcludedMemoryBlock", "WerUnregisterExcludedMemoryBlock",
+                "WerRegisterCustomMetadata", "WerUnregisterCustomMetadata", "WerRegisterAdditionalProcess",
+                "WerUnregisterAdditionalProcess", "WerStoreOpen", "WerStoreClose", "WerStoreGetFirstReportKey",
+                "WerStoreGetNextReportKey", "WerStoreQueryReportMetadataV2", "WerFreeString",
+            });
+            yield return ("windows10.0.16299", new[] { "WerRegisterAppLocalDump", "WerUnregisterAppLocalDump" });
+            yield return ("windows5.1.2600", new[] { "ReportFault", "AddERExcludedApplicationA", "AddERExcludedApplicationW" });
+        }
+
+        internal static IEnumerable<(string Name, (string Name, uint Value)[] Members)> AuthoredWerEnumGroups()
+        {
+            yield return ("WER_FAULT_REPORTING", new[]
+            {
+                ("WER_FAULT_REPORTING_FLAG_DISABLE_THREAD_SUSPENSION", 4u),
+                ("WER_FAULT_REPORTING_FLAG_NOHEAP", 1u),
+                ("WER_FAULT_REPORTING_FLAG_QUEUE", 2u),
+                ("WER_FAULT_REPORTING_FLAG_QUEUE_UPLOAD", 8u),
+                ("WER_FAULT_REPORTING_ALWAYS_SHOW_UI", 16u),
+            });
+            yield return ("WER_FILE", new[] { ("WER_FILE_ANONYMOUS_DATA", 2u), ("WER_FILE_DELETE_WHEN_DONE", 1u) });
+            yield return ("WER_SUBMIT_FLAGS", new[]
+            {
+                ("WER_SUBMIT_ADD_REGISTERED_DATA", 16u), ("WER_SUBMIT_HONOR_RECOVERY", 1u),
+                ("WER_SUBMIT_HONOR_RESTART", 2u), ("WER_SUBMIT_NO_ARCHIVE", 256u),
+                ("WER_SUBMIT_NO_CLOSE_UI", 64u), ("WER_SUBMIT_NO_QUEUE", 128u),
+                ("WER_SUBMIT_OUTOFPROCESS", 32u), ("WER_SUBMIT_OUTOFPROCESS_ASYNC", 1024u),
+                ("WER_SUBMIT_QUEUE", 4u), ("WER_SUBMIT_SHOW_DEBUG", 8u),
+                ("WER_SUBMIT_START_MINIMIZED", 512u), ("WER_SUBMIT_BYPASS_DATA_THROTTLING", 2048u),
+                ("WER_SUBMIT_ARCHIVE_PARAMETERS_ONLY", 4096u), ("WER_SUBMIT_REPORT_MACHINE_ID", 8192u),
+            });
+        }
+
+        [Fact]
+        public void WerHeadersUseOnlyTheExistingNativeNeutralGroupVocabulary()
+        {
+            string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "um", "WerApi.h.patch"));
+            Assert.Equal(3, patch.Split('\n').Count(line => line.StartsWith("+_Win32_FlagsEnum_(", StringComparison.Ordinal)));
+            Assert.Equal(5, patch.Split('\n').Count(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                line.Contains("_Win32_AssociatedEnum_(", StringComparison.Ordinal)));
+            Assert.Equal(2, patch.Split('\n').Count(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                line.Contains("_Win32_RAIIFree_(", StringComparison.Ordinal)));
+            Assert.DoesNotContain("push_macro", patch);
+            Assert.DoesNotContain("pop_macro", patch);
+            Assert.DoesNotContain("[[clang::flag_enum]]", patch);
+            Assert.DoesNotContain("+enum ", patch);
+            foreach (string group in AuthoredWerEnumGroups().Select(value => value.Name))
+                Assert.Contains("+_Win32_FlagsEnum_(" + group + ", DWORD,", patch);
         }
 
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredDwmHeaderContracts()
