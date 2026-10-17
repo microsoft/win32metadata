@@ -1753,3 +1753,98 @@ metadata source copied by the existing `Emit` helper; that invocation is
 retained, and the corrected fixture supplies it before compilation.
 These remain bounded local controls, not complete-image or production-CI
 admission for the four original IDLs or the held global source batch.
+
+### Corrected four-use frozen execution with the qualified root
+
+The corrected `E2F66BB2...` four-use configuration now runs through the
+actual ConstantsScraper and complete emitter with the inherited qualified
+tooling. This is explicitly the immutable original `750E...` header
+context, not fresh owning-head header traversal or source admission.
+Control has 832 frozen inputs, including 824 C# files; candidate and
+independent repeat each have 836 inputs, including 828 C# files. Fresh
+constants execution changes only `enumsRemap.rsp` relative to the original
+candidate. All 1,577 frozen traversal rows were rechecked, including the
+nine originally absent paths.
+
+The complete images are control `D10F4503...`, candidate `3A7AF78D...`
+and repeat `2B125C6E...`. Unfiltered control-to-candidate and
+control-to-repeat each have exactly 49 rows, byte-identical with SHA256
+`A055EBDC231FD754B14365EC343529A41FD961FC607DBF63AFA3CCFC6D1C8DC2`;
+candidate-to-repeat is raw-zero. The prior 50-row report remains
+unchanged. The removed row is specifically the unintended
+`NETINFOSTRUCT.dwStatus` enum-use loss, not an alias or value allowance.
+All 3,378 named group members, storage, values, flags and type facts,
+plus all three method uses and that existing field use, pass physical
+readback on all three architectures.
+
+The 49 changed scalar declarations are physically retained without
+absorption: 44 are UInt32 and five are Int32. The latter are
+`DS_S_SUCCESS`, `DNS_STATUS_PACKET_UNSECURE`, `SCARD_S_SUCCESS`,
+`WN_SUCCESS` and `WN_NO_ERROR`; no blanket unsigned conversion is inferred.
+All scalar facts, complete physical type sequences and complete group
+field sequences are literal first/repeat matches. Full unsorted raw
+sequences and scalar signatures/value blobs are retained in the evidence.
+These measurements do not admit the 46 added APIs or the three existing
+RPC changes: `RPC_X_SS_CONTEXT_MISMATCH` changes Int32 -1073545211 to
+UInt32 6, `RPC_X_INVALID_BUFFER` changes Int32 -1073741306 to UInt32 1784,
+and `RPC_X_PIPE_APP_MEMORY` changes Int32 -1073741801 to UInt32 14.
+Permanent architecture-specific guards print every old/new raw scalar row
+and continue to fail baseline equality.
+
+Literal order remains a separate failed gate: 3,377 of 3,379 group field
+positions, including the storage slot, differ. This corrected four-use
+witness also has 37,214 changed physical type positions out of 37,314.
+The earlier coordinator witness's 37,212 count is retained as its own
+measurement, not overwritten or reused for this different execution.
+The strengthened whole-image guard compares the original type sequence
+before semantic snapshots. No ordering is normalized or allowed.
+WNet, native branch/representation and complete original-header source
+admission remain held; native signedness and consumer effects are not
+claimed.
+
+### Third original-IDL batch: bounded complete-image results
+
+The four normal generated C# files and all five generated RSP files are
+literal first/repeat matches. Each fresh emitter rule is present in the
+complete frozen response-file closure: the 22 fixup rows match exactly,
+and the 11 common pointer-reduction rows are present in each architecture's
+complete response file. No generated source or rule is repaired.
+
+The next bounded complete-image experiment rematerializes all 831 entries
+of the retained whole-FileHistory source archive, including 824 C# files.
+Candidate and repeat replace only the four complete normal outputs for
+Com.CallObj, Com.Events, Antimalware and Eap. Their bounded emitter settings
+remove only the existing
+`IEnumEventObject::Reset=[CanReturnMultipleSuccessValues]` directive.
+The held original WinError/SetupAPI source contributions are not included;
+the unchanged frozen legacy group is private comparison context, not a
+restored production definition.
+
+Control `37B8AC8A...`, candidate `1D0E2188...` and repeat `CBF56327...`
+are unfiltered raw API-zero against each other. The new control is also
+raw-zero against the prior whole-FileHistory `33B82E6F...` image. Both
+candidate and repeat pass all 37,314 literal physical type snapshots,
+the original type and field declaration sequences, and complete ordered
+method rows. All 25 interface and seven function availability targets
+retain their exact versions on all three architectures.
+
+The existing reviewed Reset check uses the original same-SDK
+`1361407C...` OLD image: its signature and method flags are unchanged,
+the CLI PreserveSig implementation flag is set, and the former success
+custom attribute is absent without a replacement custom flag. The first
+invocation incorrectly used the already-canonical `37B8AC8A...` tooling
+control as OLD and retained three failed old-flag preconditions. Only the
+fixture binding was corrected; neither source nor assertions changed.
+The qualified emitter already canonicalizes the legacy directive, so
+relocating this reviewed fact into the original IDL adds no new image
+delta against the matched canonical control.
+
+Each complete candidate passes seven targeted physical cases and all 14
+existing integrity/interface cases without skips. These complete-image
+results accompany the retained 216 native cases, actual MIDL/native-output
+and warning-source controls, and fresh preparation/source repeats; they
+do not claim a new native replay after test-only edits. The prior
+FileHistory placement/floor negatives and Nla custom-RetVal physical audit
+remain separate evidence. This is a locally verified four-owner source
+checkpoint, not production admission of all authored drafts or the held
+global source batch, and not owning current-head CI qualification.

@@ -939,6 +939,87 @@ namespace Win32MetadataScraperTests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(4)]
+        public void ThirdOriginalIdlBatchPreservesItsThirtyTwoExactAvailabilityTargets(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var groups = new[]
+            {
+                ("Windows.Win32.System.Com.CallObj", "windows5.0", new[]
+                {
+                    "ICallFrame", "ICallIndirect", "ICallInterceptor", "ICallFrameEvents", "ICallUnmarshal", "ICallFrameWalker",
+                }),
+                ("Windows.Win32.System.Com.Events", "windows5.0", new[]
+                {
+                    "IEventSystem", "IEventPublisher", "IEventClass", "IEventClass2", "IEventSubscription", "IFiringControl",
+                    "IPublisherFilter", "IMultiInterfacePublisherFilter", "IEventObjectChange", "IEventObjectChange2",
+                    "IEnumEventObject", "IEventObjectCollection", "IEventProperty", "IEventControl", "IMultiInterfaceEventControl",
+                }),
+                ("Windows.Win32.System.Antimalware", "windows10.0.10240", new[]
+                {
+                    "IAmsiStream", "IAntimalwareProvider", "IAntimalware",
+                }),
+                ("Windows.Win32.Security.ExtensibleAuthenticationProtocol", "windows5.0", new[]
+                {
+                    "IEAPProviderConfig",
+                }),
+            };
+            Assert.Equal(25, groups.Sum(group => group.Item3.Length));
+            foreach (var group in groups)
+                foreach (string name in group.Item3)
+                {
+                    var before = Type(control.Reader, name, architecture, group.Item1);
+                    var after = Type(current.Reader, name, architecture, group.Item1);
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(control.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            var functions = new[]
+            {
+                ("Windows.Win32.System.Com.CallObj", "windows5.0", new[] { "CoGetInterceptor" }),
+                ("Windows.Win32.System.Antimalware", "windows10.0.10240", new[]
+                {
+                    "AmsiInitialize", "AmsiUninitialize", "AmsiOpenSession", "AmsiCloseSession", "AmsiScanBuffer", "AmsiScanString",
+                }),
+            };
+            Assert.Equal(7, functions.Sum(group => group.Item3.Length));
+            foreach (var group in functions)
+            {
+                var before = Methods(control.Reader, group.Item1, "Apis", architecture);
+                var after = Methods(current.Reader, group.Item1, "Apis", architecture);
+                foreach (string name in group.Item3)
+                {
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(control.Reader, before[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    Assert.Equal(new[] { group.Item2 },
+                        AttributeValues(current.Reader, after[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                }
+            }
+            this.output.WriteLine($"Architecture {architecture}: all 25 interface and seven function floors retain their exact targets and versions.");
+        }
+
+        [MigrationFact]
+        public void ThirdOriginalIdlBatchPreservesEveryPhysicalTypeAndDeclarationOrder()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(before.Keys, after.Keys);
+            foreach (var entry in before)
+                Assert.Equal(entry.Value.GetFields()
+                    .Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    after[entry.Key].GetFields()
+                        .Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+            this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "third four original-IDL canonical control");
+            this.output.WriteLine("Literal type and field sequences are unchanged; complete method rows retain their declaration order.");
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
         public void FileHistoryPreservesAllElevenFloorsAndItsExactProducerOwnership(int architecture)
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
@@ -1197,9 +1278,14 @@ namespace Win32MetadataScraperTests
             var after = Type(current.Reader, "WIN32_ERROR", architecture, "Windows.Win32.Foundation");
             Assert.Equal(3379, before.GetFields().Count);
             Assert.Equal(3379, after.GetFields().Count);
-            foreach (var pair in new[] { (control.Reader, before), (current.Reader, after) })
+            string[] oldNames = before.GetFields()
+                .Select(handle => control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)).ToArray();
+            string[] newNames = after.GetFields()
+                .Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)).ToArray();
+            this.output.WriteLine($"Architecture {architecture}: {oldNames.Zip(newNames).Count(pair => pair.First != pair.Second)} " +
+                $"of {oldNames.Length} literal field positions differ, including the storage field.");
+            foreach (string[] names in new[] { oldNames, newNames })
             {
-                string[] names = pair.Item2.GetFields().Select(handle => pair.Item1.GetString(pair.Item1.GetFieldDefinition(handle).Name)).ToArray();
                 Assert.Contains("ERROR_ITERATED_DATA_EXCEEDS_64k", names);
                 Assert.Contains("ERROR_AUTODATASEG_EXCEEDS_64k", names);
             }
@@ -1259,11 +1345,39 @@ namespace Win32MetadataScraperTests
                 .Where(method => reader.GetString(method.Name) == name && Supports(reader, method.GetCustomAttributes(), architecture)));
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalRpcAliasesRetainTheirExistingScalarStorageAndValues(int architecture)
+        {
+            const string ns = "Windows.Win32.Foundation";
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            string[] names = { "RPC_X_SS_CONTEXT_MISMATCH", "RPC_X_INVALID_BUFFER", "RPC_X_PIPE_APP_MEMORY" };
+            var before = Rows(control.Reader);
+            var after = Rows(current.Reader);
+            foreach (string name in names)
+                this.output.WriteLine($"{name}/{architecture}: {before[name]} => {after[name]}");
+            Assert.Equal(names.Select(name => before[name]), names.Select(name => after[name]));
+
+            Dictionary<string, string> Rows(MetadataReader reader) =>
+                SnapshotType(reader, Type(reader, "Apis", architecture, ns)).Split('\n')
+                    .Where(row => row.StartsWith("F|", StringComparison.Ordinal) && names.Contains(row.Split('|')[1]))
+                    .ToDictionary(row => row.Split('|')[1], StringComparer.Ordinal);
+        }
+
         [MigrationFact]
         public void OriginalErrorGroupBatchPreservesEveryPhysicalTypeWithoutOrderNormalization()
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
+            string[] before = Types(control.Reader).Keys.ToArray();
+            string[] after = Types(current.Reader).Keys.ToArray();
+            Assert.Equal(before.Length, after.Length);
+            this.output.WriteLine($"{before.Zip(after).Count(pair => pair.First != pair.Second)} of {before.Length} " +
+                "literal physical type positions differ; neither sequence is sorted or normalized.");
+            Assert.Equal(before, after);
             this.AssertEveryPhysicalTypeUnchanged(control.Reader, current.Reader, "complete original error-owner group control");
         }
 
