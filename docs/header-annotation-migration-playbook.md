@@ -2729,8 +2729,43 @@ declaration blocks from each side reproduces every other selected SDK byte,
 including original line endings and trailing blank lines. Both existing
 cleanup annotations remain on their precise producer parameters.
 
-Three permanent source guards pass without skips. Fresh whole-owner
-native controls, complete normal source traversal, full-image/repeat,
-physical/API/order evidence and immutable closure have **not** yet
-qualified this cohort. Coverage remains 31/50; neither original header
-is counted separately or admitted partially.
+Three permanent source guards and all twelve fresh whole-owner
+C17/C++17, metadata-off/on, x86/x64/arm64 native cases pass without skips.
+Two independent stock Wer traversals and their normal ConstantsScraper
+stages succeed at producer `f55e3ccdfa0c85ece11549cd72833fc98b016349`.
+Both 3,443-header prepared SDK closures are independently hashed and
+literal. The three actual whole owned outputs repeat byte-for-byte;
+388 of 389 complete normal-stage outputs are literal, with the two
+raw preparation-root-dependent namespace maps retained unmodified.
+
+**The coupled cohort is held on a complete-image compiler blocker.**
+The normal constants output contains the source-backed scalar alias
+`public const uint WER_SUBMIT_DISCARD_IF_QUEUED = WER_SUBMIT_NO_QUEUE;`.
+Its target remains a member of the existing `WER_SUBMIT_FLAGS` group,
+not a new loose constant. Both complete 831-input/824-C# emissions fail
+with the same single `CS0103`: `WER_SUBMIT_NO_QUEUE` is unresolved in the
+processed constants source. There is no candidate or repeat WinMD.
+The processed constants bytes are identical, SHA256
+`711C10CC74AE778F9E4B2040B12E5630970433DC795CBBA33EB77C8DAF01CE30`.
+The existing cleaner removes loose copies of enum members; the released
+post-compilation alias conversion requires an already bound enum
+expression and does not resolve this unqualified identifier. This is
+a measured integration gap, not a new native signedness or source-policy
+decision.
+
+Each complete input retains 827 literal unowned entries from sealed
+Dwm `D4FF3976...`, including the qualified Eap and DeviceQuery sources.
+Only the three whole real Wer outputs replace the old owned inputs;
+the exact two synthetic-handle objects, twelve handle-remap rows and
+five direct-enum-use rows are removed from the otherwise frozen configs.
+The actual quadruple-colon `WerReportSubmit` legacy row is retained in
+the removal evidence, not silently corrected.
+
+The bounded first/repeat failures are preserved under
+`files\wer-errorrep-alias-held-f55e3ccd` in the owning session.
+No alias is suppressed, absorbed into a logical group, manually
+qualified or replaced by a literal/cast; no generated source, native
+declaration or shared tooling is repaired around the failure.
+Final physical/API/order and complete-image acceptance remain unexecuted.
+Coverage stays **31/50**; neither header is partially admitted. Other
+disjoint original-header work and the separate WNet/RPC holds continue.
