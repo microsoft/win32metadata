@@ -61,6 +61,7 @@ GETPROPERTYSTOREFLAGS
 HLBWIF_FLAGS
 HLFNAMEF
 HLNF
+IdentityUpdateEvent
 JOB_OBJECT_NET_RATE_CONTROL_FLAGS
 KSPROPERTY_IPSINK
 MERGE_VIRTUAL_DISK_FLAG
@@ -1416,6 +1417,8 @@ IDirectXVideoAccelerationService::CreateSurface::DxvaType=[AssociatedEnum("DXVA2
 IDirectXVideoDecoder::GetBuffer::BufferType=[AssociatedEnum("DXVA2_BufferfType")]
 IFolderView::ItemCount::uFlags=[AssociatedEnum("_SVGIO")]
 IFolderView::Items::uFlags=[AssociatedEnum("_SVGIO")]
+IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents=[AssociatedEnum("IdentityUpdateEvent")]
+IIdentityProvider::Advise::dwIdentityUpdateEvents=[AssociatedEnum("IdentityUpdateEvent")]
 IImePad::Request::reqId=[AssociatedEnum("IME_PAD_REQUEST_FLAGS")]
 IOleClientSite::GetMoniker::dwAssign=[AssociatedEnum("OLEGETMONIKER")]
 IOleClientSite::GetMoniker::dwWhichMoniker=[AssociatedEnum("OLEWHICHMK")]
@@ -1438,6 +1441,7 @@ IStream::LockRegion::dwLockType=[AssociatedEnum("LOCKTYPE")]
 IStream::Stat::grfStatFlag=[AssociatedEnum("STATFLAG")]
 IVBGetControl::EnumControls::dwOleContF=[AssociatedEnum("OLECONTF")]
 IWPCProviderConfig::RequestOverride::dwFlags=[AssociatedEnum("WPCFLAG_RESTRICTION")]
+IWSCProductList::Initialize::provider=[AssociatedEnum("WSC_SECURITY_PROVIDER")]
 JOBOBJECT_IO_RATE_CONTROL_INFORMATION::ControlFlags=[AssociatedEnum("JOB_OBJECT_IO_RATE_CONTROL_FLAGS")]
 LdapMapErrorToWin32::LdapError=[AssociatedEnum("LDAP_RETCODE")]
 LOGPEN::lopnStyle=[AssociatedEnum("PEN_STYLE")]

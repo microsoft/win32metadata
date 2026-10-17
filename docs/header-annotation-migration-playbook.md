@@ -891,3 +891,36 @@ per-fact dispositions and bounded command/evidence receipts under ignored
 original OLD/control/NEW full images, broad physical/transitive closure,
 final exact-head CI and downloaded-image qualification. Consumer compatibility
 remains unverified.
+
+## Resumed original-artifact preflight and source-blocked residuals
+
+The selected SDK's generated banners and all 930 shipped IDL files were checked
+before resuming authoring. Seven previously patched headers are MIDL-generated
+but their owning IDL and interface declarations are not present in that SDK:
+`iwscapi.h`, `winsatcominterfacei.h`, `locationapi.h`, `WcnDevice.h`,
+`IdentityProvider.h`, `IdentityStore.h` and `rendezvoussession.h`.
+A shipped generated header is a consumption artifact, not an authored C/C++
+source merely because its filename ends in `.h`.
+
+These seven migrations are **source-blocked**, not accepted header-only
+migrations and not removed APIs. Their historical generated-header patches and
+images remain immutable controls; the seven patches are removed from the active
+recipe. Their exact existing legacy contracts remain: 26 availability rows,
+three associations and the IdentityUpdateEvent flags setting. No declaration,
+floor, native alias or replacement authoring source is invented. Natural SDK
+SAL/MIDL facts may still be read from unchanged consumption headers; that does
+not authorize annotating the generated files.
+
+The first independent original-header authoring inputs are `wscapi.h` and
+`wcmapi.h`, with their three and five existing availability targets. SecurityCenter
+remains a mixed owner: authored Wsc functions do not imply admission of its
+source-blocked IWsc interfaces. Original-IDL drafts for RadialControllerInterop,
+ddpbackup, NotificationActivationCallback and wsbapp reuse grouped interface
+carriers and ordinary SAL includes, without copying declarations or adding a
+per-API annotation-header include.
+
+These are source classifications and bounded authoring inputs only. Updated
+qualified tooling, common native/MIDL SAL bootstrap, measured input/including-IDL
+closure, actual native/MIDL output checks, fresh source/image grading and final
+current-head CI remain required. No historical 437-row expectation or physical
+normalization is an admission waiver for the resumed work.

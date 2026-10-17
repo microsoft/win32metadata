@@ -48,6 +48,41 @@ namespace Win32MetadataScraperTests
             ("DWMSC_NONE", 0),
             ("DWMSC_ALL", uint.MaxValue),
         };
+        private static readonly (string Target, string OS)[] SourceBlockedAvailability =
+        {
+            ("IAssociatedIdentityProvider", "windows6.1"),
+            ("IConnectedIdentityProvider", "windows8.0"),
+            ("IIdentityAdvise", "windows6.1"),
+            ("IIdentityProvider", "windows6.1"),
+            ("IIdentityStore", "windows6.1"),
+            ("IWscProduct", "windows8.0"),
+            ("IWSCProductList", "windows8.0"),
+            ("ICivicAddressReport", "windows6.1"),
+            ("IDefaultLocation", "windows6.1"),
+            ("ILatLongReport", "windows6.1"),
+            ("ILocation", "windows6.1"),
+            ("ILocationEvents", "windows6.1"),
+            ("ILocationPower", "windows8.0"),
+            ("ILocationReport", "windows6.1"),
+            ("DRendezvousSessionEvents", "windows6.0.6000"),
+            ("IRendezvousApplication", "windows6.0.6000"),
+            ("IRendezvousSession", "windows6.0.6000"),
+            ("IWCNConnectNotify", "windows6.1"),
+            ("IWCNDevice", "windows6.1"),
+            ("IInitiateWinSATAssessment", "windows6.0.6000"),
+            ("IProvideWinSATAssessmentInfo", "windows6.0.6000"),
+            ("IProvideWinSATResultsInfo", "windows6.0.6000"),
+            ("IProvideWinSATVisuals", "windows6.0.6000"),
+            ("IQueryAllWinSATAssessments", "windows6.0.6000"),
+            ("IQueryRecentWinSATAssessment", "windows6.0.6000"),
+            ("IWinSATInitiateEvents", "windows6.0.6000"),
+        };
+        private static readonly string[] SourceBlockedAssociations =
+        {
+            "IIdentityAdvise::IdentityUpdated::dwIdentityUpdateEvents=[AssociatedEnum(\"IdentityUpdateEvent\")]",
+            "IIdentityProvider::Advise::dwIdentityUpdateEvents=[AssociatedEnum(\"IdentityUpdateEvent\")]",
+            "IWSCProductList::Initialize::provider=[AssociatedEnum(\"WSC_SECURITY_PROVIDER\")]",
+        };
         private static readonly (string Owner, string Member, string Enum, string Native)[] Associations =
         {
             ("WinHttpOpenRequest", "dwFlags", "WINHTTP_OPEN_REQUEST_FLAGS", "UInt32"),
@@ -491,6 +526,30 @@ namespace Win32MetadataScraperTests
         {
             Assert.DoesNotContain(File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "scraper.settings.rsp")),
                 line => line.TrimStart().StartsWith("DWM_SHOWCONTACT=", StringComparison.Ordinal));
+        }
+
+        [Fact]
+        public void SourceBlockedGeneratedArtifactsRetainTheirExactLegacyFacts()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string[] osRows = File.ReadAllLines(Path.Combine(project, "supportedOS.rsp"));
+            foreach (var fact in SourceBlockedAvailability)
+                Assert.Equal(fact.Target + "=SupportedOSPlatform(\"" + fact.OS + "\")",
+                    Assert.Single(osRows.Where(row => row.StartsWith(fact.Target + "=", StringComparison.Ordinal))));
+            string[] emitter = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
+            foreach (string row in SourceBlockedAssociations.Append("IdentityUpdateEvent"))
+                Assert.Single(emitter.Where(value => value == row));
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray().Select(value => value.GetString()).ToArray();
+            foreach (string file in new[] { "iwscapi.h", "winsatcominterfacei.h", "locationapi.h", "WcnDevice.h",
+                "IdentityProvider.h", "IdentityStore.h", "rendezvoussession.h" })
+            {
+                string source = File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "um", file));
+                Assert.Contains("File created by MIDL compiler", source);
+                Assert.DoesNotContain(patches, path => File.ReadAllText(Path.Combine(project, "patches", path))
+                    .Split('\n').Any(line => line.StartsWith("+++ ", StringComparison.Ordinal) &&
+                        line.TrimEnd('\r').EndsWith("/" + file, StringComparison.OrdinalIgnoreCase)));
+            }
         }
 
         [MigrationFact]
@@ -1252,7 +1311,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void AdditionalEmittedOwnersHaveOnlyTheExplicitDhcpArrayResidual()
+        public void AdditionalEmittedOwnersHaveOnlyTheExplicitUnmigratedResiduals()
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");
             var emitted = old.Reader.MethodDefinitions.Select(old.Reader.GetMethodDefinition)
@@ -1269,6 +1328,11 @@ namespace Win32MetadataScraperTests
                 foreach (string line in File.ReadLines(Path.Combine(project, file)))
                 {
                     if (file == "emitter.settings.rsp" && line == HeldDhcpArrayRow)
+                        continue;
+                    if (file == "supportedOS.rsp" && SourceBlockedAvailability.Any(fact =>
+                        line == fact.Target + "=SupportedOSPlatform(\"" + fact.OS + "\")"))
+                        continue;
+                    if (file == "emitter.settings.rsp" && SourceBlockedAssociations.Contains(line, StringComparer.Ordinal))
                         continue;
                     string target = line.Split('=')[0].Split(new[] { "::" }, StringSplitOptions.None)[0];
                     Assert.DoesNotContain(target, AdditionalOwnedMethods);

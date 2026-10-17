@@ -53,12 +53,17 @@ namespace Win32MetadataScraperTests
         public SdkComponentMigrationTests(ITestOutputHelper output) => this.output = output;
 
         [Fact]
-        public void OwnedFloorsHaveNoAuthoredFallbackAndKeepParserConfigurationSeparate()
+        public void OwnedFloorsKeepOnlyTheExplicitSourceBlockedResidualsAndParserConfiguration()
         {
             string sdk = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
             string sidecar = File.ReadAllText(Path.Combine(sdk, "supportedOS.rsp"));
             foreach (var fact in Floors)
-                Assert.DoesNotContain(fact.Target + "=SupportedOSPlatform(", sidecar);
+            {
+                if (fact.Target is "DRendezvousSessionEvents" or "IRendezvousApplication" or "IRendezvousSession")
+                    Assert.Contains(fact.Target + "=SupportedOSPlatform(\"" + fact.OS + "\")", sidecar);
+                else
+                    Assert.DoesNotContain(fact.Target + "=SupportedOSPlatform(", sidecar);
+            }
             foreach (string partition in Namespaces.Keys)
             {
                 string settings = File.ReadAllText(Path.Combine(sdk, "Partitions", partition, "settings.rsp"));
