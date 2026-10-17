@@ -2,7 +2,7 @@
 
 Move authored semantic facts to reviewed header patches without changing native
 contracts. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
-The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/733477d4ecc3ea3e6e979a9ce26930df62d065af/docs/copilot/plans/shift-left-annotation-spec.md) defines
+The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/8d6d5290e8a5421ba6e565752e79c011ea40d470/docs/copilot/plans/shift-left-annotation-spec.md) defines
 the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
 complete example and its immutable evidence.
 
