@@ -1650,5 +1650,46 @@ choose one global projection for both branches or approve that type change.
 The 46 loose additions, three RPC changes, missing-field correction and
 declaration ordering stay separate from fact relocation. Their consumer
 effects remain unmeasured. The private alias prototype remains unpublished,
-and neither pending root `d8262ba4...` nor the complete original-source
-dependency is admitted by these controls.
+and, at this source checkpoint, neither pending root `d8262ba4...` nor the
+complete original-source dependency is admitted by these controls.
+
+The existing `ConstantsScraper.GetForcedTypeForName` deliberately represents
+`ERROR_*` as `uint` regardless of native signedness. Its symbolic-alias path
+inherits the referenced constant's represented type. That preexisting
+projection policy explains the candidate's unsigned representation; the
+generic checked alias lowering does not select it. This explanation does
+not waive the three existing RPC API type/value changes or establish
+native signedness equality.
+
+### Third original-IDL batch: actual preparation and native-output controls
+
+The next bounded batch uses only the already-authored original
+`callobj.idl`, `EventSys.idl`, `amsi.idl` and `RrasCfg.idl` patches. It must
+retain 25 interface floors, seven function floors and the exact
+`IEnumEventObject::Reset` result target. The matched pristine and patched
+stock preparations contain 3,443 headers, 51 actual IDL inputs and 16
+generated headers each. Exactly the four owning generated headers differ.
+Their identities are `FB515DAF...` and `863639EE...`; this matched pair is
+not a fresh repeat of the patched preparation.
+
+All 24 actual MIDL commands for the four owners, three architectures and
+two variants succeeded. The 39 actually produced RPC/IID/dlldata/TLB
+outputs compare byte-for-byte across the 12 pairs. All 8,751 full warning
+contexts and literal source-token lines remain equal: 8,292 retain their
+line, nine move by five lines and 450 move by 17 lines. Original
+coordinates, raw logs, commands, saved preprocess streams and output hashes
+are retained. The first missing-header-binding recipe rejection occurred
+before any MIDL execution and remains separate failed evidence.
+
+The extended existing native C17/C++17/CINTERFACE and metadata-off/on
+matrix actually ran 216 cases: 210 passed and six failed. All six failures
+were the C AMSI context on the pristine header, before a before/after
+comparison: the native-surface harness did not register the unnamed union
+type that has a named `RequestType` field. The union is already present in
+the original IDL/header. The harness now recognizes the same anonymous
+type-location spelling it already compares, retaining strict declaration
+identity lookup and all layout/type facts. No SDK source, native cast or
+metadata expectation changes for that correction. The original six
+failures remain evidence; a fresh native rerun, normal source first/repeat,
+physical result-target check, complete image and owning current-head CI
+remain required before admission.

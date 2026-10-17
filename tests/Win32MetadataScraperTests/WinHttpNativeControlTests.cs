@@ -634,11 +634,19 @@ static_assert(DISC_NO_FORCE == 64u);
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             string[] facts = annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
-            Assert.Equal((enabled && language == "c++" ? expected : Array.Empty<string>())
-                .OrderBy(value => value, StringComparer.Ordinal), facts);
+            string[] resultCarriers = facts.Where(value => value.StartsWith("_WIN32META_METHOD_", StringComparison.Ordinal)).ToArray();
+            if (partition == "Com.Events" && enabled && language == "c++" && !cInterface)
+            {
+                string carrier = Assert.Single(resultCarriers.Select(value => value.Split('|')[0]).Distinct(StringComparer.Ordinal));
+                Assert.Equal(new[] { carrier + "|Method", carrier + "|PreserveResult" }, resultCarriers);
+            }
+            else
+                Assert.Empty(resultCarriers);
+            Assert.Equal((enabled ? expected : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
+                facts.Except(resultCarriers, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
-                $"{facts.Length} exact interface availability facts.");
+                $"{facts.Length} exact availability/result annotation facts.");
         }
 
         public static IEnumerable<object[]> OriginalIdlHeaderControls()
@@ -689,6 +697,24 @@ static_assert(DISC_NO_FORCE == 64u);
                     "ISimilarityTraitsMapping", "ISimilarityTraitsTable", "ISimilarityFileIdTable",
                     "IRdcSimilarityGenerator", "IFindSimilarResults", "ISimilarity",
                 }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").ToArray()),
+                ("Com.CallObj", "callobj.h", new[]
+                {
+                    "ICallFrame", "ICallIndirect", "ICallInterceptor", "ICallFrameEvents", "ICallUnmarshal", "ICallFrameWalker",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows5.0\")").ToArray()),
+                ("Com.Events", "EventSys.h", new[]
+                {
+                    "IEventSystem", "IEventPublisher", "IEventClass", "IEventClass2", "IEventSubscription", "IFiringControl",
+                    "IPublisherFilter", "IMultiInterfacePublisherFilter", "IEventObjectChange", "IEventObjectChange2",
+                    "IEnumEventObject", "IEventObjectCollection", "IEventProperty", "IEventControl", "IMultiInterfaceEventControl",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows5.0\")").ToArray()),
+                ("Antimalware", "amsi.h", new[]
+                {
+                    "IAmsiStream", "IAntimalwareProvider", "IAntimalware",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows10.0.10240\")").ToArray()),
+                ("Eap", "RrasCfg.h", new[]
+                {
+                    "IEAPProviderConfig|SupportedOSPlatform(\"windows5.0\")",
+                }),
             };
             foreach (var owner in owners)
                 foreach (var architecture in new[]
@@ -702,7 +728,17 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[]
                             {
                                 owner.Item1, owner.Item2, architecture.Item1, architecture.Item2,
-                                mode.Item1, mode.Item2, enabled, owner.Item3,
+                                mode.Item1, mode.Item2, enabled,
+                                (mode.Item1 == "c++" ? owner.Item3 : Array.Empty<string>()).Concat(owner.Item1 switch
+                                {
+                                    "Com.CallObj" => new[] { "CoGetInterceptor|SupportedOSPlatform(\"windows5.0\")" },
+                                    "Antimalware" => new[]
+                                    {
+                                        "AmsiInitialize", "AmsiUninitialize", "AmsiOpenSession", "AmsiCloseSession",
+                                        "AmsiScanBuffer", "AmsiScanString",
+                                    }.Select(name => name + "|SupportedOSPlatform(\"windows10.0.10240\")"),
+                                    _ => Array.Empty<string>(),
+                                }).ToArray(),
                             };
         }
 
@@ -980,11 +1016,11 @@ static_assert(DISC_NO_FORCE == 64u);
             }
             var result = new List<string>();
             // Clang's anonymous names embed paths and line numbers; retain declaration identity without those incidental coordinates.
+            const string anonymousLocationPattern = @"\((?:anonymous|unnamed)(?: (?:struct|union|enum))? at (?<location>[^)]+:\d+:\d+)\)";
             var anonymous = new Dictionary<string, string>(StringComparer.Ordinal);
             var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
             Walk(unit.Cursor, "");
-            return result.Select(value => Regex.Replace(value,
-                @"\((?:anonymous|unnamed)(?: (?:struct|union|enum))? at (?<location>[^)]+:\d+:\d+)\)",
+            return result.Select(value => Regex.Replace(value, anonymousLocationPattern,
                 match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]))
                 .OrderBy(value => value, StringComparer.Ordinal).ToArray();
 
@@ -999,7 +1035,8 @@ static_assert(DISC_NO_FORCE == 64u);
                 string name = Text(cursor.Spelling);
                 if (record || enumeration)
                 {
-                    if (cursor.IsAnonymousRecordDecl || name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal))
+                    if (cursor.IsAnonymousRecordDecl || name.Length == 0 || name.StartsWith("(", StringComparison.Ordinal) ||
+                        Regex.IsMatch(Text(cursor.Type.Spelling), anonymousLocationPattern))
                     {
                         ordinals.TryGetValue(header, out int ordinal);
                         ordinals[header] = ordinal + 1;
