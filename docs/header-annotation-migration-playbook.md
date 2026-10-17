@@ -1945,3 +1945,88 @@ The seven missing-IDL migrations, WNet/RPC representation and literal-order
 gates, excluded field-array activation and owning current-head production/CI
 admission remain separate. Draft authoring and old green CI do not satisfy
 those gates.
+
+### Three authored service headers: original-source local results
+
+The next bounded cohort qualifies original SDK `um\EvColl.h` (Wec),
+`shared\tbs.h` (Tbs) and `um\davclnt.h` (WebDav). All three repository
+preimages byte-match the selected shipped SDK headers; none is a generated
+MIDL product. The 38 existing facts are 35 function floors, two explicit
+last-error flags on `EcOpenSubscriptionEnum` and `EcOpenSubscription`, and
+the `GetDeviceID` import from `tbs.dll`. These are relocations, not new
+native facts, enum representations or ownership assertions.
+
+EvColl and WebDav now use fixed per-declaration Vista macros instead of
+scope blocks. Tbs's existing five Vista, three Windows 8 and one 17134
+declaration floors and import annotation are unchanged. Three permanent
+source guards require the exact 15/9/11 floor counts and reject scope
+transport. No helper, reader, shared tooling, native declaration body or
+declaration order is changed.
+
+The initial EvColl authoring fixture lost trailing SDK whitespace and an
+EOF blank line. Its exact original-byte check rejected it before any
+production patch was generated. The original failed fixture and raw diff
+are retained; only that formatting was restored. Removing precisely the
+38 inserted CRLF annotation lines from the actual prepared headers now
+reproduces every original SDK byte.
+
+The stock bounded recipe preserves all preceding source context and adds
+only these three bindings: 40 headers, 36 patches and 38 partitions.
+Independent preparations both identify as `30785AE8...`. All 3,443 actual
+headers in each preparation were rehashed against the manifests; literal
+paths and independent repeat bytes match. The explicitly reused preceding
+`5D3CBC46...` source tree differs only at these three original headers.
+The 51 MIDL inputs, four tools and two scripts are unchanged; this does
+not claim a fresh all-architecture native MIDL replay.
+
+The fresh native subset passes all 36 C17/C++17, metadata-off/on,
+x86/x64/ARM64 controls without skips. They preserve every measured native
+ABI, SAL and diagnostic fact and require the exact 38 metadata sites when
+enabled and none when disabled. The preceding 78 controls were not rerun
+for this cohort. These are native compiler/AST controls, not target
+runtime or consumer-projection measurements.
+
+Fresh ordinary first/repeat owner traversals produce three complete C#
+files, five generated RSP files and one preamble, all nine byte-identical.
+All ten common pointer reductions are covered by each architecture's
+complete frozen rules; the full function-pointer fixup file is literal.
+The three raw discovery `.remaps` files are explicitly **not** byte-equal:
+3,914 rows retain different absolute preparation origins, `p5a` versus
+`p5b`. Every mapping identity, target, relative header spelling and raw
+row position matches, and both actual origin files hash equally. The
+original raw differences and every before/after row are retained. No
+discovery output, source or raw report was rewritten to manufacture
+literal equality.
+
+The complete images preserve the preceding exact 831-entry input archive
+(824 C# files), replacing only the three entire normal owner outputs.
+All 828 other inputs and all frozen emitter configurations remain literal;
+their owners and constants are not freshly traversed. Candidate
+`7F0B12A1...` and independent repeat `4596A24E...` are each unfiltered
+raw API-zero against preceding `BD8EA0A8...`, and against each other.
+Both retain exactly the existing 16 native SecurityCenter custom-retval
+rows against the older `7279E5A3...` control, byte-identical raw SHA256
+`EEEEC8409DADD43282B6D4C42AE33F9EE2895EE97BC4FCD68355F0488E378112`.
+The existing emitter `CSSW001` warning for WebAuthn/WinHttp.header-types
+is retained, not suppressed.
+
+Each real image passes eleven physical/source cases and all fourteen
+existing integrity/interface/RAII cases without skips. These compare all
+physical type snapshots and literal type/field/method sequences without
+order normalization, preserve the 35 exact floors, both last-error flags,
+the existing import, and all 30 legacy facts for the seven missing-IDL
+artifacts. Both exact pre-emission ZIPs' membership and every entry byte
+were independently rehashed after emission; processed `.modified.cs`
+files are not archival inputs. The original shared binary fixture was
+restored byte-for-byte after both image runs.
+
+Source commit `19d581b7...` preserves the exact executed producer bytes;
+later documentation-only qualification does not relabel these runs as
+fresh. This raises local resumed-original-artifact coverage to 23 of 50:
+12 original IDLs and eleven authored headers. Twenty-seven authored-header
+drafts still await original-source qualification. ErrorRep remains coupled
+to WerApi's normal owner traversal; no partial owner or new Wer native
+failure is claimed here. The seven missing-IDL artifacts, held WNet/RPC
+representation/branch and literal-order gates, excluded field-array
+activation, and owning production/current-head CI admission remain
+separate. The existing draft stack and published old head are unchanged.
