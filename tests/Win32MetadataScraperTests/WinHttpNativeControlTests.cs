@@ -444,6 +444,21 @@ static_assert(DISC_NO_FORCE == 64u);
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal((enabled ? expected : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
                 annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            if (header == "devfiltertypes.h")
+                foreach (var side in new[] { ("before", before), ("after", after) })
+                    foreach (string fact in side.Item2.Where(value =>
+                        value.StartsWith("enum ", StringComparison.Ordinal) || value.StartsWith("value ", StringComparison.Ordinal)))
+                    {
+                        string detail = fact;
+                        if (fact.StartsWith("value ", StringComparison.Ordinal))
+                        {
+                            long value = long.Parse(fact.Substring(fact.LastIndexOf(' ') + 1),
+                                System.Globalization.CultureInfo.InvariantCulture);
+                            detail += " bitPattern32=0x" + (value & 0xFFFFFFFFL)
+                                .ToString("X8", System.Globalization.CultureInfo.InvariantCulture);
+                        }
+                        this.output.WriteLine(side.Item1 + " " + detail);
+                    }
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
