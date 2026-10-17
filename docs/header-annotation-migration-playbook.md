@@ -2030,3 +2030,99 @@ failure is claimed here. The seven missing-IDL artifacts, held WNet/RPC
 representation/branch and literal-order gates, excluded field-array
 activation, and owning production/current-head CI admission remain
 separate. The existing draft stack and published old head are unchanged.
+
+## Sixth authored-header cohort: NetBios and NetShell
+
+This bounded cohort qualifies original SDK `um\nb30.h` (NetBios) and
+`um\NetSh.h` (NetShell), not generated MIDL consumption headers. Their
+repository preimages byte-match the selected shipped SDK originals.
+The nine existing facts are the Windows 2000 floor on `Netbios` and
+eight Windows XP floors on `MatchEnumTag`, `MatchToken`,
+`PreprocessCommand`, `PrintError`, `PrintMessageFromModule`,
+`PrintMessage`, `RegisterContext` and `RegisterHelper`. NetSh now uses
+fixed per-declaration macros instead of scope transport; nb30's existing
+declaration macro is unchanged. These are relocations, with no new native
+facts, enum representations, ownership assertions or native body changes.
+
+The stock bounded recipe has 42 header bindings, 38 patches and 40
+partitions. Independent fresh preparations both identify as
+`854FD92D...`. All 3,443 actual headers in each were independently
+rehashed, with identical literal paths and bytes. Compared with the
+explicitly reused service preparation `30785AE8...`, only these two
+original headers differ. Removing precisely their nine inserted CRLF
+annotation lines reproduces every original SDK byte.
+
+All 51 MIDL input, four tool and two script bindings remain literal,
+and the actual selected tool/script bytes were rehashed. This does not
+claim a fresh all-architecture native MIDL replay. A stronger attempted
+whole-MIDL-evidence-directory equality assertion failed and is retained,
+not waived as byte equality: the independent directories each contain
+174 files, of which 158 are literal and 16 generated `.log` files differ.
+Both complete inventories and all untouched raw differences are retained;
+the consumed prepared headers were independently verified equal.
+
+The fresh native subset passes exactly 24 C17/C++17, metadata-off/on,
+x86/x64/ARM64 compiler/AST controls without skips. They preserve every
+measured native ABI, SAL and diagnostic fact, require the exact nine
+metadata sites when enabled and none when disabled, and explicitly
+verify nb30's empty original SAL set. The preceding 114 native cases
+were not rerun. No target-runtime or consumer-projection effect is
+claimed.
+
+An initial common-only owner assumption was rejected before image
+assembly. The actual stock `crossarch` closure is three complete
+architecture-specific `NetBios.cs` files and one common `NetShell.cs`;
+both separate owner constants files remain frozen. Fresh ordinary
+first/repeat traversals produce these four C# files, five RSP files and
+one preamble, all ten byte-identical. A separate rejected pointer-proof
+assumption required every name in each architecture RSP individually.
+The actual emitter consumes all three complete frozen RSPs into one
+unqualified reduction set. All 22 normal reduction names are covered by
+that actual union; no rule or configuration was added or repaired, and
+the full function-pointer fixup file is literal.
+
+The four raw scratch `.remaps` files are explicitly **not** byte-equal:
+5,233 rows retain different absolute preparation origins, `p6a` versus
+`p6b`. Every mapping prefix, target, relative header spelling and row
+position matches, and both actual referenced headers hash equally.
+Every before/after row and untouched raw diff is retained. No discovery
+output, source or report was rewritten to claim normalized equality.
+
+Source commit `51f4c022...` preserves the exact executed producer bytes.
+Native, preparation and normal-traversal commands ran before that commit
+on identical source bytes, not in a newly checked-out committed tree.
+Both complete images were actually emitted at the committed producer:
+candidate `FC3B4A51...` and independent repeat `B4645AC4...`.
+Each preserves the preceding exact 831-entry archive (824 C# files),
+overlays only the four entire normal header files, and keeps all 827
+other inputs and frozen configurations literal. Those other owners and
+constants are not freshly traversed.
+
+Both images are unfiltered raw API-zero against qualified service
+`7F0B12A1...` and against each other; service repeat `4596A24E...` also
+compares raw-zero to the candidate. Each retains exactly the existing
+16 native SecurityCenter custom-retval rows against `7279E5A3...`,
+with untouched raw SHA256
+`EEEEC8409DADD43282B6D4C42AE33F9EE2895EE97BC4FCD68355F0488E378112`.
+The existing `CSSW001` WebAuthn/WinHttp.header-types warning remains
+explicit. Both exact input ZIPs preserve baseline entry membership,
+case and order; all 1,662 extracted entry bytes were independently
+rehashed. Processed `.modified.cs` files are not archival inputs.
+
+Each actual image passes thirteen physical/source cases and the entire
+fourteen-case integrity/interface/RAII suite without skips. These
+preserve all physical type snapshots and literal type/field/method
+sequences, all nine exact floors across three architectures, and all
+30 legacy facts for the seven missing-IDL artifacts. The original shared
+binary fixture was restored byte-for-byte.
+
+Local resumed-original-artifact coverage is now **25 of 50**: twelve
+original IDLs and thirteen authored headers, nine more headers than at
+`12279c76...`. The other 25 header drafts remain outside these qualified
+cohorts; draft authoring is not source admission. WebSock/Cabinets and
+other deferred owner preflights are not claimed to have compiler
+failures merely because they have not been qualified. The seven
+missing-IDL artifacts, WNet/RPC's 49 raw rows and representation/branch
+and literal-order gates, excluded field-array activation, and owning
+production/current-head CI/publication remain separate. No reviewed
+branch, stack membership, merge state or consumer code is changed.
