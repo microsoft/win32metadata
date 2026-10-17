@@ -552,6 +552,63 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void SourceBlockedArtifactsRetainEveryLegacyPhysicalFact(int architecture)
+        {
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var originalTypes = old.Reader.TypeDefinitions.Select(old.Reader.GetTypeDefinition)
+                .Where(type => Supports(old.Reader, type.GetCustomAttributes(), architecture))
+                .ToLookup(type => old.Reader.GetString(type.Name), StringComparer.Ordinal);
+
+            foreach (var fact in SourceBlockedAvailability)
+            {
+                var (before, after) = RequiredType(fact.Target);
+                Assert.Equal(new[] { fact.OS }, AttributeValues(old.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                Assert.Equal(new[] { fact.OS }, AttributeValues(current.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+
+            foreach (string row in SourceBlockedAssociations)
+            {
+                string[] target = row.Substring(0, row.IndexOf('=')).Split(new[] { "::" }, StringSplitOptions.None);
+                int quote = row.IndexOf('"');
+                string enumName = row.Substring(quote + 1, row.LastIndexOf('"') - quote - 1);
+                var (beforeType, _) = RequiredType(target[0]);
+                string ns = old.Reader.GetString(beforeType.Namespace);
+                var before = Methods(old.Reader, ns, target[0], architecture)[target[1]];
+                var after = Methods(current.Reader, ns, target[0], architecture)[target[1]];
+                Assert.Equal(Signature(before.DecodeSignature(Signatures, null)), Signature(after.DecodeSignature(Signatures, null)));
+                var original = Assert.Single(before.GetParameters().Select(old.Reader.GetParameter)
+                    .Where(parameter => old.Reader.GetString(parameter.Name) == target[2]));
+                var parameter = Assert.Single(after.GetParameters().Select(current.Reader.GetParameter)
+                    .Where(value => current.Reader.GetString(value.Name) == target[2]));
+                Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+                Assert.Equal(original.Attributes, parameter.Attributes);
+                Assert.Equal(new[] { enumName }, AttributeValues(old.Reader, original.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                Assert.Equal(new[] { enumName }, AttributeValues(current.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            }
+
+            var (oldFlags, newFlags) = RequiredType("IdentityUpdateEvent");
+            Assert.Equal(SnapshotType(old.Reader, oldFlags), SnapshotType(current.Reader, newFlags));
+            foreach (var pair in new[] { (old.Reader, oldFlags), (current.Reader, newFlags) })
+            {
+                var attribute = Assert.Single(pair.Item2.GetCustomAttributes()
+                    .Where(handle => AttributeTypeName(pair.Item1, handle) == "System.FlagsAttribute"));
+                Assert.Equal(new byte[] { 1, 0, 0, 0 }, pair.Item1.GetBlobBytes(pair.Item1.GetCustomAttribute(attribute).Value));
+            }
+            this.output.WriteLine($"Architecture {architecture}: all 26 source-blocked floors, three legacy associations/signatures " +
+                "and the complete IdentityUpdateEvent flags enum preserved without metadata normalization.");
+
+            (TypeDefinition Before, TypeDefinition After) RequiredType(string name)
+            {
+                var before = Assert.Single(originalTypes[name]);
+                return (before, Type(current.Reader, name, architecture, old.Reader.GetString(before.Namespace)));
+            }
+        }
+
         [MigrationFact]
         public void CompleteNewImageClosesConstructorsAndFrozenOldDefectIsExplicit()
         {

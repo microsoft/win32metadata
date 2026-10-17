@@ -919,6 +919,13 @@ ddpbackup, NotificationActivationCallback and wsbapp reuse grouped interface
 carriers and ordinary SAL includes, without copying declarations or adding a
 per-API annotation-header include.
 
+`SourceBlockedArtifactsRetainEveryLegacyPhysicalFact` checks the retained facts
+on x86, x64 and ARM64: all 26 original availability values, all three association
+values and their unchanged native signatures/parameter flags, and the complete
+IdentityUpdateEvent enum including its Flags payload. This also covers the mixed
+SecurityCenter owner; admitting authored Wsc functions must not discard IWsc
+metadata. These checks do not suppress independently captured native retval facts.
+
 These are source classifications and bounded authoring inputs only. Updated
 qualified tooling, common native/MIDL SAL bootstrap, measured input/including-IDL
 closure, actual native/MIDL output checks, fresh source/image grading and final
