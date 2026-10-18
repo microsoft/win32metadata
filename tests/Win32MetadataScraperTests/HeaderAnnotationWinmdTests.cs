@@ -1173,6 +1173,152 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                 : Key(reader, reader.GetTypeDefinition(type.GetDeclaringType())) + "+" + reader.GetString(type.Name);
         }
 
+        [NativeMigrationTheory("EXISTING_NATIVE_AVAILABILITY_ROOT")]
+        [InlineData("x64")]
+        public void NormalExistingNativeAvailabilityPreservesExactFloorsAndDeclarationShapes(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("EXISTING_NATIVE_AVAILABILITY_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "authored", "report.json")));
+            var facts = report.RootElement.GetProperty("facts").EnumerateArray().ToArray();
+            Assert.Equal(53, facts.Length);
+            Assert.Equal(53, facts.Select(fact => fact.GetProperty("factId").GetString()).Distinct().Count());
+            Assert.Equal(25, facts.Count(fact => fact.GetProperty("kind").GetString() == "method"));
+            Assert.Equal(28, facts.Count(fact => fact.GetProperty("kind").GetString() == "record"));
+            string baseline = Environment.GetEnvironmentVariable("EXISTING_NATIVE_AVAILABILITY_BASELINE");
+            Assert.False(string.IsNullOrEmpty(baseline));
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baseline), "exact-source-inputs.zip"));
+            string output = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            string legacyDirectory = Path.Combine(output, "legacy");
+            string candidateDirectory = Path.Combine(output, "candidate");
+            Directory.CreateDirectory(legacyDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            foreach (string partition in new[] { "Com", "DirectWrite", "Threading" })
+            {
+                var selected = facts.Where(fact => fact.GetProperty("partition").GetString() == partition)
+                    .Select(fact => fact.GetProperty("symbol").GetString()).ToHashSet(StringComparer.Ordinal);
+                var entries = new[] { "common\\" + partition + ".cs", architecture + "\\" + partition + ".cs" }
+                    .Select(archive.GetEntry).Where(entry => entry != null).ToArray();
+                Assert.NotEmpty(entries);
+                var oldSources = entries.Select(entry =>
+                {
+                    using var stream = new StreamReader(entry.Open());
+                    return stream.ReadToEnd();
+                }).ToArray();
+                WriteAvailabilityDeclarations(oldSources, partition, selected, legacyDirectory);
+                WriteAvailabilityDeclarations(new[] { File.ReadAllText(Path.Combine(root, "scrape", "generated",
+                    architecture, partition + ".cs")) }, partition, selected, candidateDirectory);
+            }
+            var priorLegacyFacts = new Dictionary<string, string>
+            {
+                ["CoInitialize"] = "[CanReturnMultipleSuccessValues]",
+            };
+            using var legacy = Emit(legacyDirectory, architecture, memberRemaps: priorLegacyFacts, references: new[] { baseline });
+            using var candidate = Emit(candidateDirectory, architecture, references: new[] { baseline });
+            AssertMetadataClosure(legacy.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            foreach (var fact in facts)
+            {
+                string name = fact.GetProperty("symbol").GetString();
+                string version = fact.GetProperty("version").GetString();
+                if (fact.GetProperty("kind").GetString() == "method")
+                {
+                    var before = FindMethod(legacy.Reader, "Apis", name);
+                    var after = FindMethod(candidate.Reader, "Apis", name);
+                    AssertStringAttribute(legacy.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                    AssertStringAttribute(candidate.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                    Assert.Equal(MethodShape(legacy.Reader, before), MethodShape(candidate.Reader, after));
+                }
+                else
+                {
+                    var before = FindType(legacy.Reader, name);
+                    var after = FindType(candidate.Reader, name);
+                    Assert.Equal(legacy.Reader.GetString(before.Namespace), candidate.Reader.GetString(after.Namespace));
+                    AssertStringAttribute(legacy.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                    AssertStringAttribute(candidate.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                    Assert.Equal(before.Attributes, after.Attributes);
+                    Assert.Equal(before.GetLayout(), after.GetLayout());
+                    Assert.Equal(before.GetFields().Select(legacy.Reader.GetFieldDefinition)
+                        .Select(field => FieldShape(legacy.Reader, field)),
+                        after.GetFields().Select(candidate.Reader.GetFieldDefinition)
+                            .Select(field => FieldShape(candidate.Reader, field)));
+                    Assert.Equal(before.GetMethods().Select(legacy.Reader.GetMethodDefinition)
+                        .Select(method => MethodShape(legacy.Reader, method)),
+                        after.GetMethods().Select(candidate.Reader.GetMethodDefinition)
+                            .Select(method => MethodShape(candidate.Reader, method)));
+                    Assert.Equal(before.GetNestedTypes().Select(legacy.Reader.GetTypeDefinition)
+                        .Select(type => string.Join("\n", type.GetFields().Select(legacy.Reader.GetFieldDefinition)
+                            .Select(field => FieldShape(legacy.Reader, field)))),
+                        after.GetNestedTypes().Select(candidate.Reader.GetTypeDefinition)
+                            .Select(type => string.Join("\n", type.GetFields().Select(candidate.Reader.GetFieldDefinition)
+                                .Select(field => FieldShape(candidate.Reader, field)))));
+                }
+            }
+            File.WriteAllText(Path.Combine(output, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                sourceFacts = facts.Select(fact => fact.GetProperty("factId").GetString()).ToArray(),
+                sourceMethods = 25,
+                sourceRecords = 28,
+                preservedExistingControlFacts = priorLegacyFacts,
+                normalPartitions = new[] { "Com", "DirectWrite", "Threading" },
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                controlPath = Path.Combine(legacyDirectory, "Test.winmd"),
+                scope = "Exact 53 availability attributes and unchanged native declaration signatures, field placement and COM slot order against retained normal sources. Not a whole-SDK or consumer-compatibility grade.",
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            static string FieldShape(MetadataReader reader, FieldDefinition field)
+                => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
+                    field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+
+            static string MethodShape(MetadataReader reader, MethodDefinition method)
+            {
+                var signature = method.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+                var import = method.GetImport();
+                string module = import.Module.IsNil ? "" :
+                    reader.GetString(reader.GetModuleReference(import.Module).Name);
+                return reader.GetString(method.Name) + "|" + method.Attributes + "|" + method.ImplAttributes + "|" +
+                    signature.Header.RawValue + "|" + signature.ReturnType + "|" +
+                    string.Join(",", signature.ParameterTypes) + "|" + import.Attributes + "|" + module + "|" +
+                    (import.Name.IsNil ? "" : reader.GetString(import.Name)) + "|" +
+                    string.Join(",", method.GetParameters().Select(reader.GetParameter)
+                        .Select(parameter => reader.GetString(parameter.Name) + ":" + parameter.SequenceNumber + ":" + parameter.Attributes));
+            }
+
+            static void WriteAvailabilityDeclarations(IEnumerable<string> texts, string partition, HashSet<string> names, string directory)
+            {
+                var sources = texts.Select(text => CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot()).ToArray();
+                var source = sources[0].WithUsings(SyntaxFactory.List(sources.SelectMany(unit => unit.Usings)
+                    .GroupBy(value => value.ToString(), StringComparer.Ordinal).Select(group => group.First())));
+                var found = new HashSet<string>(StringComparer.Ordinal);
+                var namespaces = sources.SelectMany(unit => unit.Members).OfType<NamespaceDeclarationSyntax>().Select(ns =>
+                {
+                    var members = new List<MemberDeclarationSyntax>();
+                    foreach (var declaration in ns.Members)
+                    {
+                        if (declaration is StructDeclarationSyntax record && names.Contains(record.Identifier.ValueText))
+                        {
+                            Assert.True(found.Add(record.Identifier.ValueText));
+                            members.Add(record);
+                        }
+                        if (declaration is ClassDeclarationSyntax api)
+                        {
+                            var methods = api.Members.OfType<MethodDeclarationSyntax>()
+                                .Where(method => names.Contains(method.Identifier.ValueText)).ToArray();
+                            foreach (var method in methods)
+                                Assert.True(found.Add(method.Identifier.ValueText));
+                            if (methods.Length != 0)
+                                members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
+                        }
+                    }
+                    return ns.WithMembers(SyntaxFactory.List(members));
+                }).Where(ns => ns.Members.Count != 0).ToArray();
+                Assert.True(names.SetEquals(found), directory + "/" + partition + ": " + string.Join(",", names.Except(found)));
+                File.WriteAllText(Path.Combine(directory, partition + ".cs"),
+                    source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
+            }
+        }
+
         private static readonly (string Name, string Header, bool Flags, int Members)[] NextNativeCategoryGroups =
         {
             ("CERT_SELECT_STRUCT_FLAGS", "cryptdlg.h", true, 6),

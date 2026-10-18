@@ -1,8 +1,26 @@
 diff --git a/um/rtworkq.h b/um/rtworkq.h
-index b3de755b..9c8c734f 100644
+index b3de755b..37c3dfb2 100644
 --- a/um/rtworkq.h
 +++ b/um/rtworkq.h
-@@ -69,45 +69,72 @@ typedef struct tagRTWQASYNCRESULT : public IRtwqAsyncResult
+@@ -43,7 +43,7 @@ typedef enum
+     RTWQ_MULTITHREADED_WORKQUEUE = 2,   // multithreaded MTA
+ }   RTWQ_WORKQUEUE_TYPE;
+ 
+-interface DECLSPEC_UUID("ac6b7889-0740-4d51-8619-905994a55cc6") DECLSPEC_NOVTABLE
++interface _Win32_SupportedOS_Windows81_ DECLSPEC_UUID("ac6b7889-0740-4d51-8619-905994a55cc6") DECLSPEC_NOVTABLE
+     IRtwqAsyncResult : public IUnknown
+ {
+     STDMETHOD(GetState)( _Out_ IUnknown** ppunkState)=0;
+@@ -53,7 +53,7 @@ interface DECLSPEC_UUID("ac6b7889-0740-4d51-8619-905994a55cc6") DECLSPEC_NOVTABL
+     STDMETHOD_(IUnknown *, GetStateNoAddRef)()=0;
+ };
+ 
+-interface DECLSPEC_UUID("a27003cf-2354-4f2a-8d6a-ab7cff15437e") DECLSPEC_NOVTABLE
++interface _Win32_SupportedOS_Windows81_ DECLSPEC_UUID("a27003cf-2354-4f2a-8d6a-ab7cff15437e") DECLSPEC_NOVTABLE
+     IRtwqAsyncCallback : public IUnknown
+ {
+     STDMETHOD(GetParameters)( _Out_ DWORD* pdwFlags, _Out_ DWORD* pdwQueue )=0;
+@@ -69,62 +69,94 @@ typedef struct tagRTWQASYNCRESULT : public IRtwqAsyncResult
      HANDLE hEvent;
  }   RTWQASYNCRESULT;
  
@@ -74,8 +92,11 @@ index b3de755b..9c8c734f 100644
 +_Win32_SupportedOS_Windows81_
  STDAPI RtwqGetWorkQueueMMCSSPriority(DWORD workQueueId, _Out_ LONG* priority);
  
- interface DECLSPEC_UUID("63d9255a-7ff1-4b61-8faf-ed6460dacf2b") DECLSPEC_NOVTABLE
-@@ -117,14 +144,19 @@ interface DECLSPEC_UUID("63d9255a-7ff1-4b61-8faf-ed6460dacf2b") DECLSPEC_NOVTABL
+-interface DECLSPEC_UUID("63d9255a-7ff1-4b61-8faf-ed6460dacf2b") DECLSPEC_NOVTABLE
++interface _Win32_SupportedOS_Windows81_ DECLSPEC_UUID("63d9255a-7ff1-4b61-8faf-ed6460dacf2b") DECLSPEC_NOVTABLE
+     IRtwqPlatformEvents : public IUnknown
+ {
+     STDMETHOD(InitializationComplete)()=0;
      STDMETHOD(ShutdownStart)()=0;
      STDMETHOD(ShutdownComplete)()=0;
  };

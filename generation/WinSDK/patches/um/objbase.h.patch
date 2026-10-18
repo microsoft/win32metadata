@@ -1,5 +1,5 @@
 diff --git a/um/objbase.h b/um/objbase.h
-index a156d7da..dfcd4a64 100644
+index a156d7da..34bd91ec 100644
 --- a/um/objbase.h
 +++ b/um/objbase.h
 @@ -28,7 +28,11 @@
@@ -15,17 +15,39 @@ index a156d7da..dfcd4a64 100644
  {
    COINIT_APARTMENTTHREADED  = 0x2,      // Apartment model
  
-@@ -77,7 +81,8 @@ WINOLEAPI_(DWORD) CoBuildVersion( VOID );
+@@ -77,17 +81,23 @@ WINOLEAPI_(DWORD) CoBuildVersion( VOID );
  
  /* init/uninit */
  
 -_Check_return_ WINOLEAPI  CoInitialize(_In_opt_ LPVOID pvReserved);
 +_Win32_PreserveResult_
++_Win32_SupportedOS_Windows2000_
 +_Check_return_ WINOLEAPI  CoInitialize(_In_opt_ _Reserved_ LPVOID pvReserved);
  
  #define COM_SUPPORT_MALLOC_SPIES
++_Win32_SupportedOS_Windows2000_
  _Check_return_ WINOLEAPI  CoRegisterMallocSpy(_In_ LPMALLOCSPY pMallocSpy);
-@@ -106,8 +111,11 @@ _Check_return_ WINOLEAPI  CoGetSystemSecurityPermissions(COMSD comSDType, PSECUR
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CoRevokeMallocSpy(void);
+ WINOLEAPI  CoCreateStandardMalloc(_In_ DWORD memctx, _Outptr_ IMalloc FAR* FAR* ppMalloc);
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_ WINOLEAPI  CoRegisterInitializeSpy(_In_ IInitializeSpy *pSpy, _Out_ ULARGE_INTEGER *puliCookie);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CoRevokeInitializeSpy(_In_ ULARGE_INTEGER uliCookie);
+ 
+ // COM System Security Descriptors (used when the corresponding registry
+@@ -100,20 +110,25 @@ typedef enum tagCOMSD
+     SD_ACCESSRESTRICTIONS = 3       // Machine wide access limits
+ 
+ } COMSD;
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CoGetSystemSecurityPermissions(COMSD comSDType, PSECURITY_DESCRIPTOR *ppSD);
+ 
+ #endif
  
  /* dll loading helpers; keeps track of ref counts and unloads all on exit */
  
@@ -37,7 +59,22 @@ index a156d7da..dfcd4a64 100644
  WINOLEAPI_(void) CoFreeAllLibraries(void);
  
  
-@@ -140,7 +148,8 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+ #if (_WIN32_WINNT >= 0x0400 ) || defined(_WIN32_DCOM) // DCOM
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI CoGetInstanceFromFile(
+     _In_opt_ COSERVERINFO *            pServerInfo,
+     _In_opt_ CLSID        *            pClsid,
+@@ -125,6 +140,7 @@ _Check_return_ WINOLEAPI CoGetInstanceFromFile(
+     _Inout_updates_(dwCount) MULTI_QI * pResults );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+     _In_opt_ COSERVERINFO *            pServerInfo,
+     _In_opt_ CLSID        *            pClsid,
+@@ -140,7 +156,8 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
  #if (_WIN32_WINNT >= 0x0500 ) || defined(_WIN32_DCOM) // DCOM
  
  
@@ -47,7 +84,7 @@ index a156d7da..dfcd4a64 100644
  
  
  WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulReserved, _In_ HRESULT appsHR);
-@@ -148,11 +157,14 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
+@@ -148,15 +165,19 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
  #endif
  
  /* other helpers */
@@ -62,7 +99,20 @@ index a156d7da..dfcd4a64 100644
  WINOLEAPI_(BOOL) CoDosDateTimeToFileTime(
                         _In_ WORD nDosDate, _In_ WORD nDosTime, _Out_ FILETIME FAR* lpFileTime);
  WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
-@@ -175,8 +187,9 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI CoRegisterMessageFilter( _In_opt_ LPMESSAGEFILTER lpMessageFilter,
+                                 _Outptr_opt_result_maybenull_ LPMESSAGEFILTER FAR* lplpMessageFilter );
+ 
+@@ -168,6 +189,7 @@ WINOLEAPI CoRegisterChannelHook( _In_ REFGUID ExtensionUuid, _In_ IChannelHook *
+ 
+ /* TreatAs APIS */
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID clsidNew);
+ 
+ 
+@@ -175,8 +197,9 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
  
  WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
  
@@ -73,15 +123,56 @@ index a156d7da..dfcd4a64 100644
  
  
  /****** Storage API Prototypes ********************************************/
-@@ -221,9 +234,9 @@ WINOLEAPI  CoInstall(
+@@ -221,28 +244,42 @@ WINOLEAPI  CoInstall(
  //  Moniker APIs
  //
  
 -_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _Outptr_ LPVOID FAR* ppvResult);
++_Win32_SupportedOS_Windows2000_
 +_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _COM_Outptr_ LPVOID FAR* ppvResult);
  
 -_Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _Outptr_ void **ppv);
++_Win32_SupportedOS_Windows2000_
 +_Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _COM_Outptr_ void **ppv);
++_Win32_SupportedOS_Windows2000_
  _Check_return_ WINOLEAPI  MkParseDisplayName(_In_ LPBC pbc, _In_ LPCOLESTR szUserName,
                  _Out_ ULONG FAR * pchEaten, _Outptr_ LPMONIKER FAR * ppmk);
++_Win32_SupportedOS_Windows2000_
  _Check_return_ WINOLEAPI  MonikerRelativePathTo(_In_ LPMONIKER pmkSrc, _In_ LPMONIKER pmkDest, _Outptr_ LPMONIKER
+                 FAR* ppmkRelPath, _In_ BOOL dwReserved);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  MonikerCommonPrefixWith(_In_ LPMONIKER pmkThis, _In_ LPMONIKER pmkOther,
+                 _Outptr_ LPMONIKER FAR* ppmkCommon);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateBindCtx(_In_ DWORD reserved, _Outptr_ LPBC FAR* ppbc);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateGenericComposite(_In_opt_ LPMONIKER pmkFirst, _In_opt_ LPMONIKER pmkRest,
+                 _Outptr_ LPMONIKER FAR* ppmkComposite);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  GetClassFile (_In_ LPCOLESTR szFilename, _Out_ CLSID FAR* pclsid);
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateClassMoniker(_In_ REFCLSID rclsid, _Outptr_ LPMONIKER FAR* ppmk);
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateFileMoniker(_In_ LPCOLESTR lpszPathName, _Outptr_ LPMONIKER FAR* ppmk);
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateItemMoniker(_In_ LPCOLESTR lpszDelim, _In_ LPCOLESTR lpszItem,
+                           _Outptr_ LPMONIKER FAR* ppmk);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateAntiMoniker(_Outptr_ LPMONIKER FAR* ppmk);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreatePointerMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_ LPMONIKER FAR* ppmk);
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  CreateObjrefMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_ LPMONIKER FAR * ppmk);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */
+@@ -251,6 +288,7 @@ _Check_return_ WINOLEAPI  CreateObjrefMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_
+ #pragma region Desktop Partition
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_ WINOLEAPI  GetRunningObjectTable( _In_ DWORD reserved, _Outptr_ LPRUNNINGOBJECTTABLE FAR* pprot);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
