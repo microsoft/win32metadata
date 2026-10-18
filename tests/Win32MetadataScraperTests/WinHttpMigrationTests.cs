@@ -991,6 +991,7 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "ProcessSnapshot.h", 10)]
         [InlineData("um", "bluetoothapis.h", 34)]
         [InlineData("um", "bluetoothleapis.h", 13)]
+        [InlineData("um", "dinput.h", 1)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
@@ -1093,6 +1094,66 @@ namespace Win32MetadataScraperTests
         {
             "FDICreate", "FDIIsCabinet", "FDICopy", "FDIDestroy",
         };
+
+        [Fact]
+        public void HidStatusAliasUsesTheExistingCCompatibleNativeConstantEncoding()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string original = File.ReadAllText(Path.Combine(root, "RecompiledIdlHeaders", "shared", "hidpi.h"));
+            Assert.Contains("#define HIDP_STATUS_I8242_TRANS_UNKNOWN HIDP_STATUS_I8042_TRANS_UNKNOWN", original);
+            Assert.Contains("((NTSTATUS) (((SEV) << 28)", original);
+            foreach (string relative in new[] { Path.Combine("shared", "hidpi.h.patch"), Path.Combine("post-midl", "shared", "hidpi.annotations.patch") })
+            {
+                string patch = File.ReadAllText(Path.Combine(root, "patches", relative));
+                Assert.DoesNotContain("constexpr", patch);
+                Assert.Contains("+#ifdef WIN32METADATA", patch);
+                Assert.Contains("+const NTSTATUS HIDP_STATUS_I8242_TRANS_UNKNOWN = HIDP_STATUS_I8042_TRANS_UNKNOWN;", patch);
+                Assert.Contains("+#pragma pop_macro(\"HIDP_STATUS_I8242_TRANS_UNKNOWN\")", patch);
+                Assert.DoesNotContain("0xC0110009", patch);
+            }
+        }
+
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalHidHeadersRetainTheNativeStatusAliasAndAvailability(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var image in new[] { control, current })
+            {
+                var apis = Type(image.Reader, "Apis", architecture, HidNamespace);
+                AssertHidConstant(image.Reader, apis.GetFields().Select(image.Reader.GetFieldDefinition)
+                    .Single(field => image.Reader.GetString(field.Name) == HidConstant));
+                var method = Methods(image.Reader, HidNamespace, "Apis", architecture)["joyConfigChanged"];
+                Assert.Equal(new[] { "windows5.0" },
+                    AttributeValues(image.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+            this.output.WriteLine($"Architecture {architecture}: the existing typo alias remains NTSTATUS/Int32 " +
+                "with bytes 090011C0; joyConfigChanged retains its exact Windows 2000 floor.");
+        }
+
+        [MigrationFact]
+        public void WholeOriginalHidImageHasNoPhysicalMetadataChanges()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37312, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (var entry in after)
+            {
+                Assert.Equal(SnapshotType(control.Reader, before[entry.Key]), SnapshotType(current.Reader, entry.Value));
+                Assert.Equal(before[entry.Key].GetFields().Select(handle =>
+                    control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    entry.Value.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+            }
+            this.output.WriteLine("All 37,312 complete physical snapshots and actual field sequences remain literal " +
+                "with every normalization option off, including real struct/layout and COM/vtable method order.");
+        }
 
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredBluetoothHeaderContracts()
         {

@@ -438,6 +438,11 @@ static_assert(DISC_NO_FORCE == 64u);
                 {
                     header, "bluetoothleapis.h", "bthdef.h", "bthledef.h", "ws2bth.h", "bthsdpdef.h",
                 },
+                "dinput.h" => new[]
+                {
+                    header, "dinputd.h", "hidclass.h", "hidpi.h", "hidsdi.h", "hidusage.h",
+                    "ntddkbd.h", "ntddmou.h", "gpiobuttontypes.h",
+                },
                 _ => new[] { header },
             };
             string assertion = language == "c" ? "_Static_assert" : "static_assert";
@@ -453,6 +458,15 @@ static_assert(DISC_NO_FORCE == 64u);
                     : "__is_same(decltype(((SOCKADDR_BTH*)0)->addressFamily), unsigned short)";
                 checks = $"{assertion}(AF_BTH == 32 && PF_BTH == 32 && sizeof(AF_BTH) == 4 && {macroType}, \"original Bluetooth address-family macros\");\n" +
                     $"{assertion}({fieldType} && sizeof(((SOCKADDR_BTH*)0)->addressFamily) == 2 && sizeof(SOCKADDR_BTH) == 30, \"original narrow packed Bluetooth address\");";
+            }
+            if (header == "dinput.h")
+            {
+                string statusType = language == "c"
+                    ? "_Generic((HIDP_STATUS_I8242_TRANS_UNKNOWN), NTSTATUS: 1, default: 0)"
+                    : "__is_same(decltype(HIDP_STATUS_I8242_TRANS_UNKNOWN), NTSTATUS)";
+                checks = $"{assertion}({statusType} && sizeof(HIDP_STATUS_I8242_TRANS_UNKNOWN) == 4, \"native HID NTSTATUS alias type\");\n" +
+                    $"{assertion}(HIDP_STATUS_I8242_TRANS_UNKNOWN == HIDP_STATUS_I8042_TRANS_UNKNOWN && " +
+                    $"HIDP_STATUS_I8242_TRANS_UNKNOWN < 0 && (unsigned long)HIDP_STATUS_I8242_TRANS_UNKNOWN == 0xC0110009UL, \"native HID status alias value and bits\");";
             }
             var before = Surface(root, original, partition, architecture, target, headers, checks,
                 salAnnotations: beforeSal, rawSalAnnotations: beforeRawSal, diagnostics: beforeDiagnostics, language: language);
@@ -529,7 +543,7 @@ static_assert(DISC_NO_FORCE == 64u);
                         value.StartsWith("function DwmShowContact ", StringComparison.Ordinal)))
                         this.output.WriteLine(side.Item1 + " " + fact);
             }
-            if (header is "fdi.h" or "ProcessSnapshot.h" or "bluetoothapis.h")
+            if (header is "fdi.h" or "ProcessSnapshot.h" or "bluetoothapis.h" or "dinput.h")
             {
                 Assert.Equal(enabled ? expected.Length : 0, annotations.Count);
                 foreach (var side in new[]
@@ -545,6 +559,10 @@ static_assert(DISC_NO_FORCE == 64u);
                 this.output.WriteLine("Original AF_BTH/PF_BTH=32 are signed four-byte int macros; " +
                     "SOCKADDR_BTH.addressFamily remains unsigned two-byte storage and the packed native structure remains 30 bytes. " +
                     "Native macro assertions do not choose a metadata scalar projection.");
+            if (header == "dinput.h")
+                this.output.WriteLine("The original HID typo macro retains its native signed four-byte NTSTATUS type, " +
+                    "canonical alias value and 0xC0110009 bits in both languages and metadata modes; " +
+                    "the complete nine-header owner retains every recorded native/layout/SAL fact.");
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
@@ -700,7 +718,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm", "Cabinets", "Proc_Snap", "Bluetooth",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm", "Cabinets", "Proc_Snap", "Bluetooth", "Hid",
             })
             {
                 string[] expected = partition switch
@@ -781,6 +799,7 @@ static_assert(DISC_NO_FORCE == 64u);
                             name + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
                         .Concat(WinHttpMigrationTests.AuthoredBluetoothLastErrorFunctions.Select(name => name + "|SetLastError"))
                         .Concat(new[] { "BluetoothFindFirstRadio|RAIIFree", "BluetoothFindFirstDevice|RAIIFree" }).ToArray(),
+                    "Hid" => new[] { "joyConfigChanged|SupportedOSPlatform(\"windows5.0\")" },
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -802,6 +821,7 @@ static_assert(DISC_NO_FORCE == 64u);
                     "Cabinets" => "fdi.h",
                     "Proc_Snap" => "ProcessSnapshot.h",
                     "Bluetooth" => "bluetoothapis.h",
+                    "Hid" => "dinput.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]
