@@ -519,7 +519,9 @@ API surface merely to borrow its constants.
 
 Rules:
 
-- Use the original underlying integral type, not a type chosen to reproduce a sidecar.
+- Choose a logical group's integral storage from the native API uses it describes,
+  rather than mechanically reproducing a sidecar or inferring storage from one
+  constant literal. Keep native enum and use-site declarations unchanged.
 - Do not `push_macro`, `undef`, copy values, or change native signatures for grouping.
 - Use `AssociatedEnum` for the use-site relationship while retaining the native type.
 - Preserve complete existing constant names as unscoped enum members so generated
@@ -531,6 +533,27 @@ Rules:
   intentionally defines scoped semantics; do not use it merely to wrap constants.
 - Other metadata-only constants use guarded annotated `constexpr`/`const` declarations while
   preserving the ordinary macro.
+
+### Enum associations and storage compatibility
+
+An `AssociatedEnum` annotation preserves the relationship to a particular enum;
+it does not require that enum's storage to equal every associated native type.
+Move each existing association to the same return, parameter, or field and retain
+its resolved enum identity. A lost or incorrectly retargeted association is a
+migration defect, not an intentional enum-storage correction.
+
+Choose metadata enum storage from the consuming API contracts. Correct a clearly
+single-use legacy storage error when its values and native use support the change.
+For shared enums, select the most appropriate representation across their uses
+without changing native declarations to make every association match. Preserve
+narrow structure fields and pointer element widths; an advisory association must
+not silently become an ABI-changing direct enum substitution. Signedness and width
+differences can be intentional, as documented in
+[#2371](https://github.com/microsoft/win32metadata/issues/2371).
+
+An enum-storage correction is a concrete metadata compatibility change to record
+and cover with regression tests. It is not a reason to block an otherwise correct
+header association, restore an API-specific sidecar, or retype the native enum.
 
 ## HANDLE ownership
 
@@ -1139,7 +1162,20 @@ identity or namespace partitioning. For each API/type, compare:
 - callback canonical names;
 - repeatable metadata such as invalid handle values.
 
-Any difference affecting generated bindings or safe resource use is a functional gap and
+Keep enum association identity, native use-site storage, and metadata enum storage
+as separate checks. Existing advisory associations may legitimately join different
+storage types. Expected handle/enum projection changes and justified corrections to
+incorrect legacy metadata must be classified by the affected API and behavior,
+not treated as unexplained migration failures.
+
+Raw comparer output remains evidence, not a count of independent defects: one enum
+storage correction can also change the reported constant types of all its members.
+Metadata type-table positions and synthetic enum declaration order alone are not
+functional compatibility failures. Preserve ABI-relevant structure field order and
+interface/vtable method order, and keep raw reports unchanged rather than sorting
+or suppressing their differences.
+
+Any unexplained difference affecting generated bindings or safe resource use is a functional gap and
 requires a source syntax, consumer behavior, patch, and regression test.
 
 ### Migration and validation plan

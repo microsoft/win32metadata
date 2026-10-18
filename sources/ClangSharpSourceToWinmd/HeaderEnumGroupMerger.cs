@@ -94,6 +94,8 @@ namespace ClangSharpSourceToWinmd
             if (groups.Count == 0)
                 return compilation;
 
+            var members = groups.SelectMany(group => group.GetMembers().OfType<IFieldSymbol>())
+                .Where(member => member.HasConstantValue).ToLookup(member => member.Name, StringComparer.Ordinal);
             var converted = compilation;
             foreach (var tree in compilation.SyntaxTrees)
             {
@@ -114,13 +116,32 @@ namespace ClangSharpSourceToWinmd
                             SpecialType.System_Int64 or SpecialType.System_UInt64))
                         continue;
                     var value = alias.Initializer.Value;
+                    var expression = value;
                     if (model.GetTypeInfo(value).Type is not INamedTypeSymbol source || !groups.Contains(source) ||
                         !model.GetConstantValue(value).HasValue)
-                        continue;
+                    {
+                        while (expression is ParenthesizedExpressionSyntax parenthesized)
+                            expression = parenthesized.Expression;
+                        if (expression is not IdentifierNameSyntax identifier)
+                            continue;
+                        var info = model.GetSymbolInfo(identifier);
+                        if (info.Symbol != null || info.CandidateSymbols.Length != 0)
+                            continue;
+                        var matches = members[identifier.Identifier.ValueText].ToArray();
+                        if (matches.Length != 1)
+                            continue;
+
+                        // The cleaner removed the loose copy of this uniquely owned group member.
+                        var member = matches[0];
+                        string name = SyntaxFacts.GetKeywordKind(member.Name) == SyntaxKind.None ? member.Name : "@" + member.Name;
+                        expression = value.ReplaceNode(identifier, SyntaxFactory.ParseExpression(
+                            member.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + name)
+                            .WithTriviaFrom(identifier));
+                    }
                     var type = ((VariableDeclarationSyntax)alias.Parent).Type.WithoutTrivia();
                     // Metadata-only groups must not change scalar types or hide constant overflow.
                     replacements.Add(value, SyntaxFactory.CheckedExpression(SyntaxKind.CheckedExpression,
-                        SyntaxFactory.CastExpression(type, SyntaxFactory.ParenthesizedExpression(value.WithoutTrivia())))
+                        SyntaxFactory.CastExpression(type, SyntaxFactory.ParenthesizedExpression(expression.WithoutTrivia())))
                         .WithTriviaFrom(value));
                 }
                 if (replacements.Count == 0)
