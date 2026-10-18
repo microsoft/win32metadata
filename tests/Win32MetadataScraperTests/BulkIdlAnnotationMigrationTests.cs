@@ -301,6 +301,61 @@ namespace Win32MetadataScraperTests
                     "IMbnDeviceService" or "IMbnDeviceServicesContext" or "IMbnDeviceServicesEvents" or
                     "IMbnDeviceServicesManager" or "IMbnMultiCarrier" or "IMbnMultiCarrierEvents"
                         ? "windows8.0" : "windows6.1") + "\")").ToArray()),
+                ("Media.DShow", "videoacc.h", new[]
+                {
+                    "IAMVideoAccelerator|SupportedOSPlatform(\"windows5.0\")",
+                    "IAMVideoAcceleratorNotify|SupportedOSPlatform(\"windows5.0\")",
+                }),
+                ("VSS", "vss.h", new[]
+                {
+                    "IVssAsync|SupportedOSPlatform(\"windows5.1.2600\")",
+                    "IVssEnumObject|SupportedOSPlatform(\"windows5.1.2600\")",
+                }),
+                ("Xps", "xpsobjectmodel_2.h", new[]
+                {
+                    "IXpsDocumentPackageTarget3D|SupportedOSPlatform(\"windows8.1\")",
+                    "IXpsOMPackageWriter3D|SupportedOSPlatform(\"windows8.1\")",
+                }),
+                ("Audio.Endpoints", "audioendpoints.h", new[]
+                {
+                    "IAudioEndpointFormatControl|SupportedOSPlatform(\"windows6.1\")",
+                }),
+                ("Bits", "bits1_5.h", new[]
+                {
+                    "IBackgroundCopyJob2|SupportedOSPlatform(\"windows6.0.6000\")",
+                }),
+                ("Certificates", "certmod.h", new[]
+                {
+                    "ICertManageModule|SupportedOSPlatform(\"windowsserver2003\")",
+                }),
+                ("Tsf", "ctfspui.h", new[]
+                {
+                    "ITfSpeechUIServer|SupportedOSPlatform(\"windows5.0\")",
+                }),
+                ("Com", "ctxtcall.h", new[]
+                {
+                    "IContextCallback|SupportedOSPlatform(\"windows5.0\")",
+                }),
+                ("Direct3D11", "d3d11_4.h", new[]
+                {
+                    "ID3D11VideoContext2|SupportedOSPlatform(\"windows10.0.10240\")",
+                }),
+                ("DirectComp", "dcompanimation.h", new[]
+                {
+                    "IDCompositionAnimation|SupportedOSPlatform(\"windows8.0\")",
+                }),
+                ("Media.DShow", "dmodshow.h", new[]
+                {
+                    "IDMOWrapperFilter|SupportedOSPlatform(\"windows5.1.2600\")",
+                }),
+                ("WinProg", "editionupgradehelper.h", new[]
+                {
+                    "IEditionUpgradeHelper|SupportedOSPlatform(\"windows10.0.10240\")",
+                }),
+                ("IndexSrv", "filter.h", new[]
+                {
+                    "IFilter|SupportedOSPlatform(\"windows5.0\")",
+                }),
             };
             foreach (var owner in owners)
                 foreach (var architecture in new[]
