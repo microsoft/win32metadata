@@ -3135,6 +3135,78 @@
       "sourceSha256": "FF6C9D58BEA8E577177A47D46BB164B593F54EE051353059FEDED7F783EDEFA9",
       "sdkPath": "c\\include\\10.0.26100.0\\winrt\\inspectable.idl",
       "sdkSha256": "D7C278B83B622613E8FBFDE119B7B9F0FAD1515E1001E55C3F82DFE1FFAB8874"
+    },
+    {
+      "path": "um\\dshowasf.h",
+      "sourceSha256": "275D8C3AA3AFB66AB0A77B055204DA0476C4D4D4B84C1225198A60A4F049655E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dshowasf.idl",
+      "sdkSha256": "55B670B3A4DFEE9B934F5191EEC6808536988665A07FD1AF4A5D6EEA70C0D57B"
+    },
+    {
+      "path": "um\\inputpanelconfiguration.h",
+      "sourceSha256": "4719ED9F62104D96DBAE3078B433F77D72D1452CB957D1297773925D9139814F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\inputpanelconfiguration.idl",
+      "sdkSha256": "0AB52414EA7FAF470B4C517C4DC82D5B5440CC4A90DAFEA68867B9FBCAD4EFF5"
+    },
+    {
+      "path": "um\\mfspatialaudio.h",
+      "sourceSha256": "C5D955D9688D9CCE666B808C05860788022DB435DA803D47208511180E13525B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfspatialaudio.idl",
+      "sdkSha256": "F84B4434C040D67147DC80A778DD4D947CCEF3C78DE1CF090456A9227DDA8DB5"
+    },
+    {
+      "path": "um\\mixerocx.h",
+      "sourceSha256": "B027CA8D70F9AFE032951A4AD00950088B90817603A694843A7D753356C00664",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mixerocx.idl",
+      "sdkSha256": "69A445F81FF1E602FC5D8A66FD9C24B064CCDF2AA2C92232D7A2611098015554"
+    },
+    {
+      "path": "um\\mmcobj.h",
+      "sourceSha256": "2D28241C0C4AE98B913DAE3EF8E3576BA9194545F85735D958FF01F04F687996",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mmcobj.idl",
+      "sdkSha256": "EBABD460778A1F31EDFBBC15EDE019C7ACF1B5C86D764BD74E8AAC7119AAD9FF"
+    },
+    {
+      "path": "um\\objectarray.h",
+      "sourceSha256": "885A0E1983C2D5CF2B4B2B398F26306A174B9E28129D6A55ABA4259BA2DB5974",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\objectarray.idl",
+      "sdkSha256": "62C10FEC9CCEE38D307576665C42BBD5D44A567519CCC6A8243C33F7B3404F4E"
+    },
+    {
+      "path": "um\\spatialaudiohrtf.h",
+      "sourceSha256": "72DAAE73C3356951B101B74149A2A358BB5FB8088889BE82428F736EEAF7AC2C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialaudiohrtf.idl",
+      "sdkSha256": "52EB81CA52800D5826A9099E8E290355E21BF2719A76DA43C03E5D00D2C084FF"
+    },
+    {
+      "path": "um\\spellcheckprovider.h",
+      "sourceSha256": "E575EBF871481CBA72C59DE50F681239389FA3E9A836554907CDDCD320DF8316",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spellcheckprovider.idl",
+      "sdkSha256": "1EFE835D2054BCBC5FFE164EE4F6E2043FD293FE056CA364E3ACB8417FC0E2F1"
+    },
+    {
+      "path": "um\\tpmvscmgr.h",
+      "sourceSha256": "39D9972C125A7ED24DAD94921A598EAF35B3EA1B1BB25923BE137B969DB9423F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tpmvscmgr.idl",
+      "sdkSha256": "F65976FB6E2F0A44E22AF7B931B5D84FA47A7178728D5D3F1200625AC8A7B4E7"
+    },
+    {
+      "path": "um\\tsgauthenticationengine.h",
+      "sourceSha256": "C862CB2CB82D1DEA09F173E322467C5635169A656F1F2014B50E1B512A1EDCE6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tsgauthenticationengine.idl",
+      "sdkSha256": "D211861D3748A8C0F94FB3B5EBC6C4844A45CACCEAF88B27123510AB1FA27F1E"
+    },
+    {
+      "path": "um\\tvratings.h",
+      "sourceSha256": "A1BADCBEA02DE525437DEC8EDCD4503BDD16A609B3FC40DBB7F4AF754ED1F939",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tvratings.idl",
+      "sdkSha256": "DAAADFB3D0612BD848B2EE2159E4C6395856024DEAFF0E52DB577ED12843F41A"
+    },
+    {
+      "path": "um\\txlogpub.h",
+      "sourceSha256": "2BACFFCE9E483BAA7149AB1B4ACC2BFB020EACEAE9EEF3AB0E3484A5184C4EFA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
+      "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
     }
   ],
   "midl": {
@@ -4497,6 +4569,61 @@
         "path": "winrt\\asyncinfo.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\winrt\\asyncinfo.idl",
         "sdkSha256": "479DC67E42370602B494E0024606B218B20BF5FAFB47CC6AEF6120A071FC2D18"
+      },
+      {
+        "path": "um\\dshowasf.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dshowasf.idl",
+        "sdkSha256": "55B670B3A4DFEE9B934F5191EEC6808536988665A07FD1AF4A5D6EEA70C0D57B"
+      },
+      {
+        "path": "um\\inputpanelconfiguration.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\inputpanelconfiguration.idl",
+        "sdkSha256": "0AB52414EA7FAF470B4C517C4DC82D5B5440CC4A90DAFEA68867B9FBCAD4EFF5"
+      },
+      {
+        "path": "um\\mfspatialaudio.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mfspatialaudio.idl",
+        "sdkSha256": "F84B4434C040D67147DC80A778DD4D947CCEF3C78DE1CF090456A9227DDA8DB5"
+      },
+      {
+        "path": "um\\mixerocx.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mixerocx.idl",
+        "sdkSha256": "69A445F81FF1E602FC5D8A66FD9C24B064CCDF2AA2C92232D7A2611098015554"
+      },
+      {
+        "path": "um\\mmcobj.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mmcobj.idl",
+        "sdkSha256": "EBABD460778A1F31EDFBBC15EDE019C7ACF1B5C86D764BD74E8AAC7119AAD9FF"
+      },
+      {
+        "path": "um\\spatialaudiohrtf.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialaudiohrtf.idl",
+        "sdkSha256": "52EB81CA52800D5826A9099E8E290355E21BF2719A76DA43C03E5D00D2C084FF"
+      },
+      {
+        "path": "um\\spellcheckprovider.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\spellcheckprovider.idl",
+        "sdkSha256": "1EFE835D2054BCBC5FFE164EE4F6E2043FD293FE056CA364E3ACB8417FC0E2F1"
+      },
+      {
+        "path": "um\\TpmVscAttestation.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\TpmVscAttestation.idl",
+        "sdkSha256": "05CCF9D0484E047F582BFC7492E26801D2F65DF16C77A1BFC9539C2873179D7F"
+      },
+      {
+        "path": "um\\tpmvscmgr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tpmvscmgr.idl",
+        "sdkSha256": "F65976FB6E2F0A44E22AF7B931B5D84FA47A7178728D5D3F1200625AC8A7B4E7"
+      },
+      {
+        "path": "um\\tsgauthenticationengine.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tsgauthenticationengine.idl",
+        "sdkSha256": "D211861D3748A8C0F94FB3B5EBC6C4844A45CACCEAF88B27123510AB1FA27F1E"
+      },
+      {
+        "path": "um\\txlogpub.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
+        "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
       }
     ],
     "outputs": [
@@ -5139,6 +5266,54 @@
       {
         "source": "winrt\\inspectable.idl",
         "path": "winrt\\inspectable.h"
+      },
+      {
+        "source": "um\\dshowasf.idl",
+        "path": "um\\dshowasf.h"
+      },
+      {
+        "source": "um\\inputpanelconfiguration.idl",
+        "path": "um\\inputpanelconfiguration.h"
+      },
+      {
+        "source": "um\\mfspatialaudio.idl",
+        "path": "um\\mfspatialaudio.h"
+      },
+      {
+        "source": "um\\mixerocx.idl",
+        "path": "um\\mixerocx.h"
+      },
+      {
+        "source": "um\\mmcobj.idl",
+        "path": "um\\mmcobj.h"
+      },
+      {
+        "source": "um\\objectarray.idl",
+        "path": "um\\objectarray.h"
+      },
+      {
+        "source": "um\\spatialaudiohrtf.idl",
+        "path": "um\\spatialaudiohrtf.h"
+      },
+      {
+        "source": "um\\spellcheckprovider.idl",
+        "path": "um\\spellcheckprovider.h"
+      },
+      {
+        "source": "um\\tpmvscmgr.idl",
+        "path": "um\\tpmvscmgr.h"
+      },
+      {
+        "source": "um\\tsgauthenticationengine.idl",
+        "path": "um\\tsgauthenticationengine.h"
+      },
+      {
+        "source": "um\\tvratings.idl",
+        "path": "um\\tvratings.h"
+      },
+      {
+        "source": "um\\txlogpub.idl",
+        "path": "um\\txlogpub.h"
       }
     ]
   },
@@ -5352,7 +5527,9 @@
     "FunctionDiscovery",
     "WinRT.Printing",
     "MixedRealityInterop",
-    "VSS"
+    "VSS",
+    "Shell.Common",
+    "Security.Tpm"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -5842,6 +6019,18 @@
     "um\\workspaceruntimeclientext.idl.patch",
     "winrt\\activation.idl.patch",
     "winrt\\asyncinfo.idl.patch",
-    "winrt\\inspectable.idl.patch"
+    "winrt\\inspectable.idl.patch",
+    "um\\dshowasf.idl.patch",
+    "um\\inputpanelconfiguration.idl.patch",
+    "um\\mfspatialaudio.idl.patch",
+    "um\\mixerocx.idl.patch",
+    "um\\mmcobj.idl.patch",
+    "um\\objectarray.idl.patch",
+    "um\\spatialaudiohrtf.idl.patch",
+    "um\\spellcheckprovider.idl.patch",
+    "um\\tpmvscmgr.idl.patch",
+    "um\\tsgauthenticationengine.idl.patch",
+    "um\\tvratings.idl.patch",
+    "um\\txlogpub.idl.patch"
   ]
 }

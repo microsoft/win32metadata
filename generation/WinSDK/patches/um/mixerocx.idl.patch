@@ -1,0 +1,26 @@
+diff --git a/um/mixerocx.idl b/um/mixerocx.idl
+index 5777918d..4957f58c 100644
+--- a/um/mixerocx.idl
++++ b/um/mixerocx.idl
+@@ -1,4 +1,5 @@
+ // Copyright (c) 1998  Microsoft Corporation.  All Rights Reserved.
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -21,6 +22,7 @@ import "unknwn.idl";
+ interface IMixerOCXNotify;
+ interface IMixerOCX;
+ 
++_Win32_AnnotateInterface_(IMixerOCXNotify, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(81A3BD31-DEE1-11d1-8508-00A0C91F9CA0),
+@@ -39,6 +41,7 @@ interface IMixerOCXNotify : IUnknown
+     HRESULT OnDataChange([in] ULONG ulDataFlags);
+ };
+ 
++_Win32_AnnotateInterface_(IMixerOCX, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(81A3BD32-DEE1-11d1-8508-00A0C91F9CA0),

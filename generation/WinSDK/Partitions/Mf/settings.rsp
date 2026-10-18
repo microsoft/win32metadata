@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --exclude
 _MF_Plugin_Type
 tagVIDEOINFOHEADER

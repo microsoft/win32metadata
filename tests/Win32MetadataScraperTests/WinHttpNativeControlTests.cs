@@ -1273,6 +1273,17 @@ static_assert(DISC_NO_FORCE == 64u);
         public void OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
             string partition, string header, string architecture, string target, string language,
             bool cInterface, bool enabled, string[] expected)
+            => this.AssertOriginalIdlHeaderControl(partition, header, architecture, target, language, cInterface, enabled, expected);
+
+        [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
+        [MemberData(nameof(DeviceOriginalIdlHeaderControls))]
+        public void OriginalDeviceIdlHeadersPreserveNativeAbiAndSalWithExactMetadata(
+            string partition, string header, string architecture, string target, string language,
+            bool cInterface, bool enabled, string[] expected)
+            => this.AssertOriginalIdlHeaderControl(partition, header, architecture, target, language, cInterface, enabled, expected);
+
+        private void AssertOriginalIdlHeaderControl(string partition, string header, string architecture,
+            string target, string language, bool cInterface, bool enabled, string[] expected)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
             string original = Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS");
@@ -1293,8 +1304,12 @@ static_assert(DISC_NO_FORCE == 64u);
             Assert.NotEmpty(before);
             string[] nativeAfter = NormalizeInterfaceCarrierTypedefs(before, after, expected);
             Assert.Equal(before, nativeAfter);
-            this.output.WriteLine($"{after.Length - nativeAfter.Length} identical existing interface typedef redeclarations carry metadata.");
-            Assert.NotEmpty(beforeSal);
+            int typeCarriers = after.Length - nativeAfter.Length;
+            if (partition == "Shell" && header.Equals("inputpanelconfiguration.h", StringComparison.OrdinalIgnoreCase) &&
+                language == "c++" && !cInterface)
+                Assert.Empty(beforeSal);
+            else
+                Assert.NotEmpty(beforeSal);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
@@ -1312,7 +1327,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 facts.Except(resultCarriers, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
-                $"{facts.Length} exact availability/result annotation facts.");
+                $"{typeCarriers} exact same-name type-carrier redeclarations, {facts.Length} exact availability/result annotation facts.");
         }
 
         internal static string[] NormalizeInterfaceCarrierTypedefs(
@@ -1421,6 +1436,25 @@ static_assert(DISC_NO_FORCE == 64u);
                                     }.Select(name => name + "|SupportedOSPlatform(\"windows10.0.10240\")"),
                                     _ => Array.Empty<string>(),
                                 }).ToArray(),
+                            };
+        }
+
+        public static IEnumerable<object[]> DeviceOriginalIdlHeaderControls()
+        {
+            foreach (var owner in WinHttpMigrationTests.DeviceIdlOriginalHeaderContracts())
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (var mode in new[] { ("c", false), ("c++", false), ("c++", true) })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                owner.Partition, owner.Header, architecture.Item1, architecture.Item2,
+                                mode.Item1, mode.Item2, enabled, mode.Item1 == "c++"
+                                    ? owner.Interfaces.Select(name => name + "|SupportedOSPlatform(\"" + owner.OS + "\")").ToArray()
+                                    : Array.Empty<string>(),
                             };
         }
 

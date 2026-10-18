@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --with-type
 _tagSLDATATYPE=uint
 SLDATATYPE=uint
@@ -9,4 +11,3 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/tpmvscmgr.h
 --namespace
 Windows.Win32.Security.Tpm
-

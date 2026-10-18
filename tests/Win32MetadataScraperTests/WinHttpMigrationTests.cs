@@ -1163,6 +1163,89 @@ namespace Win32MetadataScraperTests
             yield return ("WinRT", new[] { "winrt\\roapi.h", "winrt\\roerrorapi.h" });
         }
 
+        [Fact]
+        public void DeviceIdlAvailabilityFactsHaveOriginalIdlOwnersAndPreparedOutputs()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            var outputs = recipe.RootElement.GetProperty("midl").GetProperty("outputs").EnumerateArray().ToArray();
+            var owners = DeviceIdlOriginalHeaderContracts().ToArray();
+            Assert.Equal(12, owners.Select(owner => owner.Header).Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal(24, owners.Sum(owner => owner.Interfaces.Length));
+            foreach (var owner in owners)
+            {
+                string original = "um\\" + Path.ChangeExtension(owner.Header, ".idl");
+                Assert.Single(patches.Where(patch => patch == original + ".patch"));
+                Assert.Single(outputs.Where(output => output.GetProperty("source").GetString() == original &&
+                    output.GetProperty("path").GetString() == "um\\" + owner.Header));
+                string patch = File.ReadAllText(Path.Combine(root, "patches", original + ".patch"));
+                Assert.Contains("--- a/" + original.Replace('\\', '/'), patch);
+                Assert.DoesNotContain("RecompiledIdlHeaders", patch);
+                foreach (string name in owner.Interfaces)
+                {
+                    Assert.Matches(@"\+_Win32_AnnotateInterface_\(" + Regex.Escape(name) +
+                        @", _Win32_SupportedOS_\w+_\)", patch);
+                }
+                Assert.Contains("parse-win32-annotations",
+                    File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
+            }
+            Assert.Contains("IUnknown=SupportedOSPlatform(\"windows5.0\")",
+                File.ReadAllLines(Path.Combine(root, "supportedOS.rsp")));
+        }
+
+        internal static IEnumerable<(string Header, string Partition, string OS, string[] Interfaces)> DeviceIdlOriginalHeaderContracts()
+        {
+            yield return ("dshowasf.h", "Media.DShow", "windows5.1.2600", new[] { "IConfigAsfWriter", "IConfigAsfWriter2" });
+            yield return ("inputpanelconfiguration.h", "Shell", "windows8.0", new[] { "IInputPanelConfiguration", "IInputPanelInvocationConfiguration" });
+            yield return ("mfspatialaudio.h", "Mf", "windows10.0.15063", new[] { "IMFSpatialAudioObjectBuffer", "IMFSpatialAudioSample" });
+            yield return ("mixerocx.h", "Media.DShow", "windows5.0", new[] { "IMixerOCX", "IMixerOCXNotify" });
+            yield return ("mmcobj.h", "Mmc", "windows6.0.6000", new[] { "ISnapinProperties", "ISnapinPropertiesCallback" });
+            yield return ("objectarray.h", "Shell.Common", "windows6.1", new[] { "IObjectArray", "IObjectCollection" });
+            yield return ("spatialaudiohrtf.h", "Audio", "windows10.0.15063", new[] { "ISpatialAudioObjectForHrtf", "ISpatialAudioObjectRenderStreamForHrtf" });
+            yield return ("spellcheckprovider.h", "Intl", "windows8.0", new[] { "ISpellCheckProvider", "ISpellCheckProviderFactory" });
+            yield return ("tpmvscmgr.h", "Security.Tpm", "windows8.0", new[] { "ITpmVirtualSmartCardManager", "ITpmVirtualSmartCardManagerStatusCallback" });
+            yield return ("tsgauthenticationengine.h", "TermServ", "windows6.1", new[] { "ITSGAuthenticateUserSink", "ITSGAuthenticationEngine" });
+            yield return ("tvratings.h", "MsTv", "windows5.1.2600", new[] { "IEvalRat", "IXDSToRat" });
+            yield return ("txlogpub.h", "Com", "windows5.1.2600", new[] { "IFileBasedLogInit", "ILog" });
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_GENERATED_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualDeviceIdlTypeFloorsReachNormalGeneratedSources(string architecture)
+        {
+            string generated = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_GENERATED_ROOT");
+            var types = new[] { "common", architecture }
+                .SelectMany(folder => Directory.Exists(Path.Combine(generated, folder))
+                    ? Directory.EnumerateFiles(Path.Combine(generated, folder), "*.cs") : Array.Empty<string>())
+                .SelectMany(path => CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot().DescendantNodes()
+                    .OfType<TypeDeclarationSyntax>())
+                .ToLookup(type => type.Identifier.ValueText, StringComparer.Ordinal);
+            int checkedTypes = 0;
+            foreach (var owner in DeviceIdlOriginalHeaderContracts())
+            {
+                foreach (string name in owner.Interfaces)
+                {
+                    var declarations = types[name].ToArray();
+                    Assert.True(declarations.Length > 0, $"Authored original-IDL type is missing: {name}/{architecture}.");
+                    foreach (var type in declarations)
+                    {
+                        var floor = Assert.Single(type.AttributeLists.SelectMany(list => list.Attributes).Where(attribute =>
+                            attribute.Name.ToString() == "SupportedOSPlatform" ||
+                            attribute.Name.ToString().EndsWith(".SupportedOSPlatform", StringComparison.Ordinal)));
+                        var value = Assert.IsType<LiteralExpressionSyntax>(Assert.Single(floor.ArgumentList.Arguments).Expression);
+                        Assert.Equal(owner.OS, value.Token.ValueText);
+                    }
+                    checkedTypes++;
+                }
+            }
+            Assert.Equal(24, checkedTypes);
+            this.output.WriteLine($"{architecture}: all24 exact original-IDL type floors reached normal generated sources.");
+        }
+
         [MigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS", "WINHTTP_DEVICE_GENERATED_ROOT")]
         [InlineData("x86")]
         [InlineData("x64")]

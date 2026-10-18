@@ -1,0 +1,25 @@
+diff --git a/um/tsgauthenticationengine.idl b/um/tsgauthenticationengine.idl
+index ca97b10a..e4151b6f 100644
+--- a/um/tsgauthenticationengine.idl
++++ b/um/tsgauthenticationengine.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -8,6 +9,7 @@ import "ocidl.idl";
+ 
+ // This interface method is a callback from the policy engine, for a 
+ // AuthorizeConnection request
++_Win32_AnnotateInterface_(ITSGAuthenticateUserSink, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(2c3e2e73-a782-47f9-8dfb-77ee1ed27a03),
+@@ -49,6 +51,7 @@ interface ITSGAuthenticateUserSink : IUnknown
+         [in] ULONG_PTR context);                 // Context information
+ };
+ 
++_Win32_AnnotateInterface_(ITSGAuthenticationEngine, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(9ee3e5bf-04ab-4691-998c-d7f622321a56),

@@ -1,0 +1,28 @@
+diff --git a/um/mfspatialaudio.idl b/um/mfspatialaudio.idl
+index 83a2d093..075468a6 100644
+--- a/um/mfspatialaudio.idl
++++ b/um/mfspatialaudio.idl
+@@ -6,6 +6,7 @@
+ //*@@@---@@@@******************************************************************
+ //
+ 
++#include <sal.h>
+ import "mfobjects.idl";
+ import "SpatialAudioClient.idl";
+ import "SpatialAudioMetadata.idl";
+@@ -15,6 +16,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
+ 
++_Win32_AnnotateInterface_(IMFSpatialAudioObjectBuffer, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(d396ec8c-605e-4249-978d-72ad1c312872),
+@@ -99,6 +101,7 @@ interface IMFSpatialAudioObjectBuffer : IMFMediaBuffer
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IMFSpatialAudioSample, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(abf28a9B-3393-4290-ba79-5ffc46d986b2),

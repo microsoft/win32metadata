@@ -1,0 +1,25 @@
+diff --git a/um/spatialaudiohrtf.idl b/um/spatialaudiohrtf.idl
+index 61acf973..3cbf102c 100644
+--- a/um/spatialaudiohrtf.idl
++++ b/um/spatialaudiohrtf.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //
+@@ -115,6 +116,7 @@ typedef struct SpatialAudioHrtfActivationParams2
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioObjectForHrtf, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(D7436ADE-1978-4E14-ABA0-555BD8EB83B4),
+@@ -157,6 +159,7 @@ interface ISpatialAudioObjectForHrtf : ISpatialAudioObjectBase
+ };
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioObjectRenderStreamForHrtf, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(E08DEEF9-5363-406E-9FDC-080EE247BBE0),
