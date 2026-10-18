@@ -21,6 +21,67 @@ documentation mappings. Count emitted symbols, not just library-map rows.
 | Manual import overrides | Use `ImportLibrary` only for demonstrated missing/incorrect scan data; retain generic override support. |
 | Namespace/traversal/architecture/schema configuration and documentation tooling | Keep separate from functional semantic migration. |
 
+### SDK-wide inventory and source queue
+
+`scripts\Get-SdkAnnotationCoverage.py` inventories the selected SDK package,
+partition traversals, response files, enum/handle JSON, manual sources and active
+original-source patches without scraping, running MIDL or building the WinMD.
+It requires Python's standard library, the cached selected SDK/D3D packages, Git
+history and the frozen original-source qualification ledger supplied to the run.
+Keep reports and campaign reservations in session artifacts, not the SDK mirror.
+
+```powershell
+python .\scripts\Get-SdkAnnotationCoverage.py `
+    --ledger $frozenOriginalSourceLedger `
+    --output "$artifacts\coverage.json" `
+    --campaign "$artifacts\campaign.json" `
+    --queue-output "$artifacts\queue.json" `
+    --native-owner-output "$artifacts\native-owners.json" `
+    --idl-owner-output "$artifacts\idl-owners.json" `
+    --scoreboard-output "$artifacts\scoreboard.json" `
+    --strict-apply
+```
+
+The campaign supplies the single-writer session, worker-to-role assignments,
+explicit `reservedOriginals` path arrays, tool revisions and optional
+`sourceReceipts` with committed revisions and exact original paths. Original
+paths are exclusive locks; ordinal batch IDs are only convenient grouping.
+Reassign only confirmed unstarted paths. The native owner map preserves the
+existing applicator's `readyOriginalOwners` schema and exact OS/error rows;
+candidate ownership still requires its three-architecture AST admission.
+Original-IDL inputs are separate, with actual source hashes, generated-header
+mapping candidates and explicit unsupported residuals.
+
+Use `--refresh` with the same output/campaign/queue/owner-map/scoreboard arguments
+to update operational reservations and committed-source receipts without
+rescanning the SDK. It requires an unchanged production tree and a strictly
+applied baseline before counting later receipts. Receipt patches come from
+shared Git objects and are strictly applied to small private original copies;
+no worker checkout, SDK installation or production patch is modified.
+
+Read each denominator separately: SDK-CPP original inputs, generated header
+origin slots, partitions and the historical qualification cohort are different
+units. The report distinguishes direct enum substitutions from `AssociatedEnum`,
+retained facts from baseline removals, and configuration/parser fixes from
+authored contracts. No mapped facts does not prove no migration is needed.
+Unresolved original ownership, unbound D3D overlays, auto-populated enum member
+counts and manual-source semantic counts remain explicitly unknown.
+
+The scoreboard counts unique committed, nontrivially strict-applied native
+header paths, excluding the SAL bootstrap from API-header totals. Revising a
+previously counted header adds no new owner; IDL paths and recipe output edges
+do not count as changed generated headers. Optional campaign
+`generatedOutputObservations` point to small frozen producer receipts with the
+source commit, exact output paths, before/after hashes and positive authored
+carrier/source-contract evidence. Only these semantically changed outputs join
+the deduplicated known header-goal count; other generated outputs remain unknown.
+Campaign `goalExcludedNativeHeaders` records explicit reasons for withholding
+credit from nontrivial patches that do not complete any relocated fact; physical
+strict-application counts remain visible separately. Compilation/qualification
+is separate from source conversion, and source conversion may retain explicit
+sidecar cleanup debt. Run the focused inventory controls with
+`python -m unittest discover -s tests\SdkAnnotationCoverage.Tests`.
+
 Bind each physical header to one owner. Include all physical-header and semantic
 dependents in the validation closure, without migrating their unrelated facts.
 An API absent from the selected SDK must not be recreated as a fake declaration.
