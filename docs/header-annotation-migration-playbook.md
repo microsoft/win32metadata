@@ -3628,3 +3628,33 @@ acceptance. `imepad.h` remains legacy: adding its native but previously unemitte
 twentieth label would add API and is not the historical-label case above.
 Evidence stays under
 `artifacts\bulk-annotations\system-nonfloor-enums-005-vb-*`.
+
+### Split-owner MIDI logical-enum union
+
+`mmsyscom.h` owns the seven native `CALLBACK_*` expressions. The exact published
+Device fragment `9758cb13b7f6fd616e9a5114a76014e118762f92` supplies the seven
+native WAVE/MIDI expressions in `mmeapi.h`; that patch is adopted unchanged.
+Both fragments use guarded metadata-only `FlagsEnum` typedefs with unsigned
+long storage. The existing required-name namespace route moves the Media
+fragment to `Windows.Win32.Media.Audio` before logical-group merging.
+
+Eight actual native cases compile all fourteen values in the Audio context
+and preserve declaration multiplicities, native types/layout, SAL, diagnostics
+and exact annotation payloads. The Audio comparison retains all 85 prior
+Device Win32 payloads on each metadata architecture, then checks the local
+seven-member WAVE/MIDI payload and inherited seven-member CALLBACK payload
+separately. No broad annotation or typedef deduplication is used.
+
+Actual Audio and Media bindings produce one physical
+`Windows.Win32.Media.Audio.MIDI_WAVE_OPEN_TYPE`: UInt32 storage, Flags present,
+unscoped, with all fourteen original names and values. Only the completely
+covered definition and fourteen explicit member rows are retired. The four
+`fdwOpen` uses on `waveOutOpen`, `waveInOpen`, `midiInOpen` and `midiOutOpen`
+remain exact `addUsesTo` debt; the component checks their configuration
+identities and actual normal-source UInt32 parameters, not native-authored
+associations or final physical API acceptance.
+
+This adds one semantic source header (`mmsyscom.h`); the Device-owned
+`mmeapi.h` revision earns zero new-header credit. Evidence stays under
+`artifacts\bulk-annotations\system-nonfloor-enums-006-midi-*`.
+No frozen central SDK05 input, full-SDK image or CI qualification is changed.

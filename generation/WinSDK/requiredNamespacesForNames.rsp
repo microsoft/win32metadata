@@ -2661,3 +2661,4 @@ PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Variant
 # endregion wtypes.h
+MIDI_WAVE_OPEN_TYPE=Windows.Win32.Media.Audio

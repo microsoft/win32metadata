@@ -137,7 +137,10 @@ using WINHTTP_INTERNET_SCHEME = void;
             var fieldAssociations = owner.GetProperty("associations").EnumerateArray()
                 .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();
             string[] headers = { Path.GetFileName(original) };
-            string checks = string.Join("\n", groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
+            var nativeMembers = groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
+                .Concat(owner.TryGetProperty("additionalNativeMembers", out var additionalMembers)
+                    ? additionalMembers.EnumerateArray() : Enumerable.Empty<JsonElement>());
+            string checks = string.Join("\n", nativeMembers
                 .Select(member => "static_assert((unsigned long long)(" +
                     (member.TryGetProperty("NativeExpression", out var expression) ? expression.GetString() : member.GetProperty("Name").GetString()) +
                     ") == " + member.GetProperty("Value").GetRawText() + "ULL);")
@@ -154,20 +157,23 @@ using WINHTTP_INTERNET_SCHEME = void;
                 })).ToArray();
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
             var beforeAnnotations = new List<string>();
             var annotations = new List<string>();
             bool compareAnnotations = owner.TryGetProperty("expectedAddedAnnotations", out var expectedAddedAnnotations);
             var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled && compareAnnotations,
-                annotations: beforeAnnotations, salAnnotations: beforeSal);
+                annotations: beforeAnnotations, salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
             var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled,
-                annotations: annotations, salAnnotations: afterSal);
+                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics);
             Assert.True(groups.Length > 0 || fieldAssociations.Length > 0);
             Assert.NotEmpty(checks);
             Assert.Equal(before.Concat(metadataEnabled ? carriers : Array.Empty<string>())
                 .OrderBy(value => value, StringComparer.Ordinal), after);
             Assert.Equal(beforeSal, afterSal);
+            Assert.Equal(beforeDiagnostics, afterDiagnostics);
             if (compareAnnotations)
                 Assert.Equal(beforeAnnotations.Concat(metadataEnabled
                     ? expectedAddedAnnotations.EnumerateArray().Select(value => value.GetString())

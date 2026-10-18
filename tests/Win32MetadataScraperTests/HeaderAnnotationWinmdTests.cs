@@ -265,6 +265,26 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                     }
                 }
             }
+            if (report.RootElement.TryGetProperty("retainedUses", out var retainedUses))
+            {
+                var uses = retainedUses.EnumerateArray().ToArray();
+                var configured = MetadataUtils.EnumObject.LoadFromFile(Path.Combine(
+                        Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"), "enums.after.json"))
+                    .Where(value => value.addUsesTo != null && expected.ContainsKey(value.addUsesTo))
+                    .SelectMany(value => value.uses.Select(use => value.addUsesTo + "|" + use));
+                Assert.Equal(uses.Select(value => value.GetProperty("group").GetString() + "|" +
+                    value.GetProperty("symbol").GetString()).OrderBy(value => value, StringComparer.Ordinal),
+                    configured.OrderBy(value => value, StringComparer.Ordinal));
+                foreach (var use in uses)
+                {
+                    string[] symbol = use.GetProperty("symbol").GetString().Split("::");
+                    var method = Assert.Single(sources[use.GetProperty("partition").GetString()].DescendantNodes()
+                        .OfType<MethodDeclarationSyntax>().Where(value => value.Identifier.ValueText == symbol[0]));
+                    var parameter = Assert.Single(method.ParameterList.Parameters
+                        .Where(value => value.Identifier.ValueText == symbol[1]));
+                    Assert.Equal("uint", parameter.Type.ToString());
+                }
+            }
             AssertMetadataClosure(reader);
             Console.WriteLine($"{architecture}: {expected.Count} real source-projected logical identities and " +
                 $"{expected.Values.Sum(group => group.GetProperty("Members").GetArrayLength())} compiled-native members; " +

@@ -3873,6 +3873,12 @@
       "sourceSha256": "E59DF32953EA02F2178AAD0F108DD35CDF3EC78232B89BE1B32F8601CFAABFAD",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\vbinterf.h",
       "sdkSha256": "E59DF32953EA02F2178AAD0F108DD35CDF3EC78232B89BE1B32F8601CFAABFAD"
+    },
+    {
+      "path": "um\\mmsyscom.h",
+      "sourceSha256": "E312D128602E8E6D51456F12229F81B0228AD1C8EA6C9AC438053966A7D20C8F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mmsyscom.h",
+      "sdkSha256": "E312D128602E8E6D51456F12229F81B0228AD1C8EA6C9AC438053966A7D20C8F"
     }
   ],
   "midl": {
@@ -7907,6 +7913,7 @@
     "shared\\tcpmib.h.patch",
     "um\\minschannel.h.patch",
     "um\\credssp.h.patch",
-    "um\\vbinterf.h.patch"
+    "um\\vbinterf.h.patch",
+    "um\\mmsyscom.h.patch"
   ]
 }
