@@ -1135,7 +1135,7 @@ namespace Win32MetadataScraperTests
         }
 
         [MigrationFact]
-        public void WholeOriginalHidImageHasNoPhysicalMetadataChanges()
+        public void WholeOriginalHidImageHasOnlyTheExactStaticAliasRelocation()
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
@@ -1144,15 +1144,36 @@ namespace Win32MetadataScraperTests
             Assert.Equal(37312, before.Count);
             Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
                 after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            var changed = new List<string>();
             foreach (var entry in after)
             {
-                Assert.Equal(SnapshotType(control.Reader, before[entry.Key]), SnapshotType(current.Reader, entry.Value));
-                Assert.Equal(before[entry.Key].GetFields().Select(handle =>
-                    control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
-                    entry.Value.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                string original = SnapshotType(control.Reader, before[entry.Key]);
+                string actual = SnapshotType(current.Reader, entry.Value);
+                if (original != actual)
+                    changed.Add(entry.Key);
+                string expected = original;
+                var expectedFields = before[entry.Key].GetFields().Select(handle =>
+                    control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)).ToList();
+                if (entry.Key == HidNamespace + ".Apis#124")
+                {
+                    Assert.Equal(4683, expectedFields.Count);
+                    Assert.Equal(167, expectedFields.IndexOf(HidConstant));
+                    Assert.True(expectedFields.Remove(HidConstant));
+                    expectedFields.Add(HidConstant);
+                    var rows = original.Split('\n').ToList();
+                    string alias = Assert.Single(rows.Where(row => row.StartsWith("F|" + HidConstant + "|", StringComparison.Ordinal)));
+                    Assert.True(rows.Remove(alias));
+                    rows.Insert(rows.FindLastIndex(row => row.StartsWith("F|", StringComparison.Ordinal)) + 1, alias);
+                    expected = string.Join("\n", rows);
+                }
+                Assert.Equal(expected, actual);
+                Assert.Equal(expectedFields, entry.Value.GetFields().Select(handle =>
+                    current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
             }
-            this.output.WriteLine("All 37,312 complete physical snapshots and actual field sequences remain literal " +
-                "with every normalization option off, including real struct/layout and COM/vtable method order.");
+            Assert.Equal(new[] { HidNamespace + ".Apis#124" }, changed);
+            this.output.WriteLine("All 37,312 identities remain and 37,311 complete snapshots are literal with every " +
+                "normalization option off. Only the existing static NTSTATUS alias moves from index 167 to 4682 " +
+                "inside Apis; its full physical row and every other field/layout and COM/vtable method order remain exact.");
         }
 
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredBluetoothHeaderContracts()
