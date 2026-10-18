@@ -10454,7 +10454,17 @@
     ]
   },
   {
-    "addUsesTo": "OA_BOOL",
+    "name": "OA_BOOL",
+    "members": [
+      {
+        "name": "OATRUE",
+        "value": -1
+      },
+      {
+        "name": "OAFALSE",
+        "value": 0
+      }
+    ],
     "uses": [
       {
         "interface": "IVideoWindow",
