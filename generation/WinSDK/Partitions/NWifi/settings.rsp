@@ -11,3 +11,5 @@
 <IncludeRoot>/um/wlclient.h
 --namespace
 Windows.Win32.NetworkManagement.WiFi
+--config
+parse-win32-annotations

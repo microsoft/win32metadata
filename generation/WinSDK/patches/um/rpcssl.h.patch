@@ -1,0 +1,20 @@
+diff --git a/um/rpcssl.h b/um/rpcssl.h
+index 453a1592..8b19c323 100644
+--- a/um/rpcssl.h
++++ b/um/rpcssl.h
+@@ -31,6 +31,7 @@ extern "C" {
+ #define RpcCertGeneratePrincipalName RpcCertGeneratePrincipalNameA
+ #endif /* UNICODE */
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -41,6 +42,7 @@ RpcCertGeneratePrincipalNameW(
+     );
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY

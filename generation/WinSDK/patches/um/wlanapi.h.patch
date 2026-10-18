@@ -1,0 +1,446 @@
+diff --git a/um/wlanapi.h b/um/wlanapi.h
+index 0d77f58e..9f675d42 100644
+--- a/um/wlanapi.h
++++ b/um/wlanapi.h
+@@ -1224,6 +1224,7 @@ typedef struct _WFD_GROUP_ID
+ 
+ 
+ // public APIs
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanOpenHandle(
+     _In_ DWORD dwClientVersion,
+@@ -1232,12 +1233,14 @@ WlanOpenHandle(
+     _Out_ PHANDLE phClientHandle
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanCloseHandle(
+     _In_ HANDLE hClientHandle,
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanEnumInterfaces(
+     _In_ HANDLE hClientHandle,
+@@ -1245,6 +1248,7 @@ WlanEnumInterfaces(
+     _Outptr_ PWLAN_INTERFACE_INFO_LIST *ppInterfaceList
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetAutoConfigParameter(
+     _In_ HANDLE hClientHandle,
+@@ -1254,6 +1258,7 @@ WlanSetAutoConfigParameter(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanQueryAutoConfigParameter(
+     _In_ HANDLE hClientHandle,
+@@ -1264,6 +1269,7 @@ WlanQueryAutoConfigParameter(
+     _Out_opt_ PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetInterfaceCapability(
+     _In_ HANDLE hClientHandle,
+@@ -1272,6 +1278,7 @@ WlanGetInterfaceCapability(
+     _Outptr_ PWLAN_INTERFACE_CAPABILITY *ppCapability
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetInterface(
+     _In_ HANDLE hClientHandle,
+@@ -1282,6 +1289,7 @@ WlanSetInterface(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanQueryInterface(
+     _In_ HANDLE hClientHandle,
+@@ -1293,6 +1301,7 @@ WlanQueryInterface(
+     _Out_opt_ PWLAN_OPCODE_VALUE_TYPE pWlanOpcodeValueType
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanIhvControl(
+     _In_ HANDLE hClientHandle,
+@@ -1305,6 +1314,7 @@ WlanIhvControl(
+     _Out_ PDWORD pdwBytesReturned
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanScan(
+     _In_ HANDLE hClientHandle,
+@@ -1314,6 +1324,7 @@ WlanScan(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetAvailableNetworkList(
+     _In_ HANDLE hClientHandle,
+@@ -1332,6 +1343,7 @@ WlanGetAvailableNetworkList2(
+     _Outptr_ PWLAN_AVAILABLE_NETWORK_LIST_V2 *ppAvailableNetworkList
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetNetworkBssList(
+     _In_ HANDLE hClientHandle,
+@@ -1343,6 +1355,7 @@ WlanGetNetworkBssList(
+     _Outptr_ PWLAN_BSS_LIST *ppWlanBssList
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanConnect(
+     _In_ HANDLE hClientHandle,
+@@ -1359,6 +1372,7 @@ WlanConnect2(
+     _Reserved_  PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanDisconnect(
+     _In_ HANDLE hClientHandle,
+@@ -1366,6 +1380,7 @@ WlanDisconnect(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanRegisterNotification(
+     _In_ HANDLE hClientHandle,
+@@ -1378,6 +1393,7 @@ WlanRegisterNotification(
+ );
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetProfile(
+     _In_ HANDLE hClientHandle,
+@@ -1389,6 +1405,7 @@ WlanGetProfile(
+     _Out_opt_ DWORD *pdwGrantedAccess
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfileEapUserData(
+     _In_ HANDLE hClientHandle,
+@@ -1401,6 +1418,7 @@ WlanSetProfileEapUserData(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfileEapXmlUserData(
+     _In_ HANDLE hClientHandle,
+@@ -1411,6 +1429,7 @@ WlanSetProfileEapXmlUserData(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfile(
+     _In_ HANDLE hClientHandle,
+@@ -1423,6 +1442,7 @@ WlanSetProfile(
+     _Out_ DWORD *pdwReasonCode
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanDeleteProfile(
+     _In_ HANDLE hClientHandle,
+@@ -1431,6 +1451,7 @@ WlanDeleteProfile(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanRenameProfile(
+     _In_ HANDLE hClientHandle,
+@@ -1440,6 +1461,7 @@ WlanRenameProfile(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetProfileList(
+     _In_ HANDLE hClientHandle,
+@@ -1448,6 +1470,7 @@ WlanGetProfileList(
+     _Outptr_ PWLAN_PROFILE_INFO_LIST *ppProfileList
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfileList(
+     _In_ HANDLE hClientHandle,
+@@ -1457,6 +1480,7 @@ WlanSetProfileList(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfilePosition(
+     _In_ HANDLE hClientHandle,
+@@ -1466,6 +1490,7 @@ WlanSetProfilePosition(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetProfileCustomUserData(
+     _In_ HANDLE hClientHandle,
+@@ -1476,6 +1501,7 @@ WlanSetProfileCustomUserData(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetProfileCustomUserData(
+     _In_ HANDLE hClientHandle,
+@@ -1486,6 +1512,7 @@ WlanGetProfileCustomUserData(
+     _Outptr_result_bytebuffer_(*pdwDataSize) PBYTE *ppData
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetFilterList(
+     _In_ HANDLE hClientHandle,
+@@ -1494,6 +1521,7 @@ WlanSetFilterList(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetFilterList(
+     _In_ HANDLE hClientHandle,
+@@ -1502,6 +1530,7 @@ WlanGetFilterList(
+     _Outptr_ PDOT11_NETWORK_LIST *ppNetworkList
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetPsdIEDataList(
+     _In_ HANDLE hClientHandle,
+@@ -1510,6 +1539,7 @@ WlanSetPsdIEDataList(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSaveTemporaryProfile(
+     _In_ HANDLE hClientHandle,
+@@ -1551,6 +1581,7 @@ WlanRegisterDeviceServiceNotification(
+ #if !defined(__midl)
+ 
+ // client side APIs
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanExtractPsdIEDataList(
+     _In_ HANDLE hClientHandle,
+@@ -1562,6 +1593,7 @@ WlanExtractPsdIEDataList(
+ );
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanReasonCodeToString(
+     _In_ DWORD dwReasonCode,
+@@ -1570,16 +1602,20 @@ WlanReasonCodeToString(
+     _Reserved_ PVOID pReserved
+ );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ PVOID WINAPI
+ WlanAllocateMemory(
+     _In_ DWORD dwMemorySize
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ VOID WINAPI
+ WlanFreeMemory(
+     _In_ PVOID pMemory
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanSetSecuritySettings(
+     _In_ HANDLE hClientHandle,
+@@ -1587,6 +1623,7 @@ WlanSetSecuritySettings(
+     _In_ LPCWSTR strModifiedSDDL
+ );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanGetSecuritySettings(
+     _In_ HANDLE hClientHandle,
+@@ -1615,6 +1652,7 @@ typedef enum _WL_DISPLAY_PAGES
+     WLAdvPage
+ } WL_DISPLAY_PAGES, *PWL_DISPLAY_PAGES;
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI
+ WlanUIEditProfile(
+     _In_ DWORD dwClientVersion,
+@@ -1702,6 +1740,7 @@ WLAN_HOSTED_NETWORK_PEER_AUTH_STATE, *PWLAN_HOSTED_NETWORK_PEER_AUTH_STATE;
+ 
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkStartUsing
+@@ -1713,6 +1752,7 @@ WlanHostedNetworkStartUsing
+ 
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkStopUsing
+@@ -1725,6 +1765,7 @@ WlanHostedNetworkStopUsing
+ 
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkForceStart
+@@ -1736,6 +1777,7 @@ WlanHostedNetworkForceStart
+ 
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkForceStop
+@@ -1878,6 +1920,7 @@ WLAN_HOSTED_NETWORK_SECURITY_SETTINGS, *PWLAN_HOSTED_NETWORK_SECURITY_SETTINGS;
+ //
+ // This function queries the static properties of the hosted network
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkQueryProperty
+@@ -1896,6 +1939,7 @@ WlanHostedNetworkQueryProperty
+ //
+ // This function sets the static properties of the hosted network
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkSetProperty
+@@ -1915,6 +1959,7 @@ WlanHostedNetworkSetProperty
+ // on a machine. There are no effects if an initial
+ // configuration has already been created.
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkInitSettings
+@@ -1927,6 +1972,7 @@ WlanHostedNetworkInitSettings
+ 
+ 
+ 
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkRefreshSecuritySettings
+@@ -1959,6 +2005,7 @@ WLAN_HOSTED_NETWORK_STATUS, *PWLAN_HOSTED_NETWORK_STATUS;
+ //
+ // This function queries the runtime status of the hosted network
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkQueryStatus
+@@ -1977,6 +2024,7 @@ WlanHostedNetworkQueryStatus
+ // if it is passphrase, key length includes the terminating '\0',
+ // if not, key length is the number of bytes in the key data array.
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkSetSecondaryKey
+@@ -1997,6 +2045,7 @@ WlanHostedNetworkSetSecondaryKey
+ // If it is passphrase, key length includes the terminating '\0',
+ // if not, key length is the number of bytes in the key data array.
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanHostedNetworkQuerySecondaryKey
+@@ -2013,6 +2062,7 @@ WlanHostedNetworkQuerySecondaryKey
+ //
+ // This function is used to register and unregister notifications on virtual station.
+ //
++_Win32_SupportedOS_Windows7_
+ DWORD
+ WINAPI
+ WlanRegisterVirtualStationNotification
+@@ -2564,6 +2614,7 @@ DEFINE_DEVPROPKEY(
+     0x07
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDOpenHandle(
+@@ -2572,6 +2623,7 @@ WFDOpenHandle(
+     _Out_ PHANDLE           phClientHandle
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDCloseHandle(
+@@ -2586,6 +2638,7 @@ typedef VOID (WINAPI *WFD_OPEN_SESSION_COMPLETE_CALLBACK) (
+     _In_ DWORD          dwReasonCode
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDStartOpenSession(
+@@ -2596,12 +2649,14 @@ WFDStartOpenSession(
+     _Out_ PHANDLE                               phSessionHandle
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDCancelOpenSession(
+     _In_ HANDLE                         hSessionHandle
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDOpenLegacySession(
+@@ -2611,12 +2666,14 @@ WFDOpenLegacySession(
+     _Out_ GUID* pGuidSessionInterface
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDCloseSession(
+     _In_ HANDLE                         hSessionHandle
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ DWORD
+ WINAPI
+ WFDUpdateDeviceVisibility(

@@ -17,3 +17,5 @@ CLUSPROP_FTSET_INFO
 CLUSPROP_SCSI_ADDRESS
 --namespace
 Windows.Win32.Networking.Clustering
+--config
+parse-win32-annotations

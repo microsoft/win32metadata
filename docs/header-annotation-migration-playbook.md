@@ -1701,6 +1701,34 @@ members and the three exact signed user-branch RPC values. These are
 focused checks, not a full-SDK image, combined API grade, current-head CI
 or consumer qualification; consumer compatibility remains **UNVERIFIED**.
 
+#### Native network bulk source pass
+
+The first two reserved bulk batches add **38 distinct original-header
+patches**, not 39: `rpcproxy.h` has 36 retained, unbound facts and no
+authored patch. The source-bound pass relocates exactly 2,267
+SupportedOS rows and 304 SetLastError rows into 2,599 annotation
+placements. Removing just those inserted annotation lines restores all
+38 original native files byte-for-byte. The sidecar set difference is
+exactly those 2,571 rows, with no unrelated additions or removals.
+
+This is a source majority, not complete annotation migration for those
+headers. There are 128 explicitly retained mapper facts and 41 additional
+queue availability references outside the initial free-function owner
+map; the latter include macros, helpers, aliases and two C++ interfaces.
+Their original sidecar facts remain. The queue also retains 475
+other-category row references: 12 synthetic-group definitions, 172
+explicit members, 213 direct enum uses, 73 declaration overrides, two
+associated-enum uses, two invalid-handle values and one cleanup API.
+These are configuration references, not counts of unique APIs or new
+annotation-vocabulary gaps. They are not counted as converted by the
+availability/error-only mapper.
+
+Focused ordinary native controls pass for all 17 selected partition
+closures on x86/x64/ARM64, in 51 cases. The stock metadata-enabled source
+scrape uses one consistent private native recipe. Complete image/API
+grading, production CI and consumer qualification remain central gates;
+this source commit does not claim those outcomes.
+
 ### Third original-IDL batch: actual preparation and native-output controls
 
 The next bounded batch uses only the already-authored original

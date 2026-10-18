@@ -1,0 +1,288 @@
+diff --git a/um/winsnmp.h b/um/winsnmp.h
+index dcbad6c7..4a3115c7 100644
+--- a/um/winsnmp.h
++++ b/um/winsnmp.h
+@@ -267,41 +267,51 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
+                          IN LPVOID lpClientData);
+ 
+ /* Local Database Functions */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTranslateMode
+                               (OUT smiLPUINT32 nTranslateMode);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetTranslateMode
+                               (IN smiUINT32 nTranslateMode);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetransmitMode
+                               (OUT smiLPUINT32 nRetransmitMode);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetRetransmitMode
+                               (IN smiUINT32 nRetransmitMode);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetTimeout
+                               (IN HSNMP_ENTITY hEntity,
+                               OUT smiLPTIMETICKS nPolicyTimeout,
+                               OUT smiLPTIMETICKS nActualTimeout);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetTimeout
+                               (IN HSNMP_ENTITY hEntity,
+                               IN smiTIMETICKS nPolicyTimeout);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetRetry
+                               (IN HSNMP_ENTITY hEntity,
+                               OUT smiLPUINT32 nPolicyRetry,
+                               OUT smiLPUINT32 nActualRetry);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetRetry
+                               (IN HSNMP_ENTITY hEntity,
+                               IN smiUINT32 nPolicyRetry);
+ 
+ /* Following Local Database Functions added in v2.0 */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetVendorInfo
+                               (OUT smiLPVENDORINFO vendorInfo);
+ 
+ /* Communications Functions */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStartup
+                               (OUT smiLPUINT32 nMajorVersion,
+                               OUT smiLPUINT32 nMinorVersion,
+@@ -309,16 +319,20 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStartup
+                               OUT smiLPUINT32 nTranslateMode,
+                               OUT smiLPUINT32 nRetransmitMode);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpCleanup
+                               (void);
+ 
++_Win32_SupportedOS_Windows2000_
+ HSNMP_SESSION  SNMPAPI_CALL   SnmpOpen
+                               (IN HWND hWnd,
+                               IN UINT wMsg);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpClose
+                               (IN HSNMP_SESSION session);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSendMsg
+                               (IN HSNMP_SESSION session,
+                               IN HSNMP_ENTITY srcEntity,
+@@ -326,6 +340,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSendMsg
+                               IN HSNMP_CONTEXT context,
+                               IN HSNMP_PDU PDU);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
+                               (IN HSNMP_SESSION session,
+                               OUT LPHSNMP_ENTITY srcEntity,
+@@ -333,6 +348,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
+                               OUT LPHSNMP_CONTEXT  context,
+                               OUT LPHSNMP_PDU PDU);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRegister
+                               (IN HSNMP_SESSION session,
+                               IN HSNMP_ENTITY srcEntity,
+@@ -342,12 +358,14 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRegister
+                               IN smiUINT32 state);
+ 
+ /* Following Communications Functions added in v2.0 */
++_Win32_SupportedOS_Windows2000_
+ HSNMP_SESSION  SNMPAPI_CALL   SnmpCreateSession
+                               (IN HWND hWnd,
+                               IN UINT wMsg,
+                               IN SNMPAPI_CALLBACK fCallBack,
+                               IN LPVOID lpClientData);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpListen
+                               (IN HSNMP_ENTITY hEntity,
+                               IN SNMPAPI_STATUS lStatus);
+@@ -357,11 +375,13 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpListenEx
+                               IN SNMPAPI_STATUS lStatus,
+                               IN smiUINT32 nUseEntityAddr);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpCancelMsg
+                               (IN HSNMP_SESSION session,
+                               IN smiINT32 reqId);
+ 
+ /* Extensions to Communications Functions */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL SnmpStartupEx 
+                             (OUT smiLPUINT32 nMajorVersion,
+                              OUT smiLPUINT32 nMinorVersion,
+@@ -373,40 +393,49 @@ typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPSTARTUPEX)(  smiLPUINT32,
+                                                         smiLPUINT32,
+                                                         smiLPUINT32,
+                                                         smiLPUINT32);
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL SnmpCleanupEx 
+                             (void);
+ typedef SNMPAPI_STATUS (SNMPAPI_CALL * PFNSNMPCLEANUPEX)(void);
+ 
+ /* Entity/Context Functions */
++_Win32_SupportedOS_Windows2000_
+ HSNMP_ENTITY   SNMPAPI_CALL   SnmpStrToEntity
+                               (IN HSNMP_SESSION session,
+                               IN LPCSTR string);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEntityToStr
+                               (_In_ HSNMP_ENTITY entity,
+                               _In_ smiUINT32 size,
+                               _Out_writes_(size) LPSTR string);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeEntity
+                               (IN HSNMP_ENTITY entity);
+ 
++_Win32_SupportedOS_Windows2000_
+ HSNMP_CONTEXT  SNMPAPI_CALL   SnmpStrToContext
+                               (IN HSNMP_SESSION session,
+                               IN smiLPCOCTETS string);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpContextToStr
+                               (IN HSNMP_CONTEXT context,
+                               OUT smiLPOCTETS string);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeContext
+                               (IN HSNMP_CONTEXT context);
+ 
+ /* Following Entity/Context Functions added in v2.0 */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPort
+                               (IN HSNMP_ENTITY hEntity,
+                               IN UINT nPort);
+ 
+ /* PDU Functions */
++_Win32_SupportedOS_Windows2000_
+ HSNMP_PDU      SNMPAPI_CALL   SnmpCreatePdu
+                               (IN HSNMP_SESSION session,
+                               IN smiINT PDU_type,
+@@ -415,6 +444,7 @@ HSNMP_PDU      SNMPAPI_CALL   SnmpCreatePdu
+                               IN smiINT error_index,
+                               IN HSNMP_VBL varbindlist);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetPduData
+                               (IN HSNMP_PDU PDU,
+                               OUT smiLPINT PDU_type,
+@@ -423,6 +453,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetPduData
+                               OUT smiLPINT error_index,
+                               OUT LPHSNMP_VBL varbindlist);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
+                               (IN HSNMP_PDU PDU,
+                               IN const smiINT FAR *PDU_type,
+@@ -431,68 +462,83 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
+                               IN const smiINT FAR *max_repetitions,
+                               IN const HSNMP_VBL FAR *varbindlist);
+ 
++_Win32_SupportedOS_Windows2000_
+ HSNMP_PDU      SNMPAPI_CALL   SnmpDuplicatePdu
+                               (IN HSNMP_SESSION session,
+                               IN HSNMP_PDU PDU);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreePdu
+                               (IN HSNMP_PDU PDU);
+ 
+ /* Variable-Binding Functions */
++_Win32_SupportedOS_Windows2000_
+ HSNMP_VBL      SNMPAPI_CALL   SnmpCreateVbl
+                               (IN HSNMP_SESSION session,
+                               IN smiLPCOID name,
+                               IN smiLPCVALUE value);
+ 
++_Win32_SupportedOS_Windows2000_
+ HSNMP_VBL      SNMPAPI_CALL   SnmpDuplicateVbl
+                               (IN HSNMP_SESSION session,
+                               IN HSNMP_VBL vbl);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeVbl
+                               (IN HSNMP_VBL vbl);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpCountVbl
+                               (IN HSNMP_VBL vbl);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetVb
+                               (IN HSNMP_VBL vbl,
+                               IN smiUINT32 index,
+                               OUT smiLPOID name,
+                               OUT smiLPVALUE value);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetVb
+                               (IN HSNMP_VBL vbl,
+                               IN smiUINT32 index,
+                               IN smiLPCOID name,
+                               IN smiLPCVALUE value);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDeleteVb
+                               (IN HSNMP_VBL vbl,
+                               IN smiUINT32 index);
+ 
+ /* Utility Functions */
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetLastError
+                               (IN HSNMP_SESSION session);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpStrToOid
+                               (IN LPCSTR string,
+                               OUT smiLPOID dstOID);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidToStr
+                               (_In_ smiLPCOID srcOID,
+                               _In_ smiUINT32 size,
+                               _Out_writes_(size) LPSTR string);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCopy
+                               (IN smiLPCOID srcOID,
+                               OUT smiLPOID dstOID);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpOidCompare
+                               (IN smiLPCOID xOID,
+                               IN smiLPCOID yOID,
+                               IN smiUINT32 maxlen,
+                               OUT smiLPINT result);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
+                               (IN HSNMP_SESSION session,
+                               IN HSNMP_ENTITY srcEntity,
+@@ -501,6 +547,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
+                               IN HSNMP_PDU pdu,
+                               OUT smiLPOCTETS msgBufDesc);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
+                               (IN HSNMP_SESSION session,
+                               OUT LPHSNMP_ENTITY srcEntity,
+@@ -509,6 +556,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
+                               OUT LPHSNMP_PDU pdu,
+                               IN smiLPCOCTETS msgBufDesc);
+ 
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
+                               (IN smiUINT32 syntax,
+                               IN smiLPOPAQUE descriptor);

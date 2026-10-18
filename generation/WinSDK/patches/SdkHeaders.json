@@ -957,6 +957,234 @@
       "sourceSha256": "C4FC2FAC4006329223DD667B8AF1DDB7663D06ECEDEA5292A314788DB3BCCB59",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\mfmediaengine.idl",
       "sdkSha256": "B5CDE0EA42295029A3F7B28FBC15C253258DEF8400844CFF4EB0568DB0586543"
+    },
+    {
+      "path": "shared\\rpcasync.h",
+      "sourceSha256": "5E91801CEE17B175A397CC56FF08790783D4FCDBC8D52FE7BB7461CCFA369A85",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\rpcasync.h",
+      "sdkSha256": "5E91801CEE17B175A397CC56FF08790783D4FCDBC8D52FE7BB7461CCFA369A85"
+    },
+    {
+      "path": "um\\rasshost.h",
+      "sourceSha256": "8E78B4385FD418154D5D8A1C2D5B5F95BBCB5E5F866D0A71C92B7FBAB56CABB8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rasshost.h",
+      "sdkSha256": "8E78B4385FD418154D5D8A1C2D5B5F95BBCB5E5F866D0A71C92B7FBAB56CABB8"
+    },
+    {
+      "path": "um\\midles.h",
+      "sourceSha256": "D8CDC3973F2DD738766117F8AAA36DCC9BF934AC49610B29B7511825EE64BD8E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\midles.h",
+      "sdkSha256": "D8CDC3973F2DD738766117F8AAA36DCC9BF934AC49610B29B7511825EE64BD8E"
+    },
+    {
+      "path": "um\\adsprop.h",
+      "sourceSha256": "67E8BE34FCE6F6F8BB33EDAF81FDC2CB385787F827108FCC4705879F5E07C9A1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\adsprop.h",
+      "sdkSha256": "67E8BE34FCE6F6F8BB33EDAF81FDC2CB385787F827108FCC4705879F5E07C9A1"
+    },
+    {
+      "path": "um\\madcapcl.h",
+      "sourceSha256": "A2B5F1EADB4D077372EA52AA042A0B3FBD1389F6CA137888C1F6119B0054849F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\madcapcl.h",
+      "sdkSha256": "A2B5F1EADB4D077372EA52AA042A0B3FBD1389F6CA137888C1F6119B0054849F"
+    },
+    {
+      "path": "um\\dsclient.h",
+      "sourceSha256": "5B8247A577DFB75D004853AC766E189196F5A036D89A39DC8B0624980CE5BEF9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dsclient.h",
+      "sdkSha256": "5B8247A577DFB75D004853AC766E189196F5A036D89A39DC8B0624980CE5BEF9"
+    },
+    {
+      "path": "um\\rasdlg.h",
+      "sourceSha256": "28CCDE48D66DECFC1125D487B6A573C0F345608829CEE74EC703138487405ED0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rasdlg.h",
+      "sdkSha256": "28CCDE48D66DECFC1125D487B6A573C0F345608829CEE74EC703138487405ED0"
+    },
+    {
+      "path": "um\\ondemandconnroutehelper.h",
+      "sourceSha256": "2F30005299AEBD2871E341D99A5EB130966CC813D7E52EDB72E64D8A785CBA39",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ondemandconnroutehelper.h",
+      "sdkSha256": "2F30005299AEBD2871E341D99A5EB130966CC813D7E52EDB72E64D8A785CBA39"
+    },
+    {
+      "path": "um\\sporder.h",
+      "sourceSha256": "C245F34237060D288CE6AE5E42F0069B110D134BC53F54E1F2487B1487C68082",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\sporder.h",
+      "sdkSha256": "C245F34237060D288CE6AE5E42F0069B110D134BC53F54E1F2487B1487C68082"
+    },
+    {
+      "path": "shared\\rpcdcep.h",
+      "sourceSha256": "DF032ED7952B84113857284D86E7365B158CC57F955A5C0580E57E96C6DF5BA2",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\rpcdcep.h",
+      "sdkSha256": "DF032ED7952B84113857284D86E7365B158CC57F955A5C0580E57E96C6DF5BA2"
+    },
+    {
+      "path": "um\\rpcssl.h",
+      "sourceSha256": "AB33B02919D6C7332F60169B442C91DDFFD058CD798F9A8CB3232B1997466085",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rpcssl.h",
+      "sdkSha256": "AB33B02919D6C7332F60169B442C91DDFFD058CD798F9A8CB3232B1997466085"
+    },
+    {
+      "path": "um\\dsrole.h",
+      "sourceSha256": "F69FEA6CB1F76BB20E008226552563BBECCF63CEEB49C17EF1B0796D2E9E10F3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dsrole.h",
+      "sdkSha256": "F69FEA6CB1F76BB20E008226552563BBECCF63CEEB49C17EF1B0796D2E9E10F3"
+    },
+    {
+      "path": "um\\smbclnt.h",
+      "sourceSha256": "12C00D5F4512BED3EE89FA8071EFE8998B5785861721E0BC42D43C43E3792586",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\smbclnt.h",
+      "sdkSha256": "12C00D5F4512BED3EE89FA8071EFE8998B5785861721E0BC42D43C43E3792586"
+    },
+    {
+      "path": "um\\socketapi.h",
+      "sourceSha256": "AEF9C091BA91045094124FC5EA935E5CCFF6D68771186EBE38D43B33D114842A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\socketapi.h",
+      "sdkSha256": "AEF9C091BA91045094124FC5EA935E5CCFF6D68771186EBE38D43B33D114842A"
+    },
+    {
+      "path": "um\\wininet.h",
+      "sourceSha256": "11BE77DDA11353695CBB64984B8D056E9CCF7A5E833413883C239E59D5FE2D72",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wininet.h",
+      "sdkSha256": "11BE77DDA11353695CBB64984B8D056E9CCF7A5E833413883C239E59D5FE2D72"
+    },
+    {
+      "path": "um\\clusapi.h",
+      "sourceSha256": "E482D9DB059AD2EB16E9AEB870E4AA6DB1B3621673B4ED71DA17EBA87563216C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\clusapi.h",
+      "sdkSha256": "E482D9DB059AD2EB16E9AEB870E4AA6DB1B3621673B4ED71DA17EBA87563216C"
+    },
+    {
+      "path": "um\\winldap.h",
+      "sourceSha256": "D500763D0B73C0CFBE57D1D850BE7C1D74F61D9731890F84B9908E13D5C5B88D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winldap.h",
+      "sdkSha256": "D500763D0B73C0CFBE57D1D850BE7C1D74F61D9731890F84B9908E13D5C5B88D"
+    },
+    {
+      "path": "shared\\rpcdce.h",
+      "sourceSha256": "991883893134C8ECBE6AF8335DF0781BFB779C11684B3367DEF514136241B866",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\rpcdce.h",
+      "sdkSha256": "991883893134C8ECBE6AF8335DF0781BFB779C11684B3367DEF514136241B866"
+    },
+    {
+      "path": "um\\webservices.h",
+      "sourceSha256": "BB47DCAF660E929488B159A6B02624CC35C4319A5D5691D712838BD09905A040",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\webservices.h",
+      "sdkSha256": "BB47DCAF660E929488B159A6B02624CC35C4319A5D5691D712838BD09905A040"
+    },
+    {
+      "path": "um\\fwpmu.h",
+      "sourceSha256": "92D5F2A1EE268BA7F494DC7109A61A09766E622F10E4C4EB91605C56792EC3E1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fwpmu.h",
+      "sdkSha256": "92D5F2A1EE268BA7F494DC7109A61A09766E622F10E4C4EB91605C56792EC3E1"
+    },
+    {
+      "path": "um\\mprapi.h",
+      "sourceSha256": "BF52C3A182C8C278E317D54F940911E76ABC85F5C4E937E3B5F219DAC2C43E34",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mprapi.h",
+      "sdkSha256": "BF52C3A182C8C278E317D54F940911E76ABC85F5C4E937E3B5F219DAC2C43E34"
+    },
+    {
+      "path": "um\\winsock2.h",
+      "sourceSha256": "15098CBB8780BF917B155E2A7DF9201F9768717A26544EC3912FD32ADDCEA2C7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsock2.h",
+      "sdkSha256": "15098CBB8780BF917B155E2A7DF9201F9768717A26544EC3912FD32ADDCEA2C7"
+    },
+    {
+      "path": "shared\\netioapi.h",
+      "sourceSha256": "7035F59FD6BD88B4B7B023FF25DD66EAEC4116646275BA81E29E7598EDAFB71F",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\netioapi.h",
+      "sdkSha256": "7035F59FD6BD88B4B7B023FF25DD66EAEC4116646275BA81E29E7598EDAFB71F"
+    },
+    {
+      "path": "um\\resapi.h",
+      "sourceSha256": "DA5C79E08767F33C8EBD7C87E45E603724AEC59A1DA0B09F82DC9D3AA30BE4E6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\resapi.h",
+      "sdkSha256": "DA5C79E08767F33C8EBD7C87E45E603724AEC59A1DA0B09F82DC9D3AA30BE4E6"
+    },
+    {
+      "path": "um\\ras.h",
+      "sourceSha256": "64117AA161F0DC001F1D6F352AD230245499BE995EE8B4B0943EE5AC8C3F099B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ras.h",
+      "sdkSha256": "64117AA161F0DC001F1D6F352AD230245499BE995EE8B4B0943EE5AC8C3F099B"
+    },
+    {
+      "path": "um\\iphlpapi.h",
+      "sourceSha256": "639CF8963B00A11FDFFA8955EF71E9CA2294F0FBB4193D5DF3823E64AB8F5C51",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iphlpapi.h",
+      "sdkSha256": "639CF8963B00A11FDFFA8955EF71E9CA2294F0FBB4193D5DF3823E64AB8F5C51"
+    },
+    {
+      "path": "um\\winsnmp.h",
+      "sourceSha256": "51E142484656573D0F94F2F2CCCE1F43B53F296B1946884E86C57EB2C208D2AE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsnmp.h",
+      "sdkSha256": "51E142484656573D0F94F2F2CCCE1F43B53F296B1946884E86C57EB2C208D2AE"
+    },
+    {
+      "path": "um\\snmp.h",
+      "sourceSha256": "1BD89A1560311993697025C2832D2C209A9947403C0CB8669B955458834E9A8C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\snmp.h",
+      "sdkSha256": "1BD89A1560311993697025C2832D2C209A9947403C0CB8669B955458834E9A8C"
+    },
+    {
+      "path": "um\\http.h",
+      "sourceSha256": "EF78CFE8F719D8E2E65314C79C39BE6271E5832ED5962B6982DEB284D18D9B7D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\http.h",
+      "sdkSha256": "EF78CFE8F719D8E2E65314C79C39BE6271E5832ED5962B6982DEB284D18D9B7D"
+    },
+    {
+      "path": "um\\ntdsapi.h",
+      "sourceSha256": "292E6568AC12E8CA166D8BC4E3757702794AD0DDFB1C0E115898E0731B6B603A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ntdsapi.h",
+      "sdkSha256": "292E6568AC12E8CA166D8BC4E3757702794AD0DDFB1C0E115898E0731B6B603A"
+    },
+    {
+      "path": "shared\\rpcndr.h",
+      "sourceSha256": "7EEAAA2B4A5972B44A03086884EEB4338D2B0790E3DBC3CB858CBAB5FA813978",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\rpcndr.h",
+      "sdkSha256": "7EEAAA2B4A5972B44A03086884EEB4338D2B0790E3DBC3CB858CBAB5FA813978"
+    },
+    {
+      "path": "um\\windns.h",
+      "sourceSha256": "B1586EC874EE2892216035B819F5A88C4C8F5E967590C7510213791B96F2666E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\windns.h",
+      "sdkSha256": "B1586EC874EE2892216035B819F5A88C4C8F5E967590C7510213791B96F2666E"
+    },
+    {
+      "path": "um\\rtmv2.h",
+      "sourceSha256": "A4BD89592B395EB7ADA4FE01F4B67E182F08A88E4F6075D7B7B1437E4BBAC092",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rtmv2.h",
+      "sdkSha256": "A4BD89592B395EB7ADA4FE01F4B67E182F08A88E4F6075D7B7B1437E4BBAC092"
+    },
+    {
+      "path": "um\\wlanapi.h",
+      "sourceSha256": "F0B3981DA287AA2F45D9D954C6B2EC7C59CAD408E516AB75F2C85F06C3951E62",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wlanapi.h",
+      "sdkSha256": "F0B3981DA287AA2F45D9D954C6B2EC7C59CAD408E516AB75F2C85F06C3951E62"
+    },
+    {
+      "path": "um\\rpcnsi.h",
+      "sourceSha256": "F49466A31875D34A6E5C02F301D81B7A78F25CB947F3D6E6EA712AB356B42C8E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rpcnsi.h",
+      "sdkSha256": "F49466A31875D34A6E5C02F301D81B7A78F25CB947F3D6E6EA712AB356B42C8E"
+    },
+    {
+      "path": "um\\ws2spi.h",
+      "sourceSha256": "5F3EC7AFB07C10153104917CD0A81AE8488DAD48C0C5522A79E88AD9E66B5CC8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ws2spi.h",
+      "sdkSha256": "5F3EC7AFB07C10153104917CD0A81AE8488DAD48C0C5522A79E88AD9E66B5CC8"
+    },
+    {
+      "path": "um\\ws2tcpip.h",
+      "sourceSha256": "76011C9095FCD50AF68EB7D3FFB828D4D2B710CBDA09EC4B2653371319886A21",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ws2tcpip.h",
+      "sdkSha256": "76011C9095FCD50AF68EB7D3FFB828D4D2B710CBDA09EC4B2653371319886A21"
+    },
+    {
+      "path": "um\\peerdist.h",
+      "sourceSha256": "6315DAAA9EEFE6F8C8F4E0AFB737BAF5987541BA13DD7516841E50BBAD47F730",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\peerdist.h",
+      "sdkSha256": "6315DAAA9EEFE6F8C8F4E0AFB737BAF5987541BA13DD7516841E50BBAD47F730"
     }
   ],
   "midl": {
@@ -1802,7 +2030,13 @@
     "Wmi",
     "Mmc",
     "Mbn",
-    "Gpmc"
+    "Gpmc",
+    "MadCap",
+    "MsCs",
+    "Wsw",
+    "WindowsFilteringPlatform",
+    "Dns",
+    "NWifi"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -1929,6 +2163,44 @@
     "um\\mmc.idl.patch",
     "um\\mbnapi.idl.patch",
     "um\\gpmgmt.idl.patch",
-    "um\\mfmediaengine.idl.patch"
+    "um\\mfmediaengine.idl.patch",
+    "shared\\rpcasync.h.patch",
+    "um\\rasshost.h.patch",
+    "um\\midles.h.patch",
+    "um\\adsprop.h.patch",
+    "um\\madcapcl.h.patch",
+    "um\\dsclient.h.patch",
+    "um\\rasdlg.h.patch",
+    "um\\ondemandconnroutehelper.h.patch",
+    "um\\sporder.h.patch",
+    "shared\\rpcdcep.h.patch",
+    "um\\rpcssl.h.patch",
+    "um\\dsrole.h.patch",
+    "um\\smbclnt.h.patch",
+    "um\\socketapi.h.patch",
+    "um\\wininet.h.patch",
+    "um\\clusapi.h.patch",
+    "um\\winldap.h.patch",
+    "shared\\rpcdce.h.patch",
+    "um\\webservices.h.patch",
+    "um\\fwpmu.h.patch",
+    "um\\mprapi.h.patch",
+    "um\\winsock2.h.patch",
+    "shared\\netioapi.h.patch",
+    "um\\resapi.h.patch",
+    "um\\ras.h.patch",
+    "um\\iphlpapi.h.patch",
+    "um\\winsnmp.h.patch",
+    "um\\snmp.h.patch",
+    "um\\http.h.patch",
+    "um\\ntdsapi.h.patch",
+    "shared\\rpcndr.h.patch",
+    "um\\windns.h.patch",
+    "um\\rtmv2.h.patch",
+    "um\\wlanapi.h.patch",
+    "um\\rpcnsi.h.patch",
+    "um\\ws2spi.h.patch",
+    "um\\ws2tcpip.h.patch",
+    "um\\peerdist.h.patch"
   ]
 }

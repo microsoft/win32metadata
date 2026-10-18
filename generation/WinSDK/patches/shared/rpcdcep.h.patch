@@ -1,0 +1,12 @@
+diff --git a/shared/rpcdcep.h b/shared/rpcdcep.h
+index 8b038177..439282f8 100644
+--- a/shared/rpcdcep.h
++++ b/shared/rpcdcep.h
+@@ -549,6 +549,7 @@ I_RpcBindingInqMarshalledTargetInfo (
+ #endif // (NTDDI_VERSION >= NTDDI_WS03)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY

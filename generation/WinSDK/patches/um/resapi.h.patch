@@ -1,0 +1,864 @@
+diff --git a/um/resapi.h b/um/resapi.h
+index 0c6cddc5..2c6322a5 100644
+--- a/um/resapi.h
++++ b/um/resapi.h
+@@ -990,26 +990,31 @@ typedef struct _CLUSTER_HEALTH_FAULT_ARRAY
+ //
+ //Health fault utility routines
+ //
++_Win32_SupportedOS_Server2016_
+ DWORD
+ InitializeClusterHealthFault(
+     _Inout_ CLUSTER_HEALTH_FAULT* clusterHealthFault
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ InitializeClusterHealthFaultArray(
+     _Inout_ CLUSTER_HEALTH_FAULT_ARRAY* clusterHealthFaultArray
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ FreeClusterHealthFault(
+     _Inout_ CLUSTER_HEALTH_FAULT* clusterHealthFault
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ FreeClusterHealthFaultArray(
+     _Inout_ CLUSTER_HEALTH_FAULT_ARRAY* clusterHealthFaultArray
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ WINAPI
+ ClusGetClusterHealthFaults(
+@@ -1017,6 +1022,7 @@ ClusGetClusterHealthFaults(
+     _Out_ CLUSTER_HEALTH_FAULT_ARRAY* objects,
+     _In_ DWORD flags);
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ WINAPI
+ ClusRemoveClusterHealthFault(
+@@ -1025,6 +1031,7 @@ ClusRemoveClusterHealthFault(
+     _In_ DWORD flags
+ );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ WINAPI
+ ClusAddClusterHealthFault(
+@@ -1037,6 +1044,7 @@ ClusAddClusterHealthFault(
+ // Resource Utility Routines
+ //
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilStartResourceService(
+@@ -1050,6 +1058,7 @@ typedef DWORD
+     OUT LPSC_HANDLE phServiceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilVerifyResourceService(
+@@ -1061,6 +1070,7 @@ typedef DWORD
+     IN LPCWSTR pszServiceName
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilStopResourceService(
+@@ -1072,6 +1082,7 @@ typedef DWORD
+     IN LPCWSTR pszServiceName
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilVerifyService(
+@@ -1083,6 +1094,7 @@ typedef DWORD
+     IN SC_HANDLE hServiceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilStopService(
+@@ -1094,6 +1106,7 @@ typedef DWORD
+     IN SC_HANDLE hServiceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilCreateDirectoryTree(
+@@ -1105,6 +1118,7 @@ typedef DWORD
+     IN LPCWSTR pszPath
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ResUtilIsPathValid(
+@@ -1116,6 +1130,7 @@ typedef BOOL
+     IN LPCWSTR pszPath
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilEnumProperties(
+@@ -1135,6 +1150,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilEnumPrivateProperties(
+@@ -1154,6 +1170,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetProperties(
+@@ -1175,6 +1192,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetAllProperties(
+@@ -1196,6 +1214,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetPrivateProperties(
+@@ -1215,6 +1234,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetPropertySize(
+@@ -1232,6 +1252,7 @@ typedef DWORD
+     IN OUT LPDWORD pnPropertyCount
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ _Success_( return == ERROR_SUCCESS )
+ DWORD
+ WINAPI
+@@ -1252,6 +1273,7 @@ DWORD
+     _Inout_ LPDWORD pcbOutPropertyItemSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilVerifyPropertyTable(
+@@ -1273,6 +1295,7 @@ typedef DWORD
+     _Out_opt_ LPBYTE pOutParams
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetPropertyTable(
+@@ -1296,6 +1319,7 @@ typedef DWORD
+     _Out_opt_ LPBYTE pOutParams
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetPropertyTableEx(
+@@ -1321,6 +1345,7 @@ typedef DWORD
+     OUT OPTIONAL LPBYTE pOutParams
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetPropertyParameterBlock(
+@@ -1344,6 +1369,7 @@ typedef DWORD
+     OUT OPTIONAL LPBYTE pOutParams
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetPropertyParameterBlockEx(
+@@ -1369,6 +1395,7 @@ typedef DWORD
+     OUT OPTIONAL LPBYTE pOutParams
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetUnknownProperties(
+@@ -1386,6 +1413,7 @@ typedef DWORD
+     _In_ DWORD cbInPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetPropertiesToParameterBlock(
+@@ -1414,6 +1442,7 @@ typedef DWORD
+     OUT OPTIONAL LPWSTR * pszNameOfPropInError
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilPropertyListFromParameterBlock(
+@@ -1435,6 +1464,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilDupParameterBlock(
+@@ -1450,6 +1480,7 @@ typedef DWORD
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ void
+ WINAPI
+ ResUtilFreeParameterBlock(
+@@ -1465,6 +1496,7 @@ typedef void
+     IN const PRESUTIL_PROPERTY_ITEM pPropertyTable
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilAddUnknownProperties(
+@@ -1486,6 +1518,7 @@ typedef DWORD
+     IN OUT LPDWORD pcbRequired
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetPrivatePropertyList(
+@@ -1501,6 +1534,7 @@ typedef DWORD
+     _In_ DWORD cbInPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilVerifyPrivatePropertyList(
+@@ -1514,6 +1548,8 @@ typedef DWORD
+     _In_ DWORD cbInPropertyListSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ PWSTR
+ WINAPI
+ ResUtilDupString(
+@@ -1525,6 +1561,7 @@ typedef PWSTR
+     IN LPCWSTR pszInString
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetBinaryValue(
+@@ -1542,6 +1579,8 @@ typedef DWORD
+     _Out_ LPDWORD pcbOutValueSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ LPWSTR
+ WINAPI
+ ResUtilGetSzValue(
+@@ -1555,6 +1594,8 @@ typedef LPWSTR
+     IN LPCWSTR pszValueName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2003_
+ LPWSTR
+ WINAPI
+ ResUtilGetExpandSzValue(
+@@ -1583,6 +1624,7 @@ ResUtilGetMultiSzValue(
+     return ResUtilGetBinaryValue( hkeyClusterKey, pszValueName, (LPBYTE *) ppszOutValue, pcbOutValueSize );
+ }
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetDwordValue(
+@@ -1600,6 +1642,7 @@ typedef DWORD
+     _In_ DWORD dwDefaultValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetQwordValue(
+@@ -1617,6 +1660,7 @@ typedef DWORD
+     _In_ ULONGLONG qwDefaultValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetBinaryValue(
+@@ -1640,6 +1684,7 @@ typedef DWORD
+     _Inout_ LPDWORD pcbOutValueSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetSzValue(
+@@ -1657,6 +1702,7 @@ typedef DWORD
+     _Inout_opt_ LPWSTR *ppszOutString
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetExpandSzValue(
+@@ -1674,6 +1720,7 @@ typedef DWORD
+     _Inout_opt_ LPWSTR *ppszOutString
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetMultiSzValue(
+@@ -1695,6 +1742,7 @@ typedef DWORD
+     _Inout_opt_ LPDWORD pcbOutValueSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetDwordValue(
+@@ -1712,6 +1760,7 @@ typedef DWORD
+     IN OUT LPDWORD pdwOutValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetQwordValue(
+@@ -1729,6 +1778,7 @@ typedef DWORD
+     _Inout_opt_ PULONGLONG pqwOutValue
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ResUtilSetValueEx(
+@@ -1740,6 +1790,7 @@ ResUtilSetValueEx(
+     _In_ DWORD flags
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetBinaryProperty(
+@@ -1763,6 +1814,7 @@ typedef DWORD
+     _Inout_ LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetSzProperty(
+@@ -1782,6 +1834,7 @@ typedef DWORD
+     _Inout_ LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetMultiSzProperty(
+@@ -1805,6 +1858,7 @@ typedef DWORD
+     _Inout_ LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetDwordProperty(
+@@ -1828,6 +1882,7 @@ typedef DWORD
+     OUT LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetLongProperty(
+@@ -1851,6 +1906,7 @@ typedef DWORD
+     OUT LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetFileTimeProperty(
+@@ -1874,6 +1930,8 @@ typedef DWORD
+     OUT LPDWORD pcbPropertyListSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ LPVOID
+ WINAPI
+ ResUtilGetEnvironmentWithNetName(
+@@ -1885,6 +1943,7 @@ typedef LPVOID
+     _In_ HRESOURCE hResource
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFreeEnvironment(
+@@ -1896,6 +1955,8 @@ typedef DWORD
+     IN LPVOID lpEnvironment
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ LPWSTR
+ WINAPI
+ ResUtilExpandEnvironmentStrings(
+@@ -1907,6 +1968,7 @@ typedef LPWSTR
+     IN LPCWSTR pszSrc
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetResourceServiceEnvironment(
+@@ -1924,6 +1986,7 @@ typedef DWORD
+     IN RESOURCE_HANDLE hResourceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilRemoveResourceServiceEnvironment(
+@@ -1939,6 +2002,7 @@ typedef DWORD
+     IN  RESOURCE_HANDLE     hResourceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilSetResourceServiceStartParameters(
+@@ -1958,6 +2022,7 @@ typedef DWORD
+     IN RESOURCE_HANDLE hResourceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindSzProperty(
+@@ -1975,6 +2040,7 @@ typedef DWORD
+     _Outptr_opt_ LPWSTR *pszPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindExpandSzProperty(
+@@ -1992,6 +2058,7 @@ typedef DWORD
+     _Outptr_opt_ LPWSTR *pszPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindExpandedSzProperty(
+@@ -2009,6 +2076,7 @@ typedef DWORD
+     _Outptr_opt_ LPWSTR *pszPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindDwordProperty(
+@@ -2026,6 +2094,7 @@ typedef DWORD
+     _Out_ LPDWORD pdwPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindBinaryProperty(
+@@ -2045,6 +2114,7 @@ typedef DWORD
+     _Out_opt_ LPDWORD pcbPropertyValueSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindMultiSzProperty(
+@@ -2064,6 +2134,7 @@ typedef DWORD
+     _Out_ LPDWORD pcbPropertyValueSize
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindLongProperty(
+@@ -2081,6 +2152,7 @@ typedef DWORD
+     _Out_ LPLONG plPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ WINAPI
+ ResUtilFindULargeIntegerProperty(
+@@ -2098,6 +2170,7 @@ typedef DWORD
+     _Out_ ULONGLONG *plPropertyValue
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilFindFileTimeProperty(
+@@ -2130,6 +2203,7 @@ typedef DWORD (WINAPI *PWORKER_START_ROUTINE)(
+     LPVOID lpThreadParameter
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ClusWorkerCreate(
+@@ -2145,6 +2219,7 @@ typedef DWORD
+     IN PVOID lpParameter
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ClusWorkerCheckTerminate(
+@@ -2167,6 +2242,7 @@ typedef VOID
+     _In_ PCLUS_WORKER lpWorker
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ WINAPI
+ ClusWorkerTerminateEx(
+@@ -2175,6 +2251,7 @@ ClusWorkerTerminateEx(
+     _In_ BOOL WaitOnly
+     );
+ 
++_Win32_SupportedOS_Server2016_
+ DWORD
+ ClusWorkersTerminate(
+     _Inout_updates_(ClusWorkersCount) PCLUS_WORKER * ClusWorkers,
+@@ -2191,6 +2268,7 @@ typedef   DWORD (*LPGROUP_CALLBACK_EX)( HCLUSTER, HGROUP, HGROUP , PVOID );
+ typedef   DWORD (*LPNODE_CALLBACK)( HCLUSTER, HNODE, CLUSTER_NODE_STATE, PVOID );
+ 
+ 
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ResUtilResourcesEqual(
+@@ -2206,6 +2284,7 @@ typedef BOOL
+     );
+ 
+ 
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ResUtilResourceTypesEqual(
+@@ -2220,6 +2299,7 @@ typedef BOOL
+     IN HRESOURCE    hResource
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ResUtilIsResourceClassEqual(
+@@ -2233,6 +2313,7 @@ typedef BOOL
+     IN HRESOURCE                    hResource
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilEnumResources(
+@@ -2250,6 +2331,7 @@ typedef DWORD
+     IN PVOID                pParameter
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilEnumResourcesEx(
+@@ -2269,6 +2351,8 @@ typedef DWORD
+     IN PVOID                    pParameter
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependency(
+@@ -2282,6 +2366,8 @@ typedef HRESOURCE
+     IN LPCWSTR      lpszResourceType
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependencyByName(
+@@ -2299,6 +2385,8 @@ typedef HRESOURCE
+     IN BOOL     bRecurse
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependencyByClass(
+@@ -2316,6 +2404,8 @@ typedef HRESOURCE
+     IN BOOL                         bRecurse
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceNameDependency(
+@@ -2329,6 +2419,7 @@ typedef HRESOURCE
+     IN LPCWSTR      lpszResourceType
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ _Success_( return == ERROR_SUCCESS )
+ DWORD
+ WINAPI
+@@ -2355,6 +2446,8 @@ DWORD
+     _Inout_ DWORD *pcchNetwork
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ _Success_( return == ERROR_SUCCESS )
+ DWORD
+ WINAPI
+@@ -2374,6 +2467,7 @@ _Success_( return == ERROR_SUCCESS ) DWORD
+     _Inout_ DWORD *pcchDriveLetter       // IN size of the pszDriveLetter buffer, OUT size of buffer required
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilTerminateServiceProcessFromResDll(
+@@ -2393,6 +2487,7 @@ typedef DWORD
+     _In_ RESOURCE_HANDLE hResourceHandle
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetPropertyFormats(
+@@ -2413,6 +2508,7 @@ typedef DWORD
+     );
+ 
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetCoreClusterResources(
+@@ -2431,6 +2527,7 @@ typedef DWORD
+     _Out_ HRESOURCE *phClusterQuorumResource
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ResUtilGetResourceName(
+@@ -2488,6 +2585,8 @@ typedef enum _CLUSTER_ROLE_STATE {
+     ClusterRoleUnclustered
+ } CLUSTER_ROLE_STATE;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ _Success_(return >= 0) // != ClusterRoleUnknown
+ CLUSTER_ROLE_STATE
+ WINAPI
+@@ -2497,6 +2596,7 @@ ResUtilGetClusterRoleState(
+     );
+ 
+ // TODO: should we implement versioning here like ClusApi - maybe overkill for now.
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ClusterIsPathOnSharedVolume(
+@@ -2508,6 +2608,8 @@ typedef BOOL
+     _In_ LPCWSTR lpszPathName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ClusterGetVolumePathName(
+@@ -2523,6 +2625,8 @@ typedef BOOL
+     _In_   DWORD cchBufferLength
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2008_
+ BOOL
+ WINAPI
+ ClusterGetVolumeNameForVolumeMountPoint(
+@@ -2538,6 +2642,7 @@ typedef BOOL
+     _In_   DWORD cchBufferLength
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ClusterPrepareSharedVolumeForBackup(
+@@ -2557,6 +2662,7 @@ typedef DWORD
+     _Inout_ LPDWORD lpcchVolumeName
+     );
+ 
++_Win32_SupportedOS_Server2008_
+ DWORD
+ WINAPI
+ ClusterClearBackupStateForSharedVolume(
+@@ -2570,6 +2676,7 @@ typedef DWORD
+ 
+ // Begin updates to ResUtil functions that accept access level
+ #if ( CLUSAPI_VERSION >= CLUSAPI_VERSION_WINDOWS8 )
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ResUtilSetResourceServiceStartParametersEx(
+@@ -2591,6 +2698,7 @@ typedef DWORD
+     IN      RESOURCE_HANDLE     hResourceHandle
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ResUtilEnumResourcesEx2(
+@@ -2612,6 +2720,8 @@ typedef DWORD
+     IN DWORD                    dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2012_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependencyEx(
+@@ -2627,6 +2737,8 @@ typedef HRESOURCE
+     IN DWORD        dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2012_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependencyByNameEx(
+@@ -2646,6 +2758,8 @@ typedef HRESOURCE
+     IN DWORD    dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2012_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceDependencyByClassEx(
+@@ -2665,6 +2779,8 @@ typedef HRESOURCE
+     IN DWORD                        dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Server2012_
+ HRESOURCE
+ WINAPI
+ ResUtilGetResourceNameDependencyEx(
+@@ -2680,6 +2796,7 @@ typedef HRESOURCE
+     IN DWORD        dwDesiredAccess
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ResUtilGetCoreClusterResourcesEx(
+@@ -2702,6 +2819,7 @@ typedef DWORD
+ 
+ typedef struct _HCLUSCRYPTPROVIDER *HCLUSCRYPTPROVIDER;
+ 
++_Win32_SupportedOS_Server2012_
+ HCLUSCRYPTPROVIDER
+ WINAPI
+ OpenClusterCryptProvider(
+@@ -2738,6 +2856,7 @@ typedef HCLUSCRYPTPROVIDER
+     _In_ DWORD dwFlags
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ CloseClusterCryptProvider(
+@@ -2749,6 +2868,7 @@ typedef DWORD
+     _In_ HCLUSCRYPTPROVIDER hClusCryptProvider
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ClusterEncrypt(
+@@ -2768,6 +2888,7 @@ typedef DWORD
+     _Out_ PDWORD pcbData
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ ClusterDecrypt(
+@@ -2787,6 +2908,7 @@ typedef DWORD
+     _Out_ PDWORD pcbCryptOutput
+     );
+ 
++_Win32_SupportedOS_Server2012_
+ DWORD
+ WINAPI
+ FreeClusterCrypt(
+@@ -2848,8 +2970,10 @@ typedef struct _WitnessTagHelper
+     PaxosTagCStruct paxosToValidate;
+ }WitnessTagHelper;
+ 
++_Win32_SupportedOS_Server2016_
+ BOOL ResUtilPaxosComparer(const PaxosTagCStruct *const left, const PaxosTagCStruct * const right);
+ 
++_Win32_SupportedOS_Server2016_
+ BOOL ResUtilLeftPaxosIsLessThanRight(const PaxosTagCStruct *const left, const PaxosTagCStruct * const right);
+ 
+ DWORD ResUtilsDeleteKeyTree(HKEY key, LPCWSTR keyName, BOOL treatNoKeyAsError);

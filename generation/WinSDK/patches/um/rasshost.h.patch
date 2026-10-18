@@ -1,0 +1,54 @@
+diff --git a/um/rasshost.h b/um/rasshost.h
+index 04310cdb..b3ec153f 100644
+--- a/um/rasshost.h
++++ b/um/rasshost.h
+@@ -78,6 +78,7 @@ typedef DWORD (WINAPI *RASSECURITYPROC)();
+ // the security dialog
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ VOID WINAPI
+ RasSecurityDialogComplete(
+     IN SECURITY_MESSAGE * pSecMsg       // Pointer to the above info. structure
+@@ -90,6 +91,7 @@ RasSecurityDialogComplete(
+ // Should return errors from winerror.h or raserror.h
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD WINAPI
+ RasSecurityDialogBegin(
+     IN HPORT  hPort,        // RAS handle to port
+@@ -113,6 +115,7 @@ RasSecurityDialogBegin(
+ // Should return errors from winerror.h or raserror.h
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD WINAPI
+ RasSecurityDialogEnd(
+     IN HPORT    hPort           // RAS handle to port.
+@@ -126,6 +129,8 @@ RasSecurityDialogEnd(
+ // Will return errors from winerror.h or raserror.h
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ DWORD WINAPI
+ RasSecurityDialogSend(
+     IN HPORT    hPort,          // RAS handle to port.
+@@ -138,6 +143,8 @@ RasSecurityDialogSend(
+ // Will return errors from winerror.h or raserror.h
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ DWORD WINAPI
+ RasSecurityDialogReceive(
+     IN HPORT    hPort,          // RAS handle to port.
+@@ -153,6 +160,7 @@ RasSecurityDialogReceive(
+ // Will return errors from winerror.h or raserror.h
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD WINAPI
+ RasSecurityDialogGetInfo(
+     IN HPORT                hPort,      // RAS handle to port.

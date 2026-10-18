@@ -2,3 +2,5 @@
 <IncludeRoot>/um/http.h
 --namespace
 Windows.Win32.Networking.HttpServer
+--config
+parse-win32-annotations

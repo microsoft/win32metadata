@@ -1,0 +1,1068 @@
+diff --git a/shared/rpcdce.h b/shared/rpcdce.h
+index e3f1c442..4fb02d10 100644
+--- a/shared/rpcdce.h
++++ b/shared/rpcdce.h
+@@ -290,6 +290,7 @@ typedef struct
+ } RPC_IF_ID_VECTOR;
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -300,6 +301,7 @@ RpcBindingCopy (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -308,6 +310,7 @@ RpcBindingFree (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -319,6 +322,7 @@ RpcBindingSetOption (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -335,6 +339,7 @@ RpcBindingInqOption (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -344,6 +349,7 @@ RpcBindingFromStringBindingA (
+     _Out_ RPC_BINDING_HANDLE __RPC_FAR * Binding
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -404,6 +410,7 @@ RpcBindingInqMaxCalls (
+     );
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -414,6 +421,7 @@ RpcBindingInqObject (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -426,6 +434,7 @@ RpcBindingReset (
+ /* RpcBindingSetAuthInfo */
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -442,6 +451,7 @@ RpcBindingSetObject (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -462,6 +472,7 @@ RpcMgmtInqDefaultProtectLevel (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -471,6 +482,7 @@ RpcBindingToStringBindingA (
+     _Outptr_ RPC_CSTR __RPC_FAR * StringBinding
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -506,6 +518,7 @@ RpcBindingToStringBinding (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -526,6 +539,7 @@ RpcBindingVectorFree (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -539,6 +553,7 @@ RpcStringBindingComposeA (
+     _Outptr_opt_ RPC_CSTR __RPC_FAR * StringBinding
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -591,6 +606,7 @@ RpcStringBindingCompose (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -604,6 +620,7 @@ RpcStringBindingParseA (
+     _Outptr_opt_ RPC_CSTR __RPC_FAR * NetworkOptions
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -657,6 +674,7 @@ RpcStringBindingParse (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -664,6 +682,7 @@ RpcStringFreeA (
+     _Inout_ RPC_CSTR __RPC_FAR * String    
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -698,6 +717,7 @@ RpcStringFree (
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -715,6 +735,7 @@ RpcIfInqId (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -723,6 +744,7 @@ RpcNetworkIsProtseqValidA (
+     _In_ RPC_CSTR Protseq     
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -758,6 +780,7 @@ RpcNetworkIsProtseqValid (
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -772,6 +795,7 @@ RpcMgmtInqComTimeout (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -782,6 +806,7 @@ RpcMgmtSetComTimeout (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -800,6 +825,7 @@ RpcMgmtSetCancelTimeout(
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -808,6 +834,7 @@ RpcNetworkInqProtseqsA (
+     _Outptr_ RPC_PROTSEQ_VECTORA __RPC_FAR * __RPC_FAR * ProtseqVector    
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -834,6 +861,7 @@ RpcNetworkInqProtseqs (
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -844,6 +872,7 @@ RpcObjectInqType (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -853,6 +882,7 @@ RpcObjectSetInqFn (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -866,6 +896,7 @@ RpcObjectSetType (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -873,6 +904,7 @@ RpcProtseqVectorFreeA (
+     _Inout_ RPC_PROTSEQ_VECTORA __RPC_FAR * __RPC_FAR * ProtseqVector
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -898,6 +930,7 @@ RpcProtseqVectorFree (
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -917,6 +950,7 @@ RpcServerInqBindingsEx (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -928,6 +962,7 @@ RpcServerInqIf (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -939,6 +974,7 @@ RpcServerListen (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -950,6 +986,7 @@ RpcServerRegisterIf (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -964,6 +1001,7 @@ RpcServerRegisterIfEx (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -979,6 +1017,7 @@ RpcServerRegisterIf2 (
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
+ /* server */
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -995,6 +1034,7 @@ RpcServerRegisterIf3 (
+ #endif // (NTDDI_VERSION >= NTDDI_WIN8)
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1007,6 +1047,7 @@ RpcServerUnregisterIf (
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ /* server */
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -1018,6 +1059,7 @@ RpcServerUnregisterIfEx (
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1028,6 +1070,7 @@ RpcServerUseAllProtseqs (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1039,6 +1082,7 @@ RpcServerUseAllProtseqsEx (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1050,6 +1094,7 @@ RpcServerUseAllProtseqsIf (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1066,6 +1111,7 @@ RpcServerUseAllProtseqsIfEx (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1076,6 +1122,7 @@ RpcServerUseProtseqA (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1087,6 +1134,7 @@ RpcServerUseProtseqExA (
+     _In_ PRPC_POLICY Policy
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1097,6 +1145,7 @@ RpcServerUseProtseqW (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1143,6 +1192,7 @@ RpcServerUseProtseqEx (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1154,6 +1204,7 @@ RpcServerUseProtseqEpA (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1166,6 +1217,7 @@ RpcServerUseProtseqEpExA (
+     _In_ PRPC_POLICY Policy
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1177,6 +1229,7 @@ RpcServerUseProtseqEpW (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1226,6 +1279,7 @@ RpcServerUseProtseqEpEx (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1237,6 +1291,7 @@ RpcServerUseProtseqIfA (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1249,6 +1304,7 @@ RpcServerUseProtseqIfExA (
+     _In_ PRPC_POLICY Policy
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1260,6 +1316,7 @@ RpcServerUseProtseqIfW (
+     _In_opt_ void __RPC_FAR * SecurityDescriptor
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1313,6 +1370,7 @@ RpcServerYield (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -1327,6 +1385,7 @@ RpcMgmtStatsVectorFree (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1337,6 +1396,7 @@ RpcMgmtInqStats (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1352,6 +1412,7 @@ RpcMgmtIsServerListening (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1361,6 +1422,7 @@ RpcMgmtStopServerListening (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1370,6 +1432,7 @@ RpcMgmtWaitServerListen (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1379,6 +1442,7 @@ RpcMgmtSetServerStackSize (
+     );
+ 
+ /* server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ void
+ RPC_ENTRY
+@@ -1387,6 +1451,7 @@ RpcSsDontSerializeContext (
+     );
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1395,6 +1460,7 @@ RpcMgmtEnableIdleCleanup (
+     void
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1404,6 +1470,7 @@ RpcMgmtInqIfIds (
+     _Outptr_ RPC_IF_ID_VECTOR __RPC_FAR * __RPC_FAR * IfIdVector
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -1419,6 +1486,7 @@ RpcIfIdVectorFree (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1429,6 +1497,7 @@ RpcMgmtInqServerPrincNameA (
+     _Outptr_ RPC_CSTR __RPC_FAR * ServerPrincName
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1472,6 +1541,7 @@ RpcMgmtInqServerPrincName (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1481,6 +1551,7 @@ RpcServerInqDefaultPrincNameA (
+     _Outptr_ RPC_CSTR __RPC_FAR * PrincName
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1515,6 +1586,7 @@ RpcServerInqDefaultPrincName (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* client */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1534,6 +1606,7 @@ RpcEpResolveBinding (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -1544,6 +1617,7 @@ RpcNsBindingInqEntryNameA (
+     _Outptr_ RPC_CSTR __RPC_FAR * EntryName
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2127,6 +2201,7 @@ typedef struct _RPC_BINDING_HANDLE_OPTIONS_V1 {
+ 
+ #ifdef _AUTH_IDENTITY_A_DEFINED
+ 
++_Win32_SupportedOS_WindowsVista_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2139,6 +2214,7 @@ RpcBindingCreateA (
+ 
+ #endif // _AUTH_IDENTITY_A_DEFINED
+ 
++_Win32_SupportedOS_WindowsVista_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2169,6 +2245,7 @@ RpcBindingGetTrainingContextHandle (
+     _Outptr_ void ** ContextHandle
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ RPCRTAPI
+ RPC_STATUS 
+ RPC_ENTRY 
+@@ -2256,6 +2333,7 @@ typedef void
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2271,6 +2349,7 @@ RpcImpersonateClient2 (
+     _In_opt_ RPC_BINDING_HANDLE BindingHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2279,6 +2358,7 @@ RpcRevertToSelfEx (
+     _In_opt_ RPC_BINDING_HANDLE BindingHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2287,6 +2367,7 @@ RpcRevertToSelf (
+     void
+     );
+ 
++_Win32_SupportedOS_10240_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2295,6 +2376,7 @@ RpcImpersonateClientContainer (
+     _In_opt_ RPC_BINDING_HANDLE BindingHandle
+     );
+ 
++_Win32_SupportedOS_10240_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2313,6 +2395,7 @@ RpcRevertContainerImpersonation (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2326,6 +2409,7 @@ RpcBindingInqAuthClientA (
+     _Out_opt_ unsigned long __RPC_FAR * AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2339,6 +2423,7 @@ RpcBindingInqAuthClientW (
+     _Out_opt_ unsigned long __RPC_FAR * AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2352,6 +2437,7 @@ RpcBindingInqAuthClientExA (
+     _In_  unsigned long             Flags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2371,6 +2457,7 @@ RpcBindingInqAuthClientExW (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2384,6 +2471,7 @@ RpcBindingInqAuthInfoA (
+     _Out_opt_ unsigned long __RPC_FAR * AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2397,6 +2485,7 @@ RpcBindingInqAuthInfoW (
+     _Out_opt_ unsigned long __RPC_FAR * AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2410,6 +2499,7 @@ RpcBindingSetAuthInfoA (
+     _In_ unsigned long AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2424,6 +2514,7 @@ RpcBindingSetAuthInfoExA (
+     _In_opt_ RPC_SECURITY_QOS * SecurityQos
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2437,6 +2528,7 @@ RpcBindingSetAuthInfoW (
+     _In_ unsigned long AuthzSvc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2451,6 +2543,7 @@ RpcBindingSetAuthInfoExW (
+     _In_opt_ RPC_SECURITY_QOS * SecurityQOS
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2466,6 +2559,7 @@ RpcBindingInqAuthInfoExA (
+     _Out_opt_ RPC_SECURITY_QOS *SecurityQOS
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2496,6 +2590,7 @@ typedef void
+     _Out_ RPC_STATUS __RPC_FAR * Status
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY 
+@@ -2504,6 +2599,7 @@ RpcServerCompleteSecurityCallback(
+     _In_ RPC_STATUS Status
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2515,6 +2611,7 @@ RpcServerRegisterAuthInfoA (
+     _In_opt_ void __RPC_FAR * Arg
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2645,6 +2742,7 @@ typedef struct {
+ #endif 
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2660,6 +2758,7 @@ RpcBindingServerFromClient (
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ DECLSPEC_NORETURN
+ void
+@@ -2668,6 +2767,7 @@ RpcRaiseException (
+     _In_ RPC_STATUS exception
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2682,6 +2782,7 @@ RpcTestCancel(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2690,6 +2791,7 @@ RpcServerTestCancel (
+     _In_opt_ RPC_BINDING_HANDLE BindingHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2698,6 +2800,7 @@ RpcCancelThread(
+     _In_ void * Thread
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2713,6 +2816,7 @@ RpcCancelThreadEx(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2722,6 +2826,7 @@ UuidCreate (
+     );
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -2732,6 +2837,7 @@ UuidCreateSequential (
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2742,6 +2848,7 @@ UuidToStringA (
+     );
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2752,6 +2859,7 @@ UuidFromStringA (
+     );
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2762,6 +2870,7 @@ UuidToStringW (
+     );
+ 
+ /* client/server */
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2801,6 +2910,7 @@ UuidFromString (
+ 
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ signed int
+ RPC_ENTRY
+@@ -2810,6 +2920,7 @@ UuidCompare (
+     _Out_ RPC_STATUS __RPC_FAR * Status
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2818,6 +2929,7 @@ UuidCreateNil (
+     _Out_ UUID __RPC_FAR * NilUuid
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ int
+ RPC_ENTRY
+@@ -2827,6 +2939,7 @@ UuidEqual (
+     _Out_ RPC_STATUS __RPC_FAR * Status
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ unsigned short
+ RPC_ENTRY
+@@ -2835,6 +2948,7 @@ UuidHash (
+     _Out_ RPC_STATUS __RPC_FAR * Status
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ int
+ RPC_ENTRY
+@@ -2851,6 +2965,7 @@ UuidIsNil (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2862,6 +2977,7 @@ RpcEpRegisterNoReplaceA (
+     _In_opt_ RPC_CSTR Annotation
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2873,6 +2989,7 @@ RpcEpRegisterNoReplaceW (
+     _In_opt_ RPC_WSTR Annotation
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2884,6 +3001,7 @@ RpcEpRegisterA (
+     _In_opt_ RPC_CSTR Annotation
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2928,6 +3046,7 @@ RpcEpRegister (
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2948,6 +3067,7 @@ RpcEpUnregister(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -2957,6 +3077,7 @@ DceErrorInqTextA (
+     _Out_writes_(DCE_C_ERROR_STRING_LEN) RPC_CSTR ErrorText
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3009,6 +3130,7 @@ typedef I_RPC_HANDLE * RPC_EP_INQ_HANDLE;
+ #define  RPC_C_VERS_MAJOR_ONLY    4
+ #define  RPC_C_VERS_UPTO          5
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3022,6 +3144,7 @@ RpcMgmtEpEltInqBegin (
+     _Out_ RPC_EP_INQ_HANDLE __RPC_FAR * InquiryContext
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3032,6 +3155,7 @@ RpcMgmtEpEltInqDone (
+ 
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3044,6 +3168,7 @@ RpcMgmtEpEltInqNextA (
+     _Outptr_opt_ RPC_CSTR __RPC_FAR * Annotation
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3100,6 +3225,7 @@ typedef int
+ #define RPC_C_MGMT_IS_SERVER_LISTEN   3
+ #define RPC_C_MGMT_STOP_SERVER_LISTEN 4
+ 
++_Win32_SupportedOS_Windows2000_
+ RPCRTAPI
+ _Must_inspect_result_
+ RPC_STATUS
+@@ -3115,6 +3241,7 @@ RpcMgmtSetAuthorizationFn (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ RPCRTAPI
+ int
+ RPC_ENTRY
+@@ -3260,6 +3387,7 @@ RPC_INTERFACE_GROUP_IDLE_CALLBACK_FN (
+ #ifdef RPC_UNICODE_SUPPORTED
+ 
+ /* server */
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -3276,6 +3404,7 @@ RpcServerInterfaceGroupCreateW (
+ 
+ 
+ /* server */
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -3315,6 +3444,7 @@ RpcServerInterfaceGroupCreate (
+ 
+ #endif /* RPC_UNICODE_SUPPORTED */
+ 
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -3322,6 +3452,7 @@ RpcServerInterfaceGroupClose (
+     _In_ RPC_INTERFACE_GROUP IfGroup
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -3329,6 +3460,7 @@ RpcServerInterfaceGroupActivate (
+     _In_ RPC_INTERFACE_GROUP IfGroup
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
+@@ -3337,6 +3469,7 @@ RpcServerInterfaceGroupDeactivate (
+     _In_ unsigned long ForceDeactivation
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ RPCRTAPI
+ RPC_STATUS
+ RPC_ENTRY
