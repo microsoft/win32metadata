@@ -11,6 +11,7 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using MetadataTasks;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
@@ -1712,6 +1713,258 @@ namespace Win32MetadataScraperTests
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
             Assert.Contains(recipe.RootElement.GetProperty("patches").EnumerateArray(),
                 value => value.GetString() == "um\\ws2bth.h.patch");
+        }
+
+        private const string DeviceInstallationNamespace = "Windows.Win32.Devices.DeviceAndDriverInstallation";
+        internal static readonly (string Name, bool Flags, int Members)[] DeviceInstallationGroups =
+        {
+            ("DIINSTALLDEVICE_FLAGS", true, 5), ("DIINSTALLDRIVER_FLAGS", true, 9),
+            ("DIUNINSTALLDRIVER_FLAGS", true, 3), ("DIROLLBACKDRIVER_FLAGS", true, 2),
+            ("UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS", true, 4), ("CM_RESTYPE", false, 17),
+            ("CM_GET_DEVICE_INTERFACE_LIST_FLAGS", false, 3), ("CM_LOCATE_DEVNODE_FLAGS", false, 5),
+            ("CM_REENUMERATE_FLAGS", true, 5), ("CM_ENUMERATE_FLAGS", true, 3),
+            ("CM_CDMASK", true, 5), ("CM_CDFLAGS", true, 3), ("CM_REMOVAL_POLICY", false, 3),
+            ("CM_INSTALL_STATE", false, 4), ("CM_DEVCAP", true, 11), ("DD_FLAGS", true, 13),
+            ("IOD_DESFLAGS", true, 11), ("IRQD_FLAGS", true, 8), ("MD_FLAGS", true, 26),
+            ("PMF_FLAGS", true, 1), ("PCD_FLAGS", true, 36),
+        };
+        internal static readonly (string Owner, string Member, string Enum, string Native)[] DeviceInstallationEnumUses =
+        {
+            ("DiInstallDevice", "Flags", "DIINSTALLDEVICE_FLAGS", "UInt32"),
+            ("DiInstallDriverA", "Flags", "DIINSTALLDRIVER_FLAGS", "UInt32"),
+            ("DiInstallDriverW", "Flags", "DIINSTALLDRIVER_FLAGS", "UInt32"),
+            ("DiUninstallDriverA", "Flags", "DIUNINSTALLDRIVER_FLAGS", "UInt32"),
+            ("DiUninstallDriverW", "Flags", "DIUNINSTALLDRIVER_FLAGS", "UInt32"),
+            ("DiRollbackDriver", "Flags", "DIROLLBACKDRIVER_FLAGS", "UInt32"),
+            ("UpdateDriverForPlugAndPlayDevicesA", "InstallFlags", "UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS", "UInt32"),
+            ("UpdateDriverForPlugAndPlayDevicesW", "InstallFlags", "UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS", "UInt32"),
+            ("CM_Get_Next_Res_Des", "ForResource", "CM_RESTYPE", "UInt32"),
+            ("CM_Get_Next_Res_Des", "pResourceID", "CM_RESTYPE", "UInt32*"),
+            ("CM_Get_Next_Res_Des_Ex", "ForResource", "CM_RESTYPE", "UInt32"),
+            ("CM_Get_Next_Res_Des_Ex", "pResourceID", "CM_RESTYPE", "UInt32*"),
+            ("CM_Query_Resource_Conflict_List", "ResourceID", "CM_RESTYPE", "UInt32"),
+            ("CM_Get_Device_Interface_ListA", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_ListW", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_ExA", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_ExW", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_SizeA", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_SizeW", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_Size_ExA", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Get_Device_Interface_List_Size_ExW", "ulFlags", "CM_GET_DEVICE_INTERFACE_LIST_FLAGS", "UInt32"),
+            ("CM_Locate_DevNodeA", "ulFlags", "CM_LOCATE_DEVNODE_FLAGS", "UInt32"),
+            ("CM_Locate_DevNodeW", "ulFlags", "CM_LOCATE_DEVNODE_FLAGS", "UInt32"),
+            ("CM_Reenumerate_DevNode", "ulFlags", "CM_REENUMERATE_FLAGS", "UInt32"),
+            ("CM_Enumerate_Classes", "ulFlags", "CM_ENUMERATE_FLAGS", "UInt32"),
+            ("CM_Enumerate_Classes_Ex", "ulFlags", "CM_ENUMERATE_FLAGS", "UInt32"),
+            ("CONFLICT_DETAILS_A", "CD_ulMask", "CM_CDMASK", "UInt32"),
+            ("CONFLICT_DETAILS_W", "CD_ulMask", "CM_CDMASK", "UInt32"),
+            ("CONFLICT_DETAILS_A", "CD_ulFlags", "CM_CDFLAGS", "UInt32"),
+            ("CONFLICT_DETAILS_W", "CD_ulFlags", "CM_CDFLAGS", "UInt32"),
+            ("DMA_DES", "DD_Flags", "DD_FLAGS", "UInt32"),
+            ("DMA_RANGE", "DR_Flags", "DD_FLAGS", "UInt32"),
+            ("IO_DES", "IOD_DesFlags", "IOD_DESFLAGS", "UInt32"),
+            ("IO_RANGE", "IOR_RangeFlags", "IOD_DESFLAGS", "UInt32"),
+            ("IRQ_DES_64", "IRQD_Flags", "IRQD_FLAGS", "UInt32"),
+            ("IRQ_DES_32", "IRQD_Flags", "IRQD_FLAGS", "UInt32"),
+            ("IRQ_RANGE", "IRQR_Flags", "IRQD_FLAGS", "UInt32"),
+            ("MEM_DES", "MD_Flags", "MD_FLAGS", "UInt32"),
+            ("MEM_RANGE", "MR_Flags", "MD_FLAGS", "UInt32"),
+            ("MFCARD_DES", "PMF_Flags", "PMF_FLAGS", "UInt32"),
+            ("PCCARD_DES", "PCD_Flags", "PCD_FLAGS", "UInt32"),
+        };
+        internal static readonly string[] DeviceInstallationUnboundUses =
+        {
+            "CM_Get_Device_Interface_SizeA", "CM_Get_Device_Interface_SizeW",
+            "CM_Get_Device_Interface_Size_ExA", "CM_Get_Device_Interface_Size_ExW", "CM_Reenumerate_DevNodeEx",
+        };
+
+        [Fact]
+        public void DeviceInstallationGroupsHaveOnlyTheirExistingNativeOwnersAndExactResidualUses()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var names = DeviceInstallationGroups.Select(group => group.Name).ToHashSet(StringComparer.Ordinal);
+            var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && names.Contains(name.GetString()));
+            var residual = items.Where(item => item.TryGetProperty("addUsesTo", out var name) && names.Contains(name.GetString())).ToArray();
+            Assert.Equal(2, residual.Length);
+            Assert.Equal(DeviceInstallationUnboundUses.OrderBy(value => value, StringComparer.Ordinal),
+                residual.SelectMany(item => item.GetProperty("uses").EnumerateArray())
+                    .Select(use => use.GetProperty("method").GetString()).OrderBy(value => value, StringComparer.Ordinal));
+            Assert.All(residual.SelectMany(item => item.GetProperty("uses").EnumerateArray()),
+                use => Assert.Equal("ulFlags", use.GetProperty("parameter").GetString()));
+            foreach (string retained in new[] { "CM_LOG_CONF", "CM_DEVNODE_STATUS_FLAGS", "CM_PROB" })
+                Assert.Contains(items, item => item.TryGetProperty("name", out var name) && name.GetString() == retained);
+
+            string additions = string.Join("\n", new[] { "cfgmgr32.h", "newdev.h" }.SelectMany(header =>
+                File.ReadAllLines(Path.Combine(project, "patches", "um", header + ".patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1))));
+            var groups = Regex.Matches(additions, @"_Win32_(?<flags>Flags)?Enum_\((?<arguments>[^)]+)\);")
+                .Select(match => new
+                {
+                    Flags = match.Groups["flags"].Success,
+                    Arguments = match.Groups["arguments"].Value.Split(',').Select(value => value.Trim()).ToArray(),
+                }).ToArray();
+            Assert.Equal(26, groups.Length);
+            Assert.Equal(names.OrderBy(value => value, StringComparer.Ordinal),
+                groups.Select(group => group.Arguments[0]).Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            foreach (var contract in DeviceInstallationGroups)
+            {
+                var contributions = groups.Where(group => group.Arguments[0] == contract.Name).ToArray();
+                Assert.All(contributions, group => Assert.Equal(contract.Flags, group.Flags));
+                Assert.All(contributions, group => Assert.Contains(group.Arguments[1], new[] { "DWORD", "ULONG", "RESOURCEID" }));
+                Assert.Equal(contract.Members, contributions.SelectMany(group => group.Arguments.Skip(2))
+                    .Distinct(StringComparer.Ordinal).Count());
+            }
+            Assert.Equal(177, DeviceInstallationGroups.Sum(group => group.Members));
+            Assert.Equal(41, DeviceInstallationEnumUses.Length);
+            Assert.DoesNotContain("enum ", additions);
+            Assert.DoesNotContain("constexpr", additions);
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_GENERATED_ROOT", "WINHTTP_DEVICE_ENUM_CONTRACTS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualDeviceInstallationGroupsAndAssociationsReachNormalGeneratedSources(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_GENERATED_ROOT");
+            var files = new[] { "common", architecture }.Select(folder => Path.Combine(root, folder))
+                .Where(Directory.Exists).SelectMany(folder => Directory.GetFiles(folder, "*.cs", SearchOption.AllDirectories)).ToArray();
+            Assert.NotEmpty(files);
+            var nodes = files.SelectMany(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file)).GetRoot().DescendantNodes()).ToArray();
+            using var frozen = JsonDocument.Parse(File.ReadAllText(Environment.GetEnvironmentVariable("WINHTTP_DEVICE_ENUM_CONTRACTS")));
+            var contracts = frozen.RootElement.EnumerateArray().ToDictionary(item => item.GetProperty("name").GetString(), StringComparer.Ordinal);
+            Assert.Equal(DeviceInstallationGroups.Select(group => group.Name).OrderBy(name => name, StringComparer.Ordinal),
+                contracts.Keys.OrderBy(name => name, StringComparer.Ordinal));
+            var actual = DeviceInstallationGroups.Select(group =>
+                Assert.Single(nodes.OfType<EnumDeclarationSyntax>().Where(node => node.Identifier.ValueText == group.Name))).ToArray();
+            var actualValues = Values(string.Join("\n", actual.Select(node => node.ToFullString())));
+            var expectedValues = Values(string.Join("\n", DeviceInstallationGroups.Select(group =>
+                contracts[group.Name].GetProperty("frozenDeclaration").GetString())));
+            foreach (var group in DeviceInstallationGroups)
+            {
+                var declaration = actual.Single(node => node.Identifier.ValueText == group.Name);
+                Assert.Equal("uint", Assert.Single(declaration.BaseList.Types).Type.ToString());
+                Assert.Equal(group.Flags, declaration.AttributeLists.SelectMany(list => list.Attributes)
+                    .Any(attribute => attribute.Name.ToString().EndsWith("Flags", StringComparison.Ordinal)));
+                Assert.Equal(contracts[group.Name].GetProperty("memberNames").EnumerateArray().Select(member => member.GetString()),
+                    declaration.Members.Select(member => member.Identifier.ValueText));
+                Assert.Equal(expectedValues[group.Name], actualValues[group.Name]);
+            }
+            foreach (var use in DeviceInstallationEnumUses)
+            {
+                string native;
+                IEnumerable<AttributeSyntax> attributes;
+                var method = nodes.OfType<MethodDeclarationSyntax>().SingleOrDefault(node => node.Identifier.ValueText == use.Owner);
+                if (method != null)
+                {
+                    var parameter = Assert.Single(method.ParameterList.Parameters.Where(node => node.Identifier.ValueText == use.Member));
+                    native = parameter.Type.ToString();
+                    attributes = parameter.AttributeLists.SelectMany(list => list.Attributes);
+                }
+                else
+                {
+                    var owner = Assert.Single(nodes.OfType<StructDeclarationSyntax>().Where(node => node.Identifier.ValueText == use.Owner));
+                    var field = Assert.Single(owner.Members.OfType<FieldDeclarationSyntax>()
+                        .Where(node => node.Declaration.Variables.Any(variable => variable.Identifier.ValueText == use.Member)));
+                    native = field.Declaration.Type.ToString();
+                    attributes = field.AttributeLists.SelectMany(list => list.Attributes);
+                }
+                string expected = use.Native.Replace("UInt32", "uint", StringComparison.Ordinal);
+                Assert.True(expected == native, $"{architecture}/{use.Owner}::{use.Member}: expected native {expected}, found {native}.");
+                var associated = Assert.Single(attributes.Where(attribute =>
+                    attribute.Name.ToString().EndsWith("AssociatedEnum", StringComparison.Ordinal)));
+                Assert.Equal("\"" + use.Enum + "\"", Assert.Single(associated.ArgumentList.Arguments).Expression.ToString());
+            }
+            this.output.WriteLine($"{architecture}: 21 normal native groups/177 exact compiled values and ordered members, " +
+                "26 exact parameter associations and 15 field associations, preserving current native uint/pointer storage.");
+
+            static Dictionary<string, KeyValuePair<string, uint>[]> Values(string declarations)
+            {
+                var tree = CSharpSyntaxTree.ParseText("using System;\n" + declarations);
+                var compilation = CSharpCompilation.Create("ActualDeviceEnumValues", new[] { tree },
+                    new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                    new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+                var model = compilation.GetSemanticModel(tree);
+                return tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .ToDictionary(node => node.Identifier.ValueText, node => node.Members.Select(member =>
+                        new KeyValuePair<string, uint>(member.Identifier.ValueText,
+                            Assert.IsType<uint>(((IFieldSymbol)model.GetDeclaredSymbol(member)).ConstantValue))).ToArray(), StringComparer.Ordinal);
+            }
+        }
+
+        [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void DeviceInstallationLogicalGroupsPreserveEveryPhysicalEnumFact(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var group in DeviceInstallationGroups)
+            {
+                var before = Type(control.Reader, group.Name, architecture, DeviceInstallationNamespace);
+                var after = Type(current.Reader, group.Name, architecture, DeviceInstallationNamespace);
+                Assert.Equal(SnapshotType(control.Reader, before), SnapshotType(current.Reader, after));
+                var fields = after.GetFields().Select(current.Reader.GetFieldDefinition).ToArray();
+                Assert.Equal("UInt32", fields.Single(field => current.Reader.GetString(field.Name) == "value__").DecodeSignature(Signatures, null));
+                Assert.Equal(group.Members, fields.Count(field => !field.GetDefaultValue().IsNil));
+                Assert.Equal(group.Flags, after.GetCustomAttributes().Any(handle => AttributeName(current.Reader, handle) == "FlagsAttribute"));
+                Assert.DoesNotContain(after.GetCustomAttributes(), handle => AttributeName(current.Reader, handle) == "ScopedEnumAttribute");
+            }
+            this.output.WriteLine($"{architecture}: 21 existing physical enum identities, 177 ordered members/values, uint storage and flags exactly unchanged.");
+        }
+
+        [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void DeviceInstallationPhysicalUsesPreserveNativeStorageAndExactAssociations(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_OLD");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var oldApis = Methods(control.Reader, DeviceInstallationNamespace, "Apis", architecture);
+            var apis = Methods(current.Reader, DeviceInstallationNamespace, "Apis", architecture);
+            foreach (var use in DeviceInstallationEnumUses)
+            {
+                if (apis.TryGetValue(use.Owner, out var method))
+                {
+                    var before = oldApis[use.Owner];
+                    var original = before.GetParameters().Select(control.Reader.GetParameter)
+                        .Single(parameter => control.Reader.GetString(parameter.Name) == use.Member);
+                    var parameter = method.GetParameters().Select(current.Reader.GetParameter)
+                        .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                    Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+                    Assert.Equal(original.Attributes, parameter.Attributes);
+                    Assert.Equal(Import(control.Reader, before), Import(current.Reader, method));
+                    Assert.Equal(DeviceInstallationNamespace + "." + use.Enum + (use.Native.EndsWith("*", StringComparison.Ordinal) ? "*" : ""),
+                        before.DecodeSignature(Signatures, null).ParameterTypes[original.SequenceNumber - 1]);
+                    Assert.Equal(use.Native, method.DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                }
+                else
+                {
+                    var before = Type(control.Reader, use.Owner, architecture, DeviceInstallationNamespace);
+                    var after = Type(current.Reader, use.Owner, architecture, DeviceInstallationNamespace);
+                    var original = before.GetFields().Select(control.Reader.GetFieldDefinition)
+                        .Single(field => control.Reader.GetString(field.Name) == use.Member);
+                    var field = after.GetFields().Select(current.Reader.GetFieldDefinition)
+                        .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                    Assert.Equal(original.Attributes, field.Attributes);
+                    Assert.Equal(DeviceInstallationNamespace + "." + use.Enum, original.DecodeSignature(Signatures, null));
+                    Assert.Equal(use.Native, field.DecodeSignature(Signatures, null));
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, field.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                }
+            }
+            var members = DeviceInstallationGroups.SelectMany(group =>
+                Type(control.Reader, group.Name, architecture, DeviceInstallationNamespace).GetFields().Select(control.Reader.GetFieldDefinition))
+                .Where(field => !field.GetDefaultValue().IsNil).Select(field => control.Reader.GetString(field.Name)).ToHashSet(StringComparer.Ordinal);
+            Assert.DoesNotContain(Type(current.Reader, "Apis", architecture, DeviceInstallationNamespace).GetFields()
+                .Select(current.Reader.GetFieldDefinition), field => members.Contains(current.Reader.GetString(field.Name)));
+            this.output.WriteLine($"{architecture}: 41 exact physical native-storage/AssociatedEnum transfers; no new loose group members.");
         }
 
         internal static readonly string[] AuthoredProcessSnapshotFunctions =

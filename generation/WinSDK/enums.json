@@ -33090,88 +33090,6 @@
     ]
   },
   {
-    "name": "DIINSTALLDEVICE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "newdev.h",
-      "filter": "DIIDFLAG_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "DiInstallDevice",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "DIINSTALLDRIVER_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "newdev.h",
-      "filter": "DIIRFLAG_"
-    },
-    "members": [
-      {
-        "name": "DIIRFLAG_BITS",
-        "value": "(DIIRFLAG_FORCE_INF | DIIRFLAG_HOTPATCH  | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
-      },
-      {
-        "name": "DIIRFLAG_SYSTEM_BITS",
-        "value": "(DIIRFLAG_INF_ALREADY_COPIED | DIIRFLAG_FORCE_INF | DIIRFLAG_HW_USING_THE_INF | DIIRFLAG_HOTPATCH | DIIRFLAG_NOBACKUP | DIIRFLAG_PRE_CONFIGURE_INF | DIIRFLAG_INSTALL_AS_SET)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "DiInstallDriverA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "DiInstallDriverW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "DIUNINSTALLDRIVER_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "newdev.h",
-      "filter": "DIURFLAG_"
-    },
-    "members": [
-      {
-        "name": "DIURFLAG_VALID",
-        "value": "(DIURFLAG_NO_REMOVE_INF | DIURFLAG_RESERVED)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "DiUninstallDriverA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "DiUninstallDriverW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "DIROLLBACKDRIVER_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "newdev.h",
-      "filter": "ROLLBACK_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "DiRollbackDriver",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "name": "GPO_OPEN_FLAGS",
     "autoPopulate": {
       "header": "GPEdit.h",
@@ -33233,78 +33151,19 @@
     ]
   },
   {
-    "name": "UPDATEDRIVERFORPLUGANDPLAYDEVICES_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "INSTALLFLAG_",
-      "header": "newdev.h"
-    },
+    "addUsesTo": "CM_REENUMERATE_FLAGS",
     "members": [],
     "uses": [
       {
-        "method": "UpdateDriverForPlugAndPlayDevicesA",
-        "parameter": "InstallFlags"
-      },
-      {
-        "method": "UpdateDriverForPlugAndPlayDevicesW",
-        "parameter": "InstallFlags"
+        "method": "CM_Reenumerate_DevNodeEx",
+        "parameter": "ulFlags"
       }
     ]
   },
   {
-    "name": "CM_RESTYPE",
-    "autoPopulate": {
-      "filter": "ResType_",
-      "header": "cfgmgr32.h"
-    },
+    "addUsesTo": "CM_GET_DEVICE_INTERFACE_LIST_FLAGS",
     "members": [],
     "uses": [
-      {
-        "method": "CM_Get_Next_Res_Des",
-        "parameter": "ForResource"
-      },
-      {
-        "method": "CM_Get_Next_Res_Des",
-        "parameter": "pResourceID"
-      },
-      {
-        "method": "CM_Get_Next_Res_Des_Ex",
-        "parameter": "ForResource"
-      },
-      {
-        "method": "CM_Get_Next_Res_Des_Ex",
-        "parameter": "pResourceID"
-      },
-      {
-        "method": "CM_Query_Resource_Conflict_List",
-        "parameter": "ResourceID"
-      }
-    ]
-  },
-  {
-    "name": "CM_GET_DEVICE_INTERFACE_LIST_FLAGS",
-    "autoPopulate": {
-      "filter": "CM_GET_DEVICE_INTERFACE_LIST_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CM_Get_Device_Interface_ListA",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_ListW",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_ExA",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_ExW",
-        "parameter": "ulFlags"
-      },
       {
         "method": "CM_Get_Device_Interface_SizeA",
         "parameter": "ulFlags"
@@ -33319,59 +33178,6 @@
       },
       {
         "method": "CM_Get_Device_Interface_Size_ExW",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_SizeA",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_SizeW",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_Size_ExA",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_Device_Interface_List_Size_ExW",
-        "parameter": "ulFlags"
-      }
-    ]
-  },
-  {
-    "name": "CM_LOCATE_DEVNODE_FLAGS",
-    "autoPopulate": {
-      "filter": "CM_LOCATE_DEVNODE_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CM_Locate_DevNodeA",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Locate_DevNodeW",
-        "parameter": "ulFlags"
-      }
-    ]
-  },
-  {
-    "name": "CM_REENUMERATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_REENUMERATE_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CM_Reenumerate_DevNode",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Reenumerate_DevNodeEx",
         "parameter": "ulFlags"
       }
     ]
@@ -33388,25 +33194,6 @@
       {
         "method": "SetProcessWorkingSetSizeEx",
         "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "CM_ENUMERATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_ENUMERATE_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CM_Enumerate_Classes",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Enumerate_Classes_Ex",
-        "parameter": "ulFlags"
       }
     ]
   },
@@ -33852,58 +33639,6 @@
     ]
   },
   {
-    "name": "CM_CDMASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_CDMASK_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "CONFLICT_DETAILS_A",
-        "field": "CD_ulMask"
-      },
-      {
-        "struct": "CONFLICT_DETAILS_W",
-        "field": "CD_ulMask"
-      }
-    ]
-  },
-  {
-    "name": "CM_CDFLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_CDFLAGS_",
-      "header": "cfgmgr32.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "CONFLICT_DETAILS_A",
-        "field": "CD_ulFlags"
-      },
-      {
-        "struct": "CONFLICT_DETAILS_W",
-        "field": "CD_ulFlags"
-      }
-    ]
-  },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  {
     "namespace": "Windows.Win32.NetworkManagement.WiFi",
     "name": "DEVPROP_PCIDEVICE_SUPPORTEDSPEEDSANDMODE",
     "autoPopulate": {
@@ -33965,141 +33700,6 @@
       {
         "struct": "TASKDIALOGCONFIG",
         "field": "dwCommonButtons"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "CM_REMOVAL_POLICY",
-    "autoPopulate": {
-      "filter": "CM_REMOVAL_POLICY_",
-      "header": "cfgmgr32.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "CM_INSTALL_STATE",
-    "autoPopulate": {
-      "filter": "CM_INSTALL_STATE_",
-      "header": "cfgmgr32.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "CM_DEVCAP",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CM_DEVCAP_",
-      "header": "cfgmgr32.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "DD_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fDD_|mDD_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "DMA_DES",
-        "field": "DD_Flags"
-      },
-      {
-        "struct": "DMA_RANGE",
-        "field": "DR_Flags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "IOD_DESFLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fIOD_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "IO_DES",
-        "field": "IOD_DesFlags"
-      },
-      {
-        "struct": "IO_RANGE",
-        "field": "IOR_RangeFlags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "IRQD_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fIRQD_|mIRQD_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "IRQ_DES_64",
-        "field": "IRQD_Flags"
-      },
-      {
-        "struct": "IRQ_DES_32",
-        "field": "IRQD_Flags"
-      },
-      {
-        "struct": "IRQ_RANGE",
-        "field": "IRQR_Flags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "MD_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fMD_|mMD_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "MEM_DES",
-        "field": "MD_Flags"
-      },
-      {
-        "struct": "MEM_RANGE",
-        "field": "MR_Flags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "PMF_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fPMF_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "MFCARD_DES",
-        "field": "PMF_Flags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "PCD_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "fPCD_|mPCD_",
-      "header": "cfgmgr32.h"
-    },
-    "uses": [
-      {
-        "struct": "PCCARD_DES",
-        "field": "PCD_Flags"
       }
     ]
   },

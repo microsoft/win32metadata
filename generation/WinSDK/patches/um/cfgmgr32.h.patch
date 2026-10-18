@@ -1,7 +1,447 @@
 diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
+index cfd63837..f224d1c7 100644
 --- a/um/cfgmgr32.h
 +++ b/um/cfgmgr32.h
-@@ -1388,6 +1388,7 @@
+@@ -158,21 +158,26 @@ typedef  HMACHINE     *PHMACHINE;
+ typedef ULONG_PTR      CONFLICT_LIST;
+ typedef CONFLICT_LIST *PCONFLICT_LIST;
+ 
++#ifdef WIN32METADATA
++typedef ULONG CM_CDMASK;
++typedef ULONG CM_CDFLAGS;
++#endif
++
+ typedef struct _CONFLICT_DETAILS_A {
+     ULONG       CD_ulSize;                   // size of structure, ie: sizeof(CONFLICT_DETAILS)
+-    ULONG       CD_ulMask;                   // indicates what information is required/valid
++    _Win32_AssociatedEnum_(CM_CDMASK) ULONG       CD_ulMask;                   // indicates what information is required/valid
+     DEVINST     CD_dnDevInst;                // filled with DevInst of conflicting device if CM_CDMASK_DEVINST set
+     RES_DES     CD_rdResDes;                 // filled with a ResDes of conflict if CM_CDMASK_RESDES set
+-    ULONG       CD_ulFlags;                  // various flags regarding conflict
++    _Win32_AssociatedEnum_(CM_CDFLAGS) ULONG       CD_ulFlags;                  // various flags regarding conflict
+     CHAR        CD_szDescription[MAX_PATH];  // description of conflicting device
+ } CONFLICT_DETAILS_A , *PCONFLICT_DETAILS_A;
+ 
+ typedef struct _CONFLICT_DETAILS_W {
+     ULONG       CD_ulSize;                   // size of structure, ie: sizeof(CONFLICT_DETAILS)
+-    ULONG       CD_ulMask;                   // indicates what information is required/valid
++    _Win32_AssociatedEnum_(CM_CDMASK) ULONG       CD_ulMask;                   // indicates what information is required/valid
+     DEVINST     CD_dnDevInst;                // filled with DevInst of conflicting device if CM_CDMASK_DEVINST set
+     RES_DES     CD_rdResDes;                 // filled with a ResDes of conflict if CM_CDMASK_RESDES set
+-    ULONG       CD_ulFlags;                  // various flags regarding conflict
++    _Win32_AssociatedEnum_(CM_CDFLAGS) ULONG       CD_ulFlags;                  // various flags regarding conflict
+     WCHAR       CD_szDescription[MAX_PATH];  // description of conflicting device
+ } CONFLICT_DETAILS_W , *PCONFLICT_DETAILS_W;
+ 
+@@ -190,10 +195,22 @@ typedef PCONFLICT_DETAILS_A PCONFLICT_DETAILS;
+ #define CM_CDMASK_DESCRIPTION  (0x00000008)   // mask to retrieve CD_szDescription attribute for conflict
+ #define CM_CDMASK_VALID        (0x0000000F)   // valid bits
+ 
++_Win32_FlagsEnum_(CM_CDMASK, ULONG,
++    CM_CDMASK_DEVINST,
++    CM_CDMASK_RESDES,
++    CM_CDMASK_FLAGS,
++    CM_CDMASK_DESCRIPTION,
++    CM_CDMASK_VALID);
++
+ #define CM_CDFLAGS_DRIVER      (0x00000001)     // CD_ulFlags: CD_szDescription reports back legacy driver name
+ #define CM_CDFLAGS_ROOT_OWNED  (0x00000002)     // CD_ulFlags: Root owned device
+ #define CM_CDFLAGS_RESERVED    (0x00000004)     // CD_ulFlags: Specified range is not available for use
+ 
++_Win32_FlagsEnum_(CM_CDFLAGS, ULONG,
++    CM_CDFLAGS_DRIVER,
++    CM_CDFLAGS_ROOT_OWNED,
++    CM_CDFLAGS_RESERVED);
++
+ typedef  ULONG             REGDISPOSITION;
+ 
+ //
+@@ -243,6 +260,34 @@ typedef  ULONG             REGDISPOSITION;
+ #define fMD_WINDOW_DECODE           (0x40) // Memory range is bridge window decode.
+ #define fMD_MEMORY_BAR              (0x80) // Memory BAR resource.
+ 
++_Win32_FlagsEnum_(MD_FLAGS, DWORD,
++    mMD_MemoryType,
++    fMD_MemoryType,
++    fMD_ROM,
++    fMD_RAM,
++    mMD_32_24,
++    fMD_32_24,
++    fMD_24,
++    fMD_32,
++    mMD_Prefetchable,
++    fMD_Prefetchable,
++    fMD_Pref,
++    fMD_PrefetchDisallowed,
++    fMD_PrefetchAllowed,
++    mMD_Readable,
++    fMD_Readable,
++    fMD_ReadAllowed,
++    fMD_ReadDisallowed,
++    mMD_CombinedWrite,
++    fMD_CombinedWrite,
++    fMD_CombinedWriteDisallowed,
++    fMD_CombinedWriteAllowed,
++    mMD_Cacheable,
++    fMD_NonCacheable,
++    fMD_Cacheable,
++    fMD_WINDOW_DECODE,
++    fMD_MEMORY_BAR);
++
+ //
+ // MEM_RANGE Structure
+ //
+@@ -251,7 +296,7 @@ typedef struct Mem_Range_s {
+    ULONG     MR_nBytes;    // specifies number of bytes required
+    DWORDLONG MR_Min;       // specifies minimum address of the range
+    DWORDLONG MR_Max;       // specifies maximum address of the range
+-   DWORD     MR_Flags;     // specifies flags describing range (fMD flags)
++   _Win32_AssociatedEnum_(MD_FLAGS) DWORD     MR_Flags;     // specifies flags describing range (fMD flags)
+    DWORD     MR_Reserved;
+ } MEM_RANGE, *PMEM_RANGE;
+ 
+@@ -263,7 +308,7 @@ typedef struct Mem_Des_s {
+    DWORD     MD_Type;         // size (in bytes) of MEM_RANGE (MType_Range)
+    DWORDLONG MD_Alloc_Base;   // base memory address of range allocated
+    DWORDLONG MD_Alloc_End;    // end of allocated range
+-   DWORD     MD_Flags;        // flags describing allocated range (fMD flags)
++   _Win32_AssociatedEnum_(MD_FLAGS) DWORD     MD_Flags;        // flags describing allocated range (fMD flags)
+    DWORD     MD_Reserved;
+ } MEM_DES, *PMEM_DES;
+ 
+@@ -346,6 +391,19 @@ typedef struct Mem_Large_Resource_s {
+ #define fIOD_WINDOW_DECODE    (0x0080)
+ #define fIOD_PORT_BAR         (0x0100)
+ 
++_Win32_FlagsEnum_(IOD_DESFLAGS, DWORD,
++    fIOD_PortType,
++    fIOD_Memory,
++    fIOD_IO,
++    fIOD_DECODE,
++    fIOD_10_BIT_DECODE,
++    fIOD_12_BIT_DECODE,
++    fIOD_16_BIT_DECODE,
++    fIOD_POSITIVE_DECODE,
++    fIOD_PASSIVE_DECODE,
++    fIOD_WINDOW_DECODE,
++    fIOD_PORT_BAR);
++
+ //
+ // these are for compatiblity
+ //
+@@ -362,7 +420,7 @@ typedef struct IO_Range_s {
+    DWORD     IOR_nPorts;     // number of ports
+    DWORDLONG IOR_Min;        // minimum port address
+    DWORDLONG IOR_Max;        // maximum port address
+-   DWORD     IOR_RangeFlags; // flags for this port range
++   _Win32_AssociatedEnum_(IOD_DESFLAGS) DWORD     IOR_RangeFlags; // flags for this port range
+    DWORDLONG IOR_Alias;      // multiplier that generates aliases for port(s)
+ } IO_RANGE, *PIO_RANGE;
+ 
+@@ -374,7 +432,7 @@ typedef struct IO_Des_s {
+    DWORD     IOD_Type;           // size (in bytes) of IO_RANGE (IOType_Range)
+    DWORDLONG IOD_Alloc_Base;     // base of allocated port range
+    DWORDLONG IOD_Alloc_End;      // end of allocated port range
+-   DWORD     IOD_DesFlags;       // flags relating to allocated port range
++   _Win32_AssociatedEnum_(IOD_DESFLAGS) DWORD     IOD_DesFlags;       // flags relating to allocated port range
+ } IO_DES, *PIO_DES;
+ 
+ //
+@@ -417,13 +475,28 @@ typedef struct IO_Resource_s {
+ #define fDD_TypeB        (0x10)    //   Type-B DMA
+ #define fDD_TypeF        (0x18)    //   Type-F DMA
+ 
++_Win32_FlagsEnum_(DD_FLAGS, ULONG,
++    mDD_Width,
++    fDD_BYTE,
++    fDD_WORD,
++    fDD_DWORD,
++    fDD_BYTE_AND_WORD,
++    mDD_BusMaster,
++    fDD_NoBusMaster,
++    fDD_BusMaster,
++    mDD_Type,
++    fDD_TypeStandard,
++    fDD_TypeA,
++    fDD_TypeB,
++    fDD_TypeF);
++
+ //
+ // DMA_RANGE structure
+ //
+ typedef struct DMA_Range_s {
+    ULONG DR_Min;     // minimum DMA port in the range
+    ULONG DR_Max;     // maximum DMA port in the range
+-   ULONG DR_Flags;   // flags describing the range (fDD flags)
++   _Win32_AssociatedEnum_(DD_FLAGS) ULONG DR_Flags;   // flags describing the range (fDD flags)
+ } DMA_RANGE, *PDMA_RANGE;
+ 
+ //
+@@ -432,7 +505,7 @@ typedef struct DMA_Range_s {
+ typedef struct DMA_Des_s {
+    DWORD  DD_Count;       // number of DMA_RANGE structs in DMA_RESOURCE
+    DWORD  DD_Type;        // size (in bytes) of DMA_RANGE struct (DType_Range)
+-   DWORD  DD_Flags;       // Flags describing DMA channel (fDD flags)
++   _Win32_AssociatedEnum_(DD_FLAGS) DWORD  DD_Flags;       // Flags describing DMA channel (fDD flags)
+    ULONG  DD_Alloc_Chan;  // Specifies the DMA channel that was allocated
+ } DMA_DES, *PDMA_DES;
+ 
+@@ -474,6 +547,16 @@ typedef struct DMA_Resource_s {
+ #define fIRQD_Level        (0x0) //   The IRQ is level-sensitive
+ #define fIRQD_Edge         (0x2) //   The IRQ is edge-sensitive
+ 
++_Win32_FlagsEnum_(IRQD_FLAGS, ULONG,
++    mIRQD_Share,
++    fIRQD_Exclusive,
++    fIRQD_Share,
++    fIRQD_Share_Bit,
++    fIRQD_Level_Bit,
++    mIRQD_Edge_Level,
++    fIRQD_Level,
++    fIRQD_Edge);
++
+ //
+ // IRQ_RANGE
+ //
+@@ -481,10 +564,10 @@ typedef struct IRQ_Range_s {
+    ULONG IRQR_Min;      // minimum IRQ in the range
+    ULONG IRQR_Max;      // maximum IRQ in the range
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT IRQR_Flags;   // flags describing the range (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT IRQR_Flags;   // flags describing the range (fIRQD flags)
+    USHORT IRQR_Rsvdz;   // Reserved, must be zero.
+ #else
+-   ULONG IRQR_Flags;    // flags describing the range (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) ULONG IRQR_Flags;    // flags describing the range (fIRQD flags)
+ #endif
+ } IRQ_RANGE, *PIRQ_RANGE;
+ 
+@@ -495,10 +578,10 @@ typedef struct IRQ_Des_32_s {
+    DWORD   IRQD_Count;       // number of IRQ_RANGE structs in IRQ_RESOURCE
+    DWORD   IRQD_Type;        // size (in bytes) of IRQ_RANGE (IRQType_Range)
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+    USHORT  IRQD_Group;       // Group number of interrupt target.
+ #else
+-   DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+ #endif
+    ULONG   IRQD_Alloc_Num;   // specifies the IRQ that was allocated
+    ULONG32 IRQD_Affinity;
+@@ -508,10 +591,10 @@ typedef struct IRQ_Des_64_s {
+    DWORD   IRQD_Count;       // number of IRQ_RANGE structs in IRQ_RESOURCE
+    DWORD   IRQD_Type;        // size (in bytes) of IRQ_RANGE (IRQType_Range)
+ #if defined(NT_PROCESSOR_GROUPS)
+-   USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) USHORT  IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+    USHORT  IRQD_Group;       // Group number of interrupt target.
+ #else
+-   DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
++   _Win32_AssociatedEnum_(IRQD_FLAGS) DWORD   IRQD_Flags;       // flags describing the IRQ (fIRQD flags)
+ #endif
+    ULONG   IRQD_Alloc_Num;   // specifies the IRQ that was allocated
+    ULONG64 IRQD_Affinity;
+@@ -671,6 +754,44 @@ typedef struct CS_Resource_s {
+ #define fPCD_MEM2_WS_THREE  (0x30000000)  // MEM window 2, 3 wait states
+ #define fPCD_MEM2_16        (0x40000000)  // MEM window 2 is 16-bit
+ 
++_Win32_FlagsEnum_(PCD_FLAGS, DWORD,
++    mPCD_IO_8_16,
++    fPCD_IO_8,
++    fPCD_IO_16,
++    mPCD_MEM_8_16,
++    fPCD_MEM_8,
++    fPCD_MEM_16,
++    mPCD_MEM_A_C,
++    fPCD_MEM1_A,
++    fPCD_MEM2_A,
++    fPCD_IO_ZW_8,
++    fPCD_IO_SRC_16,
++    fPCD_IO_WS_16,
++    mPCD_MEM_WS,
++    fPCD_MEM_WS_ONE,
++    fPCD_MEM_WS_TWO,
++    fPCD_MEM_WS_THREE,
++    fPCD_MEM_A,
++    fPCD_ATTRIBUTES_PER_WINDOW,
++    fPCD_IO1_16,
++    fPCD_IO1_ZW_8,
++    fPCD_IO1_SRC_16,
++    fPCD_IO1_WS_16,
++    fPCD_IO2_16,
++    fPCD_IO2_ZW_8,
++    fPCD_IO2_SRC_16,
++    fPCD_IO2_WS_16,
++    mPCD_MEM1_WS,
++    fPCD_MEM1_WS_ONE,
++    fPCD_MEM1_WS_TWO,
++    fPCD_MEM1_WS_THREE,
++    fPCD_MEM1_16,
++    mPCD_MEM2_WS,
++    fPCD_MEM2_WS_ONE,
++    fPCD_MEM2_WS_TWO,
++    fPCD_MEM2_WS_THREE,
++    fPCD_MEM2_16);
++
+ #define PCD_MAX_MEMORY   2
+ #define PCD_MAX_IO       2
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+@@ -678,7 +799,7 @@ typedef struct CS_Resource_s {
+ typedef struct PcCard_Des_s {
+     DWORD    PCD_Count;
+     DWORD    PCD_Type;
+-    DWORD    PCD_Flags;
++    _Win32_AssociatedEnum_(PCD_FLAGS) DWORD    PCD_Flags;
+     BYTE     PCD_ConfigIndex;
+     BYTE     PCD_Reserved[3];
+     DWORD    PCD_MemoryCardBase1;
+@@ -703,10 +824,12 @@ typedef struct PcCard_Resource_s {
+ #define mPMF_AUDIO_ENABLE   (0x8)   // Bitmask, whether audio is enabled or not
+ #define fPMF_AUDIO_ENABLE   (0x8)   // Audio is enabled
+ 
++_Win32_FlagsEnum_(PMF_FLAGS, DWORD, fPMF_AUDIO_ENABLE);
++
+ typedef struct MfCard_Des_s {
+     DWORD    PMF_Count;
+     DWORD    PMF_Type;
+-    DWORD    PMF_Flags;
++    _Win32_AssociatedEnum_(PMF_FLAGS) DWORD    PMF_Flags;
+     BYTE     PMF_ConfigOptions;
+     BYTE     PMF_IoResourceIndex;
+     BYTE     PMF_Reserved[2];
+@@ -854,8 +977,26 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define ResType_DevicePrivate (0x00008001)   // device private data
+ #define ResType_PcCardConfig  (0x00008002)   // PC Card configuration data
+ #define ResType_MfCardConfig  (0x00008003)   // MF Card configuration data
++_Win32_Enum_(CM_RESTYPE, RESOURCEID,
++    ResType_All,
++    ResType_None,
++    ResType_Mem,
++    ResType_IO,
++    ResType_DMA,
++    ResType_IRQ,
++    ResType_DoNotUse,
++    ResType_BusNumber,
++    ResType_MemLarge,
++    ResType_MAX,
++    ResType_Ignored_Bit,
++    ResType_ClassSpecific,
++    ResType_Reserved,
++    ResType_DevicePrivate,
++    ResType_PcCardConfig,
++    ResType_MfCardConfig);
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+ #define ResType_Connection    (0x00008004)   // Connection (Resource Hub) resource
++_Win32_Enum_(CM_RESTYPE, RESOURCEID, ResType_Connection);
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+ 
+ //
+@@ -937,6 +1078,10 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_ENUMERATE_CLASSES_INSTALLER (0x00000000)
+ #define CM_ENUMERATE_CLASSES_INTERFACE (0x00000001)
+ #define CM_ENUMERATE_CLASSES_BITS      (0x00000001)
++_Win32_FlagsEnum_(CM_ENUMERATE_FLAGS, ULONG,
++    CM_ENUMERATE_CLASSES_INSTALLER,
++    CM_ENUMERATE_CLASSES_INTERFACE,
++    CM_ENUMERATE_CLASSES_BITS);
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+ 
+ //
+@@ -986,6 +1131,11 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES (0x00000001)  // all registered device interfaces, live or not
+ #define CM_GET_DEVICE_INTERFACE_LIST_BITS        (0x00000001)
+ 
++_Win32_Enum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS, ULONG,
++    CM_GET_DEVICE_INTERFACE_LIST_PRESENT,
++    CM_GET_DEVICE_INTERFACE_LIST_ALL_DEVICES,
++    CM_GET_DEVICE_INTERFACE_LIST_BITS);
++
+ //
+ // Registry properties (specified in call to CM_Get_DevInst_Registry_Property or CM_Get_Class_Registry_Property,
+ // some are allowed in calls to CM_Set_DevInst_Registry_Property and CM_Set_Class_Registry_Property)
+@@ -1076,6 +1226,19 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_DEVCAP_NONDYNAMIC        (0x00000200)
+ #define CM_DEVCAP_SECUREDEVICE      (0x00000400)
+ 
++_Win32_FlagsEnum_(CM_DEVCAP, ULONG,
++    CM_DEVCAP_LOCKSUPPORTED,
++    CM_DEVCAP_EJECTSUPPORTED,
++    CM_DEVCAP_REMOVABLE,
++    CM_DEVCAP_DOCKDEVICE,
++    CM_DEVCAP_UNIQUEID,
++    CM_DEVCAP_SILENTINSTALL,
++    CM_DEVCAP_RAWDEVICEOK,
++    CM_DEVCAP_SURPRISEREMOVALOK,
++    CM_DEVCAP_HARDWAREDISABLED,
++    CM_DEVCAP_NONDYNAMIC,
++    CM_DEVCAP_SECUREDEVICE);
++
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ //
+ // Removal policies (retrievable via CM_Get_DevInst_Registry_Property with
+@@ -1086,6 +1249,11 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL        2
+ #define CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL       3
+ 
++_Win32_Enum_(CM_REMOVAL_POLICY, ULONG,
++    CM_REMOVAL_POLICY_EXPECT_NO_REMOVAL,
++    CM_REMOVAL_POLICY_EXPECT_ORDERLY_REMOVAL,
++    CM_REMOVAL_POLICY_EXPECT_SURPRISE_REMOVAL);
++
+ //
+ // Device install states (retrievable via CM_Get_DevInst_Registry_Property with
+ // the CM_DRP_INSTALL_STATE properties)
+@@ -1094,6 +1262,11 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_INSTALL_STATE_NEEDS_REINSTALL                1
+ #define CM_INSTALL_STATE_FAILED_INSTALL                 2
+ #define CM_INSTALL_STATE_FINISH_INSTALL                 3
++_Win32_Enum_(CM_INSTALL_STATE, ULONG,
++    CM_INSTALL_STATE_INSTALLED,
++    CM_INSTALL_STATE_NEEDS_REINSTALL,
++    CM_INSTALL_STATE_FAILED_INSTALL,
++    CM_INSTALL_STATE_FINISH_INSTALL);
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+ 
+ //
+@@ -1105,6 +1278,13 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_LOCATE_DEVNODE_NOVALIDATION 0x00000004
+ #define CM_LOCATE_DEVNODE_BITS         0x00000007
+ 
++_Win32_Enum_(CM_LOCATE_DEVNODE_FLAGS, ULONG,
++    CM_LOCATE_DEVNODE_NORMAL,
++    CM_LOCATE_DEVNODE_PHANTOM,
++    CM_LOCATE_DEVNODE_CANCELREMOVE,
++    CM_LOCATE_DEVNODE_NOVALIDATION,
++    CM_LOCATE_DEVNODE_BITS);
++
+ #define CM_LOCATE_DEVINST_NORMAL       CM_LOCATE_DEVNODE_NORMAL
+ #define CM_LOCATE_DEVINST_PHANTOM      CM_LOCATE_DEVNODE_PHANTOM
+ #define CM_LOCATE_DEVINST_CANCELREMOVE CM_LOCATE_DEVNODE_CANCELREMOVE
+@@ -1145,13 +1325,22 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
+ #define CM_REENUMERATE_NORMAL                   0x00000000
+ #define CM_REENUMERATE_SYNCHRONOUS              0x00000001
+ 
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG,
++    CM_REENUMERATE_NORMAL,
++    CM_REENUMERATE_SYNCHRONOUS);
++
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ #define CM_REENUMERATE_RETRY_INSTALLATION       0x00000002
+ #define CM_REENUMERATE_ASYNCHRONOUS             0x00000004
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG,
++    CM_REENUMERATE_RETRY_INSTALLATION,
++    CM_REENUMERATE_ASYNCHRONOUS);
+ #endif // (WINVER >= _WIN32_WINNT_WINXP)
+ 
+ #define CM_REENUMERATE_BITS                     0x00000007
+ 
++_Win32_FlagsEnum_(CM_REENUMERATE_FLAGS, ULONG, CM_REENUMERATE_BITS);
++
+ //
+ // Flags for CM_Register_Device_Driver
+ //
+@@ -1388,6 +1577,7 @@ typedef __callback DWORD (CALLBACK *PCM_NOTIFY_CALLBACK)(
  // Function prototypes
  //--------------------------------------------------------------
  
@@ -9,7 +449,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1398,6 +1399,7 @@
+@@ -1398,6 +1588,7 @@ CM_Add_Empty_Log_Conf(
      _In_  ULONG         ulFlags
      );
  
@@ -17,7 +457,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1418,6 +1420,7 @@
+@@ -1418,6 +1609,7 @@ CM_Add_IDA(
      _In_  ULONG         ulFlags
      );
  
@@ -25,7 +465,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1437,6 +1440,7 @@
+@@ -1437,6 +1629,7 @@ CM_Add_ID_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -33,7 +473,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1465,6 +1469,7 @@
+@@ -1465,6 +1658,7 @@ CM_Add_Range(
      _In_  ULONG         ulFlags
      );
  
@@ -41,7 +481,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1477,6 +1482,7 @@
+@@ -1477,6 +1671,7 @@ CM_Add_Res_Des(
      _In_  ULONG         ulFlags
      );
  
@@ -49,7 +489,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1498,6 +1504,7 @@
+@@ -1498,6 +1693,7 @@ CM_Connect_MachineA(
      _Out_ PHMACHINE     phMachine
      );
  
@@ -57,7 +497,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1583,6 +1590,7 @@
+@@ -1583,6 +1779,7 @@ CM_Create_Range_List(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -65,7 +505,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1612,6 +1620,7 @@
+@@ -1612,6 +1809,7 @@ CM_Delete_Class_Key_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -73,7 +513,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1684,6 +1693,7 @@
+@@ -1684,6 +1882,7 @@ CM_Detect_Resource_Conflict_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -81,7 +521,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1711,6 +1721,7 @@
+@@ -1711,6 +1910,7 @@ CM_Disable_DevNode_Ex(
  
  #define CM_Disable_DevInst_Ex    CM_Disable_DevNode_Ex
  
@@ -89,7 +529,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1733,6 +1744,7 @@
+@@ -1733,6 +1933,7 @@ CM_Dup_Range_List(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -97,7 +537,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1760,6 +1772,7 @@
+@@ -1760,22 +1961,24 @@ CM_Enable_DevNode_Ex(
  
  #define CM_Enable_DevInst_Ex     CM_Enable_DevNode_Ex
  
@@ -105,7 +545,26 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1769,6 +1782,7 @@
+ CM_Enumerate_Classes(
+     _In_  ULONG         ulClassIndex,
+     _Out_ LPGUID        ClassGuid,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_ENUMERATE_FLAGS) ULONG         ulFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ CMAPI
+ CONFIGRET
+ WINAPI
+ CM_Enumerate_Classes_Ex(
+     _In_  ULONG         ulClassIndex,
+     _Out_ LPGUID        ClassGuid,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_ENUMERATE_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -1789,6 +1992,7 @@ CM_Enumerate_EnumeratorsA(
      _In_  ULONG         ulFlags
      );
  
@@ -113,15 +572,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1789,6 +1803,7 @@
-     _In_  ULONG         ulFlags
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- CMAPI
- CONFIGRET
- WINAPI
-@@ -1810,6 +1825,7 @@
+@@ -1810,6 +2014,7 @@ CM_Enumerate_Enumerators_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -129,7 +580,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1853,6 +1869,7 @@
+@@ -1853,6 +2058,7 @@ CM_First_Range(
      _In_  ULONG         ulFlags
      );
  
@@ -137,7 +588,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1861,6 +1878,7 @@
+@@ -1861,6 +2067,7 @@ CM_Free_Log_Conf(
      _In_  ULONG         ulFlags
      );
  
@@ -145,7 +596,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1870,6 +1888,7 @@
+@@ -1870,6 +2077,7 @@ CM_Free_Log_Conf_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -153,7 +604,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1885,6 +1904,7 @@
+@@ -1885,6 +2093,7 @@ CM_Free_Range_List(
      _In_  ULONG         ulFlags
      );
  
@@ -161,7 +612,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1894,6 +1914,7 @@
+@@ -1894,6 +2103,7 @@ CM_Free_Res_Des(
      _In_  ULONG         ulFlags
      );
  
@@ -169,7 +620,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1904,6 +1925,7 @@
+@@ -1904,6 +2114,7 @@ CM_Free_Res_Des_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -177,7 +628,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1917,6 +1939,7 @@
+@@ -1917,6 +2128,7 @@ CM_Free_Res_Des_Handle(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -185,7 +636,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -1932,6 +1955,7 @@
+@@ -1932,6 +2144,7 @@ CM_Get_Child(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -193,7 +644,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2048,6 +2072,7 @@
+@@ -2048,6 +2261,7 @@ CM_Get_Class_Key_Name_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -201,7 +652,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2063,6 +2088,7 @@
+@@ -2063,6 +2277,7 @@ CM_Get_Depth(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -209,7 +660,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2089,6 +2115,7 @@
+@@ -2089,6 +2304,7 @@ CM_Get_Device_IDA(
      _In_  ULONG         ulFlags
      );
  
@@ -217,7 +668,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2122,6 +2149,7 @@
+@@ -2122,6 +2338,7 @@ CM_Get_Device_ID_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -225,7 +676,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2145,6 +2173,7 @@
+@@ -2145,6 +2362,7 @@ CM_Get_Device_ID_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -233,7 +684,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2155,6 +2184,7 @@
+@@ -2155,6 +2373,7 @@ CM_Get_Device_ID_ListA(
      _In_  ULONG         ulFlags
      );
  
@@ -241,7 +692,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2188,6 +2218,7 @@
+@@ -2188,6 +2407,7 @@ CM_Get_Device_ID_List_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -249,7 +700,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2211,6 +2242,7 @@
+@@ -2211,6 +2431,7 @@ CM_Get_Device_ID_List_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -257,7 +708,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2220,6 +2252,7 @@
+@@ -2220,6 +2441,7 @@ CM_Get_Device_ID_List_SizeA(
      _In_  ULONG         ulFlags
      );
  
@@ -265,7 +716,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2251,6 +2284,7 @@
+@@ -2251,6 +2473,7 @@ CM_Get_Device_ID_List_Size_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -273,7 +724,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2273,6 +2307,7 @@
+@@ -2273,6 +2496,7 @@ CM_Get_Device_ID_List_Size_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -281,7 +732,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2288,6 +2323,7 @@
+@@ -2288,6 +2512,7 @@ CM_Get_Device_ID_Size(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -289,7 +740,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2306,6 +2342,7 @@
+@@ -2306,6 +2531,7 @@ CM_Get_Device_ID_Size_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -297,7 +748,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2328,6 +2365,7 @@
+@@ -2328,6 +2554,7 @@ CM_Get_DevNode_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -305,7 +756,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2351,6 +2389,7 @@
+@@ -2351,6 +2578,7 @@ CM_Get_DevNode_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -313,7 +764,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2367,6 +2406,7 @@
+@@ -2367,6 +2595,7 @@ CM_Get_DevNode_Property_Keys(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -321,7 +772,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2398,6 +2438,7 @@
+@@ -2398,6 +2627,7 @@ CM_Get_DevNode_Registry_PropertyA(
      _In_  ULONG         ulFlags
      );
  
@@ -329,7 +780,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2536,6 +2577,7 @@
+@@ -2536,6 +2766,7 @@ CM_Get_DevNode_Custom_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -337,7 +788,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2554,6 +2596,7 @@
+@@ -2554,6 +2785,7 @@ CM_Get_DevNode_Status(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -345,7 +796,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2567,6 +2610,7 @@
+@@ -2567,6 +2799,7 @@ CM_Get_DevNode_Status_Ex(
  
  #define CM_Get_DevInst_Status_Ex CM_Get_DevNode_Status_Ex
  
@@ -353,7 +804,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2576,6 +2620,7 @@
+@@ -2576,6 +2809,7 @@ CM_Get_First_Log_Conf(
      _In_  ULONG         ulFlags
      );
  
@@ -361,7 +812,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2657,6 +2702,7 @@
+@@ -2657,6 +2891,7 @@ CM_Get_Hardware_Profile_Info_ExW(
  #define CM_Get_Hardware_Profile_Info_Ex   CM_Get_Hardware_Profile_Info_ExA
  #endif // UNICODE
  
@@ -369,7 +820,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2667,6 +2713,7 @@
+@@ -2667,6 +2902,7 @@ CM_Get_HW_Prof_FlagsA(
      _In_  ULONG         ulFlags
      );
  
@@ -377,7 +828,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2677,6 +2724,7 @@
+@@ -2677,6 +2913,7 @@ CM_Get_HW_Prof_FlagsW(
      _In_  ULONG         ulFlags
      );
  
@@ -385,7 +836,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2688,6 +2736,7 @@
+@@ -2688,6 +2925,7 @@ CM_Get_HW_Prof_Flags_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -393,7 +844,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2718,6 +2767,7 @@
+@@ -2718,6 +2956,7 @@ CM_Get_Device_Interface_AliasA(
      _In_  ULONG         ulFlags
      );
  
@@ -401,7 +852,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2767,6 +2817,7 @@
+@@ -2767,6 +3006,7 @@ CM_Get_Device_Interface_Alias_ExW(
  #pragma region Desktop Family, OneCore Family, or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -409,15 +860,46 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2778,6 +2829,7 @@
-     _In_  ULONG         ulFlags
+@@ -2775,9 +3015,10 @@ CM_Get_Device_Interface_ListA(
+     _In_opt_ DEVINSTID_A pDeviceID,
+     _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
      );
  
 +_Win32_SupportedOS_Windows2000_
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2836,6 +2888,7 @@
+@@ -2786,7 +3027,7 @@ CM_Get_Device_Interface_ListW(
+     _In_opt_ DEVINSTID_W pDeviceID,
+     _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -2809,7 +3050,7 @@ CM_Get_Device_Interface_List_ExA(
+     _In_opt_ DEVINSTID_A pDeviceID,
+     _Out_writes_(BufferLen) PZZSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2821,7 +3062,7 @@ CM_Get_Device_Interface_List_ExW(
+     _In_opt_ DEVINSTID_W pDeviceID,
+     _Out_writes_(BufferLen) PZZWSTR Buffer,
+     _In_  ULONG         BufferLen,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ #ifdef UNICODE
+@@ -2836,6 +3077,7 @@ CM_Get_Device_Interface_List_ExW(
  #pragma region Desktop Family, OneCore Family, or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -425,15 +907,46 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2846,6 +2899,7 @@
-     _In_  ULONG         ulFlags
+@@ -2843,9 +3085,10 @@ CM_Get_Device_Interface_List_SizeA(
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
      );
  
 +_Win32_SupportedOS_Windows2000_
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2904,6 +2958,7 @@
+@@ -2853,7 +3096,7 @@ CM_Get_Device_Interface_List_SizeW(
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -2875,7 +3118,7 @@ CM_Get_Device_Interface_List_Size_ExA(
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2886,7 +3129,7 @@ CM_Get_Device_Interface_List_Size_ExW(
+     _Out_ PULONG        pulLen,
+     _In_  LPGUID        InterfaceClassGuid,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags,
++    _In_  _Win32_AssociatedEnum_(CM_GET_DEVICE_INTERFACE_LIST_FLAGS) ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+ 
+@@ -2904,6 +3147,7 @@ CM_Get_Device_Interface_List_Size_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -441,7 +954,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2926,6 +2981,7 @@
+@@ -2926,6 +3170,7 @@ CM_Get_Device_Interface_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -449,7 +962,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2949,6 +3005,7 @@
+@@ -2949,6 +3194,7 @@ CM_Get_Device_Interface_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -457,7 +970,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2969,6 +3026,7 @@
+@@ -2969,6 +3215,7 @@ CM_Get_Device_Interface_Property_KeysW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -465,7 +978,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2992,6 +3050,7 @@
+@@ -2992,6 +3239,7 @@ CM_Get_Device_Interface_Property_Keys_ExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -473,7 +986,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3001,6 +3060,7 @@
+@@ -3001,6 +3249,7 @@ CM_Get_Log_Conf_Priority(
      _In_  ULONG         ulFlags
      );
  
@@ -481,7 +994,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3011,6 +3071,7 @@
+@@ -3011,6 +3260,7 @@ CM_Get_Log_Conf_Priority_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -489,7 +1002,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3020,6 +3081,7 @@
+@@ -3020,6 +3270,7 @@ CM_Get_Next_Log_Conf(
      _In_  ULONG         ulFlags
      );
  
@@ -497,7 +1010,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3036,6 +3098,7 @@
+@@ -3036,6 +3287,7 @@ CM_Get_Next_Log_Conf_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -505,7 +1018,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3051,6 +3114,7 @@
+@@ -3051,6 +3303,7 @@ CM_Get_Parent(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -513,7 +1026,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3061,6 +3125,7 @@
+@@ -3061,6 +3314,7 @@ CM_Get_Parent_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -521,7 +1034,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3071,6 +3136,7 @@
+@@ -3071,6 +3325,7 @@ CM_Get_Res_Des_Data(
      _In_  ULONG         ulFlags
      );
  
@@ -529,7 +1042,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3082,6 +3148,7 @@
+@@ -3082,6 +3337,7 @@ CM_Get_Res_Des_Data_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -537,7 +1050,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3091,6 +3158,7 @@
+@@ -3091,6 +3347,7 @@ CM_Get_Res_Des_Data_Size(
      _In_  ULONG         ulFlags
      );
  
@@ -545,7 +1058,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3107,6 +3175,7 @@
+@@ -3107,6 +3364,7 @@ CM_Get_Res_Des_Data_Size_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -553,7 +1066,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3122,6 +3191,7 @@
+@@ -3122,6 +3380,7 @@ CM_Get_Sibling(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -561,7 +1074,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3132,6 +3202,8 @@
+@@ -3132,6 +3391,8 @@ CM_Get_Sibling_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -570,7 +1083,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  WORD
  WINAPI
-@@ -3139,6 +3211,8 @@
+@@ -3139,6 +3400,8 @@ CM_Get_Version(
      VOID
      );
  
@@ -579,7 +1092,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  WORD
  WINAPI
-@@ -3147,6 +3221,7 @@
+@@ -3147,6 +3410,7 @@ CM_Get_Version_Ex(
      );
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
@@ -587,7 +1100,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  BOOL
  WINAPI
-@@ -3154,6 +3229,7 @@
+@@ -3154,6 +3418,7 @@ CM_Is_Version_Available(
      _In_  WORD          wVersion
      );
  
@@ -595,7 +1108,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  BOOL
  WINAPI
-@@ -3189,6 +3265,7 @@
+@@ -3189,22 +3454,24 @@ CM_Invert_Range_List(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -603,15 +1116,26 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3198,6 +3275,7 @@
-     _In_  ULONG         ulFlags
+ CM_Locate_DevNodeA(
+     _Out_ PDEVINST      pdnDevInst,
+     _In_opt_ DEVINSTID_A pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_LOCATE_DEVNODE_FLAGS) ULONG         ulFlags
      );
  
 +_Win32_SupportedOS_Windows2000_
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3232,6 +3310,7 @@
+ CM_Locate_DevNodeW(
+     _Out_ PDEVINST      pdnDevInst,
+     _In_opt_ DEVINSTID_W pDeviceID,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_LOCATE_DEVNODE_FLAGS) ULONG         ulFlags
+     );
+ 
+ #define CM_Locate_DevInstA       CM_Locate_DevNodeA
+@@ -3232,6 +3499,7 @@ CM_Locate_DevNode_ExA(
      _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
@@ -619,7 +1143,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3262,6 +3341,7 @@
+@@ -3262,6 +3530,7 @@ CM_Merge_Range_List(
      _In_  ULONG         ulFlags
      );
  
@@ -627,7 +1151,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3274,6 +3354,7 @@
+@@ -3274,6 +3543,7 @@ CM_Modify_Res_Des(
      _In_  ULONG         ulFlags
      );
  
@@ -635,7 +1159,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3319,6 +3400,7 @@
+@@ -3319,25 +3589,27 @@ CM_Next_Range(
      _In_  ULONG         ulFlags
      );
  
@@ -643,7 +1167,13 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3330,6 +3412,7 @@
+ CM_Get_Next_Res_Des(
+     _Out_ PRES_DES      prdResDes,
+     _In_  RES_DES       rdResDes,
+-    _In_  RESOURCEID    ForResource,
+-    _Out_opt_ PRESOURCEID pResourceID,
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ForResource,
++    _Out_opt_ _Win32_AssociatedEnum_(CM_RESTYPE) PRESOURCEID pResourceID,
      _In_  ULONG         ulFlags
      );
  
@@ -651,7 +1181,17 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3360,6 +3443,7 @@
+ CM_Get_Next_Res_Des_Ex(
+     _Out_ PRES_DES      prdResDes,
+     _In_  RES_DES       rdResDes,
+-    _In_  RESOURCEID    ForResource,
+-    _Out_opt_ PRESOURCEID pResourceID,
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ForResource,
++    _Out_opt_ _Win32_AssociatedEnum_(CM_RESTYPE) PRESOURCEID pResourceID,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
+     );
+@@ -3360,6 +3632,7 @@ CM_Open_Class_KeyA(
      _In_  ULONG         ulFlags
      );
  
@@ -659,7 +1199,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3422,6 +3506,7 @@
+@@ -3422,6 +3695,7 @@ CM_Open_Class_Key_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -667,7 +1207,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3465,6 +3550,7 @@
+@@ -3465,6 +3739,7 @@ CM_Open_DevNode_Key_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -675,7 +1215,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3476,6 +3562,7 @@
+@@ -3476,6 +3751,7 @@ CM_Open_Device_Interface_KeyA(
      _In_  ULONG         ulFlags
      );
  
@@ -683,7 +1223,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3499,6 +3586,7 @@
+@@ -3499,6 +3775,7 @@ CM_Open_Device_Interface_KeyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -691,7 +1231,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3511,6 +3599,7 @@
+@@ -3511,6 +3788,7 @@ CM_Open_Device_Interface_Key_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -699,7 +1239,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3543,6 +3632,7 @@
+@@ -3543,6 +3821,7 @@ CM_Delete_Device_Interface_KeyA(
      _In_  ULONG         ulFlags
      );
  
@@ -707,7 +1247,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3563,6 +3653,7 @@
+@@ -3563,6 +3842,7 @@ CM_Delete_Device_Interface_KeyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -715,7 +1255,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3572,6 +3663,7 @@
+@@ -3572,6 +3852,7 @@ CM_Delete_Device_Interface_Key_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -723,7 +1263,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3673,6 +3765,7 @@
+@@ -3673,6 +3954,7 @@ CM_Query_And_Remove_SubTreeA(
      _In_  ULONG         ulFlags
      );
  
@@ -731,7 +1271,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3708,6 +3801,7 @@
+@@ -3708,6 +3990,7 @@ CM_Query_And_Remove_SubTree_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -739,7 +1279,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3749,6 +3843,7 @@
+@@ -3749,6 +4032,7 @@ CM_Request_Device_Eject_ExA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -747,7 +1287,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3760,6 +3855,7 @@
+@@ -3760,6 +4044,7 @@ CM_Request_Device_EjectW(
      _In_  ULONG         ulFlags
      );
  
@@ -755,7 +1295,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3780,6 +3876,7 @@
+@@ -3780,14 +4065,16 @@ CM_Request_Device_Eject_ExW(
  #define CM_Request_Device_Eject_Ex CM_Request_Device_Eject_ExA
  #endif // UNICODE
  
@@ -763,15 +1303,17 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3788,6 +3885,7 @@
-     _In_  ULONG         ulFlags
+ CM_Reenumerate_DevNode(
+     _In_  DEVINST       dnDevInst,
+-    _In_  ULONG         ulFlags
++    _In_  _Win32_AssociatedEnum_(CM_REENUMERATE_FLAGS) ULONG         ulFlags
      );
  
 +_Win32_SupportedOS_Windows2000_
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3857,6 +3955,7 @@
+@@ -3857,6 +4144,7 @@ CM_Register_Device_Interface_ExW(
  #define CM_Register_Device_Interface_Ex CM_Register_Device_Interface_ExA
  #endif // UNICODE
  
@@ -779,7 +1321,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3867,6 +3966,7 @@
+@@ -3867,6 +4155,7 @@ CM_Set_DevNode_Problem_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -787,7 +1329,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3965,6 +4065,7 @@
+@@ -3965,6 +4254,7 @@ CM_Remove_SubTree_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -795,7 +1337,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -3987,6 +4088,7 @@
+@@ -3987,6 +4277,7 @@ CM_Set_DevNode_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -803,7 +1345,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4023,6 +4125,7 @@
+@@ -4023,6 +4314,7 @@ CM_Set_DevNode_Registry_PropertyA(
      _In_  ULONG         ulFlags
      );
  
@@ -811,7 +1353,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4092,6 +4195,7 @@
+@@ -4092,6 +4384,7 @@ CM_Set_DevNode_Registry_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -819,7 +1361,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4114,6 +4218,7 @@
+@@ -4114,6 +4407,7 @@ CM_Set_Device_Interface_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -827,7 +1369,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4139,6 +4244,7 @@
+@@ -4139,6 +4433,7 @@ CM_Set_Device_Interface_Property_ExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -835,7 +1377,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4146,6 +4252,7 @@
+@@ -4146,6 +4441,7 @@ CM_Is_Dock_Station_Present(
      _Out_ PBOOL         pbPresent
      );
  
@@ -843,7 +1385,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4154,6 +4261,7 @@
+@@ -4154,6 +4450,7 @@ CM_Is_Dock_Station_Present_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -851,7 +1393,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4161,6 +4269,7 @@
+@@ -4161,6 +4458,7 @@ CM_Request_Eject_PC(
      VOID
      );
  
@@ -859,7 +1401,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4224,6 +4333,7 @@
+@@ -4224,6 +4522,7 @@ CM_Set_HW_Prof_Flags_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -867,7 +1409,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4267,6 +4377,7 @@
+@@ -4267,6 +4566,7 @@ CM_Test_Range_Available(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -875,7 +1417,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4383,6 +4494,7 @@
+@@ -4383,19 +4683,21 @@ CM_Set_HW_Prof_Ex(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -883,7 +1425,14 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4396,6 +4508,7 @@
+ CM_Query_Resource_Conflict_List(
+     _Out_ PCONFLICT_LIST pclConflictList,
+     _In_  DEVINST       dnDevInst,
+-    _In_  RESOURCEID    ResourceID,
++    _In_  _Win32_AssociatedEnum_(CM_RESTYPE) RESOURCEID    ResourceID,
+     _In_reads_bytes_(ResourceLen) PCVOID ResourceData,
+     _In_  ULONG         ResourceLen,
+     _In_  ULONG         ulFlags,
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -891,7 +1440,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4403,6 +4516,7 @@
+@@ -4403,6 +4705,7 @@ CM_Free_Resource_Conflict_Handle(
      _In_  CONFLICT_LIST clConflictList
      );
  
@@ -899,7 +1448,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4420,6 +4534,7 @@
+@@ -4420,6 +4723,7 @@ CM_Get_Resource_Conflict_DetailsA(
      _Inout_ PCONFLICT_DETAILS_A pConflictDetails
      );
  
@@ -907,7 +1456,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4443,6 +4558,7 @@
+@@ -4443,6 +4747,7 @@ CM_Get_Resource_Conflict_DetailsW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -915,7 +1464,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4465,6 +4581,7 @@
+@@ -4465,6 +4770,7 @@ CM_Get_Class_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -923,7 +1472,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4488,6 +4605,7 @@
+@@ -4488,6 +4794,7 @@ CM_Get_Class_Property_ExW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -931,7 +1480,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4504,6 +4622,7 @@
+@@ -4504,6 +4811,7 @@ CM_Get_Class_Property_Keys(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -939,7 +1488,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4521,6 +4640,7 @@
+@@ -4521,6 +4829,7 @@ CM_Get_Class_Property_Keys_Ex(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -947,7 +1496,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4543,6 +4663,7 @@
+@@ -4543,6 +4852,7 @@ CM_Set_Class_PropertyW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -955,7 +1504,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4582,6 +4703,7 @@
+@@ -4582,6 +4892,7 @@ CM_Get_Class_Registry_PropertyA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -963,7 +1512,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4607,6 +4729,7 @@
+@@ -4607,6 +4918,7 @@ CM_Set_Class_Registry_PropertyA(
      _In_opt_ HMACHINE   hMachine
      );
  
@@ -971,7 +1520,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4636,6 +4759,8 @@
+@@ -4636,6 +4948,8 @@ CM_Set_Class_Registry_PropertyW(
  #if (WINVER >= _WIN32_WINNT_WIN2K)
  #define CM_WaitNoPendingInstallEvents CMP_WaitNoPendingInstallEvents
  
@@ -980,7 +1529,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  DWORD
  WINAPI
  CM_WaitNoPendingInstallEvents(
-@@ -4651,6 +4776,7 @@
+@@ -4651,6 +4965,7 @@ CM_WaitNoPendingInstallEvents(
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
  
@@ -988,7 +1537,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4661,6 +4787,7 @@
+@@ -4661,6 +4976,7 @@ CM_Register_Notification(
      _Out_   PHCMNOTIFICATION        pNotifyContext
      );
  
@@ -996,7 +1545,7 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4676,6 +4803,7 @@
+@@ -4676,6 +4992,7 @@ CM_Unregister_Notification(
  // CONFIGRET to Win32 error mapping routine
  //
  
@@ -1004,3 +1553,8 @@ diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
  CMAPI
  DWORD
  WINAPI
+@@ -4765,4 +5082,3 @@ CM_MapCrToWin32Err(
+ #pragma endregion
+ 
+ #endif // _CFGMGR32_H_
+-

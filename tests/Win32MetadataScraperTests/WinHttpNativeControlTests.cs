@@ -1894,6 +1894,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
         [MemberData(nameof(DeviceFamilyOriginalHeaderControls))]
         public void OriginalDeviceFamilyHeadersPreserveNativeAbiSalAndExactMetadata(
             string partition, string architecture, string target, string language, bool enabled)
+            => this.AssertDeviceFamilyHeaderControl(partition, architecture, target, language, enabled);
+
+        [NativeMigrationTheory]
+        [MemberData(nameof(OriginalErrorOwnerControls))]
+        public void OriginalDeviceInstallationProcessorGroupsPreserveNativeAbiSalAndExactMetadata(
+            string architecture, string target, string language, bool enabled)
+            => this.AssertDeviceFamilyHeaderControl("DevInst", architecture, target, language, enabled, processorGroups: true);
+
+        private void AssertDeviceFamilyHeaderControl(
+            string partition, string architecture, string target, string language, bool enabled, bool processorGroups = false)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
@@ -1908,13 +1918,21 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
+            string sourceText = processorGroups ? "#define NT_PROCESSOR_GROUPS 1\n" +
+                File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp")) : null;
             var before = Surface(root, original, partition, architecture, target, headers, "",
-                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language, sourceText: sourceText);
             var after = Surface(root, prepared, partition, architecture, target, headers, "",
                 metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
-                diagnostics: afterDiagnostics, language: language);
+                diagnostics: afterDiagnostics, language: language, sourceText: sourceText);
             Assert.NotEmpty(before);
-            Assert.Equal(before, after);
+            if (processorGroups)
+                Assert.Equal(3, before.Where(value => Regex.IsMatch(value,
+                    @"^field \w+::(?:IRQD_Flags|IRQR_Flags) unsigned short \d+$")).Distinct(StringComparer.Ordinal).Count());
+            var native = after.ToList();
+            if (partition == "DevInst" && enabled)
+                AssertDeviceInstallationGroupContributions(native, annotations);
+            Assert.Equal(before, native);
             Assert.NotEmpty(beforeSal);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
@@ -1934,6 +1952,42 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 $"{annotations.Count} exact availability/last-error facts; the original CM_Wait alias remains CMP_Wait.");
 
             static string NativeName(string name) => name == "CM_WaitNoPendingInstallEvents" ? "CMP_WaitNoPendingInstallEvents" : name;
+        }
+
+        private static void AssertDeviceInstallationGroupContributions(List<string> native, List<string> annotations)
+        {
+            var groupAnnotations = annotations.Select(value => Regex.Match(value,
+                @"^(?<name>[^|]+)\|(?<flags>Flags)?Enum\((?<members>[^)]+)\)$"))
+                .Where(match => match.Success).ToArray();
+            Assert.Equal(33, groupAnnotations.Length);
+            Assert.Equal(26, groupAnnotations.Select(match => match.Value).Distinct(StringComparer.Ordinal).Count());
+            var groups = groupAnnotations.GroupBy(match => match.Groups["name"].Value, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.ToArray(), StringComparer.Ordinal);
+            Assert.Equal(WinHttpMigrationTests.DeviceInstallationGroups.Select(group => group.Name).OrderBy(name => name, StringComparer.Ordinal),
+                groups.Keys.OrderBy(name => name, StringComparer.Ordinal));
+            foreach (var group in WinHttpMigrationTests.DeviceInstallationGroups)
+            {
+                var contributions = groups[group.Name];
+                int occurrences = group.Name is "DIINSTALLDRIVER_FLAGS" or "CM_REENUMERATE_FLAGS" ? 6 :
+                    group.Name == "CM_RESTYPE" ? 3 : 1;
+                Assert.Equal(occurrences, contributions.Length);
+                Assert.All(contributions, match => Assert.Equal(group.Flags, match.Groups["flags"].Success));
+                Assert.Equal(group.Members, contributions.SelectMany(match => match.Groups["members"].Value
+                    .Split(',').Select(member => member.Trim())).Distinct(StringComparer.Ordinal).Count());
+            }
+            string[] carriers = WinHttpMigrationTests.DeviceInstallationGroups.Select(group => group.Name)
+                .Concat(new[] { "DIINSTALLDRIVER_FLAGS", "DIINSTALLDRIVER_FLAGS", "CM_RESTYPE",
+                    "CM_REENUMERATE_FLAGS", "CM_REENUMERATE_FLAGS", "CM_CDMASK", "CM_CDFLAGS" })
+                .Select(name => "typedef " + name + " unsigned long").ToArray();
+            Assert.Equal(28, carriers.Length);
+            foreach (string carrier in carriers)
+                Assert.True(native.Remove(carrier), "Missing exact metadata-only integral typedef: " + carrier);
+            var associations = annotations.Where(value => value.EndsWith("|AssociatedEnum", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(26, associations.Count(value => !value.Contains("::", StringComparison.Ordinal)));
+            Assert.Equal(15, associations.Where(value => value.Contains("::", StringComparison.Ordinal))
+                .Distinct(StringComparer.Ordinal).Count());
+            var known = groupAnnotations.Select(match => match.Value).Concat(associations).ToHashSet(StringComparer.Ordinal);
+            annotations.RemoveAll(known.Contains);
         }
 
         public static IEnumerable<object[]> DeviceFamilyOriginalHeaderControls()
