@@ -1,5 +1,5 @@
 diff --git a/um/wmsdkidl.idl b/um/wmsdkidl.idl
-index f2a5e246..edfe3697 100644
+index f2a5e246..0601d287 100644
 --- a/um/wmsdkidl.idl
 +++ b/um/wmsdkidl.idl
 @@ -5,6 +5,7 @@
@@ -10,6 +10,46 @@ index f2a5e246..edfe3697 100644
  cpp_quote( "//=========================================================================" )
  cpp_quote( "//" )
  cpp_quote( "// Microsoft Windows Media Technologies" )
+@@ -1949,25 +1950,25 @@ cpp_quote( "#define WM_MAX_STREAMS                  0x3f" )
+ //
+ // This function examines a file and determines whether or not it is DRM protected.
+ //
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMIsContentProtected( const WCHAR *pwszFileName, BOOL *pfIsProtected );" )
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateEditor( IWMMetadataEditor **ppEditor );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateIndexer( IWMIndexer **ppIndexer );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateWriter( IUnknown* pUnkCert, IWMWriter **ppWriter );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateReader( IUnknown* pUnkCert, DWORD dwRights, IWMReader **ppReader );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateSyncReader( IUnknown* pUnkCert, DWORD dwRights, IWMSyncReader **ppSyncReader );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateEditor( IWMMetadataEditor **ppEditor );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateIndexer( IWMIndexer **ppIndexer );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateBackupRestorer( IUnknown *pCallback, IWMLicenseBackup **ppBackup );" )
+ 
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateProfileManager( IWMProfileManager **ppProfileManager );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateWriterFileSink( IWMWriterFileSink **ppSink );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateWriterPushSink( IWMWriterPushSink **ppSink );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateDeviceRegistration( IWMDeviceRegistration **ppDevReg );" )
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptor( IWMDRMTranscryptor **ppTranscryptor );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateProfileManager( IWMProfileManager **ppProfileManager );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateWriterFileSink( IWMWriterFileSink **ppSink );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateWriterNetworkSink( IWMWriterNetworkSink **ppSink );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_Windows2000_ WMCreateWriterPushSink( IWMWriterPushSink **ppSink );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_WindowsXP_ WMCreateDeviceRegistration( IWMDeviceRegistration **ppDevReg );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_WindowsXP_ WMCreateDRMTranscryptor( IWMDRMTranscryptor **ppTranscryptor );" )
+ cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateDRMTranscryptionManager( IWMDRMTranscryptionManager **ppTranscryptionManager );" )
+ 
+-cpp_quote( "HRESULT STDMETHODCALLTYPE WMCreateLicenseRevocationAgent( IUnknown *pCallback, IWMLicenseRevocationAgent ** ppLicenseRevocationAgent );" )
++cpp_quote( "HRESULT STDMETHODCALLTYPE _Win32_SupportedOS_WindowsXP_ WMCreateLicenseRevocationAgent( IUnknown *pCallback, IWMLicenseRevocationAgent ** ppLicenseRevocationAgent );" )
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ //
 @@ -2133,6 +2134,7 @@ interface IWMWriter : IUnknown
  };
  

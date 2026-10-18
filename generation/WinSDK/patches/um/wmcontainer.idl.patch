@@ -1,5 +1,5 @@
 diff --git a/um/wmcontainer.idl b/um/wmcontainer.idl
-index d0efb922..e5d51d11 100644
+index d0efb922..d4f28fc9 100644
 --- a/um/wmcontainer.idl
 +++ b/um/wmcontainer.idl
 @@ -5,6 +5,7 @@
@@ -18,6 +18,15 @@ index d0efb922..e5d51d11 100644
  [
      object,
      uuid(B1DCA5CD-D5DA-4451-8E9E-DB5C59914EAD),
+@@ -72,7 +74,7 @@ interface IMFASFContentInfo : IUnknown
+         [out]     IPropertyStore **ppIStore);
+ };
+ 
+-cpp_quote("STDAPI MFCreateASFContentInfo( ")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFContentInfo( ")
+ cpp_quote("        /* out */     IMFASFContentInfo     **ppIContentInfo);")
+ 
+ 
 @@ -83,6 +85,7 @@ interface IMFASFStreamConfig;
  interface IMFASFMutualExclusion;
  interface IMFASFStreamPrioritization;
@@ -58,6 +67,24 @@ index d0efb922..e5d51d11 100644
  [
      object,
      uuid(53590F48-DC3B-4297-813F-787761AD7B3E),
+@@ -445,7 +452,7 @@ interface IMFASFIndexer : IUnknown
+ 
+ };
+ 
+-cpp_quote("STDAPI MFCreateASFIndexer( ")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFIndexer( ")
+ cpp_quote("        /* out */     IMFASFIndexer         **ppIIndexer);")
+ 
+ //
+@@ -455,7 +462,7 @@ cpp_quote("        /* out */     IMFASFIndexer         **ppIIndexer);")
+ // For write-mode indexing, the Indexer will automatically use default
+ // IMFByteStreams, unless overridden by the user with custom byte streams.
+ //
+-cpp_quote("STDAPI MFCreateASFIndexerByteStream( ")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFIndexerByteStream( ")
+ cpp_quote("        /* in */      IMFByteStream         *pIContentByteStream,")
+ cpp_quote("        /* in */      QWORD                  cbIndexStartOffset,")
+ cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
 @@ -472,6 +479,7 @@ cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
@@ -66,6 +93,33 @@ index d0efb922..e5d51d11 100644
  [
      object,
      uuid(12558295-E399-11D5-BC2A-00B0D0F3F4AB),
+@@ -517,7 +525,7 @@ interface IMFASFSplitter : IUnknown
+ 
+ };
+ 
+-cpp_quote("STDAPI MFCreateASFSplitter( ")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFSplitter( ")
+ cpp_quote("        /* out */     IMFASFSplitter        **ppISplitter);")
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+@@ -889,14 +897,14 @@ cpp_quote( "EXTERN_GUID(MF_ASFPROFILE_MAXPACKETSIZE, 0x22587627, 0x47de, 0x4168,
+ //
+ // ASF Profile functions
+ //
+-cpp_quote( "STDAPI MFCreateASFProfile( "                                      )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFProfile( "                                      )
+ cpp_quote( "        /* out */     IMFASFProfile         **ppIProfile);"       )
+ 
+-cpp_quote( "STDAPI MFCreateASFProfileFromPresentationDescriptor( "            )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFProfileFromPresentationDescriptor( "            )
+ cpp_quote( "        /* in  */     IMFPresentationDescriptor  *pIPD,"          )
+ cpp_quote( "        /* out */     IMFASFProfile             **ppIProfile);"   )
+ 
+-cpp_quote( "STDAPI MFCreatePresentationDescriptorFromASFProfile( "            )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreatePresentationDescriptorFromASFProfile( "            )
+ cpp_quote( "        /* in  */     IMFASFProfile              *pIProfile,"     )
+ cpp_quote( "        /* out */     IMFPresentationDescriptor **ppIPD);"        )
+ 
 @@ -1007,6 +1015,7 @@ typedef struct ASF_MUX_STATISTICS
  
  } ASF_MUX_STATISTICS;
@@ -74,6 +128,15 @@ index d0efb922..e5d51d11 100644
  [
      object,
      uuid(57BDD80A-9B38-4838-B737-C58F670D7D4F),
+@@ -1045,7 +1054,7 @@ interface IMFASFMultiplexer : IUnknown
+                 [in]      DWORD                msSyncTolerance );
+ };
+ 
+-cpp_quote( "STDAPI MFCreateASFMultiplexer( "                          )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFMultiplexer( "                          )
+ cpp_quote( "        /* out */     IMFASFMultiplexer     **ppIMultiplexer);"     )
+ 
+ 
 @@ -1107,6 +1116,7 @@ typedef enum ASF_SELECTION_STATUS
  
  } ASF_SELECTION_STATUS;
@@ -82,6 +145,69 @@ index d0efb922..e5d51d11 100644
  [
      object,
      uuid(d01bad4a-4fa0-4a60-9349-c27e62da9d41),
+@@ -1150,7 +1160,7 @@ interface IMFASFStreamSelector : IUnknown
+     HRESULT SetStreamSelectorFlags( [in] DWORD dwStreamSelectorFlags );
+ };
+ 
+-cpp_quote( "STDAPI MFCreateASFStreamSelector( " )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFStreamSelector( " )
+ cpp_quote( "    /* in */ IMFASFProfile *pIASFProfile, " )
+ cpp_quote( "    /* out */ IMFASFStreamSelector **ppSelector );" )
+ 
+@@ -1186,7 +1196,7 @@ cpp_quote( "    /* out */ IMFASFStreamSelector **ppSelector );" )
+ ///     encode settings, etc)
+ /// </remarks>
+ cpp_quote( "STDAPI" )
+-cpp_quote( "MFCreateASFMediaSink(" )
++cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateASFMediaSink(" )
+ cpp_quote( "    IMFByteStream *pIByteStream," )
+ cpp_quote( "    IMFMediaSink** ppIMediaSink" )
+ cpp_quote( "    );" )
+@@ -1211,7 +1221,7 @@ cpp_quote( "    );" )
+ /// <param name="ppIActivate">
+ ///     Returns pointer to an ASF Media Sink Activate
+ /// </param>
+-cpp_quote( "STDAPI MFCreateASFMediaSinkActivate(" )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFCreateASFMediaSinkActivate(" )
+ cpp_quote( "    LPCWSTR pwszFileName," )
+ cpp_quote( "    IMFASFContentInfo *pContentInfo," )
+ cpp_quote( "    IMFActivate** ppIActivate" )
+@@ -1231,7 +1241,7 @@ cpp_quote( "    );" )
+ ///     Returns pointer to a WMV encoder MFT Activate
+ /// </param>
+ cpp_quote( "HRESULT STDMETHODCALLTYPE" )
+-cpp_quote( "MFCreateWMVEncoderActivate(" )
++cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateWMVEncoderActivate(" )
+ cpp_quote( "    IMFMediaType * pMediaType, " )
+ cpp_quote( "    IPropertyStore * pEncodingConfigurationProperties, " )
+ cpp_quote( "    IMFActivate ** ppActivate " )
+@@ -1251,7 +1261,7 @@ cpp_quote( "    );" )
+ ///     Returns pointer to a WMA encoder MFT Activate
+ /// </param>
+ cpp_quote( "HRESULT STDMETHODCALLTYPE" )
+-cpp_quote( "MFCreateWMAEncoderActivate(" )
++cpp_quote( "_Win32_SupportedOS_WindowsVista_ MFCreateWMAEncoderActivate(" )
+ cpp_quote( "    IMFMediaType * pMediaType, " )
+ cpp_quote( "    IPropertyStore * pEncodingConfigurationProperties, " )
+ cpp_quote( "    IMFActivate ** ppActivate " )
+@@ -1272,7 +1282,7 @@ cpp_quote( "    );" )
+ ///     encode settings, etc)
+ /// </remarks>
+ cpp_quote( "STDAPI" )
+-cpp_quote( "MFCreateASFStreamingMediaSink(" )
++cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreateASFStreamingMediaSink(" )
+ cpp_quote( "    IMFByteStream *pIByteStream," )
+ cpp_quote( "    IMFMediaSink** ppIMediaSink" )
+ cpp_quote( "    );" )
+@@ -1297,7 +1307,7 @@ cpp_quote( "    );" )
+ /// <param name="ppIActivate">
+ ///     Returns pointer to an ASF Streaming Media Sink Activate
+ /// </param>
+-cpp_quote( "STDAPI MFCreateASFStreamingMediaSinkActivate(" )
++cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFCreateASFStreamingMediaSinkActivate(" )
+ cpp_quote( "    IMFActivate *pByteStreamActivate," )
+ cpp_quote( "    IMFASFContentInfo *pContentInfo," )
+ cpp_quote( "    IMFActivate** ppIActivate" )
 @@ -1379,6 +1389,7 @@ cpp_quote( "// "  )
  
  
