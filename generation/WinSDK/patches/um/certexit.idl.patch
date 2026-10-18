@@ -1,0 +1,28 @@
+diff --git a/um/certexit.idl b/um/certexit.idl
+index 7f4a6ca2..113deafd 100644
+--- a/um/certexit.idl
++++ b/um/certexit.idl
+@@ -12,6 +12,7 @@
+ // This file will be processed by the MIDL tool to produce the type library
+ // (certexit.tlb) and marshalling code.
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -36,6 +37,7 @@ cpp_quote("#define EXITEVENT_CERTIMPORTED          ( 0x200 ) // Certificate Impo
+ // ICertExit class -- local COM interface, local implementation
+ //+--------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(ICertExit, _Win32_SupportedOS_Server2003_)
+ [
+     object,
+     uuid(e19ae1a0-7364-11d0-8816-00a0c903b83c),
+@@ -65,6 +67,7 @@ interface ICertExit: IDispatch
+ // ICertExit2 -- local COM interface
+ //+--------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(ICertExit2, _Win32_SupportedOS_Server2003_)
+ [
+     object,
+     uuid(0abf484b-d049-464d-a7ed-552e7529b0ff),

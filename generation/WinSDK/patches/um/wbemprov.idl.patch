@@ -1,0 +1,113 @@
+diff --git a/um/wbemprov.idl b/um/wbemprov.idl
+index 4bba922b..382e48dc 100644
+--- a/um/wbemprov.idl
++++ b/um/wbemprov.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("/*******************************************************************************/" )
+ cpp_quote("/*                                                                             */" )
+ cpp_quote("/*    Copyright (c) Microsoft Corporation.  All rights reserved.               */" )
+@@ -99,6 +100,7 @@ library WbemProviders_v1
+ 
+ #define OPTIONAL in, unique
+ 
++_Win32_AnnotateInterface_(IWbemUnboundObjectSink, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(e246107b-b06e-11d0-ad61-00c04fd8fdff)]
+ interface IWbemUnboundObjectSink : IUnknown
+ {
+@@ -113,6 +115,7 @@ interface IWbemUnboundObjectSink : IUnknown
+ //
+ //
+ 
++_Win32_AnnotateInterface_(IWbemPropertyProvider, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(CE61E841-65BC-11d0-B6BD-00AA003240C7)]
+ 
+ interface IWbemPropertyProvider : IUnknown
+@@ -136,6 +139,7 @@ interface IWbemPropertyProvider : IUnknown
+         );        
+ };
+ 
++_Win32_AnnotateInterface_(IWbemEventProvider, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(e245105b-b06e-11d0-ad61-00c04fd8fdff)]
+ interface IWbemEventProvider : IUnknown
+ {
+@@ -145,6 +149,7 @@ interface IWbemEventProvider : IUnknown
+             );
+ };
+ 
++_Win32_AnnotateInterface_(IWbemEventProviderQuerySink, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(580acaf8-fa1c-11d0-ad72-00c04fd8fdff)]
+ interface IWbemEventProviderQuerySink : IUnknown
+ {
+@@ -157,6 +162,7 @@ interface IWbemEventProviderQuerySink : IUnknown
+                 [in] unsigned long dwId);
+ };
+ 
++_Win32_AnnotateInterface_(IWbemEventProviderSecurity, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(631f7d96-d993-11d2-b339-00105a1f4aaf)]
+ interface IWbemEventProviderSecurity : IUnknown
+ {
+@@ -167,6 +173,7 @@ interface IWbemEventProviderSecurity : IUnknown
+                 [in, size_is(lSidLength), unique] const BYTE* pSid);
+ };
+ 
++_Win32_AnnotateInterface_(IWbemProviderIdentity, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(631f7d97-d993-11d2-b339-00105a1f4aaf)]
+ interface IWbemProviderIdentity : IUnknown
+ {
+@@ -176,6 +183,7 @@ interface IWbemProviderIdentity : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IWbemEventConsumerProvider, _Win32_SupportedOS_WindowsVista_)
+ [restricted, object, uuid(e246107a-b06e-11d0-ad61-00c04fd8fdff)]
+ interface IWbemEventConsumerProvider : IUnknown
+ {
+@@ -203,6 +211,7 @@ typedef enum tag_WBEM_PROVIDER_FLAGS
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IWbemProviderInitSink, _Win32_SupportedOS_WindowsVista_)
+ [object, uuid(1be41571-91dd-11d1-aeb2-00c04fb68820)]
+ 
+ interface IWbemProviderInitSink : IUnknown
+@@ -215,6 +224,7 @@ interface IWbemProviderInitSink : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IWbemProviderInit, _Win32_SupportedOS_WindowsVista_)
+ [object, uuid(1be41572-91dd-11d1-aeb2-00c04fb68820)]
+ 
+ interface IWbemProviderInit : IUnknown
+@@ -230,6 +240,7 @@ interface IWbemProviderInit : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IWbemHiPerfProvider, _Win32_SupportedOS_WindowsVista_)
+ [local, restricted, object, uuid(49353c93-516b-11d1-aea6-00c04fb68820)]
+ interface IWbemHiPerfProvider : IUnknown
+ {
+@@ -278,6 +289,7 @@ interface IWbemHiPerfProvider : IUnknown
+ 
+ };
+ 
++_Win32_AnnotateInterface_(IWbemDecoupledRegistrar, _Win32_SupportedOS_WindowsVista_)
+ [object, local, uuid(1005cbcf-e64f-4646-bcd3-3a089d8a84b4)]
+ interface IWbemDecoupledRegistrar : IUnknown
+ {
+@@ -295,6 +307,7 @@ interface IWbemDecoupledRegistrar : IUnknown
+ 	HRESULT UnRegister () ;
+ } ;
+ 
++_Win32_AnnotateInterface_(IWbemDecoupledBasicEventProvider, _Win32_SupportedOS_WindowsVista_)
+ [object, local, uuid(86336d20-ca11-4786-9ef1-bc8a946b42fc)]
+ interface IWbemDecoupledBasicEventProvider : IWbemDecoupledRegistrar
+ {
+@@ -322,6 +335,7 @@ typedef [v1_enum] enum tag_WBEM_BATCH_TYPE
+ } WBEM_BATCH_TYPE;
+ 
+ 
++_Win32_AnnotateInterface_(IWbemEventSink, _Win32_SupportedOS_WindowsVista_)
+ [object, restricted, uuid(3ae0080a-7e3a-4366-bf89-0feedc931659)]
+ interface IWbemEventSink : IWbemObjectSink
+ {

@@ -1,0 +1,92 @@
+diff --git a/um/fsrmscreen.idl b/um/fsrmscreen.idl
+index 5bf50c07..c51dd55c 100644
+--- a/um/fsrmscreen.idl
++++ b/um/fsrmscreen.idl
+@@ -2,6 +2,7 @@
+ //        Imports
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -60,6 +61,7 @@ const DISPID FSRM_DISPID_FILESCREEN_TEMPLATE_MANAGER    = FSRM_DISPID_FEATURE_FI
+ //////////////////////////////////////
+ //        Interfaces
+ //
++_Win32_AnnotateInterface_(IFsrmFileGroup, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(8dd04909-0e34-4d55-afaa-89e1f1a1bbb9),
+@@ -95,6 +97,7 @@ interface IFsrmFileGroup : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileGroupImported, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(ad55f10b-5f11-4be7-94ef-d9ee2e470ded),
+@@ -116,6 +119,7 @@ interface IFsrmFileGroupImported : IFsrmFileGroup
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileGroupManager, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(426677d5-018c-485c-8a51-20b86d00bdc4),
+@@ -155,6 +159,7 @@ interface IFsrmFileGroupManager : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenBase, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(f3637e80-5b22-4a2b-a637-bbb642b41cfc),
+@@ -194,6 +199,7 @@ interface IFsrmFileScreenBase : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreen, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(5f6325d3-ce88-4733-84c1-2d6aefc5ea07),
+@@ -234,6 +240,7 @@ interface IFsrmFileScreen : IFsrmFileScreenBase
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenException, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(bee7ce02-df77-4515-9389-78f01c5afc1a),
+@@ -259,6 +266,7 @@ interface IFsrmFileScreenException : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenManager, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(ff4fa04e-5a94-4bda-a3a0-d5b4d3c52eba),
+@@ -319,6 +327,7 @@ interface IFsrmFileScreenManager : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenTemplate, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(205bebf8-dd93-452a-95a6-32b566b35828),
+@@ -352,6 +361,7 @@ interface IFsrmFileScreenTemplate : IFsrmFileScreenBase
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenTemplateImported, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(e1010359-3e5d-4ecd-9fe4-ef48622fdf30),
+@@ -373,6 +383,7 @@ interface IFsrmFileScreenTemplateImported : IFsrmFileScreenTemplate
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileScreenTemplateManager, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(cfe36cba-1949-4e74-a14f-f1d580ceaf13),

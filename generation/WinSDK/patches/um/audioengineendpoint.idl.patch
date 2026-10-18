@@ -1,0 +1,92 @@
+diff --git a/um/audioengineendpoint.idl b/um/audioengineendpoint.idl
+index 030cd8ff..b8d3b35c 100644
+--- a/um/audioengineendpoint.idl
++++ b/um/audioengineendpoint.idl
+@@ -6,6 +6,7 @@
+ //  The interface and type definitions for audio engine endpoints.
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -154,6 +155,7 @@ typedef struct AE_CURRENT_POSITION
+ //
+ //  The AudioProcessor uses this interface to get information about the endpoint(s)
+ //  attached to it.
++_Win32_AnnotateInterface_(IAudioEndpoint, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(30A99515-1527-4451-AF9F-00C5F0234DAF),
+@@ -294,6 +296,7 @@ interface IAudioEndpoint : IUnknown{
+ 
+ //  The AudioProcessor uses this interface to discover the current padding between read
+ //  and write positions.
++_Win32_AnnotateInterface_(IAudioEndpointRT, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(DFD2005F-A6E5-4d39-A265-939ADA9FBB4D),
+@@ -420,6 +423,7 @@ interface IAudioEndpointRT : IUnknown{
+ 
+ //  The AudioProcessor uses this interface to get appropriate input buffers for
+ //  each processing pass.
++_Win32_AnnotateInterface_(IAudioInputEndpointRT, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(8026AB61-92B2-43c1-A1DF-5C37EBD08D82),
+@@ -563,6 +567,7 @@ interface IAudioInputEndpointRT : IUnknown{
+ 
+ //  The AudioProcessor uses this interface to get appropriate output buffers
+ //  for each processing pass.
++_Win32_AnnotateInterface_(IAudioOutputEndpointRT, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(8FA906E4-C31C-4e31-932E-19A66385E9AA),
+@@ -695,6 +700,7 @@ interface IAudioOutputEndpointRT : IUnknown{
+ //
+ //  This interface is used to initialize a Device Endpoint.
+ //
++_Win32_AnnotateInterface_(IAudioDeviceEndpoint, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(D4952F5A-A0B2-4cc4-8B82-9358488DD8AC),
+@@ -844,6 +850,7 @@ interface IAudioEndpointOffloadStreamVolume : IUnknown
+ //
+ //  This interface is used to allow per stream offloaded control of mute.
+ //
++_Win32_AnnotateInterface_(IAudioEndpointOffloadStreamMute, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(DFE21355-5EC2-40E0-8D6B-710AC3C00249),
+@@ -882,6 +889,7 @@ interface IAudioEndpointOffloadStreamMeter : IUnknown
+ //  the very last valid byte of data is read instead of doing that until 
+ //  it reaches the end of a buffer.
+ //
++_Win32_AnnotateInterface_(IAudioEndpointLastBufferControl, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(F8520DD3-8F9D-4437-9861-62F584C33DD6),
+@@ -899,6 +907,7 @@ interface IAudioEndpointLastBufferControl : IUnknown
+ //
+ //  This interface is used to query and enable/disable Lfx on each stream 
+ //
++_Win32_AnnotateInterface_(IAudioLfxControl, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(076A6922-D802-4F83-BAF6-409D9CA11BFE),
+@@ -917,6 +926,7 @@ interface IAudioLfxControl : IUnknown
+ //  This interface is used to query the potential render hardware audio engine feature 
+ //  exposed on an endpoint.
+ //
++_Win32_AnnotateInterface_(IHardwareAudioEngineBase, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(EDDCE3E4-F3C1-453a-B461-223563CBD886),
+@@ -933,6 +943,7 @@ interface IHardwareAudioEngineBase: IUnknown
+ };
+ //-----------------------------------------------------------------------------
+ // This interface is used to control an endpoint.
++_Win32_AnnotateInterface_(IAudioEndpointControl, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(C684B72A-6DF4-4774-BDF9-76B77509B653),

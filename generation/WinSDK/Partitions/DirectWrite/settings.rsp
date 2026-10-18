@@ -8,3 +8,5 @@ DWRITE_FONT_AXIS_TAG
 <IncludeRoot>/um/dwrite_2.h
 --namespace
 Windows.Win32.Graphics.DirectWrite
+--config
+parse-win32-annotations

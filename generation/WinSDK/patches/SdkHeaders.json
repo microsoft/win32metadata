@@ -2913,6 +2913,156 @@
       "sourceSha256": "ACDF772F82D060A87DCE239DC3424BEB6DB50F8236FDF9DE9D5F7F9574D32CD8",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\directmanipulation.idl",
       "sdkSha256": "33F66AADA54A38B2A02C81FC8C9F74C5D7C7E16928A1D477314EE3F9B2AAC95A"
+    },
+    {
+      "path": "um\\dwrite.h",
+      "sourceSha256": "E991BB9037949BB1C03BDF34EEE04A8DD8C0578D2504D41913A711CE77C697DE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwrite.h",
+      "sdkSha256": "E991BB9037949BB1C03BDF34EEE04A8DD8C0578D2504D41913A711CE77C697DE"
+    },
+    {
+      "path": "um\\wbemprov.h",
+      "sourceSha256": "D918CADF7F38B138341E22B4E9830E533476C958CBB3DD055A56EAD52D8D7068",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wbemprov.idl",
+      "sdkSha256": "CC46D2D18E9F63A44292F63F7D1FB6E7812A6E03DA93B6004499A98F5DEB4FA8"
+    },
+    {
+      "path": "um\\mfcaptureengine.h",
+      "sourceSha256": "893C2FABFFDA909BF0B76DB98EB8ED4AEBBF72595E87DE1C06726C6A0A9FA3EE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfcaptureengine.idl",
+      "sdkSha256": "BF6F7E100D71E02D0B15C4B453E629C9DE3C767BC2164081BCF4D04B5006B759"
+    },
+    {
+      "path": "um\\uiribbon.h",
+      "sourceSha256": "14F769DC542234B4C49A469041853B62FAD4A19B760015AD7F0E27BF82C159AA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\uiribbon.idl",
+      "sdkSha256": "8C8A7EB2A97A90B13AADDBDAA15CE35FB53D41627D77CEA7A90521DAC8C43AFE"
+    },
+    {
+      "path": "um\\portabledeviceapi.h",
+      "sourceSha256": "270566037F69C9D02A2DF584995D5BFB859DA6030CE81A4D812A46B6316BFAFB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\portabledeviceapi.idl",
+      "sdkSha256": "AF30B2D030F63DE87E483C806D7C45F3C8C0A0CDB5164014B3B4130F2D9CE57F"
+    },
+    {
+      "path": "um\\wsdclient.h",
+      "sourceSha256": "224D929F57311E3A77CA030AFF80BB9F5481ECA19B31B26A7C8F4FAAB85DA2CA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsdclient.idl",
+      "sdkSha256": "9ADDEAE23D52D2784AD32770519CA16A3984F0988F303DE124E819D06D170FC4"
+    },
+    {
+      "path": "um\\adhoc.h",
+      "sourceSha256": "16E02B486B175DEA72E6EECE503805E959AFA74F88CCD223FA513CEBF6C77499",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\adhoc.idl",
+      "sdkSha256": "10662977B80D8E7E832EFE06C7D115214784CDE609AFA179728BD6E806ED27A3"
+    },
+    {
+      "path": "um\\audioengineendpoint.h",
+      "sourceSha256": "79003BAE31B98F0A7C7DA89A3C53BADE7BAD9EF7DCD35EC30BCAB53E8452CAD1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\audioengineendpoint.idl",
+      "sdkSha256": "773689C50C7821835FB75B7C12EE9853CEA34386C2D3A0D9CB76F340FD54B1E4"
+    },
+    {
+      "path": "um\\bits3_0.h",
+      "sourceSha256": "B7FFAE395A411AAA00F0FCA8304367ED3EBA47A50BEAB0C2A607C7ED6E43DEE5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bits3_0.idl",
+      "sdkSha256": "D6AA0560CB797B50320A03B4A06E1EFA3724DE7E708012C7413B5AB6749B349E"
+    },
+    {
+      "path": "um\\certexit.h",
+      "sourceSha256": "9B7AE26C1FFD373DE7DAA177293C56A91A60D4024A2DD44E995C91829A105773",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\certexit.idl",
+      "sdkSha256": "65AE2C4E8C8BC5E9B94BEE2E704594883DAA96E9442492CF384E7A78DB168EB0"
+    },
+    {
+      "path": "um\\docobj.h",
+      "sourceSha256": "A9988CF0C0D260884D61056E8743C178F2A69D0153CB6D2E8AB8AB53ECAD1997",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\docobj.idl",
+      "sdkSha256": "EDE93F5F0089D183272A430CFC0261615A982C059DA0C7A4CFB46ECB6F0E87A5"
+    },
+    {
+      "path": "um\\fsrmscreen.h",
+      "sourceSha256": "63FEB2EE272BAB593D4A192BDCAA8E23D3244E7DAA96E3CBA277ECB3A607DC65",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmscreen.idl",
+      "sdkSha256": "DFA1F5249101E2ACF3662BA15F36880B7A60FCF16657C156DB7F35177D235CB4"
+    },
+    {
+      "path": "um\\spellcheck.h",
+      "sourceSha256": "2092117C1A686ABC04EDB388A8AA4F347D41306F6D580E3AD834C142F351D56C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spellcheck.idl",
+      "sdkSha256": "56BE486FB700ABCB59B7B449A695BBD2D0B3EBBF94A980B9E5FB99732765340D"
+    },
+    {
+      "path": "um\\tsvirtualchannels.h",
+      "sourceSha256": "A5BAFEBBD54D3D4011D95F5A5F3C16BF9E003EC035C86DB6A3E45DA3A341288D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tsvirtualchannels.idl",
+      "sdkSha256": "F0D4669DD038ACF9E3FE3D1C9D8691D9F6C41ACE6AB0567D540B52C8956DC420"
+    },
+    {
+      "path": "um\\wsddisco.h",
+      "sourceSha256": "6CA9DBED8ECDF89182D8CBD7A795A1256E09AF34C8DAE84B55CABE46EC61285C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsddisco.idl",
+      "sdkSha256": "2949BB7252406E3C423680B7FE93487580549DCC62A5F09EA1F326F7BAB1D9FA"
+    },
+    {
+      "path": "um\\wsmandisp.h",
+      "sourceSha256": "AE615103B496B8F5F2B8687F9336387890BAAA0A40CC2AE422090526743A6E5E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsmandisp.idl",
+      "sdkSha256": "E156CEAA3F978EC63F2FE0299D029E7F94BBA6FCE81DFCFC236BA78D952DF51F"
+    },
+    {
+      "path": "um\\audiopolicy.h",
+      "sourceSha256": "3222E903474AE171728CB2F5963000518BCAED4B26076AF0C15A1FF470A20465",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\audiopolicy.idl",
+      "sdkSha256": "95BDADDE7F74320C0043BAA753F7DF5EDEC1462DC6E1ED4A26AF09B5CEBF42BF"
+    },
+    {
+      "path": "um\\d3d11_1.h",
+      "sourceSha256": "5EEBC193F7A06F85DF5EA3A0DD0769C98923045DE92A8F53BA24539B909D6A8F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11_1.idl",
+      "sdkSha256": "23AEF0D6AEEB71F1B0E77A0F7E9AAD716E629613443F2A595A5642742F2784EF"
+    },
+    {
+      "path": "um\\fsrmquota.h",
+      "sourceSha256": "0BBA6253F91E6B7DD099D55F387CBBA648169C7C5705FD45D36AF7C64194C3DA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmquota.idl",
+      "sdkSha256": "A597EDD4C6E2FDC07A2BC1086165D6976C0BBAFB444F35E4592BD24142048759"
+    },
+    {
+      "path": "um\\mfsharingengine.h",
+      "sourceSha256": "BE3A0B6C475B5BDEF94297212E669855EF170AFCB00ED5F62FA6E57E9201DA05",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfsharingengine.idl",
+      "sdkSha256": "D5968BFE635835F814FF416A03E92FCC0FE06FACFD052AE497DAEBF102FEC3BD"
+    },
+    {
+      "path": "um\\spatialaudiometadata.h",
+      "sourceSha256": "A48FD14EDB61A7EAB71C18BB859D2F6348B91B5C7FBA847ACA1168C0948715C8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialaudiometadata.idl",
+      "sdkSha256": "273D2D32C885307267D3FD04761E188E108379DEC93FF3D6F32C703D55A1032C"
+    },
+    {
+      "path": "um\\workspaceruntime.h",
+      "sourceSha256": "52CAC64EC03CA3AAA55D95FAF5B04938A4E48CD20374D60F22C685949532BA79",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\workspaceruntime.idl",
+      "sdkSha256": "7BDB753040D5196D7CE894F30C6869D7681B50A6B0C11BA100E4267297F4C8AD"
+    },
+    {
+      "path": "um\\camerauicontrol.h",
+      "sourceSha256": "F00DAD782B919615FF3FE143EFAC03982E2D92C7E26E7CA54EB1E32B25D9AE84",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\camerauicontrol.idl",
+      "sdkSha256": "8B51E011E308F11F389186242162EDEB5777806F9940D8D951F5D8DB5D255A1C"
+    },
+    {
+      "path": "um\\fsrmreports.h",
+      "sourceSha256": "3CA3AFA12F7C9CE6C04E2144F28CC1F45E763521DCB507D0CB8153F54B911126",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmreports.idl",
+      "sdkSha256": "8115B0465C7592F8869BFD056B20ECE280A46706FB6527A6A929476F4F2854DE"
+    },
+    {
+      "path": "um\\functiondiscoveryprovider.h",
+      "sourceSha256": "CD19A54DB7FC32ECD4B157FA69A117687F8A3FBE67C24B7EECDDB36DD282F5DB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\functiondiscoveryprovider.idl",
+      "sdkSha256": "4463DA0474C0FA0D456D735B09F7997EC695620894EF82BD548A27210E30C5C1"
     }
   ],
   "midl": {
@@ -4100,6 +4250,131 @@
         "path": "winrt\\weakreference.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\winrt\\weakreference.idl",
         "sdkSha256": "5DA6A0EC24F7256F8755C160B8A5187DF28A35EC84B19E1ECA39601AF2F60C43"
+      },
+      {
+        "path": "um\\adhoc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\adhoc.idl",
+        "sdkSha256": "10662977B80D8E7E832EFE06C7D115214784CDE609AFA179728BD6E806ED27A3"
+      },
+      {
+        "path": "um\\audioapotypes.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audioapotypes.h",
+        "sdkSha256": "528CE885B69A57BD48C6A8741FD73931DA5266A9CDEA0F8C74B2E476D4F7AB8C"
+      },
+      {
+        "path": "um\\audioengineendpoint.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audioengineendpoint.idl",
+        "sdkSha256": "773689C50C7821835FB75B7C12EE9853CEA34386C2D3A0D9CB76F340FD54B1E4"
+      },
+      {
+        "path": "um\\audiopolicy.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audiopolicy.idl",
+        "sdkSha256": "95BDADDE7F74320C0043BAA753F7DF5EDEC1462DC6E1ED4A26AF09B5CEBF42BF"
+      },
+      {
+        "path": "um\\camerauicontrol.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\camerauicontrol.idl",
+        "sdkSha256": "8B51E011E308F11F389186242162EDEB5777806F9940D8D951F5D8DB5D255A1C"
+      },
+      {
+        "path": "um\\certexit.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\certexit.idl",
+        "sdkSha256": "65AE2C4E8C8BC5E9B94BEE2E704594883DAA96E9442492CF384E7A78DB168EB0"
+      },
+      {
+        "path": "um\\fsrmquota.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmquota.idl",
+        "sdkSha256": "A597EDD4C6E2FDC07A2BC1086165D6976C0BBAFB444F35E4592BD24142048759"
+      },
+      {
+        "path": "um\\fsrmreports.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmreports.idl",
+        "sdkSha256": "8115B0465C7592F8869BFD056B20ECE280A46706FB6527A6A929476F4F2854DE"
+      },
+      {
+        "path": "um\\fsrmscreen.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\fsrmscreen.idl",
+        "sdkSha256": "DFA1F5249101E2ACF3662BA15F36880B7A60FCF16657C156DB7F35177D235CB4"
+      },
+      {
+        "path": "um\\FunctionDiscoveryAPI.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\FunctionDiscoveryAPI.idl",
+        "sdkSha256": "AD2AC4A02A83D8DB48B197C8F4FC550E4086F78586153979BE999EAD45DF5B8D"
+      },
+      {
+        "path": "um\\FunctionDiscoveryConstraints.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\FunctionDiscoveryConstraints.h",
+        "sdkSha256": "1FA4D820E94F9A6A48E8B0C8CE6EE16D52E3FD5473FE8B8716573FA76E0ED686"
+      },
+      {
+        "path": "um\\functiondiscoveryprovider.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\functiondiscoveryprovider.idl",
+        "sdkSha256": "4463DA0474C0FA0D456D735B09F7997EC695620894EF82BD548A27210E30C5C1"
+      },
+      {
+        "path": "um\\mfcaptureengine.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mfcaptureengine.idl",
+        "sdkSha256": "BF6F7E100D71E02D0B15C4B453E629C9DE3C767BC2164081BCF4D04B5006B759"
+      },
+      {
+        "path": "um\\mfsharingengine.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mfsharingengine.idl",
+        "sdkSha256": "D5968BFE635835F814FF416A03E92FCC0FE06FACFD052AE497DAEBF102FEC3BD"
+      },
+      {
+        "path": "um\\SpatialAudioClient.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SpatialAudioClient.idl",
+        "sdkSha256": "222B1665B1E65EB278679866ACD7D00ADB1AFDA443A77F3FFC7C305C9B743B43"
+      },
+      {
+        "path": "um\\spatialaudiometadata.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialaudiometadata.idl",
+        "sdkSha256": "273D2D32C885307267D3FD04761E188E108379DEC93FF3D6F32C703D55A1032C"
+      },
+      {
+        "path": "um\\spellcheck.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\spellcheck.idl",
+        "sdkSha256": "56BE486FB700ABCB59B7B449A695BBD2D0B3EBBF94A980B9E5FB99732765340D"
+      },
+      {
+        "path": "um\\tsvirtualchannels.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tsvirtualchannels.idl",
+        "sdkSha256": "F0D4669DD038ACF9E3FE3D1C9D8691D9F6C41ACE6AB0567D540B52C8956DC420"
+      },
+      {
+        "path": "um\\uiribbon.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\uiribbon.idl",
+        "sdkSha256": "8C8A7EB2A97A90B13AADDBDAA15CE35FB53D41627D77CEA7A90521DAC8C43AFE"
+      },
+      {
+        "path": "um\\wbemprov.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\wbemprov.idl",
+        "sdkSha256": "CC46D2D18E9F63A44292F63F7D1FB6E7812A6E03DA93B6004499A98F5DEB4FA8"
+      },
+      {
+        "path": "um\\workspaceruntime.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\workspaceruntime.idl",
+        "sdkSha256": "7BDB753040D5196D7CE894F30C6869D7681B50A6B0C11BA100E4267297F4C8AD"
+      },
+      {
+        "path": "um\\workspaceruntimeclientext.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\workspaceruntimeclientext.idl",
+        "sdkSha256": "32EAD8C24ED7752A3A6A7F9D2B4719AABA847406FE0037DB72B50CFB81E61C7D"
+      },
+      {
+        "path": "um\\wsdclient.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\wsdclient.idl",
+        "sdkSha256": "9ADDEAE23D52D2784AD32770519CA16A3984F0988F303DE124E819D06D170FC4"
+      },
+      {
+        "path": "um\\wsddisco.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\wsddisco.idl",
+        "sdkSha256": "2949BB7252406E3C423680B7FE93487580549DCC62A5F09EA1F326F7BAB1D9FA"
+      },
+      {
+        "path": "um\\wsmandisp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\wsmandisp.idl",
+        "sdkSha256": "E156CEAA3F978EC63F2FE0299D029E7F94BBA6FCE81DFCFC236BA78D952DF51F"
       }
     ],
     "outputs": [
@@ -4598,6 +4873,102 @@
       {
         "source": "um\\directmanipulation.idl",
         "path": "um\\directmanipulation.h"
+      },
+      {
+        "source": "um\\wbemprov.idl",
+        "path": "um\\wbemprov.h"
+      },
+      {
+        "source": "um\\mfcaptureengine.idl",
+        "path": "um\\mfcaptureengine.h"
+      },
+      {
+        "source": "um\\uiribbon.idl",
+        "path": "um\\uiribbon.h"
+      },
+      {
+        "source": "um\\portabledeviceapi.idl",
+        "path": "um\\portabledeviceapi.h"
+      },
+      {
+        "source": "um\\wsdclient.idl",
+        "path": "um\\wsdclient.h"
+      },
+      {
+        "source": "um\\adhoc.idl",
+        "path": "um\\adhoc.h"
+      },
+      {
+        "source": "um\\audioengineendpoint.idl",
+        "path": "um\\audioengineendpoint.h"
+      },
+      {
+        "source": "um\\bits3_0.idl",
+        "path": "um\\bits3_0.h"
+      },
+      {
+        "source": "um\\certexit.idl",
+        "path": "um\\certexit.h"
+      },
+      {
+        "source": "um\\docobj.idl",
+        "path": "um\\docobj.h"
+      },
+      {
+        "source": "um\\fsrmscreen.idl",
+        "path": "um\\fsrmscreen.h"
+      },
+      {
+        "source": "um\\spellcheck.idl",
+        "path": "um\\spellcheck.h"
+      },
+      {
+        "source": "um\\tsvirtualchannels.idl",
+        "path": "um\\tsvirtualchannels.h"
+      },
+      {
+        "source": "um\\wsddisco.idl",
+        "path": "um\\wsddisco.h"
+      },
+      {
+        "source": "um\\wsmandisp.idl",
+        "path": "um\\wsmandisp.h"
+      },
+      {
+        "source": "um\\audiopolicy.idl",
+        "path": "um\\audiopolicy.h"
+      },
+      {
+        "source": "um\\d3d11_1.idl",
+        "path": "um\\d3d11_1.h"
+      },
+      {
+        "source": "um\\fsrmquota.idl",
+        "path": "um\\fsrmquota.h"
+      },
+      {
+        "source": "um\\mfsharingengine.idl",
+        "path": "um\\mfsharingengine.h"
+      },
+      {
+        "source": "um\\spatialaudiometadata.idl",
+        "path": "um\\spatialaudiometadata.h"
+      },
+      {
+        "source": "um\\workspaceruntime.idl",
+        "path": "um\\workspaceruntime.h"
+      },
+      {
+        "source": "um\\camerauicontrol.idl",
+        "path": "um\\camerauicontrol.h"
+      },
+      {
+        "source": "um\\fsrmreports.idl",
+        "path": "um\\fsrmreports.h"
+      },
+      {
+        "source": "um\\functiondiscoveryprovider.idl",
+        "path": "um\\functiondiscoveryprovider.h"
       }
     ]
   },
@@ -4804,7 +5175,11 @@
     "XpsPrinting",
     "WinTouch",
     "Direct3D11on12",
-    "DirectManipulation"
+    "DirectManipulation",
+    "DirectWrite",
+    "WindowsRibbon",
+    "WpdSdk",
+    "FunctionDiscovery"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -5257,6 +5632,31 @@
     "um\\certpol.idl.patch",
     "um\\d3d11_2.idl.patch",
     "um\\d3d11on12.idl.patch",
-    "um\\directmanipulation.idl.patch"
+    "um\\directmanipulation.idl.patch",
+    "um\\dwrite.h.patch",
+    "um\\wbemprov.idl.patch",
+    "um\\mfcaptureengine.idl.patch",
+    "um\\uiribbon.idl.patch",
+    "um\\portabledeviceapi.idl.patch",
+    "um\\wsdclient.idl.patch",
+    "um\\adhoc.idl.patch",
+    "um\\audioengineendpoint.idl.patch",
+    "um\\bits3_0.idl.patch",
+    "um\\certexit.idl.patch",
+    "um\\docobj.idl.patch",
+    "um\\fsrmscreen.idl.patch",
+    "um\\spellcheck.idl.patch",
+    "um\\tsvirtualchannels.idl.patch",
+    "um\\wsddisco.idl.patch",
+    "um\\wsmandisp.idl.patch",
+    "um\\audiopolicy.idl.patch",
+    "um\\d3d11_1.idl.patch",
+    "um\\fsrmquota.idl.patch",
+    "um\\mfsharingengine.idl.patch",
+    "um\\spatialaudiometadata.idl.patch",
+    "um\\workspaceruntime.idl.patch",
+    "um\\camerauicontrol.idl.patch",
+    "um\\fsrmreports.idl.patch",
+    "um\\functiondiscoveryprovider.idl.patch"
   ]
 }

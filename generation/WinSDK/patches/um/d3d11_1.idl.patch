@@ -1,0 +1,84 @@
+diff --git a/um/d3d11_1.idl b/um/d3d11_1.idl
+index b6949381..83507cd3 100644
+--- a/um/d3d11_1.idl
++++ b/um/d3d11_1.idl
+@@ -8,6 +8,7 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "dxgi1_2.idl";
+@@ -103,6 +104,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++_Win32_AnnotateInterface_(ID3D11BlendState1, _Win32_SupportedOS_Windows8_)
+ [ uuid(cc86fabe-da55-401d-85e7-e3c9de2877e9), object, local, pointer_default( unique ) ]
+ interface ID3D11BlendState1
+     : ID3D11BlendState
+@@ -178,6 +180,7 @@ cpp_quote( "};" )
+ cpp_quote( "extern \"C\"{" )
+ cpp_quote( "#endif" )
+ 
++_Win32_AnnotateInterface_(ID3D11RasterizerState1, _Win32_SupportedOS_Windows8_)
+ [ uuid(1217d7a6-5039-418c-b042-9cbe256afd6e), object, local, pointer_default( unique ) ]
+ interface ID3D11RasterizerState1
+     : ID3D11RasterizerState
+@@ -197,6 +200,7 @@ typedef enum D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG
+ 
+ } D3D11_1_CREATE_DEVICE_CONTEXT_STATE_FLAG;
+ 
++_Win32_AnnotateInterface_(ID3DDeviceContextState, _Win32_SupportedOS_Windows8_)
+ [ uuid( 5c1e0d8a-7c23-48f9-8c59-a92958ceff11 ), object, local, pointer_default( unique ) ]
+ interface ID3DDeviceContextState
+     : ID3D11DeviceChild
+@@ -208,6 +212,7 @@ interface ID3DDeviceContextState
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(ID3D11DeviceContext1, _Win32_SupportedOS_Windows8_)
+ [ uuid( bb2c6faa-b5fb-4082-8e6b-388b8cfa90e1 ), object, local, pointer_default( unique ) ]
+ interface ID3D11DeviceContext1
+     : ID3D11DeviceContext
+@@ -486,6 +491,7 @@ typedef struct D3D11_VIDEO_SAMPLE_DESC
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(ID3D11VideoContext1, _Win32_SupportedOS_10240_)
+ [uuid(A7F026DA-A5F8-4487-A564-15E34357651E), object, local, pointer_default(unique)]
+ interface ID3D11VideoContext1
+     : ID3D11VideoContext
+@@ -571,6 +577,7 @@ interface ID3D11VideoContext1
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(ID3D11VideoDevice1, _Win32_SupportedOS_10240_)
+ [uuid(29DA1D51-1321-4454-804B-F5FC9F861F0F), object, local, pointer_default(unique)]
+ interface ID3D11VideoDevice1
+     : ID3D11VideoDevice
+@@ -613,6 +620,7 @@ interface ID3D11VideoDevice1
+ // VideoProcessorEnum
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(ID3D11VideoProcessorEnumerator1, _Win32_SupportedOS_10240_)
+ [uuid(465217F2-5568-43CF-B5B9-F61D54531CA1), object, local, pointer_default(unique)]
+ interface ID3D11VideoProcessorEnumerator1
+     : ID3D11VideoProcessorEnumerator
+@@ -625,6 +633,7 @@ interface ID3D11VideoProcessorEnumerator1
+         [annotation("_Out_")] BOOL* pSupported);
+ };
+ 
++_Win32_AnnotateInterface_(ID3D11Device1, _Win32_SupportedOS_Windows8_)
+ [ uuid( a04bfb29-08ef-43d6-a49c-a9bdbdcbe686 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Device1
+     : ID3D11Device
+@@ -664,6 +673,7 @@ interface ID3D11Device1
+         [annotation("_COM_Outptr_")] void** ppResource);
+ };
+ 
++_Win32_AnnotateInterface_(ID3DUserDefinedAnnotation, _Win32_SupportedOS_Windows8_)
+ [ uuid( b2daad8b-03d4-4dbf-95eb-32ab4b63d0ab ), object, local, pointer_default( unique ) ]
+ interface ID3DUserDefinedAnnotation
+     : IUnknown

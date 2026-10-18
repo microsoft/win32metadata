@@ -8,3 +8,6 @@
 <IncludeRoot>/um/wbemtran.h
 --namespace
 Windows.Win32.System.Wmi
+
+--config
+parse-win32-annotations

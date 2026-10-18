@@ -1,0 +1,81 @@
+diff --git a/um/spatialaudiometadata.idl b/um/spatialaudiometadata.idl
+index b7dbc8ec..d6511496 100644
+--- a/um/spatialaudiometadata.idl
++++ b/um/spatialaudiometadata.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //
+@@ -87,6 +88,7 @@ typedef struct SpatialAudioObjectRenderStreamForMetadataActivationParams2
+ 
+ #pragma pack(pop)
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataItems, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(BCD7C78F-3098-4F22-B547-A2F25A381269),
+@@ -133,6 +135,7 @@ interface ISpatialAudioMetadataItems : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataWriter, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(1B17CA01-2955-444D-A430-537DC589A844),
+@@ -216,6 +219,7 @@ interface ISpatialAudioMetadataWriter : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataReader, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(B78E86A2-31D9-4C32-94D2-7DF40FC7EBEC),
+@@ -298,6 +302,7 @@ interface ISpatialAudioMetadataReader : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataCopier, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(D224B233-E251-4FD0-9CA2-D5ECF9A68404),
+@@ -373,6 +378,7 @@ interface ISpatialAudioMetadataCopier : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataItemsBuffer, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(42640A16-E1BD-42D9-9FF6-031AB71A2DBA),
+@@ -426,6 +432,7 @@ interface ISpatialAudioMetadataItemsBuffer : IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioMetadataClient, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(777D4A3B-F6FF-4A26-85DC-68D7CDEDA1D4),
+@@ -529,6 +536,7 @@ interface ISpatialAudioMetadataClient : IUnknown
+ 
+ // This interface is used to write engine specific metadata commands
+ // The data written via this interface must adhere to the format defined by the spatial rendering engine
++_Win32_AnnotateInterface_(ISpatialAudioObjectForMetadataCommands, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(0DF2C94B-F5F9-472D-AF6B-C46E0AC9CD05),
+@@ -551,6 +559,7 @@ interface ISpatialAudioObjectForMetadataCommands : ISpatialAudioObjectBase
+ // This interface is used to write engine specific metadata when multiple metadata items with frame
+ // accurate placement per buffer is required.  This is typically used for streaming content via Media Foundation.
+ // The data written via this interface must adhere to the format defined by the spatial rendering engine
++_Win32_AnnotateInterface_(ISpatialAudioObjectForMetadataItems, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(DDEA49FF-3BC0-4377-8AAD-9FBCFD808566),
+@@ -566,6 +575,7 @@ interface ISpatialAudioObjectForMetadataItems : ISpatialAudioObjectBase
+ }
+ 
+ 
++_Win32_AnnotateInterface_(ISpatialAudioObjectRenderStreamForMetadata, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(BBC9C907-48D5-4A2E-A0C7-F7F0D67C1FB1),

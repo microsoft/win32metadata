@@ -14,3 +14,6 @@
 <IncludeRoot>/um/bitsmsg.h
 --namespace
 Windows.Win32.Networking.BackgroundIntelligentTransferService
+
+--config
+parse-win32-annotations

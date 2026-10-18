@@ -1,0 +1,76 @@
+diff --git a/um/fsrmreports.idl b/um/fsrmreports.idl
+index 0173c802..b0d9616b 100644
+--- a/um/fsrmreports.idl
++++ b/um/fsrmreports.idl
+@@ -2,6 +2,7 @@
+ //        Imports
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -57,6 +58,7 @@ const DISPID FSRM_DISPID_FILE_MANAGEMENT_JOB_2
+ //        Interfaces
+ //
+ 
++_Win32_AnnotateInterface_(IFsrmReportManager, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(27b899fe-6ffa-4481-a184-d3daade8a02b),
+@@ -123,6 +125,7 @@ interface IFsrmReportManager : IDispatch {
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmReportJob, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(38e87280-715c-4c7d-a280-ea1651a19fef),
+@@ -202,6 +205,7 @@ interface IFsrmReportJob : IFsrmObject {
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmReport, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(d8cc81d9-46b8-4fa4-bfa5-4aa9dec9b638),
+@@ -253,6 +257,7 @@ interface IFsrmReport : IDispatch {
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmReportScheduler, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(6879caf9-6617-4484-8719-71c3d8645f94),
+@@ -286,6 +291,7 @@ interface IFsrmReportScheduler : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileManagementJobManager, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(ee321ecb-d95e-48e9-907c-c7685a013235),
+@@ -322,6 +328,7 @@ interface IFsrmFileManagementJobManager : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileManagementJob, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(0770687e-9f36-4d6f-8778-599d188461c9),
+@@ -524,6 +531,7 @@ interface IFsrmFileManagementJob : IFsrmObject {
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyCondition, _Win32_SupportedOS_Server2008_)
+ [
+   odl,
+   uuid(326af66f-2ac0-4f68-bf8c-4759f054fa29),
+@@ -593,6 +601,7 @@ interface IFsrmFileCondition : IDispatch {
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmFileConditionProperty, _Win32_SupportedOS_Server2012_)
+ [
+   odl,
+   uuid(81926775-B981-4479-988F-DA171D627360),

@@ -1,0 +1,74 @@
+diff --git a/um/spellcheck.idl b/um/spellcheck.idl
+index 09de4339..d4fa907a 100644
+--- a/um/spellcheck.idl
++++ b/um/spellcheck.idl
+@@ -1,4 +1,5 @@
+ // Copyright (c) Microsoft Corporation. All Rights Reserved.
++#include <sal.h>
+ cpp_quote("// Copyright (c) Microsoft Corporation. All Rights Reserved.")
+ 
+ cpp_quote("#ifndef MIN_SPELLING_NTDDI")
+@@ -28,6 +29,7 @@ typedef [v1_enum] enum WORDLIST_TYPE
+ // This interface represents a spelling error - you can get information like the range that comprises the error, or the suggestions for that misspelled word
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through IEnumSpellingError::Next
++_Win32_AnnotateInterface_(ISpellingError, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(B7C82D61-FBE8-4B47-9B27-6C0D2E0DE0A3),
+@@ -53,6 +55,7 @@ interface ISpellingError : IUnknown
+ // This interface is an enumeration of spelling errors
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through ISpellChecker::Check
++_Win32_AnnotateInterface_(IEnumSpellingError, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(803E3BD4-2828-4410-8290-418D1D73C762),
+@@ -66,6 +69,7 @@ interface IEnumSpellingError : IUnknown
+ // This interface holds the associated data of a spelling option
+ // Should be implemented by any spell check provider (someone who provides a spell checking engine), and used by clients of spell checking
+ // It is obtained through ISpellChecker::GetOptionDescription
++_Win32_AnnotateInterface_(IOptionDescription, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(432E5F85-35CF-4606-A801-6F70277E1D7A),
+@@ -82,6 +86,7 @@ interface IOptionDescription : IUnknown
+ interface ISpellChecker;
+ 
+ // This interface should be implemented by clients of spell checking that wish to be notified of any changes that might change spell checking results
++_Win32_AnnotateInterface_(ISpellCheckerChangedEventHandler, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(0B83A5B0-792F-4EAB-9799-ACF52C5ED08A),
+@@ -99,6 +104,7 @@ interface ISpellCheckerChangedEventHandler : IUnknown
+ // A suggested scenario for ComprehensiveCheck is for a real-time text input of small text by the user (such as when the user is typing a word) 
+ // On the other hand, Check is better suited for large-text input scenarios
+ 
++_Win32_AnnotateInterface_(ISpellChecker, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(B6FD0B71-E2BC-4653-8D05-F197E412770B),
+@@ -122,6 +128,7 @@ interface ISpellChecker : IUnknown
+     HRESULT ComprehensiveCheck([in] LPCWSTR text, [out, retval] IEnumSpellingError** value);
+ };
+ 
++_Win32_AnnotateInterface_(ISpellChecker2, _Win32_SupportedOS_10240_)
+ [ 
+     object, 
+     uuid(E7ED1C71-87F7-4378-A840-C9200DACEE47), 
+@@ -136,6 +143,7 @@ interface ISpellChecker2 : ISpellChecker
+ // This interface is used to create a spell checker for a given language and to obtain information about which language do have a spell checker available in the system
+ // Should be used by clients of spell checking
+ // It is obtained through CoCreateInstance
++_Win32_AnnotateInterface_(ISpellCheckerFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(8E018A9D-2415-4677-BF08-794EA61F94BB),
+@@ -157,6 +165,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ // This interface is used to register new spelling dictionaries to be read by the spell checking facility
+ // Should be used by clients of spell checking
+ // It is obtained through a QueryInterface in ISpellCheckerFactory
++_Win32_AnnotateInterface_(IUserDictionariesRegistrar, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(AA176B85-0E12-4844-8E1A-EEF1DA77F586),

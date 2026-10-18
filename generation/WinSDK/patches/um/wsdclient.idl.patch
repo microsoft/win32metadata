@@ -1,0 +1,76 @@
+diff --git a/um/wsdclient.idl b/um/wsdclient.idl
+index d279a9f4..dfc3fdc1 100644
+--- a/um/wsdclient.idl
++++ b/um/wsdclient.idl
+@@ -13,6 +13,7 @@
+ //
+ //--------------------------------------------------------------------------
+         
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -68,6 +69,7 @@ cpp_quote("#endif")
+ //  IWSDEndpointProxy Interface
+ //  Description: Messaging proxy to device services
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDEndpointProxy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(1860d430-b24c-4975-9f90-dbb39baa24ec),
+@@ -112,6 +114,7 @@ interface IWSDEndpointProxy : IUnknown
+ //  IWSDServiceProxy Interface
+ //  Description: Client-side representation of device services
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDServiceProxy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(d4c7fb9c-03ab-4175-9d67-094fafebf487),
+@@ -153,6 +156,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
+ //  IWSDServiceProxyEventing Interface
+ //  Description: Client-side eventing representation of device services
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDServiceProxyEventing, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(f9279d6d-1012-4a94-b8cc-fd35d2202bfe),
+@@ -275,6 +279,7 @@ cpp_quote("#endif")
+ //  IWSDDeviceProxy Interface
+ //  Description: Client-side representation of devices
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDDeviceProxy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(eee0c031-c578-4c0e-9a3b-973c35f409db),
+@@ -326,6 +331,7 @@ interface IWSDDeviceProxy : IUnknown
+ //  IWSDAsyncResult Interface
+ //  Description: Represent asynchronous operations
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDAsyncResult, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(11a9852a-8dd8-423e-b537-9356db4fbfb8),
+@@ -361,6 +367,7 @@ interface IWSDAsyncResult : IUnknown
+ //  IWSDAsyncCallback Interface
+ //  Description: Callbacks for async operation completion.
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDAsyncCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(a63e109d-ce72-49e2-ba98-e845f5ee1666),
+@@ -380,6 +387,7 @@ interface IWSDAsyncCallback : IUnknown
+ //  IWSDMetadataExchange Interface
+ //  Description: MetadataExchange
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDMetadataExchange, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(06996d57-1d67-4928-9307-3d7833fdb846),
+@@ -403,6 +411,7 @@ interface IWSDMetadataExchange : IUnknown
+ //  IWSDEventingStatus Interface
+ //  Description: Eventing
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDEventingStatus, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(49b17f52-637a-407a-ae99-fbe82a4d38c0),

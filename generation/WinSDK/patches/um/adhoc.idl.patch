@@ -1,0 +1,92 @@
+diff --git a/um/adhoc.idl b/um/adhoc.idl
+index c95243d6..751e0e16 100644
+--- a/um/adhoc.idl
++++ b/um/adhoc.idl
+@@ -7,6 +7,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -125,6 +126,7 @@ typedef [v1_enum] enum tagDOT11_ADHOC_CONNECT_FAIL_REASON
+ // IDot11AdHocManager -- root interface for the home networking configuration
+ //                manager.
+ //
++_Win32_AnnotateInterface_(IDot11AdHocManager, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -183,6 +185,7 @@ interface IDot11AdHocManager : IUnknown
+ // IDot11AdHocManager -- root interface for the home networking configuration
+ //                manager.
+ //
++_Win32_AnnotateInterface_(IDot11AdHocManagerNotificationSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -218,6 +221,7 @@ interface IDot11AdHocManagerNotificationSink : IUnknown
+ // IEnumDot11AdHocNetworks -- Is used to enumerate the scanned Ad-Hoc Connections,
+ //                         which optionally just matches the provided Guid Filter
+ //
++_Win32_AnnotateInterface_(IEnumDot11AdHocNetworks, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -248,6 +252,7 @@ interface IEnumDot11AdHocNetworks : IUnknown
+ //+---------------------------------------------------------------------------
+ // IDot11AdHocNetwork -- 
+ //
++_Win32_AnnotateInterface_(IDot11AdHocNetwork, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -345,6 +350,7 @@ interface IDot11AdHocNetwork : IUnknown
+ //+---------------------------------------------------------------------------
+ // IDot11AdHocNetworkNotificationSink -- 
+ //
++_Win32_AnnotateInterface_(IDot11AdHocNetworkNotificationSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -366,6 +372,7 @@ interface IDot11AdHocNetworkNotificationSink : IUnknown
+ // IDot11AdHocInterface
+ //
+ //
++_Win32_AnnotateInterface_(IDot11AdHocInterface, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -420,6 +427,7 @@ interface IDot11AdHocInterface : IUnknown
+ // IEnumDot11AdHocInterfaces
+ //
+ //
++_Win32_AnnotateInterface_(IEnumDot11AdHocInterfaces, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -451,6 +459,7 @@ interface IEnumDot11AdHocInterfaces : IUnknown
+ // IEnumDot11InterfaceSecuritySettings
+ //
+ //
++_Win32_AnnotateInterface_(IEnumDot11AdHocSecuritySettings, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -482,6 +491,7 @@ IEnumDot11AdHocSecuritySettings : IUnknown
+ // IDot11AdHocSecuritySettings
+ //
+ //
++_Win32_AnnotateInterface_(IDot11AdHocSecuritySettings, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -503,6 +513,7 @@ interface IDot11AdHocSecuritySettings : IUnknown
+ // IDot11AdHocInterfaceNotificationSink
+ //
+ //
++_Win32_AnnotateInterface_(IDot11AdHocInterfaceNotificationSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,

@@ -1,0 +1,60 @@
+diff --git a/um/wsddisco.idl b/um/wsddisco.idl
+index d83a8ecb..310cccd6 100644
+--- a/um/wsddisco.idl
++++ b/um/wsddisco.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -54,6 +55,7 @@ cpp_quote("#endif")
+ //  IWSDiscoveryProvider Interface
+ //  Description: Defines the behavior of the discovery provider
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDiscoveryProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8FFC8E55-F0EB-480F-88B7-B435DD281D45),
+@@ -95,6 +97,7 @@ interface IWSDiscoveryProvider : IUnknown
+ //  Description: Defines the behavior of the sink attached to 
+ //               the discovery provider
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDiscoveryProviderNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(73ee3ced-b6e6-4329-a546-3e8ad46563d2),
+@@ -123,6 +126,7 @@ interface IWSDiscoveryProviderNotify : IUnknown
+ //  IWSDiscoveredService Interface
+ //  Description: Encapsulates information about a discovered service
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDiscoveredService, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(4BAD8A3B-B374-4420-9632-AAC945B374AA),
+@@ -186,6 +190,7 @@ cpp_quote("#endif")
+ //  IWSDiscoveryPublisher Interface
+ //  Description: Defines the behavior of the discovery publisher
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDiscoveryPublisher, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(AE01E1A8-3FF9-4148-8116-057CC616FE13),
+@@ -310,6 +315,7 @@ interface IWSDiscoveryPublisher : IUnknown
+ //  Description: Defines the behavior of the sink attached to the 
+ //               discovery publisher
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDiscoveryPublisherNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e67651b0-337a-4b3c-9758-733388568251),
+@@ -333,6 +339,7 @@ interface IWSDiscoveryPublisherNotify : IUnknown
+ //  IWSDScopeMatchingRule Interface
+ //  Description: Defines an interface for new scope matching rules
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDScopeMatchingRule, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fcafe424-fef5-481a-bd9f-33ce0574256f),

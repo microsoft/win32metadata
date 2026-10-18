@@ -1,0 +1,84 @@
+diff --git a/um/workspaceruntime.idl b/um/workspaceruntime.idl
+index 466ab5b0..d4a958e0 100644
+--- a/um/workspaceruntime.idl
++++ b/um/workspaceruntime.idl
+@@ -4,6 +4,7 @@
+ // This file will be processed by the MIDL tool to
+ // produce the type library (WorkspaceRuntime.tlb) and marshalling code.
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -16,6 +17,7 @@ cpp_quote( "#define WKS_FLAG_PASSWORD_ENCRYPTED   2" )
+ cpp_quote( "#define WKS_FLAG_CREDS_AUTHENTICATED  4" )
+ 
+ 
++_Win32_AnnotateInterface_(IWorkspace, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(B922BBB8-4C55-4FEA-8496-BEB0B44285E5),
+@@ -28,6 +30,7 @@ interface IWorkspace : IUnknown{
+     [helpstring("method GetProcessId")] HRESULT GetProcessId([out,retval] ULONG* pulProcessId);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspace2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(96D8D7CF-783E-4286-834C-EBC0E95F783C),
+@@ -45,6 +48,7 @@ interface IWorkspace2 : IWorkspace{
+         [in] SAFEARRAY(BSTR) psaParams);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspace3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(1BECBE4A-D654-423B-AFEB-BE8D532C13C6),
+@@ -68,6 +72,7 @@ interface IWorkspace3 : IWorkspace2{
+         [in] BSTR bstrRefreshToken);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspaceRegistration, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(B922BBB8-4C55-4FEA-8496-BEB0B44285E6),
+@@ -80,6 +85,7 @@ interface IWorkspaceRegistration : IUnknown{
+     [helpstring("method RemoveResource")] HRESULT RemoveResource([in] DWORD dwCookieConnection);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspaceRegistration2, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(CF59F654-39BB-44D8-94D0-4635728957E9),
+@@ -93,6 +99,7 @@ interface IWorkspaceRegistration2 : IWorkspaceRegistration{
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IWorkspaceScriptable, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(EFEA49A2-DDA5-429D-8F42-B23B92C4C347),
+@@ -111,6 +118,7 @@ interface IWorkspaceScriptable : IDispatch{
+     [id(7), helpstring("method DisconnectWorkspaceByFriendlyName")] HRESULT DisconnectWorkspaceByFriendlyName([in] BSTR bstrWorkspaceFriendlyName);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspaceScriptable2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(EFEA49A2-DDA5-429D-8F42-B33BA2C4C348),
+@@ -139,6 +147,7 @@ interface IWorkspaceScriptable2 : IWorkspaceScriptable
+         [in] BSTR bstrWorkspaceFriendlyName);
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspaceScriptable3, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(531E6512-2CBF-4BD2-80A5-D90A71636A9A),
+@@ -164,6 +173,7 @@ interface IWorkspaceScriptable3 : IWorkspaceScriptable2
+         [in] GUID correlationId);    
+ };
+ 
++_Win32_AnnotateInterface_(IWorkspaceReportMessage, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(a7c06739-500f-4e8c-99a8-2bd6955899eb),        

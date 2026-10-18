@@ -1,0 +1,13 @@
+diff --git a/um/dwrite.h b/um/dwrite.h
+index 08c3cf50..da4b2df3 100644
+--- a/um/dwrite.h
++++ b/um/dwrite.h
+@@ -5120,7 +5120,7 @@ interface DWRITE_DECLARE_INTERFACE("b859ee5a-d838-4b5b-a2e8-1adc7d93db48") IDWri
+ /// from the rest of the process components. In such cases, it is recommended to use an isolated factory for the sandboxed
+ /// component.
+ /// </remarks>
+-EXTERN_C HRESULT DWRITE_EXPORT DWriteCreateFactory(
++EXTERN_C _Win32_SupportedOS_Windows7_ HRESULT DWRITE_EXPORT DWriteCreateFactory(
+     _In_ DWRITE_FACTORY_TYPE factoryType,
+     _In_ REFIID iid,
+     _COM_Outptr_ IUnknown **factory

@@ -1,0 +1,76 @@
+diff --git a/um/mfsharingengine.idl b/um/mfsharingengine.idl
+index 172b7f73..1bacab78 100644
+--- a/um/mfsharingengine.idl
++++ b/um/mfsharingengine.idl
+@@ -6,6 +6,7 @@
+ //*@@@---@@@@******************************************************************
+ //
+ 
++#include <sal.h>
+ import "MFMediaEngine.idl";
+ import "inspectable.idl";
+ 
+@@ -56,6 +57,7 @@ typedef enum MF_MEDIA_SHARING_ENGINE_EVENT
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSharingEngineClassFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(2BA61F92-8305-413B-9733-FAF15F259384),
+@@ -78,6 +80,7 @@ interface IMFSharingEngineClassFactory : IUnknown
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaSharingEngine, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(8D3CE1BF-2367-40E0-9EEE-40D377CC1B46),
+@@ -142,6 +145,7 @@ cpp_quote("0x57dc1e95, 0xd252, 0x43fa, 0x9b, 0xbc, 0x18, 0x0, 0x70, 0xee, 0xfe,
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaSharingEngineClassFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(524D2BC4-B2B1-4FE5-8FAC-FA4E4512B4E0),
+@@ -172,6 +176,7 @@ cpp_quote( "EXTERN_GUID(CLSID_MFMediaSharingEngineClassFactory, 0xf8e307fb, 0x6d
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFImageSharingEngine, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(CFA0AE8E-7E1C-44D2-AE68-FC4C148A6354),
+@@ -194,6 +199,7 @@ interface IMFImageSharingEngine : IUnknown
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFImageSharingEngineClassFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(1FC55727-A7FB-4FC8-83AE-8AF024990AF1),
+@@ -242,6 +248,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PLAYTO_SOURCE_CREATEFLAGS)")
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IPlayToControl, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(607574EB-F4B6-45C1-B08C-CB715122901D),
+@@ -262,6 +269,7 @@ interface IPlayToControl : IUnknown
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IPlayToControlWithCapabilities, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(AA9DD80F-C50A-4220-91C1-332287F82A34),
+@@ -280,6 +288,7 @@ interface IPlayToControlWithCapabilities : IPlayToControl
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IPlayToSourceClassFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(842B32A3-9B9B-4D1C-B3F3-49193248A554),
