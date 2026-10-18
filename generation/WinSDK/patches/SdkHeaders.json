@@ -3513,6 +3513,12 @@
       "sourceSha256": "D9754B14386E6B31A2FED882B7D1ADF7EBA6DF0D8C8545DE50D1A0EAA72DDD7D",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\mpegtype.h",
       "sdkSha256": "D9754B14386E6B31A2FED882B7D1ADF7EBA6DF0D8C8545DE50D1A0EAA72DDD7D"
+    },
+    {
+      "path": "um\\comadmin.h",
+      "sourceSha256": "6587948F79A11D30D46E5AA0A8392C73724C8BD71E14830CD6AE98C32EE2D004",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\comadmin.idl",
+      "sdkSha256": "8DA1E2C3E8964EB882BA8562B86AE9868CE8A6F3992979046F00A39789C9FD3B"
     }
   ],
   "midl": {
@@ -5185,6 +5191,11 @@
         "path": "um\\cluadmex.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\cluadmex.idl",
         "sdkSha256": "A959A87AEB3F55EFE4B6470F65EF0E5DADF4F53BA49690612F4AE1E71BB1DFF3"
+      },
+      {
+        "path": "um\\comadmin.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\comadmin.idl",
+        "sdkSha256": "8DA1E2C3E8964EB882BA8562B86AE9868CE8A6F3992979046F00A39789C9FD3B"
       }
     ],
     "outputs": [
@@ -6075,6 +6086,10 @@
       {
         "source": "um\\cluadmex.idl",
         "path": "um\\cluadmex.h"
+      },
+      {
+        "source": "um\\comadmin.idl",
+        "path": "um\\comadmin.h"
       }
     ]
   },
@@ -6846,6 +6861,7 @@
     "um\\vsmgmt.idl.patch",
     "um\\vsprov.idl.patch",
     "um\\cluadmex.idl.patch",
-    "um\\mpegtype.h.patch"
+    "um\\mpegtype.h.patch",
+    "um\\comadmin.idl.patch"
   ]
 }
