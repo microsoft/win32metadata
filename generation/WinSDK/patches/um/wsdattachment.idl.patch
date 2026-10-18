@@ -1,5 +1,5 @@
 diff --git a/um/wsdattachment.idl b/um/wsdattachment.idl
-index 20635cd7..8972ed09 100644
+index 20635cd7..d21f613c 100644
 --- a/um/wsdattachment.idl
 +++ b/um/wsdattachment.idl
 @@ -11,6 +11,7 @@
@@ -10,7 +10,15 @@ index 20635cd7..8972ed09 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -33,6 +34,7 @@ cpp_quote("    _Outptr_ IWSDOutboundAttachment** ppAttachment);")
+@@ -26,13 +27,14 @@ interface IWSDOutboundAttachment;
+ interface IWSDInboundAttachment;
+ 
+ cpp_quote("HRESULT WINAPI")
+-cpp_quote("WSDCreateOutboundAttachment(")
++cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateOutboundAttachment(")
+ cpp_quote("    _Outptr_ IWSDOutboundAttachment** ppAttachment);")
+ 
+ //+-------------------------------------------------------------------------
  //  IWSDAttachment Interface
  //  Description: Base interface for inbound and outbound attachments
  //--------------------------------------------------------------------------

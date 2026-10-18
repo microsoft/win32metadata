@@ -85,7 +85,7 @@ function Get-AttributeStart([string]$Mask, [int]$Offset, [Collections.Generic.Ha
 }
 
 function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [string]$Name) {
-    $returnType = '(?:STDAPI(?:_\([A-Za-z_]\w*\))?|(?:EXTERN_C\s+)?HRESULT\s+(?:STDAPICALLTYPE|STDMETHODCALLTYPE|WINAPI))'
+    $returnType = '(?:(?:SH)?STDAPI(?:_\([A-Za-z_]\w*\))?|(?:EXTERN_C\s+)?(?:HRESULT|DWORD)\s+(?:STDAPICALLTYPE|STDMETHODCALLTYPE|WINAPI))'
     for ($i = 0; $i -lt $Quotes.Count; $i++) {
         $quote = $Quotes[$i]
         if ($Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(') { continue }
@@ -93,14 +93,17 @@ function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [s
         $nameMatch = [regex]::Match($body, "(?<![A-Za-z_0-9])$([regex]::Escape($Name))\s*\(")
         if (!$nameMatch.Success) { continue }
         $prefix = $body.Substring(0, $nameMatch.Index)
-        if (!$prefix.Trim()) {
-            if (!$i) { continue }
-            $previous = $Quotes[$i - 1]
-            if ($Text.Substring($previous.Index + $previous.Length, $quote.Index - $previous.Index - $previous.Length) -notmatch '^\s*$' -or
+        $prefixQuote = $i
+        while ($prefix -notmatch "^\s*$returnType\s+$" -and $prefixQuote -gt 0) {
+            $previous = $Quotes[$prefixQuote - 1]
+            $next = $Quotes[$prefixQuote]
+            if ($Text.Substring($previous.Index + $previous.Length, $next.Index - $previous.Index - $previous.Length) -notmatch '^\s*$' -or
                 $Mask.Substring($previous.Index, $previous.Length) -notmatch '^\s*cpp_quote\s*\(' -or
-                $previous.Groups['code'].Value -notmatch "^\s*$returnType\s*$") { continue }
+                $prefix -match '[;{}()]') { break }
+            $prefix = $previous.Groups['code'].Value + ' ' + $prefix
+            $prefixQuote--
         }
-        elseif ($prefix -notmatch "^\s*$returnType\s+$") { continue }
+        if ($prefix -notmatch "^\s*$returnType\s+$") { continue }
         $prototype = $body.Substring($nameMatch.Index)
         $last = $quote
         $j = $i + 1
@@ -126,7 +129,7 @@ function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [s
                         offset = $quote.Groups['code'].Index + $nameMatch.Index
                         afterParametersOffset = $last.Groups['code'].Index + $rawClose -
                             ($prototype.Length - $last.Groups['code'].Length) + 1
-                        start = $quote.Index
+                        start = $Quotes[$prefixQuote].Index
                         end = $last.Index + $last.Length
                     }
                 }
@@ -139,6 +142,87 @@ function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [s
             $prototype += "`n" + $next.Groups['code'].Value
             $last = $next
             $j++
+        }
+    }
+}
+
+function Get-ClosingDelimiter([string]$Mask, [int]$Start, [char]$Open, [char]$Close) {
+    $depth = 1
+    for ($cursor = $Start + 1; $cursor -lt $Mask.Length; $cursor++) {
+        if ($Mask[$cursor] -eq $Open) { $depth++ }
+        elseif ($Mask[$cursor] -eq $Close) {
+            $depth--
+            if (!$depth) { return $cursor }
+        }
+    }
+    -1
+}
+
+function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [string]$Name) {
+    $parts = $Name -split '::'
+    if ($parts.Count -notin @(2, 3)) { return }
+    foreach ($definition in @($Definitions | Where-Object { $_.Groups['name'].Value -ceq $parts[0] })) {
+        $open = $definition.Index + $definition.Length - 1
+        $close = Get-ClosingDelimiter $Mask $open '{' '}'
+        if ($close -lt 0) { continue }
+        $terminator = [regex]::Match($Mask.Substring($close + 1), '^\s*;')
+        $end = $close + 1
+        if ($terminator.Success) { $end += $terminator.Length }
+        $lineEnd = $Text.IndexOf("`n", $end)
+        if ($lineEnd -lt 0) { $lineEnd = $Text.Length }
+        if ($Mask.Substring($end, $lineEnd - $end).Trim()) { continue }
+        $body = $Mask.Substring($open + 1, $close - $open - 1)
+        foreach ($method in [regex]::Matches($body, "\b$([regex]::Escape($parts[1]))\s*\(")) {
+            $methodOffset = $open + 1 + $method.Index
+            $preceding = $Mask.Substring($open + 1, $methodOffset - $open - 1)
+            if ([regex]::Matches($preceding, '\{').Count -ne [regex]::Matches($preceding, '\}').Count -or
+                $preceding -notmatch '[A-Za-z_]\w*\s+$') { continue }
+            $parametersOpen = $methodOffset + $method.Length - 1
+            $parametersClose = Get-ClosingDelimiter $Mask $parametersOpen '(' ')'
+            if ($parametersClose -lt 0 -or $parametersClose -ge $close -or
+                $Mask.Substring($parametersClose + 1, $close - $parametersClose - 1) -notmatch '^\s*;') { continue }
+            if ($parts.Count -eq 2) {
+                [pscustomobject]@{
+                    offset = $methodOffset; start = $methodOffset; end = $parametersClose + 1
+                    insertionOffset = [Math]::Min($Text.Length, $lineEnd + 1)
+                    needsNewline = $lineEnd -eq $Text.Length
+                    nativeRetval = $false
+                }
+                continue
+            }
+            $round = 0
+            $square = 0
+            $start = $parametersOpen + 1
+            for ($cursor = $start; $cursor -le $parametersClose; $cursor++) {
+                $character = $Mask[$cursor]
+                if ($cursor -eq $parametersClose -or ($character -eq ',' -and !$round -and !$square)) {
+                    $parameter = $Mask.Substring($start, $cursor - $start)
+                    $match = [regex]::Match($parameter,
+                        "\b(?<name>$([regex]::Escape($parts[2])))\s*(?:\[[^\]]*\]\s*)*$")
+                    if ($match.Success) {
+                        $parameterText = $Text.Substring($start, $cursor - $start)
+                        $annotations = @([regex]::Matches($parameterText, '\bannotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)') |
+                            Where-Object { $Mask.Substring($start + $_.Index, 'annotation'.Length) -ceq 'annotation' })
+                        $annotation = if ($annotations.Count -eq 1) { $annotations[0].Groups['value'] }
+                        [pscustomobject]@{
+                            offset = $start + $match.Groups['name'].Index; start = $start; end = $cursor
+                            insertionOffset = if ($annotation) { $start + $annotation.Index + $annotation.Length }
+                                else { $start + [regex]::Match($parameter, '\S').Index }
+                            needsNewline = $false
+                            annotationCount = $annotations.Count
+                            appendToAnnotation = $null -ne $annotation
+                            nativeRetval = $parameter -match '\[[^\]]*\bretval\b[^\]]*\]' -or
+                                ($annotation -and $annotation.Value -match '\b_(?:Out|COM_Outptr)_retval_')
+                        }
+                    }
+                    $start = $cursor + 1
+                    continue
+                }
+                if ($character -eq '(') { $round++ }
+                elseif ($character -eq ')') { $round-- }
+                elseif ($character -eq '[') { $square++ }
+                elseif ($character -eq ']') { $square-- }
+            }
         }
     }
 }
@@ -256,7 +340,63 @@ foreach ($owner in $owners) {
         $declarations = @($definitions | Where-Object { $_.Groups['name'].Value -ceq $fact.symbol })
         $functions = @(Find-QuotedFunction $text $mask $quotes $fact.symbol)
         $reason = $null
-        if ($fact.category -ne 'supportedOS') { $reason = 'not-an-interface-SupportedOS-fact-native-function-or-method-review-required' }
+        $methodAnnotation = if ($fact.category -ceq 'declaration-attribute-override' -and
+            $fact.value -ceq "$($fact.symbol)=[RetVal]") { '_Win32_Retval_' }
+        elseif ($fact.category -ceq 'declaration-attribute-override' -and
+            $fact.value -cin @("$($fact.symbol)=[CanReturnMultipleSuccessValues]", "$($fact.symbol)=[CanReturnErrorsAsSuccess]")) {
+            '_Win32_PreserveResult_'
+        }
+        if ($methodAnnotation) {
+            $parts = $fact.symbol -split '::'
+            $expectedParts = if ($methodAnnotation -ceq '_Win32_Retval_') { 3 } else { 2 }
+            $methods = @(Find-IdlMethod $text $mask $definitions $fact.symbol)
+            if ($parts.Count -ne $expectedParts -or $methods.Count -ne 1) {
+                $dispositions.Add([ordered]@{
+                    fact = $fact; disposition = 'retained-legacy'
+                    reason = "requires-one-original-interface-method-or-parameter-found-$($methods.Count)"
+                })
+                continue
+            }
+            $method = $methods[0]
+            if ($method.nativeRetval) {
+                $dispositions.Add([ordered]@{
+                    fact = $fact; disposition = 'retained-legacy'
+                    reason = 'native-retval-already-present-no-new-source-conversion-credit'
+                })
+                continue
+            }
+            if ($expectedParts -eq 3 -and $method.annotationCount -gt 1) {
+                $dispositions.Add([ordered]@{
+                    fact = $fact; disposition = 'retained-legacy'
+                    reason = "requires-one-existing-native-parameter-annotation-found-$($method.annotationCount)"
+                })
+                continue
+            }
+            $annotation = if ($expectedParts -eq 3) {
+                    if ($method.appendToAnnotation) { " $methodAnnotation" } else { "[annotation(`"$methodAnnotation`")] " }
+                }
+                else {
+                    $(if ($method.needsNewline) { $newline }) +
+                        "_Win32_AnnotateMethod_($($fact.symbol), $methodAnnotation)$newline"
+                }
+            $insertions.Add([pscustomobject]@{ offset = $method.insertionOffset; text = $annotation })
+            $dispositions.Add([ordered]@{
+                fact = $fact; disposition = 'authored-original-idl'; macro = $methodAnnotation
+                declaration = [ordered]@{
+                    name = $parts[-1]; qualifiedName = $fact.symbol
+                    kind = if ($expectedParts -eq 3) { 'ParmVarDecl' } else { 'CXXMethodDecl' }
+                    sourceForm = 'native-idl-interface-member'; file = $relative
+                    line = 1 + [regex]::Matches($text.Substring(0, $method.offset), '\n').Count
+                    offset = $method.offset; start = $method.start; end = $method.end
+                    isDefinition = $false; sourceSha256 = Get-Hash $bytes
+                }
+            })
+            continue
+        }
+        $macro = $null
+        if ($fact.category -ceq 'setLastError' -and $fact.value -ceq $fact.symbol -and
+            $functions.Count -eq 1 -and !$declarations.Count) { $macro = '_Win32_SetLastError_' }
+        elseif ($fact.category -ne 'supportedOS') { $reason = 'not-an-interface-SupportedOS-fact-native-function-or-method-review-required' }
         elseif (!$payload.Success -or $payload.Groups[1].Value -cne $fact.symbol) { $reason = 'unsupported-or-inconsistent-authored-payload' }
         elseif (!$macros.ContainsKey($payload.Groups[2].Value)) { $reason = 'payload-not-in-reviewed-public-OS-vocabulary' }
         elseif ($declarations.Count + $functions.Count -ne 1) { $reason = "requires-one-original-interface-or-quoted-function-found-$($declarations.Count + $functions.Count)" }
@@ -265,7 +405,7 @@ foreach ($owner in $owners) {
             $dispositions.Add([ordered]@{ fact = $fact; disposition = 'retained-legacy'; reason = $reason })
             continue
         }
-        $macro = $macros[$payload.Groups[2].Value]
+        if (!$macro) { $macro = $macros[$payload.Groups[2].Value] }
         if ($functions.Count) {
             $function = $functions[0]
             $insertion = $null

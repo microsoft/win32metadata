@@ -2872,7 +2872,8 @@ void NetworkBroadSourceSalProbe(
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
-            string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null)
+            string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null,
+            bool includeCallableOwners = false)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
@@ -2968,6 +2969,8 @@ void NetworkBroadSourceSalProbe(
                     }
                     childOwner = owner + name + "::";
                 }
+                else if (includeCallableOwners && kind is CX_DeclKind.CX_DeclKind_Function or CX_DeclKind.CX_DeclKind_CXXMethod)
+                    childOwner = owner + name + "::";
                 if (headers.Contains(header, StringComparer.OrdinalIgnoreCase))
                 {
                     if (kind is CX_DeclKind.CX_DeclKind_Function or CX_DeclKind.CX_DeclKind_CXXMethod or

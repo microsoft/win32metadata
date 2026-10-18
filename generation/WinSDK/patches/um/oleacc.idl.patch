@@ -1,5 +1,5 @@
 diff --git a/um/oleacc.idl b/um/oleacc.idl
-index 1d722fd8..32cda6b1 100644
+index 1d722fd8..5cfa4459 100644
 --- a/um/oleacc.idl
 +++ b/um/oleacc.idl
 @@ -12,6 +12,7 @@
@@ -31,8 +31,8 @@ index 1d722fd8..32cda6b1 100644
  cpp_quote("")
 -cpp_quote("STDAPI_(UINT)   GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
 -cpp_quote("STDAPI_(UINT)   GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SupportedOS_Windows2000_ GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SupportedOS_Windows2000_ GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
++cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetRoleTextA(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPSTR lpszRole, _In_ UINT cchRoleMax);")
++cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetRoleTextW(_In_ DWORD lRole, _Out_writes_opt_(cchRoleMax) LPWSTR lpszRole, _In_ UINT cchRoleMax);")
  cpp_quote("")
  cpp_quote("#ifdef UNICODE")
  cpp_quote("#define GetRoleText     GetRoleTextW")
@@ -42,8 +42,8 @@ index 1d722fd8..32cda6b1 100644
  cpp_quote("")
 -cpp_quote("STDAPI_(UINT)   GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
 -cpp_quote("STDAPI_(UINT)   GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SupportedOS_Windows2000_ GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
-+cpp_quote("STDAPI_(UINT)   _Win32_SupportedOS_Windows2000_ GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
++cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetStateTextA(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPSTR lpszState, _In_ UINT cchState);")
++cpp_quote("STDAPI_(UINT)   _Win32_SetLastError_ _Win32_SupportedOS_Windows2000_ GetStateTextW(_In_ DWORD lStateBit, _Out_writes_opt_(cchState) LPWSTR lpszState, _In_ UINT cchState);")
  cpp_quote("#ifdef UNICODE")
  cpp_quote("#define GetStateText    GetStateTextW")
  cpp_quote("#else")

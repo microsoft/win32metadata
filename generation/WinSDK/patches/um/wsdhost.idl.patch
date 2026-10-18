@@ -1,5 +1,5 @@
 diff --git a/um/wsdhost.idl b/um/wsdhost.idl
-index 95ea72e0..f0da4e4b 100644
+index 95ea72e0..81e4abf8 100644
 --- a/um/wsdhost.idl
 +++ b/um/wsdhost.idl
 @@ -11,6 +11,7 @@
@@ -10,6 +10,31 @@ index 95ea72e0..f0da4e4b 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
+@@ -35,13 +36,13 @@ interface IWSDDeviceHostNotify;
+ interface IWSDServiceMessaging;
+ 
+ cpp_quote("HRESULT WINAPI")
+-cpp_quote("WSDCreateDeviceHost(")
++cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDeviceHost(")
+ cpp_quote("    _In_ LPCWSTR pszLocalId,")
+ cpp_quote("    IWSDXMLContext* pContext,")
+ cpp_quote("    _Outptr_ IWSDDeviceHost** ppDeviceHost);")
+ 
+ cpp_quote("HRESULT WINAPI")
+-cpp_quote("WSDCreateDeviceHostAdvanced(")
++cpp_quote("_Win32_SupportedOS_WindowsVista_ WSDCreateDeviceHostAdvanced(")
+ cpp_quote("    _In_ LPCWSTR pszLocalId,")
+ cpp_quote("    IWSDXMLContext* pContext,")
+ cpp_quote("    _In_reads_opt_(dwHostAddressCount) IWSDAddress** ppHostAddresses,")
+@@ -50,7 +51,7 @@ cpp_quote("    _Outptr_ IWSDDeviceHost** ppDeviceHost);")
+ 
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
+ cpp_quote("HRESULT WINAPI")
+-cpp_quote("WSDCreateDeviceHost2(")
++cpp_quote("_Win32_SupportedOS_Windows7_ WSDCreateDeviceHost2(")
+ cpp_quote("    _In_ LPCWSTR pszLocalId,")
+ cpp_quote("    IWSDXMLContext* pContext,")
+ cpp_quote("    _In_reads_opt_(dwConfigParamCount) WSD_CONFIG_PARAM* pConfigParams,")
 @@ -62,6 +63,7 @@ cpp_quote("#endif")
  //  IWSDDeviceHost Interface
  //  Description: Host-side representation of devices

@@ -71,14 +71,10 @@ GetPrivateProfileStringW
 GetProcessWorkingSetSize
 getprotobyname
 getprotobynumber
-GetRoleTextA
-GetRoleTextW
 getservbyname
 getservbyport
 getsockname
 getsockopt
-GetStateTextA
-GetStateTextW
 GetTempFileName
 GetTimestampForLoadedLibrary
 GetWindow

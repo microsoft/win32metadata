@@ -109,6 +109,116 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void UnsupportedOrNativeEquivalentMethodFactsRemainExactLegacyDebt()
+        {
+            const string source = "interface IAmbiguous : IUnknown {\n" +
+                "HRESULT Read([out] long* result);\nHRESULT Read([out] long* result);\n};\n" +
+                "interface IExisting : IUnknown {\nHRESULT Read([out, retval] long* result);\n" +
+                "HRESULT NativeInline([out, annotation(\"_Out_retval_\")] long* result);\n" +
+                "HRESULT AmbiguousInline([out, annotation(\"_Out_\")][annotation(\"_Out_\")] long* result);\n};\n" +
+                "interface IOnlyForward;\n" +
+                "cpp_quote(\"interface IQuoted : IUnknown { HRESULT Read(long* result); };\")\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            object[] facts =
+            {
+                new { category = "declaration-attribute-override", symbol = "IAmbiguous::Read",
+                    value = "IAmbiguous::Read=[CanReturnMultipleSuccessValues]" },
+                new { category = "declaration-attribute-override", symbol = "IAmbiguous::Read::result",
+                    value = "IAmbiguous::Read::result=[RetVal]" },
+                new { category = "declaration-attribute-override", symbol = "IExisting::Read::result",
+                    value = "IExisting::Read::result=[RetVal]" },
+                new { category = "declaration-attribute-override", symbol = "IExisting::NativeInline::result",
+                    value = "IExisting::NativeInline::result=[RetVal]" },
+                new { category = "declaration-attribute-override", symbol = "IExisting::AmbiguousInline::result",
+                    value = "IExisting::AmbiguousInline::result=[RetVal]" },
+                new { category = "declaration-attribute-override", symbol = "IOnlyForward::Read",
+                    value = "IOnlyForward::Read=[CanReturnErrorsAsSuccess]" },
+                new { category = "declaration-attribute-override", symbol = "IQuoted::Read",
+                    value = "IQuoted::Read=[CanReturnMultipleSuccessValues]" },
+                new { category = "declaration-attribute-override", symbol = "IExisting::Read::missing",
+                    value = "IExisting::Read::missing=[RetVal]" },
+            };
+            fixture.WriteMap(facts);
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(8, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.Contains("native-retval-already-present", File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            fixture.WriteMap(new[]
+            {
+                new { category = "declaration-attribute-override", symbol = "IExisting::Read::result",
+                    value = "IExisting::Read::result=[ComOutPtr]" },
+            });
+            var unsupported = fixture.Run();
+            Assert.Equal(0, unsupported.ExitCode);
+            using var unsupportedReport = JsonDocument.Parse(File.ReadAllText(Path.Combine(unsupported.OutputDirectory, "report.json")));
+            Assert.Equal(1, unsupportedReport.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+        }
+
+        [Theory]
+        [InlineData("\r\n", true, false)]
+        [InlineData("\n", true, false)]
+        [InlineData("\r\n", false, false)]
+        [InlineData("\n", false, false)]
+        [InlineData("\r\n", true, true)]
+        [InlineData("\n", true, true)]
+        [InlineData("\r\n", false, true)]
+        [InlineData("\n", false, true)]
+        public void NativeMethodParameterAndLastErrorFactsPreserveAllOriginalSourceBytes(
+            string newline, bool terminator, bool inlineAnnotation)
+        {
+            string parameterAttributes = inlineAnnotation ? "[out, annotation(\"_Out_\")]" : "[out]";
+            string source = ("#ifndef SAMPLE_IDL\n#define SAMPLE_IDL\n" +
+                "interface IExisting : IUnknown {\n" +
+                "HRESULT Read([in, size_is(, count)] long** values, [in] long count,\n" +
+                "    " + parameterAttributes + " long* result);\n}" + (terminator ? ";" : "") + " // native definition\n" +
+                "cpp_quote(\"STDAPI_(UINT) Exported(_In_ long value);\")\n" +
+                "cpp_quote(\"SHSTDAPI ShellNative(void);\")\n" +
+                "cpp_quote(\"DWORD\")\ncpp_quote(\"WINAPI\")\ncpp_quote(\"NetworkNative(void);\")\n" +
+                "#endif\n").Replace("\n", newline, StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            object[] facts =
+            {
+                Floor("IExisting"),
+                new { category = "declaration-attribute-override", symbol = "IExisting::Read",
+                    value = "IExisting::Read=[CanReturnMultipleSuccessValues]" },
+                new { category = "declaration-attribute-override", symbol = "IExisting::Read::result",
+                    value = "IExisting::Read::result=[RetVal]" },
+                new { category = "setLastError", symbol = "Exported", value = "Exported" },
+                Floor("ShellNative"), Floor("NetworkNative"),
+            };
+            fixture.WriteMap(facts);
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            const string method = "_Win32_AnnotateMethod_(IExisting::Read, _Win32_PreserveResult_)";
+            Assert.Contains("}" + (terminator ? ";" : "") + " // native definition" + newline + method + newline, authored);
+            Assert.Contains(inlineAnnotation ? "[out, annotation(\"_Out_ _Win32_Retval_\")] long* result" :
+                "[annotation(\"_Win32_Retval_\")] [out] long* result", authored);
+            Assert.Contains("STDAPI_(UINT) _Win32_SetLastError_ Exported", authored);
+            Assert.Contains("SHSTDAPI _Win32_SupportedOS_Windows7_ ShellNative", authored);
+            Assert.Contains("cpp_quote(\"WINAPI\")" + newline +
+                "cpp_quote(\"_Win32_SupportedOS_Windows7_ NetworkNative", authored);
+            Assert.Equal(source, authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
+                .Replace("_Win32_AnnotateInterface_(IExisting, _Win32_SupportedOS_Windows7_)" + newline, "", StringComparison.Ordinal)
+                .Replace(method + newline, "", StringComparison.Ordinal)
+                .Replace(inlineAnnotation ? " _Win32_Retval_" : "[annotation(\"_Win32_Retval_\")] ", "", StringComparison.Ordinal)
+                .Replace("_Win32_SetLastError_ ", "", StringComparison.Ordinal)
+                .Replace("_Win32_SupportedOS_Windows7_ ", "", StringComparison.Ordinal));
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(6, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(0, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            var application = Fixture.Command("git", fixture.RepositoryRoot, "-c",
+                "core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol", "apply", "--unsafe-paths", "-p1",
+                "--directory=" + fixture.Sdk, "--whitespace=error-all", "--check", "--",
+                Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
+            Assert.True(application.ExitCode == 0, application.Error);
+        }
+
+        [Fact]
         public void AuthoringIsRepeatableAndNeverOverwritesAPublishedResult()
         {
             using var fixture = new Fixture(Encoding.ASCII.GetBytes("interface IMigrated : IUnknown {};\r\n"));
@@ -513,6 +623,388 @@ namespace Win32MetadataScraperTests
                                 architecture.Item2, mode.Item1, mode.Item2, enabled };
         }
 
+        [MigrationTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
+            "WINHTTP_NATIVE_TOOLSET_INCLUDE", "WIN32METADATA_ORIGINAL_MEMBER_REPORT",
+            "WIN32METADATA_ORIGINAL_MEMBER_BASE_REPORT")]
+        [MemberData(nameof(PublishedMemberNativeSamples))]
+        public void PublishedNativeMembersPreservePartitionAbiSalAndExactAnnotationPayloads(
+            string partition, string architecture, string target)
+        {
+            using var current = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_REPORT")));
+            using var baseline = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_BASE_REPORT")));
+            var owners = Owners(current).ToArray();
+            string[] headers = owners.SelectMany(owner => owner.GetProperty("generatedHeaders").EnumerateArray())
+                .Select(value => Path.GetFileName(value.GetString())).Distinct(StringComparer.OrdinalIgnoreCase).ToArray();
+            var newFacts = owners.SelectMany(owner => owner.GetProperty("dispositions").EnumerateArray()).ToArray();
+            var originalFacts = Owners(baseline).SelectMany(owner =>
+                owner.GetProperty("dispositions").EnumerateArray()).Where(value =>
+                    value.GetProperty("disposition").GetString() == "authored-original-idl").ToArray();
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            string[] before = WinHttpNativeControlTests.Surface(root,
+                Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"), partition, architecture,
+                target, headers, "", metadataEnabled: true, annotations: beforeAnnotations,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, includeCallableOwners: true);
+            string[] after = WinHttpNativeControlTests.Surface(root,
+                Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"), partition, architecture,
+                target, headers, "", metadataEnabled: true, annotations: afterAnnotations,
+                salAnnotations: afterSal, diagnostics: afterDiagnostics, includeCallableOwners: true);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expectedBefore = originalFacts.Select(Fact).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(expectedBefore, beforeAnnotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            string[] carriers = afterAnnotations.Where(value => value.StartsWith("_WIN32META_METHOD_", StringComparison.Ordinal)).ToArray();
+            int methodCount = newFacts.Count(value =>
+                value.GetProperty("declaration").GetProperty("kind").GetString() == "CXXMethodDecl");
+            Assert.Equal(methodCount * 2, carriers.Length);
+            foreach (var carrier in carriers.GroupBy(value => value.Split('|')[0], StringComparer.Ordinal))
+                Assert.Equal(new[] { carrier.Key + "|Method", carrier.Key + "|PreserveResult" },
+                    carrier.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expectedAfter = expectedBefore.Concat(newFacts.Where(value =>
+                value.GetProperty("declaration").GetProperty("kind").GetString() != "CXXMethodDecl").Select(Fact))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(expectedAfter, afterAnnotations.Except(carriers, StringComparer.Ordinal)
+                .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{partition}/{architecture}: {before.Length} unchanged native ABI/value facts, " +
+                $"{beforeSal.Count} unchanged fully qualified SAL facts, {newFacts.Length} exact new contracts; " +
+                $"{methodCount} native method carriers also require the actual normal target assertion.");
+
+            IEnumerable<JsonElement> Owners(JsonDocument document) => document.RootElement.GetProperty("owners").EnumerateArray()
+                .Where(owner => owner.GetProperty("partitionCandidates").EnumerateArray().Any(value => value.GetString() == partition));
+            static string Fact(JsonElement value)
+            {
+                var fact = value.GetProperty("fact");
+                return fact.GetProperty("category").GetString() switch
+                {
+                    "supportedOS" => fact.GetProperty("value").GetString().Replace('=', '|'),
+                    "setLastError" => fact.GetProperty("symbol").GetString() + "|SetLastError",
+                    "declaration-attribute-override" when value.GetProperty("macro").GetString() == "_Win32_Retval_" =>
+                        value.GetProperty("declaration").GetProperty("qualifiedName").GetString() + "|RetVal",
+                    _ => throw new InvalidOperationException("Every raw native payload needs its exact declared contract."),
+                };
+            }
+        }
+
+        public static IEnumerable<object[]> PublishedMemberNativeSamples()
+        {
+            string path = Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_REPORT");
+            if (string.IsNullOrEmpty(path))
+            {
+                yield return new object[] { "Dxgi", "x64", "x86_64-pc-windows-msvc" };
+                yield break;
+            }
+            using var report = JsonDocument.Parse(File.ReadAllText(path));
+            foreach (string partition in report.RootElement.GetProperty("owners").EnumerateArray()
+                .SelectMany(owner => owner.GetProperty("partitionCandidates").EnumerateArray())
+                .Select(value => value.GetString()).Distinct(StringComparer.Ordinal))
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"), ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    yield return new object[] { partition, architecture.Item1, architecture.Item2 };
+        }
+
+        [MigrationTheory("WIN32METADATA_ORIGINAL_MEMBER_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+            "WIN32METADATA_FACTORY_PUBLISHED_OBJ")]
+        [MemberData(nameof(PublishedMemberNormalSamples))]
+        public void ActualNormalNativeMembersHaveExactPayloadsImportsAndCompleteInheritedProjection(
+            string partition, string architecture, int factCount)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_REPORT")));
+            var facts = report.RootElement.GetProperty("owners").EnumerateArray().Where(owner =>
+                owner.GetProperty("partitionCandidates").EnumerateArray().Any(value => value.GetString() == partition))
+                .SelectMany(owner => owner.GetProperty("dispositions").EnumerateArray()).ToArray();
+            Assert.Equal(factCount, facts.Length);
+            string positiveObj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_NORMAL_OBJ");
+            string beforeObj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_PUBLISHED_OBJ");
+            var positive = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(
+                positiveObj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var before = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(
+                beforeObj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var added = new HashSet<SyntaxNode>();
+            var projections = new List<object>();
+            foreach (var disposition in facts)
+            {
+                var fact = disposition.GetProperty("fact");
+                string category = fact.GetProperty("category").GetString();
+                string symbol = fact.GetProperty("symbol").GetString();
+                string kind = disposition.GetProperty("declaration").GetProperty("kind").GetString();
+                string macro = disposition.GetProperty("macro").GetString();
+                var oldTargets = Targets(before, kind, symbol).ToDictionary(Key, StringComparer.Ordinal);
+                var newTargets = Targets(positive, kind, symbol).ToDictionary(Key, StringComparer.Ordinal);
+                Assert.NotEmpty(newTargets);
+                Assert.Equal(oldTargets.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                    newTargets.Keys.OrderBy(value => value, StringComparer.Ordinal));
+                Assert.DoesNotContain(fact.GetProperty("value").GetString(), File.ReadAllLines(Path.Combine(
+                    WinHttpMigrationTests.RepositoryRoot, fact.GetProperty("source").GetString())));
+                foreach (var pair in newTargets)
+                {
+                    var attributes = Attributes(pair.Value).ToArray();
+                    var oldAttributes = Attributes(oldTargets[pair.Key]).ToArray();
+                    projections.Add(new
+                    {
+                        FactId = fact.GetProperty("factId").GetString(), Symbol = symbol,
+                        Declaration = pair.Key, Kind = pair.Value.Kind().ToString(), Macro = macro,
+                    });
+                    if (kind == "FunctionDecl")
+                    {
+                        string library = fact.GetProperty("existingImportLibrary").GetString();
+                        Assert.False(string.IsNullOrEmpty(library));
+                        var import = Assert.Single(attributes.Where(IsImport));
+                        Assert.Equal(library, Assert.IsType<LiteralExpressionSyntax>(
+                            import.ArgumentList.Arguments[0].Expression).Token.ValueText);
+                        if (category == "setLastError")
+                        {
+                            var flag = Assert.Single(import.ArgumentList.Arguments.Where(argument =>
+                                argument.NameEquals?.Name.Identifier.ValueText == "SetLastError"));
+                            Assert.Equal(SyntaxKind.TrueLiteralExpression, flag.Expression.Kind());
+                            Assert.Empty(Assert.Single(oldAttributes.Where(IsImport)).ArgumentList.Arguments.Where(argument =>
+                                argument.NameEquals?.Name.Identifier.ValueText == "SetLastError"));
+                            added.Add(flag);
+                            continue;
+                        }
+                    }
+                    string name = macro switch
+                    {
+                        "_Win32_PreserveResult_" => "global::System.Runtime.InteropServices.PreserveSig",
+                        "_Win32_Retval_" => "global::Windows.Win32.Foundation.Metadata.RetVal",
+                        _ when category == "supportedOS" => "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform",
+                        _ => throw new InvalidOperationException("Unknown native contract projection."),
+                    };
+                    var attribute = Assert.Single(attributes.Where(value => value.Name.ToString() == name));
+                    Assert.Empty(oldAttributes.Where(value => value.Name.ToString() == name));
+                    if (category == "supportedOS")
+                    {
+                        string payload = "SupportedOSPlatform(\"" + Assert.IsType<LiteralExpressionSyntax>(
+                            Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText + "\")";
+                        Assert.Equal(symbol + "=" + payload, fact.GetProperty("value").GetString());
+                    }
+                    var list = Assert.IsType<AttributeListSyntax>(attribute.Parent);
+                    Assert.Single(list.Attributes);
+                    added.Add(list);
+                }
+                this.output.WriteLine($"{symbol}: {newTargets.Count} exact native/derived projection sites.");
+            }
+            string evidenceDirectory = Path.GetDirectoryName(
+                Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_REPORT"));
+            File.WriteAllText(Path.Combine(evidenceDirectory,
+                partition + "." + architecture + "." + Path.GetFileName(positiveObj) + ".projections.json"),
+                JsonSerializer.Serialize(projections));
+            var remaining = positive.RemoveNodes(added, SyntaxRemoveOptions.KeepNoTrivia);
+            var coordinates = new List<object>();
+            if (!SyntaxFactory.AreEquivalent(before, remaining))
+            {
+                var oldTokens = before.DescendantTokens().ToArray();
+                var newTokens = remaining.DescendantTokens().ToArray();
+                var replacements = new Dictionary<SyntaxToken, SyntaxToken>();
+                if (oldTokens.Length == newTokens.Length)
+                {
+                    foreach (var pair in oldTokens.Zip(newTokens).Where(pair => pair.First.Text != pair.Second.Text))
+                    {
+                        const string pattern = @"^__AnonymousRecord_(?<header>.+)_L(?<line>\d+)_C(?<column>\d+)$";
+                        var oldCoordinate = Regex.Match(pair.First.ValueText, pattern);
+                        var newCoordinate = Regex.Match(pair.Second.ValueText, pattern);
+                        if (!pair.First.IsKind(SyntaxKind.StringLiteralToken) ||
+                            !pair.Second.IsKind(SyntaxKind.StringLiteralToken) ||
+                            !oldCoordinate.Success || !newCoordinate.Success)
+                            continue;
+                        Assert.Equal("NativeTypeName", pair.First.Parent.AncestorsAndSelf()
+                            .OfType<AttributeSyntax>().Single().Name.ToString());
+                        Assert.Equal("NativeTypeName", pair.Second.Parent.AncestorsAndSelf()
+                            .OfType<AttributeSyntax>().Single().Name.ToString());
+                        Assert.Equal(Key(pair.First.Parent), Key(pair.Second.Parent));
+                        Assert.Equal(oldCoordinate.Groups["header"].Value, newCoordinate.Groups["header"].Value);
+                        Assert.Equal(oldCoordinate.Groups["column"].Value, newCoordinate.Groups["column"].Value);
+                        var owner = Assert.Single(report.RootElement.GetProperty("owners").EnumerateArray().Where(value =>
+                            string.Equals(Path.GetFileNameWithoutExtension(value.GetProperty("original").GetString()),
+                                oldCoordinate.Groups["header"].Value, StringComparison.OrdinalIgnoreCase)));
+                        string original = owner.GetProperty("original").GetString();
+                        string oldInclude = File.ReadAllText(Path.Combine(beforeObj, "prepared-sdk.txt")).Trim();
+                        string newInclude = File.ReadAllText(Path.Combine(positiveObj, "prepared-sdk.txt")).Trim();
+                        using var oldCommands = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                            Path.GetDirectoryName(oldInclude), "midl", "commands.json")));
+                        using var newCommands = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                            Path.GetDirectoryName(newInclude), "midl", "commands.json")));
+                        string oldHeader = Assert.Single(oldCommands.RootElement.EnumerateArray().Where(value =>
+                            value.GetProperty("source").GetString() == original)).GetProperty("header").GetString();
+                        string newHeader = Assert.Single(newCommands.RootElement.EnumerateArray().Where(value =>
+                            value.GetProperty("source").GetString() == original)).GetProperty("header").GetString();
+                        Assert.Equal(oldHeader, newHeader);
+                        byte[] oldBytes = File.ReadAllBytes(Path.Combine(oldInclude, oldHeader));
+                        byte[] newBytes = File.ReadAllBytes(Path.Combine(newInclude, newHeader));
+                        string oldText = Encoding.Latin1.GetString(oldBytes);
+                        string newText = Encoding.Latin1.GetString(newBytes);
+                        string recovered = newText;
+                        var carrierLines = new List<int>();
+                        foreach (var disposition in owner.GetProperty("dispositions").EnumerateArray())
+                        {
+                            Assert.Equal("CXXMethodDecl", disposition.GetProperty("declaration").GetProperty("kind").GetString());
+                            string carrier = "_WIN32META_ANNOTATE_METHOD_(" +
+                                disposition.GetProperty("fact").GetProperty("symbol").GetString() + ", " +
+                                disposition.GetProperty("macro").GetString() + ");";
+                            Assert.DoesNotContain(carrier, oldText);
+                            string linePattern = @"(?m)^[\t ]*" + Regex.Escape(carrier) + @"\r?\n";
+                            var line = Assert.Single(Regex.Matches(newText, linePattern).Cast<Match>());
+                            carrierLines.Add(newText.Take(line.Index).Count(value => value == '\n') + 1);
+                            recovered = Regex.Replace(recovered, linePattern, string.Empty);
+                        }
+                        Assert.Equal(oldText, recovered);
+                        int oldLine = int.Parse(oldCoordinate.Groups["line"].Value);
+                        int newLine = int.Parse(newCoordinate.Groups["line"].Value);
+                        int insertedBeforeRecord = carrierLines.Count(line => line < newLine);
+                        Assert.Equal(oldLine + insertedBeforeRecord, newLine);
+                        Assert.Equal(oldText.Split('\n')[oldLine - 1], newText.Split('\n')[newLine - 1]);
+                        replacements.Add(pair.Second, pair.First);
+                        coordinates.Add(new
+                        {
+                            Declaration = Key(pair.Second.Parent), Original = original, Header = oldHeader,
+                            Before = pair.First.ValueText, After = pair.Second.ValueText,
+                            BeforeHeaderSha256 = Convert.ToHexString(SHA256.HashData(oldBytes)),
+                            AfterHeaderSha256 = Convert.ToHexString(SHA256.HashData(newBytes)),
+                            EveryNativeHeaderByteRecoveredByRemovingOnlyExactNewMethodCarriers = true,
+                            NewCarrierLines = carrierLines, InsertedLinesBeforeRecord = insertedBeforeRecord,
+                        });
+                    }
+                }
+                remaining = remaining.ReplaceTokens(replacements.Keys, (token, _) =>
+                    replacements[token].WithTriviaFrom(token));
+            }
+            File.WriteAllText(Path.Combine(evidenceDirectory,
+                partition + "." + architecture + "." + Path.GetFileName(positiveObj) + ".coordinates.json"),
+                JsonSerializer.Serialize(coordinates));
+            if (!SyntaxFactory.AreEquivalent(before, remaining))
+            {
+                var oldTokens = before.DescendantTokens().ToArray();
+                var newTokens = remaining.DescendantTokens().ToArray();
+                var differences = oldTokens.Zip(newTokens).Select((pair, index) => new { pair.First, pair.Second, Index = index })
+                    .Where(pair => pair.First.RawKind != pair.Second.RawKind || pair.First.Text != pair.Second.Text)
+                    .Select(pair => new { pair.Index, Before = Describe(pair.First), After = Describe(pair.Second) }).ToArray();
+                string directory = Path.Combine(Path.GetDirectoryName(
+                    Environment.GetEnvironmentVariable("WIN32METADATA_ORIGINAL_MEMBER_REPORT")), "normal-differences");
+                Directory.CreateDirectory(directory);
+                string path = Path.Combine(directory, partition + "." + architecture + "." + Path.GetFileName(positiveObj) + ".json");
+                File.WriteAllText(path, JsonSerializer.Serialize(new
+                {
+                    BeforeTokenCount = oldTokens.Length, AfterTokenCount = newTokens.Length, Differences = differences,
+                }));
+                Assert.True(false, "Actual normal source has unwaived differences beyond exact new contracts: " + path);
+            }
+            foreach (string directory in new[] { positiveObj, beforeObj })
+            {
+                string settings = File.ReadAllText(Path.Combine(directory, "scratch", architecture, partition + ".settings.rsp"));
+                Assert.Contains("parse-win32-annotations", settings);
+                Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+            }
+
+            static IEnumerable<AttributeSyntax> Attributes(SyntaxNode node) => (node switch
+            {
+                MemberDeclarationSyntax member => member.AttributeLists,
+                ParameterSyntax parameter => parameter.AttributeLists,
+                _ => throw new InvalidOperationException("A native fact requires its exact declaration or parameter."),
+            }).SelectMany(list => list.Attributes);
+            static bool IsImport(AttributeSyntax value) => value.Name.ToString() is
+                "DllImport" or "global::System.Runtime.InteropServices.DllImport";
+            static string Key(SyntaxNode node) => string.Join("::", node.AncestorsAndSelf().Reverse().Select(value => value switch
+            {
+                TypeDeclarationSyntax type => type.Identifier.ValueText,
+                MethodDeclarationSyntax method => method.Identifier.ValueText,
+                DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
+                ParameterSyntax parameter => parameter.Identifier.ValueText,
+                _ => null,
+            }).Where(value => value != null));
+            static object Describe(SyntaxToken token) => new
+            {
+                Kind = token.Kind().ToString(), token.Text, token.ValueText,
+                Attribute = token.Parent.AncestorsAndSelf().OfType<AttributeSyntax>().FirstOrDefault()?.Name.ToString(),
+                Declaration = Key(token.Parent),
+            };
+            static IEnumerable<SyntaxNode> Targets(SyntaxNode root, string kind, string symbol)
+            {
+                string[] parts = symbol.Split("::", StringSplitOptions.None);
+                if (kind == "FunctionDecl")
+                    return root.DescendantNodes().OfType<MethodDeclarationSyntax>().Where(method =>
+                        method.Identifier.ValueText == symbol && method.AttributeLists.SelectMany(list => list.Attributes).Any(IsImport));
+                var types = root.DescendantNodes().OfType<TypeDeclarationSyntax>().ToLookup(type =>
+                    type.Identifier.ValueText, StringComparer.Ordinal);
+                var methods = types.SelectMany(group => group).Where(IsOwnerOrDerived)
+                    .SelectMany(type => type.Members.OfType<MethodDeclarationSyntax>())
+                    .Where(method => method.Identifier.ValueText == parts[1]).ToArray();
+                var callables = methods.Cast<SyntaxNode>().Concat(methods.SelectMany(AssociatedDelegates)).ToArray();
+                return kind switch
+                {
+                    "CXXMethodDecl" => callables,
+                    "ParmVarDecl" => callables.SelectMany(callable => callable switch
+                        {
+                            MethodDeclarationSyntax method => method.ParameterList.Parameters,
+                            DelegateDeclarationSyntax callback => callback.ParameterList.Parameters,
+                            _ => throw new InvalidOperationException("A native callable requires its exact parameter list."),
+                        })
+                        .Where(parameter => parameter.Identifier.ValueText == parts[2]),
+                    _ => throw new InvalidOperationException("Unknown native member kind."),
+                };
+
+                static IEnumerable<DelegateDeclarationSyntax> AssociatedDelegates(MethodDeclarationSyntax method)
+                {
+                    var owner = Assert.IsAssignableFrom<TypeDeclarationSyntax>(method.Parent);
+                    foreach (var reference in method.DescendantNodes().OfType<GenericNameSyntax>()
+                        .Where(value => value.Identifier.ValueText == "GetDelegateForFunctionPointer"))
+                    {
+                        string name = Assert.IsType<IdentifierNameSyntax>(
+                            Assert.Single(reference.TypeArgumentList.Arguments)).Identifier.ValueText;
+                        var callback = Assert.Single(owner.Members.OfType<DelegateDeclarationSyntax>()
+                            .Where(value => value.Identifier.ValueText == name));
+                        Assert.Equal(method.ReturnType.ToString(), callback.ReturnType.ToString());
+                        Assert.Equal(method.ParameterList.Parameters.Count + 1, callback.ParameterList.Parameters.Count);
+                        var receiver = Assert.IsType<PointerTypeSyntax>(callback.ParameterList.Parameters[0].Type);
+                        Assert.Equal(owner.Identifier.ValueText, receiver.ElementType.ToString());
+                        for (int index = 0; index < method.ParameterList.Parameters.Count; index++)
+                            Assert.True(SyntaxFactory.AreEquivalent(method.ParameterList.Parameters[index],
+                                callback.ParameterList.Parameters[index + 1]),
+                                "The actual vtable delegate must preserve its native wrapper parameter exactly.");
+                        yield return callback;
+                    }
+                }
+
+                bool IsOwnerOrDerived(TypeDeclarationSyntax type)
+                {
+                    var visited = new HashSet<string>(StringComparer.Ordinal);
+                    while (visited.Add(type.Identifier.ValueText))
+                    {
+                        if (type.Identifier.ValueText == parts[0])
+                            return true;
+                        var inheritance = type.AttributeLists.SelectMany(list => list.Attributes)
+                            .SingleOrDefault(value => value.Name.ToString() == "NativeInheritance");
+                        if (inheritance == null)
+                            return false;
+                        string parent = Assert.IsType<LiteralExpressionSyntax>(
+                            Assert.Single(inheritance.ArgumentList.Arguments).Expression).Token.ValueText;
+                        if (parent == parts[0])
+                            return true;
+                        if (!types.Contains(parent))
+                            return false;
+                        type = Assert.Single(types[parent]);
+                    }
+                    throw new InvalidOperationException("The actual normal native inheritance graph contains a cycle.");
+                }
+            }
+        }
+
+        public static IEnumerable<object[]> PublishedMemberNormalSamples() =>
+            PublishedNormalSamples("WIN32METADATA_ORIGINAL_MEMBER_REPORT", functionsOnly: false);
+
         [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
             "WIN32METADATA_FACTORY_PUBLISHED_OBJ")]
         [MemberData(nameof(PublishedQuotedFactoryNormalSamples))]
@@ -581,9 +1073,12 @@ namespace Win32MetadataScraperTests
                 "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform";
         }
 
-        public static IEnumerable<object[]> PublishedQuotedFactoryNormalSamples()
+        public static IEnumerable<object[]> PublishedQuotedFactoryNormalSamples() =>
+            PublishedNormalSamples("WIN32METADATA_FACTORY_IDL_REPORT", functionsOnly: true);
+
+        private static IEnumerable<object[]> PublishedNormalSamples(string reportVariable, bool functionsOnly)
         {
-            string reportPath = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT");
+            string reportPath = Environment.GetEnvironmentVariable(reportVariable);
             if (string.IsNullOrEmpty(reportPath))
             {
                 yield return new object[] { "Mf", "x64", 13 };
@@ -600,13 +1095,13 @@ namespace Win32MetadataScraperTests
                 .SelectMany(owner => owner.GetProperty("partitionCandidates").EnumerateArray().Select(partition =>
                     (Partition: partition.GetString(), Owner: owner))).GroupBy(value => value.Partition, StringComparer.Ordinal))
             {
-                int functionCount = group.SelectMany(value => value.Owner.GetProperty("dispositions").EnumerateArray())
+                int factCount = group.SelectMany(value => value.Owner.GetProperty("dispositions").EnumerateArray())
                     .Count(value => value.GetProperty("disposition").GetString() == "authored-original-idl" &&
-                        value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl");
-                Assert.True(functionCount > 0);
+                        (!functionsOnly || value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl"));
+                Assert.True(factCount > 0);
                 foreach (string architecture in common.Contains(group.Key)
                     ? new[] { "common" } : new[] { "x86", "x64", "arm64" })
-                    yield return new object[] { group.Key, architecture, functionCount };
+                    yield return new object[] { group.Key, architecture, factCount };
             }
         }
 

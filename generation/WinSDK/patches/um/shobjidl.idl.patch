@@ -1,5 +1,5 @@
 diff --git a/um/shobjidl.idl b/um/shobjidl.idl
-index 80f71937..d170ede6 100644
+index 80f71937..2c1b2c9e 100644
 --- a/um/shobjidl.idl
 +++ b/um/shobjidl.idl
 @@ -7,6 +7,7 @@
@@ -82,6 +82,19 @@ index 80f71937..d170ede6 100644
  [
      object,
      uuid(8a68fdda-1fdc-4c20-8ceb-416643b5a625),
+@@ -300,9 +310,9 @@ interface IStreamUnbufferedInfo : IUnknown
+ 
+ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
+ cpp_quote("SHSTDAPI SHRemovePersonalPropertyValues(_In_ IShellItemArray *psia);")
+-cpp_quote("SHSTDAPI SHAddDefaultPropertiesByExt(_In_ PCWSTR pszExt, _In_ IPropertyStore *pPropStore);")
+-cpp_quote("SHSTDAPI SHCreateDefaultPropertiesOp(_In_ IShellItem *psi, _Outptr_ IFileOperation **ppFileOp);")
+-cpp_quote("SHSTDAPI SHSetDefaultProperties(_In_opt_ HWND hwnd, _In_ IShellItem *psi, DWORD dwFileOpFlags, _In_opt_ IFileOperationProgressSink *pfops);")
++cpp_quote("SHSTDAPI _Win32_SupportedOS_WindowsVista_ SHAddDefaultPropertiesByExt(_In_ PCWSTR pszExt, _In_ IPropertyStore *pPropStore);")
++cpp_quote("SHSTDAPI _Win32_SupportedOS_WindowsVista_ SHCreateDefaultPropertiesOp(_In_ IShellItem *psi, _Outptr_ IFileOperation **ppFileOp);")
++cpp_quote("SHSTDAPI _Win32_SupportedOS_WindowsVista_ SHSetDefaultProperties(_In_opt_ HWND hwnd, _In_ IShellItem *psi, DWORD dwFileOpFlags, _In_opt_ IFileOperationProgressSink *pfops);")
+ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN2K)")
 @@ -316,6 +326,7 @@ typedef [v1_enum] enum DSH_FLAGS
  } DSH_FLAGS;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DSH_FLAGS)")

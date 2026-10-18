@@ -124,9 +124,10 @@ bootstrap without rewriting existing bytes, guards, attributes or method order.
 Native function-like attribute macros are kept intact when every source definition
 expands to an attribute list; carriers precede the original invocation.
 It also binds unique native function prototypes in consecutive `cpp_quote`
-statements with an explicit `STDAPI`, `STDAPI_(type)`, or HRESULT
+statements with an explicit `STDAPI`, `STDAPI_(type)`, `SHSTDAPI`, or HRESULT/DWORD
 `STDAPICALLTYPE`, `STDMETHODCALLTYPE`, or `WINAPI` prefix and a complete parameter
-list ending in a semicolon. The public OS macro
+list ending in a semicolon. Consecutive quoted return-type and calling-convention
+lines are kept intact. The public OS macro
 is inserted immediately before the function name, preserving native linkage,
 return types, calling conventions and SAL. If that original line has trailing
 whitespace, it uses the equivalent position after the parameter list instead,
@@ -153,6 +154,25 @@ the exact new function floors only in the prepared-after source and compare
 the complete remaining C# syntax without suppressing unrelated attributes.
 Selected callable facts can pin an `existingImportLibrary` in the qualification
 report to require the same nonempty `DllImport` in actual normal output.
+
+The same native prototype binding supports function `setLastError` facts through
+`_Win32_SetLastError_`. Exact interface method
+`CanReturnMultipleSuccessValues`/`CanReturnErrorsAsSuccess` overrides use the
+existing `_Win32_AnnotateMethod_(Interface::Method, _Win32_PreserveResult_)`
+carrier inside the original interface's guards. Native method parameter
+`RetVal` overrides use `[annotation("_Win32_Retval_")]` alongside the untouched
+MIDL attributes. If a parameter already has one native inline `annotation`
+payload, the token is appended inside that same payload: MIDL otherwise keeps
+only the last annotation and loses the metadata. Multiple existing annotation
+payloads remain residuals. Only one complete native method/parameter can bind each fact;
+forwarded, ambiguous, unsupported and already-native `[retval]` contracts remain
+explicit residuals. Existing native facts do not earn new conversion credit.
+
+Normal member controls follow native inheritance and each wrapper's exact
+vtable-delegate reference, preserving receiver and parameter signatures.
+Anonymous `NativeTypeName` coordinate changes are enumerated separately.
+Each requires complete native header byte recovery after removing only the
+exact new method carriers, with the line shift explained by those carriers.
 
 Recipe `partitions` do not activate the normal scraper. After qualifying and
 admitting exact original/output pairs, rerun the authorer with `-Apply` to enable

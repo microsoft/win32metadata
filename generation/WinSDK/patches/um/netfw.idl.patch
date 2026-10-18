@@ -1,5 +1,5 @@
 diff --git a/um/netfw.idl b/um/netfw.idl
-index b68dec12..c3b38bc3 100644
+index b68dec12..b0b1524f 100644
 --- a/um/netfw.idl
 +++ b/um/netfw.idl
 @@ -8,6 +8,7 @@
@@ -10,6 +10,33 @@ index b68dec12..c3b38bc3 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
+@@ -117,7 +118,7 @@ cpp_quote("    _In_ HANDLE registrationObject ")
+ cpp_quote("    );")
+ cpp_quote("HRESULT")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationEnumerateAppContainerRules(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationEnumerateAppContainerRules(")
+ cpp_quote("    _Outptr_ IEnumVARIANT ** newEnum")
+ cpp_quote("    );")
+ cpp_quote("")
+@@ -178,7 +179,7 @@ cpp_quote("#define NETISO_GEID_FOR_WDAG 0x01")
+ cpp_quote("#define NETISO_GEID_FOR_NEUTRAL_AWARE 0x02")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationGetEnterpriseIdAsync(")
++cpp_quote("_Win32_SupportedOS_10240_ NetworkIsolationGetEnterpriseIdAsync(")
+ cpp_quote("    _In_z_ LPCWSTR wszServerName,")
+ cpp_quote("    _In_   DWORD   dwFlags,")
+ cpp_quote("    _In_opt_ void *  context,")
+@@ -187,7 +188,7 @@ cpp_quote("    _Out_  HANDLE *hOperation ")
+ cpp_quote("    );")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationGetEnterpriseIdClose(")
++cpp_quote("_Win32_SupportedOS_10240_ NetworkIsolationGetEnterpriseIdClose(")
+ cpp_quote("    _In_ HANDLE hOperation,")
+ cpp_quote("    _In_ BOOL   bWaitForOperation")
+ cpp_quote("    );")
 @@ -280,6 +281,7 @@ import "oaidl.idl";
  // instance of this interface is retrieved through the RemoteAdminSettings
  // property of the INetFwProfile interface. All configuration changes take
