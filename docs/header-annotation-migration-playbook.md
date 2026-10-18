@@ -3603,3 +3603,28 @@ OLD124 reports remain unchanged alongside the separate native128 proposal under
 `artifacts\bulk-annotations\system-nonfloor-enums-003-*` and
 `system-nonfloor-enums-004-correction-*`. No frozen central SDK05 input or
 full-image acceptance is changed by this source proposal.
+
+### Historical VB logical-enum label
+
+The `vbinterf.h` source uses the existing low-level logical-group encoding to
+keep the metadata label `GCW_WCH_SIBLING` while compiling its value from the real
+native `GC_WCH_SIBLING` expression. No SDK alias, copied numeric value, consumer
+rename or new annotation vocabulary is introduced. The other seven labels use
+their corresponding native expressions. Although the existing logical name is
+`ENUM_CONTROLS_WHICH_FLAGS`, its immutable metadata has no Flags attribute; the
+source therefore uses `Enum`, not `FlagsEnum`.
+
+All eight names and values, UInt32 storage, unscoped identity and
+`Windows.Win32.System.Ole` namespace remain exact. The native
+`IVBGetControl::EnumControls::dwWhich` DWORD parameter carries the existing
+association. Four native modes preserve ABI, SAL and exact annotation payloads;
+the actual x64 component also emits the COM interface and checks its UInt32
+parameter signature and exact `AssociatedEnum` payload. The immutable baseline
+supplies only unchanged shared COM dependencies.
+
+Only that complete eight-member definition and its one matching use row are
+retired. This is one additional semantic source header, not full-SDK or CI
+acceptance. `imepad.h` remains legacy: adding its native but previously unemitted
+twentieth label would add API and is not the historical-label case above.
+Evidence stays under
+`artifacts\bulk-annotations\system-nonfloor-enums-005-vb-*`.

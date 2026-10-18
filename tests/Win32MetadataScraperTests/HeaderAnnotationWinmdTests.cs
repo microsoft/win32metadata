@@ -120,7 +120,11 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 .ToDictionary(group => group.GetProperty("Group").GetString(), StringComparer.Ordinal);
             var fieldAssociations = owners.SelectMany(owner => owner.GetProperty("associations").EnumerateArray())
                 .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();
+            var interfaceAssociations = owners.SelectMany(owner => owner.GetProperty("associations").EnumerateArray())
+                .Where(value => (!value.TryGetProperty("kind", out var kind) || kind.GetString() != "field") &&
+                    value.GetProperty("symbol").GetString().Split("::").Length == 3).ToArray();
             var nativeRecords = fieldAssociations.Select(value => value.GetProperty("nativeType").GetString())
+                .Concat(interfaceAssociations.Select(value => value.GetProperty("symbol").GetString().Split("::")[0]))
                 .ToHashSet(StringComparer.Ordinal);
             var nativeEnums = fieldAssociations.Select(value => value.GetProperty("group").GetString())
                 .ToHashSet(StringComparer.Ordinal);
@@ -155,6 +159,9 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 var usings = nativeRecords.Count > 0
                     ? SyntaxFactory.List(headerTypes.Usings.Concat(source.Usings).DistinctBy(value => value.ToString()))
                     : headerTypes.Usings;
+                if (interfaceAssociations.Length > 0)
+                    usings = SyntaxFactory.List(usings.Append(SyntaxFactory.UsingDirective(
+                        SyntaxFactory.ParseName("Windows.Win32.System.Com"))).DistinctBy(value => value.ToString()));
                 var subset = SyntaxFactory.CompilationUnit().WithUsings(usings)
                     .AddMembers(namespaces).NormalizeWhitespace();
                 File.WriteAllText(Path.Combine(component, partition + ".header-types.cs"), subset.ToFullString());
@@ -236,20 +243,33 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                             association.GetProperty("group").GetString());
                         continue;
                     }
-                    var method = Assert.Single(methods[symbol[0]]);
+                    Assert.True(symbol.Length is 2 or 3);
+                    var method = Assert.Single(methods[symbol[^2]].Where(value => symbol.Length == 2 ||
+                        value.Ancestors().OfType<TypeDeclarationSyntax>().Any(type => type.Identifier.ValueText == symbol[0])));
                     var parameter = Assert.Single(method.ParameterList.Parameters
-                        .Where(value => value.Identifier.ValueText == symbol[1]));
+                        .Where(value => value.Identifier.ValueText == symbol[^1]));
                     Assert.Equal("uint", parameter.Type.ToString());
                     var attribute = Assert.Single(parameter.AttributeLists.SelectMany(list => list.Attributes)
                         .Where(value => value.Name.ToString().Split('.').Last() is "AssociatedEnum" or "AssociatedEnumAttribute"));
                     var name = Assert.IsType<LiteralExpressionSyntax>(Assert.Single(attribute.ArgumentList.Arguments).Expression);
                     Assert.Equal(association.GetProperty("group").GetString(), name.Token.ValueText);
+                    if (symbol.Length == 3)
+                    {
+                        var metadataMethod = FindMethod(reader, symbol[0], symbol[1]);
+                        var metadataParameter = Assert.Single(metadataMethod.GetParameters().Select(reader.GetParameter)
+                            .Where(value => reader.GetString(value.Name) == symbol[2]));
+                        Assert.Equal("UInt32", metadataMethod.DecodeSignature(new SignatureNames(), null)
+                            .ParameterTypes[metadataParameter.SequenceNumber - 1]);
+                        AssertStringAttribute(reader, metadataParameter.GetCustomAttributes(), "AssociatedEnumAttribute",
+                            association.GetProperty("group").GetString());
+                    }
                 }
             }
             AssertMetadataClosure(reader);
             Console.WriteLine($"{architecture}: {expected.Count} real source-projected logical identities and " +
                 $"{expected.Values.Sum(group => group.GetProperty("Members").GetArrayLength())} compiled-native members; " +
-                $"{fieldAssociations.Length} native DWORD field associations.");
+                $"{fieldAssociations.Length} native DWORD field associations; " +
+                $"{interfaceAssociations.Length} physical COM parameter associations.");
         }
 
         [Theory]

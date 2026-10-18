@@ -138,7 +138,8 @@ using WINHTTP_INTERNET_SCHEME = void;
                 .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();
             string[] headers = { Path.GetFileName(original) };
             string checks = string.Join("\n", groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
-                .Select(member => "static_assert((unsigned long long)(" + member.GetProperty("Name").GetString() +
+                .Select(member => "static_assert((unsigned long long)(" +
+                    (member.TryGetProperty("NativeExpression", out var expression) ? expression.GetString() : member.GetProperty("Name").GetString()) +
                     ") == " + member.GetProperty("Value").GetRawText() + "ULL);")
                 .Concat(fieldAssociations.Select(value => "static_assert(__is_same(decltype(((" +
                     value.GetProperty("nativeType").GetString() + "*)nullptr)->" +

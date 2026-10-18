@@ -12972,50 +12972,7 @@
       }
     ]
   },
-  {
-    "name": "ENUM_CONTROLS_WHICH_FLAGS",
-    "members": [
-      {
-        "name": "GCW_WCH_SIBLING",
-        "value": "1"
-      },
-      {
-        "name": "GC_WCH_CONTAINER",
-        "value": "2"
-      },
-      {
-        "name": "GC_WCH_CONTAINED",
-        "value": "3"
-      },
-      {
-        "name": "GC_WCH_ALL",
-        "value": "4"
-      },
-      {
-        "name": "GC_WCH_FREVERSEDIR",
-        "value": "134217728"
-      },
-      {
-        "name": "GC_WCH_FONLYAFTER",
-        "value": "268435456"
-      },
-      {
-        "name": "GC_WCH_FONLYBEFORE",
-        "value": "536870912"
-      },
-      {
-        "name": "GC_WCH_FSELECTED",
-        "value": "1073741824"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IVBGetControl",
-        "method": "EnumControls",
-        "parameter": "dwWhich"
-      }
-    ]
-  },
+
   {
     "name": "ARC_DIRECTION",
     "type": "int",

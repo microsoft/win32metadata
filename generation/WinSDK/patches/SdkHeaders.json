@@ -3867,6 +3867,12 @@
       "sourceSha256": "4E4E8CEA816FA8BC7A358BD93FAFE947174B3157EB671B6CB083E6AF8706103C",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\credssp.h",
       "sdkSha256": "4E4E8CEA816FA8BC7A358BD93FAFE947174B3157EB671B6CB083E6AF8706103C"
+    },
+    {
+      "path": "um\\vbinterf.h",
+      "sourceSha256": "E59DF32953EA02F2178AAD0F108DD35CDF3EC78232B89BE1B32F8601CFAABFAD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vbinterf.h",
+      "sdkSha256": "E59DF32953EA02F2178AAD0F108DD35CDF3EC78232B89BE1B32F8601CFAABFAD"
     }
   ],
   "midl": {
@@ -7900,6 +7906,7 @@
     "um\\mcx.h.patch",
     "shared\\tcpmib.h.patch",
     "um\\minschannel.h.patch",
-    "um\\credssp.h.patch"
+    "um\\credssp.h.patch",
+    "um\\vbinterf.h.patch"
   ]
 }
