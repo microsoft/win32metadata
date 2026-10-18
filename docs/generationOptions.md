@@ -31,6 +31,48 @@ for the complete vocabulary, valid targets, and examples. The options below desc
 the existing response-file configuration; API-specific metadata moves into the owning
 SDK header or original IDL.
 
+### Bulk native-header annotation authoring
+
+`--declaration-map` followed by a JSON output path exports native free-function
+identities after the normal Clang parse, without generating bindings or remaps.
+The schema includes the translation unit, partition, compiler arguments, source
+SHA256 values, USRs, native qualified names, types, and spelling/expansion locations.
+Offsets and half-open declaration extents are **bytes**, not character positions.
+This is an opt-in authoring aid; ordinary scraping is unchanged.
+
+For explicitly allocated original-header owners, the bulk helper can export maps
+for all three architectures and propose cumulative SDK patches:
+
+```powershell
+dotnet build .\sources\Win32MetadataScraper -c Release
+.\scripts\Convert-SdkHeaderAnnotations.ps1 `
+    -OwnerMap C:\work\owners.json `
+    -Partition MenuRc,Services `
+    -Original 'um\winuser.h','um\winsvc.h' `
+    -OutputDirectory .\artifacts\bulk-annotations\batch-01
+```
+
+The owner inventory uses `readyOriginalOwners` records with `original`,
+`partitionCandidates`, `supportedOS`, and `setLastError`; each fact supplies its
+exact retained `symbol` and `value`. Its `snapshot` identifies the selected SDK
+package root, package version, and include version. Inventory candidates are not
+proof of declaration ownership: the helper checks the parsed identity and original
+bytes before placing an annotation.
+
+Review `report.json` and the proposed patches. Reuse exported JSON maps through
+`-DeclarationMaps` instead of `-Partition` when useful. A fresh output directory is
+required for every invocation. Adding `-Apply` installs patches and SDK recipe pins,
+enables annotation parsing in configured owning partitions, and removes only exact
+sidecar rows whose discovered declarations are all covered. Generated headers,
+overloads, macro-produced declarations, additional owners, unparsed conditional
+occurrences, and failed configurations remain explicit residuals. A retained fact
+may already have some source annotations; it is not counted as fully converted.
+Original IDL requires the separate original-IDL authoring path.
+
+Run representative normal scrapes and native checks after applying a batch.
+The machine-readable counts describe authored source deltas, not full-SDK or
+final-winmd qualification.
+
 ### Remapping
 
 ````

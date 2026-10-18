@@ -60,6 +60,7 @@ class Program
         "--additional",
         "--auto-remaps-file",
         "--config",
+        "--declaration-map",
         "--exclude",
         "--exclude-auto-remap",
         "--file",
@@ -192,6 +193,13 @@ class Program
 
             using var translationUnit = TranslationUnit.GetOrCreate(cxHandle);
             Debug.Assert(translationUnit is not null);
+
+            string declarationMap = settings.GetValueOrDefault("--declaration-map")?.SingleOrDefault();
+            if (declarationMap != null)
+            {
+                DeclarationSourceMap.Write(translationUnit.Handle.Cursor, sourceFile, clangArgs, declarationMap);
+                return 0;
+            }
 
             // ── Walk AST to discover all typedef-tag and function pointer relationships ──
             var discovery = RemapDiscovery.WalkTranslationUnit(translationUnit.TranslationUnitDecl);
