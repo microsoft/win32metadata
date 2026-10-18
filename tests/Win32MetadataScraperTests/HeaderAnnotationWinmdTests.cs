@@ -337,6 +337,94 @@ unsigned long __stdcall NativeResourceType(
             AssertMetadataClosure(reader);
         }
 
+        [NativeMigrationTheory("STATE_HELPERS_MIGRATION_ROOT")]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void NormalRegistryFallbackReachesFinalWinmd(string architecture, string target)
+        {
+            string root = Environment.GetEnvironmentVariable("STATE_HELPERS_MIGRATION_ROOT");
+            string source = Path.Combine(root, "scrape-02", "generated", architecture, "Registry.cs");
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, "");
+            Directory.CreateDirectory(Path.GetDirectoryName(fixture.Output));
+            var methodSource = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(method => method.Identifier.ValueText == "GetRegistryValueWithFallbackW");
+            var apiSource = Assert.IsType<ClassDeclarationSyntax>(methodSource.Parent);
+            var namespaceSource = Assert.IsType<NamespaceDeclarationSyntax>(apiSource.Parent);
+            var boundedApi = apiSource.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(methodSource));
+            var boundedSource = SyntaxFactory.ParseCompilationUnit(
+                "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
+                .AddMembers(namespaceSource.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(boundedApi)));
+            File.WriteAllText(fixture.Output, boundedSource.NormalizeWhitespace().ToFullString());
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var method = FindMethod(reader, "Apis", "GetRegistryValueWithFallbackW");
+            var signature = method.DecodeSignature(new SignatureNames(), null);
+            Assert.Equal("Int32", signature.ReturnType);
+            Assert.Equal(new[]
+            {
+                "IntPtr", "UInt16*", "IntPtr", "UInt16*", "UInt16*",
+                "UInt32", "UInt32*", "Void*", "UInt32", "UInt32*",
+            }, signature.ParameterTypes);
+            var result = method.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 0);
+            AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "WIN32_ERROR");
+            var owner = reader.GetTypeDefinition(method.GetDeclaringType());
+            Assert.Equal("Windows.Win32.System.Registry", reader.GetString(owner.Namespace));
+            var import = method.GetImport();
+            Assert.Equal("api-ms-win-core-state-helpers-l1-1-0.dll",
+                reader.GetString(reader.GetModuleReference(import.Module).Name));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void SignedRegistryStatusKeepsUnsignedErrorAssociation(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define ERROR_SUCCESS 0L
+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
+_Win32_Enum_(WIN32_ERROR, unsigned long, ERROR_SUCCESS);
+#endif
+typedef long LSTATUS;
+#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
+_Win32_AssociatedEnum_(WIN32_ERROR)
+#endif
+LSTATUS __stdcall RegistryStatus(unsigned long flags);
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var method = FindMethod(reader, "Apis", "RegistryStatus");
+            var signature = method.DecodeSignature(new SignatureNames(), null);
+            Assert.Equal("Int32", signature.ReturnType);
+            Assert.Equal(new[] { "UInt32" }, signature.ParameterTypes);
+            var result = method.GetParameters().Select(reader.GetParameter)
+                .SingleOrDefault(parameter => parameter.SequenceNumber == 0);
+            if (annotationsEnabled)
+            {
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "WIN32_ERROR");
+                var storage = FindType(reader, "WIN32_ERROR").GetFields().Select(reader.GetFieldDefinition)
+                    .Single(field => reader.GetString(field.Name) == "value__");
+                Assert.Equal("UInt32", storage.DecodeSignature(new SignatureNames(), null));
+            }
+            else
+            {
+                Assert.DoesNotContain(reader.CustomAttributes,
+                    handle => AttributeName(reader, handle) == "AssociatedEnumAttribute");
+                Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                    type => reader.GetString(type.Name) == "WIN32_ERROR");
+            }
+            AssertMetadataClosure(reader);
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]

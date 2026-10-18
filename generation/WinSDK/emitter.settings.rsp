@@ -475,7 +475,6 @@ QISearch::ppv=[ComOutPtr]
 PDNS_SERVICE_BROWSE_CALLBACK::pDnsRecord=DNS_RECORDW*
 IMMDevice::Activate::dwClsCtx=CLSCTX
 IMMDevice::Activate::ppInterface=[ComOutPtr]
-GetRegistryValueWithFallbackW::return=WIN32_ERROR
 RegCloseKey::return=WIN32_ERROR
 RegConnectRegistryA::return=WIN32_ERROR
 RegConnectRegistryW::return=WIN32_ERROR

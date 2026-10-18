@@ -3933,6 +3933,12 @@
       "sourceSha256": "25F30931052889DDFF3BFF51432813D588140EC4F333E0D0004EEEAF441B193C",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\infotech.h",
       "sdkSha256": "25F30931052889DDFF3BFF51432813D588140EC4F333E0D0004EEEAF441B193C"
+    },
+    {
+      "path": "um\\statehelpers.h",
+      "sourceSha256": "097A90FC0A727B2354FC6ABC2DB04A0159524CCFBF96BFD21FF9276652A1ECDB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\statehelpers.h",
+      "sdkSha256": "097A90FC0A727B2354FC6ABC2DB04A0159524CCFBF96BFD21FF9276652A1ECDB"
     }
   ],
   "midl": {
@@ -7979,6 +7985,7 @@
     "um\\lmuseflg.h.patch",
     "um\\dshow.h.patch",
     "um\\sens.h.patch",
-    "um\\infotech.h.patch"
+    "um\\infotech.h.patch",
+    "um\\statehelpers.h.patch"
   ]
 }
