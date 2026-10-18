@@ -4146,7 +4146,7 @@ namespace Win32MetadataScraperTests
                 File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
         }
 
-        [MigrationTheory]
+        [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(4)]
@@ -4154,6 +4154,7 @@ namespace Win32MetadataScraperTests
         {
             using var old = Open("WINHTTP_MIGRATION_OLD");
             using var current = Open("WINHTTP_MIGRATION_NEW");
+            int retained = 0;
             foreach (var use in NativeRetvalUses)
             {
                 var before = Methods(old.Reader, use.Namespace, use.Owner, architecture)[use.Method];
@@ -4166,11 +4167,27 @@ namespace Win32MetadataScraperTests
                 Assert.Equal(original.Attributes, parameter.Attributes);
                 Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
                 Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Retval));
-                Assert.DoesNotContain(original.GetCustomAttributes(), handle => AttributeName(old.Reader, handle) == "RetValAttribute");
+                var originalAttributes = original.GetCustomAttributes()
+                    .Where(handle => AttributeName(old.Reader, handle) == "RetValAttribute").ToArray();
+                bool alreadyPresentInBaseline = use.Namespace == "Windows.Win32.System.SecurityCenter"
+                    || use == ("Windows.Win32.Networking.NetworkListManager", "INetworkConnection2", "IsDomainAuthenticatedBy", "pValue");
+                if (alreadyPresentInBaseline)
+                {
+                    var originalAttribute = Assert.Single(originalAttributes);
+                    Assert.Equal(new byte[] { 1, 0, 0, 0 },
+                        old.Reader.GetBlobBytes(old.Reader.GetCustomAttribute(originalAttribute).Value));
+                    retained++;
+                }
+                else
+                {
+                    Assert.Empty(originalAttributes);
+                }
                 var attribute = Assert.Single(parameter.GetCustomAttributes().Where(handle => AttributeName(current.Reader, handle) == "RetValAttribute"));
                 Assert.Equal(new byte[] { 1, 0, 0, 0 }, current.Reader.GetBlobBytes(current.Reader.GetCustomAttribute(attribute).Value));
             }
-            this.output.WriteLine($"{NativeRetvalUses.Length} exact native MIDL RetValAttribute additions on architecture {architecture}; CLI parameter flags and signatures unchanged.");
+            Assert.Equal(17, retained);
+            this.output.WriteLine($"{NativeRetvalUses.Length - retained} exact native MIDL RetValAttribute additions and " +
+                $"{retained} retained on architecture {architecture}; CLI parameter flags and signatures unchanged.");
         }
 
         [MigrationTheory]

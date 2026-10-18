@@ -209,6 +209,10 @@ OLD is a comparison baseline, not authority to suppress the native contract.
 Classify and present exact OLD-to-NEW metadata and consumer differences to the
 user for review instead of excluding a migration solely to retain OLD omissions.
 
+When reusing a native-capture fixture against a later baseline, distinguish its
+exact retained sites from new additions. Assert both payloads and counts; do not
+assume every native fact is absent in OLD or count retained attributes twice.
+
 A source-derived addition must be traceable to an existing fact in the pinned
 native sources, with its exact declaration, owner, target, payload and architecture
 coverage. Verify that interpretation rather than inventing API/type/ownership
