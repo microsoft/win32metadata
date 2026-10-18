@@ -7,6 +7,7 @@ using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using ClangSharp;
 using ClangSharp.Interop;
 using ClangSharpSourceToWinmd;
@@ -2890,6 +2891,175 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
 
             static string[] Snapshot(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
                 .Select(type => WinHttpMigrationTests.SnapshotType(reader, type)).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_PRODUCER_ROOT", "WINHTTP_DEVICE_PRODUCER_BASELINE")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void DeviceProducerSourceProjectionPreservesFamiliesAndMovesOnlyFourOutputContracts(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_ROOT");
+            string baselinePath = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_BASELINE");
+            var transfers = WinHttpMigrationTests.DeviceProducerTransfers;
+            var families = transfers.DistinctBy(value => value.TypeName).ToArray();
+            using var baseline = new MetadataImage(baselinePath);
+            using var before = Component("before", "original-autoTypes.json");
+            using var after = Component("after", "candidate-owned-autoTypes.json");
+            AssertMetadataClosure(before.Reader);
+            AssertMetadataClosure(after.Reader);
+            Assert.Equal(3, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(5, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "InvalidHandleValueAttribute"));
+            Assert.Equal(4, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(6, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "InvalidHandleValueAttribute"));
+            var originalTypes = TypeSnapshots(before.Reader);
+            var currentTypes = TypeSnapshots(after.Reader);
+            Assert.Equal(originalTypes.Keys, currentTypes.Keys);
+            var changed = families.Select(value => value.Namespace + "." + value.TypeName)
+                .Concat(families.Select(value => value.Namespace + ".Apis")).ToHashSet(StringComparer.Ordinal);
+            foreach (var entry in originalTypes.Where(value => !changed.Contains(value.Key)))
+                Assert.Equal(entry.Value, currentTypes[entry.Key]);
+
+            var signatures = new SignatureNames(qualifiedNames: true);
+            foreach (var family in families)
+            {
+                var original = FindType(before.Reader, family.TypeName);
+                var current = FindType(after.Reader, family.TypeName);
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(baseline.Reader, FindType(baseline.Reader, family.TypeName)),
+                    WinHttpMigrationTests.SnapshotType(before.Reader, original));
+                Assert.Equal(family.Cleanup, ReadStringAttribute(before.Reader, original.GetCustomAttributes(), "RAIIFreeAttribute"));
+                Assert.Equal(family.InvalidValues, ReadInvalidValues(before.Reader, original.GetCustomAttributes()));
+                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "RAIIFreeAttribute");
+                AssertDoesNotHaveAttribute(after.Reader, current.GetCustomAttributes(), "InvalidHandleValueAttribute");
+                Assert.Equal(original.Attributes, current.Attributes);
+                Assert.Equal(original.GetLayout().PackingSize, current.GetLayout().PackingSize);
+                Assert.Equal(original.GetLayout().Size, current.GetLayout().Size);
+                Assert.Equal(HandleKind.TypeReference, original.BaseType.Kind);
+                Assert.Equal(HandleKind.TypeReference, current.BaseType.Kind);
+                Assert.Equal(signatures.GetTypeFromReference(before.Reader, (TypeReferenceHandle)original.BaseType, 0),
+                    signatures.GetTypeFromReference(after.Reader, (TypeReferenceHandle)current.BaseType, 0));
+                Assert.Equal(Facts(before.Reader, original.GetCustomAttributes(), true),
+                    Facts(after.Reader, current.GetCustomAttributes(), true));
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').First(),
+                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').First());
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(before.Reader, original).Split('\n').Skip(2),
+                    WinHttpMigrationTests.SnapshotType(after.Reader, current).Split('\n').Skip(2));
+            }
+
+            var usedTransfers = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var family in families)
+            {
+                var originalApis = Api(before.Reader, family.Namespace);
+                var currentApis = Api(after.Reader, family.Namespace);
+                Assert.Equal(originalApis.Attributes, currentApis.Attributes);
+                Assert.Equal(Facts(before.Reader, originalApis.GetCustomAttributes()),
+                    Facts(after.Reader, currentApis.GetCustomAttributes()));
+                var originalMethods = originalApis.GetMethods().Select(before.Reader.GetMethodDefinition).ToArray();
+                var currentMethods = currentApis.GetMethods().Select(after.Reader.GetMethodDefinition).ToArray();
+                var expectedOrder = originalMethods.Select(method => before.Reader.GetString(method.Name)).ToList();
+                Assert.True(expectedOrder.IndexOf(family.Cleanup) > expectedOrder.IndexOf(family.Method));
+                Assert.True(expectedOrder.Remove(family.Cleanup));
+                expectedOrder.Insert(expectedOrder.IndexOf(family.Method), family.Cleanup);
+                Assert.Equal(expectedOrder, currentMethods.Select(method => after.Reader.GetString(method.Name)));
+                foreach (var original in originalMethods)
+                {
+                    string name = before.Reader.GetString(original.Name);
+                    var current = Assert.Single(currentMethods.Where(method => after.Reader.GetString(method.Name) == name));
+                    Assert.Equal(original.Attributes, current.Attributes);
+                    Assert.Equal(original.ImplAttributes, current.ImplAttributes);
+                    var oldSignature = original.DecodeSignature(signatures, null);
+                    var signature = current.DecodeSignature(signatures, null);
+                    Assert.Equal(oldSignature.Header, signature.Header);
+                    Assert.Equal(oldSignature.ReturnType, signature.ReturnType);
+                    Assert.Equal(oldSignature.ParameterTypes.ToArray(), signature.ParameterTypes.ToArray());
+                    Assert.Equal(Facts(before.Reader, original.GetCustomAttributes()), Facts(after.Reader, current.GetCustomAttributes()));
+                    var oldImport = original.GetImport();
+                    var import = current.GetImport();
+                    Assert.Equal(oldImport.Attributes, import.Attributes);
+                    Assert.Equal(before.Reader.GetString(oldImport.Name), after.Reader.GetString(import.Name));
+                    Assert.Equal(before.Reader.GetString(before.Reader.GetModuleReference(oldImport.Module).Name),
+                        after.Reader.GetString(after.Reader.GetModuleReference(import.Module).Name));
+                    var originalParameters = original.GetParameters().Select(before.Reader.GetParameter).ToArray();
+                    var parameters = current.GetParameters().Select(after.Reader.GetParameter).ToArray();
+                    Assert.Equal(originalParameters.Length, parameters.Length);
+                    for (int i = 0; i < parameters.Length; i++)
+                    {
+                        var originalParameter = originalParameters[i];
+                        var parameter = parameters[i];
+                        string parameterName = after.Reader.GetString(parameter.Name);
+                        Assert.Equal(originalParameter.SequenceNumber, parameter.SequenceNumber);
+                        Assert.Equal(before.Reader.GetString(originalParameter.Name), parameterName);
+                        Assert.Equal(originalParameter.Attributes, parameter.Attributes);
+                        Assert.Equal(Facts(before.Reader, originalParameter.GetCustomAttributes()),
+                            Facts(after.Reader, parameter.GetCustomAttributes(), true));
+                        var transfer = transfers.SingleOrDefault(value => value.Method == name && value.Parameter == parameterName);
+                        if (transfer.Method == null)
+                        {
+                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
+                            AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "InvalidHandleValueAttribute");
+                            continue;
+                        }
+                        Assert.True(usedTransfers.Add(name + "::" + parameterName));
+                        Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                        AssertStringAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", transfer.Cleanup);
+                        Assert.Equal(transfer.InvalidValues, ReadInvalidValues(after.Reader, parameter.GetCustomAttributes()));
+                        Assert.Equal(transfer.Namespace + "." + transfer.TypeName + "*",
+                            signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                    }
+                }
+            }
+            Assert.Equal(transfers.Select(value => value.Method + "::" + value.Parameter).OrderBy(value => value, StringComparer.Ordinal),
+                usedTransfers.OrderBy(value => value, StringComparer.Ordinal));
+
+            MetadataImage Component(string state, string autoTypesFile)
+            {
+                string directory = Path.Combine(root, "components", architecture, state);
+                Directory.CreateDirectory(directory);
+                var names = new Dictionary<string, string>(StringComparer.Ordinal);
+                foreach (var group in transfers.GroupBy(value => value.Partition, StringComparer.Ordinal))
+                {
+                    string generated = Path.Combine(root, state, "obj", "generated");
+                    string path = new[] { architecture, "common" }.Select(folder =>
+                        Path.Combine(generated, folder, group.Key + ".cs")).Single(File.Exists);
+                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
+                    var apis = Assert.Single(source.DescendantNodes().OfType<ClassDeclarationSyntax>()
+                        .Where(value => value.Identifier.ValueText == "Apis"));
+                    var ns = Assert.Single(apis.Ancestors().OfType<NamespaceDeclarationSyntax>());
+                    Assert.All(group, value => Assert.Equal(value.Namespace, ns.Name.ToString()));
+                    var methods = group.Select(value => value.Method).Concat(group.Select(value => value.Cleanup))
+                        .ToHashSet(StringComparer.Ordinal);
+                    string familyPattern = @"\b(?:" + string.Join("|", group.Select(value => Regex.Escape(value.TypeName))
+                        .Distinct(StringComparer.Ordinal)) + @")\b";
+                    var selected = apis.Members.OfType<MethodDeclarationSyntax>()
+                        .Where(value => Regex.IsMatch(value.ToString(), familyPattern)).ToArray();
+                    Assert.All(methods, method => Assert.Single(selected.Where(value => value.Identifier.ValueText == method)));
+                    source = source.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                        ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                            apis.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(selected))))));
+                    File.WriteAllText(Path.Combine(directory, group.Key + ".cs"), source.ToFullString());
+                    foreach (string cleanup in group.Select(value => value.Cleanup))
+                        names[cleanup] = ns.Name.ToString();
+                }
+                var types = AutoTypeHelpers.GetAutoTypesFromFiles(new[] { Path.Combine(root, autoTypesFile) })
+                    .Where(value => families.Any(family => family.TypeName == value.Name)).ToArray();
+                Assert.Equal(3, types.Length);
+                using (var stream = File.Create(Path.Combine(directory, "NativeTypedefs.cs")))
+                    NativeTypedefStructsCreator.WriteToStream(names, types, stream);
+                return Emit(directory, architecture, references: new[] { baselinePath });
+            }
+
+            static TypeDefinition Api(MetadataReader reader, string ns) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(value => reader.GetString(value.Namespace) == ns && reader.GetString(value.Name) == "Apis");
+            static Dictionary<string, string> TypeSnapshots(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .OrderBy(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name), StringComparer.Ordinal)
+                .ToDictionary(value => reader.GetString(value.Namespace) + "." + reader.GetString(value.Name),
+                    value => WinHttpMigrationTests.SnapshotType(reader, value), StringComparer.Ordinal);
+            static string[] Facts(MetadataReader reader, CustomAttributeHandleCollection attributes, bool withoutOwnership = false)
+                => attributes.Where(handle => !withoutOwnership ||
+                    AttributeName(reader, handle) is not ("RAIIFreeAttribute" or "InvalidHandleValueAttribute"))
+                    .Select(handle => AttributeName(reader, handle) + ":" +
+                        Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,

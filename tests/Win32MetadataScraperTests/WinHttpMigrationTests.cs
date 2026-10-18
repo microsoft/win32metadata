@@ -1715,6 +1715,47 @@ namespace Win32MetadataScraperTests
                 value => value.GetString() == "um\\ws2bth.h.patch");
         }
 
+        internal static readonly (string Header, string Partition, string Namespace, string TypeName,
+            string Method, string Parameter, string Cleanup, long[] InvalidValues)[] DeviceProducerTransfers =
+        {
+            ("cfgmgr32.h", "DevInst", "Windows.Win32.Devices.DeviceAndDriverInstallation", "HCMNOTIFICATION",
+                "CM_Register_Notification", "pNotifyContext", "CM_Unregister_Notification", new long[] { -1, 0 }),
+            ("swdevice.h", "SwDevice", "Windows.Win32.Devices.Enumeration.Pnp", "HSWDEVICE",
+                "SwDeviceCreate", "phSwDevice", "SwDeviceClose", new long[] { -1, 0 }),
+            ("winusb.h", "Buses", "Windows.Win32.Devices.Usb", "WINUSB_INTERFACE_HANDLE",
+                "WinUsb_Initialize", "InterfaceHandle", "WinUsb_Free", new long[] { 0 }),
+            ("winusb.h", "Buses", "Windows.Win32.Devices.Usb", "WINUSB_INTERFACE_HANDLE",
+                "WinUsb_GetAssociatedInterface", "AssociatedInterfaceHandle", "WinUsb_Free", new long[] { 0 }),
+        };
+
+        [Fact]
+        public void DeviceProducerOwnershipHasFourNativeOutputAuthoritiesAndRetainsAllThreeHandleRepresentations()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var types = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "autoTypes.json")));
+            foreach (var family in DeviceProducerTransfers.DistinctBy(value => value.TypeName))
+            {
+                var type = Assert.Single(types.RootElement.EnumerateArray()
+                    .Where(value => value.GetProperty("Name").GetString() == family.TypeName));
+                Assert.Equal(family.Namespace, type.GetProperty("Namespace").GetString());
+                Assert.Equal("DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
+                Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
+                Assert.False(type.TryGetProperty("CloseApi", out _));
+                Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
+            }
+            foreach (var group in DeviceProducerTransfers.GroupBy(value => value.Header, StringComparer.Ordinal))
+            {
+                string additions = string.Join("\n", File.ReadAllLines(Path.Combine(project, "patches", "um", group.Key + ".patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1)));
+                Assert.Equal(group.Select(value => value.Cleanup + ", " + string.Join(", ", value.InvalidValues))
+                    .OrderBy(value => value, StringComparer.Ordinal),
+                    Regex.Matches(additions, @"_Win32_RAIIFree_\(([^)]+)\)")
+                        .Select(match => match.Groups[1].Value).OrderBy(value => value, StringComparer.Ordinal));
+                Assert.DoesNotContain("_Win32_AlsoUsableFor_", additions);
+            }
+        }
+
         private const string DeviceInstallationNamespace = "Windows.Win32.Devices.DeviceAndDriverInstallation";
         internal static readonly (string Name, bool Flags, int Members)[] DeviceInstallationGroups =
         {

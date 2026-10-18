@@ -1,5 +1,5 @@
 diff --git a/um/cfgmgr32.h b/um/cfgmgr32.h
-index cfd63837..f224d1c7 100644
+index cfd63837..37830474 100644
 --- a/um/cfgmgr32.h
 +++ b/um/cfgmgr32.h
 @@ -158,21 +158,26 @@ typedef  HMACHINE     *PHMACHINE;
@@ -1529,7 +1529,7 @@ index cfd63837..f224d1c7 100644
  DWORD
  WINAPI
  CM_WaitNoPendingInstallEvents(
-@@ -4651,6 +4965,7 @@ CM_WaitNoPendingInstallEvents(
+@@ -4651,21 +4965,24 @@ CM_WaitNoPendingInstallEvents(
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
  
@@ -1537,15 +1537,31 @@ index cfd63837..f224d1c7 100644
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4661,6 +4976,7 @@ CM_Register_Notification(
-     _Out_   PHCMNOTIFICATION        pNotifyContext
+-CM_Register_Notification(
+-    _In_    PCM_NOTIFY_FILTER       pFilter,
+-    _In_opt_ PVOID                  pContext,
+-    _In_    PCM_NOTIFY_CALLBACK     pCallback,
+-    _Out_   PHCMNOTIFICATION        pNotifyContext
++CM_Unregister_Notification(
++    _In_    HCMNOTIFICATION NotifyContext
      );
  
 +_Win32_SupportedOS_Windows8_
  CMAPI
  CONFIGRET
  WINAPI
-@@ -4676,6 +4992,7 @@ CM_Unregister_Notification(
+-CM_Unregister_Notification(
+-    _In_    HCMNOTIFICATION NotifyContext
++CM_Register_Notification(
++    _In_    PCM_NOTIFY_FILTER       pFilter,
++    _In_opt_ PVOID                  pContext,
++    _In_    PCM_NOTIFY_CALLBACK     pCallback,
++    _Out_ _Win32_RAIIFree_(CM_Unregister_Notification, -1, 0)
++            PHCMNOTIFICATION        pNotifyContext
+     );
+ 
+ #endif // (WINVER >= _WIN32_WINNT_WIN8)
+@@ -4676,6 +4993,7 @@ CM_Unregister_Notification(
  // CONFIGRET to Win32 error mapping routine
  //
  
@@ -1553,7 +1569,7 @@ index cfd63837..f224d1c7 100644
  CMAPI
  DWORD
  WINAPI
-@@ -4765,4 +5082,3 @@ CM_MapCrToWin32Err(
+@@ -4765,4 +5083,3 @@ CM_MapCrToWin32Err(
  #pragma endregion
  
  #endif // _CFGMGR32_H_

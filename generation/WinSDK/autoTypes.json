@@ -684,8 +684,6 @@
     "Namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
     "Name": "HCMNOTIFICATION",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "CM_Unregister_Notification",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
@@ -931,8 +929,6 @@
     "Namespace": "Windows.Win32.Devices.Enumeration.Pnp",
     "Name": "HSWDEVICE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "SwDeviceClose",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
@@ -1648,10 +1644,9 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.Devices.Usb",
     "Name": "WINUSB_INTERFACE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "WinUsb_Free",
-    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
