@@ -1,0 +1,78 @@
+diff --git a/um/mgmtapi.h b/um/mgmtapi.h
+index b5814863..6a5be938 100644
+--- a/um/mgmtapi.h
++++ b/um/mgmtapi.h
+@@ -74,6 +74,8 @@ typedef PVOID LPSNMP_MGR_SESSION;
+ //                                                                           //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ LPSNMP_MGR_SESSION
+ SNMP_FUNC_TYPE
+ SnmpMgrOpen(
+@@ -83,6 +85,8 @@ SnmpMgrOpen(
+     IN INT   nRetries                       // Comm time-out/retry count
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrCtl(
+@@ -95,12 +99,15 @@ SnmpMgrCtl(
+     LPDWORD            lpcbBytesReturned    // space used from lpvOutBuffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrClose(
+     IN LPSNMP_MGR_SESSION session           // SNMP session pointer
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ SNMPAPI
+ SNMP_FUNC_TYPE
+ SnmpMgrRequest(
+@@ -111,6 +118,7 @@ SnmpMgrRequest(
+        OUT AsnInteger         *errorIndex        // Result error index
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrStrToOid(
+@@ -118,6 +126,7 @@ SnmpMgrStrToOid(
+     OUT AsnObjectIdentifier *oid            // OID internal representation
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrOidToStr(
+@@ -125,12 +134,15 @@ SnmpMgrOidToStr(
+     _Outptr_opt_ LPSTR   *string         // OID string representation
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrTrapListen(
+     OUT HANDLE *phTrapAvailable             // Event indicating trap available
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrap(
+@@ -142,6 +154,7 @@ SnmpMgrGetTrap(
+     OUT RFC1157VarBindList  *variableBindings    // Variable bindings
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ BOOL
+ SNMP_FUNC_TYPE
+ SnmpMgrGetTrapEx(

@@ -1,0 +1,70 @@
+diff --git a/um/winineti.h b/um/winineti.h
+index 63c850c4..62f8bb49 100644
+--- a/um/winineti.h
++++ b/um/winineti.h
+@@ -1042,6 +1042,8 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ (0x100)
+ #define INTERNET_CACHE_CONTAINER_SHARE_READ_WRITE (0x300)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI CreateUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ LPCSTR lpCachePrefix,
+@@ -1052,6 +1054,8 @@ BOOLAPI CreateUrlCacheContainerA(
+     _Reserved_ LPVOID pvBuffer,
+     _Reserved_ LPDWORD cbBuffer
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI CreateUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ LPCWSTR lpCachePrefix,
+@@ -1068,10 +1072,14 @@ BOOLAPI CreateUrlCacheContainerW(
+ #define CreateUrlCacheContainer  CreateUrlCacheContainerA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI DeleteUrlCacheContainerA(
+     _In_ LPCSTR Name,
+     _In_ DWORD dwOptions
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI DeleteUrlCacheContainerW(
+     _In_ LPCWSTR Name,
+     _In_ DWORD dwOptions
+@@ -1161,11 +1169,15 @@ typedef enum {
+ } WININET_SYNC_MODE;
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI FreeUrlCacheSpaceA(
+     _In_opt_ LPCSTR lpszCachePath,
+     _In_ DWORD dwSize,
+     _In_ DWORD dwFilter
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ BOOLAPI FreeUrlCacheSpaceW(
+     _In_opt_ LPCWSTR lpszCachePath,
+     _In_ DWORD dwSize,
+@@ -1229,12 +1241,16 @@ DWORD UrlCacheGetGlobalCacheSize(
+ #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
+ #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOLAPI
+ GetUrlCacheConfigInfoA(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
+     _Reserved_ LPDWORD lpcbCacheConfigInfo,
+     _In_ DWORD dwFieldControl
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOLAPI
+ GetUrlCacheConfigInfoW(
+     _Inout_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,

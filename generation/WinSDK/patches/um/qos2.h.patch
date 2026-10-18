@@ -1,0 +1,92 @@
+diff --git a/um/qos2.h b/um/qos2.h
+index 1d59ed67..7a9916d0 100644
+--- a/um/qos2.h
++++ b/um/qos2.h
+@@ -504,6 +504,7 @@ QOS_SUBTRACT_OVERHEAD(
+ //          and MSFT firewall documentation for more details.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCreateHandle(
+@@ -539,6 +540,7 @@ QOSCreateHandle(
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCloseHandle(
+@@ -596,6 +598,7 @@ QOSCloseHandle(
+ //          have the required components or that it is not on the same link.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSStartTrackingClient(
+@@ -630,6 +633,7 @@ QOSStartTrackingClient(
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSStopTrackingClient(
+@@ -675,6 +679,7 @@ QOSStopTrackingClient(
+ //          to perform this call.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSEnumerateFlows(
+@@ -818,6 +823,7 @@ QOSEnumerateFlows(
+ //          have the required components or that it is not on the same link.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSAddSocketToFlow(
+@@ -881,6 +887,7 @@ QOSAddSocketToFlow(
+ //          Invalid FlowId specified
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSRemoveSocketFromFlow(
+@@ -985,6 +992,7 @@ QOSRemoveSocketFromFlow(
+ //          to perform this call.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSSetFlow(
+@@ -1107,6 +1115,7 @@ QOSSetFlow(
+ //          before ascertaining the state of the network.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSQueryFlow(
+@@ -1228,6 +1237,7 @@ QOSQueryFlow(
+ //          information on your network is currently not supported.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSNotifyFlow(
+@@ -1274,6 +1284,7 @@ QOSNotifyFlow(
+ //  information, call GetLastError.
+ //
+ ExternC
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ QOSCancel(

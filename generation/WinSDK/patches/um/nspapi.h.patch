@@ -1,0 +1,111 @@
+diff --git a/um/nspapi.h b/um/nspapi.h
+index ba21f468..3ff4d7e5 100644
+--- a/um/nspapi.h
++++ b/um/nspapi.h
+@@ -537,6 +537,8 @@ typedef struct _SERVICE_ASYNC_INFO {
+ //
+ // Public NSP API prototypes.
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ EnumProtocolsA (
+@@ -547,6 +549,8 @@ EnumProtocolsA (
+ //
+ // Public NSP API prototypes.
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ EnumProtocolsW (
+@@ -560,6 +564,8 @@ EnumProtocolsW (
+ #define EnumProtocols  EnumProtocolsA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetAddressByNameA (
+@@ -574,6 +580,8 @@ GetAddressByNameA (
+     _Inout_updates_opt_(*lpdwAliasBufferLength) LPSTR  lpAliasBuffer,
+     _Inout_ LPDWORD               lpdwAliasBufferLength
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetAddressByNameW (
+@@ -594,12 +602,16 @@ GetAddressByNameW (
+ #define GetAddressByName  GetAddressByNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetTypeByNameA (
+     _In_    LPSTR         lpServiceName,
+     _Inout_ LPGUID        lpServiceType
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetTypeByNameW (
+@@ -612,6 +624,8 @@ GetTypeByNameW (
+ #define GetTypeByName  GetTypeByNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetNameByTypeA (
+@@ -619,6 +633,8 @@ GetNameByTypeA (
+     _Out_writes_bytes_(dwNameLength) LPSTR         lpServiceName,
+     _In_   DWORD           dwNameLength
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetNameByTypeW (
+@@ -632,6 +648,8 @@ GetNameByTypeW (
+ #define GetNameByType  GetNameByTypeA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ SetServiceA (
+@@ -642,6 +660,8 @@ SetServiceA (
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo,
+     _Out_    LPDWORD              lpdwStatusFlags
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ SetServiceW (
+@@ -658,6 +678,8 @@ SetServiceW (
+ #define SetService  SetServiceA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetServiceA (
+@@ -669,6 +691,8 @@ GetServiceA (
+     _Inout_  LPDWORD              lpdwBufferSize,
+     _In_opt_ LPSERVICE_ASYNC_INFO lpServiceAsyncInfo
+     );
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ INT
+ APIENTRY
+ GetServiceW (

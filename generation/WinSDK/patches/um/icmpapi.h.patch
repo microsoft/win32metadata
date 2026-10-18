@@ -1,0 +1,85 @@
+diff --git a/um/icmpapi.h b/um/icmpapi.h
+index e7907cb5..52cf7ccf 100644
+--- a/um/icmpapi.h
++++ b/um/icmpapi.h
+@@ -75,6 +75,8 @@ extern "C" {
+ //
+ //--
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ IPHLPAPI_DLL_LINKAGE
+ HANDLE
+ WINAPI
+@@ -104,6 +106,8 @@ IcmpCreateFile(
+ //
+ //--
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ IPHLPAPI_DLL_LINKAGE
+ HANDLE
+ WINAPI
+@@ -133,6 +137,8 @@ Icmp6CreateFile(
+ //
+ //--
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ IPHLPAPI_DLL_LINKAGE
+ BOOL
+ WINAPI
+@@ -194,6 +200,8 @@ IcmpCloseHandle(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -283,6 +291,8 @@ IcmpSendEcho(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -312,6 +322,8 @@ IcmpSendEcho2(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTASP1)
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -343,6 +355,8 @@ IcmpSendEcho2Ex(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -397,6 +411,8 @@ Icmp6SendEcho2(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
+@@ -407,6 +423,8 @@ IcmpParseReplies(
+     );
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ IPHLPAPI_DLL_LINKAGE
+ DWORD
+ WINAPI
