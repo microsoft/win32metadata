@@ -1,5 +1,5 @@
 diff --git a/um/winineti.h b/um/winineti.h
-index 63c850c4..62f8bb49 100644
+index 63c850c4..5107eb92 100644
 --- a/um/winineti.h
 +++ b/um/winineti.h
 @@ -1042,6 +1042,8 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
@@ -51,20 +51,48 @@ index 63c850c4..62f8bb49 100644
  BOOLAPI FreeUrlCacheSpaceW(
      _In_opt_ LPCWSTR lpszCachePath,
      _In_ DWORD dwSize,
-@@ -1229,12 +1241,16 @@ DWORD UrlCacheGetGlobalCacheSize(
+@@ -1229,17 +1241,42 @@ DWORD UrlCacheGetGlobalCacheSize(
  #define CACHE_CONFIG_CONTENT_USAGE_FC                                0x00002000
  #define CACHE_CONFIG_STICKY_CONTENT_USAGE_FC                         0x00004000
  
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(CACHE_CONFIG, unsigned long,
++    CACHE_CONFIG_FORCE_CLEANUP_FC,
++    CACHE_CONFIG_DISK_CACHE_PATHS_FC,
++    CACHE_CONFIG_SYNC_MODE_FC,
++    CACHE_CONFIG_CONTENT_PATHS_FC,
++    CACHE_CONFIG_HISTORY_PATHS_FC,
++    CACHE_CONFIG_COOKIES_PATHS_FC,
++    CACHE_CONFIG_QUOTA_FC,
++    CACHE_CONFIG_USER_MODE_FC,
++    CACHE_CONFIG_CONTENT_USAGE_FC,
++    CACHE_CONFIG_STICKY_CONTENT_USAGE_FC);
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  BOOLAPI
  GetUrlCacheConfigInfoA(
      _Inout_ LPINTERNET_CACHE_CONFIG_INFOA lpCacheConfigInfo,
      _Reserved_ LPDWORD lpcbCacheConfigInfo,
-     _In_ DWORD dwFieldControl
+-    _In_ DWORD dwFieldControl
++    #if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AssociatedEnum_(CACHE_CONFIG)
++#endif
++_In_ DWORD dwFieldControl
      );
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  BOOLAPI
  GetUrlCacheConfigInfoW(
      _Inout_ LPINTERNET_CACHE_CONFIG_INFOW lpCacheConfigInfo,
+     _Reserved_ LPDWORD lpcbCacheConfigInfo,
+-    _In_ DWORD dwFieldControl
++    #if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_AssociatedEnum_(CACHE_CONFIG)
++#endif
++_In_ DWORD dwFieldControl
+     );
+ #ifdef UNICODE
+ #define GetUrlCacheConfigInfo  GetUrlCacheConfigInfoW

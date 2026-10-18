@@ -1,8 +1,25 @@
 diff --git a/um/perflib.h b/um/perflib.h
-index 778da347..7f64bca4 100644
+index 778da347..ae67dd4d 100644
 --- a/um/perflib.h
 +++ b/um/perflib.h
-@@ -199,14 +199,24 @@ WINAPI
+@@ -98,6 +98,16 @@ specified.
+ #define PERF_AGGREGATE_MAX        4 /* Maximum.
+     The maximum value of the returned counter instance values. */
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(PERF_COUNTER_AGGREGATE_FUNC, unsigned long,
++    PERF_AGGREGATE_UNDEFINED,
++    PERF_AGGREGATE_TOTAL,
++    PERF_AGGREGATE_AVG,
++    PERF_AGGREGATE_MIN,
++    PERF_AGGREGATE_MAX);
++#endif
++
+ /*
+ These are possible attributes used in generated PERF_COUNTER_INFO::Attrib value.
+ Note that only certain combinations of the preceding possible values are allowed:
+@@ -199,14 +209,24 @@ WINAPI
      IN ULONG  BufferSize
  );
  
@@ -28,7 +45,7 @@ index 778da347..7f64bca4 100644
  );
  
  // Start PERFLIB V2 provider with customized memory allocation/free routines.
-@@ -223,25 +233,29 @@ typedef struct _PROVIDER_CONTEXT {
+@@ -223,25 +243,29 @@ typedef struct _PROVIDER_CONTEXT {
      LPVOID         pMemContext;
  } PERF_PROVIDER_CONTEXT, * PPERF_PROVIDER_CONTEXT;
  
@@ -60,7 +77,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfSetCounterSetInfo(
      _In_ HANDLE ProviderHandle,
-@@ -249,6 +263,8 @@ PerfSetCounterSetInfo(
+@@ -249,6 +273,8 @@ PerfSetCounterSetInfo(
      _In_ ULONG TemplateSize
      );
  
@@ -69,7 +86,7 @@ index 778da347..7f64bca4 100644
  PPERF_COUNTERSET_INSTANCE WINAPI
  PerfCreateInstance(
      _In_ HANDLE ProviderHandle,
-@@ -257,12 +273,15 @@ PerfCreateInstance(
+@@ -257,12 +283,15 @@ PerfCreateInstance(
      _In_ ULONG Id
      );
  
@@ -85,7 +102,7 @@ index 778da347..7f64bca4 100644
  PPERF_COUNTERSET_INSTANCE WINAPI
  PerfQueryInstance(
      _In_ HANDLE ProviderHandle,
-@@ -271,6 +290,7 @@ PerfQueryInstance(
+@@ -271,6 +300,7 @@ PerfQueryInstance(
      _In_ ULONG Id
      );
  
@@ -93,7 +110,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfSetCounterRefValue(
      _In_ HANDLE Provider,
-@@ -279,6 +299,7 @@ PerfSetCounterRefValue(
+@@ -279,6 +309,7 @@ PerfSetCounterRefValue(
      _In_ PVOID Address
      );
  
@@ -101,7 +118,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfSetULongCounterValue(
      _In_ HANDLE Provider,
-@@ -287,6 +308,7 @@ PerfSetULongCounterValue(
+@@ -287,6 +318,7 @@ PerfSetULongCounterValue(
      _In_ ULONG Value
      );
  
@@ -109,7 +126,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfSetULongLongCounterValue(
      _In_ HANDLE Provider,
-@@ -295,6 +317,7 @@ PerfSetULongLongCounterValue(
+@@ -295,6 +327,7 @@ PerfSetULongLongCounterValue(
      _In_ ULONGLONG Value
      );
  
@@ -117,7 +134,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfIncrementULongCounterValue(
      _In_ HANDLE Provider,
-@@ -303,6 +326,7 @@ PerfIncrementULongCounterValue(
+@@ -303,6 +336,7 @@ PerfIncrementULongCounterValue(
      _In_ ULONG Value
      );
  
@@ -125,7 +142,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfIncrementULongLongCounterValue(
      _In_ HANDLE Provider,
-@@ -311,6 +335,7 @@ PerfIncrementULongLongCounterValue(
+@@ -311,6 +345,7 @@ PerfIncrementULongLongCounterValue(
      _In_ ULONGLONG Value
      );
  
@@ -133,7 +150,7 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfDecrementULongCounterValue(
      _In_ HANDLE Provider,
-@@ -319,6 +344,7 @@ PerfDecrementULongCounterValue(
+@@ -319,6 +354,7 @@ PerfDecrementULongCounterValue(
      _In_ ULONG Value
      );
  
@@ -141,7 +158,17 @@ index 778da347..7f64bca4 100644
  ULONG WINAPI
  PerfDecrementULongLongCounterValue(
      _In_ HANDLE Provider,
-@@ -671,6 +697,7 @@ returned by the function.
+@@ -429,6 +465,9 @@ typedef struct _PERF_COUNTER_REG_INFO {
+     ULONG     PerfTimeId;    // The counter ID of the perf counter, 0xffffffff for none.
+     ULONG     PerfFreqId;    // The counter ID of the freq counter, 0xffffffff for none.
+     ULONG     MultiId;       // The counter ID of the multi counter, 0xffffffff for none.
++    #if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++    _Win32_AssociatedEnum_(PERF_COUNTER_AGGREGATE_FUNC)
++#endif
+     ULONG     AggregateFunc; // PERF_AGGREGATE value, used if counter set type is aggregate.
+     ULONG     Reserved;      // Reserved.
+ } PERF_COUNTER_REG_INFO, * PPERF_COUNTER_REG_INFO;
+@@ -671,6 +710,7 @@ returned by the function.
  - Other: On return, the value *pcCounterSetIdsActual is undefined and should
    not be used.
  */
@@ -149,7 +176,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -719,6 +746,7 @@ of a PERF_INSTANCE_HEADER immediately followed by a nul-terminated utf-16le
+@@ -719,6 +759,7 @@ of a PERF_INSTANCE_HEADER immediately followed by a nul-terminated utf-16le
  instance name, followed by padding so that the size of the
  PERF_INSTANCE_HEADER block is a multiple of 8.
  */
@@ -157,7 +184,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -775,6 +803,7 @@ Remarks:
+@@ -775,6 +816,7 @@ Remarks:
  See the PerfRegInfoType enum for the types of data that can be requested and
  the formats of the data returned for each type of request.
  */
@@ -165,7 +192,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -806,12 +835,24 @@ phQuery:
+@@ -806,12 +848,24 @@ phQuery:
  Receives the query handle. The handle should be closed with
  PerfCloseQueryHandle when it is no longer needed.
  */
@@ -191,7 +218,7 @@ index 778da347..7f64bca4 100644
      );
  
  /*
-@@ -822,6 +863,7 @@ Closes a query handle that was opened by PerfOpenQueryHandle.
+@@ -822,6 +876,7 @@ Closes a query handle that was opened by PerfOpenQueryHandle.
  hQuery:
  The query handle to be closed.
  */
@@ -199,7 +226,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -864,6 +906,7 @@ The size of each block (including the PERF_COUNTER_IDENTIFIER, InstanceName,
+@@ -864,6 +919,7 @@ The size of each block (including the PERF_COUNTER_IDENTIFIER, InstanceName,
  and padding) is determined by the PERF_COUNTER_IDENTIFIER Size field, which
  will be a multiple of 8 bytes.
  */
@@ -207,7 +234,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -908,6 +951,7 @@ structure followed by a sequence of PERF_COUNTER_HEADER blocks. See the
+@@ -908,6 +964,7 @@ structure followed by a sequence of PERF_COUNTER_HEADER blocks. See the
  description of the PERF_DATA_HEADER and PERF_COUNTER_HEADER structures for
  details.
  */
@@ -215,7 +242,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -963,6 +1007,7 @@ PerfAddCounters will attempt to add one counter specification to the query for
+@@ -963,6 +1020,7 @@ PerfAddCounters will attempt to add one counter specification to the query for
  each PERF_COUNTER_IDENTIFIER block, and will update the Status field of each
  block with the result of the attempt.
  */
@@ -223,7 +250,7 @@ index 778da347..7f64bca4 100644
  _Success_(return == ERROR_SUCCESS)
  ULONG
  WINAPI
-@@ -999,6 +1044,7 @@ PerfDeleteCounters will attempt to remove one counter specification from the
+@@ -999,6 +1057,7 @@ PerfDeleteCounters will attempt to remove one counter specification from the
  query for each PERF_COUNTER_IDENTIFIER block, and will update the Status field
  of each block with the result of the attempt.
  */

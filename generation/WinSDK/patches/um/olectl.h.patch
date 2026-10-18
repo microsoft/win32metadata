@@ -1,5 +1,5 @@
 diff --git a/um/olectl.h b/um/olectl.h
-index cb297a63..28641e76 100644
+index cb297a63..4e6e7f8b 100644
 --- a/um/olectl.h
 +++ b/um/olectl.h
 @@ -166,11 +166,25 @@ typedef struct tagFONTDESC
@@ -28,7 +28,7 @@ index cb297a63..28641e76 100644
      UINT picType;
      union
      {
-@@ -411,40 +425,50 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
+@@ -411,46 +425,56 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
  /////////////////////////////////////////////////////////////////////////////
  // Self-registration APIs (to be implemented by server DLL)
  
@@ -44,11 +44,14 @@ index cb297a63..28641e76 100644
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleCreatePropertyFrame(HWND hwndOwner, UINT x, UINT y,
-     LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
-     LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
+-    LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
+-    LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
++    LPCOLESTR lpszCaption, ULONG cObjects, _In_ LPUNKNOWN FAR* ppUnk, ULONG cPages,
++    _In_ LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, _In_ LPVOID pvReserved);
  
+-WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
 +_Win32_SupportedOS_Windows2000_
- WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
++WINOLECTLAPI OleCreatePropertyFrameIndirect(_In_ LPOCPFIPARAMS lpParams);
  
  
  /////////////////////////////////////////////////////////////////////////////
@@ -56,29 +59,43 @@ index cb297a63..28641e76 100644
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleTranslateColor(OLE_COLOR clr, HPALETTE hpal,
-     COLORREF* lpcolorref);
+-    COLORREF* lpcolorref);
++    _Out_ COLORREF* lpcolorref);
  
+-WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
+-    LPVOID FAR* lplpvObj);
 +_Win32_SupportedOS_Windows2000_
- WINOLECTLAPI OleCreateFontIndirect(LPFONTDESC lpFontDesc, REFIID riid,
-     LPVOID FAR* lplpvObj);
++WINOLECTLAPI OleCreateFontIndirect(_In_ LPFONTDESC lpFontDesc, REFIID riid,
++    _Out_ LPVOID FAR* lplpvObj);
  
+-WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
+-    BOOL fOwn, LPVOID FAR* lplpvObj);
 +_Win32_SupportedOS_Windows2000_
- WINOLECTLAPI OleCreatePictureIndirect(LPPICTDESC lpPictDesc, REFIID riid,
-     BOOL fOwn, LPVOID FAR* lplpvObj);
++WINOLECTLAPI OleCreatePictureIndirect(_In_ LPPICTDESC lpPictDesc, REFIID riid,
++    BOOL fOwn, _COM_Outptr_ LPVOID FAR* lplpvObj);
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleLoadPicture(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
-     REFIID riid, LPVOID FAR* lplpvObj);
+-    REFIID riid, LPVOID FAR* lplpvObj);
++    REFIID riid, _Out_ LPVOID FAR* lplpvObj);
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleLoadPictureEx(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
      REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags,
-     LPVOID FAR* lplpvObj);
+-    LPVOID FAR* lplpvObj);
++    _Out_ LPVOID FAR* lplpvObj);
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
  				  LPUNKNOWN punkCaller,
  				  DWORD     dwReserved,
+ 				  OLE_COLOR clrReserved,
+ 				  REFIID    riid,
+-				  LPVOID *  ppvRet );
++				  _Out_ LPVOID *  ppvRet );
+ 
+ WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
+     LPDISPATCH* lplpdispPicture);
 @@ -461,6 +485,7 @@ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
  WINOLECTLAPI OleSavePictureFile(LPDISPATCH lpdispPicture,
      BSTR bstrFileName);

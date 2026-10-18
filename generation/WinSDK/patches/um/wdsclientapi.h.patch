@@ -1,5 +1,5 @@
 diff --git a/um/wdsclientapi.h b/um/wdsclientapi.h
-index 1f3aeba9..0176946f 100644
+index 1f3aeba9..72f53bc8 100644
 --- a/um/wdsclientapi.h
 +++ b/um/wdsclientapi.h
 @@ -54,6 +54,7 @@ typedef struct tagWDS_CLI_CRED
@@ -187,15 +187,26 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliGetImageNamespace(
-@@ -368,6 +394,7 @@ enum
+@@ -366,8 +392,18 @@ enum
+     WDS_CLI_MSG_PROGRESS,
+     WDS_CLI_MSG_TEXT,
  };
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(PFN_WDS_CLI_CALLBACK_MESSAGE_ID, unsigned long,
++    WDS_CLI_MSG_START,
++    WDS_CLI_MSG_COMPLETE,
++    WDS_CLI_MSG_PROGRESS,
++    WDS_CLI_MSG_TEXT);
++#endif
++
  
  
 +_Win32_SupportedOS_WindowsVista_
  HRESULT
  WDSCLIAPI
  WdsCliGetTransferSize(
-@@ -386,6 +413,7 @@ WDSCLIAPI
+@@ -386,6 +422,7 @@ WDSCLIAPI
  WdsCliSetTransferBufferSize(
      _In_ ULONG ulSizeInBytes );
  
@@ -203,7 +214,7 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliTransferImage(
-@@ -397,6 +425,7 @@ WdsCliTransferImage(
+@@ -397,6 +434,7 @@ WdsCliTransferImage(
      _In_opt_ PVOID pvUserData,
      _Out_ PHANDLE phTransfer );
  
@@ -211,7 +222,7 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliTransferFile(
-@@ -410,11 +439,13 @@ WdsCliTransferFile(
+@@ -410,11 +448,13 @@ WdsCliTransferFile(
      _In_opt_ PVOID pvUserData,
      _Out_ PHANDLE phTransfer );
  
@@ -225,7 +236,7 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliWaitForTransfer(
-@@ -423,6 +454,7 @@ WdsCliWaitForTransfer(
+@@ -423,6 +463,7 @@ WdsCliWaitForTransfer(
  //
  // Dynamic Driver Provisioning functions
  //
@@ -233,7 +244,7 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliObtainDriverPackages(
-@@ -432,6 +464,7 @@ WdsCliObtainDriverPackages(
+@@ -432,6 +473,7 @@ WdsCliObtainDriverPackages(
      _Out_ ULONG *pulCount    
      );
  
@@ -241,7 +252,7 @@ index 1f3aeba9..0176946f 100644
  HRESULT
  WDSCLIAPI
  WdsCliObtainDriverPackagesEx (
-@@ -442,6 +475,7 @@ WdsCliObtainDriverPackagesEx (
+@@ -442,6 +484,7 @@ WdsCliObtainDriverPackagesEx (
      _Out_ ULONG* pulCount
      );
  

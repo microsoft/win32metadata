@@ -5169,61 +5169,6 @@
     ]
   },
   {
-    "name": "CACHE_CONFIG",
-    "members": [
-      {
-        "name": "CACHE_CONFIG_FORCE_CLEANUP_FC",
-        "value": "32"
-      },
-      {
-        "name": "CACHE_CONFIG_DISK_CACHE_PATHS_FC",
-        "value": "64"
-      },
-      {
-        "name": "CACHE_CONFIG_SYNC_MODE_FC",
-        "value": "128"
-      },
-      {
-        "name": "CACHE_CONFIG_CONTENT_PATHS_FC",
-        "value": "256"
-      },
-      {
-        "name": "CACHE_CONFIG_HISTORY_PATHS_FC",
-        "value": "1024"
-      },
-      {
-        "name": "CACHE_CONFIG_COOKIES_PATHS_FC",
-        "value": "512"
-      },
-      {
-        "name": "CACHE_CONFIG_QUOTA_FC",
-        "value": "2048"
-      },
-      {
-        "name": "CACHE_CONFIG_USER_MODE_FC",
-        "value": "4096"
-      },
-      {
-        "name": "CACHE_CONFIG_CONTENT_USAGE_FC",
-        "value": "8192"
-      },
-      {
-        "name": "CACHE_CONFIG_STICKY_CONTENT_USAGE_FC",
-        "value": "16384"
-      }
-    ],
-    "uses": [
-      {
-        "method": "GetUrlCacheConfigInfoW",
-        "parameter": "dwFieldControl"
-      },
-      {
-        "method": "GetUrlCacheConfigInfoA",
-        "parameter": "dwFieldControl"
-      }
-    ]
-  },
-  {
     "addUsesTo": "NtmsCreateOptions",
     "members": [],
     "uses": [
@@ -7830,36 +7775,6 @@
     ]
   },
   {
-    "name": "SET_SERVICE_OPERATION",
-    "members": [
-      {
-        "name": "SERVICE_REGISTER"
-      },
-      {
-        "name": "SERVICE_DEREGISTER"
-      },
-      {
-        "name": "SERVICE_FLUSH"
-      },
-      {
-        "name": "SERVICE_ADD_TYPE"
-      },
-      {
-        "name": "SERVICE_DELETE_TYPE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetServiceA",
-        "parameter": "dwOperation"
-      },
-      {
-        "method": "SetServiceW",
-        "parameter": "dwOperation"
-      }
-    ]
-  },
-  {
     "name": "REGISTER_TOUCH_WINDOW_FLAGS",
     "members": [
       {
@@ -10058,28 +9973,6 @@
     "uses": [
       {
         "method": "OpenThemeDataEx",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "SECURITY_INFO_PAGE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SI_ADVANCED"
-      },
-      {
-        "name": "SI_EDIT_AUDITS"
-      },
-      {
-        "name": "SI_EDIT_PROPERTIES"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "ISecurityInformation",
-        "method": "GetAccessRights",
         "parameter": "dwFlags"
       }
     ]
@@ -17074,25 +16967,8 @@
     ]
   },
   {
-    "name": "PFN_WDS_CLI_CALLBACK_MESSAGE_ID",
-    "members": [
-      {
-        "name": "WDS_CLI_MSG_START",
-        "value": "0"
-      },
-      {
-        "name": "WDS_CLI_MSG_COMPLETE",
-        "value": "1"
-      },
-      {
-        "name": "WDS_CLI_MSG_PROGRESS",
-        "value": "2"
-      },
-      {
-        "name": "WDS_CLI_MSG_TEXT",
-        "value": "3"
-      }
-    ],
+    "addUsesTo": "PFN_WDS_CLI_CALLBACK_MESSAGE_ID",
+    "namespace": "Windows.Win32.System.DeploymentServices",
     "uses": [
       {
         "method": "PFN_WdsCliCallback",
@@ -17144,32 +17020,6 @@
       {
         "struct": "TOKEN_MANDATORY_POLICY",
         "field": "Policy"
-      }
-    ]
-  },
-  {
-    "name": "PERF_COUNTER_AGGREGATE_FUNC",
-    "members": [
-      {
-        "name": "PERF_AGGREGATE_UNDEFINED"
-      },
-      {
-        "name": "PERF_AGGREGATE_TOTAL"
-      },
-      {
-        "name": "PERF_AGGREGATE_AVG"
-      },
-      {
-        "name": "PERF_AGGREGATE_MIN"
-      },
-      {
-        "name": "PERF_AGGREGATE_MAX"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PERF_COUNTER_REG_INFO",
-        "field": "AggregateFunc"
       }
     ]
   },
@@ -18630,40 +18480,6 @@
         }
       ]
     },
-  {
-    "name": "CERT_SELECT_STRUCT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CSS_HIDE_PROPERTIES"
-      },
-      {
-        "name": "CSS_ENABLEHOOK"
-      },
-      {
-        "name": "CSS_ALLOWMULTISELECT"
-      },
-      {
-        "name": "CSS_SHOW_HELP"
-      },
-      {
-        "name": "CSS_ENABLETEMPLATE"
-      },
-      {
-        "name": "CSS_ENABLETEMPLATEHANDLE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CERT_SELECT_STRUCT_A",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "CERT_SELECT_STRUCT_W",
-        "field": "dwFlags"
-      }
-    ]
-  },
   {
     "name": "MSGFLTINFO_STATUS",
     "members": [
@@ -24264,52 +24080,6 @@
     ]
   },
   {
-    "name": "CERT_VIEWPROPERTIES_STRUCT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CM_ENABLEHOOK"
-      },
-      {
-        "name": "CM_SHOW_HELP"
-      },
-      {
-        "name": "CM_SHOW_HELPICON"
-      },
-      {
-        "name": "CM_ENABLETEMPLATE"
-      },
-      {
-        "name": "CM_HIDE_ADVANCEPAGE"
-      },
-      {
-        "name": "CM_HIDE_TRUSTPAGE"
-      },
-      {
-        "name": "CM_NO_NAMECHANGE"
-      },
-      {
-        "name": "CM_NO_EDITTRUST"
-      },
-      {
-        "name": "CM_HIDE_DETAILPAGE"
-      },
-      {
-        "name": "CM_ADD_CERT_STORES"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CERT_VIEWPROPERTIES_STRUCT_A",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "CERT_VIEWPROPERTIES_STRUCT_W",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "CRYPTUI_WIZ_EXPORT_FORMAT",
     "members": [
       {
@@ -24829,26 +24599,6 @@
       {
         "struct": "SECPKG_EVENT_PACKAGE_CHANGE",
         "field": "ChangeType"
-      }
-    ]
-  },
-  {
-    "name": "CTL_MODIFY_REQUEST_OPERATION",
-    "members": [
-      {
-        "name": "CTL_MODIFY_REQUEST_ADD_TRUSTED"
-      },
-      {
-        "name": "CTL_MODIFY_REQUEST_ADD_NOT_TRUSTED"
-      },
-      {
-        "name": "CTL_MODIFY_REQUEST_REMOVE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CTL_MODIFY_REQUEST",
-        "field": "dwOperation"
       }
     ]
   },

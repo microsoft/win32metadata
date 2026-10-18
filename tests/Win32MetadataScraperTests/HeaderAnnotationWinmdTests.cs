@@ -1173,6 +1173,275 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                 : Key(reader, reader.GetTypeDefinition(type.GetDeclaringType())) + "+" + reader.GetString(type.Name);
         }
 
+        private static readonly (string Name, string Header, bool Flags, int Members)[] NextNativeCategoryGroups =
+        {
+            ("CERT_SELECT_STRUCT_FLAGS", "cryptdlg.h", true, 6),
+            ("CERT_VIEWPROPERTIES_STRUCT_FLAGS", "cryptdlg.h", true, 10),
+            ("CTL_MODIFY_REQUEST_OPERATION", "cryptdlg.h", false, 3),
+            ("SECURITY_INFO_PAGE_FLAGS", "aclui.h", true, 3),
+            ("SET_SERVICE_OPERATION", "nspapi.h", false, 5),
+            ("PERF_COUNTER_AGGREGATE_FUNC", "perflib.h", false, 5),
+            ("CACHE_CONFIG", "winineti.h", false, 10),
+            ("PFN_WDS_CLI_CALLBACK_MESSAGE_ID", "wdsclientapi.h", false, 4),
+        };
+
+        [Fact]
+        public void NextNativeCategoryKeepsSourceGroupsAndExactUnsupportedTails()
+        {
+            string project = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            foreach (var group in NextNativeCategoryGroups)
+            {
+                Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) &&
+                    name.GetString() == group.Name);
+                string macro = group.Flags ? "_Win32_FlagsEnum_" : "_Win32_Enum_";
+                Assert.Single(File.ReadAllLines(Path.Combine(project, "patches", "um", group.Header + ".patch"))
+                    .Where(line => line.StartsWith("+" + macro + "(" + group.Name + ",", StringComparison.Ordinal)));
+            }
+            var wds = Assert.Single(items.Where(item => item.TryGetProperty("addUsesTo", out var name) &&
+                name.GetString() == "PFN_WDS_CLI_CALLBACK_MESSAGE_ID"));
+            Assert.Equal("Windows.Win32.System.DeploymentServices", wds.GetProperty("namespace").GetString());
+            var callback = Assert.Single(wds.GetProperty("uses").EnumerateArray());
+            Assert.Equal("PFN_WdsCliCallback", callback.GetProperty("method").GetString());
+            Assert.Equal("dwMessageId", callback.GetProperty("parameter").GetString());
+            Assert.Contains(items, item => item.TryGetProperty("name", out var name) &&
+                name.GetString() == "SI_OBJECT_INFO_FLAGS");
+            var rows = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
+            foreach (string row in new[]
+            {
+                "GetProcessHeap::return=[DoNotRelease]",
+                "GetProcessHeaps::ProcessHeaps=[DoNotRelease]",
+                "OleCreatePropertyFrame::dwReserved=[Reserved]",
+                "OleCreatePropertyFrame::pvReserved=[Reserved]",
+                "OleLoadPicturePath::dwReserved=[Reserved]",
+                "PXE_DHCP_OPTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_MESSAGE_HEADER=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+            })
+                Assert.Contains(row, rows);
+            foreach (string row in new[]
+            {
+                "SysAllocStringByteLen::psz=[NativeArrayInfo(CountParamIndex = 1)]",
+                "CoInitialize=[CanReturnMultipleSuccessValues]",
+                "CreateDataCache::ppv=[ComOutPtr]",
+            })
+                Assert.DoesNotContain(row, rows);
+        }
+
+        [NativeMigrationTheory("EXISTING_NATIVE_CATEGORY_NEXT_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void NormalNextNativeCategoryKeepsPhysicalGroupsAndContracts(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("EXISTING_NATIVE_CATEGORY_NEXT_ROOT");
+            using var expectations = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "expectations.json")));
+            var plan = expectations.RootElement;
+            using var baselinePaths = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "frozen-baseline-types.json")));
+            string baselinePath = baselinePaths.RootElement.GetProperty("path").GetString();
+            using var baseline = new MetadataImage(baselinePath);
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baselinePath), "exact-source-inputs.zip"));
+            string normal = Path.Combine(root, "scrape-" + architecture, "generated", architecture);
+            string directory = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            string controlDirectory = Path.Combine(directory, "native-storage-expectation");
+            string candidateDirectory = Path.Combine(directory, "candidate");
+            Directory.CreateDirectory(controlDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            var methods = plan.GetProperty("methods").EnumerateArray().Select(value => value.GetString()).ToHashSet();
+            var records = plan.GetProperty("records").EnumerateArray().Select(value => value.GetString()).ToHashSet();
+            var groups = NextNativeCategoryGroups.Select(group => group.Name).ToHashSet();
+            var expectedMethods = new HashSet<string>();
+            var expectedRecords = new HashSet<string>();
+            var actualMethods = new HashSet<string>();
+            var actualRecords = new HashSet<string>();
+            var actualGroups = new HashSet<string>();
+            foreach (string file in new[] { "Authorization.UI", "Security.Cryptography.UI", "WinSock", "Perf",
+                "WinInet", "Wds", "Shell", "Fs", "Com", "ComOle" })
+            {
+                var entry = archive.GetEntry(architecture + "\\" + file + ".cs") ??
+                    archive.GetEntry("common\\" + file + ".cs");
+                Assert.NotNull(entry);
+                using var stream = new StreamReader(entry.Open());
+                WriteSelected(stream.ReadToEnd(), file, controlDirectory, false, expectedMethods, expectedRecords);
+                WriteSelected(File.ReadAllText(Path.Combine(normal, file + ".cs")), file,
+                    candidateDirectory, true, actualMethods, actualRecords);
+            }
+            foreach (string path in Directory.EnumerateFiles(normal, "*.header-types.cs"))
+                WriteSelected(File.ReadAllText(path), Path.GetFileNameWithoutExtension(path), candidateDirectory,
+                    true, actualMethods, actualRecords);
+            Assert.Equal(methods.OrderBy(value => value), expectedMethods.OrderBy(value => value));
+            Assert.Equal(records.OrderBy(value => value), expectedRecords.OrderBy(value => value));
+            Assert.Equal(methods.OrderBy(value => value), actualMethods.OrderBy(value => value));
+            Assert.Equal(records.OrderBy(value => value), actualRecords.OrderBy(value => value));
+            Assert.Equal(groups.OrderBy(value => value), actualGroups.OrderBy(value => value));
+
+            // Preserve every legacy attribute; normalize only the eleven reviewed enum-typed UInt32 slots.
+            using var control = Emit(controlDirectory, architecture,
+                memberRemaps: Dictionary(plan.GetProperty("nativeStorageExpectationRemaps")),
+                references: new[] { baselinePath });
+            using var candidate = Emit(candidateDirectory, architecture,
+                memberRemaps: Dictionary(plan.GetProperty("candidateRemaps")),
+                references: new[] { baselinePath });
+            AssertMetadataClosure(control.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            var before = Types(control.Reader);
+            var after = Types(candidate.Reader);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (string name in before.Keys)
+                Assert.Equal(WinHttpMigrationTests.SnapshotType(control.Reader, before[name]),
+                    WinHttpMigrationTests.SnapshotType(candidate.Reader, after[name]));
+
+            var groupValues = new Dictionary<string, string[]>();
+            foreach (var group in NextNativeCategoryGroups)
+            {
+                var current = FindType(candidate.Reader, group.Name);
+                var old = FindType(baseline.Reader, group.Name);
+                string ns = plan.GetProperty("namespaces").GetProperty(group.Name).GetString();
+                Assert.Equal(ns, candidate.Reader.GetString(current.Namespace));
+                Assert.Equal(ns, baseline.Reader.GetString(old.Namespace));
+                foreach (var pair in new[] { (candidate.Reader, current), (baseline.Reader, old) })
+                {
+                    var storage = pair.Item2.GetFields().Select(pair.Item1.GetFieldDefinition)
+                        .Single(field => pair.Item1.GetString(field.Name) == "value__");
+                    Assert.Equal("UInt32", storage.DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(group.Flags, pair.Item2.GetCustomAttributes().Any(
+                        handle => AttributeName(pair.Item1, handle) == "FlagsAttribute"));
+                    AssertDoesNotHaveAttribute(pair.Item1, pair.Item2.GetCustomAttributes(), "ScopedEnumAttribute");
+                }
+                string[] values = Values(candidate.Reader, current);
+                Assert.Equal(group.Members, values.Length);
+                Assert.Equal(Values(baseline.Reader, old), values);
+                groupValues[group.Name] = values;
+            }
+            foreach (var association in plan.GetProperty("associations").EnumerateArray())
+            {
+                string group = association.GetProperty("group").GetString();
+                string fullEnum = plan.GetProperty("namespaces").GetProperty(group).GetString() + "." + group;
+                var use = association.GetProperty("legacyUse");
+                if (use.TryGetProperty("struct", out var owner))
+                {
+                    string fieldName = use.GetProperty("field").GetString();
+                    var old = FindType(baseline.Reader, owner.GetString()).GetFields().Select(baseline.Reader.GetFieldDefinition)
+                        .Single(field => baseline.Reader.GetString(field.Name) == fieldName);
+                    var current = FindType(candidate.Reader, owner.GetString()).GetFields().Select(candidate.Reader.GetFieldDefinition)
+                        .Single(field => candidate.Reader.GetString(field.Name) == fieldName);
+                    Assert.Equal(fullEnum, old.DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+                    Assert.Equal("UInt32", current.DecodeSignature(new SignatureNames(), null));
+                    AssertStringAttribute(candidate.Reader, current.GetCustomAttributes(), "AssociatedEnumAttribute", group);
+                }
+                else
+                {
+                    string methodName = use.GetProperty("method").GetString();
+                    string recordName = use.TryGetProperty("interface", out owner) ? owner.GetString() : "Apis";
+                    var old = Method(baseline.Reader, recordName, methodName);
+                    var current = Method(candidate.Reader, recordName, methodName);
+                    string parameterName = use.GetProperty("parameter").GetString();
+                    var oldParameter = old.GetParameters().Select(baseline.Reader.GetParameter)
+                        .Single(parameter => baseline.Reader.GetString(parameter.Name) == parameterName);
+                    var parameter = current.GetParameters().Select(candidate.Reader.GetParameter)
+                        .Single(value => candidate.Reader.GetString(value.Name) == parameterName);
+                    Assert.Equal(oldParameter.SequenceNumber, parameter.SequenceNumber);
+                    Assert.Equal(oldParameter.Attributes, parameter.Attributes);
+                    Assert.Equal(fullEnum, old.DecodeSignature(new SignatureNames(qualifiedNames: true), null)
+                        .ParameterTypes[oldParameter.SequenceNumber - 1]);
+                    Assert.Equal("UInt32", current.DecodeSignature(new SignatureNames(), null)
+                        .ParameterTypes[parameter.SequenceNumber - 1]);
+                    AssertStringAttribute(candidate.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", group);
+                }
+            }
+            foreach (var contract in plan.GetProperty("preserveResult").EnumerateArray())
+                Assert.True(Method(candidate.Reader, "Apis", contract.GetProperty("method").GetString())
+                    .ImplAttributes.HasFlag(MethodImplAttributes.PreserveSig));
+            foreach (var name in plan.GetProperty("packing").GetProperty("types").EnumerateArray())
+                Assert.Equal(1, FindType(candidate.Reader, name.GetString()).GetLayout().PackingSize);
+            var allocation = Method(candidate.Reader, "Apis", "SysAllocStringByteLen");
+            var input = allocation.GetParameters().Select(candidate.Reader.GetParameter)
+                .Single(parameter => candidate.Reader.GetString(parameter.Name) == "psz");
+            Assert.Equal(ParameterAttributes.In | ParameterAttributes.Optional, input.Attributes);
+            AssertHasAttribute(candidate.Reader, input.GetCustomAttributes(), "NativeArrayInfoAttribute");
+            File.WriteAllText(Path.Combine(directory, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                scope = plan.GetProperty("scope").GetString(),
+                groups = groupValues,
+                nativeStorageAssociations = plan.GetProperty("associations"),
+                exactLegacyAttributeRows = plan.GetProperty("retiredAttributeRows"),
+                retainedSelectedAttributeRows = plan.GetProperty("retainedSelectedAttributeRows"),
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                expectationPath = Path.Combine(controlDirectory, "Test.winmd"),
+                referencePath = baselinePath,
+                selectedMethods = actualMethods.OrderBy(value => value),
+                selectedRecords = actualRecords.OrderBy(value => value),
+                nativeFieldArrayInferenceEnabled = false,
+                noWholeSdkImageOrApiAcceptance = true,
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            Dictionary<string, TypeDefinition> Types(MetadataReader reader)
+                => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == "Apis" || records.Contains(reader.GetString(type.Name)))
+                    .ToDictionary(type => reader.GetString(type.Namespace) + "." + reader.GetString(type.Name));
+
+            static Dictionary<string, string> Dictionary(JsonElement element)
+                => element.EnumerateObject().ToDictionary(property => property.Name, property => property.Value.GetString());
+
+            static string[] Values(MetadataReader reader, TypeDefinition type)
+                => type.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => reader.GetString(field.Name) != "value__")
+                    .Select(field =>
+                    {
+                        var value = reader.GetConstant(field.GetDefaultValue());
+                        return reader.GetString(field.Name) + "=" + value.TypeCode + ":" +
+                            Convert.ToHexString(reader.GetBlobBytes(value.Value));
+                    }).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+
+            static MethodDefinition Method(MetadataReader reader, string owner, string name)
+                => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => reader.GetString(type.Name) == owner)
+                    .SelectMany(type => type.GetMethods()).Select(reader.GetMethodDefinition)
+                    .Single(method => reader.GetString(method.Name) == name);
+
+            void WriteSelected(string text, string file, string output, bool includeGroups,
+                HashSet<string> foundMethods, HashSet<string> foundRecords)
+            {
+                var source = CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot();
+                var namespaces = source.Members.OfType<NamespaceDeclarationSyntax>().Select(ns =>
+                {
+                    var members = new List<MemberDeclarationSyntax>();
+                    foreach (var declaration in ns.Members)
+                    {
+                        if (declaration is BaseTypeDeclarationSyntax type && records.Contains(type.Identifier.ValueText))
+                        {
+                            Assert.True(foundRecords.Add(type.Identifier.ValueText));
+                            members.Add(type);
+                        }
+                        else if (includeGroups && declaration is EnumDeclarationSyntax group &&
+                            groups.Contains(group.Identifier.ValueText))
+                        {
+                            Assert.True(actualGroups.Add(group.Identifier.ValueText));
+                            members.Add(group);
+                        }
+                        else if (declaration is ClassDeclarationSyntax api && api.Identifier.ValueText == "Apis")
+                        {
+                            var selected = api.Members.OfType<MethodDeclarationSyntax>()
+                                .Where(method => methods.Contains(method.Identifier.ValueText))
+                                .OrderBy(method => method.Identifier.ValueText, StringComparer.Ordinal).ToArray();
+                            foreach (var method in selected)
+                                Assert.True(foundMethods.Add(method.Identifier.ValueText), "An API must have one actual normal declaration.");
+                            if (selected.Length != 0)
+                                members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(selected)));
+                        }
+                    }
+                    return ns.WithMembers(SyntaxFactory.List(members));
+                }).Where(ns => ns.Members.Count != 0).ToArray();
+                if (namespaces.Length != 0)
+                    File.WriteAllText(Path.Combine(output, file + ".cs"),
+                        source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
+            }
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]

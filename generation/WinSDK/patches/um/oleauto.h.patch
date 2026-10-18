@@ -1,8 +1,8 @@
 diff --git a/um/oleauto.h b/um/oleauto.h
-index 7860ea3c..04af400e 100644
+index 7860ea3c..5bf04b62 100644
 --- a/um/oleauto.h
 +++ b/um/oleauto.h
-@@ -75,7 +75,9 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
+@@ -75,14 +75,16 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
  WINOLEAUTAPI_(INT)  SysReAllocString(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(_String_length_(psz)+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz);
  WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
  _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
@@ -12,6 +12,14 @@ index 7860ea3c..04af400e 100644
  WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
  WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
  WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
+ 
+ #if (defined (_WIN32) || defined (_WIN64))
+ WINOLEAUTAPI_(_Post_equal_to_(_String_length_(bstr) * sizeof(OLECHAR)) UINT) SysStringByteLen(_In_opt_ BSTR bstr);
+-WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_In_opt_z_ LPCSTR psz, _In_ UINT len);
++WINOLEAUTAPI_(BSTR) SysAllocStringByteLen(_In_reads_opt_(len) LPCSTR psz, _In_ UINT len);
+ 
+ #endif /* (defined (_WIN32) || defined (_WIN64)) */
+ 
 @@ -131,10 +133,13 @@ WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ VARTYPE vt, _In_ UINT cDims, _In
  WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
  _Check_return_
