@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Win32MetadataScraper;
@@ -240,6 +241,41 @@ typedef _Win32_SupportedOS_WindowsVista_ struct IHoisted IHoisted;
             Assert.NotEqual(0, fixture.Run());
             Assert.Contains("Conflicting 'SupportedOSPlatform'", fixture.Diagnostics);
             Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("c++", "c++17", true, true, false, true)]
+        [InlineData("c++", "c++17", true, true, true, true)]
+        [InlineData("c++", "c++17", false, true, false, false)]
+        [InlineData("c++", "c++17", false, true, true, false)]
+        [InlineData("c++", "c++17", true, false, false, false)]
+        [InlineData("c++", "c++17", true, false, true, false)]
+        [InlineData("c", "c17", true, true, false, false)]
+        [InlineData("c", "c17", false, true, false, false)]
+        public void MidlInterfaceQuoteGuardKeepsCarrierMetadataOnly(
+            string language, string standard, bool enabled, bool clang, bool cInterface, bool active)
+        {
+            string header = File.ReadAllText(Path.Combine(AppContext.BaseDirectory, "assets", "win32metadata_annotations.h"));
+            var guard = Regex.Match(header,
+                @"#define _Win32_AnnotateInterface_\(name, annotation\) \\\r?\n\s+cpp_quote\(""([^""]+)""\)");
+            Assert.True(guard.Success, "The original-IDL interface carrier must emit an explicit metadata guard.");
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct IHoisted IHoisted;
+struct IHoisted { int value; };
+" + guard.Groups[1].Value + @"
+typedef _Win32_SupportedOS_WindowsVista_ struct IHoisted IHoisted;
+const int CARRIER_ACTIVE = 1;
+#else
+const int CARRIER_ACTIVE = 0;
+#endif
+", annotationsEnabled: enabled,
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n" +
+                    (clang ? "" : "--additional=-U__clang__\n") +
+                    (cInterface ? "--additional=-DCINTERFACE\n" : ""));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("CARRIER_ACTIVE = " + (active ? "1" : "0"), source);
+            AssertSupportedOS(source, "IHoisted", active ? "windows6.0.6000" : null);
         }
 
         [Fact]

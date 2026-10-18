@@ -46,7 +46,7 @@
 
 #if defined(MIDL_PASS)
 #define _Win32_AnnotateInterface_(name, annotation) \
-    cpp_quote("#if defined(__cplusplus)") \
+    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)") \
     cpp_quote("typedef " #annotation " struct " #name " " #name ";") \
     cpp_quote("#endif")
 #define _Win32_AnnotateMethod_(method, annotation) \

@@ -908,6 +908,8 @@ and Clang discards attributes on a record redeclared after its definition.
 The typedef does not introduce a new type or change native layout. This encoding
 is needed because native MIDL does not emit an arbitrary interface `[annotation]`
 on the C++ definition; ignored-attribute diagnostics remain errors.
+The emitted declaration is guarded by `WIN32METADATA`, `__clang__`, and
+`__cplusplus`, so ordinary native consumers do not receive an extra typedef.
 
 Pin the helper and original import/preprocessor closure alongside the SDK source IDL,
 and explicitly pass the necessary preprocessor defines/includes when MIDL `cpp_opt`
