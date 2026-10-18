@@ -3230,11 +3230,13 @@ namespace Win32MetadataScraperTests
             {
                 foreach (string partition in partitions)
                 {
+                    string settings = Path.Combine(project, "Partitions", partition, "settings.rsp");
+                    Assert.Single(File.ReadLines(settings).Where(line => line == "parse-win32-annotations"));
                     var filter = new FilterResponseFiles
                     {
                         ResponseFiles = new[]
                         {
-                            new Microsoft.Build.Utilities.TaskItem(Path.Combine(project, "Partitions", partition, "settings.rsp")),
+                            new Microsoft.Build.Utilities.TaskItem(settings),
                         },
                         OutputFileName = filtered,
                         ValidSwitches = "--config",
