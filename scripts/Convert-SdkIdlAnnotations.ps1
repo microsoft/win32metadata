@@ -6,6 +6,8 @@ param(
     [Parameter(Mandatory)][string]$SdkIncludeRoot,
     [Parameter(Mandatory)][string]$OutputDirectory,
     [string[]]$Original,
+    [string]$SdkProjectRoot = "$PSScriptRoot\..\generation\WinSDK",
+    [switch]$Apply,
     [string]$AnnotationHeader = "$PSScriptRoot\..\generation\WinSDK\RecompiledIdlHeaders\shared\win32metadata_annotations.h"
 )
 
@@ -13,10 +15,16 @@ $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $SdkIncludeRoot = [IO.Path]::GetFullPath($SdkIncludeRoot).TrimEnd('\')
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
+$SdkProjectRoot = [IO.Path]::GetFullPath($SdkProjectRoot).TrimEnd('\')
 if ($OutputDirectory -eq $SdkIncludeRoot -or
     $OutputDirectory.StartsWith("$SdkIncludeRoot\", [StringComparison]::OrdinalIgnoreCase) -or
     $SdkIncludeRoot.StartsWith("$OutputDirectory\", [StringComparison]::OrdinalIgnoreCase)) {
     throw 'IDL authoring output must not overlap the installed SDK.'
+}
+if ($SdkProjectRoot -eq $SdkIncludeRoot -or
+    $SdkProjectRoot.StartsWith("$SdkIncludeRoot\", [StringComparison]::OrdinalIgnoreCase) -or
+    $SdkIncludeRoot.StartsWith("$SdkProjectRoot\", [StringComparison]::OrdinalIgnoreCase)) {
+    throw 'Parser activation must not modify the installed SDK.'
 }
 if (Test-Path -LiteralPath $OutputDirectory) {
     throw "Use a new output directory; do not overwrite an existing authoring result: $OutputDirectory"
@@ -101,6 +109,19 @@ function Write-Patch([string]$Before, [string]$After, [string]$Relative, [string
     [IO.File]::WriteAllBytes($Destination, [Text.Encoding]::Latin1.GetBytes($patch))
     $process.Dispose()
     $bytes.Dispose()
+}
+
+function Get-RspValues([string]$Text, [string]$Option) {
+    $active = $false
+    foreach ($line in [regex]::Split($Text, '\r\n|\n|\r')) {
+        $value = $line.Trim().TrimStart([char]0xFEFF)
+        if ($value.StartsWith('--', [StringComparison]::Ordinal)) {
+            $active = $value -ceq $Option
+        }
+        elseif ($active -and $value -and !$value.StartsWith('#', [StringComparison]::Ordinal)) {
+            $value
+        }
+    }
 }
 
 $map = Get-Content -LiteralPath $InputMap -Raw | ConvertFrom-Json
@@ -220,6 +241,86 @@ foreach ($owner in $owners) {
     })
 }
 
+$activation = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::OrdinalIgnoreCase)
+$unresolvedActivation = [Collections.Generic.List[object]]::new()
+$recipePath = Join-Path $SdkProjectRoot 'patches\SdkHeaders.json'
+$admittedOutputs = @()
+if (Test-Path -LiteralPath $recipePath -PathType Leaf) {
+    $recipe = Get-Content -LiteralPath $recipePath -Raw | ConvertFrom-Json
+    if ($recipe.schemaVersion -ne 1) { throw 'Normal parser activation requires a schema-1 SDK recipe.' }
+    if ($null -ne $recipe.PSObject.Properties['midl']) {
+        $admittedOutputs = @($recipe.midl.outputs)
+    }
+}
+foreach ($owner in @($results | Where-Object changed)) {
+    foreach ($header in $owner.generatedHeaders) {
+        if ([IO.Path]::IsPathRooted($header) -or $header -match '(^|[\\/])\.\.([\\/]|$)' -or
+            [IO.Path]::GetExtension($header) -ne '.h') {
+            throw "Invalid generated-header owner route: $header"
+        }
+        if (!@($admittedOutputs | Where-Object { $_.source -ieq $owner.original -and $_.path -ieq $header }).Count) {
+            $unresolvedActivation.Add([ordered]@{ original = $owner.original; header = $header; reason = 'original-output-not-admitted-to-recipe' })
+            continue
+        }
+        $matched = $false
+        foreach ($name in $owner.partitionCandidates) {
+            if ($name -notmatch '^[A-Za-z0-9_.-]+$') { throw "Invalid normal partition name: $name" }
+            $directory = Join-Path $SdkProjectRoot "Partitions\$name"
+            $settings = Join-Path $directory 'settings.rsp'
+            if (!(Test-Path -LiteralPath "$directory\main.cpp" -PathType Leaf) -or
+                !(Test-Path -LiteralPath $settings -PathType Leaf)) { continue }
+            $before = [IO.File]::ReadAllBytes($settings)
+            $content = [Text.UTF8Encoding]::new($false, $true).GetString($before)
+            $traverses = @(Get-RspValues $content '--traverse')
+            $owns = @($traverses | Where-Object {
+                $pattern = $_.Replace('/', '\')
+                $pattern.StartsWith('<IncludeRoot>\', [StringComparison]::OrdinalIgnoreCase) -and
+                    [Management.Automation.WildcardPattern]::new($pattern.Substring(14),
+                        [Management.Automation.WildcardOptions]::IgnoreCase).IsMatch($header.Replace('/', '\'))
+            }).Count -gt 0
+            if (!$owns) { continue }
+            $matched = $true
+            if ($activation.ContainsKey($name)) { continue }
+            $enabled = @(Get-RspValues $content '--config') -ccontains 'parse-win32-annotations'
+            $after = $before
+            if (!$enabled) {
+                $newline = [regex]::Match($content, '\r\n|\n|\r').Value
+                if (!$newline) { $newline = "`r`n" }
+                $separator = if ($content.Length -and $content[-1] -notin @("`r", "`n")) { $newline } else { '' }
+                $suffix = [Text.Encoding]::UTF8.GetBytes("${separator}--config${newline}parse-win32-annotations${newline}")
+                $after = [byte[]]::new($before.Length + $suffix.Length)
+                $before.CopyTo($after, 0)
+                $suffix.CopyTo($after, $before.Length)
+            }
+            $activation.Add($name, [ordered]@{
+                partition = $name; settings = $settings; enabled = $enabled
+                before = $before; after = $after; preimageSha256 = Get-Hash $before; resultSha256 = Get-Hash $after
+            })
+        }
+        if (!$matched) {
+            $unresolvedActivation.Add([ordered]@{
+                original = $owner.original; header = $header; reason = 'no-configured-normal-traverse-owner'
+            })
+        }
+    }
+}
+if ($Apply) {
+    if (!$activation.Count -or $unresolvedActivation.Count) {
+        throw 'Apply requires recipe-admitted originals and actual configured normal traverse owners; no speculative settings or namespace will be created.'
+    }
+    foreach ($item in $activation.Values) {
+        if ((Get-Hash ([IO.File]::ReadAllBytes($item.settings))) -cne $item.preimageSha256) {
+            throw "Normal partition settings changed during planning: $($item.settings)"
+        }
+    }
+    foreach ($item in $activation.Values) {
+        if (!$item.enabled) {
+            [IO.File]::WriteAllBytes($item.settings, $item.after)
+            $item.enabled = $true
+        }
+    }
+}
+
 [IO.Directory]::CreateDirectory($OutputDirectory) | Out-Null
 foreach ($plan in $plans) {
     if (!$plan.insertions.Count) { continue }
@@ -237,6 +338,18 @@ $report = [ordered]@{
     candidateGeneratedHeaders = @($results | Where-Object changed | ForEach-Object generatedHeaders | Sort-Object -Unique)
     authoredFacts = @($all | Where-Object disposition -eq 'authored-original-idl').Count
     retainedLegacyFacts = @($all | Where-Object disposition -eq 'retained-legacy').Count
+    normalParserActivation = [ordered]@{
+        applied = [bool]$Apply
+        ready = $activation.Count -gt 0 -and !$unresolvedActivation.Count -and
+            !@($activation.Values | Where-Object { !$_.enabled }).Count
+        unresolved = @($unresolvedActivation)
+        partitions = @($activation.Values | ForEach-Object {
+            [ordered]@{
+                partition = $_.partition; settings = $_.settings; enabled = $_.enabled
+                preimageSha256 = $_.preimageSha256; resultSha256 = $_.resultSha256
+            }
+        })
+    }
     owners = @($results)
 }
 [IO.File]::WriteAllText("$OutputDirectory\report.json", ($report | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false))

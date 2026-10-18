@@ -6,6 +6,8 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -184,6 +186,82 @@ namespace Win32MetadataScraperTests
                 original, prepared, new[] { "IExample|SupportedOSPlatform(\"windows6.1\")" }));
         }
 
+        [Theory]
+        [InlineData("\r\n")]
+        [InlineData("\n")]
+        public void RecipeAdmissionRequiresRealNormalParserActivation(string newline)
+        {
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes("interface IMigrated : IUnknown {};"));
+            fixture.WriteMap(new[] { Floor("IMigrated") });
+            string settings = Path.Combine(fixture.Project, "Partitions", "Sample", "settings.rsp");
+            string original = "--namespace\nTest\n--traverse\n<IncludeRoot>/um/sample.h\n--config\ngenerate-compatible-codegen\n"
+                .Replace("\n", newline, StringComparison.Ordinal);
+            File.WriteAllText(settings, original);
+            string untouched = Path.Combine(fixture.Project, "Partitions", "Other", "settings.rsp");
+            Directory.CreateDirectory(Path.GetDirectoryName(untouched));
+            File.WriteAllText(untouched, "--namespace\nOther\n");
+            byte[] untouchedBytes = File.ReadAllBytes(untouched);
+            byte[] source = File.ReadAllBytes(fixture.Source);
+            var proposal = fixture.Run();
+            Assert.True(proposal.ExitCode == 0, proposal.Error);
+            using (var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(proposal.OutputDirectory, "report.json"))))
+                Assert.False(report.RootElement.GetProperty("normalParserActivation").GetProperty("ready").GetBoolean());
+            Assert.Equal(original, File.ReadAllText(settings));
+            var applied = fixture.Run(apply: true);
+            Assert.True(applied.ExitCode == 0, applied.Error);
+            using (var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(applied.OutputDirectory, "report.json"))))
+                Assert.True(report.RootElement.GetProperty("normalParserActivation").GetProperty("ready").GetBoolean());
+            Assert.Equal(original + "--config" + newline + "parse-win32-annotations" + newline, File.ReadAllText(settings));
+            byte[] activated = File.ReadAllBytes(settings);
+            Assert.True(fixture.Run(apply: true).ExitCode == 0);
+            Assert.Equal(activated, File.ReadAllBytes(settings));
+            Assert.Equal(untouchedBytes, File.ReadAllBytes(untouched));
+            Assert.Equal(source, File.ReadAllBytes(fixture.Source));
+        }
+
+        [Fact]
+        public void ApplyRejectsAnUnconfiguredNormalOwnerWithoutCreatingSpeculativeSettings()
+        {
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes("interface IMigrated : IUnknown {};"));
+            fixture.WriteMap(new[] { Floor("IMigrated") });
+            string settings = Path.Combine(fixture.Project, "Partitions", "Sample", "settings.rsp");
+            File.Delete(settings);
+            var result = fixture.Run(apply: true);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("actual configured normal traverse owners", result.Error);
+            Assert.False(File.Exists(settings));
+            Assert.False(Directory.Exists(result.OutputDirectory));
+        }
+
+        [NativeMigrationTheory("WIN32METADATA_WMI_GENERATED_SOURCE")]
+        [InlineData("IEnumWbemClassObject", "windows6.0.6000")]
+        public void ActualNormalWmiSourceProjectsTheOwnedFloorWithoutLegacyFallback(string target, string floor)
+        {
+            string source = Environment.GetEnvironmentVariable("WIN32METADATA_WMI_GENERATED_SOURCE");
+            string disabled = Environment.GetEnvironmentVariable("WIN32METADATA_WMI_DISABLED_SOURCE");
+            Assert.True(!string.IsNullOrEmpty(disabled) && File.Exists(disabled), "Supply the actual normal disabled-parser control.");
+            Assert.Empty(Floors(disabled));
+            Assert.Equal(new[] { floor }, Floors(source));
+            Assert.DoesNotContain(target + "=SupportedOSPlatform(\"" + floor + "\")",
+                File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "supportedOS.rsp")));
+            string obj = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(source)));
+            string settings = File.ReadAllText(Path.Combine(obj, "scratch", "common", "Wmi.settings.rsp"));
+            Assert.Contains("parse-win32-annotations", settings);
+            Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+
+            string[] Floors(string path)
+            {
+                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(path));
+                var declaration = Assert.Single(tree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
+                    .Where(node => node.Identifier.ValueText == target));
+                return declaration.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => attribute.Name.ToString() ==
+                        "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform")
+                    .Select(attribute => Assert.IsType<LiteralExpressionSyntax>(
+                        Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText).ToArray();
+            }
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlNativeSamples))]
         public void OriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
@@ -255,11 +333,24 @@ namespace Win32MetadataScraperTests
                 Directory.CreateDirectory(Path.Combine(this.Sdk, "um"));
                 this.Source = Path.Combine(this.Sdk, "um", "sample.idl");
                 File.WriteAllBytes(this.Source, source);
+                this.Project = Path.Combine(this.directory, "Project");
+                Directory.CreateDirectory(Path.Combine(this.Project, "Partitions", "Sample"));
+                Directory.CreateDirectory(Path.Combine(this.Project, "patches"));
+                File.WriteAllText(Path.Combine(this.Project, "Partitions", "Sample", "main.cpp"), "#include <sample.h>\n");
+                File.WriteAllText(Path.Combine(this.Project, "Partitions", "Sample", "settings.rsp"),
+                    "--namespace\nTest\n--traverse\n<IncludeRoot>/um/sample.h\n");
+                File.WriteAllText(Path.Combine(this.Project, "patches", "SdkHeaders.json"), JsonSerializer.Serialize(new
+                {
+                    schemaVersion = 1,
+                    partitions = new[] { "Sample" },
+                    midl = new { outputs = new[] { new { source = @"um\sample.idl", path = @"um\sample.h" } } },
+                }));
             }
 
             public string RepositoryRoot => WinHttpMigrationTests.RepositoryRoot;
             public string Sdk { get; }
             public string Source { get; }
+            public string Project { get; }
 
             public void WriteMap(object[] facts, string original = @"um\sample.idl", bool stale = false)
             {
@@ -272,12 +363,16 @@ namespace Win32MetadataScraperTests
                 }));
             }
 
-            public (int ExitCode, string Error, string OutputDirectory) Run(string output = null)
+            public (int ExitCode, string Error, string OutputDirectory) Run(string output = null, bool apply = false)
             {
                 output ??= Path.Combine(this.directory, "result-" + this.runs++);
-                var result = Command("pwsh", this.RepositoryRoot, "-NoProfile", "-File",
+                var arguments = new List<string> { "-NoProfile", "-File",
                     Path.Combine(this.RepositoryRoot, "scripts", "Convert-SdkIdlAnnotations.ps1"),
-                    "-InputMap", Path.Combine(this.directory, "owners.json"), "-SdkIncludeRoot", this.Sdk, "-OutputDirectory", output);
+                    "-InputMap", Path.Combine(this.directory, "owners.json"), "-SdkIncludeRoot", this.Sdk,
+                    "-OutputDirectory", output, "-SdkProjectRoot", this.Project };
+                if (apply)
+                    arguments.Add("-Apply");
+                var result = Command("pwsh", this.RepositoryRoot, arguments.ToArray());
                 return (result.ExitCode, result.Error, output);
             }
 

@@ -121,6 +121,18 @@ existing preparation/MIDL and native checks before claiming applied output or
 removing equivalent sidecar rows. Authored source is not compile or full-SDK
 acceptance.
 
+Recipe `partitions` do not activate the normal scraper. After qualifying and
+admitting exact original/output pairs, rerun the authorer with `-Apply` to enable
+`parse-win32-annotations` in their actual configured `--traverse` owners. This
+switch applies only normal parser settings: source patches, recipe admission and
+sidecar cleanup remain separate. Existing settings bytes and other partitions
+are preserved; unconfigured owners fail rather than inventing namespace or
+traversal settings. `-SdkProjectRoot` selects an isolated SDK project for this
+step. The report's `normalParserActivation.ready` is false when recipe admission
+is missing, normal ownership is unresolved, or an actual owner is not enabled.
+Do not remove equivalent legacy rows or claim authoring acceptance until it is
+true, then verify actual normal generated declarations as well as native controls.
+
 Preparation accepts original CRLF line endings, including first-line insertions,
 while keeping strict rejection of trailing spaces/tabs and space-before-tab
 indentation errors.
