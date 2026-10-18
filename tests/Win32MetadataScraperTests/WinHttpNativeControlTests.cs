@@ -1484,7 +1484,7 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[] { header, architecture.Item1, architecture.Item2, enabled, mode.Item1, mode.Item2 };
         }
 
-        private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
+        internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
             string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null)

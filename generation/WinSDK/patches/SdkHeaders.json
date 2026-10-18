@@ -675,6 +675,54 @@
       "sourceSha256": "91175CDAA4DC94E0F0F3472A9B76D92FA09FB2996A074A49811557FFC95D5340",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\lmremutl.h",
       "sdkSha256": "91175CDAA4DC94E0F0F3472A9B76D92FA09FB2996A074A49811557FFC95D5340"
+    },
+    {
+      "path": "um\\winbase.h",
+      "sourceSha256": "EC538199F5EBE8CEC2DFD4F1BA48316EF776C82D37277AED3A677965E494F192",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winbase.h",
+      "sdkSha256": "EC538199F5EBE8CEC2DFD4F1BA48316EF776C82D37277AED3A677965E494F192"
+    },
+    {
+      "path": "um\\wingdi.h",
+      "sourceSha256": "96F3528CABC7E5FE30E2F2C51DAA01C018DD6CEDB3768121202434758629B8A2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wingdi.h",
+      "sdkSha256": "96F3528CABC7E5FE30E2F2C51DAA01C018DD6CEDB3768121202434758629B8A2"
+    },
+    {
+      "path": "um\\winnls.h",
+      "sourceSha256": "E47861762A4B51A2689C8A99798A1A7E68335573E03C857E545172B095C5C829",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winnls.h",
+      "sdkSha256": "E47861762A4B51A2689C8A99798A1A7E68335573E03C857E545172B095C5C829"
+    },
+    {
+      "path": "um\\fileapi.h",
+      "sourceSha256": "F8927178C75DE487C0E57F044A215E455522BF6EAA0B660421BE09CD06AE05A1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fileapi.h",
+      "sdkSha256": "F8927178C75DE487C0E57F044A215E455522BF6EAA0B660421BE09CD06AE05A1"
+    },
+    {
+      "path": "um\\securitybaseapi.h",
+      "sourceSha256": "A443B4183D3EC5B8E1AE40DB5824F002A34EB0415F38227FA1DDDBBF02A448D4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\securitybaseapi.h",
+      "sdkSha256": "A443B4183D3EC5B8E1AE40DB5824F002A34EB0415F38227FA1DDDBBF02A448D4"
+    },
+    {
+      "path": "um\\processthreadsapi.h",
+      "sourceSha256": "436AE4CBB017D1CDB381AAF2119A3F89B04BAE257FD4C881EF251DAA02533540",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\processthreadsapi.h",
+      "sdkSha256": "436AE4CBB017D1CDB381AAF2119A3F89B04BAE257FD4C881EF251DAA02533540"
+    },
+    {
+      "path": "um\\memoryapi.h",
+      "sourceSha256": "58EDCC2090C411A1821E04A6A2954C258FD59DED44440BDD671984027E0A852F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\memoryapi.h",
+      "sdkSha256": "58EDCC2090C411A1821E04A6A2954C258FD59DED44440BDD671984027E0A852F"
+    },
+    {
+      "path": "um\\synchapi.h",
+      "sourceSha256": "D962588974E5E100205F683160B351DEE70EA100AA736E14D878B7A74577A9C5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\synchapi.h",
+      "sdkSha256": "D962588974E5E100205F683160B351DEE70EA100AA736E14D878B7A74577A9C5"
     }
   ],
   "midl": {
@@ -1079,7 +1127,14 @@
     "Wsb",
     "MenuRc",
     "Services",
-    "NetMgmt"
+    "NetMgmt",
+    "WinProg",
+    "Gdi",
+    "Intl",
+    "Fs",
+    "Security",
+    "Threading",
+    "Memory"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -1159,6 +1214,14 @@
     "um\\lmuse.h.patch",
     "um\\atacct.h.patch",
     "um\\lmalert.h.patch",
-    "um\\lmremutl.h.patch"
+    "um\\lmremutl.h.patch",
+    "um\\winbase.h.patch",
+    "um\\wingdi.h.patch",
+    "um\\winnls.h.patch",
+    "um\\fileapi.h.patch",
+    "um\\securitybaseapi.h.patch",
+    "um\\processthreadsapi.h.patch",
+    "um\\memoryapi.h.patch",
+    "um\\synchapi.h.patch"
   ]
 }

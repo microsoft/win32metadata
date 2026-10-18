@@ -1,0 +1,528 @@
+diff --git a/um/synchapi.h b/um/synchapi.h
+index 8721bd1d..47b8c520 100644
+--- a/um/synchapi.h
++++ b/um/synchapi.h
+@@ -35,6 +35,7 @@ typedef RTL_SRWLOCK SRWLOCK, *PSRWLOCK;
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -42,6 +43,7 @@ InitializeSRWLock(
+     _Out_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Releases_exclusive_lock_(*SRWLock)
+ _Releases_nonreentrant_lock_(*SRWLock)
+@@ -51,6 +53,7 @@ ReleaseSRWLockExclusive(
+     _Inout_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Releases_shared_lock_(*SRWLock)
+ _Releases_nonreentrant_lock_(*SRWLock)
+@@ -60,6 +63,7 @@ ReleaseSRWLockShared(
+     _Inout_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Acquires_exclusive_lock_(*SRWLock)
+ _Acquires_nonreentrant_lock_(*SRWLock)
+@@ -69,6 +73,7 @@ AcquireSRWLockExclusive(
+     _Inout_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Acquires_shared_lock_(*SRWLock)
+ _Acquires_nonreentrant_lock_(*SRWLock)
+@@ -78,6 +83,7 @@ AcquireSRWLockShared(
+     _Inout_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ _When_(return!=0, _Acquires_exclusive_lock_(*SRWLock))
+ _When_(return!=0, _Acquires_nonreentrant_lock_(*SRWLock))
+@@ -87,6 +93,7 @@ TryAcquireSRWLockExclusive(
+     _Inout_ PSRWLOCK SRWLock
+     );
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ _When_(return!=0, _Acquires_shared_lock_(*SRWLock))
+ _When_(return!=0, _Acquires_nonreentrant_lock_(*SRWLock))
+@@ -110,6 +117,7 @@ InitializeCriticalSection(
+ 
+ #else
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -119,6 +127,7 @@ InitializeCriticalSection(
+ 
+ #endif  // (_WIN32_WINNT < 0x0600)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -126,6 +135,7 @@ EnterCriticalSection(
+     _Inout_ LPCRITICAL_SECTION lpCriticalSection
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -133,6 +143,8 @@ LeaveCriticalSection(
+     _Inout_ LPCRITICAL_SECTION lpCriticalSection
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -144,6 +156,8 @@ InitializeCriticalSectionAndSpinCount(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -155,6 +169,7 @@ InitializeCriticalSectionEx(
+ 
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -165,6 +180,7 @@ SetCriticalSectionSpinCount(
+ 
+ #if (_WIN32_WINNT >= 0x0400)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -174,6 +190,7 @@ TryEnterCriticalSection(
+ 
+ #endif /* _WIN32_WINNT >= 0x0400 */
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -216,6 +233,7 @@ BOOL
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -223,6 +241,8 @@ InitOnceInitialize(
+     _Out_ PINIT_ONCE InitOnce
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -233,6 +253,8 @@ InitOnceExecuteOnce(
+     _Outptr_opt_result_maybenull_ LPVOID* Context
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -243,6 +265,8 @@ InitOnceBeginInitialize(
+     _Outptr_opt_result_maybenull_ LPVOID* lpContext
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -274,6 +298,7 @@ typedef RTL_CONDITION_VARIABLE CONDITION_VARIABLE, *PCONDITION_VARIABLE;
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -281,6 +306,7 @@ InitializeConditionVariable(
+     _Out_ PCONDITION_VARIABLE ConditionVariable
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -288,6 +314,7 @@ WakeConditionVariable(
+     _Inout_ PCONDITION_VARIABLE ConditionVariable
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -295,6 +322,8 @@ WakeAllConditionVariable(
+     _Inout_ PCONDITION_VARIABLE ConditionVariable
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -304,6 +333,8 @@ SleepConditionVariableCS(
+     _In_ DWORD dwMilliseconds
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -316,6 +347,8 @@ SleepConditionVariableSRW(
+ 
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -323,6 +356,8 @@ SetEvent(
+     _In_ HANDLE hEvent
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -330,6 +365,8 @@ ResetEvent(
+     _In_ HANDLE hEvent
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -339,6 +376,8 @@ ReleaseSemaphore(
+     _Out_opt_ LPLONG lpPreviousCount
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -346,6 +385,8 @@ ReleaseMutex(
+     _In_ HANDLE hMutex
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -354,6 +395,7 @@ WaitForSingleObject(
+     _In_ DWORD dwMilliseconds
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -362,6 +404,8 @@ SleepEx(
+     _In_ BOOL bAlertable
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -371,6 +415,8 @@ WaitForSingleObjectEx(
+     _In_ BOOL bAlertable
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -389,6 +435,8 @@ WaitForMultipleObjectsEx(
+ #define MUTEX_MODIFY_STATE  MUTANT_QUERY_STATE
+ #define MUTEX_ALL_ACCESS    MUTANT_ALL_ACCESS
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -399,6 +447,8 @@ CreateMutexA(
+     _In_opt_ LPCSTR lpName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -415,6 +465,8 @@ CreateMutexW(
+ #define CreateMutex  CreateMutexA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -429,6 +481,8 @@ OpenMutexW(
+ #define OpenMutex  OpenMutexW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -440,6 +494,8 @@ CreateEventA(
+     _In_opt_ LPCSTR lpName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -457,6 +513,8 @@ CreateEventW(
+ #define CreateEvent  CreateEventA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -467,6 +525,8 @@ OpenEventA(
+     _In_ LPCSTR lpName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -483,6 +543,8 @@ OpenEventW(
+ #define OpenEvent  OpenEventA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -507,6 +569,8 @@ VOID
+     _In_     DWORD dwTimerHighValue
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -523,6 +587,8 @@ OpenWaitableTimerW(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ BOOL
+ WINAPI
+ SetWaitableTimerEx(
+@@ -537,6 +603,8 @@ SetWaitableTimerEx(
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -549,6 +617,8 @@ SetWaitableTimer(
+     _In_ BOOL fResume
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -560,6 +630,8 @@ CancelWaitableTimer(
+ 
+ #define CREATE_MUTEX_INITIAL_OWNER  0x00000001
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -571,6 +643,8 @@ CreateMutexExA(
+     _In_ DWORD dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -591,6 +665,8 @@ CreateMutexExW(
+ #define CREATE_EVENT_MANUAL_RESET   0x00000001
+ #define CREATE_EVENT_INITIAL_SET    0x00000002
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -602,6 +678,8 @@ CreateEventExA(
+     _In_ DWORD dwDesiredAccess
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -619,6 +697,8 @@ CreateEventExW(
+ #define CreateEventEx  CreateEventExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -641,6 +721,8 @@ CreateSemaphoreExW(
+ #define CREATE_WAITABLE_TIMER_HIGH_RESOLUTION 0x00000002
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -668,6 +750,7 @@ typedef PRTL_BARRIER LPSYNCHRONIZATION_BARRIER;
+ #define SYNCHRONIZATION_BARRIER_FLAGS_BLOCK_ONLY 0x02
+ #define SYNCHRONIZATION_BARRIER_FLAGS_NO_DELETE  0x04
+ 
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ EnterSynchronizationBarrier(
+@@ -675,6 +758,8 @@ EnterSynchronizationBarrier(
+     _In_ DWORD dwFlags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ InitializeSynchronizationBarrier(
+@@ -683,12 +768,14 @@ InitializeSynchronizationBarrier(
+     _In_ LONG lSpinCount
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ DeleteSynchronizationBarrier(
+     _Inout_ LPSYNCHRONIZATION_BARRIER lpBarrier
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -696,6 +783,8 @@ Sleep(
+     _In_ DWORD dwMilliseconds
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ WaitOnAddress(
+@@ -705,12 +794,14 @@ WaitOnAddress(
+     _In_opt_ DWORD dwMilliseconds
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ VOID
+ WINAPI
+ WakeByAddressSingle(
+     _In_ PVOID Address
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ VOID
+ WINAPI
+ WakeByAddressAll(
+@@ -725,6 +816,8 @@ WakeByAddressAll(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -743,6 +836,8 @@ SignalObjectAndWait(
+ #pragma region Application or OneCore Family or Games Partition
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -753,6 +848,8 @@ WaitForMultipleObjects(
+     _In_ DWORD dwMilliseconds
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -767,6 +864,8 @@ CreateSemaphoreW(
+ #define CreateSemaphore  CreateSemaphoreW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE

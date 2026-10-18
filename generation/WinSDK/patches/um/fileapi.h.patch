@@ -1,0 +1,826 @@
+diff --git a/um/fileapi.h b/um/fileapi.h
+index 8b41fa60..e0f16f6f 100644
+--- a/um/fileapi.h
++++ b/um/fileapi.h
+@@ -38,6 +38,7 @@ extern "C" {
+ #define INVALID_SET_FILE_POINTER ((DWORD)-1)
+ #define INVALID_FILE_ATTRIBUTES ((DWORD)-1)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ LONG
+ WINAPI
+@@ -46,6 +47,8 @@ CompareFileTime(
+     _In_ CONST FILETIME* lpFileTime2
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -54,6 +57,8 @@ CreateDirectoryA(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -74,6 +79,8 @@ CreateDirectoryW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -87,6 +94,8 @@ CreateFileA(
+     _In_opt_ HANDLE hTemplateFile
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -112,6 +121,8 @@ CreateFileW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -131,6 +142,8 @@ DefineDosDeviceW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -138,6 +151,8 @@ DeleteFileA(
+     _In_ LPCSTR lpFileName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -157,6 +172,8 @@ DeleteFileW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -174,6 +191,8 @@ DeleteVolumeMountPointW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -188,6 +207,8 @@ FileTimeToLocalFileTime(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -201,6 +222,8 @@ FindClose(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -208,6 +231,8 @@ FindCloseChangeNotification(
+     _In_ HANDLE hChangeHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -217,6 +242,8 @@ FindFirstChangeNotificationA(
+     _In_ DWORD dwNotifyFilter
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -238,6 +265,8 @@ FindFirstChangeNotificationW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -246,6 +275,8 @@ FindFirstFileA(
+     _Out_ LPWIN32_FIND_DATAA lpFindFileData
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -262,6 +293,8 @@ FindFirstFileW(
+ 
+ #if (_WIN32_WINNT >= 0x0400)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -274,6 +307,8 @@ FindFirstFileExA(
+     _In_ DWORD dwAdditionalFlags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -300,6 +335,8 @@ FindFirstFileExW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -312,6 +349,8 @@ FindFirstVolumeW(
+ #define FindFirstVolume FindFirstVolumeW
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -325,6 +364,8 @@ FindNextChangeNotification(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -333,6 +374,8 @@ FindNextFileA(
+     _Out_ LPWIN32_FIND_DATAA lpFindFileData
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -353,6 +396,8 @@ FindNextFileW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -366,6 +411,8 @@ FindNextVolumeW(
+ #define FindNextVolume FindNextVolumeW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -379,6 +426,8 @@ FindVolumeClose(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -386,6 +435,8 @@ FlushFileBuffers(
+     _In_ HANDLE hFile
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -397,6 +448,8 @@ GetDiskFreeSpaceA(
+     _Out_opt_ LPDWORD lpTotalNumberOfClusters
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -414,6 +467,8 @@ GetDiskFreeSpaceW(
+ #define GetDiskFreeSpace  GetDiskFreeSpaceA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -424,6 +479,8 @@ GetDiskFreeSpaceExA(
+     _Out_opt_ PULARGE_INTEGER lpTotalNumberOfFreeBytes
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -565,6 +622,7 @@ GetDiskSpaceInformationW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -572,6 +630,7 @@ GetDriveTypeA(
+     _In_opt_ LPCSTR lpRootPathName
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -594,6 +653,8 @@ typedef struct _WIN32_FILE_ATTRIBUTE_DATA {
+     DWORD nFileSizeLow;
+ } WIN32_FILE_ATTRIBUTE_DATA, *LPWIN32_FILE_ATTRIBUTE_DATA;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -601,6 +662,8 @@ GetFileAttributesA(
+     _In_ LPCSTR lpFileName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -614,6 +677,8 @@ GetFileAttributesW(
+ #define GetFileAttributes  GetFileAttributesA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -623,6 +688,8 @@ GetFileAttributesExA(
+     _Out_writes_bytes_(sizeof(WIN32_FILE_ATTRIBUTE_DATA)) LPVOID lpFileInformation
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -651,6 +718,8 @@ typedef struct _BY_HANDLE_FILE_INFORMATION {
+     DWORD nFileIndexLow;
+ } BY_HANDLE_FILE_INFORMATION, *PBY_HANDLE_FILE_INFORMATION, *LPBY_HANDLE_FILE_INFORMATION;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -665,6 +734,8 @@ GetFileInformationByHandle(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -679,6 +750,8 @@ GetFileSize(
+ #pragma region Application Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -687,6 +760,8 @@ GetFileSizeEx(
+     _Out_ PLARGE_INTEGER lpFileSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -696,6 +771,8 @@ GetFileType(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -706,6 +783,8 @@ GetFinalPathNameByHandleA(
+     _In_ DWORD dwFlags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -724,6 +803,8 @@ GetFinalPathNameByHandleW(
+ 
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -734,6 +815,8 @@ GetFileTime(
+     _Out_opt_ LPFILETIME lpLastWriteTime
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Success_(return != 0 && return < nBufferLength)
+ DWORD
+@@ -749,6 +832,8 @@ GetFullPathNameW(
+ #define GetFullPathName  GetFullPathNameW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Success_(return != 0 && return < nBufferLength)
+ DWORD
+@@ -764,6 +849,8 @@ GetFullPathNameA(
+ #define GetFullPathName GetFullPathNameA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -777,6 +864,8 @@ GetLogicalDrives(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -795,6 +884,8 @@ GetLogicalDriveStringsW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Success_(return != 0 && return < cchBuffer)
+ DWORD
+@@ -809,6 +900,8 @@ GetLongPathNameA(
+ #define GetLongPathName GetLongPathNameA
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Success_(return != 0 && return < cchBuffer)
+ DWORD
+@@ -841,6 +934,8 @@ AreShortNamesEnabled(
+ 
+ #endif // (NTDDI_VERSION >= NTDDI_WIN10_FE)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Success_(return != 0 && return < cchBuffer)
+ DWORD
+@@ -861,6 +956,8 @@ GetShortPathNameW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -883,6 +980,8 @@ GetTempFileNameW(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -899,6 +998,8 @@ GetVolumeInformationByHandleW(
+ 
+ #endif /* _WIN32_WINNT >=  0x0600 */
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -917,6 +1018,8 @@ GetVolumeInformationW(
+ #define GetVolumeInformation  GetVolumeInformationW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -930,6 +1033,8 @@ GetVolumePathNameW(
+ #define GetVolumePathName  GetVolumePathNameW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -938,6 +1043,8 @@ LocalFileTimeToFileTime(
+     _Out_ LPFILETIME lpFileTime
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -949,6 +1056,8 @@ LockFile(
+     _In_ DWORD nNumberOfBytesToLockHigh
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -967,6 +1076,8 @@ LockFileEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -986,6 +1097,8 @@ QueryDosDeviceW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -998,6 +1111,8 @@ ReadFile(
+     _Inout_opt_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -1010,6 +1125,8 @@ ReadFileEx(
+     _In_ LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -1022,6 +1139,8 @@ ReadFileScatter(
+     _Inout_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1029,6 +1148,8 @@ RemoveDirectoryA(
+     _In_ LPCSTR lpPathName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1042,6 +1163,8 @@ RemoveDirectoryW(
+ #define RemoveDirectory  RemoveDirectoryA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1049,6 +1172,8 @@ SetEndOfFile(
+     _In_ HANDLE hFile
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1057,6 +1182,8 @@ SetFileAttributesA(
+     _In_ DWORD dwFileAttributes
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1073,6 +1200,8 @@ SetFileAttributesW(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1085,6 +1214,8 @@ SetFileInformationByHandle(
+ 
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -1095,6 +1226,8 @@ SetFilePointer(
+     _In_ DWORD dwMoveMethod
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1105,6 +1238,8 @@ SetFilePointerEx(
+     _In_ DWORD dwMoveMethod
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1117,6 +1252,8 @@ SetFileTime(
+ 
+ #if _WIN32_WINNT >= 0x0501
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1127,6 +1264,8 @@ SetFileValidData(
+ 
+ #endif // (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1138,6 +1277,8 @@ UnlockFile(
+     _In_ DWORD nNumberOfBytesToUnlockHigh
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1149,6 +1290,8 @@ UnlockFileEx(
+     _Inout_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1160,6 +1303,8 @@ WriteFile(
+     _Inout_opt_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1171,6 +1316,8 @@ WriteFileEx(
+     _In_ LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1182,6 +1329,8 @@ WriteFileGather(
+     _Inout_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -1200,6 +1349,8 @@ GetTempPathW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1221,6 +1372,8 @@ GetVolumeNameForVolumeMountPointW(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1254,6 +1407,8 @@ typedef struct _CREATEFILE2_EXTENDED_PARAMETERS {
+     HANDLE hTemplateFile;
+ } CREATEFILE2_EXTENDED_PARAMETERS, *PCREATEFILE2_EXTENDED_PARAMETERS, *LPCREATEFILE2_EXTENDED_PARAMETERS;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -1275,6 +1430,8 @@ CreateFile2(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1288,6 +1445,8 @@ SetFileIoOverlappedRange(
+ 
+ #if _WIN32_WINNT >= 0x0501
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -1296,6 +1455,8 @@ GetCompressedFileSizeA(
+     _Out_opt_ LPDWORD lpFileSizeHigh
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -1328,6 +1489,8 @@ typedef struct _WIN32_FIND_STREAM_DATA {
+ 
+ } WIN32_FIND_STREAM_DATA, *PWIN32_FIND_STREAM_DATA;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -1338,6 +1501,8 @@ FindFirstStreamW(
+     _Reserved_ DWORD dwFlags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -1354,6 +1519,7 @@ FindNextStreamW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1367,6 +1533,8 @@ AreFileApisANSI(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -1387,6 +1555,8 @@ GetTempPathA(
+ 
+ #if _WIN32_WINNT >= 0x0600
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ HANDLE
+ WINAPI
+@@ -1397,6 +1567,8 @@ FindFirstFileNameW(
+     _Out_writes_(*StringLength) PWSTR LinkName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ APIENTRY
+@@ -1414,6 +1586,8 @@ FindNextFileNameW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -1438,6 +1612,8 @@ GetVolumeInformationA(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -1457,6 +1633,7 @@ GetTempFileNameA(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -1464,6 +1641,7 @@ SetFileApisToOEM(
+     VOID
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI

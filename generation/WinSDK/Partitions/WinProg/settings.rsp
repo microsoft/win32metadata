@@ -61,3 +61,5 @@ UiaRect
 <IncludeRoot>/um/deletebrowsinghistory.h
 --namespace
 Windows.Win32.System.WindowsProgramming
+--config
+parse-win32-annotations

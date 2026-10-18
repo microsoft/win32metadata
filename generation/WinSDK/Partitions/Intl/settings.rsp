@@ -17,3 +17,5 @@
 <IncludeRoot>/um/mlang.h
 --namespace
 Windows.Win32.Globalization
+--config
+parse-win32-annotations
