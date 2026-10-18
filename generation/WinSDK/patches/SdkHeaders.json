@@ -3201,12 +3201,6 @@
       "sourceSha256": "A1BADCBEA02DE525437DEC8EDCD4503BDD16A609B3FC40DBB7F4AF754ED1F939",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\tvratings.idl",
       "sdkSha256": "DAAADFB3D0612BD848B2EE2159E4C6395856024DEAFF0E52DB577ED12843F41A"
-    },
-    {
-      "path": "um\\txlogpub.h",
-      "sourceSha256": "2BACFFCE9E483BAA7149AB1B4ACC2BFB020EACEAE9EEF3AB0E3484A5184C4EFA",
-      "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
-      "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
     }
   ],
   "midl": {
@@ -4619,11 +4613,6 @@
         "path": "um\\tsgauthenticationengine.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\tsgauthenticationengine.idl",
         "sdkSha256": "D211861D3748A8C0F94FB3B5EBC6C4844A45CACCEAF88B27123510AB1FA27F1E"
-      },
-      {
-        "path": "um\\txlogpub.idl",
-        "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
-        "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
       }
     ],
     "outputs": [
@@ -5310,10 +5299,6 @@
       {
         "source": "um\\tvratings.idl",
         "path": "um\\tvratings.h"
-      },
-      {
-        "source": "um\\txlogpub.idl",
-        "path": "um\\txlogpub.h"
       }
     ]
   },
@@ -6030,7 +6015,6 @@
     "um\\spellcheckprovider.idl.patch",
     "um\\tpmvscmgr.idl.patch",
     "um\\tsgauthenticationengine.idl.patch",
-    "um\\tvratings.idl.patch",
-    "um\\txlogpub.idl.patch"
+    "um\\tvratings.idl.patch"
   ]
 }

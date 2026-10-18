@@ -1172,8 +1172,9 @@ namespace Win32MetadataScraperTests
                 .Select(value => value.GetString()).ToArray();
             var outputs = recipe.RootElement.GetProperty("midl").GetProperty("outputs").EnumerateArray().ToArray();
             var owners = DeviceIdlOriginalHeaderContracts().ToArray();
-            Assert.Equal(12, owners.Select(owner => owner.Header).Distinct(StringComparer.Ordinal).Count());
-            Assert.Equal(24, owners.Sum(owner => owner.Interfaces.Length));
+            string[] legacy = File.ReadAllLines(Path.Combine(root, "supportedOS.rsp"));
+            Assert.Equal(11, owners.Select(owner => owner.Header).Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal(22, owners.Sum(owner => owner.Interfaces.Length));
             foreach (var owner in owners)
             {
                 string original = "um\\" + Path.ChangeExtension(owner.Header, ".idl");
@@ -1187,12 +1188,21 @@ namespace Win32MetadataScraperTests
                 {
                     Assert.Matches(@"\+_Win32_AnnotateInterface_\(" + Regex.Escape(name) +
                         @", _Win32_SupportedOS_\w+_\)", patch);
+                    Assert.DoesNotContain(name + "=SupportedOSPlatform(\"" + owner.OS + "\")", legacy);
                 }
                 Assert.Contains("parse-win32-annotations",
                     File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
             }
-            Assert.Contains("IUnknown=SupportedOSPlatform(\"windows5.0\")",
-                File.ReadAllLines(Path.Combine(root, "supportedOS.rsp")));
+            Assert.DoesNotContain("um\\txlogpub.idl.patch", patches);
+            Assert.DoesNotContain(outputs, output => output.GetProperty("path").GetString() == "um\\txlogpub.h");
+            Assert.False(File.Exists(Path.Combine(root, "patches", "um", "txlogpub.idl.patch")));
+            foreach (string retained in new[]
+            {
+                "IUnknown=SupportedOSPlatform(\"windows5.0\")",
+                "IFileBasedLogInit=SupportedOSPlatform(\"windows5.1.2600\")",
+                "ILog=SupportedOSPlatform(\"windows5.1.2600\")",
+            })
+                Assert.Single(legacy.Where(row => row == retained));
         }
 
         internal static IEnumerable<(string Header, string Partition, string OS, string[] Interfaces)> DeviceIdlOriginalHeaderContracts()
@@ -1208,7 +1218,6 @@ namespace Win32MetadataScraperTests
             yield return ("tpmvscmgr.h", "Security.Tpm", "windows8.0", new[] { "ITpmVirtualSmartCardManager", "ITpmVirtualSmartCardManagerStatusCallback" });
             yield return ("tsgauthenticationengine.h", "TermServ", "windows6.1", new[] { "ITSGAuthenticateUserSink", "ITSGAuthenticationEngine" });
             yield return ("tvratings.h", "MsTv", "windows5.1.2600", new[] { "IEvalRat", "IXDSToRat" });
-            yield return ("txlogpub.h", "Com", "windows5.1.2600", new[] { "IFileBasedLogInit", "ILog" });
         }
 
         [MigrationTheory("WINHTTP_DEVICE_GENERATED_ROOT")]
@@ -1242,8 +1251,9 @@ namespace Win32MetadataScraperTests
                     checkedTypes++;
                 }
             }
-            Assert.Equal(24, checkedTypes);
-            this.output.WriteLine($"{architecture}: all24 exact original-IDL type floors reached normal generated sources.");
+            Assert.Equal(22, checkedTypes);
+            this.output.WriteLine($"{architecture}: all22 exact original-IDL type floors reached normal generated sources; " +
+                "unrouted transaction-log interfaces remain legacy.");
         }
 
         [MigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS", "WINHTTP_DEVICE_GENERATED_ROOT")]
