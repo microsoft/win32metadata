@@ -173,8 +173,12 @@ void Unrelated(unsigned flags);
             const string original = "// caf\u00e9\r\nint Earlier(void);\r\n" +
                 "#define _Check_return_\r\n#define WINOLEAPI extern \"C\" __declspec(dllimport) long __stdcall\r\n" +
                 "#define COMBASEAPI extern \"C\" __declspec(dllimport) long __stdcall\r\n" +
-                "_Check_return_ WINOLEAPI\r\nUnique(void);\r\nCOMBASEAPI Another(void);\r\n";
-            using var fixture = new AuthoringFixture(original, new[] { "Unique", "Another" }, new[] { "Unique" }, architecture, target);
+                "#define PSSTDAPI extern \"C\" __declspec(dllimport) long __stdcall\r\n" +
+                "#define PSSTDAPI_(type) extern \"C\" __declspec(dllimport) type __stdcall\r\n" +
+                "_Check_return_ WINOLEAPI\r\nUnique(void);\r\nCOMBASEAPI Another(void);\r\n" +
+                "_Check_return_ PSSTDAPI Property(void);\r\nPSSTDAPI_(unsigned int) PropertyCount(void);\r\n";
+            using var fixture = new AuthoringFixture(original, new[] { "Unique", "Another", "Property", "PropertyCount" },
+                new[] { "Unique" }, architecture, target);
             string cumulative = original.Replace("int Earlier", "_Win32_PreserveResult_\r\nint Earlier");
             fixture.InstallExistingPatch(cumulative);
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
@@ -184,7 +188,7 @@ void Unrelated(unsigned flags);
             var result = fixture.Run(apply: true);
             Assert.True(result.ExitCode == 0, result.Text);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
-            Assert.Equal(3, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(5, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
             Assert.Equal(0, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
             Assert.False(string.IsNullOrEmpty(Assert.Single(report.RootElement.GetProperty("sourceBindings").EnumerateArray())
                 .GetProperty("existingPatchSha256").GetString()));
@@ -192,6 +196,8 @@ void Unrelated(unsigned flags);
             Assert.Contains("_Win32_PreserveResult_\r\nint Earlier", after);
             Assert.Contains("WINOLEAPI\r\n_Win32_SetLastError_ _Win32_SupportedOS_Windows7_ Unique", after);
             Assert.Contains("COMBASEAPI _Win32_SupportedOS_Windows7_ Another", after);
+            Assert.Contains("_Check_return_ PSSTDAPI _Win32_SupportedOS_Windows7_ Property", after);
+            Assert.Contains("PSSTDAPI_(unsigned int) _Win32_SupportedOS_Windows7_ PropertyCount", after);
             Assert.Equal(cumulative, after.Replace("#include <sal.h>\r\n", "")
                 .Replace("_Win32_SetLastError_ ", "").Replace("_Win32_SupportedOS_Windows7_ ", ""));
             using var recipe = JsonDocument.Parse(File.ReadAllText(fixture.Recipe));
@@ -201,7 +207,7 @@ void Unrelated(unsigned flags);
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             Assert.Equal(native, Signatures(fixture.Native.ReadSource()));
             Assert.Contains("PreserveSig", fixture.Native.ReadSource());
-            Assert.Equal(2, fixture.Native.ReadSource().Split("SupportedOSPlatform(\"windows6.1\")").Length - 1);
+            Assert.Equal(4, fixture.Native.ReadSource().Split("SupportedOSPlatform(\"windows6.1\")").Length - 1);
             Assert.Contains("SetLastError = true", fixture.Native.ReadSource());
         }
 
@@ -264,10 +270,12 @@ void Unrelated(unsigned flags);
         [Theory]
         [InlineData("DECLARE(Unique)\r\n")]
         [InlineData("UNKNOWNAPI Unique(void);\r\n")]
+        [InlineData("PSSTDAPI_UNKNOWN Unique(void);\r\n")]
         public void UnknownFunctionMacroExpansionsRemainLegacy(string declaration)
         {
             using var fixture = new AuthoringFixture(
-                "#define DECLARE(name) int name(void);\r\n#define UNKNOWNAPI extern \"C\" int\r\n" + declaration,
+                "#define DECLARE(name) int name(void);\r\n#define UNKNOWNAPI extern \"C\" int\r\n" +
+                "#define PSSTDAPI_UNKNOWN extern \"C\" int\r\n" + declaration,
                 new[] { "Unique" }, Array.Empty<string>());
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             var result = fixture.Run(apply: true);

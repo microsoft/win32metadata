@@ -72,6 +72,9 @@ retains every observed physical declaration owner for those names.
 An exact `EXTERN_C` linkage prefix is preserved, with annotations inserted inline
 after linkage and before the parsed declaration; other shared-line prefixes remain
 explicit residuals.
+The reviewed `WINOLEAPI`, `COMBASEAPI`, and `PSSTDAPI` return wrappers, including
+their typed `_` forms, require an exact parsed source prefix. Unknown lookalike
+macros remain residuals.
 
 Declaration maps also export native struct/class identities and definition sites.
 For global record SupportedOS facts, the authoring helper admits direct record

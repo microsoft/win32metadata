@@ -377,7 +377,7 @@ foreach ($owner in $Original) {
                 $prefix = $text.Substring($lineStart, [int]$decl.start - $lineStart)
                 $nativePrefix = $text.Substring([int]$decl.start, $nameOffset - [int]$decl.start)
                 $returnMacro = !$isRecord -and $nativePrefix -cmatch
-                    '^(?:WINOLEAPI|COMBASEAPI)(?:_[ \t]*\([A-Za-z_][A-Za-z_0-9 \t:*]*\))?[ \t\r\n]*$' -and
+                    '^(?:WINOLEAPI|COMBASEAPI|PSSTDAPI)(?:_[ \t]*\([A-Za-z_][A-Za-z_0-9 \t:*]*\))?[ \t\r\n]*$' -and
                     $masked.Substring($nameOffset + $fact.symbol.Length) -match '^\s*\('
                 if (!$isRecord -and !$returnMacro) {
                     $returnType = [regex]::Match($decl.type, '^\s*(?:const\s+|volatile\s+)*([A-Za-z_]\w*)').Groups[1].Value
