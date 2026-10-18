@@ -952,6 +952,109 @@ PRODUCER(Second, CloseSecond, 7)
             Assert.Contains("InvalidHandleValue(7L)", methods["Second"].ToString());
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", false, true)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, true)]
+        public void MacroCallbackParametersKeepTheirNativeMethodOwner(
+            string architecture, string target, bool sharedRecordMacro, bool annotated)
+        {
+            string methods = @"
+#define METHODS \
+virtual int __stdcall First(FIRST_FACT void** value) = 0; \
+virtual int __stdcall Second(SECOND_FACT void** value) = 0;
+";
+            methods = methods.Replace("FIRST_FACT", annotated ? "_Win32_RAIIFree_(CloseFirst, 0)" : "")
+                .Replace("SECOND_FACT", annotated ? "_Win32_RAIIFree_(CloseSecond, 7)" : "");
+            using var fixture = new NativeFixture(architecture, target,
+                methods + (sharedRecordMacro ? @"
+#define RECORDS struct IProbe { METHODS }; struct ISecondProbe { METHODS };
+RECORDS
+" : "\nstruct IProbe { METHODS };\n"));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var callbacks = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<DelegateDeclarationSyntax>().ToArray();
+            Assert.Equal(sharedRecordMacro ? 4 : 2, callbacks.Length);
+            Assert.Contains(callbacks, callback => callback.Identifier.ValueText.EndsWith("First", StringComparison.Ordinal));
+            Assert.Contains(callbacks, callback => callback.Identifier.ValueText.EndsWith("Second", StringComparison.Ordinal));
+            foreach (var callback in callbacks)
+            {
+                bool first = callback.Identifier.ValueText.EndsWith("First", StringComparison.Ordinal);
+                var parameter = callback.ParameterList.Parameters.Single(candidate => candidate.Identifier.ValueText == "value");
+                Assert.Equal("int", callback.ReturnType.ToString());
+                Assert.Equal("void**", parameter.Type.ToString());
+                if (annotated)
+                {
+                    Assert.Contains(first ? "RAIIFree(\"CloseFirst\")" : "RAIIFree(\"CloseSecond\")", parameter.ToString());
+                    Assert.Contains(first ? "InvalidHandleValue(0L)" : "InvalidHandleValue(7L)", parameter.ToString());
+                }
+                else
+                    Assert.DoesNotContain("RAIIFree", parameter.ToString());
+                Assert.DoesNotContain(first ? "CloseSecond" : "CloseFirst", parameter.ToString());
+            }
+        }
+
+        [Fact]
+        public void InheritedMacroCallbacksKeepTheirOriginalNativeMethodOwner()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define RECORDS \
+struct IBase { virtual int __stdcall First(_Win32_RAIIFree_(CloseFirst, 0) void** value) = 0; }; \
+struct IDerived : IBase { virtual int __stdcall Second(_Win32_RAIIFree_(CloseSecond, 7) void** value) = 0; };
+RECORDS
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var callbacks = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<DelegateDeclarationSyntax>().ToArray();
+            Assert.True(callbacks.Length >= 2);
+            Assert.Contains(callbacks, callback => callback.Identifier.ValueText.EndsWith("First", StringComparison.Ordinal));
+            Assert.Contains(callbacks, callback => callback.Identifier.ValueText.EndsWith("Second", StringComparison.Ordinal));
+            foreach (var callback in callbacks)
+            {
+                bool first = callback.Identifier.ValueText.EndsWith("First", StringComparison.Ordinal);
+                var parameter = callback.ParameterList.Parameters.Single(candidate => candidate.Identifier.ValueText == "value");
+                Assert.Contains(first ? "RAIIFree(\"CloseFirst\")" : "RAIIFree(\"CloseSecond\")", parameter.ToString());
+                Assert.DoesNotContain(first ? "CloseSecond" : "CloseFirst", parameter.ToString());
+            }
+        }
+
+        [Fact]
+        public void AmbiguousMacroCallbackNamesStillFail()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define METHODS \
+virtual int __stdcall First(_Win32_RAIIFree_(CloseFirst, 0) void** value) = 0; \
+virtual int __stdcall Second(_Win32_RAIIFree_(CloseSecond, 7) void** value) = 0;
+struct IProbe { METHODS };
+", extraSettings: "--remap\nFirst=Same\nSecond=Same\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Source-location transport is ambiguous", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void UnprojectedFunctionPointerFieldParametersStillFail()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define METHODS \
+int (__stdcall* First)(_Win32_RAIIFree_(CloseFirst, 0) void** value); \
+int (__stdcall* Second)(_Win32_RAIIFree_(CloseSecond, 7) void** value);
+struct IProbe { METHODS };
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("were not projected", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
         [Fact]
         public void MacroFieldsKeepDistinctNativeOwners()
         {

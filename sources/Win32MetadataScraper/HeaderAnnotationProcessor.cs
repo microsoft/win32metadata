@@ -878,6 +878,25 @@ namespace Win32MetadataScraper
                 var compatible = candidates?.Where(facts => MatchesKind(facts.Declaration, node)).ToArray()
                     ?? Array.Empty<DeclarationFacts>();
                 compatible = compatible.GroupBy(facts => facts.AnnotationOwner).Select(group => group.First()).ToArray();
+                if (compatible.Length > 1 && node is ParameterSyntax parameterNode)
+                {
+                    var parent = parameterNode.Parent?.Parent;
+                    var declaration = parent switch
+                    {
+                        MethodDeclarationSyntax method => FindFacts(method.AttributeLists, method)?.Declaration,
+                        DelegateDeclarationSyntax callback => FindFacts(callback.AttributeLists, callback)?.Declaration,
+                        _ => null,
+                    };
+                    if (declaration is FunctionDecl function)
+                        compatible = compatible.Where(facts =>
+                            GetNativeIdentity(facts.Declaration).Declaration == function.Handle.CanonicalCursor).ToArray();
+                    else if (declaration is TypedefNameDecl alias)
+                    {
+                        var origin = owner.callbackOrigins.GetValueOrDefault(alias) ?? alias;
+                        var parameters = origin.CursorChildren.OfType<ParmVarDecl>().Select(GetNativeIdentity).ToHashSet();
+                        compatible = compatible.Where(facts => parameters.Contains(GetNativeIdentity(facts.Declaration))).ToArray();
+                    }
+                }
                 if (compatible.Length > 1)
                 {
                     string name = node switch
@@ -890,7 +909,19 @@ namespace Win32MetadataScraper
                         DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
                         _ => string.Empty,
                     };
-                    compatible = compatible.Where(facts => owner.Remap(facts.Declaration.Name) == name).ToArray();
+                    // ClangSharp prefixes synthesized virtual-method delegate names with "_".
+                    compatible = compatible.Where(facts => owner.Remap(facts.Declaration.Name) == name ||
+                        node is DelegateDeclarationSyntax && facts.Declaration is CXXMethodDecl &&
+                        "_" + owner.Remap(facts.Declaration.Name) == name).ToArray();
+                }
+                if (compatible.Length > 1 && node is MethodDeclarationSyntax or DelegateDeclarationSyntax)
+                {
+                    var record = node.Ancestors().OfType<StructDeclarationSyntax>()
+                        .Select(parent => FindFacts(parent.AttributeLists, parent)?.Declaration)
+                        .OfType<RecordDecl>().FirstOrDefault();
+                    if (record != null)
+                        compatible = compatible.Where(facts =>
+                            facts.Declaration.SemanticParentCursor.Handle.CanonicalCursor == record.Handle.CanonicalCursor).ToArray();
                 }
                 if (compatible.Length > 1)
                     throw Error(compatible[0].Location, "Source-location transport is ambiguous between native declarations; refusing to assign annotation facts.");
