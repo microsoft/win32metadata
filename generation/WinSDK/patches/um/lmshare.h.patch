@@ -1,5 +1,5 @@
 diff --git a/um/lmshare.h b/um/lmshare.h
-index 50827309..19a92fd2 100644
+index 50827309..f7528d7f 100644
 --- a/um/lmshare.h
 +++ b/um/lmshare.h
 @@ -51,6 +51,7 @@ extern "C" {
@@ -82,7 +82,53 @@ index 50827309..19a92fd2 100644
  _Check_return_
  _Success_( return == 0 )
  NET_API_STATUS NET_API_FUNCTION
-@@ -528,6 +538,7 @@ typedef struct _SESSION_INFO_502 {
+@@ -463,13 +473,17 @@ typedef struct _SESSION_INFO_0 {
+     LMSTR     sesi0_cname;              // client name (no backslashes)
+ } SESSION_INFO_0, *PSESSION_INFO_0, *LPSESSION_INFO_0;
+ 
++#if defined(WIN32METADATA) && defined(__clang__)
++typedef DWORD SESSION_INFO_USER_FLAGS;
++#endif
++
+ typedef struct _SESSION_INFO_1 {
+     LMSTR     sesi1_cname;              // client name (no backslashes)
+     LMSTR     sesi1_username;
+     DWORD     sesi1_num_opens;
+     DWORD     sesi1_time;
+     DWORD     sesi1_idle_time;
+-    DWORD     sesi1_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi1_user_flags;
+ } SESSION_INFO_1, *PSESSION_INFO_1, *LPSESSION_INFO_1;
+ 
+ typedef struct _SESSION_INFO_2 {
+@@ -478,7 +492,7 @@ typedef struct _SESSION_INFO_2 {
+     DWORD     sesi2_num_opens;
+     DWORD     sesi2_time;
+     DWORD     sesi2_idle_time;
+-    DWORD     sesi2_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi2_user_flags;
+     LMSTR     sesi2_cltype_name;
+ } SESSION_INFO_2, *PSESSION_INFO_2, *LPSESSION_INFO_2;
+ 
+@@ -495,7 +509,7 @@ typedef struct _SESSION_INFO_502 {
+     DWORD     sesi502_num_opens;
+     DWORD     sesi502_time;
+     DWORD     sesi502_idle_time;
+-    DWORD     sesi502_user_flags;
++    _Win32_AssociatedEnum_(SESSION_INFO_USER_FLAGS) DWORD     sesi502_user_flags;
+     LMSTR     sesi502_cltype_name;
+     LMSTR     sesi502_transport;
+ } SESSION_INFO_502, *PSESSION_INFO_502, *LPSESSION_INFO_502;
+@@ -511,6 +525,8 @@ typedef struct _SESSION_INFO_502 {
+ #define SESS_GUEST          0x00000001  // session is logged on as a guest
+ #define SESS_NOENCRYPTION   0x00000002  // session is not using encryption
+ 
++_Win32_Enum_(SESSION_INFO_USER_FLAGS, DWORD, SESS_GUEST, SESS_NOENCRYPTION);
++
+ #define SESI1_NUM_ELEMENTS  8
+ #define SESI2_NUM_ELEMENTS  9
+ 
+@@ -528,6 +544,7 @@ typedef struct _SESSION_INFO_502 {
  // Function Prototypes - CONNECTION
  //
  
@@ -90,7 +136,7 @@ index 50827309..19a92fd2 100644
  _Check_return_
  _Success_( return == 0  || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -575,6 +586,7 @@ typedef struct _CONNECTION_INFO_1 {
+@@ -575,6 +592,7 @@ typedef struct _CONNECTION_INFO_1 {
  // Function Prototypes - FILE
  //
  
@@ -98,7 +144,7 @@ index 50827309..19a92fd2 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetFileClose(
-@@ -582,6 +594,7 @@ NetFileClose(
+@@ -582,6 +600,7 @@ NetFileClose(
      _In_ DWORD fileid
      );
  
@@ -106,7 +152,7 @@ index 50827309..19a92fd2 100644
  _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -599,6 +612,7 @@ NetFileEnum(
+@@ -599,6 +618,7 @@ NetFileEnum(
      _Inout_opt_ PDWORD_PTR resume_handle
      );
  
@@ -114,3 +160,33 @@ index 50827309..19a92fd2 100644
  _Check_return_
  _Success_( return == 0)
  NET_API_STATUS NET_API_FUNCTION
+@@ -623,9 +643,13 @@ typedef struct _FILE_INFO_2 {
+     DWORD     fi2_id;
+ } FILE_INFO_2, *PFILE_INFO_2, *LPFILE_INFO_2;
+ 
++#if defined(WIN32METADATA) && defined(__clang__)
++typedef DWORD FILE_INFO_FLAGS_PERMISSIONS;
++#endif
++
+ typedef struct _FILE_INFO_3 {
+     DWORD     fi3_id;
+-    DWORD     fi3_permissions;
++    _Win32_AssociatedEnum_(FILE_INFO_FLAGS_PERMISSIONS) DWORD     fi3_permissions;
+     DWORD     fi3_num_locks;
+     LMSTR     fi3_pathname;
+     LMSTR     fi3_username;
+@@ -643,6 +667,9 @@ typedef struct _FILE_INFO_3 {
+ #define PERM_FILE_WRITE     0x2 // user has write access
+ #define PERM_FILE_CREATE    0x4 // user has create access
+ 
++_Win32_FlagsEnum_(FILE_INFO_FLAGS_PERMISSIONS, DWORD,
++    PERM_FILE_READ, PERM_FILE_WRITE, PERM_FILE_CREATE);
++
+ #ifdef __cplusplus
+ }
+ #endif
+@@ -651,4 +678,3 @@ typedef struct _FILE_INFO_3 {
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+-

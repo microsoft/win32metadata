@@ -1264,42 +1264,6 @@
     ]
   },
   {
-    "finished": true,
-    "name": "SNMP_EXTENSION_REQUEST_TYPE",
-    "members": [
-      {
-        "name": "SNMP_EXTENSION_GET",
-        "value": "SNMP_PDU_TYPE.SNMP_PDU_GET"
-      },
-      {
-        "name": "SNMP_EXTENSION_GET_NEXT",
-        "value": "SNMP_PDU_TYPE.SNMP_PDU_GETNEXT"
-      },
-      {
-        "name": "SNMP_EXTENSION_SET_TEST",
-        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x0)"
-      },
-      {
-        "name": "SNMP_EXTENSION_SET_COMMIT",
-        "value": "SNMP_PDU_TYPE.SNMP_PDU_SET"
-      },
-      {
-        "name": "SNMP_EXTENSION_SET_UNDO",
-        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x1)"
-      },
-      {
-        "name": "SNMP_EXTENSION_SET_CLEANUP",
-        "value": "(ASN_PRIVATE | ASN_CONSTRUCTOR | 0x2)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpExtensionQueryEx",
-        "parameter": "nRequestType"
-      }
-    ]
-  },
-  {
     "name": "CFM_MASK",
     "flags": true,
     "autoPopulate": {
@@ -2094,34 +2058,6 @@
   },
   {
     "type": "uint",
-    "name": "MPR_INTERFACE_DIAL_MODE",
-    "members": [
-      {
-        "name": "MPRDM_DialFirst",
-        "value": "0"
-      },
-      {
-        "name": "MPRDM_DialAll",
-        "value": "RASENTRY_DIAL_MODE.RASEDM_DialAll"
-      },
-      {
-        "name": "MPRDM_DialAsNeeded",
-        "value": "RASENTRY_DIAL_MODE.RASEDM_DialAsNeeded"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MPR_INTERFACE_3",
-        "field": "dwDialMode"
-      },
-      {
-        "struct": "MPR_INTERFACE_2",
-        "field": "dwDialMode"
-      }
-    ]
-  },
-  {
-    "type": "uint",
     "name": "RASENTRY_DIAL_MODE",
     "members": [
       {
@@ -2141,33 +2077,6 @@
       {
         "struct": "RASENTRYW",
         "field": "dwDialMode"
-      }
-    ]
-  },
-  {
-    "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE",
-    "members": [
-      {
-        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1",
-        "value": "1"
-      },
-      {
-        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2",
-        "value": "2"
-      },
-      {
-        "name": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION",
-        "value": "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PEERDIST_STATUS_INFO",
-        "field": "dwMaxVer"
-      },
-      {
-        "struct": "PEERDIST_STATUS_INFO",
-        "field": "dwMinVer"
       }
     ]
   },
@@ -4927,38 +4836,6 @@
     ]
   },
   {
-    "name": "SNMP_API_TRANSLATE_MODE",
-    "members": [
-      {
-        "name": "SNMPAPI_TRANSLATED"
-      },
-      {
-        "name": "SNMPAPI_UNTRANSLATED_V1"
-      },
-      {
-        "name": "SNMPAPI_UNTRANSLATED_V2"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpStartupEx",
-        "parameter": "nTranslateMode"
-      },
-      {
-        "method": "SnmpGetTranslateMode",
-        "parameter": "nTranslateMode"
-      },
-      {
-        "method": "SnmpSetTranslateMode",
-        "parameter": "nTranslateMode"
-      },
-      {
-        "method": "SnmpStartup",
-        "parameter": "nTranslateMode"
-      }
-    ]
-  },
-  {
     "name": "ACC_UTILITY_STATE_FLAGS",
     "flags": true,
     "members": [
@@ -5612,37 +5489,10 @@
   },
   {
     "name": "SNMP_GENERICTRAP",
-    "members": [
-      {
-        "name": "SNMP_GENERICTRAP_COLDSTART"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_WARMSTART"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_LINKDOWN"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_LINKUP"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_AUTHFAILURE"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_EGPNEIGHLOSS"
-      },
-      {
-        "name": "SNMP_GENERICTRAP_ENTERSPECIFIC"
-      }
-    ],
     "uses": [
       {
         "method": "SnmpMgrGetTrap",
         "parameter": "genericTrap"
-      },
-      {
-        "method": "SnmpExtensionTrap",
-        "parameter": "pGenericTrapId"
       },
       {
         "method": "SnmpMgrGetTrapEx",
@@ -7305,6 +7155,15 @@
     ]
   },
   {
+    "name": "SNMP_ERROR_STATUS",
+    "uses": [
+      {
+        "method": "SnmpMgrRequest",
+        "parameter": "errorStatus"
+      }
+    ]
+  },
+  {
     "name": "CREATE_POLYGON_RGN_MODE",
     "type": "int",
     "members": [
@@ -7327,82 +7186,6 @@
       {
         "method": "CreatePolyPolygonRgn",
         "parameter": "iMode"
-      }
-    ]
-  },
-  {
-    "name": "SNMP_ERROR_STATUS",
-    "members": [
-      {
-        "name": "SNMP_ERRORSTATUS_NOERROR"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_TOOBIG"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_NOSUCHNAME"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_BADVALUE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_READONLY"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_GENERR"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_NOACCESS"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_WRONGTYPE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_WRONGLENGTH"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_WRONGENCODING"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_WRONGVALUE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_NOCREATION"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_INCONSISTENTVALUE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_RESOURCEUNAVAILABLE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_COMMITFAILED"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_UNDOFAILED"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_AUTHORIZATIONERROR"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_NOTWRITABLE"
-      },
-      {
-        "name": "SNMP_ERRORSTATUS_INCONSISTENTNAME"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpExtensionQueryEx",
-        "parameter": "pErrorStatus"
-      },
-      {
-        "method": "SnmpMgrRequest",
-        "parameter": "errorStatus"
-      },
-      {
-        "method": "SnmpExtensionQuery",
-        "parameter": "pErrorStatus"
       }
     ]
   },
@@ -8127,43 +7910,6 @@
       {
         "struct": "SERVICE_STATUS_PROCESS",
         "field": "dwServiceType"
-      }
-    ]
-  },
-  {
-    "name": "SNMP_STATUS",
-    "members": [
-      {
-        "name": "SNMPAPI_ON"
-      },
-      {
-        "name": "SNMPAPI_OFF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpListen",
-        "parameter": "lStatus"
-      },
-      {
-        "method": "SnmpStartup",
-        "parameter": "nRetransmitMode"
-      },
-      {
-        "method": "SnmpSetRetransmitMode",
-        "parameter": "nRetransmitMode"
-      },
-      {
-        "method": "SnmpGetRetransmitMode",
-        "parameter": "nRetransmitMode"
-      },
-      {
-        "method": "SnmpRegister",
-        "parameter": "state"
-      },
-      {
-        "method": "SnmpStartupEx",
-        "parameter": "nRetransmitMode"
       }
     ]
   },
@@ -10957,25 +10703,6 @@
     ]
   },
   {
-    "name": "WLAN_SET_EAPHOST_FLAGS",
-    "members": [
-      {
-        "name": "WLAN_SET_EAPHOST_DATA_ALL_USERS",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WlanSetProfileEapUserData",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "WlanSetProfileEapXmlUserData",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "REGISTER_NOTIFICATION_FLAGS",
     "flags": true,
     "members": [
@@ -11806,22 +11533,6 @@
         "field": "Type"
       }
     ]
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.Snmp",
-    "name": "SNMP_OUTPUT_LOG_TYPE",
-    "members": [
-      {
-        "name": "SNMP_OUTPUT_TO_CONSOLE"
-      },
-      {
-        "name": "SNMP_OUTPUT_TO_LOGFILE"
-      },
-      {
-        "name": "SNMP_OUTPUT_TO_DEBUGGER"
-      }
-    ],
-    "uses": []
   },
   {
     "name": "SERVICE_START_TYPE",
@@ -13477,40 +13188,6 @@
     ]
   },
   {
-    "name": "SNMP_LOG",
-    "type": "int",
-    "members": [
-      {
-        "name": "SNMP_LOG_SILENT"
-      },
-      {
-        "name": "SNMP_LOG_FATAL"
-      },
-      {
-        "name": "SNMP_LOG_ERROR"
-      },
-      {
-        "name": "SNMP_LOG_WARNING"
-      },
-      {
-        "name": "SNMP_LOG_TRACE"
-      },
-      {
-        "name": "SNMP_LOG_VERBOSE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpUtilDbgPrint",
-        "parameter": "nLogLevel"
-      },
-      {
-        "method": "SnmpSvcSetLogLevel",
-        "parameter": "nLogLevel"
-      }
-    ]
-  },
-  {
     "name": "TAPE_POSITION_METHOD",
     "type": "uint",
     "members": [
@@ -14889,74 +14566,6 @@
     ]
   },
   {
-    "name": "SNMP_ERROR",
-    "members": [
-      {
-        "name": "SNMP_ERROR_NOERROR"
-      },
-      {
-        "name": "SNMP_ERROR_TOOBIG"
-      },
-      {
-        "name": "SNMP_ERROR_NOSUCHNAME"
-      },
-      {
-        "name": "SNMP_ERROR_BADVALUE"
-      },
-      {
-        "name": "SNMP_ERROR_READONLY"
-      },
-      {
-        "name": "SNMP_ERROR_GENERR"
-      },
-      {
-        "name": "SNMP_ERROR_NOACCESS"
-      },
-      {
-        "name": "SNMP_ERROR_WRONGTYPE"
-      },
-      {
-        "name": "SNMP_ERROR_WRONGLENGTH"
-      },
-      {
-        "name": "SNMP_ERROR_WRONGENCODING"
-      },
-      {
-        "name": "SNMP_ERROR_WRONGVALUE"
-      },
-      {
-        "name": "SNMP_ERROR_NOCREATION"
-      },
-      {
-        "name": "SNMP_ERROR_INCONSISTENTVALUE"
-      },
-      {
-        "name": "SNMP_ERROR_RESOURCEUNAVAILABLE"
-      },
-      {
-        "name": "SNMP_ERROR_COMMITFAILED"
-      },
-      {
-        "name": "SNMP_ERROR_UNDOFAILED"
-      },
-      {
-        "name": "SNMP_ERROR_AUTHORIZATIONERROR"
-      },
-      {
-        "name": "SNMP_ERROR_NOTWRITABLE"
-      },
-      {
-        "name": "SNMP_ERROR_INCONSISTENTNAME"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpGetPduData",
-        "parameter": "error_status"
-      }
-    ]
-  },
-  {
     "name": "CRYPT_MSG_TYPE",
     "members": [
       {
@@ -14979,23 +14588,6 @@
       {
         "method": "CryptMsgOpenToEncode",
         "parameter": "dwMsgType"
-      }
-    ]
-  },
-  {
-    "name": "CSBACKUP_TYPE",
-    "members": [
-      {
-        "name": "CSBACKUP_TYPE_FULL"
-      },
-      {
-        "name": "CSBACKUP_TYPE_LOGS_ONLY"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CertSrvBackupPrepareW",
-        "parameter": "dwBackupFlags"
       }
     ]
   },
@@ -17101,28 +16693,6 @@
       {
         "method": "PFN_CERT_ENUM_SYSTEM_STORE",
         "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "HTTP_INITIALIZE",
-    "flags": true,
-    "members": [
-      {
-        "name": "HTTP_INITIALIZE_CONFIG"
-      },
-      {
-        "name": "HTTP_INITIALIZE_SERVER"
-      }
-    ],
-    "uses": [
-      {
-        "method": "HttpTerminate",
-        "parameter": "Flags"
-      },
-      {
-        "method": "HttpInitialize",
-        "parameter": "Flags"
       }
     ]
   },
@@ -19489,23 +19059,6 @@
       ]
     },
   {
-    "name": "WLAN_CONNECTION_NOTIFICATION_FLAGS",
-    "members": [
-      {
-        "name": "WLAN_CONNECTION_NOTIFICATION_ADHOC_NETWORK_FORMED"
-      },
-      {
-        "name": "WLAN_CONNECTION_NOTIFICATION_CONSOLE_USER_PROFILE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "WLAN_CONNECTION_NOTIFICATION_DATA",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "CERT_SELECT_STRUCT_FLAGS",
     "flags": true,
     "members": [
@@ -20179,41 +19732,6 @@
     ]
   },
   {
-    "name": "RESTOREPOINTINFO_TYPE",
-    "members": [
-      {
-        "name": "APPLICATION_INSTALL",
-        "value": "0"
-      },
-      {
-        "name": "APPLICATION_UNINSTALL",
-        "value": "1"
-      },
-      {
-        "name": "DEVICE_DRIVER_INSTALL",
-        "value": "10"
-      },
-      {
-        "name": "MODIFY_SETTINGS",
-        "value": "12"
-      },
-      {
-        "name": "CANCELLED_OPERATION",
-        "value": "13"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RESTOREPOINTINFOA",
-        "field": "dwRestorePtType"
-      },
-      {
-        "struct": "RESTOREPOINTINFOW",
-        "field": "dwRestorePtType"
-      }
-    ]
-  },
-  {
     "name": "HIGHCONTRASTW_FLAGS",
     "flags": true,
     "members": [
@@ -20830,34 +20348,6 @@
       {
         "struct": "RPC_BINDING_HANDLE_OPTIONS_V1",
         "field": "Flags"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "MPR_ET",
-    "members": [
-      {
-        "name": "MPR_ET_None"
-      },
-      {
-        "name": "MPR_ET_Require"
-      },
-      {
-        "name": "MPR_ET_RequireMax"
-      },
-      {
-        "name": "MPR_ET_Optional"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MPR_INTERFACE_2",
-        "field": "dwEncryptionType"
-      },
-      {
-        "struct": "MPR_INTERFACE_3",
-        "field": "dwEncryptionType"
       }
     ]
   },
@@ -21835,30 +21325,6 @@
     ]
   },
   {
-    "name": "RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA",
-    "members": [
-      {
-        "name": "RASLCPAD_CHAP_MD5"
-      },
-      {
-        "name": "RASLCPAD_CHAP_MS"
-      },
-      {
-        "name": "RASLCPAD_CHAP_MSV2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RASPPP_PROJECTION_INFO",
-        "field": "dwServerAuthenticationData"
-      },
-      {
-        "struct": "RASPPP_PROJECTION_INFO",
-        "field": "dwAuthenticationData"
-      }
-    ]
-  },
-  {
       "addUsesTo": "USN_SOURCE_INFO_ID",
       "uses": [
         {
@@ -22030,45 +21496,6 @@
     ]
   },
   {
-    "name": "PPP_LCP",
-    "members": [
-      {
-        "name": "PPP_LCP_PAP"
-      },
-      {
-        "name": "PPP_LCP_CHAP"
-      },
-      {
-        "name": "PPP_LCP_EAP"
-      },
-      {
-        "name": "PPP_LCP_SPAP"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PPP_PROJECTION_INFO",
-        "field": "dwAuthenticationProtocol"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO2",
-        "field": "dwAuthenticationProtocol"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO2",
-        "field": "dwRemoteAuthenticationProtocol"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO",
-        "field": "dwRemoteAuthenticationProtocol"
-      },
-      {
-        "struct": "PPP_LCP_INFO",
-        "field": "dwAuthenticationProtocol"
-      }
-    ]
-  },
-  {
     "name": "TOOLTIP_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -22092,37 +21519,6 @@
       {
         "struct": "NMTTDISPINFOA",
         "field": "uFlags"
-      }
-    ]
-  },
-  {
-    "name": "RESTOREPOINTINFO_EVENT_TYPE",
-    "members": [
-      {
-        "name": "BEGIN_NESTED_SYSTEM_CHANGE",
-        "value": "102"
-      },
-      {
-        "name": "BEGIN_SYSTEM_CHANGE",
-        "value": "100"
-      },
-      {
-        "name": "END_NESTED_SYSTEM_CHANGE",
-        "value": "103"
-      },
-      {
-        "name": "END_SYSTEM_CHANGE",
-        "value": "101"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RESTOREPOINTINFOA",
-        "field": "dwEventType"
-      },
-      {
-        "struct": "RESTOREPOINTINFOW",
-        "field": "dwEventType"
       }
     ]
   },
@@ -22269,33 +21665,6 @@
       {
         "struct": "IMAGEHLP_CBA_EVENTW",
         "field": "severity"
-      }
-    ]
-  },
-  {
-    "name": "RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL",
-    "members": [
-      {
-        "name": "RASLCPAP_PAP"
-      },
-      {
-        "name": "RASLCPAP_SPAP"
-      },
-      {
-        "name": "RASLCPAP_CHAP"
-      },
-      {
-        "name": "RASLCPAP_EAP"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RASPPP_PROJECTION_INFO",
-        "field": "dwServerAuthenticationProtocol"
-      },
-      {
-        "struct": "RASPPP_PROJECTION_INFO",
-        "field": "dwAuthenticationProtocol"
       }
     ]
   },
@@ -22447,42 +21816,6 @@
       {
         "struct": "IMAGEHLP_GET_TYPE_INFO_PARAMS",
         "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "PPP_LCP_INFO_AUTH_DATA",
-    "members": [
-      {
-        "name": "PPP_LCP_CHAP_MD5"
-      },
-      {
-        "name": "PPP_LCP_CHAP_MS"
-      },
-      {
-        "name": "PPP_LCP_CHAP_MSV2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PPP_LCP_INFO",
-        "field": "dwAuthenticationData"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO",
-        "field": "dwAuthenticationData"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO2",
-        "field": "dwAuthenticationData"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO2",
-        "field": "dwRemoteAuthenticationData"
-      },
-      {
-        "struct": "PPP_PROJECTION_INFO",
-        "field": "dwRemoteAuthenticationData"
       }
     ]
   },
@@ -22832,27 +22165,6 @@
       {
         "struct": "INTERNET_PROXY_INFO",
         "field": "dwAccessType"
-      }
-    ]
-  },
-  {
-    "name": "RASIKEV_PROJECTION_INFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "RASIKEv2_FLAGS_MOBIKESUPPORTED"
-      },
-      {
-        "name": "RASIKEv2_FLAGS_BEHIND_NAT"
-      },
-      {
-        "name": "RASIKEv2_FLAGS_SERVERBEHIND_NAT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RASIKEV2_PROJECTION_INFO",
-        "field": "dwFlags"
       }
     ]
   },
@@ -23415,36 +22727,6 @@
     ]
   },
   {
-    "name": "MPR_VS",
-    "members": [
-      {
-        "name": "MPR_VS_Default"
-      },
-      {
-        "name": "MPR_VS_PptpOnly"
-      },
-      {
-        "name": "MPR_VS_PptpFirst"
-      },
-      {
-        "name": "MPR_VS_L2tpOnly"
-      },
-      {
-        "name": "MPR_VS_L2tpFirst"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MPR_INTERFACE_2",
-        "field": "dwVpnStrategy"
-      },
-      {
-        "struct": "MPR_INTERFACE_3",
-        "field": "dwVpnStrategy"
-      }
-    ]
-  },
-  {
     "name": "TBINSERTMARK_FLAGS",
     "members": [
       {
@@ -23584,31 +22866,6 @@
       {
         "struct": "LVGROUP",
         "field": "mask"
-      }
-    ]
-  },
-  {
-    "name": "SESSION_INFO_USER_FLAGS",
-    "members": [
-      {
-        "name": "SESS_GUEST"
-      },
-      {
-        "name": "SESS_NOENCRYPTION"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SESSION_INFO_502",
-        "field": "sesi502_user_flags"
-      },
-      {
-        "struct": "SESSION_INFO_2",
-        "field": "sesi2_user_flags"
-      },
-      {
-        "struct": "SESSION_INFO_1",
-        "field": "sesi1_user_flags"
       }
     ]
   },
@@ -25225,26 +24482,6 @@
     ]
   },
   {
-    "name": "SECURITY_MESSAGE_MSG_ID",
-    "members": [
-      {
-        "name": "SECURITYMSG_SUCCESS"
-      },
-      {
-        "name": "SECURITYMSG_FAILURE"
-      },
-      {
-        "name": "SECURITYMSG_ERROR"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SECURITY_MESSAGE",
-        "field": "dwMsgId"
-      }
-    ]
-  },
-  {
     "name": "LVHITTESTINFO_FLAGS",
     "flags": true,
     "members": [
@@ -25859,27 +25096,6 @@
       {
         "struct": "CONVINFO",
         "field": "wStatus"
-      }
-    ]
-  },
-  {
-    "name": "FILE_INFO_FLAGS_PERMISSIONS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PERM_FILE_READ"
-      },
-      {
-        "name": "PERM_FILE_WRITE"
-      },
-      {
-        "name": "PERM_FILE_CREATE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "FILE_INFO_3",
-        "field": "fi3_permissions"
       }
     ]
   },
@@ -33198,6 +32414,15 @@
     ]
   },
   {
+    "name": "WLAN_NOTIFICATION_SOURCES",
+    "uses": [
+      {
+        "struct": "L2_NOTIFICATION_DATA",
+        "field": "NotificationSource"
+      }
+    ]
+  },
+  {
     "name": "INF_STYLE",
     "flags": true,
     "autoPopulate": {
@@ -33244,25 +32469,6 @@
       {
         "method": "SetupScanFileQueueW",
         "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "WLAN_NOTIFICATION_SOURCES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "WLAN_NOTIFICATION_SOURCE_",
-      "header": "wlanapi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "WlanRegisterNotification",
-        "parameter": "dwNotifSource"
-      },
-      {
-        "struct": "L2_NOTIFICATION_DATA",
-        "field": "NotificationSource"
       }
     ]
   },

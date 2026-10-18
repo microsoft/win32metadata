@@ -1408,6 +1408,156 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> OriginalWnetHeaderControls() => OriginalErrorOwnerControls();
 
+        [Fact]
+        public void NetworkEnumSourcePatchesRemoveOnlyCoveredLegacyFacts()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            string[] headers =
+            {
+                "ras", "mprapi", "snmp", "winsnmp", "windns", "wlanapi",
+                "http", "lmshare", "srrestoreptapi", "rasshost", "certbcli", "peerdist",
+            };
+            string additions = string.Join("\n", headers.SelectMany(header =>
+                File.ReadLines(Path.Combine(root, "patches", "um", header + ".h.patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1).TrimEnd('\r'))));
+            var groups = Regex.Matches(additions,
+                @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
+            Assert.Equal(27, groups.Count);
+            Assert.Equal(27, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal(130, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
+            Assert.Equal(new[]
+            {
+                "FILE_INFO_FLAGS_PERMISSIONS", "HTTP_INITIALIZE", "RASIKEV_PROJECTION_INFO_FLAGS", "WLAN_NOTIFICATION_SOURCES",
+            }, groups.Where(group => group.Groups["kind"].Value == "FlagsEnum")
+                .Select(group => group.Groups["name"].Value).OrderBy(value => value, StringComparer.Ordinal));
+            foreach (Match group in groups)
+            {
+                Assert.Equal(group.Groups["name"].Value == "SNMP_LOG" ? "int" : "DWORD", group.Groups["storage"].Value);
+                foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
+                    Assert.Matches(@"^[A-Za-z_]\w*$", member);
+            }
+            Assert.Equal(61, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
+            var retained = new Dictionary<string, string[]>
+            {
+                ["SNMP_ERROR_STATUS"] = new[] { "SnmpMgrRequest::errorStatus" },
+                ["SNMP_GENERICTRAP"] = new[] { "SnmpMgrGetTrap::genericTrap", "SnmpMgrGetTrapEx::genericTrap" },
+                ["WLAN_NOTIFICATION_SOURCES"] = new[] { "L2_NOTIFICATION_DATA::NotificationSource" },
+            };
+            foreach (Match group in groups)
+            {
+                string name = group.Groups["name"].Value;
+                var legacy = enums.RootElement.GetProperty("items").EnumerateArray().Where(item =>
+                    item.TryGetProperty("name", out var value) && value.GetString() == name ||
+                    item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == name).ToArray();
+                if (!retained.TryGetValue(name, out var uses))
+                {
+                    Assert.Empty(legacy);
+                    continue;
+                }
+                var item = Assert.Single(legacy);
+                Assert.Equal(new[] { "name", "uses" }, item.EnumerateObject().Select(property => property.Name));
+                Assert.Equal(uses, item.GetProperty("uses").EnumerateArray().Select(use =>
+                    use.TryGetProperty("method", out var method)
+                        ? method.GetString() + "::" + use.GetProperty("parameter").GetString()
+                        : use.GetProperty("struct").GetString() + "::" + use.GetProperty("field").GetString()));
+            }
+            string[] overrides = File.ReadAllLines(Path.Combine(root, "emitter.settings.rsp"));
+            foreach (string row in new[]
+            {
+                "DnsQuery_A::return=WIN32_ERROR", "DnsQuery_W::return=WIN32_ERROR",
+                "DnsQuery_UTF8::return=WIN32_ERROR", "STATEMGRSTATUS::nStatus=WIN32_ERROR",
+                "SnmpSvcSetLogType::nLogType=[AssociatedEnum(\"SNMP_OUTPUT_LOG_TYPE\")]",
+            })
+                Assert.DoesNotContain(row, overrides);
+        }
+
+        [NativeMigrationTheory]
+        [MemberData(nameof(NetworkEnumOwnerControls))]
+        public void OriginalNetworkEnumOwnersPreserveNativeAbiSalAndTypedefMultiplicity(
+            string partition, string architecture, string target, bool enabled)
+        {
+            var (headers, groups, forwards) = partition switch
+            {
+                "RRas" => (new[] { "ras.h", "mprapi.h", "rasshost.h" },
+                    new[]
+                    {
+                        "RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL", "RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA",
+                        "RASIKEV_PROJECTION_INFO_FLAGS", "MPR_INTERFACE_DIAL_MODE", "MPR_ET", "MPR_VS",
+                        "PPP_LCP", "PPP_LCP_INFO_AUTH_DATA", "SECURITY_MESSAGE_MSG_ID",
+                    }, new[] { "SECURITY_MESSAGE_MSG_ID" }),
+                "Snmp" => (new[] { "snmp.h", "winsnmp.h" },
+                    new[]
+                    {
+                        "SNMP_ERROR_STATUS", "SNMP_GENERICTRAP", "SNMP_LOG", "SNMP_EXTENSION_REQUEST_TYPE",
+                        "SNMP_OUTPUT_LOG_TYPE", "SNMP_ERROR", "SNMP_API_TRANSLATE_MODE", "SNMP_STATUS",
+                    }, new[] { "SNMP_LOG", "SNMP_OUTPUT_LOG_TYPE" }),
+                "Dns" => (new[] { "windns.h" }, Array.Empty<string>(), Array.Empty<string>()),
+                "NWifi" => (new[] { "wlanapi.h" },
+                    new[] { "WLAN_NOTIFICATION_SOURCES", "WLAN_CONNECTION_NOTIFICATION_FLAGS", "WLAN_SET_EAPHOST_FLAGS" },
+                    Array.Empty<string>()),
+                "HttpServer" => (new[] { "http.h" }, new[] { "HTTP_INITIALIZE" }, Array.Empty<string>()),
+                "Fs" => (new[] { "lmshare.h" },
+                    new[] { "FILE_INFO_FLAGS_PERMISSIONS", "SESSION_INFO_USER_FLAGS" },
+                    new[] { "FILE_INFO_FLAGS_PERMISSIONS", "SESSION_INFO_USER_FLAGS" }),
+                "Sr" => (new[] { "srrestoreptapi.h" },
+                    new[] { "RESTOREPOINTINFO_TYPE", "RESTOREPOINTINFO_EVENT_TYPE" }, Array.Empty<string>()),
+                "Certificates" => (new[] { "certbcli.h" }, new[] { "CSBACKUP_TYPE" }, Array.Empty<string>()),
+                "P2p" => (new[] { "peerdist.h" },
+                    new[] { "PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE" }, Array.Empty<string>()),
+                _ => throw new ArgumentException("Unknown network enum owner.", nameof(partition)),
+            };
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeRawSal = new List<string>();
+            var afterRawSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            string checks = enabled ? "" : string.Join("\n", groups.Select(name => "using " + name + " = void;"));
+            var before = Surface(root, original, partition, architecture, target, headers, checks,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, rawSalAnnotations: beforeRawSal);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks,
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, rawSalAnnotations: afterRawSal);
+            string[] carriers = enabled ? groups.Concat(forwards).Select(name =>
+                "typedef " + name + (name == "SNMP_LOG" ? " int" : " unsigned long")).ToArray() : Array.Empty<string>();
+            Assert.NotEmpty(before);
+            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeRawSal.Count, beforeSal.Count);
+            Assert.Equal(afterRawSal.Count, afterSal.Count);
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            var actualGroups = annotations.Select(value => Regex.Match(value, @"^(?<name>[^|]+)\|(?:Flags)?Enum\("))
+                .Where(match => match.Success).Select(match => match.Groups["name"].Value)
+                .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(enabled ? groups.OrderBy(value => value, StringComparer.Ordinal) : Array.Empty<string>(), actualGroups);
+            if (!enabled)
+                Assert.Empty(annotations);
+            this.output.WriteLine($"{partition}/{architecture}/metadata={enabled}: " +
+                $"{before.Length} unchanged native signature/type/layout/value/typedef facts; " +
+                $"{beforeSal.Count} unchanged SAL attributes and matched diagnostics; " +
+                $"{carriers.Length} exact metadata-only typedef occurrences, {actualGroups.Length} logical groups.");
+        }
+
+        public static IEnumerable<object[]> NetworkEnumOwnerControls()
+        {
+            foreach (string partition in new[] { "RRas", "Snmp", "Dns", "NWifi", "HttpServer", "Fs", "Sr", "Certificates", "P2p" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled };
+        }
+
         [NativeMigrationTheory]
         [MemberData(nameof(OriginalErrorOwnerControls))]
         public void OriginalErrorOwnersPreserveNativeAbiAndSalWithCompleteGroupContributions(

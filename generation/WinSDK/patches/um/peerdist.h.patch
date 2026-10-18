@@ -1,5 +1,5 @@
 diff --git a/um/peerdist.h b/um/peerdist.h
-index 56539313..01bf344a 100644
+index 56539313..2b62f915 100644
 --- a/um/peerdist.h
 +++ b/um/peerdist.h
 @@ -92,21 +92,25 @@ typedef HANDLE      PEERDIST_STREAM_HANDLE;
@@ -171,7 +171,30 @@ index 56539313..01bf344a 100644
  DWORD WINAPI PeerDistClientCancelAsyncOperation(
          _In_ PEERDIST_INSTANCE_HANDLE hPeerDist,
          _In_ PEERDIST_CONTENT_HANDLE hContentHandle,
-@@ -292,11 +318,13 @@ typedef struct _PEERDIST_CLIENT_BASIC_INFO {
+@@ -263,6 +289,11 @@ DWORD WINAPI PeerDistClientCancelAsyncOperation(
+ #define PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1 1L
+ #define PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2 2L
+ 
++_Win32_Enum_(PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE, DWORD,
++    PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_1,
++    PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_2,
++    PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION);
++
+ typedef struct peerdist_retrieval_options_tag 
+ {
+     DWORD cbSize;
+@@ -276,8 +307,8 @@ typedef struct peerdist_status_info_tag
+ {
+     DWORD cbSize;
+     PEERDIST_STATUS status;
+-    DWORD dwMinVer;
+-    DWORD dwMaxVer;
++    _Win32_AssociatedEnum_(PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE) DWORD dwMinVer;
++    _Win32_AssociatedEnum_(PEERDIST_RETRIEVAL_OPTIONS_CONTENTINFO_VERSION_VALUE) DWORD dwMaxVer;
+ } PEERDIST_STATUS_INFO, *PPEERDIST_STATUS_INFO;
+ typedef const PEERDIST_STATUS_INFO * PCPEERDIST_STATUS_INFO;
+ 
+@@ -292,11 +323,13 @@ typedef struct _PEERDIST_CLIENT_BASIC_INFO {
  
  #ifndef MIDL_PASS
  
@@ -185,7 +208,7 @@ index 56539313..01bf344a 100644
  DWORD WINAPI PeerDistRegisterForStatusChangeNotificationEx(
          _In_      PEERDIST_INSTANCE_HANDLE hPeerDist,
          _In_opt_  HANDLE hCompletionPort,
-@@ -305,12 +333,14 @@ DWORD WINAPI PeerDistRegisterForStatusChangeNotificationEx(
+@@ -305,12 +338,14 @@ DWORD WINAPI PeerDistRegisterForStatusChangeNotificationEx(
          _Inout_ PEERDIST_STATUS_INFO *pPeerDistStatus
          );
  
@@ -200,7 +223,7 @@ index 56539313..01bf344a 100644
  DWORD WINAPI PeerDistServerOpenContentInformationEx(
          _In_ PEERDIST_INSTANCE_HANDLE  hPeerDist,
               DWORD cbContentIdentifier,
-@@ -323,6 +353,7 @@ DWORD WINAPI PeerDistServerOpenContentInformationEx(
+@@ -323,6 +358,7 @@ DWORD WINAPI PeerDistServerOpenContentInformationEx(
          _Out_ PPEERDIST_CONTENTINFO_HANDLE phContentInfo
          );
  

@@ -1,5 +1,5 @@
 diff --git a/um/windns.h b/um/windns.h
-index f213f55c..0acf79ce 100644
+index f213f55c..aeb0e528 100644
 --- a/um/windns.h
 +++ b/um/windns.h
 @@ -412,6 +412,7 @@ DNS_CONFIG_TYPE;
@@ -34,31 +34,34 @@ index f213f55c..0acf79ce 100644
  PDNS_RECORD
  DnsRecordSetDetach(
      _Inout_         PDNS_RECORD     pRecordList
-@@ -763,6 +767,7 @@ DnsIsFlatRecord(
+@@ -763,6 +767,8 @@ DnsIsFlatRecord(
  
  
  
 +_Win32_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(WIN32_ERROR)
  DNS_STATUS
  WINAPI
  DnsQuery_A(
-@@ -774,6 +779,7 @@ DnsQuery_A(
+@@ -774,6 +780,8 @@ DnsQuery_A(
      _Outptr_opt_result_maybenull_ PVOID *         pReserved
      );
  
 +_Win32_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(WIN32_ERROR)
  DNS_STATUS
  WINAPI
  DnsQuery_UTF8(
-@@ -785,6 +791,7 @@ DnsQuery_UTF8(
+@@ -785,6 +793,8 @@ DnsQuery_UTF8(
      _Outptr_opt_result_maybenull_ PVOID *         pReserved
      );
  
 +_Win32_SupportedOS_Windows2000_
++_Win32_AssociatedEnum_(WIN32_ERROR)
  DNS_STATUS
  WINAPI
  DnsQuery_W(
-@@ -899,6 +906,7 @@ typedef struct DECLSPEC_ALIGN(8) _DNS_QUERY_CANCEL
+@@ -899,6 +909,7 @@ typedef struct DECLSPEC_ALIGN(8) _DNS_QUERY_CANCEL
  }
  DNS_QUERY_CANCEL, *PDNS_QUERY_CANCEL;
  
@@ -66,7 +69,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsQueryEx(
-@@ -907,6 +915,7 @@ DnsQueryEx(
+@@ -907,6 +918,7 @@ DnsQueryEx(
      _Inout_opt_ PDNS_QUERY_CANCEL   pCancelHandle
      );
  
@@ -74,7 +77,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsCancelQuery(
-@@ -1103,6 +1112,7 @@ DnsCancelQueryRaw(
+@@ -1103,6 +1115,7 @@ DnsCancelQueryRaw(
  //  the future.
  //
  
@@ -82,7 +85,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_W(
-@@ -1111,6 +1121,7 @@ DnsAcquireContextHandle_W(
+@@ -1111,6 +1124,7 @@ DnsAcquireContextHandle_W(
      _Outptr_     PHANDLE         pContext
      );
  
@@ -90,7 +93,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_A(
-@@ -1125,6 +1136,7 @@ DnsAcquireContextHandle_A(
+@@ -1125,6 +1139,7 @@ DnsAcquireContextHandle_A(
  #define DnsAcquireContextHandle DnsAcquireContextHandle_A
  #endif
  
@@ -98,7 +101,7 @@ index f213f55c..0acf79ce 100644
  VOID
  WINAPI
  DnsReleaseContextHandle(
-@@ -1135,6 +1147,7 @@ DnsReleaseContextHandle(
+@@ -1135,6 +1150,7 @@ DnsReleaseContextHandle(
  //  Dynamic Update API
  //
  
@@ -106,7 +109,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsModifyRecordsInSet_W(
-@@ -1146,6 +1159,7 @@ DnsModifyRecordsInSet_W(
+@@ -1146,6 +1162,7 @@ DnsModifyRecordsInSet_W(
      _Inout_opt_     PVOID           pReserved
      );
  
@@ -114,7 +117,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsModifyRecordsInSet_A(
-@@ -1157,6 +1171,7 @@ DnsModifyRecordsInSet_A(
+@@ -1157,6 +1174,7 @@ DnsModifyRecordsInSet_A(
      _Inout_opt_     PVOID           pReserved
      );
  
@@ -122,7 +125,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsModifyRecordsInSet_UTF8(
-@@ -1175,6 +1190,7 @@ DnsModifyRecordsInSet_UTF8(
+@@ -1175,6 +1193,7 @@ DnsModifyRecordsInSet_UTF8(
  #endif
  
  
@@ -130,7 +133,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsReplaceRecordSetW(
-@@ -1185,6 +1201,7 @@ DnsReplaceRecordSetW(
+@@ -1185,6 +1204,7 @@ DnsReplaceRecordSetW(
      _Inout_opt_     PVOID           pReserved
      );
  
@@ -138,7 +141,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsReplaceRecordSetA(
-@@ -1195,6 +1212,7 @@ DnsReplaceRecordSetA(
+@@ -1195,6 +1215,7 @@ DnsReplaceRecordSetA(
      _Inout_opt_     PVOID           pReserved
      );
  
@@ -146,7 +149,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsReplaceRecordSetUTF8(
-@@ -1242,6 +1260,7 @@ DnsValidateName_A(
+@@ -1242,6 +1263,7 @@ DnsValidateName_A(
      _In_    DNS_NAME_FORMAT Format
      );
  
@@ -154,7 +157,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  DnsValidateName_UTF8(
      _In_    PCSTR           pszName,
-@@ -1272,6 +1291,7 @@ DnsValidateName_UTF8(
+@@ -1272,6 +1294,7 @@ DnsValidateName_UTF8(
  // Winsock2.h must be included before windns.h to use the validate server function
  #ifdef _WS2DEF_
  
@@ -162,7 +165,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  DnsValidateServerStatus(
      _In_        PSOCKADDR   server,
-@@ -1311,6 +1331,7 @@ DnsNameCompare_W(
+@@ -1311,6 +1334,7 @@ DnsNameCompare_W(
  //  DNS message "roll-your-own" routines
  //
  
@@ -170,7 +173,7 @@ index f213f55c..0acf79ce 100644
  BOOL
  WINAPI
  DnsWriteQuestionToBuffer_W(
-@@ -1322,6 +1343,7 @@ DnsWriteQuestionToBuffer_W(
+@@ -1322,6 +1346,7 @@ DnsWriteQuestionToBuffer_W(
      _In_        BOOL                fRecursionDesired
      );
  
@@ -178,7 +181,7 @@ index f213f55c..0acf79ce 100644
  BOOL
  WINAPI
  DnsWriteQuestionToBuffer_UTF8(
-@@ -1333,6 +1355,7 @@ DnsWriteQuestionToBuffer_UTF8(
+@@ -1333,6 +1358,7 @@ DnsWriteQuestionToBuffer_UTF8(
      _In_        BOOL                fRecursionDesired
      );
  
@@ -186,7 +189,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsExtractRecordsFromMessage_W(
-@@ -1341,6 +1364,7 @@ DnsExtractRecordsFromMessage_W(
+@@ -1341,6 +1367,7 @@ DnsExtractRecordsFromMessage_W(
      _Outptr_     PDNS_RECORD *       ppRecord
      );
  
@@ -194,7 +197,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsExtractRecordsFromMessage_UTF8(
-@@ -1355,6 +1379,7 @@ DnsExtractRecordsFromMessage_UTF8(
+@@ -1355,6 +1382,7 @@ DnsExtractRecordsFromMessage_UTF8(
  //  DNS name resolution policy table
  //
  
@@ -202,7 +205,7 @@ index f213f55c..0acf79ce 100644
  DWORD
  WINAPI
  DnsGetProxyInformation(
-@@ -1365,6 +1390,7 @@ DnsGetProxyInformation(
+@@ -1365,6 +1393,7 @@ DnsGetProxyInformation(
      _In_opt_    void *                          completionContext
      );
  
@@ -210,7 +213,7 @@ index f213f55c..0acf79ce 100644
  VOID
  WINAPI
  DnsFreeProxyName(
-@@ -1675,6 +1701,7 @@ typedef struct _DNS_SERVICE_INSTANCE
+@@ -1675,6 +1704,7 @@ typedef struct _DNS_SERVICE_INSTANCE
  
  #ifndef __midl
  
@@ -218,7 +221,7 @@ index f213f55c..0acf79ce 100644
  PDNS_SERVICE_INSTANCE
  WINAPI
  DnsServiceConstructInstance(
-@@ -1690,12 +1717,14 @@ DnsServiceConstructInstance(
+@@ -1690,12 +1720,14 @@ DnsServiceConstructInstance(
      _In_reads_(dwPropertiesCount) PCWSTR *values
      );
  
@@ -233,7 +236,7 @@ index f213f55c..0acf79ce 100644
  VOID
  WINAPI
  DnsServiceFreeInstance(
-@@ -1748,6 +1777,8 @@ typedef struct _DNS_SERVICE_BROWSE_REQUEST
+@@ -1748,6 +1780,8 @@ typedef struct _DNS_SERVICE_BROWSE_REQUEST
  
  #pragma warning(pop)
  
@@ -242,7 +245,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsServiceBrowse(
-@@ -1755,6 +1786,8 @@ DnsServiceBrowse(
+@@ -1755,6 +1789,8 @@ DnsServiceBrowse(
      _Inout_ PDNS_SERVICE_CANCEL            pCancel
      );
  
@@ -251,7 +254,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsServiceBrowseCancel(
-@@ -1784,6 +1817,8 @@ typedef struct _DNS_SERVICE_RESOLVE_REQUEST{
+@@ -1784,6 +1820,8 @@ typedef struct _DNS_SERVICE_RESOLVE_REQUEST{
      PVOID pQueryContext;
  } DNS_SERVICE_RESOLVE_REQUEST, *PDNS_SERVICE_RESOLVE_REQUEST;
  
@@ -260,7 +263,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsServiceResolve(
-@@ -1791,6 +1826,8 @@ DnsServiceResolve(
+@@ -1791,6 +1829,8 @@ DnsServiceResolve(
      _Inout_ PDNS_SERVICE_CANCEL             pCancel
      );
  
@@ -269,7 +272,7 @@ index f213f55c..0acf79ce 100644
  DNS_STATUS
  WINAPI
  DnsServiceResolveCancel(
-@@ -1822,6 +1859,8 @@ typedef struct _DNS_SERVICE_REGISTER_REQUEST{
+@@ -1822,6 +1862,8 @@ typedef struct _DNS_SERVICE_REGISTER_REQUEST{
      BOOL unicastEnabled;
  } DNS_SERVICE_REGISTER_REQUEST, *PDNS_SERVICE_REGISTER_REQUEST;
  
@@ -278,7 +281,7 @@ index f213f55c..0acf79ce 100644
  DWORD
  WINAPI
  DnsServiceRegister(
-@@ -1829,6 +1868,8 @@ DnsServiceRegister(
+@@ -1829,6 +1871,8 @@ DnsServiceRegister(
      _Inout_opt_ PDNS_SERVICE_CANCEL             pCancel
      );
  
@@ -287,7 +290,7 @@ index f213f55c..0acf79ce 100644
  DWORD
  WINAPI
  DnsServiceDeRegister(
-@@ -1836,6 +1877,7 @@ DnsServiceDeRegister(
+@@ -1836,6 +1880,7 @@ DnsServiceDeRegister(
      _Inout_opt_ PDNS_SERVICE_CANCEL             pCancel
      );
  
@@ -295,7 +298,7 @@ index f213f55c..0acf79ce 100644
  DWORD
  WINAPI
  DnsServiceRegisterCancel(
-@@ -1877,11 +1919,15 @@ typedef struct _MDNS_QUERY_REQUEST
+@@ -1877,11 +1922,15 @@ typedef struct _MDNS_QUERY_REQUEST
      ULONG                   ulResendCount;   // Reserved
  } MDNS_QUERY_REQUEST, *PMDNS_QUERY_REQUEST;
  
