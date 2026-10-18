@@ -115,6 +115,12 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
             var owners = report.RootElement.GetProperty("owners").EnumerateArray().ToArray();
             var expected = owners.SelectMany(owner => owner.GetProperty("groups").EnumerateArray())
                 .ToDictionary(group => group.GetProperty("Group").GetString(), StringComparer.Ordinal);
+            var fieldAssociations = owners.SelectMany(owner => owner.GetProperty("associations").EnumerateArray())
+                .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();
+            var nativeRecords = fieldAssociations.Select(value => value.GetProperty("nativeType").GetString())
+                .ToHashSet(StringComparer.Ordinal);
+            var nativeEnums = fieldAssociations.Select(value => value.GetProperty("group").GetString())
+                .ToHashSet(StringComparer.Ordinal);
             string generated = Path.Combine(Environment.GetEnvironmentVariable("SYSTEM_ENUM_BINDINGS"), architecture);
             using var results = JsonDocument.Parse(File.ReadAllText(Path.Combine(generated, "results.json")));
             string component = Path.Combine(generated, "logical-groups-component-" + Guid.NewGuid().ToString("N"));
@@ -134,11 +140,19 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                     .Where(value => expected.ContainsKey(value.Identifier.ValueText)).ToArray();
                 foreach (var declaration in enums)
                     observed.Add(declaration.Identifier.ValueText);
-                var namespaces = enums.GroupBy(declaration => string.Join(".", declaration.Ancestors()
+                var declarations = enums.Cast<MemberDeclarationSyntax>().Concat(source.DescendantNodes()
+                    .OfType<BaseTypeDeclarationSyntax>().Where(declaration =>
+                        !declaration.Ancestors().OfType<BaseTypeDeclarationSyntax>().Any() &&
+                        ((declaration is StructDeclarationSyntax && nativeRecords.Contains(declaration.Identifier.ValueText)) ||
+                         (declaration is EnumDeclarationSyntax && nativeEnums.Contains(declaration.Identifier.ValueText)))));
+                var namespaces = declarations.GroupBy(declaration => string.Join(".", declaration.Ancestors()
                     .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(value => value.Name.ToString())))
                     .Select(group => SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
-                        .AddMembers(group.Cast<MemberDeclarationSyntax>().ToArray())).ToArray();
-                var subset = SyntaxFactory.CompilationUnit().WithUsings(headerTypes.Usings)
+                        .AddMembers(group.ToArray())).ToArray();
+                var usings = nativeRecords.Count > 0
+                    ? SyntaxFactory.List(headerTypes.Usings.Concat(source.Usings).DistinctBy(value => value.ToString()))
+                    : headerTypes.Usings;
+                var subset = SyntaxFactory.CompilationUnit().WithUsings(usings)
                     .AddMembers(namespaces).NormalizeWhitespace();
                 File.WriteAllText(Path.Combine(component, partition + ".header-types.cs"), subset.ToFullString());
             }
@@ -149,7 +163,14 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 .Select(line => line.Trim().Split('=', 2))
                 .Where(parts => parts.Length == 2 && expected.ContainsKey(parts[0]))
                 .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
-            using var image = Emit(component, architecture, requiredNamespaces: requiredNamespaces);
+            string[] references = null;
+            if (nativeRecords.Count > 0)
+            {
+                string baseline = Environment.GetEnvironmentVariable("SYSTEM_ENUM_REFERENCE_METADATA");
+                Assert.True(File.Exists(baseline), "Set SYSTEM_ENUM_REFERENCE_METADATA to the immutable baseline for shared native dependencies.");
+                references = new[] { baseline };
+            }
+            using var image = Emit(component, architecture, references: references, requiredNamespaces: requiredNamespaces);
             var reader = image.Reader;
             foreach (var pair in expected)
             {
@@ -189,6 +210,29 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 foreach (var association in owner.GetProperty("associations").EnumerateArray())
                 {
                     string[] symbol = association.GetProperty("symbol").GetString().Split("::");
+                    if (association.TryGetProperty("kind", out var kind) && kind.GetString() == "field")
+                    {
+                        var record = Assert.Single(sources[partition].DescendantNodes().OfType<StructDeclarationSyntax>()
+                            .Where(value => value.Identifier.ValueText == symbol[0] &&
+                                !value.Ancestors().OfType<BaseTypeDeclarationSyntax>().Any()));
+                        var type = FindType(reader, symbol[0]);
+                        foreach (string nested in symbol.Skip(1).SkipLast(1))
+                        {
+                            record = Assert.Single(record.Members.OfType<StructDeclarationSyntax>()
+                                .Where(value => value.Identifier.ValueText == nested));
+                            type = reader.GetTypeDefinition(Assert.Single(type.GetNestedTypes()
+                                .Where(handle => reader.GetString(reader.GetTypeDefinition(handle).Name) == nested)));
+                        }
+                        var field = Assert.Single(record.Members.OfType<FieldDeclarationSyntax>()
+                            .Where(value => value.Declaration.Variables.Any(variable => variable.Identifier.ValueText == symbol.Last())));
+                        Assert.Equal("uint", field.Declaration.Type.ToString());
+                        var metadataField = Assert.Single(type.GetFields().Select(reader.GetFieldDefinition)
+                            .Where(value => reader.GetString(value.Name) == symbol.Last()));
+                        Assert.Equal("UInt32", metadataField.DecodeSignature(new SignatureNames(), null));
+                        AssertStringAttribute(reader, metadataField.GetCustomAttributes(), "AssociatedEnumAttribute",
+                            association.GetProperty("group").GetString());
+                        continue;
+                    }
                     var method = Assert.Single(methods[symbol[0]]);
                     var parameter = Assert.Single(method.ParameterList.Parameters
                         .Where(value => value.Identifier.ValueText == symbol[1]));
@@ -201,7 +245,8 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
             }
             AssertMetadataClosure(reader);
             Console.WriteLine($"{architecture}: {expected.Count} real source-projected logical identities and " +
-                $"{expected.Values.Sum(group => group.GetProperty("Members").GetArrayLength())} compiled-native members.");
+                $"{expected.Values.Sum(group => group.GetProperty("Members").GetArrayLength())} compiled-native members; " +
+                $"{fieldAssociations.Length} native DWORD field associations.");
         }
 
         [Theory]

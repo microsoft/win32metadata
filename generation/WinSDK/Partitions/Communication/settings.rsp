@@ -3,3 +3,5 @@
 <IncludeRoot>/um/cellularapi_oem.h
 --namespace
 Windows.Win32.Devices.Communication
+--config
+parse-win32-annotations

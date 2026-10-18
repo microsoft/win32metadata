@@ -3551,3 +3551,20 @@ Neither discrepancy is repaired by inventing members or copying wrong values.
 The seven reserved originals outside this majority, unresolved uses and partial groups remain
 explicit follow-up work. Evidence stays under the worker's
 `artifacts\bulk-annotations\system-nonfloor-enums-001-*`.
+
+The separate two-header follow-up moves four nonconflicting `mcx.h` groups
+(13 existing native members) and six `tcpmib.h` field associations into source.
+The TCP fields remain native DWORD/metadata UInt32, including the anonymous
+`MIB_TCPROW_LH` union field; `MIB_TCP_STATE` remains its existing native enum.
+Exactly four complete definitions, 13 explicit member rows and six emitter
+association rows are retired. Four modem uses and the conflicting speaker-mode
+definition/use remain legacy.
+
+Eight ordinary/metadata native controls and one actual x64 component pass
+without skips. The component checks all four group identities/values and all
+six emitted UInt32 association payloads. Set `SYSTEM_ENUM_REFERENCE_METADATA`
+to the immutable baseline for unchanged shared native dependencies such as
+`LARGE_INTEGER`; it does not supply the newly authored facts. The previous
+53-group component also remains passing. This is two additional semantic
+headers, not complete-header or full-image acceptance. Evidence stays under
+`artifacts\bulk-annotations\system-nonfloor-enums-002-*`.

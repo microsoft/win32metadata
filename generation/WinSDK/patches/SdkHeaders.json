@@ -3843,6 +3843,18 @@
       "sourceSha256": "5BB46F50CB47863EEA78E2EC756BDF4D6D21ACEBDEDF07EC604738D2ED3DD2C0",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\oledbdep.idl",
       "sdkSha256": "C7BE181281FDF1A696D9FB566A13206A05A1447CF22F5FA16B21903AA5CAE44F"
+    },
+    {
+      "path": "um\\mcx.h",
+      "sourceSha256": "4EE416B2D24E45CFC5D35CE5B34833B64B34FD9A39957C66D75509F6D3B8F972",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mcx.h",
+      "sdkSha256": "4EE416B2D24E45CFC5D35CE5B34833B64B34FD9A39957C66D75509F6D3B8F972"
+    },
+    {
+      "path": "shared\\tcpmib.h",
+      "sourceSha256": "8D202A04F8252892A3D9BCB752DDED6ACE19A8E56A2E7B92E805208B3F1C9B0F",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\tcpmib.h",
+      "sdkSha256": "8D202A04F8252892A3D9BCB752DDED6ACE19A8E56A2E7B92E805208B3F1C9B0F"
     }
   ],
   "midl": {
@@ -7263,7 +7275,8 @@
     "Debug.ActiveScript",
     "MsHtml",
     "Audio.Apo",
-    "CompositionSwapchain"
+    "CompositionSwapchain",
+    "Communication"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -7871,6 +7884,8 @@
     "um\\dispex.idl.patch",
     "um\\netcfgn.idl.patch",
     "um\\scpops.idl.patch",
-    "um\\rstkys.idl.patch"
+    "um\\rstkys.idl.patch",
+    "um\\mcx.h.patch",
+    "shared\\tcpmib.h.patch"
   ]
 }

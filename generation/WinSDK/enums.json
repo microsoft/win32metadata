@@ -18905,29 +18905,14 @@
     ]
   },
   {
-    "name": "MODEMDEVCAPS_DIAL_OPTIONS",
-    "flags": true,
-    "members": [
-      {
-        "name": "DIALOPTION_BILLING",
-        "value": "64"
-      },
-      {
-        "name": "DIALOPTION_DIALTONE",
-        "value": "256"
-      },
-      {
-        "name": "DIALOPTION_QUIET",
-        "value": "128"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MODEMDEVCAPS",
-        "field": "dwDialOptions"
-      }
-    ]
-  },
+      "addUsesTo": "MODEMDEVCAPS_DIAL_OPTIONS",
+      "uses": [
+        {
+          "struct": "MODEMDEVCAPS",
+          "field": "dwDialOptions"
+        }
+      ]
+    },
   {
     "name": "LVCOLUMNW_FORMAT",
     "type": "int",
@@ -23297,28 +23282,14 @@
     ]
   },
   {
-    "name": "MODEM_SPEAKER_VOLUME",
-    "members": [
-      {
-        "name": "MDMVOL_HIGH",
-        "value": "2"
-      },
-      {
-        "name": "MDMVOL_LOW",
-        "value": "0"
-      },
-      {
-        "name": "MDMVOL_MEDIUM",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MODEMSETTINGS",
-        "field": "dwSpeakerVolume"
-      }
-    ]
-  },
+      "addUsesTo": "MODEM_SPEAKER_VOLUME",
+      "uses": [
+        {
+          "struct": "MODEMSETTINGS",
+          "field": "dwSpeakerVolume"
+        }
+      ]
+    },
   {
     "name": "LVFINDINFOW_FLAGS",
     "flags": true,
@@ -23663,29 +23634,14 @@
     ]
   },
   {
-    "name": "MODEMDEVCAPS_SPEAKER_VOLUME",
-    "flags": true,
-    "members": [
-      {
-        "name": "MDMVOLFLAG_HIGH",
-        "value": "4"
-      },
-      {
-        "name": "MDMVOLFLAG_LOW",
-        "value": "1"
-      },
-      {
-        "name": "MDMVOLFLAG_MEDIUM",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MODEMDEVCAPS",
-        "field": "dwSpeakerVolume"
-      }
-    ]
-  },
+      "addUsesTo": "MODEMDEVCAPS_SPEAKER_VOLUME",
+      "uses": [
+        {
+          "struct": "MODEMDEVCAPS",
+          "field": "dwSpeakerVolume"
+        }
+      ]
+    },
   {
     "name": "SERVICE_TRIGGER_TYPE",
     "members": [
@@ -24082,33 +24038,14 @@
     ]
   },
   {
-    "name": "MODEMDEVCAPS_SPEAKER_MODE",
-    "flags": true,
-    "members": [
-      {
-        "name": "MDMSPKRFLAG_CALLSETUP",
-        "value": "8"
-      },
-      {
-        "name": "MDMSPKRFLAG_DIAL",
-        "value": "2"
-      },
-      {
-        "name": "MDMSPKRFLAG_OFF",
-        "value": "1"
-      },
-      {
-        "name": "MDMSPKRFLAG_ON",
-        "value": "4"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MODEMDEVCAPS",
-        "field": "dwSpeakerMode"
-      }
-    ]
-  },
+      "addUsesTo": "MODEMDEVCAPS_SPEAKER_MODE",
+      "uses": [
+        {
+          "struct": "MODEMDEVCAPS",
+          "field": "dwSpeakerMode"
+        }
+      ]
+    },
   {
     "name": "CRYPT_XML_GROUP_ID",
     "members": [

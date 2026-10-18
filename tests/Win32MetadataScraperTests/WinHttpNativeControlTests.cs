@@ -134,10 +134,15 @@ using WINHTTP_INTERNET_SCHEME = void;
             var owner = report.RootElement.GetProperty("owners").EnumerateArray()
                 .Single(value => value.GetProperty("original").GetString() == original);
             var groups = owner.GetProperty("groups").EnumerateArray().ToArray();
+            var fieldAssociations = owner.GetProperty("associations").EnumerateArray()
+                .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();
             string[] headers = { Path.GetFileName(original) };
             string checks = string.Join("\n", groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
                 .Select(member => "static_assert((unsigned long long)(" + member.GetProperty("Name").GetString() +
-                    ") == " + member.GetProperty("Value").GetRawText() + "ULL);"));
+                    ") == " + member.GetProperty("Value").GetRawText() + "ULL);")
+                .Concat(fieldAssociations.Select(value => "static_assert(__is_same(decltype(((" +
+                    value.GetProperty("nativeType").GetString() + "*)nullptr)->" +
+                    value.GetProperty("symbol").GetString().Split("::").Last() + "), DWORD));")));
             string[] carriers = groups.Select(group => "typedef " + group.GetProperty("Group").GetString() + " " +
                 (group.GetProperty("Storage").GetString() switch
                 {
@@ -154,7 +159,7 @@ using WINHTTP_INTERNET_SCHEME = void;
             var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled,
                 annotations: annotations, salAnnotations: afterSal);
-            Assert.NotEmpty(groups);
+            Assert.True(groups.Length > 0 || fieldAssociations.Length > 0);
             Assert.NotEmpty(checks);
             Assert.Equal(before.Concat(metadataEnabled ? carriers : Array.Empty<string>())
                 .OrderBy(value => value, StringComparer.Ordinal), after);
@@ -170,7 +175,7 @@ using WINHTTP_INTERNET_SCHEME = void;
                 }
             }
             this.output.WriteLine($"{original}/{architecture}: {groups.Length} exact metadata-only group aliases; " +
-                "compiled native member values, declaration multiplicities, ABI and SAL preserved.");
+                "compiled native value/type checks, declaration multiplicities, ABI and SAL preserved.");
         }
 
         public static IEnumerable<object[]> SystemEnumNativeModes()
