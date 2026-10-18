@@ -1,4 +1,6 @@
 --config
+parse-win32-annotations
+--config
 exclude-empty-records
 parse-win32-annotations
 --exclude

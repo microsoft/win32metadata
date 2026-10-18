@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/um/xpsdigitalsignature.h
 <IncludeRoot>/um/xpsobjectmodel_1.h
