@@ -540,6 +540,11 @@ translation unit; the emitter combines the generated `.header-types.cs` contribu
 by qualified metadata identity after namespace assignment. Keep those producer
 filenames when staging sources for emission.
 
+When partitions initially emit the same group in different namespaces, use the
+existing global `--requiredNamespaceForName` organization to preserve its established
+physical FullName before merging. Check the combined owning-partition outputs;
+individually valid fragments must not leave extra wrong-namespace copies.
+
 The complete group is the union of those source-owned contributions, not an empty
 typedef or a replacement native enum. Repeated members must have identical compiled
 values after conversion to the group's storage. Conflicting values, storage, flags,

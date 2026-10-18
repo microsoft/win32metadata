@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection.Metadata;
 using System.Text.Json;
 using ClangSharpSourceToWinmd;
+using MetadataTasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -215,6 +216,29 @@ namespace Win32MetadataScraperTests
             var methods = tree.DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .Where(method => names.Contains(method.Identifier.ValueText, StringComparer.Ordinal)).ToArray();
             Assert.Equal(names.Length, methods.Length);
+            var otherGroups = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(batch, "normal", architecture,
+                    "WinProg.header-types.cs"))).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()
+                .Where(group => groupNames.Contains(group.Identifier.ValueText, StringComparer.Ordinal)).ToArray();
+            Assert.Equal(groupNames.Length, otherGroups.Length);
+            var namespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            string baselinePath = Environment.GetEnvironmentVariable("SDK_NATIVE_ENUM_BASELINE_WINMD");
+            Assert.False(string.IsNullOrEmpty(baselinePath));
+            using var baseline = new HeaderAnnotationWinmdTests.MetadataImage(baselinePath);
+            var baselineNames = baseline.Reader.TypeDefinitions.Select(baseline.Reader.GetTypeDefinition)
+                .Where(type => groupNames.Contains(baseline.Reader.GetString(type.Name), StringComparer.Ordinal))
+                .ToDictionary(type => baseline.Reader.GetString(type.Name),
+                    type => baseline.Reader.GetString(type.Namespace) + "." + baseline.Reader.GetString(type.Name),
+                    StringComparer.Ordinal);
+            Assert.Equal(groupNames.Length, baselineNames.Count);
+            var baselineMethods = baseline.Reader.TypeDefinitions.Select(baseline.Reader.GetTypeDefinition)
+                .Where(type => baseline.Reader.GetString(type.Namespace) == "Windows.Win32.Storage.FileSystem")
+                .SelectMany(type => type.GetMethods()).Select(baseline.Reader.GetMethodDefinition)
+                .Where(method => names.Contains(baseline.Reader.GetString(method.Name), StringComparer.Ordinal))
+                .ToDictionary(method => baseline.Reader.GetString(method.Name), StringComparer.Ordinal);
+            Assert.Equal(names.Length, baselineMethods.Count);
             using var control = JsonDocument.Parse(File.ReadAllText(Path.Combine(batch, "observations", "actual-" + architecture + ".json")));
             var nativeGroups = control.RootElement.GetProperty("groupObservations").EnumerateArray().ToDictionary(
                 value => value.GetProperty("name").GetString());
@@ -223,16 +247,27 @@ namespace Win32MetadataScraperTests
             try
             {
                 Write(directory, architecture, "Fs.header-types.cs", groups);
+                Write(directory, architecture, "WinProg.header-types.cs", otherGroups);
                 Write(directory, architecture, "Fs.cs", methods);
-                using var image = HeaderAnnotationWinmdTests.Emit(directory, architecture, nativeFieldArrayInfo: false);
+                using var image = HeaderAnnotationWinmdTests.Emit(directory, architecture, nativeFieldArrayInfo: false,
+                    references: new[] { baselinePath }, requiredNamespaces: namespaces);
                 var reader = image.Reader;
+                var actualGroups = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                    .Where(type => groupNames.Contains(reader.GetString(type.Name), StringComparer.Ordinal)).ToArray();
+                Assert.Equal(groupNames.Length, actualGroups.Length);
                 var enumObservations = new List<object>();
                 foreach (string name in groupNames)
                 {
-                    var type = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(value => reader.GetString(value.Name) == name);
+                    var type = actualGroups.Single(value => reader.GetString(value.Name) == name);
                     Assert.Equal("Windows.Win32.Storage.FileSystem", reader.GetString(type.Namespace));
+                    Assert.Equal(baselineNames[name], reader.GetString(type.Namespace) + "." + name);
                     var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
                     Assert.Equal("UInt32", fields.Single(value => reader.GetString(value.Name) == "value__")
+                        .DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null));
+                    var oldType = baseline.Reader.TypeDefinitions.Select(baseline.Reader.GetTypeDefinition)
+                        .Single(value => baseline.Reader.GetString(value.Namespace) + "." + baseline.Reader.GetString(value.Name) == baselineNames[name]);
+                    Assert.Equal("UInt32", oldType.GetFields().Select(baseline.Reader.GetFieldDefinition)
+                        .Single(value => baseline.Reader.GetString(value.Name) == "value__")
                         .DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null));
                     var values = fields.Where(value => reader.GetString(value.Name) != "value__").ToDictionary(
                         value => reader.GetString(value.Name), value => ReadValue(reader.GetBlobReader(reader.GetConstant(value.GetDefaultValue()).Value), "UInt32"));
@@ -248,11 +283,22 @@ namespace Win32MetadataScraperTests
                     string name = method.Identifier.ValueText;
                     var actual = reader.TypeDefinitions.Select(reader.GetTypeDefinition).SelectMany(type => type.GetMethods())
                         .Select(reader.GetMethodDefinition).Single(value => reader.GetString(value.Name) == name);
-                    var signature = actual.DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null);
+                    var signature = actual.DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(qualifiedNames: true), null);
                     Assert.Equal("UInt32", signature.ReturnType);
                     bool returned = name == "GetFileType";
+                    Assert.Equal("uint", method.ReturnType.ToString());
+                    var nativeParameters = method.ParameterList.Parameters.Select(parameter => parameter.Type.ToString()).ToArray();
                     Assert.Equal(returned ? new[] { "IntPtr" } : new[] { "IntPtr", name.EndsWith("A", StringComparison.Ordinal)
-                        ? "SByte*" : "UInt16*", "UInt32", "UInt32" }, signature.ParameterTypes);
+                        ? "sbyte*" : "ushort*", "uint", "uint" }, nativeParameters);
+                    var oldSignature = baselineMethods[name].DecodeSignature(
+                        new HeaderAnnotationWinmdTests.SignatureNames(qualifiedNames: true), null);
+                    string[] expectedParameters = oldSignature.ParameterTypes.ToArray();
+                    if (!returned)
+                    {
+                        Assert.Equal(baselineNames["GETFINALPATHNAMEBYHANDLE_FLAGS"], expectedParameters[3]);
+                        expectedParameters[3] = "UInt32";
+                    }
+                    Assert.Equal(expectedParameters, signature.ParameterTypes.ToArray());
                     var parameters = actual.GetParameters().Select(reader.GetParameter).ToArray();
                     var slot = returned ? parameters.Single(value => value.SequenceNumber == 0)
                         : parameters.Single(value => reader.GetString(value.Name) == "dwFlags");
@@ -264,13 +310,17 @@ namespace Win32MetadataScraperTests
                         ((LiteralExpressionSyntax)association.ArgumentList.Arguments.Single().Expression).Token.ValueText);
                     Assert.Equal(1, parameters.Sum(parameter => parameter.GetCustomAttributes().Count(handle =>
                         HeaderAnnotationWinmdTests.AttributeName(reader, handle) == "AssociatedEnumAttribute")));
-                    methodObservations.Add(new { name, signature.ReturnType, signature.ParameterTypes,
+                    methodObservations.Add(new { name, signature.ReturnType, signature.ParameterTypes, nativeParameters,
+                        legacyReturnType = oldSignature.ReturnType, legacyParameterTypes = oldSignature.ParameterTypes,
                         associationSlot = returned ? "return" : "dwFlags" });
                 }
                 string observations = Path.Combine(frozen, "canonical-fs", "observations");
                 Directory.CreateDirectory(observations);
                 File.WriteAllText(Path.Combine(observations, "physical-" + architecture + ".json"),
                     JsonSerializer.Serialize(new { architecture, enumObservations, methodObservations,
+                        baselinePath, baselineNames, combinedOwningRoutes = new[] { "Fs", "WinProg" },
+                        requiredNamespaces = namespaces.Where(pair => groupNames.Contains(pair.Key, StringComparer.Ordinal))
+                            .ToDictionary(pair => pair.Key, pair => pair.Value),
                         legacyEnumOverlays = 0, nativeFieldArrayInfo = false }, new JsonSerializerOptions { WriteIndented = true }));
             }
             finally

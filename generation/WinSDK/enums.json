@@ -6171,19 +6171,6 @@
     ]
   },
   {
-    "addUsesTo": "GETFINALPATHNAMEBYHANDLE_FLAGS",
-    "uses": [
-      {
-        "method": "GetFinalPathNameByHandleA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetFinalPathNameByHandleW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "TRACE_MESSAGE_FLAGS",
     "flags": true,
     "members": [
@@ -30728,15 +30715,6 @@
       {
         "method": "MapVirtualKeyExW",
         "parameter": "uMapType"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "FILE_TYPE",
-    "uses": [
-      {
-        "method": "GetFileType",
-        "parameter": "return"
       }
     ]
   },
