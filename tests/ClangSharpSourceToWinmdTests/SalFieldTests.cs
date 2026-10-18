@@ -182,6 +182,89 @@ namespace ClangSharpSourceToWinmdTests
             Assert.AreEqual(1, ((LiteralExpressionSyntax)argument.Expression).Token.Value);
         }
 
+        [DataTestMethod]
+        [DataRow(false, "SAL_writableTo")]
+        [DataRow(false, "SAL_readableTo")]
+        [DataRow(true, "SAL_writableTo")]
+        [DataRow(true, "SAL_readableTo")]
+        public void ReturnedBufferCountFollowsTheOuterPointerAccess(bool isDelegate, string countAttribute)
+        {
+            string sal = "Name=SAL_name; p1=\"_Outptr_result_buffer_\"^Name=SAL_begin^" +
+                "Name=SAL_pre^Name=SAL_notref^Name=SAL_writableTo; p1=elementCount(1)^" +
+                "Name=SAL_post^Name=SAL_valid^Name=SAL_deref^Name=" + countAttribute +
+                "; p1=elementCount(*count)^Name=SAL_end";
+            string parameters = "uint* count, " + CppAttribute(sal) + " uint** values";
+            string declaration = isDelegate
+                ? $"public unsafe delegate void D(void* pThis, {parameters});"
+                : $"public unsafe interface S {{ void M({parameters}); }}";
+            var tree = Clean("namespace Test { " + declaration + " }", nativeFieldArrayInfo: false);
+            var attributes = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>()
+                .Single(parameter => parameter.Identifier.ValueText == "values")
+                .AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            var argument = attributes.Single(attribute => attribute.Name.ToString() == "NativeArrayInfo")
+                .ArgumentList!.Arguments.Single();
+            Assert.AreEqual("CountParamIndex", argument.NameEquals!.Name.Identifier.ValueText);
+            Assert.AreEqual(isDelegate ? 1 : 0, ((LiteralExpressionSyntax)argument.Expression).Token.Value);
+            Assert.AreEqual(1, attributes.Count(attribute => attribute.Name.ToString() == "Out"));
+            Assert.IsFalse(attributes.Any(attribute => attribute.Name.ToString() == "In"));
+        }
+
+        [TestMethod]
+        public void ReturnedBufferConstantCountFollowsTheOuterPointerAccess()
+        {
+            string sal = "Name=SAL_pre^Name=SAL_writableTo; p1=elementCount(1)^" +
+                "Name=SAL_post^Name=SAL_deref^Name=SAL_readableTo; p1=elementCount(4)";
+            var tree = Clean("namespace Test { public unsafe delegate void D(" + CppAttribute(sal) +
+                " uint** values); }", nativeFieldArrayInfo: false);
+            var argument = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Single()
+                .AttributeLists.SelectMany(list => list.Attributes)
+                .Single(attribute => attribute.Name.ToString() == "NativeArrayInfo").ArgumentList!.Arguments.Single();
+            Assert.AreEqual("CountConst", argument.NameEquals!.Name.Identifier.ValueText);
+            Assert.AreEqual(4, ((LiteralExpressionSyntax)argument.Expression).Token.Value);
+        }
+
+        [TestMethod]
+        public void ReturnedByteBufferInferenceGuardRemainsUnchanged()
+        {
+            string sal = "Name=SAL_name; p1=\"_Outptr_result_bytebuffer_\"^" +
+                "Name=SAL_pre^Name=SAL_writableTo; p1=elementCount(1)^" +
+                "Name=SAL_post^Name=SAL_deref^Name=SAL_writableTo; p1=byteCount(*count)";
+            var tree = Clean("namespace Test { public unsafe delegate void D(uint* count, " +
+                CppAttribute(sal) + " void** values); }", nativeFieldArrayInfo: false);
+            Assert.IsFalse(tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Last()
+                .AttributeLists.SelectMany(list => list.Attributes)
+                .Any(attribute => attribute.Name.ToString() is "NativeArrayInfo" or "MemorySize"));
+        }
+
+        [TestMethod]
+        public void PreconditionCapacityRemainsPreferredToPostconditionLength()
+        {
+            string sal = "Name=SAL_pre^Name=SAL_writableTo; p1=elementCount(capacity)^" +
+                "Name=SAL_post^Name=SAL_readableTo; p1=elementCount(*written)";
+            var tree = Clean("namespace Test { public unsafe delegate void D(uint capacity, uint* written, " +
+                CppAttribute(sal) + " uint* values); }", nativeFieldArrayInfo: false);
+            var argument = tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Last()
+                .AttributeLists.SelectMany(list => list.Attributes)
+                .Single(attribute => attribute.Name.ToString() == "NativeArrayInfo").ArgumentList!.Arguments.Single();
+            Assert.AreEqual("CountParamIndex", argument.NameEquals!.Name.Identifier.ValueText);
+            Assert.AreEqual(0, ((LiteralExpressionSyntax)argument.Expression).Token.Value);
+        }
+
+        [DataTestMethod]
+        [DataRow("1")]
+        [DataRow("missing")]
+        [DataRow("count + 1")]
+        public void UnresolvedReturnedBufferCountDoesNotInventAnArray(string count)
+        {
+            string sal = "Name=SAL_pre^Name=SAL_writableTo; p1=elementCount(1)^" +
+                $"Name=SAL_post^Name=SAL_deref^Name=SAL_writableTo; p1=elementCount({count})";
+            var tree = Clean("namespace Test { public unsafe delegate void D(uint* count, " +
+                CppAttribute(sal) + " uint** values); }", nativeFieldArrayInfo: false);
+            Assert.IsFalse(tree.GetRoot().DescendantNodes().OfType<ParameterSyntax>().Last()
+                .AttributeLists.SelectMany(list => list.Attributes)
+                .Any(attribute => attribute.Name.ToString() == "NativeArrayInfo"));
+        }
+
         private static string Source(string sal, bool countAfterArray = false,
             string countDeclaration = "public uint NumElements;", string fieldAttributes = "")
         {

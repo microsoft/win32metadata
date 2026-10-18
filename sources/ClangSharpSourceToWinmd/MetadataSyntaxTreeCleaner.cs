@@ -1140,13 +1140,13 @@ namespace ClangSharpSourceToWinmd
                 // If we didn't add marshal as yet, try again without using pre
                 if (!marshalAsAdded && !isByteBuffer)
                 {
-                    var salAttr = salAttrs.FirstOrDefault(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo");
-                    if (salAttr != null)
+                    foreach (var salAttr in salAttrs.Where(attr => attr.Name == "SAL_writableTo" || attr.Name == "SAL_readableTo"))
                     {
                         nativeArrayInfoParams = GetArrayMarshalAsFromP1(paramNode, salAttr.P1);
                         if (!string.IsNullOrEmpty(nativeArrayInfoParams))
                         {
                             marshalAsAdded = true;
+                            break;
                         }
                     }
                 }

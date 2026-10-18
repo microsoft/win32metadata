@@ -79,12 +79,19 @@ Use existing native syntax where it already expresses the contract:
 | Intent | Existing syntax |
 | --- | --- |
 | Input/output/optional/reserved | SAL/MIDL direction, optionality, and reserved-parameter annotations. |
-| Array count/capacity/byte size | Native array declarations and SAL such as `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, and their byte-count variants. |
+| Array count/capacity/byte size | Native array declarations and SAL such as `_In_reads_`, `_Out_writes_`, `_Inout_updates_`, `_Outptr_result_buffer_`, and their byte-count variants. |
 | Double-NUL string | `_NullNull_terminated_`. |
 | COM output pointer | `_COM_Outptr_` and its standard SAL variants. |
 | Native constness | C/C++ `const`. |
 | Native scoped enum | `enum class`; do not make a logical constant group scoped. |
 | Native flags enum | Existing `[[clang::flag_enum]]`. Use `_Win32_FlagsEnum_` for metadata-only groups. |
+
+For returned buffers, `_Outptr_result_buffer_(*count)` describes the pointee's
+element count, not the single outer pointer slot. The C# consumer must continue
+past that slot's `elementCount(1)` constraint to the usable postcondition count
+and preserve the count parameter's index in the projected method. A usable
+precondition capacity still takes precedence; unsupported counts must not be
+invented. This parameter handling does not enable deferred field-array inference.
 
 ## Declaration placement
 
