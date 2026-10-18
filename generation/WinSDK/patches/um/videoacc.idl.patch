@@ -1,0 +1,28 @@
+diff --git a/um/videoacc.idl b/um/videoacc.idl
+index 156ee507..7c6116b0 100644
+--- a/um/videoacc.idl
++++ b/um/videoacc.idl
+@@ -8,6 +8,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -39,6 +40,7 @@ cpp_quote("#include <ddraw.h>")
+ cpp_quote("#include <amva.h>")
+ 
+ 
++_Win32_AnnotateInterface_(IAMVideoAcceleratorNotify, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -65,6 +67,7 @@ interface IAMVideoAcceleratorNotify : IUnknown
+                                           [out] [annotation("_Outptr_result_bytebuffer_(*pdwSizeMiscData)")] LPVOID *ppMiscData);
+ };
+ 
++_Win32_AnnotateInterface_(IAMVideoAccelerator, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,

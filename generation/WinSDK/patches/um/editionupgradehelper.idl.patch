@@ -1,0 +1,17 @@
+diff --git a/um/editionupgradehelper.idl b/um/editionupgradehelper.idl
+index 1eee2925..2a99cbfa 100644
+--- a/um/editionupgradehelper.idl
++++ b/um/editionupgradehelper.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ #pragma region Application Family
+ 
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -6,6 +7,7 @@ import "ocidl.idl";
+ import "objidl.idl";
+ import "Oleidl.idl";
+ 
++_Win32_AnnotateInterface_(IEditionUpgradeHelper, _Win32_SupportedOS_10240_)
+ [
+ object,
+ uuid(D3E9E342-5DEB-43B6-849E-6913B85D503A),

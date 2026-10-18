@@ -1308,8 +1308,9 @@ static_assert(DISC_NO_FORCE == 64u);
             string[] nativeAfter = NormalizeInterfaceCarrierTypedefs(before, after, enabled ? expected : Array.Empty<string>());
             Assert.Equal(before, nativeAfter);
             int typeCarriers = after.Length - nativeAfter.Length;
-            if (partition == "Shell" && header.Equals("inputpanelconfiguration.h", StringComparison.OrdinalIgnoreCase) &&
-                language == "c++" && !cInterface)
+            if (language == "c++" && !cInterface &&
+               (header == "dcompanimation.h" ||
+                   (partition == "Shell" && header.Equals("inputpanelconfiguration.h", StringComparison.OrdinalIgnoreCase))))
                 Assert.Empty(beforeSal);
             else
                 Assert.NotEmpty(beforeSal);

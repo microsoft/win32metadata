@@ -1,0 +1,20 @@
+diff --git a/um/ctfspui.idl b/um/ctfspui.idl
+index da2b5b05..90c08323 100644
+--- a/um/ctfspui.idl
++++ b/um/ctfspui.idl
+@@ -9,6 +9,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//=--------------------------------------------------------------------------=")
+ cpp_quote("// ctfspui.h")
+ cpp_quote("")
+@@ -59,6 +60,7 @@ cpp_quote("EXTERN_C const CLSID CLSID_SpeechUIServer;")
+ //
+ // Implemented by TIP.
+ //
++_Win32_AnnotateInterface_(ITfSpeechUIServer, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(90e9a944-9244-489f-a78f-de67afc013a7),

@@ -1,0 +1,20 @@
+diff --git a/um/dmodshow.idl b/um/dmodshow.idl
+index 95e0a1a9..7c940fdf 100644
+--- a/um/dmodshow.idl
++++ b/um/dmodshow.idl
+@@ -8,6 +8,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -23,6 +24,7 @@ cpp_quote("DEFINE_GUID(CLSID_DMOWrapperFilter, 0x94297043,0xbd82,0x4dfd,0xb0,0xd
+ cpp_quote("DEFINE_GUID(CLSID_DMOFilterCategory,0xbcd5796c,0xbd52,0x4d30,0xab,0x76,0x70,0xf9,0x75,0xb8,0x91,0x99);")
+ 
+ 
++_Win32_AnnotateInterface_(IDMOWrapperFilter, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(52d6f586-9f0f-4824-8fc8-e32ca04930c2),

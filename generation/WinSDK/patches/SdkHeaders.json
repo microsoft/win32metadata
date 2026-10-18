@@ -3201,6 +3201,84 @@
       "sourceSha256": "A1BADCBEA02DE525437DEC8EDCD4503BDD16A609B3FC40DBB7F4AF754ED1F939",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\tvratings.idl",
       "sdkSha256": "DAAADFB3D0612BD848B2EE2159E4C6395856024DEAFF0E52DB577ED12843F41A"
+    },
+    {
+      "path": "um\\videoacc.h",
+      "sourceSha256": "78E288B1639852791CDD3C6F56C0C6746CE24A5E16E510D64C5440F1FAEABA98",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\videoacc.idl",
+      "sdkSha256": "4B889E0FB86B7C452EBA91702FA1341D8C4BBFF930E97DF16B2D6EEE6E42DEA6"
+    },
+    {
+      "path": "um\\vss.h",
+      "sourceSha256": "654F2464535949A4023667F2B032188D6F280ECFE45AB49B4B7409694734700E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vss.idl",
+      "sdkSha256": "6251B17E386C0BA418E3F526C39163DC3A415D57FE649C3B5987CB0BB6FDBDCF"
+    },
+    {
+      "path": "um\\xpsobjectmodel_2.h",
+      "sourceSha256": "D62092F9D92689D8FF5B0CEC7812FADE508DF9CDF35A7100F704B1135EA5D3DD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\xpsobjectmodel_2.idl",
+      "sdkSha256": "85BB7765D97E604AF9993D25E9DE2FC39046E85C72C1043536A1F032C11D8D0B"
+    },
+    {
+      "path": "um\\audioendpoints.h",
+      "sourceSha256": "CBF737EDDA234A8CCE7974B67F520ECCFBA40A4FDE539E15F499A9205EC17963",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\audioendpoints.idl",
+      "sdkSha256": "B9827DC2D469A7F57FAC5EE0186002B321A16A2633B678CEBFB7B23707A1797C"
+    },
+    {
+      "path": "um\\bits1_5.h",
+      "sourceSha256": "CF1507E181226D1129FE56255CCF26AC70A2E0D9712E9F40C4E7A77C55DC0847",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bits1_5.idl",
+      "sdkSha256": "04D3467CD33C1CFD63C4EFEE5783A54A5C9DB5B6664E88C22D112AEEB15D6B9D"
+    },
+    {
+      "path": "um\\certmod.h",
+      "sourceSha256": "78F22D1463D87A6BA2099B9EF18B7660935CCF58AB77BBA26F3391A1FD55615B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\certmod.idl",
+      "sdkSha256": "CEED4FE34F5CB94BB8328E2C77F96C8F53B626122CC50392C671460D6C2C920F"
+    },
+    {
+      "path": "um\\ctfspui.h",
+      "sourceSha256": "93C6C4F8AEC357722330756FAAF6DC34D7D67B7C9D4B2DDBE6CFFD34D12E9C16",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ctfspui.idl",
+      "sdkSha256": "791E70D2FBF233B0C6EF62C1B2E33AC472A6E9F7F6B1E6075DBC5D68C198880A"
+    },
+    {
+      "path": "um\\ctxtcall.h",
+      "sourceSha256": "59C3B0BABF5CBFADE205E448A99CB7CB7E177838CD6C2D252FF954930D64F4A7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ctxtcall.idl",
+      "sdkSha256": "2EA29B4C802968CD49BD36A28FD1FD2B14E2B6A398273107A3DFFB0D3B48249B"
+    },
+    {
+      "path": "um\\d3d11_4.h",
+      "sourceSha256": "74EC9F3FBB7A9C0D9B8C631419BD23CD234EA994423AD4C3302576767E469049",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11_4.idl",
+      "sdkSha256": "07D07BB005561A58A36B202D2119878D1489D599D665BDB02A45B85A5632D9E2"
+    },
+    {
+      "path": "um\\dcompanimation.h",
+      "sourceSha256": "BFBF7675C1679524A532AB4BB1B43B9E8B0BE3AF3BD38C422B632881EA373B08",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dcompanimation.idl",
+      "sdkSha256": "FC2E05FC0240BA5586F3F96899F8F0C11B32E65EA4E2E0854269BB7BB5754254"
+    },
+    {
+      "path": "um\\dmodshow.h",
+      "sourceSha256": "6DD54A4F85049D1C97E09C3D2BFC5B4F0264351FB56CB12F6B1EF49C949F7972",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dmodshow.idl",
+      "sdkSha256": "74111784154148089E8272104DD9906AB8003321A47CEFEF5A43DE6B92DC6111"
+    },
+    {
+      "path": "um\\editionupgradehelper.h",
+      "sourceSha256": "BEAF54928C4E8CA4F96032AB94A11F5FA967E7C7671807C1CAE317A6230387AE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\editionupgradehelper.idl",
+      "sdkSha256": "E1BF2C66DCFC5A777C6D06E6AC5F9D2C13992AFC8930DF0154A49DA307FF234D"
+    },
+    {
+      "path": "um\\filter.h",
+      "sourceSha256": "4C2E98D5295A496D393CC7F0C8D16420FA03028AF7DD84DFD8184AE775495457",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\filter.idl",
+      "sdkSha256": "80416936FC95889C449FC9C5F7AF4D604AD447D82DC9565AA46E92C74A702D0E"
     }
   ],
   "midl": {
@@ -4613,6 +4691,51 @@
         "path": "um\\tsgauthenticationengine.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\tsgauthenticationengine.idl",
         "sdkSha256": "D211861D3748A8C0F94FB3B5EBC6C4844A45CACCEAF88B27123510AB1FA27F1E"
+      },
+      {
+        "path": "um\\audioendpoints.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audioendpoints.idl",
+        "sdkSha256": "B9827DC2D469A7F57FAC5EE0186002B321A16A2633B678CEBFB7B23707A1797C"
+      },
+      {
+        "path": "um\\ctfspui.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ctfspui.idl",
+        "sdkSha256": "791E70D2FBF233B0C6EF62C1B2E33AC472A6E9F7F6B1E6075DBC5D68C198880A"
+      },
+      {
+        "path": "um\\ctxtcall.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\ctxtcall.idl",
+        "sdkSha256": "2EA29B4C802968CD49BD36A28FD1FD2B14E2B6A398273107A3DFFB0D3B48249B"
+      },
+      {
+        "path": "um\\d3d11_4.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11_4.idl",
+        "sdkSha256": "07D07BB005561A58A36B202D2119878D1489D599D665BDB02A45B85A5632D9E2"
+      },
+      {
+        "path": "um\\dmodshow.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dmodshow.idl",
+        "sdkSha256": "74111784154148089E8272104DD9906AB8003321A47CEFEF5A43DE6B92DC6111"
+      },
+      {
+        "path": "um\\editionupgradehelper.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\editionupgradehelper.idl",
+        "sdkSha256": "E1BF2C66DCFC5A777C6D06E6AC5F9D2C13992AFC8930DF0154A49DA307FF234D"
+      },
+      {
+        "path": "um\\filter.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\filter.idl",
+        "sdkSha256": "80416936FC95889C449FC9C5F7AF4D604AD447D82DC9565AA46E92C74A702D0E"
+      },
+      {
+        "path": "um\\videoacc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\videoacc.idl",
+        "sdkSha256": "4B889E0FB86B7C452EBA91702FA1341D8C4BBFF930E97DF16B2D6EEE6E42DEA6"
+      },
+      {
+        "path": "um\\xpsobjectmodel_2.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xpsobjectmodel_2.idl",
+        "sdkSha256": "85BB7765D97E604AF9993D25E9DE2FC39046E85C72C1043536A1F032C11D8D0B"
       }
     ],
     "outputs": [
@@ -5299,6 +5422,58 @@
       {
         "source": "um\\tvratings.idl",
         "path": "um\\tvratings.h"
+      },
+      {
+        "source": "um\\videoacc.idl",
+        "path": "um\\videoacc.h"
+      },
+      {
+        "source": "um\\vss.idl",
+        "path": "um\\vss.h"
+      },
+      {
+        "source": "um\\xpsobjectmodel_2.idl",
+        "path": "um\\xpsobjectmodel_2.h"
+      },
+      {
+        "source": "um\\audioendpoints.idl",
+        "path": "um\\audioendpoints.h"
+      },
+      {
+        "source": "um\\bits1_5.idl",
+        "path": "um\\bits1_5.h"
+      },
+      {
+        "source": "um\\certmod.idl",
+        "path": "um\\certmod.h"
+      },
+      {
+        "source": "um\\ctfspui.idl",
+        "path": "um\\ctfspui.h"
+      },
+      {
+        "source": "um\\ctxtcall.idl",
+        "path": "um\\ctxtcall.h"
+      },
+      {
+        "source": "um\\d3d11_4.idl",
+        "path": "um\\d3d11_4.h"
+      },
+      {
+        "source": "um\\dcompanimation.idl",
+        "path": "um\\dcompanimation.h"
+      },
+      {
+        "source": "um\\dmodshow.idl",
+        "path": "um\\dmodshow.h"
+      },
+      {
+        "source": "um\\editionupgradehelper.idl",
+        "path": "um\\editionupgradehelper.h"
+      },
+      {
+        "source": "um\\filter.idl",
+        "path": "um\\filter.h"
       }
     ]
   },
@@ -6015,6 +6190,19 @@
     "um\\spellcheckprovider.idl.patch",
     "um\\tpmvscmgr.idl.patch",
     "um\\tsgauthenticationengine.idl.patch",
-    "um\\tvratings.idl.patch"
+    "um\\tvratings.idl.patch",
+    "um\\videoacc.idl.patch",
+    "um\\vss.idl.patch",
+    "um\\xpsobjectmodel_2.idl.patch",
+    "um\\audioendpoints.idl.patch",
+    "um\\bits1_5.idl.patch",
+    "um\\certmod.idl.patch",
+    "um\\ctfspui.idl.patch",
+    "um\\ctxtcall.idl.patch",
+    "um\\d3d11_4.idl.patch",
+    "um\\dcompanimation.idl.patch",
+    "um\\dmodshow.idl.patch",
+    "um\\editionupgradehelper.idl.patch",
+    "um\\filter.idl.patch"
   ]
 }

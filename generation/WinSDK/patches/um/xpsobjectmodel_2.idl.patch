@@ -1,0 +1,28 @@
+diff --git a/um/xpsobjectmodel_2.idl b/um/xpsobjectmodel_2.idl
+index 4d5a7634..18ec0e37 100644
+--- a/um/xpsobjectmodel_2.idl
++++ b/um/xpsobjectmodel_2.idl
+@@ -7,6 +7,7 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -24,6 +25,7 @@ import "XpsObjectModel_1.idl";
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IXpsOMPackageWriter3D, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(e8a45033-640e-43fa-9bdf-fddeaa31c6a0),
+@@ -43,6 +45,7 @@ interface IXpsOMPackageWriter3D : IXpsOMPackageWriter
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IXpsDocumentPackageTarget3D, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(60ba71b8-3101-4984-9199-f4ea775ff01d),

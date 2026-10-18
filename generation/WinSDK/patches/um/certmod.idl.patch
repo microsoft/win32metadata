@@ -1,0 +1,20 @@
+diff --git a/um/certmod.idl b/um/certmod.idl
+index 906cdf6f..5f6b5f49 100644
+--- a/um/certmod.idl
++++ b/um/certmod.idl
+@@ -9,6 +9,7 @@
+ //
+ //---------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -45,6 +46,7 @@ const WCHAR wszCMM_PROP_ISMULTITHREADED[] = L"IsMultiThreaded";
+ // ICertManageModule class -- local COM interface
+ //+--------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(ICertManageModule, _Win32_SupportedOS_Server2003_)
+ [
+     object,
+     uuid(e7d7ad42-bd3d-11d1-9a4d-00c04fc297eb),
