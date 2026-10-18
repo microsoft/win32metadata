@@ -167,7 +167,10 @@ bootstrap; do not repeat annotation-header includes in individual API patches.
 An original IDL must obtain SAL before using annotation carriers. MIDL imports
 do not establish C-preprocessor macro visibility, so the two annotated pilot
 IDLs need ordinary `#include <sal.h>` directives. Their generated headers already
-obtain SAL through native RPC headers. Pin every actual SAL dependency and the
+obtain SAL through native RPC headers. The same rule applies to annotated native
+C headers imported by MIDL: `appmgmt.h` must include SAL itself, even when the
+importing `shappmgr.idl` already does. Keep the shared bootstrap rather than
+adding per-header no-op annotation definitions. Pin every actual SAL dependency and the
 canonical repository helper's exact `sourceSha256` in the MIDL closure; do not
 pretend the helper came from the selected SDK or search ambient include paths.
 A header patch consumed by MIDL must bind the same pristine SDK input as its

@@ -2,7 +2,15 @@ diff --git a/um/appmgmt.h b/um/appmgmt.h
 index 75823074..eb81c2ee 100644
 --- a/um/appmgmt.h
 +++ b/um/appmgmt.h
-@@ -127,6 +127,7 @@ typedef struct _APPCATEGORYINFOLIST
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -127,6 +128,7 @@ typedef struct _APPCATEGORYINFOLIST
  #define WINAPI
  #endif
  
@@ -10,7 +18,7 @@ index 75823074..eb81c2ee 100644
  DWORD WINAPI
  InstallApplication(
  #if !defined(__midl)
-@@ -135,6 +136,7 @@ InstallApplication(
+@@ -135,6 +137,7 @@ InstallApplication(
  	PINSTALLDATA pInstallInfo
      );
  
@@ -18,7 +26,7 @@ index 75823074..eb81c2ee 100644
  DWORD WINAPI
  UninstallApplication(
  #if !defined(__midl)
-@@ -160,6 +162,7 @@ CommandLineFromMsiDescriptor(
+@@ -160,6 +163,7 @@ CommandLineFromMsiDescriptor(
      DWORD *     CommandLineLength
      );
  
@@ -26,7 +34,7 @@ index 75823074..eb81c2ee 100644
  DWORD WINAPI
  GetManagedApplications(
  #if !defined(__midl)
-@@ -184,6 +187,7 @@ GetManagedApplications(
+@@ -184,6 +188,7 @@ GetManagedApplications(
  	PMANAGEDAPPLICATION* prgManagedApps
      );
  
@@ -34,7 +42,7 @@ index 75823074..eb81c2ee 100644
  DWORD WINAPI
  GetLocalManagedApplications(
  #if !defined(__midl)
-@@ -216,6 +220,7 @@ GetLocalManagedApplicationData(
+@@ -216,6 +221,7 @@ GetLocalManagedApplicationData(
  	LPWSTR *            SupportUrl
      );
  

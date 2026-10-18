@@ -2870,6 +2870,23 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void MidlImportedAppMgmtHeaderBootstrapsItsOwnAnnotationMacros()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            Assert.Contains(recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray(),
+                input => input.GetProperty("path").GetString() == @"um\appmgmt.h");
+            Assert.Contains(recipe.RootElement.GetProperty("midl").GetProperty("outputs").EnumerateArray(),
+                output => output.GetProperty("source").GetString() == @"um\shappmgr.idl");
+            string[] additions = File.ReadAllLines(Path.Combine(project, "patches", "um", "appmgmt.h.patch"))
+                .Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                    !line.StartsWith("+++", StringComparison.Ordinal))
+                .Select(line => line.Substring(1)).ToArray();
+            Assert.Equal("#include <sal.h>", additions[0]);
+            Assert.Equal(Enumerable.Repeat("_Win32_SupportedOS_WindowsVista_", 5), additions.Skip(1));
+        }
+
+        [Fact]
         public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainAllUnmigratedUses()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
