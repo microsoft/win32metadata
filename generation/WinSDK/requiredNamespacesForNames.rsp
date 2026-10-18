@@ -2662,3 +2662,10 @@ TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Variant
 # endregion wtypes.h
 MIDI_WAVE_OPEN_TYPE=Windows.Win32.Media.Audio
+# region ntdef.h
+OS_PRODUCT_TYPE=Windows.Win32.System.SystemInformation
+OBJECT_ATTRIBUTE_FLAGS=Windows.Win32.Foundation
+# endregion ntdef.h
+# region regstr.h
+SETUP_DI_DEVICE_CONFIGURATION_FLAGS=Windows.Win32.Devices.DeviceAndDriverInstallation
+# endregion regstr.h

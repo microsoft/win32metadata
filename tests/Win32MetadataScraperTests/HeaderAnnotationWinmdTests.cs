@@ -10,6 +10,7 @@ using System.Text.Json;
 using ClangSharp;
 using ClangSharp.Interop;
 using ClangSharpSourceToWinmd;
+using MetadataTasks;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -347,16 +348,7 @@ unsigned long __stdcall NativeResourceType(
             string source = Path.Combine(root, "scrape-02", "generated", architecture, "Registry.cs");
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, "");
             Directory.CreateDirectory(Path.GetDirectoryName(fixture.Output));
-            var methodSource = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot().DescendantNodes()
-                .OfType<MethodDeclarationSyntax>()
-                .Single(method => method.Identifier.ValueText == "GetRegistryValueWithFallbackW");
-            var apiSource = Assert.IsType<ClassDeclarationSyntax>(methodSource.Parent);
-            var namespaceSource = Assert.IsType<NamespaceDeclarationSyntax>(apiSource.Parent);
-            var boundedApi = apiSource.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(methodSource));
-            var boundedSource = SyntaxFactory.ParseCompilationUnit(
-                "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
-                .AddMembers(namespaceSource.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(boundedApi)));
-            File.WriteAllText(fixture.Output, boundedSource.NormalizeWhitespace().ToFullString());
+            WriteNormalMethod(source, "GetRegistryValueWithFallbackW", fixture.Output);
             using var image = Emit(fixture, architecture);
             var reader = image.Reader;
             var method = FindMethod(reader, "Apis", "GetRegistryValueWithFallbackW");
@@ -376,6 +368,192 @@ unsigned long __stdcall NativeResourceType(
             Assert.Equal("api-ms-win-core-state-helpers-l1-1-0.dll",
                 reader.GetString(reader.GetModuleReference(import.Module).Name));
             AssertMetadataClosure(reader);
+        }
+
+        [Fact]
+        public void RoutedNativeGroupsHaveNoLegacyDefinitionsAndKeepTheirExactExternalUse()
+        {
+            string project = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            var groups = new[]
+            {
+                (Name: "OS_PRODUCT_TYPE", Original: "shared\\ntdef.h", Macro: "_Win32_Enum_"),
+                (Name: "OBJECT_ATTRIBUTE_FLAGS", Original: "shared\\ntdef.h", Macro: "_Win32_FlagsEnum_"),
+                (Name: "SETUP_DI_DEVICE_CONFIGURATION_FLAGS", Original: "um\\regstr.h", Macro: "_Win32_FlagsEnum_"),
+            };
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            foreach (var group in groups)
+            {
+                Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) &&
+                    name.GetString() == group.Name);
+                var carriers = File.ReadAllLines(Path.Combine(project, "patches", group.Original + ".patch"))
+                    .Where(line => line.StartsWith("+" + group.Macro + "(" + group.Name + ",", StringComparison.Ordinal));
+                Assert.Single(carriers);
+            }
+            var retained = Assert.Single(items.Where(item => item.TryGetProperty("addUsesTo", out var name) &&
+                name.GetString() == "OS_PRODUCT_TYPE"));
+            Assert.False(retained.TryGetProperty("autoPopulate", out _));
+            Assert.False(retained.TryGetProperty("members", out _));
+            Assert.Equal("Windows.Win32.System.SystemInformation", retained.GetProperty("namespace").GetString());
+            var use = Assert.Single(retained.GetProperty("uses").EnumerateArray());
+            Assert.Equal("GetProductInfo", use.GetProperty("method").GetString());
+            Assert.Equal("pdwReturnedProductType", use.GetProperty("parameter").GetString());
+        }
+
+        [NativeMigrationTheory("ROUTED_NATIVE_ENUM_MIGRATION_ROOT")]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void NormalNativeGroupsKeepRoutedWinmdIdentities(string architecture, string target)
+        {
+            string root = Environment.GetEnvironmentVariable("ROUTED_NATIVE_ENUM_MIGRATION_ROOT");
+            string normal = Path.Combine(root, "scrape-02", "generated", architecture);
+            var groups = new[]
+            {
+                (Name: "OS_PRODUCT_TYPE", Namespace: "Windows.Win32.System.SystemInformation", Flags: false),
+                (Name: "OBJECT_ATTRIBUTE_FLAGS", Namespace: "Windows.Win32.Foundation", Flags: true),
+                (Name: "SETUP_DI_DEVICE_CONFIGURATION_FLAGS",
+                    Namespace: "Windows.Win32.Devices.DeviceAndDriverInstallation", Flags: true),
+            };
+            var requiredNamespaces = RspReader.GetSettingsValues(Path.Combine(
+                    WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "requiredNamespacesForNames.rsp"),
+                    "--requiredNamespaceForName")
+                .Select(line => line.Split('=', 2))
+                .Where(pair => pair.Length == 2 && groups.Any(group => group.Name == pair[0]))
+                .ToDictionary(pair => pair[0], pair => pair[1]);
+            foreach (var group in groups)
+                Assert.Equal(group.Namespace, requiredNamespaces[group.Name]);
+            var remaps = RspReader.GetSettingsValues(Path.Combine(root, "constants", "enumsRemap.rsp"), "--memberRemap")
+                .Select(line => line.Split('=', 2))
+                .Where(pair => pair.Length == 2)
+                .ToDictionary(pair => pair[0], pair => pair[1]);
+            Assert.Equal(new KeyValuePair<string, string>("GetProductInfo::pdwReturnedProductType", "OS_PRODUCT_TYPE"),
+                Assert.Single(remaps));
+            using var expectedValues = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "normal-values.json")));
+            using var sourceGroups = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "authored-03", "report.json")));
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, "");
+            string directory = Path.GetDirectoryName(fixture.Output);
+            Directory.CreateDirectory(directory);
+            foreach (string partition in new[] { "Kernel", "Registry" })
+            {
+                string fileName = partition + ".header-types.cs";
+                File.Copy(Path.Combine(normal, fileName), Path.Combine(directory, fileName));
+            }
+            WriteNormalMethod(Path.Combine(normal, "SystemInformation.cs"), "GetProductInfo", fixture.Output);
+            using var image = Emit(directory, architecture, memberRemaps: remaps, requiredNamespaces: requiredNamespaces);
+            var reader = image.Reader;
+            using var legacyFixture = new HeaderAnnotationTests.NativeFixture(architecture, target, "");
+            string legacyDirectory = Path.GetDirectoryName(legacyFixture.Output);
+            Directory.CreateDirectory(legacyDirectory);
+            WriteNormalMethod(Path.Combine(normal, "SystemInformation.cs"), "GetProductInfo", legacyFixture.Output);
+            var legacyGroups = Directory.GetFiles(Path.Combine(root, "legacy-constants"), "*.enums.cs")
+                .SelectMany(path => CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot().DescendantNodes()
+                    .OfType<EnumDeclarationSyntax>()).ToArray();
+            foreach (var group in groups)
+            {
+                var declaration = legacyGroups.Single(value => value.Identifier.ValueText == group.Name);
+                var ns = Assert.IsType<NamespaceDeclarationSyntax>(declaration.Parent);
+                var bounded = SyntaxFactory.ParseCompilationUnit(
+                    "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
+                    .AddMembers(ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(declaration)));
+                File.WriteAllText(Path.Combine(legacyDirectory, group.Name + ".enums.cs"),
+                    bounded.NormalizeWhitespace().ToFullString());
+            }
+            using var legacyImage = Emit(legacyDirectory, architecture,
+                memberRemaps: remaps, requiredNamespaces: requiredNamespaces);
+            var legacy = legacyImage.Reader;
+            foreach (var group in groups)
+            {
+                var type = FindType(reader, group.Name);
+                Assert.Equal(group.Namespace, reader.GetString(type.Namespace));
+                Assert.Equal(group.Flags, type.GetCustomAttributes().Any(
+                    handle => AttributeName(reader, handle) == "FlagsAttribute"));
+                AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "ScopedEnumAttribute");
+                var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                var storage = fields.Single(field => reader.GetString(field.Name) == "value__");
+                Assert.Equal("UInt32", storage.DecodeSignature(new SignatureNames(), null));
+                var values = fields.Where(field => !field.GetDefaultValue().IsNil).ToDictionary(
+                    field => reader.GetString(field.Name), field =>
+                    {
+                        var constant = reader.GetConstant(field.GetDefaultValue());
+                        Assert.Equal(ConstantTypeCode.UInt32, constant.TypeCode);
+                        return reader.GetBlobReader(constant.Value).ReadUInt32();
+                    });
+                var nativeMembers = sourceGroups.RootElement.GetProperty("groups").EnumerateArray()
+                    .Single(item => item.GetProperty("name").GetString() == group.Name)
+                    .GetProperty("members").EnumerateArray().Select(item => item.GetString())
+                    .OrderBy(name => name, StringComparer.Ordinal);
+                Assert.Equal(nativeMembers, values.Keys.OrderBy(name => name, StringComparer.Ordinal));
+                var expected = expectedValues.RootElement.GetProperty(architecture).GetProperty(group.Name)
+                    .EnumerateObject().ToDictionary(item => item.Name, item => item.Value.GetUInt32());
+                Assert.Equal(expected.OrderBy(item => item.Key, StringComparer.Ordinal),
+                    values.OrderBy(item => item.Key, StringComparer.Ordinal));
+                var legacyType = FindType(legacy, group.Name);
+                Assert.Equal(group.Namespace, legacy.GetString(legacyType.Namespace));
+                Assert.Equal(AttributeValues(legacy, legacyType.GetCustomAttributes()),
+                    AttributeValues(reader, type.GetCustomAttributes()));
+                var legacyFields = legacyType.GetFields().Select(legacy.GetFieldDefinition).ToArray();
+                Assert.Equal("UInt32", legacyFields.Single(field => legacy.GetString(field.Name) == "value__")
+                    .DecodeSignature(new SignatureNames(), null));
+                var legacyValues = legacyFields.Where(field => !field.GetDefaultValue().IsNil).ToDictionary(
+                    field => legacy.GetString(field.Name),
+                    field => legacy.GetBlobReader(legacy.GetConstant(field.GetDefaultValue()).Value).ReadUInt32());
+                Assert.Equal(legacyValues.OrderBy(item => item.Key, StringComparer.Ordinal),
+                    values.OrderBy(item => item.Key, StringComparer.Ordinal));
+            }
+            var method = FindMethod(reader, "Apis", "GetProductInfo");
+            Assert.Equal("Int32", method.DecodeSignature(new SignatureNames(), null).ReturnType);
+            Assert.Equal(new[] { "UInt32", "UInt32", "UInt32", "UInt32", "OS_PRODUCT_TYPE*" },
+                method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            Assert.Equal("Windows.Win32.System.SystemInformation.OS_PRODUCT_TYPE*",
+                method.DecodeSignature(new SignatureNames(qualifiedNames: true), null).ParameterTypes[4]);
+            var legacyMethod = FindMethod(legacy, "Apis", "GetProductInfo");
+            Assert.Equal(legacyMethod.DecodeSignature(new SignatureNames(qualifiedNames: true), null).ParameterTypes.ToArray(),
+                method.DecodeSignature(new SignatureNames(qualifiedNames: true), null).ParameterTypes.ToArray());
+            var result = method.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => reader.GetString(parameter.Name) == "pdwReturnedProductType");
+            var legacyResult = legacyMethod.GetParameters().Select(legacy.GetParameter)
+                .Single(parameter => legacy.GetString(parameter.Name) == "pdwReturnedProductType");
+            Assert.Equal(legacyResult.Attributes, result.Attributes);
+            Assert.Equal(AttributeValues(legacy, legacyResult.GetCustomAttributes()),
+                AttributeValues(reader, result.GetCustomAttributes()));
+            Assert.Equal(AttributeValues(legacy, legacyMethod.GetCustomAttributes()),
+                AttributeValues(reader, method.GetCustomAttributes()));
+            Assert.Equal(legacy.GetString(legacy.GetModuleReference(legacyMethod.GetImport().Module).Name),
+                reader.GetString(reader.GetModuleReference(method.GetImport().Module).Name));
+            Assert.Equal("Windows.Win32.System.SystemInformation",
+                reader.GetString(reader.GetTypeDefinition(method.GetDeclaringType()).Namespace));
+            AssertMetadataClosure(reader);
+            AssertMetadataClosure(legacy);
+            string physical = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(physical);
+            foreach (var output in new[]
+            {
+                (Directory: directory, Name: "candidate.winmd"),
+                (Directory: legacyDirectory, Name: "legacy.winmd"),
+            })
+                File.Copy(Path.Combine(output.Directory, "Test.winmd"), Path.Combine(physical, output.Name));
+            File.WriteAllText(Path.Combine(physical, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                scope = "Three actual source groups plus one unchanged normal API method versus the exact three legacy descriptors.",
+                groups = groups.Select(group => new
+                {
+                    group.Name, group.Namespace, storage = "UInt32", group.Flags,
+                    memberCount = expectedValues.RootElement.GetProperty(architecture).GetProperty(group.Name)
+                        .EnumerateObject().Count(),
+                }),
+                preservedUse = "GetProductInfo::pdwReturnedProductType=Windows.Win32.System.SystemInformation.OS_PRODUCT_TYPE*",
+                candidateSha256 = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                    File.ReadAllBytes(Path.Combine(physical, "candidate.winmd")))),
+                legacySha256 = Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(
+                    File.ReadAllBytes(Path.Combine(physical, "legacy.winmd")))),
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            static string[] AttributeValues(MetadataReader metadata, CustomAttributeHandleCollection attributes)
+                => attributes.Select(handle => AttributeName(metadata, handle) + "=" +
+                    Convert.ToHexString(metadata.GetBlobBytes(metadata.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
         [Theory]
@@ -2427,6 +2605,19 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 new Dictionary<string, string>(), reducePointerLevels ?? new HashSet<string>(), new HashSet<string>(), new Version(1, 0), path);
             Assert.True(generator.WroteWinmd, string.Join(Environment.NewLine, generator.GetDiagnostics()));
             return new MetadataImage(path);
+        }
+
+        private static void WriteNormalMethod(string source, string name, string destination)
+        {
+            var method = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == name);
+            var api = Assert.IsType<ClassDeclarationSyntax>(method.Parent);
+            var ns = Assert.IsType<NamespaceDeclarationSyntax>(api.Parent);
+            var boundedApi = api.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(method));
+            var boundedSource = SyntaxFactory.ParseCompilationUnit(
+                "using System; using System.Runtime.InteropServices; using Windows.Win32.Foundation.Metadata;")
+                .AddMembers(ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(boundedApi)));
+            File.WriteAllText(destination, boundedSource.NormalizeWhitespace().ToFullString());
         }
 
         private static TypeDefinition FindType(MetadataReader reader, string name)

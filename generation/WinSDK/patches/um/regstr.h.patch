@@ -1,0 +1,45 @@
+diff --git a/um/regstr.h b/um/regstr.h
+index 025711bc..d23d0157 100644
+--- a/um/regstr.h
++++ b/um/regstr.h
+@@ -771,7 +771,7 @@
+ #define CONFIGFLAG_NOREMOVEEXIT         0x00000200      // Don't remove at exit.
+ #define CONFIGFLAG_FINISH_INSTALL       0x00000400      // Complete install for devnode running 'raw'
+ #define CONFIGFLAG_NEEDS_FORCED_CONFIG  0x00000800      // This devnode requires a forced config
+-#if defined(REMOTE_BOOT)
++#if defined(REMOTE_BOOT) || (defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS))
+ #define CONFIGFLAG_NETBOOT_CARD         0x00001000      // This is the remote boot network card
+ #endif // defined(REMOTE_BOOT)
+ #define CONFIGFLAG_PARTIAL_LOG_CONF     0x00002000      // This device has a partial logconfig
+@@ -1501,6 +1501,31 @@ typedef struct _DSKTLSYSTEMTIME {
+ #define LASTGOOD_OPERATION_DELETE       0x00000001 // Delete file during recovery
+ 
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(SETUP_DI_DEVICE_CONFIGURATION_FLAGS, unsigned long,
++    CONFIGFLAG_DISABLED,
++    CONFIGFLAG_REMOVED,
++    CONFIGFLAG_MANUAL_INSTALL,
++    CONFIGFLAG_IGNORE_BOOT_LC,
++    CONFIGFLAG_NET_BOOT,
++    CONFIGFLAG_REINSTALL,
++    CONFIGFLAG_FAILEDINSTALL,
++    CONFIGFLAG_CANTSTOPACHILD,
++    CONFIGFLAG_OKREMOVEROM,
++    CONFIGFLAG_NOREMOVEEXIT,
++    CONFIGFLAG_FINISH_INSTALL,
++    CONFIGFLAG_NEEDS_FORCED_CONFIG,
++    CONFIGFLAG_NETBOOT_CARD,
++    CONFIGFLAG_PARTIAL_LOG_CONF,
++    CONFIGFLAG_SUPPRESS_SURPRISE,
++    CONFIGFLAG_VERIFY_HARDWARE,
++    CONFIGFLAG_FINISHINSTALL_UI,
++    CONFIGFLAG_FINISHINSTALL_ACTION,
++    CONFIGFLAG_BOOT_DEVICE,
++    CONFIGFLAG_NEEDS_CLASS_CONFIG);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 

@@ -16623,12 +16623,8 @@
     ]
   },
   {
-    "name": "OS_PRODUCT_TYPE",
+    "addUsesTo": "OS_PRODUCT_TYPE",
     "namespace": "Windows.Win32.System.SystemInformation",
-    "autoPopulate": {
-      "filter": "PRODUCT_",
-      "header": "ntdef.h"
-    },    
     "uses": [
       {
         "method": "GetProductInfo",
@@ -34396,15 +34392,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Devices.DeviceAndDriverInstallation",
-    "name": "SETUP_DI_DEVICE_CONFIGURATION_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CONFIGFLAG_",
-      "header": "regstr.h"
-    }
-  },
-  {
     "name": "FILE_COMPRESSION_TYPE",
     "flags": true,
     "autoPopulate": {
@@ -34523,17 +34510,6 @@
         "parameter": "return"
       }
     ]
-  },
-  {
-    "namespace": "Windows.Win32.Foundation",
-    "name": "OBJECT_ATTRIBUTE_FLAGS",
-    "type": "uint",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "OBJ_(?!HANDLE_TAGBITS)",
-      "header": "ntdef.h"
-    },
-    "uses": []
   }
 ]
 }

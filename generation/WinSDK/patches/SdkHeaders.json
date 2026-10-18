@@ -3939,6 +3939,18 @@
       "sourceSha256": "097A90FC0A727B2354FC6ABC2DB04A0159524CCFBF96BFD21FF9276652A1ECDB",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\statehelpers.h",
       "sdkSha256": "097A90FC0A727B2354FC6ABC2DB04A0159524CCFBF96BFD21FF9276652A1ECDB"
+    },
+    {
+      "path": "shared\\ntdef.h",
+      "sourceSha256": "4A107192DF73E5EFAE5B0AB6EC9024B9C40C9EF63F539471F70CB47DB21FB12C",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntdef.h",
+      "sdkSha256": "4A107192DF73E5EFAE5B0AB6EC9024B9C40C9EF63F539471F70CB47DB21FB12C"
+    },
+    {
+      "path": "um\\regstr.h",
+      "sourceSha256": "65D3AEF381BE3FD3B1FE5901949241E604D084C20808FED85B01206F0A9D75ED",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\regstr.h",
+      "sdkSha256": "65D3AEF381BE3FD3B1FE5901949241E604D084C20808FED85B01206F0A9D75ED"
     }
   ],
   "midl": {
@@ -7362,7 +7374,8 @@
     "CompositionSwapchain",
     "Communication",
     "Devices.Properties",
-    "HtmlHelp"
+    "HtmlHelp",
+    "Kernel"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -7986,6 +7999,8 @@
     "um\\dshow.h.patch",
     "um\\sens.h.patch",
     "um\\infotech.h.patch",
-    "um\\statehelpers.h.patch"
+    "um\\statehelpers.h.patch",
+    "shared\\ntdef.h.patch",
+    "um\\regstr.h.patch"
   ]
 }
