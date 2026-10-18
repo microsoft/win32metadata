@@ -1113,6 +1113,151 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("_Win32_FlagsEnum_", patch);
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void TwelfthAuthoredCabinetsAndProcessSnapshotHeadersPreserveExactNativeContracts(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            foreach (var image in new[] { control, current })
+            {
+                var cpu = Type(image.Reader, "FDICREATE_CPU_TYPE", architecture, CabinetsNamespace);
+                var fields = cpu.GetFields().Select(image.Reader.GetFieldDefinition).ToArray();
+                Assert.Equal("value__", image.Reader.GetString(fields[0].Name));
+                Assert.Equal("Int32", fields[0].DecodeSignature(Signatures, null));
+                Assert.Empty(cpu.GetCustomAttributes().Where(handle => AttributeName(image.Reader, handle) == "FlagsAttribute"));
+                Assert.Equal(new[] { "cpuUNKNOWN", "cpu80286", "cpu80386" },
+                    fields.Skip(1).Select(field => image.Reader.GetString(field.Name)));
+                for (int index = 0; index < 3; index++)
+                    AssertNativeLiteral(image.Reader, fields[index + 1], CabinetsNamespace + ".FDICREATE_CPU_TYPE",
+                        ConstantTypeCode.Int32, BitConverter.GetBytes(index - 1));
+                Assert.Equal(SnapshotType(control.Reader, Type(control.Reader, "FDICREATE_CPU_TYPE", architecture, CabinetsNamespace)),
+                    SnapshotType(image.Reader, cpu));
+                var cabinets = Methods(image.Reader, CabinetsNamespace, "Apis", architecture);
+                Assert.Equal(10, cabinets.Count);
+                foreach (string name in AuthoredFdiFunctions)
+                    Assert.Equal(new[] { "windows5.0" },
+                        AttributeValues(image.Reader, cabinets[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                var snapshot = Methods(image.Reader, ProcessSnapshotNamespace, "Apis", architecture);
+                Assert.Equal(AuthoredProcessSnapshotFunctions.OrderBy(value => value, StringComparer.Ordinal),
+                    snapshot.Keys.OrderBy(value => value, StringComparer.Ordinal));
+                foreach (string name in AuthoredProcessSnapshotFunctions)
+                    Assert.Equal(new[] { "windows8.1" },
+                        AttributeValues(image.Reader, snapshot[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            }
+            var originalCreate = Methods(control.Reader, CabinetsNamespace, "Apis", architecture)["FDICreate"];
+            var create = Methods(current.Reader, CabinetsNamespace, "Apis", architecture)["FDICreate"];
+            var originalCpu = originalCreate.GetParameters().Select(control.Reader.GetParameter)
+                .Single(parameter => control.Reader.GetString(parameter.Name) == "cpuType");
+            var nativeCpu = create.GetParameters().Select(current.Reader.GetParameter)
+                .Single(parameter => current.Reader.GetString(parameter.Name) == "cpuType");
+            Assert.Equal(8, nativeCpu.SequenceNumber);
+            Assert.Equal(originalCpu.SequenceNumber, nativeCpu.SequenceNumber);
+            Assert.Equal(originalCpu.Attributes, nativeCpu.Attributes);
+            Assert.Equal(CabinetsNamespace + ".FDICREATE_CPU_TYPE",
+                originalCreate.DecodeSignature(Signatures, null).ParameterTypes[7]);
+            Assert.Equal("Int32", create.DecodeSignature(Signatures, null).ParameterTypes[7]);
+            Assert.Empty(AttributeValues(control.Reader, originalCpu.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            Assert.Equal(new[] { "FDICREATE_CPU_TYPE" },
+                AttributeValues(current.Reader, nativeCpu.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            var transfer = Assert.Single(ReviewedLifecycleTransfers.Where(value => value.Namespace == ProcessSnapshotNamespace));
+            Assert.Equal(LifecycleAttributes(transfer.Cleanup),
+                Ownership(control.Reader, Type(control.Reader, transfer.Type, architecture, ProcessSnapshotNamespace).GetCustomAttributes()));
+            Assert.Empty(Ownership(current.Reader,
+                Type(current.Reader, transfer.Type, architecture, ProcessSnapshotNamespace).GetCustomAttributes()));
+            foreach (string ns in new[] { CabinetsNamespace, ProcessSnapshotNamespace })
+            {
+                var before = Methods(control.Reader, ns, "Apis", architecture);
+                var after = Methods(current.Reader, ns, "Apis", architecture);
+                Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                    after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+                foreach (var entry in after)
+                {
+                    Assert.Equal(Import(control.Reader, before[entry.Key]), Import(current.Reader, entry.Value));
+                    foreach (var parameter in entry.Value.GetParameters().Select(current.Reader.GetParameter))
+                    {
+                        bool producer = ns == ProcessSnapshotNamespace && entry.Key == transfer.Method &&
+                            current.Reader.GetString(parameter.Name) == transfer.Member;
+                        Assert.Equal(producer ? LifecycleAttributes(transfer.Cleanup) : Array.Empty<string>(),
+                            Ownership(current.Reader, parameter.GetCustomAttributes()));
+                        if (producer)
+                        {
+                            Assert.Equal(ParameterAttributes.Out, parameter.Attributes);
+                            Assert.Equal(ProcessSnapshotNamespace + ".HPSSWALK*",
+                                entry.Value.DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+                        }
+                    }
+                }
+            }
+            this.output.WriteLine($"Architecture {architecture}: the three ordered signed Int32 CPU members and fourteen exact floors " +
+                "remain unchanged; FDICreate retains native int with its original logical enum target, and only the native " +
+                "PssWalkMarkerCreate output receives the old HPSSWALK cleanup and invalid-value facts.");
+        }
+
+        [MigrationFact]
+        public void WholeCabinetsAndProcessSnapshotImagesHaveOnlyTheExactEnumUseAndLifecycleTransfer()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37312, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            var enumSites = new HashSet<string>(StringComparer.Ordinal);
+            var lifecycleSites = new HashSet<string>(StringComparer.Ordinal);
+            var changed = new List<string>();
+            foreach (var entry in after)
+            {
+                string original = SnapshotType(control.Reader, before[entry.Key]);
+                string actual = SnapshotType(current.Reader, entry.Value);
+                if (original != actual)
+                    changed.Add(entry.Key);
+                string expected = original;
+                if (entry.Key == CabinetsNamespace + ".Apis#124")
+                    expected = SnapshotType(control.Reader, before[entry.Key], normalizeReviewedEnumUses: true,
+                        usedEnumSites: enumSites);
+                else if (entry.Key == ProcessSnapshotNamespace + ".Apis#124" ||
+                    entry.Key == ProcessSnapshotNamespace + ".HPSSWALK#124")
+                    expected = SnapshotType(control.Reader, before[entry.Key], normalizeReviewedChanges: true,
+                        usedLifecycleSites: lifecycleSites);
+                Assert.Equal(before[entry.Key].GetFields().Select(handle =>
+                    control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    entry.Value.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                if (entry.Key == ProcessSnapshotNamespace + ".Apis#124")
+                {
+                    string[] expectedRows = expected.Split('\n');
+                    string[] actualRows = actual.Split('\n');
+                    Assert.Equal(expectedRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)),
+                        actualRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)));
+                    var expectedMethods = MethodRows(expectedRows);
+                    var actualMethods = MethodRows(actualRows);
+                    var order = expectedMethods.Keys.ToList();
+                    Assert.True(order.Remove("PssWalkMarkerFree"));
+                    order.Insert(order.IndexOf("PssWalkMarkerCreate"), "PssWalkMarkerFree");
+                    Assert.Equal(order, actualMethods.Keys);
+                    foreach (var method in expectedMethods)
+                        Assert.Equal(method.Value, actualMethods[method.Key]);
+                }
+                else
+                    Assert.True(expected == actual, "Unexpected physical change: " + entry.Key);
+            }
+            Assert.Equal(new[]
+            {
+                CabinetsNamespace + ".Apis#124", ProcessSnapshotNamespace + ".Apis#124",
+                ProcessSnapshotNamespace + ".HPSSWALK#124",
+            }, changed);
+            Assert.Equal(new[] { Assert.Single(ReviewedEnumUses.Where(value => value.Namespace == CabinetsNamespace)).Site }, enumSites);
+            var transfer = Assert.Single(ReviewedLifecycleTransfers.Where(value => value.Namespace == ProcessSnapshotNamespace));
+            Assert.Equal(new[] { transfer.TypeSite, transfer.Site }.OrderBy(value => value, StringComparer.Ordinal),
+                lifecycleSites.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine("All 37,312 physical identities remain: 37,309 snapshots are literal and only the exact CPU enum " +
+                "use/association and precise HPSSWALK producer lifecycle transfer differ. Every real field/layout/member order and " +
+                "COM/vtable method order remains strict; only the existing static cleanup declaration moves before its producer.");
+        }
+
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredWerHeaderContracts()
         {
             yield return ("windows6.0.6000", new[]
