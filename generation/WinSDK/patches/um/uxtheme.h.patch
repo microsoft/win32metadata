@@ -1,5 +1,5 @@
 diff --git a/um/uxtheme.h b/um/uxtheme.h
-index f4998fa4..d04fae25 100644
+index f4998fa4..d7316946 100644
 --- a/um/uxtheme.h
 +++ b/um/uxtheme.h
 @@ -43,6 +43,7 @@ typedef HANDLE HTHEME;          // handle to a section of theme data for class
@@ -458,15 +458,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  DrawThemeParentBackgroundEx(
      _In_ HWND hwnd,
-@@ -1589,6 +1646,7 @@ typedef struct _WTA_OPTIONS
-                                    WTNCA_NOSYSMENU | \
-                                    WTNCA_NOMIRRORHELP)
- 
-+_Win32_SupportedOS_WindowsVista_
- THEMEAPI
- SetWindowThemeAttribute(
-     _In_ HWND hwnd,
-@@ -1677,6 +1735,7 @@ typedef struct _DTTOPTS
+@@ -1677,6 +1734,7 @@ typedef struct _DTTOPTS
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -474,7 +466,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  DrawThemeTextEx(
      _In_ HTHEME hTheme,
-@@ -1704,6 +1763,7 @@ DrawThemeTextEx(
+@@ -1704,6 +1762,7 @@ DrawThemeTextEx(
  //                    file when iPropId==TMT_DISKSTREAM (use GetCurrentThemeName 
  //                    and LoadLibraryEx(LOAD_LIBRARY_AS_DATAFILE)
  //-----------------------------------------------------------------------
@@ -482,7 +474,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  GetThemeBitmap(
      _In_ HTHEME hTheme,
-@@ -1727,6 +1787,7 @@ GetThemeBitmap(
+@@ -1727,6 +1786,7 @@ GetThemeBitmap(
  //                    file when iPropId==TMT_DISKSTREAM (use GetCurrentThemeName 
  //                    and LoadLibraryEx(LOAD_LIBRARY_AS_DATAFILE)
  //-----------------------------------------------------------------------
@@ -490,7 +482,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  GetThemeStream(
      _In_ HTHEME hTheme,
-@@ -1744,6 +1805,7 @@ GetThemeStream(
+@@ -1744,6 +1804,7 @@ GetThemeStream(
  //                        Should be called prior to BeginBufferedPaint,
  //                        and should have a matching BufferedPaintUnInit.
  //------------------------------------------------------------------------
@@ -498,7 +490,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  BufferedPaintInit(
      VOID
-@@ -1754,6 +1816,7 @@ BufferedPaintInit(
+@@ -1754,6 +1815,7 @@ BufferedPaintInit(
  //                          Should be called once for each call to BufferedPaintInit,
  //                          when calls to BeginBufferedPaint are no longer needed.
  //------------------------------------------------------------------------
@@ -506,7 +498,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  BufferedPaintUnInit(
      VOID
-@@ -1817,6 +1880,8 @@ typedef struct _BP_PAINTPARAMS
+@@ -1817,6 +1879,8 @@ typedef struct _BP_PAINTPARAMS
      const BLENDFUNCTION *       pBlendFunction;
  } BP_PAINTPARAMS, *PBP_PAINTPARAMS;
  
@@ -515,7 +507,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(_Success_(return != NULL) HPAINTBUFFER)
  BeginBufferedPaint(
      _In_ HDC hdcTarget,
-@@ -1833,6 +1898,7 @@ BeginBufferedPaint(
+@@ -1833,6 +1897,7 @@ BeginBufferedPaint(
  //    hBufferedPaint   - handle to buffered paint context
  //    fUpdateTarget    - update target DC
  //------------------------------------------------------------------------
@@ -523,7 +515,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  EndBufferedPaint(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1845,6 +1911,7 @@ EndBufferedPaint(
+@@ -1845,6 +1910,7 @@ EndBufferedPaint(
  //    hBufferedPaint             - handle to buffered paint context
  //    prc                        - pointer to receive target rectangle
  //------------------------------------------------------------------------
@@ -531,7 +523,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  GetBufferedPaintTargetRect(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1856,6 +1923,7 @@ GetBufferedPaintTargetRect(
+@@ -1856,6 +1922,7 @@ GetBufferedPaintTargetRect(
  //
  //    hBufferedPaint           - handle to buffered paint context
  //------------------------------------------------------------------------
@@ -539,7 +531,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(HDC)
  GetBufferedPaintTargetDC(
      _In_ HPAINTBUFFER hBufferedPaint
-@@ -1866,6 +1934,7 @@ GetBufferedPaintTargetDC(
+@@ -1866,6 +1933,7 @@ GetBufferedPaintTargetDC(
  //
  //    hBufferedPaint     - handle to buffered paint context
  //------------------------------------------------------------------------
@@ -547,7 +539,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(HDC)
  GetBufferedPaintDC(
      _In_ HPAINTBUFFER hBufferedPaint
-@@ -1879,6 +1948,7 @@ GetBufferedPaintDC(
+@@ -1879,6 +1947,7 @@ GetBufferedPaintDC(
  //    pcxRow               - pointer to receive width of buffer bitmap, in pixels;
  //                           this value may not necessarily be equal to the buffer width
  //------------------------------------------------------------------------
@@ -555,7 +547,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  GetBufferedPaintBits(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1892,6 +1962,7 @@ GetBufferedPaintBits(
+@@ -1892,6 +1961,7 @@ GetBufferedPaintBits(
  //    hBufferedPaint     - handle to buffered paint context
  //    prc                - rectangle to clear; NULL specifies entire buffer
  //------------------------------------------------------------------------
@@ -563,15 +555,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  BufferedPaintClear(
      _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1905,6 +1976,7 @@ BufferedPaintClear(
- //    prc                   - rectangle to set alpha in; NULL specifies entire buffer
- //    alpha                 - alpha value to set in the given rectangle
- //------------------------------------------------------------------------
-+_Win32_SupportedOS_WindowsVista_
- THEMEAPI
- BufferedPaintSetAlpha(
-     _In_ HPAINTBUFFER hBufferedPaint,
-@@ -1920,6 +1992,7 @@ BufferedPaintSetAlpha(
+@@ -1920,6 +1990,7 @@ BufferedPaintSetAlpha(
  //
  //    hwnd                           - window on which to stop all animations
  //------------------------------------------------------------------------
@@ -579,7 +563,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI
  BufferedPaintStopAllAnimations(
      _In_ HWND hwnd
-@@ -1927,6 +2000,7 @@ BufferedPaintStopAllAnimations(
+@@ -1927,6 +1998,7 @@ BufferedPaintStopAllAnimations(
  
  typedef HANDLE HANIMATIONBUFFER;  // handle to a buffered paint animation
  
@@ -587,7 +571,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(HANIMATIONBUFFER)
  BeginBufferedAnimation(
      _In_ HWND hwnd,
-@@ -1939,12 +2013,14 @@ BeginBufferedAnimation(
+@@ -1939,12 +2011,14 @@ BeginBufferedAnimation(
      _Out_ HDC *phdcTo
      );
  
@@ -602,7 +586,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(BOOL)
  BufferedPaintRenderAnimation(
      _In_ HWND hwnd,
-@@ -1956,6 +2032,7 @@ BufferedPaintRenderAnimation(
+@@ -1956,6 +2030,7 @@ BufferedPaintRenderAnimation(
  // process (themes are active). 
  // Roughly equivalent to "DwmIsCompositionEnabled() && IsAppthemed()"
  //----------------------------------------------------------------------------
@@ -610,7 +594,7 @@ index f4998fa4..d04fae25 100644
  THEMEAPI_(BOOL) IsCompositionActive();
  
  //------------------------------------------------------------------------
-@@ -1969,6 +2046,7 @@ THEMEAPI_(BOOL) IsCompositionActive();
+@@ -1969,6 +2044,7 @@ THEMEAPI_(BOOL) IsCompositionActive();
  //  iPropId             - property id 
  //  pdwDuration         - receives the transition duration
  //------------------------------------------------------------------------

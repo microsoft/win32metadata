@@ -1,5 +1,5 @@
 diff --git a/um/commctrl.h b/um/commctrl.h
-index 44285099..381ae00b 100644
+index 44285099..a7930e5b 100644
 --- a/um/commctrl.h
 +++ b/um/commctrl.h
 @@ -138,6 +138,7 @@ extern "C" {
@@ -18,7 +18,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(_In_ const INITCOMMONCONTROLSEX *picce);
  
  #define ODT_HEADER              100
-@@ -546,17 +548,26 @@ typedef struct _IMAGELISTDRAWPARAMS
+@@ -546,17 +548,25 @@ typedef struct _IMAGELISTDRAWPARAMS
  #define ILC_ORIGINALSIZE        0x00010000      // Imagelist should accept smaller than set images and apply OriginalSize based on image added
  #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
  #endif
@@ -35,7 +35,6 @@ index 44285099..381ae00b 100644
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI int         WINAPI ImageList_Add(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
  
-+_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI int         WINAPI ImageList_ReplaceIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ HICON hicon);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI COLORREF    WINAPI ImageList_SetBkColor(_In_ HIMAGELIST himl, _In_ COLORREF clrBk);
@@ -45,7 +44,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl, _In_ int iImage, _In_ int iOverlay);
  
  #define     ImageList_AddIcon(himl, hicon) ImageList_ReplaceIcon(himl, -1, hicon)
-@@ -593,6 +604,7 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl
+@@ -593,6 +603,7 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl
  #define ILGT_ASYNC              0x00000001
  #endif
  
@@ -53,7 +52,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ UINT fStyle);
  
  
-@@ -602,14 +614,22 @@ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_
+@@ -602,14 +613,20 @@ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_
  #define HBITMAP_CALLBACK               ((HBITMAP)-1)       // only for SparseImageList
  #endif
  
@@ -66,9 +65,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawEx(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ int dx, _In_ int dy, _In_ COLORREF rgbBk, _In_ COLORREF rgbFg, _In_ UINT fStyle);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
-+_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
-+_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ UINT flags);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
@@ -76,7 +73,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
  
  #ifdef UNICODE
-@@ -620,16 +640,25 @@ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpb
+@@ -620,16 +637,25 @@ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpb
  
  #define ILCF_MOVE   (0x00000000)
  #define ILCF_SWAP   (0x00000001)
@@ -102,7 +99,7 @@ index 44285099..381ae00b 100644
  _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragImage(_Out_opt_ POINT *ppt, _Out_opt_ POINT *pptHotspot);
  
  #define     ImageList_RemoveAll(himl) ImageList_Remove(himl, -1)
-@@ -638,7 +667,9 @@ _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragIma
+@@ -638,7 +664,9 @@ _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragIma
  
  struct IStream;
  
@@ -112,7 +109,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ struct IStream *pstm);
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
-@@ -646,7 +677,9 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ str
+@@ -646,7 +674,9 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ str
  #define ILP_DOWNLEVEL       1           // Write or reads the stream using downlevel sematics.
  
  
@@ -122,7 +119,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HRESULT WINAPI ImageList_WriteEx(_In_ HIMAGELIST himl, _In_ DWORD dwFlags, _In_ struct IStream *pstm);
  #endif
  
-@@ -662,16 +695,22 @@ typedef struct _IMAGEINFO
+@@ -662,16 +692,22 @@ typedef struct _IMAGEINFO
  } IMAGEINFO, *LPIMAGEINFO;
  #endif
  
@@ -145,7 +142,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HRESULT WINAPI HIMAGELIST_QueryInterface(_In_ HIMAGELIST himl, _In_ REFIID riid, _Outptr_ void **ppv);
  
  #ifdef __cplusplus
-@@ -1221,11 +1260,15 @@ typedef struct _COLORMAP {
+@@ -1221,11 +1257,15 @@ typedef struct _COLORMAP {
      COLORREF to;
  } COLORMAP, *LPCOLORMAP;
  
@@ -161,7 +158,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HBITMAP WINAPI CreateMappedBitmap(HINSTANCE hInstance, INT_PTR idBitmap,
                                    UINT wFlags, _In_opt_ LPCOLORMAP lpColorMap,
                                    int iNumMaps);
-@@ -2516,10 +2559,16 @@ typedef struct tagNMTTDISPINFOW {
+@@ -2516,10 +2556,16 @@ typedef struct tagNMTTDISPINFOW {
  
  // end_r_commctrl
  
@@ -178,7 +175,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
  
  #ifdef UNICODE
-@@ -2602,8 +2651,11 @@ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWN
+@@ -2602,8 +2648,11 @@ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWN
  
  #ifndef NOMENUHELP
  
@@ -190,7 +187,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI void WINAPI GetEffectiveClientRect(_In_ HWND hWnd, _Out_ LPRECT lprc,  _In_z_ const INT *lpInfo);
  
  #define MINSYSCOMMAND   SC_SIZE
-@@ -2756,9 +2808,12 @@ typedef struct tagDRAGLISTINFO {
+@@ -2756,9 +2805,12 @@ typedef struct tagDRAGLISTINFO {
  
  #define DRAGLISTMSGSTRING       TEXT("commctrl_DragListMsg")
  
@@ -203,7 +200,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI int WINAPI LBItemFromPt(HWND hLB, POINT pt, BOOL bAutoScroll);
  
  #endif
-@@ -2823,6 +2878,7 @@ typedef struct _UDACCEL {
+@@ -2823,6 +2875,7 @@ typedef struct _UDACCEL {
  #define UDM_SETPOS32            (WM_USER+113)
  #define UDM_GETPOS32            (WM_USER+114)
  
@@ -211,7 +208,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HWND WINAPI CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
                                  HWND hParent, int nID, HINSTANCE hInst,
                                  HWND hBuddy,
-@@ -7762,7 +7818,9 @@ typedef struct _TASKDIALOGCONFIG
+@@ -7762,7 +7815,9 @@ typedef struct _TASKDIALOGCONFIG
  } TASKDIALOGCONFIG;
  
  
@@ -221,7 +218,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
  
  
-@@ -7781,9 +7839,11 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
+@@ -7781,9 +7836,11 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
  // === MUI APIs ===
  //
  #ifndef NOMUI
@@ -233,7 +230,7 @@ index 44285099..381ae00b 100644
  LANGID WINAPI GetMUILanguage(void);
  #endif  // NOMUI
  
-@@ -7835,6 +7895,7 @@ typedef struct tagTRACKMOUSEEVENT {
+@@ -7835,6 +7892,7 @@ typedef struct tagTRACKMOUSEEVENT {
  // Declare _TrackMouseEvent.  This API tries to use the window manager's
  // implementation of TrackMouseEvent if it is present, otherwise it emulates.
  //
@@ -241,7 +238,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI
  BOOL
  WINAPI
-@@ -7864,33 +7925,46 @@ _TrackMouseEvent(
+@@ -7864,33 +7922,46 @@ _TrackMouseEvent(
  #define FSB_ENCARTA_MODE        1
  #define FSB_REGULAR_MODE        0
  
@@ -288,7 +285,7 @@ index 44285099..381ae00b 100644
  WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
  
  #endif  //  NOFLATSBAPIS
-@@ -7907,13 +7981,17 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
+@@ -7907,13 +7978,17 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
      LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
  
  
@@ -306,7 +303,7 @@ index 44285099..381ae00b 100644
  LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
  #endif
  
-@@ -7925,13 +8003,16 @@ enum _LI_METRIC
+@@ -7925,13 +8000,16 @@ enum _LI_METRIC
     LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
  };
  

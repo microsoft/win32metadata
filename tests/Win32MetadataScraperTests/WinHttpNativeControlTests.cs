@@ -1695,15 +1695,29 @@ static_assert(DISC_NO_FORCE == 64u);
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string[] headers = WinHttpMigrationTests.DeviceBulkOriginalHeaders().Single(owner => owner.Partition == partition).Headers;
+            string sourceText = null;
+            if (language == "c")
+            {
+                string main = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp"));
+                const string versionInclude = "#include <sdkddkver.h>";
+                int version = main.IndexOf(versionInclude, StringComparison.Ordinal);
+                Assert.InRange(version, 0, main.Length - versionInclude.Length);
+                sourceText = main.Substring(0, version + versionInclude.Length) + "\n";
+                if (Regex.IsMatch(main, @"(?m)^#define\s+UNICODE\b"))
+                    sourceText += "#define UNICODE\n";
+                if (partition == "WebServicesOnDevices")
+                    sourceText += "#include <wsdxml.h>\n#include <wsdtypes.h>\n";
+                sourceText += string.Join("\n", headers.Select(header => "#include <" + header + ">")) + "\n";
+            }
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
             var before = Surface(root, original, partition, architecture, target, headers, "",
-                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+                sourceText: sourceText, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
             var after = Surface(root, prepared, partition, architecture, target, headers, "",
-                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                metadataEnabled: enabled, annotations: annotations, sourceText: sourceText, salAnnotations: afterSal,
                 diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
@@ -1716,9 +1730,16 @@ static_assert(DISC_NO_FORCE == 64u);
             var expected = new List<string>();
             foreach (var fact in contracts.RootElement.GetProperty("facts").EnumerateArray())
             {
-                if (!headers.Contains(Path.GetFileName(fact.GetProperty("original").GetString()), StringComparer.OrdinalIgnoreCase) ||
-                    fact.GetProperty("annotationCount").GetInt32() == 0)
+                if (!headers.Contains(Path.GetFileName(fact.GetProperty("original").GetString()), StringComparer.OrdinalIgnoreCase))
                     continue;
+                string status = fact.GetProperty("status").GetString();
+                Assert.Contains(status, new[] { "converted", "retained" });
+                if (status == "retained")
+                {
+                    Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+                    continue;
+                }
+                Assert.True(fact.GetProperty("annotationCount").GetInt32() > 0);
                 string name = fact.GetProperty("symbol").GetString();
                 string category = fact.GetProperty("category").GetString();
                 Assert.Contains(category, new[] { "supportedOS", "setLastError" });
@@ -1740,7 +1761,8 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations.OrderBy(value => value, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} unchanged native facts, {beforeSal.Count} unchanged SAL occurrences, " +
-                $"{annotations.Count} exact source-bound availability/last-error facts.");
+                $"{annotations.Count} exact source-bound availability/last-error facts; " +
+                (language == "c" ? "owned-header C17 context" : "complete owner C++ context") + ".");
         }
 
         public static IEnumerable<object[]> DeviceBulkOriginalHeaderControls()

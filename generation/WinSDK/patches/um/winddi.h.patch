@@ -1,5 +1,5 @@
 diff --git a/um/winddi.h b/um/winddi.h
-index 9580b341..3be09b0e 100644
+index 9580b341..49f81c20 100644
 --- a/um/winddi.h
 +++ b/um/winddi.h
 @@ -1747,22 +1747,26 @@ typedef struct _XLATEOBJ
@@ -736,51 +736,7 @@ index 9580b341..3be09b0e 100644
  __drv_preferredFunction("(see documentation)", "Obsolete, always returns false. ") 
  ENGAPI
  BOOL APIENTRY EngSetPointerTag(
-@@ -3908,6 +4008,7 @@ BOOL APIENTRY EngSetPointerTag(
- 
- #else // !USERMODE_DRIVER
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- _Post_writable_byte_size_(MemSize)
- PVOID APIENTRY EngAllocMem(
-@@ -3916,11 +4017,13 @@ PVOID APIENTRY EngAllocMem(
-     _In_                ULONG Tag
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- VOID APIENTRY EngFreeMem(
-     _In_                PVOID Mem
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- _Post_writable_byte_size_(cj)
- PVOID APIENTRY EngAllocUserMem(
-@@ -3928,11 +4031,13 @@ PVOID APIENTRY EngAllocUserMem(
-     _In_                ULONG tag
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- VOID APIENTRY EngFreeUserMem(
-     _In_                PVOID pv
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- _Post_writable_byte_size_(cj)
- PVOID APIENTRY EngAllocPrivateUserMem(
-@@ -3941,6 +4046,7 @@ PVOID APIENTRY EngAllocPrivateUserMem(
-     _In_                ULONG tag
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- VOID
- EngFreePrivateUserMem(
-@@ -3958,6 +4064,7 @@ EngDxIoctl(
+@@ -3958,6 +4058,7 @@ EngDxIoctl(
      );
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
@@ -788,7 +744,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  int APIENTRY EngMulDiv(
      _In_                int a,
-@@ -3972,6 +4079,7 @@ int APIENTRY EngMulDiv(
+@@ -3972,6 +4073,7 @@ int APIENTRY EngMulDiv(
  // User mode memory Operations
  //
  
@@ -796,7 +752,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngProbeForRead(
      _In_reads_bytes_(Length)     PVOID Address,
-@@ -3983,6 +4091,7 @@ VOID APIENTRY EngProbeForRead(
+@@ -3983,6 +4085,7 @@ VOID APIENTRY EngProbeForRead(
      _In_                    ULONG Alignment
      );
  
@@ -804,7 +760,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngProbeForReadAndWrite(
      _Inout_updates_bytes_(Length)  PVOID Address,
-@@ -3994,17 +4103,20 @@ VOID APIENTRY EngProbeForReadAndWrite(
+@@ -3994,17 +4097,20 @@ VOID APIENTRY EngProbeForReadAndWrite(
      _In_                    ULONG Alignment
      );
  
@@ -825,26 +781,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  DWORD APIENTRY EngDeviceIoControl(
      _In_                                HANDLE hDevice,
-@@ -4028,22 +4140,26 @@ DWORD APIENTRY EngDeviceIoControl(
- 
- #else // !USERMODE_DRIVER
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- HANDLE APIENTRY EngLoadImage(
-     _In_ LPWSTR pwszDriver
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- PVOID APIENTRY EngFindImageProcAddress(
-     HANDLE hModule,
-     _In_ LPSTR lpProcName
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- ENGAPI
- VOID APIENTRY EngUnloadImage(
+@@ -4044,6 +4150,7 @@ VOID APIENTRY EngUnloadImage(
      _In_ HANDLE hModule
      );
  
@@ -852,7 +789,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  PVOID APIENTRY EngMapModule(
      _In_ HANDLE h,
-@@ -4057,11 +4173,13 @@ PVOID APIENTRY EngMapModule(
+@@ -4057,11 +4164,13 @@ PVOID APIENTRY EngMapModule(
  // callback for extra PDEV information
  //
  
@@ -866,7 +803,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  LPWSTR APIENTRY EngGetDriverName(
      _In_                    HDEV hdev
-@@ -4074,6 +4192,7 @@ typedef struct _TYPE1_FONT
+@@ -4074,6 +4183,7 @@ typedef struct _TYPE1_FONT
      ULONG   ulIdentifier;
  } TYPE1_FONT;
  
@@ -874,7 +811,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngGetType1FontList(
      _In_                            HDEV            hdev,
-@@ -4088,11 +4207,13 @@ BOOL APIENTRY EngGetType1FontList(
+@@ -4088,11 +4198,13 @@ BOOL APIENTRY EngGetType1FontList(
  // Manipulating resource sections
  //
  
@@ -888,7 +825,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  PVOID APIENTRY EngFindResource(
      _In_                    HANDLE h,
-@@ -4101,11 +4222,13 @@ PVOID APIENTRY EngFindResource(
+@@ -4101,11 +4213,13 @@ PVOID APIENTRY EngFindResource(
      _Out_                   PULONG pulSize
      );
  
@@ -902,7 +839,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL
  APIENTRY
-@@ -4113,6 +4236,7 @@ EngDeleteFile (
+@@ -4113,6 +4227,7 @@ EngDeleteFile (
      _In_                    LPWSTR  pwszFileName
      );
  
@@ -910,7 +847,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  _Success_(return != 0)
  _When_(cjSize != 0, _At_(return, _Out_writes_bytes_(cjSize)))
-@@ -4124,6 +4248,7 @@ EngMapFile(
+@@ -4124,6 +4239,7 @@ EngMapFile(
      _Out_    ULONG_PTR  *piFile
      );
  
@@ -918,7 +855,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL
  APIENTRY
-@@ -4135,12 +4260,14 @@ EngUnmapFile (
+@@ -4135,12 +4251,14 @@ EngUnmapFile (
  // FontFile Callbacks
  //
  
@@ -933,7 +870,7 @@ index 9580b341..3be09b0e 100644
  __drv_preferredFunction("EngMapFontFileFD", "Obsolete") 
  ENGAPI
  BOOL APIENTRY EngMapFontFile(
-@@ -4149,11 +4276,13 @@ BOOL APIENTRY EngMapFontFile(
+@@ -4149,11 +4267,13 @@ BOOL APIENTRY EngMapFontFile(
      _Out_                           ULONG  *pcjBuf
      );
  
@@ -947,7 +884,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngMapFontFileFD(
      _In_                            ULONG_PTR  iFile,
-@@ -4161,6 +4290,7 @@ BOOL APIENTRY EngMapFontFileFD(
+@@ -4161,6 +4281,7 @@ BOOL APIENTRY EngMapFontFileFD(
      _Out_                           ULONG  *pcjBuf
      );
  
@@ -955,7 +892,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngLpkInstalled();
  
-@@ -4170,21 +4300,25 @@ BOOL APIENTRY EngLpkInstalled();
+@@ -4170,21 +4291,25 @@ BOOL APIENTRY EngLpkInstalled();
  
  DECLARE_HANDLE(HSEMAPHORE);
  
@@ -981,7 +918,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngDeleteSemaphore(
      _In_                    HSEMAPHORE hsem
-@@ -4209,11 +4343,13 @@ BOOL APIENTRY EngAcquireSemaphoreSharedNoWait(
+@@ -4209,11 +4334,13 @@ BOOL APIENTRY EngAcquireSemaphoreSharedNoWait(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -995,7 +932,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngIsSemaphoreOwnedByCurrentThread(
      _In_                    HSEMAPHORE hsem
-@@ -4260,16 +4396,19 @@ typedef struct _ENGSAFESEMAPHORE
+@@ -4260,16 +4387,19 @@ typedef struct _ENGSAFESEMAPHORE
      LONG lCount;
  } ENGSAFESEMAPHORE;
  
@@ -1015,7 +952,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngMultiByteToUnicodeN(
      _Out_writes_bytes_to_(MaxBytesInUnicodeString, *BytesInUnicodeString)   LPWSTR UnicodeString,
-@@ -4279,6 +4418,7 @@ VOID APIENTRY EngMultiByteToUnicodeN(
+@@ -4279,6 +4409,7 @@ VOID APIENTRY EngMultiByteToUnicodeN(
      _In_                                                                ULONG BytesInMultiByteString
      );
  
@@ -1023,7 +960,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngUnicodeToMultiByteN(
      _Out_writes_bytes_to_(MaxBytesInMultiByteString, *BytesInMultiByteString)   PCHAR MultiByteString,
-@@ -4302,6 +4442,7 @@ VOID APIENTRY EngUnicodeToMultiByteN(
+@@ -4302,6 +4433,7 @@ VOID APIENTRY EngUnicodeToMultiByteN(
  
  #else // !USERMODE_DRIVER
  
@@ -1031,7 +968,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngGetPrinterDriver(
      _In_                    HANDLE  hPrinter,
-@@ -4312,6 +4453,7 @@ BOOL APIENTRY EngGetPrinterDriver(
+@@ -4312,6 +4444,7 @@ BOOL APIENTRY EngGetPrinterDriver(
      _Out_                   DWORD  *pcbNeeded
      );
  
@@ -1039,7 +976,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  DWORD APIENTRY EngGetPrinterData(
      _In_                    HANDLE   hPrinter,
-@@ -4322,6 +4464,7 @@ DWORD APIENTRY EngGetPrinterData(
+@@ -4322,6 +4455,7 @@ DWORD APIENTRY EngGetPrinterData(
      _Out_                   LPDWORD  pcbNeeded
      );
  
@@ -1047,7 +984,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  DWORD APIENTRY EngSetPrinterData(
      _In_                        HANDLE   hPrinter,
-@@ -4331,6 +4474,7 @@ DWORD APIENTRY EngSetPrinterData(
+@@ -4331,6 +4465,7 @@ DWORD APIENTRY EngSetPrinterData(
      _In_                        DWORD    cjPrinterData
      );
  
@@ -1055,7 +992,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngGetForm(
      _In_                    HANDLE  hPrinter,
-@@ -4341,6 +4485,7 @@ BOOL APIENTRY EngGetForm(
+@@ -4341,6 +4476,7 @@ BOOL APIENTRY EngGetForm(
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1063,7 +1000,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngWritePrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4349,6 +4494,7 @@ BOOL APIENTRY EngWritePrinter(
+@@ -4349,6 +4485,7 @@ BOOL APIENTRY EngWritePrinter(
      _Out_                   LPDWORD pcWritten
      );
  
@@ -1071,7 +1008,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngGetPrinter(
      _In_                    HANDLE  hPrinter,
-@@ -4358,6 +4504,7 @@ BOOL APIENTRY EngGetPrinter(
+@@ -4358,6 +4495,7 @@ BOOL APIENTRY EngGetPrinter(
      _Out_                   LPDWORD pcbNeeded
      );
  
@@ -1079,67 +1016,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngEnumForms(
      _In_                    HANDLE  hPrinter,
-@@ -4379,36 +4526,59 @@ BOOL APIENTRY EngEnumForms(
-         ULONG ul2;
-     } FLOATOBJ, *PFLOATOBJ;
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_SetFloat(PFLOATOBJ,FLOATL);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_SetLong(PFLOATOBJ,LONG);
- 
-+    _Win32_SupportedOS_Windows2000_
-     LONG APIENTRY FLOATOBJ_GetFloat(PFLOATOBJ);
-+    _Win32_SupportedOS_Windows2000_
-     LONG APIENTRY FLOATOBJ_GetLong(PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_AddFloat(PFLOATOBJ,FLOATL);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_AddLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_Add(PFLOATOBJ,PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_SubFloat(PFLOATOBJ,FLOATL);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_SubLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_Sub(PFLOATOBJ,PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_MulFloat(PFLOATOBJ,FLOATL);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_MulLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_Mul(PFLOATOBJ,PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_DivFloat(PFLOATOBJ,FLOATL);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_DivLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_Div(PFLOATOBJ,PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     VOID APIENTRY FLOATOBJ_Neg(PFLOATOBJ);
- 
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_EqualLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_GreaterThanLong(PFLOATOBJ,LONG);
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_LessThanLong(PFLOATOBJ,LONG);
- 
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_Equal(PFLOATOBJ,PFLOATOBJ);
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_GreaterThan(PFLOATOBJ,PFLOATOBJ);
-+    _Win32_SupportedOS_Windows2000_
-     BOOL APIENTRY FLOATOBJ_LessThan(PFLOATOBJ,PFLOATOBJ);
- 
- #else
-@@ -4472,6 +4642,7 @@ typedef struct  tagFLOATOBJ_XFORM
+@@ -4472,6 +4610,7 @@ typedef struct  tagFLOATOBJ_XFORM
      FLOATOBJ eDy;
  } FLOATOBJ_XFORM, *PFLOATOBJ_XFORM, FAR *LPFLOATOBJ_XFORM;
  
@@ -1147,7 +1024,7 @@ index 9580b341..3be09b0e 100644
  ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
      XFORMOBJ *pxo,
      FLOATOBJ_XFORM * pfxo
-@@ -4484,6 +4655,7 @@ ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
+@@ -4484,6 +4623,7 @@ ULONG APIENTRY XFORMOBJ_iGetFloatObjXform(
  
  typedef int (__cdecl *SORTCOMP)(const void *pv1, const void *pv2);
  
@@ -1155,7 +1032,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID APIENTRY EngSort(
      _Inout_updates_bytes_(c * cjElem)  PBYTE pjBuf,
-@@ -4503,11 +4675,13 @@ typedef struct _ENG_TIME_FIELDS {
+@@ -4503,11 +4643,13 @@ typedef struct _ENG_TIME_FIELDS {
      USHORT usWeekday;     // range [0..6] == [Sunday..Saturday]
  } ENG_TIME_FIELDS, *PENG_TIME_FIELDS;
  
@@ -1169,7 +1046,7 @@ index 9580b341..3be09b0e 100644
  _Success_(return != 0)
  ENGAPI
  FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
-@@ -4516,6 +4690,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
+@@ -4516,6 +4658,7 @@ FD_GLYPHSET* APIENTRY EngComputeGlyphSet(
      _In_                    INT cChars
      );
  
@@ -1177,7 +1054,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  INT APIENTRY EngMultiByteToWideChar(
      _In_                                    UINT CodePage,
-@@ -4525,6 +4700,7 @@ INT APIENTRY EngMultiByteToWideChar(
+@@ -4525,6 +4668,7 @@ INT APIENTRY EngMultiByteToWideChar(
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1185,7 +1062,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  INT APIENTRY EngWideCharToMultiByte(
      _In_                                    UINT CodePage,
-@@ -4534,23 +4710,27 @@ INT APIENTRY EngWideCharToMultiByte(
+@@ -4534,23 +4678,27 @@ INT APIENTRY EngWideCharToMultiByte(
      _In_                                    INT BytesInMultiByteString
      );
  
@@ -1213,7 +1090,7 @@ index 9580b341..3be09b0e 100644
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFileChangeTime(
-@@ -4558,6 +4738,7 @@ BOOL APIENTRY EngGetFileChangeTime(
+@@ -4558,6 +4706,7 @@ BOOL APIENTRY EngGetFileChangeTime(
      _Out_   LARGE_INTEGER   *pChangeTime
      );
  
@@ -1221,7 +1098,7 @@ index 9580b341..3be09b0e 100644
  _Success_(return)
  ENGAPI
  BOOL APIENTRY EngGetFilePath(
-@@ -4640,11 +4821,13 @@ BOOL APIENTRY EngRestoreFloatingPointState(
+@@ -4640,11 +4789,13 @@ BOOL APIENTRY EngRestoreFloatingPointState(
  // DirectDraw surface locking
  //
  
@@ -1235,7 +1112,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY EngUnlockDirectDrawSurface(
          _In_    PDD_SURFACE_LOCAL pSurface
-@@ -4660,21 +4843,25 @@ BOOL APIENTRY EngUnlockDirectDrawSurface(
+@@ -4660,21 +4811,25 @@ BOOL APIENTRY EngUnlockDirectDrawSurface(
  
  typedef struct _ENG_EVENT *PEVENT;
  
@@ -1261,7 +1138,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  PEVENT APIENTRY EngMapEvent(
      _In_        HDEV            hDev,
-@@ -4684,24 +4871,28 @@ PEVENT APIENTRY EngMapEvent(
+@@ -4684,24 +4839,28 @@ PEVENT APIENTRY EngMapEvent(
      _Reserved_  PVOID           Reserved3
      );
  
@@ -1290,7 +1167,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  LONG APIENTRY
  EngReadStateEvent (
-@@ -4732,6 +4923,7 @@ typedef enum _ENG_SYSTEM_ATTRIBUTE {
+@@ -4732,6 +4891,7 @@ typedef enum _ENG_SYSTEM_ATTRIBUTE {
  #endif // (NTDDI_VERSION >= NTDDI_LONGHORN)
  
  
@@ -1298,7 +1175,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  BOOL APIENTRY
  EngQuerySystemAttribute(
-@@ -4741,6 +4933,7 @@ EngQuerySystemAttribute(
+@@ -4741,6 +4901,7 @@ EngQuerySystemAttribute(
  #define ENG_FNT_CACHE_READ_FAULT    0x1
  #define ENG_FNT_CACHE_WRITE_FAULT   0x2
  
@@ -1306,7 +1183,7 @@ index 9580b341..3be09b0e 100644
  _Success_(return != nullptr)
  ENGAPI
  _Post_writable_byte_size_(*pulSize)
-@@ -4755,12 +4948,14 @@ BOOL WINAPI EngFntCacheFlush(
+@@ -4755,12 +4916,14 @@ BOOL WINAPI EngFntCacheFlush(
      _In_  BOOL  DiscardContent);
  #endif
  
@@ -1321,7 +1198,7 @@ index 9580b341..3be09b0e 100644
  ENGAPI
  VOID  APIENTRY  EngFntCacheFault(
      _In_    ULONG ulFastCheckSum, 
-@@ -4771,6 +4966,7 @@ typedef enum _ENG_DEVICE_ATTRIBUTE {
+@@ -4771,6 +4934,7 @@ typedef enum _ENG_DEVICE_ATTRIBUTE {
      QDA_ACCELERATION_LEVEL = 1
  } ENG_DEVICE_ATTRIBUTE;
  

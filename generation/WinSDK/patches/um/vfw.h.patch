@@ -1,5 +1,5 @@
 diff --git a/um/vfw.h b/um/vfw.h
-index eb2800ad..dc80f55a 100644
+index eb2800ad..b5da18aa 100644
 --- a/um/vfw.h
 +++ b/um/vfw.h
 @@ -543,6 +543,7 @@ typedef struct {
@@ -50,7 +50,7 @@ index eb2800ad..dc80f55a 100644
  HIC
  VFWAPI
  ICOpenFunction(
-@@ -595,12 +601,14 @@ ICOpenFunction(
+@@ -595,6 +601,7 @@ ICOpenFunction(
      _In_ FARPROC lpfnHandler
      );
  
@@ -58,14 +58,7 @@ index eb2800ad..dc80f55a 100644
  LRESULT
  VFWAPI
  ICClose(
-     _In_ HIC hic
-     );
- 
-+_Win32_SupportedOS_Windows2000_
- LRESULT
- VFWAPI
- ICSendMessage(
-@@ -691,6 +699,7 @@ static DWORD dwICValue;
+@@ -691,6 +698,7 @@ static DWORD dwICValue;
   *  compress a single frame
   *
   */
@@ -73,7 +66,7 @@ index eb2800ad..dc80f55a 100644
  DWORD
  VFWAPIV
  ICCompress(
-@@ -768,6 +777,7 @@ ICCompress(
+@@ -768,6 +776,7 @@ ICCompress(
   */
  #define ICDECOMPRESS_HURRYUP    0x80000000L     // don't draw just buffer (hurry up!)
  
@@ -81,7 +74,7 @@ index eb2800ad..dc80f55a 100644
  DWORD
  VFWAPIV
  ICDecompress(
-@@ -996,6 +1006,7 @@ ICDecompressExQuery(
+@@ -996,6 +1005,7 @@ ICDecompressExQuery(
  #define ICDRAW_FULLSCREEN   0x00000002L   // draw to full screen
  #define ICDRAW_HDC          0x00000004L   // draw to a HDC/HWND
  
@@ -89,7 +82,7 @@ index eb2800ad..dc80f55a 100644
  DWORD
  VFWAPIV
  ICDrawBegin(
-@@ -1027,6 +1038,7 @@ ICDrawBegin(
+@@ -1027,6 +1037,7 @@ ICDrawBegin(
  #define ICDRAW_HURRYUP      0x80000000L   // don't draw just buffer (hurry up!)
  #define ICDRAW_UPDATE       0x40000000L   // don't draw just update screen
  
@@ -97,15 +90,7 @@ index eb2800ad..dc80f55a 100644
  DWORD
  VFWAPIV
  ICDraw(
-@@ -1159,6 +1171,7 @@ helper routines for DrawDib and MCIAVI...
- #define ICDrawOpen(fccType, fccHandler, lpbiIn) \
-     ICLocate(fccType, fccHandler, lpbiIn, NULL, ICMODE_DRAW)
- 
-+_Win32_SupportedOS_Windows2000_
- HIC
- VFWAPI
- ICLocate(
-@@ -1169,6 +1182,7 @@ ICLocate(
+@@ -1169,6 +1180,7 @@ ICLocate(
      _In_     WORD wFlags
      );
  
@@ -113,7 +98,7 @@ index eb2800ad..dc80f55a 100644
  HIC
  VFWAPI
  ICGetDisplayFormat(
-@@ -1184,6 +1198,7 @@ ICGetDisplayFormat(
+@@ -1184,6 +1196,7 @@ ICGetDisplayFormat(
  Higher level functions
  ************************************************************************/
  
@@ -121,7 +106,7 @@ index eb2800ad..dc80f55a 100644
  HANDLE
  VFWAPI
  ICImageCompress(
-@@ -1196,6 +1211,7 @@ ICImageCompress(
+@@ -1196,6 +1209,7 @@ ICImageCompress(
      _Inout_opt_  LONG FAR *          plSize      // compress to this size (0=whatever)
      );
  
@@ -129,7 +114,7 @@ index eb2800ad..dc80f55a 100644
  HANDLE
  VFWAPI
  ICImageDecompress(
-@@ -1238,6 +1254,7 @@ typedef struct {
+@@ -1238,6 +1252,7 @@ typedef struct {
  //
  //  allows user to choose compressor, quality etc...
  //
@@ -137,7 +122,7 @@ index eb2800ad..dc80f55a 100644
  BOOL
  VFWAPI
  ICCompressorChoose(
-@@ -1257,6 +1274,7 @@ ICCompressorChoose(
+@@ -1257,6 +1272,7 @@ ICCompressorChoose(
  						// can handle the input format
  						// or input data
  
@@ -145,7 +130,7 @@ index eb2800ad..dc80f55a 100644
  BOOL
  VFWAPI
  ICSeqCompressFrameStart(
-@@ -1264,12 +1282,14 @@ ICSeqCompressFrameStart(
+@@ -1264,12 +1280,14 @@ ICSeqCompressFrameStart(
      _In_ LPBITMAPINFO lpbiIn
      );
  
@@ -160,7 +145,7 @@ index eb2800ad..dc80f55a 100644
  LPVOID
  VFWAPI
  ICSeqCompressFrame(
-@@ -1280,6 +1300,7 @@ ICSeqCompressFrame(
+@@ -1280,6 +1298,7 @@ ICSeqCompressFrame(
      _Inout_opt_ LONG FAR               *plSize     // size to compress to/of returned image
      );
  
@@ -168,7 +153,7 @@ index eb2800ad..dc80f55a 100644
  void
  VFWAPI
  ICCompressorFree(
-@@ -1337,12 +1358,14 @@ extern BOOL VFWAPI DrawDibInit(void);			// ;Internal
+@@ -1337,12 +1356,14 @@ extern BOOL VFWAPI DrawDibInit(void);			// ;Internal
  **  DrawDibOpen()
  **
  */
@@ -183,7 +168,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1354,6 +1377,7 @@ DrawDibClose(
+@@ -1354,6 +1375,7 @@ DrawDibClose(
  ** DrawDibGetBuffer()
  **
  */
@@ -191,7 +176,7 @@ index eb2800ad..dc80f55a 100644
  extern
  LPVOID
  VFWAPI
-@@ -1375,6 +1399,7 @@ extern UINT VFWAPI DrawDibError(HDRAWDIB hdd);		// ;Internal
+@@ -1375,6 +1397,7 @@ extern UINT VFWAPI DrawDibError(HDRAWDIB hdd);		// ;Internal
  **  get the palette used for drawing DIBs
  **
  */
@@ -199,7 +184,7 @@ index eb2800ad..dc80f55a 100644
  extern
  HPALETTE
  VFWAPI
-@@ -1389,6 +1414,7 @@ DrawDibGetPalette(
+@@ -1389,6 +1412,7 @@ DrawDibGetPalette(
  **  get the palette used for drawing DIBs
  **
  */
@@ -207,7 +192,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1400,6 +1426,7 @@ DrawDibSetPalette(
+@@ -1400,6 +1424,7 @@ DrawDibSetPalette(
  /*
  **  DrawDibChangePalette()
  */
@@ -215,7 +200,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1416,6 +1443,7 @@ DrawDibChangePalette(
+@@ -1416,6 +1441,7 @@ DrawDibChangePalette(
  **  realize the palette in a HDD
  **
  */
@@ -223,7 +208,7 @@ index eb2800ad..dc80f55a 100644
  extern
  UINT
  VFWAPI
-@@ -1431,6 +1459,7 @@ DrawDibRealize(
+@@ -1431,6 +1457,7 @@ DrawDibRealize(
  **  start of streaming playback
  **
  */
@@ -231,7 +216,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1445,6 +1474,7 @@ DrawDibStart(
+@@ -1445,6 +1472,7 @@ DrawDibStart(
  **  start of streaming playback
  **
  */
@@ -239,7 +224,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1458,6 +1488,7 @@ DrawDibStop(
+@@ -1458,6 +1486,7 @@ DrawDibStop(
  **  prepare to draw
  **
  */
@@ -247,15 +232,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1478,6 +1509,7 @@ DrawDibBegin(
- **  actualy draw a DIB to the screen.
- **
- */
-+_Win32_SupportedOS_Windows2000_
- extern
- BOOL
- VFWAPI
-@@ -1508,6 +1540,7 @@ DrawDibDraw(
+@@ -1508,6 +1537,7 @@ DrawDibDraw(
  /*
  **  DrawDibEnd()
  */
@@ -263,7 +240,7 @@ index eb2800ad..dc80f55a 100644
  extern
  BOOL
  VFWAPI
-@@ -1528,6 +1561,7 @@ typedef struct {
+@@ -1528,6 +1558,7 @@ typedef struct {
      LONG    timeSetDIBits;
  }   DRAWDIBTIME, FAR *LPDRAWDIBTIME;
  
@@ -271,7 +248,7 @@ index eb2800ad..dc80f55a 100644
  BOOL
  VFWAPI
  DrawDibTime(
-@@ -1542,6 +1576,7 @@ DrawDibTime(
+@@ -1542,6 +1573,7 @@ DrawDibTime(
  #define PD_STRETCHDIB_1_2_OK    0x0008      /* ... */
  #define PD_STRETCHDIB_1_N_OK    0x0010      /* ... */
  
@@ -279,7 +256,7 @@ index eb2800ad..dc80f55a 100644
  LRESULT
  VFWAPI
  DrawDibProfileDisplay(
-@@ -2261,15 +2296,21 @@ DEFINE_AVIGUID(CLSID_AVIFile,           0x00020000, 0, 0);
+@@ -2261,15 +2293,21 @@ DEFINE_AVIGUID(CLSID_AVIFile,           0x00020000, 0, 0);
  // functions
  //
  
@@ -301,7 +278,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIFileOpenW       (_Outptr_ PAVIFILE FAR * ppfile, _In_ LPCWSTR szFile,
  			  UINT uMode, _In_opt_ LPCLSID lpHandler);
  #ifdef UNICODE
-@@ -2284,7 +2325,9 @@ STDAPI AVIFileOpen       (PAVIFILE FAR * ppfile, LPCSTR szFile,
+@@ -2284,7 +2322,9 @@ STDAPI AVIFileOpen       (PAVIFILE FAR * ppfile, LPCSTR szFile,
  #endif
  
  #ifdef _WIN32
@@ -311,7 +288,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIFileInfoA (_In_ PAVIFILE pfile, _Out_writes_bytes_(lSize) LPAVIFILEINFOA pfi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIFileInfo	AVIFileInfoW
-@@ -2297,11 +2340,14 @@ STDAPI AVIFileInfo (PAVIFILE pfile, LPAVIFILEINFO pfi, LONG lSize);
+@@ -2297,11 +2337,14 @@ STDAPI AVIFileInfo (PAVIFILE pfile, LPAVIFILEINFO pfi, LONG lSize);
  #endif
  
  
@@ -326,7 +303,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIFileCreateStreamA (_In_ PAVIFILE pfile, _Outptr_ PAVISTREAM FAR *ppavi, _In_ AVISTREAMINFOA FAR * psi);
  #ifdef UNICODE
  #define AVIFileCreateStream	AVIFileCreateStreamW
-@@ -2313,20 +2359,27 @@ STDAPI AVIFileCreateStream(PAVIFILE pfile, PAVISTREAM FAR *ppavi, AVISTREAMINFO
+@@ -2313,20 +2356,27 @@ STDAPI AVIFileCreateStream(PAVIFILE pfile, PAVISTREAM FAR *ppavi, AVISTREAMINFO
  #define AVIFileCreateStreamW AVIFileCreateStream	    /* ;Internal */
  #endif
  
@@ -354,26 +331,18 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTREAMINFOA psi, _In_ LONG lSize);
  #ifdef UNICODE
  #define AVIStreamInfo	AVIStreamInfoW
-@@ -2334,12 +2387,18 @@ STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTRE
- #define AVIStreamInfo	AVIStreamInfoA
- #endif
+@@ -2336,8 +2386,10 @@ STDAPI AVIStreamInfoA (_In_ PAVISTREAM pavi, _Out_writes_bytes_(lSize) LPAVISTRE
  
-+_Win32_SupportedOS_Windows2000_
  STDAPI_(LONG) AVIStreamFindSample(_In_ PAVISTREAM pavi, _In_ LONG lPos, _In_ LONG lFlags);
-+_Win32_SupportedOS_Windows2000_
  STDAPI AVIStreamReadFormat   (_In_ PAVISTREAM pavi, _In_ LONG lPos,_Out_writes_bytes_to_opt_(*lpcbFormat,*lpcbFormat) LPVOID lpFormat,_Inout_ LONG FAR *lpcbFormat);
 +_Win32_SupportedOS_Windows2000_
  STDAPI AVIStreamSetFormat    (_In_ PAVISTREAM pavi, _In_ LONG lPos,_In_reads_bytes_(cbFormat) LPVOID lpFormat, _In_ LONG cbFormat);
-+_Win32_SupportedOS_Windows2000_
  STDAPI AVIStreamReadData     (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _Out_writes_bytes_to_opt_(*lpcb, *lpcb) LPVOID lp, _Inout_ LONG FAR *lpcb);
 +_Win32_SupportedOS_Windows2000_
  STDAPI AVIStreamWriteData    (_In_ PAVISTREAM pavi, _In_ DWORD fcc, _In_reads_bytes_(cb) LPVOID lp, _In_ LONG cb);
  
-+_Win32_SupportedOS_Windows2000_
  STDAPI AVIStreamRead         (_In_ PAVISTREAM pavi,
- 			      _In_ LONG lStart,
- 			      _In_ LONG lSamples,
-@@ -2349,6 +2408,7 @@ STDAPI AVIStreamRead         (_In_ PAVISTREAM pavi,
+@@ -2349,6 +2401,7 @@ STDAPI AVIStreamRead         (_In_ PAVISTREAM pavi,
  			      _Out_opt_ LONG FAR * plSamples);
  #define AVISTREAMREAD_CONVENIENT	(-1L)
  
@@ -381,17 +350,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIStreamWrite        (_In_ PAVISTREAM pavi,
  			      _In_ LONG lStart, _In_ LONG lSamples,
  			      _In_reads_bytes_(cbBuffer) LPVOID lpBuffer, _In_ LONG cbBuffer, _In_ DWORD dwFlags,
-@@ -2357,21 +2417,30 @@ STDAPI AVIStreamWrite        (_In_ PAVISTREAM pavi,
- 
- // Right now, these just use AVIStreamInfo() to get information, then
- // return some of it.  Can they be more efficient?
-+_Win32_SupportedOS_Windows2000_
- STDAPI_(LONG) AVIStreamStart        (_In_ PAVISTREAM pavi);
-+_Win32_SupportedOS_Windows2000_
- STDAPI_(LONG) AVIStreamLength       (_In_ PAVISTREAM pavi);
-+_Win32_SupportedOS_Windows2000_
- STDAPI_(LONG) AVIStreamTimeToSample (_In_ PAVISTREAM pavi, _In_ LONG lTime);
-+_Win32_SupportedOS_Windows2000_
+@@ -2363,15 +2416,20 @@ STDAPI_(LONG) AVIStreamTimeToSample (_In_ PAVISTREAM pavi, _In_ LONG lTime);
  STDAPI_(LONG) AVIStreamSampleToTime (_In_ PAVISTREAM pavi, _In_ LONG lSample);
  
  
@@ -412,7 +371,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
  
  
-@@ -2381,9 +2450,11 @@ STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
+@@ -2381,9 +2439,11 @@ STDAPI AVIStreamGetFrameClose(_In_ PGETFRAME pg);
  
  
  // Shortcut function
@@ -424,7 +383,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
  			     _In_ DWORD fccType, _In_ LONG lParam,
  			     _In_ UINT mode, _In_opt_ CLSID FAR *pclsidHandler);
-@@ -2394,6 +2465,7 @@ STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
+@@ -2394,6 +2454,7 @@ STDAPI AVIStreamOpenFromFileW(_Outptr_ PAVISTREAM FAR *ppavi, LPCWSTR szFile,
  #endif
  
  // Use to create disembodied streams
@@ -432,7 +391,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ LONG lParam2,
  		       _In_opt_ CLSID FAR *pclsidHandler);
  
-@@ -2516,6 +2588,7 @@ STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ L
+@@ -2516,6 +2577,7 @@ STDAPI AVIStreamCreate(_Outptr_ PAVISTREAM FAR *ppavi, _In_ LONG lParam1, _In_ L
  #define comptypeDIB         mmioFOURCC('D', 'I', 'B', ' ')
  #endif
  
@@ -440,7 +399,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIMakeCompressedStream(
  		_Outptr_ PAVISTREAM FAR *	    ppsCompressed,
  		_In_ PAVISTREAM		    ppsSource,
-@@ -2530,6 +2603,7 @@ EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
+@@ -2530,6 +2592,7 @@ EXTERN_C HRESULT CDECL AVISaveA (LPCSTR               szFile,
  		_In_ LPAVICOMPRESSOPTIONS lpOptions,
  		...);
  
@@ -448,7 +407,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVISaveVA(LPCSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
-@@ -2544,6 +2618,7 @@ EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
+@@ -2544,6 +2607,7 @@ EXTERN_C HRESULT CDECL AVISaveW (LPCWSTR               szFile,
  		_In_ LPAVICOMPRESSOPTIONS lpOptions,
  		...);
  
@@ -456,7 +415,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVISaveVW(LPCWSTR               szFile,
  		_In_opt_ CLSID FAR *pclsidHandler,
  		_In_ AVISAVECALLBACK     lpfnCallback,
-@@ -2560,12 +2635,14 @@ STDAPI AVISaveVW(LPCWSTR               szFile,
+@@ -2560,12 +2624,14 @@ STDAPI AVISaveVW(LPCWSTR               szFile,
  
  
  
@@ -471,7 +430,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVISaveOptionsFree(int nStreams,
  			     _In_reads_(nStreams) LPAVICOMPRESSOPTIONS FAR *plpOptions);
  
-@@ -2575,17 +2652,21 @@ STDAPI AVISaveOptionsFree(int nStreams,
+@@ -2575,17 +2641,21 @@ STDAPI AVISaveOptionsFree(int nStreams,
  // These determine what the compression options dialog for video streams
  // will look like.
  
@@ -493,7 +452,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ PAVISTREAM FAR *ppstream);
  
  /****************************************************************************
-@@ -2594,10 +2675,13 @@ STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ P
+@@ -2594,10 +2664,13 @@ STDAPI AVIMakeStreamFromClipboard(UINT cfFormat, _In_ HANDLE hGlobal, _Outptr_ P
   *
   ***************************************************************************/
  
@@ -507,7 +466,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI AVIClearClipboard(void);
  
  /****************************************************************************
-@@ -2605,22 +2689,31 @@ STDAPI AVIClearClipboard(void);
+@@ -2605,22 +2678,31 @@ STDAPI AVIClearClipboard(void);
   *  Editing routines
   *
   ***************************************************************************/
@@ -539,7 +498,7 @@ index eb2800ad..dc80f55a 100644
  STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVISTREAMINFOA lpInfo, _In_ LONG cbInfo);
  #ifdef UNICODE
  #define EditStreamSetInfo	EditStreamSetInfoW
-@@ -2750,6 +2843,7 @@ STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVIST
+@@ -2750,6 +2832,7 @@ STDAPI EditStreamSetInfoA(_In_ PAVISTREAM pavi, _In_reads_bytes_(cbInfo) LPAVIST
  #define MCIWndSM SendMessage    /* SendMessage in C */
  #endif  /* __cplusplus */
  #define MCIWND_WINDOW_CLASS TEXT("MCIWndClass")
@@ -547,7 +506,7 @@ index eb2800ad..dc80f55a 100644
  HWND
  VFWAPIV
  MCIWndCreateA(
-@@ -2759,6 +2853,7 @@ MCIWndCreateA(
+@@ -2759,6 +2842,7 @@ MCIWndCreateA(
      _In_opt_ LPCSTR szFile
      );
  
@@ -555,7 +514,7 @@ index eb2800ad..dc80f55a 100644
  HWND
  VFWAPIV
  MCIWndCreateW(
-@@ -2773,6 +2868,7 @@ MCIWndCreateW(
+@@ -2773,6 +2857,7 @@ MCIWndCreateW(
  #else
  #define MCIWndCreate    MCIWndCreateA
  #endif
@@ -563,7 +522,7 @@ index eb2800ad..dc80f55a 100644
  BOOL VFWAPIV MCIWndRegisterClass(void);
  
  // Flags for the MCIWndOpen command
-@@ -3647,22 +3743,26 @@ typedef LRESULT (CALLBACK* CAPCONTROLCALLBACK)(_In_ HWND hWnd, _In_ int nState);
+@@ -3647,22 +3732,26 @@ typedef LRESULT (CALLBACK* CAPCONTROLCALLBACK)(_In_ HWND hWnd, _In_ int nState);
  //  The only exported functions from AVICAP.DLL
  // ------------------------------------------------------------------
  
@@ -590,7 +549,7 @@ index eb2800ad..dc80f55a 100644
  BOOL VFWAPI capGetDriverDescriptionW (UINT wDriverIndex,
          _Out_writes_(cbName) LPWSTR lpszName, _In_ int cbName,
          _Out_writes_(cbVer) LPWSTR lpszVer, _In_ int cbVer);
-@@ -3779,24 +3879,28 @@ extern "C" {            /* Assume C declarations for C++ */
+@@ -3779,24 +3868,28 @@ extern "C" {            /* Assume C declarations for C++ */
   ***************************************************************************/
  #ifdef OFN_READONLY
  
