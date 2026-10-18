@@ -1302,7 +1302,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations: annotations, sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics,
                 language: language);
             Assert.NotEmpty(before);
-            string[] nativeAfter = NormalizeInterfaceCarrierTypedefs(before, after, expected);
+            string[] nativeAfter = NormalizeInterfaceCarrierTypedefs(before, after, enabled ? expected : Array.Empty<string>());
             Assert.Equal(before, nativeAfter);
             int typeCarriers = after.Length - nativeAfter.Length;
             if (partition == "Shell" && header.Equals("inputpanelconfiguration.h", StringComparison.OrdinalIgnoreCase) &&
