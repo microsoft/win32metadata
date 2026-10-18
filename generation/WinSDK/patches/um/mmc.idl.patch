@@ -1,5 +1,5 @@
 diff --git a/um/mmc.idl b/um/mmc.idl
-index ad21af41..220a0679 100644
+index ad21af41..fe7495f0 100644
 --- a/um/mmc.idl
 +++ b/um/mmc.idl
 @@ -11,6 +11,7 @@
@@ -29,15 +29,16 @@ index ad21af41..220a0679 100644
  cpp_quote("EXTERN_C const CLSID CLSID_NodeManager;")
  
  cpp_quote("#if (MMC_VER >= 0x0120)")
-@@ -1023,6 +1024,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
+@@ -1023,6 +1024,8 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
  ///////////////////////////////////////////////////////////////////////////////
  //  Interfaces
  //
++_Win32_AnnotateInterface_(IComponent, _Win32_SupportedOS_WindowsVista_)
 +_Win32_AnnotateInterface_(IComponentData, _Win32_SupportedOS_WindowsVista_)
      [
          object,
          uuid(955AB28A-5218-11D0-A985-00C04FD8D565),
-@@ -1090,6 +1092,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
+@@ -1090,6 +1093,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
      };
  
  
@@ -45,7 +46,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(E8315A52-7A1A-11D0-A2D2-00C04FD909DD),
-@@ -1104,6 +1107,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
+@@ -1104,6 +1108,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
      }
  
  
@@ -53,7 +54,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(9CB396D8-EA83-11d0-AEF1-00C04FB6DD2C),
-@@ -1123,6 +1127,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
+@@ -1123,6 +1128,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
      }
  
  
@@ -61,7 +62,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(43136EB1-D36C-11CF-ADBC-00AA00A80033),
-@@ -1171,6 +1176,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
+@@ -1171,6 +1177,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
  
  
  
@@ -69,7 +70,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(43136EB3-D36C-11CF-ADBC-00AA00A80033),
-@@ -1367,6 +1373,7 @@ enum
+@@ -1367,6 +1374,7 @@ enum
  };
  
  
@@ -77,7 +78,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(43136EB7-D36C-11CF-ADBC-00AA00A80033),
-@@ -1391,6 +1398,7 @@ enum
+@@ -1391,6 +1399,7 @@ enum
  
  
  
@@ -85,7 +86,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(43136EB6-D36C-11CF-ADBC-00AA00A80033),
-@@ -1431,6 +1439,7 @@ enum
+@@ -1431,6 +1440,7 @@ enum
      };
  
  
@@ -93,7 +94,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(4F3B7A4F-CFAC-11CF-B8E3-00C04FD8D5B0),
-@@ -1477,6 +1486,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
+@@ -1477,6 +1487,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
  
  
  
@@ -101,7 +102,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(31DA5FA0-E0EB-11cf-9F21-00AA003CA9F6),
-@@ -1535,6 +1545,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
+@@ -1535,6 +1546,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
      };
  
  
@@ -109,7 +110,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(BEDEB620-F24D-11cf-8AFC-00AA003CA9F6),
-@@ -1570,6 +1581,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
+@@ -1570,6 +1582,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
      };
  
  
@@ -117,7 +118,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(255F18CC-65DB-11D1-A7DC-00C04FD8D565),
-@@ -1589,6 +1601,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
+@@ -1589,6 +1602,7 @@ cpp_quote("#endif // MMC_VER >= 0x0120")
  struct _PSP;
  typedef struct _PSP * HPROPSHEETPAGE;
  
@@ -125,7 +126,7 @@ index ad21af41..220a0679 100644
      [
          local,
          object,
-@@ -1606,6 +1619,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1606,6 +1620,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
          HRESULT RemovePage([in] HPROPSHEETPAGE  hPage);
      };
  
@@ -133,7 +134,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(85DE64DE-EF21-11cf-A285-00C04FD8DBE6),
-@@ -1632,6 +1646,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1632,6 +1647,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
          HRESULT Show([in] LONG_PTR window, [in] int page);
      };
  
@@ -141,7 +142,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(85DE64DC-EF21-11cf-A285-00C04FD8DBE6),
-@@ -1656,6 +1671,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1656,6 +1672,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
  
  
  
@@ -149,7 +150,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(69FB811E-6C1C-11D0-A2CB-00C04FD909DD),
-@@ -1676,6 +1692,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1676,6 +1693,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
          HRESULT Detach([in] LPUNKNOWN lpUnknown);
      };
  
@@ -157,7 +158,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(49506520-6F40-11D0-A98B-00C04FD8D565),
-@@ -1693,6 +1710,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1693,6 +1711,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
      };
  
  
@@ -165,7 +166,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(43136EB9-D36C-11CF-ADBC-00AA00A80033),
-@@ -1720,6 +1738,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1720,6 +1739,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
      };
  
  
@@ -173,7 +174,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(E49F7A60-74AF-11D0-A286-00C04FD8FE93),
-@@ -1741,6 +1760,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1741,6 +1761,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
      };
  
  
@@ -181,7 +182,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(1245208C-A151-11D0-A7D7-00C04FD909DD),
-@@ -1768,6 +1788,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1768,6 +1789,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
      };
  
  
@@ -189,7 +190,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(951ED750-D080-11d0-B197-000000000000),
-@@ -1790,6 +1811,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1790,6 +1812,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
      };
  
  
@@ -197,7 +198,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(A6B15ACE-DF59-11D0-A7DD-00C04FD909DD),
-@@ -1812,6 +1834,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
+@@ -1812,6 +1835,7 @@ typedef struct _PSP * HPROPSHEETPAGE;
  ////
  cpp_quote("#if (MMC_VER >= 0x0110)")
  
@@ -205,7 +206,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(B7A87232-4A51-11D1-A7EA-00C04FD909DD),
-@@ -1828,6 +1851,7 @@ cpp_quote("#if (MMC_VER >= 0x0110)")
+@@ -1828,6 +1852,7 @@ cpp_quote("#if (MMC_VER >= 0x0110)")
                                [out] BOOL* bStretch);
      };
  
@@ -213,7 +214,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(9757abb8-1b32-11d1-a7ce-00c04fd8d565),
-@@ -1847,6 +1871,7 @@ cpp_quote("#if (MMC_VER >= 0x0110)")
+@@ -1847,6 +1872,7 @@ cpp_quote("#if (MMC_VER >= 0x0110)")
      };
  
  
@@ -221,7 +222,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(4861A010-20F9-11d2-A510-00C04FB6DD2C),
-@@ -1930,6 +1955,7 @@ typedef struct _MMC_LISTPAD_INFO
+@@ -1930,6 +1956,7 @@ typedef struct _MMC_LISTPAD_INFO
  typedef DWORD MMC_STRING_ID;
  
  
@@ -229,7 +230,7 @@ index ad21af41..220a0679 100644
      [
          local,
          object,
-@@ -1954,6 +1980,7 @@ typedef DWORD MMC_STRING_ID;
+@@ -1954,6 +1981,7 @@ typedef DWORD MMC_STRING_ID;
  
  
  
@@ -237,7 +238,7 @@ index ad21af41..220a0679 100644
      [
          local,
          object,
-@@ -1989,6 +2016,7 @@ typedef DWORD MMC_STRING_ID;
+@@ -1989,6 +2017,7 @@ typedef DWORD MMC_STRING_ID;
      };
  
  
@@ -245,7 +246,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(103D842A-AA63-11D1-A7E1-00C04FD8D565),
-@@ -2008,6 +2036,7 @@ typedef DWORD MMC_STRING_ID;
+@@ -2008,6 +2037,7 @@ typedef DWORD MMC_STRING_ID;
      };
  
  
@@ -253,7 +254,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(cc593830-b926-11d1-8063-0000f875a9ce),
-@@ -2021,6 +2050,7 @@ typedef DWORD MMC_STRING_ID;
+@@ -2021,6 +2051,7 @@ typedef DWORD MMC_STRING_ID;
      };
  
  
@@ -261,7 +262,7 @@ index ad21af41..220a0679 100644
      [
          local,
          object,
-@@ -2041,6 +2071,7 @@ typedef DWORD MMC_STRING_ID;
+@@ -2041,6 +2072,7 @@ typedef DWORD MMC_STRING_ID;
      };
  
  
@@ -269,7 +270,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(DE40B7A4-0F65-11d2-8E25-00C04F8ECD78),
-@@ -2139,6 +2170,7 @@ typedef struct _MMC_SORT_SET_DATA
+@@ -2139,6 +2171,7 @@ typedef struct _MMC_SORT_SET_DATA
      MMC_SORT_DATA*   pSortData;   // Array of column data
  } MMC_SORT_SET_DATA;
  
@@ -277,7 +278,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(547C1354-024D-11d3-A707-00C04F8EF4CB),
-@@ -2172,6 +2204,7 @@ typedef struct _MMC_SORT_SET_DATA
+@@ -2172,6 +2205,7 @@ typedef struct _MMC_SORT_SET_DATA
              );
      };
  
@@ -285,7 +286,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(80F94174-FCCC-11d2-B991-00C04F8ECD78),
-@@ -2233,6 +2266,7 @@ typedef struct _MMC_SORT_SET_DATA
+@@ -2233,6 +2267,7 @@ typedef struct _MMC_SORT_SET_DATA
      } RDCOMPARE;
  
  
@@ -293,7 +294,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(96933476-0251-11d3-AEB0-00C04F8ECD78),
-@@ -2386,6 +2420,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2386,6 +2421,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -301,7 +302,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(CCA0F2D2-82DE-41B5-BF47-3B2076273D5C),
-@@ -2406,6 +2441,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2406,6 +2442,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -309,7 +310,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(79A2D615-4A10-4ED4-8C65-8633F9335095),
-@@ -2433,6 +2469,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2433,6 +2470,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -317,7 +318,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(E178BC0E-2ED0-4b5e-8097-42C9087E8B33),
-@@ -2462,6 +2499,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2462,6 +2500,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -325,7 +326,7 @@ index ad21af41..220a0679 100644
      [
          uuid(A8D2C5FE-CDCB-4b9d-BDE5-A27343FF54BC),
          helpstring("IMMCVersionInfo Interface"),
-@@ -2514,6 +2552,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2514,6 +2553,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -333,7 +334,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(89995CEE-D2ED-4c0e-AE5E-DF7E76F3FA53),
-@@ -2535,6 +2574,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2535,6 +2575,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -341,7 +342,7 @@ index ad21af41..220a0679 100644
     [
         object,
         uuid(34DD928A-7599-41E5-9F5E-D6BC3062C2DA),
-@@ -2554,6 +2594,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2554,6 +2595,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -349,7 +350,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(1cfbdd0e-62ca-49ce-a3af-dbb2de61b068),
-@@ -2576,6 +2617,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2576,6 +2618,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -357,7 +358,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(3333759f-fe4f-4975-b143-fec0a5dd6d65),
-@@ -2599,6 +2641,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2599,6 +2642,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -365,7 +366,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(15BC4D24-A522-4406-AA55-0749537A6865),
-@@ -2618,6 +2661,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2618,6 +2662,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
@@ -373,7 +374,7 @@ index ad21af41..220a0679 100644
      [
          object,
          uuid(4F85EFDB-D0E1-498c-8D4A-D010DFDD404F),
-@@ -2637,6 +2681,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
+@@ -2637,6 +2682,7 @@ const DWORD MMC_DEFAULT_OPERATION_COPY           = 0x0001;
      //
      //#######################################################################
      //#######################################################################
