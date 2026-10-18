@@ -417,6 +417,7 @@ static_assert(DISC_NO_FORCE == 64u);
         [NativeMigrationTheory]
         [MemberData(nameof(AuthoredAvailabilityHeaderControls))]
         [MemberData(nameof(AuthoredMonitorHeaderControls))]
+        [MemberData(nameof(AuthoredDhcpHeaderControls))]
         public void AuthoredAvailabilityHeadersPreserveNativeAbiAndSalWithExactMetadata(
             string partition, string header, string architecture, string target, string language, bool enabled, string[] expected)
         {
@@ -837,6 +838,27 @@ static_assert(DISC_NO_FORCE == 64u);
                             {
                                 partition, header,
                                 architecture.Item1, architecture.Item2, language, enabled, expected,
+                            };
+            }
+        }
+
+        public static IEnumerable<object[]> AuthoredDhcpHeaderControls()
+        {
+            foreach (var header in DhcpMigrationTests.HeaderContracts().GroupBy(contract => contract.Header))
+            {
+                string[] expected = header.SelectMany(contract => contract.Functions.Select(name =>
+                    name + "|SupportedOSPlatform(\"" + contract.OS + "\")")).ToArray();
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (string language in new[] { "c", "c++" })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                "Dhcp", header.Key, architecture.Item1, architecture.Item2, language, enabled, expected,
                             };
             }
         }

@@ -1,24 +1,30 @@
 diff --git a/um/DhcpCSdk.h b/um/DhcpCSdk.h
-index d044f5d1..62648f3a 100644
+index d044f5d1..8fd6323c 100644
 --- a/um/DhcpCSdk.h
 +++ b/um/DhcpCSdk.h
-@@ -215,6 +215,7 @@ typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
+@@ -215,18 +215,21 @@ typedef struct _DHCPCAPI_CLASSID {                // defines a client class id.
  #define     DHCPCAPI_REQUEST_CANCEL               0x08 // cancel request
  #define     DHCPCAPI_REQUEST_MASK                 0x0F // allowed flags..
  
-+_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_SupportedOS_Windows2000_
  DWORD
  APIENTRY
  DhcpCApiInitialize(
-@@ -240,6 +241,7 @@ DhcpRequestParams(                                // request parameters of clien
-     _Inout_ LPDWORD                pSize,         // i/p: size of above in BYTES, o/p required bytes..
-     _In_    LPWSTR                 RequestIdStr   // needed for persistent requests
- );  // returns ERROR_MORE_DATA if o/p buffer is of insufficient size, and fills in reqd size in # of bytes
-+_Win32_SupportedOS_END_()
+     OUT     LPDWORD                Version
+ );
  
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
- #pragma endregion
-@@ -247,6 +249,7 @@ DhcpRequestParams(                                // request parameters of clien
++_Win32_SupportedOS_Windows2000_
+ VOID
+ APIENTRY
+ DhcpCApiCleanup(
+     VOID
+ );
+ 
++_Win32_SupportedOS_Windows2000_
+ DWORD                                             // win32 status
+ APIENTRY
+ DhcpRequestParams(                                // request parameters of client
+@@ -247,6 +250,7 @@ DhcpRequestParams(                                // request parameters of clien
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -26,7 +32,7 @@ index d044f5d1..62648f3a 100644
  DWORD                                             // win32 status
  APIENTRY
  DhcpUndoRequestParams(                            // undo the effect of a persistent request -- currently undo from registry
-@@ -257,6 +260,7 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
+@@ -257,6 +261,7 @@ DhcpUndoRequestParams(                            // undo the effect of a persis
  );
  
  #define     DHCPCAPI_REGISTER_HANDLE_EVENT        0x01 // handle returned is to an event
@@ -34,19 +40,19 @@ index d044f5d1..62648f3a 100644
  DWORD                                             // win32 status
  APIENTRY
  DhcpRegisterParamChange(                          // notify if a parameter has changed
-@@ -269,6 +273,7 @@ DhcpRegisterParamChange(                          // notify if a parameter has c
+@@ -269,6 +274,7 @@ DhcpRegisterParamChange(                          // notify if a parameter has c
  );
  
  #define     DHCPCAPI_DEREGISTER_HANDLE_EVENT      0x01 // de-register handle that is an event
-+_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_SupportedOS_Windows2000_
  DWORD
  APIENTRY
  DhcpDeRegisterParamChange(                        // undo the registration
-@@ -282,6 +287,7 @@ APIENTRY
- DhcpRemoveDNSRegistrations(
-     VOID
-     );
-+_Win32_SupportedOS_END_()
+@@ -277,6 +283,7 @@ DhcpDeRegisterParamChange(                        // undo the registration
+     IN      LPVOID                 Event          // handle to event returned by DhcpRegisterParamChange.
+ );
  
++_Win32_SupportedOS_Windows2000_
  DWORD
  APIENTRY
+ DhcpRemoveDNSRegistrations(
