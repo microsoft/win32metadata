@@ -1,0 +1,28 @@
+diff --git a/um/dcomp.h b/um/dcomp.h
+index 6a7d19db..d63ff7e8 100644
+--- a/um/dcomp.h
++++ b/um/dcomp.h
+@@ -64,6 +64,7 @@ typedef interface IDCompositionVisual                    IDCompositionVisual;
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
++_Win32_SupportedOS_Windows8_
+ STDAPI DCompositionCreateDevice(
+     _In_opt_ IDXGIDevice *dxgiDevice,
+     _In_ REFIID iid,
+@@ -81,6 +82,7 @@ STDAPI DCompositionCreateDevice(
+ //      other DirectComposition objects.
+ //
+ //------------------------------------------------------------------------------
++_Win32_SupportedOS_Windows81_
+ STDAPI DCompositionCreateDevice2(
+     _In_opt_ IUnknown *renderingDevice,
+     _In_ REFIID iid,
+@@ -118,6 +120,7 @@ STDAPI DCompositionCreateDevice3(
+ //      with a visual.
+ //
+ //------------------------------------------------------------------------------
++_Win32_SupportedOS_Windows8_
+ STDAPI DCompositionCreateSurfaceHandle(
+     _In_ DWORD desiredAccess,
+     _In_opt_ SECURITY_ATTRIBUTES *securityAttributes,

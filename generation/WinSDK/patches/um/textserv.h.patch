@@ -1,0 +1,12 @@
+diff --git a/um/textserv.h b/um/textserv.h
+index b1c7fe0b..43e2429d 100644
+--- a/um/textserv.h
++++ b/um/textserv.h
+@@ -502,6 +502,7 @@ interface IRicheditUiaOverrides : public IUnknown
+ //------------------------------------------------------------------------
+ 
+ // Text Services factory
++_Win32_SupportedOS_WindowsVista_
+ STDAPI CreateTextServices(
+ 	IUnknown *punkOuter,
+ 	ITextHost *pITextHost,

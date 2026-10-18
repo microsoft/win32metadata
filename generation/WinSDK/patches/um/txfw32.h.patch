@@ -1,0 +1,31 @@
+diff --git a/um/txfw32.h b/um/txfw32.h
+index 17ecc1c7..cbc5b0e4 100644
+--- a/um/txfw32.h
++++ b/um/txfw32.h
+@@ -300,6 +300,8 @@ typedef struct _TXF_LOG_RECORD_AFFECTED_FILE {
+ extern "C" {
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogCreateFileReadContext (
+@@ -367,6 +369,8 @@ TxfLogCreateRangeReadContext (
+ 
+ */
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogDestroyReadContext (
+@@ -385,6 +389,8 @@ TxfLogDestroyReadContext (
+ */
+ 
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ TxfLogReadRecords (

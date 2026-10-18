@@ -4,3 +4,5 @@
 <IncludeRoot>/um/dcompanimation.h
 --namespace
 Windows.Win32.Graphics.DirectComposition
+--config
+parse-win32-annotations

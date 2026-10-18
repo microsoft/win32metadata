@@ -1,0 +1,92 @@
+diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
+index a2df1063..12e30721 100644
+--- a/um/ncryptprotect.h
++++ b/um/ncryptprotect.h
+@@ -175,6 +175,7 @@ DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE );
+ 
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptRegisterProtectionDescriptorName(
+@@ -218,6 +219,7 @@ NCryptRegisterProtectionDescriptorName(
+     
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptQueryProtectionDescriptorName(
+@@ -261,6 +263,7 @@ NCryptQueryProtectionDescriptorName(
+     NTE_BAD_TYPE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptCreateProtectionDescriptor(
+@@ -294,6 +297,7 @@ NCryptCreateProtectionDescriptor(
+     NTE_INVALID_HANDLE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptCloseProtectionDescriptor(
+@@ -355,6 +359,7 @@ NCryptCloseProtectionDescriptor(
+ //
+ #define NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING   0x00000001  // LPWSTR
+ 
++_Win32_SupportedOS_Windows8_
+ _Success_(return == 0)
+ _When_(dwInfoType == NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING,
+        _At_((LPWSTR*)ppvInfo, _Outptr_result_nullonfailure_))
+@@ -420,6 +425,7 @@ NCryptGetProtectionDescriptorInfo(
+     NTE_BAD_TYPE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptProtectSecret(
+@@ -498,6 +504,7 @@ NCryptProtectSecret(
+     no actual decryption will occur.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptUnprotectSecret(
+@@ -627,6 +634,7 @@ typedef struct NCRYPT_PROTECT_STREAM_INFO {
+     NTE_BAD_TYPE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptStreamOpenToProtect(
+@@ -672,6 +680,7 @@ NCryptStreamOpenToProtect(
+     NTE_DECRYPTION_FAILURE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptStreamOpenToUnprotect(
+@@ -837,6 +846,7 @@ NCryptStreamOpenToUnprotectEx(
+     NTE_DECRYPTION_FAILURE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptStreamUpdate(
+@@ -863,6 +873,7 @@ NCryptStreamUpdate(
+     NTE_INVALID_HANDLE
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ NCryptStreamClose(

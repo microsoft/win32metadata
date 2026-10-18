@@ -1,0 +1,95 @@
+diff --git a/um/wdstci.h b/um/wdstci.h
+index a055f544..9a6a01f9 100644
+--- a/um/wdstci.h
++++ b/um/wdstci.h
+@@ -220,12 +220,14 @@ typedef struct _WDS_TRANSPORTCLIENT_CALLBACKS
+ 
+ //----------------------------------------------------------------- Functions.
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientInitialize (
+     VOID
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientInitializeSession (
+@@ -234,6 +236,7 @@ WdsTransportClientInitializeSession (
+     _Out_ PHANDLE hSessionKey
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientRegisterCallback (
+@@ -242,12 +245,14 @@ WdsTransportClientRegisterCallback (
+     _In_ PVOID pfnCallback
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientStartSession (
+     _In_ HANDLE hSessionKey
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCompleteReceive (
+@@ -256,6 +261,7 @@ WdsTransportClientCompleteReceive (
+     _In_ PULARGE_INTEGER pullOffset
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCancelSession (
+@@ -269,6 +275,7 @@ WdsTransportClientCancelSessionEx (
+     _In_ DWORD dwErrorCode
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientWaitForCompletion (
+@@ -276,6 +283,7 @@ WdsTransportClientWaitForCompletion (
+     _In_ ULONG uTimeout
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientQueryStatus (
+@@ -284,24 +292,28 @@ WdsTransportClientQueryStatus (
+     _Out_ PULONG puErrorCode
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientCloseSession (
+     _In_ HANDLE hSessionKey
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientAddRefBuffer (
+     _In_ PVOID pvBuffer
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientReleaseBuffer (
+     _In_ PVOID pvBuffer
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WDSTCIAPI
+ WdsTransportClientShutdown (

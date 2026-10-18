@@ -2025,6 +2025,138 @@
       "sourceSha256": "8B98A194569E52CA87266B5A8D676CCBA67538CE7851571003DB8F7A606B0D2B",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\commdlg.h",
       "sdkSha256": "8B98A194569E52CA87266B5A8D676CCBA67538CE7851571003DB8F7A606B0D2B"
+    },
+    {
+      "path": "um\\dcomp.h",
+      "sourceSha256": "09539255B912F1072B276C6E33DD55FA80EB1A5C953C465E89A960F6E1D881D6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dcomp.h",
+      "sdkSha256": "09539255B912F1072B276C6E33DD55FA80EB1A5C953C465E89A960F6E1D881D6"
+    },
+    {
+      "path": "um\\d2d1.h",
+      "sourceSha256": "FCF7F870ACF11E1509B4CEC31D433602502B77D0A236E417304948A1CE7486A5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d2d1.h",
+      "sdkSha256": "FCF7F870ACF11E1509B4CEC31D433602502B77D0A236E417304948A1CE7486A5"
+    },
+    {
+      "path": "um\\debugapi.h",
+      "sourceSha256": "D63F6C4AAD9787BB8FF2E54966C8DB156B0EF1570BE58201D74DFF12CD6F1E22",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\debugapi.h",
+      "sdkSha256": "D63F6C4AAD9787BB8FF2E54966C8DB156B0EF1570BE58201D74DFF12CD6F1E22"
+    },
+    {
+      "path": "um\\enclaveapi.h",
+      "sourceSha256": "9467C4BC6400057C3D3205D53667000BE525CAD64A381552291E869430AF6A76",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\enclaveapi.h",
+      "sdkSha256": "9467C4BC6400057C3D3205D53667000BE525CAD64A381552291E869430AF6A76"
+    },
+    {
+      "path": "um\\txfw32.h",
+      "sourceSha256": "7794FE22BF8E39A887027CE21DA7B6A2F87CA3D918B2690EAE4C58DCD3B307DB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\txfw32.h",
+      "sdkSha256": "7794FE22BF8E39A887027CE21DA7B6A2F87CA3D918B2690EAE4C58DCD3B307DB"
+    },
+    {
+      "path": "winrt\\roerrorapi.h",
+      "sourceSha256": "0D24722C95A57E408F2F8DD099C6A5D68D5D1D3671F6D9DE2C6E5F38625A0E19",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\roerrorapi.h",
+      "sdkSha256": "0D24722C95A57E408F2F8DD099C6A5D68D5D1D3671F6D9DE2C6E5F38625A0E19"
+    },
+    {
+      "path": "um\\ncryptprotect.h",
+      "sourceSha256": "44E9841A5B0F7B452EAB7EA49F3555B192C509EEA784B3BB3F2C55E2C256ECE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ncryptprotect.h",
+      "sdkSha256": "44E9841A5B0F7B452EAB7EA49F3555B192C509EEA784B3BB3F2C55E2C256ECE7"
+    },
+    {
+      "path": "um\\wdstci.h",
+      "sourceSha256": "2D9338DE1980CD4C62ECED5DC9C99B7F562614ED034754AD3B2BC178E329ACE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wdstci.h",
+      "sdkSha256": "2D9338DE1980CD4C62ECED5DC9C99B7F562614ED034754AD3B2BC178E329ACE7"
+    },
+    {
+      "path": "um\\datetimeapi.h",
+      "sourceSha256": "A4325C76B9BC900C22EF3D766C739CCD3A71894E81833AD637D50F9E45417117",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\datetimeapi.h",
+      "sdkSha256": "A4325C76B9BC900C22EF3D766C739CCD3A71894E81833AD637D50F9E45417117"
+    },
+    {
+      "path": "um\\realtimeapiset.h",
+      "sourceSha256": "00C874B981A1242EE4EBC21E6AE96A69D7AA70662D820CEFFBABCFEA859B03E4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\realtimeapiset.h",
+      "sdkSha256": "00C874B981A1242EE4EBC21E6AE96A69D7AA70662D820CEFFBABCFEA859B03E4"
+    },
+    {
+      "path": "um\\winternl.h",
+      "sourceSha256": "A43424486349C38F697C009512DFE4EB8FCA733D7665AFAB42F50752170B9785",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winternl.h",
+      "sdkSha256": "A43424486349C38F697C009512DFE4EB8FCA733D7665AFAB42F50752170B9785"
+    },
+    {
+      "path": "um\\lzexpand.h",
+      "sourceSha256": "55E2FE7B987A83EEB10466A2F38411F406480362ACCCE187FDC222AF36656061",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lzexpand.h",
+      "sdkSha256": "55E2FE7B987A83EEB10466A2F38411F406480362ACCCE187FDC222AF36656061"
+    },
+    {
+      "path": "shared\\secext.h",
+      "sourceSha256": "22C2FDCFD609A59F8C1D4CF22A61E540896CE309AE1239CEF2B746E88CB84EF1",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\secext.h",
+      "sdkSha256": "22C2FDCFD609A59F8C1D4CF22A61E540896CE309AE1239CEF2B746E88CB84EF1"
+    },
+    {
+      "path": "um\\wct.h",
+      "sourceSha256": "0D060F9C7C5B55CDB046EB7712A422820BE2D6D8F3E17AA58EA4499E51BF3426",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wct.h",
+      "sdkSha256": "0D060F9C7C5B55CDB046EB7712A422820BE2D6D8F3E17AA58EA4499E51BF3426"
+    },
+    {
+      "path": "winrt\\roapi.h",
+      "sourceSha256": "07C564D33B64745ED92C5DCCF7915E4191083AEBE84A4C7D6A7C87561AB0245E",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\roapi.h",
+      "sdkSha256": "07C564D33B64745ED92C5DCCF7915E4191083AEBE84A4C7D6A7C87561AB0245E"
+    },
+    {
+      "path": "um\\handleapi.h",
+      "sourceSha256": "C967FDF1A98E4CE8D501DAE26B905F6452173B2BE1C25E6AA2E5EEAE415369CC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\handleapi.h",
+      "sdkSha256": "C967FDF1A98E4CE8D501DAE26B905F6452173B2BE1C25E6AA2E5EEAE415369CC"
+    },
+    {
+      "path": "um\\textserv.h",
+      "sourceSha256": "1D2561BDBB105BABBF603ABAF663F7CE3EE868ACFC5537597A7E93DF6D7DFE31",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\textserv.h",
+      "sdkSha256": "1D2561BDBB105BABBF603ABAF663F7CE3EE868ACFC5537597A7E93DF6D7DFE31"
+    },
+    {
+      "path": "um\\dpapi.h",
+      "sourceSha256": "A98783DA8086DEF831C97880296504468A043B01E7EB35E500A70198F33582BC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dpapi.h",
+      "sdkSha256": "A98783DA8086DEF831C97880296504468A043B01E7EB35E500A70198F33582BC"
+    },
+    {
+      "path": "um\\shellscalingapi.h",
+      "sourceSha256": "FC061CABF74C2E751E68D75067E29E3422706A0A5426DB6E7A3E89DCC3A2F7F4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shellscalingapi.h",
+      "sdkSha256": "FC061CABF74C2E751E68D75067E29E3422706A0A5426DB6E7A3E89DCC3A2F7F4"
+    },
+    {
+      "path": "um\\subauth.h",
+      "sourceSha256": "BF6205510532B12549CA0E175D052B07A98E3B576739D96884483D487EDF4AA8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\subauth.h",
+      "sdkSha256": "BF6205510532B12549CA0E175D052B07A98E3B576739D96884483D487EDF4AA8"
+    },
+    {
+      "path": "um\\fibersapi.h",
+      "sourceSha256": "F8EEADC28F8E3E4C7BFD1217D55315EB31D63F3D86C66A3948D74CEB8E7A00D0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fibersapi.h",
+      "sdkSha256": "F8EEADC28F8E3E4C7BFD1217D55315EB31D63F3D86C66A3948D74CEB8E7A00D0"
+    },
+    {
+      "path": "um\\fontsub.h",
+      "sourceSha256": "BDE9900E66673ADA4F8A31C1CE628A5D2C7400060AE2B3D0DB384495DE5806DD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fontsub.h",
+      "sdkSha256": "BDE9900E66673ADA4F8A31C1CE628A5D2C7400060AE2B3D0DB384495DE5806DD"
     }
   ],
   "midl": {
@@ -2933,7 +3065,9 @@
     "WebServicesOnDevices",
     "PrintTicket",
     "Variant",
-    "DlgBox"
+    "DlgBox",
+    "DirectComp",
+    "Enclave"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -3238,6 +3372,28 @@
     "um\\uxtheme.h.patch",
     "um\\shellapi.h.patch",
     "um\\avrt.h.patch",
-    "um\\commdlg.h.patch"
+    "um\\commdlg.h.patch",
+    "um\\dcomp.h.patch",
+    "um\\d2d1.h.patch",
+    "um\\debugapi.h.patch",
+    "um\\enclaveapi.h.patch",
+    "um\\txfw32.h.patch",
+    "winrt\\roerrorapi.h.patch",
+    "um\\ncryptprotect.h.patch",
+    "um\\wdstci.h.patch",
+    "um\\datetimeapi.h.patch",
+    "um\\realtimeapiset.h.patch",
+    "um\\winternl.h.patch",
+    "um\\lzexpand.h.patch",
+    "shared\\secext.h.patch",
+    "um\\wct.h.patch",
+    "winrt\\roapi.h.patch",
+    "um\\handleapi.h.patch",
+    "um\\textserv.h.patch",
+    "um\\dpapi.h.patch",
+    "um\\shellscalingapi.h.patch",
+    "um\\subauth.h.patch",
+    "um\\fibersapi.h.patch",
+    "um\\fontsub.h.patch"
   ]
 }

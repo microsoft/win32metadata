@@ -1690,11 +1690,23 @@ static_assert(DISC_NO_FORCE == 64u);
         [MemberData(nameof(DeviceBulkOriginalHeaderControls))]
         public void OriginalDeviceBulkHeadersPreserveNativeAbiSalAndBoundMetadata(
             string partition, string architecture, string target, string language, bool enabled)
+            => this.AssertOriginalDeviceHeaderControl(partition, architecture, target, language, enabled,
+                WinHttpMigrationTests.DeviceBulkOriginalHeaders().Single(owner => owner.Partition == partition).Headers);
+
+        [NativeMigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS")]
+        [MemberData(nameof(DeviceContinuationOriginalHeaderControls))]
+        public void OriginalDeviceContinuationHeadersPreserveNativeAbiSalAndBoundMetadata(
+            string partition, string architecture, string target, string language, bool enabled)
+            => this.AssertOriginalDeviceHeaderControl(partition, architecture, target, language, enabled,
+                WinHttpMigrationTests.DeviceContinuationOriginalHeaders().Single(owner => owner.Partition == partition)
+                    .Headers.Select(Path.GetFileName).ToArray());
+
+        private void AssertOriginalDeviceHeaderControl(string partition, string architecture, string target,
+            string language, bool enabled, string[] headers)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
             string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
-            string[] headers = WinHttpMigrationTests.DeviceBulkOriginalHeaders().Single(owner => owner.Partition == partition).Headers;
             string sourceText = null;
             if (language == "c")
             {
@@ -1786,6 +1798,18 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[] { owner.Partition, architecture.Item1, architecture.Item2, language, enabled };
         }
 
+        public static IEnumerable<object[]> DeviceContinuationOriginalHeaderControls()
+        {
+            foreach (var owner in WinHttpMigrationTests.DeviceContinuationOriginalHeaders())
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { owner.Partition, architecture.Item1, architecture.Item2, "c++", enabled };
+        }
+
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
@@ -1800,16 +1824,28 @@ static_assert(DISC_NO_FORCE == 64u);
                     "--language=" + language, "--std=" + standard, "--target=" + target,
                     "--include-directory=" + Path.Combine(root, "generation", "WinSDK", "inc"),
                 };
-            arguments.AddRange(partitionOptions.Where(line => line.StartsWith("<IncludeRoot>/", StringComparison.Ordinal))
-                .Select(line => Path.GetDirectoryName(Path.Combine(includeRoot, line.Substring("<IncludeRoot>/".Length).Replace('/', '\\'))))
-                .Distinct(StringComparer.OrdinalIgnoreCase)
-                .Select(directory => "--include-directory=" + directory));
-            arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
-                .Select(directory => "--include-directory=" + Path.Combine(includeRoot, directory)));
             string toolsetInclude = Environment.GetEnvironmentVariable("WINHTTP_NATIVE_TOOLSET_INCLUDE");
             Assert.True(!string.IsNullOrEmpty(toolsetInclude) && Directory.Exists(toolsetInclude),
                 "Set WINHTTP_NATIVE_TOOLSET_INCLUDE to the pinned MSVC include directory; ambient INCLUDE is not used.");
             arguments.Add("--include-directory=" + toolsetInclude);
+            string[] defaultIncludes = new[] { "shared", "um", "winrt", "ucrt" }
+                .Select(directory => Path.Combine(includeRoot, directory)).ToArray();
+            bool traverse = false;
+            foreach (string line in partitionOptions.Select(value => value.Trim()))
+            {
+                if (line.StartsWith("--", StringComparison.Ordinal))
+                    traverse = line == "--traverse";
+                else if (traverse && line.StartsWith("<IncludeRoot>", StringComparison.Ordinal))
+                {
+                    string parent = Path.GetDirectoryName(line.Replace("<IncludeRoot>", includeRoot, StringComparison.Ordinal)
+                        .Replace('/', Path.DirectorySeparatorChar));
+                    string option = "--include-directory=" + parent;
+                    if (!defaultIncludes.Contains(parent, StringComparer.OrdinalIgnoreCase) &&
+                        !arguments.Contains(option, StringComparer.OrdinalIgnoreCase))
+                        arguments.Add(option);
+                }
+            }
+            arguments.AddRange(defaultIncludes.Select(directory => "--include-directory=" + directory));
             if (cInterface)
                 arguments.Add("-DCINTERFACE=1");
             string settings = Path.Combine(root, "sources", "GeneratorSdk", "tools", "assets", "scraper");

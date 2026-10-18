@@ -11,6 +11,8 @@ using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using MetadataTasks;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -1090,26 +1092,35 @@ namespace Win32MetadataScraperTests
 
         [Fact]
         public void DeviceBulkAvailabilityPatchesUseOriginalHeadersAndSharedPreparation()
+            => AssertOriginalDeviceHeaderPatches(DeviceBulkOriginalHeaders()
+                .Select(owner => (owner.Partition, owner.Headers.Select(header => "um\\" + header).ToArray())), 25);
+
+        [Fact]
+        public void DeviceContinuationAvailabilityPatchesUseOriginalHeadersAndSharedPreparation()
+            => AssertOriginalDeviceHeaderPatches(DeviceContinuationOriginalHeaders(), 22);
+
+        private static void AssertOriginalDeviceHeaderPatches(
+            IEnumerable<(string Partition, string[] Headers)> owners, int expectedOriginals)
         {
             string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
             string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray()
                 .Select(value => value.GetString()).ToArray();
-            string[] headers = DeviceBulkOriginalHeaders().SelectMany(owner => owner.Headers).ToArray();
-            Assert.Equal(25, headers.Distinct(StringComparer.Ordinal).Count());
+            string[] headers = owners.SelectMany(owner => owner.Headers).ToArray();
+            Assert.Equal(expectedOriginals, headers.Distinct(StringComparer.Ordinal).Count());
             foreach (string header in headers)
             {
-                string path = "um\\" + header + ".patch";
+                string path = header + ".patch";
                 Assert.Single(patches.Where(value => value == path));
                 string text = File.ReadAllText(Path.Combine(root, "patches", path));
-                Assert.Contains("--- a/um/" + header, text);
+                Assert.Contains("--- a/" + header.Replace('\\', '/'), text);
                 Assert.DoesNotContain("RecompiledIdlHeaders", text);
                 Assert.DoesNotContain("+#include <win32metadata_annotations.h>", text);
                 Assert.Contains(text.Split('\n'), line => line.StartsWith("+", StringComparison.Ordinal) &&
                     (line.Contains("_Win32_SupportedOS_", StringComparison.Ordinal) ||
                         line.Contains("_Win32_SetLastError_", StringComparison.Ordinal)));
             }
-            foreach (var owner in DeviceBulkOriginalHeaders())
+            foreach (var owner in owners)
                 Assert.Contains("parse-win32-annotations",
                     File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
         }
@@ -1130,6 +1141,100 @@ namespace Win32MetadataScraperTests
             yield return ("Variant", new[] { "propvarutil.h" });
             yield return ("WebServicesOnDevices", new[] { "wsdutil.h" });
             yield return ("WinAuto", new[] { "uiautomationcoreapi.h" });
+        }
+
+        internal static IEnumerable<(string Partition, string[] Headers)> DeviceContinuationOriginalHeaders()
+        {
+            yield return ("Controls.RichEdit", new[] { "um\\textserv.h" });
+            yield return ("Debug", new[] { "um\\debugapi.h", "um\\wct.h" });
+            yield return ("Direct2D", new[] { "um\\d2d1.h" });
+            yield return ("DirectComp", new[] { "um\\dcomp.h" });
+            yield return ("Enclave", new[] { "um\\enclaveapi.h" });
+            yield return ("Foundation", new[] { "um\\handleapi.h" });
+            yield return ("Fs", new[] { "um\\lzexpand.h", "um\\txfw32.h" });
+            yield return ("Gdi", new[] { "um\\fontsub.h" });
+            yield return ("Identity", new[] { "shared\\secext.h", "um\\subauth.h" });
+            yield return ("Intl", new[] { "um\\datetimeapi.h" });
+            yield return ("Security.Cryptography", new[] { "um\\ncryptprotect.h", "um\\dpapi.h" });
+            yield return ("Shell", new[] { "um\\shellscalingapi.h" });
+            yield return ("Threading", new[] { "um\\fibersapi.h" });
+            yield return ("Wds", new[] { "um\\wdstci.h" });
+            yield return ("WinProg", new[] { "um\\realtimeapiset.h", "um\\winternl.h" });
+            yield return ("WinRT", new[] { "winrt\\roapi.h", "winrt\\roerrorapi.h" });
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS", "WINHTTP_DEVICE_GENERATED_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualConvertedDeviceFactsReachNormalGeneratedSources(string architecture)
+        {
+            string generated = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_GENERATED_ROOT");
+            var methods = new[] { "common", architecture }
+                .SelectMany(folder => Directory.Exists(Path.Combine(generated, folder))
+                    ? Directory.EnumerateFiles(Path.Combine(generated, folder), "*.cs") : Array.Empty<string>())
+                .SelectMany(path => CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot().DescendantNodes()
+                    .OfType<MethodDeclarationSyntax>())
+                .Where(method => method.Modifiers.Any(token => token.ValueText == "extern"))
+                .ToLookup(method => method.Identifier.ValueText, StringComparer.Ordinal);
+            using var contracts = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_BATCH_CONTRACTS")));
+            var unmapped = new HashSet<string>(StringComparer.Ordinal);
+            int checkedFacts = 0;
+            int nativeAliases = 0;
+            foreach (var fact in contracts.RootElement.GetProperty("facts").EnumerateArray())
+            {
+                string status = fact.GetProperty("status").GetString();
+                Assert.Contains(status, new[] { "converted", "retained" });
+                if (status == "retained")
+                {
+                    Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+                    continue;
+                }
+                string name = fact.GetProperty("symbol").GetString();
+                string authoredName = name;
+                if (architecture == "x86" && name == "FlatSB_GetScrollPropPtr")
+                {
+                    Assert.Matches(@"(?s)#ifdef _WIN64\s+WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr" +
+                        @"\(HWND, int propIndex, PINT_PTR\);\s+#else\s+#define FlatSB_GetScrollPropPtr\s+FlatSB_GetScrollProp\s+#endif",
+                        File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "RecompiledIdlHeaders", "um", "commctrl.h")));
+                    Assert.Empty(methods[name]);
+                    name = "FlatSB_GetScrollProp";
+                    nativeAliases++;
+                }
+                var declarations = methods[name].ToArray();
+                Assert.True(declarations.Length > 0, $"Converted native fact has no generated declaration: {name}/{architecture}.");
+                foreach (var method in declarations)
+                {
+                    var attributes = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+                    var import = Assert.Single(attributes.Where(attribute => AttributeIs(attribute, "DllImport")));
+                    if (Assert.IsType<LiteralExpressionSyntax>(import.ArgumentList.Arguments[0].Expression).Token.ValueText.Length == 0)
+                        unmapped.Add(name);
+                    string category = fact.GetProperty("category").GetString();
+                    Assert.Contains(category, new[] { "supportedOS", "setLastError" });
+                    if (category == "supportedOS")
+                    {
+                        var floors = attributes.Where(attribute => AttributeIs(attribute, "SupportedOSPlatform")).ToArray();
+                        Assert.True(floors.Length == 1, $"{name}/{architecture}: expected one OS floor, found {floors.Length}.");
+                        Assert.Equal(fact.GetProperty("value").GetString(), authoredName + "=SupportedOSPlatform" + floors[0].ArgumentList);
+                    }
+                    else
+                    {
+                        var lastError = Assert.Single(import.ArgumentList.Arguments.Where(argument =>
+                            argument.NameEquals?.Name.Identifier.ValueText == "SetLastError"));
+                        Assert.Equal("true", lastError.Expression.ToString());
+                    }
+                }
+                checkedFacts++;
+            }
+            Assert.True(checkedFacts > 0);
+            this.output.WriteLine($"{architecture}: {checkedFacts} exact converted facts reached normal generated sources " +
+                $"({nativeAliases} native conditional aliases); " +
+                $"{unmapped.Count} imports remain unmapped and are not emitter-qualified: " +
+                string.Join(", ", unmapped.OrderBy(value => value, StringComparer.Ordinal)));
+
+            static bool AttributeIs(AttributeSyntax attribute, string name)
+                => attribute.Name.ToString() == name || attribute.Name.ToString().EndsWith("." + name, StringComparison.Ordinal);
         }
 
         internal static IEnumerable<(string Header, string Partition, string OS, string[] Functions)> AuthoredDeviceFamilyHeaderContracts()

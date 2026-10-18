@@ -1,0 +1,48 @@
+diff --git a/um/handleapi.h b/um/handleapi.h
+index 0036bec5..afbe348b 100644
+--- a/um/handleapi.h
++++ b/um/handleapi.h
+@@ -32,6 +32,8 @@ extern "C" {
+ //
+ // Prototypes
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -39,6 +41,8 @@ CloseHandle(
+     _In_ _Post_ptr_invalid_ HANDLE hObject
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -58,6 +62,7 @@ DuplicateHandle(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -72,6 +77,8 @@ CompareObjectHandles(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -80,6 +87,8 @@ GetHandleInformation(
+     _Out_ LPDWORD lpdwFlags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI

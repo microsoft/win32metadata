@@ -1,0 +1,20 @@
+diff --git a/um/fontsub.h b/um/fontsub.h
+index a58d255c..4564da09 100644
+--- a/um/fontsub.h
++++ b/um/fontsub.h
+@@ -26,6 +26,7 @@ typedef void *(__cdecl *CFP_ALLOCPROC)(size_t);
+ typedef void *(__cdecl *CFP_REALLOCPROC)(void *, size_t);
+ typedef void (__cdecl *CFP_FREEPROC)(void *);
+ 
++_Win32_SupportedOS_WindowsXP_
+ unsigned long __cdecl CreateFontPackage(
+ 	CONST unsigned char * puchSrcBuffer, /* input TTF or TTC buffer */
+ 	CONST unsigned long ulSrcBufferSize, /* size of input TTF or TTC buffer data */
+@@ -71,6 +72,7 @@ unsigned long __cdecl CreateFontPackage(
+ #define TTFCFP_FLAGS_TTC 0x0004  /* if bit off, its a TTF */
+ #define TTFCFP_FLAGS_GLYPHLIST 0x0008 /* if bit off, list is characters */
+ 
++_Win32_SupportedOS_WindowsXP_
+ unsigned long __cdecl MergeFontPackage(CONST unsigned char * puchMergeFontBuffer, /* buffer containing font to merge with */
+ 			CONST unsigned long ulMergeFontBufferSize,	/* size of buffer containing font to merge with */
+ 			CONST unsigned char * puchFontPackageBuffer, /* buffer containing a font package to merge with the MergeFontBuffer */

@@ -1,0 +1,36 @@
+diff --git a/um/subauth.h b/um/subauth.h
+index 227870b8..9c737ad8 100644
+--- a/um/subauth.h
++++ b/um/subauth.h
+@@ -302,6 +302,7 @@ typedef struct _NETLOGON_TARGET_INFO {
+ #define MSV1_0_GUEST_LOGON  0x02
+ #define MSV1_0_KERBEROS_LOGON  0x04
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutine(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+@@ -347,6 +348,7 @@ typedef struct _MSV1_0_VALIDATION_INFO {
+ #define MSV1_0_SUBAUTH_ACCOUNT_TYPE            0x00000040
+ #define MSV1_0_SUBAUTH_LOCKOUT                 0x00000080
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutineEx(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+@@ -358,6 +360,7 @@ Msv1_0SubAuthenticationRoutineEx(
+     OUT PULONG ActionsPerformed
+ );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationRoutineGeneric(
+     IN PVOID SubmitBuffer,
+@@ -366,6 +369,7 @@ Msv1_0SubAuthenticationRoutineGeneric(
+     OUT PVOID *ReturnBuffer
+ );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS NTAPI
+ Msv1_0SubAuthenticationFilter(
+     IN NETLOGON_LOGON_INFO_CLASS LogonLevel,

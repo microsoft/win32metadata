@@ -1,0 +1,28 @@
+diff --git a/winrt/roapi.h b/winrt/roapi.h
+index d7429649..e686bd88 100644
+--- a/winrt/roapi.h
++++ b/winrt/roapi.h
+@@ -107,6 +107,7 @@ RoGetActivationFactory(
+ typedef interface IApartmentShutdown IApartmentShutdown;
+ DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -117,6 +118,7 @@ RoRegisterForApartmentShutdown(
+     _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -125,6 +127,7 @@ RoUnregisterForApartmentShutdown(
+     _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ _Check_return_
+ HRESULT

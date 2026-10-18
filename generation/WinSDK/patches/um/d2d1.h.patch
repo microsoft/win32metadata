@@ -1,0 +1,34 @@
+diff --git a/um/d2d1.h b/um/d2d1.h
+index 86eb97eb..619eb682 100644
+--- a/um/d2d1.h
++++ b/um/d2d1.h
+@@ -3672,6 +3672,7 @@ extern "C"
+         );
+ 
+ 
++    _Win32_SupportedOS_Windows7_
+     void WINAPI
+     D2D1MakeRotateMatrix(
+         _In_ FLOAT angle,
+@@ -3679,6 +3680,7 @@ extern "C"
+         _Out_ D2D1_MATRIX_3X2_F *matrix
+         );
+ 
++    _Win32_SupportedOS_Windows7_
+     void WINAPI
+     D2D1MakeSkewMatrix(
+         _In_ FLOAT angleX,
+@@ -3687,11 +3689,13 @@ extern "C"
+         _Out_ D2D1_MATRIX_3X2_F *matrix
+         );
+ 
++    _Win32_SupportedOS_Windows7_
+     BOOL WINAPI
+     D2D1IsMatrixInvertible(
+         _In_ CONST D2D1_MATRIX_3X2_F *matrix
+         );
+ 
++    _Win32_SupportedOS_Windows7_
+     BOOL WINAPI
+     D2D1InvertMatrix(
+         _Inout_ D2D1_MATRIX_3X2_F *matrix

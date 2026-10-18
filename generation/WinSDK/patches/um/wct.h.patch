@@ -1,0 +1,38 @@
+diff --git a/um/wct.h b/um/wct.h
+index 84abdf2d..f1f3be84 100644
+--- a/um/wct.h
++++ b/um/wct.h
+@@ -105,6 +105,8 @@ typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
+ #define WCT_ASYNC_OPEN_FLAG 0x1
+ #define WCTP_OPEN_ALL_FLAGS (WCT_ASYNC_OPEN_FLAG)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ WINADVAPI
+ HWCT WINAPI
+@@ -113,6 +115,7 @@ OpenThreadWaitChainSession (
+     _In_opt_ PWAITCHAINCALLBACK callback
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINADVAPI
+ VOID WINAPI
+ CloseThreadWaitChainSession (
+@@ -125,6 +128,8 @@ CloseThreadWaitChainSession (
+ #define WCT_NETWORK_IO_FLAG      0x8
+ #define WCTP_GETINFO_ALL_FLAGS (WCT_OUT_OF_PROC_FLAG|WCT_OUT_OF_PROC_COM_FLAG|WCT_OUT_OF_PROC_CS_FLAG)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ _Check_return_
+ WINADVAPI
+ BOOL WINAPI
+@@ -141,6 +146,7 @@ GetThreadWaitChain (
+ typedef HRESULT (*PCOGETCALLSTATE)(int, PULONG);
+ typedef HRESULT (*PCOGETACTIVATIONSTATE)(GUID, DWORD, DWORD*);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINADVAPI
+ VOID WINAPI
+ RegisterWaitChainCOMCallback (
