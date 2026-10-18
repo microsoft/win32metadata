@@ -3831,6 +3831,12 @@
       "sourceSha256": "D13140FA26FFE55C788D81A17B7CCFA21B0410456C0D84CAB4818FE58C61625E",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\netcfgn.idl",
       "sdkSha256": "34DC1B54CDDBB9EE72454DB49DAA0C0C1E2303DB64E86B7A7ECF7AACFB8C9151"
+    },
+    {
+      "path": "um\\oledb.h",
+      "sourceSha256": "DEA54A3F28F230F257BA0E3E663AF2FEA321B812A84465794F2702F94EB1ED3A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\oledb.idl",
+      "sdkSha256": "023D3F0D92178E635C3EF818BB7E9A3B6B3F5D9E4EBD8F7E9D68E1DCD8991437"
     }
   ],
   "midl": {
@@ -5568,6 +5574,431 @@
         "path": "um\\xmllite.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\xmllite.idl",
         "sdkSha256": "F2A4DFDA73C7FF458433B48625440D01CD6E684947672D37D04AD82E14499F62"
+      },
+      {
+        "path": "um\\access.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\access.idl",
+        "sdkSha256": "56993B453918DD5D8A1CF74279456DC9A23D7709BDF0CA6912B07DF8E41F5C41"
+      },
+      {
+        "path": "um\\altidx.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\altidx.idl",
+        "sdkSha256": "DD999121CD81DCB7FF2C46F2BBAE064FE414FF5ED851A8374288F29FFF37D7D7"
+      },
+      {
+        "path": "um\\alttab.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\alttab.idl",
+        "sdkSha256": "060800607FB0808BF577219CD2472B688E54EDCD2035DFFD6DD1AC409C69FECF"
+      },
+      {
+        "path": "um\\asynot.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\asynot.idl",
+        "sdkSha256": "EAF82C0AE7C922B5127DD2F6B55A8434DA39BB36AD2E61E482276849FEC50E3E"
+      },
+      {
+        "path": "um\\asysta.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\asysta.idl",
+        "sdkSha256": "0E43CCF7B33C3CB70275B2537CFA9D7EC1EFF67EB5E96602357A4014C592228F"
+      },
+      {
+        "path": "um\\binres.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\binres.idl",
+        "sdkSha256": "F4F498338B6FF7465D9FA3BC3F5652D1F89BF8BB0BBE718EDA287342DDBD9602"
+      },
+      {
+        "path": "um\\chprst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\chprst.idl",
+        "sdkSha256": "9DF307740CF469182F1D9A28F84234FABA8BFD625CFAB286711F583B0F8FDF2B"
+      },
+      {
+        "path": "um\\clinf2.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\clinf2.idl",
+        "sdkSha256": "1003DDD96AE596F58A62B713B6EFC808DC5BCCBC098647478BA905E8D5B13D3A"
+      },
+      {
+        "path": "um\\cmdbas.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdbas.idl",
+        "sdkSha256": "175E7A5C9EA1B066CFEC7F86A6C1BC1505881450647F93E2BFECE779A44AD741"
+      },
+      {
+        "path": "um\\cmdpre.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdpre.idl",
+        "sdkSha256": "CDA34A161C2503638628D510BA93B13C12A00181F9CE3F7C4CCC9759D7DE1B3D"
+      },
+      {
+        "path": "um\\cmdprp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdprp.idl",
+        "sdkSha256": "280DD084CD16029E22FCA745C022A50EA132270A256B38018E136BFD79CAE12E"
+      },
+      {
+        "path": "um\\cmdprst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdprst.idl",
+        "sdkSha256": "5040CDAD23070685D4115C0ADFA1178C6493B5D0B6C9A969D223FC5FCE3F3C56"
+      },
+      {
+        "path": "um\\cmdstrm.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdstrm.idl",
+        "sdkSha256": "42480E0749BAAE65DFF38D33197D725FEB2BD00201AE525EF59F61D205D2BF45"
+      },
+      {
+        "path": "um\\cmdtxt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdtxt.idl",
+        "sdkSha256": "023486A6E31FBD9466E21327F02694F9E5944E618C7F649123F2582C6904E505"
+      },
+      {
+        "path": "um\\cmdwpr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdwpr.idl",
+        "sdkSha256": "DC29203EA636AE55DBAF4D745040C1341BF3BB42EDC73A7A435BC98DA50FD785"
+      },
+      {
+        "path": "um\\colinf.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\colinf.idl",
+        "sdkSha256": "C65621847645FD5C20A1BC35D5EB6078D36EE235969444CB208A7AC9BE1AECE9"
+      },
+      {
+        "path": "um\\colrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\colrst.idl",
+        "sdkSha256": "BACC9FEA96C60FD2DBBE377F74559F1C061EBEF5653FC57356C73BD90D2DAF30"
+      },
+      {
+        "path": "um\\crtrow.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\crtrow.idl",
+        "sdkSha256": "AC091BE2C5B35F97F01F8FAB6948C2F27CADBD4227A668D20F1FA09642F97C66"
+      },
+      {
+        "path": "um\\cvttyp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cvttyp.idl",
+        "sdkSha256": "B08C7E60AB13E83609B011F3FF6487A0887CB5EB5C7A6F929B2A4896B2597E4E"
+      },
+      {
+        "path": "um\\dbccmd.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbccmd.idl",
+        "sdkSha256": "94209B3FF82C6851F2C55E5CD69CFF376291EF1942F54B06080EA1B11D9E3E4A"
+      },
+      {
+        "path": "um\\dbcses.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbcses.idl",
+        "sdkSha256": "2AA5DEE29B8FE20CCF9E9770ED6E4A0997B382E85AD243A08735E9997F74A176"
+      },
+      {
+        "path": "um\\dbdsad.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbdsad.idl",
+        "sdkSha256": "7394B0D5D6220803AF345E531B69845010B34B730A3BC994F69919A4DC1CEE44"
+      },
+      {
+        "path": "um\\dbinfo.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbinfo.idl",
+        "sdkSha256": "2A203B63F89ABFC99F20BF679A7F38B2EC46A4485E843C1F9401A9652E597C7F"
+      },
+      {
+        "path": "um\\dbinit.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbinit.idl",
+        "sdkSha256": "E58ECD74417ABDF908C07C89D1DD2D845A3EC40137C5EB09380EA4AC1631B913"
+      },
+      {
+        "path": "um\\dbprop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbprop.idl",
+        "sdkSha256": "9A47E71D08C8DAE58D256999DCCEC617D71BE39C9359D7E562EA1917A457D99F"
+      },
+      {
+        "path": "um\\dbrtpr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbrtpr.idl",
+        "sdkSha256": "514FE20F22E5CA908CCD8FC4CD209657F30352DE80184A397C5945D3140D37A9"
+      },
+      {
+        "path": "um\\dbs.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbs.idl",
+        "sdkSha256": "BBE31F6E6885C4AF99C4845AD7FE30B416448EF4629F53B3D7BACB6C152FE0C5"
+      },
+      {
+        "path": "um\\dbsrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbsrst.idl",
+        "sdkSha256": "3EF3E994D1DCA83116BD65A2565AE38255CA5B0F8C53EFC79277533DFB363185"
+      },
+      {
+        "path": "um\\errlup.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\errlup.idl",
+        "sdkSha256": "94EF49AD6B08EB9CD3FA1F7681BD774EC852820B61D1566C8185C91B49BACAF9"
+      },
+      {
+        "path": "um\\errrec.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\errrec.idl",
+        "sdkSha256": "EDADE7ED47124E2E1DDF4BE526DC435E72CC9B608E3A895455BFD5EDB5A93C8D"
+      },
+      {
+        "path": "um\\getdts.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\getdts.idl",
+        "sdkSha256": "DA464B045728E420E629CC5F09F54EB0AFFFD216820C40DEF9442F98BDD84C34"
+      },
+      {
+        "path": "um\\getrow.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\getrow.idl",
+        "sdkSha256": "6A910FF18EC25D52A0BB14A331BC1B8EB052899195CC8C8FC111999E458EF91B"
+      },
+      {
+        "path": "um\\getses.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\getses.idl",
+        "sdkSha256": "07013EF0708629CEA370BBDFEAE5436BA1A6603768392F53413B7059C83622D2"
+      },
+      {
+        "path": "um\\getsrw.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\getsrw.idl",
+        "sdkSha256": "37F6DE9E436431F2E14FCF1423AA82A05F89187FF87F846BE420661F31159D8F"
+      },
+      {
+        "path": "um\\idlmulti.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\idlmulti.h",
+        "sdkSha256": "CDCBD5395469AF4C7665A3C7B62984A5529DA375EBFCACC50C1C8173D89C804E"
+      },
+      {
+        "path": "um\\inddef.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\inddef.idl",
+        "sdkSha256": "2AC64B8FD5184208C2A61EFBB333B0F7248ED27D1A92A0098558F2DEB8BD88B4"
+      },
+      {
+        "path": "um\\mddset.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mddset.idl",
+        "sdkSha256": "66AA06F6CFADBDD56634E184C66983B0C38217158E10BE2227BF5686AA899198"
+      },
+      {
+        "path": "um\\mdfind.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mdfind.idl",
+        "sdkSha256": "6BD7996D767C90682B7CDFC9D1D4FA191444E6DFD6C19FDEADE1BE56DA1C2CEC"
+      },
+      {
+        "path": "um\\mdrrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mdrrst.idl",
+        "sdkSha256": "E70268519DB330E460A038673EE0C895C8A0C80A56D274E2A3EB34001082D672"
+      },
+      {
+        "path": "um\\mulres.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mulres.idl",
+        "sdkSha256": "EA27682CFD739F4AEFB8893D787C3ABF3FC77AE4E3479D6F4A58F2CFA626D324"
+      },
+      {
+        "path": "um\\objactnl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\objactnl.idl",
+        "sdkSha256": "07BA828E7932B5D1FCB63A7C23A8DD9D6F0DCECDBCFE2D99433288E0C12940B1"
+      },
+      {
+        "path": "um\\oledb.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\oledb.idl",
+        "sdkSha256": "023D3F0D92178E635C3EF818BB7E9A3B6B3F5D9E4EBD8F7E9D68E1DCD8991437"
+      },
+      {
+        "path": "um\\opnrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\opnrst.idl",
+        "sdkSha256": "9A64FCA127D04A2E5C2C9A74FA178428C10B8F63FBC4E1E0543F61B14EC2BB44"
+      },
+      {
+        "path": "um\\parrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\parrst.idl",
+        "sdkSha256": "C173E558E6E63DD3816DA4478EE1931E05B79A3D5F32FB7C0748458065477006"
+      },
+      {
+        "path": "um\\regprv.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\regprv.idl",
+        "sdkSha256": "4AE06EB154B55333CFE584451456628E5D68FE2DC915CD1784AA6204D731D114"
+      },
+      {
+        "path": "um\\row.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\row.idl",
+        "sdkSha256": "927C886DF3FB1A1485946C4CA1C57C19F1103D91D759744D2F476C5CD0E985CB"
+      },
+      {
+        "path": "um\\rowchg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rowchg.idl",
+        "sdkSha256": "8B6785FE3B47BC05D592DBD33361816C3918A6B786229BCEA756356E975FD986"
+      },
+      {
+        "path": "um\\rowpos.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rowpos.idl",
+        "sdkSha256": "B7D5D0D7E833D10E7021D862DE137793DC21F070CBFFF28DDAEBA2A2BCA5B932"
+      },
+      {
+        "path": "um\\rowpsc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rowpsc.idl",
+        "sdkSha256": "0CC0202C09FF20BD1B6150464C8876463D4F9B0E49DC3853B0922AEE271DA11B"
+      },
+      {
+        "path": "um\\rstbas.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstbas.idl",
+        "sdkSha256": "FF64968C4B11A759C523D91AA14CA48EEB88293F646AB86A15F72D44C7EE0F2C"
+      },
+      {
+        "path": "um\\rstbmrk.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstbmrk.idl",
+        "sdkSha256": "18BA86140F5FA60ADC57048303369A16F113FB1F8C700B292177E28E134C3285"
+      },
+      {
+        "path": "um\\rstchg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstchg.idl",
+        "sdkSha256": "C847E2445F38FE06DF25E19580BF39A7E86CC806093C50F4E3D50AF572A65023"
+      },
+      {
+        "path": "um\\rstchpmb.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstchpmb.idl",
+        "sdkSha256": "A4127EBA533367D53A36B25FCADB0693E3E517C3471BA61B67539FE18A18C993"
+      },
+      {
+        "path": "um\\rstcridx.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstcridx.idl",
+        "sdkSha256": "9539C7FA0801E84261EFA7BC6BAF5ED7F78CF37876FE59B4DA444A1BB9F0C469"
+      },
+      {
+        "path": "um\\rstfnd.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstfnd.idl",
+        "sdkSha256": "A92F699B994AD5727761EC6D50E229B8B474A52E969E054D09A5EEC9C9633D16"
+      },
+      {
+        "path": "um\\rstidn.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstidn.idl",
+        "sdkSha256": "34A2B6DFABDAF8F72DC1A455B98DB3800E17F5F6BE9F6255A5C5150CDF2D86C7"
+      },
+      {
+        "path": "um\\rstind.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstind.idl",
+        "sdkSha256": "96C18BBEBF59B4E0EED653CFDE93AA03CF9AE443F2EC1590AFC9C48ACAED53D4"
+      },
+      {
+        "path": "um\\rstinf.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstinf.idl",
+        "sdkSha256": "B39F1633A1291334173D175807A6C8D6A852ED85810CBB86F4B4ED7E681371A4"
+      },
+      {
+        "path": "um\\rstloc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstloc.idl",
+        "sdkSha256": "3AA04D97CA5867D0D8E2A328FD7A5068B198C3A668FFD40BA91EC6456F823B0E"
+      },
+      {
+        "path": "um\\rstnot.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstnot.idl",
+        "sdkSha256": "8BBE0B13F85FA4FE378F0C32D8A631F5DA537A7E44F4686EA04D9CA249F6E7AF"
+      },
+      {
+        "path": "um\\rstres.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstres.idl",
+        "sdkSha256": "3354F65B2CB409B93CC22DD2E86F7FEF81E2DAF33EFBA38516915409AF958A7A"
+      },
+      {
+        "path": "um\\rstrfres.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstrfres.idl",
+        "sdkSha256": "9BBE13F184424428D95A815230FD082C42C79C2E8AECA10D9CB878AFEB0BE0B5"
+      },
+      {
+        "path": "um\\rstscr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstscr.idl",
+        "sdkSha256": "50BE7B917CEFE9648D71CF7AD322008E59FD46D92ADF2B03956D797C3E16E1F1"
+      },
+      {
+        "path": "um\\rstupd.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstupd.idl",
+        "sdkSha256": "849D2FF626AED1EDB5645B74997833E4E5EA08570D840FEB484519FE39A319C3"
+      },
+      {
+        "path": "um\\rstvw.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstvw.idl",
+        "sdkSha256": "03A1766DABC8396E62E7E7465520B705802C261B214979E9D86A4F3EAC0BED3A"
+      },
+      {
+        "path": "um\\rstxsc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rstxsc.idl",
+        "sdkSha256": "4FDC3FE93B081196C25403C13E52C06761D1EF589333988F3C939D894B6CE938"
+      },
+      {
+        "path": "um\\rwschg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\rwschg.idl",
+        "sdkSha256": "356E9DBA3C28EB3958FF0256AE94F81C8A2DBCCD8BBDFB97BD53F2F6EA22D0F6"
+      },
+      {
+        "path": "um\\scpops.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\scpops.idl",
+        "sdkSha256": "9E7363C01481C6713892726785709F948E4BA3F40BFD2B889AF009C9E1038F30"
+      },
+      {
+        "path": "um\\sesprp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\sesprp.idl",
+        "sdkSha256": "60ED06CF504A1F07113CB4BAFB0DD4BFBCB0D2FE95BADE144F25900B08708254"
+      },
+      {
+        "path": "um\\seurinfo.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\seurinfo.idl",
+        "sdkSha256": "7F6143BF2B0EE56752522F93BE2D30302D3C561B94DECFD6B8133E9A20E4F339"
+      },
+      {
+        "path": "um\\sqleri.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\sqleri.idl",
+        "sdkSha256": "FDE3A0CA305AF55DB2EABD67421BD26256F2DE4AD97D73F60ECE07572855FF85"
+      },
+      {
+        "path": "um\\srcrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\srcrst.idl",
+        "sdkSha256": "3AA00CB9D819ADAD3E39BEE6D42C11B9D4CE9D98F8A6A0ACBAC6B96566E40A1E"
+      },
+      {
+        "path": "um\\tabdef.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tabdef.idl",
+        "sdkSha256": "50D6B4B2EA3918E2E3D2703192F4188E6DD8E72A2743EB49310C16744D32F054"
+      },
+      {
+        "path": "um\\tbdefcnt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tbdefcnt.idl",
+        "sdkSha256": "B2326037EBDA9A7BE737095E61CEE95B9411CF0F3523178B5F965028410AA327"
+      },
+      {
+        "path": "um\\tblcrt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tblcrt.idl",
+        "sdkSha256": "94065992C47CAD56139335B1FE362CE7BF06DADDBE9D453BE9964F86914ACFBE"
+      },
+      {
+        "path": "um\\transact.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\transact.idl",
+        "sdkSha256": "50C31ADCFDF1E11B5D13D7ECB7B409C85E196FC0C6DB61FFF67BFEC0B017E69C"
+      },
+      {
+        "path": "um\\trnjoi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\trnjoi.idl",
+        "sdkSha256": "BD1282ECB422425030A487202729EEFFEAB46FDD203D7FD81A8947858D0FB259"
+      },
+      {
+        "path": "um\\trnlcl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\trnlcl.idl",
+        "sdkSha256": "83368C42FA3BAA90ED7821091AA9EA5018AA9A81FC444AC89AA6AF6E5A6CB385"
+      },
+      {
+        "path": "um\\trnobj.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\trnobj.idl",
+        "sdkSha256": "0BC3512EEE42AE3105B163B2F778DD3CBA972B2991EF1DC59B92A55DEDC6C253"
+      },
+      {
+        "path": "um\\truadmin.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\truadmin.idl",
+        "sdkSha256": "96F6086B509F45206608E2AD6D51F0502AFB26BCA91327E2E7B953CCB37927B5"
+      },
+      {
+        "path": "um\\trugpadm.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\trugpadm.idl",
+        "sdkSha256": "35A5EEE85345ADE65141F946EDBA102D24CE0DB2AB5996313C5BFD7BAA3C3B58"
+      },
+      {
+        "path": "um\\vwchp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vwchp.idl",
+        "sdkSha256": "801A0EC82FE6907C44B64BC1FA20550A6AE6D37DF50B5DA2509E5B8DE8BB2787"
+      },
+      {
+        "path": "um\\vwflt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vwflt.idl",
+        "sdkSha256": "D68A81194B2E544B6297FB2C82B152AF92058F38E416274DA488D12522096949"
+      },
+      {
+        "path": "um\\vwrst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vwrst.idl",
+        "sdkSha256": "C6DC3138BD56D9E18371924A8AB9B7F02A1C9EE22262986FE20790C69C7C42A3"
+      },
+      {
+        "path": "um\\vwsrt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vwsrt.idl",
+        "sdkSha256": "5C99197CC52ED905105E0C9E2353B5B9400D2FAA14482C8EDFE6EC03FA55A635"
       }
     ],
     "outputs": [
@@ -6506,6 +6937,10 @@
       {
         "source": "um\\netcfgn.idl",
         "path": "um\\netcfgn.h"
+      },
+      {
+        "source": "um\\oledb.idl",
+        "path": "um\\oledb.h"
       }
     ]
   },
@@ -7339,6 +7774,7 @@
     "um\\dbgprop.idl.patch",
     "um\\presentation.idl.patch",
     "um\\dispex.idl.patch",
-    "um\\netcfgn.idl.patch"
+    "um\\netcfgn.idl.patch",
+    "um\\scpops.idl.patch"
   ]
 }

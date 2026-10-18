@@ -2,6 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
+using System.Runtime.InteropServices;
+using System.Runtime.Loader;
+using System.Text.Json;
 using ClangSharpSourceToWinmd;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -12,6 +16,31 @@ namespace Win32MetadataScraperTests
 {
     public class NonfloorIdlMigrationTests
     {
+        [NonfloorIdlSourceTheory("SDK_NONFLOOR_FRAGMENT_GENERATED_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualScopedOperationsFragmentReachesNormalGenerationWithoutLegacyOverlays(string architecture)
+        {
+            string generated = Environment.GetEnvironmentVariable("SDK_NONFLOOR_FRAGMENT_GENERATED_ROOT");
+            Assert.False(string.IsNullOrEmpty(generated));
+            string path = Path.Combine(generated, architecture, "Search.cs");
+            if (!File.Exists(path))
+                path = Path.Combine(generated, "common", "Search.cs");
+            var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(path), path: path);
+            Assert.Empty(tree.GetDiagnostics().Where(value => value.Severity == DiagnosticSeverity.Error));
+            var actual = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree,
+                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), new HashSet<string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>(), new Dictionary<string, string>(),
+                new HashSet<string>(), new HashSet<string>(), path).GetRoot();
+            foreach (string method in new[] { "Copy", "Move" })
+                AssertAttribute(Parameter("IScopedOperations", method, "pAuthenticate"), "Optional");
+            ParameterSyntax Parameter(string owner, string method, string parameter) => Assert.Single(
+                actual.DescendantNodes().OfType<TypeDeclarationSyntax>().Single(value => value.Identifier.ValueText == owner)
+                    .Members.OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == method)
+                    .ParameterList.Parameters.Where(value => value.Identifier.ValueText == parameter));
+        }
+
         [NonfloorIdlSourceTheory]
         [InlineData("x86")]
         [InlineData("x64")]
@@ -101,6 +130,128 @@ namespace Win32MetadataScraperTests
                 Method(route, owner, method).ParameterList.Parameters.Where(value => value.Identifier.ValueText == name));
         }
 
+        [NonfloorIdlSourceTheory("SDK_NONFLOOR_GENERATED_ROOT", "SDK_BULK_HEADER_BASELINE", "SDK_BULK_NATIVE_OBSERVATIONS")]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void NativePackedChildrenPreserveTheFourPhysicalOuterLayouts(string architecture, string target)
+        {
+            string generated = Environment.GetEnvironmentVariable("SDK_NONFLOOR_GENERATED_ROOT");
+            string nativeBaseline = Environment.GetEnvironmentVariable("SDK_BULK_HEADER_BASELINE");
+            Assert.False(string.IsNullOrEmpty(nativeBaseline));
+            var expected = new[]
+            {
+                (Name: "MPEG_TIME", Size: 3, Fields: new[] { ("Hours", 0), ("Minutes", 1), ("Seconds", 2) }),
+                (Name: "SECTION", Size: 4, Fields: new[] { ("TableId", 0), ("Header", 1), ("SectionData", 3) }),
+                (Name: "MPEG_DATE_AND_TIME", Size: 7, Fields: new[] { ("D", 0), ("T", 4) }),
+                (Name: "ITEMIDLIST", Size: 3, Fields: new[] { ("mkid", 0) }),
+            };
+            string checks = string.Join("\n", expected.SelectMany(item => new[]
+            {
+                $"static_assert(sizeof({item.Name}) == {item.Size}, \"same-MIDL native size\");",
+                $"static_assert(alignof({item.Name}) == 1, \"same-MIDL native alignment\");",
+            }.Concat(item.Fields.Select(field =>
+                $"static_assert(__builtin_offsetof({item.Name}, {field.Item1}) == {field.Item2}, \"same-MIDL native field offset\");"))));
+            WinHttpNativeControlTests.Surface(WinHttpMigrationTests.RepositoryRoot, nativeBaseline, "MenuRc",
+                architecture, target, new[] { "mpeg2structs.h", "shtypes.h" }, checks,
+                sourceText: "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <mpeg2structs.h>\n#include <shtypes.h>\n");
+
+            var records = new List<StructDeclarationSyntax>();
+            foreach (var input in new[]
+            {
+                (Route: "MsTv", Names: new[] { "MPEG_TIME", "MPEG_DATE", "MPEG_DATE_AND_TIME", "MPEG_HEADER_BITS_MIDL", "SECTION" }),
+                (Route: "Shell.Common", Names: new[] { "SHITEMID", "ITEMIDLIST" }),
+            })
+            {
+                var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(generated, "common", input.Route + ".cs")));
+                foreach (string name in input.Names)
+                    records.Add(Assert.Single(tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
+                        .Where(record => record.Identifier.ValueText == name)));
+            }
+            var namespaces = records.ToDictionary(record => record.Identifier.ValueText,
+                record => record.Ancestors().OfType<BaseNamespaceDeclarationSyntax>().Single().Name.ToString(), StringComparer.Ordinal);
+            string source = "using System;\nusing System.Runtime.InteropServices;\nusing Windows.Win32.Foundation.Metadata;\n" +
+                string.Join("\n", records.GroupBy(record => namespaces[record.Identifier.ValueText]).Select(group =>
+                    "namespace " + group.Key + " {\n" + string.Join("\n", group.Select(record => record.ToFullString())) +
+                    string.Join("\n", expected.Where(item => namespaces[item.Name] == group.Key).Select(item =>
+                        $"public struct Align_{item.Name} {{ public byte prefix; public {item.Name} value; }}")) + "\n}"));
+            string directory = Path.Combine(Path.GetTempPath(), "nonfloor-layout-" + Guid.NewGuid().ToString("N"));
+            var observations = new List<object>();
+            var legacyFields = new Dictionary<string, string[]>(StringComparer.Ordinal);
+            try
+            {
+                foreach (bool legacy in new[] { true, false })
+                {
+                    string phase = Path.Combine(directory, legacy ? "legacy" : "native");
+                    Directory.CreateDirectory(Path.Combine(phase, architecture));
+                    File.WriteAllText(Path.Combine(phase, architecture, "Actual.cs"), source);
+                    var remaps = legacy ? expected.ToDictionary(item => item.Name,
+                        _ => "[StructLayout(LayoutKind.Sequential, Pack = 1)]", StringComparer.Ordinal) : new Dictionary<string, string>();
+                    using var image = HeaderAnnotationWinmdTests.Emit(phase, architecture, memberRemaps: remaps);
+                    var reader = image.Reader;
+                    var compilation = ClangSharpSourceCompilation.Create(phase, architecture, remaps,
+                        new Dictionary<string, Dictionary<string, string>>(), Array.Empty<string>(),
+                        new Dictionary<string, string>(), new Dictionary<string, string>(), new HashSet<string>(),
+                        Array.Empty<string>(), new Dictionary<string, string>(), new Dictionary<string, string>()).CSharpCompilation;
+                    using var stream = new MemoryStream();
+                    var result = compilation.WithAssemblyName("NonfloorLayout" + Guid.NewGuid().ToString("N"))
+                        .WithOptions(compilation.Options.WithOutputKind(OutputKind.DynamicallyLinkedLibrary).WithPlatform(Platform.AnyCpu))
+                        .Emit(stream);
+                    Assert.True(result.Success, string.Join("\n", result.Diagnostics));
+                    stream.Position = 0;
+                    var context = new AssemblyLoadContext("nonfloor-layout", isCollectible: true);
+                    try
+                    {
+                        var assembly = context.LoadFromStream(stream);
+                        foreach (var item in expected)
+                        {
+                            var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                                .Single(type => reader.GetString(type.Name) == item.Name);
+                            string fullName = namespaces[item.Name] + "." + item.Name;
+                            Assert.Equal(namespaces[item.Name], reader.GetString(physical.Namespace));
+                            Assert.Equal(legacy ? 1 : 0, physical.GetLayout().PackingSize);
+                            string[] fieldSignatures = physical.GetFields().Select(reader.GetFieldDefinition).Select(field =>
+                                reader.GetString(field.Name) + ":" + field.DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null) +
+                                ":offset=" + field.GetOffset() + ":attributes=" + string.Join(",", field.GetCustomAttributes()
+                                    .Select(handle => Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value))))).ToArray();
+                            if (legacy)
+                                legacyFields.Add(item.Name, fieldSignatures);
+                            else
+                                Assert.Equal(legacyFields[item.Name], fieldSignatures);
+                            var managed = assembly.GetType(fullName, throwOnError: true);
+                            Assert.Equal(item.Size, Marshal.SizeOf(managed));
+                            var alignment = assembly.GetType(namespaces[item.Name] + ".Align_" + item.Name, throwOnError: true);
+                            Assert.Equal(1, Marshal.OffsetOf(alignment, "value").ToInt32());
+                            foreach (var field in item.Fields)
+                                Assert.Equal(field.Item2, Marshal.OffsetOf(managed, field.Item1).ToInt32());
+                            observations.Add(new
+                            {
+                                fullName, architecture, nativeTarget = target, clrHostArchitecture = RuntimeInformation.ProcessArchitecture.ToString(),
+                                legacy, physicalPack = physical.GetLayout().PackingSize,
+                                size = item.Size, alignment = 1,
+                                fields = item.Fields.Select(field => new { name = field.Item1, offset = field.Item2 }).ToArray(),
+                                fieldSignatures,
+                            });
+                        }
+                    }
+                    finally
+                    {
+                        context.Unload();
+                    }
+                }
+                string output = Environment.GetEnvironmentVariable("SDK_BULK_NATIVE_OBSERVATIONS");
+                Assert.False(string.IsNullOrEmpty(output));
+                Directory.CreateDirectory(output);
+                File.WriteAllText(Path.Combine(output, "outer-layouts-" + architecture + ".json"),
+                    JsonSerializer.Serialize(observations, new JsonSerializerOptions { WriteIndented = true }));
+            }
+            finally
+            {
+                if (Directory.Exists(directory))
+                    Directory.Delete(directory, recursive: true);
+            }
+        }
+
         private static void AssertCount(ParameterSyntax parameter, int expected)
         {
             var attribute = AssertAttribute(parameter, "NativeArrayInfo");
@@ -134,10 +285,13 @@ namespace Win32MetadataScraperTests
 
     public sealed class NonfloorIdlSourceTheoryAttribute : TheoryAttribute
     {
-        public NonfloorIdlSourceTheoryAttribute()
+        public NonfloorIdlSourceTheoryAttribute(params string[] requiredVariables)
         {
-            if (Environment.GetEnvironmentVariable("SDK_NONFLOOR_GENERATED_ROOT") == null)
-                Skip = "Set SDK_NONFLOOR_GENERATED_ROOT to the bounded normal original-IDL scrape outputs.";
+            if (requiredVariables.Length == 0)
+                requiredVariables = new[] { "SDK_NONFLOOR_GENERATED_ROOT" };
+            foreach (string variable in requiredVariables)
+                if (Environment.GetEnvironmentVariable(variable) == null)
+                    Skip = "Set " + variable + " to the bounded original-IDL validation inputs.";
         }
     }
 }

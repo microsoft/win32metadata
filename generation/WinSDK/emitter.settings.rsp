@@ -442,7 +442,6 @@ ISequentialStream::Read=[CanReturnMultipleSuccessValues]
 ISequentialStream::Write=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Next=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Skip=[CanReturnMultipleSuccessValues]
-JsDebugReadMemoryFlags=[ScopedEnum]
 SHCreateItemFromIDList::ppv=[ComOutPtr]
 SHCreateItemFromParsingName::ppv=[ComOutPtr]
 SHCreateItemWithParent::ppvItem=[ComOutPtr]
@@ -897,15 +896,11 @@ PXE_DHCPV6_MESSAGE_HEADER=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 PXE_DHCPV6_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # shtypes.h
-ITEMIDLIST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # mxdc.h
 MXDC_PRINTTICKET_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 MXDC_S0PAGE_RESOURCE_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # mpeg2struts.h
-MPEG_TIME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-SECTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-MPEG_DATE_AND_TIME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # shlwapi.h
 IQueryAssociations::Init::flags=ASSOCF
 IQueryAssociations::GetString::flags=ASSOCF
@@ -2000,8 +1995,6 @@ FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 # Changes to make oledb.h functions consistent with old annotations
 IRowsetKeys::ListKeys::prgColumns=[-In][NativeArrayInfo(CountParamIndex=0)]
-IScopedOperations::Copy::pAuthenticate=[Optional]
-IScopedOperations::Move::pAuthenticate=[Optional]
 FwpmEngineOpen0::serverName=[Reserved]
 FwpmCalloutAdd0::engineHandle=FWPM_ENGINE_HANDLE
 FwpmCalloutCreateEnumHandle0::engineHandle=FWPM_ENGINE_HANDLE

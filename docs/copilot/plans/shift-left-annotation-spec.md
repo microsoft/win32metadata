@@ -282,6 +282,17 @@ member names. Existing scalar typedefs can also back `_Win32_Enum_` or
 `_Win32_FlagsEnum_` groups using their original constants; do not replace the
 typedef or invent a scoped native enum.
 
+For declarations authored in an included IDL fragment, patch that physical
+fragment while keeping the generated output pinned to its unchanged generation
+root. Preserve every native conditional declaration variant and admit the root's
+actual MIDL input closure.
+
+An omitted outer `Pack` is not by itself an ABI difference: packed child records
+can already force byte alignment. Retire such an override only after comparing
+the actual physical metadata and native size, alignment, and field offsets with
+the same-MIDL control. Keep the explicit metadata packing difference in the
+receipt; this is not a waiver for unrelated packing facts.
+
 For a C/C++-authored declaration, combine direction SAL with `_Win32_Retval_`:
 
 ```cpp

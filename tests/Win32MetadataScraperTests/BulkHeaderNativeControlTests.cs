@@ -191,6 +191,7 @@ namespace Win32MetadataScraperTests
                     "dbgprop.h" => new[] { Interface("IEnumDebugPropertyInfo") + "::pi", "pi" },
                     "presentation.h" => new[] { Interface("IPresentationManager") + "::fence", "presentationFactory" },
                     "netcfgn.h" => new[] { Interface("INetCfgComponentUpperEdge") + "::pAdapter" },
+                    "oledb.h" => new[] { Interface("IScopedOperations") + "::pAuthenticate", "pAuthenticate" },
                     "fwptypes.h" or "wtypes.h" or "xmllite.h" or "activprof.h" or "dispex.h" => Array.Empty<string>(),
                     _ => throw new ArgumentException("Unqualified nonfloor native-control header: " + header),
                 };
@@ -220,6 +221,7 @@ namespace Win32MetadataScraperTests
                 string fence = authored ? "_COM_Outptr_retval_" : "_Out_retval_";
                 string factory = authored ? "_COM_Outptr_" : "_Outptr_";
                 string adapter = authored ? "_In_" : "_In_reads_(dwNumInterfaces)";
+                string authenticate = authored ? "_In_opt_" : "_In_";
                 string Member(string owner, string parameters) => language == "c"
                     ? "struct " + Interface(owner) + " { void (__stdcall *Probe)(" + parameters + "); };\n"
                     : "struct " + owner + " { void Probe(" + parameters + "); };\n";
@@ -233,7 +235,14 @@ namespace Win32MetadataScraperTests
                     "void NextProxy(unsigned celt, " + debug + " void* pi, unsigned* pcEltsfetched);\n" +
                     Member("IPresentationManager", fence + " void** fence") +
                     "void Factory(" + factory + " void** presentationFactory);\n" +
-                    Member("INetCfgComponentUpperEdge", "unsigned dwNumInterfaces, " + adapter + " void* pAdapter");
+                    Member("INetCfgComponentUpperEdge", "unsigned dwNumInterfaces, " + adapter + " void* pAdapter") +
+                    (language == "c"
+                        ? "struct IScopedOperationsVtbl { void (__stdcall *Copy)(" + authenticate + " void* pAuthenticate); " +
+                            "void (__stdcall *Move)(" + authenticate + " void* pAuthenticate); };\n"
+                        : "struct IScopedOperations { void Copy(" + authenticate + " void* pAuthenticate); " +
+                            "void Move(" + authenticate + " void* pAuthenticate); };\n") +
+                    "void CopyProxy(" + authenticate + " void* pAuthenticate);\n" +
+                    "void MoveProxy(" + authenticate + " void* pAuthenticate);\n";
             }
 
             static string[] Difference(List<string> left, List<string> right)
