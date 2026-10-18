@@ -586,6 +586,8 @@ static_assert(DISC_NO_FORCE == 64u);
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
+            var beforeRawSal = new List<string>();
+            var afterRawSal = new List<string>();
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
@@ -600,14 +602,20 @@ static_assert(DISC_NO_FORCE == 64u);
                 "WEB_SOCKET_UNSOLICITED_PONG_BUFFER_TYPE == 0x80000006U",
             }.Select(check => $"{assertion}({check}, \"original WebSocket contract\");"));
             var before = Surface(root, original, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
-                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language,
+                rawSalAnnotations: beforeRawSal);
             var after = Surface(root, prepared, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
                 metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
-                diagnostics: afterDiagnostics, language: language);
+                diagnostics: afterDiagnostics, language: language, rawSalAnnotations: afterRawSal);
+            foreach (var side in new[] { ("before", beforeRawSal), ("after", afterRawSal) })
+                foreach (string fact in side.Item2)
+                    this.output.WriteLine(side.Item1 + " raw SAL " + fact);
             Assert.NotEmpty(before);
             Assert.Equal(before, after);
             Assert.Equal(13, before.Count(value => value.StartsWith("function WebSocket", StringComparison.Ordinal)));
             Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeRawSal.Count, beforeSal.Count);
+            Assert.Equal(afterRawSal.Count, afterSal.Count);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
@@ -1248,7 +1256,7 @@ static_assert(DISC_NO_FORCE == 64u);
         private static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
-            string language = "c++", bool cInterface = false)
+            string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
@@ -1302,9 +1310,11 @@ static_assert(DISC_NO_FORCE == 64u);
             var anonymous = new Dictionary<string, string>(StringComparer.Ordinal);
             var ordinals = new Dictionary<string, int>(StringComparer.Ordinal);
             Walk(unit.Cursor, "");
-            return result.Select(value => Regex.Replace(value, anonymousLocationPattern,
-                match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]))
+            return result.Select(DeclarationIdentity)
                 .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+
+            string DeclarationIdentity(string value) => Regex.Replace(value, anonymousLocationPattern,
+                match => anonymous[match.Groups["location"].Value.Replace('\\', '/')]);
 
             void Walk(CXCursor cursor, string owner)
             {
@@ -1353,7 +1363,10 @@ static_assert(DISC_NO_FORCE == 64u);
                         if (value.StartsWith(prefix, StringComparison.Ordinal))
                             annotations?.Add(owner + name + "|" + value.Substring(prefix.Length));
                         else
-                            salAnnotations?.Add(owner + name + "|" + value);
+                        {
+                            rawSalAnnotations?.Add(owner + name + "|" + value);
+                            salAnnotations?.Add(DeclarationIdentity(owner + name) + "|" + value);
+                        }
                     }
                     if (child.IsDeclaration || child.IsTranslationUnit)
                         Walk(child, childOwner);
