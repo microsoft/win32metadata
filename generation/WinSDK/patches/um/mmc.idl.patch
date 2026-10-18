@@ -1,5 +1,5 @@
 diff --git a/um/mmc.idl b/um/mmc.idl
-index ad21af41..e6875def 100644
+index ad21af41..220a0679 100644
 --- a/um/mmc.idl
 +++ b/um/mmc.idl
 @@ -11,6 +11,7 @@
@@ -10,6 +10,25 @@ index ad21af41..e6875def 100644
  cpp_quote("#ifndef MMC_VER")
  cpp_quote("#define MMC_VER 0x0210")
  cpp_quote("#endif")
+@@ -971,14 +972,14 @@ cpp_quote("#endif // MMC_VER >= 0x0110")
+ // APIs exported in mmc.lib
+ //
+ 
+-cpp_quote("STDAPI MMCPropertyChangeNotify(LONG_PTR lNotifyHandle, LPARAM param);")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MMCPropertyChangeNotify(LONG_PTR lNotifyHandle, LPARAM param);")
+ cpp_quote("#if (MMC_VER >= 0x0110)")
+ cpp_quote("#include <specstrings.h>")
+-cpp_quote("STDAPI MMCPropertyHelp(_In_ LPOLESTR pszHelpTopic);")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MMCPropertyHelp(_In_ LPOLESTR pszHelpTopic);")
+ cpp_quote("#endif // MMC_VER >= 0x0110")
+-cpp_quote("STDAPI MMCFreeNotifyHandle(LONG_PTR lNotifyHandle);")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MMCFreeNotifyHandle(LONG_PTR lNotifyHandle);")
+ cpp_quote("// MMCPropPageCallback is only available in mmc.lib. See MMCAfxPropPageCallback if linking against mmcutil.lib.")
+-cpp_quote("STDAPI MMCPropPageCallback(void* vpsp);")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ MMCPropPageCallback(void* vpsp);")
+ cpp_quote("EXTERN_C const CLSID CLSID_NodeManager;")
+ 
+ cpp_quote("#if (MMC_VER >= 0x0120)")
 @@ -1023,6 +1024,7 @@ cpp_quote("#define IS_SPECIAL_COOKIE(c)     (((c)          >= SPECIAL_COOKIE_MIN
  ///////////////////////////////////////////////////////////////////////////////
  //  Interfaces

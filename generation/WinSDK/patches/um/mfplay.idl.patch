@@ -1,5 +1,5 @@
 diff --git a/um/mfplay.idl b/um/mfplay.idl
-index 62b58e9d..c6168649 100644
+index 62b58e9d..62e1deb6 100644
 --- a/um/mfplay.idl
 +++ b/um/mfplay.idl
 @@ -5,6 +5,7 @@
@@ -10,6 +10,15 @@ index 62b58e9d..c6168649 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
+@@ -203,7 +204,7 @@ typedef [v1_enum] enum _MFP_CREDENTIAL_FLAGS
+ ///     Return Media Player interface.
+ /// </param>
+ 
+-cpp_quote( "STDAPI MFPCreateMediaPlayer(" )
++cpp_quote( "STDAPI _Win32_SupportedOS_Windows7_ MFPCreateMediaPlayer(" )
+ cpp_quote( "            _In_opt_  LPCWSTR pwszURL," )
+ cpp_quote( "            _In_      BOOL fStartPlayback," )
+ cpp_quote( "            _In_opt_  MFP_CREATION_OPTIONS creationOptions," )
 @@ -216,6 +217,7 @@ cpp_quote( "            _Out_opt_ IMFPMediaPlayer ** ppMediaPlayer );" )
  //////////////////////////////////////////////////////////////////////////////
  /// <summary>

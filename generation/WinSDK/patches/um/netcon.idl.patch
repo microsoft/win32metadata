@@ -1,5 +1,5 @@
 diff --git a/um/netcon.idl b/um/netcon.idl
-index a5154b2c..1b305872 100644
+index a5154b2c..7f027fce 100644
 --- a/um/netcon.idl
 +++ b/um/netcon.idl
 @@ -7,6 +7,7 @@
@@ -18,6 +18,20 @@ index a5154b2c..1b305872 100644
  [
      object,
      uuid(C08956A1-1CD3-11D1-B1C5-00805FC1270E),
+@@ -213,11 +215,11 @@ cpp_quote("#define S_OBJECT_NO_LONGER_VALID ((HRESULT)0x00000002L)")
+ };
+ 
+ cpp_quote("")
+-cpp_quote("STDAPI_(VOID) NcFreeNetconProperties (NETCON_PROPERTIES* pProps);")
++cpp_quote("STDAPI_(VOID) _Win32_SupportedOS_WindowsXP_ NcFreeNetconProperties (NETCON_PROPERTIES* pProps);")
+ cpp_quote("")
+ 
+ cpp_quote("")
+-cpp_quote("STDAPI_(BOOL) NcIsValidConnectionName (PCWSTR pszwName);")
++cpp_quote("STDAPI_(BOOL) _Win32_SupportedOS_WindowsXP_ NcIsValidConnectionName (PCWSTR pszwName);")
+ cpp_quote("")
+ 
+ 
 @@ -288,6 +290,7 @@ interface INetConnectionConnectUi : IUnknown
  //+---------------------------------------------------------------------------
  // IEnumNetSharingPortMapping - An enumerator for INetSharingPortMapping objects.
