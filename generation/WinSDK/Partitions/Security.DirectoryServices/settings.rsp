@@ -8,3 +8,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/dssec.h
 --namespace
 Windows.Win32.Security.DirectoryServices
+--config
+parse-win32-annotations

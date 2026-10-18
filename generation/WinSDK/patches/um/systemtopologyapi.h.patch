@@ -1,0 +1,29 @@
+diff --git a/um/systemtopologyapi.h b/um/systemtopologyapi.h
+index 9b41bbbc..97437b2c 100644
+--- a/um/systemtopologyapi.h
++++ b/um/systemtopologyapi.h
+@@ -25,6 +25,8 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -40,6 +42,7 @@ GetNumaHighestNodeNumber(
+ 
+ #if _WIN32_WINNT >= 0x0601
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -67,6 +70,7 @@ GetNumaNodeProcessorMask2(
+ 
+ #if _WIN32_WINNT >= 0x0601
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI

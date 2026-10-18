@@ -7,9 +7,6 @@ AllJoynEnumEvents
 AllJoynEventSelect
 AllJoynReceiveFromBus
 AllJoynSendToBus
-AuxUlibInitialize
-AuxUlibIsDLLSynchronizationHeld
-AuxUlibSetSystemFileCacheSize
 bind
 BroadcastSystemMessage
 closesocket
@@ -67,7 +64,6 @@ gethostname
 GetMessage
 GetMessageA
 GetMessageW
-GetNumaHighestNodeNumber
 getpeername
 GetPrivateProfileString
 GetPrivateProfileStringA
@@ -138,17 +134,13 @@ MoveFileA
 MoveFileW
 ntohl
 ntohs
-OOBEComplete
 OpenFileMappingFromApp
 OpenFileMappingW
 PostThreadMessageA
 PostThreadMessageW
 PropSheet_GetResult
-QueryPerformanceCounter
-QueryPerformanceFrequency
 recv
 recvfrom
-RegisterWaitUntilOOBECompleted
 SearchTreeForFile
 SearchTreeForFileW
 select
@@ -469,7 +461,6 @@ SetupSetSourceListW
 SetupTermDefaultQueueCallback
 SetupTerminateFileLog
 SetupUninstallNewlyCopiedInfs
-SfcGetNextProtectedFile
 shutdown
 SignalObjectAndWait
 socket
@@ -630,7 +621,6 @@ SymUnloadModule64
 UnDecorateSymbolName
 UnDecorateSymbolNameW
 UnmapDebugInformation
-UnregisterWaitUntilOOBECompleted
 VirtualAlloc
 VirtualAllocFromApp
 VirtualProtect

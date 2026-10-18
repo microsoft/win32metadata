@@ -1,0 +1,28 @@
+diff --git a/um/storprop.h b/um/storprop.h
+index 4aa65c6c..85ad1542 100644
+--- a/um/storprop.h
++++ b/um/storprop.h
+@@ -67,19 +67,23 @@ CdromCddaInfo(
+     IN OUT PULONG BufferSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ CdromKnownGoodDigitalPlayback(IN HDEVINFO HDevInfo,
+                               IN PSP_DEVINFO_DATA DevInfoData);
+ 
++_Win32_SupportedOS_WindowsXP_
+ LONG
+ CdromEnableDigitalPlayback(IN HDEVINFO DevInfo,
+                            IN PSP_DEVINFO_DATA DevInfoData,
+                            IN BOOLEAN ForceUnknown);
+ 
++_Win32_SupportedOS_WindowsXP_
+ LONG
+ CdromDisableDigitalPlayback( IN HDEVINFO DevInfo,
+                              IN PSP_DEVINFO_DATA DevInfoData);
+ 
++_Win32_SupportedOS_WindowsXP_
+ LONG
+ CdromIsDigitalPlaybackEnabled(
+     IN  HDEVINFO DevInfo,

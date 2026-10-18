@@ -5,3 +5,5 @@
 <IncludeRoot>/um/filterr.h
 --namespace
 Windows.Win32.Storage.IndexServer
+--config
+parse-win32-annotations

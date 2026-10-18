@@ -1822,6 +1822,27 @@ prefixes. This batch does not silently change their association identity
 or the temporary RPC value/type disposition above. Complete SDK/API/CI
 and consumer qualification remain separate central gates.
 
+#### Reserved following native batch
+
+A further 25 reserved originals yield **18 actual header patches** with
+57 SupportedOS and ten SetLastError relocations. The 67 placements are
+direct declaration facts, not blanket header defaults. Native bytes,
+signatures and all other sidecar categories are preserved.
+
+Seven originals have no safe patch and receive no header credit:
+`rometadataresolution.h`, `traceloggingactivity.h`, `atlthunk.h`,
+`gdiplusimagecodec.h`, `msdrm.h`, `ntlsa.h` and `timeprov.h`.
+The 28 retained floors comprise nine unsupported shared-line declarations,
+twelve facts without a configured owning partition, six without a parsed
+declaration and one with an additional unparsed reference. None receives
+a partial source marker or a parser-only partition admission.
+
+No additional OS/error queue references are omitted from that report.
+The one cleanup API, one direct enum use and one invalid-handle-value
+configuration reference remain unchanged. The broad native source total
+is 77 distinct new original-header patches across these four batches;
+the preexisting WNet/Npapi corrections are not counted again.
+
 ### Third original-IDL batch: actual preparation and native-output controls
 
 The next bounded batch uses only the already-authored original

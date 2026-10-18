@@ -2283,6 +2283,114 @@
       "sourceSha256": "F42804B971E21BC34ACF7D1E63F6A7BF9777094696A75732753B5E73DDAAAC5F",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\srrestoreptapi.h",
       "sdkSha256": "F42804B971E21BC34ACF7D1E63F6A7BF9777094696A75732753B5E73DDAAAC5F"
+    },
+    {
+      "path": "um\\timeapi.h",
+      "sourceSha256": "0252981F62C9ED1ECE53434C3863F4BF503C2EAD70719ADB2CFD38E3E21AB6DA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\timeapi.h",
+      "sdkSha256": "0252981F62C9ED1ECE53434C3863F4BF503C2EAD70719ADB2CFD38E3E21AB6DA"
+    },
+    {
+      "path": "um\\winenclaveapi.h",
+      "sourceSha256": "192CB0E49C1DDB6D9855D836F70024CFAB2A7733DC1A6C7B0675C1770CBE79C7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winenclaveapi.h",
+      "sdkSha256": "192CB0E49C1DDB6D9855D836F70024CFAB2A7733DC1A6C7B0675C1770CBE79C7"
+    },
+    {
+      "path": "winrt\\roparameterizediid.h",
+      "sourceSha256": "8733DD793F2CD55E288013DE49EE09B13C489D19FB8FE1EB0208F1EAE4F08492",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\roparameterizediid.h",
+      "sdkSha256": "8733DD793F2CD55E288013DE49EE09B13C489D19FB8FE1EB0208F1EAE4F08492"
+    },
+    {
+      "path": "um\\cscapi.h",
+      "sourceSha256": "69D5231DFE11941DFDB5FFA13B6C552751FEE8F7A35122CF2AC677AE16467BF7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cscapi.h",
+      "sdkSha256": "69D5231DFE11941DFDB5FFA13B6C552751FEE8F7A35122CF2AC677AE16467BF7"
+    },
+    {
+      "path": "um\\dssec.h",
+      "sourceSha256": "4A80A312E4DFAED8E0423E9B145BD32B41F52A7B5CF67EFFF3DD785219B4A8DB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dssec.h",
+      "sdkSha256": "4A80A312E4DFAED8E0423E9B145BD32B41F52A7B5CF67EFFF3DD785219B4A8DB"
+    },
+    {
+      "path": "um\\loadperf.h",
+      "sourceSha256": "6B22631556BA476764A2116CFEBD3189758655CDD3DB2DA789A0E40F9BCD81FF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\loadperf.h",
+      "sdkSha256": "6B22631556BA476764A2116CFEBD3189758655CDD3DB2DA789A0E40F9BCD81FF"
+    },
+    {
+      "path": "um\\ntquery.h",
+      "sourceSha256": "EDDBCB93C5985823567B613F0A85A980ADC395F46DD48A6EE7B7262756E1E2DA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ntquery.h",
+      "sdkSha256": "EDDBCB93C5985823567B613F0A85A980ADC395F46DD48A6EE7B7262756E1E2DA"
+    },
+    {
+      "path": "um\\profileapi.h",
+      "sourceSha256": "CFA8E3626DBA11689997D8FCD65B5DFBF4BCEF8DE09DD7E4E881769D48D165A2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\profileapi.h",
+      "sdkSha256": "CFA8E3626DBA11689997D8FCD65B5DFBF4BCEF8DE09DD7E4E881769D48D165A2"
+    },
+    {
+      "path": "um\\resourceindexer.h",
+      "sourceSha256": "F3E5BA9F66722743156DAE8EB0038726CFC83CDB6E6A838C7B2F1940C49B9708",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\resourceindexer.h",
+      "sdkSha256": "F3E5BA9F66722743156DAE8EB0038726CFC83CDB6E6A838C7B2F1940C49B9708"
+    },
+    {
+      "path": "um\\sfc.h",
+      "sourceSha256": "9752FCDFF8BDA98DD40409F167038050ADC11A5954586F6B446F828288CE8D8A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\sfc.h",
+      "sdkSha256": "9752FCDFF8BDA98DD40409F167038050ADC11A5954586F6B446F828288CE8D8A"
+    },
+    {
+      "path": "um\\storprop.h",
+      "sourceSha256": "45A0657F015118B8DEF6C777ECAB62D2D752838301054769AD7EBA25EABA9665",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\storprop.h",
+      "sdkSha256": "45A0657F015118B8DEF6C777ECAB62D2D752838301054769AD7EBA25EABA9665"
+    },
+    {
+      "path": "um\\systemtopologyapi.h",
+      "sourceSha256": "8BFD1A78CC30B6D33C88E3F61AE2AC6468CEE0607352EE8D096BA5375B4D401C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\systemtopologyapi.h",
+      "sdkSha256": "8BFD1A78CC30B6D33C88E3F61AE2AC6468CEE0607352EE8D096BA5375B4D401C"
+    },
+    {
+      "path": "um\\wmsdkvalidate.h",
+      "sourceSha256": "C6AA1C0BA6F1DDADA1068E54D2814C5B5A629EB7CC35060F8AAFBF550A94A127",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wmsdkvalidate.h",
+      "sdkSha256": "C6AA1C0BA6F1DDADA1068E54D2814C5B5A629EB7CC35060F8AAFBF550A94A127"
+    },
+    {
+      "path": "um\\aux_ulib.h",
+      "sourceSha256": "2854875A7634932E47DDC32FBF360B075CE6FAADBCAB03883AC30D6EE02C4C5E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\aux_ulib.h",
+      "sdkSha256": "2854875A7634932E47DDC32FBF360B075CE6FAADBCAB03883AC30D6EE02C4C5E"
+    },
+    {
+      "path": "um\\evntcons.h",
+      "sourceSha256": "67D6228A6814B4B1F6D49FF21707FEBC63E6C07A827C0598CDE23D05C5CA21F1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\evntcons.h",
+      "sdkSha256": "67D6228A6814B4B1F6D49FF21707FEBC63E6C07A827C0598CDE23D05C5CA21F1"
+    },
+    {
+      "path": "um\\oobenotification.h",
+      "sourceSha256": "9A0FFFCEB4557DA43FE7F02C70CD6F0D9FF2F9B2F41FFC6591D281B6AD55A9DA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\oobenotification.h",
+      "sdkSha256": "9A0FFFCEB4557DA43FE7F02C70CD6F0D9FF2F9B2F41FFC6591D281B6AD55A9DA"
+    },
+    {
+      "path": "um\\processtopologyapi.h",
+      "sourceSha256": "4507A5E0C4F41D19A80D1543833F1A9D90277BC376441B277884BB043BE24BA5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\processtopologyapi.h",
+      "sdkSha256": "4507A5E0C4F41D19A80D1543833F1A9D90277BC376441B277884BB043BE24BA5"
+    },
+    {
+      "path": "winrt\\shcore.h",
+      "sourceSha256": "D52421B7A145B5D48C4E55E8FC35739D13853E6FF311D91AAEB697041BDEE2C2",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\shcore.h",
+      "sdkSha256": "D52421B7A145B5D48C4E55E8FC35739D13853E6FF311D91AAEB697041BDEE2C2"
     }
   ],
   "midl": {
@@ -3202,7 +3310,13 @@
     "Dfs",
     "IO",
     "ProjFs",
-    "Sr"
+    "Sr",
+    "Media",
+    "Of",
+    "Security.DirectoryServices",
+    "IndexSrv",
+    "WmFormat",
+    "WindowsSetupAndMigration"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -3550,6 +3664,24 @@
     "um\\gpedit.h.patch",
     "um\\jobapi2.h.patch",
     "um\\threadpoollegacyapiset.h.patch",
-    "um\\srrestoreptapi.h.patch"
+    "um\\srrestoreptapi.h.patch",
+    "um\\timeapi.h.patch",
+    "um\\winenclaveapi.h.patch",
+    "winrt\\roparameterizediid.h.patch",
+    "um\\cscapi.h.patch",
+    "um\\dssec.h.patch",
+    "um\\loadperf.h.patch",
+    "um\\ntquery.h.patch",
+    "um\\profileapi.h.patch",
+    "um\\resourceindexer.h.patch",
+    "um\\sfc.h.patch",
+    "um\\storprop.h.patch",
+    "um\\systemtopologyapi.h.patch",
+    "um\\wmsdkvalidate.h.patch",
+    "um\\aux_ulib.h.patch",
+    "um\\evntcons.h.patch",
+    "um\\oobenotification.h.patch",
+    "um\\processtopologyapi.h.patch",
+    "winrt\\shcore.h.patch"
   ]
 }

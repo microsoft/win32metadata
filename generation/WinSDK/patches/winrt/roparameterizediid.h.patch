@@ -1,0 +1,26 @@
+diff --git a/winrt/roparameterizediid.h b/winrt/roparameterizediid.h
+index 4ca62976..fb485ddf 100644
+--- a/winrt/roparameterizediid.h
++++ b/winrt/roparameterizediid.h
+@@ -65,6 +65,7 @@ struct IRoMetaDataLocator
+     ) const = 0;
+ };
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI
+ RoGetParameterizedTypeInstanceIID(
+     UINT32 nameElementCount,
+@@ -74,11 +75,13 @@ RoGetParameterizedTypeInstanceIID(
+     _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(void)
+ RoFreeParameterizedTypeExtra(
+     _In_ ROPARAMIIDHANDLE extra
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(PCSTR)
+ RoParameterizedTypeExtraGetTypeSignature(
+     _In_ ROPARAMIIDHANDLE extra
