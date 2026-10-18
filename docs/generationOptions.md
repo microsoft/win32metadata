@@ -145,6 +145,11 @@ Normal-scrape proof must exclude relocated rows from every resolved response
 input: `supportedOS.rsp` is also consumed by the scraper, not just the emitter.
 Preserve existing native contracts such as IDL `[retval]` and enumerate their
 exact activation differences separately from relocated availability facts.
+For an incremental callable batch, a parser-enabled published-before control
+preserves existing interface carriers and native contracts on both sides.
+With the newly relocated rows absent from both resolved normal inputs, require
+the exact new function floors only in the prepared-after source and compare
+the complete remaining C# syntax without suppressing unrelated attributes.
 
 Recipe `partitions` do not activate the normal scraper. After qualifying and
 admitting exact original/output pairs, rerun the authorer with `-Apply` to enable

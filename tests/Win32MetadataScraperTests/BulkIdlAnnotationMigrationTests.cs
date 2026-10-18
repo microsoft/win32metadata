@@ -427,13 +427,21 @@ namespace Win32MetadataScraperTests
             var owner = Assert.Single(report.RootElement.GetProperty("owners").EnumerateArray().Where(value =>
                 value.GetProperty("generatedHeaders").EnumerateArray().Any(path =>
                     path.GetString().Equals(@"um\" + header, StringComparison.OrdinalIgnoreCase))));
-            var dispositions = owner.GetProperty("dispositions").EnumerateArray().ToArray();
+            var dispositions = owner.GetProperty("dispositions").EnumerateArray().Where(value =>
+                value.GetProperty("disposition").GetString() == "authored-original-idl").ToArray();
             Assert.Equal(functionCount, dispositions.Count(value =>
                 value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl"));
             string root = WinHttpMigrationTests.RepositoryRoot;
+            string prerequisites = header switch
+            {
+                "dxva2api.h" or "opmapi.h" => "#include <d3d9.h>\n",
+                "mfreadwrite.h" => "#include <mfidl.h>\n",
+                _ => "",
+            };
             string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
                 (cInterface ? "#define CINTERFACE 1\n" : "") +
-                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n" +
+                prerequisites + "#include <" + header + ">\n";
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
             var beforeDiagnostics = new List<string>();
@@ -473,7 +481,23 @@ namespace Win32MetadataScraperTests
 
         public static IEnumerable<object[]> QuotedFactoryNativeSamples()
         {
-            foreach (var owner in new[] { ("Mf", "mfidl.h", 72), ("Mf", "wmcontainer.h", 15), ("WmFormat", "wmsdkidl.h", 14) })
+            var owners = new[] { ("Mf", "mfidl.h", 72), ("Mf", "wmcontainer.h", 15), ("WmFormat", "wmsdkidl.h", 14) };
+            string reportPath = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT");
+            if (!string.IsNullOrEmpty(reportPath))
+            {
+                using var report = JsonDocument.Parse(File.ReadAllText(reportPath));
+                owners = report.RootElement.GetProperty("owners").EnumerateArray()
+                    .Where(owner => owner.GetProperty("changed").GetBoolean())
+                    .Select(owner => (
+                        Assert.Single(owner.GetProperty("partitionCandidates").EnumerateArray()).GetString(),
+                        Path.GetFileName(Assert.Single(owner.GetProperty("generatedHeaders").EnumerateArray()).GetString()),
+                        owner.GetProperty("dispositions").EnumerateArray().Count(value =>
+                            value.GetProperty("disposition").GetString() == "authored-original-idl" &&
+                            value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl")))
+                    .Where(owner => owner.Item3 != 0).ToArray();
+                Assert.NotEmpty(owners);
+            }
+            foreach (var owner in owners)
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"), ("arm64", "aarch64-pc-windows-msvc"),
@@ -482,6 +506,95 @@ namespace Win32MetadataScraperTests
                         foreach (bool enabled in new[] { false, true })
                             yield return new object[] { owner.Item1, owner.Item2, owner.Item3, architecture.Item1,
                                 architecture.Item2, mode.Item1, mode.Item2, enabled };
+        }
+
+        [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+            "WIN32METADATA_FACTORY_PUBLISHED_OBJ")]
+        [MemberData(nameof(PublishedQuotedFactoryNormalSamples))]
+        public void ActualNormalQuotedCallablesAddOnlyExactNewFloorsToPublishedSourcesWithoutLegacyFallback(
+            string partition, string architecture, int functionCount)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT")));
+            var dispositions = report.RootElement.GetProperty("owners").EnumerateArray().Where(owner =>
+                owner.GetProperty("partitionCandidates").EnumerateArray().Any(value => value.GetString() == partition))
+                .SelectMany(owner => owner.GetProperty("dispositions").EnumerateArray()).Where(value =>
+                    value.GetProperty("disposition").GetString() == "authored-original-idl" &&
+                    value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl").ToArray();
+            Assert.Equal(functionCount, dispositions.Length);
+            string obj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_NORMAL_OBJ");
+            string publishedObj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_PUBLISHED_OBJ");
+            var positive = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                Path.Combine(obj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var published = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                Path.Combine(publishedObj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var positiveMethods = positive.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var publishedMethods = published.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var newFloors = new List<AttributeListSyntax>();
+            string[] legacy = File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "supportedOS.rsp"));
+            foreach (var disposition in dispositions)
+            {
+                var fact = disposition.GetProperty("fact");
+                string symbol = fact.GetProperty("symbol").GetString();
+                string payload = fact.GetProperty("value").GetString().Substring(symbol.Length + 1);
+                var declaration = Assert.Single(positiveMethods[symbol]);
+                var attribute = Assert.Single(declaration.AttributeLists.SelectMany(list => list.Attributes).Where(IsFloor));
+                string floor = Assert.IsType<LiteralExpressionSyntax>(
+                    Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText;
+                Assert.Equal(payload, "SupportedOSPlatform(\"" + floor + "\")");
+                var list = Assert.IsType<AttributeListSyntax>(attribute.Parent);
+                Assert.Single(list.Attributes);
+                newFloors.Add(list);
+                Assert.Empty(Assert.Single(publishedMethods[symbol]).AttributeLists
+                    .SelectMany(value => value.Attributes).Where(IsFloor));
+                Assert.DoesNotContain(symbol + "=" + payload, legacy);
+            }
+            Assert.True(SyntaxFactory.AreEquivalent(published,
+                positive.RemoveNodes(newFloors, SyntaxRemoveOptions.KeepNoTrivia)),
+                "The actual normal source changed beyond the exact new function floors.");
+            foreach (string directory in new[] { obj, publishedObj })
+            {
+                string settings = File.ReadAllText(Path.Combine(directory, "scratch", architecture, partition + ".settings.rsp"));
+                Assert.Contains("parse-win32-annotations", settings);
+                Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+            }
+            this.output.WriteLine($"{partition}/{architecture}: {functionCount} exact new function floors; " +
+                "all published C# declarations, native return values, imports and unrelated syntax preserved.");
+
+            static bool IsFloor(AttributeSyntax attribute) => attribute.Name.ToString() ==
+                "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform";
+        }
+
+        public static IEnumerable<object[]> PublishedQuotedFactoryNormalSamples()
+        {
+            string reportPath = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT");
+            if (string.IsNullOrEmpty(reportPath))
+            {
+                yield return new object[] { "Mf", "x64", 13 };
+                yield break;
+            }
+            using var report = JsonDocument.Parse(File.ReadAllText(reportPath));
+            Assert.True(report.RootElement.GetProperty("normalParserActivation").GetProperty("ready").GetBoolean());
+            var project = System.Xml.Linq.XDocument.Load(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "Windows.Win32.proj"));
+            var common = new HashSet<string>(Assert.Single(project.Descendants().Where(element =>
+                element.Name.LocalName == "ExcludeFromCrossarch")).Value.Split(';',
+                    StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries), StringComparer.Ordinal);
+            foreach (var group in report.RootElement.GetProperty("owners").EnumerateArray()
+                .SelectMany(owner => owner.GetProperty("partitionCandidates").EnumerateArray().Select(partition =>
+                    (Partition: partition.GetString(), Owner: owner))).GroupBy(value => value.Partition, StringComparer.Ordinal))
+            {
+                int functionCount = group.SelectMany(value => value.Owner.GetProperty("dispositions").EnumerateArray())
+                    .Count(value => value.GetProperty("disposition").GetString() == "authored-original-idl" &&
+                        value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl");
+                Assert.True(functionCount > 0);
+                foreach (string architecture in common.Contains(group.Key)
+                    ? new[] { "common" } : new[] { "x86", "x64", "arm64" })
+                    yield return new object[] { group.Key, architecture, functionCount };
+            }
         }
 
         [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
