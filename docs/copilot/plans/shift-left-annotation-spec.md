@@ -908,6 +908,8 @@ and Clang discards attributes on a record redeclared after its definition.
 The typedef does not introduce a new type or change native layout. This encoding
 is needed because native MIDL does not emit an arbitrary interface `[annotation]`
 on the C++ definition; ignored-attribute diagnostics remain errors.
+The emitted declaration is guarded by `WIN32METADATA`, `__clang__`, and
+`__cplusplus`, so ordinary native consumers do not receive an extra typedef.
 
 Metadata-only C/C++ enum grouping invocations must be excluded from `MIDL_PASS`,
 including their trailing semicolon. An empty `_Win32_Enum_` expansion leaves a
