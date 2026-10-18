@@ -3271,6 +3271,24 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void CertificateBackupGroupingIsExcludedFromItsMidlImport()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            Assert.Contains(recipe.RootElement.GetProperty("midl").GetProperty("inputs").EnumerateArray(),
+                input => input.GetProperty("path").GetString() == @"um\certbcli.h");
+            Assert.Contains(recipe.RootElement.GetProperty("midl").GetProperty("outputs").EnumerateArray(),
+                output => output.GetProperty("source").GetString() == @"um\certpol.idl");
+            string[] additions = File.ReadAllLines(Path.Combine(project, "patches", "um", "certbcli.h.patch"))
+                .Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                    !line.StartsWith("+++", StringComparison.Ordinal))
+                .Select(line => line.Substring(1)).ToArray();
+            Assert.Equal("#if !defined(MIDL_PASS)", additions[0]);
+            Assert.Equal("_Win32_Enum_(CSBACKUP_TYPE, DWORD, CSBACKUP_TYPE_FULL, CSBACKUP_TYPE_LOGS_ONLY);", additions[1]);
+            Assert.Equal("#endif", additions[2]);
+        }
+
+        [Fact]
         public void MidlImportedAppMgmtHeaderBootstrapsItsOwnAnnotationMacros()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");

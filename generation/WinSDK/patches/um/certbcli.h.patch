@@ -2,11 +2,13 @@ diff --git a/um/certbcli.h b/um/certbcli.h
 index eebe909f..b50f3d2e 100644
 --- a/um/certbcli.h
 +++ b/um/certbcli.h
-@@ -63,6 +63,8 @@ extern "C" {
+@@ -63,6 +63,10 @@ extern "C" {
  //#define CSBACKUP_TYPE_INCREMENTAL	0x00000004	// not yet supported
  #define CSBACKUP_TYPE_MASK		0x00000003	// valid flags
  
++#if !defined(MIDL_PASS)
 +_Win32_Enum_(CSBACKUP_TYPE, DWORD, CSBACKUP_TYPE_FULL, CSBACKUP_TYPE_LOGS_ONLY);
++#endif
 +
  // Type of Restore passed to CertSrvRestorePrepare:
  // CSRESTORE_TYPE_FULL: Requesting restore of the complete DB (DB & Log files)
