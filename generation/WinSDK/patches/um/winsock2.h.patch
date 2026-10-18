@@ -1,35 +1,8 @@
 diff --git a/um/winsock2.h b/um/winsock2.h
-index 824a3558..0b928c34 100644
+index 824a3558..4cdebb21 100644
 --- a/um/winsock2.h
 +++ b/um/winsock2.h
-@@ -1626,6 +1626,8 @@ typedef struct pollfd {
- /* Socket function prototypes */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows81_
- WINSOCK_API_LINKAGE
- _Must_inspect_result_
- SOCKET
-@@ -1687,6 +1689,8 @@ int
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_WindowsVista_
- WINSOCK_API_LINKAGE
- int
- WSAAPI
-@@ -1951,6 +1955,8 @@ __inline double ntohd ( unsigned __int64 Value )
- #endif /* NO_EXTRA_HTON_FUNCTIONS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows81_
- WINSOCK_API_LINKAGE
- int
- WSAAPI
-@@ -2054,6 +2060,8 @@ int
+@@ -2258,6 +2258,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -38,66 +11,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2079,6 +2087,8 @@ int
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows81_
- WINSOCK_API_LINKAGE
- int
- WSAAPI
-@@ -2173,6 +2183,8 @@ int
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows81_
- WINSOCK_API_LINKAGE
- _Must_inspect_result_
- SOCKET
-@@ -2258,6 +2270,8 @@ int
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows81_
- WINSOCK_API_LINKAGE
- int
- WSAAPI
-@@ -2427,6 +2441,7 @@ int
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
- _WINSOCK_DEPRECATED_BY("Winsock 2")
- WINSOCK_API_LINKAGE
- BOOL
-@@ -2445,6 +2460,7 @@ BOOL
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
- _WINSOCK_DEPRECATED_BY("Winsock 2")
- WINSOCK_API_LINKAGE
- int
-@@ -2463,6 +2479,7 @@ int
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
- _WINSOCK_DEPRECATED_BY("Winsock 2")
- WINSOCK_API_LINKAGE
- FARPROC
-@@ -2481,6 +2498,7 @@ FARPROC
- #endif /* INCL_WINSOCK_API_TYPEDEFS */
- 
- #if INCL_WINSOCK_API_PROTOTYPES
-+_Win32_SetLastError_
- _WINSOCK_DEPRECATED_BY("Winsock 2")
- WINSOCK_API_LINKAGE
- int
-@@ -2710,6 +2728,8 @@ int
+@@ -2710,6 +2712,8 @@ int
  /* WinSock 2 API new function prototypes */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -106,7 +20,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  _Must_inspect_result_
  SOCKET
-@@ -2737,6 +2757,8 @@ SOCKET
+@@ -2737,6 +2741,8 @@ SOCKET
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -115,7 +29,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  BOOL
  WSAAPI
-@@ -2754,6 +2776,8 @@ BOOL
+@@ -2754,6 +2760,8 @@ BOOL
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -124,7 +38,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2776,6 +2800,8 @@ WSAConnect(
+@@ -2776,6 +2784,8 @@ WSAConnect(
  #define WSAConnectByName    WSAConnectByNameA
  #endif
  
@@ -133,7 +47,7 @@ index 824a3558..0b928c34 100644
  BOOL
  PASCAL
  WSAConnectByNameW(
-@@ -2789,6 +2815,8 @@ WSAConnectByNameW(
+@@ -2789,6 +2799,8 @@ WSAConnectByNameW(
      _In_opt_ const struct timeval * timeout,
      _Reserved_ LPWSAOVERLAPPED Reserved);
  
@@ -142,7 +56,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAConnectByNameW()")
  BOOL
  PASCAL
-@@ -2803,6 +2831,8 @@ WSAConnectByNameA(
+@@ -2803,6 +2815,8 @@ WSAConnectByNameA(
      _In_opt_ const struct timeval * timeout,
      _Reserved_ LPWSAOVERLAPPED Reserved);
  
@@ -151,7 +65,7 @@ index 824a3558..0b928c34 100644
  BOOL
  PASCAL
  WSAConnectByList(
-@@ -2831,6 +2861,8 @@ int
+@@ -2831,6 +2845,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -160,7 +74,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  WSAEVENT
  WSAAPI
-@@ -2848,6 +2880,8 @@ WSAEVENT
+@@ -2848,6 +2864,8 @@ WSAEVENT
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -169,7 +83,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSADuplicateSocketW()")
  WINSOCK_API_LINKAGE
  int
-@@ -2858,6 +2892,8 @@ WSADuplicateSocketA(
+@@ -2858,6 +2876,8 @@ WSADuplicateSocketA(
      _Out_ LPWSAPROTOCOL_INFOA lpProtocolInfo
      );
  
@@ -178,7 +92,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2897,6 +2933,8 @@ int
+@@ -2897,6 +2917,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -187,7 +101,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2918,6 +2956,8 @@ int
+@@ -2918,6 +2940,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -196,7 +110,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAEnumProtocolsW()")
  WINSOCK_API_LINKAGE
  int
-@@ -2928,6 +2968,8 @@ WSAEnumProtocolsA(
+@@ -2928,6 +2952,8 @@ WSAEnumProtocolsA(
      _Inout_ LPDWORD lpdwBufferLength
      );
  
@@ -205,7 +119,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2967,6 +3009,8 @@ int
+@@ -2967,6 +2993,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -214,7 +128,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -2988,6 +3032,8 @@ int
+@@ -2988,6 +3016,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -223,7 +137,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  BOOL
  WSAAPI
-@@ -3016,6 +3062,8 @@ BOOL
+@@ -3016,6 +3046,8 @@ BOOL
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -232,7 +146,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED
  WINSOCK_API_LINKAGE
  BOOL
-@@ -3041,6 +3089,8 @@ BOOL
+@@ -3041,6 +3073,8 @@ BOOL
  #pragma endregion
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -241,7 +155,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3062,6 +3112,8 @@ int
+@@ -3062,6 +3096,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -250,7 +164,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3083,6 +3135,8 @@ int
+@@ -3083,6 +3119,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -259,7 +173,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3116,6 +3170,8 @@ int
+@@ -3116,6 +3154,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -268,7 +182,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  SOCKET
  WSAAPI
-@@ -3147,6 +3203,8 @@ SOCKET
+@@ -3147,6 +3187,8 @@ SOCKET
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -277,7 +191,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3168,6 +3226,8 @@ int
+@@ -3168,6 +3210,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -286,7 +200,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3189,6 +3249,8 @@ int
+@@ -3189,6 +3233,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -295,7 +209,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3221,6 +3283,8 @@ int
+@@ -3221,6 +3267,8 @@ int
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -304,7 +218,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSARecv()")
  WINSOCK_API_LINKAGE
  int
-@@ -3244,6 +3308,8 @@ int
+@@ -3244,6 +3292,8 @@ int
  #pragma endregion
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -313,7 +227,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3277,6 +3343,8 @@ int
+@@ -3277,6 +3327,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -322,7 +236,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  BOOL
  WSAAPI
-@@ -3294,6 +3362,8 @@ BOOL
+@@ -3294,6 +3346,8 @@ BOOL
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -331,7 +245,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3324,6 +3394,8 @@ int
+@@ -3324,6 +3378,8 @@ int
  
  #if(_WIN32_WINNT >= 0x0600)
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -340,7 +254,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3342,6 +3414,8 @@ WSASendMsg(
+@@ -3342,6 +3398,8 @@ WSASendMsg(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -349,7 +263,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSASend()")
  WINSOCK_API_LINKAGE
  int
-@@ -3365,6 +3439,8 @@ int
+@@ -3365,6 +3423,8 @@ int
  #pragma endregion
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -358,7 +272,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  int
  WSAAPI
-@@ -3398,6 +3474,8 @@ int
+@@ -3398,6 +3458,8 @@ int
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -367,7 +281,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  BOOL
  WSAAPI
-@@ -3416,6 +3494,8 @@ BOOL
+@@ -3416,6 +3478,8 @@ BOOL
  
  #if INCL_WINSOCK_API_PROTOTYPES
  
@@ -376,7 +290,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSASocketW()")
  WINSOCK_API_LINKAGE
  _Must_inspect_result_
-@@ -3430,6 +3510,8 @@ WSASocketA(
+@@ -3430,6 +3494,8 @@ WSASocketA(
      _In_ DWORD dwFlags
      );
  
@@ -385,7 +299,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  _Must_inspect_result_
  SOCKET
-@@ -3482,6 +3564,8 @@ SOCKET
+@@ -3482,6 +3548,8 @@ SOCKET
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -394,7 +308,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  DWORD
  WSAAPI
-@@ -3508,6 +3592,8 @@ DWORD
+@@ -3508,6 +3576,8 @@ DWORD
  
  #if INCL_WINSOCK_API_PROTOTYPES
  
@@ -403,7 +317,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAAddressToStringW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3520,6 +3606,8 @@ WSAAddressToStringA(
+@@ -3520,6 +3590,8 @@ WSAAddressToStringA(
      _Inout_  LPDWORD             lpdwAddressStringLength
      );
  
@@ -412,7 +326,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3567,6 +3655,8 @@ INT
+@@ -3567,6 +3639,8 @@ INT
  
  #if INCL_WINSOCK_API_PROTOTYPES
  
@@ -421,7 +335,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAStringToAddressW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3579,6 +3669,8 @@ WSAStringToAddressA(
+@@ -3579,6 +3653,8 @@ WSAStringToAddressA(
      _Inout_ LPINT               lpAddressLength
      );
  
@@ -430,7 +344,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3629,6 +3721,8 @@ INT
+@@ -3629,6 +3705,8 @@ INT
  
  #if INCL_WINSOCK_API_PROTOTYPES
  
@@ -439,7 +353,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSALookupServiceBeginW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3639,6 +3733,8 @@ WSALookupServiceBeginA(
+@@ -3639,6 +3717,8 @@ WSALookupServiceBeginA(
      _Out_ LPHANDLE       lphLookup
      );
  
@@ -448,7 +362,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3680,6 +3776,8 @@ INT
+@@ -3680,6 +3760,8 @@ INT
  
  #if INCL_WINSOCK_API_PROTOTYPES
  
@@ -457,7 +371,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSALookupServiceNextW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3691,6 +3789,8 @@ WSALookupServiceNextA(
+@@ -3691,6 +3773,8 @@ WSALookupServiceNextA(
      _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSAQUERYSETA lpqsResults
      );
  
@@ -466,7 +380,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3735,6 +3835,8 @@ INT
+@@ -3735,6 +3819,8 @@ INT
  
  #if(_WIN32_WINNT >= 0x0501)
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -475,7 +389,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3767,6 +3869,8 @@ INT
+@@ -3767,6 +3853,8 @@ INT
  #endif //(_WIN32_WINNT >= 0x0501)
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -484,7 +398,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3787,6 +3891,8 @@ INT
+@@ -3787,6 +3875,8 @@ INT
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -493,7 +407,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAInstallServiceClassW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3794,6 +3900,8 @@ WSAAPI
+@@ -3794,6 +3884,8 @@ WSAAPI
  WSAInstallServiceClassA(
      _In_  LPWSASERVICECLASSINFOA   lpServiceClassInfo
      );
@@ -502,7 +416,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3826,6 +3934,8 @@ INT
+@@ -3826,6 +3918,8 @@ INT
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -511,7 +425,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3848,6 +3958,8 @@ INT
+@@ -3848,6 +3942,8 @@ INT
  #if INCL_WINSOCK_API_PROTOTYPES
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -520,7 +434,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAGetServiceClassInfoW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3861,6 +3973,8 @@ WSAGetServiceClassInfoA(
+@@ -3861,6 +3957,8 @@ WSAGetServiceClassInfoA(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
@@ -529,7 +443,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3907,6 +4021,8 @@ INT
+@@ -3907,6 +4005,8 @@ INT
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -538,7 +452,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3916,6 +4032,8 @@ WSAEnumNameSpaceProvidersA(
+@@ -3916,6 +4016,8 @@ WSAEnumNameSpaceProvidersA(
      _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSANAMESPACE_INFOA lpnspBuffer
      );
  
@@ -547,7 +461,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -3931,6 +4049,8 @@ WSAEnumNameSpaceProvidersW(
+@@ -3931,6 +4033,8 @@ WSAEnumNameSpaceProvidersW(
  #endif /* !UNICODE */
  
  #if(_WIN32_WINNT >= 0x0600 )
@@ -556,7 +470,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAEnumNameSpaceProvidersW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -3940,6 +4060,8 @@ WSAEnumNameSpaceProvidersExA(
+@@ -3940,6 +4044,8 @@ WSAEnumNameSpaceProvidersExA(
      _Out_writes_bytes_to_(*lpdwBufferLength,*lpdwBufferLength) LPWSANAMESPACE_INFOEXA lpnspBuffer
      );
  
@@ -565,7 +479,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -4006,6 +4128,8 @@ INT
+@@ -4006,6 +4112,8 @@ INT
  #if INCL_WINSOCK_API_PROTOTYPES
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -574,7 +488,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSAGetServiceClassNameByClassIdW()")
  WINSOCK_API_LINKAGE
  _Success_(return == 0) INT
-@@ -4018,6 +4142,8 @@ WSAGetServiceClassNameByClassIdA(
+@@ -4018,6 +4126,8 @@ WSAGetServiceClassNameByClassIdA(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
@@ -583,7 +497,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  _Success_(return == 0) INT
  WSAAPI
-@@ -4061,6 +4187,8 @@ INT
+@@ -4061,6 +4171,8 @@ INT
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -592,7 +506,7 @@ index 824a3558..0b928c34 100644
  _WINSOCK_DEPRECATED_BY("WSASetServiceW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -4071,6 +4199,8 @@ WSASetServiceA(
+@@ -4071,6 +4183,8 @@ WSASetServiceA(
      _In_ DWORD dwControlFlags
      );
  
@@ -601,7 +515,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -4110,6 +4240,8 @@ INT
+@@ -4110,6 +4224,8 @@ INT
  #endif /* INCL_WINSOCK_API_TYPEDEFS */
  
  #if INCL_WINSOCK_API_PROTOTYPES
@@ -610,7 +524,7 @@ index 824a3558..0b928c34 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -4132,6 +4264,8 @@ INT
+@@ -4132,6 +4248,8 @@ INT
  
  #if(_WIN32_WINNT >= 0x0600)
  #if INCL_WINSOCK_API_PROTOTYPES

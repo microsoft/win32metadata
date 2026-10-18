@@ -1,5 +1,5 @@
 diff --git a/um/mprapi.h b/um/mprapi.h
-index eca63657..69b1e4e5 100644
+index eca63657..d8229910 100644
 --- a/um/mprapi.h
 +++ b/um/mprapi.h
 @@ -1994,6 +1994,7 @@ typedef struct RAS_UPDATE_CONNECTION_
@@ -985,15 +985,7 @@ index eca63657..69b1e4e5 100644
  DWORD APIENTRY
  MprInfoBlockSet(
      _In_      LPVOID                  lpHeader,
-@@ -3175,6 +3304,7 @@ MprInfoBlockSet(
-     _Out_     LPVOID*                 lplpNewHeader
- );
- 
-+_Win32_SupportedOS_Server2000_
- DWORD APIENTRY
- MprInfoBlockFind(
-     _In_      LPVOID                  lpHeader,
-@@ -3184,6 +3314,7 @@ MprInfoBlockFind(
+@@ -3184,6 +3313,7 @@ MprInfoBlockFind(
      _Outptr_result_bytebuffer_((*lpdwItemSize)*(*lpdwItemCount))     LPBYTE*                 lplpItemData        // OPTIONAL
  );
  

@@ -1767,10 +1767,18 @@ or consumer qualification; consumer compatibility remains **UNVERIFIED**.
 The first two reserved bulk batches add **38 distinct original-header
 patches**, not 39: `rpcproxy.h` has 36 retained, unbound facts and no
 authored patch. The source-bound pass relocates exactly 2,267
-SupportedOS rows and 304 SetLastError rows into 2,599 annotation
+SupportedOS rows and 304 SetLastError rows into 2,571 annotation
 placements. Removing just those inserted annotation lines restores all
 38 original native files byte-for-byte. The sidecar set difference is
 exactly those 2,571 rows, with no unrelated additions or removals.
+
+The initial draft also inserted 28 partial markers for retained facts:
+18 SupportedOS and ten SetLastError markers in `clusapi.h`, `http.h`,
+`mprapi.h`, `resapi.h`, `windns.h` and `winsock2.h`. Those markers are
+removed using their original AST declaration offsets; their exact legacy
+rows remain. Incomplete facts stay entirely legacy, matching the shared
+mapper's corrected all-or-legacy behavior. This does not undo any of the
+2,571 completed fact relocations or reduce the 38-header source count.
 
 This is a source majority, not complete annotation migration for those
 headers. There are 128 explicitly retained mapper facts and 41 additional

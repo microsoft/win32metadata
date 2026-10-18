@@ -1,5 +1,5 @@
 diff --git a/um/http.h b/um/http.h
-index 4178ef13..bca27adb 100644
+index 4178ef13..2ef57112 100644
 --- a/um/http.h
 +++ b/um/http.h
 @@ -2997,6 +2997,7 @@ typedef enum _HTTP_FEATURE_ID
@@ -194,23 +194,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3318,6 +3342,7 @@ HttpReceiveRequestEntityBody(
- 
- #if _WIN32_WINNT >= 0x0600
- 
-+_Win32_SupportedOS_WindowsVista_
- HTTPAPI_LINKAGE
- ULONG
- WINAPI
-@@ -3356,6 +3381,7 @@ HttpSendHttpResponse(
- 
- #if _WIN32_WINNT >= 0x0600
- 
-+_Win32_SupportedOS_WindowsVista_
- HTTPAPI_LINKAGE
- ULONG
- WINAPI
-@@ -3393,6 +3419,7 @@ HttpSendResponseEntityBody(
+@@ -3393,6 +3417,7 @@ HttpSendResponseEntityBody(
  
  #endif // _WIN32_WINNT >= 0x0600
  
@@ -218,7 +202,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3405,6 +3432,7 @@ HttpDeclarePush(
+@@ -3405,6 +3430,7 @@ HttpDeclarePush(
      _In_opt_ PHTTP_REQUEST_HEADERS Headers
      );
  
@@ -226,7 +210,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3426,6 +3454,7 @@ HttpWaitForDisconnectEx(
+@@ -3426,6 +3452,7 @@ HttpWaitForDisconnectEx(
      IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
@@ -234,7 +218,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3435,6 +3464,7 @@ HttpCancelHttpRequest(
+@@ -3435,6 +3462,7 @@ HttpCancelHttpRequest(
      IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
@@ -242,7 +226,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3477,6 +3507,7 @@ HttpFindUrlGroupId(
+@@ -3477,6 +3505,7 @@ HttpFindUrlGroupId(
  // Cache manipulation APIs.
  //
  
@@ -250,7 +234,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3487,6 +3518,7 @@ HttpFlushResponseCache(
+@@ -3487,6 +3516,7 @@ HttpFlushResponseCache(
      IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
@@ -258,7 +242,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3498,6 +3530,7 @@ HttpAddFragmentToCache(
+@@ -3498,6 +3528,7 @@ HttpAddFragmentToCache(
      IN LPOVERLAPPED Overlapped OPTIONAL
      );
  
@@ -266,7 +250,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3515,6 +3548,7 @@ HttpReadFragmentFromCache(
+@@ -3515,6 +3546,7 @@ HttpReadFragmentFromCache(
  // Server configuration APIs
  //
  
@@ -274,7 +258,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3526,6 +3560,7 @@ HttpSetServiceConfiguration(
+@@ -3526,6 +3558,7 @@ HttpSetServiceConfiguration(
      _Reserved_ LPOVERLAPPED pOverlapped
      );
  
@@ -282,7 +266,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3537,6 +3572,7 @@ HttpUpdateServiceConfiguration(
+@@ -3537,6 +3570,7 @@ HttpUpdateServiceConfiguration(
      _Reserved_ LPOVERLAPPED Overlapped
      );
  
@@ -290,7 +274,7 @@ index 4178ef13..bca27adb 100644
  HTTPAPI_LINKAGE
  ULONG
  WINAPI
-@@ -3548,6 +3584,7 @@ HttpDeleteServiceConfiguration(
+@@ -3548,6 +3582,7 @@ HttpDeleteServiceConfiguration(
      _Reserved_ LPOVERLAPPED pOverlapped
      );
  
