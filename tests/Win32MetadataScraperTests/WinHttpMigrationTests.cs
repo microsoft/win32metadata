@@ -1146,6 +1146,170 @@ namespace Win32MetadataScraperTests
                 Assert.Contains("+_Win32_FlagsEnum_(" + group + ", DWORD,", patch);
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void EleventhAuthoredWerHeadersPreserveGroupsFloorsAndExactNativeUses(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, WerNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, WerNamespace, "Apis", architecture);
+            Assert.Equal(41, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (var image in new[] { control, current })
+            {
+                var methods = Methods(image.Reader, WerNamespace, "Apis", architecture);
+                foreach (var contract in AuthoredWerHeaderContracts())
+                    foreach (string name in contract.Functions)
+                        Assert.Equal(new[] { contract.OS },
+                            AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                foreach (var group in AuthoredWerEnumGroups())
+                {
+                    var type = Type(image.Reader, group.Name, architecture, WerNamespace);
+                    var fields = type.GetFields().Select(image.Reader.GetFieldDefinition).ToArray();
+                    Assert.Equal("value__", image.Reader.GetString(fields[0].Name));
+                    Assert.Equal("UInt32", fields[0].DecodeSignature(Signatures, null));
+                    Assert.Single(type.GetCustomAttributes().Where(handle => AttributeName(image.Reader, handle) == "FlagsAttribute"));
+                    Assert.Equal(group.Members.Select(member => member.Name),
+                        fields.Skip(1).Select(field => image.Reader.GetString(field.Name)));
+                    foreach (var member in group.Members)
+                    {
+                        var field = fields.Single(value => image.Reader.GetString(value.Name) == member.Name);
+                        AssertNativeLiteral(image.Reader, field, WerNamespace + "." + group.Name,
+                            ConstantTypeCode.UInt32, BitConverter.GetBytes(member.Value));
+                    }
+                    Assert.Equal(SnapshotType(control.Reader, Type(control.Reader, group.Name, architecture, WerNamespace)),
+                        SnapshotType(image.Reader, type));
+                }
+            }
+            foreach (var use in ReviewedEnumUses.Where(value => value.Namespace == WerNamespace))
+            {
+                var original = before[use.Owner].GetParameters().Select(control.Reader.GetParameter)
+                    .Single(value => control.Reader.GetString(value.Name) == use.Member);
+                var parameter = after[use.Owner].GetParameters().Select(current.Reader.GetParameter)
+                    .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+                Assert.Equal(original.Attributes, parameter.Attributes);
+                Assert.Equal(use.OldType, before[use.Owner].DecodeSignature(Signatures, null).ParameterTypes[original.SequenceNumber - 1]);
+                Assert.Equal(use.Native, after[use.Owner].DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+                Assert.Empty(AttributeValues(control.Reader, original.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            }
+            foreach (var use in ReviewedHandleUses.Where(value => value.Namespace == WerNamespace))
+            {
+                var original = before[use.Method].GetParameters().Select(control.Reader.GetParameter)
+                    .Single(value => control.Reader.GetString(value.Name) == use.Member);
+                var parameter = after[use.Method].GetParameters().Select(current.Reader.GetParameter)
+                    .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                Assert.Equal(original.SequenceNumber, parameter.SequenceNumber);
+                Assert.Equal(original.Attributes, parameter.Attributes);
+                Assert.Equal(use.OldType, before[use.Method].DecodeSignature(Signatures, null).ParameterTypes[original.SequenceNumber - 1]);
+                Assert.Equal(use.Native, after[use.Method].DecodeSignature(Signatures, null).ParameterTypes[parameter.SequenceNumber - 1]);
+            }
+            var transfers = ReviewedLifecycleTransfers.Where(value => value.Namespace == WerNamespace).ToArray();
+            Assert.Equal(2, transfers.Length);
+            foreach (var entry in after)
+            {
+                Assert.Equal(Import(control.Reader, before[entry.Key]), Import(current.Reader, entry.Value));
+                foreach (var parameter in entry.Value.GetParameters().Select(current.Reader.GetParameter))
+                {
+                    string name = current.Reader.GetString(parameter.Name);
+                    var transfer = transfers.SingleOrDefault(value => value.Method == entry.Key && value.Member == name);
+                    Assert.Equal(transfer == null ? Array.Empty<string>() : LifecycleAttributes(transfer.Cleanup),
+                        Ownership(current.Reader, parameter.GetCustomAttributes()));
+                    if (transfer != null)
+                        Assert.Equal(ParameterAttributes.Out, parameter.Attributes);
+                }
+            }
+            var alias = Type(current.Reader, "Apis", architecture, WerNamespace).GetFields()
+                .Select(current.Reader.GetFieldDefinition).Single(field => current.Reader.GetString(field.Name) == WerAlias);
+            AssertNativeLiteral(current.Reader, alias, "UInt32", ConstantTypeCode.UInt32, new byte[] { 128, 0, 0, 0 });
+            this.output.WriteLine($"Wer/{architecture}: 35 floors, 41 imports, three UInt32 flag groups and all 21 ordered members " +
+                "remain exact; five advisory enum targets accompany native DWORD/PDWORD, seventeen pseudo-handle uses become " +
+                "native pointer representations, and only two producer outputs gain lifecycle facts. The scalar alias stays UInt32/128.");
+        }
+
+        [MigrationFact]
+        public void WholeWerHeadersHaveOnlyExactNativeUsesAliasAndProducerLifecycleTransfers()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            var removed = ReviewedLifecycleTransfers.Where(value => value.Namespace == WerNamespace && value.Synthetic).ToArray();
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(2, removed.Length);
+            foreach (var transfer in removed)
+            {
+                string key = transfer.TypeSite + "#124";
+                var attributes = LifecycleAttributes(transfer.Cleanup)
+                    .Append(MetadataNamespace + ".NativeTypedefAttribute:01000000").OrderBy(value => value, StringComparer.Ordinal);
+                Assert.Equal(transfer.TypeSite + "\nPublic, SequentialLayout, Sealed, BeforeFieldInit|System.ValueType|0|0|" +
+                    string.Join(",", attributes) + "\nF|Value|Public|Void*|-1|||", SnapshotType(control.Reader, before[key]));
+                Assert.DoesNotContain(key, after.Keys);
+            }
+            Assert.Equal(before.Keys.Except(removed.Select(value => value.TypeSite + "#124"), StringComparer.Ordinal)
+                .OrderBy(value => value, StringComparer.Ordinal), after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            var enumSites = new HashSet<string>(StringComparer.Ordinal);
+            var handleSites = new HashSet<string>(StringComparer.Ordinal);
+            var lifecycleSites = new HashSet<string>(StringComparer.Ordinal);
+            var constantSites = new HashSet<string>(StringComparer.Ordinal);
+            var changed = new List<string>();
+            foreach (var entry in after)
+            {
+                string original = SnapshotType(control.Reader, before[entry.Key]);
+                string actual = SnapshotType(current.Reader, entry.Value);
+                if (original != actual)
+                    changed.Add(entry.Key);
+                if (entry.Key == WerNamespace + ".Apis#124")
+                {
+                    string[] expectedRows = SnapshotType(control.Reader, before[entry.Key], normalizeReviewedChanges: true,
+                        usedEnumSites: enumSites, usedHandleSites: handleSites, usedLifecycleSites: lifecycleSites,
+                        usedNativeConstantSites: constantSites).Split('\n');
+                    string[] actualRows = actual.Split('\n');
+                    Assert.Equal(expectedRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)),
+                        actualRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)));
+                    var expectedMethods = MethodRows(expectedRows);
+                    var actualMethods = MethodRows(actualRows);
+                    var order = expectedMethods.Keys.ToList();
+                    foreach (var transfer in removed)
+                    {
+                        Assert.True(order.Remove(transfer.Cleanup));
+                        order.Insert(order.IndexOf(transfer.Method), transfer.Cleanup);
+                    }
+                    Assert.Equal(order, actualMethods.Keys);
+                    foreach (var method in expectedMethods)
+                        Assert.Equal(method.Value, actualMethods[method.Key]);
+                    Assert.Equal(before[entry.Key].GetFields().Select(handle =>
+                        control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                        entry.Value.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name))
+                            .Where(name => name != WerAlias));
+                }
+                else
+                {
+                    Assert.Equal(before[entry.Key].GetFields().Select(handle =>
+                        control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                        entry.Value.GetFields().Select(handle => current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                    Assert.True(original == actual, "Unowned physical change: " + entry.Key);
+                }
+            }
+            Assert.Equal(new[] { WerNamespace + ".Apis#124" }, changed);
+            Assert.Equal(ReviewedEnumUses.Where(value => value.Namespace == WerNamespace).Select(value => value.Site)
+                .OrderBy(value => value, StringComparer.Ordinal), enumSites.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(ReviewedHandleUses.Where(value => value.Namespace == WerNamespace).Select(value => value.Site)
+                .OrderBy(value => value, StringComparer.Ordinal), handleSites.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(removed.Select(value => value.Site).OrderBy(value => value, StringComparer.Ordinal),
+                lifecycleSites.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(new[] { WerNamespace + ".Apis." + WerAlias }, constantSites);
+            this.output.WriteLine("All 37,314 original physical identities graded: only two exact old pseudo handles disappear " +
+                "and Wer.Apis has the five native enum associations, seventeen native pointer uses, two producer lifecycle additions " +
+                "and one UInt32 scalar alias. All 37,311 other surviving snapshots, real field layouts/order, logical enum members " +
+                "and COM/vtable order are unchanged; only the two explicit static cleanup declarations move.");
+        }
+
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredDwmHeaderContracts()
         {
             yield return ("windows6.0.6000", new[]
