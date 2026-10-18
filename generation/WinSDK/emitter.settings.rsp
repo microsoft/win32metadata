@@ -37,7 +37,6 @@ APPLY_SNAPSHOT_VHDSET_FLAG
 ASM_BIND_FLAGS
 ATTACH_VIRTUAL_DISK_FLAG
 CLSCTX
-COINIT
 COMPACT_VIRTUAL_DISK_FLAG
 CREATE_VIRTUAL_DISK_FLAG
 D3D11_BIND_FLAG
@@ -74,7 +73,6 @@ OPEN_AS_INFO_FLAGS
 OPEN_VIRTUAL_DISK_FLAG
 OPM_HDCP_FLAGS
 OUTPUT_STATE
-PATHCCH_OPTIONS
 PKA_FLAGS
 PLACEHOLDER_STATES
 PRINTFLAG
@@ -1471,7 +1469,6 @@ OleRegGetUserType::dwFormOfType=[AssociatedEnum("USERCLASSTYPE")]
 OLEVERB::grfAttribs=[AssociatedEnum("OLEVERBATTRIB")]
 PathCleanupSpec::return=[AssociatedEnum("PCS_RET")]
 PathResolve::fFlags=[AssociatedEnum("PRF_FLAGS")]
-PICTDESC::picType=[AssociatedEnum("PICTYPE")]
 PIXELFORMATDESCRIPTOR::iLayerType=[AssociatedEnum("PFD_LAYER_TYPE")]
 PRINTER_OPTIONSA::dwFlags=[AssociatedEnum("PRINTER_OPTION_FLAGS")]
 PRINTER_OPTIONSW::dwFlags=[AssociatedEnum("PRINTER_OPTION_FLAGS")]
@@ -1567,8 +1564,6 @@ CreatePrivateNamespaceA::return=[RAIIFree("ClosePrivateNamespace")]
 CreatePrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
 DnsAcquireContextHandle_A::pContext=[RAIIFree("DnsReleaseContextHandle")]
 DnsAcquireContextHandle_W::pContext=[RAIIFree("DnsReleaseContextHandle")]
-DsGetDcOpenA::RetGetDcContext=[RAIIFree("DsGetDcCloseW")]
-DsGetDcOpenW::RetGetDcContext=[RAIIFree("DsGetDcCloseW")]
 FilterFindFirst::lpFilterFind=[RAIIFree("FilterFindClose")]
 FilterInstanceFindFirst::lpFilterInstanceFind=[RAIIFree("FilterInstanceFindClose")]
 FilterVolumeFindFirst::lpVolumeFind=[RAIIFree("FilterVolumeFindClose")]
@@ -1589,18 +1584,12 @@ FindFirstVolumeA::return=[RAIIFree("FindVolumeClose")]
 FindFirstVolumeMountPointA::return=[RAIIFree("FindVolumeMountPointClose")]
 FindFirstVolumeMountPointW::return=[RAIIFree("FindVolumeMountPointClose")]
 FindFirstVolumeW::return=[RAIIFree("FindVolumeClose")]
-HeapCreate::return=[RAIIFree("HeapDestroy")]
-Icmp6CreateFile::return=[RAIIFree("IcmpCloseHandle")]
-IcmpCreateFile::return=[RAIIFree("IcmpCloseHandle")]
 OpenBackupEventLogA::return=[RAIIFree("CloseEventLog")]
 OpenBackupEventLogW::return=[RAIIFree("CloseEventLog")]
 OpenEventLogA::return=[RAIIFree("CloseEventLog")]
 OpenEventLogW::return=[RAIIFree("CloseEventLog")]
 OpenPrivateNamespaceA::return=[RAIIFree("ClosePrivateNamespace")]
 OpenPrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
-PerfOpenQueryHandle::phQuery=[RAIIFree("PerfCloseQueryHandle")]
-PerfStartProvider::phProvider=[RAIIFree("PerfStopProvider")]
-PerfStartProviderEx::Provider=[RAIIFree("PerfStopProvider")]
 RegisterEventSourceA::return=[RAIIFree("DeregisterEventSource")]
 RegisterEventSourceW::return=[RAIIFree("DeregisterEventSource")]
 SHChangeNotification_Lock::return=[RAIIFree("SHChangeNotification_Unlock")]
@@ -2358,10 +2347,6 @@ HttpReceiveClientCertificate::SslClientCertInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpparsereplies
-IcmpSendEcho::ReplyBuffer=[ContainsInteriorPointers]
-IcmpSendEcho2::ReplyBuffer=[ContainsInteriorPointers]
-IcmpSendEcho2Ex::ReplyBuffer=[ContainsInteriorPointers]
-IcmpParseReplies::ReplyBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcea
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationa
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamea

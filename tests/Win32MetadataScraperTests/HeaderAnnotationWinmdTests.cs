@@ -556,6 +556,309 @@ unsigned long __stdcall NativeResourceType(
                     .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
+        [Fact]
+        public void ExistingNativeNonfloorCategoryKeepsSourceOwnersAndExactStaging()
+        {
+            string project = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            foreach (var group in ExistingNativeNonfloorGroups.Where(group => group.Synthetic))
+            {
+                Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) &&
+                    name.GetString() == group.Name);
+                Assert.Contains(items, item => item.TryGetProperty("addUsesTo", out var name) &&
+                    name.GetString() == group.Name && item.GetProperty("namespace").GetString() == group.Namespace);
+                string macro = group.Flags ? "_Win32_FlagsEnum_" : "_Win32_Enum_";
+                Assert.Single(File.ReadAllLines(Path.Combine(project, "patches", "um", group.Header + ".patch"))
+                    .Where(line => line.StartsWith("+" + macro + "(" + group.Name + ",", StringComparison.Ordinal)));
+            }
+            var routes = File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp"));
+            Assert.Contains("DISPATCH_FLAGS=Windows.Win32.System.Com", routes);
+            Assert.Contains("VAR_CHANGE_FLAGS=Windows.Win32.System.Variant", routes);
+            foreach (string header in new[] { "objbase.h", "pathcch.h" })
+                Assert.Contains("+__attribute__((flag_enum))",
+                    File.ReadAllLines(Path.Combine(project, "patches", "um", header + ".patch")));
+            string compression = File.ReadAllText(Path.Combine(project, "patches", "um", "compressapi.h.patch"));
+            Assert.Contains("_Win32_RAIIFree_(CloseCompressor, -1, 0)", compression);
+            Assert.Contains("_Win32_RAIIFree_(CloseDecompressor, -1, 0)", compression);
+        }
+
+        private static readonly (string Name, string Header, string Namespace, string Storage,
+            bool Flags, bool Synthetic, int Members)[] ExistingNativeNonfloorGroups =
+        {
+            ("ACTIVEOBJECT_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 2),
+            ("NUMPARSE_FLAGS", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", true, true, 16),
+            ("VARCMP", "oleauto.h", "Windows.Win32.System.Ole", "UInt32", false, true, 4),
+            ("DISPATCH_FLAGS", "oleauto.h", "Windows.Win32.System.Com", "UInt16", true, true, 4),
+            ("VAR_CHANGE_FLAGS", "oleauto.h", "Windows.Win32.System.Variant", "UInt16", true, true, 8),
+            ("PICTYPE", "olectl.h", "Windows.Win32.System.Ole", "Int16", false, true, 6),
+            ("LOAD_PICTURE_FLAGS", "olectl.h", "Windows.Win32.System.Ole", "UInt32", true, true, 4),
+            ("STGM", "coml2api.h", "Windows.Win32.System.Com", "UInt32", true, true, 18),
+            ("STGFMT", "coml2api.h", "Windows.Win32.System.Com.StructuredStorage", "UInt32", false, true, 6),
+            ("COINIT", "objbase.h", "Windows.Win32.System.Com", "Int32", true, false, 4),
+            ("PATHCCH_OPTIONS", "pathcch.h", "Windows.Win32.UI.Shell", "UInt32", true, false, 8),
+        };
+
+        [NativeMigrationTheory("EXISTING_NATIVE_NONFLOOR_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void NormalExistingNativeGroupsKeepPhysicalNamesStorageFlagsAndValues(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("EXISTING_NATIVE_NONFLOOR_ROOT");
+            string normal = Path.Combine(root, architecture == "x64" ? "scrape" : "scrape-" + architecture,
+                "generated", architecture);
+            string directory = Path.Combine(root, "physical", "groups", architecture, Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            var names = ExistingNativeNonfloorGroups.Select(group => group.Name).Append("COINITBASE").ToHashSet();
+            var observed = new HashSet<string>();
+            foreach (string path in Directory.EnumerateFiles(normal, "*.cs"))
+            {
+                var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
+                var namespaces = source.Members.OfType<NamespaceDeclarationSyntax>().Select(ns =>
+                    ns.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(ns.Members
+                        .OfType<EnumDeclarationSyntax>().Where(type => names.Contains(type.Identifier.ValueText)))))
+                    .Where(ns => ns.Members.Count != 0).ToArray();
+                foreach (var type in namespaces.SelectMany(ns => ns.Members).OfType<EnumDeclarationSyntax>())
+                    Assert.True(observed.Add(type.Identifier.ValueText), "A source group must have one normal declaration.");
+                if (namespaces.Length == 0)
+                    continue;
+                var bounded = SyntaxFactory.ParseCompilationUnit(
+                    "using System; using Windows.Win32.Foundation.Metadata;")
+                    .AddMembers(namespaces);
+                File.WriteAllText(Path.Combine(directory, Path.GetFileName(path)),
+                    bounded.NormalizeWhitespace().ToFullString());
+            }
+            Assert.Equal(names.OrderBy(name => name), observed.OrderBy(name => name));
+            using var baselinePaths = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "frozen-baseline-types.json")));
+            using var baseline = new MetadataImage(baselinePaths.RootElement.GetProperty("path").GetString());
+            using var candidate = Emit(directory, architecture, requiredNamespaces:
+                ExistingNativeNonfloorGroups.ToDictionary(group => group.Name, group => group.Namespace));
+            var values = new Dictionary<string, string[]>();
+            foreach (var group in ExistingNativeNonfloorGroups)
+            {
+                var current = FindType(candidate.Reader, group.Name);
+                var old = FindType(baseline.Reader, group.Name);
+                Assert.Equal(group.Namespace, candidate.Reader.GetString(current.Namespace));
+                Assert.Equal(group.Namespace, baseline.Reader.GetString(old.Namespace));
+                foreach (var pair in new[] { (candidate.Reader, current), (baseline.Reader, old) })
+                {
+                    var storage = pair.Item2.GetFields().Select(pair.Item1.GetFieldDefinition)
+                        .Single(field => pair.Item1.GetString(field.Name) == "value__");
+                    Assert.Equal(group.Storage, storage.DecodeSignature(new SignatureNames(), null));
+                    Assert.Equal(group.Flags, pair.Item2.GetCustomAttributes().Any(
+                        handle => AttributeName(pair.Item1, handle) == "FlagsAttribute"));
+                    AssertDoesNotHaveAttribute(pair.Item1, pair.Item2.GetCustomAttributes(), "ScopedEnumAttribute");
+                }
+                string[] expected = Members(baseline.Reader, old);
+                string[] actual = Members(candidate.Reader, current);
+                Assert.Equal(group.Members, actual.Length);
+                Assert.Equal(expected, actual);
+                values[group.Name] = actual;
+            }
+            AssertMetadataClosure(candidate.Reader);
+            File.WriteAllText(Path.Combine(directory, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                scope = "Nine actual source groups and two native flag enums versus eleven named frozen physical types.",
+                nativeOriginals = 5,
+                sourceGroups = 9,
+                sourceGroupMembers = 68,
+                types = ExistingNativeNonfloorGroups.Select(group => new
+                {
+                    group.Name, group.Namespace, group.Storage, group.Flags, group.Synthetic, group.Members,
+                    values = values[group.Name],
+                }),
+                candidatePath = Path.Combine(directory, "Test.winmd"),
+                baselinePath = baselinePaths.RootElement.GetProperty("path").GetString(),
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            static string[] Members(MetadataReader reader, TypeDefinition type)
+                => type.GetFields().Select(reader.GetFieldDefinition)
+                    .Where(field => reader.GetString(field.Name) != "value__")
+                    .Select(field =>
+                    {
+                        var constant = reader.GetConstant(field.GetDefaultValue());
+                        return reader.GetString(field.Name) + "=" + constant.TypeCode + ":" +
+                            Convert.ToHexString(reader.GetBlobBytes(constant.Value));
+                    }).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        [NativeMigrationTheory("EXISTING_NATIVE_NONFLOOR_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void NormalExistingNativeProducersKeepExactCleanupTargetsAndNativeShapes(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("EXISTING_NATIVE_NONFLOOR_ROOT");
+            string normal = Path.Combine(root, architecture == "x64" ? "scrape" : "scrape-" + architecture,
+                "generated", architecture);
+            string directory = Path.Combine(root, "physical", "producers", architecture, Guid.NewGuid().ToString("N"));
+            string controlDirectory = Path.Combine(directory, "legacy");
+            string candidateDirectory = Path.Combine(directory, "candidate");
+            Directory.CreateDirectory(controlDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            using var baselinePaths = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "frozen-baseline-types.json")));
+            string baselinePath = baselinePaths.RootElement.GetProperty("path").GetString();
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baselinePath), "exact-source-inputs.zip"));
+            var selections = new[]
+            {
+                (File: "Memory", Methods: new[] { "HeapCreate", "HeapDestroy" }),
+                (File: "Perf", Methods: new[] { "PerfStartProvider", "PerfStartProviderEx", "PerfOpenQueryHandle",
+                    "PerfStopProvider", "PerfCloseQueryHandle" }),
+                (File: "IpHlp", Methods: new[] { "IcmpCreateFile", "Icmp6CreateFile", "IcmpSendEcho", "IcmpSendEcho2",
+                    "IcmpSendEcho2Ex", "IcmpParseReplies", "IcmpCloseHandle" }),
+                (File: "ActiveDirectory", Methods: new[] { "DsGetDcOpenA", "DsGetDcOpenW", "DsGetDcCloseW" }),
+                (File: "CmpApi", Methods: new[] { "CreateCompressor", "CreateDecompressor",
+                    "CloseCompressor", "CloseDecompressor" }),
+                (File: "ComOle", Methods: Array.Empty<string>()),
+            };
+            foreach (var selection in selections)
+            {
+                var entry = archive.GetEntry(architecture + "\\" + selection.File + ".cs") ??
+                    archive.GetEntry("common\\" + selection.File + ".cs");
+                Assert.NotNull(entry);
+                using var stream = new StreamReader(entry.Open());
+                WriteSelected(stream.ReadToEnd(), selection.File, selection.Methods, controlDirectory);
+                WriteSelected(File.ReadAllText(Path.Combine(normal, selection.File + ".cs")),
+                    selection.File, selection.Methods, candidateDirectory);
+            }
+            var oldFacts = new Dictionary<string, string>
+            {
+                ["HeapCreate::return"] = "[RAIIFree(\"HeapDestroy\")]",
+                ["PerfOpenQueryHandle::phQuery"] = "[RAIIFree(\"PerfCloseQueryHandle\")]",
+                ["PerfStartProvider::phProvider"] = "[RAIIFree(\"PerfStopProvider\")]",
+                ["PerfStartProviderEx::Provider"] = "[RAIIFree(\"PerfStopProvider\")]",
+                ["IcmpCreateFile::return"] = "[RAIIFree(\"IcmpCloseHandle\")]",
+                ["Icmp6CreateFile::return"] = "[RAIIFree(\"IcmpCloseHandle\")]",
+                ["DsGetDcOpenA::RetGetDcContext"] = "[RAIIFree(\"DsGetDcCloseW\")]",
+                ["DsGetDcOpenW::RetGetDcContext"] = "[RAIIFree(\"DsGetDcCloseW\")]",
+                ["PICTDESC::picType"] = "[AssociatedEnum(\"PICTYPE\")]",
+            };
+            foreach (string method in new[] { "IcmpSendEcho", "IcmpSendEcho2", "IcmpSendEcho2Ex", "IcmpParseReplies" })
+                oldFacts.Add(method + "::ReplyBuffer", "[ContainsInteriorPointers]");
+            using var control = Emit(controlDirectory, architecture, memberRemaps: oldFacts, references: new[] { baselinePath });
+            using var candidate = Emit(candidateDirectory, architecture, references: new[] { baselinePath });
+            AssertMetadataClosure(control.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            var before = control.Reader.TypeDefinitions.Select(control.Reader.GetTypeDefinition).Where(SelectedType)
+                .ToDictionary(type => control.Reader.GetString(type.Namespace) + "." + control.Reader.GetString(type.Name));
+            var after = candidate.Reader.TypeDefinitions.Select(candidate.Reader.GetTypeDefinition)
+                .Where(type => candidate.Reader.GetString(type.Name) is "Apis" or "PICTDESC")
+                .ToDictionary(type => candidate.Reader.GetString(type.Namespace) + "." + candidate.Reader.GetString(type.Name));
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            foreach (string name in before.Keys)
+            {
+                if (name != "Windows.Win32.Storage.Compression.Apis")
+                    Assert.Equal(WinHttpMigrationTests.SnapshotType(control.Reader, before[name]),
+                        WinHttpMigrationTests.SnapshotType(candidate.Reader, after[name]));
+            }
+            foreach (var creation in new[]
+            {
+                (Method: "CreateCompressor", Parameter: "CompressorHandle", Cleanup: "CloseCompressor"),
+                (Method: "CreateDecompressor", Parameter: "DecompressorHandle", Cleanup: "CloseDecompressor"),
+            })
+            {
+                var old = FindApiMethod(control.Reader, creation.Method);
+                var current = FindApiMethod(candidate.Reader, creation.Method);
+                var oldSignature = old.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+                var signature = current.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+                Assert.Equal(oldSignature.ReturnType, signature.ReturnType);
+                Assert.Equal(oldSignature.ParameterTypes.ToArray(), signature.ParameterTypes.ToArray());
+                var parameter = current.GetParameters().Select(candidate.Reader.GetParameter)
+                    .Single(value => candidate.Reader.GetString(value.Name) == creation.Parameter);
+                Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                AssertStringAttribute(candidate.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", creation.Cleanup);
+                Assert.Equal(new long[] { -1, 0 },
+                    ReadInvalidValues(candidate.Reader, parameter.GetCustomAttributes()).OrderBy(value => value));
+            }
+            foreach (string cleanup in new[] { "CloseCompressor", "CloseDecompressor" })
+            {
+                var old = FindApiMethod(control.Reader, cleanup);
+                var current = FindApiMethod(candidate.Reader, cleanup);
+                var oldSignature = old.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+                var signature = current.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+                Assert.Equal(oldSignature.ReturnType, signature.ReturnType);
+                Assert.Equal(oldSignature.ParameterTypes.ToArray(), signature.ParameterTypes.ToArray());
+                Assert.Equal(old.Attributes, current.Attributes);
+                var oldImport = old.GetImport();
+                var import = current.GetImport();
+                Assert.Equal(oldImport.Attributes, import.Attributes);
+                Assert.Equal(control.Reader.GetString(oldImport.Name), candidate.Reader.GetString(import.Name));
+                Assert.Equal(control.Reader.GetString(control.Reader.GetModuleReference(oldImport.Module).Name),
+                    candidate.Reader.GetString(candidate.Reader.GetModuleReference(import.Module).Name));
+            }
+            File.WriteAllText(Path.Combine(directory, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                scope = "Actual normal producers, all seven cleanup declarations including forwards, and PICTDESC versus retained frozen normal source and thirteen exact legacy attribute rows.",
+                retainedLegacyHandleObjects = new[] { "COMPRESSOR_HANDLE", "DECOMPRESSOR_HANDLE" },
+                migratedLegacyAttributeRows = 13,
+                newProducerCleanupAndInvalidSetContracts = 2,
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                controlPath = Path.Combine(controlDirectory, "Test.winmd"),
+                referencePath = baselinePath,
+                noWholeSdkImageOrApiAcceptance = true,
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            bool SelectedType(TypeDefinition type)
+                => control.Reader.GetString(type.Name) is "Apis" or "PICTDESC";
+
+            static MethodDefinition FindApiMethod(MetadataReader reader, string name)
+                => reader.MethodDefinitions.Select(reader.GetMethodDefinition)
+                    .Single(method => reader.GetString(method.Name) == name);
+
+            static void WriteSelected(string text, string file, string[] names, string output)
+            {
+                var source = CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot();
+                var found = new HashSet<string>();
+                var namespaces = source.Members.OfType<NamespaceDeclarationSyntax>().Select(ns =>
+                {
+                    var members = new List<MemberDeclarationSyntax>();
+                    foreach (var declaration in ns.Members)
+                    {
+                        if (declaration is ClassDeclarationSyntax api)
+                        {
+                            var methods = api.Members.OfType<MethodDeclarationSyntax>()
+                                .Where(method => names.Contains(method.Identifier.ValueText))
+                                .GroupBy(method => method.Identifier.ValueText)
+                                .SelectMany(group =>
+                                {
+                                    if (group.Key == "PerfStartProvider")
+                                    {
+                                        Assert.Equal(2, group.Count());
+                                        // The exact legacy slot uses phProvider; native controls cover both HANDLE*/PHANDLE declarations.
+                                        return new[] { group.Single(method => method.ParameterList.Parameters.Last()
+                                            .Identifier.ValueText == "phProvider") };
+                                    }
+                                    if (group.Key is "HeapDestroy" or "PerfStopProvider" or "PerfCloseQueryHandle" or
+                                        "IcmpCloseHandle" or "DsGetDcCloseW" or "CloseCompressor" or "CloseDecompressor")
+                                        return group.ToArray();
+                                    return new[] { Assert.Single(group) };
+                                })
+                                .OrderBy(method => method.Identifier.ValueText, StringComparer.Ordinal).ToArray();
+                            foreach (string method in methods.Select(method => method.Identifier.ValueText).Distinct())
+                                Assert.True(found.Add(method));
+                            if (methods.Length != 0)
+                                members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
+                        }
+                        if (file == "ComOle" && declaration is StructDeclarationSyntax record &&
+                            record.Identifier.ValueText == "PICTDESC")
+                        {
+                            Assert.True(found.Add("PICTDESC"));
+                            members.Add(record);
+                        }
+                    }
+                    return ns.WithMembers(SyntaxFactory.List(members));
+                }).Where(ns => ns.Members.Count != 0).ToArray();
+                Assert.Equal((file == "ComOle" ? new[] { "PICTDESC" } : names).OrderBy(name => name),
+                    found.OrderBy(name => name));
+                var bounded = source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces));
+                File.WriteAllText(Path.Combine(output, file + ".cs"), bounded.NormalizeWhitespace().ToFullString());
+            }
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]

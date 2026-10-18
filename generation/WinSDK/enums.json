@@ -27013,13 +27013,8 @@
     ]
   },
   {
-    "name": "STGM",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "STGM_",
-      "header": "coml2api.h"
-    },
-    "members": [],
+    "addUsesTo": "STGM",
+    "namespace": "Windows.Win32.System.Com",
     "uses": [
       {
         "interface": "IStorage",
@@ -27079,12 +27074,8 @@
     ]
   },
   {
-    "name": "STGFMT",
-    "autoPopulate": {
-      "filter": "STGFMT_",
-      "header": "coml2api.h"
-    },
-    "members": [],
+    "addUsesTo": "STGFMT",
+    "namespace": "Windows.Win32.System.Com.StructuredStorage",
     "uses": [
       {
         "method": "StgCreateStorageEx",
@@ -28835,13 +28826,8 @@
     ]
   },
   {
-    "name": "ACTIVEOBJECT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ACTIVEOBJECT_",
-      "header": "Oleauto.h"
-    },
-    "members": [],
+    "addUsesTo": "ACTIVEOBJECT_FLAGS",
+    "namespace": "Windows.Win32.System.Ole",
     "uses": [
       {
         "method": "RegisterActiveObject",
@@ -29107,13 +29093,8 @@
     ]
   },
   {
-    "name": "NUMPARSE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "NUMPRS_",
-      "header": "oleauto.h"
-    },
-    "members": [],
+    "addUsesTo": "NUMPARSE_FLAGS",
+    "namespace": "Windows.Win32.System.Ole",
     "uses": [
       {
         "struct": "NUMPARSE",
@@ -29126,13 +29107,8 @@
     ]
   },
   {
-    "name": "PICTYPE",
-    "type": "short",
-    "autoPopulate": {
-      "filter": "PICTYPE_",
-      "header": "olectl.h"
-    },
-    "members": [],
+    "addUsesTo": "PICTYPE",
+    "namespace": "Windows.Win32.System.Ole",
     "uses": [
       {
         "interface": "IPicture",
@@ -29142,12 +29118,8 @@
     ]
   },
   {
-    "name": "VARCMP",
-    "autoPopulate": {
-      "filter": "VARCMP_",
-      "header": "oleauto.h"
-    },
-    "members": [],
+    "addUsesTo": "VARCMP",
+    "namespace": "Windows.Win32.System.Ole",
     "uses": [
       {
         "method": "VarCmp",
@@ -29220,13 +29192,8 @@
     ]
   },
   {
-    "name": "LOAD_PICTURE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LP_",
-      "header": "olectl.h"
-    },
-    "members": [],
+    "addUsesTo": "LOAD_PICTURE_FLAGS",
+    "namespace": "Windows.Win32.System.Ole",
     "uses": [
       {
         "method": "OleLoadPictureFileEx",
@@ -31538,14 +31505,8 @@
     ]
   },
   {
-    "type": "ushort",
-    "flags": true,
-    "name": "DISPATCH_FLAGS",
-    "autoPopulate": {
-      "filter": "DISPATCH_",
-      "header": "OleAuto.h"
-    },
-    "members": [],
+    "addUsesTo": "DISPATCH_FLAGS",
+    "namespace": "Windows.Win32.System.Com",
     "uses": [
       {
         "interface": "IDispatch",
@@ -31553,7 +31514,7 @@
         "parameter": "wFlags"
       },
       {
-        "interface" : "ITypeInfo",
+        "interface": "ITypeInfo",
         "method": "Invoke",
         "parameter": "wFlags"
       }
@@ -32993,13 +32954,8 @@
     ]
   },
   {
-    "name": "VAR_CHANGE_FLAGS",
-    "type": "ushort",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "VARIANT_",
-      "header": "OleAuto.h"
-    },
+    "addUsesTo": "VAR_CHANGE_FLAGS",
+    "namespace": "Windows.Win32.System.Variant",
     "uses": [
       {
         "method": "VariantChangeType",

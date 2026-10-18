@@ -481,6 +481,10 @@ StgGetIFillLockBytesOnFile=Windows.Win32.System.Com.StructuredStorage
 StgOpenLayoutDocfile=Windows.Win32.System.Com.StructuredStorage
 CoRegisterMessageFilter=Windows.Win32.Media.Audio
 # endregion objbase.h
+# region oleauto.h
+DISPATCH_FLAGS=Windows.Win32.System.Com
+VAR_CHANGE_FLAGS=Windows.Win32.System.Variant
+# endregion oleauto.h
 # region objidl.h
 IMessageFilter=Windows.Win32.Media.Audio
 IThumbnailExtractor=Windows.Win32.System.Com.UI

@@ -1,8 +1,21 @@
 diff --git a/um/objbase.h b/um/objbase.h
-index a156d7da..9df55d36 100644
+index a156d7da..82c47a2f 100644
 --- a/um/objbase.h
 +++ b/um/objbase.h
-@@ -106,8 +106,11 @@ _Check_return_ WINOLEAPI  CoGetSystemSecurityPermissions(COMSD comSDType, PSECUR
+@@ -28,7 +28,11 @@
+ #include <coml2api.h>
+ 
+ // COM initialization flags; passed to CoInitialize.
+-typedef enum tagCOINIT
++typedef enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++tagCOINIT
+ {
+   COINIT_APARTMENTTHREADED  = 0x2,      // Apartment model
+ 
+@@ -106,8 +110,11 @@ _Check_return_ WINOLEAPI  CoGetSystemSecurityPermissions(COMSD comSDType, PSECUR
  
  /* dll loading helpers; keeps track of ref counts and unloads all on exit */
  
@@ -14,7 +27,7 @@ index a156d7da..9df55d36 100644
  WINOLEAPI_(void) CoFreeAllLibraries(void);
  
  
-@@ -140,6 +143,7 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+@@ -140,6 +147,7 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
  #if (_WIN32_WINNT >= 0x0500 ) || defined(_WIN32_DCOM) // DCOM
  
  
@@ -22,7 +35,7 @@ index a156d7da..9df55d36 100644
  WINOLEAPI CoAllowSetForegroundWindow(_In_ IUnknown *pUnk, _In_opt_ LPVOID lpvReserved);
  
  
-@@ -148,11 +152,14 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
+@@ -148,11 +156,14 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
  #endif
  
  /* other helpers */
@@ -37,7 +50,7 @@ index a156d7da..9df55d36 100644
  WINOLEAPI_(BOOL) CoDosDateTimeToFileTime(
                         _In_ WORD nDosDate, _In_ WORD nDosTime, _Out_ FILETIME FAR* lpFileTime);
  WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
-@@ -175,6 +182,7 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
+@@ -175,6 +186,7 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
  
  WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
  

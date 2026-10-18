@@ -1,26 +1,40 @@
 diff --git a/um/icmpapi.h b/um/icmpapi.h
-index e7907cb5..52cf7ccf 100644
+index e7907cb5..39a0859f 100644
 --- a/um/icmpapi.h
 +++ b/um/icmpapi.h
-@@ -75,6 +75,8 @@ extern "C" {
+@@ -75,6 +75,21 @@ extern "C" {
  //
  //--
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Keep the native cleanup visible to compiler-parsed producer annotations.
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
++IPHLPAPI_DLL_LINKAGE
++BOOL
++WINAPI
++IcmpCloseHandle(
++    _In_ HANDLE  IcmpHandle
++    );
++#endif
++
++_Win32_RAIIFree_(IcmpCloseHandle)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  IPHLPAPI_DLL_LINKAGE
  HANDLE
  WINAPI
-@@ -104,6 +106,8 @@ IcmpCreateFile(
+@@ -104,6 +119,9 @@ IcmpCreateFile(
  //
  //--
  
++_Win32_RAIIFree_(IcmpCloseHandle)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  IPHLPAPI_DLL_LINKAGE
  HANDLE
  WINAPI
-@@ -133,6 +137,8 @@ Icmp6CreateFile(
+@@ -133,6 +151,8 @@ Icmp6CreateFile(
  //
  //--
  
@@ -29,7 +43,7 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -194,6 +200,8 @@ IcmpCloseHandle(
+@@ -194,6 +214,8 @@ IcmpCloseHandle(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -38,7 +52,16 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -283,6 +291,8 @@ IcmpSendEcho(
+@@ -203,7 +225,7 @@ IcmpSendEcho(
+     _In_reads_bytes_(RequestSize)   LPVOID                   RequestData,
+     _In_                       WORD                     RequestSize,
+     _In_opt_                   PIP_OPTION_INFORMATION   RequestOptions,
+-    _Out_writes_bytes_(ReplySize)    LPVOID                   ReplyBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(ReplySize)    LPVOID                   ReplyBuffer,
+     _In_range_(>=, sizeof(ICMP_ECHO_REPLY) + RequestSize + 8)
+     DWORD                    ReplySize,
+     _In_                       DWORD                    Timeout
+@@ -283,6 +305,8 @@ IcmpSendEcho(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -47,7 +70,16 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -312,6 +322,8 @@ IcmpSendEcho2(
+@@ -299,7 +323,7 @@ IcmpSendEcho2(
+     _In_reads_bytes_(RequestSize)    LPVOID                   RequestData,
+     _In_                        WORD                     RequestSize,
+     _In_opt_                    PIP_OPTION_INFORMATION   RequestOptions,
+-    _Out_writes_bytes_(ReplySize)     LPVOID                   ReplyBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(ReplySize)     LPVOID                   ReplyBuffer,
+     _In_range_(>=, sizeof(ICMP_ECHO_REPLY) + RequestSize + 8)
+     DWORD                    ReplySize,
+     _In_                        DWORD                    Timeout
+@@ -312,6 +336,8 @@ IcmpSendEcho2(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if (NTDDI_VERSION >= NTDDI_VISTASP1)
@@ -56,7 +88,16 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -343,6 +355,8 @@ IcmpSendEcho2Ex(
+@@ -329,7 +355,7 @@ IcmpSendEcho2Ex(
+     _In_reads_bytes_(RequestSize)   LPVOID                   RequestData,
+     _In_                       WORD                     RequestSize,
+     _In_opt_                   PIP_OPTION_INFORMATION   RequestOptions,
+-    _Out_writes_bytes_(ReplySize)    LPVOID                   ReplyBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(ReplySize)    LPVOID                   ReplyBuffer,
+     _In_range_(>=, sizeof(ICMP_ECHO_REPLY) + RequestSize + 8)
+     DWORD                    ReplySize,
+     _In_                       DWORD                    Timeout
+@@ -343,6 +369,8 @@ IcmpSendEcho2Ex(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -65,7 +106,7 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -397,6 +411,8 @@ Icmp6SendEcho2(
+@@ -397,16 +425,20 @@ Icmp6SendEcho2(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -74,7 +115,11 @@ index e7907cb5..52cf7ccf 100644
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -407,6 +423,8 @@ IcmpParseReplies(
+ IcmpParseReplies(
+-    _Out_writes_bytes_(ReplySize)   LPVOID                   ReplyBuffer,
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(ReplySize)   LPVOID                   ReplyBuffer,
+     _In_range_(>=, sizeof(ICMP_ECHO_REPLY) + 8)
+     DWORD                    ReplySize
      );
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)

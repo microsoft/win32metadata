@@ -1,16 +1,59 @@
 diff --git a/um/coml2api.h b/um/coml2api.h
-index a818bd60..ff9c31d7 100644
+index a818bd60..ff3833e3 100644
 --- a/um/coml2api.h
 +++ b/um/coml2api.h
-@@ -82,6 +82,7 @@ typedef DWORD STGFMT;
+@@ -61,6 +61,29 @@
+ #define STGM_NOSNAPSHOT         0x00200000L
+ #if (_WIN32_WINNT >= 0x0500)
+ #define STGM_DIRECT_SWMR        0x00400000L
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(STGM, unsigned long,
++    STGM_DIRECT,
++    STGM_TRANSACTED,
++    STGM_SIMPLE,
++    STGM_READ,
++    STGM_WRITE,
++    STGM_READWRITE,
++    STGM_SHARE_DENY_NONE,
++    STGM_SHARE_DENY_READ,
++    STGM_SHARE_DENY_WRITE,
++    STGM_SHARE_EXCLUSIVE,
++    STGM_PRIORITY,
++    STGM_DELETEONRELEASE,
++    STGM_NOSCRATCH,
++    STGM_CREATE,
++    STGM_CONVERT,
++    STGM_FAILIFTHERE,
++    STGM_NOSNAPSHOT,
++    STGM_DIRECT_SWMR);
++#endif
+ #endif
  
+ typedef DWORD STGFMT;
+@@ -80,8 +103,20 @@ typedef DWORD STGFMT;
+ // This is a legacy define to allow old component to builds
+ #define STGFMT_DOCUMENT         0
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(STGFMT, unsigned long,
++    STGFMT_STORAGE,
++    STGFMT_NATIVE,
++    STGFMT_FILE,
++    STGFMT_ANY,
++    STGFMT_DOCFILE,
++    STGFMT_DOCUMENT);
++#endif
++
  // Structured storage APIs
  _Check_return_
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI
  StgCreateDocfile(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
-@@ -91,6 +92,7 @@ StgCreateDocfile(
+@@ -91,6 +126,7 @@ StgCreateDocfile(
      );
  
  _Check_return_
@@ -18,7 +61,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgCreateDocfileOnILockBytes(
      _In_ ILockBytes* plkbyt,
-@@ -100,6 +102,7 @@ StgCreateDocfileOnILockBytes(
+@@ -100,6 +136,7 @@ StgCreateDocfileOnILockBytes(
      );
  
  _Check_return_
@@ -26,7 +69,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgOpenStorage(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
-@@ -111,6 +114,7 @@ StgOpenStorage(
+@@ -111,6 +148,7 @@ StgOpenStorage(
      );
  
  _Check_return_
@@ -34,7 +77,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgOpenStorageOnILockBytes(
      _In_ ILockBytes* plkbyt,
-@@ -122,18 +126,21 @@ StgOpenStorageOnILockBytes(
+@@ -122,18 +160,21 @@ StgOpenStorageOnILockBytes(
      );
  
  _Check_return_
@@ -56,7 +99,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgSetTimes(
      _In_ _Null_terminated_ const WCHAR* lpszName,
-@@ -162,6 +169,7 @@ typedef struct tagSTGOPTIONS
+@@ -162,6 +203,7 @@ typedef struct tagSTGOPTIONS
  } STGOPTIONS;
  
  _Check_return_
@@ -64,7 +107,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgCreateStorageEx(
      _In_opt_ _Null_terminated_ const WCHAR* pwcsName,
-@@ -175,6 +183,7 @@ StgCreateStorageEx(
+@@ -175,6 +217,7 @@ StgCreateStorageEx(
      );
  
  _Check_return_
@@ -72,7 +115,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgOpenStorageEx(
      _In_ _Null_terminated_ const WCHAR* pwcsName,
-@@ -190,6 +199,7 @@ StgOpenStorageEx(
+@@ -190,6 +233,7 @@ StgOpenStorageEx(
  #ifndef _STGCREATEPROPSTG_DEFINED_
  
  _Check_return_
@@ -80,7 +123,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgCreatePropStg(
      _In_ IUnknown* pUnk,
-@@ -201,6 +211,7 @@ StgCreatePropStg(
+@@ -201,6 +245,7 @@ StgCreatePropStg(
      );
  
  _Check_return_
@@ -88,7 +131,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgOpenPropStg(
      _In_ IUnknown* pUnk,
-@@ -211,6 +222,7 @@ StgOpenPropStg(
+@@ -211,6 +256,7 @@ StgOpenPropStg(
      );
  
  _Check_return_
@@ -96,7 +139,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  StgCreatePropSetStg(
      _In_ IStorage* pStorage,
-@@ -221,6 +233,7 @@ StgCreatePropSetStg(
+@@ -221,6 +267,7 @@ StgCreatePropSetStg(
  #define CCH_MAX_PROPSTG_NAME    31
  
  _Check_return_
@@ -104,7 +147,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  FmtIdToPropStgName(
      _In_ const FMTID* pfmtid,
-@@ -228,6 +241,7 @@ FmtIdToPropStgName(
+@@ -228,6 +275,7 @@ FmtIdToPropStgName(
      );
  
  _Check_return_
@@ -112,7 +155,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  PropStgNameToFmtId(
      _In_ const LPOLESTR oszName,
-@@ -237,24 +251,28 @@ PropStgNameToFmtId(
+@@ -237,24 +285,28 @@ PropStgNameToFmtId(
  #endif // _STGCREATEPROPSTG_DEFINED_
  
  // Helper functions
@@ -141,7 +184,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  WriteClassStm(
      _In_ LPSTREAM pStm,
-@@ -263,6 +281,7 @@ WriteClassStm(
+@@ -263,6 +315,7 @@ WriteClassStm(
  
  // Storage utility APIs
  _Check_return_
@@ -149,7 +192,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  GetHGlobalFromILockBytes(
      _In_ LPLOCKBYTES plkbyt,
-@@ -270,6 +289,7 @@ GetHGlobalFromILockBytes(
+@@ -270,6 +323,7 @@ GetHGlobalFromILockBytes(
      );
  
  _Check_return_
@@ -157,7 +200,7 @@ index a818bd60..ff9c31d7 100644
  WINOLEAPI
  CreateILockBytesOnHGlobal(
      _In_opt_ HGLOBAL hGlobal,
-@@ -278,6 +298,7 @@ CreateILockBytesOnHGlobal(
+@@ -278,6 +332,7 @@ CreateILockBytesOnHGlobal(
      );
  
  // ConvertTo APIs

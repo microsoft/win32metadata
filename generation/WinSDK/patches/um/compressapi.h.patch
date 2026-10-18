@@ -1,18 +1,31 @@
 diff --git a/um/compressapi.h b/um/compressapi.h
-index c6f8f5b1..83d7f87a 100644
+index c6f8f5b1..2dc9f213 100644
 --- a/um/compressapi.h
 +++ b/um/compressapi.h
-@@ -69,6 +69,8 @@ typedef enum {
+@@ -69,14 +69,29 @@ typedef enum {
  
  // Compression routines
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Keep the native cleanup visible to compiler-parsed producer annotations.
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
++BOOL
++WINAPI
++CloseCompressor (
++    _In_ COMPRESSOR_HANDLE CompressorHandle
++    );
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows8_
  BOOL
  WINAPI
  CreateCompressor (
-@@ -77,6 +79,8 @@ CreateCompressor (
-     _Out_ PCOMPRESSOR_HANDLE CompressorHandle
+     _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PCOMPRESSOR_HANDLE CompressorHandle
++    _Win32_RAIIFree_(CloseCompressor, -1, 0) _Out_ PCOMPRESSOR_HANDLE CompressorHandle
      );
  
 +_Win32_SetLastError_
@@ -20,7 +33,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  SetCompressorInformation (
-@@ -86,6 +90,8 @@ SetCompressorInformation (
+@@ -86,6 +101,8 @@ SetCompressorInformation (
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -29,7 +42,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  QueryCompressorInformation (
-@@ -95,6 +101,8 @@ QueryCompressorInformation (
+@@ -95,6 +112,8 @@ QueryCompressorInformation (
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -38,7 +51,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  Compress (
-@@ -106,12 +114,16 @@ Compress (
+@@ -106,12 +125,16 @@ Compress (
      _Out_ PSIZE_T CompressedDataSize
      );
  
@@ -55,17 +68,30 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  CloseCompressor (
-@@ -120,6 +132,8 @@ CloseCompressor (
+@@ -120,14 +143,29 @@ CloseCompressor (
  
  // Decompression routines
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Keep the native cleanup visible to compiler-parsed producer annotations.
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
++BOOL
++WINAPI
++CloseDecompressor (
++    _In_ DECOMPRESSOR_HANDLE DecompressorHandle
++    );
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows8_
  BOOL
  WINAPI
  CreateDecompressor (
-@@ -128,6 +142,8 @@ CreateDecompressor (
-     _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
+     _In_ DWORD Algorithm,
+     _In_opt_ PCOMPRESS_ALLOCATION_ROUTINES AllocationRoutines,
+-    _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
++    _Win32_RAIIFree_(CloseDecompressor, -1, 0) _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
      );
  
 +_Win32_SetLastError_
@@ -73,7 +99,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  SetDecompressorInformation (
-@@ -137,6 +153,8 @@ SetDecompressorInformation (
+@@ -137,6 +175,8 @@ SetDecompressorInformation (
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -82,7 +108,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  QueryDecompressorInformation (
-@@ -146,6 +164,8 @@ QueryDecompressorInformation (
+@@ -146,6 +186,8 @@ QueryDecompressorInformation (
      _In_ SIZE_T CompressInformationSize
      );
  
@@ -91,7 +117,7 @@ index c6f8f5b1..83d7f87a 100644
  BOOL
  WINAPI
  Decompress (
-@@ -157,12 +177,16 @@ Decompress (
+@@ -157,12 +199,16 @@ Decompress (
      _Out_opt_ PSIZE_T UncompressedDataSize
      );
  

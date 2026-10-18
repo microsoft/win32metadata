@@ -1,8 +1,21 @@
 diff --git a/um/pathcch.h b/um/pathcch.h
-index b205d258..0e2d1900 100644
+index b205d258..8ded1316 100644
 --- a/um/pathcch.h
 +++ b/um/pathcch.h
-@@ -80,6 +80,7 @@ PathIsUNCEx(
+@@ -20,7 +20,11 @@ extern "C" {
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+-typedef enum PATHCCH_OPTIONS
++typedef enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++PATHCCH_OPTIONS
+ {
+     PATHCCH_NONE = 0x0,
+ 
+@@ -80,6 +84,7 @@ PathIsUNCEx(
      _Outptr_opt_ PCWSTR* ppszServer
      );
  
@@ -10,7 +23,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  BOOL
  APIENTRY
-@@ -87,6 +88,7 @@ PathCchIsRoot(
+@@ -87,6 +92,7 @@ PathCchIsRoot(
      _In_opt_ PCWSTR pszPath
      );
  
@@ -18,7 +31,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -97,6 +99,7 @@ PathCchAddBackslashEx(
+@@ -97,6 +103,7 @@ PathCchAddBackslashEx(
      _Out_opt_ size_t* pcchRemaining
      );
  
@@ -26,7 +39,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -105,6 +108,7 @@ PathCchAddBackslash(
+@@ -105,6 +112,7 @@ PathCchAddBackslash(
      _In_ size_t cchPath
      );
  
@@ -34,7 +47,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -115,6 +119,7 @@ PathCchRemoveBackslashEx(
+@@ -115,6 +123,7 @@ PathCchRemoveBackslashEx(
      _Out_opt_ size_t* pcchRemaining
      );
  
@@ -42,7 +55,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -131,6 +136,7 @@ PathCchSkipRoot(
+@@ -131,6 +140,7 @@ PathCchSkipRoot(
      _Outptr_ PCWSTR* ppszRootEnd
      );
  
@@ -50,7 +63,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -139,6 +145,7 @@ PathCchStripToRoot(
+@@ -139,6 +149,7 @@ PathCchStripToRoot(
      _In_ size_t cchPath
      );
  
@@ -58,7 +71,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -156,6 +163,7 @@ PathCchFindExtension(
+@@ -156,6 +167,7 @@ PathCchFindExtension(
      _Outptr_ PCWSTR* ppszExt
      );
  
@@ -66,7 +79,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -165,6 +173,7 @@ PathCchAddExtension(
+@@ -165,6 +177,7 @@ PathCchAddExtension(
      _In_ PCWSTR pszExt
      );
  
@@ -74,7 +87,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -174,6 +183,7 @@ PathCchRenameExtension(
+@@ -174,6 +187,7 @@ PathCchRenameExtension(
      _In_ PCWSTR pszExt
      );
  
@@ -82,7 +95,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -183,6 +193,7 @@ PathCchRemoveExtension(
+@@ -183,6 +197,7 @@ PathCchRemoveExtension(
      );
  
  /* PATHCCH_OPTIONS */
@@ -90,7 +103,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -193,6 +204,7 @@ PathCchCanonicalizeEx(
+@@ -193,6 +208,7 @@ PathCchCanonicalizeEx(
      _In_ ULONG dwFlags
      );
  
@@ -98,7 +111,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -203,6 +215,7 @@ PathCchCanonicalize(
+@@ -203,6 +219,7 @@ PathCchCanonicalize(
      );
  
  /* PATHCCH_OPTIONS */
@@ -106,7 +119,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -214,6 +227,7 @@ PathCchCombineEx(
+@@ -214,6 +231,7 @@ PathCchCombineEx(
      _In_ ULONG dwFlags
      );
  
@@ -114,7 +127,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -225,6 +239,7 @@ PathCchCombine(
+@@ -225,6 +243,7 @@ PathCchCombine(
      );
  
  /* PATHCCH_OPTIONS */
@@ -122,7 +135,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -235,6 +250,7 @@ PathCchAppendEx(
+@@ -235,6 +254,7 @@ PathCchAppendEx(
      _In_ ULONG dwFlags
      );
  
@@ -130,7 +143,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -244,6 +260,7 @@ PathCchAppend(
+@@ -244,6 +264,7 @@ PathCchAppend(
      _In_opt_ PCWSTR pszMore
      );
  
@@ -138,7 +151,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -253,6 +270,7 @@ PathCchStripPrefix(
+@@ -253,6 +274,7 @@ PathCchStripPrefix(
      );
  
  /* PATHCCH_OPTIONS */
@@ -146,7 +159,7 @@ index b205d258..0e2d1900 100644
  WINPATHCCHAPI
  HRESULT
  APIENTRY
-@@ -264,6 +282,7 @@ PathAllocCombine(
+@@ -264,6 +286,7 @@ PathAllocCombine(
      );
  
  /* PATHCCH_OPTIONS */

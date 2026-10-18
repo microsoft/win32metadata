@@ -1,5 +1,5 @@
 diff --git a/um/dsgetdc.h b/um/dsgetdc.h
-index ec178be3..9c0fd3d2 100644
+index ec178be3..62b0c061 100644
 --- a/um/dsgetdc.h
 +++ b/um/dsgetdc.h
 @@ -223,6 +223,7 @@ typedef struct _DOMAIN_CONTROLLER_INFOW {
@@ -146,23 +146,58 @@ index ec178be3..9c0fd3d2 100644
  DSGETDCAPI
  DWORD
  WINAPI
-@@ -600,6 +618,7 @@ DsDeregisterDnsHostRecordsA (
+@@ -600,6 +618,18 @@ DsDeregisterDnsHostRecordsA (
              DS_WRITABLE_REQUIRED )
  
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Keep the native cleanup visible to compiler-parsed producer annotations.
++_Win32_SupportedOS_WindowsVista_
++DSGETDCAPI
++VOID
++WINAPI
++DsGetDcCloseW(
++    _In_ HANDLE GetDcContextHandle
++    );
++#endif
++
 +_Win32_SupportedOS_WindowsVista_
  DSGETDCAPI
  DWORD
  WINAPI
-@@ -613,6 +632,7 @@ DsGetDcOpenW(
-     _Out_ PHANDLE RetGetDcContext
+@@ -610,9 +640,21 @@ DsGetDcOpenW(
+     _In_opt_ GUID *DomainGuid,
+     _In_opt_ LPCWSTR DnsForestName,
+     _In_ ULONG DcFlags,
+-    _Out_ PHANDLE RetGetDcContext
++    _Win32_RAIIFree_(DsGetDcCloseW) _Out_ PHANDLE RetGetDcContext
      );
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Keep the native cleanup visible to compiler-parsed producer annotations.
++_Win32_SupportedOS_WindowsVista_
++DSGETDCAPI
++VOID
++WINAPI
++DsGetDcCloseW(
++    _In_ HANDLE GetDcContextHandle
++    );
++#endif
++
 +_Win32_SupportedOS_WindowsVista_
  DSGETDCAPI
  DWORD
  WINAPI
-@@ -632,6 +652,7 @@ DsGetDcOpenA(
+@@ -623,7 +665,7 @@ DsGetDcOpenA(
+     _In_opt_ GUID *DomainGuid,
+     _In_opt_ LPCSTR DnsForestName,
+     _In_ ULONG DcFlags,
+-    _Out_ PHANDLE RetGetDcContext
++    _Win32_RAIIFree_(DsGetDcCloseW) _Out_ PHANDLE RetGetDcContext
+     );
+ 
+ #ifdef UNICODE
+@@ -632,6 +674,7 @@ DsGetDcOpenA(
  #define DsGetDcOpen DsGetDcOpenA
  #endif // !UNICODE
  
@@ -170,7 +205,7 @@ index ec178be3..9c0fd3d2 100644
  _Success_(return == ERROR_SUCCESS)
  DSGETDCAPI
  DWORD
-@@ -643,6 +664,7 @@ DsGetDcNextW(
+@@ -643,6 +686,7 @@ DsGetDcNextW(
      _Outptr_opt_result_nullonfailure_ LPWSTR *DnsHostName
      );
  
@@ -178,7 +213,7 @@ index ec178be3..9c0fd3d2 100644
  _Success_(return == ERROR_SUCCESS)
  DSGETDCAPI
  DWORD
-@@ -660,6 +682,7 @@ DsGetDcNextA(
+@@ -660,6 +704,7 @@ DsGetDcNextA(
  #define DsGetDcNext DsGetDcNextA
  #endif // !UNICODE
  

@@ -1,8 +1,34 @@
 diff --git a/um/olectl.h b/um/olectl.h
-index cb297a63..8d250b3d 100644
+index cb297a63..28641e76 100644
 --- a/um/olectl.h
 +++ b/um/olectl.h
-@@ -411,40 +411,50 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
+@@ -166,11 +166,25 @@ typedef struct tagFONTDESC
+ #define PICTYPE_ICON            3
+ #ifdef _WIN32
+ #define PICTYPE_ENHMETAFILE     4
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(PICTYPE, short,
++    PICTYPE_UNINITIALIZED,
++    PICTYPE_NONE,
++    PICTYPE_BITMAP,
++    PICTYPE_METAFILE,
++    PICTYPE_ICON,
++    PICTYPE_ENHMETAFILE);
++#endif
+ #endif
+ 
+ typedef struct tagPICTDESC
+ {
+     UINT cbSizeofstruct;
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++    _Win32_AssociatedEnum_(PICTYPE)
++#endif
+     UINT picType;
+     union
+     {
+@@ -411,40 +425,50 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
  /////////////////////////////////////////////////////////////////////////////
  // Self-registration APIs (to be implemented by server DLL)
  
@@ -53,7 +79,7 @@ index cb297a63..8d250b3d 100644
  WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
  				  LPUNKNOWN punkCaller,
  				  DWORD     dwReserved,
-@@ -461,6 +471,7 @@ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
+@@ -461,6 +485,7 @@ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
  WINOLECTLAPI OleSavePictureFile(LPDISPATCH lpdispPicture,
      BSTR bstrFileName);
  
@@ -61,3 +87,19 @@ index cb297a63..8d250b3d 100644
  WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
  
  #define LP_DEFAULT      0x00
+@@ -468,6 +493,15 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+ #define LP_VGACOLOR     0x02
+ #define LP_COLOR        0x04
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(LOAD_PICTURE_FLAGS, unsigned long,
++    LP_DEFAULT,
++    LP_MONOCHROME,
++    LP_VGACOLOR,
++    LP_COLOR);
++#endif
++
+ #if !defined(RC_INVOKED)
+ #include <poppack.h>
+ #endif

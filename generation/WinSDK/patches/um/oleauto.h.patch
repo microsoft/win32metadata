@@ -1,5 +1,5 @@
 diff --git a/um/oleauto.h b/um/oleauto.h
-index 7860ea3c..3a429854 100644
+index 7860ea3c..04af400e 100644
 --- a/um/oleauto.h
 +++ b/um/oleauto.h
 @@ -75,7 +75,9 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
@@ -26,3 +26,97 @@ index 7860ea3c..3a429854 100644
  WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
  WINOLEAUTAPI SafeArrayDestroy(_In_ SAFEARRAY * psa);
  WINOLEAUTAPI SafeArrayRedim(_Inout_ SAFEARRAY * psa, _In_ SAFEARRAYBOUND * psaboundNew);
+@@ -202,6 +207,19 @@ WINOLEAUTAPI VariantChangeTypeEx(_Inout_ VARIANTARG * pvargDest,
+ #define VARIANT_CALENDAR_THAI		0x20  // SOUTHASIA calendar support
+ #define VARIANT_CALENDAR_GREGORIAN	0x40  // SOUTHASIA calendar support
+ #define VARIANT_USE_NLS                 0x80  // NLS function call support
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(VAR_CHANGE_FLAGS, unsigned short,
++    VARIANT_NOVALUEPROP,
++    VARIANT_ALPHABOOL,
++    VARIANT_NOUSEROVERRIDE,
++    VARIANT_CALENDAR_HIJRI,
++    VARIANT_LOCALBOOL,
++    VARIANT_CALENDAR_THAI,
++    VARIANT_CALENDAR_GREGORIAN,
++    VARIANT_USE_NLS);
++#endif
+ /*---------------------------------------------------------------------*/
+ /*                Vector <-> Bstr conversion APIs                      */
+ /*---------------------------------------------------------------------*/
+@@ -763,6 +781,27 @@ typedef struct {
+ #define NUMPRS_NEG              0x10000
+ #define NUMPRS_INEXACT          0x20000
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(NUMPARSE_FLAGS, unsigned long,
++    NUMPRS_LEADING_WHITE,
++    NUMPRS_TRAILING_WHITE,
++    NUMPRS_LEADING_PLUS,
++    NUMPRS_TRAILING_PLUS,
++    NUMPRS_LEADING_MINUS,
++    NUMPRS_TRAILING_MINUS,
++    NUMPRS_HEX_OCT,
++    NUMPRS_PARENS,
++    NUMPRS_DECIMAL,
++    NUMPRS_THOUSANDS,
++    NUMPRS_CURRENCY,
++    NUMPRS_EXPONENT,
++    NUMPRS_USE_ALL,
++    NUMPRS_STD,
++    NUMPRS_NEG,
++    NUMPRS_INEXACT);
++#endif
++
+ /* flags used by VarNumFromParseNum to indicate acceptable result types:
+  */
+ #define VTBIT_I1        (1 << VT_I1)
+@@ -912,6 +951,15 @@ STDAPI VarR8Round(_In_ double dblIn, _In_ int cDecimals, _Out_ double *pdblResul
+ #define VARCMP_GT   2
+ #define VARCMP_NULL 3
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(VARCMP, unsigned long,
++    VARCMP_LT,
++    VARCMP_EQ,
++    VARCMP_GT,
++    VARCMP_NULL);
++#endif
++
+ // VT_HARDTYPE tells the compare routine that the argument is a literal or
+ // otherwise declared of that specific type.  It causes comparison rules to
+ // change. For example, if a hard-type string is compared to a variant (not hard
+@@ -1084,6 +1132,15 @@ typedef DISPID MEMBERID;
+ #define DISPATCH_PROPERTYPUT    0x4
+ #define DISPATCH_PROPERTYPUTREF 0x8
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(DISPATCH_FLAGS, unsigned short,
++    DISPATCH_METHOD,
++    DISPATCH_PROPERTYGET,
++    DISPATCH_PROPERTYPUT,
++    DISPATCH_PROPERTYPUTREF);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+ #pragma endregion
+ 
+@@ -1299,6 +1356,13 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+ #define ACTIVEOBJECT_STRONG 0x0
+ #define ACTIVEOBJECT_WEAK 0x1
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_FlagsEnum_(ACTIVEOBJECT_FLAGS, unsigned long,
++    ACTIVEOBJECT_STRONG,
++    ACTIVEOBJECT_WEAK);
++#endif
++
+ _Check_return_
+ WINOLEAUTAPI RegisterActiveObject(IUnknown * punk, REFCLSID rclsid,
+             DWORD dwFlags, DWORD * pdwRegister);
