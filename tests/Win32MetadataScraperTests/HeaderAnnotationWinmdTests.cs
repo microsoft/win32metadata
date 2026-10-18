@@ -418,6 +418,76 @@ struct HOLDER { _Win32_AssociatedEnum_(OPTIONS) unsigned options; unsigned after
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void ForwardLogicalEnumsReachFinalWinmdFromTraversedConsumers(
+            string architecture, string target, bool enabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#ifdef WIN32METADATA
+typedef unsigned OPTIONS;
+typedef unsigned FLAGS;
+#endif
+_Win32_AssociatedEnum_(OPTIONS) unsigned GetOptions();
+void SetFlags(_Win32_AssociatedEnum_(FLAGS) unsigned flags);
+#include ""group-values.h""
+#include ""group-more.h""
+", annotationsEnabled: enabled);
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "group-values.h"), @"
+#define FIRST 1U
+#define HIGH 0x80000000U
+_Win32_Enum_(OPTIONS, unsigned, FIRST);
+_Win32_FlagsEnum_(FLAGS, unsigned, FIRST, HIGH);
+");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "group-more.h"), @"
+#define EXTRA (HIGH | FIRST)
+_Win32_Enum_(OPTIONS, unsigned, FIRST, EXTRA);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var get = FindMethod(reader, "Apis", "GetOptions");
+            var set = FindMethod(reader, "Apis", "SetFlags");
+            Assert.Equal("UInt32", get.DecodeSignature(new SignatureNames(), null).ReturnType);
+            Assert.Equal(new[] { "UInt32" }, set.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            if (enabled)
+            {
+                foreach (string name in new[] { "OPTIONS", "FLAGS" })
+                {
+                    var group = FindType(reader, name);
+                    Assert.Equal("Test", reader.GetString(group.Namespace));
+                    var fields = group.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                    Assert.Equal("UInt32", fields.Single(field => reader.GetString(field.Name) == "value__")
+                        .DecodeSignature(new SignatureNames(), null));
+                    var members = fields.Where(field => reader.GetString(field.Name) != "value__").ToArray();
+                    Assert.Equal(name == "OPTIONS" ? new[] { "FIRST", "EXTRA" } : new[] { "FIRST", "HIGH" },
+                        members.Select(field => reader.GetString(field.Name)));
+                    Assert.Equal(new uint[] { 1, name == "OPTIONS" ? 0x80000001U : 0x80000000U },
+                        members.Select(field => reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadUInt32()));
+                    AssertDoesNotHaveAttribute(reader, group.GetCustomAttributes(), "ScopedEnumAttribute");
+                }
+                AssertDoesNotHaveAttribute(reader, FindType(reader, "OPTIONS").GetCustomAttributes(), "FlagsAttribute");
+                AssertHasAttribute(reader, FindType(reader, "FLAGS").GetCustomAttributes(), "FlagsAttribute");
+                var result = get.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "OPTIONS");
+                var flagsParameter = set.GetParameters().Select(reader.GetParameter).Single(item => item.SequenceNumber == 1);
+                AssertStringAttribute(reader, flagsParameter.GetCustomAttributes(), "AssociatedEnumAttribute", "FLAGS");
+            }
+            else
+            {
+                Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                    type => new[] { "OPTIONS", "FLAGS" }.Contains(reader.GetString(type.Name)));
+                foreach (var handle in get.GetParameters().Concat(set.GetParameters()))
+                    AssertDoesNotHaveAttribute(reader, reader.GetParameter(handle).GetCustomAttributes(), "AssociatedEnumAttribute");
+            }
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void SharedAssociatedEnumsPreserveTargetsAndConflictingNativeStorage(
             string architecture, string target, bool enabled)
         {

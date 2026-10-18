@@ -121,6 +121,76 @@ _Win32_Enum_(ERROR_GROUP, unsigned, SHARED, EXTRA);
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void LogicalEnumForwardDeclarationsProjectTraversedCanonicalGroups(
+            string architecture, string target, string language, string standard)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+typedef unsigned OPTIONS;
+typedef unsigned FLAGS;
+typedef unsigned EXCLUDED;
+_Win32_AssociatedEnum_(OPTIONS) unsigned GetOptions();
+void SetOptions(_Win32_AssociatedEnum_(FLAGS) unsigned flags);
+#include ""group-values.h""
+#include ""group-more.h""
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n--exclude\nEXCLUDED\n");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "group-values.h"), @"
+#define FIRST 1U
+#define HIGH 0x80000000U
+_Win32_Enum_(OPTIONS, unsigned, FIRST);
+_Win32_FlagsEnum_(FLAGS, unsigned, FIRST, HIGH);
+_Win32_Enum_(EXCLUDED, unsigned, FIRST);
+_Win32_Enum_(UNTRAVERSED, unsigned, FIRST);
+");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "group-more.h"), @"
+#define EXTRA (HIGH | FIRST)
+_Win32_Enum_(OPTIONS, unsigned, FIRST, EXTRA);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var groups = CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>()
+                .ToDictionary(group => group.Identifier.ValueText);
+            Assert.Equal(new[] { "FLAGS", "OPTIONS" }, groups.Keys.OrderBy(name => name));
+            Assert.Equal(new[] { "FIRST", "EXTRA" },
+                groups["OPTIONS"].Members.Select(member => member.Identifier.ValueText));
+            Assert.Contains("EXTRA = unchecked((uint)2147483649UL)", groups["OPTIONS"].ToString());
+            Assert.Contains("global::System.Flags", groups["FLAGS"].ToString());
+            Assert.DoesNotContain("global::System.Flags", groups["OPTIONS"].ToString());
+            Assert.All(groups.Values, group => Assert.Contains(": uint", group.ToString()));
+            string source = fixture.ReadSource();
+            Assert.Contains("uint GetOptions()", source);
+            Assert.Contains("uint flags", source);
+            Assert.Contains("AssociatedEnum(\"OPTIONS\")", source);
+            Assert.Contains("AssociatedEnum(\"FLAGS\")", source);
+            Assert.DoesNotContain("NativeAnnotation(", source + fixture.ReadAdditionalTypes());
+        }
+
+        [Fact]
+        public void LogicalEnumForwardDeclarationsDoNotBorrowUnrelatedGroupIdentities()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef unsigned OPTIONS;
+_Win32_AssociatedEnum_(OPTIONS) unsigned GetOptions();
+#include ""other-group.h""
+");
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "other-group.h"), @"
+namespace Other
+{
+#define FIRST 1U
+_Win32_Enum_(OPTIONS, unsigned, FIRST);
+}
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("AssociatedEnum requires a native enum or a _Win32_Enum_/_Win32_FlagsEnum_ group.", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
         [InlineData("_Win32_FlagsEnum_(ERROR_GROUP, unsigned, FIRST);", "Conflicting enum group kinds")]
         [InlineData("#undef FIRST\n#define FIRST 2U\n_Win32_Enum_(ERROR_GROUP, unsigned, FIRST);", "Conflicting enum group values")]
         public void LogicalEnumGroupRedeclarationsRejectContradictions(string redeclaration, string diagnostic)
