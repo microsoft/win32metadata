@@ -1686,6 +1686,76 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[] { partition, architecture.Item1, architecture.Item2, language, enabled };
         }
 
+        [NativeMigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS")]
+        [MemberData(nameof(DeviceBulkOriginalHeaderControls))]
+        public void OriginalDeviceBulkHeadersPreserveNativeAbiSalAndBoundMetadata(
+            string partition, string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string[] headers = WinHttpMigrationTests.DeviceBulkOriginalHeaders().Single(owner => owner.Partition == partition).Headers;
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, "",
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, partition, architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            using var contracts = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_BATCH_CONTRACTS")));
+            var expected = new List<string>();
+            foreach (var fact in contracts.RootElement.GetProperty("facts").EnumerateArray())
+            {
+                if (!headers.Contains(Path.GetFileName(fact.GetProperty("original").GetString()), StringComparer.OrdinalIgnoreCase) ||
+                    fact.GetProperty("annotationCount").GetInt32() == 0)
+                    continue;
+                string name = fact.GetProperty("symbol").GetString();
+                string category = fact.GetProperty("category").GetString();
+                Assert.Contains(category, new[] { "supportedOS", "setLastError" });
+                string value = "SetLastError";
+                if (category == "supportedOS")
+                {
+                    string row = fact.GetProperty("value").GetString();
+                    Assert.StartsWith(name + "=SupportedOSPlatform(", row);
+                    value = row.Substring(name.Length + 1);
+                }
+                int occurrences = before.Count(declaration =>
+                    declaration.StartsWith("function " + name + " ", StringComparison.Ordinal));
+                for (int i = 0; i < occurrences; i++)
+                    expected.Add(name + "|" + value);
+            }
+            Assert.NotEmpty(expected);
+            string[] expectedAnnotations = expected.OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(enabled ? expectedAnnotations : Array.Empty<string>(),
+                annotations.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
+                $"{before.Length} unchanged native facts, {beforeSal.Count} unchanged SAL occurrences, " +
+                $"{annotations.Count} exact source-bound availability/last-error facts.");
+        }
+
+        public static IEnumerable<object[]> DeviceBulkOriginalHeaderControls()
+        {
+            foreach (var owner in WinHttpMigrationTests.DeviceBulkOriginalHeaders())
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (string language in new[] { "c", "c++" })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[] { owner.Partition, architecture.Item1, architecture.Item2, language, enabled };
+        }
+
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,

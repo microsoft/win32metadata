@@ -1,0 +1,325 @@
+diff --git a/um/commctrl.h b/um/commctrl.h
+index 44285099..381ae00b 100644
+--- a/um/commctrl.h
++++ b/um/commctrl.h
+@@ -138,6 +138,7 @@ extern "C" {
+ #endif // RC_INVOKED
+ #endif //_MAC
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI InitCommonControls(void);
+ 
+ typedef struct tagINITCOMMONCONTROLSEX {
+@@ -165,6 +166,7 @@ typedef struct tagINITCOMMONCONTROLSEX {
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI InitCommonControlsEx(_In_ const INITCOMMONCONTROLSEX *picce);
+ 
+ #define ODT_HEADER              100
+@@ -546,17 +548,26 @@ typedef struct _IMAGELISTDRAWPARAMS
+ #define ILC_ORIGINALSIZE        0x00010000      // Imagelist should accept smaller than set images and apply OriginalSize based on image added
+ #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
+ #endif
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Create(int cx, int cy, UINT flags, int cInitial, int cGrow);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Destroy(_In_opt_ HIMAGELIST himl);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int         WINAPI ImageList_GetImageCount(_In_ HIMAGELIST himl);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetImageCount(_In_ HIMAGELIST himl, _In_ UINT uNewCount);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int         WINAPI ImageList_Add(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int         WINAPI ImageList_ReplaceIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ HICON hicon);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI COLORREF    WINAPI ImageList_SetBkColor(_In_ HIMAGELIST himl, _In_ COLORREF clrBk);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI COLORREF    WINAPI ImageList_GetBkColor(_In_ HIMAGELIST himl);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl, _In_ int iImage, _In_ int iOverlay);
+ 
+ #define     ImageList_AddIcon(himl, hicon) ImageList_ReplaceIcon(himl, -1, hicon)
+@@ -593,6 +604,7 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl
+ #define ILGT_ASYNC              0x00000001
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ UINT fStyle);
+ 
+ 
+@@ -602,14 +614,22 @@ WINCOMMCTRLAPI BOOL WINAPI ImageList_Draw(_In_ HIMAGELIST himl, _In_ int i, _In_
+ #define HBITMAP_CALLBACK               ((HBITMAP)-1)       // only for SparseImageList
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Replace(_In_ HIMAGELIST himl, _In_ int i, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int         WINAPI ImageList_AddMasked(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_ COLORREF crMask);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawEx(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ int dx, _In_ int dy, _In_ COLORREF rgbBk, _In_ COLORREF rgbFg, _In_ UINT fStyle);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ UINT flags);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
+ 
+ #ifdef UNICODE
+@@ -620,16 +640,25 @@ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpb
+ 
+ #define ILCF_MOVE   (0x00000000)
+ #define ILCF_SWAP   (0x00000001)
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Copy(_In_ HIMAGELIST himlDst, _In_ int iDst, _In_ HIMAGELIST himlSrc, _In_ int iSrc, _In_ UINT uFlags);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_BeginDrag(_In_ HIMAGELIST himlTrack, _In_ int iTrack, _In_ int dxHotspot, _In_ int dyHotspot);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void        WINAPI ImageList_EndDrag(void);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragEnter(HWND hwndLock, int x, int y);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragLeave(HWND hwndLock);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragMove(int x, int y);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetDragCursorImage(_In_ HIMAGELIST himlDrag, _In_ int iDrag, _In_ int dxHotspot, _In_ int dyHotspot);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_DragShowNolock(BOOL fShow);
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragImage(_Out_opt_ POINT *ppt, _Out_opt_ POINT *pptHotspot);
+ 
+ #define     ImageList_RemoveAll(himl) ImageList_Remove(himl, -1)
+@@ -638,7 +667,9 @@ _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragIma
+ 
+ struct IStream;
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Read(_In_ struct IStream *pstm);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ struct IStream *pstm);
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+@@ -646,7 +677,9 @@ WINCOMMCTRLAPI BOOL        WINAPI ImageList_Write(_In_ HIMAGELIST himl, _In_ str
+ #define ILP_DOWNLEVEL       1           // Write or reads the stream using downlevel sematics.
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI ImageList_ReadEx(_In_ DWORD dwFlags, _In_ struct IStream *pstm, _In_ REFIID riid, _Outptr_ PVOID* ppv);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI ImageList_WriteEx(_In_ HIMAGELIST himl, _In_ DWORD dwFlags, _In_ struct IStream *pstm);
+ #endif
+ 
+@@ -662,16 +695,22 @@ typedef struct _IMAGEINFO
+ } IMAGEINFO, *LPIMAGEINFO;
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetIconSize(_In_ HIMAGELIST himl, _Out_opt_ int *cx, _Out_opt_ int *cy);
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetIconSize(_In_ HIMAGELIST himl, _In_ int cx, _In_ int cy);
++_Win32_SupportedOS_WindowsVista_
+ _Success_(return) WINCOMMCTRLAPI BOOL        WINAPI ImageList_GetImageInfo(_In_ HIMAGELIST himl, _In_ int i, _Out_ IMAGEINFO *pImageInfo);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Merge(_In_ HIMAGELIST himl1, _In_ int i1, _In_ HIMAGELIST himl2, _In_ int i2, _In_ int dx, _In_ int dy);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_Duplicate(_In_ HIMAGELIST himl);
+ 
+ 
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI HIMAGELIST_QueryInterface(_In_ HIMAGELIST himl, _In_ REFIID riid, _Outptr_ void **ppv);
+ 
+ #ifdef __cplusplus
+@@ -1221,11 +1260,15 @@ typedef struct _COLORMAP {
+     COLORREF to;
+ } COLORMAP, *LPCOLORMAP;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HWND WINAPI CreateToolbarEx(HWND hwnd, DWORD ws, UINT wID, int nBitmaps,
+                         HINSTANCE hBMInst, UINT_PTR wBMID, LPCTBBUTTON lpButtons,
+                         int iNumButtons, int dxButton, int dyButton,
+                         int dxBitmap, int dyBitmap, UINT uStructSize);
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HBITMAP WINAPI CreateMappedBitmap(HINSTANCE hInstance, INT_PTR idBitmap,
+                                   UINT wFlags, _In_opt_ LPCOLORMAP lpColorMap,
+                                   int iNumMaps);
+@@ -2516,10 +2559,16 @@ typedef struct tagNMTTDISPINFOW {
+ 
+ // end_r_commctrl
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI DrawStatusTextA(HDC hDC, LPCRECT lprc, LPCSTR pszText, UINT uFlags);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI DrawStatusTextW(HDC hDC, LPCRECT lprc, LPCWSTR pszText, UINT uFlags);
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowA(LONG style, LPCSTR lpszText, HWND hwndParent, UINT wID);
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
+ 
+ #ifdef UNICODE
+@@ -2602,8 +2651,11 @@ WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWN
+ 
+ #ifndef NOMENUHELP
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI MenuHelp(UINT uMsg, WPARAM wParam, LPARAM lParam, HMENU hMainMenu, HINSTANCE hInst, HWND hwndStatus, _In_reads_(_Inexpressible_(2 + 2n && n >= 1)) UINT *lpwIDs);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI ShowHideMenuCtl(_In_ HWND hWnd, _In_ UINT_PTR uFlags, _In_z_ LPINT lpInfo);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI GetEffectiveClientRect(_In_ HWND hWnd, _Out_ LPRECT lprc,  _In_z_ const INT *lpInfo);
+ 
+ #define MINSYSCOMMAND   SC_SIZE
+@@ -2756,9 +2808,12 @@ typedef struct tagDRAGLISTINFO {
+ 
+ #define DRAGLISTMSGSTRING       TEXT("commctrl_DragListMsg")
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI MakeDragList(HWND hLB);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI void WINAPI DrawInsert(HWND handParent, HWND hLB, int nItem);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int WINAPI LBItemFromPt(HWND hLB, POINT pt, BOOL bAutoScroll);
+ 
+ #endif
+@@ -2823,6 +2878,7 @@ typedef struct _UDACCEL {
+ #define UDM_SETPOS32            (WM_USER+113)
+ #define UDM_GETPOS32            (WM_USER+114)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HWND WINAPI CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
+                                 HWND hParent, int nID, HINSTANCE hInst,
+                                 HWND hBuddy,
+@@ -7762,7 +7818,9 @@ typedef struct _TASKDIALOGCONFIG
+ } TASKDIALOGCONFIG;
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI TaskDialogIndirect(_In_ const TASKDIALOGCONFIG *pTaskConfig, _Out_opt_ int *pnButton, _Out_opt_ int *pnRadioButton, _Out_opt_ BOOL *pfVerificationFlagChecked);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
+ 
+ 
+@@ -7781,9 +7839,11 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
+ // === MUI APIs ===
+ //
+ #ifndef NOMUI
++_Win32_SupportedOS_WindowsVista_
+ void WINAPI InitMUILanguage(LANGID uiLang);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ LANGID WINAPI GetMUILanguage(void);
+ #endif  // NOMUI
+ 
+@@ -7835,6 +7895,7 @@ typedef struct tagTRACKMOUSEEVENT {
+ // Declare _TrackMouseEvent.  This API tries to use the window manager's
+ // implementation of TrackMouseEvent if it is present, otherwise it emulates.
+ //
++_Win32_SupportedOS_Windows2000_
+ WINCOMMCTRLAPI
+ BOOL
+ WINAPI
+@@ -7864,33 +7925,46 @@ _TrackMouseEvent(
+ #define FSB_ENCARTA_MODE        1
+ #define FSB_REGULAR_MODE        0
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_EnableScrollBar(HWND, int, UINT);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, int code, BOOL);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, int code, LPINT, LPINT);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, int code, LPSCROLLINFO);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, int code);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, int propIndex, LPINT);
+ #ifdef _WIN64
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollPropPtr(HWND, int propIndex, PINT_PTR);
+ #else
+ #define FlatSB_GetScrollPropPtr  FlatSB_GetScrollProp
+ #endif
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, int code, int pos, BOOL fRedraw);
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, int code, LPSCROLLINFO psi, BOOL fRedraw);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, int code, int min, int max, BOOL fRedraw);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI FlatSB_SetScrollProp(HWND, UINT index, INT_PTR newValue, BOOL);
+ #define FlatSB_SetScrollPropPtr FlatSB_SetScrollProp
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI BOOL WINAPI InitializeFlatSB(HWND);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
+ 
+ #endif  //  NOFLATSBAPIS
+@@ -7907,13 +7981,17 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
+     LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return) BOOL WINAPI SetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
+     _In_ DWORD_PTR dwRefData);
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return) BOOL WINAPI GetWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass, _In_ UINT_PTR uIdSubclass,
+     _Out_opt_ DWORD_PTR *pdwRefData);
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return) BOOL WINAPI RemoveWindowSubclass(_In_ HWND hWnd, _In_ SUBCLASSPROC pfnSubclass,
+     _In_ UINT_PTR uIdSubclass);
+ 
++_Win32_SupportedOS_WindowsXP_
+ LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+ #endif
+ 
+@@ -7925,13 +8003,16 @@ enum _LI_METRIC
+    LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
+ };
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, int lims, _Out_ HICON *phico);
++_Win32_SupportedOS_WindowsVista_
+ WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Out_ HICON *phico);
+ 
+ #endif // NTDDI_VISTA
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ 
++_Win32_SupportedOS_WindowsVista_
+ int WINAPI DrawShadowText(_In_ HDC hdc, _In_reads_(cch) LPCWSTR pszText, _In_ UINT cch, _In_ RECT* prc, _In_ DWORD dwFlags, _In_ COLORREF crText, _In_ COLORREF crShadow,
+     _In_ int ixOffset, _In_ int iyOffset);
+ #endif

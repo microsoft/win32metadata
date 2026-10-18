@@ -1088,6 +1088,50 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        [Fact]
+        public void DeviceBulkAvailabilityPatchesUseOriginalHeadersAndSharedPreparation()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            string[] headers = DeviceBulkOriginalHeaders().SelectMany(owner => owner.Headers).ToArray();
+            Assert.Equal(25, headers.Distinct(StringComparer.Ordinal).Count());
+            foreach (string header in headers)
+            {
+                string path = "um\\" + header + ".patch";
+                Assert.Single(patches.Where(value => value == path));
+                string text = File.ReadAllText(Path.Combine(root, "patches", path));
+                Assert.Contains("--- a/um/" + header, text);
+                Assert.DoesNotContain("RecompiledIdlHeaders", text);
+                Assert.DoesNotContain("+#include <win32metadata_annotations.h>", text);
+                Assert.Contains(text.Split('\n'), line => line.StartsWith("+", StringComparison.Ordinal) &&
+                    (line.Contains("_Win32_SupportedOS_", StringComparison.Ordinal) ||
+                        line.Contains("_Win32_SetLastError_", StringComparison.Ordinal)));
+            }
+            foreach (var owner in DeviceBulkOriginalHeaders())
+                Assert.Contains("parse-win32-annotations",
+                    File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
+        }
+
+        internal static IEnumerable<(string Partition, string[] Headers)> DeviceBulkOriginalHeaders()
+        {
+            yield return ("Audio", new[] { "mmeapi.h", "msacm.h" });
+            yield return ("Controls", new[] { "commctrl.h", "uxtheme.h" });
+            yield return ("Display", new[] { "winddi.h" });
+            yield return ("DlgBox", new[] { "commdlg.h" });
+            yield return ("Fax", new[] { "winfax.h", "faxdev.h", "faxroute.h", "faxext.h", "fxsutility.h" });
+            yield return ("Multimedia", new[] { "vfw.h", "mmiscapi.h", "joystickapi.h" });
+            yield return ("PrintTicket", new[] { "prntvpt.h" });
+            yield return ("Printing", new[] { "prnasnot.h" });
+            yield return ("SecBitomet", new[] { "winbio.h", "winbio_adapter.h" });
+            yield return ("Shell", new[] { "shlwapi.h", "shlobj_core.h", "shellapi.h" });
+            yield return ("Threading", new[] { "avrt.h" });
+            yield return ("Variant", new[] { "propvarutil.h" });
+            yield return ("WebServicesOnDevices", new[] { "wsdutil.h" });
+            yield return ("WinAuto", new[] { "uiautomationcoreapi.h" });
+        }
+
         internal static IEnumerable<(string Header, string Partition, string OS, string[] Functions)> AuthoredDeviceFamilyHeaderContracts()
         {
             yield return ("cfgmgr32.h", "DevInst", "windows5.0", new[]

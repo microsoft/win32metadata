@@ -1875,6 +1875,156 @@
       "sourceSha256": "89174D7BF7C9B1A602B0559E17E6F2064D3722DB6E67C3187ACA346CA54FE021",
       "sdkPath": "c\\include\\10.0.26100.0\\winrt\\rometadata.h",
       "sdkSha256": "89174D7BF7C9B1A602B0559E17E6F2064D3722DB6E67C3187ACA346CA54FE021"
+    },
+    {
+      "path": "um\\winddi.h",
+      "sourceSha256": "7D2FF626273F5CF40CD19FCBD2D0EEF615DDE65DBF5EA4A47FDA7436DA8028FD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winddi.h",
+      "sdkSha256": "7D2FF626273F5CF40CD19FCBD2D0EEF615DDE65DBF5EA4A47FDA7436DA8028FD"
+    },
+    {
+      "path": "um\\vfw.h",
+      "sourceSha256": "14B6D9F7999E2A2480A287D841DE7460E29D73EA5204422C23B78D52084B9459",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vfw.h",
+      "sdkSha256": "14B6D9F7999E2A2480A287D841DE7460E29D73EA5204422C23B78D52084B9459"
+    },
+    {
+      "path": "um\\mmeapi.h",
+      "sourceSha256": "EE475F72AE76FEA07CE189895A14A4C7DD345568F59884801E6AA4744E931C65",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mmeapi.h",
+      "sdkSha256": "EE475F72AE76FEA07CE189895A14A4C7DD345568F59884801E6AA4744E931C65"
+    },
+    {
+      "path": "um\\winfax.h",
+      "sourceSha256": "2212E84CF90AE48CCD094F37E0D4AD2D8B838540E832DB7BEFE76DDFE954C44A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winfax.h",
+      "sdkSha256": "2212E84CF90AE48CCD094F37E0D4AD2D8B838540E832DB7BEFE76DDFE954C44A"
+    },
+    {
+      "path": "um\\msacm.h",
+      "sourceSha256": "8C38E5AA5B3EEC7909BA17384EC2AC5421D702D52E00BADB06DB80E033DEF375",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msacm.h",
+      "sdkSha256": "8C38E5AA5B3EEC7909BA17384EC2AC5421D702D52E00BADB06DB80E033DEF375"
+    },
+    {
+      "path": "um\\winbio.h",
+      "sourceSha256": "632188306CD9BDE1FFDCE3FCBC1D66F2C95D9CBAE400BB53AA5F960FC32A7D89",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winbio.h",
+      "sdkSha256": "632188306CD9BDE1FFDCE3FCBC1D66F2C95D9CBAE400BB53AA5F960FC32A7D89"
+    },
+    {
+      "path": "um\\mmiscapi.h",
+      "sourceSha256": "C732D81FF59B188F570972CBEEEDFD5BC3BC5D18CCEB5475C41C4AB540358CF3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mmiscapi.h",
+      "sdkSha256": "C732D81FF59B188F570972CBEEEDFD5BC3BC5D18CCEB5475C41C4AB540358CF3"
+    },
+    {
+      "path": "um\\faxdev.h",
+      "sourceSha256": "016709F6B5504B5AD5484D8C988AC02BA94C1F26C00DCA8756EF751794FAC0BD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\faxdev.h",
+      "sdkSha256": "016709F6B5504B5AD5484D8C988AC02BA94C1F26C00DCA8756EF751794FAC0BD"
+    },
+    {
+      "path": "um\\wsdutil.h",
+      "sourceSha256": "1910ABBA0A599BFF998381920706A9DD5A77CC60FC460FF07E662BE1B9CD02B6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsdutil.h",
+      "sdkSha256": "1910ABBA0A599BFF998381920706A9DD5A77CC60FC460FF07E662BE1B9CD02B6"
+    },
+    {
+      "path": "um\\prntvpt.h",
+      "sourceSha256": "C971F87CAB24C231B8771DC75E9A8EE061285249EA49B2DBAA362E7F426E1FB9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\prntvpt.h",
+      "sdkSha256": "C971F87CAB24C231B8771DC75E9A8EE061285249EA49B2DBAA362E7F426E1FB9"
+    },
+    {
+      "path": "um\\faxroute.h",
+      "sourceSha256": "76841637BB78AC8ABFD487D397AA5F1A1BA6F7143B50FED165B13ACCFF7F97CC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\faxroute.h",
+      "sdkSha256": "76841637BB78AC8ABFD487D397AA5F1A1BA6F7143B50FED165B13ACCFF7F97CC"
+    },
+    {
+      "path": "um\\joystickapi.h",
+      "sourceSha256": "D87B7DD3517D2018478DF501BA3EA578D7ECDC4DDDF44720802C414376FB5734",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\joystickapi.h",
+      "sdkSha256": "D87B7DD3517D2018478DF501BA3EA578D7ECDC4DDDF44720802C414376FB5734"
+    },
+    {
+      "path": "um\\faxext.h",
+      "sourceSha256": "3A3BCF9C24D8C958FEA7BCA435C42027C87AEA822B86D14587EBBA467F390BA2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\faxext.h",
+      "sdkSha256": "3A3BCF9C24D8C958FEA7BCA435C42027C87AEA822B86D14587EBBA467F390BA2"
+    },
+    {
+      "path": "um\\prnasnot.h",
+      "sourceSha256": "8A56571BD122A6DC29B47C174986F3FB19B168015484F8D8BBC8A7B61D84AD2E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\prnasnot.h",
+      "sdkSha256": "8A56571BD122A6DC29B47C174986F3FB19B168015484F8D8BBC8A7B61D84AD2E"
+    },
+    {
+      "path": "um\\winbio_adapter.h",
+      "sourceSha256": "E0A3A6ADEA3FD1B6693874472F2BA2839A09994F43F2AED42741C48391EDDF7D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winbio_adapter.h",
+      "sdkSha256": "E0A3A6ADEA3FD1B6693874472F2BA2839A09994F43F2AED42741C48391EDDF7D"
+    },
+    {
+      "path": "um\\fxsutility.h",
+      "sourceSha256": "A8EF328A70BC9C5E6AA2CF660C1DD8B775979C17CF20B8FABEE73374F63771F5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\fxsutility.h",
+      "sdkSha256": "A8EF328A70BC9C5E6AA2CF660C1DD8B775979C17CF20B8FABEE73374F63771F5"
+    },
+    {
+      "path": "um\\shlwapi.h",
+      "sourceSha256": "8845385DE1A3C182FA00350925CA73E7C270AC579F3F5512F1B311ACE8A226B1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shlwapi.h",
+      "sdkSha256": "8845385DE1A3C182FA00350925CA73E7C270AC579F3F5512F1B311ACE8A226B1"
+    },
+    {
+      "path": "um\\propvarutil.h",
+      "sourceSha256": "1ED6B7BB5CB2DACC6714DD77F7C414719F8FBF6F6734526A8EFC25AFE623E3E3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propvarutil.h",
+      "sdkSha256": "1ED6B7BB5CB2DACC6714DD77F7C414719F8FBF6F6734526A8EFC25AFE623E3E3"
+    },
+    {
+      "path": "um\\shlobj_core.h",
+      "sourceSha256": "9EB3A933681921C03766DD57CA8B7AB54FCB9F28F1D432EB0E546039F61D943D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shlobj_core.h",
+      "sdkSha256": "9EB3A933681921C03766DD57CA8B7AB54FCB9F28F1D432EB0E546039F61D943D"
+    },
+    {
+      "path": "um\\uiautomationcoreapi.h",
+      "sourceSha256": "5AEF9A750219F162A9F6C45BD1E10CABAFED69ECAE634E79D814902428EF22A8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\uiautomationcoreapi.h",
+      "sdkSha256": "5AEF9A750219F162A9F6C45BD1E10CABAFED69ECAE634E79D814902428EF22A8"
+    },
+    {
+      "path": "um\\commctrl.h",
+      "sourceSha256": "6B8FA0799817FD438A9A3539C3E743B40ACF6C77763C8F5ACDBC91988E4736B0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\commctrl.h",
+      "sdkSha256": "6B8FA0799817FD438A9A3539C3E743B40ACF6C77763C8F5ACDBC91988E4736B0"
+    },
+    {
+      "path": "um\\uxtheme.h",
+      "sourceSha256": "57822AA309F31AE2564C2FDF7EAE6DF6E42D3BD55D26E4762A090B172421DA67",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\uxtheme.h",
+      "sdkSha256": "57822AA309F31AE2564C2FDF7EAE6DF6E42D3BD55D26E4762A090B172421DA67"
+    },
+    {
+      "path": "um\\shellapi.h",
+      "sourceSha256": "C0712ED939BABDD72F9602A031120D71360324D7EC7933C31D6739AADB49C989",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shellapi.h",
+      "sdkSha256": "C0712ED939BABDD72F9602A031120D71360324D7EC7933C31D6739AADB49C989"
+    },
+    {
+      "path": "um\\avrt.h",
+      "sourceSha256": "9AD68E7C0709D64C283B88AF31A9FD59B5D1054768CD4C7AF51551B8424450E4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\avrt.h",
+      "sdkSha256": "9AD68E7C0709D64C283B88AF31A9FD59B5D1054768CD4C7AF51551B8424450E4"
+    },
+    {
+      "path": "um\\commdlg.h",
+      "sourceSha256": "8B98A194569E52CA87266B5A8D676CCBA67538CE7851571003DB8F7A606B0D2B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\commdlg.h",
+      "sdkSha256": "8B98A194569E52CA87266B5A8D676CCBA67538CE7851571003DB8F7A606B0D2B"
     }
   ],
   "midl": {
@@ -2774,7 +2924,16 @@
     "Sens",
     "Ifsk",
     "WinRT",
-    "WinRT.Metadata"
+    "WinRT.Metadata",
+    "Display",
+    "Multimedia",
+    "Audio",
+    "Fax",
+    "SecBitomet",
+    "WebServicesOnDevices",
+    "PrintTicket",
+    "Variant",
+    "DlgBox"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -3054,6 +3213,31 @@
     "um\\scrnsave.h.patch",
     "um\\wtshintapi.h.patch",
     "winrt\\robuffer.h.patch",
-    "winrt\\rometadata.h.patch"
+    "winrt\\rometadata.h.patch",
+    "um\\winddi.h.patch",
+    "um\\vfw.h.patch",
+    "um\\mmeapi.h.patch",
+    "um\\winfax.h.patch",
+    "um\\msacm.h.patch",
+    "um\\winbio.h.patch",
+    "um\\mmiscapi.h.patch",
+    "um\\faxdev.h.patch",
+    "um\\wsdutil.h.patch",
+    "um\\prntvpt.h.patch",
+    "um\\faxroute.h.patch",
+    "um\\joystickapi.h.patch",
+    "um\\faxext.h.patch",
+    "um\\prnasnot.h.patch",
+    "um\\winbio_adapter.h.patch",
+    "um\\fxsutility.h.patch",
+    "um\\shlwapi.h.patch",
+    "um\\propvarutil.h.patch",
+    "um\\shlobj_core.h.patch",
+    "um\\uiautomationcoreapi.h.patch",
+    "um\\commctrl.h.patch",
+    "um\\uxtheme.h.patch",
+    "um\\shellapi.h.patch",
+    "um\\avrt.h.patch",
+    "um\\commdlg.h.patch"
   ]
 }

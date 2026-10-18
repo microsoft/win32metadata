@@ -1,0 +1,27 @@
+diff --git a/um/prnasnot.h b/um/prnasnot.h
+index ab0ef556..e6720bd8 100644
+--- a/um/prnasnot.h
++++ b/um/prnasnot.h
+@@ -170,6 +170,7 @@ DECLARE_INTERFACE_(IPrintAsyncNotifyCallback, IUnknown)
+ 
+ #undef INTERFACE
+ 
++_Win32_SupportedOS_WindowsVista_
+ HRESULT
+ WINAPI
+ RegisterForPrintAsyncNotifications(
+@@ -181,12 +182,14 @@ RegisterForPrintAsyncNotifications(
+     _Out_    HANDLE*                           phNotify
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ HRESULT
+ WINAPI
+ UnRegisterForPrintAsyncNotifications(
+     _In_     HANDLE
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ HRESULT
+ WINAPI
+ CreatePrintAsyncNotifyChannel(

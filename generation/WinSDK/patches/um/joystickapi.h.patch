@@ -1,0 +1,68 @@
+diff --git a/um/joystickapi.h b/um/joystickapi.h
+index 57d6e6d0..3afbe34d 100644
+--- a/um/joystickapi.h
++++ b/um/joystickapi.h
+@@ -326,6 +326,7 @@ typedef struct joyinfoex_tag {
+ /* joystick function prototypes */
+ 
+ #if (WINVER >= 0x0400)
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -336,6 +337,7 @@ joyGetPosEx(
+ 
+ #endif /* WINVER >= 0x0400 */
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ UINT
+ WINAPI
+@@ -354,6 +356,7 @@ joyGetDevCapsA(
+     _In_ UINT cbjc
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -373,6 +376,7 @@ joyGetDevCapsW(
+ MMRESULT WINAPI joyGetDevCaps(UINT uJoyID, LPJOYCAPS pjc, UINT cbjc);
+ #endif
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -381,6 +385,7 @@ joyGetPos(
+     _Out_ LPJOYINFO pji
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -389,6 +394,7 @@ joyGetThreshold(
+     _Out_ LPUINT puThreshold
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -396,6 +402,7 @@ joyReleaseCapture(
+     _In_ UINT uJoyID
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
+@@ -406,6 +413,7 @@ joySetCapture(
+     _In_ BOOL fChanged
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ MMRESULT
+ WINAPI
