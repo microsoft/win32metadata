@@ -3349,108 +3349,6 @@
   },
   {
     "type": "uint",
-    "name": "RPC_C_QOS_CAPABILITIES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "RPC_C_QOS_CAPABILITIES_",
-      "header": "rpcdce.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "RPC_SECURITY_QOS",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_A",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_W",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_A",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_W",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_A",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_W",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_A",
-        "field": "Capabilities"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_W",
-        "field": "Capabilities"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "RPC_C_QOS_IDENTITY",
-    "autoPopulate": {
-      "filter": "RPC_C_QOS_IDENTITY_",
-      "header": "rpcdce.h"
-    },
-    "members": [
-      {
-        "name": "RPC_C_QOS_IDENTITY_STATIC"
-      },
-      {
-        "name": "RPC_C_QOS_IDENTITY_DYNAMIC"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RPC_SECURITY_QOS",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_A",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_W",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_A",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_W",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_A",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_W",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_A",
-        "field": "IdentityTracking"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_W",
-        "field": "IdentityTracking"
-      }
-    ]
-  },
-  {
-    "type": "uint",
     "name": "RPC_C_AUTHN_INFO_TYPE",
     "autoPopulate": {
       "filter": "RPC_C_AUTHN_INFO_TYPE_",
@@ -3494,85 +3392,6 @@
       {
         "struct": "RPC_SECURITY_QOS_V5_W",
         "field": "AdditionalSecurityInfoType"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "RPC_C_HTTP_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "RPC_C_HTTP_FLAG_",
-      "header": "rpcdce.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
-        "field": "Flags"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_W",
-        "field": "Flags"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A",
-        "field": "Flags"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W",
-        "field": "Flags"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A",
-        "field": "Flags"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "RPC_C_HTTP_AUTHN_TARGET",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "RPC_C_HTTP_AUTHN_TARGET_",
-      "header": "rpcdce.h"
-    },
-    "members": [
-      {
-        "name": "RPC_C_HTTP_AUTHN_TARGET_SERVER"
-      },
-      {
-        "name": "RPC_C_HTTP_AUTHN_TARGET_PROXY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_A",
-        "field": "AuthenticationTarget"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_W",
-        "field": "AuthenticationTarget"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_A",
-        "field": "AuthenticationTarget"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V2_W",
-        "field": "AuthenticationTarget"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_A",
-        "field": "AuthenticationTarget"
-      },
-      {
-        "struct": "RPC_HTTP_TRANSPORT_CREDENTIALS_V3_W",
-        "field": "AuthenticationTarget"
       }
     ]
   },
@@ -6114,52 +5933,6 @@
       {
         "method": "FoldStringW",
         "parameter": "dwMapFlags"
-      }
-    ]
-  },
-  {
-    "name": "FTP_FLAGS",
-    "members": [
-      {
-        "name": "FTP_TRANSFER_TYPE_ASCII"
-      },
-      {
-        "name": "FTP_TRANSFER_TYPE_BINARY"
-      },
-      {
-        "name": "FTP_TRANSFER_TYPE_UNKNOWN"
-      },
-      {
-        "name": "INTERNET_FLAG_TRANSFER_ASCII"
-      },
-      {
-        "name": "INTERNET_FLAG_TRANSFER_BINARY"
-      }
-    ],
-    "uses": [
-      {
-        "method": "FtpPutFileA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "FtpOpenFileW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "FtpPutFileW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "FtpOpenFileA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "FtpCommandA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "FtpCommandW",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -9981,40 +9754,6 @@
     ]
   },
   {
-    "name": "HTTP_ADDREQ_FLAG",
-    "flags": true,
-    "members": [
-      {
-        "name": "HTTP_ADDREQ_FLAG_ADD"
-      },
-      {
-        "name": "HTTP_ADDREQ_FLAG_ADD_IF_NEW"
-      },
-      {
-        "name": "HTTP_ADDREQ_FLAG_COALESCE"
-      },
-      {
-        "name": "HTTP_ADDREQ_FLAG_COALESCE_WITH_COMMA"
-      },
-      {
-        "name": "HTTP_ADDREQ_FLAG_COALESCE_WITH_SEMICOLON"
-      },
-      {
-        "name": "HTTP_ADDREQ_FLAG_REPLACE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "HttpAddRequestHeadersA",
-        "parameter": "dwModifiers"
-      },
-      {
-        "method": "HttpAddRequestHeadersW",
-        "parameter": "dwModifiers"
-      }
-    ]
-  },
-  {
     "addUsesTo": "tomConstants",
     "flags": true,
     "members": [],
@@ -12353,30 +12092,6 @@
       {
         "method": "AuthzInitializeObjectAccessAuditEvent",
         "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SAFER_TOKEN_NULL_IF_EQUAL"
-      },
-      {
-        "name": "SAFER_TOKEN_COMPARE_ONLY"
-      },
-      {
-        "name": "SAFER_TOKEN_MAKE_INERT"
-      },
-      {
-        "name": "SAFER_TOKEN_WANT_FLAGS"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SaferComputeTokenFromLevel",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -15956,26 +15671,6 @@
       {
         "method": "LocalAlloc",
         "parameter": "uFlags"
-      }
-    ]
-  },
-  {
-    "name": "WLX_SHUTDOWN_TYPE",
-    "members": [
-      {
-        "name": "WLX_SAS_ACTION_SHUTDOWN"
-      },
-      {
-        "name": "WLX_SAS_ACTION_SHUTDOWN_REBOOT"
-      },
-      {
-        "name": "WLX_SAS_ACTION_SHUTDOWN_POWER_OFF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WlxShutdown",
-        "parameter": "ShutdownType"
       }
     ]
   },
@@ -20334,24 +20029,6 @@
     ]
   },
   {
-    "name": "RPC_BINDING_HANDLE_OPTIONS_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "RPC_BHO_NONCAUSAL"
-      },
-      {
-        "name": "RPC_BHO_DONTLINGER"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RPC_BINDING_HANDLE_OPTIONS_V1",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
     "name": "MCGRIDINFO_PART",
     "members": [
       {
@@ -20427,93 +20104,6 @@
       {
         "struct": "PARAFORMAT2",
         "field": "wBorders"
-      }
-    ]
-  },
-  {
-    "name": "GOPHER_TYPE",
-    "members": [
-      {
-        "name": "GOPHER_TYPE_ASK"
-      },
-      {
-        "name": "GOPHER_TYPE_BINARY"
-      },
-      {
-        "name": "GOPHER_TYPE_BITMAP"
-      },
-      {
-        "name": "GOPHER_TYPE_CALENDAR"
-      },
-      {
-        "name": "GOPHER_TYPE_CSO"
-      },
-      {
-        "name": "GOPHER_TYPE_DIRECTORY"
-      },
-      {
-        "name": "GOPHER_TYPE_DOS_ARCHIVE"
-      },
-      {
-        "name": "GOPHER_TYPE_ERROR"
-      },
-      {
-        "name": "GOPHER_TYPE_GIF"
-      },
-      {
-        "name": "GOPHER_TYPE_GOPHER_PLUS"
-      },
-      {
-        "name": "GOPHER_TYPE_HTML"
-      },
-      {
-        "name": "GOPHER_TYPE_IMAGE"
-      },
-      {
-        "name": "GOPHER_TYPE_INDEX_SERVER"
-      },
-      {
-        "name": "GOPHER_TYPE_INLINE"
-      },
-      {
-        "name": "GOPHER_TYPE_MAC_BINHEX"
-      },
-      {
-        "name": "GOPHER_TYPE_MOVIE"
-      },
-      {
-        "name": "GOPHER_TYPE_PDF"
-      },
-      {
-        "name": "GOPHER_TYPE_REDUNDANT"
-      },
-      {
-        "name": "GOPHER_TYPE_SOUND"
-      },
-      {
-        "name": "GOPHER_TYPE_TELNET"
-      },
-      {
-        "name": "GOPHER_TYPE_TEXT_FILE"
-      },
-      {
-        "name": "GOPHER_TYPE_TN3270"
-      },
-      {
-        "name": "GOPHER_TYPE_UNIX_UUENCODED"
-      },
-      {
-        "name": "GOPHER_TYPE_UNKNOWN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "GOPHER_FIND_DATAW",
-        "field": "GopherType"
-      },
-      {
-        "struct": "GOPHER_FIND_DATAA",
-        "field": "GopherType"
       }
     ]
   },
@@ -21387,48 +20977,6 @@
     ]
   },
   {
-    "name": "INTERNET_PER_CONN",
-    "members": [
-      {
-        "name": "INTERNET_PER_CONN_AUTOCONFIG_URL"
-      },
-      {
-        "name": "INTERNET_PER_CONN_AUTODISCOVERY_FLAGS"
-      },
-      {
-        "name": "INTERNET_PER_CONN_FLAGS"
-      },
-      {
-        "name": "INTERNET_PER_CONN_PROXY_BYPASS"
-      },
-      {
-        "name": "INTERNET_PER_CONN_PROXY_SERVER"
-      },
-      {
-        "name": "INTERNET_PER_CONN_AUTOCONFIG_SECONDARY_URL"
-      },
-      {
-        "name": "INTERNET_PER_CONN_AUTOCONFIG_RELOAD_DELAY_MINS"
-      },
-      {
-        "name": "INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_TIME"
-      },
-      {
-        "name": "INTERNET_PER_CONN_AUTOCONFIG_LAST_DETECT_URL"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "INTERNET_PER_CONN_OPTIONA",
-        "field": "dwOption"
-      },
-      {
-        "struct": "INTERNET_PER_CONN_OPTIONW",
-        "field": "dwOption"
-      }
-    ]
-  },
-  {
     "name": "SERVER_INFO_HIDDEN",
     "type": "int",
     "members": [
@@ -22145,26 +21693,6 @@
       {
         "struct": "COMMPROP",
         "field": "wSettableStopParity"
-      }
-    ]
-  },
-  {
-    "name": "INTERNET_ACCESS_TYPE",
-    "members": [
-      {
-        "name": "INTERNET_OPEN_TYPE_DIRECT"
-      },
-      {
-        "name": "INTERNET_OPEN_TYPE_PRECONFIG"
-      },
-      {
-        "name": "INTERNET_OPEN_TYPE_PROXY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "INTERNET_PROXY_INFO",
-        "field": "dwAccessType"
       }
     ]
   },
@@ -32302,67 +31830,6 @@
       {
         "struct": "SIGNER_CERT",
         "field": "dwCertChoice"
-      }
-    ]
-  },
-  {
-    "name": "GPO_OPEN_FLAGS",
-    "autoPopulate": {
-      "header": "GPEdit.h",
-      "filter": "GPO_OPEN_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "OpenLocalMachineGPO",
-        "parameter": "dwFlags"
-      },
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "OpenRemoteMachineGPO",
-        "parameter": "dwFlags"
-      },
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "OpenDSGPO",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "GPO_OPTIONS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "GPEdit.h",
-      "filter": "GPO_OPTION_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "GetOptions",
-        "parameter": "dwOptions"
-      },
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "SetOptions",
-        "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
-    "name": "GPO_SECTION",
-    "autoPopulate": {
-      "header": "GPEdit.h",
-      "filter": "GPO_SECTION_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "interface": "IGroupPolicyObject",
-        "method": "GetRegistryKey",
-        "parameter": "dwSection"
       }
     ]
   },

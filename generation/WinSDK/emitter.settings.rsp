@@ -381,7 +381,6 @@ IUIAutomationElement::get_CachedNativeWindowHandle::retVal=HWND*
 IUIAutomationProxyFactory::CreateProvider::hwnd=HWND
 IUIAutomation::ElementFromHandle::hwnd=HWND
 IUIAutomation::ElementFromHandleBuildCache::hwnd=HWND
-GetNetworkParams::return=WIN32_ERROR
 DoDragDrop=[CanReturnMultipleSuccessValues]
 IShellFolder::EnumObjects=[CanReturnMultipleSuccessValues]
 IShellLinkA::GetPath=[CanReturnMultipleSuccessValues]
@@ -1010,13 +1009,9 @@ NCryptOpenKey::dwLegacyKeySpec=[-Optional]
 MFPCreateMediaPlayer::creationOptions=[-Optional]
 DirectSoundCreate::pUnkOuter=[Optional]
 IDirectSound::CreateSoundBuffer::pUnkOuter=[Optional]
-I_RpcNsInterfaceExported::EntryName=[In]
-I_RpcNsInterfaceExported::RpcInterfaceInformation=[In]
 FNCERTSRVBACKUPGETDYNAMICFILELISTW::hbc=[In]
 FNCERTSRVBACKUPGETDYNAMICFILELISTW::ppwszzFileList=[Out]
 FNCERTSRVBACKUPGETDYNAMICFILELISTW::pcbSize=[Out]
-SetLogFileSizeWithPolicy::pDesiredSize=[In]
-SetLogFileSizeWithPolicy::pResultingSize=[Out]
 FlushLogBuffers::pvMarshal=[In]
 FlushLogBuffers::pOverlapped=[In][Out][Optional][Retained]
 GetMessageA=[CanReturnMultipleSuccessValues]
@@ -1309,7 +1304,6 @@ LocalFree=[CanReturnErrorsAsSuccess]
 IMediaSample::IsDiscontinuity=[CanReturnMultipleSuccessValues]
 IMediaSample::IsPreroll=[CanReturnMultipleSuccessValues]
 IMediaSample::IsSyncPoint=[CanReturnMultipleSuccessValues]
-LdapMapErrorToWin32::return=WIN32_ERROR
 CERT_RDN_ATTR::dwValueType=[AssociatedEnum("CERT_RDN_ATTR_VALUE_TYPE")]
 CHANGENOTIFY::dwChangeType=[AssociatedEnum("CHANGETYPE")]
 CoGetClassObject::dwClsContext=[AssociatedEnum("CLSCTX")]
@@ -1395,7 +1389,6 @@ IVBGetControl::EnumControls::dwOleContF=[AssociatedEnum("OLECONTF")]
 IWPCProviderConfig::RequestOverride::dwFlags=[AssociatedEnum("WPCFLAG_RESTRICTION")]
 IWSCProductList::Initialize::provider=[AssociatedEnum("WSC_SECURITY_PROVIDER")]
 JOBOBJECT_IO_RATE_CONTROL_INFORMATION::ControlFlags=[AssociatedEnum("JOB_OBJECT_IO_RATE_CONTROL_FLAGS")]
-LdapMapErrorToWin32::LdapError=[AssociatedEnum("LDAP_RETCODE")]
 LOGPEN::lopnStyle=[AssociatedEnum("PEN_STYLE")]
 MFTEnum2::Flags=[AssociatedEnum("MFT_ENUM_FLAG")]
 MFTEnumEx::Flags=[AssociatedEnum("MFT_ENUM_FLAG")]
@@ -2228,11 +2221,7 @@ GetPackageApplicationIds::buffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersaddresses
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getperadapterinfo
-GetAdaptersAddresses::AdapterAddresses=[ContainsInteriorPointers]
-GetAdaptersInfo::AdapterInfo=[ContainsInteriorPointers]
-GetPerAdapterInfo::pPerAdapterInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcpentry
-GetOwnerModuleFromTcpEntry::pBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfigw
 # https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-queryserviceconfig2w
 QueryServiceConfigA::lpServiceConfig=[ContainsInteriorPointers]
@@ -2281,29 +2270,11 @@ GdipGetImageDecoders::decoders=[ContainsInteriorPointers]
 HttpReceiveHttpRequest::RequestBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw
 # INTERNET_OPTION_PROXY returns packed INTERNET_PROXY_INFO and referenced strings.
-InternetQueryOptionA::lpBuffer=[ContainsInteriorPointers]
-InternetQueryOptionW::lpBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infoa
 # https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infow
 # https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-retrieveurlcacheentrystreama
-RetrieveUrlCacheEntryFileA::lpCacheEntryInfo=[ContainsInteriorPointers]
-RetrieveUrlCacheEntryFileW::lpCacheEntryInfo=[ContainsInteriorPointers]
-RetrieveUrlCacheEntryStreamA::lpCacheEntryInfo=[ContainsInteriorPointers]
-RetrieveUrlCacheEntryStreamW::lpCacheEntryInfo=[ContainsInteriorPointers]
-GetUrlCacheEntryInfoA::lpCacheEntryInfo=[ContainsInteriorPointers]
-GetUrlCacheEntryInfoW::lpCacheEntryInfo=[ContainsInteriorPointers]
-GetUrlCacheEntryInfoExA::lpCacheEntryInfo=[ContainsInteriorPointers]
-GetUrlCacheEntryInfoExW::lpCacheEntryInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findfirsturlcacheentryexw
 # https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-findnexturlcacheentryexw
-FindFirstUrlCacheEntryA::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
-FindFirstUrlCacheEntryW::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
-FindFirstUrlCacheEntryExA::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
-FindFirstUrlCacheEntryExW::lpFirstCacheEntryInfo=[ContainsInteriorPointers]
-FindNextUrlCacheEntryA::lpNextCacheEntryInfo=[ContainsInteriorPointers]
-FindNextUrlCacheEntryW::lpNextCacheEntryInfo=[ContainsInteriorPointers]
-FindNextUrlCacheEntryExA::lpNextCacheEntryInfo=[ContainsInteriorPointers]
-FindNextUrlCacheEntryExW::lpNextCacheEntryInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetenhancedkeyusage
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatectlentryfromcertificatecontextproperties
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatecontextproperty
@@ -2322,8 +2293,6 @@ CryptExportPublicKeyInfoEx::pInfo=[ContainsInteriorPointers]
 CryptExportPublicKeyInfoFromBCryptKeyHandle::pInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceproviders32
 # https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceprovidersex32
-WSCEnumNameSpaceProviders32::lpnspBuffer=[ContainsInteriorPointers]
-WSCEnumNameSpaceProvidersEx32::lpnspBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta
 # https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenextw
 WSALookupServiceNextA::lpqsResults=[ContainsInteriorPointers]
@@ -2331,9 +2300,6 @@ WSALookupServiceNextW::lpqsResults=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudpentry
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcp6entry
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudp6entry
-GetOwnerModuleFromUdpEntry::pBuffer=[ContainsInteriorPointers]
-GetOwnerModuleFromTcp6Entry::pBuffer=[ContainsInteriorPointers]
-GetOwnerModuleFromUdp6Entry::pBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration
 HttpQueryServiceConfiguration::pOutput=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate

@@ -1,5 +1,4 @@
 diff --git a/um/ws2spi.h b/um/ws2spi.h
-index e1d43ea9..5899d301 100644
 --- a/um/ws2spi.h
 +++ b/um/ws2spi.h
 @@ -615,6 +615,7 @@ typedef struct _WSPUPCALLTABLE {
@@ -265,7 +264,7 @@ index e1d43ea9..5899d301 100644
  int
  WSPAPI
  WPUCloseThread(
-@@ -1094,6 +1127,7 @@ WPUCloseThread(
+@@ -1094,11 +1127,12 @@ WPUCloseThread(
  #define LPFN_WSCENUMNAMESPACEPROVIDERS LPFN_WSAENUMNAMESPACEPROVIDERSW
  
  #if defined(_WIN64)
@@ -273,7 +272,13 @@ index e1d43ea9..5899d301 100644
  INT
  WSAAPI
  WSCEnumNameSpaceProviders32(
-@@ -1108,6 +1142,7 @@ WSCEnumNameSpaceProviders32(
+     _Inout_ LPDWORD             lpdwBufferLength,
+-    _Out_writes_bytes_(*lpdwBufferLength) LPWSANAMESPACE_INFOW lpnspBuffer
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpdwBufferLength) LPWSANAMESPACE_INFOW lpnspBuffer
+     );
+ #endif
+ #endif //(_WIN32_WINNT >= 0x0501)
+@@ -1108,15 +1142,17 @@ WSCEnumNameSpaceProviders32(
  #define LPFN_WSCENUMNAMESPACEPROVIDERSEX LPFN_WSAENUMNAMESPACEPROVIDERSEXW
  
  #if defined(_WIN64)
@@ -281,7 +286,10 @@ index e1d43ea9..5899d301 100644
  INT
  WSAAPI
  WSCEnumNameSpaceProvidersEx32(
-@@ -1117,6 +1152,7 @@ WSCEnumNameSpaceProvidersEx32(
+     _Inout_ LPDWORD     lpdwBufferLength,
+-    _Out_writes_bytes_(*lpdwBufferLength) LPWSANAMESPACE_INFOEXW lpnspBuffer
++    _Win32_ContainsInteriorPointers_ _Out_writes_bytes_(*lpdwBufferLength) LPWSANAMESPACE_INFOEXW lpnspBuffer
+     );
  #endif //(_WIN64)
  #endif //(_WIN32_WINNT >= 0x0600)
  

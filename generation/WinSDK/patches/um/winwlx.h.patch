@@ -1,8 +1,16 @@
 diff --git a/um/winwlx.h b/um/winwlx.h
-index f5be6127..52889fb2 100644
 --- a/um/winwlx.h
 +++ b/um/winwlx.h
-@@ -594,6 +594,7 @@ typedef struct _WLX_CONSOLESWITCH_CREDENTIALS_INFO {
+@@ -193,6 +193,8 @@ typedef struct _WLX_SC_NOTIFICATION_INFO {
+ #define WLX_SAS_ACTION_FORCE_LOGOFF                 (9)
+ #define WLX_SAS_ACTION_SHUTDOWN_POWER_OFF           (10)
+ #define WLX_SAS_ACTION_SHUTDOWN_REBOOT              (11)
++
++_Win32_Enum_(WLX_SHUTDOWN_TYPE, DWORD, WLX_SAS_ACTION_SHUTDOWN, WLX_SAS_ACTION_SHUTDOWN_REBOOT, WLX_SAS_ACTION_SHUTDOWN_POWER_OFF);
+ #define WLX_SAS_ACTION_SHUTDOWN_SLEEP               (12)
+ #define WLX_SAS_ACTION_SHUTDOWN_SLEEP2              (13)
+ #define WLX_SAS_ACTION_SHUTDOWN_HIBERNATE           (14)
+@@ -594,6 +596,7 @@ typedef struct _WLX_CONSOLESWITCH_CREDENTIALS_INFO {
  //                                                                    //
  ////////////////////////////////////////////////////////////////////////
  
@@ -10,7 +18,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxNegotiate(
-@@ -601,6 +602,7 @@ WlxNegotiate(
+@@ -601,6 +604,7 @@ WlxNegotiate(
      PDWORD                  pdwDllVersion
      );
  
@@ -18,7 +26,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxInitialize(
-@@ -611,6 +613,7 @@ WlxInitialize(
+@@ -611,6 +615,7 @@ WlxInitialize(
      PVOID *                 pWlxContext
      );
  
@@ -26,7 +34,7 @@ index f5be6127..52889fb2 100644
  VOID
  WINAPI
  WlxDisplaySASNotice(
-@@ -618,6 +621,7 @@ WlxDisplaySASNotice(
+@@ -618,6 +623,7 @@ WlxDisplaySASNotice(
      );
  
  
@@ -34,7 +42,7 @@ index f5be6127..52889fb2 100644
  int
  WINAPI
  WlxLoggedOutSAS(
-@@ -631,6 +635,7 @@ WlxLoggedOutSAS(
+@@ -631,6 +637,7 @@ WlxLoggedOutSAS(
      PVOID *                 pProfile
      );
  
@@ -42,7 +50,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxActivateUserShell(
-@@ -640,6 +645,7 @@ WlxActivateUserShell(
+@@ -640,6 +647,7 @@ WlxActivateUserShell(
      PVOID                   pEnvironment
      );
  
@@ -50,7 +58,7 @@ index f5be6127..52889fb2 100644
  int
  WINAPI
  WlxLoggedOnSAS(
-@@ -648,12 +654,14 @@ WlxLoggedOnSAS(
+@@ -648,12 +656,14 @@ WlxLoggedOnSAS(
      PVOID                   pReserved
      );
  
@@ -65,7 +73,7 @@ index f5be6127..52889fb2 100644
  int
  WINAPI
  WlxWkstaLockedSAS(
-@@ -661,18 +669,21 @@ WlxWkstaLockedSAS(
+@@ -661,18 +671,21 @@ WlxWkstaLockedSAS(
      DWORD                   dwSasType
      );
  
@@ -87,7 +95,7 @@ index f5be6127..52889fb2 100644
  VOID
  WINAPI
  WlxLogoff(
-@@ -680,6 +691,7 @@ WlxLogoff(
+@@ -680,23 +693,26 @@ WlxLogoff(
      );
  
  
@@ -95,7 +103,12 @@ index f5be6127..52889fb2 100644
  VOID
  WINAPI
  WlxShutdown(
-@@ -691,12 +703,14 @@ WlxShutdown(
+     PVOID                   pWlxContext,
+-    DWORD                   ShutdownType
++    _Win32_AssociatedEnum_(WLX_SHUTDOWN_TYPE) DWORD                   ShutdownType
+     );
+ 
+ 
  //
  // NEW for version 1.1
  //
@@ -110,7 +123,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxStartApplication(
-@@ -710,6 +724,7 @@ WlxStartApplication(
+@@ -710,6 +726,7 @@ WlxStartApplication(
  // New for 1.3
  //
  
@@ -118,7 +131,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxNetworkProviderLoad(
-@@ -721,6 +736,7 @@ WlxNetworkProviderLoad(
+@@ -721,6 +738,7 @@ WlxNetworkProviderLoad(
  #define STATUSMSG_OPTION_NOANIMATION    0x00000001
  #define STATUSMSG_OPTION_SETFOREGROUND  0x00000002
  
@@ -126,7 +139,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxDisplayStatusMessage(
-@@ -731,6 +747,7 @@ WlxDisplayStatusMessage(
+@@ -731,6 +749,7 @@ WlxDisplayStatusMessage(
      PWSTR                   pMessage
      );
  
@@ -134,7 +147,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxGetStatusMessage(
-@@ -740,6 +757,7 @@ WlxGetStatusMessage(
+@@ -740,6 +759,7 @@ WlxGetStatusMessage(
      DWORD                   dwBufferSize
      );
  
@@ -142,7 +155,7 @@ index f5be6127..52889fb2 100644
  BOOL
  WINAPI
  WlxRemoveStatusMessage(
-@@ -750,6 +768,7 @@ WlxRemoveStatusMessage(
+@@ -750,6 +770,7 @@ WlxRemoveStatusMessage(
  //
  // New for 1.4
  //

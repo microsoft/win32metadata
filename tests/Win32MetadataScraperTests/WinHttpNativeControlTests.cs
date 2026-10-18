@@ -1558,6 +1558,172 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                         yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled };
         }
 
+        [Fact]
+        public void NetworkCategorySourcePatchesRetainCrossingGroupsAndHandleContracts()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            string[] originals =
+            {
+                @"shared\rpcdce", @"shared\rpcdcep", @"um\wininet", @"um\gpedit", @"um\winsafer",
+                @"um\winwlx", @"um\iphlpapi", @"um\winldap", @"um\ws2spi", @"um\clfsmgmtw32",
+            };
+            string additions = string.Join("\n", originals.SelectMany(original =>
+                File.ReadLines(Path.Combine(root, "patches", original.Replace('\\', Path.DirectorySeparatorChar) + ".h.patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1).TrimEnd('\r'))));
+            var groups = Regex.Matches(additions,
+                @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
+            string[] expectedGroups =
+            {
+                "FTP_FLAGS", "GOPHER_TYPE", "GPO_OPEN_FLAGS", "GPO_OPTIONS", "GPO_SECTION", "HTTP_ADDREQ_FLAG",
+                "INTERNET_ACCESS_TYPE", "INTERNET_PER_CONN", "RPC_BINDING_HANDLE_OPTIONS_FLAGS", "RPC_C_HTTP_AUTHN_TARGET",
+                "RPC_C_HTTP_FLAGS", "RPC_C_QOS_CAPABILITIES", "RPC_C_QOS_IDENTITY",
+                "SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS", "WLX_SHUTDOWN_TYPE",
+            };
+            Assert.Equal(expectedGroups, groups.Select(group => group.Groups["name"].Value)
+                .OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(78, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
+            Assert.Equal(new[]
+            {
+                "GPO_OPTIONS", "HTTP_ADDREQ_FLAG", "RPC_BINDING_HANDLE_OPTIONS_FLAGS", "RPC_C_HTTP_AUTHN_TARGET",
+                "RPC_C_HTTP_FLAGS", "RPC_C_QOS_CAPABILITIES", "SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS",
+            }, groups.Where(group => group.Groups["kind"].Value == "FlagsEnum")
+                .Select(group => group.Groups["name"].Value).OrderBy(value => value, StringComparer.Ordinal));
+            foreach (Match group in groups)
+            {
+                Assert.Equal("DWORD", group.Groups["storage"].Value);
+                foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
+                    Assert.Matches(@"^[A-Za-z_]\w*$", member);
+            }
+            Assert.Equal(55, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            Assert.Equal(27, Regex.Matches(additions, @"_Win32_ContainsInteriorPointers_").Count);
+            Assert.Equal(4, Regex.Matches(additions, @"(?m)^typedef DWORD (?:INTERNET_ACCESS_TYPE|INTERNET_PER_CONN|GOPHER_TYPE|HTTP_ADDREQ_FLAG);$").Count);
+            Assert.Contains("_In_ unsigned short *EntryName", additions);
+            Assert.Contains("_In_ RPC_SERVER_INTERFACE * RpcInterfaceInformation", additions);
+            Assert.Contains("_In_  PULONGLONG pDesiredSize", additions);
+            Assert.Contains("_Out_ PULONGLONG pResultingSize", additions);
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
+            var retained = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            foreach (string name in expectedGroups)
+                Assert.DoesNotContain(retained, item =>
+                    item.TryGetProperty("name", out var value) && value.GetString() == name ||
+                    item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == name);
+            foreach (string name in new[]
+            {
+                "RPC_C_AUTHN_LEVEL", "RPC_C_IMP_LEVEL", "RPC_C_AUTHN_INFO_TYPE", "INTERNET_COOKIE_FLAGS",
+                "INTERNET_STATE", "PROXY_AUTO_DETECT_TYPE", "GET_ADAPTERS_ADDRESSES_FLAGS",
+            })
+                Assert.Contains(retained, item => item.TryGetProperty("name", out var value) && value.GetString() == name);
+            string[] overrides = File.ReadAllLines(Path.Combine(root, "emitter.settings.rsp"));
+            foreach (string row in new[]
+            {
+                "GetNetworkParams::return=WIN32_ERROR", "LdapMapErrorToWin32::return=WIN32_ERROR",
+                "LdapMapErrorToWin32::LdapError=[AssociatedEnum(\"LDAP_RETCODE\")]",
+                "I_RpcNsInterfaceExported::EntryName=[In]", "I_RpcNsInterfaceExported::RpcInterfaceInformation=[In]",
+                "SetLogFileSizeWithPolicy::pDesiredSize=[In]", "SetLogFileSizeWithPolicy::pResultingSize=[Out]",
+            })
+                Assert.DoesNotContain(row, overrides);
+            var heldUrlUses = Assert.Single(retained.Where(item =>
+                item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == "WIN_HTTP_CREATE_URL_FLAGS"));
+            Assert.Equal(new[] { "InternetCrackUrlA::dwFlags", "InternetCrackUrlW::dwFlags" },
+                heldUrlUses.GetProperty("uses").EnumerateArray().Select(use =>
+                    use.GetProperty("method").GetString() + "::" + use.GetProperty("parameter").GetString()));
+            Assert.DoesNotContain("_Win32_RAIIFree_", additions);
+        }
+
+        [NativeMigrationTheory]
+        [MemberData(nameof(NetworkCategoryOwnerControls))]
+        public void OriginalNetworkCategoryOwnersPreserveNativeSurfaceAndExactSalEnrichments(
+            string partition, string architecture, string target, bool enabled, bool cInterface)
+        {
+            var (headers, groups, forwards) = partition switch
+            {
+                "Rpc" => (new[] { "rpcdce.h", "rpcdcep.h" },
+                    new[] { "RPC_C_QOS_CAPABILITIES", "RPC_C_QOS_IDENTITY", "RPC_C_HTTP_FLAGS",
+                        "RPC_C_HTTP_AUTHN_TARGET", "RPC_BINDING_HANDLE_OPTIONS_FLAGS" }, Array.Empty<string>()),
+                "WinInet" => (new[] { "wininet.h" },
+                    new[] { "FTP_FLAGS", "HTTP_ADDREQ_FLAG", "GOPHER_TYPE", "INTERNET_PER_CONN", "INTERNET_ACCESS_TYPE" },
+                    new[] { "INTERNET_ACCESS_TYPE", "INTERNET_PER_CONN", "GOPHER_TYPE", "HTTP_ADDREQ_FLAG" }),
+                "Policy" => (new[] { "gpedit.h" }, new[] { "GPO_OPEN_FLAGS", "GPO_OPTIONS", "GPO_SECTION" }, Array.Empty<string>()),
+                "Security.AppLocker" => (new[] { "winsafer.h" }, new[] { "SAFER_COMPUTE_TOKEN_FROM_LEVEL_FLAGS" }, Array.Empty<string>()),
+                "Security.WinWlx" => (new[] { "winwlx.h" }, new[] { "WLX_SHUTDOWN_TYPE" }, Array.Empty<string>()),
+                "IpHlp" => (new[] { "iphlpapi.h" }, Array.Empty<string>(), Array.Empty<string>()),
+                "Ldap" => (new[] { "winldap.h" }, Array.Empty<string>(), Array.Empty<string>()),
+                "WinSock" => (new[] { "ws2spi.h" }, Array.Empty<string>(), Array.Empty<string>()),
+                "Fs" => (new[] { "clfsmgmtw32.h" }, Array.Empty<string>(), Array.Empty<string>()),
+                _ => throw new ArgumentException("Unknown network category owner.", nameof(partition)),
+            };
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeRawSal = new List<string>();
+            var afterRawSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            string checks = enabled ? "" : string.Join("\n", groups.Select(name => "using " + name + " = void;"));
+            var before = Surface(root, original, partition, architecture, target, headers, checks,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, cInterface: cInterface, rawSalAnnotations: beforeRawSal);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks,
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, cInterface: cInterface, rawSalAnnotations: afterRawSal);
+            string[] carriers = enabled ? groups.Concat(forwards).Select(name => "typedef " + name + " unsigned long").ToArray() : Array.Empty<string>();
+            Assert.NotEmpty(before);
+            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            var addedSal = new List<string>();
+            string directionProbe = partition switch
+            {
+                "Rpc" => "\nvoid NativeDirectionProbe(_In_ unsigned short *EntryName, _In_ RPC_SERVER_INTERFACE *RpcInterfaceInformation);",
+                "Fs" => "\nvoid NativeDirectionProbe(_In_ PULONGLONG pDesiredSize, _Out_ PULONGLONG pResultingSize);",
+                _ => "",
+            };
+            if (directionProbe.Length != 0)
+            {
+                Surface(root, original, partition, architecture, target, new[] { "main.cpp" }, directionProbe,
+                    salAnnotations: addedSal, cInterface: cInterface);
+                Assert.NotEmpty(addedSal);
+            }
+            Assert.Equal(beforeSal.Concat(addedSal).OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeRawSal.Count, beforeSal.Count);
+            Assert.Equal(afterRawSal.Count, afterSal.Count);
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            var actualGroups = annotations.Select(value => Regex.Match(value, @"^(?<name>[^|]+)\|(?:Flags)?Enum\("))
+                .Where(match => match.Success).Select(match => match.Groups["name"].Value)
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(enabled ? groups.OrderBy(value => value, StringComparer.Ordinal) : Array.Empty<string>(), actualGroups);
+            int buffers = partition switch
+            {
+                "WinInet" => 18,
+                "IpHlp" => 7,
+                "WinSock" => architecture == "x86" ? 0 : 2,
+                _ => 0,
+            };
+            Assert.Equal(enabled ? buffers : 0, annotations.Count(value => value.EndsWith("|ContainsInteriorPointers", StringComparison.Ordinal)));
+            if (!enabled)
+                Assert.Empty(annotations);
+            this.output.WriteLine($"{partition}/{architecture}/metadata={enabled}/CINTERFACE={cInterface}: " +
+                $"{before.Length} unchanged native signature/type/layout/value/typedef facts; " +
+                $"{beforeSal.Count} unchanged SAL attributes plus {addedSal.Count} exact native direction attributes; " +
+                $"matched diagnostics, {carriers.Length} exact metadata-only typedef occurrences, {actualGroups.Length} logical groups.");
+        }
+
+        public static IEnumerable<object[]> NetworkCategoryOwnerControls()
+        {
+            foreach (string partition in new[] { "Rpc", "WinInet", "Policy", "Security.AppLocker", "Security.WinWlx", "IpHlp", "Ldap", "WinSock", "Fs" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        foreach (bool cInterface in partition == "Policy" ? new[] { false, true } : new[] { false })
+                            yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled, cInterface };
+        }
+
         [NativeMigrationTheory]
         [MemberData(nameof(OriginalErrorOwnerControls))]
         public void OriginalErrorOwnersPreserveNativeAbiAndSalWithCompleteGroupContributions(

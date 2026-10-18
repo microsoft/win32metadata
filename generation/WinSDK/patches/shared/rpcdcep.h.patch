@@ -1,7 +1,17 @@
 diff --git a/shared/rpcdcep.h b/shared/rpcdcep.h
-index 8b038177..439282f8 100644
 --- a/shared/rpcdcep.h
 +++ b/shared/rpcdcep.h
+@@ -481,8 +481,8 @@ RPC_STATUS
+ RPC_ENTRY
+ I_RpcNsInterfaceExported (
+     IN unsigned long EntryNameSyntax,
+-    IN unsigned short *EntryName,
+-    IN RPC_SERVER_INTERFACE * RpcInterfaceInformation
++    _In_ unsigned short *EntryName,
++    _In_ RPC_SERVER_INTERFACE * RpcInterfaceInformation
+     );
+ 
+ RPCRTAPI
 @@ -549,6 +549,7 @@ I_RpcBindingInqMarshalledTargetInfo (
  #endif // (NTDDI_VERSION >= NTDDI_WS03)
  

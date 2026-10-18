@@ -1,5 +1,4 @@
 diff --git a/um/winldap.h b/um/winldap.h
-index 6db741e1..66086338 100644
 --- a/um/winldap.h
 +++ b/um/winldap.h
 @@ -596,13 +596,19 @@ typedef struct ldapmodA {
@@ -1476,7 +1475,7 @@ index 6db741e1..66086338 100644
  WINLDAPAPI ULONG LDAPAPI ldap_close_extended_op(
          LDAP    *ld,
          ULONG   MessageNumber
-@@ -3225,12 +3458,14 @@ typedef struct LdapReferralCallback {
+@@ -3225,13 +3458,16 @@ typedef struct LdapReferralCallback {
  //  LdapGetLastError();
  //
  
@@ -1487,11 +1486,14 @@ index 6db741e1..66086338 100644
  //  Translate from LdapError to closest Win32 error code.
  //
  
+-WINLDAPAPI ULONG LDAPAPI LdapMapErrorToWin32( ULONG LdapError );
 +_Win32_SupportedOS_WindowsVista_
- WINLDAPAPI ULONG LDAPAPI LdapMapErrorToWin32( ULONG LdapError );
++_Win32_AssociatedEnum_(WIN32_ERROR)
++WINLDAPAPI ULONG LDAPAPI LdapMapErrorToWin32( _Win32_AssociatedEnum_(LDAP_RETCODE) ULONG LdapError );
  
  //
-@@ -3289,6 +3524,7 @@ typedef BOOLEAN (_cdecl VERIFYSERVERCERT) (
+ // This is an arrangement for specifying client certificates while establishing
+@@ -3289,6 +3525,7 @@ typedef BOOLEAN (_cdecl VERIFYSERVERCERT) (
  //  came from.  It can return NULL if the connection has already been freed.
  //
  
