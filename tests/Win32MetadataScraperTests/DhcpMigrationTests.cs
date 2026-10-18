@@ -132,8 +132,13 @@ DhcpV4GetClientInfo DhcpV6CreateClientInfo DhcpV4GetFreeIPAddress DhcpV6GetFreeI
                     var parent = constructor.Kind == HandleKind.MethodDefinition
                         ? after.GetMethodDefinition((MethodDefinitionHandle)constructor).GetDeclaringType()
                         : after.GetMemberReference((MemberReferenceHandle)constructor).Parent;
-                    return parent.Kind == HandleKind.TypeDefinition &&
-                        after.GetString(after.GetTypeDefinition((TypeDefinitionHandle)parent).Name) == "SupportedOSPlatformAttribute";
+                    string attributeName = parent.Kind switch
+                    {
+                        HandleKind.TypeDefinition => after.GetString(after.GetTypeDefinition((TypeDefinitionHandle)parent).Name),
+                        HandleKind.TypeReference => after.GetString(after.GetTypeReference((TypeReferenceHandle)parent).Name),
+                        _ => throw new InvalidOperationException("Unsupported custom attribute owner."),
+                    };
+                    return attributeName == "SupportedOSPlatformAttribute";
                 }).ToArray();
                 if (!expected.TryGetValue(name, out string os))
                 {
