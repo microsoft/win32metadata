@@ -1,0 +1,52 @@
+diff --git a/um/shappmgr.idl b/um/shappmgr.idl
+index d9f040ea..0ece3efe 100644
+--- a/um/shappmgr.idl
++++ b/um/shappmgr.idl
+@@ -5,6 +5,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#ifndef _SHAPPMGR_H_")
+ cpp_quote("#define _SHAPPMGR_H_")
+ cpp_quote("#include <winapifamily.h>")
+@@ -24,6 +25,7 @@ import "appmgmt.h";
+ //
+ // IShellApp interface
+ //
++_Win32_AnnotateInterface_(IShellApp, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(A3E14960-935F-11D1-B8B8-006008059382),     // IID_IShellApp
+     object
+@@ -116,6 +118,7 @@ interface IShellApp : IUnknown
+ //
+ // IPublishedApp interface
+ //
++_Win32_AnnotateInterface_(IPublishedApp, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(1BC752E0-9046-11D1-B8B3-006008059382),     // IID_IPublishedApp
+     object
+@@ -145,6 +148,7 @@ interface IPublishedApp : IShellApp
+     HRESULT Unschedule(void);
+ };
+ 
++_Win32_AnnotateInterface_(IPublishedApp2, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(12B81347-1B3A-4A04-AA61-3F768B67FD7E),     // IID_IPublishedApp2
+     object
+@@ -157,6 +161,7 @@ interface IPublishedApp2 : IPublishedApp
+ //
+ // IEnumPublishedApps interface
+ //
++_Win32_AnnotateInterface_(IEnumPublishedApps, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(0B124F8C-91F0-11D1-B8B5-006008059382),     // IID_IEnumPublishedApps
+     object
+@@ -172,6 +177,7 @@ interface IEnumPublishedApps : IUnknown
+ //
+ // IAppPublisher interface
+ //
++_Win32_AnnotateInterface_(IAppPublisher, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(07250A10-9CF9-11D1-9076-006008059382),     // IID_IAppPublisher
+     object

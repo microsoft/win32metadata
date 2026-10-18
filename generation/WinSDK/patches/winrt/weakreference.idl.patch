@@ -1,0 +1,28 @@
+diff --git a/winrt/weakreference.idl b/winrt/weakreference.idl
+index e2a3c552..ebe51408 100644
+--- a/winrt/weakreference.idl
++++ b/winrt/weakreference.idl
+@@ -1,6 +1,7 @@
+ //  Microsoft Windows
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ 
++#include <sal.h>
+ cpp_quote("//  Microsoft Windows")
+ cpp_quote("//  Copyright (c) Microsoft Corporation. All rights reserved.")
+ cpp_quote("#pragma once")
+@@ -9,6 +10,7 @@ cpp_quote("#pragma once")
+ import "inspectable.idl";
+ #endif
+ 
++_Win32_AnnotateInterface_(IWeakReference, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(00000037-0000-0000-C000-000000000046),
+@@ -45,6 +47,7 @@ cpp_quote("#else")
+ }
+ cpp_quote("#endif")
+ 
++_Win32_AnnotateInterface_(IWeakReferenceSource, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(00000038-0000-0000-C000-000000000046),

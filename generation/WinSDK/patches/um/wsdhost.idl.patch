@@ -1,0 +1,36 @@
+diff --git a/um/wsdhost.idl b/um/wsdhost.idl
+index 95ea72e0..f0da4e4b 100644
+--- a/um/wsdhost.idl
++++ b/um/wsdhost.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -62,6 +63,7 @@ cpp_quote("#endif")
+ //  IWSDDeviceHost Interface
+ //  Description: Host-side representation of devices
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDDeviceHost, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(917fe891-3d13-4138-9809-934c8abeb12c),
+@@ -128,6 +130,7 @@ interface IWSDDeviceHost : IUnknown
+ //  IWSDDeviceHostNotify Interface
+ //  Description: Provides device-related notifications for devices
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDDeviceHostNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(b5bee9f9-eeda-41fe-96f7-f45e14990fb0),
+@@ -149,6 +152,7 @@ midl_pragma warning(disable:2495)
+ //  Description: Provides response channels for dispatched service messages.
+ //               This interface is used only by generated stubs.
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDServiceMessaging, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(94974cf4-0cab-460d-a3f6-7a0ad623c0e6),

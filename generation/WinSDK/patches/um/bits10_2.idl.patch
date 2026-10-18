@@ -1,0 +1,20 @@
+diff --git a/um/bits10_2.idl b/um/bits10_2.idl
+index 702530ac..cdf330a6 100644
+--- a/um/bits10_2.idl
++++ b/um/bits10_2.idl
+@@ -4,6 +4,7 @@
+ *                                                        *
+ *********************************************************/
+ 
++#include <sal.h>
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)")
+ cpp_quote("#include <winapifamily.h>")
+ 
+@@ -19,6 +20,7 @@ import "bits4_0.idl";
+ import "bits5_0.idl";
+ import "bits10_1.idl";
+ 
++_Win32_AnnotateInterface_(IBackgroundCopyJobHttpOptions2, _Win32_SupportedOS_17763_)
+ [
+     uuid(B591A192-A405-4FC3-8323-4C5C542578FC)
+ ]

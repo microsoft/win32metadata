@@ -1,0 +1,41 @@
+diff --git a/um/endpointvolume.idl b/um/endpointvolume.idl
+index 3f5b3627..1daf6e24 100644
+--- a/um/endpointvolume.idl
++++ b/um/endpointvolume.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //**@@@*@@@****************************************************
+@@ -56,6 +57,7 @@ cpp_quote("#define   ENDPOINT_HARDWARE_SUPPORT_METER     0x00000004")
+ //  Callback interface to be implemented by clients to respond to changes in the volume/mute
+ // state of an endpoint.
+ //
++_Win32_AnnotateInterface_(IAudioEndpointVolumeCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -94,6 +96,7 @@ interface IAudioEndpointVolumeCallback : IUnknown
+ //
+ //  Volume control interface for a device endpoint.
+ //
++_Win32_AnnotateInterface_(IAudioEndpointVolume, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -470,6 +473,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ //  Volume control interface for a device endpoint.
+ //
++_Win32_AnnotateInterface_(IAudioEndpointVolumeEx, _Win32_SupportedOS_Windows7_)
+ [
+ object,
+ local,
+@@ -514,6 +518,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ //  Volume control interface for a device endpoint.
+ //
++_Win32_AnnotateInterface_(IAudioMeterInformation, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,

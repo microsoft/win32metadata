@@ -1,0 +1,19 @@
+diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
+index d08fe528..9e2f23e3 100644
+--- a/shared/dxgi1_5.idl
++++ b/shared/dxgi1_5.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++#include <sal.h>
+ import "dxgi1_4.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -15,6 +16,7 @@ typedef enum DXGI_OUTDUPL_FLAG {
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput5 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput5, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(80A07424-AB52-42EB-833C-0C42FD282D98),

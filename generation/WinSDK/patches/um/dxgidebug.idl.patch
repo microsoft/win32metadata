@@ -1,0 +1,36 @@
+diff --git a/um/dxgidebug.idl b/um/dxgidebug.idl
+index ad3184d3..a695ac56 100644
+--- a/um/dxgidebug.idl
++++ b/um/dxgidebug.idl
+@@ -8,6 +8,7 @@
+ //                                                                                          //
+ //////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
+@@ -113,6 +114,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);"
+ // to this object which can be retrieved through its APIs.
+ //
+ //
++_Win32_AnnotateInterface_(IDXGIInfoQueue, _Win32_SupportedOS_Windows8_)
+ [ uuid( D67441C7-672A-476f-9E82-CD55B44949CE ), object, local, pointer_default( unique ) ]
+ 
+ interface IDXGIInfoQueue
+@@ -424,6 +426,7 @@ interface IDXGIInfoQueue
+         [annotation("_In_")]    DXGI_DEBUG_ID                           Producer);
+ };
+ 
++_Win32_AnnotateInterface_(IDXGIDebug, _Win32_SupportedOS_Windows8_)
+ [ uuid(119E7452-DE9E-40fe-8806-88F90C12B441), object, local, pointer_default( unique ) ]
+ interface IDXGIDebug
+     : IUnknown
+@@ -431,6 +434,7 @@ interface IDXGIDebug
+     HRESULT ReportLiveObjects(GUID apiid, DXGI_DEBUG_RLO_FLAGS flags);
+ };
+ 
++_Win32_AnnotateInterface_(IDXGIDebug1, _Win32_SupportedOS_Windows81_)
+ [ uuid(c5a05f0c-16f2-4adf-9f4d-a8c4d58ac550), object, local, pointer_default( unique ) ]
+ interface IDXGIDebug1
+     : IDXGIDebug

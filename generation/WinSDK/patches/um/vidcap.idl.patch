@@ -1,0 +1,52 @@
+diff --git a/um/vidcap.idl b/um/vidcap.idl
+index dad39d21..3ea7c8ff 100644
+--- a/um/vidcap.idl
++++ b/um/vidcap.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -37,6 +38,7 @@ cpp_quote("#endif")
+ 
+ 
+ // IKsTopologyInfo interface
++_Win32_AnnotateInterface_(IKsTopologyInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -57,6 +59,7 @@ interface IKsTopologyInfo : IUnknown
+ 
+ 
+ // ISelector interface
++_Win32_AnnotateInterface_(ISelector, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -71,6 +74,7 @@ interface ISelector : IUnknown
+ }
+ 
+ // ICameraControl interface
++_Win32_AnnotateInterface_(ICameraControl, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -283,6 +287,7 @@ interface ICameraControl : IUnknown
+ 
+ 
+ // IVideoProcAmp interface
++_Win32_AnnotateInterface_(IVideoProcAmp, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -464,6 +469,7 @@ interface IVideoProcAmp : IUnknown
+ }
+ 
+ // IKsNodeControl interface
++_Win32_AnnotateInterface_(IKsNodeControl, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,

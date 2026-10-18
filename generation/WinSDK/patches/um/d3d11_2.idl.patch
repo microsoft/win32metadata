@@ -1,0 +1,31 @@
+diff --git a/um/d3d11_2.idl b/um/d3d11_2.idl
+index 2161bcdc..3114320b 100644
+--- a/um/d3d11_2.idl
++++ b/um/d3d11_2.idl
+@@ -8,6 +8,7 @@
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "dxgi1_3.idl";
+@@ -95,6 +96,7 @@ typedef enum D3D11_TILE_COPY_FLAG
+ //
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(ID3D11DeviceContext2, _Win32_SupportedOS_Windows81_)
+ [ uuid( 420d5b32-b90c-4da4-bef0-359f6a24a83a ), object, local, pointer_default( unique ) ]
+ interface ID3D11DeviceContext2
+     : ID3D11DeviceContext1
+@@ -145,7 +147,9 @@ interface ID3D11DeviceContext2
+     void SetMarkerInt( [annotation("_In_")] LPCWSTR pLabel, INT Data );
+     void BeginEventInt( [annotation("_In_")] LPCWSTR pLabel, INT Data );
+     void EndEvent();
+-};[ uuid( 9d06dffa-d1e5-4d07-83a8-1bb123f2f841 ), object, local, pointer_default( unique ) ]
++};
++_Win32_AnnotateInterface_(ID3D11Device2, _Win32_SupportedOS_Windows81_)
++[ uuid( 9d06dffa-d1e5-4d07-83a8-1bb123f2f841 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Device2
+     : ID3D11Device1
+ {

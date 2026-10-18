@@ -1,0 +1,28 @@
+diff --git a/um/bitscfg.idl b/um/bitscfg.idl
+index 93c84264..7f0d8189 100644
+--- a/um/bitscfg.idl
++++ b/um/bitscfg.idl
+@@ -10,6 +10,7 @@
+ //
+ //=======================================================================
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -25,6 +26,7 @@ import "mstask.idl";
+ // =============================
+ //
+ 
++_Win32_AnnotateInterface_(IBITSExtensionSetup, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(29cfbbf7-09e4-4b97-b0bc-f2287e3d8eb3),
+     odl,
+@@ -50,6 +52,7 @@ interface IBITSExtensionSetup : IDispatch
+     [id(4)] HRESULT GetCleanupTask( [in] REFIID riid, [out,retval] IUnknown **ppUnk );
+ }
+ 
++_Win32_AnnotateInterface_(IBITSExtensionSetupFactory, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(d5d2d542-5503-4e64-8b48-72ef91a32ee1),
+     odl,

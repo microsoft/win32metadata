@@ -1,0 +1,28 @@
+diff --git a/um/amstream.idl b/um/amstream.idl
+index ab95439b..4d13d611 100644
+--- a/um/amstream.idl
++++ b/um/amstream.idl
+@@ -7,6 +7,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -181,6 +182,7 @@ interface IMediaStreamFilter : IBaseFilter
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IDirectDrawMediaSampleAllocator, _Win32_SupportedOS_Windows2000_)
+ [
+ object,
+ local,
+@@ -193,6 +195,7 @@ interface IDirectDrawMediaSampleAllocator : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IDirectDrawMediaSample, _Win32_SupportedOS_Windows2000_)
+ [
+ object,
+ local,

@@ -1,0 +1,36 @@
+diff --git a/um/documenttarget.idl b/um/documenttarget.idl
+index 48f29700..6a2bd384 100644
+--- a/um/documenttarget.idl
++++ b/um/documenttarget.idl
+@@ -13,6 +13,7 @@
+ //
+ //
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -28,6 +29,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IPrintDocumentPackageTarget, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(1b8efec4-3019-4c27-964e-367202156906),
+@@ -96,6 +98,7 @@ typedef struct
+     HRESULT                         PackageStatus;
+ } PrintDocumentPackageStatus;
+ 
++_Win32_AnnotateInterface_(IPrintDocumentPackageStatusEvent, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(ed90c8ad-5c34-4d05-a1ec-0e8a9b3ad7af),
+@@ -111,6 +114,7 @@ interface IPrintDocumentPackageStatusEvent : IDispatch
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IPrintDocumentPackageTargetFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(d2959bf7-b31b-4a3d-9600-712eb1335ba4),

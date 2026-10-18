@@ -1,0 +1,17 @@
+diff --git a/um/opmapi.idl b/um/opmapi.idl
+index a7049f1e..adcf8222 100644
+--- a/um/opmapi.idl
++++ b/um/opmapi.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+@@ -509,6 +510,7 @@ cpp_quote( "DEFINE_GUID( IID_IOPMVideoOutput, 0x0A15159D, 0x41C7, 0x4456, 0x93,
+ cpp_quote( "#endif // defined( _WIN32 ) && !defined( _NO_COM )" )
+ 
+ 
++_Win32_AnnotateInterface_(IOPMVideoOutput, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0A15159D-41C7-4456-93E1-284CD61D4E8D),

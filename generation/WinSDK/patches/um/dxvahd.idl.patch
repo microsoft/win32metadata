@@ -1,0 +1,28 @@
+diff --git a/um/dxvahd.idl b/um/dxvahd.idl
+index 94a93241..5b33fa38 100644
+--- a/um/dxvahd.idl
++++ b/um/dxvahd.idl
+@@ -8,6 +8,7 @@
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -459,6 +460,7 @@ typedef struct _DXVAHD_STREAM_STATE_PRIVATE_IVTC_DATA
+ // IDXVAHD_Device INTERFACE
+ //
+ 
++_Win32_AnnotateInterface_(IDXVAHD_Device, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(95f12dfd-d77e-49be-815f-57d579634d6d),
+@@ -528,6 +530,7 @@ interface IDXVAHD_Device : IUnknown
+ // IDXVAHD_VideoProcessor INTERFACE
+ //
+ 
++_Win32_AnnotateInterface_(IDXVAHD_VideoProcessor, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(95f4edf4-6e03-4cd7-be1b-3075d665aa52),

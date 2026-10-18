@@ -1,0 +1,44 @@
+diff --git a/winrt/rdpappcontainerclient.idl b/winrt/rdpappcontainerclient.idl
+index 286a7bdf..e113e7a1 100644
+--- a/winrt/rdpappcontainerclient.idl
++++ b/winrt/rdpappcontainerclient.idl
+@@ -9,6 +9,7 @@
+ //  File: rdpappcontainerclient.idl
+ //
+ // ----------------------------------------------------------------------------
++#include <sal.h>
+ #include <olectl.h>
+ 
+ //
+@@ -82,6 +83,7 @@ const int DISPID_AX_TOUCHPOINTERCURSORMOVED      = 800;
+ // IRemoteDesktopClientSettings
+ // (Windows8.0)
+ //
++_Win32_AnnotateInterface_(IRemoteDesktopClientSettings, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(48A0F2A7-2713-431f-BBAC-6F4558E7D64D),
+@@ -136,6 +138,7 @@ interface IRemoteDesktopClientSettings: IDispatch
+ // IRemoteDesktopClientActions
+ // (Windows8.0)
+ //
++_Win32_AnnotateInterface_(IRemoteDesktopClientActions, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(7D54BC4E-1028-45d4-8B0A-B9B6BFFBA176),
+@@ -199,6 +202,7 @@ interface IRemoteDesktopClientActions: IDispatch
+ // IRemoteDesktopClientTouchPointer
+ // (Windows8.0)
+ //
++_Win32_AnnotateInterface_(IRemoteDesktopClientTouchPointer, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(260ec22d-8cbc-44b5-9e88-2a37f6c93ae9),
+@@ -267,6 +271,7 @@ interface IRemoteDesktopClientTouchPointer: IDispatch
+ // (Windows8.0)
+ //
+ 
++_Win32_AnnotateInterface_(IRemoteDesktopClient, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(57D25668-625A-4905-BE4E-304CAA13F89C),

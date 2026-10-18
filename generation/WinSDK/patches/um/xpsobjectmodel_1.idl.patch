@@ -1,0 +1,49 @@
+diff --git a/um/xpsobjectmodel_1.idl b/um/xpsobjectmodel_1.idl
+index 7117a467..f2e7313e 100644
+--- a/um/xpsobjectmodel_1.idl
++++ b/um/xpsobjectmodel_1.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+----------------------------------------------------------------------------
+@@ -38,6 +39,7 @@ typedef [v1_enum] enum
+     XPS_DOCUMENT_TYPE_OPENXPS
+ } XPS_DOCUMENT_TYPE;
+ 
++_Win32_AnnotateInterface_(IXpsOMObjectFactory1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(0a91b617-d612-4181-bf7c-be5824e9cc8f),
+@@ -140,6 +142,7 @@ interface IXpsOMObjectFactory1 : IXpsOMObjectFactory
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IXpsOMPackage1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(95a9435e-12bb-461b-8e7f-c6adb04cd96a),
+@@ -171,6 +174,7 @@ interface IXpsOMPackage1 : IXpsOMPackage
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IXpsOMPage1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(305b60ef-6892-4dda-9cbb-3aa65974508a),
+@@ -193,6 +197,7 @@ interface IXpsOMPage1 : IXpsOMPage
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IXpsDocumentPackageTarget, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(3b0b6d38-53ad-41da-b212-d37637a6714e),
+@@ -218,6 +223,7 @@ interface IXpsDocumentPackageTarget : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IXpsOMRemoteDictionaryResource1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(BF8FC1D4-9D46-4141-BA5F-94BB9250D041),

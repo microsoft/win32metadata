@@ -1,0 +1,36 @@
+diff --git a/um/wsdattachment.idl b/um/wsdattachment.idl
+index 20635cd7..8972ed09 100644
+--- a/um/wsdattachment.idl
++++ b/um/wsdattachment.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -33,6 +34,7 @@ cpp_quote("    _Outptr_ IWSDOutboundAttachment** ppAttachment);")
+ //  IWSDAttachment Interface
+ //  Description: Base interface for inbound and outbound attachments
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDAttachment, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5d55a616-9df8-4b09-b156-9ba351a48b76)
+@@ -45,6 +47,7 @@ interface IWSDAttachment : IUnknown
+ //  IWSDOutboundAttachment Interface
+ //  Description: Provides a way for applications to send attachment data
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDOutboundAttachment, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(aa302f8d-5a22-4ba5-b392-aa8486f4c15d),
+@@ -66,6 +69,7 @@ interface IWSDOutboundAttachment : IWSDAttachment
+ //  IWSDInboundAttachment Interface
+ //  Description: Provides a way for applications to receive attachment data
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDInboundAttachment, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5bd6ca65-233c-4fb8-9f7a-2641619655c9),

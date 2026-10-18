@@ -1,0 +1,33 @@
+diff --git a/um/mftransform.idl b/um/mftransform.idl
+index a370cb39..eb72e2a3 100644
+--- a/um/mftransform.idl
++++ b/um/mftransform.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop or Games Family
+@@ -276,6 +277,7 @@ cpp_quote( "#define ProcessOutput           MFTProcessOutput" )
+ cpp_quote( "#endif" )
+ 
+ //  Interface supported by media objects
++_Win32_AnnotateInterface_(IMFTransform, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(bf94c121-5b05-4e6f-8000-ba598961414d)
+@@ -631,6 +633,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ 
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+ 
++_Win32_AnnotateInterface_(IMFDeviceTransform, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(D818FBD8-FC46-42F2-87AC-1EA2D1F9BF32),
+@@ -778,6 +781,7 @@ cpp_quote("#if (NTDDI_VERSION >= _WIN32_WINNT_WIN10) ")
+ // 396CE1C9-67A9-454C-8797-95A45799D804
+ cpp_quote( "EXTERN_GUID( MF_DMFT_FRAME_BUFFER_INFO,  0x396CE1C9, 0x67A9, 0x454C, 0x87, 0x97, 0x95, 0xA4, 0x57, 0x99, 0xD8, 0x04);" )
+ 
++_Win32_AnnotateInterface_(IMFDeviceTransformCallback, _Win32_SupportedOS_17134_)
+ [
+     object,
+     uuid(6D5CB646-29EC-41FB-8179-8C4C6D750811),

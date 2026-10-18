@@ -1,0 +1,26 @@
+diff --git a/um/bits2_0.idl b/um/bits2_0.idl
+index e83fc621..228615a2 100644
+--- a/um/bits2_0.idl
++++ b/um/bits2_0.idl
+@@ -1,4 +1,5 @@
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -25,6 +26,7 @@ cpp_quote("#define BG_COPY_FILE_DACL    4")
+ cpp_quote("#define BG_COPY_FILE_SACL    8")
+ cpp_quote("#define BG_COPY_FILE_ALL    15")
+ 
++_Win32_AnnotateInterface_(IBackgroundCopyJob3, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(443c8934-90ff-48ed-bcde-26f5c7450042),
+     helpstring("IBackgroundCopyJob3 Interface"),
+@@ -60,6 +62,7 @@ interface IBackgroundCopyJob3 : IBackgroundCopyJob2
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IBackgroundCopyFile2, _Win32_SupportedOS_WindowsVista_)
+ [
+ 	uuid(83e81b93-0873-474d-8a8c-f2018b1a939c),
+ 	helpstring("IBackgroundCopyFile2"),
