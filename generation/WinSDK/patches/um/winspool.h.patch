@@ -1,8 +1,17 @@
 diff --git a/um/winspool.h b/um/winspool.h
-index a2a8b352..af49a780 100644
+index a2a8b352..ebcb2a3e 100644
 --- a/um/winspool.h
 +++ b/um/winspool.h
-@@ -1249,6 +1249,7 @@ typedef PPRINTER_ENUM_VALUESA PPRINTER_ENUM_VALUES;
+@@ -18,6 +18,8 @@ Revision History:
+ #ifndef _WINSPOOL_
+ #define _WINSPOOL_
+ 
++#include <sal.h>
++
+ #include <winapifamily.h>
+ 
+ #ifdef _WINUSER_
+@@ -1249,6 +1251,7 @@ typedef PPRINTER_ENUM_VALUESA PPRINTER_ENUM_VALUES;
  typedef LPPRINTER_ENUM_VALUESA LPPRINTER_ENUM_VALUES;
  #endif // UNICODE
  
@@ -10,7 +19,14 @@ index a2a8b352..af49a780 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -1262,6 +1263,7 @@ _Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
+@@ -1256,12 +1259,13 @@ EnumPrintersA(
+ _In_          DWORD   Flags,
+ _In_opt_      LPSTR Name,
+               DWORD   Level,
+-_Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
+               LPBYTE  pPrinterEnum,
+               DWORD   cbBuf,
  _Out_         LPDWORD pcbNeeded,
  _Out_         LPDWORD pcReturned
  );
@@ -18,7 +34,16 @@ index a2a8b352..af49a780 100644
  _Success_(return != FALSE)
  BOOL
  WINAPI
-@@ -1313,6 +1315,7 @@ _Out_         LPDWORD pcReturned
+@@ -1269,7 +1273,7 @@ EnumPrintersW(
+ _In_          DWORD   Flags,
+ _In_opt_      LPWSTR Name,
+               DWORD   Level,
+-_Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_to_opt_(cbBuf, *pcbNeeded)
+               LPBYTE  pPrinterEnum,
+               DWORD   cbBuf,
+ _Out_         LPDWORD pcbNeeded,
+@@ -1313,6 +1317,7 @@ _Out_         LPDWORD pcReturned
  #define SPOOL_FILE_PERSISTENT    0x00000001
  #define SPOOL_FILE_TEMPORARY     0x00000002
  
@@ -26,7 +51,7 @@ index a2a8b352..af49a780 100644
  HANDLE
  WINAPI
  GetSpoolFileHandle(
-@@ -1334,6 +1337,7 @@ _In_    HANDLE  hPrinter,
+@@ -1334,6 +1339,7 @@ _In_    HANDLE  hPrinter,
  _In_    HANDLE  hSpoolFile
  );
  
@@ -34,7 +59,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  OpenPrinterA(
-@@ -1341,6 +1345,7 @@ _In_opt_    LPSTR             pPrinterName,
+@@ -1341,6 +1347,7 @@ _In_opt_    LPSTR             pPrinterName,
  _Out_       LPHANDLE            phPrinter,
  _In_opt_    LPPRINTER_DEFAULTSA pDefault
  );
@@ -42,7 +67,25 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  OpenPrinterW(
-@@ -1434,6 +1439,7 @@ _Out_ LPDWORD  pcbNeeded
+@@ -1412,7 +1419,7 @@ GetJobA(
+ _In_  HANDLE   hPrinter,
+       DWORD    JobId,
+       DWORD    Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE   pJob,
+       DWORD    cbBuf,
+ _Out_ LPDWORD  pcbNeeded
+@@ -1423,7 +1430,7 @@ GetJobW(
+ _In_  HANDLE   hPrinter,
+       DWORD    JobId,
+       DWORD    Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE   pJob,
+       DWORD    cbBuf,
+ _Out_ LPDWORD  pcbNeeded
+@@ -1434,6 +1441,7 @@ _Out_ LPDWORD  pcbNeeded
  #define GetJob  GetJobA
  #endif // !UNICODE
  
@@ -50,7 +93,14 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  EnumJobsA(
-@@ -1447,6 +1453,7 @@ _Out_writes_bytes_opt_(cbBuf)
+@@ -1441,12 +1449,13 @@ _In_  HANDLE  hPrinter,
+       DWORD   FirstJob,
+       DWORD   NoJobs,
+       DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE  pJob,
+       DWORD   cbBuf,
  _Out_ LPDWORD pcbNeeded,
  _Out_ LPDWORD pcReturned
  );
@@ -58,7 +108,16 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  EnumJobsW(
-@@ -1466,6 +1473,7 @@ _Out_ LPDWORD pcReturned
+@@ -1454,7 +1463,7 @@ _In_  HANDLE  hPrinter,
+       DWORD   FirstJob,
+       DWORD   NoJobs,
+       DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE  pJob,
+       DWORD   cbBuf,
+ _Out_ LPDWORD pcbNeeded,
+@@ -1466,6 +1475,7 @@ _Out_ LPDWORD pcReturned
  #define EnumJobs  EnumJobsA
  #endif // !UNICODE
  
@@ -66,7 +125,7 @@ index a2a8b352..af49a780 100644
  HANDLE
  WINAPI
  AddPrinterA(
-@@ -1476,6 +1484,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(PRINTER_INFO_1)))
+@@ -1476,6 +1486,7 @@ _When_(Level == 1, _In_reads_bytes_(sizeof(PRINTER_INFO_1)))
  _When_(Level == 2, _In_reads_bytes_(sizeof(PRINTER_INFO_2)))
              LPBYTE     pPrinter
  );
@@ -74,7 +133,7 @@ index a2a8b352..af49a780 100644
  HANDLE
  WINAPI
  AddPrinterW(
-@@ -1492,12 +1501,14 @@ _When_(Level == 2, _In_reads_bytes_(sizeof(PRINTER_INFO_2)))
+@@ -1492,12 +1503,14 @@ _When_(Level == 2, _In_reads_bytes_(sizeof(PRINTER_INFO_2)))
  #define AddPrinter  AddPrinterA
  #endif // !UNICODE
  
@@ -89,7 +148,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  SetPrinterA(
-@@ -1517,6 +1528,7 @@ SetPrinterA(
+@@ -1517,6 +1530,7 @@ SetPrinterA(
                       LPBYTE  pPrinter,
      _In_             DWORD   Command
      );
@@ -97,7 +156,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  SetPrinterW(
-@@ -1542,6 +1554,7 @@ SetPrinterW(
+@@ -1542,22 +1556,24 @@ SetPrinterW(
  #define SetPrinter  SetPrinterA
  #endif // !UNICODE
  
@@ -105,7 +164,11 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  GetPrinterA(
-@@ -1552,6 +1565,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _In_  HANDLE  hPrinter,
+       DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE  pPrinter,
        DWORD   cbBuf,
  _Out_ LPDWORD pcbNeeded
  );
@@ -113,7 +176,14 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  GetPrinterW(
-@@ -1568,6 +1582,7 @@ _Out_ LPDWORD pcbNeeded
+ _In_  HANDLE  hPrinter,
+       DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+       LPBYTE  pPrinter,
+       DWORD   cbBuf,
+ _Out_ LPDWORD pcbNeeded
+@@ -1568,6 +1584,7 @@ _Out_ LPDWORD pcbNeeded
  #define GetPrinter  GetPrinterA
  #endif // !UNICODE
  
@@ -121,7 +191,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddPrinterDriverA(
-@@ -1575,6 +1590,7 @@ _In_opt_    LPSTR   pName,
+@@ -1575,6 +1592,7 @@ _In_opt_    LPSTR   pName,
              DWORD     Level,
  _In_        LPBYTE    pDriverInfo
  );
@@ -129,7 +199,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddPrinterDriverW(
-@@ -1620,6 +1636,7 @@ _In_             DWORD    dwFileCopyFlags
+@@ -1620,25 +1638,27 @@ _In_             DWORD    dwFileCopyFlags
  #define AddPrinterDriverEx  AddPrinterDriverExA
  #endif // !UNICODE
  
@@ -137,7 +207,13 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  EnumPrinterDriversA(
-@@ -1632,6 +1649,7 @@ _Out_writes_bytes_opt_(cbBuf)
+ _In_opt_    LPSTR        pName,
+ _In_opt_    LPSTR        pEnvironment,
+             DWORD          Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE        pDriverInfo,
+             DWORD          cbBuf,
  _Out_       LPDWORD        pcbNeeded,
  _Out_       LPDWORD        pcReturned
  );
@@ -145,7 +221,105 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  EnumPrinterDriversW(
-@@ -2665,6 +2683,7 @@ _In_   LPWSTR   pCaption,
+ _In_opt_    LPWSTR        pName,
+ _In_opt_    LPWSTR        pEnvironment,
+             DWORD          Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE        pDriverInfo,
+             DWORD          cbBuf,
+ _Out_       LPDWORD        pcbNeeded,
+@@ -1656,7 +1676,7 @@ GetPrinterDriverA(
+ _In_        HANDLE  hPrinter,
+ _In_opt_    LPSTR pEnvironment,
+             DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE  pDriverInfo,
+             DWORD   cbBuf,
+ _Out_       LPDWORD pcbNeeded
+@@ -1667,7 +1687,7 @@ GetPrinterDriverW(
+ _In_        HANDLE  hPrinter,
+ _In_opt_    LPWSTR pEnvironment,
+             DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE  pDriverInfo,
+             DWORD   cbBuf,
+ _Out_       LPDWORD pcbNeeded
+@@ -1780,7 +1800,7 @@ EnumPrintProcessorsA(
+ _In_opt_   LPSTR   pName,
+ _In_opt_   LPSTR   pEnvironment,
+            DWORD     Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+            LPBYTE    pPrintProcessorInfo,
+            DWORD     cbBuf,
+ _Out_      LPDWORD   pcbNeeded,
+@@ -1792,7 +1812,7 @@ EnumPrintProcessorsW(
+ _In_opt_   LPWSTR   pName,
+ _In_opt_   LPWSTR   pEnvironment,
+            DWORD     Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+            LPBYTE    pPrintProcessorInfo,
+            DWORD     cbBuf,
+ _Out_      LPDWORD   pcbNeeded,
+@@ -1841,7 +1861,7 @@ EnumPrintProcessorDatatypesA(
+ _In_opt_    LPSTR   pName,
+ _In_        LPSTR   pPrintProcessorName,
+             DWORD     Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE    pDatatypes,
+             DWORD     cbBuf,
+ _Out_       LPDWORD   pcbNeeded,
+@@ -1854,7 +1874,7 @@ EnumPrintProcessorDatatypesW(
+ _In_opt_    LPWSTR   pName,
+ _In_        LPWSTR   pPrintProcessorName,
+             DWORD     Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE    pDatatypes,
+             DWORD     cbBuf,
+ _Out_       LPDWORD   pcbNeeded,
+@@ -1971,7 +1991,7 @@ WINAPI
+ AddJobA(
+ _In_    HANDLE  hPrinter,
+         DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE  pData,
+         DWORD   cbBuf,
+ _Out_   LPDWORD pcbNeeded
+@@ -1981,7 +2001,7 @@ WINAPI
+ AddJobW(
+ _In_    HANDLE  hPrinter,
+         DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE  pData,
+         DWORD   cbBuf,
+ _Out_   LPDWORD pcbNeeded
+@@ -2174,7 +2194,7 @@ WINAPI
+ EnumPrinterDataExA(
+ _In_    HANDLE    hPrinter,
+ _In_    LPCSTR  pKeyName,
+-_Out_writes_bytes_opt_(cbEnumValues)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbEnumValues)
+         LPBYTE    pEnumValues,
+         DWORD     cbEnumValues,
+ _Out_   LPDWORD   pcbEnumValues,
+@@ -2185,7 +2205,7 @@ WINAPI
+ EnumPrinterDataExW(
+ _In_    HANDLE    hPrinter,
+ _In_    LPCWSTR  pKeyName,
+-_Out_writes_bytes_opt_(cbEnumValues)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbEnumValues)
+         LPBYTE    pEnumValues,
+         DWORD     cbEnumValues,
+ _Out_   LPDWORD   pcbEnumValues,
+@@ -2665,6 +2685,7 @@ _In_   LPWSTR   pCaption,
  #define PRINTER_ERROR_JAM           0x00000002
  #define PRINTER_ERROR_OUTOFTONER    0x00000004
  
@@ -153,7 +327,61 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  ClosePrinter(
-@@ -2830,6 +2849,7 @@ _Out_       LPDWORD    pcReturned
+@@ -2721,7 +2742,7 @@ GetFormA(
+ _In_    HANDLE        hPrinter,
+ _In_    LPSTR       pFormName,
+         DWORD         Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE        pForm,
+         DWORD         cbBuf,
+ _Out_   LPDWORD       pcbNeeded
+@@ -2732,7 +2753,7 @@ GetFormW(
+ _In_    HANDLE        hPrinter,
+ _In_    LPWSTR       pFormName,
+         DWORD         Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE        pForm,
+         DWORD         cbBuf,
+ _Out_   LPDWORD       pcbNeeded
+@@ -2776,7 +2797,7 @@ WINAPI
+ EnumFormsA(
+ _In_    HANDLE  hPrinter,
+         DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE  pForm,
+         DWORD   cbBuf,
+ _Out_   LPDWORD pcbNeeded,
+@@ -2787,7 +2808,7 @@ WINAPI
+ EnumFormsW(
+ _In_    HANDLE  hPrinter,
+         DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+         LPBYTE  pForm,
+         DWORD   cbBuf,
+ _Out_   LPDWORD pcbNeeded,
+@@ -2805,7 +2826,7 @@ WINAPI
+ EnumMonitorsA(
+ _In_opt_    LPSTR   pName,
+             DWORD       Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE      pMonitor,
+             DWORD       cbBuf,
+ _Out_       LPDWORD    pcbNeeded,
+@@ -2816,7 +2837,7 @@ WINAPI
+ EnumMonitorsW(
+ _In_opt_    LPWSTR   pName,
+             DWORD       Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE      pMonitor,
+             DWORD       cbBuf,
+ _Out_       LPDWORD    pcbNeeded,
+@@ -2830,6 +2851,7 @@ _Out_       LPDWORD    pcReturned
  
  
  
@@ -161,7 +389,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddMonitorA(
-@@ -2838,6 +2858,7 @@ _In_opt_    LPSTR pName,
+@@ -2838,6 +2860,7 @@ _In_opt_    LPSTR pName,
  _In_reads_bytes_opt_(sizeof(MONITOR_INFO_2))
              LPBYTE  pMonitors
  );
@@ -169,7 +397,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddMonitorW(
-@@ -2854,6 +2875,7 @@ _In_reads_bytes_opt_(sizeof(MONITOR_INFO_2))
+@@ -2854,6 +2877,7 @@ _In_reads_bytes_opt_(sizeof(MONITOR_INFO_2))
  
  
  
@@ -177,7 +405,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  DeleteMonitorA(
-@@ -2861,6 +2883,7 @@ _In_opt_    LPSTR     pName,
+@@ -2861,6 +2885,7 @@ _In_opt_    LPSTR     pName,
  _In_opt_    LPSTR     pEnvironment,
  _In_        LPSTR     pMonitorName
  );
@@ -185,7 +413,25 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  DeleteMonitorW(
-@@ -2905,6 +2928,7 @@ _Out_       LPDWORD pcReturned
+@@ -2881,7 +2906,7 @@ WINAPI
+ EnumPortsA(
+ _In_opt_    LPSTR pName,
+             DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE  pPort,
+             DWORD   cbBuf,
+ _Out_       LPDWORD pcbNeeded,
+@@ -2892,7 +2917,7 @@ WINAPI
+ EnumPortsW(
+ _In_opt_    LPWSTR pName,
+             DWORD   Level,
+-_Out_writes_bytes_opt_(cbBuf)
++_Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+             LPBYTE  pPort,
+             DWORD   cbBuf,
+ _Out_       LPDWORD pcbNeeded,
+@@ -2905,6 +2930,7 @@ _Out_       LPDWORD pcReturned
  #endif // !UNICODE
  
  
@@ -193,7 +439,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddPortA(
-@@ -2912,6 +2936,7 @@ _In_opt_    LPSTR   pName,
+@@ -2912,6 +2938,7 @@ _In_opt_    LPSTR   pName,
  _In_        HWND      hWnd,
  _In_        LPSTR   pMonitorName
  );
@@ -201,7 +447,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  AddPortW(
-@@ -2947,6 +2972,7 @@ _In_        LPWSTR   pPortName
+@@ -2947,6 +2974,7 @@ _In_        LPWSTR   pPortName
  #define ConfigurePort  ConfigurePortA
  #endif // !UNICODE
  
@@ -209,7 +455,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  DeletePortA(
-@@ -2954,6 +2980,7 @@ _In_opt_    LPSTR pName,
+@@ -2954,6 +2982,7 @@ _In_opt_    LPSTR pName,
  _In_        HWND    hWnd,
  _In_        LPSTR pPortName
  );
@@ -217,7 +463,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  DeletePortW(
-@@ -3018,6 +3045,7 @@ _In_opt_    LPCWSTR pszPrinter
+@@ -3018,6 +3047,7 @@ _In_opt_    LPCWSTR pszPrinter
  #endif // !UNICODE
  
  
@@ -225,7 +471,7 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  SetPortA(
-@@ -3027,6 +3055,7 @@ _In_        LPSTR     pPortName,
+@@ -3027,6 +3057,7 @@ _In_        LPSTR     pPortName,
  _In_reads_bytes_(sizeof(PORT_INFO_3))
              LPBYTE      pPortInfo
  );
@@ -233,7 +479,22 @@ index a2a8b352..af49a780 100644
  BOOL
  WINAPI
  SetPortW(
-@@ -3441,6 +3470,7 @@ typedef PPRINTER_OPTIONSA PPRINTER_OPTIONS;
+@@ -3424,12 +3455,12 @@ _In_        LPWSTR   pPrintProvidorName
+     typedef struct _PRINTER_OPTIONSA
+     {
+         UINT            cbSize;
+-        DWORD           dwFlags;
++        _Win32_AssociatedEnum_(PRINTER_OPTION_FLAGS) DWORD dwFlags;
+     } PRINTER_OPTIONSA, *PPRINTER_OPTIONSA, *LPPRINTER_OPTIONSA;
+     typedef struct _PRINTER_OPTIONSW
+     {
+         UINT            cbSize;
+-        DWORD           dwFlags;
++        _Win32_AssociatedEnum_(PRINTER_OPTION_FLAGS) DWORD dwFlags;
+     } PRINTER_OPTIONSW, *PPRINTER_OPTIONSW, *LPPRINTER_OPTIONSW;
+ #ifdef UNICODE
+ typedef PRINTER_OPTIONSW PRINTER_OPTIONS;
+@@ -3441,6 +3472,7 @@ typedef PPRINTER_OPTIONSA PPRINTER_OPTIONS;
  typedef LPPRINTER_OPTIONSA LPPRINTER_OPTIONS;
  #endif // UNICODE
  
@@ -241,7 +502,7 @@ index a2a8b352..af49a780 100644
      BOOL
      WINAPI
      OpenPrinter2A(
-@@ -3449,6 +3479,7 @@ typedef LPPRINTER_OPTIONSA LPPRINTER_OPTIONS;
+@@ -3449,6 +3481,7 @@ typedef LPPRINTER_OPTIONSA LPPRINTER_OPTIONS;
      _In_opt_      PPRINTER_DEFAULTSA      pDefault,
      _In_opt_      PPRINTER_OPTIONSA       pOptions
      );
@@ -249,3 +510,12 @@ index a2a8b352..af49a780 100644
      BOOL
      WINAPI
      OpenPrinter2W(
+@@ -3788,7 +3821,7 @@ typedef PCORE_PRINTER_DRIVERA PCORE_PRINTER_DRIVER;
+         _In_        HANDLE  hPrinter,
+         _In_opt_    LPWSTR pEnvironment,
+                     DWORD   Level,
+-        _Out_writes_bytes_opt_(cbBuf)
++        _Win32_ContainsInteriorPointers_ _Out_writes_bytes_opt_(cbBuf)
+                     LPBYTE  pDriverInfo,
+                     DWORD   cbBuf,
+         _Out_       LPDWORD pcbNeeded

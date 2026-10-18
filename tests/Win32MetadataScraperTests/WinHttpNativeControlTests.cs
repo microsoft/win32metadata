@@ -2649,6 +2649,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "ActiveDirectory" => "dsclient.h",
                 "RRas" => "mprapi.h",
                 "MsCs" => "resapi.h",
+                "Printing" => "winspool.h",
                 _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
             };
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -2667,9 +2668,21 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             if (language == "c" && partition is "RRas" or "MsCs")
                 sourceText = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n#include \"intrinfix.h\"\n" +
                     "#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+            string controlSourceText = sourceText;
+            string controlHeader = null;
+            if (partition == "Printing")
+            {
+                controlHeader = Environment.GetEnvironmentVariable("NETWORK_WINSPOOL_CONTROL_HEADER");
+                Assert.True(!string.IsNullOrEmpty(controlHeader) && File.Exists(controlHeader),
+                    "Set NETWORK_WINSPOOL_CONTROL_HEADER to the complete inherited Winspool source before this batch.");
+                string prefix = "#define SECURITY_WIN32\n#include \"intrinfix.h\"\n" +
+                    "#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n";
+                controlSourceText = prefix + "#include \"" + controlHeader + "\"\n";
+                sourceText = prefix + "#include <winspool.h>\n";
+            }
             var before = Surface(root, control, partition, architecture, target, headers, BroadSourceSalProbe,
                 metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
-                diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
+                diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: controlSourceText);
             var after = Surface(root, prepared, partition, architecture, target, headers, BroadSourceSalProbe,
                 metadataEnabled: enabled, annotations: afterAnnotations, salAnnotations: afterSal,
                 diagnostics: afterDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
@@ -2677,6 +2690,9 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } : Array.Empty<string>();
             Assert.NotEmpty(before);
             Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            if (controlHeader != null)
+                beforeDiagnostics = beforeDiagnostics.Select(value => value.Replace(controlHeader,
+                    Path.Combine("<headers>", "um", "winspool.h"), StringComparison.OrdinalIgnoreCase)).ToList();
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
             var addedSal = BroadSourceSalAdditions(beforeSal, partition);
@@ -2711,6 +2727,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                     case "MsCs":
                         addedAnnotations.Add("ResUtilGetBinaryValue|SupportedOSPlatform(\"windowsserver2008\")");
                         break;
+                    case "Printing":
+                        foreach (string name in new[] { "_PRINTER_OPTIONSA", "_PRINTER_OPTIONSW" })
+                        {
+                            int occurrences = before.Count(value => value.StartsWith("field " + name + "::dwFlags ",
+                                StringComparison.Ordinal));
+                            Assert.True(occurrences > 0, "Missing inherited native printer option field: " + name);
+                            Assert.Contains("field " + name + "::dwFlags unsigned long 32", before);
+                            addedAnnotations.AddRange(Enumerable.Repeat(name + "::dwFlags|AssociatedEnum", occurrences));
+                        }
+                        break;
                     case "Policy":
                     case "ActiveDirectory":
                         bool cStyle = language == "c" || cInterface;
@@ -2735,7 +2761,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> NetworkBroadSourceControls()
         {
-            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs" })
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing" })
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
