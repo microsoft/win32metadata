@@ -1,5 +1,5 @@
 diff --git a/um/mmdeviceapi.idl b/um/mmdeviceapi.idl
-index d12a237b..1b7e2185 100644
+index d12a237b..d6ee6bd3 100644
 --- a/um/mmdeviceapi.idl
 +++ b/um/mmdeviceapi.idl
 @@ -3,6 +3,7 @@
@@ -66,3 +66,12 @@ index d12a237b..1b7e2185 100644
  [
      object,
      local,
+@@ -657,7 +665,7 @@ cpp_quote("// * a COM interface identifier")
+ cpp_quote("// * activation parameters specific to the interface being activated")
+ cpp_quote("// and asynchronously returns a pointer to the specified interface")
+ cpp_quote("// ----------------------------------------------------------------------")
+-cpp_quote("STDAPI ActivateAudioInterfaceAsync(")
++cpp_quote("STDAPI _Win32_SupportedOS_Windows8_ ActivateAudioInterfaceAsync(")
+ cpp_quote("    _In_ LPCWSTR deviceInterfacePath,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _In_opt_ PROPVARIANT *activationParams,")

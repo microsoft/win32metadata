@@ -1,5 +1,5 @@
 diff --git a/um/opmapi.idl b/um/opmapi.idl
-index a7049f1e..adcf8222 100644
+index a7049f1e..3f5a046a 100644
 --- a/um/opmapi.idl
 +++ b/um/opmapi.idl
 @@ -1,3 +1,4 @@
@@ -15,3 +15,29 @@ index a7049f1e..adcf8222 100644
  [
      object,
      uuid(0A15159D-41C7-4456-93E1-284CD61D4E8D),
+@@ -587,14 +589,14 @@ cpp_quote( "#define IsNonStandardBusImplementation( ulBusTypeAndImplementation )
+ //  These functions create IOPMVideoOutput objects.
+ //
+ 
+-cpp_quote( "STDAPI OPMGetVideoOutputsFromHMONITOR(                                                      " )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ OPMGetVideoOutputsFromHMONITOR(                                                      " )
+ cpp_quote( "    _In_ HMONITOR hMonitor,                                                                 " )
+ cpp_quote( "    _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    " )
+ cpp_quote( "    _Out_ ULONG* pulNumVideoOutputs,                                                        " )
+ cpp_quote( "    _Outptr_result_buffer_(*pulNumVideoOutputs) IOPMVideoOutput*** pppOPMVideoOutputArray       " )
+ cpp_quote( "    );                                                                                      " )
+ 
+-cpp_quote( "STDAPI OPMGetVideoOutputForTarget(                                                          " )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ OPMGetVideoOutputForTarget(                                                          " )
+ cpp_quote( "    _In_ LUID* pAdapterLuid,                                                                " )
+ cpp_quote( "    _In_ ULONG VidPnTarget,                                                                 " )
+ cpp_quote( "    _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    " )
+@@ -603,7 +605,7 @@ cpp_quote( "    );
+ 
+ cpp_quote("#ifndef DO_NOT_USE_DIRECTX_OR_DXVA2")
+ 
+-cpp_quote( "STDAPI OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        " )
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ OPMGetVideoOutputsFromIDirect3DDevice9Object(                                        " )
+ cpp_quote( "    _In_ IDirect3DDevice9* pDirect3DDevice9,                                                " )
+ cpp_quote( "    _In_ OPM_VIDEO_OUTPUT_SEMANTICS vos,                                                    " )
+ cpp_quote( "    _Out_ ULONG* pulNumVideoOutputs,                                                        " )

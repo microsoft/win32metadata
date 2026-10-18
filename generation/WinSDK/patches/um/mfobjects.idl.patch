@@ -1,5 +1,5 @@
 diff --git a/um/mfobjects.idl b/um/mfobjects.idl
-index a4e9e7e1..ac214fdb 100644
+index a4e9e7e1..0d9fae2d 100644
 --- a/um/mfobjects.idl
 +++ b/um/mfobjects.idl
 @@ -1,3 +1,4 @@
@@ -15,6 +15,21 @@ index a4e9e7e1..ac214fdb 100644
  [
      object,
      uuid(2cd2d921-c447-44a7-a13c-4adabfc247e3)
+@@ -987,12 +989,12 @@ enum MF_ATTRIBUTE_SERIALIZE_OPTIONS
+     MF_ATTRIBUTE_SERIALIZE_UNKNOWN_BYREF = 0x00000001,
+ };
+ 
+-cpp_quote( "STDAPI MFSerializeAttributesToStream(")
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFSerializeAttributesToStream(")
+ cpp_quote( "  IMFAttributes * pAttr, ")
+ cpp_quote( "  DWORD dwOptions, ")
+ cpp_quote( "  IStream * pStm);")
+ 
+-cpp_quote( "STDAPI MFDeserializeAttributesFromStream(")
++cpp_quote( "STDAPI _Win32_SupportedOS_WindowsVista_ MFDeserializeAttributesFromStream(")
+ cpp_quote( "  IMFAttributes * pAttr, ")
+ cpp_quote( "  DWORD dwOptions, ")
+ cpp_quote( "  IStream * pStm);")
 @@ -1011,6 +1013,7 @@ cpp_quote( "  IStream * pStm);")
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////

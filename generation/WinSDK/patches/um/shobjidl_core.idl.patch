@@ -1,5 +1,5 @@
 diff --git a/um/shobjidl_core.idl b/um/shobjidl_core.idl
-index 3074ba74..98739035 100644
+index 3074ba74..765d1276 100644
 --- a/um/shobjidl_core.idl
 +++ b/um/shobjidl_core.idl
 @@ -3,6 +3,7 @@
@@ -306,6 +306,15 @@ index 3074ba74..98739035 100644
  [
      uuid(43826d1e-e718-42ee-bc55-a1e261c37bfe),
      object,
+@@ -2774,7 +2812,7 @@ typedef [v1_enum] enum DATAOBJ_GET_ITEM_FLAGS
+ } DATAOBJ_GET_ITEM_FLAGS;
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)")
+ // returns IShellItem and other interfaces that CLSID_ShellItem implements
+-cpp_quote("STDAPI SHGetItemFromDataObject(_In_ IDataObject *pdtobj, _In_ DATAOBJ_GET_ITEM_FLAGS dwFlags, _In_ REFIID riid, _Outptr_ void **ppv);")
++cpp_quote("STDAPI _Win32_SupportedOS_Windows7_ SHGetItemFromDataObject(_In_ IDataObject *pdtobj, _In_ DATAOBJ_GET_ITEM_FLAGS dwFlags, _In_ REFIID riid, _Outptr_ void **ppv);")
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+ // New for Vista, but used by downlevel code
 @@ -2803,6 +2841,7 @@ cpp_quote("#define STR_GPS_BESTEFFORT                 L\"GPS_BESTEFFORT\"")
  cpp_quote("#define STR_GPS_NO_OPLOCK                  L\"GPS_NO_OPLOCK\"")
  
@@ -1082,7 +1091,12 @@ index 3074ba74..98739035 100644
  [
      object,
      uuid(41ded17d-d6b3-4261-997d-88c60e4b1d58),
-@@ -7532,6 +7667,7 @@ cpp_quote("STDAPI SHCreateDefaultExtractIcon(_In_ REFIID riid, _Outptr_ void **p
+@@ -7528,10 +7663,11 @@ interface IDefaultExtractIconInit : IUnknown
+ }
+ 
+ // "Default" IExtractIcon implementation useful for implementation of ::GetUIObjectOf(IID_IExtractIcon)
+-cpp_quote("STDAPI SHCreateDefaultExtractIcon(_In_ REFIID riid, _Outptr_ void **ppv);")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ SHCreateDefaultExtractIcon(_In_ REFIID riid, _Outptr_ void **ppv);")
  
  interface IEnumExplorerCommand;
  
@@ -1258,6 +1272,17 @@ index 3074ba74..98739035 100644
  [
      uuid(a5cd92ff-29be-454c-8d04-d82879fb3f1b),
      object,
+@@ -8403,8 +8560,8 @@ typedef [v1_enum] enum LIBRARYMANAGEDIALOGOPTIONS
+ 
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)")
+ 
+-cpp_quote("STDAPI SHShowManageLibraryUI(_In_ IShellItem *psiLibrary, _In_ HWND hwndOwner, _In_opt_ LPCWSTR pszTitle, _In_opt_ LPCWSTR pszInstruction, _In_ LIBRARYMANAGEDIALOGOPTIONS lmdOptions);")
+-cpp_quote("STDAPI SHResolveLibrary(_In_ IShellItem *psiLibrary);")
++cpp_quote("STDAPI _Win32_SupportedOS_Windows7_ SHShowManageLibraryUI(_In_ IShellItem *psiLibrary, _In_ HWND hwndOwner, _In_opt_ LPCWSTR pszTitle, _In_opt_ LPCWSTR pszInstruction, _In_ LIBRARYMANAGEDIALOGOPTIONS lmdOptions);")
++cpp_quote("STDAPI _Win32_SupportedOS_Windows7_ SHResolveLibrary(_In_ IShellItem *psiLibrary);")
+ cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
+ cpp_quote("")
+ cpp_quote("// These functions properly initialize their _Outptr_ parameters to NULL, and only return NULL")
 @@ -8532,6 +8689,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  //  SHAssocEnumHandlers returns an IEnumAssocHandlers object.
  //

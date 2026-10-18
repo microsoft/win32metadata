@@ -1,5 +1,5 @@
 diff --git a/um/mftransform.idl b/um/mftransform.idl
-index a370cb39..eb72e2a3 100644
+index a370cb39..20687901 100644
 --- a/um/mftransform.idl
 +++ b/um/mftransform.idl
 @@ -1,3 +1,4 @@
@@ -31,3 +31,12 @@ index a370cb39..eb72e2a3 100644
  [
      object,
      uuid(6D5CB646-29EC-41FB-8179-8C4C6D750811),
+@@ -1107,7 +1111,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ cpp_quote( "STDAPI" )
+-cpp_quote( "MFCreateTransformActivate(" )
++cpp_quote( "_Win32_SupportedOS_Windows7_ MFCreateTransformActivate(" )
+ cpp_quote( "    _Out_ IMFActivate** ppActivate" )
+ cpp_quote( "    );" )
+ 

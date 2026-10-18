@@ -3951,6 +3951,12 @@
       "sourceSha256": "65D3AEF381BE3FD3B1FE5901949241E604D084C20808FED85B01206F0A9D75ED",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\regstr.h",
       "sdkSha256": "65D3AEF381BE3FD3B1FE5901949241E604D084C20808FED85B01206F0A9D75ED"
+    },
+    {
+      "path": "um\\audiomediatype.h",
+      "sourceSha256": "219C68431234687FEF0D7957C98B26DBF2AD7630FE3D68F4415152DE620ED106",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\audiomediatype.idl",
+      "sdkSha256": "154316E0630E6EB8C8A63C65443DBE4B272EC0E08DBEE44619D16AC6CA7988DB"
     }
   ],
   "midl": {
@@ -7144,6 +7150,10 @@
       {
         "source": "um\\oledbdep.idl",
         "path": "um\\oledbdep.h"
+      },
+      {
+        "source": "um\\audiomediatype.idl",
+        "path": "um\\audiomediatype.h"
       }
     ]
   },
@@ -8001,6 +8011,7 @@
     "um\\infotech.h.patch",
     "um\\statehelpers.h.patch",
     "shared\\ntdef.h.patch",
-    "um\\regstr.h.patch"
+    "um\\regstr.h.patch",
+    "um\\audiomediatype.idl.patch"
   ]
 }

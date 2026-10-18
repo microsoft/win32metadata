@@ -1,5 +1,5 @@
 diff --git a/um/dxva2api.idl b/um/dxva2api.idl
-index 5ca7bc2e..ec2e7ca3 100644
+index 5ca7bc2e..c6f3d54b 100644
 --- a/um/dxva2api.idl
 +++ b/um/dxva2api.idl
 @@ -5,6 +5,7 @@
@@ -66,3 +66,18 @@ index 5ca7bc2e..ec2e7ca3 100644
  [
      object,
      uuid(b7f916dd-db3b-49c1-84d7-e45ef99ec726),
+@@ -989,12 +997,12 @@ interface IDirectXVideoMemoryConfiguration : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
+-cpp_quote("STDAPI DXVA2CreateDirect3DDeviceManager9(")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ DXVA2CreateDirect3DDeviceManager9(")
+ cpp_quote("    _Out_ UINT* pResetToken,")
+ cpp_quote("    _Outptr_ IDirect3DDeviceManager9** ppDeviceManager")
+ cpp_quote("    );")
+ 
+-cpp_quote("STDAPI DXVA2CreateVideoService(")
++cpp_quote("STDAPI _Win32_SupportedOS_WindowsVista_ DXVA2CreateVideoService(")
+ cpp_quote("    _In_ IDirect3DDevice9* pDD,")
+ cpp_quote("    _In_ REFIID riid,")
+ cpp_quote("    _Outptr_ void** ppService")
