@@ -909,6 +909,11 @@ The typedef does not introduce a new type or change native layout. This encoding
 is needed because native MIDL does not emit an arbitrary interface `[annotation]`
 on the C++ definition; ignored-attribute diagnostics remain errors.
 
+Metadata-only C/C++ enum grouping invocations must be excluded from `MIDL_PASS`,
+including their trailing semicolon. An empty `_Win32_Enum_` expansion leaves a
+naked semicolon that MIDL rejects. The canonical WinError patch guards the
+complete group without changing its constants or ordinary C/C++ behavior.
+
 Pin the helper and original import/preprocessor closure alongside the SDK source IDL,
 and explicitly pass the necessary preprocessor defines/includes when MIDL `cpp_opt`
 overrides normal forwarding. Preserve ordinary MIDL diagnostics and native C/C++

@@ -2575,6 +2575,20 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void OriginalErrorGroupingIsExcludedFromMidlGrammar()
+        {
+            string patch = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "shared", "winerror.h.patch");
+            string[] additions = File.ReadAllLines(patch)
+                .Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                    !line.StartsWith("+++", StringComparison.Ordinal))
+                .Select(line => line.Substring(1)).ToArray();
+            Assert.Equal("#if !defined(MIDL_PASS)", additions[0]);
+            Assert.Equal("_Win32_Enum_(WIN32_ERROR, unsigned long,", additions[1]);
+            Assert.Equal("    ERROR_QUERY_STORAGE_ERROR);", additions[^2]);
+            Assert.Equal("#endif", additions[^1]);
+        }
+
+        [Fact]
         public void OriginalErrorOwnersHaveNoLegacyDefinitionAndRetainAllUnmigratedUses()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");

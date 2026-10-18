@@ -2,10 +2,11 @@ diff --git a/shared/winerror.h b/shared/winerror.h
 index 9356de0c..95b196fd 100644
 --- a/shared/winerror.h
 +++ b/shared/winerror.h
-@@ -66990,4 +66990,3293 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
+@@ -66990,4 +66990,3295 @@ FORCEINLINE HRESULT HRESULT_FROM_SETUPAPI(unsigned long x) { return (((x) & (0x2
  //
  #define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
  
++#if !defined(MIDL_PASS)
 +_Win32_Enum_(WIN32_ERROR, unsigned long,
 +    NO_ERROR,
 +    ERROR_SUCCESS,
@@ -3295,4 +3296,5 @@ index 9356de0c..95b196fd 100644
 +    ERROR_VHD_MISSING_CHANGE_TRACKING_INFORMATION,
 +    ERROR_VHD_UNEXPECTED_ID,
 +    ERROR_QUERY_STORAGE_ERROR);
++#endif
  #endif//_WINERROR_
