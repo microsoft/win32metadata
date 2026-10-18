@@ -1484,6 +1484,65 @@ static_assert(DISC_NO_FORCE == 64u);
                             yield return new object[] { header, architecture.Item1, architecture.Item2, enabled, mode.Item1, mode.Item2 };
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(DeviceFamilyOriginalHeaderControls))]
+        public void OriginalDeviceFamilyHeadersPreserveNativeAbiSalAndExactMetadata(
+            string partition, string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var availability = WinHttpMigrationTests.AuthoredDeviceFamilyHeaderContracts()
+                .Where(contract => contract.Partition == partition).ToArray();
+            var errors = WinHttpMigrationTests.AuthoredDeviceFamilyLastErrorContracts()
+                .Where(contract => contract.Partition == partition).ToArray();
+            string[] headers = availability.Select(contract => contract.Header).Distinct(StringComparer.Ordinal).ToArray();
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, "",
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, partition, architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expected = availability.SelectMany(contract => contract.Functions
+                .Select(name => NativeName(name) + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
+                .Concat(errors.SelectMany(contract => contract.Functions.Select(name => NativeName(name) + "|SetLastError")))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            foreach (string name in availability.SelectMany(contract => contract.Functions)
+                .Concat(errors.SelectMany(contract => contract.Functions)).Distinct(StringComparer.Ordinal))
+                Assert.Contains(before, value => value.StartsWith("function " + NativeName(name) + " ", StringComparison.Ordinal));
+            Assert.Equal(enabled ? expected : Array.Empty<string>(),
+                annotations.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
+                $"{before.Length} unchanged native facts, {beforeSal.Count} unchanged SAL occurrences, " +
+                $"{annotations.Count} exact availability/last-error facts; the original CM_Wait alias remains CMP_Wait.");
+
+            static string NativeName(string name) => name == "CM_WaitNoPendingInstallEvents" ? "CMP_WaitNoPendingInstallEvents" : name;
+        }
+
+        public static IEnumerable<object[]> DeviceFamilyOriginalHeaderControls()
+        {
+            foreach (string partition in new[] { "DevInst", "Buses", "SwDevice" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (string language in new[] { "c", "c++" })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[] { partition, architecture.Item1, architecture.Item2, language, enabled };
+        }
+
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,

@@ -723,6 +723,30 @@
       "sourceSha256": "D962588974E5E100205F683160B351DEE70EA100AA736E14D878B7A74577A9C5",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\synchapi.h",
       "sdkSha256": "D962588974E5E100205F683160B351DEE70EA100AA736E14D878B7A74577A9C5"
+    },
+    {
+      "path": "um\\cfgmgr32.h",
+      "sourceSha256": "5C7CEC278E684CF89591331391622441F660C5B9852351312FD910AE5930AE22",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cfgmgr32.h",
+      "sdkSha256": "5C7CEC278E684CF89591331391622441F660C5B9852351312FD910AE5930AE22"
+    },
+    {
+      "path": "um\\newdev.h",
+      "sourceSha256": "663C1D8247BC38B987285CB64C5ECE50D0BBE4744BC448E0B28DE56A5DBBA5A2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\newdev.h",
+      "sdkSha256": "663C1D8247BC38B987285CB64C5ECE50D0BBE4744BC448E0B28DE56A5DBBA5A2"
+    },
+    {
+      "path": "um\\winusb.h",
+      "sourceSha256": "4ED890A8C9DFC49B00EB2DBACF3E17007F8B25AFDCF2C4B22011F78236DCD964",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winusb.h",
+      "sdkSha256": "4ED890A8C9DFC49B00EB2DBACF3E17007F8B25AFDCF2C4B22011F78236DCD964"
+    },
+    {
+      "path": "um\\swdevice.h",
+      "sourceSha256": "FBB4C940D641600EBB32DEF276EE23EB0434DC03A0BCDEA7A080FA66D73E490A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\swdevice.h",
+      "sdkSha256": "FBB4C940D641600EBB32DEF276EE23EB0434DC03A0BCDEA7A080FA66D73E490A"
     }
   ],
   "midl": {
@@ -1134,7 +1158,9 @@
     "Fs",
     "Security",
     "Threading",
-    "Memory"
+    "Memory",
+    "Buses",
+    "SwDevice"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -1222,6 +1248,10 @@
     "um\\securitybaseapi.h.patch",
     "um\\processthreadsapi.h.patch",
     "um\\memoryapi.h.patch",
-    "um\\synchapi.h.patch"
+    "um\\synchapi.h.patch",
+    "um\\cfgmgr32.h.patch",
+    "um\\newdev.h.patch",
+    "um\\winusb.h.patch",
+    "um\\swdevice.h.patch"
   ]
 }

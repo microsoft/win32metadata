@@ -1060,6 +1060,140 @@ namespace Win32MetadataScraperTests
                 File.ReadAllText(Path.Combine(root, "RecompiledIdlHeaders", "um", "devfiltertypes.h")));
         }
 
+        [Fact]
+        public void DeviceFamilyAvailabilityAndLastErrorFactsHaveOriginalHeaderOwners()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            var availability = AuthoredDeviceFamilyHeaderContracts().ToArray();
+            var errors = AuthoredDeviceFamilyLastErrorContracts().ToArray();
+            Assert.Equal(154, availability.Sum(contract => contract.Functions.Length));
+            Assert.Equal(43, errors.Sum(contract => contract.Functions.Length));
+            string[] osRows = File.ReadAllLines(Path.Combine(root, "supportedOS.rsp"));
+            string[] errorRows = File.ReadAllLines(Path.Combine(root, "WithSetLastError.rsp"));
+            foreach (string name in availability.SelectMany(contract => contract.Functions))
+                Assert.DoesNotContain(osRows, line => line.StartsWith(name + "=", StringComparison.Ordinal));
+            foreach (string name in errors.SelectMany(contract => contract.Functions))
+                Assert.DoesNotContain(name, errorRows);
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            var patches = recipe.RootElement.GetProperty("patches").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            foreach (string header in availability.Select(contract => contract.Header).Distinct(StringComparer.Ordinal))
+            {
+                string path = "um\\" + header + ".patch";
+                Assert.Single(patches.Where(value => value == path));
+                string text = File.ReadAllText(Path.Combine(root, "patches", path));
+                Assert.Contains("--- a/um/" + header, text);
+                Assert.DoesNotContain("RecompiledIdlHeaders", text);
+                Assert.DoesNotContain("+#include <win32metadata_annotations.h>", text);
+            }
+        }
+
+        internal static IEnumerable<(string Header, string Partition, string OS, string[] Functions)> AuthoredDeviceFamilyHeaderContracts()
+        {
+            yield return ("cfgmgr32.h", "DevInst", "windows5.0", new[]
+            {
+                "CM_Add_Empty_Log_Conf_Ex", "CM_Add_Empty_Log_Conf", "CM_Add_ID_ExW", "CM_Add_IDW",
+                "CM_Add_Res_Des_Ex", "CM_Add_Res_Des", "CM_Connect_MachineW", "CM_Delete_Class_Key",
+                "CM_Delete_DevNode_Key", "CM_Disable_DevNode", "CM_Disconnect_Machine", "CM_Enable_DevNode",
+                "CM_Enumerate_Classes_Ex", "CM_Enumerate_Classes", "CM_Enumerate_Enumerators_ExW",
+                "CM_Enumerate_EnumeratorsW", "CM_Free_Log_Conf_Ex", "CM_Free_Log_Conf_Handle", "CM_Free_Log_Conf",
+                "CM_Free_Res_Des_Ex", "CM_Free_Res_Des_Handle", "CM_Free_Res_Des", "CM_Free_Resource_Conflict_Handle",
+                "CM_Get_Child_Ex", "CM_Get_Child", "CM_Get_Class_Registry_PropertyW", "CM_Get_Depth_Ex", "CM_Get_Depth",
+                "CM_Get_Device_ID_ExW", "CM_Get_Device_ID_List_ExW", "CM_Get_Device_ID_List_Size_ExW",
+                "CM_Get_Device_ID_List_SizeA", "CM_Get_Device_ID_List_SizeW", "CM_Get_Device_ID_ListA",
+                "CM_Get_Device_ID_ListW", "CM_Get_Device_ID_Size_Ex", "CM_Get_Device_ID_Size", "CM_Get_Device_IDW",
+                "CM_Get_Device_Interface_AliasW", "CM_Get_Device_Interface_List_SizeA", "CM_Get_Device_Interface_List_SizeW",
+                "CM_Get_Device_Interface_ListA", "CM_Get_Device_Interface_ListW", "CM_Get_DevNode_Registry_PropertyW",
+                "CM_Get_DevNode_Status_Ex", "CM_Get_DevNode_Status", "CM_Get_First_Log_Conf_Ex", "CM_Get_First_Log_Conf",
+                "CM_Get_HW_Prof_Flags_ExA", "CM_Get_HW_Prof_Flags_ExW", "CM_Get_HW_Prof_FlagsA", "CM_Get_HW_Prof_FlagsW",
+                "CM_Get_Log_Conf_Priority_Ex", "CM_Get_Log_Conf_Priority", "CM_Get_Next_Log_Conf_Ex", "CM_Get_Next_Log_Conf",
+                "CM_Get_Next_Res_Des_Ex", "CM_Get_Next_Res_Des", "CM_Get_Parent_Ex", "CM_Get_Parent",
+                "CM_Get_Res_Des_Data_Ex", "CM_Get_Res_Des_Data_Size_Ex", "CM_Get_Res_Des_Data_Size", "CM_Get_Res_Des_Data",
+                "CM_Get_Resource_Conflict_Count", "CM_Get_Resource_Conflict_DetailsW", "CM_Get_Sibling_Ex", "CM_Get_Sibling",
+                "CM_Get_Version_Ex", "CM_Get_Version", "CM_Is_Dock_Station_Present_Ex", "CM_Is_Dock_Station_Present",
+                "CM_Locate_DevNode_ExW", "CM_Locate_DevNodeA", "CM_Locate_DevNodeW", "CM_Modify_Res_Des_Ex",
+                "CM_Modify_Res_Des", "CM_Open_Class_KeyW", "CM_Open_DevNode_Key", "CM_Query_And_Remove_SubTree_ExW",
+                "CM_Query_And_Remove_SubTreeW", "CM_Query_Resource_Conflict_List", "CM_Reenumerate_DevNode_Ex",
+                "CM_Reenumerate_DevNode", "CM_Request_Device_Eject_ExW", "CM_Request_Device_EjectW",
+                "CM_Request_Eject_PC_Ex", "CM_Request_Eject_PC", "CM_Set_Class_Registry_PropertyW",
+                "CM_Set_DevNode_Problem_Ex", "CM_Set_DevNode_Problem", "CM_Set_DevNode_Registry_PropertyW",
+                "CM_Setup_DevNode", "CM_Uninstall_DevNode",
+            });
+            yield return ("cfgmgr32.h", "DevInst", "windows5.1.2600", new[]
+            {
+                "CM_Is_Version_Available_Ex", "CM_Is_Version_Available", "CM_WaitNoPendingInstallEvents",
+            });
+            yield return ("cfgmgr32.h", "DevInst", "windows6.0.6000", new[]
+            {
+                "CM_Delete_Device_Interface_KeyW", "CM_Get_Class_Property_Keys", "CM_Get_Class_PropertyW",
+                "CM_Get_Device_Interface_Property_KeysW", "CM_Get_Device_Interface_PropertyW",
+                "CM_Get_DevNode_Property_Keys", "CM_Get_DevNode_PropertyW", "CM_Open_Device_Interface_KeyA",
+                "CM_Open_Device_Interface_KeyW", "CM_Set_Class_PropertyW", "CM_Set_Device_Interface_PropertyW",
+                "CM_Set_DevNode_PropertyW",
+            });
+            yield return ("cfgmgr32.h", "DevInst", "windows6.1", new[] { "CM_MapCrToWin32Err" });
+            yield return ("cfgmgr32.h", "DevInst", "windows8.0", new[]
+            {
+                "CM_Register_Notification", "CM_Unregister_Notification",
+            });
+            yield return ("cfgmgr32.h", "DevInst", "windows10.0.10240", new[]
+            {
+                "CM_Delete_Device_Interface_Key_ExA", "CM_Delete_Device_Interface_Key_ExW",
+                "CM_Get_Class_Property_ExW", "CM_Get_Class_Property_Keys_Ex", "CM_Get_Device_Interface_Property_ExW",
+                "CM_Get_Device_Interface_Property_Keys_ExW", "CM_Get_DevNode_Property_ExW", "CM_Get_DevNode_Property_Keys_Ex",
+                "CM_Open_Device_Interface_Key_ExA", "CM_Open_Device_Interface_Key_ExW", "CM_Set_Class_Property_ExW",
+                "CM_Set_Device_Interface_Property_ExW", "CM_Set_DevNode_Property_ExW",
+            });
+            yield return ("newdev.h", "DevInst", "windows5.0", new[]
+            {
+                "UpdateDriverForPlugAndPlayDevicesA", "UpdateDriverForPlugAndPlayDevicesW",
+            });
+            yield return ("newdev.h", "DevInst", "windows6.0.6000", new[]
+            {
+                "DiInstallDevice", "DiInstallDriverA", "DiInstallDriverW", "DiRollbackDriver", "DiShowUpdateDevice",
+            });
+            yield return ("newdev.h", "DevInst", "windows6.1", new[] { "DiUninstallDevice" });
+            yield return ("newdev.h", "DevInst", "windows10.0.10240", new[] { "DiUninstallDriverW" });
+            yield return ("winusb.h", "Buses", "windows8.1", new[]
+            {
+                "WinUsb_GetAdjustedFrameNumber", "WinUsb_GetCurrentFrameNumber", "WinUsb_ReadIsochPipe",
+                "WinUsb_ReadIsochPipeAsap", "WinUsb_RegisterIsochBuffer", "WinUsb_UnregisterIsochBuffer",
+                "WinUsb_WriteIsochPipe", "WinUsb_WriteIsochPipeAsap",
+            });
+            yield return ("winusb.h", "Buses", "windows10.0.10240", new[]
+            {
+                "WinUsb_GetCurrentFrameNumberAndQpc", "WinUsb_StartTrackingForTimeSync", "WinUsb_StopTrackingForTimeSync",
+            });
+            yield return ("swdevice.h", "SwDevice", "windows8.0", new[]
+            {
+                "SwDeviceClose", "SwDeviceCreate", "SwDeviceInterfacePropertySet", "SwDeviceInterfaceRegister",
+                "SwDeviceInterfaceSetState", "SwDevicePropertySet", "SwMemFree",
+            });
+            yield return ("swdevice.h", "SwDevice", "windows8.1", new[] { "SwDeviceGetLifetime", "SwDeviceSetLifetime" });
+        }
+
+        internal static IEnumerable<(string Header, string Partition, string[] Functions)> AuthoredDeviceFamilyLastErrorContracts()
+        {
+            yield return ("cfgmgr32.h", "DevInst", new[] { "CM_Get_Version", "CM_Get_Version_Ex", "CM_WaitNoPendingInstallEvents" });
+            yield return ("newdev.h", "DevInst", new[]
+            {
+                "DiInstallDevice", "DiInstallDriverA", "DiInstallDriverW", "DiRollbackDriver", "DiShowUpdateDevice",
+                "DiUninstallDevice", "DiUninstallDriverW", "UpdateDriverForPlugAndPlayDevicesA", "UpdateDriverForPlugAndPlayDevicesW",
+            });
+            yield return ("winusb.h", "Buses", new[]
+            {
+                "WinUsb_AbortPipe", "WinUsb_ControlTransfer", "WinUsb_FlushPipe", "WinUsb_GetAdjustedFrameNumber",
+                "WinUsb_GetAssociatedInterface", "WinUsb_GetCurrentAlternateSetting", "WinUsb_GetCurrentFrameNumber",
+                "WinUsb_GetCurrentFrameNumberAndQpc", "WinUsb_GetDescriptor", "WinUsb_GetOverlappedResult",
+                "WinUsb_GetPipePolicy", "WinUsb_GetPowerPolicy", "WinUsb_Initialize", "WinUsb_QueryDeviceInformation",
+                "WinUsb_QueryInterfaceSettings", "WinUsb_QueryPipe", "WinUsb_QueryPipeEx", "WinUsb_ReadIsochPipe",
+                "WinUsb_ReadIsochPipeAsap", "WinUsb_ReadPipe", "WinUsb_RegisterIsochBuffer", "WinUsb_ResetPipe",
+                "WinUsb_SetCurrentAlternateSetting", "WinUsb_SetPipePolicy", "WinUsb_SetPowerPolicy",
+                "WinUsb_StartTrackingForTimeSync", "WinUsb_StopTrackingForTimeSync", "WinUsb_UnregisterIsochBuffer",
+                "WinUsb_WriteIsochPipe", "WinUsb_WriteIsochPipeAsap", "WinUsb_WritePipe",
+            });
+        }
+
         [MigrationTheory]
         [InlineData(1)]
         [InlineData(2)]
