@@ -158,16 +158,6 @@
     "uses": []
   },
   {
-    "name": "ATF_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ATF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "DRAWEDGE_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -253,50 +243,6 @@
       {
         "struct": "WNDCLASSEXW",
         "field": "style"
-      }
-    ]
-  },
-  {
-    "name": "CWP_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CWP_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "ChildWindowFromPointEx",
-        "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "name": "DFC_TYPE",
-    "autoPopulate": {
-      "filter": "DFC_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "DrawFrameControl",
-        "parameter": "param2"
-      }
-    ]
-  },
-  {
-    "name": "DFCS_STATE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DFCS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "DrawFrameControl",
-        "parameter": "param3"
       }
     ]
   },
@@ -646,21 +592,6 @@
       {
         "struct": "POINTER_INFO",
         "field": "pointerFlags"
-      }
-    ]
-  },
-  {
-    "name": "REDRAW_WINDOW_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "RDW_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "RedrawWindow",
-        "parameter": "flags"
       }
     ]
   },
@@ -6240,11 +6171,7 @@
     ]
   },
   {
-    "name": "GETFINALPATHNAMEBYHANDLE_FLAGS",
-    "autoPopulate": {
-      "header": "winbase.h",
-      "filter": "FILE_NAME|VOLUME_NAME"
-    },
+    "addUsesTo": "GETFINALPATHNAMEBYHANDLE_FLAGS",
     "uses": [
       {
         "method": "GetFinalPathNameByHandleA",
@@ -15920,21 +15847,6 @@
     ]
   },
   {
-    "name": "EXIT_WINDOWS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "EWX_",
-      "header": "winuser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "ExitWindowsEx",
-        "parameter": "uFlags"
-      }
-    ]
-  },
-  {
     "name": "CRED_ENUMERATE_FLAGS",
     "flags": true,
     "members": [
@@ -24841,21 +24753,6 @@
     ]
   },
   {
-    "name": "PARAFORMAT_ALIGNMENT",
-    "type": "ushort",
-    "autoPopulate": {
-      "filter": "PFA_",
-      "header": "richedit.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "PARAFORMAT",
-        "field": "wAlignment"
-      }
-    ]
-  },
-  {
     "name": "NCRYPT_ALGORITHM_NAME_CLASS",
     "members": [
       {
@@ -25186,32 +25083,6 @@
       {
         "method": "NOTIFYICONDATAW",
         "parameter": "uFlags"
-      }
-    ]
-  },
-  {
-    "name": "SYMBOLIC_LINK_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SYMBOLIC_LINK_FLAG_",
-      "header": "winbase.h"
-    },
-    "uses": [
-      {
-        "method": "CreateSymbolicLinkA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateSymbolicLinkW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateSymbolicLinkTransactedA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateSymbolicLinkTransactedW",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -26517,25 +26388,6 @@
     ]
   },
   {
-    "type": "uint",
-    "name": "BRUSH_STYLE",
-    "autoPopulate": {
-      "filter": "BS_",
-      "header": "wingdi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LOGBRUSH",
-        "field": "lbStyle"
-      },
-      {
-        "struct": "LOGBRUSH32",
-        "field": "lbStyle"
-      }
-    ]
-  },
-  {
     "type": "byte",
     "name": "TMPF_FLAGS",
     "flags": true,
@@ -27191,13 +27043,7 @@
     ]
   },
   {
-    "name": "DEVMODE_COLOR",
-    "type": "short",
-    "autoPopulate": {
-      "filter": "DMCOLOR_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_COLOR",
     "uses": [
       {
         "struct": "DEVMODEW",
@@ -27210,13 +27056,7 @@
     ]
   },
   {
-    "name": "DEVMODE_DUPLEX",
-    "type": "short",
-    "autoPopulate": {
-      "filter": "DMDUP_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_DUPLEX",
     "uses": [
       {
         "struct": "DEVMODEW",
@@ -27229,13 +27069,7 @@
     ]
   },
   {
-    "name": "DEVMODE_COLLATE",
-    "type": "short",
-    "autoPopulate": {
-      "filter": "DMCOLLATE_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_COLLATE",
     "uses": [
       {
         "struct": "DEVMODEW",
@@ -27286,13 +27120,7 @@
     ]
   },
   {
-    "name": "DEVMODE_TRUETYPE_OPTION",
-    "type": "short",
-    "autoPopulate": {
-      "filter": "DMTT_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_TRUETYPE_OPTION",
     "uses": [
       {
         "struct": "DEVMODEW",
@@ -27374,22 +27202,6 @@
         "interface": "ITextRange",
         "method": "ChangeCase",
         "parameter": "Type"
-      }
-    ]
-  },
-  {
-    "name": "PARAFORMAT_NUMBERING",
-    "type": "ushort",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PFN_",
-      "header": "Richedit.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "PARAFORMAT",
-        "field": "wNumbering"
       }
     ]
   },
@@ -27580,25 +27392,6 @@
     ]
   },
   {
-    "name": "BUSY_DIALOG_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "BZ_",
-      "header": "Oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "OLEUIBUSYA",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "OLEUIBUSYW",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "UI_CONVERT_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -27613,83 +27406,6 @@
       },
       {
         "method": "OLEUICONVERTW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "CHANGE_ICON_FLAGS",
-    "type": "uint",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CIF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUICHANGEICONA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUICHANGEICONW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "CHANGE_SOURCE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CSF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUICHANGESOURCEA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUICHANGESOURCEW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "EDIT_LINKS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ELF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUIEDITLINKSA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUIEDITLINKSW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "INSERT_OBJECT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "IOF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUIINSERTOBJECTA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUIINSERTOBJECTW",
         "parameter": "dwFlags"
       }
     ]
@@ -31016,11 +30732,7 @@
     ]
   },
   {
-    "name": "FILE_TYPE",
-    "autoPopulate": {
-      "filter": "FILE_TYPE_",
-      "header": "WinBase.h"
-    },
+    "addUsesTo": "FILE_TYPE",
     "uses": [
       {
         "method": "GetFileType",
@@ -31344,19 +31056,6 @@
       {
         "method": "BCryptGenRandom",
         "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "FILE_DISPOSITION_INFO_EX_FLAGS",
-    "autoPopulate": {
-      "header": "winbase.h",
-      "filter": "FILE_DISPOSITION_FLAG_"
-    },
-    "uses": [
-      {
-        "struct": "FILE_DISPOSITION_INFO_EX",
-        "field": "Flags"
       }
     ]
   },
@@ -32673,20 +32372,6 @@
     ]
   },
   {
-    "name": "CRYPTCATATTRIBUTE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CRYPTCAT_ATTR_",
-      "header": "mscat.h"
-    },
-    "uses": [
-      {
-        "struct": "CRYPTCATATTRIBUTE",
-        "field": "dwAttrTypeAndAction"
-      }
-    ]
-  },
-  {
     "name": "COPYFILE_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -32709,20 +32394,6 @@
       {
         "struct": "COPYFILE2_EXTENDED_PARAMETERS_V2",
         "field": "dwCopyFlags"
-      }
-    ]
-  },
-  {
-    "name": "COPYFILE2_V2_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "COPY_FILE2_V2_",
-      "header": "winbase.h"
-    },
-    "uses": [
-      {
-        "struct": "COPYFILE2_EXTENDED_PARAMETERS_V2",
-        "field": "dwCopyFlagsV2"
       }
     ]
   },

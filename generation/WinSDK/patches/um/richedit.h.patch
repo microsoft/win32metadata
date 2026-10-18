@@ -1,8 +1,56 @@
 diff --git a/um/richedit.h b/um/richedit.h
-index 5bebec44..715b2b3f 100644
+index 5bebec44..40475236 100644
 --- a/um/richedit.h
 +++ b/um/richedit.h
-@@ -1600,6 +1600,7 @@ typedef struct hyphresult
+@@ -9,6 +9,12 @@
+ 
+ #ifndef _RICHEDIT_
+ #define _RICHEDIT_
++
++#include <sal.h>
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned short PARAFORMAT_ALIGNMENT;
++typedef unsigned short PARAFORMAT_NUMBERING;
++#endif
+ #pragma once
+ #include <winapifamily.h>
+ #include <wtypes.h>
+@@ -1134,7 +1140,7 @@ typedef struct _paraformat
+ {
+ 	UINT	cbSize;
+ 	DWORD	dwMask;
+-	WORD	wNumbering;
++	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING) WORD	wNumbering;
+ 	union
+ 	{
+ 		WORD	wReserved;
+@@ -1143,7 +1149,7 @@ typedef struct _paraformat
+ 	LONG	dxStartIndent;
+ 	LONG	dxRightIndent;
+ 	LONG	dxOffset;
+-	WORD	wAlignment;
++	_Win32_AssociatedEnum_(PARAFORMAT_ALIGNMENT) WORD	wAlignment;
+ 	SHORT	cTabCount;
+ 	LONG	rgxTabs[MAX_TAB_STOPS];
+ } PARAFORMAT;
+@@ -1282,6 +1288,16 @@ typedef struct _paraformat2
+ #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
+ #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PARAFORMAT_NUMBERING, unsigned short,
++    PFN_BULLET,
++    PFN_ARABIC,
++    PFN_LCLETTER,
++    PFN_UCLETTER,
++    PFN_LCROMAN,
++    PFN_UCROMAN);
++#endif
++
+ // PARAFORMAT2 wNumberingStyle options 
+ #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
+ #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
+@@ -1600,6 +1616,7 @@ typedef struct hyphresult
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -10,3 +58,23 @@ index 5bebec44..715b2b3f 100644
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
+@@ -1629,6 +1646,19 @@ typedef struct tagHyphenateInfo
+ #define PFA_FULL_SCALED 	 7	// Not implemented
+ #define PFA_FULL_GLYPHS 	 8	// Not implemented
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PARAFORMAT_ALIGNMENT, unsigned short,
++    PFA_LEFT,
++    PFA_RIGHT,
++    PFA_CENTER,
++    PFA_JUSTIFY,
++    PFA_FULL_INTERWORD,
++    PFA_FULL_NEWSPAPER,
++    PFA_FULL_INTERLETTER,
++    PFA_FULL_SCALED,
++    PFA_FULL_GLYPHS);
++#endif
++
+ // This is deprecated identifier.
+ // This constant is used for a discontinued lparam value in EM_AUTOURLDETECT handling
+ #define	AURL_ENABLEEA			1	// Deprecated: use AURL_ENABLEEAURLS
