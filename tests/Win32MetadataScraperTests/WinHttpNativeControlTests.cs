@@ -1699,14 +1699,22 @@ static_assert(DISC_NO_FORCE == 64u);
             if (language == "c")
             {
                 string main = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp"));
-                const string versionInclude = "#include <sdkddkver.h>";
-                int version = main.IndexOf(versionInclude, StringComparison.Ordinal);
-                Assert.InRange(version, 0, main.Length - versionInclude.Length);
-                sourceText = main.Substring(0, version + versionInclude.Length) + "\n";
+                string lastPrefixInclude = partition == "SecBitomet" ? "#include <winbio.h>" : "#include <sdkddkver.h>";
+                int prefixEnd = main.IndexOf(lastPrefixInclude, StringComparison.Ordinal);
+                Assert.InRange(prefixEnd, 0, main.Length - lastPrefixInclude.Length);
+                if (partition != "SecBitomet")
+                    prefixEnd += lastPrefixInclude.Length;
+                sourceText = main.Substring(0, prefixEnd) + "\n";
                 if (Regex.IsMatch(main, @"(?m)^#define\s+UNICODE\b"))
                     sourceText += "#define UNICODE\n";
+                if (partition == "Audio")
+                    sourceText += "#include <mmsystem.h>\n#include <mmreg.h>\n";
+                if (partition == "Fax")
+                    sourceText += "#define WIN32 1\n#define IN _In_\n#define OUT _Out_\n";
                 if (partition == "WebServicesOnDevices")
                     sourceText += "#include <wsdxml.h>\n#include <wsdtypes.h>\n";
+                if (partition == "WinAuto")
+                    sourceText += "#include <uiautomationcore.h>\n";
                 sourceText += string.Join("\n", headers.Select(header => "#include <" + header + ">")) + "\n";
             }
             var beforeSal = new List<string>();
