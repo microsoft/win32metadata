@@ -47,20 +47,28 @@ function Get-CodeMask([string]$Text) {
     })
 }
 
-function Get-AttributeStart([string]$Mask, [int]$Offset) {
+function Get-AttributeStart([string]$Mask, [int]$Offset, [Collections.Generic.HashSet[string]]$AttributeMacros) {
     $start = $Offset
     while ($true) {
         $cursor = $start - 1
         while ($cursor -ge 0 -and [char]::IsWhiteSpace($Mask[$cursor])) { $cursor-- }
-        if ($cursor -lt 0 -or $Mask[$cursor] -ne ']') { break }
+        if ($cursor -lt 0 -or $Mask[$cursor] -notin @(']', ')')) { break }
+        $close = $Mask[$cursor]
+        $open = if ($close -eq ']') { '[' } else { '(' }
         $depth = 1
         $cursor--
         while ($cursor -ge 0 -and $depth -gt 0) {
-            if ($Mask[$cursor] -eq ']') { $depth++ }
-            if ($Mask[$cursor] -eq '[') { $depth-- }
+            if ($Mask[$cursor] -eq $close) { $depth++ }
+            if ($Mask[$cursor] -eq $open) { $depth-- }
             $cursor--
         }
         if ($depth -ne 0) { throw "Unbalanced IDL attributes before byte $Offset" }
+        if ($close -eq ')') {
+            while ($cursor -ge 0 -and [char]::IsWhiteSpace($Mask[$cursor])) { $cursor-- }
+            $end = $cursor + 1
+            while ($cursor -ge 0 -and $Mask[$cursor] -match '[A-Za-z_0-9]') { $cursor-- }
+            if (!$AttributeMacros.Contains($Mask.Substring($cursor + 1, $end - $cursor - 1))) { break }
+        }
         $start = $cursor + 1
     }
     $line = $Mask.LastIndexOf("`n", [Math]::Max(0, $start - 1)) + 1
@@ -133,6 +141,26 @@ foreach ($owner in $owners) {
     $text = [Text.Encoding]::Latin1.GetString($bytes)
     $bom = if ($bytes.Length -ge 3 -and $bytes[0] -eq 239 -and $bytes[1] -eq 187 -and $bytes[2] -eq 191) { 3 } else { 0 }
     $mask = (' ' * $bom) + (Get-CodeMask $text.Substring($bom))
+    $macroDefinitions = [Collections.Generic.Dictionary[string, bool]]::new([StringComparer]::Ordinal)
+    foreach ($definition in [regex]::Matches($mask,
+        '(?m)^[ \t]*#[ \t]*define[ \t]+(?<name>[A-Za-z_]\w*)(?<parameters>\([^\r\n)]*\))?(?<body>(?:[^\r\n]*\\\r?\n)*[^\r\n]*)')) {
+        $name = $definition.Groups['name'].Value
+        $body = $definition.Groups['body'].Value -replace '\\\r?\n', ''
+        if (!$macroDefinitions.ContainsKey($name)) { $macroDefinitions.Add($name, $true) }
+        $macroDefinitions[$name] = $macroDefinitions[$name] -and $definition.Groups['parameters'].Success -and
+            [regex]::IsMatch($body, '^\s*\[.*\]\s*$', 'Singleline')
+    }
+    $attributeMacros = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+    foreach ($name in $macroDefinitions.Keys) {
+        if ($macroDefinitions[$name]) {
+            $attributeMacros.Add($name) | Out-Null
+        }
+    }
+    # Directives are declaration boundaries, not whitespace before an attribute list.
+    $mask = [regex]::Replace($mask, '(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*', {
+        param($match)
+        [regex]::Replace($match.Value, '[^\r\n]', ';')
+    })
     $definitions = @([regex]::Matches($mask, '\binterface\s+(?<name>[A-Za-z_]\w*)\s*:\s*[A-Za-z_]\w*(?:\s*::\s*[A-Za-z_]\w*)*\s*\{'))
     $insertions = [Collections.Generic.List[object]]::new()
     $dispositions = [Collections.Generic.List[object]]::new()
@@ -156,7 +184,7 @@ foreach ($owner in $owners) {
             continue
         }
         $definition = $declarations[0]
-        $offset = Get-AttributeStart $mask $definition.Index
+        $offset = Get-AttributeStart $mask $definition.Index $attributeMacros
         $macro = $macros[$payload.Groups[2].Value]
         $prefix = if ($offset -gt 0 -and $text[$offset - 1] -notin @("`n", "`r")) { $newline } else { '' }
         $insertions.Add([pscustomobject]@{ offset = $offset; text = "${prefix}_Win32_AnnotateInterface_($($fact.symbol), $macro)$newline" })

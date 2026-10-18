@@ -25,6 +25,7 @@ namespace Win32MetadataScraperTests
         {
             string text = "// Copyright sample " + (char)0xA9 + "\n" +
                 "#ifndef SAMPLE_IDL\n#define SAMPLE_IDL\n" +
+                "#define UNUSED_DECLARATION interface IMacroBody : IUnknown {};\n" +
                 "// interface IComment : IUnknown { };\n" +
                 "cpp_quote(\"interface IQuoted : IUnknown { };\")\n" +
                 "interface IMigrated;\n" +
@@ -37,14 +38,14 @@ namespace Win32MetadataScraperTests
             using var fixture = new Fixture(bytes);
             fixture.WriteMap(new[]
             {
-                Floor("IMigrated"), Floor("IComment"), Floor("IQuoted"), Floor("IOnlyForward"),
+                Floor("IMigrated"), Floor("IComment"), Floor("IQuoted"), Floor("IOnlyForward"), Floor("IMacroBody"),
             });
             var result = fixture.Run();
             Assert.Equal(0, result.ExitCode);
             Assert.Equal(bytes, File.ReadAllBytes(fixture.Source));
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(1, report.RootElement.GetProperty("authoredFacts").GetInt32());
-            Assert.Equal(3, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.Equal(4, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
             Assert.Single(report.RootElement.GetProperty("candidateGeneratedHeaders").EnumerateArray());
             byte[] authored = File.ReadAllBytes(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
             string decoded = Encoding.Latin1.GetString(authored);
@@ -140,6 +141,26 @@ namespace Win32MetadataScraperTests
             string patch = File.ReadAllText(Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
             Assert.DoesNotContain("-interface", patch);
             Assert.DoesNotContain("-//", patch);
+        }
+
+        [Fact]
+        public void CarriersPrecedeNativeMacroGeneratedAttributeLists()
+        {
+            const string source = "// native attributes\r\n" +
+                "#define NATIVE_INTERFACE(id, description) \\\r\n" +
+                "    [object, uuid(id), helpstring(description), local]\r\n" +
+                "NATIVE_INTERFACE(00000000-0000-0000-0000-000000000001,\r\n" +
+                "    \"native interface\")\r\n" +
+                "interface IMigrated : IUnknown {};\r\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { Floor("IMigrated") });
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            const string carrier = "_Win32_AnnotateInterface_(IMigrated, _Win32_SupportedOS_Windows7_)\r\n";
+            Assert.Contains(carrier + "NATIVE_INTERFACE(00000000", authored);
+            Assert.Equal(source, authored.Replace(carrier, "", StringComparison.Ordinal)
+                .Replace("#include <sal.h>\r\n", "", StringComparison.Ordinal));
         }
 
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]

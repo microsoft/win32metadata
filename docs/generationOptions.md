@@ -94,6 +94,8 @@ The tool binds interface definitions in original shipped IDL, ignoring comments,
 quoted C++ and forward declarations. It inserts the reviewed
 `_Win32_AnnotateInterface_` carrier before native attributes and adds the SAL
 bootstrap without rewriting existing bytes, guards, attributes or method order.
+Native function-like attribute macros are kept intact when every source definition
+expands to an attribute list; carriers precede the original invocation.
 Ambiguous targets, unsupported OS vocabulary, existing carriers and non-interface
 facts are reported verbatim as retained legacy debt. It never removes sidecar
 rows or changes the installed SDK or repository recipe. The report's
