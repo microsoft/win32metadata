@@ -1,0 +1,83 @@
+diff --git a/shared/dxgi1_2.idl b/shared/dxgi1_2.idl
+index e5c1a6da..a72151f8 100644
+--- a/shared/dxgi1_2.idl
++++ b/shared/dxgi1_2.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++#include <sal.h>
+ import "dxgi.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -7,6 +8,7 @@ cpp_quote("#include <winapifamily.h>")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IDXGIDisplayControl, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid( ea9dbf1a-c88e-4486-854a-98aa0138f30c ),
+@@ -73,6 +75,7 @@ typedef struct DXGI_OUTDUPL_FRAME_INFO
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutputDuplication interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutputDuplication, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(191cfac3-a341-470d-b26e-a864f428319c),
+@@ -115,6 +118,7 @@ typedef enum DXGI_ALPHA_MODE
+     DXGI_ALPHA_MODE_FORCE_DWORD = 0xffffffff
+ } DXGI_ALPHA_MODE;
+ 
++_Win32_AnnotateInterface_(IDXGISurface2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(aba496dd-b617-4cb8-a866-bc44d7eb1fa2),
+@@ -129,6 +133,7 @@ interface IDXGISurface2 :
+                         [out, annotation("_Out_")] UINT *pSubresourceIndex);
+ };
+ 
++_Win32_AnnotateInterface_(IDXGIResource1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(30961379-4609-4a41-998e-54fe567ee0c1),
+@@ -156,6 +161,7 @@ typedef enum _DXGI_OFFER_RESOURCE_PRIORITY
+     DXGI_OFFER_RESOURCE_PRIORITY_HIGH,
+ } DXGI_OFFER_RESOURCE_PRIORITY;
+ 
++_Win32_AnnotateInterface_(IDXGIDevice2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid( 05008617-fbfd-4051-a790-144884b4f6a9 ),
+@@ -237,6 +243,7 @@ typedef struct DXGI_PRESENT_PARAMETERS
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGISwapchain1 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGISwapChain1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid( 790a45f7-0d42-4876-983a-0a55cfe6f4aa ),
+@@ -269,6 +276,7 @@ interface IDXGISwapChain1 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIFactory2 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIFactory2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid( 50c83a1c-e072-4c48-87b0-3630fa36a6d0 ),
+@@ -375,6 +383,7 @@ typedef struct DXGI_ADAPTER_DESC2
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIAdapter2 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIAdapter2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5),
+@@ -390,6 +399,7 @@ interface IDXGIAdapter2 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput1
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput1, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(00cddea8-939b-4b83-a340-a685226666cc),

@@ -1,0 +1,124 @@
+diff --git a/um/netcon.idl b/um/netcon.idl
+index a5154b2c..1b305872 100644
+--- a/um/netcon.idl
++++ b/um/netcon.idl
+@@ -7,6 +7,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -97,6 +98,7 @@ interface IEnumNetConnection : IUnknown
+ //+---------------------------------------------------------------------------
+ // INetConnection -
+ //
++_Win32_AnnotateInterface_(INetConnection, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956A1-1CD3-11D1-B1C5-00805FC1270E),
+@@ -288,6 +290,7 @@ interface INetConnectionConnectUi : IUnknown
+ //+---------------------------------------------------------------------------
+ // IEnumNetSharingPortMapping - An enumerator for INetSharingPortMapping objects.
+ //
++_Win32_AnnotateInterface_(IEnumNetSharingPortMapping, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B0-1CD3-11D1-B1C5-00805FC1270E),
+@@ -310,6 +313,7 @@ interface IEnumNetSharingPortMapping : IUnknown
+         [out] IEnumNetSharingPortMapping** ppenum);
+ };
+ 
++_Win32_AnnotateInterface_(INetSharingPortMappingProps, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(24B7E9B5-E38F-4685-851B-00892CF5F940),
+@@ -332,6 +336,7 @@ interface INetSharingPortMappingProps : IDispatch
+ //+---------------------------------------------------------------------------
+ // INetSharingPortMapping -
+ //
++_Win32_AnnotateInterface_(INetSharingPortMapping, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B1-1CD3-11D1-B1C5-00805FC1270E),
+@@ -359,6 +364,7 @@ interface INetSharingPortMapping : IDispatch
+ // IEnumNetSharingEveryConnection - An enumerator for INetConnection interface pointers
+ //                          that represent all connections in the connections folder
+ //
++_Win32_AnnotateInterface_(IEnumNetSharingEveryConnection, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B8-1CD3-11D1-B1C5-00805FC1270E),
+@@ -386,6 +392,7 @@ interface IEnumNetSharingEveryConnection : IUnknown
+ // IEnumNetSharingPublicConnection - An enumerator for INetConnection interface pointers
+ //                         that represent connections configured as publicly shared.
+ //
++_Win32_AnnotateInterface_(IEnumNetSharingPublicConnection, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B4-1CD3-11D1-B1C5-00805FC1270E),
+@@ -413,6 +420,7 @@ interface IEnumNetSharingPublicConnection : IUnknown
+ // IEnumNetSharingPrivateConnection - An enumerator for INetConnection interface pointers
+ //                         that represent connections configured as privately shared.
+ //
++_Win32_AnnotateInterface_(IEnumNetSharingPrivateConnection, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B5-1CD3-11D1-B1C5-00805FC1270E),
+@@ -435,6 +443,7 @@ interface IEnumNetSharingPrivateConnection : IUnknown
+ };
+ 
+ // Collection needed for INetSharingConfiguration::EnumPortMappings() below
++_Win32_AnnotateInterface_(INetSharingPortMappingCollection, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(02E4A2DE-DA20-4E34-89C8-AC22275A010B),
+@@ -449,6 +458,7 @@ interface INetSharingPortMappingCollection : IDispatch
+ };
+ 
+ cpp_quote("// properties for INetConnection (wraps NETCON_PROPERTIES)")
++_Win32_AnnotateInterface_(INetConnectionProps, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(F4277C95-CE5B-463D-8167-5662D9BCAA72),
+@@ -486,6 +496,7 @@ interface INetConnectionProps : IDispatch
+ //     - Enumerate Port Mappings
+ //     - Add Port Mappings
+ //
++_Win32_AnnotateInterface_(INetSharingConfiguration, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B6-1CD3-11D1-B1C5-00805FC1270E),
+@@ -560,6 +571,7 @@ interface INetSharingConfiguration : IDispatch
+ };
+ 
+ // ICollection interfaces
++_Win32_AnnotateInterface_(INetSharingEveryConnectionCollection, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(33C4643C-7811-46FA-A89A-768597BD7223),
+@@ -573,6 +585,7 @@ interface INetSharingConfiguration : IDispatch
+         [propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
+     };
+ 
++_Win32_AnnotateInterface_(INetSharingPublicConnectionCollection, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(7D7A6355-F372-4971-A149-BFC927BE762A),
+@@ -586,6 +599,7 @@ interface INetSharingConfiguration : IDispatch
+         [propget, id(1), helpstring("property Count")] HRESULT Count([out, retval] long *pVal);
+     };
+ 
++_Win32_AnnotateInterface_(INetSharingPrivateConnectionCollection, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(38AE69E0-4409-402A-A2CB-E965C727F840),
+@@ -607,6 +621,7 @@ interface INetSharingConfiguration : IDispatch
+ //     - Enumerate Public Connections
+ //     - Enumerate Private Connections
+ //
++_Win32_AnnotateInterface_(INetSharingManager, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C08956B7-1CD3-11D1-B1C5-00805FC1270E),

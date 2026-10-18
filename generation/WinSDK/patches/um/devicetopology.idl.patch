@@ -1,0 +1,201 @@
+diff --git a/um/devicetopology.idl b/um/devicetopology.idl
+index a8edc8e4..bbd90d73 100644
+--- a/um/devicetopology.idl
++++ b/um/devicetopology.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ //**@@@*@@@****************************************************
+ //
+@@ -240,6 +241,7 @@ interface IKsControl : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioVolumeLevel, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -262,6 +264,7 @@ interface IAudioVolumeLevel : IPerChannelDbLevel
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioChannelConfig, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -311,6 +314,7 @@ interface IAudioChannelConfig : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioLoudness, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -362,6 +366,7 @@ interface IAudioLoudness : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioInputSelector, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -415,6 +420,7 @@ interface IAudioInputSelector : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioOutputSelector, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -468,6 +474,7 @@ interface IAudioOutputSelector : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioMute, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -519,6 +526,7 @@ interface IAudioMute : IUnknown
+ //      Nothing.  Base class only.
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IPerChannelDbLevel, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -646,6 +654,7 @@ interface IPerChannelDbLevel : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioBass, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -667,6 +676,7 @@ interface IAudioBass : IPerChannelDbLevel{
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioMidrange, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -688,6 +698,7 @@ interface IAudioMidrange : IPerChannelDbLevel{
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioTreble, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -709,6 +720,7 @@ interface IAudioTreble : IPerChannelDbLevel{
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioAutoGainControl, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -761,6 +773,7 @@ interface IAudioAutoGainControl : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAudioPeakMeter, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -813,6 +826,7 @@ interface IAudioPeakMeter : IUnknown
+ //      IPart interface on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDeviceSpecificProperty, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -839,6 +853,7 @@ interface IDeviceSpecificProperty : IUnknown
+ //      IPart interface (on a connector) on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IKsFormatSupport, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -894,6 +909,7 @@ interface IKsFormatSupport : IUnknown
+ //      IPart interface (bridge pin connector) on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IKsJackDescription, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -945,6 +961,7 @@ interface IKsJackDescription : IUnknown
+ //      IPart interface (bridge pin connector) on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IKsJackDescription2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     local,
+@@ -1053,6 +1070,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_NI) ")
+ //      IPart interface (bridge pin connector) on an KS Filter devicetopology object
+ //
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IKsJackSinkInformation, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     local,
+@@ -1118,6 +1136,7 @@ interface IKsJackContainerId : IUnknown
+ // ----------------------------------------------------------------------
+ // Non-Activatable interfaces
+ 
++_Win32_AnnotateInterface_(IPartsList, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     uuid(6DAA848C-5EB0-45CC-AEA5-998A2CDA1FFB),
+@@ -1157,6 +1176,7 @@ interface IPartsList : IUnknown
+     HRESULT GetPart([in, annotation("_In_")] UINT nIndex, [out, annotation("_Out_")] IPart** ppPart);
+ };
+ 
++_Win32_AnnotateInterface_(IPart, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     uuid(AE2DE0E4-5BCA-4F2D-AA46-5D13F8FDB3A9),
+@@ -1377,6 +1397,7 @@ interface IPart : IUnknown
+ };
+ 
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IConnector, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     uuid(9c2c4058-23f5-41de-877a-df3af236a09e),
+@@ -1519,6 +1540,7 @@ interface IConnector : IUnknown
+ };
+ 
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(ISubunit, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     uuid(82149A85-DBA6-4487-86BB-EA8F7FEFCC71),
+@@ -1530,6 +1552,7 @@ interface ISubunit : IUnknown
+ };
+ 
+ //
++_Win32_AnnotateInterface_(IControlInterface, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     uuid(45d37c3f-5140-444a-ae24-400789f3cbf3),
+@@ -1578,6 +1601,7 @@ interface IControlInterface : IUnknown
+ // this interface in a call to IPart::Activate. 
+ // DeviceTopology will call the clients IControlChangeNotify::OnNotify 
+ // method when the state of the activated control changes.
++_Win32_AnnotateInterface_(IControlChangeNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -1613,6 +1637,7 @@ interface IControlChangeNotify : IUnknown
+ };
+ 
+ // ----------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDeviceTopology, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,

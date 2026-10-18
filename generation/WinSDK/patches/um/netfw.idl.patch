@@ -1,0 +1,164 @@
+diff --git a/um/netfw.idl b/um/netfw.idl
+index b68dec12..c3b38bc3 100644
+--- a/um/netfw.idl
++++ b/um/netfw.idl
+@@ -8,6 +8,7 @@
+ //
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -280,6 +281,7 @@ import "oaidl.idl";
+ // instance of this interface is retrieved through the RemoteAdminSettings
+ // property of the INetFwProfile interface. All configuration changes take
+ // effect immediately.
++_Win32_AnnotateInterface_(INetFwRemoteAdminSettings, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(D4BECDDF-6F73-4A83-B832-9C66874CD20E),
+@@ -336,6 +338,7 @@ interface INetFwRemoteAdminSettings : IDispatch
+ // this interface is retrieved through the IcmpSettings property of the
+ // INetFwProfile interface. All configuration changes take effect
+ // immediately.
++_Win32_AnnotateInterface_(INetFwIcmpSettings, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(A6207B2E-7CDD-426A-951E-5E1CBC5AFEAD),
+@@ -452,6 +455,7 @@ interface INetFwIcmpSettings : IDispatch
+ // HNetCfg.FwOpenPort COM object. For reading or modifying existing ports,
+ // instances of this interface are retrieved through the INetFwOpenPorts
+ // collection. All configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwOpenPort, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(E0483BA0-47FF-4D9C-A6D6-7741D0B195F7),
+@@ -549,6 +553,7 @@ interface INetFwOpenPort : IDispatch
+ // of this interface is retrieved through the GloballyOpenPorts property of the
+ // INetFwProfile interface. All configuration changes take effect
+ // immediately.
++_Win32_AnnotateInterface_(INetFwOpenPorts, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(C0E9D7FA-E07E-430A-B19A-090CE82D92E2),
+@@ -598,6 +603,7 @@ interface INetFwOpenPorts : IDispatch
+ // listen through the firewall.  Instances of this interface are retrieved
+ // through the INetFwServices collection. All configuration changes take
+ // effect immediately.
++_Win32_AnnotateInterface_(INetFwService, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(79FD57C8-908E-4A36-9888-D5B3F0A444CF),
+@@ -683,6 +689,7 @@ interface INetFwService : IDispatch
+ // through the firewall. An instance of this interface is retrieved through the
+ // Services property of the INetFwProfile interface. All configuration
+ // changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwServices, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(79649BB4-903E-421B-94C9-79848E79F6EE),
+@@ -718,6 +725,7 @@ interface INetFwServices : IDispatch
+ // modifying existing apps, instances of this interface are retrieved through
+ // the INetFwAuthorizedApplications collection. All configuration changes
+ // take effect immediately.
++_Win32_AnnotateInterface_(INetFwAuthorizedApplication, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(B5E64FFA-C2C5-444E-A301-FB5E00018050),
+@@ -800,6 +808,7 @@ interface INetFwAuthorizedApplication : IDispatch
+ // firewall. An instance of this interface is retrieved through the
+ // AuthorizedApplications property of the INetFwProfile interface. All
+ // configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwAuthorizedApplications, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(644EFD52-CCF9-486C-97A2-39F352570B30),
+@@ -847,6 +856,7 @@ interface INetFwAuthorizedApplications : IDispatch
+ // interface is supported by the HNetCfg.FwRule COM object.  For reading or
+ // modifying existing rules, instances of this interface are retrieved through
+ // the INetFwRules collection. All configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwRule, _Win32_SupportedOS_WindowsVista_)
+ [
+    local,
+    object,
+@@ -1039,6 +1049,7 @@ interface INetFwRule : IDispatch
+ 
+ 
+ // Provides access to the dynamic edge properties of a rule.
++_Win32_AnnotateInterface_(INetFwRule2, _Win32_SupportedOS_Windows7_)
+ [
+    local,
+    object,
+@@ -1062,6 +1073,7 @@ interface INetFwRule2 : INetFwRule
+ 
+ 
+ // Provides access to the lowbox properties of a rule.
++_Win32_AnnotateInterface_(INetFwRule3, _Win32_SupportedOS_Windows8_)
+ [
+    local,
+    object,
+@@ -1136,6 +1148,7 @@ interface INetFwRule3 : INetFwRule2
+ // Provides access to a collection of rules in the specified profile. An instance
+ // of this interface is retrieved through the Rules property of the INetFwPolicy2
+ // interface. All configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwRules, _Win32_SupportedOS_WindowsVista_)
+ [
+    local,
+    object,
+@@ -1183,6 +1196,7 @@ interface INetFwRules : IDispatch
+ // Provides access to the service hardening firewall policy. Instances of this
+ // interface are retrieved through the ServiceRestriction property of the
+ // INetFwPolicy2 interface. All configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwServiceRestriction, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -1220,6 +1234,7 @@ interface INetFwServiceRestriction : IDispatch
+ // are retrieved through the CurrentProfile property or GetProfileByType method
+ // of the INetFwPolicy interface. All configuration changes take effect
+ // immediately.
++_Win32_AnnotateInterface_(INetFwProfile, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(174A0DDA-E9F9-449D-993B-21AB667CA456),
+@@ -1312,6 +1327,7 @@ interface INetFwProfile : IDispatch
+ // Provides access to a firewall policy. Instances of this interface are
+ // retrieved through the LocalPolicy method of the INetFwMgr interface. All
+ // configuration changes take effect immediately.
++_Win32_AnnotateInterface_(INetFwPolicy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(D46D2478-9AC9-4008-9DC7-5563CE5536CC),
+@@ -1336,6 +1352,7 @@ interface INetFwPolicy : IDispatch
+ // Provides access to the firewall settings for a computer. This interface is
+ // supported by the HNetCfg.FwPolicy2 COM object. All configuration changes take
+ // effect immediately.
++_Win32_AnnotateInterface_(INetFwPolicy2, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -1496,6 +1513,7 @@ interface INetFwPolicy2 : IDispatch
+ // Provides access to the firewall settings for a computer. This interface is
+ // supported by the HNetCfg.FwMgr COM object. All configuration changes take
+ // effect immediately.
++_Win32_AnnotateInterface_(INetFwMgr, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(F7898AF5-CAC4-4632-A2EC-DA06E5111AF2),
+@@ -1574,6 +1592,7 @@ interface INetFwMgr : IDispatch
+ }
+ 
+ // Provides access to the properties of a third-party firewall registration.
++_Win32_AnnotateInterface_(INetFwProduct, _Win32_SupportedOS_Windows7_)
+ [
+    local,
+    object,
+@@ -1616,6 +1635,7 @@ interface INetFwProduct : IDispatch
+ // Provides access to the collection of third-party firewalls registered with
+ // the Windows Firewall. This interface is supported by the HNetCfg.FwProducts
+ // COM object.
++_Win32_AnnotateInterface_(INetFwProducts, _Win32_SupportedOS_Windows7_)
+ [
+    local,
+    object,

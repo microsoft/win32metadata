@@ -1,0 +1,140 @@
+diff --git a/um/bdaiface.idl b/um/bdaiface.idl
+index dd7af9a9..1a823a2b 100644
+--- a/um/bdaiface.idl
++++ b/um/bdaiface.idl
+@@ -15,6 +15,7 @@
+ //---------------------------------------------------------------------
+ // IUnknown import idl
+ //---------------------------------------------------------------------
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -782,6 +783,7 @@ interface IBDA_AutoDemodulate : IUnknown
+ //---------------------------------------------------------------------
+ // IBDA_AutoDemodulateEx interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_AutoDemodulateEx, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(34518D13-1182-48e6-B28F-B24987787326),
+@@ -1075,6 +1077,7 @@ typedef struct {
+ } PID_MAP ;
+ #endif // REMOVE_THESE
+ 
++_Win32_AnnotateInterface_(IEnumPIDMap, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid (afb6c2a2-2c41-11d3-8a60-0000f81e0e4a),
+@@ -1108,6 +1111,7 @@ interface IEnumPIDMap : IUnknown
+ // IMPEG2PIDMap interface
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IMPEG2PIDMap, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid (afb6c2a1-2c41-11d3-8a60-0000f81e0e4a),
+@@ -1195,6 +1199,7 @@ interface IMPEG2PIDMap : IUnknown
+ // Currently implemented on the TIF and registered as a service by TIF.
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IBDA_EasMessage, _Win32_SupportedOS_WindowsVista_)
+     [
+          object,
+      uuid(D806973D-3EBE-46de-8FBB-6358FE784208),
+@@ -1242,6 +1247,7 @@ cpp_quote("#define SID_BDA_TransportStreamInfo __uuidof(IBDA_TransportStreamInfo
+ //---------------------------------------------------------------------
+ // IBDA_ConditionalAccess interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_ConditionalAccess, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(CD51F1E0-7BE9-4123-8482-A2A796C0A6B0),
+@@ -1350,6 +1356,7 @@ cpp_quote("#define SID_BDA_DiagnosticProperties __uuidof(IBDA_DiagnosticProperti
+ // IBDA_DRM interface
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IBDA_DRM, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(F98D88B0-1992-4cd6-A6D9-B9AFAB99330D),
+@@ -1414,6 +1421,7 @@ cpp_quote("#define SID_BDA_NameValueService __uuidof(IBDA_NameValueService)")
+ //---------------------------------------------------------------------
+ // IBDA_ConditionalAccessEx interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_ConditionalAccessEx, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(497C3418-23CB-44ba-BB62-769F506FCEA7),
+@@ -1472,6 +1480,7 @@ cpp_quote("#define SID_BDA_ConditionalAccessEx __uuidof(IBDA_ConditionalAccessEx
+ //---------------------------------------------------------------------
+ // IBDA_ISDBConditionalAccess interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_ISDBConditionalAccess, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(5E68C627-16C2-4e6c-B1E2-D00170CDAA0F),
+@@ -1495,6 +1504,7 @@ cpp_quote("#define SID_BDA_ISDBConditionalAccess __uuidof(IBDA_ISDBConditionalAc
+ //---------------------------------------------------------------------
+ // IBDA_EventingService interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_EventingService, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(207C413F-00DC-4c61-BAD6-6FEE1FF07064),
+@@ -1554,6 +1564,7 @@ cpp_quote("0xfd456373, 0x3323, 0x4090, 0xad, 0xca, 0x8e, 0xd4, 0x5f, 0x55, 0xcf,
+ //---------------------------------------------------------------------
+ // IBDA_Encoder interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_Encoder, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(3a8bad59-59fe-4559-a0ba-396cfaa98ae3),
+@@ -1648,6 +1659,7 @@ cpp_quote("#define PBDA_Encoder_BitrateMode_Average                 0x00000003")
+ //---------------------------------------------------------------------
+ // IBDA_FDC interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_FDC, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(138adc7e-58ae-437f-b0b4-c9fe19d5b4ac),
+@@ -1721,6 +1733,7 @@ cpp_quote("0xe7dbf9a0, 0x22ab, 0x4047, 0x8e, 0x67, 0xef, 0x9a, 0xd5, 0x4, 0xe7,
+ //---------------------------------------------------------------------
+ // IBDA_GuideDataDeliveryService interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_GuideDataDeliveryService, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(C0AFCB73-23E7-4bc6-BAFA-FDC167B4719F),
+@@ -1936,6 +1949,7 @@ cpp_quote("#define SID_BDA_WMDRMTuner __uuidof(IBDA_WMDRMTuner)")
+ //---------------------------------------------------------------------
+ // IBDA_DRIDRMService interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_DRIDRMService, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(1F9BC2A5-44A3-4c52-AAB1-0BBCE5A1381D),
+@@ -2026,6 +2040,7 @@ cpp_quote("#define SID_BDA_DRIWMDRMSession __uuidof(IBDA_DRIWMDRMSession)")
+ //---------------------------------------------------------------------
+ // IBDA_MUX interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_MUX, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(942AAFEC-4C05-4c74-B8EB-8706C2A4943F),
+@@ -2083,6 +2098,7 @@ cpp_quote("#define SID_BDA_TransportStreamSelector __uuidof(IBDA_TransportStream
+ //---------------------------------------------------------------------
+ // IBDA_UserActivityService interface
+ //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IBDA_UserActivityService, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(53B14189-E478-4b7a-A1FF-506DB4B99DFE),
+@@ -2151,6 +2167,7 @@ interface IESEvents : IUnknown
+ 	HRESULT OnESEventReceived([in] GUID guidEventType, [in] IESEvent* pESEvent);
+ };
+ 
++_Win32_AnnotateInterface_(IBroadcastEvent, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     hidden,

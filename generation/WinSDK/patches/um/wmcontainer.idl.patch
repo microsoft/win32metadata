@@ -1,0 +1,92 @@
+diff --git a/um/wmcontainer.idl b/um/wmcontainer.idl
+index d0efb922..e5d51d11 100644
+--- a/um/wmcontainer.idl
++++ b/um/wmcontainer.idl
+@@ -5,6 +5,7 @@
+ //
+ //*@@@---@@@@******************************************************************
+ //
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ import "mfidl.idl";
+@@ -23,6 +24,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ interface IMFASFProfile;
+ 
++_Win32_AnnotateInterface_(IMFASFContentInfo, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(B1DCA5CD-D5DA-4451-8E9E-DB5C59914EAD),
+@@ -83,6 +85,7 @@ interface IMFASFStreamConfig;
+ interface IMFASFMutualExclusion;
+ interface IMFASFStreamPrioritization;
+ 
++_Win32_AnnotateInterface_(IMFASFProfile, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(D267BF6A-028B-4e0d-903D-43F0EF82D0D4),
+@@ -150,6 +153,7 @@ interface IMFASFProfile : IMFAttributes
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFASFStreamConfig, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(9E8AE8D2-DBBD-4200-9ACA-06E6DF484913),
+@@ -209,6 +213,7 @@ interface IMFASFStreamConfig : IMFAttributes
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFASFMutualExclusion, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(12558291-E399-11D5-BC2A-00B0D0F3F4AB),
+@@ -253,6 +258,7 @@ interface IMFASFMutualExclusion : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFASFStreamPrioritization, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(699bdc27-bbaf-49ff-8e38-9c39c9b5e088),
+@@ -347,6 +353,7 @@ typedef struct _ASF_INDEX_DESCRIPTOR
+ 
+ }   ASF_INDEX_DESCRIPTOR;
+ 
++_Win32_AnnotateInterface_(IMFASFIndexer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(53590F48-DC3B-4297-813F-787761AD7B3E),
+@@ -472,6 +479,7 @@ cpp_quote("        /* out */     IMFByteStream        **pIIndexByteStream);")
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFASFSplitter, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(12558295-E399-11D5-BC2A-00B0D0F3F4AB),
+@@ -1007,6 +1015,7 @@ typedef struct ASF_MUX_STATISTICS
+ 
+ } ASF_MUX_STATISTICS;
+ 
++_Win32_AnnotateInterface_(IMFASFMultiplexer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(57BDD80A-9B38-4838-B737-C58F670D7D4F),
+@@ -1107,6 +1116,7 @@ typedef enum ASF_SELECTION_STATUS
+ 
+ } ASF_SELECTION_STATUS;
+ 
++_Win32_AnnotateInterface_(IMFASFStreamSelector, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(d01bad4a-4fa0-4a60-9349-c27e62da9d41),
+@@ -1379,6 +1389,7 @@ cpp_quote( "// "  )
+ 
+ 
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
++_Win32_AnnotateInterface_(IMFDRMNetHelper, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(3D1FF0EA-679A-4190-8D46-7FA69E8C7E15)

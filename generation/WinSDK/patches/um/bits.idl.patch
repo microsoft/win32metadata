@@ -1,0 +1,68 @@
+diff --git a/um/bits.idl b/um/bits.idl
+index 65af0618..43600d3c 100644
+--- a/um/bits.idl
++++ b/um/bits.idl
+@@ -10,6 +10,7 @@
+ //
+ //=======================================================================
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -31,6 +32,7 @@ cpp_quote("#define BG_SIZE_UNKNOWN     (UINT64)(-1)")
+ // Marshalled interfaces
+ // =============================
+ 
++_Win32_AnnotateInterface_(IBackgroundCopyFile, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(01b7bd23-fb88-4a77-8490-5891d3e4653a),
+     odl
+@@ -55,6 +57,7 @@ interface IBackgroundCopyFile : IUnknown
+ 
+ //--------------------------------------------------------------------
+ //
++_Win32_AnnotateInterface_(IEnumBackgroundCopyFiles, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(ca51e165-c365-424c-8d41-24aaa4ff3c40),
+     helpstring("IEnumBackgroundCopyFiles Interface"),
+@@ -78,6 +81,7 @@ interface IEnumBackgroundCopyFiles : IUnknown
+ //--------------------------------------------------------------------
+ //
+ 
++_Win32_AnnotateInterface_(IBackgroundCopyError, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(19c613a0-fcb8-4f28-81ae-897c3d078f81),
+     helpstring("error object for IBackgroundCopyJob"),
+@@ -121,6 +125,7 @@ interface IBackgroundCopyError : IUnknown
+ 
+ // ==============================================
+ // Job Interface
++_Win32_AnnotateInterface_(IBackgroundCopyJob, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(37668d37-507e-4160-9316-26306d150b12),
+     helpstring("IBackgroundCopyJob Interface"),
+@@ -331,6 +336,7 @@ interface IBackgroundCopyJob : IUnknown
+ // ==============================================
+ // IEnumJobs Interface
+ //     This interface allows enumerating the jobs under a Job
++_Win32_AnnotateInterface_(IEnumBackgroundCopyJobs, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(1af4f612-3b71-466f-8f58-7b6f73ac57ad),
+     helpstring("IEnumBackgroundCopyJobs2 Interface"),
+@@ -362,6 +368,7 @@ cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
+ // IBackgroundCallback Interface
+ //     This interface is implemented by the client and is used by the queue manager
+ //     to supply progress information to the client.
++_Win32_AnnotateInterface_(IBackgroundCopyCallback, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22),
+ #if !defined( BITS_DONT_USE_ASYNC_DCOM )
+@@ -396,6 +403,7 @@ interface IBackgroundCopyCallback : IUnknown
+ //
+ // IBackgroundCopyManager is the "root" interface to the background file copy component.
+ //
++_Win32_AnnotateInterface_(IBackgroundCopyManager, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c),
+     helpstring("Background Copy interface"),

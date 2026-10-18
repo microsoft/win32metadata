@@ -1,0 +1,60 @@
+diff --git a/um/windowsstoragecom.idl b/um/windowsstoragecom.idl
+index 435f2a19..9bce1398 100644
+--- a/um/windowsstoragecom.idl
++++ b/um/windowsstoragecom.idl
+@@ -4,6 +4,7 @@
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ //
+ //--------------------------------------------------------------------------
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -12,6 +13,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ import "oaidl.idl";
+ import "shobjidl_core.idl";
+ 
++_Win32_AnnotateInterface_(IRandomAccessStreamFileAccessMode, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(332E5848-2E15-458E-85C4-C911C0C3D6F4),
+@@ -21,6 +23,7 @@ interface IRandomAccessStreamFileAccessMode : IUnknown
+     HRESULT GetMode([out] DWORD* fileAccessMode); // Windows::Storage::FileAccessMode
+ }
+ 
++_Win32_AnnotateInterface_(IUnbufferedFileHandleOplockCallback, _Win32_SupportedOS_10240_)
+ [
+     uuid(D1019A0E-6243-4329-8497-2E75894D7710),
+     object,
+@@ -31,6 +34,7 @@ interface IUnbufferedFileHandleOplockCallback : IUnknown
+     HRESULT OnBrokenCallback();
+ }
+ 
++_Win32_AnnotateInterface_(IUnbufferedFileHandleProvider, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(A65C9109-42AB-4B94-A7B1-DD2E4E68515E),
+@@ -91,6 +95,7 @@ typedef [v1_enum] enum HANDLE_CREATION_OPTIONS
+     HCO_TRUNCATE_EXISTING = 0x5,
+ } HANDLE_CREATION_OPTIONS;
+ 
++_Win32_AnnotateInterface_(IOplockBreakingHandler, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(826ABE3D-3ACD-47D3-84F2-88AAEDCF6304),
+@@ -100,6 +105,7 @@ interface IOplockBreakingHandler : IUnknown
+     HRESULT OplockBreaking();
+ }
+ 
++_Win32_AnnotateInterface_(IStorageItemHandleAccess, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(5CA296B2-2C25-4D22-B785-B885C8201E6A),
+@@ -115,6 +121,7 @@ interface IStorageItemHandleAccess : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IStorageFolderHandleAccess, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(DF19938F-5462-48A0-BE65-D2A3271A08D6),

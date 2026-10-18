@@ -1,0 +1,225 @@
+diff --git a/um/mfobjects.idl b/um/mfobjects.idl
+index a4e9e7e1..ac214fdb 100644
+--- a/um/mfobjects.idl
++++ b/um/mfobjects.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //*@@@+++@@@@******************************************************************
+@@ -56,6 +57,7 @@ typedef enum _MF_ATTRIBUTES_MATCH_TYPE {
+     MF_ATTRIBUTES_MATCH_SMALLER         = 4,    // do all the attributes in the type that has fewer attributes match?
+ } MF_ATTRIBUTES_MATCH_TYPE;
+ 
++_Win32_AnnotateInterface_(IMFAttributes, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(2cd2d921-c447-44a7-a13c-4adabfc247e3)
+@@ -1011,6 +1013,7 @@ cpp_quote( "  IStream * pStm);")
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaBuffer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(045FA593-8799-42b8-BC8D-8968C6453507),
+@@ -1124,6 +1127,7 @@ interface IMFMediaBuffer : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSample, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(c40a00f2-b93a-4d80-ae8c-5a1c634f58e4),
+@@ -1361,6 +1365,7 @@ interface IMFSample : IMFAttributes
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMF2DBuffer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7DC9D5F9-9ED9-44ec-9BBF-0600BB589FBB),
+@@ -1481,6 +1486,7 @@ typedef enum _MF2DBuffer_LockFlags
+     MF2DBuffer_LockFlags_ForceDWORD         = 0x7FFFFFFF
+ } MF2DBuffer_LockFlags;
+ 
++_Win32_AnnotateInterface_(IMF2DBuffer2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(33ae5ea6-4316-436f-8ddd-d73d22f829ec),
+@@ -1501,6 +1507,7 @@ interface IMF2DBuffer2 :  IMF2DBuffer
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFDXGIBuffer, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(e7174cfa-1c9e-48b1-8866-626226bfc258),
+@@ -1569,6 +1576,7 @@ interface IMFDXGICrossAdapterBuffer : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaType, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(44ae0fa8-ea31-4109-8d2e-4cae4997c555)
+@@ -1633,6 +1641,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFAudioMediaType, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(26a0adc3-ce26-4672-9304-69552edd3faf),
+@@ -2094,6 +2103,7 @@ cpp_quote( "" )
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFVideoMediaType, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(b99f381f-a8f9-47a2-a5af-ca3a225a3890),
+@@ -2134,6 +2144,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFAsyncResult, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(ac6b7889-0740-4d51-8619-905994a55cc6)
+@@ -2190,6 +2201,7 @@ interface IMFAsyncResult : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFAsyncCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(a27003cf-2354-4f2a-8d6a-ab7cff15437e),
+@@ -2254,6 +2266,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFAsyncCallbackLogging, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(c7a4dca1-f5f0-47b6-b92b-bf0106d25791),
+@@ -3548,6 +3561,7 @@ enum
+ 
+ typedef DWORD MediaEventType;
+ 
++_Win32_AnnotateInterface_(IMFMediaEvent, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(DF598932-F10C-4E39-BBA2-C308F101DAA3)
+@@ -3610,6 +3624,7 @@ cpp_quote( "#define MF_EVENT_FLAG_NO_WAIT 0x00000001" )
+ 
+ interface IMFRemoteAsyncCallback;
+ 
++_Win32_AnnotateInterface_(IMFMediaEventGenerator, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(2CD0BD52-BCD5-4B89-B62C-EADC0C031E7D)
+@@ -3745,6 +3760,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
+ 
+ 
++_Win32_AnnotateInterface_(IMFRemoteAsyncCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(a27003d0-2354-4f2a-8d6a-ab7cff15437e),
+@@ -3779,6 +3795,7 @@ typedef enum _MFBYTESTREAM_SEEK_ORIGIN
+ } MFBYTESTREAM_SEEK_ORIGIN;
+ 
+ 
++_Win32_AnnotateInterface_(IMFByteStream, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(ad4c1b00-4bf7-422f-9175-756693d9130d),
+@@ -4109,6 +4126,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+ // {770e8e77-4916-441c-a9a7-b342d0eebc71}
+ cpp_quote( "EXTERN_GUID(CLSID_MFByteStreamProxyClassFactory, 0x770e8e77, 0x4916, 0x441c, 0xa9, 0xa7, 0xb3, 0x42, 0xd0, 0xee, 0xbc, 0x71 );" )
+ 
++_Win32_AnnotateInterface_(IMFByteStreamProxyClassFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(a6b43f84-5c0a-42e8-a44d-b1857a76992f)
+@@ -4162,6 +4180,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFSampleOutputStream, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(8feed468-6f7e-440d-869a-49bdd283ad0d),
+@@ -4197,6 +4216,7 @@ interface IMFSampleOutputStream : IUnknown
+ ////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFCollection, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5BC8A76B-869A-46a3-9B03-FA218A66AEBE)
+@@ -4232,6 +4252,7 @@ interface IMFCollection : IUnknown
+ ////////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaEventQueue, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(36f846fc-2256-48b6-b58e-e2b638316581),
+@@ -4354,6 +4375,7 @@ interface IMFMediaEventQueue : IUnknown
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFActivate, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7FEE9E9A-4A89-47a6-899C-B6A53A70FB67),
+@@ -4419,6 +4441,7 @@ typedef enum _MF_Plugin_Type {
+     MF_Plugin_Type_Other                = (DWORD)-1,
+ } MF_Plugin_Type;
+ 
++_Win32_AnnotateInterface_(IMFPluginControl, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     local,
+@@ -4562,6 +4585,7 @@ typedef enum MF_PLUGIN_CONTROL_POLICY
+     MF_PLUGIN_CONTROL_POLICY_USE_WEB_PLUGINS_EDGEMODE = 3
+ } MF_PLUGIN_CONTROL_POLICY;
+ 
++_Win32_AnnotateInterface_(IMFPluginControl2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,
+@@ -4582,6 +4606,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFDXGIDeviceManager, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,
+@@ -4647,6 +4672,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)")
+ 
++_Win32_AnnotateInterface_(IMFMuxStreamAttributesManager, _Win32_SupportedOS_15063_)
+ [
+     object,
+     local,
+@@ -4669,6 +4695,7 @@ interface IMFMuxStreamAttributesManager : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IMFMuxStreamMediaTypeManager, _Win32_SupportedOS_15063_)
+ [
+     object,
+     local,
+@@ -4708,6 +4735,7 @@ interface IMFMuxStreamMediaTypeManager : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IMFMuxStreamSampleManager, _Win32_SupportedOS_15063_)
+ [
+     object,
+     local,

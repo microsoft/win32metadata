@@ -1,0 +1,92 @@
+diff --git a/um/wincodecsdk.idl b/um/wincodecsdk.idl
+index 979dfd24..e775bdc6 100644
+--- a/um/wincodecsdk.idl
++++ b/um/wincodecsdk.idl
+@@ -9,6 +9,7 @@
+ //
+ //------------------------------------------------------------------------
+ 
++#include <sal.h>
+ import "wtypes.idl";
+ import "wincodec.idl";
+ 
+@@ -204,6 +205,7 @@ typedef [public] enum WICPersistOptions
+     IWICMetadataBlockReader
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataBlockReader, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(FEAA2A8D-B3F3-43E4-B25C-D1DE990A1AE1)
+@@ -233,6 +235,7 @@ interface IWICMetadataBlockReader : IUnknown
+     IWICMetadataBlockWriter
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataBlockWriter, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(08FB9676-B444-41E8-8DBE-6A53A542BFF1)
+@@ -266,6 +269,7 @@ interface IWICMetadataBlockWriter : IWICMetadataBlockReader
+     IWICMetadataReader
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataReader, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(9204FE99-D8FC-4FD5-A001-9536B067A899)
+@@ -307,6 +311,7 @@ interface IWICMetadataReader : IUnknown
+     IWICMetadataWriter
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataWriter, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(F7836E16-3BE0-470B-86BB-160D0AECD7DE)
+@@ -341,6 +346,7 @@ interface IWICMetadataWriter : IWICMetadataReader
+     IWICStreamProvider
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICStreamProvider, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(449494BC-B468-4927-96D7-BA90D31AB505)
+@@ -368,6 +374,7 @@ interface IWICStreamProvider : IUnknown
+     IWICPersistStream
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICPersistStream, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(00675040-6908-45F8-86A3-49C7DFD6D9AD)
+@@ -392,6 +399,7 @@ interface IWICPersistStream : IPersistStream
+     IWICMetadataHandlerInfo
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataHandlerInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(ABA958BF-C672-44D1-8D61-CE6DF2E682C2)
+@@ -452,6 +460,7 @@ typedef struct WICMetadataPattern
+     IWICMetadataReaderInfo
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataReaderInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(EEBF1F5B-07C1-4447-A3AB-22ACAF78A804)
+@@ -502,6 +511,7 @@ typedef struct WICMetadataHeader
+     IWICMetadataWriterInfo
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICMetadataWriterInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(B22E3FBA-3925-4323-B5C1-9EBFC430F236)
+@@ -529,6 +539,7 @@ interface IWICMetadataWriterInfo : IWICMetadataHandlerInfo
+     IWICComponentFactory
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IWICComponentFactory, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(412D0C3A-9650-44FA-AF5B-DD2A06C8E8FB)

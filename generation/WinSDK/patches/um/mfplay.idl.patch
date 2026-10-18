@@ -1,0 +1,36 @@
+diff --git a/um/mfplay.idl b/um/mfplay.idl
+index 62b58e9d..c6168649 100644
+--- a/um/mfplay.idl
++++ b/um/mfplay.idl
+@@ -5,6 +5,7 @@
+ //
+ //*@@@---@@@@******************************************************************
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -216,6 +217,7 @@ cpp_quote( "            _Out_opt_ IMFPMediaPlayer ** ppMediaPlayer );" )
+ //////////////////////////////////////////////////////////////////////////////
+ /// <summary>
+ /// </summary>
++_Win32_AnnotateInterface_(IMFPMediaPlayer, _Win32_SupportedOS_Windows7_)
+ [
+     local,
+     object,
+@@ -428,6 +430,7 @@ interface IMFPMediaPlayer : IUnknown
+ cpp_quote( "EXTERN_GUID( MFP_POSITIONTYPE_100NS, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0 );" )  // GUID_NULL
+ 
+ //////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFPMediaItem, _Win32_SupportedOS_Windows7_)
+ [
+     local,
+     object,
+@@ -803,6 +806,7 @@ cpp_quote( "#define MFP_GET_ACQUIRE_USER_CREDENTIAL_EVENT( pHdr )
+ //////////////////////////////////////////////////////////////////////////////
+ /// <summary>
+ /// </summary>
++_Win32_AnnotateInterface_(IMFPMediaPlayerCallback, _Win32_SupportedOS_Windows7_)
+ [
+     local,
+     object,

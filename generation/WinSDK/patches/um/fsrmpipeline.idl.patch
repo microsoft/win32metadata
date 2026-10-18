@@ -1,0 +1,148 @@
+diff --git a/um/fsrmpipeline.idl b/um/fsrmpipeline.idl
+index 5e0f95e7..3e32c7e8 100644
+--- a/um/fsrmpipeline.idl
++++ b/um/fsrmpipeline.idl
+@@ -2,6 +2,7 @@
+ //        Imports
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -84,6 +85,7 @@ const ULONG FsrmMaxNumberPropertyDefinitions = 100;
+ //        Interfaces
+ //
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyDefinition, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(ede0150f-e9a3-419c-877c-01fe5d24c5d3),
+@@ -133,6 +135,7 @@ interface IFsrmPropertyDefinition : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyDefinition2, _Win32_SupportedOS_Server2012_)
+ [
+     object,
+     uuid(47782152-d16c-4229-b4e1-0ddfe308b9f6),
+@@ -164,6 +167,7 @@ interface IFsrmPropertyDefinition2 : IFsrmPropertyDefinition {
+     HRESULT ValueDefinitions([out, retval] IFsrmCollection **valueDefinitions);
+ };
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyDefinitionValue, _Win32_SupportedOS_Server2012_)
+ [
+     object,
+     uuid(E946D148-BD67-4178-8E22-1C44925ED710),
+@@ -190,6 +194,7 @@ interface IFsrmPropertyDefinitionValue : IDispatch
+     HRESULT UniqueID([out, retval] BSTR *uniqueID);
+ };
+ 
++_Win32_AnnotateInterface_(IFsrmProperty, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(4a73fee4-4102-4fcc-9ffb-38614f9ee768),
+@@ -220,6 +225,7 @@ interface IFsrmProperty : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmRule, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(cb0df960-16f5-4495-9079-3f9360d831df),
+@@ -277,6 +283,7 @@ interface IFsrmRule : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmClassificationRule, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(afc052c2-5315-45ab-841b-c6db0e120148),
+@@ -312,6 +319,7 @@ interface IFsrmClassificationRule : IFsrmRule
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPipelineModuleDefinition, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(515c1277-2c81-440e-8fcf-367921ed4f59),
+@@ -393,6 +401,7 @@ interface IFsrmPipelineModuleDefinition : IFsrmObject
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmClassifierModuleDefinition, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(bb36ea26-6318-4b8c-8592-f72dd602e7a5),
+@@ -428,6 +437,7 @@ interface IFsrmClassifierModuleDefinition : IFsrmPipelineModuleDefinition
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmStorageModuleDefinition, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(15a81350-497d-4aba-80e9-d4dbcc5521fe),
+@@ -463,6 +473,7 @@ interface IFsrmStorageModuleDefinition : IFsrmPipelineModuleDefinition
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmClassificationManager, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(d2dc89da-ee91-48a0-85d8-cc72a56f7d04),
+@@ -609,6 +620,7 @@ interface IFsrmClassificationManager : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmClassificationManager2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(0004c1c9-127e-4765-ba07-6a3147bca112),
+@@ -636,6 +648,7 @@ interface IFsrmClassificationManager2 : IFsrmClassificationManager
+ //
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyBag, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(774589d1-d300-4f7a-9a24-f7b766800250),
+@@ -743,6 +756,7 @@ interface IFsrmPropertyBag : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPropertyBag2, _Win32_SupportedOS_Server2012_)
+ [
+     object,
+     uuid(0e46bdbd-2402-4fed-9c30-9266e6eb2cc9),
+@@ -769,6 +783,7 @@ interface IFsrmPropertyBag2 : IFsrmPropertyBag
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPipelineModuleImplementation, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(b7907906-2b02-4cb5-84a9-fdf54613d6cd),
+@@ -792,6 +807,7 @@ interface IFsrmPipelineModuleImplementation : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmClassifierModuleImplementation, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(4c968fc6-6edb-4051-9c18-73b7291ae106),
+@@ -843,6 +859,7 @@ interface IFsrmClassifierModuleImplementation : IFsrmPipelineModuleImplementatio
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmStorageModuleImplementation, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(0af4a0da-895a-4e50-8712-a96724bcec64),
+@@ -867,6 +884,7 @@ interface IFsrmStorageModuleImplementation : IFsrmPipelineModuleImplementation
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFsrmPipelineModuleConnector, _Win32_SupportedOS_Server2008_)
+ [
+     object,
+     uuid(c16014f3-9aa1-46b3-b0a7-ab146eb205f2),

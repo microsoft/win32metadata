@@ -1,0 +1,68 @@
+diff --git a/um/dxva2api.idl b/um/dxva2api.idl
+index 5ca7bc2e..ec2e7ca3 100644
+--- a/um/dxva2api.idl
++++ b/um/dxva2api.idl
+@@ -5,6 +5,7 @@
+ // Copyright (c) 1999 - 2005, Microsoft Corporation.  All rights reserved.
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "unknwn.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -631,6 +632,7 @@ interface IDirectXVideoProcessor;
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirect3DDeviceManager9, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(a0cade0f-06d5-4cf4-a1c7-f3cdd725aa75),
+@@ -679,6 +681,7 @@ interface IDirect3DDeviceManager9 : IUnknown
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoAccelerationService, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fc51a550-d5e7-11d9-af55-00054e43ff02),
+@@ -705,6 +708,7 @@ interface IDirectXVideoAccelerationService : IUnknown
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoDecoderService, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fc51a551-d5e7-11d9-af55-00054e43ff02),
+@@ -747,6 +751,7 @@ interface IDirectXVideoDecoderService : IDirectXVideoAccelerationService
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoProcessorService, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fc51a552-d5e7-11d9-af55-00054e43ff02),
+@@ -817,6 +822,7 @@ interface IDirectXVideoProcessorService : IDirectXVideoAccelerationService
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoDecoder, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(f2b0810a-fd00-43c9-918c-df94e2d8ef7d),
+@@ -867,6 +873,7 @@ interface IDirectXVideoDecoder : IUnknown
+ //
+ //  TBD.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoProcessor, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8c3a39f0-916e-4690-804f-4c8001355d25),
+@@ -939,6 +946,7 @@ typedef enum
+ //  in DirectShow disconnecting 2 filters invalidates any prior agreement between
+ //  the two filters about the surface type to use for media samples.
+ //
++_Win32_AnnotateInterface_(IDirectXVideoMemoryConfiguration, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(b7f916dd-db3b-49c1-84d7-e45ef99ec726),

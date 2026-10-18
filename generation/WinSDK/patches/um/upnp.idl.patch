@@ -1,0 +1,156 @@
+diff --git a/um/upnp.idl b/um/upnp.idl
+index 3b6086fe..5a214a26 100644
+--- a/um/upnp.idl
++++ b/um/upnp.idl
+@@ -7,6 +7,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -178,6 +179,7 @@ cpp_quote("#endif")
+ #define DISPID_UPNPDESCRIPTIONDOC_DEVICEBYUDN    (DISPID_UPNPDESCRIPTIONDOC + 6)
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceFinder, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(ADDA3D55-6F72-4319-BFF9-18600A539B10),
+@@ -216,6 +218,7 @@ interface IUPnPDeviceFinder : IDispatch
+                       [out, retval] IUPnPDevice ** pDevice);
+ };
+ 
++_Win32_AnnotateInterface_(IUPnPAddressFamilyControl, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(E3BF6178-694E-459F-A5A6-191EA0FFA1C7),
+@@ -234,6 +237,7 @@ interface IUPnPAddressFamilyControl : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPHttpHeaderControl, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(0405AF4F-8B5C-447C-80F2-B75984A31F3C),
+@@ -249,6 +253,7 @@ interface IUPnPHttpHeaderControl : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceFinderCallback, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(415A984A-88B3-49F3-92AF-0508BEDF0D6C),
+@@ -266,6 +271,7 @@ interface IUPnPDeviceFinderCallback : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPServices, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(3F8C8E9E-9A7A-4DC8-BC41-FF31FA374956),
+@@ -288,6 +294,7 @@ interface IUPnPServices : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPService, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(A295019C-DC65-47DD-90DC-7FE918A1AB44),
+@@ -330,6 +337,7 @@ interface IUPnPService : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPAsyncResult, _Win32_SupportedOS_Windows8_)
+ [
+    object,
+    uuid(4D65FD08-D13E-4274-9C8B-DD8D028C8644),
+@@ -345,6 +353,7 @@ interface IUPnPAsyncResult : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPServiceAsync, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(098BDAF5-5EC1-49e7-A260-B3A11DD8680C),
+@@ -414,6 +423,7 @@ interface IUPnPServiceAsync : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPServiceCallback, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(31fadca9-ab73-464b-b67d-5c1d0f83c8b8),
+@@ -431,6 +441,7 @@ interface IUPnPServiceCallback : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPServiceEnumProperty, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(38873B37-91BB-49f4-B249-2E8EFBB8A816),
+@@ -443,6 +454,7 @@ interface IUPnPServiceEnumProperty: IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPServiceDocumentAccess, _Win32_SupportedOS_Windows8_)
+ [
+    object,
+    uuid(21905529-0A5E-4589-825D-7E6D87EA6998),
+@@ -456,6 +468,7 @@ interface IUPnPServiceDocumentAccess: IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPDevices, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(FDBC0C73-BDA3-4C66-AC4F-F2D96FDAD68C),
+@@ -479,6 +492,7 @@ interface IUPnPDevices : IDispatch
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPDevice, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(3D44D0D1-98C9-4889-ACD1-F9D674BF2221),
+@@ -571,6 +585,7 @@ interface IUPnPDevice : IDispatch
+     HRESULT Services([out, retval] IUPnPServices ** ppusServices);
+ };
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceDocumentAccess, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(E7772804-3287-418e-9072-CF2B47238981),
+@@ -581,6 +596,7 @@ interface IUPnPDeviceDocumentAccess : IUnknown
+     HRESULT GetDocumentURL([out, retval] BSTR * pbstrDocument);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceDocumentAccessEx, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(C4BC4050-6178-4BD1-A4B8-6398321F3247),
+@@ -592,6 +608,7 @@ interface IUPnPDeviceDocumentAccessEx : IUnknown
+ }
+ 
+ 
++_Win32_AnnotateInterface_(IUPnPDescriptionDocument, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(11d1c1b2-7daa-4c9e-9595-7f82ed206d1e),
+@@ -633,6 +650,7 @@ interface IUPnPDescriptionDocument : IDispatch
+                         [out, retval] IUPnPDevice ** ppudDevice);
+ };
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceFinderAddCallbackWithInterface, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(983dfc0b-1796-44df-8975-ca545b620ee5),
+@@ -646,6 +664,7 @@ interface IUPnPDeviceFinderAddCallbackWithInterface : IUnknown
+         [in] GUID * pguidInterface);
+ };
+ 
++_Win32_AnnotateInterface_(IUPnPDescriptionDocumentCallback, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(77394c69-5486-40d6-9bc3-4991983e02da),

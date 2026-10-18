@@ -1,0 +1,41 @@
+diff --git a/shared/dxgi.idl b/shared/dxgi.idl
+index 1899f8f2..d75b658c 100644
+--- a/shared/dxgi.idl
++++ b/shared/dxgi.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ 
+@@ -303,6 +304,7 @@ interface IDXGISurface :
+ // The DXGISurface1
+ //--------------------------------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDXGISurface1, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid( 4AE63092-6327-4c1b-80AE-BFE12EA32B86),
+@@ -550,6 +552,7 @@ interface IDXGIAdapter1;
+ // The DXGIFactory1
+ //--------------------------------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDXGIFactory1, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid( 770aae78-f26f-4dba-a829-253c83d1b387 ),
+@@ -568,6 +571,7 @@ interface IDXGIFactory1 :
+ //--------------------------------------------------------------------------------------------------------
+ // The DXGIAdapter1
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIAdapter1, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid( 29038f61-3839-4626-91fd-086879011a05 ),
+@@ -584,6 +588,7 @@ interface IDXGIAdapter1 :
+ // The DXGIDevice1
+ //--------------------------------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDXGIDevice1, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid( 77db970f-6276-48ba-ba28-070143b4392c ),

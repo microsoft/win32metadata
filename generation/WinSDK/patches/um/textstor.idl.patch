@@ -1,0 +1,57 @@
+diff --git a/um/textstor.idl b/um/textstor.idl
+index e2e7f949..32f42077 100644
+--- a/um/textstor.idl
++++ b/um/textstor.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+-------------------------------------------------------------------------
+@@ -173,6 +174,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITextStoreACP
+ //
++_Win32_AnnotateInterface_(ITextStoreACP, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(28888fe3-c2a0-483a-a3ea-8cb1ce51ff3d),
+@@ -311,6 +313,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITextStoreACP2
+ //
++_Win32_AnnotateInterface_(ITextStoreACP2, _Win32_SupportedOS_Windows8_)
+ [
+   object,
+   uuid(f86ad89f-5fe4-4b8d-bb9f-ef3797a84f1f),
+@@ -440,6 +443,7 @@ interface ITextStoreACP2 : IUnknown
+ //
+ // ITextStoreACPSink
+ //
++_Win32_AnnotateInterface_(ITextStoreACPSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(22d44c94-a419-4542-a272-ae26093ececf),
+@@ -471,6 +475,7 @@ interface ITextStoreACPSink : IUnknown
+ //
+ // IAnchor
+ //
++_Win32_AnnotateInterface_(IAnchor, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(0feb7e34-5a60-4356-8ef7-abdec2ff7cf8),
+@@ -519,6 +524,7 @@ interface IAnchor : IUnknown
+     HRESULT Clone([out] IAnchor **ppaClone);
+ };
+ 
++_Win32_AnnotateInterface_(ITextStoreAnchor, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(9b2077b0-5f18-4dec-bee9-3cc722f5dfe0),
+@@ -651,6 +657,7 @@ interface ITextStoreAnchor : IUnknown
+ //
+ // ITextStoreAnchorSink
+ //
++_Win32_AnnotateInterface_(ITextStoreAnchorSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e905-2021-11d2-93e0-0060b067b86e),

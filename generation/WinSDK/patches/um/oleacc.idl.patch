@@ -1,0 +1,60 @@
+diff --git a/um/oleacc.idl b/um/oleacc.idl
+index 1d722fd8..b2e14786 100644
+--- a/um/oleacc.idl
++++ b/um/oleacc.idl
+@@ -12,6 +12,7 @@
+ //
+ //+-------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -186,6 +187,7 @@ cpp_quote("")
+ #define DO_NO_IMPORTS
+ import "oaidl.idl";
+ 
++_Win32_AnnotateInterface_(IAccessible, _Win32_SupportedOS_Windows2000_)
+ [
+ 	object,
+ 	uuid(618736e0-3c3d-11cf-810c-00aa00389b71),
+@@ -423,6 +425,7 @@ cpp_quote("#endif //STATE_SYSTEM_HASPOPUP")
+ //
+ //
+ 
++_Win32_AnnotateInterface_(IAccessibleHandler, _Win32_SupportedOS_WindowsXP_)
+ [
+ 	object,
+ 	uuid(03022430-ABC4-11d0-BDE2-00AA001A1953),
+@@ -439,6 +442,7 @@ interface IAccessibleHandler : IUnknown
+ }
+ 
+ 
++_Win32_AnnotateInterface_(IAccessibleWindowlessSite, _Win32_SupportedOS_Windows8_)
+ [
+ 	object,
+ 	uuid(BF3ABD9C-76DA-4389-9EB6-1427D25ABAB7),
+@@ -492,6 +496,7 @@ typedef GUID MSAAPROPID;
+ 
+ // This interface is used to expose an identity string that is used as a key
+ // into the annotation database.
++_Win32_AnnotateInterface_(IAccIdentity, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(7852b78d-1cfd-41c1-a615-9c0c85960b5f),
+@@ -509,6 +514,7 @@ interface IAccIdentity: IUnknown
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IAccPropServer, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(76c0dbbb-15e0-4e7b-b61b-20eeea2001e0),
+@@ -526,6 +532,7 @@ interface IAccPropServer: IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IAccPropServices, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(6e26e776-04f0-495d-80e4-3330352e3169),

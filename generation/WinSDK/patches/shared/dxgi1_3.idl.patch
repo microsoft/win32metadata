@@ -1,0 +1,75 @@
+diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
+index 06b176bc..a01122c3 100644
+--- a/shared/dxgi1_3.idl
++++ b/shared/dxgi1_3.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++#include <sal.h>
+ import "dxgi1_2.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -14,6 +15,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIDevice3 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIDevice3, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 6007896c-3244-4afd-bf18-a6d3beda5023 ),
+@@ -45,6 +47,7 @@ typedef struct DXGI_MATRIX_3X2_F
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGISwapChain2 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGISwapChain2, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( a8be2ac4-199f-4946-b331-79599fb98de7 ),
+@@ -67,6 +70,7 @@ interface IDXGISwapChain2 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput2 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput2, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 595e39d1-2724-4663-99b1-da969de28364 ),
+@@ -83,6 +87,7 @@ interface IDXGIOutput2 :
+ // IDXGIFactory3 interface
+ //--------------------------------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDXGIFactory3, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 25483823-cd46-4c7d-86ca-47aa95b837bd ),
+@@ -126,6 +131,7 @@ typedef enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIDecodeSwapChain interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIDecodeSwapChain, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 2633066b-4514-4c7a-8fd8-12ea98059d18 ),
+@@ -154,6 +160,7 @@ interface IDXGIDecodeSwapChain :
+ // IDXGIFactoryMedia interface
+ //--------------------------------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDXGIFactoryMedia, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12 ),
+@@ -206,6 +213,7 @@ typedef struct DXGI_FRAME_STATISTICS_MEDIA
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGISwapChainMedia interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGISwapChainMedia, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( dd95b90b-f05f-4f6a-bd65-25bfb264bd84 ),
+@@ -235,6 +243,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput3 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput3, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid( 8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18 ),

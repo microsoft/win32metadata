@@ -1,0 +1,92 @@
+diff --git a/um/wsdbase.idl b/um/wsdbase.idl
+index 0089023c..3615a570 100644
+--- a/um/wsdbase.idl
++++ b/um/wsdbase.idl
+@@ -11,6 +11,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -191,6 +192,7 @@ cpp_quote("#define WSDAPI_ADDRESSFAMILY_IPV6 2")
+ //  IWSDAddress Interface
+ //  Description: Generic Transport Address
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDAddress, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(b9574c6c-12a6-4f74-93a1-3318ff605759),
+@@ -213,6 +215,7 @@ midl_pragma warning( default:2495 )
+ //  IWSDTransportAddress Interface
+ //  Description: IP-based Transport Address
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDTransportAddress, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(70d23498-4ee6-4340-a3df-d845d2235467),
+@@ -241,6 +244,7 @@ interface IWSDTransportAddress : IWSDAddress
+ //  IWSDMessageParameters Interface
+ //  Description: Specific transmission with a remote device
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDMessageParameters, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(1fafe8a2-e6fc-4b80-b6cf-b7d45c416d7c)
+@@ -292,6 +296,7 @@ typedef struct _WSDUdpRetransmitParams
+ //  IWSDUdpMessageParameters Interface
+ //  Description: UDP specific retransmission information for this message
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDUdpMessageParameters, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(9934149f-8f0c-447b-aa0b-73124b0ca7f0)
+@@ -337,6 +342,7 @@ typedef enum _WSDUdpMessageType
+ //  IWSDUdpAddress Interface
+ //  Description: UDP Address Interface
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDUdpAddress, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(74d6124a-a441-4f78-a1eb-97a8d1996893),
+@@ -391,6 +397,7 @@ cpp_quote("    _Outptr_ IWSDHttpMessageParameters** ppTxParams);")
+ //  IWSDHttpMessageParameters Interface
+ //  Description: HTTP message parameters
+ //--------------------------------------------------------------------------  
++_Win32_AnnotateInterface_(IWSDHttpMessageParameters, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(540bd122-5c83-4dec-b396-ea62a2697fdf),
+@@ -437,6 +444,7 @@ cpp_quote("    _Outptr_ IWSDHttpAddress** ppAddress);")
+ //  IWSDHttpAddress Interface
+ //  Description: HTTP address interface
+ //--------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDHttpAddress, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(d09ac7bd-2a3e-4b85-8605-2737ff3e4ea0),
+@@ -463,6 +471,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7)")
+ //  IWSDSSLClientCertificate Interface
+ //  Description: Interface to retrive SSL client certificate
+ //--------------------------------------------------------------------------  
++_Win32_AnnotateInterface_(IWSDSSLClientCertificate, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(de105e87-a0da-418e-98ad-27b9eed87bdc),
+@@ -485,6 +494,7 @@ interface IWSDSSLClientCertificate : IUnknown
+ //  Description:    Interface through which applications can retrieve http authentication
+ //                        parameters related to the current request.
+ //---------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDHttpAuthParameters, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(0b476df0-8dac-480d-b05c-99781a5884aa),
+@@ -513,6 +523,7 @@ interface IWSDHttpAuthParameters: IUnknown
+ //  Description: Interface to retrieve the compact signature properties present in the
+ //  message and the signature trust status based on user specified validation params
+ //------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IWSDSignatureProperty, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(03ce20aa-71c4-45e2-b32e-3766c61c790f),

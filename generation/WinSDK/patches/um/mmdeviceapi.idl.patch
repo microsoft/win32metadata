@@ -1,0 +1,68 @@
+diff --git a/um/mmdeviceapi.idl b/um/mmdeviceapi.idl
+index d12a237b..1b7e2185 100644
+--- a/um/mmdeviceapi.idl
++++ b/um/mmdeviceapi.idl
+@@ -3,6 +3,7 @@
+ // Copyright (C) Microsoft Corporation. All rights reserved.
+ //
+ //**@@@*@@@****************************************************
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop or Games Family
+@@ -213,6 +214,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+ // Description:
+ //      This interface is implemented by a client who wishes to be notified of changes
+ //      to Endpoint devices on the system.
++_Win32_AnnotateInterface_(IMMNotificationClient, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -308,6 +310,7 @@ interface IMMNotificationClient : IUnknown
+ // Description:
+ //      Base interface for Device objects supported by MMDeviceAPI.
+ //
++_Win32_AnnotateInterface_(IMMDevice, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -397,6 +400,7 @@ interface IMMDevice : IUnknown
+ // Description:
+ //      Provides methods for accessing and enumerating a collection of IMMDevice objects
+ //
++_Win32_AnnotateInterface_(IMMDeviceCollection, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -444,6 +448,7 @@ interface IMMDeviceCollection : IUnknown
+ // Description:
+ //      Provides additional methods beyond IMMDevice for Endpoint device objects
+ //
++_Win32_AnnotateInterface_(IMMEndpoint, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -477,6 +482,7 @@ interface IMMEndpoint : IUnknown
+ //      Provides methods for enumerating IMMDevice objects and for registering notifications
+ //      about Endpoint devices
+ //
++_Win32_AnnotateInterface_(IMMDeviceEnumerator, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     local,
+@@ -621,6 +627,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ 
+ interface IActivateAudioInterfaceAsyncOperation;
+ 
++_Win32_AnnotateInterface_(IActivateAudioInterfaceCompletionHandler, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,
+@@ -634,6 +641,7 @@ interface IActivateAudioInterfaceCompletionHandler : IUnknown
+     HRESULT ActivateCompleted([in, annotation("_In_")] IActivateAudioInterfaceAsyncOperation* activateOperation);
+ };
+ 
++_Win32_AnnotateInterface_(IActivateAudioInterfaceAsyncOperation, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,

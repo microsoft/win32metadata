@@ -1,0 +1,172 @@
+diff --git a/um/mileffects.idl b/um/mileffects.idl
+index e2c75533..779a0980 100644
+--- a/um/mileffects.idl
++++ b/um/mileffects.idl
+@@ -13,6 +13,7 @@ Abstract:
+ 
+ --*/
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -131,6 +132,7 @@ typedef [public] struct MILMatrixF
+     look like).
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectConnectorInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(F66D2E4B-B46B-42FC-859E-3DA0ECDB3C43)
+@@ -151,6 +153,7 @@ interface IMILBitmapEffectConnectorInfo : IUnknown
+     there is 1 input and 1 output both of type 32bit RGBA.
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectConnectionsInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(476B538A-C765-4237-BA4A-D6A880FF0CFC)
+@@ -171,6 +174,7 @@ interface IMILBitmapEffectConnectionsInfo : IUnknown
+     most uses is adequate).
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectConnections, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C2B5D861-9B1A-4374-89B0-DEC4874D6A81)
+@@ -194,6 +198,7 @@ interface IMILBitmapEffectConnections : IUnknown
+     must implement this functionality themselves.
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffect, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(8A6FF321-C944-4A1B-9944-9954AF301258)
+@@ -214,6 +219,7 @@ interface IMILBitmapEffect : IUnknown
+     effects should not access these methods.
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectImpl, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(CC2468F2-9936-47BE-B4AF-06B5DF5DBCBB)
+@@ -240,6 +246,7 @@ interface IMILBitmapEffectImpl : IUnknown
+     IMILBitmapEffectFactory -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectFactory, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(33A9DF34-A403-4EC7-B07E-BC0682370845)
+@@ -256,6 +263,7 @@ interface IMILBitmapEffectFactory : IUnknown
+     IMILBitmapEffectRenderContext -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectRenderContext, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(12A2EC7E-2D33-44b2-B334-1ABB7846E390)
+@@ -279,6 +287,7 @@ interface IMILBitmapEffectRenderContext : IUnknown
+     the real effect (versus IMILBitmapEffect which is on the wrapper object).
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectPrimitive, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(67E31025-3091-4dfc-98D6-DD494551461D)
+@@ -310,6 +319,7 @@ interface IMILBitmapEffectPrimitive : IUnknown
+     IMILBitmapEffects -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffects, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(51AC3DCE-67C5-448b-9180-AD3EABDDD5DD)
+@@ -328,6 +338,7 @@ interface IMILBitmapEffects : IUnknown
+     IMILBitmapEffectGroup -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectGroup, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(2F952360-698A-4ac6-81A1-BCFDF08EB8E8)
+@@ -343,6 +354,7 @@ interface IMILBitmapEffectGroup : IUnknown
+     IMILBitmapEffectConnector -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectConnector, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(F59567B3-76C1-4d47-BA1E-79F955E350EF)
+@@ -357,6 +369,7 @@ interface IMILBitmapEffectConnector : IMILBitmapEffectConnectorInfo
+     IMILBitmapEffectInputConnector -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectInputConnector, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(A9B4ECAA-7A3C-45e7-8573-F4B81B60DD6C)
+@@ -372,6 +385,7 @@ interface IMILBitmapEffectInputConnector : IMILBitmapEffectConnector
+     IMILBitmapEffectOutputConnector -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectOutputConnector, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(92957AAD-841B-4866-82EC-8752468B07FD)
+@@ -382,6 +396,7 @@ interface IMILBitmapEffectOutputConnector : IMILBitmapEffectConnector
+     HRESULT GetConnection([in] ULONG uiIndex, [out, retval] IMILBitmapEffectInputConnector **ppConnection);
+ };
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectInteriorOutputConnector, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(00BBB6DC-ACC9-4bfc-B344-8BEE383DFEFA)
+@@ -391,6 +406,7 @@ interface IMILBitmapEffectInteriorOutputConnector : IUnknown
+     HRESULT GetOutputConnector([out, retval] IMILBitmapEffectOutputConnector **pOutputConnector);
+ };
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectInteriorInputConnector, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(20287E9E-86A2-4e15-953D-EB1438A5B842)
+@@ -405,6 +421,7 @@ interface IMILBitmapEffectInteriorInputConnector : IUnknown
+     IMILBitmapEffectEvents -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectEvents, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(2E880DD8-F8CE-457b-8199-D60BB3D7EF98)
+@@ -424,6 +441,7 @@ interface IMILBitmapEffectEvents : IUnknown
+     IMILBitmapEffectRenderContextImpl -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectRenderContextImpl, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(4D25ACCB-797D-4fd2-B128-DFFEFF84FCC3)
+@@ -441,6 +459,7 @@ interface IMILBitmapEffectRenderContextImpl : IUnknown
+     IMILBitmapEffectPrimitiveImpl -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectPrimitiveImpl, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(CE41E00B-EFA6-44e7-B007-DD042E3AE126)
+@@ -455,6 +474,7 @@ interface IMILBitmapEffectPrimitiveImpl : IUnknown
+     IMILBitmapEffectGroupImpl -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectGroupImpl, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(78FED518-1CFC-4807-8B85-6B6E51398F62)
+@@ -470,6 +490,7 @@ interface IMILBitmapEffectGroupImpl : IUnknown
+     IMILBitmapEffectOutputConnectorImpl -  
+ \*=========================================================================*/
+ 
++_Win32_AnnotateInterface_(IMILBitmapEffectOutputConnectorImpl, _Win32_SupportedOS_WindowsXP_)
+ [
+    object,
+    uuid(21FAE777-8B39-4bfa-9F2D-F3941ED36913)
