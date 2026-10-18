@@ -1290,7 +1290,10 @@ static_assert(DISC_NO_FORCE == 64u);
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
                 (cInterface ? "#define CINTERFACE 1\n" : "") +
-                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+                (cInterface && header == "d3d11_4.h" ? "#define D3D11_NO_HELPERS 1\n" : "") +
+                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n" +
+                (header == "videoacc.h" ? "#include <strmif.h>\n" : "") +
+                "#include <" + header + ">\n";
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
             var beforeDiagnostics = new List<string>();
