@@ -1503,9 +1503,9 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                     .Select(line => line.Substring(1).TrimEnd('\r'))));
             var groups = Regex.Matches(additions,
                 @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
-            Assert.Equal(28, groups.Count);
-            Assert.Equal(28, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
-            Assert.Equal(132, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
+            Assert.Equal(29, groups.Count);
+            Assert.Equal(29, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal(134, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
             Assert.Equal(new[]
             {
                 "FILE_INFO_FLAGS_PERMISSIONS", "HTTP_INITIALIZE", "RASIKEV_PROJECTION_INFO_FLAGS", "WLAN_NOTIFICATION_SOURCES",
@@ -1523,7 +1523,15 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
                     Assert.Matches(@"^[A-Za-z_]\w*$", member);
             }
-            Assert.Equal(66, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            var dialMode = Assert.Single(groups.Where(group => group.Groups["name"].Value == "RASENTRY_DIAL_MODE"));
+            Assert.Equal("Enum", dialMode.Groups["kind"].Value);
+            Assert.Equal(new[] { "RASEDM_DialAll", "RASEDM_DialAsNeeded" },
+                dialMode.Groups["members"].Value.Split(',').Select(value => value.Trim()));
+            Assert.Contains("#define RASEDM_DialAll                  1", additions);
+            Assert.Contains("#define RASEDM_DialAsNeeded             2", additions);
+            Assert.Equal(2, Regex.Matches(additions,
+                @"_Win32_AssociatedEnum_\(RASENTRY_DIAL_MODE\)\s+DWORD\s+dwDialMode;").Count);
+            Assert.Equal(68, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
             foreach (Match group in groups)
             {
@@ -1554,7 +1562,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                     new[]
                     {
                         "RASPPP_PROJECTION_INFO_SERVER_AUTH_PROTOCOL", "RASPPP_PROJECTION_INFO_SERVER_AUTH_DATA",
-                        "RASIKEV_PROJECTION_INFO_FLAGS", "MPR_INTERFACE_DIAL_MODE", "MPR_ET", "MPR_VS",
+                        "RASIKEV_PROJECTION_INFO_FLAGS", "RASENTRY_DIAL_MODE", "MPR_INTERFACE_DIAL_MODE", "MPR_ET", "MPR_VS",
                         "PPP_LCP", "PPP_LCP_INFO_AUTH_DATA", "SECURITY_MESSAGE_MSG_ID",
                     }, new[] { "SECURITY_MESSAGE_MSG_ID" }),
                 "Snmp" => (new[] { "snmp.h", "winsnmp.h" },
@@ -2650,9 +2658,11 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "RRas" => "mprapi.h",
                 "MsCs" => "resapi.h",
                 "Printing" => "winspool.h",
+                "RasDialMode" => "ras.h",
                 _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
             };
             string root = WinHttpMigrationTests.RepositoryRoot;
+            string sourcePartition = partition == "RasDialMode" ? "RRas" : partition;
             string control = Environment.GetEnvironmentVariable("NETWORK_BROAD_CONTROL_HEADERS");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             var beforeSal = new List<string>();
@@ -2665,7 +2675,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             // The unrelated WinHTTP include contains C++ helpers; the owned HTTP header also supports C.
             string sourceText = partition == "HttpServer" && language == "c" ?
                 "#include \"intrinfix.h\"\n#define IN _In_\n#define OUT _Out_\n#include <WinSock2.h>\n#include <http.h>\n" : null;
-            if (language == "c" && partition is "RRas" or "MsCs")
+            if (partition == "RasDialMode" || language == "c" && partition is "RRas" or "MsCs")
                 sourceText = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n#include \"intrinfix.h\"\n" +
                     "#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
             string controlSourceText = sourceText;
@@ -2680,14 +2690,19 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 controlSourceText = prefix + "#include \"" + controlHeader + "\"\n";
                 sourceText = prefix + "#include <winspool.h>\n";
             }
-            var before = Surface(root, control, partition, architecture, target, headers, BroadSourceSalProbe,
+            string checks = BroadSourceSalProbe;
+            if (partition == "RasDialMode")
+                checks += "\ntypedef char RasDialModeNativeValues[(RASEDM_DialAll == 1 && RASEDM_DialAsNeeded == 2) ? 1 : -1];\n";
+            var before = Surface(root, control, sourcePartition, architecture, target, headers, checks,
                 metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
                 diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: controlSourceText);
-            var after = Surface(root, prepared, partition, architecture, target, headers, BroadSourceSalProbe,
+            var after = Surface(root, prepared, sourcePartition, architecture, target, headers, checks,
                 metadataEnabled: enabled, annotations: afterAnnotations, salAnnotations: afterSal,
                 diagnostics: afterDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
             string[] carriers = enabled && partition == "HttpServer" ?
-                new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } : Array.Empty<string>();
+                new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } :
+                enabled && partition == "RasDialMode" ?
+                new[] { "typedef RASENTRY_DIAL_MODE unsigned long" } : Array.Empty<string>();
             Assert.NotEmpty(before);
             Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
             if (controlHeader != null)
@@ -2737,6 +2752,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                             addedAnnotations.AddRange(Enumerable.Repeat(name + "::dwFlags|AssociatedEnum", occurrences));
                         }
                         break;
+                    case "RasDialMode":
+                        addedAnnotations.Add("RASENTRY_DIAL_MODE|Enum(RASEDM_DialAll, RASEDM_DialAsNeeded)");
+                        foreach (string name in new[] { "tagRASENTRYA", "tagRASENTRYW" })
+                        {
+                            int occurrences = before.Count(value => value.StartsWith("field " + name + "::dwDialMode ",
+                                StringComparison.Ordinal));
+                            Assert.True(occurrences > 0, "Missing inherited native RAS dial-mode field: " + name);
+                            addedAnnotations.AddRange(Enumerable.Repeat(name + "::dwDialMode|AssociatedEnum", occurrences));
+                        }
+                        break;
                     case "Policy":
                     case "ActiveDirectory":
                         bool cStyle = language == "c" || cInterface;
@@ -2761,7 +2786,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> NetworkBroadSourceControls()
         {
-            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing" })
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing", "RasDialMode" })
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),

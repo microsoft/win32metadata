@@ -1308,30 +1308,6 @@
     ]
   },
   {
-    "type": "uint",
-    "name": "RASENTRY_DIAL_MODE",
-    "members": [
-      {
-        "name": "RASEDM_DialAll",
-        "value": "1"
-      },
-      {
-        "name": "RASEDM_DialAsNeeded",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "RASENTRYA",
-        "field": "dwDialMode"
-      },
-      {
-        "struct": "RASENTRYW",
-        "field": "dwDialMode"
-      }
-    ]
-  },
-  {
     "name": "FILE_CREATION_DISPOSITION",
     "members": [
       {
