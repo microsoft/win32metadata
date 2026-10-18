@@ -996,6 +996,12 @@ Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabula
 preservation uses `MethodImplAttributes.PreserveSig`. Native scoped enums retain
 `ScopedEnum`; logical flags groups emit `Flags`.
 
+During partial migration, a retained legacy `SupportedOSPlatform` alias can
+overlap the fully qualified header attribute. The cleaner removes only a known
+legacy alias with the same target and normalized literal payload, keeping the
+header attribute. Different floors, different targets, unrelated qualified
+attributes, and duplicate attributes from the same source remain visible.
+
 Both legacy input attributes, `CanReturnErrorsAsSuccess` and
 `CanReturnMultipleSuccessValues`, also lower to `MethodImplAttributes.PreserveSig`.
 They are input-compatibility spellings, not separate emitted custom attributes.

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using ClangSharpSourceToWinmd;
 using MetadataUtils;
@@ -119,6 +120,78 @@ namespace Test { public unsafe delegate int D(
             var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
             Assert.AreEqual(1, method.AttributeLists.SelectMany(list => list.Attributes).Count(attribute => attribute.Name.ToString().Contains("RAIIFree")));
             Assert.AreEqual(2, method.AttributeLists.SelectMany(list => list.Attributes).Count(attribute => attribute.Name.ToString().Contains("InvalidHandleValue")));
+        }
+
+        [DataTestMethod]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\"), SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatformAttribute(\"windows5.0\"), global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(@\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"\\u0077indows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        public void IdenticalProducerAndLegacyAvailabilityAliasesAreDeduplicated(string attributes)
+        {
+            var tree = Clean($@"
+namespace Test {{ public abstract class Apis {{
+    {attributes} [Obsolete(""keep"")]
+    public abstract int F();
+}} }}");
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            var actual = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+            Assert.AreEqual(1, actual.Count(attribute => attribute.Name.ToString().Contains("SupportedOSPlatform")));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString().StartsWith("global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform", StringComparison.Ordinal)));
+            Assert.IsTrue(actual.Any(attribute => attribute.Name.ToString() == "Obsolete"));
+            Assert.AreEqual(tree.GetRoot().ToFullString(), Clean(tree.GetRoot().ToFullString()).GetRoot().ToFullString());
+        }
+
+        [DataTestMethod]
+        [DataRow("[SupportedOSPlatform(\"windows6.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.00\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[Other.SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.Other.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[SupportedOSPlatform(\"windows5.0\"), SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\"), global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        [DataRow("[return: SupportedOSPlatform(\"windows5.0\")] [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(\"windows5.0\")]")]
+        public void AvailabilityDeduplicationPreservesConflictsOtherNamesAndTargets(string attributes)
+        {
+            var tree = Clean($@"
+namespace Test {{ public abstract class Apis {{
+    {attributes}
+    public abstract int F();
+}} }}");
+            var method = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single();
+            Assert.AreEqual(2, method.AttributeLists.SelectMany(list => list.Attributes)
+                .Count(attribute => attribute.Name.ToString().Contains("SupportedOSPlatform")));
+            if (attributes.Contains("return:"))
+                Assert.IsTrue(method.AttributeLists.Any(list => list.Target?.Identifier.ValueText == "return"));
+        }
+
+        [DataTestMethod]
+        [DataRow("windows5.0", true)]
+        [DataRow("windows6.0", false)]
+        public void AvailabilityAliasDeduplicationAllowsOnlyIdenticalPayloadsToCompile(string legacyPlatform, bool success)
+        {
+            var tree = Clean($@"
+using Windows.Win32.Foundation.Metadata;
+namespace Windows.Win32.Foundation.Metadata {{
+    public sealed class SupportedOSPlatformAttribute : System.Attribute {{
+        public SupportedOSPlatformAttribute(string platform) {{ }}
+    }}
+}}
+namespace Test {{ public abstract class Apis {{
+    [SupportedOSPlatform(""{legacyPlatform}"")]
+    [global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform(""windows5.0"")]
+    public abstract int F();
+}} }}");
+            var compilation = CSharpCompilation.Create("AvailabilityAliases", new[] { tree },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            using var output = new MemoryStream();
+            var result = compilation.Emit(output);
+            Assert.AreEqual(success, result.Success, string.Join(Environment.NewLine, result.Diagnostics));
+            if (!success)
+                Assert.IsTrue(result.Diagnostics.Any(diagnostic => diagnostic.Id == "CS0579"));
         }
 
         [DataTestMethod]
