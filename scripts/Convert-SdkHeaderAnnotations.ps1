@@ -1,5 +1,16 @@
 #Requires -Version 7.0
 
+<#
+.SYNOPSIS
+Moves compiler-bound availability and last-error facts into original SDK header patches.
+.DESCRIPTION
+Declaration maps bind pristine selected-SDK bytes. Existing uniquely admitted patches
+are strictly applied in isolation first; only unchanged native declaration spans are
+eligible for further authoring. The result is one cumulative patch against the SDK
+original. Unbound variants, changed spans and unsupported macro expansions retain
+their exact sidecar facts. Changed headers include ordinary sal.h themselves.
+#>
+
 [CmdletBinding()]
 param(
     [Parameter(Mandatory)]
@@ -16,6 +27,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+$patchWhitespace = 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol'
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..")
 $sdk = "$repo\generation\WinSDK"
 $mirror = "$sdk\RecompiledIdlHeaders"
@@ -164,6 +176,17 @@ foreach ($category in $sidecars.Keys) {
     $sidecarLines[$category] = [IO.File]::ReadAllLines($sidecars[$category])
 }
 
+function Get-AuthoredOffset([int]$Offset, [Collections.Generic.List[int]]$Starts, [hashtable]$Lines) {
+    $index = $Starts.BinarySearch($Offset)
+    if ($index -lt 0) {
+        $index = -$index - 2
+    }
+    if (!$Lines.ContainsKey($index)) {
+        return -1
+    }
+    return [int]$Lines[$index] + $Offset - $Starts[$index]
+}
+
 foreach ($owner in $Original) {
     if ([IO.Path]::IsPathRooted($owner) -or $owner.Split('\') -contains '..' -or
         [IO.Path]::GetExtension($owner) -ne '.h') {
@@ -173,9 +196,11 @@ foreach ($owner in $Original) {
     if ($candidates.Count -ne 1) {
         throw "Expected one explicitly available original owner: $owner"
     }
-    if (@($recipe.patches | Where-Object { $_ -ieq "$owner.patch" }).Count -or
-        (Test-Path -LiteralPath "$sdk\patches\$owner.patch")) {
-        throw "An existing original patch must be coordinated, not overwritten: $owner"
+    $existingPatch = "$sdk\patches\$owner.patch"
+    $patchAdmissions = @($recipe.patches | Where-Object { $_ -ieq "$owner.patch" })
+    $hasPatch = Test-Path -LiteralPath $existingPatch
+    if ($patchAdmissions.Count -gt 1 -or [bool]$patchAdmissions.Count -ne $hasPatch) {
+        throw "Existing patch and its unique recipe admission must agree: $owner"
     }
     $source = "$include\$owner"
     $mirrorPath = "$mirror\$owner"
@@ -189,11 +214,94 @@ foreach ($owner in $Original) {
     if ($text.Contains('File created by MIDL compiler')) {
         throw "Generated headers are not native authoring inputs: $owner"
     }
+    $authorText = $text
+    $existingPatchHash = $null
+    $lineMap = @{}
+    $lineStarts = [Collections.Generic.List[int]]::new()
+    $lineStarts.Add(0)
+    foreach ($newline in [regex]::Matches($text, "`n")) {
+        $lineStarts.Add($newline.Index + 1)
+    }
+    if ($hasPatch) {
+        $admissions = @($recipe.headers | Where-Object path -eq $owner)
+        if ($admissions.Count -ne 1 -or $admissions[0].sourceSha256 -ne $hash -or
+            $admissions[0].sdkSha256 -ne $hash) {
+            throw "Existing header admission does not match the original bytes: $owner"
+        }
+        $existingPatchHash = (Get-FileHash -LiteralPath $existingPatch -Algorithm SHA256).Hash
+        $verified = "$OutputDirectory\existing"
+        [IO.Directory]::CreateDirectory("$verified\$([IO.Path]::GetDirectoryName($owner))") | Out-Null
+        [IO.File]::WriteAllBytes("$verified\$owner", $before)
+        & git -C $verified init --quiet
+        if ($LASTEXITCODE -ne 0) {
+            throw "Cannot initialize isolated existing-patch verification: $owner"
+        }
+        $statistics = @(& git -C $verified apply --numstat -- $existingPatch)
+        if ($LASTEXITCODE -ne 0 -or $statistics.Count -ne 1 -or
+            ($statistics[0] -split "`t")[-1] -cne $owner.Replace('\', '/')) {
+            throw "A cumulative owner patch must change only its admitted original: $owner"
+        }
+        & git -c $patchWhitespace -C $verified apply --whitespace=error-all -- $existingPatch
+        if ($LASTEXITCODE -ne 0) {
+            throw "Existing cumulative patch failed strict selected-SDK application: $owner"
+        }
+        $authorText = [Text.Encoding]::Latin1.GetString([IO.File]::ReadAllBytes("$verified\$owner"))
+        $pristinePath = "$OutputDirectory\pristine\$owner"
+        [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($pristinePath)) | Out-Null
+        [IO.File]::WriteAllBytes($pristinePath, $before)
+        $changes = @(& git -c core.autocrlf=false --no-pager diff --no-index --no-ext-diff --no-color --unified=0 -- $pristinePath "$verified\$owner")
+        if ($LASTEXITCODE -ne 1) {
+            throw "Expected a nonempty verified cumulative patch: $owner"
+        }
+        # Native map offsets survive only in byte-identical spans of the verified patch.
+        $oldLines = [regex]::Split($text, '(?<=\n)')
+        $newLines = [regex]::Split($authorText, '(?<=\n)')
+        $newStarts = [Collections.Generic.List[int]]::new()
+        $offset = 0
+        foreach ($line in $newLines) {
+            $newStarts.Add($offset)
+            $offset += $line.Length
+        }
+        $oldLine = 0
+        $newLine = 0
+        foreach ($change in $changes) {
+            if ($change -notmatch '^@@ -(\d+)(?:,(\d+))? \+(\d+)(?:,(\d+))? @@') {
+                continue
+            }
+            $oldCount = if (!$Matches.ContainsKey(2)) { 1 } else { [int]$Matches[2] }
+            $newCount = if (!$Matches.ContainsKey(4)) { 1 } else { [int]$Matches[4] }
+            $oldStart = [int]$Matches[1] - [int]($oldCount -ne 0)
+            $newStart = [int]$Matches[3] - [int]($newCount -ne 0)
+            while ($oldLine -lt $oldStart) {
+                if ($oldLines[$oldLine] -cne $newLines[$newLine]) {
+                    throw "Existing patch line mapping is not byte-identical: $owner"
+                }
+                $lineMap[$oldLine++] = $newStarts[$newLine++]
+            }
+            if ($newLine -ne $newStart) {
+                throw "Existing patch hunk coordinates are inconsistent: $owner"
+            }
+            $oldLine += $oldCount
+            $newLine += $newCount
+        }
+        while ($oldLine -lt $oldLines.Count) {
+            if ($newLine -ge $newLines.Count -or $oldLines[$oldLine] -cne $newLines[$newLine]) {
+                throw "Existing patch tail mapping is not byte-identical: $owner"
+            }
+            $lineMap[$oldLine++] = $newStarts[$newLine++]
+        }
+    }
+    else {
+        for ($index = 0; $index -lt $lineStarts.Count; $index++) {
+            $lineMap[$index] = $lineStarts[$index]
+        }
+    }
     $masked = [regex]::Replace($text, '(?s)/\*.*?\*/|//[^\r\n]*|"(?:\\.|[^"\\])*"|''(?:\\.|[^''\\])*''',
         { param($match) [regex]::Replace($match.Value, '[^\r\n]', ' ') })
     $eol = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
     $insertions = @{}
     $recordNames = @{}
+    $inlineOffsets = [Collections.Generic.HashSet[int]]::new()
     foreach ($category in @('supportedOS', 'setLastError')) {
         foreach ($fact in $candidates[0].$category) {
             $row = [ordered]@{ original = $owner; category = $category; symbol = $fact.symbol
@@ -216,6 +324,9 @@ foreach ($owner in $Original) {
             $recordDefinitions = @($locations | Where-Object {
                 $_.declaration.kind -in @('CXCursor_StructDecl', 'CXCursor_ClassDecl') -and $_.declaration.isDefinition
             })
+            if (@($locations | Where-Object sha256 -ne $hash).Count) {
+                throw "Stale parsed source bytes: $owner"
+            }
             $isRecord = $recordDefinitions.Count -gt 0
             $recordReferences = @()
             if ($isRecord) {
@@ -250,7 +361,7 @@ foreach ($owner in $Original) {
                 if ($location.sha256 -ne $hash) {
                     throw "Stale parsed source bytes: $owner"
                 }
-                $nameOffset = if ($isRecord) { [int]$decl.spellingOffset } else { [int]$decl.offset }
+                $nameOffset = [int]$decl.spellingOffset
                 if ((!$isRecord -and ($decl.kind -ne 'CXCursor_FunctionDecl' -or $decl.isDefinition -or
                         $decl.offset -ne $decl.spellingOffset)) -or !$decl.id -or
                     $decl.qualifiedName -cne $fact.symbol -or
@@ -264,7 +375,18 @@ foreach ($owner in $Original) {
                 }
                 $lineStart = $text.LastIndexOf("`n", [int]$decl.start) + 1
                 $prefix = $text.Substring($lineStart, [int]$decl.start - $lineStart)
-                if ($prefix -notmatch '^[ \t]*$' -and
+                $nativePrefix = $text.Substring([int]$decl.start, $nameOffset - [int]$decl.start)
+                $returnMacro = !$isRecord -and $nativePrefix -cmatch
+                    '^(?:WINOLEAPI|COMBASEAPI)(?:_[ \t]*\([A-Za-z_][A-Za-z_0-9 \t:*]*\))?[ \t\r\n]*$' -and
+                    $masked.Substring($nameOffset + $fact.symbol.Length) -match '^\s*\('
+                if (!$isRecord -and !$returnMacro) {
+                    $returnType = [regex]::Match($decl.type, '^\s*(?:const\s+|volatile\s+)*([A-Za-z_]\w*)').Groups[1].Value
+                    if (!$returnType -or $nativePrefix -cnotmatch ('\b' + [regex]::Escape($returnType) + '\b')) {
+                        $row.reason = 'unsupported-function-declaration-macro'
+                        continue
+                    }
+                }
+                if (!$returnMacro -and $prefix -notmatch '^[ \t]*$' -and
                     ($isRecord -or $prefix -notmatch '^[ \t]*EXTERN_C[ \t]+$')) {
                     $row.reason = 'declaration-start-shares-source-line'
                     continue
@@ -277,7 +399,21 @@ foreach ($owner in $Original) {
                         continue
                     }
                 }
-                $pending.Add([pscustomobject]@{ offset = [int]$decl.start; macro = $macro; indent = $prefix
+                $authoredStart = Get-AuthoredOffset ([int]$decl.start) $lineStarts $lineMap
+                $authoredEnd = Get-AuthoredOffset ([int]$decl.end - 1) $lineStarts $lineMap
+                $nativeLength = [int]$decl.end - [int]$decl.start
+                if ($authoredStart -lt 0 -or $authoredEnd -lt 0 -or
+                    $authoredEnd + 1 - $authoredStart -ne $nativeLength -or
+                    $authorText.Substring($authoredStart, $nativeLength) -cne
+                        $text.Substring([int]$decl.start, $nativeLength)) {
+                    $row.reason = 'native-declaration-span-changed-by-existing-patch'
+                    continue
+                }
+                $insertionOffset = if ($returnMacro) {
+                    Get-AuthoredOffset $nameOffset $lineStarts $lineMap
+                } else { $authoredStart }
+                $pending.Add([pscustomobject]@{ offset = $insertionOffset; macro = $macro; indent = $prefix
+                    inline = $returnMacro
                     recordTag = if ($decl.kind -eq 'CXCursor_ClassDecl') { 'class' } else { 'struct' } })
             }
             $row.declarationCount = $locations.Count
@@ -342,6 +478,9 @@ foreach ($owner in $Original) {
                         $insertions[$insertion.offset] = [Collections.Generic.SortedSet[string]]::new([StringComparer]::Ordinal)
                     }
                     $insertions[$insertion.offset].Add($insertion.macro) | Out-Null
+                    if ($insertion.inline) {
+                        $inlineOffsets.Add($insertion.offset) | Out-Null
+                    }
                     if ($isRecord) {
                         $recordNames[$insertion.offset] = [pscustomobject]@{ name = $fact.symbol; tag = $insertion.recordTag }
                     }
@@ -359,21 +498,28 @@ foreach ($owner in $Original) {
     if (!$insertions.Count) {
         continue
     }
-    $after = $text
+    $after = $authorText
     foreach ($offset in @($insertions.Keys | Sort-Object -Descending)) {
-        $lineStart = $text.LastIndexOf("`n", $offset) + 1
-        $indent = $text.Substring($lineStart, $offset - $lineStart)
+        $lineStart = $authorText.LastIndexOf("`n", $offset) + 1
+        $indent = $authorText.Substring($lineStart, $offset - $lineStart)
         $prefix = if ($recordNames.ContainsKey($offset)) {
             $record = $recordNames[$offset]
             '#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)' + $eol + $indent +
                 'typedef ' + ($insertions[$offset] -join ' ') + " $($record.tag) $($record.name) $($record.name);" + $eol + $indent +
                 '#endif' + $eol + $indent
-        } elseif ($indent -match '^[ \t]*EXTERN_C[ \t]+$') {
+        } elseif ($inlineOffsets.Contains($offset) -or $indent -match '^[ \t]*EXTERN_C[ \t]+$') {
             ($insertions[$offset] -join ' ') + ' '
         } else {
             ($insertions[$offset] -join ($eol + $indent)) + $eol + $indent
         }
         $after = $after.Insert($offset, $prefix)
+    }
+    if ($after -notmatch '(?m)^\s*#include\s*[<"]sal\.h[>"]') {
+        $guard = [regex]::Match($after, '(?m)^#ifndef[ \t]+(\w+)[ \t]*\r?\n#define[ \t]+\1[ \t]*\r?\n')
+        $offset = if ($guard.Success) { $guard.Index + $guard.Length }
+            elseif ($before.Length -ge 3 -and $before[0] -eq 239 -and $before[1] -eq 187 -and $before[2] -eq 191) { 3 }
+            else { 0 }
+        $after = $after.Insert($offset, "#include <sal.h>" + $eol)
     }
     $beforePath = "$OutputDirectory\before\$owner"
     $afterPath = "$OutputDirectory\after\$owner"
@@ -393,11 +539,13 @@ foreach ($owner in $Original) {
     $diff = [regex]::Replace($diff, '(?m)^--- [^\n]*', "--- a/$unixOwner")
     $diff = [regex]::Replace($diff, '(?m)^\+\+\+ [^\n]*', "+++ b/$unixOwner")
     [IO.File]::WriteAllBytes($patchPath, [Text.Encoding]::Latin1.GetBytes($diff))
-    & git -C $repo apply --check --unsafe-paths -p1 "--directory=$include" --whitespace=error-all -- $patchPath
+    & git -c $patchWhitespace -C $repo apply --check --unsafe-paths -p1 "--directory=$include" --whitespace=error-all -- $patchPath
     if ($LASTEXITCODE -ne 0) {
         throw "Original SDK patch preflight failed: $owner"
     }
-    $patches.Add([pscustomobject]@{ original = $owner; patch = $patchPath; sha256 = $hash })
+    $patches.Add([pscustomobject]@{ original = $owner; patch = $patchPath; sha256 = $hash
+        existingPatchSha256 = $existingPatchHash
+        authoredInputSha256 = [Convert]::ToHexString([Security.Cryptography.SHA256]::HashData([Text.Encoding]::Latin1.GetBytes($authorText))) })
 }
 
 $summary = [ordered]@{
@@ -411,13 +559,18 @@ $summary = [ordered]@{
         unknown = @($rows | Where-Object reason -eq 'no-parsed-declaration').Count
     }
     parseFailures = $parseFailures.ToArray()
+    sourceBindings = @($patches | Select-Object original, sha256, existingPatchSha256, authoredInputSha256)
     facts = $rows.ToArray()
 }
 if ($Apply) {
     foreach ($patch in $patches) {
         $target = "$sdk\patches\$($patch.original).patch"
+        if ($patch.existingPatchSha256 -and
+            (Get-FileHash -LiteralPath $target -Algorithm SHA256).Hash -ne $patch.existingPatchSha256) {
+            throw "Existing cumulative patch changed during authoring: $($patch.original)"
+        }
         [IO.Directory]::CreateDirectory([IO.Path]::GetDirectoryName($target)) | Out-Null
-        [IO.File]::Copy($patch.patch, $target)
+        [IO.File]::Copy($patch.patch, $target, [bool]$patch.existingPatchSha256)
         $existing = @($recipe.headers | Where-Object path -eq $patch.original)
         if (!$existing.Count) {
             $recipe.headers += [pscustomobject]@{
@@ -430,7 +583,9 @@ if ($Apply) {
             $existing[0].sdkSha256 -ne $patch.sha256) {
             throw "Existing header admission does not match the original bytes: $($patch.original)"
         }
-        $recipe.patches += "$($patch.original).patch"
+        if ("$($patch.original).patch" -notin $recipe.patches) {
+            $recipe.patches += "$($patch.original).patch"
+        }
         $owner = @($inventory.readyOriginalOwners | Where-Object original -eq $patch.original)[0]
         foreach ($name in $owner.partitionCandidates) {
             if ($name -notin $recipe.partitions) {

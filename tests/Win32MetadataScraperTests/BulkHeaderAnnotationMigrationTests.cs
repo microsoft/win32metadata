@@ -6,6 +6,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Nodes;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
@@ -123,7 +124,8 @@ void Unrelated(unsigned flags);
             Assert.Equal(1, afterText.Split("_Win32_SetLastError_").Length - 1);
             string stripped = string.Concat(afterText.Split("\r\n")
                 .Where(line => !line.StartsWith("_Win32_", StringComparison.Ordinal)).Select(line => line + "\r\n"));
-            Assert.Equal(Encoding.UTF8.GetString(before), stripped.Substring(0, stripped.Length - 2));
+            Assert.Equal(Encoding.UTF8.GetString(before), stripped.Substring(0, stripped.Length - 2)
+                .Replace("#include <sal.h>\r\n", ""));
             Assert.Equal(before, File.ReadAllBytes(fixture.Source));
             string sidecar = File.ReadAllText(fixture.OSSidecar);
             Assert.DoesNotContain("Unique=", sidecar);
@@ -160,6 +162,138 @@ void Unrelated(unsigned flags);
             Assert.Equal(recipe, File.ReadAllBytes(fixture.Recipe));
             Assert.Contains("Unique=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
             Assert.False(File.Exists(Path.Combine(fixture.Root, "generation", "WinSDK", "patches", "um", "sample.h.patch")));
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void CumulativeNativePatchesPreservePriorFactsAndBindReturnMacros(string architecture, string target)
+        {
+            const string original = "// caf\u00e9\r\nint Earlier(void);\r\n" +
+                "#define _Check_return_\r\n#define WINOLEAPI extern \"C\" __declspec(dllimport) long __stdcall\r\n" +
+                "#define COMBASEAPI extern \"C\" __declspec(dllimport) long __stdcall\r\n" +
+                "_Check_return_ WINOLEAPI\r\nUnique(void);\r\nCOMBASEAPI Another(void);\r\n";
+            using var fixture = new AuthoringFixture(original, new[] { "Unique", "Another" }, new[] { "Unique" }, architecture, target);
+            string cumulative = original.Replace("int Earlier", "_Win32_PreserveResult_\r\nint Earlier");
+            fixture.InstallExistingPatch(cumulative);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            fixture.RemoveMapOption();
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            string[] native = Signatures(fixture.Native.ReadSource());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            Assert.Equal(3, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(0, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
+            Assert.False(string.IsNullOrEmpty(Assert.Single(report.RootElement.GetProperty("sourceBindings").EnumerateArray())
+                .GetProperty("existingPatchSha256").GetString()));
+            string after = File.ReadAllText(Path.Combine(fixture.Output, "after", "um", "sample.h"));
+            Assert.Contains("_Win32_PreserveResult_\r\nint Earlier", after);
+            Assert.Contains("WINOLEAPI\r\n_Win32_SetLastError_ _Win32_SupportedOS_Windows7_ Unique", after);
+            Assert.Contains("COMBASEAPI _Win32_SupportedOS_Windows7_ Another", after);
+            Assert.Equal(cumulative, after.Replace("#include <sal.h>\r\n", "")
+                .Replace("_Win32_SetLastError_ ", "").Replace("_Win32_SupportedOS_Windows7_ ", ""));
+            using var recipe = JsonDocument.Parse(File.ReadAllText(fixture.Recipe));
+            Assert.Single(recipe.RootElement.GetProperty("headers").EnumerateArray());
+            Assert.Single(recipe.RootElement.GetProperty("patches").EnumerateArray());
+            File.WriteAllText(fixture.Mirror, after, new UTF8Encoding(false));
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.Equal(native, Signatures(fixture.Native.ReadSource()));
+            Assert.Contains("PreserveSig", fixture.Native.ReadSource());
+            Assert.Equal(2, fixture.Native.ReadSource().Split("SupportedOSPlatform(\"windows6.1\")").Length - 1);
+            Assert.Contains("SetLastError = true", fixture.Native.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("stale-map")]
+        [InlineData("changed-declaration")]
+        [InlineData("unadmitted-patch")]
+        [InlineData("stale-pin")]
+        [InlineData("wrong-patch-base")]
+        [InlineData("trailing-whitespace")]
+        public void CumulativeAuthoringRejectsUnverifiedInputsWithoutRetiringFacts(string failure)
+        {
+            const string original = "// Native\r\nint Earlier(void);\r\nint Unique(void);\r\n";
+            using var fixture = new AuthoringFixture(original, new[] { "Unique" }, Array.Empty<string>());
+            string cumulative = original.Replace("int Earlier", "_Win32_PreserveResult_\r\nint Earlier");
+            if (failure == "changed-declaration")
+                cumulative = cumulative.Replace("int Unique", "long Unique");
+            if (failure == "trailing-whitespace")
+                cumulative += "// invalid trailing spaces   \r\n";
+            fixture.InstallExistingPatch(cumulative);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            if (failure == "stale-map")
+            {
+                var map = JsonNode.Parse(File.ReadAllText(fixture.Map));
+                foreach (string path in map["files"].AsObject().Select(pair => pair.Key).ToArray())
+                    map["files"][path] = new string('0', 64);
+                File.WriteAllText(fixture.Map, map.ToJsonString());
+            }
+            if (failure is "unadmitted-patch" or "stale-pin")
+            {
+                var recipe = JsonNode.Parse(File.ReadAllText(fixture.Recipe));
+                if (failure == "unadmitted-patch")
+                    recipe["patches"] = new JsonArray();
+                else
+                    recipe["headers"][0]["sdkSha256"] = new string('0', 64);
+                File.WriteAllText(fixture.Recipe, recipe.ToJsonString());
+            }
+            if (failure == "wrong-patch-base")
+                File.WriteAllText(fixture.ExistingPatch, File.ReadAllText(fixture.ExistingPatch).Replace("int Earlier", "int Missing"));
+            byte[] recipeBefore = File.ReadAllBytes(fixture.Recipe);
+            byte[] patchBefore = File.ReadAllBytes(fixture.ExistingPatch);
+            var result = fixture.Run(apply: true);
+            if (failure == "changed-declaration")
+            {
+                Assert.True(result.ExitCode == 0, result.Text);
+                using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+                var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+                Assert.Equal("native-declaration-span-changed-by-existing-patch", fact.GetProperty("reason").GetString());
+                Assert.Equal("retained", fact.GetProperty("status").GetString());
+            }
+            else
+            {
+                Assert.NotEqual(0, result.ExitCode);
+                Assert.Equal(recipeBefore, File.ReadAllBytes(fixture.Recipe));
+            }
+            Assert.Equal(patchBefore, File.ReadAllBytes(fixture.ExistingPatch));
+            Assert.Contains("Unique=SupportedOSPlatform(\"windows6.1\")", File.ReadAllText(fixture.OSSidecar));
+        }
+
+        [Theory]
+        [InlineData("DECLARE(Unique)\r\n")]
+        [InlineData("UNKNOWNAPI Unique(void);\r\n")]
+        public void UnknownFunctionMacroExpansionsRemainLegacy(string declaration)
+        {
+            using var fixture = new AuthoringFixture(
+                "#define DECLARE(name) int name(void);\r\n#define UNKNOWNAPI extern \"C\" int\r\n" + declaration,
+                new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            Assert.Equal("retained", Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray())
+                .GetProperty("status").GetString());
+            Assert.Contains("Unique=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
+        }
+
+        [Fact]
+        public void AuthoredHeaderBootstrapsSalInAFreshMidlImportContext()
+        {
+            using var fixture = new AuthoringFixture("int Unique(void);\r\n", new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            File.Copy(Path.Combine(fixture.Output, "after", "um", "sample.h"), fixture.Mirror, overwrite: true);
+            fixture.RemoveMapOption();
+            File.WriteAllText(fixture.Native.Header, "#include \"" + fixture.Mirror.Replace('\\', '/') + "\"\n");
+            string settings = Path.Combine(fixture.Native.DirectoryPath, "test.rsp");
+            File.WriteAllText(settings, File.ReadAllText(settings).Replace("parse-win32-annotations", "") +
+                "--language\nc\n--std\nc17\n--additional=-DMIDL_PASS\n");
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.Contains("Unique", fixture.Native.ReadSource());
+            Assert.DoesNotContain("SupportedOSPlatform", fixture.Native.ReadSource());
         }
 
         [Fact]
@@ -261,7 +395,7 @@ void Unrelated(unsigned flags);
             string text = File.ReadAllText(after);
             Assert.Contains("EXTERN_C _Win32_SetLastError_ _Win32_SupportedOS_Windows7_ HRESULT DWRITE_EXPORT Unique", text);
             Assert.Equal(original, Encoding.UTF8.GetBytes(text.Replace("_Win32_SetLastError_ ", "")
-                .Replace("_Win32_SupportedOS_Windows7_ ", "")));
+                .Replace("_Win32_SupportedOS_Windows7_ ", "").Replace("#include <sal.h>\r\n", "")));
             File.Copy(after, fixture.Mirror, overwrite: true);
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             Assert.Equal(before, Signatures(fixture.Native.ReadSource()));
@@ -349,7 +483,7 @@ DECLARE_MAPI_INTERFACE_PTR(IAddrBook, LPADRBOOK);
                 Assert.Contains(transport, afterText);
                 stripped = stripped.Replace(transport, "");
             }
-            Assert.Equal(original, Encoding.UTF8.GetBytes(stripped));
+            Assert.Equal(original, Encoding.UTF8.GetBytes(stripped.Replace("#include <sal.h>\r\n", "")));
             File.Copy(after, fixture.Mirror, overwrite: true);
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             Assert.Equal(nativeBefore, fixture.Native.ReadSource());
@@ -562,8 +696,42 @@ DECLARE_MAPI_INTERFACE_PTR(IAddrBook, LPADRBOOK);
             internal string Recipe { get; }
             internal string Output { get; }
             internal string Map { get; }
+            internal string ExistingPatch => Path.Combine(Root, "generation", "WinSDK", "patches", "um", "sample.h.patch");
             private string OwnerMap { get; }
             private string Script { get; }
+
+            internal void InstallExistingPatch(string cumulative)
+            {
+                string before = Path.Combine(Native.DirectoryPath, "pristine.h");
+                string after = Path.Combine(Native.DirectoryPath, "cumulative.h");
+                File.Copy(Source, before);
+                File.WriteAllText(after, cumulative, new UTF8Encoding(false));
+                Directory.CreateDirectory(Path.GetDirectoryName(ExistingPatch));
+                var start = new ProcessStartInfo("git") { UseShellExecute = false, RedirectStandardError = true };
+                foreach (string argument in new[] { "-c", "core.autocrlf=false", "diff", "--no-index",
+                    "--no-ext-diff", "--output=" + ExistingPatch, "--", before, after })
+                    start.ArgumentList.Add(argument);
+                using var process = Process.Start(start);
+                string error = process.StandardError.ReadToEnd();
+                process.WaitForExit();
+                Assert.True(process.ExitCode == 1, error);
+                string patch = Encoding.Latin1.GetString(File.ReadAllBytes(ExistingPatch));
+                patch = Regex.Replace(patch, @"\Adiff --git [^\n]*", "diff --git a/um/sample.h b/um/sample.h");
+                patch = Regex.Replace(patch, @"(?m)^--- [^\n]*", "--- a/um/sample.h");
+                patch = Regex.Replace(patch, @"(?m)^\+\+\+ [^\n]*", "+++ b/um/sample.h");
+                File.WriteAllBytes(ExistingPatch, Encoding.Latin1.GetBytes(patch));
+                string hash = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(Source)));
+                var recipe = JsonNode.Parse(File.ReadAllText(Recipe));
+                recipe["headers"].AsArray().Add(new JsonObject
+                {
+                    ["path"] = "um\\sample.h",
+                    ["sourceSha256"] = hash,
+                    ["sdkSha256"] = hash,
+                    ["sdkPath"] = "c\\include\\10.0.26100.0\\um\\sample.h",
+                });
+                recipe["patches"].AsArray().Add("um\\sample.h.patch");
+                File.WriteAllText(Recipe, recipe.ToJsonString());
+            }
 
             internal void EnableAutomaticMapExport()
             {
