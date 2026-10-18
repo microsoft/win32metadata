@@ -84,6 +84,65 @@ function Get-AttributeStart([string]$Mask, [int]$Offset, [Collections.Generic.Ha
     $start
 }
 
+function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [string]$Name) {
+    $returnType = '(?:STDAPI(?:_\([A-Za-z_]\w*\))?|(?:EXTERN_C\s+)?HRESULT\s+(?:STDAPICALLTYPE|STDMETHODCALLTYPE))'
+    for ($i = 0; $i -lt $Quotes.Count; $i++) {
+        $quote = $Quotes[$i]
+        if ($Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(') { continue }
+        $body = $quote.Groups['code'].Value
+        $nameMatch = [regex]::Match($body, "(?<![A-Za-z_0-9])$([regex]::Escape($Name))\s*\(")
+        if (!$nameMatch.Success) { continue }
+        $prefix = $body.Substring(0, $nameMatch.Index)
+        if (!$prefix.Trim()) {
+            if (!$i) { continue }
+            $previous = $Quotes[$i - 1]
+            if ($Text.Substring($previous.Index + $previous.Length, $quote.Index - $previous.Index - $previous.Length) -notmatch '^\s*$' -or
+                $Mask.Substring($previous.Index, $previous.Length) -notmatch '^\s*cpp_quote\s*\(' -or
+                $previous.Groups['code'].Value -notmatch "^\s*$returnType\s*$") { continue }
+        }
+        elseif ($prefix -notmatch "^\s*$returnType\s+$") { continue }
+        $prototype = $body.Substring($nameMatch.Index)
+        $last = $quote
+        $j = $i + 1
+        while ($true) {
+            $code = Get-CodeMask ($prototype.Replace('\"', '"'))
+            $depth = 0
+            $close = -1
+            for ($cursor = $code.IndexOf('('); $cursor -ge 0 -and $cursor -lt $code.Length; $cursor++) {
+                if ($code[$cursor] -eq '(') { $depth++ }
+                elseif ($code[$cursor] -eq ')') {
+                    $depth--
+                    if (!$depth) { $close = $cursor; break }
+                }
+            }
+            if ($close -ge 0) {
+                if ($code.Substring($close + 1) -match '^\s*;') {
+                    $rawClose = $close
+                    foreach ($escapedQuote in [regex]::Matches($prototype, '\\"')) {
+                        if ($escapedQuote.Index -le $rawClose) { $rawClose++ }
+                    }
+                    [pscustomobject]@{
+                        name = $Name
+                        offset = $quote.Groups['code'].Index + $nameMatch.Index
+                        afterParametersOffset = $last.Groups['code'].Index + $rawClose -
+                            ($prototype.Length - $last.Groups['code'].Length) + 1
+                        start = $quote.Index
+                        end = $last.Index + $last.Length
+                    }
+                }
+                break
+            }
+            if ($j -ge $Quotes.Count) { break }
+            $next = $Quotes[$j]
+            if ($Text.Substring($last.Index + $last.Length, $next.Index - $last.Index - $last.Length) -notmatch '^\s*$' -or
+                $Mask.Substring($next.Index, $next.Length) -notmatch '^\s*cpp_quote\s*\(') { break }
+            $prototype += "`n" + $next.Groups['code'].Value
+            $last = $next
+            $j++
+        }
+    }
+}
+
 function Write-Patch([string]$Before, [string]$After, [string]$Relative, [string]$Destination) {
     $start = [Diagnostics.ProcessStartInfo]::new('git')
     $start.UseShellExecute = $false
@@ -183,6 +242,7 @@ foreach ($owner in $owners) {
         [regex]::Replace($match.Value, '[^\r\n]', ';')
     })
     $definitions = @([regex]::Matches($mask, '\binterface\s+(?<name>[A-Za-z_]\w*)\s*:\s*[A-Za-z_]\w*(?:\s*::\s*[A-Za-z_]\w*)*\s*\{'))
+    $quotes = @([regex]::Matches($text, '(?m)^[ \t]*cpp_quote\s*\(\s*"(?<code>(?:\\.|[^"\\\r\n])*)"\s*\)'))
     $insertions = [Collections.Generic.List[object]]::new()
     $dispositions = [Collections.Generic.List[object]]::new()
     $seen = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
@@ -194,19 +254,54 @@ foreach ($owner in $owners) {
         }
         $payload = [regex]::Match($fact.value, '^([A-Za-z_]\w*)=SupportedOSPlatform\("([^"]+)"\)$')
         $declarations = @($definitions | Where-Object { $_.Groups['name'].Value -ceq $fact.symbol })
+        $functions = @(Find-QuotedFunction $text $mask $quotes $fact.symbol)
         $reason = $null
         if ($fact.category -ne 'supportedOS') { $reason = 'not-an-interface-SupportedOS-fact-native-function-or-method-review-required' }
         elseif (!$payload.Success -or $payload.Groups[1].Value -cne $fact.symbol) { $reason = 'unsupported-or-inconsistent-authored-payload' }
         elseif (!$macros.ContainsKey($payload.Groups[2].Value)) { $reason = 'payload-not-in-reviewed-public-OS-vocabulary' }
-        elseif ($declarations.Count -ne 1) { $reason = "requires-one-original-interface-definition-found-$($declarations.Count)" }
-        elseif ($text -match "_Win32_AnnotateInterface_\s*\(\s*$([regex]::Escape($fact.symbol))\s*,") { $reason = 'existing-interface-carrier-requires-cumulative-review' }
+        elseif ($declarations.Count + $functions.Count -ne 1) { $reason = "requires-one-original-interface-or-quoted-function-found-$($declarations.Count + $functions.Count)" }
+        elseif ($declarations.Count -and $text -match "_Win32_AnnotateInterface_\s*\(\s*$([regex]::Escape($fact.symbol))\s*,") { $reason = 'existing-interface-carrier-requires-cumulative-review' }
         if ($reason) {
             $dispositions.Add([ordered]@{ fact = $fact; disposition = 'retained-legacy'; reason = $reason })
             continue
         }
+        $macro = $macros[$payload.Groups[2].Value]
+        if ($functions.Count) {
+            $function = $functions[0]
+            $insertion = $null
+            foreach ($candidate in @(
+                [pscustomobject]@{ offset = $function.offset; text = "$macro "; placement = 'before-function-name' },
+                [pscustomobject]@{ offset = $function.afterParametersOffset; text = " $macro"; placement = 'after-parameter-list' }
+            )) {
+                $lineEnd = $text.IndexOf("`n", $candidate.offset)
+                if ($lineEnd -lt 0) { $lineEnd = $text.Length }
+                if ($text.Substring($candidate.offset, $lineEnd - $candidate.offset).TrimEnd("`r") -match '[ \t]$') { continue }
+                $insertion = $candidate
+                break
+            }
+            if (!$insertion) {
+                $dispositions.Add([ordered]@{
+                    fact = $fact; disposition = 'retained-legacy'
+                    reason = 'native-prototype-insertion-lines-have-existing-trailing-whitespace-strict-text-patch-review-required'
+                })
+                continue
+            }
+            $insertions.Add($insertion)
+            $dispositions.Add([ordered]@{
+                fact = $fact; disposition = 'authored-original-idl'; macro = $macro
+                declaration = [ordered]@{
+                    name = $fact.symbol; qualifiedName = $fact.symbol; kind = 'FunctionDecl'
+                    sourceForm = 'cpp_quote-prototype'; file = $relative
+                    annotationPlacement = $insertion.placement
+                    line = 1 + [regex]::Matches($text.Substring(0, $function.offset), '\n').Count
+                    offset = $function.offset; start = $function.start; end = $function.end
+                    isDefinition = $false; sourceSha256 = Get-Hash $bytes
+                }
+            })
+            continue
+        }
         $definition = $declarations[0]
         $offset = Get-AttributeStart $mask $definition.Index $attributeMacros
-        $macro = $macros[$payload.Groups[2].Value]
         $prefix = if ($offset -gt 0 -and $text[$offset - 1] -notin @("`n", "`r")) { $newline } else { '' }
         $insertions.Add([pscustomobject]@{ offset = $offset; text = "${prefix}_Win32_AnnotateInterface_($($fact.symbol), $macro)$newline" })
         $dispositions.Add([ordered]@{

@@ -117,21 +117,34 @@ from a reserved schema-1 owner map. Each `owners` entry contains `original`,
     -OutputDirectory .\artifacts\idl-authoring
 ```
 
-The tool binds interface definitions in original shipped IDL, ignoring comments,
-quoted C++ and forward declarations. It inserts the reviewed
+The tool binds interface definitions in original shipped IDL, ignoring comments
+and forward declarations. It inserts the reviewed
 `_Win32_AnnotateInterface_` carrier before native attributes and adds the SAL
 bootstrap without rewriting existing bytes, guards, attributes or method order.
 Native function-like attribute macros are kept intact when every source definition
 expands to an attribute list; carriers precede the original invocation.
-Ambiguous targets, unsupported OS vocabulary, existing carriers and non-interface
-facts are reported verbatim as retained legacy debt. It never removes sidecar
+It also binds unique native function prototypes in consecutive `cpp_quote`
+statements with an explicit `STDAPI`, `STDAPI_(type)`, or HRESULT calling-convention
+prefix and a complete parameter list ending in a semicolon. The public OS macro
+is inserted immediately before the function name, preserving native linkage,
+return types, calling conventions and SAL. If that original line has trailing
+whitespace, it uses the equivalent position after the parameter list instead,
+without cleaning native bytes or weakening patch checks. If neither line can be
+patched strictly, the exact fact remains legacy debt. Calls, definitions, comments and
+incomplete or ambiguous prototypes are not admitted. Rerun with the owner's full
+fact map to preserve already-authored interface annotations in cumulative patches.
+Ambiguous targets, unsupported OS vocabulary, existing carriers and other
+unsupported facts are reported verbatim as retained legacy debt. It never removes sidecar
 rows or changes the installed SDK or repository recipe. The report's
 `candidateGeneratedHeaders` are ownership candidates, not measured generated
 outputs. Add admitted patches, original-input closure and generated outputs to
-`SdkHeaders.json`, then use the
-existing preparation/MIDL and native checks before claiming applied output or
-removing equivalent sidecar rows. Authored source is not compile or full-SDK
-acceptance.
+`SdkHeaders.json`, then use the existing preparation/MIDL and native checks before
+claiming applied output or removing equivalent sidecar rows. Authored source is
+not compile or full-SDK acceptance.
+Normal-scrape proof must exclude relocated rows from every resolved response
+input: `supportedOS.rsp` is also consumed by the scraper, not just the emitter.
+Preserve existing native contracts such as IDL `[retval]` and enumerate their
+exact activation differences separately from relocated availability facts.
 
 Recipe `partitions` do not activate the normal scraper. After qualifying and
 admitting exact original/output pairs, rerun the authorer with `-Apply` to enable

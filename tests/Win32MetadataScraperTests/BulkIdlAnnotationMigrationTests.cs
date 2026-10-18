@@ -7,6 +7,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
@@ -166,6 +167,127 @@ namespace Win32MetadataScraperTests
                 .Replace("#include <sal.h>\r\n", "", StringComparison.Ordinal));
         }
 
+        [Theory]
+        [InlineData("\r\n")]
+        [InlineData("\n")]
+        public void QuotedNativePrototypesPreserveLinkageAndCumulativeInterfaceAnnotations(string newline)
+        {
+            string source = "interface IExisting : IUnknown {};\n" +
+                "cpp_quote(\"STDAPI SingleLine(_Out_ long* result);\")\n" +
+                "cpp_quote(\"STDAPI\")\ncpp_quote(\"SplitLine(\")\n" +
+                "cpp_quote(\"    _In_reads_(count) const long* values, long count);\")\n" +
+                "cpp_quote(\"EXTERN_C HRESULT STDAPICALLTYPE Linked(void);\")\n" +
+                "cpp_quote(\"HRESULT STDMETHODCALLTYPE Stdcall(void);\")\n" +
+                "cpp_quote(\"STDAPI_(MFTIME)\")\ncpp_quote(\"Clock(void);\")\n" +
+                "cpp_quote(\"STDAPI Trailing(\") \t\ncpp_quote(\"    _In_ long value);\")\n" +
+                "cpp_quote(\"STDAPI Escaped(\") \t\n" +
+                "cpp_quote(\"    long value __attribute__((annotate(\\\"(marker)\\\"))));\")\n";
+            source = source.Replace("\n", newline, StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { Floor("IExisting") });
+            var previous = fixture.Run();
+            Assert.True(previous.ExitCode == 0, previous.Error);
+            fixture.WriteMap(new[] { "IExisting", "SingleLine", "SplitLine", "Linked", "Stdcall", "Clock", "Trailing", "Escaped" }
+                .Select(name => Floor(name)).ToArray());
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            Assert.Equal(File.ReadAllText(Path.Combine(previous.OutputDirectory, "source", "um", "sample.idl")),
+                authored.Replace("_Win32_SupportedOS_Windows7_ ", "", StringComparison.Ordinal)
+                    .Replace(") _Win32_SupportedOS_Windows7_;", ");", StringComparison.Ordinal));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+            Assert.Contains("EXTERN_C HRESULT STDAPICALLTYPE _Win32_SupportedOS_Windows7_ Linked", authored);
+            Assert.Contains("cpp_quote(\"STDAPI\")" + newline + "cpp_quote(\"_Win32_SupportedOS_Windows7_ SplitLine(", authored);
+            Assert.Contains("cpp_quote(\"STDAPI Trailing(\") \t" + newline +
+                "cpp_quote(\"    _In_ long value) _Win32_SupportedOS_Windows7_;\")", authored);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Contains("annotate(\\\"(marker)\\\")))) _Win32_SupportedOS_Windows7_;", authored);
+            Assert.Equal(8, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            var functions = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions").EnumerateArray()
+                .Where(item => item.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl").ToArray();
+            Assert.Equal(7, functions.Length);
+            Assert.All(functions, item =>
+            {
+                Assert.Equal("cpp_quote-prototype", item.GetProperty("declaration").GetProperty("sourceForm").GetString());
+                Assert.False(item.GetProperty("declaration").GetProperty("isDefinition").GetBoolean());
+            });
+        }
+
+        [Fact]
+        public void QuotedCallsCommentsIncompletePrototypesAndAmbiguousTargetsRemainLegacy()
+        {
+            const string source = "cpp_quote(\"// STDAPI Comment(void);\")\n" +
+                "/*\ncpp_quote(\"STDAPI BlockComment(void);\")\n*/\n" +
+                "cpp_quote(\"Invoke(Call());\")\n" +
+                "cpp_quote(\"HRESULT STDMETHODCALLTYPE Invoke(NestedCall());\")\n" +
+                "cpp_quote(\"typedef HRESULT (STDMETHODCALLTYPE *Pointer)(void);\")\n" +
+                "cpp_quote(\"STDAPI (*ReturnedPointer(void))(void);\")\n" +
+                "cpp_quote(\"STDAPI Whitespace(void);\") \t\n" +
+                "cpp_quote(\"STDAPI Definition(void) { return 0; }\")\n" +
+                "cpp_quote(\"STDAPI Duplicate(void);\")\ncpp_quote(\"STDAPI Duplicate(void);\")\n" +
+                "cpp_quote(\"STDAPI Incomplete(void)\")\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { "Comment", "BlockComment", "Call", "NestedCall", "Pointer", "ReturnedPointer",
+                "Whitespace", "Definition", "Duplicate", "Incomplete" }
+                .Select(name => Floor(name)).ToArray());
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(10, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+        }
+
+        [Fact]
+        public void QuotedFunctionOnlyOwnersRequireAndApplyNormalParserActivation()
+        {
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes("cpp_quote(\"STDAPI Factory(void);\")\n"));
+            fixture.WriteMap(new[] { Floor("Factory") });
+            var proposal = fixture.Run();
+            Assert.True(proposal.ExitCode == 0, proposal.Error);
+            using var before = JsonDocument.Parse(File.ReadAllText(Path.Combine(proposal.OutputDirectory, "report.json")));
+            Assert.False(before.RootElement.GetProperty("normalParserActivation").GetProperty("ready").GetBoolean());
+            var applied = fixture.Run(apply: true);
+            Assert.True(applied.ExitCode == 0, applied.Error);
+            using var after = JsonDocument.Parse(File.ReadAllText(Path.Combine(applied.OutputDirectory, "report.json")));
+            Assert.True(after.RootElement.GetProperty("normalParserActivation").GetProperty("ready").GetBoolean());
+            Assert.Contains("parse-win32-annotations", File.ReadAllText(
+                Path.Combine(fixture.Project, "Partitions", "Sample", "settings.rsp")));
+            Assert.Equal(File.ReadAllBytes(Path.Combine(proposal.OutputDirectory, "source", "um", "sample.idl")),
+                File.ReadAllBytes(Path.Combine(applied.OutputDirectory, "source", "um", "sample.idl")));
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c", "c11")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c", "c11")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17")]
+        public void QuotedPrototypeAvailabilityBindsToFunctionsInEitherNativePosition(
+            string architecture, string target, string language, string standard)
+        {
+            string linkage = language == "c++" ? "extern \"C\" " : "extern ";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                linkage + "int __stdcall _Win32_SupportedOS_Windows7_ Prefix(int value);\n" +
+                linkage + "int __stdcall Postfix(int value) _Win32_SupportedOS_Windows8_;\n",
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot()
+                .DescendantNodes().OfType<MethodDeclarationSyntax>().ToArray();
+            foreach (var expected in new[] { ("Prefix", "windows6.1"), ("Postfix", "windows8.0") })
+            {
+                var method = Assert.Single(methods.Where(value => value.Identifier.ValueText == expected.Item1));
+                Assert.Equal("int", method.ReturnType.ToString());
+                Assert.Equal("int", Assert.Single(method.ParameterList.Parameters).Type.ToString());
+                Assert.Contains("DllImport(\"scan.dll\"", method.AttributeLists.ToString());
+                var floor = Assert.Single(method.AttributeLists.SelectMany(list => list.Attributes).Where(value =>
+                    value.Name.ToString() == "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform"));
+                Assert.Equal(expected.Item2, Assert.IsType<LiteralExpressionSyntax>(
+                    Assert.Single(floor.ArgumentList.Arguments).Expression).Token.ValueText);
+            }
+        }
+
         [Fact]
         public void NativeControlsAccountForOneExistingInterfaceTypedefCarrier()
         {
@@ -291,6 +413,178 @@ namespace Win32MetadataScraperTests
             string settings = File.ReadAllText(Path.Combine(obj, "scratch", "common", partition + ".settings.rsp"));
             Assert.Contains("parse-win32-annotations", settings);
             Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+        }
+
+        [MigrationTheory("WINHTTP_PREPARED_HEADERS", "WINHTTP_PRISTINE_PREPARED_HEADERS",
+            "WINHTTP_NATIVE_TOOLSET_INCLUDE", "WIN32METADATA_FACTORY_IDL_REPORT")]
+        [MemberData(nameof(QuotedFactoryNativeSamples))]
+        public void QuotedFactoriesPreservePublishedNativeAbiSalAndInterfaceFloors(
+            string partition, string header, int functionCount, string architecture, string target,
+            string language, bool cInterface, bool enabled)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT")));
+            var owner = Assert.Single(report.RootElement.GetProperty("owners").EnumerateArray().Where(value =>
+                value.GetProperty("generatedHeaders").EnumerateArray().Any(path =>
+                    path.GetString().Equals(@"um\" + header, StringComparison.OrdinalIgnoreCase))));
+            var dispositions = owner.GetProperty("dispositions").EnumerateArray().ToArray();
+            Assert.Equal(functionCount, dispositions.Count(value =>
+                value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl"));
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string source = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n" +
+                (cInterface ? "#define CINTERFACE 1\n" : "") +
+                "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            string[] before = WinHttpNativeControlTests.Surface(root,
+                Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"), partition, architecture,
+                target, new[] { header }, "", metadataEnabled: enabled, annotations: beforeAnnotations,
+                sourceText: source, salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            string[] after = WinHttpNativeControlTests.Surface(root,
+                Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"), partition, architecture,
+                target, new[] { header }, "", metadataEnabled: enabled, annotations: afterAnnotations,
+                sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] interfaces = language == "c++" ? Facts("InterfaceDecl") : Array.Empty<string>();
+            Assert.Equal(enabled ? interfaces : Array.Empty<string>(), AnnotationFacts(beforeAnnotations));
+            Assert.Equal(enabled ? interfaces.Concat(Facts("FunctionDecl")).OrderBy(value => value, StringComparer.Ordinal)
+                : Array.Empty<string>(), AnnotationFacts(afterAnnotations));
+            this.output.WriteLine($"{partition}/{header}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
+                $"{before.Length} identical native facts without typedef normalization; {beforeSal.Count} identical SAL facts; " +
+                $"{interfaces.Length} preserved interface floors and {functionCount} new exact factory floors when enabled.");
+
+            string[] Facts(string kind) => dispositions.Where(value =>
+                value.GetProperty("declaration").GetProperty("kind").GetString() == kind)
+                .Select(value => value.GetProperty("fact").GetProperty("value").GetString().Replace('=', '|'))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            static string[] AnnotationFacts(IEnumerable<string> values) =>
+                values.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        public static IEnumerable<object[]> QuotedFactoryNativeSamples()
+        {
+            foreach (var owner in new[] { ("Mf", "mfidl.h", 72), ("Mf", "wmcontainer.h", 15), ("WmFormat", "wmsdkidl.h", 14) })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"), ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (var mode in new[] { ("c", false), ("c++", false), ("c++", true) })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[] { owner.Item1, owner.Item2, owner.Item3, architecture.Item1,
+                                architecture.Item2, mode.Item1, mode.Item2, enabled };
+        }
+
+        [MigrationTheory("WIN32METADATA_FACTORY_IDL_REPORT", "WIN32METADATA_FACTORY_NORMAL_OBJ",
+            "WIN32METADATA_FACTORY_DISABLED_OBJ")]
+        [InlineData("Mf", "x86", 87)]
+        [InlineData("Mf", "x64", 87)]
+        [InlineData("Mf", "arm64", 87)]
+        [InlineData("WmFormat", "common", 14)]
+        public void ActualNormalFactorySourcesPreserveNativeReturnValuesAndExactOwnedFloorsWithoutLegacyFallback(
+            string partition, string architecture, int functionCount)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT")));
+            var dispositions = report.RootElement.GetProperty("owners").EnumerateArray().Where(owner =>
+                owner.GetProperty("partitionCandidates").EnumerateArray().Any(value => value.GetString() == partition))
+                .SelectMany(owner => owner.GetProperty("dispositions").EnumerateArray()).ToArray();
+            Assert.Equal(functionCount, dispositions.Count(value =>
+                value.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl"));
+            string obj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_NORMAL_OBJ");
+            string disabledObj = Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_DISABLED_OBJ");
+            var positive = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                Path.Combine(obj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var disabled = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                Path.Combine(disabledObj, "generated", architecture, partition + ".cs"))).GetRoot();
+            var positiveMethods = positive.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var disabledMethods = disabled.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var positiveTypes = positive.DescendantNodes().OfType<TypeDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var disabledTypes = disabled.DescendantNodes().OfType<TypeDeclarationSyntax>()
+                .ToLookup(node => node.Identifier.ValueText, StringComparer.Ordinal);
+            var expectedLists = new List<AttributeListSyntax>();
+            string[] legacy = File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "supportedOS.rsp"));
+            foreach (var disposition in dispositions)
+            {
+                var fact = disposition.GetProperty("fact");
+                string symbol = fact.GetProperty("symbol").GetString();
+                string payload = fact.GetProperty("value").GetString().Substring(symbol.Length + 1);
+                bool function = disposition.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl";
+                var declaration = Declaration(true);
+                var attribute = Assert.Single(declaration.AttributeLists.SelectMany(list => list.Attributes).Where(IsFloor));
+                string floor = Assert.IsType<LiteralExpressionSyntax>(
+                    Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText;
+                Assert.Equal(payload, "SupportedOSPlatform(\"" + floor + "\")");
+                var list = Assert.IsType<AttributeListSyntax>(attribute.Parent);
+                Assert.Single(list.Attributes);
+                expectedLists.Add(list);
+                Assert.Empty(Declaration(false).AttributeLists.SelectMany(value => value.Attributes).Where(IsFloor));
+                Assert.DoesNotContain(symbol + "=" + payload, legacy);
+
+                MemberDeclarationSyntax Declaration(bool enabled) => function
+                    ? Assert.Single((enabled ? positiveMethods : disabledMethods)[symbol])
+                    : Assert.Single((enabled ? positiveTypes : disabledTypes)[symbol]);
+            }
+            // The existing reader also preserves these unchanged native IDL retval contracts.
+            string[] expectedReturnValues = partition == "Mf" ? new[]
+            {
+                "IMFActivate.ActivateObject.ppv",
+                "IMFActivate._ActivateObject.ppv",
+                "IMFVideoProcessorControl2.GetSupportedHardwareEffects.puiSupport",
+                "IMFVideoProcessorControl2._GetSupportedHardwareEffects.puiSupport",
+                "IMFVideoProcessorControl3.GetSupportedHardwareEffects.puiSupport",
+                "IMFVideoProcessorControl3._GetSupportedHardwareEffects.puiSupport",
+            } : Array.Empty<string>();
+            var returnValues = new List<string>();
+            foreach (var parameter in positive.DescendantNodes().OfType<ParameterSyntax>())
+            {
+                var attributes = parameter.AttributeLists.SelectMany(list => list.Attributes).Where(IsReturnValue).ToArray();
+                if (attributes.Length == 0)
+                    continue;
+                var attribute = Assert.Single(attributes);
+                Assert.Null(attribute.ArgumentList);
+                var list = Assert.IsType<AttributeListSyntax>(attribute.Parent);
+                Assert.Single(list.Attributes);
+                expectedLists.Add(list);
+                var member = parameter.Parent.Parent;
+                string name = member switch
+                {
+                    MethodDeclarationSyntax method => method.Identifier.ValueText,
+                    DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
+                    _ => throw new InvalidOperationException("An expected native retval requires a method or its delegate."),
+                };
+                var type = Assert.IsType<StructDeclarationSyntax>(member.Parent);
+                returnValues.Add(type.Identifier.ValueText + "." + name + "." + parameter.Identifier.ValueText);
+            }
+            Assert.Equal(expectedReturnValues, returnValues.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Empty(disabled.DescendantNodes().OfType<AttributeSyntax>().Where(IsReturnValue));
+            Assert.True(SyntaxFactory.AreEquivalent(
+                positive.RemoveNodes(expectedLists, SyntaxRemoveOptions.KeepNoTrivia), disabled),
+                "Disabling annotation parsing must change only the exact owned floors and proven native retval attributes, not declarations, imports or native names.");
+            string settings = File.ReadAllText(Path.Combine(obj, "scratch", architecture, partition + ".settings.rsp"));
+            Assert.Contains("parse-win32-annotations", settings);
+            Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+            this.output.WriteLine($"{partition}/{architecture}: {dispositions.Length} exact owned floors " +
+                $"({functionCount} factories), {returnValues.Count} exact existing native retval placements; " +
+                "all remaining syntax, native names, SAL and imports unchanged.");
+
+            static bool IsFloor(AttributeSyntax value) =>
+                value.Name.ToString() == "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform";
+            static bool IsReturnValue(AttributeSyntax value) =>
+                value.Name.ToString() == "global::Windows.Win32.Foundation.Metadata.RetVal";
         }
 
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
