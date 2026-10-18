@@ -1743,6 +1743,7 @@ CRITICAL_SECTION=Windows.Win32.System.Threading
 CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG=Windows.Win32.System.WindowsProgramming
 CY=Windows.Win32.System.Com
 DECIMAL=Windows.Win32.Foundation
+DEVICE_POWER_CAPABILITIES=Windows.Win32.System.Power
 DEVICE_POWER_STATE=Windows.Win32.System.Power
 DISPATCHER_CONTEXT_ARM64=Windows.Win32.System.Diagnostics.Debug
 DISPATCHER_CONTEXT=Windows.Win32.System.Diagnostics.Debug

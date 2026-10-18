@@ -1,0 +1,23 @@
+diff --git a/um/winnt.h b/um/winnt.h
+--- a/um/winnt.h
++++ b/um/winnt.h
+@@ -18499,6 +18499,19 @@
+ #define PDCAP_WAKE_FROM_D3_SUPPORTED    0x00000080
+ #define PDCAP_WARM_EJECT_SUPPORTED      0x00000100
+ 
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(DEVICE_POWER_CAPABILITIES, unsigned long,
++    PDCAP_D0_SUPPORTED,
++    PDCAP_D1_SUPPORTED,
++    PDCAP_D2_SUPPORTED,
++    PDCAP_D3_SUPPORTED,
++    PDCAP_WAKE_FROM_D0_SUPPORTED,
++    PDCAP_WAKE_FROM_D1_SUPPORTED,
++    PDCAP_WAKE_FROM_D2_SUPPORTED,
++    PDCAP_WAKE_FROM_D3_SUPPORTED,
++    PDCAP_WARM_EJECT_SUPPORTED);
++#endif
++
+ typedef struct CM_Power_Data_s {
+     DWORD               PD_Size;
+     DEVICE_POWER_STATE  PD_MostRecentPowerState;

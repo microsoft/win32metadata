@@ -5,6 +5,12 @@
   "sourceGitTree": "8b7d1b2d7806c4767ac056cc9c8d2db3a6ab677d",
   "headers": [
     {
+      "path": "um\\winnt.h",
+      "sourceSha256": "8693F0AD4ADA355C912D40CA41CE929B480E92291BDA2F9227ACF56736BFFBFF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winnt.h",
+      "sdkSha256": "8693F0AD4ADA355C912D40CA41CE929B480E92291BDA2F9227ACF56736BFFBFF"
+    },
+    {
       "path": "shared\\winerror.h",
       "sourceSha256": "0284EA46280C14063BB714D08C9EC48DE18DE6A7F0384323B263FEC234428833",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\winerror.h",
@@ -1030,6 +1036,7 @@
     "um\\powerbase.h.patch",
     "um\\powersetting.h.patch",
     "um\\powrprof.h.patch",
+    "um\\winnt.h.patch",
     "um\\WerApi.h.patch",
     "shared\\tbs.h.patch",
     "um\\davclnt.h.patch",

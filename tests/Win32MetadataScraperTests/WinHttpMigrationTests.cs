@@ -10,6 +10,7 @@ using System.Reflection.PortableExecutable;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using MetadataTasks;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
@@ -282,15 +283,18 @@ namespace Win32MetadataScraperTests
                 new EnumUse(WerNamespace, "WerReportSubmit", "dwFlags", "WER_SUBMIT_FLAGS", "UInt32"),
                 new EnumUse(WerNamespace, "WerGetFlags", "pdwFlags", "WER_FAULT_REPORTING", "UInt32*"),
                 new EnumUse(WerNamespace, "WerSetFlags", "dwFlags", "WER_FAULT_REPORTING", "UInt32"),
-                new EnumUse(PowerNamespace, "PowerDeterminePlatformRoleEx", "Version", "POWER_PLATFORM_ROLE_VERSION", "UInt32"),
-                new EnumUse(PowerNamespace, "PowerRegisterSuspendResumeNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
-                    "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
-                new EnumUse(PowerNamespace, "PowerSettingRegisterNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
-                    "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
-                new EnumUse(PowerNamespace, "PowerSettingAccessCheckEx", "AccessType", "REG_SAM_FLAGS",
-                    "UInt32", "Windows.Win32.System.Registry"),
                 new EnumUse(CabinetsNamespace, "FDICreate", "cpuType", "FDICREATE_CPU_TYPE", "Int32"),
             }).ToArray();
+        private static readonly EnumUse[] TemporaryPowerEnumUses =
+        {
+            new EnumUse(PowerNamespace, "PowerDeterminePlatformRoleEx", "Version", "POWER_PLATFORM_ROLE_VERSION", "UInt32"),
+            new EnumUse(PowerNamespace, "PowerRegisterSuspendResumeNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
+                "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
+            new EnumUse(PowerNamespace, "PowerSettingRegisterNotification", "Flags", "REGISTER_NOTIFICATION_FLAGS",
+                "UInt32", "Windows.Win32.UI.WindowsAndMessaging"),
+            new EnumUse(PowerNamespace, "PowerSettingAccessCheckEx", "AccessType", "REG_SAM_FLAGS",
+                "UInt32", "Windows.Win32.System.Registry"),
+        };
         private static readonly HandleUse[] ReviewedHandleUses =
         {
             new HandleUse(BluetoothNamespace, "BluetoothFindDeviceClose", "hFind", "HBLUETOOTH_DEVICE_FIND", "IntPtr"),
@@ -3082,10 +3086,123 @@ namespace Win32MetadataScraperTests
             Assert.Contains("parse-win32-annotations",
                 File.ReadAllText(Path.Combine(project, "Partitions", "RstMgr", "settings.rsp")));
             string patch = File.ReadAllText(Path.Combine(project, "patches", "um", "RestartManager.h.patch"));
-            Assert.Single(patch.Split('\n').Where(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_BEGIN_(WindowsVista)"));
-            Assert.Single(patch.Split('\n').Where(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_END_()"));
+            Assert.Equal(RestartManagerFunctions.Length,
+                patch.Split('\n').Count(line => line.TrimEnd('\r') == "+_Win32_SupportedOS_WindowsVista_"));
+            Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
+            Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
             Assert.DoesNotContain("_Win32_DllImport_", patch);
             Assert.DoesNotContain("_Win32_ImportLibrary_", patch);
+        }
+
+        [NativeMigrationTheory("POWER_RESTART_MIGRATION_ROOT")]
+        [InlineData("x86", 1)]
+        [InlineData("x64", 2)]
+        [InlineData("arm64", 4)]
+        public void OriginalPowerAndRestartManagerEmitOwnedFacts(string architecture, int physicalArchitecture)
+        {
+            string root = Environment.GetEnvironmentVariable("POWER_RESTART_MIGRATION_ROOT");
+            string generated = Path.Combine(root, "new-all-arch", "obj", "generated");
+            string directory = Path.Combine(root, "component-emitter", architecture);
+            Directory.CreateDirectory(directory);
+            foreach (string name in new[] { "Power.cs", "Power.header-types.cs", "RstMgr.cs" })
+                File.Copy(Path.Combine(generated, architecture, name), Path.Combine(directory, name), overwrite: true);
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            var remaps = RspReader.GetSettingsValues(Path.Combine(project, "emitter.settings.rsp"), "--memberRemap")
+                .Where(line => line.StartsWith("CallNtPowerInformation::return=", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            Assert.Equal("NTSTATUS", Assert.Single(remaps).Value);
+            foreach (var use in TemporaryPowerEnumUses)
+                remaps.Add(use.Owner + "::" + use.Member, use.Enum);
+            var requiredNamespaces = RspReader.GetSettingsValues(Path.Combine(project, "requiredNamespacesForNames.rsp"),
+                    "--requiredNamespaceForName")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            var reductions = File.ReadLines(Path.Combine(generated, "emitter.autoFnPtr.crossarch.generated.rsp"))
+                .Where(line => !line.StartsWith("--", StringComparison.Ordinal) && !string.IsNullOrWhiteSpace(line))
+                .ToHashSet(StringComparer.Ordinal);
+            reductions.UnionWith(RspReader.GetSettingsValues(Path.Combine(project, "emitter.settings.rsp"), "--reducePointerLevel")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal)));
+            using var old = Open("WINHTTP_MIGRATION_OLD");
+            using var current = HeaderAnnotationWinmdTests.Emit(directory, architecture, reductions, memberRemaps: remaps,
+                references: new[] { Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") },
+                requiredNamespaces: requiredNamespaces);
+            foreach (var owner in new[] { (PowerNamespace, 88), (RestartManagerNamespace, 11) })
+            {
+                var before = Methods(old.Reader, owner.Item1, "Apis", physicalArchitecture);
+                var after = Methods(current.Reader, owner.Item1, "Apis", physicalArchitecture);
+                Assert.Equal(owner.Item2, after.Count);
+                foreach (var entry in after)
+                {
+                    var original = before[entry.Key];
+                    Assert.Equal(Import(old.Reader, original), Import(current.Reader, entry.Value));
+                    Assert.Equal(AttributeValues(old.Reader, original.GetCustomAttributes(), "SupportedOSPlatformAttribute"),
+                        AttributeValues(current.Reader, entry.Value.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                    bool errorReturn = owner.Item1 == RestartManagerNamespace || PowerErrorFunctions.Contains(entry.Key);
+                    var signature = original.DecodeSignature(Signatures, null);
+                    Assert.Equal(Signature(signature, returnType: errorReturn ? "UInt32" : signature.ReturnType),
+                        Signature(entry.Value.DecodeSignature(Signatures, null)));
+                    if (errorReturn)
+                    {
+                        var result = entry.Value.GetParameters().Select(current.Reader.GetParameter)
+                            .Single(value => value.SequenceNumber == 0);
+                        Assert.Equal(new[] { "WIN32_ERROR" },
+                            AttributeValues(current.Reader, result.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                    }
+                }
+            }
+            Assert.Equal(SnapshotType(old.Reader, Type(old.Reader, "DEVICE_POWER_CAPABILITIES", physicalArchitecture, PowerNamespace)),
+                SnapshotType(current.Reader, Type(current.Reader, "DEVICE_POWER_CAPABILITIES", physicalArchitecture, PowerNamespace)));
+            var callbackBefore = Type(old.Reader, "EFFECTIVE_POWER_MODE_CALLBACK", physicalArchitecture, PowerNamespace);
+            var callbackAfter = Type(current.Reader, "EFFECTIVE_POWER_MODE_CALLBACK", physicalArchitecture, PowerNamespace);
+            Assert.Equal(AttributeValues(old.Reader, callbackBefore.GetCustomAttributes(), "SupportedOSPlatformAttribute"),
+                AttributeValues(current.Reader, callbackAfter.GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+            var record = Type(current.Reader, "RM_PROCESS_INFO", physicalArchitecture, RestartManagerNamespace);
+            var status = record.GetFields().Select(current.Reader.GetFieldDefinition)
+                .Single(value => current.Reader.GetString(value.Name) == "AppStatus");
+            Assert.Equal("UInt32", status.DecodeSignature(Signatures, null));
+            Assert.Equal(new[] { "RM_APP_STATUS" },
+                AttributeValues(current.Reader, status.GetCustomAttributes(), "AssociatedEnumAttribute"));
+            this.output.WriteLine($"{architecture}: 99 actual native APIs, all owned OS/import/error facts, " +
+                "four retained legacy enum uses and the 19-member native-source group.");
+        }
+
+        [Fact]
+        public void PowerTemporaryUsesAreExactAndSourceGroupsHaveNoFallback()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
+            var retained = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var item in enums.RootElement.GetProperty("items").EnumerateArray())
+            {
+                string group = item.TryGetProperty("name", out var name) ? name.GetString()
+                    : item.GetProperty("addUsesTo").GetString();
+                Assert.NotEqual("DEVICE_POWER_CAPABILITIES", group);
+                if (!item.TryGetProperty("uses", out var uses))
+                    continue;
+                foreach (var use in uses.EnumerateArray())
+                {
+                    if (!use.TryGetProperty("method", out var method) || !use.TryGetProperty("parameter", out var parameter))
+                        continue;
+                    var expected = TemporaryPowerEnumUses.SingleOrDefault(value =>
+                        value.Owner == method.GetString() && value.Member == parameter.GetString());
+                    if (expected == null)
+                        continue;
+                    Assert.Equal(expected.Enum, group);
+                    Assert.True(retained.Add(expected.Owner + "::" + expected.Member));
+                }
+            }
+            Assert.Equal(TemporaryPowerEnumUses.Select(value => value.Owner + "::" + value.Member).OrderBy(value => value),
+                retained.OrderBy(value => value));
+            string power = File.ReadAllText(Path.Combine(project, "patches", "um", "powrprof.h.patch"));
+            string winnt = File.ReadAllText(Path.Combine(project, "patches", "um", "winnt.h.patch"));
+            Assert.Contains("_Win32_FlagsEnum_(DEVICE_POWER_CAPABILITIES, unsigned long,", power);
+            Assert.Contains("_Win32_FlagsEnum_(DEVICE_POWER_CAPABILITIES, unsigned long,", winnt);
+            Assert.DoesNotContain("push_macro", power);
+            Assert.DoesNotContain("#undef PDCAP_", power);
+            Assert.DoesNotContain("PDCAP_D0_SUPPORTED =", power);
+            Assert.DoesNotContain("PDCAP_D0_SUPPORTED =", winnt);
+            Assert.Contains("DEVICE_POWER_CAPABILITIES=" + PowerNamespace,
+                File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
         }
 
         [Fact]

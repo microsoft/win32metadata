@@ -1,82 +1,78 @@
 diff --git a/um/powersetting.h b/um/powersetting.h
-index 7d5e80f6..d179ae74 100644
 --- a/um/powersetting.h
 +++ b/um/powersetting.h
-@@ -40,6 +40,8 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
+@@ -40,6 +40,8 @@
  #endif // _HPOWERNOTIFY_DEF_
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  DWORD
  WINAPI
  PowerReadACValue(
-@@ -55,6 +57,7 @@ PowerReadACValue(
+@@ -55,6 +57,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  DWORD
  WINAPI
  PowerReadDCValue(
-@@ -70,6 +73,7 @@ PowerReadDCValue(
+@@ -70,6 +74,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  DWORD
  WINAPI
  PowerWriteACValueIndex(
-@@ -96,6 +100,7 @@ PowerWriteDCValueIndex(
+@@ -83,6 +89,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ PowerWriteDCValueIndex(
+@@ -96,6 +103,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  DWORD
  WINAPI
  PowerGetActiveScheme(
-@@ -106,21 +111,25 @@ PowerGetActiveScheme(
+@@ -106,6 +115,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  DWORD
  WINAPI
  PowerSetActiveScheme(
-     _In_opt_ HKEY UserRootPowerKey,
-     _In_opt_ CONST GUID* SchemeGuid
-     );
-+_Win32_SupportedOS_END_()
- 
+@@ -116,6 +127,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
-+_Win32_SupportedOS_BEGIN_(Windows7)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows7_
  DWORD
  WINAPI
  PowerSettingRegisterNotification(
-     _In_ LPCGUID SettingGuid,
--    _In_ DWORD Flags,
-+    _In_ _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) DWORD Flags,
-     _In_ HANDLE Recipient,
-     _Out_ PHPOWERNOTIFY RegistrationHandle
-     );
-@@ -128,11 +137,13 @@ PowerSettingRegisterNotification(
+@@ -128,6 +141,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows7_
  DWORD
  WINAPI
  PowerSettingUnregisterNotification(
-     _Inout_ HPOWERNOTIFY RegistrationHandle
-     );
-+_Win32_SupportedOS_END_()
- 
- #endif
- 
-@@ -153,6 +164,7 @@ typedef enum EFFECTIVE_POWER_MODE {
+@@ -153,6 +168,7 @@
  #define EFFECTIVE_POWER_MODE_V1 (0x00000001)
  #define EFFECTIVE_POWER_MODE_V2 (0x00000002)
  
@@ -84,19 +80,19 @@ index 7d5e80f6..d179ae74 100644
  typedef _Function_class_(EFFECTIVE_POWER_MODE_CALLBACK)
  VOID
  WINAPI
-@@ -163,6 +175,7 @@ EFFECTIVE_POWER_MODE_CALLBACK (
+@@ -164,6 +180,7 @@
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS5
+ _Must_inspect_result_
++_Win32_SupportedOS_17763_
+ HRESULT
+ WINAPI
+ PowerRegisterForEffectivePowerModeNotifications(
+@@ -176,6 +193,7 @@
  #endif
  
  #if NTDDI_VERSION >= NTDDI_WIN10_RS5
-+_Win32_SupportedOS_BEGIN_(17763)
- _Must_inspect_result_
++_Win32_SupportedOS_17763_
  HRESULT
  WINAPI
-@@ -181,6 +194,7 @@ WINAPI
  PowerUnregisterFromEffectivePowerModeNotifications(
-     _In_ PVOID RegistrationHandle
-     );
-+_Win32_SupportedOS_END_()
- 
- #endif
- 

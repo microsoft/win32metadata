@@ -11046,7 +11046,12 @@
         "name": "POWER_PLATFORM_ROLE_V2"
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "method": "PowerDeterminePlatformRoleEx",
+        "parameter": "Version"
+      }
+    ]
   },
   {
     "addUsesTo": "WIN_HTTP_CREATE_URL_FLAGS",
@@ -11429,6 +11434,24 @@
       {
         "method": "RegisterPowerSettingNotification",
         "parameter": "Flags"
+      },
+      {
+        "method": "PowerRegisterSuspendResumeNotification",
+        "parameter": "Flags"
+      },
+      {
+        "method": "PowerSettingRegisterNotification",
+        "parameter": "Flags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "REG_SAM_FLAGS",
+    "members": [],
+    "uses": [
+      {
+        "method": "PowerSettingAccessCheckEx",
+        "parameter": "AccessType"
       }
     ]
   },

@@ -1,13 +1,12 @@
 diff --git a/um/powrprof.h b/um/powrprof.h
-index 7d68d141..aca3cc73 100644
 --- a/um/powrprof.h
 +++ b/um/powrprof.h
-@@ -205,29 +205,35 @@ typedef PWRSCHEMESENUMPROC_V1 *PWRSCHEMESENUMPROC;
+@@ -205,29 +205,39 @@
  
  // Public function prototypes
  
-+_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  GetPwrDiskSpindownRange(
      _Out_ PUINT puiMax,
@@ -15,6 +14,7 @@ index 7d68d141..aca3cc73 100644
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  EnumPwrSchemes(
      _In_ PWRSCHEMESENUMPROC lpfn,
@@ -22,12 +22,14 @@ index 7d68d141..aca3cc73 100644
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  ReadGlobalPwrPolicy(
      _In_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  ReadPwrScheme(
      _In_ UINT uiID,
@@ -35,56 +37,75 @@ index 7d68d141..aca3cc73 100644
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  WritePwrScheme(
      _In_ PUINT puiID,
-@@ -236,21 +242,25 @@ WritePwrScheme(
+@@ -236,21 +246,29 @@
      _In_ PPOWER_POLICY lpScheme
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  WriteGlobalPwrPolicy(
          _In_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  DeletePwrScheme(
          _In_ UINT uiID
          );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  GetActivePwrScheme(
          _Out_ PUINT puiID
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  SetActivePwrScheme(
      _In_ UINT uiID,
-@@ -272,12 +282,15 @@ STDAPI_(BOOLEAN)
- IsPwrShutdownAllowed(
+@@ -258,16 +276,19 @@
+     _In_opt_ PPOWER_POLICY pPowerPolicy
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ STDAPI_(BOOLEAN)
+ IsPwrSuspendAllowed(
          VOID
          );
-+_Win32_SupportedOS_END_()
  
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
- IsAdminOverrideActive(
+ IsPwrHibernateAllowed(
+         VOID
+         );
+ 
++_Win32_SupportedOS_WindowsXP_
+ STDAPI_(BOOLEAN)
+ IsPwrShutdownAllowed(
+         VOID
+@@ -278,6 +299,8 @@
      _In_ PADMINISTRATOR_POWER_POLICY papp
      );
  
-+_Win32_SupportedOS_BEGIN_(WindowsXP)
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  SetSuspendState(
      _In_ BOOLEAN bHibernate,
-@@ -285,21 +298,26 @@ SetSuspendState(
+@@ -285,12 +308,16 @@
      _In_ BOOLEAN bWakeupEventsDisabled
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  GetCurrentPowerPolicies(
      _Out_ PGLOBAL_POWER_POLICY pGlobalPowerPolicy,
@@ -92,459 +113,469 @@ index 7d68d141..aca3cc73 100644
      );
  
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  CanUserWritePwrScheme(
          VOID
-         );
-+_Win32_SupportedOS_END_()
- 
- #if (NTDDI_VERSION >= NTDDI_WINXP)
+@@ -300,6 +327,8 @@
  //
  // deprecated.
  //
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  ReadProcessorPwrScheme(
      _In_ UINT uiID,
-@@ -311,6 +329,8 @@ ReadProcessorPwrScheme(
+@@ -311,6 +340,8 @@
  //
  // deprecated.
  //
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
  STDAPI_(BOOLEAN)
  WriteProcessorPwrScheme(
      _In_ UINT uiID,
-@@ -409,6 +429,7 @@ typedef struct _DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
+@@ -409,6 +440,7 @@
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
-+_Win32_SupportedOS_BEGIN_(Windows7)
++_Win32_SupportedOS_Windows7_
  STDAPI_(BOOLEAN)
  PowerIsSettingRangeDefined (
      _In_opt_ CONST GUID *SubKeyGuid OPTIONAL,
-@@ -418,16 +439,20 @@ PowerIsSettingRangeDefined (
+@@ -418,6 +450,8 @@
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows7_
  STDAPI_(DWORD)
  PowerSettingAccessCheckEx (
      _In_ POWER_DATA_ACCESSOR AccessFlags,
-     _In_opt_ CONST GUID *PowerGuid,
--    _In_ REGSAM AccessType
-+    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM AccessType
-     );
-+_Win32_SupportedOS_END_()
- #endif
+@@ -428,6 +462,8 @@
  
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-+_Win32_SupportedOS_WindowsVista_
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerSettingAccessCheck (
      _In_ POWER_DATA_ACCESSOR AccessFlags,
-@@ -467,6 +492,8 @@ PowerSetUserConfiguredDCPowerMode(
+@@ -467,6 +503,8 @@
  // Read functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadACValueIndex (
      _In_opt_ HKEY RootPowerKey,
-@@ -489,6 +516,7 @@ PowerReadDCValueIndex (
+@@ -478,6 +516,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerReadDCValueIndex (
+     _In_opt_ HKEY RootPowerKey,
+@@ -489,6 +528,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -501,6 +529,7 @@ PowerReadFriendlyName (
+@@ -501,6 +542,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -513,6 +542,7 @@ PowerReadDescription (
+@@ -513,6 +556,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadPossibleValue (
      _In_opt_ HKEY RootPowerKey,
-@@ -526,6 +556,7 @@ PowerReadPossibleValue (
+@@ -526,6 +571,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadPossibleFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -538,6 +569,7 @@ PowerReadPossibleFriendlyName (
+@@ -538,6 +585,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadPossibleDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -550,6 +582,7 @@ PowerReadPossibleDescription (
+@@ -550,6 +599,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadValueMin (
      _In_opt_ HKEY RootPowerKey,
-@@ -560,6 +593,7 @@ PowerReadValueMin (
+@@ -560,6 +611,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadValueMax (
      _In_opt_ HKEY RootPowerKey,
-@@ -570,6 +604,7 @@ PowerReadValueMax (
+@@ -570,6 +623,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadValueIncrement (
      _In_opt_ HKEY RootPowerKey,
-@@ -580,6 +615,7 @@ PowerReadValueIncrement (
+@@ -580,6 +635,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadValueUnitsSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -613,6 +649,7 @@ PowerReadDCDefaultIndex (
+@@ -591,6 +648,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerReadACDefaultIndex (
+     _In_opt_ HKEY RootPowerKey,
+@@ -602,6 +660,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerReadDCDefaultIndex (
+     _In_opt_ HKEY RootPowerKey,
+@@ -613,6 +672,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerReadIconResourceSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -630,12 +667,15 @@ PowerReadSettingAttributes (
-     _In_opt_ CONST GUID *SubGroupGuid,
-     _In_opt_ CONST GUID *PowerSettingGuid
-     );
-+_Win32_SupportedOS_END_()
+@@ -625,6 +686,7 @@
  #endif
  
- //
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerReadSettingAttributes (
+     _In_opt_ CONST GUID *SubGroupGuid,
+@@ -636,6 +698,8 @@
  // Write functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -648,6 +688,7 @@ PowerWriteFriendlyName (
+@@ -648,6 +712,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -660,6 +701,7 @@ PowerWriteDescription (
+@@ -660,6 +726,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWritePossibleValue (
      _In_opt_ HKEY RootPowerKey,
-@@ -673,6 +715,7 @@ PowerWritePossibleValue (
+@@ -673,6 +741,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWritePossibleFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -685,6 +728,7 @@ PowerWritePossibleFriendlyName (
+@@ -685,6 +755,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWritePossibleDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -697,6 +741,7 @@ PowerWritePossibleDescription (
+@@ -697,6 +769,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteValueMin (
      _In_opt_ HKEY RootPowerKey,
-@@ -707,6 +752,7 @@ PowerWriteValueMin (
+@@ -707,6 +781,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteValueMax (
      _In_opt_ HKEY RootPowerKey,
-@@ -717,6 +763,7 @@ PowerWriteValueMax (
+@@ -717,6 +793,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteValueIncrement (
      _In_opt_ HKEY RootPowerKey,
-@@ -727,6 +774,7 @@ PowerWriteValueIncrement (
+@@ -727,6 +805,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteValueUnitsSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -760,6 +808,7 @@ PowerWriteDCDefaultIndex (
+@@ -738,6 +818,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerWriteACDefaultIndex (
+     _In_opt_ HKEY RootSystemPowerKey,
+@@ -749,6 +830,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerWriteDCDefaultIndex (
+     _In_opt_ HKEY RootSystemPowerKey,
+@@ -760,6 +842,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteIconResourceSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -772,6 +821,7 @@ PowerWriteIconResourceSpecifier (
+@@ -772,6 +856,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerWriteSettingAttributes (
      _In_opt_ CONST GUID *SubGroupGuid,
-@@ -781,6 +831,7 @@ PowerWriteSettingAttributes (
+@@ -781,6 +867,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerDuplicateScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -790,6 +841,7 @@ PowerDuplicateScheme (
+@@ -790,6 +878,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerImportPowerScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -799,6 +851,7 @@ PowerImportPowerScheme (
+@@ -799,6 +889,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerDeleteScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -807,6 +860,7 @@ PowerDeleteScheme (
+@@ -807,6 +899,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerRemovePowerSetting (
     _In_ CONST GUID *PowerSettingSubKeyGuid,
-@@ -815,6 +869,7 @@ PowerRemovePowerSetting (
+@@ -815,6 +909,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerCreateSetting (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -824,6 +879,7 @@ PowerCreateSetting (
+@@ -824,6 +920,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerCreatePossibleSetting (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -837,6 +893,7 @@ PowerCreatePossibleSetting (
+@@ -837,6 +935,8 @@
  // Enumerate Functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerEnumerate (
      _In_opt_ HKEY RootPowerKey,
-@@ -847,6 +904,7 @@ PowerEnumerate (
-     _Out_writes_bytes_opt_(*BufferSize) UCHAR *Buffer,
-     _Inout_ DWORD *BufferSize
-     );
-+_Win32_SupportedOS_END_()
+@@ -868,6 +968,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-@@ -868,6 +926,8 @@ PowerOpenSystemPowerKey (
- #endif
- 
- #if (NTDDI_VERSION >= NTDDI_VISTA)
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerCanRestoreIndividualDefaultPowerScheme (
      _In_ CONST GUID *SchemeGuid
-@@ -875,6 +935,7 @@ PowerCanRestoreIndividualDefaultPowerScheme (
+@@ -875,6 +977,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerRestoreIndividualDefaultPowerScheme (
      _In_ CONST GUID *SchemeGuid
-@@ -882,6 +943,7 @@ PowerRestoreIndividualDefaultPowerScheme (
+@@ -882,6 +986,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  PowerRestoreDefaultPowerSchemes(
      VOID
-@@ -900,6 +962,7 @@ STDAPI_(POWER_PLATFORM_ROLE)
- PowerDeterminePlatformRole(
-     VOID
-     );
-+_Win32_SupportedOS_END_()
+@@ -889,6 +995,7 @@
  #endif
  
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(DWORD)
+ PowerReplaceDefaultPowerSchemes(
+     VOID
+@@ -896,6 +1003,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_VISTA)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(POWER_PLATFORM_ROLE)
+ PowerDeterminePlatformRole(
+     VOID
+@@ -1042,10 +1150,25 @@
+ #define PDCAP_S4_SUPPORTED              0x01000000
+ #define PDCAP_S5_SUPPORTED              0x02000000
+ 
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(DEVICE_POWER_CAPABILITIES, unsigned long,
++    PDCAP_S0_SUPPORTED,
++    PDCAP_S1_SUPPORTED,
++    PDCAP_S2_SUPPORTED,
++    PDCAP_S3_SUPPORTED,
++    PDCAP_WAKE_FROM_S0_SUPPORTED,
++    PDCAP_WAKE_FROM_S1_SUPPORTED,
++    PDCAP_WAKE_FROM_S2_SUPPORTED,
++    PDCAP_WAKE_FROM_S3_SUPPORTED,
++    PDCAP_S4_SUPPORTED,
++    PDCAP_S5_SUPPORTED);
++#endif
++
  //
-@@ -1046,6 +1109,7 @@ PowerDeterminePlatformRole(
  // Function prototypes
  //
  #if (NTDDI_VERSION >= NTDDI_WS03)
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(BOOLEAN)
  DevicePowerEnumDevices(
      _In_ ULONG  QueryIndex,
-@@ -1057,6 +1121,7 @@ DevicePowerEnumDevices(
+@@ -1057,6 +1180,8 @@
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WS03)
 +_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
  STDAPI_(DWORD)
  DevicePowerSetDeviceState(
      _In_ LPCWSTR DeviceDescription,
-@@ -1077,6 +1142,7 @@ STDAPI_(BOOLEAN)
- DevicePowerClose(
-     VOID
-     );
-+_Win32_SupportedOS_END_()
+@@ -1066,6 +1191,7 @@
  #endif
  
- //
-@@ -1095,12 +1161,96 @@ typedef struct _THERMAL_EVENT {
+ #if (NTDDI_VERSION >= NTDDI_WS03)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(BOOLEAN)
+ DevicePowerOpen(
+     _In_opt_ ULONG DebugMask
+@@ -1073,6 +1199,7 @@
+ #endif
+ 
+ #if (NTDDI_VERSION >= NTDDI_WS03)
++_Win32_SupportedOS_WindowsVista_
+ STDAPI_(BOOLEAN)
+ DevicePowerClose(
+     VOID
+@@ -1095,12 +1222,15 @@
  } THERMAL_EVENT, *PTHERMAL_EVENT; 
  
  #if (NTDDI_VERSION >= NTDDI_WINBLUE)
-+_Win32_SupportedOS_Windows81_
 +_Win32_AssociatedEnum_(WIN32_ERROR)
++_Win32_SupportedOS_Windows81_
  STDAPI_(DWORD)
  PowerReportThermalEvent (
      _In_ PTHERMAL_EVENT Event
      );
  #endif
  
-+#ifdef WIN32METADATA
-+#pragma push_macro("PDCAP_D0_SUPPORTED")
-+#undef PDCAP_D0_SUPPORTED
-+#pragma push_macro("PDCAP_D1_SUPPORTED")
-+#undef PDCAP_D1_SUPPORTED
-+#pragma push_macro("PDCAP_D2_SUPPORTED")
-+#undef PDCAP_D2_SUPPORTED
-+#pragma push_macro("PDCAP_D3_SUPPORTED")
-+#undef PDCAP_D3_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D0_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D1_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D2_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_D3_SUPPORTED
-+#pragma push_macro("PDCAP_WARM_EJECT_SUPPORTED")
-+#undef PDCAP_WARM_EJECT_SUPPORTED
-+#pragma push_macro("PDCAP_S0_SUPPORTED")
-+#undef PDCAP_S0_SUPPORTED
-+#pragma push_macro("PDCAP_S1_SUPPORTED")
-+#undef PDCAP_S1_SUPPORTED
-+#pragma push_macro("PDCAP_S2_SUPPORTED")
-+#undef PDCAP_S2_SUPPORTED
-+#pragma push_macro("PDCAP_S3_SUPPORTED")
-+#undef PDCAP_S3_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S0_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S1_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S2_SUPPORTED
-+#pragma push_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
-+#undef PDCAP_WAKE_FROM_S3_SUPPORTED
-+#pragma push_macro("PDCAP_S4_SUPPORTED")
-+#undef PDCAP_S4_SUPPORTED
-+#pragma push_macro("PDCAP_S5_SUPPORTED")
-+#undef PDCAP_S5_SUPPORTED
-+enum [[clang::flag_enum]] DEVICE_POWER_CAPABILITIES : DWORD
-+{
-+    PDCAP_D0_SUPPORTED = 0x00000001,
-+    PDCAP_D1_SUPPORTED = 0x00000002,
-+    PDCAP_D2_SUPPORTED = 0x00000004,
-+    PDCAP_D3_SUPPORTED = 0x00000008,
-+    PDCAP_WAKE_FROM_D0_SUPPORTED = 0x00000010,
-+    PDCAP_WAKE_FROM_D1_SUPPORTED = 0x00000020,
-+    PDCAP_WAKE_FROM_D2_SUPPORTED = 0x00000040,
-+    PDCAP_WAKE_FROM_D3_SUPPORTED = 0x00000080,
-+    PDCAP_WARM_EJECT_SUPPORTED = 0x00000100,
-+    PDCAP_S0_SUPPORTED = 0x00010000,
-+    PDCAP_S1_SUPPORTED = 0x00020000,
-+    PDCAP_S2_SUPPORTED = 0x00040000,
-+    PDCAP_S3_SUPPORTED = 0x00080000,
-+    PDCAP_WAKE_FROM_S0_SUPPORTED = 0x00100000,
-+    PDCAP_WAKE_FROM_S1_SUPPORTED = 0x00200000,
-+    PDCAP_WAKE_FROM_S2_SUPPORTED = 0x00400000,
-+    PDCAP_WAKE_FROM_S3_SUPPORTED = 0x00800000,
-+    PDCAP_S4_SUPPORTED = 0x01000000,
-+    PDCAP_S5_SUPPORTED = 0x02000000,
-+};
-+#pragma pop_macro("PDCAP_S5_SUPPORTED")
-+#pragma pop_macro("PDCAP_S4_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S3_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S2_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S1_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_S0_SUPPORTED")
-+#pragma pop_macro("PDCAP_S3_SUPPORTED")
-+#pragma pop_macro("PDCAP_S2_SUPPORTED")
-+#pragma pop_macro("PDCAP_S1_SUPPORTED")
-+#pragma pop_macro("PDCAP_S0_SUPPORTED")
-+#pragma pop_macro("PDCAP_WARM_EJECT_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D3_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D2_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D1_SUPPORTED")
-+#pragma pop_macro("PDCAP_WAKE_FROM_D0_SUPPORTED")
-+#pragma pop_macro("PDCAP_D3_SUPPORTED")
-+#pragma pop_macro("PDCAP_D2_SUPPORTED")
-+#pragma pop_macro("PDCAP_D1_SUPPORTED")
-+#pragma pop_macro("PDCAP_D0_SUPPORTED")
-+#endif
 +
  #ifdef __cplusplus
  }

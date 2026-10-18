@@ -69,6 +69,58 @@ using WINHTTP_INTERNET_SCHEME = void;
                 hash);
         }
 
+        [NativeMigrationTheory("POWER_RESTART_MIGRATION_ROOT")]
+        [MemberData(nameof(PowerRestartModes))]
+        public void OriginalPowerAndRestartManagerKeepNativeContracts(
+            string partition, string architecture, string target, string language)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string[] headers = partition == "Power"
+                ? new[] { "powrprof.h", "powerbase.h", "powersetting.h" }
+                : new[] { "RestartManager.h" };
+            var originalSal = new List<string>();
+            var disabledSal = new List<string>();
+            var enabledSal = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, "",
+                salAnnotations: originalSal, language: language);
+            var disabled = Surface(root, prepared, partition, architecture, target, headers, "",
+                salAnnotations: disabledSal, language: language);
+            var enabled = Surface(root, prepared, partition, architecture, target, headers, "",
+                metadataEnabled: true, annotations: annotations, salAnnotations: enabledSal, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, disabled);
+            const string group = "typedef DEVICE_POWER_CAPABILITIES unsigned long";
+            if (partition == "Power")
+                Assert.Single(enabled.Where(value => value == group));
+            else
+                Assert.DoesNotContain(group, enabled);
+            Assert.Equal(before, enabled.Where(value => value != group));
+            Assert.Equal(originalSal, disabledSal);
+            Assert.Equal(originalSal, enabledSal);
+            Assert.Equal(partition == "Power" ? 81 : 11,
+                annotations.Count(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal)));
+            Assert.Equal(partition == "Power" ? 16 : 0,
+                annotations.Count(value => value.EndsWith("|SetLastError", StringComparison.Ordinal)));
+            this.output.WriteLine($"{partition}/{architecture}/{language}: native declarations/layout/SAL unchanged; " +
+                "only the compiled-native logical group is metadata-only.");
+        }
+
+        public static IEnumerable<object[]> PowerRestartModes()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"),
+                ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (string partition in new[] { "Power", "RstMgr" })
+                    foreach (string language in new[] { "c", "c++" })
+                        yield return new object[] { partition, architecture.Item1, architecture.Item2, language };
+        }
+
         [NativeMigrationTheory]
         [MemberData(nameof(AdditionalPartitions))]
         public void AdditionalPreparedPartitionsKeepOrdinaryNativeAbi(string partition, string architecture, string target)

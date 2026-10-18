@@ -3223,9 +3223,11 @@ repeat audits. Partial conversion and exact temporary sidecar debt remain explic
 the combined full-SDK build, unfiltered API comparison, regression and CI gate comes
 after integration. Historical qualification receipts remain unchanged.
 
-The tracked 50-original-artifact cohort now has **41 source-converted artifacts**:
-the previous 36 qualified artifacts, two Hid/DirectInput headers, and three Bluetooth
-headers. This is not full-SDK coverage or qualification of the combined head.
+The tracked 50-original-artifact cohort now has **50 source-converted artifacts**:
+the previous 36 qualified artifacts, two Hid/DirectInput headers, three Bluetooth
+headers, three DHCP headers, two WNet/Npapi headers, and four Power/RestartManager
+headers. The additional native `um\winnt.h` PDCAP contribution is outside that
+historical cohort. This is not full-SDK coverage or qualification of the combined head.
 SDK-wide source/fact inventory and additional bulk migrations extend beyond this
 historical cohort.
 
@@ -3236,6 +3238,12 @@ covered/assigned rows, 5,544 generated/nonfunction rows, 380 unknown rows and
 AST-qualified or completed migrations. The early map uses documentation and
 native-declarator lexical evidence; enum, handle, parser and manual categories
 are still being classified.
+
+The expanded allocator inventory identifies 1,291 candidate source owners across
+254 candidate partitions and 3,096 facts without a unique original. These remain
+source candidates, not converted-header counts. Native-header and original-IDL
+batch authoring now use shared, source-bound utilities; actual committed patches
+and applied output, not candidate totals or recipe edges, determine progress.
 
 Hid retains the native `NTSTATUS` alias using C17-compatible `const`, with its exact
 Int32 value and bytes. Its only physical change is the existing static literal
@@ -3251,14 +3259,43 @@ no new helper, annotation vocabulary, cast or invented alias. Its source/native
 checks pass; the remaining measured API differences are the native find-handle
 representation and precise cleanup transfers, not scalar widening.
 
-| Remaining tracked source work | Explicit cleanup or blocker |
+| Source stream | Explicit remaining cleanup or blocker |
 | --- | --- |
-| WNet/Npapi and coupled RPC | Preserve source-backed additions; resolve the three actual native RPC value/type contracts and retain exact unresolved legacy uses as debt. |
-| Power and RestartManager | Use source-owned PDCAP contributions; stage only the necessary association-name and sizeof-derived constant residuals. |
-| DHCP | Retain native field/pointer shapes and explicit remaining field-array/count relationships. |
-| SDK-wide inventory and bulk conversion | Classify the substantial sidecar tail outside the 50-artifact ledger before claiming SDK completion. |
+| WNet/Npapi and coupled RPC | Original groups and native compile fixes are integrated. Retain the three exact signed RPC alias emitter rows and Foundation direct-use rows as explicit debt. |
+| Power and RestartManager | Original declarations and source-owned PDCAP contributions are integrated. Stage only the documented association-name, parser, manual-declaration and sizeof-derived constant residuals. |
+| DHCP | Original declaration floors are integrated. Retain the exact `DHCP_IP_ARRAY::Elements` CountParamIndex 0 row while global field-array activation remains off. |
+| SDK-wide inventory and bulk conversion | Convert the substantial tail outside the 50-artifact ledger and keep unknown or ambiguous facts visible before claiming SDK completion. |
 
 Native compilation, ABI and signature defects remain blockers. Incidental metadata
 ordering, additional provenance archives and minor annotation cleanup do not block
 committing the working majority. No push, PR/stack mutation, SDK upgrade or consumer
 validation is implied by this checkpoint.
+
+### Original Power and RestartManager: source-first majority
+
+The original `um\powerbase.h`, `um\powersetting.h`, `um\powrprof.h` and
+`um\RestartManager.h` patches now compile without the held draft's synthetic
+native types or macro push/undef/value copies. Direct declaration annotations
+preserve 81 Power availability facts (including the callback), 16 last-error
+facts, 44 native DWORD/error associations, 11 RestartManager availability/error
+associations and the `RM_PROCESS_INFO::AppStatus` association. The existing
+`DEVICE_POWER_CAPABILITIES` group unions nine native `um\winnt.h` macros with
+the ten native `powrprof.h` macros; its 19 names/values, uint storage and flags
+are preserved. Global namespace resolution keeps that union in System.Power.
+
+The bounded original-source scrape covers x86, x64 and ARM64. Seventeen focused
+checks pass without skips: C17/C++17 ordinary/metadata native ABI and SAL,
+three actual component WinMDs, and exact staging-sidecar assertions. This is
+not a new full-SDK image or final CI acceptance. Evidence stays in the worker's
+`artifacts\parallel-system-migration\resumed-power-restart`.
+
+| Explicit temporary legacy input | Remaining cleanup |
+|---|---|
+| `PowerDeterminePlatformRoleEx::Version` enum use | `POWER_PLATFORM_ROLE_VERSION` is also a native object macro; the typed association needs a non-expanding name encoding. Keep the existing V1/V2 group, not an invented CURRENT_VERSION member. |
+| `PowerRegisterSuspendResumeNotification::Flags`, `PowerSettingRegisterNotification::Flags`, `PowerSettingAccessCheckEx::AccessType` enum uses | The notification and registry groups need declarations from their physical owners; retain these exact four total Power use rows in `enums.json`. |
+| `CallNtPowerInformation::return=NTSTATUS` | Existing emitter substitution retained; the native header's conditional LONG macro is not permission to invent a typedef or use an enum association. |
+| `CCH_RM_SESSION_KEY` in `manual\RestartManager.cs` | Existing value retained; the native definition depends on `sizeof(GUID)`, which the constants stage does not capture. No numeric header replacement. |
+| `POWER_COOLING_MODE`, `PROCESSOR_POWER_INFORMATION`, `SYSTEM_POWER_INFORMATION` in `manual\Power.cs` | Native declarations are still unlocated; retain the existing declarations rather than fabricate SDK source. Shared HPOWERNOTIFY cleanup remains with its physical owner. |
+
+`EFFECTIVE_POWER_MODE_CALLBACK` still requires the existing explicit
+`--reducePointerLevel` parser fixup in addition to the derived pointer cache.
