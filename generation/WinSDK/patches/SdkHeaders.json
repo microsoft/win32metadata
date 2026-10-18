@@ -803,12 +803,6 @@
       "sdkSha256": "25416AD973F5F041122753F8D17F29EF2DA8D06AA50B50A768C3852FE0B8E3AD"
     },
     {
-      "path": "shared\\ip2string.h",
-      "sourceSha256": "16FE1F7FFBC3BD334E50A00CC4D365629A6E4D006049C102BD8BD43C06198D46",
-      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ip2string.h",
-      "sdkSha256": "16FE1F7FFBC3BD334E50A00CC4D365629A6E4D006049C102BD8BD43C06198D46"
-    },
-    {
       "path": "um\\mgmtapi.h",
       "sourceSha256": "B0EAE4699CFD9EE27A1BE5884F02EB0B89B43BBDA3F26EAA57693B182AC1F0D6",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\mgmtapi.h",
@@ -2138,7 +2132,6 @@
     "um\\adshlp.h.patch",
     "um\\mgm.h.patch",
     "um\\ndfapi.h.patch",
-    "shared\\ip2string.h.patch",
     "um\\mgmtapi.h.patch",
     "um\\dsparse.h.patch",
     "um\\winber.h.patch",

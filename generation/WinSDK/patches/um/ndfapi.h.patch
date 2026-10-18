@@ -1,5 +1,5 @@
 diff --git a/um/ndfapi.h b/um/ndfapi.h
-index 1f76cedb..98b3c990 100644
+index 1f76cedb..2ac80402 100644
 --- a/um/ndfapi.h
 +++ b/um/ndfapi.h
 @@ -29,30 +29,39 @@ typedef void* NDFHANDLE;
@@ -62,23 +62,7 @@ index 1f76cedb..98b3c990 100644
  NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfCloseIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
  NdfCloseIncident(NDFHANDLE handle);
  
-@@ -93,6 +105,7 @@ NdfCloseIncident(NDFHANDLE handle);
- 
- // UI-less diagnosis API
- #ifdef __cplusplus
-+_Win32_SupportedOS_Windows7_
- NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfDiagnoseIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
- NdfDiagnoseIncident(
-     _In_ NDFHANDLE Handle,
-@@ -113,6 +126,7 @@ NdfDiagnoseIncident(
- 
- // UI-less repair API
- #ifdef __cplusplus
-+_Win32_SupportedOS_Windows7_
- NOT_BUILD_WINDOWS_DEPRECATE_NDFAPI_STDAPI("NdfRepairIncident is deprecated and might not work on all platforms. For more info, see MSDN.")
- NdfRepairIncident(_In_ NDFHANDLE Handle, _In_ RepairInfoEx* RepairEx, DWORD dwWait = INFINITE);
- #else
-@@ -121,9 +135,11 @@ NdfRepairIncident(_In_ NDFHANDLE Handle, _In_ RepairInfoEx* RepairEx, DWORD dwWa
+@@ -121,9 +133,11 @@ NdfRepairIncident(_In_ NDFHANDLE Handle, _In_ RepairInfoEx* RepairEx, DWORD dwWa
  #endif
  
  // UI-less cancel API
