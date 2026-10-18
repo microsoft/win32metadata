@@ -1,8 +1,54 @@
 diff --git a/um/textserv.h b/um/textserv.h
-index b1c7fe0b..43e2429d 100644
 --- a/um/textserv.h
 +++ b/um/textserv.h
-@@ -502,6 +502,7 @@ interface IRicheditUiaOverrides : public IUnknown
+@@ -16,6 +16,7 @@
+ 
+ #ifndef _TEXTSERV_H
+ #define _TEXTSERV_H
++#include <sal.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -113,7 +114,7 @@ enum CHANGETYPE
+  *	what actually happened for a change.
+  */
+ struct CHANGENOTIFY {
+-	DWORD	dwChangeType;				//@field TEXT changed, etc
++	_Win32_AssociatedEnum_(CHANGETYPE) DWORD	dwChangeType;				//@field TEXT changed, etc
+ 	void *	pvCookieData; 				//@field cookie for the undo action 
+ 										// associated with the change.
+ };
+@@ -457,6 +458,9 @@ interface IRawElementProviderSimple;
+  *
+  *	@base	public | IUnknown 
+  */
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows8_ struct IRicheditWindowlessAccessibility IRicheditWindowlessAccessibility;
++#endif
+ interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
+@@ -473,6 +477,9 @@ struct UiaRect;
+  *
+  *	@base	public | IUnknown 
+  */
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows8_ struct IRichEditUiaInformation IRichEditUiaInformation;
++#endif
+ interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
+@@ -490,6 +497,9 @@ typedef int PROPERTYID;
+  *
+  *	@base	public | IUnknown 
+  */
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows8_ struct IRicheditUiaOverrides IRicheditUiaOverrides;
++#endif
+ interface IRicheditUiaOverrides : public IUnknown
+ {
+ 	virtual HRESULT STDMETHODCALLTYPE GetPropertyOverrideValue(
+@@ -502,6 +512,7 @@ interface IRicheditUiaOverrides : public IUnknown
  //------------------------------------------------------------------------
  
  // Text Services factory

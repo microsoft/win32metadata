@@ -1836,7 +1836,20 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  } EDITBALLOONTIP, *PEDITBALLOONTIP;
  #define EM_SHOWBALLOONTIP   (ECM_FIRST + 3)     // Show a balloon tip associated to the edit control
  #define Edit_ShowBalloonTip(hwnd, peditballoontip) \
-@@ -7762,7 +8440,9 @@ typedef struct _TASKDIALOGCONFIG
+@@ -7626,7 +8304,11 @@ typedef struct NMSEARCHWEB
+ 
+ typedef HRESULT (CALLBACK *PFTASKDIALOGCALLBACK)(_In_ HWND hwnd, _In_ UINT msg, _In_ WPARAM wParam, _In_ LPARAM lParam, _In_ LONG_PTR lpRefData);
+ 
+-enum _TASKDIALOG_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ _TASKDIALOG_FLAGS
+ {
+     TDF_ENABLE_HYPERLINKS               = 0x0001,
+     TDF_USE_HICON_MAIN                  = 0x0002,
+@@ -7762,7 +8444,9 @@ typedef struct _TASKDIALOGCONFIG
  } TASKDIALOGCONFIG;
  
  
@@ -1846,7 +1859,7 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
  
  
-@@ -7781,9 +8461,11 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
+@@ -7781,9 +8465,11 @@ WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINST
  // === MUI APIs ===
  //
  #ifndef NOMUI
@@ -1858,7 +1871,7 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  LANGID WINAPI GetMUILanguage(void);
  #endif  // NOMUI
  
-@@ -7835,6 +8517,7 @@ typedef struct tagTRACKMOUSEEVENT {
+@@ -7835,6 +8521,7 @@ typedef struct tagTRACKMOUSEEVENT {
  // Declare _TrackMouseEvent.  This API tries to use the window manager's
  // implementation of TrackMouseEvent if it is present, otherwise it emulates.
  //
@@ -1866,7 +1879,7 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  WINCOMMCTRLAPI
  BOOL
  WINAPI
-@@ -7858,39 +8541,67 @@ _TrackMouseEvent(
+@@ -7858,39 +8545,67 @@ _TrackMouseEvent(
  #define WSB_PROP_HSTYLE     0x00000200L
  #define WSB_PROP_WINSTYLE   0x00000400L
  #define WSB_PROP_PALETTE    0x00000800L
@@ -1937,7 +1950,7 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
  
  #endif  //  NOFLATSBAPIS
-@@ -7907,13 +8618,17 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
+@@ -7907,13 +8622,17 @@ typedef LRESULT (CALLBACK *SUBCLASSPROC)(HWND hWnd, UINT uMsg, WPARAM wParam,
      LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
  
  
@@ -1955,7 +1968,7 @@ diff --git a/um/commctrl.h b/um/commctrl.h
  LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
  #endif
  
-@@ -7925,13 +8640,16 @@ enum _LI_METRIC
+@@ -7925,13 +8644,16 @@ enum _LI_METRIC
     LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
  };
  

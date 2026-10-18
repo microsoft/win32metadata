@@ -1,8 +1,20 @@
 diff --git a/um/propvarutil.h b/um/propvarutil.h
-index 17f56347..9d52164f 100644
 --- a/um/propvarutil.h
 +++ b/um/propvarutil.h
-@@ -55,40 +55,57 @@ typedef int PSTIME_FLAGS;
+@@ -41,7 +41,11 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS;
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+-enum tagPSTIME_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ tagPSTIME_FLAGS
+ {
+     PSTF_UTC   = 0x00000000,
+     PSTF_LOCAL = 0x00000001,
+@@ -55,40 +59,57 @@ typedef int PSTIME_FLAGS;
  //====================
  
  // Initialize a propvariant
@@ -60,7 +72,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI InitPropVariantFromStringAsVector(_In_opt_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
  #ifdef __cplusplus
  HRESULT  InitPropVariantFromBoolean(_In_ BOOL fVal, _Out_ PROPVARIANT *ppropvar);
-@@ -106,13 +123,21 @@ BOOL     IsPropVariantString(_In_ REFPROPVARIANT propvar);
+@@ -106,13 +127,21 @@ BOOL     IsPropVariantString(_In_ REFPROPVARIANT propvar);
  #endif
  
  // Extract data from a propvariant
@@ -82,7 +94,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ DOUBLE dblDefault);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -120,19 +145,27 @@ PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarI
+@@ -120,19 +149,27 @@ PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarI
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  PSSTDAPI_(PCWSTR)    PropVariantToStringWithDefault(_In_ REFPROPVARIANT propvarIn, _In_opt_ LPCWSTR pszDefault);
  
@@ -110,7 +122,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI             PropVariantToString(_In_ REFPROPVARIANT propvar, _Out_writes_(cch) PWSTR psz, _In_ UINT cch);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -146,23 +179,34 @@ _Check_return_ PSSTDAPI PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Outptr_r
+@@ -146,23 +183,34 @@ _Check_return_ PSSTDAPI PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Outptr_r
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  _Check_return_ PSSTDAPI PropVariantToStrRet(_In_ REFPROPVARIANT propvar, _Out_ STRRET *pstrret);
@@ -145,7 +157,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI PropVariantToFileTimeVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgft, *pcElem) FILETIME *prgft, _In_ ULONG crgft, _Out_ ULONG *pcElem);
  _Check_return_ PSSTDAPI PropVariantToStringVector(_In_ REFPROPVARIANT propvar, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
  
-@@ -181,14 +225,23 @@ _Check_return_ PSSTDAPI PropVariantToStringVectorAlloc(_In_ REFPROPVARIANT propv
+@@ -181,14 +229,23 @@ _Check_return_ PSSTDAPI PropVariantToStringVectorAlloc(_In_ REFPROPVARIANT propv
  
  // Extract a single element from a propvariant.  If it is a VT_VECTOR or VT_ARRAY, returns the element you request.
  // Otherwise iElem must equal 0 and the function will returns the value.
@@ -169,7 +181,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI PropVariantGetFileTimeElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Out_ FILETIME *pftVal);
  _Check_return_ PSSTDAPI PropVariantGetStringElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
  #ifdef __cplusplus
-@@ -196,6 +249,7 @@ HRESULT  PropVariantGetElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Ou
+@@ -196,6 +253,7 @@ HRESULT  PropVariantGetElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Ou
  #endif
  
  // Helpers
@@ -177,7 +189,33 @@ index 17f56347..9d52164f 100644
  PSSTDAPI_(void) ClearPropVariantArray(_Inout_updates_(cVars) PROPVARIANT *rgPropVar, _In_ UINT cVars);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -245,10 +299,13 @@ enum tagPROPVAR_CHANGE_FLAGS
+@@ -215,7 +273,11 @@ typedef enum
+     PVCU_YEAR    = 6
+ } PROPVAR_COMPARE_UNIT;
+ 
+-enum tagPROPVAR_COMPARE_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ tagPROPVAR_COMPARE_FLAGS
+ {
+     PVCF_DEFAULT                 = 0x00000000,   // When comparing strings, use StrCmpLogical
+     PVCF_TREATEMPTYASGREATERTHAN = 0x00000001,   // Empty/null values are greater-than non-empty values
+@@ -233,7 +295,11 @@ PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVA
+ int PropVariantCompare(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2);
+ #endif
+ 
+-enum tagPROPVAR_CHANGE_FLAGS
++enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ tagPROPVAR_CHANGE_FLAGS
+ {
+     PVCHF_DEFAULT           = 0x00000000,
+     PVCHF_NOVALUEPROP       = 0x00000001,       // Maps to VARIANT_NOVALUEPROP for VariantChangeType
+@@ -245,10 +311,13 @@ enum tagPROPVAR_CHANGE_FLAGS
  typedef int PROPVAR_CHANGE_FLAGS;
  
  // Coersions
@@ -191,7 +229,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pPropVar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
  #pragma endregion
-@@ -261,6 +318,7 @@ _Check_return_ PSSTDAPI StgSerializePropVariant(
+@@ -261,6 +330,7 @@ _Check_return_ PSSTDAPI StgSerializePropVariant(
              _Outptr_result_bytebuffer_(*pcb) SERIALIZEDPROPERTYVALUE** ppProp,
              _Out_ ULONG* pcb);
      
@@ -199,7 +237,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI StgDeserializePropVariant(
              _In_ const SERIALIZEDPROPERTYVALUE* pprop,
              _In_ ULONG cbMax,
-@@ -283,6 +341,7 @@ BOOL IsVarTypeInteger(_In_ VARTYPE vt);
+@@ -283,6 +353,7 @@ BOOL IsVarTypeInteger(_In_ VARTYPE vt);
  #endif
  
  // Initialize a VARIANT
@@ -207,7 +245,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI InitVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ VARIANT *pvar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -293,19 +352,32 @@ PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb
+@@ -293,19 +364,32 @@ PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -240,7 +278,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI InitVariantFromStringArray(_In_reads_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ VARIANT *pvar);
  #ifdef __cplusplus
  HRESULT  InitVariantFromBoolean(_In_ BOOL fVal, _Out_ VARIANT *pvar);
-@@ -324,51 +396,79 @@ HRESULT  InitVariantFromUnknown(_In_opt_ IUnknown *unknown, _Out_ VARIANT* varia
+@@ -324,51 +408,79 @@ HRESULT  InitVariantFromUnknown(_In_opt_ IUnknown *unknown, _Out_ VARIANT* varia
  #endif
  
  // Extract data from a VARIANT
@@ -320,7 +358,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI VariantToDoubleArray(_In_ REFVARIANT var, _Out_writes_to_(crgn, *pcElem) DOUBLE *prgn, _In_ ULONG crgn, _Out_ ULONG *pcElem);
  _Check_return_ PSSTDAPI VariantToStringArray(_In_ REFVARIANT var, _Out_writes_to_(crgsz, *pcElem) PWSTR *prgsz, _In_ ULONG crgsz, _Out_ ULONG *pcElem);
  
-@@ -385,13 +485,21 @@ _Check_return_ PSSTDAPI VariantToStringArrayAlloc(_In_ REFVARIANT var, _Outptr_r
+@@ -385,13 +497,21 @@ _Check_return_ PSSTDAPI VariantToStringArrayAlloc(_In_ REFVARIANT var, _Outptr_r
  
  // Get a single element of a VARIANT.  If it is type VT_ARRAY, returns a the requested element.  Otherwise
  // iElem must equal 0 and the function returns the value.
@@ -342,7 +380,7 @@ index 17f56347..9d52164f 100644
  PSSTDAPI VariantGetDoubleElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Out_ DOUBLE *pnVal);
  _Check_return_ PSSTDAPI VariantGetStringElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
  #ifdef __cplusplus
-@@ -399,7 +507,9 @@ HRESULT  VariantGetElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *
+@@ -399,7 +519,9 @@ HRESULT  VariantGetElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *
  #endif
  
  // Helpers
@@ -352,3 +390,16 @@ index 17f56347..9d52164f 100644
  PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
  
  //===========================
+@@ -414,7 +536,11 @@ PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
+ // propvar.caul.pElems[0] = current progress
+ // propvar.caul.pElems[1] = total progress
+ // propvar.caul.pElems[2] = DRAWPROGRESSFLAGS (see below);
+-typedef enum DRAWPROGRESSFLAGS
++typedef enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ DRAWPROGRESSFLAGS
+ {
+     DPF_NONE                = 0x0,  // No progress flags.
+     DPF_MARQUEE             = 0x1,  // The progress bar should draw in marquee mode.

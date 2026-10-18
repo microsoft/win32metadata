@@ -621,8 +621,6 @@ VirtualAlloc
 VirtualAllocFromApp
 VirtualProtect
 VirtualProtectFromApp
-WinUsb_ParseConfigurationDescriptor
-WinUsb_ParseDescriptors
 WSAAsyncGetHostByAddr
 WSAAsyncGetHostByName
 WSAAsyncGetProtoByName

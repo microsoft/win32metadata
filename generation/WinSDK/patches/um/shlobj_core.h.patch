@@ -1,5 +1,4 @@
 diff --git a/um/shlobj_core.h b/um/shlobj_core.h
-index 04174f87..d7087e90 100644
 --- a/um/shlobj_core.h
 +++ b/um/shlobj_core.h
 @@ -101,8 +101,11 @@ extern "C" {            /* Assume C declarations for C++ */
@@ -14,7 +13,47 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void)   SHFree(_In_opt_ void * pv);           // CoTaskMemFree(pv)
  
  
-@@ -386,7 +389,9 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
+@@ -233,6 +236,9 @@ SHSTDAPI_(void)   SHFree(_In_opt_ void * pv);           // CoTaskMemFree(pv)
+ #undef  INTERFACE
+ #define INTERFACE   IExtractIconA
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IExtractIconA IExtractIconA;
++#endif
+ DECLARE_INTERFACE_IID_(IExtractIconA, IUnknown, "000214eb-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(GetIconLocation)(THIS_
+@@ -255,6 +261,9 @@ typedef IExtractIconA * LPEXTRACTICONA;
+ #undef  INTERFACE
+ #define INTERFACE   IExtractIconW
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IExtractIconW IExtractIconW;
++#endif
+ DECLARE_INTERFACE_IID_(IExtractIconW, IUnknown, "000214fa-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(GetIconLocation)(THIS_
+@@ -317,6 +326,9 @@ typedef IExtractIconW * LPEXTRACTICONW;
+ #undef  INTERFACE
+ #define INTERFACE   IShellIconOverlayManager
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IShellIconOverlayManager IShellIconOverlayManager;
++#endif
+ DECLARE_INTERFACE_IID_(IShellIconOverlayManager, IUnknown, "f10b5e34-dd3b-42a7-aa7d-2f4ec54bb09b")
+ {
+     STDMETHOD(GetFileOverlayInfo)(THIS_ _In_ PCWSTR pwszPath, DWORD dwAttrib, _Out_ int * pIndex, DWORD dwflags) PURE;
+@@ -359,6 +371,9 @@ DECLARE_INTERFACE_IID_(IShellIconOverlayManager, IUnknown, "f10b5e34-dd3b-42a7-a
+ #undef  INTERFACE
+ #define INTERFACE   IShellIconOverlay
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IShellIconOverlay IShellIconOverlay;
++#endif
+ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c04fd655e1")
+ {
+     STDMETHOD(GetOverlayIndex)(THIS_ _In_ PCUITEMID_CHILD pidl, _Inout_ int * pIndex) PURE;
+@@ -386,7 +401,9 @@ DECLARE_INTERFACE_IID_(IShellIconOverlay, IUnknown, "7d688a70-c613-11d0-999b-00c
  #define IDO_SHGIOI_LINK   0x0FFFFFFE
  #define IDO_SHGIOI_SLOWFILE 0x0FFFFFFFD
  #define IDO_SHGIOI_DEFAULT  0x0FFFFFFFC
@@ -24,7 +63,37 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(int) SHGetIconOverlayIndexW(_In_opt_ LPCWSTR pszIconPath, int iIconIndex);
  #ifdef UNICODE
  #define SHGetIconOverlayIndex  SHGetIconOverlayIndexW
-@@ -652,22 +657,33 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
+@@ -589,6 +606,9 @@ DECLARE_INTERFACE_IID_(IShellExecuteHookW, IUnknown, "000214fb-0000-0000-c000-00
+ #undef  INTERFACE
+ #define INTERFACE   IURLSearchHook
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IURLSearchHook IURLSearchHook;
++#endif
+ DECLARE_INTERFACE_IID_(IURLSearchHook, IUnknown, "ac60f6a0-0fd9-11d0-99cb-00c04fd64497")
+ {
+     STDMETHOD(Translate)(THIS_ _Out_writes_(cchBufferSize) PWSTR pwszSearchURL, DWORD cchBufferSize) PURE;
+@@ -597,6 +617,9 @@ DECLARE_INTERFACE_IID_(IURLSearchHook, IUnknown, "ac60f6a0-0fd9-11d0-99cb-00c04f
+ #undef  INTERFACE
+ #define INTERFACE   ISearchContext
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct ISearchContext ISearchContext;
++#endif
+ DECLARE_INTERFACE_IID_(ISearchContext, IUnknown, "09F656A2-41AF-480C-88F7-16CC0D164615")
+ {
+     STDMETHOD(GetSearchUrl)(THIS_ _Outptr_ BSTR * pbstrSearchUrl) PURE;
+@@ -607,6 +630,9 @@ DECLARE_INTERFACE_IID_(ISearchContext, IUnknown, "09F656A2-41AF-480C-88F7-16CC0D
+ #undef  INTERFACE
+ #define INTERFACE   IURLSearchHook2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IURLSearchHook2 IURLSearchHook2;
++#endif
+ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc-07540dedd0e0")
+ {
+     STDMETHOD(TranslateWithSearchContext)(THIS_ _Out_writes_(cchBufferSize) PWSTR pwszSearchURL, DWORD cchBufferSize, _In_opt_ ISearchContext * pSearchContext) PURE;
+@@ -652,22 +678,33 @@ DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc
  
  SHSTDAPI_(PIDLIST_RELATIVE)     ILClone(_In_ PCUIDLIST_RELATIVE pidl);
  SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
@@ -47,7 +116,8 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL)                 ILIsParent(_In_ PCIDLIST_ABSOLUTE pidl1, _In_ PCIDLIST_ABSOLUTE pidl2, BOOL fImmediate);
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI                        ILSaveToStream(_In_ IStream *pstm, _In_ PCUIDLIST_RELATIVE pidl);
- EXTERN_C DECLSPEC_DEPRECATED HRESULT STDAPICALLTYPE ILLoadFromStream(_In_ IStream *pstm, _Inout_ PIDLIST_RELATIVE *pidl); // use ILLoadFromStreamEx instead
+-EXTERN_C DECLSPEC_DEPRECATED HRESULT STDAPICALLTYPE ILLoadFromStream(_In_ IStream *pstm, _Inout_ PIDLIST_RELATIVE *pidl); // use ILLoadFromStreamEx instead
++EXTERN_C _Win32_SupportedOS_WindowsXP_ DECLSPEC_DEPRECATED HRESULT STDAPICALLTYPE ILLoadFromStream(_In_ IStream *pstm, _Inout_ PIDLIST_RELATIVE *pidl); // use ILLoadFromStreamEx instead
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  SHSTDAPI                        ILLoadFromStreamEx(_In_ IStream *pstm, _Outptr_ PIDLIST_RELATIVE *pidl);
  #endif // NTDDI_VISTA
@@ -58,7 +128,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPathW(_In_ PCWSTR pszPath);
  
  #ifdef NO_WRAPPERS_FOR_ILCREATEFROMPATH
-@@ -680,6 +696,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
+@@ -680,6 +717,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
  #endif  // !UNICODE
  #endif  // NO_WRAPPERS_FOR_ILCREATEFROMPATH
  
@@ -66,7 +136,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHILCreateFromPath(_In_ PCWSTR pszPath, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _Inout_opt_ DWORD *rgfInOut);
  
  
-@@ -733,6 +750,7 @@ extern "C" {
+@@ -733,6 +771,7 @@ extern "C" {
  
  #endif // defined(STRICT_TYPED_ITEMIDS) && defined(__cplusplus)
  
@@ -74,7 +144,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(PIDLIST_RELATIVE) ILAppendID(_In_opt_ PIDLIST_RELATIVE pidl, _In_ LPCSHITEMID pmkid, BOOL fAppend);
  
  
-@@ -748,17 +766,20 @@ enum
+@@ -748,17 +787,20 @@ enum
  
  
  typedef int GPFIDL_FLAGS;
@@ -95,7 +165,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetPathFromIDList  SHGetPathFromIDListW
-@@ -766,8 +787,11 @@ SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(M
+@@ -766,8 +808,11 @@ SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(M
  #define SHGetPathFromIDList  SHGetPathFromIDListA
  #endif // !UNICODE
  
@@ -107,7 +177,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
  #ifdef UNICODE
  #define SHCreateDirectoryEx  SHCreateDirectoryExW
-@@ -782,10 +806,12 @@ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _I
+@@ -782,10 +827,12 @@ SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _I
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  
@@ -120,7 +190,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShellFolder *psfParent, _In_ PCUITEMID_CHILD pidl, _Outptr_ IShellItem **ppsi);
  
  #endif
-@@ -891,12 +917,16 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
+@@ -891,12 +938,16 @@ SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShel
  #define CSIDL_FLAG_MASK                 0xFF00        // mask for all possible flag values
  
  _Check_return_
@@ -137,7 +207,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
  #ifdef UNICODE
  #define SHGetSpecialFolderPath  SHGetSpecialFolderPathW
-@@ -905,6 +935,7 @@ SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_P
+@@ -905,6 +956,7 @@ SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_P
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -145,7 +215,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void) SHFlushSFCache(void);
  
  typedef enum {
-@@ -912,25 +943,32 @@ typedef enum {
+@@ -912,25 +964,32 @@ typedef enum {
      SHGFP_TYPE_DEFAULT  = 1,   // default value, may not exist
  } SHGFP_TYPE;
  
@@ -178,7 +248,7 @@ index 04174f87..d7087e90 100644
  STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPathAndSubDir  SHGetFolderPathAndSubDirW
-@@ -1033,16 +1071,19 @@ typedef enum
+@@ -1033,18 +1092,21 @@ typedef enum
  
  DEFINE_ENUM_FLAG_OPERATORS(KNOWN_FOLDER_FLAG)
  
@@ -196,9 +266,12 @@ index 04174f87..d7087e90 100644
  
 +_Win32_SupportedOS_WindowsVista_
  STDAPI SHGetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
-                             _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
+-                            _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
++                            _Win32_AssociatedEnum_(KNOWN_FOLDER_FLAG) _In_ DWORD /* KNOWN_FOLDER_FLAG */ dwFlags,
                              _In_opt_ HANDLE hToken,
-@@ -1052,6 +1093,7 @@ STDAPI SHGetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
+                             _Outptr_ PWSTR *ppszPath); // free *ppszPath with CoTaskMemFree
+ 
+@@ -1052,6 +1114,7 @@ STDAPI SHGetKnownFolderPath(_In_ REFKNOWNFOLDERID rfid,
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  // returns IShellItem or related interface
@@ -206,7 +279,7 @@ index 04174f87..d7087e90 100644
  STDAPI SHGetKnownFolderItem(_In_ REFKNOWNFOLDERID rfid,
                              _In_ KNOWN_FOLDER_FLAG flags,
                              _In_opt_ HANDLE hToken,
-@@ -1114,6 +1156,7 @@ typedef struct
+@@ -1114,6 +1177,7 @@ typedef struct
  #include <poppack.h>        /* Return to byte packing */
  
  // Gets/Sets the Folder Custom Settings for pszPath based on dwReadWrite. dwReadWrite can be FCS_READ/FCS_WRITE/FCS_FORCEWRITE
@@ -214,7 +287,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHGetSetFolderCustomSettings(_Inout_ LPSHFOLDERCUSTOMSETTINGS pfcs, _In_ PCWSTR pszPath, DWORD dwReadWrite);
  
  #endif //NTDDI_VISTA
-@@ -1207,7 +1250,9 @@ typedef struct _browseinfoW {
+@@ -1207,7 +1271,9 @@ typedef struct _browseinfoW {
  #define BFFM_SETOKTEXT          (WM_USER + 105) // Unicode only
  #define BFFM_SETEXPANDED        (WM_USER + 106) // Unicode only
  
@@ -224,7 +297,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
  
  #ifdef UNICODE
-@@ -1233,6 +1278,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
+@@ -1233,6 +1299,7 @@ SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
  //-------------------------------------------------------------------------
  
  _Check_return_
@@ -232,7 +305,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHLoadInProc(_In_ REFCLSID rclsid);
  
  
-@@ -1272,6 +1318,7 @@ enum
+@@ -1272,6 +1339,7 @@ enum
  //  CoCreateInstance(CLSID_Desktop, NULL, CLSCTX_INPROC, IID_PPV_ARGS(&pshf));
  //
  _Check_return_
@@ -240,7 +313,67 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHGetDesktopFolder(_Outptr_ IShellFolder **ppshf);
  
  // this interface is deprecated, data sources should
-@@ -2057,6 +2104,7 @@ typedef struct _SHChangeNotifyEntry
+@@ -1280,6 +1348,9 @@ SHSTDAPI SHGetDesktopFolder(_Outptr_ IShellFolder **ppshf);
+ #undef  INTERFACE
+ #define INTERFACE   IShellDetails
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IShellDetails IShellDetails;
++#endif
+ DECLARE_INTERFACE_IID_(IShellDetails, IUnknown, "000214EC-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(GetDetailsOf)(THIS_ _In_opt_ PCUITEMID_CHILD pidl, UINT iColumn, _Out_ SHELLDETAILS *pDetails) PURE;
+@@ -1302,6 +1373,9 @@ DECLARE_INTERFACE_IID_(IShellDetails, IUnknown, "000214EC-0000-0000-c000-0000000
+ #undef INTERFACE
+ #define INTERFACE IObjMgr
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IObjMgr IObjMgr;
++#endif
+ DECLARE_INTERFACE_IID_(IObjMgr, IUnknown, "00BB2761-6A77-11D0-A535-00C04FD7D062")
+ {
+     STDMETHOD(Append) (THIS_ _In_ IUnknown *punk) PURE;
+@@ -1326,6 +1400,9 @@ DECLARE_INTERFACE_IID_(IObjMgr, IUnknown, "00BB2761-6A77-11D0-A535-00C04FD7D062"
+ #undef INTERFACE
+ #define INTERFACE IACList
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IACList IACList;
++#endif
+ DECLARE_INTERFACE_IID_(IACList, IUnknown, "77A130B0-94FD-11D0-A544-00C04FD7d062")
+ {
+     STDMETHOD(Expand) (THIS_ _In_ PCWSTR pszExpand) PURE;
+@@ -1355,6 +1432,9 @@ typedef enum _tagAUTOCOMPLETELISTOPTIONS
+ #endif
+ } AUTOCOMPLETELISTOPTIONS;
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IACList2 IACList2;
++#endif
+ DECLARE_INTERFACE_IID_(IACList2, IACList, "470141a0-5186-11d2-bbb6-0060977b464c")
+ {
+     // *** IACList2 specific methods ***
+@@ -1434,6 +1514,9 @@ DECLARE_INTERFACE_IID_(IACList2, IACList, "470141a0-5186-11d2-bbb6-0060977b464c"
+ #undef  INTERFACE
+ #define INTERFACE   IProgressDialog
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IProgressDialog IProgressDialog;
++#endif
+ DECLARE_INTERFACE_IID_(IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-006097DF5BD4")
+ {
+     STDMETHOD(StartProgressDialog)(THIS_ _In_opt_ HWND hwndParent, _In_opt_ IUnknown * punkEnableModless, DWORD dwFlags, _Reserved_ LPCVOID pvResevered) PURE;
+@@ -1487,6 +1570,9 @@ DECLARE_INTERFACE_IID_(IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-00609
+ #undef  INTERFACE
+ #define INTERFACE   IDockingWindowSite
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IDockingWindowSite IDockingWindowSite;
++#endif
+ DECLARE_INTERFACE_IID_(IDockingWindowSite, IOleWindow, "2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8")
+ {
+     STDMETHOD(GetBorderDW) (THIS_ _In_ IUnknown* punkObj, _Out_ RECT *prcBorder) PURE;
+@@ -2057,6 +2143,7 @@ typedef struct _SHChangeNotifyEntry
  //
  //  APIs
  //
@@ -248,7 +381,27 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void) SHChangeNotify(LONG wEventId, UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
  
  //
-@@ -2152,6 +2200,7 @@ typedef struct SHARDAPPIDINFOLINK
+@@ -2065,6 +2152,9 @@ SHSTDAPI_(void) SHChangeNotify(LONG wEventId, UINT uFlags, _In_opt_ LPCVOID dwIt
+ #undef  INTERFACE
+ #define INTERFACE  IShellChangeNotify
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IShellChangeNotify IShellChangeNotify;
++#endif
+ DECLARE_INTERFACE_IID_(IShellChangeNotify, IUnknown, "D82BE2B1-5764-11D0-A96E-00C04FD705A2")
+ {
+     STDMETHOD(OnChange) (THIS_ LONG lEvent, _In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCIDLIST_ABSOLUTE pidl2) PURE;
+@@ -2084,6 +2174,9 @@ DECLARE_INTERFACE_IID_(IShellChangeNotify, IUnknown, "D82BE2B1-5764-11D0-A96E-00
+ #undef  INTERFACE
+ #define INTERFACE  IQueryInfo
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IQueryInfo IQueryInfo;
++#endif
+ DECLARE_INTERFACE_IID_(IQueryInfo, IUnknown, "00021500-0000-0000-c000-000000000046")
+ {
+     STDMETHOD(GetInfoTip)(THIS_ DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
+@@ -2152,6 +2245,7 @@ typedef struct SHARDAPPIDINFOLINK
  #endif
  
  // The type of the data pointed to by pv is a function of uFlags values that are SHARD_XXX values.  PV can be a PCIDLIST_ABSOLUTE, PCWSTR, PCSTR, SHARDAPPIDINFO, or SHARDAPPIDINFOIDLIST.
@@ -256,7 +409,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void) SHAddToRecentDocs(UINT uFlags, _In_opt_ LPCVOID pv);
  
  
-@@ -2177,8 +2226,11 @@ typedef struct _SHChangeUpdateImageIDList {
+@@ -2177,8 +2271,11 @@ typedef struct _SHChangeUpdateImageIDList {
      WCHAR szName[MAX_PATH];
      USHORT cbZero;
  } SHChangeUpdateImageIDList, * LPSHChangeUpdateImageIDList;
@@ -268,7 +421,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
  #ifdef UNICODE
  #define SHUpdateImage  SHUpdateImageW
-@@ -2187,7 +2239,9 @@ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags
+@@ -2187,7 +2284,9 @@ SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags
  #endif // !UNICODE
  #endif /* NTDDI_WIN2K */
  
@@ -278,7 +431,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) SHChangeNotifyDeregister(ULONG ulID);
  
  typedef enum
-@@ -2196,14 +2250,18 @@ typedef enum
+@@ -2196,14 +2295,18 @@ typedef enum
      SCNRT_DISABLE = 1,
  } SCNRT_STATUS;
  
@@ -297,7 +450,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHGetInstanceExplorer(_Outptr_ IUnknown **ppunk);
  
  //
-@@ -2254,7 +2312,9 @@ typedef struct _SHDESCRIPTIONID {
+@@ -2254,7 +2357,9 @@ typedef struct _SHDESCRIPTIONID {
  
  // these delegate to IShellFolder2::GetDetailsEx()
  
@@ -307,7 +460,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
  #ifdef UNICODE
  #define SHGetDataFromIDList  SHGetDataFromIDListW
-@@ -2274,18 +2334,25 @@ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl,
+@@ -2274,18 +2379,25 @@ SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl,
  #define PRF_REQUIREABSOLUTE         0x0010
  #endif
  
@@ -333,7 +486,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _In_ DWORD dwEffect, _Out_ DWORD *pdwEffect);
  // stuff for doing auto scrolling
  #define NUM_POINTS      3
-@@ -2297,12 +2364,19 @@ typedef struct {        // asd
+@@ -2297,12 +2409,19 @@ typedef struct {        // asd
      DWORD dwTimes[NUM_POINTS];
  } AUTO_SCROLL_DATA;
  
@@ -353,7 +506,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
  typedef struct {
      WORD cLength;
-@@ -2326,9 +2400,13 @@ typedef struct {
+@@ -2326,9 +2445,13 @@ typedef struct {
  #define CABINETSTATE_VERSION 2
  
  // APIs for reading and writing the cabinet state.
@@ -367,7 +520,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
  //
  //  Return codes from PathCleanupSpec.  Negative return values are
-@@ -2340,20 +2418,26 @@ SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
+@@ -2340,20 +2463,26 @@ SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
  #define PCS_TRUNCATED       0x00000004
  #define PCS_PATHTOOLONG     0x00000008  // Always combined with FATAL
  
@@ -394,7 +547,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, ULONG uFlags);
  
  
-@@ -2372,6 +2456,7 @@ SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInser
+@@ -2372,6 +2501,7 @@ SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInser
   *
   *     TRUE if the Properties command was invoked
   */
@@ -402,7 +555,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
  
  #define SHOP_PRINTERNAME 0x00000001  // pszObjectName points to a printer friendly name
-@@ -2447,6 +2532,7 @@ SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType
+@@ -2447,6 +2577,7 @@ SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType
   *      last time".
   *
   */
@@ -410,8 +563,11 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT options);
  
  //
-@@ -2471,8 +2557,11 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+@@ -2469,10 +2600,14 @@ SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT opti
+ 
+ #ifndef HPSXA_DEFINED
  #define HPSXA_DEFINED
++#include <sal.h>
  DECLARE_HANDLE( HPSXA );
  #endif
 +_Win32_SupportedOS_WindowsXP_
@@ -422,7 +578,7 @@ index 04174f87..d7087e90 100644
  WINSHELLAPI UINT WINAPI SHReplaceFromPropSheetExtArray(_In_ HPSXA hpsxa, UINT uPageID, _In_ LPFNADDPROPSHEETPAGE lpfnReplaceWith, LPARAM lParam);
  
  // shell restriction values, parameter for SHRestricted()
-@@ -2698,31 +2787,43 @@ typedef enum RESTRICTIONS
+@@ -2698,31 +2833,43 @@ typedef enum RESTRICTIONS
  #endif  // NTDDI_VISTA
  #endif  // NTDDI_WINXPSP2
  } RESTRICTIONS;
@@ -466,7 +622,20 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
                             _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
  #ifdef UNICODE
-@@ -2765,13 +2866,18 @@ typedef struct _openasinfo
+@@ -2734,7 +2881,11 @@ SHSTDAPI SHDefExtractIconW(_In_ LPCWSTR pszIconFile, int iIndex, UINT uFlags,
+ // Elevation
+ 
+ // OpenAsInfo flags
+-enum tagOPEN_AS_INFO_FLAGS {
++enum
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++__attribute__((flag_enum))
++#endif
++ tagOPEN_AS_INFO_FLAGS {
+     OAIF_ALLOW_REGISTRATION = 0x00000001,     // enable the "always use this file" checkbox (NOTE if you don't pass this, it will be disabled)
+     OAIF_REGISTER_EXT       = 0x00000002,     // do the registration after the user hits "ok"
+     OAIF_EXEC               = 0x00000004,     // execute file after registering
+@@ -2765,13 +2916,18 @@ typedef struct _openasinfo
  #include <poppack.h>        /* Return to byte packing */
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -485,7 +654,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
  #ifdef UNICODE
  #define Shell_GetCachedImageIndex  Shell_GetCachedImageIndexW
-@@ -2789,6 +2895,7 @@ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIn
+@@ -2789,6 +2945,7 @@ SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIn
  #define VALIDATEUNC_VALID       0x0007          // valid flags
  #endif
  
@@ -493,7 +662,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, UINT fConnect);
  #define PIFNAMESIZE     30
  #define PIFSTARTLOCSIZE 63
-@@ -2817,14 +2924,21 @@ typedef UNALIGNED PROPPRG *PPROPPRG;
+@@ -2817,14 +2974,21 @@ typedef UNALIGNED PROPPRG *PPROPPRG;
  typedef UNALIGNED PROPPRG FAR *LPPROPPRG;
  typedef const UNALIGNED PROPPRG FAR *LPCPROPPRG;
  
@@ -515,7 +684,27 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPARAM lParam);
  
  //
-@@ -2992,10 +3106,12 @@ typedef struct _SFV_CREATE
+@@ -2834,6 +2998,9 @@ SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPAR
+ #undef  INTERFACE
+ #define INTERFACE   IShellFolderViewCB
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IShellFolderViewCB IShellFolderViewCB;
++#endif
+ DECLARE_INTERFACE_IID_(IShellFolderViewCB, IUnknown, "2047E320-F2A9-11CE-AE65-08002B2E1262")
+ {
+     STDMETHOD(MessageSFVCB)(THIS_ UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
+@@ -2950,6 +3117,9 @@ typedef struct _ITEMSPACING
+ #undef  INTERFACE
+ #define INTERFACE   IShellFolderView
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IShellFolderView IShellFolderView;
++#endif
+ DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-08002B2E1262")
+ {
+     STDMETHOD(Rearrange) (THIS_ LPARAM lParamSort) PURE; // use IFolderView2::SetSortColumns
+@@ -2992,10 +3162,12 @@ typedef struct _SFV_CREATE
      IShellFolderViewCB* psfvcb; // No callback if NULL
  } SFV_CREATE;
  
@@ -528,7 +717,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI CDefFolderMenu_Create2(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ HWND hwnd,
                                  UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl,
                                  _In_opt_ IShellFolder *psf, _In_opt_ LPFNDFMCALLBACK pfn,
-@@ -3017,6 +3133,7 @@ typedef struct {
+@@ -3017,6 +3189,7 @@ typedef struct {
  // used in the implemetnation of ::GetUIObjectOf()
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -536,7 +725,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHCreateDefaultContextMenu(_In_ const DEFCONTEXTMENU *pdcm, _In_ REFIID riid, _Outptr_ void **ppv);
  #endif // NTDDI_VISTA
  
-@@ -3100,7 +3217,9 @@ typedef struct _CSFV
+@@ -3100,7 +3273,9 @@ typedef struct _CSFV
  
  #include <poppack.h>        /* Return to byte packing */
  
@@ -546,7 +735,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHCreateShellFolderViewEx(_In_ CSFV *pcsfv, _Outptr_ IShellView **ppsv);
  
  
-@@ -3313,6 +3432,7 @@ typedef struct {
+@@ -3313,6 +3488,7 @@ typedef struct {
  #define SHELLSTATE_SIZE_IE4   FIELD_OFFSET(SHELLSTATE,uNotUsed)
  #define SHELLSTATE_SIZE_WIN2K sizeof(SHELLSTATE)
  
@@ -554,7 +743,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, DWORD dwMask, BOOL bSet);
  
  //
-@@ -3394,23 +3514,28 @@ typedef struct {
+@@ -3394,23 +3570,28 @@ typedef struct {
  // When these settings change, a WM_SETTINGCHANGE message is sent
  // with the string lParam value of "ShellState".
  //
@@ -583,7 +772,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHBindToObject(_In_opt_ IShellFolder *psf, _In_ PCUIDLIST_RELATIVE pidl, _In_opt_ IBindCtx *pbc, _In_ REFIID riid, _Outptr_ void **ppv);
  
  #endif // NTDDI_VISTA
-@@ -3445,6 +3570,7 @@ __inline BOOL IDListContainerIsConsistent(_In_reads_bytes_(cbAlloc) PCUIDLIST_RE
+@@ -3445,6 +3626,7 @@ __inline BOOL IDListContainerIsConsistent(_In_reads_bytes_(cbAlloc) PCUIDLIST_RE
  //  psfgaoOut is optional for SFGAO attributes
  //
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -591,7 +780,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _In_ SFGAOF sfgaoIn, _Out_opt_ SFGAOF *psfgaoOut);
  #endif // NTDDI_WINXP
  
-@@ -3475,7 +3601,9 @@ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr
+@@ -3475,7 +3657,9 @@ SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr
  #endif // NTDDI_WINXP
  
  
@@ -601,7 +790,17 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHPathPrepareForWrite  SHPathPrepareForWriteW
-@@ -3521,6 +3649,7 @@ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000
+@@ -3491,6 +3675,9 @@ SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnabl
+ //--------------------------------------------------------------------------
+ #undef  INTERFACE
+ #define INTERFACE  INamedPropertyBag
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct INamedPropertyBag INamedPropertyBag;
++#endif
+ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000000000000")
+ {
+     STDMETHOD(ReadPropertyNPB) (THIS_ _In_ PCWSTR pszBagname,
+@@ -3521,6 +3708,7 @@ DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000
  //  IPropertyStorage** ppstg,  // Address to receive requested vtable
  //  puCodePage      //  Optional address to receive the code page ID for the set.
  //
@@ -609,7 +808,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _In_opt_ const CLSID *pclsid, DWORD grfFlags, DWORD grfMode, DWORD dwDisposition, _Outptr_ IPropertyStorage** ppstg, _Out_opt_ UINT* puCodePage);
  
  
-@@ -3536,6 +3665,7 @@ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _
+@@ -3536,6 +3724,7 @@ SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _
  //  rgpspec,   //Array of the properties to be read
  //  rgvar      //Array of PROPVARIANTs containing the property values on return
  //
@@ -617,7 +816,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Out_writes_all_(cpspec) PROPVARIANT rgvar[] );
  
  
-@@ -3552,10 +3682,12 @@ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG
+@@ -3552,10 +3741,12 @@ SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG
  //  rgvar,     // Array of PROPVARIANT values
  //  propidNameFirst // Minimum value for property identifiers. This value should be >= PID_FIRST_USABLE
  //
@@ -630,7 +829,7 @@ index 04174f87..d7087e90 100644
  SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttributes, _In_ REFIID riid, _Outptr_ void **ppv);
  #ifdef UNICODE
  #define SHCreateFileExtractIcon  SHCreateFileExtractIconW
-@@ -3563,8 +3695,10 @@ SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttribu
+@@ -3563,8 +3754,10 @@ SHSTDAPI SHCreateFileExtractIconW(_In_ LPCWSTR pszFile, _In_ DWORD dwFileAttribu
  #define SHCreateFileExtractIcon  SHCreateFileExtractIconA
  #endif // !UNICODE
  
@@ -641,7 +840,7 @@ index 04174f87..d7087e90 100644
  STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttributeMask, _Out_opt_ DWORD *pdwAttributes, _Out_opt_ UINT *pcItems);
  
  #endif  // NTDDI_WINXP
-@@ -3572,14 +3706,18 @@ STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttribut
+@@ -3572,14 +3765,18 @@ STDAPI SHGetAttributesFromDataObject(_In_opt_ IDataObject *pdo, DWORD dwAttribut
  // A usefull function in Defview for mapping idlist into index into system
  // image list.  Optionally it can also look up the index of the selected
  // icon.

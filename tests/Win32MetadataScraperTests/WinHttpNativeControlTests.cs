@@ -2895,6 +2895,93 @@ void NetworkBroadSourceSalProbe(
             return added;
         }
 
+        [NativeMigrationTheory("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")]
+        [MemberData(nameof(DeviceNativeFollowthroughNativeControls))]
+        public void DeviceNativeFollowthroughPreservesNativeAbiSalAndPriorMetadata(
+            string partition, string architecture, string target, bool metadataEnabled)
+        {
+            using var report = System.Text.Json.JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")));
+            var selected = report.RootElement.GetProperty("selected").EnumerateArray().ToArray();
+            string[] headers = report.RootElement.GetProperty("authoredHeaders").EnumerateArray()
+                .Select(header => Path.GetFileName(header.GetProperty("original").GetString()))
+                .Concat(new[] { "windows.h", "winnt.h", "unknwn.h", "objbase.h", "rpc.h", "mmsystem.h",
+                    "d2d1effectauthor.h", "d2d1_1.h", "dcompanimation.h" }).ToArray();
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_DEVICE_FOLLOWTHROUGH_BEFORE"), partition,
+                architecture, target, headers, "", metadataEnabled: metadataEnabled, annotations: beforeAnnotations,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
+            var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"), partition,
+                architecture, target, headers, "", metadataEnabled: metadataEnabled, annotations: afterAnnotations,
+                salAnnotations: afterSal, diagnostics: afterDiagnostics).ToList();
+            Assert.NotEmpty(before);
+            foreach (string fact in before)
+                Assert.True(after.Remove(fact), "Changed an existing native/layout fact: " + fact);
+            var records = selected.Where(item => item.TryGetProperty("nativeKind", out var kind) &&
+                kind.GetString() is "CXCursor_StructDecl" or "CXCursor_ClassDecl")
+                .Select(item => item.GetProperty("fact").GetProperty("symbol").GetString()).ToArray();
+            foreach (string fact in after)
+            {
+                Assert.True(metadataEnabled, "Unexpected feature-off native addition: " + fact);
+                var match = Regex.Match(fact, @"^typedef (?<name>\w+) (?:(?:struct|class) )?\k<name>$");
+                Assert.True(match.Success, "Unexpected native addition: " + fact);
+                Assert.Contains(match.Groups["name"].Value, records);
+            }
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (string annotation in beforeAnnotations)
+                Assert.True(afterAnnotations.Remove(annotation), "Lost an existing metadata fact: " + annotation);
+            var allowed = new List<string>();
+            foreach (var item in selected)
+            {
+                var fact = item.GetProperty("fact");
+                string symbol = fact.GetProperty("symbol").GetString();
+                string category = fact.GetProperty("category").GetString();
+                if (category == "enum-flags")
+                    continue;
+                string annotation;
+                if (category == "supportedOS")
+                    annotation = symbol + "|" + fact.GetProperty("value").GetString().Split('=', 2)[1];
+                else if (category == "setLastError")
+                    annotation = symbol + "|SetLastError";
+                else
+                {
+                    string[] targetParts = symbol.Split("::", StringSplitOptions.None);
+                    string owner = item.GetProperty("transport").GetString() == "native-field" || targetParts.Length == 3
+                        ? targetParts[0] + "::" : "";
+                    annotation = owner + targetParts[^1] + "|" +
+                        (category == "associated-enum-use" ? "AssociatedEnum" : "RetVal");
+                }
+                for (int i = 0; i < item.GetProperty("annotationCount").GetInt32(); i++)
+                    allowed.Add(annotation);
+            }
+            foreach (string annotation in afterAnnotations)
+                Assert.True(metadataEnabled && allowed.Remove(annotation), "Unexpected new native metadata fact: " + annotation);
+            this.output.WriteLine($"{partition}/{architecture}/metadata={metadataEnabled}: {before.Length} unchanged native/layout facts, " +
+                $"{beforeSal.Count} unchanged SAL occurrences, protected/dependent headers and all prior metadata preserved; " +
+                $"{afterAnnotations.Count} exact new annotations.");
+        }
+
+        public static IEnumerable<object[]> DeviceNativeFollowthroughNativeControls()
+        {
+            foreach (string partition in new[] { "Buses", "Controls", "Controls.RichEdit", "Direct2D", "DirectComp", "DlgBox", "Shell", "Variant" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled };
+        }
+
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,

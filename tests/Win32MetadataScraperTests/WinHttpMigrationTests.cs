@@ -2089,6 +2089,149 @@ namespace Win32MetadataScraperTests
                 $"{useCount} exact native use-site associations through normal generated sources.");
         }
 
+        [MigrationTheory("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT", "WINHTTP_DEVICE_GENERATED_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualDeviceNativeFollowthroughFactsReachNormalGeneratedSources(string architecture)
+        {
+            string generated = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_GENERATED_ROOT");
+            var nodes = new[] { "common", architecture }
+                .Where(folder => Directory.Exists(Path.Combine(generated, folder)))
+                .SelectMany(folder => Directory.GetFiles(Path.Combine(generated, folder), "*.cs", SearchOption.AllDirectories))
+                .SelectMany(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file)).GetRoot().DescendantNodes()).ToArray();
+            Assert.NotEmpty(nodes);
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")));
+            var selected = report.RootElement.GetProperty("selected").EnumerateArray().ToArray();
+            var enums = new List<EnumDeclarationSyntax>();
+            foreach (var item in selected)
+            {
+                var fact = item.GetProperty("fact");
+                string name = fact.GetProperty("symbol").GetString();
+                string category = fact.GetProperty("category").GetString();
+                if (category == "enum-flags")
+                {
+                    var contract = item.GetProperty("contract");
+                    var matches = nodes.OfType<EnumDeclarationSyntax>().Where(node => node.Identifier.ValueText == name).ToArray();
+                    Assert.True(matches.Length > 0, architecture + ": missing native enum " + name);
+                    foreach (var declaration in matches)
+                    {
+                        Assert.Equal(contract.GetProperty("type").GetString(),
+                            declaration.BaseList == null ? "int" : Assert.Single(declaration.BaseList.Types).Type.ToString());
+                        Assert.Contains(declaration.AttributeLists.SelectMany(list => list.Attributes), attribute => AttributeIs(attribute, "Flags"));
+                        string sourceNamespace = declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>().Single().Name.ToString();
+                        string expectedNamespace = contract.GetProperty("namespace").GetString();
+                        if (sourceNamespace != expectedNamespace)
+                            Assert.Contains(name + "=" + expectedNamespace,
+                                File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "requiredNamespacesForNames.rsp")));
+                        Assert.Equal(contract.GetProperty("members").EnumerateArray().Select(member => member.GetProperty("name").GetString()),
+                            declaration.Members.Select(member => member.Identifier.ValueText));
+                        Assert.Equal(matches[0].Members.Select(member => member.EqualsValue?.Value.WithoutTrivia().ToFullString()),
+                            declaration.Members.Select(member => member.EqualsValue?.Value.WithoutTrivia().ToFullString()));
+                    }
+                    enums.Add(matches[0].WithAttributeLists(default)
+                        .WithMembers(SyntaxFactory.SeparatedList(matches[0].Members.Select(member => member.WithAttributeLists(default)))));
+                    continue;
+                }
+                IEnumerable<AttributeSyntax>[] occurrences;
+                if (category == "supportedOS" && item.GetProperty("nativeKind").GetString() != "CXCursor_FunctionDecl")
+                {
+                    occurrences = nodes.OfType<BaseTypeDeclarationSyntax>().Where(node => node.Identifier.ValueText == name)
+                        .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                }
+                else if (category is "supportedOS" or "setLastError")
+                {
+                    occurrences = nodes.OfType<MethodDeclarationSyntax>().Where(node => node.Identifier.ValueText == name &&
+                        node.Modifiers.Any(token => token.ValueText == "extern"))
+                        .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                }
+                else
+                {
+                    string[] target = name.Split("::", StringSplitOptions.None);
+                    if (item.GetProperty("transport").GetString() == "native-field")
+                        occurrences = nodes.OfType<StructDeclarationSyntax>().Where(node => node.Identifier.ValueText == target[0])
+                            .SelectMany(node => node.Members.OfType<FieldDeclarationSyntax>())
+                            .Where(node => node.Declaration.Variables.Any(variable => variable.Identifier.ValueText == target[^1]))
+                            .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                    else
+                        occurrences = nodes.OfType<MethodDeclarationSyntax>().Where(node => node.Identifier.ValueText == target[^2] &&
+                            (target.Length != 3 || node.Ancestors().OfType<BaseTypeDeclarationSyntax>()
+                                .Any(owner => owner.Identifier.ValueText == target[0])))
+                            .SelectMany(node => node.ParameterList.Parameters).Where(node => node.Identifier.ValueText == target[^1])
+                            .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                }
+                Assert.True(occurrences.Length > 0, architecture + ": missing native fact target " + name);
+                foreach (var attributes in occurrences)
+                {
+                    if (category == "setLastError")
+                    {
+                        var import = Assert.Single(attributes.Where(attribute => AttributeIs(attribute, "DllImport")));
+                        var argument = Assert.Single(import.ArgumentList.Arguments.Where(value =>
+                            value.NameEquals?.Name.Identifier.ValueText == "SetLastError"));
+                        Assert.Equal("true", argument.Expression.ToString());
+                    }
+                    else
+                    {
+                        string attributeName = category == "supportedOS" ? "SupportedOSPlatform" :
+                            category == "associated-enum-use" ? "AssociatedEnum" : "RetVal";
+                        var attribute = Assert.Single(attributes.Where(value => AttributeIs(value, attributeName)));
+                        string expected = fact.GetProperty("value").GetString().Split('=', 2)[1];
+                        string actual = attributeName + attribute.ArgumentList;
+                        Assert.Equal(category == "supportedOS" ? expected : expected[1..^1], actual);
+                    }
+                }
+            }
+            var tree = CSharpSyntaxTree.ParseText(string.Join("\n", enums.Select(node => node.NormalizeWhitespace().ToFullString())));
+            var compilation = CSharpCompilation.Create("DeviceNativeFollowthroughEnumValues", new[] { tree },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var model = compilation.GetSemanticModel(tree);
+            foreach (var item in selected.Where(item => item.GetProperty("fact").GetProperty("category").GetString() == "enum-flags"))
+            {
+                var contract = item.GetProperty("contract");
+                var declaration = Assert.Single(tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .Where(node => node.Identifier.ValueText == contract.GetProperty("name").GetString()));
+                var expected = contract.GetProperty("members").EnumerateArray().ToArray();
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    var symbol = Assert.IsAssignableFrom<IFieldSymbol>(model.GetDeclaredSymbol(declaration.Members[i]));
+                    Assert.Equal(expected[i].GetProperty("value").GetDecimal(),
+                        Convert.ToDecimal(symbol.ConstantValue, System.Globalization.CultureInfo.InvariantCulture));
+                }
+            }
+            this.output.WriteLine($"{architecture}: {selected.Length} exact native source facts, six unchanged native enum identities/" +
+                "ordered compiled values/int storage, and explicit attribute targets reached normal generated sources.");
+
+            static bool AttributeIs(AttributeSyntax attribute, string name)
+                => attribute.Name.ToString() == name || attribute.Name.ToString().EndsWith("." + name, StringComparison.Ordinal);
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")]
+        [InlineData(95)]
+        public void DeviceNativeFollowthroughRetiresOnlyExactCoveredRows(int expectedFacts)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")));
+            var selected = report.RootElement.GetProperty("selected").EnumerateArray().ToArray();
+            Assert.Equal(expectedFacts, selected.Length);
+            Assert.Equal(expectedFacts, selected.Select(item => item.GetProperty("fact").GetProperty("factId").GetString()).Distinct().Count());
+            foreach (var retirement in report.RootElement.GetProperty("configurationRetirements").EnumerateArray())
+            {
+                byte[] actual = File.ReadAllBytes(Path.Combine(RepositoryRoot, retirement.GetProperty("source").GetString()));
+                Assert.Equal(retirement.GetProperty("afterSha256").GetString(), Convert.ToHexString(SHA256.HashData(actual)));
+            }
+            foreach (var retained in report.RootElement.GetProperty("retainedAuthorerRows").EnumerateArray())
+            {
+                string source = retained.GetProperty("category").GetString() == "supportedOS" ? "supportedOS.rsp" : "WithSetLastError.rsp";
+                Assert.Contains(retained.GetProperty("value").GetString(),
+                    File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", source)));
+            }
+            Assert.Contains("PFTASKDIALOGCALLBACK::msg=[AssociatedEnum(\"TASKDIALOG_NOTIFICATIONS\")]",
+                File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "emitter.settings.rsp")));
+        }
+
         [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]
         [InlineData(1)]
         [InlineData(2)]

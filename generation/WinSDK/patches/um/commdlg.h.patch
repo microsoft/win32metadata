@@ -1,10 +1,12 @@
 diff --git a/um/commdlg.h b/um/commdlg.h
 --- a/um/commdlg.h
 +++ b/um/commdlg.h
-@@ -17,6 +17,17 @@
+@@ -16,6 +16,18 @@
+ 
  #ifndef _INC_COMMDLG
  #define _INC_COMMDLG
- 
++#include <sal.h>
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +typedef unsigned long CHOOSECOLOR_FLAGS;
 +typedef unsigned long OPEN_FILENAME_FLAGS;
@@ -15,11 +17,10 @@ diff --git a/um/commdlg.h b/um/commdlg.h
 +typedef unsigned long PRINTDLGEX_FLAGS;
 +typedef unsigned short CHOOSEFONT_FONT_TYPE;
 +#endif
-+
+ 
  
  #if(WINVER >= 0x0500)
- 
-@@ -183,7 +194,7 @@ typedef struct tagOFNA {
+@@ -183,7 +195,7 @@ typedef struct tagOFNA {
     DWORD        nMaxFileTitle;
     LPCSTR       lpstrInitialDir;
     LPCSTR       lpstrTitle;
@@ -28,7 +29,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     WORD         nFileOffset;
     WORD         nFileExtension;
     LPCSTR       lpstrDefExt;
-@@ -197,7 +208,7 @@ typedef struct tagOFNA {
+@@ -197,7 +209,7 @@ typedef struct tagOFNA {
  #if (_WIN32_WINNT >= 0x0500)
     void *        pvReserved;
     DWORD        dwReserved;
@@ -37,7 +38,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif // (_WIN32_WINNT >= 0x0500)
  } OPENFILENAMEA, *LPOPENFILENAMEA;
  typedef struct tagOFNW {
-@@ -214,7 +225,7 @@ typedef struct tagOFNW {
+@@ -214,7 +226,7 @@ typedef struct tagOFNW {
     DWORD        nMaxFileTitle;
     LPCWSTR      lpstrInitialDir;
     LPCWSTR      lpstrTitle;
@@ -46,7 +47,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     WORD         nFileOffset;
     WORD         nFileExtension;
     LPCWSTR      lpstrDefExt;
-@@ -228,7 +239,7 @@ typedef struct tagOFNW {
+@@ -228,7 +240,7 @@ typedef struct tagOFNW {
  #if (_WIN32_WINNT >= 0x0500)
     void *        pvReserved;
     DWORD        dwReserved;
@@ -55,7 +56,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif // (_WIN32_WINNT >= 0x0500)
  } OPENFILENAMEW, *LPOPENFILENAMEW;
  #ifdef UNICODE
-@@ -250,14 +261,18 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
+@@ -250,14 +262,18 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
  #endif // (_WIN32_WINNT >= 0x0500)
  
  
@@ -74,7 +75,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
  #ifdef UNICODE
  #define GetSaveFileName  GetSaveFileNameW
-@@ -266,7 +281,9 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
+@@ -266,7 +282,9 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
  #endif // !UNICODE
  
  
@@ -84,7 +85,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR Buf, _In_ WORD cchSize);
  #ifdef UNICODE
  #define GetFileTitle  GetFileTitleW
-@@ -305,11 +322,45 @@ WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR
+@@ -305,11 +323,45 @@ WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR
  #if (_WIN32_WINNT >= 0x0500)
  #define OFN_DONTADDTORECENT          0x02000000
  #define OFN_FORCESHOWHIDDEN          0x10000000    // Show All files including System and hidden files
@@ -130,7 +131,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif // (_WIN32_WINNT >= 0x0500)
  
  // Return values for the registered message sent to the hook function
-@@ -476,7 +527,7 @@ typedef struct tagCHOOSECOLORA {
+@@ -476,7 +528,7 @@ typedef struct tagCHOOSECOLORA {
     HWND         hInstance;
     COLORREF     rgbResult;
     COLORREF*    lpCustColors;
@@ -139,7 +140,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPARAM       lCustData;
     LPCCHOOKPROC lpfnHook;
     LPCSTR       lpTemplateName;
-@@ -487,7 +538,7 @@ typedef struct tagCHOOSECOLORW {
+@@ -487,7 +539,7 @@ typedef struct tagCHOOSECOLORW {
     HWND         hInstance;
     COLORREF     rgbResult;
     COLORREF*    lpCustColors;
@@ -148,7 +149,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPARAM       lCustData;
     LPCCHOOKPROC lpfnHook;
     LPCWSTR      lpTemplateName;
-@@ -506,7 +557,7 @@ typedef struct tagCHOOSECOLORA {
+@@ -506,7 +558,7 @@ typedef struct tagCHOOSECOLORA {
     HWND         hInstance;
     COLORREF     rgbResult;
     COLORREF*    lpCustColors;
@@ -157,7 +158,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPARAM       lCustData;
     LPCCHOOKPROC lpfnHook;
     LPCSTR       lpTemplateName;
-@@ -518,7 +569,7 @@ typedef struct tagCHOOSECOLORW {
+@@ -518,7 +570,7 @@ typedef struct tagCHOOSECOLORW {
     HWND         hInstance;
     COLORREF     rgbResult;
     COLORREF*    lpCustColors;
@@ -166,7 +167,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPARAM       lCustData;
     LPCCHOOKPROC lpfnHook;
     LPCWSTR      lpTemplateName;
-@@ -551,6 +602,18 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
+@@ -551,6 +603,18 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
  #if(WINVER >= 0x0400)
  #define CC_SOLIDCOLOR            0x00000080
  #define CC_ANYCOLOR              0x00000100
@@ -185,7 +186,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif /* WINVER >= 0x0400 */
  
  typedef UINT_PTR (CALLBACK *LPFRHOOKPROC) (HWND, UINT, WPARAM, LPARAM);
-@@ -560,7 +623,7 @@ typedef struct tagFINDREPLACEA {
+@@ -560,7 +624,7 @@ typedef struct tagFINDREPLACEA {
     HWND         hwndOwner;          // handle to owner's window
     HINSTANCE    hInstance;          // instance handle of.EXE that
                                      //   contains cust. dlg. template
@@ -194,7 +195,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPSTR        lpstrFindWhat;      // ptr. to search string
     LPSTR        lpstrReplaceWith;   // ptr. to replace string
     WORD         wFindWhatLen;       // size of find buffer
-@@ -574,7 +637,7 @@ typedef struct tagFINDREPLACEW {
+@@ -574,7 +638,7 @@ typedef struct tagFINDREPLACEW {
     HWND         hwndOwner;          // handle to owner's window
     HINSTANCE    hInstance;          // instance handle of.EXE that
                                      //   contains cust. dlg. template
@@ -203,7 +204,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     LPWSTR       lpstrFindWhat;      // ptr. to search string
     LPWSTR       lpstrReplaceWith;   // ptr. to replace string
     WORD         wFindWhatLen;       // size of find buffer
-@@ -618,9 +681,38 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
+@@ -618,9 +682,38 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
  #define FR_MATCHDIAC                    0x20000000
  #define FR_MATCHKASHIDA                 0x40000000
  #define FR_MATCHALEFHAMZA               0x80000000
@@ -242,7 +243,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
  #ifdef UNICODE
  #define FindText  FindTextW
-@@ -628,7 +720,9 @@ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
+@@ -628,7 +721,9 @@ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
  #define FindText  FindTextA
  #endif // !UNICODE
  #ifndef _MAC
@@ -252,7 +253,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
  #ifdef UNICODE
  #define ReplaceText  ReplaceTextW
-@@ -673,7 +767,7 @@ typedef struct tagCHOOSEFONTA {
+@@ -673,7 +768,7 @@ typedef struct tagCHOOSEFONTA {
     HDC             hDC;                // printer DC/IC or NULL
     LPLOGFONTA      lpLogFont;          // ptr. to a LOGFONT struct
     INT             iPointSize;         // 10 * size in points of selected font
@@ -261,7 +262,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     COLORREF        rgbColors;          // returned text color
     LPARAM          lCustData;          // data passed to hook fn.
     LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
-@@ -682,7 +776,7 @@ typedef struct tagCHOOSEFONTA {
+@@ -682,7 +777,7 @@ typedef struct tagCHOOSEFONTA {
                                         //   contains cust. dlg. template
     LPSTR           lpszStyle;          // return the style field here
                                         // must be LF_FACESIZE or bigger
@@ -270,7 +271,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
                                         //   call back with the extra FONTTYPE_
                                         //   bits added
     WORD            ___MISSING_ALIGNMENT__;
-@@ -696,7 +790,7 @@ typedef struct tagCHOOSEFONTW {
+@@ -696,7 +791,7 @@ typedef struct tagCHOOSEFONTW {
     HDC             hDC;                // printer DC/IC or NULL
     LPLOGFONTW      lpLogFont;          // ptr. to a LOGFONT struct
     INT             iPointSize;         // 10 * size in points of selected font
@@ -279,7 +280,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     COLORREF        rgbColors;          // returned text color
     LPARAM          lCustData;          // data passed to hook fn.
     LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
-@@ -705,7 +799,7 @@ typedef struct tagCHOOSEFONTW {
+@@ -705,7 +800,7 @@ typedef struct tagCHOOSEFONTW {
                                         //   contains cust. dlg. template
     LPWSTR          lpszStyle;          // return the style field here
                                         // must be LF_FACESIZE or bigger
@@ -288,7 +289,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
                                         //   call back with the extra FONTTYPE_
                                         //   bits added
     WORD            ___MISSING_ALIGNMENT__;
-@@ -777,6 +871,38 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
+@@ -777,6 +872,38 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
  #endif /* WINVER >= 0x0400 */
  #if(WINVER >= 0x0601)
  #define CF_INACTIVEFONTS           0x02000000L
@@ -327,7 +328,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif /* WINVER >= 0x0601 */
  
  // these are extra nFontType bits that are added to what is returned to the
-@@ -788,6 +914,15 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
+@@ -788,6 +915,15 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
  #define BOLD_FONTTYPE         0x0100
  #define ITALIC_FONTTYPE       0x0200
  #define REGULAR_FONTTYPE      0x0400
@@ -343,7 +344,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  
  // EnumFonts callback routine only uses these bits, so we can use the rest
  
-@@ -862,7 +997,7 @@ typedef struct tagPDA {
+@@ -862,7 +998,7 @@ typedef struct tagPDA {
     HGLOBAL          hDevMode;
     HGLOBAL          hDevNames;
     HDC              hDC;
@@ -352,7 +353,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     WORD             nFromPage;
     WORD             nToPage;
     WORD             nMinPage;
-@@ -883,7 +1018,7 @@ typedef struct tagPDW {
+@@ -883,7 +1019,7 @@ typedef struct tagPDW {
     HGLOBAL          hDevMode;
     HGLOBAL          hDevNames;
     HDC              hDC;
@@ -361,7 +362,27 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     WORD             nFromPage;
     WORD             nToPage;
     WORD             nMinPage;
-@@ -1017,7 +1152,7 @@ typedef struct tagPDEXA {
+@@ -951,6 +1087,9 @@ WINCOMMDLGAPI _Success_(return != FALSE) BOOL APIENTRY PrintDlgW(_Inout_ LPPRINT
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogCallback
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IPrintDialogCallback IPrintDialogCallback;
++#endif
+ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+@@ -983,6 +1122,9 @@ DECLARE_INTERFACE_IID_(IPrintDialogCallback, IUnknown, "5852A2C3-6530-11D1-B6A3-
+ #undef  INTERFACE
+ #define INTERFACE   IPrintDialogServices
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IPrintDialogServices IPrintDialogServices;
++#endif
+ DECLARE_INTERFACE_IID_(IPrintDialogServices, IUnknown, "509AAEDA-5639-11D1-B6A1-0000F8757BF9")
+ {
+     // *** IUnknown methods ***
+@@ -1017,7 +1159,7 @@ typedef struct tagPDEXA {
     HGLOBAL               hDevMode;             // handle to DevMode
     HGLOBAL               hDevNames;            // handle to DevNames
     HDC                   hDC;                  // printer DC/IC or NULL
@@ -370,7 +391,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     DWORD                 Flags2;               // reserved
     DWORD                 ExclusionFlags;       // items to exclude from driver pages
     DWORD                 nPageRanges;          // number of page ranges
-@@ -1043,7 +1178,7 @@ typedef struct tagPDEXW {
+@@ -1043,7 +1185,7 @@ typedef struct tagPDEXW {
     HGLOBAL               hDevMode;             // handle to DevMode
     HGLOBAL               hDevNames;            // handle to DevNames
     HDC                   hDC;                  // printer DC/IC or NULL
@@ -379,7 +400,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
     DWORD                 Flags2;               // reserved
     DWORD                 ExclusionFlags;       // items to exclude from driver pages
     DWORD                 nPageRanges;          // number of page ranges
-@@ -1114,6 +1249,37 @@ WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExW(_Inout_ LPPRINTDLGEXW pPD);
+@@ -1114,6 +1256,37 @@ WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExW(_Inout_ LPPRINTDLGEXW pPD);
  #define PD_NOCURRENTPAGE               0x00800000
  #define PD_EXCLUSIONFLAGS              0x01000000
  #define PD_USELARGETEMPLATE            0x10000000
@@ -417,7 +438,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  #endif /* WINVER >= 0x0500 */
  
  #if(WINVER >= 0x0500)
-@@ -1155,6 +1321,7 @@ typedef const DEVNAMES *PCDEVNAMES;
+@@ -1155,6 +1328,7 @@ typedef const DEVNAMES *PCDEVNAMES;
  #define DN_DEFAULTPRN      0x0001
  
  
@@ -425,7 +446,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
  WINCOMMDLGAPI DWORD APIENTRY CommDlgExtendedError(VOID);
  
  #if(WINVER >= 0x0400)
-@@ -1175,7 +1342,7 @@ typedef struct tagPSDA
+@@ -1175,7 +1349,7 @@ typedef struct tagPSDA
      HWND            hwndOwner;
      HGLOBAL         hDevMode;
      HGLOBAL         hDevNames;
@@ -434,7 +455,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
      POINT           ptPaperSize;
      RECT            rtMinMargin;
      RECT            rtMargin;
-@@ -1192,7 +1359,7 @@ typedef struct tagPSDW
+@@ -1192,7 +1366,7 @@ typedef struct tagPSDW
      HWND            hwndOwner;
      HGLOBAL         hDevMode;
      HGLOBAL         hDevNames;
@@ -443,7 +464,7 @@ diff --git a/um/commdlg.h b/um/commdlg.h
      POINT           ptPaperSize;
      RECT            rtMinMargin;
      RECT            rtMargin;
-@@ -1239,6 +1406,28 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
+@@ -1239,6 +1413,28 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
  #define PSD_ENABLEPAGEPAINTHOOK           0x00040000
  #define PSD_DISABLEPAGEPAINTING           0x00080000
  #define PSD_NONETWORKBUTTON               0x00200000 // must be same as PD_*
