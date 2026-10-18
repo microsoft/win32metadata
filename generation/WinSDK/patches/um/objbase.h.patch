@@ -1,0 +1,47 @@
+diff --git a/um/objbase.h b/um/objbase.h
+index a156d7da..9df55d36 100644
+--- a/um/objbase.h
++++ b/um/objbase.h
+@@ -106,8 +106,11 @@ _Check_return_ WINOLEAPI  CoGetSystemSecurityPermissions(COMSD comSDType, PSECUR
+ 
+ /* dll loading helpers; keeps track of ref counts and unloads all on exit */
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(HINSTANCE) CoLoadLibrary(_In_ LPOLESTR lpszLibName, _In_ BOOL bAutoFree);
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(void) CoFreeLibrary(_In_ HINSTANCE hInst);
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(void) CoFreeAllLibraries(void);
+ 
+ 
+@@ -140,6 +143,7 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+ #if (_WIN32_WINNT >= 0x0500 ) || defined(_WIN32_DCOM) // DCOM
+ 
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI CoAllowSetForegroundWindow(_In_ IUnknown *pUnk, _In_opt_ LPVOID lpvReserved);
+ 
+ 
+@@ -148,11 +152,14 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
+ #endif
+ 
+ /* other helpers */
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(BOOL) CoIsOle1Class(_In_ REFCLSID rclsid);
+ _Check_return_ WINOLEAPI CLSIDFromProgIDEx (_In_ LPCOLESTR lpszProgID, _Out_ LPCLSID lpclsid);
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(BOOL) CoFileTimeToDosDateTime(
+                  _In_ FILETIME FAR* lpFileTime, _Out_ LPWORD lpDosDate, _Out_ LPWORD lpDosTime);
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(BOOL) CoDosDateTimeToFileTime(
+                        _In_ WORD nDosDate, _In_ WORD nDosTime, _Out_ FILETIME FAR* lpFileTime);
+ WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
+@@ -175,6 +182,7 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
+ 
+ WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI CreateDataCache(_In_opt_ LPUNKNOWN pUnkOuter, _In_ REFCLSID rclsid,
+                           _In_ REFIID iid, _Out_ LPVOID FAR* ppv);
+ 

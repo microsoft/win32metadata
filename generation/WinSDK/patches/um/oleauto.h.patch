@@ -1,0 +1,28 @@
+diff --git a/um/oleauto.h b/um/oleauto.h
+index 7860ea3c..3a429854 100644
+--- a/um/oleauto.h
++++ b/um/oleauto.h
+@@ -75,7 +75,9 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
+ WINOLEAUTAPI_(INT)  SysReAllocString(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(_String_length_(psz)+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz);
+ WINOLEAUTAPI_(_Ret_writes_maybenull_z_(ui+1) BSTR) SysAllocStringLen(_In_reads_opt_(ui) const OLECHAR * strIn, UINT ui);
+ _Check_return_ WINOLEAUTAPI_(INT)  SysReAllocStringLen(_Inout_ _At_(*pbstr, _Pre_z_ _Post_z_ _Post_readable_size_(len+1)) BSTR* pbstr, _In_opt_z_ const OLECHAR* psz, _In_ unsigned int len);
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAUTAPI SysAddRefString(_In_ BSTR bstrString);
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SysReleaseString(_In_ BSTR bstrString);
+ WINOLEAUTAPI_(void) SysFreeString(_Frees_ptr_opt_ BSTR bstrString);
+ WINOLEAUTAPI_(_Post_equal_to_(pbstr == NULL ? 0 : _String_length_(pbstr)) UINT) SysStringLen(_In_opt_ BSTR pbstr);
+@@ -131,10 +133,13 @@ WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreate(_In_ VARTYPE vt, _In_ UINT cDims, _In
+ WINOLEAUTAPI_(SAFEARRAY *) SafeArrayCreateEx(_In_ VARTYPE vt, _In_ UINT cDims, _In_ SAFEARRAYBOUND * rgsabound, _In_ PVOID pvExtra);
+ _Check_return_
+ WINOLEAUTAPI SafeArrayCopyData(_In_ SAFEARRAY *psaSource, _In_ SAFEARRAY *psaTarget);
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SafeArrayReleaseDescriptor(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayDestroyDescriptor(_In_ SAFEARRAY * psa);
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAUTAPI_(void) SafeArrayReleaseData(_In_ PVOID pData);
+ WINOLEAUTAPI SafeArrayDestroyData(_In_ SAFEARRAY * psa);
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAUTAPI SafeArrayAddRef(_In_ SAFEARRAY * psa, _Out_ PVOID *ppDataToRelease);
+ WINOLEAUTAPI SafeArrayDestroy(_In_ SAFEARRAY * psa);
+ WINOLEAUTAPI SafeArrayRedim(_Inout_ SAFEARRAY * psa, _In_ SAFEARRAYBOUND * psaboundNew);

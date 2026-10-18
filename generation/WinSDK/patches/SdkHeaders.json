@@ -1461,6 +1461,150 @@
       "sourceSha256": "C9954B0F6051BBAC7DC550F92B88C9306C2D76DDD5CFFDB224FEE4DE3C010F23",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winspool.h",
       "sdkSha256": "C9954B0F6051BBAC7DC550F92B88C9306C2D76DDD5CFFDB224FEE4DE3C010F23"
+    },
+    {
+      "path": "um\\wdsclientapi.h",
+      "sourceSha256": "8123CF47255DBAEBB7987DFFC23EEEBCDB219EFBE89809402FE7C7B0F946E24E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wdsclientapi.h",
+      "sdkSha256": "8123CF47255DBAEBB7987DFFC23EEEBCDB219EFBE89809402FE7C7B0F946E24E"
+    },
+    {
+      "path": "um\\objbase.h",
+      "sourceSha256": "14D465A8F602F2394C5455F67F129756FC525B26AD9C3099D3F6D943CAFB5007",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\objbase.h",
+      "sdkSha256": "14D465A8F602F2394C5455F67F129756FC525B26AD9C3099D3F6D943CAFB5007"
+    },
+    {
+      "path": "um\\winver.h",
+      "sourceSha256": "C60E137E7FF88582F72E50FE74904F5773502D229F78234EA83ABB2688F6E8AE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winver.h",
+      "sdkSha256": "C60E137E7FF88582F72E50FE74904F5773502D229F78234EA83ABB2688F6E8AE"
+    },
+    {
+      "path": "um\\oleauto.h",
+      "sourceSha256": "76A024C41B0778979C84466199D9C868FC767F1EACA8B2660D298798382137B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\oleauto.h",
+      "sdkSha256": "76A024C41B0778979C84466199D9C868FC767F1EACA8B2660D298798382137B4"
+    },
+    {
+      "path": "um\\aclui.h",
+      "sourceSha256": "2B3D7AF63AD3C5B44898F9F38FFCEFEF29218F21640516F5C6F5F1DEC612039D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\aclui.h",
+      "sdkSha256": "2B3D7AF63AD3C5B44898F9F38FFCEFEF29218F21640516F5C6F5F1DEC612039D"
+    },
+    {
+      "path": "um\\heapapi.h",
+      "sourceSha256": "22B606B0A4096295272BCAE6FC353C4F159F0CDFC90B5F1A9A712B2FFF50B53F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\heapapi.h",
+      "sdkSha256": "22B606B0A4096295272BCAE6FC353C4F159F0CDFC90B5F1A9A712B2FFF50B53F"
+    },
+    {
+      "path": "um\\rtworkq.h",
+      "sourceSha256": "3C12EF274DB07A1F9BAD5226CEBB0359C429FDECB2E76DA2EC9E51A2EFD5E4B2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\rtworkq.h",
+      "sdkSha256": "3C12EF274DB07A1F9BAD5226CEBB0359C429FDECB2E76DA2EC9E51A2EFD5E4B2"
+    },
+    {
+      "path": "um\\wdspxe.h",
+      "sourceSha256": "A3784414323D83C19040D2FA1AF1258F4528536BB51B5D093CC3D4B4CDE8D6C2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wdspxe.h",
+      "sdkSha256": "A3784414323D83C19040D2FA1AF1258F4528536BB51B5D093CC3D4B4CDE8D6C2"
+    },
+    {
+      "path": "um\\compressapi.h",
+      "sourceSha256": "B5790CA2284379703B731CDF5E2AFF65A91329E3B0D6E98925F9239C26AB225C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\compressapi.h",
+      "sdkSha256": "B5790CA2284379703B731CDF5E2AFF65A91329E3B0D6E98925F9239C26AB225C"
+    },
+    {
+      "path": "um\\perflib.h",
+      "sourceSha256": "03F88C174244F339464DED36A839FCA27C0282C7712C5388E13927082ECDE986",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\perflib.h",
+      "sdkSha256": "03F88C174244F339464DED36A839FCA27C0282C7712C5388E13927082ECDE986"
+    },
+    {
+      "path": "um\\cryptdlg.h",
+      "sourceSha256": "ADECC299C495F4588ABEA36B883DEB3B6262F6968BF0C0D51C236537BD98DB5E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cryptdlg.h",
+      "sdkSha256": "ADECC299C495F4588ABEA36B883DEB3B6262F6968BF0C0D51C236537BD98DB5E"
+    },
+    {
+      "path": "um\\pathcch.h",
+      "sourceSha256": "44831390EFBEA0FD7DD8EECFD670B3CEBFCE09CF8017BA37EADE9A290B0169E5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\pathcch.h",
+      "sdkSha256": "44831390EFBEA0FD7DD8EECFD670B3CEBFCE09CF8017BA37EADE9A290B0169E5"
+    },
+    {
+      "path": "um\\coml2api.h",
+      "sourceSha256": "73B81B7FEFEF903C28A3C2EAB09CC52139EDE97C38D8FE0E3F46FADDB106A65E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\coml2api.h",
+      "sdkSha256": "73B81B7FEFEF903C28A3C2EAB09CC52139EDE97C38D8FE0E3F46FADDB106A65E"
+    },
+    {
+      "path": "um\\olectl.h",
+      "sourceSha256": "6165D86EE5AB4F4F0B027B5D1A579ED5C704C20BC48629C19F7071650AA08594",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\olectl.h",
+      "sdkSha256": "6165D86EE5AB4F4F0B027B5D1A579ED5C704C20BC48629C19F7071650AA08594"
+    },
+    {
+      "path": "um\\processenv.h",
+      "sourceSha256": "C10DD3BD48A2416E0AECE2259EA57CC47D6C8B9FDBAE085A4C7A5B29C71A85DD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\processenv.h",
+      "sdkSha256": "C10DD3BD48A2416E0AECE2259EA57CC47D6C8B9FDBAE085A4C7A5B29C71A85DD"
+    },
+    {
+      "path": "um\\wsman.h",
+      "sourceSha256": "7946098F11A1D51D305DB7222661BBE4122A3BDEEE37B303D7AA3F79F82729AA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wsman.h",
+      "sdkSha256": "7946098F11A1D51D305DB7222661BBE4122A3BDEEE37B303D7AA3F79F82729AA"
+    },
+    {
+      "path": "um\\wow64apiset.h",
+      "sourceSha256": "6B14E2B59AE5B9F22BFD9A1E989A5589ADF5790832FF24CB9D8828D4E8D45CDA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wow64apiset.h",
+      "sdkSha256": "6B14E2B59AE5B9F22BFD9A1E989A5589ADF5790832FF24CB9D8828D4E8D45CDA"
+    },
+    {
+      "path": "shared\\evntprov.h",
+      "sourceSha256": "C5CF9EE283402BD506EADA2830FEE50BCCFEFCB07439C29BE1D3181A6DE81833",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\evntprov.h",
+      "sdkSha256": "C5CF9EE283402BD506EADA2830FEE50BCCFEFCB07439C29BE1D3181A6DE81833"
+    },
+    {
+      "path": "um\\eapmethodpeerapis.h",
+      "sourceSha256": "690CEDEDBC56F2A4D61CFC4D88405C238523800A5BED19A2D917ACA0BB18039D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\eapmethodpeerapis.h",
+      "sdkSha256": "690CEDEDBC56F2A4D61CFC4D88405C238523800A5BED19A2D917ACA0BB18039D"
+    },
+    {
+      "path": "um\\schannel.h",
+      "sourceSha256": "72E2EBFE9DD487AB5BAED64F2147C451B1954BF8B2B5D3DB9AB3F9B4009BE8CE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\schannel.h",
+      "sdkSha256": "72E2EBFE9DD487AB5BAED64F2147C451B1954BF8B2B5D3DB9AB3F9B4009BE8CE"
+    },
+    {
+      "path": "um\\shlobj.h",
+      "sourceSha256": "4C8CC5AAF1C4DC8778F16A67D883BD42EFBE47F8A9F4ECF99E2DA3A420C874FB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shlobj.h",
+      "sdkSha256": "4C8CC5AAF1C4DC8778F16A67D883BD42EFBE47F8A9F4ECF99E2DA3A420C874FB"
+    },
+    {
+      "path": "um\\eappapis.h",
+      "sourceSha256": "FD0695FF804EB1E103BD3EC49CCCF6349DBEFB23D947A79FF9402B48C310C855",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\eappapis.h",
+      "sdkSha256": "FD0695FF804EB1E103BD3EC49CCCF6349DBEFB23D947A79FF9402B48C310C855"
+    },
+    {
+      "path": "um\\eaphostpeerconfigapis.h",
+      "sourceSha256": "B776971CCA267D4B15DE45115D3B664CAC010DCC365D839F56D85C1B63BA7D00",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\eaphostpeerconfigapis.h",
+      "sdkSha256": "B776971CCA267D4B15DE45115D3B664CAC010DCC365D839F56D85C1B63BA7D00"
+    },
+    {
+      "path": "um\\eapmethodauthenticatorapis.h",
+      "sourceSha256": "9D753662323AA62ED6D3C4635374945253E9CD0B9203EE9404593FD34FD4DE43",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\eapmethodauthenticatorapis.h",
+      "sdkSha256": "9D753662323AA62ED6D3C4635374945253E9CD0B9203EE9404593FD34FD4DE43"
     }
   ],
   "midl": {
@@ -2339,7 +2483,15 @@
     "Edp",
     "Cos",
     "Console",
-    "Printing"
+    "Printing",
+    "Wds",
+    "Authorization.UI",
+    "CmpApi",
+    "Perf",
+    "Environment",
+    "WinRm",
+    "Etw",
+    "EapHost"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -2550,6 +2702,30 @@
     "um\\consoleapi.h.patch",
     "um\\consoleapi2.h.patch",
     "um\\consoleapi3.h.patch",
-    "um\\winspool.h.patch"
+    "um\\winspool.h.patch",
+    "um\\wdsclientapi.h.patch",
+    "um\\objbase.h.patch",
+    "um\\winver.h.patch",
+    "um\\oleauto.h.patch",
+    "um\\aclui.h.patch",
+    "um\\heapapi.h.patch",
+    "um\\rtworkq.h.patch",
+    "um\\wdspxe.h.patch",
+    "um\\compressapi.h.patch",
+    "um\\perflib.h.patch",
+    "um\\cryptdlg.h.patch",
+    "um\\pathcch.h.patch",
+    "um\\coml2api.h.patch",
+    "um\\olectl.h.patch",
+    "um\\processenv.h.patch",
+    "um\\wsman.h.patch",
+    "um\\wow64apiset.h.patch",
+    "shared\\evntprov.h.patch",
+    "um\\eapmethodpeerapis.h.patch",
+    "um\\schannel.h.patch",
+    "um\\shlobj.h.patch",
+    "um\\eappapis.h.patch",
+    "um\\eaphostpeerconfigapis.h.patch",
+    "um\\eapmethodauthenticatorapis.h.patch"
   ]
 }

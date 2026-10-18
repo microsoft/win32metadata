@@ -42,3 +42,5 @@ _NavigateToPidl=_NavigateToPidl2
 SIIGBF=Flags
 --namespace
 Windows.Win32.UI.Shell
+--config
+parse-win32-annotations

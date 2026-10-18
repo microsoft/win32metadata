@@ -1,0 +1,12 @@
+diff --git a/um/schannel.h b/um/schannel.h
+index a2208f5d..8493f483 100644
+--- a/um/schannel.h
++++ b/um/schannel.h
+@@ -1087,6 +1087,7 @@ typedef SECURITY_STATUS
+ );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows8_
+ SECURITY_STATUS
+ WINAPI
+ SslGetServerIdentity(

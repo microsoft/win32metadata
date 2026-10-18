@@ -1,0 +1,62 @@
+diff --git a/um/cryptdlg.h b/um/cryptdlg.h
+index 13feace6..10cd0705 100644
+--- a/um/cryptdlg.h
++++ b/um/cryptdlg.h
+@@ -153,6 +153,8 @@ typedef CERT_SELECT_STRUCT_A CERT_SELECT_STRUCT;
+ typedef PCERT_SELECT_STRUCT_A PCERT_SELECT_STRUCT;
+ #endif // UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ BOOL
+ WINAPI
+@@ -162,6 +164,8 @@ CertSelectCertificateA(
+ #ifdef MAC
+ #define CertSelectCertificate CertSelectCertificateA
+ #else   // !MAC
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ BOOL
+ WINAPI
+@@ -248,6 +252,7 @@ typedef CERT_VIEWPROPERTIES_STRUCT_A CERT_VIEWPROPERTIES_STRUCT;
+ typedef PCERT_VIEWPROPERTIES_STRUCT_A PCERT_VIEWPROPERTIES_STRUCT;
+ #endif // UNICODE
+ 
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ BOOL
+ WINAPI
+@@ -257,6 +262,7 @@ CertViewPropertiesA(
+ #ifdef MAC
+ #define CertViewProperties CertViewPropertiesA
+ #else   // !MAC
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ BOOL
+ WINAPI
+@@ -309,6 +315,7 @@ typedef struct tagCMFLTR {
+ //
+ //   Get a formatted friendly name for a certificate
+ 
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ DWORD
+ WINAPI
+@@ -317,6 +324,7 @@ GetFriendlyNameOfCertA(
+     _Out_writes_to_opt_(cch, return) LPSTR pch,
+     _In_ DWORD cch
+     );
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ DWORD
+ WINAPI
+@@ -444,6 +452,7 @@ typedef struct _CTL_MODIFY_REQUEST {
+     DWORD               dwError;        // Operation error code
+ } CTL_MODIFY_REQUEST, * PCTL_MODIFY_REQUEST;
+ 
++_Win32_SupportedOS_WindowsXP_
+ CRYPTDLGAPI
+ HRESULT
+ WINAPI

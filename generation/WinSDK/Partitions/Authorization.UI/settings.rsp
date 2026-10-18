@@ -8,3 +8,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/AclUI.h
 --namespace
 Windows.Win32.Security.Authorization.UI
+--config
+parse-win32-annotations

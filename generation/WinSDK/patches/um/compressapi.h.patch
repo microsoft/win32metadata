@@ -1,0 +1,110 @@
+diff --git a/um/compressapi.h b/um/compressapi.h
+index c6f8f5b1..83d7f87a 100644
+--- a/um/compressapi.h
++++ b/um/compressapi.h
+@@ -69,6 +69,8 @@ typedef enum {
+ 
+ // Compression routines
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ CreateCompressor (
+@@ -77,6 +79,8 @@ CreateCompressor (
+     _Out_ PCOMPRESSOR_HANDLE CompressorHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ SetCompressorInformation (
+@@ -86,6 +90,8 @@ SetCompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ QueryCompressorInformation (
+@@ -95,6 +101,8 @@ QueryCompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ Compress (
+@@ -106,12 +114,16 @@ Compress (
+     _Out_ PSIZE_T CompressedDataSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ ResetCompressor (
+     _In_ COMPRESSOR_HANDLE CompressorHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ CloseCompressor (
+@@ -120,6 +132,8 @@ CloseCompressor (
+ 
+ // Decompression routines
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ CreateDecompressor (
+@@ -128,6 +142,8 @@ CreateDecompressor (
+     _Out_ PDECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ SetDecompressorInformation (
+@@ -137,6 +153,8 @@ SetDecompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ QueryDecompressorInformation (
+@@ -146,6 +164,8 @@ QueryDecompressorInformation (
+     _In_ SIZE_T CompressInformationSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ Decompress (
+@@ -157,12 +177,16 @@ Decompress (
+     _Out_opt_ PSIZE_T UncompressedDataSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ ResetDecompressor (
+     _In_ DECOMPRESSOR_HANDLE DecompressorHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows8_
+ BOOL
+ WINAPI
+ CloseDecompressor (
