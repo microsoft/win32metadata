@@ -2647,6 +2647,8 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "NWifi" => "wlanapi.h",
                 "Policy" => "gpedit.h",
                 "ActiveDirectory" => "dsclient.h",
+                "RRas" => "mprapi.h",
+                "MsCs" => "resapi.h",
                 _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
             };
             string root = WinHttpMigrationTests.RepositoryRoot;
@@ -2662,6 +2664,9 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             // The unrelated WinHTTP include contains C++ helpers; the owned HTTP header also supports C.
             string sourceText = partition == "HttpServer" && language == "c" ?
                 "#include \"intrinfix.h\"\n#define IN _In_\n#define OUT _Out_\n#include <WinSock2.h>\n#include <http.h>\n" : null;
+            if (language == "c" && partition is "RRas" or "MsCs")
+                sourceText = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n#include \"intrinfix.h\"\n" +
+                    "#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
             var before = Surface(root, control, partition, architecture, target, headers, BroadSourceSalProbe,
                 metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
                 diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
@@ -2700,6 +2705,12 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                     case "NWifi":
                         addedAnnotations.Add("phClientHandle|RAIIFree");
                         break;
+                    case "RRas":
+                        addedAnnotations.Add("MprInfoBlockFind|SupportedOSPlatform(\"windowsserver2000\")");
+                        break;
+                    case "MsCs":
+                        addedAnnotations.Add("ResUtilGetBinaryValue|SupportedOSPlatform(\"windowsserver2008\")");
+                        break;
                     case "Policy":
                     case "ActiveDirectory":
                         bool cStyle = language == "c" || cInterface;
@@ -2724,7 +2735,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> NetworkBroadSourceControls()
         {
-            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory" })
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs" })
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
