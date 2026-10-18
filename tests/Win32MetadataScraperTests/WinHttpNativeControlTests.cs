@@ -1319,6 +1319,54 @@ static_assert(DISC_NO_FORCE == 64u);
                     yield return new object[] { partition }.Concat(mode).ToArray();
         }
 
+        [NativeMigrationTheory("WINHTTP_DEVICE_UI_PRODUCER_BEFORE")]
+        [MemberData(nameof(DeviceUiProducerHeaderControls))]
+        public void DeviceUiProducerCleanupPreservesActualNativeAbiSalAndBorrowedConsumers(
+            string partition, string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_UI_PRODUCER_BEFORE");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var transfers = WinHttpMigrationTests.DeviceUiProducerTransfers.Where(value => value.Partition == partition).ToArray();
+            string[] headers = transfers.Select(value => value.Header).Distinct(StringComparer.Ordinal).ToArray();
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
+                diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, partition, architecture, target, headers, "",
+                metadataEnabled: enabled, annotations: afterAnnotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(before, after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            var expected = beforeAnnotations.Concat(enabled
+                ? transfers.Select(value => (value.Parameter == "return" ? value.Method : value.Parameter) + "|RAIIFree")
+                : Array.Empty<string>());
+            Assert.Equal(expected.OrderBy(value => value, StringComparer.Ordinal),
+                afterAnnotations.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.DoesNotContain(afterAnnotations, value => value == "GetWindowTheme|RAIIFree");
+            this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
+                $"{before.Length} unchanged native facts, {beforeSal.Count} unchanged SAL occurrences, " +
+                $"{(enabled ? transfers.Length : 0)} exact producer return/output sites; borrowed consumers and all prior facts unchanged.");
+        }
+
+        public static IEnumerable<object[]> DeviceUiProducerHeaderControls()
+        {
+            foreach (string partition in WinHttpMigrationTests.DeviceUiProducerTransfers.Select(value => value.Partition)
+                .Distinct(StringComparer.Ordinal))
+                foreach (object[] mode in OriginalErrorOwnerControls())
+                    yield return new object[] { partition }.Concat(mode).ToArray();
+        }
+
         private static readonly string[] MmeapiOpenFragmentMembers =
         {
             "WAVE_FORMAT_QUERY", "WAVE_ALLOWSYNC", "WAVE_MAPPED", "WAVE_FORMAT_DIRECT",

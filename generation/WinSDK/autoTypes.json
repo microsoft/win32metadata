@@ -879,8 +879,6 @@
     "Namespace": "Windows.Win32.Graphics.Printing.PrintTicket",
     "Name": "HPTPROVIDER",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "PTCloseProvider",
-    "InvalidHandleValues": [ -1, 0 ],
     "NativeTypedef": true
   },
   {
@@ -1616,10 +1614,9 @@
     "NativeTypedef": true
   },
   {
+    "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HTHEME",
     "ValueType": "IntPtr",
-    "InvalidHandleValues": [ 0 ],
-    "CloseApi": "CloseThemeData",
     "NativeTypedef": true
   },
   {

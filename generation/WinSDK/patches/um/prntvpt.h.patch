@@ -1,8 +1,8 @@
 diff --git a/um/prntvpt.h b/um/prntvpt.h
-index a0807474..f6166465 100644
+index a0807474..d12b8de3 100644
 --- a/um/prntvpt.h
 +++ b/um/prntvpt.h
-@@ -77,12 +77,14 @@ typedef enum
+@@ -77,38 +77,44 @@ typedef enum
  } EPrintTicketScope;
  
  
@@ -14,27 +14,36 @@ index a0807474..f6166465 100644
              );
  
 +_Win32_SupportedOS_WindowsXP_
++HRESULT WINAPI
++PTCloseProvider(
++            _In_  HPTPROVIDER hProvider
++            );
++
++_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI
  PTOpenProvider( 
              _In_        PCWSTR       pszPrinterName,
-@@ -90,6 +92,7 @@ PTOpenProvider(
-             _Out_       HPTPROVIDER *phProvider
+                         DWORD        dwVersion,
+-            _Out_       HPTPROVIDER *phProvider
++            _Out_ _Win32_RAIIFree_(PTCloseProvider, -1, 0) HPTPROVIDER *phProvider
              );
  
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI
  PTOpenProviderEx( 
              _In_  PCWSTR       pszPrinterName,
-@@ -99,16 +102,19 @@ PTOpenProviderEx(
+                   DWORD        dwMaxVersion,
+                   DWORD        dwPrefVersion,
+-            _Out_ HPTPROVIDER *phProvider,
++            _Out_ _Win32_RAIIFree_(PTCloseProvider, -1, 0) HPTPROVIDER *phProvider,
              _Out_ DWORD       *pUsedVersion
              );
  
-+_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI
- PTCloseProvider(
-             _In_  HPTPROVIDER hProvider
-             );
- 
+-HRESULT WINAPI
+-PTCloseProvider(
+-            _In_  HPTPROVIDER hProvider
+-            );
+-
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI
  PTReleaseMemory(

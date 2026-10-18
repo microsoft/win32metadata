@@ -3627,19 +3627,38 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
         [InlineData("arm64")]
         public void DeviceProducerSourceProjectionPreservesFamiliesAndMovesOnlyFourOutputContracts(string architecture)
         {
-            string root = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_ROOT");
-            string baselinePath = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_BASELINE");
-            var transfers = WinHttpMigrationTests.DeviceProducerTransfers;
+            AssertDeviceProducerSourceProjection(Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_ROOT"),
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_PRODUCER_BASELINE"), architecture,
+                WinHttpMigrationTests.DeviceProducerTransfers);
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_UI_PRODUCER_ROOT", "WINHTTP_DEVICE_UI_PRODUCER_BASELINE")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void DeviceUiProducerSourceProjectionPreservesFamiliesAndMovesOnlyFiveProducerContracts(string architecture)
+        {
+            AssertDeviceProducerSourceProjection(Environment.GetEnvironmentVariable("WINHTTP_DEVICE_UI_PRODUCER_ROOT"),
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_UI_PRODUCER_BASELINE"), architecture,
+                WinHttpMigrationTests.DeviceUiProducerTransfers);
+        }
+
+        private static void AssertDeviceProducerSourceProjection(string root, string baselinePath, string architecture,
+            (string Header, string Partition, string Namespace, string TypeName,
+                string Method, string Parameter, string Cleanup, long[] InvalidValues)[] transfers)
+        {
             var families = transfers.DistinctBy(value => value.TypeName).ToArray();
             using var baseline = new MetadataImage(baselinePath);
             using var before = Component("before", "original-autoTypes.json");
             using var after = Component("after", "candidate-owned-autoTypes.json");
             AssertMetadataClosure(before.Reader);
             AssertMetadataClosure(after.Reader);
-            Assert.Equal(3, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "RAIIFreeAttribute"));
-            Assert.Equal(5, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "InvalidHandleValueAttribute"));
-            Assert.Equal(4, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "RAIIFreeAttribute"));
-            Assert.Equal(6, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "InvalidHandleValueAttribute"));
+            Assert.Equal(families.Length, before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(families.Sum(value => value.InvalidValues.Length),
+                before.Reader.CustomAttributes.Count(handle => AttributeName(before.Reader, handle) == "InvalidHandleValueAttribute"));
+            Assert.Equal(transfers.Length, after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "RAIIFreeAttribute"));
+            Assert.Equal(transfers.Sum(value => value.InvalidValues.Length),
+                after.Reader.CustomAttributes.Count(handle => AttributeName(after.Reader, handle) == "InvalidHandleValueAttribute"));
             var originalTypes = TypeSnapshots(before.Reader);
             var currentTypes = TypeSnapshots(after.Reader);
             Assert.Equal(originalTypes.Keys, currentTypes.Keys);
@@ -3707,32 +3726,41 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                     Assert.Equal(before.Reader.GetString(oldImport.Name), after.Reader.GetString(import.Name));
                     Assert.Equal(before.Reader.GetString(before.Reader.GetModuleReference(oldImport.Module).Name),
                         after.Reader.GetString(after.Reader.GetModuleReference(import.Module).Name));
-                    var originalParameters = original.GetParameters().Select(before.Reader.GetParameter).ToArray();
+                    var originalParameters = original.GetParameters().Select(before.Reader.GetParameter)
+                        .ToDictionary(parameter => parameter.SequenceNumber);
                     var parameters = current.GetParameters().Select(after.Reader.GetParameter).ToArray();
-                    Assert.Equal(originalParameters.Length, parameters.Length);
-                    for (int i = 0; i < parameters.Length; i++)
+                    Assert.Equal(originalParameters.Keys.OrderBy(value => value),
+                        parameters.Select(parameter => parameter.SequenceNumber).OrderBy(value => value));
+                    foreach (var parameter in parameters)
                     {
-                        var originalParameter = originalParameters[i];
-                        var parameter = parameters[i];
+                        var originalParameter = originalParameters[parameter.SequenceNumber];
                         string parameterName = after.Reader.GetString(parameter.Name);
-                        Assert.Equal(originalParameter.SequenceNumber, parameter.SequenceNumber);
+                        string target = parameter.SequenceNumber == 0 ? "return" : parameterName;
+                        var transfer = transfers.SingleOrDefault(value => value.Method == name && value.Parameter == target);
                         Assert.Equal(before.Reader.GetString(originalParameter.Name), parameterName);
                         Assert.Equal(originalParameter.Attributes, parameter.Attributes);
                         Assert.Equal(Facts(before.Reader, originalParameter.GetCustomAttributes()),
                             Facts(after.Reader, parameter.GetCustomAttributes(), true));
-                        var transfer = transfers.SingleOrDefault(value => value.Method == name && value.Parameter == parameterName);
                         if (transfer.Method == null)
                         {
                             AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
                             AssertDoesNotHaveAttribute(after.Reader, parameter.GetCustomAttributes(), "InvalidHandleValueAttribute");
                             continue;
                         }
-                        Assert.True(usedTransfers.Add(name + "::" + parameterName));
-                        Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                        Assert.True(usedTransfers.Add(name + "::" + target));
                         AssertStringAttribute(after.Reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute", transfer.Cleanup);
                         Assert.Equal(transfer.InvalidValues, ReadInvalidValues(after.Reader, parameter.GetCustomAttributes()));
-                        Assert.Equal(transfer.Namespace + "." + transfer.TypeName + "*",
-                            signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                        if (target == "return")
+                        {
+                            Assert.False(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName, signature.ReturnType);
+                        }
+                        else
+                        {
+                            Assert.True(parameter.Attributes.HasFlag(ParameterAttributes.Out));
+                            Assert.Equal(transfer.Namespace + "." + transfer.TypeName + "*",
+                                signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                        }
                     }
                 }
             }
@@ -3770,7 +3798,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                 }
                 var types = AutoTypeHelpers.GetAutoTypesFromFiles(new[] { Path.Combine(root, autoTypesFile) })
                     .Where(value => families.Any(family => family.TypeName == value.Name)).ToArray();
-                Assert.Equal(3, types.Length);
+                Assert.Equal(families.Length, types.Length);
                 using (var stream = File.Create(Path.Combine(directory, "NativeTypedefs.cs")))
                     NativeTypedefStructsCreator.WriteToStream(names, types, stream);
                 return Emit(directory, architecture, references: new[] { baselinePath });

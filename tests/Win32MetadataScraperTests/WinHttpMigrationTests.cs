@@ -1756,6 +1756,49 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        internal static readonly (string Header, string Partition, string Namespace, string TypeName,
+            string Method, string Parameter, string Cleanup, long[] InvalidValues)[] DeviceUiProducerTransfers =
+        {
+            ("prntvpt.h", "PrintTicket", "Windows.Win32.Graphics.Printing.PrintTicket", "HPTPROVIDER",
+                "PTOpenProvider", "phProvider", "PTCloseProvider", new long[] { -1, 0 }),
+            ("prntvpt.h", "PrintTicket", "Windows.Win32.Graphics.Printing.PrintTicket", "HPTPROVIDER",
+                "PTOpenProviderEx", "phProvider", "PTCloseProvider", new long[] { -1, 0 }),
+            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+                "OpenThemeData", "return", "CloseThemeData", new long[] { 0 }),
+            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+                "OpenThemeDataForDpi", "return", "CloseThemeData", new long[] { 0 }),
+            ("uxtheme.h", "Controls", "Windows.Win32.UI.Controls", "HTHEME",
+                "OpenThemeDataEx", "return", "CloseThemeData", new long[] { 0 }),
+        };
+
+        [Fact]
+        public void DeviceUiProducerOwnershipHasFiveNativeAuthoritiesAndRetainsBothHandleRepresentations()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var types = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "autoTypes.json")));
+            foreach (var family in DeviceUiProducerTransfers.DistinctBy(value => value.TypeName))
+            {
+                var type = Assert.Single(types.RootElement.EnumerateArray()
+                    .Where(value => value.GetProperty("Name").GetString() == family.TypeName));
+                Assert.Equal(family.Namespace, type.GetProperty("Namespace").GetString());
+                Assert.Equal(family.TypeName == "HTHEME" ? "IntPtr" : "DECLARE_HANDLE", type.GetProperty("ValueType").GetString());
+                Assert.True(type.GetProperty("NativeTypedef").GetBoolean());
+                Assert.False(type.TryGetProperty("CloseApi", out _));
+                Assert.False(type.TryGetProperty("InvalidHandleValues", out _));
+            }
+            foreach (var group in DeviceUiProducerTransfers.GroupBy(value => value.Header, StringComparer.Ordinal))
+            {
+                string additions = string.Join("\n", File.ReadAllLines(Path.Combine(project, "patches", "um", group.Key + ".patch"))
+                    .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                    .Select(line => line.Substring(1)));
+                Assert.Equal(group.Select(value => value.Cleanup + ", " + string.Join(", ", value.InvalidValues))
+                    .OrderBy(value => value, StringComparer.Ordinal),
+                    Regex.Matches(additions, @"_Win32_RAIIFree_\(([^)]+)\)")
+                        .Select(match => match.Groups[1].Value).OrderBy(value => value, StringComparer.Ordinal));
+                Assert.DoesNotContain("_Win32_AlsoUsableFor_", additions);
+            }
+        }
+
         private const string DeviceInstallationNamespace = "Windows.Win32.Devices.DeviceAndDriverInstallation";
         internal static readonly (string Name, bool Flags, int Members)[] DeviceInstallationGroups =
         {
