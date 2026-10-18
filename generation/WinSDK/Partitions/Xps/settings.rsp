@@ -7,5 +7,3 @@ parse-win32-annotations
 <IncludeRoot>/um/xpsobjectmodel.h
 --namespace
 Windows.Win32.Storage.Xps
---config
-parse-win32-annotations

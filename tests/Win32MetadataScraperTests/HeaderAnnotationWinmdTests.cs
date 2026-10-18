@@ -104,7 +104,7 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
 };
 ";
 
-        [NativeMigrationTheory("SYSTEM_ENUM_BINDINGS")]
+        [MigrationTheory("SYSTEM_ENUM_BINDINGS", "SYSTEM_ENUM_MIGRATION_ROOT")]
         [InlineData("x86")]
         [InlineData("x64")]
         [InlineData("arm64")]

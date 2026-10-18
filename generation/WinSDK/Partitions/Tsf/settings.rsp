@@ -12,5 +12,3 @@ parse-win32-annotations
 <IncludeRoot>/um/tsattrs.h
 --namespace
 Windows.Win32.UI.TextServices
---config
-parse-win32-annotations

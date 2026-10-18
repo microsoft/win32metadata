@@ -40,5 +40,3 @@ _DL_EUI48
 <IncludeRoot>/um/ipinfoid.h
 --namespace
 Windows.Win32.NetworkManagement.IpHelper
---config
-parse-win32-annotations

@@ -10,6 +10,3 @@ _DDVIDEOPORTCONNECT
 <IncludeRoot>/um/endpointvolume.h
 --namespace
 Windows.Win32.Media.Audio.Endpoints
-
---config
-parse-win32-annotations

@@ -25,5 +25,3 @@ AVIPALCHANGE
 <IncludeRoot>/um/mciapi.h
 --namespace
 Windows.Win32.Media.Multimedia
---config
-parse-win32-annotations

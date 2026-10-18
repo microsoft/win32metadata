@@ -15,5 +15,3 @@ parse-win32-annotations
 <IncludeRoot>/shared/usbscan.h
 --namespace
 Windows.Win32.Devices.Usb
---config
-parse-win32-annotations
