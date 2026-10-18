@@ -352,15 +352,28 @@ namespace Win32MetadataScraperTests
             Assert.False(Directory.Exists(fixture.SelectedSources));
         }
 
-        [Fact]
-        public void SdkBuildPreservesTheActualMidlClosureBesideGeneratedAssets()
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void SdkBuildPreservesTheActualMidlClosureBesideGeneratedAssets(bool reuseMidl)
         {
             using var fixture = new Fixture();
             fixture.EnableMidl();
+            PreparationResult first = null;
+            if (reuseMidl)
+            {
+                first = fixture.Prepare();
+                fixture.WritePatch(3);
+            }
             var result = fixture.RunSdkBuild("ScrapeConstants", "Sample");
             Assert.True(result.ExitCode == 0, result.Error + result.Output);
             string includeRoot = File.ReadAllLines(fixture.BuildEvents)[0].Split('|')[1];
             fixture.AssertPublishedProvenance(includeRoot, hasMidl: true);
+            using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(includeRoot), "manifest.json")));
+            Assert.Equal(reuseMidl, manifest.RootElement.GetProperty("midlReusedFrom").ValueKind != JsonValueKind.Null);
+            Assert.Equal(reuseMidl ? first.Identity : Path.GetFileName(Path.GetDirectoryName(includeRoot)),
+                manifest.RootElement.GetProperty("midlProducerIdentity").GetString());
         }
 
         [Fact]
@@ -390,6 +403,222 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("/WX", commands);
             Assert.Contains("MIDL2495", commands);
             Assert.Contains("/X", commands);
+        }
+
+        [Theory]
+        [InlineData("native-patch")]
+        [InlineData("unrelated-mirror")]
+        [InlineData("unrelated-admission")]
+        public void UnrelatedNativeChangesReuseTheExactMidlProduction(string mutation)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            byte[] original = File.ReadAllBytes(fixture.MidlInput);
+            var first = fixture.Prepare();
+            Assert.False(first.MidlReused);
+            switch (mutation)
+            {
+                case "native-patch":
+                    fixture.WritePatch(3);
+                    break;
+                case "unrelated-mirror":
+                    File.AppendAllText(fixture.Unrelated, "// unrelated\r\n");
+                    break;
+                case "unrelated-admission":
+                    fixture.AddUnrelatedIdlBackedHeader();
+                    break;
+            }
+
+            var changed = fixture.Prepare();
+            Assert.False(changed.Reused);
+            Assert.True(changed.MidlReused);
+            Assert.NotEqual(first.Identity, changed.Identity);
+            AssertMidlProductionEqual(first, changed);
+            using (var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(changed.IncludeRoot), "manifest.json"))))
+            {
+                Assert.Equal(first.Identity, manifest.RootElement.GetProperty("midlReusedFrom").GetString());
+                Assert.Equal(first.Identity, manifest.RootElement.GetProperty("midlProducerIdentity").GetString());
+            }
+
+            fixture.WritePatch(4);
+            var third = fixture.Prepare();
+            Assert.False(third.Reused);
+            Assert.True(third.MidlReused);
+            AssertMidlProductionEqual(first, third);
+            using var thirdManifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(third.IncludeRoot), "manifest.json")));
+            Assert.Equal(first.Identity, thirdManifest.RootElement.GetProperty("midlProducerIdentity").GetString());
+            Assert.Contains("VALUE 4", File.ReadAllText(Path.Combine(third.IncludeRoot, "um", "sample.h")));
+            Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "sample.h")));
+            Assert.Equal(original, File.ReadAllBytes(fixture.MidlInput));
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+            Assert.True(fixture.Prepare().MidlReused);
+        }
+
+        [Theory]
+        [InlineData("idl-patch")]
+        [InlineData("dependency")]
+        [InlineData("repository-helper")]
+        [InlineData("shared-header-patch")]
+        [InlineData("output-closure")]
+        [InlineData("compiler-path")]
+        public void ChangedMidlInputsAndOutputContractsRequireNewProduction(string mutation)
+        {
+            using var fixture = new Fixture();
+            if (mutation == "repository-helper")
+                fixture.EnableMidlAnnotationHeader();
+            else if (mutation == "shared-header-patch")
+                fixture.EnableMidlSharedHeader();
+            else
+                fixture.EnableMidl();
+            var first = fixture.Prepare();
+            switch (mutation)
+            {
+                case "idl-patch":
+                    fixture.ReplacePatchText(Fixture.IdlPatchPath,
+                        "+cpp_quote(\"#define IDL_VALUE 2\")", "+cpp_quote(\"#define IDL_VALUE 3\")");
+                    break;
+                case "dependency":
+                    File.AppendAllText(fixture.MidlDependency, "typedef unsigned long NEW_DEPENDENCY;\r\n");
+                    fixture.MutateRecipe(recipe =>
+                    {
+                        string hash = Fixture.Hash(File.ReadAllBytes(fixture.MidlDependency));
+                        recipe["midl"]["inputs"][1]["sdkSha256"] = hash;
+                        recipe["headers"][2]["sdkSha256"] = hash;
+                    });
+                    break;
+                case "repository-helper":
+                    File.AppendAllText(fixture.AnnotationHeader, "\r\n// changed helper\r\n");
+                    fixture.MutateRecipe(recipe => recipe["midl"]["inputs"][2]["sourceSha256"] =
+                        Fixture.Hash(File.ReadAllBytes(fixture.AnnotationHeader)));
+                    break;
+                case "shared-header-patch":
+                    fixture.ReplacePatchText(Fixture.PatchPath, "+#define VALUE 2\r\n",
+                        "+#define VALUE 2 // changed closure input\r\n");
+                    break;
+                case "output-closure":
+                    fixture.EnableIncludedMidl();
+                    break;
+                case "compiler-path":
+                    string tools = Path.Combine(Path.GetDirectoryName(fixture.MidlCompiler), "alternate");
+                    Directory.CreateDirectory(tools);
+                    foreach (string name in new[] { "midl.exe", "midlc.exe" })
+                        File.Copy(Path.Combine(Path.GetDirectoryName(fixture.MidlCompiler), name), Path.Combine(tools, name));
+                    fixture.MutateRecipe(recipe =>
+                    {
+                        recipe["midl"]["tools"][0]["sdkPath"] = @"c\bin\x64\alternate\midl.exe";
+                        recipe["midl"]["tools"][1]["sdkPath"] = @"c\bin\x64\alternate\midlc.exe";
+                    });
+                    break;
+            }
+
+            var changed = fixture.Prepare();
+            Assert.False(changed.Reused);
+            Assert.False(changed.MidlReused);
+            Assert.NotEqual(first.Identity, changed.Identity);
+            using var before = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(first.IncludeRoot), "manifest.json")));
+            using var after = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Path.GetDirectoryName(changed.IncludeRoot), "manifest.json")));
+            Assert.NotEqual(before.RootElement.GetProperty("midlIdentity").GetString(),
+                after.RootElement.GetProperty("midlIdentity").GetString());
+            Assert.Equal(JsonValueKind.Null, after.RootElement.GetProperty("midlReusedFrom").ValueKind);
+            Assert.Equal(changed.Identity, after.RootElement.GetProperty("midlProducerIdentity").GetString());
+            if (mutation == "idl-patch")
+                Assert.Contains("IDL_VALUE 3", File.ReadAllText(Path.Combine(changed.IncludeRoot, "um", "generated.h")));
+            if (mutation == "dependency")
+                Assert.Contains("NEW_DEPENDENCY", File.ReadAllText(Path.Combine(changed.IncludeRoot, "um", "dependency.h")));
+            if (mutation == "output-closure")
+                Assert.Contains("IDL_VALUE 2", File.ReadAllText(Path.Combine(changed.IncludeRoot, "um", "including.h")));
+        }
+
+        [Theory]
+        [InlineData("Prepare-SdkHeaders.ps1")]
+        [InlineData("MidlHeaderUtils.ps1")]
+        [InlineData("ConvertMidlAttributesToSalAnnotations.ps1")]
+        public void ChangedMidlScriptsAndArgumentsRequireNewProduction(string script)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.UsePrivatePreparationScripts();
+            var first = fixture.Prepare();
+            string path = fixture.PreparationScript(script);
+            if (script == "MidlHeaderUtils.ps1")
+                File.WriteAllText(path, File.ReadAllText(path).Replace("'/DUNICODE'", "'/DTEST_MIDL_REUSE=1', '/DUNICODE'"));
+            else
+                File.AppendAllText(path, "\r\n# Changed producer script\r\n");
+
+            var changed = fixture.Prepare();
+            Assert.False(changed.Reused);
+            Assert.False(changed.MidlReused);
+            Assert.NotEqual(first.Identity, changed.Identity);
+            if (script == "MidlHeaderUtils.ps1")
+                Assert.Contains("/DTEST_MIDL_REUSE=1", File.ReadAllText(Path.Combine(
+                    Path.GetDirectoryName(changed.IncludeRoot), "midl", "commands.json")));
+        }
+
+        [Theory]
+        [InlineData("generated-header")]
+        [InlineData("commands")]
+        [InlineData("preprocessed-inputs")]
+        [InlineData("missing-midl")]
+        public void NativeChangesCannotReuseTamperedOrIncompleteMidlProduction(string mutation)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            var first = fixture.Prepare();
+            string midl = Path.Combine(Path.GetDirectoryName(first.IncludeRoot), "midl");
+            if (mutation == "missing-midl")
+                Directory.Move(midl, midl + "-moved");
+            else
+            {
+                string path = mutation == "generated-header" ? Path.Combine("generated", "um", "generated.h") :
+                    mutation == "commands" ? "commands.json" : "preprocessed-inputs.json";
+                File.AppendAllText(Path.Combine(midl, path), "\r\nchanged\r\n");
+            }
+            fixture.WritePatch(3);
+            var result = fixture.Run();
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains(mutation == "missing-midl" ? "Incomplete published MIDL cache" :
+                "Published MIDL cache was modified", result.Error);
+            Assert.Single(Directory.GetDirectories(fixture.Output));
+            Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "sample.h")));
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+        }
+
+        [Fact]
+        public void UnkeyedLegacyMidlProductionIsNotAssumedReusable()
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            var first = fixture.Prepare();
+            string path = Path.Combine(Path.GetDirectoryName(first.IncludeRoot), "manifest.json");
+            var manifest = JsonNode.Parse(File.ReadAllText(path)).AsObject();
+            manifest.Remove("midlIdentity");
+            manifest.Remove("midlProducerIdentity");
+            manifest.Remove("midlReusedFrom");
+            File.WriteAllText(path, manifest.ToJsonString());
+            fixture.WritePatch(3);
+            var changed = fixture.Prepare();
+            Assert.False(changed.Reused);
+            Assert.False(changed.MidlReused);
+            Assert.NotEqual(first.Identity, changed.Identity);
+        }
+
+        private static void AssertMidlProductionEqual(PreparationResult first, PreparationResult second)
+        {
+            string before = Path.Combine(Path.GetDirectoryName(first.IncludeRoot), "midl");
+            string after = Path.Combine(Path.GetDirectoryName(second.IncludeRoot), "midl");
+            string[] files = Directory.GetFiles(before, "*", SearchOption.AllDirectories)
+                .Select(path => Path.GetRelativePath(before, path)).OrderBy(path => path, StringComparer.Ordinal).ToArray();
+            Assert.Contains("commands.json", files);
+            Assert.Contains("preprocessed-inputs.json", files);
+            Assert.Contains(Path.Combine("generated", "generated.log"), files);
+            Assert.Equal(files, Directory.GetFiles(after, "*", SearchOption.AllDirectories)
+                .Select(path => Path.GetRelativePath(after, path)).OrderBy(path => path, StringComparer.Ordinal));
+            foreach (string path in files)
+                Assert.Equal(File.ReadAllBytes(Path.Combine(before, path)), File.ReadAllBytes(Path.Combine(after, path)));
         }
 
         [Fact]
@@ -742,6 +971,7 @@ namespace Win32MetadataScraperTests
             private readonly string sdk;
             private readonly string recipe;
             private readonly string patch;
+            private string scripts;
 
             internal Fixture()
             {
@@ -752,6 +982,7 @@ namespace Win32MetadataScraperTests
                 }
 
                 RepositoryRoot = directory?.FullName ?? throw new InvalidOperationException("Repository scripts were not found.");
+                this.scripts = Path.Combine(RepositoryRoot, "scripts");
                 this.root = Path.Combine(RepositoryRoot, "artifacts", "prepared-header-tests", Guid.NewGuid().ToString("N"));
                 this.source = Path.Combine(this.root, "source");
                 this.sdk = Path.Combine(this.root, "sdk");
@@ -814,6 +1045,36 @@ namespace Win32MetadataScraperTests
                 string path = Path.Combine(this.root, target);
                 Directory.CreateDirectory(Path.GetDirectoryName(path));
                 File.Copy(Path.Combine(this.root, source), path);
+            }
+
+            internal void ReplacePatchText(string path, string before, string after)
+            {
+                string file = Path.Combine(this.root, path);
+                string text = File.ReadAllText(file);
+                Assert.Contains(before, text);
+                File.WriteAllText(file, text.Replace(before, after));
+            }
+
+            internal string PreparationScript(string name) => Path.Combine(this.scripts, name);
+
+            internal void UsePrivatePreparationScripts()
+            {
+                this.scripts = Path.Combine(this.root, "preparation", "scripts");
+                Directory.CreateDirectory(this.scripts);
+                foreach (string name in new[] { "Prepare-SdkHeaders.ps1", "MidlHeaderUtils.ps1",
+                    "ConvertMidlAttributesToSalAnnotations.ps1", "CommonUtils.ps1", "Get-VSPath.ps1",
+                    "Get-RequiredWorkloads.ps1", "Get-VSWhereBaseArgs.ps1" })
+                    File.Copy(Path.Combine(RepositoryRoot, "scripts", name), PreparationScript(name));
+                var start = new ProcessStartInfo("git")
+                {
+                    UseShellExecute = false,
+                    RedirectStandardOutput = true,
+                    RedirectStandardError = true,
+                };
+                foreach (string argument in new[] { "init", "--quiet", Path.GetDirectoryName(this.scripts) })
+                    start.ArgumentList.Add(argument);
+                var result = Execute(start);
+                Assert.True(result.ExitCode == 0, result.Error + result.Output);
             }
 
             internal void RepeatPatch() => File.AppendAllText(this.patch, File.ReadAllText(this.patch));
@@ -1066,7 +1327,7 @@ namespace Win32MetadataScraperTests
             internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null)
             {
                 return RunPowerShell("$ErrorActionPreference = 'Stop'; & " +
-                    Quote(Path.Combine(RepositoryRoot, "scripts", "Prepare-SdkHeaders.ps1")) +
+                    Quote(PreparationScript("Prepare-SdkHeaders.ps1")) +
                     " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
                     " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(outputRoot ?? Output) +
                     " | ConvertTo-Json -Compress", workingDirectory, ambientInclude);
@@ -1203,7 +1464,7 @@ namespace Win32MetadataScraperTests
 
             public void Dispose() => Directory.Delete(this.root, recursive: true);
 
-            private static string Hash(byte[] bytes) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));
+            internal static string Hash(byte[] bytes) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(bytes));
             private static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
         }
 
@@ -1212,6 +1473,7 @@ namespace Win32MetadataScraperTests
             public string IncludeRoot { get; set; }
             public string Identity { get; set; }
             public bool Reused { get; set; }
+            public bool MidlReused { get; set; }
         }
 
         private sealed record ProcessResult(int ExitCode, string Output, string Error);

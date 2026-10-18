@@ -66,6 +66,9 @@ function Resolve-Child([string]$Root, [string]$RelativePath) {
 }
 
 function Invoke-HeaderPatch($Patch, [string]$Root) {
+    if ((Get-Sha256 $Patch.fullPath) -ne $Patch.sha256) {
+        throw "A pinned SDK patch changed during preparation: $($Patch.path)"
+    }
     $arguments = @('-c', 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol',
         '-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
     $output = & git @arguments --check -- $Patch.fullPath 2>&1
@@ -170,9 +173,6 @@ function Invoke-PreparedMidl([string]$Staging) {
         if (!$usedInputs.SetEquals([string[]]$midlInputs.path)) {
             throw 'The declared MIDL input closure does not match the actual preprocessed inputs.'
         }
-        foreach ($output in $config.midl.outputs) {
-            [IO.File]::Copy((Resolve-Child $generated $output.path), (Resolve-Child "$Staging\headers" $output.path), $true)
-        }
         [IO.File]::WriteAllText("$Staging\midl\commands.json", ($commands | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
         [IO.File]::WriteAllText("$Staging\midl\preprocessed-inputs.json",
             (@($usedInputs | Sort-Object -CaseSensitive) | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
@@ -182,6 +182,38 @@ function Invoke-PreparedMidl([string]$Staging) {
             [Environment]::SetEnvironmentVariable($name, $environment[$name], 'Process')
         }
         Pop-Location
+    }
+}
+
+function Find-PreparedMidl([string]$Identity) {
+    foreach ($candidate in @(Get-ChildItem -LiteralPath $OutputRoot -Directory |
+        Where-Object Name -Match '^[A-Fa-f0-9]{64}$' | Sort-Object Name)) {
+        $path = "$($candidate.FullName)\manifest.json"
+        Assert-OrdinaryPath $path
+        if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "Incomplete published header cache: $($candidate.FullName)"
+        }
+        $manifest = Get-Content -LiteralPath $path -Raw | ConvertFrom-Json
+        if ($null -eq $manifest.PSObject.Properties['midlIdentity'] -or $manifest.midlIdentity -ne $Identity) {
+            continue
+        }
+        $midl = "$($candidate.FullName)\midl"
+        Assert-OrdinaryPath $midl
+        if ($manifest.schemaVersion -ne 1 -or $manifest.identity -ne $candidate.Name -or
+            $null -eq $manifest.PSObject.Properties['midlProducerIdentity'] -or
+            $manifest.midlProducerIdentity -cnotmatch '^[A-F0-9]{64}$' -or
+            !(Test-Path -LiteralPath $midl -PathType Container)) {
+            throw "Incomplete published MIDL cache: $($candidate.FullName)"
+        }
+        if ($manifest.midlSha256 -ne (Get-DirectoryState $midl).sha256) {
+            throw "Published MIDL cache was modified: $($candidate.FullName)."
+        }
+        return [pscustomobject]@{
+            path = $midl
+            sha256 = $manifest.midlSha256
+            preparedIdentity = $manifest.identity
+            producerIdentity = $manifest.midlProducerIdentity
+        }
     }
 }
 
@@ -199,6 +231,8 @@ if (!(Test-Path -LiteralPath $SourceRoot -PathType Container)) {
     throw "Missing post-MIDL source tree: $SourceRoot"
 }
 
+$recipeSha256 = Get-Sha256 $Recipe
+$preparationSha256 = Get-Sha256 $PSCommandPath
 $config = Get-Content -LiteralPath $Recipe -Raw | ConvertFrom-Json
 if ($config.schemaVersion -ne 1 -or $config.sourceStage -ne 'post-midl') {
     throw 'Only schema 1 post-MIDL mirror recipes are supported; pre-MIDL patches require an explicit pinned MIDL closure.'
@@ -409,9 +443,21 @@ $lock = [IO.File]::Open("$OutputRoot\prepare.lock", [IO.FileMode]::OpenOrCreate,
 $staging = $null
 try {
     $sourceState = Get-DirectoryState $SourceRoot
-    $identity = Get-TextHash ((Get-Sha256 $Recipe) + (Get-Sha256 $PSCommandPath) + $sourceState.sha256 +
+    $identity = Get-TextHash ($recipeSha256 + $preparationSha256 + $sourceState.sha256 +
         (($patches | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n") +
         (($midlTools + $midlScripts | ForEach-Object { "$($_.path):$($_.sha256)" }) -join "`n"))
+    $midlIdentity = $null
+    if ($hasMidl) {
+        $midlIdentity = Get-TextHash (([ordered]@{
+            schemaVersion = 1
+            sdkPackageVersion = $version
+            preparationSha256 = $preparationSha256
+            configuration = $config.midl
+            patches = @($patches | Where-Object isMidlInput | Select-Object path, sha256)
+            tools = $midlTools
+            scripts = $midlScripts
+        } | ConvertTo-Json -Depth 10 -Compress))
+    }
     $destination = "$OutputRoot\$identity"
     $manifestPath = "$destination\manifest.json"
     Assert-OrdinaryPath $manifestPath
@@ -425,10 +471,16 @@ try {
         if ($manifest.identity -ne $identity -or $manifest.preparedSha256 -ne $actual.sha256) {
             throw "Published header cache was modified: $destination. Do not repair a tree that a scraper may be reading."
         }
-        if ($hasMidl -and $manifest.midlSha256 -ne (Get-DirectoryState "$destination\midl").sha256) {
-            throw "Published MIDL cache was modified: $destination."
+        if ($hasMidl) {
+            Assert-OrdinaryPath "$destination\midl"
+            if ($manifest.midlSha256 -ne (Get-DirectoryState "$destination\midl").sha256) {
+                throw "Published MIDL cache was modified: $destination."
+            }
         }
-        return [pscustomobject]@{ IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity; Reused = $true }
+        return [pscustomobject]@{
+            IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
+            Reused = $true; MidlReused = $hasMidl
+        }
     }
 
     $staging = "$OutputRoot\staging-$([Guid]::NewGuid().ToString('N'))"
@@ -444,8 +496,22 @@ try {
     foreach ($patch in @($patches | Where-Object { !$_.isIdl })) {
         Invoke-HeaderPatch $patch "$staging\headers"
     }
+    $reusedMidl = $null
     if ($hasMidl) {
-        Invoke-PreparedMidl $staging
+        $reusedMidl = Find-PreparedMidl $midlIdentity
+        if ($reusedMidl) {
+            Copy-Item -LiteralPath $reusedMidl.path -Destination "$staging\midl" -Recurse
+            if ((Get-DirectoryState "$staging\midl").sha256 -ne $reusedMidl.sha256) {
+                throw 'The published MIDL cache changed while it was being copied.'
+            }
+        }
+        else {
+            Invoke-PreparedMidl $staging
+        }
+        foreach ($output in $config.midl.outputs) {
+            [IO.File]::Copy((Resolve-Child "$staging\midl\generated" $output.path),
+                (Resolve-Child "$staging\headers" $output.path), $true)
+        }
     }
     if ((Get-DirectoryState $SourceRoot).sha256 -ne $sourceState.sha256) {
         throw 'The source header tree changed during preparation.'
@@ -460,6 +526,14 @@ try {
             throw "A MIDL tool or SAL converter changed during preparation: $($tool.path)"
         }
     }
+    foreach ($patch in $patches) {
+        if ((Get-Sha256 $patch.fullPath) -ne $patch.sha256) {
+            throw "A pinned SDK patch changed during preparation: $($patch.path)"
+        }
+    }
+    if ((Get-Sha256 $Recipe) -ne $recipeSha256 -or (Get-Sha256 $PSCommandPath) -ne $preparationSha256) {
+        throw 'The SDK recipe or preparation script changed during preparation.'
+    }
     $prepared = Get-DirectoryState "$staging\headers"
     $manifest = [ordered]@{
         schemaVersion = 1
@@ -468,13 +542,16 @@ try {
         sourceStage = $config.sourceStage
         sourceGitTree = $config.sourceGitTree
         sourceSha256 = $sourceState.sha256
-        recipeSha256 = Get-Sha256 $Recipe
-        preparationSha256 = Get-Sha256 $PSCommandPath
+        recipeSha256 = $recipeSha256
+        preparationSha256 = $preparationSha256
         patches = @($patches | Select-Object path, sha256)
         preparedSha256 = $prepared.sha256
         files = $prepared.files
     }
     if ($hasMidl) {
+        $manifest.midlIdentity = $midlIdentity
+        $manifest.midlReusedFrom = if ($reusedMidl) { $reusedMidl.preparedIdentity } else { $null }
+        $manifest.midlProducerIdentity = if ($reusedMidl) { $reusedMidl.producerIdentity } else { $identity }
         $manifest.midlInputs = @($midlInputs | Select-Object path, sourceKind, sdkPath, sha256)
         $manifest.midlTools = $midlTools
         $manifest.midlScripts = $midlScripts
@@ -483,7 +560,10 @@ try {
     [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
     [IO.Directory]::Move($staging, $destination)
     $staging = $null
-    [pscustomobject]@{ IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity; Reused = $false }
+    [pscustomobject]@{
+        IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
+        Reused = $false; MidlReused = [bool]$reusedMidl
+    }
 }
 finally {
     if ($staging -and (Test-Path -LiteralPath $staging)) {

@@ -127,6 +127,17 @@ caching, path/preimage checks and rejection of modified caches. A changed root
 invalidates constants and every architecture's header marker; an unchanged root
 retains them. Prove this with the existing preparation controls.
 
+The full prepared-header identity still includes every native patch. Within the
+same private output root, reuse MIDL production only when its separate identity
+matches the complete pinned input/output closure, applicable patches, SDK,
+compiler/preprocessor, preparation and SAL/helper scripts. Unrelated native-only
+changes must not regenerate MIDL. Copy and verify the entire production, including
+raw/SAL inputs, commands and diagnostics, without rewriting their provenance.
+The new manifest records `midlIdentity`, `midlReusedFrom` and the original
+`midlProducerIdentity`; `MidlReused` distinguishes reuse from a fresh MIDL run.
+Old caches without that identity require one fresh production. Corrupt matching
+caches fail rather than falling back to regeneration.
+
 Respect the SDK artifact boundary, not just a recipe filename extension. Patch a
 shipped source IDL before MIDL when its corresponding generated header owns the
 fact; keep real direct-shipped header artifacts as header patches. A generated
