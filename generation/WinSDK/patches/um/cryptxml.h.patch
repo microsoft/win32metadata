@@ -1,0 +1,140 @@
+diff --git a/um/cryptxml.h b/um/cryptxml.h
+index b28b5686..80de6d79 100644
+--- a/um/cryptxml.h
++++ b/um/cryptxml.h
+@@ -1258,6 +1258,7 @@ typedef struct _CRYPT_XML_DOC_CTXT{
+  encapsulated by the handle is fully released.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1272,6 +1273,7 @@ CryptXmlClose(
+  default Transform Chain Engine.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+@@ -1312,6 +1314,7 @@ CryptXmlGetTransforms(
+  	[out] Handle to the Signature object.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+@@ -1354,6 +1357,7 @@ CryptXmlOpenToEncode(
+  	[out] Handle to the Document Context object.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+@@ -1404,6 +1408,7 @@ CryptXmlOpenToDecode(
+     Otherwise, use CRYPT_XML_FLAG_ADD_OBJECT_CREATE_COPY flag to create in-memory copy.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1459,6 +1464,7 @@ CryptXmlAddObject(
+     [out] Pointer to a Reference Handle.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1508,6 +1514,7 @@ Remarks:
+     The CryptXmlDigestReference function always calls pDataProviderIn->fpnClose.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1541,6 +1548,7 @@ CryptXmlDigestReference(
+  must be NULL.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1652,6 +1660,7 @@ typedef enum
+     [in] Specifies the canonicalization method.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1686,6 +1695,7 @@ CryptXmlSign(
+         [out] Pointer to BCRYPT_KEY_HANDLE that receives imported key handle.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1713,6 +1723,7 @@ CryptXmlImportPublicKey(
+         CRYPT_XML_FLAG_DISABLE_EXTENSIONS
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1729,6 +1740,7 @@ CryptXmlVerifySignature(
+  a handle to Document Context. 
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1744,6 +1756,7 @@ CryptXmlGetDocContext(
+  by a handle to Signature.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1758,6 +1771,7 @@ CryptXmlGetSignature(
+ The CryptXmlGetReference function returns data structure encapsulated 
+ by a handle to Reference.
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1773,6 +1787,7 @@ The CryptXmlGetStatus function returns a CRYPT_XML_STATUS for array
+ of Signature, single Signature, Reference or Manifest.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT 
+ WINAPI 
+@@ -1804,6 +1819,7 @@ CryptXmlGetStatus(
+     [in, callback] An application-defined callback to receive constructed XML.
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT
+ WINAPI
+@@ -1890,6 +1906,7 @@ struct _CRYPT_XML_ALGORITHM_INFO
+     The caller must free ppAlgInfo by calling LocalFree()
+ 
+ ****************************************************************************/
++_Win32_SupportedOS_Windows7_
+ _Success_( return == 0 )
+ HRESULT
+ WINAPI 

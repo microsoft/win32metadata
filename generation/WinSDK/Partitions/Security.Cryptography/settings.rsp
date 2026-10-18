@@ -66,3 +66,5 @@ _CLMD_PIV_GENERATE_ASYMMETRIC_KEY=CLMD_PIV_GENERATE_ASYMMETRIC_KEY
 _CLMD_PIV_PUBLIC_KEY_DATA=CLMD_PIV_PUBLIC_KEY_DATA
 --namespace
 Windows.Win32.Security.Cryptography
+--config
+parse-win32-annotations

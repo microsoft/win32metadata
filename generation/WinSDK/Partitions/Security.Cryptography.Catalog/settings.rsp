@@ -9,3 +9,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/mscat.h
 --namespace
 Windows.Win32.Security.Cryptography.Catalog
+--config
+parse-win32-annotations

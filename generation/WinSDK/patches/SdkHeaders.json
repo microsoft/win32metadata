@@ -1179,6 +1179,150 @@
       "sourceSha256": "6315DAAA9EEFE6F8C8F4E0AFB737BAF5987541BA13DD7516841E50BBAD47F730",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\peerdist.h",
       "sdkSha256": "6315DAAA9EEFE6F8C8F4E0AFB737BAF5987541BA13DD7516841E50BBAD47F730"
+    },
+    {
+      "path": "um\\cryptuiapi.h",
+      "sourceSha256": "57601827614B6DBB932C22C2AAFB8255A5FDA10915C54D7C5D3938E102EDB93D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cryptuiapi.h",
+      "sdkSha256": "57601827614B6DBB932C22C2AAFB8255A5FDA10915C54D7C5D3938E102EDB93D"
+    },
+    {
+      "path": "um\\richedit.h",
+      "sourceSha256": "E06C9B374B73F181E977D34AB953D4FB6DBB7582CD10ADBC701D151579391676",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\richedit.h",
+      "sdkSha256": "E06C9B374B73F181E977D34AB953D4FB6DBB7582CD10ADBC701D151579391676"
+    },
+    {
+      "path": "um\\ncrypt.h",
+      "sourceSha256": "3319FB310BA9056C4B5D8457BC14F5FABD1C7A428F2611D6D4F9084D9CB42E66",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ncrypt.h",
+      "sdkSha256": "3319FB310BA9056C4B5D8457BC14F5FABD1C7A428F2611D6D4F9084D9CB42E66"
+    },
+    {
+      "path": "um\\winevt.h",
+      "sourceSha256": "98A76F9CDC7149FBA4407A8D5B4B90E4BCD5BACE35FB066DA6591AACD77C97C1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winevt.h",
+      "sdkSha256": "98A76F9CDC7149FBA4407A8D5B4B90E4BCD5BACE35FB066DA6591AACD77C97C1"
+    },
+    {
+      "path": "um\\wintrust.h",
+      "sourceSha256": "340A90182FC0FDDAAC188A2921BB49DD3A5486D968831764DBDE81BB0BEEDBEB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wintrust.h",
+      "sdkSha256": "340A90182FC0FDDAAC188A2921BB49DD3A5486D968831764DBDE81BB0BEEDBEB"
+    },
+    {
+      "path": "um\\iscsidsc.h",
+      "sourceSha256": "89AB3A6BF81271685B65D61C5B7E7CC1BBA32B532691685E25C42C0F3A076E5E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iscsidsc.h",
+      "sdkSha256": "89AB3A6BF81271685B65D61C5B7E7CC1BBA32B532691685E25C42C0F3A076E5E"
+    },
+    {
+      "path": "um\\sysinfoapi.h",
+      "sourceSha256": "077088CB53EC69D454916AAC5F00E45DDA79E09DA64054ACC141120EB67A5700",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\sysinfoapi.h",
+      "sdkSha256": "077088CB53EC69D454916AAC5F00E45DDA79E09DA64054ACC141120EB67A5700"
+    },
+    {
+      "path": "um\\libloaderapi.h",
+      "sourceSha256": "8AD0BA5600D6C2E9AED318CA9D2F48F2BDF9F47ED3CD5D9F243E6F779C8E04C4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\libloaderapi.h",
+      "sdkSha256": "8AD0BA5600D6C2E9AED318CA9D2F48F2BDF9F47ED3CD5D9F243E6F779C8E04C4"
+    },
+    {
+      "path": "um\\userenv.h",
+      "sourceSha256": "A7EC0BAE6A5E46D41CFC49A85D7A0578EAB55A2383ADA88F03CD7E99BA53C59F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\userenv.h",
+      "sdkSha256": "A7EC0BAE6A5E46D41CFC49A85D7A0578EAB55A2383ADA88F03CD7E99BA53C59F"
+    },
+    {
+      "path": "um\\virtdisk.h",
+      "sourceSha256": "B920639BCE6E101C9A29F99D2D1BB5C36C9C36E9A2C665E20EB23B452B81996A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\virtdisk.h",
+      "sdkSha256": "B920639BCE6E101C9A29F99D2D1BB5C36C9C36E9A2C665E20EB23B452B81996A"
+    },
+    {
+      "path": "um\\cryptxml.h",
+      "sourceSha256": "CA6F2C71B1062276376F7A9F469BE9711659FF97483D89A3F31F1F506CB3AAA6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cryptxml.h",
+      "sdkSha256": "CA6F2C71B1062276376F7A9F469BE9711659FF97483D89A3F31F1F506CB3AAA6"
+    },
+    {
+      "path": "um\\mscat.h",
+      "sourceSha256": "41FD2648CE170494FCF3047746C94322AAFB65833140A44D4A65EB33F58EDCFB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mscat.h",
+      "sdkSha256": "41FD2648CE170494FCF3047746C94322AAFB65833140A44D4A65EB33F58EDCFB"
+    },
+    {
+      "path": "um\\oledlg.h",
+      "sourceSha256": "672977AF5D8E7AF32139007A9D9C61D27DA83C4AD51A92E80A95ADDB0A690EFE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\oledlg.h",
+      "sdkSha256": "672977AF5D8E7AF32139007A9D9C61D27DA83C4AD51A92E80A95ADDB0A690EFE"
+    },
+    {
+      "path": "um\\dpa_dsa.h",
+      "sourceSha256": "E0D5490BF2C73C0DC5E94746B2704C2A6EFDF0543DE1E00447B8F781FC6A186F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dpa_dsa.h",
+      "sdkSha256": "E0D5490BF2C73C0DC5E94746B2704C2A6EFDF0543DE1E00447B8F781FC6A186F"
+    },
+    {
+      "path": "um\\slpublic.h",
+      "sourceSha256": "E6F0B71FFC9BAAF6AE43BE884A86BB84A1B32678AFE571DAEB90ADF10EDFC4B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\slpublic.h",
+      "sdkSha256": "E6F0B71FFC9BAAF6AE43BE884A86BB84A1B32678AFE571DAEB90ADF10EDFC4B4"
+    },
+    {
+      "path": "um\\usp10.h",
+      "sourceSha256": "B5A57E79D60811D1F0889CF7E664D368C7B22D8382FD29AC0B8745102718404E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\usp10.h",
+      "sdkSha256": "B5A57E79D60811D1F0889CF7E664D368C7B22D8382FD29AC0B8745102718404E"
+    },
+    {
+      "path": "um\\diagnosticdataquery.h",
+      "sourceSha256": "3C9DA7A4157F9931C1E94A8446A2A2A497E796B19AD653AFAE4411CF267866C4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\diagnosticdataquery.h",
+      "sdkSha256": "3C9DA7A4157F9931C1E94A8446A2A2A497E796B19AD653AFAE4411CF267866C4"
+    },
+    {
+      "path": "um\\threadpoolapiset.h",
+      "sourceSha256": "E91D7DEE4D22CA848E3110A4C55F32E1918DC865479343896AEC9AB653EE5110",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\threadpoolapiset.h",
+      "sdkSha256": "E91D7DEE4D22CA848E3110A4C55F32E1918DC865479343896AEC9AB653EE5110"
+    },
+    {
+      "path": "um\\minidumpapiset.h",
+      "sourceSha256": "4FE26E01204F91A1597B6EB4660D9E85FF292D3CF1801B7723CA4DBE72B427B6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\minidumpapiset.h",
+      "sdkSha256": "4FE26E01204F91A1597B6EB4660D9E85FF292D3CF1801B7723CA4DBE72B427B6"
+    },
+    {
+      "path": "um\\prsht.h",
+      "sourceSha256": "C894F54AC5E0584457F176F668B20B14577B06AA2BA5CE321E243C46248EA242",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\prsht.h",
+      "sdkSha256": "C894F54AC5E0584457F176F668B20B14577B06AA2BA5CE321E243C46248EA242"
+    },
+    {
+      "path": "um\\recapis.h",
+      "sourceSha256": "C4A03F0AC970BF5DB36F58D7C7AC108A45311A3293AD611D49CA8614E2865D3F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\recapis.h",
+      "sdkSha256": "C4A03F0AC970BF5DB36F58D7C7AC108A45311A3293AD611D49CA8614E2865D3F"
+    },
+    {
+      "path": "um\\t2embapi.h",
+      "sourceSha256": "4BC572E06E330109840BC5F82A227F1858D071EE53D729D4100B5CD1A94ED46C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\t2embapi.h",
+      "sdkSha256": "4BC572E06E330109840BC5F82A227F1858D071EE53D729D4100B5CD1A94ED46C"
+    },
+    {
+      "path": "um\\imagehlp.h",
+      "sourceSha256": "04983C7F071733A26BE015D199C7B8BB6D386739187A2D6639D47F8F05254401",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\imagehlp.h",
+      "sdkSha256": "04983C7F071733A26BE015D199C7B8BB6D386739187A2D6639D47F8F05254401"
+    },
+    {
+      "path": "um\\cfapi.h",
+      "sourceSha256": "C50FB112B31A38E91151B84C46FCFEFEB395AA12FAA60CDC270103CDCE7C4AE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cfapi.h",
+      "sdkSha256": "C50FB112B31A38E91151B84C46FCFEFEB395AA12FAA60CDC270103CDCE7C4AE7"
     }
   ],
   "midl": {
@@ -2030,7 +2174,24 @@
     "Wsw",
     "WindowsFilteringPlatform",
     "Dns",
-    "NWifi"
+    "NWifi",
+    "Security.Cryptography.UI",
+    "Controls.RichEdit",
+    "Security.Cryptography",
+    "Wes",
+    "Security.WinTrust",
+    "IScsiDisc",
+    "SystemInformation",
+    "LibraryLoader",
+    "Policy",
+    "Vhd",
+    "Security.Cryptography.Catalog",
+    "Controls",
+    "Identity",
+    "Security.DiagnosticDataQuery",
+    "Debug",
+    "Tablet",
+    "Cloudapi"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -2194,6 +2355,30 @@
     "um\\rpcnsi.h.patch",
     "um\\ws2spi.h.patch",
     "um\\ws2tcpip.h.patch",
-    "um\\peerdist.h.patch"
+    "um\\peerdist.h.patch",
+    "um\\cryptuiapi.h.patch",
+    "um\\richedit.h.patch",
+    "um\\ncrypt.h.patch",
+    "um\\winevt.h.patch",
+    "um\\wintrust.h.patch",
+    "um\\iscsidsc.h.patch",
+    "um\\sysinfoapi.h.patch",
+    "um\\libloaderapi.h.patch",
+    "um\\userenv.h.patch",
+    "um\\virtdisk.h.patch",
+    "um\\cryptxml.h.patch",
+    "um\\mscat.h.patch",
+    "um\\oledlg.h.patch",
+    "um\\dpa_dsa.h.patch",
+    "um\\slpublic.h.patch",
+    "um\\usp10.h.patch",
+    "um\\diagnosticdataquery.h.patch",
+    "um\\threadpoolapiset.h.patch",
+    "um\\minidumpapiset.h.patch",
+    "um\\prsht.h.patch",
+    "um\\recapis.h.patch",
+    "um\\t2embapi.h.patch",
+    "um\\imagehlp.h.patch",
+    "um\\cfapi.h.patch"
   ]
 }

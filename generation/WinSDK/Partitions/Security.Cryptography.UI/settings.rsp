@@ -9,3 +9,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/cryptuiapi.h
 --namespace
 Windows.Win32.Security.Cryptography.UI
+--config
+parse-win32-annotations

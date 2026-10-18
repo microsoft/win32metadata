@@ -9,3 +9,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/diagnosticdataquerytypes.h
 --namespace
 Windows.Win32.Security.DiagnosticDataQuery
+--config
+parse-win32-annotations

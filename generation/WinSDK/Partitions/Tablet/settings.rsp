@@ -20,3 +20,5 @@ PfnRecoCallback
 <IncludeRoot>/um/tpcerror.h
 --namespace
 Windows.Win32.UI.TabletPC
+--config
+parse-win32-annotations

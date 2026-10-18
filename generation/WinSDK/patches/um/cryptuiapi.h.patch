@@ -1,0 +1,88 @@
+diff --git a/um/cryptuiapi.h b/um/cryptuiapi.h
+index 15570d3c..5242a707 100644
+--- a/um/cryptuiapi.h
++++ b/um/cryptuiapi.h
+@@ -43,6 +43,7 @@ extern "C" {
+ //
+ //  dwFlags currently isn't used and should be set to 0.
+ //-----------------------------------------------------------------------------
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -75,6 +76,7 @@ CryptUIDlgViewContext(
+ //
+ //  dwFlags currently isn't used and should be set to 0.
+ //-----------------------------------------------------------------------------
++_Win32_SupportedOS_WindowsXP_
+ PCCERT_CONTEXT
+ WINAPI
+ CryptUIDlgSelectCertificateFromStore(
+@@ -126,6 +128,7 @@ typedef struct {
+ //
+ //
+ //-----------------------------------------------------------------------------
++_Win32_SupportedOS_Windows7_
+ HRESULT
+ WINAPI
+ CertSelectionGetSerializedBlob(
+@@ -192,6 +195,7 @@ typedef const CRYPTUI_CERT_MGR_STRUCT *PCCRYPTUI_CERT_MGR_STRUCT;
+ //                                    structure.
+ //
+ //-----------------------------------------------------------------------------
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -542,6 +546,7 @@ typedef const CRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT *PCCRYPTUI_WIZ_DIGITAL_SIGN_CONTE
+ //                                    blob.
+ //
+ //-----------------------------------------------------------------------------
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -553,6 +558,7 @@ CryptUIWizDigitalSign(
+     _Outptr_opt_        PCCRYPTUI_WIZ_DIGITAL_SIGN_CONTEXT  *ppSignContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -708,6 +714,8 @@ typedef const CRYPTUI_VIEWCERTIFICATE_STRUCTA *PCCRYPTUI_VIEWCERTIFICATE_STRUCTA
+ //                                 if any properties have been changed on certs in the chain
+ //                                 while the dialog was open
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -716,6 +724,8 @@ CryptUIDlgViewCertificateW(
+         _Out_ BOOL                                *pfPropertiesChanged  // OPTIONAL
+         );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -862,6 +872,8 @@ typedef const CRYPTUI_WIZ_EXPORT_CERTCONTEXT_INFO *PCCRYPTUI_WIZ_EXPORT_CERTCONT
+ //                                          is being exported.  See above table for values, if this is non-NULL
+ //                                          the values are displayed to the user as the default choices.
+ //------------------------------------------------------------------------
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI
+@@ -997,6 +1009,8 @@ typedef const CRYPTUI_WIZ_IMPORT_SRC_INFO *PCCRYPTUI_WIZ_IMPORT_SRC_INFO;
+ //                                          flag CERT_STORE_SET_LOCALIZED_NAME_FLAG.  If NULL, the wizard will prompt user to select
+ //                                          a certificate store.
+ //------------------------------------------------------------------------
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return == TRUE)
+ BOOL
+ WINAPI

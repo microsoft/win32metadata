@@ -1,0 +1,12 @@
+diff --git a/um/richedit.h b/um/richedit.h
+index 5bebec44..715b2b3f 100644
+--- a/um/richedit.h
++++ b/um/richedit.h
+@@ -1600,6 +1600,7 @@ typedef struct hyphresult
+ 	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
+ } HYPHRESULT;
+ 
++_Win32_SupportedOS_WindowsXP_
+ void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
+ typedef struct tagHyphenateInfo
+ {

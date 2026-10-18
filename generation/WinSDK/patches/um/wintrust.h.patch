@@ -1,0 +1,125 @@
+diff --git a/um/wintrust.h b/um/wintrust.h
+index 5025403f..26225798 100644
+--- a/um/wintrust.h
++++ b/um/wintrust.h
+@@ -459,12 +459,14 @@ typedef struct WINTRUST_CERT_INFO_
+ //    Any publisher or timestamp chain error. If WTD_SAFER_FLAG wasn't set in
+ //    dwProvFlags, any signed code verification error.
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern LONG WINAPI WinVerifyTrust(HWND hwnd, GUID *pgActionID,
+                                   LPVOID pWVTData);
+ 
+ // This API returns a Win32 error code, previously it was declared to return HRESULT.
+ // Do not test the result with SUCCEEDED() or FAILED(), any non-zero value represents
+ // verification failure. To avoid this problem use WinVerifyTrust() instead.
++_Win32_SupportedOS_WindowsXP_
+ extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *pWinTrustData);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -521,6 +523,7 @@ extern long WINAPI WinVerifyTrustEx(HWND hwnd, GUID *pgActionID, WINTRUST_DATA *
+ //  This API call is exported from WINTRUST.DLL and is the recommended method
+ //  of retrieving the DWORD representing the Policy Flags.
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern void WINAPI      WintrustGetRegPolicyFlags(DWORD *pdwPolicyFlags);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -532,6 +535,7 @@ extern void WINAPI      WintrustGetRegPolicyFlags(DWORD *pdwPolicyFlags);
+ //  WintrustGetRegPolicyFlags to get the current value and or/and the value
+ //  you need then call the set the flags.
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI      WintrustSetRegPolicyFlags(DWORD dwPolicyFlags);
+ 
+ 
+@@ -1095,6 +1099,8 @@ typedef struct _CRYPT_PROVIDER_DEFUSAGE
+ //      TRUE:                           No fatal errors
+ //      FALSE:                          Errors occured.  See GetLastError()
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI  WintrustAddActionID(_In_ GUID *pgActionID,
+                                         _In_ DWORD fdwFlags,
+                                         _In_ CRYPT_REGISTER_ACTIONID *psProvInfo);
+@@ -1116,6 +1122,7 @@ extern BOOL WINAPI  WintrustAddActionID(_In_ GUID *pgActionID,
+ //      TRUE:                           No fatal errors
+ //      FALSE:                          Errors occured.  See GetLastError()
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI  WintrustRemoveActionID(_In_ GUID *pgActionID);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1128,6 +1135,7 @@ extern BOOL WINAPI  WintrustRemoveActionID(_In_ GUID *pgActionID);
+ //      TRUE                            success.
+ //      FALSE                           fail.
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER_FUNCTIONS *pPfns);
+ 
+ 
+@@ -1144,6 +1152,8 @@ extern BOOL WINAPI WintrustLoadFunctionPointers(GUID *pgActionID, CRYPT_PROVIDER
+ //      TRUE                            success.
+ //      FALSE                           fail.
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI              WintrustAddDefaultForUsage(_In_ const char *pszUsageOID,
+                                                            _In_ CRYPT_PROVIDER_REGDEFUSAGE *psDefUsage);
+ 
+@@ -1162,23 +1172,31 @@ extern BOOL WINAPI              WintrustAddDefaultForUsage(_In_ const char *pszU
+ //
+ #define                             DWACTION_ALLOCANDFILL           1
+ #define                             DWACTION_FREE                   2
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI              WintrustGetDefaultForUsage(_In_ DWORD dwAction,
+                                                            _In_ const char *pszUsageOID,
+                                                            _Inout_ CRYPT_PROVIDER_DEFUSAGE *psUsage);
+ 
++_Win32_SupportedOS_WindowsXP_
+ extern CRYPT_PROVIDER_SGNR * WINAPI     WTHelperGetProvSignerFromChain(CRYPT_PROVIDER_DATA *pProvData,
+                                                                        DWORD idxSigner,
+                                                                        BOOL fCounterSigner,
+                                                                        DWORD idxCounterSigner);
++_Win32_SupportedOS_WindowsXP_
+ extern CRYPT_PROVIDER_CERT * WINAPI     WTHelperGetProvCertFromChain(CRYPT_PROVIDER_SGNR *pSgnr,
+                                                                      DWORD idxCert);
+ 
++_Win32_SupportedOS_WindowsXP_
+ extern CRYPT_PROVIDER_DATA * WINAPI     WTHelperProvDataFromStateData(HANDLE hStateData);
+ 
++_Win32_SupportedOS_WindowsXP_
+ extern CRYPT_PROVIDER_PRIVDATA * WINAPI WTHelperGetProvPrivateDataFromChain(CRYPT_PROVIDER_DATA *pProvData,
+                                                                             GUID *pgProviderID);
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI                      WTHelperCertIsSelfSigned(DWORD dwEncoding, CERT_INFO *pCert);
+ 
++_Win32_SupportedOS_WindowsVista_
+ extern HRESULT WINAPI                   WTHelperCertCheckValidSignature(CRYPT_PROVIDER_DATA *pProvData);
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -1647,6 +1665,7 @@ typedef struct _WIN_SPUB_TRUSTED_PUBLISHER_DATA
+ //
+ //      Note, initially all certs are removed from the above store.
+ //
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI OpenPersonalTrustDBDialogEx(
+     _In_opt_ HWND hwndParent,
+     _In_ DWORD dwFlags,
+@@ -1660,6 +1679,7 @@ extern BOOL WINAPI OpenPersonalTrustDBDialogEx(
+ 
+ 
+ // Calls above with dwFlags = 0 and pvReserved = NULL
++_Win32_SupportedOS_WindowsXP_
+ extern BOOL WINAPI OpenPersonalTrustDBDialog(
+     _In_opt_ HWND hwndParent
+     );
+@@ -1673,6 +1693,7 @@ extern BOOL WINAPI OpenPersonalTrustDBDialog(
+ //
+ //  Unless explicitly set, the default is not to include page hashes.
+ //
++_Win32_SupportedOS_WindowsVista_
+ extern
+ void
+ WINAPI

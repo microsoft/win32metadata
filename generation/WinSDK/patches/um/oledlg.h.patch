@@ -1,0 +1,125 @@
+diff --git a/um/oledlg.h b/um/oledlg.h
+index d814c88e..b5355253 100644
+--- a/um/oledlg.h
++++ b/um/oledlg.h
+@@ -289,9 +289,11 @@ typedef UINT (CALLBACK *LPFNOLEUIHOOK)(HWND, UINT, WPARAM, LPARAM);
+ #define OLEUI_ERR_STANDARDMAX           116  // Start here for specific errors.
+ 
+ // Miscellaneous utility functions.
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(BOOL) OleUIAddVerbMenuW(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCWSTR lpszShortType,
+         HMENU hMenu, UINT uPos, UINT uIDVerbMin, UINT uIDVerbMax,
+         BOOL bAddConvert, UINT idConvert, _Out_ HMENU *lphMenu);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(BOOL) OleUIAddVerbMenuA(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCSTR lpszShortType,
+         HMENU hMenu, UINT uPos, UINT uIDVerbMin, UINT uIDVerbMax,
+         BOOL bAddConvert, UINT idConvert, _Out_ HMENU *lphMenu);
+@@ -367,7 +369,9 @@ typedef struct tagOLEUIINSERTOBJECTA
+ 
+ } OLEUIINSERTOBJECTA, *POLEUIINSERTOBJECTA, *LPOLEUIINSERTOBJECTA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIInsertObjectW(_In_ LPOLEUIINSERTOBJECTW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
+ 
+ #ifdef UNICODE
+@@ -606,7 +610,9 @@ typedef struct tagOLEUIPASTESPECIALA
+ #define LPOLEUIPASTESPECIAL LPOLEUIPASTESPECIALA
+ #endif
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIPasteSpecialW(_In_ LPOLEUIPASTESPECIALW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
+ #ifdef UNICODE
+ #define OleUIPasteSpecial OleUIPasteSpecialW
+@@ -766,7 +772,9 @@ typedef struct tagOLEUIEDITLINKSA
+ #define OLEUI_ELERR_LINKCNTRNULL        (OLEUI_ERR_STANDARDMAX+0)
+ #define OLEUI_ELERR_LINKCNTRINVALID     (OLEUI_ERR_STANDARDMAX+1)
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIEditLinksW(_In_ LPOLEUIEDITLINKSW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
+ 
+ #ifdef UNICODE
+@@ -831,7 +839,9 @@ typedef struct tagOLEUICHANGEICONA
+ 
+ } OLEUICHANGEICONA, *POLEUICHANGEICONA, *LPOLEUICHANGEICONA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIChangeIconW(_In_ LPOLEUICHANGEICONW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
+ 
+ #ifdef UNICODE
+@@ -949,7 +959,9 @@ typedef struct tagOLEUICONVERTA
+ 
+ } OLEUICONVERTA, *POLEUICONVERTA, *LPOLEUICONVERTA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIConvertW(_In_ LPOLEUICONVERTW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
+ 
+ #ifdef UNICODE
+@@ -968,6 +980,7 @@ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
+ 
+ // Determine if there is at least one class that can Convert or ActivateAs
+ // the given clsid.
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(BOOL) OleUICanConvertOrActivateAs(
+         _In_ REFCLSID rClsid, BOOL fIsLinkedObject, WORD wFormat);
+ 
+@@ -1030,7 +1043,9 @@ typedef struct tagOLEUIBUSYA
+ 
+ } OLEUIBUSYA, *POLEUIBUSYA, *LPOLEUIBUSYA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIBusyW(_In_ LPOLEUIBUSYW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
+ 
+ #ifdef UNICODE
+@@ -1118,7 +1133,9 @@ typedef struct tagOLEUICHANGESOURCEA
+ 
+ } OLEUICHANGESOURCEA, *POLEUICHANGESOURCEA, *LPOLEUICHANGESOURCEA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIChangeSourceW(_In_ LPOLEUICHANGESOURCEW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
+ 
+ #ifdef UNICODE
+@@ -1525,7 +1542,9 @@ typedef struct tagOLEUIOBJECTPROPSA
+ 
+ } OLEUIOBJECTPROPSA, *POLEUIOBJECTPROPSA, FAR* LPOLEUIOBJECTPROPSA;
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIObjectPropertiesW(_In_ LPOLEUIOBJECTPROPSW);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+ 
+ #ifdef UNICODE
+@@ -1581,7 +1600,9 @@ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+ /////////////////////////////////////////////////////////////////////////////
+ // PROMPT USER DIALOGS
+ 
++_Win32_SupportedOS_Windows2000_
+ int __cdecl OleUIPromptUserW(int nTemplate, HWND hwndParent, ...);
++_Win32_SupportedOS_Windows2000_
+ int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
+ 
+ #ifdef UNICODE
+@@ -1590,8 +1611,10 @@ int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
+ #define OleUIPromptUser OleUIPromptUserA
+ #endif
+ 
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(BOOL) OleUIUpdateLinksW(LPOLEUILINKCONTAINERW lpOleUILinkCntr,
+         HWND hwndParent, _In_ LPWSTR lpszTitle, int cLinks);
++_Win32_SupportedOS_Windows2000_
+ STDAPI_(BOOL) OleUIUpdateLinksA(LPOLEUILINKCONTAINERA lpOleUILinkCntr,
+         HWND hwndParent, _In_ LPSTR lpszTitle, int cLinks);
+ 

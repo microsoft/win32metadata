@@ -1,0 +1,344 @@
+diff --git a/um/sysinfoapi.h b/um/sysinfoapi.h
+index f53062ca..eb0a0907 100644
+--- a/um/sysinfoapi.h
++++ b/um/sysinfoapi.h
+@@ -80,6 +80,8 @@ typedef struct _MEMORYSTATUSEX {
+ #define USER_CET_ENVIRONMENT_VBS_ENCLAVE          0x00000010
+ #define USER_CET_ENVIRONMENT_VBS_BASIC_ENCLAVE    0x00000011
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -87,6 +89,7 @@ GlobalMemoryStatusEx(
+     _Out_ LPMEMORYSTATUSEX lpBuffer
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -94,6 +97,7 @@ GetSystemInfo(
+     _Out_ LPSYSTEM_INFO lpSystemInfo
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -101,6 +105,7 @@ GetSystemTime(
+     _Out_ LPSYSTEMTIME lpSystemTime
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -108,6 +113,7 @@ GetSystemTimeAsFileTime(
+     _Out_ LPFILETIME lpSystemTimeAsFileTime
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -150,6 +156,7 @@ GetSystemLeapSecondInformation(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_Windows2000_
+ NOT_BUILD_WINDOWS_DEPRECATE
+ WINBASEAPI
+ __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
+@@ -159,6 +166,8 @@ GetVersion(
+     VOID
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -172,6 +181,7 @@ SetLocalTime(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_Windows2000_
+ __drv_preferredFunction("GetTickCount64", "GetTickCount overflows roughly every 49 days.  Code that does not take that into account can loop indefinitely.  GetTickCount64 operates on 64 bit values and does not have that problem")
+ WINBASEAPI
+ DWORD
+@@ -182,6 +192,7 @@ GetTickCount(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ ULONGLONG
+ WINAPI
+@@ -197,6 +208,8 @@ GetTickCount64(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -213,6 +226,8 @@ GetSystemTimeAdjustment(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -229,6 +244,8 @@ GetSystemTimeAdjustmentPrecise(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -238,6 +255,8 @@ GetSystemDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -259,6 +278,8 @@ GetSystemDirectoryW(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Must_inspect_result_
+ _Success_(return != 0 && return < uSize)
+@@ -269,6 +290,8 @@ GetWindowsDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Must_inspect_result_
+ _Success_(return != 0 && return < uSize)
+@@ -291,6 +314,8 @@ GetWindowsDirectoryW(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -300,6 +325,8 @@ GetSystemWindowsDirectoryA(
+     _In_ UINT uSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0 && return < uSize)
+ UINT
+@@ -333,6 +360,8 @@ typedef enum _COMPUTER_NAME_FORMAT {
+     ComputerNameMax
+ } COMPUTER_NAME_FORMAT ;
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -343,6 +372,8 @@ GetComputerNameExA(
+     _Inout_ LPDWORD nSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -365,6 +396,8 @@ GetComputerNameExW(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -377,6 +410,8 @@ SetComputerNameExW(
+ #define SetComputerNameEx SetComputerNameExW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -390,6 +425,8 @@ SetSystemTime(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ NOT_BUILD_WINDOWS_DEPRECATE
+ WINBASEAPI
+ __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
+@@ -399,6 +436,8 @@ GetVersionExA(
+     _Inout_ LPOSVERSIONINFOA lpVersionInformation
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ NOT_BUILD_WINDOWS_DEPRECATE
+ WINBASEAPI
+ __drv_preferredFunction("IsWindows*", "Deprecated. Use VerifyVersionInfo* or IsWindows* macros from VersionHelpers.")
+@@ -414,6 +453,8 @@ GetVersionExW(
+ #define GetVersionEx  GetVersionExA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -424,6 +465,8 @@ GetLogicalProcessorInformation(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -437,6 +480,7 @@ GetLogicalProcessorInformationEx(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -448,6 +492,7 @@ GetNativeSystemInfo(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -465,6 +510,7 @@ GetSystemTimePreciseAsFileTime(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -514,6 +560,8 @@ GetOsSafeBootMode(
+ #pragma region OneCore Family or App Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -523,6 +571,8 @@ EnumSystemFirmwareTables(
+     _In_ DWORD BufferSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -549,6 +599,8 @@ DnsHostnameToComputerNameExW(
+     _Inout_ LPDWORD nSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -572,6 +624,8 @@ SetComputerNameEx2W(
+ #define SetComputerNameEx2 SetComputerNameEx2W
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -581,6 +635,8 @@ SetSystemTimeAdjustment(
+     _In_ BOOL bTimeAdjustmentDisabled
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return != FALSE)
+ BOOL
+@@ -590,6 +646,8 @@ SetSystemTimeAdjustmentPrecise(
+     _In_ BOOL bTimeAdjustmentDisabled
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -602,6 +660,8 @@ InstallELAMCertificateInfo(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -635,6 +695,7 @@ GetOsManufacturingMode(
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ HRESULT
+ WINAPI
+@@ -650,6 +711,8 @@ GetIntegratedDisplaySize(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -657,6 +720,8 @@ SetComputerNameA(
+     _In_ LPCSTR lpComputerName
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -670,6 +735,8 @@ SetComputerNameW(
+ #define SetComputerName  SetComputerNameA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI

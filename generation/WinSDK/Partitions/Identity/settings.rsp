@@ -33,3 +33,5 @@ Windows.Win32.Security.Authentication.Identity
 --preserve-auto-fnptr-level
 PLSA_REDIRECTED_LOGON_CALLBACK
 PLSA_REDIRECTED_LOGON_CLEANUP_CALLBACK
+--config
+parse-win32-annotations

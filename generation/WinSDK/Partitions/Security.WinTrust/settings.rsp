@@ -9,3 +9,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/softpub.h
 --namespace
 Windows.Win32.Security.WinTrust
+--config
+parse-win32-annotations
