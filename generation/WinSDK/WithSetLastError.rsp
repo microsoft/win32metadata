@@ -27,7 +27,6 @@ AllJoynSendToBus
 AllocConsole
 AllocReservedLog
 AssignProcessToJobObject
-AssociateContextWithName
 AttachConsole
 AuditComputeEffectivePolicyBySid
 AuditComputeEffectivePolicyByToken
@@ -99,7 +98,6 @@ AvSetMmMaxThreadCharacteristicsW
 AvSetMmThreadCharacteristicsA
 AvSetMmThreadCharacteristicsW
 AvSetMmThreadPriority
-Beep
 BeginBufferedPaint
 bind
 BroadcastSystemMessage
@@ -534,7 +532,6 @@ FreeEnvironmentStringsW
 FreeMUILibrary
 FreeReservedLog
 GenerateConsoleCtrlEvent
-GetAppContainerNamedObjectPath
 GetClassName
 GetClassNameA
 GetClassNameW
@@ -701,7 +698,6 @@ IsDestinationReachableA
 IsDestinationReachableW
 IsEnclaveTypeSupported
 IsNetworkAlive
-IsProcessInJob
 IsWow64GuestMachineSupported
 IsWow64Process
 IsWow64Process2
@@ -732,7 +728,6 @@ MoveFile
 MoveFileA
 MoveFileW
 MultiByteToWideChar
-NlsDllCodePageTranslation
 ntohl
 ntohs
 OleMetafilePictFromIconAndLabel
@@ -784,7 +779,6 @@ QueryIdleProcessorCycleTime
 QueryInformationJobObject
 QueryIoRateControlInformationJobObject
 QueryLogPolicy
-QueryOptionalDelayLoadedAPI
 QueryPerformanceCounter
 QueryPerformanceFrequency
 QueryProcessCycleTime

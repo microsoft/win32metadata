@@ -1323,6 +1323,120 @@
       "sourceSha256": "C50FB112B31A38E91151B84C46FCFEFEB395AA12FAA60CDC270103CDCE7C4AE7",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\cfapi.h",
       "sdkSha256": "C50FB112B31A38E91151B84C46FCFEFEB395AA12FAA60CDC270103CDCE7C4AE7"
+    },
+    {
+      "path": "um\\advpub.h",
+      "sourceSha256": "63EB078EC24EF4F8746B24041362F05D4318585F5AF51A7F2793AAB9AA354FD2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\advpub.h",
+      "sdkSha256": "63EB078EC24EF4F8746B24041362F05D4318585F5AF51A7F2793AAB9AA354FD2"
+    },
+    {
+      "path": "um\\dmemmgr.h",
+      "sourceSha256": "1D7C378175125056506DCB7E286F7C330D315E5E0A54C8772BB9C76493B4262C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dmemmgr.h",
+      "sdkSha256": "1D7C378175125056506DCB7E286F7C330D315E5E0A54C8772BB9C76493B4262C"
+    },
+    {
+      "path": "um\\gb18030.h",
+      "sourceSha256": "E1254977597532259A457A7B4ACFC725B9E349A1916C0BAE27C2D3905E702B6D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\gb18030.h",
+      "sdkSha256": "E1254977597532259A457A7B4ACFC725B9E349A1916C0BAE27C2D3905E702B6D"
+    },
+    {
+      "path": "um\\ime.h",
+      "sourceSha256": "CFA1B354A2EEC5A1B9071F6659EA0F9B964AB0728422387A6B1B226488EC34C6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ime.h",
+      "sdkSha256": "CFA1B354A2EEC5A1B9071F6659EA0F9B964AB0728422387A6B1B226488EC34C6"
+    },
+    {
+      "path": "um\\immdev.h",
+      "sourceSha256": "5B0F8CBC8F6994C3332EA4D8E430AA62117440D262CA79BDEEBEE56999239018",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\immdev.h",
+      "sdkSha256": "5B0F8CBC8F6994C3332EA4D8E430AA62117440D262CA79BDEEBEE56999239018"
+    },
+    {
+      "path": "um\\jobapi.h",
+      "sourceSha256": "08DDFF85EC80F12B156837BBCE4F969480FEA0E32A08DADE7CC16ACECB0892D1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\jobapi.h",
+      "sdkSha256": "08DDFF85EC80F12B156837BBCE4F969480FEA0E32A08DADE7CC16ACECB0892D1"
+    },
+    {
+      "path": "um\\libloaderapi2.h",
+      "sourceSha256": "D0CA5E787BF51C46E651ACAAB082A4BBC22AE9475BAF6F9AACAADD8626B2B4A9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\libloaderapi2.h",
+      "sdkSha256": "D0CA5E787BF51C46E651ACAAB082A4BBC22AE9475BAF6F9AACAADD8626B2B4A9"
+    },
+    {
+      "path": "um\\mschapp.h",
+      "sourceSha256": "04BFAC77E93DDE8A8874AF5F1F7ADD6E67B522451F6C35EB5D06EC2C95A8C544",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mschapp.h",
+      "sdkSha256": "04BFAC77E93DDE8A8874AF5F1F7ADD6E67B522451F6C35EB5D06EC2C95A8C544"
+    },
+    {
+      "path": "um\\msctfmonitorapi.h",
+      "sourceSha256": "08309EF148544008FA1354B6F125073E258C9E70ADB48BA16235AFE94EF61652",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msctfmonitorapi.h",
+      "sdkSha256": "08309EF148544008FA1354B6F125073E258C9E70ADB48BA16235AFE94EF61652"
+    },
+    {
+      "path": "um\\securityappcontainer.h",
+      "sourceSha256": "85CC13ED7028960BD7F97C91F98B96825B46F4B8BC386AED2F2A6A9BCCBE4083",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\securityappcontainer.h",
+      "sdkSha256": "85CC13ED7028960BD7F97C91F98B96825B46F4B8BC386AED2F2A6A9BCCBE4083"
+    },
+    {
+      "path": "um\\utilapiset.h",
+      "sourceSha256": "A8E0F6001C784B3AD9FEB44C61D96B58C57366C473832CA8B2EA5DE05877B470",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\utilapiset.h",
+      "sdkSha256": "A8E0F6001C784B3AD9FEB44C61D96B58C57366C473832CA8B2EA5DE05877B470"
+    },
+    {
+      "path": "um\\windowsdefender.h",
+      "sourceSha256": "51AD3E1DDC7AFD5DEAED6799C6699152C54C804CEEE78815CECB9E9EA7AB4676",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\windowsdefender.h",
+      "sdkSha256": "51AD3E1DDC7AFD5DEAED6799C6699152C54C804CEEE78815CECB9E9EA7AB4676"
+    },
+    {
+      "path": "um\\edpwin32.h",
+      "sourceSha256": "E70BA3CBC78B0B17B52F57E01CA0C747BAA640FEA81CC1F7DE37C5D405D1C549",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\edpwin32.h",
+      "sdkSha256": "E70BA3CBC78B0B17B52F57E01CA0C747BAA640FEA81CC1F7DE37C5D405D1C549"
+    },
+    {
+      "path": "um\\filehc.h",
+      "sourceSha256": "BD6C7A540EA10329641571C9A8D9B074D03052ABF304A937E0D268C98348A182",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\filehc.h",
+      "sdkSha256": "BD6C7A540EA10329641571C9A8D9B074D03052ABF304A937E0D268C98348A182"
+    },
+    {
+      "path": "um\\lmstats.h",
+      "sourceSha256": "865F6DFB36A7D3C413B578E075DC5B7C56E841970ECEFC60D41DEE81CD1EA77A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmstats.h",
+      "sdkSha256": "865F6DFB36A7D3C413B578E075DC5B7C56E841970ECEFC60D41DEE81CD1EA77A"
+    },
+    {
+      "path": "um\\mtxdm.h",
+      "sourceSha256": "8FC2D598C2709678ACB66D89416262C377BFB67DB149E3B72E6D1E2D672CCF2E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mtxdm.h",
+      "sdkSha256": "8FC2D598C2709678ACB66D89416262C377BFB67DB149E3B72E6D1E2D672CCF2E"
+    },
+    {
+      "path": "um\\propapi.h",
+      "sourceSha256": "D7E0DD58611D6CE89EE8D669C830B96A6D276018BB4F31F04E19A984853466A0",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propapi.h",
+      "sdkSha256": "D7E0DD58611D6CE89EE8D669C830B96A6D276018BB4F31F04E19A984853466A0"
+    },
+    {
+      "path": "um\\sas.h",
+      "sourceSha256": "53A689BC699BEDB2F85A1E306BD167A98B63F4E72C87DD5092826FFB08C1CD03",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\sas.h",
+      "sdkSha256": "53A689BC699BEDB2F85A1E306BD167A98B63F4E72C87DD5092826FFB08C1CD03"
+    },
+    {
+      "path": "um\\winnls32.h",
+      "sourceSha256": "9DE576F479AEB64320D3D996D830DCDB4724684540943375F80596C955D4B79C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winnls32.h",
+      "sdkSha256": "9DE576F479AEB64320D3D996D830DCDB4724684540943375F80596C955D4B79C"
     }
   ],
   "midl": {
@@ -2191,7 +2305,15 @@
     "Security.DiagnosticDataQuery",
     "Debug",
     "Tablet",
-    "Cloudapi"
+    "Cloudapi",
+    "DirectDraw",
+    "Input.Ime",
+    "JobObjects",
+    "MsChap",
+    "Isolation",
+    "Lwef",
+    "Edp",
+    "Cos"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -2379,6 +2501,25 @@
     "um\\recapis.h.patch",
     "um\\t2embapi.h.patch",
     "um\\imagehlp.h.patch",
-    "um\\cfapi.h.patch"
+    "um\\cfapi.h.patch",
+    "um\\advpub.h.patch",
+    "um\\dmemmgr.h.patch",
+    "um\\gb18030.h.patch",
+    "um\\ime.h.patch",
+    "um\\immdev.h.patch",
+    "um\\jobapi.h.patch",
+    "um\\libloaderapi2.h.patch",
+    "um\\mschapp.h.patch",
+    "um\\msctfmonitorapi.h.patch",
+    "um\\securityappcontainer.h.patch",
+    "um\\utilapiset.h.patch",
+    "um\\windowsdefender.h.patch",
+    "um\\edpwin32.h.patch",
+    "um\\filehc.h.patch",
+    "um\\lmstats.h.patch",
+    "um\\mtxdm.h.patch",
+    "um\\propapi.h.patch",
+    "um\\sas.h.patch",
+    "um\\winnls32.h.patch"
   ]
 }

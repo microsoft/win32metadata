@@ -1,0 +1,13 @@
+diff --git a/um/libloaderapi2.h b/um/libloaderapi2.h
+index c8e8e79c..3052cc17 100644
+--- a/um/libloaderapi2.h
++++ b/um/libloaderapi2.h
+@@ -46,6 +46,8 @@ LoadPackagedLibrary(
+ 
+ #if (_WIN32_WINNT >= 0x0602)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ BOOL
+ WINAPI

@@ -1,0 +1,14 @@
+diff --git a/um/ime.h b/um/ime.h
+index 838b76e8..8ef6f65b 100644
+--- a/um/ime.h
++++ b/um/ime.h
+@@ -32,7 +32,9 @@ typedef unsigned int UINT;
+ 
+ #define IME_MAXPROCESS 32
+ 
++_Win32_SupportedOS_Windows2000_
+ LRESULT WINAPI SendIMEMessageExA( IN HWND, IN LPARAM);
++_Win32_SupportedOS_Windows2000_
+ LRESULT WINAPI SendIMEMessageExW( IN HWND, IN LPARAM);
+ #ifdef UNICODE
+ #define SendIMEMessageEx  SendIMEMessageExW

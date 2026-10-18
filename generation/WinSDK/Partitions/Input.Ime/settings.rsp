@@ -8,4 +8,5 @@
 <IncludeRoot>/um/msimeapi.h
 --namespace
 Windows.Win32.UI.Input.Ime
-
+--config
+parse-win32-annotations

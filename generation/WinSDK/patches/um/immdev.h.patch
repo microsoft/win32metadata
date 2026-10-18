@@ -1,0 +1,14 @@
+diff --git a/um/immdev.h b/um/immdev.h
+index 5295f270..b46736f2 100644
+--- a/um/immdev.h
++++ b/um/immdev.h
+@@ -921,7 +921,9 @@ BOOL WINAPI ImmGenerateMessage(IN HIMC);
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_WindowsXP_
+ LRESULT WINAPI ImmRequestMessageA(IN HIMC, IN WPARAM, IN LPARAM);
++_Win32_SupportedOS_WindowsXP_
+ LRESULT WINAPI ImmRequestMessageW(IN HIMC, IN WPARAM, IN LPARAM);
+ #ifdef UNICODE
+ #define ImmRequestMessage  ImmRequestMessageW

@@ -4,3 +4,5 @@
 <IncludeRoot>/um/WindowsDefender.h
 --namespace
 Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
+--config
+parse-win32-annotations
