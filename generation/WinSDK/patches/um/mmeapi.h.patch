@@ -1,5 +1,5 @@
 diff --git a/um/mmeapi.h b/um/mmeapi.h
-index 7c68a997..df678763 100644
+index 7c68a997..8b57d716 100644
 --- a/um/mmeapi.h
 +++ b/um/mmeapi.h
 @@ -338,6 +338,7 @@ typedef struct tWAVEFORMATEX
@@ -218,7 +218,20 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1087,6 +1114,7 @@ typedef struct midiproptempo_tag
+@@ -795,6 +822,12 @@ typedef WORD FAR *LPKEYARRAY;
+ #if(WINVER >= 0x0400)
+ /* flags for dwFlags parm of midiInOpen() */
+ #define MIDI_IO_STATUS      0x00000020L
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MIDI_WAVE_OPEN_TYPE, unsigned long,
++    WAVE_FORMAT_QUERY, WAVE_ALLOWSYNC, WAVE_MAPPED, WAVE_FORMAT_DIRECT,
++    WAVE_FORMAT_DIRECT_QUERY, WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE,
++    MIDI_IO_STATUS);
++#endif
+ #endif /* WINVER >= 0x0400 */
+ 
+ /* flags for wFlags parm of midiOutCachePatches(), midiOutCacheDrumPatches() */
+@@ -1087,6 +1120,7 @@ typedef struct midiproptempo_tag
  #endif /* WINVER >= 0x0400 */
  
  /* MIDI function prototypes */
@@ -226,7 +239,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  UINT
  WINAPI
-@@ -1095,6 +1123,7 @@ midiOutGetNumDevs(
+@@ -1095,6 +1129,7 @@ midiOutGetNumDevs(
      );
  
  #if (WINVER >= 0x0400)
@@ -234,7 +247,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1107,6 +1136,7 @@ midiStreamOpen(
+@@ -1107,6 +1142,7 @@ midiStreamOpen(
      _In_ DWORD fdwOpen
      );
  
@@ -242,7 +255,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1114,6 +1144,7 @@ midiStreamClose(
+@@ -1114,6 +1150,7 @@ midiStreamClose(
      _In_ HMIDISTRM hms
      );
  
@@ -250,7 +263,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1123,6 +1154,7 @@ midiStreamProperty(
+@@ -1123,6 +1160,7 @@ midiStreamProperty(
      _In_ DWORD dwProperty
      );
  
@@ -258,7 +271,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1132,6 +1164,7 @@ midiStreamPosition(
+@@ -1132,6 +1170,7 @@ midiStreamPosition(
      _In_ UINT cbmmt
      );
  
@@ -266,7 +279,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1141,6 +1174,7 @@ midiStreamOut(
+@@ -1141,6 +1180,7 @@ midiStreamOut(
      _In_ UINT cbmh
      );
  
@@ -274,7 +287,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1148,6 +1182,7 @@ midiStreamPause(
+@@ -1148,6 +1188,7 @@ midiStreamPause(
      _In_ HMIDISTRM hms
      );
  
@@ -282,7 +295,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1155,6 +1190,7 @@ midiStreamRestart(
+@@ -1155,6 +1196,7 @@ midiStreamRestart(
      _In_ HMIDISTRM hms
      );
  
@@ -290,7 +303,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1163,6 +1199,7 @@ midiStreamStop(
+@@ -1163,6 +1205,7 @@ midiStreamStop(
      );
  
  #ifdef _WIN32
@@ -298,7 +311,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1172,6 +1209,7 @@ midiConnect(
+@@ -1172,6 +1215,7 @@ midiConnect(
      _In_opt_ LPVOID pReserved
      );
  
@@ -306,7 +319,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1186,6 +1224,7 @@ midiDisconnect(
+@@ -1186,6 +1230,7 @@ midiDisconnect(
  
  #ifdef _WIN32
  
@@ -314,7 +327,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1195,6 +1234,7 @@ midiOutGetDevCapsA(
+@@ -1195,6 +1240,7 @@ midiOutGetDevCapsA(
      _In_ UINT cbmoc
      );
  
@@ -322,7 +335,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1238,6 +1278,7 @@ WINMMAPI MMRESULT WINAPI midiOutSetVolume(UINT uId, DWORD dwVolume);
+@@ -1238,6 +1284,7 @@ WINMMAPI MMRESULT WINAPI midiOutSetVolume(UINT uId, DWORD dwVolume);
  
  #ifdef _WIN32
  
@@ -330,7 +343,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1247,6 +1288,7 @@ midiOutGetErrorTextA(
+@@ -1247,6 +1294,7 @@ midiOutGetErrorTextA(
      _In_ UINT cchText
      );
  
@@ -338,7 +351,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1266,6 +1308,7 @@ midiOutGetErrorTextW(
+@@ -1266,6 +1314,7 @@ midiOutGetErrorTextW(
  WINMMAPI MMRESULT WINAPI midiOutGetErrorText(MMRESULT mmrError, LPSTR pszText, UINT cchText);
  #endif
  
@@ -346,7 +359,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1277,6 +1320,7 @@ midiOutOpen(
+@@ -1277,6 +1326,7 @@ midiOutOpen(
      _In_ DWORD fdwOpen
      );
  
@@ -354,7 +367,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1284,6 +1328,7 @@ midiOutClose(
+@@ -1284,6 +1334,7 @@ midiOutClose(
      _In_ HMIDIOUT hmo
      );
  
@@ -362,7 +375,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1293,6 +1338,7 @@ midiOutPrepareHeader(
+@@ -1293,6 +1344,7 @@ midiOutPrepareHeader(
      _In_ UINT cbmh
      );
  
@@ -370,7 +383,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1302,6 +1348,7 @@ midiOutUnprepareHeader(
+@@ -1302,6 +1354,7 @@ midiOutUnprepareHeader(
      _In_ UINT cbmh
      );
  
@@ -378,7 +391,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1310,6 +1357,7 @@ midiOutShortMsg(
+@@ -1310,6 +1363,7 @@ midiOutShortMsg(
      _In_ DWORD dwMsg
      );
  
@@ -386,7 +399,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1319,6 +1367,7 @@ midiOutLongMsg(
+@@ -1319,6 +1373,7 @@ midiOutLongMsg(
      _In_ UINT cbmh
      );
  
@@ -394,7 +407,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1326,6 +1375,7 @@ midiOutReset(
+@@ -1326,6 +1381,7 @@ midiOutReset(
      _In_ HMIDIOUT hmo
      );
  
@@ -402,7 +415,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1336,6 +1386,7 @@ midiOutCachePatches(
+@@ -1336,6 +1392,7 @@ midiOutCachePatches(
      _In_ UINT fuCache
      );
  
@@ -410,7 +423,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1346,6 +1397,7 @@ midiOutCacheDrumPatches(
+@@ -1346,6 +1403,7 @@ midiOutCacheDrumPatches(
      _In_ UINT fuCache
      );
  
@@ -418,7 +431,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1371,6 +1423,7 @@ DWORD WINAPI midiOutMessage(HMIDIOUT hmo, UINT uMsg, DWORD dw1, DWORD dw2);
+@@ -1371,6 +1429,7 @@ DWORD WINAPI midiOutMessage(HMIDIOUT hmo, UINT uMsg, DWORD dw1, DWORD dw2);
  #endif
  #endif /* ifdef WINVER >= 0x030a */
  
@@ -426,7 +439,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  UINT
  WINAPI
-@@ -1380,6 +1433,7 @@ midiInGetNumDevs(
+@@ -1380,6 +1439,7 @@ midiInGetNumDevs(
  
  #ifdef _WIN32
  
@@ -434,7 +447,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1389,6 +1443,7 @@ midiInGetDevCapsA(
+@@ -1389,6 +1449,7 @@ midiInGetDevCapsA(
      _In_ UINT cbmic
      );
  
@@ -442,7 +455,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1403,6 +1458,7 @@ midiInGetDevCapsW(
+@@ -1403,6 +1464,7 @@ midiInGetDevCapsW(
  #else
  #define midiInGetDevCaps  midiInGetDevCapsA
  #endif // !UNICODE
@@ -450,7 +463,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1412,6 +1468,7 @@ midiInGetErrorTextA(
+@@ -1412,6 +1474,7 @@ midiInGetErrorTextA(
      _In_ UINT cchText
      );
  
@@ -458,7 +471,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1432,6 +1489,7 @@ MMRESULT WINAPI midiInGetDevCaps(UINT uDeviceID, LPMIDIINCAPS pmic, UINT cbmic);
+@@ -1432,6 +1495,7 @@ MMRESULT WINAPI midiInGetDevCaps(UINT uDeviceID, LPMIDIINCAPS pmic, UINT cbmic);
  WINMMAPI MMRESULT WINAPI midiInGetErrorText(MMRESULT mmrError, _Out_writes_(cchText) LPSTR pszText, UINT cchText);
  #endif
  
@@ -466,7 +479,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1443,6 +1501,7 @@ midiInOpen(
+@@ -1443,6 +1507,7 @@ midiInOpen(
      _In_ DWORD fdwOpen
      );
  
@@ -474,7 +487,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1450,6 +1509,7 @@ midiInClose(
+@@ -1450,6 +1515,7 @@ midiInClose(
      _In_ HMIDIIN hmi
      );
  
@@ -482,7 +495,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1459,6 +1519,7 @@ midiInPrepareHeader(
+@@ -1459,6 +1525,7 @@ midiInPrepareHeader(
      _In_ UINT cbmh
      );
  
@@ -490,7 +503,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1468,6 +1529,7 @@ midiInUnprepareHeader(
+@@ -1468,6 +1535,7 @@ midiInUnprepareHeader(
      _In_ UINT cbmh
      );
  
@@ -498,7 +511,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1477,6 +1539,7 @@ midiInAddBuffer(
+@@ -1477,6 +1545,7 @@ midiInAddBuffer(
      _In_ UINT cbmh
      );
  
@@ -506,7 +519,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1484,6 +1547,7 @@ midiInStart(
+@@ -1484,6 +1553,7 @@ midiInStart(
      _In_ HMIDIIN hmi
      );
  
@@ -514,7 +527,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1491,6 +1555,7 @@ midiInStop(
+@@ -1491,6 +1561,7 @@ midiInStop(
      _In_ HMIDIIN hmi
      );
  
@@ -522,7 +535,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1498,6 +1563,7 @@ midiInReset(
+@@ -1498,6 +1569,7 @@ midiInReset(
      _In_ HMIDIIN hmi
      );
  
@@ -530,7 +543,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1623,6 +1689,7 @@ typedef struct auxcaps_tag {
+@@ -1623,6 +1695,7 @@ typedef struct auxcaps_tag {
  #define AUXCAPS_LRVOLUME        0x0002  /* separate left-right volume control */
  
  /* auxiliary audio function prototypes */
@@ -538,7 +551,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  UINT
  WINAPI
-@@ -1632,6 +1699,7 @@ auxGetNumDevs(
+@@ -1632,6 +1705,7 @@ auxGetNumDevs(
  
  #ifdef _WIN32
  
@@ -546,7 +559,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1641,6 +1709,7 @@ auxGetDevCapsA(
+@@ -1641,6 +1715,7 @@ auxGetDevCapsA(
      _In_ UINT cbac
      );
  
@@ -554,7 +567,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1659,6 +1728,7 @@ auxGetDevCapsW(
+@@ -1659,6 +1734,7 @@ auxGetDevCapsW(
  #else
  MMRESULT WINAPI auxGetDevCaps(UINT uDeviceID, LPAUXCAPS pac, UINT cbac);
  #endif
@@ -562,7 +575,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1667,6 +1737,7 @@ auxSetVolume(
+@@ -1667,6 +1743,7 @@ auxSetVolume(
      _In_ DWORD dwVolume
      );
  
@@ -570,7 +583,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1732,6 +1803,7 @@ typedef HMIXER     FAR *LPHMIXER;
+@@ -1732,6 +1809,7 @@ typedef HMIXER     FAR *LPHMIXER;
  #define MIXER_OBJECTF_HMIDIIN   (MIXER_OBJECTF_HANDLE|MIXER_OBJECTF_MIDIIN)
  #define MIXER_OBJECTF_AUX       0x50000000L
  
@@ -578,7 +591,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  UINT
  WINAPI
-@@ -1811,6 +1883,7 @@ typedef struct tMIXERCAPS {
+@@ -1811,6 +1889,7 @@ typedef struct tMIXERCAPS {
  
  #ifdef _WIN32
  
@@ -586,7 +599,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1820,6 +1893,7 @@ mixerGetDevCapsA(
+@@ -1820,6 +1899,7 @@ mixerGetDevCapsA(
      _In_ UINT cbmxcaps
      );
  
@@ -594,7 +607,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1839,6 +1913,7 @@ mixerGetDevCapsW(
+@@ -1839,6 +1919,7 @@ mixerGetDevCapsW(
  MMRESULT WINAPI mixerGetDevCaps(UINT uMxId, LPMIXERCAPS pmxcaps, UINT cbmxcaps);
  #endif
  
@@ -602,7 +615,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1850,6 +1925,7 @@ mixerOpen(
+@@ -1850,6 +1931,7 @@ mixerOpen(
      _In_ DWORD fdwOpen
      );
  
@@ -610,7 +623,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -1857,6 +1933,7 @@ mixerClose(
+@@ -1857,6 +1939,7 @@ mixerClose(
      _In_ HMIXER hmx
      );
  
@@ -618,7 +631,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  DWORD
  WINAPI
-@@ -2001,6 +2078,7 @@ typedef struct tMIXERLINE {
+@@ -2001,6 +2084,7 @@ typedef struct tMIXERLINE {
  
  #ifdef _WIN32
  
@@ -626,7 +639,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2010,6 +2088,7 @@ mixerGetLineInfoA(
+@@ -2010,6 +2094,7 @@ mixerGetLineInfoA(
      _In_ DWORD fdwInfo
      );
  
@@ -634,7 +647,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2037,6 +2116,7 @@ MMRESULT WINAPI mixerGetLineInfo(HMIXEROBJ hmxobj, LPMIXERLINE pmxl, DWORD fdwIn
+@@ -2037,6 +2122,7 @@ MMRESULT WINAPI mixerGetLineInfo(HMIXEROBJ hmxobj, LPMIXERLINE pmxl, DWORD fdwIn
  
  #define MIXER_GETLINEINFOF_QUERYMASK        0x0000000FL
  
@@ -642,7 +655,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2275,6 +2355,7 @@ typedef struct tMIXERLINECONTROLS {
+@@ -2275,6 +2361,7 @@ typedef struct tMIXERLINECONTROLS {
  /* */
  #ifdef _WIN32
  
@@ -650,7 +663,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2284,6 +2365,7 @@ mixerGetLineControlsA(
+@@ -2284,6 +2371,7 @@ mixerGetLineControlsA(
      _In_ DWORD fdwControls
      );
  
@@ -658,7 +671,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2379,6 +2461,7 @@ typedef struct tMIXERCONTROLDETAILS_UNSIGNED {
+@@ -2379,6 +2467,7 @@ typedef struct tMIXERCONTROLDETAILS_UNSIGNED {
  
  #ifdef _WIN32
  
@@ -666,7 +679,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2388,6 +2471,7 @@ mixerGetControlDetailsA(
+@@ -2388,6 +2477,7 @@ mixerGetControlDetailsA(
      _In_ DWORD fdwDetails
      );
  
@@ -674,7 +687,7 @@ index 7c68a997..df678763 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -2412,6 +2496,7 @@ MMRESULT WINAPI mixerGetControlDetails(HMIXEROBJ hmxobj, LPMIXERCONTROLDETAILS p
+@@ -2412,6 +2502,7 @@ MMRESULT WINAPI mixerGetControlDetails(HMIXEROBJ hmxobj, LPMIXERCONTROLDETAILS p
  
  #define MIXER_GETCONTROLDETAILSF_QUERYMASK  0x0000000FL
  

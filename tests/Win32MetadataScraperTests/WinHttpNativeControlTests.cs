@@ -1267,6 +1267,93 @@ static_assert(DISC_NO_FORCE == 64u);
                 $"{beforeSal.Count} unchanged SAL attributes; 12 logical groups/55 members and native DWORD associations when enabled.");
         }
 
+        private static readonly string[] MmeapiOpenFragmentMembers =
+        {
+            "WAVE_FORMAT_QUERY", "WAVE_ALLOWSYNC", "WAVE_MAPPED", "WAVE_FORMAT_DIRECT",
+            "WAVE_FORMAT_DIRECT_QUERY", "WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE", "MIDI_IO_STATUS",
+        };
+
+        [Fact]
+        public void MmeapiOpenFragmentContainsOnlyTheSevenAllocatedNativeNamesInsideTheCompleteMetadataGuard()
+        {
+            string patch = File.ReadAllText(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "patches", "um", "mmeapi.h.patch"));
+            string additions = string.Join("\n", patch.Split('\n')
+                .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                .Select(line => line.Substring(1).TrimEnd('\r')));
+            var group = Assert.Single(Regex.Matches(additions,
+                @"(?m)^#if defined\(WIN32METADATA\) && !defined\(MIDL_PASS\)\n" +
+                @"_Win32_FlagsEnum_\(MIDI_WAVE_OPEN_TYPE, unsigned long,\n(?<members>[^)]+)\);\n#endif$"));
+            Assert.Equal(MmeapiOpenFragmentMembers, group.Groups["members"].Value.Split(',').Select(member => member.Trim()));
+            Assert.Single(Regex.Matches(additions, "_Win32_FlagsEnum_"));
+            Assert.DoesNotContain("_Win32_AssociatedEnum_", additions);
+            Assert.DoesNotContain("CALLBACK_", group.Value);
+        }
+
+        [NativeMigrationTheory("WINHTTP_MMEAPI_FRAGMENT_CONTROL_HEADERS")]
+        [MemberData(nameof(OriginalErrorOwnerControls))]
+        public void MmeapiOpenFragmentPreservesAcceptedNativeAbiSalAvailabilityAndSevenCompiledValues(
+            string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Environment.GetEnvironmentVariable("WINHTTP_MMEAPI_FRAGMENT_CONTROL_HEADERS");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string main = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "Partitions", "Audio", "main.cpp"));
+            const string lastPrefixInclude = "#include <sdkddkver.h>";
+            int prefix = main.IndexOf(lastPrefixInclude, StringComparison.Ordinal);
+            Assert.InRange(prefix, 0, main.Length - lastPrefixInclude.Length);
+            string source = main.Substring(0, prefix + lastPrefixInclude.Length) +
+                "\n#include <mmsystem.h>\n#include <mmreg.h>\n#include <mmeapi.h>\n";
+            const string checks = @"
+#ifdef __cplusplus
+#define MIDI_FRAGMENT_ASSERT static_assert
+#else
+#define MIDI_FRAGMENT_ASSERT _Static_assert
+#endif
+MIDI_FRAGMENT_ASSERT(WAVE_FORMAT_QUERY == 1UL, ""native WAVE_FORMAT_QUERY"");
+MIDI_FRAGMENT_ASSERT(WAVE_ALLOWSYNC == 2UL, ""native WAVE_ALLOWSYNC"");
+MIDI_FRAGMENT_ASSERT(WAVE_MAPPED == 4UL, ""native WAVE_MAPPED"");
+MIDI_FRAGMENT_ASSERT(WAVE_FORMAT_DIRECT == 8UL, ""native WAVE_FORMAT_DIRECT"");
+MIDI_FRAGMENT_ASSERT(WAVE_FORMAT_DIRECT_QUERY == (WAVE_FORMAT_QUERY | WAVE_FORMAT_DIRECT), ""native WAVE_FORMAT_DIRECT_QUERY expression"");
+MIDI_FRAGMENT_ASSERT(WAVE_FORMAT_DIRECT_QUERY == 9UL, ""native WAVE_FORMAT_DIRECT_QUERY value"");
+MIDI_FRAGMENT_ASSERT(WAVE_MAPPED_DEFAULT_COMMUNICATION_DEVICE == 16UL, ""native default communication device"");
+MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
+";
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            string[] headers = { "mmeapi.h" };
+            var before = Surface(root, original, "Audio", architecture, target, headers, checks,
+                metadataEnabled: enabled, sourceText: source, annotations: beforeAnnotations,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "Audio", architecture, target, headers, checks,
+                metadataEnabled: enabled, sourceText: source, annotations: afterAnnotations,
+                salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language).ToList();
+            Assert.NotEmpty(before);
+            Assert.NotEmpty(beforeSal);
+            if (enabled)
+            {
+                Assert.True(after.Remove("typedef MIDI_WAVE_OPEN_TYPE unsigned long"));
+                string contribution = Assert.Single(afterAnnotations.Where(value =>
+                    value.StartsWith("MIDI_WAVE_OPEN_TYPE|FlagsEnum(", StringComparison.Ordinal)));
+                Assert.Equal(MmeapiOpenFragmentMembers, Regex.Match(contribution, @"FlagsEnum\(([^)]+)\)")
+                    .Groups[1].Value.Split(',').Select(member => member.Trim()));
+                Assert.True(afterAnnotations.Remove(contribution));
+            }
+            Assert.Equal(before, after);
+            Assert.Equal(beforeAnnotations.OrderBy(value => value, StringComparer.Ordinal),
+                afterAnnotations.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{architecture}/{language}/metadata={enabled}: seven actual compiled native constants; " +
+                "accepted mmeapi ABI, SAL, diagnostics and availability unchanged; fragment only, not full14 union qualification.");
+        }
+
         public static IEnumerable<object[]> OriginalWnetHeaderControls() => OriginalErrorOwnerControls();
 
         [NativeMigrationTheory]
