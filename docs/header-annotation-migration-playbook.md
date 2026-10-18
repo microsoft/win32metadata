@@ -3119,3 +3119,59 @@ and their thirty legacy facts remain separate. This is not an all-SDK
 owner percentage, whole-production/current-head CI qualification or
 publication. No push, PR/stack mutation, merge or consumer work is
 performed.
+
+### Bounded original Bluetooth scalar witness, not source admission
+
+The next Bluetooth traversal is bound to the qualified FDI/ProcessSnapshot
+833-input archive `90A41D86...` and image `EDF06984...`, including completed
+parent verification `CA661ADD...`. All sixteen read-only parent evidence files
+were rehashed. The unadmitted Bluetooth candidate is not a new baseline.
+
+At source/native/image producer `b8913710...`, the first stock whole-owner
+header/constants traversal succeeds. Twelve complete C17/C++17, metadata
+off/on, three-architecture native cases and three source guards pass. The
+two API patches use forty-seven fixed declaration floors, retain twelve
+SetLastError sites, and move two complete original cleanup declaration/comment
+blocks before their precise producers. The original `ws2bth.h` is unchanged;
+its old metadata-only C++ `constexpr USHORT` patch is removed rather than
+replacing the SDK macro or narrow structure field.
+
+One complete candidate image `83DF44BA...` is emitted using the unchanged
+`01DCFCBF...` emitter, 833 normal inputs and ten captured configurations.
+Both whole Bluetooth outputs are fresh; all 831 unowned inputs remain literal
+to the qualified context. The unfiltered comparison `DB4E0F4B...` has twelve
+rows: six find-handle uses become native IntPtr, two cleanup-return transfers
+retain their existing facts, two synthetic metadata handles disappear, and
+two scalar constant types change. All 37,309 other surviving physical
+snapshots are literal with every correction switch disabled.
+
+The scalar question is concrete, not an enum-storage gate. Native
+`ws2bth.h:47,50` defines `AF_BTH=32` and `PF_BTH=AF_BTH`; the native matrix
+establishes signed four-byte int macros. `SOCKADDR_BTH.addressFamily` remains
+unsigned two-byte storage, with unchanged fields, packing and native size 30.
+The original `socket.af` declaration is int; reading it is not a separately
+executed socket-signature assertion. Normal ConstantsScraper literal
+projection and alias inheritance produce UInt32 rather than the old UInt16
+constants: signature `0607`/constant bytes `2000` become `0609`/`20000000`,
+still value 32. This explains the producer result, not native signedness
+equivalence or a finding that UInt16 was inappropriate for the narrow field.
+The unchanged UInt16 assertion rejects candidate `AF_BTH`.
+
+The appropriate scalar projection and any corresponding source authoring
+remain outside this witness's admission. No global AF rule, new annotation,
+native cast, alias or generated-source repair is introduced. The existing
+macro-only constant authoring contract must not be mistaken for proof that
+new shared tooling is necessarily required. There is no native compiler
+contradiction, but no repeat traversal/image, full integrity acceptance,
+managed consumer measurement or current-head CI/publication claim either.
+
+The read-only receipt is
+`files\original-bluetooth-scalar-boundary-b8913710\measurement.json`,
+SHA `AFB2F92248D95F118CADD8AFBFF279C5D36A2B71818779A3D133AAE75E79B638`.
+Index `91BA7676...` binds 179 payloads totaling 183,106,239 bytes; all 6,674
+retained ZIP entries and all 263 prior FDI/ProcessSnapshot payloads were
+rehashed. Complete raw reports, literal snapshots, source/config/SDK/private
+inputs, native/PDB evidence and proof-only verifier mistakes are retained.
+Local coverage remains **36/50**, with fourteen drafts unadmitted.
+Independent Power original-header preflight uses the qualified FDI context,
+not the Bluetooth candidate. WNet/RPC and missing-IDL holds remain separate.
