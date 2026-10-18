@@ -1,0 +1,148 @@
+diff --git a/um/cluadmex.idl b/um/cluadmex.idl
+index 769ca49f..0e99c601 100644
+--- a/um/cluadmex.idl
++++ b/um/cluadmex.idl
+@@ -50,6 +50,7 @@
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ #ifndef _CLUADMEX_IDL_
+ #define _CLUADMEX_IDL_
+ 
+@@ -100,6 +101,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterUIInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE50-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -126,6 +128,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterDataInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE51-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -151,6 +154,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterObjectInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE52-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -178,6 +182,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterNodeInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE53-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -200,6 +205,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterGroupInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE54-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -222,6 +228,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterResourceInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE55-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -254,6 +261,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterNetworkInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE56-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -276,6 +284,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IGetClusterNetInterfaceInfo, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE57-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -302,6 +311,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWCPropertySheetCallback, _Win32_SupportedOS_Server2008_)
+ 	[
+ 		object,
+ 		uuid(97DEDE60-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -324,6 +334,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWEExtendPropertySheet, _Win32_SupportedOS_Server2008_)
+ 	[
+ 		object,
+ 		uuid(97DEDE61-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -347,6 +358,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWCWizardCallback, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE62-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -373,6 +385,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWEExtendWizard, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE63-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -396,6 +409,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWCContextMenuCallback, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE64-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -422,6 +436,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWEExtendContextMenu, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE65-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -445,6 +460,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWEInvokeCommand, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE66-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -468,6 +484,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWCWizard97Callback, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE67-FC6B-11CF-B5F5-00A0C90AB505),
+@@ -494,6 +511,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 	//
+ 	/////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IWEExtendWizard97, _Win32_SupportedOS_Server2003_)
+ 	[
+ 		object,
+ 		uuid(97DEDE68-FC6B-11CF-B5F5-00A0C90AB505),

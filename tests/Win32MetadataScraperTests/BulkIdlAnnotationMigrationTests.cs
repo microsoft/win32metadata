@@ -263,6 +263,36 @@ namespace Win32MetadataScraperTests
             }
         }
 
+        [NativeMigrationTheory("WIN32METADATA_CLU_GENERATED_SOURCE")]
+        [InlineData("MsCs", "cluadmex.h")]
+        public void ActualNormalCluSourceProjectsAllOwnedFloorsWithoutLegacyFallback(string partition, string header)
+        {
+            string source = Environment.GetEnvironmentVariable("WIN32METADATA_CLU_GENERATED_SOURCE");
+            var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(source));
+            var declarations = tree.GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>().ToArray();
+            string[] expected = (string[])OriginalIdlNativeSamples().First(row =>
+                (string)row[0] == partition && (string)row[1] == header && (string)row[4] == "c++")[7];
+            Assert.Equal(17, expected.Length);
+            string[] legacy = File.ReadAllLines(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                "generation", "WinSDK", "supportedOS.rsp"));
+            foreach (string fact in expected)
+            {
+                string[] parts = fact.Split('|');
+                var declaration = Assert.Single(declarations.Where(node => node.Identifier.ValueText == parts[0]));
+                var attribute = Assert.Single(declaration.AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(value => value.Name.ToString() ==
+                        "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform"));
+                string floor = Assert.IsType<LiteralExpressionSyntax>(
+                    Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText;
+                Assert.Equal(parts[1], "SupportedOSPlatform(\"" + floor + "\")");
+                Assert.DoesNotContain(parts[0] + "=" + parts[1], legacy);
+            }
+            string obj = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(source)));
+            string settings = File.ReadAllText(Path.Combine(obj, "scratch", "common", partition + ".settings.rsp"));
+            Assert.Contains("parse-win32-annotations", settings);
+            Assert.DoesNotContain("--nativeFieldArrayInfo", settings);
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlNativeSamples))]
         public void OriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
@@ -357,6 +387,17 @@ namespace Win32MetadataScraperTests
                 {
                     "IFilter|SupportedOSPlatform(\"windows5.0\")",
                 }),
+                ("MsCs", "cluadmex.h", new[]
+                {
+                    "IGetClusterDataInfo", "IGetClusterGroupInfo", "IGetClusterNetInterfaceInfo",
+                    "IGetClusterNetworkInfo", "IGetClusterNodeInfo", "IGetClusterObjectInfo",
+                    "IGetClusterResourceInfo", "IGetClusterUIInfo", "IWCContextMenuCallback",
+                    "IWCWizard97Callback", "IWCWizardCallback", "IWEExtendContextMenu",
+                    "IWEExtendWizard", "IWEExtendWizard97", "IWEInvokeCommand",
+                }.Select(name => name + "|SupportedOSPlatform(\"windowsserver2003\")").Concat(new[]
+                {
+                    "IWCPropertySheetCallback", "IWEExtendPropertySheet",
+                }.Select(name => name + "|SupportedOSPlatform(\"windowsserver2008\")")).ToArray()),
             };
             foreach (var owner in owners)
                 foreach (var architecture in new[]

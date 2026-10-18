@@ -3501,6 +3501,12 @@
       "sourceSha256": "A6C8761F269797C2241463FFA5AEF8381A5E69A6AD13A5E60D6C44D197A7D9E2",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\vsprov.idl",
       "sdkSha256": "FD21E10A77C76C59DCFFDC3B6BE2AF4A31DA3C686FB8EF206E8CECA6CCC6BECE"
+    },
+    {
+      "path": "um\\cluadmex.h",
+      "sourceSha256": "44FE9E93F9353C08E1898DB6705CC3BCBA0656D07306D83789AB0196AB6664F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cluadmex.idl",
+      "sdkSha256": "A959A87AEB3F55EFE4B6470F65EF0E5DADF4F53BA49690612F4AE1E71BB1DFF3"
     }
   ],
   "midl": {
@@ -5168,6 +5174,11 @@
         "path": "winrt\\webapplication.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\winrt\\webapplication.idl",
         "sdkSha256": "0349EEB88558EE012D8FFCD9C110BCB1EFED897464B8C49EBC54D437693F4CD0"
+      },
+      {
+        "path": "um\\cluadmex.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cluadmex.idl",
+        "sdkSha256": "A959A87AEB3F55EFE4B6470F65EF0E5DADF4F53BA49690612F4AE1E71BB1DFF3"
       }
     ],
     "outputs": [
@@ -6054,6 +6065,10 @@
       {
         "source": "um\\vsprov.idl",
         "path": "um\\vsprov.h"
+      },
+      {
+        "source": "um\\cluadmex.idl",
+        "path": "um\\cluadmex.h"
       }
     ]
   },
@@ -6823,6 +6838,7 @@
     "um\\shldisp.idl.patch",
     "um\\spatialaudioclient.idl.patch",
     "um\\vsmgmt.idl.patch",
-    "um\\vsprov.idl.patch"
+    "um\\vsprov.idl.patch",
+    "um\\cluadmex.idl.patch"
   ]
 }
