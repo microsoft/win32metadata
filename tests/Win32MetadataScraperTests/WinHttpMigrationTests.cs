@@ -1209,6 +1209,126 @@ namespace Win32MetadataScraperTests
                 "preserved independently of native DWORD parameters; DwmShowContact keeps its native enum with all seven Int32 member bits.");
         }
 
+        [MigrationTheory]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void TenthAuthoredWebSocketHeaderPreservesFloorsNativeEnumsAndPreciseOwnership(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, WebSocketNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, WebSocketNamespace, "Apis", architecture);
+            Assert.Equal(WebSocketFunctions.OrderBy(value => value, StringComparer.Ordinal),
+                after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (var image in new[] { control, current })
+            {
+                var methods = Methods(image.Reader, WebSocketNamespace, "Apis", architecture);
+                foreach (string name in WebSocketFunctions)
+                    Assert.Equal(new[] { "windows8.0" },
+                        AttributeValues(image.Reader, methods[name].GetCustomAttributes(), "SupportedOSPlatformAttribute"));
+                foreach (string name in new[]
+                {
+                    "WEB_SOCKET_CLOSE_STATUS", "WEB_SOCKET_PROPERTY_TYPE", "WEB_SOCKET_ACTION_QUEUE",
+                    "WEB_SOCKET_BUFFER_TYPE", "WEB_SOCKET_ACTION",
+                })
+                {
+                    var type = Type(image.Reader, name, architecture, WebSocketNamespace);
+                    var fields = type.GetFields().Select(image.Reader.GetFieldDefinition).ToArray();
+                    Assert.Equal("value__", image.Reader.GetString(fields[0].Name));
+                    Assert.Equal("Int32", fields[0].DecodeSignature(Signatures, null));
+                    Assert.All(fields.Skip(1), field =>
+                        Assert.Equal(ConstantTypeCode.Int32, image.Reader.GetConstant(field.GetDefaultValue()).TypeCode));
+                    Assert.Equal(SnapshotType(control.Reader, Type(control.Reader, name, architecture, WebSocketNamespace)),
+                        SnapshotType(image.Reader, type));
+                }
+            }
+            foreach (string name in WebSocketFunctions)
+            {
+                Assert.Equal(Signature(before[name].DecodeSignature(Signatures, null)),
+                    Signature(after[name].DecodeSignature(Signatures, null)));
+                Assert.Equal(Import(control.Reader, before[name]), Import(current.Reader, after[name]));
+                foreach (var parameter in after[name].GetParameters().Select(current.Reader.GetParameter))
+                {
+                    bool producer = name is "WebSocketCreateClientHandle" or "WebSocketCreateServerHandle" &&
+                        current.Reader.GetString(parameter.Name) == "phWebSocket";
+                    Assert.Equal(producer ? LifecycleAttributes("WebSocketDeleteHandle") : Array.Empty<string>(),
+                        Ownership(current.Reader, parameter.GetCustomAttributes()));
+                    if (producer)
+                    {
+                        Assert.Equal(3, parameter.SequenceNumber);
+                        Assert.Equal(ParameterAttributes.Out, parameter.Attributes);
+                        Assert.Equal(WebSocketNamespace + ".WEB_SOCKET_HANDLE*",
+                            after[name].DecodeSignature(Signatures, null).ParameterTypes[2]);
+                    }
+                }
+            }
+            var originalHandle = Type(control.Reader, "WEB_SOCKET_HANDLE", architecture, WebSocketNamespace);
+            var handle = Type(current.Reader, "WEB_SOCKET_HANDLE", architecture, WebSocketNamespace);
+            Assert.Equal(LifecycleAttributes("WebSocketDeleteHandle"), Ownership(control.Reader, originalHandle.GetCustomAttributes()));
+            Assert.Empty(Ownership(current.Reader, handle.GetCustomAttributes()));
+            Assert.Equal(WebSocketNamespace + ".WEB_SOCKET_HANDLE",
+                Assert.Single(after["WebSocketDeleteHandle"].DecodeSignature(Signatures, null).ParameterTypes));
+            this.output.WriteLine($"WebSock/{architecture}: all thirteen floors/imports/native signatures and five Int32 enums " +
+                "remain exact; lifecycle facts move only from the native handle type to the two producer outputs.");
+        }
+
+        [MigrationFact]
+        public void WholeWebSocketHeaderHasOnlyItsExactLifecycleTransfersAndStaticCleanupMove()
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Types(control.Reader);
+            var after = Types(current.Reader);
+            Assert.Equal(37314, before.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                after.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            var changed = new List<string>();
+            var used = new HashSet<string>(StringComparer.Ordinal);
+            foreach (var entry in before)
+            {
+                string original = SnapshotType(control.Reader, entry.Value);
+                string actual = SnapshotType(current.Reader, after[entry.Key]);
+                Assert.Equal(entry.Value.GetFields().Select(handle =>
+                    control.Reader.GetString(control.Reader.GetFieldDefinition(handle).Name)),
+                    after[entry.Key].GetFields().Select(handle =>
+                        current.Reader.GetString(current.Reader.GetFieldDefinition(handle).Name)));
+                if (original != actual)
+                    changed.Add(entry.Key);
+                if (entry.Key == WebSocketNamespace + ".Apis#124")
+                {
+                    string[] expectedRows = SnapshotType(control.Reader, entry.Value,
+                        normalizeReviewedChanges: true, usedLifecycleSites: used).Split('\n');
+                    string[] actualRows = actual.Split('\n');
+                    Assert.Equal(expectedRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)),
+                        actualRows.TakeWhile(row => !row.StartsWith("M|", StringComparison.Ordinal)));
+                    var expectedMethods = MethodRows(expectedRows);
+                    var actualMethods = MethodRows(actualRows);
+                    Assert.Equal(WebSocketFunctions, expectedMethods.Keys);
+                    Assert.Equal(WebSocketFunctions.Where(name => name != "WebSocketDeleteHandle").Prepend("WebSocketDeleteHandle"),
+                        actualMethods.Keys);
+                    foreach (var method in expectedMethods)
+                        Assert.Equal(method.Value, actualMethods[method.Key]);
+                }
+                else if (entry.Key == WebSocketNamespace + ".WEB_SOCKET_HANDLE#124")
+                    Assert.Equal(SnapshotType(control.Reader, entry.Value,
+                        normalizeReviewedChanges: true, usedLifecycleSites: used), actual);
+                else
+                    Assert.True(original == actual, "Unowned physical change: " + entry.Key);
+            }
+            Assert.Equal(new[] { WebSocketNamespace + ".Apis#124", WebSocketNamespace + ".WEB_SOCKET_HANDLE#124" },
+                changed);
+            Assert.Equal(new[]
+            {
+                WebSocketNamespace + ".Apis.WebSocketCreateClientHandle::phWebSocket",
+                WebSocketNamespace + ".Apis.WebSocketCreateServerHandle::phWebSocket",
+                WebSocketNamespace + ".WEB_SOCKET_HANDLE",
+            }.OrderBy(value => value, StringComparer.Ordinal), used.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine("All 37,314 physical identities graded with exact case: only two producer lifecycle additions, " +
+                "the matching native handle-type removal, and the explicit static DeleteHandle declaration move; " +
+                "all other snapshots, layouts, native enum members and COM order remain strict.");
+        }
+
         internal static IEnumerable<(string Header, string[] Functions, string[] WithoutLastError)> AuthoredMonitorHeaderContracts()
         {
             yield return ("lowlevelmonitorconfigurationapi.h", new[]
@@ -1778,21 +1898,6 @@ namespace Win32MetadataScraperTests
                 "exact FileHistory producer/type lifecycle relocation and approved ClosePipe/OpenPipe physical order are distinct; " +
                 "the per-architecture FileHistory gate checks every affected floor/signature/ownership/header fact.");
 
-            static Dictionary<string, List<string>> MethodRows(string[] rows)
-            {
-                var result = new Dictionary<string, List<string>>(StringComparer.Ordinal);
-                List<string> method = null;
-                foreach (string row in rows)
-                {
-                    if (row.StartsWith("M|", StringComparison.Ordinal))
-                    {
-                        method = new List<string>();
-                        result.Add(row.Split('|')[1], method);
-                    }
-                    method?.Add(row);
-                }
-                return result;
-            }
         }
 
         [MigrationFact]
@@ -3812,6 +3917,22 @@ namespace Win32MetadataScraperTests
                 .Last(row => row.StartsWith("M|", StringComparison.Ordinal)));
             Assert.Equal("P|2|pValue|Out||", before[index]);
             Assert.Equal("P|2|pValue|Out||" + MetadataNamespace + ".RetValAttribute:01000000", after[index]);
+        }
+
+        private static Dictionary<string, List<string>> MethodRows(IEnumerable<string> rows)
+        {
+            var result = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+            List<string> method = null;
+            foreach (string row in rows)
+            {
+                if (row.StartsWith("M|", StringComparison.Ordinal))
+                {
+                    method = new List<string>();
+                    result.Add(row.Split('|')[1], method);
+                }
+                method?.Add(row);
+            }
+            return result;
         }
 
         private static string[] Ownership(MetadataReader reader, CustomAttributeHandleCollection attributes)
