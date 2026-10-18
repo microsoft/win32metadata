@@ -3507,6 +3507,12 @@
       "sourceSha256": "44FE9E93F9353C08E1898DB6705CC3BCBA0656D07306D83789AB0196AB6664F8",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\cluadmex.idl",
       "sdkSha256": "A959A87AEB3F55EFE4B6470F65EF0E5DADF4F53BA49690612F4AE1E71BB1DFF3"
+    },
+    {
+      "path": "um\\mpegtype.h",
+      "sourceSha256": "D9754B14386E6B31A2FED882B7D1ADF7EBA6DF0D8C8545DE50D1A0EAA72DDD7D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mpegtype.h",
+      "sdkSha256": "D9754B14386E6B31A2FED882B7D1ADF7EBA6DF0D8C8545DE50D1A0EAA72DDD7D"
     }
   ],
   "midl": {
@@ -6839,6 +6845,7 @@
     "um\\spatialaudioclient.idl.patch",
     "um\\vsmgmt.idl.patch",
     "um\\vsprov.idl.patch",
-    "um\\cluadmex.idl.patch"
+    "um\\cluadmex.idl.patch",
+    "um\\mpegtype.h.patch"
   ]
 }

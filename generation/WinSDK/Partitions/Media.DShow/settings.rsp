@@ -51,3 +51,5 @@ Windows.Win32.Media.DirectShow
 _DVD_REGION
 --std
 c++20
+--config
+parse-win32-annotations
