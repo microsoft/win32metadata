@@ -1,5 +1,16 @@
 --requiredNamespaceForName
 WIN32_ERROR=Windows.Win32.Foundation
+# Source-owned logical groups retain their established projection namespaces.
+ATF_FLAGS=Windows.Win32.System.SystemServices
+COPYFILE2_V2_FLAGS=Windows.Win32.Storage.FileSystem
+DFC_TYPE=Windows.Win32.Graphics.Gdi
+DFCS_STATE=Windows.Win32.Graphics.Gdi
+EXIT_WINDOWS_FLAGS=Windows.Win32.System.Shutdown
+FILE_DISPOSITION_INFO_EX_FLAGS=Windows.Win32.Storage.FileSystem
+REDRAW_WINDOW_FLAGS=Windows.Win32.Graphics.Gdi
+ROT_FLAGS=Windows.Win32.System.Com
+SYMBOLIC_LINK_FLAGS=Windows.Win32.Storage.FileSystem
+WORD_WHEEL_OPEN_FLAGS=Windows.Win32.System.SystemServices
 # region amvideo.h
 VIDEOINFOHEADER=Windows.Win32.Media.MediaFoundation
 MPEG1VIDEOINFO=Windows.Win32.Media.MediaFoundation

@@ -3281,6 +3281,23 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("__MIDL___MIDL_itf_dbgprop_0000_0000_0001=DBGPROP_ATTRIB_FLAGS", settings);
         }
 
+        [Theory]
+        [InlineData("ATF_FLAGS", "Windows.Win32.System.SystemServices")]
+        [InlineData("COPYFILE2_V2_FLAGS", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("DFC_TYPE", "Windows.Win32.Graphics.Gdi")]
+        [InlineData("DFCS_STATE", "Windows.Win32.Graphics.Gdi")]
+        [InlineData("EXIT_WINDOWS_FLAGS", "Windows.Win32.System.Shutdown")]
+        [InlineData("FILE_DISPOSITION_INFO_EX_FLAGS", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("REDRAW_WINDOW_FLAGS", "Windows.Win32.Graphics.Gdi")]
+        [InlineData("ROT_FLAGS", "Windows.Win32.System.Com")]
+        [InlineData("SYMBOLIC_LINK_FLAGS", "Windows.Win32.Storage.FileSystem")]
+        [InlineData("WORD_WHEEL_OPEN_FLAGS", "Windows.Win32.System.SystemServices")]
+        public void SourceOwnedLogicalGroupsRetainExistingNamespaces(string name, string ns)
+        {
+            string path = Path.Combine(RepositoryRoot, "generation", "WinSDK", "requiredNamespacesForNames.rsp");
+            Assert.Single(File.ReadAllLines(path).Where(line => line == name + "=" + ns));
+        }
+
         [Fact]
         public void CertificateBackupGroupingIsExcludedFromItsMidlImport()
         {

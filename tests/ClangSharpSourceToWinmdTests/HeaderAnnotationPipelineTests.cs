@@ -239,6 +239,28 @@ namespace Test { public class Apis {
             Assert.AreEqual(1, tree.GetRoot().DescendantNodes().OfType<AttributeSyntax>().Count(attribute => attribute.Name.ToString().Contains("Flags")));
         }
 
+        [TestMethod]
+        public void SourceOwnedGroupKeepsItsNamespaceWithoutAnAuthoredUse()
+        {
+            var tree = CSharpSyntaxTree.ParseText(@"
+namespace Windows.Win32.System.SystemServices {
+[global::System.Flags] public enum ROT_FLAGS : uint {
+    ROTFLAGS_REGISTRATIONKEEPSALIVE = 1,
+    ROTFLAGS_ALLOWANYCLIENT = 2
+}}", path: "winnt.header-types.cs");
+            var moved = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, new Dictionary<string, string>
+            {
+                ["ROT_FLAGS"] = "Windows.Win32.System.Com",
+            });
+            var group = moved.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>().Single();
+            Assert.AreEqual("Windows.Win32.System.Com",
+                group.Ancestors().OfType<NamespaceDeclarationSyntax>().Single().Name.ToString());
+            Assert.AreEqual("uint", group.BaseList!.Types.Single().Type.ToString());
+            Assert.AreEqual("global::System.Flags", group.AttributeLists.Single().Attributes.Single().Name.ToString());
+            CollectionAssert.AreEqual(new[] { "ROTFLAGS_REGISTRATIONKEEPSALIVE=1", "ROTFLAGS_ALLOWANYCLIENT=2" },
+                group.Members.Select(member => member.Identifier.ValueText + "=" + member.EqualsValue!.Value).ToArray());
+        }
+
         [DataTestMethod]
         [DataRow("static string Text = \"x\";")]
         [DataRow("static readonly global::System.Guid Id = new global::System.Guid(\"00000000-0000-0000-0000-000000000000\");")]
