@@ -159,10 +159,16 @@ jobs:
               const diffLines = diff.split(/\r?\n/);
               const additions = diffLines.filter(line => /^\+[^+]/.test(line)).length;
               const deletions = diffLines.filter(line => /^-[^-]/.test(line)).length;
-              const longestBacktickRun = Math.max(0, ...Array.from(diff.matchAll(/`+/g), match => match[0].length));
-              const fence = '`'.repeat(Math.max(3, longestBacktickRun + 1));
+              const maxCommentLength = 65536;
+              const truncationNotice = `\n\n> Diff truncated to fit this comment. Download the complete \`api-diff.patch\` from the [api-diff artifact](${runUrl}#artifacts).`;
+              const renderComment = (preview, notice = '') => {
+                let longestBacktickRun = 0;
+                for (const match of preview.matchAll(/`+/g)) {
+                  longestBacktickRun = Math.max(longestBacktickRun, match[0].length);
+                }
+                const fence = '`'.repeat(Math.max(3, longestBacktickRun + 1));
 
-              body = `${marker}
+                return `${marker}
             ## 📋 API Surface Diff
 
             **+${additions} additions / -${deletions} deletions** vs main branch ([full validation run](${runUrl}))
@@ -171,12 +177,19 @@ jobs:
             <summary>Click to expand API diff</summary>
 
             ${fence}diff
-            ${diff}
+            ${preview}
             ${fence}
 
-            </details>
+            </details>${notice}
 
             > This comment is automatically updated on each push.`;
+              };
+              body = renderComment(diff);
+              if (body.length > maxCommentLength) {
+                // Reserve space for the wrapper, both fences, and the truncation notice.
+                const previewLength = Math.max(0, maxCommentLength - (body.length - diff.length) - truncationNotice.length);
+                body = renderComment(diff.slice(0, previewLength), truncationNotice);
+              }
             }
 
             const comments = await github.paginate(github.rest.issues.listComments, {

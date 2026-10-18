@@ -1,15 +1,24 @@
 const assert = require('node:assert/strict');
-const { readFileSync } = require('node:fs');
+const { execFileSync } = require('node:child_process');
+const { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } = require('node:fs');
+const { tmpdir } = require('node:os');
 const path = require('node:path');
 const { test } = require('node:test');
 
 const workflow = readFileSync(path.join(__dirname, '..', 'workflows', 'pr-api-diff-comment.yml'), 'utf8')
   .replace(/\r\n/g, '\n');
-const steps = new Map(workflow.split(/^      - name: /m).slice(1).map(block => {
-  const endOfName = block.indexOf('\n');
-  return [block.slice(0, endOfName), block.slice(endOfName + 1)];
-}));
+const validationWorkflow = readFileSync(path.join(__dirname, '..', 'workflows', 'pr-validation.yml'), 'utf8')
+  .replace(/\r\n/g, '\n');
+const steps = workflowSteps(workflow);
+const validationSteps = workflowSteps(validationWorkflow);
 const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
+
+function workflowSteps(source) {
+  return new Map(source.split(/^      - name: /m).slice(1).map(block => {
+    const endOfName = block.indexOf('\n');
+    return [block.slice(0, endOfName), block.slice(endOfName + 1)];
+  }));
+}
 
 function script(name) {
   const step = steps.get(name);
@@ -23,6 +32,14 @@ function script(name) {
 
 const checkArtifact = script('Check API diff artifact');
 const postComment = script('Post API diff comment');
+const oversizedPatch = [
+  'diff --git a/bin/baseline.apidump.cs b/bin/current.apidump.cs',
+  '--- a/bin/baseline.apidump.cs',
+  '+++ b/bin/current.apidump.cs',
+  '@@ -1,4000 +1,8000 @@',
+  ...Array.from({ length: 4000 }, (_, index) => `-public const int OldValue${index} = ${index};`),
+  ...Array.from({ length: 8000 }, (_, index) => `+public const int NewValue${index} = ${index};`)
+].join('\r\n') + '\r\n';
 
 function fixture(documentationOnly = false) {
   return {
@@ -145,6 +162,60 @@ test('download and comment both require the preflight output', () => {
   assert.doesNotMatch(workflow, /uses: actions\/checkout/);
 });
 
+test('both artifact uploads still include the generated patch', () => {
+  const upload = validationSteps.get('Upload API diff');
+  assert.match(upload, /^          name: api-diff$/m);
+  assert.match(upload, /^          path: bin\/api-diff\.patch$/m);
+  const winmdUpload = validationSteps.get('Upload winmd and API dump');
+  assert.match(winmdUpload, /^          name: winmd$/m);
+  for (const file of ['Windows.Win32.winmd', 'current.apidump.cs', 'baseline.apidump.cs', 'api-diff.patch']) {
+    assert.ok(winmdUpload.includes(`            bin/${file}\n`));
+  }
+});
+
+for (const [name, patch, expectedOutputs] of [
+  ['an oversized diff', oversizedPatch, { has_diff: 'true', additions: '8000', deletions: '4000' }],
+  ['an empty diff', '', { has_diff: 'false' }]
+]) {
+  test(`the producer preserves ${name} byte-for-byte`, () => {
+    const directory = mkdtempSync(path.join(tmpdir(), 'win32metadata-api-diff-'));
+    try {
+      const baselineDirectory = path.join(directory, 'bin', 'baseline-artifact');
+      mkdirSync(baselineDirectory, { recursive: true });
+      writeFileSync(path.join(baselineDirectory, 'Windows.Win32.winmd'), '');
+      writeFileSync(path.join(directory, 'expected.patch'), patch);
+      const outputFile = path.join(directory, 'step-output.txt');
+      const step = validationSteps.get('Generate API surface diff');
+      const marker = '        run: |\n';
+      const start = step.indexOf(marker);
+      assert.notEqual(start, -1, 'Missing inline diff producer');
+      const producer = step.slice(start + marker.length).replace(/^ {10}/gm, '');
+      const commands = String.raw`
+        function dotnet { $global:LASTEXITCODE = 0 }
+        function cmd {
+          if ($args.Count -ne 2 -or $args[0] -ne '/c' -or
+              $args[1] -ne 'git diff --no-index --unified=3 bin\baseline.apidump.cs bin\current.apidump.cs > bin\api-diff.patch 2>&1') {
+            throw 'Unexpected diff command'
+          }
+          Copy-Item -LiteralPath expected.patch -Destination bin\api-diff.patch
+          $global:LASTEXITCODE = ${patch.length === 0 ? 0 : 1}
+        }
+      `;
+      execFileSync('pwsh', ['-NoLogo', '-NoProfile', '-NonInteractive', '-Command', commands + producer], {
+        cwd: directory,
+        env: { ...process.env, GITHUB_OUTPUT: outputFile },
+        windowsHide: true
+      });
+      const actual = readFileSync(path.join(directory, 'bin', 'api-diff.patch'));
+      assert.ok(actual.equals(Buffer.from(patch)), `Patch changed: expected ${Buffer.byteLength(patch)} bytes, got ${actual.length}`);
+      const outputs = Object.fromEntries(readFileSync(outputFile, 'utf8').trim().split(/\r?\n/).map(line => line.split('=')));
+      assert.deepEqual(outputs, expectedOutputs);
+    } finally {
+      rmSync(directory, { recursive: true, force: true });
+    }
+  });
+}
+
 test('recorded documentation-only execution skips the download and comment', async () => {
   const result = await runWorkflow(fixture(true));
   assert.deepEqual(result.outputs, { available: 'false' });
@@ -162,6 +233,46 @@ test('a current build artifact downloads and posts the actual diff', async () =>
   assert.equal(result.comments[0].issue_number, 42);
   assert.match(result.comments[0].body, /\+1 additions \/ -1 deletions/);
   assert.match(result.comments[0].body, /\+added\n-removed/);
+  assert.doesNotMatch(result.comments[0].body, /Diff truncated/);
+});
+
+test('an oversized diff retains full statistics and links to the complete artifact', async () => {
+  const data = fixture();
+  data.patch = oversizedPatch;
+  const result = await runWorkflow(data);
+  const body = result.comments[0].body;
+  assert.match(body, /\+8000 additions \/ -4000 deletions/);
+  assert.ok(body.includes('Diff truncated'));
+  assert.ok(body.includes(`[api-diff artifact](${data.run.html_url}#artifacts)`));
+  assert.ok(body.length <= 65536, `Comment is ${body.length} characters`);
+  assert.ok(!body.includes('+public const int NewValue7999 = 7999;'));
+  assert.equal(data.patch, oversizedPatch);
+});
+
+for (const [name, patch] of [
+  ['wrapper and truncation notice', '+' + 'x'.repeat(65500)],
+  ['long Markdown fences', '+' + '`'.repeat(34000) + '\n'],
+  ['many backtick runs', '+`value`\n'.repeat(70000)]
+]) {
+  test(`the complete comment fits the limit including ${name}`, async () => {
+    const data = fixture();
+    data.patch = patch;
+    const result = await runWorkflow(data);
+    const body = result.comments[0].body;
+    assert.ok(body.length <= 65536, `Comment is ${body.length} characters`);
+    assert.ok(body.includes('Diff truncated'));
+    assert.ok(body.startsWith('<!-- win32metadata-api-diff -->'));
+    assert.match(body, /<\/details>\n/);
+    assert.ok(body.endsWith('> This comment is automatically updated on each push.'));
+  });
+}
+
+test('backticks in an untruncated diff remain inside its Markdown fence', async () => {
+  const data = fixture();
+  data.patch = '+```embedded fence```\n';
+  const result = await runWorkflow(data);
+  assert.ok(result.comments[0].body.includes('````diff\n' + data.patch + '\n````'));
+  assert.doesNotMatch(result.comments[0].body, /Diff truncated/);
 });
 
 test('an empty actual patch still posts no API differences', async () => {
