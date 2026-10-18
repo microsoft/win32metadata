@@ -1993,8 +1993,6 @@ SetPrinterDataW::pValueName=[Const]
 FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
-# Changes to make oledb.h functions consistent with old annotations
-IRowsetKeys::ListKeys::prgColumns=[-In][NativeArrayInfo(CountParamIndex=0)]
 FwpmEngineOpen0::serverName=[Reserved]
 FwpmCalloutAdd0::engineHandle=FWPM_ENGINE_HANDLE
 FwpmCalloutCreateEnumHandle0::engineHandle=FWPM_ENGINE_HANDLE

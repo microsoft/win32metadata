@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Runtime.Loader;
@@ -16,6 +17,102 @@ namespace Win32MetadataScraperTests
 {
     public class NonfloorIdlMigrationTests
     {
+        [NonfloorIdlSourceTheory("SDK_NONFLOOR_ROWSET_RECORD_ROOT", "SDK_BULK_NATIVE_OBSERVATIONS")]
+        [InlineData("x86", 4)]
+        [InlineData("x64", 8)]
+        [InlineData("arm64", 8)]
+        public void ActualReturnedBufferRecordReachesPhysicalWinmdWithoutLegacyOverlays(string architecture, int nativeOrdinalBytes)
+        {
+            string frozen = Path.Combine(Environment.GetEnvironmentVariable("SDK_NONFLOOR_ROWSET_RECORD_ROOT"),
+                "bulk-idl-nonfloor-rowsetkeys-failure-" + architecture + ".cs");
+            string source = File.ReadAllText(frozen);
+            var tree = CSharpSyntaxTree.ParseText(source);
+            var record = Assert.Single(tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>()
+                .Where(value => value.Identifier.ValueText == "IRowsetKeys"));
+            var method = record.Members.OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == "ListKeys");
+            string[] originalTypes = method.ParameterList.Parameters.Select(value => value.Type.ToString()).ToArray();
+            Assert.Equal(new[] { "UIntPtr*", "UIntPtr**" }, originalTypes);
+            Assert.Equal(new[] { "DBORDINAL *", "DBORDINAL **" }, method.ParameterList.Parameters.Select(parameter =>
+                Assert.IsType<LiteralExpressionSyntax>(AssertAttribute(parameter, "NativeTypeName").ArgumentList.Arguments.Single().Expression).Token.ValueText));
+            var clean = MetadataSyntaxTreeCleaner.CleanSyntaxTree(tree,
+                new Dictionary<string, string>(), new Dictionary<string, Dictionary<string, string>>(), new HashSet<string>(),
+                new Dictionary<string, string>(), new Dictionary<string, string>(), new Dictionary<string, string>(),
+                new HashSet<string>(), new HashSet<string>(), frozen).GetRoot();
+            var columns = clean.DescendantNodes().OfType<MethodDeclarationSyntax>().Single(value => value.Identifier.ValueText == "ListKeys")
+                .ParameterList.Parameters.Single(value => value.Identifier.ValueText == "prgColumns");
+            AssertCount(columns, 0);
+            AssertAttribute(columns, "Out");
+            Assert.DoesNotContain(Attributes(columns), attribute => Name(attribute) == "In");
+
+            // The frozen diagnostic packet omitted only the native record's three outer attributes.
+            source = source.Replace("    public unsafe partial struct IRowsetKeys",
+                "    [Guid(\"0C733A12-2A1C-11CE-ADE5-00AA0044773D\")]\n" +
+                "    [NativeTypeName(\"struct IRowsetKeys : IUnknown\")]\n" +
+                "    [NativeInheritance(\"IUnknown\")]\n    public unsafe partial struct IRowsetKeys", StringComparison.Ordinal);
+            string directory = Path.Combine(Path.GetTempPath(), "nonfloor-rowset-" + Guid.NewGuid().ToString("N"));
+            try
+            {
+                Directory.CreateDirectory(Path.Combine(directory, architecture));
+                File.WriteAllText(Path.Combine(directory, architecture, "Actual.cs"), source);
+                var inherited = record.Members.OfType<MethodDeclarationSyntax>()
+                    .Where(value => new[] { "QueryInterface", "AddRef", "Release" }.Contains(value.Identifier.ValueText)).ToArray();
+                Assert.Equal(3, inherited.Length);
+                var vtable = Assert.Single(record.Members.OfType<FieldDeclarationSyntax>().Where(value =>
+                    value.Declaration.Variables.Single().Identifier.ValueText == "lpVtbl"));
+                var delegates = record.Members.OfType<DelegateDeclarationSyntax>()
+                    .Where(value => new[] { "_QueryInterface", "_AddRef", "_Release" }.Contains(value.Identifier.ValueText))
+                    .Select(value => value.ReplaceNodes(value.DescendantNodes().OfType<IdentifierNameSyntax>()
+                        .Where(name => name.Identifier.ValueText == "IRowsetKeys"),
+                        (_, _) => SyntaxFactory.IdentifierName("IUnknown"))).ToArray();
+                Assert.Equal(3, delegates.Length);
+                var body = SyntaxFactory.Block(SyntaxFactory.ThrowStatement(SyntaxFactory.ObjectCreationExpression(
+                    SyntaxFactory.IdentifierName("NotImplementedException")).WithArgumentList(SyntaxFactory.ArgumentList())));
+                string baseSource = "using System;\nusing System.Runtime.InteropServices;\nusing Windows.Win32.Foundation.Metadata;\n" +
+                    "namespace " + record.Ancestors().OfType<NamespaceDeclarationSyntax>().Single().Name + " {\n" +
+                    "[Guid(\"00000000-0000-0000-C000-000000000046\")] public unsafe partial struct IUnknown {\n" +
+                    vtable.ToFullString() + string.Join("\n", delegates.Select(value => value.ToFullString())) +
+                    string.Join("\n", inherited.Select(value => value.WithBody(body).NormalizeWhitespace().ToFullString())) + "\n}\n}";
+                File.WriteAllText(Path.Combine(directory, architecture, "IUnknown.cs"), baseSource);
+                using var image = HeaderAnnotationWinmdTests.Emit(directory, architecture, nativeFieldArrayInfo: false);
+                var reader = image.Reader;
+                var physical = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(value => reader.GetString(value.Name) == "IRowsetKeys")
+                    .GetMethods().Select(reader.GetMethodDefinition).Single(value => reader.GetString(value.Name) == "ListKeys");
+                var signature = physical.DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null);
+                Assert.Equal("Int32", signature.ReturnType);
+                Assert.Equal(originalTypes, signature.ParameterTypes);
+                var parameters = physical.GetParameters().Select(reader.GetParameter).ToArray();
+                Assert.Equal(ParameterAttributes.In | ParameterAttributes.Out,
+                    parameters.Single(value => reader.GetString(value.Name) == "pcColumns").Attributes);
+                var output = parameters.Single(value => reader.GetString(value.Name) == "prgColumns");
+                Assert.Equal(ParameterAttributes.Out, output.Attributes);
+                var attribute = reader.GetCustomAttribute(Assert.Single(output.GetCustomAttributes().Where(handle =>
+                    HeaderAnnotationWinmdTests.AttributeName(reader, handle) == "NativeArrayInfoAttribute")));
+                var blob = reader.GetBlobReader(attribute.Value);
+                Assert.Equal(1, blob.ReadUInt16());
+                Assert.Equal(1, blob.ReadUInt16());
+                Assert.Equal(0x53, blob.ReadByte());
+                Assert.Equal((byte)SignatureTypeCode.Int16, blob.ReadByte());
+                Assert.Equal("CountParamIndex", blob.ReadSerializedString());
+                Assert.Equal(0, blob.ReadInt16());
+                Assert.Equal(0, blob.RemainingBytes);
+                string observations = Environment.GetEnvironmentVariable("SDK_BULK_NATIVE_OBSERVATIONS");
+                Directory.CreateDirectory(observations);
+                File.WriteAllText(Path.Combine(observations, "rowset-fixed-" + architecture + ".json"),
+                    JsonSerializer.Serialize(new
+                    {
+                        architecture, frozenActualRecord = frozen, nativeOrdinalBytes,
+                        nativeOrdinalMetadataType = "UIntPtr", originalTypes, physicalTypes = signature.ParameterTypes,
+                        countParamIndex = (short)0, outputFlags = output.Attributes.ToString(),
+                        outputArrayAttributes = 1, legacyOverlays = 0, nativeFieldArrayInfo = false,
+                    }, new JsonSerializerOptions { WriteIndented = true }));
+            }
+            finally
+            {
+                if (Directory.Exists(directory))
+                    Directory.Delete(directory, recursive: true);
+            }
+        }
+
         [NonfloorIdlSourceTheory("SDK_NONFLOOR_FRAGMENT_GENERATED_ROOT")]
         [InlineData("x86")]
         [InlineData("x64")]

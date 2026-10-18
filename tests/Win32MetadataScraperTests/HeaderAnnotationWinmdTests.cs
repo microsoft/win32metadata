@@ -2259,7 +2259,7 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
         private static MethodDefinition FindMethod(MetadataReader reader, string type, string name)
             => FindType(reader, type).GetMethods().Select(reader.GetMethodDefinition).Single(method => reader.GetString(method.Name) == name);
 
-        private static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
+        internal static string AttributeName(MetadataReader reader, CustomAttributeHandle handle)
         {
             var constructor = reader.GetCustomAttribute(handle).Constructor;
             var type = constructor.Kind == HandleKind.MethodDefinition
