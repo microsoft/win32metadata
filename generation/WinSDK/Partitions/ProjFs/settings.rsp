@@ -2,3 +2,5 @@
 <IncludeRoot>/um/projectedfslib.h
 --namespace
 Windows.Win32.Storage.ProjectedFileSystem
+--config
+parse-win32-annotations

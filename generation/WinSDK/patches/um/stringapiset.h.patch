@@ -1,0 +1,75 @@
+diff --git a/um/stringapiset.h b/um/stringapiset.h
+index c6ad9cf7..5e160490 100644
+--- a/um/stringapiset.h
++++ b/um/stringapiset.h
+@@ -27,6 +27,8 @@ extern "C" {
+ 
+ #if (WINVER >= 0x0600)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -42,6 +44,8 @@ CompareStringEx(
+     _Reserved_ LPARAM lParam
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -55,6 +59,7 @@ CompareStringOrdinal(
+ 
+ #endif //(WINVER >= 0x0600)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -71,6 +76,8 @@ CompareStringW(
+ #define CompareString  CompareStringW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -86,6 +93,8 @@ FoldStringW(
+ #define FoldString  FoldStringW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -101,6 +110,8 @@ GetStringTypeExW(
+ #define GetStringTypeEx  GetStringTypeExW
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -115,6 +126,8 @@ GetStringTypeW(
+ //  NLS Code Page Dependent APIs.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cbMultiByte == -1) && (cchWideChar != 0), _Post_equal_to_(_String_length_(lpWideCharStr)+1))
+@@ -129,6 +142,8 @@ MultiByteToWideChar(
+     _In_ int cchWideChar
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ _Success_(return != 0)
+          _When_((cchWideChar == -1) && (cbMultiByte != 0), _Post_equal_to_(_String_length_(lpMultiByteStr)+1))

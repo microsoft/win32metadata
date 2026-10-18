@@ -1,0 +1,116 @@
+diff --git a/um/lmshare.h b/um/lmshare.h
+index 50827309..19a92fd2 100644
+--- a/um/lmshare.h
++++ b/um/lmshare.h
+@@ -51,6 +51,7 @@ extern "C" {
+ // Function Prototypes - Share
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetShareAdd(
+@@ -63,6 +64,7 @@ NetShareAdd(
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -99,6 +101,7 @@ NetShareEnumSticky(
+     _Inout_opt_ LPDWORD resume_handle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -116,6 +119,7 @@ NetShareGetInfo(
+     LPBYTE *bufptr
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetShareSetInfo(
+@@ -134,6 +138,7 @@ NetShareSetInfo(
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetShareDel(
+@@ -150,6 +155,7 @@ NetShareDelSticky(
+     _Reserved_ DWORD reserved
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetShareCheck(
+@@ -158,6 +164,7 @@ NetShareCheck(
+     _Out_ LPDWORD type
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetShareDelEx(
+@@ -412,6 +419,7 @@ typedef struct _SERVER_ALIAS_INFO_0 {
+ //
+ // Function Prototypes Session
+ //
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -432,6 +440,7 @@ NetSessionEnum(
+     _Inout_opt_ LPDWORD resume_handle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetSessionDel(
+@@ -440,6 +449,7 @@ NetSessionDel(
+     _In_opt_ LMSTR username
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -528,6 +538,7 @@ typedef struct _SESSION_INFO_502 {
+ // Function Prototypes - CONNECTION
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0  || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -575,6 +586,7 @@ typedef struct _CONNECTION_INFO_1 {
+ // Function Prototypes - FILE
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetFileClose(
+@@ -582,6 +594,7 @@ NetFileClose(
+     _In_ DWORD fileid
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -599,6 +612,7 @@ NetFileEnum(
+     _Inout_opt_ PDWORD_PTR resume_handle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Check_return_
+ _Success_( return == 0)
+ NET_API_STATUS NET_API_FUNCTION

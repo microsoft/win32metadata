@@ -1,0 +1,76 @@
+diff --git a/um/threadpoollegacyapiset.h b/um/threadpoollegacyapiset.h
+index f0b98656..fd871390 100644
+--- a/um/threadpoollegacyapiset.h
++++ b/um/threadpoollegacyapiset.h
+@@ -29,6 +29,8 @@ extern "C" {
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -38,6 +40,8 @@ QueueUserWorkItem(
+     _In_ ULONG Flags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -53,6 +57,8 @@ UnregisterWaitEx(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ HANDLE
+@@ -61,6 +67,8 @@ CreateTimerQueue(
+     VOID
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -74,6 +82,8 @@ CreateTimerQueueTimer(
+     _In_ ULONG Flags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -85,6 +95,8 @@ ChangeTimerQueueTimer(
+     _In_ ULONG Period
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -95,6 +107,8 @@ DeleteTimerQueueTimer(
+     _In_opt_ HANDLE CompletionEvent
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL
+@@ -103,6 +117,8 @@ DeleteTimerQueue(
+     _In_ HANDLE TimerQueue
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Must_inspect_result_
+ BOOL

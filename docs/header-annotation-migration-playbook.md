@@ -1798,6 +1798,30 @@ scrape uses one consistent private native recipe. Complete image/API
 grading, production CI and consumer qualification remain central gates;
 this source commit does not claim those outcomes.
 
+#### Reserved native continuation
+
+The next 25 reserved originals produce **21 additional header patches**.
+Exactly 285 SupportedOS rows and 80 SetLastError rows move to 365 direct
+source placements. All 21 native files restore byte-for-byte after removing
+only those marker lines; no signature, macro value, enum or native storage
+is changed.
+
+`d2d1helper.h`, `d2d1_1.h`, `d2d1_1helper.h` and
+`traceloggingprovider.h` have no safe authored prefix and are not counted.
+The pass retains 83 availability facts for ambiguous identities,
+macro/non-global declarations and unbound declarations or references.
+None receives a partial source annotation. The complete queue adds no
+further OS/error references outside this report. Another 101 configuration
+references remain unchanged: 50 direct enum uses, four synthetic groups,
+30 explicit members, nine declaration overrides, one enum association,
+five invalid-handle values and two cleanup APIs.
+
+In particular, the three Foundation error-group uses remain explicit
+cleanup debt even though `errhandlingapi.h` now has availability/error
+prefixes. This batch does not silently change their association identity
+or the temporary RPC value/type disposition above. Complete SDK/API/CI
+and consumer qualification remain separate central gates.
+
 ### Third original-IDL batch: actual preparation and native-output controls
 
 The next bounded batch uses only the already-authored original

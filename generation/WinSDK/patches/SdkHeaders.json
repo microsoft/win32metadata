@@ -2157,6 +2157,132 @@
       "sourceSha256": "BDE9900E66673ADA4F8A31C1CE628A5D2C7400060AE2B3D0DB384495DE5806DD",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\fontsub.h",
       "sdkSha256": "BDE9900E66673ADA4F8A31C1CE628A5D2C7400060AE2B3D0DB384495DE5806DD"
+    },
+    {
+      "path": "um\\lmshare.h",
+      "sourceSha256": "404D314AE6BCDF518ABC5AB0511E8704B5EBEB190C8A12B6917A426951F1319E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmshare.h",
+      "sdkSha256": "404D314AE6BCDF518ABC5AB0511E8704B5EBEB190C8A12B6917A426951F1319E"
+    },
+    {
+      "path": "um\\tdh.h",
+      "sourceSha256": "E6150F4BD7AC46F6A6EAA91B6DAFBB6268D7B9A6F115DD9C4C60B42B1862BC2B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tdh.h",
+      "sdkSha256": "E6150F4BD7AC46F6A6EAA91B6DAFBB6268D7B9A6F115DD9C4C60B42B1862BC2B"
+    },
+    {
+      "path": "um\\interactioncontext.h",
+      "sourceSha256": "9EC8F08F2C0DC822CFFC28F73147E71F379A56C9BBEEABE22A93F32DDA60E923",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\interactioncontext.h",
+      "sdkSha256": "9EC8F08F2C0DC822CFFC28F73147E71F379A56C9BBEEABE22A93F32DDA60E923"
+    },
+    {
+      "path": "um\\mssip.h",
+      "sourceSha256": "6B5A0E5C295E97DBEAA999DCF2A006D7613A50B41D1EBDA8137AAD3F56643E91",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mssip.h",
+      "sdkSha256": "6B5A0E5C295E97DBEAA999DCF2A006D7613A50B41D1EBDA8137AAD3F56643E91"
+    },
+    {
+      "path": "um\\winsafer.h",
+      "sourceSha256": "0B5303CF534EF2E58ADCDF95ED63B3D177ED5980569ADFBD22003657DE00E967",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsafer.h",
+      "sdkSha256": "0B5303CF534EF2E58ADCDF95ED63B3D177ED5980569ADFBD22003657DE00E967"
+    },
+    {
+      "path": "um\\certbcli.h",
+      "sourceSha256": "CDBA65B104A50A63B5AB01CACF1C2FAE54F5B5E9E42D2AC3FF5FF480E2371EE1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\certbcli.h",
+      "sdkSha256": "CDBA65B104A50A63B5AB01CACF1C2FAE54F5B5E9E42D2AC3FF5FF480E2371EE1"
+    },
+    {
+      "path": "um\\errhandlingapi.h",
+      "sourceSha256": "B73CCCCE6DAC8CE02C6A399862EC2A6E22FE27A4D09874D86EC2BE3BD5D17FBF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\errhandlingapi.h",
+      "sdkSha256": "B73CCCCE6DAC8CE02C6A399862EC2A6E22FE27A4D09874D86EC2BE3BD5D17FBF"
+    },
+    {
+      "path": "um\\namedpipeapi.h",
+      "sourceSha256": "37062EBA19E35B391CF050519C9403E19C6782663EA644FF38B2B5EB71DFCE6B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\namedpipeapi.h",
+      "sdkSha256": "37062EBA19E35B391CF050519C9403E19C6782663EA644FF38B2B5EB71DFCE6B"
+    },
+    {
+      "path": "um\\winwlx.h",
+      "sourceSha256": "E28AA4BEFFC7C74FEAF8595A7FBE4BCBBC365FAB02C17F836D9E637CA2928B66",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winwlx.h",
+      "sdkSha256": "E28AA4BEFFC7C74FEAF8595A7FBE4BCBBC365FAB02C17F836D9E637CA2928B66"
+    },
+    {
+      "path": "um\\clfsmgmtw32.h",
+      "sourceSha256": "F2C31E9CB820F014BDBC82DB2B972489BCCA277EAB4B47B97A639A6D5C4536C6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\clfsmgmtw32.h",
+      "sdkSha256": "F2C31E9CB820F014BDBC82DB2B972489BCCA277EAB4B47B97A639A6D5C4536C6"
+    },
+    {
+      "path": "um\\lmdfs.h",
+      "sourceSha256": "99C514967490A773B07E1D1BBFCFE6A4154E9F88052B62DDF8E43B6BBE303D06",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmdfs.h",
+      "sdkSha256": "99C514967490A773B07E1D1BBFCFE6A4154E9F88052B62DDF8E43B6BBE303D06"
+    },
+    {
+      "path": "um\\ioapiset.h",
+      "sourceSha256": "7C3F659F98B3F1748A314BD64106583D01649333E0419B66232B4F64B3F85B0C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ioapiset.h",
+      "sdkSha256": "7C3F659F98B3F1748A314BD64106583D01649333E0419B66232B4F64B3F85B0C"
+    },
+    {
+      "path": "um\\projectedfslib.h",
+      "sourceSha256": "F02E815060C49A455410085EED2EEE75364DFA1E3A2A434BBCD7C362C6F94A80",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\projectedfslib.h",
+      "sdkSha256": "F02E815060C49A455410085EED2EEE75364DFA1E3A2A434BBCD7C362C6F94A80"
+    },
+    {
+      "path": "um\\stringapiset.h",
+      "sourceSha256": "624C82FB73517A3829F3766A50A0235E2F9A51CB4BDA95A0C39981E39FA4D42D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\stringapiset.h",
+      "sdkSha256": "624C82FB73517A3829F3766A50A0235E2F9A51CB4BDA95A0C39981E39FA4D42D"
+    },
+    {
+      "path": "winrt\\winstring.h",
+      "sourceSha256": "A3685255B11F4F58C123FD45C5AA4BE3526A9E9E8F939C3A5C80B859F48A7B43",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\winstring.h",
+      "sdkSha256": "A3685255B11F4F58C123FD45C5AA4BE3526A9E9E8F939C3A5C80B859F48A7B43"
+    },
+    {
+      "path": "um\\wdstpdi.h",
+      "sourceSha256": "AD502AC24284F1DF9405DA8E5DF829DD5AD6B6F2C6AD3C3187120DC23CD2010C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wdstpdi.h",
+      "sdkSha256": "AD502AC24284F1DF9405DA8E5DF829DD5AD6B6F2C6AD3C3187120DC23CD2010C"
+    },
+    {
+      "path": "shared\\sddl.h",
+      "sourceSha256": "69DBF70F61188AEAB9A6BE1BBFB291E10D54299FA41BAA3FD26362E9CDF793B2",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\sddl.h",
+      "sdkSha256": "69DBF70F61188AEAB9A6BE1BBFB291E10D54299FA41BAA3FD26362E9CDF793B2"
+    },
+    {
+      "path": "um\\gpedit.h",
+      "sourceSha256": "55965FB97A3DD1F08ABFE0F63886A53E5FABC628C7B4B50728E7B4C013BE3A1C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\gpedit.h",
+      "sdkSha256": "55965FB97A3DD1F08ABFE0F63886A53E5FABC628C7B4B50728E7B4C013BE3A1C"
+    },
+    {
+      "path": "um\\jobapi2.h",
+      "sourceSha256": "A8F9591DC2B0BD249D03150B70ABD47C0068C6EDA2A1D74D24BC8964BCD68549",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\jobapi2.h",
+      "sdkSha256": "A8F9591DC2B0BD249D03150B70ABD47C0068C6EDA2A1D74D24BC8964BCD68549"
+    },
+    {
+      "path": "um\\threadpoollegacyapiset.h",
+      "sourceSha256": "87C1630ABF7DC4ED7978F2C4DBACF418F6BCF94CB946E277CB7250770BD44200",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\threadpoollegacyapiset.h",
+      "sdkSha256": "87C1630ABF7DC4ED7978F2C4DBACF418F6BCF94CB946E277CB7250770BD44200"
+    },
+    {
+      "path": "um\\srrestoreptapi.h",
+      "sourceSha256": "F42804B971E21BC34ACF7D1E63F6A7BF9777094696A75732753B5E73DDAAAC5F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\srrestoreptapi.h",
+      "sdkSha256": "F42804B971E21BC34ACF7D1E63F6A7BF9777094696A75732753B5E73DDAAAC5F"
     }
   ],
   "midl": {
@@ -3067,7 +3193,16 @@
     "Variant",
     "DlgBox",
     "DirectComp",
-    "Enclave"
+    "Enclave",
+    "Input_IntContext",
+    "Security.Cryptography.Sip",
+    "Security.AppLocker",
+    "Pipes",
+    "Security.WinWlx",
+    "Dfs",
+    "IO",
+    "ProjFs",
+    "Sr"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -3394,6 +3529,27 @@
     "um\\shellscalingapi.h.patch",
     "um\\subauth.h.patch",
     "um\\fibersapi.h.patch",
-    "um\\fontsub.h.patch"
+    "um\\fontsub.h.patch",
+    "um\\lmshare.h.patch",
+    "um\\tdh.h.patch",
+    "um\\interactioncontext.h.patch",
+    "um\\mssip.h.patch",
+    "um\\winsafer.h.patch",
+    "um\\certbcli.h.patch",
+    "um\\errhandlingapi.h.patch",
+    "um\\namedpipeapi.h.patch",
+    "um\\winwlx.h.patch",
+    "um\\clfsmgmtw32.h.patch",
+    "um\\lmdfs.h.patch",
+    "um\\ioapiset.h.patch",
+    "um\\projectedfslib.h.patch",
+    "um\\stringapiset.h.patch",
+    "winrt\\winstring.h.patch",
+    "um\\wdstpdi.h.patch",
+    "shared\\sddl.h.patch",
+    "um\\gpedit.h.patch",
+    "um\\jobapi2.h.patch",
+    "um\\threadpoollegacyapiset.h.patch",
+    "um\\srrestoreptapi.h.patch"
   ]
 }

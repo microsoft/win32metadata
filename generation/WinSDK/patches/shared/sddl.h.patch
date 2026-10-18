@@ -1,0 +1,76 @@
+diff --git a/shared/sddl.h b/shared/sddl.h
+index ac2b84be..e0e2b68b 100644
+--- a/shared/sddl.h
++++ b/shared/sddl.h
+@@ -263,6 +263,8 @@ extern "C" {
+ #if !defined(_NTDDK_)
+ 
+ #if (_WIN32_WINNT >= 0x0500)
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -271,6 +273,8 @@ ConvertSidToStringSidA(
+     _Outptr_ LPSTR  *StringSid
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -285,6 +289,8 @@ ConvertSidToStringSidW(
+ #define ConvertSidToStringSid  ConvertSidToStringSidA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -293,6 +299,8 @@ ConvertStringSidToSidA(
+     _Outptr_ PSID   *Sid
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -307,6 +315,8 @@ ConvertStringSidToSidW(
+ #define ConvertStringSidToSid  ConvertStringSidToSidA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -317,6 +327,8 @@ ConvertStringSecurityDescriptorToSecurityDescriptorA(
+     _Out_opt_ PULONG  SecurityDescriptorSize
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -333,6 +345,8 @@ ConvertStringSecurityDescriptorToSecurityDescriptorW(
+ #define ConvertStringSecurityDescriptorToSecurityDescriptor  ConvertStringSecurityDescriptorToSecurityDescriptorA
+ #endif // !UNICODE
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI
+@@ -344,6 +358,8 @@ ConvertSecurityDescriptorToStringSecurityDescriptorA(
+     _Out_opt_ PULONG StringSecurityDescriptorLen
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ _Success_(return != FALSE)
+ BOOL
+ WINAPI

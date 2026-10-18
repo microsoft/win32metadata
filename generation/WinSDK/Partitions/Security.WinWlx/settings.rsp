@@ -8,3 +8,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/WinWlx.h
 --namespace
 Windows.Win32.Security.WinWlx
+--config
+parse-win32-annotations

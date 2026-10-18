@@ -8,3 +8,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/mssip.h
 --namespace
 Windows.Win32.Security.Cryptography.Sip
+--config
+parse-win32-annotations

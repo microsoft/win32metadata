@@ -1,0 +1,134 @@
+diff --git a/um/errhandlingapi.h b/um/errhandlingapi.h
+index 073a04f8..df4cf5bb 100644
+--- a/um/errhandlingapi.h
++++ b/um/errhandlingapi.h
+@@ -38,6 +38,7 @@ typedef PTOP_LEVEL_EXCEPTION_FILTER LPTOP_LEVEL_EXCEPTION_FILTER;
+ // Prototypes
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -54,6 +55,7 @@ RaiseException(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsXP_
+ __callback
+ WINBASEAPI
+ LONG
+@@ -68,6 +70,7 @@ UnhandledExceptionFilter(
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ LPTOP_LEVEL_EXCEPTION_FILTER
+ WINAPI
+@@ -77,6 +80,7 @@ SetUnhandledExceptionFilter(
+ 
+ #ifndef _M_CEE_PURE
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Check_return_
+ _Post_equals_last_error_
+@@ -88,6 +92,8 @@ GetLastError(
+ 
+ #endif
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -103,6 +109,7 @@ SetLastError(
+ 
+ #if (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -112,6 +119,7 @@ GetErrorMode(
+ 
+ #endif // (_WIN32_WINNT >= 0x0600)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ UINT
+ WINAPI
+@@ -127,6 +135,7 @@ SetErrorMode(
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ _Ret_maybenull_
+ PVOID
+@@ -136,6 +145,7 @@ AddVectoredExceptionHandler(
+     _In_ PVECTORED_EXCEPTION_HANDLER Handler
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ ULONG
+ WINAPI
+@@ -143,6 +153,7 @@ RemoveVectoredExceptionHandler(
+     _In_ PVOID Handle
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ _Ret_maybenull_
+ PVOID
+@@ -152,6 +163,7 @@ AddVectoredContinueHandler(
+     _In_ PVECTORED_EXCEPTION_HANDLER Handler
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ ULONG
+ WINAPI
+@@ -187,6 +199,7 @@ typedef VOID (WINAPI* PRESTORE_LAST_ERROR)(DWORD);
+ #pragma region Application Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -202,6 +215,7 @@ RaiseFailFastException(
+ #pragma region Desktop Family or OneCore Family or Games Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -210,6 +224,7 @@ FatalAppExitA(
+     _In_ LPCSTR lpMessageText
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINBASEAPI
+ VOID
+ WINAPI
+@@ -230,6 +245,7 @@ FatalAppExitW(
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ DWORD
+ WINAPI
+@@ -237,6 +253,8 @@ GetThreadErrorMode(
+     VOID
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows7_
+ WINBASEAPI
+ BOOL
+ WINAPI

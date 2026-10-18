@@ -1,0 +1,92 @@
+diff --git a/um/winsafer.h b/um/winsafer.h
+index 17c21ea4..52de7afd 100644
+--- a/um/winsafer.h
++++ b/um/winsafer.h
+@@ -619,6 +619,8 @@ typedef struct _SAFER_URLZONE_IDENTIFICATION
+ // enumeration operations.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetPolicyInformation(
+@@ -630,6 +632,8 @@ SaferGetPolicyInformation(
+     _Reserved_ LPVOID            lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetPolicyInformation(
+@@ -644,6 +648,8 @@ SaferSetPolicyInformation(
+ // Functions to open or close a handle to a Safer Level.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCreateLevel(
+@@ -654,12 +660,16 @@ SaferCreateLevel(
+     _Reserved_ LPVOID               lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferCloseLevel(
+     _In_ SAFER_LEVEL_HANDLE hLevelHandle
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferIdentifyLevel(
+@@ -669,6 +679,8 @@ SaferIdentifyLevel(
+     _In_opt_ LPVOID         lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferComputeTokenFromLevel(
+@@ -679,6 +691,8 @@ SaferComputeTokenFromLevel(
+     _Inout_opt_ LPVOID      lpReserved
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferGetLevelInformation(
+@@ -689,6 +703,8 @@ SaferGetLevelInformation(
+         _Out_ LPDWORD                           lpdwOutBufferSize
+         );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferSetLevelInformation(
+@@ -704,6 +720,8 @@ SaferSetLevelInformation(
+ // ShellExecute and cmd when a lower trust evaluation result occurs.
+ //
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferRecordEventLogEntry(
+@@ -713,6 +731,7 @@ SaferRecordEventLogEntry(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL WINAPI
+ SaferiIsExecutableFileType(

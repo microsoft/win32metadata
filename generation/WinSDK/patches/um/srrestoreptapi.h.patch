@@ -1,0 +1,28 @@
+diff --git a/um/srrestoreptapi.h b/um/srrestoreptapi.h
+index 531fcf46..b98c3f18 100644
+--- a/um/srrestoreptapi.h
++++ b/um/srrestoreptapi.h
+@@ -137,6 +137,7 @@ extern "C" {
+ //
+ // ERROR_ALREADY_EXISTS       If this is a nested restore point
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL __stdcall
+ SRSetRestorePointA(
+                   _In_ PRESTOREPOINTINFOA  pRestorePtSpec,// [in] Restore Point specification
+@@ -144,6 +145,7 @@ SRSetRestorePointA(
+                   );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL __stdcall
+ SRSetRestorePointW(
+                   _In_ PRESTOREPOINTINFOW pRestorePtSpec,
+@@ -157,6 +159,7 @@ SRSetRestorePointInternal(
+                   _In_ BOOL           fForceSurrogate
+                   );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD __stdcall
+ SRRemoveRestorePoint(DWORD dwRPNum);
+ 

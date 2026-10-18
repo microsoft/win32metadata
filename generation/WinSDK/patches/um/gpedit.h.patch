@@ -1,0 +1,52 @@
+diff --git a/um/gpedit.h b/um/gpedit.h
+index e1a069ea..42ab5b76 100644
+--- a/um/gpedit.h
++++ b/um/gpedit.h
+@@ -706,6 +706,7 @@ typedef IRSOPInformation *LPRSOPINFORMATION;
+ //
+ //=============================================================================
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI
+@@ -728,6 +729,7 @@ CreateGPOLink(
+ //
+ //=============================================================================
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI
+@@ -748,6 +750,7 @@ DeleteGPOLink(
+ //
+ //=============================================================================
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI
+@@ -796,6 +799,7 @@ typedef struct tag_GPOBROWSEINFO
+ } GPOBROWSEINFO, *LPGPOBROWSEINFO;
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI
+@@ -819,6 +823,7 @@ BrowseForGPO(
+ //
+ //=============================================================================
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI
+@@ -844,6 +849,7 @@ ImportRSoPData(
+ //
+ //=============================================================================
+ 
++_Win32_SupportedOS_WindowsVista_
+ GPEDITAPI
+ HRESULT
+ WINAPI

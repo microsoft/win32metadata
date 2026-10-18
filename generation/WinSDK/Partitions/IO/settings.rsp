@@ -2,4 +2,5 @@
 <IncludeRoot>/um/ioapiset.h
 --namespace
 Windows.Win32.System.IO
-
+--config
+parse-win32-annotations

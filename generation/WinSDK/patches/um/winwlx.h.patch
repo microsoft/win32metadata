@@ -1,0 +1,152 @@
+diff --git a/um/winwlx.h b/um/winwlx.h
+index f5be6127..52889fb2 100644
+--- a/um/winwlx.h
++++ b/um/winwlx.h
+@@ -594,6 +594,7 @@ typedef struct _WLX_CONSOLESWITCH_CREDENTIALS_INFO {
+ //                                                                    //
+ ////////////////////////////////////////////////////////////////////////
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxNegotiate(
+@@ -601,6 +602,7 @@ WlxNegotiate(
+     PDWORD                  pdwDllVersion
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxInitialize(
+@@ -611,6 +613,7 @@ WlxInitialize(
+     PVOID *                 pWlxContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ VOID
+ WINAPI
+ WlxDisplaySASNotice(
+@@ -618,6 +621,7 @@ WlxDisplaySASNotice(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ int
+ WINAPI
+ WlxLoggedOutSAS(
+@@ -631,6 +635,7 @@ WlxLoggedOutSAS(
+     PVOID *                 pProfile
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxActivateUserShell(
+@@ -640,6 +645,7 @@ WlxActivateUserShell(
+     PVOID                   pEnvironment
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ int
+ WINAPI
+ WlxLoggedOnSAS(
+@@ -648,12 +654,14 @@ WlxLoggedOnSAS(
+     PVOID                   pReserved
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ VOID
+ WINAPI
+ WlxDisplayLockedNotice(
+     PVOID                   pWlxContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ int
+ WINAPI
+ WlxWkstaLockedSAS(
+@@ -661,18 +669,21 @@ WlxWkstaLockedSAS(
+     DWORD                   dwSasType
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxIsLockOk(
+     PVOID                   pWlxContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxIsLogoffOk(
+     PVOID                   pWlxContext
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ VOID
+ WINAPI
+ WlxLogoff(
+@@ -680,6 +691,7 @@ WlxLogoff(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ VOID
+ WINAPI
+ WlxShutdown(
+@@ -691,12 +703,14 @@ WlxShutdown(
+ //
+ // NEW for version 1.1
+ //
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxScreenSaverNotify(
+     PVOID                   pWlxContext,
+     BOOL *                  pSecure);
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxStartApplication(
+@@ -710,6 +724,7 @@ WlxStartApplication(
+ // New for 1.3
+ //
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxNetworkProviderLoad(
+@@ -721,6 +736,7 @@ WlxNetworkProviderLoad(
+ #define STATUSMSG_OPTION_NOANIMATION    0x00000001
+ #define STATUSMSG_OPTION_SETFOREGROUND  0x00000002
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxDisplayStatusMessage(
+@@ -731,6 +747,7 @@ WlxDisplayStatusMessage(
+     PWSTR                   pMessage
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxGetStatusMessage(
+@@ -740,6 +757,7 @@ WlxGetStatusMessage(
+     DWORD                   dwBufferSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxRemoveStatusMessage(
+@@ -750,6 +768,7 @@ WlxRemoveStatusMessage(
+ //
+ // New for 1.4
+ //
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ WlxGetConsoleSwitchCredentials (
