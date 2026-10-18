@@ -885,11 +885,6 @@ TCP_OPT_FASTOPEN=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 TXF_ID=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 TXF_LOG_RECORD_BASE=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 TXF_LOG_RECORD_AFFECTED_FILE=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-# wdspxe.h
-PXE_DHCP_OPTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-PXE_DHCPV6_MESSAGE_HEADER=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-PXE_DHCPV6_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # shtypes.h
 # mxdc.h
 MXDC_PRINTTICKET_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]

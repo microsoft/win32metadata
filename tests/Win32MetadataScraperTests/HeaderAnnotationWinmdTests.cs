@@ -1215,10 +1215,6 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                 "OleCreatePropertyFrame::dwReserved=[Reserved]",
                 "OleCreatePropertyFrame::pvReserved=[Reserved]",
                 "OleLoadPicturePath::dwReserved=[Reserved]",
-                "PXE_DHCP_OPTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
-                "PXE_DHCPV6_MESSAGE_HEADER=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
-                "PXE_DHCPV6_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
-                "PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
             })
                 Assert.Contains(row, rows);
             foreach (string row in new[]
@@ -1226,6 +1222,10 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                 "SysAllocStringByteLen::psz=[NativeArrayInfo(CountParamIndex = 1)]",
                 "CoInitialize=[CanReturnMultipleSuccessValues]",
                 "CreateDataCache::ppv=[ComOutPtr]",
+                "PXE_DHCP_OPTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_MESSAGE_HEADER=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
+                "PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
             })
                 Assert.DoesNotContain(row, rows);
         }
