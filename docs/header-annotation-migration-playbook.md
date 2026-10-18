@@ -2878,3 +2878,124 @@ fresh corresponding qualification with the released generic
 the original `5A69415E...` hold is immutable. WNet/RPC's actual native
 branch/value/type questions remain independent. No push, PR/stack
 mutation or PR merge is performed.
+
+### Locally qualified original Wer and ErrorRep headers
+
+The coupled original `WerApi.h` and `ErrorRep.h` cohort is now locally
+qualified. The historical `5A69415E...` compiler failure above remains
+immutable; no generated source or native declaration was repaired around
+it. Released generic compiler source `5c226101...` was ordinarily merged
+at `a9f42a8d...`. Fresh stock source traversals, native controls and complete
+emissions actually ran at that merge head. The permanent exact acceptance
+tests ran at `7b7aa183...`; production `sources`, `generation`, `scripts`
+and the native-control source are literal across that test-only commit.
+These are separate execution identities, not relabeled later-head runs.
+
+The frozen baseline is the completed WebSock qualification `5AA8E16F...`,
+including its independently completed parent binding `2C82BFC5...`.
+Its exact `B204D3C8...` source archive retains the qualified Eap,
+DeviceQuery, Dwm and WebSock sources. Re-emitting that frozen context
+with the actual new `01DCFCBF...` emitter produces `B49A29BB...`,
+unfiltered API-zero against the qualified WebSock image. All 37,314
+type positions, 247,662 field sequences and 70,740 method/signature
+positions remain literal in that tooling control; it is not a fresh
+source traversal.
+
+The bounded recipe now has 51 selected headers, 46 literal production
+patches and 45 eligible partitions. Two fresh normal Wer header/constants
+traversals produce independently verified 3,443-header closures and
+389 normal outputs each. Of those outputs, 388 repeat literally; only
+the raw preparation-root-dependent namespace map differs. Both raw maps
+are retained unnormalized. The actual whole `Wer.cs` output is
+`80008CAF...`, including the existing stock ConstantsScraper headers and
+usings. Its extra 2,608-byte, 36-line prefix is retained explicitly;
+the entire historical `622298F4...` source is its exact literal suffix.
+Historical whole-source byte equality is not claimed. No normal source
+file was manually edited.
+
+All twelve fresh whole-owner C17/C++17, metadata off/on,
+x86/x64/arm64 cases pass. Each side retains 704 complete native facts,
+1,526 SAL occurrences and all 21 original macro values. The three
+metadata-only UInt32 typedef carriers appear only when enabled, with
+47 exact metadata occurrences enabled and zero disabled. The original
+native declarations, typedefs, parameter directions, layouts and SAL
+contracts remain unchanged. Thirty-five fixed declaration-local floors
+are retained; no new scope-based authoring or fresh all-architecture
+MIDL execution is claimed.
+
+The actual candidate `1869DB7A...` and repeat `08109440...` images each
+consume 831 inputs, including 824 C# files and 827 byte-literal unowned
+inputs from that latest WebSock context. Only the three whole normal
+Wer outputs, the old owned logical-group file and five owned remap rows
+change. All ten executed full configs per image are captured and
+rehashed. Their source ZIP containers differ, but all entry names,
+bytes and order repeat literally. All 821 compiler-private inputs also
+repeat literally; only the compiler-private alias resolution is used.
+The original native constants and normal generated sources are intact.
+
+Both unfiltered baseline comparisons retain the same 32 report rows,
+SHA `95F9FE5B...`; this is deliberately **not API-zero**. The differences
+are classified by affected contract, rather than treating report lines
+as separate blockers:
+
+| Contract | Exact metadata change |
+| --- | --- |
+| Five flag use sites | Old direct enum uses become native UInt32/UInt32 pointers plus the same logical `AssociatedEnum` targets. All three logical groups, 21 ordered members, values, UInt32 storage and actual flags remain exact. |
+| Native report/store handles | Seventeen parameters retain native pointer representations; only the two old metadata-only `HREPORT`/`HREPORTSTORE` pseudo structs disappear. The SDK declares `HREPORT` as `HANDLE` and `HREPORTSTORE` as `PVOID`, not as structs. |
+| Two precise producer outputs | `WerReportCreate.phReportHandle` and `WerStoreOpen.phReportStore` gain their existing cleanup and invalid-value metadata. No other parameter gains ownership assertions. |
+| Existing scalar macro alias | `WER_SUBMIT_DISCARD_IF_QUEUED` becomes a primitive UInt32 constant with value 128 and bytes `80000000`. It is not absorbed into `WER_SUBMIT_FLAGS`. |
+
+The complete physical grade compares all 37,314 old identities.
+Exactly the two pseudo types disappear; only surviving `Wer.Apis`
+changes. All 37,311 other surviving snapshots are literal. All
+41 Wer methods/imports and 35 floors are graded exactly, including the
+two explicit original static cleanup declaration moves before their
+producers. Real field order, native widths, layouts and COM/vtable
+order remain strict. The 36,503 type-position changes and 6,383 type
+rows with different raw method-signature sequences are retained
+diagnostically, not normalized or treated as native ABI failures.
+Every other resolved signature is unchanged. Candidate to repeat is
+unfiltered API-zero and literal across all 37,312 type positions,
+247,661 fields and 70,740 methods/raw signatures. Actual managed
+consumer projection effects remain unmeasured.
+
+The fresh native twelve cases, two 33-case precise source/API/physical
+runs and two entire fourteen-case integrity runs total **106 passed,
+zero failed, zero skipped**. Fourteen supplementary source guards
+also pass; all 120 executed rows, including repeated case identities,
+are retained with plain-text error messages. The shared integrity image
+is restored byte-for-byte. The separate merged compiler regression run
+has 135 passes and one unbound ServiceApi-context discovery skip;
+that skip is neither hidden nor counted as source qualification.
+
+The new immutable receipt is
+`files\authored-wer-errorrep-15-local-7b7aa183\qualification.json`,
+SHA `AF4C2CCB0BF39978822D379BEDF7CB96A2232187C13A0B3F78A58C328F520CB8`.
+Its index `E44E9B72...` binds 244 payloads totaling 380,040,753 bytes,
+all rehashed before and after read-only sealing. All 11,799 retained
+SDK, normal-source, full-source and private-compilation ZIP entries
+are independently rehashed. Every indexed payload in the seven
+referenced prior immutable packets remains unchanged, including all
+171 original held-Wer files.
+
+Local resumed-original-artifact coverage is now **34/50**: twelve
+original IDLs and twenty-two headers, eighteen additional original
+headers since `12279c76...`. Sixteen header drafts remain outside
+qualified cohorts. This denominator is the tracked original-artifact
+cohort, not an all-SDK owner percentage or owning-production acceptance.
+Seven missing original IDLs and their thirty legacy facts remain
+separate. There is no owning current-head CI/publication claim and no
+push, PR/stack mutation or PR merge.
+
+WNet/RPC remains independently held on actual native branch/value/type
+disposition and 46 loose additions, not the now-resolved generic
+scalar-alias compiler boundary. In particular, the retained user-branch
+candidate changes `RPC_X_SS_CONTEXT_MISMATCH` from -1073545211 to 6,
+`RPC_X_INVALID_BUFFER` from -1073741306 to 1784, and
+`RPC_X_PIPE_APP_MEMORY` from -1073741801 to 14. Its UInt32 representation
+comes from the existing `ERROR_*` projection and symbolic alias path;
+that explains the representation without waiving native signedness or
+branch fidelity. The four corrected `WIN32_ERROR` sites remain direct
+enum-typed uses, not four `AssociatedEnum` attributes. The general
+association-storage clarification does not admit this separate source
+cohort or make global #2371 cleanup a prerequisite.
