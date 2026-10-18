@@ -77,9 +77,13 @@ carrier/source-contract evidence. Only these semantically changed outputs join
 the deduplicated known header-goal count; other generated outputs remain unknown.
 Campaign `goalExcludedNativeHeaders` records explicit reasons for withholding
 credit from nontrivial patches that do not complete any relocated fact; physical
-strict-application counts remain visible separately. Compilation/qualification
-is separate from source conversion, and source conversion may retain explicit
-sidecar cleanup debt. Run the focused inventory controls with
+strict-application counts remain visible separately. Likewise,
+`goalExcludedGeneratedHeaders` lists observed output `header` paths and explicit
+`reason` values for withdrawn or held credit. Their positive preparation evidence
+remains diagnostic; they do not count toward the header goal. Reported
+`reportedProductionGates` do not erase genuine source changes or imply producer
+acceptance. Compilation/qualification is separate from source conversion, and
+source conversion may retain explicit sidecar cleanup debt. Run the focused inventory controls with
 `python -m unittest discover -s tests\SdkAnnotationCoverage.Tests`.
 
 Bind each physical header to one owner. Include all physical-header and semantic

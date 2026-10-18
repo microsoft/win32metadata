@@ -382,6 +382,7 @@ def update_source_receipts(report, campaign, repo, sdk, scratch):
         "newNativeHeaderPathsBeyondSnapshot": sorted(native - set(scoreboard["strictlyAppliedNativeHeaderPaths"])),
         "committedStrictlyAppliedOriginalIdlPaths": sorted(idls),
         "committedStrictlyAppliedOriginalIdlCount": len(idls) if baseline_checked else None,
+        "reportedProductionGates": campaign.get("reportedProductionGates", []),
         "receiptQualification": "Strict original patch application, not compilation or whole-header/partition qualification. Revised original paths count once.",
     })
     if campaign.get("currentIntegratedRevision"):
@@ -564,7 +565,7 @@ def selected_overlay_originals(originals, overlay_files):
     return sorted(set(originals) & targets)
 
 
-def update_generated_observations(report, observations, repo):
+def update_generated_observations(report, observations, repo, goal_excluded_headers=()):
     score = report["sourceProgressScoreboard"]
     selected = {
         item["original"] for item in report["selectedSdkOriginals"] if item["kind"] == "native-header"
@@ -597,17 +598,27 @@ def update_generated_observations(report, observations, repo):
             raise ValueError("Generated observation count does not match its named outputs")
         actual.update(seen)
         receipts.append({"evidencePath": observation if isinstance(observation, str) else None, **receipt})
+    exclusions = {}
+    for item in goal_excluded_headers:
+        header = item["header"].replace("/", "\\").lower()
+        if header not in actual or header in exclusions or not item.get("reason"):
+            raise ValueError(f"Invalid or duplicate generated header-goal exclusion: {header}")
+        exclusions[header] = {**item, "header": header}
+    eligible_generated = actual - set(exclusions)
     score["generatedOutputObservations"] = receipts
     score["actuallyAffectedGeneratedHeaderPaths"] = sorted(actual) if receipts else None
     score["actuallyAffectedGeneratedHeaderCount"] = len(actual) if receipts else None
+    score["goalExcludedGeneratedHeaders"] = list(exclusions.values())
+    score["goalEligibleObservedGeneratedHeaderPaths"] = sorted(eligible_generated) if receipts else None
+    score["goalEligibleObservedGeneratedHeaderCount"] = len(eligible_generated) if receipts else None
     score["generatedOutputMeasurementComplete"] = False
     score["generatedOutputUnknownReason"] = (
         "Only named, hash-different, semantically changed outputs from producer receipts count; other outputs remain unmeasured."
         if receipts else "This inventory does not run MIDL; recipe output edges are not changed-output evidence."
     )
     native = set(score["goalEligibleCommittedNativeHeaderPaths"])
-    score["eligiblePatchedHeaderPathsKnown"] = sorted(native | actual)
-    score["eligiblePatchedHeaderCountKnown"] = len(native | actual) if score["committedNonBootstrapNativeHeaderCount"] is not None else None
+    score["eligiblePatchedHeaderPathsKnown"] = sorted(native | eligible_generated)
+    score["eligiblePatchedHeaderCountKnown"] = len(native | eligible_generated) if score["committedNonBootstrapNativeHeaderCount"] is not None else None
     score["generatedEvidenceScope"] = "Producer-observed prepared bytes/carriers, checked against shared-Git output ownership and inventory strict original applications; not a fresh MIDL run or full qualification."
 
 
@@ -694,7 +705,10 @@ def main():
         )
         report["scope"]["selectedProviderOverlayOriginalsDeferred"] = len(report["selectedProviderOverlayOriginals"])
         update_source_receipts(report, campaign, repo, sdk, args.output.parent)
-        update_generated_observations(report, campaign.get("generatedOutputObservations", []), repo)
+        update_generated_observations(
+            report, campaign.get("generatedOutputObservations", []), repo,
+            campaign.get("goalExcludedGeneratedHeaders", []),
+        )
         write_operational_outputs(report, campaign, args, sdk)
         args.output.write_text(json.dumps(report, separators=(",", ":")) + "\n", encoding="utf-8")
         print(json.dumps({
@@ -702,6 +716,7 @@ def main():
             "committedNonBootstrapNativeHeaders": report["sourceProgressScoreboard"]["committedNonBootstrapNativeHeaderCount"],
             "goalEligibleNativeHeaders": report["sourceProgressScoreboard"]["goalEligibleCommittedNativeHeaderCount"],
             "observedGeneratedHeaders": report["sourceProgressScoreboard"]["actuallyAffectedGeneratedHeaderCount"],
+            "goalEligibleObservedGeneratedHeaders": report["sourceProgressScoreboard"]["goalEligibleObservedGeneratedHeaderCount"],
             "eligiblePatchedHeadersKnown": report["sourceProgressScoreboard"]["eligiblePatchedHeaderCountKnown"],
             "newNativeHeadersBeyondSnapshot": len(report["sourceProgressScoreboard"]["newNativeHeaderPathsBeyondSnapshot"]),
             "receiptStrictApplyStatusCounts": report["sourceProgressScoreboard"]["receiptStrictApplyStatusCounts"],
@@ -1176,7 +1191,10 @@ def main():
         if campaign.get("sourceReceipts") and not args.strict_apply:
             raise ValueError("Committed source receipts require --strict-apply for a fresh inventory")
         update_source_receipts(report, campaign, repo, sdk, args.output.parent)
-        update_generated_observations(report, campaign.get("generatedOutputObservations", []), repo)
+        update_generated_observations(
+            report, campaign.get("generatedOutputObservations", []), repo,
+            campaign.get("goalExcludedGeneratedHeaders", []),
+        )
         write_operational_outputs(report, campaign, args, sdk)
     elif args.queue_output or args.scoreboard_output or args.strict_apply:
         raise ValueError("Queue, scoreboard, and strict application require the full inventory")

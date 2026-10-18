@@ -245,6 +245,36 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(score["eligiblePatchedHeaderPathsKnown"], [r"um\a.h", r"um\example.h"])
         self.assertFalse(score["generatedOutputMeasurementComplete"])
 
+    def test_held_generated_output_keeps_measurement_but_not_goal_credit(self):
+        report, receipt, recipe = self.generated_fixture()
+        exclusions = [{"header": "UM/EXAMPLE.H", "reason": "No live normal-source emission route."}]
+        with patch.object(coverage, "git", return_value="a" * 40), \
+                patch.object(coverage, "recipe_at", return_value=recipe):
+            coverage.update_generated_observations(report, [receipt, receipt], Path("."), exclusions)
+        score = report["sourceProgressScoreboard"]
+        self.assertEqual(score["actuallyAffectedGeneratedHeaderCount"], 1)
+        self.assertEqual(score["goalEligibleObservedGeneratedHeaderCount"], 0)
+        self.assertEqual(score["goalEligibleObservedGeneratedHeaderPaths"], [])
+        self.assertEqual(score["eligiblePatchedHeaderCountKnown"], 1)
+        self.assertEqual(score["eligiblePatchedHeaderPathsKnown"], [r"um\a.h"])
+        self.assertEqual(score["goalExcludedGeneratedHeaders"], [
+            {"header": r"um\example.h", "reason": "No live normal-source emission route."},
+        ])
+
+    def test_generated_goal_holds_require_observed_headers_and_reasons(self):
+        valid = {"header": r"um\example.h", "reason": "Emission ownership is unknown."}
+        for exclusions in (
+            [{"header": r"um\unknown.h", "reason": "Not an observed output."}],
+            [{"header": r"um\example.h"}],
+            [valid, {**valid, "header": "UM/EXAMPLE.H"}],
+        ):
+            with self.subTest(exclusions=exclusions):
+                report, receipt, recipe = self.generated_fixture()
+                with patch.object(coverage, "git", return_value="a" * 40), \
+                        patch.object(coverage, "recipe_at", return_value=recipe), \
+                        self.assertRaisesRegex(ValueError, "generated header-goal exclusion"):
+                    coverage.update_generated_observations(report, [receipt], Path("."), exclusions)
+
     def test_generated_copies_and_format_only_outputs_are_rejected(self):
         for key, value in (("afterSha256", "0" * 64), ("authoredCarrierCount", 0)):
             with self.subTest(key=key):
@@ -335,6 +365,7 @@ class ProgressTests(unittest.TestCase):
         campaign["goalExcludedNativeHeaders"] = [
             {"original": r"um\b.h", "reason": "Only partial prefixes; no complete converted fact."}
         ]
+        campaign["reportedProductionGates"] = [{"partition": "Core", "state": "Parser opt-in is missing."}]
         patches = [{"patch": original + ".patch", "original": original} for original in (r"um\a.h", r"um\b.h")]
         rows = [{"original": item["original"], "status": "applied-nontrivial"} for item in patches]
         recipe = {"sdkPackageVersion": "test-sdk", "patches": [item["patch"] for item in patches]}
@@ -349,6 +380,7 @@ class ProgressTests(unittest.TestCase):
         self.assertEqual(score["goalEligibleCommittedNativeHeaderCount"], 1)
         self.assertEqual(score["goalEligibleCommittedNativeHeaderPaths"], [r"um\a.h"])
         self.assertEqual(score["newNativeHeaderPathsBeyondSnapshot"], [r"um\b.h"])
+        self.assertEqual(score["reportedProductionGates"], campaign["reportedProductionGates"])
 
     def test_unmeasured_baseline_is_null_not_zero(self):
         report = report_fixture()
