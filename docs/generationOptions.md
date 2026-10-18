@@ -73,6 +73,31 @@ Run representative normal scrapes and native checks after applying a batch.
 The machine-readable counts describe authored source deltas, not full-SDK or
 final-winmd qualification.
 
+### Original-IDL batch authoring
+
+`scripts\Convert-SdkIdlAnnotations.ps1` authors cumulative SDK-relative IDL patches
+from a reserved schema-1 owner map. Each `owners` entry contains `original`,
+`sourceSha256`, `generatedHeaders`, `partitionCandidates`, and exact `facts`
+(`category`, `symbol`, `value`, plus optional inventory provenance).
+
+```powershell
+.\scripts\Convert-SdkIdlAnnotations.ps1 -InputMap .\artifacts\idl-owners.json `
+    -SdkIncludeRoot "$sdk\c\include\10.0.26100.0" `
+    -OutputDirectory .\artifacts\idl-authoring
+```
+
+The tool binds interface definitions in original shipped IDL, ignoring comments,
+quoted C++ and forward declarations. It inserts the reviewed
+`_Win32_AnnotateInterface_` carrier before native attributes and adds the SAL
+bootstrap without rewriting existing bytes, guards, attributes or method order.
+Ambiguous targets, unsupported OS vocabulary, existing carriers and non-interface
+facts are reported verbatim as retained legacy debt. It never removes sidecar
+rows or changes the installed SDK or repository recipe. Add admitted patches,
+original-input closure and generated outputs to `SdkHeaders.json`, then use the
+existing preparation/MIDL and native checks before claiming applied output or
+removing equivalent sidecar rows. Authored source is not compile or full-SDK
+acceptance.
+
 ### Remapping
 
 ````
