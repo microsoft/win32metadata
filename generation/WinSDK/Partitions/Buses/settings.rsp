@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --traverse
 <IncludeRoot>/shared/winusbio.h
 <IncludeRoot>/shared/genericusbfnioctl.h

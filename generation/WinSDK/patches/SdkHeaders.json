@@ -3657,6 +3657,114 @@
       "sourceSha256": "2846744F732410F5D1EB30AE10B4CA841A0A4BC28ED7170A2EC698611CD7206F",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\iwstdec.h",
       "sdkSha256": "2846744F732410F5D1EB30AE10B4CA841A0A4BC28ED7170A2EC698611CD7206F"
+    },
+    {
+      "path": "shared\\cfg.h",
+      "sourceSha256": "6E2AA35C540EC4754D8E13666B0B17F83CB174C4DFD34CF9076565F72361F5E3",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\cfg.h",
+      "sdkSha256": "6E2AA35C540EC4754D8E13666B0B17F83CB174C4DFD34CF9076565F72361F5E3"
+    },
+    {
+      "path": "shared\\mmreg.h",
+      "sourceSha256": "F1BFA2FDB661F7B3188813F9B4A056D818D26A95941155F13D9B7AAB15772631",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\mmreg.h",
+      "sdkSha256": "F1BFA2FDB661F7B3188813F9B4A056D818D26A95941155F13D9B7AAB15772631"
+    },
+    {
+      "path": "shared\\pciprop.h",
+      "sourceSha256": "324E884BA572C8FD7B2447CFC7B1767F301F04E4D1705340D957AB450E2EEDE7",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\pciprop.h",
+      "sdkSha256": "324E884BA572C8FD7B2447CFC7B1767F301F04E4D1705340D957AB450E2EEDE7"
+    },
+    {
+      "path": "shared\\tdiinfo.h",
+      "sourceSha256": "82D23453754E64CE5591D989C4E1947E408E616BEF457DD83D15EDE380681837",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\tdiinfo.h",
+      "sdkSha256": "82D23453754E64CE5591D989C4E1947E408E616BEF457DD83D15EDE380681837"
+    },
+    {
+      "path": "shared\\winbio_types.h",
+      "sourceSha256": "614F6362EA3A2DFC45B569F4FC3ED52592BDD13CD0DF07BD0C0FFCE0069AC830",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\winbio_types.h",
+      "sdkSha256": "614F6362EA3A2DFC45B569F4FC3ED52592BDD13CD0DF07BD0C0FFCE0069AC830"
+    },
+    {
+      "path": "shared\\winusbio.h",
+      "sourceSha256": "1BE604E75B8CE82CCBD4CF59E10F5CD8A1E248F052873210F72D417BAAF5C966",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\winusbio.h",
+      "sdkSha256": "1BE604E75B8CE82CCBD4CF59E10F5CD8A1E248F052873210F72D417BAAF5C966"
+    },
+    {
+      "path": "um\\accctrl.h",
+      "sourceSha256": "37A7438A7233AD985E312151F6979A55D499C75F1B92BA8BEB930A71FFA8E429",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\accctrl.h",
+      "sdkSha256": "37A7438A7233AD985E312151F6979A55D499C75F1B92BA8BEB930A71FFA8E429"
+    },
+    {
+      "path": "um\\certsrv.h",
+      "sourceSha256": "AAA0C9AE9320A7879FF2EFBCA4FD7DF9BE079EA4C67285682A94DAC68F978CF1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\certsrv.h",
+      "sdkSha256": "AAA0C9AE9320A7879FF2EFBCA4FD7DF9BE079EA4C67285682A94DAC68F978CF1"
+    },
+    {
+      "path": "um\\dbt.h",
+      "sourceSha256": "7C718E36E8E5B3E0BAB96D76D397C2090E0DA0837EEBD7FE3E3F8A8C424B8A2C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dbt.h",
+      "sdkSha256": "7C718E36E8E5B3E0BAB96D76D397C2090E0DA0837EEBD7FE3E3F8A8C424B8A2C"
+    },
+    {
+      "path": "um\\dvdmedia.h",
+      "sourceSha256": "67ED0BDE5F327B8D72D4361F574F59AEBC7FA8EC2DC57B5DA7366C1520B0D26E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dvdmedia.h",
+      "sdkSha256": "67ED0BDE5F327B8D72D4361F574F59AEBC7FA8EC2DC57B5DA7366C1520B0D26E"
+    },
+    {
+      "path": "um\\imm.h",
+      "sourceSha256": "942D0B80EB7D186EE935FCE8064CCDCDEA3A49B39BCC03F55208B7C37E289779",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\imm.h",
+      "sdkSha256": "942D0B80EB7D186EE935FCE8064CCDCDEA3A49B39BCC03F55208B7C37E289779"
+    },
+    {
+      "path": "um\\iptypes.h",
+      "sourceSha256": "1335FA9CCDED9A98FC7FAEA84DD7E47D9419C771953892AD6C754B0BD35DEB81",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iptypes.h",
+      "sdkSha256": "1335FA9CCDED9A98FC7FAEA84DD7E47D9419C771953892AD6C754B0BD35DEB81"
+    },
+    {
+      "path": "um\\mq.h",
+      "sourceSha256": "A66B318D8882B5068EF68960843A20CD98B5C7DCB59EFDE326041305C538D66A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mq.h",
+      "sdkSha256": "A66B318D8882B5068EF68960843A20CD98B5C7DCB59EFDE326041305C538D66A"
+    },
+    {
+      "path": "um\\playsoundapi.h",
+      "sourceSha256": "29FB73D46381A51143B05C0BA5603DAD5DFF3EC879BB7376DD20E4A271E2D818",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\playsoundapi.h",
+      "sdkSha256": "29FB73D46381A51143B05C0BA5603DAD5DFF3EC879BB7376DD20E4A271E2D818"
+    },
+    {
+      "path": "um\\verrsrc.h",
+      "sourceSha256": "FF9BEE8EE5B7AA81EAF79A1EAB0E93BD307601E87D3B80A73F24984E9C951C61",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\verrsrc.h",
+      "sdkSha256": "FF9BEE8EE5B7AA81EAF79A1EAB0E93BD307601E87D3B80A73F24984E9C951C61"
+    },
+    {
+      "path": "um\\vssym32.h",
+      "sourceSha256": "E5A7450642A2D783E667EE106EB1888A4B547627EDEC1C6DF45BF1C6B8FC29ED",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vssym32.h",
+      "sdkSha256": "E5A7450642A2D783E667EE106EB1888A4B547627EDEC1C6DF45BF1C6B8FC29ED"
+    },
+    {
+      "path": "um\\winioctl.h",
+      "sourceSha256": "E4F42E55B43604F34C8D7080C2435363845BA13484F4163B2D8AC5F730BD8FD2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winioctl.h",
+      "sdkSha256": "E4F42E55B43604F34C8D7080C2435363845BA13484F4163B2D8AC5F730BD8FD2"
+    },
+    {
+      "path": "um\\winperf.h",
+      "sourceSha256": "F73392E4535CBD70EF811B91D9DE580A35E57930640A8A8B584507841006E20A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winperf.h",
+      "sdkSha256": "F73392E4535CBD70EF811B91D9DE580A35E57930640A8A8B584507841006E20A"
     }
   ],
   "midl": {
@@ -6448,7 +6556,9 @@
     "Xaml_Diagnostics",
     "Debug.WebApp",
     "Wab",
-    "Xaudio2"
+    "Xaudio2",
+    "Ioctl",
+    "MessageQueuing"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -7025,6 +7135,24 @@
     "um\\amparse.h.patch",
     "um\\hrtfapoapi.h.patch",
     "um\\il21dec.h.patch",
-    "um\\iwstdec.h.patch"
+    "um\\iwstdec.h.patch",
+    "shared\\cfg.h.patch",
+    "shared\\mmreg.h.patch",
+    "shared\\pciprop.h.patch",
+    "shared\\tdiinfo.h.patch",
+    "shared\\winbio_types.h.patch",
+    "shared\\winusbio.h.patch",
+    "um\\accctrl.h.patch",
+    "um\\certsrv.h.patch",
+    "um\\dbt.h.patch",
+    "um\\dvdmedia.h.patch",
+    "um\\imm.h.patch",
+    "um\\iptypes.h.patch",
+    "um\\mq.h.patch",
+    "um\\playsoundapi.h.patch",
+    "um\\verrsrc.h.patch",
+    "um\\vssym32.h.patch",
+    "um\\winioctl.h.patch",
+    "um\\winperf.h.patch"
   ]
 }

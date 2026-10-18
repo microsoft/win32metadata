@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Text.Json;
 using ClangSharp;
 using ClangSharp.Interop;
 using ClangSharpSourceToWinmd;
@@ -102,6 +103,106 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
     virtual HRESULT __stdcall UnannotatedMember(_Out_ _Win32_Retval_ int* result) = 0;
 };
 ";
+
+        [NativeMigrationTheory("SYSTEM_ENUM_BINDINGS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void SystemSourceLogicalGroupsPreserveExactEmittedIdentity(string architecture)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"), "report.json")));
+            var owners = report.RootElement.GetProperty("owners").EnumerateArray().ToArray();
+            var expected = owners.SelectMany(owner => owner.GetProperty("groups").EnumerateArray())
+                .ToDictionary(group => group.GetProperty("Group").GetString(), StringComparer.Ordinal);
+            string generated = Path.Combine(Environment.GetEnvironmentVariable("SYSTEM_ENUM_BINDINGS"), architecture);
+            using var results = JsonDocument.Parse(File.ReadAllText(Path.Combine(generated, "results.json")));
+            string component = Path.Combine(generated, "logical-groups-component-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(component);
+            var observed = new HashSet<string>(StringComparer.Ordinal);
+            var sources = new Dictionary<string, CompilationUnitSyntax>(StringComparer.Ordinal);
+            foreach (var result in results.RootElement.EnumerateArray())
+            {
+                Assert.True(result.GetProperty("success").GetBoolean(), result.GetProperty("log").GetString());
+                string partition = result.GetProperty("partition").GetString();
+                var source = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                    result.GetProperty("generatedSource").GetString())).GetCompilationUnitRoot();
+                sources.Add(partition, source);
+                var headerTypes = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                    result.GetProperty("headerTypes").GetString())).GetCompilationUnitRoot();
+                var enums = headerTypes.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .Where(value => expected.ContainsKey(value.Identifier.ValueText)).ToArray();
+                foreach (var declaration in enums)
+                    observed.Add(declaration.Identifier.ValueText);
+                var namespaces = enums.GroupBy(declaration => string.Join(".", declaration.Ancestors()
+                    .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(value => value.Name.ToString())))
+                    .Select(group => SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
+                        .AddMembers(group.Cast<MemberDeclarationSyntax>().ToArray())).ToArray();
+                var subset = SyntaxFactory.CompilationUnit().WithUsings(headerTypes.Usings)
+                    .AddMembers(namespaces).NormalizeWhitespace();
+                File.WriteAllText(Path.Combine(component, partition + ".header-types.cs"), subset.ToFullString());
+            }
+            Assert.Equal(expected.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                observed.OrderBy(value => value, StringComparer.Ordinal));
+            var requiredNamespaces = File.ReadAllLines(Path.Combine(
+                    WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "requiredNamespacesForNames.rsp"))
+                .Select(line => line.Trim().Split('=', 2))
+                .Where(parts => parts.Length == 2 && expected.ContainsKey(parts[0]))
+                .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            using var image = Emit(component, architecture, requiredNamespaces: requiredNamespaces);
+            var reader = image.Reader;
+            foreach (var pair in expected)
+            {
+                var type = FindType(reader, pair.Key);
+                Assert.Equal(pair.Value.GetProperty("Namespace").GetString(), reader.GetString(type.Namespace));
+                var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                var storage = Assert.Single(fields.Where(field => reader.GetString(field.Name) == "value__"));
+                Assert.Equal(pair.Value.GetProperty("Storage").GetString(),
+                    storage.DecodeSignature(new SignatureNames(), null));
+                Assert.Equal(pair.Value.GetProperty("Flags").GetBoolean(),
+                    type.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "FlagsAttribute"));
+                AssertDoesNotHaveAttribute(reader, type.GetCustomAttributes(), "ScopedEnumAttribute");
+                var actual = fields.Where(field => !field.GetDefaultValue().IsNil)
+                    .ToDictionary(field => reader.GetString(field.Name), field =>
+                    {
+                        var constant = reader.GetConstant(field.GetDefaultValue());
+                        var blob = reader.GetBlobReader(constant.Value);
+                        return constant.TypeCode switch
+                        {
+                            ConstantTypeCode.UInt16 => blob.ReadUInt16().ToString(),
+                            ConstantTypeCode.UInt32 => blob.ReadUInt32().ToString(),
+                            ConstantTypeCode.Int32 => blob.ReadInt32().ToString(),
+                            _ => throw new InvalidOperationException("Unexpected native logical-group constant storage."),
+                        };
+                    }, StringComparer.Ordinal);
+                var members = pair.Value.GetProperty("Members").EnumerateArray()
+                    .ToDictionary(member => member.GetProperty("Name").GetString(),
+                        member => member.GetProperty("Value").GetRawText(), StringComparer.Ordinal);
+                Assert.Equal(members.OrderBy(value => value.Key, StringComparer.Ordinal),
+                    actual.OrderBy(value => value.Key, StringComparer.Ordinal));
+            }
+            foreach (var owner in owners)
+            {
+                string partition = owner.GetProperty("partitionCandidates").EnumerateArray().First().GetString();
+                var methods = sources[partition].DescendantNodes().OfType<MethodDeclarationSyntax>()
+                    .ToLookup(method => method.Identifier.ValueText, StringComparer.Ordinal);
+                foreach (var association in owner.GetProperty("associations").EnumerateArray())
+                {
+                    string[] symbol = association.GetProperty("symbol").GetString().Split("::");
+                    var method = Assert.Single(methods[symbol[0]]);
+                    var parameter = Assert.Single(method.ParameterList.Parameters
+                        .Where(value => value.Identifier.ValueText == symbol[1]));
+                    Assert.Equal("uint", parameter.Type.ToString());
+                    var attribute = Assert.Single(parameter.AttributeLists.SelectMany(list => list.Attributes)
+                        .Where(value => value.Name.ToString().Split('.').Last() is "AssociatedEnum" or "AssociatedEnumAttribute"));
+                    var name = Assert.IsType<LiteralExpressionSyntax>(Assert.Single(attribute.ArgumentList.Arguments).Expression);
+                    Assert.Equal(association.GetProperty("group").GetString(), name.Token.ValueText);
+                }
+            }
+            AssertMetadataClosure(reader);
+            Console.WriteLine($"{architecture}: {expected.Count} real source-projected logical identities and " +
+                $"{expected.Values.Sum(group => group.GetProperty("Members").GetArrayLength())} compiled-native members.");
+        }
 
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "c", "c11")]

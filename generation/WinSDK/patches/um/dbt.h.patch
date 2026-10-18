@@ -1,0 +1,33 @@
+diff --git a/um/dbt.h b/um/dbt.h
+index 188f6d20..45786465 100644
+--- a/um/dbt.h
++++ b/um/dbt.h
+@@ -303,6 +303,15 @@ struct VolLockBroadcast {
+ #if(WINVER >= 0x040A)
+ #define DBT_DEVTYP_DEVICEINTERFACE      0x00000005  // device interface class
+ #define DBT_DEVTYP_HANDLE               0x00000006  // file system handle
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DEV_BROADCAST_HDR_DEVICE_TYPE, unsigned long,
++    DBT_DEVTYP_DEVICEINTERFACE,
++    DBT_DEVTYP_HANDLE,
++    DBT_DEVTYP_OEM,
++    DBT_DEVTYP_PORT,
++    DBT_DEVTYP_VOLUME);
++#endif
+ #endif /* WINVER >= 0x040A */
+ 
+ 
+@@ -347,6 +356,12 @@ typedef         DEV_BROADCAST_VOLUME    DBTFAR *PDEV_BROADCAST_VOLUME;
+ #define DBTF_MEDIA      0x0001          // media comings and goings
+ #define DBTF_NET        0x0002          // network volume
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DEV_BROADCAST_VOLUME_FLAGS, unsigned short,
++    DBTF_MEDIA,
++    DBTF_NET);
++#endif
++
+ typedef struct _DEV_BROADCAST_PORT_A {
+     DWORD       dbcp_size;
+     DWORD       dbcp_devicetype;

@@ -1,0 +1,33 @@
+diff --git a/um/accctrl.h b/um/accctrl.h
+index eacc2a2e..a646394f 100644
+--- a/um/accctrl.h
++++ b/um/accctrl.h
+@@ -558,6 +558,14 @@ typedef PTRUSTEE_ACCESSA PTRUSTEE_ACCESS;
+ #define ACTRL_AUDIT_SUCCESS         0x00000004
+ #define ACTRL_AUDIT_FAILURE         0x00000008
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(ACTRL_ACCESS_ENTRY_ACCESS_FLAGS, unsigned long,
++    ACTRL_ACCESS_ALLOWED,
++    ACTRL_ACCESS_DENIED,
++    ACTRL_AUDIT_SUCCESS,
++    ACTRL_AUDIT_FAILURE);
++#endif
++
+ //
+ // Property list flags
+ //
+@@ -711,6 +719,13 @@ typedef PACTRL_CONTROL_INFOA PACTRL_CONTROL_INFO;
+ #define TREE_SEC_INFO_SET                   0x00000001
+ #define TREE_SEC_INFO_RESET                 0x00000002
+ #define TREE_SEC_INFO_RESET_KEEP_EXPLICIT   0x00000003
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TREE_SEC_INFO, unsigned long,
++    TREE_SEC_INFO_SET,
++    TREE_SEC_INFO_RESET,
++    TREE_SEC_INFO_RESET_KEEP_EXPLICIT);
++#endif
+ #endif // (NTDDI_VERSION >= NTDDI_VISTA)
+ 
+ 

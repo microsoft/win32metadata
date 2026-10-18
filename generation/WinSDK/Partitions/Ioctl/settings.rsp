@@ -1,3 +1,5 @@
+--config
+parse-win32-annotations
 --exclude
 _VIRTUAL_STORAGE_TYPE
 --traverse

@@ -123,6 +123,84 @@ using WINHTTP_INTERNET_SCHEME = void;
                         yield return new object[] { partition, architecture.Item1, architecture.Item2, language };
         }
 
+        [NativeMigrationTheory("SYSTEM_ENUM_MIGRATION_ROOT")]
+        [MemberData(nameof(SystemEnumNativeModes))]
+        public void SystemLogicalGroupsKeepNativeValuesTypesAndSurface(
+            string original, string partition, string architecture, string target, bool metadataEnabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"), "report.json")));
+            var owner = report.RootElement.GetProperty("owners").EnumerateArray()
+                .Single(value => value.GetProperty("original").GetString() == original);
+            var groups = owner.GetProperty("groups").EnumerateArray().ToArray();
+            string[] headers = { Path.GetFileName(original) };
+            string checks = string.Join("\n", groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
+                .Select(member => "static_assert((unsigned long long)(" + member.GetProperty("Name").GetString() +
+                    ") == " + member.GetProperty("Value").GetRawText() + "ULL);"));
+            string[] carriers = groups.Select(group => "typedef " + group.GetProperty("Group").GetString() + " " +
+                (group.GetProperty("Storage").GetString() switch
+                {
+                    "UInt16" => "unsigned short",
+                    "UInt32" => "unsigned long",
+                    "Int32" => "int",
+                    var storage => throw new InvalidOperationException("Unexpected exact logical-group storage: " + storage),
+                })).ToArray();
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"),
+                partition, architecture, target, headers, checks, salAnnotations: beforeSal);
+            var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
+                partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled,
+                annotations: annotations, salAnnotations: afterSal);
+            Assert.NotEmpty(groups);
+            Assert.NotEmpty(checks);
+            Assert.Equal(before.Concat(metadataEnabled ? carriers : Array.Empty<string>())
+                .OrderBy(value => value, StringComparer.Ordinal), after);
+            Assert.Equal(beforeSal, afterSal);
+            if (metadataEnabled)
+            {
+                foreach (var group in groups)
+                {
+                    string name = group.GetProperty("Group").GetString();
+                    Assert.Single(annotations.Where(value =>
+                        value.StartsWith(name + "|Enum(", StringComparison.Ordinal) ||
+                        value.StartsWith(name + "|FlagsEnum(", StringComparison.Ordinal)));
+                }
+            }
+            this.output.WriteLine($"{original}/{architecture}: {groups.Length} exact metadata-only group aliases; " +
+                "compiled native member values, declaration multiplicities, ABI and SAL preserved.");
+        }
+
+        public static IEnumerable<object[]> SystemEnumNativeModes()
+        {
+            string artifacts = Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT");
+            if (artifacts == null)
+            {
+                yield return new object[] { "", "", "x64", "x86_64-pc-windows-msvc", true };
+                yield break;
+            }
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(artifacts, "report.json")));
+            foreach (var owner in report.RootElement.GetProperty("owners").EnumerateArray())
+            {
+                string original = owner.GetProperty("original").GetString();
+                string partition = owner.GetProperty("partitionCandidates").EnumerateArray()
+                    .Select(value => value.GetString()).First();
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                {
+                    yield return new object[] { original, partition, architecture.Item1, architecture.Item2, true };
+                    if (architecture.Item1 == "x64")
+                        yield return new object[] { original, partition, architecture.Item1, architecture.Item2, false };
+                }
+            }
+        }
+
         [NativeMigrationTheory("BULK_SYSTEM_MIGRATION_ROOT")]
         [MemberData(nameof(BulkSystemNativeModes))]
         public void BulkSystemHeaderFloorsAndErrorsKeepNativeContracts(

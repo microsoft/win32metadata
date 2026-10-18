@@ -154,6 +154,7 @@ IAMWMBufferPassCallback=Windows.Win32.Media.DirectShow
 # region dvdmedia.h
 VIDEOINFOHEADER2=Windows.Win32.Media.MediaFoundation
 MPEG2VIDEOINFO=Windows.Win32.Media.MediaFoundation
+MPEG2VIDEOINFO_FLAGS=Windows.Win32.Media.MediaFoundation
 # dvdmedia dxgi.h
 # region dxgi.h
 DXGI_FORMAT=Windows.Win32.Graphics.Dxgi.Common
@@ -284,6 +285,7 @@ HEAACWAVEFORMAT=Windows.Win32.Media.DirectShow
 HEAACWAVEINFO=Windows.Win32.Media.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Media.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Media.DirectShow
+MPEGLAYER3WAVEFORMAT_FLAGS=Windows.Win32.Media.DirectShow
 # endregion mmreg.h
 # region mscoree.h
 DEPRECATED_CLR_API_MESG=Windows.Win32.System.ClrHosting
@@ -1744,6 +1746,7 @@ CUSTOM_SYSTEM_EVENT_TRIGGER_CONFIG=Windows.Win32.System.WindowsProgramming
 CY=Windows.Win32.System.Com
 DECIMAL=Windows.Win32.Foundation
 DEVICE_POWER_CAPABILITIES=Windows.Win32.System.Power
+IGP_ID=Windows.Win32.System.SystemServices
 DEVICE_POWER_STATE=Windows.Win32.System.Power
 DISPATCHER_CONTEXT_ARM64=Windows.Win32.System.Diagnostics.Debug
 DISPATCHER_CONTEXT=Windows.Win32.System.Diagnostics.Debug

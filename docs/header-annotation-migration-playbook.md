@@ -3525,3 +3525,29 @@ has no source-backed route in the pinned SDK. Its eight interface floors and
 eight non-interface function facts elsewhere in the allocation remain exactly
 in the availability sidecar. Evidence stays in the worker's
 `artifacts\idl-batch\system-idl-001-*`; failed proposals are not prepared coverage.
+
+### Native system enum source majority
+
+The next batch patches 18 native headers with 53 existing logical enum groups
+and 705 compiler-evaluated native members. Names, namespaces, backing storage,
+Flags payloads and unscoped bag identities match the immutable emitted baseline.
+The metadata-only group invocations, including their semicolons, are excluded
+under `MIDL_PASS`. Three existing logical namespaces use the shared
+`requiredNamespacesForNames.rsp` mechanism rather than physical-header defaults.
+
+The matching sidecar cleanup retires 53 definitions and 133 explicit member rows.
+Two PlaySound uses now annotate the native DWORD parameters directly; 71 unbound
+uses remain exact `addUsesTo` rows. All other categories and partial/shared groups
+remain unchanged. The 72 selected native controls preserve ABI, SAL, declaration
+multiplicities and values across metadata x86/x64/ARM64 and ordinary x64. Actual
+bounded x64 bindings and a component WinMD preserve all 53 identities and 705
+values. These are source/native/component results, not full-SDK or CI acceptance.
+
+`imepad.h` remains legacy because `IME_PAD_REQUEST_FLAGS` lists the nonexistent
+`IMEPADREQ_GETCURRENTUILANG`, not the native `IMEPADREQ_GETCURRENTUILANGID`.
+`mcx.h` remains outside this majority because legacy
+`MODEMSETTINGS_SPEAKER_MODE` values are 1/2/4/8 while native values are 0/1/2/3.
+Neither discrepancy is repaired by inventing members or copying wrong values.
+The seven reserved originals outside this majority, unresolved uses and partial groups remain
+explicit follow-up work. Evidence stays under the worker's
+`artifacts\bulk-annotations\system-nonfloor-enums-001-*`.

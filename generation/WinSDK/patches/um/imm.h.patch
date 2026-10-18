@@ -1,0 +1,114 @@
+diff --git a/um/imm.h b/um/imm.h
+index b7ebb2e6..c54a37b7 100644
+--- a/um/imm.h
++++ b/um/imm.h
+@@ -510,6 +510,24 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ #define IME_ITHOTKEY_PREVIOUS_COMPOSITION       0x201
+ #define IME_ITHOTKEY_UISTYLE_TOGGLE             0x202
+ #define IME_ITHOTKEY_RECONVERTSTRING            0x203
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IME_HOTKEY_IDENTIFIER, unsigned long,
++    IME_CHOTKEY_IME_NONIME_TOGGLE,
++    IME_CHOTKEY_SHAPE_TOGGLE,
++    IME_CHOTKEY_SYMBOL_TOGGLE,
++    IME_JHOTKEY_CLOSE_OPEN,
++    IME_KHOTKEY_SHAPE_TOGGLE,
++    IME_KHOTKEY_HANJACONVERT,
++    IME_KHOTKEY_ENGLISH,
++    IME_THOTKEY_IME_NONIME_TOGGLE,
++    IME_THOTKEY_SHAPE_TOGGLE,
++    IME_THOTKEY_SYMBOL_TOGGLE,
++    IME_ITHOTKEY_RESEND_RESULTSTR,
++    IME_ITHOTKEY_PREVIOUS_COMPOSITION,
++    IME_ITHOTKEY_UISTYLE_TOGGLE,
++    IME_ITHOTKEY_RECONVERTSTRING);
++#endif
+ #define IME_HOTKEY_PRIVATE_LAST                 0x21F
+ 
+ 
+@@ -527,6 +545,22 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ #define GCS_RESULTSTR                   0x0800
+ #define GCS_RESULTCLAUSE                0x1000
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(IME_COMPOSITION_STRING, unsigned long,
++    GCS_COMPREADSTR,
++    GCS_COMPREADATTR,
++    GCS_COMPREADCLAUSE,
++    GCS_COMPSTR,
++    GCS_COMPATTR,
++    GCS_COMPCLAUSE,
++    GCS_CURSORPOS,
++    GCS_DELTASTART,
++    GCS_RESULTREADSTR,
++    GCS_RESULTREADCLAUSE,
++    GCS_RESULTSTR,
++    GCS_RESULTCLAUSE);
++#endif
++
+ // style bit flags for WM_IME_COMPOSITION
+ #define CS_INSERTCHAR                   0x2000
+ #define CS_NOMOVECARET                  0x4000
+@@ -603,6 +637,17 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ #define IGP_SETCOMPSTR                  0x00000014
+ #define IGP_SELECT                      0x00000018
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IGP_ID, unsigned long,
++    IGP_GETIMEVERSION,
++    IGP_PROPERTY,
++    IGP_CONVERSION,
++    IGP_SENTENCE,
++    IGP_UI,
++    IGP_SETCOMPSTR,
++    IGP_SELECT);
++#endif
++
+ // dwIndex for ImmSetCompositionString API
+ #define SCS_SETSTR                      (GCS_COMPREADSTR|GCS_COMPSTR)
+ #define SCS_CHANGEATTR                  (GCS_COMPREADATTR|GCS_COMPATTR)
+@@ -653,6 +698,17 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ #define IME_SMODE_CONVERSATION          0x0010
+ #define IME_SMODE_RESERVED          0x0000F000
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(IME_SENTENCE_MODE, unsigned long,
++    IME_SMODE_NONE,
++    IME_SMODE_PLAURALCLAUSE,
++    IME_SMODE_SINGLECONVERT,
++    IME_SMODE_AUTOMATIC,
++    IME_SMODE_PHRASEPREDICT,
++    IME_SMODE_CONVERSATION,
++    IME_SMODE_RESERVED);
++#endif
++
+ 
+ // style of candidate
+ #define IME_CAND_UNKNOWN                0x0000
+@@ -718,6 +774,25 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ #define IME_ESC_PRIVATE_HOTKEY          0x100a
+ #define IME_ESC_GETHELPFILENAME         0x100b
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IME_ESCAPE, unsigned long,
++    IME_ESC_QUERY_SUPPORT,
++    IME_ESC_RESERVED_FIRST,
++    IME_ESC_RESERVED_LAST,
++    IME_ESC_PRIVATE_FIRST,
++    IME_ESC_PRIVATE_LAST,
++    IME_ESC_SEQUENCE_TO_INTERNAL,
++    IME_ESC_GET_EUDC_DICTIONARY,
++    IME_ESC_SET_EUDC_DICTIONARY,
++    IME_ESC_MAX_KEY,
++    IME_ESC_IME_NAME,
++    IME_ESC_SYNC_HOTKEY,
++    IME_ESC_HANJA_MODE,
++    IME_ESC_AUTOMATA,
++    IME_ESC_PRIVATE_HOTKEY,
++    IME_ESC_GETHELPFILENAME);
++#endif
++
+ // style of word registration
+ #define IME_REGWORD_STYLE_EUDC          0x00000001
+ #define IME_REGWORD_STYLE_USER_FIRST    0x80000000

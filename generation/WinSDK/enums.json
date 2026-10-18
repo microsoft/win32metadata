@@ -2,16 +2,7 @@
   "$schema": "enums.schema.json",
   "items":
 [
-  {
-    "namespace": "Windows.Win32.UI.Controls",
-    "name": "THEME_PROPERTY_SYMBOL_ID",
-    "flags": false,
-    "autoPopulate": {
-      "filter": "TMT_",
-      "header": "vssym32.h"
-    },
-    "uses": []
-  },
+
   {
     "name": "SET_THEME_APP_PROPERTIES_FLAGS",
     "type": "uint",
@@ -1207,93 +1198,48 @@
     ]
   },
   {
-    "finished": true,
-    "name": "WINBIO_SETTING_SOURCE",
-    "members": [
-      {
-        "name": "WINBIO_SETTING_SOURCE_INVALID",
-        "value": "0"
-      },
-      {
-        "name": "WINBIO_SETTING_SOURCE_DEFAULT",
-        "value": "1"
-      },
-      {
-        "name": "WINBIO_SETTING_SOURCE_LOCAL",
-        "value": "3"
-      },
-      {
-        "name": "WINBIO_SETTING_SOURCE_POLICY",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinBioGetEnabledSetting",
-        "parameter": "Source"
-      },
-      {
-        "method": "WinBioGetLogonSetting",
-        "parameter": "Source"
-      },
-      {
-        "method": "WinBioGetDomainLogonSetting",
-        "parameter": "Source"
-      }
-    ]
-  },
+      "addUsesTo": "WINBIO_SETTING_SOURCE",
+      "uses": [
+        {
+          "method": "WinBioGetEnabledSetting",
+          "parameter": "Source"
+        },
+        {
+          "method": "WinBioGetLogonSetting",
+          "parameter": "Source"
+        },
+        {
+          "method": "WinBioGetDomainLogonSetting",
+          "parameter": "Source"
+        }
+      ]
+    },
   {
-    "finished": true,
-    "name": "WINBIO_COMPONENT",
-    "members": [
-      {
-        "name": "WINBIO_COMPONENT_SENSOR",
-        "value": "1"
-      },
-      {
-        "name": "WINBIO_COMPONENT_ENGINE",
-        "value": "2"
-      },
-      {
-        "name": "WINBIO_COMPONENT_STORAGE",
-        "value": "3"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinBioControlUnit",
-        "parameter": "Component"
-      },
-      {
-        "method": "WinBioControlUnitPrivileged",
-        "parameter": "Component"
-      }
-    ]
-  },
+      "addUsesTo": "WINBIO_COMPONENT",
+      "uses": [
+        {
+          "method": "WinBioControlUnit",
+          "parameter": "Component"
+        },
+        {
+          "method": "WinBioControlUnitPrivileged",
+          "parameter": "Component"
+        }
+      ]
+    },
   {
-    "finished": true,
-    "name": "WINBIO_POOL",
-    "members": [
-      {
-        "name": "WINBIO_POOL_SYSTEM",
-        "value": "1"
-      },
-      {
-        "name": "WINBIO_POOL_PRIVATE",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinBioOpenSession",
-        "parameter": "PoolType"
-      },
-      {
-        "method": "WinBioAsyncOpenSession",
-        "parameter": "PoolType"
-      }
-    ]
-  },
+      "addUsesTo": "WINBIO_POOL",
+      "uses": [
+        {
+          "method": "WinBioOpenSession",
+          "parameter": "PoolType"
+        },
+        {
+          "method": "WinBioAsyncOpenSession",
+          "parameter": "PoolType"
+        }
+      ]
+    },
   {
     "name": "SNMP_PDU_TYPE",
     "members": [
@@ -1585,20 +1531,7 @@
       }
     ]
   },
-  {
-    "name": "IGP_ID",
-    "autoPopulate": {
-      "filter": "IGP_",
-      "header": "imm.h"
-    },
-    "members": [
-      {
-        "name": "IGP_GETIMEVERSION",
-        "value": "unchecked((uint)-4)"
-      }
-    ],
-    "uses": []
-  },
+
   {
     "finished": true,
     "name": "MENU_ITEM_TYPE",
@@ -2058,161 +1991,98 @@
     ]
   },
   {
-    "name": "GET_FILE_VERSION_INFO_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "FILE_VER_GET_"
+      "addUsesTo": "GET_FILE_VERSION_INFO_FLAGS",
+      "uses": [
+        {
+          "method": "GetFileVersionInfoExA",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "GetFileVersionInfoExW",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "GetFileVersionInfoSizeExA",
+          "parameter": "dwFlags"
+        },
+        {
+          "method": "GetFileVersionInfoSizeExW",
+          "parameter": "dwFlags"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "GetFileVersionInfoExA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetFileVersionInfoExW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetFileVersionInfoSizeExA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetFileVersionInfoSizeExW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
   {
-    "name": "VER_FIND_FILE_FLAGS",
-    "flags": false,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VFFF_"
+      "addUsesTo": "VER_FIND_FILE_FLAGS",
+      "uses": [
+        {
+          "method": "VerFindFileA",
+          "parameter": "uFlags"
+        },
+        {
+          "method": "VerFindFileW",
+          "parameter": "uFlags"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "VerFindFileA",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "VerFindFileW",
-        "parameter": "uFlags"
-      }
-    ]
-  },
   {
-    "name": "VER_FIND_FILE_STATUS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VFF_"
+      "addUsesTo": "VER_FIND_FILE_STATUS",
+      "uses": [
+        {
+          "method": "VerFindFileA",
+          "parameter": "return"
+        },
+        {
+          "method": "VerFindFileW",
+          "parameter": "return"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "VerFindFileA",
-        "parameter": "return"
-      },
-      {
-        "method": "VerFindFileW",
-        "parameter": "return"
-      }
-    ]
-  },
   {
-    "name": "VER_INSTALL_FILE_FLAGS",
-    "flags": false,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VIFF_"
+      "addUsesTo": "VER_INSTALL_FILE_FLAGS",
+      "uses": [
+        {
+          "method": "VerInstallFileA",
+          "parameter": "uFlags"
+        },
+        {
+          "method": "VerInstallFileW",
+          "parameter": "uFlags"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "VerInstallFileA",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "VerInstallFileW",
-        "parameter": "uFlags"
-      }
-    ]
-  },
   {
-    "name": "VER_INSTALL_FILE_STATUS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VIF_"
+      "addUsesTo": "VER_INSTALL_FILE_STATUS",
+      "uses": [
+        {
+          "method": "VerInstallFileA",
+          "parameter": "return"
+        },
+        {
+          "method": "VerInstallFileW",
+          "parameter": "return"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "VerInstallFileA",
-        "parameter": "return"
-      },
-      {
-        "method": "VerInstallFileW",
-        "parameter": "return"
-      }
-    ]
-  },
   {
-    "name": "VS_FIXEDFILEINFO_FILE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VS_FF_"
+      "addUsesTo": "VS_FIXEDFILEINFO_FILE_FLAGS",
+      "uses": [
+        {
+          "struct": "VS_FIXEDFILEINFO",
+          "field": "dwFileFlags"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileFlags"
-      }
-    ]
-  },
   {
-    "name": "VS_FIXEDFILEINFO_FILE_OS",
-    "type": "uint",
-    "flags": false,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VOS_"
+      "addUsesTo": "VS_FIXEDFILEINFO_FILE_OS",
+      "uses": [
+        {
+          "struct": "VS_FIXEDFILEINFO",
+          "field": "dwFileOS"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileOS"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Storage.FileSystem",
-    "name": "VS_FIXEDFILEINFO_FILE_TYPE",
-    "flags": false,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VFT_"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
-    "namespace": "Windows.Win32.Storage.FileSystem",
-    "name": "VS_FIXEDFILEINFO_FILE_SUBTYPE",
-    "flags": false,
-    "autoPopulate": {
-      "header": "verrsrc.h",
-      "filter": "VFT2_"
-    },
-    "members": [],
-    "uses": []
-  },
+
+
   {
     "name": "URI_CREATE_FLAGS",
     "flags": true,
@@ -4694,72 +4564,58 @@
     ]
   },
   {
-    "name": "PERF_DETAIL",
-    "members": [
-      {
-        "name": "PERF_DETAIL_NOVICE"
-      },
-      {
-        "name": "PERF_DETAIL_ADVANCED"
-      },
-      {
-        "name": "PERF_DETAIL_EXPERT"
-      },
-      {
-        "name": "PERF_DETAIL_WIZARD"
-      }
-    ],
-    "uses": [
-      {
-        "method": "PdhEnumObjectItemsW",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectsHW",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectsW",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectItemsA",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectItemsHA",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectsHA",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectsA",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "method": "PdhEnumObjectItemsHW",
-        "parameter": "dwDetailLevel"
-      },
-      {
-        "struct": "PDH_BROWSE_DLG_CONFIG_A",
-        "field": "dwDefaultDetailLevel"
-      },
-      {
-        "struct": "PDH_BROWSE_DLG_CONFIG_HW",
-        "field": "dwDefaultDetailLevel"
-      },
-      {
-        "struct": "PDH_BROWSE_DLG_CONFIG_HA",
-        "field": "dwDefaultDetailLevel"
-      },
-      {
-        "struct": "PDH_BROWSE_DLG_CONFIG_W",
-        "field": "dwDefaultDetailLevel"
-      }
-    ]
-  },
+      "addUsesTo": "PERF_DETAIL",
+      "uses": [
+        {
+          "method": "PdhEnumObjectItemsW",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectsHW",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectsW",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectItemsA",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectItemsHA",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectsHA",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectsA",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "method": "PdhEnumObjectItemsHW",
+          "parameter": "dwDetailLevel"
+        },
+        {
+          "struct": "PDH_BROWSE_DLG_CONFIG_A",
+          "field": "dwDefaultDetailLevel"
+        },
+        {
+          "struct": "PDH_BROWSE_DLG_CONFIG_HW",
+          "field": "dwDefaultDetailLevel"
+        },
+        {
+          "struct": "PDH_BROWSE_DLG_CONFIG_HA",
+          "field": "dwDefaultDetailLevel"
+        },
+        {
+          "struct": "PDH_BROWSE_DLG_CONFIG_W",
+          "field": "dwDefaultDetailLevel"
+        }
+      ]
+    },
   {
     "name": "SCROLLBAR_CONSTANTS",
     "type": "int",
@@ -13785,139 +13641,42 @@
       }
     ]
   },
+
   {
-    "name": "SND_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SND_APPLICATION"
-      },
-      {
-        "name": "SND_ALIAS"
-      },
-      {
-        "name": "SND_ALIAS_ID"
-      },
-      {
-        "name": "SND_ALIAS"
-      },
-      {
-        "name": "SND_FILENAME"
-      },
-      {
-        "name": "SND_RESOURCE"
-      },
-      {
-        "name": "SND_ALIAS_ID"
-      },
-      {
-        "name": "SND_ASYNC"
-      },
-      {
-        "name": "SND_FILENAME"
-      },
-      {
-        "name": "SND_NODEFAULT"
-      },
-      {
-        "name": "SND_LOOP"
-      },
-      {
-        "name": "SND_ASYNC"
-      },
-      {
-        "name": "SND_MEMORY"
-      },
-      {
-        "name": "SND_NODEFAULT"
-      },
-      {
-        "name": "SND_NOSTOP"
-      },
-      {
-        "name": "SND_NOWAIT"
-      },
-      {
-        "name": "SND_PURGE"
-      },
-      {
-        "name": "SND_RESOURCE"
-      },
-      {
-        "name": "SND_SENTRY"
-      },
-      {
-        "name": "SND_SYNC"
-      },
-      {
-        "name": "SND_SYSTEM"
-      }
-    ],
-    "uses": [
-      {
-        "method": "PlaySoundW",
-        "parameter": "fdwSound"
-      },
-      {
-        "method": "PlaySoundA",
-        "parameter": "fdwSound"
-      }
-    ]
-  },
-  {
-    "name": "CERT_PROPERTY_TYPE",
-    "type": "int",
-    "members": [
-      {
-        "name": "PROPTYPE_BINARY",
-        "value": "3"
-      },
-      {
-        "name": "PROPTYPE_DATE",
-        "value": "2"
-      },
-      {
-        "name": "PROPTYPE_LONG",
-        "value": "1"
-      },
-      {
-        "name": "PROPTYPE_STRING",
-        "value": "4"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IEnumCERTVIEWEXTENSION",
-        "method": "GetValue",
-        "parameter": "Type"
-      },
-      {
-        "interface": "ICertAdmin",
-        "method": "SetCertificateExtension",
-        "parameter": "Type"
-      },
-      {
-        "interface": "ICertAdmin2",
-        "method": "SetCAProperty",
-        "parameter": "PropType"
-      },
-      {
-        "interface": "ICertServerPolicy",
-        "method": "GetCertificateProperty",
-        "parameter": "PropertyType"
-      },
-      {
-        "interface": "ICertServerPolicy",
-        "method": "GetCertificateExtension",
-        "parameter": "Type"
-      },
-      {
-        "interface": "ICertRequest2",
-        "method": "GetFullResponseProperty",
-        "parameter": "PropType"
-      }
-    ]
-  },
+      "addUsesTo": "CERT_PROPERTY_TYPE",
+      "uses": [
+        {
+          "interface": "IEnumCERTVIEWEXTENSION",
+          "method": "GetValue",
+          "parameter": "Type"
+        },
+        {
+          "interface": "ICertAdmin",
+          "method": "SetCertificateExtension",
+          "parameter": "Type"
+        },
+        {
+          "interface": "ICertAdmin2",
+          "method": "SetCAProperty",
+          "parameter": "PropType"
+        },
+        {
+          "interface": "ICertServerPolicy",
+          "method": "GetCertificateProperty",
+          "parameter": "PropertyType"
+        },
+        {
+          "interface": "ICertServerPolicy",
+          "method": "GetCertificateExtension",
+          "parameter": "Type"
+        },
+        {
+          "interface": "ICertRequest2",
+          "method": "GetFullResponseProperty",
+          "parameter": "PropType"
+        }
+      ]
+    },
   {
     "name": "FONT_QUALITY",
     "type": "byte",
@@ -14622,32 +14381,18 @@
     ]
   },
   {
-    "name": "TREE_SEC_INFO",
-    "members": [
-      {
-        "name": "TREE_SEC_INFO_SET",
-        "value": "1"
-      },
-      {
-        "name": "TREE_SEC_INFO_RESET",
-        "value": "2"
-      },
-      {
-        "name": "TREE_SEC_INFO_RESET_KEEP_EXPLICIT",
-        "value": "3"
-      }
-    ],
-    "uses": [
-      {
-        "method": "TreeSetNamedSecurityInfoA",
-        "parameter": "dwAction"
-      },
-      {
-        "method": "TreeSetNamedSecurityInfoW",
-        "parameter": "dwAction"
-      }
-    ]
-  },
+      "addUsesTo": "TREE_SEC_INFO",
+      "uses": [
+        {
+          "method": "TreeSetNamedSecurityInfoA",
+          "parameter": "dwAction"
+        },
+        {
+          "method": "TreeSetNamedSecurityInfoW",
+          "parameter": "dwAction"
+        }
+      ]
+    },
   {
     "name": "GET_WINDOW_CMD",
     "members": [
@@ -16611,61 +16356,14 @@
     ]
   },
   {
-    "name": "GET_ADAPTERS_ADDRESSES_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "GAA_FLAG_SKIP_UNICAST",
-        "value": "1"
-      },
-      {
-        "name": "GAA_FLAG_SKIP_ANYCAST",
-        "value": "2"
-      },
-      {
-        "name": "GAA_FLAG_SKIP_MULTICAST",
-        "value": "4"
-      },
-      {
-        "name": "GAA_FLAG_SKIP_DNS_SERVER",
-        "value": "8"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_PREFIX",
-        "value": "16"
-      },
-      {
-        "name": "GAA_FLAG_SKIP_FRIENDLY_NAME",
-        "value": "32"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_WINS_INFO",
-        "value": "64"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_GATEWAYS",
-        "value": "128"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_ALL_INTERFACES",
-        "value": "256"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_ALL_COMPARTMENTS",
-        "value": "512"
-      },
-      {
-        "name": "GAA_FLAG_INCLUDE_TUNNEL_BINDINGORDER",
-        "value": "1024"
-      }
-    ],
-    "uses": [
-      {
-        "method": "GetAdaptersAddresses",
-        "parameter": "Flags"
-      }
-    ]
-  },
+      "addUsesTo": "GET_ADAPTERS_ADDRESSES_FLAGS",
+      "uses": [
+        {
+          "method": "GetAdaptersAddresses",
+          "parameter": "Flags"
+        }
+      ]
+    },
   {
     "namespace": "Windows.Win32.UI.Input.Ime",
     "name": "IME_PAD_REQUEST_FLAGS",
@@ -19693,57 +19391,14 @@
     ]
   },
   {
-    "name": "MPEG2VIDEOINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "AMMPEG2_DoPanScan",
-        "value": "1"
-      },
-      {
-        "name": "AMMPEG2_DVDLine21Field1",
-        "value": "2"
-      },
-      {
-        "name": "AMMPEG2_DVDLine21Field2",
-        "value": "4"
-      },
-      {
-        "name": "AMMPEG2_SourceIsLetterboxed",
-        "value": "8"
-      },
-      {
-        "name": "AMMPEG2_FilmCameraMode",
-        "value": "16"
-      },
-      {
-        "name": "AMMPEG2_LetterboxAnalogOut",
-        "value": "32"
-      },
-      {
-        "name": "AMMPEG2_DSS_UserData",
-        "value": "64"
-      },
-      {
-        "name": "AMMPEG2_DVB_UserData",
-        "value": "128"
-      },
-      {
-        "name": "AMMPEG2_27MhzTimebase",
-        "value": "256"
-      },
-      {
-        "name": "AMMPEG2_WidescreenAnalogOut",
-        "value": "512"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MPEG2VIDEOINFO",
-        "field": "dwFlags"
-      }
-    ]
-  },
+      "addUsesTo": "MPEG2VIDEOINFO_FLAGS",
+      "uses": [
+        {
+          "struct": "MPEG2VIDEOINFO",
+          "field": "dwFlags"
+        }
+      ]
+    },
   {
     "name": "MIXERLINE_COMPONENTTYPE",
     "members": [
@@ -20197,25 +19852,14 @@
     ]
   },
   {
-    "name": "USN_DELETE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "USN_DELETE_FLAG_DELETE",
-        "value": "1"
-      },
-      {
-        "name": "USN_DELETE_FLAG_NOTIFY",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DELETE_USN_JOURNAL_DATA",
-        "field": "DeleteFlags"
-      }
-    ]
-  },
+      "addUsesTo": "USN_DELETE_FLAGS",
+      "uses": [
+        {
+          "struct": "DELETE_USN_JOURNAL_DATA",
+          "field": "DeleteFlags"
+        }
+      ]
+    },
   {
     "name": "WLAN_CONNECTION_NOTIFICATION_FLAGS",
     "members": [
@@ -21884,89 +21528,18 @@
     ]
   },
   {
-    "name": "TXFS_RMF_LAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "TXFS_RM_FLAG_LOGGING_MODE",
-        "value": "1"
-      },
-      {
-        "name": "TXFS_RM_FLAG_RENAME_RM",
-        "value": "2"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MAX",
-        "value": "4"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_CONTAINER_COUNT_MIN",
-        "value": "8"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_NUM_CONTAINERS",
-        "value": "16"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_GROWTH_INCREMENT_PERCENT",
-        "value": "32"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_AUTO_SHRINK_PERCENTAGE",
-        "value": "64"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MAX",
-        "value": "128"
-      },
-      {
-        "name": "TXFS_RM_FLAG_LOG_NO_CONTAINER_COUNT_MIN",
-        "value": "256"
-      },
-      {
-        "name": "TXFS_RM_FLAG_GROW_LOG",
-        "value": "1024"
-      },
-      {
-        "name": "TXFS_RM_FLAG_SHRINK_LOG",
-        "value": "2048"
-      },
-      {
-        "name": "TXFS_RM_FLAG_ENFORCE_MINIMUM_SIZE",
-        "value": "4096"
-      },
-      {
-        "name": "TXFS_RM_FLAG_PRESERVE_CHANGES",
-        "value": "8192"
-      },
-      {
-        "name": "TXFS_RM_FLAG_RESET_RM_AT_NEXT_START",
-        "value": "16384"
-      },
-      {
-        "name": "TXFS_RM_FLAG_DO_NOT_RESET_RM_AT_NEXT_START",
-        "value": "32768"
-      },
-      {
-        "name": "TXFS_RM_FLAG_PREFER_CONSISTENCY",
-        "value": "65536"
-      },
-      {
-        "name": "TXFS_RM_FLAG_PREFER_AVAILABILITY",
-        "value": "131072"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TXFS_MODIFY_RM",
-        "field": "Flags"
-      },
-      {
-        "struct": "TXFS_QUERY_RM_INFORMATION",
-        "field": "Flags"
-      }
-    ]
-  },
+      "addUsesTo": "TXFS_RMF_LAGS",
+      "uses": [
+        {
+          "struct": "TXFS_MODIFY_RM",
+          "field": "Flags"
+        },
+        {
+          "struct": "TXFS_QUERY_RM_INFORMATION",
+          "field": "Flags"
+        }
+      ]
+    },
   {
     "namespace": "Windows.Win32.UI.Controls",
     "name": "LVITEMA_GROUP_ID",
@@ -22475,33 +22048,18 @@
     ]
   },
   {
-    "name": "FILESYSTEM_STATISTICS_TYPE",
-    "type": "ushort",
-    "members": [
-      {
-        "name": "FILESYSTEM_STATISTICS_TYPE_EXFAT",
-        "value": "3"
-      },
-      {
-        "name": "FILESYSTEM_STATISTICS_TYPE_FAT",
-        "value": "2"
-      },
-      {
-        "name": "FILESYSTEM_STATISTICS_TYPE_NTFS",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "FILESYSTEM_STATISTICS_EX",
-        "field": "FileSystemType"
-      },
-      {
-        "struct": "FILESYSTEM_STATISTICS",
-        "field": "FileSystemType"
-      }
-    ]
-  },
+      "addUsesTo": "FILESYSTEM_STATISTICS_TYPE",
+      "uses": [
+        {
+          "struct": "FILESYSTEM_STATISTICS_EX",
+          "field": "FileSystemType"
+        },
+        {
+          "struct": "FILESYSTEM_STATISTICS",
+          "field": "FileSystemType"
+        }
+      ]
+    },
   {
     "name": "MENU_ITEM_MASK",
     "flags": true,
@@ -22673,32 +22231,14 @@
     ]
   },
   {
-    "name": "USN_SOURCE_INFO_ID",
-    "members": [
-      {
-        "name": "USN_SOURCE_AUXILIARY_DATA",
-        "value": "2"
-      },
-      {
-        "name": "USN_SOURCE_DATA_MANAGEMENT",
-        "value": "1"
-      },
-      {
-        "name": "USN_SOURCE_REPLICATION_MANAGEMENT",
-        "value": "4"
-      },
-      {
-        "name": "USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT",
-        "value": "8"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USN_RECORD_V4",
-        "field": "SourceInfo"
-      }
-    ]
-  },
+      "addUsesTo": "USN_SOURCE_INFO_ID",
+      "uses": [
+        {
+          "struct": "USN_RECORD_V4",
+          "field": "SourceInfo"
+        }
+      ]
+    },
   {
     "name": "IPSEC_DOSP_FLAGS",
     "flags": true,
@@ -23151,22 +22691,14 @@
     ]
   },
   {
-    "name": "FILE_STORAGE_TIER_FLAGS",
-    "flags": true,
-    "type": "uint",
-    "members": [
-      {
-        "name": "FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY",
-        "value": "131072"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "FSCTL_QUERY_STORAGE_CLASSES_OUTPUT",
-        "field": "Flags"
-      }
-    ]
-  },
+      "addUsesTo": "FILE_STORAGE_TIER_FLAGS",
+      "uses": [
+        {
+          "struct": "FSCTL_QUERY_STORAGE_CLASSES_OUTPUT",
+          "field": "Flags"
+        }
+      ]
+    },
   {
     "name": "RAWINPUTDEVICE_FLAGS",
     "flags": true,
@@ -25115,36 +24647,18 @@
     ]
   },
   {
-    "name": "ACTRL_ACCESS_ENTRY_ACCESS_FLAGS",
-    "members": [
-      {
-        "name": "ACTRL_ACCESS_ALLOWED",
-        "value": "1"
-      },
-      {
-        "name": "ACTRL_ACCESS_DENIED",
-        "value": "2"
-      },
-      {
-        "name": "ACTRL_AUDIT_SUCCESS",
-        "value": "4"
-      },
-      {
-        "name": "ACTRL_AUDIT_FAILURE",
-        "value": "8"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "ACTRL_ACCESS_ENTRYA",
-        "field": "fAccessFlags"
-      },
-      {
-        "struct": "ACTRL_ACCESS_ENTRYW",
-        "field": "fAccessFlags"
-      }
-    ]
-  },
+      "addUsesTo": "ACTRL_ACCESS_ENTRY_ACCESS_FLAGS",
+      "uses": [
+        {
+          "struct": "ACTRL_ACCESS_ENTRYA",
+          "field": "fAccessFlags"
+        },
+        {
+          "struct": "ACTRL_ACCESS_ENTRYW",
+          "field": "fAccessFlags"
+        }
+      ]
+    },
   {
     "name": "DRAWITEMSTRUCT_CTL_TYPE",
     "members": [
@@ -25300,40 +24814,14 @@
     ]
   },
   {
-    "name": "TDIENTITY_ENTITY_TYPE",
-    "members": [
-      {
-        "name": "GENERIC_ENTITY"
-      },
-      {
-        "name": "AT_ENTITY"
-      },
-      {
-        "name": "CL_NL_ENTITY"
-      },
-      {
-        "name": "CO_NL_ENTITY"
-      },
-      {
-        "name": "CL_TL_ENTITY"
-      },
-      {
-        "name": "CO_TL_ENTITY"
-      },
-      {
-        "name": "ER_ENTITY"
-      },
-      {
-        "name": "IF_ENTITY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TDIEntityID",
-        "field": "tei_entity"
-      }
-    ]
-  },
+      "addUsesTo": "TDIENTITY_ENTITY_TYPE",
+      "uses": [
+        {
+          "struct": "TDIEntityID",
+          "field": "tei_entity"
+        }
+      ]
+    },
   {
     "name": "TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH",
     "flags": true,
@@ -25886,36 +25374,14 @@
     ]
   },
   {
-    "name": "DEV_BROADCAST_HDR_DEVICE_TYPE",
-    "members": [
-      {
-        "name": "DBT_DEVTYP_DEVICEINTERFACE",
-        "value": "5"
-      },
-      {
-        "name": "DBT_DEVTYP_HANDLE",
-        "value": "6"
-      },
-      {
-        "name": "DBT_DEVTYP_OEM",
-        "value": "0"
-      },
-      {
-        "name": "DBT_DEVTYP_PORT",
-        "value": "3"
-      },
-      {
-        "name": "DBT_DEVTYP_VOLUME",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DEV_BROADCAST_HDR",
-        "field": "dbch_devicetype"
-      }
-    ]
-  },
+      "addUsesTo": "DEV_BROADCAST_HDR_DEVICE_TYPE",
+      "uses": [
+        {
+          "struct": "DEV_BROADCAST_HDR",
+          "field": "dbch_devicetype"
+        }
+      ]
+    },
   {
     "name": "MINIMIZEDMETRICS_ARRANGE",
     "members": [
@@ -26503,25 +25969,14 @@
     ]
   },
   {
-    "name": "DEV_BROADCAST_VOLUME_FLAGS",
-    "type": "ushort",
-    "members": [
-      {
-        "name": "DBTF_MEDIA",
-        "value": "1"
-      },
-      {
-        "name": "DBTF_NET",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DEV_BROADCAST_VOLUME",
-        "field": "dbcv_flags"
-      }
-    ]
-  },
+      "addUsesTo": "DEV_BROADCAST_VOLUME_FLAGS",
+      "uses": [
+        {
+          "struct": "DEV_BROADCAST_VOLUME",
+          "field": "dbcv_flags"
+        }
+      ]
+    },
   {
     "name": "CERT_ID_OPTION",
     "members": [
@@ -27131,28 +26586,14 @@
     ]
   },
   {
-    "name": "MPEGLAYER3WAVEFORMAT_FLAGS",
-    "members": [
-      {
-        "name": "MPEGLAYER3_FLAG_PADDING_ISO",
-        "value": "0"
-      },
-      {
-        "name": "MPEGLAYER3_FLAG_PADDING_ON",
-        "value": "1"
-      },
-      {
-        "name": "MPEGLAYER3_FLAG_PADDING_OFF",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MPEGLAYER3WAVEFORMAT",
-        "field": "fdwFlags"
-      }
-    ]
-  },
+      "addUsesTo": "MPEGLAYER3WAVEFORMAT_FLAGS",
+      "uses": [
+        {
+          "struct": "MPEGLAYER3WAVEFORMAT",
+          "field": "fdwFlags"
+        }
+      ]
+    },
   {
     "name": "GUITHREADINFO_FLAGS",
     "flags": true,
@@ -28647,75 +28088,53 @@
     ]
   },
   {
-    "name": "IME_SENTENCE_MODE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "IME_SMODE_",
-      "header": "Imm.h"
+      "addUsesTo": "IME_SENTENCE_MODE",
+      "uses": [
+        {
+          "method": "ImmGetConversionStatus",
+          "parameter": "lpfdwSentence"
+        },
+        {
+          "method": "ImmSetConversionStatus",
+          "parameter": "param2"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "ImmGetConversionStatus",
-        "parameter": "lpfdwSentence"
-      },
-      {
-        "method": "ImmSetConversionStatus",
-        "parameter": "param2"
-      }
-    ]
-  },
   {
-    "name": "IME_COMPOSITION_STRING",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "GCS_",
-      "header": "Imm.h"
+      "addUsesTo": "IME_COMPOSITION_STRING",
+      "uses": [
+        {
+          "method": "ImmGetCompositionStringA",
+          "parameter": "param1"
+        },
+        {
+          "method": "ImmGetCompositionStringW",
+          "parameter": "param1"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "ImmGetCompositionStringA",
-        "parameter": "param1"
-      },
-      {
-        "method": "ImmGetCompositionStringW",
-        "parameter": "param1"
-      }
-    ]
-  },
   {
-    "name": "IME_ESCAPE",
-    "autoPopulate": {
-      "filter": "IME_ESC_",
-      "header": "Imm.h"
+      "addUsesTo": "IME_ESCAPE",
+      "uses": [
+        {
+          "method": "ImmEscapeA",
+          "parameter": "param2"
+        },
+        {
+          "method": "ImmEscapeW",
+          "parameter": "param2"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "ImmEscapeA",
-        "parameter": "param2"
-      },
-      {
-        "method": "ImmEscapeW",
-        "parameter": "param2"
-      }
-    ]
-  },
   {
-    "name": "IME_HOTKEY_IDENTIFIER",
-    "autoPopulate": {
-      "filter": "IME_CHOTKEY_|IME_ITHOTKEY_|IME_JHOTKEY_|IME_KHOTKEY_|IME_THOTKEY_",
-      "header": "Imm.h"
+      "addUsesTo": "IME_HOTKEY_IDENTIFIER",
+      "uses": [
+        {
+          "method": "ImmSimulateHotKey",
+          "parameter": "param1"
+        }
+      ]
     },
-    "members": [],
-    "uses": [
-      {
-        "method": "ImmSimulateHotKey",
-        "parameter": "param1"
-      }
-    ]
-  },
   {
     "name": "DTTOPTS_FLAGS",
     "flags": true,
@@ -33429,68 +32848,31 @@
     ]
   },
   {
-    "name": "WINUSB_PIPE_POLICY",
-    "members": [
-      {
-        "name": "SHORT_PACKET_TERMINATE"
-      },
-      {
-        "name": "AUTO_CLEAR_STALL"
-      },
-      {
-        "name": "PIPE_TRANSFER_TIMEOUT"
-      },
-      {
-        "name": "IGNORE_SHORT_PACKETS"
-      },
-      {
-        "name": "ALLOW_PARTIAL_READS"
-      },
-      {
-        "name": "AUTO_FLUSH"
-      },
-      {
-        "name": "RAW_IO"
-      },
-      {
-        "name": "MAXIMUM_TRANSFER_SIZE"
-      },
-      {
-        "name": "RESET_PIPE_ON_RESUME"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinUsb_GetPipePolicy",
-        "parameter": "PolicyType"
-      },
-      {
-        "method": "WinUsb_SetPipePolicy",
-        "parameter": "PolicyType"
-      }
-    ]
-  },
+      "addUsesTo": "WINUSB_PIPE_POLICY",
+      "uses": [
+        {
+          "method": "WinUsb_GetPipePolicy",
+          "parameter": "PolicyType"
+        },
+        {
+          "method": "WinUsb_SetPipePolicy",
+          "parameter": "PolicyType"
+        }
+      ]
+    },
   {
-    "name": "WINUSB_POWER_POLICY",
-    "members": [
-      {
-        "name": "AUTO_SUSPEND"
-      },
-      {
-        "name": "SUSPEND_DELAY"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinUsb_GetPowerPolicy",
-        "parameter": "PolicyType"
-      },
-      {
-        "method": "WinUsb_SetPowerPolicy",
-        "parameter": "PolicyType"
-      }
-    ]
-  },
+      "addUsesTo": "WINUSB_POWER_POLICY",
+      "uses": [
+        {
+          "method": "WinUsb_GetPowerPolicy",
+          "parameter": "PolicyType"
+        },
+        {
+          "method": "WinUsb_SetPowerPolicy",
+          "parameter": "PolicyType"
+        }
+      ]
+    },
   {
     "addUsesTo": "ShellWindowTypeConstants",
     "members": [],
@@ -33637,54 +33019,7 @@
       }
     ]
   },
-  {
-    "namespace": "Windows.Win32.System.MessageQueuing",
-    "name": "MQQUEUEACCESSMASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "MQSEC_",
-      "header": "mq.h"
-    },
-    "members": [
-      {
-        "name": "MQSEC_DELETE_QUEUE",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.DELETE)"
-      },
-      {
-        "name": "MQSEC_GET_QUEUE_PERMISSIONS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.READ_CONTROL)"
-      },
-      {
-        "name": "MQSEC_CHANGE_QUEUE_PERMISSIONS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_DAC)"
-      },
-      {
-        "name": "MQSEC_TAKE_QUEUE_OWNERSHIP",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.WRITE_OWNER)"
-      },
-      {
-        "name": "MQSEC_RECEIVE_MESSAGE",
-        "value": "(MQSEC_DELETE_MESSAGE | MQSEC_PEEK_MESSAGE)"
-      },
-      {
-        "name": "MQSEC_RECEIVE_JOURNAL_MESSAGE",
-        "value": "(MQSEC_DELETE_JOURNAL_MESSAGE | MQSEC_PEEK_MESSAGE)"
-      },
-      {
-        "name": "MQSEC_QUEUE_GENERIC_READ",
-        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE)"
-      },
-      {
-        "name": "MQSEC_QUEUE_GENERIC_WRITE",
-        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_WRITE_MESSAGE)"
-      },
-      {
-        "name": "MQSEC_QUEUE_GENERIC_ALL",
-        "value": "(MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE | MQSEC_WRITE_MESSAGE | MQSEC_SET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PROPERTIES | MQSEC_DELETE_QUEUE | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_CHANGE_QUEUE_PERMISSIONS | MQSEC_TAKE_QUEUE_OWNERSHIP)"
-      }
-    ],
-    "uses": []
-  },
+
   {
     "namespace": "Windows.Win32.Foundation",
     "name": "GENERIC_ACCESS_RIGHTS",
@@ -34894,46 +34229,31 @@
     ]
   },
   {
-    "name": "CM_DEVNODE_STATUS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DN_",
-      "header": "cfg.h"
+      "addUsesTo": "CM_DEVNODE_STATUS_FLAGS",
+      "uses": [
+        {
+          "method": "CM_Get_DevNode_Status",
+          "parameter": "pulStatus"
+        },
+        {
+          "method": "CM_Get_DevNode_Status_Ex",
+          "parameter": "pulStatus"
+        }
+      ]
     },
-    "members": [
-      {
-        "name": "DN_CHANGEABLE_FLAGS",
-        "value": "(DN_NOT_FIRST_TIME+DN_HARDWARE_ENUM+DN_HAS_MARK+DN_DISABLEABLE+DN_REMOVABLE+DN_MF_CHILD+DN_MF_PARENT+DN_NOT_FIRST_TIMEE+DN_STOP_FREE_RES+DN_REBAL_CANDIDATE+DN_NT_ENUMERATOR+DN_NT_DRIVER+DN_SILENT_INSTALL+DN_NO_SHOW_IN_DM)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CM_Get_DevNode_Status",
-        "parameter": "pulStatus"
-      },
-      {
-        "method": "CM_Get_DevNode_Status_Ex",
-        "parameter": "pulStatus"
-      }
-    ]
-  },
   {
-    "name": "CM_PROB",
-    "autoPopulate": {
-      "filter": "CM_PROB_",
-      "header": "cfg.h"
+      "addUsesTo": "CM_PROB",
+      "uses": [
+        {
+          "method": "CM_Get_DevNode_Status",
+          "parameter": "pulProblemNumber"
+        },
+        {
+          "method": "CM_Get_DevNode_Status_Ex",
+          "parameter": "pulProblemNumber"
+        }
+      ]
     },
-    "uses": [
-      {
-        "method": "CM_Get_DevNode_Status",
-        "parameter": "pulProblemNumber"
-      },
-      {
-        "method": "CM_Get_DevNode_Status_Ex",
-        "parameter": "pulProblemNumber"
-      }
-    ]
-  },
   {
     "name": "FILEOPERATION_FLAGS",
     "flags": true,
@@ -35099,118 +34419,20 @@
       }
     ]
   },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIROOTBUS_SECONDARYINTERFACE",
-    "autoPopulate": {
-      "filter": "DevProp_PciRootBus_SecondaryInterface_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIROOTBUS_CURRENTSPEEDANDMODE",
-    "autoPopulate": {
-      "filter": "DevProp_PciRootBus_CurrentSpeedAndMode_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIROOTBUS_SUPPORTEDSPEEDSANDMODES",
-    "autoPopulate": {
-      "filter": "DevProp_PciRootBus_SupportedSpeedsAndModes_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIROOTBUS_BUSWIDTH",
-    "autoPopulate": {
-      "filter": "DevProp_PciRootBus_BusWidth_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_DEVICEBRIDGETYPE",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_DeviceType_|DevProp_PciDevice_BridgeType_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_CURRENTSPEEDANDMODE",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_CurrentSpeedAndMode_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIEXPRESSDEVICE_PAYLOADORREQUESTSIZE",
-    "autoPopulate": {
-      "filter": "DevProp_PciExpressDevice_PayloadOrRequestSize_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIEXPRESSDEVICE_LINKSPEED",
-    "autoPopulate": {
-      "filter": "DevProp_PciExpressDevice_LinkSpeed_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIEXPRESSDEVICE_LINKWIDTH",
-    "autoPopulate": {
-      "filter": "DevProp_PciExpressDevice_LinkWidth_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIEXPRESSDEVICE_SPEC_VERSION",
-    "autoPopulate": {
-      "filter": "DevProp_PciExpressDevice_Spec_Version_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_INTERRUPTTYPE",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_InterruptType_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_SRIOVSUPPORT",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_SriovSupport_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_ACSSUPPORT",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_AcsSupport_",
-      "header": "pciprop.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.NetworkManagement.WiFi",
-    "name": "DEVPROP_PCIDEVICE_ACSCOMPATIBLEUPHIERARCHY",
-    "autoPopulate": {
-      "filter": "DevProp_PciDevice_AcsCompatibleUpHierarchy_",
-      "header": "pciprop.h"
-    }
-  },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   {
     "namespace": "Windows.Win32.NetworkManagement.WiFi",
     "name": "DEVPROP_PCIDEVICE_SUPPORTEDSPEEDSANDMODE",
