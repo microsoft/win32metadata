@@ -1437,6 +1437,30 @@
       "sourceSha256": "9DE576F479AEB64320D3D996D830DCDB4724684540943375F80596C955D4B79C",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winnls32.h",
       "sdkSha256": "9DE576F479AEB64320D3D996D830DCDB4724684540943375F80596C955D4B79C"
+    },
+    {
+      "path": "um\\consoleapi.h",
+      "sourceSha256": "A0E727E696F3599EF0B570942F28646DBD94374E62C812659EBA5EBE2A42A99F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\consoleapi.h",
+      "sdkSha256": "A0E727E696F3599EF0B570942F28646DBD94374E62C812659EBA5EBE2A42A99F"
+    },
+    {
+      "path": "um\\consoleapi2.h",
+      "sourceSha256": "F2134E1D2C01611E60FF939CCD45561884AA0CCBCE590136FFD1D95161892D17",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\consoleapi2.h",
+      "sdkSha256": "F2134E1D2C01611E60FF939CCD45561884AA0CCBCE590136FFD1D95161892D17"
+    },
+    {
+      "path": "um\\consoleapi3.h",
+      "sourceSha256": "0A00BF6CA901D0D980FE8C2B9BB91A39FB84C3A99E9C87498149A04CF7CF5925",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\consoleapi3.h",
+      "sdkSha256": "0A00BF6CA901D0D980FE8C2B9BB91A39FB84C3A99E9C87498149A04CF7CF5925"
+    },
+    {
+      "path": "um\\winspool.h",
+      "sourceSha256": "C9954B0F6051BBAC7DC550F92B88C9306C2D76DDD5CFFDB224FEE4DE3C010F23",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winspool.h",
+      "sdkSha256": "C9954B0F6051BBAC7DC550F92B88C9306C2D76DDD5CFFDB224FEE4DE3C010F23"
     }
   ],
   "midl": {
@@ -2313,7 +2337,9 @@
     "Isolation",
     "Lwef",
     "Edp",
-    "Cos"
+    "Cos",
+    "Console",
+    "Printing"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -2520,6 +2546,10 @@
     "um\\mtxdm.h.patch",
     "um\\propapi.h.patch",
     "um\\sas.h.patch",
-    "um\\winnls32.h.patch"
+    "um\\winnls32.h.patch",
+    "um\\consoleapi.h.patch",
+    "um\\consoleapi2.h.patch",
+    "um\\consoleapi3.h.patch",
+    "um\\winspool.h.patch"
   ]
 }
