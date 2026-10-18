@@ -992,8 +992,17 @@ namespace Win32MetadataScraperTests
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
             Assert.DoesNotContain("_Win32_SupportedOS_BEGIN_", patch);
             Assert.DoesNotContain("_Win32_SupportedOS_END_", patch);
-            Assert.Equal(count, patch.Split('\n').Count(line => line.StartsWith("+", StringComparison.Ordinal) &&
-                line.Substring(1).TrimStart().StartsWith("_Win32_SupportedOS_", StringComparison.Ordinal)));
+            string[] floors = patch.Split('\n').Where(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                line.Substring(1).TrimStart().StartsWith("_Win32_SupportedOS_", StringComparison.Ordinal)).ToArray();
+            Assert.Equal(count, floors.Length);
+            string helper = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK",
+                "RecompiledIdlHeaders", "shared", "win32metadata_annotations.h"));
+            foreach (string line in floors)
+            {
+                string macro = line.Substring(1).Trim();
+                Assert.DoesNotContain("(", macro);
+                Assert.Contains("#define " + macro + " ", helper);
+            }
         }
 
         [MigrationTheory]

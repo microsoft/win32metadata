@@ -2785,6 +2785,24 @@ cleanup declaration block from both sides, every other selected SDK byte
 is literal. The five original native enums and their members remain
 unchanged. The private 49-header/44-patch/44-partition recipe extends the
 last qualified Dwm context and explicitly excludes the held Wer/ErrorRep
-patches. The permanent thirteen-floor source guard passes; fresh native,
-normal traversal, complete-image/repeat and physical acceptance have not
-yet qualified this header. Coverage remains **31/50**.
+patches.
+
+The first authoring at `d620a8ea...` mistakenly used the undefined
+function-like token `_Win32_SupportedOS_(Windows8)`. Both stock traversals
+and all twelve native cases failed while parsing that spelling; neither
+the normal constants stage nor native comparison assertions completed.
+This was our authoring error, not a contradictory SDK contract or a
+request for new helper vocabulary. The exact failures and plain-text
+language-specific diagnostics are sealed under
+`files\websocket-authoring-token-negative-d620a8ea`, receipt
+`B10934323E114CDFEE38F6ACE583CD81493AF2DAC5E7C89B052C0427CB811212`.
+
+The correction uses only the existing
+`_Win32_SupportedOS_Windows8_` macro. The source guard now rejects
+function-like floor spellings and requires every floor to have an
+existing helper definition. It rejects the original mistake; all
+thirteen current fixed-floor guard cases then pass without skips,
+including the WebSock case checking its thirteen exact floors.
+Fresh native, normal traversal, complete-image/repeat and physical
+acceptance still have not qualified this header.
+Coverage remains **31/50**.
