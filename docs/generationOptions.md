@@ -151,6 +151,8 @@ preserves existing interface carriers and native contracts on both sides.
 With the newly relocated rows absent from both resolved normal inputs, require
 the exact new function floors only in the prepared-after source and compare
 the complete remaining C# syntax without suppressing unrelated attributes.
+Selected callable facts can pin an `existingImportLibrary` in the qualification
+report to require the same nonempty `DllImport` in actual normal output.
 
 Recipe `partitions` do not activate the normal scraper. After qualifying and
 admitting exact original/output pairs, rerun the authorer with `-Apply` to enable

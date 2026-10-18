@@ -1,5 +1,5 @@
 diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
-index 06b176bc..a01122c3 100644
+index 06b176bc..fccc2351 100644
 --- a/shared/dxgi1_3.idl
 +++ b/shared/dxgi1_3.idl
 @@ -1,5 +1,6 @@
@@ -9,7 +9,15 @@ index 06b176bc..a01122c3 100644
  import "dxgi1_2.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -14,6 +15,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_
+@@ -8,12 +9,13 @@ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
+ cpp_quote( "#define DXGI_CREATE_FACTORY_DEBUG 0x1")
+-cpp_quote( "HRESULT WINAPI CreateDXGIFactory2(UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);" )
+-cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);" )
++cpp_quote( "HRESULT WINAPI _Win32_SupportedOS_Windows81_ CreateDXGIFactory2(UINT Flags, REFIID riid, _COM_Outptr_ void **ppFactory);" )
++cpp_quote( "HRESULT WINAPI _Win32_SupportedOS_Windows81_ DXGIGetDebugInterface1(UINT Flags, REFIID riid, _COM_Outptr_ void **pDebug);" )
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIDevice3 interface
  //--------------------------------------------------------------------------------------------------------

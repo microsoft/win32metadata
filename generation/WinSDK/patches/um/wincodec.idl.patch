@@ -1,5 +1,5 @@
 diff --git a/um/wincodec.idl b/um/wincodec.idl
-index 0fe8f083..c19f1780 100644
+index 0fe8f083..717007b2 100644
 --- a/um/wincodec.idl
 +++ b/um/wincodec.idl
 @@ -15,6 +15,7 @@ Revision History:
@@ -290,6 +290,54 @@ index 0fe8f083..c19f1780 100644
  [
     object,
     uuid(7B816B45-1996-4476-B132-DE9E247C8AF0),
+@@ -2732,13 +2768,13 @@ cpp_quote("#endif")
+     APIs
+ \*=========================================================================*/
+ 
+-cpp_quote("HRESULT WINAPI WICConvertBitmapSource(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICConvertBitmapSource(" )
+ cpp_quote("     _In_ REFWICPixelFormatGUID dstFormat, // Destination pixel format" )
+ cpp_quote("     _In_ IWICBitmapSource  *pISrc,    // Source bitmap" )
+ cpp_quote("     _Outptr_ IWICBitmapSource **ppIDst   // Destination bitmap, a copy or addrefed source" )
+ cpp_quote("     );" )
+ 
+-cpp_quote("HRESULT WINAPI WICCreateBitmapFromSection(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICCreateBitmapFromSection(" )
+ cpp_quote("     _In_ UINT width," )
+ cpp_quote("     _In_ UINT height," )
+ cpp_quote("     _In_ REFWICPixelFormatGUID pixelFormat," )
+@@ -2748,7 +2784,7 @@ cpp_quote("     _In_ UINT offset," )
+ cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
+ cpp_quote("     );" )
+ 
+-cpp_quote("HRESULT WINAPI WICCreateBitmapFromSectionEx(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_Windows7_ WICCreateBitmapFromSectionEx(" )
+ cpp_quote("     _In_ UINT width," )
+ cpp_quote("     _In_ UINT height," )
+ cpp_quote("     _In_ REFWICPixelFormatGUID pixelFormat," )
+@@ -2759,19 +2795,19 @@ cpp_quote("     _In_ WICSectionAccessLevel desiredAccessLevel," )
+ cpp_quote("     _Outptr_ IWICBitmap **ppIBitmap" )
+ cpp_quote("     );" )
+ 
+-cpp_quote("HRESULT WINAPI WICMapGuidToShortName(")
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapGuidToShortName(")
+ cpp_quote("    _In_ REFGUID guid,")
+ cpp_quote("    _In_ UINT cchName,")
+ cpp_quote("    _Inout_updates_opt_(cchName) WCHAR *wzName,")
+ cpp_quote("    _Out_ UINT *pcchActual")
+ cpp_quote("   );")
+ 
+-cpp_quote("HRESULT WINAPI WICMapShortNameToGuid(")
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapShortNameToGuid(")
+ cpp_quote("    _In_ PCWSTR wzName,")
+ cpp_quote("    _Out_ GUID *pguid")
+ cpp_quote("   );")
+ 
+-cpp_quote("HRESULT WINAPI WICMapSchemaToName(")
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMapSchemaToName(")
+ cpp_quote("    _In_ REFGUID guidMetadataFormat,")
+ cpp_quote("    _In_ LPWSTR pwzSchema,")
+ cpp_quote("    _In_ UINT cchName,")
 @@ -3019,6 +3055,7 @@ cpp_quote("#define WICRawChangeNotification_ToneCurve                  0x0000080
  cpp_quote("#define WICRawChangeNotification_Rotation                   0x00001000")
  cpp_quote("#define WICRawChangeNotification_RenderMode                 0x00002000")

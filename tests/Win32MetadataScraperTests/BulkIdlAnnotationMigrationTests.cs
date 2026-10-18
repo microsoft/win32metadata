@@ -431,7 +431,7 @@ namespace Win32MetadataScraperTests
                 Environment.GetEnvironmentVariable("WIN32METADATA_FACTORY_IDL_REPORT")));
             var owner = Assert.Single(report.RootElement.GetProperty("owners").EnumerateArray().Where(value =>
                 value.GetProperty("generatedHeaders").EnumerateArray().Any(path =>
-                    path.GetString().Equals(@"um\" + header, StringComparison.OrdinalIgnoreCase))));
+                    Path.GetFileName(path.GetString()).Equals(header, StringComparison.OrdinalIgnoreCase))));
             var dispositions = owner.GetProperty("dispositions").EnumerateArray().Where(value =>
                 value.GetProperty("disposition").GetString() == "authored-original-idl").ToArray();
             Assert.Equal(functionCount, dispositions.Count(value =>
@@ -439,7 +439,7 @@ namespace Win32MetadataScraperTests
             string root = WinHttpMigrationTests.RepositoryRoot;
             string prerequisites = header switch
             {
-                "dxva2api.h" or "opmapi.h" => "#include <d3d9.h>\n",
+                "dxva2api.h" or "dxvahd.h" or "opmapi.h" => "#include <d3d9.h>\n",
                 "mfreadwrite.h" => "#include <mfidl.h>\n",
                 _ => "",
             };
@@ -546,6 +546,14 @@ namespace Win32MetadataScraperTests
                 string symbol = fact.GetProperty("symbol").GetString();
                 string payload = fact.GetProperty("value").GetString().Substring(symbol.Length + 1);
                 var declaration = Assert.Single(positiveMethods[symbol]);
+                if (fact.TryGetProperty("existingImportLibrary", out var library))
+                {
+                    Assert.False(string.IsNullOrEmpty(library.GetString()));
+                    var import = Assert.Single(declaration.AttributeLists.SelectMany(list => list.Attributes)
+                        .Where(value => value.Name.ToString() is "DllImport" or "global::System.Runtime.InteropServices.DllImport"));
+                    Assert.Equal(library.GetString(), Assert.IsType<LiteralExpressionSyntax>(
+                        import.ArgumentList.Arguments[0].Expression).Token.ValueText);
+                }
                 var attribute = Assert.Single(declaration.AttributeLists.SelectMany(list => list.Attributes).Where(IsFloor));
                 string floor = Assert.IsType<LiteralExpressionSyntax>(
                     Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText;

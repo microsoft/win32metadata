@@ -1,5 +1,5 @@
 diff --git a/um/dxvahd.idl b/um/dxvahd.idl
-index 94a93241..5b33fa38 100644
+index 94a93241..d7d49edd 100644
 --- a/um/dxvahd.idl
 +++ b/um/dxvahd.idl
 @@ -8,6 +8,7 @@
@@ -26,3 +26,12 @@ index 94a93241..5b33fa38 100644
  [
      object,
      uuid(95f4edf4-6e03-4cd7-be1b-3075d665aa52),
+@@ -794,7 +797,7 @@ typedef struct _DXVAHDETW_DESTROYVIDEOPROCESSOR
+ cpp_quote("")
+ cpp_quote("")
+ cpp_quote("HRESULT WINAPI")
+-cpp_quote("DXVAHD_CreateDevice(")
++cpp_quote("_Win32_SupportedOS_Windows7_ DXVAHD_CreateDevice(")
+ cpp_quote("    _In_ IDirect3DDevice9Ex* pD3DDevice,")
+ cpp_quote("    _In_ const DXVAHD_CONTENT_DESC* pContentDesc,")
+ cpp_quote("    _In_ DXVAHD_DEVICE_USAGE Usage,")

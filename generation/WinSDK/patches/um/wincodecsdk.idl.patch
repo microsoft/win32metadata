@@ -1,5 +1,5 @@
 diff --git a/um/wincodecsdk.idl b/um/wincodecsdk.idl
-index 979dfd24..e775bdc6 100644
+index 979dfd24..5fdd1fb0 100644
 --- a/um/wincodecsdk.idl
 +++ b/um/wincodecsdk.idl
 @@ -9,6 +9,7 @@
@@ -90,3 +90,28 @@ index 979dfd24..e775bdc6 100644
  [
     object,
     uuid(412D0C3A-9650-44FA-AF5B-DD2A06C8E8FB)
+@@ -586,21 +597,21 @@ interface IWICComponentFactory : IWICImagingFactory
+     APIs
+ \*=========================================================================*/
+ 
+-cpp_quote("HRESULT WINAPI WICMatchMetadataContent(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICMatchMetadataContent(" )
+ cpp_quote("    _In_ REFGUID guidContainerFormat,")
+ cpp_quote("    _In_opt_  const GUID *pguidVendor,")
+ cpp_quote("    _In_  IStream *pIStream,")
+ cpp_quote("    _Out_ GUID *pguidMetadataFormat")
+ cpp_quote("    );" )
+ 
+-cpp_quote("HRESULT WINAPI WICSerializeMetadataContent(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICSerializeMetadataContent(" )
+ cpp_quote("    _In_ REFGUID guidContainerFormat,")
+ cpp_quote("    _In_ IWICMetadataWriter *pIWriter,")
+ cpp_quote("    _In_ DWORD dwPersistOptions,")
+ cpp_quote("    _In_ IStream *pIStream")
+ cpp_quote("    );" )
+ 
+-cpp_quote("HRESULT WINAPI WICGetMetadataContentSize(" )
++cpp_quote("HRESULT WINAPI _Win32_SupportedOS_WindowsXP_ WICGetMetadataContentSize(" )
+ cpp_quote("    _In_ REFGUID guidContainerFormat,")
+ cpp_quote("    _In_ IWICMetadataWriter *pIWriter,")
+ cpp_quote("    _Out_ ULARGE_INTEGER *pcbSize")
