@@ -51,20 +51,42 @@ function SALParseSize {
 $parenBlob = "\((?:\([^()]*\)[^()]*|[^()]*)\)"
 $attributeListPattern = [Regex]::new("\[(((?:,\s*)?(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob))+)\]")
 $attributePattern = [Regex]::new("(in|out|string|retval|unique|defaultvalue$parenBlob|size_is$parenBlob|iid_is$parenBlob|length_is$parenBlob)")
+$adjacentAttributeLists = [Regex]::new("(?<left>$attributeListPattern)\s*(?<right>$attributeListPattern)")
+$annotationPattern = '\[annotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)\s*\]'
+$annotationBeforeNative = [Regex]::new("(?<annotation>$annotationPattern)\s*(?<native>$attributeListPattern)")
+$adjacentAnnotations = [Regex]::new("(?<left>$annotationPattern)\s*(?<right>$annotationPattern)")
 
 $stream = [System.IO.StreamWriter] $outputFileName
 
 foreach ($line in (Get-Content $inputFileName)) {
-    # Skip lines that already have annotations and ignore cpp_quote and #pragma.
-    if ($line.Contains("annotation (") -or $line.Contains("annotation(") -or $line.Contains("cpp_quote(") -or $line.StartsWith("#pragma")) {
+    # Quoted C++ text is not an IDL parameter declaration.
+    if ($line.TrimStart().StartsWith("cpp_quote(") -or $line.TrimStart().StartsWith("#pragma")) {
         $stream.WriteLine($line)
 
         continue
     }
 
+    while ($annotationBeforeNative.IsMatch($line)) {
+        $line = $annotationBeforeNative.Replace($line, {
+            param($match)
+            $match.Groups['native'].Value + $match.Groups['annotation'].Value
+        })
+    }
     # Merge multiple adjacent MIDL attribute lists into one so all annotations are consolidated into one annotation attribute per parameter.
-    if ($attributeListPattern.Matches($line).Count -gt 1) {
-        $line = $line -replace "\]\s*\[", ", "
+    while ($adjacentAttributeLists.IsMatch($line)) {
+        $line = $adjacentAttributeLists.Replace($line, {
+            param($match)
+            $left = $match.Groups['left'].Value
+            $left.Substring(0, $left.Length - 1) + ", " + $match.Groups['right'].Value.Substring(1)
+        })
+    }
+    while ($adjacentAnnotations.IsMatch($line)) {
+        $line = $adjacentAnnotations.Replace($line, {
+            param($match)
+            $left = [regex]::Match($match.Groups['left'].Value, $annotationPattern).Groups['value'].Value
+            $right = [regex]::Match($match.Groups['right'].Value, $annotationPattern).Groups['value'].Value
+            '[annotation("' + $left + ' ' + $right + '")]'
+        })
     }
 
     # Convert MIDL attributes to SAL annotations.
@@ -73,6 +95,12 @@ foreach ($line in (Get-Content $inputFileName)) {
         $match = $attributeListPattern.Match($line, $startAt)
         $attributeList = $match.Groups[1].Value
         $attributeListIndex = $match.Groups[0].Index + $match.Groups[0].Length
+        $existingAnnotation = [regex]::Match($line.Substring($attributeListIndex), "^\s*$annotationPattern")
+        if ($existingAnnotation.Success -and
+            $existingAnnotation.Groups['value'].Value -match '_(?:In|Out|Inout|COM_Outptr)[A-Za-z0-9_]*(?:\(|$|\s)') {
+            $startAt = $attributeListIndex + $existingAnnotation.Length
+            continue
+        }
 
         $in = $false
         $out = $false
@@ -157,9 +185,14 @@ foreach ($line in (Get-Content $inputFileName)) {
 
         # Insert the annotation attribute into the line after the original attribute list.
         if ($annotation) {
+            if ($existingAnnotation.Success) {
+                # MIDL emits only the last annotation attribute; keep SAL and metadata in one payload.
+                $annotation += " " + $existingAnnotation.Groups['value'].Value
+            }
             $annotationAttribute = "[annotation(""$annotation"")]"
 
-            $line = $line.Substring(0, $attributeListIndex) + $annotationAttribute + $line.Substring($attributeListIndex)
+            $line = $line.Substring(0, $attributeListIndex) + $annotationAttribute +
+                $line.Substring($attributeListIndex + $existingAnnotation.Length)
 
             $startAt = $attributeListIndex + $annotationAttribute.Length
         } else {
