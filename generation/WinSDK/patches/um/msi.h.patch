@@ -1,5 +1,5 @@
 diff --git a/um/msi.h b/um/msi.h
-index 77ea809b..0f10f409 100644
+index 77ea809b..abb836a2 100644
 --- a/um/msi.h
 +++ b/um/msi.h
 @@ -105,6 +105,7 @@ UINT WINAPI MsiCloseHandle(MSIHANDLE hAny);
@@ -572,7 +572,19 @@ index 77ea809b..0f10f409 100644
  INSTALLSTATE WINAPI MsiGetComponentPathExW(		
  	_In_					LPCWSTR		szProductCode,		// ProductCode
  	_In_					LPCWSTR		szComponentCode,	// ComponentCode
-@@ -1352,6 +1433,7 @@ INSTALLSTATE WINAPI MsiGetComponentPathExW(
+@@ -1346,12 +1427,19 @@ INSTALLSTATE WINAPI MsiGetComponentPathExW(
+ #define MSIASSEMBLYINFO_NETASSEMBLY   0 // Net assemblies
+ #define MSIASSEMBLYINFO_WIN32ASSEMBLY 1 // Win32 assemblies
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(MSIASSEMBLYINFO, unsigned long,
++    MSIASSEMBLYINFO_NETASSEMBLY,
++    MSIASSEMBLYINFO_WIN32ASSEMBLY);
++#endif
++
+ // Return full component path for an assembly installed via the WI, performing any necessary installation. 
+ // Prompts for source if necessary and increments the usage count for the feature.
+ // The szAssemblyName parameter specifies the stringized assembly name. 
  // The szAppContext is the full path to the .cfg file or the app exe to which the assembly being requested 
  // has been privatised to, which is null for global assemblies
  
@@ -580,7 +592,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiProvideAssemblyA(
  	_In_ LPCSTR    szAssemblyName,                       // stringized assembly name
  	_In_opt_ LPCSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
-@@ -1359,6 +1441,7 @@ UINT WINAPI MsiProvideAssemblyA(
+@@ -1359,6 +1447,7 @@ UINT WINAPI MsiProvideAssemblyA(
  	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,    // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf); // in/out buffer character count
@@ -588,7 +600,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiProvideAssemblyW(
  	_In_ LPCWSTR    szAssemblyName,                       // stringized assembly name
  	_In_opt_ LPCWSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
-@@ -1377,12 +1460,14 @@ UINT WINAPI MsiProvideAssemblyW(
+@@ -1377,12 +1466,14 @@ UINT WINAPI MsiProvideAssemblyW(
  #if (_WIN32_MSI >= 300)
  // Query the installed state of a component in the specified product instance
  
@@ -603,7 +615,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiQueryComponentStateW(
  		_In_ LPCWSTR szProductCode,       // Information is queried on this product
  		_In_opt_ LPCWSTR szUserSid,       // Account of this product instance
-@@ -1404,9 +1489,11 @@ UINT WINAPI MsiQueryComponentStateW(
+@@ -1404,9 +1495,11 @@ UINT WINAPI MsiQueryComponentStateW(
  
  // Enumerate the registered products, either installed or advertised
  
@@ -615,7 +627,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumProductsW(
  	_In_ DWORD     iProductIndex,                               // 0-based index into registered products
  	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpProductBuf);    // buffer of char count: 39 (size of string GUID)
-@@ -1419,6 +1506,7 @@ UINT WINAPI MsiEnumProductsW(
+@@ -1419,6 +1512,7 @@ UINT WINAPI MsiEnumProductsW(
  #if (_WIN32_MSI >= 300)
  // Enumerate the registered products, either installed or advertised in
  // the specified context
@@ -623,7 +635,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumProductsExA(
  		_In_opt_ LPCSTR szProductCode,                                      // Enumerate instances of this product
  		_In_opt_ LPCSTR szUserSid,                                          // Account for enumeration
-@@ -1430,6 +1518,7 @@ UINT WINAPI MsiEnumProductsExA(
+@@ -1430,6 +1524,7 @@ UINT WINAPI MsiEnumProductsExA(
  		_Inout_opt_ LPDWORD pcchSid);                                         // in/out character count of szSid 
  // Enumerate the registered products, either installed or advertised in
  // the specified context
@@ -631,7 +643,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumProductsExW(
  		_In_opt_ LPCWSTR szProductCode,                                      // Enumerate instances of this product
  		_In_opt_ LPCWSTR szUserSid,                                          // Account for enumeration
-@@ -1450,11 +1539,13 @@ UINT WINAPI MsiEnumProductsExW(
+@@ -1450,11 +1545,13 @@ UINT WINAPI MsiEnumProductsExW(
  
  // Enumerate products with given upgrade code
  
@@ -645,7 +657,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumRelatedProductsW(
  	_In_ LPCWSTR  lpUpgradeCode,                               // upgrade code of products to enumerate
  	_Reserved_ DWORD     dwReserved,                            // reserved, must be 0
-@@ -1471,11 +1562,13 @@ UINT WINAPI MsiEnumRelatedProductsW(
+@@ -1471,11 +1568,13 @@ UINT WINAPI MsiEnumRelatedProductsW(
  // Enumerate the advertised features for a given product.
  // If parent is not required, supplying NULL will improve performance.
  
@@ -659,7 +671,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumFeaturesW(
  	_In_ LPCWSTR  szProduct,
  	_In_ DWORD     iFeatureIndex,                                    // 0-based index into published features
-@@ -1489,9 +1582,11 @@ UINT WINAPI MsiEnumFeaturesW(
+@@ -1489,9 +1588,11 @@ UINT WINAPI MsiEnumFeaturesW(
  
  // Enumerate the installed components for all products
  
@@ -671,7 +683,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumComponentsW(
  	_In_ DWORD    iComponentIndex,                              // 0-based index into installed components
  	_Out_writes_(MAX_GUID_CHARS+1)  LPWSTR   lpComponentBuf);  // buffer of char count: 39 (size of string GUID)
-@@ -1505,6 +1600,7 @@ UINT WINAPI MsiEnumComponentsW(
+@@ -1505,6 +1606,7 @@ UINT WINAPI MsiEnumComponentsW(
  // Enumerate installed components for all products for a given users 
  // and context
  
@@ -679,7 +691,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumComponentsExA(	
  	_In_opt_				LPCSTR		szUserSid,			// Account for enumeration
  	_In_					DWORD			dwContext,			// Contexts for enumeration
-@@ -1513,6 +1609,7 @@ UINT WINAPI MsiEnumComponentsExA(
+@@ -1513,6 +1615,7 @@ UINT WINAPI MsiEnumComponentsExA(
  	_Out_opt_				MSIINSTALLCONTEXT*	pdwInstalledContext,		// Enumerated component's context
  	_Out_writes_opt_(*pcchSid)		LPSTR			szSid,				// Enumerated component's user account
  	_Inout_opt_				LPDWORD			pcchSid);			// in/out character count of szSid 
@@ -687,7 +699,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumComponentsExW(	
  	_In_opt_				LPCWSTR		szUserSid,			// Account for enumeration
  	_In_					DWORD			dwContext,			// Contexts for enumeration
-@@ -1531,10 +1628,12 @@ UINT WINAPI MsiEnumComponentsExW(
+@@ -1531,10 +1634,12 @@ UINT WINAPI MsiEnumComponentsExW(
  
  // Enumerate the client products for a component
  
@@ -700,7 +712,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumClientsW(
  	_In_ LPCWSTR  szComponent,
  	_In_ DWORD     iProductIndex,                               // 0-based index into client products
-@@ -1549,6 +1648,7 @@ UINT WINAPI MsiEnumClientsW(
+@@ -1549,6 +1654,7 @@ UINT WINAPI MsiEnumClientsW(
  // Enumerate the client products for a component for a given users 
  // and context
  
@@ -708,7 +720,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumClientsExA (	
  	_In_					LPCSTR		szComponent,		// ComponentCode for enumeration
  	_In_opt_				LPCSTR		szUserSid,		// Account for enumeration
-@@ -1558,6 +1658,7 @@ UINT WINAPI MsiEnumClientsExA (
+@@ -1558,6 +1664,7 @@ UINT WINAPI MsiEnumClientsExA (
  	_Out_opt_				MSIINSTALLCONTEXT	*pdwInstalledContext,	// Enumerated component's client product's context
  	_Out_writes_opt_(*pcchSid)		LPSTR			szSid,			// Enumerated user account
  	_Inout_opt_				LPDWORD			pcchSid);		// in/out character count of szSid 
@@ -716,7 +728,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumClientsExW (	
  	_In_					LPCWSTR		szComponent,		// ComponentCode for enumeration
  	_In_opt_				LPCWSTR		szUserSid,		// Account for enumeration
-@@ -1576,6 +1677,7 @@ UINT WINAPI MsiEnumClientsExW (
+@@ -1576,6 +1683,7 @@ UINT WINAPI MsiEnumClientsExW (
  
  // Enumerate the qualifiers for an advertised component.
  
@@ -724,7 +736,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumComponentQualifiersA(
  	_In_                                       LPCSTR   szComponent,             // generic component ID that is qualified
  	_In_                                       DWORD      iIndex,	               // 0-based index into qualifiers
-@@ -1583,6 +1685,7 @@ UINT WINAPI MsiEnumComponentQualifiersA(
+@@ -1583,6 +1691,7 @@ UINT WINAPI MsiEnumComponentQualifiersA(
  	_Inout_                                    LPDWORD    pcchQualifierBuf,        // in/out qualifier buffer character count
  	_Out_writes_opt_(*pcchApplicationDataBuf)  LPSTR    lpApplicationDataBuf,    // description buffer
  	_Inout_opt_                                LPDWORD    pcchApplicationDataBuf); // in/out description buffer character count
@@ -732,7 +744,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiEnumComponentQualifiersW(
  	_In_                                       LPCWSTR   szComponent,             // generic component ID that is qualified
  	_In_                                       DWORD      iIndex,	               // 0-based index into qualifiers
-@@ -1602,9 +1705,11 @@ UINT WINAPI MsiEnumComponentQualifiersW(
+@@ -1602,9 +1711,11 @@ UINT WINAPI MsiEnumComponentQualifiersW(
  
  // Open the installation for a product to obtain detailed information
  
@@ -744,7 +756,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiOpenProductW(
  	_In_ LPCWSTR   szProduct,     // product code
  	_Out_ MSIHANDLE  *hProduct);   // returned product handle, must be closed
-@@ -1616,9 +1721,11 @@ UINT WINAPI MsiOpenProductW(
+@@ -1616,9 +1727,11 @@ UINT WINAPI MsiOpenProductW(
  
  // Open a product package in order to access product properties
  
@@ -756,7 +768,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiOpenPackageW(
  	_In_ LPCWSTR    szPackagePath,      // path to package, or database handle: #nnnn
  	_Out_ MSIHANDLE  *hProduct);         // returned product handle, must be closed
-@@ -1634,10 +1741,12 @@ UINT WINAPI MsiOpenPackageW(
+@@ -1634,10 +1747,12 @@ UINT WINAPI MsiOpenPackageW(
  // Option to create a "safe" engine that does not look at machine state
  //  and does not allow for modification of machine state
  
@@ -769,7 +781,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiOpenPackageExW(
  	_In_ LPCWSTR   szPackagePath,  // path to package, or database handle: #nnnn
  	_In_ DWORD      dwOptions,      // options flags to indicate whether or not to ignore machine state
-@@ -1652,11 +1761,13 @@ UINT WINAPI MsiOpenPackageExW(
+@@ -1652,11 +1767,13 @@ UINT WINAPI MsiOpenPackageExW(
  
  #if (_WIN32_MSI >= 400)
  
@@ -783,7 +795,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetPatchFileListW(
  	_In_  LPCWSTR    szProductCode,
  	_In_  LPCWSTR    szPatchPackages,
-@@ -1672,11 +1783,13 @@ UINT WINAPI MsiGetPatchFileListW(
+@@ -1672,11 +1789,13 @@ UINT WINAPI MsiGetPatchFileListW(
  
  // Provide the value for an installation property.
  
@@ -797,7 +809,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetProductPropertyW(
  	_In_ MSIHANDLE   hProduct,                                   // product handle obtained from MsiOpenProduct
  	_In_ LPCWSTR    szProperty,                                 // property name, case-sensitive
-@@ -1692,8 +1805,10 @@ UINT WINAPI MsiGetProductPropertyW(
+@@ -1692,8 +1811,10 @@ UINT WINAPI MsiGetProductPropertyW(
  // Determine whether a file is a package
  // Returns ERROR_SUCCESS if file is a package.
  
@@ -808,7 +820,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiVerifyPackageW(
  	_In_ LPCWSTR      szPackagePath);   // location of package
  #ifdef UNICODE
-@@ -1709,6 +1824,7 @@ UINT WINAPI MsiVerifyPackageW(
+@@ -1709,6 +1830,7 @@ UINT WINAPI MsiVerifyPackageW(
  //   1 = highest priority, feature installed if parent is installed
  //  >1 = decreasing priority, feature installation based on InstallLevel property
  
@@ -816,7 +828,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetFeatureInfoA(
  	_In_                             MSIHANDLE   hProduct,      // product handle obtained from MsiOpenProduct
  	_In_                             LPCSTR    szFeature,     // feature name
-@@ -1717,6 +1833,7 @@ UINT WINAPI MsiGetFeatureInfoA(
+@@ -1717,6 +1839,7 @@ UINT WINAPI MsiGetFeatureInfoA(
  	_Inout_opt_                      LPDWORD     pcchTitleBuf,  // in/out buffer character count
  	_Out_writes_opt_(*pcchHelpBuf)   LPSTR     lpHelpBuf,     // returned description, NULL if not desired
  	_Inout_opt_                      LPDWORD     pcchHelpBuf);  // in/out buffer character count
@@ -824,7 +836,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetFeatureInfoW(
  	_In_                             MSIHANDLE   hProduct,      // product handle obtained from MsiOpenProduct
  	_In_                             LPCWSTR    szFeature,     // feature name
-@@ -1740,10 +1857,12 @@ UINT WINAPI MsiGetFeatureInfoW(
+@@ -1740,10 +1863,12 @@ UINT WINAPI MsiGetFeatureInfoW(
  // This would typically occur due to failue to establish feature availability
  // The product feature having the smallest incremental cost is installed
  
@@ -837,7 +849,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiInstallMissingComponentW(
  	_In_ LPCWSTR      szProduct,        // product code
  	_In_ LPCWSTR      szComponent,      // component Id, string GUID
-@@ -1759,9 +1878,11 @@ UINT WINAPI MsiInstallMissingComponentW(
+@@ -1759,9 +1884,11 @@ UINT WINAPI MsiInstallMissingComponentW(
  // The missing component is determined from the product's File table, then
  // the product feature having the smallest incremental cost is installed
  
@@ -849,7 +861,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiInstallMissingFileW(
  	_In_ LPCWSTR      szProduct,        // product code
  	_In_ LPCWSTR      szFile);          // file name, without path
-@@ -1776,10 +1897,12 @@ UINT WINAPI MsiInstallMissingFileW(
+@@ -1776,10 +1903,12 @@ UINT WINAPI MsiInstallMissingFileW(
  // but is not guaranteed to find the correct product for the caller.
  // MsiGetComponentPath should always be called when possible.
  
@@ -862,7 +874,7 @@ index 77ea809b..0f10f409 100644
  INSTALLSTATE WINAPI MsiLocateComponentW(
  	_In_ LPCWSTR szComponent,                         // component Id, string GUID
  	_Out_writes_opt_(*pcchBuf)  LPWSTR  lpPathBuf,    // returned path
-@@ -1800,10 +1923,12 @@ INSTALLSTATE WINAPI MsiLocateComponentW(
+@@ -1800,10 +1929,12 @@ INSTALLSTATE WINAPI MsiLocateComponentW(
  // and removes all network sources from the list. A NULL or empty value for
  // the user name indicates the per-machine install.
  
@@ -875,7 +887,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListClearAllW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
-@@ -1818,11 +1943,13 @@ UINT WINAPI MsiSourceListClearAllW(
+@@ -1818,11 +1949,13 @@ UINT WINAPI MsiSourceListClearAllW(
  // and adds the provided source as a new network source. A NULL or empty 
  // value for the user name indicates the per-machine install.
  
@@ -889,7 +901,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListAddSourceW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
-@@ -1837,10 +1964,12 @@ UINT WINAPI MsiSourceListAddSourceW(
+@@ -1837,10 +1970,12 @@ UINT WINAPI MsiSourceListAddSourceW(
  // Forces the installer to reevaluate the list of sources the next time that
  // the specified product needs a source.
  
@@ -902,7 +914,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListForceResolutionW(
  	_In_ LPCWSTR szProduct,          // product code
  	_In_opt_ LPCWSTR szUserName,     // user name or NULL/empty for per-machine
-@@ -1857,6 +1986,7 @@ UINT WINAPI MsiSourceListForceResolutionW(
+@@ -1857,6 +1992,7 @@ UINT WINAPI MsiSourceListForceResolutionW(
  // Adds a source or moves a source within the list of sources for the 
  // specified product or patch instance. The source can be network/url type.
  
@@ -910,7 +922,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListAddSourceExA(
  	_In_ LPCSTR szProductCodeOrPatchCode,// Source will be added to this product or patch
  	_In_opt_ LPCSTR szUserSid,           // Account of this product/patch instance
-@@ -1864,6 +1994,7 @@ UINT WINAPI MsiSourceListAddSourceExA(
+@@ -1864,6 +2000,7 @@ UINT WINAPI MsiSourceListAddSourceExA(
  	_In_ DWORD dwOptions,                  // Additional qualifiers
  	_In_ LPCSTR szSource,                // source to be added/re-ordered
  	_In_ DWORD dwIndex);                   // new index for the source
@@ -918,7 +930,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListAddSourceExW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,// Source will be added to this product or patch
  	_In_opt_ LPCWSTR szUserSid,           // Account of this product/patch instance
-@@ -1879,6 +2010,7 @@ UINT WINAPI MsiSourceListAddSourceExW(
+@@ -1879,6 +2016,7 @@ UINT WINAPI MsiSourceListAddSourceExW(
  
  // Add or update a media source for the specified product or patch instance
  
@@ -926,7 +938,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListAddMediaDiskA(
  	_In_ LPCSTR szProductCodeOrPatchCode,// Disk will be added to this product or patch
  	_In_opt_ LPCSTR szUserSid,           // Account of this product/patch instance
-@@ -1887,6 +2019,7 @@ UINT WINAPI MsiSourceListAddMediaDiskA(
+@@ -1887,6 +2025,7 @@ UINT WINAPI MsiSourceListAddMediaDiskA(
  	_In_ DWORD dwDiskId,                   // ID of the disk to be added/updated
  	_In_opt_ LPCSTR szVolumeLabel,       // Volume Label of the disk
  	_In_opt_ LPCSTR szDiskPrompt);       // Disk Prompt of the disk
@@ -934,7 +946,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListAddMediaDiskW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,// Disk will be added to this product or patch
  	_In_opt_ LPCWSTR szUserSid,           // Account of this product/patch instance
-@@ -1903,12 +2036,14 @@ UINT WINAPI MsiSourceListAddMediaDiskW(
+@@ -1903,12 +2042,14 @@ UINT WINAPI MsiSourceListAddMediaDiskW(
  
  // Remove an existing source for the specified product or patch instance
  
@@ -949,7 +961,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListClearSourceW(
  	_In_ LPCWSTR szProductCodeOrPatchCode, // Source will be cleared for this product or patch
  	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
-@@ -1924,12 +2059,14 @@ UINT WINAPI MsiSourceListClearSourceW(
+@@ -1924,12 +2065,14 @@ UINT WINAPI MsiSourceListClearSourceW(
  // Remove an existing registered disk under the media source for the specified product or
  // patch instance
  
@@ -964,7 +976,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListClearMediaDiskW(
  	_In_ LPCWSTR szProductCodeOrPatchCode, // Disk will be cleared for this product or patch
  	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
-@@ -1945,11 +2082,13 @@ UINT WINAPI MsiSourceListClearMediaDiskW(
+@@ -1945,11 +2088,13 @@ UINT WINAPI MsiSourceListClearMediaDiskW(
  // Remove all existing sources of the given source type for the specified product or patch
  // instance
  
@@ -978,7 +990,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListClearAllExW(
  	_In_ LPCWSTR szProductCodeOrPatchCode, // All sources will be cleared for this product or patch
  	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
-@@ -1964,11 +2103,13 @@ UINT WINAPI MsiSourceListClearAllExW(
+@@ -1964,11 +2109,13 @@ UINT WINAPI MsiSourceListClearAllExW(
  // Forces the installer to reevaluate the list of sources the next time that
  // the specified product or patch instance needs a source.
  
@@ -992,7 +1004,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListForceResolutionExW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,  // Source Resolution will be forced for this product or patch
  	_In_opt_ LPCWSTR szUserSid,             // Account of this product/patch instance
-@@ -1982,6 +2123,7 @@ UINT WINAPI MsiSourceListForceResolutionExW(
+@@ -1982,6 +2129,7 @@ UINT WINAPI MsiSourceListForceResolutionExW(
  
  // Set the source list property to the provided value for the specified product or patch instance
  
@@ -1000,7 +1012,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListSetInfoA(
  	_In_ LPCSTR szProductCodeOrPatchCode, // Source Info will be set for this product or patch
  	_In_opt_ LPCSTR szUserSid,            // Account of this product/patch instance
-@@ -1989,6 +2131,7 @@ UINT WINAPI MsiSourceListSetInfoA(
+@@ -1989,6 +2137,7 @@ UINT WINAPI MsiSourceListSetInfoA(
  	_In_ DWORD dwOptions,                   // Additional qualifiers
  	_In_ LPCSTR szProperty,               // Property being set/modified
  	_In_ LPCSTR szValue);                 // Value to be set
@@ -1008,7 +1020,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListSetInfoW(
  	_In_ LPCWSTR szProductCodeOrPatchCode, // Source Info will be set for this product or patch
  	_In_opt_ LPCWSTR szUserSid,            // Account of this product/patch instance
-@@ -2004,6 +2147,7 @@ UINT WINAPI MsiSourceListSetInfoW(
+@@ -2004,6 +2153,7 @@ UINT WINAPI MsiSourceListSetInfoW(
  
  // Query the given source list property for the specified product or patch instance
  
@@ -1016,7 +1028,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListGetInfoA(
  	_In_ LPCSTR szProductCodeOrPatchCode,        // Source Info will be queried for this produt or patch
  	_In_opt_ LPCSTR szUserSid,                   // Account of this product/patch instance
-@@ -2012,6 +2156,7 @@ UINT WINAPI MsiSourceListGetInfoA(
+@@ -2012,6 +2162,7 @@ UINT WINAPI MsiSourceListGetInfoA(
  	_In_ LPCSTR szProperty,                      // Property being queried
  	_Out_writes_opt_(*pcchValue)  LPSTR szValue, // Buffer to get the value
  	_Inout_opt_ LPDWORD pcchValue);                // in/out character count of szValue
@@ -1024,7 +1036,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListGetInfoW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,        // Source Info will be queried for this produt or patch
  	_In_opt_ LPCWSTR szUserSid,                   // Account of this product/patch instance
-@@ -2028,6 +2173,7 @@ UINT WINAPI MsiSourceListGetInfoW(
+@@ -2028,6 +2179,7 @@ UINT WINAPI MsiSourceListGetInfoW(
  
  // Enumerate all sources for the specified product or patch instance
  
@@ -1032,7 +1044,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListEnumSourcesA(
  	_In_ LPCSTR szProductCodeOrPatchCode,             // Sources will be enumerated for this product or patch
  	_In_opt_ LPCSTR szUserSid,                        // Account of this product/patch instance
-@@ -2036,6 +2182,7 @@ UINT WINAPI MsiSourceListEnumSourcesA(
+@@ -2036,6 +2188,7 @@ UINT WINAPI MsiSourceListEnumSourcesA(
  	_In_ DWORD dwIndex,                                 // Index value for enumeration
  	_Out_writes_opt_(*pcchSource)  LPSTR szSource,    // Buffer to receive the enumerated source
  	_Inout_opt_                    LPDWORD pcchSource); // in/out character count of szSource
@@ -1040,7 +1052,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListEnumSourcesW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,             // Sources will be enumerated for this product or patch
  	_In_opt_ LPCWSTR szUserSid,                        // Account of this product/patch instance
-@@ -2052,6 +2199,7 @@ UINT WINAPI MsiSourceListEnumSourcesW(
+@@ -2052,6 +2205,7 @@ UINT WINAPI MsiSourceListEnumSourcesW(
  
  // Enumerate all registered media disks for the specified product or patch instance
  
@@ -1048,7 +1060,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListEnumMediaDisksA(
  	_In_ LPCSTR szProductCodeOrPatchCode,                      // Disks will be enumerated for this product or patch
  	_In_opt_ LPCSTR szUserSid,                                 // Account of this product/patch instance
-@@ -2063,6 +2211,7 @@ UINT WINAPI MsiSourceListEnumMediaDisksA(
+@@ -2063,6 +2217,7 @@ UINT WINAPI MsiSourceListEnumMediaDisksA(
  	_Inout_opt_                         LPDWORD pcchVolumeLabel, // in/out character count of szVolumeLabel
  	_Out_writes_opt_(*pcchDiskPrompt)   LPSTR szDiskPrompt,    // DiskPrompt of the disk being enumerated
  	_Inout_opt_                         LPDWORD pcchDiskPrompt); // in/out character count of szDiskPrompt
@@ -1056,7 +1068,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiSourceListEnumMediaDisksW(
  	_In_ LPCWSTR szProductCodeOrPatchCode,                      // Disks will be enumerated for this product or patch
  	_In_opt_ LPCWSTR szUserSid,                                 // Account of this product/patch instance
-@@ -2088,12 +2237,14 @@ UINT WINAPI MsiSourceListEnumMediaDisksW(
+@@ -2088,12 +2243,14 @@ UINT WINAPI MsiSourceListEnumMediaDisksW(
  
  // Give the version string and language for a specified file
  
@@ -1071,7 +1083,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetFileVersionW(
  	_In_                               LPCWSTR    szFilePath,       // path to the file
  	_Out_writes_opt_(*pcchVersionBuf)  LPWSTR     lpVersionBuf,     // returned version string
-@@ -2109,10 +2260,12 @@ UINT WINAPI MsiGetFileVersionW(
+@@ -2109,10 +2266,12 @@ UINT WINAPI MsiGetFileVersionW(
  
  #if (_WIN32_MSI >=  150)
  
@@ -1084,7 +1096,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetFileHashW(
  	_In_ LPCWSTR         szFilePath,  // path to the file
  	_In_ DWORD            dwOptions,   // options
-@@ -2128,12 +2281,14 @@ UINT WINAPI MsiGetFileHashW(
+@@ -2128,12 +2287,14 @@ UINT WINAPI MsiGetFileHashW(
  #if (_WIN32_MSI >= 150)
  #ifndef _MSI_NO_CRYPTO
  
@@ -1099,7 +1111,7 @@ index 77ea809b..0f10f409 100644
  HRESULT WINAPI MsiGetFileSignatureInformationW(
  	_In_ LPCWSTR szSignedObjectPath,                     // path to the signed object
  	_In_ DWORD dwFlags,                                   // special extra error case flags
-@@ -2159,11 +2314,13 @@ HRESULT WINAPI MsiGetFileSignatureInformationW(
+@@ -2159,11 +2320,13 @@ HRESULT WINAPI MsiGetFileSignatureInformationW(
  // examine a shortcut, and retrieve its descriptor information 
  // if available.
  
@@ -1113,7 +1125,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiGetShortcutTargetW(
  	_In_                                   LPCWSTR    szShortcutPath,    // full file path for the shortcut
  	_Out_writes_opt_(MAX_GUID_CHARS+1)     LPWSTR     szProductCode,     // returned product code   - GUID
-@@ -2182,12 +2339,14 @@ UINT WINAPI MsiGetShortcutTargetW(
+@@ -2182,12 +2345,14 @@ UINT WINAPI MsiGetShortcutTargetW(
  // checks to see if a product is managed
  // checks per-machine if called from system context, per-user if from
  // user context
@@ -1128,7 +1140,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiIsProductElevatedW(
  	_In_ LPCWSTR szProduct,  // product code
  	_Out_ BOOL *pfElevated);  // result   
-@@ -2204,8 +2363,10 @@ UINT WINAPI MsiIsProductElevatedW(
+@@ -2204,8 +2369,10 @@ UINT WINAPI MsiIsProductElevatedW(
  
  // Caller notifies us of a user who's been moved and results in a sid change.
  
@@ -1139,7 +1151,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
                                  _In_ LPCWSTR pNewSid);
  #ifdef UNICODE
-@@ -2223,12 +2384,14 @@ UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
+@@ -2223,12 +2390,14 @@ UINT WINAPI MsiNotifySidChangeW(_In_ LPCWSTR pOldSid,
  #if (_WIN32_MSI >=  450)
  
  // Start a multi package transaction
@@ -1154,7 +1166,7 @@ index 77ea809b..0f10f409 100644
  UINT WINAPI MsiBeginTransactionW(
  	_In_ LPCWSTR szName,                         // A name to identify the transaction
  	_In_ DWORD dwTransactionAttributes,           // Attributes to control the nature of the transaction
-@@ -2241,10 +2404,12 @@ UINT WINAPI MsiBeginTransactionW(
+@@ -2241,10 +2410,12 @@ UINT WINAPI MsiBeginTransactionW(
  #endif // !UNICODE
  
  // End a multi package transaction

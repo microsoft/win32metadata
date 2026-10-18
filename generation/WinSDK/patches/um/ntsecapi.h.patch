@@ -1,5 +1,5 @@
 diff --git a/um/ntsecapi.h b/um/ntsecapi.h
-index e30ee026..81cb7050 100644
+index e30ee026..baf259f6 100644
 --- a/um/ntsecapi.h
 +++ b/um/ntsecapi.h
 @@ -1653,6 +1653,7 @@ typedef enum _POLICY_AUDIT_EVENT_TYPE {
@@ -321,7 +321,63 @@ index e30ee026..81cb7050 100644
  ULONG
  NTAPI
  LsaNtStatusToWinError(
-@@ -5479,6 +5519,8 @@ typedef const PAUDIT_POLICY_INFORMATION PCAUDIT_POLICY_INFORMATION, LPCAUDIT_POL
+@@ -3494,6 +3534,16 @@ typedef struct _DOMAIN_PASSWORD_INFORMATION {
+ #define DOMAIN_LOCKOUT_ADMINS               0x00000008L
+ #define DOMAIN_PASSWORD_STORE_CLEARTEXT     0x00000010L
+ #define DOMAIN_REFUSE_PASSWORD_CHANGE       0x00000020L
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(DOMAIN_PASSWORD_PROPERTIES, unsigned long,
++    DOMAIN_PASSWORD_COMPLEX,
++    DOMAIN_PASSWORD_NO_ANON_CHANGE,
++    DOMAIN_PASSWORD_NO_CLEAR_CHANGE,
++    DOMAIN_LOCKOUT_ADMINS,
++    DOMAIN_PASSWORD_STORE_CLEARTEXT,
++    DOMAIN_REFUSE_PASSWORD_CHANGE);
++#endif
+ #if(_WIN32_WINNT >= 0x0502)
+ #define DOMAIN_NO_LM_OWF_CHANGE             0x00000040L
+ #endif
+@@ -4399,6 +4449,24 @@ RtlDecryptMemory(
+ #define KERB_TICKET_FLAGS_enc_pa_rep        0x00010000
+ #define KERB_TICKET_FLAGS_reserved1         0x00000001
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(KERB_TICKET_FLAGS, unsigned long,
++    KERB_TICKET_FLAGS_forwardable,
++    KERB_TICKET_FLAGS_forwarded,
++    KERB_TICKET_FLAGS_hw_authent,
++    KERB_TICKET_FLAGS_initial,
++    KERB_TICKET_FLAGS_invalid,
++    KERB_TICKET_FLAGS_may_postdate,
++    KERB_TICKET_FLAGS_ok_as_delegate,
++    KERB_TICKET_FLAGS_postdated,
++    KERB_TICKET_FLAGS_pre_authent,
++    KERB_TICKET_FLAGS_proxiable,
++    KERB_TICKET_FLAGS_proxy,
++    KERB_TICKET_FLAGS_renewable,
++    KERB_TICKET_FLAGS_reserved,
++    KERB_TICKET_FLAGS_reserved1);
++#endif
++
+ 
+ 
+ #if (_WIN32_WINNT >= 0x0501)
+@@ -5297,6 +5365,13 @@ typedef struct _KERB_ADD_CREDENTIALS_REQUEST {
+ #define KERB_REQUEST_ADD_CREDENTIAL     1
+ #define KERB_REQUEST_REPLACE_CREDENTIAL 2
+ #define KERB_REQUEST_REMOVE_CREDENTIAL  4
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(KERB_REQUEST_FLAGS, unsigned long,
++    KERB_REQUEST_ADD_CREDENTIAL,
++    KERB_REQUEST_REPLACE_CREDENTIAL,
++    KERB_REQUEST_REMOVE_CREDENTIAL);
++#endif
+ #define KERB_REQUEST_CRED_LOCAL_ACCOUNT 8
+ #endif
+ 
+@@ -5479,6 +5554,8 @@ typedef const PAUDIT_POLICY_INFORMATION PCAUDIT_POLICY_INFORMATION, LPCAUDIT_POL
  #define AUDIT_GENERIC_EXECUTE        (STANDARD_RIGHTS_EXECUTE)
  
  
@@ -330,7 +386,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditSetSystemPolicy(
-@@ -5486,6 +5528,8 @@ AuditSetSystemPolicy(
+@@ -5486,6 +5563,8 @@ AuditSetSystemPolicy(
      _In_ ULONG dwPolicyCount
      );
  
@@ -339,7 +395,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditSetPerUserPolicy(
-@@ -5494,6 +5538,8 @@ AuditSetPerUserPolicy(
+@@ -5494,6 +5573,8 @@ AuditSetPerUserPolicy(
      _In_ ULONG dwPolicyCount
      );
  
@@ -348,7 +404,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5504,6 +5550,8 @@ AuditQuerySystemPolicy(
+@@ -5504,6 +5585,8 @@ AuditQuerySystemPolicy(
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -357,7 +413,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5515,6 +5563,8 @@ AuditQueryPerUserPolicy(
+@@ -5515,6 +5598,8 @@ AuditQueryPerUserPolicy(
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -366,7 +422,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5522,6 +5572,8 @@ AuditEnumeratePerUserPolicy(
+@@ -5522,6 +5607,8 @@ AuditEnumeratePerUserPolicy(
      _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PPOLICY_AUDIT_SID_ARRAY* ppAuditSidArray
      );
  
@@ -375,7 +431,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5533,6 +5585,8 @@ AuditComputeEffectivePolicyBySid(
+@@ -5533,6 +5620,8 @@ AuditComputeEffectivePolicyBySid(
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -384,7 +440,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5544,6 +5598,8 @@ AuditComputeEffectivePolicyByToken(
+@@ -5544,6 +5633,8 @@ AuditComputeEffectivePolicyByToken(
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -393,7 +449,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5553,6 +5609,8 @@ AuditEnumerateCategories(
+@@ -5553,6 +5644,8 @@ AuditEnumerateCategories(
      _Out_ PULONG pdwCountReturned
      );
  
@@ -402,7 +458,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5564,6 +5622,8 @@ AuditEnumerateSubCategories(
+@@ -5564,6 +5657,8 @@ AuditEnumerateSubCategories(
      _Out_ PULONG pdwCountReturned
      );
  
@@ -411,7 +467,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5572,6 +5632,8 @@ AuditLookupCategoryNameW(
+@@ -5572,6 +5667,8 @@ AuditLookupCategoryNameW(
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszCategoryName
      );
  
@@ -420,7 +476,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5586,6 +5648,8 @@ AuditLookupCategoryNameA(
+@@ -5586,6 +5683,8 @@ AuditLookupCategoryNameA(
  #define AuditLookupCategoryName  AuditLookupCategoryNameA
  #endif
  
@@ -429,7 +485,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5594,6 +5658,8 @@ AuditLookupSubCategoryNameW(
+@@ -5594,6 +5693,8 @@ AuditLookupSubCategoryNameW(
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszSubCategoryName
      );
  
@@ -438,7 +494,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5608,6 +5674,8 @@ AuditLookupSubCategoryNameA(
+@@ -5608,6 +5709,8 @@ AuditLookupSubCategoryNameA(
  #define AuditLookupSubCategoryName  AuditLookupSubCategoryNameA
  #endif
  
@@ -447,7 +503,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditLookupCategoryIdFromCategoryGuid(
-@@ -5615,6 +5683,8 @@ AuditLookupCategoryIdFromCategoryGuid(
+@@ -5615,6 +5718,8 @@ AuditLookupCategoryIdFromCategoryGuid(
      _Out_ PPOLICY_AUDIT_EVENT_TYPE pAuditCategoryId
      );
  
@@ -456,7 +512,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditLookupCategoryGuidFromCategoryId(
-@@ -5622,6 +5692,8 @@ AuditLookupCategoryGuidFromCategoryId(
+@@ -5622,6 +5727,8 @@ AuditLookupCategoryGuidFromCategoryId(
      _Out_ GUID* pAuditCategoryGuid
      );
  
@@ -465,7 +521,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditSetSecurity(
-@@ -5629,6 +5701,8 @@ AuditSetSecurity(
+@@ -5629,6 +5736,8 @@ AuditSetSecurity(
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
      );
  
@@ -474,7 +530,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5637,6 +5711,8 @@ AuditQuerySecurity(
+@@ -5637,6 +5746,8 @@ AuditQuerySecurity(
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSECURITY_DESCRIPTOR *ppSecurityDescriptor
      );
  
@@ -483,7 +539,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditSetGlobalSaclW(
-@@ -5644,6 +5720,8 @@ AuditSetGlobalSaclW(
+@@ -5644,6 +5755,8 @@ AuditSetGlobalSaclW(
      _In_opt_ PACL Acl
      );
  
@@ -492,7 +548,7 @@ index e30ee026..81cb7050 100644
  BOOLEAN
  NTAPI
  AuditSetGlobalSaclA(
-@@ -5657,6 +5735,8 @@ AuditSetGlobalSaclA(
+@@ -5657,6 +5770,8 @@ AuditSetGlobalSaclA(
  #define AuditSetGlobalSacl AuditSetGlobalSaclA
  #endif
  
@@ -501,7 +557,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5665,6 +5745,8 @@ AuditQueryGlobalSaclW(
+@@ -5665,6 +5780,8 @@ AuditQueryGlobalSaclW(
      _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PACL *Acl
      );
  
@@ -510,7 +566,7 @@ index e30ee026..81cb7050 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5679,6 +5761,7 @@ AuditQueryGlobalSaclA(
+@@ -5679,6 +5796,7 @@ AuditQueryGlobalSaclA(
  #define AuditQueryGlobalSacl AuditQueryGlobalSaclA
  #endif
  

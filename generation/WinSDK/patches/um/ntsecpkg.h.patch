@@ -1,8 +1,22 @@
 diff --git a/um/ntsecpkg.h b/um/ntsecpkg.h
-index 2571b34b..c4f4385e 100644
+index 2571b34b..ef7875aa 100644
 --- a/um/ntsecpkg.h
 +++ b/um/ntsecpkg.h
-@@ -1829,6 +1829,7 @@ extern "C"
+@@ -1601,6 +1601,13 @@ typedef struct _SECPKG_EVENT_PACKAGE_CHANGE {
+ #define SECPKG_PACKAGE_CHANGE_UNLOAD    1
+ #define SECPKG_PACKAGE_CHANGE_SELECT    2
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(SECPKG_PACKAGE_CHANGE_TYPE, unsigned long,
++    SECPKG_PACKAGE_CHANGE_LOAD,
++    SECPKG_PACKAGE_CHANGE_UNLOAD,
++    SECPKG_PACKAGE_CHANGE_SELECT);
++#endif
++
+ typedef struct _SECPKG_EVENT_ROLE_CHANGE {
+     ULONG   PreviousRole;
+     ULONG   NewRole;
+@@ -1829,6 +1836,7 @@ extern "C"
  {
  #endif
  

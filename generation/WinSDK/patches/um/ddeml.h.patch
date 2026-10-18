@@ -1,8 +1,56 @@
 diff --git a/um/ddeml.h b/um/ddeml.h
-index a6276573..f7c35966 100644
+index a6276573..334b815b 100644
 --- a/um/ddeml.h
 +++ b/um/ddeml.h
-@@ -218,6 +218,7 @@ typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
+@@ -100,6 +100,27 @@ typedef struct tagCONVINFO {
+ #define     XST_ADVDATASENT      15
+ #define     XST_ADVDATAACKRCVD   16
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(CONVINFO_CONVERSATION_STATE, unsigned long,
++    XST_ADVACKRCVD,
++    XST_ADVDATAACKRCVD,
++    XST_ADVDATASENT,
++    XST_ADVSENT,
++    XST_CONNECTED,
++    XST_DATARCVD,
++    XST_EXECACKRCVD,
++    XST_EXECSENT,
++    XST_INCOMPLETE,
++    XST_INIT1,
++    XST_INIT2,
++    XST_NULL,
++    XST_POKEACKRCVD,
++    XST_POKESENT,
++    XST_REQSENT,
++    XST_UNADVACKRCVD,
++    XST_UNADVSENT);
++#endif
++
+ /* used in LOWORD(dwData1) of XTYP_ADVREQ callbacks... */
+ #define     CADV_LATEACK         0xFFFF
+ 
+@@ -115,6 +136,19 @@ typedef struct tagCONVINFO {
+ #define     ST_BLOCKNEXT            0x0080
+ #define     ST_ISSELF               0x0100
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CONVINFO_STATUS, unsigned long,
++    ST_ADVISE,
++    ST_BLOCKED,
++    ST_BLOCKNEXT,
++    ST_CLIENT,
++    ST_CONNECTED,
++    ST_INLIST,
++    ST_ISLOCAL,
++    ST_ISSELF,
++    ST_TERMINATED);
++#endif
++
+ /* DDE constants for wStatus field */
+ 
+ #define DDE_FACK                0x8000
+@@ -218,6 +252,7 @@ typedef HDDEDATA (CALLBACK *PFNCALLBACK)(UINT wType, UINT wFmt, HCONV hConv,
  
  /* DLL registration functions */
  
@@ -10,7 +58,7 @@ index a6276573..f7c35966 100644
  UINT
  WINAPI
  DdeInitializeA(
-@@ -225,6 +226,7 @@ DdeInitializeA(
+@@ -225,6 +260,7 @@ DdeInitializeA(
      _In_ PFNCALLBACK pfnCallback,
      _In_ DWORD afCmd,
      _Reserved_ DWORD ulRes);
@@ -18,7 +66,7 @@ index a6276573..f7c35966 100644
  UINT
  WINAPI
  DdeInitializeW(
-@@ -269,6 +271,7 @@ DdeInitializeW(
+@@ -269,6 +305,7 @@ DdeInitializeW(
  #define     APPCLASS_STANDARD            0x00000000L
  #define     APPCLASS_MASK                0x0000000FL
  
@@ -26,7 +74,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeUninitialize(
-@@ -277,6 +280,7 @@ DdeUninitialize(
+@@ -277,6 +314,7 @@ DdeUninitialize(
  /*
   * conversation enumeration functions
   */
@@ -34,7 +82,7 @@ index a6276573..f7c35966 100644
  HCONVLIST
  WINAPI
  DdeConnectList(
-@@ -286,11 +290,13 @@ DdeConnectList(
+@@ -286,11 +324,13 @@ DdeConnectList(
      _In_ HCONVLIST hConvList,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -48,7 +96,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeDisconnectList(
-@@ -299,6 +305,7 @@ DdeDisconnectList(
+@@ -299,6 +339,7 @@ DdeDisconnectList(
  /*
   * conversation control functions
   */
@@ -56,7 +104,7 @@ index a6276573..f7c35966 100644
  HCONV
  WINAPI
  DdeConnect(
-@@ -307,16 +314,19 @@ DdeConnect(
+@@ -307,16 +348,19 @@ DdeConnect(
      _In_ HSZ hszTopic,
      _In_opt_ PCONVCONTEXT pCC);
  
@@ -76,7 +124,7 @@ index a6276573..f7c35966 100644
  UINT
  WINAPI
  DdeQueryConvInfo(
-@@ -324,6 +334,7 @@ DdeQueryConvInfo(
+@@ -324,6 +368,7 @@ DdeQueryConvInfo(
      _In_ DWORD idTransaction,
      _Inout_ PCONVINFO pConvInfo);
  
@@ -84,7 +132,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeSetUserHandle(
-@@ -331,6 +342,7 @@ DdeSetUserHandle(
+@@ -331,6 +376,7 @@ DdeSetUserHandle(
      _In_ DWORD id,
      _In_ DWORD_PTR hUser);
  
@@ -92,7 +140,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeAbandonTransaction(
-@@ -342,6 +354,7 @@ DdeAbandonTransaction(
+@@ -342,6 +388,7 @@ DdeAbandonTransaction(
  /*
   * app server interface functions
   */
@@ -100,7 +148,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdePostAdvise(
-@@ -349,6 +362,7 @@ DdePostAdvise(
+@@ -349,6 +396,7 @@ DdePostAdvise(
      _In_ HSZ hszTopic,
      _In_ HSZ hszItem);
  
@@ -108,7 +156,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeEnableCallback(
-@@ -356,6 +370,8 @@ DdeEnableCallback(
+@@ -356,6 +404,8 @@ DdeEnableCallback(
      _In_ HCONV hConv,
      _In_ UINT wCmd);
  
@@ -117,15 +165,34 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeImpersonateClient(
-@@ -367,6 +383,7 @@ DdeImpersonateClient(
+@@ -367,6 +417,15 @@ DdeImpersonateClient(
  #define EC_DISABLE              ST_BLOCKED
  #define EC_QUERYWAITING         2
  
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_ENABLE_CALLBACK_CMD, unsigned long,
++    EC_ENABLEALL,
++    EC_ENABLEONE,
++    EC_DISABLE,
++    EC_QUERYWAITING);
++#endif
++
 +_Win32_SupportedOS_Windows2000_
  HDDEDATA
  WINAPI
  DdeNameService(
-@@ -383,6 +400,7 @@ DdeNameService(
+@@ -380,9 +439,18 @@ DdeNameService(
+ #define DNS_FILTERON        0x0004
+ #define DNS_FILTEROFF       0x0008
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_NAME_SERVICE_CMD, unsigned long,
++    DNS_REGISTER,
++    DNS_UNREGISTER,
++    DNS_FILTERON,
++    DNS_FILTEROFF);
++#endif
++
  /*
   * app client interface functions
   */
@@ -133,7 +200,7 @@ index a6276573..f7c35966 100644
  HDDEDATA
  WINAPI
  DdeClientTransaction(
-@@ -400,6 +418,7 @@ DdeClientTransaction(
+@@ -400,6 +468,7 @@ DdeClientTransaction(
   *data transfer functions
   */
  
@@ -141,7 +208,7 @@ index a6276573..f7c35966 100644
  HDDEDATA
  WINAPI
  DdeCreateDataHandle(
-@@ -411,6 +430,7 @@ DdeCreateDataHandle(
+@@ -411,6 +480,7 @@ DdeCreateDataHandle(
      _In_ UINT wFmt,
      _In_ UINT afCmd);
  
@@ -149,7 +216,7 @@ index a6276573..f7c35966 100644
  HDDEDATA
  WINAPI
  DdeAddData(
-@@ -419,6 +439,7 @@ DdeAddData(
+@@ -419,6 +489,7 @@ DdeAddData(
      _In_ DWORD cb,
      _In_ DWORD cbOff);
  
@@ -157,7 +224,7 @@ index a6276573..f7c35966 100644
  DWORD
  WINAPI
  DdeGetData(
-@@ -427,17 +448,20 @@ DdeGetData(
+@@ -427,17 +498,20 @@ DdeGetData(
      _In_ DWORD cbMax,
      _In_ DWORD cbOff);
  
@@ -178,7 +245,7 @@ index a6276573..f7c35966 100644
  BOOL
  WINAPI
  DdeFreeDataHandle(
-@@ -446,6 +470,7 @@ DdeFreeDataHandle(
+@@ -446,6 +520,7 @@ DdeFreeDataHandle(
  #define     HDATA_APPOWNED          0x0001
  
  
@@ -186,7 +253,7 @@ index a6276573..f7c35966 100644
  UINT
  WINAPI
  DdeGetLastError(
-@@ -477,12 +502,14 @@ DdeGetLastError(
+@@ -477,12 +552,14 @@ DdeGetLastError(
  
  #define     DMLERR_LAST                        0x4011
  
@@ -201,7 +268,7 @@ index a6276573..f7c35966 100644
  HSZ
  WINAPI
  DdeCreateStringHandleW(
-@@ -495,6 +522,7 @@ DdeCreateStringHandleW(
+@@ -495,6 +572,7 @@ DdeCreateStringHandleW(
  #define DdeCreateStringHandle  DdeCreateStringHandleA
  #endif // !UNICODE
  
@@ -209,7 +276,7 @@ index a6276573..f7c35966 100644
  DWORD
  WINAPI
  DdeQueryStringA(
-@@ -503,6 +531,7 @@ DdeQueryStringA(
+@@ -503,6 +581,7 @@ DdeQueryStringA(
      _Out_writes_opt_(cchMax) LPSTR psz,
      _In_ DWORD cchMax,
      _In_ int iCodePage);
@@ -217,7 +284,7 @@ index a6276573..f7c35966 100644
  DWORD
  WINAPI
  DdeQueryStringW(
-@@ -517,18 +546,21 @@ DdeQueryStringW(
+@@ -517,18 +596,21 @@ DdeQueryStringW(
  #define DdeQueryString  DdeQueryStringA
  #endif // !UNICODE
  
@@ -239,3 +306,63 @@ index a6276573..f7c35966 100644
  int
  WINAPI
  DdeCmpStringHandles(
+@@ -643,6 +725,25 @@ typedef struct tagMONCONVSTRUCT {
+ #define     APPCLASS_MONITOR        0x00000001L
+ #define     XTYP_MONITOR            (0x00F0 | XCLASS_NOTIFICATION | XTYPF_NOBLOCK)
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DDE_CLIENT_TRANSACTION_TYPE, unsigned long,
++    XTYP_ADVSTART,
++    XTYP_ADVSTOP,
++    XTYP_EXECUTE,
++    XTYP_POKE,
++    XTYP_REQUEST,
++    XTYP_ADVDATA,
++    XTYP_ADVREQ,
++    XTYP_CONNECT,
++    XTYP_CONNECT_CONFIRM,
++    XTYP_DISCONNECT,
++    XTYP_MONITOR,
++    XTYP_REGISTER,
++    XTYP_UNREGISTER,
++    XTYP_WILDCONNECT,
++    XTYP_XACT_COMPLETE);
++#endif
++
+ /*
+  * Callback filter flags for use with MONITOR apps - 0 implies no monitor
+  * callbacks.
+@@ -655,6 +756,33 @@ typedef struct tagMONCONVSTRUCT {
+ #define     MF_LINKS                     0x20000000
+ #define     MF_CONV                      0x40000000
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(DDE_INITIALIZE_COMMAND, unsigned long,
++    APPCLASS_MONITOR,
++    APPCLASS_STANDARD,
++    APPCMD_CLIENTONLY,
++    APPCMD_FILTERINITS,
++    CBF_FAIL_ALLSVRXACTIONS,
++    CBF_FAIL_ADVISES,
++    CBF_FAIL_CONNECTIONS,
++    CBF_FAIL_EXECUTES,
++    CBF_FAIL_POKES,
++    CBF_FAIL_REQUESTS,
++    CBF_FAIL_SELFCONNECTIONS,
++    CBF_SKIP_ALLNOTIFICATIONS,
++    CBF_SKIP_CONNECT_CONFIRMS,
++    CBF_SKIP_DISCONNECTS,
++    CBF_SKIP_REGISTRATIONS,
++    CBF_SKIP_UNREGISTRATIONS,
++    MF_CALLBACKS,
++    MF_CONV,
++    MF_ERRORS,
++    MF_HSZ_INFO,
++    MF_LINKS,
++    MF_POSTMSGS,
++    MF_SENDMSGS);
++#endif
++
+ #define     MF_MASK                      0xFF000000
+ #endif /* NODDEMLSPY */
+ 

@@ -1279,6 +1279,9 @@ IWICImageEncoder=Windows.Win32.Graphics.Imaging.D2D
 IWICImagingFactory2=Windows.Win32.Graphics.Imaging.D2D
 IWICImagingFactory3=Windows.Win32.Graphics.Imaging.D2D
 # endregion wincodec.h
+# region wincrypt.h
+CERT_ALT_NAME=Windows.Win32.Security.Cryptography.Certificates
+# endregion wincrypt.h
 # region winddi.h
 BLENDOBJ=Windows.Win32.Devices.Display
 BRUSHOBJ_hGetColorTransform=Windows.Win32.Devices.Display

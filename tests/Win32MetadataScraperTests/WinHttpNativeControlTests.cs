@@ -128,6 +128,22 @@ using WINHTTP_INTERNET_SCHEME = void;
         public void SystemLogicalGroupsKeepNativeValuesTypesAndSurface(
             string original, string partition, string architecture, string target, bool metadataEnabled)
         {
+            this.VerifySystemLogicalGroupsNativeSurface(original, partition, architecture, target, metadataEnabled, "c++");
+        }
+
+        [NativeMigrationTheory("SYSTEM_ENUM_C_MIGRATION_ROOT")]
+        [MemberData(nameof(SystemEnumCNativeModes))]
+        public void SystemLogicalGroupsKeepCNativeValuesTypesAndSurface(
+            string original, string partition, string architecture, string target, bool metadataEnabled)
+        {
+            Assert.Equal(Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"),
+                Environment.GetEnvironmentVariable("SYSTEM_ENUM_C_MIGRATION_ROOT"));
+            this.VerifySystemLogicalGroupsNativeSurface(original, partition, architecture, target, metadataEnabled, "c");
+        }
+
+        private void VerifySystemLogicalGroupsNativeSurface(
+            string original, string partition, string architecture, string target, bool metadataEnabled, string language)
+        {
             string root = WinHttpMigrationTests.RepositoryRoot;
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(
                 Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"), "report.json")));
@@ -140,13 +156,18 @@ using WINHTTP_INTERNET_SCHEME = void;
             var nativeMembers = groups.SelectMany(group => group.GetProperty("Members").EnumerateArray())
                 .Concat(owner.TryGetProperty("additionalNativeMembers", out var additionalMembers)
                     ? additionalMembers.EnumerateArray() : Enumerable.Empty<JsonElement>());
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
             string checks = string.Join("\n", nativeMembers
-                .Select(member => "static_assert((unsigned long long)(" +
+                .Select(member => assertion + "((unsigned long long)(" +
                     (member.TryGetProperty("NativeExpression", out var expression) ? expression.GetString() : member.GetProperty("Name").GetString()) +
-                    ") == " + member.GetProperty("Value").GetRawText() + "ULL);")
-                .Concat(fieldAssociations.Select(value => "static_assert(__is_same(decltype(((" +
-                    value.GetProperty("nativeType").GetString() + "*)nullptr)->" +
-                    value.GetProperty("symbol").GetString().Split("::").Last() + "), DWORD));")));
+                    ") == " + member.GetProperty("Value").GetRawText() + "ULL, \"native value\");")
+                .Concat(fieldAssociations.Select(value => language == "c"
+                    ? "_Static_assert(_Generic(((" + value.GetProperty("nativeType").GetString() + "*)0)->" +
+                        value.GetProperty("symbol").GetString().Split("::").Last() + ", DWORD: 1, default: 0), \"native DWORD field\");"
+                    : "static_assert(__is_same(decltype(((" + value.GetProperty("nativeType").GetString() + "*)nullptr)->" +
+                        value.GetProperty("symbol").GetString().Split("::").Last() + "), DWORD));")));
+            if (owner.TryGetProperty("nativeChecks", out var nativeChecks))
+                checks += "\n" + nativeChecks.GetString();
             string[] carriers = groups.Select(group => "typedef " + group.GetProperty("Group").GetString() + " " +
                 (group.GetProperty("Storage").GetString() switch
                 {
@@ -162,13 +183,21 @@ using WINHTTP_INTERNET_SCHEME = void;
             var beforeAnnotations = new List<string>();
             var annotations = new List<string>();
             bool compareAnnotations = owner.TryGetProperty("expectedAddedAnnotations", out var expectedAddedAnnotations);
+            string sourceText = language == "c"
+                ? "#define SECURITY_WIN32\n#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n" +
+                    "#include <sdkddkver.h>\n#include <ntsecapi.h>\n#include <sspi.h>\n#include <" +
+                    Path.GetFileName(original) + ">\n"
+                : null;
             var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled && compareAnnotations,
-                annotations: beforeAnnotations, salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
+                annotations: beforeAnnotations, sourceText: sourceText, salAnnotations: beforeSal,
+                diagnostics: beforeDiagnostics, language: language);
             var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled,
-                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics);
-            Assert.True(groups.Length > 0 || fieldAssociations.Length > 0);
+                annotations: annotations, sourceText: sourceText, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            int producerCount = owner.TryGetProperty("producers", out var producers) ? producers.GetArrayLength() : 0;
+            Assert.True(groups.Length > 0 || fieldAssociations.Length > 0 || producerCount > 0);
             Assert.NotEmpty(checks);
             Assert.Equal(before.Concat(metadataEnabled ? carriers : Array.Empty<string>())
                 .OrderBy(value => value, StringComparer.Ordinal), after);
@@ -209,10 +238,13 @@ using WINHTTP_INTERNET_SCHEME = void;
                         value.StartsWith(name + "|FlagsEnum(", StringComparison.Ordinal)));
                 }
             }
-            this.output.WriteLine($"{original}/{architecture}: {groups.Length} exact metadata-only group aliases; " +
+            this.output.WriteLine($"{original}/{architecture}/{language}: {groups.Length} exact metadata-only group aliases, {producerCount} producer contracts; " +
                 $"compiled native value/type checks, declaration multiplicities, ABI and SAL preserved; " +
                 $"{beforeAnnotations.Count} prior Win32 annotation payloads preserved.");
         }
+
+        public static IEnumerable<object[]> SystemEnumCNativeModes()
+            => SystemEnumNativeModes().Where(value => (string)value[2] == "x64");
 
         public static IEnumerable<object[]> SystemEnumNativeModes()
         {

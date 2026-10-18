@@ -1,8 +1,91 @@
 diff --git a/shared/evntrace.h b/shared/evntrace.h
-index 58677d49..5844b6bd 100644
+index 58677d49..7f21026f 100644
 --- a/shared/evntrace.h
 +++ b/shared/evntrace.h
-@@ -1726,6 +1726,7 @@ extern "C" {
+@@ -547,6 +547,37 @@ typedef ULONG64 CONTROLTRACE_ID;
+ // Enable flags for Kernel Events on Threshold and above
+ //
+ #define EVENT_TRACE_FLAG_JOB                0x00080000  // job start & end
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(EVENT_TRACE_FLAG, unsigned long,
++    EVENT_TRACE_FLAG_ALPC,
++    EVENT_TRACE_FLAG_CSWITCH,
++    EVENT_TRACE_FLAG_DBGPRINT,
++    EVENT_TRACE_FLAG_DISK_FILE_IO,
++    EVENT_TRACE_FLAG_DISK_IO,
++    EVENT_TRACE_FLAG_DISK_IO_INIT,
++    EVENT_TRACE_FLAG_DISPATCHER,
++    EVENT_TRACE_FLAG_DPC,
++    EVENT_TRACE_FLAG_DRIVER,
++    EVENT_TRACE_FLAG_FILE_IO,
++    EVENT_TRACE_FLAG_FILE_IO_INIT,
++    EVENT_TRACE_FLAG_IMAGE_LOAD,
++    EVENT_TRACE_FLAG_INTERRUPT,
++    EVENT_TRACE_FLAG_JOB,
++    EVENT_TRACE_FLAG_MEMORY_HARD_FAULTS,
++    EVENT_TRACE_FLAG_MEMORY_PAGE_FAULTS,
++    EVENT_TRACE_FLAG_NETWORK_TCPIP,
++    EVENT_TRACE_FLAG_NO_SYSCONFIG,
++    EVENT_TRACE_FLAG_PROCESS,
++    EVENT_TRACE_FLAG_PROCESS_COUNTERS,
++    EVENT_TRACE_FLAG_PROFILE,
++    EVENT_TRACE_FLAG_REGISTRY,
++    EVENT_TRACE_FLAG_SPLIT_IO,
++    EVENT_TRACE_FLAG_SYSTEMCALL,
++    EVENT_TRACE_FLAG_THREAD,
++    EVENT_TRACE_FLAG_VAMAP,
++    EVENT_TRACE_FLAG_VIRTUAL_ALLOC);
++#endif
+ #define EVENT_TRACE_FLAG_DEBUG_EVENTS       0x00400000  // debugger events (break/continue/...)
+ 
+ //
+@@ -636,6 +667,14 @@ typedef ULONG64 CONTROLTRACE_ID;
+ 
+ #define EVENT_TRACE_CONTROL_FLUSH           3       // Flushes all the buffers
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(EVENT_TRACE_CONTROL, unsigned long,
++    EVENT_TRACE_CONTROL_FLUSH,
++    EVENT_TRACE_CONTROL_QUERY,
++    EVENT_TRACE_CONTROL_STOP,
++    EVENT_TRACE_CONTROL_UPDATE);
++#endif
++
+ //
+ // Supported for RS5 and above.
+ //
+@@ -663,6 +702,15 @@ typedef ULONG64 CONTROLTRACE_ID;
+ #define TRACE_MESSAGE_PERFORMANCE_TIMESTAMP 16 // *Obsolete* Clock type is controlled by the logger
+ #define TRACE_MESSAGE_SYSTEMINFO            32 // Message includes system information TID,PID
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(TRACE_MESSAGE_FLAGS, unsigned long,
++    TRACE_MESSAGE_COMPONENTID,
++    TRACE_MESSAGE_GUID,
++    TRACE_MESSAGE_SEQUENCE,
++    TRACE_MESSAGE_SYSTEMINFO,
++    TRACE_MESSAGE_TIMESTAMP);
++#endif
++
+ //
+ // Vista flags set by system to indicate provider pointer size.
+ //
+@@ -1501,6 +1549,13 @@ typedef struct _EVENT_TRACE {
+ #define EVENT_CONTROL_CODE_ENABLE_PROVIDER  1
+ #define EVENT_CONTROL_CODE_CAPTURE_STATE    2
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(ENABLECALLBACK_ENABLED_STATE, unsigned long,
++    EVENT_CONTROL_CODE_DISABLE_PROVIDER,
++    EVENT_CONTROL_CODE_ENABLE_PROVIDER,
++    EVENT_CONTROL_CODE_CAPTURE_STATE);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+@@ -1726,6 +1781,7 @@ extern "C" {
  //
  
  EXTERN_C
@@ -10,7 +93,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  StartTraceW (
-@@ -1741,6 +1742,7 @@ StartTraceW (
+@@ -1741,6 +1797,7 @@ StartTraceW (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -18,7 +101,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  StartTraceA (
-@@ -1760,6 +1762,7 @@ StartTraceA (
+@@ -1760,6 +1817,7 @@ StartTraceA (
  //
  
  EXTERN_C
@@ -26,7 +109,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  StopTraceW (
-@@ -1775,6 +1778,7 @@ StopTraceW (
+@@ -1775,6 +1833,7 @@ StopTraceW (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -34,7 +117,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  StopTraceA (
-@@ -1794,6 +1798,7 @@ StopTraceA (
+@@ -1794,6 +1853,7 @@ StopTraceA (
  //
  
  EXTERN_C
@@ -42,7 +125,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  QueryTraceW (
-@@ -1809,6 +1814,7 @@ QueryTraceW (
+@@ -1809,6 +1869,7 @@ QueryTraceW (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -50,7 +133,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  QueryTraceA (
-@@ -1822,6 +1828,7 @@ QueryTraceA (
+@@ -1822,6 +1883,7 @@ QueryTraceA (
  //
  
  EXTERN_C
@@ -58,7 +141,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  UpdateTraceW (
-@@ -1831,6 +1838,7 @@ UpdateTraceW (
+@@ -1831,6 +1893,7 @@ UpdateTraceW (
      );
  
  EXTERN_C
@@ -66,7 +149,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  UpdateTraceA (
-@@ -1852,6 +1860,7 @@ UpdateTraceA (
+@@ -1852,6 +1915,7 @@ UpdateTraceA (
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
  EXTERN_C
@@ -74,7 +157,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  FlushTraceW (
-@@ -1869,6 +1878,7 @@ FlushTraceW (
+@@ -1869,6 +1933,7 @@ FlushTraceW (
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
  EXTERN_C
@@ -82,7 +165,21 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  FlushTraceA (
-@@ -1914,6 +1924,7 @@ ControlTraceA (
+@@ -1894,7 +1959,7 @@ ControlTraceW (
+     _In_ CONTROLTRACE_ID TraceId,
+     _In_opt_ LPCWSTR InstanceName,
+     _Inout_ PEVENT_TRACE_PROPERTIES Properties,
+-    _In_ ULONG ControlCode
++    _In_ _Win32_AssociatedEnum_(EVENT_TRACE_CONTROL) ULONG ControlCode
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -1910,10 +1975,11 @@ ControlTraceA (
+     _In_ CONTROLTRACE_ID TraceId,
+     _In_opt_ LPCSTR InstanceName,
+     _Inout_ PEVENT_TRACE_PROPERTIES Properties,
+-    _In_ ULONG ControlCode
++    _In_ _Win32_AssociatedEnum_(EVENT_TRACE_CONTROL) ULONG ControlCode
      );
  
  EXTERN_C
@@ -90,7 +187,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  QueryAllTracesW (
-@@ -1923,6 +1934,7 @@ QueryAllTracesW (
+@@ -1923,6 +1989,7 @@ QueryAllTracesW (
      );
  
  EXTERN_C
@@ -98,7 +195,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  QueryAllTracesA (
-@@ -1942,6 +1954,7 @@ QueryAllTracesA (
+@@ -1942,6 +2009,7 @@ QueryAllTracesA (
  //
  
  EXTERN_C
@@ -106,7 +203,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  EnableTrace (
-@@ -1964,6 +1977,7 @@ EnableTrace (
+@@ -1964,6 +2032,7 @@ EnableTrace (
  
  #if (WINVER >= _WIN32_WINNT_VISTA)
  EXTERN_C
@@ -114,7 +211,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  EnableTraceEx (
-@@ -2011,6 +2025,7 @@ typedef struct _ENABLE_TRACE_PARAMETERS {
+@@ -2011,6 +2080,7 @@ typedef struct _ENABLE_TRACE_PARAMETERS {
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
  EXTERN_C
@@ -122,7 +219,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  EnableTraceEx2 (
-@@ -2404,6 +2419,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
+@@ -2404,6 +2474,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
  
  #if (WINVER >= _WIN32_WINNT_VISTA)
  EXTERN_C
@@ -130,7 +227,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  EnumerateTraceGuidsEx (
-@@ -2461,6 +2477,7 @@ typedef struct TRACE_CONTEXT_REGISTER_INFO {
+@@ -2461,6 +2532,7 @@ typedef struct TRACE_CONTEXT_REGISTER_INFO {
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
  EXTERN_C
@@ -138,7 +235,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  TraceSetInformation (
-@@ -2473,6 +2490,7 @@ TraceSetInformation (
+@@ -2473,6 +2545,7 @@ TraceSetInformation (
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
  EXTERN_C
@@ -146,7 +243,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  TraceQueryInformation (
-@@ -2505,6 +2523,7 @@ TraceConfigureLastBranchRecord (
+@@ -2505,6 +2578,7 @@ TraceConfigureLastBranchRecord (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  EXTERN_C
@@ -154,7 +251,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  CreateTraceInstanceId (
-@@ -2535,6 +2554,7 @@ typedef ULONG64 TRACEGUID_HANDLE;
+@@ -2535,6 +2609,7 @@ typedef ULONG64 TRACEGUID_HANDLE;
  //
  
  EXTERN_C
@@ -162,7 +259,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  TraceEvent (
-@@ -2549,6 +2569,7 @@ TraceEvent (
+@@ -2549,6 +2624,7 @@ TraceEvent (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  EXTERN_C
@@ -170,7 +267,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  TraceEventInstance (
-@@ -2569,6 +2590,7 @@ TraceEventInstance (
+@@ -2569,6 +2645,7 @@ TraceEventInstance (
  //
  
  EXTERN_C
@@ -178,7 +275,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  RegisterTraceGuidsW (
-@@ -2589,6 +2611,7 @@ RegisterTraceGuidsW (
+@@ -2589,6 +2666,7 @@ RegisterTraceGuidsW (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -186,7 +283,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  RegisterTraceGuidsA (
-@@ -2604,6 +2627,7 @@ RegisterTraceGuidsA (
+@@ -2604,6 +2682,7 @@ RegisterTraceGuidsA (
  
  #if (WINVER >= _WIN32_WINNT_WINXP)
  EXTERN_C
@@ -194,7 +291,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  EnumerateTraceGuids (
-@@ -2620,6 +2644,7 @@ EnumerateTraceGuids (
+@@ -2620,6 +2699,7 @@ EnumerateTraceGuids (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -202,7 +299,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  UnregisterTraceGuids (
-@@ -2627,6 +2652,8 @@ UnregisterTraceGuids (
+@@ -2627,6 +2707,8 @@ UnregisterTraceGuids (
      );
  
  EXTERN_C
@@ -211,7 +308,7 @@ index 58677d49..5844b6bd 100644
  TRACELOGGER_HANDLE
  WMIAPI
  GetTraceLoggerHandle (
-@@ -2634,6 +2661,8 @@ GetTraceLoggerHandle (
+@@ -2634,6 +2716,8 @@ GetTraceLoggerHandle (
      );
  
  EXTERN_C
@@ -220,7 +317,7 @@ index 58677d49..5844b6bd 100644
  UCHAR
  WMIAPI
  GetTraceEnableLevel (
-@@ -2641,6 +2670,8 @@ GetTraceEnableLevel (
+@@ -2641,6 +2725,8 @@ GetTraceEnableLevel (
      );
  
  EXTERN_C
@@ -229,7 +326,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  GetTraceEnableFlags (
-@@ -2659,6 +2690,8 @@ GetTraceEnableFlags (
+@@ -2659,6 +2745,8 @@ GetTraceEnableFlags (
  
  EXTERN_C
  ETW_APP_DECLSPEC_DEPRECATED
@@ -238,7 +335,7 @@ index 58677d49..5844b6bd 100644
  PROCESSTRACE_HANDLE
  WMIAPI
  OpenTraceW (
-@@ -2667,6 +2700,7 @@ OpenTraceW (
+@@ -2667,6 +2755,7 @@ OpenTraceW (
  
  EXTERN_C
  ETW_APP_DECLSPEC_DEPRECATED
@@ -246,7 +343,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  ProcessTrace (
-@@ -2678,6 +2712,7 @@ ProcessTrace (
+@@ -2678,6 +2767,7 @@ ProcessTrace (
  
  EXTERN_C
  ETW_APP_DECLSPEC_DEPRECATED
@@ -254,7 +351,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  CloseTrace (
-@@ -2789,6 +2824,7 @@ typedef struct _ETW_TRACE_PARTITION_INFORMATION_V2 {
+@@ -2789,6 +2879,7 @@ typedef struct _ETW_TRACE_PARTITION_INFORMATION_V2 {
  
  EXTERN_C
  ETW_APP_DECLSPEC_DEPRECATED
@@ -262,7 +359,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  QueryTraceProcessingHandle (
-@@ -2812,6 +2848,8 @@ QueryTraceProcessingHandle (
+@@ -2812,6 +2903,8 @@ QueryTraceProcessingHandle (
  //
  
  EXTERN_C
@@ -271,7 +368,7 @@ index 58677d49..5844b6bd 100644
  PROCESSTRACE_HANDLE
  WMIAPI
  OpenTraceA (
-@@ -2819,6 +2857,7 @@ OpenTraceA (
+@@ -2819,6 +2912,7 @@ OpenTraceA (
      );
  
  EXTERN_C
@@ -279,7 +376,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  SetTraceCallback (
-@@ -2827,6 +2866,7 @@ SetTraceCallback (
+@@ -2827,6 +2921,7 @@ SetTraceCallback (
      );
  
  EXTERN_C
@@ -287,7 +384,7 @@ index 58677d49..5844b6bd 100644
  ULONG
  WMIAPI
  RemoveTraceCallback (
-@@ -2844,6 +2884,7 @@ RemoveTraceCallback (
+@@ -2844,11 +2939,12 @@ RemoveTraceCallback (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -295,7 +392,13 @@ index 58677d49..5844b6bd 100644
  ULONG
  __cdecl
  TraceMessage (
-@@ -2861,6 +2902,7 @@ TraceMessage (
+     _In_ TRACELOGGER_HANDLE LoggerHandle,
+-    _In_ ULONG MessageFlags,
++    _In_ _Win32_AssociatedEnum_(TRACE_MESSAGE_FLAGS) ULONG MessageFlags,
+     _In_ LPCGUID MessageGuid,
+     _In_ USHORT MessageNumber,
+     ...
+@@ -2861,10 +2957,11 @@ TraceMessage (
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  EXTERN_C
@@ -303,3 +406,8 @@ index 58677d49..5844b6bd 100644
  ULONG
  TraceMessageVa (
      _In_ TRACELOGGER_HANDLE LoggerHandle,
+-    _In_ ULONG MessageFlags,
++    _In_ _Win32_AssociatedEnum_(TRACE_MESSAGE_FLAGS) ULONG MessageFlags,
+     _In_ LPCGUID MessageGuid,
+     _In_ USHORT MessageNumber,
+     _In_ va_list MessageArgList

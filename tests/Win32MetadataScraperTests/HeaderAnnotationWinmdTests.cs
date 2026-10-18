@@ -211,6 +211,9 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 var members = pair.Value.GetProperty("Members").EnumerateArray()
                     .ToDictionary(member => member.GetProperty("Name").GetString(),
                         member => member.GetProperty("Value").GetRawText(), StringComparer.Ordinal);
+                Assert.Equal(pair.Value.GetProperty("Members").EnumerateArray()
+                    .Select(member => member.GetProperty("Name").GetString()),
+                    fields.Where(field => !field.GetDefaultValue().IsNil).Select(field => reader.GetString(field.Name)));
                 Assert.Equal(members.OrderBy(value => value.Key, StringComparer.Ordinal),
                     actual.OrderBy(value => value.Key, StringComparer.Ordinal));
             }

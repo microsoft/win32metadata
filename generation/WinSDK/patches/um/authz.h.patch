@@ -1,17 +1,54 @@
 diff --git a/um/authz.h b/um/authz.h
-index dad771d0..04898e06 100644
+index dad771d0..df7a1fa6 100644
 --- a/um/authz.h
 +++ b/um/authz.h
-@@ -541,6 +541,8 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTES_INFORMATION {
+@@ -158,6 +158,12 @@ typedef struct _AUTHZ_ACCESS_REPLY
+ 
+ } AUTHZ_ACCESS_REPLY, *PAUTHZ_ACCESS_REPLY;
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_GENERATE_RESULTS, unsigned long,
++    AUTHZ_GENERATE_SUCCESS_AUDIT,
++    AUTHZ_GENERATE_FAILURE_AUDIT);
++#endif
++
+ //
+ // Typedefs for callback functions to be provided by the resource manager.
+ //
+@@ -492,6 +498,12 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTE_V1 {
+     } Values;
+ } AUTHZ_SECURITY_ATTRIBUTE_V1, *PAUTHZ_SECURITY_ATTRIBUTE_V1;
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(AUTHZ_SECURITY_ATTRIBUTE_FLAGS, unsigned long,
++    AUTHZ_SECURITY_ATTRIBUTE_NON_INHERITABLE,
++    AUTHZ_SECURITY_ATTRIBUTE_VALUE_CASE_SENSITIVE);
++#endif
++
+ 
+ //
+ //  Set of security attributes.
+@@ -541,11 +553,18 @@ typedef struct _AUTHZ_SECURITY_ATTRIBUTES_INFORMATION {
  
  #define AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD 0x00000001
  
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_ACCESS_CHECK_FLAGS, unsigned long,
++    AUTHZ_ACCESS_CHECK_NO_DEEP_COPY_SD);
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  AUTHZAPI
  BOOL
  WINAPI
-@@ -557,6 +559,8 @@ AuthzAccessCheck(
+ AuthzAccessCheck(
+-    _In_      DWORD                              Flags,
++    _In_      _Win32_AssociatedEnum_(AUTHZ_ACCESS_CHECK_FLAGS) DWORD                              Flags,
+     _In_      AUTHZ_CLIENT_CONTEXT_HANDLE        hAuthzClientContext,
+     _In_      PAUTHZ_ACCESS_REQUEST              pRequest,
+     _In_opt_  AUTHZ_AUDIT_EVENT_HANDLE           hAuditEvent,
+@@ -557,6 +576,8 @@ AuthzAccessCheck(
      _Out_opt_ PAUTHZ_ACCESS_CHECK_RESULTS_HANDLE phAccessCheckResults
      );
  
@@ -20,7 +57,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -568,6 +572,8 @@ AuthzCachedAccessCheck(
+@@ -568,6 +589,8 @@ AuthzCachedAccessCheck(
       _Inout_ PAUTHZ_ACCESS_REPLY               pReply
      );
  
@@ -29,7 +66,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -583,6 +589,8 @@ AuthzOpenObjectAudit(
+@@ -583,6 +606,8 @@ AuthzOpenObjectAudit(
      _In_     PAUTHZ_ACCESS_REPLY         pReply
      );
  
@@ -38,7 +75,18 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -601,6 +609,8 @@ AuthzFreeHandle(
+@@ -597,10 +622,19 @@ AuthzFreeHandle(
+ #define AUTHZ_RM_FLAG_NO_AUDIT 0x1
+ #define AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION 0x2
+ #define AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES 0x4
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(AUTHZ_RESOURCE_MANAGER_FLAGS, unsigned long,
++    AUTHZ_RM_FLAG_NO_AUDIT,
++    AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION,
++    AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES);
++#endif
+ #define AUTHZ_VALID_RM_INIT_FLAGS (AUTHZ_RM_FLAG_NO_AUDIT | \
          AUTHZ_RM_FLAG_INITIALIZE_UNDER_IMPERSONATION | \
          AUTHZ_RM_FLAG_NO_CENTRAL_ACCESS_POLICIES)
  
@@ -47,7 +95,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -668,6 +678,8 @@ typedef struct _AUTHZ_INIT_INFO
+@@ -668,17 +702,21 @@ typedef struct _AUTHZ_INIT_INFO
      PFN_AUTHZ_FREE_CENTRAL_ACCESS_POLICY    pfnFreeCentralAccessPolicy;
  } AUTHZ_INIT_INFO, *PAUTHZ_INIT_INFO;
  
@@ -56,7 +104,12 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -679,6 +691,8 @@ AuthzInitializeResourceManagerEx(
+ AuthzInitializeResourceManagerEx(
+-    _In_opt_ DWORD                          Flags,
++    _In_opt_ _Win32_AssociatedEnum_(AUTHZ_RESOURCE_MANAGER_FLAGS) DWORD                          Flags,
+     _In_opt_ PAUTHZ_INIT_INFO               pAuthzInitInfo,
+     _Out_    PAUTHZ_RESOURCE_MANAGER_HANDLE phAuthzResourceManager
+     );
  
  
  
@@ -65,7 +118,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -689,6 +703,8 @@ AuthzInitializeRemoteResourceManager(
+@@ -689,6 +727,8 @@ AuthzInitializeRemoteResourceManager(
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -74,7 +127,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -696,6 +712,8 @@ AuthzFreeResourceManager(
+@@ -696,6 +736,8 @@ AuthzFreeResourceManager(
      _In_ AUTHZ_RESOURCE_MANAGER_HANDLE hAuthzResourceManager
      );
  
@@ -83,7 +136,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -709,6 +727,8 @@ AuthzInitializeContextFromToken(
+@@ -709,6 +751,8 @@ AuthzInitializeContextFromToken(
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
      );
  
@@ -92,7 +145,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -722,6 +742,8 @@ AuthzInitializeContextFromSid(
+@@ -722,6 +766,8 @@ AuthzInitializeContextFromSid(
      _Out_     PAUTHZ_CLIENT_CONTEXT_HANDLE  phAuthzClientContext
      );
  
@@ -101,7 +154,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -737,6 +759,8 @@ AuthzInitializeContextFromAuthzContext(
+@@ -737,6 +783,8 @@ AuthzInitializeContextFromAuthzContext(
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
  
@@ -110,7 +163,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -748,6 +772,8 @@ AuthzInitializeCompoundContext(
+@@ -748,6 +796,8 @@ AuthzInitializeCompoundContext(
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -119,7 +172,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -764,6 +790,8 @@ AuthzAddSidsToContext(
+@@ -764,6 +814,8 @@ AuthzAddSidsToContext(
  //  API to modify security attributes in AUTHZ client context.
  //
  
@@ -128,7 +181,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -801,6 +829,8 @@ typedef enum _AUTHZ_CONTEXT_INFORMATION_CLASS
+@@ -801,6 +853,8 @@ typedef enum _AUTHZ_CONTEXT_INFORMATION_CLASS
  } AUTHZ_CONTEXT_INFORMATION_CLASS;
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
@@ -137,7 +190,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -813,6 +843,8 @@ AuthzModifyClaims(
+@@ -813,6 +867,8 @@ AuthzModifyClaims(
      _In_opt_ PAUTHZ_SECURITY_ATTRIBUTES_INFORMATION pClaims
      );
  
@@ -146,7 +199,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -825,6 +857,8 @@ AuthzModifySids(
+@@ -825,6 +881,8 @@ AuthzModifySids(
      _In_opt_ PTOKEN_GROUPS                          pSids
      );
  
@@ -155,7 +208,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -838,6 +872,8 @@ AuthzSetAppContainerInformation(
+@@ -838,6 +896,8 @@ AuthzSetAppContainerInformation(
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
@@ -164,7 +217,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -849,6 +885,8 @@ AuthzGetInformationFromContext(
+@@ -849,6 +909,8 @@ AuthzGetInformationFromContext(
      _Out_ PVOID                           Buffer
  );
  
@@ -173,7 +226,21 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -872,6 +910,8 @@ AuthzFreeContext(
+@@ -865,6 +927,13 @@ AuthzFreeContext(
+ #define AUTHZ_NO_FAILURE_AUDIT                   0x00000002
+ #define AUTHZ_NO_ALLOC_STRINGS                   0x00000004
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS, unsigned long,
++    AUTHZ_NO_SUCCESS_AUDIT,
++    AUTHZ_NO_FAILURE_AUDIT,
++    AUTHZ_NO_ALLOC_STRINGS);
++#endif
++
+ #define AUTHZ_WPD_CATEGORY_FLAG                  0x00000010
+ 
+ #define AUTHZ_VALID_OBJECT_ACCESS_AUDIT_FLAGS    (AUTHZ_NO_SUCCESS_AUDIT | \
+@@ -872,11 +941,13 @@ AuthzFreeContext(
                                                    AUTHZ_NO_ALLOC_STRINGS | \
                                                    AUTHZ_WPD_CATEGORY_FLAG)
                               
@@ -182,7 +249,13 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -887,6 +927,8 @@ AuthzInitializeObjectAccessAuditEvent(
+ AuthzInitializeObjectAccessAuditEvent(
+-    _In_    DWORD                         Flags,
++    _In_    _Win32_AssociatedEnum_(AUTHZ_INITIALIZE_OBJECT_ACCESS_AUDIT_EVENT_FLAGS) DWORD                         Flags,
+     _In_    AUTHZ_AUDIT_EVENT_TYPE_HANDLE hAuditEventType,
+     _In_    PWSTR                         szOperationType,
+     _In_    PWSTR                         szObjectType,
+@@ -887,6 +958,8 @@ AuthzInitializeObjectAccessAuditEvent(
      ...
      );
      
@@ -191,7 +264,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -917,6 +959,8 @@ typedef enum _AUTHZ_AUDIT_EVENT_INFORMATION_CLASS
+@@ -917,6 +990,8 @@ typedef enum _AUTHZ_AUDIT_EVENT_INFORMATION_CLASS
      AuthzAuditEventInfoAdditionalInfo,
  } AUTHZ_AUDIT_EVENT_INFORMATION_CLASS;
  
@@ -200,7 +273,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -991,6 +1035,8 @@ typedef struct _AUTHZ_SOURCE_SCHEMA_REGISTRATION
+@@ -991,6 +1066,8 @@ typedef struct _AUTHZ_SOURCE_SCHEMA_REGISTRATION
  
  #define AUTHZ_FLAG_ALLOW_MULTIPLE_SOURCE_INSTANCES 0x1
  
@@ -209,7 +282,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL 
  WINAPI
-@@ -999,6 +1045,8 @@ AuthzInstallSecurityEventSource(
+@@ -999,6 +1076,8 @@ AuthzInstallSecurityEventSource(
      _In_ PAUTHZ_SOURCE_SCHEMA_REGISTRATION pRegistration
      );
  
@@ -218,7 +291,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1008,6 +1056,8 @@ AuthzUninstallSecurityEventSource(
+@@ -1008,6 +1087,8 @@ AuthzUninstallSecurityEventSource(
      );
  
  
@@ -227,7 +300,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1018,6 +1068,8 @@ AuthzEnumerateSecurityEventSources(
+@@ -1018,6 +1099,8 @@ AuthzEnumerateSecurityEventSources(
       _Inout_ PDWORD                            pdwLength
      );
      
@@ -236,7 +309,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1027,6 +1079,8 @@ AuthzRegisterSecurityEventSource(
+@@ -1027,6 +1110,8 @@ AuthzRegisterSecurityEventSource(
      _Out_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
      );
      
@@ -245,7 +318,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1035,6 +1089,8 @@ AuthzUnregisterSecurityEventSource(
+@@ -1035,6 +1120,8 @@ AuthzUnregisterSecurityEventSource(
       _Inout_ PAUTHZ_SECURITY_EVENT_PROVIDER_HANDLE phEventProvider
      );
  
@@ -254,7 +327,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1047,6 +1103,8 @@ AuthzReportSecurityEvent(
+@@ -1047,6 +1134,8 @@ AuthzReportSecurityEvent(
      ...    
      );
  
@@ -263,7 +336,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1059,6 +1117,8 @@ AuthzReportSecurityEventFromParams(
+@@ -1059,6 +1148,8 @@ AuthzReportSecurityEventFromParams(
      );
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
@@ -272,7 +345,7 @@ index dad771d0..04898e06 100644
  _Success_(return != FALSE)
  AUTHZAPI
  BOOL
-@@ -1069,6 +1129,8 @@ AuthzRegisterCapChangeNotification(
+@@ -1069,6 +1160,8 @@ AuthzRegisterCapChangeNotification(
      _In_opt_ PVOID pCallbackContext
      );
  
@@ -281,7 +354,7 @@ index dad771d0..04898e06 100644
  AUTHZAPI
  BOOL
  WINAPI
-@@ -1076,6 +1138,8 @@ AuthzUnregisterCapChangeNotification(
+@@ -1076,6 +1169,8 @@ AuthzUnregisterCapChangeNotification(
      _In_ AUTHZ_CAP_CHANGE_SUBSCRIPTION_HANDLE hCapChangeSubscription
      );
  

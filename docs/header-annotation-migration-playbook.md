@@ -3689,3 +3689,29 @@ This adds one semantic source header (`mmsyscom.h`); the Device-owned
 `mmeapi.h` revision earns zero new-header credit. Evidence stays under
 `artifacts\bulk-annotations\system-nonfloor-enums-006-midi-*`.
 No frozen central SDK05 input, full-SDK image or CI qualification is changed.
+
+### Broad already-positive System native enum continuation
+
+Thirteen existing native patches now carry another 88 logical groups, 472
+native literal members and 98 source-qualified scalar parameter associations.
+The corresponding 88 definition markers, 472 explicit member rows and 98
+direct uses are retired. These are 658 distinct baseline facts and no new
+unique-header admissions. The original namespaces, storage, Flags state,
+unscoped shape, literal values and declaration order are preserved.
+`CERT_ALT_NAME` retains its existing Certificates namespace through ordinary
+required-name organization.
+
+The associations keep native unsigned scalar storage and carry the logical
+`AssociatedEnum` target. All 106 uncovered use objects remain unchanged as
+`addUsesTo` debt, including earlier declarations, fields, pointer/return uses
+and outside/unknown ownership. Metadata-only aliases are placed outside native
+record definitions. C17 controls use the selected native header closure rather
+than C++-only partition source; the ordinary C++ controls retain that source.
+Actual normal bindings from nine owning partitions and bounded physical
+components qualify the changed identities without a full-SDK image.
+
+The WinNT/MSV/WTS/OLECREATE definition boundaries, IME/MCX tails, four MIDI
+uses, Authz lifecycle families and separate SSPI native128 API grade remain
+held. No `autoTypes`, import mapping, frozen SDK05 input or peer-owned source
+changes. Evidence is under
+`artifacts\bulk-annotations\system-native-closure-009-*`.
