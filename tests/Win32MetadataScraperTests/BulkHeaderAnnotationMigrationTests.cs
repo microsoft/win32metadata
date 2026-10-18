@@ -245,11 +245,19 @@ struct IBase { void **lpVtbl; };
 #define DECLARE_INTERFACE_IID_(name, base, iid) DECLARE_INTERFACE_(name, base)
 #define METHOD(name) void *name
 #endif
+#define DECLARE_MAPI_INTERFACE_(name, base) DECLARE_INTERFACE_(name, base)
+#if defined(__cplusplus)
+#define DECLARE_MAPI_INTERFACE_PTR(name, pointer) interface name; typedef name *pointer
+#else
+#define DECLARE_MAPI_INTERFACE_PTR(name, pointer) typedef interface name name, *pointer
+#endif
 DECLARE_INTERFACE_(IRichEditOleCallback, IBase) { METHOD(Edit); };
 DECLARE_INTERFACE_IID_(IDiskQuotaControl, IBase, ""7988B572-EC89-11cf-9C00-00AA00A14F56"") { METHOD(Quota); };
 interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1AnalysisTransform { METHOD(Analyze); };
+DECLARE_MAPI_INTERFACE_(IAddrBook, IBase) { METHOD(Address); };
+DECLARE_MAPI_INTERFACE_PTR(IAddrBook, LPADRBOOK);
 ";
-            string[] names = { "IRichEditOleCallback", "IDiskQuotaControl", "ID2D1AnalysisTransform" };
+            string[] names = { "IRichEditOleCallback", "IDiskQuotaControl", "ID2D1AnalysisTransform", "IAddrBook" };
             using var fixture = new AuthoringFixture(source.ReplaceLineEndings("\r\n") + "\r\n",
                 names, Array.Empty<string>(), architecture, target);
             byte[] original = File.ReadAllBytes(fixture.Source);
@@ -278,7 +286,7 @@ interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1An
             var result = fixture.Run(apply: true);
             Assert.True(result.ExitCode == 0, result.Text);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
-            Assert.Equal(3, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(4, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
             Assert.Equal(0, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
             string after = Path.Combine(fixture.Output, "after", "um", "sample.h");
             string afterText = File.ReadAllText(after);
@@ -320,6 +328,38 @@ interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1An
             }
         }
 
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void MapiPointerReferencesRequireTheParsedRecordIdentity(bool omitReference)
+        {
+            using var fixture = new AuthoringFixture(
+                "#define DECLARE_MAPI_INTERFACE_(name, base) struct name\r\n" +
+                "#define DECLARE_MAPI_INTERFACE_PTR(name, pointer) struct name; typedef name *pointer\r\n" +
+                "DECLARE_MAPI_INTERFACE_(Unique, IBase) { int value; };\r\n" +
+                "DECLARE_MAPI_INTERFACE_PTR(Unique, LPUNIQUE);\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var map = JsonNode.Parse(File.ReadAllText(fixture.Map));
+            var declarations = map["declarations"].AsArray();
+            var reference = Assert.Single(declarations.Where(declaration =>
+                declaration["name"].GetValue<string>() == "Unique" &&
+                !declaration["isDefinition"].GetValue<bool>()));
+            if (omitReference)
+                declarations.Remove(reference);
+            else
+                reference["id"] = "c:@S@AnotherRecord";
+            File.WriteAllText(fixture.Map, map.ToJsonString());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal("incomplete-record-source-coverage", fact.GetProperty("reason").GetString());
+            Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+            Assert.Empty(report.RootElement.GetProperty("originals").EnumerateArray());
+            Assert.Contains("Unique=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
+        }
+
         [Fact]
         public void ClassAvailabilityTransportKeepsTheNativeTagKind()
         {
@@ -352,17 +392,20 @@ interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1An
                 "#else\r\nstruct Hidden { int second; };\r\n#endif\r\n" +
                 "#if defined(UNSEEN)\r\nstruct UNKNOWN_UUID(\"unused\") HiddenPrefix { int first; };\r\n" +
                 "#else\r\nstruct HiddenPrefix { int second; };\r\n#endif\r\n" +
+                "#define DECLARE_MAPI_INTERFACE_PTR(name, pointer) struct name; typedef name *pointer\r\n" +
+                "struct HiddenPointer { int value; };\r\n" +
+                "#if defined(UNSEEN)\r\nDECLARE_MAPI_INTERFACE_PTR(HiddenPointer, LPHIDDEN);\r\n#endif\r\n" +
                 "namespace Other { struct Nested { int value; }; }\r\n",
-                new[] { "Unique", "Conditional", "Unknown", "Hidden", "HiddenPrefix", "Nested" }, new[] { "Unique" });
+                new[] { "Unique", "Conditional", "Unknown", "Hidden", "HiddenPrefix", "HiddenPointer", "Nested" }, new[] { "Unique" });
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             var result = fixture.Run(apply: true);
             Assert.True(result.ExitCode == 0, result.Text);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
             Assert.Equal(1, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
-            Assert.Equal(6, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
+            Assert.Equal(7, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
             Assert.Equal(1, report.RootElement.GetProperty("counts").GetProperty("annotations").GetInt32());
             Assert.Contains("Unique\r\n", File.ReadAllText(fixture.ErrorSidecar));
-            foreach (string name in new[] { "Conditional", "Unknown", "Hidden", "HiddenPrefix", "Nested" })
+            foreach (string name in new[] { "Conditional", "Unknown", "Hidden", "HiddenPrefix", "HiddenPointer", "Nested" })
                 Assert.Contains(name + "=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
         }
 

@@ -217,6 +217,7 @@ foreach ($owner in $Original) {
                 $_.declaration.kind -in @('CXCursor_StructDecl', 'CXCursor_ClassDecl') -and $_.declaration.isDefinition
             })
             $isRecord = $recordDefinitions.Count -gt 0
+            $recordReferences = @()
             if ($isRecord) {
                 if ($category -ne 'supportedOS' -or
                     @($locations | Where-Object { $_.declaration.kind -eq 'CXCursor_FunctionDecl' }).Count) {
@@ -224,6 +225,9 @@ foreach ($owner in $Original) {
                     $rows.Add([pscustomobject]$row)
                     continue
                 }
+                $recordReferences = @($locations | Where-Object {
+                    $_.declaration.kind -in @('CXCursor_StructDecl', 'CXCursor_ClassDecl') -and !$_.declaration.isDefinition
+                })
                 $locations = $recordDefinitions
             }
             $locations = @($locations | Group-Object { "$($_.declaration.file)|$($_.declaration.offset)|$($_.declaration.id)" } |
@@ -268,7 +272,7 @@ foreach ($owner in $Original) {
                 if ($isRecord) {
                     $declarationPrefix = $masked.Substring([int]$decl.start, $nameOffset - [int]$decl.start)
                     if ($declarationPrefix -notmatch '^(?:struct|class|interface)\s+(?:(?:DX_DECLARE_INTERFACE|DECLSPEC_UUID)\s*\([^)]*\)\s*)?$' -and
-                        $declarationPrefix -notmatch '^DECLARE_INTERFACE(?:_IID)?_\s*\(\s*$') {
+                        $declarationPrefix -notmatch '^(?:DECLARE_INTERFACE(?:_IID)?_|DECLARE_MAPI_INTERFACE_)\s*\(\s*$') {
                         $row.reason = 'unsupported-record-declaration-macro'
                         continue
                     }
@@ -291,6 +295,34 @@ foreach ($owner in $Original) {
             $boundOffsets = @($locations | ForEach-Object {
                 if ($isRecord) { [int]$_.declaration.spellingOffset } else { [int]$_.declaration.offset }
             })
+            if ($isRecord) {
+                $referenceOffsets = [Collections.Generic.HashSet[int]]::new()
+                foreach ($reference in $recordReferences) {
+                    $decl = $reference.declaration
+                    if ($reference.sha256 -ne $hash) {
+                        throw "Stale parsed source bytes: $owner"
+                    }
+                    $nameOffset = [int]$decl.spellingOffset
+                    if ($decl.id -cne $locations[0].declaration.id -or
+                        $decl.kind -ne $locations[0].declaration.kind -or $decl.qualifiedName -cne $fact.symbol -or
+                        $decl.file -ine $decl.spellingFile -or
+                        $decl.file -ine $decl.startFile -or $decl.file -ine $decl.endFile -or
+                        $decl.start -lt 0 -or $decl.end -ne $decl.start -or $decl.start -gt $nameOffset -or
+                        $nameOffset + $fact.symbol.Length -gt $text.Length) {
+                        continue
+                    }
+                    $lineStart = $masked.LastIndexOf("`n", [int]$decl.start) + 1
+                    if ($masked.Substring($lineStart, [int]$decl.start - $lineStart) -notmatch '^[ \t]*$' -or
+                        $masked.Substring([int]$decl.start, $nameOffset - [int]$decl.start) -notmatch
+                            '^DECLARE_MAPI_INTERFACE_PTR[ \t]*\([ \t]*$' -or
+                        $masked.Substring($nameOffset) -cnotmatch
+                            ('^' + $symbolPattern + '[ \t]*,[ \t]*[A-Za-z_]\w*[ \t]*\)[ \t]*;[ \t]*(?:\r?\n|$)')) {
+                        continue
+                    }
+                    $referenceOffsets.Add($nameOffset) | Out-Null
+                }
+                $occurrences = @($occurrences | Where-Object { !$referenceOffsets.Contains($_.Index) })
+            }
             if (@($occurrences | Where-Object { $_.Index -notin $boundOffsets }).Count) {
                 $row.reason = 'unparsed-declaration-or-reference'
             }
