@@ -163,6 +163,27 @@ namespace Win32MetadataScraperTests
                 .Replace("#include <sal.h>\r\n", "", StringComparison.Ordinal));
         }
 
+        [Fact]
+        public void NativeControlsAccountForOneExistingInterfaceTypedefCarrier()
+        {
+            string[] original = { "record IExample 8 8", "typedef IExample IExample" };
+            string[] prepared = { "record IExample 8 8", "typedef IExample IExample", "typedef IExample IExample" };
+            Assert.Equal(original, WinHttpNativeControlTests.NormalizeInterfaceCarrierTypedefs(
+                original, prepared, new[] { "IExample|SupportedOSPlatform(\"windows6.1\")" }));
+        }
+
+        [Theory]
+        [InlineData("record IExample 16 8", "typedef IExample IExample", "typedef IExample IExample")]
+        [InlineData("record IExample 8 8", "typedef IExample int", "typedef IExample int")]
+        [InlineData("record IExample 8 8", "typedef IExample IExample", "typedef IExample IExample", "typedef IExample IExample")]
+        [InlineData("record IExample 8 8", "typedef IExample IExample", "typedef INew INew")]
+        public void NativeControlsRetainLayoutTypeAndUnexpectedDeclarationDifferences(params string[] prepared)
+        {
+            string[] original = { "record IExample 8 8", "typedef IExample IExample" };
+            Assert.NotEqual<string>(original, WinHttpNativeControlTests.NormalizeInterfaceCarrierTypedefs(
+                original, prepared, new[] { "IExample|SupportedOSPlatform(\"windows6.1\")" }));
+        }
+
         [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
         [MemberData(nameof(OriginalIdlNativeSamples))]
         public void OriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(

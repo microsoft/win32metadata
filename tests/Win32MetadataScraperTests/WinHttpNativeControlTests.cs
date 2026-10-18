@@ -1291,7 +1291,9 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations: annotations, sourceText: source, salAnnotations: afterSal, diagnostics: afterDiagnostics,
                 language: language);
             Assert.NotEmpty(before);
-            Assert.Equal(before, after);
+            string[] nativeAfter = NormalizeInterfaceCarrierTypedefs(before, after, expected);
+            Assert.Equal(before, nativeAfter);
+            this.output.WriteLine($"{after.Length - nativeAfter.Length} identical existing interface typedef redeclarations carry metadata.");
             Assert.NotEmpty(beforeSal);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
@@ -1311,6 +1313,22 @@ static_assert(DISC_NO_FORCE == 64u);
             this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{facts.Length} exact availability/result annotation facts.");
+        }
+
+        internal static string[] NormalizeInterfaceCarrierTypedefs(
+            string[] original, string[] prepared, string[] expectedAnnotations)
+        {
+            var originalCounts = original.GroupBy(value => value, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
+            var preparedCounts = prepared.GroupBy(value => value, StringComparer.Ordinal)
+                .ToDictionary(group => group.Key, group => group.Count(), StringComparer.Ordinal);
+            // The named MIDL carrier repeats an existing same-name typedef, not a new native type.
+            var carriers = expectedAnnotations.Select(value => value.Split('|')[0])
+                .Select(name => $"typedef {name} {name}")
+                .Where(value => originalCounts.TryGetValue(value, out int before) && before > 0 &&
+                    preparedCounts.TryGetValue(value, out int after) && after == before + 1)
+                .ToHashSet(StringComparer.Ordinal);
+            return prepared.Where(value => !carriers.Remove(value)).ToArray();
         }
 
         public static IEnumerable<object[]> OriginalIdlHeaderControls()
