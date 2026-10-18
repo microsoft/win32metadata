@@ -1,0 +1,30 @@
+diff --git a/um/namespaceapi.h b/um/namespaceapi.h
+index 589691ed..3daced34 100644
+--- a/um/namespaceapi.h
++++ b/um/namespaceapi.h
+@@ -44,6 +44,8 @@ OpenPrivateNamespaceW(
+     _In_ LPCWSTR lpAliasPrefix
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOLEAN
+ WINAPI
+@@ -60,6 +62,8 @@ CreateBoundaryDescriptorW(
+     _In_ ULONG Flags
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ BOOL
+ WINAPI
+@@ -68,6 +72,7 @@ AddSIDToBoundaryDescriptor(
+     _In_ PSID RequiredSid
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ WINBASEAPI
+ VOID
+ WINAPI

@@ -1,0 +1,53 @@
+diff --git a/um/winefs.h b/um/winefs.h
+index d1bd0b95..d77020ab 100644
+--- a/um/winefs.h
++++ b/um/winefs.h
+@@ -318,6 +318,7 @@ typedef struct _ENCRYPTION_PROTECTOR_LIST {
+ //----------------------------------------------------------------------------------/
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -327,6 +328,7 @@ QueryUsersOnEncryptedFile(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -336,6 +338,7 @@ QueryRecoveryAgentsOnEncryptedFile(
+     );
+ 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -344,6 +347,7 @@ RemoveUsersFromEncryptedFile(
+     _In_    PENCRYPTION_CERTIFICATE_HASH_LIST   pHashes
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ DWORD
+ WINAPI
+@@ -391,6 +395,7 @@ SetUserFileEncryptionKeyEx(
+ 
+ #endif // #if (NTDDI_VERSION >= NTDDI_VISTA) 
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ VOID
+ WINAPI
+@@ -398,6 +403,8 @@ FreeEncryptionCertificateHashList(
+     _In_    PENCRYPTION_CERTIFICATE_HASH_LIST       pUsers
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ WINADVAPI
+ BOOL
+ WINAPI

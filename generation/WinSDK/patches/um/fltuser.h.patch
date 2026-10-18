@@ -1,0 +1,12 @@
+diff --git a/um/fltuser.h b/um/fltuser.h
+index f555a8a4..76950568 100644
+--- a/um/fltuser.h
++++ b/um/fltuser.h
+@@ -430,6 +430,7 @@ FilterGetMessage (
+     _Inout_opt_ LPOVERLAPPED lpOverlapped
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Must_inspect_result_
+ HRESULT
+ WINAPI

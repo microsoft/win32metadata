@@ -20,3 +20,5 @@ ID2D1Factory
 <IncludeRoot>/winrt/roparameterizediid.h
 --namespace
 Windows.Win32.System.WinRT.Metadata
+--config
+parse-win32-annotations

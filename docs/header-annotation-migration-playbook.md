@@ -3424,3 +3424,20 @@ not demonstrated annotation-vocabulary gaps or native-contract conflicts.
 their 180 and 107 discovery-tail facts remain intact. Other metadata categories
 in these headers still require subsequent source authoring. This is a
 source-first majority, not complete-header, full-SDK, CI or consumer acceptance.
+
+The next system batch and its three-original tail add 22 further semantic
+native-header patches: 89 availability and 13 last-error facts, with exactly
+102 placements and matching sidecar removals. Strict pinned preparation and
+54 ordinary/metadata native ABI, layout, SAL and payload checks pass across
+the 17 actual owning contexts and x86/x64/ARM64. Contexts are derived from
+the selected originals and the current partition traversals, not a fixed
+first-batch list. Evidence stays under
+`artifacts\bulk-annotations\system-next-002-and-tail*`.
+
+The 54 retained availability facts comprise 15 macro/definition/non-global
+placements, seven without a configured owning partition, 23 without a parsed
+declaration and nine unparsed declarations or lexical references. The six
+unpatched originals (`vsbackup.h`, `clfs.h`, `comppkgsup.h`, `lpmapi.h`,
+`d2d1_3helper.h`, `gdipluspixelformats.h`) do not count. Other categories and
+final emitted-image qualification remain separate work; these native controls
+are not a full-image or complete-header acceptance claim.

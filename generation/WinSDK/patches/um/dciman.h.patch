@@ -1,0 +1,17 @@
+diff --git a/um/dciman.h b/um/dciman.h
+index 1da64fa5..df65800d 100644
+--- a/um/dciman.h
++++ b/um/dciman.h
+@@ -38,9 +38,12 @@ DECLARE_HANDLE(HWINWATCH);  // context handle for WinWatch instance
+ /****************************************************************************
+  ***************************************************************************/
+ 
++_Win32_SupportedOS_Windows2000_
+ extern HDC WINAPI DCIOpenProvider(void);
++_Win32_SupportedOS_Windows2000_
+ extern void WINAPI DCICloseProvider(HDC hdc);
+ 
++_Win32_SupportedOS_Windows2000_
+ extern int WINAPI DCICreatePrimary(HDC hdc, LPDCISURFACEINFO FAR *lplpSurface);
+ extern int WINAPI DCICreateOffscreen(HDC hdc, DWORD dwCompression, DWORD dwRedMask,
+     DWORD dwGreenMask, DWORD dwBlueMask, DWORD dwWidth, DWORD dwHeight,

@@ -1,0 +1,12 @@
+diff --git a/um/ntsecpkg.h b/um/ntsecpkg.h
+index 2571b34b..c4f4385e 100644
+--- a/um/ntsecpkg.h
++++ b/um/ntsecpkg.h
+@@ -1829,6 +1829,7 @@ extern "C"
+ {
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ CredMarshalTargetInfo (
+     _In_        PCREDENTIAL_TARGET_INFORMATIONW InTargetInfo,

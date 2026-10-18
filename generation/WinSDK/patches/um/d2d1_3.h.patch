@@ -1,0 +1,12 @@
+diff --git a/um/d2d1_3.h b/um/d2d1_3.h
+index 4ac84c88..efeacbfd 100644
+--- a/um/d2d1_3.h
++++ b/um/d2d1_3.h
+@@ -1932,6 +1932,7 @@ extern "C"
+ #endif
+ 
+ #if NTDDI_VERSION >= NTDDI_WINTHRESHOLD
++    _Win32_SupportedOS_10240_
+     void WINAPI 
+     D2D1GetGradientMeshInteriorPointsFromCoonsPatch(
+         _In_ CONST D2D1_POINT_2F *pPoint0,

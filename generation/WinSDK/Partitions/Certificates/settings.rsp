@@ -22,3 +22,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/certreqd.h
 --namespace
 Windows.Win32.Security.Cryptography.Certificates
+--config
+parse-win32-annotations

@@ -1,7 +1,6 @@
 --with-setlasterror
 accept
 ActivateKeyboardLayout
-AddSIDToBoundaryDescriptor
 AllJoynCloseBusHandle
 AllJoynConnectToBus
 AllJoynEnumEvents
@@ -36,7 +35,6 @@ CancelSynchronousIo
 ChangeTimerQueueTimer
 CheckRemoteDebuggerPresent
 CloseHandle
-ClosePrivateNamespace
 closesocket
 CommandLineToArgvW
 CompareStringEx
@@ -91,7 +89,6 @@ CryptSIPVerifyIndirectData
 CryptUnprotectData
 CryptUnprotectMemory
 CryptUpdateProtectedState
-DdeSetQualityOfService
 DebugActiveProcess
 DebugActiveProcessStop
 DeleteEnclave
@@ -109,7 +106,6 @@ DialogBoxParamW
 DisconnectNamedPipe
 DiUninstallDriverA
 DuplicateHandle
-EncryptionDisable
 EndTask
 EnumDirTree
 EnumDirTreeW
@@ -195,7 +191,6 @@ FoldStringW
 FormatMessage
 FormatMessageA
 FormatMessageW
-FreeMUILibrary
 GetClassName
 GetClassNameA
 GetClassNameW
@@ -246,7 +241,6 @@ GetTimeFormatA
 GetTimeFormatEx
 GetTimeFormatW
 GetTimestampForLoadedLibrary
-GetUILanguageFallbackList
 GetUserNameExA
 GetUserNameExW
 GetWindow
@@ -267,7 +261,6 @@ ImageDirectoryEntryToDataEx
 ImageNtHeader
 ImageRvaToSection
 ImageRvaToVa
-ImpersonateDdeClientWindow
 ImpersonateNamedPipeClient
 inet_addr
 inet_ntoa
@@ -284,15 +277,10 @@ InternetGoOnlineA
 InternetGoOnlineW
 InternetInitializeAutoProxyDll
 ioctlsocket
-IsDestinationReachableA
-IsDestinationReachableW
 IsEnclaveTypeSupported
-IsNetworkAlive
 listen
 LoadEnclaveData
 LoadEnclaveImageW
-LoadMUILibraryA
-LoadMUILibraryW
 LoadStringA
 LoadStringW
 LogTailAdvanceFailure
@@ -344,7 +332,6 @@ QueueUserWorkItem
 ReadLogNotification
 recv
 recvfrom
-RegisterDialogClasses
 RegisterForLogWriteNotification
 RegisterManageableLogClient
 RegisterWaitUntilOOBECompleted

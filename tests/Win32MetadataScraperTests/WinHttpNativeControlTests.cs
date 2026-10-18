@@ -175,6 +175,26 @@ using WINHTTP_INTERNET_SCHEME = void;
 
         public static IEnumerable<object[]> BulkSystemNativeModes()
         {
+            string[] partitions =
+            {
+                "AppxPackaging", "Authorization", "Com", "ComOle", "Credentials", "DataXchg", "Etw", "Fs",
+                "Identity", "Mf", "Mi", "Perf", "Registry", "Security.Cryptography", "Setup", "TermServ",
+            };
+            string artifacts = Environment.GetEnvironmentVariable("BULK_SYSTEM_MIGRATION_ROOT");
+            if (artifacts != null)
+            {
+                using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(artifacts, "report.json")));
+                var traversals = report.RootElement.GetProperty("originals").EnumerateArray()
+                    .Select(value => "<IncludeRoot>/" + value.GetString().Replace('\\', '/'))
+                    .ToHashSet(StringComparer.OrdinalIgnoreCase);
+                partitions = Directory.EnumerateDirectories(Path.Combine(
+                        WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK", "Partitions"))
+                    .Where(path => File.Exists(Path.Combine(path, "settings.rsp")) &&
+                        File.ReadLines(Path.Combine(path, "settings.rsp")).Any(line => traversals.Contains(line.Trim())))
+                    .Select(Path.GetFileName).OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                if (partitions.Length == 0)
+                    throw new InvalidOperationException("The source batch must have an actual owning traversal.");
+            }
             foreach (var architecture in new[]
             {
                 ("x86", "i686-pc-windows-msvc"),
@@ -182,13 +202,9 @@ using WINHTTP_INTERNET_SCHEME = void;
                 ("arm64", "aarch64-pc-windows-msvc"),
             })
             {
-                foreach (string partition in new[]
-                {
-                    "AppxPackaging", "Authorization", "Com", "ComOle", "Credentials", "DataXchg", "Etw", "Fs",
-                    "Identity", "Mf", "Mi", "Perf", "Registry", "Security.Cryptography", "Setup", "TermServ",
-                })
+                foreach (string partition in partitions)
                     yield return new object[] { partition, architecture.Item1, architecture.Item2, "c++" };
-                foreach (string partition in new[] { "Identity", "Setup", "Security.Cryptography", "Registry" })
+                foreach (string partition in new[] { "Identity", "Setup", "Security.Cryptography", "Registry" }.Intersect(partitions))
                     yield return new object[] { partition, architecture.Item1, architecture.Item2, "c" };
             }
         }

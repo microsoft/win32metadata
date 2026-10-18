@@ -1,0 +1,12 @@
+diff --git a/um/d2d1_2.h b/um/d2d1_2.h
+index 6b6df02c..3c572863 100644
+--- a/um/d2d1_2.h
++++ b/um/d2d1_2.h
+@@ -186,6 +186,7 @@ extern "C"
+ #endif
+ 
+ #if NTDDI_VERSION >= NTDDI_WINBLUE
++    _Win32_SupportedOS_Windows81_
+     FLOAT WINAPI 
+     D2D1ComputeMaximumScaleFactor(
+         _In_ CONST D2D1_MATRIX_3X2_F *matrix
