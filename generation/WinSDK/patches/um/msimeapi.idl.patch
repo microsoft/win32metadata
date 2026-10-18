@@ -1,0 +1,20 @@
+diff --git a/um/msimeapi.idl b/um/msimeapi.idl
+index 5b38a652..f84d2c6e 100644
+--- a/um/msimeapi.idl
++++ b/um/msimeapi.idl
+@@ -9,6 +9,7 @@
+ 
+ ----------------------------------------------------------------------------*/
+ 
++#include <sal.h>
+ cpp_quote("#pragma once")
+ cpp_quote("")
+ 
+@@ -25,6 +26,7 @@ import "ocidl.idl";
+ //
+ // IImePlugInDictDictionaryList
+ //
++_Win32_AnnotateInterface_(IImePlugInDictDictionaryList, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(98752974-b0a6-489b-8f6f-bff3769c8eeb),

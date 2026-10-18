@@ -1,0 +1,19 @@
+diff --git a/um/icontentprefetchertasktrigger.idl b/um/icontentprefetchertasktrigger.idl
+index 076de0f2..a4370cb3 100644
+--- a/um/icontentprefetchertasktrigger.idl
++++ b/um/icontentprefetchertasktrigger.idl
+@@ -1,5 +1,6 @@
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "inspectable.idl";
+ import "wtypes.idl";
+@@ -9,6 +10,7 @@ cpp_quote("#include <winapifamily.h>")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ 
++_Win32_AnnotateInterface_(IContentPrefetcherTaskTrigger, _Win32_SupportedOS_Windows81_)
+ [uuid(1b35a14a-6094-4799-a60e-e474e15d4dc9), object]
+ interface IContentPrefetcherTaskTrigger : IInspectable
+ {

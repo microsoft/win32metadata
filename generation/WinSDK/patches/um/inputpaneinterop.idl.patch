@@ -1,0 +1,20 @@
+diff --git a/um/inputpaneinterop.idl b/um/inputpaneinterop.idl
+index 8dd545b9..d9257a65 100644
+--- a/um/inputpaneinterop.idl
++++ b/um/inputpaneinterop.idl
+@@ -5,6 +5,7 @@
+ * Copyright (c) Microsoft Corporation. All rights reserved
+ */
+ 
++#include <sal.h>
+ import "inspectable.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -14,6 +15,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS1)")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IInputPaneInterop, _Win32_SupportedOS_14393_)
+ [
+     uuid(75CF2C57-9195-4931-8332-F0B409E916AF),
+ ]

@@ -3279,6 +3279,78 @@
       "sourceSha256": "4C2E98D5295A496D393CC7F0C8D16420FA03028AF7DD84DFD8184AE775495457",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\filter.idl",
       "sdkSha256": "80416936FC95889C449FC9C5F7AF4D604AD447D82DC9565AA46E92C74A702D0E"
+    },
+    {
+      "path": "um\\filtereg.h",
+      "sourceSha256": "D764EC7EEE70270D328AAB53C0F2C418A4ADFD3BA840F84489350ADBD518A06B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\filtereg.idl",
+      "sdkSha256": "E436B740F02A8263527C172F0174EDA06EBBC41A9D6C6368D8F493A7A082C693"
+    },
+    {
+      "path": "um\\holographicspaceinterop.h",
+      "sourceSha256": "6AC3200107A232903E8997B613ED9573208C5A5524DC0F28F32405AE2D187F62",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\holographicspaceinterop.idl",
+      "sdkSha256": "09F5FC605BE8F543B8939AEE952E96FB170F8BC513D102E26BDC90940D7A310F"
+    },
+    {
+      "path": "um\\iaccess.h",
+      "sourceSha256": "3EEF7B500BDE5A95FAA9C7802EE24FAC23628E3CD918B86D0C624EA67CB0AC23",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iaccess.idl",
+      "sdkSha256": "02F8173B7668C9E427164D172A557DFB47E94C1D47BB91AC3991AB840467DC78"
+    },
+    {
+      "path": "um\\icontentprefetchertasktrigger.h",
+      "sourceSha256": "B045B2409BE86F0BAD1ADF7FE0FD20F4F0B9BB2E0446DAB99219C729C5C414FF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\icontentprefetchertasktrigger.idl",
+      "sdkSha256": "1F52DEC7E41512A3BDB40A6ED0702E88CDBF8F10AD76A8F70C66D8462F70646D"
+    },
+    {
+      "path": "um\\inkrenderer.h",
+      "sourceSha256": "57FE25E5312FE74A985CBFBD90BFCFC26E96219B59697222E5834D0BA6163214",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\inkrenderer.idl",
+      "sdkSha256": "C133920FFAEDCE82E4712D108883F1BD035CEAA3AD5C6CB68D0634661938DFEF"
+    },
+    {
+      "path": "um\\inputpaneinterop.h",
+      "sourceSha256": "6A3F9BA67A746E5F2562BFC2DFD8EA663E89C6DE9DFB3ACF683DAA8A557B152B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\inputpaneinterop.idl",
+      "sdkSha256": "1FCD4DA27F64F19A5A60CCEE007DD6999597EB7402306ED502A460C2BDE001B4"
+    },
+    {
+      "path": "um\\mfmp2dlna.h",
+      "sourceSha256": "984BBCD75C8E331DF0211A3A185D27FFEDDD184D7C43691F2FDF6DF8AA629E55",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfmp2dlna.idl",
+      "sdkSha256": "635C9B364BE9736ABE6DDCBE6B788C3687406063BA147CAB259E9B7CD58DAF6B"
+    },
+    {
+      "path": "um\\mpeg2psiparser.h",
+      "sourceSha256": "56D5839B67937031FEA6FD1045B57C56E6B713AC3D276ECF8ACF0D354B3BFE6E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mpeg2psiparser.idl",
+      "sdkSha256": "C19DC666A34164031B844E216D704E3F445780AE3EC076528351FFACFEBB1942"
+    },
+    {
+      "path": "um\\msimeapi.h",
+      "sourceSha256": "1A0C7D2D7B894D0B770AA55343470894474FD5D64AB20ABC5EBEFB6145D74BB5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msimeapi.idl",
+      "sdkSha256": "7B02DE9C85DA744555876EE8F99628C206A04B7E0A4D283542A8303F0BCB1BA0"
+    },
+    {
+      "path": "um\\msvidctl.h",
+      "sourceSha256": "750AA179A2F71EB3AB3B1479A39526A6F9A2C1354F555EAB6169D0BE215F8D67",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msvidctl.idl",
+      "sdkSha256": "62D686FE5D299492D60D84CC8778C2CE1C229DAC97D4F4BD045CE2C43E45E701"
+    },
+    {
+      "path": "um\\playtomanagerinterop.h",
+      "sourceSha256": "C7D3CC3E4676803BE8226331C344EC67F6BBECF58F39BEA566C693E74FD66A8F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\playtomanagerinterop.idl",
+      "sdkSha256": "69A5BEB4064F964501F9489CE42E820DC6713FFC72D859906EFC087B8990F91E"
+    },
+    {
+      "path": "um\\portabledeviceconnectapi.h",
+      "sourceSha256": "95B5AF91D315E83F299BBB8C629626DB6A5A67BEFA98754BF5F834F50B1AAE75",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\portabledeviceconnectapi.idl",
+      "sdkSha256": "D9C89638BA317E16E30CECC70E1F75BD902ED69A024BC15E4D1913B8BA52899F"
     }
   ],
   "midl": {
@@ -4736,6 +4808,106 @@
         "path": "um\\xpsobjectmodel_2.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\xpsobjectmodel_2.idl",
         "sdkSha256": "85BB7765D97E604AF9993D25E9DE2FC39046E85C72C1043536A1F032C11D8D0B"
+      },
+      {
+        "path": "shared\\devpropdef.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\devpropdef.h",
+        "sdkSha256": "79E4631E9E0CFDA0975270F71C9970D731352AD8D198D6706AC13A3970CEAA98"
+      },
+      {
+        "path": "um\\accctrl.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\accctrl.h",
+        "sdkSha256": "37A7438A7233AD985E312151F6979A55D499C75F1B92BA8BEB930A71FFA8E429"
+      },
+      {
+        "path": "um\\dimm.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dimm.idl",
+        "sdkSha256": "6426B217FB9608253E609E83675F624DA80AF43E5F543E164571468DBF1361B2"
+      },
+      {
+        "path": "um\\dispex.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dispex.idl",
+        "sdkSha256": "BDE5016BA1C04F32E21B8A33D4282D493AD375B2D0EBF516FB88F4B5A189E1E6"
+      },
+      {
+        "path": "um\\filtereg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\filtereg.idl",
+        "sdkSha256": "E436B740F02A8263527C172F0174EDA06EBBC41A9D6C6368D8F493A7A082C693"
+      },
+      {
+        "path": "um\\holographicspaceinterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\holographicspaceinterop.idl",
+        "sdkSha256": "09F5FC605BE8F543B8939AEE952E96FB170F8BC513D102E26BDC90940D7A310F"
+      },
+      {
+        "path": "um\\iaccess.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\iaccess.idl",
+        "sdkSha256": "02F8173B7668C9E427164D172A557DFB47E94C1D47BB91AC3991AB840467DC78"
+      },
+      {
+        "path": "um\\icontentprefetchertasktrigger.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\icontentprefetchertasktrigger.idl",
+        "sdkSha256": "1F52DEC7E41512A3BDB40A6ED0702E88CDBF8F10AD76A8F70C66D8462F70646D"
+      },
+      {
+        "path": "um\\inkrenderer.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\inkrenderer.idl",
+        "sdkSha256": "C133920FFAEDCE82E4712D108883F1BD035CEAA3AD5C6CB68D0634661938DFEF"
+      },
+      {
+        "path": "um\\inputpaneinterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\inputpaneinterop.idl",
+        "sdkSha256": "1FCD4DA27F64F19A5A60CCEE007DD6999597EB7402306ED502A460C2BDE001B4"
+      },
+      {
+        "path": "um\\mfmp2dlna.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mfmp2dlna.idl",
+        "sdkSha256": "635C9B364BE9736ABE6DDCBE6B788C3687406063BA147CAB259E9B7CD58DAF6B"
+      },
+      {
+        "path": "um\\mshtmcid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mshtmcid.h",
+        "sdkSha256": "79DB77720BFC64CDF08BDC0EC2EA13119C83AEA560D61643E527BDE499741AFD"
+      },
+      {
+        "path": "um\\mshtmdid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mshtmdid.h",
+        "sdkSha256": "ACB92C86C3320CF94C7C863D823364DD254B4A52A0009A7B9F5209BDBAB2A87A"
+      },
+      {
+        "path": "um\\mshtml.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mshtml.idl",
+        "sdkSha256": "EDCB6864C8712DB1120CC29AA82DFD11E95194E00729731822522E1820A56320"
+      },
+      {
+        "path": "um\\msimeapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msimeapi.idl",
+        "sdkSha256": "7B02DE9C85DA744555876EE8F99628C206A04B7E0A4D283542A8303F0BCB1BA0"
+      },
+      {
+        "path": "um\\msvidctl.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msvidctl.idl",
+        "sdkSha256": "62D686FE5D299492D60D84CC8778C2CE1C229DAC97D4F4BD045CE2C43E45E701"
+      },
+      {
+        "path": "um\\playtomanagerinterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\playtomanagerinterop.idl",
+        "sdkSha256": "69A5BEB4064F964501F9489CE42E820DC6713FFC72D859906EFC087B8990F91E"
+      },
+      {
+        "path": "um\\portabledeviceconnectapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\portabledeviceconnectapi.idl",
+        "sdkSha256": "D9C89638BA317E16E30CECC70E1F75BD902ED69A024BC15E4D1913B8BA52899F"
+      },
+      {
+        "path": "um\\PortableDeviceConnectImports.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\PortableDeviceConnectImports.h",
+        "sdkSha256": "416F011D0EF82F97AA2BD58977FAD82A8E2A1C1C9F30A6910DEEE0FBAF731449"
+      },
+      {
+        "path": "um\\PortableDeviceConnectImports.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\PortableDeviceConnectImports.idl",
+        "sdkSha256": "A0BCA4C86B098C72AE8300006F83C885E05534BF0E8060FE1AED0AF8FE0C93B5"
       }
     ],
     "outputs": [
@@ -5474,6 +5646,54 @@
       {
         "source": "um\\filter.idl",
         "path": "um\\filter.h"
+      },
+      {
+        "source": "um\\filtereg.idl",
+        "path": "um\\filtereg.h"
+      },
+      {
+        "source": "um\\holographicspaceinterop.idl",
+        "path": "um\\holographicspaceinterop.h"
+      },
+      {
+        "source": "um\\iaccess.idl",
+        "path": "um\\iaccess.h"
+      },
+      {
+        "source": "um\\icontentprefetchertasktrigger.idl",
+        "path": "um\\icontentprefetchertasktrigger.h"
+      },
+      {
+        "source": "um\\inkrenderer.idl",
+        "path": "um\\inkrenderer.h"
+      },
+      {
+        "source": "um\\inputpaneinterop.idl",
+        "path": "um\\inputpaneinterop.h"
+      },
+      {
+        "source": "um\\mfmp2dlna.idl",
+        "path": "um\\mfmp2dlna.h"
+      },
+      {
+        "source": "um\\mpeg2psiparser.idl",
+        "path": "um\\mpeg2psiparser.h"
+      },
+      {
+        "source": "um\\msimeapi.idl",
+        "path": "um\\msimeapi.h"
+      },
+      {
+        "source": "um\\msvidctl.idl",
+        "path": "um\\msvidctl.h"
+      },
+      {
+        "source": "um\\playtomanagerinterop.idl",
+        "path": "um\\playtomanagerinterop.h"
+      },
+      {
+        "source": "um\\portabledeviceconnectapi.idl",
+        "path": "um\\portabledeviceconnectapi.h"
       }
     ]
   },
@@ -6203,6 +6423,18 @@
     "um\\dcompanimation.idl.patch",
     "um\\dmodshow.idl.patch",
     "um\\editionupgradehelper.idl.patch",
-    "um\\filter.idl.patch"
+    "um\\filter.idl.patch",
+    "um\\filtereg.idl.patch",
+    "um\\holographicspaceinterop.idl.patch",
+    "um\\iaccess.idl.patch",
+    "um\\icontentprefetchertasktrigger.idl.patch",
+    "um\\inkrenderer.idl.patch",
+    "um\\inputpaneinterop.idl.patch",
+    "um\\mfmp2dlna.idl.patch",
+    "um\\mpeg2psiparser.idl.patch",
+    "um\\msimeapi.idl.patch",
+    "um\\msvidctl.idl.patch",
+    "um\\playtomanagerinterop.idl.patch",
+    "um\\portabledeviceconnectapi.idl.patch"
   ]
 }

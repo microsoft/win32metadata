@@ -1,0 +1,20 @@
+diff --git a/um/mpeg2psiparser.idl b/um/mpeg2psiparser.idl
+index f3dbc681..683bf955 100644
+--- a/um/mpeg2psiparser.idl
++++ b/um/mpeg2psiparser.idl
+@@ -17,6 +17,7 @@
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -280,6 +281,7 @@ interface IMpeg2Data;
+     // IPSITables Interface
+     //
+     ////////////////////////////////////
++_Win32_AnnotateInterface_(IPSITables, _Win32_SupportedOS_Windows7_)
+     [
+         object,
+         uuid(919F24C5-7B14-42ac-A4B0-2AE08DAF00AC),    

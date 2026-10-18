@@ -1,0 +1,20 @@
+diff --git a/um/portabledeviceconnectapi.idl b/um/portabledeviceconnectapi.idl
+index 712313e0..6ac91333 100644
+--- a/um/portabledeviceconnectapi.idl
++++ b/um/portabledeviceconnectapi.idl
+@@ -4,6 +4,7 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -60,6 +61,7 @@ interface IEnumPortableDeviceConnectors : IUnknown
+ // This interface is used by applications to communicate to
+ // portable device connectors. 
+ //---------------------------------------------------------
++_Win32_AnnotateInterface_(IPortableDeviceConnector, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(625e2df8-6392-4cf0-9ad1-3cfa5f17775c),

@@ -1,0 +1,20 @@
+diff --git a/um/playtomanagerinterop.idl b/um/playtomanagerinterop.idl
+index bd56d3f0..6ceff6c3 100644
+--- a/um/playtomanagerinterop.idl
++++ b/um/playtomanagerinterop.idl
+@@ -5,6 +5,7 @@
+  *	Copyright (c) Microsoft Corporation. All rights reserved
+  */
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -14,6 +15,7 @@ import "inspectable.idl";
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+ 
++_Win32_AnnotateInterface_(IPlayToManagerInterop, _Win32_SupportedOS_Windows8_)
+ [
+     uuid(24394699-1F2C-4EB3-8CD7-0EC1DA42A540),
+ ]

@@ -1,0 +1,20 @@
+diff --git a/um/holographicspaceinterop.idl b/um/holographicspaceinterop.idl
+index ff6c928a..8d15302d 100644
+--- a/um/holographicspaceinterop.idl
++++ b/um/holographicspaceinterop.idl
+@@ -5,6 +5,7 @@
+  *	Copyright (c) Microsoft Corporation. All rights reserved
+  */
+ 
++#include <sal.h>
+ import "inspectable.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -14,6 +15,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_RS2)")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IHolographicSpaceInterop, _Win32_SupportedOS_15063_)
+ [
+     uuid(5C4EE536-6A98-4B86-A170-587013D6FD4B),
+ ]
