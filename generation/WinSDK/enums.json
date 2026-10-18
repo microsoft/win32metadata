@@ -18907,25 +18907,6 @@
     ]
   },
   {
-    "name": "SCHANNEL_SESSION_TOKEN_FLAGS",
-    "members": [
-      {
-        "name": "SSL_SESSION_ENABLE_RECONNECTS",
-        "value": "1"
-      },
-      {
-        "name": "SSL_SESSION_DISABLE_RECONNECTS",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SCHANNEL_SESSION_TOKEN",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
       "addUsesTo": "CRYPT_TIMESTAMP_VERSION",
       "uses": [
         {

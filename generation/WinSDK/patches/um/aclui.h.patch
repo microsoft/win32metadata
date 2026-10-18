@@ -1,5 +1,5 @@
 diff --git a/um/aclui.h b/um/aclui.h
-index 09088fa2..7f873879 100644
+index 09088fa2..38d046b1 100644
 --- a/um/aclui.h
 +++ b/um/aclui.h
 @@ -127,6 +127,14 @@ typedef struct _SI_OBJECT_INFO
@@ -29,7 +29,67 @@ index 09088fa2..7f873879 100644
                                  PSI_ACCESS *ppAccess,
                                  ULONG *pcAccesses,
                                  ULONG *piDefaultAccess ) PURE;
-@@ -419,11 +430,16 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
+@@ -236,6 +247,9 @@ typedef ISecurityInformation *LPSECURITYINFO;
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation2
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct ISecurityInformation2 ISecurityInformation2;
++#endif
+ DECLARE_INTERFACE_IID_(ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
+ {
+     // *** IUnknown methods ***
+@@ -268,6 +282,9 @@ typedef struct _SID_INFO_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IEffectivePermission IEffectivePermission;
++#endif
+ DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
+ {
+     // *** IUnknown methods ***
+@@ -289,6 +306,9 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityObjectTypeInfo
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct ISecurityObjectTypeInfo ISecurityObjectTypeInfo;
++#endif
+ DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
+ {
+     // *** IUnknown methods ***
+@@ -307,6 +327,9 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
+ // Support for separation or read-only ACL viewer and elevated ACL editor
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation3
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct ISecurityInformation3 ISecurityInformation3;
++#endif
+ DECLARE_INTERFACE_IID_(ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
+ {
+     // *** IUnknown methods ***
+@@ -351,6 +374,9 @@ typedef struct _EFFPERM_RESULT_LIST
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation4
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows8_ struct ISecurityInformation4 ISecurityInformation4;
++#endif
+ DECLARE_INTERFACE_IID_(ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
+ {
+     // *** IUnknown methods ***
+@@ -368,6 +394,9 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
+ 
+ #undef INTERFACE
+ #define INTERFACE   IEffectivePermission
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows8_ struct IEffectivePermission2 IEffectivePermission2;
++#endif
+ DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
+ {
+     // *** IUnknown methods ***
+@@ -419,11 +448,16 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
  EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  

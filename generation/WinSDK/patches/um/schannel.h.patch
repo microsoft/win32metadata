@@ -1,8 +1,29 @@
 diff --git a/um/schannel.h b/um/schannel.h
-index a2208f5d..8493f483 100644
+index a2208f5d..833fcf78 100644
 --- a/um/schannel.h
 +++ b/um/schannel.h
-@@ -1087,6 +1087,7 @@ typedef SECURITY_STATUS
+@@ -735,10 +735,20 @@ typedef struct _SCHANNEL_ALERT_TOKEN
+ #define SSL_SESSION_ENABLE_RECONNECTS   1
+ #define SSL_SESSION_DISABLE_RECONNECTS  2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(SCHANNEL_SESSION_TOKEN_FLAGS, unsigned long,
++    SSL_SESSION_ENABLE_RECONNECTS,
++    SSL_SESSION_DISABLE_RECONNECTS);
++#endif
++
+ // Session control token structure.
+ typedef struct _SCHANNEL_SESSION_TOKEN
+ {
+     DWORD   dwTokenType;        // SCHANNEL_SESSION
++    #if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++    _Win32_AssociatedEnum_(SCHANNEL_SESSION_TOKEN_FLAGS)
++    #endif
+     DWORD   dwFlags;
+ } SCHANNEL_SESSION_TOKEN;
+ 
+@@ -1087,6 +1097,7 @@ typedef SECURITY_STATUS
  );
  
  EXTERN_C

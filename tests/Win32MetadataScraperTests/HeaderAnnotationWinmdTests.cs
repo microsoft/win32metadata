@@ -1270,56 +1270,230 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                 scope = "Exact 53 availability attributes and unchanged native declaration signatures, field placement and COM slot order against retained normal sources. Not a whole-SDK or consumer-compatibility grade.",
             }, new JsonSerializerOptions { WriteIndented = true }));
 
-            static string FieldShape(MetadataReader reader, FieldDefinition field)
-                => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
-                    field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+        }
 
-            static string MethodShape(MetadataReader reader, MethodDefinition method)
+        [NativeMigrationTheory("EXISTING_NATIVE_WAVE07_ROOT")]
+        [InlineData("x64")]
+        public void NormalCompilerBoundNativeMajorityPreservesAvailabilityAndSessionContracts(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("EXISTING_NATIVE_WAVE07_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "authored", "report.json")));
+            var facts = report.RootElement.GetProperty("facts").EnumerateArray().ToArray();
+            Assert.Equal(20, facts.Length);
+            Assert.Equal(20, facts.Select(fact => fact.GetProperty("factId").GetString()).Distinct().Count());
+            var floors = facts.Where(fact => fact.GetProperty("kind").GetString() == "record").ToArray();
+            Assert.Equal(16, floors.Length);
+            Assert.Equal(5, report.RootElement.GetProperty("retainedReservedFacts").GetArrayLength());
+            Assert.Equal(4, facts.Count(fact => fact.GetProperty("kind").GetString() == "enum"));
+            string baseline = Environment.GetEnvironmentVariable("EXISTING_NATIVE_AVAILABILITY_BASELINE");
+            Assert.False(string.IsNullOrEmpty(baseline));
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baseline), "exact-source-inputs.zip"));
+            string output = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            string legacyDirectory = Path.Combine(output, "legacy");
+            string candidateDirectory = Path.Combine(output, "candidate");
+            Directory.CreateDirectory(legacyDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            string[] partitions = { "Authorization.UI", "Shell", "Identity" };
+            foreach (string partition in partitions)
             {
-                var signature = method.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
-                var import = method.GetImport();
-                string module = import.Module.IsNil ? "" :
-                    reader.GetString(reader.GetModuleReference(import.Module).Name);
-                return reader.GetString(method.Name) + "|" + method.Attributes + "|" + method.ImplAttributes + "|" +
-                    signature.Header.RawValue + "|" + signature.ReturnType + "|" +
-                    string.Join(",", signature.ParameterTypes) + "|" + import.Attributes + "|" + module + "|" +
-                    (import.Name.IsNil ? "" : reader.GetString(import.Name)) + "|" +
-                    string.Join(",", method.GetParameters().Select(reader.GetParameter)
-                        .Select(parameter => reader.GetString(parameter.Name) + ":" + parameter.SequenceNumber + ":" + parameter.Attributes));
-            }
-
-            static void WriteAvailabilityDeclarations(IEnumerable<string> texts, string partition, HashSet<string> names, string directory)
-            {
-                var sources = texts.Select(text => CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot()).ToArray();
-                var source = sources[0].WithUsings(SyntaxFactory.List(sources.SelectMany(unit => unit.Usings)
-                    .GroupBy(value => value.ToString(), StringComparer.Ordinal).Select(group => group.First())));
-                var found = new HashSet<string>(StringComparer.Ordinal);
-                var namespaces = sources.SelectMany(unit => unit.Members).OfType<NamespaceDeclarationSyntax>().Select(ns =>
+                var selected = facts.Where(fact => fact.GetProperty("partition").GetString() == partition &&
+                        fact.GetProperty("kind").GetString() != "enum")
+                    .Select(fact => fact.GetProperty("symbol").GetString().Split("::")[0]).ToHashSet(StringComparer.Ordinal);
+                if (partition == "Identity")
+                    selected.Add("SCHANNEL_SESSION_TOKEN");
+                var entries = new[] { "common\\" + partition + ".cs", architecture + "\\" + partition + ".cs" }
+                    .Select(archive.GetEntry).Where(entry => entry != null).ToArray();
+                Assert.NotEmpty(entries);
+                var oldSources = entries.Select(entry =>
                 {
-                    var members = new List<MemberDeclarationSyntax>();
-                    foreach (var declaration in ns.Members)
-                    {
-                        if (declaration is StructDeclarationSyntax record && names.Contains(record.Identifier.ValueText))
-                        {
-                            Assert.True(found.Add(record.Identifier.ValueText));
-                            members.Add(record);
-                        }
-                        if (declaration is ClassDeclarationSyntax api)
-                        {
-                            var methods = api.Members.OfType<MethodDeclarationSyntax>()
-                                .Where(method => names.Contains(method.Identifier.ValueText)).ToArray();
-                            foreach (var method in methods)
-                                Assert.True(found.Add(method.Identifier.ValueText));
-                            if (methods.Length != 0)
-                                members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
-                        }
-                    }
-                    return ns.WithMembers(SyntaxFactory.List(members));
-                }).Where(ns => ns.Members.Count != 0).ToArray();
-                Assert.True(names.SetEquals(found), directory + "/" + partition + ": " + string.Join(",", names.Except(found)));
-                File.WriteAllText(Path.Combine(directory, partition + ".cs"),
-                    source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
+                    using var stream = new StreamReader(entry.Open());
+                    return stream.ReadToEnd();
+                }).ToArray();
+                WriteAvailabilityDeclarations(oldSources, partition, selected, legacyDirectory);
+                WriteAvailabilityDeclarations(new[] { File.ReadAllText(Path.Combine(root, "scrape-ready", "generated",
+                    architecture, partition + ".cs")) }, partition, selected, candidateDirectory);
             }
+            string rawIdentity = File.ReadAllText(Path.Combine(root, "scrape-ready", "generated", architecture, "Identity.header-types.cs"));
+            var nativeGroup = CSharpSyntaxTree.ParseText(rawIdentity).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().Single(value => value.Identifier.ValueText == "SCHANNEL_SESSION_TOKEN_FLAGS");
+            var nativeNamespace = Assert.IsType<NamespaceDeclarationSyntax>(nativeGroup.Parent);
+            var groupSource = SyntaxFactory.ParseCompilationUnit(
+                "using System; using Windows.Win32.Foundation.Metadata;")
+                .AddMembers(nativeNamespace.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(nativeGroup)));
+            File.WriteAllText(Path.Combine(candidateDirectory, "SessionEnum.cs"),
+                groupSource.NormalizeWhitespace().ToFullString());
+            var legacyRemaps = new Dictionary<string, string>
+            {
+                ["SCHANNEL_SESSION_TOKEN::dwFlags"] = "SCHANNEL_SESSION_TOKEN_FLAGS",
+            };
+            var requiredNamespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Select(line => line.Split('=', 2))
+                .Where(pair => pair.Length == 2 && floors.Any(fact => fact.GetProperty("symbol").GetString() == pair[0]))
+                .ToDictionary(pair => pair[0], pair => pair[1], StringComparer.Ordinal);
+            Assert.Equal(2, requiredNamespaces.Count);
+            using var legacy = Emit(legacyDirectory, architecture, memberRemaps: legacyRemaps, references: new[] { baseline },
+                requiredNamespaces: requiredNamespaces);
+            using var candidate = Emit(candidateDirectory, architecture, references: new[] { baseline },
+                requiredNamespaces: requiredNamespaces);
+            using var reference = new MetadataImage(baseline);
+            AssertMetadataClosure(legacy.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            foreach (var fact in floors)
+            {
+                string name = fact.GetProperty("symbol").GetString();
+                string version = fact.GetProperty("version").GetString();
+                var before = FindType(legacy.Reader, name);
+                var after = FindType(candidate.Reader, name);
+                var accepted = FindType(reference.Reader, name);
+                Assert.Equal(reference.Reader.GetString(accepted.Namespace), candidate.Reader.GetString(after.Namespace));
+                Assert.Equal(GuidValues(reference.Reader, accepted), GuidValues(candidate.Reader, after));
+                AssertStringAttribute(legacy.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                AssertStringAttribute(candidate.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute", version);
+                AssertRecordShape(legacy.Reader, before, candidate.Reader, after);
+            }
+            var oldToken = FindType(legacy.Reader, "SCHANNEL_SESSION_TOKEN");
+            var newToken = FindType(candidate.Reader, "SCHANNEL_SESSION_TOKEN");
+            Assert.Equal(oldToken.Attributes, newToken.Attributes);
+            Assert.Equal(oldToken.GetLayout(), newToken.GetLayout());
+            Assert.Equal(legacy.Reader.GetString(oldToken.Namespace), candidate.Reader.GetString(newToken.Namespace));
+            var oldTokenFields = oldToken.GetFields().Select(legacy.Reader.GetFieldDefinition).ToArray();
+            var newTokenFields = newToken.GetFields().Select(candidate.Reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "dwTokenType", "dwFlags" },
+                newTokenFields.Select(field => candidate.Reader.GetString(field.Name)));
+            Assert.Equal(oldTokenFields.Select(field => legacy.Reader.GetString(field.Name)),
+                newTokenFields.Select(field => candidate.Reader.GetString(field.Name)));
+            Assert.Equal(FieldShape(legacy.Reader, oldTokenFields[0]), FieldShape(candidate.Reader, newTokenFields[0]));
+            Assert.Equal(oldTokenFields[1].Attributes, newTokenFields[1].Attributes);
+            Assert.Equal(oldTokenFields[1].GetOffset(), newTokenFields[1].GetOffset());
+            Assert.Equal("Windows.Win32.Security.Authentication.Identity.SCHANNEL_SESSION_TOKEN_FLAGS",
+                oldTokenFields[1].DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            Assert.Equal("UInt32", newTokenFields[1].DecodeSignature(new SignatureNames(qualifiedNames: true), null));
+            AssertStringAttribute(candidate.Reader, newTokenFields[1].GetCustomAttributes(),
+                "AssociatedEnumAttribute", "SCHANNEL_SESSION_TOKEN_FLAGS");
+            var oldGroup = FindType(reference.Reader, "SCHANNEL_SESSION_TOKEN_FLAGS");
+            var newGroup = FindType(candidate.Reader, "SCHANNEL_SESSION_TOKEN_FLAGS");
+            Assert.Equal("Windows.Win32.Security.Authentication.Identity", candidate.Reader.GetString(newGroup.Namespace));
+            Assert.Equal(reference.Reader.GetString(oldGroup.Namespace), candidate.Reader.GetString(newGroup.Namespace));
+            AssertDoesNotHaveAttribute(reference.Reader, oldGroup.GetCustomAttributes(), "FlagsAttribute");
+            AssertDoesNotHaveAttribute(candidate.Reader, newGroup.GetCustomAttributes(), "FlagsAttribute");
+            var oldFields = oldGroup.GetFields().Select(reference.Reader.GetFieldDefinition).ToArray();
+            var newFields = newGroup.GetFields().Select(candidate.Reader.GetFieldDefinition).ToArray();
+            Assert.Equal(3, newFields.Length);
+            Assert.Equal("0609", Convert.ToHexString(candidate.Reader.GetBlobBytes(newFields[0].Signature)));
+            Assert.Equal(oldFields.Select(field => FieldShape(reference.Reader, field)),
+                newFields.Select(field => FieldShape(candidate.Reader, field)));
+            foreach (var pair in oldFields.Skip(1).Zip(newFields.Skip(1)))
+            {
+                var before = reference.Reader.GetConstant(pair.First.GetDefaultValue());
+                var after = candidate.Reader.GetConstant(pair.Second.GetDefaultValue());
+                Assert.Equal(ConstantTypeCode.UInt32, after.TypeCode);
+                Assert.Equal(before.TypeCode, after.TypeCode);
+                Assert.Equal(reference.Reader.GetBlobBytes(before.Value), candidate.Reader.GetBlobBytes(after.Value));
+            }
+            File.WriteAllText(Path.Combine(output, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                sourceFacts = facts.Select(fact => fact.GetProperty("factId").GetString()).ToArray(),
+                sourceRecordFloors = 16,
+                retainedReservedParameters = 5,
+                sourceSessionEnumFacts = 4,
+                nativeGroupFullName = "Windows.Win32.Security.Authentication.Identity.SCHANNEL_SESSION_TOKEN_FLAGS",
+                nativeGroupStorage = "UInt32",
+                nativeGroupFlags = false,
+                nativeGroupValues = new uint[] { 1, 2 },
+                sessionFieldProjection = new
+                {
+                    nativeDeclaration = "DWORD dwFlags",
+                    oldManagedType = "Windows.Win32.Security.Authentication.Identity.SCHANNEL_SESSION_TOKEN_FLAGS",
+                    newManagedType = "UInt32",
+                    preservedAssociatedEnum = "SCHANNEL_SESSION_TOKEN_FLAGS",
+                    oldEnumAndNewNativeStorage = "UInt32",
+                    nativeAllTargetSize = 8,
+                    nativeAllTargetAlignment = 4,
+                    nativeAllTargetOffsets = new[] { 0, 4 },
+                },
+                normalPartitions = partitions,
+                existingNamespaceOrganization = requiredNamespaces,
+                controlPath = Path.Combine(legacyDirectory, "Test.winmd"),
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                scope = "Exact 20 source facts; unchanged COM declaration signatures/slots and availability; native DWORD session field with exact enum association, UInt32 storage and native-backed values. Session managed enum wrapper becomes UInt32 plus AssociatedEnum. Five Reserved facts remain unchanged. Normal physical metadata x64 only. No whole-SDK or consumer grade.",
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            static void AssertRecordShape(MetadataReader beforeReader, TypeDefinition before,
+                MetadataReader afterReader, TypeDefinition after)
+            {
+                Assert.Equal(beforeReader.GetString(before.Namespace), afterReader.GetString(after.Namespace));
+                Assert.Equal(before.Attributes, after.Attributes);
+                Assert.Equal(before.GetLayout(), after.GetLayout());
+                Assert.Equal(before.GetFields().Select(beforeReader.GetFieldDefinition).Select(field => FieldShape(beforeReader, field)),
+                    after.GetFields().Select(afterReader.GetFieldDefinition).Select(field => FieldShape(afterReader, field)));
+                Assert.Equal(before.GetMethods().Select(beforeReader.GetMethodDefinition).Select(method => MethodShape(beforeReader, method)),
+                    after.GetMethods().Select(afterReader.GetMethodDefinition).Select(method => MethodShape(afterReader, method)));
+                Assert.Equal(before.GetNestedTypes().Select(beforeReader.GetTypeDefinition)
+                    .Select(type => string.Join("\n", type.GetFields().Select(beforeReader.GetFieldDefinition)
+                        .Select(field => FieldShape(beforeReader, field)))),
+                    after.GetNestedTypes().Select(afterReader.GetTypeDefinition)
+                        .Select(type => string.Join("\n", type.GetFields().Select(afterReader.GetFieldDefinition)
+                            .Select(field => FieldShape(afterReader, field)))));
+            }
+
+            static string[] GuidValues(MetadataReader reader, TypeDefinition type)
+                => type.GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "GuidAttribute")
+                    .Select(handle => Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        private static string FieldShape(MetadataReader reader, FieldDefinition field)
+            => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
+                field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+
+        private static string MethodShape(MetadataReader reader, MethodDefinition method)
+        {
+            var signature = method.DecodeSignature(new SignatureNames(qualifiedNames: true), null);
+            var import = method.GetImport();
+            string module = import.Module.IsNil ? "" :
+                reader.GetString(reader.GetModuleReference(import.Module).Name);
+            return reader.GetString(method.Name) + "|" + method.Attributes + "|" + method.ImplAttributes + "|" +
+                signature.Header.RawValue + "|" + signature.ReturnType + "|" +
+                string.Join(",", signature.ParameterTypes) + "|" + import.Attributes + "|" + module + "|" +
+                (import.Name.IsNil ? "" : reader.GetString(import.Name)) + "|" +
+                string.Join(",", method.GetParameters().Select(reader.GetParameter)
+                    .Select(parameter => reader.GetString(parameter.Name) + ":" + parameter.SequenceNumber + ":" + parameter.Attributes));
+        }
+
+        private static void WriteAvailabilityDeclarations(IEnumerable<string> texts, string partition, HashSet<string> names, string directory)
+        {
+            var sources = texts.Select(text => CSharpSyntaxTree.ParseText(text).GetCompilationUnitRoot()).ToArray();
+            var source = sources[0].WithUsings(SyntaxFactory.List(sources.SelectMany(unit => unit.Usings)
+                .GroupBy(value => value.ToString(), StringComparer.Ordinal).Select(group => group.First())));
+            var found = new HashSet<string>(StringComparer.Ordinal);
+            var namespaces = sources.SelectMany(unit => unit.Members).OfType<NamespaceDeclarationSyntax>().Select(ns =>
+            {
+                var members = new List<MemberDeclarationSyntax>();
+                foreach (var declaration in ns.Members)
+                {
+                    if (declaration is StructDeclarationSyntax record && names.Contains(record.Identifier.ValueText))
+                    {
+                        Assert.True(found.Add(record.Identifier.ValueText));
+                        members.Add(record);
+                    }
+                    if (declaration is ClassDeclarationSyntax api)
+                    {
+                        var methods = api.Members.OfType<MethodDeclarationSyntax>()
+                            .Where(method => names.Contains(method.Identifier.ValueText)).ToArray();
+                        foreach (var method in methods)
+                            Assert.True(found.Add(method.Identifier.ValueText));
+                        if (methods.Length != 0)
+                            members.Add(api.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(methods)));
+                    }
+                }
+                return ns.WithMembers(SyntaxFactory.List(members));
+            }).Where(ns => ns.Members.Count != 0).ToArray();
+            Assert.True(names.SetEquals(found), directory + "/" + partition + ": " + string.Join(",", names.Except(found)));
+            File.WriteAllText(Path.Combine(directory, partition + ".cs"),
+                source.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces)).NormalizeWhitespace().ToFullString());
         }
 
         private static readonly (string Name, string Header, bool Flags, int Members)[] NextNativeCategoryGroups =
