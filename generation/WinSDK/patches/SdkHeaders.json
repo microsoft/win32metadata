@@ -3519,6 +3519,12 @@
       "sourceSha256": "6587948F79A11D30D46E5AA0A8392C73724C8BD71E14830CD6AE98C32EE2D004",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\comadmin.idl",
       "sdkSha256": "8DA1E2C3E8964EB882BA8562B86AE9868CE8A6F3992979046F00A39789C9FD3B"
+    },
+    {
+      "path": "um\\wabiab.h",
+      "sourceSha256": "36398E817C4CAD63CC8BF4F09032FF57BACB019514E6B07AA6A76CA71356D7E7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wabiab.h",
+      "sdkSha256": "36398E817C4CAD63CC8BF4F09032FF57BACB019514E6B07AA6A76CA71356D7E7"
     }
   ],
   "midl": {
@@ -6308,7 +6314,8 @@
     "Security.Tpm",
     "TaskSchd",
     "Xaml_Diagnostics",
-    "Debug.WebApp"
+    "Debug.WebApp",
+    "Wab"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -6862,6 +6869,7 @@
     "um\\vsprov.idl.patch",
     "um\\cluadmex.idl.patch",
     "um\\mpegtype.h.patch",
-    "um\\comadmin.idl.patch"
+    "um\\comadmin.idl.patch",
+    "um\\wabiab.h.patch"
   ]
 }
