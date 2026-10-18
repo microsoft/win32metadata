@@ -1,5 +1,5 @@
 diff --git a/um/winbase.h b/um/winbase.h
-index 62b14502..d0dea5d4 100644
+index 62b14502..ffc006f5 100644
 --- a/um/winbase.h
 +++ b/um/winbase.h
 @@ -12,6 +12,21 @@
@@ -2159,24 +2159,28 @@ index 62b14502..d0dea5d4 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -5624,6 +6115,8 @@ CheckNameLegalDOS8Dot3W(
+@@ -5624,7 +6115,9 @@ CheckNameLegalDOS8Dot3W(
  
  #if _WIN32_WINNT >= 0x0600
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
-@@ -5636,6 +6129,8 @@ FindFirstFileTransactedA(
+ FindFirstFileTransactedA(
+@@ -5636,7 +6129,9 @@ FindFirstFileTransactedA(
      _In_       DWORD dwAdditionalFlags,
      _In_       HANDLE hTransaction
      );
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
+ FindFirstFileTransactedW(
 @@ -5731,6 +6226,8 @@ DWORD
      _In_opt_ LPVOID lpData
      );
@@ -2401,24 +2405,28 @@ index 62b14502..d0dea5d4 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -6338,6 +6882,8 @@ CreateHardLinkTransactedW(
+@@ -6338,7 +6882,9 @@ CreateHardLinkTransactedW(
  
  #if _WIN32_WINNT >= 0x0600
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
-@@ -6349,6 +6895,8 @@ FindFirstStreamTransactedW (
+ FindFirstStreamTransactedW (
+@@ -6349,7 +6895,9 @@ FindFirstStreamTransactedW (
      _In_       HANDLE hTransaction
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(FindClose) WINBASEAPI
  HANDLE
  WINAPI
+ FindFirstFileNameTransactedW (
 @@ -6368,6 +6916,8 @@ FindFirstFileNameTransactedW (
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -2617,60 +2625,72 @@ index 62b14502..d0dea5d4 100644
  _Success_(return != FALSE)
  WINADVAPI
  BOOL
-@@ -6673,6 +7265,8 @@ GetOldestEventLogRecord (
+@@ -6673,7 +7265,9 @@ GetOldestEventLogRecord (
      _Out_ PDWORD OldestRecord
      );
  
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
-@@ -6681,6 +7275,8 @@ OpenEventLogA (
+ WINAPI
+@@ -6681,7 +7275,9 @@ OpenEventLogA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpSourceName
      );
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
-@@ -6701,6 +7297,8 @@ OpenEventLogW (
+ WINAPI
+@@ -6701,7 +7297,9 @@ OpenEventLogW (
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
-@@ -6709,6 +7307,8 @@ RegisterEventSourceA (
+ WINAPI
+@@ -6709,7 +7307,9 @@ RegisterEventSourceA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpSourceName
      );
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(DeregisterEventSource) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
-@@ -6729,6 +7329,8 @@ RegisterEventSourceW (
+ WINAPI
+@@ -6729,7 +7329,9 @@ RegisterEventSourceW (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
-@@ -6737,6 +7339,8 @@ OpenBackupEventLogA (
+ WINAPI
+@@ -6737,7 +7339,9 @@ OpenBackupEventLogA (
      _In_opt_ LPCSTR lpUNCServerName,
      _In_     LPCSTR lpFileName
      );
+-_Success_(return != FALSE)
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- _Success_(return != FALSE)
++_Win32_RAIIFree_(CloseEventLog) _Success_(return != FALSE)
  WINADVAPI
  HANDLE
+ WINAPI
 @@ -6751,6 +7355,8 @@ OpenBackupEventLogW (
  #define OpenBackupEventLog  OpenBackupEventLogA
  #endif // !UNICODE
@@ -3195,32 +3215,38 @@ index 62b14502..d0dea5d4 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -8018,6 +8732,8 @@ SetThreadpoolCallbackPersistent(
+@@ -8018,7 +8732,9 @@ SetThreadpoolCallbackPersistent(
  //  Private Namespaces support
  //
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -8034,6 +8750,7 @@ CreatePrivateNamespaceA(
+ WINAPI
+@@ -8034,7 +8750,8 @@ CreatePrivateNamespaceA(
  #define CreatePrivateNamespace CreatePrivateNamespaceW
  #endif
  
+-WINBASEAPI
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(ClosePrivateNamespace) WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -8054,6 +8771,8 @@ OpenPrivateNamespaceA(
+ WINAPI
+@@ -8054,7 +8771,9 @@ OpenPrivateNamespaceA(
  //  Boundary descriptors support
  //
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(DeleteBoundaryDescriptor) WINBASEAPI
  _Ret_maybenull_
  HANDLE
+ APIENTRY
 @@ -8075,6 +8794,8 @@ CreateBoundaryDescriptorA(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -3310,15 +3336,17 @@ index 62b14502..d0dea5d4 100644
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -8330,6 +9069,8 @@ CreateJobSet (
+@@ -8330,7 +9069,9 @@ CreateJobSet (
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_RAIIFree_(FindVolumeClose) WINBASEAPI
  HANDLE
  WINAPI
+ FindFirstVolumeA(
 @@ -8341,6 +9082,8 @@ FindFirstVolumeA(
  #define FindFirstVolume FindFirstVolumeA
  #endif
