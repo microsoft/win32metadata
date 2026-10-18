@@ -1,5 +1,5 @@
 diff --git a/um/winuser.h b/um/winuser.h
-index f99e9294..5f99c126 100644
+index f99e9294..46974956 100644
 --- a/um/winuser.h
 +++ b/um/winuser.h
 @@ -300,6 +300,8 @@ typedef DESKTOPENUMPROCA    DESKTOPENUMPROC;
@@ -55,16 +55,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HKL
  WINAPI
-@@ -1255,6 +1267,8 @@ LoadKeyboardLayoutW(
- 
- 
- #if(WINVER >= 0x0400)
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HKL
- WINAPI
-@@ -1271,6 +1285,7 @@ ActivateKeyboardLayout(
+@@ -1271,6 +1283,7 @@ ActivateKeyboardLayout(
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0400)
@@ -72,7 +63,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -1284,17 +1299,23 @@ ToUnicodeEx(
+@@ -1284,17 +1297,23 @@ ToUnicodeEx(
      _In_opt_ HKL dwhkl);
  #endif /* WINVER >= 0x0400 */
  
@@ -96,7 +87,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1307,6 +1328,8 @@ GetKeyboardLayoutNameW(
+@@ -1307,6 +1326,8 @@ GetKeyboardLayoutNameW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -105,7 +96,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -1314,6 +1337,7 @@ GetKeyboardLayoutList(
+@@ -1314,6 +1335,7 @@ GetKeyboardLayoutList(
      _In_ int nBuff,
      _Out_writes_to_opt_(nBuff, return) HKL FAR *lpList);
  
@@ -113,7 +104,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HKL
  WINAPI
-@@ -1350,6 +1374,8 @@ typedef struct tagMOUSEMOVEPOINT {
+@@ -1350,6 +1372,8 @@ typedef struct tagMOUSEMOVEPOINT {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -122,7 +113,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -1390,6 +1416,8 @@ GetMouseMovePointsEx(
+@@ -1390,6 +1414,8 @@ GetMouseMovePointsEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -131,7 +122,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1400,6 +1428,8 @@ CreateDesktopA(
+@@ -1400,6 +1426,8 @@ CreateDesktopA(
      _In_ DWORD dwFlags,
      _In_ ACCESS_MASK dwDesiredAccess,
      _In_opt_ LPSECURITY_ATTRIBUTES lpsa);
@@ -140,7 +131,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1416,6 +1446,8 @@ CreateDesktopW(
+@@ -1416,6 +1444,8 @@ CreateDesktopW(
  #define CreateDesktop  CreateDesktopA
  #endif // !UNICODE
  
@@ -149,7 +140,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1428,6 +1460,8 @@ CreateDesktopExA(
+@@ -1428,6 +1458,8 @@ CreateDesktopExA(
      _In_opt_ LPSECURITY_ATTRIBUTES lpsa,
      _In_ ULONG ulHeapSize,
      _Reserved_ PVOID pvoid);
@@ -158,7 +149,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1455,6 +1489,8 @@ CreateDesktopExW(
+@@ -1455,6 +1487,8 @@ CreateDesktopExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -167,7 +158,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1463,6 +1499,8 @@ OpenDesktopA(
+@@ -1463,6 +1497,8 @@ OpenDesktopA(
      _In_ DWORD dwFlags,
      _In_ BOOL fInherit,
      _In_ ACCESS_MASK dwDesiredAccess);
@@ -176,7 +167,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1477,6 +1515,8 @@ OpenDesktopW(
+@@ -1477,6 +1513,8 @@ OpenDesktopW(
  #define OpenDesktop  OpenDesktopA
  #endif // !UNICODE
  
@@ -185,7 +176,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1486,6 +1526,8 @@ OpenInputDesktop(
+@@ -1486,6 +1524,8 @@ OpenInputDesktop(
      _In_ ACCESS_MASK dwDesiredAccess);
  
  
@@ -194,7 +185,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1493,6 +1535,8 @@ EnumDesktopsA(
+@@ -1493,6 +1533,8 @@ EnumDesktopsA(
      _In_opt_ HWINSTA hwinsta,
      _In_ DESKTOPENUMPROCA lpEnumFunc,
      _In_ LPARAM lParam);
@@ -203,7 +194,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1506,6 +1550,8 @@ EnumDesktopsW(
+@@ -1506,6 +1548,8 @@ EnumDesktopsW(
  #define EnumDesktops  EnumDesktopsA
  #endif // !UNICODE
  
@@ -212,7 +203,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1515,6 +1561,8 @@ EnumDesktopWindows(
+@@ -1515,6 +1559,8 @@ EnumDesktopWindows(
      _In_ LPARAM lParam);
  
  
@@ -221,7 +212,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1522,18 +1570,24 @@ SwitchDesktop(
+@@ -1522,18 +1568,24 @@ SwitchDesktop(
      _In_ HDESK hDesktop);
  
  
@@ -246,7 +237,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDESK
  WINAPI
-@@ -1578,6 +1632,8 @@ GetThreadDesktop(
+@@ -1578,6 +1630,8 @@ GetThreadDesktop(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -255,7 +246,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINSTA
  WINAPI
-@@ -1586,6 +1642,8 @@ CreateWindowStationA(
+@@ -1586,6 +1640,8 @@ CreateWindowStationA(
      _In_ DWORD dwFlags,
      _In_ ACCESS_MASK dwDesiredAccess,
      _In_opt_ LPSECURITY_ATTRIBUTES lpsa);
@@ -264,7 +255,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINSTA
  WINAPI
-@@ -1600,6 +1658,8 @@ CreateWindowStationW(
+@@ -1600,6 +1656,8 @@ CreateWindowStationW(
  #define CreateWindowStation  CreateWindowStationA
  #endif // !UNICODE
  
@@ -273,7 +264,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINSTA
  WINAPI
-@@ -1607,6 +1667,8 @@ OpenWindowStationA(
+@@ -1607,6 +1665,8 @@ OpenWindowStationA(
      _In_ LPCSTR lpszWinSta,
      _In_ BOOL fInherit,
      _In_ ACCESS_MASK dwDesiredAccess);
@@ -282,7 +273,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINSTA
  WINAPI
-@@ -1620,12 +1682,16 @@ OpenWindowStationW(
+@@ -1620,12 +1680,16 @@ OpenWindowStationW(
  #define OpenWindowStation  OpenWindowStationA
  #endif // !UNICODE
  
@@ -299,7 +290,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1638,18 +1704,24 @@ EnumWindowStationsW(
+@@ -1638,18 +1702,24 @@ EnumWindowStationsW(
  #define EnumWindowStations  EnumWindowStationsA
  #endif // !UNICODE
  
@@ -324,7 +315,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINSTA
  WINAPI
-@@ -1666,6 +1738,8 @@ GetProcessWindowStation(
+@@ -1666,6 +1736,8 @@ GetProcessWindowStation(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -333,7 +324,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1674,6 +1748,8 @@ SetUserObjectSecurity(
+@@ -1674,6 +1746,8 @@ SetUserObjectSecurity(
      _In_ PSECURITY_INFORMATION pSIRequested,
      _In_ PSECURITY_DESCRIPTOR pSID);
  
@@ -342,7 +333,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1706,6 +1782,8 @@ typedef struct tagUSEROBJECTFLAGS {
+@@ -1706,6 +1780,8 @@ typedef struct tagUSEROBJECTFLAGS {
      DWORD dwFlags;
  } USEROBJECTFLAGS, *PUSEROBJECTFLAGS;
  
@@ -351,7 +342,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1715,6 +1793,8 @@ GetUserObjectInformationA(
+@@ -1715,6 +1791,8 @@ GetUserObjectInformationA(
      _Out_writes_bytes_opt_(nLength) PVOID pvInfo,
      _In_ DWORD nLength,
      _Out_opt_ LPDWORD lpnLengthNeeded);
@@ -360,7 +351,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1730,6 +1810,8 @@ GetUserObjectInformationW(
+@@ -1730,6 +1808,8 @@ GetUserObjectInformationW(
  #define GetUserObjectInformation  GetUserObjectInformationA
  #endif // !UNICODE
  
@@ -369,7 +360,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1738,6 +1820,8 @@ SetUserObjectInformationA(
+@@ -1738,6 +1818,8 @@ SetUserObjectInformationA(
      _In_ int nIndex,
      _In_reads_bytes_(nLength) PVOID pvInfo,
      _In_ DWORD nLength);
@@ -378,7 +369,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1848,6 +1932,7 @@ typedef LPWNDCLASSA LPWNDCLASS;
+@@ -1848,6 +1930,7 @@ typedef LPWNDCLASSA LPWNDCLASS;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -386,7 +377,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -1856,6 +1941,7 @@ IsHungAppWindow(
+@@ -1856,6 +1939,7 @@ IsHungAppWindow(
  
  
  #if(WINVER >= 0x0501)
@@ -394,7 +385,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -2643,11 +2729,15 @@ typedef struct {
+@@ -2643,11 +2727,15 @@ typedef struct {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -410,7 +401,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -2768,6 +2858,8 @@ typedef struct tagTRACKMOUSEEVENT {
+@@ -2768,6 +2856,8 @@ typedef struct tagTRACKMOUSEEVENT {
      DWORD dwHoverTime;
  } TRACKMOUSEEVENT, *LPTRACKMOUSEEVENT;
  
@@ -419,7 +410,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -2979,6 +3071,7 @@ TrackMouseEvent(
+@@ -2979,6 +3069,7 @@ TrackMouseEvent(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -427,7 +418,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3042,6 +3135,7 @@ DrawEdge(
+@@ -3042,6 +3133,7 @@ DrawEdge(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -435,7 +426,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3072,6 +3166,7 @@ DrawFrameControl(
+@@ -3072,6 +3164,7 @@ DrawFrameControl(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -443,7 +434,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3091,6 +3186,7 @@ DrawCaption(
+@@ -3091,6 +3184,7 @@ DrawCaption(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -451,25 +442,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3402,6 +3498,8 @@ typedef struct tagCOMPAREITEMSTRUCT {
-  * Message Function Templates
-  */
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- BOOL
- WINAPI
-@@ -3410,6 +3508,8 @@ GetMessageA(
-     _In_opt_ HWND hWnd,
-     _In_ UINT wMsgFilterMin,
-     _In_ UINT wMsgFilterMax);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- BOOL
- WINAPI
-@@ -3449,17 +3549,20 @@ GetMessage(
+@@ -3449,6 +3543,7 @@ GetMessage(
  #endif  /* _M_CEE */
  
  
@@ -477,20 +450,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
- TranslateMessage(
-     _In_ CONST MSG *lpMsg);
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
- DispatchMessageA(
-     _In_ CONST MSG *lpMsg);
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -3507,6 +3610,7 @@ SetMessageQueue(
+@@ -3507,6 +3602,7 @@ SetMessageQueue(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -498,7 +458,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3516,6 +3620,7 @@ PeekMessageA(
+@@ -3516,6 +3612,7 @@ PeekMessageA(
      _In_ UINT wMsgFilterMin,
      _In_ UINT wMsgFilterMax,
      _In_ UINT wRemoveMsg);
@@ -506,7 +466,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3555,6 +3660,8 @@ PeekMessageW(
+@@ -3555,6 +3652,8 @@ PeekMessageW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -515,7 +475,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3564,6 +3671,8 @@ RegisterHotKey(
+@@ -3564,6 +3663,8 @@ RegisterHotKey(
      _In_ UINT fsModifiers,
      _In_ UINT vk);
  
@@ -524,16 +484,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3631,6 +3740,8 @@ UnregisterHotKey(
- 
- #define ExitWindows(dwReserved, Code) ExitWindowsEx(EWX_LOGOFF, 0xFFFFFFFF)
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_WindowsXP_
- _When_((uFlags&(EWX_POWEROFF|EWX_SHUTDOWN|EWX_FORCE))!=0,
-     __drv_preferredFunction("InitiateSystemShutdownEx",
-         "Legacy API. Rearchitect to avoid Reboot"))
-@@ -3641,24 +3752,28 @@ ExitWindowsEx(
+@@ -3641,24 +3742,28 @@ ExitWindowsEx(
      _In_ UINT uFlags,
      _In_ DWORD dwReason);
  
@@ -562,7 +513,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPARAM
  WINAPI
-@@ -3666,6 +3781,7 @@ GetMessageExtraInfo(
+@@ -3666,6 +3771,7 @@ GetMessageExtraInfo(
      VOID);
  
  #if(_WIN32_WINNT >= 0x0602)
@@ -570,7 +521,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -3674,6 +3790,7 @@ GetUnpredictedMessagePos(
+@@ -3674,6 +3780,7 @@ GetUnpredictedMessagePos(
  #endif /* _WIN32_WINNT >= 0x0602 */
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -578,7 +529,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3682,6 +3799,7 @@ IsWow64Message(
+@@ -3682,6 +3789,7 @@ IsWow64Message(
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  #if(WINVER >= 0x0400)
@@ -586,25 +537,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPARAM
  WINAPI
-@@ -3695,6 +3813,8 @@ SetMessageExtraInfo(
- #pragma region Desktop Family or Games Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -3703,6 +3823,8 @@ SendMessageA(
-     _In_ UINT Msg,
-     _Pre_maybenull_ _Post_valid_ WPARAM wParam,
-     _Pre_maybenull_ _Post_valid_ LPARAM lParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -3747,6 +3869,8 @@ SendMessage(
+@@ -3747,6 +3855,8 @@ SendMessage(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -613,7 +546,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -3758,6 +3882,8 @@ SendMessageTimeoutA(
+@@ -3758,6 +3868,8 @@ SendMessageTimeoutA(
      _In_ UINT fuFlags,
      _In_ UINT uTimeout,
      _Out_opt_ PDWORD_PTR lpdwResult);
@@ -622,7 +555,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -3775,6 +3901,8 @@ SendMessageTimeoutW(
+@@ -3775,6 +3887,8 @@ SendMessageTimeoutW(
  #define SendMessageTimeout  SendMessageTimeoutA
  #endif // !UNICODE
  
@@ -631,7 +564,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3783,6 +3911,8 @@ SendNotifyMessageA(
+@@ -3783,6 +3897,8 @@ SendNotifyMessageA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -640,7 +573,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3797,6 +3927,8 @@ SendNotifyMessageW(
+@@ -3797,6 +3913,8 @@ SendNotifyMessageW(
  #define SendNotifyMessage  SendNotifyMessageA
  #endif // !UNICODE
  
@@ -649,7 +582,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3807,6 +3939,8 @@ SendMessageCallbackA(
+@@ -3807,6 +3925,8 @@ SendMessageCallbackA(
      _In_ LPARAM lParam,
      _In_ SENDASYNCPROC lpResultCallBack,
      _In_ ULONG_PTR dwData);
@@ -658,7 +591,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3831,6 +3965,8 @@ typedef struct {
+@@ -3831,6 +3951,8 @@ typedef struct {
      LUID  luid;
  } BSMINFO, *PBSMINFO;
  
@@ -667,7 +600,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  long
  WINAPI
-@@ -3841,6 +3977,8 @@ BroadcastSystemMessageExA(
+@@ -3841,6 +3963,8 @@ BroadcastSystemMessageExA(
      _In_ WPARAM wParam,
      _In_ LPARAM lParam,
      _Out_opt_ PBSMINFO pbsmInfo);
@@ -676,7 +609,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  long
  WINAPI
-@@ -3876,6 +4014,8 @@ BroadcastSystemMessageA(
+@@ -3876,6 +4000,8 @@ BroadcastSystemMessageA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -685,7 +618,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  long
  WINAPI
-@@ -3950,6 +4090,8 @@ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
+@@ -3950,6 +4076,8 @@ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
  #define DEVICE_NOTIFY_ALL_INTERFACE_CLASSES  0x00000004
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -694,7 +627,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDEVNOTIFY
  WINAPI
-@@ -3957,6 +4099,8 @@ RegisterDeviceNotificationA(
+@@ -3957,6 +4085,8 @@ RegisterDeviceNotificationA(
      _In_ HANDLE hRecipient,
      _In_ LPVOID NotificationFilter,
      _In_ DWORD Flags);
@@ -703,7 +636,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDEVNOTIFY
  WINAPI
-@@ -3970,6 +4114,8 @@ RegisterDeviceNotificationW(
+@@ -3970,6 +4100,8 @@ RegisterDeviceNotificationW(
  #define RegisterDeviceNotification  RegisterDeviceNotificationA
  #endif // !UNICODE
  
@@ -712,7 +645,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3988,6 +4134,8 @@ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
+@@ -3988,6 +4120,8 @@ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
  
  #endif
  
@@ -721,7 +654,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HPOWERNOTIFY
  WINAPI
-@@ -3997,6 +4145,8 @@ RegisterPowerSettingNotification(
+@@ -3997,6 +4131,8 @@ RegisterPowerSettingNotification(
      IN DWORD Flags
      );
  
@@ -730,7 +663,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4004,6 +4154,8 @@ UnregisterPowerSettingNotification(
+@@ -4004,6 +4140,8 @@ UnregisterPowerSettingNotification(
      IN HPOWERNOTIFY Handle
      );
  
@@ -739,7 +672,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HPOWERNOTIFY
  WINAPI
-@@ -4012,6 +4164,8 @@ RegisterSuspendResumeNotification (
+@@ -4012,6 +4150,8 @@ RegisterSuspendResumeNotification (
      IN DWORD Flags
      );
  
@@ -748,7 +681,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4029,6 +4183,8 @@ UnregisterSuspendResumeNotification (
+@@ -4029,6 +4169,8 @@ UnregisterSuspendResumeNotification (
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -757,7 +690,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4037,6 +4193,8 @@ PostMessageA(
+@@ -4037,6 +4179,8 @@ PostMessageA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -766,25 +699,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4051,6 +4209,8 @@ PostMessageW(
- #define PostMessage  PostMessageA
- #endif // !UNICODE
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- BOOL
- WINAPI
-@@ -4059,6 +4219,8 @@ PostThreadMessageA(
-     _In_ UINT Msg,
-     _In_ WPARAM wParam,
-     _In_ LPARAM lParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- BOOL
- WINAPI
-@@ -4098,6 +4260,7 @@ PostThreadMessageW(
+@@ -4098,6 +4242,7 @@ PostThreadMessageW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -792,7 +707,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4107,12 +4270,15 @@ AttachThreadInput(
+@@ -4107,12 +4252,15 @@ AttachThreadInput(
      _In_ BOOL fAttach);
  
  
@@ -808,7 +723,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4123,6 +4289,7 @@ WaitMessage(
+@@ -4123,6 +4271,7 @@ WaitMessage(
  #endif
  
  
@@ -816,7 +731,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -4136,6 +4303,7 @@ WaitForInputIdle(
+@@ -4136,6 +4285,7 @@ WaitForInputIdle(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -824,7 +739,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -4149,6 +4317,7 @@ DefWindowProcA(
+@@ -4149,6 +4299,7 @@ DefWindowProcA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -832,7 +747,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -4168,6 +4337,7 @@ DefWindowProcW(
+@@ -4168,6 +4319,7 @@ DefWindowProcW(
  #define DefWindowProc  DefWindowProcA
  #endif // !UNICODE
  
@@ -840,23 +755,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -4176,6 +4346,7 @@ PostQuitMessage(
- 
- #ifdef STRICT
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -4185,6 +4356,7 @@ CallWindowProcA(
-     _In_ UINT Msg,
-     _In_ WPARAM wParam,
-     _In_ LPARAM lParam);
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -4234,6 +4406,7 @@ CallWindowProcW(
+@@ -4234,6 +4386,7 @@ CallWindowProcW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -864,7 +763,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4248,6 +4421,7 @@ InSendMessage(
+@@ -4248,6 +4401,7 @@ InSendMessage(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -872,7 +771,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -4271,12 +4445,15 @@ InSendMessageEx(
+@@ -4271,12 +4425,15 @@ InSendMessageEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -888,7 +787,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4289,11 +4466,15 @@ SetDoubleClickTime(
+@@ -4289,11 +4446,15 @@ SetDoubleClickTime(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -904,7 +803,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  ATOM
  WINAPI
-@@ -4305,12 +4486,16 @@ RegisterClassW(
+@@ -4305,12 +4466,16 @@ RegisterClassW(
  #define RegisterClass  RegisterClassA
  #endif // !UNICODE
  
@@ -921,7 +820,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4329,6 +4514,8 @@ UnregisterClassW(
+@@ -4329,6 +4494,8 @@ UnregisterClassW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -930,7 +829,7 @@ index f99e9294..5f99c126 100644
  _Success_(return)
  WINUSERAPI
  BOOL
-@@ -4337,6 +4524,8 @@ GetClassInfoA(
+@@ -4337,6 +4504,8 @@ GetClassInfoA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpClassName,
      _Out_ LPWNDCLASSA lpWndClass);
@@ -939,7 +838,7 @@ index f99e9294..5f99c126 100644
  _Success_(return)
  WINUSERAPI
  BOOL
-@@ -4358,11 +4547,15 @@ GetClassInfoW(
+@@ -4358,11 +4527,15 @@ GetClassInfoW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
  #if(WINVER >= 0x0400)
@@ -955,7 +854,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  ATOM
  WINAPI
-@@ -4380,6 +4573,8 @@ RegisterClassExW(
+@@ -4380,6 +4553,8 @@ RegisterClassExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -964,7 +863,7 @@ index f99e9294..5f99c126 100644
  _Success_(return)
  WINUSERAPI
  BOOL
-@@ -4388,6 +4583,8 @@ GetClassInfoExA(
+@@ -4388,6 +4563,8 @@ GetClassInfoExA(
      _In_opt_ HINSTANCE hInstance,
      _In_ LPCSTR lpszClass,
      _Out_ LPWNDCLASSEXA lpwcx);
@@ -973,25 +872,7 @@ index f99e9294..5f99c126 100644
  _Success_(return)
  WINUSERAPI
  BOOL
-@@ -4421,6 +4618,8 @@ GetClassInfoExW(
- typedef BOOLEAN (WINAPI * PREGISTERCLASSNAMEW)(LPCWSTR);
- #endif /* _WIN32_WINNT >= 0x0501 */
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -4437,6 +4636,8 @@ CreateWindowExA(
-     _In_opt_ HMENU hMenu,
-     _In_opt_ HINSTANCE hInstance,
-     _In_opt_ LPVOID lpParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -4480,6 +4681,7 @@ nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
+@@ -4480,6 +4657,7 @@ nWidth, nHeight, hWndParent, hMenu, hInstance, lpParam)
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -999,7 +880,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4487,12 +4689,14 @@ IsWindow(
+@@ -4487,12 +4665,14 @@ IsWindow(
      _In_opt_ HWND hWnd);
  
  
@@ -1014,7 +895,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4506,12 +4710,15 @@ IsChild(
+@@ -4506,12 +4686,15 @@ IsChild(
  #pragma region Desktop or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1030,7 +911,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4526,6 +4733,8 @@ ShowWindow(
+@@ -4526,6 +4709,8 @@ ShowWindow(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0500)
@@ -1039,7 +920,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4544,6 +4753,8 @@ AnimateWindow(
+@@ -4544,6 +4729,8 @@ AnimateWindow(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1048,7 +929,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4596,6 +4807,8 @@ UpdateLayeredWindowIndirect(
+@@ -4596,6 +4783,8 @@ UpdateLayeredWindowIndirect(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1057,7 +938,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4612,6 +4825,7 @@ GetLayeredWindowAttributes(
+@@ -4612,6 +4801,7 @@ GetLayeredWindowAttributes(
  #endif /* _WIN32_WINNT >= 0x0603 */
  
  
@@ -1065,7 +946,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4628,6 +4842,8 @@ PrintWindow(
+@@ -4628,6 +4818,8 @@ PrintWindow(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1074,7 +955,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4670,6 +4886,7 @@ typedef struct
+@@ -4670,6 +4862,7 @@ typedef struct
  
  
  #if(WINVER >= 0x0400)
@@ -1082,7 +963,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4678,6 +4895,7 @@ ShowWindowAsync(
+@@ -4678,6 +4871,7 @@ ShowWindowAsync(
      _In_  int nCmdShow);
  #endif /* WINVER >= 0x0400 */
  
@@ -1090,7 +971,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4694,6 +4912,7 @@ typedef struct {
+@@ -4694,6 +4888,7 @@ typedef struct {
      DWORD dwTimeout;
  } FLASHWINFO, *PFLASHWINFO;
  
@@ -1098,7 +979,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4709,6 +4928,8 @@ FlashWindowEx(
+@@ -4709,6 +4904,8 @@ FlashWindowEx(
  
  #endif /* WINVER >= 0x0500 */
  
@@ -1107,7 +988,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4716,12 +4937,16 @@ ShowOwnedPopups(
+@@ -4716,12 +4913,16 @@ ShowOwnedPopups(
      _In_  HWND hWnd,
      _In_  BOOL fShow);
  
@@ -1124,7 +1005,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4734,6 +4959,8 @@ CloseWindow(
+@@ -4734,6 +4935,8 @@ CloseWindow(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1133,7 +1014,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4745,6 +4972,8 @@ MoveWindow(
+@@ -4745,6 +4948,8 @@ MoveWindow(
      _In_ int nHeight,
      _In_ BOOL bRepaint);
  
@@ -1142,7 +1023,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4763,6 +4992,8 @@ SetWindowPos(
+@@ -4763,6 +4968,8 @@ SetWindowPos(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1151,7 +1032,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4770,6 +5001,8 @@ GetWindowPlacement(
+@@ -4770,6 +4977,8 @@ GetWindowPlacement(
      _In_ HWND hWnd,
      _Inout_ WINDOWPLACEMENT *lpwndpl);
  
@@ -1160,7 +1041,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4783,6 +5016,8 @@ SetWindowPlacement(
+@@ -4783,6 +4992,8 @@ SetWindowPlacement(
  #define WDA_EXCLUDEFROMCAPTURE 0x00000011
  
  
@@ -1169,7 +1050,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4790,6 +5025,8 @@ GetWindowDisplayAffinity(
+@@ -4790,6 +5001,8 @@ GetWindowDisplayAffinity(
      _In_ HWND hWnd,
      _Out_ DWORD* pdwAffinity);
  
@@ -1178,7 +1059,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4807,12 +5044,16 @@ SetWindowDisplayAffinity(
+@@ -4807,12 +5020,16 @@ SetWindowDisplayAffinity(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1195,7 +1076,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDWP
  WINAPI
-@@ -4827,6 +5068,8 @@ DeferWindowPos(
+@@ -4827,6 +5044,8 @@ DeferWindowPos(
      _In_ UINT uFlags);
  
  
@@ -1204,7 +1085,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4841,6 +5084,7 @@ EndDeferWindowPos(
+@@ -4841,6 +5060,7 @@ EndDeferWindowPos(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -1212,7 +1093,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4853,24 +5097,29 @@ IsWindowVisible(
+@@ -4853,24 +5073,29 @@ IsWindowVisible(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1242,79 +1123,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5006,6 +5255,8 @@ typedef LPDLGITEMTEMPLATEA LPDLGITEMTEMPLATE;
- #pragma region Desktop Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -5015,6 +5266,8 @@ CreateDialogParamA(
-     _In_opt_ HWND hWndParent,
-     _In_opt_ DLGPROC lpDialogFunc,
-     _In_ LPARAM dwInitParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -5030,6 +5283,8 @@ CreateDialogParamW(
- #define CreateDialogParam  CreateDialogParamA
- #endif // !UNICODE
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -5039,6 +5294,8 @@ CreateDialogIndirectParamA(
-     _In_opt_ HWND hWndParent,
-     _In_opt_ DLGPROC lpDialogFunc,
-     _In_ LPARAM dwInitParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -5074,6 +5331,8 @@ CreateDialogIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0L)
- #define CreateDialogIndirect  CreateDialogIndirectA
- #endif // !UNICODE
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- INT_PTR
- WINAPI
-@@ -5083,6 +5342,8 @@ DialogBoxParamA(
-     _In_opt_ HWND hWndParent,
-     _In_opt_ DLGPROC lpDialogFunc,
-     _In_ LPARAM dwInitParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- INT_PTR
- WINAPI
-@@ -5098,6 +5359,8 @@ DialogBoxParamW(
- #define DialogBoxParam  DialogBoxParamA
- #endif // !UNICODE
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- INT_PTR
- WINAPI
-@@ -5107,6 +5370,8 @@ DialogBoxIndirectParamA(
-     _In_opt_ HWND hWndParent,
-     _In_opt_ DLGPROC lpDialogFunc,
-     _In_ LPARAM dwInitParam);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- INT_PTR
- WINAPI
-@@ -5142,6 +5407,8 @@ DialogBoxIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0L)
+@@ -5142,6 +5367,8 @@ DialogBoxIndirectParamW(hInstance, lpTemplate, hWndParent, lpDialogFunc, 0L)
  #define DialogBoxIndirect  DialogBoxIndirectA
  #endif // !UNICODE
  
@@ -1323,7 +1132,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5149,6 +5416,8 @@ EndDialog(
+@@ -5149,6 +5376,8 @@ EndDialog(
      _In_ HWND hDlg,
      _In_ INT_PTR nResult);
  
@@ -1332,7 +1141,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -5156,6 +5425,8 @@ GetDlgItem(
+@@ -5156,6 +5385,8 @@ GetDlgItem(
      _In_opt_ HWND hDlg,
      _In_ int nIDDlgItem);
  
@@ -1341,7 +1150,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5165,6 +5436,8 @@ SetDlgItemInt(
+@@ -5165,6 +5396,8 @@ SetDlgItemInt(
      _In_ UINT uValue,
      _In_ BOOL bSigned);
  
@@ -1350,7 +1159,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -5174,6 +5447,8 @@ GetDlgItemInt(
+@@ -5174,6 +5407,8 @@ GetDlgItemInt(
      _Out_opt_ BOOL *lpTranslated,
      _In_ BOOL bSigned);
  
@@ -1359,7 +1168,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5181,6 +5456,8 @@ SetDlgItemTextA(
+@@ -5181,6 +5416,8 @@ SetDlgItemTextA(
      _In_ HWND hDlg,
      _In_ int nIDDlgItem,
      _In_ LPCSTR lpString);
@@ -1368,7 +1177,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5194,6 +5471,8 @@ SetDlgItemTextW(
+@@ -5194,6 +5431,8 @@ SetDlgItemTextW(
  #define SetDlgItemText  SetDlgItemTextA
  #endif // !UNICODE
  
@@ -1377,7 +1186,7 @@ index f99e9294..5f99c126 100644
  _Ret_range_(0, cchMax)
  WINUSERAPI
  UINT
-@@ -5203,6 +5482,8 @@ GetDlgItemTextA(
+@@ -5203,6 +5442,8 @@ GetDlgItemTextA(
      _In_ int nIDDlgItem,
      _Out_writes_(cchMax) LPSTR lpString,
      _In_ int cchMax);
@@ -1386,7 +1195,7 @@ index f99e9294..5f99c126 100644
  _Ret_range_(0, cchMax)
  WINUSERAPI
  UINT
-@@ -5218,6 +5499,8 @@ GetDlgItemTextW(
+@@ -5218,6 +5459,8 @@ GetDlgItemTextW(
  #define GetDlgItemText  GetDlgItemTextA
  #endif // !UNICODE
  
@@ -1395,7 +1204,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5226,6 +5509,8 @@ CheckDlgButton(
+@@ -5226,6 +5469,8 @@ CheckDlgButton(
      _In_ int nIDButton,
      _In_ UINT uCheck);
  
@@ -1404,7 +1213,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5235,6 +5520,7 @@ CheckRadioButton(
+@@ -5235,6 +5480,7 @@ CheckRadioButton(
      _In_ int nIDLastButton,
      _In_ int nIDCheckButton);
  
@@ -1412,7 +1221,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -5242,6 +5528,7 @@ IsDlgButtonChecked(
+@@ -5242,6 +5488,7 @@ IsDlgButtonChecked(
      _In_ HWND hDlg,
      _In_ int nIDButton);
  
@@ -1420,7 +1229,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -5251,6 +5538,7 @@ SendDlgItemMessageA(
+@@ -5251,6 +5498,7 @@ SendDlgItemMessageA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1428,7 +1237,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -5266,6 +5554,8 @@ SendDlgItemMessageW(
+@@ -5266,6 +5514,8 @@ SendDlgItemMessageW(
  #define SendDlgItemMessage  SendDlgItemMessageA
  #endif // !UNICODE
  
@@ -1437,7 +1246,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -5274,6 +5564,8 @@ GetNextDlgGroupItem(
+@@ -5274,6 +5524,8 @@ GetNextDlgGroupItem(
      _In_opt_ HWND hCtl,
      _In_ BOOL bPrevious);
  
@@ -1446,7 +1255,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -5282,12 +5574,15 @@ GetNextDlgTabItem(
+@@ -5282,12 +5534,15 @@ GetNextDlgTabItem(
      _In_opt_ HWND hCtl,
      _In_ BOOL bPrevious);
  
@@ -1462,7 +1271,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  long
  WINAPI
-@@ -5307,6 +5602,7 @@ DefDlgProcA(
+@@ -5307,6 +5562,7 @@ DefDlgProcA(
      _In_ UINT Msg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -1470,7 +1279,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -5336,6 +5632,8 @@ typedef enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
+@@ -5336,6 +5592,8 @@ typedef enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
  DEFINE_ENUM_FLAG_OPERATORS(DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS);
  #endif
  
@@ -1479,7 +1288,7 @@ index f99e9294..5f99c126 100644
  BOOL
  WINAPI
  SetDialogControlDpiChangeBehavior(
-@@ -5343,6 +5641,8 @@ SetDialogControlDpiChangeBehavior(
+@@ -5343,6 +5601,8 @@ SetDialogControlDpiChangeBehavior(
      _In_ DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS mask,
      _In_ DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS values);
  
@@ -1488,7 +1297,7 @@ index f99e9294..5f99c126 100644
  DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS
  WINAPI
  GetDialogControlDpiChangeBehavior(
-@@ -5359,6 +5659,8 @@ typedef enum DIALOG_DPI_CHANGE_BEHAVIORS {
+@@ -5359,6 +5619,8 @@ typedef enum DIALOG_DPI_CHANGE_BEHAVIORS {
  DEFINE_ENUM_FLAG_OPERATORS(DIALOG_DPI_CHANGE_BEHAVIORS);
  #endif
  
@@ -1497,7 +1306,7 @@ index f99e9294..5f99c126 100644
  BOOL
  WINAPI
  SetDialogDpiChangeBehavior(
-@@ -5366,6 +5668,8 @@ SetDialogDpiChangeBehavior(
+@@ -5366,6 +5628,8 @@ SetDialogDpiChangeBehavior(
      _In_ DIALOG_DPI_CHANGE_BEHAVIORS mask,
      _In_ DIALOG_DPI_CHANGE_BEHAVIORS values);
  
@@ -1506,7 +1315,7 @@ index f99e9294..5f99c126 100644
  DIALOG_DPI_CHANGE_BEHAVIORS
  WINAPI
  GetDialogDpiChangeBehavior(
-@@ -5390,12 +5694,14 @@ GetDialogDpiChangeBehavior(
+@@ -5390,12 +5654,14 @@ GetDialogDpiChangeBehavior(
  
  #ifndef NOMSG
  
@@ -1521,7 +1330,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5416,12 +5722,16 @@ CallMsgFilterW(
+@@ -5416,12 +5682,16 @@ CallMsgFilterW(
   * Clipboard Manager Functions
   */
  
@@ -1538,7 +1347,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5431,6 +5741,7 @@ CloseClipboard(
+@@ -5431,6 +5701,7 @@ CloseClipboard(
  
  #if(WINVER >= 0x0500)
  
@@ -1546,7 +1355,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -5439,24 +5750,31 @@ GetClipboardSequenceNumber(
+@@ -5439,24 +5710,31 @@ GetClipboardSequenceNumber(
  
  #endif /* WINVER >= 0x0500 */
  
@@ -1578,7 +1387,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5464,6 +5782,8 @@ ChangeClipboardChain(
+@@ -5464,6 +5742,8 @@ ChangeClipboardChain(
      _In_ HWND hWndRemove,
      _In_ HWND hWndNewNext);
  
@@ -1587,7 +1396,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -5471,6 +5791,8 @@ SetClipboardData(
+@@ -5471,6 +5751,8 @@ SetClipboardData(
      _In_ UINT uFormat,
      _In_opt_ HANDLE hMem);
  
@@ -1596,7 +1405,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -5492,11 +5814,15 @@ GetClipboardMetadata(
+@@ -5492,11 +5774,15 @@ GetClipboardMetadata(
      UINT format,
      _Inout_ PGETCLIPBMETADATA metadata);
  
@@ -1612,7 +1421,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -5508,18 +5834,24 @@ RegisterClipboardFormatW(
+@@ -5508,18 +5794,24 @@ RegisterClipboardFormatW(
  #define RegisterClipboardFormat  RegisterClipboardFormatA
  #endif // !UNICODE
  
@@ -1637,7 +1446,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5527,6 +5859,8 @@ GetClipboardFormatNameA(
+@@ -5527,6 +5819,8 @@ GetClipboardFormatNameA(
      _In_ UINT format,
      _Out_writes_(cchMaxCount) LPSTR lpszFormatName,
      _In_ int cchMaxCount);
@@ -1646,7 +1455,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5540,18 +5874,24 @@ GetClipboardFormatNameW(
+@@ -5540,18 +5834,24 @@ GetClipboardFormatNameW(
  #define GetClipboardFormatName  GetClipboardFormatNameA
  #endif // !UNICODE
  
@@ -1671,7 +1480,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5559,6 +5899,8 @@ GetPriorityClipboardFormat(
+@@ -5559,6 +5859,8 @@ GetPriorityClipboardFormat(
      _In_reads_(cFormats) UINT *paFormatPriorityList,
      _In_ int cFormats);
  
@@ -1680,7 +1489,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -5566,18 +5908,24 @@ GetOpenClipboardWindow(
+@@ -5566,18 +5868,24 @@ GetOpenClipboardWindow(
      VOID);
  
  #if(WINVER >= 0x0600)
@@ -1705,7 +1514,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5593,12 +5941,16 @@ GetUpdatedClipboardFormats(
+@@ -5593,12 +5901,16 @@ GetUpdatedClipboardFormats(
   * Character Translation Routines
   */
  
@@ -1722,7 +1531,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5611,6 +5963,8 @@ CharToOemW(
+@@ -5611,6 +5923,8 @@ CharToOemW(
  #define CharToOem  CharToOemA
  #endif // !UNICODE
  
@@ -1731,7 +1540,7 @@ index f99e9294..5f99c126 100644
  __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
  WINUSERAPI
  BOOL
-@@ -5618,6 +5972,8 @@ WINAPI
+@@ -5618,6 +5932,8 @@ WINAPI
  OemToCharA(
      _In_ LPCSTR pSrc,
      _Out_writes_(_Inexpressible_(strlen(pSrc) + 1)) LPSTR pDst);
@@ -1740,7 +1549,7 @@ index f99e9294..5f99c126 100644
  __drv_preferredFunction("OemToCharBuff","Does not validate buffer size")
  WINUSERAPI
  BOOL
-@@ -5631,6 +5987,8 @@ OemToCharW(
+@@ -5631,6 +5947,8 @@ OemToCharW(
  #define OemToChar  OemToCharA
  #endif // !UNICODE
  
@@ -1749,7 +1558,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5638,6 +5996,8 @@ CharToOemBuffA(
+@@ -5638,6 +5956,8 @@ CharToOemBuffA(
      _In_ LPCSTR lpszSrc,
      _Out_writes_(cchDstLength) LPSTR lpszDst,
      _In_ DWORD cchDstLength);
@@ -1758,7 +1567,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5651,6 +6011,8 @@ CharToOemBuffW(
+@@ -5651,6 +5971,8 @@ CharToOemBuffW(
  #define CharToOemBuff  CharToOemBuffA
  #endif // !UNICODE
  
@@ -1767,7 +1576,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5658,6 +6020,8 @@ OemToCharBuffA(
+@@ -5658,6 +5980,8 @@ OemToCharBuffA(
      _In_ LPCSTR lpszSrc,
      _Out_writes_(cchDstLength) LPSTR lpszDst,
      _In_ DWORD cchDstLength);
@@ -1776,7 +1585,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5677,11 +6041,15 @@ OemToCharBuffW(
+@@ -5677,11 +6001,15 @@ OemToCharBuffW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -1792,7 +1601,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPWSTR
  WINAPI
-@@ -5693,12 +6061,14 @@ CharUpperW(
+@@ -5693,12 +6021,14 @@ CharUpperW(
  #define CharUpper  CharUpperA
  #endif // !UNICODE
  
@@ -1807,7 +1616,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -5711,11 +6081,15 @@ CharUpperBuffW(
+@@ -5711,11 +6041,15 @@ CharUpperBuffW(
  #define CharUpperBuff  CharUpperBuffA
  #endif // !UNICODE
  
@@ -1823,7 +1632,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPWSTR
  WINAPI
-@@ -5727,12 +6101,14 @@ CharLowerW(
+@@ -5727,12 +6061,14 @@ CharLowerW(
  #define CharLower  CharLowerA
  #endif // !UNICODE
  
@@ -1838,7 +1647,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -5745,11 +6121,13 @@ CharLowerBuffW(
+@@ -5745,11 +6081,13 @@ CharLowerBuffW(
  #define CharLowerBuff  CharLowerBuffA
  #endif // !UNICODE
  
@@ -1852,7 +1661,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPWSTR
  WINAPI
-@@ -5761,12 +6139,14 @@ CharNextW(
+@@ -5761,12 +6099,14 @@ CharNextW(
  #define CharNext  CharNextA
  #endif // !UNICODE
  
@@ -1867,7 +1676,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPWSTR
  WINAPI
-@@ -5780,6 +6160,7 @@ CharPrevW(
+@@ -5780,6 +6120,7 @@ CharPrevW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -1875,7 +1684,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPSTR
  WINAPI
-@@ -5788,6 +6169,7 @@ CharNextExA(
+@@ -5788,6 +6129,7 @@ CharNextExA(
       _In_ LPCSTR lpCurrentChar,
       _In_ DWORD dwFlags);
  
@@ -1883,7 +1692,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LPSTR
  WINAPI
-@@ -5823,11 +6205,15 @@ CharPrevExA(
+@@ -5823,11 +6165,15 @@ CharPrevExA(
   * Language dependent Routines
   */
  
@@ -1899,7 +1708,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5839,11 +6225,15 @@ IsCharAlphaW(
+@@ -5839,11 +6185,15 @@ IsCharAlphaW(
  #define IsCharAlpha  IsCharAlphaA
  #endif // !UNICODE
  
@@ -1915,7 +1724,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5855,11 +6245,15 @@ IsCharAlphaNumericW(
+@@ -5855,11 +6205,15 @@ IsCharAlphaNumericW(
  #define IsCharAlphaNumeric  IsCharAlphaNumericA
  #endif // !UNICODE
  
@@ -1931,7 +1740,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5871,11 +6265,14 @@ IsCharUpperW(
+@@ -5871,11 +6225,14 @@ IsCharUpperW(
  #define IsCharUpper  IsCharUpperA
  #endif // !UNICODE
  
@@ -1946,7 +1755,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5895,42 +6292,51 @@ IsCharLowerW(
+@@ -5895,42 +6252,51 @@ IsCharLowerW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1998,7 +1807,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Check_return_
  BOOL
-@@ -5938,6 +6344,8 @@ WINAPI
+@@ -5938,6 +6304,8 @@ WINAPI
  GetKeyboardState(
      _Out_writes_(256) PBYTE lpKeyState);
  
@@ -2007,7 +1816,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -5951,6 +6359,8 @@ SetKeyboardState(
+@@ -5951,6 +6319,8 @@ SetKeyboardState(
  #pragma region  Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  
@@ -2016,7 +1825,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5958,6 +6368,8 @@ GetKeyNameTextA(
+@@ -5958,6 +6328,8 @@ GetKeyNameTextA(
      _In_ LONG lParam,
      _Out_writes_(cchSize) LPSTR lpString,
      _In_ int cchSize);
@@ -2025,7 +1834,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5978,12 +6390,15 @@ GetKeyNameTextW(
+@@ -5978,12 +6350,15 @@ GetKeyNameTextW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -2041,7 +1850,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -5995,6 +6410,7 @@ ToAscii(
+@@ -5995,6 +6370,7 @@ ToAscii(
      _In_ UINT uFlags);
  
  #if(WINVER >= 0x0400)
@@ -2049,7 +1858,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -6007,6 +6423,7 @@ ToAsciiEx(
+@@ -6007,6 +6383,7 @@ ToAsciiEx(
      _In_opt_ HKL dwhkl);
  #endif /* WINVER >= 0x0400 */
  
@@ -2057,7 +1866,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -6018,17 +6435,20 @@ ToUnicode(
+@@ -6018,17 +6395,20 @@ ToUnicode(
      _In_ int cchBuff,
      _In_ UINT wFlags);
  
@@ -2078,7 +1887,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  SHORT
  WINAPI
-@@ -6041,12 +6461,14 @@ VkKeyScanW(
+@@ -6041,12 +6421,14 @@ VkKeyScanW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -2093,7 +1902,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  SHORT
  WINAPI
-@@ -6066,6 +6488,7 @@ VkKeyScanExW(
+@@ -6066,6 +6448,7 @@ VkKeyScanExW(
  #define KEYEVENTF_SCANCODE    0x0008
  #endif /* _WIN32_WINNT >= 0x0500 */
  
@@ -2101,7 +1910,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -6100,6 +6523,7 @@ keybd_event(
+@@ -6100,6 +6483,7 @@ keybd_event(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2109,7 +1918,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -6166,6 +6590,8 @@ typedef struct tagINPUT {
+@@ -6166,6 +6550,8 @@ typedef struct tagINPUT {
      } DUMMYUNIONNAME;
  } INPUT, *PINPUT, FAR* LPINPUT;
  
@@ -2118,7 +1927,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -6238,6 +6664,8 @@ typedef TOUCHINPUT const * PCTOUCHINPUT;
+@@ -6238,6 +6624,8 @@ typedef TOUCHINPUT const * PCTOUCHINPUT;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2127,7 +1936,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6247,6 +6675,8 @@ GetTouchInputInfo(
+@@ -6247,6 +6635,8 @@ GetTouchInputInfo(
      _Out_writes_(cInputs) PTOUCHINPUT pInputs,  // array of touch inputs
      _In_ int cbSize);                           // sizeof(TOUCHINPUT)
  
@@ -2136,7 +1945,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6267,6 +6697,8 @@ CloseTouchInputHandle(
+@@ -6267,6 +6657,8 @@ CloseTouchInputHandle(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2145,7 +1954,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6274,12 +6706,15 @@ RegisterTouchWindow(
+@@ -6274,12 +6666,15 @@ RegisterTouchWindow(
      _In_ HWND hwnd,
      _In_ ULONG ulFlags);
  
@@ -2161,7 +1970,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6480,6 +6915,8 @@ typedef enum {
+@@ -6480,6 +6875,8 @@ typedef enum {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2170,7 +1979,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6487,6 +6924,8 @@ InitializeTouchInjection(
+@@ -6487,6 +6884,8 @@ InitializeTouchInjection(
      _In_ UINT32 maxCount,
      _In_ DWORD dwMode);
  
@@ -2179,7 +1988,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6523,6 +6962,8 @@ typedef struct tagINPUT_INJECTION_VALUE {
+@@ -6523,6 +6922,8 @@ typedef struct tagINPUT_INJECTION_VALUE {
      USHORT index;
  }INPUT_INJECTION_VALUE, *PINPUT_INJECTION_VALUE;
  
@@ -2188,7 +1997,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6530,6 +6971,8 @@ GetPointerType(
+@@ -6530,6 +6931,8 @@ GetPointerType(
      _In_ UINT32 pointerId,
      _Out_ POINTER_INPUT_TYPE *pointerType);
  
@@ -2197,7 +2006,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6537,6 +6980,8 @@ GetPointerCursorId(
+@@ -6537,6 +6940,8 @@ GetPointerCursorId(
      _In_ UINT32 pointerId,
      _Out_ UINT32 *cursorId);
  
@@ -2206,7 +2015,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6544,6 +6989,8 @@ GetPointerInfo(
+@@ -6544,6 +6949,8 @@ GetPointerInfo(
      _In_ UINT32 pointerId,
      _Out_writes_(1) POINTER_INFO *pointerInfo);
  
@@ -2215,7 +2024,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6552,6 +6999,8 @@ GetPointerInfoHistory(
+@@ -6552,6 +6959,8 @@ GetPointerInfoHistory(
      _Inout_ UINT32 *entriesCount,
      _Out_writes_opt_(*entriesCount) POINTER_INFO *pointerInfo);
  
@@ -2224,7 +2033,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6560,6 +7009,8 @@ GetPointerFrameInfo(
+@@ -6560,6 +6969,8 @@ GetPointerFrameInfo(
      _Inout_ UINT32 *pointerCount,
      _Out_writes_opt_(*pointerCount) POINTER_INFO *pointerInfo);
  
@@ -2233,7 +2042,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6569,6 +7020,8 @@ GetPointerFrameInfoHistory(
+@@ -6569,6 +6980,8 @@ GetPointerFrameInfoHistory(
      _Inout_ UINT32 *pointerCount,
      _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_INFO *pointerInfo);
  
@@ -2242,7 +2051,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6576,6 +7029,8 @@ GetPointerTouchInfo(
+@@ -6576,6 +6989,8 @@ GetPointerTouchInfo(
      _In_ UINT32 pointerId,
      _Out_writes_(1) POINTER_TOUCH_INFO *touchInfo);
  
@@ -2251,7 +2060,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6584,6 +7039,8 @@ GetPointerTouchInfoHistory(
+@@ -6584,6 +6999,8 @@ GetPointerTouchInfoHistory(
      _Inout_ UINT32 *entriesCount,
      _Out_writes_opt_(*entriesCount) POINTER_TOUCH_INFO *touchInfo);
  
@@ -2260,7 +2069,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6592,6 +7049,8 @@ GetPointerFrameTouchInfo(
+@@ -6592,6 +7009,8 @@ GetPointerFrameTouchInfo(
      _Inout_ UINT32 *pointerCount,
      _Out_writes_opt_(*pointerCount) POINTER_TOUCH_INFO *touchInfo);
  
@@ -2269,7 +2078,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6601,6 +7060,8 @@ GetPointerFrameTouchInfoHistory(
+@@ -6601,6 +7020,8 @@ GetPointerFrameTouchInfoHistory(
      _Inout_ UINT32 *pointerCount,
      _Out_writes_opt_(*entriesCount * *pointerCount) POINTER_TOUCH_INFO *touchInfo);
  
@@ -2278,7 +2087,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6608,6 +7069,8 @@ GetPointerPenInfo(
+@@ -6608,6 +7029,8 @@ GetPointerPenInfo(
      _In_ UINT32 pointerId,
      _Out_writes_(1) POINTER_PEN_INFO *penInfo);
  
@@ -2287,7 +2096,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6616,6 +7079,8 @@ GetPointerPenInfoHistory(
+@@ -6616,6 +7039,8 @@ GetPointerPenInfoHistory(
      _Inout_ UINT32 *entriesCount,
      _Out_writes_opt_(*entriesCount) POINTER_PEN_INFO *penInfo);
  
@@ -2296,7 +2105,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6624,6 +7089,8 @@ GetPointerFramePenInfo(
+@@ -6624,6 +7049,8 @@ GetPointerFramePenInfo(
      _Inout_ UINT32 *pointerCount,
      _Out_writes_opt_(*pointerCount) POINTER_PEN_INFO *penInfo);
  
@@ -2305,7 +2114,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6635,12 +7102,16 @@ GetPointerFramePenInfoHistory(
+@@ -6635,12 +7062,16 @@ GetPointerFramePenInfoHistory(
  
  // TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
  
@@ -2322,7 +2131,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6648,6 +7119,8 @@ RegisterPointerInputTarget(
+@@ -6648,6 +7079,8 @@ RegisterPointerInputTarget(
      _In_ HWND hwnd,
      _In_ POINTER_INPUT_TYPE pointerType);
  
@@ -2331,7 +2140,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6655,6 +7128,7 @@ UnregisterPointerInputTarget(
+@@ -6655,6 +7088,7 @@ UnregisterPointerInputTarget(
      _In_ HWND hwnd,
      _In_ POINTER_INPUT_TYPE pointerType);
  
@@ -2339,7 +2148,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6663,6 +7137,7 @@ RegisterPointerInputTargetEx(
+@@ -6663,6 +7097,7 @@ RegisterPointerInputTargetEx(
      _In_ POINTER_INPUT_TYPE pointerType,
      _In_ BOOL fObserve);
  
@@ -2347,7 +2156,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6672,6 +7147,8 @@ UnregisterPointerInputTargetEx(
+@@ -6672,6 +7107,8 @@ UnregisterPointerInputTargetEx(
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
  DECLARE_HANDLE(HSYNTHETICPOINTERDEVICE);
@@ -2356,7 +2165,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HSYNTHETICPOINTERDEVICE
  WINAPI
-@@ -6680,6 +7157,8 @@ CreateSyntheticPointerDevice(
+@@ -6680,6 +7117,8 @@ CreateSyntheticPointerDevice(
      _In_ ULONG maxCount,
      _In_ POINTER_FEEDBACK_MODE mode);
  
@@ -2365,7 +2174,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6688,6 +7167,7 @@ InjectSyntheticPointerInput(
+@@ -6688,6 +7127,7 @@ InjectSyntheticPointerInput(
      _In_reads_(count) CONST POINTER_TYPE_INFO* pointerInfo,
      _In_ UINT32 count);
  
@@ -2373,7 +2182,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -6697,12 +7177,15 @@ DestroySyntheticPointerDevice(
+@@ -6697,12 +7137,15 @@ DestroySyntheticPointerDevice(
  
  // TODO(47499024): Make public when Feature_TouchpadPublicApis3 is enabled
  
@@ -2389,7 +2198,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6721,6 +7204,8 @@ EnableMouseInPointerForThread(VOID);
+@@ -6721,6 +7164,8 @@ EnableMouseInPointerForThread(VOID);
  #define TOUCH_HIT_TESTING_CLIENT  0x1
  #define TOUCH_HIT_TESTING_NONE    0x2
  
@@ -2398,7 +2207,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6751,6 +7236,8 @@ typedef struct tagTOUCH_HIT_TESTING_INPUT
+@@ -6751,6 +7196,8 @@ typedef struct tagTOUCH_HIT_TESTING_INPUT
  #define TOUCH_HIT_TESTING_PROXIMITY_CLOSEST  0x0
  #define TOUCH_HIT_TESTING_PROXIMITY_FARTHEST  0xFFF
  
@@ -2407,7 +2216,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6759,6 +7246,8 @@ EvaluateProximityToRect(
+@@ -6759,6 +7206,8 @@ EvaluateProximityToRect(
      _In_ const TOUCH_HIT_TESTING_INPUT *pHitTestingInput,
      _Out_ TOUCH_HIT_TESTING_PROXIMITY_EVALUATION *pProximityEval);
  
@@ -2416,7 +2225,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6768,6 +7257,8 @@ EvaluateProximityToPolygon(
+@@ -6768,6 +7217,8 @@ EvaluateProximityToPolygon(
      _In_ const TOUCH_HIT_TESTING_INPUT *pHitTestingInput,
      _Out_ TOUCH_HIT_TESTING_PROXIMITY_EVALUATION *pProximityEval);
  
@@ -2425,7 +2234,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -6795,6 +7286,7 @@ typedef enum tagFEEDBACK_TYPE {
+@@ -6795,6 +7246,7 @@ typedef enum tagFEEDBACK_TYPE {
  #define GWFS_INCLUDE_ANCESTORS           0x00000001
  
  
@@ -2433,7 +2242,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6805,6 +7297,7 @@ GetWindowFeedbackSetting(
+@@ -6805,6 +7257,7 @@ GetWindowFeedbackSetting(
      _Inout_ UINT32* pSize,
      _Out_writes_bytes_opt_(*pSize) VOID* config);
  
@@ -2441,7 +2250,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6849,6 +7342,8 @@ typedef struct tagINPUT_TRANSFORM {
+@@ -6849,6 +7302,8 @@ typedef struct tagINPUT_TRANSFORM {
  #endif
  
  
@@ -2450,7 +2259,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6879,6 +7374,7 @@ typedef struct tagLASTINPUTINFO {
+@@ -6879,6 +7334,7 @@ typedef struct tagLASTINPUTINFO {
      DWORD dwTime;
  } LASTINPUTINFO, * PLASTINPUTINFO;
  
@@ -2458,7 +2267,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -6892,12 +7388,14 @@ GetLastInputInfo(
+@@ -6892,12 +7348,14 @@ GetLastInputInfo(
  #pragma region Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  
@@ -2473,7 +2282,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -6911,6 +7409,7 @@ MapVirtualKeyW(
+@@ -6911,6 +7369,7 @@ MapVirtualKeyW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -2481,7 +2290,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -6918,6 +7417,7 @@ MapVirtualKeyExA(
+@@ -6918,6 +7377,7 @@ MapVirtualKeyExA(
      _In_ UINT uCode,
      _In_ UINT uMapType,
      _In_opt_ HKL dwhkl);
@@ -2489,7 +2298,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -6946,12 +7446,14 @@ MapVirtualKeyExW(
+@@ -6946,12 +7406,14 @@ MapVirtualKeyExW(
  #define MAPVK_VK_TO_VSC_EX  (4)
  #endif /* WINVER >= 0x0600 */
  
@@ -2504,7 +2313,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -6959,24 +7461,30 @@ GetQueueStatus(
+@@ -6959,24 +7421,30 @@ GetQueueStatus(
      _In_ UINT flags);
  
  
@@ -2535,7 +2344,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -6987,6 +7495,8 @@ MsgWaitForMultipleObjects(
+@@ -6987,6 +7455,8 @@ MsgWaitForMultipleObjects(
      _In_ DWORD dwMilliseconds,
      _In_ DWORD dwWakeMask);
  
@@ -2544,7 +2353,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -7074,6 +7584,8 @@ MsgWaitForMultipleObjectsEx(
+@@ -7074,6 +7544,8 @@ MsgWaitForMultipleObjectsEx(
   * Windows Functions
   */
  
@@ -2553,7 +2362,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT_PTR
  WINAPI
-@@ -7101,6 +7613,8 @@ SetTimer(
+@@ -7101,6 +7573,8 @@ SetTimer(
  
  #if(WINVER >= 0x0601)
  
@@ -2562,7 +2371,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT_PTR
  WINAPI
-@@ -7119,6 +7633,8 @@ SetCoalescableTimer(
+@@ -7119,6 +7593,8 @@ SetCoalescableTimer(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -2571,7 +2380,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7132,12 +7648,14 @@ KillTimer(
+@@ -7132,12 +7608,14 @@ KillTimer(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2586,7 +2395,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7145,18 +7663,23 @@ EnableWindow(
+@@ -7145,18 +7623,23 @@ EnableWindow(
      _In_ HWND hWnd,
      _In_ BOOL bEnable);
  
@@ -2610,7 +2419,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HACCEL
  WINAPI
-@@ -7169,12 +7692,16 @@ LoadAcceleratorsW(
+@@ -7169,12 +7652,16 @@ LoadAcceleratorsW(
  #define LoadAccelerators  LoadAcceleratorsA
  #endif // !UNICODE
  
@@ -2627,7 +2436,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HACCEL
  WINAPI
-@@ -7187,12 +7714,14 @@ CreateAcceleratorTableW(
+@@ -7187,12 +7674,14 @@ CreateAcceleratorTableW(
  #define CreateAcceleratorTable  CreateAcceleratorTableA
  #endif // !UNICODE
  
@@ -2642,7 +2451,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7200,6 +7729,7 @@ CopyAcceleratorTableA(
+@@ -7200,6 +7689,7 @@ CopyAcceleratorTableA(
      _In_ HACCEL hAccelSrc,
      _Out_writes_to_opt_(cAccelEntries, return) LPACCEL lpAccelDst,
      _In_ int cAccelEntries);
@@ -2650,7 +2459,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7215,6 +7745,8 @@ CopyAcceleratorTableW(
+@@ -7215,6 +7705,8 @@ CopyAcceleratorTableW(
  
  #ifndef NOMSG
  
@@ -2659,7 +2468,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7222,6 +7754,8 @@ TranslateAcceleratorA(
+@@ -7222,6 +7714,8 @@ TranslateAcceleratorA(
      _In_ HWND hWnd,
      _In_ HACCEL hAccTable,
      _In_ LPMSG lpMsg);
@@ -2668,7 +2477,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7405,6 +7939,7 @@ TranslateAcceleratorW(
+@@ -7405,6 +7899,7 @@ TranslateAcceleratorW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2676,7 +2485,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7413,6 +7948,8 @@ GetSystemMetrics(
+@@ -7413,6 +7908,8 @@ GetSystemMetrics(
  
  
  #if(WINVER >= 0x0605)
@@ -2685,7 +2494,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7467,12 +8004,16 @@ GetSystemMetricsForDpi(
+@@ -7467,12 +7964,16 @@ GetSystemMetricsForDpi(
  
  #define MENU_ALL_ACCESS (STANDARD_RIGHTS_ALL | MENU_READ_ACCESS | MENU_WRITE_ACCESS | MENU_EXECUTE_ACCESS)
  
@@ -2702,7 +2511,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMENU
  WINAPI
-@@ -7485,11 +8026,15 @@ LoadMenuW(
+@@ -7485,11 +7986,15 @@ LoadMenuW(
  #define LoadMenu  LoadMenuA
  #endif // !UNICODE
  
@@ -2718,7 +2527,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMENU
  WINAPI
-@@ -7501,12 +8046,15 @@ LoadMenuIndirectW(
+@@ -7501,12 +8006,15 @@ LoadMenuIndirectW(
  #define LoadMenuIndirect  LoadMenuIndirectA
  #endif // !UNICODE
  
@@ -2734,7 +2543,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7538,6 +8086,7 @@ ChangeMenuW(
+@@ -7538,6 +8046,7 @@ ChangeMenuW(
  #define ChangeMenu  ChangeMenuA
  #endif // !UNICODE
  
@@ -2742,7 +2551,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7547,6 +8096,7 @@ HiliteMenuItem(
+@@ -7547,6 +8056,7 @@ HiliteMenuItem(
      _In_ UINT uIDHiliteItem,
      _In_ UINT uHilite);
  
@@ -2750,7 +2559,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7556,6 +8106,7 @@ GetMenuStringA(
+@@ -7556,6 +8066,7 @@ GetMenuStringA(
      _Out_writes_opt_(cchMax) LPSTR lpString,
      _In_ int cchMax,
      _In_ UINT flags);
@@ -2758,7 +2567,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7571,6 +8122,7 @@ GetMenuStringW(
+@@ -7571,6 +8082,7 @@ GetMenuStringW(
  #define GetMenuString  GetMenuStringA
  #endif // !UNICODE
  
@@ -2766,7 +2575,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -7579,6 +8131,8 @@ GetMenuState(
+@@ -7579,6 +8091,8 @@ GetMenuState(
      _In_ UINT uId,
      _In_ UINT uFlags);
  
@@ -2775,7 +2584,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7591,6 +8145,7 @@ DrawMenuBar(
+@@ -7591,6 +8105,7 @@ DrawMenuBar(
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  
@@ -2783,7 +2592,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMENU
  WINAPI
-@@ -7599,24 +8154,31 @@ GetSystemMenu(
+@@ -7599,24 +8114,31 @@ GetSystemMenu(
      _In_ BOOL bRevert);
  
  
@@ -2815,7 +2624,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -7625,6 +8187,7 @@ CheckMenuItem(
+@@ -7625,6 +8147,7 @@ CheckMenuItem(
      _In_ UINT uIDCheckItem,
      _In_ UINT uCheck);
  
@@ -2823,7 +2632,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7633,6 +8196,7 @@ EnableMenuItem(
+@@ -7633,6 +8156,7 @@ EnableMenuItem(
      _In_ UINT uIDEnableItem,
      _In_ UINT uEnable);
  
@@ -2831,7 +2640,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMENU
  WINAPI
-@@ -7640,6 +8204,7 @@ GetSubMenu(
+@@ -7640,6 +8164,7 @@ GetSubMenu(
      _In_ HMENU hMenu,
      _In_ int nPos);
  
@@ -2839,7 +2648,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -7647,12 +8212,16 @@ GetMenuItemID(
+@@ -7647,12 +8172,16 @@ GetMenuItemID(
      _In_ HMENU hMenu,
      _In_ int nPos);
  
@@ -2856,7 +2665,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7662,6 +8231,8 @@ InsertMenuA(
+@@ -7662,6 +8191,8 @@ InsertMenuA(
      _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
@@ -2865,7 +2674,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7677,6 +8248,8 @@ InsertMenuW(
+@@ -7677,6 +8208,8 @@ InsertMenuW(
  #define InsertMenu  InsertMenuA
  #endif // !UNICODE
  
@@ -2874,7 +2683,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7685,6 +8258,8 @@ AppendMenuA(
+@@ -7685,6 +8218,8 @@ AppendMenuA(
      _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
@@ -2883,7 +2692,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7699,6 +8274,8 @@ AppendMenuW(
+@@ -7699,6 +8234,8 @@ AppendMenuW(
  #define AppendMenu  AppendMenuA
  #endif // !UNICODE
  
@@ -2892,7 +2701,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7708,6 +8285,8 @@ ModifyMenuA(
+@@ -7708,6 +8245,8 @@ ModifyMenuA(
      _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
@@ -2901,7 +2710,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7723,6 +8302,8 @@ ModifyMenuW(
+@@ -7723,6 +8262,8 @@ ModifyMenuW(
  #define ModifyMenu  ModifyMenuA
  #endif // !UNICODE
  
@@ -2910,7 +2719,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI RemoveMenu(
-@@ -7730,6 +8311,8 @@ WINAPI RemoveMenu(
+@@ -7730,6 +8271,8 @@ WINAPI RemoveMenu(
      _In_ UINT uPosition,
      _In_ UINT uFlags);
  
@@ -2919,7 +2728,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7738,6 +8321,8 @@ DeleteMenu(
+@@ -7738,6 +8281,8 @@ DeleteMenu(
      _In_ UINT uPosition,
      _In_ UINT uFlags);
  
@@ -2928,7 +2737,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7748,12 +8333,15 @@ SetMenuItemBitmaps(
+@@ -7748,12 +8293,15 @@ SetMenuItemBitmaps(
      _In_opt_ HBITMAP hBitmapUnchecked,
      _In_opt_ HBITMAP hBitmapChecked);
  
@@ -2944,7 +2753,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7780,6 +8368,8 @@ typedef struct tagTPMPARAMS
+@@ -7780,6 +8328,8 @@ typedef struct tagTPMPARAMS
  }   TPMPARAMS;
  typedef TPMPARAMS FAR *LPTPMPARAMS;
  
@@ -2953,7 +2762,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7793,6 +8383,8 @@ TrackPopupMenuEx(
+@@ -7793,6 +8343,8 @@ TrackPopupMenuEx(
  #endif /* WINVER >= 0x0400 */
  
  #if(_WIN32_WINNT >= 0x0601)
@@ -2962,7 +2771,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7833,6 +8425,8 @@ typedef struct tagMENUINFO
+@@ -7833,6 +8385,8 @@ typedef struct tagMENUINFO
  }   MENUINFO, FAR *LPMENUINFO;
  typedef MENUINFO CONST FAR *LPCMENUINFO;
  
@@ -2971,7 +2780,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7840,6 +8434,8 @@ GetMenuInfo(
+@@ -7840,6 +8394,8 @@ GetMenuInfo(
      _In_ HMENU,
      _Inout_ LPMENUINFO);
  
@@ -2980,7 +2789,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7847,6 +8443,8 @@ SetMenuInfo(
+@@ -7847,6 +8403,8 @@ SetMenuInfo(
      _In_ HMENU,
      _In_ LPCMENUINFO);
  
@@ -2989,7 +2798,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7959,6 +8557,8 @@ typedef LPCMENUITEMINFOA LPCMENUITEMINFO;
+@@ -7959,6 +8517,8 @@ typedef LPCMENUITEMINFOA LPCMENUITEMINFO;
  #endif // UNICODE
  
  
@@ -2998,7 +2807,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7967,6 +8567,8 @@ InsertMenuItemA(
+@@ -7967,6 +8527,8 @@ InsertMenuItemA(
      _In_ UINT item,
      _In_ BOOL fByPosition,
      _In_ LPCMENUITEMINFOA lpmi);
@@ -3007,7 +2816,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7981,6 +8583,8 @@ InsertMenuItemW(
+@@ -7981,6 +8543,8 @@ InsertMenuItemW(
  #define InsertMenuItem  InsertMenuItemA
  #endif // !UNICODE
  
@@ -3016,7 +2825,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7989,6 +8593,8 @@ GetMenuItemInfoA(
+@@ -7989,6 +8553,8 @@ GetMenuItemInfoA(
      _In_ UINT item,
      _In_ BOOL fByPosition,
      _Inout_ LPMENUITEMINFOA lpmii);
@@ -3025,7 +2834,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8003,6 +8609,8 @@ GetMenuItemInfoW(
+@@ -8003,6 +8569,8 @@ GetMenuItemInfoW(
  #define GetMenuItemInfo  GetMenuItemInfoA
  #endif // !UNICODE
  
@@ -3034,7 +2843,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8011,6 +8619,8 @@ SetMenuItemInfoA(
+@@ -8011,6 +8579,8 @@ SetMenuItemInfoA(
      _In_ UINT item,
      _In_ BOOL fByPositon,
      _In_ LPCMENUITEMINFOA lpmii);
@@ -3043,7 +2852,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8029,6 +8639,8 @@ SetMenuItemInfoW(
+@@ -8029,6 +8599,8 @@ SetMenuItemInfoW(
  #define GMDI_USEDISABLED    0x0001L
  #define GMDI_GOINTOPOPUPS   0x0002L
  
@@ -3052,7 +2861,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -8037,6 +8649,8 @@ GetMenuDefaultItem(
+@@ -8037,6 +8609,8 @@ GetMenuDefaultItem(
      _In_ UINT fByPos,
      _In_ UINT gmdiFlags);
  
@@ -3061,7 +2870,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8045,6 +8659,8 @@ SetMenuDefaultItem(
+@@ -8045,6 +8619,8 @@ SetMenuDefaultItem(
      _In_ UINT uItem,
      _In_ UINT fByPos);
  
@@ -3070,7 +2879,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8054,6 +8670,7 @@ GetMenuItemRect(
+@@ -8054,6 +8630,7 @@ GetMenuItemRect(
      _In_ UINT uItem,
      _Out_ LPRECT lprcItem);
  
@@ -3078,7 +2887,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8150,6 +8767,7 @@ DragObject(
+@@ -8150,6 +8727,7 @@ DragObject(
      _In_ ULONG_PTR data,
      _In_opt_ HCURSOR hcur);
  
@@ -3086,7 +2895,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8165,6 +8783,8 @@ DragDetect(
+@@ -8165,6 +8743,8 @@ DragDetect(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3095,23 +2904,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8242,6 +8862,7 @@ typedef struct tagDRAWTEXTPARAMS
-     _When_(((size) == -1) || (_String_length_(_Curr_) <  (size)), _Pre_z_ _Pre_valid_ _Out_writes_z_(_String_length_(_Curr_) + (grows))) \
-     _When_(((size) != -1) && (_String_length_(_Curr_) >= (size)), _Pre_count_(size) _Pre_valid_ _Out_writes_z_((size) + (grows)))
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- _Success_(return)
- int
-@@ -8254,6 +8875,7 @@ DrawTextA(
-     _In_ int cchText,
-     _Inout_ LPRECT lprc,
-     _In_ UINT format);
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- _Success_(return)
- int
-@@ -8300,6 +8922,7 @@ DrawText(
+@@ -8300,6 +8880,7 @@ DrawText(
  
  
  #if(WINVER >= 0x0400)
@@ -3119,7 +2912,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return)
  int
-@@ -8314,6 +8937,7 @@ DrawTextExA(
+@@ -8314,6 +8895,7 @@ DrawTextExA(
      _Inout_ LPRECT lprc,
      _In_ UINT format,
      _In_opt_ LPDRAWTEXTPARAMS lpdtp);
@@ -3127,7 +2920,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return)
  int
-@@ -8343,6 +8967,7 @@ DrawTextExW(
+@@ -8343,6 +8925,7 @@ DrawTextExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3135,7 +2928,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8356,6 +8981,7 @@ GrayStringA(
+@@ -8356,6 +8939,7 @@ GrayStringA(
      _In_ int Y,
      _In_ int nWidth,
      _In_ int nHeight);
@@ -3143,7 +2936,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8401,6 +9027,7 @@ GrayStringW(
+@@ -8401,6 +8985,7 @@ GrayStringW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3151,7 +2944,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8415,6 +9042,7 @@ DrawStateA(
+@@ -8415,6 +9000,7 @@ DrawStateA(
      _In_ int cx,
      _In_ int cy,
      _In_ UINT uFlags);
@@ -3159,7 +2952,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8443,6 +9071,7 @@ DrawStateW(
+@@ -8443,6 +9029,7 @@ DrawStateW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3167,7 +2960,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -8455,6 +9084,7 @@ TabbedTextOutA(
+@@ -8455,6 +9042,7 @@ TabbedTextOutA(
      _In_ int nTabPositions,
      _In_reads_opt_(nTabPositions) CONST INT *lpnTabStopPositions,
      _In_ int nTabOrigin);
@@ -3175,7 +2968,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -8473,6 +9103,7 @@ TabbedTextOutW(
+@@ -8473,6 +9061,7 @@ TabbedTextOutW(
  #define TabbedTextOut  TabbedTextOutA
  #endif // !UNICODE
  
@@ -3183,7 +2976,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -8482,6 +9113,7 @@ GetTabbedTextExtentA(
+@@ -8482,6 +9071,7 @@ GetTabbedTextExtentA(
      _In_ int chCount,
      _In_ int nTabPositions,
      _In_reads_opt_(nTabPositions) CONST INT *lpnTabStopPositions);
@@ -3191,7 +2984,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -8497,12 +9129,15 @@ GetTabbedTextExtentW(
+@@ -8497,12 +9087,15 @@ GetTabbedTextExtentW(
  #define GetTabbedTextExtent  GetTabbedTextExtentA
  #endif // !UNICODE
  
@@ -3207,7 +3000,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -8510,6 +9145,7 @@ SetActiveWindow(
+@@ -8510,6 +9103,7 @@ SetActiveWindow(
      _In_ HWND hWnd);
  
  
@@ -3215,7 +3008,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -8517,12 +9153,14 @@ GetForegroundWindow(
+@@ -8517,12 +9111,14 @@ GetForegroundWindow(
      VOID);
  
  #if(WINVER >= 0x0400)
@@ -3230,7 +3023,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -8532,6 +9170,7 @@ SwitchToThisWindow(
+@@ -8532,6 +9128,7 @@ SwitchToThisWindow(
  #endif /* WINVER >= 0x0400 */
  
  
@@ -3238,7 +3031,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8539,6 +9178,8 @@ SetForegroundWindow(
+@@ -8539,6 +9136,8 @@ SetForegroundWindow(
      _In_ HWND hWnd);
  
  #if(_WIN32_WINNT >= 0x0500)
@@ -3247,7 +3040,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8547,6 +9188,8 @@ AllowSetForegroundWindow(
+@@ -8547,6 +9146,8 @@ AllowSetForegroundWindow(
  
  #define ASFW_ANY    ((DWORD)-1)
  
@@ -3256,7 +3049,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8558,18 +9201,21 @@ LockSetForegroundWindow(
+@@ -8558,18 +9159,21 @@ LockSetForegroundWindow(
  
  #endif /* _WIN32_WINNT >= 0x0500 */
  
@@ -3278,7 +3071,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDC
  WINAPI
-@@ -8601,12 +9247,14 @@ GetDCEx(
+@@ -8601,12 +9205,14 @@ GetDCEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3293,7 +3086,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8614,6 +9262,7 @@ ReleaseDC(
+@@ -8614,6 +9220,7 @@ ReleaseDC(
      _In_opt_ HWND hWnd,
      _In_ HDC hDC);
  
@@ -3301,7 +3094,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HDC
  WINAPI
-@@ -8621,6 +9270,7 @@ BeginPaint(
+@@ -8621,6 +9228,7 @@ BeginPaint(
      _In_ HWND hWnd,
      _Out_ LPPAINTSTRUCT lpPaint);
  
@@ -3309,7 +3102,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8628,6 +9278,7 @@ EndPaint(
+@@ -8628,6 +9236,7 @@ EndPaint(
      _In_ HWND hWnd,
      _In_ CONST PAINTSTRUCT *lpPaint);
  
@@ -3317,7 +3110,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8636,6 +9287,7 @@ GetUpdateRect(
+@@ -8636,6 +9245,7 @@ GetUpdateRect(
      _Out_opt_ LPRECT lpRect,
      _In_ BOOL bErase);
  
@@ -3325,7 +3118,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8644,6 +9296,7 @@ GetUpdateRgn(
+@@ -8644,6 +9254,7 @@ GetUpdateRgn(
      _In_ HRGN hRgn,
      _In_ BOOL bErase);
  
@@ -3333,7 +3126,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8659,6 +9312,7 @@ SetWindowRgn(
+@@ -8659,6 +9270,7 @@ SetWindowRgn(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3341,7 +3134,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8668,6 +9322,7 @@ GetWindowRgn(
+@@ -8668,6 +9280,7 @@ GetWindowRgn(
  
  #if(_WIN32_WINNT >= 0x0501)
  
@@ -3349,7 +3142,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8677,6 +9332,7 @@ GetWindowRgnBox(
+@@ -8677,6 +9290,7 @@ GetWindowRgnBox(
  
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -3357,7 +3150,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8684,6 +9340,7 @@ ExcludeUpdateRgn(
+@@ -8684,6 +9298,7 @@ ExcludeUpdateRgn(
      _In_ HDC hDC,
      _In_ HWND hWnd);
  
@@ -3365,7 +3158,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8692,6 +9349,7 @@ InvalidateRect(
+@@ -8692,6 +9307,7 @@ InvalidateRect(
      _In_opt_ CONST RECT *lpRect,
      _In_ BOOL bErase);
  
@@ -3373,7 +3166,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8699,6 +9357,7 @@ ValidateRect(
+@@ -8699,6 +9315,7 @@ ValidateRect(
      _In_opt_ HWND hWnd,
      _In_opt_ CONST RECT *lpRect);
  
@@ -3381,7 +3174,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8707,6 +9366,7 @@ InvalidateRgn(
+@@ -8707,6 +9324,7 @@ InvalidateRgn(
      _In_opt_ HRGN hRgn,
      _In_ BOOL bErase);
  
@@ -3389,7 +3182,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8715,6 +9375,7 @@ ValidateRgn(
+@@ -8715,6 +9333,7 @@ ValidateRgn(
      _In_opt_ HRGN hRgn);
  
  
@@ -3397,7 +3190,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8755,12 +9416,15 @@ RedrawWindow(
+@@ -8755,12 +9374,15 @@ RedrawWindow(
   * LockWindowUpdate API
   */
  
@@ -3413,7 +3206,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8771,6 +9435,8 @@ ScrollWindow(
+@@ -8771,6 +9393,8 @@ ScrollWindow(
      _In_opt_ CONST RECT *lpRect,
      _In_opt_ CONST RECT *lpClipRect);
  
@@ -3422,7 +3215,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8783,6 +9449,8 @@ ScrollDC(
+@@ -8783,6 +9407,8 @@ ScrollDC(
      _In_opt_ HRGN hrgnUpdate,
      _Out_opt_ LPRECT lprcUpdate);
  
@@ -3431,7 +3224,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8811,6 +9479,8 @@ ScrollWindowEx(
+@@ -8811,6 +9437,8 @@ ScrollWindowEx(
  
  #ifndef NOSCROLL
  
@@ -3440,7 +3233,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8820,6 +9490,8 @@ SetScrollPos(
+@@ -8820,6 +9448,8 @@ SetScrollPos(
      _In_ int nPos,
      _In_ BOOL bRedraw);
  
@@ -3449,7 +3242,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8827,6 +9499,8 @@ GetScrollPos(
+@@ -8827,6 +9457,8 @@ GetScrollPos(
      _In_ HWND hWnd,
      _In_ int nBar);
  
@@ -3458,7 +3251,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8837,6 +9511,8 @@ SetScrollRange(
+@@ -8837,6 +9469,8 @@ SetScrollRange(
      _In_ int nMaxPos,
      _In_ BOOL bRedraw);
  
@@ -3467,7 +3260,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8846,6 +9522,8 @@ GetScrollRange(
+@@ -8846,6 +9480,8 @@ GetScrollRange(
      _Out_ LPINT lpMinPos,
      _Out_ LPINT lpMaxPos);
  
@@ -3476,7 +3269,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8854,6 +9532,8 @@ ShowScrollBar(
+@@ -8854,6 +9490,8 @@ ShowScrollBar(
      _In_ int wBar,
      _In_ BOOL bShow);
  
@@ -3485,7 +3278,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8882,6 +9562,8 @@ EnableScrollBar(
+@@ -8882,6 +9520,8 @@ EnableScrollBar(
  #endif  /* !NOSCROLL */
  
  
@@ -3494,7 +3287,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8889,6 +9571,8 @@ SetPropA(
+@@ -8889,6 +9529,8 @@ SetPropA(
      _In_ HWND hWnd,
      _In_ LPCSTR lpString,
      _In_opt_ HANDLE hData);
@@ -3503,7 +3296,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8902,12 +9586,14 @@ SetPropW(
+@@ -8902,12 +9544,14 @@ SetPropW(
  #define SetProp  SetPropA
  #endif // !UNICODE
  
@@ -3518,7 +3311,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -8920,12 +9606,16 @@ GetPropW(
+@@ -8920,12 +9564,16 @@ GetPropW(
  #define GetProp  GetPropA
  #endif // !UNICODE
  
@@ -3535,7 +3328,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -8938,6 +9628,7 @@ RemovePropW(
+@@ -8938,6 +9586,7 @@ RemovePropW(
  #define RemoveProp  RemovePropA
  #endif // !UNICODE
  
@@ -3543,7 +3336,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8945,6 +9636,7 @@ EnumPropsExA(
+@@ -8945,6 +9594,7 @@ EnumPropsExA(
      _In_ HWND hWnd,
      _In_ PROPENUMPROCEXA lpEnumFunc,
      _In_ LPARAM lParam);
@@ -3551,7 +3344,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8958,12 +9650,14 @@ EnumPropsExW(
+@@ -8958,12 +9608,14 @@ EnumPropsExW(
  #define EnumPropsEx  EnumPropsExA
  #endif // !UNICODE
  
@@ -3566,7 +3359,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8976,12 +9670,16 @@ EnumPropsW(
+@@ -8976,12 +9628,16 @@ EnumPropsW(
  #define EnumProps  EnumPropsA
  #endif // !UNICODE
  
@@ -3583,7 +3376,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8994,6 +9692,8 @@ SetWindowTextW(
+@@ -8994,6 +9650,8 @@ SetWindowTextW(
  #define SetWindowText  SetWindowTextA
  #endif // !UNICODE
  
@@ -3592,7 +3385,7 @@ index f99e9294..5f99c126 100644
  _Ret_range_(0, nMaxCount)
  WINUSERAPI
  int
-@@ -9002,6 +9702,8 @@ GetWindowTextA(
+@@ -9002,6 +9660,8 @@ GetWindowTextA(
      _In_ HWND hWnd,
      _Out_writes_(nMaxCount) LPSTR lpString,
      _In_ int nMaxCount);
@@ -3601,7 +3394,7 @@ index f99e9294..5f99c126 100644
  _Ret_range_(0, nMaxCount)
  WINUSERAPI
  int
-@@ -9016,11 +9718,15 @@ GetWindowTextW(
+@@ -9016,11 +9676,15 @@ GetWindowTextW(
  #define GetWindowText  GetWindowTextA
  #endif // !UNICODE
  
@@ -3617,7 +3410,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9038,6 +9744,8 @@ GetWindowTextLengthW(
+@@ -9038,6 +9702,8 @@ GetWindowTextLengthW(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -3626,7 +3419,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9051,6 +9759,8 @@ GetClientRect(
+@@ -9051,6 +9717,8 @@ GetClientRect(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3635,7 +3428,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9064,6 +9774,8 @@ GetWindowRect(
+@@ -9064,6 +9732,8 @@ GetWindowRect(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -3644,7 +3437,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9072,6 +9784,8 @@ AdjustWindowRect(
+@@ -9072,6 +9742,8 @@ AdjustWindowRect(
      _In_ DWORD dwStyle,
      _In_ BOOL bMenu);
  
@@ -3653,7 +3446,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9088,6 +9802,8 @@ AdjustWindowRectEx(
+@@ -9088,6 +9760,8 @@ AdjustWindowRectEx(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0605)
@@ -3662,7 +3455,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9120,6 +9836,8 @@ typedef struct tagHELPINFO      /* Structure pointed to by lParam of WM_HELP */
+@@ -9120,6 +9794,8 @@ typedef struct tagHELPINFO      /* Structure pointed to by lParam of WM_HELP */
      POINT   MousePos;           /* Mouse Position in screen co-ordinates */
  }  HELPINFO, FAR *LPHELPINFO;
  
@@ -3671,7 +3464,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9127,12 +9845,15 @@ SetWindowContextHelpId(
+@@ -9127,12 +9803,15 @@ SetWindowContextHelpId(
      _In_ HWND,
      _In_ DWORD);
  
@@ -3687,7 +3480,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9140,6 +9861,7 @@ SetMenuContextHelpId(
+@@ -9140,6 +9819,7 @@ SetMenuContextHelpId(
      _In_ HMENU,
      _In_ DWORD);
  
@@ -3695,25 +3488,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -9225,6 +9947,8 @@ GetMenuContextHelpId(
- #pragma region Desktop Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- int
- WINAPI
-@@ -9233,6 +9957,8 @@ MessageBoxA(
-     _In_opt_ LPCSTR lpText,
-     _In_opt_ LPCSTR lpCaption,
-     _In_ UINT uType);
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- int
- WINAPI
-@@ -9271,6 +9997,8 @@ MessageBox(
+@@ -9271,6 +9951,8 @@ MessageBox(
  }
  #endif  /* _M_CEE */
  
@@ -3722,7 +3497,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9280,6 +10008,8 @@ MessageBoxExA(
+@@ -9280,6 +9962,8 @@ MessageBoxExA(
      _In_opt_ LPCSTR lpCaption,
      _In_ UINT uType,
      _In_ WORD wLanguageId);
@@ -3731,7 +3506,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9335,11 +10065,13 @@ typedef PMSGBOXPARAMSA PMSGBOXPARAMS;
+@@ -9335,11 +10019,13 @@ typedef PMSGBOXPARAMSA PMSGBOXPARAMS;
  typedef LPMSGBOXPARAMSA LPMSGBOXPARAMS;
  #endif // UNICODE
  
@@ -3745,7 +3520,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9360,6 +10092,8 @@ MessageBoxIndirectW(
+@@ -9360,6 +10046,8 @@ MessageBoxIndirectW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3754,7 +3529,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9381,6 +10115,7 @@ MessageBeep(
+@@ -9381,6 +10069,7 @@ MessageBeep(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -3762,7 +3537,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9393,6 +10128,8 @@ ShowCursor(
+@@ -9393,6 +10082,8 @@ ShowCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3771,7 +3546,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9401,6 +10138,8 @@ SetCursorPos(
+@@ -9401,6 +10092,8 @@ SetCursorPos(
      _In_ int Y);
  
  #if(WINVER >= 0x0600)
@@ -3780,7 +3555,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9415,12 +10154,15 @@ SetPhysicalCursorPos(
+@@ -9415,12 +10108,15 @@ SetPhysicalCursorPos(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -3796,7 +3571,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9434,6 +10176,8 @@ GetCursorPos(
+@@ -9434,6 +10130,8 @@ GetCursorPos(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0600)
@@ -3805,7 +3580,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9442,18 +10186,23 @@ GetPhysicalCursorPos(
+@@ -9442,18 +10140,23 @@ GetPhysicalCursorPos(
  #endif /* WINVER >= 0x0600 */
  
  
@@ -3829,7 +3604,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9463,36 +10212,48 @@ CreateCaret(
+@@ -9463,36 +10166,48 @@ CreateCaret(
      _In_ int nWidth,
      _In_ int nHeight);
  
@@ -3878,7 +3653,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9500,12 +10261,15 @@ SetCaretPos(
+@@ -9500,12 +10215,15 @@ SetCaretPos(
      _In_ int X,
      _In_ int Y);
  
@@ -3894,7 +3669,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9513,6 +10277,7 @@ ClientToScreen(
+@@ -9513,6 +10231,7 @@ ClientToScreen(
      _In_ HWND hWnd,
      _Inout_ LPPOINT lpPoint);
  
@@ -3902,7 +3677,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9521,6 +10286,7 @@ ScreenToClient(
+@@ -9521,6 +10240,7 @@ ScreenToClient(
      _Inout_ LPPOINT lpPoint);
  
  #if(WINVER >= 0x0600)
@@ -3910,7 +3685,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9528,6 +10294,7 @@ LogicalToPhysicalPoint(
+@@ -9528,6 +10248,7 @@ LogicalToPhysicalPoint(
      _In_ HWND hWnd,
      _Inout_ LPPOINT lpPoint);
  
@@ -3918,7 +3693,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9538,6 +10305,7 @@ PhysicalToLogicalPoint(
+@@ -9538,6 +10259,7 @@ PhysicalToLogicalPoint(
  #endif /* WINVER >= 0x0600 */
  
  #if(WINVER >= 0x0603)
@@ -3926,7 +3701,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9545,6 +10313,7 @@ LogicalToPhysicalPointForPerMonitorDPI(
+@@ -9545,6 +10267,7 @@ LogicalToPhysicalPointForPerMonitorDPI(
      _In_opt_ HWND hWnd,
      _Inout_ LPPOINT lpPoint);
  
@@ -3934,7 +3709,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9554,6 +10323,7 @@ PhysicalToLogicalPointForPerMonitorDPI(
+@@ -9554,6 +10277,7 @@ PhysicalToLogicalPointForPerMonitorDPI(
  
  #endif /* WINVER >= 0x0603 */
  
@@ -3942,7 +3717,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9563,6 +10333,7 @@ MapWindowPoints(
+@@ -9563,6 +10287,7 @@ MapWindowPoints(
      _Inout_updates_(cPoints) LPPOINT lpPoints,
      _In_ UINT cPoints);
  
@@ -3950,7 +3725,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -9570,6 +10341,7 @@ WindowFromPoint(
+@@ -9570,6 +10295,7 @@ WindowFromPoint(
      _In_ POINT Point);
  
  #if(WINVER >= 0x0600)
@@ -3958,7 +3733,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -9577,6 +10349,7 @@ WindowFromPhysicalPoint(
+@@ -9577,6 +10303,7 @@ WindowFromPhysicalPoint(
      _In_ POINT Point);
  #endif /* WINVER >= 0x0600 */
  
@@ -3966,7 +3741,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -9589,6 +10362,8 @@ ChildWindowFromPoint(
+@@ -9589,6 +10316,8 @@ ChildWindowFromPoint(
  
  #pragma region Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
@@ -3975,7 +3750,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9606,6 +10381,7 @@ ClipCursor(
+@@ -9606,6 +10335,7 @@ ClipCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3983,7 +3758,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -9685,6 +10461,7 @@ ChildWindowFromPointEx(
+@@ -9685,6 +10415,7 @@ ChildWindowFromPointEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -3991,7 +3766,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -9692,6 +10469,7 @@ GetSysColor(
+@@ -9692,6 +10423,7 @@ GetSysColor(
      _In_ int nIndex);
  
  #if(WINVER >= 0x0400)
@@ -3999,7 +3774,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HBRUSH
  WINAPI
-@@ -9701,6 +10479,8 @@ GetSysColorBrush(
+@@ -9701,6 +10433,8 @@ GetSysColorBrush(
  
  #endif /* WINVER >= 0x0400 */
  
@@ -4008,7 +3783,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9717,6 +10497,7 @@ SetSysColors(
+@@ -9717,6 +10451,7 @@ SetSysColors(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4016,7 +3791,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9724,6 +10505,7 @@ DrawFocusRect(
+@@ -9724,6 +10459,7 @@ DrawFocusRect(
      _In_ HDC hDC,
      _In_ CONST RECT * lprc);
  
@@ -4024,7 +3799,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9732,6 +10514,7 @@ FillRect(
+@@ -9732,6 +10468,7 @@ FillRect(
      _In_ CONST RECT *lprc,
      _In_ HBRUSH hbr);
  
@@ -4032,7 +3807,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -9740,6 +10523,7 @@ FrameRect(
+@@ -9740,6 +10477,7 @@ FrameRect(
      _In_ CONST RECT *lprc,
      _In_ HBRUSH hbr);
  
@@ -4040,7 +3815,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9747,6 +10531,7 @@ InvertRect(
+@@ -9747,6 +10485,7 @@ InvertRect(
      _In_ HDC hDC,
      _In_ CONST RECT *lprc);
  
@@ -4048,7 +3823,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9757,12 +10542,14 @@ SetRect(
+@@ -9757,12 +10496,14 @@ SetRect(
      _In_ int xRight,
      _In_ int yBottom);
  
@@ -4063,7 +3838,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9770,6 +10557,7 @@ CopyRect(
+@@ -9770,6 +10511,7 @@ CopyRect(
      _Out_ LPRECT lprcDst,
      _In_ CONST RECT *lprcSrc);
  
@@ -4071,7 +3846,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9778,6 +10566,7 @@ InflateRect(
+@@ -9778,6 +10520,7 @@ InflateRect(
      _In_ int dx,
      _In_ int dy);
  
@@ -4079,7 +3854,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9786,6 +10575,7 @@ IntersectRect(
+@@ -9786,6 +10529,7 @@ IntersectRect(
      _In_ CONST RECT *lprcSrc1,
      _In_ CONST RECT *lprcSrc2);
  
@@ -4087,7 +3862,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9794,6 +10584,7 @@ UnionRect(
+@@ -9794,6 +10538,7 @@ UnionRect(
      _In_ CONST RECT *lprcSrc1,
      _In_ CONST RECT *lprcSrc2);
  
@@ -4095,7 +3870,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9802,6 +10593,7 @@ SubtractRect(
+@@ -9802,6 +10547,7 @@ SubtractRect(
      _In_ CONST RECT *lprcSrc1,
      _In_ CONST RECT *lprcSrc2);
  
@@ -4103,7 +3878,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9810,12 +10602,14 @@ OffsetRect(
+@@ -9810,12 +10556,14 @@ OffsetRect(
      _In_ int dx,
      _In_ int dy);
  
@@ -4118,7 +3893,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9823,6 +10617,7 @@ EqualRect(
+@@ -9823,6 +10571,7 @@ EqualRect(
      _In_ CONST RECT *lprc1,
      _In_ CONST RECT *lprc2);
  
@@ -4126,7 +3901,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9857,12 +10652,16 @@ SetWindowWord(
+@@ -9857,12 +10606,16 @@ SetWindowWord(
  
  #ifndef NOWINOFFSETS
  
@@ -4143,7 +3918,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -9875,6 +10674,8 @@ GetWindowLongW(
+@@ -9875,6 +10628,8 @@ GetWindowLongW(
  #define GetWindowLong  GetWindowLongA
  #endif // !UNICODE
  
@@ -4152,7 +3927,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -9882,6 +10683,8 @@ SetWindowLongA(
+@@ -9882,6 +10637,8 @@ SetWindowLongA(
      _In_ HWND hWnd,
      _In_ int nIndex,
      _In_ LONG dwNewLong);
@@ -4161,7 +3936,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -9897,12 +10700,16 @@ SetWindowLongW(
+@@ -9897,12 +10654,16 @@ SetWindowLongW(
  
  #ifdef _WIN64
  
@@ -4178,7 +3953,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG_PTR
  WINAPI
-@@ -9915,6 +10722,8 @@ GetWindowLongPtrW(
+@@ -9915,6 +10676,8 @@ GetWindowLongPtrW(
  #define GetWindowLongPtr  GetWindowLongPtrA
  #endif // !UNICODE
  
@@ -4187,7 +3962,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG_PTR
  WINAPI
-@@ -9922,6 +10731,8 @@ SetWindowLongPtrA(
+@@ -9922,6 +10685,8 @@ SetWindowLongPtrA(
      _In_ HWND hWnd,
      _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
@@ -4196,7 +3971,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG_PTR
  WINAPI
-@@ -9965,6 +10776,8 @@ SetWindowLongPtrW(
+@@ -9965,6 +10730,8 @@ SetWindowLongPtrW(
  
  #ifndef NOWINOFFSETS
  
@@ -4205,7 +3980,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  WORD
  WINAPI
-@@ -9972,6 +10785,8 @@ GetClassWord(
+@@ -9972,6 +10739,8 @@ GetClassWord(
      _In_ HWND hWnd,
      _In_ int nIndex);
  
@@ -4214,7 +3989,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  WORD
  WINAPI
-@@ -9980,12 +10795,16 @@ SetClassWord(
+@@ -9980,12 +10749,16 @@ SetClassWord(
      _In_ int nIndex,
      _In_ WORD wNewWord);
  
@@ -4231,7 +4006,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -9998,6 +10817,8 @@ GetClassLongW(
+@@ -9998,6 +10771,8 @@ GetClassLongW(
  #define GetClassLong  GetClassLongA
  #endif // !UNICODE
  
@@ -4240,7 +4015,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -10005,6 +10826,8 @@ SetClassLongA(
+@@ -10005,6 +10780,8 @@ SetClassLongA(
      _In_ HWND hWnd,
      _In_ int nIndex,
      _In_ LONG dwNewLong);
@@ -4249,7 +4024,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -10020,12 +10843,16 @@ SetClassLongW(
+@@ -10020,12 +10797,16 @@ SetClassLongW(
  
  #ifdef _WIN64
  
@@ -4266,7 +4041,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  ULONG_PTR
  WINAPI
-@@ -10038,6 +10865,8 @@ GetClassLongPtrW(
+@@ -10038,6 +10819,8 @@ GetClassLongPtrW(
  #define GetClassLongPtr  GetClassLongPtrA
  #endif // !UNICODE
  
@@ -4275,7 +4050,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  ULONG_PTR
  WINAPI
-@@ -10045,6 +10874,8 @@ SetClassLongPtrA(
+@@ -10045,6 +10828,8 @@ SetClassLongPtrA(
      _In_ HWND hWnd,
      _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
@@ -4284,7 +4059,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  ULONG_PTR
  WINAPI
-@@ -10081,12 +10912,16 @@ SetClassLongPtrW(
+@@ -10081,12 +10866,16 @@ SetClassLongPtrW(
  #endif /* !NOWINOFFSETS */
  
  #if(WINVER >= 0x0500)
@@ -4301,7 +4076,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10094,6 +10929,7 @@ SetProcessDefaultLayout(
+@@ -10094,6 +10883,7 @@ SetProcessDefaultLayout(
      _In_ DWORD dwDefaultLayout);
  #endif /* WINVER >= 0x0500 */
  
@@ -4309,7 +4084,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10101,12 +10937,16 @@ GetDesktopWindow(
+@@ -10101,12 +10891,16 @@ GetDesktopWindow(
      VOID);
  
  
@@ -4326,7 +4101,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10114,6 +10954,7 @@ SetParent(
+@@ -10114,6 +10908,7 @@ SetParent(
      _In_ HWND hWndChild,
      _In_opt_ HWND hWndNewParent);
  
@@ -4334,7 +4109,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10123,12 +10964,16 @@ EnumChildWindows(
+@@ -10123,12 +10918,16 @@ EnumChildWindows(
      _In_ LPARAM lParam);
  
  
@@ -4351,7 +4126,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10142,6 +10987,8 @@ FindWindowW(
+@@ -10142,6 +10941,8 @@ FindWindowW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -4360,7 +4135,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10150,6 +10997,8 @@ FindWindowExA(
+@@ -10150,6 +10951,8 @@ FindWindowExA(
      _In_opt_ HWND hWndChildAfter,
      _In_opt_ LPCSTR lpszClass,
      _In_opt_ LPCSTR lpszWindow);
@@ -4369,7 +4144,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10164,6 +11013,7 @@ FindWindowExW(
+@@ -10164,6 +10967,7 @@ FindWindowExW(
  #define FindWindowEx  FindWindowExA
  #endif // !UNICODE
  
@@ -4377,7 +4152,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10173,18 +11023,22 @@ GetShellWindow(
+@@ -10173,18 +10977,22 @@ GetShellWindow(
  #endif /* WINVER >= 0x0400 */
  
  
@@ -4400,33 +4175,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10192,6 +11046,7 @@ EnumWindows(
-     _In_ WNDENUMPROC lpEnumFunc,
-     _In_ LPARAM lParam);
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- BOOL
- WINAPI
-@@ -10209,6 +11064,8 @@ EnumThreadWindows(
- #pragma region Desktop Family or Games Family
- #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- int
- WINAPI
-@@ -10217,6 +11074,8 @@ GetClassNameA(
-     _Out_writes_to_(nMaxCount, return) LPSTR lpClassName,
-     _In_ int nMaxCount
-     );
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- int
- WINAPI
-@@ -10259,6 +11118,8 @@ GetClassName(
+@@ -10259,6 +11067,8 @@ GetClassName(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4435,15 +4184,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10269,6 +11130,7 @@ GetTopWindow(
- #define GetSysModalWindow() (NULL)
- #define SetSysModalWindow(hWnd) (NULL)
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- DWORD
- WINAPI
-@@ -10278,6 +11140,7 @@ GetWindowThreadProcessId(
+@@ -10278,6 +11088,7 @@ GetWindowThreadProcessId(
  
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -4451,7 +4192,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10290,6 +11153,7 @@ IsGUIThread(
+@@ -10290,6 +11101,7 @@ IsGUIThread(
  #define GetWindowTask(hWnd) \
          ((HANDLE)(DWORD_PTR)GetWindowThreadProcessId(hWnd, NULL))
  
@@ -4459,16 +4200,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -10312,6 +11176,8 @@ GetLastActivePopup(
- #define GW_MAX              6
- #endif
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HWND
- WINAPI
-@@ -10371,6 +11237,8 @@ UnhookWindowsHook(
+@@ -10371,6 +11183,8 @@ UnhookWindowsHook(
      _In_ int nCode,
      _In_ HOOKPROC pfnFilterProc);
  
@@ -4477,7 +4209,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HHOOK
  WINAPI
-@@ -10379,6 +11247,8 @@ SetWindowsHookExA(
+@@ -10379,6 +11193,8 @@ SetWindowsHookExA(
      _In_ HOOKPROC lpfn,
      _In_opt_ HINSTANCE hmod,
      _In_ DWORD dwThreadId);
@@ -4486,7 +4218,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HHOOK
  WINAPI
-@@ -10394,12 +11264,15 @@ SetWindowsHookExW(
+@@ -10394,6 +11210,8 @@ SetWindowsHookExW(
  #endif // !UNICODE
  
  
@@ -4495,14 +4227,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
- UnhookWindowsHookEx(
-     _In_ HHOOK hhk);
- 
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- LRESULT
- WINAPI
-@@ -10504,6 +11377,8 @@ CallNextHookEx(
+@@ -10504,6 +11322,8 @@ CallNextHookEx(
  
  #if(WINVER >= 0x0400)
  
@@ -4511,7 +4236,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10584,12 +11459,14 @@ typedef struct {        // version 0
+@@ -10584,12 +11404,14 @@ typedef struct {        // version 0
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4526,7 +4251,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HBITMAP
  WINAPI
-@@ -10608,12 +11485,16 @@ LoadBitmapW(
+@@ -10608,12 +11430,16 @@ LoadBitmapW(
  #pragma region Desktop or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -4543,7 +4268,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HCURSOR
  WINAPI
-@@ -10632,11 +11513,15 @@ LoadCursorW(
+@@ -10632,11 +11458,15 @@ LoadCursorW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4559,7 +4284,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HCURSOR
  WINAPI
-@@ -10654,6 +11539,8 @@ LoadCursorFromFileW(
+@@ -10654,6 +11484,8 @@ LoadCursorFromFileW(
  #pragma region Desktop or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -4568,7 +4293,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HCURSOR
  WINAPI
-@@ -10666,6 +11553,8 @@ CreateCursor(
+@@ -10666,6 +11498,8 @@ CreateCursor(
      _In_ CONST VOID *pvANDPlane,
      _In_ CONST VOID *pvXORPlane);
  
@@ -4577,7 +4302,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10723,6 +11612,8 @@ CopyCursor(
+@@ -10723,6 +11557,8 @@ CopyCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4586,7 +4311,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10739,12 +11630,16 @@ typedef struct _ICONINFO {
+@@ -10739,12 +11575,16 @@ typedef struct _ICONINFO {
  } ICONINFO;
  typedef ICONINFO *PICONINFO;
  
@@ -4603,7 +4328,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HICON
  WINAPI
-@@ -10758,6 +11653,7 @@ LoadIconW(
+@@ -10758,6 +11598,7 @@ LoadIconW(
  #endif // !UNICODE
  
  
@@ -4611,7 +4336,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -10770,6 +11666,7 @@ PrivateExtractIconsA(
+@@ -10770,6 +11611,7 @@ PrivateExtractIconsA(
      _Out_writes_opt_(nIcons) UINT *piconid,
      _In_ UINT nIcons,
      _In_ UINT flags);
@@ -4619,7 +4344,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -10788,6 +11685,8 @@ PrivateExtractIconsW(
+@@ -10788,6 +11630,8 @@ PrivateExtractIconsW(
  #define PrivateExtractIcons  PrivateExtractIconsA
  #endif // !UNICODE
  
@@ -4628,7 +4353,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HICON
  WINAPI
-@@ -10800,12 +11699,16 @@ CreateIcon(
+@@ -10800,12 +11644,16 @@ CreateIcon(
      _In_ CONST BYTE *lpbANDbits,
      _In_ CONST BYTE *lpbXORbits);
  
@@ -4645,7 +4370,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -10814,6 +11717,8 @@ LookupIconIdFromDirectory(
+@@ -10814,6 +11662,8 @@ LookupIconIdFromDirectory(
      _In_ BOOL fIcon);
  
  #if(WINVER >= 0x0400)
@@ -4654,7 +4379,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -10825,6 +11730,8 @@ LookupIconIdFromDirectoryEx(
+@@ -10825,6 +11675,8 @@ LookupIconIdFromDirectoryEx(
      _In_ UINT Flags);
  #endif /* WINVER >= 0x0400 */
  
@@ -4663,7 +4388,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HICON
  WINAPI
-@@ -10835,6 +11742,8 @@ CreateIconFromResource(
+@@ -10835,6 +11687,8 @@ CreateIconFromResource(
      _In_ DWORD dwVer);
  
  #if(WINVER >= 0x0400)
@@ -4672,7 +4397,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HICON
  WINAPI
-@@ -10901,6 +11810,8 @@ SetThreadCursorCreationScaling(
+@@ -10901,6 +11755,8 @@ SetThreadCursorCreationScaling(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4681,7 +4406,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -10911,6 +11822,8 @@ LoadImageA(
+@@ -10911,6 +11767,8 @@ LoadImageA(
      _In_ int cx,
      _In_ int cy,
      _In_ UINT fuLoad);
@@ -4690,7 +4415,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -10927,6 +11840,8 @@ LoadImageW(
+@@ -10927,6 +11785,8 @@ LoadImageW(
  #define LoadImage  LoadImageA
  #endif // !UNICODE
  
@@ -4699,7 +4424,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HANDLE
  WINAPI
-@@ -10946,6 +11861,8 @@ CopyImage(
+@@ -10946,6 +11806,8 @@ CopyImage(
  #define DI_NOMIRROR     0x0010
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -4708,7 +4433,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI BOOL WINAPI DrawIconEx(
      _In_ HDC hdc,
      _In_ int xLeft,
-@@ -10965,18 +11882,24 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
+@@ -10965,6 +11827,8 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4717,14 +4442,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HICON
  WINAPI
- CreateIconIndirect(
-     _In_ PICONINFO piconinfo);
- 
-+_Win32_SetLastError_
-+_Win32_SupportedOS_Windows2000_
- WINUSERAPI
- HICON
- WINAPI
+@@ -10977,6 +11841,8 @@ WINAPI
  CopyIcon(
      _In_ HICON hIcon);
  
@@ -4733,7 +4451,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11015,12 +11938,14 @@ typedef ICONINFOEXA ICONINFOEX;
+@@ -11015,12 +11881,14 @@ typedef ICONINFOEXA ICONINFOEX;
  typedef PICONINFOEXA PICONINFOEX;
  #endif // UNICODE
  
@@ -4748,7 +4466,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11548,12 +12473,14 @@ typedef enum {
+@@ -11548,12 +12416,14 @@ typedef enum {
  
  #ifndef NOMSG
  
@@ -4763,7 +4481,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11568,6 +12495,8 @@ IsDialogMessageW(
+@@ -11568,6 +12438,8 @@ IsDialogMessageW(
  
  #endif /* !NOMSG */
  
@@ -4772,7 +4490,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11575,6 +12504,7 @@ MapDialogRect(
+@@ -11575,6 +12447,7 @@ MapDialogRect(
      _In_ HWND hDlg,
      _Inout_ LPRECT lpRect);
  
@@ -4780,7 +4498,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -11584,6 +12514,7 @@ DlgDirListA(
+@@ -11584,6 +12457,7 @@ DlgDirListA(
      _In_ int nIDListBox,
      _In_ int nIDStaticPath,
      _In_ UINT uFileType);
@@ -4788,7 +4506,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -11619,6 +12550,8 @@ DlgDirListW(
+@@ -11619,6 +12493,8 @@ DlgDirListW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -4797,7 +4515,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11627,6 +12560,8 @@ DlgDirSelectExA(
+@@ -11627,6 +12503,8 @@ DlgDirSelectExA(
      _Out_writes_(chCount) LPSTR lpString,
      _In_ int chCount,
      _In_ int idListBox);
@@ -4806,7 +4524,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11641,6 +12576,8 @@ DlgDirSelectExW(
+@@ -11641,6 +12519,8 @@ DlgDirSelectExW(
  #define DlgDirSelectEx  DlgDirSelectExA
  #endif // !UNICODE
  
@@ -4815,7 +4533,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -11650,6 +12587,8 @@ DlgDirListComboBoxA(
+@@ -11650,6 +12530,8 @@ DlgDirListComboBoxA(
      _In_ int nIDComboBox,
      _In_ int nIDStaticPath,
      _In_ UINT uFiletype);
@@ -4824,7 +4542,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -11665,6 +12604,8 @@ DlgDirListComboBoxW(
+@@ -11665,6 +12547,8 @@ DlgDirListComboBoxW(
  #define DlgDirListComboBox  DlgDirListComboBoxA
  #endif // !UNICODE
  
@@ -4833,7 +4551,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11673,6 +12614,8 @@ DlgDirSelectComboBoxExA(
+@@ -11673,6 +12557,8 @@ DlgDirSelectComboBoxExA(
      _Out_writes_(cchOut) LPSTR lpString,
      _In_ int cchOut,
      _In_ int idComboBox);
@@ -4842,7 +4560,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12047,6 +12990,7 @@ typedef struct tagSCROLLINFO
+@@ -12047,6 +12933,7 @@ typedef struct tagSCROLLINFO
  }   SCROLLINFO, FAR *LPSCROLLINFO;
  typedef SCROLLINFO CONST FAR *LPCSCROLLINFO;
  
@@ -4850,7 +4568,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -12056,6 +13000,8 @@ SetScrollInfo(
+@@ -12056,6 +12943,8 @@ SetScrollInfo(
      _In_ LPCSCROLLINFO lpsi,
      _In_ BOOL redraw);
  
@@ -4859,7 +4577,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12127,6 +13073,7 @@ typedef struct tagCLIENTCREATESTRUCT {
+@@ -12127,6 +13016,7 @@ typedef struct tagCLIENTCREATESTRUCT {
      UINT idFirstChild;
  } CLIENTCREATESTRUCT, *LPCLIENTCREATESTRUCT;
  
@@ -4867,7 +4585,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -12136,6 +13083,7 @@ DefFrameProcA(
+@@ -12136,6 +13026,7 @@ DefFrameProcA(
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -4875,7 +4593,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -12151,6 +13099,7 @@ DefFrameProcW(
+@@ -12151,6 +13042,7 @@ DefFrameProcW(
  #define DefFrameProc  DefFrameProcA
  #endif // !UNICODE
  
@@ -4883,7 +4601,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -12164,6 +13113,7 @@ DefMDIChildProcA(
+@@ -12164,6 +13056,7 @@ DefMDIChildProcA(
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -4891,7 +4609,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -12185,6 +13135,7 @@ DefMDIChildProcW(
+@@ -12185,6 +13078,7 @@ DefMDIChildProcW(
  
  #ifndef NOMSG
  
@@ -4899,7 +4617,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12194,12 +13145,16 @@ TranslateMDISysAccel(
+@@ -12194,12 +13088,16 @@ TranslateMDISysAccel(
  
  #endif /* !NOMSG */
  
@@ -4916,7 +4634,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -12214,6 +13169,8 @@ CreateMDIWindowA(
+@@ -12214,6 +13112,8 @@ CreateMDIWindowA(
      _In_opt_ HWND hWndParent,
      _In_opt_ HINSTANCE hInstance,
      _In_ LPARAM lParam);
@@ -4925,7 +4643,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -12235,6 +13192,8 @@ CreateMDIWindowW(
+@@ -12235,6 +13135,8 @@ CreateMDIWindowW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -4934,7 +4652,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  WORD
  WINAPI
-@@ -12245,6 +13204,8 @@ TileWindows(
+@@ -12245,6 +13147,8 @@ TileWindows(
      _In_ UINT cKids,
      _In_reads_opt_(cKids) const HWND FAR * lpKids);
  
@@ -4943,7 +4661,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  WORD
  WINAPI CascadeWindows(
-@@ -12367,6 +13328,8 @@ typedef LPHELPWININFOA LPHELPWININFO;
+@@ -12367,6 +13271,8 @@ typedef LPHELPWININFOA LPHELPWININFO;
  
  
  
@@ -4952,7 +4670,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12375,6 +13338,8 @@ WinHelpA(
+@@ -12375,6 +13281,8 @@ WinHelpA(
      _In_opt_ LPCSTR lpszHelp,
      _In_ UINT uCommand,
      _In_ ULONG_PTR dwData);
@@ -4961,7 +4679,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12412,6 +13377,8 @@ WinHelpW(
+@@ -12412,6 +13320,8 @@ WinHelpW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0500)
@@ -4970,7 +4688,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -13078,12 +14045,14 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13078,12 +13988,14 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #ifdef _WINGDI_
  #ifndef NOGDI
  
@@ -4985,7 +4703,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13096,6 +14065,7 @@ ChangeDisplaySettingsW(
+@@ -13096,6 +14008,7 @@ ChangeDisplaySettingsW(
  #define ChangeDisplaySettings  ChangeDisplaySettingsA
  #endif // !UNICODE
  
@@ -4993,7 +4711,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13105,6 +14075,7 @@ ChangeDisplaySettingsExA(
+@@ -13105,6 +14018,7 @@ ChangeDisplaySettingsExA(
      _Reserved_ HWND hwnd,
      _In_ DWORD dwflags,
      _In_opt_ LPVOID lParam);
@@ -5001,7 +4719,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13124,6 +14095,7 @@ ChangeDisplaySettingsExW(
+@@ -13124,6 +14038,7 @@ ChangeDisplaySettingsExW(
  #define ENUM_CURRENT_SETTINGS       ((DWORD)-1)
  #define ENUM_REGISTRY_SETTINGS      ((DWORD)-2)
  
@@ -5009,7 +4727,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13131,6 +14103,7 @@ EnumDisplaySettingsA(
+@@ -13131,6 +14046,7 @@ EnumDisplaySettingsA(
      _In_opt_ LPCSTR lpszDeviceName,
      _In_ DWORD iModeNum,
      _Inout_ DEVMODEA* lpDevMode);
@@ -5017,7 +4735,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13146,6 +14119,7 @@ EnumDisplaySettingsW(
+@@ -13146,6 +14062,7 @@ EnumDisplaySettingsW(
  
  #if(WINVER >= 0x0500)
  
@@ -5025,7 +4743,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13154,6 +14128,7 @@ EnumDisplaySettingsExA(
+@@ -13154,6 +14071,7 @@ EnumDisplaySettingsExA(
      _In_ DWORD iModeNum,
      _Inout_ DEVMODEA* lpDevMode,
      _In_ DWORD dwFlags);
@@ -5033,7 +4751,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13172,6 +14147,7 @@ EnumDisplaySettingsExW(
+@@ -13172,6 +14090,7 @@ EnumDisplaySettingsExW(
  #define EDS_RAWMODE                   0x00000002
  #define EDS_ROTATEDMODE               0x00000004
  
@@ -5041,7 +4759,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13180,6 +14156,7 @@ EnumDisplayDevicesA(
+@@ -13180,6 +14099,7 @@ EnumDisplayDevicesA(
      _In_ DWORD iDevNum,
      _Inout_ PDISPLAY_DEVICEA lpDisplayDevice,
      _In_ DWORD dwFlags);
@@ -5049,7 +4767,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13201,6 +14178,7 @@ EnumDisplayDevicesW(
+@@ -13201,6 +14121,7 @@ EnumDisplayDevicesW(
  
  #if(WINVER >= 0x0601)
  
@@ -5057,7 +4775,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13209,6 +14187,7 @@ GetDisplayConfigBufferSizes(
+@@ -13209,6 +14130,7 @@ GetDisplayConfigBufferSizes(
      _Out_ UINT32* numPathArrayElements,
      _Out_ UINT32* numModeInfoArrayElements);
  
@@ -5065,7 +4783,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13219,6 +14198,7 @@ SetDisplayConfig(
+@@ -13219,6 +14141,7 @@ SetDisplayConfig(
      _In_reads_opt_(numModeInfoArrayElements) DISPLAYCONFIG_MODE_INFO* modeInfoArray,
      _In_ UINT32 flags);
  
@@ -5073,7 +4791,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return == ERROR_SUCCESS) LONG
  WINAPI
-@@ -13232,12 +14212,14 @@ QueryDisplayConfig(
+@@ -13232,12 +14155,14 @@ QueryDisplayConfig(
      _When_(flags & QDC_DATABASE_CURRENT, _Out_)
          DISPLAYCONFIG_TOPOLOGY_ID* currentTopologyId);
  
@@ -5088,7 +4806,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -13251,6 +14233,8 @@ DisplayConfigSetDeviceInfo(
+@@ -13251,6 +14176,8 @@ DisplayConfigSetDeviceInfo(
  #endif /* _WINGDI_ */
  
  
@@ -5097,7 +4815,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return != FALSE)
  BOOL
-@@ -13260,6 +14244,8 @@ SystemParametersInfoA(
+@@ -13260,6 +14187,8 @@ SystemParametersInfoA(
      _In_ UINT uiParam,
      _Pre_maybenull_ _Post_valid_ PVOID pvParam,
      _In_ UINT fWinIni);
@@ -5106,7 +4824,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return != FALSE)
  BOOL
-@@ -13277,6 +14263,8 @@ SystemParametersInfoW(
+@@ -13277,6 +14206,8 @@ SystemParametersInfoW(
  
  
  #if(WINVER >= 0x0605)
@@ -5115,7 +4833,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  _Success_(return != FALSE)
  BOOL
-@@ -13494,6 +14482,7 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
+@@ -13494,6 +14425,7 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
  #pragma region Desktop or PC Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP)
  #if(_WIN32_WINNT >= 0x0600)
@@ -5123,7 +4841,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13559,6 +14548,8 @@ SetDebugErrorLevel(
+@@ -13559,6 +14491,8 @@ SetDebugErrorLevel(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5132,7 +4850,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -13566,6 +14557,8 @@ SetLastErrorEx(
+@@ -13566,6 +14500,8 @@ SetLastErrorEx(
      _In_ DWORD dwErrCode,
      _In_ DWORD dwType);
  
@@ -5141,7 +4859,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  int
  WINAPI
-@@ -13608,6 +14601,7 @@ CancelShutdown(
+@@ -13608,6 +14544,7 @@ CancelShutdown(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5149,7 +4867,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMONITOR
  WINAPI
-@@ -13615,6 +14609,7 @@ MonitorFromPoint(
+@@ -13615,6 +14552,7 @@ MonitorFromPoint(
      _In_ POINT pt,
      _In_ DWORD dwFlags);
  
@@ -5157,7 +4875,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMONITOR
  WINAPI
-@@ -13622,6 +14617,7 @@ MonitorFromRect(
+@@ -13622,6 +14560,7 @@ MonitorFromRect(
      _In_ LPCRECT lprc,
      _In_ DWORD dwFlags);
  
@@ -5165,7 +4883,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HMONITOR
  WINAPI
-@@ -13685,12 +14681,14 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
+@@ -13685,12 +14624,14 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
  #endif // UNICODE
  #endif
  
@@ -5180,7 +4898,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13705,6 +14703,7 @@ GetMonitorInfoW(
+@@ -13705,6 +14646,7 @@ GetMonitorInfoW(
  
  typedef BOOL (CALLBACK* MONITORENUMPROC)(HMONITOR, HDC, LPRECT, LPARAM);
  
@@ -5188,7 +4906,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13726,6 +14725,7 @@ EnumDisplayMonitors(
+@@ -13726,6 +14668,7 @@ EnumDisplayMonitors(
   * WinEvents - Active Accessibility hooks
   */
  
@@ -5196,7 +4914,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -13744,6 +14744,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
+@@ -13744,6 +14687,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
      DWORD         idEventThread,
      DWORD         dwmsEventTime);
  
@@ -5204,7 +4922,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWINEVENTHOOK
  WINAPI
-@@ -13757,6 +14758,7 @@ SetWinEventHook(
+@@ -13757,6 +14701,7 @@ SetWinEventHook(
      _In_ DWORD dwFlags);
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -5212,7 +4930,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13778,6 +14780,7 @@ IsWinEventHookInstalled(
+@@ -13778,6 +14723,7 @@ IsWinEventHookInstalled(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5220,7 +4938,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14428,6 +15431,8 @@ typedef struct tagGUITHREADINFO
+@@ -14428,6 +15374,8 @@ typedef struct tagGUITHREADINFO
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5229,7 +4947,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14435,6 +15440,8 @@ GetGUIThreadInfo(
+@@ -14435,6 +15383,8 @@ GetGUIThreadInfo(
      _In_ DWORD idThread,
      _Inout_ PGUITHREADINFO pgui);
  
@@ -5238,7 +4956,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14445,12 +15452,14 @@ BlockInput(
+@@ -14445,12 +15395,14 @@ BlockInput(
  
  #define USER_DEFAULT_SCREEN_DPI 96
  
@@ -5253,7 +4971,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14460,36 +15469,42 @@ IsProcessDPIAware(
+@@ -14460,36 +15412,42 @@ IsProcessDPIAware(
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0605)
@@ -5296,7 +5014,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14497,30 +15512,36 @@ AreDpiAwarenessContextsEqual(
+@@ -14497,30 +15455,36 @@ AreDpiAwarenessContextsEqual(
      _In_ DPI_AWARENESS_CONTEXT dpiContextA,
      _In_ DPI_AWARENESS_CONTEXT dpiContextB);
  
@@ -5333,7 +5051,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14537,6 +15558,8 @@ InheritWindowMonitor(
+@@ -14537,6 +15501,8 @@ InheritWindowMonitor(
  #endif /* WINVER >= 0x0605 */
  
  #if(WINVER >= 0x0605)
@@ -5342,7 +5060,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14558,17 +15581,20 @@ GetDpiAwarenessContextForProcess(
+@@ -14558,17 +15524,20 @@ GetDpiAwarenessContextForProcess(
  
  #if(WINVER >= 0x0606)
  
@@ -5363,7 +5081,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DPI_HOSTING_BEHAVIOR
  WINAPI
-@@ -14578,6 +15604,7 @@ GetWindowDpiHostingBehavior(
+@@ -14578,6 +15547,7 @@ GetWindowDpiHostingBehavior(
  #endif /* WINVER >= 0x0606 */
  
  
@@ -5371,7 +5089,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -14585,6 +15612,7 @@ GetWindowModuleFileNameA(
+@@ -14585,6 +15555,7 @@ GetWindowModuleFileNameA(
      _In_ HWND hwnd,
      _Out_writes_to_(cchFileNameMax, return) LPSTR pszFileName,
      _In_ UINT cchFileNameMax);
@@ -5379,7 +5097,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -14659,6 +15687,8 @@ typedef struct tagCURSORINFO
+@@ -14659,6 +15630,8 @@ typedef struct tagCURSORINFO
  #define CURSOR_SUPPRESSED  0x00000002
  #endif /* WINVER >= 0x0602 */
  
@@ -5388,7 +5106,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14690,6 +15720,8 @@ typedef struct tagWINDOWINFO
+@@ -14690,6 +15663,8 @@ typedef struct tagWINDOWINFO
  
  #define WS_ACTIVECAPTION    0x0001
  
@@ -5397,7 +5115,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14707,6 +15739,8 @@ typedef struct tagTITLEBARINFO
+@@ -14707,6 +15682,8 @@ typedef struct tagTITLEBARINFO
      DWORD rgstate[CCHILDREN_TITLEBAR + 1];
  } TITLEBARINFO, *PTITLEBARINFO, *LPTITLEBARINFO;
  
@@ -5406,7 +5124,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14738,6 +15772,8 @@ typedef struct tagMENUBARINFO
+@@ -14738,6 +15715,8 @@ typedef struct tagMENUBARINFO
      BOOL fUnused:30;     // reserved
  } MENUBARINFO, *PMENUBARINFO, *LPMENUBARINFO;
  
@@ -5415,7 +5133,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14761,6 +15797,8 @@ typedef struct tagSCROLLBARINFO
+@@ -14761,6 +15740,8 @@ typedef struct tagSCROLLBARINFO
      DWORD rgstate[CCHILDREN_SCROLLBAR + 1];
  } SCROLLBARINFO, *PSCROLLBARINFO, *LPSCROLLBARINFO;
  
@@ -5424,7 +5142,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14783,6 +15821,8 @@ typedef struct tagCOMBOBOXINFO
+@@ -14783,6 +15764,8 @@ typedef struct tagCOMBOBOXINFO
      HWND hwndList;
  } COMBOBOXINFO, *PCOMBOBOXINFO, *LPCOMBOBOXINFO;
  
@@ -5433,7 +5151,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14803,6 +15843,7 @@ GetComboBoxInfo(
+@@ -14803,6 +15786,7 @@ GetComboBoxInfo(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5441,7 +5159,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -14817,6 +15858,7 @@ GetAncestor(
+@@ -14817,6 +15801,7 @@ GetAncestor(
   * fields will get returned.  In other words, it is kind of a cross between
   * ChildWindowFromPointEx and WindowFromPoint.
   */
@@ -5449,7 +5167,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  HWND
  WINAPI
-@@ -14840,6 +15882,8 @@ RealGetWindowClassA(
+@@ -14840,6 +15825,8 @@ RealGetWindowClassA(
   * This gets the name of the window TYPE, not class.  This allows us to
   * recognize ThunderButton32 et al.
   */
@@ -5458,7 +5176,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -14869,6 +15913,8 @@ typedef struct tagALTTABINFO
+@@ -14869,6 +15856,8 @@ typedef struct tagALTTABINFO
      POINT ptStart;
  } ALTTABINFO, *PALTTABINFO, *LPALTTABINFO;
  
@@ -5467,7 +5185,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14878,6 +15924,8 @@ GetAltTabInfoA(
+@@ -14878,6 +15867,8 @@ GetAltTabInfoA(
      _Inout_ PALTTABINFO pati,
      _Out_writes_opt_(cchItemText) LPSTR pszItemText,
      _In_ UINT cchItemText);
@@ -5476,7 +5194,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14897,6 +15945,7 @@ GetAltTabInfoW(
+@@ -14897,6 +15888,7 @@ GetAltTabInfoW(
   * Listbox information.
   * Returns the number of items per row.
   */
@@ -5484,7 +5202,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -14914,6 +15963,8 @@ GetListBoxInfo(
+@@ -14914,6 +15906,8 @@ GetListBoxInfo(
  
  
  #if(_WIN32_WINNT >= 0x0500)
@@ -5493,7 +5211,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14923,6 +15974,8 @@ LockWorkStation(
+@@ -14923,6 +15917,8 @@ LockWorkStation(
  
  #if(_WIN32_WINNT >= 0x0500)
  
@@ -5502,7 +5220,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15204,6 +16257,7 @@ typedef struct tagRAWINPUT {
+@@ -15204,6 +16200,7 @@ typedef struct tagRAWINPUT {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5510,7 +5228,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15265,6 +16319,8 @@ typedef struct tagRID_DEVICE_INFO {
+@@ -15265,6 +16262,8 @@ typedef struct tagRID_DEVICE_INFO {
      } DUMMYUNIONNAME;
  } RID_DEVICE_INFO, *PRID_DEVICE_INFO, *LPRID_DEVICE_INFO;
  
@@ -5519,7 +5237,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15273,6 +16329,8 @@ GetRawInputDeviceInfoA(
+@@ -15273,6 +16272,8 @@ GetRawInputDeviceInfoA(
      _In_ UINT uiCommand,
      _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
      _Inout_ PUINT pcbSize);
@@ -5528,7 +5246,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15291,6 +16349,8 @@ GetRawInputDeviceInfoW(
+@@ -15291,6 +16292,8 @@ GetRawInputDeviceInfoW(
  /*
   * Raw Input Bulk Read: GetRawInputBuffer
   */
@@ -5537,7 +5255,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15347,6 +16407,8 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
+@@ -15347,6 +16350,8 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5546,7 +5264,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15355,6 +16417,8 @@ RegisterRawInputDevices(
+@@ -15355,6 +16360,8 @@ RegisterRawInputDevices(
      _In_ UINT uiNumDevices,
      _In_ UINT cbSize);
  
@@ -5555,7 +5273,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15369,6 +16433,8 @@ typedef struct tagRAWINPUTDEVICELIST {
+@@ -15369,6 +16376,8 @@ typedef struct tagRAWINPUTDEVICELIST {
      DWORD dwType;
  } RAWINPUTDEVICELIST, *PRAWINPUTDEVICELIST;
  
@@ -5564,7 +5282,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -15377,6 +16443,7 @@ GetRawInputDeviceList(
+@@ -15377,6 +16386,7 @@ GetRawInputDeviceList(
      _Inout_ PUINT puiNumDevices,
      _In_ UINT cbSize);
  
@@ -5572,7 +5290,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -15456,6 +16523,8 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
+@@ -15456,6 +16466,8 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
      POINTER_DEVICE_CURSOR_TYPE cursor;
  } POINTER_DEVICE_CURSOR_INFO;
  
@@ -5581,7 +5299,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15463,6 +16532,8 @@ GetPointerDevices(
+@@ -15463,6 +16475,8 @@ GetPointerDevices(
      _Inout_ UINT32* deviceCount,
      _Out_writes_opt_(*deviceCount) POINTER_DEVICE_INFO *pointerDevices);
  
@@ -5590,7 +5308,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15470,6 +16541,8 @@ GetPointerDevice(
+@@ -15470,6 +16484,8 @@ GetPointerDevice(
      _In_ HANDLE device,
      _Out_writes_(1) POINTER_DEVICE_INFO *pointerDevice);
  
@@ -5599,7 +5317,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15478,6 +16551,8 @@ GetPointerDeviceProperties(
+@@ -15478,6 +16494,8 @@ GetPointerDeviceProperties(
      _Inout_ UINT32* propertyCount,
      _Out_writes_opt_(*propertyCount) POINTER_DEVICE_PROPERTY *pointerProperties);
  
@@ -5608,7 +5326,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15485,6 +16560,8 @@ RegisterPointerDeviceNotifications(
+@@ -15485,6 +16503,8 @@ RegisterPointerDeviceNotifications(
      _In_ HWND window,
      _In_ BOOL notifyRange);
  
@@ -5617,7 +5335,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15493,6 +16570,8 @@ GetPointerDeviceRects(
+@@ -15493,6 +16513,8 @@ GetPointerDeviceRects(
      _Out_writes_(1) RECT* pointerDeviceRect,
      _Out_writes_(1) RECT* displayRect);
  
@@ -5626,7 +5344,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15501,6 +16580,8 @@ GetPointerDeviceCursors(
+@@ -15501,6 +16523,8 @@ GetPointerDeviceCursors(
      _Inout_ UINT32* cursorCount,
      _Out_writes_opt_(*cursorCount) POINTER_DEVICE_CURSOR_INFO *deviceCursors);
  
@@ -5635,7 +5353,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15625,6 +16706,8 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
+@@ -15625,6 +16649,8 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5644,7 +5362,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15668,6 +16751,8 @@ typedef struct tagCHANGEFILTERSTRUCT {
+@@ -15668,6 +16694,8 @@ typedef struct tagCHANGEFILTERSTRUCT {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5653,7 +5371,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15773,6 +16858,8 @@ typedef struct tagGESTURENOTIFYSTRUCT {
+@@ -15773,6 +16801,8 @@ typedef struct tagGESTURENOTIFYSTRUCT {
   * Gesture information retrieval
   *   - HGESTUREINFO is received by a window in the lParam of a WM_GESTURE message.
   */
@@ -5662,7 +5380,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15786,6 +16873,8 @@ GetGestureInfo(
+@@ -15786,6 +16816,8 @@ GetGestureInfo(
   *   - Size, in bytes, of the extra argument data is available in the cbExtraArgs
   *     field of the GESTUREINFO structure retrieved using the GetGestureInfo function.
   */
@@ -5671,7 +5389,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15804,6 +16893,8 @@ GetGestureExtraArgs(
+@@ -15804,6 +16836,8 @@ GetGestureExtraArgs(
   *     one of the PostMessage or SendMessage class of API functions, the handle
   *     is transfered with the message and need not be closed by the application.
   */
@@ -5680,7 +5398,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15872,6 +16963,8 @@ typedef struct tagGESTURECONFIG {
+@@ -15872,6 +16906,8 @@ typedef struct tagGESTURECONFIG {
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5689,7 +5407,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15887,6 +16980,8 @@ SetGestureConfig(
+@@ -15887,6 +16923,8 @@ SetGestureConfig(
  #define GCF_INCLUDE_ANCESTORS           0x00000001      // If specified, GetGestureConfig returns consolidated configuration
                                                          // for the specified window and it's parent window chain
  
@@ -5698,7 +5416,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15927,6 +17022,8 @@ GetGestureConfig(
+@@ -15927,6 +16965,8 @@ GetGestureConfig(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -5707,7 +5425,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15934,6 +17031,8 @@ ShutdownBlockReasonCreate(
+@@ -15934,6 +16974,8 @@ ShutdownBlockReasonCreate(
      _In_ HWND hWnd,
      _In_ LPCWSTR pwszReason);
  
@@ -5716,7 +5434,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15942,6 +17041,8 @@ ShutdownBlockReasonQuery(
+@@ -15942,6 +16984,8 @@ ShutdownBlockReasonQuery(
      _Out_writes_opt_(*pcchBuff) LPWSTR pwszBuff,
      _Inout_ DWORD *pcchBuff);
  
@@ -5725,7 +5443,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15990,12 +17091,15 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
+@@ -15990,12 +17034,15 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
  /*
   * API to determine the input source of the current messsage.
   */
@@ -5741,7 +5459,7 @@ index f99e9294..5f99c126 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -16097,12 +17201,16 @@ SetDisplayAutoRotationPreferences(
+@@ -16097,12 +17144,16 @@ SetDisplayAutoRotationPreferences(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
