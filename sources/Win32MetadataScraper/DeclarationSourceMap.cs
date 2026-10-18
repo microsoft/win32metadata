@@ -10,10 +10,23 @@ namespace Win32MetadataScraper
 {
     internal static class DeclarationSourceMap
     {
-        internal static unsafe void Write(CXCursor root, string sourceFile, string[] arguments, string outputPath)
+        internal static unsafe void Write(CXCursor root, string sourceFile, string[] arguments, string outputPath,
+            IReadOnlyCollection<string> symbols = null)
         {
             var declarations = new List<Declaration>();
             var files = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            var selected = symbols == null ? null : new HashSet<string>(symbols, StringComparer.Ordinal);
+            var visited = selected == null ? null : new HashSet<CXCursor>();
+            var kinds = new HashSet<CXCursorKind>
+            {
+                CXCursorKind.CXCursor_FunctionDecl, CXCursorKind.CXCursor_StructDecl, CXCursorKind.CXCursor_ClassDecl,
+            };
+            if (selected != null)
+                kinds.UnionWith(new[]
+                {
+                    CXCursorKind.CXCursor_ParmDecl, CXCursorKind.CXCursor_FieldDecl,
+                    CXCursorKind.CXCursor_TypedefDecl, CXCursorKind.CXCursor_EnumDecl, CXCursorKind.CXCursor_EnumConstantDecl,
+                });
             Walk(root);
             Directory.CreateDirectory(Path.GetDirectoryName(Path.GetFullPath(outputPath)));
             File.WriteAllText(outputPath, JsonSerializer.Serialize(new
@@ -22,15 +35,32 @@ namespace Win32MetadataScraper
                 translationUnit = Path.GetFullPath(sourceFile),
                 partition = Path.GetFileName(Path.GetDirectoryName(Path.GetFullPath(sourceFile))),
                 arguments,
-                declarationKinds = new[] { "CXCursor_FunctionDecl", "CXCursor_StructDecl", "CXCursor_ClassDecl" },
+                declarationKinds = kinds.Select(kind => kind.ToString()).OrderBy(kind => kind, StringComparer.Ordinal),
+                selectedSymbols = symbols ?? Array.Empty<string>(),
                 files,
                 declarations = declarations.OrderBy(value => value.File, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(value => value.Start).ThenBy(value => value.Id, StringComparer.Ordinal),
             }, new JsonSerializerOptions { WriteIndented = true, PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
 
-            void Walk(CXCursor cursor)
+            bool IsSelected(CXCursor cursor)
             {
-                if (cursor.Kind is CXCursorKind.CXCursor_FunctionDecl or CXCursorKind.CXCursor_StructDecl or CXCursorKind.CXCursor_ClassDecl)
+                if (selected == null)
+                    return true;
+                for (var current = cursor; !current.IsTranslationUnit && !current.Equals(default(CXCursor));
+                    current = current.SemanticParent)
+                {
+                    using var name = current.Spelling;
+                    if (selected.Contains(name.ToString()) || selected.Contains(QualifiedName(current)))
+                        return true;
+                }
+                return false;
+            }
+
+            void Walk(CXCursor cursor, int? parameterIndex = null)
+            {
+                if (visited != null && !visited.Add(cursor))
+                    return;
+                if (kinds.Contains(cursor.Kind) && IsSelected(cursor))
                 {
                     cursor.Location.GetExpansionLocation(out var file, out uint line, out uint column, out uint offset);
                     cursor.Location.GetSpellingLocation(out var spellingFile, out _, out _, out uint spellingOffset);
@@ -44,17 +74,21 @@ namespace Win32MetadataScraper
                         using var spelling = cursor.Spelling;
                         using var identity = cursor.Usr;
                         using var type = cursor.Type.Spelling;
+                        using var parentIdentity = cursor.SemanticParent.Usr;
+                        using var typeIdentity = cursor.Type.CanonicalType.Declaration.Usr;
                         declarations.Add(new Declaration(
                             identity.ToString(), spelling.ToString(), QualifiedName(cursor),
                             cursor.Kind.ToString(), type.ToString(), path,
                             line, column, offset, start, end, cursor.IsDefinition,
-                            spellingFile.ToString(), spellingOffset, startFile.ToString(), endFile.ToString()));
+                            spellingFile.ToString(), spellingOffset, startFile.ToString(), endFile.ToString(),
+                            parentIdentity.ToString(), QualifiedName(cursor.SemanticParent), parameterIndex, typeIdentity.ToString()));
                     }
                 }
+                int nextParameter = 0;
                 cursor.VisitChildren((child, parent, data) =>
                 {
                     if (child.IsDeclaration || child.IsTranslationUnit)
-                        Walk(child);
+                        Walk(child, child.Kind == CXCursorKind.CXCursor_ParmDecl ? nextParameter++ : null);
                     return CXChildVisitResult.CXChildVisit_Continue;
                 }, default);
             }
@@ -78,6 +112,6 @@ namespace Win32MetadataScraper
         private sealed record Declaration(
             string Id, string Name, string QualifiedName, string Kind, string Type, string File, uint Line, uint Column, uint Offset,
             uint Start, uint End, bool IsDefinition, string SpellingFile, uint SpellingOffset,
-            string StartFile, string EndFile);
+            string StartFile, string EndFile, string ParentId, string ParentQualifiedName, int? ParameterIndex, string TypeDeclarationId);
     }
 }

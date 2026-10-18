@@ -46,6 +46,54 @@ DECLARE(Expanded)
         }
 
         [Fact]
+        public void DeclarationMapSymbolSelectionRequiresAnOutputMap()
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", "void Selected(int value);");
+            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"), "--declaration-map-symbol\nSelected\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("--declaration-map-symbol requires --declaration-map", fixture.Diagnostics);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void SelectedDeclarationMapBindsNamedAndUnnamedParametersAndRecordFields(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef struct Record { unsigned flags; short mode; } RecordAlias;
+void Selected(unsigned flags, unsigned);
+namespace Other { void Selected(float flags); }
+void Unrelated(unsigned flags);
+");
+            string path = AddMapOption(fixture);
+            File.AppendAllText(Path.Combine(fixture.DirectoryPath, "test.rsp"), "--declaration-map-symbol\nRecord\nRecordAlias\nSelected\n");
+            byte[] before = File.ReadAllBytes(fixture.Header);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(before, File.ReadAllBytes(fixture.Header));
+            Assert.False(File.Exists(fixture.Output));
+            using var map = JsonDocument.Parse(File.ReadAllText(path));
+            var declarations = map.RootElement.GetProperty("declarations").EnumerateArray().ToArray();
+            Assert.DoesNotContain(declarations, row => row.GetProperty("qualifiedName").GetString().Contains("Unrelated", StringComparison.Ordinal));
+            var function = Assert.Single(declarations.Where(row => row.GetProperty("kind").GetString() == "CXCursor_FunctionDecl" &&
+                row.GetProperty("qualifiedName").GetString() == "Selected"));
+            var parameters = declarations.Where(row => row.GetProperty("kind").GetString() == "CXCursor_ParmDecl" &&
+                row.GetProperty("parentId").GetString() == function.GetProperty("id").GetString()).ToArray();
+            Assert.Equal(new[] { 0, 1 }, parameters.Select(row => row.GetProperty("parameterIndex").GetInt32()));
+            Assert.Equal(new[] { "flags", "" }, parameters.Select(row => row.GetProperty("name").GetString()));
+            var field = Assert.Single(declarations.Where(row => row.GetProperty("qualifiedName").GetString() == "Record::mode"));
+            Assert.Equal("CXCursor_FieldDecl", field.GetProperty("kind").GetString());
+            Assert.Equal("Record", field.GetProperty("parentQualifiedName").GetString());
+            Assert.Equal("mode", Encoding.UTF8.GetString(before, field.GetProperty("spellingOffset").GetInt32(), 4));
+            var aliases = declarations.Where(row => row.GetProperty("kind").GetString() == "CXCursor_TypedefDecl" &&
+                row.GetProperty("name").GetString() == "RecordAlias").ToArray();
+            Assert.NotEmpty(aliases);
+            Assert.All(aliases, alias => Assert.Equal(field.GetProperty("parentId").GetString(),
+                alias.GetProperty("typeDeclarationId").GetString()));
+            Assert.Contains(declarations, row => row.GetProperty("qualifiedName").GetString() == "Other::Selected::flags");
+        }
+
+        [Fact]
         public void BulkAuthoringPreservesBytesCoversRedeclarationsAndRetainsUnboundFacts()
         {
             using var fixture = new AuthoringFixture(

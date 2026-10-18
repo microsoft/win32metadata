@@ -61,6 +61,7 @@ class Program
         "--auto-remaps-file",
         "--config",
         "--declaration-map",
+        "--declaration-map-symbol",
         "--exclude",
         "--exclude-auto-remap",
         "--file",
@@ -119,6 +120,14 @@ class Program
             string outputFile = settings.GetValueOrDefault("--output")?.LastOrDefault();
             string ns = settings.GetValueOrDefault("--namespace")?.LastOrDefault();
             string headerFile = settings.GetValueOrDefault("--headerFile")?.LastOrDefault();
+            string declarationMap = settings.GetValueOrDefault("--declaration-map")?.SingleOrDefault();
+            var declarationMapSymbols = settings.GetValueOrDefault("--declaration-map-symbol");
+
+            if (declarationMapSymbols != null && (declarationMap == null || declarationMapSymbols.Count == 0))
+            {
+                Console.Error.WriteLine("Error: --declaration-map-symbol requires --declaration-map and at least one native symbol");
+                return 1;
+            }
 
             if (sourceFile == null || outputFile == null || ns == null)
             {
@@ -194,10 +203,9 @@ class Program
             using var translationUnit = TranslationUnit.GetOrCreate(cxHandle);
             Debug.Assert(translationUnit is not null);
 
-            string declarationMap = settings.GetValueOrDefault("--declaration-map")?.SingleOrDefault();
             if (declarationMap != null)
             {
-                DeclarationSourceMap.Write(translationUnit.Handle.Cursor, sourceFile, clangArgs, declarationMap);
+                DeclarationSourceMap.Write(translationUnit.Handle.Cursor, sourceFile, clangArgs, declarationMap, declarationMapSymbols);
                 return 0;
             }
 

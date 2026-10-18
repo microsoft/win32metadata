@@ -33,12 +33,20 @@ SDK header or original IDL.
 
 ### Bulk native-header annotation authoring
 
-`--declaration-map` followed by a JSON output path exports native free-function
+`--declaration-map` followed by a JSON output path exports native function and record
 identities after the normal Clang parse, without generating bindings or remaps.
 The schema includes the translation unit, partition, compiler arguments, source
 SHA256 values, USRs, native qualified names, types, and spelling/expansion locations.
 Offsets and half-open declaration extents are **bytes**, not character positions.
 This is an opt-in authoring aid; ordinary scraping is unchanged.
+
+Add `--declaration-map-symbol` followed by native names or qualified names to export
+only those declarations and their members. This bounded mode also includes parameters,
+fields, typedefs, enums and enum constants, with parent USRs, canonical type-declaration
+USRs, and zero-based native parameter ordinals (including unnamed parameters). An
+unqualified name retains matching declarations in every namespace and physical owner;
+it does not establish unique ownership. The default, unfiltered map retains its
+existing declaration kinds.
 
 For explicitly allocated original-header owners, the bulk helper can export maps
 for all three architectures and propose cumulative SDK patches. Map exports use
