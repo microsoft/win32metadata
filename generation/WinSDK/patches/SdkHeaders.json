@@ -3351,6 +3351,12 @@
       "sourceSha256": "95B5AF91D315E83F299BBB8C629626DB6A5A67BEFA98754BF5F834F50B1AAE75",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\portabledeviceconnectapi.idl",
       "sdkSha256": "D9C89638BA317E16E30CECC70E1F75BD902ED69A024BC15E4D1913B8BA52899F"
+    },
+    {
+      "path": "um\\msclus.h",
+      "sourceSha256": "28045F0B639DA6118CE67E3D9B992B3974350708D2FB758174105D683922C6A3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msclus.idl",
+      "sdkSha256": "59BC9E6F0BE0B6B579A3001DEE502FDE7E043266D61342FCAA00558BDC452F7D"
     }
   ],
   "midl": {
@@ -4908,6 +4914,21 @@
         "path": "um\\PortableDeviceConnectImports.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\PortableDeviceConnectImports.idl",
         "sdkSha256": "A0BCA4C86B098C72AE8300006F83C885E05534BF0E8060FE1AED0AF8FE0C93B5"
+      },
+      {
+        "path": "shared\\winerror.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\winerror.h",
+        "sdkSha256": "0284EA46280C14063BB714D08C9EC48DE18DE6A7F0384323B263FEC234428833"
+      },
+      {
+        "path": "um\\clusapi.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\clusapi.h",
+        "sdkSha256": "E482D9DB059AD2EB16E9AEB870E4AA6DB1B3621673B4ED71DA17EBA87563216C"
+      },
+      {
+        "path": "um\\msclus.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msclus.idl",
+        "sdkSha256": "59BC9E6F0BE0B6B579A3001DEE502FDE7E043266D61342FCAA00558BDC452F7D"
       }
     ],
     "outputs": [
@@ -5694,6 +5715,10 @@
       {
         "source": "um\\portabledeviceconnectapi.idl",
         "path": "um\\portabledeviceconnectapi.h"
+      },
+      {
+        "source": "um\\msclus.idl",
+        "path": "um\\msclus.h"
       }
     ]
   },
@@ -6435,6 +6460,7 @@
     "um\\msimeapi.idl.patch",
     "um\\msvidctl.idl.patch",
     "um\\playtomanagerinterop.idl.patch",
-    "um\\portabledeviceconnectapi.idl.patch"
+    "um\\portabledeviceconnectapi.idl.patch",
+    "um\\msclus.idl.patch"
   ]
 }

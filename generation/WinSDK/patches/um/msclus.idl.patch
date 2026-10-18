@@ -1,0 +1,20 @@
+diff --git a/um/msclus.idl b/um/msclus.idl
+index 5420b708..83b06387 100644
+--- a/um/msclus.idl
++++ b/um/msclus.idl
+@@ -11,6 +11,7 @@
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -1912,6 +1913,7 @@ interface ISClusPartition : IDispatch
+ 
+ /////////////////////////////////////////////////
+ // ISClusPartitionEx
++_Win32_AnnotateInterface_(ISClusPartitionEx, _Win32_SupportedOS_Server2008_)
+ [
+     oleautomation,
+     hidden,
