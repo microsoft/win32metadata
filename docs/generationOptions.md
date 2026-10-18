@@ -98,6 +98,10 @@ existing preparation/MIDL and native checks before claiming applied output or
 removing equivalent sidecar rows. Authored source is not compile or full-SDK
 acceptance.
 
+Preparation accepts original CRLF line endings, including first-line insertions,
+while keeping strict rejection of trailing spaces/tabs and space-before-tab
+indentation errors.
+
 ### Remapping
 
 ````

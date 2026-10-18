@@ -65,6 +65,34 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData("// annotation", true)]
+        [InlineData("// annotation ", false)]
+        [InlineData("// annotation\t", false)]
+        [InlineData(" \t// annotation", false)]
+        public void FirstLineCrLfInsertionsKeepStrictWhitespaceValidation(string firstLine, bool accepted)
+        {
+            using var fixture = new Fixture();
+            fixture.WriteFirstLinePatch(firstLine);
+            var result = fixture.Run();
+            if (accepted)
+            {
+                Assert.True(result.ExitCode == 0, result.Error + result.Output);
+                var prepared = JsonSerializer.Deserialize<PreparationResult>(result.Output);
+                Assert.Equal(Encoding.ASCII.GetBytes(firstLine + "\r\n" + Fixture.Before),
+                    File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "um", "sample.h")));
+            }
+            else
+            {
+                Assert.NotEqual(0, result.ExitCode);
+                Assert.Contains("Patch preflight failed", result.Error);
+                Assert.Contains("whitespace", result.Error);
+                Assert.Empty(Directory.GetDirectories(fixture.Output));
+            }
+            Assert.Equal(Encoding.ASCII.GetBytes(Fixture.Before), File.ReadAllBytes(fixture.Header));
+            Assert.Equal(Encoding.ASCII.GetBytes(Fixture.Before), File.ReadAllBytes(fixture.SdkHeader));
+        }
+
+        [Theory]
         [InlineData("stage", "MIDL")]
         [InlineData("sdk", "SDK package mismatch")]
         [InlineData("preimage", "preimage mismatch")]
@@ -769,6 +797,15 @@ namespace Win32MetadataScraperTests
                 string text = $"diff --git a/{oldPath} b/{path}\n{metadata}" +
                     $"--- a/{oldPath}\n+++ b/{path}\n@@ -1,4 +1,4 @@\n #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" +
                     $"-#define VALUE {before}\r\n+#define VALUE {after}\r\n #endif\r\n";
+                File.WriteAllText(this.patch, text, new UTF8Encoding(false));
+            }
+
+            internal void WriteFirstLinePatch(string firstLine)
+            {
+                string text = "diff --git a/um/sample.h b/um/sample.h\n" +
+                    "--- a/um/sample.h\n+++ b/um/sample.h\n@@ -1,4 +1,5 @@\n" +
+                    "+" + firstLine + "\r\n #ifndef SAMPLE_H\r\n #define SAMPLE_H\r\n" +
+                    " #define VALUE 1\r\n #endif\r\n";
                 File.WriteAllText(this.patch, text, new UTF8Encoding(false));
             }
 

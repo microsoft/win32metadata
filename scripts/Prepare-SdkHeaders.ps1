@@ -66,7 +66,8 @@ function Resolve-Child([string]$Root, [string]$RelativePath) {
 }
 
 function Invoke-HeaderPatch($Patch, [string]$Root) {
-    $arguments = @('-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
+    $arguments = @('-c', 'core.whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol',
+        '-C', $repoRoot, 'apply', '--unsafe-paths', '-p1', "--directory=$Root", '--whitespace=error-all')
     $output = & git @arguments --check -- $Patch.fullPath 2>&1
     if ($LASTEXITCODE -ne 0) {
         throw "Patch preflight failed for $($Patch.path):`n$($output -join "`n")"
