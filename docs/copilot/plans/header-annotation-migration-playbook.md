@@ -112,6 +112,11 @@ It works for qualified field cases; type/interface and non-local callable target
 have additional restrictions. Existing parameter/retval marker comments are a
 limited compatibility bridge, not a generic new-metadata transport.
 
+For plain input pointer parameters without authored annotations, preserve MIDL's
+compiler-derived RPC SAL instead of injecting `_In_`: that override can erase
+native interface-pointer optionality. Scalar inputs, buffer counts, outputs,
+retval, and existing annotation payloads retain their separate conversion paths.
+
 Use `_Win32_AnnotateInterface_` for interface facts, grouped in an existing opening
 quote region. Use `_Win32_AnnotateMethod_(Interface::Method, annotation)` after the
 complete interface definitions, grouped with an existing trailing quote region.
