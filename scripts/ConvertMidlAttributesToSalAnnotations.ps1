@@ -140,6 +140,14 @@ foreach ($line in (Get-Content $inputFileName)) {
             continue
         }
 
+        # MIDL derives pointer optionality from its native type and pointer defaults.
+        if ($in -and !$out -and !$existingAnnotation.Success -and
+            $attributeList -match '^\s*(?:in|unique)(?:\s*,\s*(?:in|unique))*\s*$' -and
+            $line.Substring($attributeListIndex) -match '^\s*[\w:]+(?:\s+[\w:]+)*\s*\*') {
+            $startAt = $attributeListIndex
+            continue
+        }
+
         $annotation = $null
 
         $pointerOperation = $null
