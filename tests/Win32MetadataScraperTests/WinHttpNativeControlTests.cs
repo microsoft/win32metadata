@@ -2368,6 +2368,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         private static void AssertDeviceInstallationGroupContributions(List<string> native, List<string> annotations)
         {
+            string[] configurations = annotations.Where(value => value.StartsWith("CM_LOG_CONF|Enum(", StringComparison.Ordinal)).ToArray();
+            Assert.NotEmpty(configurations);
+            foreach (string configuration in configurations)
+                Assert.Equal(new[] { "BASIC_LOG_CONF", "FILTERED_LOG_CONF", "ALLOC_LOG_CONF", "BOOT_LOG_CONF",
+                    "FORCED_LOG_CONF", "OVERRIDE_LOG_CONF", "NUM_LOG_CONF" },
+                    configuration[(configuration.IndexOf('(') + 1)..^1].Split(',').Select(value => value.Trim()));
+            annotations.RemoveAll(configurations.Contains);
+            Assert.Equal(2, native.RemoveAll(value => value == "typedef CM_LOG_CONF unsigned long"));
+            Assert.True(annotations.Remove("ulFlags|AssociatedEnum"));
+            Assert.True(annotations.Remove("ulFlags|AssociatedEnum"));
             var groupAnnotations = annotations.Select(value => Regex.Match(value,
                 @"^(?<name>[^|]+)\|(?<flags>Flags)?Enum\((?<members>[^)]+)\)$"))
                 .Where(match => match.Success).ToArray();
@@ -2696,6 +2706,80 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                             {
                                 partition, architecture.Item1, architecture.Item2, mode.Item1, mode.Item2, enabled,
                             };
+        }
+
+        [NativeMigrationTheory("WINHTTP_DEVICE_POSITIVE_BEFORE")]
+        [MemberData(nameof(DevicePositiveEnumNativeControls))]
+        public void DevicePositiveEnumCarriersPreserveOriginalNativeAbiAndSal(string partition, string architecture, string target)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            using var report = System.Text.Json.JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_POSITIVE_ENUM_CONTRACTS")));
+            var groups = report.RootElement.GetProperty("selected").EnumerateArray().ToArray();
+            string[] headers = report.RootElement.GetProperty("authoredHeaders").EnumerateArray()
+                .Select(header => Path.GetFileName(header.GetString())).ToArray();
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_DEVICE_POSITIVE_BEFORE"), partition,
+                architecture, target, headers, "", metadataEnabled: true, annotations: beforeAnnotations,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics);
+            var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"), partition,
+                architecture, target, headers, "", metadataEnabled: true, annotations: afterAnnotations,
+                salAnnotations: afterSal, diagnostics: afterDiagnostics).ToList();
+            Assert.NotEmpty(before);
+            foreach (var group in groups)
+            {
+                string carrier = "typedef " + group.GetProperty("name").GetString() + " " + group.GetProperty("nativeStorage").GetString();
+                Assert.DoesNotContain(carrier, before);
+                after.RemoveAll(fact => fact == carrier);
+            }
+            Assert.Equal(before, after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (var use in groups.SelectMany(group => group.GetProperty("uses").EnumerateArray()))
+            {
+                if (!use.TryGetProperty("nativeRoute", out var route) || route.GetProperty("partition").GetString() != partition)
+                    continue;
+                string[] targetParts = use.GetProperty("symbol").GetString().Split("::", StringSplitOptions.None);
+                string function = "function " + string.Join("::", targetParts[..^1]) + " ";
+                bool present = route.GetProperty("architectures").EnumerateArray().Any(value => value.GetString() == architecture);
+                Assert.Equal(present, before.Any(fact => fact.StartsWith(function, StringComparison.Ordinal)));
+                Assert.Equal(present, after.Any(fact => fact.StartsWith(function, StringComparison.Ordinal)));
+            }
+            foreach (string annotation in beforeAnnotations)
+                Assert.True(afterAnnotations.Remove(annotation), "Lost an existing native metadata fact: " + annotation);
+            foreach (string annotation in afterAnnotations)
+            {
+                if (annotation.EndsWith("|AssociatedEnum", StringComparison.Ordinal))
+                    continue;
+                var match = Regex.Match(annotation, @"^(?<name>[^|]+)\|(?<flags>Flags)?Enum\((?<members>[^)]+)\)$");
+                Assert.True(match.Success, "Unexpected new native metadata fact: " + annotation);
+                var group = Assert.Single(groups.Where(item => item.GetProperty("name").GetString() == match.Groups["name"].Value));
+                Assert.Equal(group.GetProperty("flags").GetBoolean(), match.Groups["flags"].Success);
+                Assert.Equal(group.GetProperty("members").EnumerateArray().Select(member => member.GetProperty("name").GetString()),
+                    match.Groups["members"].Value.Split(',').Select(member => member.Trim()));
+            }
+            Assert.NotEmpty(afterAnnotations);
+            this.output.WriteLine($"{partition}/{architecture}: {before.Length} unchanged native/layout facts, " +
+                $"{beforeSal.Count} unchanged SAL occurrences, all prior metadata retained; " +
+                $"{afterAnnotations.Count} new group/use AST annotations checked by normal exact-value/use projection.");
+        }
+
+        public static IEnumerable<object[]> DevicePositiveEnumNativeControls()
+        {
+            foreach (string partition in new[] { "Controls", "Controls.RichEdit", "Debug", "DevInst", "DlgBox", "Fs", "Gdi", "Shell", "Wds" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    yield return new object[] { partition, architecture.Item1, architecture.Item2 };
         }
 
         private const string BroadSourceSalProbe = @"

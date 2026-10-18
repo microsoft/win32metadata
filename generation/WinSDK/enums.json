@@ -4,39 +4,6 @@
 [
 
   {
-    "name": "SET_THEME_APP_PROPERTIES_FLAGS",
-    "type": "uint",
-    "flags": true,
-    "members": [
-      {
-        "name": "ALLOW_NONCLIENT",
-        "value": "(1 << 0)"
-      },
-      {
-        "name": "ALLOW_CONTROLS",
-        "value": "(1 << 1)"
-      },
-      {
-        "name": "ALLOW_WEBCONTENT",
-        "value": "(1 << 2)"
-      },
-      {
-        "name": "VALIDBITS",
-        "value": "(ALLOW_NONCLIENT|ALLOW_CONTROLS|ALLOW_WEBCONTENT)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetThemeAppProperties",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "GetThemeAppProperties",
-        "parameter": "return"
-      }
-    ]
-  },
-  {
     "name": "THREAD_CREATION_FLAGS",
     "flags": true,
     "members": [
@@ -164,25 +131,6 @@
       {
         "method": "CommDlgExtendedError",
         "parameter": "return"
-      }
-    ]
-  },
-  {
-    "name": "CHOOSECOLOR_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CC_",
-      "header": "commdlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "CHOOSECOLORW",
-        "field": "Flags"
-      },
-      {
-        "struct": "CHOOSECOLORA",
-        "field": "Flags"
       }
     ]
   },
@@ -969,33 +917,6 @@
     ]
   },
   {
-    "name": "DRAGLISTINFO_NOTIFICATION_FLAGS",
-    "members": [
-      {
-        "name": "DL_BEGINDRAG",
-        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 133"
-      },
-      {
-        "name": "DL_CANCELDRAG",
-        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 136"
-      },
-      {
-        "name": "DL_DRAGGING",
-        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 134"
-      },
-      {
-        "name": "DL_DROPPED",
-        "value": "Windows.Win32.UI.WindowsAndMessaging.Apis.WM_USER + 135"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DRAGLISTINFO",
-        "field": "uNotification"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.System.Memory",
     "name": "SECTION_FLAGS",
     "flags": true,
@@ -1654,152 +1575,6 @@
       {
         "method": "WTSSendMessageW",
         "parameter": "pResponse"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "OPEN_FILENAME_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "OFN_READONLY",
-        "value": "0x00000001"
-      },
-      {
-        "name": "OFN_OVERWRITEPROMPT",
-        "value": "0x00000002"
-      },
-      {
-        "name": "OFN_HIDEREADONLY",
-        "value": "0x00000004"
-      },
-      {
-        "name": "OFN_NOCHANGEDIR",
-        "value": "0x00000008"
-      },
-      {
-        "name": "OFN_SHOWHELP",
-        "value": "0x00000010"
-      },
-      {
-        "name": "OFN_ENABLEHOOK",
-        "value": "0x00000020"
-      },
-      {
-        "name": "OFN_ENABLETEMPLATE",
-        "value": "0x00000040"
-      },
-      {
-        "name": "OFN_ENABLETEMPLATEHANDLE",
-        "value": "0x00000080"
-      },
-      {
-        "name": "OFN_NOVALIDATE",
-        "value": "0x00000100"
-      },
-      {
-        "name": "OFN_ALLOWMULTISELECT",
-        "value": "0x00000200"
-      },
-      {
-        "name": "OFN_EXTENSIONDIFFERENT",
-        "value": "0x00000400"
-      },
-      {
-        "name": "OFN_PATHMUSTEXIST",
-        "value": "0x00000800"
-      },
-      {
-        "name": "OFN_FILEMUSTEXIST",
-        "value": "0x00001000"
-      },
-      {
-        "name": "OFN_CREATEPROMPT",
-        "value": "0x00002000"
-      },
-      {
-        "name": "OFN_SHAREAWARE",
-        "value": "0x00004000"
-      },
-      {
-        "name": "OFN_NOREADONLYRETURN",
-        "value": "0x00008000"
-      },
-      {
-        "name": "OFN_NOTESTFILECREATE",
-        "value": "0x00010000"
-      },
-      {
-        "name": "OFN_NONETWORKBUTTON",
-        "value": "0x00020000"
-      },
-      {
-        "name": "OFN_NOLONGNAMES",
-        "value": "0x00040000"
-      },
-      {
-        "name": "OFN_EXPLORER",
-        "value": "0x00080000"
-      },
-      {
-        "name": "OFN_NODEREFERENCELINKS",
-        "value": "0x00100000"
-      },
-      {
-        "name": "OFN_LONGNAMES",
-        "value": "0x00200000"
-      },
-      {
-        "name": "OFN_ENABLEINCLUDENOTIFY",
-        "value": "0x00400000"
-      },
-      {
-        "name": "OFN_ENABLESIZING",
-        "value": "0x00800000"
-      },
-      {
-        "name": "OFN_DONTADDTORECENT",
-        "value": "0x02000000"
-      },
-      {
-        "name": "OFN_FORCESHOWHIDDEN",
-        "value": "0x10000000"
-      }
-    ],
-    "uses": [
-      {
-        "method": "OPENFILENAMEA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "OPENFILENAMEW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "OPEN_FILENAME_FLAGS_EX",
-    "flags": true,
-    "members": [
-      {
-        "name": "OFN_EX_NONE",
-        "value": "0x00000000"
-      },
-      {
-        "name": "OFN_EX_NOPLACESBAR",
-        "value": "0x00000001"
-      }
-    ],
-    "uses": [
-      {
-        "method": "OPENFILENAMEA",
-        "parameter": "FlagsEx"
-      },
-      {
-        "method": "OPENFILENAMEW",
-        "parameter": "FlagsEx"
       }
     ]
   },
@@ -8712,20 +8487,6 @@
     ]
   },
   {
-    "name": "OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS",
-    "members": [
-      {
-        "name": "WCT_ASYNC_OPEN_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "OpenThreadWaitChainSession",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.System.Registry",
     "name": "REG_RESTORE_KEY_FLAGS",
     "members": [
@@ -9333,24 +9094,6 @@
     ]
   },
   {
-    "name": "OPEN_THEME_DATA_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "OTD_FORCE_RECT_SIZING"
-      },
-      {
-        "name": "OTD_NONCLIENT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "OpenThemeDataEx",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "QUEUE_STATUS_FLAGS",
     "flags": true,
     "members": [
@@ -9469,26 +9212,6 @@
       {
         "interface": "ITextStoreAnchorSink",
         "method": "OnTextChange",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "GET_THEME_BITMAP_FLAGS",
-    "members": [
-      {
-        "name": "GBF_DIRECT"
-      },
-      {
-        "name": "GBF_COPY"
-      },
-      {
-        "name": "GBF_VALIDBITS"
-      }
-    ],
-    "uses": [
-      {
-        "method": "GetThemeBitmap",
         "parameter": "dwFlags"
       }
     ]
@@ -10624,71 +10347,6 @@
     ]
   },
   {
-    "name": "IMAGE_LIST_DRAW_STYLE",
-    "flags": true,
-    "members": [
-      {
-        "name": "ILD_NORMAL"
-      },
-      {
-        "name": "ILD_TRANSPARENT"
-      },
-      {
-        "name": "ILD_BLEND25"
-      },
-      {
-        "name": "ILD_FOCUS"
-      },
-      {
-        "name": "ILD_BLEND50"
-      },
-      {
-        "name": "ILD_SELECTED"
-      },
-      {
-        "name": "ILD_BLEND"
-      },
-      {
-        "name": "ILD_MASK"
-      },
-      {
-        "name": "ILD_IMAGE"
-      },
-      {
-        "name": "ILD_ROP"
-      },
-      {
-        "name": "ILD_OVERLAYMASK"
-      },
-      {
-        "name": "ILD_PRESERVEALPHA"
-      },
-      {
-        "name": "ILD_SCALE"
-      },
-      {
-        "name": "ILD_DPISCALE"
-      },
-      {
-        "name": "ILD_ASYNC"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ImageList_Draw",
-        "parameter": "fStyle"
-      },
-      {
-        "method": "ImageList_DrawEx",
-        "parameter": "fStyle"
-      },
-      {
-        "method": "ImageList_GetIcon",
-        "parameter": "flags"
-      }
-    ]
-  },
-  {
     "name": "CERT_FIND_CHAIN_IN_STORE_FLAGS",
     "flags": true,
     "members": [
@@ -11010,97 +10668,6 @@
       {
         "method": "ImageDirectoryEntryToData",
         "parameter": "DirectoryEntry"
-      }
-    ]
-  },
-  {
-    "name": "WSB_PROP",
-    "type": "int",
-    "members": [
-      {
-        "name": "WSB_PROP_CXHSCROLL"
-      },
-      {
-        "name": "WSB_PROP_CXHTHUMB"
-      },
-      {
-        "name": "WSB_PROP_CXVSCROLL"
-      },
-      {
-        "name": "WSB_PROP_CYHSCROLL"
-      },
-      {
-        "name": "WSB_PROP_CYVSCROLL"
-      },
-      {
-        "name": "WSB_PROP_CYVTHUMB"
-      },
-      {
-        "name": "WSB_PROP_HBKGCOLOR"
-      },
-      {
-        "name": "WSB_PROP_HSTYLE"
-      },
-      {
-        "name": "WSB_PROP_PALETTE"
-      },
-      {
-        "name": "WSB_PROP_VBKGCOLOR"
-      },
-      {
-        "name": "WSB_PROP_VSTYLE"
-      },
-      {
-        "name": "WSB_PROP_WINSTYLE"
-      }
-    ],
-    "uses": [
-      {
-        "method": "FlatSB_GetScrollProp",
-        "parameter": "propIndex"
-      },
-      {
-        "method": "FlatSB_GetScrollPropPtr",
-        "parameter": "propIndex"
-      }
-    ]
-  },
-  {
-    "name": "DISKQUOTA_USERNAME_RESOLVE",
-    "members": [
-      {
-        "name": "DISKQUOTA_USERNAME_RESOLVE_ASYNC",
-        "value": "2"
-      },
-      {
-        "name": "DISKQUOTA_USERNAME_RESOLVE_NONE",
-        "value": "0"
-      },
-      {
-        "name": "DISKQUOTA_USERNAME_RESOLVE_SYNC",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IDiskQuotaControl",
-        "method": "FindUserSid",
-        "parameter": "fNameResolution"
-      },
-      {
-        "interface": "IDiskQuotaControl",
-        "method": "AddUserSid",
-        "parameter": "fNameResolution"
-      },
-      {
-        "interface": "IDiskQuotaControl",
-        "method": "CreateEnumUsers",
-        "parameter": "fNameResolution"
-      },
-      {
-        "interface": "IDiskQuotaControl",
-        "method": "AddUserName",
-        "parameter": "fNameResolution"
       }
     ]
   },
@@ -12647,26 +12214,6 @@
     ]
   },
   {
-    "name": "WAIT_CHAIN_THREAD_OPTIONS",
-    "members": [
-      {
-        "name": "WCT_OUT_OF_PROC_COM_FLAG"
-      },
-      {
-        "name": "WCT_OUT_OF_PROC_CS_FLAG"
-      },
-      {
-        "name": "WCT_OUT_OF_PROC_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "GetThreadWaitChain",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "name": "FONT_LICENSE_PRIVS",
     "members": [
       {
@@ -13249,23 +12796,6 @@
     ]
   },
   {
-    "name": "IMAGE_LIST_COPY_FLAGS",
-    "members": [
-      {
-        "name": "ILCF_MOVE"
-      },
-      {
-        "name": "ILCF_SWAP"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ImageList_Copy",
-        "parameter": "uFlags"
-      }
-    ]
-  },
-  {
     "name": "DLG_BUTTON_CHECK_STATE",
     "members": [
       {
@@ -13430,27 +12960,6 @@
       {
         "method": "CryptMsgOpenToEncode",
         "parameter": "dwMsgType"
-      }
-    ]
-  },
-  {
-    "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
-    "type": "short",
-    "members": [
-      {
-        "name": "TTFCFP_STD_MAC_CHAR_SET"
-      },
-      {
-        "name": "TTFCFP_SYMBOL_CHAR_SET"
-      },
-      {
-        "name": "TTFCFP_UNICODE_CHAR_SET"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CreateFontPackage",
-        "parameter": "usSubsetEncoding"
       }
     ]
   },
@@ -14247,27 +13756,6 @@
       {
         "method": "DrawCaption",
         "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "name": "DRAW_THEME_PARENT_BACKGROUND_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "DTPB_WINDOWDC"
-      },
-      {
-        "name": "DTPB_USECTLCOLORSTATIC"
-      },
-      {
-        "name": "DTPB_USEERASEBKGND"
-      }
-    ],
-    "uses": [
-      {
-        "method": "DrawThemeParentBackgroundEx",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -15469,24 +14957,6 @@
     ]
   },
   {
-    "name": "CREATE_FONT_PACKAGE_SUBSET_PLATFORM",
-    "type": "short",
-    "members": [
-      {
-        "name": "TTFCFP_UNICODE_PLATFORMID"
-      },
-      {
-        "name": "TTFCFP_ISO_PLATFORMID"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CreateFontPackage",
-        "parameter": "usSubsetPlatform"
-      }
-    ]
-  },
-  {
     "name": "CERT_SYSTEM_STORE_FLAGS",
     "members": [
       {
@@ -16163,34 +15633,6 @@
     ]
   },
   {
-    "name": "RICH_EDIT_GET_OBJECT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "REO_GETOBJ_POLEOBJ"
-      },
-      {
-        "name": "REO_GETOBJ_PSTG"
-      },
-      {
-        "name": "REO_GETOBJ_POLESITE"
-      },
-      {
-        "name": "REO_GETOBJ_NO_INTERFACES"
-      },
-      {
-        "name": "REO_GETOBJ_ALL_INTERFACES"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IRichEditOle",
-        "method": "GetObject",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "GET_TAPE_DRIVE_PARAMETERS_OPERATION",
     "members": [
       {
@@ -16366,32 +15808,6 @@
     ]
   },
   {
-    "name": "HDI_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "HDI_",
-      "header": "CommCtrl.h"
-    },
-    "uses": [
-      {
-        "struct": "NMHDDISPINFOA",
-        "field": "mask"
-      },
-      {
-        "struct": "NMHDDISPINFOW",
-        "field": "mask"
-      },
-      {
-        "struct": "HDITEMW",
-        "field": "mask"
-      },
-      {
-        "struct": "HDITEMA",
-        "field": "mask"
-      }
-    ]
-  },
-  {
     "name": "SOUND_SENTRY_GRAPHICS_EFFECT",
     "members": [
       {
@@ -16411,27 +15827,6 @@
       {
         "struct": "SOUNDSENTRYA",
         "field": "iFSGrafEffect"
-      }
-    ]
-  },
-  {
-    "name": "NMREBAR_MASK_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "RBNM_ID"
-      },
-      {
-        "name": "RBNM_LPARAM"
-      },
-      {
-        "name": "RBNM_STYLE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMREBAR",
-        "field": "dwMask"
       }
     ]
   },
@@ -16704,39 +16099,6 @@
     ]
   },
   {
-    "name": "EDITBALLOONTIP_ICON",
-    "type": "int",
-    "members": [
-      {
-        "name": "TTI_ERROR"
-      },
-      {
-        "name": "TTI_INFO"
-      },
-      {
-        "name": "TTI_NONE"
-      },
-      {
-        "name": "TTI_WARNING"
-      },
-      {
-        "name": "TTI_INFO_LARGE"
-      },
-      {
-        "name": "TTI_WARNING_LARGE"
-      },
-      {
-        "name": "TTI_ERROR_LARGE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "EDITBALLOONTIP",
-        "field": "ttiIcon"
-      }
-    ]
-  },
-  {
     "name": "WINTRUST_DATA_PROVIDER_FLAGS",
     "flags": true,
     "members": [
@@ -16891,56 +16253,6 @@
       ]
     },
   {
-    "name": "LVCOLUMNW_FORMAT",
-    "type": "int",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVCFMT_LEFT"
-      },
-      {
-        "name": "LVCFMT_RIGHT"
-      },
-      {
-        "name": "LVCFMT_CENTER"
-      },
-      {
-        "name": "LVCFMT_JUSTIFYMASK"
-      },
-      {
-        "name": "LVCFMT_IMAGE"
-      },
-      {
-        "name": "LVCFMT_BITMAP_ON_RIGHT"
-      },
-      {
-        "name": "LVCFMT_COL_HAS_IMAGES"
-      },
-      {
-        "name": "LVCFMT_FIXED_WIDTH"
-      },
-      {
-        "name": "LVCFMT_NO_DPI_SCALE"
-      },
-      {
-        "name": "LVCFMT_FIXED_RATIO"
-      },
-      {
-        "name": "LVCFMT_SPLITBUTTON"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVCOLUMNW",
-        "field": "fmt"
-      },
-      {
-        "struct": "LVCOLUMNA",
-        "field": "fmt"
-      }
-    ]
-  },
-  {
     "name": "CRYPT_IMAGE_REF_FLAGS",
     "flags": true,
     "members": [
@@ -17067,32 +16379,6 @@
       {
         "struct": "SERVICE_STATUS_PROCESS",
         "field": "dwServiceFlags"
-      }
-    ]
-  },
-  {
-    "name": "NMPGSCROLL_KEYS",
-    "type": "ushort",
-    "flags": true,
-    "members": [
-      {
-        "name": "PGK_NONE",
-        "value": "0"
-      },
-      {
-        "name": "PGK_SHIFT"
-      },
-      {
-        "name": "PGK_CONTROL"
-      },
-      {
-        "name": "PGK_MENU"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMPGSCROLL",
-        "field": "fwKeys"
       }
     ]
   },
@@ -17312,43 +16598,6 @@
       {
         "struct": "LOADED_IMAGE",
         "field": "Characteristics"
-      }
-    ]
-  },
-  {
-    "name": "COMBOBOX_EX_ITEM_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CBEIF_DI_SETITEM"
-      },
-      {
-        "name": "CBEIF_IMAGE"
-      },
-      {
-        "name": "CBEIF_INDENT"
-      },
-      {
-        "name": "CBEIF_LPARAM"
-      },
-      {
-        "name": "CBEIF_OVERLAY"
-      },
-      {
-        "name": "CBEIF_SELECTEDIMAGE"
-      },
-      {
-        "name": "CBEIF_TEXT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "COMBOBOXEXITEMW",
-        "field": "mask"
-      },
-      {
-        "struct": "COMBOBOXEXITEMA",
-        "field": "mask"
       }
     ]
   },
@@ -17599,25 +16848,6 @@
     ]
   },
   {
-    "name": "WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL",
-    "members": [
-      {
-        "name": "WDS_TRANSPORTCLIENT_AUTH",
-        "value": "1"
-      },
-      {
-        "name": "WDS_TRANSPORTCLIENT_NO_AUTH",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "WDS_TRANSPORTCLIENT_REQUEST",
-        "field": "ulAuthLevel"
-      }
-    ]
-  },
-  {
     "name": "CRYPT_XML_KEY_VALUE_TYPE",
     "members": [
       {
@@ -17641,98 +16871,6 @@
       {
         "struct": "CRYPT_XML_KEY_VALUE",
         "field": "dwType"
-      }
-    ]
-  },
-  {
-    "name": "PAGESETUPDLG_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PSD_DEFAULTMINMARGINS",
-        "value": "0"
-      },
-      {
-        "name": "PSD_DISABLEMARGINS",
-        "value": "16"
-      },
-      {
-        "name": "PSD_DISABLEORIENTATION",
-        "value": "256"
-      },
-      {
-        "name": "PSD_DISABLEPAGEPAINTING",
-        "value": "524288"
-      },
-      {
-        "name": "PSD_DISABLEPAPER",
-        "value": "512"
-      },
-      {
-        "name": "PSD_DISABLEPRINTER",
-        "value": "32"
-      },
-      {
-        "name": "PSD_ENABLEPAGEPAINTHOOK",
-        "value": "262144"
-      },
-      {
-        "name": "PSD_ENABLEPAGESETUPHOOK",
-        "value": "8192"
-      },
-      {
-        "name": "PSD_ENABLEPAGESETUPTEMPLATE",
-        "value": "32768"
-      },
-      {
-        "name": "PSD_ENABLEPAGESETUPTEMPLATEHANDLE",
-        "value": "131072"
-      },
-      {
-        "name": "PSD_INHUNDREDTHSOFMILLIMETERS",
-        "value": "8"
-      },
-      {
-        "name": "PSD_INTHOUSANDTHSOFINCHES",
-        "value": "4"
-      },
-      {
-        "name": "PSD_INWININIINTLMEASURE",
-        "value": "0"
-      },
-      {
-        "name": "PSD_MARGINS",
-        "value": "2"
-      },
-      {
-        "name": "PSD_MINMARGINS",
-        "value": "1"
-      },
-      {
-        "name": "PSD_NONETWORKBUTTON",
-        "value": "2097152"
-      },
-      {
-        "name": "PSD_NOWARNING",
-        "value": "128"
-      },
-      {
-        "name": "PSD_RETURNDEFAULT",
-        "value": "1024"
-      },
-      {
-        "name": "PSD_SHOWHELP",
-        "value": "2048"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PAGESETUPDLGA",
-        "field": "Flags"
-      },
-      {
-        "struct": "PAGESETUPDLGW",
-        "field": "Flags"
       }
     ]
   },
@@ -17977,63 +17115,6 @@
     ]
   },
   {
-    "name": "TVITEM_MASK",
-    "flags": true,
-    "members": [
-      {
-        "name": "TVIF_CHILDREN"
-      },
-      {
-        "name": "TVIF_DI_SETITEM"
-      },
-      {
-        "name": "TVIF_HANDLE"
-      },
-      {
-        "name": "TVIF_IMAGE"
-      },
-      {
-        "name": "TVIF_PARAM"
-      },
-      {
-        "name": "TVIF_SELECTEDIMAGE"
-      },
-      {
-        "name": "TVIF_STATE"
-      },
-      {
-        "name": "TVIF_TEXT"
-      },
-      {
-        "name": "TVIF_EXPANDEDIMAGE"
-      },
-      {
-        "name": "TVIF_INTEGRAL"
-      },
-      {
-        "name": "TVIF_STATEEX"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TVITEMA",
-        "field": "mask"
-      },
-      {
-        "struct": "TVITEMW",
-        "field": "mask"
-      },
-      {
-        "struct": "TVITEMEXW",
-        "field": "mask"
-      },
-      {
-        "struct": "TVITEMEXA",
-        "field": "mask"
-      }
-    ]
-  },
-  {
     "name": "AF_OP",
     "flags": true,
     "members": [
@@ -18074,112 +17155,6 @@
       {
         "struct": "USER_INFO_2",
         "field": "usri2_auth_flags"
-      }
-    ]
-  },
-  {
-    "name": "CHOOSEFONT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CF_APPLY"
-      },
-      {
-        "name": "CF_ANSIONLY"
-      },
-      {
-        "name": "CF_BOTH",
-        "value": "3"
-      },
-      {
-        "name": "CF_EFFECTS"
-      },
-      {
-        "name": "CF_ENABLEHOOK"
-      },
-      {
-        "name": "CF_ENABLETEMPLATE"
-      },
-      {
-        "name": "CF_ENABLETEMPLATEHANDLE"
-      },
-      {
-        "name": "CF_FIXEDPITCHONLY"
-      },
-      {
-        "name": "CF_FORCEFONTEXIST"
-      },
-      {
-        "name": "CF_INACTIVEFONTS"
-      },
-      {
-        "name": "CF_INITTOLOGFONTSTRUCT"
-      },
-      {
-        "name": "CF_LIMITSIZE"
-      },
-      {
-        "name": "CF_NOOEMFONTS"
-      },
-      {
-        "name": "CF_NOFACESEL"
-      },
-      {
-        "name": "CF_NOSCRIPTSEL"
-      },
-      {
-        "name": "CF_NOSIMULATIONS"
-      },
-      {
-        "name": "CF_NOSIZESEL"
-      },
-      {
-        "name": "CF_NOSTYLESEL"
-      },
-      {
-        "name": "CF_NOVECTORFONTS"
-      },
-      {
-        "name": "CF_NOVERTFONTS"
-      },
-      {
-        "name": "CF_PRINTERFONTS",
-        "value": "2"
-      },
-      {
-        "name": "CF_SCALABLEONLY"
-      },
-      {
-        "name": "CF_SCREENFONTS",
-        "value": "1"
-      },
-      {
-        "name": "CF_SCRIPTSONLY"
-      },
-      {
-        "name": "CF_SELECTSCRIPT"
-      },
-      {
-        "name": "CF_SHOWHELP"
-      },
-      {
-        "name": "CF_TTONLY"
-      },
-      {
-        "name": "CF_USESTYLE"
-      },
-      {
-        "name": "CF_WYSIWYG"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CHOOSEFONTW",
-        "field": "Flags"
-      },
-      {
-        "struct": "CHOOSEFONTA",
-        "field": "Flags"
       }
     ]
   },
@@ -18231,45 +17206,6 @@
       {
         "struct": "SHARE_INFO_2",
         "field": "shi2_permissions"
-      }
-    ]
-  },
-  {
-    "name": "TCITEMHEADERA_MASK",
-    "flags": true,
-    "members": [
-      {
-        "name": "TCIF_IMAGE"
-      },
-      {
-        "name": "TCIF_RTLREADING"
-      },
-      {
-        "name": "TCIF_TEXT"
-      },
-      {
-        "name": "TCIF_PARAM"
-      },
-      {
-        "name": "TCIF_STATE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TCITEMHEADERA",
-        "field": "mask"
-      },
-      {
-        "struct": "TCITEMHEADERW",
-        "field": "mask"
-      },
-      {
-        "struct": "TCITEMW",
-        "field": "mask"
-      },
-      {
-        "struct": "TCITEMA",
-        "field": "mask"
       }
     ]
   },
@@ -18348,29 +17284,6 @@
     ]
   },
   {
-    "name": "TCHITTESTINFO_FLAGS",
-    "members": [
-      {
-        "name": "TCHT_NOWHERE"
-      },
-      {
-        "name": "TCHT_ONITEM"
-      },
-      {
-        "name": "TCHT_ONITEMICON"
-      },
-      {
-        "name": "TCHT_ONITEMLABEL"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TCHITTESTINFO",
-        "field": "flags"
-      }
-    ]
-  },
-  {
     "name": "CERT_LOGOTYPE_OPTION",
     "members": [
       {
@@ -18384,24 +17297,6 @@
       {
         "struct": "CERT_LOGOTYPE_INFO",
         "field": "dwLogotypeInfoChoice"
-      }
-    ]
-  },
-  {
-    "name": "FINDREPLACE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "FR_",
-      "header": "commdlg.h"
-    },
-    "uses": [
-      {
-        "struct": "FINDREPLACEW",
-        "field": "Flags"
-      },
-      {
-        "struct": "FINDREPLACEA",
-        "field": "Flags"
       }
     ]
   },
@@ -18681,142 +17576,6 @@
     ]
   },
   {
-    "name": "PRINTDLGEX_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PD_ALLPAGES",
-        "value": "0"
-      },
-      {
-        "name": "PD_COLLATE",
-        "value": "16"
-      },
-      {
-        "name": "PD_CURRENTPAGE",
-        "value": "4194304"
-      },
-      {
-        "name": "PD_DISABLEPRINTTOFILE",
-        "value": "524288"
-      },
-      {
-        "name": "PD_ENABLEPRINTTEMPLATE",
-        "value": "16384"
-      },
-      {
-        "name": "PD_ENABLEPRINTTEMPLATEHANDLE",
-        "value": "65536"
-      },
-      {
-        "name": "PD_EXCLUSIONFLAGS",
-        "value": "16777216"
-      },
-      {
-        "name": "PD_HIDEPRINTTOFILE",
-        "value": "1048576"
-      },
-      {
-        "name": "PD_NOCURRENTPAGE",
-        "value": "8388608"
-      },
-      {
-        "name": "PD_NOPAGENUMS",
-        "value": "8"
-      },
-      {
-        "name": "PD_NOSELECTION",
-        "value": "4"
-      },
-      {
-        "name": "PD_NOWARNING",
-        "value": "128"
-      },
-      {
-        "name": "PD_PAGENUMS",
-        "value": "2"
-      },
-      {
-        "name": "PD_PRINTTOFILE",
-        "value": "32"
-      },
-      {
-        "name": "PD_RETURNDC",
-        "value": "256"
-      },
-      {
-        "name": "PD_RETURNDEFAULT",
-        "value": "1024"
-      },
-      {
-        "name": "PD_RETURNIC",
-        "value": "512"
-      },
-      {
-        "name": "PD_SELECTION",
-        "value": "1"
-      },
-      {
-        "name": "PD_USEDEVMODECOPIES",
-        "value": "262144"
-      },
-      {
-        "name": "PD_USEDEVMODECOPIESANDCOLLATE",
-        "value": "262144"
-      },
-      {
-        "name": "PD_USELARGETEMPLATE",
-        "value": "268435456"
-      },
-      {
-        "name": "PD_ENABLEPRINTHOOK",
-        "value": "4096"
-      },
-      {
-        "name": "PD_ENABLESETUPHOOK",
-        "value": "8192"
-      },
-      {
-        "name": "PD_ENABLESETUPTEMPLATE",
-        "value": "32768"
-      },
-      {
-        "name": "PD_ENABLESETUPTEMPLATEHANDLE",
-        "value": "131072"
-      },
-      {
-        "name": "PD_NONETWORKBUTTON",
-        "value": "2097152"
-      },
-      {
-        "name": "PD_PRINTSETUP",
-        "value": "64"
-      },
-      {
-        "name": "PD_SHOWHELP",
-        "value": "2048"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PRINTDLGEXA",
-        "field": "Flags"
-      },
-      {
-        "struct": "PRINTDLGEXW",
-        "field": "Flags"
-      },
-      {
-        "struct": "PRINTDLGA",
-        "field": "Flags"
-      },
-      {
-        "struct": "PRINTDLGW",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
     "name": "VDS_NF_CONTROLLER",
     "members": [
       {
@@ -19009,41 +17768,6 @@
     ]
   },
   {
-    "name": "NMCUSTOMDRAW_DRAW_STAGE",
-    "members": [
-      {
-        "name": "CDDS_POSTPAINT"
-      },
-      {
-        "name": "CDDS_PREERASE"
-      },
-      {
-        "name": "CDDS_PREPAINT"
-      },
-      {
-        "name": "CDDS_ITEMPOSTERASE"
-      },
-      {
-        "name": "CDDS_ITEMPOSTPAINT"
-      },
-      {
-        "name": "CDDS_ITEMPREERASE"
-      },
-      {
-        "name": "CDDS_ITEMPREPAINT"
-      },
-      {
-        "name": "CDDS_SUBITEM"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMCUSTOMDRAW",
-        "field": "dwDrawStage"
-      }
-    ]
-  },
-  {
     "name": "WINTRUST_SIGNATURE_SETTINGS_FLAGS",
     "flags": true,
     "members": [
@@ -19060,44 +17784,6 @@
       {
         "struct": "WINTRUST_SIGNATURE_SETTINGS",
         "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "MCGRIDINFO_PART",
-    "members": [
-      {
-        "name": "MCGIP_CALENDARCONTROL"
-      },
-      {
-        "name": "MCGIP_NEXT"
-      },
-      {
-        "name": "MCGIP_PREV"
-      },
-      {
-        "name": "MCGIP_FOOTER"
-      },
-      {
-        "name": "MCGIP_CALENDAR"
-      },
-      {
-        "name": "MCGIP_CALENDARHEADER"
-      },
-      {
-        "name": "MCGIP_CALENDARBODY"
-      },
-      {
-        "name": "MCGIP_CALENDARROW"
-      },
-      {
-        "name": "MCGIP_CALENDARCELL"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MCGRIDINFO",
-        "field": "dwPart"
       }
     ]
   },
@@ -19284,17 +17970,6 @@
       ]
     },
   {
-    "namespace": "Windows.Win32.UI.Controls",
-    "name": "LVITEMA_GROUP_ID",
-    "type": "int",
-    "autoPopulate": {
-      "filter": "I_GROUPID",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "SCHANNEL_CRED_FLAGS",
     "flags": true,
     "members": [
@@ -19442,52 +18117,6 @@
       {
         "method": "IDropTargetHelper::Drop",
         "parameter": "dwEffect"
-      }
-    ]
-  },
-  {
-    "name": "NMTBHOTITEM_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "HICF_ACCELERATOR"
-      },
-      {
-        "name": "HICF_ARROWKEYS"
-      },
-      {
-        "name": "HICF_DUPACCEL"
-      },
-      {
-        "name": "HICF_ENTERING"
-      },
-      {
-        "name": "HICF_LEAVING"
-      },
-      {
-        "name": "HICF_LMOUSE"
-      },
-      {
-        "name": "HICF_MOUSE"
-      },
-      {
-        "name": "HICF_OTHER"
-      },
-      {
-        "name": "HICF_RESELECT"
-      },
-      {
-        "name": "HICF_TOGGLEDROPDOWN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMTBHOTITEM",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "NMBCHOTITEM",
-        "field": "dwFlags"
       }
     ]
   },
@@ -20079,33 +18708,6 @@
     ]
   },
   {
-    "name": "TOOLTIP_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TTF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TTTOOLINFOA",
-        "field": "uFlags"
-      },
-      {
-        "struct": "TTTOOLINFOW",
-        "field": "uFlags"
-      },
-      {
-        "struct": "NMTTDISPINFOW",
-        "field": "uFlags"
-      },
-      {
-        "struct": "NMTTDISPINFOA",
-        "field": "uFlags"
-      }
-    ]
-  },
-  {
     "name": "JOB_OBJECT_TERMINATE_AT_END_ACTION",
     "namespace": "Windows.Win32.System.JobObjects",
     "members": [
@@ -20122,45 +18724,6 @@
       {
         "struct": "JOBOBJECT_END_OF_JOB_TIME_INFORMATION",
         "field": "EndOfJobTimeAction"
-      }
-    ]
-  },
-  {
-    "name": "LVTILEVIEWINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVTVIF_AUTOSIZE"
-      },
-      {
-        "name": "LVTVIF_FIXEDWIDTH"
-      },
-      {
-        "name": "LVTVIF_FIXEDHEIGHT"
-      },
-      {
-        "name": "LVTVIF_FIXEDSIZE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVTILEVIEWINFO",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "LVTILEVIEWINFO_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVTVIM_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVTILEVIEWINFO",
-        "field": "dwMask"
       }
     ]
   },
@@ -20427,30 +18990,6 @@
     ]
   },
   {
-    "name": "NMPGSCROLL_DIR",
-    "type": "int",
-    "members": [
-      {
-        "name": "PGF_SCROLLDOWN"
-      },
-      {
-        "name": "PGF_SCROLLLEFT"
-      },
-      {
-        "name": "PGF_SCROLLRIGHT"
-      },
-      {
-        "name": "PGF_SCROLLUP"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMPGSCROLL",
-        "field": "iDir"
-      }
-    ]
-  },
-  {
     "name": "MENUINFO_STYLE",
     "flags": true,
     "members": [
@@ -20644,49 +19183,6 @@
     ]
   },
   {
-    "name": "LVCOLUMNW_MASK",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVCF_FMT"
-      },
-      {
-        "name": "LVCF_WIDTH"
-      },
-      {
-        "name": "LVCF_TEXT"
-      },
-      {
-        "name": "LVCF_SUBITEM"
-      },
-      {
-        "name": "LVCF_IMAGE"
-      },
-      {
-        "name": "LVCF_ORDER"
-      },
-      {
-        "name": "LVCF_MINWIDTH"
-      },
-      {
-        "name": "LVCF_DEFAULTWIDTH"
-      },
-      {
-        "name": "LVCF_IDEALWIDTH"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVCOLUMNW",
-        "field": "mask"
-      },
-      {
-        "struct": "LVCOLUMNA",
-        "field": "mask"
-      }
-    ]
-  },
-  {
     "name": "COMMPROP_STOP_PARITY",
     "type": "ushort",
     "flags": true,
@@ -20808,40 +19304,6 @@
         }
       ]
     },
-  {
-    "name": "LVFINDINFOW_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVFI_PARAM"
-      },
-      {
-        "name": "LVFI_PARTIAL"
-      },
-      {
-        "name": "LVFI_STRING"
-      },
-      {
-        "name": "LVFI_SUBSTRING"
-      },
-      {
-        "name": "LVFI_WRAP"
-      },
-      {
-        "name": "LVFI_NEARESTXY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVFINDINFOW",
-        "field": "flags"
-      },
-      {
-        "struct": "LVFINDINFOA",
-        "field": "flags"
-      }
-    ]
-  },
   {
     "name": "VER_PLATFORM",
     "members": [
@@ -21224,93 +19686,6 @@
     ]
   },
   {
-    "name": "BUTTON_IMAGELIST_ALIGN",
-    "members": [
-      {
-        "name": "BUTTON_IMAGELIST_ALIGN_LEFT"
-      },
-      {
-        "name": "BUTTON_IMAGELIST_ALIGN_RIGHT"
-      },
-      {
-        "name": "BUTTON_IMAGELIST_ALIGN_TOP"
-      },
-      {
-        "name": "BUTTON_IMAGELIST_ALIGN_BOTTOM"
-      },
-      {
-        "name": "BUTTON_IMAGELIST_ALIGN_CENTER"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "BUTTON_IMAGELIST",
-        "field": "uAlign"
-      }
-    ]
-  },
-  {
-    "name": "TBBUTTONINFOW_MASK",
-    "flags": true,
-    "members": [
-      {
-        "name": "TBIF_BYINDEX"
-      },
-      {
-        "name": "TBIF_COMMAND"
-      },
-      {
-        "name": "TBIF_IMAGE"
-      },
-      {
-        "name": "TBIF_LPARAM"
-      },
-      {
-        "name": "TBIF_SIZE"
-      },
-      {
-        "name": "TBIF_STATE"
-      },
-      {
-        "name": "TBIF_STYLE"
-      },
-      {
-        "name": "TBIF_TEXT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TBBUTTONINFOW",
-        "field": "dwMask"
-      },
-      {
-        "struct": "TBBUTTONINFOA",
-        "field": "dwMask"
-      }
-    ]
-  },
-  {
-    "name": "TBINSERTMARK_FLAGS",
-    "members": [
-      {
-        "name": "TBIMHT_NONE",
-        "value": "0"
-      },
-      {
-        "name": "TBIMHT_AFTER"
-      },
-      {
-        "name": "TBIMHT_BACKGROUND"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TBINSERTMARK",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "CERT_STRONG_SIGN_FLAGS",
     "flags": true,
     "members": [
@@ -21418,21 +19793,6 @@
     ]
   },
   {
-    "name": "LVGROUP_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVGF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVGROUP",
-        "field": "mask"
-      }
-    ]
-  },
-  {
     "name": "DTTOPTS_iTextShadowTypeFlags",
     "members": [
       {
@@ -21449,30 +19809,6 @@
       {
         "struct": "DTTOPTS",
         "field": "iTextShadowType"
-      }
-    ]
-  },
-  {
-    "name": "BP_PAINTPARAMS_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "BPPF_ERASE",
-        "value": "1"
-      },
-      {
-        "name": "BPPF_NOCLIP",
-        "value": "2"
-      },
-      {
-        "name": "BPPF_NONCLIENT",
-        "value": "4"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "BP_PAINTPARAMS",
-        "field": "dwFlags"
       }
     ]
   },
@@ -21523,54 +19859,6 @@
       {
         "struct": "CRYPT_XML_ALGORITHM_INFO",
         "field": "dwGroupId"
-      }
-    ]
-  },
-  {
-    "name": "TVHITTESTINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "TVHT_ABOVE"
-      },
-      {
-        "name": "TVHT_BELOW"
-      },
-      {
-        "name": "TVHT_NOWHERE"
-      },
-      {
-        "name": "TVHT_ONITEM"
-      },
-      {
-        "name": "TVHT_ONITEMBUTTON"
-      },
-      {
-        "name": "TVHT_ONITEMICON"
-      },
-      {
-        "name": "TVHT_ONITEMINDENT"
-      },
-      {
-        "name": "TVHT_ONITEMLABEL"
-      },
-      {
-        "name": "TVHT_ONITEMRIGHT"
-      },
-      {
-        "name": "TVHT_ONITEMSTATEICON"
-      },
-      {
-        "name": "TVHT_TOLEFT"
-      },
-      {
-        "name": "TVHT_TORIGHT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TVHITTESTINFO",
-        "field": "flags"
       }
     ]
   },
@@ -21835,47 +20123,6 @@
       {
         "struct": "CHANGER_ELEMENT_STATUS_EX",
         "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "CHOOSEFONT_FONT_TYPE",
-    "type": "ushort",
-    "flags": true,
-    "members": [
-      {
-        "name": "BOLD_FONTTYPE",
-        "value": "256"
-      },
-      {
-        "name": "ITALIC_FONTTYPE",
-        "value": "512"
-      },
-      {
-        "name": "PRINTER_FONTTYPE",
-        "value": "16384"
-      },
-      {
-        "name": "REGULAR_FONTTYPE",
-        "value": "1024"
-      },
-      {
-        "name": "SCREEN_FONTTYPE",
-        "value": "8192"
-      },
-      {
-        "name": "SIMULATED_FONTTYPE",
-        "value": "32768"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CHOOSEFONTA",
-        "field": "nFontType"
-      },
-      {
-        "struct": "CHOOSEFONTW",
-        "field": "nFontType"
       }
     ]
   },
@@ -22382,23 +20629,6 @@
     ]
   },
   {
-    "name": "NMPGCALCSIZE_FLAGS",
-    "members": [
-      {
-        "name": "PGF_CALCHEIGHT"
-      },
-      {
-        "name": "PGF_CALCWIDTH"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMPGCALCSIZE",
-        "field": "dwFlag"
-      }
-    ]
-  },
-  {
     "name": "RESOURCE_DISPLAY_TYPE",
     "members": [
       {
@@ -22753,27 +20983,6 @@
     ]
   },
   {
-    "name": "MCGRIDINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "MCGIF_DATE"
-      },
-      {
-        "name": "MCGIF_RECT"
-      },
-      {
-        "name": "MCGIF_NAME"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MCGRIDINFO",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
       "addUsesTo": "DEV_BROADCAST_HDR_DEVICE_TYPE",
       "uses": [
         {
@@ -23002,30 +21211,6 @@
     ]
   },
   {
-    "name": "TXF_LOG_RECORD_TYPE",
-    "type": "ushort",
-    "members": [
-      {
-        "name": "TXF_LOG_RECORD_TYPE_AFFECTED_FILE",
-        "value": "4"
-      },
-      {
-        "name": "TXF_LOG_RECORD_TYPE_TRUNCATE",
-        "value": "2"
-      },
-      {
-        "name": "TXF_LOG_RECORD_TYPE_WRITE",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "TXF_LOG_RECORD_BASE",
-        "field": "RecordType"
-      }
-    ]
-  },
-  {
     "name": "SCHANNEL_SESSION_TOKEN_FLAGS",
     "members": [
       {
@@ -23045,69 +21230,6 @@
     ]
   },
   {
-    "name": "LVHITTESTINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVHT_ABOVE"
-      },
-      {
-        "name": "LVHT_BELOW"
-      },
-      {
-        "name": "LVHT_NOWHERE"
-      },
-      {
-        "name": "LVHT_ONITEMICON"
-      },
-      {
-        "name": "LVHT_ONITEMLABEL"
-      },
-      {
-        "name": "LVHT_ONITEMSTATEICON"
-      },
-      {
-        "name": "LVHT_TOLEFT"
-      },
-      {
-        "name": "LVHT_TORIGHT"
-      },
-      {
-        "name": "LVHT_EX_GROUP_HEADER"
-      },
-      {
-        "name": "LVHT_EX_GROUP_FOOTER"
-      },
-      {
-        "name": "LVHT_EX_GROUP_COLLAPSE"
-      },
-      {
-        "name": "LVHT_EX_GROUP_BACKGROUND"
-      },
-      {
-        "name": "LVHT_EX_GROUP_STATEICON"
-      },
-      {
-        "name": "LVHT_EX_GROUP_SUBSETLINK"
-      },
-      {
-        "name": "LVHT_EX_GROUP"
-      },
-      {
-        "name": "LVHT_EX_ONCONTENTS"
-      },
-      {
-        "name": "LVHT_EX_FOOTER"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVHITTESTINFO",
-        "field": "flags"
-      }
-    ]
-  },
-  {
     "name": "CRYPT_TIMESTAMP_VERSION",
     "members": [
       {
@@ -23118,86 +21240,6 @@
       {
         "struct": "CRYPT_TIMESTAMP_REQUEST",
         "field": "dwVersion"
-      }
-    ]
-  },
-  {
-    "name": "INITCOMMONCONTROLSEX_ICC",
-    "flags": true,
-    "members": [
-      {
-        "name": "ICC_ANIMATE_CLASS",
-        "value": "128"
-      },
-      {
-        "name": "ICC_BAR_CLASSES",
-        "value": "4"
-      },
-      {
-        "name": "ICC_COOL_CLASSES",
-        "value": "1024"
-      },
-      {
-        "name": "ICC_DATE_CLASSES",
-        "value": "256"
-      },
-      {
-        "name": "ICC_HOTKEY_CLASS",
-        "value": "64"
-      },
-      {
-        "name": "ICC_INTERNET_CLASSES",
-        "value": "2048"
-      },
-      {
-        "name": "ICC_LINK_CLASS",
-        "value": "32768"
-      },
-      {
-        "name": "ICC_LISTVIEW_CLASSES",
-        "value": "1"
-      },
-      {
-        "name": "ICC_NATIVEFNTCTL_CLASS",
-        "value": "8192"
-      },
-      {
-        "name": "ICC_PAGESCROLLER_CLASS",
-        "value": "4096"
-      },
-      {
-        "name": "ICC_PROGRESS_CLASS",
-        "value": "32"
-      },
-      {
-        "name": "ICC_STANDARD_CLASSES",
-        "value": "16384"
-      },
-      {
-        "name": "ICC_TAB_CLASSES",
-        "value": "8"
-      },
-      {
-        "name": "ICC_TREEVIEW_CLASSES",
-        "value": "2"
-      },
-      {
-        "name": "ICC_UPDOWN_CLASS",
-        "value": "16"
-      },
-      {
-        "name": "ICC_USEREX_CLASSES",
-        "value": "512"
-      },
-      {
-        "name": "ICC_WIN95_CLASSES",
-        "value": "255"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "INITCOMMONCONTROLSEX",
-        "field": "dwICC"
       }
     ]
   },
@@ -23252,26 +21294,6 @@
       {
         "struct": "IKEEXT_EAP_AUTHENTICATION0",
         "field": "flags"
-      }
-    ]
-  },
-  {
-    "name": "NMLVCUSTOMDRAW_ITEM_TYPE",
-    "members": [
-      {
-        "name": "LVCDI_ITEM"
-      },
-      {
-        "name": "LVCDI_GROUP"
-      },
-      {
-        "name": "LVCDI_ITEMSLIST"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMLVCUSTOMDRAW",
-        "field": "dwItemType"
       }
     ]
   },
@@ -23397,31 +21419,6 @@
     ]
   },
   {
-    "name": "NMTBDISPINFOW_MASK",
-    "flags": true,
-    "members": [
-      {
-        "name": "TBNF_IMAGE"
-      },
-      {
-        "name": "TBNF_TEXT"
-      },
-      {
-        "name": "TBNF_DI_SETITEM"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMTBDISPINFOW",
-        "field": "dwMask"
-      },
-      {
-        "struct": "NMTBDISPINFOA",
-        "field": "dwMask"
-      }
-    ]
-  },
-  {
     "name": "CRYPTUI_WIZ_EXPORT_FORMAT",
     "members": [
       {
@@ -23477,75 +21474,6 @@
       {
         "struct": "SCROLLINFO",
         "field": "fMask"
-      }
-    ]
-  },
-  {
-    "name": "REOBJECT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "REO_ALIGNTORIGHT"
-      },
-      {
-        "name": "REO_BELOWBASELINE"
-      },
-      {
-        "name": "REO_BLANK"
-      },
-      {
-        "name": "REO_CANROTATE"
-      },
-      {
-        "name": "REO_DONTNEEDPALETTE"
-      },
-      {
-        "name": "REO_DYNAMICSIZE"
-      },
-      {
-        "name": "REO_GETMETAFILE"
-      },
-      {
-        "name": "REO_HILITED"
-      },
-      {
-        "name": "REO_INPLACEACTIVE"
-      },
-      {
-        "name": "REO_INVERTEDSELECT"
-      },
-      {
-        "name": "REO_LINK"
-      },
-      {
-        "name": "REO_LINKAVAILABLE"
-      },
-      {
-        "name": "REO_OPEN"
-      },
-      {
-        "name": "REO_OWNERDRAWSELECT"
-      },
-      {
-        "name": "REO_RESIZABLE"
-      },
-      {
-        "name": "REO_SELECTED"
-      },
-      {
-        "name": "REO_STATIC"
-      },
-      {
-        "name": "REO_USEASBACKGROUND"
-      },
-      {
-        "name": "REO_WRAPTEXTAROUND"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "REOBJECT",
-        "field": "dwFlags"
       }
     ]
   },
@@ -23636,20 +21564,6 @@
       {
         "struct": "LSA_AUTH_INFORMATION",
         "field": "AuthType"
-      }
-    ]
-  },
-  {
-    "name": "NMLVEMPTYMARKUP_FLAGS",
-    "members": [
-      {
-        "name": "EMF_CENTERED"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMLVEMPTYMARKUP",
-        "field": "dwFlags"
       }
     ]
   },
@@ -23809,23 +21723,6 @@
       {
         "struct": "CRYPT_TIMESTAMP_RESPONSE",
         "field": "dwStatus"
-      }
-    ]
-  },
-  {
-    "name": "LVFOOTERITEM_MASK",
-    "members": [
-      {
-        "name": "LVFIF_TEXT"
-      },
-      {
-        "name": "LVFIF_STATE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVFOOTERITEM",
-        "field": "mask"
       }
     ]
   },
@@ -24104,42 +22001,6 @@
         "interface": "IDxcUtils",
         "method": "LoadFile",
         "parameter": "pCodePage"
-      }
-    ]
-  },
-  {
-    "name": "NOTIFY_ICON_MESSAGE",
-    "flags": false,
-    "autoPopulate": {
-      "filter": "NIM_",
-      "header": "shellapi.h"
-    },
-    "uses": [
-      {
-        "method": "Shell_NotifyIconA",
-        "parameter": "dwMessage"
-      },
-      {
-        "method": "Shell_NotifyIconW",
-        "parameter": "dwMessage"
-      }
-    ]
-  },
-  {
-    "name": "NOTIFY_ICON_DATA_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "NIF_",
-      "header": "shellapi.h"
-    },
-    "uses": [
-      {
-        "method": "NOTIFYICONDATAA",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "NOTIFYICONDATAW",
-        "parameter": "uFlags"
       }
     ]
   },
@@ -24518,21 +22379,6 @@
         "interface": "IImageList2",
         "method": "Initialize",
         "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "name": "OS",
-    "flags": false,
-    "autoPopulate": {
-      "header": "shlwapi.h",
-      "filter": "OS_"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "IsOS",
-        "parameter": "dwOS"
       }
     ]
   },
@@ -25226,21 +23072,6 @@
     ]
   },
   {
-    "name": "SHELL_AUTOCOMPLETE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SHACF_",
-      "header": "shlwapi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "SHAutoComplete",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "IME_CONVERSION_MODE",
     "flags": true,
     "autoPopulate": {
@@ -25345,78 +23176,6 @@
       ]
     },
   {
-    "name": "DTTOPTS_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "DTT_TEXTCOLOR",
-        "value": "0x1"
-      },
-      {
-        "name": "DTT_BORDERCOLOR",
-        "value": "0x2"
-      },
-      {
-        "name": "DTT_SHADOWCOLOR",
-        "value": "0x4"
-      },
-      {
-        "name": "DTT_SHADOWTYPE",
-        "value": "0x8"
-      },
-      {
-        "name": "DTT_SHADOWOFFSET",
-        "value": "0x10"
-      },
-      {
-        "name": "DTT_BORDERSIZE",
-        "value": "0x20"
-      },
-      {
-        "name": "DTT_FONTPROP",
-        "value": "0x40"
-      },
-      {
-        "name": "DTT_COLORPROP",
-        "value": "0x80"
-      },
-      {
-        "name": "DTT_STATEID",
-        "value": "0x100"
-      },
-      {
-        "name": "DTT_CALCRECT",
-        "value": "0x200"
-      },
-      {
-        "name": "DTT_APPLYOVERLAY",
-        "value": "0x400"
-      },
-      {
-        "name": "DTT_GLOWSIZE",
-        "value": "0x800"
-      },
-      {
-        "name": "DTT_CALLBACK",
-        "value": "0x1000"
-      },
-      {
-        "name": "DTT_COMPOSITED",
-        "value": "0x2000"
-      },
-      {
-        "name": "DTT_VALIDBITS",
-        "value": "(DTT_TEXTCOLOR | DTT_BORDERCOLOR | DTT_SHADOWCOLOR | DTT_SHADOWTYPE | DTT_SHADOWOFFSET | DTT_BORDERSIZE | DTT_FONTPROP | DTT_COLORPROP | DTT_STATEID | DTT_CALCRECT | DTT_APPLYOVERLAY | DTT_GLOWSIZE | DTT_COMPOSITED)"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DTTOPTS",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "addUsesTo": "BI_COMPRESSION",
     "uses": [
       {
@@ -25458,429 +23217,6 @@
       {
         "method": "IDropTarget::Drop",
         "parameter": "grfKeyState"
-      }
-    ]
-  },
-  {
-    "name": "NMLVGETINFOTIP_FLAGS",
-    "members": [
-      {
-        "name": "LVGIT_UNFOLDED"
-      },
-      {
-        "name": "LVGIT_ZERO",
-        "value": "0"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMLVGETINFOTIPW",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "NMLVGETINFOTIPA",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_ITEM_STATE_FLAGS",
-    "autoPopulate": {
-      "filter": "LVIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NMLVODSTATECHANGE",
-        "field": "uNewState"
-      },
-      {
-        "struct": "NMLVODSTATECHANGE",
-        "field": "uOldState"
-      },
-      {
-        "struct": "LVITEMW",
-        "field": "state"
-      },
-      {
-        "struct": "LVITEMW",
-        "field": "stateMask"
-      },
-      {
-        "struct": "LVITEMA",
-        "field": "state"
-      },
-      {
-        "struct": "LVITEMA",
-        "field": "stateMask"
-      }
-    ]
-  },
-  {
-    "name": "NM_TREEVIEW_ACTION",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TVE_|TVC_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NMTREEVIEWW",
-        "field": "action"
-      },
-      {
-        "struct": "NMTREEVIEWA",
-        "field": "action"
-      }
-    ]
-  },
-  {
-    "name": "MONTH_CALDENDAR_MESSAGES_VIEW",
-    "autoPopulate": {
-      "filter": "MCMV_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NMVIEWCHANGE",
-        "field": "dwOldView"
-      },
-      {
-        "struct": "NMVIEWCHANGE",
-        "field": "dwNewView"
-      }
-    ]
-  },
-  {
-    "name": "TAB_CONTROL_ITEM_STATE",
-    "autoPopulate": {
-      "filter": "TCIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TCITEMW",
-        "field": "dwState"
-      },
-      {
-        "struct": "TCITEMW",
-        "field": "dwStateMask"
-      },
-      {
-        "struct": "TCITEMA",
-        "field": "dwState"
-      },
-      {
-        "struct": "TCITEMA",
-        "field": "dwStateMask"
-      }
-    ]
-  },
-  {
-    "name": "TREE_VIEW_ITEM_STATE_FLAGS",
-    "autoPopulate": {
-      "filter": "TVIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TVITEMW",
-        "field": "state"
-      },
-      {
-        "struct": "TVITEMW",
-        "field": "stateMask"
-      },
-      {
-        "struct": "TVITEMA",
-        "field": "state"
-      },
-      {
-        "struct": "TVITEMA",
-        "field": "stateMask"
-      }
-    ]
-  },
-  {
-    "name": "HEADER_CONTROL_FORMAT_FLAGS",
-    "type": "int",
-    "autoPopulate": {
-      "filter": "HDF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "HDITEMW",
-        "field": "fmt"
-      },
-      {
-        "struct": "HDITEMA",
-        "field": "fmt"
-      }
-    ]
-  },
-  {
-    "name": "HEADER_CONTROL_FORMAT_TYPE",
-    "autoPopulate": {
-      "filter": "HDFT_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "HDITEMW",
-        "field": "type"
-      },
-      {
-        "struct": "HDITEMA",
-        "field": "type"
-      }
-    ]
-  },
-  {
-    "name": "HEADER_CONTROL_FORMAT_STATE",
-    "autoPopulate": {
-      "filter": "HDIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "HDITEMW",
-        "field": "state"
-      },
-      {
-        "struct": "HDITEMA",
-        "field": "state"
-      }
-    ]
-  },
-  {
-    "name": "HEADER_HITTEST_INFO_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "HHT_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "HDHITTESTINFO",
-        "field": "flags"
-      }
-    ]
-  },
-  {
-    "name": "IMAGE_LIST_WRITE_STREAM_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "ILP_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "ImageList_WriteEx",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "LIST_ITEM_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LIF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LITEM",
-        "field": "mask"
-      }
-    ]
-  },
-  {
-    "name": "LIST_ITEM_STATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LITEM",
-        "field": "state"
-      },
-      {
-        "struct": "LITEM",
-        "field": "stateMask"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_BACKGROUND_IMAGE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVBKIF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVBKIMAGEW",
-        "field": "ulFlags"
-      },
-      {
-        "struct": "LVBKIMAGEA",
-        "field": "ulFlags"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_GROUP_STATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVGS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVGROUP",
-        "field": "state"
-      },
-      {
-        "struct": "LVGROUP",
-        "field": "stateMask"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_GROUP_ALIGN_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVGA_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "LVGROUP",
-        "field": "uAlign"
-      },
-      {
-        "struct": "NMLVCUSTOMDRAW",
-        "field": "uAlign"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS",
-    "type": "int",
-    "flags": true,
-    "members": [
-      {
-        "name": "LVCFMT_LINE_BREAK"
-      },
-      {
-        "name": "LVCFMT_FILL"
-      },
-      {
-        "name": "LVCFMT_WRAP"
-      },
-      {
-        "name": "LVCFMT_NO_TITLE"
-      },
-      {
-        "name": "LVCFMT_TILE_PLACEMENTMASK"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "LVITEMW",
-        "field": "piColFmt"
-      },
-      {
-        "struct": "LVITEMA",
-        "field": "piColFmt"
-      }
-    ]
-  },
-  {
-    "name": "MCHITTESTINFO_HIT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "MCHT_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "MCHITTESTINFO",
-        "field": "uHit"
-      }
-    ]
-  },
-  {
-    "name": "NMCUSTOMDRAW_DRAW_STATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CDIS_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NMCUSTOMDRAW",
-        "field": "uItemState"
-      }
-    ]
-  },
-  {
-    "name": "NMDATETIMECHANGE_FLAGS",
-    "members": [
-      {
-        "name": "GDT_NONE"
-      },
-      {
-        "name": "GDT_VALID"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMDATETIMECHANGE",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "LIST_VIEW_ITEM_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "LVIF_",
-      "header": "commctrl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NMLISTVIEW",
-        "field": "uChanged"
-      },
-      {
-        "struct": "LVITEMW",
-        "field": "mask"
-      },
-      {
-        "struct": "LVITEMA",
-        "field": "mask"
       }
     ]
   },
@@ -26150,22 +23486,6 @@
         "interface": "ITextRange",
         "method": "ChangeCase",
         "parameter": "Type"
-      }
-    ]
-  },
-  {
-    "name": "RECO_FLAGS",
-    "type": "uint",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "RECO_",
-      "header": "RichOle.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "IRichEditOleCallback::QueryAcceptData",
-        "parameter": "reco"
       }
     ]
   },
@@ -28451,68 +25771,6 @@
     ]
   },
   {
-    "name": "HIT_TEST_BACKGROUND_OPTIONS",
-    "autoPopulate": {
-      "filter": "HTTB_",
-      "header": "uxtheme.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "HitTestThemeBackground",
-        "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "flags": true,
-    "name": "NOTIFY_ICON_INFOTIP_FLAGS",
-    "autoPopulate": {
-      "filter": "NIIF_",
-      "header": "shellapi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NOTIFYICONDATAW",
-        "field": "dwInfoFlags"
-      },
-      {
-        "struct": "NOTIFYICONDATAA",
-        "field": "dwInfoFlags"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "flags": true,
-    "name": "NOTIFY_ICON_STATE",
-    "autoPopulate": {
-      "filter": "NIS_",
-      "header": "shellapi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "NOTIFYICONDATAW",
-        "field": "dwState"
-      },
-      {
-        "struct": "NOTIFYICONDATAW",
-        "field": "dwStateMask"
-      },
-      {
-        "struct": "NOTIFYICONDATAA",
-        "field": "dwState"
-      },
-      {
-        "struct": "NOTIFYICONDATAA",
-        "field": "dwStateMask"
-      }
-    ]
-  },
-  {
     "name": "PAN_FAMILY_TYPE",
     "type": "byte",
     "autoPopulate": {
@@ -29163,50 +26421,6 @@
         "method": "QueryObjectSink",
         "parameter": "lFlags"
         }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "SHGSI_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SHGSI_ICONLOCATION"
-      },
-      {
-        "name": "SHGSI_ICON",
-        "value": "0x000000100"
-      },
-      {
-        "name": "SHGSI_SYSICONINDEX",
-        "value": "0x000004000"
-      },
-      {
-        "name": "SHGSI_LINKOVERLAY",
-        "value": "0x000008000"
-      },
-      {
-        "name": "SHGSI_SELECTED",
-        "value": "0x000010000"
-      },
-      {
-        "name": "SHGSI_LARGEICON",
-        "value": "0x000000000"
-      },
-      {
-        "name": "SHGSI_SMALLICON",
-        "value": "0x000000001"
-      },
-      {
-        "name": "SHGSI_SHELLICONSIZE",
-        "value": "0x000000004"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SHGetStockIconInfo",
-        "parameter": "uFlags"
-      }
     ]
   },
   {
@@ -30545,42 +27759,6 @@
       }
     ],
     "uses": []
-  },
-  {
-    "name": "CM_LOG_CONF",
-    "members": [
-      {
-        "name": "BASIC_LOG_CONF"
-      },
-      {
-        "name": "FILTERED_LOG_CONF"
-      },
-      {
-        "name": "ALLOC_LOG_CONF"
-      },
-      {
-        "name": "BOOT_LOG_CONF"
-      },
-      {
-        "name": "FORCED_LOG_CONF"
-      },
-      {
-        "name": "OVERRIDE_LOG_CONF"
-      },
-      {
-        "name": "NUM_LOG_CONF"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CM_Get_First_Log_Conf",
-        "parameter": "ulFlags"
-      },
-      {
-        "method": "CM_Get_First_Log_Conf_Ex",
-        "parameter": "ulFlags"
-      }
-    ]
   },
   {
       "addUsesTo": "CM_DEVNODE_STATUS_FLAGS",

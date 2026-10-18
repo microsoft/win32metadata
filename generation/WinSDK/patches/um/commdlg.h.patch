@@ -1,8 +1,61 @@
 diff --git a/um/commdlg.h b/um/commdlg.h
-index 4083a3eb..7928708c 100644
 --- a/um/commdlg.h
 +++ b/um/commdlg.h
-@@ -250,14 +250,18 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
+@@ -17,6 +17,17 @@
+ #ifndef _INC_COMMDLG
+ #define _INC_COMMDLG
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long CHOOSECOLOR_FLAGS;
++typedef unsigned long OPEN_FILENAME_FLAGS;
++typedef unsigned long OPEN_FILENAME_FLAGS_EX;
++typedef unsigned long PAGESETUPDLG_FLAGS;
++typedef unsigned long CHOOSEFONT_FLAGS;
++typedef unsigned long FINDREPLACE_FLAGS;
++typedef unsigned long PRINTDLGEX_FLAGS;
++typedef unsigned short CHOOSEFONT_FONT_TYPE;
++#endif
++
+ 
+ #if(WINVER >= 0x0500)
+ 
+@@ -183,7 +194,7 @@ typedef struct tagOFNA {
+    DWORD        nMaxFileTitle;
+    LPCSTR       lpstrInitialDir;
+    LPCSTR       lpstrTitle;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS) DWORD        Flags;
+    WORD         nFileOffset;
+    WORD         nFileExtension;
+    LPCSTR       lpstrDefExt;
+@@ -197,7 +208,7 @@ typedef struct tagOFNA {
+ #if (_WIN32_WINNT >= 0x0500)
+    void *        pvReserved;
+    DWORD        dwReserved;
+-   DWORD        FlagsEx;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS_EX) DWORD        FlagsEx;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ } OPENFILENAMEA, *LPOPENFILENAMEA;
+ typedef struct tagOFNW {
+@@ -214,7 +225,7 @@ typedef struct tagOFNW {
+    DWORD        nMaxFileTitle;
+    LPCWSTR      lpstrInitialDir;
+    LPCWSTR      lpstrTitle;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS) DWORD        Flags;
+    WORD         nFileOffset;
+    WORD         nFileExtension;
+    LPCWSTR      lpstrDefExt;
+@@ -228,7 +239,7 @@ typedef struct tagOFNW {
+ #if (_WIN32_WINNT >= 0x0500)
+    void *        pvReserved;
+    DWORD        dwReserved;
+-   DWORD        FlagsEx;
++   _Win32_AssociatedEnum_(OPEN_FILENAME_FLAGS_EX) DWORD        FlagsEx;
+ #endif // (_WIN32_WINNT >= 0x0500)
+ } OPENFILENAMEW, *LPOPENFILENAMEW;
+ #ifdef UNICODE
+@@ -250,14 +261,18 @@ typedef LPOPENFILENAMEA LPOPENFILENAME;
  #endif // (_WIN32_WINNT >= 0x0500)
  
  
@@ -21,7 +74,7 @@ index 4083a3eb..7928708c 100644
  WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
  #ifdef UNICODE
  #define GetSaveFileName  GetSaveFileNameW
-@@ -266,7 +270,9 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
+@@ -266,7 +281,9 @@ WINCOMMDLGAPI BOOL  APIENTRY GetSaveFileNameW(LPOPENFILENAMEW);
  #endif // !UNICODE
  
  
@@ -31,8 +84,156 @@ index 4083a3eb..7928708c 100644
  WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR Buf, _In_ WORD cchSize);
  #ifdef UNICODE
  #define GetFileTitle  GetFileTitleW
-@@ -620,7 +626,9 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
+@@ -305,11 +322,45 @@ WINCOMMDLGAPI short APIENTRY GetFileTitleW(LPCWSTR, _Out_writes_(cchSize) LPWSTR
+ #if (_WIN32_WINNT >= 0x0500)
+ #define OFN_DONTADDTORECENT          0x02000000
+ #define OFN_FORCESHOWHIDDEN          0x10000000    // Show All files including System and hidden files
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(OPEN_FILENAME_FLAGS, unsigned long,
++    OFN_READONLY,
++    OFN_OVERWRITEPROMPT,
++    OFN_HIDEREADONLY,
++    OFN_NOCHANGEDIR,
++    OFN_SHOWHELP,
++    OFN_ENABLEHOOK,
++    OFN_ENABLETEMPLATE,
++    OFN_ENABLETEMPLATEHANDLE,
++    OFN_NOVALIDATE,
++    OFN_ALLOWMULTISELECT,
++    OFN_EXTENSIONDIFFERENT,
++    OFN_PATHMUSTEXIST,
++    OFN_FILEMUSTEXIST,
++    OFN_CREATEPROMPT,
++    OFN_SHAREAWARE,
++    OFN_NOREADONLYRETURN,
++    OFN_NOTESTFILECREATE,
++    OFN_NONETWORKBUTTON,
++    OFN_NOLONGNAMES,
++    OFN_EXPLORER,
++    OFN_NODEREFERENCELINKS,
++    OFN_LONGNAMES,
++    OFN_ENABLEINCLUDENOTIFY,
++    OFN_ENABLESIZING,
++    OFN_DONTADDTORECENT,
++    OFN_FORCESHOWHIDDEN);
++#endif
+ #endif // (_WIN32_WINNT >= 0x0500)
+ 
+ //FlagsEx Values
+ #if (_WIN32_WINNT >= 0x0500)
+ #define  OFN_EX_NOPLACESBAR         0x00000001
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(OFN_EX_NONE, OFN_EX_NOPLACESBAR)",
++    0,
++    OFN_EX_NOPLACESBAR) unsigned long OPEN_FILENAME_FLAGS_EX;
++#endif
+ #endif // (_WIN32_WINNT >= 0x0500)
+ 
+ // Return values for the registered message sent to the hook function
+@@ -476,7 +527,7 @@ typedef struct tagCHOOSECOLORA {
+    HWND         hInstance;
+    COLORREF     rgbResult;
+    COLORREF*    lpCustColors;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(CHOOSECOLOR_FLAGS) DWORD        Flags;
+    LPARAM       lCustData;
+    LPCCHOOKPROC lpfnHook;
+    LPCSTR       lpTemplateName;
+@@ -487,7 +538,7 @@ typedef struct tagCHOOSECOLORW {
+    HWND         hInstance;
+    COLORREF     rgbResult;
+    COLORREF*    lpCustColors;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(CHOOSECOLOR_FLAGS) DWORD        Flags;
+    LPARAM       lCustData;
+    LPCCHOOKPROC lpfnHook;
+    LPCWSTR      lpTemplateName;
+@@ -506,7 +557,7 @@ typedef struct tagCHOOSECOLORA {
+    HWND         hInstance;
+    COLORREF     rgbResult;
+    COLORREF*    lpCustColors;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(CHOOSECOLOR_FLAGS) DWORD        Flags;
+    LPARAM       lCustData;
+    LPCCHOOKPROC lpfnHook;
+    LPCSTR       lpTemplateName;
+@@ -518,7 +569,7 @@ typedef struct tagCHOOSECOLORW {
+    HWND         hInstance;
+    COLORREF     rgbResult;
+    COLORREF*    lpCustColors;
+-   DWORD        Flags;
++   _Win32_AssociatedEnum_(CHOOSECOLOR_FLAGS) DWORD        Flags;
+    LPARAM       lCustData;
+    LPCCHOOKPROC lpfnHook;
+    LPCWSTR      lpTemplateName;
+@@ -551,6 +602,18 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseColorW(LPCHOOSECOLORW);
+ #if(WINVER >= 0x0400)
+ #define CC_SOLIDCOLOR            0x00000080
+ #define CC_ANYCOLOR              0x00000100
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CHOOSECOLOR_FLAGS, unsigned long,
++    CC_RGBINIT,
++    CC_FULLOPEN,
++    CC_PREVENTFULLOPEN,
++    CC_SHOWHELP,
++    CC_ENABLEHOOK,
++    CC_ENABLETEMPLATE,
++    CC_ENABLETEMPLATEHANDLE,
++    CC_SOLIDCOLOR,
++    CC_ANYCOLOR);
++#endif
+ #endif /* WINVER >= 0x0400 */
+ 
+ typedef UINT_PTR (CALLBACK *LPFRHOOKPROC) (HWND, UINT, WPARAM, LPARAM);
+@@ -560,7 +623,7 @@ typedef struct tagFINDREPLACEA {
+    HWND         hwndOwner;          // handle to owner's window
+    HINSTANCE    hInstance;          // instance handle of.EXE that
+                                     //   contains cust. dlg. template
+-   DWORD        Flags;              // one or more of the FR_??
++   _Win32_AssociatedEnum_(FINDREPLACE_FLAGS) DWORD        Flags;              // one or more of the FR_??
+    LPSTR        lpstrFindWhat;      // ptr. to search string
+    LPSTR        lpstrReplaceWith;   // ptr. to replace string
+    WORD         wFindWhatLen;       // size of find buffer
+@@ -574,7 +637,7 @@ typedef struct tagFINDREPLACEW {
+    HWND         hwndOwner;          // handle to owner's window
+    HINSTANCE    hInstance;          // instance handle of.EXE that
+                                     //   contains cust. dlg. template
+-   DWORD        Flags;              // one or more of the FR_??
++   _Win32_AssociatedEnum_(FINDREPLACE_FLAGS) DWORD        Flags;              // one or more of the FR_??
+    LPWSTR       lpstrFindWhat;      // ptr. to search string
+    LPWSTR       lpstrReplaceWith;   // ptr. to replace string
+    WORD         wFindWhatLen;       // size of find buffer
+@@ -618,9 +681,38 @@ typedef LPFINDREPLACEA LPFINDREPLACE;
+ #define FR_MATCHDIAC                    0x20000000
+ #define FR_MATCHKASHIDA                 0x40000000
  #define FR_MATCHALEFHAMZA               0x80000000
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(FINDREPLACE_FLAGS, unsigned long,
++    FR_DOWN,
++    FR_WHOLEWORD,
++    FR_MATCHCASE,
++    FR_FINDNEXT,
++    FR_REPLACE,
++    FR_REPLACEALL,
++    FR_DIALOGTERM,
++    FR_SHOWHELP,
++    FR_ENABLEHOOK,
++    FR_ENABLETEMPLATE,
++    FR_NOUPDOWN,
++    FR_NOMATCHCASE,
++    FR_NOWHOLEWORD,
++    FR_ENABLETEMPLATEHANDLE,
++    FR_HIDEUPDOWN,
++    FR_HIDEMATCHCASE,
++    FR_HIDEWHOLEWORD,
++    FR_RAW,
++    FR_SHOWWRAPAROUND,
++    FR_NOWRAPAROUND,
++    FR_WRAPAROUND,
++    FR_MATCHDIAC,
++    FR_MATCHKASHIDA,
++    FR_MATCHALEFHAMZA);
++#endif
  #endif // (NTDDI_VERSION >= NTDDI_WIN2K)
  
 +_Win32_SupportedOS_Windows2000_
@@ -41,7 +242,7 @@ index 4083a3eb..7928708c 100644
  WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
  #ifdef UNICODE
  #define FindText  FindTextW
-@@ -628,7 +636,9 @@ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
+@@ -628,7 +720,9 @@ WINCOMMDLGAPI HWND APIENTRY FindTextW(LPFINDREPLACEW);
  #define FindText  FindTextA
  #endif // !UNICODE
  #ifndef _MAC
@@ -51,7 +252,172 @@ index 4083a3eb..7928708c 100644
  WINCOMMDLGAPI HWND APIENTRY ReplaceTextW(LPFINDREPLACEW);
  #ifdef UNICODE
  #define ReplaceText  ReplaceTextW
-@@ -1155,6 +1165,7 @@ typedef const DEVNAMES *PCDEVNAMES;
+@@ -673,7 +767,7 @@ typedef struct tagCHOOSEFONTA {
+    HDC             hDC;                // printer DC/IC or NULL
+    LPLOGFONTA      lpLogFont;          // ptr. to a LOGFONT struct
+    INT             iPointSize;         // 10 * size in points of selected font
+-   DWORD           Flags;              // enum. type flags
++   _Win32_AssociatedEnum_(CHOOSEFONT_FLAGS) DWORD           Flags;              // enum. type flags
+    COLORREF        rgbColors;          // returned text color
+    LPARAM          lCustData;          // data passed to hook fn.
+    LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
+@@ -682,7 +776,7 @@ typedef struct tagCHOOSEFONTA {
+                                        //   contains cust. dlg. template
+    LPSTR           lpszStyle;          // return the style field here
+                                        // must be LF_FACESIZE or bigger
+-   WORD            nFontType;          // same value reported to the EnumFonts
++   _Win32_AssociatedEnum_(CHOOSEFONT_FONT_TYPE) WORD            nFontType;          // same value reported to the EnumFonts
+                                        //   call back with the extra FONTTYPE_
+                                        //   bits added
+    WORD            ___MISSING_ALIGNMENT__;
+@@ -696,7 +790,7 @@ typedef struct tagCHOOSEFONTW {
+    HDC             hDC;                // printer DC/IC or NULL
+    LPLOGFONTW      lpLogFont;          // ptr. to a LOGFONT struct
+    INT             iPointSize;         // 10 * size in points of selected font
+-   DWORD           Flags;              // enum. type flags
++   _Win32_AssociatedEnum_(CHOOSEFONT_FLAGS) DWORD           Flags;              // enum. type flags
+    COLORREF        rgbColors;          // returned text color
+    LPARAM          lCustData;          // data passed to hook fn.
+    LPCFHOOKPROC    lpfnHook;           // ptr. to hook function
+@@ -705,7 +799,7 @@ typedef struct tagCHOOSEFONTW {
+                                        //   contains cust. dlg. template
+    LPWSTR          lpszStyle;          // return the style field here
+                                        // must be LF_FACESIZE or bigger
+-   WORD            nFontType;          // same value reported to the EnumFonts
++   _Win32_AssociatedEnum_(CHOOSEFONT_FONT_TYPE) WORD            nFontType;          // same value reported to the EnumFonts
+                                        //   call back with the extra FONTTYPE_
+                                        //   bits added
+    WORD            ___MISSING_ALIGNMENT__;
+@@ -777,6 +871,38 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
+ #endif /* WINVER >= 0x0400 */
+ #if(WINVER >= 0x0601)
+ #define CF_INACTIVEFONTS           0x02000000L
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CHOOSEFONT_FLAGS, unsigned long,
++    CF_APPLY,
++    CF_ANSIONLY,
++    CF_BOTH,
++    CF_EFFECTS,
++    CF_ENABLEHOOK,
++    CF_ENABLETEMPLATE,
++    CF_ENABLETEMPLATEHANDLE,
++    CF_FIXEDPITCHONLY,
++    CF_FORCEFONTEXIST,
++    CF_INACTIVEFONTS,
++    CF_INITTOLOGFONTSTRUCT,
++    CF_LIMITSIZE,
++    CF_NOOEMFONTS,
++    CF_NOFACESEL,
++    CF_NOSCRIPTSEL,
++    CF_NOSIMULATIONS,
++    CF_NOSIZESEL,
++    CF_NOSTYLESEL,
++    CF_NOVECTORFONTS,
++    CF_NOVERTFONTS,
++    CF_PRINTERFONTS,
++    CF_SCALABLEONLY,
++    CF_SCREENFONTS,
++    CF_SCRIPTSONLY,
++    CF_SELECTSCRIPT,
++    CF_SHOWHELP,
++    CF_TTONLY,
++    CF_USESTYLE,
++    CF_WYSIWYG);
++#endif
+ #endif /* WINVER >= 0x0601 */
+ 
+ // these are extra nFontType bits that are added to what is returned to the
+@@ -788,6 +914,15 @@ WINCOMMDLGAPI BOOL APIENTRY ChooseFontW(LPCHOOSEFONTW);
+ #define BOLD_FONTTYPE         0x0100
+ #define ITALIC_FONTTYPE       0x0200
+ #define REGULAR_FONTTYPE      0x0400
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CHOOSEFONT_FONT_TYPE, unsigned short,
++    BOLD_FONTTYPE,
++    ITALIC_FONTTYPE,
++    PRINTER_FONTTYPE,
++    REGULAR_FONTTYPE,
++    SCREEN_FONTTYPE,
++    SIMULATED_FONTTYPE);
++#endif
+ 
+ // EnumFonts callback routine only uses these bits, so we can use the rest
+ 
+@@ -862,7 +997,7 @@ typedef struct tagPDA {
+    HGLOBAL          hDevMode;
+    HGLOBAL          hDevNames;
+    HDC              hDC;
+-   DWORD            Flags;
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD            Flags;
+    WORD             nFromPage;
+    WORD             nToPage;
+    WORD             nMinPage;
+@@ -883,7 +1018,7 @@ typedef struct tagPDW {
+    HGLOBAL          hDevMode;
+    HGLOBAL          hDevNames;
+    HDC              hDC;
+-   DWORD            Flags;
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD            Flags;
+    WORD             nFromPage;
+    WORD             nToPage;
+    WORD             nMinPage;
+@@ -1017,7 +1152,7 @@ typedef struct tagPDEXA {
+    HGLOBAL               hDevMode;             // handle to DevMode
+    HGLOBAL               hDevNames;            // handle to DevNames
+    HDC                   hDC;                  // printer DC/IC or NULL
+-   DWORD                 Flags;                // PD_ flags
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD                 Flags;                // PD_ flags
+    DWORD                 Flags2;               // reserved
+    DWORD                 ExclusionFlags;       // items to exclude from driver pages
+    DWORD                 nPageRanges;          // number of page ranges
+@@ -1043,7 +1178,7 @@ typedef struct tagPDEXW {
+    HGLOBAL               hDevMode;             // handle to DevMode
+    HGLOBAL               hDevNames;            // handle to DevNames
+    HDC                   hDC;                  // printer DC/IC or NULL
+-   DWORD                 Flags;                // PD_ flags
++   _Win32_AssociatedEnum_(PRINTDLGEX_FLAGS) DWORD                 Flags;                // PD_ flags
+    DWORD                 Flags2;               // reserved
+    DWORD                 ExclusionFlags;       // items to exclude from driver pages
+    DWORD                 nPageRanges;          // number of page ranges
+@@ -1114,6 +1249,37 @@ WINCOMMDLGAPI HRESULT APIENTRY PrintDlgExW(_Inout_ LPPRINTDLGEXW pPD);
+ #define PD_NOCURRENTPAGE               0x00800000
+ #define PD_EXCLUSIONFLAGS              0x01000000
+ #define PD_USELARGETEMPLATE            0x10000000
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PRINTDLGEX_FLAGS, unsigned long,
++    PD_ALLPAGES,
++    PD_COLLATE,
++    PD_CURRENTPAGE,
++    PD_DISABLEPRINTTOFILE,
++    PD_ENABLEPRINTTEMPLATE,
++    PD_ENABLEPRINTTEMPLATEHANDLE,
++    PD_EXCLUSIONFLAGS,
++    PD_HIDEPRINTTOFILE,
++    PD_NOCURRENTPAGE,
++    PD_NOPAGENUMS,
++    PD_NOSELECTION,
++    PD_NOWARNING,
++    PD_PAGENUMS,
++    PD_PRINTTOFILE,
++    PD_RETURNDC,
++    PD_RETURNDEFAULT,
++    PD_RETURNIC,
++    PD_SELECTION,
++    PD_USEDEVMODECOPIES,
++    PD_USEDEVMODECOPIESANDCOLLATE,
++    PD_USELARGETEMPLATE,
++    PD_ENABLEPRINTHOOK,
++    PD_ENABLESETUPHOOK,
++    PD_ENABLESETUPTEMPLATE,
++    PD_ENABLESETUPTEMPLATEHANDLE,
++    PD_NONETWORKBUTTON,
++    PD_PRINTSETUP,
++    PD_SHOWHELP);
++#endif
+ #endif /* WINVER >= 0x0500 */
+ 
+ #if(WINVER >= 0x0500)
+@@ -1155,6 +1321,7 @@ typedef const DEVNAMES *PCDEVNAMES;
  #define DN_DEFAULTPRN      0x0001
  
  
@@ -59,3 +425,50 @@ index 4083a3eb..7928708c 100644
  WINCOMMDLGAPI DWORD APIENTRY CommDlgExtendedError(VOID);
  
  #if(WINVER >= 0x0400)
+@@ -1175,7 +1342,7 @@ typedef struct tagPSDA
+     HWND            hwndOwner;
+     HGLOBAL         hDevMode;
+     HGLOBAL         hDevNames;
+-    DWORD           Flags;
++    _Win32_AssociatedEnum_(PAGESETUPDLG_FLAGS) DWORD           Flags;
+     POINT           ptPaperSize;
+     RECT            rtMinMargin;
+     RECT            rtMargin;
+@@ -1192,7 +1359,7 @@ typedef struct tagPSDW
+     HWND            hwndOwner;
+     HGLOBAL         hDevMode;
+     HGLOBAL         hDevNames;
+-    DWORD           Flags;
++    _Win32_AssociatedEnum_(PAGESETUPDLG_FLAGS) DWORD           Flags;
+     POINT           ptPaperSize;
+     RECT            rtMinMargin;
+     RECT            rtMargin;
+@@ -1239,6 +1406,28 @@ WINCOMMDLGAPI BOOL APIENTRY PageSetupDlgW( LPPAGESETUPDLGW );
+ #define PSD_ENABLEPAGEPAINTHOOK           0x00040000
+ #define PSD_DISABLEPAGEPAINTING           0x00080000
+ #define PSD_NONETWORKBUTTON               0x00200000 // must be same as PD_*
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PAGESETUPDLG_FLAGS, unsigned long,
++    PSD_DEFAULTMINMARGINS,
++    PSD_DISABLEMARGINS,
++    PSD_DISABLEORIENTATION,
++    PSD_DISABLEPAGEPAINTING,
++    PSD_DISABLEPAPER,
++    PSD_DISABLEPRINTER,
++    PSD_ENABLEPAGEPAINTHOOK,
++    PSD_ENABLEPAGESETUPHOOK,
++    PSD_ENABLEPAGESETUPTEMPLATE,
++    PSD_ENABLEPAGESETUPTEMPLATEHANDLE,
++    PSD_INHUNDREDTHSOFMILLIMETERS,
++    PSD_INTHOUSANDTHSOFINCHES,
++    PSD_INWININIINTLMEASURE,
++    PSD_MARGINS,
++    PSD_MINMARGINS,
++    PSD_NONETWORKBUTTON,
++    PSD_NOWARNING,
++    PSD_RETURNDEFAULT,
++    PSD_SHOWHELP);
++#endif
+ #endif /* WINVER >= 0x0400 */
+ 
+ 

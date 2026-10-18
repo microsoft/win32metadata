@@ -668,6 +668,9 @@ WM_UNICHAR=Windows.Win32.UI.WindowsAndMessaging
 WM_PRINTCLIENT=Windows.Win32.UI.WindowsAndMessaging
 WM_NOTIFY=Windows.Win32.UI.WindowsAndMessaging
 # endregion
+# region richole.h
+RECO_FLAGS=Windows.Win32.System.SystemServices
+# endregion richole.h
 # region securitybaseapi.h
 CveEventWrite=Windows.Win32.System.Diagnostics.Etw
 # endregion securitybaseapi.h

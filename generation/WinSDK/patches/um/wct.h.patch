@@ -1,9 +1,26 @@
 diff --git a/um/wct.h b/um/wct.h
-index 84abdf2d..f1f3be84 100644
 --- a/um/wct.h
 +++ b/um/wct.h
-@@ -105,6 +105,8 @@ typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
+@@ -20,6 +20,11 @@ History:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS;
++typedef unsigned long WAIT_CHAIN_THREAD_OPTIONS;
++#endif
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -103,16 +108,23 @@ typedef VOID (CALLBACK *PWAITCHAINCALLBACK) (
+     );
+ 
  #define WCT_ASYNC_OPEN_FLAG 0x1
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS, unsigned long,
++    WCT_ASYNC_OPEN_FLAG);
++#endif
  #define WCTP_OPEN_ALL_FLAGS (WCT_ASYNC_OPEN_FLAG)
  
 +_Win32_SetLastError_
@@ -11,7 +28,9 @@ index 84abdf2d..f1f3be84 100644
  _Check_return_
  WINADVAPI
  HWCT WINAPI
-@@ -113,6 +115,7 @@ OpenThreadWaitChainSession (
+ OpenThreadWaitChainSession (
+-    _In_ DWORD Flags,
++    _Win32_AssociatedEnum_(OPEN_THREAD_WAIT_CHAIN_SESSION_FLAGS) _In_ DWORD Flags,
      _In_opt_ PWAITCHAINCALLBACK callback
      );
  
@@ -19,7 +38,16 @@ index 84abdf2d..f1f3be84 100644
  WINADVAPI
  VOID WINAPI
  CloseThreadWaitChainSession (
-@@ -125,6 +128,8 @@ CloseThreadWaitChainSession (
+@@ -122,16 +134,24 @@ CloseThreadWaitChainSession (
+ #define WCT_OUT_OF_PROC_FLAG     0x1
+ #define WCT_OUT_OF_PROC_COM_FLAG 0x2
+ #define WCT_OUT_OF_PROC_CS_FLAG  0x4
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(WAIT_CHAIN_THREAD_OPTIONS, unsigned long,
++    WCT_OUT_OF_PROC_COM_FLAG,
++    WCT_OUT_OF_PROC_CS_FLAG,
++    WCT_OUT_OF_PROC_FLAG);
++#endif
  #define WCT_NETWORK_IO_FLAG      0x8
  #define WCTP_GETINFO_ALL_FLAGS (WCT_OUT_OF_PROC_FLAG|WCT_OUT_OF_PROC_COM_FLAG|WCT_OUT_OF_PROC_CS_FLAG)
  
@@ -28,7 +56,15 @@ index 84abdf2d..f1f3be84 100644
  _Check_return_
  WINADVAPI
  BOOL WINAPI
-@@ -141,6 +146,7 @@ GetThreadWaitChain (
+ GetThreadWaitChain (
+     _In_ HWCT WctHandle,
+     _In_opt_ DWORD_PTR Context,
+-    _In_ DWORD Flags,
++    _Win32_AssociatedEnum_(WAIT_CHAIN_THREAD_OPTIONS) _In_ DWORD Flags,
+     _In_ DWORD ThreadId,
+     _Inout_ LPDWORD NodeCount,
+     _Out_writes_(*NodeCount) PWAITCHAIN_NODE_INFO NodeInfoArray,
+@@ -141,6 +161,7 @@ GetThreadWaitChain (
  typedef HRESULT (*PCOGETCALLSTATE)(int, PULONG);
  typedef HRESULT (*PCOGETACTIVATIONSTATE)(GUID, DWORD, DWORD*);
  

@@ -1,8 +1,40 @@
 diff --git a/um/txfw32.h b/um/txfw32.h
-index 17ecc1c7..cbc5b0e4 100644
 --- a/um/txfw32.h
 +++ b/um/txfw32.h
-@@ -300,6 +300,8 @@ typedef struct _TXF_LOG_RECORD_AFFECTED_FILE {
+@@ -30,6 +30,10 @@
+ #ifndef _TXF_W32_H_INCLUDED_
+ #define _TXF_W32_H_INCLUDED_
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned short TXF_LOG_RECORD_TYPE;
++#endif
++
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -43,6 +47,12 @@
+ #define TXF_LOG_RECORD_TYPE_WRITE           0x01
+ #define TXF_LOG_RECORD_TYPE_TRUNCATE        0x02
+ #define TXF_LOG_RECORD_TYPE_AFFECTED_FILE   0x04
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(TXF_LOG_RECORD_TYPE, unsigned short,
++    TXF_LOG_RECORD_TYPE_AFFECTED_FILE,
++    TXF_LOG_RECORD_TYPE_TRUNCATE,
++    TXF_LOG_RECORD_TYPE_WRITE);
++#endif
+ 
+ #define TXF_LOG_RECORD_GENERIC_TYPE_COMMIT  0x01
+ #define TXF_LOG_RECORD_GENERIC_TYPE_ABORT   0x02
+@@ -91,7 +101,7 @@ typedef struct _TXF_LOG_RECORD_BASE {
+     //  Type of record, defined above.
+     //
+ 
+-    USHORT RecordType;
++    _Win32_AssociatedEnum_(TXF_LOG_RECORD_TYPE) USHORT RecordType;
+ 
+     //
+     //  Length of this record in bytes.
+@@ -300,6 +310,8 @@ typedef struct _TXF_LOG_RECORD_AFFECTED_FILE {
  extern "C" {
  #endif
  
@@ -11,7 +43,7 @@ index 17ecc1c7..cbc5b0e4 100644
  BOOL
  WINAPI
  TxfLogCreateFileReadContext (
-@@ -367,6 +369,8 @@ TxfLogCreateRangeReadContext (
+@@ -367,6 +379,8 @@ TxfLogCreateRangeReadContext (
  
  */
  
@@ -20,7 +52,7 @@ index 17ecc1c7..cbc5b0e4 100644
  BOOL
  WINAPI
  TxfLogDestroyReadContext (
-@@ -385,6 +389,8 @@ TxfLogDestroyReadContext (
+@@ -385,6 +399,8 @@ TxfLogDestroyReadContext (
  */
  
  

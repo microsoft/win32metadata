@@ -1,8 +1,39 @@
 diff --git a/um/wdstci.h b/um/wdstci.h
-index a055f544..9a6a01f9 100644
 --- a/um/wdstci.h
 +++ b/um/wdstci.h
-@@ -220,12 +220,14 @@ typedef struct _WDS_TRANSPORTCLIENT_CALLBACKS
+@@ -19,6 +19,10 @@ Environment:
+ 
+ #ifndef _WDSTCI_H
+ #define _WDSTCI_H
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL;
++#endif
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -50,6 +54,11 @@ extern "C"
+ 
+ #define WDS_TRANSPORTCLIENT_AUTH    0x1
+ #define WDS_TRANSPORTCLIENT_NO_AUTH 0x2
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL, unsigned long,
++    WDS_TRANSPORTCLIENT_AUTH,
++    WDS_TRANSPORTCLIENT_NO_AUTH);
++#endif
+ 
+ typedef enum _TRANSPORTCLIENT_CALLBACK_ID
+ {
+@@ -166,7 +175,7 @@ typedef struct _WDS_TRANSPORTCLIENT_REQUEST
+     //
+     // The level of authentication to send to the server.
+     //
+-    ULONG ulAuthLevel;
++    _Win32_AssociatedEnum_(WDS_TRANSPORTCLIENT_REQUEST_AUTH_LEVEL) ULONG ulAuthLevel;
+ 
+     //
+     // Server name.
+@@ -220,12 +229,14 @@ typedef struct _WDS_TRANSPORTCLIENT_CALLBACKS
  
  //----------------------------------------------------------------- Functions.
  
@@ -17,7 +48,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientInitializeSession (
-@@ -234,6 +236,7 @@ WdsTransportClientInitializeSession (
+@@ -234,6 +245,7 @@ WdsTransportClientInitializeSession (
      _Out_ PHANDLE hSessionKey
      );
  
@@ -25,7 +56,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientRegisterCallback (
-@@ -242,12 +245,14 @@ WdsTransportClientRegisterCallback (
+@@ -242,12 +254,14 @@ WdsTransportClientRegisterCallback (
      _In_ PVOID pfnCallback
      );
  
@@ -40,7 +71,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientCompleteReceive (
-@@ -256,6 +261,7 @@ WdsTransportClientCompleteReceive (
+@@ -256,6 +270,7 @@ WdsTransportClientCompleteReceive (
      _In_ PULARGE_INTEGER pullOffset
      );
  
@@ -48,7 +79,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientCancelSession (
-@@ -269,6 +275,7 @@ WdsTransportClientCancelSessionEx (
+@@ -269,6 +284,7 @@ WdsTransportClientCancelSessionEx (
      _In_ DWORD dwErrorCode
      );
  
@@ -56,7 +87,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientWaitForCompletion (
-@@ -276,6 +283,7 @@ WdsTransportClientWaitForCompletion (
+@@ -276,6 +292,7 @@ WdsTransportClientWaitForCompletion (
      _In_ ULONG uTimeout
      );
  
@@ -64,7 +95,7 @@ index a055f544..9a6a01f9 100644
  DWORD
  WDSTCIAPI
  WdsTransportClientQueryStatus (
-@@ -284,24 +292,28 @@ WdsTransportClientQueryStatus (
+@@ -284,24 +301,28 @@ WdsTransportClientQueryStatus (
      _Out_ PULONG puErrorCode
      );
  

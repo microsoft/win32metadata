@@ -1867,7 +1867,7 @@ namespace Win32MetadataScraperTests
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "enums.json")));
-            var names = DeviceInstallationGroups.Select(group => group.Name).ToHashSet(StringComparer.Ordinal);
+            var names = DeviceInstallationGroups.Select(group => group.Name).Append("CM_LOG_CONF").ToHashSet(StringComparer.Ordinal);
             var items = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
             Assert.DoesNotContain(items, item => item.TryGetProperty("name", out var name) && names.Contains(name.GetString()));
             var residual = items.Where(item => item.TryGetProperty("addUsesTo", out var name) && names.Contains(name.GetString())).ToArray();
@@ -1877,7 +1877,7 @@ namespace Win32MetadataScraperTests
                     .Select(use => use.GetProperty("method").GetString()).OrderBy(value => value, StringComparer.Ordinal));
             Assert.All(residual.SelectMany(item => item.GetProperty("uses").EnumerateArray()),
                 use => Assert.Equal("ulFlags", use.GetProperty("parameter").GetString()));
-            foreach (string retained in new[] { "CM_LOG_CONF", "CM_DEVNODE_STATUS_FLAGS", "CM_PROB" })
+            foreach (string retained in new[] { "CM_DEVNODE_STATUS_FLAGS", "CM_PROB" })
                 Assert.Contains(items, item => item.TryGetProperty("name", out var name) && name.GetString() == retained);
 
             string additions = string.Join("\n", new[] { "cfgmgr32.h", "newdev.h" }.SelectMany(header =>
@@ -1890,7 +1890,7 @@ namespace Win32MetadataScraperTests
                     Flags = match.Groups["flags"].Success,
                     Arguments = match.Groups["arguments"].Value.Split(',').Select(value => value.Trim()).ToArray(),
                 }).ToArray();
-            Assert.Equal(26, groups.Length);
+            Assert.Equal(27, groups.Length);
             Assert.Equal(names.OrderBy(value => value, StringComparer.Ordinal),
                 groups.Select(group => group.Arguments[0]).Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
             foreach (var contract in DeviceInstallationGroups)
@@ -1901,6 +1901,11 @@ namespace Win32MetadataScraperTests
                 Assert.Equal(contract.Members, contributions.SelectMany(group => group.Arguments.Skip(2))
                     .Distinct(StringComparer.Ordinal).Count());
             }
+            var logicalConfigurations = Assert.Single(groups.Where(group => group.Arguments[0] == "CM_LOG_CONF"));
+            Assert.False(logicalConfigurations.Flags);
+            Assert.Equal("unsigned long", logicalConfigurations.Arguments[1]);
+            Assert.Equal(new[] { "BASIC_LOG_CONF", "FILTERED_LOG_CONF", "ALLOC_LOG_CONF", "BOOT_LOG_CONF",
+                "FORCED_LOG_CONF", "OVERRIDE_LOG_CONF", "NUM_LOG_CONF" }, logicalConfigurations.Arguments.Skip(2));
             Assert.Equal(177, DeviceInstallationGroups.Sum(group => group.Members));
             Assert.Equal(41, DeviceInstallationEnumUses.Length);
             Assert.DoesNotContain("enum ", additions);
@@ -1978,6 +1983,110 @@ namespace Win32MetadataScraperTests
                         new KeyValuePair<string, uint>(member.Identifier.ValueText,
                             Assert.IsType<uint>(((IFieldSymbol)model.GetDeclaredSymbol(member)).ConstantValue))).ToArray(), StringComparer.Ordinal);
             }
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_POSITIVE_GENERATED_ROOT", "WINHTTP_DEVICE_POSITIVE_ENUM_CONTRACTS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualDevicePositiveEnumGroupsAndUsesReachNormalGeneratedSources(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_POSITIVE_GENERATED_ROOT");
+            string[] files = new[] { "common", architecture }.Select(folder => Path.Combine(root, folder))
+                .Where(Directory.Exists).SelectMany(folder => Directory.GetFiles(folder, "*.cs", SearchOption.AllDirectories)).ToArray();
+            Assert.NotEmpty(files);
+            var nodes = files.SelectMany(file => CSharpSyntaxTree.ParseText(File.ReadAllText(file)).GetRoot().DescendantNodes()).ToArray();
+            using var report = JsonDocument.Parse(File.ReadAllText(Environment.GetEnvironmentVariable("WINHTTP_DEVICE_POSITIVE_ENUM_CONTRACTS")));
+            var groups = report.RootElement.GetProperty("selected").EnumerateArray().ToArray();
+            Assert.NotEmpty(groups);
+            var declarations = new List<EnumDeclarationSyntax>();
+            int useCount = 0;
+            foreach (var group in groups)
+            {
+                string name = group.GetProperty("name").GetString();
+                var matches = nodes.OfType<EnumDeclarationSyntax>().Where(node => node.Identifier.ValueText == name).ToArray();
+                Assert.True(matches.Length != 0, architecture + ": missing native group " + name);
+                foreach (var declaration in matches)
+                {
+                    Assert.Equal(group.GetProperty("type").GetString(), Assert.Single(declaration.BaseList.Types).Type.ToString());
+                    string expectedNamespace = group.GetProperty("namespace").GetString();
+                    string sourceNamespace = declaration.Ancestors().OfType<BaseNamespaceDeclarationSyntax>().Single().Name.ToString();
+                    if (sourceNamespace != expectedNamespace)
+                        Assert.Contains(name + "=" + expectedNamespace,
+                            File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "requiredNamespacesForNames.rsp")));
+                    Assert.Equal(group.GetProperty("flags").GetBoolean(), declaration.AttributeLists.SelectMany(list => list.Attributes)
+                        .Any(attribute => attribute.Name.ToString().EndsWith("Flags", StringComparison.Ordinal)));
+                    Assert.Equal(group.GetProperty("members").EnumerateArray().Select(member => member.GetProperty("name").GetString()),
+                        declaration.Members.Select(member => member.Identifier.ValueText));
+                    Assert.Equal(matches[0].Members.Select(member => member.EqualsValue?.Value.WithoutTrivia().ToFullString()),
+                        declaration.Members.Select(member => member.EqualsValue?.Value.WithoutTrivia().ToFullString()));
+                }
+                declarations.Add(matches[0].WithAttributeLists(default)
+                    .WithMembers(SyntaxFactory.SeparatedList(matches[0].Members.Select(member => member.WithAttributeLists(default)))));
+                foreach (var use in group.GetProperty("uses").EnumerateArray())
+                {
+                    string[] target = use.GetProperty("symbol").GetString().Split("::", StringSplitOptions.None);
+                    string member = target[^1];
+                    bool field = use.GetProperty("locations")[0].GetProperty("kind").GetString() == "field";
+                    IEnumerable<AttributeSyntax>[] attributes;
+                    if (field)
+                    {
+                        attributes = nodes.OfType<StructDeclarationSyntax>().Where(node => node.Identifier.ValueText == target[0])
+                            .SelectMany(node => node.Members.OfType<FieldDeclarationSyntax>())
+                            .Where(node => node.Declaration.Variables.Any(variable => variable.Identifier.ValueText == member))
+                            .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                    }
+                    else
+                    {
+                        string method = target[^2];
+                        var methods = nodes.OfType<MethodDeclarationSyntax>().Where(node => node.Identifier.ValueText == method &&
+                            (target.Length != 3 || node.Ancestors().OfType<BaseTypeDeclarationSyntax>()
+                                .Any(owner => owner.Identifier.ValueText == target[0]))).ToArray();
+                        attributes = member == "return"
+                            ? methods.Select(node => node.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return")
+                                .SelectMany(list => list.Attributes)).ToArray()
+                            : methods.SelectMany(node => node.ParameterList.Parameters)
+                                .Where(node => node.Identifier.ValueText == member)
+                                .Select(node => node.AttributeLists.SelectMany(list => list.Attributes)).ToArray();
+                    }
+                    if (use.TryGetProperty("nativeRoute", out var route) &&
+                        !route.GetProperty("architectures").EnumerateArray().Any(value => value.GetString() == architecture))
+                    {
+                        Assert.Empty(attributes);
+                        Assert.DoesNotContain(nodes.OfType<MethodDeclarationSyntax>(), node => node.Identifier.ValueText == target[^2]);
+                        continue;
+                    }
+                    Assert.True(attributes.Length != 0, architecture + ": missing native use " + use.GetProperty("symbol").GetString());
+                    foreach (var occurrence in attributes)
+                    {
+                        var associated = Assert.Single(occurrence.Where(attribute =>
+                            attribute.Name.ToString().EndsWith("AssociatedEnum", StringComparison.Ordinal)));
+                        Assert.Equal("\"" + name + "\"", Assert.Single(associated.ArgumentList.Arguments).Expression.ToString());
+                    }
+                    useCount++;
+                }
+            }
+            var tree = CSharpSyntaxTree.ParseText(string.Join("\n", declarations.Select(node => node.NormalizeWhitespace().ToFullString())));
+            var compilation = CSharpCompilation.Create("ActualDevicePositiveEnumValues", new[] { tree },
+                new[] { MetadataReference.CreateFromFile(typeof(object).Assembly.Location) },
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+            Assert.Empty(compilation.GetDiagnostics().Where(diagnostic => diagnostic.Severity == DiagnosticSeverity.Error));
+            var model = compilation.GetSemanticModel(tree);
+            foreach (var group in groups)
+            {
+                var declaration = Assert.Single(tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .Where(node => node.Identifier.ValueText == group.GetProperty("name").GetString()));
+                var expected = group.GetProperty("members").EnumerateArray().ToArray();
+                for (int i = 0; i < expected.Length; i++)
+                {
+                    var symbol = Assert.IsAssignableFrom<IFieldSymbol>(model.GetDeclaredSymbol(declaration.Members[i]));
+                    Assert.Equal(expected[i].GetProperty("value").GetDecimal(),
+                        Convert.ToDecimal(symbol.ConstantValue, System.Globalization.CultureInfo.InvariantCulture));
+                }
+            }
+            this.output.WriteLine($"{architecture}: {groups.Length} existing logical enum identities, " +
+                $"{groups.Sum(group => group.GetProperty("members").GetArrayLength())} exact compiled ordered values/storage/Flags, " +
+                $"{useCount} exact native use-site associations through normal generated sources.");
         }
 
         [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]
