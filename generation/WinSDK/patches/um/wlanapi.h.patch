@@ -1,5 +1,5 @@
 diff --git a/um/wlanapi.h b/um/wlanapi.h
-index 0d77f58e..8726a6ea 100644
+index 0d77f58e..19da7888 100644
 --- a/um/wlanapi.h
 +++ b/um/wlanapi.h
 @@ -76,6 +76,8 @@ extern "C" {
@@ -45,23 +45,31 @@ index 0d77f58e..8726a6ea 100644
  #ifdef __midl
  // use the 4-byte enum
  typedef [v1_enum] enum _WLAN_NOTIFICATION_ACM {
-@@ -1224,6 +1237,7 @@ typedef struct _WFD_GROUP_ID
+@@ -1224,20 +1237,23 @@ typedef struct _WFD_GROUP_ID
  
  
  // public APIs
 +_Win32_SupportedOS_WindowsVista_
++DWORD WINAPI
++WlanCloseHandle(
++    _In_ HANDLE hClientHandle,
++    _Reserved_ PVOID pReserved
++);
++
++_Win32_SupportedOS_WindowsVista_
  DWORD WINAPI
  WlanOpenHandle(
      _In_ DWORD dwClientVersion,
-@@ -1232,12 +1246,14 @@ WlanOpenHandle(
-     _Out_ PHANDLE phClientHandle
- );
- 
-+_Win32_SupportedOS_WindowsVista_
- DWORD WINAPI
- WlanCloseHandle(
-     _In_ HANDLE hClientHandle,
-     _Reserved_ PVOID pReserved
+     _Reserved_ PVOID pReserved,
+     _Out_ PDWORD pdwNegotiatedVersion,
+-    _Out_ PHANDLE phClientHandle
+-);
+-
+-DWORD WINAPI
+-WlanCloseHandle(
+-    _In_ HANDLE hClientHandle,
+-    _Reserved_ PVOID pReserved
++    _Out_ _Win32_RAIIFree_(WlanCloseHandle) PHANDLE phClientHandle
  );
  
 +_Win32_SupportedOS_WindowsVista_

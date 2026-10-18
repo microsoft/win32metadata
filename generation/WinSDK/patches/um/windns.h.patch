@@ -1,5 +1,5 @@
 diff --git a/um/windns.h b/um/windns.h
-index f213f55c..aeb0e528 100644
+index f213f55c..652351af 100644
 --- a/um/windns.h
 +++ b/um/windns.h
 @@ -412,6 +412,7 @@ DNS_CONFIG_TYPE;
@@ -77,31 +77,49 @@ index f213f55c..aeb0e528 100644
  DNS_STATUS
  WINAPI
  DnsCancelQuery(
-@@ -1103,6 +1115,7 @@ DnsCancelQueryRaw(
+@@ -1103,20 +1115,29 @@ DnsCancelQueryRaw(
  //  the future.
  //
  
 +_Win32_SupportedOS_Windows2000_
++VOID
++WINAPI
++DnsReleaseContextHandle(
++    _In_        HANDLE          hContext
++    );
++
++_Win32_SupportedOS_Windows2000_
  DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_W(
-@@ -1111,6 +1124,7 @@ DnsAcquireContextHandle_W(
-     _Outptr_     PHANDLE         pContext
+     _In_            DWORD           CredentialFlags,
+     _In_opt_        PVOID           Credentials,
+-    _Outptr_     PHANDLE         pContext
++    _Outptr_ _Win32_RAIIFree_(DnsReleaseContextHandle) PHANDLE pContext
      );
  
 +_Win32_SupportedOS_Windows2000_
  DNS_STATUS
  WINAPI
  DnsAcquireContextHandle_A(
-@@ -1125,6 +1139,7 @@ DnsAcquireContextHandle_A(
+     _In_            DWORD           CredentialFlags,
+     _In_opt_        PVOID           Credentials,
+-    _Outptr_     PHANDLE         pContext
++    _Outptr_ _Win32_RAIIFree_(DnsReleaseContextHandle) PHANDLE pContext
+     );
+ 
+ #ifdef UNICODE
+@@ -1125,16 +1146,11 @@ DnsAcquireContextHandle_A(
  #define DnsAcquireContextHandle DnsAcquireContextHandle_A
  #endif
  
-+_Win32_SupportedOS_Windows2000_
- VOID
- WINAPI
- DnsReleaseContextHandle(
-@@ -1135,6 +1150,7 @@ DnsReleaseContextHandle(
+-VOID
+-WINAPI
+-DnsReleaseContextHandle(
+-    _In_        HANDLE          hContext
+-    );
+-
+ //
  //  Dynamic Update API
  //
  

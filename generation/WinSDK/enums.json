@@ -13383,26 +13383,6 @@
     ]
   },
   {
-    "name": "HTTP_RECEIVE_HTTP_REQUEST_FLAGS",
-    "members": [
-      {
-        "name": "0__zero_"
-      },
-      {
-        "name": "HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY"
-      },
-      {
-        "name": "HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY"
-      }
-    ],
-    "uses": [
-      {
-        "method": "HttpReceiveHttpRequest",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "name": "SYSTEM_METRICS_INDEX",
     "type": "int",
     "members": [

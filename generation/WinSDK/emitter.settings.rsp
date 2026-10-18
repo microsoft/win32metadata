@@ -953,33 +953,8 @@ DCompositionGetTargetStatistics::targetStats=[RetVal]
 IDCompositionTexture::GetAvailableFence::availableFence=[ComOutPtr]
 IDCompositionDevice::GetFrameStatistics::statistics=[RetVal]
 IDCompositionDevice2::GetFrameStatistics::statistics=[RetVal]
-HttpAddFragmentToCache::Overlapped=[In][Out][Optional][Retained]
-HttpCancelHttpRequest::Overlapped=[In][Out][Optional][Retained]
 HttpCloseRequestQueue::RequestQueueHandle=HTTP_REQUEST_QUEUE_HANDLE
-HttpCreateRequestQueue::Flags=[Optional]
-HttpCreateRequestQueue::Name=[Optional]
 HttpCreateRequestQueue::RequestQueueHandle=HTTP_REQUEST_QUEUE_HANDLE*
-HttpCreateRequestQueue::SecurityAttributes=[Optional]
-HttpFlushResponseCache::Overlapped=[In][Out][Optional][Retained]
-HttpReadFragmentFromCache::ByteRange=[Optional]
-HttpReadFragmentFromCache::Overlapped=[In][Out][Optional][Retained]
-HttpReceiveClientCertificate::Overlapped=[In][Out][Optional][Retained]
-HttpReceiveHttpRequest::Overlapped=[In][Out][Optional][Retained]
-HttpReceiveRequestEntityBody::Overlapped=[In][Out][Optional][Retained]
-HttpSendHttpResponse::BytesSent=[Optional]
-HttpSendHttpResponse::CachePolicy=[Optional]
-HttpSendHttpResponse::LogData=[Optional]
-HttpSendHttpResponse::Overlapped=[In][Out][Optional][Retained]
-HttpSendResponseEntityBody::BytesSent=[Optional]
-HttpSendResponseEntityBody::EntityChunkCount=[Optional]
-HttpSendResponseEntityBody::LogData=[Optional]
-HttpSendResponseEntityBody::Overlapped=[In][Out][Optional][Retained]
-HttpSendResponseEntityBody::Reserved1=[Optional]
-HttpSendResponseEntityBody::Reserved2=[Optional]
-HttpWaitForDemandStart::Overlapped=[In][Out][Optional][Retained]
-HttpWaitForDisconnect::Overlapped=[In][Out][Optional][Retained]
-HttpWaitForDisconnectEx::Overlapped=[In][Out][Optional][Retained]
-HttpWaitForDisconnectEx::Reserved=[Optional]
 IDCompositionSurface::BeginDraw::updateObject=[ComOutPtr]
 ^Pdh\w+::return$=uint
 EnumSystemGeoNames::data=[-Optional]
@@ -991,9 +966,6 @@ NCryptOpenKey::dwLegacyKeySpec=[-Optional]
 MFPCreateMediaPlayer::creationOptions=[-Optional]
 DirectSoundCreate::pUnkOuter=[Optional]
 IDirectSound::CreateSoundBuffer::pUnkOuter=[Optional]
-FNCERTSRVBACKUPGETDYNAMICFILELISTW::hbc=[In]
-FNCERTSRVBACKUPGETDYNAMICFILELISTW::ppwszzFileList=[Out]
-FNCERTSRVBACKUPGETDYNAMICFILELISTW::pcbSize=[Out]
 FlushLogBuffers::pvMarshal=[In]
 FlushLogBuffers::pOverlapped=[In][Out][Optional][Retained]
 GetMessageA=[CanReturnMultipleSuccessValues]
@@ -1527,8 +1499,6 @@ CreateMetaFileA::return=[RAIIFree("DeleteMetaFile")]
 CreateMetaFileW::return=[RAIIFree("DeleteMetaFile")]
 CreatePrivateNamespaceA::return=[RAIIFree("ClosePrivateNamespace")]
 CreatePrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
-DnsAcquireContextHandle_A::pContext=[RAIIFree("DnsReleaseContextHandle")]
-DnsAcquireContextHandle_W::pContext=[RAIIFree("DnsReleaseContextHandle")]
 FilterFindFirst::lpFilterFind=[RAIIFree("FilterFindClose")]
 FilterInstanceFindFirst::lpFilterInstanceFind=[RAIIFree("FilterInstanceFindClose")]
 FilterVolumeFindFirst::lpVolumeFind=[RAIIFree("FilterVolumeFindClose")]
@@ -1565,7 +1535,6 @@ CfReleaseTransferKey::TransferKey=[-Out][In]
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
 LoadResource::return=[DoNotRelease]
 CertOpenStore::hCryptProv=[Reserved]
-WlanOpenHandle::phClientHandle=[RAIIFree("WlanCloseHandle")]
 IAudioSessionControl2::IsSystemSoundsSession=[CanReturnMultipleSuccessValues]
 GetUserGeoID::GeoClass=SYSGEOCLASS
 GetGeoInfoA::GeoType=SYSGEOTYPE
@@ -1579,7 +1548,6 @@ IAMStreamConfig::GetStreamCaps::pSCC=[NativeArrayInfo]
 ENUM_SERVICE_TYPE=[AssociatedConstant("SERVICE_NO_CHANGE")]
 SERVICE_ERROR=[AssociatedConstant("SERVICE_NO_CHANGE")]
 SERVICE_START_TYPE=[AssociatedConstant("SERVICE_NO_CHANGE")]
-HttpReceiveHttpRequest::Overlapped=[In][Out][Optional][Retained]
 PFTASKDIALOGCALLBACK::msg=[AssociatedEnum("TASKDIALOG_NOTIFICATIONS")]
 GlobalMemoryStatusEx::lpBuffer=[In]
 SHCreateItemInKnownFolder::dwKFFlags=[AssociatedEnum("KNOWN_FOLDER_FLAG")]
@@ -2235,7 +2203,6 @@ GdipGetImageDecoders::decoders=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceivehttprequest
-HttpReceiveHttpRequest::RequestBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wininet/nf-wininet-internetqueryoptionw
 # INTERNET_OPTION_PROXY returns packed INTERNET_PROXY_INFO and referenced strings.
 # https://learn.microsoft.com/windows/win32/api/wininet/ns-wininet-internet_cache_entry_infoa
@@ -2269,9 +2236,7 @@ WSALookupServiceNextW::lpqsResults=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromtcp6entry
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getownermodulefromudp6entry
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpqueryserviceconfiguration
-HttpQueryServiceConfiguration::pOutput=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/http/nf-http-httpreceiveclientcertificate
-HttpReceiveClientCertificate::SslClientCertInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2
 # https://learn.microsoft.com/windows/win32/api/icmpapi/nf-icmpapi-icmpsendecho2ex

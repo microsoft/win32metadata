@@ -1,8 +1,28 @@
 diff --git a/um/dsclient.h b/um/dsclient.h
-index 71ad8398..c6f489ad 100644
+index 71ad8398..f3ed155c 100644
 --- a/um/dsclient.h
 +++ b/um/dsclient.h
-@@ -459,7 +459,9 @@ typedef struct
+@@ -188,6 +188,9 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE  IDsBrowseDomainTree
+ 
++#if defined(WIN32METADATA) && defined(__clang__)
++struct _Win32_SupportedOS_WindowsVista_ IDsBrowseDomainTree;
++#endif
+ DECLARE_INTERFACE_IID_(IDsBrowseDomainTree, IUnknown, "7cabcf1e-78f5-11d2-960c-00c04fa31a86")
+ {
+     // *** IUnknown methods ***
+@@ -268,6 +271,9 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE IDsDisplaySpecifier
+ 
++#if defined(WIN32METADATA) && defined(__clang__)
++struct _Win32_SupportedOS_WindowsVista_ IDsDisplaySpecifier;
++#endif
+ DECLARE_INTERFACE_IID_(IDsDisplaySpecifier, IUnknown, "1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")
+ {
+     // *** IUnknown methods ***
+@@ -459,7 +465,9 @@ typedef struct
  // API exported for browsing for containers.
  //
  
@@ -12,7 +32,7 @@ index 71ad8398..c6f489ad 100644
  STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  #ifdef UNICODE
-@@ -471,7 +473,9 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
+@@ -471,7 +479,9 @@ STDAPI_(int) DsBrowseForContainerA(_Inout_ PDSBROWSEINFOA pInfo);
  
  // NOTE: these are here to keep old clients building - remove soon
  
@@ -22,3 +42,8 @@ index 71ad8398..c6f489ad 100644
  STDAPI DsGetFriendlyClassName(LPCWSTR pszObjectClass, _Out_writes_(cchBuffer) LPWSTR pszBuffer, UINT cchBuffer);
  
  
+@@ -484,4 +494,3 @@ struct __declspec(uuid("1ab4a8c0-6a0b-11d2-ad49-00c04fa31a86")) IDsDisplaySpecif
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
+-

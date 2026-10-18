@@ -1,5 +1,5 @@
 diff --git a/um/certbcli.h b/um/certbcli.h
-index eebe909f..b50f3d2e 100644
+index eebe909f..320f7e39 100644
 --- a/um/certbcli.h
 +++ b/um/certbcli.h
 @@ -63,6 +63,10 @@ extern "C" {
@@ -21,9 +21,16 @@ index eebe909f..b50f3d2e 100644
  HRESULT
  CERTBCLI_API
  CertSrvIsServerOnlineW(
-@@ -187,6 +190,7 @@ typedef HRESULT (CERTBCLI_CALL FNCERTSRVBACKUPGETDYNAMICFILELISTW)(
-     OUT WCHAR **ppwszzFileList,
-     OUT DWORD *pcbSize);
+@@ -183,10 +186,11 @@ FNCERTSRVISSERVERONLINEW *pfnCertSrvIsServerOnline = CertSrvIsServerOnline;
+ //---------------------------------------------------------------------------
+ 
+ typedef HRESULT (CERTBCLI_CALL FNCERTSRVBACKUPGETDYNAMICFILELISTW)(
+-    IN  HCSBC hbc,
+-    OUT WCHAR **ppwszzFileList,
+-    OUT DWORD *pcbSize);
++    _In_ IN  HCSBC hbc,
++    _Out_ OUT WCHAR **ppwszzFileList,
++    _Out_ OUT DWORD *pcbSize);
  
 +_Win32_SupportedOS_Server2003_
  HRESULT

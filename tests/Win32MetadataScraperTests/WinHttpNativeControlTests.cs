@@ -1423,9 +1423,9 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                     .Select(line => line.Substring(1).TrimEnd('\r'))));
             var groups = Regex.Matches(additions,
                 @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>\w+),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
-            Assert.Equal(27, groups.Count);
-            Assert.Equal(27, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
-            Assert.Equal(130, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
+            Assert.Equal(28, groups.Count);
+            Assert.Equal(28, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
+            Assert.Equal(132, groups.Sum(group => group.Groups["members"].Value.Split(',').Length));
             Assert.Equal(new[]
             {
                 "FILE_INFO_FLAGS_PERMISSIONS", "HTTP_INITIALIZE", "RASIKEV_PROJECTION_INFO_FLAGS", "WLAN_NOTIFICATION_SOURCES",
@@ -1433,11 +1433,17 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 .Select(group => group.Groups["name"].Value).OrderBy(value => value, StringComparer.Ordinal));
             foreach (Match group in groups)
             {
-                Assert.Equal(group.Groups["name"].Value == "SNMP_LOG" ? "int" : "DWORD", group.Groups["storage"].Value);
+                string storage = group.Groups["name"].Value switch
+                {
+                    "SNMP_LOG" => "int",
+                    "HTTP_RECEIVE_HTTP_REQUEST_FLAGS" => "ULONG",
+                    _ => "DWORD",
+                };
+                Assert.Equal(storage, group.Groups["storage"].Value);
                 foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
                     Assert.Matches(@"^[A-Za-z_]\w*$", member);
             }
-            Assert.Equal(65, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            Assert.Equal(66, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
             foreach (Match group in groups)
             {
@@ -1481,7 +1487,8 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "NWifi" => (new[] { "wlanapi.h" },
                     new[] { "WLAN_NOTIFICATION_SOURCES", "WLAN_CONNECTION_NOTIFICATION_FLAGS", "WLAN_SET_EAPHOST_FLAGS" },
                     Array.Empty<string>()),
-                "HttpServer" => (new[] { "http.h" }, new[] { "HTTP_INITIALIZE" }, Array.Empty<string>()),
+                "HttpServer" => (new[] { "http.h" },
+                    new[] { "HTTP_INITIALIZE", "HTTP_RECEIVE_HTTP_REQUEST_FLAGS" }, Array.Empty<string>()),
                 "Fs" => (new[] { "lmshare.h" },
                     new[] { "FILE_INFO_FLAGS_PERMISSIONS", "SESSION_INFO_USER_FLAGS" },
                     new[] { "FILE_INFO_FLAGS_PERMISSIONS", "SESSION_INFO_USER_FLAGS" }),
@@ -1503,6 +1510,12 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
             string checks = enabled ? "" : string.Join("\n", groups.Select(name => "using " + name + " = void;"));
+            bool legacySalEnriched = partition is "HttpServer" or "Certificates";
+            if (legacySalEnriched)
+            {
+                headers = headers.Append("main.cpp").ToArray();
+                checks += BroadSourceSalProbe;
+            }
             var before = Surface(root, original, partition, architecture, target, headers, checks,
                 salAnnotations: beforeSal, diagnostics: beforeDiagnostics, rawSalAnnotations: beforeRawSal);
             var after = Surface(root, prepared, partition, architecture, target, headers, checks,
@@ -1512,7 +1525,8 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "typedef " + name + (name == "SNMP_LOG" ? " int" : " unsigned long")).ToArray() : Array.Empty<string>();
             Assert.NotEmpty(before);
             Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
-            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+            Assert.Equal(beforeSal.Concat(legacySalEnriched ? BroadSourceSalAdditions(beforeSal, partition) :
+                    Enumerable.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeRawSal.Count, beforeSal.Count);
             Assert.Equal(afterRawSal.Count, afterSal.Count);
@@ -1595,9 +1609,13 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             foreach (string name in new[]
             {
                 "RPC_C_AUTHN_LEVEL", "RPC_C_IMP_LEVEL", "RPC_C_AUTHN_INFO_TYPE", "INTERNET_COOKIE_FLAGS",
-                "INTERNET_STATE", "PROXY_AUTO_DETECT_TYPE", "GET_ADAPTERS_ADDRESSES_FLAGS",
+                "INTERNET_STATE", "PROXY_AUTO_DETECT_TYPE",
             })
                 Assert.Contains(retained, item => item.TryGetProperty("name", out var value) && value.GetString() == name);
+            Assert.DoesNotContain(retained, item =>
+                item.TryGetProperty("name", out var value) && value.GetString() == "GET_ADAPTERS_ADDRESSES_FLAGS");
+            Assert.Contains("_Win32_FlagsEnum_(GET_ADAPTERS_ADDRESSES_FLAGS, unsigned long,",
+                File.ReadAllText(Path.Combine(root, "patches", "um", "iptypes.h.patch")));
             string[] overrides = File.ReadAllLines(Path.Combine(root, "emitter.settings.rsp"));
             foreach (string row in new[]
             {
@@ -2524,6 +2542,156 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 })
                     foreach (bool enabled in new[] { false, true })
                         yield return new object[] { owner.Partition, architecture.Item1, architecture.Item2, "c++", enabled };
+        }
+
+        [NativeMigrationTheory("NETWORK_BROAD_CONTROL_HEADERS")]
+        [MemberData(nameof(NetworkBroadSourceControls))]
+        public void NetworkBroadSourceContractsPreserveNativeAbiAndExactSalChanges(
+            string partition, string architecture, string target, string language, bool cInterface, bool enabled)
+        {
+            string header = partition switch
+            {
+                "HttpServer" => "http.h",
+                "Certificates" => "certbcli.h",
+                "Dns" => "windns.h",
+                "NWifi" => "wlanapi.h",
+                "Policy" => "gpedit.h",
+                "ActiveDirectory" => "dsclient.h",
+                _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
+            };
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string control = Environment.GetEnvironmentVariable("NETWORK_BROAD_CONTROL_HEADERS");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeAnnotations = new List<string>();
+            var afterAnnotations = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            string[] headers = { header, "main.cpp" };
+            // The unrelated WinHTTP include contains C++ helpers; the owned HTTP header also supports C.
+            string sourceText = partition == "HttpServer" && language == "c" ?
+                "#include \"intrinfix.h\"\n#define IN _In_\n#define OUT _Out_\n#include <WinSock2.h>\n#include <http.h>\n" : null;
+            var before = Surface(root, control, partition, architecture, target, headers, BroadSourceSalProbe,
+                metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
+                diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
+            var after = Surface(root, prepared, partition, architecture, target, headers, BroadSourceSalProbe,
+                metadataEnabled: enabled, annotations: afterAnnotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
+            string[] carriers = enabled && partition == "HttpServer" ?
+                new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } : Array.Empty<string>();
+            Assert.NotEmpty(before);
+            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            var addedSal = BroadSourceSalAdditions(beforeSal, partition);
+            Assert.Equal(beforeSal.Concat(addedSal).OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            var addedAnnotations = new List<string>();
+            if (enabled)
+            {
+                switch (partition)
+                {
+                    case "HttpServer":
+                        addedAnnotations.AddRange(new[]
+                        {
+                            "HTTP_RECEIVE_HTTP_REQUEST_FLAGS|Enum(HTTP_RECEIVE_REQUEST_FLAG_COPY_BODY, HTTP_RECEIVE_REQUEST_FLAG_FLUSH_BODY)",
+                            "Flags|AssociatedEnum",
+                            "RequestBuffer|ContainsInteriorPointers", "pOutput|ContainsInteriorPointers",
+                            "SslClientCertInfo|ContainsInteriorPointers",
+                            "HttpSendHttpResponse|SupportedOSPlatform(\"windows6.0.6000\")",
+                            "HttpSendResponseEntityBody|SupportedOSPlatform(\"windows6.0.6000\")",
+                        });
+                        addedAnnotations.AddRange(Enumerable.Repeat("Overlapped|Retained", 12));
+                        break;
+                    case "Dns":
+                        addedAnnotations.AddRange(Enumerable.Repeat("pContext|RAIIFree", 2));
+                        break;
+                    case "NWifi":
+                        addedAnnotations.Add("phClientHandle|RAIIFree");
+                        break;
+                    case "Policy":
+                    case "ActiveDirectory":
+                        bool cStyle = language == "c" || cInterface;
+                        foreach (string name in partition == "Policy" ?
+                            new[] { "IGPEInformation", "IGroupPolicyObject", "IRSOPInformation" } :
+                            new[] { "IDsBrowseDomainTree", "IDsDisplaySpecifier" })
+                        {
+                            int occurrences = (cStyle ? 3 : 2) +
+                                (name == "IDsDisplaySpecifier" && language == "c++" ? 1 : 0);
+                            addedAnnotations.AddRange(Enumerable.Repeat(
+                                name + "|SupportedOSPlatform(\"windows6.0.6000\")", occurrences));
+                        }
+                        break;
+                }
+            }
+            Assert.Equal(beforeAnnotations.Concat(addedAnnotations).OrderBy(value => value, StringComparer.Ordinal),
+                afterAnnotations.OrderBy(value => value, StringComparer.Ordinal));
+            this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
+                $"{before.Length} unchanged native signature/type/layout/value/typedef facts; " +
+                $"{addedSal.Count} exact legacy-SAL enrichments, {addedAnnotations.Count} exact source annotations; matched diagnostics.");
+        }
+
+        public static IEnumerable<object[]> NetworkBroadSourceControls()
+        {
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory" })
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (var mode in partition is "Policy" or "ActiveDirectory" ?
+                        new[] { ("c++", false), ("c++", true), ("c", false) } :
+                        new[] { ("c++", false), ("c", false) })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                partition, architecture.Item1, architecture.Item2, mode.Item1, mode.Item2, enabled,
+                            };
+        }
+
+        private const string BroadSourceSalProbe = @"
+void NetworkBroadSourceSalProbe(
+    _In_ void *networkProbeInput,
+    _Out_ void *networkProbeOutput,
+    _In_opt_ void *networkProbeOptionalInput,
+    _Out_opt_ void *networkProbeOptionalOutput,
+    _Inout_opt_ void *networkProbeOptionalInOut);
+";
+
+        private static List<string> BroadSourceSalAdditions(List<string> control, string partition)
+        {
+            var added = new List<string>();
+            void Add(string parameter, string probe, int count = 1)
+            {
+                string[] values = control.Where(value =>
+                    value.StartsWith(probe + "|", StringComparison.Ordinal)).ToArray();
+                Assert.NotEmpty(values);
+                foreach (string value in values)
+                {
+                    string payload = value.Substring(value.IndexOf('|') + 1);
+                    added.AddRange(Enumerable.Repeat(parameter + "|" + payload, count));
+                }
+            }
+            if (partition == "HttpServer")
+            {
+                Add("Overlapped", "networkProbeOptionalInOut", 12);
+                foreach (string name in new[]
+                {
+                    "Name", "SecurityAttributes", "Flags", "ByteRange", "CachePolicy",
+                    "EntityChunkCount", "Reserved1", "Reserved2", "Reserved",
+                })
+                    Add(name, "networkProbeOptionalInput");
+                Add("LogData", "networkProbeOptionalInput", 2);
+                Add("BytesSent", "networkProbeOptionalOutput", 2);
+            }
+            else if (partition == "Certificates")
+            {
+                Add("hbc", "networkProbeInput");
+                Add("ppwszzFileList", "networkProbeOutput");
+                Add("pcbSize", "networkProbeOutput");
+            }
+            return added;
         }
 
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
