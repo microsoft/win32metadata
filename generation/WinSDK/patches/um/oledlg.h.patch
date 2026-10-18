@@ -1,11 +1,18 @@
 diff --git a/um/oledlg.h b/um/oledlg.h
-index d814c88e..b95352c1 100644
+index d814c88e..4e866475 100644
 --- a/um/oledlg.h
 +++ b/um/oledlg.h
-@@ -26,6 +26,15 @@ Abstract:
+@@ -26,6 +26,22 @@ Abstract:
  #ifndef _OLEDLG_H_
  #define _OLEDLG_H_
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int OBJECT_PROPERTIES_FLAGS;
++typedef unsigned int PASTE_SPECIAL_FLAGS;
++typedef unsigned int UI_CONVERT_FLAGS;
++typedef unsigned int VIEW_OBJECT_PROPERTIES_FLAGS;
++#endif
++
 +#include <sal.h>
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef unsigned int BUSY_DIALOG_FLAGS;
@@ -18,7 +25,7 @@ index d814c88e..b95352c1 100644
  #if _MSC_VER > 1000
  #pragma once
  #endif
-@@ -289,9 +298,11 @@ typedef UINT (CALLBACK *LPFNOLEUIHOOK)(HWND, UINT, WPARAM, LPARAM);
+@@ -289,9 +305,11 @@ typedef UINT (CALLBACK *LPFNOLEUIHOOK)(HWND, UINT, WPARAM, LPARAM);
  #define OLEUI_ERR_STANDARDMAX           116  // Start here for specific errors.
  
  // Miscellaneous utility functions.
@@ -30,7 +37,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(BOOL) OleUIAddVerbMenuA(_In_opt_ LPOLEOBJECT lpOleObj, _In_opt_ LPCSTR lpszShortType,
          HMENU hMenu, UINT uPos, UINT uIDVerbMin, UINT uIDVerbMax,
          BOOL bAddConvert, UINT idConvert, _Out_ HMENU *lphMenu);
-@@ -308,7 +319,7 @@ typedef struct tagOLEUIINSERTOBJECTW
+@@ -308,7 +326,7 @@ typedef struct tagOLEUIINSERTOBJECTW
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -39,7 +46,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCWSTR         lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -339,7 +350,7 @@ typedef struct tagOLEUIINSERTOBJECTA
+@@ -339,7 +357,7 @@ typedef struct tagOLEUIINSERTOBJECTA
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -48,7 +55,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCSTR          lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -367,7 +378,9 @@ typedef struct tagOLEUIINSERTOBJECTA
+@@ -367,7 +385,9 @@ typedef struct tagOLEUIINSERTOBJECTA
  
  } OLEUIINSERTOBJECTA, *POLEUIINSERTOBJECTA, *LPOLEUIINSERTOBJECTA;
  
@@ -58,7 +65,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
  
  #ifdef UNICODE
-@@ -400,6 +413,24 @@ STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
+@@ -400,6 +420,24 @@ STDAPI_(UINT) OleUIInsertObjectA(_In_ LPOLEUIINSERTOBJECTA);
  #define IOF_SHOWINSERTCONTROL           0x00001000L
  #define IOF_SELECTCREATECONTROL         0x00002000L
  
@@ -83,7 +90,25 @@ index d814c88e..b95352c1 100644
  // Insert Object specific error codes
  #define OLEUI_IOERR_LPSZFILEINVALID         (OLEUI_ERR_STANDARDMAX+0)
  #define OLEUI_IOERR_LPSZLABELINVALID        (OLEUI_ERR_STANDARDMAX+1)
-@@ -606,7 +637,9 @@ typedef struct tagOLEUIPASTESPECIALA
+@@ -529,7 +567,7 @@ typedef struct tagOLEUIPASTESPECIALW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(PASTE_SPECIAL_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -563,7 +601,7 @@ typedef struct tagOLEUIPASTESPECIALA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(PASTE_SPECIAL_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -606,7 +644,9 @@ typedef struct tagOLEUIPASTESPECIALA
  #define LPOLEUIPASTESPECIAL LPOLEUIPASTESPECIALA
  #endif
  
@@ -93,7 +118,26 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
  #ifdef UNICODE
  #define OleUIPasteSpecial OleUIPasteSpecialW
-@@ -717,7 +750,7 @@ typedef struct tagOLEUIEDITLINKSW
+@@ -626,6 +666,18 @@ STDAPI_(UINT) OleUIPasteSpecialA(_In_ LPOLEUIPASTESPECIALA);
+ #define PSF_STAYONCLIPBOARDCHANGE       0x00000040L
+ #define PSF_NOREFRESHDATAOBJECT         0x00000080L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PASTE_SPECIAL_FLAGS, unsigned int,
++    PSF_SHOWHELP,
++    PSF_SELECTPASTE,
++    PSF_SELECTPASTELINK,
++    PSF_CHECKDISPLAYASICON,
++    PSF_DISABLEDISPLAYASICON,
++    PSF_HIDECHANGEICON,
++    PSF_STAYONCLIPBOARDCHANGE,
++    PSF_NOREFRESHDATAOBJECT);
++#endif
++
+ // Paste Special specific error codes
+ #define OLEUI_IOERR_SRCDATAOBJECTINVALID    (OLEUI_ERR_STANDARDMAX+0)
+ #define OLEUI_IOERR_ARRPASTEENTRIESINVALID  (OLEUI_ERR_STANDARDMAX+1)
+@@ -717,7 +769,7 @@ typedef struct tagOLEUIEDITLINKSW
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -102,7 +146,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCWSTR         lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -736,7 +769,7 @@ typedef struct tagOLEUIEDITLINKSA
+@@ -736,7 +788,7 @@ typedef struct tagOLEUIEDITLINKSA
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -111,7 +155,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCSTR          lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -766,7 +799,9 @@ typedef struct tagOLEUIEDITLINKSA
+@@ -766,7 +818,9 @@ typedef struct tagOLEUIEDITLINKSA
  #define OLEUI_ELERR_LINKCNTRNULL        (OLEUI_ERR_STANDARDMAX+0)
  #define OLEUI_ELERR_LINKCNTRINVALID     (OLEUI_ERR_STANDARDMAX+1)
  
@@ -121,7 +165,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
  
  #ifdef UNICODE
-@@ -782,6 +817,15 @@ STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
+@@ -782,6 +836,15 @@ STDAPI_(UINT) OleUIEditLinksA(_In_ LPOLEUIEDITLINKSA);
  #define ELF_DISABLECHANGESOURCE         0x00000008L
  #define ELF_DISABLECANCELLINK           0x00000010L
  
@@ -137,7 +181,7 @@ index d814c88e..b95352c1 100644
  /////////////////////////////////////////////////////////////////////////////
  // CHANGE ICON DIALOG
  
-@@ -789,7 +833,7 @@ typedef struct tagOLEUICHANGEICONW
+@@ -789,7 +852,7 @@ typedef struct tagOLEUICHANGEICONW
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -146,7 +190,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCWSTR         lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -812,7 +856,7 @@ typedef struct tagOLEUICHANGEICONA
+@@ -812,7 +875,7 @@ typedef struct tagOLEUICHANGEICONA
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -155,7 +199,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCSTR          lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -831,7 +875,9 @@ typedef struct tagOLEUICHANGEICONA
+@@ -831,7 +894,9 @@ typedef struct tagOLEUICHANGEICONA
  
  } OLEUICHANGEICONA, *POLEUICHANGEICONA, *LPOLEUICHANGEICONA;
  
@@ -165,7 +209,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
  
  #ifdef UNICODE
-@@ -855,6 +901,15 @@ STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
+@@ -855,6 +920,15 @@ STDAPI_(UINT) OleUIChangeIconA(_In_ LPOLEUICHANGEICONA);
  #define CIF_SELECTFROMFILE              0x00000008L
  #define CIF_USEICONEXE                  0x00000010L
  
@@ -181,7 +225,25 @@ index d814c88e..b95352c1 100644
  // Change Icon specific error codes
  #define OLEUI_CIERR_MUSTHAVECLSID           (OLEUI_ERR_STANDARDMAX+0)
  #define OLEUI_CIERR_MUSTHAVECURRENTMETAFILE (OLEUI_ERR_STANDARDMAX+1)
-@@ -949,7 +1004,9 @@ typedef struct tagOLEUICONVERTA
+@@ -873,7 +947,7 @@ typedef struct tagOLEUICONVERTW
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(UI_CONVERT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCWSTR         lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -913,7 +987,7 @@ typedef struct tagOLEUICONVERTA
+ {
+         // These IN fields are standard across all OLEUI dialog functions.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT:  Flags
++        _Win32_AssociatedEnum_(UI_CONVERT_FLAGS) DWORD           dwFlags;        // IN-OUT:  Flags
+         HWND            hWndOwner;      // Owning window
+         LPCSTR          lpszCaption;    // Dialog caption bar contents
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback
+@@ -949,7 +1023,9 @@ typedef struct tagOLEUICONVERTA
  
  } OLEUICONVERTA, *POLEUICONVERTA, *LPOLEUICONVERTA;
  
@@ -191,7 +253,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
  
  #ifdef UNICODE
-@@ -968,6 +1025,7 @@ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
+@@ -968,6 +1044,7 @@ STDAPI_(UINT) OleUIConvertA(_In_ LPOLEUICONVERTA);
  
  // Determine if there is at least one class that can Convert or ActivateAs
  // the given clsid.
@@ -199,7 +261,27 @@ index d814c88e..b95352c1 100644
  STDAPI_(BOOL) OleUICanConvertOrActivateAs(
          _In_ REFCLSID rClsid, BOOL fIsLinkedObject, WORD wFormat);
  
-@@ -996,7 +1054,7 @@ typedef struct tagOLEUIBUSYW
+@@ -982,6 +1059,19 @@ STDAPI_(BOOL) OleUICanConvertOrActivateAs(
+ #define CF_HIDECHANGEICON               0x00000080L
+ #define CF_CONVERTONLY                  0x00000100L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(UI_CONVERT_FLAGS, unsigned int,
++    CF_SHOWHELPBUTTON,
++    CF_SETCONVERTDEFAULT,
++    CF_SETACTIVATEDEFAULT,
++    CF_SELECTCONVERTTO,
++    CF_SELECTACTIVATEAS,
++    CF_DISABLEDISPLAYASICON,
++    CF_DISABLEACTIVATEAS,
++    CF_HIDECHANGEICON,
++    CF_CONVERTONLY);
++#endif
++
+ // Convert specific error codes
+ #define OLEUI_CTERR_CLASSIDINVALID      (OLEUI_ERR_STANDARDMAX+1)
+ #define OLEUI_CTERR_DVASPECTINVALID     (OLEUI_ERR_STANDARDMAX+2)
+@@ -996,7 +1086,7 @@ typedef struct tagOLEUIBUSYW
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -208,7 +290,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCWSTR         lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -1015,7 +1073,7 @@ typedef struct tagOLEUIBUSYA
+@@ -1015,7 +1105,7 @@ typedef struct tagOLEUIBUSYA
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -217,7 +299,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCSTR          lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -1030,7 +1088,9 @@ typedef struct tagOLEUIBUSYA
+@@ -1030,7 +1120,9 @@ typedef struct tagOLEUIBUSYA
  
  } OLEUIBUSYA, *POLEUIBUSYA, *LPOLEUIBUSYA;
  
@@ -227,7 +309,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
  
  #ifdef UNICODE
-@@ -1054,6 +1114,14 @@ STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
+@@ -1054,6 +1146,14 @@ STDAPI_(UINT) OleUIBusyA(_In_ LPOLEUIBUSYA);
  
  #define BZ_NOTRESPONDINGDIALOG          0x00000008L
  
@@ -242,7 +324,7 @@ index d814c88e..b95352c1 100644
  // Busy specific error/return codes
  #define OLEUI_BZERR_HTASKINVALID     (OLEUI_ERR_STANDARDMAX+0)
  #define OLEUI_BZ_SWITCHTOSELECTED    (OLEUI_ERR_STANDARDMAX+1)
-@@ -1068,7 +1136,7 @@ typedef struct tagOLEUICHANGESOURCEW
+@@ -1068,7 +1168,7 @@ typedef struct tagOLEUICHANGESOURCEW
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -251,7 +333,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCWSTR         lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -1095,7 +1163,7 @@ typedef struct tagOLEUICHANGESOURCEA
+@@ -1095,7 +1195,7 @@ typedef struct tagOLEUICHANGESOURCEA
  {
          // These IN fields are standard across all OLEUI dialog functions.
          DWORD           cbStruct;       // Structure Size
@@ -260,7 +342,7 @@ index d814c88e..b95352c1 100644
          HWND            hWndOwner;      // Owning window
          LPCSTR          lpszCaption;    // Dialog caption bar contents
          LPFNOLEUIHOOK   lpfnHook;       // Hook callback
-@@ -1118,7 +1186,9 @@ typedef struct tagOLEUICHANGESOURCEA
+@@ -1118,7 +1218,9 @@ typedef struct tagOLEUICHANGESOURCEA
  
  } OLEUICHANGESOURCEA, *POLEUICHANGESOURCEA, *LPOLEUICHANGESOURCEA;
  
@@ -270,7 +352,7 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
  
  #ifdef UNICODE
-@@ -1141,6 +1211,14 @@ STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
+@@ -1141,6 +1243,14 @@ STDAPI_(UINT) OleUIChangeSourceA(_In_ LPOLEUICHANGESOURCEA);
  #define CSF_ONLYGETSOURCE               0x00000004L // IN: disables validation of source
  #define CSF_EXPLORER                    0x00000008L // IN: use new OFN_EXPLORER custom template behavior
  
@@ -285,7 +367,57 @@ index d814c88e..b95352c1 100644
  // Change Source Dialog errors
  #define OLEUI_CSERR_LINKCNTRNULL        (OLEUI_ERR_STANDARDMAX+0)
  #define OLEUI_CSERR_LINKCNTRINVALID     (OLEUI_ERR_STANDARDMAX+1)
-@@ -1525,7 +1603,9 @@ typedef struct tagOLEUIOBJECTPROPSA
+@@ -1351,7 +1461,7 @@ typedef struct tagOLEUIVIEWPROPSW
+ {
+         // These IN fields are standard across all OLEUI property pages.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: flags specific to view page
++        _Win32_AssociatedEnum_(VIEW_OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: flags specific to view page
+         DWORD           dwReserved1[2];
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback (not used in this dialog)
+         LPARAM          lCustData;      // Custom data to pass to hook
+@@ -1368,7 +1478,7 @@ typedef struct tagOLEUIVIEWPROPSA
+ {
+         // These IN fields are standard across all OLEUI property pages.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: flags specific to view page
++        _Win32_AssociatedEnum_(VIEW_OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: flags specific to view page
+         DWORD           dwReserved1[2];
+         LPFNOLEUIHOOK   lpfnHook;       // Hook callback (not used in this dialog)
+         LPARAM          lCustData;      // Custom data to pass to hook
+@@ -1398,6 +1508,13 @@ typedef struct tagOLEUIVIEWPROPSA
+ #define VPF_DISABLERELATIVE         0x00000002L // IN: disable relative to orig
+ #define VPF_DISABLESCALE            0x00000004L // IN: disable scale option
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(VIEW_OBJECT_PROPERTIES_FLAGS, unsigned int,
++    VPF_SELECTRELATIVE,
++    VPF_DISABLERELATIVE,
++    VPF_DISABLESCALE);
++#endif
++
+ typedef struct tagOLEUILINKPROPSW
+ {
+         // These IN fields are standard across all OLEUI property pages.
+@@ -1481,7 +1598,7 @@ typedef struct tagOLEUIOBJECTPROPSW
+ {
+         // These IN fields are standard across all OLEUI property sheets.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: global flags for the sheet
++        _Win32_AssociatedEnum_(OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: global flags for the sheet
+ 
+         // Standard PROPSHEETHEADER used for extensibility
+         LPPROPSHEETHEADERW   lpPS;         // IN: property sheet header
+@@ -1505,7 +1622,7 @@ typedef struct tagOLEUIOBJECTPROPSA
+ {
+         // These IN fields are standard across all OLEUI property sheets.
+         DWORD           cbStruct;       // Structure Size
+-        DWORD           dwFlags;        // IN-OUT: global flags for the sheet
++        _Win32_AssociatedEnum_(OBJECT_PROPERTIES_FLAGS) DWORD           dwFlags;        // IN-OUT: global flags for the sheet
+ 
+         // Standard PROPSHEETHEADER used for extensibility
+         LPPROPSHEETHEADERA  lpPS;         // IN: property sheet header
+@@ -1525,7 +1642,9 @@ typedef struct tagOLEUIOBJECTPROPSA
  
  } OLEUIOBJECTPROPSA, *POLEUIOBJECTPROPSA, FAR* LPOLEUIOBJECTPROPSA;
  
@@ -295,7 +427,22 @@ index d814c88e..b95352c1 100644
  STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
  
  #ifdef UNICODE
-@@ -1581,7 +1661,9 @@ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+@@ -1548,6 +1667,14 @@ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
+ #define OPF_SHOWHELP                    0x00000004L
+ #define OPF_DISABLECONVERT              0x00000008L
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(OBJECT_PROPERTIES_FLAGS, unsigned int,
++    OPF_OBJECTISLINK,
++    OPF_NOFILLDEFAULT,
++    OPF_SHOWHELP,
++    OPF_DISABLECONVERT);
++#endif
++
+ // Errors for OleUIObjectProperties
+ #define OLEUI_OPERR_SUBPROPNULL         (OLEUI_ERR_STANDARDMAX+0)
+ #define OLEUI_OPERR_SUBPROPINVALID      (OLEUI_ERR_STANDARDMAX+1)
+@@ -1581,7 +1708,9 @@ STDAPI_(UINT) OleUIObjectPropertiesA(_In_ LPOLEUIOBJECTPROPSA);
  /////////////////////////////////////////////////////////////////////////////
  // PROMPT USER DIALOGS
  
@@ -305,7 +452,7 @@ index d814c88e..b95352c1 100644
  int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
  
  #ifdef UNICODE
-@@ -1590,8 +1672,10 @@ int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
+@@ -1590,8 +1719,10 @@ int __cdecl OleUIPromptUserA(int nTemplate, HWND hwndParent, ...);
  #define OleUIPromptUser OleUIPromptUserA
  #endif
  

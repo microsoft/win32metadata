@@ -329,7 +329,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        private static void Write(string directory, string architecture, string name, IEnumerable<MemberDeclarationSyntax> members)
+        internal static void Write(string directory, string architecture, string name, IEnumerable<MemberDeclarationSyntax> members)
         {
             var namespaces = members.GroupBy(Namespace).Select(group =>
             {
@@ -351,15 +351,17 @@ namespace Win32MetadataScraperTests
         private static string Namespace(SyntaxNode declaration) =>
             declaration.Ancestors().OfType<NamespaceDeclarationSyntax>().Single().Name.ToString();
 
-        private static long ReadValue(BlobReader reader, string storage) => storage switch
+        internal static long ReadValue(BlobReader reader, string storage) => storage switch
         {
+            "Byte" => reader.ReadByte(),
+            "Int32" => reader.ReadInt32(),
             "UInt32" => reader.ReadUInt32(),
             "UInt16" => reader.ReadUInt16(),
             "Int16" => reader.ReadInt16(),
             var unknown => throw new InvalidOperationException(unknown),
         };
 
-        private static void AssertAssociation(MetadataReader reader, CustomAttributeHandleCollection attributes, AttributeSyntax expected)
+        internal static void AssertAssociation(MetadataReader reader, CustomAttributeHandleCollection attributes, AttributeSyntax expected)
         {
             var handle = Assert.Single(attributes.Where(value =>
                 HeaderAnnotationWinmdTests.AttributeName(reader, value) == "AssociatedEnumAttribute"));

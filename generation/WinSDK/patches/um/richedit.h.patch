@@ -1,11 +1,17 @@
 diff --git a/um/richedit.h b/um/richedit.h
-index 5bebec44..40475236 100644
+index 5bebec44..f0ef7380 100644
 --- a/um/richedit.h
 +++ b/um/richedit.h
-@@ -9,6 +9,12 @@
+@@ -9,6 +9,18 @@
  
  #ifndef _RICHEDIT_
  #define _RICHEDIT_
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int CFE_EFFECTS;
++typedef unsigned int CFM_MASK;
++typedef unsigned int PARAFORMAT_MASK;
++#endif
 +
 +#include <sal.h>
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
@@ -15,16 +21,161 @@ index 5bebec44..40475236 100644
  #pragma once
  #include <winapifamily.h>
  #include <wtypes.h>
-@@ -1134,7 +1140,7 @@ typedef struct _paraformat
+@@ -674,8 +686,8 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
+ typedef struct _charformat
+ {
+ 	UINT		cbSize;
+-	DWORD		dwMask;
+-	DWORD		dwEffects;
++	_Win32_AssociatedEnum_(CFM_MASK) DWORD		dwMask;
++	_Win32_AssociatedEnum_(CFE_EFFECTS) DWORD		dwEffects;
+ 	LONG		yHeight;
+ 	LONG		yOffset;
+ 	COLORREF	crTextColor;
+@@ -687,8 +699,8 @@ typedef struct _charformat
+ typedef struct _charformatw
+ {
+ 	UINT		cbSize;
+-	DWORD		dwMask;
+-	DWORD		dwEffects;
++	_Win32_AssociatedEnum_(CFM_MASK) DWORD		dwMask;
++	_Win32_AssociatedEnum_(CFE_EFFECTS) DWORD		dwEffects;
+ 	LONG		yHeight;
+ 	LONG		yOffset;
+ 	COLORREF	crTextColor;
+@@ -889,6 +901,11 @@ typedef struct _charformat2a
+ #define CFM_UNDERLINETYPE	0x00800000		// Many displayed by 3.0 
+ #if (_RICHEDIT_VER >= 0x0600)
+ #define CFM_COOKIE			0x01000000		// RE 6.0
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CFM_MASK, unsigned int,
++    CFM_COOKIE);
++#endif
+ #endif
+ #define CFM_LCID			0x02000000
+ #define CFM_BACKCOLOR		0x04000000		// Higher mask bits defined above
+@@ -911,10 +928,20 @@ typedef struct _charformat2a
+ 					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR \
+ 					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION \
+ 					| CFM_COOKIE)
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CFM_MASK, unsigned int,
++    CFM_ALL2);
++#endif
+ #else
+ #define CFM_ALL2	 (CFM_ALL | CFM_EFFECTS2 | CFM_BACKCOLOR | CFM_LCID \
+ 					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR \
+ 					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION)
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CFM_MASK, unsigned int,
++    CFM_ALL2);
++#endif
+ #endif
+ 
+ #define CFE_SMALLCAPS		CFM_SMALLCAPS
+@@ -940,6 +967,51 @@ typedef struct _charformat2a
+ 
+ #define	CFM_ALLEFFECTS				(CFM_EFFECTS2 | CFM_FONTBOUND | CFM_EXTENDED | CFM_MATHNOBUILDUP | CFM_MATH | CFM_MATHORDINARY)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CFM_MASK, unsigned int,
++    CFM_BOLD,
++    CFM_ITALIC,
++    CFM_UNDERLINE,
++    CFM_STRIKEOUT,
++    CFM_PROTECTED,
++    CFM_LINK,
++    CFM_SIZE,
++    CFM_COLOR,
++    CFM_FACE,
++    CFM_OFFSET,
++    CFM_CHARSET,
++    CFM_SMALLCAPS,
++    CFM_ALLCAPS,
++    CFM_HIDDEN,
++    CFM_OUTLINE,
++    CFM_SHADOW,
++    CFM_EMBOSS,
++    CFM_IMPRINT,
++    CFM_DISABLED,
++    CFM_REVISED,
++    CFM_REVAUTHOR,
++    CFM_ANIMATION,
++    CFM_STYLE,
++    CFM_KERNING,
++    CFM_SPACING,
++    CFM_WEIGHT,
++    CFM_UNDERLINETYPE,
++    CFM_LCID,
++    CFM_BACKCOLOR,
++    CFM_SUBSCRIPT,
++    CFM_SUPERSCRIPT,
++    CFM_EFFECTS,
++    CFM_ALL,
++    CFM_EFFECTS2,
++    CFM_FONTBOUND,
++    CFM_LINKPROTECTED,
++    CFM_EXTENDED,
++    CFM_MATHNOBUILDUP,
++    CFM_MATH,
++    CFM_MATHORDINARY,
++    CFM_ALLEFFECTS);
++#endif
++
+ #define CFE_FONTBOUND				0x00100000	// Font chosen by binder, not user
+ #define	CFE_LINKPROTECTED			0x00800000
+ #define CFE_EXTENDED				0x02000000
+@@ -947,6 +1019,35 @@ typedef struct _charformat2a
+ #define CFE_MATH					0x10000000
+ #define CFE_MATHORDINARY			0x20000000
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CFE_EFFECTS, unsigned int,
++    CFE_BOLD,
++    CFE_ITALIC,
++    CFE_UNDERLINE,
++    CFE_STRIKEOUT,
++    CFE_PROTECTED,
++    CFE_LINK,
++    CFE_AUTOCOLOR,
++    CFE_SUBSCRIPT,
++    CFE_SUPERSCRIPT,
++    CFE_SMALLCAPS,
++    CFE_ALLCAPS,
++    CFE_HIDDEN,
++    CFE_OUTLINE,
++    CFE_SHADOW,
++    CFE_EMBOSS,
++    CFE_IMPRINT,
++    CFE_DISABLED,
++    CFE_REVISED,
++    CFE_AUTOBACKCOLOR,
++    CFE_FONTBOUND,
++    CFE_LINKPROTECTED,
++    CFE_EXTENDED,
++    CFE_MATHNOBUILDUP,
++    CFE_MATH,
++    CFE_MATHORDINARY);
++#endif
++
+ // Underline types. RE 1.0 displays only CFU_UNDERLINE
+ #define CFU_CF1UNDERLINE	0xFF	// Map charformat's bit underline to CF2
+ #define CFU_INVERT			0xFE	// For IME composition fake a selection
+@@ -1133,8 +1234,8 @@ typedef struct _formatrange
+ typedef struct _paraformat
  {
  	UINT	cbSize;
- 	DWORD	dwMask;
+-	DWORD	dwMask;
 -	WORD	wNumbering;
++	_Win32_AssociatedEnum_(PARAFORMAT_MASK) DWORD	dwMask;
 +	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING) WORD	wNumbering;
  	union
  	{
  		WORD	wReserved;
-@@ -1143,7 +1149,7 @@ typedef struct _paraformat
+@@ -1143,7 +1244,7 @@ typedef struct _paraformat
  	LONG	dxStartIndent;
  	LONG	dxRightIndent;
  	LONG	dxOffset;
@@ -33,7 +184,52 @@ index 5bebec44..40475236 100644
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1282,6 +1288,16 @@ typedef struct _paraformat2
+@@ -1256,6 +1357,44 @@ typedef struct _paraformat2
+ 					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
+ 					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PARAFORMAT_MASK, unsigned int,
++    PFM_STARTINDENT,
++    PFM_RIGHTINDENT,
++    PFM_OFFSET,
++    PFM_ALIGNMENT,
++    PFM_TABSTOPS,
++    PFM_NUMBERING,
++    PFM_OFFSETINDENT,
++    PFM_SPACEBEFORE,
++    PFM_SPACEAFTER,
++    PFM_LINESPACING,
++    PFM_STYLE,
++    PFM_BORDER,
++    PFM_SHADING,
++    PFM_NUMBERINGSTYLE,
++    PFM_NUMBERINGTAB,
++    PFM_NUMBERINGSTART,
++    PFM_RTLPARA,
++    PFM_KEEP,
++    PFM_KEEPNEXT,
++    PFM_PAGEBREAKBEFORE,
++    PFM_NOLINENUMBER,
++    PFM_NOWIDOWCONTROL,
++    PFM_DONOTHYPHEN,
++    PFM_SIDEBYSIDE,
++    PFM_COLLAPSED,
++    PFM_OUTLINELEVEL,
++    PFM_BOX,
++    PFM_RESERVED2,
++    PFM_TABLEROWDELIMITER,
++    PFM_TEXTWRAPPINGBREAK,
++    PFM_TABLE,
++    PFM_ALL,
++    PFM_EFFECTS,
++    PFM_ALL2);
++#endif
++
+ #define PFE_RTLPARA 			(PFM_RTLPARA		 >> 16)
+ #define PFE_KEEP				(PFM_KEEP			 >> 16) // (*)	
+ #define PFE_KEEPNEXT			(PFM_KEEPNEXT		 >> 16) // (*)	
+@@ -1282,6 +1421,16 @@ typedef struct _paraformat2
  #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
  #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
  
@@ -50,7 +246,7 @@ index 5bebec44..40475236 100644
  // PARAFORMAT2 wNumberingStyle options 
  #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
  #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
-@@ -1600,6 +1616,7 @@ typedef struct hyphresult
+@@ -1600,6 +1749,7 @@ typedef struct hyphresult
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -58,7 +254,7 @@ index 5bebec44..40475236 100644
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
-@@ -1629,6 +1646,19 @@ typedef struct tagHyphenateInfo
+@@ -1629,6 +1779,19 @@ typedef struct tagHyphenateInfo
  #define PFA_FULL_SCALED 	 7	// Not implemented
  #define PFA_FULL_GLYPHS 	 8	// Not implemented
  

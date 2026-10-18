@@ -61,15 +61,6 @@
     ]
   },
   {
-    "name": "ALERT_SYSTEM_SEV",
-    "autoPopulate": {
-      "filter": "ALERT_SYSTEM_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "CRED_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -149,15 +140,6 @@
     ]
   },
   {
-    "name": "APPCOMMAND_ID",
-    "autoPopulate": {
-      "filter": "APPCOMMAND_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "DRAWEDGE_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -218,161 +200,6 @@
         "parameter": "cfFormat"
       }
   ]
-  },
-  {
-    "name": "WNDCLASS_STYLES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "WNDCLASSA",
-        "field": "style"
-      },
-      {
-        "struct": "WNDCLASSW",
-        "field": "style"
-      },
-      {
-        "struct": "WNDCLASSEXA",
-        "field": "style"
-      },
-      {
-        "struct": "WNDCLASSEXW",
-        "field": "style"
-      }
-    ]
-  },
-  {
-    "name": "CDS_TYPE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CDS_",
-      "header": "WinUser.h"
-    },
-    "members": [
-      {
-        "name": "CDS_FULLSCREEN"
-      },
-      {
-        "name": "CDS_GLOBAL"
-      },
-      {
-        "name": "CDS_NORESET"
-      },
-      {
-        "name": "CDS_RESET"
-      },
-      {
-        "name": "CDS_SET_PRIMARY"
-      },
-      {
-        "name": "CDS_TEST"
-      },
-      {
-        "name": "CDS_UPDATEREGISTRY"
-      },
-      {
-        "name": "CDS_VIDEOPARAMETERS"
-      },
-      {
-        "name": "CDS_ENABLE_UNSAFE_MODES"
-      },
-      {
-        "name": "CDS_DISABLE_UNSAFE_MODES"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ChangeDisplaySettingsA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "ChangeDisplaySettingsW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "ChangeDisplaySettingsExW",
-        "parameter": "dwflags"
-      },
-      {
-        "method": "ChangeDisplaySettingsExA",
-        "parameter": "dwflags"
-      }
-    ]
-  },
-  {
-    "name": "DISP_CHANGE",
-    "autoPopulate": {
-      "filter": "DISP_CHANGE",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "ChangeDisplaySettingsA",
-        "parameter": "return"
-      },
-      {
-        "method": "ChangeDisplaySettingsW",
-        "parameter": "return"
-      },
-      {
-        "method": "ChangeDisplaySettingsExW",
-        "parameter": "return"
-      },
-      {
-        "method": "ChangeDisplaySettingsExA",
-        "parameter": "return"
-      }
-    ]
-  },
-  {
-    "name": "DRAWSTATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DST_|DSS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "DrawStateA",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "DrawStateW",
-        "parameter": "uFlags"
-      }
-    ]
-  },
-  {
-    "name": "GESTURECONFIG_ID",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "GID_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "GESTURECONFIG",
-        "field": "dwID"
-      }
-    ]
-  },
-  {
-    "name": "GESTURECONFIG_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "GC_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
   },
   {
     "type": "uint",
@@ -581,21 +408,6 @@
     ]
   },
   {
-    "name": "POINTER_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "POINTER_FLAG_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "POINTER_INFO",
-        "field": "pointerFlags"
-      }
-    ]
-  },
-  {
     "name": "SHOW_WINDOW_CMD",
     "type": "int",
     "members": [
@@ -761,208 +573,6 @@
         "interface": "ITextHost",
         "method": "TxScrollWindowEx",
         "parameter": "fuScroll"
-      }
-    ]
-  },
-  {
-    "name": "STICKYKEYS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SKF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "STICKYKEYS",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "SYSTEM_PARAMETERS_INFO_ACTION",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SPI_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "SystemParametersInfoA",
-        "parameter": "uiAction"
-      },
-      {
-        "method": "SystemParametersInfoW",
-        "parameter": "uiAction"
-      }
-    ]
-  },
-  {
-    "name": "SOUNDSENTRY_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SSF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "SOUNDSENTRYA",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "SOUNDSENTRYW",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "TOUCH_FEEDBACK_MODE",
-    "autoPopulate": {
-      "filter": "TOUCH_FEEDBACK_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "InitializeTouchInjection",
-        "parameter": "dwMode"
-      }
-    ]
-  },
-  {
-    "name": "TOUCHEVENTF_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TOUCHEVENTF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TOUCHINPUT",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "TOUCHINPUTMASKF_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TOUCHINPUTMASKF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TOUCHINPUT",
-        "field": "dwMask"
-      }
-    ]
-  },
-  {
-    "name": "TRACK_POPUP_MENU_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TPM_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "TrackPopupMenu",
-        "parameter": "uFlags"
-      }
-    ]
-  },
-  {
-    "name": "WINDOW_EX_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "WS_EX_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "WINDOWINFO",
-        "field": "dwExStyle"
-      },
-      {
-        "method": "CreateWindowExA",
-        "parameter": "dwExStyle"
-      },
-      {
-        "method": "CreateWindowExW",
-        "parameter": "dwExStyle"
-      },
-      {
-        "method": "AdjustWindowRectEx",
-        "parameter": "dwExStyle"
-      },
-      {
-        "method": "AdjustWindowRectExForDpi",
-        "parameter": "dwExStyle"
-      },
-      {
-        "struct": "CREATESTRUCTA",
-        "field": "dwExStyle"
-      },
-      {
-        "struct": "CREATESTRUCTW",
-        "field": "dwExStyle"
-      }
-    ]
-  },
-  {
-    "name": "WINDOW_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "WS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CreateWindowExA",
-        "parameter": "dwStyle"
-      },
-      {
-        "method": "CreateWindowExW",
-        "parameter": "dwStyle"
-      },
-      {
-        "method": "CreateMDIWindowA",
-        "parameter": "dwStyle"
-      },
-      {
-        "method": "CreateMDIWindowW",
-        "parameter": "dwStyle"
-      },
-      {
-        "struct": "MDICREATESTRUCTW",
-        "field": "style"
-      },
-      {
-        "struct": "WINDOWINFO",
-        "field": "dwStyle"
-      },
-      {
-        "struct": "MDICREATESTRUCTA",
-        "field": "style"
-      },
-      {
-        "method": "AdjustWindowRect",
-        "parameter": "dwStyle"
-      },
-      {
-        "method": "AdjustWindowRectEx",
-        "parameter": "dwStyle"
-      },
-      {
-        "method": "AdjustWindowRectExForDpi",
-        "parameter": "dwStyle"
       }
     ]
   },
@@ -1195,149 +805,6 @@
     ]
   },
   {
-    "name": "CFM_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CFM_",
-      "header": "Richedit.h"
-    },
-    "members": [
-      {
-        "name": "CFM_SUBSCRIPT",
-        "value": "(CFE_EFFECTS.CFE_SUBSCRIPT | CFE_EFFECTS.CFE_SUPERSCRIPT)"
-      },
-      {
-        "name": "CFM_SUPERSCRIPT",
-        "value": "CFM_SUBSCRIPT"
-      },
-      {
-        "name": "CFM_EFFECTS",
-        "value": "(CFM_BOLD | CFM_ITALIC | CFM_UNDERLINE | CFM_COLOR | CFM_STRIKEOUT | CFE_EFFECTS.CFE_PROTECTED | CFM_LINK)"
-      },
-      {
-        "name": "CFM_ALL"
-      },
-      {
-        "name": "CFM_BOLD"
-      },
-      {
-        "name": "CFM_CHARSET"
-      },
-      {
-        "name": "CFM_COLOR"
-      },
-      {
-        "name": "CFM_FACE"
-      },
-      {
-        "name": "CFM_ITALIC"
-      },
-      {
-        "name": "CFM_OFFSET"
-      },
-      {
-        "name": "CFM_PROTECTED"
-      },
-      {
-        "name": "CFM_SIZE"
-      },
-      {
-        "name": "CFM_STRIKEOUT"
-      },
-      {
-        "name": "CFM_UNDERLINE."
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CHARFORMATW",
-        "field": "dwMask"
-      },
-      {
-        "struct": "CHARFORMATA",
-        "field": "dwMask"
-      }
-    ]
-  },
-  {
-    "name": "CFE_EFFECTS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CFE_",
-      "header": "Richedit.h"
-    },
-    "members": [
-      {
-        "name": "CFE_ALLCAPS",
-        "value": "CFM_MASK.CFM_ALLCAPS"
-      },
-      {
-        "name": "CFE_AUTOBACKCOLOR",
-        "value": "CFM_MASK.CFM_BACKCOLOR"
-      },
-      {
-        "name": "CFE_DISABLED",
-        "value": "CFM_MASK.CFM_DISABLED"
-      },
-      {
-        "name": "CFE_EMBOSS",
-        "value": "CFM_MASK.CFM_EMBOSS"
-      },
-      {
-        "name": "CFE_HIDDEN",
-        "value": "CFM_MASK.CFM_HIDDEN"
-      },
-      {
-        "name": "CFE_IMPRINT",
-        "value": "CFM_MASK.CFM_IMPRINT"
-      },
-      {
-        "name": "CFE_OUTLINE",
-        "value": "CFM_MASK.CFM_OUTLINE"
-      },
-      {
-        "name": "CFE_REVISED",
-        "value": "CFM_MASK.CFM_REVISED"
-      },
-      {
-        "name": "CFE_SHADOW",
-        "value": "CFM_MASK.CFM_SHADOW"
-      },
-      {
-        "name": "CFE_SMALLCAPS",
-        "value": "CFM_MASK.CFM_SMALLCAPS"
-      },
-      {
-        "name": "CFE_AUTOCOLOR"
-      },
-      {
-        "name": "CFE_BOLD"
-      },
-      {
-        "name": "CFE_ITALIC"
-      },
-      {
-        "name": "CFE_STRIKEOUT"
-      },
-      {
-        "name": "CFE_UNDERLINE"
-      },
-      {
-        "name": "CFE_PROTECTED"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CHARFORMATA",
-        "field": "dwEffects"
-      },
-      {
-        "struct": "CHARFORMATW",
-        "field": "dwEffects"
-      }
-    ]
-  },
-  {
     "name": "CFE_UNDERLINE",
     "flags": true,
     "autoPopulate": {
@@ -1502,21 +969,6 @@
     ]
   },
   {
-    "name": "PARAFORMAT_MASK",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PFM_",
-      "header": "richedit.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "PARAFORMAT",
-        "field": "dwMask"
-      }
-    ]
-  },
-  {
     "name": "DRAGLISTINFO_NOTIFICATION_FLAGS",
     "members": [
       {
@@ -1560,45 +1012,10 @@
     "uses": []
   },
   {
-    "name": "FILE_MAP",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "FILE_MAP_",
-      "header": "memoryapi.h"
-    },
-    "members": [
-      {
-        "name": "FILE_MAP_WRITE",
-        "value": "SECTION_FLAGS.SECTION_MAP_WRITE"
-      },
-      {
-        "name": "FILE_MAP_READ",
-        "value": "SECTION_FLAGS.SECTION_MAP_READ"
-      },
-      {
-        "name": "FILE_MAP_ALL_ACCESS",
-        "value": "SECTION_FLAGS.SECTION_ALL_ACCESS"
-      },
-      {
-        "name": "FILE_MAP_EXECUTE",
-        "value": "SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT"
-      }
-    ],
+    "addUsesTo": "FILE_MAP",
     "uses": [
       {
         "method": "MapViewOfFile",
-        "parameter": "dwDesiredAccess"
-      },
-      {
-        "method": "MapViewOfFileEx",
-        "parameter": "dwDesiredAccess"
-      },
-      {
-        "method": "MapViewOfFileFromApp",
-        "parameter": "DesiredAccess"
-      },
-      {
-        "method": "MapViewOfFileExNuma",
         "parameter": "dwDesiredAccess"
       }
     ]
@@ -4088,50 +3505,6 @@
       {
         "struct": "SHARE_INFO_503",
         "field": "shi503_type"
-      }
-    ]
-  },
-  {
-    "name": "PEN_STYLE",
-    "type": "int",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PS_",
-      "header": "wingdi.h"
-    },
-    "members": [
-      {
-        "name": "PS_GEOMETRIC"
-      },
-      {
-        "name": "PS_COSMETIC"
-      },
-      {
-        "name": "PS_SOLID"
-      },
-      {
-        "name": "PS_DASH"
-      },
-      {
-        "name": "PS_DOT"
-      },
-      {
-        "name": "PS_DASHDOT"
-      },
-      {
-        "name": "PS_DASHDOTDOT"
-      },
-      {
-        "name": "PS_NULL"
-      },
-      {
-        "name": "PS_INSIDEFRAME"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CreatePen",
-        "parameter": "iStyle"
       }
     ]
   },
@@ -11938,17 +11311,6 @@
         "struct": "LOGFONTA",
         "field": "lfOutPrecision"
       }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Gdi",
-    "name": "FONT_WEIGHT",
-    "autoPopulate": {
-      "header": "wingdi.h",
-      "filter": "FW_"
-    },
-    "members": [],
-    "uses": [
     ]
   },
   {
@@ -25160,34 +24522,6 @@
     ]
   },
   {
-    "name": "KBDLLHOOKSTRUCT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "winuser.h",
-      "filter": "LLKHF_"
-    },
-    "members": [
-      {
-        "name": "LLKHF_EXTENDED",
-        "value": "0x00000001"
-      },
-      {
-        "name": "LLKHF_ALTDOWN",
-        "value": "0x00000020"
-      },
-      {
-        "name": "LLKHF_UP",
-        "value": "0x00000080"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "KBDLLHOOKSTRUCT",
-        "field": "flags"
-      }
-    ]
-  },
-  {
     "name": "OS",
     "flags": false,
     "autoPopulate": {
@@ -26083,41 +25417,7 @@
     ]
   },
   {
-    "type": "byte",
-    "name": "TMPF_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "TMPF_",
-      "header": "wingdi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "TEXTMETRICW",
-        "field": "tmPitchAndFamily"
-      },
-      {
-        "struct": "TEXTMETRICA",
-        "field": "tmPitchAndFamily"
-      },
-      {
-        "struct": "NEWTEXTMETRICA",
-        "field": "tmPitchAndFamily"
-      },
-      {
-        "struct": "NEWTEXTMETRICW",
-        "field": "tmPitchAndFamily"
-      }
-    ]
-  },
-  {
-    "name": "BI_COMPRESSION",
-    "type": "uint",
-    "autoPopulate": {
-      "filter": "BI_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "BI_COMPRESSION",
     "uses": [
       {
         "struct": "BITMAPV5HEADER",
@@ -26158,35 +25458,6 @@
       {
         "method": "IDropTarget::Drop",
         "parameter": "grfKeyState"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "STATIC_STYLES",
-    "autoPopulate": {
-      "filter": "SS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": []
-  },
-  {
-    "type": "uint",
-    "name": "ENHANCED_METAFILE_RECORD_TYPE",
-    "autoPopulate": {
-      "filter": "EMR_",
-      "header": "wingdi.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "EMR",
-        "field": "iType"
-      },
-      {
-        "struct": "ENHMETARECORD",
-        "field": "iType"
       }
     ]
   },
@@ -26719,13 +25990,7 @@
     ]
   },
   {
-    "name": "DEVMODE_FIELD_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DM_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_FIELD_FLAGS",
     "uses": [
       {
         "struct": "DEVMODEW",
@@ -26777,13 +26042,7 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Gdi",
-    "name": "DEVMODE_DISPLAY_ORIENTATION",
-    "autoPopulate": {
-      "filter": "DMDO_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_DISPLAY_ORIENTATION",
     "uses": [
       {
         "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
@@ -26796,13 +26055,7 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Gdi",
-    "name": "DEVMODE_DISPLAY_FIXED_OUTPUT",
-    "autoPopulate": {
-      "filter": "DMDFO_",
-      "header": "wingdi.h"
-    },
-    "members": [],
+    "addUsesTo": "DEVMODE_DISPLAY_FIXED_OUTPUT",
     "uses": [
       {
         "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
@@ -26958,90 +26211,6 @@
   },
   {
     "type": "uint",
-    "name": "ODA_FLAGS",
-    "autoPopulate": {
-      "filter": "ODA_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "DRAWITEMSTRUCT",
-        "field": "itemAction"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "ODS_FLAGS",
-    "autoPopulate": {
-      "filter": "ODS_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "DRAWITEMSTRUCT",
-        "field": "itemState"
-      }
-    ]
-  },
-  {
-    "type": "int",
-    "name": "HELP_INFO_TYPE",
-    "autoPopulate": {
-      "filter": "HELPINFO_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "HELPINFO",
-        "field": "iContextType"
-      }
-    ]
-  },
-  {
-    "type": "uint",
-    "name": "DESKTOP_CONTROL_FLAGS",
-    "autoPopulate": {
-      "filter": "DF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "CreateDesktopExA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OpenInputDesktop",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateDesktopExW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateDesktopA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CreateDesktopW",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OpenDesktopA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OpenDesktopW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "type": "uint",
     "name": "DESKTOP_ACCESS_FLAGS",
     "autoPopulate": {
       "filter": "DESKTOP_",
@@ -27082,63 +26251,6 @@
     "uses": [
       {
         "method": "RegisterActiveObject",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "UI_CONVERT_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "CF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUICONVERTA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUICONVERTW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "OBJECT_PROPERTIES_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "OPF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUIOBJECTPROPSA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUIOBJECTPROPSW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "VIEW_OBJECT_PROPERTIES_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "VPF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "OLEUIVIEWPROPSA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OLEUIVIEWPROPSW",
         "parameter": "dwFlags"
       }
     ]
@@ -27299,25 +26411,6 @@
       {
         "method": "VarR4CmpR8",
         "parameter": "return"
-      }
-    ]
-  },
-  {
-    "name": "PASTE_SPECIAL_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PSF_",
-      "header": "oledlg.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "OLEUIPASTESPECIALA",
-        "field": "dwFlags"
-      },
-      {
-        "struct": "OLEUIPASTESPECIALW",
-        "field": "dwFlags"
       }
     ]
   },
@@ -30402,31 +29495,6 @@
     ]
   },
   {
-    "name": "MAP_VIRTUAL_KEY_TYPE",
-    "autoPopulate": {
-      "filter": "MAPVK_",
-      "header": "WinUser.h"
-    },
-    "uses": [
-      {
-        "method": "MapVirtualKeyA",
-        "parameter": "uMapType"
-      },
-      {
-        "method": "MapVirtualKeyExA",
-        "parameter": "uMapType"
-      },
-      {
-        "method": "MapVirtualKeyW",
-        "parameter": "uMapType"
-      },
-      {
-        "method": "MapVirtualKeyExW",
-        "parameter": "uMapType"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.System.RemoteDesktop",
     "name": "WTS_SECURITY_FLAGS",
     "flags": true,
@@ -30450,62 +29518,6 @@
       {
         "name": "WTS_SECURITY_ALL_ACCESS",
         "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
-      }
-    ]
-  },
-  {
-    "name": "SET_DISPLAY_CONFIG_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SDC_",
-      "header": "wingdi.h"
-    },
-    "members": [
-      {
-        "name": "SDC_USE_DATABASE_CURRENT",
-        "value": "(SDC_TOPOLOGY_INTERNAL | SDC_TOPOLOGY_CLONE | SDC_TOPOLOGY_EXTEND | SDC_TOPOLOGY_EXTERNAL)"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetDisplayConfig",
-        "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "name": "QUERY_DISPLAY_CONFIG_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "QDC_",
-      "header": "wingdi.h"
-    },
-    "uses": [
-      {
-        "method": "QueryDisplayConfig",
-        "parameter": "flags"
-      },
-      {
-        "method": "GetDisplayConfigBufferSizes",
-        "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "name": "ENUM_DISPLAY_SETTINGS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "EDS_",
-      "header": "winuser.h"
-    },
-    "uses": [
-      {
-        "method": "EnumDisplaySettingsExA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "EnumDisplaySettingsExW",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -31753,24 +30765,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.UI.ColorSystem",
-    "name": "LCSCSTYPE",
-    "type": "int",
-    "members": [
-      {
-        "name": "LCS_CALIBRATED_RGB"
-      },
-      {
-        "name": "LCS_sRGB",
-        "value": "0x73524742"
-      },
-      {
-        "name": "LCS_WINDOWS_COLOR_SPACE",
-        "value": "0x57696E20"
-      }
-    ]
-  },
-  {
     "name": "DEVICE_STATE",
     "autoPopulate": {
       "filter": "DEVICE_STATE_",
@@ -32031,56 +31025,7 @@
     ]
   },
   {
-    "name": "DISPLAY_DEVICE_STATE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DISPLAY_DEVICE_",
-      "header": "wingdi.h"
-    },
-    "uses": [
-      {
-        "struct": "DISPLAY_DEVICEA",
-        "field": "StateFlags"
-      },
-      {
-        "struct": "DISPLAY_DEVICEW",
-        "field": "StateFlags"
-      }
-    ]
-  },
-  {
-    "name": "COPYFILE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "COPY_FILE_",
-      "header": "winbase.h"
-    },
-    "uses": [
-      {
-        "method": "CopyFileExA",
-        "parameter": "dwCopyFlags"
-      },
-      {
-        "method": "CopyFileExW",
-        "parameter": "dwCopyFlags"
-      },
-      {
-        "struct": "COPYFILE2_EXTENDED_PARAMETERS",
-        "field": "dwCopyFlags"
-      },
-      {
-        "struct": "COPYFILE2_EXTENDED_PARAMETERS_V2",
-        "field": "dwCopyFlags"
-      }
-    ]
-  },
-  {
-    "name": "COPYPROGRESSROUTINE_PROGRESS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "PROGRESS_",
-      "header": "winbase.h"
-    },
+    "addUsesTo": "COPYPROGRESSROUTINE_PROGRESS",
     "uses": [
       {
         "method": "LPPROGRESS_ROUTINE",
