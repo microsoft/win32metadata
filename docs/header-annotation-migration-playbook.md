@@ -3568,3 +3568,38 @@ to the immutable baseline for unchanged shared native dependencies such as
 53-group component also remains passing. This is two additional semantic
 headers, not complete-header or full-image acceptance. Evidence stays under
 `artifacts\bulk-annotations\system-nonfloor-enums-002-*`.
+
+### Isolated native SECPKG_ATTR correction proposal
+
+The three native fragments in `sspi.h`, `minschannel.h` and `credssp.h` cover
+21, 13 and 7 members of the same existing `SECPKG_ATTR` identity. The existing
+namespace-routing mechanism moves the fragments before merging: the physical
+component must contain exactly one unscoped
+`Windows.Win32.Security.Authentication.Identity.SECPKG_ATTR`, with UInt32
+storage and no Flags payload. Six existing uses annotate their native
+`unsigned long ulAttribute` parameters directly. The Credentials partition
+includes the real `sspi.h` prerequisite before `credssp.h`; no constants are
+invented to satisfy that dependency.
+
+This is an **API-value correction proposal**, not a value-equivalent migration.
+Immutable OLD emits `SECPKG_ATTR_SUBJECT_SECURITY_ATTRIBUTES = 124`, while the
+pinned shipped SDK defines it as 128. Source annotations use the native macro,
+so the proposed component emits 128. The other 40 names and values, storage,
+namespace, non-flags identity and all six use targets remain exact. That single
+124-to-128 member difference requires explicit final-comparer grading and
+review; these source results do not grant completed API acceptance or a blanket
+normalization.
+
+Twelve ordinary/metadata native cases and one actual x64 component pass without
+skips. Native controls preserve all 75 prior SSPI annotation payloads, ABI, SAL
+and declaration multiplicities. They compare the exact local and inherited
+group payloads separately, including both attributes on redeclarations, rather
+than deduplicating their strings or typedef surface. Only the completely
+covered 41-member definition and six native use rows are retired.
+
+The same-owner SSPI extension earns no additional unique-header credit;
+`minschannel.h` and `credssp.h` are two new semantic source headers. Original
+OLD124 reports remain unchanged alongside the separate native128 proposal under
+`artifacts\bulk-annotations\system-nonfloor-enums-003-*` and
+`system-nonfloor-enums-004-correction-*`. No frozen central SDK05 input or
+full-image acceptance is changed by this source proposal.

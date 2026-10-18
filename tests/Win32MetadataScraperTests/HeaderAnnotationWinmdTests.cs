@@ -113,7 +113,10 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(
                 Environment.GetEnvironmentVariable("SYSTEM_ENUM_MIGRATION_ROOT"), "report.json")));
             var owners = report.RootElement.GetProperty("owners").EnumerateArray().ToArray();
-            var expected = owners.SelectMany(owner => owner.GetProperty("groups").EnumerateArray())
+            var logicalGroups = report.RootElement.TryGetProperty("logicalGroups", out var completeGroups)
+                ? completeGroups.EnumerateArray()
+                : owners.SelectMany(owner => owner.GetProperty("groups").EnumerateArray());
+            var expected = logicalGroups
                 .ToDictionary(group => group.GetProperty("Group").GetString(), StringComparer.Ordinal);
             var fieldAssociations = owners.SelectMany(owner => owner.GetProperty("associations").EnumerateArray())
                 .Where(value => value.TryGetProperty("kind", out var kind) && kind.GetString() == "field").ToArray();

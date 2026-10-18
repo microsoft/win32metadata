@@ -153,9 +153,12 @@ using WINHTTP_INTERNET_SCHEME = void;
                 })).ToArray();
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
+            var beforeAnnotations = new List<string>();
             var annotations = new List<string>();
+            bool compareAnnotations = owner.TryGetProperty("expectedAddedAnnotations", out var expectedAddedAnnotations);
             var before = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS"),
-                partition, architecture, target, headers, checks, salAnnotations: beforeSal);
+                partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled && compareAnnotations,
+                annotations: beforeAnnotations, salAnnotations: beforeSal);
             var after = Surface(root, Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
                 partition, architecture, target, headers, checks, metadataEnabled: metadataEnabled,
                 annotations: annotations, salAnnotations: afterSal);
@@ -164,7 +167,32 @@ using WINHTTP_INTERNET_SCHEME = void;
             Assert.Equal(before.Concat(metadataEnabled ? carriers : Array.Empty<string>())
                 .OrderBy(value => value, StringComparer.Ordinal), after);
             Assert.Equal(beforeSal, afterSal);
-            if (metadataEnabled)
+            if (compareAnnotations)
+                Assert.Equal(beforeAnnotations.Concat(metadataEnabled
+                    ? expectedAddedAnnotations.EnumerateArray().Select(value => value.GetString())
+                    : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
+                    annotations.OrderBy(value => value, StringComparer.Ordinal));
+            if (owner.TryGetProperty("expectedGroupAnnotations", out var expectedAnnotations))
+            {
+                var roles = expectedAnnotations.EnumerateArray().ToArray();
+                Assert.Equal(groups.Length, roles.Count(value => value.GetProperty("role").GetString() == "local"));
+                foreach (var role in roles)
+                {
+                    string source = role.GetProperty("original").GetString();
+                    Assert.Contains(source, report.RootElement.GetProperty("owners").EnumerateArray()
+                        .Select(value => value.GetProperty("original").GetString()));
+                    Assert.True(role.GetProperty("role").GetString() is "local" or "inherited");
+                    Assert.Equal(source == original, role.GetProperty("role").GetString() == "local");
+                }
+                var actual = annotations.Where(value => groups.Any(group =>
+                    value.StartsWith(group.GetProperty("Group").GetString() + "|Enum(", StringComparison.Ordinal) ||
+                    value.StartsWith(group.GetProperty("Group").GetString() + "|FlagsEnum(", StringComparison.Ordinal)));
+                Assert.Equal((metadataEnabled
+                    ? roles.Select(value => value.GetProperty("payload").GetString())
+                    : Array.Empty<string>()).OrderBy(value => value, StringComparer.Ordinal),
+                    actual.OrderBy(value => value, StringComparer.Ordinal));
+            }
+            else if (metadataEnabled)
             {
                 foreach (var group in groups)
                 {
@@ -175,7 +203,8 @@ using WINHTTP_INTERNET_SCHEME = void;
                 }
             }
             this.output.WriteLine($"{original}/{architecture}: {groups.Length} exact metadata-only group aliases; " +
-                "compiled native value/type checks, declaration multiplicities, ABI and SAL preserved.");
+                $"compiled native value/type checks, declaration multiplicities, ABI and SAL preserved; " +
+                $"{beforeAnnotations.Count} prior Win32 annotation payloads preserved.");
         }
 
         public static IEnumerable<object[]> SystemEnumNativeModes()

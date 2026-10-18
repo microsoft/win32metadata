@@ -3855,6 +3855,18 @@
       "sourceSha256": "8D202A04F8252892A3D9BCB752DDED6ACE19A8E56A2E7B92E805208B3F1C9B0F",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\tcpmib.h",
       "sdkSha256": "8D202A04F8252892A3D9BCB752DDED6ACE19A8E56A2E7B92E805208B3F1C9B0F"
+    },
+    {
+      "path": "um\\minschannel.h",
+      "sourceSha256": "788EDFF9E4AF84DDEF6FC3009BFE1F5F3DA989EFC22A6AAD79C32334FE77A724",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\minschannel.h",
+      "sdkSha256": "788EDFF9E4AF84DDEF6FC3009BFE1F5F3DA989EFC22A6AAD79C32334FE77A724"
+    },
+    {
+      "path": "um\\credssp.h",
+      "sourceSha256": "4E4E8CEA816FA8BC7A358BD93FAFE947174B3157EB671B6CB083E6AF8706103C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\credssp.h",
+      "sdkSha256": "4E4E8CEA816FA8BC7A358BD93FAFE947174B3157EB671B6CB083E6AF8706103C"
     }
   ],
   "midl": {
@@ -7886,6 +7898,8 @@
     "um\\scpops.idl.patch",
     "um\\rstkys.idl.patch",
     "um\\mcx.h.patch",
-    "shared\\tcpmib.h.patch"
+    "shared\\tcpmib.h.patch",
+    "um\\minschannel.h.patch",
+    "um\\credssp.h.patch"
   ]
 }
