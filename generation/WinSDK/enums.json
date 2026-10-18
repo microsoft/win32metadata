@@ -5238,19 +5238,6 @@
     ]
   },
   {
-    "name": "SNMP_GENERICTRAP",
-    "uses": [
-      {
-        "method": "SnmpMgrGetTrap",
-        "parameter": "genericTrap"
-      },
-      {
-        "method": "SnmpMgrGetTrapEx",
-        "parameter": "genericTrap"
-      }
-    ]
-  },
-  {
     "name": "SETUP_FILE_OPERATION",
     "members": [
       {
@@ -6838,15 +6825,6 @@
       {
         "method": "EjectNtmsMedia",
         "parameter": "dwAction"
-      }
-    ]
-  },
-  {
-    "name": "SNMP_ERROR_STATUS",
-    "uses": [
-      {
-        "method": "SnmpMgrRequest",
-        "parameter": "errorStatus"
       }
     ]
   },
@@ -31554,15 +31532,6 @@
       {
         "method": "SetProcessWorkingSetSizeEx",
         "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "WLAN_NOTIFICATION_SOURCES",
-    "uses": [
-      {
-        "struct": "L2_NOTIFICATION_DATA",
-        "field": "NotificationSource"
       }
     ]
   },

@@ -219,6 +219,16 @@ interop direction attributes when SAL does not already transport a direction.
 Unannotated pointer defaults and existing SAL Optional/RetVal behavior remain
 separate; a mutable pointer is not evidence that an explicit input is in/out.
 
+Preserve each authored logical group's storage, including signed sentinel values;
+an unsigned parameter using that group does not make the group unsigned. Put
+cross-header associations on the actual parameter or record field, not a typedef
+alias of the record. A source-defined group with a name-only, memberless legacy
+object does not retain its uses, and an enum-type remap is not a substitute for
+`AssociatedEnum` on a native scalar or pointer.
+If declaration order requires a forward, guard it as metadata-only and preserve
+the existing group's exact name and storage; keep its sole member/flags
+definition in the authoritative header.
+
 A source-derived addition must be traceable to an existing fact in the pinned
 native sources, with its exact declaration, owner, target, payload and architecture
 coverage. Verify that interpretation rather than inventing API/type/ownership

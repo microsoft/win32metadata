@@ -1415,7 +1415,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             string[] headers =
             {
                 "ras", "mprapi", "snmp", "winsnmp", "windns", "wlanapi",
-                "http", "lmshare", "srrestoreptapi", "rasshost", "certbcli", "peerdist",
+                "http", "lmshare", "srrestoreptapi", "rasshost", "certbcli", "peerdist", "mgmtapi", "l2cmn",
             };
             string additions = string.Join("\n", headers.SelectMany(header =>
                 File.ReadLines(Path.Combine(root, "patches", "um", header + ".h.patch"))
@@ -1437,31 +1437,15 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 foreach (string member in group.Groups["members"].Value.Split(',').Select(value => value.Trim()))
                     Assert.Matches(@"^[A-Za-z_]\w*$", member);
             }
-            Assert.Equal(61, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
+            Assert.Equal(65, Regex.Matches(additions, @"_Win32_AssociatedEnum_\(").Count);
             using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
-            var retained = new Dictionary<string, string[]>
-            {
-                ["SNMP_ERROR_STATUS"] = new[] { "SnmpMgrRequest::errorStatus" },
-                ["SNMP_GENERICTRAP"] = new[] { "SnmpMgrGetTrap::genericTrap", "SnmpMgrGetTrapEx::genericTrap" },
-                ["WLAN_NOTIFICATION_SOURCES"] = new[] { "L2_NOTIFICATION_DATA::NotificationSource" },
-            };
             foreach (Match group in groups)
             {
                 string name = group.Groups["name"].Value;
                 var legacy = enums.RootElement.GetProperty("items").EnumerateArray().Where(item =>
                     item.TryGetProperty("name", out var value) && value.GetString() == name ||
                     item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == name).ToArray();
-                if (!retained.TryGetValue(name, out var uses))
-                {
-                    Assert.Empty(legacy);
-                    continue;
-                }
-                var item = Assert.Single(legacy);
-                Assert.Equal(new[] { "name", "uses" }, item.EnumerateObject().Select(property => property.Name));
-                Assert.Equal(uses, item.GetProperty("uses").EnumerateArray().Select(use =>
-                    use.TryGetProperty("method", out var method)
-                        ? method.GetString() + "::" + use.GetProperty("parameter").GetString()
-                        : use.GetProperty("struct").GetString() + "::" + use.GetProperty("field").GetString()));
+                Assert.Empty(legacy);
             }
             string[] overrides = File.ReadAllLines(Path.Combine(root, "emitter.settings.rsp"));
             foreach (string row in new[]

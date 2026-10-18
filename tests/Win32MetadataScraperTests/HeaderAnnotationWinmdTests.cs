@@ -860,6 +860,147 @@ unsigned long __stdcall NativeResourceType(
             }
         }
 
+        [MigrationTheory("SDK_CONTRACT_FIX_NORMAL_ROOT", "WINHTTP_MIGRATION_OLD")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void NormalLogicalGroupRepairsKeepNativeStorageAndExactAssociations(string architecture)
+        {
+            string normal = Environment.GetEnvironmentVariable("SDK_CONTRACT_FIX_NORMAL_ROOT");
+            var namespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            using var before = Component("before");
+            using var after = Component("after");
+            using var old = new MetadataImage(Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD"));
+            var reader = after.Reader;
+            var html = FindType(reader, "HTML_HELP_COMMAND");
+            var oldHtml = FindType(old.Reader, "HTML_HELP_COMMAND");
+            Assert.Equal(WinHttpMigrationTests.SnapshotType(old.Reader, oldHtml),
+                WinHttpMigrationTests.SnapshotType(reader, html));
+            Assert.Equal(oldHtml.GetFields().Select(old.Reader.GetFieldDefinition).Select(value => old.Reader.GetString(value.Name)),
+                html.GetFields().Select(reader.GetFieldDefinition).Select(value => reader.GetString(value.Name)));
+            var snmp = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(type =>
+                reader.GetString(type.Namespace) == "Windows.Win32.NetworkManagement.Snmp" &&
+                reader.GetString(type.Name) == "Apis");
+            foreach (var (name, sequence, group) in new[]
+            {
+                ("SnmpMgrGetTrap", 3, "SNMP_GENERICTRAP"),
+                ("SnmpMgrGetTrapEx", 4, "SNMP_GENERICTRAP"),
+                ("SnmpMgrRequest", 4, "SNMP_ERROR_STATUS"),
+            })
+            {
+                var method = snmp.GetMethods().Select(reader.GetMethodDefinition)
+                    .Single(value => reader.GetString(value.Name) == name);
+                var parameter = method.GetParameters().Select(reader.GetParameter)
+                    .Single(value => value.SequenceNumber == sequence);
+                AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", group);
+                Assert.Equal("Int32*", method.DecodeSignature(new SignatureNames(), null).ParameterTypes[sequence - 1]);
+                Assert.Equal("mgmtapi.dll", reader.GetString(reader.GetModuleReference(method.GetImport().Module).Name));
+            }
+            var l2 = FindType(reader, "L2_NOTIFICATION_DATA");
+            Assert.Equal("Windows.Win32.NetworkManagement.WiFi", reader.GetString(l2.Namespace));
+            var field = l2.GetFields().Select(reader.GetFieldDefinition)
+                .Single(value => reader.GetString(value.Name) == "NotificationSource");
+            Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null));
+            AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "WLAN_NOTIFICATION_SOURCES");
+            var wlan = FindType(reader, "WLAN_NOTIFICATION_SOURCES");
+            Assert.Equal("Windows.Win32.NetworkManagement.WiFi", reader.GetString(wlan.Namespace));
+            Assert.Equal("UInt32", wlan.GetFields().Select(reader.GetFieldDefinition)
+                .Single(value => reader.GetString(value.Name) == "value__").DecodeSignature(new SignatureNames(), null));
+
+            var expected = new HashSet<(string Type, string Method, string Slot)>
+            {
+                ("Windows.Win32.NetworkManagement.Snmp.Apis", "SnmpMgrGetTrap", "3"),
+                ("Windows.Win32.NetworkManagement.Snmp.Apis", "SnmpMgrGetTrapEx", "4"),
+                ("Windows.Win32.NetworkManagement.Snmp.Apis", "SnmpMgrRequest", "4"),
+                ("Windows.Win32.NetworkManagement.WiFi.L2_NOTIFICATION_DATA", "", "NotificationSource"),
+            };
+            var oldTypes = Snapshots(before.Reader);
+            var newTypes = Snapshots(reader);
+            Assert.Equal(oldTypes.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                newTypes.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            foreach (string type in oldTypes.Keys)
+            {
+                if (type.EndsWith(".HTML_HELP_COMMAND", StringComparison.Ordinal))
+                    continue;
+                string[] oldRows = oldTypes[type].Split('\n');
+                string[] newRows = newTypes[type].Split('\n');
+                Assert.Equal(oldRows.Length, newRows.Length);
+                string method = "";
+                for (int i = 0; i < oldRows.Length; i++)
+                {
+                    string[] parts = newRows[i].Split('|');
+                    if (parts[0] == "M")
+                        method = parts[1];
+                    if (oldRows[i] == newRows[i])
+                        continue;
+                    Assert.Contains(parts[0], new[] { "F", "P" });
+                    Assert.True(expected.Remove((type, parts[0] == "F" ? "" : method, parts[1])), newRows[i]);
+                    int attributes = parts[0] == "F" ? 7 : 5;
+                    string[] values = parts[attributes].Split(',', StringSplitOptions.RemoveEmptyEntries);
+                    Assert.Single(values.Where(value => value.StartsWith(
+                        "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute:", StringComparison.Ordinal)));
+                    parts[attributes] = string.Join(",", values.Where(value => !value.StartsWith(
+                        "Windows.Win32.Foundation.Metadata.AssociatedEnumAttribute:", StringComparison.Ordinal)));
+                    Assert.Equal(oldRows[i], string.Join("|", parts));
+                }
+            }
+            Assert.Empty(expected);
+
+            MetadataImage Component(string leg)
+            {
+                string directory = Path.Combine(normal, "physical", architecture, leg);
+                Directory.CreateDirectory(directory);
+                foreach (string source in Directory.GetFiles(Path.Combine(normal, leg, architecture), "*.cs"))
+                    File.Copy(source, Path.Combine(directory, Path.GetFileName(source)), overwrite: true);
+                var reductions = File.ReadLines(Path.Combine(normal, leg, architecture,
+                        "emitter.autoFnPtr.crossarch.generated.rsp"))
+                    .Where(line => !line.StartsWith("--", StringComparison.Ordinal) && !string.IsNullOrWhiteSpace(line))
+                    .ToHashSet(StringComparer.Ordinal);
+                return Emit(directory, architecture, reductions,
+                    references: new[] { Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") },
+                    requiredNamespaces: namespaces);
+            }
+            static Dictionary<string, string> Snapshots(MetadataReader value) => value.TypeDefinitions
+                .Select(value.GetTypeDefinition).ToDictionary(type => Key(value, type),
+                    type => WinHttpMigrationTests.SnapshotType(value, type), StringComparer.Ordinal);
+            static string Key(MetadataReader value, TypeDefinition type) => type.GetDeclaringType().IsNil
+                ? value.GetString(type.Namespace) + "." + value.GetString(type.Name)
+                : Key(value, value.GetTypeDefinition(type.GetDeclaringType())) + "+" + value.GetString(type.Name);
+        }
+
+        [MigrationTheory("SDK_CONTRACT_FIX_BEFORE_HEADERS", "SDK_CONTRACT_FIX_AFTER_HEADERS", "WINHTTP_NATIVE_TOOLSET_INCLUDE")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c")]
+        [InlineData("x86", "i686-pc-windows-msvc", "c++")]
+        [InlineData("x64", "x86_64-pc-windows-msvc", "c++")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", "c++")]
+        public void LogicalGroupContractRepairPatchesPreserveNativeAbiAndSal(string architecture, string target, string language)
+        {
+            string before = Environment.GetEnvironmentVariable("SDK_CONTRACT_FIX_BEFORE_HEADERS");
+            string after = Environment.GetEnvironmentVariable("SDK_CONTRACT_FIX_AFTER_HEADERS");
+            foreach (var (partition, headers) in new[]
+            {
+                ("HtmlHelp", new[] { "htmlhelp.h" }),
+                ("Snmp", new[] { "snmp.h", "mgmtapi.h" }),
+                ("NWifi", new[] { "wlanapi.h", "l2cmn.h" }),
+            })
+            {
+                var oldSal = new List<string>();
+                var newSal = new List<string>();
+                string source = "#define SECURITY_WIN32\n#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n" +
+                    string.Join("\n", headers.Select(header => "#include <" + header + ">")) + "\n";
+                Assert.Equal(WinHttpNativeControlTests.Surface(WinHttpMigrationTests.RepositoryRoot, before,
+                        partition, architecture, target, headers, "", sourceText: source, salAnnotations: oldSal, language: language),
+                    WinHttpNativeControlTests.Surface(WinHttpMigrationTests.RepositoryRoot, after,
+                        partition, architecture, target, headers, "", sourceText: source, salAnnotations: newSal, language: language));
+                Assert.Equal(oldSal, newSal);
+            }
+        }
+
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]

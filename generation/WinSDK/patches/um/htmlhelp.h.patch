@@ -1,5 +1,5 @@
 diff --git a/um/htmlhelp.h b/um/htmlhelp.h
-index 8e0828c8..462169eb 100644
+index 5f2fd73f..1a82bed4 100644
 --- a/um/htmlhelp.h
 +++ b/um/htmlhelp.h
 @@ -370,12 +370,53 @@ typedef struct tagHHNTRACK
@@ -8,7 +8,7 @@ index 8e0828c8..462169eb 100644
  
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
 +#include <sal.h>
-+_Win32_Enum_(HTML_HELP_COMMAND, unsigned long,
++_Win32_Enum_(HTML_HELP_COMMAND, int,
 +    HH_DISPLAY_TOPIC,
 +    HH_HELP_FINDER,
 +    HH_DISPLAY_TOC,
