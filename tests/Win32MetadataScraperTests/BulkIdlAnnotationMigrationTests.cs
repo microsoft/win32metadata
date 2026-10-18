@@ -263,7 +263,7 @@ namespace Win32MetadataScraperTests
             }
         }
 
-        [NativeMigrationTheory("WIN32METADATA_CLU_GENERATED_SOURCE")]
+        [MigrationTheory("WIN32METADATA_CLU_GENERATED_SOURCE")]
         [InlineData("MsCs", "cluadmex.h")]
         public void ActualNormalCluSourceProjectsAllOwnedFloorsWithoutLegacyFallback(string partition, string header)
         {
