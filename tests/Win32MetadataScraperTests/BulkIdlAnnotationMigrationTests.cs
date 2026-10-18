@@ -178,6 +178,8 @@ namespace Win32MetadataScraperTests
                 "cpp_quote(\"    _In_reads_(count) const long* values, long count);\")\n" +
                 "cpp_quote(\"EXTERN_C HRESULT STDAPICALLTYPE Linked(void);\")\n" +
                 "cpp_quote(\"HRESULT STDMETHODCALLTYPE Stdcall(void);\")\n" +
+                "cpp_quote(\"HRESULT WINAPI Winapi(void);\")\n" +
+                "cpp_quote(\"EXTERN_C HRESULT WINAPI\")\ncpp_quote(\"SplitWinapi(void);\")\n" +
                 "cpp_quote(\"STDAPI_(MFTIME)\")\ncpp_quote(\"Clock(void);\")\n" +
                 "cpp_quote(\"STDAPI Trailing(\") \t\ncpp_quote(\"    _In_ long value);\")\n" +
                 "cpp_quote(\"STDAPI Escaped(\") \t\n" +
@@ -187,7 +189,7 @@ namespace Win32MetadataScraperTests
             fixture.WriteMap(new[] { Floor("IExisting") });
             var previous = fixture.Run();
             Assert.True(previous.ExitCode == 0, previous.Error);
-            fixture.WriteMap(new[] { "IExisting", "SingleLine", "SplitLine", "Linked", "Stdcall", "Clock", "Trailing", "Escaped" }
+            fixture.WriteMap(new[] { "IExisting", "SingleLine", "SplitLine", "Linked", "Stdcall", "Winapi", "SplitWinapi", "Clock", "Trailing", "Escaped" }
                 .Select(name => Floor(name)).ToArray());
             var result = fixture.Run();
             Assert.True(result.ExitCode == 0, result.Error);
@@ -197,15 +199,18 @@ namespace Win32MetadataScraperTests
                     .Replace(") _Win32_SupportedOS_Windows7_;", ");", StringComparison.Ordinal));
             Assert.Equal(source, File.ReadAllText(fixture.Source));
             Assert.Contains("EXTERN_C HRESULT STDAPICALLTYPE _Win32_SupportedOS_Windows7_ Linked", authored);
+            Assert.Contains("HRESULT WINAPI _Win32_SupportedOS_Windows7_ Winapi", authored);
+            Assert.Contains("cpp_quote(\"EXTERN_C HRESULT WINAPI\")" + newline +
+                "cpp_quote(\"_Win32_SupportedOS_Windows7_ SplitWinapi(", authored);
             Assert.Contains("cpp_quote(\"STDAPI\")" + newline + "cpp_quote(\"_Win32_SupportedOS_Windows7_ SplitLine(", authored);
             Assert.Contains("cpp_quote(\"STDAPI Trailing(\") \t" + newline +
                 "cpp_quote(\"    _In_ long value) _Win32_SupportedOS_Windows7_;\")", authored);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Contains("annotate(\\\"(marker)\\\")))) _Win32_SupportedOS_Windows7_;", authored);
-            Assert.Equal(8, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(10, report.RootElement.GetProperty("authoredFacts").GetInt32());
             var functions = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions").EnumerateArray()
                 .Where(item => item.GetProperty("declaration").GetProperty("kind").GetString() == "FunctionDecl").ToArray();
-            Assert.Equal(7, functions.Length);
+            Assert.Equal(9, functions.Length);
             Assert.All(functions, item =>
             {
                 Assert.Equal("cpp_quote-prototype", item.GetProperty("declaration").GetProperty("sourceForm").GetString());

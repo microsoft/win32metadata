@@ -124,8 +124,9 @@ bootstrap without rewriting existing bytes, guards, attributes or method order.
 Native function-like attribute macros are kept intact when every source definition
 expands to an attribute list; carriers precede the original invocation.
 It also binds unique native function prototypes in consecutive `cpp_quote`
-statements with an explicit `STDAPI`, `STDAPI_(type)`, or HRESULT calling-convention
-prefix and a complete parameter list ending in a semicolon. The public OS macro
+statements with an explicit `STDAPI`, `STDAPI_(type)`, or HRESULT
+`STDAPICALLTYPE`, `STDMETHODCALLTYPE`, or `WINAPI` prefix and a complete parameter
+list ending in a semicolon. The public OS macro
 is inserted immediately before the function name, preserving native linkage,
 return types, calling conventions and SAL. If that original line has trailing
 whitespace, it uses the equivalent position after the parameter list instead,

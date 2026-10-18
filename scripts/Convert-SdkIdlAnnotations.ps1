@@ -85,7 +85,7 @@ function Get-AttributeStart([string]$Mask, [int]$Offset, [Collections.Generic.Ha
 }
 
 function Find-QuotedFunction([string]$Text, [string]$Mask, [object[]]$Quotes, [string]$Name) {
-    $returnType = '(?:STDAPI(?:_\([A-Za-z_]\w*\))?|(?:EXTERN_C\s+)?HRESULT\s+(?:STDAPICALLTYPE|STDMETHODCALLTYPE))'
+    $returnType = '(?:STDAPI(?:_\([A-Za-z_]\w*\))?|(?:EXTERN_C\s+)?HRESULT\s+(?:STDAPICALLTYPE|STDMETHODCALLTYPE|WINAPI))'
     for ($i = 0; $i -lt $Quotes.Count; $i++) {
         $quote = $Quotes[$i]
         if ($Mask.Substring($quote.Index, $quote.Length) -notmatch '^\s*cpp_quote\s*\(') { continue }
