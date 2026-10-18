@@ -467,6 +467,18 @@ namespace ClangSharpSourceToWinmd
             {
                 var attrName = firstAttr.Name.ToString();
 
+                if ((attrName is "SupportedOSPlatform" or "SupportedOSPlatformAttribute" or
+                    "Windows.Win32.Foundation.Metadata.SupportedOSPlatform" or
+                    "Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute") &&
+                    node.Parent.ChildNodes().OfType<AttributeListSyntax>()
+                        .Where(list => list.Target?.Identifier.ValueText == node.Target?.Identifier.ValueText)
+                        .SelectMany(list => list.Attributes)
+                        .Any(attribute => (attribute.Name.ToString() is
+                            "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform" or
+                            "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatformAttribute") &&
+                            NormalizeAttributeArguments(attribute) == NormalizeAttributeArguments(firstAttr)))
+                    return null;
+
                 switch (attrName)
                 {
                     // We don't want more than one of these on an interface. Get rid of it if the 
