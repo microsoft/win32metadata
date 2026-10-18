@@ -73,7 +73,7 @@ function Write-Patch([string]$Before, [string]$After, [string]$Relative, [string
     $start.UseShellExecute = $false
     $start.RedirectStandardOutput = $true
     $start.RedirectStandardError = $true
-    foreach ($argument in @('diff', '--no-index', '--no-ext-diff', '--no-color', '--', $Before, $After)) {
+    foreach ($argument in @('-c', 'core.autocrlf=false', 'diff', '--no-index', '--no-ext-diff', '--no-color', '--', $Before, $After)) {
         $start.ArgumentList.Add($argument)
     }
     $process = [Diagnostics.Process]::Start($start)
@@ -159,7 +159,7 @@ foreach ($owner in $owners) {
         $offset = Get-AttributeStart $mask $definition.Index
         $macro = $macros[$payload.Groups[2].Value]
         $prefix = if ($offset -gt 0 -and $text[$offset - 1] -notin @("`n", "`r")) { $newline } else { '' }
-        $insertions.Add([ordered]@{ offset = $offset; text = "${prefix}_Win32_AnnotateInterface_($($fact.symbol), $macro)$newline" })
+        $insertions.Add([pscustomobject]@{ offset = $offset; text = "${prefix}_Win32_AnnotateInterface_($($fact.symbol), $macro)$newline" })
         $dispositions.Add([ordered]@{
             fact = $fact; disposition = 'authored-original-idl'; macro = $macro
             declaration = [ordered]@{
@@ -177,7 +177,7 @@ foreach ($owner in $owners) {
         $line = $text.LastIndexOf("`n", [Math]::Max(0, $bootstrap - 1)) + 1
         if ($line -lt $bom) { $line = $bom }
         if ($text.Substring($line) -notmatch '^#\s*include\s*[<"]sal\.h[>"]') {
-            $insertions.Add([ordered]@{ offset = $line; text = "#include <sal.h>$newline" })
+            $insertions.Add([pscustomobject]@{ offset = $line; text = "#include <sal.h>$newline" })
         }
     }
     $after = $text
@@ -188,7 +188,7 @@ foreach ($owner in $owners) {
     $results.Add([ordered]@{
         original = $relative; generatedHeaders = @($owner.generatedHeaders); partitionCandidates = @($owner.partitionCandidates)
         sourceSha256 = Get-Hash $bytes; patchedSha256 = Get-Hash ([Text.Encoding]::Latin1.GetBytes($after))
-        changed = $insertions.Count -gt 0; dispositions = @($dispositions)
+        changed = $insertions.Count -gt 0; dispositions = @($dispositions); insertions = @($insertions)
     })
 }
 

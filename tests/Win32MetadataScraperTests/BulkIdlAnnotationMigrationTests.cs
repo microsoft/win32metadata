@@ -112,6 +112,29 @@ namespace Win32MetadataScraperTests
             Assert.Contains("do not overwrite", overwrite.Error);
         }
 
+        [Fact]
+        public void MultipleSourceOffsetsAreAppliedDescendingRatherThanInInventoryOrder()
+        {
+            const string source = "// before first\r\n[object]\r\ninterface IZFirst : IUnknown {};\r\n" +
+                "// before second\r\n[object]\r\ninterface IASecond : IUnknown {};\r\n" +
+                "// before third\r\n[object]\r\ninterface IMThird : IUnknown {};\r\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            fixture.WriteMap(new[] { Floor("IASecond"), Floor("IMThird"), Floor("IZFirst") });
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            foreach (string name in new[] { "IZFirst", "IASecond", "IMThird" })
+            {
+                string carrier = "_Win32_AnnotateInterface_(" + name + ", _Win32_SupportedOS_Windows7_)\r\n";
+                Assert.Contains(carrier + "[object]\r\ninterface " + name, authored);
+                authored = authored.Replace(carrier, "", StringComparison.Ordinal);
+            }
+            Assert.Equal(source, authored.Replace("#include <sal.h>\r\n", "", StringComparison.Ordinal));
+            string patch = File.ReadAllText(Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
+            Assert.DoesNotContain("-interface", patch);
+            Assert.DoesNotContain("-//", patch);
+        }
+
         private static object Floor(string symbol, string version = "windows6.1") =>
             new { category = "supportedOS", symbol, value = symbol + "=SupportedOSPlatform(\"" + version + "\")" };
 
