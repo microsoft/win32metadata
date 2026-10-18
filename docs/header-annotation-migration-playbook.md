@@ -2999,3 +2999,123 @@ branch fidelity. The four corrected `WIN32_ERROR` sites remain direct
 enum-typed uses, not four `AssociatedEnum` attributes. The general
 association-storage clarification does not admit this separate source
 cohort or make global #2371 cleanup a prerequisite.
+
+### Locally qualified original FDI and ProcessSnapshot headers
+
+The original `fdi.h` and `ProcessSnapshot.h` cohort is now locally
+qualified. The unpatched `fci.h` and `fdi_fci_types.h` are complete
+Cabinets traversal context, not two additional migrations. All four
+selected SDK originals match the repository mirrors byte-for-byte.
+Stock source traversals, native controls and complete emissions ran at
+`0364a475...`; permanent metadata acceptance ran at `40479bbb...`.
+Production `sources`, `generation`, `scripts` and the native-control
+source remain literal across that acceptance-only commit. The actual
+native fixture `57B6878B...` and final fixture `52530260...`, their PDBs
+and source-checksum bindings are retained separately.
+
+The baseline is the completed Wer qualification `AF4C2CCB...` and its
+independently completed parent verification `F60A8A40...`. All fifteen
+parent payloads were rehashed here. The exact `D3D6E336...` source archive
+and `1869DB7A...` image preserve the latest qualified Eap, DeviceQuery,
+Dwm, WebSock and Wer context. Reusing these unchanged inputs is not
+reported as a fresh traversal. The actual emitter remains `01DCFCBF...`;
+no shared tooling, helper, dependency or toolchain changes are needed.
+
+FDI uses the existing native-neutral `_Win32_Enum_` transport for the
+logical `FDICREATE_CPU_TYPE` group. Original `cpuUNKNOWN`, `cpu80286`
+and `cpu80386` macros remain -1, 0 and 1; `FDICreate.cpuType` remains
+native `int`. Four Windows 2000 floors and ten ProcessSnapshot
+Windows 8.1 floors are fixed on individual declarations, not scopes.
+The complete original `PssWalkMarkerFree` declaration moves intact
+before `PssWalkMarkerCreate`. Its precise native output receives the
+existing cleanup and invalid-value facts. Removing metadata and
+undoing that one static declaration move recovers both original
+headers byte-for-byte. No native enum, alias, cast or forward
+declaration is invented.
+
+The bounded recipe contains 55 selected headers, 48 patches and 47
+eligible partitions; all 46 prior patches remain literal. Two fresh
+stock whole-owner header/constants traversals each produce 3,443
+prepared headers and 394 normal outputs. All 6,886 prepared payloads
+are rehashed and repeat literally. Of the normal outputs, 393 repeat
+literally; the only difference is the actual preparation-root
+coordinate in `traversedFileToNamespace.rsp`. All raw outputs and four
+raw scratch discovery differences are retained. Discovery decisions
+and relative header paths remain exact, with pointer-reduction
+coverage checked against the corresponding architecture, not a
+cross-architecture union.
+
+All twenty-four whole-owner C17/C++17, metadata off/on,
+x86/x64/arm64 cases pass. Cabinets preserves 306 native facts and 489
+SAL occurrences per case. ProcessSnapshot preserves 688 native facts
+in C and 723 in C++, with 515 SAL occurrences per case. Complete
+selected native, SAL and raw-SAL stdout is retained. Metadata appears
+at exactly six FDI and eleven ProcessSnapshot occurrences when enabled,
+and zero when disabled. The single FDI int carrier is metadata-only.
+The native `HPSS` and `HPSSWALK` declarations, field layouts, pointer
+widths, directions and SAL remain unchanged.
+
+The complete candidate `EDF06984...` and repeat `263D87E3...` each
+consume 833 inputs, including 826 C# files and 824 byte-literal unowned
+inputs from the qualified Wer context. Eight whole normal owner C#
+outputs replace their corresponding inputs; three are new
+architecture-specific group companions. The entire old
+`Storage.Cabinets.enums.cs` is removed. The ninth owned archive entry
+is the exact enum-use configuration change. All ten actual consumed
+configs are captured: only the CPU use remap and old `HPSSWALK`
+lifecycle settings change; its native typedef object remains.
+All 833 source entry names, order and bytes repeat literally, as do
+all 821 actual compiler-private files. No partial source splice or
+generated-source repair is used.
+
+Both unfiltered Wer comparisons retain the same four report rows,
+SHA `F6D870DF...`; this is **not API-zero**. The developer-visible
+changes are two precise representation relocations:
+
+| Contract | Exact metadata change |
+| --- | --- |
+| `FDICreate.cpuType` | Direct logical enum use becomes native `System.Int32` plus the same `AssociatedEnum(FDICREATE_CPU_TYPE)` target. `In` is unchanged. The logical enum retains its identity, Int32 storage, ordered -1/0/1 members, raw bytes and absent flags. |
+| `PssWalkMarkerCreate.WalkMarkerHandle` | Existing `PssWalkMarkerFree` cleanup and invalid values -1/0 move from the `HPSSWALK` type to this precise `Out` producer. The native typedef and its physical representation remain intact. |
+
+Every one of the 37,312 physical identities survives. Exactly the two
+owners' `Apis` snapshots and `HPSSWALK` change; the other 37,309
+snapshots remain literal with every correction and normalization
+switch off. All twenty imports and fourteen floors are graded
+exactly. Real field order, layouts and COM/vtable order remain strict;
+the original static cleanup move is explicit. Raw baseline/candidate
+type, field and method/signature sequences are retained diagnostically.
+Candidate to repeat is unfiltered API-zero and literal across all
+37,312 type positions, 247,661 fields and 70,740 methods/raw signatures.
+Actual managed consumer projection effects remain unmeasured.
+
+The twenty-four native, eight precise metadata/whole-image and
+twenty-eight integrity executions total **60 passed, zero failed,
+zero skipped**. Three supplementary source guards also pass. These
+are 63 retained execution rows and 45 distinct case identities, not
+63 distinct tests. TRX error messages are plain text. The shared
+integrity image is restored byte-for-byte. Proof-only CRLF, filename,
+discovery-coordinate, architecture-union, reflection-dependency and
+inline-command mistakes are preserved; none is a native contradiction,
+compiler repair or new source-policy gate.
+
+The immutable receipt is
+`files\authored-cabinets-processsnapshot-16-local-40479bbb\qualification.json`,
+SHA `8CC52BCC20C2B33C9292F83BCAA1E169CBD3DB2AB00D4588E1FB15BB93D89936`.
+Index `395FD0BF...` binds 263 payloads totaling 411,051,269 bytes,
+all rehashed before and after read-only sealing. Every one of the
+11,837 retained ZIP entries is independently rehashed: 11,006 fresh
+SDK, normal, discovery, full-source and private-compilation entries,
+plus 831 explicitly frozen qualified-Wer entries. All 2,745 indexed
+payloads in the eight prior immutable packets remain read-only and
+unchanged, including the original DeviceQuery and Wer negatives.
+
+Local resumed-original-artifact coverage is now **36/50**: twelve
+original IDLs and twenty-four headers, twenty additional original
+headers since `12279c76...`. Fourteen header drafts remain outside
+qualified cohorts. Bluetooth has only an independent original-header
+preflight at this checkpoint, not source/native/image admission.
+WNet/RPC branch/value/type questions, seven unavailable original IDLs
+and their thirty legacy facts remain separate. This is not an all-SDK
+owner percentage, whole-production/current-head CI qualification or
+publication. No push, PR/stack mutation, merge or consumer work is
+performed.
