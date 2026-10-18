@@ -1,0 +1,16 @@
+diff --git a/um/dshow.h b/um/dshow.h
+index 27458a5e..178df22c 100644
+--- a/um/dshow.h
++++ b/um/dshow.h
+@@ -106,4 +106,11 @@
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(OA_BOOL, long,
++    OATRUE,
++    OAFALSE);
++#endif
++
+ #endif // __DSHOW_INCLUDED__

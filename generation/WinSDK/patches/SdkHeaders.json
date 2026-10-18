@@ -3879,6 +3879,60 @@
       "sourceSha256": "E312D128602E8E6D51456F12229F81B0228AD1C8EA6C9AC438053966A7D20C8F",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\mmsyscom.h",
       "sdkSha256": "E312D128602E8E6D51456F12229F81B0228AD1C8EA6C9AC438053966A7D20C8F"
+    },
+    {
+      "path": "shared\\ntstatus.h",
+      "sourceSha256": "34CDC350A1F1FAE13DC0194557F7B27FA012B6FF615900F31F05390D3EB7D4CB",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntstatus.h",
+      "sdkSha256": "34CDC350A1F1FAE13DC0194557F7B27FA012B6FF615900F31F05390D3EB7D4CB"
+    },
+    {
+      "path": "shared\\cderr.h",
+      "sourceSha256": "BF32AFDC975BA03781B01DFC7B3A450787CC213257A3F4B7F53EC168CE07DD7C",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\cderr.h",
+      "sdkSha256": "BF32AFDC975BA03781B01DFC7B3A450787CC213257A3F4B7F53EC168CE07DD7C"
+    },
+    {
+      "path": "shared\\bugcodes.h",
+      "sourceSha256": "1516034D71722CCDE51FF8818D0302F6ED637974E1ABE4B41CDA4247C455F2C8",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\bugcodes.h",
+      "sdkSha256": "1516034D71722CCDE51FF8818D0302F6ED637974E1ABE4B41CDA4247C455F2C8"
+    },
+    {
+      "path": "shared\\devpropdef.h",
+      "sourceSha256": "79E4631E9E0CFDA0975270F71C9970D731352AD8D198D6706AC13A3970CEAA98",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\devpropdef.h",
+      "sdkSha256": "79E4631E9E0CFDA0975270F71C9970D731352AD8D198D6706AC13A3970CEAA98"
+    },
+    {
+      "path": "um\\htmlhelp.h",
+      "sourceSha256": "A59DDEDC08021A30DC4E8BBEC683AA03E3DB02A481ADC66524A02C4BED10CF32",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\htmlhelp.h",
+      "sdkSha256": "A59DDEDC08021A30DC4E8BBEC683AA03E3DB02A481ADC66524A02C4BED10CF32"
+    },
+    {
+      "path": "um\\lmuseflg.h",
+      "sourceSha256": "104C9E031411978107B325D47A9D4F1F499182885558DB6B7A455DC4C2655E43",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmuseflg.h",
+      "sdkSha256": "104C9E031411978107B325D47A9D4F1F499182885558DB6B7A455DC4C2655E43"
+    },
+    {
+      "path": "um\\dshow.h",
+      "sourceSha256": "40B1A1CF8028A06539F3DC3345D2640A120386C6AB498B1F3B43E762638E9736",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dshow.h",
+      "sdkSha256": "40B1A1CF8028A06539F3DC3345D2640A120386C6AB498B1F3B43E762638E9736"
+    },
+    {
+      "path": "um\\sens.h",
+      "sourceSha256": "8ED40FAD01D6BFE53B2BD1AA16EA8CEAAD7002958EABECF9CC8D8E0133BC4172",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\sens.h",
+      "sdkSha256": "8ED40FAD01D6BFE53B2BD1AA16EA8CEAAD7002958EABECF9CC8D8E0133BC4172"
+    },
+    {
+      "path": "um\\infotech.h",
+      "sourceSha256": "25F30931052889DDFF3BFF51432813D588140EC4F333E0D0004EEEAF441B193C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\infotech.h",
+      "sdkSha256": "25F30931052889DDFF3BFF51432813D588140EC4F333E0D0004EEEAF441B193C"
     }
   ],
   "midl": {
@@ -7300,7 +7354,9 @@
     "MsHtml",
     "Audio.Apo",
     "CompositionSwapchain",
-    "Communication"
+    "Communication",
+    "Devices.Properties",
+    "HtmlHelp"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -7914,6 +7970,15 @@
     "um\\minschannel.h.patch",
     "um\\credssp.h.patch",
     "um\\vbinterf.h.patch",
-    "um\\mmsyscom.h.patch"
+    "um\\mmsyscom.h.patch",
+    "shared\\ntstatus.h.patch",
+    "shared\\cderr.h.patch",
+    "shared\\bugcodes.h.patch",
+    "shared\\devpropdef.h.patch",
+    "um\\htmlhelp.h.patch",
+    "um\\lmuseflg.h.patch",
+    "um\\dshow.h.patch",
+    "um\\sens.h.patch",
+    "um\\infotech.h.patch"
   ]
 }

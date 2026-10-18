@@ -1,0 +1,18 @@
+diff --git a/shared/ntstatus.h b/shared/ntstatus.h
+index c6c0b3a5..69b82c15 100644
+--- a/shared/ntstatus.h
++++ b/shared/ntstatus.h
+@@ -27725,4 +27725,13 @@ __inline NTSTATUS_FROM_WIN32(long x) { return x <= 0 ? (NTSTATUS)x : (NTSTATUS)
+ // end_ntsecapi
+ 
+ #endif // WIN32_NO_STATUS // winnt
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++#include <sal.h>
++_Win32_Enum_(NTSTATUS_SEVERITY_CODE, unsigned long,
++    STATUS_SEVERITY_SUCCESS,
++    STATUS_SEVERITY_INFORMATIONAL,
++    STATUS_SEVERITY_WARNING,
++    STATUS_SEVERITY_ERROR);
++#endif
++
+ #endif // _NTSTATUS_

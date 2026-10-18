@@ -187,13 +187,7 @@
     ]
   },
   {
-    "name": "COMMON_DLG_ERRORS",
-    "type": "uint",
-    "autoPopulate": {
-      "filter": ".+",
-      "header": "cderr.h"
-    },
-    "members": [],
+    "addUsesTo": "COMMON_DLG_ERRORS",
     "uses": [
       {
         "method": "CommDlgExtendedError",
@@ -3902,15 +3896,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.System.Diagnostics.Debug",
-    "type": "uint",
-    "name": "BUGCHECK_ERROR",
-    "autoPopulate": {
-      "filter": ".*",
-      "header": "bugcodes.h"
-    }
-  },
-  {
     "namespace": "Windows.Win32.System.Rpc",
     "type": "int",
     "name": "RPC_STATUS",
@@ -4002,17 +3987,6 @@
         "name": "FACILITY_MCA_ERROR_CODE"
       }
     ],
-    "uses": []
-  },
-  {
-    "namespace": "Windows.Win32.Foundation",
-    "type": "uint",
-    "name": "NTSTATUS_SEVERITY_CODE",
-    "autoPopulate": {
-      "filter": "STATUS_SEVERITY_",
-      "header": "ntstatus.h"
-    },
-    "members": [],
     "uses": []
   },
   {
@@ -10480,17 +10454,7 @@
     ]
   },
   {
-    "name": "OA_BOOL",
-    "members": [
-      {
-        "name": "OATRUE",
-        "value": -1
-      },
-      {
-        "name": "OAFALSE",
-        "value": 0
-      }
-    ],
+    "addUsesTo": "OA_BOOL",
     "uses": [
       {
         "interface": "IVideoWindow",
@@ -11686,21 +11650,7 @@
     ]
   },
   {
-    "name": "FORCE_LEVEL_FLAGS",
-    "members": [
-      {
-        "name": "USE_NOFORCE",
-        "value": 0
-      },
-      {
-        "name": "USE_FORCE",
-        "value": 1
-      },
-      {
-        "name": "USE_LOTS_OF_FORCE",
-        "value": 2
-      }
-    ],
+    "addUsesTo": "FORCE_LEVEL_FLAGS",
     "uses": [
       {
         "method": "NetUseDel",
@@ -13325,17 +13275,7 @@
     ]
   },
   {
-    "name": "SENS_CONNECTION_TYPE",
-    "members": [
-      {
-        "name": "CONNECTION_LAN",
-        "value": "0"
-      },
-      {
-        "name": "CONNECTION_WAN",
-        "value": "1"
-      }
-    ],
+    "addUsesTo": "SENS_CONNECTION_TYPE",
     "uses": [
       {
         "interface": "ISensNetwork",
@@ -15398,13 +15338,7 @@
     ]
   },
   {
-    "name": "WORD_WHEEL_OPEN_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "ITWW_OPEN_CONNECT"
-      }
-    ],
+    "addUsesTo": "WORD_WHEEL_OPEN_FLAGS",
     "uses": [
       {
         "interface": "IITWordWheel",
@@ -32273,15 +32207,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Data.HtmlHelp",
-    "name": "HTML_HELP_COMMAND",
-    "autoPopulate": {
-      "filter": "HH_",
-      "header": "HtmlHelp.h"
-    },
-    "uses": []
-  },
-  {
     "name": "COMPRESSION_FORMAT",
     "type": "ushort",
     "autoPopulate": {
@@ -32537,15 +32462,6 @@
         "parameter": "swfwOptions"
       }
     ]
-  },
-  {
-    "namespace": "Windows.Win32.Devices.Properties",
-    "name": "DEVPROPTYPE",
-    "autoPopulate": {
-      "filter": "DEVPROP_TYPE_|DEVPROP_TYPEMOD_",
-      "header": "devpropdef.h"
-    },
-    "uses": []
   },
   {
     "addUsesTo": "CF_HYDRATION_POLICY_PRIMARY",
