@@ -454,6 +454,9 @@ namespace Win32MetadataScraper
                     facts.IsScopedEnum = owner.IsScopedEnum;
                     facts.IsFlagsEnum = owner.IsFlagsEnum;
                     facts.LogicalEnumMembers = owner.LogicalEnumMembers;
+                    // A traversed forward typedef can inherit group facts from an untraversed redeclaration.
+                    if (facts.Declaration is TypedefNameDecl && facts.LogicalEnumMembers != null && !annotatedTypedefs.Contains(facts))
+                        annotatedTypedefs.Add(facts);
                 }
             }
         }

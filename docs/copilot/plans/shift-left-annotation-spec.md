@@ -508,6 +508,12 @@ void SetMode(_Win32_AssociatedEnum_(MODE) DWORD mode);
 _Win32_Enum_(MODE, DWORD, MODE_A, MODE_B);
 ```
 
+The forward typedef and complete group may be in different included headers. A
+traversed forward declaration projects its compiler-bound merged group even when
+the contributing header is outside the partition's traversal list. Unrelated
+same-named typedefs do not establish a group; excluded or entirely untraversed
+groups remain unprojected.
+
 A group whose constants have multiple original-header owners may repeat
 `_Win32_Enum_` or `_Win32_FlagsEnum_` on the same native typedef, with the same
 storage and kind. Each owner lists its own existing constants after their native
