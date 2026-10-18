@@ -233,7 +233,7 @@ namespace Win32MetadataScraperTests
             Assert.False(Directory.Exists(result.OutputDirectory));
         }
 
-        [NativeMigrationTheory("WIN32METADATA_WMI_GENERATED_SOURCE")]
+        [MigrationTheory("WIN32METADATA_WMI_GENERATED_SOURCE", "WIN32METADATA_WMI_DISABLED_SOURCE")]
         [InlineData("IEnumWbemClassObject", "windows6.0.6000")]
         public void ActualNormalWmiSourceProjectsTheOwnedFloorWithoutLegacyFallback(string target, string floor)
         {
