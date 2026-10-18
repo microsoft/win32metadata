@@ -1758,6 +1758,14 @@ static_assert(DISC_NO_FORCE == 64u);
                 WinHttpMigrationTests.DeviceContinuationOriginalHeaders().Single(owner => owner.Partition == partition)
                     .Headers.Select(Path.GetFileName).ToArray());
 
+        [NativeMigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS")]
+        [MemberData(nameof(DeviceFollowingOriginalHeaderControls))]
+        public void OriginalDeviceRecordHeadersPreserveNativeAbiSalAndBoundMetadata(
+            string partition, string architecture, string target, string language, bool enabled)
+            => this.AssertOriginalDeviceHeaderControl(partition, architecture, target, language, enabled,
+                WinHttpMigrationTests.DeviceFollowingOriginalHeaders().Single(owner => owner.Partition == partition)
+                    .Headers.Select(Path.GetFileName).ToArray());
+
         private void AssertOriginalDeviceHeaderControl(string partition, string architecture, string target,
             string language, bool enabled, string[] headers)
         {
@@ -1797,15 +1805,44 @@ static_assert(DISC_NO_FORCE == 64u);
                 metadataEnabled: enabled, annotations: annotations, sourceText: sourceText, salAnnotations: afterSal,
                 diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
-            Assert.Equal(before, after);
+            using var contracts = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_BATCH_CONTRACTS")));
+            var boundFacts = contracts.RootElement.GetProperty("facts").EnumerateArray().ToArray();
+            var withoutCarriers = after.ToList();
+            int recordCarriers = 0;
+            if (enabled && language == "c++")
+            {
+                foreach (string header in headers)
+                {
+                    string path = new[] { "shared", "um", "winrt", "ucrt" }
+                        .Select(directory => Path.Combine(prepared, directory, header)).Single(File.Exists);
+                    foreach (Match carrier in Regex.Matches(File.ReadAllText(path),
+                        @"(?m)^[ \t]*#if defined\(WIN32METADATA\) && defined\(__clang__\) && defined\(__cplusplus\)\r?\n" +
+                        @"[ \t]*typedef _Win32_SupportedOS_\w+_ (?:struct|class) (?<name>\w+) \k<name>;\r?\n" +
+                        @"[ \t]*#endif\r?\n"))
+                    {
+                        string name = carrier.Groups["name"].Value;
+                        Assert.Single(boundFacts.Where(fact =>
+                            Path.GetFileName(fact.GetProperty("original").GetString()) == header &&
+                            fact.GetProperty("symbol").GetString() == name &&
+                            fact.GetProperty("category").GetString() == "supportedOS" &&
+                            fact.GetProperty("status").GetString() == "converted"));
+                        Assert.Contains(before, declaration => declaration.StartsWith("record " + name + " ", StringComparison.Ordinal));
+                        string native = "typedef " + name + " " + name;
+                        Assert.Equal(before.Count(declaration => declaration == native) + 1,
+                            withoutCarriers.Count(declaration => declaration == native));
+                        Assert.True(withoutCarriers.Remove(native));
+                        recordCarriers++;
+                    }
+                }
+            }
+            Assert.Equal(before, withoutCarriers);
             Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
-            using var contracts = JsonDocument.Parse(File.ReadAllText(
-                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_BATCH_CONTRACTS")));
             var expected = new List<string>();
-            foreach (var fact in contracts.RootElement.GetProperty("facts").EnumerateArray())
+            foreach (var fact in boundFacts)
             {
                 if (!headers.Contains(Path.GetFileName(fact.GetProperty("original").GetString()), StringComparer.OrdinalIgnoreCase))
                     continue;
@@ -1829,6 +1866,9 @@ static_assert(DISC_NO_FORCE == 64u);
                 }
                 int occurrences = before.Count(declaration =>
                     declaration.StartsWith("function " + name + " ", StringComparison.Ordinal));
+                if (category == "supportedOS")
+                    occurrences += before.Count(declaration =>
+                        declaration.StartsWith("record " + name + " ", StringComparison.Ordinal));
                 for (int i = 0; i < occurrences; i++)
                     expected.Add(name + "|" + value);
             }
@@ -1838,6 +1878,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 annotations.OrderBy(value => value, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} unchanged native facts, {beforeSal.Count} unchanged SAL occurrences, " +
+                $"{recordCarriers} exact metadata-only same-name record aliases, " +
                 $"{annotations.Count} exact source-bound availability/last-error facts; " +
                 (language == "c" ? "owned-header C17 context" : "complete owner C++ context") + ".");
         }
@@ -1858,6 +1899,18 @@ static_assert(DISC_NO_FORCE == 64u);
         public static IEnumerable<object[]> DeviceContinuationOriginalHeaderControls()
         {
             foreach (var owner in WinHttpMigrationTests.DeviceContinuationOriginalHeaders())
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { owner.Partition, architecture.Item1, architecture.Item2, "c++", enabled };
+        }
+
+        public static IEnumerable<object[]> DeviceFollowingOriginalHeaderControls()
+        {
+            foreach (var owner in WinHttpMigrationTests.DeviceFollowingOriginalHeaders())
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),

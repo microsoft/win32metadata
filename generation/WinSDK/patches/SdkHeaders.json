@@ -3525,6 +3525,138 @@
       "sourceSha256": "36398E817C4CAD63CC8BF4F09032FF57BACB019514E6B07AA6A76CA71356D7E7",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\wabiab.h",
       "sdkSha256": "36398E817C4CAD63CC8BF4F09032FF57BACB019514E6B07AA6A76CA71356D7E7"
+    },
+    {
+      "path": "um\\richole.h",
+      "sourceSha256": "A35ECC6540237235447DD414609EA82834BE2440CEC02A07B74CA0874CF76D7E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\richole.h",
+      "sdkSha256": "A35ECC6540237235447DD414609EA82834BE2440CEC02A07B74CA0874CF76D7E"
+    },
+    {
+      "path": "um\\d2d1effectauthor.h",
+      "sourceSha256": "ABE531F28CAE43E28845F507B415AFD560C2B97B65B6CC59A3F1DC97A8654E47",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d2d1effectauthor.h",
+      "sdkSha256": "ABE531F28CAE43E28845F507B415AFD560C2B97B65B6CC59A3F1DC97A8654E47"
+    },
+    {
+      "path": "um\\dwrite_3.h",
+      "sourceSha256": "1A033492B5BB70E9CC273A948CB76A5AC310D2B205FDA58136D13776501C7AD6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwrite_3.h",
+      "sdkSha256": "1A033492B5BB70E9CC273A948CB76A5AC310D2B205FDA58136D13776501C7AD6"
+    },
+    {
+      "path": "um\\dskquota.h",
+      "sourceSha256": "418D784DDACDC83CDEF9911E9360167809B5D8B9E8B3A3938132DC4A8A667EB9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dskquota.h",
+      "sdkSha256": "418D784DDACDC83CDEF9911E9360167809B5D8B9E8B3A3938132DC4A8A667EB9"
+    },
+    {
+      "path": "um\\dwrite_2.h",
+      "sourceSha256": "64D2FF91EEBCE0BA23CBB7F8EAF3D3DF5BABCABBEE408DEB98CE419C3BC49353",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwrite_2.h",
+      "sdkSha256": "64D2FF91EEBCE0BA23CBB7F8EAF3D3DF5BABCABBEE408DEB98CE419C3BC49353"
+    },
+    {
+      "path": "um\\qnetwork.h",
+      "sourceSha256": "E39486744B197FD786FDEC2E79C0AD337C57A425F61F075AD328F0EC0D3F389E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\qnetwork.h",
+      "sdkSha256": "E39486744B197FD786FDEC2E79C0AD337C57A425F61F075AD328F0EC0D3F389E"
+    },
+    {
+      "path": "um\\dwrite_1.h",
+      "sourceSha256": "72107EA7B01125DCB095EEEEC1ABE18A05838C8BD0F7E525ACF2DCDF28D17BF8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dwrite_1.h",
+      "sdkSha256": "72107EA7B01125DCB095EEEEC1ABE18A05838C8BD0F7E525ACF2DCDF28D17BF8"
+    },
+    {
+      "path": "um\\dsadmin.h",
+      "sourceSha256": "8237B3ABA94B8430BBC44B33ACC0FB0F993A98289FE98E6438C579A59D9A3350",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dsadmin.h",
+      "sdkSha256": "8237B3ABA94B8430BBC44B33ACC0FB0F993A98289FE98E6438C579A59D9A3350"
+    },
+    {
+      "path": "um\\d3d11shader.h",
+      "sourceSha256": "CC5B6359CE97EC951FB117297CC920FEDB24665CF60F0536E53ADA06E42CDD75",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11shader.h",
+      "sdkSha256": "CC5B6359CE97EC951FB117297CC920FEDB24665CF60F0536E53ADA06E42CDD75"
+    },
+    {
+      "path": "um\\wabdefs.h",
+      "sourceSha256": "DD98D47E51CD2F08E84368A4BE7E191F2779845DBB8404C8F18C8AE819053B4F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wabdefs.h",
+      "sdkSha256": "DD98D47E51CD2F08E84368A4BE7E191F2779845DBB8404C8F18C8AE819053B4F"
+    },
+    {
+      "path": "um\\amvideo.h",
+      "sourceSha256": "977B297DB87B72DEC8062281C42F5061F4B865DD725856453101BBD9647F4238",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amvideo.h",
+      "sdkSha256": "977B297DB87B72DEC8062281C42F5061F4B865DD725856453101BBD9647F4238"
+    },
+    {
+      "path": "um\\cmnquery.h",
+      "sourceSha256": "0E132CEE2FEDB6AC8FBF2E0932EEB8EE6BB7BE4D11D10AAD4156A4A612C098B4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\cmnquery.h",
+      "sdkSha256": "0E132CEE2FEDB6AC8FBF2E0932EEB8EE6BB7BE4D11D10AAD4156A4A612C098B4"
+    },
+    {
+      "path": "um\\vpnotify.h",
+      "sourceSha256": "1F639F12E5028E7A8E94ACDF10299CAC7D6BC12FEE6EFC684F6F898624322E91",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vpnotify.h",
+      "sdkSha256": "1F639F12E5028E7A8E94ACDF10299CAC7D6BC12FEE6EFC684F6F898624322E91"
+    },
+    {
+      "path": "um\\mpconfig.h",
+      "sourceSha256": "EEB9FCCFA1503A47CAF371780A280C026E87CFB894763AAD8BF4F7D4A6809BBB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mpconfig.h",
+      "sdkSha256": "EEB9FCCFA1503A47CAF371780A280C026E87CFB894763AAD8BF4F7D4A6809BBB"
+    },
+    {
+      "path": "um\\objsel.h",
+      "sourceSha256": "1EFFDCC6A210CD09E2F2EEF79D5D4B19957CD59FE21603B3C007C2FE93F80807",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\objsel.h",
+      "sdkSha256": "1EFFDCC6A210CD09E2F2EEF79D5D4B19957CD59FE21603B3C007C2FE93F80807"
+    },
+    {
+      "path": "um\\vpconfig.h",
+      "sourceSha256": "86B79FBD3D1538274114CF69A3EB0057F18E60DEEB5AD1283D69A4F18BFD8C25",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vpconfig.h",
+      "sdkSha256": "86B79FBD3D1538274114CF69A3EB0057F18E60DEEB5AD1283D69A4F18BFD8C25"
+    },
+    {
+      "path": "um\\wabapi.h",
+      "sourceSha256": "9FB450A55DCDF794F43A02EAC4374C523D10F36621D0AEA2D820F3EFD6BBFA01",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wabapi.h",
+      "sdkSha256": "9FB450A55DCDF794F43A02EAC4374C523D10F36621D0AEA2D820F3EFD6BBFA01"
+    },
+    {
+      "path": "um\\amaudio.h",
+      "sourceSha256": "8287F2C2D7CBB6F1CB8D5F249BF55B86267982C8176ACA15EE201E3068666A4C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amaudio.h",
+      "sdkSha256": "8287F2C2D7CBB6F1CB8D5F249BF55B86267982C8176ACA15EE201E3068666A4C"
+    },
+    {
+      "path": "um\\amparse.h",
+      "sourceSha256": "7C0E1FAE760B261669A5AD4D4677353AFE9C1B096D719627A504BB537E015780",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\amparse.h",
+      "sdkSha256": "7C0E1FAE760B261669A5AD4D4677353AFE9C1B096D719627A504BB537E015780"
+    },
+    {
+      "path": "um\\hrtfapoapi.h",
+      "sourceSha256": "E80079F58FAD8C3F87282AED1181DE708D0E040864A9E61188A490654EC74941",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\hrtfapoapi.h",
+      "sdkSha256": "E80079F58FAD8C3F87282AED1181DE708D0E040864A9E61188A490654EC74941"
+    },
+    {
+      "path": "um\\il21dec.h",
+      "sourceSha256": "A185F9B3385B327A501B5CEBDE462B5ADF508C2923285426FD1469E707FEE71F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\il21dec.h",
+      "sdkSha256": "A185F9B3385B327A501B5CEBDE462B5ADF508C2923285426FD1469E707FEE71F"
+    },
+    {
+      "path": "um\\iwstdec.h",
+      "sourceSha256": "2846744F732410F5D1EB30AE10B4CA841A0A4BC28ED7170A2EC698611CD7206F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\iwstdec.h",
+      "sdkSha256": "2846744F732410F5D1EB30AE10B4CA841A0A4BC28ED7170A2EC698611CD7206F"
     }
   ],
   "midl": {
@@ -6315,7 +6447,8 @@
     "TaskSchd",
     "Xaml_Diagnostics",
     "Debug.WebApp",
-    "Wab"
+    "Wab",
+    "Xaudio2"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -6870,6 +7003,28 @@
     "um\\cluadmex.idl.patch",
     "um\\mpegtype.h.patch",
     "um\\comadmin.idl.patch",
-    "um\\wabiab.h.patch"
+    "um\\wabiab.h.patch",
+    "um\\richole.h.patch",
+    "um\\d2d1effectauthor.h.patch",
+    "um\\dwrite_3.h.patch",
+    "um\\dskquota.h.patch",
+    "um\\dwrite_2.h.patch",
+    "um\\qnetwork.h.patch",
+    "um\\dwrite_1.h.patch",
+    "um\\dsadmin.h.patch",
+    "um\\d3d11shader.h.patch",
+    "um\\wabdefs.h.patch",
+    "um\\amvideo.h.patch",
+    "um\\cmnquery.h.patch",
+    "um\\vpnotify.h.patch",
+    "um\\mpconfig.h.patch",
+    "um\\objsel.h.patch",
+    "um\\vpconfig.h.patch",
+    "um\\wabapi.h.patch",
+    "um\\amaudio.h.patch",
+    "um\\amparse.h.patch",
+    "um\\hrtfapoapi.h.patch",
+    "um\\il21dec.h.patch",
+    "um\\iwstdec.h.patch"
   ]
 }

@@ -1,0 +1,24 @@
+diff --git a/um/richole.h b/um/richole.h
+index 13a6a61f..6b1d8596 100644
+--- a/um/richole.h
++++ b/um/richole.h
+@@ -90,6 +90,9 @@ typedef struct _reobject
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOle
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IRichEditOle IRichEditOle;
++#endif
+ DECLARE_INTERFACE_(IRichEditOle, IUnknown)
+ {
+     // *** IUnknown methods ***
+@@ -132,6 +135,9 @@ typedef         IRichEditOle FAR * LPRICHEDITOLE;
+ #undef INTERFACE
+ #define INTERFACE   IRichEditOleCallback
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IRichEditOleCallback IRichEditOleCallback;
++#endif
+ DECLARE_INTERFACE_(IRichEditOleCallback, IUnknown)
+ {
+     // *** IUnknown methods ***

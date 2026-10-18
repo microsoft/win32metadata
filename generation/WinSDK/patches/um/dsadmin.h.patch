@@ -1,0 +1,54 @@
+diff --git a/um/dsadmin.h b/um/dsadmin.h
+index c007ffbd..5142f4e5 100644
+--- a/um/dsadmin.h
++++ b/um/dsadmin.h
+@@ -68,6 +68,9 @@ DEFINE_GUID(IID_IDsAdminNotifyHandler,
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminCreateObj
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IDsAdminCreateObj IDsAdminCreateObj;
++#endif
+ DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
+ {
+   // *** IUnknown methods ***
+@@ -100,6 +103,9 @@ DECLARE_INTERFACE_(IDsAdminCreateObj, IUnknown)
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObj
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IDsAdminNewObj IDsAdminNewObj;
++#endif
+ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
+ {
+   // *** IUnknown methods ***
+@@ -129,6 +135,9 @@ DECLARE_INTERFACE_(IDsAdminNewObj, IUnknown)
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObjPrimarySite
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IDsAdminNewObjPrimarySite IDsAdminNewObjPrimarySite;
++#endif
+ DECLARE_INTERFACE_(IDsAdminNewObjPrimarySite, IUnknown)
+ {
+   // *** IUnknown methods ***
+@@ -184,6 +193,9 @@ typedef struct
+ #undef  INTERFACE
+ #define INTERFACE   IDsAdminNewObjExt
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IDsAdminNewObjExt IDsAdminNewObjExt;
++#endif
+ DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
+ {
+   // *** IUnknown methods ***
+@@ -250,6 +262,9 @@ DECLARE_INTERFACE_(IDsAdminNewObjExt, IUnknown)
+ #define INTERFACE   IDsAdminNotifyHandler
+ 
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsVista_ struct IDsAdminNotifyHandler IDsAdminNotifyHandler;
++#endif
+ DECLARE_INTERFACE_(IDsAdminNotifyHandler, IUnknown)
+ {
+   // *** IUnknown methods ***

@@ -1,0 +1,54 @@
+diff --git a/um/dskquota.h b/um/dskquota.h
+index bb349ec0..855da1a4 100644
+--- a/um/dskquota.h
++++ b/um/dskquota.h
+@@ -172,6 +172,9 @@ typedef struct DiskQuotaUserInformation {
+ //
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUser
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IDiskQuotaUser IDiskQuotaUser;
++#endif
+ DECLARE_INTERFACE_IID_(IDiskQuotaUser, IUnknown, "7988B574-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(GetID)(THIS_
+@@ -242,6 +245,9 @@ typedef IDiskQuotaUser DISKQUOTA_USER, *PDISKQUOTA_USER;
+ //
+ #undef  INTERFACE
+ #define INTERFACE IEnumDiskQuotaUsers
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IEnumDiskQuotaUsers IEnumDiskQuotaUsers;
++#endif
+ DECLARE_INTERFACE_IID_(IEnumDiskQuotaUsers, IUnknown, "7988B577-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Next)(THIS_
+@@ -267,6 +273,9 @@ typedef IEnumDiskQuotaUsers ENUM_DISKQUOTA_USERS, *PENUM_DISKQUOTA_USERS;
+ // 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaUserBatch
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IDiskQuotaUserBatch IDiskQuotaUserBatch;
++#endif
+ DECLARE_INTERFACE_IID_(IDiskQuotaUserBatch, IUnknown, "7988B576-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Add)(THIS_
+@@ -289,6 +298,9 @@ typedef IDiskQuotaUserBatch DISKQUOTA_USER_BATCH, *PDISKQUOTA_USER_BATCH;
+ //
+ #undef INTERFACE
+ #define INTERFACE IDiskQuotaControl
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IDiskQuotaControl IDiskQuotaControl;
++#endif
+ DECLARE_INTERFACE_IID_(IDiskQuotaControl, IConnectionPointContainer, "7988B572-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(Initialize)(THIS_
+@@ -372,6 +384,9 @@ typedef IDiskQuotaControl DISKQUOTA_CONTROL, *PDISKQUOTA_CONTROL;
+ 
+ #undef  INTERFACE
+ #define INTERFACE IDiskQuotaEvents
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct IDiskQuotaEvents IDiskQuotaEvents;
++#endif
+ DECLARE_INTERFACE_IID_(IDiskQuotaEvents, IUnknown, "7988B579-EC89-11cf-9C00-00AA00A14F56")
+ {
+     STDMETHOD(OnUserNameChanged)(THIS_

@@ -1256,6 +1256,111 @@ namespace Win32MetadataScraperTests
                 "unrouted transaction-log interfaces remain legacy.");
         }
 
+        [Fact]
+        public void DeviceRecordAvailabilityFactsHaveNativeOwnersAndRetainUnsupportedRows()
+        {
+            string root = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "patches", "SdkHeaders.json")));
+            string[] patches = recipe.RootElement.GetProperty("patches").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            var descriptors = recipe.RootElement.GetProperty("headers").EnumerateArray().ToArray();
+            var owners = DeviceFollowingOriginalHeaders().ToArray();
+            Assert.Equal(22, owners.Sum(owner => owner.Headers.Length));
+            int annotations = 0;
+            foreach (var owner in owners)
+            {
+                Assert.Contains("parse-win32-annotations",
+                    File.ReadAllLines(Path.Combine(root, "Partitions", owner.Partition, "settings.rsp")));
+                foreach (string original in owner.Headers)
+                {
+                    Assert.Single(patches.Where(patch => patch == original + ".patch"));
+                    var descriptor = Assert.Single(descriptors.Where(header => header.GetProperty("path").GetString() == original));
+                    Assert.Equal(descriptor.GetProperty("sourceSha256").GetString(), descriptor.GetProperty("sdkSha256").GetString());
+                    string patch = File.ReadAllText(Path.Combine(root, "patches", original + ".patch"));
+                    Assert.Contains("--- a/" + original.Replace('\\', '/'), patch);
+                    Assert.DoesNotContain("RecompiledIdlHeaders", patch);
+                    annotations += Regex.Matches(patch, @"(?m)^\+(?!\+)[^\r\n]*_Win32_SupportedOS_\w+_").Count;
+                }
+            }
+            Assert.Equal(100, annotations);
+            foreach (string original in new[] { "shared\\d3d9.h", "um\\reconcil.h", "um\\scesvc.h" })
+            {
+                Assert.DoesNotContain(original + ".patch", patches);
+                Assert.False(File.Exists(Path.Combine(root, "patches", original + ".patch")));
+            }
+            string[] legacy = File.ReadAllLines(Path.Combine(root, "supportedOS.rsp"));
+            foreach (string name in new[] { "ISceSvcAttachmentData", "ISceSvcAttachmentPersistInfo", "INotifyReplica",
+                "IReconcilableObject", "IReconcileInitiator" })
+                Assert.Single(legacy.Where(row => row == name + "=SupportedOSPlatform(\"windows5.1.2600\")"));
+            foreach (string name in new[] { "IDirect3D9ExOverlayExtension", "IDirect3DAuthenticatedChannel9",
+                "IDirect3DCryptoSession9", "IDirect3DDevice9Video", "ID3D11ShaderReflectionConstantBuffer",
+                "ID3D11ShaderReflectionType", "ID3D11ShaderReflectionVariable" })
+                Assert.Single(legacy.Where(row => row == name + "=SupportedOSPlatform(\"windows6.1\")"));
+        }
+
+        internal static IEnumerable<(string Partition, string[] Headers)> DeviceFollowingOriginalHeaders()
+        {
+            yield return ("ActiveDirectory", new[] { "um\\cmnquery.h", "um\\dsadmin.h", "um\\objsel.h" });
+            yield return ("Controls.RichEdit", new[] { "um\\richole.h" });
+            yield return ("Direct2D", new[] { "um\\d2d1effectauthor.h" });
+            yield return ("Direct3D11", new[] { "um\\d3d11shader.h" });
+            yield return ("DirectWrite", new[] { "um\\dwrite_1.h", "um\\dwrite_2.h", "um\\dwrite_3.h" });
+            yield return ("Fs", new[] { "um\\dskquota.h" });
+            yield return ("Media.DShow", new[] { "um\\amaudio.h", "um\\amparse.h", "um\\amvideo.h", "um\\qnetwork.h",
+                "um\\il21dec.h", "um\\iwstdec.h", "um\\mpconfig.h", "um\\vpconfig.h", "um\\vpnotify.h" });
+            yield return ("Wab", new[] { "um\\wabapi.h", "um\\wabdefs.h" });
+            yield return ("Xaudio2", new[] { "um\\hrtfapoapi.h" });
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS", "WINHTTP_DEVICE_GENERATED_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualDeviceRecordFloorsReachNormalGeneratedSources(string architecture)
+        {
+            string generated = Environment.GetEnvironmentVariable("WINHTTP_DEVICE_GENERATED_ROOT");
+            var nodes = new[] { "common", architecture }
+                .SelectMany(folder => Directory.Exists(Path.Combine(generated, folder))
+                    ? Directory.EnumerateFiles(Path.Combine(generated, folder), "*.cs") : Array.Empty<string>())
+                .SelectMany(path => CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot().DescendantNodes()).ToArray();
+            var types = nodes.OfType<TypeDeclarationSyntax>().ToLookup(type => type.Identifier.ValueText, StringComparer.Ordinal);
+            var methods = nodes.OfType<MethodDeclarationSyntax>().Where(method => method.Modifiers.Any(token => token.ValueText == "extern"))
+                .ToLookup(method => method.Identifier.ValueText, StringComparer.Ordinal);
+            using var contracts = JsonDocument.Parse(File.ReadAllText(Environment.GetEnvironmentVariable("WINHTTP_DEVICE_BATCH_CONTRACTS")));
+            string[] legacy = File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "supportedOS.rsp"));
+            int checkedFacts = 0;
+            foreach (var fact in contracts.RootElement.GetProperty("facts").EnumerateArray())
+            {
+                if (fact.GetProperty("status").GetString() == "retained")
+                {
+                    Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+                    continue;
+                }
+                Assert.Equal("converted", fact.GetProperty("status").GetString());
+                Assert.Equal("supportedOS", fact.GetProperty("category").GetString());
+                string name = fact.GetProperty("symbol").GetString();
+                string row = fact.GetProperty("value").GetString();
+                var expected = Regex.Match(row, "^" + Regex.Escape(name) + "=SupportedOSPlatform\\(\"([^\"]+)\"\\)$");
+                Assert.True(expected.Success, row);
+                Assert.DoesNotContain(row, legacy);
+                var attributes = types[name].Select(type => type.AttributeLists)
+                    .Concat(methods[name].Select(method => method.AttributeLists)).ToArray();
+                Assert.True(attributes.Length > 0, $"Native source-bound declaration is missing: {name}/{architecture}.");
+                foreach (var lists in attributes)
+                {
+                    var floor = Assert.Single(lists.SelectMany(list => list.Attributes).Where(attribute =>
+                        attribute.Name.ToString() == "SupportedOSPlatform" ||
+                        attribute.Name.ToString().EndsWith(".SupportedOSPlatform", StringComparison.Ordinal)));
+                    var value = Assert.IsType<LiteralExpressionSyntax>(Assert.Single(floor.ArgumentList.Arguments).Expression);
+                    Assert.Equal(expected.Groups[1].Value, value.Token.ValueText);
+                }
+                checkedFacts++;
+            }
+            Assert.Equal(100, checkedFacts);
+            this.output.WriteLine($"{architecture}: all100 exact native record/function floors reached normal generated sources; " +
+                "twelve unsupported source-coverage rows remain entirely legacy. This is not final emitter/consumer qualification.");
+        }
+
         [MigrationTheory("WINHTTP_DEVICE_BATCH_CONTRACTS", "WINHTTP_DEVICE_GENERATED_ROOT")]
         [InlineData("x86")]
         [InlineData("x64")]

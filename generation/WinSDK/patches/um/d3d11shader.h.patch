@@ -1,0 +1,14 @@
+diff --git a/um/d3d11shader.h b/um/d3d11shader.h
+index 2f1eaa8f..b3723e34 100644
+--- a/um/d3d11shader.h
++++ b/um/d3d11shader.h
+@@ -330,6 +330,9 @@ DEFINE_GUID(IID_ID3D11ShaderReflection,
+ #undef INTERFACE
+ #define INTERFACE ID3D11ShaderReflection
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows7_ struct ID3D11ShaderReflection ID3D11ShaderReflection;
++#endif
+ DECLARE_INTERFACE_(ID3D11ShaderReflection, IUnknown)
+ {
+     STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid,
