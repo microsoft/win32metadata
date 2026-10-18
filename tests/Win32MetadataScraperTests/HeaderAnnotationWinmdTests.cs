@@ -250,6 +250,46 @@ unsigned long __stdcall NativeResourceType(
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void ReturnedBufferSalCountReachesPhysicalWinmd(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+struct __declspec(uuid(""f40fb47a-61fc-49ec-811a-60be160a87cc"")) IReturnedBuffer
+{
+    virtual HRESULT __stdcall List(
+        _Inout_ unsigned* count,
+        _Outptr_result_buffer_(*count) unsigned** values) = 0;
+};
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var method = FindMethod(reader, "IReturnedBuffer", "List");
+            Assert.Equal(new[] { "UInt32*", "UInt32**" },
+                method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var parameters = method.GetParameters().Select(reader.GetParameter).ToArray();
+            var count = parameters.Single(parameter => reader.GetString(parameter.Name) == "count");
+            var values = parameters.Single(parameter => reader.GetString(parameter.Name) == "values");
+            Assert.True(count.Attributes.HasFlag(ParameterAttributes.In | ParameterAttributes.Out));
+            Assert.True(values.Attributes.HasFlag(ParameterAttributes.Out));
+            Assert.False(values.Attributes.HasFlag(ParameterAttributes.In));
+            var arrayInfo = reader.GetCustomAttribute(Assert.Single(values.GetCustomAttributes()
+                .Where(handle => AttributeName(reader, handle) == "NativeArrayInfoAttribute")));
+            var blob = reader.GetBlobReader(arrayInfo.Value);
+            Assert.Equal(1, blob.ReadUInt16());
+            Assert.Equal(1, blob.ReadUInt16());
+            Assert.Equal(0x53, blob.ReadByte());
+            Assert.Equal((byte)SignatureTypeCode.Int16, blob.ReadByte());
+            Assert.Equal("CountParamIndex", blob.ReadSerializedString());
+            Assert.Equal(0, blob.ReadInt16());
+            Assert.Equal(0, blob.RemainingBytes);
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
