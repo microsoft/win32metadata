@@ -987,6 +987,8 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "WerApi.h", 31)]
         [InlineData("um", "ErrorRep.h", 4)]
         [InlineData("um", "websocket.h", 13)]
+        [InlineData("um", "fdi.h", 4)]
+        [InlineData("um", "ProcessSnapshot.h", 10)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
@@ -1083,6 +1085,32 @@ namespace Win32MetadataScraperTests
                 Type(current.Reader, "DEVPROP_OPERATOR", architecture, DeviceQueryNamespace), signed: true);
             this.output.WriteLine($"Architecture {architecture}: all eight filter APIs retain expression pointers; " +
                 "Operator retains DEVPROP_OPERATOR, separate from QueryFlags, with all 42 exact signed values and raw bits.");
+        }
+
+        internal static readonly string[] AuthoredFdiFunctions =
+        {
+            "FDICreate", "FDIIsCabinet", "FDICopy", "FDIDestroy",
+        };
+
+        internal static readonly string[] AuthoredProcessSnapshotFunctions =
+        {
+            "PssCaptureSnapshot", "PssFreeSnapshot", "PssQuerySnapshot", "PssWalkSnapshot", "PssDuplicateSnapshot",
+            "PssWalkMarkerCreate", "PssWalkMarkerFree", "PssWalkMarkerGetPosition",
+            "PssWalkMarkerSetPosition", "PssWalkMarkerSeekToBeginning",
+        };
+
+        [Fact]
+        public void FdiHeaderUsesTheExistingNativeNeutralSignedCpuGroup()
+        {
+            string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "um", "fdi.h.patch"));
+            Assert.Contains("+_Win32_Enum_(FDICREATE_CPU_TYPE, int,", patch);
+            Assert.Equal(1, patch.Split('\n').Count(line => line.StartsWith("+_Win32_Enum_(", StringComparison.Ordinal)));
+            Assert.Equal(1, patch.Split('\n').Count(line => line.StartsWith("+", StringComparison.Ordinal) &&
+                line.Contains("_Win32_AssociatedEnum_(FDICREATE_CPU_TYPE)", StringComparison.Ordinal)));
+            Assert.DoesNotContain("push_macro", patch);
+            Assert.DoesNotContain("pop_macro", patch);
+            Assert.DoesNotContain("+enum ", patch);
+            Assert.DoesNotContain("_Win32_FlagsEnum_", patch);
         }
 
         internal static IEnumerable<(string OS, string[] Functions)> AuthoredWerHeaderContracts()

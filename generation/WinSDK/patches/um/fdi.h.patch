@@ -1,41 +1,28 @@
 diff --git a/um/fdi.h b/um/fdi.h
-index 271b4b96..058ff4ae 100644
+index 271b4b96..b9a1c6ee 100644
 --- a/um/fdi.h
 +++ b/um/fdi.h
-@@ -925,6 +925,24 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
+@@ -925,6 +925,11 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
  #define     cpu80286           (0)     /* '286 opcodes only */
  #define     cpu80386           (1)     /* '386 opcodes used */
  
-+#ifdef WIN32METADATA
-+#pragma push_macro("cpuUNKNOWN")
-+#pragma push_macro("cpu80286")
-+#pragma push_macro("cpu80386")
-+#undef cpuUNKNOWN
-+#undef cpu80286
-+#undef cpu80386
-+enum FDICREATE_CPU_TYPE : int
-+{
-+    cpuUNKNOWN = -1,
-+    cpu80286 = 0,
-+    cpu80386 = 1,
-+};
-+#pragma pop_macro("cpu80386")
-+#pragma pop_macro("cpu80286")
-+#pragma pop_macro("cpuUNKNOWN")
-+#endif
++_Win32_Enum_(FDICREATE_CPU_TYPE, int,
++    cpuUNKNOWN,
++    cpu80286,
++    cpu80386);
 +
  
  /***    FDICreate - Create an FDI context
   *
-@@ -957,6 +975,7 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
+@@ -957,6 +962,7 @@ typedef FDISPILLFILE *PFDISPILLFILE; /* pfdisf */
   *      FDICreate(), and then free it up afterwards (or do all your allocation
   *      before calling FDICreate().
   */
-+_Win32_SupportedOS_BEGIN_(Windows2000)
++_Win32_SupportedOS_Windows2000_
  HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
                                __callback PFNFREE  pfnfree,
                                __callback PFNOPEN  pfnopen,
-@@ -964,7 +983,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+@@ -964,7 +970,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
                                __callback PFNWRITE pfnwrite,
                                __callback PFNCLOSE pfnclose,
                                __callback PFNSEEK  pfnseek,
@@ -44,11 +31,27 @@ index 271b4b96..058ff4ae 100644
                                _Inout_    PERF     perf);
  
  
-@@ -1035,6 +1054,7 @@ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+@@ -983,6 +989,7 @@ HFDI FAR DIAMONDAPI FDICreate(__callback PFNALLOC pfnalloc,
+  *      Returns FALSE, file is not a cabinet;  If an error occurred,
+  *          perf (passed on FDICreate call!) filled in with error.
+  */
++_Win32_SupportedOS_Windows2000_
+ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+                                  _In_  INT_PTR          hf,
+                                  _Out_opt_ PFDICABINETINFO  pfdici);
+@@ -1014,6 +1021,7 @@ BOOL FAR DIAMONDAPI FDIIsCabinet(_In_  HFDI             hfdi,
+  *      it will not be in a valid state (since there was an error while
+  *      writing it out).
+  */
++_Win32_SupportedOS_Windows2000_
+ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+                             _In_ LPSTR                  pszCabinet,
+                             _In_ LPSTR                  pszCabPath,
+@@ -1034,6 +1042,7 @@ BOOL FAR DIAMONDAPI FDICopy(_In_ HFDI                   hfdi,
+  *  Exit-Failure:
   *      Returns FALSE;
   */
++_Win32_SupportedOS_Windows2000_
  BOOL FAR DIAMONDAPI FDIDestroy(_In_ HFDI hfdi);
-+_Win32_SupportedOS_END_()
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
- #pragma endregion

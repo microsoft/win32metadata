@@ -425,16 +425,34 @@ static_assert(DISC_NO_FORCE == 64u);
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             var beforeSal = new List<string>();
             var afterSal = new List<string>();
+            var beforeRawSal = new List<string>();
+            var afterRawSal = new List<string>();
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
             var annotations = new List<string>();
-            string[] headers = header == "devfiltertypes.h" ? new[] { header, "devquery.h", "devquerydef.h" } : new[] { header };
-            var before = Surface(root, original, partition, architecture, target, headers, "",
-                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
-            var after = Surface(root, prepared, partition, architecture, target, headers, "", metadataEnabled: enabled,
-                annotations: annotations, salAnnotations: afterSal, diagnostics: afterDiagnostics, language: language);
+            string[] headers = header switch
+            {
+                "devfiltertypes.h" => new[] { header, "devquery.h", "devquerydef.h" },
+                "fdi.h" => new[] { "fci.h", "fdi_fci_types.h", header },
+                _ => new[] { header },
+            };
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            string checks = header == "fdi.h" ?
+                $"{assertion}(cpuUNKNOWN == -1 && cpu80286 == 0 && cpu80386 == 1 && sizeof(int) == 4, \"native FDI CPU contract\");" : "";
+            var before = Surface(root, original, partition, architecture, target, headers, checks,
+                salAnnotations: beforeSal, rawSalAnnotations: beforeRawSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, partition, architecture, target, headers, checks, metadataEnabled: enabled,
+                annotations: annotations, salAnnotations: afterSal, rawSalAnnotations: afterRawSal,
+                diagnostics: afterDiagnostics, language: language);
             Assert.NotEmpty(before);
-            Assert.Equal(before, after);
+            if (header == "fdi.h")
+            {
+                const string carrier = "typedef FDICREATE_CPU_TYPE int";
+                Assert.Equal(enabled ? new[] { carrier } : Array.Empty<string>(), after.Except(before));
+                Assert.Equal(before, after.Where(value => value != carrier));
+            }
+            else
+                Assert.Equal(before, after);
             if (header is "amxmlgraphbuilder.h" or "wnvapi.h" or "nb30.h")
                 Assert.Empty(beforeSal);
             else
@@ -494,6 +512,18 @@ static_assert(DISC_NO_FORCE == 64u);
                         value.StartsWith("function DwmGetWindowAttribute ", StringComparison.Ordinal) ||
                         value.StartsWith("function DwmSetWindowAttribute ", StringComparison.Ordinal) ||
                         value.StartsWith("function DwmShowContact ", StringComparison.Ordinal)))
+                        this.output.WriteLine(side.Item1 + " " + fact);
+            }
+            if (header is "fdi.h" or "ProcessSnapshot.h")
+            {
+                Assert.Equal(enabled ? expected.Length : 0, annotations.Count);
+                foreach (var side in new[]
+                {
+                    ("before", before), ("after", after),
+                    ("before-sal", beforeSal.ToArray()), ("after-sal", afterSal.ToArray()),
+                    ("before-raw-sal", beforeRawSal.ToArray()), ("after-raw-sal", afterRawSal.ToArray()),
+                })
+                    foreach (string fact in side.Item2)
                         this.output.WriteLine(side.Item1 + " " + fact);
             }
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
@@ -651,7 +681,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm", "Cabinets", "Proc_Snap",
             })
             {
                 string[] expected = partition switch
@@ -721,6 +751,12 @@ static_assert(DISC_NO_FORCE == 64u);
                         .SelectMany(contract => contract.Functions.Select(name =>
                             name + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
                         .Append("dwAttribute|AssociatedEnum").ToArray(),
+                    "Cabinets" => WinHttpMigrationTests.AuthoredFdiFunctions
+                        .Select(name => name + "|SupportedOSPlatform(\"windows5.0\")")
+                        .Concat(new[] { "FDICREATE_CPU_TYPE|Enum(cpuUNKNOWN, cpu80286, cpu80386)", "cpuType|AssociatedEnum" }).ToArray(),
+                    "Proc_Snap" => WinHttpMigrationTests.AuthoredProcessSnapshotFunctions
+                        .Select(name => name + "|SupportedOSPlatform(\"windows8.1\")")
+                        .Append("WalkMarkerHandle|RAIIFree").ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -739,6 +775,8 @@ static_assert(DISC_NO_FORCE == 64u);
                     "Eap" => "Raseapif.h",
                     "DeviceQuery" => "devfiltertypes.h",
                     "Dwm" => "dwmapi.h",
+                    "Cabinets" => "fdi.h",
+                    "Proc_Snap" => "ProcessSnapshot.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]
