@@ -867,6 +867,178 @@ unsigned long __stdcall NativeResourceType(
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void MidlParameterDirectionsReachPhysicalMetadataWithoutChangingPointerDefaults(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            const string parameters = @"/* [in] */ unsigned* input,
+    /* [out] */ unsigned* output,
+    /* [in, out] */ unsigned* updated,
+    unsigned* ordinary,
+    const unsigned* constant,
+    /* This prose uses [in] as an example, not a parameter contract. */ unsigned* prose";
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef int HRESULT;
+extern ""C"" HRESULT __stdcall NativeDirections(" + parameters + @");
+typedef HRESULT (__stdcall* PFN_DIRECTIONS)(" + parameters + @");
+struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
+    virtual HRESULT __stdcall Apply(" + parameters + @") = 0;
+    virtual HRESULT __stdcall Sal(
+        /* [in] */ _In_opt_ unsigned* input,
+        /* [out] */ _Out_ unsigned* output,
+        /* [in][out] */ _Inout_ unsigned* updated,
+        /* [retval][out] */ _Out_retval_ unsigned* result) = 0;
+    virtual HRESULT __stdcall Nullness(/* [out] */ _Notnull_ unsigned* result) = 0;
+    virtual HRESULT __stdcall MidlRetval(/* [retval][out] */ unsigned* result) = 0;
+};
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var defaults = ParameterAttributes.In | ParameterAttributes.Out;
+            var expected = new[]
+            {
+                annotationsEnabled ? ParameterAttributes.In : defaults,
+                annotationsEnabled ? ParameterAttributes.Out : defaults,
+                defaults,
+                defaults,
+                ParameterAttributes.In,
+                defaults,
+            };
+            foreach (var (owner, name) in new[]
+            {
+                ("Apis", "NativeDirections"), ("PFN_DIRECTIONS", "Invoke"), ("IDirections", "Apply"),
+            })
+            {
+                var method = FindMethod(reader, owner, name);
+                var actual = method.GetParameters().Select(reader.GetParameter)
+                    .Where(parameter => parameter.SequenceNumber != 0).ToArray();
+                Assert.Equal(expected, actual.Select(parameter => parameter.Attributes));
+                Assert.Equal(Enumerable.Repeat("UInt32*", expected.Length),
+                    method.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            }
+
+            var sal = FindMethod(reader, "IDirections", "Sal").GetParameters().Select(reader.GetParameter)
+                .Where(parameter => parameter.SequenceNumber != 0).ToArray();
+            Assert.Equal(new[]
+            {
+                ParameterAttributes.In | ParameterAttributes.Optional,
+                ParameterAttributes.Out,
+                defaults,
+                ParameterAttributes.Out,
+            }, sal.Select(parameter => parameter.Attributes));
+            Assert.Single(sal[3].GetCustomAttributes().Where(handle => AttributeName(reader, handle) == "RetValAttribute"));
+
+            var nullness = FindMethod(reader, "IDirections", "Nullness").GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 1);
+            Assert.Equal(annotationsEnabled ? ParameterAttributes.Out : defaults, nullness.Attributes);
+
+            var retval = FindMethod(reader, "IDirections", "MidlRetval").GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 1);
+            Assert.Equal(annotationsEnabled ? ParameterAttributes.Out : defaults, retval.Attributes);
+            Assert.Equal(annotationsEnabled ? 1 : 0,
+                retval.GetCustomAttributes().Count(handle => AttributeName(reader, handle) == "RetValAttribute"));
+            Assert.False(retval.Attributes.HasFlag(ParameterAttributes.Retval));
+            AssertMetadataClosure(reader);
+        }
+
+        [MigrationTheory("SDK_MIDL_DIRECTION_NORMAL_ROOT", "SDK_MIDL_DIRECTION_BEFORE_ROOT", "WINHTTP_MIGRATION_OLD")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void NormalDShowMidlDirectionsChangeOnlyPhysicalParameterDirections(string architecture)
+        {
+            string normal = Environment.GetEnvironmentVariable("SDK_MIDL_DIRECTION_NORMAL_ROOT");
+            string beforeRoot = Environment.GetEnvironmentVariable("SDK_MIDL_DIRECTION_BEFORE_ROOT");
+            string beforeSource = Path.Combine(beforeRoot, architecture, "Media.DShow.cs");
+            string afterSource = Path.Combine(normal, "obj", "generated", architecture, "Media.DShow.cs");
+            Assert.True(File.Exists(afterSource), "Each target requires its own actual normal producer output.");
+            var reductions = File.ReadLines(Path.Combine(beforeRoot, "emitter.autoFnPtr.crossarch.generated.rsp"))
+                .Where(line => !line.StartsWith("--", StringComparison.Ordinal) && !string.IsNullOrWhiteSpace(line))
+                .ToHashSet(StringComparer.Ordinal);
+            var namespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Where(line => !line.StartsWith("#", StringComparison.Ordinal))
+                .Select(line => line.Split('=', 2)).ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            using var before = Component("before", beforeSource);
+            using var after = Component("after", afterSource);
+            var oldTypes = Snapshots(before.Reader);
+            var newTypes = Snapshots(after.Reader);
+            Assert.Equal(oldTypes.Keys.OrderBy(value => value, StringComparer.Ordinal),
+                newTypes.Keys.OrderBy(value => value, StringComparer.Ordinal));
+            var differences = new List<object>();
+            foreach (string type in oldTypes.Keys)
+            {
+                string[] oldRows = oldTypes[type].Split('\n');
+                string[] newRows = newTypes[type].Split('\n');
+                Assert.Equal(oldRows.Length, newRows.Length);
+                string method = null;
+                int ordinal = 0;
+                var overloads = new Dictionary<string, int>(StringComparer.Ordinal);
+                for (int i = 0; i < oldRows.Length; i++)
+                {
+                    if (oldRows[i].StartsWith("M|", StringComparison.Ordinal))
+                    {
+                        method = oldRows[i].Split('|')[1];
+                        ordinal = overloads.GetValueOrDefault(method);
+                        overloads[method] = ordinal + 1;
+                    }
+                    if (oldRows[i] == newRows[i])
+                        continue;
+                    string[] oldFields = oldRows[i].Split('|');
+                    string[] newFields = newRows[i].Split('|');
+                    Assert.Equal("P", oldFields[0]);
+                    Assert.Equal("P", newFields[0]);
+                    var oldFlags = Enum.Parse<ParameterAttributes>(oldFields[3]);
+                    var newFlags = Enum.Parse<ParameterAttributes>(newFields[3]);
+                    const ParameterAttributes direction = ParameterAttributes.In | ParameterAttributes.Out;
+                    Assert.Equal(oldFlags & ~direction, newFlags & ~direction);
+                    differences.Add(new
+                    {
+                        type, method, overloadOrdinal = ordinal, sequence = int.Parse(oldFields[1]),
+                        parameter = oldFields[2], before = oldRows[i], after = newRows[i],
+                    });
+                    oldFields[3] = newFields[3];
+                    Assert.Equal(oldFields, newFields);
+                }
+            }
+            Assert.NotEmpty(differences);
+            var oldParameter = FindMethod(before.Reader, "IVMRMixerControl9", "GetBackgroundClr")
+                .GetParameters().Select(before.Reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1);
+            var newParameter = FindMethod(after.Reader, "IVMRMixerControl9", "GetBackgroundClr")
+                .GetParameters().Select(after.Reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1);
+            Assert.Equal(ParameterAttributes.In | ParameterAttributes.Out, oldParameter.Attributes);
+            Assert.Equal(ParameterAttributes.In, newParameter.Attributes);
+            string report = Path.Combine(normal, "physical", architecture, "direction-deltas.json");
+            File.WriteAllText(report, JsonSerializer.Serialize(new
+            {
+                architecture, beforeSource, afterSource, physicalTypes = newTypes.Count, differences,
+                scope = "Complete actual normal source through the existing cleaner/emitter; external OLD types only. Native binding and full-image acceptance are separate gates.",
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            MetadataImage Component(string leg, string source)
+            {
+                string directory = Path.Combine(normal, "physical", architecture, leg);
+                Directory.CreateDirectory(directory);
+                File.Copy(source, Path.Combine(directory, "Media.DShow.cs"), overwrite: true);
+                return Emit(directory, architecture, reductions,
+                    references: new[] { Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") },
+                    requiredNamespaces: namespaces);
+            }
+            static Dictionary<string, string> Snapshots(MetadataReader reader) => reader.TypeDefinitions
+                .Select(reader.GetTypeDefinition).ToDictionary(type => Key(reader, type),
+                    type => WinHttpMigrationTests.SnapshotType(reader, type), StringComparer.Ordinal);
+            static string Key(MetadataReader reader, TypeDefinition type) => type.GetDeclaringType().IsNil
+                ? reader.GetString(type.Namespace) + "." + reader.GetString(type.Name)
+                : Key(reader, reader.GetTypeDefinition(type.GetDeclaringType())) + "+" + reader.GetString(type.Name);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void SignedRegistryStatusKeepsUnsignedErrorAssociation(
             string architecture, string target, bool annotationsEnabled)
         {

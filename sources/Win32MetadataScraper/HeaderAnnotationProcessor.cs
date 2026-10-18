@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using ClangSharp;
@@ -272,7 +273,7 @@ namespace Win32MetadataScraper
         internal void ValidateProjection()
         {
             foreach (var facts in declarations.Values)
-                if ((facts.Annotations.Count != 0 || facts.IsScopedEnum || facts.IsFlagsEnum) &&
+                if ((facts.Annotations.Count != 0 || facts.MidlDirection != ParameterAttributes.None || facts.IsScopedEnum || facts.IsFlagsEnum) &&
                     ShouldEmit(facts.Declaration, facts.Location) && !projectedDeclarations.Contains(facts.AnnotationOwner.Declaration))
                     throw Error(facts.Location, $"Annotation facts for '{facts.Declaration.Name}' were not projected by ClangSharp.");
         }
@@ -300,12 +301,18 @@ namespace Win32MetadataScraper
                 }
                 var facts = new DeclarationFacts(declaration, location);
                 ReadAnnotations(declaration, facts);
-                if (declaration is ParmVarDecl && HasLegacyRetvalComment(declaration))
+                if (declaration is ParmVarDecl)
                 {
-                    var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
-                    ValidateTarget(facts, retval, location);
-                    if (!facts.Annotations.Any(annotation => annotation.Name == retval.Name))
-                        facts.Annotations.Add(retval);
+                    string comment = GetLegacyParameterComment(declaration);
+                    if (!HasSalParameterDirection(declaration))
+                        facts.MidlDirection = GetMidlDirection(comment);
+                    if (comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase))
+                    {
+                        var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
+                        ValidateTarget(facts, retval, location);
+                        if (!facts.Annotations.Any(annotation => annotation.Name == retval.Name))
+                            facts.Annotations.Add(retval);
+                    }
                 }
                 if (declaration is EnumDecl enumDeclaration)
                 {
@@ -410,6 +417,10 @@ namespace Win32MetadataScraper
                 var supportedOS = osValues.FirstOrDefault();
                 if (osValues.Any(annotation => !annotation.Arguments.SequenceEqual(supportedOS.Arguments)))
                     throw Error(group.First().Location, $"Conflicting 'SupportedOSPlatform' annotations on redeclarations of '{group.First().Declaration.Name}'.");
+                var directions = group.Select(facts => facts.MidlDirection)
+                    .Where(direction => direction != ParameterAttributes.None).Distinct().ToArray();
+                if (directions.Length > 1)
+                    throw Error(group.First().Location, $"Conflicting MIDL parameter directions on redeclarations of '{group.First().Declaration.Name}'.");
                 foreach (var facts in group)
                     facts.Annotations.RemoveAll(annotation => annotation.Name == "SupportedOSPlatform");
                 var owner = group.FirstOrDefault(facts => facts.Annotations.Count != 0) ?? group.First();
@@ -454,6 +465,7 @@ namespace Win32MetadataScraper
                     facts.IsScopedEnum = owner.IsScopedEnum;
                     facts.IsFlagsEnum = owner.IsFlagsEnum;
                     facts.LogicalEnumMembers = owner.LogicalEnumMembers;
+                    facts.MidlDirection = directions.SingleOrDefault();
                     // A traversed forward typedef can inherit group facts from an untraversed redeclaration.
                     if (facts.Declaration is TypedefNameDecl && facts.LogicalEnumMembers != null && !annotatedTypedefs.Contains(facts))
                         annotatedTypedefs.Add(facts);
@@ -579,6 +591,13 @@ namespace Win32MetadataScraper
 
         private IEnumerable<AttributeListSyntax> GetAttributes(DeclarationFacts facts)
         {
+            if (facts.MidlDirection != ParameterAttributes.None && !HasSalParameterDirection(facts.Declaration))
+            {
+                if (facts.MidlDirection.HasFlag(ParameterAttributes.In))
+                    yield return MakeAttribute("global::System.Runtime.InteropServices.In");
+                if (facts.MidlDirection.HasFlag(ParameterAttributes.Out))
+                    yield return MakeAttribute("global::System.Runtime.InteropServices.Out");
+            }
             foreach (var annotation in facts.Annotations)
             {
                 bool returnTarget = facts.Declaration is FunctionDecl && annotation.Name is "RAIIFree" or "AssociatedEnum";
@@ -787,27 +806,58 @@ namespace Win32MetadataScraper
             return GetManagedType(type, location);
         }
 
-        // Existing generated SDK headers still need this bridge until their original IDL is prepared with retval SAL.
-        private bool HasLegacyRetvalComment(NamedDecl declaration)
+        private static bool HasSalParameterDirection(NamedDecl declaration)
+        {
+            foreach (var attribute in declaration.Attrs)
+            {
+                string payload = attribute.Spelling;
+                if (Regex.IsMatch(payload, @"\bName\s*=\s*SAL_valid\b"))
+                    return true;
+                string name = Regex.Match(payload, @"\bName\s*=\s*SAL_name\s*;\s*p1\s*=\s*""([^""]+)""").Groups[1].Value;
+                if ((name.StartsWith("__RPC__", StringComparison.Ordinal) && Regex.IsMatch(name, @"_(in|out|inout)(_|$)")) ||
+                    name.StartsWith("_COM_Outptr", StringComparison.Ordinal) || name.StartsWith("_Outptr_", StringComparison.Ordinal) ||
+                    name is "_Maybenull_" or "_Pre_maybenull_" or "_Pre_null_")
+                    return true;
+            }
+            return false;
+        }
+
+        private static ParameterAttributes GetMidlDirection(string comment)
+        {
+            if (!Regex.IsMatch(comment, @"^/\*\s*(\[[^\[\]]*\]\s*)+\*/$"))
+                return ParameterAttributes.None;
+            var direction = ParameterAttributes.None;
+            foreach (Match attributeList in Regex.Matches(comment, @"\[([^\[\]]*)\]"))
+                foreach (string attribute in attributeList.Groups[1].Value.Split(','))
+                {
+                    if (attribute.Trim().Equals("in", StringComparison.OrdinalIgnoreCase))
+                        direction |= ParameterAttributes.In;
+                    else if (attribute.Trim().Equals("out", StringComparison.OrdinalIgnoreCase))
+                        direction |= ParameterAttributes.Out;
+                }
+            return direction;
+        }
+
+        // MIDL does not emit SAL for every explicit direction or retval contract.
+        private string GetLegacyParameterComment(NamedDecl declaration)
         {
             var start = GetLocation(declaration.Extent.Start);
             if (start.File.Length == 0)
-                return false;
+                return string.Empty;
             var file = declaration.TranslationUnit.Handle.GetFile(start.File);
             var contents = declaration.TranslationUnit.Handle.GetFileContents(file, out _);
             int position = checked((int)start.Offset);
             while (position > 0 && char.IsWhiteSpace((char)contents[position - 1]))
                 position--;
             if (position < 2 || contents[position - 2] != '*' || contents[position - 1] != '/')
-                return false;
+                return string.Empty;
             int end = position;
             position -= 2;
             while (position >= 2 && !(contents[position - 2] == '/' && contents[position - 1] == '*'))
                 position--;
             if (position < 2)
-                return false;
-            string comment = Encoding.UTF8.GetString(contents.Slice(position - 2, end - position + 2));
-            return comment.Contains("[retval]", StringComparison.OrdinalIgnoreCase);
+                return string.Empty;
+            return Encoding.UTF8.GetString(contents.Slice(position - 2, end - position + 2));
         }
 
         private static NativeLocation GetLocation(CXSourceLocation location)
@@ -838,6 +888,7 @@ namespace Win32MetadataScraper
             internal List<long> InvalidValues { get; set; } = new();
             internal bool IsScopedEnum { get; set; }
             internal bool IsFlagsEnum { get; set; }
+            internal ParameterAttributes MidlDirection { get; set; }
             internal LogicalEnumMember[] LogicalEnumMembers { get; set; }
         }
 

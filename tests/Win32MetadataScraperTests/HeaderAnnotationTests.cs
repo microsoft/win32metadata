@@ -1497,6 +1497,34 @@ LPSIMPLE_CALLBACK
             }
         }
 
+        [Fact]
+        public void MidlParameterDirectionIsRetainedAcrossUnannotatedRedeclarations()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+int Repeated(/* [in] */ unsigned* value);
+int Repeated(unsigned* value);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().Where(value => value.Identifier.ValueText == "Repeated").ToArray();
+            Assert.Equal(2, methods.Length);
+            foreach (var method in methods)
+                Assert.Single(method.ParameterList.Parameters.Single().AttributeLists.SelectMany(list => list.Attributes)
+                    .Where(attribute => attribute.Name.ToString() == "global::System.Runtime.InteropServices.In"));
+        }
+
+        [Fact]
+        public void ConflictingMidlParameterDirectionsFailExplicitly()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+int Conflicting(/* [in] */ unsigned* value);
+int Conflicting(/* [out] */ unsigned* value);
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Conflicting MIDL parameter directions", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
         internal sealed class NativeFixture : IDisposable
         {
             internal NativeFixture(string architecture, string target, string declarations, bool annotationsEnabled = true,

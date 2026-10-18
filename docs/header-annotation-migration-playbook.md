@@ -213,6 +213,12 @@ When reusing a native-capture fixture against a later baseline, distinguish its
 exact retained sites from new additions. Assert both payloads and counts; do not
 assume every native fact is absent in OLD or count retained attributes twice.
 
+Explicit MIDL `[in]`, `[out]` and `[in, out]` parameter comments also carry native
+contracts. With metadata parsing enabled, the existing comment bridge supplies
+interop direction attributes when SAL does not already transport a direction.
+Unannotated pointer defaults and existing SAL Optional/RetVal behavior remain
+separate; a mutable pointer is not evidence that an explicit input is in/out.
+
 A source-derived addition must be traceable to an existing fact in the pinned
 native sources, with its exact declaration, owner, target, payload and architecture
 coverage. Verify that interpretation rather than inventing API/type/ownership
