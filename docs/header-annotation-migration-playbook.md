@@ -2770,7 +2770,7 @@ Final physical/API/order and complete-image acceptance remain unexecuted.
 Coverage stays **31/50**; neither header is partially admitted. Other
 disjoint original-header work and the separate WNet/RPC holds continue.
 
-### Bounded WebSock source continuation, not yet qualified
+### Locally qualified WebSock original header
 
 The disjoint `WebSock` owner traverses the original shipped `websocket.h`.
 Thirteen declaration-local Windows 8 floors replace its scope block.
@@ -2803,6 +2803,78 @@ function-like floor spellings and requires every floor to have an
 existing helper definition. It rejects the original mistake; all
 thirteen current fixed-floor guard cases then pass without skips,
 including the WebSock case checking its thirteen exact floors.
-Fresh native, normal traversal, complete-image/repeat and physical
-acceptance still have not qualified this header.
-Coverage remains **31/50**.
+
+Fresh stock header and constants traversals at `bd3b6e84...` now
+complete twice. Both actual prepared closures contain 3,443 headers.
+Of 388 actual normal outputs per run, 387 are literal; only
+`traversedFileToNamespace.rsp` contains different preparation-root
+coordinates. Both raw maps are retained without normalization. The
+whole `WebSock.cs` and WebSocket constants outputs repeat byte-for-byte.
+This does not claim fresh all-architecture MIDL execution.
+
+The first corrected-token native run exposed a test-owner identity
+defect: SAL owner strings still used Clang's absolute anonymous-record
+coordinates. The test-only correction reuses the existing declaration
+identity mapping for those owners, retaining every SAL payload and
+occurrence. The original twelve failures and their successful
+resolution are sealed as
+`D0336E58A436C9363C4E8F5FB42610C7BEEDA06811DDFED45D7C5667A64D3ED5`.
+The fresh whole-owner C17/C++17, metadata off/on, x86/x64/arm64 matrix
+at `aab88d40...` passes all twelve cases. Each side retains 190 native
+facts and 974 raw SAL occurrences per case. All five native enums and
+their 34 members use Int32 in both old and new metadata and in the
+original native controls, including the high buffer bit patterns.
+There is no enum-storage compatibility change.
+
+The two complete images, `1DF3F711...` and `D6CC3CEE...`, each consume
+831 inputs, including 824 C# files. Their literal source archive is
+`B204D3C8...`: only the two whole normal WebSock outputs replace the
+sealed Dwm context; all 829 unowned inputs retain the qualified Eap,
+DeviceQuery and Dwm sources. All ten full executed emitter configs
+are retained and rehashed. Against the actual Dwm image, both
+unfiltered reports have the same three lifecycle-relocation rows,
+SHA `79B18381...`; candidate to repeat is raw-zero. The native handle
+remains, and no API type, native signature or enum fact changes.
+
+The exhaustive physical gates at `9e0f2f79...` preserve all 37,314
+type identities and all 247,662 field positions. Only the exact
+WebSocket `Apis` and native-handle snapshots change. The static
+cleanup method moves before its producers; all other static methods
+retain their relative order. Raw signature blobs differ in 212 type
+rows because of reference-token numbering, while resolved signatures
+and imports remain exact. Raw vectors and differences are retained,
+not declared byte-equal or normalized. Native layouts, actual field
+order, pointer widths and COM/vtable order remain strict.
+
+An initial operational snapshot cache incorrectly collapsed the
+case-distinct `AVIStreamHeader` and `AVISTREAMHEADER` identities.
+Its false reports remain preserved. The authoritative ordinal
+comparison proves both types unchanged; no unowned difference is
+waived. The source, native and emission heads remain separately
+identified: production `sources`, `generation` and `scripts` trees
+are literal across the two proof-only follow-ups, not relabeled
+fresh executions.
+
+The fresh native twelve cases, two 33-case precise source/API/physical
+runs and two entire fourteen-case integrity runs total **106 passed,
+zero failed, zero skipped**. The shared integrity image is restored.
+The local qualification is sealed under
+`files\authored-websocket-14-local-9e0f2f79\qualification.json`,
+SHA `5AA8E16FBFB8E0713790A2CF3DADE56E1F11FF85326A10C439943105D05A5D44`.
+Its 562 indexed payloads total 422,516,702 bytes and were verified
+before and after read-only sealing; all 9,324 retained source,
+prepared-header and normal-output ZIP entries were independently
+rehashed. All indexed payloads of the six referenced prior immutable
+packets remain unchanged.
+
+Local resumed-original-artifact coverage is now **32/50**: twelve
+original IDLs and twenty headers, sixteen additional original
+headers since `12279c76...`. Eighteen header drafts remain outside
+qualified cohorts. Seven missing original IDLs and their thirty
+legacy facts remain separate. This is not whole owning-production,
+current-head CI or publication acceptance. Wer/ErrorRep still require
+fresh corresponding qualification with the released generic
+`5c226101...` compiler disposition and this latest frozen context;
+the original `5A69415E...` hold is immutable. WNet/RPC's actual native
+branch/value/type questions remain independent. No push, PR/stack
+mutation or PR merge is performed.
