@@ -2769,3 +2769,22 @@ declaration or shared tooling is repaired around the failure.
 Final physical/API/order and complete-image acceptance remain unexecuted.
 Coverage stays **31/50**; neither header is partially admitted. Other
 disjoint original-header work and the separate WNet/RPC holds continue.
+
+### Bounded WebSock source continuation, not yet qualified
+
+The disjoint `WebSock` owner traverses the original shipped `websocket.h`.
+Thirteen declaration-local Windows 8 floors replace its scope block.
+Both existing cleanup annotations remain on `phWebSocket` in the client
+and server producer functions. The exact original `WebSocketDeleteHandle`
+declaration moves before those producers; no prototype, native enum,
+handle, parameter, record, field, SAL contract or helper vocabulary is
+invented or retyped.
+
+After removing only the fifteen annotations and that same byte-identical
+cleanup declaration block from both sides, every other selected SDK byte
+is literal. The five original native enums and their members remain
+unchanged. The private 49-header/44-patch/44-partition recipe extends the
+last qualified Dwm context and explicitly excludes the held Wer/ErrorRep
+patches. The permanent thirteen-floor source guard passes; fresh native,
+normal traversal, complete-image/repeat and physical acceptance have not
+yet qualified this header. Coverage remains **31/50**.

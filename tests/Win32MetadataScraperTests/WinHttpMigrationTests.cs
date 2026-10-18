@@ -47,6 +47,13 @@ namespace Win32MetadataScraperTests
             "DevCreateObjectQueryFromIdEx", "DevCreateObjectQueryFromIds", "DevCreateObjectQueryFromIdsEx",
             "DevGetObjects", "DevGetObjectsEx",
         };
+        internal static readonly string[] WebSocketFunctions =
+        {
+            "WebSocketCreateClientHandle", "WebSocketBeginClientHandshake", "WebSocketEndClientHandshake",
+            "WebSocketCreateServerHandle", "WebSocketBeginServerHandshake", "WebSocketEndServerHandshake",
+            "WebSocketSend", "WebSocketReceive", "WebSocketGetAction", "WebSocketCompleteAction",
+            "WebSocketAbortHandle", "WebSocketDeleteHandle", "WebSocketGetGlobalProperty",
+        };
         private static readonly (string Name, int Value)[] DeviceQueryOperatorMembers =
         {
             ("DEVPROP_OPERATOR_MODIFIER_NOT", 0x00010000),
@@ -979,6 +986,7 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "dwmapi.h", 31)]
         [InlineData("um", "WerApi.h", 31)]
         [InlineData("um", "ErrorRep.h", 4)]
+        [InlineData("um", "websocket.h", 13)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));

@@ -576,6 +576,68 @@ static_assert(DISC_NO_FORCE == 64u);
                         yield return new object[] { architecture.Item1, architecture.Item2, language, enabled };
         }
 
+        [NativeMigrationTheory]
+        [MemberData(nameof(WebSocketOriginalHeaderControls))]
+        public void OriginalWebSocketHeaderPreservesNativeAbiAndSalWithExactMetadata(
+            string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            string assertion = language == "c" ? "_Static_assert" : "static_assert";
+            string checks = string.Join("\n", new[]
+            {
+                "sizeof(WEB_SOCKET_HANDLE) == sizeof(void*)", "WEB_SOCKET_MAX_CLOSE_REASON_LENGTH == 123",
+                "sizeof(WEB_SOCKET_CLOSE_STATUS) == 4", "sizeof(WEB_SOCKET_PROPERTY_TYPE) == 4",
+                "sizeof(WEB_SOCKET_ACTION_QUEUE) == 4", "sizeof(WEB_SOCKET_BUFFER_TYPE) == 4",
+                "sizeof(WEB_SOCKET_ACTION) == 4", "WEB_SOCKET_ALL_ACTION_QUEUE == 3",
+                "WEB_SOCKET_UTF8_MESSAGE_BUFFER_TYPE == 0x80000000U",
+                "WEB_SOCKET_UNSOLICITED_PONG_BUFFER_TYPE == 0x80000006U",
+            }.Select(check => $"{assertion}({check}, \"original WebSocket contract\");"));
+            var before = Surface(root, original, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "WebSock", architecture, target, new[] { "websocket.h" }, checks,
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, after);
+            Assert.Equal(13, before.Count(value => value.StartsWith("function WebSocket", StringComparison.Ordinal)));
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            string[] expected = WinHttpMigrationTests.WebSocketFunctions
+                .Select(name => name + "|SupportedOSPlatform(\"windows8.0\")")
+                .Append("phWebSocket|RAIIFree").OrderBy(value => value, StringComparer.Ordinal).ToArray();
+            Assert.Equal(enabled ? expected : Array.Empty<string>(),
+                annotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(enabled ? 15 : 0, annotations.Count);
+            foreach (var side in new[] { ("before", before), ("after", after) })
+                foreach (string fact in side.Item2)
+                    this.output.WriteLine(side.Item1 + " " + fact);
+            this.output.WriteLine($"WebSock/{architecture}/{language}/metadata={enabled}: " +
+                $"{before.Length} identical complete native facts, {beforeSal.Count} unchanged SAL attributes, " +
+                $"all five original enums and native handle widths; {annotations.Count} exact metadata occurrences.");
+        }
+
+        public static IEnumerable<object[]> WebSocketOriginalHeaderControls()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+                foreach (string language in new[] { "c", "c++" })
+                    foreach (bool enabled in new[] { false, true })
+                        yield return new object[] { architecture.Item1, architecture.Item2, language, enabled };
+        }
+
         public static IEnumerable<object[]> AuthoredAvailabilityHeaderControls()
         {
             foreach (string partition in new[]
