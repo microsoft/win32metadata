@@ -1,0 +1,36 @@
+#define QCC_OS_GROUP_WINDOWS
+
+#include "intrinfix.h"
+
+#include "windows.fixed.h"
+#include <stdint.h>
+#include <MSAJTransport.h>
+#include <alljoyn_c\AjAPI.h>
+#include <alljoyn_c\AboutData.h>
+#include <alljoyn_c\AboutIconObj.h>
+#include <alljoyn_c\AboutIconProxy.h>
+#include <alljoyn_c\AboutObj.h>
+#include <alljoyn_c\AboutObjectDescription.h>
+#include <alljoyn_c\AboutProxy.h>
+#include <alljoyn_c\ApplicationStateListener.h>
+#include <alljoyn_c\AuthListener.h>
+#include <alljoyn_c\AutoPinger.h>
+#include <alljoyn_c\BusAttachment.h>
+#include <alljoyn_c\BusListener.h>
+#include <alljoyn_c\BusObject.h>
+#include <alljoyn_c\DBusStdDefines.h>
+#include <alljoyn_c\version.h>
+#include <alljoyn_c\Init.h>
+#include <alljoyn_c\InterfaceDescription.h>
+#include <alljoyn_c\KeyStoreListener.h>
+#include <alljoyn_c\Message.h>
+#include <alljoyn_c\MsgArg.h>
+#include <alljoyn_c\Observer.h>
+#include <alljoyn_c\PasswordManager.h>
+#include <alljoyn_c\PermissionConfigurationListener.h>
+#include <alljoyn_c\PermissionConfigurator.h>
+#include <alljoyn_c\AutoPinger.h>
+#include <alljoyn_c\ProxyBusObject.h>
+#include <alljoyn_c\SecurityApplicationProxy.h>
+#include <alljoyn_c\SessionListener.h>
+#include <alljoyn_c\Session.h>

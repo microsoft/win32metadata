@@ -58,6 +58,12 @@ AdjustWindowRectExForDpi
 ADsGetLastError
 AdvanceLogBase
 AlignReservedLog
+AllJoynCloseBusHandle
+AllJoynConnectToBus
+AllJoynEnumEvents
+AllJoynEventSelect
+AllJoynReceiveFromBus
+AllJoynSendToBus
 AllocateAndInitializeSid
 AllocateLocallyUniqueId
 AllocateUserPhysicalPages

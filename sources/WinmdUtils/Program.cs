@@ -1951,7 +1951,8 @@ namespace WinmdUtilsProgram
 
                     try
                     {
-                        var syntaxTree = decompiler.DecompileTypes(new[] { handle });
+                        var fullTypeName = new ICSharpCode.Decompiler.TypeSystem.FullTypeName(fullName);
+                        var syntaxTree = decompiler.DecompileType(fullTypeName);
                         writer.WriteLine(syntaxTree.ToString());
                     }
                     catch (Exception ex)

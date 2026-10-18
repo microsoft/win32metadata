@@ -10,4 +10,3 @@
 #include <winioctl.h>
 #include <ntddstor.h>
 #include <cxl.h>
-#include <ntddmtm.h>

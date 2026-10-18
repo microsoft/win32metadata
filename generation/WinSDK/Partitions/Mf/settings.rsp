@@ -35,6 +35,7 @@ _MFT_ENUM_FLAG=MFT_ENUM_FLAG
 <IncludeRoot>/um/wmcontainer.h
 <IncludeRoot>/um/mferror.h
 <IncludeRoot>/um/mfvirtualcamera.h
+<IncludeRoot>/um/opmxbox.h
 <IncludeRoot>/um/playto.h
 --namespace
 Windows.Win32.Media.MediaFoundation

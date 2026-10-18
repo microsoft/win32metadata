@@ -1,0 +1,4 @@
+--traverse
+<IncludeRoot>/um/windows.devices.alljoyn.interop.h
+--namespace
+Windows.Win32.System.WinRT.AllJoyn

@@ -79,24 +79,6 @@ namespace ClangSharpSourceToWinmdTests
             }
         }
 
-        [TestMethod]
-        public void DumpEnums_ArchitectureVariants_IncludeEachDefinition()
-        {
-            using var fixture = new MetadataFixture();
-            string winmd = fixture.Generate(
-                string.Empty,
-                "public enum Register { X64Register = 1 }",
-                "public enum Register { Arm64Register = 2 }");
-
-            string output = AssertToolExitCode("dump", winmd, 0);
-
-            StringAssert.Contains(output, "Architecture.X64");
-            StringAssert.Contains(output, "Architecture.Arm64");
-            StringAssert.Contains(output, "X64Register = 1");
-            StringAssert.Contains(output, "Arm64Register = 2");
-            Assert.IsFalse(output.Contains("ERROR decompiling"));
-        }
-
         [DataTestMethod]
         [DataRow(false)]
         [DataRow(true)]

@@ -22,10 +22,16 @@ namespace Windows.Win32.Tests
         }
 
         [Theory]
-        [InlineData("WebAuthNPluginAddAuthenticator2")]
-        [InlineData("WebAuthNPluginUpdateAuthenticatorDetails2")]
-        [InlineData("WebAuthNPluginPerformUserVerification2")]
-        public void WebAuthnPluginVersion2ApisHaveDllImports(string methodName)
+        [InlineData("Windows.Win32.Security.Authentication.WebAuthn", "WebAuthNPluginAddAuthenticator2", "webauthn.dll")]
+        [InlineData("Windows.Win32.Security.Authentication.WebAuthn", "WebAuthNPluginUpdateAuthenticatorDetails2", "webauthn.dll")]
+        [InlineData("Windows.Win32.Security.Authentication.WebAuthn", "WebAuthNPluginPerformUserVerification2", "webauthn.dll")]
+        [InlineData("Windows.Win32.Devices.AllJoyn", "AllJoynCloseBusHandle", "MSAJApi.dll")]
+        [InlineData("Windows.Win32.Devices.AllJoyn", "alljoyn_init", "MSAJApi.dll")]
+        [InlineData("Windows.Win32.NetworkManagement.P2P", "PeerGroupStartup", "P2P.dll")]
+        [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxEnableHDCP", "OPMXbox.dll")]
+        [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxGetHDCPStatus", "OPMXbox.dll")]
+        [InlineData("Windows.Win32.Media.MediaFoundation", "OPMXboxGetHDCPStatusAndType", "OPMXbox.dll")]
+        public void SdkApisHaveDllImports(string expectedNamespace, string methodName, string expectedDll)
         {
             using var stream = File.OpenRead(TestCommon.TestUtils.Win32WinmdPath);
             using var peReader = new PEReader(stream);
@@ -34,12 +40,12 @@ namespace Windows.Win32.Tests
                 .Select(reader.GetMethodDefinition)
                 .Single(method => reader.StringComparer.Equals(method.Name, methodName));
             var declaringType = reader.GetTypeDefinition(method.GetDeclaringType());
-            Assert.Equal("Windows.Win32.Security.Authentication.WebAuthn", reader.GetString(declaringType.Namespace));
+            Assert.Equal(expectedNamespace, reader.GetString(declaringType.Namespace));
 
             var import = method.GetImport();
             Assert.False(import.Module.IsNil);
             Assert.Equal(methodName, reader.GetString(import.Name));
-            Assert.Equal("webauthn.dll", reader.GetString(reader.GetModuleReference(import.Module).Name));
+            Assert.Equal(expectedDll, reader.GetString(reader.GetModuleReference(import.Module).Name));
         }
     }
 }

@@ -342,8 +342,6 @@ namespace MetadataUtils
                 function = function.Replace("SCMBUS_FUNCTION(", "(IOCTL_SCMBUS_DEVICE_FUNCTION_BASE + ");
                 function = function.Replace("SCM_LOGICAL_DEVICE_FUNCTION(", "(IOCTL_SCM_LOGICAL_DEVICE_FUNCTION_BASE + ");
                 function = function.Replace("SCM_PHYSICAL_DEVICE_FUNCTION(", "(IOCTL_SCM_PHYSICAL_DEVICE_FUNCTION_BASE + ");
-                function = function.Replace("MTMBUS_FUNCTION(", "(IOCTL_MTMBUS_DEVICE_FUNCTION_BASE + ");
-                function = function.Replace("MTM_PHYSICAL_DEVICE_FUNCTION(", "(IOCTL_MTM_PHYSICAL_DEVICE_FUNCTION_BASE + ");
 
                 writer.AddValue("uint", name, $"(({deviceType}) << 16) | (uint)(((int)({access})) << 14) | (({function}) << 2) | ({method})");
 

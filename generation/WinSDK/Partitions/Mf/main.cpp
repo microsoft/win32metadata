@@ -43,4 +43,5 @@
 #include <mfcontentdecryptionmodule.h>
 #include <mferror.h>
 #include <mfvirtualcamera.h>
+#include <opmxbox.h>
 #include <playto.h>
