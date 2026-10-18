@@ -1,0 +1,34 @@
+diff --git a/shared/dxgi1_6.idl b/shared/dxgi1_6.idl
+index 6b9879bd..80da6fcb 100644
+--- a/shared/dxgi1_6.idl
++++ b/shared/dxgi1_6.idl
+@@ -1,4 +1,5 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
++#include <sal.h>
+ cpp_quote("// Copyright (c) Microsoft Corporation.  All Rights Reserved")
+ 
+ import "dxgi1_5.idl";
+@@ -112,6 +113,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS( DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS )
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput6 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput6, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(068346e8-aaec-4b84-add7-137f513f77a1),
+@@ -141,6 +143,7 @@ typedef enum DXGI_GPU_PREFERENCE
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIFactory6 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIFactory6, _Win32_SupportedOS_17134_)
+ [
+     object,
+     uuid(c1b6694f-ff09-44a9-b03c-77900a0a1d17),
+@@ -161,6 +164,7 @@ interface IDXGIFactory6 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIFactory7 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIFactory7, _Win32_SupportedOS_17763_)
+ [
+     object,
+     uuid(a4966eed-76db-44da-84c1-ee9a7afb20a8),

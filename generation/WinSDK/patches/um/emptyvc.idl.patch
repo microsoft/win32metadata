@@ -1,0 +1,36 @@
+diff --git a/um/emptyvc.idl b/um/emptyvc.idl
+index 5fb131c4..4c9a865f 100644
+--- a/um/emptyvc.idl
++++ b/um/emptyvc.idl
+@@ -6,6 +6,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//=--------------------------------------------------------------------------=")
+ cpp_quote("// emptyvc.h")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -63,6 +64,7 @@ cpp_quote("//  Interface Definitions")
+ //----------------------------------------------------------------------------
+ cpp_quote("#ifndef _LPEMPTYVOLUMECACHECALLBACK_DEFINED")
+ cpp_quote("#define _LPEMPTYVOLUMECACHECALLBACK_DEFINED")
++_Win32_AnnotateInterface_(IEmptyVolumeCacheCallBack, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(6E793361-73C6-11D0-8469-00AA00442901),
+@@ -96,6 +98,7 @@ cpp_quote("#endif")
+ //----------------------------------------------------------------------------
+ cpp_quote("#ifndef _LPEMPTYVOLUMECACHE_DEFINED")
+ cpp_quote("#define _LPEMPTYVOLUMECACHE_DEFINED")
++_Win32_AnnotateInterface_(IEmptyVolumeCache, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(8FCE5227-04DA-11d1-A004-00805F8ABE06),
+@@ -143,6 +146,7 @@ cpp_quote("#endif")
+ //----------------------------------------------------------------------------
+ cpp_quote("#ifndef _LPEMPTYVOLUMECACHE2_DEFINED")
+ cpp_quote("#define _LPEMPTYVOLUMECACHE2_DEFINED")
++_Win32_AnnotateInterface_(IEmptyVolumeCache2, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(02b7e3ba-4db3-11d2-b2d9-00c04f8eec8c),

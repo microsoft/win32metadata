@@ -1,0 +1,68 @@
+diff --git a/um/upnphost.idl b/um/upnphost.idl
+index 03bb5421..1acc74c2 100644
+--- a/um/upnphost.idl
++++ b/um/upnphost.idl
+@@ -9,6 +9,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -96,6 +97,7 @@ cpp_quote("#define ADDRESS_FAMILY_VALUE_NAME L\"AddressFamily\"")
+ ////////////////////////////////////
+ // Interface definitions
+ 
++_Win32_AnnotateInterface_(IUPnPEventSink, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810b4-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique)
+@@ -112,6 +114,7 @@ interface IUPnPEventSink: IUnknown
+         [in] VARIANT varsadispidChanges);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPEventSource, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810b5-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique)
+@@ -127,6 +130,7 @@ interface IUPnPEventSource: IUnknown
+         [in] IUPnPEventSink * pesSubscriber);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPRegistrar, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810b6-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique)
+@@ -164,6 +168,7 @@ interface IUPnPRegistrar : IUnknown
+         [in] BSTR     bstrProviderName);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPReregistrar, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810b7-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique)
+@@ -187,6 +192,7 @@ interface IUPnPReregistrar : IUnknown
+         [in] long     nLifeTime);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceControl, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810ba-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique),
+@@ -213,6 +219,7 @@ interface IUPnPDeviceControlHttpHeaders : IUnknown
+        [out,retval] BSTR*     bstrHttpResponseHeaders);
+ }
+ 
++_Win32_AnnotateInterface_(IUPnPDeviceProvider, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(204810b8-73b2-11d4-bf42-00b0d0118b56),
+     pointer_default(unique),
+@@ -224,6 +231,7 @@ interface IUPnPDeviceProvider : IUnknown
+ }
+ 
+ // IUPnPRemoteEndpointInfo
++_Win32_AnnotateInterface_(IUPnPRemoteEndpointInfo, _Win32_SupportedOS_WindowsVista_)
+ [
+    uuid(c92eb863-0269-4aff-9c72-75321bba2952),
+    pointer_default(unique)

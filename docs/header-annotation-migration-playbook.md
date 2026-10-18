@@ -3502,3 +3502,26 @@ unpatched originals (`vsbackup.h`, `clfs.h`, `comppkgsup.h`, `lpmapi.h`,
 `d2d1_3helper.h`, `gdipluspixelformats.h`) do not count. Other categories and
 final emitted-image qualification remain separate work; these native controls
 are not a full-image or complete-header acceptance claim.
+
+### Original-IDL system continuation
+
+The system IDL batch patches 24 authoritative original IDLs and removes exactly
+124 equivalent interface availability rows. Actual MIDL generation and strict
+canonical preparation produce 24 changed headers with all 124 exact annotated
+typedef carriers before their C++ interface definitions. Existing native
+admissions and the exact consumed MIDL input closure are preserved additively.
+
+All 96 ordinary/metadata native controls pass: metadata-enabled x86, x64 and
+ARM64, plus ordinary x64 for each header. The interface transport permits only
+one extra identical, pre-existing same-name typedef for an expected interface;
+all other declaration multiplicities, layouts, values, SAL and payloads remain
+strict. The common-controls fixture includes `commctrl.h`, matching its owning
+partition. Actual normal x64 binding generation and generated-source readback
+also preserve every one of the 124 interface floors. These are bounded native
+and generated-source checks, not a full-SDK image or CI acceptance.
+
+`wcmconfig.idl` is not admitted or counted: its unconditional `guids.h` include
+has no source-backed route in the pinned SDK. Its eight interface floors and
+eight non-interface function facts elsewhere in the allocation remain exactly
+in the availability sidecar. Evidence stays in the worker's
+`artifacts\idl-batch\system-idl-001-*`; failed proposals are not prepared coverage.

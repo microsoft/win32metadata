@@ -1293,6 +1293,7 @@ static_assert(DISC_NO_FORCE == 64u);
                 (cInterface && header == "d3d11_4.h" ? "#define D3D11_NO_HELPERS 1\n" : "") +
                 "#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n" +
                 (header == "videoacc.h" ? "#include <strmif.h>\n" : "") +
+                (header.Equals("commoncontrols.h", StringComparison.OrdinalIgnoreCase) ? "#include <commctrl.h>\n" : "") +
                 "#include <" + header + ">\n";
             var beforeSal = new List<string>();
             var afterSal = new List<string>();

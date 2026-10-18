@@ -1,0 +1,19 @@
+diff --git a/um/commoncontrols.idl b/um/commoncontrols.idl
+index 10787e66..0202cd36 100644
+--- a/um/commoncontrols.idl
++++ b/um/commoncontrols.idl
+@@ -1,5 +1,6 @@
+ // CommonControls.idl
+ //
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -126,6 +127,7 @@ cpp_quote("#define ILR_SCALE_ASPECTRATIO        0x0100")
+ 
+ 
+ // New for (_WIN32_IE >= 0x0605)
++_Win32_AnnotateInterface_(IImageList2, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(192b9d83-50fc-457b-90a0-2b82a8b5dae1),
+     local

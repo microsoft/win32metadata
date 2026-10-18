@@ -1,0 +1,27 @@
+diff --git a/shared/dxgi1_4.idl b/shared/dxgi1_4.idl
+index cac1fa60..0e851f35 100644
+--- a/shared/dxgi1_4.idl
++++ b/shared/dxgi1_4.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All Rights Reserved
+ 
++#include <sal.h>
+ import "dxgi1_3.idl";
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -21,6 +22,7 @@ typedef enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGISwapChain3 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGISwapChain3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid( 94d99bdb-f1f8-4ab0-b236-7da0170edab1 ),
+@@ -58,6 +60,7 @@ typedef enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIOutput4 interface
+ //--------------------------------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDXGIOutput4, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(dc7dca35-2196-414d-9F53-617884032a60),

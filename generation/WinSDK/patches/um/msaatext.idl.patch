@@ -1,0 +1,68 @@
+diff --git a/um/msaatext.idl b/um/msaatext.idl
+index 84ba7148..62dcf6b8 100644
+--- a/um/msaatext.idl
++++ b/um/msaatext.idl
+@@ -1,6 +1,7 @@
+ // MSAAText.idl : IDL source for MSAAText.dll
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -39,6 +40,7 @@ import "ocidl.idl";
+ import "objidl.idl";
+ import "textstor.idl";
+ 
++_Win32_AnnotateInterface_(ITfMSAAControl, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(b5f8fb3b-393f-4f7c-84cb-504924c2705a),
+@@ -137,6 +139,7 @@ const int TS_STRF_END   = 2;
+ //
+ //	IAccDictionary Interface
+ //
++_Win32_AnnotateInterface_(IAccDictionary, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid( 1DC4CB5F-D737-474d-ADE9-5CCFC9BC1CC9 ),
+@@ -184,6 +187,7 @@ const int TS_STRF_END   = 2;
+ //
+ //	IVersionInfo Interface
+ //
++_Win32_AnnotateInterface_(IVersionInfo, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid( 401518EC-DB00-4611-9B29-2A0E4B9AFA85 ),
+@@ -229,6 +233,7 @@ const int TS_STRF_END   = 2;
+ //	ICoCreateLocally Interface
+ //	ICoCreatedLocally Interface
+ //
++_Win32_AnnotateInterface_(ICoCreateLocally, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid( 03DE00AA-F272-41e3-99CB-03C5E8114EA0 ),
+@@ -251,6 +256,7 @@ const int TS_STRF_END   = 2;
+ 
+ 
+ 
++_Win32_AnnotateInterface_(ICoCreatedLocally, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid( 0A53EB6C-1908-4742-8CFF-2CEE2E93F94C ),
+@@ -321,6 +327,7 @@ const int TS_STRF_END   = 2;
+ //
+ //	IAccServerDocMgr Interface
+ //
++_Win32_AnnotateInterface_(IAccServerDocMgr, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid(AD7C73CF-6DD5-4855-ABC2-B04BAD5B9153),
+@@ -345,6 +352,7 @@ const int TS_STRF_END   = 2;
+ //
+ //	AccClientDocMgr Interface
+ //
++_Win32_AnnotateInterface_(IAccClientDocMgr, _Win32_SupportedOS_WindowsXP_)
+ 	[
+ 		object,
+ 		uuid(4C896039-7B6D-49e6-A8C1-45116A98292B),

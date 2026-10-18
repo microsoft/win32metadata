@@ -1,0 +1,60 @@
+diff --git a/um/natupnp.idl b/um/natupnp.idl
+index a0ad2c7e..1d700bfb 100644
+--- a/um/natupnp.idl
++++ b/um/natupnp.idl
+@@ -4,6 +4,7 @@
+ // This file will be processed by the MIDL tool to
+ // produce the type library (NATUPnP.tlb) and marshalling code.
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -34,6 +35,7 @@ interface INATEventManager;
+ //+---------------------------------------------------------------------------
+ // IUPnPNAT - top-level client-side object to manage NAT traversal via UPnP
+ // 
++_Win32_AnnotateInterface_(IUPnPNAT, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(B171C812-CC76-485A-94D8-B6B3A2794E99),
+@@ -56,6 +58,7 @@ interface INATEventManager;
+ //+---------------------------------------------------------------------------
+ // INATEventManager
+ // 
++_Win32_AnnotateInterface_(INATEventManager, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(624BD588-9060-4109-B0B0-1ADBBCAC32DF),
+@@ -71,6 +74,7 @@ interface INATEventManager;
+         [id(2), propput, helpstring("property Number Of Entries Callback")]
+         HRESULT NumberOfEntriesCallback ([in] IUnknown * pUnk);
+     };
++_Win32_AnnotateInterface_(INATExternalIPAddressCallback, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(9C416740-A34E-446F-BA06-ABD04C3149AE),
+@@ -82,6 +86,7 @@ interface INATEventManager;
+         [id(0), helpstring("NewExternalIPAddress")]
+         HRESULT NewExternalIPAddress ([in] BSTR bstrNewExternalIPAddress);
+     };
++_Win32_AnnotateInterface_(INATNumberOfEntriesCallback, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(C83A0A74-91EE-41B6-B67A-67E0F00BBD78),
+@@ -195,6 +200,7 @@ interface INATEventManager;
+ //+---------------------------------------------------------------------------
+ // IStaticPortMappingCollection - collection of static port mappings
+ // 
++_Win32_AnnotateInterface_(IStaticPortMappingCollection, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(CD1F3E77-66D6-4664-82C7-36DBB641D0F1),
+@@ -232,6 +238,7 @@ interface INATEventManager;
+             [out, retval] IStaticPortMapping ** ppSPM);
+     };
+ 
++_Win32_AnnotateInterface_(IStaticPortMapping, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid(6F10711F-729B-41E5-93B8-F21D0F818DF1),

@@ -1,0 +1,60 @@
+diff --git a/um/d3d11sdklayers.idl b/um/d3d11sdklayers.idl
+index 7b31d505..f6969694 100644
+--- a/um/d3d11sdklayers.idl
++++ b/um/d3d11sdklayers.idl
+@@ -8,6 +8,7 @@
+ //                                                                                          //
+ //////////////////////////////////////////////////////////////////////////////////////////////
+ 
++#include <sal.h>
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "d3d11.idl";
+@@ -44,6 +45,7 @@ typedef enum D3D11_RLDO_FLAGS
+ 
+ cpp_quote( "DEFINE_ENUM_FLAG_OPERATORS(D3D11_RLDO_FLAGS)")
+ 
++_Win32_AnnotateInterface_(ID3D11Debug, _Win32_SupportedOS_Windows7_)
+ [ uuid( 79cf2233-7536-4948-9d36-1e4692dc5760 ), object, local, pointer_default( unique ) ]
+ interface ID3D11Debug
+     : IUnknown
+@@ -66,6 +68,7 @@ cpp_quote("#pragma endregion")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(ID3D11SwitchToRef, _Win32_SupportedOS_Windows7_)
+ [ uuid( 1ef337e3-58e7-4f83-a692-db221f5ed47e ), object, local, pointer_default( unique ) ]
+ interface ID3D11SwitchToRef
+     : IUnknown
+@@ -143,6 +146,7 @@ typedef enum D3D11_SHADER_TRACKING_OPTION
+         D3D11_SHADER_TRACKING_OPTION_TRACK_UNINITIALIZED,
+ } D3D11_SHADER_TRACKING_OPTIONS;
+ 
++_Win32_AnnotateInterface_(ID3D11TracingDevice, _Win32_SupportedOS_Windows8_)
+ [ uuid( 1911c771-1587-413e-a7e0-fb26c3de0268 ), object, local, pointer_default( unique ) ]
+ interface ID3D11TracingDevice
+     : IUnknown
+@@ -160,6 +164,7 @@ interface ID3D11TracingDevice
+         [annotation("_In_")] UINT Options);
+ };
+ 
++_Win32_AnnotateInterface_(ID3D11RefTrackingOptions, _Win32_SupportedOS_Windows8_)
+ [ uuid( 193dacdf-0db2-4c05-a55c-ef06cac56fd9 ), object, local, pointer_default( unique ) ]
+ interface ID3D11RefTrackingOptions
+     : IUnknown
+@@ -167,6 +172,7 @@ interface ID3D11RefTrackingOptions
+     HRESULT SetTrackingOptions( UINT uOptions );
+ };
+ 
++_Win32_AnnotateInterface_(ID3D11RefDefaultTrackingOptions, _Win32_SupportedOS_Windows8_)
+ [ uuid( 03916615-c644-418c-9bf4-75db5be63ca0 ), object, local, pointer_default( unique ) ]
+ interface ID3D11RefDefaultTrackingOptions
+     : IUnknown
+@@ -1778,6 +1784,7 @@ typedef struct D3D11_INFO_QUEUE_FILTER
+ //
+ //
+ cpp_quote("#define D3D11_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024")
++_Win32_AnnotateInterface_(ID3D11InfoQueue, _Win32_SupportedOS_Windows7_)
+ [ uuid( 6543dbb6-1b48-42f5-ab82-e97ec74326f6 ), object, local, pointer_default( unique ) ]
+ interface ID3D11InfoQueue
+     : IUnknown

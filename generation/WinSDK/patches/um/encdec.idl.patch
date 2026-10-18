@@ -1,0 +1,68 @@
+diff --git a/um/encdec.idl b/um/encdec.idl
+index 2e70e0c5..b0b1b067 100644
+--- a/um/encdec.idl
++++ b/um/encdec.idl
+@@ -22,6 +22,7 @@
+ //  x = 1 - Encrypter-Tagger
+ //  x = 2 - Decrypter-Detagger
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -277,6 +278,7 @@ typedef LONG    PackedTvRating;
+ 
+ #include <encdec_enums.h>
+ 
++_Win32_AnnotateInterface_(IETFilterConfig, _Win32_SupportedOS_WindowsXP_)
+ [
+     restricted,
+     object,
+@@ -297,6 +299,7 @@ interface IETFilterConfig : IUnknown
+                               );
+ };
+ 
++_Win32_AnnotateInterface_(IDTFilterConfig, _Win32_SupportedOS_WindowsXP_)
+ [
+     restricted,
+     object,
+@@ -400,6 +403,7 @@ library EncDec
+     importlib("stdole32.tlb");
+     importlib("stdole2.tlb");
+ 
++_Win32_AnnotateInterface_(IETFilter, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid (C4C4C4B1-0049-4E2B-98FB-9537F6CE516D),
+@@ -457,6 +461,7 @@ library EncDec
+     // ---------------------------------------------------
+ 
+ 
++_Win32_AnnotateInterface_(IDTFilter, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid (C4C4C4B2-0049-4E2B-98FB-9537F6CE516D),
+@@ -512,6 +517,7 @@ library EncDec
+ 
+     };
+ 
++_Win32_AnnotateInterface_(IDTFilter2, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid (C4C4C4B4-0049-4E2B-98FB-9537F6CE516D),
+@@ -532,6 +538,7 @@ library EncDec
+             HRESULT GetLastErrorCode();
+    };
+ 
++_Win32_AnnotateInterface_(IDTFilter3, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid (513998cc-e929-4cdf-9fbd-bad1e0314866),
+@@ -579,6 +586,7 @@ library EncDec
+     };
+ 
+     // ---------------------------------------------------
++_Win32_AnnotateInterface_(IXDSCodec, _Win32_SupportedOS_WindowsXP_)
+     [
+         object,
+         uuid (C4C4C4B3-0049-4E2B-98FB-9537F6CE516D),

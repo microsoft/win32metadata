@@ -1,0 +1,59 @@
+diff --git a/um/xamlom.idl b/um/xamlom.idl
+index bf5f13fe..257f1340 100644
+--- a/um/xamlom.idl
++++ b/um/xamlom.idl
+@@ -1,5 +1,6 @@
+ // Copyright (c) Microsoft Corporation.  All rights reserved.
+ 
++#include <sal.h>
+ cpp_quote("#pragma region Application Family")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+@@ -153,6 +154,7 @@ typedef enum VisualElementState
+ 
+ // Interfaces.
+ 
++_Win32_AnnotateInterface_(IVisualTreeServiceCallback, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(AA7A8931-80E4-4FEC-8F3B-553F87B4966E),
+@@ -166,6 +168,7 @@ interface IVisualTreeServiceCallback : IUnknown
+         [in] VisualMutationType mutationType);
+ };
+ 
++_Win32_AnnotateInterface_(IVisualTreeServiceCallback2, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(BAD9EB88-AE77-4397-B948-5FA2DB0A19EA),
+@@ -240,6 +243,7 @@ interface IVisualTreeService : IUnknown
+         [in] InstanceHandle parent);
+ };
+ 
++_Win32_AnnotateInterface_(IXamlDiagnostics, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(18C9E2B6-3F43-4116-9F2B-FF935D7770D2),
+@@ -271,6 +275,7 @@ interface IXamlDiagnostics : IUnknown
+         [out, retval] BSTR* pInitializationData);
+ };
+ 
++_Win32_AnnotateInterface_(IBitmapData, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(d1a34ef2-cad8-4635-a3d2-fcda8d3f3caf),
+@@ -311,6 +316,7 @@ interface IBitmapData : IUnknown
+         [out] BitmapDescription* pBitmapDescription);
+ };
+ 
++_Win32_AnnotateInterface_(IVisualTreeService2, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(130F5136-EC43-4F61-89C7-9801A36D2E95),
+@@ -368,6 +374,7 @@ interface IVisualTreeService2 : IVisualTreeService
+         [out] IBitmapData** ppBitmapData);
+ };
+ 
++_Win32_AnnotateInterface_(IVisualTreeService3, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(0E79C6E0-85A0-4BE8-B41A-655CF1FD19BD),

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
@@ -372,6 +373,118 @@ namespace Win32MetadataScraperTests
                                 mode.Item1, mode.Item2, enabled,
                                 mode.Item1 == "c++" ? owner.Item3 : Array.Empty<string>(),
                             };
+        }
+
+        [NativeMigrationTheory("BULK_SYSTEM_IDL_MIGRATION_ROOT")]
+        [MemberData(nameof(SystemOriginalIdlNativeSamples))]
+        public void SystemOriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
+            string partition, string header, string architecture, string target, bool enabled, string[] expected) =>
+            new WinHttpNativeControlTests(this.output).OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
+                partition, header, architecture, target, "c++", false, enabled, expected);
+
+        public static IEnumerable<object[]> SystemOriginalIdlNativeSamples()
+        {
+            string root = Environment.GetEnvironmentVariable("BULK_SYSTEM_IDL_MIGRATION_ROOT");
+            if (string.IsNullOrEmpty(root))
+            {
+                yield return new object[] { "", "", "x64", "x86_64-pc-windows-msvc", true, Array.Empty<string>() };
+                yield break;
+            }
+
+            string results = Environment.GetEnvironmentVariable("BULK_SYSTEM_IDL_COMPILE_RESULTS");
+            if (string.IsNullOrEmpty(results))
+                throw new InvalidOperationException("A real system IDL fixture requires its actual MIDL compile results.");
+            using var compiled = JsonDocument.Parse(File.ReadAllText(results));
+            var successful = compiled.RootElement.EnumerateArray()
+                .Where(result => result.GetProperty("success").GetBoolean())
+                .ToDictionary(result => result.GetProperty("original").GetString(),
+                    result => result.GetProperty("generatedHeader").GetString(), StringComparer.OrdinalIgnoreCase);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "report.json")));
+            foreach (var owner in report.RootElement.GetProperty("owners").EnumerateArray())
+            {
+                string original = owner.GetProperty("original").GetString();
+                if (!successful.TryGetValue(original, out string header))
+                    continue;
+                string partition = owner.GetProperty("partitionCandidates").EnumerateArray()
+                    .Select(value => value.GetString()).First();
+                string[] expected = owner.GetProperty("dispositions").EnumerateArray()
+                    .Where(row => row.GetProperty("disposition").GetString() == "authored-original-idl")
+                    .Select(row => row.GetProperty("fact"))
+                    .Select(fact =>
+                    {
+                        string value = fact.GetProperty("value").GetString();
+                        return fact.GetProperty("symbol").GetString() + "|" + value[(value.IndexOf('=') + 1)..];
+                    }).ToArray();
+                if (expected.Length == 0)
+                    throw new InvalidOperationException($"No authored semantic facts for {original}.");
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                {
+                    yield return new object[]
+                    {
+                        partition, Path.GetFileName(header), architecture.Item1, architecture.Item2, true, expected,
+                    };
+                    if (architecture.Item1 == "x64")
+                        yield return new object[]
+                        {
+                            partition, Path.GetFileName(header), architecture.Item1, architecture.Item2, false, expected,
+                        };
+                }
+            }
+        }
+
+        [NativeMigrationTheory("BULK_SYSTEM_IDL_BINDINGS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void SystemOriginalIdlProjectionContainsExactInterfaceFloors(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("BULK_SYSTEM_IDL_MIGRATION_ROOT");
+            string generated = Path.Combine(Environment.GetEnvironmentVariable("BULK_SYSTEM_IDL_BINDINGS"), architecture);
+            using var compiled = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("BULK_SYSTEM_IDL_COMPILE_RESULTS")));
+            var successful = compiled.RootElement.EnumerateArray()
+                .Where(result => result.GetProperty("success").GetBoolean())
+                .Select(result => result.GetProperty("original").GetString()).ToHashSet(StringComparer.OrdinalIgnoreCase);
+            using var bindings = JsonDocument.Parse(File.ReadAllText(Path.Combine(generated, "results.json")));
+            var outputs = bindings.RootElement.EnumerateArray()
+                .ToDictionary(result => result.GetProperty("original").GetString(), StringComparer.OrdinalIgnoreCase);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "report.json")));
+            int checkedFacts = 0;
+            foreach (var owner in report.RootElement.GetProperty("owners").EnumerateArray())
+            {
+                string original = owner.GetProperty("original").GetString();
+                if (!successful.Contains(original))
+                    continue;
+                Assert.True(outputs.TryGetValue(original, out var result), $"Missing actual binding output for {original}.");
+                Assert.True(result.GetProperty("success").GetBoolean(), $"Binding generation failed for {original}.");
+                var declarations = CSharpSyntaxTree.ParseText(File.ReadAllText(result.GetProperty("generatedSource").GetString()))
+                    .GetRoot().DescendantNodes().OfType<TypeDeclarationSyntax>()
+                    .ToLookup(declaration => declaration.Identifier.ValueText, StringComparer.Ordinal);
+                foreach (var row in owner.GetProperty("dispositions").EnumerateArray()
+                    .Where(row => row.GetProperty("disposition").GetString() == "authored-original-idl"))
+                {
+                    var fact = row.GetProperty("fact");
+                    string symbol = fact.GetProperty("symbol").GetString();
+                    var declaration = Assert.Single(declarations[symbol]);
+                    string expected = Regex.Match(fact.GetProperty("value").GetString(),
+                        "SupportedOSPlatform\\(\"([^\"]+)\"\\)").Groups[1].Value;
+                    string[] actual = declaration.AttributeLists.SelectMany(list => list.Attributes)
+                        .Where(attribute => attribute.Name.ToString().Split('.').Last()
+                            is "SupportedOSPlatform" or "SupportedOSPlatformAttribute")
+                        .Select(attribute => Assert.IsType<LiteralExpressionSyntax>(
+                            Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText).ToArray();
+                    Assert.True(actual.SequenceEqual(new[] { expected }),
+                        $"{architecture}/{original}/{symbol}: expected '{expected}', actual [{string.Join(", ", actual)}].");
+                    checkedFacts++;
+                }
+            }
+            Assert.True(checkedFacts > 0, "The readback requires actual projected original-IDL interface facts.");
+            this.output.WriteLine($"{architecture}: {checkedFacts} exact source-authored interface floors in real generated bindings.");
         }
 
         private static object Floor(string symbol, string version = "windows6.1") =>

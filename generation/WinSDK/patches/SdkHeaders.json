@@ -3357,6 +3357,150 @@
       "sourceSha256": "28045F0B639DA6118CE67E3D9B992B3974350708D2FB758174105D683922C6A3",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\msclus.idl",
       "sdkSha256": "59BC9E6F0BE0B6B579A3001DEE502FDE7E043266D61342FCAA00558BDC452F7D"
+    },
+    {
+      "path": "um\\mstask.h",
+      "sourceSha256": "B97D42923767DAE8E53F397A44E2C07768E284D259A349B273EBEA716C93FF9C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mstask.idl",
+      "sdkSha256": "05FB210A4ECF1A36707A7CFB6F88D48681FC3C47299433A0D4965D9E5E937F4B"
+    },
+    {
+      "path": "um\\xamlom.h",
+      "sourceSha256": "E3AF8F9BD73382D3EDF17090C684E3D3E170824794BF00F62162DF3E3BE9D021",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\xamlom.idl",
+      "sdkSha256": "F5D34CD5D3743AC7F7637DB29773CFBC6681C18137D212A6BD16FF893825633B"
+    },
+    {
+      "path": "um\\xpsdigitalsignature.h",
+      "sourceSha256": "80539F652ADF405AF62411E505AFA7AD138051E99227F436726DA618AEF6F3B7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\xpsdigitalsignature.idl",
+      "sdkSha256": "B7515D9CC85B5A481707FE403AF090ED335DF8CCF6DBDC5C75FD7A772E42B2AC"
+    },
+    {
+      "path": "shared\\dxgi1_4.h",
+      "sourceSha256": "4D2C71FC2620633DC4B1797E6B9F68E773EC4F8DAB2C8A5C9D30CC433AF0160E",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\dxgi1_4.idl",
+      "sdkSha256": "49339CA9214D9A284556929718DB5D15BE862861D6B5D824E631B7B2FAE3CD5A"
+    },
+    {
+      "path": "shared\\dxgi1_6.h",
+      "sourceSha256": "7F2D532ACCB0789D7DA93A3BBD953A5FA86E6A12B85D21D29C8CD601B9091CC9",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\dxgi1_6.idl",
+      "sdkSha256": "D209B7EF9E56E2DC67973E46AD88E91F9FFBB22F853E2A2FDC497CD9FD02CA54"
+    },
+    {
+      "path": "um\\emptyvc.h",
+      "sourceSha256": "B5FE75AC34F8A7E997BDF5108F1D10F75EFCBAC9B0057101B824A3F73535813F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\emptyvc.idl",
+      "sdkSha256": "AF054A7CD69C88FE46928C273A3F4DB5FB4BDC4C061471F89E15E5516096A3C0"
+    },
+    {
+      "path": "um\\encdec.h",
+      "sourceSha256": "6452D12935F1D8FE21AF5EC44BC54F772D5B99DD9C858D6C0632F8F0BE0A82AD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\encdec.idl",
+      "sdkSha256": "35AE48450CCB4447C8C255F634B347DC54E80CE1DF7E8A50DC25471796F03786"
+    },
+    {
+      "path": "um\\functiondiscoveryapi.h",
+      "sourceSha256": "2FFDE57DC46CE17C2AB9140F6C08BDE8EF8402B2FA598CD5E496F4FA63ADDF53",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\functiondiscoveryapi.idl",
+      "sdkSha256": "AD2AC4A02A83D8DB48B197C8F4FC550E4086F78586153979BE999EAD45DF5B8D"
+    },
+    {
+      "path": "um\\msaatext.h",
+      "sourceSha256": "14963A22E6653F5844A72FDEC47ABE96DD745EC4415631A8EA894F617FEA51B1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msaatext.idl",
+      "sdkSha256": "9CA80CDD0CB480870308E5A68A921D7689535E997AF74F9F9A82077008BF1821"
+    },
+    {
+      "path": "um\\upnphost.h",
+      "sourceSha256": "68D8640353889135995546307653C9070494DC16F884D68FFAF7A5ACB4A53586",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\upnphost.idl",
+      "sdkSha256": "7C08142917D338DA650BD34AE4343248486629D0EAB65AB22359286FD07B8591"
+    },
+    {
+      "path": "winrt\\webapplication.h",
+      "sourceSha256": "C19DC0487A4EA485AAF5443E967E9E7A06555BD06212FF1E820B850F2F3BEC24",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\webapplication.idl",
+      "sdkSha256": "0349EEB88558EE012D8FFCD9C110BCB1EFED897464B8C49EBC54D437693F4CD0"
+    },
+    {
+      "path": "um\\bits4_0.h",
+      "sourceSha256": "3C52504A55E0238CF5E4F71E1C913E9D5C61706C6E015C2D0AB8A319F9F317FF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\bits4_0.idl",
+      "sdkSha256": "1837D4518A7E66723DE8931010929C595B33FDF5806F68B9596BD29B9A0E8563"
+    },
+    {
+      "path": "um\\casetup.h",
+      "sourceSha256": "8B27A051F24CD7BF0492BF6D9CC5227840AF79B7158F1D2EE92DB48483A4D5AB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\casetup.idl",
+      "sdkSha256": "178772BF6875E42ADE31EFC75B80483AF8958314BA3EF72633908FBF93EB65E9"
+    },
+    {
+      "path": "um\\comcat.h",
+      "sourceSha256": "111FA393F6075509BD53D44C17E4E1DDABD7BB01738B9B75233BA49B7EEACF07",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\comcat.idl",
+      "sdkSha256": "04AD4E13812214C3D1C9925A3535E6744F6704E2B614636AC7FA74BB32F84B9E"
+    },
+    {
+      "path": "um\\commoncontrols.h",
+      "sourceSha256": "A77D433F550901053CC738790DFBA3EE4731531E80CF8B3BFC5243F3EE8C4EB6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\commoncontrols.idl",
+      "sdkSha256": "CAD7D328E38F33C7C25E9880711C1E1F63D218704FE3EDC82B51D6C34385DE21"
+    },
+    {
+      "path": "um\\d3d11sdklayers.h",
+      "sourceSha256": "0A5A3EAB6B8B38E9C1DD431ACE567ED2C4CE916B69A770A4805ED4C083017197",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11sdklayers.idl",
+      "sdkSha256": "2921B8E7CA678ACCD40528FF48BE2BF27C97E4C19CF6F20BC1CF81E13416F43F"
+    },
+    {
+      "path": "um\\inputscope.h",
+      "sourceSha256": "2E6A80C9894434C272458040224B169574D902DD7A79917EE1A60B74DCBB9EAC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\inputscope.idl",
+      "sdkSha256": "8D7A8DEE00B0FD4B0773F0669DE58795D58D13C8B856586E1349B95000D08D30"
+    },
+    {
+      "path": "um\\mfcontentdecryptionmodule.h",
+      "sourceSha256": "BAFC188DD7B0CF15FF6440E10DA473A8A2737FC11268F1CFD84BAA9D462ED3B1",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfcontentdecryptionmodule.idl",
+      "sdkSha256": "3A8C8532E85B1D5338F97D07586120143F153BEC20B233B943136A2C41460BD4"
+    },
+    {
+      "path": "um\\natupnp.h",
+      "sourceSha256": "A86DC4EA851DEF211FD83E2F1FB2F09A7C8724E5A75454EB60BDC79F8F55B474",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\natupnp.idl",
+      "sdkSha256": "EA3A0350647EEE4A3B48A272DD71C234B20A7A41070EB3743D949B1870BB1D30"
+    },
+    {
+      "path": "um\\qmgr.h",
+      "sourceSha256": "DA80F1A5743FE2D25E080A25E4472416AFA31CC209673A73A1192400F477CDEE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\qmgr.idl",
+      "sdkSha256": "001601C4BAD8E6FF2098708BC023D63E0155C3079296E90A51CF10A0C6CF4C4B"
+    },
+    {
+      "path": "um\\shldisp.h",
+      "sourceSha256": "11AE01DCBA47B94FC7C7588A89C633EC6FBBBDB8F20B09D279C56646ABE55D81",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\shldisp.idl",
+      "sdkSha256": "3229DFDFB6D10E8D0DE474BCC582B117C8DBB28639DA70CEDF2EDC15B126F1F1"
+    },
+    {
+      "path": "um\\spatialaudioclient.h",
+      "sourceSha256": "A948B69CD0B65683177332F40FE116C02F5BFA19E4F7135317520023992E6451",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialaudioclient.idl",
+      "sdkSha256": "222B1665B1E65EB278679866ACD7D00ADB1AFDA443A77F3FFC7C305C9B743B43"
+    },
+    {
+      "path": "um\\vsmgmt.h",
+      "sourceSha256": "5DCADCC1041DF564D666B77440BE0A44803D804400A5F3CD01DA60A919DDE96E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vsmgmt.idl",
+      "sdkSha256": "840D17C61A6FD0AB4434F5B0B0D251294450EE260754F78EE5A5128CFC8C7090"
+    },
+    {
+      "path": "um\\vsprov.h",
+      "sourceSha256": "A6C8761F269797C2241463FFA5AEF8381A5E69A6AD13A5E60D6C44D197A7D9E2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vsprov.idl",
+      "sdkSha256": "FD21E10A77C76C59DCFFDC3B6BE2AF4A31DA3C686FB8EF206E8CECA6CCC6BECE"
     }
   ],
   "midl": {
@@ -4929,6 +5073,101 @@
         "path": "um\\msclus.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\msclus.idl",
         "sdkSha256": "59BC9E6F0BE0B6B579A3001DEE502FDE7E043266D61342FCAA00558BDC452F7D"
+      },
+      {
+        "path": "shared\\dxgi1_6.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\dxgi1_6.idl",
+        "sdkSha256": "D209B7EF9E56E2DC67973E46AD88E91F9FFBB22F853E2A2FDC497CD9FD02CA54"
+      },
+      {
+        "path": "um\\activscp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\activscp.idl",
+        "sdkSha256": "89B5780592CB05DC4AAEF4F99376DE664A0811125821DCE092F4DA67BADE0ADA"
+      },
+      {
+        "path": "um\\casetup.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\casetup.idl",
+        "sdkSha256": "178772BF6875E42ADE31EFC75B80483AF8958314BA3EF72633908FBF93EB65E9"
+      },
+      {
+        "path": "um\\commoncontrols.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\commoncontrols.idl",
+        "sdkSha256": "CAD7D328E38F33C7C25E9880711C1E1F63D218704FE3EDC82B51D6C34385DE21"
+      },
+      {
+        "path": "um\\d3d11sdklayers.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\d3d11sdklayers.idl",
+        "sdkSha256": "2921B8E7CA678ACCD40528FF48BE2BF27C97E4C19CF6F20BC1CF81E13416F43F"
+      },
+      {
+        "path": "um\\emptyvc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\emptyvc.idl",
+        "sdkSha256": "AF054A7CD69C88FE46928C273A3F4DB5FB4BDC4C061471F89E15E5516096A3C0"
+      },
+      {
+        "path": "um\\inputscope.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\inputscope.idl",
+        "sdkSha256": "8D7A8DEE00B0FD4B0773F0669DE58795D58D13C8B856586E1349B95000D08D30"
+      },
+      {
+        "path": "um\\mfcontentdecryptionmodule.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mfcontentdecryptionmodule.idl",
+        "sdkSha256": "3A8C8532E85B1D5338F97D07586120143F153BEC20B233B943136A2C41460BD4"
+      },
+      {
+        "path": "um\\msaatext.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\msaatext.idl",
+        "sdkSha256": "9CA80CDD0CB480870308E5A68A921D7689535E997AF74F9F9A82077008BF1821"
+      },
+      {
+        "path": "um\\natupnp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\natupnp.idl",
+        "sdkSha256": "EA3A0350647EEE4A3B48A272DD71C234B20A7A41070EB3743D949B1870BB1D30"
+      },
+      {
+        "path": "um\\qmgr.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\qmgr.idl",
+        "sdkSha256": "001601C4BAD8E6FF2098708BC023D63E0155C3079296E90A51CF10A0C6CF4C4B"
+      },
+      {
+        "path": "um\\shdispid.h",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\shdispid.h",
+        "sdkSha256": "EEB6E16DBD8817A936561B6555E403B49EB926D7BC1B81C46ABEF6286AB73736"
+      },
+      {
+        "path": "um\\shldisp.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\shldisp.idl",
+        "sdkSha256": "3229DFDFB6D10E8D0DE474BCC582B117C8DBB28639DA70CEDF2EDC15B126F1F1"
+      },
+      {
+        "path": "um\\upnphost.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\upnphost.idl",
+        "sdkSha256": "7C08142917D338DA650BD34AE4343248486629D0EAB65AB22359286FD07B8591"
+      },
+      {
+        "path": "um\\vsmgmt.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vsmgmt.idl",
+        "sdkSha256": "840D17C61A6FD0AB4434F5B0B0D251294450EE260754F78EE5A5128CFC8C7090"
+      },
+      {
+        "path": "um\\vsprov.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vsprov.idl",
+        "sdkSha256": "FD21E10A77C76C59DCFFDC3B6BE2AF4A31DA3C686FB8EF206E8CECA6CCC6BECE"
+      },
+      {
+        "path": "um\\xamlom.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xamlom.idl",
+        "sdkSha256": "F5D34CD5D3743AC7F7637DB29773CFBC6681C18137D212A6BD16FF893825633B"
+      },
+      {
+        "path": "um\\xpsdigitalsignature.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xpsdigitalsignature.idl",
+        "sdkSha256": "B7515D9CC85B5A481707FE403AF090ED335DF8CCF6DBDC5C75FD7A772E42B2AC"
+      },
+      {
+        "path": "winrt\\webapplication.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\webapplication.idl",
+        "sdkSha256": "0349EEB88558EE012D8FFCD9C110BCB1EFED897464B8C49EBC54D437693F4CD0"
       }
     ],
     "outputs": [
@@ -5719,6 +5958,102 @@
       {
         "source": "um\\msclus.idl",
         "path": "um\\msclus.h"
+      },
+      {
+        "source": "um\\mstask.idl",
+        "path": "um\\mstask.h"
+      },
+      {
+        "source": "um\\xamlom.idl",
+        "path": "um\\xamlom.h"
+      },
+      {
+        "source": "um\\xpsdigitalsignature.idl",
+        "path": "um\\xpsdigitalsignature.h"
+      },
+      {
+        "source": "shared\\dxgi1_4.idl",
+        "path": "shared\\dxgi1_4.h"
+      },
+      {
+        "source": "shared\\dxgi1_6.idl",
+        "path": "shared\\dxgi1_6.h"
+      },
+      {
+        "source": "um\\emptyvc.idl",
+        "path": "um\\emptyvc.h"
+      },
+      {
+        "source": "um\\encdec.idl",
+        "path": "um\\encdec.h"
+      },
+      {
+        "source": "um\\functiondiscoveryapi.idl",
+        "path": "um\\functiondiscoveryapi.h"
+      },
+      {
+        "source": "um\\msaatext.idl",
+        "path": "um\\msaatext.h"
+      },
+      {
+        "source": "um\\upnphost.idl",
+        "path": "um\\upnphost.h"
+      },
+      {
+        "source": "winrt\\webapplication.idl",
+        "path": "winrt\\webapplication.h"
+      },
+      {
+        "source": "um\\bits4_0.idl",
+        "path": "um\\bits4_0.h"
+      },
+      {
+        "source": "um\\casetup.idl",
+        "path": "um\\casetup.h"
+      },
+      {
+        "source": "um\\comcat.idl",
+        "path": "um\\comcat.h"
+      },
+      {
+        "source": "um\\commoncontrols.idl",
+        "path": "um\\commoncontrols.h"
+      },
+      {
+        "source": "um\\d3d11sdklayers.idl",
+        "path": "um\\d3d11sdklayers.h"
+      },
+      {
+        "source": "um\\inputscope.idl",
+        "path": "um\\inputscope.h"
+      },
+      {
+        "source": "um\\mfcontentdecryptionmodule.idl",
+        "path": "um\\mfcontentdecryptionmodule.h"
+      },
+      {
+        "source": "um\\natupnp.idl",
+        "path": "um\\natupnp.h"
+      },
+      {
+        "source": "um\\qmgr.idl",
+        "path": "um\\qmgr.h"
+      },
+      {
+        "source": "um\\shldisp.idl",
+        "path": "um\\shldisp.h"
+      },
+      {
+        "source": "um\\spatialaudioclient.idl",
+        "path": "um\\spatialaudioclient.h"
+      },
+      {
+        "source": "um\\vsmgmt.idl",
+        "path": "um\\vsmgmt.h"
+      },
+      {
+        "source": "um\\vsprov.idl",
+        "path": "um\\vsprov.h"
       }
     ]
   },
@@ -5934,7 +6269,10 @@
     "MixedRealityInterop",
     "VSS",
     "Shell.Common",
-    "Security.Tpm"
+    "Security.Tpm",
+    "TaskSchd",
+    "Xaml_Diagnostics",
+    "Debug.WebApp"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -6461,6 +6799,30 @@
     "um\\msvidctl.idl.patch",
     "um\\playtomanagerinterop.idl.patch",
     "um\\portabledeviceconnectapi.idl.patch",
-    "um\\msclus.idl.patch"
+    "um\\msclus.idl.patch",
+    "um\\mstask.idl.patch",
+    "um\\xamlom.idl.patch",
+    "um\\xpsdigitalsignature.idl.patch",
+    "shared\\dxgi1_4.idl.patch",
+    "shared\\dxgi1_6.idl.patch",
+    "um\\emptyvc.idl.patch",
+    "um\\encdec.idl.patch",
+    "um\\functiondiscoveryapi.idl.patch",
+    "um\\msaatext.idl.patch",
+    "um\\upnphost.idl.patch",
+    "winrt\\webapplication.idl.patch",
+    "um\\bits4_0.idl.patch",
+    "um\\casetup.idl.patch",
+    "um\\comcat.idl.patch",
+    "um\\commoncontrols.idl.patch",
+    "um\\d3d11sdklayers.idl.patch",
+    "um\\inputscope.idl.patch",
+    "um\\mfcontentdecryptionmodule.idl.patch",
+    "um\\natupnp.idl.patch",
+    "um\\qmgr.idl.patch",
+    "um\\shldisp.idl.patch",
+    "um\\spatialaudioclient.idl.patch",
+    "um\\vsmgmt.idl.patch",
+    "um\\vsprov.idl.patch"
   ]
 }

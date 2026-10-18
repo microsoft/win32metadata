@@ -1,0 +1,52 @@
+diff --git a/um/mfcontentdecryptionmodule.idl b/um/mfcontentdecryptionmodule.idl
+index 59b47bd6..5ee636e6 100644
+--- a/um/mfcontentdecryptionmodule.idl
++++ b/um/mfcontentdecryptionmodule.idl
+@@ -5,6 +5,7 @@
+ //
+ //*@@@---@@@@******************************************************************
+ //
++#include <sal.h>
+ import "mfmediaengine.idl";
+ 
+ #pragma region Application Family
+@@ -16,6 +17,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ // IMFContentDecryptionModuleSession is designed based on EME MediaKeySession:
+ // https://www.w3.org/TR/2017/REC-encrypted-media-20170918/#dom-mediakeysession
++_Win32_AnnotateInterface_(IMFContentDecryptionModuleSession, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(4e233efd-1dd2-49e8-b577-d63eee4c0d33),
+@@ -86,6 +88,7 @@ interface IMFContentDecryptionModuleSession : IUnknown
+ 
+ // IMFContentDecryptionModuleSessionCallbacks is designed based on EME keystatuseschange event:
+ // https://www.w3.org/TR/2017/REC-encrypted-media-20170918/#dom-evt-keystatuseschange
++_Win32_AnnotateInterface_(IMFContentDecryptionModuleSessionCallbacks, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(3f96ee40-ad81-4096-8470-59a4b770f89a),
+@@ -105,6 +108,7 @@ interface IMFContentDecryptionModuleSessionCallbacks : IUnknown
+     HRESULT KeyStatusChanged();
+ }
+ 
++_Win32_AnnotateInterface_(IMFContentDecryptionModule, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(87be986c-10be-4943-bf48-4b54ce1983a2),
+@@ -166,6 +170,7 @@ interface IMFContentDecryptionModule : IUnknown
+ 
+ // IMFContentDecryptionModuleAccess is designed based on MediaKeySystemAccess:
+ // https://www.w3.org/TR/2017/REC-encrypted-media-20170918/#mediakeysystemaccess-interface
++_Win32_AnnotateInterface_(IMFContentDecryptionModuleAccess, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(a853d1f4-e2a0-4303-9edc-f1a68ee43136),
+@@ -214,6 +219,7 @@ cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_CONTENTDECRYPTIONMOD
+ // Users calling the CreateContentDecryptionModule should not create this property.
+ cpp_quote("EXTERN_C const DECLSPEC_SELECTANY PROPERTYKEY MF_CONTENTDECRYPTIONMODULE_PMPSTORECONTEXT =    { { 0x6d2a2835, 0xc3a9, 0x4681, { 0x97, 0xf2, 0x0a, 0xf5, 0x6b, 0xe9, 0x34, 0x46 } }, 0x03 }; ")
+ 
++_Win32_AnnotateInterface_(IMFContentDecryptionModuleFactory, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(7d5abf16-4cbb-4e08-b977-9ba59049943e),

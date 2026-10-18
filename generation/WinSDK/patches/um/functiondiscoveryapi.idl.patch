@@ -1,0 +1,60 @@
+diff --git a/um/functiondiscoveryapi.idl b/um/functiondiscoveryapi.idl
+index 5d2aa6ce..2633e25e 100644
+--- a/um/functiondiscoveryapi.idl
++++ b/um/functiondiscoveryapi.idl
+@@ -2,6 +2,7 @@
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -57,6 +58,7 @@ typedef enum tagQueryCategoryType
+ 
+ 
+ // This interface should be implemented by clients performing async queries...
++_Win32_AnnotateInterface_(IFunctionDiscoveryNotification, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5f6c1ba8-5330-422e-a368-572b244d3f87),
+@@ -80,6 +82,7 @@ interface IFunctionDiscoveryNotification : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFunctionDiscovery, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(4df99b70-e148-4432-b004-4c9eeb535a5e),
+@@ -130,6 +133,7 @@ interface IFunctionDiscovery : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFunctionInstance, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(33591c10-0bed-4f02-b0ab-1530d5533ee9),
+@@ -157,6 +161,7 @@ interface IFunctionInstance : IServiceProvider
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IFunctionInstanceCollection, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(f0a3d895-855c-42a2-948d-2f97d450ecb1),
+@@ -216,6 +221,7 @@ interface IPropertyStoreCollection : IUnknown
+ /////////////////////////////////
+ // Query interfaces
+ /////////////////////////////////
++_Win32_AnnotateInterface_(IFunctionInstanceQuery, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6242bc6b-90ec-4b37-bb46-e229fd84ed95),
+@@ -229,6 +235,7 @@ interface IFunctionInstanceQuery : IUnknown
+         [out, retval] IFunctionInstance ** ppIFunctionInstance );
+ };
+ 
++_Win32_AnnotateInterface_(IFunctionInstanceCollectionQuery, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(57cc6fd2-c09a-4289-bb72-25f04142058e),
