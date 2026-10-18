@@ -1,0 +1,20 @@
+diff --git a/winrt/asyncinfo.idl b/winrt/asyncinfo.idl
+index 2dec9a58..8282c2c8 100644
+--- a/winrt/asyncinfo.idl
++++ b/winrt/asyncinfo.idl
+@@ -1,6 +1,7 @@
+ //  Microsoft Windows
+ //  Copyright (c) Microsoft Corporation. All rights reserved.
+ 
++#include <sal.h>
+ cpp_quote("//  Microsoft Windows")
+ cpp_quote("//  Copyright (c) Microsoft Corporation. All rights reserved.")
+ cpp_quote("#pragma once")
+@@ -52,6 +53,7 @@ cpp_quote("#endif // __cplusplus")
+ 
+ // IAsyncInfo
+ // C++, C & IDL definition, global namespace
++_Win32_AnnotateInterface_(IAsyncInfo, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(00000036-0000-0000-C000-000000000046),

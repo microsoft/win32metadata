@@ -1,0 +1,17 @@
+diff --git a/um/tspubplugincom.idl b/um/tspubplugincom.idl
+index 04dabb01..168d13ce 100644
+--- a/um/tspubplugincom.idl
++++ b/um/tspubplugincom.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -18,6 +19,7 @@ import "ocidl.idl";
+ #define RESOURCE_TYPE_APPLICATION                                      1
+ #define RESOURCE_TYPE_DESKTOP                                          2
+ 
++_Win32_AnnotateInterface_(ItsPubPlugin, _Win32_SupportedOS_Server2008_)
+ [
+ 	object,
+ 	uuid(70C04B05-F347-412B-822F-36C99C54CA45),

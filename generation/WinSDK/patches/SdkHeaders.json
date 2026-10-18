@@ -3063,6 +3063,78 @@
       "sourceSha256": "CD19A54DB7FC32ECD4B157FA69A117687F8A3FBE67C24B7EECDDB36DD282F5DB",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\functiondiscoveryprovider.idl",
       "sdkSha256": "4463DA0474C0FA0D456D735B09F7997EC695620894EF82BD548A27210E30C5C1"
+    },
+    {
+      "path": "um\\printmanagerinterop.h",
+      "sourceSha256": "12204080DF492F3782BB7C6F54E3782BF3A0CF6E3BC9F5CF9295B1D00A1139F7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\printmanagerinterop.idl",
+      "sdkSha256": "82CDA8132780D0601B51581EACBCCF9104DEEAB4C6ADCE29E9A18BFB16490ACC"
+    },
+    {
+      "path": "um\\regbag.h",
+      "sourceSha256": "74B1F53A253058B327F38009C5430F7E70FEF2039AC841672DA7FD4310BDBD6D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\regbag.idl",
+      "sdkSha256": "C220EAC5666EA10A510492DDB93DDA137ECDA9380B5C412D61FE459646039562"
+    },
+    {
+      "path": "um\\spatialinteractionmanagerinterop.h",
+      "sourceSha256": "CEACFE3060B55271AF518D75098BA1251C3777BF9044416301B911167F853867",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialinteractionmanagerinterop.idl",
+      "sdkSha256": "D957169602ADD2D5F68FC47ED9B63CE6DBEC8FC41A37A1EAF2E56218BD8C3BC3"
+    },
+    {
+      "path": "um\\thumbnailstreamcache.h",
+      "sourceSha256": "7BAC28071AEF6FBC24E9AE48B631CE21016477D471BD888F76B6FF2DD47E0EAD",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\thumbnailstreamcache.idl",
+      "sdkSha256": "78ACEAB63094F1B07F081A5E34A4AEEB4EA925F30099C8CDEF3417B008794EBD"
+    },
+    {
+      "path": "um\\tspubplugin2com.h",
+      "sourceSha256": "81928713D7B98F132E1E71A7F0463D1A689F4C6AFDE5128EFD76B1395AC12A78",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tspubplugin2com.idl",
+      "sdkSha256": "C90C01EEEEB3A271395C0CBF75D201C264FCDCFC6D7AE101DF27B04FACCF1E14"
+    },
+    {
+      "path": "um\\tspubplugincom.h",
+      "sourceSha256": "E9EE7B6ACD83D49113129B6EC1EEA8ACFCF4CD1F698D97160482222ED5F05825",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tspubplugincom.idl",
+      "sdkSha256": "966F8047842E0CC468215BBEA60F6FF1856AB4952B52405CFFE405CE394FEDAE"
+    },
+    {
+      "path": "um\\tssbx.h",
+      "sourceSha256": "01E42C7FC74808E6049189974BCD9AA992B777DD8F439974CD35B19DD0547DBA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\tssbx.idl",
+      "sdkSha256": "F59E3A25FCAF7D2767EE134D35999D778A650A1D2D6D6A626FF2C870CDA37F47"
+    },
+    {
+      "path": "um\\vsadmin.h",
+      "sourceSha256": "EE9CD94020078D12C66ED11EB61F08EDAA17F072652F547A79E9EF396C5196E6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vsadmin.idl",
+      "sdkSha256": "2C8C5EEDB363C452FF05EC2B2D48AC86924A464B9646836B589E43901C8C7842"
+    },
+    {
+      "path": "um\\workspaceruntimeclientext.h",
+      "sourceSha256": "1FA5530C75E68B0FC77411E086B56030A29277EC4AFE72C6DB88F62CE9308EB3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\workspaceruntimeclientext.idl",
+      "sdkSha256": "32EAD8C24ED7752A3A6A7F9D2B4719AABA847406FE0037DB72B50CFB81E61C7D"
+    },
+    {
+      "path": "winrt\\activation.h",
+      "sourceSha256": "9296D6DB4AE0A9CA875C941EACD2DA2C89FB894F15AC712A81F23C1763931C65",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\activation.idl",
+      "sdkSha256": "10B820A9EA1A1432037A016A8165F9EA695457E35337FACF9BEFB46CA4F8D903"
+    },
+    {
+      "path": "winrt\\asyncinfo.h",
+      "sourceSha256": "2AB28D3D4F16BC5EA061BD93F7B031E980233E5BCA14D576F2693C002B54EF10",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\asyncinfo.idl",
+      "sdkSha256": "479DC67E42370602B494E0024606B218B20BF5FAFB47CC6AEF6120A071FC2D18"
+    },
+    {
+      "path": "winrt\\inspectable.h",
+      "sourceSha256": "FF6C9D58BEA8E577177A47D46BB164B593F54EE051353059FEDED7F783EDEFA9",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\inspectable.idl",
+      "sdkSha256": "D7C278B83B622613E8FBFDE119B7B9F0FAD1515E1001E55C3F82DFE1FFAB8874"
     }
   ],
   "midl": {
@@ -4375,6 +4447,56 @@
         "path": "um\\wsmandisp.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\wsmandisp.idl",
         "sdkSha256": "E156CEAA3F978EC63F2FE0299D029E7F94BBA6FCE81DFCFC236BA78D952DF51F"
+      },
+      {
+        "path": "um\\printmanagerinterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\printmanagerinterop.idl",
+        "sdkSha256": "82CDA8132780D0601B51581EACBCCF9104DEEAB4C6ADCE29E9A18BFB16490ACC"
+      },
+      {
+        "path": "um\\spatialinteractionmanagerinterop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\spatialinteractionmanagerinterop.idl",
+        "sdkSha256": "D957169602ADD2D5F68FC47ED9B63CE6DBEC8FC41A37A1EAF2E56218BD8C3BC3"
+      },
+      {
+        "path": "um\\thumbnailstreamcache.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\thumbnailstreamcache.idl",
+        "sdkSha256": "78ACEAB63094F1B07F081A5E34A4AEEB4EA925F30099C8CDEF3417B008794EBD"
+      },
+      {
+        "path": "um\\tspubplugin2com.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tspubplugin2com.idl",
+        "sdkSha256": "C90C01EEEEB3A271395C0CBF75D201C264FCDCFC6D7AE101DF27B04FACCF1E14"
+      },
+      {
+        "path": "um\\tspubplugincom.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tspubplugincom.idl",
+        "sdkSha256": "966F8047842E0CC468215BBEA60F6FF1856AB4952B52405CFFE405CE394FEDAE"
+      },
+      {
+        "path": "um\\tssbx.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\tssbx.idl",
+        "sdkSha256": "F59E3A25FCAF7D2767EE134D35999D778A650A1D2D6D6A626FF2C870CDA37F47"
+      },
+      {
+        "path": "um\\vsadmin.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vsadmin.idl",
+        "sdkSha256": "2C8C5EEDB363C452FF05EC2B2D48AC86924A464B9646836B589E43901C8C7842"
+      },
+      {
+        "path": "um\\vss.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\vss.idl",
+        "sdkSha256": "6251B17E386C0BA418E3F526C39163DC3A415D57FE649C3B5987CB0BB6FDBDCF"
+      },
+      {
+        "path": "winrt\\activation.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\activation.idl",
+        "sdkSha256": "10B820A9EA1A1432037A016A8165F9EA695457E35337FACF9BEFB46CA4F8D903"
+      },
+      {
+        "path": "winrt\\asyncinfo.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\winrt\\asyncinfo.idl",
+        "sdkSha256": "479DC67E42370602B494E0024606B218B20BF5FAFB47CC6AEF6120A071FC2D18"
       }
     ],
     "outputs": [
@@ -4969,6 +5091,54 @@
       {
         "source": "um\\functiondiscoveryprovider.idl",
         "path": "um\\functiondiscoveryprovider.h"
+      },
+      {
+        "source": "um\\printmanagerinterop.idl",
+        "path": "um\\printmanagerinterop.h"
+      },
+      {
+        "source": "um\\regbag.idl",
+        "path": "um\\regbag.h"
+      },
+      {
+        "source": "um\\spatialinteractionmanagerinterop.idl",
+        "path": "um\\spatialinteractionmanagerinterop.h"
+      },
+      {
+        "source": "um\\thumbnailstreamcache.idl",
+        "path": "um\\thumbnailstreamcache.h"
+      },
+      {
+        "source": "um\\tspubplugin2com.idl",
+        "path": "um\\tspubplugin2com.h"
+      },
+      {
+        "source": "um\\tspubplugincom.idl",
+        "path": "um\\tspubplugincom.h"
+      },
+      {
+        "source": "um\\tssbx.idl",
+        "path": "um\\tssbx.h"
+      },
+      {
+        "source": "um\\vsadmin.idl",
+        "path": "um\\vsadmin.h"
+      },
+      {
+        "source": "um\\workspaceruntimeclientext.idl",
+        "path": "um\\workspaceruntimeclientext.h"
+      },
+      {
+        "source": "winrt\\activation.idl",
+        "path": "winrt\\activation.h"
+      },
+      {
+        "source": "winrt\\asyncinfo.idl",
+        "path": "winrt\\asyncinfo.h"
+      },
+      {
+        "source": "winrt\\inspectable.idl",
+        "path": "winrt\\inspectable.h"
       }
     ]
   },
@@ -5179,7 +5349,10 @@
     "DirectWrite",
     "WindowsRibbon",
     "WpdSdk",
-    "FunctionDiscovery"
+    "FunctionDiscovery",
+    "WinRT.Printing",
+    "MixedRealityInterop",
+    "VSS"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -5657,6 +5830,18 @@
     "um\\workspaceruntime.idl.patch",
     "um\\camerauicontrol.idl.patch",
     "um\\fsrmreports.idl.patch",
-    "um\\functiondiscoveryprovider.idl.patch"
+    "um\\functiondiscoveryprovider.idl.patch",
+    "um\\printmanagerinterop.idl.patch",
+    "um\\regbag.idl.patch",
+    "um\\spatialinteractionmanagerinterop.idl.patch",
+    "um\\thumbnailstreamcache.idl.patch",
+    "um\\tspubplugin2com.idl.patch",
+    "um\\tspubplugincom.idl.patch",
+    "um\\tssbx.idl.patch",
+    "um\\vsadmin.idl.patch",
+    "um\\workspaceruntimeclientext.idl.patch",
+    "winrt\\activation.idl.patch",
+    "winrt\\asyncinfo.idl.patch",
+    "winrt\\inspectable.idl.patch"
   ]
 }

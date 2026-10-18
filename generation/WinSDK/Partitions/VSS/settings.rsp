@@ -17,3 +17,6 @@ ShouldBlockRevert
 <IncludeRoot>/um/vsserror.h
 --namespace
 Windows.Win32.Storage.Vss
+
+--config
+parse-win32-annotations

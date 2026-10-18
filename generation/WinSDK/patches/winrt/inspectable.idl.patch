@@ -1,0 +1,20 @@
+diff --git a/winrt/inspectable.idl b/winrt/inspectable.idl
+index e239f6ee..a59ef23d 100644
+--- a/winrt/inspectable.idl
++++ b/winrt/inspectable.idl
+@@ -5,6 +5,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -31,6 +32,7 @@ typedef [v1_enum] enum TrustLevel
+     FullTrust
+ } TrustLevel;
+ 
++_Win32_AnnotateInterface_(IInspectable, _Win32_SupportedOS_Windows8_)
+ [
+   object,
+   uuid(AF86E2E0-B12D-4c6a-9C5A-D7AA65101E90),
