@@ -1,0 +1,24 @@
+diff --git a/um/mshtmhst.idl b/um/mshtmhst.idl
+index 38eaa7f5..903c7375 100644
+--- a/um/mshtmhst.idl
++++ b/um/mshtmhst.idl
+@@ -281,8 +281,8 @@ interface IDocHostUIHandler : IUnknown
+     typedef struct _DOCHOSTUIINFO
+     {
+         ULONG       cbSize;
+-        DWORD       dwFlags;
+-        DWORD       dwDoubleClick;
++        [annotation("_Win32_AssociatedEnum_(DOCHOSTUIFLAG)")] DWORD       dwFlags;
++        [annotation("_Win32_AssociatedEnum_(DOCHOSTUIDBLCLK)")] DWORD       dwDoubleClick;
+         OLECHAR *   pchHostCss;
+         OLECHAR *   pchHostNS;
+     } DOCHOSTUIINFO;
+@@ -398,7 +398,7 @@ cpp_quote("#define IID_IClassFactory3  IID_IClassFactoryEx")
+ interface IClassFactoryEx : IClassFactory
+ {
+         HRESULT CreateInstanceWithContext(IUnknown *punkContext,
+-                        IUnknown *punkOuter, REFIID riid, [out] void **ppv);
++                        IUnknown *punkOuter, REFIID riid, [out, annotation("_COM_Outptr_")] void **ppv);
+ };
+ 
+ //-------------------------------------------------------------------------

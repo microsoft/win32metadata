@@ -3765,6 +3765,72 @@
       "sourceSha256": "F73392E4535CBD70EF811B91D9DE580A35E57930640A8A8B584507841006E20A",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winperf.h",
       "sdkSha256": "F73392E4535CBD70EF811B91D9DE580A35E57930640A8A8B584507841006E20A"
+    },
+    {
+      "path": "shared\\fwptypes.h",
+      "sourceSha256": "C971CDF8A56B58265F510575819E6C47946F1B20F2FD3F23F3617C2B988A2FA1",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\fwptypes.idl",
+      "sdkSha256": "46790A9804F690E09CD06BFF11A55BC11E49DFE3B847073A5EB03530A7102898"
+    },
+    {
+      "path": "shared\\wtypes.h",
+      "sourceSha256": "F0F2E4AE8C2CEE4BE0BB4A0AB75C854F135929ADC6B2A70599E0BBF4C2286B02",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\wtypes.idl",
+      "sdkSha256": "F850757CCEF6092F20A97E955DD64AE2A595E0BF71C09A826A0BDE7C21B36E81"
+    },
+    {
+      "path": "um\\hlink.h",
+      "sourceSha256": "E2D0131B7F74D47BB138C849BB743E63178D99DC4E2FD607E543C7EC75F09090",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\hlink.idl",
+      "sdkSha256": "FE5E5415A518838B67AECB24CAEEF7B6B49274591B6225A570591EBE8AD64AAC"
+    },
+    {
+      "path": "um\\xmllite.h",
+      "sourceSha256": "B0C6CF3E9886B1C0FD33A67DBB9FCBD5A1C1D27E30D7CA226EBC40F6909836DE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\xmllite.idl",
+      "sdkSha256": "F2A4DFDA73C7FF458433B48625440D01CD6E684947672D37D04AD82E14499F62"
+    },
+    {
+      "path": "um\\activprof.h",
+      "sourceSha256": "043C3F6BA725DCBE50A9AFA743BDD70F52A5CD5A02D552E3DF9E6810D67A4CDE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\activprof.idl",
+      "sdkSha256": "7CBF144EFD0654074DEEBBA38FA9060771A9E6FF9040856B775ADBC4FACA11FD"
+    },
+    {
+      "path": "um\\mshtmhst.h",
+      "sourceSha256": "82487B9060AF24B066D4C14CB84FDCEB1CF1FB5D3FDB34E0CF22B8913F3BA78A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mshtmhst.idl",
+      "sdkSha256": "F906FF61A7B1BC4177C1F8B34C9E66CE4E6634EEB458C7E67E5E3D7FEB6BE48A"
+    },
+    {
+      "path": "um\\audioenginebaseapo.h",
+      "sourceSha256": "4C4FA7A68B3E7042B2BE85D5BAA8DC4C592F3B09EBCE7296B824F4E8B6EEBC7C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\audioenginebaseapo.idl",
+      "sdkSha256": "7A6AF63707456D6FA3948973E23DD2369E14A519321EA105E979204E36EB7160"
+    },
+    {
+      "path": "um\\dbgprop.h",
+      "sourceSha256": "BD1558AE1425979F220DA72DF44C73A085D7AC1917B9159DFD8C86C57017B1DE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dbgprop.idl",
+      "sdkSha256": "5C573323D0567D754018E35414E423A623218579983E88D08419D952FE666B1D"
+    },
+    {
+      "path": "um\\presentation.h",
+      "sourceSha256": "FFF18CA1D4939B7CD243D9BD8F581B854DAB696A7BD46E5E7AFF69FC1CF5E7EF",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\presentation.idl",
+      "sdkSha256": "AFC7F3D24BBFCF1C9D46BC920E71A2F14FE5EB178818E32BF934F587F172E65C"
+    },
+    {
+      "path": "um\\dispex.h",
+      "sourceSha256": "53E8E168A4E4AC8E4F2EC08C2665B9C5C4BCBE7660A96483A2C76F5AF2AA685F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dispex.idl",
+      "sdkSha256": "BDE5016BA1C04F32E21B8A33D4282D493AD375B2D0EBF516FB88F4B5A189E1E6"
+    },
+    {
+      "path": "um\\netcfgn.h",
+      "sourceSha256": "D13140FA26FFE55C788D81A17B7CCFA21B0410456C0D84CAB4818FE58C61625E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\netcfgn.idl",
+      "sdkSha256": "34DC1B54CDDBB9EE72454DB49DAA0C0C1E2303DB64E86B7A7ECF7AACFB8C9151"
     }
   ],
   "midl": {
@@ -5442,6 +5508,66 @@
         "path": "um\\comadmin.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\comadmin.idl",
         "sdkSha256": "8DA1E2C3E8964EB882BA8562B86AE9868CE8A6F3992979046F00A39789C9FD3B"
+      },
+      {
+        "path": "shared\\fwptypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\fwptypes.idl",
+        "sdkSha256": "46790A9804F690E09CD06BFF11A55BC11E49DFE3B847073A5EB03530A7102898"
+      },
+      {
+        "path": "um\\activprof.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\activprof.idl",
+        "sdkSha256": "7CBF144EFD0654074DEEBBA38FA9060771A9E6FF9040856B775ADBC4FACA11FD"
+      },
+      {
+        "path": "um\\audioenginebaseapo.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audioenginebaseapo.idl",
+        "sdkSha256": "7A6AF63707456D6FA3948973E23DD2369E14A519321EA105E979204E36EB7160"
+      },
+      {
+        "path": "um\\audiomediatype.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\audiomediatype.idl",
+        "sdkSha256": "154316E0630E6EB8C8A63C65443DBE4B272EC0E08DBEE44619D16AC6CA7988DB"
+      },
+      {
+        "path": "um\\dbgprop.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\dbgprop.idl",
+        "sdkSha256": "5C573323D0567D754018E35414E423A623218579983E88D08419D952FE666B1D"
+      },
+      {
+        "path": "um\\hlink.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\hlink.idl",
+        "sdkSha256": "FE5E5415A518838B67AECB24CAEEF7B6B49274591B6225A570591EBE8AD64AAC"
+      },
+      {
+        "path": "um\\mshtmhst.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\mshtmhst.idl",
+        "sdkSha256": "F906FF61A7B1BC4177C1F8B34C9E66CE4E6634EEB458C7E67E5E3D7FEB6BE48A"
+      },
+      {
+        "path": "um\\netcfgn.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\netcfgn.idl",
+        "sdkSha256": "34DC1B54CDDBB9EE72454DB49DAA0C0C1E2303DB64E86B7A7ECF7AACFB8C9151"
+      },
+      {
+        "path": "um\\netcfgx.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\netcfgx.idl",
+        "sdkSha256": "312E946B06B9ADBCF8AC808000A51779D7DD19C3ED7DFB4CB739851B2483EA63"
+      },
+      {
+        "path": "um\\presentation.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\presentation.idl",
+        "sdkSha256": "AFC7F3D24BBFCF1C9D46BC920E71A2F14FE5EB178818E32BF934F587F172E65C"
+      },
+      {
+        "path": "um\\PresentationTypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\PresentationTypes.idl",
+        "sdkSha256": "A28F037998DD3FA15C977FBF54C86D79E3FBF2E49664FECF2F05CC9A22AAB013"
+      },
+      {
+        "path": "um\\xmllite.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\xmllite.idl",
+        "sdkSha256": "F2A4DFDA73C7FF458433B48625440D01CD6E684947672D37D04AD82E14499F62"
       }
     ],
     "outputs": [
@@ -6336,6 +6462,50 @@
       {
         "source": "um\\comadmin.idl",
         "path": "um\\comadmin.h"
+      },
+      {
+        "source": "shared\\fwptypes.idl",
+        "path": "shared\\fwptypes.h"
+      },
+      {
+        "source": "shared\\wtypes.idl",
+        "path": "shared\\wtypes.h"
+      },
+      {
+        "source": "um\\hlink.idl",
+        "path": "um\\hlink.h"
+      },
+      {
+        "source": "um\\xmllite.idl",
+        "path": "um\\xmllite.h"
+      },
+      {
+        "source": "um\\activprof.idl",
+        "path": "um\\activprof.h"
+      },
+      {
+        "source": "um\\mshtmhst.idl",
+        "path": "um\\mshtmhst.h"
+      },
+      {
+        "source": "um\\audioenginebaseapo.idl",
+        "path": "um\\audioenginebaseapo.h"
+      },
+      {
+        "source": "um\\dbgprop.idl",
+        "path": "um\\dbgprop.h"
+      },
+      {
+        "source": "um\\presentation.idl",
+        "path": "um\\presentation.h"
+      },
+      {
+        "source": "um\\dispex.idl",
+        "path": "um\\dispex.h"
+      },
+      {
+        "source": "um\\netcfgn.idl",
+        "path": "um\\netcfgn.h"
       }
     ]
   },
@@ -6558,7 +6728,12 @@
     "Wab",
     "Xaudio2",
     "Ioctl",
-    "MessageQueuing"
+    "MessageQueuing",
+    "XmlLite",
+    "Debug.ActiveScript",
+    "MsHtml",
+    "Audio.Apo",
+    "CompositionSwapchain"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -7153,6 +7328,17 @@
     "um\\verrsrc.h.patch",
     "um\\vssym32.h.patch",
     "um\\winioctl.h.patch",
-    "um\\winperf.h.patch"
+    "um\\winperf.h.patch",
+    "shared\\fwptypes.idl.patch",
+    "shared\\wtypes.idl.patch",
+    "um\\hlink.idl.patch",
+    "um\\xmllite.idl.patch",
+    "um\\activprof.idl.patch",
+    "um\\mshtmhst.idl.patch",
+    "um\\audioenginebaseapo.idl.patch",
+    "um\\dbgprop.idl.patch",
+    "um\\presentation.idl.patch",
+    "um\\dispex.idl.patch",
+    "um\\netcfgn.idl.patch"
   ]
 }

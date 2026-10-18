@@ -1,0 +1,54 @@
+diff --git a/shared/wtypes.idl b/shared/wtypes.idl
+index 075e85e4..7dc8213b 100644
+--- a/shared/wtypes.idl
++++ b/shared/wtypes.idl
+@@ -314,6 +314,9 @@ cpp_quote("#define _ROTFLAGS_DEFINED")
+ cpp_quote("#define ROTFLAGS_REGISTRATIONKEEPSALIVE 0x1")
+ cpp_quote("#define ROTFLAGS_ALLOWANYCLIENT 0x2")
+ cpp_quote("#endif // !_ROTFLAGS_DEFINED")
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("_Win32_FlagsEnum_(ROT_FLAGS, DWORD, ROTFLAGS_REGISTRATIONKEEPSALIVE, ROTFLAGS_ALLOWANYCLIENT);")
++cpp_quote("#endif")
+ // Maximum size of comparison buffer for IROTData::GetComparisonData
+ cpp_quote("#ifndef _ROT_COMPARE_MAX_DEFINED")
+ cpp_quote("#define _ROT_COMPARE_MAX_DEFINED")
+@@ -339,6 +342,9 @@ typedef enum tagDVASPECT
+ 
+ 
+ /* Storage commit types */
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum tagSTGC
+ {
+     STGC_DEFAULT        = 0,
+@@ -347,6 +353,9 @@ typedef enum tagSTGC
+     STGC_DANGEROUSLYCOMMITMERELYTODISKCACHE = 4,
+     STGC_CONSOLIDATE    = 8
+ } STGC;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ typedef enum tagSTGMOVE
+@@ -824,6 +833,9 @@ cpp_quote(" *  VT_BYREF            [V]           void* for local use")
+ cpp_quote(" *  VT_BSTR_BLOB                      Reserved for system use")
+ cpp_quote(" */")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum VARENUM
+ {
+     VT_EMPTY           = 0,
+@@ -885,6 +897,9 @@ enum VARENUM
+     VT_ILLEGALMASKED   = 0x0fff,
+     VT_TYPEMASK        = 0x0fff
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ // Property stuff

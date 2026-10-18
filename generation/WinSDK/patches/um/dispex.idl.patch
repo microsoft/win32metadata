@@ -1,0 +1,14 @@
+diff --git a/um/dispex.idl b/um/dispex.idl
+index 2a62cc5b..f637f574 100644
+--- a/um/dispex.idl
++++ b/um/dispex.idl
+@@ -107,6 +107,9 @@ cpp_quote("#define fdexPropCanConstruct        0x00000400L")
+ cpp_quote("#define fdexPropCannotConstruct     0x00000800L")
+ cpp_quote("#define fdexPropCanSourceEvents     0x00001000L")
+ cpp_quote("#define fdexPropCannotSourceEvents  0x00002000L")
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("_Win32_FlagsEnum_(FDEX_PROP_FLAGS, DWORD, fdexPropCanGet, fdexPropCannotGet, fdexPropCanPut, fdexPropCannotPut, fdexPropCanPutRef, fdexPropCannotPutRef, fdexPropNoSideEffects, fdexPropDynamicType, fdexPropCanCall, fdexPropCannotCall, fdexPropCanConstruct, fdexPropCannotConstruct, fdexPropCanSourceEvents, fdexPropCannotSourceEvents);")
++cpp_quote("#endif")
+ cpp_quote("")
+ cpp_quote("#define grfdexPropCanAll \\")
+ cpp_quote("       (fdexPropCanGet | fdexPropCanPut | fdexPropCanPutRef | \\")

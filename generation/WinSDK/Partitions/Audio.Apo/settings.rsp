@@ -13,3 +13,5 @@ AUDIO_CURVE_TYPE
 <IncludeRoot>/um/audiomediatype.h
 --namespace
 Windows.Win32.Media.Audio.Apo
+--config
+parse-win32-annotations

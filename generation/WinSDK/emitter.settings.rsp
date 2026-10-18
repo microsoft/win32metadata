@@ -44,7 +44,6 @@ D3D11_BIND_FLAG
 D3D11_CLEAR_FLAG
 D3D11_CPU_ACCESS_FLAG
 D3D11_RESOURCE_MISC_FLAG
-DBGPROP_ATTRIB_FLAGS
 DBGPROP_INFO
 DDSFF_FLAGS
 DELETE_SNAPSHOT_VHDSET_FLAG
@@ -59,8 +58,6 @@ FORK_VIRTUAL_DISK_FLAG
 GET_STORAGE_DEPENDENCY_FLAG
 GETPROPERTYSTOREFLAGS
 HLBWIF_FLAGS
-HLFNAMEF
-HLNF
 IdentityUpdateEvent
 JOB_OBJECT_NET_RATE_CONTROL_FLAGS
 KSPROPERTY_IPSINK
@@ -82,9 +79,6 @@ PKA_FLAGS
 PLACEHOLDER_STATES
 PRINTFLAG
 PROFILER_EVENT_MASK
-PROFILER_HEAP_ENUM_FLAGS
-PROFILER_HEAP_OBJECT_FLAGS
-PROFILER_HEAP_OBJECT_RELATIONSHIP_FLAGS
 PROPDESC_FORMAT_FLAGS
 PROPDESC_SEARCHINFO_FLAGS
 PROPDESC_VIEW_FLAGS
@@ -98,12 +92,10 @@ QUERY_CHANGES_VIRTUAL_DISK_FLAG
 RAW_SCSI_VIRTUAL_DISK_FLAG
 REG_PINFLAG
 RESIZE_VIRTUAL_DISK_FLAG
-STGC
 SYNC_ENGINE_STATE_FLAGS
 SYNC_TRANSFER_STATUS
 TAKE_SNAPSHOT_VHDSET_FLAG
 TASKDIALOG_FLAGS
-VARENUM
 VIRTUAL_DISK_ACCESS_MASK
 WBEM_GENERIC_FLAG_TYPE
 --reducePointerLevel
@@ -245,7 +237,6 @@ SetStdHandle::nStdHandle=STD_HANDLE
 SetStdHandleEx::nStdHandle=STD_HANDLE
 CreateLogFile::fFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
 OpenFileById::dwFlagsAndAttributes=FILE_FLAGS_AND_ATTRIBUTES
-IEnumDebugPropertyInfo::Next::pi=[NativeArrayInfo(CountParamIndex = 0)]
 GetProcessHeaps::ProcessHeaps=[DoNotRelease]
 GetProcessHeap::return=[DoNotRelease]
 CryptCreateAsyncHandle::phAsync=HCRYPTASYNC*
@@ -482,12 +473,6 @@ IUnknown_GetSite::ppv=[ComOutPtr]
 IUnknown_QueryService::ppvOut=[ComOutPtr]
 SHGetViewStatePropertyBag::ppv=[ComOutPtr]
 QISearch::ppv=[ComOutPtr]
-HlinkCreateFromMoniker::ppvObj=[ComOutPtr]
-HlinkCreateFromString::ppvObj=[ComOutPtr]
-HlinkCreateFromData::ppvObj=[ComOutPtr]
-HlinkClone::ppvObj=[ComOutPtr]
-HlinkCreateBrowseContext::ppvObj=[ComOutPtr]
-HlinkCreateExtensionServices::ppvObj=[ComOutPtr]
 PDNS_SERVICE_BROWSE_CALLBACK::pDnsRecord=DNS_RECORDW*
 IMMDevice::Activate::dwClsCtx=CLSCTX
 IMMDevice::Activate::ppInterface=[ComOutPtr]
@@ -683,11 +668,6 @@ IBackgroundCopyFile::GetLocalName::ppName=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile::GetRemoteName::ppName=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile2::GetFileRanges::Ranges=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile3::GetTemporaryName::pFilename=[FreeWith("CoTaskMemFree")]
-IXmlReader::MoveToAttributeByName=[CanReturnMultipleSuccessValues]
-IXmlReader::MoveToNextAttribute=[CanReturnMultipleSuccessValues]
-IXmlReader::MoveToFirstAttribute=[CanReturnMultipleSuccessValues]
-IXmlReader::Read=[CanReturnMultipleSuccessValues]
-IXmlReader::ReadValueChunk=[CanReturnMultipleSuccessValues]
 IMILBitmapEffectPrimitiveImpl::IsDirty=[CanReturnMultipleSuccessValues]
 IMoniker::IsDirty=[CanReturnMultipleSuccessValues]
 IOfflineFilesChangeInfo::IsDirty=[CanReturnMultipleSuccessValues]
@@ -705,7 +685,6 @@ IWMDRMMessageParser::ParseLicenseRequestMsg::pbLicenseRequestMsg=[NativeArrayInf
 IAudioClient::GetService::ppv=[ComOutPtr]
 IDataObject::GetCanonicalFormatEtc=[CanReturnMultipleSuccessValues]
 IEnumExplorerCommand::Next=[CanReturnMultipleSuccessValues]
-INetCfgComponentUpperEdge::AddInterfacesToAdapter::pAdapter=[-NativeArrayInfo]
 LoadStringA::lpBuffer=[-NativeArrayInfo]
 LoadStringW::lpBuffer=[-NativeArrayInfo]
 DebugCreate::Interface=[ComOutPtr]
@@ -726,7 +705,6 @@ StiCreateInstanceW::ppSti=[ComOutPtr]
 IMFImageSharingEngineClassFactory::CreateInstanceFromUDN::ppEngine=[ComOutPtr]
 IMFReadWriteClassFactory::CreateInstanceFromURL::ppvObject=[ComOutPtr]
 IMFReadWriteClassFactory::CreateInstanceFromObject::ppvObject=[ComOutPtr]
-IClassFactoryEx::CreateInstanceWithContext::ppv=[ComOutPtr]
 ImageList_CoCreateInstance::ppv=[ComOutPtr]
 D2D1CreateFactory::ppIFactory=[ComOutPtr]
 IDXGISwapChain::Present=[CanReturnMultipleSuccessValues]
@@ -1002,8 +980,6 @@ DCompositionCreateDevice2::dcompositionDevice=[ComOutPtr]
 DCompositionCreateDevice3::dcompositionDevice=[ComOutPtr]
 DCompositionGetStatistics::targetIds=[NativeArrayInfo(CountFieldName = "targetIdCount")]
 DCompositionGetTargetStatistics::targetStats=[RetVal]
-CreatePresentationFactory::presentationFactory=[ComOutPtr]
-IPresentationManager::GetPresentRetiringFence::fence=[ComOutPtr]
 IDCompositionTexture::GetAvailableFence::availableFence=[ComOutPtr]
 IDCompositionDevice::GetFrameStatistics::statistics=[RetVal]
 IDCompositionDevice2::GetFrameStatistics::statistics=[RetVal]
@@ -1060,8 +1036,6 @@ GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
 GetPhysicalMonitorsFromHMONITOR::return=BOOL
 DestroyPhysicalMonitor::return=BOOL
 DestroyPhysicalMonitors::return=BOOL
-IAudioProcessingObjectConfiguration::LockForProcess::ppInputConnections=[NativeArrayInfo(CountParamIndex = 0)]
-IAudioProcessingObjectConfiguration::LockForProcess::ppOutputConnections=[NativeArrayInfo(CountParamIndex = 2)]
 IUnknown::QueryInterface=[CanReturnErrorsAsSuccess]
 GetPrivateProfileIntW::return=int
 OleCreatePictureIndirect::lplpvObj=[ComOutPtr]
@@ -1373,8 +1347,6 @@ D3D11_TEXTURE3D_DESC::MiscFlags=[AssociatedEnum("D3D11_RESOURCE_MISC_FLAG")]
 D3D11_TEXTURE3D_DESC1::BindFlags=[AssociatedEnum("D3D11_BIND_FLAG")]
 D3D11_TEXTURE3D_DESC1::CPUAccessFlags=[AssociatedEnum("D3D11_CPU_ACCESS_FLAG")]
 D3D11_TEXTURE3D_DESC1::MiscFlags=[AssociatedEnum("D3D11_RESOURCE_MISC_FLAG")]
-DOCHOSTUIINFO::dwDoubleClick=[AssociatedEnum("DOCHOSTUIDBLCLK")]
-DOCHOSTUIINFO::dwFlags=[AssociatedEnum("DOCHOSTUIFLAG")]
 DXVA2_DecodeBufferDesc::CompressedBufferType=[AssociatedEnum("DXVA2_BufferfType")]
 EMREXTSELECTCLIPRGN::iMode=[AssociatedEnum("RGN_COMBINE_MODE")]
 ExtCreatePen::iPenStyle=[AssociatedEnum("PEN_STYLE")]

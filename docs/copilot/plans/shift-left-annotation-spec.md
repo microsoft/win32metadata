@@ -275,6 +275,13 @@ These helpers do not create symbols for ordinary SDK consumers. The method helpe
 does not annotate parameters or the C-interface vtable fields; those remain
 separate targets.
 
+For an existing IDL enum, emit a metadata/Clang-guarded `#pragma clang attribute`
+push/pop pair through `cpp_quote` around the original definition to apply
+`__attribute__((flag_enum))`. This preserves anonymous enum identity and native
+member names. Existing scalar typedefs can also back `_Win32_Enum_` or
+`_Win32_FlagsEnum_` groups using their original constants; do not replace the
+typedef or invent a scoped native enum.
+
 For a C/C++-authored declaration, combine direction SAL with `_Win32_Retval_`:
 
 ```cpp
