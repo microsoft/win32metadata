@@ -204,6 +204,50 @@ _Win32_Enum_(OPTIONS, unsigned, FIRST);
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void NativeEnumFlagsPragmaKeepsTheOriginalEnumDefinitions(string architecture, string target)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)
+typedef enum { AnonymousNone = 0, AnonymousFirst = 1, AnonymousSecond = 2 } AnonymousFlags;
+enum NamedFlags { NamedNone = 0, NamedFirst = 1, NamedSecond = 2 };
+#pragma clang attribute pop
+enum Ordinary { OrdinaryFirst = 1 };
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var enums = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>().ToArray();
+            foreach (string name in new[] { "AnonymousFlags", "NamedFlags" })
+                Assert.Contains(Assert.Single(enums.Where(value => value.Identifier.ValueText == name))
+                    .AttributeLists.SelectMany(list => list.Attributes),
+                    attribute => attribute.Name.ToString().EndsWith("Flags", StringComparison.Ordinal));
+            Assert.Empty(Assert.Single(enums.Where(value => value.Identifier.ValueText == "Ordinary")).AttributeLists);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void LogicalEnumGroupsBindAnExistingNativeScalarAlias(string architecture, string target)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+typedef unsigned EXISTING;
+#define FIRST 0x1001U
+#define SECOND 0x1002U
+_Win32_Enum_(EXISTING, unsigned, FIRST, SECOND);
+void Use(EXISTING value);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var group = Assert.Single(CSharpSyntaxTree.ParseText(fixture.ReadAdditionalTypes()).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>());
+            Assert.Equal("EXISTING", group.Identifier.ValueText);
+            Assert.Equal(new[] { "FIRST", "SECOND" }, group.Members.Select(member => member.Identifier.ValueText));
+            Assert.Contains("uint value", fixture.ReadSource());
+        }
+
+        [Theory]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(S::value, _Win32_PreserveResult_);", "declared native interface method")]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(Free, _Win32_PreserveResult_);", "declared native interface method")]
         [InlineData("_WIN32META_ANNOTATE_METHOD_(S::Run, _Win32_SetLastError_);", "not valid on")]
