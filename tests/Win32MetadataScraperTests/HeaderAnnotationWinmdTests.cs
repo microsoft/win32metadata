@@ -372,6 +372,78 @@ struct HOLDER { _Win32_AssociatedEnum_(OPTIONS) unsigned options; unsigned after
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void SharedAssociatedEnumsPreserveTargetsAndConflictingNativeStorage(
+            string architecture, string target, bool enabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define FIRST_CHOICE 1
+_Win32_Enum_(SHARED_KIND, unsigned char, FIRST_CHOICE);
+enum NATIVE_KIND { NativeChoice = 1 };
+struct SHARED_HOLDER {
+    _Win32_AssociatedEnum_(SHARED_KIND) unsigned char narrow;
+    _Win32_AssociatedEnum_(SHARED_KIND) unsigned wide;
+    _Win32_AssociatedEnum_(NATIVE_KIND) unsigned nativeUnsigned;
+};
+_Win32_AssociatedEnum_(SHARED_KIND) unsigned GetKind();
+void UseKinds(_Win32_AssociatedEnum_(SHARED_KIND) unsigned kind,
+    _Win32_AssociatedEnum_(SHARED_KIND) unsigned short* output,
+    _Win32_AssociatedEnum_(NATIVE_KIND) unsigned nativeKind);
+", annotationsEnabled: enabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, metadataEnabled: false),
+                NativeSurface(fixture, target, metadataEnabled: true));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var nativeStorage = FindType(reader, "NATIVE_KIND").GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "value__");
+            Assert.Equal("Int32", nativeStorage.DecodeSignature(new SignatureNames(), null));
+            var fields = FindType(reader, "SHARED_HOLDER").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "Byte", "UInt32", "UInt32" },
+                fields.Select(field => field.DecodeSignature(new SignatureNames(), null)));
+            var get = FindMethod(reader, "Apis", "GetKind");
+            Assert.Equal("UInt32", get.DecodeSignature(new SignatureNames(), null).ReturnType);
+            var use = FindMethod(reader, "Apis", "UseKinds");
+            Assert.Equal(new[] { "UInt32", "UInt16*", "UInt32" },
+                use.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var parameters = use.GetParameters().Select(reader.GetParameter)
+                .Where(parameter => parameter.SequenceNumber != 0).ToArray();
+            CheckAssociation(fields[0].GetCustomAttributes(), "SHARED_KIND");
+            CheckAssociation(fields[1].GetCustomAttributes(), "SHARED_KIND");
+            CheckAssociation(fields[2].GetCustomAttributes(), "NATIVE_KIND");
+            CheckAssociation(get.GetParameters().Select(reader.GetParameter)
+                .Single(parameter => parameter.SequenceNumber == 0).GetCustomAttributes(), "SHARED_KIND");
+            CheckAssociation(parameters[0].GetCustomAttributes(), "SHARED_KIND");
+            CheckAssociation(parameters[1].GetCustomAttributes(), "SHARED_KIND");
+            CheckAssociation(parameters[2].GetCustomAttributes(), "NATIVE_KIND");
+            if (enabled)
+            {
+                var groupStorage = FindType(reader, "SHARED_KIND").GetFields().Select(reader.GetFieldDefinition)
+                    .Single(field => reader.GetString(field.Name) == "value__");
+                Assert.Equal("Byte", groupStorage.DecodeSignature(new SignatureNames(), null));
+            }
+            else
+            {
+                Assert.DoesNotContain(reader.TypeDefinitions.Select(reader.GetTypeDefinition),
+                    type => reader.GetString(type.Name) == "SHARED_KIND");
+            }
+            AssertMetadataClosure(reader);
+
+            void CheckAssociation(CustomAttributeHandleCollection attributes, string expected)
+            {
+                if (enabled)
+                    AssertStringAttribute(reader, attributes, "AssociatedEnumAttribute", expected);
+                else
+                    AssertDoesNotHaveAttribute(reader, attributes, "AssociatedEnumAttribute");
+            }
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]
@@ -1205,10 +1277,14 @@ void Extra(_Win32_AssociatedEnum_(ERROR_GROUP) unsigned error);
         }
 
         [Theory]
-        [InlineData("x86", "i686-pc-windows-msvc")]
-        [InlineData("x64", "x86_64-pc-windows-msvc")]
-        [InlineData("arm64", "aarch64-pc-windows-msvc")]
-        public void LogicalGroupUnionPreservesPrimitiveAliasesFromConstantsScraper(string architecture, string target)
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LogicalGroupUnionPreservesPrimitiveAliasesFromConstantsScraper(
+            string architecture, string target, bool includeGroupImport)
         {
             using var first = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
 #define SUCCESS 0L
@@ -1235,7 +1311,7 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
                 string.Join("\n", Enumerable.Range(1, 40).Select(index => $"#define NETWORK_ALIAS_{index} NOT_SUPPORTED")));
             File.WriteAllText(printingHeader, "#define PRINTING_ALIAS NOT_SUPPORTED\n");
             MetadataUtils.ConstantsScraper.ScrapeConstants(Array.Empty<string>(), "Test", first.DirectoryPath,
-                "using static Test.ERROR_GROUP;\n", new HashSet<string>(), new Dictionary<string, string>
+                includeGroupImport ? "using static Test.ERROR_GROUP;\n" : "", new HashSet<string>(), new Dictionary<string, string>
                 {
                     [first.Header] = "Test",
                     [networkHeader] = "Network",
@@ -1246,7 +1322,11 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Network.constants.cs")));
             Assert.Contains("public const uint PRINTING_ALIAS = NOT_SUPPORTED;",
                 File.ReadAllText(Path.Combine(first.DirectoryPath, "Printing.constants.cs")));
+            var originals = Directory.GetFiles(first.DirectoryPath, "*.cs", SearchOption.AllDirectories)
+                .ToDictionary(path => path, File.ReadAllBytes);
             using var image = Emit(first, architecture);
+            foreach (var original in originals)
+                Assert.Equal(original.Value, File.ReadAllBytes(original.Key));
             var reader = image.Reader;
             Assert.Equal(new[] { "value__", "SUCCESS", "NOT_SUPPORTED", "EXTRA" },
                 FindType(reader, "ERROR_GROUP").GetFields().Select(handle =>
@@ -1278,26 +1358,34 @@ _Win32_Enum_(ERROR_GROUP, unsigned, EXTRA);
             AssertMetadataClosure(reader);
         }
 
-        [Fact]
-        public void LogicalGroupsDoNotImplicitlyConvertOrdinaryNativeEnumConstants()
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void LogicalGroupsDoNotImplicitlyConvertOrdinaryNativeEnumConstants(bool unqualified)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum class NATIVE_GROUP : unsigned { FIRST = 2 };
 #define FIRST 1U
 _Win32_Enum_(ERROR_GROUP, unsigned, FIRST);
-enum class NATIVE_GROUP : unsigned { NativeFirst = 2 };
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
             File.WriteAllText(Path.Combine(fixture.DirectoryPath, "NativeAlias.constants.cs"),
-                "namespace Test { public static partial class Apis { public const uint NativeAlias = NATIVE_GROUP.NativeFirst; } }");
+                (unqualified ? "using static Test.NATIVE_GROUP;\n" : "") +
+                "namespace Test { public static partial class Apis { public const uint NativeAlias = " +
+                (unqualified ? "FIRST" : "NATIVE_GROUP.FIRST") + "; } }");
             var exception = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
             Assert.Contains("CS0266", exception.Message);
         }
 
         [Theory]
-        [InlineData("x86", "i686-pc-windows-msvc")]
-        [InlineData("x64", "x86_64-pc-windows-msvc")]
-        [InlineData("arm64", "aarch64-pc-windows-msvc")]
-        public void LogicalGroupScalarAliasesPreserveIntegralStorageAndExpressions(string architecture, string target)
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LogicalGroupScalarAliasesPreserveIntegralStorageAndExpressions(
+            string architecture, string target, bool includeGroupImport)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
 #define ONE 1ULL
@@ -1313,13 +1401,13 @@ _Win32_Enum_(WIDE_GROUP, unsigned long long, ONE, BYTE_MAX, SHORT_MAX, USHORT_MA
 _Win32_Enum_(SIGNED_GROUP, long long, NEGATIVE);
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.manual.cs"), @"
+            string aliasesSource = @"
 using Scalar = System.UInt32;
 using static Test.WIDE_GROUP;
 namespace Consumers {
 public static partial class Apis {
-    public const sbyte SmallSigned = ONE + 126;
-    public const byte SmallUnsigned = BYTE_MAX;
+    public const sbyte SmallSigned = global::Test.WIDE_GROUP.ONE + 126;
+    public const byte SmallUnsigned = (BYTE_MAX);
     public const short Short = SHORT_MAX;
     public const ushort UShort = USHORT_MAX;
     public const char Character = USHORT_MAX;
@@ -1328,11 +1416,17 @@ public static partial class Apis {
     public const long Long = LONG_MAX;
     public const ulong ULong = ULONG_MAX;
     public const int Negative = Test.SIGNED_GROUP.NEGATIVE;
-    public const uint AlreadyCast = (uint)UINT_MAX;
+    public const uint AlreadyCast = (uint)global::Test.WIDE_GROUP.UINT_MAX;
     public const uint AliasChain = UInt;
 }}
-");
+";
+            if (!includeGroupImport)
+                aliasesSource = aliasesSource.Replace("using static Test.WIDE_GROUP;", "", StringComparison.Ordinal);
+            string aliasesPath = Path.Combine(fixture.DirectoryPath, "Aliases.manual.cs");
+            File.WriteAllText(aliasesPath, aliasesSource);
+            byte[] originalAliases = File.ReadAllBytes(aliasesPath);
             using var image = Emit(fixture, architecture);
+            Assert.Equal(originalAliases, File.ReadAllBytes(aliasesPath));
             var reader = image.Reader;
             var expected = new Dictionary<string, (ConstantTypeCode Code, string Signature, object Value)>
             {
@@ -1369,12 +1463,20 @@ public static partial class Apis {
         [InlineData("bool", "ERROR_GROUP.FIRST", "CS0029")]
         [InlineData("OTHER_GROUP", "ERROR_GROUP.FIRST", "CS0266")]
         [InlineData("uint", "ERROR_GROUP.UNDECLARED", "CS0117")]
+        [InlineData("byte", "TOO_LARGE", "CS0221")]
+        [InlineData("byte", "(TOO_LARGE)", "CS0221")]
+        [InlineData("uint", "UNDECLARED", "CS0103")]
+        [InlineData("uint", "FIRST", "CS0103")]
+        [InlineData("uint", "Other", "CS0103")]
+        [InlineData("bool", "TOO_LARGE", "CS0103")]
+        [InlineData("OTHER_GROUP", "TOO_LARGE", "CS0103")]
         public void LogicalGroupScalarAliasConversionPreservesErrors(string type, string value, string diagnostic)
         {
             using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
 #define FIRST 1U
 #define TOO_LARGE 256U
 _Win32_Enum_(ERROR_GROUP, unsigned, FIRST, TOO_LARGE);
+_Win32_Enum_(SECOND_GROUP, unsigned, FIRST);
 enum class OTHER_GROUP : unsigned { Other = 2 };
 ");
             Assert.True(fixture.Run() == 0, fixture.Diagnostics);

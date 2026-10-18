@@ -86,9 +86,14 @@ Include the complete normal constants scrape and emission in that dependency bat
 Scalar macro aliases outside the group must keep their own primitive storage and
 values; do not absorb them into the group or add casts to native headers. The emitter
 uses Roslyn-bound header-group identities to add checked scalar conversions in its
-private compiler inputs. Ordinary native enums, enum-typed aliases, and unrelated
-compiler errors are unchanged; out-of-range constants still fail. A small group-only
-image does not qualify the full alias closure or waive declaration-order differences.
+private compiler inputs. When removal of a grouped member's loose constant leaves
+a bare scalar alias unbound, the emitter resolves it only if normal C# lookup has
+no symbol or candidates and exactly one producer-owned logical group supplies that
+member. Parenthesized aliases follow the same rule; existing bindings and ambiguous
+or missing names are not guessed. Original generated sources remain unchanged.
+Ordinary native enums, enum-typed aliases, and unrelated compiler errors are
+unchanged; out-of-range constants still fail. A small group-only image does not
+qualify the full alias closure or ABI-relevant layout and declaration order.
 Successful alias compilation preserves the candidate's declared scalar facts, not
 OLD API equivalence. Grade newly exposed aliases, changed conditional macro
 selections, and retained use-site remaps separately in the unfiltered full image.
