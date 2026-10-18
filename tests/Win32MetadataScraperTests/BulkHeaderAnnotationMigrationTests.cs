@@ -110,6 +110,28 @@ DECLARE(Expanded)
             Assert.False(File.Exists(Path.Combine(fixture.Root, "generation", "WinSDK", "patches", "um", "sample.h.patch")));
         }
 
+        [Fact]
+        public void AutomaticMapExportIncludesTraverseParentDirectoriesForEveryArchitecture()
+        {
+            using var fixture = new AuthoringFixture("// Native header\r\nint Unique(void);\r\n", new[] { "Unique" }, Array.Empty<string>());
+            fixture.EnableAutomaticMapExport();
+            var result = fixture.Run(apply: true, exportMaps: true);
+            string diagnostics = result.Text + string.Concat(Directory.EnumerateFiles(fixture.Output, "*.log").Select(File.ReadAllText));
+            Assert.True(result.ExitCode == 0, diagnostics);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            Assert.Empty(report.RootElement.GetProperty("parseFailures").EnumerateArray());
+            Assert.Equal(1, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            foreach (string architecture in new[] { "x86", "x64", "arm64" })
+            {
+                string path = Path.Combine(fixture.Output, $"Sample.{architecture}.declarations.json");
+                using var map = JsonDocument.Parse(File.ReadAllText(path));
+                Assert.Contains(map.RootElement.GetProperty("declarations").EnumerateArray(),
+                    declaration => declaration.GetProperty("name").GetString() == "TraverseDependency");
+                Assert.Contains("um\\cpdk",
+                    File.ReadAllText(Path.Combine(fixture.Output, $"Sample.{architecture}.rsp")));
+            }
+        }
+
         private static string[] Signatures(string source)
             => CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .Select(method => method.ReturnType + " " + method.Identifier.ValueText + method.ParameterList)
@@ -186,17 +208,44 @@ DECLARE(Expanded)
             private string OwnerMap { get; }
             private string Script { get; }
 
+            internal void EnableAutomaticMapExport()
+            {
+                string binaries = Path.Combine(Root, "bin", "Release", "net10.0", "win-x64");
+                Directory.CreateDirectory(binaries);
+                foreach (string path in Directory.EnumerateFiles(Path.GetDirectoryName(typeof(Win32MetadataScraper.RemapDiscovery).Assembly.Location))
+                    .Where(path => Path.GetExtension(path) is ".dll" or ".json"))
+                    File.Copy(path, Path.Combine(binaries, Path.GetFileName(path)));
+                string assets = Path.Combine(Root, "sources", "GeneratorSdk", "tools", "assets", "scraper");
+                Directory.CreateDirectory(assets);
+                foreach (string name in new[] { "baseSettings.rsp", "baseSettings.x86.rsp", "baseSettings.x64.rsp", "baseSettings.arm64.rsp" })
+                    File.Copy(Path.Combine(WinHttpMigrationTests.RepositoryRoot, "sources", "GeneratorSdk", "tools", "assets", "scraper", name),
+                        Path.Combine(assets, name));
+                string nested = Path.Combine(Path.GetDirectoryName(Mirror), "cpdk");
+                Directory.CreateDirectory(nested);
+                File.WriteAllText(Path.Combine(nested, "dependency.h"), "int TraverseDependency(void);\r\n");
+                string main = Path.Combine(Path.GetDirectoryName(PartitionSettings), "main.cpp");
+                File.WriteAllText(main, "#include <sample.h>\r\n#include <dependency.h>\r\n");
+                File.AppendAllText(PartitionSettings, "--traverse\r\n<IncludeRoot>/um/cpdk/dependency.h\r\n<IncludeRoot>/um/sample.h\r\n");
+                string toolset = Path.Combine(Root, "toolset");
+                Directory.CreateDirectory(toolset);
+                File.WriteAllText(Path.Combine(toolset, "vcruntime.h"), "");
+            }
+
             internal void RemoveMapOption()
             {
                 string path = Path.Combine(Native.DirectoryPath, "test.rsp");
                 File.WriteAllText(path, File.ReadAllText(path).Replace("--declaration-map\n" + Map + "\n", ""));
             }
 
-            internal (int ExitCode, string Text) Run(bool apply)
+            internal (int ExitCode, string Text) Run(bool apply, bool exportMaps = false)
             {
                 var start = new ProcessStartInfo("pwsh") { UseShellExecute = false, RedirectStandardOutput = true, RedirectStandardError = true };
                 foreach (string argument in new[] { "-NoProfile", "-NonInteractive", "-File", Script,
-                    "-OwnerMap", OwnerMap, "-DeclarationMaps", Map, "-Original", "um\\sample.h", "-OutputDirectory", Output })
+                    "-OwnerMap", OwnerMap, "-Original", "um\\sample.h", "-OutputDirectory", Output })
+                    start.ArgumentList.Add(argument);
+                foreach (string argument in exportMaps
+                    ? new[] { "-Partition", "Sample", "-ToolsetInclude", Path.Combine(Root, "toolset") }
+                    : new[] { "-DeclarationMaps", Map })
                     start.ArgumentList.Add(argument);
                 if (apply)
                     start.ArgumentList.Add("-Apply");

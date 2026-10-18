@@ -41,7 +41,9 @@ Offsets and half-open declaration extents are **bytes**, not character positions
 This is an opt-in authoring aid; ordinary scraping is unchanged.
 
 For explicitly allocated original-header owners, the bulk helper can export maps
-for all three architectures and propose cumulative SDK patches:
+for all three architectures and propose cumulative SDK patches. Map exports use
+the owning partition's traversal include parents, including nested SDK directories
+such as `um\cpdk`, just like the normal scraper:
 
 ```powershell
 dotnet build .\sources\Win32MetadataScraper -c Release

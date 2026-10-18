@@ -72,13 +72,30 @@ if ($Partition.Count) {
         $settingsPath = "$OutputDirectory\$name.settings.rsp"
         [IO.File]::WriteAllText($settingsPath,
             [IO.File]::ReadAllText("$sdk\Partitions\$name\settings.rsp").Replace('<IncludeRoot>', $mirror))
+        $includeDirs = [Collections.Generic.List[string]]::new()
+        $includeDirs.Add("$sdk\inc")
+        $includeDirs.Add($ToolsetInclude)
+        $defaults = @("$mirror\shared", "$mirror\um", "$mirror\winrt", "$mirror\ucrt")
+        $traverse = $false
+        foreach ($line in [IO.File]::ReadAllLines($settingsPath)) {
+            $value = $line.Trim()
+            if ($value.StartsWith('--')) {
+                $traverse = $value -eq '--traverse'
+            }
+            elseif ($traverse -and $value -and !$value.StartsWith('#')) {
+                $parent = [IO.Path]::GetDirectoryName($value.Replace('/', '\'))
+                if ($parent -and $parent -notin $defaults -and $parent -notin $includeDirs) {
+                    $includeDirs.Add($parent)
+                }
+            }
+        }
+        $includeDirs.AddRange([string[]]$defaults)
         foreach ($arch in @('x86', 'x64', 'arm64')) {
             $mapPath = "$OutputDirectory\$name.$arch.declarations.json"
             $rspPath = "$OutputDirectory\$name.$arch.rsp"
             $lines = @('--file', "$sdk\Partitions\$name\main.cpp", '--namespace', 'BulkMapping',
                 '--output', "$OutputDirectory\unused.cs", '--declaration-map', $mapPath,
-                '--include-directory', "$sdk\inc", "$mirror\shared", "$mirror\um", "$mirror\winrt",
-                "$mirror\ucrt", $ToolsetInclude, "--additional=--target=$($targets[$arch])")
+                '--include-directory') + $includeDirs.ToArray() + @("--additional=--target=$($targets[$arch])")
             [IO.File]::WriteAllLines($rspPath, $lines)
             $log = "$OutputDirectory\$name.$arch.log"
             & dotnet $scraper "$OutputDirectory\unused.remaps" "@$base\baseSettings.rsp" `
