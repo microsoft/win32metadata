@@ -1,0 +1,273 @@
+diff --git a/um/objidl.idl b/um/objidl.idl
+index 00cd5a8f..9e809806 100644
+--- a/um/objidl.idl
++++ b/um/objidl.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+-------------------------------------------------------------------------
+@@ -83,6 +84,7 @@ midl_pragma warning (disable: 2480)
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IMallocSpy, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -169,6 +171,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_S
+  *  Binding Interfaces
+  ****************************************************************************/
+ 
++_Win32_AnnotateInterface_(IBindCtx, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000000e-0000-0000-C000-000000000046),
+@@ -316,6 +319,7 @@ cpp_quote("#endif")
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IEnumMoniker, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000102-0000-0000-C000-000000000046),
+@@ -357,6 +361,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IRunnableObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000126-0000-0000-C000-000000000046)
+@@ -386,6 +391,7 @@ interface IRunnableObject : IUnknown
+         [in] BOOL fContained);
+ }
+ 
++_Win32_AnnotateInterface_(IRunningObjectTable, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000010-0000-0000-C000-000000000046)
+@@ -445,6 +451,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IPersist, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010c-0000-0000-C000-000000000046)
+@@ -461,6 +468,7 @@ interface IPersist : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IPersistStream, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000109-0000-0000-C000-000000000046),
+@@ -495,6 +503,7 @@ interface IPersistStream : IPersist
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IMoniker, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000000f-0000-0000-C000-000000000046),
+@@ -626,6 +635,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IROTData, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(f29f6bc0-5021-11ce-aa15-00006901293f),
+@@ -646,6 +656,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IEnumSTATSTG, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000000d-0000-0000-C000-000000000046),
+@@ -678,6 +689,7 @@ interface IEnumSTATSTG : IUnknown
+         [out] IEnumSTATSTG **ppenum);
+ }
+ 
++_Win32_AnnotateInterface_(IStorage, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000000b-0000-0000-C000-000000000046),
+@@ -814,6 +826,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IPersistFile, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010b-0000-0000-C000-000000000046),
+@@ -853,6 +866,7 @@ interface IPersistFile : IPersist
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IPersistStorage, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010a-0000-0000-C000-000000000046),
+@@ -902,6 +916,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(ILockBytes, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000000a-0000-0000-C000-000000000046),
+@@ -963,6 +978,7 @@ interface ILockBytes : IUnknown
+         [in] DWORD grfStatFlag);
+ }
+ 
++_Win32_AnnotateInterface_(IEnumFORMATETC, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000103-0000-0000-C000-000000000046),
+@@ -1019,6 +1035,7 @@ midl_pragma warning( default: 2480 )
+         [out] IEnumFORMATETC **ppenum);
+ }
+ 
++_Win32_AnnotateInterface_(IEnumSTATDATA, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000105-0000-0000-C000-000000000046),
+@@ -1077,6 +1094,7 @@ interface IEnumSTATDATA : IUnknown
+         [out] IEnumSTATDATA **ppenum);
+ }
+ 
++_Win32_AnnotateInterface_(IRootStorage, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000012-0000-0000-C000-000000000046),
+@@ -1099,6 +1117,7 @@ interface IRootStorage : IUnknown
+  *  Notification Interfaces
+  ****************************************************************************/
+ 
++_Win32_AnnotateInterface_(IAdviseSink, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010f-0000-0000-C000-000000000046),
+@@ -1359,6 +1378,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IAdviseSink2, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000125-0000-0000-C000-000000000046),
+@@ -1404,6 +1424,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IDataObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010e-0000-0000-C000-000000000046),
+@@ -1486,6 +1507,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IDataAdviseHolder, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -1525,6 +1547,7 @@ interface IDataAdviseHolder : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IMessageFilter, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -1779,6 +1802,7 @@ interface IEnumConnectionPoints : IUnknown
+     );
+ }
+ #endif // __INCLUDE_CPIFS
++_Win32_AnnotateInterface_(IClassActivator, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000140-0000-0000-C000-000000000046)
+@@ -1800,6 +1824,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IFillLockBytes, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(99caf010-415e-11cf-8814-00aa00b569f5),
+@@ -1855,6 +1880,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IProgressNotify, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(a9d758a0-4617-11cf-95fc-00aa00680db4),
+@@ -1878,6 +1904,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(ILayoutStorage, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -1926,6 +1953,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IBlockingLock, _Win32_SupportedOS_Windows2000_)
+ [
+  object,
+  uuid(30f3d47a-6447-11d1-8e3c-00c04fb9386d)
+@@ -1979,6 +2007,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IDirectWriterLock, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0e6d4d92-6738-11cf-9608-00aa00680db4),
+@@ -2021,6 +2050,7 @@ interface IUrlMon : IUnknown
+         [in]         DWORD      flags);
+ }
+ 
++_Win32_AnnotateInterface_(IForegroundTransfer, _Win32_SupportedOS_Windows2000_)
+ [
+ local,
+ object,
+@@ -2102,6 +2132,7 @@ typedef enum tagShutdownType
+ //
+ // IProcessLock
+ //
++_Win32_AnnotateInterface_(IProcessLock, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+ 	local,
+@@ -2118,6 +2149,7 @@ interface IProcessLock : IUnknown
+ //
+ // ISurrogateService
+ //
++_Win32_AnnotateInterface_(ISurrogateService, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,
+@@ -2139,6 +2171,7 @@ interface ISurrogateService : IUnknown
+ 
+ cpp_quote( "#if  (_WIN32_WINNT >= 0x0501 )" )
+ 
++_Win32_AnnotateInterface_(IInitializeSpy, _Win32_SupportedOS_WindowsXP_)
+ [
+     local,
+     object,
+@@ -2168,6 +2201,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IApartmentShutdown, _Win32_SupportedOS_Windows8_)
+ [
+     local,
+     object,

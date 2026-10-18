@@ -1,0 +1,396 @@
+diff --git a/um/shobjidl.idl b/um/shobjidl.idl
+index 80f71937..d170ede6 100644
+--- a/um/shobjidl.idl
++++ b/um/shobjidl.idl
+@@ -7,6 +7,7 @@
+ //  Contents: This interface definition contains shell objects that can be remoted
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ cpp_quote("#if _MSC_VER >= 1200")
+@@ -40,6 +41,7 @@ import "shobjidl_core.idl";
+ cpp_quote("#include <sherrors.h>")
+ 
+ 
++_Win32_AnnotateInterface_(IQueryCodePage, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid("C7B236CE-EE80-11D0-985F-006008059382"),
+@@ -82,6 +84,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SYNC_ENGINE_STATE_FLAGS)")
+ 
+ typedef char * LPVIEWSETTINGS;
+ 
++_Win32_AnnotateInterface_(IFolderViewOptions, _Win32_SupportedOS_Windows7_)
+ [
+     uuid(3cc974d2-b302-4d36-ad3e-06d93f695d3f),
+     object,
+@@ -113,6 +116,7 @@ interface IFolderViewOptions : IUnknown
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ 
++_Win32_AnnotateInterface_(IShellView3, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(ec39fa88-f8af-41c5-8421-38bed28f4673),
+     object,
+@@ -146,6 +150,7 @@ cpp_quote("#endif  // NTDDI_VISTA")
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ // to discover the search box, use IServiceProvider::QueryService() using SID_SSearchBoxInfo on a site pointer within the explorer window
++_Win32_AnnotateInterface_(ISearchBoxInfo, _Win32_SupportedOS_Windows7_)
+ [
+     uuid(6af6e03f-d664-4ef4-9626-f7e0ed36755e),
+     object
+@@ -163,6 +168,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
++_Win32_AnnotateInterface_(IVisualProperties, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(e693cf68-d967-4112-8763-99172aee5e5a),
+     object,
+@@ -217,6 +223,7 @@ cpp_quote("#endif  // _WIN32_IE_IE70")
+ 
+ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
++_Win32_AnnotateInterface_(ICommDlgBrowser3, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(c8ad25a1-3294-41ee-8165-71174bd01c57),
+     object,
+@@ -239,6 +246,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
+ 
+ // Notification callback for changes to user accounts
++_Win32_AnnotateInterface_(IUserAccountChangeCallback, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(a561e69a-b4b8-4113-91a5-64c6bcca3430),
+@@ -273,6 +281,7 @@ typedef struct _OVERLAPPED {
+ 
+ cpp_quote("#endif // MIDL_PASS")
+ 
++_Win32_AnnotateInterface_(IStreamAsync, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fe0b6665-e0ca-49b9-a178-2b5cb48d92a5),
+@@ -287,6 +296,7 @@ interface IStreamAsync : IStream
+     HRESULT CancelIo();
+ }
+ 
++_Win32_AnnotateInterface_(IStreamUnbufferedInfo, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8a68fdda-1fdc-4c20-8ceb-416643b5a625),
+@@ -316,6 +326,7 @@ typedef [v1_enum] enum DSH_FLAGS
+ } DSH_FLAGS;
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DSH_FLAGS)")
+ 
++_Win32_AnnotateInterface_(IDragSourceHelper2, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(83E07D0D-0C5F-4163-BF1A-60B274051E40),
+     local,
+@@ -335,6 +346,7 @@ cpp_quote("#endif  // NTDDI_WIN2K")
+ //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
+ 
+ // HW Event Handler Interface
++_Win32_AnnotateInterface_(IHWEventHandler, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(C1FB73D0-EC3A-4ba2-B512-8CDB9187B6D1),
+@@ -359,6 +371,7 @@ interface IHWEventHandler : IUnknown
+ }
+ 
+ // HW Event Handler Interface 2
++_Win32_AnnotateInterface_(IHWEventHandler2, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(CFCC809F-295D-42e8-9FFC-424B33C487E6),
+@@ -374,6 +387,7 @@ interface IHWEventHandler2 : IHWEventHandler
+ }
+ 
+ // HW Event Handler Interface
++_Win32_AnnotateInterface_(IQueryCancelAutoPlay, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(DDEFE873-6997-4e68-BE26-39B633ADBE12),
+@@ -406,6 +420,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ //  S_OK = show, S_FALSE = hide, E_xx = error
+ //
+ // Dynamic HW Handler Interface
++_Win32_AnnotateInterface_(IDynamicHWHandler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(DC2601D7-059E-42fc-A09D-2AFD21B6D5F7),
+@@ -424,6 +439,7 @@ cpp_quote("#endif  // NTDDI_VISTA")
+ //cpp_quote("#endif  // NTDDI_WINXP")
+ 
+ 
++_Win32_AnnotateInterface_(IUserNotificationCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(19108294-0441-4AFF-8013-FA0A730B0BEA),
+     object
+@@ -438,6 +454,7 @@ interface IUserNotificationCallback : IUnknown
+     HRESULT OnContextMenu([in] POINT * pt);
+ }
+ 
++_Win32_AnnotateInterface_(IUserNotification2, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(215913CC-57EB-4FAB-AB5A-E5FA7BEA2A6C),
+     object,
+@@ -485,6 +502,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ //   Does the deskband currently render with or without composition?
+ //
+ //-------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDeskBand2, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(79D16DE4-ABEE-4021-8D9D-9169B261D657),
+     object,
+@@ -500,6 +518,7 @@ interface IDeskBand2 : IDeskBand
+ 
+ cpp_quote("#endif  // NTDDI_VISTA")
+ 
++_Win32_AnnotateInterface_(IStartMenuPinnedList, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(4CD19ADA-25A5-4A32-B3B7-347BEE5BE36B),
+     object,
+@@ -512,6 +531,7 @@ interface IStartMenuPinnedList : IUnknown
+     HRESULT RemoveFromList([in] IShellItem *pitem);
+ }
+ 
++_Win32_AnnotateInterface_(ICDBurn, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(3d73a659-e5d0-4d42-afc0-5121ba425c8d),     // IID_ICDBurn
+@@ -545,6 +565,7 @@ cpp_quote("#define IDD_WIZEXTN_LAST     0x5100")
+ // next page it would call GetNextPage and select the specified HPAGE.
+ 
+ // Wizard Extension Site
++_Win32_AnnotateInterface_(IWizardSite, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(88960f5b-422f-4e7b-8013-73415381c3c3),
+     local
+@@ -566,6 +587,7 @@ cpp_quote("#define SID_WizardSite IID_IWizardSite")
+ // into the extenion it will do so via GetFirstPage and selecting that.
+ 
+ // Wizard Extension
++_Win32_AnnotateInterface_(IWizardExtension, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(c02ea696-86cc-491e-9b23-74394a0444a8),
+     local
+@@ -587,6 +609,7 @@ interface IWizardExtension : IUnknown
+ // create a HTML wizard starting at the URL defined via SetInitialURL.
+ 
+ // Web Wizard Page Extension
++_Win32_AnnotateInterface_(IWebWizardExtension, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(0e6b3f66-98d1-48c0-a222-fbde74e2fbc5),
+     local,
+@@ -614,6 +637,7 @@ cpp_quote ("#endif  // NTDDI_VISTA")
+ cpp_quote ("#define SHPWHF_VALIDATEVIAWEBFOLDERS    0x00010000  // enable web folders to validate network places (ANP support)")
+ 
+ // Web Publishing Wizard
++_Win32_AnnotateInterface_(IPublishingWizard, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(aa9198bb-ccec-472d-beed-19a4f6733f7a),
+     local,
+@@ -636,6 +660,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
+ // Object to host an IFolderView in a window.  This is used to build check mark selection
+ // UI for files.
+ // Shell Folder Host
++_Win32_AnnotateInterface_(IFolderViewHost, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(1ea58f02-d55a-411d-b09e-9e65ac21605b),
+     local,
+@@ -653,6 +678,7 @@ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
+ //
+ //  This allows you to set the accessible name on COM objects that function as UI elements
+ //
++_Win32_AnnotateInterface_(IAccessibleObject, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(95A391C5-9ED4-4c28-8401-AB9E06719E11),
+     object,
+@@ -666,6 +692,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
+ // New for Vista, but used by downlevel code
+ //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
++_Win32_AnnotateInterface_(IResultsFolder, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(96E5AE6D-6AE1-4b1c-900C-C6480EAA8828),
+@@ -705,6 +732,7 @@ cpp_quote("#endif  // NTDDI_WINXP || (_WIN32_IE >= _WIN32_IE_IE70)")
+ //
+ cpp_quote("#define ACDD_VISIBLE        0x0001")
+ 
++_Win32_AnnotateInterface_(IAutoCompleteDropDown, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(3CD141F4-3C6A-11d2-BCAA-00C04FD929DB),
+     object,
+@@ -741,6 +769,7 @@ cpp_quote("#define SID_CDWizardHost IID_ICDBurnExt")
+ typedef DWORD CDBE_ACTIONS;
+ 
+ // add-ons for cd burning
++_Win32_AnnotateInterface_(ICDBurnExt, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(2271dcca-74fc-4414-8fb7-c56b05ace2d7)
+ ]
+@@ -754,6 +783,7 @@ cpp_quote("#endif  // NTDDI_WINXP")
+ // New for XP, but used by downlevel code
+ //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
+ 
++_Win32_AnnotateInterface_(IEnumReadyCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(61E00D45-8FFF-4e60-924E-6537B61612DD),
+     object,
+@@ -766,6 +796,7 @@ interface IEnumReadyCallback : IUnknown
+ }
+ 
+ // interface between CDefView and clients like the NSC which will try to share enumeration with the view
++_Win32_AnnotateInterface_(IEnumerableView, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(8C8BF236-1AEC-495f-9894-91D57C3C686F),
+     local
+@@ -787,6 +818,7 @@ cpp_quote("#define SID_EnumerableView IID_IEnumerableView")
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
+ 
+ // supports inserting an item into a folder
++_Win32_AnnotateInterface_(IInsertItem, _Win32_SupportedOS_WindowsXP_)
+ [
+     uuid(D2B57227-3D23-4b95-93C0-492BD454C356),
+     object,
+@@ -799,6 +831,7 @@ interface IInsertItem : IUnknown
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
+ 
++_Win32_AnnotateInterface_(IFolderBandPriv, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(47c01f95-e185-412c-b5c5-4f27df965aea),     // IID_IFolderBandPriv
+@@ -820,6 +853,7 @@ interface IFolderBandPriv : IUnknown
+ // image is < that size then return S_FALSE.
+ 
+ // Image Recompression Object
++_Win32_AnnotateInterface_(IImageRecompress, _Win32_SupportedOS_Windows2000_)
+ [
+     uuid(505f1513-6b3e-4892-a272-59f8889a4d3e),
+     pointer_default(unique),
+@@ -844,6 +878,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ 
+ // Event notifications from the controls, handled by an interface
+ // optionally implemented by the same IFileDialogEvents object supplied by the app.
++_Win32_AnnotateInterface_(IFileDialogControlEvents, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(36116642-D713-4b97-9B83-7484A9D00433),
+     object,
+@@ -879,6 +914,7 @@ interface IFileDialogControlEvents : IUnknown
+         [in] DWORD dwIDCtl);
+ }
+ 
++_Win32_AnnotateInterface_(IFileDialog2, _Win32_SupportedOS_Windows7_)
+ [
+     uuid(61744fc7-85b5-4791-a9b0-272276309b13),
+     object,
+@@ -896,6 +932,7 @@ interface IFileDialog2 : IFileDialog
+ }
+ 
+ // Application File Extension and URL Protocol Registration UI
++_Win32_AnnotateInterface_(IApplicationAssociationRegistrationUI, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(1f76a169-f994-40ac-8fc8-0959e8874710),
+@@ -908,6 +945,7 @@ interface IApplicationAssociationRegistrationUI : IUnknown
+ 
+ cpp_quote("#endif  // NTDDI_VISTA")
+ 
++_Win32_AnnotateInterface_(IShellRunDll, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(fce4bde0-4b68-4b80-8e9c-7426315a7388),
+     object,
+@@ -919,6 +957,7 @@ interface IShellRunDll : IUnknown
+     HRESULT Run([in, string, annotation("_In_")] LPCWSTR pszArgs);
+ }
+ 
++_Win32_AnnotateInterface_(IPreviousVersionsInfo, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(76e54780-ad74-48e3-a695-3ba9a0aff10d),
+@@ -936,6 +975,7 @@ interface IPreviousVersionsInfo : IUnknown
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ 
+ // used to find the item that should be used when browsing to this item (used by pagespace control)
++_Win32_AnnotateInterface_(IUseToBrowseItem, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(05edda5c-98a3-4717-8adb-c5e7da991eb1),
+@@ -961,6 +1001,7 @@ cpp_quote("DEFINE_GUID(SID_SCommandBarState, 0xB99EAA5C, 0x3850, 0x4400, 0xBC, 0
+ // New for Vista, but used by downlevel code
+ //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ 
++_Win32_AnnotateInterface_(INameSpaceTreeControl2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(7cc7aed8-290e-49bc-8945-c1401cc9306c),
+@@ -1004,6 +1045,7 @@ cpp_quote("#define ISMBUTTON(x) (NSTCECT_MBUTTON == ((x) & NSTCECT_BUTTON))")
+ cpp_quote("#define ISRBUTTON(x) (NSTCECT_RBUTTON == ((x) & NSTCECT_BUTTON))")
+ cpp_quote("#define ISDBLCLICK(x) (NSTCECT_DBLCLICK == ((x) & NSTCECT_DBLCLICK))")
+ 
++_Win32_AnnotateInterface_(INameSpaceTreeControlEvents, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(93D77985-B3D8-4484-8318-672CDDA002CE),
+@@ -1106,6 +1148,7 @@ interface INameSpaceTreeControlEvents : IUnknown
+ 
+ cpp_quote("#define NSTCDHPOS_ONTOP  -1")
+ 
++_Win32_AnnotateInterface_(INameSpaceTreeControlDropHandler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(F9C665D6-C2F2-4c19-BF33-8322D7352F51),
+@@ -1148,6 +1191,7 @@ interface INameSpaceTreeControlDropHandler : IUnknown
+     HRESULT OnDragLeave([in, unique, annotation("_In_opt_")] IShellItem *psiOver);
+ }
+ 
++_Win32_AnnotateInterface_(INameSpaceTreeAccessible, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(71f312de-43ed-4190-8477-e9536b82350b),
+@@ -1166,6 +1210,7 @@ interface INameSpaceTreeAccessible : IUnknown
+         [out, annotation("_Out_")] VARIANT *pvarRole);
+ }
+ 
++_Win32_AnnotateInterface_(INameSpaceTreeControlCustomDraw, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(2D3BA758-33EE-42d5-BB7B-5F3431D86C78),
+@@ -1215,6 +1260,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ //
+ // for show/hide deskbands
+ //
++_Win32_AnnotateInterface_(ITrayDeskBand, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6D67E846-5B9C-4db8-9CBC-DDE12F4254F1),
+@@ -1231,6 +1277,7 @@ interface ITrayDeskBand : IUnknown
+     HRESULT DeskBandRegistrationChanged();
+ }
+ 
++_Win32_AnnotateInterface_(IBandHost, _Win32_SupportedOS_WindowsVista_)
+ [
+     uuid(B9075C7C-D48E-403f-AB99-D6C77A1084AC),
+     object,
+@@ -1257,6 +1304,7 @@ cpp_quote("#define SID_SBandHost IID_IBandHost")
+ cpp_quote("#endif  // NTDDI_VISTA")
+ 
+ 
++_Win32_AnnotateInterface_(IComputerInfoChangeNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0DF60D92-6818-46d6-B358-D66170DDE466),
+@@ -1271,6 +1319,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+ cpp_quote("#endif // NTDDI_WIN7")
+ 
++_Win32_AnnotateInterface_(IDesktopGadget, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(c1646bc4-f298-4f91-a204-eb2dd1709d1a),

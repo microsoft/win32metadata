@@ -1,0 +1,492 @@
+diff --git a/um/appxpackaging.idl b/um/appxpackaging.idl
+index 778a2644..1542d305 100644
+--- a/um/appxpackaging.idl
++++ b/um/appxpackaging.idl
+@@ -7,6 +7,7 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ import "oaidl.idl";
+@@ -213,6 +214,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
++_Win32_AnnotateInterface_(IAppxFactory, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(beb94909-e451-438b-b5a7-d79e767b75d8),
+@@ -253,6 +255,7 @@ interface IAppxFactory : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxFactory2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(f1346df2-c282-4e22-b918-743a929a8d55),
+@@ -323,6 +326,7 @@ interface IAppxFactory4 : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxPackageReader, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(b5c49650-99bc-481c-9a34-3d53a4106708),
+@@ -358,6 +362,7 @@ interface IAppxPackageReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxPackageWriter, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(9099e33b-246f-41e4-881a-008eb613f858),
+@@ -379,6 +384,7 @@ interface IAppxPackageWriter : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxPackageWriter2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(2cf5c4fd-e54c-4ea5-ba4e-f8c4b105a8c8),
+@@ -393,6 +399,7 @@ interface IAppxPackageWriter2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxPackageWriter3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(a83aacd3-41c0-4501-b8a3-74164f50b2fd),
+@@ -408,6 +415,7 @@ interface IAppxPackageWriter3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxFile, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(91df827b-94fd-468f-827b-57f41b2f6f2e),
+@@ -454,6 +462,7 @@ interface IAppxFile2 : IAppxFile
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxFilesEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(f007eeaf-9831-411c-9847-917cdc62d1fe),
+@@ -477,6 +486,7 @@ interface IAppxFilesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBlockMapReader, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(5efec991-bca3-42d1-9ec2-e92d609ec22a),
+@@ -506,6 +516,7 @@ interface IAppxBlockMapReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBlockMapFile, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(277672ac-4f63-42c1-8abc-beae3600eb59),
+@@ -553,6 +564,7 @@ interface IAppxBlockMapFile2 : IAppxBlockMapFile
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBlockMapFilesEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(02b856a2-4262-4070-bacb-1a8cbbc42305),
+@@ -576,6 +588,7 @@ interface IAppxBlockMapFilesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBlockMapBlock, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(75cf3930-3244-4fe0-a8c8-e0bcb270b889),
+@@ -595,6 +608,7 @@ interface IAppxBlockMapBlock : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBlockMapBlocksEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(6b429b5b-36ef-479e-b9eb-0c1482b49e16),
+@@ -618,6 +632,7 @@ interface IAppxBlockMapBlocksEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestReader, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(4e1bd148-55a0-4480-a3d1-15544710637c),
+@@ -672,6 +687,7 @@ interface IAppxManifestReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestReader2, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(d06f67bc-b31d-4eba-a8af-638e73e77b4d),
+@@ -717,6 +733,7 @@ interface IAppxManifestReader4 : IAppxManifestReader3
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestReader5, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(8D7AE132-A690-4C00-B75A-6AAE1FEAAC80),
+@@ -730,6 +747,7 @@ interface IAppxManifestReader5 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestReader6, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(34DEACA4-D3C0-4E3E-B312-E42625E3807E),
+@@ -948,6 +966,7 @@ interface IAppxManifestHostRuntimeDependency2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestOptionalPackageInfo, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(2634847D-5B5D-4FE5-A243-002FF95EDC7E),
+@@ -966,6 +985,7 @@ interface IAppxManifestOptionalPackageInfo : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestMainPackageDependenciesEnumerator, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(A99C4F00-51D2-4F0F-BA46-7ED5255EBDFF),
+@@ -989,6 +1009,7 @@ interface IAppxManifestMainPackageDependenciesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestMainPackageDependency, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(05D0611C-BC29-46D5-97E2-84B9C79BD8AE),
+@@ -1012,6 +1033,7 @@ interface IAppxManifestMainPackageDependency : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestPackageId, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(283ce2d7-7153-4a91-9649-7a0f7240945f),
+@@ -1061,6 +1083,7 @@ interface IAppxManifestPackageId : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestPackageId2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(2256999d-d617-42f1-880e-0ba4542319d5),
+@@ -1074,6 +1097,7 @@ interface IAppxManifestPackageId2 : IAppxManifestPackageId
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestProperties, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(03faf64d-f26f-4b2c-aaf7-8fe7789b8bca),
+@@ -1117,6 +1141,7 @@ interface IAppxManifestTargetDeviceFamiliesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestTargetDeviceFamily, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(9091B09B-C8D5-4F31-8687-A338259FAEFB),
+@@ -1140,6 +1165,7 @@ interface IAppxManifestTargetDeviceFamily : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestPackageDependenciesEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(b43bbcf9-65a6-42dd-bac0-8c6741e7f5a4),
+@@ -1163,6 +1189,7 @@ interface IAppxManifestPackageDependenciesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestPackageDependency, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(e4946b59-733e-43f0-a724-3bde4c1285a0),
+@@ -1186,6 +1213,7 @@ interface IAppxManifestPackageDependency : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestPackageDependency2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(DDA0B713-F3FF-49D3-898A-2786780C5D98),
+@@ -1212,6 +1240,7 @@ interface IAppxManifestPackageDependency3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestResourcesEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(de4dfbbd-881a-48bb-858c-d6f2baeae6ed),
+@@ -1235,6 +1264,7 @@ interface IAppxManifestResourcesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestDeviceCapabilitiesEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(30204541-427b-4a1c-bacf-655bf463a540),
+@@ -1281,6 +1311,7 @@ interface IAppxManifestCapabilitiesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestApplicationsEnumerator, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(9eb8a55a-f04b-4d0d-808d-686185d4847a),
+@@ -1304,6 +1335,7 @@ interface IAppxManifestApplicationsEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxManifestApplication, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(5da89bf4-3773-46be-b650-7e744863b7e8),
+@@ -1369,6 +1401,7 @@ interface IAppxManifestQualifiedResource : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleFactory, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(BBA65864-965F-4A5F-855F-F074BDBF3A7B),
+@@ -1421,6 +1454,7 @@ interface IAppxBundleFactory3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleWriter, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(EC446FE8-BFEC-4C64-AB4F-49F038F0C6D2),
+@@ -1436,6 +1470,7 @@ interface IAppxBundleWriter : IUnknown
+     HRESULT Close();
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleWriter2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(6D8FE971-01CC-49A0-B685-233851279962),
+@@ -1449,6 +1484,7 @@ interface IAppxBundleWriter2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleWriter3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(AD711152-F969-4193-82D5-9DDF2786D21A),
+@@ -1466,6 +1502,7 @@ interface IAppxBundleWriter3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleWriter4, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(9CD9D523-5009-4C01-9882-DC029FBD47A3),
+@@ -1492,6 +1529,7 @@ interface IAppxBundleWriter4 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleReader, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(DD75B8C0-BA76-43B0-AE0F-68656A1DC5C8),
+@@ -1535,6 +1573,7 @@ interface IAppxBundleReader2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestReader, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(CF0EBBC1-CC99-4106-91EB-E67462E04FB0),
+@@ -1555,6 +1594,7 @@ interface IAppxBundleManifestReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestReader2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(5517DF70-033F-4AF2-8213-87D766805C02),
+@@ -1567,6 +1607,7 @@ interface IAppxBundleManifestReader2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestPackageInfoEnumerator, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(F9B856EE-49A6-4E19-B2B0-6A2406D63A32),
+@@ -1587,6 +1628,7 @@ interface IAppxBundleManifestPackageInfoEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestPackageInfo, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(54CD06C1-268F-40BB-8ED2-757A9EBAEC8D),
+@@ -1619,6 +1661,7 @@ interface IAppxBundleManifestPackageInfo : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestPackageInfo2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(44C2ACBC-B2CF-4CCB-BBDB-9C6DA8C3BC9E),
+@@ -1663,6 +1706,7 @@ interface IAppxBundleManifestPackageInfo4 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestOptionalBundleInfoEnumerator, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(9A178793-F97E-46AC-AACA-DD5BA4C177C8),
+@@ -1683,6 +1727,7 @@ interface IAppxBundleManifestOptionalBundleInfoEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxBundleManifestOptionalBundleInfo, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(515BF2E8-BCB0-4D69-8C48-E383147B6E12),
+@@ -1703,6 +1748,7 @@ interface IAppxBundleManifestOptionalBundleInfo : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxContentGroupFilesEnumerator, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(1a09a2fd-7440-44eb-8c84-848205a6a1cc),
+@@ -1726,6 +1772,7 @@ interface IAppxContentGroupFilesEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxContentGroup, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(328f6468-c04f-4e3c-b6fa-6b8d27f3003a),
+@@ -1744,6 +1791,7 @@ interface IAppxContentGroup : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxContentGroupsEnumerator, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(3264e477-16d1-4d63-823e-7d2984696634),
+@@ -1767,6 +1815,7 @@ interface IAppxContentGroupsEnumerator : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxContentGroupMapReader, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(418726d8-dd99-4f5d-9886-157add20de01),
+@@ -1785,6 +1834,7 @@ interface IAppxContentGroupMapReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxSourceContentGroupMapReader, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(f329791d-540b-4a9f-bc75-3282b7d73193),
+@@ -1803,6 +1853,7 @@ interface IAppxSourceContentGroupMapReader : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxContentGroupMapWriter, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(d07ab776-a9de-4798-8c14-3db31e687c78),
+@@ -1921,6 +1972,7 @@ typedef struct APPX_ENCRYPTED_EXEMPTIONS
+     [size_is(count), unique] LPCWSTR *plainTextFiles;
+ } APPX_ENCRYPTED_EXEMPTIONS;
+ 
++_Win32_AnnotateInterface_(IAppxEncryptionFactory, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(80E8E04D-8C88-44AE-A011-7CADF6FB2E72),
+@@ -1987,6 +2039,7 @@ interface IAppxEncryptionFactory : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptionFactory2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(c1b11eee-c4ba-4ab2-a55d-d015fe8ff64f),
+@@ -2005,6 +2058,7 @@ interface IAppxEncryptionFactory2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptionFactory3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(09edca37-cd64-47d6-b7e8-1cb11d4f7e05),
+@@ -2048,6 +2102,7 @@ interface IAppxEncryptionFactory3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptionFactory4, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(A879611F-12FD-41fe-85D5-06AE779BBAF5),
+@@ -2087,6 +2142,7 @@ interface IAppxEncryptionFactory5 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptedPackageWriter, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(F43D0B0B-1379-40E2-9B29-682EA2BF42AF),
+@@ -2103,6 +2159,7 @@ interface IAppxEncryptedPackageWriter : IUnknown
+     HRESULT Close();
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptedPackageWriter2, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(3E475447-3A25-40b5-8AD2-F953AE50C92D),
+@@ -2118,6 +2175,7 @@ interface IAppxEncryptedPackageWriter2 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptedBundleWriter, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(80B0902F-7BF0-4117-B8C6-4279EF81EE77),
+@@ -2133,6 +2191,7 @@ interface IAppxEncryptedBundleWriter : IUnknown
+     HRESULT Close();
+ }
+ 
++_Win32_AnnotateInterface_(IAppxEncryptedBundleWriter2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(E644BE82-F0FA-42B8-A956-8D1CB48EE379),
+@@ -2159,6 +2218,7 @@ typedef [v1_enum] enum APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS
+ } APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS;
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(APPX_PACKAGE_EDITOR_UPDATE_PACKAGE_MANIFEST_OPTIONS);")
+ 
++_Win32_AnnotateInterface_(IAppxEncryptedBundleWriter3, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(0D34DEB3-5CAE-4DD3-977C-504932A51D31),
+@@ -2179,6 +2239,7 @@ interface IAppxEncryptedBundleWriter3 : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IAppxPackageEditor, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(E2ADB6DC-5E71-4416-86B6-86E5F5291A6B),

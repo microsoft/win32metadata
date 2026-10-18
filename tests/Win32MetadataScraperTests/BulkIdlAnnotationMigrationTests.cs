@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -6,11 +7,17 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using Xunit;
+using Xunit.Abstractions;
 
 namespace Win32MetadataScraperTests
 {
+    [Collection(nameof(WinHttpNativeControlCollection))]
     public class BulkIdlAnnotationMigrationTests
     {
+        private readonly ITestOutputHelper output;
+
+        public BulkIdlAnnotationMigrationTests(ITestOutputHelper output) => this.output = output;
+
         [Theory]
         [InlineData("\r\n", false)]
         [InlineData("\n", true)]
@@ -38,7 +45,7 @@ namespace Win32MetadataScraperTests
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
             Assert.Equal(1, report.RootElement.GetProperty("authoredFacts").GetInt32());
             Assert.Equal(3, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
-            Assert.Single(report.RootElement.GetProperty("distinctGeneratedHeadersAffected").EnumerateArray());
+            Assert.Single(report.RootElement.GetProperty("candidateGeneratedHeaders").EnumerateArray());
             byte[] authored = File.ReadAllBytes(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
             string decoded = Encoding.Latin1.GetString(authored);
             Assert.Contains("_Win32_AnnotateInterface_(IMigrated, _Win32_SupportedOS_Windows7_)" + newline +
@@ -133,6 +140,63 @@ namespace Win32MetadataScraperTests
             string patch = File.ReadAllText(Path.Combine(result.OutputDirectory, "patches", "um", "sample.idl.patch"));
             Assert.DoesNotContain("-interface", patch);
             Assert.DoesNotContain("-//", patch);
+        }
+
+        [NativeMigrationTheory("WINHTTP_PRISTINE_PREPARED_HEADERS")]
+        [MemberData(nameof(OriginalIdlNativeSamples))]
+        public void OriginalIdlBatchKeepsNativeSurfaceWithExactInterfaceFloors(
+            string partition, string header, string architecture, string target, string language,
+            bool cInterface, bool enabled, string[] expected) =>
+            new WinHttpNativeControlTests(this.output).OriginalIdlBatchPreservesNativeAbiAndSalWithExactMetadata(
+                partition, header, architecture, target, language, cInterface, enabled, expected);
+
+        public static IEnumerable<object[]> OriginalIdlNativeSamples()
+        {
+            var owners = new[]
+            {
+                ("Wmi", "wbemcli.h", new[]
+                {
+                    "IEnumWbemClassObject", "IMofCompiler", "IUnsecuredApartment", "IWbemBackupRestore",
+                    "IWbemBackupRestoreEx", "IWbemCallResult", "IWbemClassObject", "IWbemConfigureRefresher",
+                    "IWbemContext", "IWbemHiPerfEnum", "IWbemLocator", "IWbemObjectAccess", "IWbemObjectSink",
+                    "IWbemObjectSinkEx", "IWbemObjectTextSrc", "IWbemQualifierSet", "IWbemRefresher",
+                    "IWbemServices", "IWbemShutdown", "IWbemStatusCodeText",
+                }.Select(name => name + "|SupportedOSPlatform(\"windows6.0.6000\")").Append(
+                    "IWbemUnsecuredApartment|SupportedOSPlatform(\"windowsserver2008\")").ToArray()),
+                ("Mbn", "mbnapi.h", new[]
+                {
+                    "IMbnConnection", "IMbnConnectionContext", "IMbnConnectionContextEvents",
+                    "IMbnConnectionEvents", "IMbnConnectionManager", "IMbnConnectionManagerEvents",
+                    "IMbnConnectionProfile", "IMbnConnectionProfileEvents", "IMbnConnectionProfileManager",
+                    "IMbnConnectionProfileManagerEvents", "IMbnDeviceService", "IMbnDeviceServicesContext",
+                    "IMbnDeviceServicesEvents", "IMbnDeviceServicesManager", "IMbnInterface",
+                    "IMbnInterfaceEvents", "IMbnInterfaceManager", "IMbnInterfaceManagerEvents",
+                    "IMbnMultiCarrier", "IMbnMultiCarrierEvents", "IMbnPin", "IMbnPinEvents", "IMbnPinManager",
+                    "IMbnPinManagerEvents", "IMbnRadio", "IMbnRadioEvents", "IMbnRegistration",
+                    "IMbnRegistrationEvents", "IMbnServiceActivation", "IMbnServiceActivationEvents",
+                    "IMbnSignal", "IMbnSignalEvents", "IMbnSms", "IMbnSmsConfiguration", "IMbnSmsEvents",
+                    "IMbnSmsReadMsgPdu", "IMbnSmsReadMsgTextCdma", "IMbnSubscriberInformation",
+                    "IMbnVendorSpecificEvents", "IMbnVendorSpecificOperation",
+                }.Select(name => name + "|SupportedOSPlatform(\"" + (name is
+                    "IMbnDeviceService" or "IMbnDeviceServicesContext" or "IMbnDeviceServicesEvents" or
+                    "IMbnDeviceServicesManager" or "IMbnMultiCarrier" or "IMbnMultiCarrierEvents"
+                        ? "windows8.0" : "windows6.1") + "\")").ToArray()),
+            };
+            foreach (var owner in owners)
+                foreach (var architecture in new[]
+                {
+                    ("x86", "i686-pc-windows-msvc"),
+                    ("x64", "x86_64-pc-windows-msvc"),
+                    ("arm64", "aarch64-pc-windows-msvc"),
+                })
+                    foreach (var mode in new[] { ("c", false), ("c++", false), ("c++", true) })
+                        foreach (bool enabled in new[] { false, true })
+                            yield return new object[]
+                            {
+                                owner.Item1, owner.Item2, architecture.Item1, architecture.Item2,
+                                mode.Item1, mode.Item2, enabled,
+                                mode.Item1 == "c++" ? owner.Item3 : Array.Empty<string>(),
+                            };
         }
 
         private static object Floor(string symbol, string version = "windows6.1") =>

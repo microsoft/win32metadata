@@ -1,0 +1,969 @@
+diff --git a/um/mfidl.idl b/um/mfidl.idl
+index d7abc97e..2b09ea2e 100644
+--- a/um/mfidl.idl
++++ b/um/mfidl.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //*@@@+++@@@@******************************************************************
+@@ -239,6 +240,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IMFMediaSession, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(90377834-21D0-4dee-8214-BA2E3E6C1127),
+@@ -700,6 +702,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFSourceResolver, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(FBE5A32D-A497-4b61-BB85-97B1A848A6E3),
+@@ -1108,6 +1111,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ interface IMFPresentationDescriptor;
+ interface IMFStreamDescriptor;
+ 
++_Win32_AnnotateInterface_(IMFMediaSource, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(279a808d-aec7-40c8-9c6b-a6b492c78a66),
+@@ -1246,6 +1250,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFMediaSourceEx, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(3C9B2EB9-86D5-4514-A394-F56664F9F0D8),
+@@ -1286,6 +1291,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFClockConsumer, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(6ef2a662-47c0-4666-b13d-cbb717f2fa2c)
+@@ -1312,6 +1318,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFMediaStream, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(D182108F-4EC6-443f-AA42-A71106EC825F),
+@@ -1455,6 +1462,7 @@ cpp_quote( "EXTERN_GUID( MF_INDEPENDENT_STILL_IMAGE, 0xea12af41, 0x0710, 0x42c9,
+ 
+ interface IMFStreamSink;
+ 
++_Win32_AnnotateInterface_(IMFMediaSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6ef2a660-47c0-4666-b13d-cbb717f2fa2c)
+@@ -1793,6 +1801,7 @@ typedef enum _MFSTREAMSINK_MARKER_TYPE
+ 
+ interface IMFMediaTypeHandler;
+ 
++_Win32_AnnotateInterface_(IMFStreamSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0A97B3CF-8E7C-4a3d-8F8C-0C843DC247FB),
+@@ -2009,6 +2018,7 @@ interface IMFStreamSink : IMFMediaEventGenerator
+ ///////////////////////////////////////////////////////////////////////////////
+ 
+ 
++_Win32_AnnotateInterface_(IMFVideoSampleAllocator, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(86cbc910-e533-4751-8e3b-f19b5b806a03),
+@@ -2033,6 +2043,7 @@ interface IMFVideoSampleAllocator : IUnknown
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFVideoSampleAllocatorNotify, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(A792CDBE-C374-4e89-8335-278E7B9956A4),
+@@ -2045,6 +2056,7 @@ interface IMFVideoSampleAllocatorNotify : IUnknown
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFVideoSampleAllocatorNotifyEx, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(3978AA1A-6D5B-4B7F-A340-90899189AE34),
+@@ -2058,6 +2070,7 @@ interface IMFVideoSampleAllocatorNotifyEx : IMFVideoSampleAllocatorNotify
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFVideoSampleAllocatorCallback, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(992388B4-3372-4f67-8B6F-C84C071F4751),
+@@ -2072,6 +2085,7 @@ interface IMFVideoSampleAllocatorCallback : IUnknown
+         [out] LONG* plSamples);
+ };
+ 
++_Win32_AnnotateInterface_(IMFVideoSampleAllocatorEx, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,
+@@ -2095,6 +2109,7 @@ interface IMFVideoSampleAllocatorEx : IMFVideoSampleAllocator
+ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
+ 
++_Win32_AnnotateInterface_(IMFDXGIDeviceManagerSource, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce),
+@@ -2129,6 +2144,7 @@ typedef enum _MF_VIDEO_PROCESSOR_MIRROR
+     MIRROR_VERTICAL            = 2
+ } MF_VIDEO_PROCESSOR_MIRROR;
+ 
++_Win32_AnnotateInterface_(IMFVideoProcessorControl, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     local,
+@@ -2155,6 +2171,7 @@ interface IMFVideoProcessorControl : IUnknown
+ };
+ 
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
++_Win32_AnnotateInterface_(IMFVideoProcessorControl2, _Win32_SupportedOS_10240_)
+ [
+     object,
+     local,
+@@ -2362,6 +2379,7 @@ interface IMFTopologyNode;
+ /// IMFTopology is provided to configure topology. The application or other MF components can create
+ /// the topology object via MFCreateTopology and then use the interface to configure the partial topology.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFTopology, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC433),
+@@ -2737,6 +2755,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ /// IMFTopologyNode interface.
+ /// Methods for configuring topology nodes
+ /// </summary>
++_Win32_AnnotateInterface_(IMFTopologyNode, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC430),
+@@ -3363,6 +3382,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFGetService, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fa993888-4383-415a-a930-dd472a8cf6f7)
+@@ -3603,6 +3623,7 @@ cpp_quote( "#define MFCLOCK_JITTER_DPC          4000" )
+ cpp_quote( "#define MFCLOCK_JITTER_PASSIVE      10000" )
+ 
+ 
++_Win32_AnnotateInterface_(IMFClock, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(2eb1e945-18b8-4139-9b1a-d5d584818530),
+@@ -3708,6 +3729,7 @@ cpp_quote( "#define PRESENTATION_CURRENT_POSITION   0x7fffffffffffffff" )
+ interface IMFClockStateSink;
+ interface IMFPresentationTimeSource;
+ 
++_Win32_AnnotateInterface_(IMFPresentationClock, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(868CE85C-8EA9-4f55-AB82-B009A910A805),
+@@ -3926,6 +3948,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */")
+ #pragma region Application or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IMFPresentationTimeSource, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7FF12CCE-F76F-41c2-863B-1666C8E5E139),
+@@ -3995,6 +4018,7 @@ cpp_quote( "    );" )
+ ///////////////////////////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFClockStateSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(F6696E82-74F7-4f3d-A178-8A5E09C3659F),
+@@ -4295,6 +4319,7 @@ cpp_quote("DEFINE_GUID( MF_PD_ADAPTIVE_STREAMING, 0xEA0D5D97, 0x29F9, 0x488B, 0x
+ 
+ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+ 
++_Win32_AnnotateInterface_(IMFPresentationDescriptor, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(03cb2711-24d7-4db6-a17f-f3a7a479a536),
+@@ -4407,6 +4432,7 @@ cpp_quote( "EXTERN_GUID(MF_SD_MUTUALLY_EXCLUSIVE, 0x23ef79c, 0x388d, 0x487f, 0xa
+ // even if the content is protected.
+ cpp_quote("DEFINE_GUID( MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH, 0x8fb6b117, 0x862e, 0x4b31, 0x8d, 0xab, 0x5e, 0x0a, 0x43, 0x4c, 0xae, 0xf0);")
+ 
++_Win32_AnnotateInterface_(IMFStreamDescriptor, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(56c03d9c-9dbb-45f5-ab4b-d80f47c05938),
+@@ -4438,6 +4464,7 @@ cpp_quote( "" )
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaTypeHandler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5),
+@@ -4533,6 +4560,7 @@ typedef enum MFTIMER_FLAGS
+ } MFTIMER_FLAGS;
+ 
+ 
++_Win32_AnnotateInterface_(IMFTimer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2),
+@@ -4649,6 +4677,7 @@ typedef enum _MFSHUTDOWN_STATUS
+     MFSHUTDOWN_COMPLETED,
+ } MFSHUTDOWN_STATUS;
+ 
++_Win32_AnnotateInterface_(IMFShutdown, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(97ec2ea4-0e42-4937-97ac-9d6d328824e1),
+@@ -5040,6 +5069,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINBLUE) ")
+ ///     topology to afull topology, which can be set on the Media Session with
+ ///     the flag MFSESSION_SETTOPOLOGY_NORESOLUTION.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFTopoLoader, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(DE9A6157-F660-4643-B56A-DF9F7998C7CD),
+@@ -5112,6 +5142,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFContentProtectionManager, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( ACF92459-6A61-42bd-B57C-B43E51203CB0 ),
+@@ -5229,6 +5260,7 @@ typedef enum
+     MF_LICENSE_URL_TAMPERED,
+ }   MF_URL_TRUST_STATUS;
+ 
++_Win32_AnnotateInterface_(IMFContentEnabler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( D3C4EF59-49CE-4381-9071-D5BCD044C770 ),
+@@ -5565,6 +5597,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFMetadata, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(F88CFB8C-EF16-4991-B450-CB8C69E51704),
+@@ -5687,6 +5720,7 @@ interface IMFMetadata : IUnknown
+                 );
+ };
+ 
++_Win32_AnnotateInterface_(IMFMetadataProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(56181D2D-E221-4adb-B1C8-3CEE6A53F76F)
+@@ -5782,6 +5816,7 @@ typedef enum _MFRATE_DIRECTION
+ 
+ }   MFRATE_DIRECTION;
+ 
++_Win32_AnnotateInterface_(IMFRateSupport, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0a9ccdbc-d797-4563-9667-94ec5d79292d),
+@@ -6008,6 +6043,7 @@ cpp_quote( "EXTERN_GUID( MF_RATE_CONTROL_SERVICE, 0x866fa297, 0xb802, 0x4bf8, 0x
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IMFRateControl, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(88ddcd21-03c3-4275-91ed-55ee3929328f),
+@@ -6142,6 +6178,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFTimecodeTranslate, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(ab9d8661-f7e8-4ef4-9861-89f334f94e74),
+@@ -6195,6 +6232,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFSeekInfo, _Win32_SupportedOS_Windows8_)
+ [
+     object, 
+     uuid(26AFEA53-D9ED-42B5-AB80-E64F9EE34779),
+@@ -6256,6 +6294,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSimpleAudioVolume, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(089EDF13-CF71-4338-8D13-9E569DBDC319)
+@@ -6296,6 +6335,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+ cpp_quote( "EXTERN_GUID( MR_CAPTURE_POLICY_VOLUME_SERVICE, 0x24030acd, 0x107a, 0x4265, 0x97, 0x5c, 0x41, 0x4e, 0x33, 0xe6, 0x5f, 0x2a);" )
+ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
+ 
++_Win32_AnnotateInterface_(IMFAudioStreamVolume, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(76B1BBDB-4EC8-4f36-B106-70A9316DF593)
+@@ -6346,6 +6386,7 @@ cpp_quote( "EXTERN_GUID( MR_STREAM_VOLUME_SERVICE, 0xf8b5fa2f, 0x32ef, 0x46f5, 0
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFAudioPolicy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(a0638c2b-6465-4395-9ae7-a321a9fd2856),
+@@ -6385,6 +6426,7 @@ cpp_quote( "EXTERN_GUID( MR_AUDIO_POLICY_SERVICE, 0x911fd737, 0x6775, 0x4ab0, 0x
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFSampleGrabberSinkCallback, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8C7B80BF-EE42-4b59-B1DF-55668E1BDCA8),
+@@ -6447,6 +6489,7 @@ cpp_quote( "EXTERN_GUID( MF_SAMPLEGRABBERSINK_IGNORE_CLOCK, 0x0efda2c0, 0x2b69,
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFSampleGrabberSinkCallback2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(ca86aa50-c46e-429e-ab27-16d6ac6844cb),
+@@ -6520,6 +6563,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFWorkQueueServices, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(35FE1BB8-A3A9-40fe-BBEC-EB569C9CCCA3),
+@@ -6776,6 +6820,7 @@ cpp_quote( "EXTERN_GUID( MF_WORKQUEUE_SERVICES, 0x8e37d489, 0x41e0, 0x413a, 0x90
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFWorkQueueServicesEx, _Win32_SupportedOS_Windows8_)
+ [
+    object,
+    uuid(96bf961b-40fe-42f1-ba9d-320238b49700),
+@@ -6923,6 +6968,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFQualityManager, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8D009D86-5B9F-4115-B1FC-9F80D52AB8AB),
+@@ -7073,6 +7119,7 @@ cpp_quote( "EXTERN_GUID( MF_QUALITY_NOTIFY_SAMPLE_LAG, 0x30d15206, 0xed2a, 0x476
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IMFQualityAdvise, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(EC15E2E9-E36B-4f7c-8758-77D452EF4CE7)
+@@ -7216,6 +7263,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFQualityAdvise2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(F3706F0D-8EA2-4886-8000-7155E9EC2EAE)
+@@ -7246,6 +7294,7 @@ interface IMFQualityAdvise2: IMFQualityAdvise
+ };
+ 
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFQualityAdviseLimits, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9)
+@@ -7282,6 +7331,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFRealTimeClient, _Win32_SupportedOS_WindowsVista_)
+ [
+    object,
+    uuid(2347D60B-3FB5-480c-8803-8DF3ADCD3EF0),
+@@ -7326,6 +7376,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFRealTimeClientEx, _Win32_SupportedOS_Windows8_)
+ [
+    object,
+    uuid(03910848-AB16-4611-B100-17B88AE2F248)   
+@@ -7387,6 +7438,7 @@ typedef enum _MFSequencerTopologyFlags
+     SequencerTopologyFlags_Last = 0x00000001,
+ } MFSequencerTopologyFlags;
+ 
++_Win32_AnnotateInterface_(IMFSequencerSource, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(197CD219-19CB-4de1-A64C-ACF2EDCBE59E),
+@@ -7587,6 +7639,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaSourceTopologyProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0E1D6009-C9F3-442d-8C51-A42D2D49452F),
+@@ -7621,6 +7674,7 @@ interface IMFMediaSourceTopologyProvider : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaSourcePresentationProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0E1D600a-C9F3-442d-8C51-A42D2D49452F),
+@@ -7695,6 +7749,7 @@ cpp_quote("#if defined(_MSC_VER) && (_MSC_VER >= 1600)")
+ cpp_quote("#pragma warning(pop)")
+ cpp_quote("#endif")
+ 
++_Win32_AnnotateInterface_(IMFTopologyNodeAttributeEditor, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(676aa6dd-238a-410d-bb99-65668d01605a),
+@@ -7846,6 +7901,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFByteStreamBuffering, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e),
+@@ -7886,6 +7942,7 @@ interface IMFByteStreamBuffering : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFByteStreamCacheControl, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(F5042EA4-7A96-4a75-AA7B-2BE1EF7F88D5),
+@@ -7909,6 +7966,7 @@ interface IMFByteStreamCacheControl : IUnknown
+ //////////////////////////////////////////////////////////////////////////////
+ //////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFByteStreamTimeSeek, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(64976BFA-FB61-4041-9069-8C9A5F659BEB),
+@@ -7982,6 +8040,7 @@ typedef struct
+     QWORD qwEndOffset;
+ } MF_BYTE_STREAM_CACHE_RANGE;
+ 
++_Win32_AnnotateInterface_(IMFByteStreamCacheControl2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(71CE469C-F34B-49EA-A56B-2D2A10E51149),
+@@ -8049,6 +8108,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetCredential, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5b87ef6a-7ed8-434f-ba0e-184fac1628d1),
+@@ -8166,6 +8226,7 @@ HRESULT SetPassword(
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetCredentialManager, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5b87ef6b-7ed8-434f-ba0e-184fac1628d1),
+@@ -8279,6 +8340,7 @@ interface IMFNetCredentialManager : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetCredentialCache, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5b87ef6c-7ed8-434f-ba0e-184fac1628d1),
+@@ -8447,6 +8509,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSSLCertificateManager, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(61f7d887-1230-4a8b-aeba-8ad434d1a64d),
+@@ -8575,6 +8638,7 @@ cpp_quote( "EXTERN_GUID( MFNETSOURCE_SSLCERTIFICATE_MANAGER, 0x55e6cb27, 0xe69b,
+ //  Synopsis:   Callbacks for filtering and sending requests.
+ //
+ //------------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IMFNetResourceFilter, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(091878a3-bf11-4a5c-bc9f-33995b06ef2d),
+@@ -8607,6 +8671,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSourceOpenMonitor, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(059054B3-027C-494C-A27D-9113291CF87F),
+@@ -8637,6 +8702,7 @@ interface IMFSourceOpenMonitor : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetProxyLocator, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e9cd0383-a268-4bb4-82de-658d53574d41),
+@@ -8714,6 +8780,7 @@ cpp_quote( "    _Outptr_ IMFNetProxyLocator** ppProxyLocator );" )
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetProxyLocatorFactory, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e9cd0384-a268-4bb4-82de-658d53574d41),
+@@ -8747,6 +8814,7 @@ interface IMFNetProxyLocatorFactory : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFSaveJob, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(e9931663-80bf-4c6e-98af-5dcf58747d1f),
+@@ -8836,6 +8904,7 @@ typedef enum _MFNETSOURCE_PROTOCOL_TYPE
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFNetSchemeHandlerConfig, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7BE19E73-C9BF-468a-AC5A-A5E8653BEC87),
+@@ -9480,6 +9549,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFSchemeHandler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6D4C7B74-52A0-4bb7-B0DB-55F29F47A668),
+@@ -9520,6 +9590,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ cpp_quote( "EXTERN_GUID(MF_BYTESTREAMHANDLER_ACCEPTS_SHARE_WRITE, 0xa6e1f733, 0x3001, 0x4915, 0x81, 0x50, 0x15, 0x58, 0xa2, 0x18, 0xe, 0xc8);" )
+ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ 
++_Win32_AnnotateInterface_(IMFByteStreamHandler, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(BB420AA4-765B-4a1f-91FE-D6A8A143924C),
+@@ -9576,6 +9647,7 @@ cpp_quote( "EXTERN_GUID( MF_BYTESTREAM_SERVICE, 0xab025e2b, 0x16d9, 0x4180, 0xa1
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFTrustedInput, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 542612C4-A1B8-4632-B521-DE11EA64A0B0 ),
+@@ -9701,6 +9773,7 @@ interface IMFOutputPolicy;
+ 
+ cpp_quote("EXTERN_GUID( MF_MEDIA_PROTECTION_MANAGER_PROPERTIES, 0x38BD81A9, 0xACEA, 0x4C73, 0x89, 0xB2, 0x55, 0x32, 0xC0, 0xAE, 0xCA, 0x79 );")
+ 
++_Win32_AnnotateInterface_(IMFInputTrustAuthority, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( D19F8E98-B126-4446-890C-5DCB7AD71453 ),
+@@ -9937,6 +10010,7 @@ interface IMFInputTrustAuthority : IUnknown
+ 
+ interface IMFOutputTrustAuthority;
+ 
++_Win32_AnnotateInterface_(IMFTrustedOutput, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( D19F8E95-B126-4446-890C-5DCB7AD71453 ),
+@@ -10015,6 +10089,7 @@ interface IMFTrustedOutput : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFOutputTrustAuthority, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( D19F8E94-B126-4446-890C-5DCB7AD71453 ),
+@@ -10081,6 +10156,7 @@ interface IMFOutputSchema;
+ ////////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFOutputPolicy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 7F00F10A-DAED-41AF-AB26-5FDFA4DFBA3C ),
+@@ -10271,6 +10347,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFOutputSchema, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 7BE0FC5B-ABD9-44FB-A5C8-F50136E71599 ),
+@@ -10590,6 +10667,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IMFSecureChannel, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( d0ae555d-3b12-4d97-b060-0990bc5aeb67 ),
+@@ -10656,6 +10734,7 @@ typedef enum SAMPLE_PROTECTION_VERSION
+ 
+ cpp_quote( "EXTERN_GUID( MF_SampleProtectionSalt, 0x5403deee, 0xb9ee, 0x438f, 0xaa, 0x83, 0x38, 0x4, 0x99, 0x7e, 0x56, 0x9d);" )
+ 
++_Win32_AnnotateInterface_(IMFSampleProtection, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 8e36395f-c7b9-43c4-a54d-512b4af63c95 ),
+@@ -10788,6 +10867,7 @@ interface IMFSampleProtection : IUnknown
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFMediaSinkPreroll, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5dfd4b2a-7674-4110-a4e6-8a68fd5f3688)
+@@ -10829,6 +10909,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(IMFFinalizableMediaSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(EAECB74A-9A50-42ce-9541-6A7F57AA4AD7),
+@@ -10895,6 +10976,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ #pragma region Application Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
++_Win32_AnnotateInterface_(IMFStreamingSinkConfig, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(9db7aa41-3cc5-40d4-8509-555804ad34cc)
+@@ -10959,6 +11041,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ /// process for source and sequencer. All proxy objects should implement the IMFRemoteProxy interface in order for
+ /// pipeline to access remote object and proxy host.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFRemoteProxy, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 994e23ad-1cc2-493c-b9fa-46f1cb040fa4 ),
+@@ -10982,6 +11065,7 @@ cpp_quote( "EXTERN_GUID( MF_REMOTE_PROXY, 0x2f00c90e, 0xd2cf, 0x4278, 0x8b, 0x6a
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFObjectReferenceStream, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(09EF5BE3-C8A7-469e-8B70-73BF25BB193F),
+@@ -11009,6 +11093,7 @@ cpp_quote( "EXTERN_GUID( CLSID_CreateMediaExtensionObject, 0xef65a54d, 0x0788, 0
+ 
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFPMPHost, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(F70CA1A9-FDC7-4782-B994-ADFFB1C98606),
+@@ -11062,6 +11147,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+ cpp_quote( "EXTERN_C const GUID MF_PMP_SERVICE;" )
+ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+ 
++_Win32_AnnotateInterface_(IMFPMPClient, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6C4E655D-EAD8-4421-B6B9-54DCDBBDF820),
+@@ -11081,6 +11167,7 @@ interface IMFPMPClient: IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IMFPMPServer, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 994e23af-1cc2-493c-b9fa-46f1cb040fa4 ),
+@@ -11118,6 +11205,7 @@ cpp_quote( "    );" )
+ ///////////////////////////////////////////////////////////////////////////////
+ ///////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFRemoteDesktopPlugin, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid( 1cde6309-cae0-4940-907e-c1ec9c3d1d4a ),
+@@ -11165,6 +11253,7 @@ cpp_quote( "" )
+ /// <summary>
+ ///     Used to retrieve and set SAMI styles on the MF SAMI Media Source.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFSAMIStyle, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(A7E025DD-5303-4a62-89D6-E747E1EFAC73),
+@@ -11258,6 +11347,7 @@ cpp_quote("STDAPI MFCreateSampleCopierMFT(_Outptr_ IMFTransform** ppCopierMFT);"
+ // Transcode APIs
+ //
+ /////////////////////////////////////////////////////////////////////////////
++_Win32_AnnotateInterface_(IMFTranscodeProfile, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(4ADFDBA3-7AB0-4953-A62B-461E7FF3DA1E),
+@@ -11659,6 +11749,7 @@ typedef struct _MF_TRANSCODE_SINK_INFO {
+     IMFMediaType* pAudioMediaType;
+ } MF_TRANSCODE_SINK_INFO;
+ 
++_Win32_AnnotateInterface_(IMFTranscodeSinkInfoProvider, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(8CFFCD2E-5A03-4a3a-AFF7-EDCD107C620E),
+@@ -11689,6 +11780,7 @@ cpp_quote(" _Outptr_ IMFActivate** ppActivate ); ")
+ //
+ /////////////////////////////////////////////////////////////////////////////
+ 
++_Win32_AnnotateInterface_(IMFFieldOfUseMFTUnlock, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(508E71D3-EC66-4fc3-8775-B4B9ED6BA847),
+@@ -11731,6 +11823,7 @@ typedef struct _MFT_REGISTRATION_INFO
+ /* ddf5cf9c-4506-45aa-abf0-6d5d94dd1b4a */
+ cpp_quote( "EXTERN_GUID(MF_LOCAL_MFT_REGISTRATION_SERVICE, 0xddf5cf9c, 0x4506, 0x45aa, 0xab, 0xf0, 0x6d, 0x5d, 0x94, 0xdd, 0x1b, 0x4a);" )
+ 
++_Win32_AnnotateInterface_(IMFLocalMFTRegistration, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(149c4d73-b4be-4f8d-8b87-079e926b6add),
+@@ -11795,6 +11888,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ 
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+ 
++_Win32_AnnotateInterface_(IMFPMPHostApp, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(84d2054a-3aa1-4728-a3b0-440a418cf49c)
+@@ -11813,6 +11907,7 @@ interface IMFPMPHostApp : IUnknown
+       [out, iid_is(riid)] void ** ppv);
+ }
+ 
++_Win32_AnnotateInterface_(IMFPMPClientApp, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(c004f646-be2c-48f3-93a2-a0983eba1108),
+@@ -11835,6 +11930,7 @@ interface IMFPMPClientApp : IUnknown
+ cpp_quote("#endif ")
+ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
+ 
++_Win32_AnnotateInterface_(IMFMediaStreamSourceSampleRequest, _Win32_SupportedOS_Windows81_)
+ [
+     object,
+     uuid(380b9af9-a85b-4e78-a2af-ea5ce645c6b4),
+@@ -11851,6 +11947,7 @@ interface IMFMediaStreamSourceSampleRequest : IUnknown
+ 
+ cpp_quote("#endif ")
+ 
++_Win32_AnnotateInterface_(IMFTrackedSample, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(245BF8E9-0755-40f7-88A5-AE0F18D55E17),
+@@ -12324,6 +12421,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ interface IMFSignedLibrary;
+ 
++_Win32_AnnotateInterface_(IMFProtectedEnvironmentAccess, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(ef5dc845-f0d9-4ec9-b00c-cb5183d38434),
+@@ -12336,6 +12434,7 @@ interface IMFProtectedEnvironmentAccess : IUnknown
+     HRESULT ReadGRL([annotation("_Out_")] UINT32 *outputLength, [annotation("_Outptr_result_bytebuffer_(*outputLength)")] BYTE **output);
+ }
+ 
++_Win32_AnnotateInterface_(IMFSignedLibrary, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(4a724bca-ff6a-4c07-8e0d-7a358421cf06),
+@@ -12346,6 +12445,7 @@ interface IMFSignedLibrary : IUnknown
+     HRESULT GetProcedureAddress([annotation("_In_")] LPCSTR name, [annotation("_Outptr_")] PVOID *address);
+ }
+ 
++_Win32_AnnotateInterface_(IMFSystemId, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a),
+@@ -12503,6 +12603,7 @@ cpp_quote( "} MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA;" )
+ /// <summary>
+ /// This interface allows a decryptor to communicate with the security processor implementing the hardware decryption for the given ProtectionSystemId.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFContentProtectionDevice, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(E6257174-A060-4C9A-A088-3B1B471CAD28),
+@@ -12555,6 +12656,7 @@ cpp_quote("   _Out_ BOOL *isSupported); ")
+ /// <summary>
+ /// This interface allows a decryptor to perform hardware key management and hardware sample decryption.
+ /// </summary>
++_Win32_AnnotateInterface_(IMFContentDecryptorContext, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(7EC4B1BD-43FB-4763-85D2-64FCB5C5F4CB),
+@@ -12758,6 +12860,7 @@ typedef enum _MF_CROSS_ORIGIN_POLICY
+ //  * GetSourceOrigin() returns the W3C origin of the HTML5 media element.  Use CoTaskMemFree to free the string.
+ //  * IsSameOrigin() returns true when the specified URL has the same origin as the HTML5 media element.
+ // </summary>
++_Win32_AnnotateInterface_(IMFNetCrossOriginSupport, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(bc2b7d44-a72d-49d5-8376-1480dee58b22),
+@@ -12791,6 +12894,7 @@ cpp_quote("EXTERN_GUID(MFNETSOURCE_CROSS_ORIGIN_SUPPORT, 0x9842207c, 0xb02c, 0x4
+ // <summary>
+ // This interface is implemented by clients to provide HTTP based download functionality to Media Foundation.
+ // </summary>
++_Win32_AnnotateInterface_(IMFHttpDownloadRequest, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(F779FDDF-26E7-4270-8A8B-B983D1859DE0),
+@@ -12877,6 +12981,7 @@ interface IMFHttpDownloadRequest : IUnknown
+ // <summary>
+ // This interface is implemented by clients to provide an IMFHttpDownloadRequest implementation to Media Foundation.
+ // </summary>
++_Win32_AnnotateInterface_(IMFHttpDownloadSession, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(71FA9A2C-53CE-4662-A132-1A7E8CBF62DB),
+@@ -12905,6 +13010,7 @@ interface IMFHttpDownloadSession : IUnknown
+ // This interface is implemented by clients that want to provide their own IMFHttpDownloadSession implementation.
+ // Media Foundation uses this interface to create an IMFHttpDownloadSession for downloading media.
+ // </summary>
++_Win32_AnnotateInterface_(IMFHttpDownloadSessionProvider, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(1B4CF4B9-3A16-4115-839D-03CC5C99DF01),
+@@ -13109,6 +13215,7 @@ typedef enum
+     MFSensorDeviceMode_Shared
+ } MFSensorDeviceMode;
+ 
++_Win32_AnnotateInterface_(IMFSensorDevice, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(FB9F48F2-2A18-4E28-9730-786F30F04DC4),
+@@ -13159,6 +13266,7 @@ interface IMFSensorDevice : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorGroup, _Win32_SupportedOS_14393_)
+ [
+     object,
+     uuid(4110243A-9757-461F-89F1-F22345BCAB4E),
+@@ -13203,6 +13311,7 @@ interface IMFSensorGroup : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorStream, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(E9A42171-C56E-498A-8B39-EDA5A070B7FC),
+@@ -13225,6 +13334,7 @@ interface IMFSensorStream : IMFAttributes
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorTransformFactory, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(EED9C2EE-66B4-4F18-A697-AC7D3960215C),
+@@ -13284,6 +13394,7 @@ typedef struct
+     UINT32  Unused;
+ } SENSORPROFILEID;
+ 
++_Win32_AnnotateInterface_(IMFSensorProfile, _Win32_SupportedOS_17134_)
+ [
+     object,
+     uuid(22F765D1-8DAB-4107-846D-56BAF72215E7),
+@@ -13312,6 +13423,7 @@ interface IMFSensorProfile : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorProfileCollection, _Win32_SupportedOS_17134_)
+ [
+     object,
+     uuid(C95EA55B-0187-48BE-9353-8D2507662351),
+@@ -13363,6 +13475,7 @@ cpp_quote("    );")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
+ #pragma endregion
+ 
++_Win32_AnnotateInterface_(IMFSensorProcessActivity, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(39DC7F4A-B141-4719-813C-A7F46162A2B8),
+@@ -13388,6 +13501,7 @@ interface IMFSensorProcessActivity : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorActivityReport, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(3E8C4BE1-A8C2-4528-90DE-2851BDE5FEAD),
+@@ -13418,6 +13532,7 @@ interface IMFSensorActivityReport  : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorActivitiesReport, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(683F7A5E-4A19-43CD-B1A9-DBF4AB3F7777),
+@@ -13441,6 +13556,7 @@ interface IMFSensorActivitiesReport : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorActivitiesReportCallback, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(DE5072EE-DBE3-46DC-8A87-B6F631194751),
+@@ -13454,6 +13570,7 @@ interface IMFSensorActivitiesReportCallback : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IMFSensorActivityMonitor, _Win32_SupportedOS_15063_)
+ [
+     object,
+     uuid(D0CEF145-B3F4-4340-A2E5-7A5080CA05CB),
+@@ -13761,6 +13878,7 @@ interface IMFExtendedCameraController : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateInterface_(IMFRelativePanelReport, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(F25362EA-2C0E-447F-81E2-755914CDC0C3),
+@@ -13785,6 +13903,7 @@ interface IMFRelativePanelReport : IUnknown
+     );
+ };
+ 
++_Win32_AnnotateInterface_(IMFRelativePanelWatcher, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(421AF7F6-573E-4AD0-8FDA-2E57CEDB18C6),
+@@ -13831,6 +13950,7 @@ cpp_quote("    _In_ PCWSTR displayMonitorDeviceId,")
+ cpp_quote("    _COM_Outptr_ IMFRelativePanelWatcher** ppRelativePanelWatcher")
+ cpp_quote("    );")
+ 
++_Win32_AnnotateInterface_(IMFVideoCaptureSampleAllocator, _Win32_SupportedOS_19041_)
+ [
+     object,
+     local,
+@@ -13896,6 +14016,7 @@ typedef enum MFSampleAllocatorUsage
+     MFSampleAllocatorUsage_DoesNotAllocate
+ } MFSampleAllocatorUsage;
+ 
++_Win32_AnnotateInterface_(IMFSampleAllocatorControl, _Win32_SupportedOS_19041_)
+ [
+     object,
+     uuid(DA62B958-3A38-4A97-BD27-149C640C0771),

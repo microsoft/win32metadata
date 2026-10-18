@@ -206,7 +206,7 @@ $report = [ordered]@{
     inputMapSha256 = Get-Hash ([IO.File]::ReadAllBytes([IO.Path]::GetFullPath($InputMap)))
     sdkIncludeRoot = $SdkIncludeRoot
     originalIdlsPatched = @($results | Where-Object changed | ForEach-Object original)
-    distinctGeneratedHeadersAffected = @($results | Where-Object changed | ForEach-Object generatedHeaders | Sort-Object -Unique)
+    candidateGeneratedHeaders = @($results | Where-Object changed | ForEach-Object generatedHeaders | Sort-Object -Unique)
     authoredFacts = @($all | Where-Object disposition -eq 'authored-original-idl').Count
     retainedLegacyFacts = @($all | Where-Object disposition -eq 'retained-legacy').Count
     owners = @($results)
@@ -214,6 +214,6 @@ $report = [ordered]@{
 [IO.File]::WriteAllText("$OutputDirectory\report.json", ($report | ConvertTo-Json -Depth 20), [Text.UTF8Encoding]::new($false))
 [pscustomobject]@{
     Report = "$OutputDirectory\report.json"; OriginalIdls = $report.originalIdlsPatched.Count
-    GeneratedHeadersAffected = $report.distinctGeneratedHeadersAffected.Count
+    CandidateGeneratedHeaders = $report.candidateGeneratedHeaders.Count
     AuthoredFacts = $report.authoredFacts; RetainedLegacyFacts = $report.retainedLegacyFacts
 }

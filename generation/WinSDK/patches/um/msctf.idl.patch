@@ -1,0 +1,729 @@
+diff --git a/um/msctf.idl b/um/msctf.idl
+index e412edd9..fff6314b 100644
+--- a/um/msctf.idl
++++ b/um/msctf.idl
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ //+-------------------------------------------------------------------------
+@@ -527,6 +528,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfThreadMgr
+ //
++_Win32_AnnotateInterface_(ITfThreadMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e801-2021-11d2-93e0-0060b067b86e),
+@@ -563,6 +565,7 @@ interface ITfThreadMgr : IUnknown
+ //
+ // ITfThreadMgrEx
+ //
++_Win32_AnnotateInterface_(ITfThreadMgrEx, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(3e90ade3-7594-4cb0-bb58-69628f5f458c),
+@@ -583,6 +586,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfThreadMgr2
+ //
++_Win32_AnnotateInterface_(ITfThreadMgr2, _Win32_SupportedOS_Windows8_)
+ [
+   object,
+   uuid(0ab198ef-6477-4ee8-8812-6780edb82d5e),
+@@ -629,6 +633,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfThreadMgrEventSink
+ //
++_Win32_AnnotateInterface_(ITfThreadMgrEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e80e-2021-11d2-93e0-0060b067b86e),
+@@ -656,6 +661,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfConfigureSystemKeystrokeFeed
+ //
++_Win32_AnnotateInterface_(ITfConfigureSystemKeystrokeFeed, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -672,6 +678,7 @@ interface ITfConfigureSystemKeystrokeFeed : IUnknown
+ //
+ // IEnumTfDocumentMgrs
+ //
++_Win32_AnnotateInterface_(IEnumTfDocumentMgrs, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e808-2021-11d2-93e0-0060b067b86e),
+@@ -693,6 +700,7 @@ interface IEnumTfDocumentMgrs : IUnknown
+ //
+ // ITfDocumentMgr
+ //
++_Win32_AnnotateInterface_(ITfDocumentMgr, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(aa80e7f4-2021-11d2-93e0-0060b067b86e),
+@@ -722,6 +730,7 @@ interface ITfDocumentMgr : IUnknown
+ //
+ // IEnumTfContexts
+ //
++_Win32_AnnotateInterface_(IEnumTfContexts, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(8f1a7ea6-1654-4502-a86e-b2902344d507),
+@@ -744,6 +753,7 @@ interface IEnumTfContexts : IUnknown
+ //
+ // ITfCompositionView
+ //
++_Win32_AnnotateInterface_(ITfCompositionView, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(D7540241-F9A1-4364-BEFC-DBCD2C4395B7),
+@@ -759,6 +769,7 @@ interface ITfCompositionView : IUnknown
+ //
+ // IEnumITfCompositionView
+ //
++_Win32_AnnotateInterface_(IEnumITfCompositionView, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(5EFD22BA-7838-46CB-88E2-CADB14124F8F),
+@@ -780,6 +791,7 @@ interface IEnumITfCompositionView : IUnknown
+ //
+ // ITfComposition
+ //
++_Win32_AnnotateInterface_(ITfComposition, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(20168D64-5A8F-4A5A-B7BD-CFA29F4D0FD9),
+@@ -801,6 +813,7 @@ interface ITfComposition : IUnknown
+ //
+ // ITfCompositionSink
+ //
++_Win32_AnnotateInterface_(ITfCompositionSink, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(A781718C-579A-4B15-A280-32B8577ACC5E),
+@@ -814,6 +827,7 @@ interface ITfCompositionSink : IUnknown
+ //
+ // ITfContextComposition
+ //
++_Win32_AnnotateInterface_(ITfContextComposition, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(D40C8AAE-AC92-4FC7-9A11-0EE0E23AA39B),
+@@ -841,6 +855,7 @@ interface ITfContextComposition : IUnknown
+ //
+ // ITfContextOwnerCompositionServices
+ //
++_Win32_AnnotateInterface_(ITfContextOwnerCompositionServices, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(86462810-593B-4916-9764-19C08E9CE110),
+@@ -854,6 +869,7 @@ interface ITfContextOwnerCompositionServices : ITfContextComposition
+ //
+ // ITfContextOwnerCompositionSink
+ //
++_Win32_AnnotateInterface_(ITfContextOwnerCompositionSink, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(5F20AA40-B57A-4F34-96AB-3576F377CC79),
+@@ -873,6 +889,7 @@ interface ITfContextOwnerCompositionSink : IUnknown
+ //
+ // ITfContextView
+ //
++_Win32_AnnotateInterface_(ITfContextView, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(2433bf8e-0f9b-435c-ba2c-180611978c30),
+@@ -919,6 +936,7 @@ interface IEnumTfContextViews : IUnknown
+ //
+ // ITfContext
+ //
++_Win32_AnnotateInterface_(ITfContext, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(aa80e7fd-2021-11d2-93e0-0060b067b86e),
+@@ -1017,6 +1035,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(ITfQueryEmbedded, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0fab9bdb-d250-4169-84e5-6be118fdd7a8),
+@@ -1032,6 +1051,7 @@ interface ITfQueryEmbedded : IUnknown
+ //
+ // ITfInsertAtSelection
+ //
++_Win32_AnnotateInterface_(ITfInsertAtSelection, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(55ce16ba-3014-41c1-9ceb-fade1446ac6c),
+@@ -1058,6 +1078,7 @@ interface ITfInsertAtSelection : IUnknown
+ //
+ // ITfCleanupContextSink
+ //
++_Win32_AnnotateInterface_(ITfCleanupContextSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(01689689-7acb-4e9b-ab7c-7ea46b12b522),
+@@ -1071,6 +1092,7 @@ interface ITfCleanupContextSink : IUnknown
+ //
+ // ITfCleanupContextDurationSink
+ //
++_Win32_AnnotateInterface_(ITfCleanupContextDurationSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(45c35144-154e-4797-bed8-d33ae7bf8794),
+@@ -1092,6 +1114,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfReadOnlyProperty
+ //
++_Win32_AnnotateInterface_(ITfReadOnlyProperty, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(17d49a3d-f8b8-4b2f-b254-52319dd64c53),
+@@ -1121,6 +1144,7 @@ typedef [uuid(d678c645-eb6a-45c9-b4ee-0f3e3a991348)] struct TF_PROPERTYVAL
+ //
+ // IEnumTfPropertyValue
+ //
++_Win32_AnnotateInterface_(IEnumTfPropertyValue, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72),
+@@ -1148,6 +1172,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfMouseTracker
+ //
++_Win32_AnnotateInterface_(ITfMouseTracker, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(09d146cd-a544-4132-925b-7afa8ef322d0),
+@@ -1165,6 +1190,7 @@ interface ITfMouseTracker : IUnknown
+ //
+ // ITfMouseTracker
+ //
++_Win32_AnnotateInterface_(ITfMouseTrackerACP, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(3bdd78e2-c16e-47fd-b883-ce6facc1a208),
+@@ -1182,6 +1208,7 @@ interface ITfMouseTrackerACP : IUnknown
+ //
+ // ITfMouseSink
+ //
++_Win32_AnnotateInterface_(ITfMouseSink, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,
+@@ -1205,6 +1232,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfEditRecord
+ //
++_Win32_AnnotateInterface_(ITfEditRecord, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(42d4d099-7c1a-4a89-b836-6c6f22160df0),
+@@ -1225,6 +1253,7 @@ interface ITfEditRecord : IUnknown
+ //
+ // ITfTextEditSink
+ //
++_Win32_AnnotateInterface_(ITfTextEditSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(8127d409-ccd3-4683-967a-b43d5b482bf7),
+@@ -1244,6 +1273,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfTextLayoutSink
+ //
++_Win32_AnnotateInterface_(ITfTextLayoutSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(2af2d06a-dd5b-4927-a0b4-54f19c91fade),
+@@ -1259,6 +1289,7 @@ interface ITfTextLayoutSink : IUnknown
+ //
+ // ITfStatusSink
+ //
++_Win32_AnnotateInterface_(ITfStatusSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(6b7d8d73-b267-4f69-b32e-1ca321ce4f45),
+@@ -1272,6 +1303,7 @@ interface ITfStatusSink : IUnknown
+ //
+ // ITfEditTransactionSink
+ //
++_Win32_AnnotateInterface_(ITfEditTransactionSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(708fbf70-b520-416b-b06c-2c41ab44f8ba),
+@@ -1287,6 +1319,7 @@ interface ITfEditTransactionSink : IUnknown
+ //
+ // ITfContextOwner
+ //
++_Win32_AnnotateInterface_(ITfContextOwner, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e80c-2021-11d2-93e0-0060b067b86e),
+@@ -1321,6 +1354,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfContextOwnerServices
+ //
++_Win32_AnnotateInterface_(ITfContextOwnerServices, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(b23eb630-3e1c-11d3-a745-0050040ab407),
+@@ -1360,6 +1394,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfContextKeyEventSink
+ //
++_Win32_AnnotateInterface_(ITfContextKeyEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -1394,6 +1429,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfEditSession
+ //
++_Win32_AnnotateInterface_(ITfEditSession, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e803-2021-11d2-93e0-0060b067b86e),
+@@ -1407,6 +1443,7 @@ interface ITfEditSession : IUnknown
+ //
+ // ITfRange
+ //
++_Win32_AnnotateInterface_(ITfRange, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e7ff-2021-11d2-93e0-0060b067b86e),
+@@ -1530,6 +1567,7 @@ interface ITfRange : IUnknown
+ //
+ // ITfRangeACP
+ //
++_Win32_AnnotateInterface_(ITfRangeACP, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(057a6296-029b-4154-b79a-0d461d4ea94c),
+@@ -1547,6 +1585,7 @@ interface ITfRangeACP : ITfRange
+ //
+ // ITextStoreACPServices
+ //
++_Win32_AnnotateInterface_(ITextStoreACPServices, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(aa80e901-2021-11d2-93e0-0060b067b86e),
+@@ -1574,6 +1613,7 @@ interface ITextStoreACPServices : IUnknown
+ //
+ // ITfRangeBackup
+ //
++_Win32_AnnotateInterface_(ITfRangeBackup, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(463a506d-6992-49d2-9b88-93d55e70bb16),
+@@ -1589,6 +1629,7 @@ interface ITfRangeBackup : IUnknown
+ //
+ // ITfPropertyStore
+ //
++_Win32_AnnotateInterface_(ITfPropertyStore, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(6834b120-88cb-11d2-bf45-00105a2799b5),
+@@ -1627,6 +1668,7 @@ interface ITfPropertyStore : IUnknown
+ //
+ // IEnumTfRanges
+ //
++_Win32_AnnotateInterface_(IEnumTfRanges, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(f99d3f40-8e32-11d2-bf46-00105a2799b5),
+@@ -1654,6 +1696,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfCreatePropertyStore
+ //
++_Win32_AnnotateInterface_(ITfCreatePropertyStore, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(2463fbf0-b0af-11d2-afc5-00105a2799b5),
+@@ -1682,6 +1725,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfPersistentPropertyLoaderACP
+ //
++_Win32_AnnotateInterface_(ITfPersistentPropertyLoaderACP, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(4ef89150-0807-11d3-8df0-00105a2799b5),
+@@ -1696,6 +1740,7 @@ interface ITfPersistentPropertyLoaderACP : IUnknown
+ //
+ // ITfProperty
+ //
++_Win32_AnnotateInterface_(ITfProperty, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(e2449660-9542-11d2-bf46-00105a2799b5),
+@@ -1724,6 +1769,7 @@ interface ITfProperty : ITfReadOnlyProperty
+ //
+ // IEnumTfProperties
+ //
++_Win32_AnnotateInterface_(IEnumTfProperties, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(19188cb0-aca9-11d2-afc5-00105a2799b5),
+@@ -1745,6 +1791,7 @@ interface IEnumTfProperties : IUnknown
+ //
+ // ITfCompartment
+ //
++_Win32_AnnotateInterface_(ITfCompartment, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(bb08f7a9-607a-4384-8623-056892b64371),
+@@ -1761,6 +1808,7 @@ interface ITfCompartment : IUnknown
+ //
+ // ITfCompartmentEventSink
+ //
++_Win32_AnnotateInterface_(ITfCompartmentEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(743abd5f-f26d-48df-8cc5-238492419b64),
+@@ -1774,6 +1822,7 @@ interface ITfCompartmentEventSink : IUnknown
+ //
+ // ITfCompartmentMgr
+ //
++_Win32_AnnotateInterface_(ITfCompartmentMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(7dcf57ac-18ad-438b-824d-979bffb74b7c),
+@@ -1794,6 +1843,7 @@ interface ITfCompartmentMgr : IUnknown
+ //
+ // ITfFunction
+ //
++_Win32_AnnotateInterface_(ITfFunction, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(db593490-098f-11d3-8df0-00105a2799b5),
+@@ -1807,6 +1857,7 @@ interface ITfFunction : IUnknown
+ //
+ // ITfFunctionProvider
+ //
++_Win32_AnnotateInterface_(ITfFunctionProvider, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(101d6610-0990-11d3-8df0-00105a2799b5),
+@@ -1827,6 +1878,7 @@ interface ITfFunctionProvider : IUnknown
+ //
+ // IEnumTfFunctionProviders
+ //
++_Win32_AnnotateInterface_(IEnumTfFunctionProviders, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(e4b24db0-0990-11d3-8df0-00105a2799b5),
+@@ -1854,6 +1906,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfInputProcessorProfiles
+ //
++_Win32_AnnotateInterface_(ITfInputProcessorProfiles, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(1F02B6C5-7842-4EE6-8A0B-9A24183A95CA),
+@@ -1938,6 +1991,7 @@ interface ITfInputProcessorProfiles : IUnknown
+ //
+ // Implemented by Cicero
+ //
++_Win32_AnnotateInterface_(ITfInputProcessorProfilesEx, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(892f230f-fe00-4a41-a98e-fcd6de0d35ef),
+@@ -1958,6 +2012,7 @@ interface ITfInputProcessorProfilesEx : ITfInputProcessorProfiles
+ //
+ // Implemented by Cicero
+ //
++_Win32_AnnotateInterface_(ITfInputProcessorProfileSubstituteLayout, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(4fd67194-1002-4513-bff2-c0ddf6258552),
+@@ -1974,6 +2029,7 @@ interface ITfInputProcessorProfileSubstituteLayout : IUnknown
+ //
+ // ITfActiveLanguageProfileNotifySink
+ //
++_Win32_AnnotateInterface_(ITfActiveLanguageProfileNotifySink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(b246cb75-a93e-4652-bf8c-b3fe0cfd7e57),
+@@ -1989,6 +2045,7 @@ interface ITfActiveLanguageProfileNotifySink : IUnknown
+ //
+ // IEnumTfLanguageProfiles
+ //
++_Win32_AnnotateInterface_(IEnumTfLanguageProfiles, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(3d61bf11-ac5f-42c8-a4cb-931bcc28c744),
+@@ -2017,6 +2074,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ //
+ // ITfLanguageProfileNotifySink
+ //
++_Win32_AnnotateInterface_(ITfLanguageProfileNotifySink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(43c9fe15-f494-4c17-9de2-b8a4ac350aa8),
+@@ -2046,6 +2104,7 @@ typedef [uuid(44d2825a-10e5-43b2-877f-6cb2f43b7e7e)] struct TF_INPUTPROCESSORPRO
+ //
+ // ITfInputProcessorProfileMgr
+ //
++_Win32_AnnotateInterface_(ITfInputProcessorProfileMgr, _Win32_SupportedOS_WindowsVista_)
+ [
+   object,
+   uuid(71c6e74c-0f28-11d8-a82a-00065b84435c),
+@@ -2107,6 +2166,7 @@ interface ITfInputProcessorProfileMgr : IUnknown
+ //
+ // IEnumTfInputProcessorProfiles
+ //
++_Win32_AnnotateInterface_(IEnumTfInputProcessorProfiles, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(71c6e74d-0f28-11d8-a82a-00065b84435c),
+@@ -2128,6 +2188,7 @@ interface IEnumTfInputProcessorProfiles : IUnknown
+ //
+ // ITfInputProcessorProfileActivationSink
+ //
++_Win32_AnnotateInterface_(ITfInputProcessorProfileActivationSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(71c6e74e-0f28-11d8-a82a-00065b84435c),
+@@ -2154,6 +2215,7 @@ typedef [uuid(77c12f95-b783-450d-879f-1cd2362c6521)] struct TF_PRESERVEDKEY
+ //
+ // ITfKeystrokeMgr
+ //
++_Win32_AnnotateInterface_(ITfKeystrokeMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2218,6 +2280,7 @@ interface ITfKeystrokeMgr : IUnknown
+ //
+ // ITfKeyEventSink
+ //
++_Win32_AnnotateInterface_(ITfKeyEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2256,6 +2319,7 @@ interface ITfKeyEventSink : IUnknown
+ //
+ // ITfKeyTraceEventSink
+ //
++_Win32_AnnotateInterface_(ITfKeyTraceEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2274,6 +2338,7 @@ interface ITfKeyTraceEventSink : IUnknown
+ //
+ // ITfPreservedKeyNotifySink
+ //
++_Win32_AnnotateInterface_(ITfPreservedKeyNotifySink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(6f77c993-d2b1-446e-853e-5912efc8a286),
+@@ -2293,6 +2358,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfMessagePump
+ //
++_Win32_AnnotateInterface_(ITfMessagePump, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2331,6 +2397,7 @@ interface ITfMessagePump : IUnknown
+ //
+ // ITfUIFocusSink
+ //
++_Win32_AnnotateInterface_(ITfThreadFocusSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2347,6 +2414,7 @@ interface ITfThreadFocusSink : IUnknown
+ //
+ // ITfTextInputProcessor
+ //
++_Win32_AnnotateInterface_(ITfTextInputProcessor, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2364,6 +2432,7 @@ interface ITfTextInputProcessor : IUnknown
+ //
+ // ITfTextInputProcessorEx
+ //
++_Win32_AnnotateInterface_(ITfTextInputProcessorEx, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2380,6 +2449,7 @@ interface ITfTextInputProcessorEx : ITfTextInputProcessor
+ //
+ // ITfClientId
+ //
++_Win32_AnnotateInterface_(ITfClientId, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2446,6 +2516,7 @@ typedef [uuid(1bf1c305-419b-4182-a4d2-9bfadc3f021f)] struct TF_DISPLAYATTRIBUTE
+ //
+ // ITfDisplayAttributeInfo
+ //
++_Win32_AnnotateInterface_(ITfDisplayAttributeInfo, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(70528852-2f26-4aea-8c96-215150578932),
+@@ -2467,6 +2538,7 @@ interface ITfDisplayAttributeInfo : IUnknown
+ //
+ // IEnumTfDisplayAttributeInfo interface
+ //
++_Win32_AnnotateInterface_(IEnumTfDisplayAttributeInfo, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(7cef04d7-cb75-4e80-a7ab-5f5bc7d332de),
+@@ -2488,6 +2560,7 @@ interface IEnumTfDisplayAttributeInfo : IUnknown
+ //
+ // ITfDisplayAttributeProvider interface
+ //
++_Win32_AnnotateInterface_(ITfDisplayAttributeProvider, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(fee47777-163c-4769-996a-6e9c50ad8f54),
+@@ -2505,6 +2578,7 @@ interface ITfDisplayAttributeProvider : IUnknown
+ // 
+ // ITfDisplayAttributeMgr interface
+ // 
++_Win32_AnnotateInterface_(ITfDisplayAttributeMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2526,6 +2600,7 @@ interface ITfDisplayAttributeMgr : IUnknown
+ //
+ // ITfDisplayAttributeNotifySink interface
+ // 
++_Win32_AnnotateInterface_(ITfDisplayAttributeNotifySink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(ad56f402-e162-4f25-908f-7d577cf9bda9),
+@@ -2539,6 +2614,7 @@ interface ITfDisplayAttributeNotifySink : IUnknown
+ // 
+ // ITfCategoryMgr interface
+ // 
++_Win32_AnnotateInterface_(ITfCategoryMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2604,6 +2680,7 @@ const DWORD TF_INVALID_COOKIE = 0xffffffff;
+ // 
+ // ITfSource
+ // 
++_Win32_AnnotateInterface_(ITfSource, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(4ea48a35-60ae-446f-8fd6-e6a8d82459f7),
+@@ -2621,6 +2698,7 @@ interface ITfSource : IUnknown
+ // 
+ // ITfSourceSingle
+ // 
++_Win32_AnnotateInterface_(ITfSourceSingle, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   uuid(73131f9c-56a9-49dd-b0ee-d046633f7528),
+@@ -2639,6 +2717,7 @@ interface ITfSourceSingle : IUnknown
+ //
+ // ITfUIElementMgr
+ //
++_Win32_AnnotateInterface_(ITfUIElementMgr, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2657,6 +2736,7 @@ interface ITfUIElementMgr : IUnknown
+ //
+ // IEnumTfUIElements
+ //
++_Win32_AnnotateInterface_(IEnumTfUIElements, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2677,6 +2757,7 @@ interface IEnumTfUIElements : IUnknown
+ //
+ // ITfUIElementSink
+ //
++_Win32_AnnotateInterface_(ITfUIElementSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2693,6 +2774,7 @@ interface ITfUIElementSink : IUnknown
+ //
+ // ITfUIElement
+ //
++_Win32_AnnotateInterface_(ITfUIElement, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2710,6 +2792,7 @@ interface ITfUIElement : IUnknown
+ //
+ // ITfCandidateListUIElement
+ //
++_Win32_AnnotateInterface_(ITfCandidateListUIElement, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2735,6 +2818,7 @@ interface ITfCandidateListUIElement : ITfUIElement
+ //
+ // ITfCandidateListUIElementBehavior
+ //
++_Win32_AnnotateInterface_(ITfCandidateListUIElementBehavior, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2751,6 +2835,7 @@ interface ITfCandidateListUIElementBehavior : ITfCandidateListUIElement
+ 
+ // ITfReadingInformationUIElement
+ //
++_Win32_AnnotateInterface_(ITfReadingInformationUIElement, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2776,6 +2861,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //
+ // ITfTransitoryExtensionUIElement
+ //
++_Win32_AnnotateInterface_(ITfTransitoryExtensionUIElement, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2789,6 +2875,7 @@ interface ITfTransitoryExtensionUIElement : ITfUIElement
+ 
+ // ITfTransitoryExtensionSink
+ //
++_Win32_AnnotateInterface_(ITfTransitoryExtensionSink, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2807,6 +2894,7 @@ interface ITfTransitoryExtensionSink : IUnknown
+ //
+ // ITfToolTipUIElement
+ //
++_Win32_AnnotateInterface_(ITfToolTipUIElement, _Win32_SupportedOS_Windows2000_)
+ [
+   object,
+   local,
+@@ -2821,6 +2909,7 @@ interface ITfToolTipUIElement : ITfUIElement
+ //
+ // ITfReverseConversionList
+ //
++_Win32_AnnotateInterface_(ITfReverseConversionList, _Win32_SupportedOS_WindowsVista_)
+ [
+   object,
+   uuid(151d69f0-86f4-4674-b721-56911e797f47),
+@@ -2837,6 +2926,7 @@ interface ITfReverseConversionList : IUnknown
+ //
+ // ITfReverseConversion
+ //
++_Win32_AnnotateInterface_(ITfReverseConversion, _Win32_SupportedOS_WindowsVista_)
+ [
+   object,
+   uuid(a415e162-157d-417d-8a8c-0ab26c7d2781),
+@@ -2851,6 +2941,7 @@ interface ITfReverseConversion : IUnknown
+ //
+ // ITfReverseConversionMgr
+ //
++_Win32_AnnotateInterface_(ITfReverseConversionMgr, _Win32_SupportedOS_WindowsVista_)
+ [
+   object,
+   uuid(b643c236-c493-41b6-abb3-692412775cc4),

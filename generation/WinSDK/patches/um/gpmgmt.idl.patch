@@ -1,0 +1,324 @@
+diff --git a/um/gpmgmt.idl b/um/gpmgmt.idl
+index 2590ab1c..f0c78331 100644
+--- a/um/gpmgmt.idl
++++ b/um/gpmgmt.idl
+@@ -6,6 +6,7 @@
+ 
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -173,6 +174,7 @@ interface IGPMMigrationTable;
+ interface IGPMMapEntryCollection;
+ interface IGPMMapEntry; 
+ 
++_Win32_AnnotateInterface_(IGPM, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(F5FAE809-3BD6-4DA9-A65E-17665B41D763),
+@@ -197,6 +199,7 @@ interface IGPMMapEntry;
+       [id(12), helpstring("method InitializeReporting")] HRESULT InitializeReporting([in, unique] BSTR bstrAdmPath);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMDomain, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(6B21CC14-5A00-4F44-A738-FEEC8A94C7E3),
+@@ -228,6 +231,7 @@ interface IGPMMapEntry;
+    };
+ 
+ 
++_Win32_AnnotateInterface_(IGPMBackupDir, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(B1568BED-0A93-4ACC-810F-AFE7081019B9),
+@@ -242,6 +246,7 @@ interface IGPMMapEntry;
+       [id(3), helpstring("method SearchBackups")] HRESULT SearchBackups([in] IGPMSearchCriteria  *pIGPMSearchCriteria,  [out, retval] IGPMBackupCollection **ppIGPMBackupCollection);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMSitesContainer, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(4725A899-2782-4D27-A6BB-D499246FFD72),
+@@ -259,6 +264,7 @@ interface IGPMMapEntry;
+    };
+    
+ 
++_Win32_AnnotateInterface_(IGPMSearchCriteria, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(D6F11C42-829B-48D4-83F5-3615B67DFC22),
+@@ -271,6 +277,7 @@ interface IGPMMapEntry;
+       [id(1), helpstring("method Add")] HRESULT Add([in] GPMSearchProperty searchProperty, [in] GPMSearchOperation searchOperation, [in] VARIANT varValue);
+    };
+    
++_Win32_AnnotateInterface_(IGPMTrustee, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(3B466DA8-C1A4-4B2A-999A-BEFCDD56CEFB),
+@@ -287,6 +294,7 @@ interface IGPMMapEntry;
+       [propget, id(5), helpstring("property TrusteeType")] HRESULT TrusteeType([out, retval] long *lVal);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMPermission, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(35EBCA40-E1A1-4A02-8905-D79416FB464A),
+@@ -303,6 +311,7 @@ interface IGPMMapEntry;
+       [propget, id(5), helpstring("property Trustee")] HRESULT Trustee([out, retval] IGPMTrustee **ppIGPMTrustee);
+    };
+    
++_Win32_AnnotateInterface_(IGPMSecurityInfo, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(B6C31ED4-1C93-4D3E-AE84-EB6D61161B60),
+@@ -320,6 +329,7 @@ interface IGPMMapEntry;
+       [id(7), helpstring("method RemoveTrustee")] HRESULT RemoveTrustee([in] BSTR bstrTrustee);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMBackup, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(D8A16A35-3B0D-416B-8D02-4DF6F95A7119),
+@@ -351,6 +361,7 @@ interface IGPMMapEntry;
+ 
+    };
+ 
++_Win32_AnnotateInterface_(IGPMBackupCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(C786FC0F-26D8-4BAB-A745-39CA7E800CAC),
+@@ -365,6 +376,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT* *ppIGPMBackup);
+    };
+    
++_Win32_AnnotateInterface_(IGPMSOM, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(C0A7F09E-05A1-4F0C-8158-9E5C33684F6B),
+@@ -388,6 +400,7 @@ interface IGPMMapEntry;
+       [id(10), helpstring("method SetSecurityInfo")] HRESULT SetSecurityInfo([in] IGPMSecurityInfo *pSecurityInfo);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMSOMCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(ADC1688E-00E4-4495-ABBA-BED200DF0CAB),
+@@ -402,6 +415,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT* *ppIGPMSOM);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMWMIFilter, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(EF2FF9B4-3C27-459A-B979-038305CEC75D),
+@@ -421,6 +435,7 @@ interface IGPMMapEntry;
+       [id(6), helpstring("method SetSecurityInfo")] HRESULT SetSecurityInfo([in] IGPMSecurityInfo *pSecurityInfo);
+    };
+    
++_Win32_AnnotateInterface_(IGPMWMIFilterCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(5782D582-1A36-4661-8A94-C3C32551945B),
+@@ -435,6 +450,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT* *pVal);
+    };
+    
++_Win32_AnnotateInterface_(IGPMRSOP, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(49ED785A-3237-4FF2-B1F0-FDF5A8D5A1EE),
+@@ -520,6 +536,7 @@ interface IGPMMapEntry;
+    
+    };
+    
++_Win32_AnnotateInterface_(IGPMGPO, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(58CC4352-1CA3-48E5-9864-1DA4D6E0D60F),
+@@ -592,6 +609,7 @@ interface IGPMMapEntry;
+       [id(29), helpstring("method MakeACLConsistent")] HRESULT MakeACLConsistent();
+    };
+ 
++_Win32_AnnotateInterface_(IGPMGPOCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(F0F0D5CF-70CA-4C39-9E29-B642F8726C01),
+@@ -606,6 +624,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT **ppIGPMGPOs);
+    };
+    
++_Win32_AnnotateInterface_(IGPMGPOLink, _Win32_SupportedOS_WindowsVista_)
+    [
+        object,
+        uuid(434B99BD-5DE7-478A-809C-C251721DF70C),
+@@ -626,6 +645,7 @@ interface IGPMMapEntry;
+       [id(7), helpstring("method Delete")] HRESULT Delete();  
+    };
+ 
++_Win32_AnnotateInterface_(IGPMGPOLinksCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(189D7B68-16BD-4D0D-A2EC-2E6AA2288C7F),
+@@ -640,6 +660,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT **ppIGPMLinks);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMCSECollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(2E52A97D-0A4A-4A6F-85DB-201622455DA0),
+@@ -654,6 +675,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT **ppIGPMCSEs);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMClientSideExtension, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(69DA7488-B8DB-415E-9266-901BE4D49928),
+@@ -669,6 +691,7 @@ interface IGPMMapEntry;
+       [id(4), helpstring("method IsComputerEnabled")] HRESULT IsComputerEnabled([out, retval] VARIANT_BOOL *pvbEnabled);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMAsyncCancel, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(DDC67754-BE67-4541-8166-F48166868C9C),
+@@ -680,6 +703,7 @@ interface IGPMMapEntry;
+    {
+       [id(1), helpstring("method Cancel")] HRESULT Cancel();
+    };
++_Win32_AnnotateInterface_(IGPMAsyncProgress, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(6AAC29F8-5948-4324-BF70-423818942DBC),
+@@ -692,6 +716,7 @@ interface IGPMMapEntry;
+       [id(1), helpstring("method Status")] HRESULT Status([in] long lProgressNumerator, [in] long lProgressDenominator, [in] HRESULT hrStatus, [in] VARIANT *pResult, [in] IGPMStatusMsgCollection *ppIGPMStatusMsgCollection);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMStatusMsgCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(9B6E1AF0-1A92-40F3-A59D-F36AC1F728B7),
+@@ -706,6 +731,7 @@ interface IGPMMapEntry;
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT * *pVal);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMStatusMessage, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(8496C22F-F3DE-4A1F-8F58-603CAAA93D7B),
+@@ -723,6 +749,7 @@ interface IGPMMapEntry;
+       [propget, id(6), helpstring("property Message")] HRESULT Message([out, retval] BSTR *pVal);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMConstants, _Win32_SupportedOS_WindowsVista_)
+    [
+         object,
+         uuid(50EF73E6-D35C-4C8D-BE63-7EA5D2AAC5C4),
+@@ -794,6 +821,7 @@ interface IGPMMapEntry;
+         [propget, id(60), helpstring("property RsopPlanningAssumeCompWQLFilterTrue")] HRESULT RsopPlanningAssumeCompWQLFilterTrue([out, retval] long *pVal);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMResult, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(86DFF7E9-F76F-42AB-9570-CEBC6BE8A52D),
+@@ -808,6 +836,7 @@ interface IGPMMapEntry;
+         [id(3), helpstring("method OverallStatus")] HRESULT OverallStatus();
+     };
+ 
++_Win32_AnnotateInterface_(IGPMMapEntryCollection, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(BB0BF49B-E53F-443F-B807-8BE22BFB6D42),
+@@ -822,6 +851,7 @@ interface IGPMMapEntry;
+         [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT * *pVal);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMMapEntry, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(8E79AD06-2381-4444-BE4C-FF693E6E6F2B),
+@@ -837,6 +867,7 @@ interface IGPMMapEntry;
+         [propget, id(4), helpstring("property EntryType")] HRESULT EntryType([out, retval] GPMEntryType *pgpmEntryType);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMMigrationTable, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(48F823B1-EFAF-470B-B6ED-40D14EE1A4EC),
+@@ -877,6 +908,7 @@ typedef enum {
+ } GPMStarterGPOType;
+ 
+ 
++_Win32_AnnotateInterface_(IGPMBackupDirEx, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(F8DC55ED-3BA0-4864-AAD4-D365189EE1D5),
+@@ -892,6 +924,7 @@ typedef enum {
+         [id(3), helpstring("method GetBackup")] HRESULT GetBackup([in] BSTR bstrID, [out, retval] VARIANT *pvarBackup);
+         [id(4), helpstring("method SearchBackups")] HRESULT SearchBackups([in] IGPMSearchCriteria *pIGPMSearchCriteria, [out, retval] VARIANT *pvarBackupCollection);
+     };
++_Win32_AnnotateInterface_(IGPMStarterGPOBackupCollection, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(C998031D-ADD0-4bb5-8DEA-298505D8423B),
+@@ -906,6 +939,7 @@ typedef enum {
+         [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT* *ppIGPMTmplBackup);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMStarterGPOBackup, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(51D98EDA-A87E-43dd-B80A-0B66EF1938D6),
+@@ -928,6 +962,7 @@ typedef enum {
+         [id(11), helpstring("method GenerateReportToFile")] HRESULT GenerateReportToFile([in] GPMReportType gpmReportType, [in] BSTR bstrTargetFilePath, [out, retval] IGPMResult **ppIGPMResult);
+     };
+ 
++_Win32_AnnotateInterface_(IGPM2, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(00238F8A-3D86-41ac-8F5E-06A6638A634A),
+@@ -941,6 +976,7 @@ typedef enum {
+         [id(14), helpstring("method InitializeReportingEx")] HRESULT InitializeReportingEx([in] BSTR bstrAdmPath, [in] LONG reportingOptions);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMStarterGPO, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(DFC3F61B-8880-4490-9337-D29C7BA8C2F0),
+@@ -1008,6 +1044,7 @@ typedef enum {
+ 
+     };
+ 
++_Win32_AnnotateInterface_(IGPMStarterGPOCollection, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(2E522729-2219-44ad-933A-64DFD650C423),
+@@ -1022,6 +1059,7 @@ typedef enum {
+       [propget, id(DISPID_NEWENUM), helpstring("property _NewEnum")] HRESULT _NewEnum([out, retval] IEnumVARIANT* *ppIGPMTemplates);
+    };
+ 
++_Win32_AnnotateInterface_(IGPMDomain2, _Win32_SupportedOS_WindowsVista_)
+    [
+       object,
+       uuid(7CA6BB8B-F1EB-490a-938D-3C4E51C768E6),
+@@ -1051,6 +1089,7 @@ typedef enum {
+                         [out, retval] IGPMResult **ppIGPMResult);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMConstants2, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(05AE21B0-AC09-4032-A26F-9E7DA786DC19),
+@@ -1077,6 +1116,7 @@ typedef enum {
+         [propget, id(76), helpstring("property ReportComments")] HRESULT ReportComments([out, retval] GPMReportingOptions *pVal);
+     };
+ 
++_Win32_AnnotateInterface_(IGPMGPO2, _Win32_SupportedOS_WindowsVista_)
+     [
+         object,
+         uuid(8A66A210-B78B-4d99-88E2-C306A817C925),

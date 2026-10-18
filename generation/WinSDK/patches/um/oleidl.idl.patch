@@ -1,0 +1,196 @@
+diff --git a/um/oleidl.idl b/um/oleidl.idl
+index 10d38014..80bdf4ac 100644
+--- a/um/oleidl.idl
++++ b/um/oleidl.idl
+@@ -7,6 +7,7 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -34,6 +35,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+ interface IOleInPlaceActiveObject;
+ interface IEnumOLEVERB;
+ 
++_Win32_AnnotateInterface_(IOleAdviseHolder, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -84,6 +86,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IOleCache, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000011e-0000-0000-C000-000000000046),
+@@ -126,6 +129,7 @@ interface IOleCache : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleCache2, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000128-0000-0000-C000-000000000046),
+@@ -194,6 +198,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+ #pragma region Desktop Family or OneCore Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
+ 
++_Win32_AnnotateInterface_(IOleCacheControl, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000129-0000-0000-C000-000000000046)
+@@ -215,6 +220,7 @@ interface IOleCacheControl : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IParseDisplayName, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000011a-0000-0000-C000-000000000046),
+@@ -236,6 +242,7 @@ interface IParseDisplayName : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleContainer, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000011b-0000-0000-C000-000000000046),
+@@ -259,6 +266,7 @@ interface IOleContainer : IParseDisplayName
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IOleClientSite, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000118-0000-0000-C000-000000000046),
+@@ -304,6 +312,7 @@ interface IOleClientSite : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000112-0000-0000-C000-000000000046),
+@@ -568,6 +577,7 @@ interface IOLETypes
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleWindow, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000114-0000-0000-C000-000000000046),
+@@ -591,6 +601,7 @@ interface IOleWindow : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IOleLink, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000011d-0000-0000-C000-000000000046)
+@@ -677,6 +688,7 @@ interface IOleLink : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleItemContainer, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000011c-0000-0000-C000-000000000046),
+@@ -721,6 +733,7 @@ interface IOleItemContainer : IOleContainer
+         [in] LPOLESTR pszItem);
+ }
+ 
++_Win32_AnnotateInterface_(IOleInPlaceUIWindow, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000115-0000-0000-C000-000000000046),
+@@ -765,6 +778,7 @@ interface IOleInPlaceUIWindow : IOleWindow
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleInPlaceActiveObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000117-0000-0000-C000-000000000046)
+@@ -820,6 +834,7 @@ interface IOleInPlaceActiveObject : IOleWindow
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleInPlaceFrame, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000116-0000-0000-C000-000000000046),
+@@ -887,6 +902,7 @@ typedef struct tagOleMenuGroupWidths
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IOleInPlaceObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000113-0000-0000-C000-000000000046),
+@@ -922,6 +938,7 @@ interface IOleInPlaceObject : IOleWindow
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IOleInPlaceSite, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000119-0000-0000-C000-000000000046),
+@@ -999,6 +1016,7 @@ interface IContinue : IUnknown
+     HRESULT FContinue();
+ }
+ 
++_Win32_AnnotateInterface_(IViewObject, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(0000010d-0000-0000-C000-000000000046)
+@@ -1109,6 +1127,7 @@ interface IViewObject : IUnknown
+ 
+ }
+ 
++_Win32_AnnotateInterface_(IViewObject2, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000127-0000-0000-C000-000000000046)
+@@ -1130,6 +1149,7 @@ interface IViewObject2 : IViewObject
+ }
+ 
+ 
++_Win32_AnnotateInterface_(IDropSource, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -1153,6 +1173,7 @@ interface IDropSource : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IDropTarget, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000122-0000-0000-C000-000000000046),    
+@@ -1223,6 +1244,7 @@ interface IDropTarget : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IDropSourceNotify, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object,
+@@ -1242,6 +1264,7 @@ interface IDropSourceNotify : IUnknown
+     );
+ }
+ 
++_Win32_AnnotateInterface_(IEnterpriseDropTarget, _Win32_SupportedOS_10240_)
+ [
+     object,
+     uuid(390E3878-FD55-4E18-819D-4682081C0CFD),
+@@ -1262,6 +1285,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+ #pragma region Application Family or OneCore Family or Games Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
+ 
++_Win32_AnnotateInterface_(IEnumOLEVERB, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(00000104-0000-0000-C000-000000000046),

@@ -94,8 +94,10 @@ quoted C++ and forward declarations. It inserts the reviewed
 bootstrap without rewriting existing bytes, guards, attributes or method order.
 Ambiguous targets, unsupported OS vocabulary, existing carriers and non-interface
 facts are reported verbatim as retained legacy debt. It never removes sidecar
-rows or changes the installed SDK or repository recipe. Add admitted patches,
-original-input closure and generated outputs to `SdkHeaders.json`, then use the
+rows or changes the installed SDK or repository recipe. The report's
+`candidateGeneratedHeaders` are ownership candidates, not measured generated
+outputs. Add admitted patches, original-input closure and generated outputs to
+`SdkHeaders.json`, then use the
 existing preparation/MIDL and native checks before claiming applied output or
 removing equivalent sidecar rows. Authored source is not compile or full-SDK
 acceptance.
