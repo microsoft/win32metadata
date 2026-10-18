@@ -271,7 +271,7 @@ foreach ($owner in $Original) {
                 }
                 if ($isRecord) {
                     $declarationPrefix = $masked.Substring([int]$decl.start, $nameOffset - [int]$decl.start)
-                    if ($declarationPrefix -notmatch '^(?:struct|class|interface)\s+(?:(?:DX_DECLARE_INTERFACE|DECLSPEC_UUID)\s*\([^)]*\)\s*)?$' -and
+                    if ($declarationPrefix -notmatch '^(?:struct|class|interface)\s+(?:(?:DX_DECLARE_INTERFACE|DWRITE_DECLARE_INTERFACE|DECLSPEC_UUID)\s*\([^)]*\)\s*)?$' -and
                         $declarationPrefix -notmatch '^(?:DECLARE_INTERFACE(?:_IID)?_|DECLARE_MAPI_INTERFACE_)\s*\(\s*$') {
                         $row.reason = 'unsupported-record-declaration-macro'
                         continue

@@ -231,8 +231,10 @@ DECLARE(Expanded)
 #define interface struct
 #if defined(__cplusplus)
 #define DX_DECLARE_INTERFACE(iid) __declspec(uuid(iid))
+#define DWRITE_DECLARE_INTERFACE(iid) __declspec(uuid(iid)) __declspec(novtable)
 #else
 #define DX_DECLARE_INTERFACE(iid)
+#define DWRITE_DECLARE_INTERFACE(iid)
 #endif
 #if defined(__cplusplus) && !defined(CINTERFACE)
 struct IBase { virtual int Base(void) = 0; };
@@ -254,10 +256,11 @@ struct IBase { void **lpVtbl; };
 DECLARE_INTERFACE_(IRichEditOleCallback, IBase) { METHOD(Edit); };
 DECLARE_INTERFACE_IID_(IDiskQuotaControl, IBase, ""7988B572-EC89-11cf-9C00-00AA00A14F56"") { METHOD(Quota); };
 interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1AnalysisTransform { METHOD(Analyze); };
+interface DWRITE_DECLARE_INTERFACE(""9A1B41C3-D3BB-466A-87FC-FE67556A3B65"") IDWriteFactory3 { METHOD(Write); };
 DECLARE_MAPI_INTERFACE_(IAddrBook, IBase) { METHOD(Address); };
 DECLARE_MAPI_INTERFACE_PTR(IAddrBook, LPADRBOOK);
 ";
-            string[] names = { "IRichEditOleCallback", "IDiskQuotaControl", "ID2D1AnalysisTransform", "IAddrBook" };
+            string[] names = { "IRichEditOleCallback", "IDiskQuotaControl", "ID2D1AnalysisTransform", "IAddrBook", "IDWriteFactory3" };
             using var fixture = new AuthoringFixture(source.ReplaceLineEndings("\r\n") + "\r\n",
                 names, Array.Empty<string>(), architecture, target);
             byte[] original = File.ReadAllBytes(fixture.Source);
@@ -286,7 +289,7 @@ DECLARE_MAPI_INTERFACE_PTR(IAddrBook, LPADRBOOK);
             var result = fixture.Run(apply: true);
             Assert.True(result.ExitCode == 0, result.Text);
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
-            Assert.Equal(4, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(5, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
             Assert.Equal(0, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
             string after = Path.Combine(fixture.Output, "after", "um", "sample.h");
             string afterText = File.ReadAllText(after);

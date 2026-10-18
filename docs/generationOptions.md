@@ -68,7 +68,8 @@ explicit residuals.
 Declaration maps also export native struct/class identities and definition sites.
 For global record SupportedOS facts, the authoring helper admits direct record
 declarations and the reviewed `DECLARE_INTERFACE_`, `DECLARE_INTERFACE_IID_`,
-`DECLARE_MAPI_INTERFACE_`, and `interface DX_DECLARE_INTERFACE` forms. It binds the
+`DECLARE_MAPI_INTERFACE_`, `interface DX_DECLARE_INTERFACE`, and
+`interface DWRITE_DECLARE_INTERFACE` forms. It binds the
 original name's spelling bytes, USR, full declaration extent and source hash,
 retaining unknown macros, additional physical definitions and unparsed conditional
 definitions. Forward declarations
