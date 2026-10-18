@@ -107,13 +107,13 @@ namespace Win32MetadataScraperTests
             Directory.CreateDirectory(Path.Combine(directory, architecture));
             try
             {
-                Write("Actual.header-types.cs", rawSources.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
+                Write(directory, architecture, "Actual.header-types.cs", rawSources.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>())
                     .Where(value => groupNames.Contains(value.Identifier.ValueText)));
                 string[] physicalRecords = { "LOGBRUSH", "LOGBRUSH32", "PARAFORMAT", "CRYPTCATATTRIBUTE", "FILE_DISPOSITION_INFO_EX" };
                 var records = rawSources.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<StructDeclarationSyntax>())
                     .Where(value => physicalRecords.Contains(value.Identifier.ValueText, StringComparer.Ordinal)).ToArray();
                 Assert.Equal(physicalRecords.Length, records.Length);
-                Write("ActualRecords.cs", records);
+                Write(directory, architecture, "ActualRecords.cs", records);
                 string[] physicalMethods =
                 {
                     "CreateSymbolicLinkA", "CreateSymbolicLinkW", "CreateSymbolicLinkTransactedA", "CreateSymbolicLinkTransactedW",
@@ -121,7 +121,7 @@ namespace Win32MetadataScraperTests
                 var methods = rawSources.SelectMany(tree => tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>())
                     .Where(value => physicalMethods.Contains(value.Identifier.ValueText, StringComparer.Ordinal)).ToArray();
                 Assert.Equal(physicalMethods.Length, methods.Length);
-                Write("ActualMethods.cs", methods);
+                Write(directory, architecture, "ActualMethods.cs", methods);
                 using var image = HeaderAnnotationWinmdTests.Emit(directory, architecture, nativeFieldArrayInfo: false);
                 var reader = image.Reader;
                 var types = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
@@ -194,25 +194,108 @@ namespace Win32MetadataScraperTests
             {
                 Directory.Delete(directory, recursive: true);
             }
+        }
 
-            void Write(string name, IEnumerable<MemberDeclarationSyntax> members)
+        [NativeMigrationTheory("SDK_NATIVE_ENUM_FROZEN_FS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void ActualForwardGroupsReachFsWinmdWithNativeSignatures(string architecture)
+        {
+            string frozen = Environment.GetEnvironmentVariable("SDK_NATIVE_ENUM_FROZEN_FS");
+            string batch = Environment.GetEnvironmentVariable("SDK_NATIVE_ENUM_BATCH");
+            Assert.False(string.IsNullOrEmpty(batch));
+            string source = Path.Combine(frozen, "canonical-fs", architecture);
+            var tree = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(source, "Fs.cs"))).GetRoot();
+            var groups = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(source, "Fs.header-types.cs"))).GetRoot()
+                .DescendantNodes().OfType<EnumDeclarationSyntax>().ToArray();
+            string[] groupNames = { "FILE_TYPE", "GETFINALPATHNAMEBYHANDLE_FLAGS" };
+            Assert.Equal(groupNames.OrderBy(value => value), groups.Select(group => group.Identifier.ValueText).OrderBy(value => value));
+            string[] names = { "GetFileType", "GetFinalPathNameByHandleA", "GetFinalPathNameByHandleW" };
+            var methods = tree.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                .Where(method => names.Contains(method.Identifier.ValueText, StringComparer.Ordinal)).ToArray();
+            Assert.Equal(names.Length, methods.Length);
+            using var control = JsonDocument.Parse(File.ReadAllText(Path.Combine(batch, "observations", "actual-" + architecture + ".json")));
+            var nativeGroups = control.RootElement.GetProperty("groupObservations").EnumerateArray().ToDictionary(
+                value => value.GetProperty("name").GetString());
+            string directory = Path.Combine(Path.GetTempPath(), "native-forward-fs-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(Path.Combine(directory, architecture));
+            try
             {
-                var namespaces = members.GroupBy(Namespace).Select(group =>
+                Write(directory, architecture, "Fs.header-types.cs", groups);
+                Write(directory, architecture, "Fs.cs", methods);
+                using var image = HeaderAnnotationWinmdTests.Emit(directory, architecture, nativeFieldArrayInfo: false);
+                var reader = image.Reader;
+                var enumObservations = new List<object>();
+                foreach (string name in groupNames)
                 {
-                    IEnumerable<MemberDeclarationSyntax> declarations = group;
-                    if (group.First() is MethodDeclarationSyntax)
-                        declarations = new[] { ((ClassDeclarationSyntax)group.First().Parent)
-                            .WithMembers(SyntaxFactory.List(group)) };
-                    return SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
-                        .WithMembers(SyntaxFactory.List(declarations));
-                });
-                var unit = SyntaxFactory.CompilationUnit().AddUsings(
-                    SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Runtime.InteropServices")),
-                    SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata")))
-                    .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces));
-                File.WriteAllText(Path.Combine(directory, architecture, name), unit.NormalizeWhitespace().ToFullString());
+                    var type = reader.TypeDefinitions.Select(reader.GetTypeDefinition).Single(value => reader.GetString(value.Name) == name);
+                    Assert.Equal("Windows.Win32.Storage.FileSystem", reader.GetString(type.Namespace));
+                    var fields = type.GetFields().Select(reader.GetFieldDefinition).ToArray();
+                    Assert.Equal("UInt32", fields.Single(value => reader.GetString(value.Name) == "value__")
+                        .DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null));
+                    var values = fields.Where(value => reader.GetString(value.Name) != "value__").ToDictionary(
+                        value => reader.GetString(value.Name), value => ReadValue(reader.GetBlobReader(reader.GetConstant(value.GetDefaultValue()).Value), "UInt32"));
+                    var expected = nativeGroups[name].GetProperty("values").EnumerateObject().ToDictionary(value => value.Name, value => value.Value.GetInt64());
+                    Assert.Equal(expected.OrderBy(value => value.Key), values.OrderBy(value => value.Key));
+                    Assert.DoesNotContain(type.GetCustomAttributes(), handle =>
+                        new[] { "FlagsAttribute", "ScopedEnumAttribute" }.Contains(HeaderAnnotationWinmdTests.AttributeName(reader, handle)));
+                    enumObservations.Add(new { fullName = reader.GetString(type.Namespace) + "." + name, storage = "UInt32", values });
+                }
+                var methodObservations = new List<object>();
+                foreach (var method in methods)
+                {
+                    string name = method.Identifier.ValueText;
+                    var actual = reader.TypeDefinitions.Select(reader.GetTypeDefinition).SelectMany(type => type.GetMethods())
+                        .Select(reader.GetMethodDefinition).Single(value => reader.GetString(value.Name) == name);
+                    var signature = actual.DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null);
+                    Assert.Equal("UInt32", signature.ReturnType);
+                    bool returned = name == "GetFileType";
+                    Assert.Equal(returned ? new[] { "IntPtr" } : new[] { "IntPtr", name.EndsWith("A", StringComparison.Ordinal)
+                        ? "SByte*" : "UInt16*", "UInt32", "UInt32" }, signature.ParameterTypes);
+                    var parameters = actual.GetParameters().Select(reader.GetParameter).ToArray();
+                    var slot = returned ? parameters.Single(value => value.SequenceNumber == 0)
+                        : parameters.Single(value => reader.GetString(value.Name) == "dwFlags");
+                    var association = (returned ? method.AttributeLists.Where(list => list.Target?.Identifier.ValueText == "return")
+                            : method.ParameterList.Parameters.Single(value => value.Identifier.ValueText == "dwFlags").AttributeLists)
+                        .SelectMany(list => list.Attributes).Single(value => value.Name.ToString().EndsWith("AssociatedEnum", StringComparison.Ordinal));
+                    AssertAssociation(reader, slot.GetCustomAttributes(), association);
+                    Assert.Equal(returned ? "FILE_TYPE" : "GETFINALPATHNAMEBYHANDLE_FLAGS",
+                        ((LiteralExpressionSyntax)association.ArgumentList.Arguments.Single().Expression).Token.ValueText);
+                    Assert.Equal(1, parameters.Sum(parameter => parameter.GetCustomAttributes().Count(handle =>
+                        HeaderAnnotationWinmdTests.AttributeName(reader, handle) == "AssociatedEnumAttribute")));
+                    methodObservations.Add(new { name, signature.ReturnType, signature.ParameterTypes,
+                        associationSlot = returned ? "return" : "dwFlags" });
+                }
+                string observations = Path.Combine(frozen, "canonical-fs", "observations");
+                Directory.CreateDirectory(observations);
+                File.WriteAllText(Path.Combine(observations, "physical-" + architecture + ".json"),
+                    JsonSerializer.Serialize(new { architecture, enumObservations, methodObservations,
+                        legacyEnumOverlays = 0, nativeFieldArrayInfo = false }, new JsonSerializerOptions { WriteIndented = true }));
             }
+            finally
+            {
+                Directory.Delete(directory, recursive: true);
+            }
+        }
+
+        private static void Write(string directory, string architecture, string name, IEnumerable<MemberDeclarationSyntax> members)
+        {
+            var namespaces = members.GroupBy(Namespace).Select(group =>
+            {
+                IEnumerable<MemberDeclarationSyntax> declarations = group;
+                if (group.First() is MethodDeclarationSyntax)
+                    declarations = new[] { ((ClassDeclarationSyntax)group.First().Parent)
+                        .WithMembers(SyntaxFactory.List(group)) };
+                return SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
+                    .WithMembers(SyntaxFactory.List(declarations));
+            });
+            var unit = SyntaxFactory.CompilationUnit().AddUsings(
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")),
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Runtime.InteropServices")),
+                SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata")))
+                .WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(namespaces));
+            File.WriteAllText(Path.Combine(directory, architecture, name), unit.NormalizeWhitespace().ToFullString());
         }
 
         private static string Namespace(SyntaxNode declaration) =>
