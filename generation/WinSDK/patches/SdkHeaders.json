@@ -597,6 +597,18 @@
       "sourceSha256": "320142FA791F045D5DBBA476421881B05F64DA4646981FC815E0201CD7DD16BE",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\wsbonlineerror.h",
       "sdkSha256": "320142FA791F045D5DBBA476421881B05F64DA4646981FC815E0201CD7DD16BE"
+    },
+    {
+      "path": "um\\winuser.h",
+      "sourceSha256": "014E26F0041535EBCC53C7B46F1D280F66283EC5EB4612B4E82F5B0F6C0D428C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winuser.h",
+      "sdkSha256": "014E26F0041535EBCC53C7B46F1D280F66283EC5EB4612B4E82F5B0F6C0D428C"
+    },
+    {
+      "path": "um\\winsvc.h",
+      "sourceSha256": "8108FE3F099960014F36D1B2DA425A8382E9D839DE3477EB06F181289A0685C8",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winsvc.h",
+      "sdkSha256": "8108FE3F099960014F36D1B2DA425A8382E9D839DE3477EB06F181289A0685C8"
     }
   ],
   "midl": {
@@ -998,7 +1010,9 @@
     "DirectML",
     "Dedup",
     "RemoteAssist",
-    "Wsb"
+    "Wsb",
+    "MenuRc",
+    "Services"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -1065,6 +1079,8 @@
     "um\\callobj.idl.patch",
     "um\\EventSys.idl.patch",
     "um\\amsi.idl.patch",
-    "um\\RrasCfg.idl.patch"
+    "um\\RrasCfg.idl.patch",
+    "um\\winuser.h.patch",
+    "um\\winsvc.h.patch"
   ]
 }

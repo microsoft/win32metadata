@@ -8,3 +8,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/winsvc.h
 --namespace
 Windows.Win32.System.Services
+--config
+parse-win32-annotations
