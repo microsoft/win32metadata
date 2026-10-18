@@ -66,11 +66,11 @@ DECLARE(Expanded)
             var counts = report.RootElement.GetProperty("counts");
             Assert.Equal(3, counts.GetProperty("converted").GetInt32());
             Assert.Equal(3, counts.GetProperty("retained").GetInt32());
-            Assert.Equal(5, counts.GetProperty("annotations").GetInt32());
+            Assert.Equal(4, counts.GetProperty("annotations").GetInt32());
             string afterPath = Path.Combine(fixture.Output, "after", "um", "sample.h");
             byte[] after = File.ReadAllBytes(afterPath);
             string afterText = Encoding.UTF8.GetString(after);
-            Assert.Equal(4, afterText.Split("_Win32_SupportedOS_Windows7_").Length - 1);
+            Assert.Equal(3, afterText.Split("_Win32_SupportedOS_Windows7_").Length - 1);
             Assert.Equal(1, afterText.Split("_Win32_SetLastError_").Length - 1);
             string stripped = string.Concat(afterText.Split("\r\n")
                 .Where(line => !line.StartsWith("_Win32_", StringComparison.Ordinal)).Select(line => line + "\r\n"));
@@ -130,6 +130,36 @@ DECLARE(Expanded)
                 Assert.Contains("um\\cpdk",
                     File.ReadAllText(Path.Combine(fixture.Output, $"Sample.{architecture}.rsp")));
             }
+        }
+
+        [Fact]
+        public void SelectedSymbolIndexStillRetainsAdditionalPhysicalDeclarationOwners()
+        {
+            using var fixture = new AuthoringFixture("// Native owner\r\nint Unique(void);\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
+            string other = Path.Combine(Path.GetDirectoryName(fixture.Mirror), "other.h");
+            File.WriteAllText(other, "int Unique(void);\nint Unselected(void);\n");
+            File.AppendAllText(fixture.Native.Header, "#include \"" + other.Replace('\\', '/') + "\"\n");
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal("retained", fact.GetProperty("status").GetString());
+            Assert.Equal("additional-declaration-owner", fact.GetProperty("reason").GetString());
+            Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+            Assert.Contains("Unique=SupportedOSPlatform(\"windows6.1\")", File.ReadAllText(fixture.OSSidecar));
+            Assert.Empty(report.RootElement.GetProperty("originals").EnumerateArray());
+            Assert.False(File.Exists(Path.Combine(fixture.Root, "generation", "WinSDK", "patches", "um", "sample.h.patch")));
+            Assert.False(File.Exists(Path.Combine(fixture.Root, "generation", "WinSDK", "patches", "um", "other.h.patch")));
+            fixture.RemoveMapOption();
+            File.AppendAllText(Path.Combine(fixture.Native.DirectoryPath, "test.rsp"),
+                "--with-attribute\nUnique=SupportedOSPlatform(\"windows6.1\")\n");
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var method = Assert.Single(CSharpSyntaxTree.ParseText(fixture.Native.ReadSource()).GetRoot()
+                .DescendantNodes().OfType<MethodDeclarationSyntax>().Where(method => method.Identifier.ValueText == "Unique"));
+            Assert.Single(method.AttributeLists.SelectMany(list => list.Attributes)
+                .Where(attribute => attribute.Name.ToString().EndsWith("SupportedOSPlatform", StringComparison.Ordinal)));
         }
 
         private static string[] Signatures(string source)

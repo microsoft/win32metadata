@@ -59,7 +59,8 @@ The owner inventory uses `readyOriginalOwners` records with `original`,
 exact retained `symbol` and `value`. Its `snapshot` identifies the selected SDK
 package root, package version, and include version. Inventory candidates are not
 proof of declaration ownership: the helper checks the parsed identity and original
-bytes before placing an annotation.
+bytes before placing an annotation. It indexes only the selected fact names, but
+retains every observed physical declaration owner for those names.
 
 Review `report.json` and the proposed patches. Reuse exported JSON maps through
 `-DeclarationMaps` instead of `-Partition` when useful. A fresh output directory is
@@ -67,8 +68,9 @@ required for every invocation. Adding `-Apply` installs patches and SDK recipe p
 enables annotation parsing in configured owning partitions, and removes only exact
 sidecar rows whose discovered declarations are all covered. Generated headers,
 overloads, macro-produced declarations, additional owners, unparsed conditional
-occurrences, and failed configurations remain explicit residuals. A retained fact
-may already have some source annotations; it is not counted as fully converted.
+occurrences, and failed configurations remain explicit residuals. Retained facts
+stay entirely in sidecars, without partial annotations that would duplicate legacy
+attributes. Only fully covered facts are annotated and removed.
 Original IDL requires the separate original-IDL authoring path.
 
 Run representative normal scrapes and native checks after applying a batch.

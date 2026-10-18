@@ -113,6 +113,14 @@ if ($Partition.Count) {
 if (!$DeclarationMaps.Count) {
     throw 'No successful declaration maps were supplied or produced.'
 }
+$wantedSymbols = [Collections.Generic.HashSet[string]]::new([StringComparer]::Ordinal)
+foreach ($owner in $inventory.readyOriginalOwners | Where-Object original -in $Original) {
+    foreach ($category in @('supportedOS', 'setLastError')) {
+        foreach ($fact in $owner.$category) {
+            $wantedSymbols.Add($fact.symbol) | Out-Null
+        }
+    }
+}
 $mapped = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
 $functionOwners = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
 foreach ($mapPath in $DeclarationMaps) {
@@ -121,6 +129,9 @@ foreach ($mapPath in $DeclarationMaps) {
         throw "Unsupported declaration map: $mapPath"
     }
     foreach ($declaration in $map.declarations) {
+        if (!$wantedSymbols.Contains($declaration.name)) {
+            continue
+        }
         $relative = [IO.Path]::GetRelativePath($mirror, $declaration.file)
         if ($relative.StartsWith('..') -or [IO.Path]::IsPathRooted($relative)) {
             continue
@@ -242,7 +253,10 @@ foreach ($owner in $Original) {
                 @($functionOwners[$fact.symbol] | Where-Object { $_ -ine $owner }).Count) {
                 $row.reason = 'additional-declaration-owner'
             }
-            if ($pending.Count -eq $locations.Count) {
+            if (!$row.reason -and $parseFailures.Count) {
+                $row.reason = 'incomplete-configuration-coverage'
+            }
+            if ($pending.Count -eq $locations.Count -and !$row.reason) {
                 foreach ($insertion in $pending) {
                     if (!$insertions.ContainsKey($insertion.offset)) {
                         $insertions[$insertion.offset] = [Collections.Generic.SortedSet[string]]::new([StringComparer]::Ordinal)
@@ -250,15 +264,8 @@ foreach ($owner in $Original) {
                     $insertions[$insertion.offset].Add($insertion.macro) | Out-Null
                 }
                 $row.annotationCount = $pending.Count
-                if (!$row.reason) {
-                    if ($parseFailures.Count) {
-                        $row.reason = 'incomplete-configuration-coverage'
-                    }
-                }
-                if (!$row.reason) {
-                    $row.status = 'converted'
-                    $remove[$category].Add($fact.value) | Out-Null
-                }
+                $row.status = 'converted'
+                $remove[$category].Add($fact.value) | Out-Null
             }
             elseif (!$row.reason) {
                 $row.reason = 'incomplete-declaration-coverage'
@@ -304,7 +311,7 @@ foreach ($owner in $Original) {
 $summary = [ordered]@{
     schemaVersion = 1
     applied = [bool]$Apply
-    originals = @($patches.original)
+    originals = @($patches | ForEach-Object original)
     counts = [ordered]@{
         converted = @($rows | Where-Object status -eq 'converted').Count
         retained = @($rows | Where-Object status -eq 'retained').Count
