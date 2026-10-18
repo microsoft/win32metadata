@@ -1661,6 +1661,46 @@ generic checked alias lowering does not select it. This explanation does
 not waive the three existing RPC API type/value changes or establish
 native signedness equality.
 
+#### WNet source-majority continuation
+
+The original `um\winnetwk.h` and `um\Npapi.h` patches now use compact,
+source-backed carriers for all twelve existing logical groups and their
+55 members. Native macro values, DWORD storage and flag semantics are
+retained. `RESOURCEUSAGE_NONE` remains the preexisting metadata-only zero
+member, not a newly invented native macro. Exact existing flag-definition
+blocks and the `WNetCloseEnum` declaration move before their typed
+annotation uses; no native signature or SAL is changed.
+
+The WNet field `NETINFOSTRUCT::dwStatus` now retains native DWORD storage
+with `AssociatedEnum("WIN32_ERROR")`; its matching sidecar use is removed.
+The exact remaining Foundation uses are `GetLastError::return`,
+`SetLastError::dwErrCode` and `SetLastErrorEx::dwErrCode`. The earlier
+four-use and literal-field snapshot gates above describe historical
+evidence, not a requirement to retain direct enum storage after this
+source migration. Logical member values, storage, flags and association
+identity remain checked; incidental synthetic declaration order does not.
+
+The actual selected user-mode RPC branch supplies signed LONG values
+`6`, `1784` and `14` for `RPC_X_SS_CONTEXT_MISMATCH`,
+`RPC_X_INVALID_BUFFER` and `RPC_X_PIPE_APP_MEMORY`. Those replace the
+historical kernel-branch values separately from annotation relocation.
+Three exact `=int` emitter remaps remain temporary parser/type-projection
+debt: the constants scraper's symbolic-alias path otherwise inherits
+unsigned `ERROR_*` storage and bypasses `--with-type`. No shared parser is
+forked. The 46 previously reported source-backed loose scalar additions
+remain additions, not new logical-group members or automatic blockers.
+
+The private continuation has 41 passing focused native/source controls,
+including C/C++, x86/x64/ARM64 and metadata off/on. The RPC fixture now
+uses the real Windows and Winternl type context rather than mixing
+`ntdef.h` with `winnt.h`. A bounded emit of the actual selected WNet and
+Foundation constant sources, using the accepted frozen dependency image,
+also passes six metadata controls: 65 DLL bindings, 57 floors, two
+last-error imports, 75 emitted associations, twelve groups/55 exact
+members and the three exact signed user-branch RPC values. These are
+focused checks, not a full-SDK image, combined API grade, current-head CI
+or consumer qualification; consumer compatibility remains **UNVERIFIED**.
+
 ### Third original-IDL batch: actual preparation and native-output controls
 
 The next bounded batch uses only the already-authored original

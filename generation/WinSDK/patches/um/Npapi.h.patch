@@ -1,5 +1,5 @@
 diff --git a/um/Npapi.h b/um/Npapi.h
-index e395c531..f057e068 100644
+index e395c531..3ffb0eb6 100644
 --- a/um/Npapi.h
 +++ b/um/Npapi.h
 @@ -43,6 +43,7 @@ extern "C" {
@@ -111,7 +111,16 @@ index e395c531..f057e068 100644
  DWORD APIENTRY
  NPGetUser (
      _In_    LPWSTR  lpName,
-@@ -381,6 +393,7 @@ typedef DWORD (APIENTRY *PF_NPSearchDialog) (
+@@ -340,6 +352,8 @@ typedef DWORD (APIENTRY *PF_NPGetPersistentUseOptionsForConnection) (
+ #define WNPS_DIR        1
+ #define WNPS_MULT       2
+ 
++_Win32_Enum_(NP_PROPERTY_DIALOG_SELECTION, DWORD, WNPS_FILE, WNPS_DIR, WNPS_MULT);
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_REMOTEFS) */
+ #pragma endregion
+ 
+@@ -381,6 +395,7 @@ typedef DWORD (APIENTRY *PF_NPSearchDialog) (
  #pragma region Desktop Family or RemoteFS Package
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_REMOTEFS)
  
@@ -119,7 +128,7 @@ index e395c531..f057e068 100644
  DWORD APIENTRY
  NPGetResourceParent(
      _In_ LPNETRESOURCEW lpNetResource,
-@@ -394,6 +407,7 @@ typedef DWORD (APIENTRY *PF_NPGetResourceParent) (
+@@ -394,6 +409,7 @@ typedef DWORD (APIENTRY *PF_NPGetResourceParent) (
      _Inout_ LPDWORD lpBufferSize
      );
  
@@ -127,7 +136,7 @@ index e395c531..f057e068 100644
  DWORD APIENTRY NPGetResourceInformation(
      _In_ LPNETRESOURCEW lpNetResource,
      _Out_writes_bytes_(*lpBufferSize) LPVOID lpBuffer,
-@@ -408,12 +422,13 @@ typedef DWORD (APIENTRY *PF_NPGetResourceInformation) (
+@@ -408,12 +424,13 @@ typedef DWORD (APIENTRY *PF_NPGetResourceInformation) (
      _Outptr_ LPWSTR *lplpSystem
      );
  
@@ -142,7 +151,7 @@ index e395c531..f057e068 100644
      _In_    DWORD    dwAveCharPerLine
      );
  
-@@ -434,7 +449,7 @@ typedef DWORD (APIENTRY *PF_NPFormatNetworkName) (
+@@ -434,7 +451,7 @@ typedef DWORD (APIENTRY *PF_NPFormatNetworkName) (
  DWORD APIENTRY
  NPGetPropertyText(
      _In_ DWORD  iButton,
@@ -151,7 +160,7 @@ index e395c531..f057e068 100644
      _In_ LPWSTR lpName,
      _Out_writes_(nButtonNameLen) LPWSTR lpButtonName,
      _In_ DWORD  nButtonNameLen,
-@@ -454,7 +469,7 @@ DWORD APIENTRY
+@@ -454,7 +471,7 @@ DWORD APIENTRY
  NPPropertyDialog(
      _In_ HWND   hwndParent,
      _In_ DWORD  iButtonDlg,
@@ -160,7 +169,16 @@ index e395c531..f057e068 100644
      _In_ LPWSTR lpFileName,
      _In_ DWORD  nType
      );
-@@ -496,7 +511,7 @@ DWORD APIENTRY
+@@ -479,6 +496,8 @@ typedef DWORD (APIENTRY *PF_NPPropertyDialog) (
+ #define WNDN_RMDIR    2
+ #define WNDN_MVDIR    3
+ 
++_Win32_Enum_(NPDIRECTORY_NOTIFY_OPERATION, DWORD, WNDN_MKDIR, WNDN_RMDIR, WNDN_MVDIR);
++
+ DWORD APIENTRY
+ NPGetDirectoryType (
+     _In_ LPWSTR  lpName,
+@@ -496,7 +515,7 @@ DWORD APIENTRY
  NPDirectoryNotify (
      _In_ HWND    hwnd,
      _In_ LPWSTR  lpDir,
@@ -169,7 +187,7 @@ index e395c531..f057e068 100644
      );
  
  typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
-@@ -511,6 +526,7 @@ typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
+@@ -511,6 +530,7 @@ typedef DWORD (APIENTRY *PF_NPDirectoryNotify) (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -177,7 +195,7 @@ index e395c531..f057e068 100644
  VOID
  WNetSetLastErrorA(
      _In_ DWORD   err,
-@@ -615,7 +631,7 @@ typedef struct _NOTIFYINFO {
+@@ -615,7 +635,7 @@ typedef struct _NOTIFYINFO {
  typedef struct _NOTIFYADD {
      HWND            hwndOwner;
      NETRESOURCE     NetResource;
@@ -186,7 +204,13 @@ index e395c531..f057e068 100644
  } NOTIFYADD, *LPNOTIFYADD;
  
  typedef struct _NOTIFYCANCEL {
-@@ -679,7 +695,7 @@ DWORD APIENTRY
+@@ -675,11 +695,13 @@ typedef DWORD (APIENTRY *PF_NPFMXGetPermCaps) (
+ #define WNPERM_DLG_AUDIT  1
+ #define WNPERM_DLG_OWNER  2
+ 
++_Win32_Enum_(WNPERM_DLG, DWORD, WNPERM_DLG_PERM, WNPERM_DLG_AUDIT, WNPERM_DLG_OWNER);
++
+ DWORD APIENTRY
  NPFMXEditPerm (
      _In_ LPWSTR lpDriveName,
      _In_ HWND   hwndFMX,
@@ -195,7 +219,7 @@ index e395c531..f057e068 100644
      );
  
  typedef DWORD (APIENTRY *PF_NPFMXEditPerm) (
-@@ -691,7 +707,7 @@ typedef DWORD (APIENTRY *PF_NPFMXEditPerm) (
+@@ -691,7 +713,7 @@ typedef DWORD (APIENTRY *PF_NPFMXEditPerm) (
  DWORD APIENTRY
  NPFMXGetPermHelp (
      _In_    LPWSTR  lpDriveName,
@@ -204,60 +228,3 @@ index e395c531..f057e068 100644
      _In_    BOOL    fDirectory,
      _Out_writes_(*lpBufferSize) LPVOID lpFileNameBuffer,
      _Inout_ LPDWORD lpBufferSize,
-@@ -707,6 +723,56 @@ typedef DWORD (APIENTRY *PF_NPFMXGetPermHelp) (
-     _Out_   LPDWORD lpnHelpContext
-     );
- 
-+#ifdef WIN32METADATA
-+#pragma push_macro("WNPERM_DLG_PERM")
-+#undef WNPERM_DLG_PERM
-+#pragma push_macro("WNPERM_DLG_AUDIT")
-+#undef WNPERM_DLG_AUDIT
-+#pragma push_macro("WNPERM_DLG_OWNER")
-+#undef WNPERM_DLG_OWNER
-+enum WNPERM_DLG : DWORD
-+{
-+    WNPERM_DLG_PERM = 0u,
-+    WNPERM_DLG_AUDIT = 1u,
-+    WNPERM_DLG_OWNER = 2u,
-+};
-+#pragma pop_macro("WNPERM_DLG_OWNER")
-+#pragma pop_macro("WNPERM_DLG_AUDIT")
-+#pragma pop_macro("WNPERM_DLG_PERM")
-+
-+#pragma push_macro("WNPS_FILE")
-+#undef WNPS_FILE
-+#pragma push_macro("WNPS_DIR")
-+#undef WNPS_DIR
-+#pragma push_macro("WNPS_MULT")
-+#undef WNPS_MULT
-+enum NP_PROPERTY_DIALOG_SELECTION : DWORD
-+{
-+    WNPS_FILE = 0u,
-+    WNPS_DIR = 1u,
-+    WNPS_MULT = 2u,
-+};
-+#pragma pop_macro("WNPS_MULT")
-+#pragma pop_macro("WNPS_DIR")
-+#pragma pop_macro("WNPS_FILE")
-+
-+#pragma push_macro("WNDN_MKDIR")
-+#undef WNDN_MKDIR
-+#pragma push_macro("WNDN_RMDIR")
-+#undef WNDN_RMDIR
-+#pragma push_macro("WNDN_MVDIR")
-+#undef WNDN_MVDIR
-+enum NPDIRECTORY_NOTIFY_OPERATION : DWORD
-+{
-+    WNDN_MKDIR = 1u,
-+    WNDN_RMDIR = 2u,
-+    WNDN_MVDIR = 3u,
-+};
-+#pragma pop_macro("WNDN_MVDIR")
-+#pragma pop_macro("WNDN_RMDIR")
-+#pragma pop_macro("WNDN_MKDIR")
-+#endif
-+
- #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
- #pragma endregion
- 

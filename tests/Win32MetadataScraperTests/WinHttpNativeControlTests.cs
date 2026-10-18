@@ -888,6 +888,80 @@ static_assert(DISC_NO_FORCE == 64u);
         }
 
         [NativeMigrationTheory]
+        [MemberData(nameof(OriginalWnetHeaderControls))]
+        public void OriginalWnetHeadersPreserveNativeAbiAndSalWithSourceBackedGroups(
+            string architecture, string target, string language, bool enabled)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string[] headers = { "winnetwk.h", "Npapi.h" };
+            var beforeSal = new List<string>();
+            var afterSal = new List<string>();
+            var beforeDiagnostics = new List<string>();
+            var afterDiagnostics = new List<string>();
+            var annotations = new List<string>();
+            const string checks = @"
+#ifdef RESOURCEUSAGE_NONE
+#error The existing metadata-only zero member must not become a native macro
+#endif
+";
+            var before = Surface(root, original, "Wnet", architecture, target, headers, checks,
+                salAnnotations: beforeSal, diagnostics: beforeDiagnostics, language: language);
+            var after = Surface(root, prepared, "Wnet", architecture, target, headers, checks,
+                metadataEnabled: enabled, annotations: annotations, salAnnotations: afterSal,
+                diagnostics: afterDiagnostics, language: language);
+            string[] carriers = enabled
+                ? new[]
+                {
+                    "NET_RESOURCE_SCOPE", "NET_RESOURCE_SCOPE", "NET_RESOURCE_TYPE",
+                    "WNET_OPEN_ENUM_USAGE", "WNET_OPEN_ENUM_USAGE",
+                    "NET_CONNECT_FLAGS", "NET_CONNECT_FLAGS", "NET_CONNECT_FLAGS", "NET_CONNECT_FLAGS", "NET_CONNECT_FLAGS",
+                    "CONNECTDLGSTRUCT_FLAGS", "DISCDLGSTRUCT_FLAGS", "UNC_INFO_LEVEL",
+                    "NETWORK_NAME_FORMAT_FLAGS", "NETINFOSTRUCT_CHARACTERISTICS",
+                    "NP_PROPERTY_DIALOG_SELECTION", "NPDIRECTORY_NOTIFY_OPERATION", "WNPERM_DLG",
+                }.Select(name => "typedef " + name + " unsigned long").ToArray()
+                : Array.Empty<string>();
+            Assert.NotEmpty(before);
+            Assert.NotEmpty(beforeSal);
+            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            Assert.Equal(beforeSal.OrderBy(value => value, StringComparer.Ordinal),
+                afterSal.OrderBy(value => value, StringComparer.Ordinal));
+            Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
+                afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            if (enabled)
+            {
+                var groups = annotations.Select(value => Regex.Match(value,
+                    @"^(?<name>[^|]+)\|(?:Flags)?Enum\((?<members>[^)]+)\)$"))
+                    .Where(match => match.Success)
+                    .GroupBy(match => match.Groups["name"].Value, StringComparer.Ordinal)
+                    .ToDictionary(group => group.Key, group => group.SelectMany(match =>
+                        match.Groups["members"].Value.Split(',').Select(member => member.Trim()))
+                        .Distinct(StringComparer.Ordinal).ToArray(), StringComparer.Ordinal);
+                Assert.Equal(WinHttpMigrationTests.NetworkLogicalEnums.OrderBy(value => value, StringComparer.Ordinal),
+                    groups.Keys.OrderBy(value => value, StringComparer.Ordinal));
+                Assert.Equal(55, groups.Values.Sum(members => members.Length));
+                Assert.Contains("RESOURCEUSAGE_NONE", groups["WNET_OPEN_ENUM_USAGE"]);
+                Assert.Equal(57, annotations.Distinct(StringComparer.Ordinal)
+                    .Count(value => value.Contains("|SupportedOSPlatform(", StringComparison.Ordinal)));
+                var associations = annotations.Where(value => value.EndsWith("|AssociatedEnum", StringComparison.Ordinal)).ToArray();
+                // Record fields are revisited through the native A/W pointer typedefs.
+                Assert.Equal(11, associations.Where(value => value.Contains("::", StringComparison.Ordinal))
+                    .Distinct(StringComparer.Ordinal).Count());
+                Assert.Equal(69, associations.Count(value => !value.Contains("::", StringComparison.Ordinal)));
+                Assert.Equal(2, annotations.Count(value => value.EndsWith("|RAIIFree", StringComparison.Ordinal)));
+                Assert.Equal(8, annotations.Count(value => value.EndsWith("|ContainsInteriorPointers", StringComparison.Ordinal)));
+                Assert.Equal(2, annotations.Count(value => value.EndsWith("|SetLastError", StringComparison.Ordinal)));
+            }
+            else
+                Assert.Empty(annotations);
+            this.output.WriteLine($"{architecture}/{language}/metadata={enabled}: {before.Length} unchanged WNet/Npapi native facts, " +
+                $"{beforeSal.Count} unchanged SAL attributes; 12 logical groups/55 members and native DWORD associations when enabled.");
+        }
+
+        public static IEnumerable<object[]> OriginalWnetHeaderControls() => OriginalErrorOwnerControls();
+
+        [NativeMigrationTheory]
         [MemberData(nameof(OriginalErrorOwnerControls))]
         public void OriginalErrorOwnersPreserveNativeAbiAndSalWithCompleteGroupContributions(
             string architecture, string target, string language, bool enabled)
@@ -958,7 +1032,7 @@ static_assert(DISC_NO_FORCE == 64u);
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string assertion = language == "c" ? "_Static_assert" : "static_assert";
             string source = (kernel ? "#define _KRPCENV_ 1\n" : "") +
-                "#include <ntdef.h>\n#include <winerror.h>\n#include <ntstatus.h>\n#include <rpcnterr.h>\n";
+                "#define WIN32_LEAN_AND_MEAN 1\n#include <windows.h>\n#include <winternl.h>\n#include <ntstatus.h>\n#include <rpcnterr.h>\n";
             var aliases = new[]
             {
                 ("RPC_X_SS_CONTEXT_MISMATCH", kernel ? unchecked((int)0xC0030005) : 6),

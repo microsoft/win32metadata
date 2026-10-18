@@ -566,7 +566,7 @@ namespace Win32MetadataScraperTests
             "NPDIRECTORY_NOTIFY_OPERATION", "NP_PROPERTY_DIALOG_SELECTION", "UNC_INFO_LEVEL", "WNET_OPEN_ENUM_USAGE",
             "WNPERM_DLG",
         };
-        private static readonly string[] NetworkLogicalEnums =
+        internal static readonly string[] NetworkLogicalEnums =
         {
             "UNC_INFO_LEVEL", "WNPERM_DLG", "WNET_OPEN_ENUM_USAGE", "NET_CONNECT_FLAGS",
             "NP_PROPERTY_DIALOG_SELECTION", "NPDIRECTORY_NOTIFY_OPERATION", "NET_RESOURCE_TYPE", "NETWORK_NAME_FORMAT_FLAGS",
@@ -2447,7 +2447,7 @@ namespace Win32MetadataScraperTests
                 item.TryGetProperty("addUsesTo", out var name) && name.GetString() == "WIN32_ERROR"));
             Assert.Equal(new[]
             {
-                "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode", "NETINFOSTRUCT::dwStatus",
+                "GetLastError::return", "SetLastError::dwErrCode", "SetLastErrorEx::dwErrCode",
             },
                 residual.GetProperty("uses").EnumerateArray()
                     .Select(use => use.TryGetProperty("method", out var method)
@@ -2497,7 +2497,7 @@ namespace Win32MetadataScraperTests
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(4)]
-        public void OriginalErrorGroupRetainsAllNativeValuesAndExistingResidualSignatureUses(int architecture)
+        public void OriginalErrorGroupRetainsAllNativeValuesAndExistingFoundationSignatureUses(int architecture)
         {
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
@@ -2529,15 +2529,9 @@ namespace Win32MetadataScraperTests
                 Assert.EndsWith("WIN32_ERROR", name == "GetLastError" ? signature.ReturnType : signature.ParameterTypes[0],
                     StringComparison.Ordinal);
             }
-            var originalNetInfo = Type(control.Reader, "NETINFOSTRUCT", architecture, WNetNamespace);
-            var netInfo = Type(current.Reader, "NETINFOSTRUCT", architecture, WNetNamespace);
-            Assert.Equal(SnapshotType(control.Reader, originalNetInfo), SnapshotType(current.Reader, netInfo));
-            var status = Assert.Single(netInfo.GetFields().Select(current.Reader.GetFieldDefinition)
-                .Where(field => current.Reader.GetString(field.Name) == "dwStatus"));
-            Assert.Equal("Windows.Win32.Foundation.WIN32_ERROR", status.DecodeSignature(Signatures, null));
             this.output.WriteLine($"Architecture {architecture}: 3378 exact named constant rows, UInt32 storage, type facts " +
-                "and all three method plus the existing NETINFOSTRUCT::dwStatus residual uses; " +
-                "WNet source admission and declaration order remain separate strict gates.");
+                "and the three remaining Foundation method uses. WNet's native DWORD/AssociatedEnum representation " +
+                "is covered independently by the original-WNet source controls.");
 
             MethodDefinition Method(MetadataReader reader, string name) => Assert.Single(reader.TypeDefinitions
                 .Select(reader.GetTypeDefinition)
@@ -2546,26 +2540,124 @@ namespace Win32MetadataScraperTests
                 .Where(method => reader.GetString(method.Name) == name && Supports(reader, method.GetCustomAttributes(), architecture)));
         }
 
-        [MigrationTheory]
+        [MigrationTheory("WINHTTP_MIGRATION_TOOLING_CONTROL", "WINHTTP_MIGRATION_NEW")]
         [InlineData(1)]
         [InlineData(2)]
         [InlineData(4)]
-        public void OriginalRpcAliasesRetainTheirExistingScalarStorageAndValues(int architecture)
+        public void OriginalWnetSourceGroupsRetainBindingsFloorsValuesAndEveryAssociation(int architecture)
+        {
+            using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
+            using var current = Open("WINHTTP_MIGRATION_NEW");
+            var before = Methods(control.Reader, WNetNamespace, "Apis", architecture);
+            var after = Methods(current.Reader, WNetNamespace, "Apis", architecture);
+            Assert.Equal(65, after.Count);
+            Assert.Equal(before.Keys.OrderBy(value => value), after.Keys.OrderBy(value => value));
+            int floors = 0, lastError = 0;
+            foreach (var entry in before)
+            {
+                var method = after[entry.Key];
+                Assert.Equal(Import(control.Reader, entry.Value), Import(current.Reader, method));
+                Assert.Equal(entry.Value.Attributes, method.Attributes);
+                Assert.Equal(entry.Value.ImplAttributes, method.ImplAttributes);
+                string[] os = AttributeValues(current.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute");
+                Assert.Equal(AttributeValues(control.Reader, entry.Value.GetCustomAttributes(), "SupportedOSPlatformAttribute"), os);
+                floors += os.Length;
+                lastError += method.GetImport().Attributes.HasFlag(MethodImportAttributes.SetLastError) ? 1 : 0;
+            }
+            Assert.Equal(57, floors);
+            Assert.Equal(2, lastError);
+            var uses = ReviewedEnumUses.Where(value => value.Namespace == WNetNamespace).ToArray();
+            Assert.Equal(75, uses.Length);
+            foreach (var use in uses)
+            {
+                if (after.TryGetValue(use.Owner, out var method))
+                {
+                    var parameter = method.GetParameters().Select(current.Reader.GetParameter).Single(value =>
+                        use.Member == "return" ? value.SequenceNumber == 0 : current.Reader.GetString(value.Name) == use.Member);
+                    var signature = method.DecodeSignature(Signatures, null);
+                    Assert.Equal(use.Native, use.Member == "return" ? signature.ReturnType : signature.ParameterTypes[parameter.SequenceNumber - 1]);
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                    if (use.Member == "return")
+                        Assert.DoesNotContain(method.GetCustomAttributes(), handle => AttributeName(current.Reader, handle) == "AssociatedEnumAttribute");
+                }
+                else
+                {
+                    var record = Type(current.Reader, use.Owner, architecture, WNetNamespace);
+                    var field = record.GetFields().Select(current.Reader.GetFieldDefinition)
+                        .Single(value => current.Reader.GetString(value.Name) == use.Member);
+                    Assert.Equal(use.Native, field.DecodeSignature(Signatures, null));
+                    Assert.Equal(new[] { use.Enum }, AttributeValues(current.Reader, field.GetCustomAttributes(), "AssociatedEnumAttribute"));
+                }
+            }
+            int members = 0;
+            foreach (string name in NetworkLogicalEnums)
+            {
+                string[] original = SnapshotType(control.Reader, Type(control.Reader, name, architecture, WNetNamespace)).Split('\n');
+                string[] actual = SnapshotType(current.Reader, Type(current.Reader, name, architecture, WNetNamespace)).Split('\n');
+                Assert.Equal(original.Take(2), actual.Take(2));
+                Assert.Equal(original.Skip(2).OrderBy(value => value, StringComparer.Ordinal),
+                    actual.Skip(2).OrderBy(value => value, StringComparer.Ordinal));
+                members += actual.Count(value => value.StartsWith("F|", StringComparison.Ordinal)) - 1;
+            }
+            Assert.Equal(55, members);
+            this.output.WriteLine($"WNet/{architecture}: 65 DLL bindings, 57 floors, 2 last-error imports, " +
+                "75 native-storage associations, and 12 logical groups/55 exact members; declaration order is not an API fact.");
+        }
+
+        [MigrationTheory("WINHTTP_MIGRATION_TOOLING_CONTROL", "WINHTTP_MIGRATION_NEW")]
+        [InlineData(1)]
+        [InlineData(2)]
+        [InlineData(4)]
+        public void OriginalRpcAliasesUseTheSelectedUserBranchAndSignedStorage(int architecture)
         {
             const string ns = "Windows.Win32.Foundation";
             using var control = Open("WINHTTP_MIGRATION_TOOLING_CONTROL");
             using var current = Open("WINHTTP_MIGRATION_NEW");
-            string[] names = { "RPC_X_SS_CONTEXT_MISMATCH", "RPC_X_INVALID_BUFFER", "RPC_X_PIPE_APP_MEMORY" };
+            var aliases = new[]
+            {
+                ("RPC_X_SS_CONTEXT_MISMATCH", unchecked((int)0xC0030005), 6),
+                ("RPC_X_INVALID_BUFFER", unchecked((int)0xC0000206), 1784),
+                ("RPC_X_PIPE_APP_MEMORY", unchecked((int)0xC0000017), 14),
+            };
             var before = Rows(control.Reader);
             var after = Rows(current.Reader);
-            foreach (string name in names)
+            foreach (var (name, kernelValue, userValue) in aliases)
+            {
+                Assert.Equal(Expected(name, kernelValue), before[name]);
+                Assert.Equal(Expected(name, userValue), after[name]);
                 this.output.WriteLine($"{name}/{architecture}: {before[name]} => {after[name]}");
-            Assert.Equal(names.Select(name => before[name]), names.Select(name => after[name]));
+            }
 
             Dictionary<string, string> Rows(MetadataReader reader) =>
                 SnapshotType(reader, Type(reader, "Apis", architecture, ns)).Split('\n')
-                    .Where(row => row.StartsWith("F|", StringComparison.Ordinal) && names.Contains(row.Split('|')[1]))
+                    .Where(row => row.StartsWith("F|", StringComparison.Ordinal) &&
+                        aliases.Any(alias => alias.Item1 == row.Split('|')[1]))
                     .ToDictionary(row => row.Split('|')[1], StringComparer.Ordinal);
+
+            static string Expected(string name, int value)
+            {
+                var blob = new BlobBuilder();
+                blob.WriteInt32(value);
+                return $"F|{name}|Public, Static, Literal, HasDefault|Int32|-1|Int32:{Convert.ToHexString(blob.ToArray())}||";
+            }
+        }
+
+        [Fact]
+        public void WnetSourceMigrationLeavesOnlyExplicitFoundationAndRpcCleanupDebt()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string[] emitter = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
+            foreach (string name in new[] { "RPC_X_SS_CONTEXT_MISMATCH", "RPC_X_INVALID_BUFFER", "RPC_X_PIPE_APP_MEMORY" })
+                Assert.Single(emitter.Where(value => value == name + "=int"));
+            foreach (string name in new[] { "winnetwk.h", "Npapi.h" })
+            {
+                string patch = File.ReadAllText(Path.Combine(project, "patches", "um", name + ".patch"));
+                Assert.DoesNotContain("#pragma push_macro", patch);
+                Assert.DoesNotContain("#undef ", patch);
+                Assert.Contains("_Win32_Enum_(", patch);
+            }
+            string[] settings = File.ReadAllLines(Path.Combine(project, "Partitions", "Wnet", "settings.rsp"));
+            Assert.Single(settings.Where(value => value == "parse-win32-annotations"));
         }
 
         [MigrationFact]
@@ -4715,12 +4807,12 @@ namespace Win32MetadataScraperTests
 
     public sealed class MigrationTheoryAttribute : TheoryAttribute
     {
-        public MigrationTheoryAttribute()
+        public MigrationTheoryAttribute(params string[] requiredFixtures)
         {
-            if (Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_OLD") == null ||
-                Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_NEW") == null ||
-                Environment.GetEnvironmentVariable("WINHTTP_MIGRATION_TOOLING_CONTROL") == null)
-                Skip = "Set WINHTTP_MIGRATION_OLD, WINHTTP_MIGRATION_NEW and WINHTTP_MIGRATION_TOOLING_CONTROL to the pinned full-image fixtures.";
+            if (requiredFixtures.Length == 0)
+                requiredFixtures = new[] { "WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW", "WINHTTP_MIGRATION_TOOLING_CONTROL" };
+            if (requiredFixtures.Any(name => Environment.GetEnvironmentVariable(name) == null))
+                Skip = "Set " + string.Join(", ", requiredFixtures) + " to the pinned metadata fixtures.";
         }
     }
 }
