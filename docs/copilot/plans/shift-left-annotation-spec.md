@@ -1001,6 +1001,13 @@ detailed-preprocessing-record dependency. Header annotation ingestion is impleme
 remaining sidecar migrations must still be qualified against their actual headers and
 output.
 
+Source coordinates are transport, not declaration identity: macro-expanded methods
+and parameters can share them. Resolve facts within the native owning record and
+function, including synthesized virtual-method callbacks, before selecting a
+parameter's annotations. Remaining ambiguity and annotated declarations that are
+not projected remain hard errors; do not merge unrelated owners or pick the first
+candidate.
+
 Metadata emission uses the standard `Windows.Win32.Foundation.Metadata` vocabulary.
 `SetLastError` sets the ECMA-335 P/Invoke `SupportsLastError` flag; COM exact-result
 preservation uses `MethodImplAttributes.PreserveSig`. Native scoped enums retain
