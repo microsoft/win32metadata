@@ -900,11 +900,14 @@ transport tests must not be counted as qualification of that contract.
 
 ### Original-IDL preparation
 
-Under `MIDL_PASS`, `_Win32_AnnotateInterface_` emits an annotated C++ forward declaration
-through `cpp_quote`. Clang inherits its attribute onto the real interface definition.
-Clang supports annotating that definition directly; this forward-declaration encoding
-is needed only because native MIDL does not emit an arbitrary interface `[annotation]`
-on that C++ definition.
+Under `MIDL_PASS`, `_Win32_AnnotateInterface_` emits an annotated same-name C++
+typedef through `cpp_quote`. The existing primary-typedef bridge transfers its
+facts to the native interface record. This works before or after the interface
+definition: MIDL can hoist library-referenced interfaces ahead of their quotes,
+and Clang discards attributes on a record redeclared after its definition.
+The typedef does not introduce a new type or change native layout. This encoding
+is needed because native MIDL does not emit an arbitrary interface `[annotation]`
+on the C++ definition; ignored-attribute diagnostics remain errors.
 
 Pin the helper and original import/preprocessor closure alongside the SDK source IDL,
 and explicitly pass the necessary preprocessor defines/includes when MIDL `cpp_opt`
@@ -924,7 +927,7 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 
 | IDL target | Native transport and qualification limit |
 | --- | --- |
-| Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies the C++ forward declaration instead. |
+| Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies an annotated same-name C++ typedef, including when MIDL hoists the definition before its quote. |
 | Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
 | Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
 | Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |

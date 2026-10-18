@@ -168,6 +168,80 @@ struct __declspec(uuid(""135cc76d-5edc-468c-b418-060f8c43435c"")) S
             Assert.False(File.Exists(fixture.Output));
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", false, true)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, true)]
+        public void MidlInterfaceTypedefRetainsAvailabilityBeforeAndAfterDefinition(
+            string architecture, string target, bool cInterface, bool afterDefinition)
+        {
+            const string annotation = "typedef _Win32_SupportedOS_WindowsVista_ struct IHoisted IHoisted;\n";
+            string definition = @"
+struct __declspec(uuid(""9cfbc4aa-ae13-452e-b020-a9c40e99d34f"")) IHoisted
+{
+#if defined(CINTERFACE)
+    void* lpVtbl;
+#else
+    virtual int __stdcall Run() = 0;
+#endif
+};
+";
+            using var fixture = new NativeFixture(architecture, target,
+                "typedef struct IHoisted IHoisted;\n" +
+                (afterDefinition ? definition + annotation : annotation + definition),
+                extraSettings: cInterface ? "--additional=-DCINTERFACE\n" : "");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            AssertSupportedOS(fixture.ReadSource(), "IHoisted", "windows6.0.6000");
+        }
+
+        [Fact]
+        public void LateMidlRecordAttributeStillFailsInsteadOfSilentlyDroppingFacts()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+struct IHoisted { int value; };
+struct _Win32_SupportedOS_WindowsVista_ IHoisted;
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("attribute declaration must precede definition", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void MidlInterfaceTypedefDoesNotAddFactsWithMetadataDisabled(bool cInterface)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct IHoisted IHoisted;
+struct IHoisted { int value; };
+typedef _Win32_SupportedOS_WindowsVista_ struct IHoisted IHoisted;
+", annotationsEnabled: false, extraSettings: cInterface ? "--additional=-DCINTERFACE\n" : "");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            AssertSupportedOS(fixture.ReadSource(), "IHoisted", null);
+        }
+
+        [Fact]
+        public void MidlInterfaceTypedefDoesNotOverwriteConflictingRecordFacts()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef struct IHoisted IHoisted;
+struct _Win32_SupportedOS_Windows7_ IHoisted { int value; };
+typedef _Win32_SupportedOS_WindowsVista_ struct IHoisted IHoisted;
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("Conflicting 'SupportedOSPlatform'", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
         [Fact]
         public void HoistedMidlMethodAttributesDoNotAnnotateInterfaceIdentifiers()
         {
