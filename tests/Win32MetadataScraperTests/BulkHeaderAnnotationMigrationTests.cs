@@ -5,6 +5,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
@@ -160,6 +161,58 @@ DECLARE(Expanded)
                 .DescendantNodes().OfType<MethodDeclarationSyntax>().Where(method => method.Identifier.ValueText == "Unique"));
             Assert.Single(method.AttributeLists.SelectMany(list => list.Attributes)
                 .Where(attribute => attribute.Name.ToString().EndsWith("SupportedOSPlatform", StringComparison.Ordinal)));
+        }
+
+        [Fact]
+        public void UnroutedOwnersCannotRemoveFactsOrCreateParserOptIns()
+        {
+            using var fixture = new AuthoringFixture("// Native owner\r\nint Unique(void);\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            string path = Path.Combine(fixture.Native.DirectoryPath, "owners.json");
+            var inventory = JsonNode.Parse(File.ReadAllText(path));
+            inventory["readyOriginalOwners"][0]["partitionCandidates"] = new JsonArray();
+            File.WriteAllText(path, inventory.ToJsonString());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal("retained", fact.GetProperty("status").GetString());
+            Assert.Equal("no-configured-owning-partition", fact.GetProperty("reason").GetString());
+            Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+            Assert.Empty(report.RootElement.GetProperty("originals").EnumerateArray());
+            Assert.Contains("Unique=SupportedOSPlatform(\"windows6.1\")", File.ReadAllText(fixture.OSSidecar));
+            Assert.DoesNotContain("parse-win32-annotations", File.ReadAllText(fixture.PartitionSettings));
+        }
+
+        [Theory]
+        [InlineData("c", "c17")]
+        [InlineData("c++", "c++17")]
+        public void ExternCPrefixAnnotationsStayAfterLinkageAndPreserveNativeSignatures(string language, string standard)
+        {
+            using var fixture = new AuthoringFixture("// Native linkage\r\n#if defined(__cplusplus)\r\n" +
+                "#define EXTERN_C extern \"C\"\r\n#else\r\n#define EXTERN_C extern\r\n#endif\r\n" +
+                "typedef long HRESULT;\r\n#define DWRITE_EXPORT __stdcall\r\n" +
+                "EXTERN_C HRESULT DWRITE_EXPORT Unique(void);\r\n", new[] { "Unique" }, new[] { "Unique" });
+            byte[] original = File.ReadAllBytes(fixture.Source);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            fixture.RemoveMapOption();
+            File.AppendAllText(Path.Combine(fixture.Native.DirectoryPath, "test.rsp"),
+                $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            string[] before = Signatures(fixture.Native.ReadSource());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            string after = Path.Combine(fixture.Output, "after", "um", "sample.h");
+            string text = File.ReadAllText(after);
+            Assert.Contains("EXTERN_C _Win32_SetLastError_ _Win32_SupportedOS_Windows7_ HRESULT DWRITE_EXPORT Unique", text);
+            Assert.Equal(original, Encoding.UTF8.GetBytes(text.Replace("_Win32_SetLastError_ ", "")
+                .Replace("_Win32_SupportedOS_Windows7_ ", "")));
+            File.Copy(after, fixture.Mirror, overwrite: true);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.Equal(before, Signatures(fixture.Native.ReadSource()));
+            Assert.Contains("SupportedOSPlatform(\"windows6.1\")", fixture.Native.ReadSource());
+            Assert.Contains("SetLastError = true", fixture.Native.ReadSource());
         }
 
         private static string[] Signatures(string source)

@@ -61,12 +61,15 @@ package root, package version, and include version. Inventory candidates are not
 proof of declaration ownership: the helper checks the parsed identity and original
 bytes before placing an annotation. It indexes only the selected fact names, but
 retains every observed physical declaration owner for those names.
+An exact `EXTERN_C` linkage prefix is preserved, with annotations inserted inline
+after linkage and before the parsed declaration; other shared-line prefixes remain
+explicit residuals.
 
 Review `report.json` and the proposed patches. Reuse exported JSON maps through
 `-DeclarationMaps` instead of `-Partition` when useful. A fresh output directory is
 required for every invocation. Adding `-Apply` installs patches and SDK recipe pins,
 enables annotation parsing in configured owning partitions, and removes only exact
-sidecar rows whose discovered declarations are all covered. Generated headers,
+sidecar rows whose discovered declarations are all covered. Unrouted owners, generated headers,
 overloads, macro-produced declarations, additional owners, unparsed conditional
 occurrences, and failed configurations remain explicit residuals. Retained facts
 stay entirely in sidecars, without partial annotations that would duplicate legacy

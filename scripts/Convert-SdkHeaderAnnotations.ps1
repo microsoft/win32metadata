@@ -199,6 +199,11 @@ foreach ($owner in $Original) {
             if (@($sidecarLines[$category] | Where-Object { $_ -ceq $fact.value }).Count -ne 1) {
                 throw "Expected one exact retained sidecar fact: $($fact.value)"
             }
+            if (!$candidates[0].partitionCandidates.Count) {
+                $row.reason = 'no-configured-owning-partition'
+                $rows.Add([pscustomobject]$row)
+                continue
+            }
             $key = "$($owner.ToLowerInvariant())|$($fact.symbol)"
             $locations = @(if ($mapped.ContainsKey($key)) { $mapped[$key].ToArray() })
             if (!$locations.Count) {
@@ -237,7 +242,7 @@ foreach ($owner in $Original) {
                 }
                 $lineStart = $text.LastIndexOf("`n", [int]$decl.start) + 1
                 $prefix = $text.Substring($lineStart, [int]$decl.start - $lineStart)
-                if ($prefix -notmatch '^[ \t]*$') {
+                if ($prefix -notmatch '^[ \t]*$' -and $prefix -notmatch '^[ \t]*EXTERN_C[ \t]+$') {
                     $row.reason = 'declaration-start-shares-source-line'
                     continue
                 }
@@ -280,7 +285,11 @@ foreach ($owner in $Original) {
     foreach ($offset in @($insertions.Keys | Sort-Object -Descending)) {
         $lineStart = $text.LastIndexOf("`n", $offset) + 1
         $indent = $text.Substring($lineStart, $offset - $lineStart)
-        $prefix = ($insertions[$offset] -join ($eol + $indent)) + $eol + $indent
+        $prefix = if ($indent -match '^[ \t]*EXTERN_C[ \t]+$') {
+            ($insertions[$offset] -join ' ') + ' '
+        } else {
+            ($insertions[$offset] -join ($eol + $indent)) + $eol + $indent
+        }
         $after = $after.Insert($offset, $prefix)
     }
     $beforePath = "$OutputDirectory\before\$owner"
