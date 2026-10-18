@@ -1,0 +1,93 @@
+diff --git a/um/lmserver.h b/um/lmserver.h
+index a8f80c8f..1d4b18fe 100644
+--- a/um/lmserver.h
++++ b/um/lmserver.h
+@@ -54,6 +54,7 @@ extern "C" {
+ // Function Prototypes - SERVER
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerEnum (
+     _In_opt_ IN  LMCSTR      servername OPTIONAL,
+@@ -87,6 +88,7 @@ NetServerEnumEx (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -99,6 +101,7 @@ NetServerGetInfo (
+     LPBYTE *bufptr
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerSetInfo(
+@@ -139,6 +142,7 @@ NetServerSetInfoCommandLine (
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -152,6 +156,7 @@ NetServerDiskEnum (
+     _Inout_opt_ LPDWORD resume_handle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerComputerNameAdd(
+@@ -160,6 +165,7 @@ NetServerComputerNameAdd(
+     _In_ LMSTR EmulatedServerName
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerComputerNameDel(
+@@ -167,6 +173,7 @@ NetServerComputerNameDel(
+     _In_ LMSTR EmulatedServerName
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportAdd (
+@@ -175,6 +182,7 @@ NetServerTransportAdd (
+     _In_reads_bytes_(sizeof(SERVER_TRANSPORT_INFO_0)) LPBYTE bufptr
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportAddEx(
+@@ -212,6 +220,7 @@ NetServerTransportAddForInstance(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ NET_API_STATUS NET_API_FUNCTION
+ NetServerTransportDel(
+@@ -245,6 +254,7 @@ NetServerTransportDelForInstance(
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ _Success_( return == 0 || return == ERROR_MORE_DATA )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -273,6 +283,8 @@ NetServerTransportEnum (
+ // Therefore, if this is the only function called by that service, then
+ // it is not necessary to link to netapi32.lib.
+ //
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ BOOL NET_API_FUNCTION
+ SetServiceBits(
+     IN SERVICE_STATUS_HANDLE    hServiceStatus,

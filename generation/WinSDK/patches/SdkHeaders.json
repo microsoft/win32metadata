@@ -609,6 +609,72 @@
       "sourceSha256": "8108FE3F099960014F36D1B2DA425A8382E9D839DE3477EB06F181289A0685C8",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winsvc.h",
       "sdkSha256": "8108FE3F099960014F36D1B2DA425A8382E9D839DE3477EB06F181289A0685C8"
+    },
+    {
+      "path": "um\\lmaccess.h",
+      "sourceSha256": "2044ED6C5CB2A99EFA66CC48839049CF3D11B7E0B98FEBFFD964D15469F5AA37",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmaccess.h",
+      "sdkSha256": "2044ED6C5CB2A99EFA66CC48839049CF3D11B7E0B98FEBFFD964D15469F5AA37"
+    },
+    {
+      "path": "um\\lmjoin.h",
+      "sourceSha256": "F8BDDA0A6A9420F0CA63F81D23B9C8FCDE24D80F2D7988F262E3C818BECEE076",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmjoin.h",
+      "sdkSha256": "F8BDDA0A6A9420F0CA63F81D23B9C8FCDE24D80F2D7988F262E3C818BECEE076"
+    },
+    {
+      "path": "um\\lmserver.h",
+      "sourceSha256": "4A14539368186AEAAA797DEC3B854E836041A43B45614041280E31792A3049EE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmserver.h",
+      "sdkSha256": "4A14539368186AEAAA797DEC3B854E836041A43B45614041280E31792A3049EE"
+    },
+    {
+      "path": "um\\lmwksta.h",
+      "sourceSha256": "58CA9883DE21556882B0A9E135B5AB30C0A29EF0E880CD777A2F863F72C15D1F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmwksta.h",
+      "sdkSha256": "58CA9883DE21556882B0A9E135B5AB30C0A29EF0E880CD777A2F863F72C15D1F"
+    },
+    {
+      "path": "um\\lmmsg.h",
+      "sourceSha256": "E6EFBD63A7DDF4D51D70C1EF96FE7A5FCD6AD208C27566D335392ED0D56C12D7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmmsg.h",
+      "sdkSha256": "E6EFBD63A7DDF4D51D70C1EF96FE7A5FCD6AD208C27566D335392ED0D56C12D7"
+    },
+    {
+      "path": "um\\lmapibuf.h",
+      "sourceSha256": "66A05E485033570D8C69CA295B4A1A086635B0033552DF6B7CF63275E22D4CEB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmapibuf.h",
+      "sdkSha256": "66A05E485033570D8C69CA295B4A1A086635B0033552DF6B7CF63275E22D4CEB"
+    },
+    {
+      "path": "um\\lmat.h",
+      "sourceSha256": "BF9AB4EC6505EED4E9E42E9750EFA79DD3796B88F61AEC3F6D343F9A0DFDCD1D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmat.h",
+      "sdkSha256": "BF9AB4EC6505EED4E9E42E9750EFA79DD3796B88F61AEC3F6D343F9A0DFDCD1D"
+    },
+    {
+      "path": "um\\lmuse.h",
+      "sourceSha256": "73641B28C96DF0B99193311540DFAB6D09B350682D7546451344FBA4286FC264",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmuse.h",
+      "sdkSha256": "73641B28C96DF0B99193311540DFAB6D09B350682D7546451344FBA4286FC264"
+    },
+    {
+      "path": "um\\atacct.h",
+      "sourceSha256": "067397B7D8F0CFBB63DACD2FF4D628FDB506F7CFE2BC57484031D442801D1023",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\atacct.h",
+      "sdkSha256": "067397B7D8F0CFBB63DACD2FF4D628FDB506F7CFE2BC57484031D442801D1023"
+    },
+    {
+      "path": "um\\lmalert.h",
+      "sourceSha256": "5C10A32019702CC63FEF699D4E7686EA5CA752F1376B48BDB851C12CF2E823A9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmalert.h",
+      "sdkSha256": "5C10A32019702CC63FEF699D4E7686EA5CA752F1376B48BDB851C12CF2E823A9"
+    },
+    {
+      "path": "um\\lmremutl.h",
+      "sourceSha256": "91175CDAA4DC94E0F0F3472A9B76D92FA09FB2996A074A49811557FFC95D5340",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\lmremutl.h",
+      "sdkSha256": "91175CDAA4DC94E0F0F3472A9B76D92FA09FB2996A074A49811557FFC95D5340"
     }
   ],
   "midl": {
@@ -1012,7 +1078,8 @@
     "RemoteAssist",
     "Wsb",
     "MenuRc",
-    "Services"
+    "Services",
+    "NetMgmt"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -1081,6 +1148,17 @@
     "um\\amsi.idl.patch",
     "um\\RrasCfg.idl.patch",
     "um\\winuser.h.patch",
-    "um\\winsvc.h.patch"
+    "um\\winsvc.h.patch",
+    "um\\lmaccess.h.patch",
+    "um\\lmjoin.h.patch",
+    "um\\lmserver.h.patch",
+    "um\\lmwksta.h.patch",
+    "um\\lmmsg.h.patch",
+    "um\\lmapibuf.h.patch",
+    "um\\lmat.h.patch",
+    "um\\lmuse.h.patch",
+    "um\\atacct.h.patch",
+    "um\\lmalert.h.patch",
+    "um\\lmremutl.h.patch"
   ]
 }

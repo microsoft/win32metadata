@@ -1,0 +1,36 @@
+diff --git a/um/lmuse.h b/um/lmuse.h
+index 56cfb2b9..4cbe3a07 100644
+--- a/um/lmuse.h
++++ b/um/lmuse.h
+@@ -60,6 +60,7 @@ extern "C" {
+ // Function Prototypes
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseAdd (
+     _In_opt_ LPTSTR servername,
+@@ -74,6 +75,7 @@ NetUseAdd (
+     _Out_opt_ LPDWORD parm_err
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseDel (
+     _In_opt_ LMSTR  UncServerName OPTIONAL,
+@@ -81,6 +83,7 @@ NetUseDel (
+     _In_ DWORD ForceLevelFlags
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseEnum (
+     _In_opt_ LMSTR  UncServerName,
+@@ -92,6 +95,7 @@ NetUseEnum (
+     _Inout_opt_ LPDWORD ResumeHandle
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetUseGetInfo (
+     _In_opt_ LMSTR  UncServerName,

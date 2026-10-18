@@ -1609,7 +1609,6 @@ MoveFileW
 MoveFileWithProgressA
 MoveFileWithProgressW
 MultiByteToWideChar
-NetUserChangePassword
 NlsDllCodePageTranslation
 NormalizeString
 NotifyChangeEventLog
@@ -1952,7 +1951,6 @@ SetSecurityDescriptorGroup
 SetSecurityDescriptorOwner
 SetSecurityDescriptorSacl
 SetServiceA
-SetServiceBits
 SetServiceW
 setsockopt
 SetStdHandle

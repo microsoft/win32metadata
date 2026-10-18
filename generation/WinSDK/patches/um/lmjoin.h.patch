@@ -1,0 +1,132 @@
+diff --git a/um/lmjoin.h b/um/lmjoin.h
+index 54ec2025..ba73a473 100644
+--- a/um/lmjoin.h
++++ b/um/lmjoin.h
+@@ -173,6 +173,7 @@ typedef struct _DSREG_JOIN_INFO
+ //
+ // Joins a machine to the domain.
+ //
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetJoinDomain(
+@@ -184,6 +185,7 @@ NetJoinDomain(
+     _In_ DWORD   fJoinOptions
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetUnjoinDomain(
+@@ -193,6 +195,7 @@ NetUnjoinDomain(
+     _In_ DWORD   fUnjoinOptions
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRenameMachineInDomain(
+@@ -206,6 +209,7 @@ NetRenameMachineInDomain(
+ //
+ // Determine the validity of a name
+ //
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetValidateName(
+@@ -219,6 +223,7 @@ NetValidateName(
+ //
+ // Determines the list of OUs that the client can create a machine account in
+ //
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetGetJoinableOUs(
+@@ -238,6 +243,7 @@ NetGetJoinableOUs(
+ 
+ #define NET_IGNORE_UNSUPPORTED_FLAGS  0x01
+ 
++_Win32_SupportedOS_WindowsXP_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetAddAlternateComputerName(
+@@ -248,6 +254,7 @@ NetAddAlternateComputerName(
+     _In_ ULONG Reserved
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRemoveAlternateComputerName(
+@@ -258,6 +265,7 @@ NetRemoveAlternateComputerName(
+     _In_ ULONG Reserved
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetSetPrimaryComputerName(
+@@ -281,6 +289,7 @@ typedef enum _NET_COMPUTER_NAME_TYPE {
+     NetComputerNameTypeMax
+ } NET_COMPUTER_NAME_TYPE, *PNET_COMPUTER_NAME_TYPE;
+ 
++_Win32_SupportedOS_WindowsXP_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetEnumerateComputerNames(
+@@ -344,6 +353,7 @@ NetEnumerateComputerNames(
+ //
+ #define NETSETUP_PROVISION_CHECK_PWD_ONLY         0x80000000
+ 
++_Win32_SupportedOS_Windows7_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetProvisionComputerAccount(
+@@ -359,6 +369,7 @@ NetProvisionComputerAccount(
+                    LPWSTR *pProvisionTextData
+ );
+ 
++_Win32_SupportedOS_Windows7_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRequestOfflineDomainJoin(
+@@ -398,6 +409,7 @@ typedef struct _NETSETUP_PROVISIONING_PARAMS
+     LPWSTR  lpPrimaryDNSDomain;     //  _In_
+ } NETSETUP_PROVISIONING_PARAMS, *PNETSETUP_PROVISIONING_PARAMS;
+ 
++_Win32_SupportedOS_Windows8_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetCreateProvisioningPackage(
+@@ -408,6 +420,7 @@ NetCreateProvisioningPackage(
+     _Outptr_opt_result_maybenull_z_ LPWSTR *ppPackageTextData
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetRequestProvisioningPackageInstall(
+@@ -428,6 +441,7 @@ NetRequestProvisioningPackageInstall(
+ 
+ #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
+ 
++_Win32_SupportedOS_10240_
+ HRESULT
+ NET_API_FUNCTION
+ NetGetAadJoinInformation(
+@@ -435,6 +449,7 @@ NetGetAadJoinInformation(
+     _Outptr_result_maybenull_ PDSREG_JOIN_INFO *ppJoinInfo
+     );
+ 
++_Win32_SupportedOS_10240_
+ VOID
+ NET_API_FUNCTION
+ NetFreeAadJoinInformation(
+@@ -464,6 +479,7 @@ typedef enum _NETSETUP_JOIN_STATUS {
+ //
+ // Determines whether a workstation is joined to a domain or not
+ //
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS
+ NET_API_FUNCTION
+ NetGetJoinInformation(

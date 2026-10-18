@@ -30,3 +30,5 @@
 <IncludeRoot>/um/rtutils.h
 --namespace
 Windows.Win32.NetworkManagement.NetManagement
+--config
+parse-win32-annotations

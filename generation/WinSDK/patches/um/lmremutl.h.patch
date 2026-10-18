@@ -1,0 +1,20 @@
+diff --git a/um/lmremutl.h b/um/lmremutl.h
+index 574d8faa..712709c8 100644
+--- a/um/lmremutl.h
++++ b/um/lmremutl.h
+@@ -57,6 +57,7 @@ typedef LPWSTR LPDESC;
+ // Function Prototypes
+ //
+ 
++_Win32_SupportedOS_Windows2000_
+ _Check_return_
+ _Success_( return == 0 )
+ NET_API_STATUS NET_API_FUNCTION
+@@ -65,6 +66,7 @@ NetRemoteTOD (
+     _Outptr_result_bytebuffer_(sizeof(TIME_OF_DAY_INFO)) LPBYTE *BufferPtr
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ NET_API_STATUS NET_API_FUNCTION
+ NetRemoteComputerSupports(
+     IN LPCWSTR UncServerName OPTIONAL,   // Must start with "\\".
