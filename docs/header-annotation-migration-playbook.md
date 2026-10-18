@@ -3175,3 +3175,50 @@ inputs, native/PDB evidence and proof-only verifier mistakes are retained.
 Local coverage remains **36/50**, with fourteen drafts unadmitted.
 Independent Power original-header preflight uses the qualified FDI context,
 not the Bluetooth candidate. WNet/RPC and missing-IDL holds remain separate.
+
+### Source-first integration checkpoint
+
+We now prioritize broad, buildable source conversion over per-cohort sealing and
+repeat audits. Partial conversion and exact temporary sidecar debt remain explicit;
+the combined full-SDK build, unfiltered API comparison, regression and CI gate comes
+after integration. Historical qualification receipts remain unchanged.
+
+The tracked 50-original-artifact cohort now has **41 source-converted artifacts**:
+the previous 36 qualified artifacts, two Hid/DirectInput headers, and three Bluetooth
+headers. This is not full-SDK coverage or qualification of the combined head.
+SDK-wide source/fact inventory and additional bulk migrations extend beyond this
+historical cohort.
+
+The initial SDK-wide map at `f2be80b9` retains 19,675 SupportedOS/SetLastError
+rows: 12,911 new row candidates across 306 original native headers, 651
+covered/assigned rows, 5,544 generated/nonfunction rows, 380 unknown rows and
+189 ambiguous rows. These are reconciled inventory categories, not counts of
+AST-qualified or completed migrations. The early map uses documentation and
+native-declarator lexical evidence; enum, handle, parser and manual categories
+are still being classified.
+
+Hid retains the native `NTSTATUS` alias using C17-compatible `const`, with its exact
+Int32 value and bytes. Its only physical change is the existing static literal
+moving within `Apis`; real field layouts, signatures and COM/vtable order remain
+strict. The original-source native checks and full-image API comparisons pass.
+
+Bluetooth uses the existing guarded `const USHORT AF_BTH = 32` encoding. The
+ordinary `AF_BTH`/`PF_BTH` macros remain signed four-byte `int`, while the
+metadata-only constant deliberately retains the existing UInt16 projection.
+Both metadata constants retain value 32 and bytes `2000`; the native
+`SOCKADDR_BTH.addressFamily` and packed structure remain unchanged. This requires
+no new helper, annotation vocabulary, cast or invented alias. Its source/native
+checks pass; the remaining measured API differences are the native find-handle
+representation and precise cleanup transfers, not scalar widening.
+
+| Remaining tracked source work | Explicit cleanup or blocker |
+| --- | --- |
+| WNet/Npapi and coupled RPC | Preserve source-backed additions; resolve the three actual native RPC value/type contracts and retain exact unresolved legacy uses as debt. |
+| Power and RestartManager | Use source-owned PDCAP contributions; stage only the necessary association-name and sizeof-derived constant residuals. |
+| DHCP | Retain native field/pointer shapes and explicit remaining field-array/count relationships. |
+| SDK-wide inventory and bulk conversion | Classify the substantial sidecar tail outside the 50-artifact ledger before claiming SDK completion. |
+
+Native compilation, ABI and signature defects remain blockers. Incidental metadata
+ordering, additional provenance archives and minor annotation cleanup do not block
+committing the working majority. No push, PR/stack mutation, SDK upgrade or consumer
+validation is implied by this checkpoint.

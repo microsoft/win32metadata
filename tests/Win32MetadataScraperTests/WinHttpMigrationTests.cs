@@ -1211,16 +1211,21 @@ namespace Win32MetadataScraperTests
         };
 
         [Fact]
-        public void BluetoothScalarHeaderRetainsItsOriginalMacroAndNarrowNativeField()
+        public void BluetoothScalarHeaderRetainsItsOriginalMacroAndExistingNarrowProjection()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
             string original = File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "um", "ws2bth.h"));
             Assert.Contains("#define AF_BTH  32", original);
             Assert.Contains("#define PF_BTH  AF_BTH", original);
             Assert.Contains("USHORT      addressFamily;", original);
-            Assert.False(File.Exists(Path.Combine(project, "patches", "um", "ws2bth.h.patch")));
+            string patch = File.ReadAllText(Path.Combine(project, "patches", "um", "ws2bth.h.patch"));
+            Assert.Contains("+#ifdef WIN32METADATA", patch);
+            Assert.Contains("+#pragma push_macro(\"AF_BTH\")", patch);
+            Assert.Contains("+const USHORT AF_BTH = 32;", patch);
+            Assert.Contains("+#pragma pop_macro(\"AF_BTH\")", patch);
+            Assert.DoesNotContain("constexpr", patch);
             using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
-            Assert.DoesNotContain(recipe.RootElement.GetProperty("patches").EnumerateArray(),
+            Assert.Contains(recipe.RootElement.GetProperty("patches").EnumerateArray(),
                 value => value.GetString() == "um\\ws2bth.h.patch");
         }
 
