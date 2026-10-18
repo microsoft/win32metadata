@@ -122,7 +122,7 @@ foreach ($owner in $inventory.readyOriginalOwners | Where-Object original -in $O
     }
 }
 $mapped = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
-$functionOwners = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
+$declarationOwners = [Collections.Generic.Dictionary[string, object]]::new([StringComparer]::Ordinal)
 foreach ($mapPath in $DeclarationMaps) {
     $map = Get-Content -LiteralPath $mapPath -Raw | ConvertFrom-Json
     if ($map.schemaVersion -ne 1) {
@@ -145,11 +145,12 @@ foreach ($mapPath in $DeclarationMaps) {
             sha256 = $map.files.($declaration.file)
             partition = $map.partition
         })
-        if ($declaration.qualifiedName -ceq $declaration.name) {
-            if (!$functionOwners.ContainsKey($declaration.name)) {
-                $functionOwners[$declaration.name] = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
+        if ($declaration.qualifiedName -ceq $declaration.name -and
+            ($declaration.kind -eq 'CXCursor_FunctionDecl' -or $declaration.isDefinition)) {
+            if (!$declarationOwners.ContainsKey($declaration.name)) {
+                $declarationOwners[$declaration.name] = [Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
             }
-            $functionOwners[$declaration.name].Add($relative) | Out-Null
+            $declarationOwners[$declaration.name].Add($relative) | Out-Null
         }
     }
 }
@@ -192,6 +193,7 @@ foreach ($owner in $Original) {
         { param($match) [regex]::Replace($match.Value, '[^\r\n]', ' ') })
     $eol = if ($text.Contains("`r`n")) { "`r`n" } else { "`n" }
     $insertions = @{}
+    $recordNames = @{}
     foreach ($category in @('supportedOS', 'setLastError')) {
         foreach ($fact in $candidates[0].$category) {
             $row = [ordered]@{ original = $owner; category = $category; symbol = $fact.symbol
@@ -210,6 +212,19 @@ foreach ($owner in $Original) {
                 $row.reason = 'no-parsed-declaration'
                 $rows.Add([pscustomobject]$row)
                 continue
+            }
+            $recordDefinitions = @($locations | Where-Object {
+                $_.declaration.kind -in @('CXCursor_StructDecl', 'CXCursor_ClassDecl') -and $_.declaration.isDefinition
+            })
+            $isRecord = $recordDefinitions.Count -gt 0
+            if ($isRecord) {
+                if ($category -ne 'supportedOS' -or
+                    @($locations | Where-Object { $_.declaration.kind -eq 'CXCursor_FunctionDecl' }).Count) {
+                    $row.reason = 'record-requires-unambiguous-supportedOS-fact'
+                    $rows.Add([pscustomobject]$row)
+                    continue
+                }
+                $locations = $recordDefinitions
             }
             $locations = @($locations | Group-Object { "$($_.declaration.file)|$($_.declaration.offset)|$($_.declaration.id)" } |
                 ForEach-Object { $_.Group[0] })
@@ -231,31 +246,59 @@ foreach ($owner in $Original) {
                 if ($location.sha256 -ne $hash) {
                     throw "Stale parsed source bytes: $owner"
                 }
-                if ($decl.kind -ne 'CXCursor_FunctionDecl' -or !$decl.id -or
-                    $decl.qualifiedName -cne $fact.symbol -or $decl.isDefinition -or
-                    $decl.file -ine $decl.spellingFile -or $decl.offset -ne $decl.spellingOffset -or
+                $nameOffset = if ($isRecord) { [int]$decl.spellingOffset } else { [int]$decl.offset }
+                if ((!$isRecord -and ($decl.kind -ne 'CXCursor_FunctionDecl' -or $decl.isDefinition -or
+                        $decl.offset -ne $decl.spellingOffset)) -or !$decl.id -or
+                    $decl.qualifiedName -cne $fact.symbol -or
+                    $decl.file -ine $decl.spellingFile -or
                     $decl.file -ine $decl.startFile -or $decl.file -ine $decl.endFile -or
-                    $decl.start -gt $decl.offset -or $decl.end -le $decl.offset -or $decl.end -gt $text.Length -or
-                    $text.Substring([int]$decl.offset, $fact.symbol.Length) -cne $fact.symbol) {
+                    $decl.start -gt $nameOffset -or $decl.end -le $nameOffset -or $decl.end -gt $text.Length -or
+                    $nameOffset + $fact.symbol.Length -gt $text.Length -or
+                    $text.Substring($nameOffset, $fact.symbol.Length) -cne $fact.symbol) {
                     $row.reason = 'macro-definition-or-non-global-declaration'
                     continue
                 }
                 $lineStart = $text.LastIndexOf("`n", [int]$decl.start) + 1
                 $prefix = $text.Substring($lineStart, [int]$decl.start - $lineStart)
-                if ($prefix -notmatch '^[ \t]*$' -and $prefix -notmatch '^[ \t]*EXTERN_C[ \t]+$') {
+                if ($prefix -notmatch '^[ \t]*$' -and
+                    ($isRecord -or $prefix -notmatch '^[ \t]*EXTERN_C[ \t]+$')) {
                     $row.reason = 'declaration-start-shares-source-line'
                     continue
                 }
-                $pending.Add([pscustomobject]@{ offset = [int]$decl.start; macro = $macro; indent = $prefix })
+                if ($isRecord) {
+                    $declarationPrefix = $masked.Substring([int]$decl.start, $nameOffset - [int]$decl.start)
+                    if ($declarationPrefix -notmatch '^(?:struct|class|interface)\s+(?:(?:DX_DECLARE_INTERFACE|DECLSPEC_UUID)\s*\([^)]*\)\s*)?$' -and
+                        $declarationPrefix -notmatch '^DECLARE_INTERFACE(?:_IID)?_\s*\(\s*$') {
+                        $row.reason = 'unsupported-record-declaration-macro'
+                        continue
+                    }
+                }
+                $pending.Add([pscustomobject]@{ offset = [int]$decl.start; macro = $macro; indent = $prefix
+                    recordTag = if ($decl.kind -eq 'CXCursor_ClassDecl') { 'class' } else { 'struct' } })
             }
             $row.declarationCount = $locations.Count
-            $occurrences = @([regex]::Matches($masked, '\b' + [regex]::Escape($fact.symbol) + '\s*\('))
-            $boundOffsets = @($locations | ForEach-Object { [int]$_.declaration.offset })
+            $symbolPattern = [regex]::Escape($fact.symbol)
+            $occurrences = if ($isRecord) {
+                @([regex]::Matches($masked,
+                    '\b[A-Za-z_]\w*\s*\(\s*(?<name>' + $symbolPattern + ')\b|' +
+                    '\b(?:struct|class|interface)\s+(?:[A-Za-z_]\w*\s*\([^)]*\)\s*)*' +
+                    '(?<name>' + $symbolPattern + ')\b(?:\s*:\s*[^;{]*)?\s*\{') |
+                    ForEach-Object { [pscustomobject]@{ Index = $_.Groups['name'].Index } } |
+                    Sort-Object Index -Unique)
+            } else {
+                @([regex]::Matches($masked, '\b' + $symbolPattern + '\s*\('))
+            }
+            $boundOffsets = @($locations | ForEach-Object {
+                if ($isRecord) { [int]$_.declaration.spellingOffset } else { [int]$_.declaration.offset }
+            })
             if (@($occurrences | Where-Object { $_.Index -notin $boundOffsets }).Count) {
                 $row.reason = 'unparsed-declaration-or-reference'
             }
-            if ($functionOwners.ContainsKey($fact.symbol) -and
-                @($functionOwners[$fact.symbol] | Where-Object { $_ -ine $owner }).Count) {
+            if ($isRecord -and @($occurrences).Count -ne $locations.Count) {
+                $row.reason = 'incomplete-record-source-coverage'
+            }
+            if ($declarationOwners.ContainsKey($fact.symbol) -and
+                @($declarationOwners[$fact.symbol] | Where-Object { $_ -ine $owner }).Count) {
                 $row.reason = 'additional-declaration-owner'
             }
             if (!$row.reason -and $parseFailures.Count) {
@@ -267,6 +310,9 @@ foreach ($owner in $Original) {
                         $insertions[$insertion.offset] = [Collections.Generic.SortedSet[string]]::new([StringComparer]::Ordinal)
                     }
                     $insertions[$insertion.offset].Add($insertion.macro) | Out-Null
+                    if ($isRecord) {
+                        $recordNames[$insertion.offset] = [pscustomobject]@{ name = $fact.symbol; tag = $insertion.recordTag }
+                    }
                 }
                 $row.annotationCount = $pending.Count
                 $row.status = 'converted'
@@ -285,7 +331,12 @@ foreach ($owner in $Original) {
     foreach ($offset in @($insertions.Keys | Sort-Object -Descending)) {
         $lineStart = $text.LastIndexOf("`n", $offset) + 1
         $indent = $text.Substring($lineStart, $offset - $lineStart)
-        $prefix = if ($indent -match '^[ \t]*EXTERN_C[ \t]+$') {
+        $prefix = if ($recordNames.ContainsKey($offset)) {
+            $record = $recordNames[$offset]
+            '#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)' + $eol + $indent +
+                'typedef ' + ($insertions[$offset] -join ' ') + " $($record.tag) $($record.name) $($record.name);" + $eol + $indent +
+                '#endif' + $eol + $indent
+        } elseif ($indent -match '^[ \t]*EXTERN_C[ \t]+$') {
             ($insertions[$offset] -join ' ') + ' '
         } else {
             ($insertions[$offset] -join ($eol + $indent)) + $eol + $indent

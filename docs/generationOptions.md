@@ -65,6 +65,18 @@ An exact `EXTERN_C` linkage prefix is preserved, with annotations inserted inlin
 after linkage and before the parsed declaration; other shared-line prefixes remain
 explicit residuals.
 
+Declaration maps also export native struct/class identities and definition sites.
+For global record SupportedOS facts, the authoring helper admits direct record
+declarations and the reviewed `DECLARE_INTERFACE_`, `DECLARE_INTERFACE_IID_`, and
+`interface DX_DECLARE_INTERFACE` forms. It binds the original name's spelling bytes,
+USR, full declaration extent and source hash, retaining unknown macros, additional
+physical definitions and unparsed conditional definitions. Forward declarations
+are not separate definition owners. A metadata-only typed alias carries the fixed
+OS macro through the existing primary-typedef-to-record bridge; it does not place
+an attribute before an expanded record keyword or change native C/C++ declarations.
+Record SetLastError facts remain legacy. Existing function-only maps remain valid
+for functions; record owners require fresh maps containing their definitions.
+
 Review `report.json` and the proposed patches. Reuse exported JSON maps through
 `-DeclarationMaps` instead of `-Partition` when useful. A fresh output directory is
 required for every invocation. Adding `-Apply` installs patches and SDK recipe pins,

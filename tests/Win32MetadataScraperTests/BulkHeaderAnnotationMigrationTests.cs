@@ -95,10 +95,13 @@ DECLARE(Expanded)
             Assert.Contains("SetLastError = true", fixture.Native.ReadSource());
         }
 
-        [Fact]
-        public void StaleDeclarationMapCannotRemoveFactsOrWriteSourcePatches()
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void StaleDeclarationMapCannotRemoveFactsOrWriteSourcePatches(bool record)
         {
-            using var fixture = new AuthoringFixture("int Unique(void);\r\n", new[] { "Unique" }, Array.Empty<string>());
+            using var fixture = new AuthoringFixture(record ? "struct Unique { int value; };\r\n" : "int Unique(void);\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             foreach (string path in new[] { fixture.Source, fixture.Mirror })
                 File.AppendAllText(path, "// changed\r\n");
@@ -163,10 +166,13 @@ DECLARE(Expanded)
                 .Where(attribute => attribute.Name.ToString().EndsWith("SupportedOSPlatform", StringComparison.Ordinal)));
         }
 
-        [Fact]
-        public void UnroutedOwnersCannotRemoveFactsOrCreateParserOptIns()
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void UnroutedOwnersCannotRemoveFactsOrCreateParserOptIns(bool record)
         {
-            using var fixture = new AuthoringFixture("// Native owner\r\nint Unique(void);\r\n",
+            using var fixture = new AuthoringFixture("// Native owner\r\n" +
+                (record ? "struct Unique { int value; };\r\n" : "int Unique(void);\r\n"),
                 new[] { "Unique" }, Array.Empty<string>());
             Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
             string path = Path.Combine(fixture.Native.DirectoryPath, "owners.json");
@@ -215,6 +221,179 @@ DECLARE(Expanded)
             Assert.Contains("SetLastError = true", fixture.Native.ReadSource());
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void MacroRecordAvailabilityUsesTypedIdentityTransportWithoutChangingNativeDeclarations(string architecture, string target)
+        {
+            const string source = @"// Original native interfaces
+#define interface struct
+#if defined(__cplusplus)
+#define DX_DECLARE_INTERFACE(iid) __declspec(uuid(iid))
+#else
+#define DX_DECLARE_INTERFACE(iid)
+#endif
+#if defined(__cplusplus) && !defined(CINTERFACE)
+struct IBase { virtual int Base(void) = 0; };
+#define DECLARE_INTERFACE_(name, base) struct name : public base
+#define DECLARE_INTERFACE_IID_(name, base, iid) struct __declspec(uuid(iid)) name : public base
+#define METHOD(name) virtual int name(void) = 0
+#else
+struct IBase { void **lpVtbl; };
+#define DECLARE_INTERFACE_(name, base) typedef struct name name; struct name
+#define DECLARE_INTERFACE_IID_(name, base, iid) DECLARE_INTERFACE_(name, base)
+#define METHOD(name) void *name
+#endif
+DECLARE_INTERFACE_(IRichEditOleCallback, IBase) { METHOD(Edit); };
+DECLARE_INTERFACE_IID_(IDiskQuotaControl, IBase, ""7988B572-EC89-11cf-9C00-00AA00A14F56"") { METHOD(Quota); };
+interface DX_DECLARE_INTERFACE(""0359dc30-95e6-4568-9055-27720d130e93"") ID2D1AnalysisTransform { METHOD(Analyze); };
+";
+            string[] names = { "IRichEditOleCallback", "IDiskQuotaControl", "ID2D1AnalysisTransform" };
+            using var fixture = new AuthoringFixture(source.ReplaceLineEndings("\r\n") + "\r\n",
+                names, Array.Empty<string>(), architecture, target);
+            byte[] original = File.ReadAllBytes(fixture.Source);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            using (var map = JsonDocument.Parse(File.ReadAllText(fixture.Map)))
+            {
+                Assert.Contains(map.RootElement.GetProperty("declarationKinds").EnumerateArray(),
+                    kind => kind.GetString() == "CXCursor_StructDecl");
+                foreach (string name in names)
+                {
+                    var definition = Assert.Single(map.RootElement.GetProperty("declarations").EnumerateArray()
+                        .Where(declaration => declaration.GetProperty("name").GetString() == name &&
+                            declaration.GetProperty("isDefinition").GetBoolean()));
+                    Assert.Equal("c:@S@" + name, definition.GetProperty("id").GetString());
+                    Assert.Equal(name, Encoding.UTF8.GetString(original,
+                        definition.GetProperty("spellingOffset").GetInt32(), name.Length));
+                }
+            }
+            fixture.RemoveMapOption();
+            string settings = Path.Combine(fixture.Native.DirectoryPath, "test.rsp");
+            string enabled = File.ReadAllText(settings);
+            string disabled = enabled.Replace("parse-win32-annotations", "");
+            File.WriteAllText(settings, disabled);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            string nativeBefore = fixture.Native.ReadSource();
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            Assert.Equal(3, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(0, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
+            string after = Path.Combine(fixture.Output, "after", "um", "sample.h");
+            string afterText = File.ReadAllText(after);
+            string stripped = afterText;
+            foreach (string name in names)
+            {
+                string transport = "#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)\r\n" +
+                    $"typedef _Win32_SupportedOS_Windows7_ struct {name} {name};\r\n#endif\r\n";
+                Assert.Contains(transport, afterText);
+                stripped = stripped.Replace(transport, "");
+            }
+            Assert.Equal(original, Encoding.UTF8.GetBytes(stripped));
+            File.Copy(after, fixture.Mirror, overwrite: true);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.Equal(nativeBefore, fixture.Native.ReadSource());
+            foreach (string mode in new[] { "", "--additional=-DCINTERFACE\n" })
+            {
+                File.WriteAllText(settings, enabled + mode);
+                Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+                var types = CSharpSyntaxTree.ParseText(fixture.Native.ReadSource()).GetRoot()
+                    .DescendantNodes().OfType<TypeDeclarationSyntax>().ToArray();
+                foreach (string name in names)
+                {
+                    var type = Assert.Single(types.Where(type => type.Identifier.ValueText == name));
+                    var attribute = Assert.Single(type.AttributeLists.SelectMany(list => list.Attributes)
+                        .Where(attribute => attribute.Name.ToString().EndsWith("SupportedOSPlatform", StringComparison.Ordinal)));
+                    Assert.Equal("\"windows6.1\"", Assert.Single(attribute.ArgumentList.Arguments).Expression.ToString());
+                }
+            }
+            foreach (string mode in new[] { "--language\nc\n--std\nc17\n", "--additional=-DCINTERFACE\n" })
+            {
+                File.WriteAllText(settings, disabled + mode);
+                File.WriteAllBytes(fixture.Mirror, original);
+                Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+                nativeBefore = fixture.Native.ReadSource();
+                File.Copy(after, fixture.Mirror, overwrite: true);
+                Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+                Assert.Equal(nativeBefore, fixture.Native.ReadSource());
+            }
+        }
+
+        [Fact]
+        public void ClassAvailabilityTransportKeepsTheNativeTagKind()
+        {
+            using var fixture = new AuthoringFixture("// Native class\r\nclass Unique { public: int value; };\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            string after = Path.Combine(fixture.Output, "after", "um", "sample.h");
+            Assert.Contains("typedef _Win32_SupportedOS_Windows7_ class Unique Unique;", File.ReadAllText(after));
+            fixture.RemoveMapOption();
+            File.Copy(after, fixture.Mirror, overwrite: true);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.DoesNotContain("mismatched", fixture.Native.Diagnostics, StringComparison.OrdinalIgnoreCase);
+            var type = Assert.Single(CSharpSyntaxTree.ParseText(fixture.Native.ReadSource()).GetRoot()
+                .DescendantNodes().OfType<TypeDeclarationSyntax>().Where(type => type.Identifier.ValueText == "Unique"));
+            Assert.Single(type.AttributeLists.SelectMany(list => list.Attributes)
+                .Where(attribute => attribute.Name.ToString().EndsWith("SupportedOSPlatform", StringComparison.Ordinal)));
+        }
+
+        [Fact]
+        public void RecordAuthoringRetainsConditionalUnknownMacroNestedAndLastErrorFacts()
+        {
+            using var fixture = new AuthoringFixture("// Native records\r\n" +
+                "struct Unique { int value; };\r\n" +
+                "#if defined(UNSEEN)\r\nstruct Conditional { int first; };\r\n" +
+                "#else\r\nstruct Conditional { int second; };\r\n#endif\r\n" +
+                "#define UNKNOWN_RECORD(name) struct name\r\nUNKNOWN_RECORD(Unknown) { int value; };\r\n" +
+                "#if defined(UNSEEN)\r\nUNKNOWN_RECORD(Hidden) { int first; };\r\n" +
+                "#else\r\nstruct Hidden { int second; };\r\n#endif\r\n" +
+                "#if defined(UNSEEN)\r\nstruct UNKNOWN_UUID(\"unused\") HiddenPrefix { int first; };\r\n" +
+                "#else\r\nstruct HiddenPrefix { int second; };\r\n#endif\r\n" +
+                "namespace Other { struct Nested { int value; }; }\r\n",
+                new[] { "Unique", "Conditional", "Unknown", "Hidden", "HiddenPrefix", "Nested" }, new[] { "Unique" });
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            Assert.Equal(1, report.RootElement.GetProperty("counts").GetProperty("converted").GetInt32());
+            Assert.Equal(6, report.RootElement.GetProperty("counts").GetProperty("retained").GetInt32());
+            Assert.Equal(1, report.RootElement.GetProperty("counts").GetProperty("annotations").GetInt32());
+            Assert.Contains("Unique\r\n", File.ReadAllText(fixture.ErrorSidecar));
+            foreach (string name in new[] { "Conditional", "Unknown", "Hidden", "HiddenPrefix", "Nested" })
+                Assert.Contains(name + "=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
+        }
+
+        [Fact]
+        public void RecordDefinitionsInAnotherPhysicalOwnerRemainEntirelyLegacy()
+        {
+            using var fixture = new AuthoringFixture("// Native record\r\nstruct Unique { int value; };\r\n",
+                new[] { "Unique" }, Array.Empty<string>());
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var first = JsonNode.Parse(File.ReadAllText(fixture.Map));
+            string other = Path.Combine(Path.GetDirectoryName(fixture.Mirror), "other.h");
+            File.Copy(fixture.Mirror, other);
+            File.WriteAllText(fixture.Native.Header, File.ReadAllText(fixture.Native.Header)
+                .Replace(fixture.Mirror.Replace('\\', '/'), other.Replace('\\', '/')));
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            var second = JsonNode.Parse(File.ReadAllText(fixture.Map));
+            foreach (var declaration in second["declarations"].AsArray())
+                first["declarations"].AsArray().Add(declaration.DeepClone());
+            foreach (var file in second["files"].AsObject())
+                first["files"][file.Key] = file.Value.DeepClone();
+            File.WriteAllText(fixture.Map, first.ToJsonString());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal("additional-declaration-owner", fact.GetProperty("reason").GetString());
+            Assert.Equal(0, fact.GetProperty("annotationCount").GetInt32());
+            Assert.Empty(report.RootElement.GetProperty("originals").EnumerateArray());
+            Assert.Contains("Unique=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
+        }
+
         private static string[] Signatures(string source)
             => CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>()
                 .Select(method => method.ReturnType + " " + method.Identifier.ValueText + method.ParameterList)
@@ -229,9 +408,10 @@ DECLARE(Expanded)
 
         private sealed class AuthoringFixture : IDisposable
         {
-            internal AuthoringFixture(string source, string[] supportedOS, string[] errors)
+            internal AuthoringFixture(string source, string[] supportedOS, string[] errors,
+                string architecture = "x64", string target = "x86_64-pc-windows-msvc")
             {
-                Native = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", "");
+                Native = new HeaderAnnotationTests.NativeFixture(architecture, target, "");
                 Root = Path.Combine(Native.DirectoryPath, "repo");
                 string sdk = Path.Combine(Root, "generation", "WinSDK");
                 Mirror = Path.Combine(sdk, "RecompiledIdlHeaders", "um", "sample.h");
@@ -287,7 +467,7 @@ DECLARE(Expanded)
             internal string PartitionSettings { get; }
             internal string Recipe { get; }
             internal string Output { get; }
-            private string Map { get; }
+            internal string Map { get; }
             private string OwnerMap { get; }
             private string Script { get; }
 

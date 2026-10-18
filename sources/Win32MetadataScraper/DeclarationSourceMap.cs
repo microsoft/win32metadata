@@ -22,6 +22,7 @@ namespace Win32MetadataScraper
                 translationUnit = Path.GetFullPath(sourceFile),
                 partition = Path.GetFileName(Path.GetDirectoryName(Path.GetFullPath(sourceFile))),
                 arguments,
+                declarationKinds = new[] { "CXCursor_FunctionDecl", "CXCursor_StructDecl", "CXCursor_ClassDecl" },
                 files,
                 declarations = declarations.OrderBy(value => value.File, StringComparer.OrdinalIgnoreCase)
                     .ThenBy(value => value.Start).ThenBy(value => value.Id, StringComparer.Ordinal),
@@ -29,7 +30,7 @@ namespace Win32MetadataScraper
 
             void Walk(CXCursor cursor)
             {
-                if (cursor.Kind == CXCursorKind.CXCursor_FunctionDecl)
+                if (cursor.Kind is CXCursorKind.CXCursor_FunctionDecl or CXCursorKind.CXCursor_StructDecl or CXCursorKind.CXCursor_ClassDecl)
                 {
                     cursor.Location.GetExpansionLocation(out var file, out uint line, out uint column, out uint offset);
                     cursor.Location.GetSpellingLocation(out var spellingFile, out _, out _, out uint spellingOffset);
