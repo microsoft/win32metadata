@@ -989,6 +989,8 @@ namespace Win32MetadataScraperTests
         [InlineData("um", "websocket.h", 13)]
         [InlineData("um", "fdi.h", 4)]
         [InlineData("um", "ProcessSnapshot.h", 10)]
+        [InlineData("um", "bluetoothapis.h", 34)]
+        [InlineData("um", "bluetoothleapis.h", 13)]
         public void AuthoredHeadersUseOnlyExplicitDeclarationFloors(string directory, string header, int count)
         {
             string patch = File.ReadAllText(Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", directory, header + ".patch"));
@@ -1091,6 +1093,54 @@ namespace Win32MetadataScraperTests
         {
             "FDICreate", "FDIIsCabinet", "FDICopy", "FDIDestroy",
         };
+
+        internal static IEnumerable<(string OS, string[] Functions)> AuthoredBluetoothHeaderContracts()
+        {
+            yield return ("windows6.0.6000", new[]
+            {
+                "BluetoothFindFirstRadio", "BluetoothFindNextRadio", "BluetoothFindRadioClose", "BluetoothGetRadioInfo",
+                "BluetoothFindFirstDevice", "BluetoothFindNextDevice", "BluetoothFindDeviceClose", "BluetoothGetDeviceInfo",
+                "BluetoothUpdateDeviceRecord", "BluetoothRemoveDevice", "BluetoothSelectDevices", "BluetoothSelectDevicesFree",
+                "BluetoothDisplayDeviceProperties", "BluetoothAuthenticateDevice", "BluetoothAuthenticateMultipleDevices",
+                "BluetoothSetServiceState", "BluetoothEnumerateInstalledServices", "BluetoothEnableDiscovery",
+                "BluetoothIsDiscoverable", "BluetoothEnableIncomingConnections", "BluetoothIsConnectable",
+                "BluetoothRegisterForAuthentication", "BluetoothRegisterForAuthenticationEx", "BluetoothUnregisterAuthentication",
+                "BluetoothSendAuthenticationResponse", "BluetoothSendAuthenticationResponseEx", "BluetoothSdpGetElementData",
+                "BluetoothSdpGetContainerElementData", "BluetoothSdpGetAttributeValue", "BluetoothSdpGetString",
+                "BluetoothSdpEnumAttributes", "BluetoothSetLocalServiceInfo", "BluetoothIsVersionAvailable",
+            });
+            yield return ("windows5.1.2600", new[] { "BluetoothAuthenticateDeviceEx" });
+            yield return ("windows8.0", new[]
+            {
+                "BluetoothGATTGetServices", "BluetoothGATTGetIncludedServices", "BluetoothGATTGetCharacteristics",
+                "BluetoothGATTGetDescriptors", "BluetoothGATTGetCharacteristicValue", "BluetoothGATTGetDescriptorValue",
+                "BluetoothGATTBeginReliableWrite", "BluetoothGATTSetCharacteristicValue", "BluetoothGATTEndReliableWrite",
+                "BluetoothGATTAbortReliableWrite", "BluetoothGATTSetDescriptorValue", "BluetoothGATTRegisterEvent",
+                "BluetoothGATTUnregisterEvent",
+            });
+        }
+
+        internal static readonly string[] AuthoredBluetoothLastErrorFunctions =
+        {
+            "BluetoothFindFirstRadio", "BluetoothFindNextRadio", "BluetoothFindRadioClose", "BluetoothGetRadioInfo",
+            "BluetoothFindFirstDevice", "BluetoothFindNextDevice", "BluetoothFindDeviceClose", "BluetoothSelectDevices",
+            "BluetoothDisplayDeviceProperties", "BluetoothRegisterForAuthentication", "BluetoothUnregisterAuthentication",
+            "BluetoothSdpEnumAttributes",
+        };
+
+        [Fact]
+        public void BluetoothScalarHeaderRetainsItsOriginalMacroAndNarrowNativeField()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            string original = File.ReadAllText(Path.Combine(project, "RecompiledIdlHeaders", "um", "ws2bth.h"));
+            Assert.Contains("#define AF_BTH  32", original);
+            Assert.Contains("#define PF_BTH  AF_BTH", original);
+            Assert.Contains("USHORT      addressFamily;", original);
+            Assert.False(File.Exists(Path.Combine(project, "patches", "um", "ws2bth.h.patch")));
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            Assert.DoesNotContain(recipe.RootElement.GetProperty("patches").EnumerateArray(),
+                value => value.GetString() == "um\\ws2bth.h.patch");
+        }
 
         internal static readonly string[] AuthoredProcessSnapshotFunctions =
         {

@@ -434,11 +434,26 @@ static_assert(DISC_NO_FORCE == 64u);
             {
                 "devfiltertypes.h" => new[] { header, "devquery.h", "devquerydef.h" },
                 "fdi.h" => new[] { "fci.h", "fdi_fci_types.h", header },
+                "bluetoothapis.h" => new[]
+                {
+                    header, "bluetoothleapis.h", "bthdef.h", "bthledef.h", "ws2bth.h", "bthsdpdef.h",
+                },
                 _ => new[] { header },
             };
             string assertion = language == "c" ? "_Static_assert" : "static_assert";
             string checks = header == "fdi.h" ?
                 $"{assertion}(cpuUNKNOWN == -1 && cpu80286 == 0 && cpu80386 == 1 && sizeof(int) == 4, \"native FDI CPU contract\");" : "";
+            if (header == "bluetoothapis.h")
+            {
+                string macroType = language == "c"
+                    ? "_Generic((AF_BTH), int: 1, default: 0)"
+                    : "__is_same(decltype(AF_BTH), int)";
+                string fieldType = language == "c"
+                    ? "_Generic(((SOCKADDR_BTH*)0)->addressFamily, unsigned short: 1, default: 0)"
+                    : "__is_same(decltype(((SOCKADDR_BTH*)0)->addressFamily), unsigned short)";
+                checks = $"{assertion}(AF_BTH == 32 && PF_BTH == 32 && sizeof(AF_BTH) == 4 && {macroType}, \"original Bluetooth address-family macros\");\n" +
+                    $"{assertion}({fieldType} && sizeof(((SOCKADDR_BTH*)0)->addressFamily) == 2 && sizeof(SOCKADDR_BTH) == 30, \"original narrow packed Bluetooth address\");";
+            }
             var before = Surface(root, original, partition, architecture, target, headers, checks,
                 salAnnotations: beforeSal, rawSalAnnotations: beforeRawSal, diagnostics: beforeDiagnostics, language: language);
             var after = Surface(root, prepared, partition, architecture, target, headers, checks, metadataEnabled: enabled,
@@ -514,7 +529,7 @@ static_assert(DISC_NO_FORCE == 64u);
                         value.StartsWith("function DwmShowContact ", StringComparison.Ordinal)))
                         this.output.WriteLine(side.Item1 + " " + fact);
             }
-            if (header is "fdi.h" or "ProcessSnapshot.h")
+            if (header is "fdi.h" or "ProcessSnapshot.h" or "bluetoothapis.h")
             {
                 Assert.Equal(enabled ? expected.Length : 0, annotations.Count);
                 foreach (var side in new[]
@@ -526,6 +541,10 @@ static_assert(DISC_NO_FORCE == 64u);
                     foreach (string fact in side.Item2)
                         this.output.WriteLine(side.Item1 + " " + fact);
             }
+            if (header == "bluetoothapis.h")
+                this.output.WriteLine("Original AF_BTH/PF_BTH=32 are signed four-byte int macros; " +
+                    "SOCKADDR_BTH.addressFamily remains unsigned two-byte storage and the packed native structure remains 30 bytes. " +
+                    "Native macro assertions do not choose a metadata scalar projection.");
             this.output.WriteLine($"{partition}/{architecture}/{language}/metadata={enabled}: " +
                 $"{before.Length} identical native facts, {beforeSal.Count} unchanged SAL attributes, " +
                 $"{annotations.Distinct(StringComparer.Ordinal).Count()} exact metadata facts.");
@@ -681,7 +700,7 @@ static_assert(DISC_NO_FORCE == 64u);
             foreach (string partition in new[]
             {
                 "MdmReg", "Media.DShow", "Media.DShow.Xml", "FileHistory", "SecurityCenter", "DirectML", "wnv", "Wsb",
-                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm", "Cabinets", "Proc_Snap",
+                "Wec", "Tbs", "WebDav", "NetBios", "NetShell", "Eap", "DeviceQuery", "Dwm", "Cabinets", "Proc_Snap", "Bluetooth",
             })
             {
                 string[] expected = partition switch
@@ -757,6 +776,11 @@ static_assert(DISC_NO_FORCE == 64u);
                     "Proc_Snap" => WinHttpMigrationTests.AuthoredProcessSnapshotFunctions
                         .Select(name => name + "|SupportedOSPlatform(\"windows8.1\")")
                         .Append("WalkMarkerHandle|RAIIFree").ToArray(),
+                    "Bluetooth" => WinHttpMigrationTests.AuthoredBluetoothHeaderContracts()
+                        .SelectMany(contract => contract.Functions.Select(name =>
+                            name + "|SupportedOSPlatform(\"" + contract.OS + "\")"))
+                        .Concat(WinHttpMigrationTests.AuthoredBluetoothLastErrorFunctions.Select(name => name + "|SetLastError"))
+                        .Concat(new[] { "BluetoothFindFirstRadio|RAIIFree", "BluetoothFindFirstDevice|RAIIFree" }).ToArray(),
                     _ => new[] { "IXMLGraphBuilder|SupportedOSPlatform(\"windows5.0\")" },
                 };
                 string header = partition switch
@@ -777,6 +801,7 @@ static_assert(DISC_NO_FORCE == 64u);
                     "Dwm" => "dwmapi.h",
                     "Cabinets" => "fdi.h",
                     "Proc_Snap" => "ProcessSnapshot.h",
+                    "Bluetooth" => "bluetoothapis.h",
                     _ => "amxmlgraphbuilder.h",
                 };
                 foreach (var architecture in new[]

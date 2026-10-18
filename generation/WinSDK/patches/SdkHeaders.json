@@ -1023,7 +1023,6 @@
     "um\\bluetoothapis.h.patch",
     "um\\bluetoothleapis.h.patch",
     "um\\dinput.h.patch",
-    "um\\ws2bth.h.patch",
     "um\\dwmapi.h.patch",
     "um\\ErrorRep.h.patch",
     "um\\EvColl.h.patch",

@@ -1,8 +1,41 @@
 diff --git a/um/bluetoothapis.h b/um/bluetoothapis.h
-index 8e828074..17e492fa 100644
+index b36ff097..cd1f67b5 100644
 --- a/um/bluetoothapis.h
 +++ b/um/bluetoothapis.h
-@@ -135,6 +135,9 @@ typedef HANDLE      HBLUETOOTH_RADIO_FIND;
+@@ -102,6 +102,32 @@ typedef struct _BLUETOOTH_FIND_RADIO_PARAMS {
+ 
+ typedef HANDLE      HBLUETOOTH_RADIO_FIND;
+ 
++//
++//  Description:
++//      Closes the enumeration handle.
++//
++//  Parameters
++//      hFind
++//          The handle returned by BluetoothFindFirstRadio().
++//
++//  Return Values:
++//      TRUE
++//          Handle succesfully closed.
++//
++//      FALSE
++//          Failure. Check GetLastError() for details.
++//
++//          ERROR_INVALID_HANDLE
++//              The handle is NULL.
++//
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++BOOL
++WINAPI
++BluetoothFindRadioClose(
++    _In_ HBLUETOOTH_RADIO_FIND hFind
++    );
++
+ //
+ //  Description:
+ //      Begins the enumeration of local Bluetooth radios.
+@@ -135,6 +161,9 @@ typedef HANDLE      HBLUETOOTH_RADIO_FIND;
  //
  _Must_inspect_result_
  _Success_(return != NULL)
@@ -12,7 +45,7 @@ index 8e828074..17e492fa 100644
  HBLUETOOTH_RADIO_FIND
  WINAPI
  BluetoothFindFirstRadio(
-@@ -174,6 +177,8 @@ BluetoothFindFirstRadio(
+@@ -174,6 +203,8 @@ BluetoothFindFirstRadio(
  //
  _Must_inspect_result_
  _Success_(return)
@@ -21,15 +54,37 @@ index 8e828074..17e492fa 100644
  BOOL
  WINAPI
  BluetoothFindNextRadio(
-@@ -199,6 +204,8 @@ BluetoothFindNextRadio(
- //          ERROR_INVALID_HANDLE
- //              The handle is NULL.
+@@ -181,30 +212,6 @@ BluetoothFindNextRadio(
+     _Out_ HANDLE * phRadio
+     );
+ 
+-//
+-//  Description:
+-//      Closes the enumeration handle.
+-//
+-//  Parameters
+-//      hFind
+-//          The handle returned by BluetoothFindFirstRadio().
+-//
+-//  Return Values:
+-//      TRUE
+-//          Handle succesfully closed.
+-//
+-//      FALSE
+-//          Failure. Check GetLastError() for details.
+-//
+-//          ERROR_INVALID_HANDLE
+-//              The handle is NULL.
+-//
+-BOOL
+-WINAPI
+-BluetoothFindRadioClose(
+-    _In_ HBLUETOOTH_RADIO_FIND hFind
+-    );
+-
+ // ***************************************************************************
  //
-+_Win32_SupportedOS_WindowsVista_
-+_Win32_SetLastError_
- BOOL
- WINAPI
- BluetoothFindRadioClose(
+ //  Radio Information
 @@ -252,6 +259,8 @@ typedef struct _BLUETOOTH_RADIO_INFO {
  //      other Win32 error codes.
  //
@@ -39,7 +94,40 @@ index 8e828074..17e492fa 100644
  DWORD
  WINAPI
  BluetoothGetRadioInfo(
-@@ -420,6 +429,9 @@ typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
+@@ -385,6 +394,32 @@ typedef struct _BLUETOOTH_DEVICE_SEARCH_PARAMS {
+ 
+ typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
+ 
++//
++//  Description:
++//      Closes the enumeration handle.
++//
++//  Parameters:
++//      hFind
++//          The handle returned from BluetoothFindFirstDevice().
++//
++//  Return Values:
++//      TRUE
++//          Handle succesfully closed.
++//
++//      FALSE
++//          Failure. Check GetLastError() for details.
++//
++//          ERROR_INVALID_HANDLE
++//              The handle is NULL.
++//
++_Win32_SupportedOS_WindowsVista_
++_Win32_SetLastError_
++BOOL
++WINAPI
++BluetoothFindDeviceClose(
++    _In_ HBLUETOOTH_DEVICE_FIND hFind
++    );
++
+ //
+ //  Description:
+ //      Begins the enumeration of Bluetooth devices.
+@@ -420,6 +455,9 @@ typedef HANDLE      HBLUETOOTH_DEVICE_FIND;
  //
  _Must_inspect_result_
  _Success_(return != NULL)
@@ -49,7 +137,7 @@ index 8e828074..17e492fa 100644
  HBLUETOOTH_DEVICE_FIND
  WINAPI
  BluetoothFindFirstDevice(
-@@ -463,6 +475,8 @@ BluetoothFindFirstDevice(
+@@ -463,6 +501,8 @@ BluetoothFindFirstDevice(
  //          other Win32 errors
  //
  _Must_inspect_result_
@@ -58,15 +146,37 @@ index 8e828074..17e492fa 100644
  BOOL
  WINAPI
  BluetoothFindNextDevice(
-@@ -488,6 +502,8 @@ BluetoothFindNextDevice(
- //          ERROR_INVALID_HANDLE
- //              The handle is NULL.
+@@ -470,30 +510,6 @@ BluetoothFindNextDevice(
+     _Inout_ BLUETOOTH_DEVICE_INFO * pbtdi
+     );
+ 
+-//
+-//  Description:
+-//      Closes the enumeration handle.
+-//
+-//  Parameters:
+-//      hFind
+-//          The handle returned from BluetoothFindFirstDevice().
+-//
+-//  Return Values:
+-//      TRUE
+-//          Handle succesfully closed.
+-//
+-//      FALSE
+-//          Failure. Check GetLastError() for details.
+-//
+-//          ERROR_INVALID_HANDLE
+-//              The handle is NULL.
+-//
+-BOOL
+-WINAPI
+-BluetoothFindDeviceClose(
+-    _In_ HBLUETOOTH_DEVICE_FIND hFind
+-    );
+-
  //
-+_Win32_SupportedOS_WindowsVista_
-+_Win32_SetLastError_
- BOOL
- WINAPI
- BluetoothFindDeviceClose(
+ //  Description:
+ //      Retrieves information about a remote device.
 @@ -533,6 +549,7 @@ BluetoothFindDeviceClose(
  //      other error codes
  //
@@ -157,24 +267,38 @@ index 8e828074..17e492fa 100644
  DWORD
  WINAPI
  BluetoothEnumerateInstalledServices(
-@@ -1175,6 +1204,8 @@ BluetoothEnumerateInstalledServices(
+@@ -1175,6 +1204,7 @@ BluetoothEnumerateInstalledServices(
  //          State was not changed. If the caller specified NULL for hRadio, all
  //          of the radios did not accept the state change.
  //
-+_Win32_SupportedOS_BEGIN_(WindowsVista)
-+
++_Win32_SupportedOS_WindowsVista_
  BOOL
  WINAPI
  BluetoothEnableDiscovery(
-@@ -1269,6 +1300,8 @@ BluetoothIsConnectable(
-     _In_opt_ HANDLE hRadio
-     );
- 
-+_Win32_SupportedOS_END_()
-+
- // ***************************************************************************
+@@ -1201,6 +1231,7 @@ BluetoothEnableDiscovery(
+ //          No radios are discoverable.
  //
- //  Authentication Registration
+ _Must_inspect_result_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ BluetoothIsDiscoverable(
+@@ -1237,6 +1268,7 @@ BluetoothIsDiscoverable(
+ //          of the radios did not accept the state change.
+ //
+ _Must_inspect_result_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ BluetoothEnableIncomingConnections(
+@@ -1263,6 +1295,7 @@ BluetoothEnableIncomingConnections(
+ //          No radios are allowing incoming connections.
+ //
+ _Must_inspect_result_
++_Win32_SupportedOS_WindowsVista_
+ BOOL
+ WINAPI
+ BluetoothIsConnectable(
 @@ -1315,6 +1348,8 @@ typedef BOOL (CALLBACK *PFN_AUTHENTICATION_CALLBACK)(LPVOID pvParam, PBLUETOOTH_
  //          Failure. The registration handle is invalid.
  //
