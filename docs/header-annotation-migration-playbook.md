@@ -248,6 +248,13 @@ Keep expectations exact and source-backed, with zero unknown differences and zer
 unused expectations. There is no blanket native-derived difference or duplicate
 allowlist, and no assumption that faithful capture implies consumer compatibility.
 
+When a source-owned logical group replaces an anonymous native enum projection,
+retire only its obsolete compiler-name remap and exclude that exact anonymous
+enum. Do not deduplicate arbitrary native enums in the emitter. For
+`dbgprop.idl`, the source group preserves all 25 native bit patterns and the
+`typedef DWORD DBGPROP_ATTRIB_FLAGS` storage contract; any physical signedness
+or Flags difference must be graded explicitly rather than called equivalent.
+
 Remove matching authored fallback rather than annotating on top of it.
 SDK-derived bindings and discoveries are not semantic fallback. Keep import
 module/entrypoint/flags checks even when no header import override is needed.

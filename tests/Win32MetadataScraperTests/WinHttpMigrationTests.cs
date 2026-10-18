@@ -3271,6 +3271,17 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void SourceBackedDebugPropertyGroupDoesNotDuplicateItsAnonymousNativeEnum()
+        {
+            string[] settings = File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "scraper.settings.rsp"));
+            int start = Array.IndexOf(settings, "--exclude") + 1;
+            Assert.True(start > 0);
+            var exclusions = settings.Skip(start).TakeWhile(line => !line.StartsWith("--", StringComparison.Ordinal));
+            Assert.Contains("__MIDL___MIDL_itf_dbgprop_0000_0000_0001", exclusions);
+            Assert.DoesNotContain("__MIDL___MIDL_itf_dbgprop_0000_0000_0001=DBGPROP_ATTRIB_FLAGS", settings);
+        }
+
+        [Fact]
         public void CertificateBackupGroupingIsExcludedFromItsMidlImport()
         {
             string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
