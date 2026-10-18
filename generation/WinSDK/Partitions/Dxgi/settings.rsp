@@ -13,6 +13,8 @@ _D3DCOLORVALUE
 <IncludeRoot>/um/dxprogrammablecapture.h
 --namespace
 Windows.Win32.Graphics.Dxgi
+--config
+parse-win32-annotations
 --with-attribute
 DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS=Flags
 DXGI_OFFER_RESOURCE_FLAGS=Flags

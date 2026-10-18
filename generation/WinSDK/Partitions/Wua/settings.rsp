@@ -3,3 +3,5 @@
 <IncludeRoot>/um/wuerror.h
 --namespace
 Windows.Win32.System.UpdateAgent
+--config
+parse-win32-annotations

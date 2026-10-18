@@ -15,3 +15,5 @@ ID2D1Factory
 <IncludeRoot>/um/windowsstoragecom.h
 --namespace
 Windows.Win32.System.WinRT.Storage
+--config
+parse-win32-annotations

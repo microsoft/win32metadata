@@ -6,3 +6,5 @@
 <IncludeRoot>/um/vdserr.h
 --namespace
 Windows.Win32.Storage.VirtualDiskService
+--config
+parse-win32-annotations

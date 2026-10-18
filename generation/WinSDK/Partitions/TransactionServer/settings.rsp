@@ -6,5 +6,7 @@ _GUID
 <IncludeRoot>/um/mtxattr.h
 --namespace
 Windows.Win32.System.TransactionServer
+--config
+parse-win32-annotations
 --with-type
 STREAM_SEEK=uint

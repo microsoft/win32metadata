@@ -2807,6 +2807,45 @@ namespace Win32MetadataScraperTests
         }
 
         [Fact]
+        public void AuthoredSdkPartitionsEnableNormalHeaderAnnotationProcessing()
+        {
+            string project = Path.Combine(RepositoryRoot, "generation", "WinSDK");
+            using var recipe = JsonDocument.Parse(File.ReadAllText(Path.Combine(project, "patches", "SdkHeaders.json")));
+            string[] partitions = recipe.RootElement.GetProperty("partitions").EnumerateArray()
+                .Select(value => value.GetString()).ToArray();
+            Assert.NotEmpty(partitions);
+            Assert.Equal(partitions.Length, partitions.Distinct(StringComparer.OrdinalIgnoreCase).Count());
+            var missing = new List<string>();
+            string filtered = Path.GetTempFileName();
+            try
+            {
+                foreach (string partition in partitions)
+                {
+                    var filter = new FilterResponseFiles
+                    {
+                        ResponseFiles = new[]
+                        {
+                            new Microsoft.Build.Utilities.TaskItem(Path.Combine(project, "Partitions", partition, "settings.rsp")),
+                        },
+                        OutputFileName = filtered,
+                        ValidSwitches = "--config",
+                        MSBuildProjectDirectory = project,
+                    };
+                    Assert.True(filter.Execute());
+                    if (!File.ReadAllLines(filtered).Contains("parse-win32-annotations", StringComparer.Ordinal))
+                        missing.Add(partition);
+                }
+                Assert.True(missing.Count == 0,
+                    "Authored SDK partitions must explicitly enable the normal annotation reader: " + string.Join(", ", missing));
+                this.output.WriteLine($"{partitions.Length} authored SDK partitions retain annotation activation after normal response-file filtering.");
+            }
+            finally
+            {
+                File.Delete(filtered);
+            }
+        }
+
+        [Fact]
         public void OriginalErrorGroupingIsExcludedFromMidlGrammar()
         {
             string patch = Path.Combine(RepositoryRoot, "generation", "WinSDK", "patches", "shared", "winerror.h.patch");

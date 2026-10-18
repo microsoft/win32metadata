@@ -10,3 +10,5 @@ IXMLHttpRequest
 <IncludeRoot>/um/msxmldid.h
 --namespace
 Windows.Win32.Data.Xml.MsXml
+--config
+parse-win32-annotations

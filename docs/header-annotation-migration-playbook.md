@@ -97,6 +97,15 @@ for review. Do not suppress those facts or reject/replace a candidate merely to
 preserve OLD omissions. Keep this a cheap classification boundary before patch
 authoring, not another preparation framework or a full SDK build per candidate.
 
+Recipe admission prepares headers; it does not activate the normal annotation
+reader. Every admitted partition must also enable `--config` /
+`parse-win32-annotations` in its existing `Partitions\<name>\settings.rsp`.
+Keep this incremental: do not globally enable unmigrated partitions to cover a
+missing owner opt-in. `AuthoredSdkPartitionsEnableNormalHeaderAnnotationProcessing`
+checks the combined recipe, including admissions from other source cohorts.
+Then measure the exact facts in ordinary generated sources: a native fixture
+that explicitly defines `WIN32METADATA` does not prove normal scraper activation.
+
 ## 2. Prepare headers once before toolchain consumption
 
 Add reviewed deltas to the SDK-wide `generation\WinSDK\patches\SdkHeaders.json`

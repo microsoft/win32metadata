@@ -2,5 +2,7 @@
 <IncludeRoot>/um/UIAnimation.h
 --namespace
 Windows.Win32.UI.Animation
+--config
+parse-win32-annotations
 --exclude
 __MIDL___MIDL_itf_uianimation_0000_0002_0003

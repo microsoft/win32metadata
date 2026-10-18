@@ -5,3 +5,5 @@ ATTRIBUTEID=uint
 <IncludeRoot>/um/sdoias.h
 --namespace
 Windows.Win32.NetworkManagement.NetworkPolicyServer
+--config
+parse-win32-annotations
