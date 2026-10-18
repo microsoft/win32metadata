@@ -1605,6 +1605,144 @@
       "sourceSha256": "9D753662323AA62ED6D3C4635374945253E9CD0B9203EE9404593FD34FD4DE43",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\eapmethodauthenticatorapis.h",
       "sdkSha256": "9D753662323AA62ED6D3C4635374945253E9CD0B9203EE9404593FD34FD4DE43"
+    },
+    {
+      "path": "um\\wincrypt.h",
+      "sourceSha256": "D73BA64946BBAAD342447564676A837E15380041B37674639FCF659EE67F13E2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wincrypt.h",
+      "sdkSha256": "D73BA64946BBAAD342447564676A837E15380041B37674639FCF659EE67F13E2"
+    },
+    {
+      "path": "um\\mi.h",
+      "sourceSha256": "C0C43BBDA10B59109484EC0D5569C2CD330BF1E81CE73F4182CF8FD6434492B3",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mi.h",
+      "sdkSha256": "C0C43BBDA10B59109484EC0D5569C2CD330BF1E81CE73F4182CF8FD6434492B3"
+    },
+    {
+      "path": "um\\msi.h",
+      "sourceSha256": "1E6372BF9015CE2BC6B9960A605B67B38019E6422AB636D61693C290E127484F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msi.h",
+      "sdkSha256": "1E6372BF9015CE2BC6B9960A605B67B38019E6422AB636D61693C290E127484F"
+    },
+    {
+      "path": "um\\winreg.h",
+      "sourceSha256": "BFF833E8D092A0CB657837E3162B8BB0CF35B43105203F4CE880972A501D61D6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winreg.h",
+      "sdkSha256": "BFF833E8D092A0CB657837E3162B8BB0CF35B43105203F4CE880972A501D61D6"
+    },
+    {
+      "path": "um\\wtsapi32.h",
+      "sourceSha256": "4AF15AD3267427BD00FFE375D6CBA0F87106DDEED84D276C139032CD679FC19A",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wtsapi32.h",
+      "sdkSha256": "4AF15AD3267427BD00FFE375D6CBA0F87106DDEED84D276C139032CD679FC19A"
+    },
+    {
+      "path": "um\\ntsecapi.h",
+      "sourceSha256": "A506D6BB9C66F87436ACE6D0CECEFCAD9ED10996E25E16E31ADB47075F72EAC2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ntsecapi.h",
+      "sdkSha256": "A506D6BB9C66F87436ACE6D0CECEFCAD9ED10996E25E16E31ADB47075F72EAC2"
+    },
+    {
+      "path": "shared\\sspi.h",
+      "sourceSha256": "0A3BC3C5F2D8DB8D23C370999A9E0208678A97A665F4D1B633A601E6F2B836CA",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\sspi.h",
+      "sdkSha256": "0A3BC3C5F2D8DB8D23C370999A9E0208678A97A665F4D1B633A601E6F2B836CA"
+    },
+    {
+      "path": "um\\ntmsapi.h",
+      "sourceSha256": "46E8A601E6A71923F3B8BC3B1C92636C79F7EB97DF3289B557B13BEC78F0A1F9",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ntmsapi.h",
+      "sdkSha256": "46E8A601E6A71923F3B8BC3B1C92636C79F7EB97DF3289B557B13BEC78F0A1F9"
+    },
+    {
+      "path": "um\\mfapi.h",
+      "sourceSha256": "524BA702B29DD429B2E79DD70C974DB3521DDB3D5C50FEAD5E2D787769B61B45",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\mfapi.h",
+      "sdkSha256": "524BA702B29DD429B2E79DD70C974DB3521DDB3D5C50FEAD5E2D787769B61B45"
+    },
+    {
+      "path": "um\\pdh.h",
+      "sourceSha256": "38AA66B854E254324E47A267BF888437B8060AC177067494207263EAF953F1A7",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\pdh.h",
+      "sdkSha256": "38AA66B854E254324E47A267BF888437B8060AC177067494207263EAF953F1A7"
+    },
+    {
+      "path": "um\\wincred.h",
+      "sourceSha256": "864E3DACE7858151D113ABD650F60A0E8A3A7B6ABE8B1164EA8225BB6D531D44",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\wincred.h",
+      "sdkSha256": "864E3DACE7858151D113ABD650F60A0E8A3A7B6ABE8B1164EA8225BB6D531D44"
+    },
+    {
+      "path": "shared\\bcrypt.h",
+      "sourceSha256": "C979EE7490EC190779385D69A39026F9D79308EEB6AAADA64EF0766C1E3E0376",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\bcrypt.h",
+      "sdkSha256": "C979EE7490EC190779385D69A39026F9D79308EEB6AAADA64EF0766C1E3E0376"
+    },
+    {
+      "path": "shared\\evntrace.h",
+      "sourceSha256": "40D80842618B587A45CA4E15B50E8DF718917727C2F154424E28E81E84300B5D",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\evntrace.h",
+      "sdkSha256": "40D80842618B587A45CA4E15B50E8DF718917727C2F154424E28E81E84300B5D"
+    },
+    {
+      "path": "um\\ddeml.h",
+      "sourceSha256": "C97ABAB2627346D786459FC86A5DA696F930C85C622A78732A71B7AD0790C1DC",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ddeml.h",
+      "sdkSha256": "C97ABAB2627346D786459FC86A5DA696F930C85C622A78732A71B7AD0790C1DC"
+    },
+    {
+      "path": "um\\combaseapi.h",
+      "sourceSha256": "4B33BDF8CAD7D07A0BD2945B4B96436B21021C46EEE900881D2531616BA4DF5F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\combaseapi.h",
+      "sdkSha256": "4B33BDF8CAD7D07A0BD2945B4B96436B21021C46EEE900881D2531616BA4DF5F"
+    },
+    {
+      "path": "um\\msiquery.h",
+      "sourceSha256": "E75952B2F2F5EC2FDC17CE24CC7A6EBAF9F213CE4A4424584D2B493A334CFD4C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msiquery.h",
+      "sdkSha256": "E75952B2F2F5EC2FDC17CE24CC7A6EBAF9F213CE4A4424584D2B493A334CFD4C"
+    },
+    {
+      "path": "um\\authz.h",
+      "sourceSha256": "D2DE15AAE3D8E55DF6762F84D546A764E9C5B8459E12607B5DB90A33870977E6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\authz.h",
+      "sdkSha256": "D2DE15AAE3D8E55DF6762F84D546A764E9C5B8459E12607B5DB90A33870977E6"
+    },
+    {
+      "path": "um\\winscard.h",
+      "sourceSha256": "EE43C5A32FD009DA030047A0DF19A66E02ED6387F54AF0162EC9BD6F9854E845",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\winscard.h",
+      "sdkSha256": "EE43C5A32FD009DA030047A0DF19A66E02ED6387F54AF0162EC9BD6F9854E845"
+    },
+    {
+      "path": "um\\clfsw32.h",
+      "sourceSha256": "8EAA10BD641BB60158B5382B3000AE975949CC5DEAE3D798897946FF8079C5AE",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\clfsw32.h",
+      "sdkSha256": "8EAA10BD641BB60158B5382B3000AE975949CC5DEAE3D798897946FF8079C5AE"
+    },
+    {
+      "path": "um\\appmodel.h",
+      "sourceSha256": "D652F5DE60B8F811D77949A5513838CAA01610ECD6D6AE064A92C1EC2198BB56",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\appmodel.h",
+      "sdkSha256": "D652F5DE60B8F811D77949A5513838CAA01610ECD6D6AE064A92C1EC2198BB56"
+    },
+    {
+      "path": "um\\ole2.h",
+      "sourceSha256": "FF6645D2BA037DF3835689CA7EFA3FA4990C229BC98E195E500145A6B1344CE6",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ole2.h",
+      "sdkSha256": "FF6645D2BA037DF3835689CA7EFA3FA4990C229BC98E195E500145A6B1344CE6"
+    },
+    {
+      "path": "um\\ktmw32.h",
+      "sourceSha256": "CC12B25ABF803888E37B8A3AF983195F1C5F0C9D3E11C4F3972B135EF7B09C14",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ktmw32.h",
+      "sdkSha256": "CC12B25ABF803888E37B8A3AF983195F1C5F0C9D3E11C4F3972B135EF7B09C14"
+    },
+    {
+      "path": "um\\aclapi.h",
+      "sourceSha256": "963251E7FFD638A9E93E60E22B0EE95ABF858E846DCC49D6B1DF61AE0C59270B",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\aclapi.h",
+      "sdkSha256": "963251E7FFD638A9E93E60E22B0EE95ABF858E846DCC49D6B1DF61AE0C59270B"
     }
   ],
   "midl": {
@@ -2491,7 +2629,14 @@
     "Environment",
     "WinRm",
     "Etw",
-    "EapHost"
+    "EapHost",
+    "Mi",
+    "Setup",
+    "Registry",
+    "TermServ",
+    "Credentials",
+    "DataXchg",
+    "Authorization"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -2726,6 +2871,29 @@
     "um\\shlobj.h.patch",
     "um\\eappapis.h.patch",
     "um\\eaphostpeerconfigapis.h.patch",
-    "um\\eapmethodauthenticatorapis.h.patch"
+    "um\\eapmethodauthenticatorapis.h.patch",
+    "um\\wincrypt.h.patch",
+    "um\\mi.h.patch",
+    "um\\msi.h.patch",
+    "um\\winreg.h.patch",
+    "um\\wtsapi32.h.patch",
+    "um\\ntsecapi.h.patch",
+    "shared\\sspi.h.patch",
+    "um\\ntmsapi.h.patch",
+    "um\\mfapi.h.patch",
+    "um\\pdh.h.patch",
+    "um\\wincred.h.patch",
+    "shared\\bcrypt.h.patch",
+    "shared\\evntrace.h.patch",
+    "um\\ddeml.h.patch",
+    "um\\combaseapi.h.patch",
+    "um\\msiquery.h.patch",
+    "um\\authz.h.patch",
+    "um\\winscard.h.patch",
+    "um\\clfsw32.h.patch",
+    "um\\appmodel.h.patch",
+    "um\\ole2.h.patch",
+    "um\\ktmw32.h.patch",
+    "um\\aclapi.h.patch"
   ]
 }

@@ -1,0 +1,410 @@
+diff --git a/shared/bcrypt.h b/shared/bcrypt.h
+index c05c9ae0..f105639a 100644
+--- a/shared/bcrypt.h
++++ b/shared/bcrypt.h
+@@ -1207,6 +1207,7 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
+ #define BCRYPT_ENABLE_INCOMPATIBLE_FIPS_CHECKS	0x00000100
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1246,6 +1247,7 @@ typedef struct _BCRYPT_ALGORITHM_IDENTIFIER
+ } BCRYPT_ALGORITHM_IDENTIFIER;
+ // certenrolls_end
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1260,6 +1262,7 @@ typedef struct _BCRYPT_PROVIDER_NAME
+     LPWSTR  pszProviderName;
+ } BCRYPT_PROVIDER_NAME;
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1275,6 +1278,7 @@ BCryptEnumProviders(
+ #define BCRYPT_PUBLIC_KEY_FLAG                  0x00000001
+ #define BCRYPT_PRIVATE_KEY_FLAG                 0x00000002
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1287,6 +1291,7 @@ BCryptGetProperty(
+     _In_                                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1298,6 +1303,7 @@ BCryptSetProperty(
+     _In_                    ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ WINAPI
+ BCryptCloseAlgorithmProvider(
+@@ -1305,6 +1311,7 @@ BCryptCloseAlgorithmProvider(
+     _In_    ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ VOID
+ WINAPI
+ BCryptFreeBuffer(
+@@ -1314,6 +1321,7 @@ BCryptFreeBuffer(
+ //
+ // Primitive encryption functions.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1327,6 +1335,7 @@ BCryptGenerateSymmetricKey(
+     _In_                                ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1337,6 +1346,7 @@ BCryptGenerateKeyPair(
+     _In_    ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1353,6 +1363,7 @@ BCryptEncrypt(
+     _In_                                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1369,6 +1380,7 @@ BCryptDecrypt(
+     _In_                                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1382,6 +1394,7 @@ BCryptExportKey(
+     _In_                                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1405,6 +1418,7 @@ BCryptImportKey(
+ #define BCRYPT_KEY_VALIDATION_REGENERATE        0x00000020  // BCryptImportKeyPair
+ #endif
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1418,6 +1432,7 @@ BCryptImportKeyPair(
+     _In_                            ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1429,6 +1444,7 @@ BCryptDuplicateKey(
+     _In_                                ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1437,18 +1453,21 @@ BCryptFinalizeKeyPair(
+     _In_    ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ WINAPI
+ BCryptDestroyKey(
+     _Inout_ BCRYPT_KEY_HANDLE   hKey);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ WINAPI
+ BCryptDestroySecret(
+     _Inout_ BCRYPT_SECRET_HANDLE   hSecret);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1463,6 +1482,7 @@ BCryptSignHash(
+     _In_                                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1476,6 +1496,7 @@ BCryptVerifySignature(
+     _In_                        ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1486,6 +1507,7 @@ BCryptSecretAgreement(
+     _In_    ULONG                   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1500,6 +1522,7 @@ BCryptDeriveKey(
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN8)
++_Win32_SupportedOS_Windows8_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1516,6 +1539,7 @@ BCryptKeyDerivation(
+ //
+ // Primitive hashing functions.
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1529,6 +1553,7 @@ BCryptCreateHash(
+     _In_                                ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1539,6 +1564,7 @@ BCryptHashData(
+     _In_                    ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1550,6 +1576,7 @@ BCryptFinishHash(
+ 
+ 
+ #if (NTDDI_VERSION > NTDDI_WINBLUE || (NTDDI_VERSION == NTDDI_WINBLUE && defined(WINBLUE_KBSPRING14)))
++_Win32_SupportedOS_Windows81_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1563,6 +1590,7 @@ BCryptCreateMultiHash(
+     _In_                                        ULONG               cbSecret,   // optional
+     _In_                                        ULONG               dwFlags);
+ 
++_Win32_SupportedOS_Windows81_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1575,6 +1603,7 @@ BCryptProcessMultiOperations(
+ #endif
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1586,6 +1615,7 @@ BCryptDuplicateHash(
+     _In_                                ULONG   dwFlags);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ WINAPI
+ BCryptDestroyHash(
+@@ -1593,6 +1623,7 @@ BCryptDestroyHash(
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
++_Win32_SupportedOS_10240_
+ NTSTATUS
+ WINAPI
+ BCryptHash(
+@@ -1615,6 +1646,7 @@ BCryptHash(
+ #define BCRYPT_RNG_USE_ENTROPY_IN_BUFFER    0x00000001
+ #define BCRYPT_USE_SYSTEM_PREFERRED_RNG     0x00000002
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1629,6 +1661,7 @@ BCryptGenRandom(
+ //
+ // Primitive key derivation functions.
+ //
++_Win32_SupportedOS_Windows7_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1642,6 +1675,7 @@ BCryptDeriveKeyCapi(
+ 
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN7)
++_Win32_SupportedOS_Windows7_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1918,6 +1952,7 @@ CRYPT_PROVIDER_REFS, *PCRYPT_PROVIDER_REFS;
+ #ifndef KERNEL_MODE_CNG
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1928,6 +1963,7 @@ BCryptQueryProviderRegistration(
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_PROVIDER_REG *ppBuffer);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1938,6 +1974,7 @@ BCryptEnumRegisteredProviders(
+ //
+ // Context Configuration Functions
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1946,6 +1983,7 @@ BCryptCreateContext(
+     _In_z_ LPCWSTR pszContext,
+     _In_opt_ PCRYPT_CONTEXT_CONFIG pConfig); // Optional
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1953,6 +1991,7 @@ BCryptDeleteContext(
+     _In_ ULONG dwTable,
+     _In_z_ LPCWSTR pszContext);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1961,6 +2000,7 @@ BCryptEnumContexts(
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXTS *ppBuffer);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1969,6 +2009,7 @@ BCryptConfigureContext(
+     _In_z_ LPCWSTR pszContext,
+     _In_ PCRYPT_CONTEXT_CONFIG pConfig);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1978,6 +2019,7 @@ BCryptQueryContextConfiguration(
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_CONFIG *ppBuffer);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1988,6 +2030,7 @@ BCryptAddContextFunction(
+     _In_z_ LPCWSTR pszFunction,
+     _In_ ULONG dwPosition);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -1997,6 +2040,7 @@ BCryptRemoveContextFunction(
+     _In_ ULONG dwInterface,
+     _In_z_ LPCWSTR pszFunction);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2007,6 +2051,7 @@ BCryptEnumContextFunctions(
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTIONS *ppBuffer);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2017,6 +2062,7 @@ BCryptConfigureContextFunction(
+     _In_z_ LPCWSTR pszFunction,
+     _In_ PCRYPT_CONTEXT_FUNCTION_CONFIG pConfig);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2029,6 +2075,7 @@ BCryptQueryContextFunctionConfiguration(
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_CONFIG *ppBuffer);
+ 
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2040,6 +2087,7 @@ BCryptEnumContextFunctionProviders(
+     _Inout_ ULONG* pcbBuffer,
+     _Outptr_opt_result_bytebuffer_all_maybenull_(*pcbBuffer) PCRYPT_CONTEXT_FUNCTION_PROVIDERS *ppBuffer);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2052,6 +2100,7 @@ BCryptSetContextFunctionProperty(
+     _In_ ULONG cbValue,
+     _In_reads_bytes_opt_(cbValue) PUCHAR pbValue);
+ 
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS
+ WINAPI
+@@ -2101,6 +2150,7 @@ BCryptUnregisterConfigChangeNotify(
+ //
+ // Provider Resolution Functions
+ //
++_Win32_SupportedOS_WindowsVista_
+ _Must_inspect_result_
+ NTSTATUS WINAPI
+ BCryptResolveProviders(
+@@ -2122,6 +2172,7 @@ BCryptResolveProviders(
+ //
+ // Miscellaneous queries about the crypto environment
+ //
++_Win32_SupportedOS_WindowsVista_
+ NTSTATUS
+ WINAPI
+ BCryptGetFipsAlgorithmMode(

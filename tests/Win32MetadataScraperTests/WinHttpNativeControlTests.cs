@@ -7,6 +7,8 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using ClangSharp.Interop;
+using Microsoft.CodeAnalysis.CSharp;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Xunit;
 using Xunit.Abstractions;
 
@@ -119,6 +121,131 @@ using WINHTTP_INTERNET_SCHEME = void;
                 foreach (string partition in new[] { "Power", "RstMgr" })
                     foreach (string language in new[] { "c", "c++" })
                         yield return new object[] { partition, architecture.Item1, architecture.Item2, language };
+        }
+
+        [NativeMigrationTheory("BULK_SYSTEM_MIGRATION_ROOT")]
+        [MemberData(nameof(BulkSystemNativeModes))]
+        public void BulkSystemHeaderFloorsAndErrorsKeepNativeContracts(
+            string partition, string architecture, string target, string language)
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
+            string artifacts = Environment.GetEnvironmentVariable("BULK_SYSTEM_MIGRATION_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(artifacts, "report.json")));
+            string[] headers = report.RootElement.GetProperty("originals").EnumerateArray()
+                .Select(value => Path.GetFileName(value.GetString())).ToArray();
+            string sourceText = language == "c" && partition is "Identity" or "Setup" or "Registry"
+                ? "#define SECURITY_WIN32\n#include \"intrinfix.h\"\n#include \"windows.fixed.h\"\n" +
+                    (partition == "Identity" ? "#include <NTSecAPI.h>\n#include <sspi.h>\n#include <wincred.h>\n"
+                        : partition == "Setup" ? "#include <msi.h>\n#include <msiquery.h>\n"
+                        : "#include <winreg.h>\n")
+                : null;
+            var beforeSal = new List<string>();
+            var disabledSal = new List<string>();
+            var enabledSal = new List<string>();
+            var annotations = new List<string>();
+            var before = Surface(root, original, partition, architecture, target, headers, "",
+                sourceText: sourceText, salAnnotations: beforeSal, language: language);
+            var disabled = Surface(root, prepared, partition, architecture, target, headers, "",
+                sourceText: sourceText, salAnnotations: disabledSal, language: language);
+            var enabled = Surface(root, prepared, partition, architecture, target, headers, "",
+                metadataEnabled: true, annotations: annotations, sourceText: sourceText, salAnnotations: enabledSal, language: language);
+            Assert.NotEmpty(before);
+            Assert.Equal(before, disabled);
+            Assert.Equal(before, enabled);
+            Assert.Equal(beforeSal, disabledSal);
+            Assert.Equal(beforeSal, enabledSal);
+            int checkedFacts = 0;
+            foreach (var fact in report.RootElement.GetProperty("facts").EnumerateArray()
+                .Where(value => value.GetProperty("status").GetString() == "converted"))
+            {
+                string symbol = fact.GetProperty("symbol").GetString();
+                if (!before.Any(value => value.StartsWith("function " + symbol + " ", StringComparison.Ordinal)))
+                    continue;
+                string payload = fact.GetProperty("category").GetString() == "setLastError" ? "SetLastError"
+                    : fact.GetProperty("value").GetString().Split('=', 2)[1];
+                Assert.Contains(symbol + "|" + payload, annotations);
+                checkedFacts++;
+            }
+            Assert.True(checkedFacts > 0, "The native control must exercise actual converted facts.");
+            this.output.WriteLine($"{partition}/{architecture}/{language}: {checkedFacts} authored facts; " +
+                "ordinary and metadata native declarations/layout/SAL unchanged.");
+        }
+
+        public static IEnumerable<object[]> BulkSystemNativeModes()
+        {
+            foreach (var architecture in new[]
+            {
+                ("x86", "i686-pc-windows-msvc"),
+                ("x64", "x86_64-pc-windows-msvc"),
+                ("arm64", "aarch64-pc-windows-msvc"),
+            })
+            {
+                foreach (string partition in new[]
+                {
+                    "AppxPackaging", "Authorization", "Com", "ComOle", "Credentials", "DataXchg", "Etw", "Fs",
+                    "Identity", "Mf", "Mi", "Perf", "Registry", "Security.Cryptography", "Setup", "TermServ",
+                })
+                    yield return new object[] { partition, architecture.Item1, architecture.Item2, "c++" };
+                foreach (string partition in new[] { "Identity", "Setup", "Security.Cryptography", "Registry" })
+                    yield return new object[] { partition, architecture.Item1, architecture.Item2, "c" };
+            }
+        }
+
+        [NativeMigrationTheory("BULK_SYSTEM_MIGRATION_ROOT")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void BulkSystemProjectionPreservesAuthoredFloorsAndErrors(string architecture)
+        {
+            string artifacts = Environment.GetEnvironmentVariable("BULK_SYSTEM_MIGRATION_ROOT");
+            string generated = Environment.GetEnvironmentVariable("BULK_SYSTEM_GENERATED_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(artifacts, "report.json")));
+            var methods = Directory.EnumerateFiles(Path.Combine(generated, architecture), "*.cs")
+                .SelectMany(path => CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetRoot().DescendantNodes()
+                    .OfType<MethodDeclarationSyntax>())
+                .Where(method => method.AttributeLists.SelectMany(list => list.Attributes)
+                    .Any(attribute => attribute.Name.ToString().Split('.').Last() is "DllImport" or "DllImportAttribute"))
+                .ToLookup(method => method.Identifier.ValueText, StringComparer.Ordinal);
+            int checkedFacts = 0;
+            int nativeOnly = 0;
+            foreach (var fact in report.RootElement.GetProperty("facts").EnumerateArray()
+                .Where(value => value.GetProperty("status").GetString() == "converted"))
+            {
+                var projected = methods[fact.GetProperty("symbol").GetString()].ToArray();
+                if (projected.Length == 0)
+                {
+                    nativeOnly++;
+                    continue;
+                }
+                foreach (var method in projected)
+                {
+                    var attributes = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
+                    if (fact.GetProperty("category").GetString() == "setLastError")
+                    {
+                        var import = Assert.Single(attributes.Where(attribute => attribute.Name.ToString().Split('.').Last()
+                            is "DllImport" or "DllImportAttribute"));
+                        Assert.Contains(import.ArgumentList.Arguments, argument =>
+                            argument.NameEquals?.Name.Identifier.ValueText == "SetLastError" && argument.Expression.ToString() == "true");
+                    }
+                    else
+                    {
+                        string os = Regex.Match(fact.GetProperty("value").GetString(),
+                            "SupportedOSPlatform\\(\"([^\"]+)\"\\)").Groups[1].Value;
+                        var actual = attributes.Where(attribute => attribute.Name.ToString().Split('.').Last()
+                                is "SupportedOSPlatform" or "SupportedOSPlatformAttribute")
+                            .Select(attribute => Assert.IsType<LiteralExpressionSyntax>(
+                                Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText).ToArray();
+                        Assert.True(actual.SequenceEqual(new[] { os }),
+                            $"{architecture}/{method.Identifier}: expected '{os}', actual [{string.Join(", ", actual)}].");
+                    }
+                }
+                checkedFacts++;
+            }
+            Assert.True(checkedFacts > 0, "The readback must exercise actual emitted native functions.");
+            this.output.WriteLine($"{architecture}: {checkedFacts} exact authored payloads read back from generated declarations; " +
+                $"{nativeOnly} source facts are outside these selected generated declarations, not claimed as emitted APIs.");
         }
 
         [NativeMigrationTheory]
@@ -1557,6 +1684,10 @@ static_assert(DISC_NO_FORCE == 64u);
                     "--language=" + language, "--std=" + standard, "--target=" + target,
                     "--include-directory=" + Path.Combine(root, "generation", "WinSDK", "inc"),
                 };
+            arguments.AddRange(partitionOptions.Where(line => line.StartsWith("<IncludeRoot>/", StringComparison.Ordinal))
+                .Select(line => Path.GetDirectoryName(Path.Combine(includeRoot, line.Substring("<IncludeRoot>/".Length).Replace('/', '\\'))))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
+                .Select(directory => "--include-directory=" + directory));
             arguments.AddRange(new[] { "shared", "um", "ucrt", "winrt" }
                 .Select(directory => "--include-directory=" + Path.Combine(includeRoot, directory)));
             string toolsetInclude = Environment.GetEnvironmentVariable("WINHTTP_NATIVE_TOOLSET_INCLUDE");

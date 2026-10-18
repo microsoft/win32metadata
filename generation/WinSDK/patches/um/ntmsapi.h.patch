@@ -1,0 +1,569 @@
+diff --git a/um/ntmsapi.h b/um/ntmsapi.h
+index 9b3376d2..6807b62d 100644
+--- a/um/ntmsapi.h
++++ b/um/ntmsapi.h
+@@ -155,18 +155,23 @@ enum NtmsSessionOptions {
+     NTMS_SESSION_QUERYEXPEDITE      = 0x1
+ };
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ HANDLE WINAPI OpenNtmsSessionW(
+     LPCWSTR lpServer,
+     LPCWSTR lpApplication,
+     DWORD   dwOptions
+     );
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ HANDLE WINAPI OpenNtmsSessionA(
+     LPCSTR lpServer,
+     LPCSTR lpApplication,
+     DWORD   dwOptions
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CloseNtmsSession(
+     HANDLE hSession
+     );
+@@ -222,6 +227,7 @@ typedef struct _NTMS_MOUNT_INFORMATION
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI MountNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+@@ -233,6 +239,7 @@ DWORD WINAPI MountNtmsMedia(
+     LPNTMS_MOUNT_INFORMATION lpMountInformation
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DismountNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+@@ -273,6 +280,7 @@ typedef struct _NTMS_ALLOCATION_INFORMATION
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI AllocateNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaPool,
+@@ -283,30 +291,35 @@ DWORD WINAPI AllocateNtmsMedia(
+     LPNTMS_ALLOCATION_INFORMATION lpAllocateInformation
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeallocateNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+     DWORD dwOptions
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SwapNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId1,
+     LPNTMS_GUID lpMediaId2
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI AddNtmsMediaType(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaTypeId,
+     LPNTMS_GUID lpLibId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsMediaType(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaTypeId,
+     LPNTMS_GUID lpLibId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ChangeNtmsMediaType(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+@@ -317,16 +330,19 @@ DWORD WINAPI ChangeNtmsMediaType(
+ // MEDIA STATES
+ //=======================================================================
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DecommissionNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsMediaComplete(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId
+@@ -363,6 +379,7 @@ DWORD WINAPI CreateNtmsMediaPool(
+ #endif
+ 
+ // SEVILIA
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CreateNtmsMediaPoolA(
+     HANDLE hSession,
+     LPCSTR lpPoolName,
+@@ -372,6 +389,7 @@ DWORD WINAPI CreateNtmsMediaPoolA(
+     LPNTMS_GUID lpPoolId            // OUT
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CreateNtmsMediaPoolW(
+     HANDLE hSession,
+     LPCWSTR lpPoolName,
+@@ -381,6 +399,7 @@ DWORD WINAPI CreateNtmsMediaPoolW(
+     LPNTMS_GUID lpPoolId            // OUT
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ WINAPI
+ GetNtmsMediaPoolNameA(
+@@ -390,6 +409,7 @@ GetNtmsMediaPoolNameA(
+     _Inout_ LPDWORD lpdwBufSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ WINAPI
+ GetNtmsMediaPoolNameW(
+@@ -399,22 +419,26 @@ GetNtmsMediaPoolNameW(
+     _Inout_ LPDWORD lpdwBufSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI MoveToNtmsMediaPool(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+     LPNTMS_GUID lpPoolId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsMediaPool(
+     HANDLE hSession,
+     LPNTMS_GUID lpPoolId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsLibrary(
+     HANDLE hSession,
+     LPNTMS_GUID lpLibraryId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsDrive(
+     HANDLE hSession,
+     LPNTMS_GUID lpDriveId
+@@ -1426,24 +1450,28 @@ DWORD WINAPI SetNtmsObjectInformation(
+ #endif
+ 
+ // Added by SEvilia
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectInformationA(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+     LPNTMS_OBJECTINFORMATIONA lpInfo
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectInformationW(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+     LPNTMS_OBJECTINFORMATIONW lpInfo
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectInformationA(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+     LPNTMS_OBJECTINFORMATIONA lpInfo
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectInformationW(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1451,6 +1479,7 @@ DWORD WINAPI SetNtmsObjectInformationW(
+     );
+ // END of SEVILIA
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CreateNtmsMediaA(
+     HANDLE hSession,
+     LPNTMS_OBJECTINFORMATIONA lpMedia,
+@@ -1458,6 +1487,7 @@ DWORD WINAPI CreateNtmsMediaA(
+     DWORD dwOptions
+     ) ;
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CreateNtmsMediaW(
+     HANDLE hSession,
+     LPNTMS_OBJECTINFORMATIONW lpMedia,
+@@ -1470,6 +1500,7 @@ enum NtmsEnumerateOption {
+     NTMS_ENUM_ROOTPOOL                  = 1
+     };
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI EnumerateNtmsObject(
+     HANDLE hSession,
+     const LPNTMS_GUID lpContainerId,
+@@ -1479,12 +1510,14 @@ DWORD WINAPI EnumerateNtmsObject(
+     DWORD dwOptions
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DisableNtmsObject(
+     HANDLE hSession,
+     DWORD dwType,
+     LPNTMS_GUID lpObjectId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI EnableNtmsObject(
+     HANDLE hSession,
+     DWORD dwType,
+@@ -1500,6 +1533,7 @@ enum NtmsEjectOperation {
+     NTMS_EJECT_ASK_USER             = 5
+ };
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI EjectNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+@@ -1514,6 +1548,7 @@ enum NtmsInjectOperation {
+     NTMS_INJECT_STARTMANY           = 3
+ };
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI InjectNtmsMedia(
+     HANDLE hSession,
+     LPNTMS_GUID lpLibraryId,
+@@ -1521,28 +1556,33 @@ DWORD WINAPI InjectNtmsMedia(
+     DWORD dwAction
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI AccessNtmsLibraryDoor(
+     HANDLE hSession,
+     LPNTMS_GUID lpLibraryId,
+     DWORD dwAction
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CleanNtmsDrive(
+     HANDLE hSession,
+     LPNTMS_GUID lpDriveId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DismountNtmsDrive(
+     HANDLE hSession,
+     LPNTMS_GUID lpDriveId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI InventoryNtmsLibrary(
+     HANDLE hSession,
+     LPNTMS_GUID lpLibraryId,
+     DWORD dwAction
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI IdentifyNtmsSlot(
+     HANDLE hSession,
+     LPNTMS_GUID lpSlotId,
+@@ -1560,6 +1600,7 @@ typedef struct
+     DWORD SerialNumber ;
+ } NTMS_FILESYSTEM_INFO ;
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI UpdateNtmsOmidInfo(
+     HANDLE hSession,
+     LPNTMS_GUID lpMediaId,
+@@ -1568,23 +1609,27 @@ DWORD WINAPI UpdateNtmsOmidInfo(
+     LPVOID lpBuffer
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CancelNtmsLibraryRequest(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsRequestOrder(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId,
+     LPDWORD lpdwOrderNumber
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsRequestOrder(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId,
+     DWORD dwOrderNumber
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI DeleteNtmsRequests(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId,
+@@ -1592,17 +1637,20 @@ DWORD WINAPI DeleteNtmsRequests(
+     DWORD dwCount
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ReserveNtmsCleanerSlot (
+     HANDLE hSession,
+     LPNTMS_GUID lpLibrary,
+     LPNTMS_GUID lpSlot
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ReleaseNtmsCleanerSlot (
+     HANDLE hSession,
+     LPNTMS_GUID lpLibrary
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI InjectNtmsCleaner (
+     HANDLE hSession,
+     LPNTMS_GUID lpLibrary,
+@@ -1611,6 +1659,7 @@ DWORD WINAPI InjectNtmsCleaner (
+     DWORD dwAction
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI EjectNtmsCleaner (
+     HANDLE hSession,
+     LPNTMS_GUID lpLibrary,
+@@ -1618,11 +1667,13 @@ DWORD WINAPI EjectNtmsCleaner (
+     DWORD dwAction
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI BeginNtmsDeviceChangeDetection(
+     HANDLE hSession,
+     LPHANDLE lpDetectHandle
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsDeviceChangeDetection(
+     HANDLE hSession,
+     HANDLE DetectHandle,
+@@ -1631,6 +1682,7 @@ DWORD WINAPI SetNtmsDeviceChangeDetection(
+     DWORD dwCount
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI EndNtmsDeviceChangeDetection(
+     HANDLE hSession,
+     HANDLE DetectHandle
+@@ -1648,6 +1700,7 @@ enum NtmsDriveType {
+ #ifndef MIDL_PASS
+ 
+ // Security for NTMS API
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectSecurity(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1658,6 +1711,7 @@ DWORD WINAPI GetNtmsObjectSecurity(
+     LPDWORD lpnLengthNeeded
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectSecurity(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1696,6 +1750,7 @@ enum NtmsAccessMask {
+ #define NTMS_MAXATTR_NAMELEN        32
+ 
+ // Object extensions for NTMS API
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectAttributeA(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1705,6 +1760,7 @@ DWORD WINAPI GetNtmsObjectAttributeA(
+     LPDWORD lpAttributeSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectAttributeW(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1714,6 +1770,7 @@ DWORD WINAPI GetNtmsObjectAttributeW(
+     LPDWORD lpAttributeSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectAttributeA(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1723,6 +1780,7 @@ DWORD WINAPI SetNtmsObjectAttributeA(
+     DWORD dwAttributeSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectAttributeW(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1748,6 +1806,7 @@ enum NtmsUIOperations {
+     NTMS_UIOPERATION_MAX
+ };
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD
+ WINAPI
+ GetNtmsUIOptionsA(
+@@ -1758,6 +1817,7 @@ GetNtmsUIOptionsA(
+     _Inout_ LPDWORD lpdwBufSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ _Success_ (return == ERROR_SUCCESS)
+ DWORD
+ WINAPI
+@@ -1769,6 +1829,7 @@ GetNtmsUIOptionsW(
+     _Inout_ LPDWORD lpdwBufSize
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsUIOptionsA(
+     HANDLE hSession,
+     const LPNTMS_GUID lpObjectId,
+@@ -1777,6 +1838,7 @@ DWORD WINAPI SetNtmsUIOptionsA(
+     LPCSTR lpszDestination
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsUIOptionsW(
+     HANDLE hSession,
+     const LPNTMS_GUID lpObjectId,
+@@ -1787,6 +1849,7 @@ DWORD WINAPI SetNtmsUIOptionsW(
+ 
+ 
+ // Operator Requests
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SubmitNtmsOperatorRequestW(
+     HANDLE hSession,
+     DWORD dwRequest,
+@@ -1796,6 +1859,7 @@ DWORD WINAPI SubmitNtmsOperatorRequestW(
+     LPNTMS_GUID lpRequestId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SubmitNtmsOperatorRequestA(
+     HANDLE hSession,
+     DWORD dwRequest,
+@@ -1805,17 +1869,20 @@ DWORD WINAPI SubmitNtmsOperatorRequestA(
+     LPNTMS_GUID lpRequestId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI WaitForNtmsOperatorRequest(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId,
+     DWORD dwTimeout
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CancelNtmsOperatorRequest(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SatisfyNtmsOperatorRequest(
+     HANDLE hSession,
+     LPNTMS_GUID lpRequestId
+@@ -1843,10 +1910,12 @@ typedef struct _NTMS_NOTIFICATIONINFORMATION {
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ImportNtmsDatabase(
+     HANDLE hSession
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ExportNtmsDatabase(
+     HANDLE hSession
+     );
+@@ -1855,10 +1924,12 @@ DWORD WINAPI ExportNtmsDatabase(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ImportNtmsDatabase(
+     HANDLE hSession
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI ExportNtmsDatabase(
+     HANDLE hSession
+     );
+@@ -1867,17 +1938,21 @@ DWORD WINAPI ExportNtmsDatabase(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SetLastError_
++_Win32_SupportedOS_WindowsXP_
+ HANDLE WINAPI OpenNtmsNotification(
+     HANDLE hSession,
+     DWORD dwType
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI WaitForNtmsNotification(
+     HANDLE hNotification,
+     LPNTMS_NOTIFICATIONINFORMATION lpNotificationInformation,
+     DWORD dwTimeout
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CloseNtmsNotification(
+     HANDLE hNotification
+     );
+@@ -1886,6 +1961,7 @@ DWORD WINAPI CloseNtmsNotification(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI EjectDiskFromSADriveW(
+     LPCWSTR lpComputerName,
+     LPCWSTR lpAppName,
+@@ -1896,6 +1972,7 @@ DWORD WINAPI EjectDiskFromSADriveW(
+     DWORD dwOptions
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD WINAPI EjectDiskFromSADriveA(
+     LPCSTR lpComputerName,
+     LPCSTR lpAppName,
+@@ -1910,6 +1987,7 @@ DWORD WINAPI EjectDiskFromSADriveA(
+ 
+ #ifndef MIDL_PASS
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ GetVolumesFromDriveW(
+@@ -1918,6 +1996,7 @@ GetVolumesFromDriveW(
+     _Outptr_ LPWSTR *DriveLetterBufferPtr
+     );
+ 
++_Win32_SupportedOS_WindowsVista_
+ DWORD
+ WINAPI
+ GetVolumesFromDriveA(

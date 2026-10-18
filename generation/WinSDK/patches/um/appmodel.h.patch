@@ -1,0 +1,260 @@
+diff --git a/um/appmodel.h b/um/appmodel.h
+index b9e2d1e4..58387065 100644
+--- a/um/appmodel.h
++++ b/um/appmodel.h
+@@ -79,6 +79,7 @@ typedef struct PACKAGE_ID {
+ 
+ // Identity Functions
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -88,6 +89,7 @@ GetCurrentPackageId(
+     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -97,6 +99,7 @@ GetCurrentPackageFullName(
+     _Out_writes_opt_(*packageFullNameLength) PWSTR packageFullName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -106,6 +109,7 @@ GetCurrentPackageFamilyName(
+     _Out_writes_opt_(*packageFamilyNameLength) PWSTR packageFamilyName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -115,6 +119,7 @@ GetCurrentPackagePath(
+     _Out_writes_opt_(*pathLength) PWSTR path
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -125,6 +130,7 @@ GetPackageId(
+     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -136,6 +142,7 @@ GetPackageFullName(
+     );
+ 
+ //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -147,6 +154,7 @@ GetPackageFullNameFromToken(
+     _Out_writes_opt_(*packageFullNameLength) PWSTR packageFullName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -158,6 +166,7 @@ GetPackageFamilyName(
+     );
+ 
+ //TODO:8645770 Change 0x0101 to 0x0102 once THRESHOLD constants are available
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -169,6 +178,7 @@ GetPackageFamilyNameFromToken(
+     _Out_writes_opt_(*packageFamilyNameLength) PWSTR packageFamilyName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -180,6 +190,7 @@ GetPackagePath(
+     _Out_writes_opt_(*pathLength) PWSTR path
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -190,6 +201,7 @@ GetPackagePathByFullName(
+     _Out_writes_opt_(*pathLength) PWSTR path
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -214,6 +226,7 @@ typedef enum PackagePathType
+ #endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+ } PackagePathType;
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -225,6 +238,7 @@ GetPackagePathByFullName2(
+     _Out_writes_opt_(*pathLength) PWSTR path
+     );
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -236,6 +250,7 @@ GetStagedPackagePathByFullName2(
+     _Out_writes_opt_(*pathLength) PWSTR path
+     );
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -248,6 +263,7 @@ GetCurrentPackageInfo2(
+     _Out_opt_ UINT32* count
+     );
+ 
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -349,6 +365,7 @@ VerifyPackageRelativeApplicationId(
+ 
+ // Conversion Functions
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -361,6 +378,7 @@ PackageIdFromFullName(
+     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -372,6 +390,7 @@ PackageFullNameFromId(
+     _Out_writes_opt_(*packageFullNameLength) PWSTR packageFullName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -383,6 +402,7 @@ PackageFamilyNameFromId(
+     _Out_writes_opt_(*packageFamilyNameLength) PWSTR packageFamilyName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -394,6 +414,7 @@ PackageFamilyNameFromFullName(
+     _Out_writes_opt_(*packageFamilyNameLength) PWSTR packageFamilyName
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -407,6 +428,7 @@ PackageNameAndPublisherIdFromFamilyName(
+     _Out_writes_opt_(*packagePublisherIdLength) PWSTR packagePublisherId
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -419,6 +441,7 @@ FormatApplicationUserModelId(
+     _Out_writes_opt_(*applicationUserModelIdLength) PWSTR applicationUserModelId
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -436,6 +459,7 @@ ParseApplicationUserModelId(
+ 
+ // Lookup Functions
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -452,6 +476,7 @@ GetPackagesByPackageFamily(
+     );
+ 
+ /* Any combination of PACKAGE_FILTER_* */
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -480,6 +505,7 @@ typedef enum PackageOrigin
+     PackageOrigin_LineOfBusiness    = 6
+ } PackageOrigin;
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Check_return_
+ _Success_(return == ERROR_SUCCESS)
+@@ -544,6 +570,7 @@ typedef struct PACKAGE_INFO {
+ 
+ // Dependency Functions
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -555,6 +582,7 @@ GetCurrentPackageInfo(
+     _Out_opt_ UINT32* count
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -578,6 +606,7 @@ OpenPackageInfoByFullNameForUser(
+     _Out_ PACKAGE_INFO_REFERENCE* packageInfoReference
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -586,6 +615,7 @@ ClosePackageInfo(
+     _In_ PACKAGE_INFO_REFERENCE packageInfoReference
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -598,6 +628,7 @@ GetPackageInfo(
+     _Out_opt_ UINT32* count
+     );
+ 
++_Win32_SupportedOS_Windows81_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG
+@@ -610,6 +641,7 @@ GetPackageApplicationIds(
+     );
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_19H1
++_Win32_SupportedOS_10240_
+ WINBASEAPI
+ _Success_(return == ERROR_SUCCESS)
+ LONG

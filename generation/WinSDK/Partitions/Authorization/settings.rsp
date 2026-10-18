@@ -13,3 +13,5 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/um/azroles.h
 --namespace
 Windows.Win32.Security.Authorization
+--config
+parse-win32-annotations

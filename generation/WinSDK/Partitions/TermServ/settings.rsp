@@ -22,3 +22,5 @@
 <IncludeRoot>/um/remotesystemadditionalinfo.h
 --namespace
 Windows.Win32.System.RemoteDesktop
+--config
+parse-win32-annotations

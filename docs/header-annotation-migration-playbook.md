@@ -3396,3 +3396,31 @@ not a new full-SDK image or final CI acceptance. Evidence stays in the worker's
 
 `EFFECTIVE_POWER_MODE_CALLBACK` still requires the existing explicit
 `--reducePointerLevel` parser fixup in addition to the derived pointer cache.
+
+### Bulk native system sources: availability and error majority
+
+The first system source batch adds semantic patches to 23 original native
+headers and removes exactly 1,581 availability rows and 415 last-error rows.
+It preserves native declarations, storage, constants, library discovery and
+all unrelated sidecars. The 1,998 annotation placements include fully covered
+native redeclarations. Retained facts receive no partial source annotation.
+
+Strict preparation applies the final patches to their pinned SDK preimages.
+Native controls cover all 16 owning contexts and x86/x64/ARM64: 57 initial
+ordinary/metadata ABI, layout, SAL and payload checks pass, followed by six
+final C17/C++17 Registry checks after the expanded owner map adds 74 existing
+Registry floors. Three generated-source readbacks check 137 actual P/Invoke
+facts per architecture in the completed AppxPackaging/Authorization scrapes.
+The other 1,859 source facts are not an additional emission claim. The broader
+selected binding-generation attempt is incomplete, not full-image acceptance.
+Evidence stays under `artifacts\bulk-annotations\system-next-001-final*`.
+
+Exactly 650 availability/error facts remain explicitly temporary: 318 lack a
+parsed declaration, 248 are macro/definition/non-global placements, 64 share a
+source line, 16 have additional lexical references and four have another
+physical declaration owner. These are discovery or mapper/placement limits,
+not demonstrated annotation-vocabulary gaps or native-contract conflicts.
+`dbghelp.h` and `intsafe.h` have no semantic patch and do not count as converted;
+their 180 and 107 discovery-tail facts remain intact. Other metadata categories
+in these headers still require subsequent source authoring. This is a
+source-first majority, not complete-header, full-SDK, CI or consumer acceptance.

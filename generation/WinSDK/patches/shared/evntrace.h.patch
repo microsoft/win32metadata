@@ -1,0 +1,305 @@
+diff --git a/shared/evntrace.h b/shared/evntrace.h
+index 58677d49..5844b6bd 100644
+--- a/shared/evntrace.h
++++ b/shared/evntrace.h
+@@ -1726,6 +1726,7 @@ extern "C" {
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ StartTraceW (
+@@ -1741,6 +1742,7 @@ StartTraceW (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ StartTraceA (
+@@ -1760,6 +1762,7 @@ StartTraceA (
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ StopTraceW (
+@@ -1775,6 +1778,7 @@ StopTraceW (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ StopTraceA (
+@@ -1794,6 +1798,7 @@ StopTraceA (
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ QueryTraceW (
+@@ -1809,6 +1814,7 @@ QueryTraceW (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ QueryTraceA (
+@@ -1822,6 +1828,7 @@ QueryTraceA (
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ UpdateTraceW (
+@@ -1831,6 +1838,7 @@ UpdateTraceW (
+     );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ UpdateTraceA (
+@@ -1852,6 +1860,7 @@ UpdateTraceA (
+ 
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ EXTERN_C
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ WMIAPI
+ FlushTraceW (
+@@ -1869,6 +1878,7 @@ FlushTraceW (
+ 
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ EXTERN_C
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ WMIAPI
+ FlushTraceA (
+@@ -1914,6 +1924,7 @@ ControlTraceA (
+     );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ QueryAllTracesW (
+@@ -1923,6 +1934,7 @@ QueryAllTracesW (
+     );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ QueryAllTracesA (
+@@ -1942,6 +1954,7 @@ QueryAllTracesA (
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ EnableTrace (
+@@ -1964,6 +1977,7 @@ EnableTrace (
+ 
+ #if (WINVER >= _WIN32_WINNT_VISTA)
+ EXTERN_C
++_Win32_SupportedOS_WindowsVista_
+ ULONG
+ WMIAPI
+ EnableTraceEx (
+@@ -2011,6 +2025,7 @@ typedef struct _ENABLE_TRACE_PARAMETERS {
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+ EXTERN_C
++_Win32_SupportedOS_Windows7_
+ ULONG
+ WMIAPI
+ EnableTraceEx2 (
+@@ -2404,6 +2419,7 @@ typedef enum _TRACE_QUERY_INFO_CLASS {
+ 
+ #if (WINVER >= _WIN32_WINNT_VISTA)
+ EXTERN_C
++_Win32_SupportedOS_WindowsVista_
+ ULONG
+ WMIAPI
+ EnumerateTraceGuidsEx (
+@@ -2461,6 +2477,7 @@ typedef struct TRACE_CONTEXT_REGISTER_INFO {
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+ EXTERN_C
++_Win32_SupportedOS_Windows7_
+ ULONG
+ WMIAPI
+ TraceSetInformation (
+@@ -2473,6 +2490,7 @@ TraceSetInformation (
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN8)
+ EXTERN_C
++_Win32_SupportedOS_Windows8_
+ ULONG
+ WMIAPI
+ TraceQueryInformation (
+@@ -2505,6 +2523,7 @@ TraceConfigureLastBranchRecord (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ CreateTraceInstanceId (
+@@ -2535,6 +2554,7 @@ typedef ULONG64 TRACEGUID_HANDLE;
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ TraceEvent (
+@@ -2549,6 +2569,7 @@ TraceEvent (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ TraceEventInstance (
+@@ -2569,6 +2590,7 @@ TraceEventInstance (
+ //
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ RegisterTraceGuidsW (
+@@ -2589,6 +2611,7 @@ RegisterTraceGuidsW (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ RegisterTraceGuidsA (
+@@ -2604,6 +2627,7 @@ RegisterTraceGuidsA (
+ 
+ #if (WINVER >= _WIN32_WINNT_WINXP)
+ EXTERN_C
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ WMIAPI
+ EnumerateTraceGuids (
+@@ -2620,6 +2644,7 @@ EnumerateTraceGuids (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ UnregisterTraceGuids (
+@@ -2627,6 +2652,8 @@ UnregisterTraceGuids (
+     );
+ 
+ EXTERN_C
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ TRACELOGGER_HANDLE
+ WMIAPI
+ GetTraceLoggerHandle (
+@@ -2634,6 +2661,8 @@ GetTraceLoggerHandle (
+     );
+ 
+ EXTERN_C
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ UCHAR
+ WMIAPI
+ GetTraceEnableLevel (
+@@ -2641,6 +2670,8 @@ GetTraceEnableLevel (
+     );
+ 
+ EXTERN_C
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ GetTraceEnableFlags (
+@@ -2659,6 +2690,8 @@ GetTraceEnableFlags (
+ 
+ EXTERN_C
+ ETW_APP_DECLSPEC_DEPRECATED
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ PROCESSTRACE_HANDLE
+ WMIAPI
+ OpenTraceW (
+@@ -2667,6 +2700,7 @@ OpenTraceW (
+ 
+ EXTERN_C
+ ETW_APP_DECLSPEC_DEPRECATED
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ ProcessTrace (
+@@ -2678,6 +2712,7 @@ ProcessTrace (
+ 
+ EXTERN_C
+ ETW_APP_DECLSPEC_DEPRECATED
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ CloseTrace (
+@@ -2789,6 +2824,7 @@ typedef struct _ETW_TRACE_PARTITION_INFORMATION_V2 {
+ 
+ EXTERN_C
+ ETW_APP_DECLSPEC_DEPRECATED
++_Win32_SupportedOS_16299_
+ ULONG
+ WMIAPI
+ QueryTraceProcessingHandle (
+@@ -2812,6 +2848,8 @@ QueryTraceProcessingHandle (
+ //
+ 
+ EXTERN_C
++_Win32_SetLastError_
++_Win32_SupportedOS_Windows2000_
+ PROCESSTRACE_HANDLE
+ WMIAPI
+ OpenTraceA (
+@@ -2819,6 +2857,7 @@ OpenTraceA (
+     );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ SetTraceCallback (
+@@ -2827,6 +2866,7 @@ SetTraceCallback (
+     );
+ 
+ EXTERN_C
++_Win32_SupportedOS_Windows2000_
+ ULONG
+ WMIAPI
+ RemoveTraceCallback (
+@@ -2844,6 +2884,7 @@ RemoveTraceCallback (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ __cdecl
+ TraceMessage (
+@@ -2861,6 +2902,7 @@ TraceMessage (
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ EXTERN_C
++_Win32_SupportedOS_WindowsXP_
+ ULONG
+ TraceMessageVa (
+     _In_ TRACELOGGER_HANDLE LoggerHandle,

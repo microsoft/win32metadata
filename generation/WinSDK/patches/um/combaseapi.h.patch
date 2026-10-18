@@ -1,0 +1,141 @@
+diff --git a/um/combaseapi.h b/um/combaseapi.h
+index dee3a821..39b0c124 100644
+--- a/um/combaseapi.h
++++ b/um/combaseapi.h
+@@ -405,6 +405,7 @@ GetHGlobalFromStream(
+ 
+ /* init/uninit */
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(void)
+ CoUninitialize(
+     void
+@@ -416,6 +417,7 @@ CoUninitialize(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(DWORD)
+ CoGetCurrentProcess(
+     void
+@@ -442,6 +444,7 @@ CoInitializeEx(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI
+ CoGetCallerTID(
+     _Out_ LPDWORD lpdwTID
+@@ -453,6 +456,7 @@ CoGetCallerTID(
+ #pragma region Application or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI
+ CoGetCurrentLogicalThreadId(
+     _Out_ GUID* pguid
+@@ -560,6 +564,7 @@ CoDecrementMTAUsage(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
++_Win32_SupportedOS_Windows8_
+ WINOLEAPI
+ CoAllowUnmarshalerCLSID(
+     _In_ REFCLSID clsid
+@@ -626,6 +631,7 @@ CoRegisterClassObject(
+     _Out_ LPDWORD lpdwRegister
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI
+ CoRevokeClassObject(
+     _In_ DWORD dwRegister
+@@ -647,11 +653,13 @@ CoSuspendClassObjects(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(ULONG)
+ CoAddRefServerProcess(
+     void
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(ULONG)
+ CoReleaseServerProcess(
+     void
+@@ -716,12 +724,14 @@ CoUnmarshalInterface(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI
+ CoMarshalHresult(
+     _In_ LPSTREAM pstm,
+     _In_ HRESULT hresult
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI
+ CoUnmarshalHresult(
+     _In_ LPSTREAM pstm,
+@@ -806,6 +816,7 @@ typedef enum tagSTDMSHLFLAGS
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(BOOL)
+ CoIsHandlerConnected(
+     _In_ LPUNKNOWN pUnk
+@@ -850,12 +861,14 @@ CoCreateFreeThreadedMarshaler(
+ #pragma region Application or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(void)
+ CoFreeUnusedLibraries(
+     void
+     );
+ 
+ #if (_WIN32_WINNT >= 0x0501)
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAPI_(void)
+ CoFreeUnusedLibrariesEx(
+     _In_ DWORD dwUnloadDelay,
+@@ -1052,6 +1065,7 @@ CoCreateInstanceFromApp(
+ #pragma region Desktop or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
++_Win32_SupportedOS_WindowsXP_
+ WINOLEAPI
+ CoRegisterActivationFilter(
+     _In_ IActivationFilter* pActivationFilter
+@@ -1328,23 +1342,28 @@ typedef HRESULT (STDAPICALLTYPE * LPFNGETCLASSOBJECT) (REFCLSID, REFIID, LPVOID
+ typedef HRESULT (STDAPICALLTYPE * LPFNCANUNLOADNOW)(void);
+ 
+ _Check_return_
++_Win32_SupportedOS_Windows2000_
+ STDAPI  DllGetClassObject(_In_ REFCLSID rclsid, _In_ REFIID riid, _Outptr_ LPVOID FAR* ppv);
+ 
+ __control_entrypoint(DllExport)
++_Win32_SupportedOS_Windows2000_
+ STDAPI  DllCanUnloadNow(void);
+ 
+ /****** Default Memory Allocation ******************************************/
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(_Ret_opt_ _Post_writable_byte_size_(cb)  __drv_allocatesMem(Mem) _Check_return_ LPVOID)
+ CoTaskMemAlloc(
+     _In_ SIZE_T cb
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(_Ret_opt_ _Post_writable_byte_size_(cb)  _When_(cb > 0, __drv_allocatesMem(Mem) _Check_return_) LPVOID)
+ CoTaskMemRealloc(
+     _Pre_maybenull_ __drv_freesMem(Mem) _Post_invalid_ LPVOID pv,
+     _In_ SIZE_T cb
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINOLEAPI_(void)
+ CoTaskMemFree(
+     _Frees_ptr_opt_ LPVOID pv

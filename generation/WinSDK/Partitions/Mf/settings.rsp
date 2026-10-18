@@ -41,3 +41,5 @@ _MFT_ENUM_FLAG=MFT_ENUM_FLAG
 Windows.Win32.Media.MediaFoundation
 --std
 c++20
+--config
+parse-win32-annotations

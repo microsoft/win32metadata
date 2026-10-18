@@ -1,0 +1,28 @@
+diff --git a/um/mi.h b/um/mi.h
+index d716bcde..3e0474f8 100644
+--- a/um/mi.h
++++ b/um/mi.h
+@@ -1682,6 +1682,7 @@ struct _MI_Server
+  * return: MI_RESULT_OK, MI_RESULT_INVALID_PARAMETER
+  *
+  */
++_Win32_SupportedOS_Windows8_
+ MI_Result MI_CALL MI_Server_GetVersion(MI_Uint32* version);
+ 
+ /**
+@@ -1697,6 +1698,7 @@ MI_Result MI_CALL MI_Server_GetVersion(MI_Uint32* version);
+  * return: MI_RESULT_OK, MI_RESULT_INVALID_PARAMETER
+  *
+  */
++_Win32_SupportedOS_Windows8_
+ MI_Result MI_CALL MI_Server_GetSystemName(const MI_Char** systemName);
+ 
+ /*
+@@ -6712,6 +6714,7 @@ __declspec(dllimport) const MI_ClientFT_V1 *mi_clientFT_V1;
+ ** Return: MI_RESULT_OK success, other errors indicate specific failure
+ **=============================================================================
+ */
++_Win32_SupportedOS_Windows8_
+ MI_Result MI_MAIN_CALL MI_Application_InitializeV1(
+              MI_Uint32 flags,
+     _In_opt_z_ const MI_Char *applicationID,
