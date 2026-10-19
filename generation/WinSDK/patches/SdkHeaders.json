@@ -4010,14 +4010,6 @@
       {
         "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midlc.exe",
         "sha256": "D12AFF8A74397601041BEC46552FC8DEE1206DAA97E39600E72A7B1B1A5EF6AB"
-      },
-      {
-        "sdkPath": "c\\bin\\10.0.26100.0\\x86\\midl.exe",
-        "sha256": "38E8F098C69F38CA6E21A994A87D30803D4F48899F1364C21305A15EFE740FF1"
-      },
-      {
-        "sdkPath": "c\\bin\\10.0.26100.0\\x86\\midlc.exe",
-        "sha256": "2D1DB2F9686EEDB15F41CD147939EED05311628879E76A112478807D1BFD6FCC"
       }
     ],
     "inputs": [
