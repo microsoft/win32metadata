@@ -82,6 +82,15 @@ the existing `addUsesTo` form can retain those existing uses without `name`, `me
 or `autoPopulate`; it emits remaps, not another enum definition. Do not add new
 API-specific sidecar facts as part of that bridge.
 
+Header typedef annotations can also coexist with a retained AutoTypes record during
+incremental migration. The emitter composes generated native typedef wrappers by
+their Roslyn-bound full identity and unmanaged `Value` storage, keeping one wrapper,
+one `Value` field, and one copy of matching annotations. Remaining AutoTypes facts
+are preserved; conflicting storage or annotation values fail rather than winning by
+input order. Ordinary declarations and foreign short names are not merged. This is
+an intermediate compatibility bridge, not permission to add type-wide ownership:
+new cleanup annotations still belong on producing results or output parameters.
+
 Include the complete normal constants scrape and emission in that dependency batch.
 Scalar macro aliases outside the group must keep their own primitive storage and
 values; do not absorb them into the group or add casts to native headers. The emitter
