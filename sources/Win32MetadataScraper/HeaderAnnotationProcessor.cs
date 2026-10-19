@@ -28,6 +28,7 @@ namespace Win32MetadataScraper
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
+        private readonly HashSet<CXCursor> enumReferenceCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
         private readonly HashSet<Cursor> visited = new();
 
@@ -70,6 +71,29 @@ namespace Win32MetadataScraper
                 bool primaryRecord = alias.UnderlyingType.CanonicalType is RecordType record && Remap(record.Decl.Name) == Remap(alias.Name);
                 if ((GetFunctionType(alias.UnderlyingType) == null || alias is TypeAliasDecl) && !primaryRecord)
                     remaps.TryAdd(alias.Name, alias.Name);
+            }
+        }
+
+        private static unsafe bool IsForwardEnumReference(EnumDecl declaration)
+        {
+            declaration = declaration.Definition ?? declaration;
+            if (declaration.Enumerators.Count != 0)
+                return false;
+            var cursor = declaration.Handle;
+            var translationUnit = cursor.TranslationUnit;
+            var tokens = translationUnit.Tokenize(cursor.Extent);
+            try
+            {
+                // MSVC enum forwards have an assumed integer type, even without a definition.
+                if (tokens.Length != 2)
+                    return false;
+                using var keyword = clang.getTokenSpelling(translationUnit, tokens[0]);
+                using var name = clang.getTokenSpelling(translationUnit, tokens[1]);
+                return keyword.ToString() == "enum" && name.ToString() == declaration.Name;
+            }
+            finally
+            {
+                translationUnit.DisposeTokens(tokens);
             }
         }
 
@@ -116,7 +140,11 @@ namespace Win32MetadataScraper
                 if (declaration.IsNull)
                     throw Error(location, "AssociatedEnum requires a named native enum or metadata group type.");
                 if (arguments[0] is Expr expression && expression.Type.CanonicalType is EnumType nativeEnum)
+                {
                     declaration = nativeEnum.Decl.Handle;
+                    if (IsForwardEnumReference(nativeEnum.Decl))
+                        enumReferenceCarriers.Add(declaration.CanonicalCursor);
+                }
                 enumAssociations.Add((declaration, location));
                 return new HeaderAnnotation("AssociatedEnum", new[] { Remap(declaration.Spelling.ToString()) });
             }
@@ -1108,6 +1136,13 @@ namespace Win32MetadataScraper
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
                 var facts = FindFacts(node.AttributeLists, node);
+                if (facts?.Declaration is EnumDecl nativeEnum &&
+                    owner.enumReferenceCarriers.Contains(nativeEnum.Handle.CanonicalCursor))
+                {
+                    if (node.Members.Count != 0)
+                        throw Error(facts.Location, "A native enum forward reference unexpectedly projected members.");
+                    return null;
+                }
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
                 if (facts != null)
                 {

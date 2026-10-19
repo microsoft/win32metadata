@@ -2135,6 +2135,48 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AssociatedEnumNativeForwardsResolveAnotherPartitionWithoutEmptyDefinitions(string architecture, string target)
+        {
+            using var use = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef enum tagCOINIT COINIT;
+void Initialize(_Win32_AssociatedEnum_(COINIT) unsigned long flags);
+", extraSettings: "--language\nc++\n--std\nc++17\n--additional=-fms-extensions\n");
+            using var definition = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef enum tagCOINIT
+{
+    COINIT_APARTMENTTHREADED = 2,
+    COINIT_MULTITHREADED = 0,
+    COINIT_DISABLE_OLE1DDE = 4,
+    COINIT_SPEED_OVER_MEMORY = 8
+} COINIT;
+");
+            Assert.True(use.Run() == 0, use.Diagnostics);
+            Assert.True(definition.Run() == 0, definition.Diagnostics);
+            File.Copy(definition.Output, Path.Combine(Path.GetDirectoryName(use.Output), "NativeEnumDefinition.cs"));
+            using var image = Emit(use, architecture);
+            var reader = image.Reader;
+            var nativeEnum = Assert.Single(reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Where(type => reader.GetString(type.Name) == "COINIT"));
+            Assert.Equal("Test", reader.GetString(nativeEnum.Namespace));
+            var fields = nativeEnum.GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal("Int32", fields.Single(field => reader.GetString(field.Name) == "value__")
+                .DecodeSignature(new SignatureNames(), null));
+            var members = fields.Where(field => reader.GetString(field.Name) != "value__").ToArray();
+            Assert.Equal(new[] { "COINIT_APARTMENTTHREADED", "COINIT_MULTITHREADED", "COINIT_DISABLE_OLE1DDE", "COINIT_SPEED_OVER_MEMORY" },
+                members.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new[] { 2, 0, 4, 8 }, members.Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32()));
+            var initialize = FindMethod(reader, "Apis", "Initialize");
+            Assert.Equal(new[] { "UInt32" }, initialize.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var flags = initialize.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 1);
+            AssertStringAttribute(reader, flags.GetCustomAttributes(), "AssociatedEnumAttribute", "COINIT");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
         public void ExplicitReservedMetadataPreservesDirectionAndOptionality(string architecture, string target)
         {
             const string annotation = "_Win32_Reserved_ ";

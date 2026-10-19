@@ -26,6 +26,14 @@ semantics: supported OS, imports, ownership and invalid values, result and lifet
 behavior, logical enum groups and associations, and the rest of the supported
 vocabulary. Native declarations and existing SAL remain authoritative.
 
+An enum association can use a metadata-only forward declaration of the original
+native enum tag and typedef when its definition is in another header or partition.
+The complete original definition must still participate in metadata generation.
+The scraper uses native cursor identity and source locations to omit only the
+forward's empty generated declaration; real empty enums, complete opaque enums,
+and unrelated same-name enums remain intact. Do not substitute a primitive alias
+or duplicate the members of a native enum.
+
 Use the [annotation specification](copilot/plans/shift-left-annotation-spec.md#attribute-reference)
 for the complete vocabulary, valid targets, and examples. The options below describe
 the existing response-file configuration; API-specific metadata moves into the owning

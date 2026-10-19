@@ -34,6 +34,116 @@ namespace Win32MetadataScraperTests
             Assert.Throws<FormatException>(() => HeaderAnnotation.Parse(payload));
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, false)]
+        [InlineData("x86", "i686-pc-windows-msvc", false, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false, true)]
+        [InlineData("x86", "i686-pc-windows-msvc", true, true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true, true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true, true)]
+        public void AssociatedEnumsBindNativeEnumForwardDeclarations(
+            string architecture, string target, bool annotationsEnabled, bool definitionFollows)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+#if defined(WIN32METADATA) && defined(__clang__)
+typedef enum tagCOINIT COINIT;
+#endif
+void Initialize(_Win32_AssociatedEnum_(COINIT) unsigned long flags);
+" + (definitionFollows ? @"
+typedef enum tagCOINIT
+{
+    COINIT_APARTMENTTHREADED = 2,
+    COINIT_MULTITHREADED = 0,
+    COINIT_DISABLE_OLE1DDE = 4,
+    COINIT_SPEED_OVER_MEMORY = 8
+} COINIT;
+" : ""), annotationsEnabled: annotationsEnabled,
+                extraSettings: "--language\nc++\n--std\nc++17\n--additional=-fms-extensions\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("uint flags", source);
+            Assert.Equal(annotationsEnabled, source.Contains("AssociatedEnum(\"COINIT\")", StringComparison.Ordinal));
+            var enums = CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().ToArray();
+            if (definitionFollows)
+            {
+                var nativeEnum = Assert.Single(enums);
+                Assert.Equal("COINIT", nativeEnum.Identifier.ValueText);
+                Assert.Equal(4, nativeEnum.Members.Count);
+            }
+            else
+            {
+                Assert.Empty(enums);
+            }
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AssociatedEnumsPreserveCompleteOpaqueAndEmptyNativeEnums(string architecture, string target)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+enum Opaque : unsigned;
+enum class ScopedOpaque;
+enum Empty { };
+void UseOpaque(Opaque value);
+void UseScopedOpaque(ScopedOpaque value);
+void UseEmpty(Empty value);
+void UseLabels(_Win32_AssociatedEnum_(Opaque) unsigned opaque,
+    _Win32_AssociatedEnum_(Empty) unsigned empty);
+", extraSettings: "--language\nc++\n--std\nc++17\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            var enums = CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().ToArray();
+            Assert.Equal(new[] { "Empty", "Opaque", "ScopedOpaque" }, enums.Select(value => value.Identifier.ValueText).OrderBy(value => value));
+            Assert.Contains("AssociatedEnum(\"Opaque\")", source);
+            Assert.Contains("AssociatedEnum(\"Empty\")", source);
+        }
+
+        [Fact]
+        public void AssociatedEnumForwardsDoNotExcludeOtherNamespaceDefinitions()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+typedef enum tagCOINIT COINIT;
+void Initialize(_Win32_AssociatedEnum_(COINIT) unsigned long flags);
+namespace Other
+{
+enum tagCOINIT { OTHER_VALUE = 1 };
+tagCOINIT Echo(tagCOINIT value);
+}
+", extraSettings: "--language\nc++\n--std\nc++17\n--additional=-fms-extensions\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var enums = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<EnumDeclarationSyntax>().ToArray();
+            var nativeEnum = Assert.Single(enums);
+            Assert.Equal("OTHER_VALUE", Assert.Single(nativeEnum.Members).Identifier.ValueText);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AssociatedEnumsBindNativeEnumForwardsInC(string architecture, string target)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+typedef enum tagCOINIT COINIT;
+void Initialize(_Win32_AssociatedEnum_(COINIT) unsigned long flags);
+", extraSettings: "--language\nc\n--std\nc17\n--additional=-fms-extensions\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Contains("AssociatedEnum(\"COINIT\")", source);
+            Assert.Contains("uint flags", source);
+            Assert.Empty(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<EnumDeclarationSyntax>());
+        }
+
         [Fact]
         public void ParsesNestedInvalidExpressionsWithoutSplittingTheirCommas()
         {
