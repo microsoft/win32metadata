@@ -66,6 +66,8 @@ permitted, and annotations on unsupported targets are errors.
 | HANDLE cleanup shorthand | `_Win32_RAIIFree_Handle_(CloseX)` | Producer return or output parameter whose invalid set is exactly `-1, 0`. |
 | Retained pointer | `_Win32_Retained_` | Pointer parameter retained by the API after the call. Follow the API's documented lifetime. |
 | Reserved parameter | `_Win32_Reserved_` | Reserved pointer or scalar parameter. Records `[Reserved]` while preserving existing native types, direction SAL, and optionality. Valueless and non-repeatable. |
+| Parameter optionality override | `_Win32_Optional_(true)` / `_Win32_Optional_(false)` | Parameter only. Explicitly adds or removes projected optionality after native SAL/MIDL derivation, including on a scalar, without replacing the native annotations. |
+| COM output override | `_Win32_ComOutPtr_(true)` / `_Win32_ComOutPtr_(false)` | Parameter with writable pointer-to-pointer or reference-to-pointer output storage. Adds or removes `ComOutPtr` metadata without replacing native direction, count, type, or lifetime contracts. An input-only parameter is invalid. |
 | Interior pointers | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter. Returned absolute pointers may borrow storage inside that same allocation; keep it alive and at a stable address until all pointer use or copying ends. Valueless and non-repeatable. |
 | Compatible native typedef | `_Win32_AlsoUsableFor_(TYPE)` | Genuine native typedef, not a logical enum group. |
 | Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with an already declared native enum or metadata-only group. Keep its native declaration type. |
@@ -74,6 +76,7 @@ permitted, and annotations on unsupported targets are errors.
 | Logical flags enum | `_Win32_FlagsEnum_(name, storage, constants...)` | The same grouping contract with flags semantics. |
 | Projected return parameter | `_Win32_Retval_` | Output parameter in a C/C++-authored declaration, alongside direction SAL. Use native `[retval]` in IDL instead. |
 | IDL interface annotation | `_Win32_AnnotateInterface_(name, annotation)` | Before the original IDL interface declaration. Supplies a public annotation such as `_Win32_SupportedOS_15063_` without editing the generated header. |
+| IDL parameter annotation | `_Win32_AnnotateParameter_(Interface::Method, nativeParameter, annotation)` | After the complete interface in an existing trailing quote region. Binds the original C++ method and native parameter name without changing native IDL parameter attributes. |
 
 Use existing native syntax where it already expresses the contract:
 
@@ -142,6 +145,14 @@ BOOL WINAPI ReadThings(
     THING* items,
     _In_ DWORD count);
 ```
+
+Explicit parameter overrides take the literal `true` or `false`, not a numeric
+value, expression, quoted string, or boolean macro. They affect only the selected
+projected metadata fact; ordinary direction SAL, native constness, array counts,
+calling conventions, imports, and signatures remain in place. Removing
+`ComOutPtr` preserves the CLI `Out` flag that the emitter would otherwise derive
+from that attribute. Identical residual legacy overrides are redundant;
+contradictory ones fail with `WMA002`, not last-writer-wins behavior.
 
 `_Out_writes_bytes_(cbBuf)` describes a buffer capacity of `cbBuf` bytes.
 `_Out_writes_bytes_to_(cbBuf, *pcbWritten)` additionally describes the initialized
@@ -974,7 +985,7 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 | Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies an annotated same-name C++ typedef, including when MIDL hoists the definition before its quote. |
 | Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
 | Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
-| Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |
+| Parameter | `[annotation("...")]` emits a SAL override and non-local parameters produce MIDL2495. `_Win32_AnnotateParameter_` instead binds a native method parameter from an existing trailing quote region. Keep native IDL parameter attributes untouched; do not change RPC locality or suppress warnings. |
 | Scalar typedef | `typedef [annotation("...")]` emits an annotated typedef, with MIDL2525 warning that a SAL override on a typedef is not recommended. |
 | Struct or enum written as a typedef | MIDL emits the annotation on the typedef, not directly on the tag, and produces MIDL2525. The C# reader transfers primary-record typedef facts to the record; do not infer arbitrary type/tag coverage from that compatibility behavior. |
 
@@ -1012,6 +1023,29 @@ conflicting-floor validation.
 This transport is empty without `WIN32METADATA`, under a non-Clang compiler, or in
 the C-interface view. Referencing an undeclared or non-method target fails rather
 than producing unbound metadata.
+
+The parameter carrier uses the same compiler-bound method reference and a
+stringized native parameter identifier:
+
+```c
+_Win32_AnnotateParameter_(IExample::Read, values, _Win32_Optional_(true))
+```
+
+Place it after the complete interface, alongside an **existing** trailing
+`cpp_quote` region. Creating the first such region can add an implicit
+`__MIDL_itf_*` interface, native `RPC_IF_HANDLE` declarations, and proxy-source
+changes; those are not metadata-only changes to normalize away. If no suitable
+region exists, retain the fact for manual source-context review. Do not invent
+native declarations to provide one.
+
+The reader resolves the method from its original Clang declaration and exactly
+one parameter with the original native name, before managed remapping. Missing,
+ambiguous, duplicate, invalid-target, and invalid-output-storage selectors fail
+with `WMA001`. The private carrier is excluded from generated bindings and is
+inactive for ordinary native consumers and C-interface views. Transport uses
+intermediate `NativeAnnotation` values only; no new final attribute type is
+introduced. Use a separately qualified reader/header/runtime pin before adopting
+this vocabulary in a source migration.
 
 #### Upstream MIDL comment recovery
 

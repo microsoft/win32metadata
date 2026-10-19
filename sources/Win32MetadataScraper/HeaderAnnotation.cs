@@ -18,6 +18,7 @@ namespace Win32MetadataScraper
             "SetLastError", "ImportLibrary", "SupportedOSPlatform", "PreserveResult",
             "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal", "Reserved",
             "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", "Enum", "FlagsEnum",
+            "Optional", "ComOutPtr",
         };
 
         private static readonly HashSet<string> SupportedVersions = new(StringComparer.Ordinal)
@@ -76,6 +77,8 @@ namespace Win32MetadataScraper
                 case "AlsoUsableFor":
                 case "AssociatedEnum":
                 case "AssociatedConstant":
+                case "Optional":
+                case "ComOutPtr":
                     minimum = maximum = 1;
                     break;
                 default:
@@ -92,7 +95,12 @@ namespace Win32MetadataScraper
                     "a cleanup name and optional invalid values."));
             }
 
-            if (name == "SupportedOSPlatform")
+            if (name is "Optional" or "ComOutPtr")
+            {
+                if (arguments[0] is not "true" and not "false")
+                    throw new FormatException($"Annotation '{name}' requires exactly true or false.");
+            }
+            else if (name == "SupportedOSPlatform")
             {
                 string version = ReadString(arguments[0], requireQuotes: true);
                 if (!SupportedVersions.Contains(version))

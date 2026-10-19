@@ -245,7 +245,8 @@ class Program
             // ── Run PInvokeGenerator with merged remaps on the same TranslationUnit ──
             var annotations = parseHeaderAnnotations
                 ? new HeaderAnnotationProcessor(translationUnit, mergedRemaps, ns,
-                    settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes))
+                    settings.GetValueOrDefault("--traverse") ?? new List<string>(), new HashSet<string>(allExcludes),
+                    configOptions.HasFlag(PInvokeGeneratorConfigurationOptions.ExcludeFunctionsWithBody))
                 : null;
             annotations?.PrepareTypedefs();
             if (annotations != null)
