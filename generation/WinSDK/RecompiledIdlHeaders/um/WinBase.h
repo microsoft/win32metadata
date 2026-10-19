@@ -275,7 +275,7 @@ typedef enum FILE_FLUSH_MODE
 #if (NTDDI_VERSION >= NTDDI_WIN10_NI)
 
 //
-//  CopyFile flag to explicitly enable retaining sparse state 
+//  CopyFile flag to explicitly enable retaining sparse state
 //  during copying.
 //
 
@@ -286,7 +286,7 @@ typedef enum FILE_FLUSH_MODE
 #if (NTDDI_VERSION >= NTDDI_WIN11_ZN)
 
 //
-//  CopyFile flag to explicitly disable retaining sparse state 
+//  CopyFile flag to explicitly disable retaining sparse state
 //  during copying. COPY_FILE_DISABLE_SPARSE_COPY overrides
 //  COPY_FILE_ENABLE_SPARSE_COPY
 //
@@ -3558,6 +3558,12 @@ typedef enum _PROC_THREAD_ATTRIBUTE_NUM {
 #if (NTDDI_VERSION >= NTDDI_WIN11_GE)
     ProcThreadAttributeSveVectorLength              = 30,
 #endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+    ProcThreadAttributeSmeVectorLength              = 31,
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+    ProcThreadAttributeContainmentConfiguration     = 33,
+#endif
 } PROC_THREAD_ATTRIBUTE_NUM;
 #endif
 
@@ -3626,7 +3632,30 @@ typedef union _PROCESS_CREATION_SVE_VECTOR_LENGTH {
     };
 } PROCESS_CREATION_SVE_VECTOR_LENGTH, *PPROCESS_CREATION_SVE_VECTOR_LENGTH;
 
+#define PROC_THREAD_ATTRIBUTE_CONTAINMENT_CONFIGURATION \
+    ProcThreadAttributeValue (ProcThreadAttributeContainmentConfiguration, FALSE, TRUE, FALSE)
+
 #endif
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
+
+#define PROC_THREAD_ATTRIBUTE_SME_VECTOR_LENGTH \
+    ProcThreadAttributeValue (ProcThreadAttributeSmeVectorLength, FALSE, TRUE, FALSE)
+
+typedef struct _PROCESS_CREATION_SME_VECTOR_LENGTH {
+    union {
+        ULONG Data;
+        struct {
+            ULONG VectorLength  : 24;
+            ULONG FlagsReserved : 8;
+        };
+    };
+
+    ULONG Reserved;
+} PROCESS_CREATION_SME_VECTOR_LENGTH, *PPROCESS_CREATION_SME_VECTOR_LENGTH;
+
+#endif
+
 
 #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
 //
@@ -5821,6 +5850,8 @@ typedef enum _COPYFILE2_MESSAGE_TYPE {
      COPYFILE2_CALLBACK_STREAM_FINISHED,
      COPYFILE2_CALLBACK_POLL_CONTINUE,
      COPYFILE2_CALLBACK_ERROR,
+     COPYFILE2_CALLBACK_SPARSE_CHUNK_STARTED,
+     COPYFILE2_CALLBACK_SPARSE_CHUNK_FINISHED,
      COPYFILE2_CALLBACK_MAX,
 } COPYFILE2_MESSAGE_TYPE;
 
@@ -5856,8 +5887,8 @@ typedef struct COPYFILE2_MESSAGE {
         struct {
             DWORD           dwStreamNumber; // monotonically increasing stream number
             DWORD           dwReserved;
-            HANDLE           hSourceFile; // handle to the source stream
-            HANDLE           hDestinationFile; // handle to the destination stream
+            HANDLE          hSourceFile; // handle to the source stream
+            HANDLE          hDestinationFile; // handle to the destination stream
             ULARGE_INTEGER  uliChunkNumber; // monotonically increasing chunk number
             ULARGE_INTEGER  uliChunkSize;  // size of the copied chunk
             ULARGE_INTEGER  uliStreamSize; // size of the current stream
@@ -5867,8 +5898,8 @@ typedef struct COPYFILE2_MESSAGE {
         struct {
             DWORD           dwStreamNumber; // monotonically increasing stream number
             DWORD           dwFlags;
-            HANDLE           hSourceFile; // handle to the source stream
-            HANDLE           hDestinationFile; // handle to the destination stream
+            HANDLE          hSourceFile; // handle to the source stream
+            HANDLE          hDestinationFile; // handle to the destination stream
             ULARGE_INTEGER  uliChunkNumber; // monotonically increasing chunk number
             ULARGE_INTEGER  uliChunkSize;  // size of the copied chunk
             ULARGE_INTEGER  uliStreamSize; // size of the current stream
@@ -5880,8 +5911,8 @@ typedef struct COPYFILE2_MESSAGE {
         struct {
             DWORD           dwStreamNumber;
             DWORD           dwReserved;
-            HANDLE           hSourceFile; // handle to the source stream
-            HANDLE           hDestinationFile; // handle to the destination stream
+            HANDLE          hSourceFile; // handle to the source stream
+            HANDLE          hDestinationFile; // handle to the destination stream
             ULARGE_INTEGER  uliStreamSize; // size of this stream
             ULARGE_INTEGER  uliTotalFileSize; // total size of all streams for this file
         } StreamStarted;
@@ -5889,8 +5920,8 @@ typedef struct COPYFILE2_MESSAGE {
         struct {
             DWORD           dwStreamNumber;
             DWORD           dwReserved;
-            HANDLE           hSourceFile; // handle to the source stream
-            HANDLE           hDestinationFile; // handle to the destination stream
+            HANDLE          hSourceFile; // handle to the source stream
+            HANDLE          hDestinationFile; // handle to the destination stream
             ULARGE_INTEGER  uliStreamSize;
             ULARGE_INTEGER  uliStreamBytesTransferred;
             ULARGE_INTEGER  uliTotalFileSize;
@@ -5912,6 +5943,12 @@ typedef struct COPYFILE2_MESSAGE {
             ULARGE_INTEGER          uliTotalFileSize;
             ULARGE_INTEGER          uliTotalBytesTransferred;
         } Error;
+
+        struct {
+            ULARGE_INTEGER  uliChunkNumber; // monotonically increasing chunk number
+            ULARGE_INTEGER  uliChunkSize;  // size of the copied chunk
+            ULARGE_INTEGER  uliChunkOffset; // starting offset of the chunk
+        } SparseChunkStatus;
 
     } Info;
 

@@ -61,6 +61,8 @@ namespace Windows
 
                 interface IRemoteDesktopRegistrarStatics;
 
+                interface IRemoteDesktopRegistrarStatics2;
+
                 runtimeclass PerformLocalActionRequestedEventArgs;
 
                 runtimeclass RemoteDesktopConnectionInfo;
@@ -211,6 +213,16 @@ namespace Windows
                     HRESULT IsSwitchToLocalSessionEnabled([out] [retval] boolean* result);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                [exclusiveto(Windows.System.RemoteDesktop.Provider.RemoteDesktopRegistrar)]
+                [experimental]
+                [uuid(4139976D-4F8E-5BB4-B953-D6447CAC4E5F)]
+                interface IRemoteDesktopRegistrarStatics2 : IInspectable
+                {
+                    [eventadd] HRESULT ConnectionCenterRequested([in] Windows.Foundation.EventHandler<IInspectable*>* handler, [out] [retval] EventRegistrationToken* token);
+                    [eventremove] HRESULT ConnectionCenterRequested([in] EventRegistrationToken token);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
                 [marshaling_behavior(agile)]
                 runtimeclass PerformLocalActionRequestedEventArgs
@@ -250,6 +262,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 15.0)]
                 [marshaling_behavior(agile)]
                 [static(Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics, Windows.Foundation.UniversalApiContract, 15.0)]
+                [static(Windows.System.RemoteDesktop.Provider.IRemoteDesktopRegistrarStatics2, Windows.Foundation.UniversalApiContract, 19.0)]
                 [threading(both)]
                 runtimeclass RemoteDesktopRegistrar
                 {

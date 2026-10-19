@@ -17,12 +17,17 @@ DECLARE_HANDLE(CIMFS_IMAGE_HANDLE);
 
 DECLARE_HANDLE(CIMFS_STREAM_HANDLE);
 
+
 typedef enum CIM_CREATE_IMAGE_FLAGS
 {
-    CIM_CREATE_IMAGE_NONE               = 0x00000000,
-    CIM_CREATE_DO_NOT_EXPAND_PE_IMAGES  = 0x00000001,
-    CIM_CREATE_FIXED_SIZE_CHUNKS        = 0x00000002,
-    CIM_CREATE_IMAGE_BLOCK_CIM          = 0x00000004,
+    CIM_CREATE_IMAGE_NONE                 = 0x00000000,
+    CIM_CREATE_DO_NOT_EXPAND_PE_IMAGES    = 0x00000001,
+    CIM_CREATE_FIXED_SIZE_CHUNKS          = 0x00000002,
+    CIM_CREATE_IMAGE_BLOCK_CIM            = 0x00000004,
+    CIM_CREATE_IMAGE_SINGLE_FILE          = 0x00000008,
+    CIM_CREATE_CONSISTENT_CIMS            = 0x00000010,
+    CIM_CREATE_SKIP_PE_IMAGE_HASHES       = 0x00000020,
+    CIM_CREATE_VERIFIED                   = 0x00000040,
 } CIM_CREATE_IMAGE_FLAGS;
 
 #ifdef DEFINE_ENUM_FLAG_OPERATORS
@@ -31,12 +36,15 @@ DEFINE_ENUM_FLAG_OPERATORS(CIM_CREATE_IMAGE_FLAGS);
 
 typedef enum CIM_MOUNT_IMAGE_FLAGS
 {
-    CIM_MOUNT_IMAGE_NONE    = 0x00000000,
-    CIM_MOUNT_CHILD_ONLY    = 0x00000001,
-    CIM_MOUNT_ENABLE_DAX    = 0x00000002,
-    CIM_MOUNT_CACHE_FILES   = 0x00000004,
-    CIM_MOUNT_CACHE_REGIONS = 0x00000008,
-    CIM_MOUNT_BLOCK_CIM     = 0x00000010,
+    CIM_MOUNT_IMAGE_NONE         = 0x00000000,
+    CIM_MOUNT_CHILD_ONLY         = 0x00000001,
+    CIM_MOUNT_ENABLE_DAX         = 0x00000002,
+    CIM_MOUNT_CACHE_FILES        = 0x00000004,
+    CIM_MOUNT_CACHE_REGIONS      = 0x00000008,
+    CIM_MOUNT_BLOCK_CIM          = 0x00000010,
+    CIM_MOUNT_SINGLE_FILE        = 0x00000020,
+    CIM_MOUNT_DO_NOT_SHARE_CACHE = 0x00000040,
+    CIM_MOUNT_ATTEST_HASH        = 0x00000080
 } CIM_MOUNT_IMAGE_FLAGS;
 
 #ifdef DEFINE_ENUM_FLAG_OPERATORS
@@ -169,6 +177,9 @@ CimCloseImage(_In_ CIMFS_IMAGE_HANDLE cimImageHandle);
 //
 //  Mounts the named image from the location specified by cimPath
 //  as a volume with the volume GUID specified by volumeId.
+//  If this API is used to mount a sealed, verified CIM, the CIM
+//  will be mounted in attest mode. The BlockDeviceHash will only
+//  be validated against the hash stored in the CIM.
 //
 
 STDAPI
@@ -208,15 +219,6 @@ CimGetFileStatBasicInformation(_In_ PCWSTR imagePath,
                                _In_ PCWSTR filePath,
                                _Out_ FILE_STAT_BASIC_INFORMATION* statInfo);
 
-//
-// This API takes a path that contains a block format cim, the cim name
-// and a path to a new location where it converts the block format cim
-// to a file format cim.
-//
-STDAPI
-CimConvertBlockImage(_In_ PCWSTR imageContainingPath,
-                     _In_ PCWSTR existingImageName,
-                     _In_ PCWSTR newImageContainingPath);
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN11_GA)
 

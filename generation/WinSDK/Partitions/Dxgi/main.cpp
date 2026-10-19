@@ -14,6 +14,7 @@
 #include <dxgi1_4.h>
 #include <dxgi1_5.h>
 #include <dxgi1_6.h>
+#include <dxgi1_7.h>
 #include <dxgidebug.h>
 #include <dxgitype.h>
 #include <dxgicommon.h>

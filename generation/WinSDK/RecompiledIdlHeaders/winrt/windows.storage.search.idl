@@ -106,6 +106,8 @@ namespace Windows
 
             interface IQueryOptions;
 
+            interface IQueryOptionsAdditionalSearchSources;
+
             interface IQueryOptionsFactory;
 
             interface IQueryOptionsWithProviderFilter;
@@ -347,6 +349,18 @@ namespace Windows
                 HRESULT SetPropertyPrefetch([in] Windows.Storage.FileProperties.PropertyPrefetchOptions options, [in] Windows.Foundation.Collections.IIterable<HSTRING>* propertiesToRetrieve);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+            [exclusiveto(Windows.Storage.Search.QueryOptions)]
+            [experimental]
+            [uuid(8D342D6B-8800-426E-B5CF-4B328F824E7E)]
+            interface IQueryOptionsAdditionalSearchSources : IInspectable
+            {
+                [propget] HRESULT IncludeLocalSemanticIndex([out] [retval] boolean* value);
+                [propput] HRESULT IncludeLocalSemanticIndex([in] boolean value);
+                [propget] HRESULT IncludeCloudProviders([out] [retval] boolean* value);
+                [propput] HRESULT IncludeCloudProviders([in] boolean value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Storage.Search.QueryOptions)]
             [uuid(032E1F8C-A9C1-4E71-8011-0DEE9D4811A3)]
@@ -506,6 +520,7 @@ namespace Windows
             {
                 [default] interface Windows.Storage.Search.IQueryOptions;
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Storage.Search.IQueryOptionsWithProviderFilter;
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)] [experimental] interface Windows.Storage.Search.IQueryOptionsAdditionalSearchSources;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

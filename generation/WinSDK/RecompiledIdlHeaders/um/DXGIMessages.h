@@ -312,6 +312,12 @@ typedef enum
     DXGI_MSG_IDXGISwapChain_Present_11On12_Released_Resource,
     DXGI_MSG_IDXGIFactory_CreateSwapChain_MultipleSwapchainRefToSurface_DeferredDtr,
     DXGI_MSG_IDXGIFactory_MakeWindowAssociation_NoOpBehavior,
+    DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpaceFlag,
+    DXGI_MSG_IDXGIFactory8_CreateSwapChain_InvalidColorSpace,
+    DXGI_MSG_IDXGISwapChain5_ResizeBuffers2_InvalidColorSpace,
+    DXGI_MSG_IDXGISwapChain5_SetColorSpace1_Unsupported,
+    DXGI_MSG_IDXGIAdapter5_GetSingleAdapterHybridMode_Unsupported,
+    DXGI_MSG_IDXGIAdapter5_SetSingleAdapterHybridMode_Unsupported,
 
     DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_NotForegroundWindow = 1000,
     DXGI_MSG_Phone_IDXGIFactory_CreateSwapChain_DISCARD_BufferCount,

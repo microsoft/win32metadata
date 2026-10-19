@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -108,7 +108,7 @@
 #endif // defined(WINDOWS_SYSTEM_PROFILE_PROFILEHARDWARETOKENCONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION)
-#define WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION 0x10000
+#define WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_PROFILE_PROFILESHAREDMODECONTRACT_VERSION)
@@ -310,6 +310,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics ABI::Windows::System::Profile::IRetailInfoStatics
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                interface IRetailInfoStatics2;
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2 ABI::Windows::System::Profile::IRetailInfoStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics_FWD_DEFINED__
@@ -1617,6 +1632,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics;
 
 /*
  *
+ * Interface Windows.System.Profile.IRetailInfoStatics2
+ *
+ * Introduced to Windows.System.Profile.ProfileRetailInfoContract in version 2.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.RetailInfo
+ *
+ */
+#if WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION >= 0x20000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_IRetailInfoStatics2[] = L"Windows.System.Profile.IRetailInfoStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                MIDL_INTERFACE("a3b5d762-9e04-4f4c-b8e2-7a3c5d6e8f01")
+                IRetailInfoStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_IsDemoModeEnabledEx(
+                        boolean* value
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IRetailInfoStatics2 = __uuidof(IRetailInfoStatics2);
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION >= 0x20000
+
+/*
+ *
  * Interface Windows.System.Profile.ISharedModeSettingsStatics
  *
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
@@ -2135,6 +2186,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileRetailInfoContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Profile.IRetailInfoStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileRetailInfoContract API contract
  *   Static Methods exist on the Windows.System.Profile.IRetailInfoStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileRetailInfoContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -2156,8 +2208,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2366,6 +2418,12 @@ typedef interface __x_ABI_CWindows_CSystem_CProfile_CIPlatformDiagnosticsAndUsag
 typedef interface __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2 __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CISharedModeSettingsStatics_FWD_DEFINED__
@@ -4623,6 +4681,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics;
 
 /*
  *
+ * Interface Windows.System.Profile.IRetailInfoStatics2
+ *
+ * Introduced to Windows.System.Profile.ProfileRetailInfoContract in version 2.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.RetailInfo
+ *
+ */
+#if WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION >= 0x20000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_IRetailInfoStatics2[] = L"Windows.System.Profile.IRetailInfoStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_IsDemoModeEnabledEx)(__x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2* This,
+        boolean* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_get_IsDemoModeEnabledEx(This, value) \
+    ((This)->lpVtbl->get_IsDemoModeEnabledEx(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CIRetailInfoStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_SYSTEM_PROFILE_PROFILERETAILINFOCONTRACT_VERSION >= 0x20000
+
+/*
+ *
  * Interface Windows.System.Profile.ISharedModeSettingsStatics
  *
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
@@ -5429,6 +5556,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileRetailInfoContract in version 1.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.System.Profile.IRetailInfoStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileRetailInfoContract API contract
  *   Static Methods exist on the Windows.System.Profile.IRetailInfoStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileRetailInfoContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -5450,8 +5578,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.System.Profile.ProfileSharedModeContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics interface starting with version 1.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
+ *   Static Methods exist on the Windows.System.Profile.ISharedModeSettingsStatics2 interface starting with version 2.0 of the Windows.System.Profile.ProfileSharedModeContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

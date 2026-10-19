@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x130000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0x140000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -152,6 +152,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Power {
+                interface IPowerManagerStatics2;
+            } /* Power */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2 ABI::Windows::System::Power::IPowerManagerStatics2
+
+#endif // ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
@@ -203,6 +218,16 @@ namespace ABI {
         namespace System {
             namespace Power {
                 typedef enum EnergySaverStatus : int EnergySaverStatus;
+            } /* Power */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Power {
+                typedef enum EnergySaverStatus2 : int EnergySaverStatus2;
             } /* Power */
         } /* System */
     } /* Windows */
@@ -266,6 +291,31 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.System.Power.EnergySaverStatus2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Power {
+                enum EnergySaverStatus2 : int
+                {
+                    EnergySaverStatus2_Unknown = 0,
+                    EnergySaverStatus2_Off = 1,
+                    EnergySaverStatus2_Standard = 2,
+                    EnergySaverStatus2_HighSavings = 3,
+                };
+            } /* Power */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -584,6 +634,52 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics;
 
 /*
  *
+ * Interface Windows.System.Power.IPowerManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Power.PowerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Power_IPowerManagerStatics2[] = L"Windows.System.Power.IPowerManagerStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Power {
+                MIDL_INTERFACE("67a446c3-4f2e-5d56-b2e8-7707c264745b")
+                IPowerManagerStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_EnergySaverStatus2(
+                        ABI::Windows::System::Power::EnergySaverStatus2* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_IsEnergySaverStatus2Supported(
+                        boolean* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_EnergySaverStatus2Changed(
+                        __FIEventHandler_1_IInspectable* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_EnergySaverStatus2Changed(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                MIDL_CONST_ID IID& IID_IPowerManagerStatics2 = __uuidof(IPowerManagerStatics2);
+            } /* Power */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Class Windows.System.Power.BackgroundEnergyManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -634,6 +730,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.Power.IPowerManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Power.IPowerManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -666,6 +763,12 @@ typedef interface __x_ABI_CWindows_CSystem_CPower_CIForegroundEnergyManagerStati
 typedef interface __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics;
 
 #endif // ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2 __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2;
+
+#endif // ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -724,6 +827,8 @@ typedef enum __x_ABI_CWindows_CSystem_CPower_CBatteryStatus __x_ABI_CWindows_CSy
 
 typedef enum __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus;
 
+typedef enum __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus2 __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus2;
+
 typedef enum __x_ABI_CWindows_CSystem_CPower_CPowerSupplyStatus __x_ABI_CWindows_CSystem_CPower_CPowerSupplyStatus;
 
 /*
@@ -758,6 +863,23 @@ enum __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus
     EnergySaverStatus_On = 2,
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.System.Power.EnergySaverStatus2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+enum __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus2
+{
+    EnergySaverStatus2_Unknown = 0,
+    EnergySaverStatus2_Off = 1,
+    EnergySaverStatus2_Standard = 2,
+    EnergySaverStatus2_HighSavings = 3,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
 
 /*
  *
@@ -1303,6 +1425,91 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics;
 
 /*
  *
+ * Interface Windows.System.Power.IPowerManagerStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 19.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Power.PowerManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+#if !defined(____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Power_IPowerManagerStatics2[] = L"Windows.System.Power.IPowerManagerStatics2";
+typedef struct __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_EnergySaverStatus2)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        enum __x_ABI_CWindows_CSystem_CPower_CEnergySaverStatus2* value);
+    HRESULT (STDMETHODCALLTYPE* get_IsEnergySaverStatus2Supported)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        boolean* value);
+    HRESULT (STDMETHODCALLTYPE* add_EnergySaverStatus2Changed)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        __FIEventHandler_1_IInspectable* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_EnergySaverStatus2Changed)(__x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_get_EnergySaverStatus2(This, value) \
+    ((This)->lpVtbl->get_EnergySaverStatus2(This, value))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_get_IsEnergySaverStatus2Supported(This, value) \
+    ((This)->lpVtbl->get_IsEnergySaverStatus2Supported(This, value))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_add_EnergySaverStatus2Changed(This, handler, token) \
+    ((This)->lpVtbl->add_EnergySaverStatus2Changed(This, handler, token))
+
+#define __x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_remove_EnergySaverStatus2Changed(This, token) \
+    ((This)->lpVtbl->remove_EnergySaverStatus2Changed(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CPower_CIPowerManagerStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x130000
+
+/*
+ *
  * Class Windows.System.Power.BackgroundEnergyManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -1353,6 +1560,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.System.Power.IPowerManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Power.IPowerManagerStatics2 interface starting with version 19.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

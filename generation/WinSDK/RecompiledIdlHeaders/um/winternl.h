@@ -264,7 +264,7 @@ typedef struct _SYSTEM_PROCESS_INFORMATION {
     UNICODE_STRING ImageName;
     KPRIORITY BasePriority;
     HANDLE UniqueProcessId;
-    PVOID Reserved2;
+    HANDLE InheritedFromUniqueProcessId;
     ULONG HandleCount;
     ULONG SessionId;
     PVOID Reserved3;

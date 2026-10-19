@@ -77,16 +77,12 @@ RtlCaptureContext(
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
-#if defined(_AMD64_)
-
 NTSYSAPI
 VOID
 NTAPI
 RtlCaptureContext2(
     _Inout_ PCONTEXT ContextRecord
     );
-
-#endif // defined(_AMD64_)
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
@@ -256,8 +252,6 @@ RtlVirtualUnwind(
     _Inout_opt_ PKNONVOLATILE_CONTEXT_POINTERS ContextPointers
     );
 
-// end_winnt
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 NTSYSAPI
@@ -280,6 +274,32 @@ RtlVirtualUnwind2(
     );
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_FE */
+
+// end_winnt
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_BR)
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+RtlVirtualUnwind3(
+    _In_ ULONG HandlerType,
+    _In_ ULONG64 ImageBase,
+    _In_ ULONG64 ControlPc,
+    _In_opt_ PRUNTIME_FUNCTION FunctionEntry,
+    _Inout_ PCONTEXT ContextRecord,
+    _Inout_opt_ PBOOLEAN MachineFrameUnwound,
+    _Out_ PVOID* HandlerData,
+    _Out_ PULONG64 EstablisherFrame,
+    _Inout_opt_ PKNONVOLATILE_CONTEXT_POINTERS ContextPointers,
+    _In_opt_ PULONG64 LowLimit,
+    _In_opt_ PULONG64 HighLimit,
+    _Outptr_opt_result_maybenull_ PEXCEPTION_ROUTINE* HandlerRoutine,
+    _In_ ULONG UnwindFlags,
+    _Out_opt_ PULONG ResultFlags
+    );
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_BR */
 
 // begin_winnt
 
@@ -422,8 +442,6 @@ RtlVirtualUnwind(
     _Inout_opt_ PKNONVOLATILE_CONTEXT_POINTERS ContextPointers
     );
 
-// end_winnt
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 NTSYSAPI
@@ -446,8 +464,6 @@ RtlVirtualUnwind2(
     );
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_FE */
-
-// begin_winnt
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -577,8 +593,6 @@ RtlVirtualUnwind(
     _Inout_opt_ PKNONVOLATILE_CONTEXT_POINTERS ContextPointers
     );
 
-// end_winnt
-
 #if (NTDDI_VERSION >= NTDDI_WIN10_FE)
 
 NTSYSAPI
@@ -601,6 +615,32 @@ RtlVirtualUnwind2(
     );
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_FE */
+
+// end_winnt
+
+#if (NTDDI_VERSION >= NTDDI_WIN11_BR)
+
+NTSYSAPI
+NTSTATUS
+NTAPI
+RtlVirtualUnwind3(
+    _In_ ULONG HandlerType,
+    _In_ ULONG_PTR ImageBase,
+    _In_ ULONG_PTR ControlPc,
+    _In_opt_ PRUNTIME_FUNCTION FunctionEntry,
+    _Inout_ PCONTEXT ContextRecord,
+    _Inout_opt_ PBOOLEAN MachineFrameUnwound,
+    _Out_ PVOID* HandlerData,
+    _Out_ PULONG_PTR EstablisherFrame,
+    _Inout_opt_ PKNONVOLATILE_CONTEXT_POINTERS ContextPointers,
+    _In_opt_ PULONG_PTR LowLimit,
+    _In_opt_ PULONG_PTR HighLimit,
+    _Outptr_opt_result_maybenull_ PEXCEPTION_ROUTINE* HandlerRoutine,
+    _In_ ULONG UnwindFlags,
+    _Out_opt_ PULONG ResultFlags
+    );
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN11_BR */
 
 // begin_winnt
 

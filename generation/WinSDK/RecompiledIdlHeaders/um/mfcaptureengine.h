@@ -140,17 +140,6 @@ extern "C"{
 #if (WINVER >= _WIN32_WINNT_WIN7) 
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-#ifndef _MFVideoNormalizedRect_
-#define _MFVideoNormalizedRect_
-typedef struct MFVideoNormalizedRect
-    {
-    float left;
-    float top;
-    float right;
-    float bottom;
-    } 	MFVideoNormalizedRect;
-
-#endif
 typedef 
 enum MF_CAPTURE_ENGINE_DEVICE_TYPE
     {

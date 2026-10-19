@@ -484,11 +484,21 @@ public:
         HRESULT hr = this->CheckValidStateForDelegateCall();
         if (SUCCEEDED(hr))
         {
-            progressDelegate_ = progressHandler;
-
-            if (progressDelegate_ != nullptr)
+            ::Microsoft::WRL::ComPtr<TProgress> oldDelegate;
             {
-                progressDelegateBucketAssist_ = Microsoft::WRL::Details::GetDelegateBucketAssist(progressDelegate_.Get());
+                auto lock = progressDelegateLock_.LockExclusive();
+
+                oldDelegate.Attach(progressDelegate_.Detach());
+                progressDelegate_ = progressHandler;
+
+                if (progressDelegate_ != nullptr)
+                {
+                    progressDelegateBucketAssist_ = Microsoft::WRL::Details::GetDelegateBucketAssist(progressDelegate_.Get());
+                }
+                else
+                {
+                    progressDelegateBucketAssist_ = nullptr;
+                }
             }
 
             this->TraceDelegateAssigned();
@@ -502,6 +512,7 @@ public:
         HRESULT hr = this->CheckValidStateForDelegateCall();
         if (SUCCEEDED(hr))
         {
+            auto lock = progressDelegateLock_.LockShared();
             progressDelegate_.CopyTo(progressHandler);
         }
         return hr;
@@ -512,35 +523,61 @@ public:
         HRESULT hr = S_OK;
         ComPtr< ::ABI::Windows::Foundation::IAsyncInfo > asyncInfo = this;
         ComPtr<typename Details::DerefHelper<typename ProgressTraits::Arg1Type>::DerefType> operationInterface;
-        if (progressDelegate_)
+        ::Microsoft::WRL::ComPtr<TProgress> localDelegate;
+        void* localBucketAssist = nullptr;
+
+        // Snapshot the delegate under the shared lock so we can release before invoking.
+        // The local ComPtr keeps the underlying interface alive even if a concurrent writer replaces or clears progressDelegate_ after we release the lock.
+        {
+            auto lock = progressDelegateLock_.LockShared();
+            localDelegate = progressDelegate_;
+            localBucketAssist = progressDelegateBucketAssist_;
+        }
+
+        if (localDelegate)
         {
             hr = asyncInfo.As(&operationInterface);
             if (SUCCEEDED(hr))
             {
                 this->TraceProgressNotificationStart();
 
-                hr = progressDelegate_->Invoke(operationInterface.Get(), arg);
+                hr = localDelegate->Invoke(operationInterface.Get(), arg);
 
                 this->TraceProgressNotificationComplete();
             }
         }
 
         // filter the errors per the Error Propagation Policy
-        hr = ErrorPropagationPolicyTraits< AllOptions::PropagationPolicy >::FireProgressErrorPropagationPolicyFilter(hr, progressDelegate_.Get(), progressDelegateBucketAssist_);
+        hr = ErrorPropagationPolicyTraits< AllOptions::PropagationPolicy >::FireProgressErrorPropagationPolicyFilter(hr, localDelegate.Get(), localBucketAssist);
 
         return hr;
     }
 
     HRESULT FireCompletion(void) override
     {
-        // "this" may be deleted during the completion call. Remove progress prior to firing completion.
-        progressDelegate_.Reset();
+        // Clear the progress delegate before invoking the base; see member declarations below.
+        ::Microsoft::WRL::ComPtr<TProgress> oldDelegate;
+        {
+            auto lock = progressDelegateLock_.LockExclusive();
+            oldDelegate.Attach(progressDelegate_.Detach());
+            progressDelegateBucketAssist_ = nullptr;
+        }
+
         return AsyncBase< TComplete, Details::Nil, resultType, TAsyncBaseOptions >::FireCompletion();
     }
 
 private:
+    // Access to progressDelegate_ / progressDelegateBucketAssist_ is serialized through progressDelegateLock_:
+    //   - Writers (PutOnProgress, FireCompletion) take the lock exclusive.
+    //   - Readers (GetOnProgress, FireProgress) take the lock shared, snapshot the ComPtr
+    //     into a local, then release before invoking the delegate.
+    //   - Writers Attach/Detach the previous delegate into a local so its Release() runs outside the lock,
+    //     avoiding reentrant lock acquisition if a delegate destructor calls back into the async object.
+    // FireCompletion clears the progress delegate BEFORE invoking the base FireCompletion,
+    // because the client's completion handler may release the last reference on *this*.
     ::Microsoft::WRL::ComPtr<TProgress> progressDelegate_;
     void *progressDelegateBucketAssist_;
+    ::Microsoft::WRL::Wrappers::SRWLock progressDelegateLock_;
 };
 
 template < typename TComplete, AsyncResultType resultType, typename TAsyncBaseOptions >
@@ -555,6 +592,7 @@ public:
         cCallbackMade_(0),
         cCompleteDelegateAssigned_(0),
         completeDelegate_(nullptr),
+        cCompleteDelegateRefCount_(0),
         completeDelegateBucketAssist_(nullptr),
         currentStatus_(Details::AsyncStatusInternal::_Created),
         errorCode_(S_OK),
@@ -708,7 +746,7 @@ public:
         if (SUCCEEDED(hr))
         {
             // this delegate property is "write once"
-            if (InterlockedIncrement(&cCompleteDelegateAssigned_) == 1)
+            if (::_InterlockedCompareExchange(&cCompleteDelegateAssigned_, 1, 0) == 0)
             {
                 if (completeHandler != nullptr)
                 {
@@ -720,6 +758,11 @@ public:
                 // Guarantee that the write of completeDelegate_ is ordered with respect to the read of state below
                 // as perceived from FireCompletion on another thread.
                 MemoryBarrier();
+
+                // Make the write "visible" to other threads
+                LONG newRefCount = InterlockedIncrement(&cCompleteDelegateRefCount_);
+                __WRL_ASSERT__(newRefCount == 1);
+                (void)newRefCount;
 
                 this->TraceDelegateAssigned();
 
@@ -747,7 +790,33 @@ public:
         HRESULT hr = CheckValidStateForDelegateCall();
         if (SUCCEEDED(hr))
         {
+            LONG currCount = cCompleteDelegateRefCount_;
+            while (currCount != 0)
+            {
+                LONG oldCount = ::_InterlockedCompareExchange(&cCompleteDelegateRefCount_, currCount + 1, currCount);
+                if (oldCount == currCount)
+                {
+                    // Successfully bumped the reference count
+                    break;
+                }
+
+                currCount = oldCount;
+            }
+
+            if (currCount == 0)
+            {
+                // Not set or not safe to read
+                return hr;
+            }
+
+            // Safe to read the pointer
             completeDelegate_.CopyTo(completeHandler);
+
+            if (InterlockedDecrement(&cCompleteDelegateRefCount_) == 0)
+            {
+                // This was the last thread to release shared ownership of the pointer; we need to clean it up
+                completeDelegate_ = nullptr;
+            }
         }
         return hr;
     }
@@ -755,13 +824,13 @@ public:
     virtual HRESULT FireCompletion()
     {
         HRESULT hr = S_OK;
-        // must do this *before* the InterlockedIncrement!
+        // must do this *before* the _InterlockedCompareExchange!
         TryTransitionToCompleted();
 
         __WRL_ASSERT__(IsTerminalState() && "Must only call FireCompletion when operation is in terminal state");
 
         // we guarantee that completion can only ever be fired once
-        if (completeDelegate_ != nullptr && InterlockedIncrement(&cCallbackMade_) == 1)
+        if (completeDelegate_ != nullptr && ::_InterlockedCompareExchange(&cCallbackMade_, 1, 0) == 0)
         {
             ComPtr< ::ABI::Windows::Foundation::IAsyncInfo> asyncInfo = this;
             ComPtr<typename Details::DerefHelper<typename CompleteTraits::Arg1Type>::DerefType> operationInterface;
@@ -778,8 +847,12 @@ public:
                 hr = completeDelegate_->Invoke(operationInterface.Get(), static_cast<::ABI::Windows::Foundation::AsyncStatus>(current));
                 // Filter the errors as per the Error Propagation Policy
                 hr = ErrorPropagationPolicyTraits< AllOptions::PropagationPolicy >::FireCompletionErrorPropagationPolicyFilter(hr, completeDelegate_.Get(), completeDelegateBucketAssist_);
-                completeDelegate_ = nullptr;
 
+                if (InterlockedDecrement(&cCompleteDelegateRefCount_) == 0)
+                {
+                    // No other thread is trying to read the pointer
+                    completeDelegate_ = nullptr;
+                }
 
                 TraceCompletionNotificationComplete();
             }
@@ -1321,7 +1394,8 @@ protected:
 
 private:
     ::Microsoft::WRL::ComPtr<TComplete>     completeDelegate_;
-    void *completeDelegateBucketAssist_;
+    LONG volatile cCompleteDelegateRefCount_;
+    void* completeDelegateBucketAssist_;
 
     ::Microsoft::WRL::ComPtr<IRestrictedErrorInfo> errorInfo_;
     Details::AsyncStatusInternal volatile currentStatus_;

@@ -19,18 +19,14 @@ Notes:
 
 --*/
 
+#pragma once
 
-#ifndef _DSGETDC_
 #define _DSGETDC_
 
-#if _MSC_VER > 1000
-#pragma once
-#endif
 #include <winapifamily.h>
 
 #pragma region Desktop Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-
 
 #if !defined(_DSGETDCAPI_)
 #define DSGETDCAPI DECLSPEC_IMPORT
@@ -85,6 +81,8 @@ extern "C" {
 
 #define DS_DIRECTORY_SERVICE_13_REQUIRED 0x02000000
 
+#define DS_DIRECTORY_SERVICE_12_REQUIRED 0x04000000
+
 #define DS_RETURN_DNS_NAME              0x40000000
 #define DS_RETURN_FLAT_NAME             0x80000000
 
@@ -110,6 +108,7 @@ extern "C" {
             DS_DIRECTORY_SERVICE_9_REQUIRED | \
             DS_DIRECTORY_SERVICE_10_REQUIRED | \
             DS_KEY_LIST_SUPPORT_REQUIRED | \
+            DS_DIRECTORY_SERVICE_12_REQUIRED | \
             DS_DIRECTORY_SERVICE_13_REQUIRED | \
             DS_WEB_SERVICE_REQUIRED | \
             DS_RETURN_FLAT_NAME  | \
@@ -121,6 +120,7 @@ extern "C" {
             DS_DIRECTORY_SERVICE_8_REQUIRED | \
             DS_DIRECTORY_SERVICE_9_REQUIRED | \
             DS_DIRECTORY_SERVICE_10_REQUIRED | \
+            DS_DIRECTORY_SERVICE_12_REQUIRED | \
             DS_DIRECTORY_SERVICE_13_REQUIRED )
 
 //
@@ -212,6 +212,7 @@ typedef struct _DOMAIN_CONTROLLER_INFOW {
 #define DS_DS_10_FLAG          0x00010000    // DC is running Windows Server 2016 or later
 #define DS_KEY_LIST_FLAG       0x00020000    // DC supports key list requests
 #define DS_DS_13_FLAG          0x00040000    // DC is running Windows Server 2025 or later
+#define DS_DS_12_FLAG          0x00080000    // DC is running Windows Server 2022 or later
 #define DS_PING_FLAGS          0x000FFFFF    // Flags returned on ping
 
 #define DS_DNS_CONTROLLER_FLAG 0x20000000    // DomainControllerName is a DNS name
@@ -679,8 +680,6 @@ DsGetDcCloseW(
 }
 #endif
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#endif // _DSGETDC_

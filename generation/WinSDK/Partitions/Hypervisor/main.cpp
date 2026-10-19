@@ -7,10 +7,11 @@
 #include <sdkddkver.h>
 
 #include <WinHvPlatform.h>
+#if defined(_AMD64_)
 #include <WinHvEmulation.h>
+#endif
 #include <hvsocket.h>
 #include <vmgenerationcounter.h>
 #include <hypervdevicevirtualization.h>
 #include <vmsavedstatedump.h>
 #include <vmsavedstatedumpdefs.h>
-

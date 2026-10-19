@@ -1082,6 +1082,17 @@ EXTERN_GUID( MF_AUDIO_EFFECTS_MANAGER_SERVICE, 0x1f541943, 0xd5df, 0x455e, 0xa2,
 #pragma endregion
 #pragma region Application or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+#ifndef _MFVideoNormalizedRect_
+#define _MFVideoNormalizedRect_
+typedef struct MFVideoNormalizedRect
+    {
+    float left;
+    float top;
+    float right;
+    float bottom;
+    } 	MFVideoNormalizedRect;
+
+#endif
 
 
 EXTERN_GUID( MF_WVC1_PROG_SINGLE_SLICE_CONTENT, 0x67EC2559, 0x0F2F, 0x4420, 0xA4, 0xDD, 0x2F, 0x8E, 0xE7, 0xA5, 0x73, 0x8B);

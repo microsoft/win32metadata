@@ -430,6 +430,9 @@ typedef enum
     WMI_REGINFO = 8,
     WMI_EXECUTE_METHOD = 9,
     WMI_CAPTURE_STATE = 10
+#else
+    // Empty enums are not legal in C.
+    __WMI_UNUSED = -1
 #endif
 } WMIDPREQUESTCODE;
 

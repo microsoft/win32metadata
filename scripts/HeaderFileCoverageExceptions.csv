@@ -136,6 +136,7 @@ File,Skipping,Reason
 /um/d3d.h,false,Need D3D
 /um/d3dhal.h,true,Ignoring kernel stuff
 /um/d3dhalex.h,true,Ignoring kernel stuff
+/um/dbgcredentialproviderimpl.h,true,C++ credential-provider class with implementation code we can't scrape
 /um/ddkmapi.h,true,Ignoring kernel stuff
 /um/devicecategories.h,true,DEVICEDISPLAY_CATEGORY_* -- no documentation for them
 /um/directxcollision.h,true,Inlined code

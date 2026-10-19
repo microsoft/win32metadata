@@ -68,7 +68,7 @@ extern "C" {
 #define _JET_BASE_TYPES_DEFINED
 // Do we define the basic JET integral types from stdint.h, or do we use the
 // historical definitions?
-#ifdef _JET_API_USE_STDINT
+#ifdef JET_API_USE_STDINT
 
 #include <stdint.h>
 
@@ -106,10 +106,12 @@ typedef void               JET_VOID;
 typedef void *             JET_PVOID;
 typedef const void *       JET_PCVOID;
 typedef char               JET_CHAR;
-#if !defined(_NATIVE_WCHAR_T_DEFINED)
-typedef unsigned short     JET_WCHAR;
-#else
+#if defined(JET_API_USE_CHAR16T)
+typedef char16_t           JET_WCHAR;
+#elif defined(_NATIVE_WCHAR_T_DEFINED)
 typedef wchar_t            JET_WCHAR;
+#else
+typedef unsigned short     JET_WCHAR;
 #endif
 #endif // _JET_BASE_TYPES_DEFINED
 // After this point, use only JET_type style types.  That is, don't use base types like
@@ -260,7 +262,7 @@ typedef struct tagCONVERT_W
 //  The JET_wszConfigStoreReadControl in the registry are registry values under the root
 //  registry key passed to JET_paramConfigStoreSpec.
 
-#define JET_wszConfigStoreReadControl                           L"CsReadControl"
+#define JET_wszConfigStoreReadControl                            L"CsReadControl"
 #define JET_bitConfigStoreReadControlInhibitRead                 0x1        //  Will stop reading from the registry config store, and pause reading until flag is removed (this will stall some JET initialization APIs).
 #define JET_bitConfigStoreReadControlDisableAll                  0x2        //  Simply disables the registry config store from being read or used.
 #define JET_bitConfigStoreReadControlDefault                     0x0        //  Use default ESE behavior.
@@ -283,7 +285,7 @@ typedef struct tagCONVERT_W
 #define JET_efvWindowsServer2022                9360        //  Efv shipped with Windows Server 2022.
 #define JET_efvWindows11v21H2                   9400        //  Efv shipped with Windows 11 21H2 release.
 #define JET_efvWindows11v22H2                   9480        //  Efv shipped with Windows 11 22H2 release.
-#define JET_efvWindows11v23H2                   9600        //  Efv shipped with Windows 11 23H2 release.
+#define JET_efvWindowsServer2025                9620        //  Efv shipped with Windows Server 2025.
 
 
 //  Online defragmentation (JetDefragment/JetDefragment2) options
@@ -512,6 +514,8 @@ typedef struct
 
 
 #define cIndexInfoCols 15
+
+
 
 typedef struct tag_JET_COLUMNCREATE_A
 {
@@ -2184,7 +2188,7 @@ typedef enum
 #endif // JET_VERSION >= 0x0A01
 
 #define JET_paramTraceFlags                                     223 // Specific flags to include in IO traces indicating various info
-#define JET_paramMaxValueInvalid                                232 //  This is not a valid parameter. It can change from release to release!
+#define JET_paramMaxValueInvalid                                249 //  This is not a valid parameter. It can change from release to release!
 
 
 
@@ -2272,6 +2276,7 @@ typedef struct
 
 #define JET_bitDbReadOnly               0x00000001
 #define JET_bitDbExclusive              0x00000002 /* multiple opens allowed */
+// RESERVED                             0x00000008 /* JET_bitDbRecoveryOff defined under JetCreateDatabase() */
 #define JET_bitDbDeleteCorruptIndexes   0x00000010 /* delete indexes possibly corrupted by NT version upgrade */
 #if ( JET_VERSION >= 0x0502 )
 #define JET_bitDbDeleteUnicodeIndexes   0x00000400 /* delete all indexes with unicode columns */
@@ -2556,7 +2561,7 @@ typedef struct
 #define JET_bitSetOverwriteLV               0x00000004 /* overwrite JET_coltypLong* byte range */
 #define JET_bitSetSizeLV                    0x00000008 /* set JET_coltypLong* size */
 #define JET_bitSetZeroLength                0x00000020
-#define JET_bitSetSeparateLV                0x00000040 /* force LV separation */
+#define JET_bitSetSeparateLV                0x00000040 /* stores the data in a separate LV as long as the number of bytes in LV is greater than size of LID(=8bytes) */
 #define JET_bitSetUniqueMultiValues         0x00000080 /* prevent duplicate multi-values */
 #define JET_bitSetUniqueNormalizedMultiValues   0x00000100 /* prevent duplicate multi-values, normalizing all data before performing comparisons */
 #if ( JET_VERSION >= 0x0501 )
@@ -2567,7 +2572,7 @@ typedef struct
 #define JET_bitSetUncompressed              0x00010000 /* don't attempt compression when storing the data */
 #define JET_bitSetCompressed                0x00020000 /* attempt compression when storing the data */
 #if ( JET_VERSION >= 0x0A01 )
-#define JET_bitSetContiguousLV              0x00040000 /* Allocates the long-value across contiguous pages (at potentialy space saving costs) for better IO behavior. Valid only with JET_bitSetSeparateLV. Invalid (or not implemented) with certain long-value operations such as replace, and certain column options such as compression. Use across many varying LVs sizes may cause space fragmentation / allocation issues. */
+#define JET_bitSetContiguousLV              0x00040000 /* Allocates the long-value across contiguous pages (at potentialy space saving costs) for better IO behavior. Valid only with JET_bitSetSeparateLV or JET_bitSetForceSeparateLV. Invalid (or not implemented) with certain long-value operations such as replace, and certain column options such as compression. Use across many varying LVs sizes may cause space fragmentation / allocation issues. */
 #endif // JET_VERSION >= 0x0A01
 #endif // JET_VERSION >= 0x0601
 
@@ -3179,10 +3184,10 @@ typedef struct
 #define JET_errPreviousVersion              -322  /* Version already existed. Recovery failure */
 #define JET_errPageBoundary                 -323  /* Reached Page Boundary */
 #define JET_errKeyBoundary                  -324  /* Reached Key Boundary */
-#define JET_errBadPageLink                  -327  /* Database corrupted */
+#define JET_errBadPageLink                  -327  /* Database corrupted - a B+ Tree link between leaf pages does not link to a correct page (could be backlink does not match, could be an empty page which is unexpected, or could be a page in another tree/table/index). */
 #define JET_errBadBookmark                  -328  /* Bookmark has no corresponding address in database */
 #define JET_errNTSystemCallFailed           -334  // A call to the operating system failed
-#define JET_errBadParentPageLink            -338  // Database corrupted
+#define JET_errBadParentPageLink            -338  // Database corrupted - a B+ Tree link from parent to children does not link to a correct page (could be an empty page which is unexpected, or could be a page in another tree/table/index, or some other element of correctness).
 #define JET_errSPAvailExtCacheOutOfSync     -340  // AvailExt cache doesn't match btree
 #define JET_errSPAvailExtCorrupted          -341  // AvailExt space tree is corrupt
 #define JET_errSPAvailExtCacheOutOfMemory   -342  // Out of memory allocating an AvailExt cache node
@@ -3199,6 +3204,7 @@ typedef struct
 #define JET_errNodeCorrupted                -358  // A node or prefix node is logically corrupted, the key suffix size is larger than the node or line's size.
 #define JET_errBBTNodeCorrupted             -364  /* A property of the BBT node is logically corrupted. Or the BBT node isn't valid. */
 #define JET_errBBTBuffCorrupted             -365  /* A BBT buff is logically corrupted. The nodes are out of sequence or the BBT header is corrupt. */
+#define JET_errBadRootPageLink              -366  /* Database corrupted - a B+ Tree link from parent to children does not link to a correct page (could be an empty page which is unexpected, or could be a page in another tree/table/index, or some other element of correctness). */
 #define JET_wrnSeparateLongValue             406  /* Column is a separated long-value */
 #define JET_wrnRecordFoundGreater           JET_wrnSeekNotEqual
 #define JET_wrnRecordFoundLess              JET_wrnSeekNotEqual
@@ -3303,7 +3309,9 @@ typedef struct
 #define JET_errLogSequenceChecksumMismatch      -590    /* The previous log's accumulated segment checksum doesn't match the next log */
 
 #define JET_wrnDatabaseRepaired                  595    /* Database corruption has been repaired */
-#define JET_errPageInitializedMismatch          -596    /* Database divergence mismatch. Page was uninitialized on remote node, but initialized on local node. */
+#define JET_errPageInitializedMismatchUninitRemote    -596    /* Database divergence mismatch. Page was uninitialized on remote node, but initialized on local node. */
+#define JET_errPageInitializedMismatch                JET_errPageInitializedMismatchUninitRemote  //  legacy, unspecific version
+#define JET_errPageInitializedMismatchUninitLocal     -597    /* Database divergence mismatch. Page was initialized on remote node, but uninitialized on local node. */
 
 
 #define JET_errUnicodeTranslationBufferTooSmall -601    /* Unicode translation buffer too small */
@@ -3478,6 +3486,7 @@ typedef struct
 #define JET_errDatabaseNotReady             -1230 /* Recovery on this database has not yet completed enough to permit access. */
 #define JET_errDatabaseAttachedForRecovery  -1231 /* Database is attached but only for recovery.  It must be explicitly attached before it can be opened. */
 #define JET_errTransactionsNotReadyDuringRecovery -1232  /* Recovery has not seen any Begin0/Commit0 records and so does not know what trxBegin0 to assign to this transaction */
+#define JET_errBlockedByCorruptionMark      -1233 /* The DB header is marked corrupted due to a logical or coherent corruption of some kind. The operation attempted (such as recovery, attach db, or backup) is being blocked by policy. The policy can be controlled by JET_param settings. */
 
 
 #define JET_wrnTableEmpty                    1301 /* Opened an empty table */
@@ -3656,8 +3665,7 @@ typedef struct
 #define JET_errOSSnapshotInvalidSnapId      -2404 /* invalid JET_OSSNAPID */
 
 
-/** KVP ERRORS
- **/
+
 
 #define JET_errLSCallbackNotSpecified       -3000 /* Attempted to use Local Storage without a callback function being specified */
 #define JET_errLSAlreadySet                 -3001 /* Attempted to set Local Storage for an object which already had it set */
@@ -3674,6 +3682,12 @@ typedef struct
 #define JET_errFileIORetry                  -4003 /* instructs the JET_ABORTRETRYFAILCALLBACK caller to retry the specified I/O */
 #define JET_errFileIOFail                   -4004 /* instructs the JET_ABORTRETRYFAILCALLBACK caller to fail the specified I/O */
 #define JET_errFileCompressed               -4005 /* read/write access is not supported on compressed files */
+
+/** ESEUTIL ERRORs (utilities, copy status, etc)
+ **/
+#define JET_wrnCopyCompletedAlready                 8002 /* This file has a regular header matching the source file, and so probably a already completed copy. */
+#define JET_errCopySignatureMismatchCannotRestart  -8003 /* Source file modified inbetween copy attempts.  Continuing would give a franken-copy of file with a mix of updates.  You must delete the destination file, and restart your copy. */
+
 
 /** CLIENT RESERVED ERROR SPACE.
     An unused errors/warnings section.  JET will never generate values in this space.  Clients may use this space

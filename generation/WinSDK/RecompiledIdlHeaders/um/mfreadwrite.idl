@@ -1266,6 +1266,16 @@ cpp_quote( "EXTERN_GUID( MF_READWRITE_DISABLE_CONVERTERS, 0x98d5b065, 0x1374, 0x
 // be set to TRUE to enable hardware transforms.
 cpp_quote( "EXTERN_GUID( MF_READWRITE_ENABLE_HARDWARE_TRANSFORMS, 0xa634a91c, 0x822b, 0x41b9, 0xa4, 0x94, 0x4d, 0xe4, 0x64, 0x36, 0x12, 0xb0);" )
 
+// MF_READWRITE_USE_ONLY_HARDWARE_TRANSFORMS
+// Data type: UINT32
+// By default, the Source Reader and Sink Writer will use any transform that matches the media type,
+// including software transforms.  This attribute can be set to TRUE to restrict the transforms to only 
+// hardware MFTs that match the passed in D3D device manager through MF_SOURCE_READER_D3D_MANAGER or 
+// MF_SINK_WRITER_D3D_MANAGER attributes. If the D3D device manager is not passed in or if the 
+// MF_READWRITE_ENABLE_HARDWARE_TRANSFORMS attribute is not set, this attribute has no effect. 
+// {F9074427-BF8B-4F69-BBAF-524969056FB6}
+cpp_quote( "EXTERN_GUID( MF_READWRITE_USE_ONLY_HARDWARE_TRANSFORMS, 0xf9074427, 0xbf8b, 0x4f69, 0xbb, 0xaf, 0x52, 0x49, 0x69, 0x5, 0x6f, 0xb6);" )
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 

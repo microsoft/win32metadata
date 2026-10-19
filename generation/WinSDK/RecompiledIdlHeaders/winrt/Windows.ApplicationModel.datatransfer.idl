@@ -340,10 +340,14 @@ namespace Windows
             [flags]
             enum DataPackageOperation
             {
-                None = 0x0,
-                Copy = 0x1,
-                Move = 0x2,
-                Link = 0x4
+                None             = 0x0,
+                Copy             = 0x1,
+                Move             = 0x2,
+                Link             = 0x4,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                NewTarget        = 0x40000000,
+                [contract(Windows.Foundation.UniversalApiContract, 19.0)]
+                BackgroundTarget = 0x20000000
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 7.0)]

@@ -1495,6 +1495,12 @@ DEFINE_GUID(MFSampleExtension_VideoEncodeInputDeltaQPMap,
 DEFINE_GUID(MFSampleExtension_VideoEncodeInputAbsoluteQPMap,
 0x432a6e9a, 0xf1ed, 0x456e, 0x8d, 0xc3, 0x6f, 0x89, 0x85, 0x64, 0x9e, 0xb9);
 
+// MFSampleExtension_VideoEncodeD3D12ReconstructedPicture {3E8A1B7F-5C92-4D6E-B834-F0A729E65C48}
+// Type: IMFMediaBuffer
+// The reconstructed picture data of an encoded video frame from a D3D12-based MFT
+DEFINE_GUID(MFSampleExtension_VideoEncodeD3D12ReconstructedPicture,
+0x3e8a1b7f, 0x5c92, 0x4d6e, 0xb8, 0x34, 0xf0, 0xa7, 0x29, 0xe6, 0x5c, 0x48);
+
 ///////////////////////////////////////////////////////////////////////////////
 /// These are the attribute GUIDs that need to be used by MFT0 to provide
 /// thumbnail support.  We are declaring these in our internal idl first and

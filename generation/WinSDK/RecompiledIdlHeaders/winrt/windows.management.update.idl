@@ -18,8 +18,6 @@ namespace Windows
     {
         namespace Collections
         {
-            runtimeclass PropertySet;
-
             runtimeclass ValueSet;
         }
     }
@@ -49,6 +47,10 @@ namespace Windows
 
             typedef enum WindowsSoftwareUpdateArchitecture WindowsSoftwareUpdateArchitecture;
 
+            typedef enum WindowsSoftwareUpdateCategory WindowsSoftwareUpdateCategory;
+
+            typedef enum WindowsSoftwareUpdateIdentityType WindowsSoftwareUpdateIdentityType;
+
             typedef enum WindowsSoftwareUpdateInstallationType WindowsSoftwareUpdateInstallationType;
 
             typedef enum WindowsSoftwareUpdateProviderRegistrationType WindowsSoftwareUpdateProviderRegistrationType;
@@ -64,6 +66,8 @@ namespace Windows
             typedef enum WindowsUpdateAdministratorStatus WindowsUpdateAdministratorStatus;
 
             typedef enum WindowsUpdateAttentionRequiredReason WindowsUpdateAttentionRequiredReason;
+
+            typedef enum WindowsUpdateManagerScanMode WindowsUpdateManagerScanMode;
 
             interface IPreviewBuildsManager;
 
@@ -94,6 +98,10 @@ namespace Windows
             interface IWindowsSoftwareUpdateExecutionInfoFactory;
 
             interface IWindowsSoftwareUpdateFactory;
+
+            interface IWindowsSoftwareUpdateIdentity;
+
+            interface IWindowsSoftwareUpdateIdentityFactory;
 
             interface IWindowsSoftwareUpdateLocalizationInfo;
 
@@ -163,10 +171,6 @@ namespace Windows
 
             interface IWindowsUpdateManagerFactory2;
 
-            interface IWindowsUpdateManagerScanOptions;
-
-            interface IWindowsUpdateManagerScanOptionsFactory;
-
             interface IWindowsUpdateProgressChangedEventArgs;
 
             interface IWindowsUpdateRestartRequestOptions;
@@ -192,6 +196,8 @@ namespace Windows
             runtimeclass WindowsSoftwareUpdateApprovalInfo;
 
             runtimeclass WindowsSoftwareUpdateExecutionInfo;
+
+            runtimeclass WindowsSoftwareUpdateIdentity;
 
             runtimeclass WindowsSoftwareUpdateLocalizationInfo;
 
@@ -234,8 +240,6 @@ namespace Windows
             runtimeclass WindowsUpdateItem;
 
             runtimeclass WindowsUpdateManager;
-
-            runtimeclass WindowsUpdateManagerScanOptions;
 
             runtimeclass WindowsUpdateProgressChangedEventArgs;
 
@@ -293,6 +297,8 @@ namespace Windows
 
                 interface Windows.Foundation.IAsyncOperation<Windows.Foundation.Collections.IVectorView<Windows.Management.Update.WindowsUpdateItem*>*>;
 
+                interface Windows.Foundation.IReference<Windows.Management.Update.WindowsSoftwareUpdateCategory>;
+
                 interface Windows.Foundation.IReference<Windows.Management.Update.WindowsSoftwareUpdateRestartReason>;
 
                 interface Windows.Foundation.TypedEventHandler<Windows.Management.Update.WindowsSoftwareUpdateProviderStatus*, IInspectable*>;
@@ -318,12 +324,12 @@ namespace Windows
     {
         namespace Update
         {
-            [contractversion(2.1)]
+            [contractversion(3.0)]
             apicontract WindowsUpdateContract
             {
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateActionResult
             {
                 Succeeded = 0,
@@ -333,7 +339,7 @@ namespace Windows
                 Removed   = 4
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateActionType
             {
                 Download   = 0,
@@ -343,7 +349,7 @@ namespace Windows
                 AppRestart = 4
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateArchitecture
             {
                 Neutral = 0,
@@ -353,7 +359,27 @@ namespace Windows
                 Arm64   = 4
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            enum WindowsSoftwareUpdateCategory
+            {
+                Other       = 0,
+                Application = 1,
+                Driver      = 2,
+                Firmware    = 3,
+                Definition  = 4,
+                Feature     = 5,
+                Quality     = 6,
+                AIComponent = 7
+            };
+
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            enum WindowsSoftwareUpdateIdentityType
+            {
+                ProductCode       = 0,
+                PackageFamilyName = 1
+            };
+
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateInstallationType
             {
                 WindowsUpdate = 0,
@@ -362,7 +388,7 @@ namespace Windows
                 Powershell    = 3
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateProviderRegistrationType
             {
                 None         = 0,
@@ -373,7 +399,7 @@ namespace Windows
                 Unregistered = 5
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateProviderTrustState
             {
                 SignedTrusted   = 0,
@@ -381,7 +407,7 @@ namespace Windows
                 Unsigned        = 2
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateProviderType
             {
                 WindowsUpdate = 0,
@@ -389,7 +415,7 @@ namespace Windows
                 Powershell    = 2
             };
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             enum WindowsSoftwareUpdateRestartReason
             {
                 None       = 0,
@@ -456,7 +482,20 @@ namespace Windows
                 BlockedByAppClose                  = 33,
                 BlockedByAppRestart                = 34,
                 [contract(Windows.Management.Update.WindowsUpdateContract, 2.1)]
-                OtherUpdateReverting               = 35
+                OtherUpdateReverting               = 35,
+                [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+                RepairInProgress                   = 36,
+                WaitingForLeadingUpdate            = 37,
+                Undefined                          = 38
+            };
+
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            enum WindowsUpdateManagerScanMode
+            {
+                Default             = 0,
+                BypassScanDeferrals = 1,
+                UserInitiated       = 2,
+                WhatIf              = 100
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 6.0)]
@@ -487,9 +526,9 @@ namespace Windows
                 [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.ValueSet** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdate)]
-            [uuid(D8F19211-98FE-58DD-AF0F-470532AA3341)]
+            [uuid(7BCD30BE-0A5E-540F-9BD8-B8B665980B8B)]
             interface IWindowsSoftwareUpdate : IInspectable
             {
                 [propget] HRESULT InstallationType([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateInstallationType* value);
@@ -498,12 +537,13 @@ namespace Windows
                 [propget] HRESULT Title([out] [retval] HSTRING* value);
                 [propget] HRESULT Description([out] [retval] HSTRING* value);
                 [propget] HRESULT MoreInfoUrl([out] [retval] Windows.Foundation.Uri** value);
+                [propget] HRESULT IsSeeker([out] [retval] boolean* value);
+                [propget] HRESULT UpdateCategory([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateCategory* value);
+                [propget] HRESULT UpdateIdentity([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateIdentity** value);
                 [propget] HRESULT DownloadSizeInBytes([out] [retval] UINT64* value);
                 [propget] HRESULT InstallSizeInBytes([out] [retval] UINT64* value);
                 [propget] HRESULT SourceVersion([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateVersion** value);
                 [propget] HRESULT TargetVersion([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateVersion** value);
-                [propget] HRESULT ProductCode([out] [retval] Windows.Foundation.IReference<GUID>** value);
-                [propget] HRESULT PackageFamilyName([out] [retval] HSTRING* value);
                 HRESULT Approve([in] Windows.Management.Update.WindowsSoftwareUpdateApprovalInfo* approvalInfo, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
                 HRESULT ApproveCurrentAction([in] boolean approve, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
                 [propget] HRESULT CurrentAction([out] [retval] HSTRING* value);
@@ -516,9 +556,11 @@ namespace Windows
                 [propget] HRESULT AppPackageInfo([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo** value);
                 [propget] HRESULT ExecutionInfo([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo** value);
                 [propget] HRESULT OptionalInfo([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo** value);
+                [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
+                HRESULT GetPropertyValue([in] HSTRING name, [out] [retval] IInspectable** result);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateActionInfo)]
             [uuid(2F6723B5-F704-5362-B600-D18808F3973E)]
             interface IWindowsSoftwareUpdateActionInfo : IInspectable
@@ -528,7 +570,7 @@ namespace Windows
                 [propget] HRESULT ActionType([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateActionType* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateActionInfo)]
             [uuid(5E83B58E-D982-5D93-A7CB-BF6C9B6EE5A6)]
             interface IWindowsSoftwareUpdateActionInfoFactory : IInspectable
@@ -536,7 +578,7 @@ namespace Windows
                 HRESULT CreateInstance([in] HSTRING fileName, [in] HSTRING fileArguments, [in] Windows.Management.Update.WindowsSoftwareUpdateActionType actionType, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateActionInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateActionProgress)]
             [uuid(17DC15FD-75F2-522B-B555-359DA8DE5581)]
             interface IWindowsSoftwareUpdateActionProgress : IInspectable
@@ -546,7 +588,7 @@ namespace Windows
                 [propget] HRESULT TotalProgress([out] [retval] UINT64* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateActionResultInfo)]
             [uuid(BCF26FBA-98C8-51CB-8B7E-1EEDC3D82A69)]
             interface IWindowsSoftwareUpdateActionResultInfo : IInspectable
@@ -558,7 +600,7 @@ namespace Windows
                 [propget] HRESULT Action([out] [retval] HSTRING* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo)]
             [uuid(A5BD59F4-E624-5552-82F9-267A4574A203)]
             interface IWindowsSoftwareUpdateAppPackageInfo : IInspectable
@@ -568,7 +610,7 @@ namespace Windows
                 [propget] HRESULT InstallUri([out] [retval] Windows.Foundation.Uri** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo)]
             [uuid(A8BDA639-A4F6-5A4A-8A54-26C1C508CD0F)]
             interface IWindowsSoftwareUpdateAppPackageInfoFactory : IInspectable
@@ -576,7 +618,7 @@ namespace Windows
                 HRESULT CreateInstance([in] HSTRING packageFamilyName, [in] Windows.Management.Update.WindowsSoftwareUpdateArchitecture packageArchitecture, [in] Windows.Foundation.Uri* installUri, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateApprovalInfo)]
             [uuid(691E6B9E-80AF-5882-9404-25437ECB791B)]
             interface IWindowsSoftwareUpdateApprovalInfo : IInspectable
@@ -587,7 +629,7 @@ namespace Windows
                 [propget] HRESULT Seeker([out] [retval] boolean* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateApprovalInfo)]
             [uuid(AB291C7C-D29F-5AC5-B447-0BFCABDC2CC3)]
             interface IWindowsSoftwareUpdateApprovalInfoFactory : IInspectable
@@ -595,7 +637,7 @@ namespace Windows
                 HRESULT CreateInstance([in] boolean userInitiated, [in] boolean appClosure, [in] boolean meteredNetwork, [in] boolean seeker, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateApprovalInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo)]
             [uuid(091AEA19-9128-5F24-AFC1-A62252DF55C0)]
             interface IWindowsSoftwareUpdateExecutionInfo : IInspectable
@@ -606,7 +648,7 @@ namespace Windows
                 [propget] HRESULT OptionalActionInfo([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalActionInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo)]
             [uuid(88596F7E-B9EF-5583-8135-94D62ED66ED4)]
             interface IWindowsSoftwareUpdateExecutionInfoFactory : IInspectable
@@ -615,16 +657,32 @@ namespace Windows
                 HRESULT CreateInstance2([in] Windows.Management.Update.WindowsSoftwareUpdateActionInfo* deployInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateOptionalActionInfo* actions, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdate)]
-            [uuid(28E7E01B-4225-52C8-BB51-C68F0B071BE5)]
+            [uuid(2A6E4E2D-3627-5943-B0AD-BF0B06CEAE4C)]
             interface IWindowsSoftwareUpdateFactory : IInspectable
             {
-                HRESULT CreateInstance([in] HSTRING providerId, [in] Windows.Management.Update.WindowsSoftwareUpdateInstallationType installationType, [in] HSTRING updateId, [in] HSTRING title, [in] HSTRING description, [in] Windows.Foundation.Uri* moreInfoUrl, [in] UINT64 downloadSizeInBytes, [in] UINT64 installSizeInBytes, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* sourceVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* targetVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo* appPackageInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo* executionInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo* optionalInfo, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdate** value);
-                HRESULT CreateInstance2([in] HSTRING providerId, [in] Windows.Management.Update.WindowsSoftwareUpdateInstallationType installationType, [in] HSTRING updateId, [in] HSTRING title, [in] HSTRING description, [in] Windows.Foundation.Uri* moreInfoUrl, [in] UINT64 downloadSizeInBytes, [in] UINT64 installSizeInBytes, [in] Windows.Foundation.IReference<GUID>* productCode, [in] HSTRING packageFamilyName, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* sourceVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* targetVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo* appPackageInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo* executionInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo* optionalInfo, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdate** value);
+                HRESULT CreateInstance([in] HSTRING providerId, [in] Windows.Management.Update.WindowsSoftwareUpdateInstallationType installationType, [in] HSTRING updateId, [in] HSTRING title, [in] HSTRING description, [in] Windows.Foundation.Uri* moreInfoUrl, [in] UINT64 downloadSizeInBytes, [in] UINT64 installSizeInBytes, [in] Windows.Management.Update.WindowsSoftwareUpdateIdentity* updateIdentity, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* sourceVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateVersion* targetVersion, [in] Windows.Management.Update.WindowsSoftwareUpdateAppPackageInfo* appPackageInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateExecutionInfo* executionInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo* optionalInfo, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdate** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateIdentity)]
+            [uuid(6040C757-5447-5C1F-8B25-8976BCE12786)]
+            interface IWindowsSoftwareUpdateIdentity : IInspectable
+            {
+                [propget] HRESULT Type([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateIdentityType* value);
+                [propget] HRESULT Identity([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateIdentity)]
+            [uuid(C84999FC-8CE6-5711-B88C-D5B926E2E5DB)]
+            interface IWindowsSoftwareUpdateIdentityFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] Windows.Management.Update.WindowsSoftwareUpdateIdentityType type, [in] HSTRING identity, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateIdentity** value);
+            }
+
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo)]
             [uuid(ADC2DE4B-5966-5F9F-AE07-00D4A285D933)]
             interface IWindowsSoftwareUpdateLocalizationInfo : IInspectable
@@ -635,7 +693,7 @@ namespace Windows
                 [propget] HRESULT MoreInfoUrl([out] [retval] Windows.Foundation.Uri** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo)]
             [uuid(76979B24-F5BD-5C8C-BDB7-A46187374AFF)]
             interface IWindowsSoftwareUpdateLocalizationInfoFactory : IInspectable
@@ -643,7 +701,7 @@ namespace Windows
                 HRESULT CreateInstance([in] UINT32 languageId, [in] HSTRING title, [in] HSTRING description, [in] Windows.Foundation.Uri* moreInfoUrl, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateOptionalActionInfo)]
             [uuid(4AC035D0-E50E-5CCB-BFD8-A303562891D2)]
             interface IWindowsSoftwareUpdateOptionalActionInfo : IInspectable
@@ -653,7 +711,7 @@ namespace Windows
                 [propget] HRESULT CloseAndRestartInfo([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateActionInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateOptionalActionInfo)]
             [uuid(88D2FCC1-4791-51B6-B988-966EF93A180B)]
             interface IWindowsSoftwareUpdateOptionalActionInfoFactory : IInspectable
@@ -661,33 +719,34 @@ namespace Windows
                 HRESULT CreateInstance([in] Windows.Management.Update.WindowsSoftwareUpdateActionInfo* closeAndDeployInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateActionInfo* closeAndInstallInfo, [in] Windows.Management.Update.WindowsSoftwareUpdateActionInfo* closeAndRestartInfo, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalActionInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo)]
-            [uuid(78084A73-50C4-5C33-A751-7A121F5AAE70)]
+            [uuid(A755841C-ED10-5A3C-8526-3FC1FD969618)]
             interface IWindowsSoftwareUpdateOptionalInfo : IInspectable
             {
                 [propget] HRESULT LocalizationInfo([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo*>** value);
                 [propget] HRESULT ComplianceDeadlineInDays([out] [retval] Windows.Foundation.IReference<INT32>** value);
                 [propget] HRESULT ComplianceGracePeriodInDays([out] [retval] Windows.Foundation.IReference<INT32>** value);
+                [propget] HRESULT Category([out] [retval] Windows.Foundation.IReference<Windows.Management.Update.WindowsSoftwareUpdateCategory>** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo)]
-            [uuid(D837DEED-A5F2-5C89-8BEB-852D2897B2EF)]
+            [uuid(BE28A884-5B20-5B8B-96A2-1C528C441ACD)]
             interface IWindowsSoftwareUpdateOptionalInfoFactory : IInspectable
             {
-                HRESULT CreateInstance([in] Windows.Foundation.IReference<INT32>* complianceDeadlineInDays, [in] Windows.Foundation.IReference<INT32>* complianceGracePeriodInDays, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo** value);
-                HRESULT CreateInstance2([in] Windows.Foundation.Collections.IIterable<Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo*>* localizationInfo, [in] Windows.Foundation.IReference<INT32>* complianceDeadlineInDays, [in] Windows.Foundation.IReference<INT32>* complianceGracePeriodInDays, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo** value);
+                HRESULT CreateInstance([in] Windows.Foundation.IReference<Windows.Management.Update.WindowsSoftwareUpdateCategory>* category, [in] Windows.Foundation.Collections.IIterable<Windows.Management.Update.WindowsSoftwareUpdateLocalizationInfo*>* localizationInfo, [in] Windows.Foundation.IReference<INT32>* complianceDeadlineInDays, [in] Windows.Foundation.IReference<INT32>* complianceGracePeriodInDays, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateOptionalInfo** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProvider)]
-            [uuid(20B67F4A-E28E-5D20-9C00-BF249922EFBE)]
+            [uuid(FD6F6D8C-C6FD-58E0-949E-A344717A8166)]
             interface IWindowsSoftwareUpdateProvider : IInspectable
             {
                 HRESULT Register([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
                 HRESULT Unregister([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
                 HRESULT Validate([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
+                [propget] HRESULT SchemaVersion([out] [retval] HSTRING* value);
                 [propget] HRESULT Id([out] [retval] HSTRING* value);
                 [propget] HRESULT Version([out] [retval] HSTRING* value);
                 [propget] HRESULT FolderPath([out] [retval] HSTRING* value);
@@ -698,11 +757,11 @@ namespace Windows
                 [propget] HRESULT PayloadFiles([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Management.Update.WindowsSoftwareUpdateProviderPayloadFileInfo*>** value);
                 [propget] HRESULT TrustState([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProviderTrustState* value);
                 [propget] HRESULT RegistrationType([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProviderRegistrationType* value);
-                [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.PropertySet** value);
+                [propget] HRESULT Properties([out] [retval] Windows.Foundation.Collections.IMapView<HSTRING, IInspectable*>** value);
                 HRESULT GetPropertyValue([in] HSTRING name, [out] [retval] IInspectable** result);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProviderActionResult)]
             [uuid(AFD92B50-6BB9-54DE-BDDA-9DFB6CC17C16)]
             interface IWindowsSoftwareUpdateProviderActionResult : IInspectable
@@ -713,7 +772,7 @@ namespace Windows
                 [propget] HRESULT ExtendedError([out] [retval] UINT64* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProviderActionResult)]
             [uuid(0C002684-30C9-59E9-B53F-8846A85D2DC6)]
             interface IWindowsSoftwareUpdateProviderActionResultFactory : IInspectable
@@ -721,7 +780,7 @@ namespace Windows
                 HRESULT CreateInstance([in] Windows.Management.Update.WindowsSoftwareUpdateActionResult actionResult, [in] Windows.Management.Update.WindowsSoftwareUpdateRestartReason restartReason, [in] UINT32 resultCode, [in] UINT64 extendedError, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProviderActionResult** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProvider)]
             [uuid(FC0D5FC4-E15E-5116-B2ED-DB0A64997FFA)]
             interface IWindowsSoftwareUpdateProviderFactory : IInspectable
@@ -729,7 +788,7 @@ namespace Windows
                 HRESULT CreateInstance([in] HSTRING folderPath, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProvider** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProviderPayloadFileInfo)]
             [uuid(F1DA16DA-1B01-5367-B4AE-20DB8CAE1E9B)]
             interface IWindowsSoftwareUpdateProviderPayloadFileInfo : IInspectable
@@ -740,7 +799,7 @@ namespace Windows
                 [propget] HRESULT TrustState([out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProviderTrustState* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProviderStatus)]
             [uuid(076741B8-7A8E-53B6-9FB7-E290B13C52E9)]
             interface IWindowsSoftwareUpdateProviderStatus : IInspectable
@@ -752,7 +811,7 @@ namespace Windows
                 HRESULT SetActionResult([in] Windows.Management.Update.WindowsSoftwareUpdateProviderActionResult* actionResult, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** result);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateProviderStatus)]
             [uuid(D1E1B416-7DFD-55EF-9E3C-18D1459E3123)]
             interface IWindowsSoftwareUpdateProviderStatusFactory : IInspectable
@@ -760,7 +819,7 @@ namespace Windows
                 HRESULT CreateInstance([in] HSTRING providerId, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProviderStatus** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateResult)]
             [uuid(A6D7ED98-6212-5AD3-AA9D-15E83BB85EE4)]
             interface IWindowsSoftwareUpdateResult : IInspectable
@@ -771,7 +830,7 @@ namespace Windows
                 [propget] HRESULT ExtendedError([out] [retval] UINT64* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateResult)]
             [uuid(512CE0BF-9977-5301-9B29-9E5042C8CF7D)]
             interface IWindowsSoftwareUpdateResultFactory : IInspectable
@@ -781,7 +840,7 @@ namespace Windows
                 HRESULT CreateInstance3([in] boolean succeeded, [in] boolean cancelRequested, [in] UINT32 resultCode, [in] UINT64 extendedError, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateResult** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateScanResult)]
             [uuid(43CA6D96-3E6D-56DA-A903-65D4AB729299)]
             interface IWindowsSoftwareUpdateScanResult : IInspectable
@@ -792,7 +851,7 @@ namespace Windows
                 [propget] HRESULT Updates([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Management.Update.WindowsSoftwareUpdate*>** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateScanResult)]
             [uuid(21148E4C-E7CE-574E-BFA7-69DC77457D21)]
             interface IWindowsSoftwareUpdateScanResultFactory : IInspectable
@@ -801,7 +860,7 @@ namespace Windows
                 HRESULT CreateInstance2([in] boolean succeeded, [in] UINT32 resultCode, [in] UINT64 extendedError, [in] Windows.Foundation.Collections.IIterable<Windows.Management.Update.WindowsSoftwareUpdate*>* updates, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateScanResult** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateVersion)]
             [uuid(215E22E7-6D57-5305-9C79-4ECD4A4D7871)]
             interface IWindowsSoftwareUpdateVersion : IInspectable
@@ -812,7 +871,7 @@ namespace Windows
                 [propget] HRESULT RevisionMinor([out] [retval] UINT32* value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsSoftwareUpdateVersion)]
             [uuid(650ED994-0858-5528-A1F2-F73CA64DABC9)]
             interface IWindowsSoftwareUpdateVersionFactory : IInspectable
@@ -993,15 +1052,15 @@ namespace Windows
                 HRESULT StartScan([in] boolean userInitiated);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsUpdateManager)]
-            [uuid(564E7683-BD21-57A4-B17F-7BF6350F4C75)]
+            [uuid(B8BA4965-423C-5E71-B89E-0B7940E7390F)]
             interface IWindowsUpdateManager2 : IInspectable
             {
                 HRESULT GetProvider([in] HSTRING id, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateProvider** result);
                 [propget] HRESULT ProviderIds([out] UINT32* __valueSize, [out] [retval] [size_is(, *__valueSize)] HSTRING** value);
                 HRESULT GetApplicableSoftwareUpdates([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Management.Update.WindowsSoftwareUpdate*>** result);
-                HRESULT PerformScan([in] Windows.Management.Update.WindowsUpdateManagerScanOptions* options, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateScanResult** result);
+                HRESULT PerformScan([in] Windows.Management.Update.WindowsUpdateManagerScanMode scanMode, [out] [retval] Windows.Management.Update.WindowsSoftwareUpdateScanResult** result);
             }
 
             [contract(Windows.Management.Update.WindowsUpdateContract, 1.0)]
@@ -1012,33 +1071,12 @@ namespace Windows
                 HRESULT CreateInstance([in] HSTRING clientId, [out] [retval] Windows.Management.Update.WindowsUpdateManager** value);
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [exclusiveto(Windows.Management.Update.WindowsUpdateManager)]
             [uuid(BA08D663-D160-59B9-9898-97A186AD52EA)]
             interface IWindowsUpdateManagerFactory2 : IInspectable
             {
                 HRESULT CreateInstance([in] HSTRING clientId, [in] UINT32 __providerIdFilterSize, [in] [size_is(__providerIdFilterSize)] HSTRING* providerIdFilter, [out] [retval] Windows.Management.Update.WindowsUpdateManager** value);
-            }
-
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [exclusiveto(Windows.Management.Update.WindowsUpdateManagerScanOptions)]
-            [uuid(B7C30113-5E4B-59D8-99AD-F58D67B2AEFC)]
-            interface IWindowsUpdateManagerScanOptions : IInspectable
-            {
-                [propget] HRESULT IsUserInitiated([out] [retval] boolean* value);
-                [propput] HRESULT IsUserInitiated([in] boolean value);
-                [propget] HRESULT AllowBypassThrottling([out] [retval] boolean* value);
-                [propput] HRESULT AllowBypassThrottling([in] boolean value);
-                [propget] HRESULT PerformUpdateActions([out] [retval] boolean* value);
-                [propput] HRESULT PerformUpdateActions([in] boolean value);
-            }
-
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [exclusiveto(Windows.Management.Update.WindowsUpdateManagerScanOptions)]
-            [uuid(1A0F9198-F18D-5CFD-8CB9-08F3FB74DA70)]
-            interface IWindowsUpdateManagerScanOptionsFactory : IInspectable
-            {
-                HRESULT CreateInstance([in] boolean isUserInitiated, [out] [retval] Windows.Management.Update.WindowsUpdateManagerScanOptions** value);
             }
 
             [contract(Windows.Management.Update.WindowsUpdateContract, 1.0)]
@@ -1107,8 +1145,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IPreviewBuildsState;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdate
@@ -1116,8 +1154,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdate;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateActionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateActionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateActionInfo
@@ -1125,22 +1163,22 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateActionInfo;
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             runtimeclass WindowsSoftwareUpdateActionProgress
             {
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateActionProgress;
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             runtimeclass WindowsSoftwareUpdateActionResultInfo
             {
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateActionResultInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateAppPackageInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateAppPackageInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateAppPackageInfo
@@ -1148,8 +1186,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateAppPackageInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateApprovalInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateApprovalInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateApprovalInfo
@@ -1157,8 +1195,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateApprovalInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateExecutionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateExecutionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateExecutionInfo
@@ -1166,8 +1204,17 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateExecutionInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateLocalizationInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateIdentityFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass WindowsSoftwareUpdateIdentity
+            {
+                [default] interface Windows.Management.Update.IWindowsSoftwareUpdateIdentity;
+            }
+
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateLocalizationInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateLocalizationInfo
@@ -1175,8 +1222,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateLocalizationInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateOptionalActionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateOptionalActionInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateOptionalActionInfo
@@ -1184,8 +1231,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateOptionalActionInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateOptionalInfoFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateOptionalInfoFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateOptionalInfo
@@ -1193,8 +1240,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateOptionalInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateProvider
@@ -1202,8 +1249,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateProvider;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderActionResultFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderActionResultFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateProviderActionResult
@@ -1211,15 +1258,15 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateProviderActionResult;
             }
 
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             runtimeclass WindowsSoftwareUpdateProviderPayloadFileInfo
             {
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateProviderPayloadFileInfo;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderStatusFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateProviderStatusFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateProviderStatus
@@ -1227,8 +1274,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateProviderStatus;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateResultFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateResultFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateResult
@@ -1236,8 +1283,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateResult;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateScanResultFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateScanResultFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateScanResult
@@ -1245,8 +1292,8 @@ namespace Windows
                 [default] interface Windows.Management.Update.IWindowsSoftwareUpdateScanResult;
             }
 
-            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateVersionFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsSoftwareUpdateVersionFactory, Windows.Management.Update.WindowsUpdateContract, 3.0)]
+            [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsSoftwareUpdateVersion
@@ -1329,24 +1376,14 @@ namespace Windows
             }
 
             [activatable(Windows.Management.Update.IWindowsUpdateManagerFactory, Windows.Management.Update.WindowsUpdateContract, 1.0)]
-            [activatable(Windows.Management.Update.IWindowsUpdateManagerFactory2, Windows.Management.Update.WindowsUpdateContract, 2.0)]
+            [activatable(Windows.Management.Update.IWindowsUpdateManagerFactory2, Windows.Management.Update.WindowsUpdateContract, 3.0)]
             [contract(Windows.Management.Update.WindowsUpdateContract, 1.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
             runtimeclass WindowsUpdateManager
             {
                 [default] interface Windows.Management.Update.IWindowsUpdateManager;
-                [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)] interface Windows.Management.Update.IWindowsUpdateManager2;
-            }
-
-            [activatable(Windows.Management.Update.IWindowsUpdateManagerScanOptionsFactory, Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [activatable(Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [contract(Windows.Management.Update.WindowsUpdateContract, 2.0)]
-            [marshaling_behavior(agile)]
-            [threading(both)]
-            runtimeclass WindowsUpdateManagerScanOptions
-            {
-                [default] interface Windows.Management.Update.IWindowsUpdateManagerScanOptions;
+                [contract(Windows.Management.Update.WindowsUpdateContract, 3.0)] interface Windows.Management.Update.IWindowsUpdateManager2;
             }
 
             [contract(Windows.Management.Update.WindowsUpdateContract, 1.0)]

@@ -102,6 +102,8 @@ if ($errorsEncountered.Count -gt 0)
     Exit 1
 }
 
+$ErrorActionPreference = "Stop"
+
 # Restore headers which have been removed from the SDK but that we still include for compatibility.
 $deprecatedHeaders = @(
     # Old ARM headers
@@ -152,10 +154,12 @@ $deprecatedHeaders = @(
     "um\windows.devices.alljoyn.interop.h",
     "um\windows.devices.alljoyn.interop.idl",
     "winrt\windows.devices.alljoyn.h",
-    "winrt\windows.devices.alljoyn.idl"
+    "winrt\windows.devices.alljoyn.idl",
+    "um\opmxbox.h"
 )
 
 Write-Host "Restoring headers that are no longer in the SDK..."
+$headersToRestore = @()
 foreach ($deprecatedHeader in $deprecatedHeaders) {
     $fullPath = Join-Path $recompiledIdlHeadersDir $deprecatedHeader
     if (!(Test-Path $fullPath)) {
@@ -164,23 +168,12 @@ foreach ($deprecatedHeader in $deprecatedHeaders) {
         if (!(Test-Path $directory)) {
             New-Item -ItemType Directory -Path $directory -Force | Out-Null
         }
-        
-        git checkout origin/main $fullPath
+
+        $headersToRestore += $fullPath
     }
 }
 
-# Also the WinMDGenerator tooling fails on the WinHv headers because of their AMD64-only defines in the latest SDK. For now, just stick with the older versions.
-$winHvHeadersToRestore = @(
-    "um\WinHvEmulation.h",
-    "um\WinHvPlatform.h",
-    "um\WinHvPlatformDefs.h"
-)
-
-Write-Host "Restoring WinHv headers to older versions..."
-foreach ($winHvHeader in $winHvHeadersToRestore) {
-    $fullPath = Join-Path $recompiledIdlHeadersDir $winHvHeader
-    Write-Host "Restoring WinHv header: $winHvHeader"
-    git checkout origin/main $fullPath
+if ($headersToRestore.Count -gt 0) {
+    git restore --source=origin/main --worktree -- $headersToRestore
+    ThrowOnNativeProcessError
 }
-
-$ErrorActionPreference = "Stop"

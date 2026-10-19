@@ -68,7 +68,7 @@ typedef struct _WEBAUTHN_PLUGIN_OPERATION_RESPONSE {
     DWORD cbEncodedResponse;
 
     // Encoded Response Buffer - Encoding type must match the request
-    [size_is(cbEncodedResponse)] byte* pbEncodedResponse;
+    [unique, size_is(cbEncodedResponse)] byte* pbEncodedResponse;
 } WEBAUTHN_PLUGIN_OPERATION_RESPONSE, *PWEBAUTHN_PLUGIN_OPERATION_RESPONSE;
 typedef const WEBAUTHN_PLUGIN_OPERATION_RESPONSE *PCWEBAUTHN_PLUGIN_OPERATION_RESPONSE;
 

@@ -1984,8 +1984,7 @@ STDAPI DXVA2CreateVideoService(
 __inline DXVA2_Fixed32 DXVA2FloatToFixed(_In_ const float _float_)
 {
     DXVA2_Fixed32 _fixed_;
-    _fixed_.Fraction = LOWORD(_float_ * 0x10000);
-    _fixed_.Value = HIWORD(_float_ * 0x10000);
+    _fixed_.ll = (LONG)(_float_ * 0x10000);
     return _fixed_;
 }
 __inline float DXVA2FixedToFloat(_In_ const DXVA2_Fixed32 _fixed_)

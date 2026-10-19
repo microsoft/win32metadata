@@ -16,17 +16,6 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
 #pragma region Desktop Family
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
 
-cpp_quote("#ifndef _MFVideoNormalizedRect_")
-cpp_quote("#define _MFVideoNormalizedRect_")
-typedef struct MFVideoNormalizedRect
-{
-    float left;
-    float top;
-    float right;
-    float bottom;
-} MFVideoNormalizedRect;
-cpp_quote("#endif")
-
 //////////////////////////////////////////////////////////////////////////////
 //
 // MF_CAPTURE_ENGINE_DEVICE_TYPE Enumeration

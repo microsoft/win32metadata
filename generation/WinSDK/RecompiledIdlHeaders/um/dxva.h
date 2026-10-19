@@ -126,7 +126,16 @@ DEFINE_GUID(DXVA_ModeJPEG_VLD_420,    0xcf782c83, 0xbef5, 0x4a2c, 0x87, 0xcb, 0x
 DEFINE_GUID(DXVA_ModeJPEG_VLD_422,    0xf04df417, 0xeee2, 0x4067, 0xa7, 0x78, 0xf3, 0x5c, 0x15, 0xab, 0x97, 0x21);
 DEFINE_GUID(DXVA_ModeJPEG_VLD_444,    0x4cd00e17, 0x89ba, 0x48ef, 0xb9, 0xf9, 0xed, 0xcb, 0x82, 0x71, 0x3f, 0x65);
 
-DEFINE_GUID(DXVA_NoEncrypt,   0x1b81beD0, 0xa0c7,0x11d3,0xb9,0x84,0x00,0xc0,0x4f,0x2e,0x73,0xc5);
+/* Advanced Professional Video (APV) - DXVA Profiles for RFC 9924 */
+DEFINE_GUID(DXVA_ModeAPV_VLD_422_10, 0x226a709d, 0xae12, 0x44c5, 0xba, 0x21, 0x16, 0x4f, 0xee, 0xb7, 0xf9, 0xb6);
+DEFINE_GUID(DXVA_ModeAPV_VLD_422_12, 0xf6f152ad, 0x94e5, 0x4bfa, 0x92, 0x27, 0x67, 0x6c, 0xdd, 0xef, 0xf4, 0x2b);
+DEFINE_GUID(DXVA_ModeAPV_VLD_444_10, 0x6a4a8d7d, 0x7610, 0x469f, 0x85, 0x5f, 0x39, 0xf1, 0x30, 0x51, 0xc0, 0x13);
+DEFINE_GUID(DXVA_ModeAPV_VLD_444_12, 0xf1039a1c, 0xe208, 0x45c1, 0x95, 0x2c, 0x04, 0x08, 0x41, 0xb6, 0x76, 0x67);
+DEFINE_GUID(DXVA_ModeAPV_VLD_4444_10, 0xc83799b9, 0x9655, 0x4b95, 0x80, 0x08, 0x56, 0xa3, 0x22, 0xce, 0x5d, 0x81);
+DEFINE_GUID(DXVA_ModeAPV_VLD_4444_12, 0x6a763ee3, 0x4d05, 0x47fe, 0xa4, 0x29, 0x72, 0x34, 0x74, 0xb6, 0x9d, 0x7c);
+DEFINE_GUID(DXVA_ModeAPV_VLD_400_10, 0x37148862, 0x6bd6, 0x4618, 0x82, 0x93, 0x77, 0x7b, 0x68, 0x6b, 0x08, 0x24);
+
+DEFINE_GUID(DXVA_NoEncrypt, 0x1b81beD0, 0xa0c7, 0x11d3, 0xb9, 0x84, 0x00, 0xc0, 0x4f, 0x2e, 0x73, 0xc5);
 
 #define DXVA_ModeWMV8_PostProc                  DXVA_ModeWMV8_A
 #define DXVA_ModeWMV8_MoComp                    DXVA_ModeWMV8_B
@@ -1856,6 +1865,78 @@ typedef struct _DXVA_HuffmanTable_MJPEG {
 } DXVA_HuffmanTable_MJPEG, *LPDXVA_HuffmanTable_MJPEG;
 
 #endif // _DIRECTX_MJPEG_VA_
+
+/* APV (Advanced Professional Video) DXVA Structures */
+#ifndef _DIRECTX_APV_VA_
+#define _DIRECTX_APV_VA_
+
+typedef struct _DXVA_PicEntry_APV
+{
+    union
+    {
+        struct
+        {
+            UCHAR Index7Bits : 7;
+            UCHAR ReservedFlag : 1;
+        };
+        UCHAR bPicEntry;
+    };
+} DXVA_PicEntry_APV, *LPDXVA_PicEntry_APV;
+
+#pragma pack(push, DXVA_APV, 16)    // Enforce 16-byte alignment for APV structures
+typedef struct _DXVA_PicParams_APV
+{
+    UCHAR   pbu_reserved_zero_8bits;
+    UINT    reserved_zero_32bits;
+    UINT32  frame_width;
+    UINT32  frame_height;
+    UCHAR   chroma_format_idc;
+    UCHAR   bit_depth_minus8;
+    UINT32  frame_info_reserved_zero_32bits;
+    UCHAR   frame_header_reserved_zero_8bits;
+    UCHAR   use_q_matrix;
+    UCHAR   q_reserved_zero_8bits;
+    UINT32  tile_width_in_mbs;
+    UINT32  tile_height_in_mbs;
+    UCHAR   tile_size_present_in_fh_flag;
+    UCHAR   tileinfo_reserved_zero_8bits;
+    UINT16  tile_reserved_16bits;
+    UINT32  statusReportFeedbackNumber;
+    DXVA_PicEntry_APV CurrPic;
+} DXVA_PicParams_APV, * LPDXVA_PicParams_APV;
+
+#define DXVA_APV_MAX_COMPONENTS     4
+#define DXVA_APV_QM_DIMENSION       8
+typedef struct _DXVA_Qmatrix_APV
+{
+    UCHAR NumComponents;
+    UINT qmatrix_reserved_zero_32bits;
+    // QMatrix[i][x][y] with:
+    //   0 <= i < NumComponents
+    //   0 <= x < DXVA_APV_QM_DIMENSION
+    //   0 <= y < DXVA_APV_QM_DIMENSION
+    UCHAR QMatrix[DXVA_APV_MAX_COMPONENTS]
+                 [DXVA_APV_QM_DIMENSION]
+                 [DXVA_APV_QM_DIMENSION];
+    UINT64  qmatrix_reserved_zero_64bits;
+} DXVA_Qmatrix_APV, * LPDXVA_Qmatrix_APV;
+
+typedef struct _DXVA_Tile_APV
+{
+    UINT    tile_data_offset;
+    UINT    tile_total_size;
+    UINT    tile_data_reserved_zero_32bits;
+    USHORT  tile_index;
+    UINT32  tile_header_reserved_zero_32bits;
+    USHORT  tile_header_size;
+    UINT    tile_component_data_size[DXVA_APV_MAX_COMPONENTS];
+    UCHAR   tile_component_qp[DXVA_APV_MAX_COMPONENTS];
+    UINT    tile_component_qp_zero_32bits;
+} DXVA_Tile_APV, * LPDXVA_Tile_APV;
+
+#pragma pack(pop, DXVA_APV)
+
+#endif // _DIRECTX_APV_VA_
 
 /*
  * Other forms of pictures are constructed in the obvious way

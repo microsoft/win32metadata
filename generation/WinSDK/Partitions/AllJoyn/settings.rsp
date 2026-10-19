@@ -37,3 +37,5 @@
 <IncludeRoot>/um/MSAJTransport.h
 --namespace
 Windows.Win32.Devices.AllJoyn
+--with-librarypath
+*=MSAJApi.dll

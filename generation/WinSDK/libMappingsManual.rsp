@@ -2,6 +2,9 @@
 # Documentation says This function has no associated import library or header file; you must call it using the LoadLibrary and GetProcAddress functions.
 pSetupModifyGlobalFlags=SETUPAPI.dll
 # APIs that have been removed from the SDK but that we include for completeness.
+OPMXboxEnableHDCP=OPMXbox.dll
+OPMXboxGetHDCPStatus=OPMXbox.dll
+OPMXboxGetHDCPStatusAndType=OPMXbox.dll
 BCryptRegisterProvider=bcrypt.dll
 BCryptUnregisterProvider=bcrypt.dll
 BCryptAddContextFunctionProvider=bcrypt.dll
@@ -390,15 +393,18 @@ WriteConsoleInputVDMW=KERNEL32.dll
 # or in Windows; LoadLibrary("WebAuthnPlugin.dll") fails with ERROR_MOD_NOT_FOUND.
 WebAuthNPluginGetAuthenticatorState=webauthn.dll
 WebAuthNPluginAddAuthenticator=webauthn.dll
+WebAuthNPluginAddAuthenticator2=webauthn.dll
 WebAuthNPluginFreeAddAuthenticatorResponse=webauthn.dll
 WebAuthNPluginRemoveAuthenticator=webauthn.dll
 WebAuthNPluginUpdateAuthenticatorDetails=webauthn.dll
+WebAuthNPluginUpdateAuthenticatorDetails2=webauthn.dll
 WebAuthNPluginAuthenticatorAddCredentials=webauthn.dll
 WebAuthNPluginAuthenticatorRemoveCredentials=webauthn.dll
 WebAuthNPluginAuthenticatorRemoveAllCredentials=webauthn.dll
 WebAuthNPluginAuthenticatorGetAllCredentials=webauthn.dll
 WebAuthNPluginAuthenticatorFreeCredentialDetailsArray=webauthn.dll
 WebAuthNPluginPerformUserVerification=webauthn.dll
+WebAuthNPluginPerformUserVerification2=webauthn.dll
 WebAuthNPluginFreeUserVerificationResponse=webauthn.dll
 WebAuthNPluginGetUserVerificationCount=webauthn.dll
 WebAuthNPluginGetUserVerificationPublicKey=webauthn.dll

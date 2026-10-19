@@ -205,6 +205,13 @@ typedef LPDRAGINFOA LPDRAGINFO;
 #define ABE_RIGHT       2
 #define ABE_BOTTOM      3
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_GE)
+// Flags for ABM_NEW
+// ABM_NEW with ABC_OVERLAYDESKTOPICONS allows an appbar to be registered that does not adjust the desktop icons.
+#define ABC_OVERLAYDESKTOPICONS 0x00000001
+#endif
+
+
 typedef struct _AppBarData
 {
     DWORD cbSize;

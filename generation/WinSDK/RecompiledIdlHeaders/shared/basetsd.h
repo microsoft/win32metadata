@@ -315,7 +315,16 @@ Ptr32ToPtr(
     const void * POINTER_32 p
     )
 {
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
+#endif
+
     return((void *) (ULONG_PTR) (unsigned long) p);
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 }
 
 __inline
@@ -324,7 +333,16 @@ Handle32ToHandle(
     const void * POINTER_32 h
     )
 {
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wvoid-pointer-to-int-cast"
+#endif
+
     return((void *) (LONG_PTR) (long) h);
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 }
 
 __inline
@@ -333,7 +351,16 @@ PtrToPtr32(
     const void *p
     )
 {
+#ifdef __clang__
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wint-to-void-pointer-cast"
+#endif
+
     return((void * POINTER_32) (unsigned long) (ULONG_PTR) p);
+
+#ifdef __clang__
+#pragma clang diagnostic pop
+#endif
 }
 
 #define HandleToHandle32( h )       (PtrToPtr32( h ))

@@ -20,8 +20,10 @@
 ;
 ; Macro Description:
 ;
-;   This macro emits a single-byte push <reg> instruction in a
-;   nested prologue, as well as the associated unwind code.
+;   This macro emits a push <reg> instruction in a nested prologue,
+;   as well as the associated unwind code.  The emitted instruction
+;   is single-byte, except for extended registers (r8-r15+), which
+;   use double-byte instructions.
 ;
 ; Arguments:
 ;
@@ -43,13 +45,16 @@ push_reg macro Reg
 ; Macro Description:
 ;
 ;   This macro emits a single-byte push <reg> instruction in a
-;   nested prologue, as well as the associated unwind code.
+;   nested prologue, as well as the associated unwind code, for
+;   non-extended registers.
 ;
-;   This differs from push_reg only in that a redundant rex prefix
-;   is added.  rex_push_reg must be used in lieu of push_reg when it
-;   appears as the first instruction in a function, as the calling
-;   standard dictates that functions must not begin with a single
-;   byte instruction.
+;   This macro differs from push_reg only in that a redundant rex
+;   prefix is added.  For non-extended registers, rex_push_reg must
+;   be used in lieu of push_reg when it appears as the first
+;   instruction in a function, as the calling standard dictates that
+;   functions must not begin with a single-byte instruction.  This
+;   macro must not be used for extended registers (r8-r15+), where
+;   the instruction is already double-byte.
 ;
 ; Arguments:
 ;
@@ -341,6 +346,28 @@ END_PROLOGUE macro
 BEGIN_EPILOGUE macro
 
         .beginepilog
+
+        endm
+
+;
+; Define macro to force version 2 epilogue code generation.
+;
+; N.B. The macro must be invoked in an unreachable location as it will emit a
+;      dummy epilogue to force the assembler to declare the function as having
+;      version 2 unwind information.  The dummy epilogue is never executed.
+;
+
+MARK_EPILOGUE_V2 macro
+
+;
+; N.B. The below code is never executed but exists only to satisfy the
+;      assembler, so that the function can be marked as having verison 2 unwind
+;      information.
+;
+
+        BEGIN_EPILOGUE
+
+        ret                             ; dummy epilogue - never executed
 
         endm
 

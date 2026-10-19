@@ -1155,7 +1155,7 @@ interface IDropSource : IUnknown
 
 [
     object,
-    uuid(00000122-0000-0000-C000-000000000046),    
+    uuid(00000122-0000-0000-C000-000000000046),
     pointer_default(unique)
 ]
 
@@ -1172,6 +1172,14 @@ interface IDropTarget : IUnknown
     const DWORD DROPEFFECT_MOVE = 2;
     const DWORD DROPEFFECT_LINK = 4;
     const DWORD DROPEFFECT_SCROLL = 0x80000000;
+
+    cpp_quote("// NEWTARGET and BACKGROUNDTARGET are hints to the system about the logical target within your drop target.")
+    cpp_quote("// NEWTARGET: The drag is now over a new logical target (e.g., individual files and folders on the Desktop)")
+    cpp_quote("// BACKGROUNDTARGET: The drag is now over a logical target that represents the background (e.g., the Desktop itself)")
+    cpp_quote("// The system uses these flags as hints when determining whether to trigger additional feedback during the drag.")
+    cpp_quote("// They should only be set when the drop target can accept the current drop (i.e. COPY/MOVE/LINK is also returned).")
+    const DWORD DROPEFFECT_NEWTARGET = 0x40000000;
+    const DWORD DROPEFFECT_BACKGROUNDTARGET = 0x20000000;
 
     cpp_quote("// default inset-width of the hot zone, in pixels")
     cpp_quote("//   typical use: GetProfileInt(\"windows\",\"DragScrollInset\",DD_DEFSCROLLINSET)")

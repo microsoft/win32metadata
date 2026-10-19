@@ -232,7 +232,7 @@ typedef struct _BCRYPT_OAEP_PADDING_INFO
     ULONG   cbLabel;
 } BCRYPT_OAEP_PADDING_INFO;
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 typedef struct _BCRYPT_PQDSA_PADDING_INFO {
     PUCHAR  pbCtx;
     ULONG   cbCtx;
@@ -380,10 +380,20 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
 
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_KEM_SHARED_SECRET_LENGTH     L"KEMSharedSecretLength"
 #define BCRYPT_KEM_CIPHERTEXT_LENGTH        L"KEMCiphertextLength"
+
 #define BCRYPT_PARAMETER_SET_NAME           L"ParameterSetName"
+#define BCRYPT_PARAMETER_SET_NAME_LIST      L"ParameterSetNameList"
+
+typedef struct _BCRYPT_PARAMETER_SET_NAMES
+{
+    ULONG       dwParameterSetNames;
+    PWSTR       *ppszParameterSetNames;
+    // PWSTR    pszParameterSetNames[dwParameterSetNames]
+    // WCHAR    parameterSetNames[]
+} BCRYPT_PARAMETER_SET_NAMES, *PBCRYPT_PARAMETER_SET_NAMES;
 #endif
 
 // BCryptSetProperty strings
@@ -425,7 +435,7 @@ typedef struct _BCRYPT_PKCS11_RSA_AES_WRAP_BLOB {
 #define BCRYPT_PAD_PKCS1_OPTIONAL_HASH_OID  0x00000010   //BCryptVerifySignature
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_PAD_PQDSA            0x00000020  // BCryptSignHash/VerifySignature
 #define BCRYPT_MLDSA_EXTERNAL_MU    0x00000040  // BCryptSignHash/VerifySignature
 #endif
@@ -525,6 +535,11 @@ typedef struct _BCRYPT_RSAKEY_BLOB
 #define SSL_ECCPUBLIC_BLOB              L"SSLECCPUBLICBLOB"
 #endif
 #define TLS_13_PRE_SHARED_KEY           L"TLS13PRESHAREDKEY"
+#define TLS_KEM_CIPHERTEXT              L"TLS_KEM_CIPHER_TEXT"
+#define TLS_HYBRID_KEYEXCHANGE          L"TLS_HYBRID_KEYEXCHANGE"
+
+#define TLS_KEM_CIPHERTEXT_MAGIC        0x434B4C4D  // MLKC
+#define TLS_HYBRID_KEYEXCHANGE_MAGIC    0x48534C54  // TLSH
 
 #define BCRYPT_ECDH_PUBLIC_P256_MAGIC   0x314B4345  // ECK1
 #define BCRYPT_ECDH_PRIVATE_P256_MAGIC  0x324B4345  // ECK2
@@ -563,6 +578,26 @@ typedef struct _SSL_ECCKEY_BLOB
     ULONG   dwCurveType;
     ULONG   cbKey;
 } SSL_ECCKEY_BLOB, *PSSL_ECCKEY_BLOB;
+
+typedef struct TLS_KEM_CIPHERTEXT_BLOB
+{
+    ULONG dwMagic;
+    ULONG cbLength;
+    // rgbCipherText[cbLength]
+} TLS_KEM_CIPHERTEXT_BLOB, *PTLS_KEM_CIPHERTEXT_BLOB;
+
+#define MAX_HYBRID_KEY_EXCHANGE_BLOBS 4
+typedef struct TLS_HYBRID_KEYEXCHANGE_BLOB
+{
+    ULONG dwMagic;
+    ULONG dwKeyType;
+    _Field_range_(2, MAX_HYBRID_KEY_EXCHANGE_BLOBS)
+    UCHAR NumBlobs;
+    _Field_size_part_(NumBlobs, MAX_HYBRID_KEY_EXCHANGE_BLOBS)
+    PCWSTR rgwszBlobTypes[MAX_HYBRID_KEY_EXCHANGE_BLOBS];
+    _Field_size_part_(NumBlobs, MAX_HYBRID_KEY_EXCHANGE_BLOBS)
+    PUCHAR rgbBlobs[MAX_HYBRID_KEY_EXCHANGE_BLOBS];
+} TLS_HYBRID_KEYEXCHANGE_BLOB, *PTLS_HYBRID_KEYEXCHANGE_BLOB;
 
 //ECC Full versions
 #define BCRYPT_ECC_FULLKEY_BLOB_V1              0x1
@@ -699,7 +734,7 @@ typedef struct _BCRYPT_KEY_DATA_BLOB_HEADER
 
 #define BCRYPT_KEY_DATA_BLOB_VERSION1    0x1
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_MLDSA_PUBLIC_MAGIC		    0x4B505344	// DSPK
 #define BCRYPT_MLDSA_PRIVATE_MAGIC		    0x4B535344	// DSSK
 #define BCRYPT_MLDSA_PRIVATE_SEED_MAGIC	    0x53535344	// DSSS
@@ -714,14 +749,6 @@ typedef struct _BCRYPT_KEY_DATA_BLOB_HEADER
 #define BCRYPT_PQDSA_PRIVATE_BLOB         	L"PQDSAPRIVATEBLOB"
 #define BCRYPT_PQDSA_PRIVATE_SEED_BLOB		L"PQDSAPRIVATESEEDBLOB"
 
-typedef struct BCRYPT_PQDSA_KEY_BLOB {
-    ULONG dwMagic;
-    ULONG cbParameterSet;                                   // Byte size of parameterSet[]
-    ULONG cbKey;                                            // Byte size of key[]
-    // WCHAR parameterSet[cbParameterSet / sizeof(WCHAR)];  // For ML-DSA and SLH-DSA, \0-terminated
-    // BYTE key[cbKey];                                     // Key material
-} BCRYPT_PQDSA_KEY_BLOB, *PBCRYPT_PQDSA_KEY_BLOB;
-
 #define BCRYPT_MLKEM_PUBLIC_MAGIC           0x504B4C4D  // MLKP
 #define BCRYPT_MLKEM_PRIVATE_MAGIC          0x524B4C4D  // MLKR
 #define BCRYPT_MLKEM_PRIVATE_SEED_MAGIC     0x534B4C4D  // MLKS
@@ -732,14 +759,33 @@ typedef struct BCRYPT_PQDSA_KEY_BLOB {
 #define BCRYPT_MLKEM_ENCAPSULATION_BLOB     BCRYPT_MLKEM_PUBLIC_BLOB
 #define BCRYPT_MLKEM_DECAPSULATION_BLOB     BCRYPT_MLKEM_PRIVATE_BLOB
 
-typedef struct BCRYPT_MLKEM_KEY_BLOB
+#define BCRYPT_COMPOSITE_MLDSA_PUBLIC_MAGIC  0x4B504D43 // CMPK
+#define BCRYPT_COMPOSITE_MLDSA_PRIVATE_MAGIC 0x4B534D43 // CMSK
+
+#define BCRYPT_COMPOSITE_MLKEM_PUBLIC_MAGIC             0x504B4D43 // CMKP
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_LAMPS_MAGIC      0x524B4D43 // CMKR
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_MAGIC            BCRYPT_COMPOSITE_MLKEM_PRIVATE_LAMPS_MAGIC
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_IRTF_SEED_MAGIC  0x534B4D43 // CMKS
+
+#define BCRYPT_COMPOSITE_MLKEM_PUBLIC_BLOB              L"COMPMLKEMPUBLICBLOB"
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_LAMPS_BLOB       L"COMPMLKEMPRIVATELAMPSBLOB"
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_BLOB             BCRYPT_COMPOSITE_MLKEM_PRIVATE_LAMPS_BLOB
+#define BCRYPT_COMPOSITE_MLKEM_PRIVATE_IRTF_SEED_BLOB   L"COMPMLKEMPRIVATEIRTFSEEDBLOB"
+#define BCRYPT_COMPOSITE_MLKEM_ENCAPSULATION_BLOB       BCRYPT_COMPOSITE_MLKEM_PUBLIC_BLOB
+#define BCRYPT_COMPOSITE_MLKEM_DECAPSULATION_BLOB       BCRYPT_COMPOSITE_MLKEM_PRIVATE_BLOB
+
+// For ML-DSA, Composite-ML-DSA, SLH-DSA, ML-KEM, Composite-ML-KEM
+typedef struct _BCRYPT_PARAMETER_SET_KEY_BLOB
 {
     ULONG   dwMagic;
     ULONG   cbParameterSet;             // Byte size of parameterSet[]
     ULONG   cbKey;                      // Byte size of key[]
-    // WCHAR parameterSet[cbParameterSet / sizeof(WCHAR)];  // For ML-KEM, \0-terminated
+    // WCHAR parameterSet[cbParameterSet / sizeof(WCHAR)];  // \0-terminated
     // BYTE key[cbKey];                                     // Key material
-} BCRYPT_MLKEM_KEY_BLOB, *PBCRYPT_MLKEM_KEY_BLOB;
+}   BCRYPT_PARAMETER_SET_KEY_BLOB, *PBCRYPT_PARAMETER_SET_KEY_BLOB,
+    BCRYPT_PQDSA_KEY_BLOB, *PBCRYPT_PQDSA_KEY_BLOB,
+    BCRYPT_MLKEM_KEY_BLOB, *PBCRYPT_MLKEM_KEY_BLOB,
+    BCRYPT_COMPOSITE_MLKEM_KEY_BLOB, *PBCRYPT_COMPOSITE_MLKEM_KEY_BLOB;
 #endif
 
 // Property Strings for DSA
@@ -848,7 +894,7 @@ typedef struct _BCRYPT_ECC_CURVE_NAMES
 #endif
 
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 //
 // PQDSA property values for BCRYPT_PARAMETER_SET_NAME
 //
@@ -876,6 +922,20 @@ typedef struct _BCRYPT_ECC_CURVE_NAMES
 #define BCRYPT_MLKEM_PARAMETER_SET_768              L"768"
 #define BCRYPT_MLKEM_PARAMETER_SET_1024             L"1024"
 
+//
+// Composite-ML-DSA property values for BCRYPT_PARAMETER_SET_NAME
+//
+#define BCRYPT_COMPOSITE_MLDSA_PARAMETER_SET_44_ECDSA_P256_SHA256 L"44-ECDSA-P256-SHA256"
+#define BCRYPT_COMPOSITE_MLDSA_PARAMETER_SET_65_ECDSA_P256_SHA512 L"65-ECDSA-P256-SHA512"
+#define BCRYPT_COMPOSITE_MLDSA_PARAMETER_SET_65_ECDSA_P384_SHA512 L"65-ECDSA-P384-SHA512"
+#define BCRYPT_COMPOSITE_MLDSA_PARAMETER_SET_87_ECDSA_P384_SHA512 L"87-ECDSA-P384-SHA512"
+
+//
+// Composite-ML-KEM property values for BCRYPT_PARAMETER_SET_NAME
+//
+#define BCRYPT_COMPOSITE_MLKEM_PARAMETER_SET_768_P256      L"768-P256"
+#define BCRYPT_COMPOSITE_MLKEM_PARAMETER_SET_768_X25519    L"768-X25519"
+#define BCRYPT_COMPOSITE_MLKEM_PARAMETER_SET_1024_P384     L"1024-P384"
 #endif
 
 
@@ -977,7 +1037,7 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_KMAC256_ALGORITHM                L"KMAC256"
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_SHAKE128_ALGORITHM               L"SHAKE128"
 #define BCRYPT_SHAKE256_ALGORITHM               L"SHAKE256"
 
@@ -988,6 +1048,10 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_XMSS_ALGORITHM                   L"XMSS"
 
 #define BCRYPT_MLKEM_ALGORITHM                  L"ML-KEM"
+
+#define BCRYPT_COMPOSITE_MLDSA_ALGORITHM        L"Composite-ML-DSA"
+
+#define BCRYPT_COMPOSITE_MLKEM_ALGORITHM        L"Composite-ML-KEM"
 #endif
 
 //
@@ -1005,7 +1069,7 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_KEY_DERIVATION_INTERFACE         0x00000007
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_KEY_ENCAPSULATION_INTERFACE      0x00000008
 #endif
 
@@ -1101,7 +1165,7 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 #define BCRYPT_KMAC256_ALG_HANDLE               ((BCRYPT_ALG_HANDLE) 0x00000441)
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_SHAKE128_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x00000451)
 #define BCRYPT_SHAKE256_ALG_HANDLE              ((BCRYPT_ALG_HANDLE) 0x00000461)
 
@@ -1109,6 +1173,9 @@ typedef struct _BCRYPT_MULTI_OBJECT_LENGTH_STRUCT
 
 #define BCRYPT_MLKEM_ALG_HANDLE                 ((BCRYPT_ALG_HANDLE) 0x00000481)
 
+#define BCRYPT_COMPOSITE_MLDSA_ALG_HANDLE       ((BCRYPT_ALG_HANDLE) 0x00000491)
+
+#define BCRYPT_COMPOSITE_MLKEM_ALG_HANDLE       ((BCRYPT_ALG_HANDLE) 0x000004A1)
 #endif
 
 //
@@ -1230,7 +1297,7 @@ BCryptOpenAlgorithmProvider(
 #define BCRYPT_KEY_DERIVATION_OPERATION         0x00000040
 #endif
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 #define BCRYPT_KEY_ENCAPSULATION_OPERATION      0x00000080
 #endif
 
@@ -1658,17 +1725,17 @@ BCryptDeriveKeyPBKDF2(
 #endif
 
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 _Must_inspect_result_
 NTSTATUS
 WINAPI
 BCryptEncapsulate(
   _In_                              BCRYPT_KEY_HANDLE       hKey,
-  _Out_writes_bytes_to_opt_(cbSecretKey, *pcbSecretKey)     
+  _Out_writes_bytes_to_opt_(cbSecretKey, *pcbSecretKey)
                                     PUCHAR                  pbSecretKey,
   _In_                              ULONG                   cbSecretKey,
   _Out_                             ULONG                   *pcbSecretKey,
-  _Out_writes_bytes_to_opt_(cbCipherText, *pcbCipherText)   
+  _Out_writes_bytes_to_opt_(cbCipherText, *pcbCipherText)
                                     PUCHAR                  pbCipherText,
   _In_                              ULONG                   cbCipherText,
   _Out_                             ULONG                   *pcbCipherText,
@@ -1676,7 +1743,7 @@ BCryptEncapsulate(
 #endif
 
 
-#if (NTDDI_VERSION >= NTDDI_WIN11_GE)
+#if (NTDDI_VERSION >= NTDDI_WIN11_DT)
 _Must_inspect_result_
 NTSTATUS
 WINAPI

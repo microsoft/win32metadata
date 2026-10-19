@@ -107,11 +107,16 @@ DEFINE_GUID(GUID_DEVINTERFACE_UNIFIED_ACCESS_RPMB,    0x27447c21L, 0xbcc3, 0x4d0
 // and in IOCTL to identify why section is requested by the user mode application
 //
 
-// /* d8e2592f-1aab-4d56-a746-1f7585df40f4 */
+//  /* d8e2592f-1aab-4d56-a746-1f7585df40f4 */
 DEFINE_GUID(GUID_DEVICEDUMP_STORAGE_DEVICE,             0xd8e2592f,0x1aab,0x4d56,0xa7, 0x46, 0x1f, 0x75, 0x85, 0xdf, 0x40, 0xf4);
 
 //  /* da82441d-7142-4bc1-b844-0807c5a4b67f */
 DEFINE_GUID(GUID_DEVICEDUMP_DRIVER_STORAGE_PORT,        0xda82441d,0x7142,0x4bc1,0xb8, 0x44, 0x08, 0x07, 0xc5, 0xa4, 0xb6, 0x7f);
+
+//
+//  /* c939c73b-17dc-4a44-904c-e2d987f52649 */
+//
+DEFINE_GUID(GUID_STORPORT_PAGING_DEVICE_DUMP,           0xc939c73b,0x17dc,0x4a44,0x90, 0x4c, 0xe2, 0xd9, 0x87, 0xf5, 0x26, 0x49);
 
 // end_tcioctlguids
 
@@ -308,6 +313,15 @@ extern "C" {
 #define IOCTL_STORAGE_FIRMWARE_GET_INFO         CTL_CODE(IOCTL_STORAGE_BASE, 0x0700, METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define IOCTL_STORAGE_FIRMWARE_DOWNLOAD         CTL_CODE(IOCTL_STORAGE_BASE, 0x0701, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 #define IOCTL_STORAGE_FIRMWARE_ACTIVATE         CTL_CODE(IOCTL_STORAGE_BASE, 0x0702, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+
+//
+// IOCTLs for BOOT partition support on storage devices
+//
+
+#define IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD CTL_CODE(IOCTL_STORAGE_BASE, 0x0703, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE CTL_CODE(IOCTL_STORAGE_BASE, 0x0704, METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_STORAGE_BOOT_PARTITION_GET_INFO CTL_CODE(IOCTL_STORAGE_BASE, 0x0705, METHOD_BUFFERED, FILE_ANY_ACCESS)
+
 
 
 //
@@ -992,7 +1006,7 @@ typedef enum _STORAGE_PROPERTY_ID {
     StorageDeviceResiliencyProperty,
     StorageDeviceMediumProductType,
     StorageAdapterRpmbProperty,
-    StorageAdapterCryptoProperty,                   // Deprecated for GE or greater OS. Use StorageHwCryptoProperty.
+    StorageAdapterCryptoProperty,                   // Deprecated. Use StorageHwCryptoProperty.
 // end_winioctl
     StorageDeviceTieringProperty,
     StorageDeviceFaultDomainProperty,
@@ -1794,8 +1808,7 @@ typedef enum _STORAGE_CRYPTO_KEY_SIZE {
 #define STORAGE_CRYPTO_CAPABILITY_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this struct is deprecated. 
-// Use STORAGE_HW_CRYPTO_CAPABILITY.
+// Note: This struct is deprecated. Use STORAGE_HW_CRYPTO_CAPABILITY.
 //
 typedef struct _STORAGE_CRYPTO_CAPABILITY {
 
@@ -1936,8 +1949,7 @@ typedef struct _STORAGE_CRYPTO_CAPABILITY_V2 {
 #define STORAGE_CRYPTO_DESCRIPTOR_VERSION_1           1
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated.
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR {
 
@@ -1987,8 +1999,7 @@ typedef enum _STORAGE_ICE_TYPE {
 } STORAGE_ICE_TYPE, *PSTORAGE_ICE_TYPE;
 
 //
-// Note: Starting in Win11 24H2 and WS2025 or GE, this structure is deprecated. 
-// Use STORAGE_HW_CRYPTO_DESCRIPTOR.
+// Note: This structure is deprecated. Use STORAGE_HW_CRYPTO_DESCRIPTOR.
 //
 typedef struct _STORAGE_CRYPTO_DESCRIPTOR_V2 {
 
@@ -6489,6 +6500,61 @@ typedef _Struct_size_bytes_(Descriptor.dwSize) struct _DEVICEDUMP_STORAGESTACK_P
 
 } DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP,*PDEVICEDUMP_STORAGESTACK_PUBLIC_DUMP;
 
+//
+// Maximum number of paging devices to report in secondary dump.
+//
+#define STOR_MAX_PAGING_DEVICES     16
+
+//
+// Miniport name length limit for dump output.
+//
+#define STOR_PAGING_DEVICE_MINIPORT_NAME_LENGTH    32
+#define STOR_PAGING_DEVICE_MODEL_NAME_LENGTH       64
+#define STOR_PAGING_DEVICE_FW_REVISION_LENGTH      16
+
+#pragma warning(push)
+#pragma warning(disable:4201) // nameless struct/union
+#pragma warning(disable:4214) // bit fields other than int to disable this around the struct
+
+//
+// Per-device info collected for paging device dump.
+//
+typedef struct _STOR_PAGING_DEVICE_DUMP_ENTRY {
+
+    CHAR MiniportName[STOR_PAGING_DEVICE_MINIPORT_NAME_LENGTH + 1];
+    CHAR ModelName[STOR_PAGING_DEVICE_MODEL_NAME_LENGTH + 1];
+    CHAR FirmwareRevision[STOR_PAGING_DEVICE_FW_REVISION_LENGTH + 1];
+    USHORT PagingPathCount;
+
+    union {
+        struct {
+            UCHAR IsBootDevice : 1;
+            UCHAR IsNativeNVMe : 1;
+            UCHAR Reserved : 6;
+        } DUMMYSTRUCTNAME;
+        UCHAR AsUchar;
+    } Flags;
+
+} STOR_PAGING_DEVICE_DUMP_ENTRY, *PSTOR_PAGING_DEVICE_DUMP_ENTRY;
+
+#pragma warning(pop)
+
+//
+// Header for the paging device dump data written to secondary dump.
+// Uses DEVICEDUMP_STRUCTURE_VERSION as the descriptor for consistency
+// with the existing DEVICEDUMP_STORAGESTACK_PUBLIC_DUMP format.
+// Shares GUID_DEVICEDUMP_DRIVER_STORAGE_PORT with the IO telemetry section;
+// the dwSignature ('PGDV': paging device) distinguishes this section from 'PTSD'.
+//
+typedef struct _STOR_PAGING_DEVICE_DUMP_DATA {
+
+    DEVICEDUMP_STRUCTURE_VERSION Descriptor;  // dwSignature='PGDV', dwVersion=1, dwSize=actual used
+    ULONG EntryCount;
+    ULONG EntrySize;
+    STOR_PAGING_DEVICE_DUMP_ENTRY Entries[ANYSIZE_ARRAY];
+
+} STOR_PAGING_DEVICE_DUMP_DATA, *PSTOR_PAGING_DEVICE_DUMP_DATA;
+
 // End of the packed structure group
 #include <poppack.h>
 
@@ -6988,6 +7054,68 @@ typedef struct _STORAGE_HW_FIRMWARE_ACTIVATE {
     UCHAR   Reserved0[3];
 
 } STORAGE_HW_FIRMWARE_ACTIVATE, *PSTORAGE_HW_FIRMWARE_ACTIVATE;
+
+//
+// Indicate the target of the request other than the device handle/object itself.
+// This is used in "Flags" field of data structures for boot partition upgrade request.
+// This flag is valid for STORAGE_HW_BOOT_PARTITION_ACTIVATE and STORAGE_HW_BOOT_PARTITION_DOWNLOAD structures.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_FLAG_CONTROLLER                       0x00000001
+
+//
+// Below definitions are only valid for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE.
+//
+
+//
+// Indicate that any existing boot partition specified in the boot partition ID field should be replaced with the downloaded image.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_REPLACE_EXISTING_BOOT_PARTITION           0x40000000
+//
+// Indicate that the existing boot partition specified in the boot partition ID field should be activated.
+//
+#define STORAGE_HW_BOOT_PARTITION_REQUEST_ACTIVATE_EXISTING_BOOT_PARTITION          0x80000000
+
+#define STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_ACTIVATE
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_ACTIVATE {
+    ULONG 	        Version;            // STORAGE_HW_BOOT_PARTITION_ACTIVATE_STRUCTURE_VERSION
+    ULONG	        Size;               // Size of the whole structure
+    ULONG           Flags;
+    UCHAR 	        BPID;              	// Boot Partition ID (BPID);
+    UCHAR 	        Reserved[3];
+} STORAGE_HW_BOOT_PARTITION_ACTIVATE, *PSTORAGE_HW_BOOT_PARTITION_ACTIVATE;
+
+#define STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION 0x01
+//
+// Input parameter for IOCTL_STORAGE_BOOT_PARTITION_DOWNLOAD
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_DOWNLOAD {
+    ULONG 	                        Version;	                        // STORAGE_HW_BOOT_PARTITION_DOWNLOAD_STRUCTURE_VERSION
+    ULONG	                        Size;		                        // Size of the whole structure including the image buffer.
+    ULONG                           Flags;
+    UCHAR 	                        BPID; 		                        // Boot Partition ID (BPID);
+    UCHAR 	                        Reserved[3];
+    ULONGLONG                       Offset;                             // Offset for each download command
+    ULONGLONG                       BufferSize;                         // ImageSize for each download command
+    _Field_size_bytes_(BufferSize)  UCHAR ImageBuffer[ANYSIZE_ARRAY];   // Buffer to hold the image data
+} STORAGE_HW_BOOT_PARTITION_DOWNLOAD, *PSTORAGE_HW_BOOT_PARTITION_DOWNLOAD;
+
+#define STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1 0x01
+//
+// Input and Output buffer for IOCTL_STORAGE_BOOT_PARTITION_GET_INFO
+//
+typedef struct _STORAGE_HW_BOOT_PARTITION_INFO {
+    ULONG       Version;                // STORAGE_HW_BOOT_PARTITION_INFO_STRUCTURE_VERSION_V1
+    ULONG       Size;                   // Size of the whole structure
+    ULONGLONG   BPSZ;                   // Boot Partition Size (BPSZ)
+    ULONG       Flags;
+    ULONG       ImagePayloadAlignment;
+    ULONG       ImagePayloadMaxSize;
+    UCHAR       SlotCount;
+    UCHAR       ABPID;                  // Active Boot Partition ID (ABPID)
+} STORAGE_HW_BOOT_PARTITION_INFO, *PSTORAGE_HW_BOOT_PARTITION_INFO;
 
 //
 // Parameter for IOCTL_STORAGE_PROTOCOL_COMMAND

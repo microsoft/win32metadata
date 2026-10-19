@@ -3,5 +3,6 @@ _VIRTUAL_STORAGE_TYPE
 --traverse
 <IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/winioctl.h
+<IncludeRoot>/shared/cxl.h
 --namespace
 Windows.Win32.System.Ioctl

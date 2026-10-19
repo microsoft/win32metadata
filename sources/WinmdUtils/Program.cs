@@ -512,7 +512,7 @@ namespace WinmdUtilsProgram
         {
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
             HashSet<string> allowTable = new HashSet<string>(allowItem);
-            Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
+            var nameToOwner = new Dictionary<string, List<(string Owner, Architecture Architectures)>>();
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions())
             {
@@ -525,6 +525,8 @@ namespace WinmdUtilsProgram
                 {
                     continue;
                 }
+
+                Architecture typeArchitectures = GetSupportedArchitectures(type.GetAttributes());
 
                 // Skip enums marked as a scoped enum (like a C++ class enum).
                 // We don't count these in the duplicated constants
@@ -542,13 +544,7 @@ namespace WinmdUtilsProgram
                     type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
                     !type.GetFields().Any())
                 {
-                    if (!nameToOwner.TryGetValue(type.Name.ToUpper(), out var owners))
-                    {
-                        owners = new List<string>();
-                        nameToOwner[type.Name.ToUpper()] = owners;
-                    }
-
-                    owners.Add(type.FullName);
+                    AddOwner(type.Name, type.FullName, typeArchitectures);
                 }
 
                 if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
@@ -560,13 +556,7 @@ namespace WinmdUtilsProgram
                             continue;
                         }
 
-                        if (!nameToOwner.TryGetValue(field.Name.ToUpper(), out var owners))
-                        {
-                            owners = new List<string>();
-                            nameToOwner[field.Name.ToUpper()] = owners;
-                        }
-
-                        owners.Add(type.FullName);
+                        AddOwner(field.Name, type.FullName, typeArchitectures & GetSupportedArchitectures(field.GetAttributes()));
                     }
                 }
             }
@@ -579,7 +569,15 @@ namespace WinmdUtilsProgram
                     continue;
                 }
 
-                if (pair.Value.Count > 1)
+                Architecture seenArchitectures = Architecture.None;
+                bool hasDuplicate = false;
+                foreach (var owner in pair.Value)
+                {
+                    hasDuplicate |= (seenArchitectures & owner.Architectures) != Architecture.None;
+                    seenArchitectures |= owner.Architectures;
+                }
+
+                if (hasDuplicate)
                 {
                     if (dupsFound == false)
                     {
@@ -592,7 +590,7 @@ namespace WinmdUtilsProgram
                     console?.Out.Write($"{pair.Key}\r\n");
                     foreach (var owner in pair.Value)
                     {
-                        console?.Out.Write($"  {owner}\r\n");
+                        console?.Out.Write($"  {owner.Owner} ({owner.Architectures})\r\n");
                     }
                 }
             }
@@ -603,6 +601,18 @@ namespace WinmdUtilsProgram
             }
 
             return dupsFound ? -1 : 0;
+
+            void AddOwner(string name, string owner, Architecture architectures)
+            {
+                string key = name.ToUpperInvariant();
+                if (!nameToOwner.TryGetValue(key, out var owners))
+                {
+                    owners = new List<(string Owner, Architecture Architectures)>();
+                    nameToOwner[key] = owners;
+                }
+
+                owners.Add((owner, architectures));
+            }
         }
 
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)
@@ -733,6 +743,12 @@ namespace WinmdUtilsProgram
             return emptyFound ? -1 : 0;
         }
 
+        private static Architecture GetSupportedArchitectures(IEnumerable<IAttribute> attributes)
+        {
+            var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
+            return archAttr != null ? (Architecture)archAttr.FixedArguments[0].Value : Architecture.All;
+        }
+
         private static string GetArchInfo(IEnumerable<IAttribute> attributes)
         {
             var archAttr = attributes.FirstOrDefault(a => a.AttributeType.Name == "SupportedArchitectureAttribute");
@@ -775,27 +791,32 @@ namespace WinmdUtilsProgram
                     return true;
                 }
 
-                bool found = false;
                 Architecture typeArches = Architecture.None;
                 foreach (var archType in foundArchTypes)
                 {
-                    var typeArchAttr =
-                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Foundation.Metadata.SupportedArchitectureAttribute");
+                    typeArches |= GetSupportedArchitectures(archType.GetAttributes());
+                }
 
-                    var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
-                    typeArches |= typeArch;
-                    if ((typeArches & requiredArch) == requiredArch)
+                if ((typeArches & requiredArch) != requiredArch)
+                {
+                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{typeArches}'\r\n");
+                    success = false;
+                }
+
+                if (type.Kind == TypeKind.Struct || type.Kind == TypeKind.Delegate)
+                {
+                    foreach (var archType in foundArchTypes)
                     {
-                        found = true;
-                        break;
+                        Architecture matchingArch = requiredArch & GetSupportedArchitectures(archType.GetAttributes());
+                        if (matchingArch != Architecture.None &&
+                            !VerifyTypeHasRightArch(namesToArchDefs, archType, archType, matchingArch, console))
+                        {
+                            success = false;
+                        }
                     }
                 }
 
-                if (!found)
-                {
-                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{typeArches}'");
-                    success = false;
-                }
+                return success;
             }
 
             if (type.Kind == TypeKind.Struct)

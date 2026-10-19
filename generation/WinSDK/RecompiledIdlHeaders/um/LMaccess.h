@@ -1632,11 +1632,11 @@ NetEnumerateTrustedDomains (
 
 // Debug function codes
 
-#define NETLOGON_CONTROL_UNLOAD_NETLOGON_DLL 0xFFFB
-#define NETLOGON_CONTROL_BACKUP_CHANGE_LOG  0xFFFC
-#define NETLOGON_CONTROL_TRUNCATE_LOG       0xFFFD
-#define NETLOGON_CONTROL_SET_DBFLAG         0xFFFE
-#define NETLOGON_CONTROL_BREAKPOINT         0xFFFF
+#define NETLOGON_CONTROL_UNLOAD_NETLOGON_DLL 0xFFFB  // Unsupported
+#define NETLOGON_CONTROL_BACKUP_CHANGE_LOG   0xFFFC  // Debug builds only
+#define NETLOGON_CONTROL_TRUNCATE_LOG        0xFFFD  // Debug builds only
+#define NETLOGON_CONTROL_SET_DBFLAG          0xFFFE  // Supported in both debug and retail builds
+#define NETLOGON_CONTROL_BREAKPOINT          0xFFFF  // Debug builds only
 
 //
 // Query level 1 for I_NetLogonControl
