@@ -300,6 +300,13 @@ replaces prepared inputs. Generated sources and actual settings, remaps and
 diagnostics are retained in `obj\generated` and `obj\scratch`, with input,
 command, log and output hashes.
 
+When unchanged mirror directories are needed as fallbacks, put the prepared
+`shared`, `um`, `ucrt` and `winrt` directories before MSVC and those fallbacks in
+`NativeIncludeDirectory`. The normal task appends its default SDK includes after
+additional includes; a mirror-first list can silently select an untraversed
+header and produce an empty file. Check expected declarations, not exit code
+alone.
+
 `Headers`, `Constants` and `Emit` are distinct stages. A runtime without
 `ConstantsScraper.dll` supports only `Headers`; the other stages fail explicitly
 before starting a producer. A library-only enum control is not a normal complete
@@ -309,6 +316,47 @@ generation. Supply only source-owned definitions or separately reviewed context,
 not invented carriers. The existing crossarch task uses `-m32` for x86, `-m64`
 for x64 and `-m64` plus `_ARM64_` for arm64; three ordinary jobs do not constitute
 a new ARM64-target ABI qualification.
+
+### Lossless aggregate review batches
+
+`WinmdUtils review-batch` reads an existing unsuppressed comparison and its exact
+OLD/NEW images. It retains every raw record, including duplicates and unknown
+record forms, and assigns an ID from the exact UTF-8 line and duplicate ordinal.
+Balanced JSONL shards contain 500-1000 differences when the batch has at least
+500 records. `inventory.jsonl`, `families.json` and the shard manifest retain
+disjoint, complete coverage; grouping never accepts, normalizes or drops a delta.
+
+The batch also indexes physical OLD/NEW metadata and actual generated-source
+identities. Optional `--scratchDirectory` and `--jobBindings` inputs add hashed
+native traversal candidates, not proof of native declaration ownership. Missing
+metadata, native context and historical producer evidence remain explicit gaps.
+`--blockers` records named unresolved families with exact symbol selectors and
+optional hash-bound evidence; it is not a difference allowlist.
+
+```powershell
+dotnet "$tools\WinmdUtils.dll" review-batch `
+    --comparisonLog "$run\comparison.log" --first $oldWinmd --second $newWinmd `
+    --outputDirectory "$run\review" --generatedDirectory "$run\obj\generated" `
+    --scratchDirectory "$run\obj\scratch" --blockers $blockers `
+    --purpose conversion-wave --boundary "$run\producer-boundary.json"
+```
+
+The default `prototype` purpose can inspect a frozen comparison without running
+its producer again. `conversion-wave` requires a completed NEW producer boundary
+binding both images and the exact comparison log; neither purpose grants API or
+consumer acceptance. Reviewers return systematic fixes or per-site dispositions
+with exception IDs and evidence, retaining the original inventory.
+
+`scripts\Invoke-HeaderConversionWave.ps1` stages the normal aggregate targets,
+integrity suite, unsuppressed comparison and review batching. Its version1 wave
+manifest must declare a clean coherent source commit, additive source inputs,
+the frozen OLD hash and a complete qualified private runtime file/debug map.
+`-PlanOnly` writes the planned commands without running a producer. Execution
+refuses an unready wave, dirty producer, changed runtime binding or reused output;
+the terminal boundary remains unaccepted even after all stages complete.
+The Headers-only239 runtime is not a qualified full-pipeline runtime. Integrity
+uses explicit `WIN32_METADATA_TEST_WINMD` and `WIN32_METADATA_TEST_PROJECT`
+overrides, restoring the caller's environment afterward.
 
 ## 3. Capture native facts and classify every difference
 

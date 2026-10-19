@@ -10,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.CSharp;
@@ -43,6 +44,23 @@ namespace WinmdUtilsProgram
             };
 
             compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, string, IConsole>(CompareWinmds);
+
+            var reviewBatchCommand = new Command("review-batch", "Create lossless review inventory and disjoint shards from an existing unsuppressed comparison.")
+            {
+                new Option<FileInfo>("--comparisonLog") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--first") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--second") { IsRequired = true }.ExistingOnly(),
+                new Option<DirectoryInfo>("--outputDirectory") { IsRequired = true },
+                new Option<DirectoryInfo>("--generatedDirectory").ExistingOnly(),
+                new Option<string[]>("--scratchDirectory", "Actual native-job scratch directories.", ArgumentArity.ZeroOrMore),
+                new Option<FileInfo>("--jobBindings").ExistingOnly(),
+                new Option<FileInfo>("--blockers").ExistingOnly(),
+                new Option<FileInfo>("--boundary").ExistingOnly(),
+                new Option<string>("--purpose", getDefaultValue: () => "prototype"),
+                new Option<int>("--shardSize", getDefaultValue: () => 750),
+            };
+            reviewBatchCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, DirectoryInfo, DirectoryInfo,
+                string[], FileInfo, FileInfo, FileInfo, string, int, IConsole>(CreateReviewBatch);
 
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
@@ -153,6 +171,7 @@ namespace WinmdUtilsProgram
                 showPointersToDelegates,
                 showSuggestedRemappings,
                 compareCommand,
+                reviewBatchCommand,
                 dumpCommand,
                 showLibImports,
                 createLibRsp,
@@ -162,6 +181,36 @@ namespace WinmdUtilsProgram
             };
 
             return rootCommand.Invoke(args);
+        }
+
+        private static int CreateReviewBatch(FileInfo comparisonLog, FileInfo first, FileInfo second, DirectoryInfo outputDirectory,
+            DirectoryInfo generatedDirectory, string[] scratchDirectory, FileInfo jobBindings, FileInfo blockers,
+            FileInfo boundary, string purpose, int shardSize, IConsole console)
+        {
+            try
+            {
+                string manifest = WinmdReviewBatch.Create(new WinmdReviewBatch.Options
+                {
+                    ComparisonLog = comparisonLog.FullName,
+                    First = first.FullName,
+                    Second = second.FullName,
+                    OutputDirectory = outputDirectory.FullName,
+                    GeneratedDirectory = generatedDirectory?.FullName,
+                    ScratchDirectories = scratchDirectory ?? Array.Empty<string>(),
+                    JobBindings = jobBindings?.FullName,
+                    Blockers = blockers?.FullName,
+                    Boundary = boundary?.FullName,
+                    Purpose = purpose,
+                    ShardSize = shardSize,
+                });
+                console.Out.WriteLine(manifest);
+                return 0;
+            }
+            catch (Exception exception) when (exception is IOException || exception is ArgumentException || exception is JsonException)
+            {
+                console.Error.WriteLine("Review batch failed: " + exception.Message);
+                return 1;
+            }
         }
 
         private static bool TypeIsPointerToOneOfNames(HashSet<string> names, string type)
