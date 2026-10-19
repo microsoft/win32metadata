@@ -1,7 +1,7 @@
 # Header-annotation migration playbook
 
-Move authored semantic facts to reviewed header patches without changing native
-contracts. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
+Move authored semantic facts to reviewed header patches without unreviewed native
+contract changes. Keep the C# scraper/emitter, matched ClangSharp stack and selected SDK.
 The [adopted annotation specification](https://github.com/microsoft/win32metadata/blob/8d6d5290e8a5421ba6e565752e79c011ea40d470/docs/copilot/plans/shift-left-annotation-spec.md) defines
 the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
 complete example and its immutable evidence.
@@ -20,6 +20,24 @@ documentation mappings. Count emitted symbols, not just library-map rows.
 | Authored OS/error, logical-enum, ownership, callback and buffer overrides | Review each contract, migrate supported facts, and remove only the matching authored fallback. |
 | Manual import overrides | Use `ImportLibrary` only for demonstrated missing/incorrect scan data; retain generic override support. |
 | Namespace/traversal/architecture/schema configuration and documentation tooling | Keep separate from functional semantic migration. |
+
+### Native pointee const contracts
+
+Native pointee const may be added at the relevant source declarations. Prefer
+existing SDK const-qualified aliases and the current emitter over a new
+metadata-only `Const` carrier. Do not const-qualify a global typedef to change
+one use, or infer constness from generic `In` or read-only SAL.
+
+Preserve binary ABI, layout, calling conventions, imports and unrelated SAL.
+Record the intentional C/C++ pointee-qualification and `NativeTypeName`
+differences; do not describe the native signatures as identical or infer consumer
+compatibility. Genuinely writable/output contradictions remain held with exact
+source evidence.
+
+For the Network-owned Winspool facts, require the ordinary Printing producer
+and exact physical `Const` metadata at every covered site without legacy
+fallback before retiring rows. Permission to change a native contract does not
+itself convert a fact, authorize new vocabulary, or retire printer-rights debt.
 
 ### SDK-wide inventory and source queue
 
