@@ -39,7 +39,6 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/sherrors.h
 <IncludeRoot>/um/ExDisp.h
 --with-attribute
-SIIGBF=Flags
 --namespace
 Windows.Win32.UI.Shell
 --config

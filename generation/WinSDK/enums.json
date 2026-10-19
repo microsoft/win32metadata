@@ -503,57 +503,6 @@
     ]
   },
   {
-    "name": "SP_COPY_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SP_COPY_",
-      "header": "SetupAPI.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "SetupCopyOEMInfA",
-        "parameter": "CopyStyle"
-      },
-      {
-        "method": "SetupCopyOEMInfW",
-        "parameter": "CopyStyle"
-      },
-      {
-        "method": "SetupInstallFileExW",
-        "parameter": "CopyStyle"
-      },
-      {
-        "method": "SetupInstallFileExA",
-        "parameter": "CopyStyle"
-      },
-      {
-        "struct": "sp_file_copy_params_a",
-        "field": "CopyStyle"
-      },
-      {
-        "struct": "sp_file_copy_params_w",
-        "field": "CopyStyle"
-      },
-      {
-        "method": "SetupInstallFileW",
-        "parameter": "CopyStyle"
-      },
-      {
-        "method": "SetupInstallFileA",
-        "parameter": "CopyStyle"
-      },
-      {
-        "struct": "filepaths_w",
-        "field": "Flags"
-      },
-      {
-        "struct": "filepaths_a",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
       "addUsesTo": "WINBIO_SETTING_SOURCE",
       "uses": [
         {
@@ -681,22 +630,6 @@
         }
       ]
     },
-  {
-    "namespace": "Windows.Win32.System.Memory",
-    "name": "SECTION_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SECTION_",
-      "header": "winnt.h"
-    },
-    "members": [
-      {
-        "name": "SECTION_ALL_ACCESS",
-        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_RIGHTS.STANDARD_RIGHTS_REQUIRED|SECTION_QUERY|SECTION_MAP_WRITE|SECTION_MAP_READ|SECTION_MAP_EXECUTE|SECTION_EXTEND_SIZE)"
-      }
-    ],
-    "uses": []
-  },
   {
     "addUsesTo": "FILE_MAP",
     "uses": [
@@ -1782,22 +1715,6 @@
     ]
   },
   {
-    "type": "uint",
-    "name": "IMAGE_SECTION_CHARACTERISTICS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "IMAGE_SCN_",
-      "header": "winnt.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "IMAGE_SECTION_HEADER",
-        "field": "Characteristics"
-      }
-    ]
-  },
-  {
     "type": "ushort",
     "name": "IMAGE_FILE_MACHINE",
     "autoPopulate": {
@@ -1850,45 +1767,6 @@
       {
         "struct": "IMAGE_FILE_HEADER",
         "field": "Machine"
-      }
-    ]
-  },
-  {
-    "name": "IMAGE_SUBSYSTEM",
-    "type": "ushort",
-    "autoPopulate": {
-      "filter": "IMAGE_SUBSYSTEM_",
-      "header": "winnt.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "IMAGE_OPTIONAL_HEADER32",
-        "field": "Subsystem"
-      },
-      {
-        "struct": "IMAGE_OPTIONAL_HEADER64",
-        "field": "Subsystem"
-      }
-    ]
-  },
-  {
-    "name": "IMAGE_DLL_CHARACTERISTICS",
-    "type": "ushort",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "IMAGE_DLLCHARACTERISTICS_",
-      "header": "winnt.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "IMAGE_OPTIONAL_HEADER32",
-        "field": "DllCharacteristics"
-      },
-      {
-        "struct": "IMAGE_OPTIONAL_HEADER64",
-        "field": "DllCharacteristics"
       }
     ]
   },
@@ -2075,17 +1953,6 @@
         "value": "(int)WIN32_ERROR.ERROR_NOT_ENOUGH_QUOTA"
       }
     ],
-    "uses": []
-  },
-  {
-    "namespace": "Windows.Win32.System.Diagnostics.Debug",
-    "type": "uint",
-    "name": "FACILITY_CODE",
-    "autoPopulate": {
-      "filter": "FACILITY_",
-      "header": "winerror.h"
-    },
-    "members": [],
     "uses": []
   },
   {
@@ -3186,49 +3053,10 @@
     "name": "SETUP_FILE_OPERATION",
     "members": [
       {
-        "name": "FILEOP_DELETE"
-      },
-      {
-        "name": "FILEOP_COPY"
-      },
-      {
         "name": "FILEOP_COPY."
       }
     ],
-    "uses": [
-      {
-        "method": "SetupRemoveSectionFromDiskSpaceListW",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupRemoveFromDiskSpaceListA",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupAddSectionToDiskSpaceListA",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupAddSectionToDiskSpaceListW",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupRemoveSectionFromDiskSpaceListA",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupRemoveFromDiskSpaceListW",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupAddToDiskSpaceListW",
-        "parameter": "Operation"
-      },
-      {
-        "method": "SetupAddToDiskSpaceListA",
-        "parameter": "Operation"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "WORKER_THREAD_FLAGS",
@@ -3292,26 +3120,6 @@
       },
       {
         "method": "CreateNtmsMediaW",
-        "parameter": "dwOptions"
-      }
-    ]
-  },
-  {
-    "name": "NET_REQUEST_PROVISION_OPTIONS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NETSETUP_PROVISION_ONLINE_CALLER",
-        "value": "1073741824"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetRequestProvisioningPackageInstall",
-        "parameter": "dwProvisionOptions"
-      },
-      {
-        "method": "NetRequestOfflineDomainJoin",
         "parameter": "dwOptions"
       }
     ]
@@ -3628,20 +3436,7 @@
   {
     "addUsesTo": "RGN_COMBINE_MODE",
     "members": [],
-    "uses": [
-      {
-        "method": "CombineRgn",
-        "parameter": "iMode"
-      },
-      {
-        "method": "ExtSelectClipRgn",
-        "parameter": "mode"
-      },
-      {
-        "method": "SelectClipPath",
-        "parameter": "mode"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "UNMAP_VIEW_OF_FILE_FLAGS",
@@ -3694,86 +3489,6 @@
         }
       ]
     },
-  {
-    "name": "NET_JOIN_DOMAIN_JOIN_OPTIONS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NETSETUP_JOIN_DOMAIN",
-        "value": "1"
-      },
-      {
-        "name": "NETSETUP_ACCT_CREATE",
-        "value": "2"
-      },
-      {
-        "name": "NETSETUP_WIN9X_UPGRADE",
-        "value": "16"
-      },
-      {
-        "name": "NETSETUP_DOMAIN_JOIN_IF_JOINED",
-        "value": "32"
-      },
-      {
-        "name": "NETSETUP_JOIN_UNSECURE",
-        "value": "64"
-      },
-      {
-        "name": "NETSETUP_MACHINE_PWD_PASSED",
-        "value": "128"
-      },
-      {
-        "name": "NETSETUP_DEFER_SPN_SET",
-        "value": "256"
-      },
-      {
-        "name": "NETSETUP_JOIN_DC_ACCOUNT",
-        "value": "512"
-      },
-      {
-        "name": "NETSETUP_JOIN_WITH_NEW_NAME",
-        "value": "1024"
-      },
-      {
-        "name": "NETSETUP_JOIN_READONLY",
-        "value": "2048"
-      },
-      {
-        "name": "NETSETUP_AMBIGUOUS_DC",
-        "value": "4096"
-      },
-      {
-        "name": "NETSETUP_NO_NETLOGON_CACHE",
-        "value": "8192"
-      },
-      {
-        "name": "NETSETUP_DONT_CONTROL_SERVICES",
-        "value": "16384"
-      },
-      {
-        "name": "NETSETUP_SET_MACHINE_NAME",
-        "value": "32768"
-      },
-      {
-        "name": "NETSETUP_FORCE_SPN_SET",
-        "value": "65536"
-      },
-      {
-        "name": "NETSETUP_NO_ACCT_REUSE",
-        "value": "131072"
-      },
-      {
-        "name": "NETSETUP_IGNORE_UNSUPPORTED_FLAGS",
-        "value": "268435456"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetJoinDomain",
-        "parameter": "fJoinOptions"
-      }
-    ]
-  },
   {
     "name": "SERVICE_ERROR",
     "members": [
@@ -4348,28 +4063,9 @@
         "parameter": "dwDrawAspect"
       },
       {
-        "interface": "ITextServices",
-        "method": "TxQueryHitPoint",
-        "parameter": "dwDrawAspect"
-      },
-      {
-        "interface": "ITextServices",
-        "method": "TxDraw",
-        "parameter": "dwDrawAspect"
-      },
-      {
-        "interface": "ITextServices",
-        "method": "OnTxSetCursor",
-        "parameter": "dwDrawAspect"
-      },
-      {
         "interface": "IViewObjectEx",
         "method": "GetNaturalExtent",
         "parameter": "dwAspect"
-      },
-      {
-        "struct": "REPASTESPECIAL",
-        "field": "dwAspect"
       }
     ]
   },
@@ -6993,27 +6689,8 @@
   },
   {
     "name": "OEM_SOURCE_MEDIA_TYPE",
-    "members": [
-      {
-        "name": "SPOST_NONE"
-      },
-      {
-        "name": "SPOST_PATH"
-      },
-      {
-        "name": "SPOST_URL"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetupCopyOEMInfW",
-        "parameter": "OEMSourceMediaType"
-      },
-      {
-        "method": "SetupCopyOEMInfA",
-        "parameter": "OEMSourceMediaType"
-      }
-    ]
+    "members": [],
+    "uses": []
   },
   {
     "name": "REG_NOTIFY_FILTER",
@@ -8589,32 +8266,8 @@
   },
   {
     "name": "SETUP_DI_DRIVER_TYPE",
-    "members": [
-      {
-        "name": "SPDIT_CLASSDRIVER"
-      },
-      {
-        "name": "SPDIT_COMPATDRIVER"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetupDiBuildDriverInfoList",
-        "parameter": "DriverType"
-      },
-      {
-        "method": "SetupDiEnumDriverInfoA",
-        "parameter": "DriverType"
-      },
-      {
-        "method": "SetupDiEnumDriverInfoW",
-        "parameter": "DriverType"
-      },
-      {
-        "method": "SetupDiDestroyDriverInfoList",
-        "parameter": "DriverType"
-      }
-    ]
+    "members": [],
+    "uses": []
   },
   {
     "name": "HANDLE_FLAGS",
@@ -8951,158 +8604,6 @@
     ]
   },
   {
-    "name": "NET_SERVER_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "SV_TYPE_WORKSTATION",
-        "value": "1"
-      },
-      {
-        "name": "SV_TYPE_SERVER",
-        "value": "2"
-      },
-      {
-        "name": "SV_TYPE_SQLSERVER",
-        "value": "4"
-      },
-      {
-        "name": "SV_TYPE_DOMAIN_CTRL",
-        "value": "8"
-      },
-      {
-        "name": "SV_TYPE_DOMAIN_BAKCTRL",
-        "value": "16"
-      },
-      {
-        "name": "SV_TYPE_TIME_SOURCE",
-        "value": "32"
-      },
-      {
-        "name": "SV_TYPE_AFP",
-        "value": "64"
-      },
-      {
-        "name": "SV_TYPE_NOVELL",
-        "value": "128"
-      },
-      {
-        "name": "SV_TYPE_DOMAIN_MEMBER",
-        "value": "256"
-      },
-      {
-        "name": "SV_TYPE_PRINTQ_SERVER",
-        "value": "512"
-      },
-      {
-        "name": "SV_TYPE_DIALIN_SERVER",
-        "value": "1024"
-      },
-      {
-        "name": "SV_TYPE_XENIX_SERVER",
-        "value": "2048"
-      },
-      {
-        "name": "SV_TYPE_SERVER_UNIX",
-        "value": "2048"
-      },
-      {
-        "name": "SV_TYPE_NT",
-        "value": "4096"
-      },
-      {
-        "name": "SV_TYPE_WFW",
-        "value": "8192"
-      },
-      {
-        "name": "SV_TYPE_SERVER_MFPN",
-        "value": "16384"
-      },
-      {
-        "name": "SV_TYPE_SERVER_NT",
-        "value": "32768"
-      },
-      {
-        "name": "SV_TYPE_POTENTIAL_BROWSER",
-        "value": "65536"
-      },
-      {
-        "name": "SV_TYPE_BACKUP_BROWSER",
-        "value": "131072"
-      },
-      {
-        "name": "SV_TYPE_MASTER_BROWSER",
-        "value": "262144"
-      },
-      {
-        "name": "SV_TYPE_DOMAIN_MASTER",
-        "value": "524288"
-      },
-      {
-        "name": "SV_TYPE_SERVER_OSF",
-        "value": "1048576"
-      },
-      {
-        "name": "SV_TYPE_SERVER_VMS",
-        "value": "2097152"
-      },
-      {
-        "name": "SV_TYPE_WINDOWS",
-        "value": "4194304"
-      },
-      {
-        "name": "SV_TYPE_DFS",
-        "value": "8388608"
-      },
-      {
-        "name": "SV_TYPE_CLUSTER_NT",
-        "value": "16777216"
-      },
-      {
-        "name": "SV_TYPE_TERMINALSERVER",
-        "value": "33554432"
-      },
-      {
-        "name": "SV_TYPE_CLUSTER_VS_NT",
-        "value": "67108864"
-      },
-      {
-        "name": "SV_TYPE_DCE",
-        "value": "268435456"
-      },
-      {
-        "name": "SV_TYPE_ALTERNATE_XPORT",
-        "value": "536870912"
-      },
-      {
-        "name": "SV_TYPE_LOCAL_LIST_ONLY",
-        "value": "1073741824"
-      },
-      {
-        "name": "SV_TYPE_DOMAIN_ENUM",
-        "value": "2147483648"
-      },
-      {
-        "name": "SV_TYPE_ALL",
-        "value": "4294967295"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetServerEnum",
-        "parameter": "servertype"
-      },
-      {
-        "struct": "SERVER_INFO_102",
-        "field": "sv102_type"
-      },
-      {
-        "struct": "SERVER_INFO_101",
-        "field": "sv101_type"
-      }
-    ]
-  },
-  {
     "addUsesTo": "tomConstants",
     "members": [],
     "uses": [
@@ -9120,33 +8621,6 @@
       {
         "method": "GetProductInfo",
         "parameter": "pdwReturnedProductType"
-      }
-    ]
-  },
-  {
-    "name": "NET_USER_ENUM_FILTER_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "FILTER_TEMP_DUPLICATE_ACCOUNT"
-      },
-      {
-        "name": "FILTER_NORMAL_ACCOUNT"
-      },
-      {
-        "name": "FILTER_INTERDOMAIN_TRUST_ACCOUNT"
-      },
-      {
-        "name": "FILTER_WORKSTATION_TRUST_ACCOUNT"
-      },
-      {
-        "name": "FILTER_SERVER_TRUST_ACCOUNT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetUserEnum",
-        "parameter": "filter"
       }
     ]
   },
@@ -9399,42 +8873,6 @@
       {
         "method": "SetNtmsUIOptionsA",
         "parameter": "dwOperation"
-      }
-    ]
-  },
-  {
-    "name": "NETSETUP_PROVISION",
-    "flags": true,
-    "members": [
-      {
-        "name": "NETSETUP_PROVISION_DOWNLEVEL_PRIV_SUPPORT",
-        "value": "1"
-      },
-      {
-        "name": "NETSETUP_PROVISION_REUSE_ACCOUNT",
-        "value": "2"
-      },
-      {
-        "name": "NETSETUP_PROVISION_USE_DEFAULT_PASSWORD",
-        "value": "4"
-      },
-      {
-        "name": "NETSETUP_PROVISION_SKIP_ACCOUNT_SEARCH",
-        "value": "8"
-      },
-      {
-        "name": "NETSETUP_PROVISION_ROOT_CA_CERTS",
-        "value": "16"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetProvisionComputerAccount",
-        "parameter": "dwOptions"
-      },
-      {
-        "struct": "NETSETUP_PROVISIONING_PARAMS",
-        "field": "dwProvisionOptions"
       }
     ]
   },
@@ -9836,99 +9274,6 @@
         }
       ]
     },
-  {
-    "name": "USER_ACCOUNT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "UF_SCRIPT"
-      },
-      {
-        "name": "UF_ACCOUNTDISABLE"
-      },
-      {
-        "name": "UF_HOMEDIR_REQUIRED"
-      },
-      {
-        "name": "UF_PASSWD_NOTREQD"
-      },
-      {
-        "name": "UF_PASSWD_CANT_CHANGE"
-      },
-      {
-        "name": "UF_LOCKOUT"
-      },
-      {
-        "name": "UF_DONT_EXPIRE_PASSWD"
-      },
-      {
-        "name": "UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED"
-      },
-      {
-        "name": "UF_NOT_DELEGATED"
-      },
-      {
-        "name": "UF_SMARTCARD_REQUIRED"
-      },
-      {
-        "name": "UF_USE_DES_KEY_ONLY"
-      },
-      {
-        "name": "UF_DONT_REQUIRE_PREAUTH"
-      },
-      {
-        "name": "UF_TRUSTED_FOR_DELEGATION"
-      },
-      {
-        "name": "UF_PASSWORD_EXPIRED"
-      },
-      {
-        "name": "UF_TRUSTED_TO_AUTHENTICATE_FOR_DELEGATION"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USER_INFO_4",
-        "field": "usri4_flags"
-      },
-      {
-        "struct": "USER_INFO_1008",
-        "field": "usri1008_flags"
-      },
-      {
-        "struct": "USER_INFO_2",
-        "field": "usri2_flags"
-      },
-      {
-        "struct": "USER_INFO_3",
-        "field": "usri3_flags"
-      },
-      {
-        "struct": "USER_INFO_22",
-        "field": "usri22_flags"
-      },
-      {
-        "struct": "USER_INFO_20",
-        "field": "usri20_flags"
-      },
-      {
-        "struct": "USER_INFO_23",
-        "field": "usri23_flags"
-      },
-      {
-        "struct": "USER_INFO_1",
-        "field": "usri1_flags"
-      },
-      {
-        "struct": "NET_DISPLAY_USER",
-        "field": "usri1_flags"
-      },
-      {
-        "struct": "NET_DISPLAY_MACHINE",
-        "field": "usri2_flags"
-      }
-    ]
-  },
   {
     "name": "SERVICE_RUNS_IN_PROCESS",
     "members": [
@@ -10533,50 +9878,6 @@
     ]
   },
   {
-    "name": "AF_OP",
-    "flags": true,
-    "members": [
-      {
-        "name": "AF_OP_PRINT"
-      },
-      {
-        "name": "AF_OP_COMM"
-      },
-      {
-        "name": "AF_OP_SERVER"
-      },
-      {
-        "name": "AF_OP_ACCOUNTS"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USER_INFO_1010",
-        "field": "usri1010_auth_flags"
-      },
-      {
-        "struct": "USER_INFO_22",
-        "field": "usri22_auth_flags"
-      },
-      {
-        "struct": "USER_INFO_3",
-        "field": "usri3_auth_flags"
-      },
-      {
-        "struct": "USER_INFO_11",
-        "field": "usri11_auth_flags"
-      },
-      {
-        "struct": "USER_INFO_4",
-        "field": "usri4_auth_flags"
-      },
-      {
-        "struct": "USER_INFO_2",
-        "field": "usri2_auth_flags"
-      }
-    ]
-  },
-  {
     "name": "SHARE_INFO_PERMISSIONS",
     "members": [
       {
@@ -10649,27 +9950,6 @@
       {
         "struct": "KERB_ADD_BINDING_CACHE_ENTRY_EX_REQUEST",
         "field": "AddressType"
-      }
-    ]
-  },
-  {
-    "name": "SERVER_INFO_SECURITY",
-    "members": [
-      {
-        "name": "SV_SHARESECURITY"
-      },
-      {
-        "name": "SV_USERSECURITY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SERVER_INFO_402",
-        "field": "sv402_security"
-      },
-      {
-        "struct": "SERVER_INFO_403",
-        "field": "sv403_security"
       }
     ]
   },
@@ -10827,50 +10107,6 @@
       {
         "struct": "SYMBOL_INFOW",
         "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "USER_PRIV",
-    "members": [
-      {
-        "name": "USER_PRIV_GUEST"
-      },
-      {
-        "name": "USER_PRIV_USER"
-      },
-      {
-        "name": "USER_PRIV_ADMIN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USER_INFO_1",
-        "field": "usri1_priv"
-      },
-      {
-        "struct": "USER_INFO_2",
-        "field": "usri2_priv"
-      },
-      {
-        "struct": "USER_INFO_4",
-        "field": "usri4_priv"
-      },
-      {
-        "struct": "USER_INFO_22",
-        "field": "usri22_priv"
-      },
-      {
-        "struct": "USER_INFO_1005",
-        "field": "usri1005_priv"
-      },
-      {
-        "struct": "USER_INFO_11",
-        "field": "usri11_priv"
-      },
-      {
-        "struct": "USER_INFO_3",
-        "field": "usri3_priv"
       }
     ]
   },
@@ -11472,35 +10708,8 @@
     ]
   },
   {
-    "name": "FWPM_SUBSCRIPTION_FLAGS",
-    "members": [
-      {
-        "name": "FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_ADD"
-      },
-      {
-        "name": "FWPM_SUBSCRIPTION_FLAG_NOTIFY_ON_DELETE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "FWPM_PROVIDER_CONTEXT_SUBSCRIPTION0",
-        "field": "flags"
-      },
-      {
-        "struct": "FWPM_SUBLAYER_SUBSCRIPTION0",
-        "field": "flags"
-      }
-    ]
-  },
-  {
     "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT",
     "members": [
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_BLOB"
-      },
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_FILE"
-      },
       {
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT_NONE",
         "value": "0"
@@ -11644,28 +10853,6 @@
         }
       ]
     },
-  {
-    "name": "SERVER_INFO_HIDDEN",
-    "type": "int",
-    "members": [
-      {
-        "name": "SV_VISIBLE"
-      },
-      {
-        "name": "SV_HIDDEN"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SERVER_INFO_1016",
-        "field": "sv1016_hidden"
-      },
-      {
-        "struct": "SERVER_INFO_102",
-        "field": "sv102_hidden"
-      }
-    ]
-  },
   {
     "name": "TIMECODE_SAMPLE_FLAGS",
     "flags": true,
@@ -11847,15 +11034,6 @@
   {
     "name": "CRYPTUI_WIZ_DIGITAL_SIGN",
     "members": [
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_CERT"
-      },
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_STORE"
-      },
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_PVK"
-      },
       {
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_NONE",
         "value": "0"
@@ -12141,29 +11319,6 @@
       ]
     },
   {
-    "name": "USER_MODALS_ROLES",
-    "members": [
-      {
-        "name": "UAS_ROLE_STANDALONE"
-      },
-      {
-        "name": "UAS_ROLE_MEMBER"
-      },
-      {
-        "name": "UAS_ROLE_BACKUP"
-      },
-      {
-        "name": "UAS_ROLE_PRIMARY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USER_MODALS_INFO_1006",
-        "field": "usrmod1006_role"
-      }
-    ]
-  },
-  {
       "addUsesTo": "MODEMDEVCAPS_SPEAKER_VOLUME",
       "uses": [
         {
@@ -12213,20 +11368,7 @@
   {
     "name": "CRYPT_XML_TRANSFORM_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "CRYPT_XML_TRANSFORM_ON_STREAM",
-        "value": "1"
-      },
-      {
-        "name": "CRYPT_XML_TRANSFORM_ON_NODESET",
-        "value": "2"
-      },
-      {
-        "name": "CRYPT_XML_TRANSFORM_URI_QUERY_STRING",
-        "value": "3"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "struct": "CRYPT_XML_TRANSFORM_INFO",
@@ -13057,42 +12199,6 @@
     ]
   },
   {
-    "name": "FWPM_FILTER_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "FWPM_FILTER_FLAG_NONE"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_PERSISTENT"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_BOOTTIME"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_HAS_PROVIDER_CONTEXT"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_CLEAR_ACTION_RIGHT"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_PERMIT_IF_CALLOUT_UNREGISTERED"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_DISABLED"
-      },
-      {
-        "name": "FWPM_FILTER_FLAG_INDEXED"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "FWPM_FILTER0",
-        "field": "flags"
-      }
-    ]
-  },
-  {
       "addUsesTo": "DEV_BROADCAST_VOLUME_FLAGS",
       "uses": [
         {
@@ -13163,12 +12269,6 @@
   {
     "name": "CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE",
     "members": [
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN"
-      },
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_CHAIN_NO_ROOT"
-      },
       {
         "name": "CRYPTUI_WIZ_DIGITAL_SIGN_ADD_NONE",
         "value": "0"
@@ -13310,75 +12410,6 @@
       {
         "struct": "TRUSTED_DOMAIN_INFORMATION_EX",
         "field": "TrustAttributes"
-      }
-    ]
-  },
-  {
-    "name": "DXC_CP",
-    "flags": false,
-    "autoPopulate": {
-      "filter": "DXC_CP_",
-      "header": "dxcapi.h"
-    },
-    "members": [
-      {
-        "name": "DXC_CP_ACP",
-        "value": "0"
-      },
-      {
-        "name": "DXC_CP_UTF16",
-        "value": "1200"
-      },
-      {
-        "name": "DXC_CP_UTF8",
-        "value": "65001"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IDxcBlobEncoding",
-        "method": "GetEncoding",
-        "parameter": "pCodePage"
-      },
-      {
-        "interface": "IDxcLibrary",
-        "method": "CreateBlobFromFile",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcLibrary",
-        "method": "CreateBlobWithEncodingFromPinned",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcLibrary",
-        "method": "CreateBlobWithEncodingOnHeapCopy",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcLibrary",
-        "method": "CreateBlobWithEncodingOnMalloc",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcUtils",
-        "method": "CreateBlobFromPinned",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcUtils",
-        "method": "MoveToBlob",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcUtils",
-        "method": "CreateBlob",
-        "parameter": "codePage"
-      },
-      {
-        "interface": "IDxcUtils",
-        "method": "LoadFile",
-        "parameter": "pCodePage"
       }
     ]
   },
@@ -17362,16 +16393,6 @@
   {
     "namespace": "Windows.Win32.Graphics.Dxgi",
     "type": "uint",
-    "name": "DXGI_SHARED_RESOURCE_RW",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_SHARED_RESOURCE_",
-      "header": "dxgi1_2.h"
-    }
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
     "name": "DXGI_CREATE_FACTORY_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -18189,56 +17210,6 @@
     ]
   },
   {
-    "name": "INF_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "INF_STYLE_",
-      "header": "SetupAPI.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "SetupGetInfFileListA",
-        "parameter": "InfStyle"
-      },
-      {
-        "method": "SetupGetInfFileListW",
-        "parameter": "InfStyle"
-      },
-      {
-        "method": "SetupOpenInfFileA",
-        "parameter": "InfStyle"
-      },
-      {
-        "method": "SetupOpenInfFileW",
-        "parameter": "InfStyle"
-      },
-      {
-        "struct": "SP_INF_INFORMATION",
-        "field": "InfStyle"
-      }
-    ]
-  },
-  {
-    "name": "SETUPSCANFILEQUEUE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SPQ_SCAN_",
-      "header": "SetupAPI.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "SetupScanFileQueueA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupScanFileQueueW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.Security.Cryptography",
     "name": "ALG_ID",
     "members": [
@@ -18549,32 +17520,6 @@
     ]
   },
   {
-    "name": "SPSVCINST_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SPSVCINST_",
-      "header": "SetupAPI.h"
-    },
-    "uses": [
-      {
-        "method": "SetupInstallServicesFromInfSectionA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupInstallServicesFromInfSectionW",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupInstallServicesFromInfSectionExA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupInstallServicesFromInfSectionExW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
     "namespace": "Windows.Win32.NetworkManagement.WiFi",
     "name": "DEVPROP_PCIDEVICE_SUPPORTEDSPEEDSANDMODE",
     "autoPopulate": {
@@ -18664,220 +17609,32 @@
     ]
   },
   {
-    "name": "SETUP_DI_REGISTRY_PROPERTY",
-    "autoPopulate": {
-      "filter": "SPDRP_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "method": "SetupDiGetDeviceRegistryPropertyA",
-        "parameter": "Property"
-      },
-      {
-        "method": "SetupDiGetDeviceRegistryPropertyW",
-        "parameter": "Property"
-      },
-      {
-        "method": "SetupDiSetDeviceRegistryPropertyA",
-        "parameter": "Property"
-      },
-      {
-        "method": "SetupDiSetDeviceRegistryPropertyW",
-        "parameter": "Property"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_DEVICE_CREATION_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DICD_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "method": "SetupDiCreateDeviceInfoA",
-        "parameter": "CreationFlags"
-      },
-      {
-        "method": "SetupDiCreateDeviceInfoW",
-        "parameter": "CreationFlags"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_DRIVER_INSTALL_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DNF_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_DRVINSTALL_PARAMS",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_STATE_CHANGE",
-    "autoPopulate": {
-      "filter": "DICS_(?!FLAG)",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_PROPCHANGE_PARAMS",
-        "field": "StateChange"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_PROPERTY_CHANGE_SCOPE",
-    "autoPopulate": {
-      "filter": "DICS_FLAG_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_PROPCHANGE_PARAMS",
-        "field": "Scope"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_REMOVE_DEVICE_SCOPE",
-    "autoPopulate": {
-      "filter": "DI_REMOVEDEVICE_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_REMOVEDEVICE_PARAMS",
-        "field": "Scope"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_GET_CLASS_DEVS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DIGCF_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "method": "SetupDiGetClassDevsA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupDiGetClassDevsW",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupDiGetClassDevsExA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SetupDiGetClassDevsExW",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "DI_FUNCTION",
-    "autoPopulate": {
-      "filter": "DIF_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "method": "SetupDiCallClassInstaller",
-        "parameter": "InstallFunction"
-      },
-      {
-        "struct": "SP_CLASSINSTALL_HEADER",
-        "field": "InstallFunction"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DI_(?!FLAGSEX)",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_DEVINSTALL_PARAMS_A",
-        "field": "Flags"
-      },
-      {
-        "struct": "SP_DEVINSTALL_PARAMS_W",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "SETUP_DI_DEVICE_INSTALL_FLAGS_EX",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DI_FLAGSEX_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "struct": "SP_DEVINSTALL_PARAMS_A",
-        "field": "FlagsEx"
-      },
-      {
-        "struct": "SP_DEVINSTALL_PARAMS_W",
-        "field": "FlagsEx"
-      }
-    ]
-  },
-  {
-    "name": "FILE_COMPRESSION_TYPE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "FILE_COMPRESSION_",
-      "header": "setupapi.h"
-    },
-    "uses": [
-      {
-        "method": "SetupGetFileCompressionInfoA",
-        "parameter": "CompressionType"
-      },
-      {
-        "method": "SetupGetFileCompressionInfoW",
-        "parameter": "CompressionType"
-      },
-      {
-        "method": "SetupGetFileCompressionInfoExA",
-        "parameter": "CompressionType"
-      },
-      {
-        "method": "SetupGetFileCompressionInfoExW",
-        "parameter": "CompressionType"
-      },
-      {
-        "method": "SetupDecompressOrCopyFileA",
-        "parameter": "CompressionType"
-      },
-      {
-        "method": "SetupDecompressOrCopyFileW",
-        "parameter": "CompressionType"
-      }
-    ]
-  },
-  {
     "addUsesTo": "COPYPROGRESSROUTINE_PROGRESS",
     "uses": [
       {
         "method": "LPPROGRESS_ROUTINE",
         "parameter": "return"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "SP_COPY_STYLE",
+    "uses": [
+      {
+        "struct": "sp_file_copy_params_a",
+        "field": "CopyStyle"
+      },
+      {
+        "struct": "sp_file_copy_params_w",
+        "field": "CopyStyle"
+      },
+      {
+        "struct": "filepaths_w",
+        "field": "Flags"
+      },
+      {
+        "struct": "filepaths_a",
+        "field": "Flags"
       }
     ]
   }

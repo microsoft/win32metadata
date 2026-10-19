@@ -1,0 +1,188 @@
+--- a/um/axcore.idl
++++ b/um/axcore.idl
+@@ -10,6 +10,7 @@
+ 
+ // include unknwn.idl and objidl.idl first
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -163,6 +164,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IPin, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -292,6 +294,7 @@
+                 [in] REFERENCE_TIME tStop,
+                 [in] double dRate);
+ }
++_Win32_AnnotateMethod_(IPin::QueryAccept, _Win32_PreserveResult_)
+ 
+ typedef IPin *PPIN;
+ 
+@@ -304,6 +307,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IEnumPins, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -327,6 +331,7 @@
+         [out AM_ANNOTATION("_Out_")] IEnumPins **ppEnum
+     );
+ }
++_Win32_AnnotateMethod_(IEnumPins::Next, _Win32_PreserveResult_)
+ 
+ typedef IEnumPins *PENUMPINS;
+ 
+@@ -339,6 +344,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IEnumMediaTypes, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -367,6 +373,7 @@
+         [out AM_ANNOTATION("_Out_")] IEnumMediaTypes **ppEnum
+     );
+ }
++_Win32_AnnotateMethod_(IEnumMediaTypes::Next, _Win32_PreserveResult_)
+ 
+ typedef IEnumMediaTypes *PENUMMEDIATYPES;
+ 
+@@ -381,6 +388,7 @@
+ //========================================================================
+ //========================================================================
+ 
++_Win32_AnnotateInterface_(IFilterGraph, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -491,6 +499,7 @@
+ //==========================================================================
+ //==========================================================================
+ 
++_Win32_AnnotateInterface_(IEnumFilters, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -518,6 +527,7 @@
+         ( [out AM_ANNOTATION("_Out_")] IEnumFilters **ppEnum
+         );
+ }
++_Win32_AnnotateMethod_(IEnumFilters::Next, _Win32_PreserveResult_)
+ 
+ typedef IEnumFilters *PENUMFILTERS;
+ 
+@@ -537,6 +547,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMediaFilter, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -639,6 +650,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IBaseFilter, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -708,6 +720,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IReferenceClock, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -750,6 +763,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IReferenceClockTimerControl, _Win32_SupportedOS_WindowsVista_)
+ [
+         local,
+         object,
+@@ -798,6 +812,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMediaSample, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -871,6 +886,9 @@
+         [in, annotation("_In_opt_")] LONGLONG * pTimeEnd
+     );
+ }
++_Win32_AnnotateMethod_(IMediaSample::IsSyncPoint, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IMediaSample::IsPreroll, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IMediaSample::IsDiscontinuity, _Win32_PreserveResult_)
+ 
+ typedef IMediaSample *PMEDIASAMPLE;
+ 
+@@ -930,6 +948,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMediaSample2, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -989,6 +1008,7 @@
+ 
+ typedef IMediaSample2 *PMEDIASAMPLE2;
+ 
++_Win32_AnnotateInterface_(IMediaSample2Config, _Win32_SupportedOS_WindowsVista_)
+ [
+         object,
+         uuid(68961E68-832B-41ea-BC91-63593F3E70E3),
+@@ -1036,6 +1056,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMemAllocator, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -1100,6 +1121,7 @@
+ //
+ //=====================================================================
+ //=====================================================================
++_Win32_AnnotateInterface_(IMemAllocatorCallbackTemp, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -1123,6 +1145,7 @@
+ //
+ //=====================================================================
+ //=====================================================================
++_Win32_AnnotateInterface_(IMemAllocatorNotifyCallbackTemp, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -1147,6 +1170,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMemInputPin, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -1266,6 +1290,7 @@
+                                             // count segment ends
+ } AM_SEEKING_SEEKING_CAPABILITIES;
+ 
++_Win32_AnnotateInterface_(IMediaSeeking, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,

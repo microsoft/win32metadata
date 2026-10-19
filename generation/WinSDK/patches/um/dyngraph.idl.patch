@@ -1,0 +1,57 @@
+--- a/um/dyngraph.idl
++++ b/um/dyngraph.idl
+@@ -7,6 +7,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -22,6 +23,7 @@
+ //  IPinConnection - supported by input pins
+ //
+ //--------------------------------------------------------------------
++_Win32_AnnotateInterface_(IPinConnection, _Win32_SupportedOS_WindowsXP_)
+ [
+         local,
+         object,
+@@ -42,12 +44,14 @@
+ 
+     HRESULT DynamicDisconnect();
+ };
++_Win32_AnnotateMethod_(IPinConnection::IsEndPin, _Win32_PreserveResult_)
+ 
+ //--------------------------------------------------------------------
+ //
+ //  IPinFlowControl - supported by output pins
+ //
+ //--------------------------------------------------------------------
++_Win32_AnnotateInterface_(IPinFlowControl, _Win32_SupportedOS_WindowsXP_)
+ [
+         local,
+         object,
+@@ -88,6 +92,7 @@
+ //
+ //--------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IGraphConfig, _Win32_SupportedOS_WindowsXP_)
+ [
+         local,
+         object,
+@@ -133,6 +138,7 @@
+ //
+ //--------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IGraphConfigCallback, _Win32_SupportedOS_WindowsXP_)
+ [
+         local,
+         object,
+@@ -304,6 +310,7 @@
+ // information on interpreting HRESULTs.
+ // 
+ // 
++_Win32_AnnotateInterface_(IFilterChain, _Win32_SupportedOS_WindowsXP_)
+ [
+     local,
+     object,

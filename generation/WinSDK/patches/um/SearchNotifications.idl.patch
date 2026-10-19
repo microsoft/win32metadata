@@ -1,0 +1,34 @@
+--- a/um/SearchNotifications.idl
++++ b/um/SearchNotifications.idl
+@@ -11,6 +11,7 @@
+ //-----------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -69,6 +70,7 @@
+ //                            to alert the indexer that an item needs to be
+ //                            updated
+ //
++_Win32_AnnotateInterface_(ISearchItemsChangedSink, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF58),
+@@ -140,6 +142,7 @@
+ //                                      to alert the indexer that an item needs
+ //                                      to be updated
+ //
++_Win32_AnnotateInterface_(ISearchPersistentItemsChangedSink, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(A2FFDF9B-4758-4F84-B729-DF81A1A0612F),
+@@ -206,6 +209,7 @@
+ //
+ // ISearchViewChangedSink
+ //
++_Win32_AnnotateInterface_(ISearchViewChangedSink, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF65),

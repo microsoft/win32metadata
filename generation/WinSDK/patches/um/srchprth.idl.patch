@@ -1,0 +1,34 @@
+--- a/um/srchprth.idl
++++ b/um/srchprth.idl
+@@ -20,6 +20,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -115,6 +116,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(ISearchProtocol, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -154,6 +156,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(ISearchProtocol2, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -184,6 +187,7 @@
+ //  History:    02/18/00    mcheng      Created
+ //
+ //+----------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IProtocolHandlerSite, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,

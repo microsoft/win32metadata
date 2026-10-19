@@ -1,0 +1,34 @@
+--- a/um/SearchQuery.idl
++++ b/um/SearchQuery.idl
+@@ -36,6 +36,7 @@
+ // 2) Expose AQS/NQS.
+ //
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -44,6 +45,7 @@
+ //**********************************************************************
+ // Query Helper
+ //**********************************************************************
++_Win32_AnnotateInterface_(ISearchQueryHelper, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF63),
+@@ -208,6 +210,7 @@
+ } PRIORITY_LEVEL;
+ 
+ 
++_Win32_AnnotateInterface_(IRowsetPrioritization, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42811652-079D-481B-87A2-09A69ECC5F44),
+@@ -248,6 +251,7 @@
+ } ROWSETEVENT_TYPE;
+ 
+ 
++_Win32_AnnotateInterface_(IRowsetEvents, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(1551AEA5-5D66-4B11-86F5-D5634CB211B9),

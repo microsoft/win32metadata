@@ -1,5 +1,3 @@
-diff --git a/um/shobjidl_core.idl b/um/shobjidl_core.idl
-index 3074ba74..6b1f9b6d 100644
 --- a/um/shobjidl_core.idl
 +++ b/um/shobjidl_core.idl
 @@ -3,6 +3,7 @@
@@ -10,7 +8,7 @@ index 3074ba74..6b1f9b6d 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -288,6 +289,7 @@ typedef struct CMINVOKECOMMANDINFOEX_REMOTE
+@@ -288,6 +289,7 @@
  cpp_quote("#include <poppack.h>")
  
  // IContextMenu
@@ -18,7 +16,7 @@ index 3074ba74..6b1f9b6d 100644
  [
  #ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
      local,
-@@ -340,10 +342,12 @@ interface IContextMenu : IUnknown
+@@ -340,10 +342,12 @@
          [in] UINT cchMax);
  #endif
  }
@@ -31,7 +29,7 @@ index 3074ba74..6b1f9b6d 100644
  [
  #ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
      local,
-@@ -371,6 +375,7 @@ interface IContextMenu2 : IContextMenu
+@@ -371,6 +375,7 @@
  typedef IContextMenu2 * LPCONTEXTMENU2;
  
  // IContextMenu3
@@ -39,7 +37,7 @@ index 3074ba74..6b1f9b6d 100644
  [
  #ifndef BUILD_ICONTEXTMENU_ISHELLEXTINIT_REMOTE_INTERFACE
      local,
-@@ -414,6 +419,7 @@ interface IStaticVerbProvider : IUnknown
+@@ -414,6 +419,7 @@
  };
  
  // IExecuteCommand
@@ -47,7 +45,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7F9185B0-CB92-43c5-80A9-92277A4F7B54),
      object,
-@@ -444,6 +450,7 @@ interface IExecuteCommand : IUnknown
+@@ -444,6 +450,7 @@
  }
  
  // IPersistFolder
@@ -55,7 +53,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(000214EA-0000-0000-C000-000000000046),  // IID_IPersistFolder
-@@ -485,6 +492,7 @@ cpp_quote("#define IRTIR_TASK_SUSPENDED     2")
+@@ -485,6 +492,7 @@
  cpp_quote("#define IRTIR_TASK_PENDING       3")
  cpp_quote("#define IRTIR_TASK_FINISHED      4")
  
@@ -63,7 +61,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(85788d00-6807-11d0-b810-00c04fd706ec), // IID_IRunnableTask
      object,
-@@ -532,6 +540,7 @@ cpp_quote("#define ITSS_THREAD_TIMEOUT_NO_CHANGE        (INFINITE - 1)  // no ch
+@@ -532,6 +540,7 @@
  // This interface is free-threaded (since queued tasks can
  // interact with the scheduler as well as the main execution
  // thread on which the task scheduler was created).
@@ -71,7 +69,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(6CCB7BE0-6807-11d0-B810-00C04FD706EC),
      object,
-@@ -578,6 +587,7 @@ interface IShellTaskScheduler : IUnknown
+@@ -578,6 +587,7 @@
  cpp_quote("#define SID_ShellTaskScheduler IID_IShellTaskScheduler")
  
  // IPersistFolder2
@@ -79,7 +77,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(1AC3D9F0-175C-11d1-95BE-00609797EA4F),  // IID_IPersistFolder2
-@@ -651,6 +661,7 @@ cpp_quote("#include <poppack.h>")
+@@ -651,6 +661,7 @@
  //             so the callee needs to initialize every member.  The callee allocates
  //             pidlTargetFolder and the caller will free it.  Filling in pidlTargetFolder is
  //             ALWAYS required.
@@ -87,7 +85,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(CEF04FDF-FE72-11d2-87A5-00C04F6837CF),  // IID_IPersistFolder3
-@@ -668,6 +679,7 @@ interface IPersistFolder3 : IPersistFolder2
+@@ -668,6 +679,7 @@
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -95,7 +93,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(1079acfc-29bd-11d3-8e0d-00c04f6837d5),  // IID_IPersistIDList
-@@ -683,6 +695,7 @@ interface IPersistIDList : IPersist
+@@ -683,6 +695,7 @@
  
  cpp_quote("#endif  // NTDDI_WINXP|| (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -103,7 +101,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214F2-0000-0000-C000-000000000046),
      object,
-@@ -705,9 +718,14 @@ interface IEnumIDList : IUnknown
+@@ -705,9 +718,14 @@
  
      HRESULT Clone([out] IEnumIDList **ppenum);
  }
@@ -118,7 +116,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d0191542-7954-4908-bc06-b2360bbe45ba),
      object,
-@@ -733,6 +751,7 @@ interface IEnumFullIDList : IUnknown
+@@ -733,6 +751,7 @@
  
      HRESULT Clone([out] IEnumFullIDList **ppenum);
  }
@@ -126,7 +124,47 @@ index 3074ba74..6b1f9b6d 100644
  
  // IShellFolder::GetDisplayNameOf/SetNameOf uFlags
  [v1_enum] enum _SHGDNF
-@@ -900,6 +919,7 @@ typedef [v1_enum] enum MERGE_UPDATE_STATUS
+@@ -841,6 +860,9 @@
+ 
+ typedef ULONG SFGAOF;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum SYNC_TRANSFER_STATUS
+ {
+     STS_NONE                   = 0x00000000,  // No sync activity
+@@ -856,6 +878,9 @@
+     STS_INCOMPLETE             = 0x00000200,  // The reported state may be missing states due to indexing delays
+     STS_PLACEHOLDER_IFEMPTY    = 0x00000400,  // If the folder is empty, treat it as a dehydrated item (placeholder)
+ } SYNC_TRANSFER_STATUS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SYNC_TRANSFER_STATUS)")
+ 
+@@ -870,6 +895,9 @@
+ 
+ // Specifies the states a placeholder file can have.
+ // Retrieve this value using PKEY_FilePlaceholderStatus (System.FilePlaceholderStatus)
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum PLACEHOLDER_STATES
+ {
+     PS_NONE                            = 0x00000000,
+@@ -883,6 +911,9 @@
+     // Bitmask for all valid status flags
+     PS_ALL                             = PS_MARKED_FOR_OFFLINE_AVAILABILITY | PS_FULL_PRIMARY_STREAM_AVAILABLE | PS_CREATE_FILE_ACCESSIBLE | PS_CLOUDFILE_PLACEHOLDER,
+ } PLACEHOLDER_STATES;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(PLACEHOLDER_STATES)")
+ 
+@@ -900,6 +931,7 @@
  } MERGE_UPDATE_STATUS;
  
  // Handlers that implement this interface must also register the component category value CATID_FilePlaceholderMergeHandler.
@@ -134,7 +172,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d97b5aac-c792-433c-975d-35c4eadc7a9d),
      object,
-@@ -1065,6 +1085,7 @@ typedef [v1_enum] enum FOLDER_ENUM_MODE
+@@ -1065,6 +1097,7 @@
      FEM_NAVIGATION    = 1, // alternate enumeration mode for navigating folder's content. default enumeration for a navigation pane, etc.
  } FOLDER_ENUM_MODE;
  
@@ -142,7 +180,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(6a9d9026-0e6e-464c-b000-42ecc07de673),
      object,
-@@ -1124,6 +1145,7 @@ cpp_quote("#define STR_STORAGEITEM_CREATION_FLAGS    L\"SHGETSTORAGEITEM\"")
+@@ -1124,6 +1157,7 @@
  
  interface IShellItem;
  
@@ -150,7 +188,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(67efed0e-e827-4408-b493-78f3982b685c),
-@@ -1156,6 +1178,7 @@ cpp_quote("#define STR_ITEM_CACHE_CONTEXT       L\"ItemCacheContext\"")
+@@ -1156,6 +1190,7 @@
  cpp_quote("#endif // NTDDI_VERSION >= NTDDI_WIN7")
  
  interface IShellFolder;
@@ -158,7 +196,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E6-0000-0000-C000-000000000046),
      object,
-@@ -1279,6 +1302,8 @@ midl_pragma warning (default: 2495)
+@@ -1279,6 +1314,8 @@
          [in] SHGDNF uFlags,
          [out] PITEMID_CHILD *ppidlOut);
  }
@@ -167,7 +205,7 @@ index 3074ba74..6b1f9b6d 100644
  typedef IShellFolder * LPSHELLFOLDER;
  
  
-@@ -1289,6 +1314,7 @@ typedef struct EXTRASEARCH
+@@ -1289,6 +1326,7 @@
      WCHAR   wszUrl[2084];
  } EXTRASEARCH, *LPEXTRASEARCH;
  
@@ -175,7 +213,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(0E700BE1-9DB6-11d1-A1CE-00C04FD75D13),
      object,
-@@ -1311,6 +1337,7 @@ typedef IEnumExtraSearch *LPENUMEXTRASEARCH;
+@@ -1311,6 +1349,7 @@
  
  // IShellFolder2::GetDefaultColumnState values
  
@@ -183,7 +221,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(93F2F68C-1D1B-11d3-A30E-00C04F79ABD1),
      object,
-@@ -1602,6 +1629,7 @@ cpp_quote("#endif //_NEVER_")
+@@ -1602,6 +1641,7 @@
  
  interface IShellBrowser;
  
@@ -191,7 +229,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E3-0000-0000-C000-000000000046),
      object,
-@@ -1640,13 +1668,15 @@ interface IShellView : IOleWindow
+@@ -1640,13 +1680,15 @@
          [in] SVSIF uFlags);
  
      HRESULT GetItemObject(
@@ -202,13 +240,14 @@ index 3074ba74..6b1f9b6d 100644
  
  typedef IShellView *LPSHELLVIEW;
  }
+-
 +_Win32_AnnotateMethod_(IShellView::TranslateAccelerator, _Win32_PreserveResult_)
- 
++
 +_Win32_AnnotateInterface_(IShellView2, _Win32_SupportedOS_Windows2000_)
  [
      uuid(88E39E80-3578-11CF-AE69-08002B2E1262),
      object,
-@@ -1700,6 +1730,7 @@ cpp_quote("#ifdef _FIX_ENABLEMODELESS_CONFLICT")
+@@ -1700,6 +1742,7 @@
  cpp_quote("#undef    EnableModeless ")
  cpp_quote("#endif")
  
@@ -216,7 +255,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(cde725b0-ccc9-4519-917e-325d72fab4ce),
      object,
-@@ -1723,12 +1754,12 @@ interface IFolderView : IUnknown
+@@ -1723,12 +1766,12 @@
  
      // get the count of items for selection, total, etc
      HRESULT ItemCount(
@@ -231,7 +270,7 @@ index 3074ba74..6b1f9b6d 100644
          [in] REFIID riid,
          [out, iid_is(riid)] void **ppv);
  
-@@ -1789,6 +1820,7 @@ cpp_quote("#if defined(__cplusplus)")
+@@ -1789,6 +1832,7 @@
  cpp_quote("#define DEPRECATED_HRESULT HRESULT DECLSPEC_DEPRECATED")
  cpp_quote("#endif")
  
@@ -239,7 +278,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(1af3a467-214f-4298-908e-06b03e0b39f9),
      object,
-@@ -1908,6 +1940,7 @@ interface IFolderView2 : IFolderView
+@@ -1908,6 +1952,7 @@
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
@@ -247,7 +286,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(ae8c987d-8797-4ed3-be72-2a47dd938db0),
      object
-@@ -1943,6 +1976,7 @@ interface IFolderViewSettings : IUnknown
+@@ -1943,6 +1988,7 @@
      HRESULT GetGroupSubsetCount([out] UINT *pcVisibleRows);
  }
  
@@ -255,7 +294,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(6e0f9881-42a8-4f2a-97f8-8af4e026d92d),
-@@ -1980,6 +2014,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -1980,6 +2026,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -263,7 +302,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(196bf9a5-b346-4ef0-aa1e-5dcdb76768b1),
-@@ -2030,6 +2065,7 @@ cpp_quote("#define CDBOSC_SELCHANGE    0x00000002")
+@@ -2030,6 +2077,7 @@
  cpp_quote("#define CDBOSC_RENAME       0x00000003")
  cpp_quote("#define CDBOSC_STATECHANGE  0x00000004")
  
@@ -271,7 +310,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214F1-0000-0000-C000-000000000046),
      object,
-@@ -2100,6 +2136,7 @@ cpp_quote("#define CDB2GVF_ISFOLDERPICKER      0x00000020")
+@@ -2100,6 +2148,7 @@
  cpp_quote("#define CDB2GVF_ADDSHIELD           0x00000040   // when CDB2GVF_NOSELECTVERB is not specified this flag controls the display of a LUA shield on the Select menu item")
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -279,7 +318,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(10339516-2894-11d2-9039-00C04F8EEB3E),
      object,
-@@ -2180,6 +2217,7 @@ typedef struct CM_COLUMNINFO
+@@ -2180,6 +2229,7 @@
      WCHAR wszName[MAX_COLUMN_NAME_LEN];
  } CM_COLUMNINFO;
  
@@ -287,7 +326,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d8ec27bb-3f3b-4042-b10a-4acfd924d453),
      object,
-@@ -2214,6 +2252,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -2214,6 +2264,7 @@
  
  // New for XP, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
@@ -295,7 +334,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(C0A651F5-B48B-11d2-B5ED-006097C686F6), // IID_IFolderFilterSite
      object,
-@@ -2224,6 +2263,7 @@ interface IFolderFilterSite : IUnknown
+@@ -2224,6 +2275,7 @@
      HRESULT SetFilter([in]IUnknown* punk);
  }
  
@@ -303,7 +342,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(9CC22886-DC8E-11d2-B1D0-00C04F8EEB3E), // IID_IFolderFilter
      object,
-@@ -2253,6 +2293,7 @@ interface IFolderFilter : IUnknown
+@@ -2253,6 +2305,7 @@
  
  // A site implements this interface so the object can communicate
  // focus change to it.
@@ -311,7 +350,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(F1DB8392-7331-11D0-8C99-00A0C92DBFE8),
-@@ -2264,6 +2305,7 @@ interface IInputObjectSite: IUnknown
+@@ -2264,6 +2317,7 @@
      HRESULT OnFocusChangeIS([in, unique] IUnknown* punkObj, [in] BOOL fSetFocus);
  }
  
@@ -319,7 +358,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(68284fAA-6A48-11D0-8c78-00C04fd918b4),
-@@ -2286,6 +2328,7 @@ interface IInputObject: IUnknown
+@@ -2286,6 +2340,7 @@
  
  // New for Vista, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
@@ -327,7 +366,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(6915C085-510B-44cd-94AF-28DFA56CF92B),
-@@ -2336,6 +2379,7 @@ interface IInputObject2 : IInputObject
+@@ -2336,6 +2391,7 @@
  //      S_FALSE, if unable to get icon for this object, go through
  //               GetUIObject, IExtractIcon, methods.
  //
@@ -335,7 +374,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E5-0000-0000-C000-000000000046), // IID_IShellIcon
      object,
-@@ -2589,6 +2633,7 @@ cpp_quote("#include <commctrl.h>")
+@@ -2589,6 +2645,7 @@
  cpp_quote("typedef LPTBBUTTON LPTBBUTTONSB;")
  cpp_quote("#endif //_NEVER_")
  
@@ -343,7 +382,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E2-0000-0000-C000-000000000046),
      object,
-@@ -2644,6 +2689,7 @@ interface IShellBrowser : IOleWindow
+@@ -2644,6 +2701,7 @@
  typedef IShellBrowser * LPSHELLBROWSER;
  
  
@@ -351,7 +390,7 @@ index 3074ba74..6b1f9b6d 100644
  [uuid(cb728b20-f786-11ce-92ad-00aa00a74cd0), object, pointer_default(unique)]
  interface IProfferService : IUnknown
  {
-@@ -2681,6 +2727,7 @@ cpp_quote("#define STR_GET_ASYNC_HANDLER L\"GetAsyncHandler\"")
+@@ -2681,6 +2739,7 @@
  //  BHID_Storage             attempts to get the stg/stm riid from BTO, but defaults to shell implementations on failure")
  
  //  Shell Namespace helper
@@ -359,7 +398,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(43826d1e-e718-42ee-bc55-a1e261c37bfe),
      object,
-@@ -2739,27 +2786,27 @@ midl_pragma warning( default: 2495 ) // annotation() only allowed on local metho
+@@ -2739,27 +2798,27 @@
  }
  //cpp_quote("#endif  // NTDDI_WINXP")
  
@@ -398,7 +437,7 @@ index 3074ba74..6b1f9b6d 100644
  
  cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_VISTA)")
  
-@@ -2774,7 +2821,7 @@ typedef [v1_enum] enum DATAOBJ_GET_ITEM_FLAGS
+@@ -2774,7 +2833,7 @@
  } DATAOBJ_GET_ITEM_FLAGS;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DATAOBJ_GET_ITEM_FLAGS)")
  // returns IShellItem and other interfaces that CLSID_ShellItem implements
@@ -407,7 +446,7 @@ index 3074ba74..6b1f9b6d 100644
  cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
  
  // New for Vista, but used by downlevel code
-@@ -2803,6 +2850,7 @@ cpp_quote("#define STR_GPS_BESTEFFORT                 L\"GPS_BESTEFFORT\"")
+@@ -2803,6 +2862,7 @@
  cpp_quote("#define STR_GPS_NO_OPLOCK                  L\"GPS_NO_OPLOCK\"")
  
  // Shell Namespace helper 2
@@ -415,7 +454,23 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7e9fb0d3-919f-4307-ab2e-9b1860310c93),
      object,
-@@ -2887,6 +2935,7 @@ interface IShellItem2 : IShellItem
+@@ -2870,6 +2930,9 @@
+ }
+ //cpp_quote("#endif  // NTDDI_VISTA")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ [v1_enum] enum _SIIGBF
+ {
+     SIIGBF_RESIZETOFIT          = 0x00000000,   // If necessary, shrink the bitmap (preserving aspect ratio) so width and height fit the given size.
+@@ -2884,9 +2947,13 @@
+     SIIGBF_SCALEUP              = 0x00000100,   // Windows 8 and later. If necessary, stretch the bitmap so width and height fit the given size.
+ 
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
  typedef int SIIGBF;
  
  
@@ -423,7 +478,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(bcc18b79-ba16-442f-80c4-8a59c30c463b),
      object,
-@@ -2904,6 +2953,7 @@ interface IShellItemImageFactory : IUnknown
+@@ -2904,6 +2971,7 @@
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
  // Shell Namespace enumerator
@@ -431,7 +486,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(70629033-e363-4a28-a567-0db78006e6d7),
      object,
-@@ -2970,6 +3020,7 @@ typedef DWORD TRANSFER_SOURCE_FLAGS;
+@@ -2970,6 +3038,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -439,7 +494,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d594d0d8-8da7-457b-b3b4-ce5dbaac0b88),
      object
-@@ -3102,6 +3153,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -3102,6 +3171,7 @@
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
@@ -447,7 +502,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(00adb003-bde9-45c6-8e29-d09f9353e108),
-@@ -3288,6 +3340,7 @@ typedef struct SHELL_ITEM_RESOURCE
+@@ -3288,6 +3358,7 @@
      WCHAR   szName[260 /*MAX_PATH*/];
  } SHELL_ITEM_RESOURCE;
  
@@ -455,7 +510,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2dd81fe3-a83c-4da9-a330-47249d345ba1),
-@@ -3307,6 +3360,7 @@ interface IEnumResources : IUnknown
+@@ -3307,6 +3378,7 @@
      HRESULT Clone([out] IEnumResources **ppenumr);
  }
  
@@ -463,7 +518,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(ff5693be-2ce0-4d48-b5c5-40817d1acdb9),
-@@ -3349,6 +3403,7 @@ interface IShellItemResources : IUnknown
+@@ -3349,6 +3421,7 @@
      HRESULT MarkForDelete();
  }
  
@@ -471,7 +526,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(48addd32-3ca5-4124-abe3-b5a72531b207),
-@@ -3395,6 +3450,7 @@ interface ITransferDestination : IUnknown
+@@ -3395,6 +3468,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -479,7 +534,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(04b0f1a7-9490-44bc-96e1-4296a31252e2),
-@@ -3487,6 +3543,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -3487,6 +3561,7 @@
  // New for Vista, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  // Shell Item Container
@@ -487,7 +542,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(b63ea76d-1f85-456f-a19c-48159efa858b),
      object,
-@@ -3527,12 +3584,13 @@ interface IShellItemArray : IUnknown
+@@ -3527,12 +3602,13 @@
  //cpp_quote("#endif  // NTDDI_VISTA")
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
@@ -505,7 +560,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7f73be3f-fb79-493c-a6c7-7ee14e245841),
      object,
-@@ -3544,6 +3602,7 @@ interface IInitializeWithItem : IUnknown
+@@ -3544,6 +3620,7 @@
      HRESULT Initialize([in] IShellItem *psi, [in] DWORD grfMode);
  }
  
@@ -513,7 +568,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(1c9cd5bb-98e9-4491-a60f-31aacc72b83c),
-@@ -3558,6 +3617,7 @@ interface IObjectWithSelection : IUnknown
+@@ -3558,6 +3635,7 @@
          [out, iid_is(riid)] void **ppv);
  }
  
@@ -521,7 +576,50 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(321a6a6a-d61f-4bf3-97ae-14be2986bb36),
-@@ -3596,6 +3656,7 @@ typedef DWORD PROPERTYUI_FLAGS;
+@@ -3570,21 +3648,36 @@
+     HRESULT RemoveBackReferences();
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ [v1_enum] enum _PROPERTYUI_NAME_FLAGS
+ {
+     PUIFNF_DEFAULT          = 0x00000000,
+     PUIFNF_MNEMONIC         = 0x00000001,   // include mnemonic in display name
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ typedef DWORD PROPERTYUI_NAME_FLAGS;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ [v1_enum] enum _PROPERTYUI_FLAGS
+ {
+     PUIF_DEFAULT                 = 0x00000000,
+     PUIF_RIGHTALIGN              = 0x00000001,   // this property should be right aligned
+     PUIF_NOLABELININFOTIP        = 0x00000002,   // this property should not display a label in the infotip
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ typedef DWORD PROPERTYUI_FLAGS;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ [v1_enum] enum _PROPERTYUI_FORMAT_FLAGS
+ {
+     PUIFFDF_DEFAULT         = 0x00000000,
+@@ -3593,9 +3686,13 @@
+     PUIFFDF_NOTIME          = 0x00000004,   // truncate time to days, not hours/mins/sec
+     PUIFFDF_FRIENDLYDATE    = 0x00000008,   // "Today", "Yesterday", etc
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
  typedef DWORD PROPERTYUI_FORMAT_FLAGS;
  
  // helper service for dealing with properties ala IPropertySetStorage
@@ -529,7 +627,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(757a7d9f-919a-4118-99d7-dbb208c8cc66),
      object,
-@@ -3659,6 +3720,7 @@ interface IPropertyUI : IUnknown
+@@ -3659,6 +3756,7 @@
  //-------------------------------------------------------------
  
  // Provides a list of catagorizers registered on an IShellFolder
@@ -537,7 +635,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(9af64809-5864-4c26-a720-c1f78c086ee3),
      object,
-@@ -3732,6 +3794,7 @@ typedef struct CATEGORY_INFO
+@@ -3732,6 +3830,7 @@
  //-------------------------------------------------------------
  
  // Categorizes items
@@ -545,7 +643,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(a3b14589-9174-49a8-89a3-06a1ae2b9ba7),
      object,
-@@ -3841,6 +3904,7 @@ cpp_quote("#include <poppack.h> // Return to byte packing")
+@@ -3841,6 +3940,7 @@
  // Call RegisterWindowMessage to get the ID
  cpp_quote("#define DI_GETDRAGIMAGE     TEXT(\"ShellGetDragImage\")")
  
@@ -553,7 +651,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(4657278B-411B-11D2-839A-00C04FD918D0),
      local,
-@@ -3868,6 +3932,7 @@ interface IDropTargetHelper : IUnknown
+@@ -3868,6 +3968,7 @@
      HRESULT Show([in, annotation("_In_")] BOOL fShow);
  }
  
@@ -561,7 +659,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(DE5BF786-477A-11D2-839D-00C04FD918D0),
      local,
-@@ -3925,6 +3990,7 @@ typedef [v1_enum] enum SLGP_FLAGS
+@@ -3925,6 +4026,7 @@
  } SLGP_FLAGS;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SLGP_FLAGS)")
  
@@ -569,18 +667,19 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214EE-0000-0000-C000-000000000046),
      object,
-@@ -3997,7 +4063,10 @@ interface IShellLinkA : IUnknown
+@@ -3997,7 +4099,10 @@
      HRESULT SetPath(
          [in, string] LPCSTR pszFile);
  }
+-
 +_Win32_AnnotateMethod_(IShellLinkA::GetIDList, _Win32_PreserveResult_)
 +_Win32_AnnotateMethod_(IShellLinkA::GetPath, _Win32_PreserveResult_)
- 
++
 +_Win32_AnnotateInterface_(IShellLinkW, _Win32_SupportedOS_WindowsXP_)
  [
      uuid(000214F9-0000-0000-C000-000000000046),
      object,
-@@ -4070,6 +4139,9 @@ interface IShellLinkW : IUnknown
+@@ -4070,6 +4175,9 @@
      HRESULT SetPath(
          [in, string] LPCWSTR pszFile);
  }
@@ -590,7 +689,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(45e2b4ae-b1c3-11d0-b92f-00a0c90312e1),
      object,
-@@ -4103,6 +4175,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN2K)")
+@@ -4103,6 +4211,7 @@
  
  // Link resolution helpers - called when a link is created or needs to be resolved.
  
@@ -598,7 +697,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(5cd52983-9449-11d2-963a-00c04f79adf0),
-@@ -4121,6 +4194,7 @@ cpp_quote("#endif  // NTDDI_WIN2K")
+@@ -4121,6 +4230,7 @@
  // New for XP, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
@@ -606,7 +705,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(49ff1172-eadc-446d-9285-156453a6431c),
-@@ -4173,6 +4247,7 @@ cpp_quote("#define ARCONTENT_PHASE_FINAL            0x40000000   // We have fini
+@@ -4173,6 +4283,7 @@
  cpp_quote("#define ARCONTENT_PHASE_MASK             0x70000000   // Bits that denote what phase we are in the Autoplay process.")
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -614,7 +713,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(49ff1173-eadc-446d-9285-156453a6431c),
-@@ -4260,6 +4335,7 @@ interface IActionProgress : IUnknown
+@@ -4260,6 +4371,7 @@
  //   hkeyProgID -- Specifies the folder type.
  
  // used to initialize an object on a remote computer (server)
@@ -622,7 +721,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E8-0000-0000-C000-000000000046),
      object,
-@@ -4315,6 +4391,7 @@ typedef IShellExtInit * LPSHELLEXTINIT;
+@@ -4315,6 +4427,7 @@
  //   lpfnReplace Specifies the callback function.
  //   lParam -- Specifies the opaque handle to be passed to the callback function.
  //
@@ -630,7 +729,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214E9-0000-0000-C000-000000000046),
      object,
-@@ -4340,6 +4417,7 @@ interface IShellPropSheetExt : IUnknown
+@@ -4340,6 +4453,7 @@
  }
  typedef IShellPropSheetExt * LPSHELLPROPSHEETEXT;
  
@@ -638,7 +737,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(000214FE-0000-0000-C000-000000000046),
      object,
-@@ -4360,6 +4438,7 @@ interface IRemoteComputer : IUnknown
+@@ -4360,6 +4474,7 @@
          [in] BOOL bEnumerating);
  }
  
@@ -646,7 +745,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7307055c-b24a-486b-9f25-163e597a28a9),
      object,
-@@ -4373,6 +4452,7 @@ interface IQueryContinue : IUnknown
+@@ -4373,6 +4488,7 @@
  // This interface supplies a caller with an event that will be signaled
  // by the callee to denote cancellation of a task.
  
@@ -654,7 +753,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(F279B885-0AE9-4b85-AC06-DDECF9408941),
      object,
-@@ -4387,6 +4467,7 @@ interface IObjectWithCancelEvent : IUnknown
+@@ -4387,6 +4503,7 @@
      HRESULT GetCancelEvent([out, annotation("_Out_")] HANDLE *phEvent);
  }
  
@@ -662,7 +761,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(ba9711ba-5893-4787-a7e1-41277151550b),
      object,
-@@ -4418,6 +4499,7 @@ interface IUserNotification : IUnknown
+@@ -4418,6 +4535,7 @@
  // interface for describing the limits placed on a name, used for validation
  // parsing and translation.
  
@@ -670,7 +769,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(1df0d7f1-b267-4d28-8b10-12e23202a5c4)
  ]
-@@ -4434,6 +4516,7 @@ interface IItemNameLimits : IUnknown
+@@ -4434,6 +4552,7 @@
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
@@ -678,7 +777,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(a0ffbc28-5482-4366-be27-3e81e78e06c2),
-@@ -4519,6 +4602,7 @@ cpp_quote("#define IEIFLAG_NOBORDER    0x0100      // returned from the extracto
+@@ -4519,6 +4638,7 @@
  cpp_quote("#define IEIFLAG_QUALITY     0x0200      // passed to the Extract method to indicate that a slower, higher quality image is desired, re-compute the thumbnail")
  cpp_quote("#define IEIFLAG_REFRESH     0x0400      // returned from the extractor if it would like to have Refresh Thumbnail available")
  
@@ -686,7 +785,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(BB2E617C-0920-11d1-9A0B-00C04FC2D6C1),
      object,
-@@ -4542,6 +4626,7 @@ typedef IExtractImage * LPEXTRACTIMAGE;
+@@ -4542,6 +4662,7 @@
  // GetDateStamp : returns the date stamp associated with the image. If this image is already cached,
  //                then it is easy to find out if the image is out of date.
  
@@ -694,7 +793,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(953BB1EE-93B4-11d1-98A3-00C04FB687DA),
      object,
-@@ -4553,6 +4638,7 @@ interface IExtractImage2 : IExtractImage
+@@ -4553,6 +4674,7 @@
  }
  typedef IExtractImage2 * LPEXTRACTIMAGE2;
  
@@ -702,7 +801,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(e35b4b2e-00da-4bc1-9f13-38bc11f5d417),
      object,
-@@ -4567,6 +4653,7 @@ interface IThumbnailHandlerFactory : IUnknown
+@@ -4567,6 +4689,7 @@
          [out, iid_is(riid)] void **ppv);
  }
  
@@ -710,7 +809,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(b3a4b685-b685-4805-99d9-5dead2873236),  // IID_IParentAndItem
      object,
-@@ -4624,6 +4711,7 @@ interface IParentAndItem : IUnknown
+@@ -4624,6 +4747,7 @@
  //
  //-------------------------------------------------------------------------
  
@@ -718,7 +817,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(012dd920-7b26-11d0-8ca9-00a0c92dbfe8),
      object
-@@ -4721,6 +4809,7 @@ cpp_quote("#define DBPC_SELECTLAST     (DWORD)-2")
+@@ -4721,6 +4845,7 @@
  
  cpp_quote("#define CGID_DeskBand IID_IDeskBand")
  
@@ -726,7 +825,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(EB0FE172-1A3A-11D0-89B3-00A0C90A90AC),
      object,
-@@ -4747,6 +4836,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+@@ -4747,6 +4872,7 @@
  //   bandsite.
  //
  //-------------------------------------------------------------------------
@@ -734,7 +833,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(77E425FC-CBF9-4307-BA6A-BB5727745661),
      object,
-@@ -4784,6 +4874,7 @@ cpp_quote("#endif  // NTDDI_VISTA")
+@@ -4784,6 +4910,7 @@
  //   This function marks hwnd in the taskbar as the active tab
  //
  //-------------------------------------------------------------------------
@@ -742,7 +841,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(56FDF342-FD6D-11d0-958A-006097C9A090),
      object,
-@@ -4801,6 +4892,7 @@ interface ITaskbarList : IUnknown
+@@ -4801,6 +4928,7 @@
      HRESULT SetActiveAlt([in] HWND hwnd);
  }
  
@@ -750,7 +849,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(602D4995-B13A-429b-A66E-1935E44F4317),
      object,
-@@ -4852,6 +4944,7 @@ cpp_quote("#include <poppack.h>")
+@@ -4852,6 +4980,7 @@
  
  cpp_quote("#define THBN_CLICKED        0x1800")
  
@@ -758,7 +857,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(ea1afb91-9e28-4b86-90e9-9e9f8a5eefaf),
      object,
-@@ -4922,6 +5015,7 @@ interface ITaskbarList3 : ITaskbarList2
+@@ -4922,6 +5051,7 @@
          [in] RECT *prcClip);
  }
  
@@ -766,7 +865,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(c43dc798-95d1-4bea-9030-bb99e2983a1a),
      object,
-@@ -4949,6 +5043,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -4949,6 +5079,7 @@
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
  //  Event sink interface for IExplorerBrowser events
@@ -774,7 +873,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(361bbdc7-e6ee-4e13-be58-58e2240c810f),    // IID_IExplorerBrowserEvents
      object
-@@ -5004,6 +5099,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(EXPLORER_BROWSER_FILL_FLAGS)")
+@@ -5004,6 +5135,7 @@
  //  or host a view of a data object.   Use either BrowseToIDList or BrowseToObject to navigate
  //  the browser or use FillWithDataObject to create the view on the data object.
  //
@@ -782,7 +881,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(dfd3b6b5-c10c-4be9-85f6-a66969f402f6),
      object,
-@@ -5060,6 +5156,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -5060,6 +5192,7 @@
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
  // Unknown Object Enumerator
@@ -790,7 +889,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(2c1c7e2e-2d0e-4059-831e-1e6f82335c2e),
      object,
-@@ -5101,6 +5198,7 @@ interface IEnumObjects : IUnknown
+@@ -5101,6 +5234,7 @@
  typedef DWORD OPPROGDLGF;
  
  // Shell Operations Engine Progress Dialog
@@ -798,7 +897,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(0C9FB851-E5C9-43EB-A370-F0677B13874C),
      object,
-@@ -5164,6 +5262,7 @@ interface IOperationsProgressDialog : IUnknown
+@@ -5164,6 +5298,7 @@
  }
  
  // Handles the thread ID and message information used after cancelling progress UI
@@ -806,7 +905,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(f5b0bf81-8cb5-4b1b-9449-1a159e0c733c),
      object,
-@@ -5202,6 +5301,7 @@ cpp_quote("#define FOFX_COPYASDOWNLOAD          0x40000000  // Show Downloading
+@@ -5202,6 +5337,7 @@
  cpp_quote("#define FOFX_DONTDISPLAYLOCATIONS    0x80000000  // Hides the locations line in the progress dialog")
  
  // Shell Copy/Move/Rename/Delete/Link/ApplyProperties Operation Handler
@@ -814,7 +913,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(947aab5f-0a5c-4c13-b4d6-4bf7836fc9f8),
      object,
-@@ -5302,6 +5402,7 @@ interface IFileOperation2 : IFileOperation
+@@ -5302,6 +5438,7 @@
  }
  cpp_quote("#endif  // (NTDDI_VERSION >= NTDDI_WIN10_RS4)")
  
@@ -822,7 +921,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(a6087428-3be3-4d73-b308-7c04a540bf1a),
      object,
-@@ -5319,6 +5420,7 @@ interface IObjectProvider : IUnknown
+@@ -5319,6 +5456,7 @@
  cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
  // shell name space walking callback interface"),
@@ -830,7 +929,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d92995f8-cf5e-4a76-bf59-ead39ea2b97e),
  ]
-@@ -5350,6 +5452,7 @@ interface INamespaceWalkCB : IUnknown
+@@ -5350,6 +5488,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -838,7 +937,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7ac7492b-c38e-438a-87db-68737844ff70),
  ]
-@@ -5361,6 +5464,7 @@ interface INamespaceWalkCB2 : INamespaceWalkCB
+@@ -5361,6 +5500,7 @@
  cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
  // shell name space walk, used to expand data objects, views or recurse folders
@@ -846,7 +945,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(57ced8a7-3f4a-432c-9350-30f24483f74f),
  ]
-@@ -5536,6 +5640,7 @@ cpp_quote("#endif  // _WIN32_IE_IE70")
+@@ -5536,6 +5676,7 @@
  cpp_quote("#define SID_SBandSite IID_IBandSite")
  cpp_quote("#define CGID_BandSite IID_IBandSite")
  
@@ -854,7 +953,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(4CF504B0-DE96-11D0-8B3F-00A0C911E8E5)
-@@ -5584,6 +5689,7 @@ interface IBandSite : IUnknown
+@@ -5584,6 +5725,7 @@
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
  // simple interface for showing a window
@@ -862,7 +961,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(b4db1657-70d7-485e-8e3e-6fcb5a5c1802),
      object,
-@@ -5600,6 +5706,7 @@ cpp_quote("#endif  // NTDDI_WINXP")
+@@ -5600,6 +5742,7 @@
  
  // New for XP, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
@@ -870,7 +969,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(0811AEBE-0B87-4C54-9E72-548CF649016B),
      object,
-@@ -5651,6 +5758,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
+@@ -5651,6 +5794,7 @@
  //
  //-------------------------------------------------------------------------
  
@@ -878,7 +977,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(568804CD-CBD7-11d0-9816-00C04FD91972),
      object,
-@@ -5672,6 +5780,7 @@ interface IMenuBand : IUnknown
+@@ -5672,6 +5816,7 @@
  }
  
  // callback objects for CRegTreeOptions items
@@ -886,7 +985,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(A9521922-0812-4d44-9EC3-7FD38C726F3D),
      local
-@@ -5688,6 +5797,7 @@ cpp_quote("#endif  // NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
+@@ -5688,6 +5833,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE60)")
  
@@ -894,7 +993,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(EB0FE173-1A3A-11D0-89B3-00A0C90A90AC),
      object,
-@@ -5729,6 +5839,7 @@ interface IDeskBar : IOleWindow
+@@ -5729,6 +5875,7 @@
  //   object's interface.  Set fSet == FALSE to remove the submenu.
  //
  //-------------------------------------------------------------------------
@@ -902,7 +1001,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(D1E7AFEB-6A2E-11d0-8C78-00C04FD918B4),
      object,
-@@ -5795,6 +5906,7 @@ typedef [v1_enum] enum FILE_USAGE_TYPE
+@@ -5795,6 +5942,7 @@
  cpp_quote("#define OF_CAP_CANSWITCHTO     0x0001")
  cpp_quote("#define OF_CAP_CANCLOSE        0x0002")
  
@@ -910,7 +1009,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(64a1cbf0-3a1a-4461-9158-376969693950),
      pointer_default(unique)
-@@ -5841,6 +5953,7 @@ typedef [v1_enum] enum FDAP
+@@ -5841,6 +5989,7 @@
  // Implemented by a client of the common file dialog browser,
  //  for notification of events within the dialog.
  //
@@ -918,7 +1017,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(973510db-7d7f-452b-8975-74a85828d354),
      object,
-@@ -5879,6 +5992,7 @@ interface IShellItemFilter;
+@@ -5879,6 +6028,7 @@
  // Implemented by the common file dialog browser, used by clients to
  //  initialize, show, and get results from the dialog.
  //
@@ -926,7 +1025,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(42f85136-db7e-439c-85f1-e4075d135fc8),
      object,
-@@ -5973,6 +6087,7 @@ interface IFileDialog : IModalWindow
+@@ -5973,6 +6123,7 @@
  //
  // Additional methods specific to the file save dialog
  //
@@ -934,7 +1033,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(84bccd23-5fde-4cdb-aea4-af64b83d78ab),
      object,
-@@ -6001,6 +6116,7 @@ interface IFileSaveDialog : IFileDialog
+@@ -6001,6 +6152,7 @@
  // Additional methods specific to the file open dialog
  // (adding multiselect capability)
  //
@@ -942,7 +1041,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(d57c7288-d4ad-4768-be02-9d969532d960),
      object,
-@@ -6035,6 +6151,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(CDCONTROLSTATEF)")
+@@ -6035,6 +6187,7 @@
  // - Container controls have the notion of a "selected item", with the exception of the toolsmenu.
  // - radiobuttongroups behave exactly like comboboxes.  The radio buttons within the group are treated exactly
  //    like items in a combobox, one of which can be the "selected item".
@@ -950,7 +1049,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(e6fdd21a-163f-4975-9c8c-a69f1ba37034),
      object,
-@@ -6175,6 +6292,7 @@ typedef [v1_enum] enum ASSOCIATIONTYPE
+@@ -6175,6 +6328,7 @@
  } ASSOCIATIONTYPE;
  
  // Application File Extension and URL Protocol Registration
@@ -958,7 +1057,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(4e530b0a-e611-4c77-a3ac-9031d022281b),
-@@ -6212,7 +6330,7 @@ interface IApplicationAssociationRegistration : IUnknown
+@@ -6212,7 +6366,7 @@
  }
  
  // SHCreateAssociationRegistration can be used to create an IApplicationAssociationRegistration
@@ -967,7 +1066,7 @@ index 3074ba74..6b1f9b6d 100644
  
  cpp_quote("#endif  // NTDDI_VISTA")
  
-@@ -6242,6 +6360,7 @@ cpp_quote("typedef const UNALIGNED DELEGATEITEMID *PCDELEGATEITEMID;")
+@@ -6242,6 +6396,7 @@
  cpp_quote("typedef UNALIGNED DELEGATEITEMID *PDELEGATEITEMID;")
  
  // shell name space delegate folder interface
@@ -975,7 +1074,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(ADD8BA80-002B-11D0-8F0F-00C04FD7D062),
      object,
-@@ -6273,6 +6392,7 @@ cpp_quote("//       If the function succeeds, the return value must be S_OK and
+@@ -6273,6 +6428,7 @@
  cpp_quote("//       If the function fails, pdwOptions needs to be filled in with BFO_NONE.")
  cpp_quote("//")
  
@@ -983,7 +1082,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(10DF43C8-1DBE-11d3-8B34-006097DF5BD4),
      object,
-@@ -6337,6 +6457,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(NWMF)")
+@@ -6337,6 +6493,7 @@
  
  // Popup manager interface for WebOC hosts and Trident.
  cpp_quote("#define SID_SNewWindowManager IID_INewWindowManager")
@@ -991,7 +1090,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(D2BC4C84-3F72-4a52-A604-7BCBF3982CBB),
      object,
-@@ -6356,6 +6477,7 @@ interface INewWindowManager : IUnknown
+@@ -6356,6 +6513,7 @@
  
  //-------------------------------------------------------------------------
  // IAttachmentExecute
@@ -999,7 +1098,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(73db1241-1e85-4581-8e4f-a81e1d0f8c57),  // IID_IAttachmentExecute
-@@ -6619,6 +6741,7 @@ cpp_quote("                                            // of user choice")
+@@ -6619,6 +6777,7 @@
  cpp_quote("#define SMAE_VALID              0x00000007")
  cpp_quote("#endif  // _WIN32_IE_IE70")
  
@@ -1007,7 +1106,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(4CA300A1-9B8D-11d1-8B22-00C04FD918D0),
      object,
-@@ -6666,6 +6789,7 @@ cpp_quote("#define SMSET_DONTOWN               0x00000001    // The Menuband doe
+@@ -6666,6 +6825,7 @@
  cpp_quote("#define SMINV_REFRESH        0x00000001")
  cpp_quote("#define SMINV_ID             0x00000008")
  
@@ -1015,7 +1114,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(EE1F7637-E138-11d1-8379-00C04FD918D0),
      object,
-@@ -6805,6 +6929,7 @@ typedef struct KNOWNFOLDER_DEFINITION
+@@ -6805,6 +6965,7 @@
  } KNOWNFOLDER_DEFINITION;
  
  // Known Folder Interface
@@ -1023,7 +1122,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(3AA7AF7E-9B36-420c-A8E3-F77D4674A488),
      object,
-@@ -6843,6 +6968,7 @@ interface IKnownFolder : IUnknown
+@@ -6843,6 +7004,7 @@
  }
  
  // Known Folder Manager
@@ -1031,7 +1130,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(8BE2D872-86AA-4d47-B776-32CCA40C7018),
      object,
-@@ -6946,6 +7072,7 @@ typedef [v1_enum] enum DEF_SHARE_ID
+@@ -6946,6 +7108,7 @@
  DEF_SHARE_ID;
  
  // Sharing Configuration Manager
@@ -1039,7 +1138,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(B4CD448A-9C86-4466-9201-2E62105B87AE)
-@@ -6982,6 +7109,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+@@ -6982,6 +7145,7 @@
  // Use with
  // IShellItem::BindToHandler, BHID_SFObject
  // IShellFolder::BindToObject
@@ -1047,7 +1146,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(a73ce67a-8ab1-44f1-8d43-d2fcbf6b1cd0),
-@@ -6996,6 +7124,7 @@ interface IRelatedItem : IUnknown
+@@ -6996,6 +7160,7 @@
  
  // Used to obtain the true identity of the item, so it can be
  // determined if two items actually represent the same item.
@@ -1055,7 +1154,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(7d903fca-d6f9-4810-8332-946c0177e247),
-@@ -7009,6 +7138,7 @@ interface IIdentityName : IRelatedItem
+@@ -7009,6 +7174,7 @@
  // item is delegating to the underlying "delegate" item.
  // Unlike IIdentityName, IDelegateItem only "unwraps" one
  // level of aliasing.
@@ -1063,7 +1162,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(3c5a1c94-c951-4cb7-bb6d-3b93f30cce93),
-@@ -7020,6 +7150,7 @@ interface IDelegateItem : IRelatedItem
+@@ -7020,6 +7186,7 @@
  
  // If an item represents a snapshot of an item taken at a previous time,
  // ICurrentItem will let you obtain the current version of the item.
@@ -1071,7 +1170,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(240a7174-d653-4a1d-a6d3-d4943cfbfe3d),
-@@ -7031,6 +7162,7 @@ interface ICurrentItem : IRelatedItem
+@@ -7031,6 +7198,7 @@
  
  // used to find the transfer object. that is the object that should be
  // queried and enumerated for copy/move/delete.
@@ -1079,7 +1178,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(77f295d5-2d6f-4e19-b8ae-322f3e721ab5),
-@@ -7041,6 +7173,7 @@ interface ITransferMediumItem : IRelatedItem
+@@ -7041,6 +7209,7 @@
  }
  
  // IDisplayItem provides the item to show UI on (used by the copy engine dialogs)
@@ -1087,7 +1186,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(c6fd5997-9f6b-4888-8703-94e80e8cde3f),
-@@ -7053,6 +7186,7 @@ interface IDisplayItem : IRelatedItem
+@@ -7053,6 +7222,7 @@
  // IViewStateIdentityItem is used to provide a canonical persistence item
  // This is item for which view customizations will be remembered
  // (example: the orignal folder item minus the search query)
@@ -1095,7 +1194,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(9D264146-A94F-4195-9F9F-3BB12CE0C955),
-@@ -7063,6 +7197,7 @@ interface IViewStateIdentityItem : IRelatedItem
+@@ -7063,6 +7233,7 @@
  }
  
  // IPreviewItem provides an item to show in the preview pane
@@ -1103,7 +1202,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(36149969-0A8F-49c8-8B00-4AECB20222FB),
-@@ -7074,6 +7209,7 @@ interface IPreviewItem : IRelatedItem
+@@ -7074,6 +7245,7 @@
  
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -1111,7 +1210,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(8a87781b-39a7-4a1f-aab3-a39b9c34a7d9),
      object,
-@@ -7090,6 +7226,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+@@ -7090,6 +7262,7 @@
  // A service implemented by callers of ShellExecute that lets them modify the inputs
  // of CreateProcess before it is called.
  // See SEE_MASK_FLAG_HINST_IS_SITE for details on how to provide this service.
@@ -1119,7 +1218,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(F6EF6140-E26F-4D82-bAC4-E9BA5FD239A8),
-@@ -7113,6 +7250,7 @@ interface ICreateProcessInputs : IUnknown
+@@ -7113,6 +7286,7 @@
          [in, string, annotation("_In_")] LPCWSTR pszValue);
  }
  
@@ -1127,7 +1226,7 @@ index 3074ba74..6b1f9b6d 100644
  [ uuid(c2b937a9-3110-4398-8a56-f34c6342d244), local ]
  interface ICreatingProcess : IUnknown
  {
-@@ -7164,6 +7302,7 @@ typedef int NMCII_FLAGS;
+@@ -7164,6 +7338,7 @@
  };
  typedef int NMCSAEI_FLAGS;
  
@@ -1135,7 +1234,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(dcb07fdc-3bb5-451c-90be-966644fed7b0),
      pointer_default(unique)
-@@ -7181,6 +7320,7 @@ cpp_quote("#define SID_SNewMenuClient   IID_INewMenuClient")
+@@ -7181,6 +7356,7 @@
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -1143,7 +1242,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(71c0d2bc-726d-45cc-a6c0-2e31c1db2159),
-@@ -7191,6 +7331,7 @@ interface IInitializeWithBindCtx : IUnknown
+@@ -7191,6 +7367,7 @@
      HRESULT Initialize([in] IBindCtx *pbc);
  }
  
@@ -1151,7 +1250,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2659B475-EEB8-48b7-8F07-B378810F48CF),
-@@ -7207,6 +7348,7 @@ interface IShellItemFilter : IUnknown
+@@ -7207,6 +7384,7 @@
  
  cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -1159,7 +1258,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(028212A3-B627-47e9-8856-C14265554E4F)
-@@ -7354,6 +7496,7 @@ cpp_quote("#define SID_SNavigationPane IID_INameSpaceTreeControl   // nearest se
+@@ -7354,6 +7532,7 @@
  //cpp_quote("#endif  // NTDDI_VISTA")
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
@@ -1167,7 +1266,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(e9701183-e6b3-4ff2-8568-813615fec7be),
-@@ -7382,6 +7525,7 @@ cpp_quote("#define E_PREVIEWHANDLER_NOAUTH   _HRESULT_TYPEDEF_(0x86420002L)") //
+@@ -7382,6 +7561,7 @@
  cpp_quote("#define E_PREVIEWHANDLER_NOTFOUND _HRESULT_TYPEDEF_(0x86420003L)") // item was not found
  cpp_quote("#define E_PREVIEWHANDLER_CORRUPT  _HRESULT_TYPEDEF_(0x86420004L)") // item was corrupt
  
@@ -1175,7 +1274,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(8895b1c6-b41f-4c1c-a562-0d564250836f),
-@@ -7405,6 +7549,7 @@ interface IPreviewHandler : IUnknown
+@@ -7405,6 +7585,7 @@
      HRESULT TranslateAccelerator([in] MSG* pmsg);
  }
  
@@ -1183,7 +1282,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(fec87aaf-35f9-447a-adb7-20234491401a),
-@@ -7439,6 +7584,7 @@ cpp_quote("#else // !__cplusplus")
+@@ -7439,6 +7620,7 @@
  cpp_quote("#define REFEXPLORERPANE const EXPLORERPANE * __MIDL_CONST")
  cpp_quote("#endif // __cplusplus")
  
@@ -1191,7 +1290,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(e07010ec-bc17-44c0-97b0-46c7c95b9edc),
-@@ -7475,6 +7621,7 @@ cpp_quote("#define SID_ExplorerPaneVisibility IID_IExplorerPaneVisibility")
+@@ -7475,6 +7657,7 @@
  
  // controls the behavior of the SHCreateDefaultContextMenu()
  
@@ -1199,7 +1298,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(3409E930-5A39-11d1-83FA-00A0C90DC849),
-@@ -7495,6 +7642,7 @@ interface IContextMenuCB : IUnknown
+@@ -7495,6 +7678,7 @@
  
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -1207,7 +1306,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(41ded17d-d6b3-4261-997d-88c60e4b1d58),
-@@ -7528,10 +7676,11 @@ interface IDefaultExtractIconInit : IUnknown
+@@ -7528,10 +7712,11 @@
  }
  
  // "Default" IExtractIcon implementation useful for implementation of ::GetUIObjectOf(IID_IExtractIcon)
@@ -1220,7 +1319,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9),
      pointer_default(unique)
-@@ -7578,16 +7727,17 @@ interface IExplorerCommand : IUnknown
+@@ -7578,16 +7763,17 @@
      // When "fOkToBeSlow" is FALSE this method must return quickly, in this case you can
      // return E_PENDING and this object will be recreated on a background thread and called with
      // fOkToBeSlow == TRUE where you can do expensive work.
@@ -1240,7 +1339,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(bddacb60-7657-47ae-8445-d23e1acf82ae),
      object,
-@@ -7603,6 +7753,7 @@ interface IExplorerCommandState : IUnknown
+@@ -7603,6 +7789,7 @@
      HRESULT GetState([in] IShellItemArray *psiItemArray, [in] BOOL fOkToBeSlow, [out] EXPCMDSTATE *pCmdState);
  }
  
@@ -1248,7 +1347,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(85075acf-231f-40ea-9610-d26b7b58f638),
-@@ -7623,6 +7774,7 @@ interface IInitializeCommand : IUnknown
+@@ -7623,6 +7810,7 @@
      HRESULT Initialize([in, string] LPCWSTR pszCommandName, [in] IPropertyBag *ppb);
  }
  
@@ -1256,17 +1355,18 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(a88826f8-186f-4987-aade-ea0cef8fbfe8),
      object,
-@@ -7648,7 +7800,9 @@ interface IEnumExplorerCommand : IUnknown
+@@ -7648,7 +7836,9 @@
  
      HRESULT Clone([out] IEnumExplorerCommand **ppenum);
  }
+-
 +_Win32_AnnotateMethod_(IEnumExplorerCommand::Next, _Win32_PreserveResult_)
- 
++
 +_Win32_AnnotateInterface_(IExplorerCommandProvider, _Win32_SupportedOS_WindowsVista_)
  [
      uuid(64961751-0835-43c0-8ffe-d57686530e64),
      pointer_default(unique)
-@@ -7678,6 +7832,7 @@ typedef [v1_enum] enum CPVIEW
+@@ -7678,6 +7868,7 @@
      CPVIEW_HOME      = CPVIEW_CATEGORY,
  } CPVIEW;
  
@@ -1274,7 +1374,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(D11AD862-66DE-4DF4-BF6C-1F5621996AF1),
-@@ -7713,6 +7868,7 @@ cpp_quote("#define STR_FILE_SYS_BIND_DATA      L\"File System Bind Data\"")
+@@ -7713,6 +7904,7 @@
  
  cpp_quote("#define STR_FILE_SYS_BIND_DATA_WIN7_FORMAT  L\"Win7FileSystemIdList\"")
  
@@ -1282,7 +1382,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(01E18D10-4D8B-11d2-855D-006008059367),
-@@ -7725,6 +7881,7 @@ interface IFileSystemBindData : IUnknown
+@@ -7725,6 +7917,7 @@
      HRESULT GetFindData([out] WIN32_FIND_DATAW *pfd);
  }
  
@@ -1290,7 +1390,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(3acf075f-71db-4afa-81f0-3fc4fdf2a5b8),
-@@ -7742,6 +7899,7 @@ interface IFileSystemBindData2 : IFileSystemBindData
+@@ -7742,6 +7935,7 @@
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
  
  // Custom Destination List
@@ -1298,7 +1398,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(6332debf-87b5-4670-90c0-5e57b408a49e),
      object,
-@@ -7776,6 +7934,7 @@ interface ICustomDestinationList : IUnknown
+@@ -7776,6 +7970,7 @@
  }
  
  // Used to remove items from the automatic destination lists created when apps or the system call SHAddToRecentDocs to report usage of a document.
@@ -1306,7 +1406,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(12337d35-94c6-48a0-bce7-6a9c69d4d600),
      object,
-@@ -7794,6 +7953,7 @@ interface IApplicationDestinations : IUnknown
+@@ -7794,6 +7989,7 @@
  }
  
  // Allows an application to retrieve the most recent and frequent documents opened in that app, as reported via SHAddToRecentDocs
@@ -1314,7 +1414,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(3c594f9f-9f30-47a1-979a-c9e83d3d0a06),
      object,
-@@ -7816,6 +7976,7 @@ interface IApplicationDocumentLists : IUnknown
+@@ -7816,6 +8012,7 @@
  }
  
  // Provides access to the App User Model ID on objects supporting this value
@@ -1322,7 +1422,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(36db0196-9665-46d1-9ba7-d3709eecf9ed),
      object,
-@@ -7839,6 +8000,7 @@ interface IObjectWithPackageFullName : IUnknown
+@@ -7839,6 +8036,7 @@
  }
  
  // Provides access to the ProgID associated with an object
@@ -1330,7 +1430,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(71e806fb-8dee-46fc-bf8c-7748a8a1ae13),
      object,
-@@ -7850,6 +8012,7 @@ interface IObjectWithProgID : IUnknown
+@@ -7850,6 +8048,7 @@
      HRESULT GetProgID([out, string] LPWSTR *ppszProgID);
  }
  
@@ -1338,7 +1438,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(6589b6d2-5f8d-4b9e-b7e0-23cdd9717d8c),
      local,
-@@ -7867,17 +8030,18 @@ interface IUpdateIDList : IUnknown
+@@ -7867,17 +8066,18 @@
  }
  
  // Sets the User Model AppID for the current process, enabling Windows to retrieve this ID
@@ -1359,7 +1459,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(B92B56A9-8B55-4E14-9A89-0199BBB6F93B),
      object
-@@ -7992,6 +8156,7 @@ cpp_quote("#define HOMEGROUP_SECURITY_GROUP_MULTI L\"HUG\"")
+@@ -7992,6 +8192,7 @@
  cpp_quote("#define HOMEGROUP_SECURITY_GROUP L\"HomeUsers\"")
  
  // IHomeGroup
@@ -1367,7 +1467,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(7a3bd1d9-35a9-4fb3-a467-f48cac35e2d0),
      object,
-@@ -8014,6 +8179,7 @@ interface IHomeGroup : IUnknown
+@@ -8014,6 +8215,7 @@
      HRESULT ShowSharingWizard([in] HWND owner, [out] HOMEGROUPSHARINGCHOICES *sharingchoices);
  }
  
@@ -1375,7 +1475,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      helpstring("Initialize With IPropertyStore"),
      uuid(C3E12EB5-7D8D-44f8-B6DD-0E77B34D6DE4),
-@@ -8025,6 +8191,7 @@ interface IInitializeWithPropertyStore : IUnknown
+@@ -8025,6 +8227,7 @@
      HRESULT Initialize([in] IPropertyStore *pps);
  }
  
@@ -1383,7 +1483,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      helpstring("OpenSearch Data Source API"),
      uuid(F0EE7333-E6FC-479b-9F25-A860C234A38E),
-@@ -8044,6 +8211,7 @@ interface IOpenSearchSource : IUnknown
+@@ -8044,6 +8247,7 @@
  }
  
  // Library API
@@ -1391,7 +1491,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      helpstring("Shell Library API"),
      uuid(11a66efa-382e-451a-9234-1e0e12ef3085),
-@@ -8151,6 +8319,7 @@ typedef [v1_enum] enum DEFAULT_FOLDER_MENU_RESTRICTIONS
+@@ -8151,6 +8355,7 @@
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DEFAULT_FOLDER_MENU_RESTRICTIONS)")
  
@@ -1399,7 +1499,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(7690aa79-f8fc-4615-a327-36f7d18f5d91),
-@@ -8206,6 +8375,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(ACTIVATEOPTIONS)")
+@@ -8206,6 +8411,7 @@
  //
  // Developers who are interested in using the Application Activation Manager do not need to implement the following
  // interface. An implementation is provided through the CoCreatable Object with CLSID_ApplicationActivationManager.
@@ -1407,7 +1507,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2e941141-7f97-4756-ba1d-9decde894a3d),
-@@ -8235,6 +8405,7 @@ cpp_quote("#endif // NTDDI_WIN8")
+@@ -8235,6 +8441,7 @@
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)")
  
@@ -1415,7 +1515,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(a5cd92ff-29be-454c-8d04-d82879fb3f1b),
      object,
-@@ -8387,8 +8558,8 @@ library ShellCoreObjects
+@@ -8387,8 +8594,8 @@
  };
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
@@ -1426,7 +1526,7 @@ index 3074ba74..6b1f9b6d 100644
  cpp_quote("#endif  // NTDDI_VISTA")
  
  // helper APIs to simplify initializing an instance of IShellLibrary and working with file system paths
-@@ -8403,8 +8574,8 @@ typedef [v1_enum] enum LIBRARYMANAGEDIALOGOPTIONS
+@@ -8403,8 +8610,8 @@
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(LIBRARYMANAGEDIALOGOPTIONS)")
  
@@ -1437,7 +1537,7 @@ index 3074ba74..6b1f9b6d 100644
  cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
  cpp_quote("")
  cpp_quote("// These functions properly initialize their _Outptr_ parameters to NULL, and only return NULL")
-@@ -8532,6 +8703,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+@@ -8532,6 +8739,7 @@
  //  SHAssocEnumHandlers returns an IEnumAssocHandlers object.
  //
  // Invoke an associated app handler
@@ -1445,7 +1545,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(92218CAB-ECAA-4335-8133-807FD234C2EE),
      object,
-@@ -8562,6 +8734,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(AHTYPE)")
+@@ -8562,6 +8770,7 @@
  
  // Association handlers
  //
@@ -1453,7 +1553,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(F04061AC-1659-4a3f-A954-775AA57FC083),
      object,
-@@ -8588,8 +8761,10 @@ interface IAssocHandler : IUnknown
+@@ -8588,8 +8797,10 @@
          [in, annotation("_In_")] IDataObject *pdo,
          [out, annotation("_Outptr_")] IAssocHandlerInvoker **ppInvoker);
  }
@@ -1464,7 +1564,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(973810ae-9599-4b88-9e4d-6ee98c9552da),
      object,
-@@ -8611,16 +8786,17 @@ typedef enum ASSOC_FILTER
+@@ -8611,16 +8822,17 @@
  } ASSOC_FILTER;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(ASSOC_FILTER)")
  
@@ -1484,7 +1584,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(3D25F6D6-4B2A-433c-9184-7C33AD35D001),
-@@ -8632,6 +8808,7 @@ interface IDataObjectProvider : IUnknown
+@@ -8632,6 +8844,7 @@
      [local] HRESULT SetDataObject([in, annotation("_In_")] IDataObject *dataObject);
  }
  
@@ -1492,7 +1592,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(3A3DCD6C-3EAB-43DC-BCDE-45671CE800C8),
-@@ -8650,6 +8827,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+@@ -8650,6 +8863,7 @@
  // Application Framework developers who are interested
  // in getting the position of the Input Pane (IHM) and in receiving Input Pane
  // change notifications must implement the following handler interface.
@@ -1500,7 +1600,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(226C537B-1E76-4D9E-A760-33DB29922F18)
-@@ -8674,6 +8852,7 @@ interface IFrameworkInputPaneHandler : IUnknown
+@@ -8674,6 +8888,7 @@
  // Application Framework creators can use this interface to:
  // 1) Listen to Input Pane state changes
  // 2) Get the current location of the Input Pane
@@ -1508,7 +1608,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(5752238B-24F0-495A-82F1-2FD593056796)
-@@ -8738,6 +8917,7 @@ typedef [v1_enum] enum MONITOR_APP_VISIBILITY
+@@ -8738,6 +8953,7 @@
     MAV_APP_VISIBLE = 2
  } MONITOR_APP_VISIBILITY;
  
@@ -1516,7 +1616,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(6584CE6B-7D82-49C2-89C9-C6BC02BA8C38)
-@@ -8751,6 +8931,7 @@ interface IAppVisibilityEvents: IUnknown
+@@ -8751,6 +8967,7 @@
     HRESULT LauncherVisibilityChange([in] BOOL currentVisibleState);
  }
  
@@ -1524,7 +1624,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2246EA2D-CAEA-4444-A3C4-6DE827E44313)
-@@ -8776,6 +8957,7 @@ typedef [v1_enum] enum PACKAGE_EXECUTION_STATE
+@@ -8776,6 +8993,7 @@
      PES_TERMINATED = 4
  } PACKAGE_EXECUTION_STATE;
  
@@ -1532,7 +1632,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(1BB12A62-2AD8-432B-8CCF-0C2C52AFCD5B)
-@@ -8785,6 +8967,7 @@ interface IPackageExecutionStateChangeNotification : IUnknown
+@@ -8785,6 +9003,7 @@
      HRESULT OnStateChanged([in, string] LPCWSTR pszPackageFullName, [in] PACKAGE_EXECUTION_STATE pesNewState);
  }
  
@@ -1540,7 +1640,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      local,
-@@ -8837,6 +9020,7 @@ interface IPackageDebugSettings2 : IPackageDebugSettings
+@@ -8837,6 +9056,7 @@
          [out, size_is(,*appCount), annotation("_Outptr_result_buffer_(*appCount)")] LPWSTR **appDisplayNames);
  }
  
@@ -1548,7 +1648,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      local,
-@@ -8856,6 +9040,7 @@ typedef [v1_enum] enum AHE_TYPE
+@@ -8856,6 +9076,7 @@
      AHE_IMMERSIVE   = 1,
  } AHE_TYPE;
  
@@ -1556,7 +1656,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(18B21AA9-E184-4FF0-9F5E-F882D03771B3)
-@@ -8877,6 +9062,7 @@ typedef [v1_enum] enum EC_HOST_UI_MODE
+@@ -8877,6 +9098,7 @@
  // reachable via the site chain provided to ShellExecuteEx() or the context menu and retrieved by
  // IServiceProvider::QueryService(..., SID_ExecuteCommandHost, ...).
  // IExecuteCommandHost::GetUIMode is called by an ExplorerCommand based verb handler to query the host UI mode.
@@ -1564,7 +1664,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(4b6832a2-5f04-4c9d-b89d-727a15d103e7)
-@@ -8907,6 +9093,7 @@ typedef [v1_enum] enum EDGE_GESTURE_KIND
+@@ -8907,6 +9129,7 @@
      EGK_MOUSE,
  } EDGE_GESTURE_KIND;
  
@@ -1572,7 +1672,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2A3DEE9A-E31D-46D6-8508-BCC597DB3557)
-@@ -8956,6 +9143,7 @@ typedef [v1_enum] enum APPLICATION_VIEW_MIN_WIDTH
+@@ -8956,6 +9179,7 @@
      AVMW_500        = 2,
  } APPLICATION_VIEW_MIN_WIDTH;
  
@@ -1580,7 +1680,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(490514E1-675A-4D6E-A58D-E54901B4CA2F)
-@@ -8984,6 +9172,7 @@ cpp_quote("#define STR_REFERRER_IDENTIFIER    L\"Referrer Identifier\"")
+@@ -8984,6 +9208,7 @@
  // on IApplicationActivationManager is called. The monitor specified by the
  // ILaunchTargetMonitor interface tells Windows which monitor the launched
  // application should be shown on.
@@ -1588,7 +1688,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(266FBC7E-490D-46ED-A96B-2274DB252003)
-@@ -9017,6 +9206,7 @@ typedef [v1_enum] enum APPLICATION_VIEW_SIZE_PREFERENCE
+@@ -9017,6 +9242,7 @@
  // any method on IApplicationActivationManager is called. The size preference
  // information will be used by Windows in placing the source app window once
  // the target app is shown on screen.
@@ -1596,7 +1696,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(E5AA01F7-1FB8-4830-8720-4E6734CBD5F3)
-@@ -9036,6 +9226,7 @@ cpp_quote("DEFINE_GUID(SID_LaunchSourceViewSizePreference, 0x80605492, 0x67d9, 0
+@@ -9036,6 +9262,7 @@
  // IApplicationActivationManager to launch the browser itself. Windows will
  // use the size preference information to decide how the browser window
  // should be shown once it is launched.
@@ -1604,7 +1704,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(2F0666C6-12F7-4360-B511-A394A0553725)
-@@ -9055,6 +9246,7 @@ cpp_quote("DEFINE_GUID(SID_LaunchTargetViewSizePreference, 0x26db2472, 0xb7b7, 0
+@@ -9055,6 +9282,7 @@
  // QueryService(SID_LaunchSourceAppUserModelId, ...) on the site pointer
  // to retrieve the interface from which the AppUserModelId of the app that
  // launches the browser is available.
@@ -1612,7 +1712,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(989191AC-28FF-4CF0-9584-E0D078BC2396)
-@@ -9071,6 +9263,7 @@ cpp_quote("#endif // NTDDI_WINBLUE")
+@@ -9071,6 +9299,7 @@
  
  // Implemented by objects the need to be provided a window, often an owner window for displaying UI.
  // Used by clients of those objects to provide the window.
@@ -1620,7 +1720,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(3E68D4BD-7135-4D10-8018-9FB6D9F33FA1),
      object,
-@@ -9084,6 +9277,7 @@ interface IInitializeWithWindow : IUnknown
+@@ -9084,6 +9313,7 @@
  // Provided to the IHandlerActivationHost methods, provides information about the handler.
  // May also be retrieved using IServiceProvider::QueryService(SID_HandlerInfo) on the site
  // chain provided in ShellExecute and verb handler invocations.
@@ -1628,7 +1728,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(997706ef-f880-453b-8118-39e1a2d2655a),
      object,
-@@ -9124,6 +9318,7 @@ interface IHandlerInfo2 : IHandlerInfo
+@@ -9124,6 +9354,7 @@
  //
  // Handlers are identified by either a COM CLSID or the .exe file that will be passed to
  // CreateProcess().
@@ -1636,7 +1736,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      uuid(35094a87-8bb1-4237-96c6-c417eebdb078),
      object,
-@@ -9190,6 +9385,7 @@ typedef [v1_enum] enum FLYOUT_PLACEMENT
+@@ -9190,6 +9421,7 @@
      FP_RIGHT,
  } FLYOUT_PLACEMENT;
  
@@ -1644,7 +1744,7 @@ index 3074ba74..6b1f9b6d 100644
  [
      object,
      uuid(99eacba7-e073-43b6-a896-55afe48a0833),
-@@ -9240,6 +9436,7 @@ cpp_quote("#endif // NTDDI_WINBLUE")
+@@ -9240,6 +9472,7 @@
  // IShellIconOverlayIdentifier::GetPriority(int * pIPriority) PURE;
  //      pIPriority     the priority of this Overlay Identifier
  

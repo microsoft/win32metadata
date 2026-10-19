@@ -6,6 +6,19 @@ The [adopted annotation specification](https://github.com/microsoft/win32metadat
 the vocabulary; the [WinHttp pilot](winhttp-header-annotations.md) records one
 complete example and its immutable evidence.
 
+The first fixed combined-image cut contains fourteen reviewed source deltas through
+the six display originals. Coalesce their production patches, activation and exact
+sidecar retirements additively; keep the central authorers and test harness when a
+cold owner's tooling or documentation conflicts. Fold the NetMgmt/FWPM and display
+recipe fragments into the canonical recipe rather than replacing its stage, SDK
+tree, tools or annotation header. Later source batches, parameter-override tooling
+and the manual-import availability bridge belong to a subsequent explicit cut.
+
+Source integration is not API acceptance. The CryptXML URI-query member deliberately
+uses the shipped SDK value `0x4` instead of the legacy sidecar value `3`; retain that
+raw difference along with native enum ordering, anonymous-coordinate and native
+typedef-identity differences in the new combined-image comparison.
+
 ## 1. Bound the partition and its authorities
 
 Inventory the actual same-SDK OLD metadata, native declarations and every applicable

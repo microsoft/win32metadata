@@ -1,0 +1,66 @@
+--- a/um/dvdif.idl
++++ b/um/dvdif.idl
+@@ -7,6 +7,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ // forward declarations - these are the interfaces declared in this file
+@@ -1104,6 +1105,7 @@
+ //==========================================================================
+ //==========================================================================
+ 
++_Win32_AnnotateInterface_(IDvdCmd, _Win32_SupportedOS_WindowsXP_)
+ [
+ AM_LOCAL
+ object,
+@@ -1139,6 +1141,7 @@
+ //==========================================================================
+ //==========================================================================
+ 
++_Win32_AnnotateInterface_(IDvdState, _Win32_SupportedOS_WindowsXP_)
+ [
+ AM_LOCAL
+ object,
+@@ -1180,6 +1183,7 @@
+ //==========================================================================
+ //==========================================================================
+ 
++_Win32_AnnotateInterface_(IDvdControl2, _Win32_SupportedOS_WindowsXP_)
+ [
+ AM_LOCAL
+ object,
+@@ -1774,6 +1778,7 @@
+ cpp_quote ("#define DVD_AUDIO_CAPS_SDDS		0x00000010")
+ 
+ 
++_Win32_AnnotateInterface_(IDvdInfo2, _Win32_SupportedOS_WindowsXP_)
+ [
+ local,
+ object,
+@@ -2223,6 +2228,7 @@
+ // IDvdGraphBuilder interface to build a filter graph for DVD-Video playback.
+ //
+ 
++_Win32_AnnotateInterface_(IDvdGraphBuilder, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,
+@@ -2314,6 +2320,7 @@
+ //
+ //  DDraw Exclusive Mode Video standard COM interface for Overlay Mixer
+ //
++_Win32_AnnotateInterface_(IDDrawExclModeVideo, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,
+@@ -2385,6 +2392,7 @@
+     AM_OVERLAY_NOTIFY_SOURCE_CHANGE  = 0x00000002,
+     AM_OVERLAY_NOTIFY_DEST_CHANGE    = 0x00000004
+ };
++_Win32_AnnotateInterface_(IDDrawExclModeVideoCallback, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,

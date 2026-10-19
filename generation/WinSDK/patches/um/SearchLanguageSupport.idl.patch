@@ -1,0 +1,18 @@
+--- a/um/SearchLanguageSupport.idl
++++ b/um/SearchLanguageSupport.idl
+@@ -10,6 +10,7 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -25,6 +26,7 @@
+ cpp_quote("CSearchLanguageSupport;")
+ cpp_quote("#endif")
+ 
++_Win32_AnnotateInterface_(ISearchLanguageSupport, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(24C3CBAA-EBC1-491a-9EF1-9F6D8DEB1B8F),

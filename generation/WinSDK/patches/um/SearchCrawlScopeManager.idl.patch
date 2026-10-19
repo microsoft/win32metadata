@@ -1,0 +1,58 @@
+--- a/um/SearchCrawlScopeManager.idl
++++ b/um/SearchCrawlScopeManager.idl
+@@ -11,6 +11,7 @@
+ //-----------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -23,6 +24,7 @@
+ //  The information about a search root applies to URL's that have the
+ //  root URL as a prefix.  (Longest prefix dominates.)
+ //
++_Win32_AnnotateInterface_(ISearchRoot, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(04C18CCF-1F57-4CBD-88CC-3900F5195CE3),
+@@ -151,6 +153,7 @@
+ //  IEnumSearchRoots - Enumerate all the search roots
+ //
+ 
++_Win32_AnnotateInterface_(IEnumSearchRoots, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF52),
+@@ -188,6 +191,7 @@
+ 
+ } FOLLOW_FLAGS;
+ 
++_Win32_AnnotateInterface_(ISearchScopeRule, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF53),
+@@ -225,6 +229,7 @@
+ //
+ // IEnumSearchScopeRules -  Enumerate scope rules
+ //
++_Win32_AnnotateInterface_(IEnumSearchScopeRules, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF54),
+@@ -276,6 +281,7 @@
+ //
+ //  ISearchCrawlScopeManager - manipulate crawlscopes and searchroots
+ //
++_Win32_AnnotateInterface_(ISearchCrawlScopeManager, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF55),
+@@ -399,6 +405,7 @@
+     HRESULT RemoveDefaultScopeRule([in, string] LPCWSTR pszURL);
+ };
+ 
++_Win32_AnnotateInterface_(ISearchCrawlScopeManager2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(6292F7AD-4E19-4717-A534-8FC22BCD5CCD),

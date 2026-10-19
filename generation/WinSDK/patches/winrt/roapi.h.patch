@@ -1,8 +1,40 @@
-diff --git a/winrt/roapi.h b/winrt/roapi.h
-index d7429649..e686bd88 100644
 --- a/winrt/roapi.h
 +++ b/winrt/roapi.h
-@@ -107,6 +107,7 @@ RoGetActivationFactory(
+@@ -2,6 +2,7 @@
+ 
+ #ifndef __ROAPI_H_
+ #define __ROAPI_H_
++#include <sal.h>
+ 
+ #ifdef _MSC_VER
+ #pragma once
+@@ -53,7 +54,8 @@
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
+ // forward declarations of the dllexport'd versions
+-ROAPI
++_Win32_SupportedOS_Windows8_
++_Win32_PreserveResult_ ROAPI
+ _Check_return_
+ HRESULT
+ WINAPI
+@@ -76,6 +78,7 @@
+     _COM_Outptr_ IInspectable** instance
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -94,6 +97,7 @@
+     _In_ RO_REGISTRATION_COOKIE cookie
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ _Check_return_
+ HRESULT
+@@ -107,6 +111,7 @@
  typedef interface IApartmentShutdown IApartmentShutdown;
  DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
  
@@ -10,7 +42,7 @@ index d7429649..e686bd88 100644
  ROAPI
  _Check_return_
  HRESULT
-@@ -117,6 +118,7 @@ RoRegisterForApartmentShutdown(
+@@ -117,6 +122,7 @@
      _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
      );
  
@@ -18,7 +50,7 @@ index d7429649..e686bd88 100644
  ROAPI
  _Check_return_
  HRESULT
-@@ -125,6 +127,7 @@ RoUnregisterForApartmentShutdown(
+@@ -125,6 +131,7 @@
      _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
      );
  

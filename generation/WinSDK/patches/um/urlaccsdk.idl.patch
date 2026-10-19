@@ -1,0 +1,42 @@
+--- a/um/urlaccsdk.idl
++++ b/um/urlaccsdk.idl
+@@ -13,6 +13,7 @@
+ //
+ //+----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -20,6 +21,7 @@
+ 
+ import "propsys.idl";
+ 
++_Win32_AnnotateInterface_(IUrlAccessor, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(0b63e318-9ccc-11d0-bcdb-00805fccce04),
+@@ -66,6 +68,7 @@
+     HRESULT BindToFilter([out] IFilter **ppFilter);
+ };
+ 
++_Win32_AnnotateInterface_(IUrlAccessor2, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(c7310734-ac80-11d1-8df3-00c04fb6ef4f),
+@@ -87,6 +90,7 @@
+                             [out] DWORD *pdwLength);
+ };
+ 
++_Win32_AnnotateInterface_(IUrlAccessor3, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(6FBC7005-0455-4874-B8FF-7439450241A3),
+@@ -100,6 +104,7 @@
+     HRESULT GetImpersonationSidBlobs([in] LPCWSTR pcwszURL, [out] DWORD *pcSidCount, [out] BLOB **ppSidBlobs);
+ };
+ 
++_Win32_AnnotateInterface_(IUrlAccessor4, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(5CC51041-C8D2-41d7-BCA3-9E9E286297DC),

@@ -1,11 +1,13 @@
-diff --git a/um/cryptxml.h b/um/cryptxml.h
-index b28b5686..ffef0486 100644
 --- a/um/cryptxml.h
 +++ b/um/cryptxml.h
-@@ -10,6 +10,16 @@
+@@ -10,6 +10,20 @@
  //
  --------------------------------------------------------------------*/
  #pragma once
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int CRYPT_XML_TRANSFORM_FLAGS;
++#endif
 +
 +#include <sal.h>
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
@@ -19,7 +21,7 @@ index b28b5686..ffef0486 100644
  #include <winapifamily.h>
  
  #pragma region Desktop Family or Appx Deployment Package
-@@ -504,7 +514,7 @@ HRESULT
+@@ -504,7 +518,7 @@
  typedef struct _CRYPT_XML_STATUS{
      ULONG                               cbSize;    
      DWORD                               dwErrorStatus;
@@ -28,10 +30,11 @@ index b28b5686..ffef0486 100644
  }CRYPT_XML_STATUS, *PCRYPT_XML_STATUS;
  
  #define CRYPT_XML_STATUS_NO_ERROR                           0x00000000
-@@ -554,6 +564,16 @@ typedef struct _CRYPT_XML_STATUS{
+@@ -553,6 +567,16 @@
+ 
  // The document is opened to encode
  #define CRYPT_XML_STATUS_OPENED_TO_ENCODE                       0x80000000
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(CRYPT_XML_STATUS_INFO_STATUS, unsigned int,
 +    CRYPT_XML_STATUS_INTERNAL_REFERENCE,
@@ -41,11 +44,24 @@ index b28b5686..ffef0486 100644
 +    CRYPT_XML_STATUS_SIGNATURE_VALID,
 +    CRYPT_XML_STATUS_OPENED_TO_ENCODE);
 +#endif
-+
+ 
  
  /****************************************************************************
-  CRYPT_XML_ALGORITHM
-@@ -803,7 +823,7 @@ Schema:
+@@ -664,6 +688,13 @@
+ 
+ #define CRYPT_XML_TRANSFORM_URI_QUERY_STRING    0x00000004
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(CRYPT_XML_TRANSFORM_FLAGS, unsigned int,
++    CRYPT_XML_TRANSFORM_ON_STREAM,
++    CRYPT_XML_TRANSFORM_ON_NODESET,
++    CRYPT_XML_TRANSFORM_URI_QUERY_STRING);
++#endif
++
+ /****************************************************************************
+  CRYPT_XML_TRANSFORM_CHAIN_CONFIG
+ 
+@@ -803,7 +834,7 @@
  
  ****************************************************************************/
  typedef struct _CRYPT_XML_KEY_VALUE{
@@ -54,7 +70,7 @@ index b28b5686..ffef0486 100644
      union
      {
          CRYPT_XML_KEY_DSA_KEY_VALUE     DSAKeyValue;
-@@ -818,6 +838,14 @@ typedef struct _CRYPT_XML_KEY_VALUE{
+@@ -818,6 +849,14 @@
  #define CRYPT_XML_KEY_VALUE_TYPE_ECDSA  0x00000003
  #define CRYPT_XML_KEY_VALUE_TYPE_CUSTOM 0x00000004
  
@@ -69,7 +85,7 @@ index b28b5686..ffef0486 100644
  /****************************************************************************
   CRYPT_XML_ISSUER_SERIAL
  
-@@ -870,7 +898,7 @@ typedef struct _CRYPT_XML_ISSUER_SERIAL{
+@@ -870,7 +909,7 @@
  
  ****************************************************************************/
  typedef struct _CRYPT_XML_X509DATA_ITEM{
@@ -78,10 +94,11 @@ index b28b5686..ffef0486 100644
      union
      {
          CRYPT_XML_ISSUER_SERIAL         IssuerSerial;
-@@ -889,6 +917,16 @@ typedef struct _CRYPT_XML_X509DATA_ITEM{
+@@ -888,6 +927,16 @@
+ #define CRYPT_XML_X509DATA_TYPE_CERTIFICATE     0x00000004
  #define CRYPT_XML_X509DATA_TYPE_CRL             0x00000005
  #define CRYPT_XML_X509DATA_TYPE_CUSTOM          0x00000006
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(CRYPT_XML_X509DATA_TYPE, unsigned int,
 +    CRYPT_XML_X509DATA_TYPE_ISSUER_SERIAL,
@@ -91,11 +108,10 @@ index b28b5686..ffef0486 100644
 +    CRYPT_XML_X509DATA_TYPE_CRL,
 +    CRYPT_XML_X509DATA_TYPE_CUSTOM);
 +#endif
-+
+ 
  /****************************************************************************
   CRYPT_XML_X509DATA
- 
-@@ -955,7 +993,7 @@ typedef struct _CRYPT_XML_X509DATA{
+@@ -955,7 +1004,7 @@
  
  ****************************************************************************/
  typedef struct _CRYPT_XML_KEY_INFO_ITEM{
@@ -104,10 +120,11 @@ index b28b5686..ffef0486 100644
      union
      {
          LPCWSTR                         wszKeyName;
-@@ -972,6 +1010,15 @@ typedef struct _CRYPT_XML_KEY_INFO_ITEM{
+@@ -971,6 +1020,15 @@
+ #define CRYPT_XML_KEYINFO_TYPE_RETRIEVAL    0x00000003
  #define CRYPT_XML_KEYINFO_TYPE_X509DATA     0x00000004
  #define CRYPT_XML_KEYINFO_TYPE_CUSTOM       0x00000005
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(CRYPT_XML_KEYINFO_TYPE, unsigned int,
 +    CRYPT_XML_KEYINFO_TYPE_KEYNAME,
@@ -116,11 +133,10 @@ index b28b5686..ffef0486 100644
 +    CRYPT_XML_KEYINFO_TYPE_X509DATA,
 +    CRYPT_XML_KEYINFO_TYPE_CUSTOM);
 +#endif
-+
+ 
  /****************************************************************************
   CRYPT_XML_KEY_INFO
- 
-@@ -1258,6 +1305,7 @@ typedef struct _CRYPT_XML_DOC_CTXT{
+@@ -1258,6 +1316,7 @@
   encapsulated by the handle is fully released.
  
  ****************************************************************************/
@@ -128,7 +144,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1272,6 +1320,7 @@ CryptXmlClose(
+@@ -1272,6 +1331,7 @@
   default Transform Chain Engine.
  
  ****************************************************************************/
@@ -136,7 +152,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT
  WINAPI
-@@ -1312,12 +1361,13 @@ CryptXmlGetTransforms(
+@@ -1312,12 +1372,13 @@
   	[out] Handle to the Signature object.
  
  ****************************************************************************/
@@ -151,7 +167,7 @@ index b28b5686..ffef0486 100644
      _In_opt_        LPCWSTR             wszId,
      _In_reads_opt_(cProperty) 
                      const CRYPT_XML_PROPERTY* rgProperty, 
-@@ -1354,12 +1404,13 @@ CryptXmlOpenToEncode(
+@@ -1354,12 +1415,13 @@
   	[out] Handle to the Document Context object.
  
  ****************************************************************************/
@@ -166,7 +182,7 @@ index b28b5686..ffef0486 100644
      _In_reads_opt_(cProperty) 
                      const CRYPT_XML_PROPERTY* rgProperty, 
      _In_            ULONG               cProperty, 
-@@ -1404,6 +1455,7 @@ CryptXmlOpenToDecode(
+@@ -1404,6 +1466,7 @@
      Otherwise, use CRYPT_XML_FLAG_ADD_OBJECT_CREATE_COPY flag to create in-memory copy.
  
  ****************************************************************************/
@@ -174,7 +190,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1459,6 +1511,7 @@ CryptXmlAddObject(
+@@ -1459,6 +1522,7 @@
      [out] Pointer to a Reference Handle.
  
  ****************************************************************************/
@@ -182,7 +198,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1508,6 +1561,7 @@ Remarks:
+@@ -1508,6 +1572,7 @@
      The CryptXmlDigestReference function always calls pDataProviderIn->fpnClose.
  
  ****************************************************************************/
@@ -190,7 +206,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1541,6 +1595,7 @@ CryptXmlDigestReference(
+@@ -1541,6 +1606,7 @@
   must be NULL.
  
  ****************************************************************************/
@@ -198,7 +214,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1652,6 +1707,7 @@ typedef enum
+@@ -1652,6 +1718,7 @@
      [in] Specifies the canonicalization method.
  
  ****************************************************************************/
@@ -206,7 +222,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1659,7 +1715,7 @@ CryptXmlSign(
+@@ -1659,7 +1726,7 @@
      _In_            HCRYPTXML           hSignature,
      _In_opt_        HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hKey,
                      DWORD               dwKeySpec,
@@ -215,7 +231,7 @@ index b28b5686..ffef0486 100644
                      CRYPT_XML_KEYINFO_SPEC dwKeyInfoSpec,
      _In_opt_        const void          *pvKeyInfoSpec,
      _In_            const CRYPT_XML_ALGORITHM *pSignatureMethod,
-@@ -1672,6 +1728,13 @@ CryptXmlSign(
+@@ -1672,6 +1739,13 @@
  //       set to CRYPT_XML_KEYINFO_SPEC_ENCODED
  #define CRYPT_XML_SIGN_ADD_KEYVALUE         0x00000001
  
@@ -229,7 +245,7 @@ index b28b5686..ffef0486 100644
  /****************************************************************************
   CryptXmlImportPublicKey
  
-@@ -1686,11 +1749,12 @@ CryptXmlSign(
+@@ -1686,11 +1760,12 @@
          [out] Pointer to BCRYPT_KEY_HANDLE that receives imported key handle.
  
  ****************************************************************************/
@@ -243,7 +259,7 @@ index b28b5686..ffef0486 100644
      _In_            const CRYPT_XML_KEY_VALUE *pKeyValue,
      _Out_           BCRYPT_KEY_HANDLE   *phKey
      );
-@@ -1713,13 +1777,14 @@ CryptXmlImportPublicKey(
+@@ -1713,13 +1788,14 @@
          CRYPT_XML_FLAG_DISABLE_EXTENSIONS
  
  ****************************************************************************/
@@ -259,7 +275,7 @@ index b28b5686..ffef0486 100644
      );
  
  /****************************************************************************
-@@ -1729,6 +1794,7 @@ CryptXmlVerifySignature(
+@@ -1729,6 +1805,7 @@
   a handle to Document Context. 
  
  ****************************************************************************/
@@ -267,7 +283,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1744,6 +1810,7 @@ CryptXmlGetDocContext(
+@@ -1744,6 +1821,7 @@
   by a handle to Signature.
  
  ****************************************************************************/
@@ -275,7 +291,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1758,6 +1825,7 @@ CryptXmlGetSignature(
+@@ -1758,6 +1836,7 @@
  The CryptXmlGetReference function returns data structure encapsulated 
  by a handle to Reference.
  ****************************************************************************/
@@ -283,7 +299,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1773,6 +1841,7 @@ The CryptXmlGetStatus function returns a CRYPT_XML_STATUS for array
+@@ -1773,6 +1852,7 @@
  of Signature, single Signature, Reference or Manifest.
  
  ****************************************************************************/
@@ -291,7 +307,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1804,6 +1873,7 @@ CryptXmlGetStatus(
+@@ -1804,6 +1884,7 @@
      [in, callback] An application-defined callback to receive constructed XML.
  
  ****************************************************************************/
@@ -299,7 +315,7 @@ index b28b5686..ffef0486 100644
  _Success_( return == 0 )
  HRESULT
  WINAPI
-@@ -1867,7 +1937,7 @@ struct _CRYPT_XML_ALGORITHM_INFO
+@@ -1867,7 +1948,7 @@
      DWORD                               cbSize;
      WCHAR                               *wszAlgorithmURI;
      WCHAR                               *wszName;
@@ -308,7 +324,7 @@ index b28b5686..ffef0486 100644
      WCHAR                               *wszCNGAlgid;
      WCHAR                               *wszCNGExtraAlgid;
      DWORD                               dwSignFlags;	    // NCryptSignHash flags
-@@ -1879,6 +1949,12 @@ struct _CRYPT_XML_ALGORITHM_INFO
+@@ -1879,6 +1960,12 @@
  #define CRYPT_XML_GROUP_ID_HASH         1
  #define CRYPT_XML_GROUP_ID_SIGN         2
  
@@ -321,7 +337,7 @@ index b28b5686..ffef0486 100644
  /****************************************************************************
   CryptXmlGetAlgorithmInfo
  
-@@ -1890,12 +1966,13 @@ struct _CRYPT_XML_ALGORITHM_INFO
+@@ -1890,12 +1977,13 @@
      The caller must free ppAlgInfo by calling LocalFree()
  
  ****************************************************************************/

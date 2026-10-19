@@ -1,15 +1,15 @@
-diff --git a/shared/dxgi1_2.idl b/shared/dxgi1_2.idl
-index e5c1a6da..a72151f8 100644
 --- a/shared/dxgi1_2.idl
 +++ b/shared/dxgi1_2.idl
-@@ -1,5 +1,6 @@
+@@ -1,5 +1,8 @@
  // Copyright (c) Microsoft Corporation.  All Rights Reserved
  
 +#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
  import "dxgi.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -7,6 +8,7 @@ cpp_quote("#include <winapifamily.h>")
+@@ -7,6 +10,7 @@
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -17,7 +17,7 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid( ea9dbf1a-c88e-4486-854a-98aa0138f30c ),
-@@ -73,6 +75,7 @@ typedef struct DXGI_OUTDUPL_FRAME_INFO
+@@ -73,6 +77,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutputDuplication interface
  //--------------------------------------------------------------------------------------------------------
@@ -25,7 +25,16 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid(191cfac3-a341-470d-b26e-a864f428319c),
-@@ -115,6 +118,7 @@ typedef enum DXGI_ALPHA_MODE
+@@ -82,7 +87,7 @@
+ interface IDXGIOutputDuplication :
+     IDXGIObject
+ {
+-    void GetDesc([out, annotation ("_Out_")] DXGI_OUTDUPL_DESC* pDesc);
++    void GetDesc([out, annotation ("_Out_ _Win32_Retval_")] DXGI_OUTDUPL_DESC* pDesc);
+     HRESULT AcquireNextFrame([in, annotation ("_In_")] UINT TimeoutInMilliseconds,
+                              [out, annotation("_Out_")] DXGI_OUTDUPL_FRAME_INFO* pFrameInfo,
+                              [out, annotation("_COM_Outptr_")] IDXGIResource** ppDesktopResource);
+@@ -115,6 +120,7 @@
      DXGI_ALPHA_MODE_FORCE_DWORD = 0xffffffff
  } DXGI_ALPHA_MODE;
  
@@ -33,7 +42,7 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid(aba496dd-b617-4cb8-a866-bc44d7eb1fa2),
-@@ -129,6 +133,7 @@ interface IDXGISurface2 :
+@@ -129,6 +135,7 @@
                          [out, annotation("_Out_")] UINT *pSubresourceIndex);
  };
  
@@ -41,7 +50,7 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid(30961379-4609-4a41-998e-54fe567ee0c1),
-@@ -156,6 +161,7 @@ typedef enum _DXGI_OFFER_RESOURCE_PRIORITY
+@@ -156,6 +163,7 @@
      DXGI_OFFER_RESOURCE_PRIORITY_HIGH,
  } DXGI_OFFER_RESOURCE_PRIORITY;
  
@@ -49,7 +58,24 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid( 05008617-fbfd-4051-a790-144884b4f6a9 ),
-@@ -237,6 +243,7 @@ typedef struct DXGI_PRESENT_PARAMETERS
+@@ -181,6 +189,7 @@
+ 
+ const DWORD DXGI_SHARED_RESOURCE_READ = 0x80000000L;
+ const DWORD DXGI_SHARED_RESOURCE_WRITE = 1;
++cpp_quote("_Win32_FlagsEnum_(DXGI_SHARED_RESOURCE_RW, unsigned int, DXGI_SHARED_RESOURCE_READ, DXGI_SHARED_RESOURCE_WRITE);")
+ 
+ typedef struct DXGI_MODE_DESC1
+ {
+@@ -215,7 +224,7 @@
+     DXGI_SCALING      Scaling;
+     DXGI_SWAP_EFFECT  SwapEffect;
+     DXGI_ALPHA_MODE   AlphaMode;
+-    UINT              Flags; // DXGI_SWAP_CHAIN_FLAG
++    [annotation("_Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG)")] UINT              Flags; // DXGI_SWAP_CHAIN_FLAG
+ } DXGI_SWAP_CHAIN_DESC1;
+ 
+ typedef struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC
+@@ -237,6 +246,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapchain1 interface
  //--------------------------------------------------------------------------------------------------------
@@ -57,7 +83,23 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid( 790a45f7-0d42-4876-983a-0a55cfe6f4aa ),
-@@ -269,6 +276,7 @@ interface IDXGISwapChain1 :
+@@ -246,8 +256,8 @@
+ interface IDXGISwapChain1 :
+     IDXGISwapChain
+ {
+-    HRESULT GetDesc1( [out, annotation("_Out_")] DXGI_SWAP_CHAIN_DESC1 *pDesc );
+-    HRESULT GetFullscreenDesc( [out, annotation("_Out_")] DXGI_SWAP_CHAIN_FULLSCREEN_DESC *pDesc );
++    HRESULT GetDesc1( [out, annotation("_Out_ _Win32_Retval_")] DXGI_SWAP_CHAIN_DESC1 *pDesc );
++    HRESULT GetFullscreenDesc( [out, annotation("_Out_ _Win32_Retval_")] DXGI_SWAP_CHAIN_FULLSCREEN_DESC *pDesc );
+ 
+     HRESULT GetHwnd( [out, annotation("_Out_")] HWND *pHwnd);
+     HRESULT GetCoreWindow (
+@@ -265,10 +275,12 @@
+     HRESULT SetRotation( [in, annotation("_In_")] DXGI_MODE_ROTATION Rotation );
+     HRESULT GetRotation( [out, annotation("_Out_")] DXGI_MODE_ROTATION* pRotation );
+ };
++_Win32_AnnotateMethod_(IDXGISwapChain1::Present1, _Win32_PreserveResult_)
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIFactory2 interface
  //--------------------------------------------------------------------------------------------------------
@@ -65,7 +107,16 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid( 50c83a1c-e072-4c48-87b0-3630fa36a6d0 ),
-@@ -375,6 +383,7 @@ typedef struct DXGI_ADAPTER_DESC2
+@@ -366,7 +378,7 @@
+ 
+     LUID AdapterLuid;
+ 
+-    UINT Flags;
++    [annotation("_Win32_AssociatedEnum_(DXGI_ADAPTER_FLAG)")] UINT Flags;
+ 
+     DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
+     DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
+@@ -375,6 +387,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGIAdapter2 interface
  //--------------------------------------------------------------------------------------------------------
@@ -73,7 +124,14 @@ index e5c1a6da..a72151f8 100644
  [
      object,
      uuid(0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5),
-@@ -390,6 +399,7 @@ interface IDXGIAdapter2 :
+@@ -384,12 +397,13 @@
+ interface IDXGIAdapter2 :
+     IDXGIAdapter1
+ {
+-    HRESULT GetDesc2( [out, annotation("_Out_")] DXGI_ADAPTER_DESC2 *pDesc);
++    HRESULT GetDesc2( [out, annotation("_Out_ _Win32_Retval_")] DXGI_ADAPTER_DESC2 *pDesc);
+ };
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput1
  //--------------------------------------------------------------------------------------------------------

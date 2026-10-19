@@ -1,4 +1,3 @@
-diff --git a/um/textserv.h b/um/textserv.h
 --- a/um/textserv.h
 +++ b/um/textserv.h
 @@ -16,6 +16,7 @@
@@ -9,7 +8,7 @@ diff --git a/um/textserv.h b/um/textserv.h
  
  #include <winapifamily.h>
  
-@@ -113,7 +114,7 @@ enum CHANGETYPE
+@@ -113,7 +114,7 @@
   *	what actually happened for a change.
   */
  struct CHANGENOTIFY {
@@ -18,7 +17,34 @@ diff --git a/um/textserv.h b/um/textserv.h
  	void *	pvCookieData; 				//@field cookie for the undo action 
  										// associated with the change.
  };
-@@ -457,6 +458,9 @@ interface IRawElementProviderSimple;
+@@ -185,7 +186,7 @@
+ 	
+ 	//@cmember Rendering
+ 	virtual HRESULT		TxDraw(	
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -216,7 +217,7 @@
+ 
+ 	//@cmember Setcursor
+ 	virtual HRESULT 	OnTxSetCursor(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -228,7 +229,7 @@
+ 
+ 	//@cmember Hit-test
+ 	virtual HRESULT 	TxQueryHitPoint(
+-							DWORD dwDrawAspect,		
++							_Win32_AssociatedEnum_(DVASPECT) DWORD dwDrawAspect,
+ 							LONG  lindex,			
+ 							void * pvAspect,		 
+ 							DVTARGETDEVICE * ptd,									
+@@ -457,6 +458,9 @@
   *
   *	@base	public | IUnknown 
   */
@@ -28,7 +54,7 @@ diff --git a/um/textserv.h b/um/textserv.h
  interface DECLSPEC_UUID("983E572D-20CD-460B-9104-83111592DD10") IRicheditWindowlessAccessibility : public IUnknown
  {
  	virtual HRESULT STDMETHODCALLTYPE CreateProvider(
-@@ -473,6 +477,9 @@ struct UiaRect;
+@@ -473,6 +477,9 @@
   *
   *	@base	public | IUnknown 
   */
@@ -38,7 +64,7 @@ diff --git a/um/textserv.h b/um/textserv.h
  interface DECLSPEC_UUID("23969A9D-8546-4032-A1BB-73750CBF3333") IRichEditUiaInformation : public IUnknown
  {
  	virtual HRESULT STDMETHODCALLTYPE GetBoundaryRectangle(UiaRect *pUiaRect) = 0;
-@@ -490,6 +497,9 @@ typedef int PROPERTYID;
+@@ -490,6 +497,9 @@
   *
   *	@base	public | IUnknown 
   */
@@ -48,7 +74,7 @@ diff --git a/um/textserv.h b/um/textserv.h
  interface IRicheditUiaOverrides : public IUnknown
  {
  	virtual HRESULT STDMETHODCALLTYPE GetPropertyOverrideValue(
-@@ -502,6 +512,7 @@ interface IRicheditUiaOverrides : public IUnknown
+@@ -502,6 +512,7 @@
  //------------------------------------------------------------------------
  
  // Text Services factory

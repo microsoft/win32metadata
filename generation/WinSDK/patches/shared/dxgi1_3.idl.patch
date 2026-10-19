@@ -1,5 +1,3 @@
-diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
-index 06b176bc..c4f3d025 100644
 --- a/shared/dxgi1_3.idl
 +++ b/shared/dxgi1_3.idl
 @@ -1,5 +1,6 @@
@@ -9,7 +7,7 @@ index 06b176bc..c4f3d025 100644
  import "dxgi1_2.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -8,12 +9,13 @@ cpp_quote("#include <winapifamily.h>")
+@@ -8,12 +9,13 @@
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
  cpp_quote( "#define DXGI_CREATE_FACTORY_DEBUG 0x1")
@@ -25,7 +23,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 6007896c-3244-4afd-bf18-a6d3beda5023 ),
-@@ -45,6 +47,7 @@ typedef struct DXGI_MATRIX_3X2_F
+@@ -45,6 +47,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapChain2 interface
  //--------------------------------------------------------------------------------------------------------
@@ -33,7 +31,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( a8be2ac4-199f-4946-b331-79599fb98de7 ),
-@@ -67,6 +70,7 @@ interface IDXGISwapChain2 :
+@@ -67,6 +70,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput2 interface
  //--------------------------------------------------------------------------------------------------------
@@ -41,7 +39,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 595e39d1-2724-4663-99b1-da969de28364 ),
-@@ -83,6 +87,7 @@ interface IDXGIOutput2 :
+@@ -83,6 +87,7 @@
  // IDXGIFactory3 interface
  //--------------------------------------------------------------------------------------------------------
  
@@ -49,7 +47,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 25483823-cd46-4c7d-86ca-47aa95b837bd ),
-@@ -108,7 +113,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -108,7 +113,7 @@
  //------------------------------------------------------------------------------
  typedef struct DXGI_DECODE_SWAP_CHAIN_DESC
  {
@@ -58,7 +56,23 @@ index 06b176bc..c4f3d025 100644
  }  DXGI_DECODE_SWAP_CHAIN_DESC;
  
  //+-----------------------------------------------------------------------------
-@@ -126,6 +131,7 @@ typedef enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+@@ -116,16 +121,23 @@
+ //  Flags: DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
+ {
+     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_NOMINAL_RANGE = 0x1, // 16 - 235 vs. 0 - 255
+     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_BT709         = 0x2, // BT.709 vs. BT.601
+     DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAG_xvYCC         = 0x4, // xvYCC vs. conventional YCbCr
+ } DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIDecodeSwapChain interface
  //--------------------------------------------------------------------------------------------------------
@@ -66,7 +80,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 2633066b-4514-4c7a-8fd8-12ea98059d18 ),
-@@ -149,11 +155,13 @@ interface IDXGIDecodeSwapChain :
+@@ -149,11 +161,13 @@
      HRESULT SetColorSpace(DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS ColorSpace);
      DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS GetColorSpace();
  };
@@ -80,7 +94,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 41e7d1f2-a591-4f7b-a2e5-fa9c843e1c12 ),
-@@ -206,6 +214,7 @@ typedef struct DXGI_FRAME_STATISTICS_MEDIA
+@@ -206,6 +220,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapChainMedia interface
  //--------------------------------------------------------------------------------------------------------
@@ -88,7 +102,25 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( dd95b90b-f05f-4f6a-bd65-25bfb264bd84 ),
-@@ -235,6 +244,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+@@ -220,11 +235,17 @@
+     HRESULT CheckPresentDurationSupport(UINT DesiredPresentDuration, [out, annotation("_Out_")] UINT *pClosestSmallerPresentDuration, [out, annotation("_Out_")] UINT *pClosestLargerPresentDuration);
+ };
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_OVERLAY_SUPPORT_FLAG
+ {
+     DXGI_OVERLAY_SUPPORT_FLAG_DIRECT   = 0x1,
+     DXGI_OVERLAY_SUPPORT_FLAG_SCALING  = 0x2
+ } DXGI_OVERLAY_SUPPORT_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -235,6 +256,7 @@
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput3 interface
  //--------------------------------------------------------------------------------------------------------
@@ -96,7 +128,7 @@ index 06b176bc..c4f3d025 100644
  [
      object,
      uuid( 8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18 ),
-@@ -244,7 +254,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+@@ -244,7 +266,7 @@
  interface IDXGIOutput3 :
      IDXGIOutput2
  {

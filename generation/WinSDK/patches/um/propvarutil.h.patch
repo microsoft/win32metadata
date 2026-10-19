@@ -1,4 +1,3 @@
-diff --git a/um/propvarutil.h b/um/propvarutil.h
 --- a/um/propvarutil.h
 +++ b/um/propvarutil.h
 @@ -1,3 +1,4 @@
@@ -6,7 +5,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  
  //===========================================================================
  //
-@@ -41,7 +42,11 @@ typedef _Return_type_success_(return >= 0) LONG NTSTATUS;
+@@ -41,7 +42,11 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -19,13 +18,14 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  {
      PSTF_UTC   = 0x00000000,
      PSTF_LOCAL = 0x00000001,
-@@ -55,40 +60,57 @@ typedef int PSTIME_FLAGS;
+@@ -55,40 +60,57 @@
  //====================
  
  // Initialize a propvariant
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitPropVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ PROPVARIANT *ppropvar);
- PSSTDAPI InitPropVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ PROPVARIANT *ppropvar);
++PSSTDAPI _Win32_SupportedOS_WindowsXP_ InitPropVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ PROPVARIANT *ppropvar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  #pragma region Application Family
@@ -48,7 +48,8 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
- PSSTDAPI InitPropVariantFromPropVariantVectorElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
+-PSSTDAPI InitPropVariantFromPropVariantVectorElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
++PSSTDAPI _Win32_SupportedOS_WindowsXP_ InitPropVariantFromPropVariantVectorElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitPropVariantVectorFromPropVariant(_In_ REFPROPVARIANT propvarSingle, _Out_ PROPVARIANT *ppropvarVector);
 +_Win32_SupportedOS_WindowsXP_
@@ -77,7 +78,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI InitPropVariantFromStringAsVector(_In_opt_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
  #ifdef __cplusplus
  HRESULT  InitPropVariantFromBoolean(_In_ BOOL fVal, _Out_ PROPVARIANT *ppropvar);
-@@ -106,13 +128,21 @@ BOOL     IsPropVariantString(_In_ REFPROPVARIANT propvar);
+@@ -106,13 +128,21 @@
  #endif
  
  // Extract data from a propvariant
@@ -99,7 +100,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ DOUBLE dblDefault);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -120,82 +150,111 @@ PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarI
+@@ -120,82 +150,111 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  PSSTDAPI_(PCWSTR)    PropVariantToStringWithDefault(_In_ REFPROPVARIANT propvarIn, _In_opt_ LPCWSTR pszDefault);
  
@@ -129,9 +130,10 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  #pragma endregion
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
- PSSTDAPI             PropVariantToGUID(_In_ REFPROPVARIANT propvar, _Out_ GUID *pguid);
+-PSSTDAPI             PropVariantToGUID(_In_ REFPROPVARIANT propvar, _Out_ GUID *pguid);
 -_Check_return_ PSSTDAPI PropVariantToStringAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ PWSTR *ppszOut);
 -_Check_return_ PSSTDAPI PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ BSTR *pbstrOut);
++PSSTDAPI             _Win32_SupportedOS_WindowsXP_ PropVariantToGUID(_In_ REFPROPVARIANT propvar, _Out_ GUID *pguid);
 +_Check_return_ PSSTDAPI _Win32_SupportedOS_WindowsXP_ PropVariantToStringAlloc(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ PWSTR *ppszOut);
 +_Check_return_ PSSTDAPI _Win32_SupportedOS_WindowsXP_ PropVariantToBSTR(_In_ REFPROPVARIANT propvar, _Outptr_result_nullonfailure_ BSTR *pbstrOut);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
@@ -226,7 +228,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI_(void) ClearPropVariantArray(_Inout_updates_(cVars) PROPVARIANT *rgPropVar, _In_ UINT cVars);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -215,7 +274,11 @@ typedef enum
+@@ -215,7 +274,11 @@
      PVCU_YEAR    = 6
  } PROPVAR_COMPARE_UNIT;
  
@@ -239,7 +241,13 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  {
      PVCF_DEFAULT                 = 0x00000000,   // When comparing strings, use StrCmpLogical
      PVCF_TREATEMPTYASGREATERTHAN = 0x00000001,   // Empty/null values are greater-than non-empty values
-@@ -233,7 +296,11 @@ PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVA
+@@ -228,12 +291,16 @@
+ typedef int PROPVAR_COMPARE_FLAGS;
+ 
+ // Comparisons
+-PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
++PSSTDAPI_(int) _Win32_SupportedOS_WindowsXP_ PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
+ #ifdef __cplusplus
  int PropVariantCompare(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2);
  #endif
  
@@ -252,7 +260,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  {
      PVCHF_DEFAULT           = 0x00000000,
      PVCHF_NOVALUEPROP       = 0x00000001,       // Maps to VARIANT_NOVALUEPROP for VariantChangeType
-@@ -245,10 +312,13 @@ enum tagPROPVAR_CHANGE_FLAGS
+@@ -245,10 +312,13 @@
  typedef int PROPVAR_CHANGE_FLAGS;
  
  // Coersions
@@ -266,7 +274,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pPropVar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
  #pragma endregion
-@@ -256,11 +326,12 @@ PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pProp
+@@ -256,11 +326,12 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  // Stg functions
@@ -280,7 +288,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI StgDeserializePropVariant(
              _In_ const SERIALIZEDPROPERTYVALUE* pprop,
              _In_ ULONG cbMax,
-@@ -283,6 +354,7 @@ BOOL IsVarTypeInteger(_In_ VARTYPE vt);
+@@ -283,29 +354,43 @@
  #endif
  
  // Initialize a VARIANT
@@ -288,7 +296,11 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI InitVariantFromResource(_In_ HINSTANCE hinst, _In_ UINT id, _Out_ VARIANT *pvar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -293,19 +365,32 @@ PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+-PSSTDAPI InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ VARIANT *pvar);
++PSSTDAPI _Win32_SupportedOS_WindowsXP_ InitVariantFromBuffer(_In_reads_bytes_(cb) const void *pv, _In_ UINT cb, _Out_ VARIANT *pvar);
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
  #pragma endregion
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -300,7 +312,8 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI InitVariantFromFileTimeArray(_In_reads_opt_(cElems) const FILETIME *prgft, _In_ ULONG cElems, _Out_ VARIANT *pvar);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitVariantFromStrRet(_In_ STRRET *pstrret, _In_ PCUITEMID_CHILD pidl, _Out_ VARIANT *pvar);
- PSSTDAPI InitVariantFromVariantArrayElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
+-PSSTDAPI InitVariantFromVariantArrayElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
++PSSTDAPI _Win32_SupportedOS_WindowsXP_ InitVariantFromVariantArrayElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitVariantFromBooleanArray(_In_reads_(cElems) const BOOL *prgf, _In_ ULONG cElems, _Out_ VARIANT *pvar);
 +_Win32_SupportedOS_WindowsXP_
@@ -321,7 +334,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI InitVariantFromStringArray(_In_reads_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ VARIANT *pvar);
  #ifdef __cplusplus
  HRESULT  InitVariantFromBoolean(_In_ BOOL fVal, _Out_ VARIANT *pvar);
-@@ -324,82 +409,120 @@ HRESULT  InitVariantFromUnknown(_In_opt_ IUnknown *unknown, _Out_ VARIANT* varia
+@@ -324,82 +409,120 @@
  #endif
  
  // Extract data from a VARIANT
@@ -455,7 +468,7 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
  
  //===========================
-@@ -414,7 +537,11 @@ PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
+@@ -414,7 +537,11 @@
  // propvar.caul.pElems[0] = current progress
  // propvar.caul.pElems[1] = total progress
  // propvar.caul.pElems[2] = DRAWPROGRESSFLAGS (see below);

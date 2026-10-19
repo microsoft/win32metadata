@@ -1,5 +1,3 @@
-diff --git a/um/dxgidebug.idl b/um/dxgidebug.idl
-index ad3184d3..a695ac56 100644
 --- a/um/dxgidebug.idl
 +++ b/um/dxgidebug.idl
 @@ -8,6 +8,7 @@
@@ -10,7 +8,27 @@ index ad3184d3..a695ac56 100644
  import "oaidl.idl";
  import "ocidl.idl";
  
-@@ -113,6 +114,7 @@ cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);"
+@@ -19,6 +20,9 @@
+ const UINT DXGI_DEBUG_BINARY_VERSION = 1;
+ 
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_DEBUG_RLO_FLAGS
+ {
+     DXGI_DEBUG_RLO_SUMMARY = 0x1,
+@@ -26,6 +30,9 @@
+     DXGI_DEBUG_RLO_IGNORE_INTERNAL = 0x4,
+     DXGI_DEBUG_RLO_ALL = 0x7,
+ } DXGI_DEBUG_RLO_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ //==================================================================================================================================
+@@ -113,6 +120,7 @@
  // to this object which can be retrieved through its APIs.
  //
  //
@@ -18,7 +36,7 @@ index ad3184d3..a695ac56 100644
  [ uuid( D67441C7-672A-476f-9E82-CD55B44949CE ), object, local, pointer_default( unique ) ]
  
  interface IDXGIInfoQueue
-@@ -424,6 +426,7 @@ interface IDXGIInfoQueue
+@@ -424,6 +432,7 @@
          [annotation("_In_")]    DXGI_DEBUG_ID                           Producer);
  };
  
@@ -26,7 +44,7 @@ index ad3184d3..a695ac56 100644
  [ uuid(119E7452-DE9E-40fe-8806-88F90C12B441), object, local, pointer_default( unique ) ]
  interface IDXGIDebug
      : IUnknown
-@@ -431,6 +434,7 @@ interface IDXGIDebug
+@@ -431,6 +440,7 @@
      HRESULT ReportLiveObjects(GUID apiid, DXGI_DEBUG_RLO_FLAGS flags);
  };
  

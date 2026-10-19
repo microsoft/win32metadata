@@ -1,5 +1,3 @@
-diff --git a/shared/dxgi.idl b/shared/dxgi.idl
-index 1899f8f2..102b74ad 100644
 --- a/shared/dxgi.idl
 +++ b/shared/dxgi.idl
 @@ -1,3 +1,4 @@
@@ -7,7 +5,27 @@ index 1899f8f2..102b74ad 100644
  import "oaidl.idl";
  import "ocidl.idl";
  
-@@ -190,7 +191,7 @@ typedef struct DXGI_SWAP_CHAIN_DESC
+@@ -163,6 +164,9 @@
+ } DXGI_SWAP_EFFECT;
+ 
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_SWAP_CHAIN_FLAG
+ {
+     DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
+@@ -179,6 +183,9 @@
+     DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 2048,
+     DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 4096,
+ } DXGI_SWAP_CHAIN_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ typedef struct DXGI_SWAP_CHAIN_DESC
+@@ -190,7 +197,7 @@
      HWND OutputWindow;
      BOOL Windowed;
      DXGI_SWAP_EFFECT SwapEffect;
@@ -16,7 +34,7 @@ index 1899f8f2..102b74ad 100644
  } DXGI_SWAP_CHAIN_DESC;
  
  
-@@ -291,7 +292,7 @@ const UINT DXGI_MAP_DISCARD = 4UL;
+@@ -291,7 +298,7 @@
  interface IDXGISurface :
      IDXGIDeviceSubObject
  {
@@ -25,7 +43,7 @@ index 1899f8f2..102b74ad 100644
      HRESULT Map(
          [out, annotation("_Out_")] DXGI_MAPPED_RECT *pLockedRect,
          [in] UINT MapFlags );
-@@ -303,6 +304,7 @@ interface IDXGISurface :
+@@ -303,6 +310,7 @@
  // The DXGISurface1
  //--------------------------------------------------------------------------------------------------------
  
@@ -33,7 +51,7 @@ index 1899f8f2..102b74ad 100644
  [
      object,
      uuid( 4AE63092-6327-4c1b-80AE-BFE12EA32B86),
-@@ -336,11 +338,12 @@ interface IDXGIAdapter : IDXGIObject
+@@ -336,11 +344,12 @@
      HRESULT EnumOutputs(
          [in] UINT Output,
          [in, out, annotation("_COM_Outptr_")] IDXGIOutput **ppOutput );
@@ -47,7 +65,7 @@ index 1899f8f2..102b74ad 100644
  
  //--------------------------------------------------------------------------------------------------------
  const UINT DXGI_ENUM_MODES_INTERLACED = 1UL;
-@@ -360,7 +363,7 @@ const UINT DXGI_ENUM_MODES_SCALING = 2UL;
+@@ -360,7 +369,7 @@
  interface IDXGIOutput :
      IDXGIObject
  {
@@ -56,7 +74,7 @@ index 1899f8f2..102b74ad 100644
      HRESULT GetDisplayModeList(
          [in] DXGI_FORMAT EnumFormat,
          [in] UINT Flags,
-@@ -421,13 +424,14 @@ interface IDXGISwapChain :
+@@ -421,13 +430,14 @@
      HRESULT GetFullscreenState(
          [out, annotation("_Out_opt_")] BOOL *pFullscreen,
          [out, annotation("_COM_Outptr_opt_result_maybenull_")] IDXGIOutput **ppTarget );
@@ -73,7 +91,7 @@ index 1899f8f2..102b74ad 100644
  
  //--------------------------------------------------------------------------------------------------------
  // The DXGIFactory
-@@ -460,6 +464,7 @@ interface IDXGIFactory :
+@@ -460,6 +470,7 @@
          [in] HMODULE Module,
          [out, annotation("_COM_Outptr_")] IDXGIAdapter **ppAdapter );
  };
@@ -81,7 +99,7 @@ index 1899f8f2..102b74ad 100644
  
  //--------------------------------------------------------------------------------------------------------
  // DXGI instantiation
-@@ -471,7 +476,7 @@ cpp_quote( "HRESULT WINAPI CreateDXGIFactory(REFIID riid, _COM_Outptr_ void **pp
+@@ -471,7 +482,7 @@
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion
  
@@ -90,7 +108,27 @@ index 1899f8f2..102b74ad 100644
  
  //----------------------------- ---------------------------------------------------------------------------
  // The DXGIDevice base interface
-@@ -531,7 +536,7 @@ typedef struct DXGI_ADAPTER_DESC1
+@@ -507,6 +518,9 @@
+ 
+ 
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_ADAPTER_FLAG
+ {
+     DXGI_ADAPTER_FLAG_NONE                      = 0,
+@@ -514,6 +528,9 @@
+     DXGI_ADAPTER_FLAG_SOFTWARE                  = 2,
+     DXGI_ADAPTER_FLAG_FORCE_DWORD               = 0xFFFFFFFF,
+ } DXGI_ADAPTER_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ typedef struct DXGI_ADAPTER_DESC1
+@@ -531,7 +548,7 @@
  
      LUID AdapterLuid;
  
@@ -99,7 +137,7 @@ index 1899f8f2..102b74ad 100644
  } DXGI_ADAPTER_DESC1;
  
  //--------------------------------------------------------------------------------------------------------
-@@ -550,6 +555,7 @@ interface IDXGIAdapter1;
+@@ -550,6 +567,7 @@
  // The DXGIFactory1
  //--------------------------------------------------------------------------------------------------------
  
@@ -107,7 +145,7 @@ index 1899f8f2..102b74ad 100644
  [
      object,
      uuid( 770aae78-f26f-4dba-a829-253c83d1b387 ),
-@@ -564,10 +570,12 @@ interface IDXGIFactory1 :
+@@ -564,10 +582,12 @@
          [out, annotation("_COM_Outptr_")] IDXGIAdapter1 **ppAdapter );
      BOOL IsCurrent();
  };
@@ -120,7 +158,7 @@ index 1899f8f2..102b74ad 100644
  [
      object,
      uuid( 29038f61-3839-4626-91fd-086879011a05 ),
-@@ -577,13 +585,14 @@ interface IDXGIFactory1 :
+@@ -577,13 +597,14 @@
  interface IDXGIAdapter1 :
      IDXGIAdapter
  {

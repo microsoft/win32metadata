@@ -1,0 +1,26 @@
+--- a/um/SearchAdmin.idl
++++ b/um/SearchAdmin.idl
+@@ -10,6 +10,7 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -23,6 +24,7 @@
+ //  ISearchManager - manage the search service
+ //
+ 
++_Win32_AnnotateInterface_(ISearchManager, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF69),
+@@ -142,6 +144,7 @@
+ //  ISearchManager2 - manage catalogs in the search service
+ //
+ 
++_Win32_AnnotateInterface_(ISearchManager2, _Win32_SupportedOS_Windows8_)
+ [
+     object,
+     uuid(DBAB3F73-DB19-4A79-BFC0-A61A93886DDF),

@@ -1,0 +1,16 @@
+--- a/um/srchntfyinlinesite.idl
++++ b/um/srchntfyinlinesite.idl
+@@ -15,11 +15,13 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ 
++_Win32_AnnotateInterface_(ISearchNotifyInlineSite, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(B5702E61-E75C-4B64-82A1-6CB4F832FCCF),

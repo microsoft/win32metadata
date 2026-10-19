@@ -1,4 +1,3 @@
-diff --git a/um/dcomp.h b/um/dcomp.h
 --- a/um/dcomp.h
 +++ b/um/dcomp.h
 @@ -1,3 +1,4 @@
@@ -6,7 +5,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  //---------------------------------------------------------------------------
  // Copyright (c) Microsoft Corporation.  All rights reserved.
  //---------------------------------------------------------------------------
-@@ -64,6 +65,7 @@ typedef interface IDCompositionVisual                    IDCompositionVisual;
+@@ -64,10 +65,11 @@
  //      other DirectComposition objects.
  //
  //------------------------------------------------------------------------------
@@ -14,7 +13,12 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  STDAPI DCompositionCreateDevice(
      _In_opt_ IDXGIDevice *dxgiDevice,
      _In_ REFIID iid,
-@@ -81,6 +83,7 @@ STDAPI DCompositionCreateDevice(
+-    _Outptr_ void **dcompositionDevice
++    _COM_Outptr_ void **dcompositionDevice
+     );
+ 
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+@@ -81,10 +83,11 @@
  //      other DirectComposition objects.
  //
  //------------------------------------------------------------------------------
@@ -22,7 +26,21 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  STDAPI DCompositionCreateDevice2(
      _In_opt_ IUnknown *renderingDevice,
      _In_ REFIID iid,
-@@ -118,6 +121,7 @@ STDAPI DCompositionCreateDevice3(
+-    _Outptr_ void **dcompositionDevice
++    _COM_Outptr_ void **dcompositionDevice
+     );
+ #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
+ 
+@@ -102,7 +105,7 @@
+ STDAPI DCompositionCreateDevice3(
+     _In_opt_ IUnknown *renderingDevice,
+     _In_ REFIID iid,
+-    _Outptr_ void **dcompositionDevice
++    _COM_Outptr_ void **dcompositionDevice
+     );
+ 
+ #endif  // (_WIN32_WINNT >= _WIN32_WINNT_WINTHRESHOLD)
+@@ -118,6 +121,7 @@
  //      with a visual.
  //
  //------------------------------------------------------------------------------
@@ -30,7 +48,16 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  STDAPI DCompositionCreateSurfaceHandle(
      _In_ DWORD desiredAccess,
      _In_opt_ SECURITY_ATTRIBUTES *securityAttributes,
-@@ -205,7 +209,7 @@ STDAPI DCompositionGetStatistics(
+@@ -190,7 +194,7 @@
+     _In_ COMPOSITION_FRAME_ID frameId,
+     _Out_ COMPOSITION_FRAME_STATS* frameStats,
+     _In_ UINT targetIdCount,
+-    _Out_writes_opt_(targetCount) COMPOSITION_TARGET_ID* targetIds,
++    _Out_writes_opt_(targetIdCount) COMPOSITION_TARGET_ID* targetIds,
+     _Out_opt_ UINT* actualTargetIdCount);
+ 
+ //+-----------------------------------------------------------------------------
+@@ -205,7 +209,7 @@
  STDAPI DCompositionGetTargetStatistics(
      _In_ COMPOSITION_FRAME_ID frameId,
      _In_ const COMPOSITION_TARGET_ID* targetId,
@@ -39,7 +66,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  
  //+-----------------------------------------------------------------------------
  //
-@@ -247,6 +251,9 @@ STDAPI_(DWORD) DCompositionWaitForCompositorClock(
+@@ -247,6 +251,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionDevice
@@ -49,7 +76,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9746CB0407F3")
  {
      // Commits all DirectComposition commands pending on this device.
-@@ -259,7 +266,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9
+@@ -259,7 +266,7 @@
  
      // Gets timing information about the composition engine.
      STDMETHOD(GetFrameStatistics)(THIS_
@@ -58,7 +85,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
          ) PURE;
  
      // Creates a composition target bound to a window represented by an HWND.
-@@ -397,6 +404,9 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice, IUnknown, "C37EA93A-E7AA-450D-B16F-9
+@@ -397,6 +404,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionTarget
@@ -68,7 +95,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionTarget, IUnknown, "eacdd04c-117e-4e17-88f4-d1b12b0e3d89")
  {
      // Sets the root visual
-@@ -417,6 +427,9 @@ DECLARE_INTERFACE_IID_(IDCompositionTarget, IUnknown, "eacdd04c-117e-4e17-88f4-d
+@@ -417,6 +427,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionVisual
@@ -78,7 +105,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionVisual, IUnknown, "4d93059d-097b-4651-9a60-f0f25116e2f3")
  {
      // Changes the value of OffsetX property
-@@ -520,6 +533,9 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual, IUnknown, "4d93059d-097b-4651-9a60-f
+@@ -520,6 +533,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionEffect
@@ -88,7 +115,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionEffect, IUnknown, "EC81B08F-BFCB-4e8d-B193-A915587999E8")
  {
  };
-@@ -535,6 +551,9 @@ DECLARE_INTERFACE_IID_(IDCompositionEffect, IUnknown, "EC81B08F-BFCB-4e8d-B193-A
+@@ -535,6 +551,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionTransform3D
@@ -98,7 +125,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionTransform3D, IDCompositionEffect, "71185722-246B-41f2-AAD1-0443F7F4BFC2")
  {
  };
-@@ -551,6 +570,9 @@ DECLARE_INTERFACE_IID_(IDCompositionTransform3D, IDCompositionEffect, "71185722-
+@@ -551,6 +570,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionTransform
@@ -108,7 +135,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionTransform, IDCompositionTransform3D, "FD55FAA7-37E0-4c20-95D2-9BE45BC33F55")
  {
  };
-@@ -567,6 +589,9 @@ DECLARE_INTERFACE_IID_(IDCompositionTransform, IDCompositionTransform3D, "FD55FA
+@@ -567,6 +589,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionTranslateTransform
@@ -118,7 +145,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform, IDCompositionTransform, "06791122-C6F0-417d-8323-269E987F5954")
  {
      // Changes the value of the OffsetX property.
-@@ -603,6 +628,9 @@ DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform, IDCompositionTransform,
+@@ -603,6 +628,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionScaleTransform
@@ -128,7 +155,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionScaleTransform, IDCompositionTransform, "71FDE914-40EF-45ef-BD51-68B037C339F9")
  {
      // Changes the value of the ScaleX property.
-@@ -659,6 +687,9 @@ DECLARE_INTERFACE_IID_(IDCompositionScaleTransform, IDCompositionTransform, "71F
+@@ -659,6 +687,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionRotateTransform
@@ -138,7 +165,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionRotateTransform, IDCompositionTransform, "641ED83C-AE96-46c5-90DC-32774CC5C6D5")
  {
      // Changes the value of the Angle property.
-@@ -705,6 +736,9 @@ DECLARE_INTERFACE_IID_(IDCompositionRotateTransform, IDCompositionTransform, "64
+@@ -705,6 +736,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionSkewTransform
@@ -148,7 +175,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionSkewTransform, IDCompositionTransform, "E57AA735-DCDB-4c72-9C61-0591F58889EE")
  {
      // Changes the value of the AngleX property.
-@@ -760,6 +794,9 @@ DECLARE_INTERFACE_IID_(IDCompositionSkewTransform, IDCompositionTransform, "E57A
+@@ -760,6 +794,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionMatrixTransform
@@ -158,7 +185,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform, IDCompositionTransform, "16CDFF07-C503-419c-83F2-0965C7AF1FA6")
  {
      // Changes all values of the matrix of this transform.
-@@ -794,6 +831,9 @@ DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform, IDCompositionTransform, "16
+@@ -794,6 +831,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionEffectGroup
@@ -168,7 +195,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionEffectGroup, IDCompositionEffect, "A7929A74-E6B2-4bd6-8B95-4040119CA34D")
  {
      // Changes the opacity property.
-@@ -824,6 +864,9 @@ DECLARE_INTERFACE_IID_(IDCompositionEffectGroup, IDCompositionEffect, "A7929A74-
+@@ -824,6 +864,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionTranslateTransform3D
@@ -178,7 +205,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform3D, IDCompositionTransform3D, "91636D4B-9BA1-4532-AAF7-E3344994D788")
  {
      // Changes the value of the OffsetX property.
-@@ -870,6 +913,9 @@ DECLARE_INTERFACE_IID_(IDCompositionTranslateTransform3D, IDCompositionTransform
+@@ -870,6 +913,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionScaleTransform3D
@@ -188,7 +215,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionScaleTransform3D, IDCompositionTransform3D, "2A9E9EAD-364B-4b15-A7C4-A1997F78B389")
  {
      // Changes the value of the ScaleX property.
-@@ -946,6 +992,9 @@ DECLARE_INTERFACE_IID_(IDCompositionScaleTransform3D, IDCompositionTransform3D,
+@@ -946,6 +992,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionRotateTransform3D
@@ -198,7 +225,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionRotateTransform3D, IDCompositionTransform3D, "D8F5B23F-D429-4a91-B55A-D2F45FD75B18")
  {
      // Changes the value of the Angle property.
-@@ -1033,6 +1082,9 @@ DECLARE_INTERFACE_IID_(IDCompositionRotateTransform3D, IDCompositionTransform3D,
+@@ -1033,6 +1082,9 @@
  #pragma warning(disable : 4995)    // D3DMATRIX': name was marked as #pragma deprecated
  #undef INTERFACE
  #define INTERFACE IDCompositionMatrixTransform3D
@@ -208,7 +235,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform3D, IDCompositionTransform3D, "4B3363F0-643B-41b7-B6E0-CCF22D34467C")
  {
      // Changes all values of the matrix of this transform.
-@@ -1068,6 +1120,9 @@ DECLARE_INTERFACE_IID_(IDCompositionMatrixTransform3D, IDCompositionTransform3D,
+@@ -1068,6 +1120,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionClip
@@ -218,7 +245,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionClip, IUnknown, "64AC3703-9D3F-45ec-A109-7CAC0E7A13A7")
  {
  };
-@@ -1084,6 +1139,9 @@ DECLARE_INTERFACE_IID_(IDCompositionClip, IUnknown, "64AC3703-9D3F-45ec-A109-7CA
+@@ -1084,6 +1139,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionRectangleClip
@@ -228,7 +255,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionRectangleClip, IDCompositionClip, "9842AD7D-D9CF-4908-AED7-48B51DA5E7C2")
  {
      // Changes the value of the Left property.
-@@ -1235,6 +1293,9 @@ DECLARE_INTERFACE_IID_(IDCompositionRectangleClip, IDCompositionClip, "9842AD7D-
+@@ -1235,12 +1293,15 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionSurface
@@ -238,7 +265,14 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionSurface, IUnknown, "BB8A4953-2C99-4F5A-96F5-4819027FA3AC")
  {
      STDMETHOD(BeginDraw)(THIS_
-@@ -1273,6 +1334,9 @@ DECLARE_INTERFACE_IID_(IDCompositionSurface, IUnknown, "BB8A4953-2C99-4F5A-96F5-
+         _In_opt_ const RECT *updateRect,
+         _In_ REFIID iid,
+-        _Outptr_ void **updateObject,
++        _COM_Outptr_ void **updateObject,
+         _Out_ POINT *updateOffset
+         ) PURE;
+ 
+@@ -1273,6 +1334,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionVirtualSurface
@@ -248,7 +282,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionVirtualSurface, IDCompositionSurface, "AE471C51-5F53-4A24-8D3E-D0C39C30B3F0")
  {
      STDMETHOD(Resize)(THIS_
-@@ -1306,6 +1370,9 @@ typedef interface IDCompositionVisualDebug          IDCompositionVisualDebug;
+@@ -1306,6 +1370,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionDevice2
@@ -258,7 +292,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-75FEA80B5B25")
  {
      // Commits all DirectComposition commands pending on this device.
-@@ -1318,7 +1385,7 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-
+@@ -1318,7 +1385,7 @@
  
      // Gets timing information about the composition engine.
      STDMETHOD(GetFrameStatistics)(THIS_
@@ -267,7 +301,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
          ) PURE;
  
      // Creates a new visual object.
-@@ -1437,6 +1504,9 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice2, IUnknown, "75F6468D-1B8E-447C-9BC6-
+@@ -1437,6 +1504,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionDesktopDevice
@@ -277,7 +311,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionDesktopDevice, IDCompositionDevice2, "5F4633FE-1E08-4CB8-8C75-CE24333F5602")
  {
      STDMETHOD(CreateTargetForHwnd)(THIS_
-@@ -1492,6 +1562,9 @@ DECLARE_INTERFACE_IID_(IDCompositionDeviceDebug, IUnknown, "A1A3C64A-224F-4A81-9
+@@ -1492,6 +1562,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionSurfaceFactory
@@ -287,7 +321,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionSurfaceFactory, IUnknown, "E334BC12-3937-4E02-85EB-FCF4EB30D2C8")
  {
      // Creates a DirectComposition surface object
-@@ -1525,6 +1598,9 @@ DECLARE_INTERFACE_IID_(IDCompositionSurfaceFactory, IUnknown, "E334BC12-3937-4E0
+@@ -1525,6 +1598,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionVisual2
@@ -297,7 +331,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionVisual2, IDCompositionVisual, "E8DE1639-4331-4B26-BC5F-6A321D347A85")
  {
      // Changes the interpretation of the opacity property of an effect group
-@@ -1550,6 +1626,9 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual2, IDCompositionVisual, "E8DE1639-4331
+@@ -1550,6 +1626,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionVisualDebug
@@ -307,7 +341,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionVisualDebug, IDCompositionVisual2, "FED2B808-5EB4-43A0-AEA3-35F65280F91B")
  {
      // Enable heat map
-@@ -1587,6 +1666,9 @@ typedef interface IDCompositionVisual3                      IDCompositionVisual3
+@@ -1587,6 +1666,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionVisual3
@@ -317,7 +351,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionVisual3, IDCompositionVisualDebug, "2775F462-B6C1-4015-B0BE-B3E7D6A4976D")
  {
      // Sets depth mode property associated with this visual
-@@ -1642,6 +1724,9 @@ DECLARE_INTERFACE_IID_(IDCompositionVisual3, IDCompositionVisualDebug, "2775F462
+@@ -1642,6 +1724,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionDevice3
@@ -327,7 +361,7 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionDevice3, IDCompositionDevice2, "0987CB06-F916-48BF-8D35-CE7641781BD9")
  {
      // Effect creation calls, each creates an interface around a D2D1Effect
-@@ -1709,6 +1794,9 @@ DECLARE_INTERFACE_IID_(IDCompositionDevice3, IDCompositionDevice2, "0987CB06-F91
+@@ -1709,6 +1794,9 @@
  //------------------------------------------------------------------------------
  #undef INTERFACE
  #define INTERFACE IDCompositionFilterEffect
@@ -337,3 +371,12 @@ diff --git a/um/dcomp.h b/um/dcomp.h
  DECLARE_INTERFACE_IID_(IDCompositionFilterEffect, IDCompositionEffect, "30C421D5-8CB2-4E9F-B133-37BE270D4AC2")
  {
      // Sets the input at the given index to the filterEffect (NULL will use source visual, unless flagged otherwise)
+@@ -2435,7 +2523,7 @@
+     STDMETHOD(GetAvailableFence)(THIS_
+         _Out_ UINT64* fenceValue,
+         _In_ REFIID iid,
+-        _Outptr_result_maybenull_ void** availableFence) PURE;
++        _COM_Outptr_result_maybenull_ void** availableFence) PURE;
+ };
+ 
+ //+-----------------------------------------------------------------------------

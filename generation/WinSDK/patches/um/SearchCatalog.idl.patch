@@ -1,0 +1,26 @@
+--- a/um/SearchCatalog.idl
++++ b/um/SearchCatalog.idl
+@@ -10,6 +10,7 @@
+ //
+ //-----------------------------------------------------------------------------
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -122,6 +123,7 @@
+ 
+ } CatalogPausedReason;
+ 
++_Win32_AnnotateInterface_(ISearchCatalogManager, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(AB310581-AC80-11D1-8DF3-00C04FB6EF50),
+@@ -350,6 +352,7 @@
+ typedef int PRIORITIZE_FLAGS;
+ 
+ 
++_Win32_AnnotateInterface_(ISearchCatalogManager2, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     uuid(7AC3286D-4D1D-4817-84FC-C1C85E3AF0D9),

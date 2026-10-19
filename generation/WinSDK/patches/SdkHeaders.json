@@ -3963,6 +3963,42 @@
       "sourceSha256": "7BF3D68DBF763399A8E99787E99B7E54D8376B3EFE79580FDC4BB50D1338C711",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\l2cmn.h",
       "sdkSha256": "7BF3D68DBF763399A8E99787E99B7E54D8376B3EFE79580FDC4BB50D1338C711"
+    },
+    {
+      "path": "um\\strmif.h",
+      "sourceSha256": "13B64A8CF7C01475077124930C508E1B96C1C3D51314E34FAF1661F564932631",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\strmif.idl",
+      "sdkSha256": "88CCFBC89223B3D14593DE2C11DD12FE9C5E8D353CA213702449714D2C23898B"
+    },
+    {
+      "path": "um\\SearchAPI.h",
+      "sourceSha256": "36E12FBE0BE2ACE120EA914A441242B2C5DA66B0A5FA1B2258666119E87AA994",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\searchapi.idl",
+      "sdkSha256": "AA19F77F4ACC575873F8924B190A226AD33E9C17D5A7200A9A5D6D41365CEE98"
+    },
+    {
+      "path": "shared\\fwpmtypes.h",
+      "sourceSha256": "8E84529708C92690C2D8C4537CFE28DC63A4E52DF93DD9802340FBC8606433F4",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\fwpmtypes.idl",
+      "sdkSha256": "FAB6532CDAB4239CE354D6034E129BBACFA6939F47D4D609A07AAA30CAD5E1AC"
+    },
+    {
+      "path": "um\\oaidl.h",
+      "sourceSha256": "77555F0602F68B20DB134A5A26D3F54D1D90711A1EB7488AA0853DAEA2242263",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\oaidl.idl",
+      "sdkSha256": "5F5A2B0508AFFC22C30289D6F44B08792CE047CD7F41303EBBB7470E2217D6BC"
+    },
+    {
+      "path": "um\\d3dcommon.h",
+      "sourceSha256": "ED03E0CC37FA5220E4738B7BD5850C6ADB5AC8537F4A929C66EC08F73EC09CAB",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\d3dcommon.idl",
+      "sdkSha256": "2513F619ECE3BDA0AF925B8120BA1ADFD6AC1D27A9CB62E4635EF3FAFBD09FD2"
+    },
+    {
+      "path": "um\\dxcapi.h",
+      "sourceSha256": "CAF915A318579B0B48D51271D457107CECD4042E01D0F3308E498A18DF24A546",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dxcapi.h",
+      "sdkSha256": "CAF915A318579B0B48D51271D457107CECD4042E01D0F3308E498A18DF24A546"
     }
   ],
   "midl": {
@@ -3974,13 +4010,17 @@
       {
         "sdkPath": "c\\bin\\10.0.26100.0\\x64\\midlc.exe",
         "sha256": "D12AFF8A74397601041BEC46552FC8DEE1206DAA97E39600E72A7B1B1A5EF6AB"
+      },
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x86\\midl.exe",
+        "sha256": "38E8F098C69F38CA6E21A994A87D30803D4F48899F1364C21305A15EFE740FF1"
+      },
+      {
+        "sdkPath": "c\\bin\\10.0.26100.0\\x86\\midlc.exe",
+        "sha256": "2D1DB2F9686EEDB15F41CD147939EED05311628879E76A112478807D1BFD6FCC"
       }
     ],
     "inputs": [
-      {
-        "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "71F94E882B3BB01825AC19191A4FE1707C0BBDD0539F5C3097043FA8F6F34196"
-      },
       {
         "path": "shared\\sal.h",
         "sdkPath": "c\\include\\10.0.26100.0\\shared\\sal.h",
@@ -6210,6 +6250,80 @@
         "path": "um\\tabren.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\tabren.idl",
         "sdkSha256": "7362FE6DF0BF826DA0A317720525E3BA2C312286874FB618899B38BB068DE576"
+      },
+      {
+        "path": "um\\SearchAdmin.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchAdmin.idl",
+        "sdkSha256": "5C08A82C5487C994724945445602819B770B604BF2F5DFA40F50ADAA05E78929"
+      },
+      {
+        "path": "um\\searchapi.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\searchapi.idl",
+        "sdkSha256": "AA19F77F4ACC575873F8924B190A226AD33E9C17D5A7200A9A5D6D41365CEE98"
+      },
+      {
+        "path": "um\\SearchCatalog.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchCatalog.idl",
+        "sdkSha256": "36352742A7B346C4BA6B5D9129448A333A6F362917ECBCB537B1FF1A24B11370"
+      },
+      {
+        "path": "um\\SearchCrawlScopeManager.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchCrawlScopeManager.idl",
+        "sdkSha256": "4E9AB07DA583C43E84CFDA1120779E981DFA3FBD049DBB7D921AEFB97AED2AD5"
+      },
+      {
+        "path": "um\\SearchLanguageSupport.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchLanguageSupport.idl",
+        "sdkSha256": "0FC81BB82940CEED111F48B0C907D0FCB4E52063409765D1A38FE3227B4783C1"
+      },
+      {
+        "path": "um\\SearchNotifications.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchNotifications.idl",
+        "sdkSha256": "37C2A8EF8E7D1D1B441A3BF0AF8E224AFCB3E21C5556E9E3BC085BCA08BD4462"
+      },
+      {
+        "path": "um\\SearchQuery.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\SearchQuery.idl",
+        "sdkSha256": "E753F8E783B05042E588A3EC6E62676B5048ABC324F7B7E9C2E25C51D8EDB091"
+      },
+      {
+        "path": "um\\srchntfyinlinesite.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\srchntfyinlinesite.idl",
+        "sdkSha256": "DD10A54647E1D5B097B2AECE6D7FFFBC264DFFEA549C73E246A0E1B718572CC8"
+      },
+      {
+        "path": "um\\srchprth.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\srchprth.idl",
+        "sdkSha256": "0C1A1CB8D13177FF0CE50EBEC63DC2D70BFC8D9E384F14337FDEB42557706F8F"
+      },
+      {
+        "path": "um\\urlacc.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\urlacc.idl",
+        "sdkSha256": "BFC0CDB3D563D747E74C901B0BD9966CA0DEF07FDBB224C854901CB28DC0A4BF"
+      },
+      {
+        "path": "um\\urlaccsdk.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\urlaccsdk.idl",
+        "sdkSha256": "909514D70C1DA6ACDBBA3A8181AF9F5CCEB083EF63DFD453FA3169602E75577F"
+      },
+      {
+        "path": "shared\\fwpmtypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\fwpmtypes.idl",
+        "sdkSha256": "FAB6532CDAB4239CE354D6034E129BBACFA6939F47D4D609A07AAA30CAD5E1AC"
+      },
+      {
+        "path": "shared\\iketypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\iketypes.idl",
+        "sdkSha256": "D0E8345FA2F68F276321211595D52B8FD4079BF5A3F18737F1D95CE3A6F41CF8"
+      },
+      {
+        "path": "shared\\ipsectypes.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\shared\\ipsectypes.idl",
+        "sdkSha256": "880848DC653C5E72528A2B0DFC512EF595EB817A58B472CF25723B63C552BBE4"
+      },
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "71F94E882B3BB01825AC19191A4FE1707C0BBDD0539F5C3097043FA8F6F34196"
       }
     ],
     "outputs": [
@@ -7160,6 +7274,26 @@
       {
         "source": "um\\audiomediatype.idl",
         "path": "um\\audiomediatype.h"
+      },
+      {
+        "source": "um\\strmif.idl",
+        "path": "um\\strmif.h"
+      },
+      {
+        "source": "um\\searchapi.idl",
+        "path": "um\\SearchAPI.h"
+      },
+      {
+        "path": "shared\\fwpmtypes.h",
+        "source": "shared\\fwpmtypes.idl"
+      },
+      {
+        "source": "um\\oaidl.idl",
+        "path": "um\\oaidl.h"
+      },
+      {
+        "source": "um\\d3dcommon.idl",
+        "path": "um\\d3dcommon.h"
       }
     ]
   },
@@ -7391,7 +7525,9 @@
     "Communication",
     "Devices.Properties",
     "HtmlHelp",
-    "Kernel"
+    "Kernel",
+    "Direct3D",
+    "Direct3DDxc"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -8018,6 +8154,26 @@
     "um\\statehelpers.h.patch",
     "shared\\ntdef.h.patch",
     "um\\regstr.h.patch",
-    "um\\audiomediatype.idl.patch"
+    "um\\audiomediatype.idl.patch",
+    "um\\devenum.idl.patch",
+    "um\\axcore.idl.patch",
+    "um\\axextend.idl.patch",
+    "um\\dyngraph.idl.patch",
+    "um\\VMRender.idl.patch",
+    "um\\dvdif.idl.patch",
+    "um\\urlaccsdk.idl.patch",
+    "um\\urlacc.idl.patch",
+    "um\\srchprth.idl.patch",
+    "um\\SearchCrawlScopeManager.idl.patch",
+    "um\\SearchNotifications.idl.patch",
+    "um\\srchntfyinlinesite.idl.patch",
+    "um\\SearchCatalog.idl.patch",
+    "um\\SearchQuery.idl.patch",
+    "um\\SearchAdmin.idl.patch",
+    "um\\SearchLanguageSupport.idl.patch",
+    "shared\\fwpmtypes.idl.patch",
+    "um\\oaidl.idl.patch",
+    "um\\d3dcommon.idl.patch",
+    "um\\dxcapi.h.patch"
   ]
 }

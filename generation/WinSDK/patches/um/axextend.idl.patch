@@ -1,0 +1,618 @@
+--- a/um/axextend.idl
++++ b/um/axextend.idl
+@@ -10,6 +10,7 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -136,6 +137,7 @@
+         [out AM_ANNOTATION("_Out_")] IEnumRegFilters **ppEnum
+     );
+ }
++_Win32_AnnotateMethod_(IEnumRegFilters::Next, _Win32_PreserveResult_)
+ 
+ 
+ typedef IEnumRegFilters *PENUMREGFILTERS;
+@@ -375,6 +377,7 @@
+ 
+ 
+ 
++_Win32_AnnotateInterface_(IFilterMapper2, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -442,6 +445,7 @@
+        );
+ }
+ 
++_Win32_AnnotateInterface_(IFilterMapper3, _Win32_SupportedOS_WindowsXP_)
+ [
+ AM_LOCAL
+ object,
+@@ -489,6 +493,7 @@
+ typedef IQualityControl *PQUALITYCONTROL;
+ 
+ 
++_Win32_AnnotateInterface_(IQualityControl, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -596,6 +601,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IOverlayNotify, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -667,6 +673,7 @@
+ cpp_quote("DECLARE_HANDLE(HMONITOR);")
+ cpp_quote("#endif")
+ 
++_Win32_AnnotateInterface_(IOverlayNotify2, _Win32_SupportedOS_Windows2000_)
+ [
+ object,
+ local,
+@@ -693,6 +700,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IOverlay, _Win32_SupportedOS_Windows2000_)
+ [
+ object,
+ local,
+@@ -758,6 +766,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IMediaEventSink, _Win32_SupportedOS_Windows2000_)
+ [
+         local,
+         object,
+@@ -785,6 +794,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IFileSourceFilter, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -815,6 +825,7 @@
+ //=====================================================================
+ //=====================================================================
+ 
++_Win32_AnnotateInterface_(IFileSinkFilter, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -837,6 +848,7 @@
+ 
+ typedef IFileSinkFilter *PFILTERFILESINK;
+ 
++_Win32_AnnotateInterface_(IFileSinkFilter2, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -870,6 +882,7 @@
+ // building of graphs by automatic selection and connection of appropriate
+ // filters
+ 
++_Win32_AnnotateInterface_(IGraphBuilder, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1043,6 +1056,7 @@
+ //
+ // Capture graph builder "CopyCapturedFile" progress callback
+ 
++_Win32_AnnotateInterface_(IAMCopyCaptureFileProgress, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1068,6 +1082,7 @@
+ // video, for example
+ //
+ 
++_Win32_AnnotateInterface_(ICaptureGraphBuilder2, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1185,6 +1200,7 @@
+ // New methods on for IFilterGraph and IGraphBuilder will have to go here.
+ //
+ 
++_Win32_AnnotateInterface_(IFilterGraph2, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1248,6 +1264,7 @@
+ // IFilterGraph3
+ //
+ 
++_Win32_AnnotateInterface_(IFilterGraph3, _Win32_SupportedOS_WindowsVista_)
+ [
+     AM_LOCAL
+     object,
+@@ -1275,6 +1292,7 @@
+ // aka convergent graphs
+ // aka Closed captioning
+ 
++_Win32_AnnotateInterface_(IStreamBuilder, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     local,
+@@ -1304,6 +1322,7 @@
+ // multiple overlapped reads from different positions
+ 
+ 
++_Win32_AnnotateInterface_(IAsyncReader, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -1385,6 +1404,7 @@
+ // interface provided by the filtergraph itself to let other objects
+ // (especially plug-in distributors, but also apps like graphedt) know
+ // when the graph has changed.
++_Win32_AnnotateInterface_(IGraphVersion, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1412,6 +1432,7 @@
+ // need to pass your implementation of this pointer as an in param.
+ //
+ // use if: you are a resource manager who implements IResourceManager
++_Win32_AnnotateInterface_(IResourceConsumer, _Win32_SupportedOS_Windows2000_)
+ [
+     local,
+     object,
+@@ -1590,6 +1611,7 @@
+ // under HKCR\Interface\<IID>\Distributor= for some interface).
+ //
+ // Use if: you are the filtergraph.
++_Win32_AnnotateInterface_(IDistributorNotify, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1653,6 +1675,7 @@
+ // IAMStreamControl
+ //
+ 
++_Win32_AnnotateInterface_(IAMStreamControl, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1692,6 +1715,7 @@
+ // ISeekingPassThru
+ //
+ 
++_Win32_AnnotateInterface_(ISeekingPassThru, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1809,6 +1833,7 @@
+ // media type can describe which other sample rates, bit rates and channels
+ // you support.
+ 
++_Win32_AnnotateInterface_(IAMStreamConfig, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -1944,6 +1969,7 @@
+ 
+ 
+ // Interface to control interleaving of different streams in one file
++_Win32_AnnotateInterface_(IConfigInterleaving, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -1993,6 +2019,7 @@
+ }
+ 
+ // Interface to control the AVI mux
++_Win32_AnnotateInterface_(IConfigAviMux, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -2049,6 +2076,7 @@
+     // many keyframes, etc., and to find information like capabilities and
+     // the description of this compressor
+ 
++_Win32_AnnotateInterface_(IAMVideoCompression, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2173,6 +2201,7 @@
+     // capture driver Capture Filter.  It allows an application to bring up
+     // one of the 3 driver dialogs that VfW capture drivers have.
+ 
++_Win32_AnnotateInterface_(IAMVfwCaptureDialogs, _Win32_SupportedOS_Windows2000_)
+     [
+         object,
+         local,
+@@ -2215,6 +2244,7 @@
+     // (Co).  It allows an application to bring up either the Configure or
+     // About dialogs for the ICM codec that it is currently using.
+ 
++_Win32_AnnotateInterface_(IAMVfwCompressDialogs, _Win32_SupportedOS_Windows2000_)
+     [
+         object,
+         local,
+@@ -2304,6 +2334,7 @@
+     // Never send the same frame # twice, and never go back in time.  The
+     // regular time stamp of a sample can also never go back in time.
+ 
++_Win32_AnnotateInterface_(IAMDroppedFrames, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2362,6 +2393,7 @@
+     // This interface can also be supported by the audio capture filter itself
+     // to control to overall record level and panning after the mix
+ 
++_Win32_AnnotateInterface_(IAMAudioInputMixer, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2473,6 +2505,7 @@
+     // GetAllocatorProperties can only be called after a pin is connected and
+     // it returns the properties of the current allocator being used
+ 
++_Win32_AnnotateInterface_(IAMBufferNegotiation, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2546,6 +2579,7 @@
+     // IAMAnalogVideoDecoder interface
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMAnalogVideoDecoder, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2630,6 +2664,7 @@
+     //
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMVideoProcAmp, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2697,6 +2732,7 @@
+     // Control of local or remote cameras
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMCameraControl, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2752,6 +2788,7 @@
+     // and listing available frame rates
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMVideoControl, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2815,6 +2852,7 @@
+     // Controls a routing matrix for analog or digital video or audio
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMCrossbar, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2893,6 +2931,7 @@
+ 
+     interface IAMTunerNotification;
+ 
++_Win32_AnnotateInterface_(IAMTuner, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -2994,6 +3033,7 @@
+     // Controls an analog TV tuner device
+     //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMTVTuner, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -3110,6 +3150,7 @@
+ 
+     interface IAMTVAudioNotification;
+ 
++_Win32_AnnotateInterface_(IAMTVAudio, _Win32_SupportedOS_Windows2000_)
+     [
+         AM_LOCAL
+         object,
+@@ -3292,6 +3333,7 @@
+     }
+ cpp_quote("#endif // _IKsPropertySet_")
+ 
++_Win32_AnnotateInterface_(IMediaPropertyBag, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -3314,6 +3356,7 @@
+ }
+ 
+ 
++_Win32_AnnotateInterface_(IPersistMediaPropertyBag, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -3389,6 +3432,7 @@
+    //
+    // See edevdefs.h for the enumerated parameter list
+    //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAMExtDevice, _Win32_SupportedOS_Windows2000_)
+  [
+      AM_LOCAL
+      object,
+@@ -3452,6 +3496,7 @@
+    //
+    // See edevdefs.h for the parameter lists
+    //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAMExtTransport, _Win32_SupportedOS_Windows2000_)
+ [
+      AM_LOCAL
+      object,
+@@ -3665,6 +3710,7 @@
+ typedef TIMECODE *PTIMECODE;
+ typedef TIMECODE_SAMPLE *PTIMECODE_SAMPLE;
+ 
++_Win32_AnnotateInterface_(IAMTimecodeReader, _Win32_SupportedOS_Windows2000_)
+ [
+      AM_LOCAL
+      object,
+@@ -3722,6 +3768,7 @@
+    //
+    // See edevdefs.h for the parameter lists
+     //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAMTimecodeGenerator, _Win32_SupportedOS_Windows2000_)
+ [
+      AM_LOCAL
+      object,
+@@ -3790,6 +3837,7 @@
+    //
+    // See edevdefs.h for the parameter lists
+     //---------------------------------------------------------------------
++_Win32_AnnotateInterface_(IAMTimecodeDisplay, _Win32_SupportedOS_Windows2000_)
+ [
+      AM_LOCAL
+      object,
+@@ -3903,6 +3951,7 @@
+ //  Control which logical streams are played and find out information about
+ //  them
+ //  Normally supported by a filter
++_Win32_AnnotateInterface_(IAMStreamSelect, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -3951,6 +4000,7 @@
+ //
+ //  Normally supported by a filter
+ //
++_Win32_AnnotateInterface_(IAMResourceControl, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -3971,6 +4021,7 @@
+ 
+ 
+ //  Set clock adjustments - supported by some clocks
++_Win32_AnnotateInterface_(IAMClockAdjust, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -3995,6 +4046,7 @@
+     AM_FILTER_MISC_FLAGS_IS_SOURCE   = 0x00000002  /*  Filter sources data */
+ };
+ 
++_Win32_AnnotateInterface_(IAMFilterMiscFlags, _Win32_SupportedOS_Windows2000_)
+ [
+     AM_LOCAL
+     object,
+@@ -4041,6 +4093,7 @@
+ // decimating their output image by an arbitary amount.
+ //
+ //
++_Win32_AnnotateInterface_(IDecimateVideoImage, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -4076,6 +4129,7 @@
+     DECIMATION_DEFAULT              // decimate at decoder then ovly the vide port then crop
+ } DECIMATION_USAGE;
+ 
++_Win32_AnnotateInterface_(IAMVideoDecimationProperties, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -4105,6 +4159,7 @@
+ //
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IVideoFrameStep, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4190,6 +4245,7 @@
+ //
+ // Used to set a source filter to run in a "live" mode.
+ //
++_Win32_AnnotateInterface_(IAMPushSource, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4243,6 +4299,7 @@
+ //
+ // ------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMDeviceRemoval, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -4300,6 +4357,7 @@
+     DVENCODERFORMAT_DVHD        =   2008,
+     DVENCODERFORMAT_DVSL        =   2009
+ };
++_Win32_AnnotateInterface_(IDVEnc, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -4346,6 +4404,7 @@
+     DVRESOLUTION_QUARTER        =   1002,
+     DVRESOLUTION_DC         =   1003
+ };
++_Win32_AnnotateInterface_(IIPDVDec, _Win32_SupportedOS_Windows2000_)
+ [
+         AM_LOCAL
+         object,
+@@ -4376,6 +4435,7 @@
+ //
+ //------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IDVRGB219, _Win32_SupportedOS_WindowsXP_)
+ [
+         AM_LOCAL
+         object,
+@@ -4395,6 +4455,7 @@
+ // Implemented by DV splitter filters
+ //
+ // ------------------------------------------------------------------------
++_Win32_AnnotateInterface_(IDVSplitter, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4439,6 +4500,7 @@
+ //
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMAudioRendererStats, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4464,6 +4526,7 @@
+ //
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMLatency, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4493,6 +4556,7 @@
+ //
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMGraphStreams, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4543,6 +4607,7 @@
+     AMOVERFX_DEINTERLACE =      0x00000008
+ };
+ 
++_Win32_AnnotateInterface_(IAMOverlayFX, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4579,6 +4644,7 @@
+ // IAMOpenProgress interface provides information about current progress through
+ // a download
+ 
++_Win32_AnnotateInterface_(IAMOpenProgress, _Win32_SupportedOS_Windows2000_)
+ [
+ AM_LOCAL
+ object,
+@@ -4610,6 +4676,7 @@
+     This interface is implemented by the MPEG-2 Demultiplexer filter,
+     irrespective of program vs. transport stream splitting functionality.
+ --*/
++_Win32_AnnotateInterface_(IMpeg2Demultiplexer, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -4687,6 +4754,7 @@
+ /*++
+     Enumerates the StreamIds mapped on a pin
+ --*/
++_Win32_AnnotateInterface_(IEnumStreamIdMap, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -4722,6 +4790,7 @@
+ 
+     Provides the ability to map/unmap a stream_id to/from an output pin.
+ --*/
++_Win32_AnnotateInterface_(IMPEG2StreamIdMap, _Win32_SupportedOS_WindowsXP_)
+ [
+     object,
+     local,
+@@ -4752,6 +4821,7 @@
+ 
+ 
+ //  Register a service provider with the filter graph
++_Win32_AnnotateInterface_(IRegisterServiceProvider, _Win32_SupportedOS_WindowsXP_)
+ [
+         object,
+         local,
+@@ -4783,6 +4853,7 @@
+ //
+ // Used to set/get the error tolerance used by a slaving audio renderer
+ //
++_Win32_AnnotateInterface_(IAMClockSlave, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -4824,6 +4895,7 @@
+ //
+ //---------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IAMGraphBuilderCallback, _Win32_SupportedOS_Windows2000_)
+ [
+     object,
+     uuid(4995f511-9ddb-4f12-bd3b-f04611807b79),
+@@ -4868,6 +4940,7 @@
+ // Copyright (c) 1992 - 2002, Microsoft Corporation.  All rights reserved.
+ //------------------------------------------------------------------------------
+ 
++_Win32_AnnotateInterface_(IGetCapabilitiesKey, _Win32_SupportedOS_WindowsXP_)
+ [
+         object,
+         local,
+@@ -4963,6 +5036,7 @@
+ cpp_quote("#define      DECODER_CAP_NOTSUPPORTED        0x00000000")
+ cpp_quote("#define      DECODER_CAP_SUPPORTED           0x00000001")
+ 
++_Win32_AnnotateInterface_(IAMDecoderCaps, _Win32_SupportedOS_WindowsXP_)
+ [
+         object,
+         local,
+@@ -5006,6 +5080,7 @@
+ } AMCOPPStatusOutput, *LPAMCOPPStatusOutput;
+ 
+ 
++_Win32_AnnotateInterface_(IAMCertifiedOutputProtection, _Win32_SupportedOS_WindowsXP_)
+ [
+         object,
+         local,
+@@ -5037,6 +5112,7 @@
+ //  Can be implemented by implementors of IAsyncReader on a Filter's output pin
+ //  fRaw = TRUE means sample timestamp = byte position
+ //  fRaw = FALSE (default) means sample timestamp = 10000000 * (byte position)
++_Win32_AnnotateInterface_(IAMAsyncReaderTimestampScaling, _Win32_SupportedOS_Windows7_)
+ [
+         object,
+         local,
+@@ -5062,6 +5138,7 @@
+ //  COM object
+ //
+ 
++_Win32_AnnotateInterface_(IAMPluginControl, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     local,

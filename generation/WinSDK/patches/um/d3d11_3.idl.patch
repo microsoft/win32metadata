@@ -1,16 +1,29 @@
-diff --git a/um/d3d11_3.idl b/um/d3d11_3.idl
-index 042fa18b..49e46b30 100644
 --- a/um/d3d11_3.idl
 +++ b/um/d3d11_3.idl
-@@ -8,6 +8,7 @@
+@@ -8,6 +8,9 @@
  //
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
 +#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <win32metadata_annotations.h>")
  import "oaidl.idl";
  import "ocidl.idl";
  import "dxgi1_3.idl";
-@@ -127,6 +128,7 @@ cpp_quote( "extern \"C\"{" )
+@@ -63,9 +66,9 @@
+     DXGI_FORMAT Format;
+     DXGI_SAMPLE_DESC SampleDesc;
+     D3D11_USAGE Usage;
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;    
+-    UINT MiscFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_BIND_FLAG)")] UINT BindFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG)")] UINT CPUAccessFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG)")] UINT MiscFlags;
+     D3D11_TEXTURE_LAYOUT TextureLayout;
+ } D3D11_TEXTURE2D_DESC1;
+ 
+@@ -127,6 +130,7 @@
  cpp_quote( "#endif" )
  
  
@@ -18,7 +31,20 @@ index 042fa18b..49e46b30 100644
  [ uuid( 51218251-1E33-4617-9CCB-4D3A4367E7BB ), object, local, pointer_default( unique ) ]
  interface ID3D11Texture2D1
      : ID3D11Texture2D
-@@ -206,6 +208,7 @@ cpp_quote( "};" )
+@@ -149,9 +153,9 @@
+     UINT MipLevels;
+     DXGI_FORMAT Format;
+     D3D11_USAGE Usage;    
+-    UINT BindFlags;
+-    UINT CPUAccessFlags;    
+-    UINT MiscFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_BIND_FLAG)")] UINT BindFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_CPU_ACCESS_FLAG)")] UINT CPUAccessFlags;
++    [annotation("_Win32_AssociatedEnum_(D3D11_RESOURCE_MISC_FLAG)")] UINT MiscFlags;
+     D3D11_TEXTURE_LAYOUT TextureLayout;
+ } D3D11_TEXTURE3D_DESC1;
+ 
+@@ -206,6 +210,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -26,7 +52,7 @@ index 042fa18b..49e46b30 100644
  [ uuid( 0C711683-2853-4846-9BB0-F3E60639E46A ), object, local, pointer_default( unique ) ]
  interface ID3D11Texture3D1
      : ID3D11Texture3D
-@@ -298,6 +301,7 @@ cpp_quote( "};" )
+@@ -298,6 +303,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -34,7 +60,7 @@ index 042fa18b..49e46b30 100644
  [ uuid(6fbd02fb-209f-46c4-b059-2ed15586a6ac), object, local, pointer_default( unique ) ]
  interface ID3D11RasterizerState2
      : ID3D11RasterizerState1
-@@ -560,6 +564,7 @@ cpp_quote( "};" )
+@@ -560,6 +566,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -42,7 +68,7 @@ index 042fa18b..49e46b30 100644
  [ uuid( 91308b87-9040-411d-8c67-c39253ce3802 ), object, local, pointer_default( unique ) ]
  interface ID3D11ShaderResourceView1
      : ID3D11ShaderResourceView
-@@ -769,6 +774,7 @@ cpp_quote( "};" )
+@@ -769,6 +776,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -50,7 +76,7 @@ index 042fa18b..49e46b30 100644
  [ uuid( ffbe2e23-f011-418a-ac56-5ceed7c5b94b ), object, local, pointer_default( unique ) ]
  interface ID3D11RenderTargetView1
      : ID3D11RenderTargetView
-@@ -966,6 +972,7 @@ cpp_quote( "};" )
+@@ -966,6 +974,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -58,7 +84,7 @@ index 042fa18b..49e46b30 100644
  [ uuid( 7b3b6153-a886-4544-ab37-6537c8500403 ), object, local, pointer_default( unique ) ]
  interface ID3D11UnorderedAccessView1
      : ID3D11UnorderedAccessView
-@@ -1007,6 +1014,7 @@ cpp_quote( "};" )
+@@ -1007,6 +1016,7 @@
  cpp_quote( "extern \"C\"{" )
  cpp_quote( "#endif" )
  
@@ -66,7 +92,7 @@ index 042fa18b..49e46b30 100644
  [ uuid( 631b4766-36dc-461d-8db6-c47e13e60916 ), object, local, pointer_default( unique ) ]
  interface ID3D11Query1
      : ID3D11Query
-@@ -1095,6 +1103,7 @@ interface ID3D11DeviceContext4
+@@ -1095,6 +1105,7 @@
  // Device3
  //
  ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,3 +100,12 @@ index 042fa18b..49e46b30 100644
  [ uuid( A05C8C37-D2C6-4732-B3A0-9CE0B0DC9AE6 ), object, local, pointer_default( unique ) ]
  interface ID3D11Device3
      : ID3D11Device2
+@@ -1148,7 +1159,7 @@
+         [annotation("_In_opt_")] const D3D11_BOX* pDstBox,
+         [annotation("_In_")] const void* pSrcData,
+         [annotation("_In_")] UINT SrcRowPitch,
+-        [annotation("_In_")] UINT SrcDepthPitch 
++        [annotation("_In_")] UINT SrcDepthPitch
+         );
+         
+     void ReadFromSubresource(
