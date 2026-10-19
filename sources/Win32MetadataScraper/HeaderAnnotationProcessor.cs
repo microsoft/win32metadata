@@ -24,6 +24,7 @@ namespace Win32MetadataScraper
         private readonly string generatedNamespace;
         private readonly IReadOnlyList<string> traversalNames;
         private readonly ISet<string> excludedNames;
+        private readonly bool excludeFunctionsWithBody;
         private readonly Dictionary<TypedefNameDecl, TypedefNameDecl> callbackOrigins = new();
         private readonly Dictionary<TypedefNameDecl, DelegateDeclarationSyntax> callbackTemplates = new();
         private readonly List<(CXCursor Declaration, NativeLocation Location)> enumAssociations = new();
@@ -34,12 +35,13 @@ namespace Win32MetadataScraper
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Select(carrier => carrier.Declaration.Name);
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
-            IReadOnlyList<string> traversalNames, ISet<string> excludedNames)
+            IReadOnlyList<string> traversalNames, ISet<string> excludedNames, bool excludeFunctionsWithBody)
         {
             this.remaps = remaps;
             this.generatedNamespace = generatedNamespace;
             this.traversalNames = traversalNames;
             this.excludedNames = excludedNames;
+            this.excludeFunctionsWithBody = excludeFunctionsWithBody;
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
             MergeRedeclarationFacts();
@@ -654,7 +656,8 @@ namespace Win32MetadataScraper
         private bool ShouldEmit(NamedDecl declaration, NativeLocation location)
         {
             for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
-                if (excludedNames.Contains(named.Name))
+                if (excludedNames.Contains(named.Name) ||
+                    excludeFunctionsWithBody && named is FunctionDecl function && function.HasBody)
                     return false;
             if (location.File.Length == 0)
                 return false;

@@ -1324,6 +1324,107 @@ _Win32_RAIIFree_(CloseThing, 0) void* Produce();
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void FunctionBodyFilterKeepsExportAndOverloadIdentities(string architecture, string target, bool annotated)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+typedef int (*CALLBACK)(void*);
+typedef int (*CONST_CALLBACK)(const void*);
+extern ""C"" _Win32_SupportedOS_WindowsVista_ int Invoke(CALLBACK callback);
+extern ""C++"" _Win32_SupportedOS_Windows7_ inline int Invoke(CONST_CALLBACK callback)
+{
+    return Invoke((CALLBACK)callback);
+}
+", annotationsEnabled: annotated, extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            var method = Assert.Single(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().Where(node => node.Identifier.ValueText == "Invoke"));
+            Assert.Contains("DllImport", method.ToString());
+            var parameter = Assert.Single(method.ParameterList.Parameters);
+            Assert.Equal("IntPtr", parameter.Type.ToString());
+            Assert.Contains("NativeTypeName(\"CALLBACK\")", parameter.ToString());
+            AssertSupportedOS(source, "Invoke", annotated ? "windows6.0.6000" : null);
+            Assert.DoesNotContain("SupportedOSPlatform(\"windows6.1\")", source);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void FunctionBodyFilterCoversParameterOwners(string architecture, string target, bool annotated)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+inline int Helper(_Win32_Retained_ void* context) { return 0; }
+int Imported(_Win32_Retained_ void* context);
+", annotationsEnabled: annotated, extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            Assert.DoesNotContain(methods, method => method.Identifier.ValueText == "Helper");
+            var imported = Assert.Single(methods.Where(method => method.Identifier.ValueText == "Imported"));
+            var parameter = Assert.Single(imported.ParameterList.Parameters);
+            Assert.Equal(annotated, parameter.ToString().Contains(".Retained", StringComparison.Ordinal));
+        }
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void FunctionBodyFilterUsesCanonicalRedeclarations(bool definitionFirst)
+        {
+            const string declaration = "_Win32_SupportedOS_WindowsVista_ int Helper(_Win32_Retained_ void* context);\n";
+            const string definition = "_Win32_SupportedOS_WindowsVista_ inline int Helper(_Win32_Retained_ void* context) { return 0; }\n";
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                (definitionFirst ? definition + declaration : declaration + definition) + "int Imported();",
+                extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            var methods = CSharpSyntaxTree.ParseText(fixture.ReadSource()).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            Assert.Equal("Imported", Assert.Single(methods).Identifier.ValueText);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void FunctionBodyFilterIsNotImplicit(string architecture, string target, bool annotated)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+_Win32_SupportedOS_Windows7_ inline int Helper(_Win32_Retained_ void* context) { return 0; }
+", annotationsEnabled: annotated);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            AssertSupportedOS(source, "Helper", annotated ? "windows6.1" : null);
+            var method = Assert.Single(CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>());
+            Assert.NotNull(method.Body);
+            Assert.Equal(annotated, Assert.Single(method.ParameterList.Parameters).ToString().Contains(".Retained", StringComparison.Ordinal));
+        }
+
+        [Theory]
+        [InlineData("inline int Helper(_Win32_Retained_ int value) { return value; }", "pointer or reference")]
+        [InlineData("_Win32_RAIIFree_(MissingCleanup, 0) inline void* Helper() { return 0; }", "undeclared identifier")]
+        [InlineData("_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ inline int Helper() { return 0; }", "Conflicting")]
+        public void FunctionBodyFilterDoesNotBypassAnnotationValidation(string declarations, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations + "\nint Imported();",
+                extraSettings: "--config\nexclude-funcs-with-body\n");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
         [InlineData("_Win32_SetLastError_")]
         [InlineData("_Win32_ImportLibrary_(\"header.dll\")")]
         public void ImportFactsOnInlineDefinitionsFailRatherThanDisappear(string annotation)

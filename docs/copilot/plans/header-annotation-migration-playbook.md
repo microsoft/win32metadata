@@ -211,6 +211,13 @@ Enable a migrated partition with `parse-win32-annotations` under its existing
 `Build-WinHttpMigrationImage.ps1` is the pilot's frozen complete-source
 overlay/repeat/comparison harness, not a general full-SDK admission shortcut.
 
+Annotation projection validation honors the same configured exclusions as
+ClangSharp. With `exclude-funcs-with-body`, native function definitions and their
+parameters still have their annotations parsed and validated, but do not require
+winmd projection. Keep those native sites annotated and qualified; a C++ inline
+overload is not the same declaration as a same-named C export. Without that
+exclusion, unprojected annotations still fail.
+
 Scraper-only response-file edits can miss the
 incremental emitter inputs: invalidate only the relevant known scrape stamps and
 stale image in the private qualification workspace, and prove the producer really
