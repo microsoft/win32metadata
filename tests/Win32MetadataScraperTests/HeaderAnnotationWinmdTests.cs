@@ -106,6 +106,147 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
 };
 ";
 
+        [NativeMigrationTheory("SYSTEM_AVAILABILITY_BINDINGS")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void SystemOwnedDeclarationFactsPreservePhysicalMetadata(string architecture)
+        {
+            string bindings = Environment.GetEnvironmentVariable("SYSTEM_AVAILABILITY_BINDINGS");
+            string beforeBindings = Environment.GetEnvironmentVariable("SYSTEM_AVAILABILITY_BEFORE_BINDINGS") ?? bindings;
+            string proposal = Environment.GetEnvironmentVariable("BULK_SYSTEM_MIGRATION_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(proposal, "report.json")));
+            var facts = report.RootElement.GetProperty("facts").EnumerateArray()
+                .Where(value => value.GetProperty("status").GetString() == "converted").ToArray();
+            Assert.NotEmpty(facts);
+            bool returnAssociations = facts.All(value => value.GetProperty("category").GetString() == "associated-enum-return");
+            Assert.True(returnAssociations || facts.All(value => value.GetProperty("category").GetString() == "supportedOS"));
+            if (report.RootElement.TryGetProperty("physicalMetadataComponentExclusions", out var exclusions))
+            {
+                var excluded = exclusions.EnumerateArray().Select(value => value.GetProperty("symbol").GetString())
+                    .ToHashSet(StringComparer.Ordinal);
+                Assert.Subset(facts.Select(value => value.GetProperty("symbol").GetString()).ToHashSet(StringComparer.Ordinal), excluded);
+                facts = facts.Where(value => !excluded.Contains(value.GetProperty("symbol").GetString())).ToArray();
+                Assert.NotEmpty(facts);
+            }
+            var names = facts.Select(value => value.GetProperty("symbol").GetString()).ToHashSet(StringComparer.Ordinal);
+            var factsByName = facts.ToDictionary(value => value.GetProperty("symbol").GetString(), StringComparer.Ordinal);
+            var retired = returnAssociations
+                ? report.RootElement.GetProperty("emitterRowsToRemove").EnumerateArray()
+                    .Select(value => value.GetString()).ToHashSet(StringComparer.Ordinal)
+                : new HashSet<string>(StringComparer.Ordinal);
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            var namespaces = File.ReadLines(Path.Combine(root, "generation", "WinSDK", "requiredNamespacesForNames.rsp"))
+                .Select(line => line.Trim().Split('=', 2)).Where(parts => parts.Length == 2)
+                .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            var remaps = File.ReadLines(Path.Combine(root, "generation", "WinSDK", "emitter.settings.rsp"))
+                .Select(line => line.Trim().Split('=', 2)).Where(parts => parts.Length == 2 &&
+                    names.Contains(parts[0].Split("::")[0]) && !retired.Contains(parts[0] + "=" + parts[1]))
+                .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
+            string component = Path.Combine(bindings, "availability-component-" + Guid.NewGuid().ToString("N"));
+            foreach (string state in returnAssociations ? new[] { "before", "after", "expected" } : new[] { "before", "after" })
+            {
+                string directory = Path.Combine(component, state);
+                Directory.CreateDirectory(directory);
+                using var results = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                    state == "after" ? bindings : beforeBindings, state == "expected" ? "before" : state,
+                    architecture, "results.json")));
+                var observed = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var result in results.RootElement.EnumerateArray())
+                {
+                    Assert.True(result.GetProperty("success").GetBoolean());
+                    string path = result.GetProperty("generatedSource").GetString();
+                    Assert.Equal(result.GetProperty("generatedSourceSha256").GetString(),
+                        Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path))));
+                    var source = CSharpSyntaxTree.ParseText(File.ReadAllText(path)).GetCompilationUnitRoot();
+                    var methods = source.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                        .Where(value => names.Contains(value.Identifier.ValueText) &&
+                            value.Modifiers.Any(SyntaxKind.ExternKeyword) &&
+                            value.Parent is ClassDeclarationSyntax parent && parent.Identifier.ValueText == "Apis").ToArray();
+                    foreach (var method in methods)
+                        Assert.True(observed.Add(method.Identifier.ValueText),
+                            "Duplicate actual imported method: " + method.Identifier.ValueText);
+                    if (state == "expected")
+                    {
+                        source = source.ReplaceNodes(methods, (method, _) =>
+                        {
+                            var argument = SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
+                                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(factsByName[method.Identifier.ValueText]
+                                    .GetProperty("enumName").GetString())));
+                            var attribute = SyntaxFactory.Attribute(SyntaxFactory.IdentifierName("AssociatedEnum"),
+                                SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(argument)));
+                            var list = SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(attribute))
+                                .WithTarget(SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
+                            return method.AddAttributeLists(list);
+                        });
+                        methods = source.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                            .Where(value => names.Contains(value.Identifier.ValueText) &&
+                                value.Modifiers.Any(SyntaxKind.ExternKeyword) &&
+                                value.Parent is ClassDeclarationSyntax parent && parent.Identifier.ValueText == "Apis").ToArray();
+                    }
+                    var members = methods.GroupBy(value => string.Join(".", value.Ancestors()
+                            .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(parent => parent.Name.ToString())))
+                        .Select(group => SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
+                            .AddMembers(group.GroupBy(method => method.Ancestors().OfType<ClassDeclarationSyntax>().First())
+                                .Select(methodsInClass => methodsInClass.Key.WithMembers(
+                                    SyntaxFactory.List<MemberDeclarationSyntax>(methodsInClass))).ToArray()));
+                    var subset = SyntaxFactory.CompilationUnit().WithUsings(source.Usings.Add(SyntaxFactory.UsingDirective(
+                            SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata"))))
+                        .AddMembers(members.ToArray()).NormalizeWhitespace();
+                    File.WriteAllText(Path.Combine(directory, result.GetProperty("partition").GetString() + ".cs"),
+                        subset.ToFullString());
+                }
+                Assert.Equal(names.OrderBy(value => value, StringComparer.Ordinal),
+                    observed.OrderBy(value => value, StringComparer.Ordinal));
+            }
+            string baseline = Environment.GetEnvironmentVariable("SYSTEM_ENUM_REFERENCE_METADATA");
+            Assert.True(File.Exists(baseline), "The immutable winmd supplies existing native dependency types only.");
+            using var before = Emit(Path.Combine(component, "before"), architecture,
+                memberRemaps: remaps, references: new[] { baseline }, requiredNamespaces: namespaces);
+            using var after = Emit(Path.Combine(component, "after"), architecture,
+                memberRemaps: remaps, references: new[] { baseline }, requiredNamespaces: namespaces);
+            AssertMetadataClosure(before.Reader);
+            AssertMetadataClosure(after.Reader);
+            if (returnAssociations)
+            {
+                using var expected = Emit(Path.Combine(component, "expected"), architecture,
+                    memberRemaps: remaps, references: new[] { baseline }, requiredNamespaces: namespaces);
+                AssertMetadataClosure(expected.Reader);
+                Assert.Equal(Snapshot(expected.Reader), Snapshot(after.Reader));
+            }
+            else
+                Assert.Equal(Snapshot(before.Reader), Snapshot(after.Reader));
+            foreach (var fact in facts)
+            {
+                string name = fact.GetProperty("symbol").GetString();
+                var method = Assert.Single(after.Reader.MethodDefinitions.Select(after.Reader.GetMethodDefinition)
+                    .Where(value => after.Reader.GetString(value.Name) == name));
+                if (returnAssociations)
+                {
+                    Assert.Equal(fact.GetProperty("nativeStorage").GetString(),
+                        method.DecodeSignature(new SignatureNames(), null).ReturnType);
+                    var target = Assert.Single(method.GetParameters().Select(after.Reader.GetParameter)
+                        .Where(value => value.SequenceNumber == 0));
+                    AssertStringAttribute(after.Reader, target.GetCustomAttributes(), "AssociatedEnumAttribute",
+                        fact.GetProperty("enumName").GetString());
+                }
+                else
+                {
+                    string payload = fact.GetProperty("value").GetString().Split('=', 2)[1];
+                    Assert.StartsWith("SupportedOSPlatform(", payload);
+                    string os = JsonSerializer.Deserialize<string>(payload["SupportedOSPlatform(".Length..^1]);
+                    AssertStringAttribute(after.Reader, method.GetCustomAttributes(), "SupportedOSPlatformAttribute", os);
+                }
+            }
+            Console.WriteLine($"{architecture}: {facts.Length} exact owned declaration facts, actual imported native signatures, " +
+                "calling conventions and namespaces checked without retired sidecar rows; " +
+                (returnAssociations ? "only the source-qualified return associations added." : "physical metadata unchanged."));
+
+            static string[] Snapshot(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Select(type => WinHttpMigrationTests.SnapshotType(reader, type))
+                .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
         [MigrationTheory("SYSTEM_ENUM_BINDINGS", "SYSTEM_ENUM_MIGRATION_ROOT")]
         [InlineData("x86")]
         [InlineData("x64")]

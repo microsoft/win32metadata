@@ -3726,3 +3726,21 @@ uses, Authz lifecycle families and separate SSPI native128 API grade remain
 held. No `autoTypes`, import mapping, frozen SDK05 input or peer-owned source
 changes. Evidence is under
 `artifacts\bulk-annotations\system-native-closure-009-*`.
+
+### Remaining System native return/linkage availability carriers
+
+The existing compiler-bound authorer moves 64 remaining SupportedOS rows into
+the real native declarations in `combaseapi.h` (58), `ole2.h` (4) and
+`mfapi.h` (2). WINOLEAPI and COMBASEAPI annotations follow their bound native
+return/linkage prefix. Existing cumulative source payloads, native signatures,
+SAL and declaration multiplicities remain unchanged. All three owning
+partitions were already opted into annotation parsing.
+
+The 64 exact sidecar rows are removed without a legacy OS overlay in normal
+projection. Targeted three-architecture native, normal and physical component
+checks cover the selected facts rather than rebuilding the full SDK. The
+candidate six WinNT floors remain in the sidecar: their owning Backup
+partition is not opted in, and this batch does not enable it or revise shared
+WinNT source. Other unsupported/changed-span candidates and the MI inline-only
+pool remain explicit debt. Final SDK-wide API grading stays with integration.
+Evidence is under `artifacts\bulk-annotations\system-retained-floors-010-*`.

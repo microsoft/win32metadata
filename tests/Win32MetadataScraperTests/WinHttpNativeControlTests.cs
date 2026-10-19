@@ -280,7 +280,8 @@ using WINHTTP_INTERNET_SCHEME = void;
             string partition, string architecture, string target, string language)
         {
             string root = WinHttpMigrationTests.RepositoryRoot;
-            string original = Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
+            string original = Environment.GetEnvironmentVariable("WINHTTP_PRISTINE_PREPARED_HEADERS")
+                ?? Path.Combine(root, "generation", "WinSDK", "RecompiledIdlHeaders");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             string artifacts = Environment.GetEnvironmentVariable("BULK_SYSTEM_MIGRATION_ROOT");
             using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(artifacts, "report.json")));
@@ -293,32 +294,46 @@ using WINHTTP_INTERNET_SCHEME = void;
                         : "#include <winreg.h>\n")
                 : null;
             var beforeSal = new List<string>();
+            var beforeEnabledSal = new List<string>();
             var disabledSal = new List<string>();
             var enabledSal = new List<string>();
+            var beforeAnnotations = new List<string>();
             var annotations = new List<string>();
             var before = Surface(root, original, partition, architecture, target, headers, "",
                 sourceText: sourceText, salAnnotations: beforeSal, language: language);
+            var beforeEnabled = Surface(root, original, partition, architecture, target, headers, "",
+                metadataEnabled: true, annotations: beforeAnnotations, sourceText: sourceText,
+                salAnnotations: beforeEnabledSal, language: language);
             var disabled = Surface(root, prepared, partition, architecture, target, headers, "",
                 sourceText: sourceText, salAnnotations: disabledSal, language: language);
             var enabled = Surface(root, prepared, partition, architecture, target, headers, "",
                 metadataEnabled: true, annotations: annotations, sourceText: sourceText, salAnnotations: enabledSal, language: language);
             Assert.NotEmpty(before);
             Assert.Equal(before, disabled);
-            Assert.Equal(before, enabled);
+            Assert.Equal(beforeEnabled, enabled);
             Assert.Equal(beforeSal, disabledSal);
-            Assert.Equal(beforeSal, enabledSal);
+            Assert.Equal(beforeEnabledSal, enabledSal);
             int checkedFacts = 0;
+            var addedAnnotations = new List<string>();
             foreach (var fact in report.RootElement.GetProperty("facts").EnumerateArray()
                 .Where(value => value.GetProperty("status").GetString() == "converted"))
             {
                 string symbol = fact.GetProperty("symbol").GetString();
                 if (!before.Any(value => value.StartsWith("function " + symbol + " ", StringComparison.Ordinal)))
                     continue;
-                string payload = fact.GetProperty("category").GetString() == "setLastError" ? "SetLastError"
-                    : fact.GetProperty("value").GetString().Split('=', 2)[1];
+                string payload = fact.GetProperty("category").GetString() switch
+                {
+                    "setLastError" => "SetLastError",
+                    "associated-enum-return" => "AssociatedEnum",
+                    _ => fact.GetProperty("value").GetString().Split('=', 2)[1],
+                };
                 Assert.Contains(symbol + "|" + payload, annotations);
+                addedAnnotations.AddRange(beforeEnabled.Where(value => value.StartsWith("function " + symbol + " ", StringComparison.Ordinal))
+                    .Select(_ => symbol + "|" + payload));
                 checkedFacts++;
             }
+            Assert.Equal(beforeAnnotations.Concat(addedAnnotations).OrderBy(value => value, StringComparer.Ordinal),
+                annotations.OrderBy(value => value, StringComparer.Ordinal));
             Assert.True(checkedFacts > 0, "The native control must exercise actual converted facts.");
             this.output.WriteLine($"{partition}/{architecture}/{language}: {checkedFacts} authored facts; " +
                 "ordinary and metadata native declarations/layout/SAL unchanged.");
@@ -389,7 +404,19 @@ using WINHTTP_INTERNET_SCHEME = void;
                 foreach (var method in projected)
                 {
                     var attributes = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
-                    if (fact.GetProperty("category").GetString() == "setLastError")
+                    if (fact.GetProperty("category").GetString() == "associated-enum-return")
+                    {
+                        Assert.Equal(fact.GetProperty("nativeStorage").GetString() == "Int32" ? "int" : "uint",
+                            method.ReturnType.ToString());
+                        var attribute = Assert.Single(method.AttributeLists.Where(list =>
+                                list.Target?.Identifier.ValueText == "return")
+                            .SelectMany(list => list.Attributes).Where(value => value.Name.ToString().Split('.').Last()
+                                is "AssociatedEnum" or "AssociatedEnumAttribute"));
+                        Assert.Equal(fact.GetProperty("enumName").GetString(),
+                            Assert.IsType<LiteralExpressionSyntax>(
+                                Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText);
+                    }
+                    else if (fact.GetProperty("category").GetString() == "setLastError")
                     {
                         var import = Assert.Single(attributes.Where(attribute => attribute.Name.ToString().Split('.').Last()
                             is "DllImport" or "DllImportAttribute"));
@@ -411,6 +438,8 @@ using WINHTTP_INTERNET_SCHEME = void;
                 checkedFacts++;
             }
             Assert.True(checkedFacts > 0, "The readback must exercise actual emitted native functions.");
+            if (report.RootElement.TryGetProperty("requireCompleteProjection", out var complete) && complete.GetBoolean())
+                Assert.Equal(0, nativeOnly);
             this.output.WriteLine($"{architecture}: {checkedFacts} exact authored payloads read back from generated declarations; " +
                 $"{nativeOnly} source facts are outside these selected generated declarations, not claimed as emitted APIs.");
         }

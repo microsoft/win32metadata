@@ -1,5 +1,5 @@
 diff --git a/um/mfapi.h b/um/mfapi.h
-index 8683cd3b..a0cae062 100644
+index 8683cd3b..66f90a0b 100644
 --- a/um/mfapi.h
 +++ b/um/mfapi.h
 @@ -93,6 +93,7 @@ STDAPI MFStartup( ULONG Version, DWORD dwFlags );
@@ -532,7 +532,15 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFCreateMediaExtensionActivate(
      _In_        PCWSTR          szActivatableClassId,
-@@ -2727,16 +2800,19 @@ DEFINE_GUID(MFSampleExtension_MULTIPLEXED_MANAGER,
+@@ -2694,6 +2767,7 @@ DEFINE_GUID( MFSampleExtension_3DVideo_SampleFormat,
+ // Only the values of 0, 90, 180, and 270 are valid.
+ #ifndef _MFVideoRotationFormat_
+ #define _MFVideoRotationFormat_
++#include <sal.h>
+ typedef enum _MFVideoRotationFormat {
+     MFVideoRotationFormat_0        = 0,
+     MFVideoRotationFormat_90       = 90,
+@@ -2727,16 +2801,19 @@ DEFINE_GUID(MFSampleExtension_MULTIPLEXED_MANAGER,
  0x8dcdee79, 0x6b5a, 0x4c45, 0x8d, 0xb9, 0x20, 0xb3, 0x95, 0xf0, 0x2f, 0xcf);
  
  
@@ -552,7 +560,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateMuxStreamSample(
      _In_ IMFCollection *pSamplesToMux,
      _COM_Outptr_ IMFSample**ppMuxSample
-@@ -3781,6 +3857,7 @@ typedef struct tagMPEG2VIDEOINFO MPEG2VIDEOINFO;
+@@ -3781,6 +3858,7 @@ typedef struct tagMPEG2VIDEOINFO MPEG2VIDEOINFO;
  struct _AMMediaType;
  typedef struct _AMMediaType AM_MEDIA_TYPE;
  
@@ -560,7 +568,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFValidateMediaTypeSize(
      _In_                    GUID    FormatType,
-@@ -3794,6 +3871,7 @@ MFValidateMediaTypeSize(
+@@ -3794,6 +3872,7 @@ MFValidateMediaTypeSize(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
@@ -568,7 +576,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFCreateMediaType(
      _Outptr_ IMFMediaType**  ppMFType
-@@ -3805,6 +3883,7 @@ MFCreateMediaType(
+@@ -3805,6 +3884,7 @@ MFCreateMediaType(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -576,7 +584,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFCreateMFVideoFormatFromMFMediaType(
      _In_        IMFMediaType*           pMFType,
-@@ -3961,6 +4040,7 @@ MFCalculateBitmapImageSize(
+@@ -3961,6 +4041,7 @@ MFCalculateBitmapImageSize(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
@@ -584,7 +592,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFCalculateImageSize(
      _In_                    REFGUID                 guidSubtype,
-@@ -3969,6 +4049,7 @@ MFCalculateImageSize(
+@@ -3969,6 +4050,7 @@ MFCalculateImageSize(
      _Out_                   UINT32*                 pcbImageSize
      );
  
@@ -592,7 +600,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFFrameRateToAverageTimePerFrame(
      _In_                    UINT32                  unNumerator,
-@@ -3976,6 +4057,7 @@ MFFrameRateToAverageTimePerFrame(
+@@ -3976,6 +4058,7 @@ MFFrameRateToAverageTimePerFrame(
      _Out_                   UINT64*                 punAverageTimePerFrame
      );
  
@@ -600,7 +608,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFAverageTimePerFrameToFrameRate(
      _In_                    UINT64                  unAverageTimePerFrame,
-@@ -3983,6 +4065,7 @@ MFAverageTimePerFrameToFrameRate(
+@@ -3983,6 +4066,7 @@ MFAverageTimePerFrameToFrameRate(
      _Out_                   UINT32*                 punDenominator
      );
  
@@ -608,7 +616,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFInitMediaTypeFromWaveFormatEx(
      _In_                    IMFMediaType*           pMFType,
-@@ -3994,6 +4077,7 @@ MFInitMediaTypeFromWaveFormatEx(
+@@ -3994,6 +4078,7 @@ MFInitMediaTypeFromWaveFormatEx(
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
@@ -616,7 +624,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFInitMediaTypeFromMFVideoFormat(
      _In_                    IMFMediaType*           pMFType,
-@@ -4001,12 +4085,14 @@ MFInitMediaTypeFromMFVideoFormat(
+@@ -4001,12 +4086,14 @@ MFInitMediaTypeFromMFVideoFormat(
      _In_                    UINT32                  cbBufSize
      );
  
@@ -631,7 +639,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFInitAMMediaTypeFromMFMediaType(
      _In_    IMFMediaType*           pMFType,
-@@ -4014,6 +4100,7 @@ MFInitAMMediaTypeFromMFMediaType(
+@@ -4014,6 +4101,7 @@ MFInitAMMediaTypeFromMFMediaType(
      _Inout_ AM_MEDIA_TYPE*          pAMType
      );
  
@@ -639,7 +647,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFCreateAMMediaTypeFromMFMediaType(
      _In_    IMFMediaType*           pMFType,
-@@ -4037,6 +4124,7 @@ MFCreateAMMediaTypeFromMFMediaType(
+@@ -4037,6 +4125,7 @@ MFCreateAMMediaTypeFromMFMediaType(
  // and all of the attributes in the partial type exist in the full type and are set to
  // the same value.
  //
@@ -647,7 +655,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI_(BOOL)
  MFCompareFullToPartialMediaType(
      _In_    IMFMediaType*   pMFTypeFull,
-@@ -4049,6 +4137,7 @@ MFCompareFullToPartialMediaType(
+@@ -4049,6 +4138,7 @@ MFCompareFullToPartialMediaType(
  
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
@@ -655,7 +663,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFWrapMediaType(
      _In_    IMFMediaType*    pOrig,
-@@ -4059,12 +4148,14 @@ MFWrapMediaType(
+@@ -4059,12 +4149,14 @@ MFWrapMediaType(
  
  
  
@@ -670,7 +678,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFGetStrideForBitmapInfoHeader(
      DWORD format,
      DWORD dwWidth,
-@@ -4103,16 +4194,19 @@ STDAPI MFCreateVideoMediaTypeFromVideoInfoHeader2(
+@@ -4103,16 +4195,19 @@ STDAPI MFCreateVideoMediaTypeFromVideoInfoHeader2(
  
  #endif
  
@@ -690,7 +698,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI_(BOOL)
  MFIsFormatYUV(
      DWORD Format
-@@ -4122,6 +4216,7 @@ MFIsFormatYUV(
+@@ -4122,6 +4217,7 @@ MFIsFormatYUV(
  //  These depend on BITMAPINFOHEADER being defined
  //
  #ifndef NOBITMAP
@@ -698,7 +706,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeader(
      _In_ const BITMAPINFOHEADER* pbmihBitMapInfoHeader,
      DWORD dwPixelAspectRatioX,
-@@ -4135,6 +4230,7 @@ STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeader(
+@@ -4135,6 +4231,7 @@ STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeader(
      );
  #endif // NOBITMAP
  
@@ -706,7 +714,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFGetPlaneSize(
      DWORD format,
      DWORD dwWidth,
-@@ -4148,6 +4244,7 @@ STDAPI MFGetPlaneSize(
+@@ -4148,6 +4245,7 @@ STDAPI MFGetPlaneSize(
  // MFCreateVideoMediaTypeFromBitMapInfoHeaderEx
  //
  
@@ -714,7 +722,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(
      _In_reads_bytes_(cbBitMapInfoHeader) const BITMAPINFOHEADER* pbmihBitMapInfoHeader,
      _In_    UINT32                  cbBitMapInfoHeader,
-@@ -4167,6 +4264,7 @@ STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(
+@@ -4167,6 +4265,7 @@ STDAPI MFCreateVideoMediaTypeFromBitMapInfoHeaderEx(
  // MFCreateMediaTypeFromRepresentation
  //
  
@@ -722,7 +730,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateMediaTypeFromRepresentation(
      GUID guidRepresentation,
      _In_ LPVOID pvRepresentation,
-@@ -4179,24 +4277,28 @@ STDAPI MFCreateMediaTypeFromRepresentation(
+@@ -4179,24 +4278,28 @@ STDAPI MFCreateMediaTypeFromRepresentation(
  //
  
  
@@ -751,7 +759,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFInitVideoFormat_RGB(
      _In_    MFVIDEOFORMAT*  pVideoFormat,
-@@ -4205,11 +4307,13 @@ MFInitVideoFormat_RGB(
+@@ -4205,11 +4308,13 @@ MFInitVideoFormat_RGB(
      _In_    DWORD           D3Dfmt /* 0 indicates sRGB */
      );
  
@@ -765,7 +773,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI
  MFConvertColorInfoFromDXVA(
      _Inout_ MFVIDEOFORMAT* pToFormat,
-@@ -4225,6 +4329,7 @@ MFConvertColorInfoFromDXVA(
+@@ -4225,6 +4330,7 @@ MFConvertColorInfoFromDXVA(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
@@ -773,7 +781,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCopyImage(
      _Out_writes_bytes_(_Inexpressible_(abs(lDestStride) *  dwLines)) BYTE* pDest,
      LONG    lDestStride,
-@@ -4240,12 +4345,14 @@ STDAPI MFCopyImage(
+@@ -4240,12 +4346,14 @@ STDAPI MFCopyImage(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -788,7 +796,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFConvertToFP16Array(
      _Out_writes_(dwCount) WORD* pDest,
      _In_reads_(dwCount) const float* pSrc,
-@@ -4258,6 +4365,7 @@ STDAPI MFConvertToFP16Array(
+@@ -4258,6 +4366,7 @@ STDAPI MFConvertToFP16Array(
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
@@ -796,7 +804,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreate2DMediaBuffer( 
      _In_ DWORD dwWidth,
      _In_ DWORD dwHeight,
-@@ -4270,6 +4378,7 @@ STDAPI MFCreate2DMediaBuffer(
+@@ -4270,6 +4379,7 @@ STDAPI MFCreate2DMediaBuffer(
  //
  // Creates an optimal system memory media buffer from a media type
  //
@@ -804,7 +812,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateMediaBufferFromMediaType(
      _In_ IMFMediaType* pMediaType,
      _In_ LONGLONG llDuration,   // Sample Duration, needed for audio
-@@ -4532,6 +4641,7 @@ MFGetAttributeString(
+@@ -4532,6 +4642,7 @@ MFGetAttributeString(
  //
  // Instantiates the MF-provided IMFCollection implementation
  //
@@ -812,7 +820,22 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCreateCollection(
      _Out_ IMFCollection **ppIMFCollection );
  
-@@ -4584,6 +4694,7 @@ DEFINE_GUID(CLSID_MFSourceResolver,
+@@ -4559,12 +4670,12 @@ typedef enum _EAllocationType
+     eAllocationTypeIgnore
+ }   EAllocationType;
+ 
+-EXTERN_C void* WINAPI MFHeapAlloc( size_t nSize,
++EXTERN_C _Win32_SupportedOS_WindowsVista_ void* WINAPI MFHeapAlloc( size_t nSize,
+                             ULONG dwFlags,
+                             _In_opt_ char *pszFile,
+                             int line,
+                             EAllocationType eat);
+-EXTERN_C void WINAPI MFHeapFree( void * pv );
++EXTERN_C _Win32_SupportedOS_WindowsVista_ void WINAPI MFHeapFree( void * pv );
+ 
+ //////////////////////////       SourceResolver     ////////////////////////////
+ ////////////////////////////////////////////////////////////////////////////////
+@@ -4584,6 +4695,7 @@ DEFINE_GUID(CLSID_MFSourceResolver,
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
@@ -820,7 +843,7 @@ index 8683cd3b..a0cae062 100644
  LONGLONG WINAPI MFllMulDiv(LONGLONG a, LONGLONG b, LONGLONG c, LONGLONG d);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
-@@ -4598,6 +4709,7 @@ LONGLONG WINAPI MFllMulDiv(LONGLONG a, LONGLONG b, LONGLONG c, LONGLONG d);
+@@ -4598,6 +4710,7 @@ LONGLONG WINAPI MFllMulDiv(LONGLONG a, LONGLONG b, LONGLONG c, LONGLONG d);
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
  
@@ -828,7 +851,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFGetContentProtectionSystemCLSID(
      _In_ REFGUID guidProtectionSystemID,
      _Out_ CLSID *pclsid );
-@@ -4642,6 +4754,7 @@ DEFINE_GUID(MF_DEVICESTREAM_ATTRIBUTE_SECURE_CAPABILITY,
+@@ -4642,6 +4755,7 @@ DEFINE_GUID(MF_DEVICESTREAM_ATTRIBUTE_SECURE_CAPABILITY,
  //  pSampleToAdd - the sample to append 
  //  dwMaxMergedDurationInMS - indicates the maximum duration that the combined sample should be allowed to occupy 
  //  pCombined - indicates that pSampleToAdd was successfully added to the base sample
@@ -836,7 +859,7 @@ index 8683cd3b..a0cae062 100644
  STDAPI MFCombineSamples( _In_ IMFSample *pSample, _In_ IMFSample* pSampleToAdd, _In_ DWORD dwMaxMergedDurationInMS, _Out_ BOOL* pMerged );
  
  // MFSplitSample
-@@ -4650,6 +4763,7 @@ STDAPI MFCombineSamples( _In_ IMFSample *pSample, _In_ IMFSample* pSampleToAdd,
+@@ -4650,6 +4764,7 @@ STDAPI MFCombineSamples( _In_ IMFSample *pSample, _In_ IMFSample* pSampleToAdd,
  //  dwOutputSampleMaxCount - maximum array size (use the BufferCount on pSample to find out an upper bound) 
  //  pdwOutputSampleCount - actual number of output samples produce
  
