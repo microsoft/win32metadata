@@ -64,6 +64,44 @@ namespace Win32MetadataScraperTests
             Assert.Empty(Directory.GetDirectories(fixture.Output));
         }
 
+        [Fact]
+        public void FailedAtomicPublicationRetainsDiagnosticsWithoutPublishingOrReusingTheTree()
+        {
+            using var fixture = new Fixture();
+            fixture.UsePrivatePreparationScripts();
+            string script = fixture.PreparationScript("Prepare-SdkHeaders.ps1");
+            string original = File.ReadAllText(script);
+            const string move = "[IO.Directory]::Move($staging, $destination)";
+            Assert.Contains(move, original);
+            File.WriteAllText(script, original.Replace(move,
+                "$publicationTestHandle = [IO.File]::Open(\"$staging\\headers\\um\\sample.h\", " +
+                "[IO.FileMode]::Open, [IO.FileAccess]::Read, [IO.FileShare]::Read)\n        " + move));
+
+            var failed = fixture.Run();
+            Assert.NotEqual(0, failed.ExitCode);
+            Assert.Contains("Atomic publication failed (0x80070005)", failed.Output);
+            Assert.Contains("It is not a valid prepared-header cache", failed.Output);
+            string staging = Assert.Single(Directory.GetDirectories(fixture.Output));
+            Assert.StartsWith("staging-", Path.GetFileName(staging));
+            Assert.True(File.Exists(Path.Combine(staging, "manifest.json")));
+            using var diagnostic = JsonDocument.Parse(File.ReadAllText(Path.Combine(staging, "publication-failure.json")));
+            Assert.Equal("failed-unpublished", diagnostic.RootElement.GetProperty("status").GetString());
+            Assert.Equal("0x80070005", diagnostic.RootElement.GetProperty("hResult").GetString());
+            Assert.Equal(staging, diagnostic.RootElement.GetProperty("staging").GetString());
+            Assert.False(diagnostic.RootElement.GetProperty("destinationExists").GetBoolean());
+            Assert.Equal(Fixture.Before, File.ReadAllText(fixture.Header));
+            byte[] failedHeader = File.ReadAllBytes(Path.Combine(staging, "headers", "um", "sample.h"));
+            Assert.Equal(Encoding.ASCII.GetBytes(Fixture.Before.Replace("VALUE 1", "VALUE 2")), failedHeader);
+
+            File.WriteAllText(script, original);
+            var prepared = fixture.Prepare();
+            Assert.False(prepared.Reused);
+            Assert.NotEqual(Path.Combine(staging, "headers"), prepared.IncludeRoot);
+            Assert.Equal(failedHeader, File.ReadAllBytes(Path.Combine(prepared.IncludeRoot, "um", "sample.h")));
+            Assert.Equal(failedHeader, File.ReadAllBytes(Path.Combine(staging, "headers", "um", "sample.h")));
+            Assert.True(fixture.Prepare().Reused);
+        }
+
         [Theory]
         [InlineData("// annotation", true)]
         [InlineData("// annotation ", false)]

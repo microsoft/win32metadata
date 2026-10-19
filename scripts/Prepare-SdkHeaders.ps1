@@ -445,6 +445,7 @@ $patches = @($config.patches | ForEach-Object {
 [IO.Directory]::CreateDirectory($OutputRoot) | Out-Null
 $lock = [IO.File]::Open("$OutputRoot\prepare.lock", [IO.FileMode]::OpenOrCreate, [IO.FileAccess]::ReadWrite, [IO.FileShare]::None)
 $staging = $null
+$publicationFailed = $false
 try {
     $sourceState = Get-DirectoryState $SourceRoot
     $identity = Get-TextHash ($recipeSha256 + $preparationSha256 + $sourceState.sha256 +
@@ -562,7 +563,38 @@ try {
         $manifest.midlSha256 = (Get-DirectoryState "$staging\midl").sha256
     }
     [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-    [IO.Directory]::Move($staging, $destination)
+    try {
+        [IO.Directory]::Move($staging, $destination)
+    }
+    catch {
+        $publicationFailed = $true
+        $publicationError = $_
+        $failure = $_.Exception.GetBaseException()
+        $diagnostic = [ordered]@{
+            status = 'failed-unpublished'
+            identity = $identity
+            staging = $staging
+            destination = $destination
+            exceptionType = $failure.GetType().FullName
+            hResult = '0x{0:X8}' -f $failure.HResult
+            message = $failure.Message
+            processId = $PID
+            processCurrentDirectory = [Environment]::CurrentDirectory
+            powerShellLocation = (Get-Location).Path
+        }
+        try {
+            $diagnostic.sourceAttributes = [IO.File]::GetAttributes($staging).ToString()
+            $diagnostic.parentAttributes = [IO.File]::GetAttributes($OutputRoot).ToString()
+            $diagnostic.destinationExists = [IO.Directory]::Exists($destination)
+            [IO.File]::WriteAllText("$staging\publication-failure.json",
+                ($diagnostic | ConvertTo-Json -Depth 4), [Text.UTF8Encoding]::new($false))
+        }
+        catch {
+            Write-Warning "Could not write atomic-publication diagnostics: $($_.Exception.Message)"
+        }
+        Write-Warning "Atomic publication failed ($($diagnostic.hResult)); unpublished diagnostic tree retained at $staging. It is not a valid prepared-header cache."
+        throw $publicationError
+    }
     $staging = $null
     [pscustomobject]@{
         IncludeRoot = "$destination\headers"; Manifest = $manifestPath; Identity = $identity
@@ -570,8 +602,12 @@ try {
     }
 }
 finally {
-    if ($staging -and (Test-Path -LiteralPath $staging)) {
-        Remove-Item -LiteralPath $staging -Recurse -Force
+    try {
+        if ($staging -and !$publicationFailed -and (Test-Path -LiteralPath $staging)) {
+            Remove-Item -LiteralPath $staging -Recurse -Force
+        }
     }
-    $lock.Dispose()
+    finally {
+        $lock.Dispose()
+    }
 }

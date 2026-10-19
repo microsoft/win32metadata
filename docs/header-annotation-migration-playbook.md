@@ -21,6 +21,13 @@ its existing guarded `int` binding and seven native-macro members from the admit
 input's parent; this is a zero-credit dependency correction, not another source
 batch or permission to adopt the ancestor's cumulative patch.
 
+An atomic prepared-header publication failure is an infrastructure failure, not a
+native annotation rejection. Keep its unpublished `staging-*` tree and
+`publication-failure.json` as failed diagnostic evidence; never rename it manually
+into a valid cache or reuse it as a published input. Diagnose owned handles,
+working directories and file attributes with cheap isolated controls before a new
+aggregate. Publication remains one atomic move, with no retry or permission change.
+
 Source integration is not API acceptance. The CryptXML URI-query member deliberately
 uses the shipped SDK value `0x4` instead of the legacy sidecar value `3`; retain that
 raw difference along with native enum ordering, anonymous-coordinate and native
