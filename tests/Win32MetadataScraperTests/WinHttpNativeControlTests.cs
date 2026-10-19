@@ -3006,6 +3006,8 @@ void NetworkBroadSourceSalProbe(
                     annotation = symbol + "|" + fact.GetProperty("value").GetString().Split('=', 2)[1];
                 else if (category == "setLastError")
                     annotation = symbol + "|SetLastError";
+                else if (item.GetProperty("transport").GetString() == "native-return")
+                    annotation = symbol.Split("::", StringSplitOptions.None)[0] + "|AssociatedEnum";
                 else
                 {
                     string[] targetParts = symbol.Split("::", StringSplitOptions.None);
@@ -3035,6 +3037,16 @@ void NetworkBroadSourceSalProbe(
                     foreach (bool enabled in new[] { false, true })
                         yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled };
         }
+
+        [NativeMigrationTheory("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")]
+        [MemberData(nameof(DeviceNativeReturnFollowthroughNativeControls))]
+        public void DeviceNativeReturnFollowthroughPreservesNativeAbiSalAndPriorMetadata(
+            string partition, string architecture, string target, bool metadataEnabled)
+            => this.DeviceNativeFollowthroughPreservesNativeAbiSalAndPriorMetadata(
+                partition, architecture, target, metadataEnabled);
+
+        public static IEnumerable<object[]> DeviceNativeReturnFollowthroughNativeControls()
+            => DeviceNativeFollowthroughNativeControls().Where(parameters => parameters[0] is "Shell" or "Variant");
 
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,

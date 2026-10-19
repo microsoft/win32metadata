@@ -2149,7 +2149,22 @@ namespace Win32MetadataScraperTests
                 else
                 {
                     string[] target = name.Split("::", StringSplitOptions.None);
-                    if (item.GetProperty("transport").GetString() == "native-field")
+                    if (item.GetProperty("transport").GetString() == "native-return")
+                    {
+                        var methods = nodes.OfType<MethodDeclarationSyntax>().Where(node =>
+                            node.Identifier.ValueText == target[0] &&
+                            node.Modifiers.Any(token => token.ValueText == "extern")).ToArray();
+                        foreach (var method in methods)
+                        {
+                            Assert.Equal(item.GetProperty("managedNativeReturn").GetString(), method.ReturnType.ToString());
+                            Assert.DoesNotContain(method.AttributeLists.Where(list => list.Target == null)
+                                .SelectMany(list => list.Attributes), attribute => AttributeIs(attribute, "AssociatedEnum"));
+                        }
+                        occurrences = methods.Select(node => node.AttributeLists
+                            .Where(list => list.Target?.Identifier.ValueText == "return")
+                            .SelectMany(list => list.Attributes)).ToArray();
+                    }
+                    else if (item.GetProperty("transport").GetString() == "native-field")
                         occurrences = nodes.OfType<StructDeclarationSyntax>().Where(node => node.Identifier.ValueText == target[0])
                             .SelectMany(node => node.Members.OfType<FieldDeclarationSyntax>())
                             .Where(node => node.Declaration.Variables.Any(variable => variable.Identifier.ValueText == target[^1]))
@@ -2174,11 +2189,12 @@ namespace Win32MetadataScraperTests
                     else
                     {
                         string attributeName = category == "supportedOS" ? "SupportedOSPlatform" :
-                            category == "associated-enum-use" ? "AssociatedEnum" : "RetVal";
+                            category is "associated-enum-use" or "direct-enum-use" ? "AssociatedEnum" : "RetVal";
                         var attribute = Assert.Single(attributes.Where(value => AttributeIs(value, attributeName)));
                         string expected = fact.GetProperty("value").GetString().Split('=', 2)[1];
                         string actual = attributeName + attribute.ArgumentList;
-                        Assert.Equal(category == "supportedOS" ? expected : expected[1..^1], actual);
+                        Assert.Equal(category == "supportedOS" ? expected : category == "direct-enum-use"
+                            ? "AssociatedEnum(\"" + expected + "\")" : expected[1..^1], actual);
                     }
                 }
             }
@@ -2201,8 +2217,8 @@ namespace Win32MetadataScraperTests
                         Convert.ToDecimal(symbol.ConstantValue, System.Globalization.CultureInfo.InvariantCulture));
                 }
             }
-            this.output.WriteLine($"{architecture}: {selected.Length} exact native source facts, six unchanged native enum identities/" +
-                "ordered compiled values/int storage, and explicit attribute targets reached normal generated sources.");
+            this.output.WriteLine($"{architecture}: {selected.Length} exact native source facts, {enums.Count} unchanged native enum identities/" +
+                "ordered compiled values/storage, and explicit attribute targets reached normal generated sources.");
 
             static bool AttributeIs(AttributeSyntax attribute, string name)
                 => attribute.Name.ToString() == name || attribute.Name.ToString().EndsWith("." + name, StringComparison.Ordinal);
@@ -2230,6 +2246,39 @@ namespace Win32MetadataScraperTests
             }
             Assert.Contains("PFTASKDIALOGCALLBACK::msg=[AssociatedEnum(\"TASKDIALOG_NOTIFICATIONS\")]",
                 File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "emitter.settings.rsp")));
+        }
+
+        [MigrationTheory("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT", "WINHTTP_PREPARED_HEADERS")]
+        [InlineData(78)]
+        public void DeviceNativeReturnFollowthroughRetiresOnlyExactCoveredRows(int expectedFacts)
+        {
+            using var report = JsonDocument.Parse(File.ReadAllText(
+                Environment.GetEnvironmentVariable("WINHTTP_DEVICE_FOLLOWTHROUGH_REPORT")));
+            var root = report.RootElement;
+            var selected = root.GetProperty("selected").EnumerateArray().ToArray();
+            Assert.Equal(expectedFacts, selected.Length);
+            Assert.Equal(expectedFacts, selected.Select(item => item.GetProperty("fact").GetProperty("factId").GetString()).Distinct().Count());
+            Assert.Equal(29, selected.Count(item => item.GetProperty("fact").GetProperty("category").GetString() == "supportedOS"));
+            var returns = selected.Where(item => item.GetProperty("transport").GetString() == "native-return").ToArray();
+            Assert.Equal(49, returns.Length);
+            foreach (var item in returns)
+            {
+                Assert.Equal("LSTATUS", item.GetProperty("nativeReturn").GetString());
+                Assert.Equal("int", item.GetProperty("managedNativeReturn").GetString());
+                Assert.Equal("WIN32_ERROR", item.GetProperty("associatedEnum").GetString());
+            }
+            foreach (var retirement in root.GetProperty("configurationRetirements").EnumerateArray())
+            {
+                byte[] actual = File.ReadAllBytes(Path.Combine(RepositoryRoot, retirement.GetProperty("source").GetString()));
+                Assert.Equal(retirement.GetProperty("afterSha256").GetString(), Convert.ToHexString(SHA256.HashData(actual)));
+            }
+            var rows = File.ReadAllLines(Path.Combine(RepositoryRoot, "generation", "WinSDK", "supportedOS.rsp"));
+            foreach (var retained in root.GetProperty("retainedAuthorerRows").EnumerateArray())
+                Assert.Contains(retained.GetProperty("value").GetString(), rows);
+            var group = root.GetProperty("unchangedLogicalGroupSource");
+            string header = Path.Combine(Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS"),
+                group.GetProperty("original").GetString());
+            Assert.Equal(group.GetProperty("sha256").GetString(), Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(header))));
         }
 
         [MigrationTheory("WINHTTP_MIGRATION_OLD", "WINHTTP_MIGRATION_NEW")]

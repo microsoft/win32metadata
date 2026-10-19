@@ -674,23 +674,27 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
  #ifdef UNICODE
  #define ParseURL  ParseURLW
-@@ -1142,33 +1342,41 @@ LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
+@@ -1142,41 +1342,50 @@ LWSTDAPI            ParseURLW(_In_ LPCWSTR pcszURL, _Inout_ PARSEDURLW * ppu);
  // SHDeleteEmptyKey mimics RegDeleteKey as it behaves on NT.
  // SHDeleteKey mimics RegDeleteKey as it behaves on Win95.
  
+-LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
+-LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
++LWSTDAPI_(LSTATUS)  _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteEmptyKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)  SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
++LWSTDAPI_(LSTATUS)  _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteEmptyKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
  #ifdef UNICODE
  #define SHDeleteEmptyKey  SHDeleteEmptyKeyW
  #else
  #define SHDeleteEmptyKey  SHDeleteEmptyKeyA
  #endif // !UNICODE
+-LWSTDAPI_(LSTATUS)  SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
+-LWSTDAPI_(LSTATUS)  SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)  SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
++LWSTDAPI_(LSTATUS)  _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteKeyA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)  SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
++LWSTDAPI_(LSTATUS)  _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteKeyW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey);
  #ifdef UNICODE
  #define SHDeleteKey  SHDeleteKeyW
  #else
@@ -703,27 +707,32 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  // These functions open the key, get/set/delete the value, then close
  // the key.
  
+-LWSTDAPI_(LSTATUS)    SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
+-LWSTDAPI_(LSTATUS)    SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_ LPCSTR pszValue);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHDeleteValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_ LPCWSTR pszValue);
  #ifdef UNICODE
  #define SHDeleteValue  SHDeleteValueW
  #else
  #define SHDeleteValue  SHDeleteValueA
  #endif // !UNICODE
+-LWSTDAPI_(LSTATUS)    SHGetValueA(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHGetValueA(
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHGetValueA(
      _In_                       HKEY hkey,
      _In_opt_                   LPCSTR  pszSubKey,
-@@ -1176,6 +1384,7 @@ LWSTDAPI_(LSTATUS)    SHGetValueA(
+     _In_opt_                   LPCSTR  pszValue,
      _Out_opt_                  DWORD    *pdwType,
      _Out_writes_bytes_opt_(*pcbData) void     *pvData,
      _Inout_opt_                DWORD    *pcbData);
+-LWSTDAPI_(LSTATUS)    SHGetValueW(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHGetValueW(
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHGetValueW(
      _In_                       HKEY hkey,
      _In_opt_                   LPCWSTR  pszSubKey,
+     _In_opt_                   LPCWSTR  pszValue,
 @@ -1188,8 +1397,10 @@ LWSTDAPI_(LSTATUS)    SHGetValueW(
  #else
  #define SHGetValue  SHGetValueA
@@ -735,170 +744,219 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  LWSTDAPI_(LSTATUS)    SHSetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ DWORD dwType,
      _In_reads_bytes_opt_(cbData) LPCVOID pvData, _In_ DWORD cbData);
  #ifdef UNICODE
-@@ -1414,9 +1625,11 @@ typedef int SRRF;
+@@ -1414,10 +1625,12 @@ typedef int SRRF;
  //
  //      BOOL bExists = ERROR_SUCCESS == SHRegGetValue(hkey, NULL, TEXT("MyValue"), SRRF_RT_ANY, NULL, NULL, NULL)
  
+-LWSTDAPI_(LSTATUS) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
 +_Win32_SupportedOS_WindowsXP_
- LWSTDAPI_(LSTATUS) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetValueA(_In_ HKEY hkey, _In_opt_ LPCSTR pszSubKey, _In_opt_ LPCSTR pszValue,
      _In_ SRRF srrfFlags, _Out_opt_ DWORD *pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ DWORD *pcbData);
+-LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
 +_Win32_SupportedOS_WindowsXP_
- LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue,
      _In_ SRRF srrfFlags, _Out_opt_ DWORD *pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ DWORD *pcbData);
+ #ifdef UNICODE
 @@ -1426,12 +1639,15 @@ LWSTDAPI_(LSTATUS) SHRegGetValueW(_In_ HKEY hkey, _In_opt_ LPCWSTR pszSubKey, _I
  #define SHRegGetValue  SHRegGetValueA
  #endif // !UNICODE
  
+-LWSTDAPI_(LSTATUS) SHRegSetValue(_In_ HKEY    hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ SRRF srrfFlags,
 +_Win32_SupportedOS_WindowsVista_
- LWSTDAPI_(LSTATUS) SHRegSetValue(_In_ HKEY    hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ SRRF srrfFlags,
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegSetValue(_In_ HKEY    hkey, _In_opt_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ SRRF srrfFlags,
      _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) LPCVOID pvData, _In_opt_ DWORD cbData);
  
+-LWSTDAPI_(LSTATUS) SHRegGetValueFromHKCUHKLM(_In_ PCWSTR pwszKey, _In_opt_ PCWSTR pwszValue, _In_ SRRF srrfFlags,
 +_Win32_SupportedOS_WindowsVista_
- LWSTDAPI_(LSTATUS) SHRegGetValueFromHKCUHKLM(_In_ PCWSTR pwszKey, _In_opt_ PCWSTR pwszValue, _In_ SRRF srrfFlags,
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetValueFromHKCUHKLM(_In_ PCWSTR pwszKey, _In_opt_ PCWSTR pwszValue, _In_ SRRF srrfFlags,
                                          _Out_opt_ DWORD* pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void* pvData,
                                          _Inout_opt_ _When_(pvData != 0, _Pre_notnull_) DWORD * pcbData);
 +_Win32_SupportedOS_WindowsVista_
  STDAPI_(BOOL) SHRegGetBoolValueFromHKCUHKLM(_In_ PCWSTR pszKey, _In_opt_ PCWSTR pszValue, _In_ BOOL fDefault);
  #endif  // (_WIN32_IE >= 0x0602)
  
-@@ -1442,6 +1658,7 @@ STDAPI_(BOOL) SHRegGetBoolValueFromHKCUHKLM(_In_ PCWSTR pszKey, _In_opt_ PCWSTR
+@@ -1442,7 +1658,8 @@ STDAPI_(BOOL) SHRegGetBoolValueFromHKCUHKLM(_In_ PCWSTR pszKey, _In_opt_ PCWSTR
  // Additionally, if the data type is REG_EXPAND_SZ these functions will
  // go ahead and expand out the string, and "massage" the returned *pdwType
  // to be REG_SZ.
+-LWSTDAPI_(LSTATUS) SHQueryValueExA(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS) SHQueryValueExA(
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHQueryValueExA(
      _In_                       HKEY      hkey,
      _In_opt_                   LPCSTR  pszValue,
-@@ -1456,6 +1673,7 @@ LWSTDAPI_(LSTATUS) SHQueryValueExA(
+     _Reserved_                 DWORD    *pdwReserved,
+@@ -1456,7 +1673,8 @@ LWSTDAPI_(LSTATUS) SHQueryValueExA(
  // Additionally, if the data type is REG_EXPAND_SZ these functions will
  // go ahead and expand out the string, and "massage" the returned *pdwType
  // to be REG_SZ.
+-LWSTDAPI_(LSTATUS) SHQueryValueExW(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS) SHQueryValueExW(
++LWSTDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHQueryValueExW(
      _In_                       HKEY      hkey,
      _In_opt_                   LPCWSTR  pszValue,
-@@ -1471,26 +1689,38 @@ LWSTDAPI_(LSTATUS) SHQueryValueExW(
+     _Reserved_                 DWORD    *pdwReserved,
+@@ -1471,27 +1689,39 @@ LWSTDAPI_(LSTATUS) SHQueryValueExW(
  
  // Enumeration functions support.
  
+-LWSTDAPI_(LSTATUS)     SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
+-LWSTDAPI_(LSTATUS)     SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
+-LWSTDAPI_(LSTATUS)     SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHEnumKeyExA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHEnumKeyExW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_(*pcchName) LPWSTR pszName, _Inout_ LPDWORD pcchName);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHEnumValueA(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PSTR pszValueName,
      _Inout_opt_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ LPDWORD pcbData);
+-LWSTDAPI_(LSTATUS)     SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHEnumValueW(_In_ HKEY hkey, _In_ DWORD dwIndex, _Out_writes_opt_(*pcchValueName) PWSTR pszValueName,
      _Inout_opt_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType, _Out_writes_bytes_to_opt_(*pcbData,*pcbData) void *pvData,
      _Inout_opt_ LPDWORD pcbData);
+-LWSTDAPI_(LSTATUS)     SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
+-LWSTDAPI_(LSTATUS)     SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHQueryInfoKeyA(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHQueryInfoKeyW(_In_ HKEY hkey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen);
  
  // recursive key copy
+-LWSTDAPI_(LSTATUS)     SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
+-LWSTDAPI_(LSTATUS)     SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHCopyKeyA(_In_ HKEY hkeySrc, _In_opt_ LPCSTR  pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHCopyKeyW(_In_ HKEY hkeySrc, _In_opt_ LPCWSTR pszSrcSubKey, _In_ HKEY hkeyDest, _Reserved_ DWORD fReserved);
  
  // Getting and setting file system paths with environment variables
  
+-LWSTDAPI_(LSTATUS)    SHRegGetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)    SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)    SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)    SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHRegGetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _Out_writes_(MAX_PATH) LPSTR pszPath, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHRegSetPathA(_In_ HKEY hKey, _In_opt_ LPCSTR pcszSubKey, _In_opt_ LPCSTR pcszValue, _In_ LPCSTR pcszPath, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)    SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)    _Win32_AssociatedEnum_(WIN32_ERROR) SHRegSetPathW(_In_ HKEY hKey, _In_opt_ LPCWSTR pcszSubKey, _In_opt_ LPCWSTR pcszValue, _In_ LPCWSTR pcszPath, _In_ DWORD dwFlags);
  
  #ifdef UNICODE
-@@ -1540,10 +1770,15 @@ typedef enum
+ #define SHEnumKeyEx           SHEnumKeyExW
+@@ -1540,11 +1770,16 @@ typedef enum
  typedef HANDLE HUSKEY;  // HUSKEY is a Handle to a User Specific KEY.
  typedef HUSKEY *PHUSKEY;
  
+-LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
+-LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
+-LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegCreateUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegCreateUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegCreateUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegOpenUSKeyA(_In_ LPCSTR pszPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegOpenUSKeyW(_In_ LPCWSTR pwzPath, _In_ REGSAM samDesired, _In_opt_ HUSKEY hRelativeUSKey, _Out_ PHUSKEY phNewUSKey, _In_ BOOL fIgnoreHKCU);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegQueryUSValueA(
      _In_                                      HUSKEY  hUSKey,
      _In_opt_                                  LPCSTR  pszValue,
-@@ -1553,6 +1788,7 @@ LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
+     _Inout_opt_                               DWORD * pdwType,
+@@ -1553,7 +1788,8 @@ LWSTDAPI_(LSTATUS)     SHRegQueryUSValueA(
      _In_                                      BOOL    fIgnoreHKCU,
      _In_reads_bytes_opt_(dwDefaultDataSize)        void *  pvDefaultData,
      _In_opt_                                  DWORD   dwDefaultDataSize);
+-LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegQueryUSValueW(
      _In_                                      HUSKEY  hUSKey,
      _In_opt_                                  LPCWSTR  pszValue,
-@@ -1562,26 +1798,40 @@ LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
+     _Inout_opt_                               DWORD * pdwType,
+@@ -1562,27 +1798,41 @@ LWSTDAPI_(LSTATUS)     SHRegQueryUSValueW(
      _In_                                      BOOL    fIgnoreHKCU,
      _In_reads_bytes_opt_(dwDefaultDataSize)        void *  pvDefaultData,
      _In_opt_                                  DWORD   dwDefaultDataSize);
+-LWSTDAPI_(LSTATUS)     SHRegWriteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)     SHRegWriteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ SHREGDEL_FLAGS delRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ SHREGDEL_FLAGS delRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegWriteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegWriteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegWriteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegWriteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_(cbData) const void *pvData, _In_ DWORD cbData, _In_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ SHREGDEL_FLAGS delRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegDeleteUSValueA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszValue, _In_ SHREGDEL_FLAGS delRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegDeleteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ SHREGDEL_FLAGS delRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegDeleteUSValueW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzValue, _In_ SHREGDEL_FLAGS delRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegDeleteEmptyUSKeyW(_In_ HUSKEY hUSKey, _In_ LPCWSTR pwzSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegDeleteEmptyUSKeyA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegDeleteEmptyUSKeyA(_In_ HUSKEY hUSKey, _In_ LPCSTR pszSubKey, _In_ SHREGDEL_FLAGS delRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegEnumUSKeyA(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPSTR pszName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegEnumUSKeyW(_In_ HUSKEY hUSKey, _In_ DWORD dwIndex, _Out_writes_to_(*pcchName,*pcchName) LPWSTR pwzName, _Inout_ LPDWORD pcchName, _In_ SHREGENUM_FLAGS enumRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegEnumUSValueA(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
      _Out_writes_to_(*pcchValueName,*pcchValueName) LPSTR pszValueName, _Inout_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType,
      _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData, _Inout_opt_ LPDWORD pcbData, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegEnumUSValueW(_In_ HUSKEY hUSkey, _In_ DWORD dwIndex,
      _Out_writes_to_(*pcchValueName,*pcchValueName) LPWSTR pszValueName, _Inout_ LPDWORD pcchValueName, _Out_opt_ LPDWORD pdwType,
      _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData, _Inout_opt_ LPDWORD pcbData, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
+-LWSTDAPI_(LSTATUS)     SHRegCloseUSKey(_In_ HUSKEY hUSKey);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegQueryInfoUSKeyA(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegQueryInfoUSKeyW(_In_ HUSKEY hUSKey, _Out_opt_ LPDWORD pcSubKeys, _Out_opt_ LPDWORD pcchMaxSubKeyLen, _Out_opt_ LPDWORD pcValues, _Out_opt_ LPDWORD pcchMaxValueNameLen, _In_ SHREGENUM_FLAGS enumRegFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegCloseUSKey(_In_ HUSKEY hUSKey);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegCloseUSKey(_In_ HUSKEY hUSKey);
  
  
  // These calls are equal to an SHRegOpenUSKey, SHRegQueryUSValue, and then a SHRegCloseUSKey.
+-STDAPI_(LSTATUS) SHRegGetUSValueA(
 +_Win32_SupportedOS_Windows2000_
- STDAPI_(LSTATUS) SHRegGetUSValueA(
++STDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetUSValueA(
      _In_                                      LPCSTR  pszSubKey,
      _In_opt_                                  LPCSTR  pszValue,
-@@ -1591,6 +1841,7 @@ STDAPI_(LSTATUS) SHRegGetUSValueA(
+     _Inout_opt_                               DWORD  *pdwType,
+@@ -1591,7 +1841,8 @@ STDAPI_(LSTATUS) SHRegGetUSValueA(
      _In_                                      BOOL    fIgnoreHKCU,
      _In_reads_bytes_opt_(dwDefaultDataSize)        void   *pvDefaultData,
      _In_                                      DWORD   dwDefaultDataSize);
+-STDAPI_(LSTATUS) SHRegGetUSValueW(
 +_Win32_SupportedOS_Windows2000_
- STDAPI_(LSTATUS) SHRegGetUSValueW(
++STDAPI_(LSTATUS) _Win32_AssociatedEnum_(WIN32_ERROR) SHRegGetUSValueW(
      _In_                                      LPCWSTR  pszSubKey,
      _In_opt_                                  LPCWSTR  pszValue,
+     _Inout_opt_                               DWORD  *pdwType,
 @@ -1600,8 +1851,11 @@ STDAPI_(LSTATUS) SHRegGetUSValueW(
      _In_                                      BOOL    fIgnoreHKCU,
      _In_reads_bytes_opt_(dwDefaultDataSize)        void   *pvDefaultData,
      _In_                                      DWORD   dwDefaultDataSize);
+-LWSTDAPI_(LSTATUS)     SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
+-LWSTDAPI_(LSTATUS)     SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegSetUSValueA(_In_ LPCSTR pszSubKey, _In_ LPCSTR pszValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI_(LSTATUS)     SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
++LWSTDAPI_(LSTATUS)     _Win32_AssociatedEnum_(WIN32_ERROR) SHRegSetUSValueW(_In_ LPCWSTR pwzSubKey, _In_ LPCWSTR pwzValue, _In_ DWORD dwType, _In_reads_bytes_opt_(cbData) const void *pvData, _In_opt_ DWORD cbData, _In_opt_ DWORD dwFlags);
 +_Win32_SupportedOS_Windows2000_
  LWSTDAPI_(int)         SHRegGetIntW(_In_ HKEY hk, _In_opt_ PCWSTR pwzKey, _In_ int iDefault);
  
