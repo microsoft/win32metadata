@@ -354,6 +354,7 @@ namespace Win32MetadataScraperTests
         internal static long ReadValue(BlobReader reader, string storage) => storage switch
         {
             "Byte" => reader.ReadByte(),
+            "SByte" => reader.ReadSByte(),
             "Int32" => reader.ReadInt32(),
             "UInt32" => reader.ReadUInt32(),
             "UInt16" => reader.ReadUInt16(),

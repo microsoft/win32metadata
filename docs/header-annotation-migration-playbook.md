@@ -47,6 +47,24 @@ and `NativeTypeName` spellings intentionally change; global typedefs, the 29
 prior interior-pointer facts, two prior associations and 20 printer-rights
 residuals are unchanged. This is not a consumer-compatibility claim.
 
+### Bulk source ownership and enum member order
+
+The broad native cohort moves 169 logical groups and 277 uses into 21 existing
+originals. Its cumulative Wintrust prerequisite moves six more groups and six
+field uses. Exact native values, logical names, namespaces, storage and Flags
+are checked on all three architectures without legacy enum overlays.
+Source adoption and baseline-unit admission do not establish API equivalence:
+85 of the broad groups emit members in native-header order instead of their
+authored order. Keep those exact differences as unresolved compatibility holds;
+do not sort them away, claim OLD equality or infer consumer compatibility.
+The six additional Wintrust groups retain their prior physical member order.
+
+Annotation placement must also pass the ordinary strict header preparer.
+For the three affected Cryptui, T2emb and Wintrust declarations, a separate
+preceding annotation line preserves the original native line, including its
+trailing spaces/tabs. Do not trim SDK payloads or weaken `--whitespace=error-all`.
+The separately qualified placement repair adds no facts or retirements.
+
 ### SDK-wide inventory and source queue
 
 `scripts\Get-SdkAnnotationCoverage.py` inventories the selected SDK package,

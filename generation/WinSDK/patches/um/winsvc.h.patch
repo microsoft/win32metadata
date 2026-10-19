@@ -1,8 +1,162 @@
 diff --git a/um/winsvc.h b/um/winsvc.h
-index e653a243..5186a151 100644
+index 2a80ff95..737cc97d 100644
 --- a/um/winsvc.h
 +++ b/um/winsvc.h
-@@ -1019,6 +1019,8 @@ typedef struct _SERVICE_START_REASON {
+@@ -18,6 +18,15 @@ Environment:
+ #ifndef _WINSVC_
+ #define _WINSVC_
+ 
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int ENUM_SERVICE_STATE;
++typedef unsigned int SERVICE_CONFIG;
++typedef unsigned int SERVICE_STATUS_CURRENT_STATE;
++typedef unsigned int SERVICE_TRIGGER_ACTION;
++typedef unsigned int SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE;
++typedef unsigned int SERVICE_TRIGGER_TYPE;
++#endif
+ #include <winapifamily.h>
+ 
+ //
+@@ -95,6 +104,13 @@ extern "C" {
+ #define SERVICE_STATE_ALL              (SERVICE_ACTIVE   | \
+                                         SERVICE_INACTIVE)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENUM_SERVICE_STATE, unsigned int,
++    SERVICE_ACTIVE,
++    SERVICE_INACTIVE,
++    SERVICE_STATE_ALL);
++#endif
++
+ //
+ // Controls
+ //
+@@ -132,6 +148,17 @@ extern "C" {
+ #define SERVICE_PAUSE_PENDING                  0x00000006
+ #define SERVICE_PAUSED                         0x00000007
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SERVICE_STATUS_CURRENT_STATE, unsigned int,
++    SERVICE_STOPPED,
++    SERVICE_START_PENDING,
++    SERVICE_STOP_PENDING,
++    SERVICE_RUNNING,
++    SERVICE_CONTINUE_PENDING,
++    SERVICE_PAUSE_PENDING,
++    SERVICE_PAUSED);
++#endif
++
+ //
+ // Controls Accepted  (Bit Mask)
+ //
+@@ -216,6 +243,20 @@ extern "C" {
+ // reserved                                     11
+ #define SERVICE_CONFIG_LAUNCH_PROTECTED         12
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SERVICE_CONFIG, unsigned int,
++    SERVICE_CONFIG_DESCRIPTION,
++    SERVICE_CONFIG_FAILURE_ACTIONS,
++    SERVICE_CONFIG_DELAYED_AUTO_START_INFO,
++    SERVICE_CONFIG_FAILURE_ACTIONS_FLAG,
++    SERVICE_CONFIG_SERVICE_SID_INFO,
++    SERVICE_CONFIG_REQUIRED_PRIVILEGES_INFO,
++    SERVICE_CONFIG_PRESHUTDOWN_INFO,
++    SERVICE_CONFIG_TRIGGER_INFO,
++    SERVICE_CONFIG_PREFERRED_NODE,
++    SERVICE_CONFIG_LAUNCH_PROTECTED);
++#endif
++
+ //
+ // Info levels for NotifyServiceStatusChange
+ //
+@@ -323,6 +364,17 @@ extern "C" {
+ #define SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT                       6
+ #define SERVICE_TRIGGER_TYPE_CUSTOM_SYSTEM_STATE_CHANGE             7
+ #define SERVICE_TRIGGER_TYPE_CUSTOM                                 20
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SERVICE_TRIGGER_TYPE, unsigned int,
++    SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL,
++    SERVICE_TRIGGER_TYPE_IP_ADDRESS_AVAILABILITY,
++    SERVICE_TRIGGER_TYPE_DOMAIN_JOIN,
++    SERVICE_TRIGGER_TYPE_FIREWALL_PORT_EVENT,
++    SERVICE_TRIGGER_TYPE_GROUP_POLICY,
++    SERVICE_TRIGGER_TYPE_NETWORK_ENDPOINT,
++    SERVICE_TRIGGER_TYPE_CUSTOM);
++#endif
+ #define SERVICE_TRIGGER_TYPE_AGGREGATE                              30
+ 
+ //
+@@ -334,6 +386,15 @@ extern "C" {
+ #define SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY                       4
+ #define SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL                       5
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE, unsigned int,
++    SERVICE_TRIGGER_DATA_TYPE_BINARY,
++    SERVICE_TRIGGER_DATA_TYPE_STRING,
++    SERVICE_TRIGGER_DATA_TYPE_LEVEL,
++    SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ANY,
++    SERVICE_TRIGGER_DATA_TYPE_KEYWORD_ALL);
++#endif
++
+ //
+ //  Service start reason
+ //
+@@ -490,6 +551,12 @@ typedef struct _SERVICE_CUSTOM_SYSTEM_STATE_CHANGE_DATA_ITEM {
+ #define SERVICE_TRIGGER_ACTION_SERVICE_START                        1
+ #define SERVICE_TRIGGER_ACTION_SERVICE_STOP                         2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SERVICE_TRIGGER_ACTION, unsigned int,
++    SERVICE_TRIGGER_ACTION_SERVICE_START,
++    SERVICE_TRIGGER_ACTION_SERVICE_STOP);
++#endif
++
+ 
+ //
+ // argv[1] passed into ServiceMain of trigger started services
+@@ -619,7 +686,7 @@ typedef struct _SERVICE_PRESHUTDOWN_INFO {
+ //
+ typedef struct _SERVICE_TRIGGER_SPECIFIC_DATA_ITEM
+ {
+-    DWORD   dwDataType; // Data type -- one of SERVICE_TRIGGER_DATA_TYPE_* constants
++    _Win32_AssociatedEnum_(SERVICE_TRIGGER_SPECIFIC_DATA_ITEM_DATA_TYPE) DWORD   dwDataType; // Data type -- one of SERVICE_TRIGGER_DATA_TYPE_* constants
+ #ifdef __midl
+     [range(0, 1024)]
+ #endif
+@@ -635,8 +702,8 @@ typedef struct _SERVICE_TRIGGER_SPECIFIC_DATA_ITEM
+ //
+ typedef struct _SERVICE_TRIGGER
+ {
+-    DWORD                       dwTriggerType;              // One of SERVICE_TRIGGER_TYPE_* constants
+-    DWORD                       dwAction;                   // One of SERVICE_TRIGGER_ACTION_* constants
++    _Win32_AssociatedEnum_(SERVICE_TRIGGER_TYPE) DWORD                       dwTriggerType;              // One of SERVICE_TRIGGER_TYPE_* constants
++    _Win32_AssociatedEnum_(SERVICE_TRIGGER_ACTION) DWORD                       dwAction;                   // One of SERVICE_TRIGGER_ACTION_* constants
+     GUID    *                   pTriggerSubtype;            // Provider GUID if the trigger type is SERVICE_TRIGGER_TYPE_CUSTOM
+                                                             // Device class interface GUID if the trigger type is
+                                                             // SERVICE_TRIGGER_TYPE_DEVICE_INTERFACE_ARRIVAL
+@@ -722,7 +789,7 @@ typedef enum _SC_ENUM_TYPE {
+ 
+ typedef struct _SERVICE_STATUS {
+     DWORD   dwServiceType;
+-    DWORD   dwCurrentState;
++    _Win32_AssociatedEnum_(SERVICE_STATUS_CURRENT_STATE) DWORD   dwCurrentState;
+     DWORD   dwControlsAccepted;
+     DWORD   dwWin32ExitCode;
+     DWORD   dwServiceSpecificExitCode;
+@@ -732,7 +799,7 @@ typedef struct _SERVICE_STATUS {
+ 
+ typedef struct _SERVICE_STATUS_PROCESS {
+     DWORD   dwServiceType;
+-    DWORD   dwCurrentState;
++    _Win32_AssociatedEnum_(SERVICE_STATUS_CURRENT_STATE) DWORD   dwCurrentState;
+     DWORD   dwControlsAccepted;
+     DWORD   dwWin32ExitCode;
+     DWORD   dwServiceSpecificExitCode;
+@@ -1019,6 +1086,8 @@ typedef struct _SERVICE_START_REASON {
  // API Function Prototypes
  ///////////////////////////////////////////////////////////////////////////
  
@@ -11,7 +165,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1035,6 +1037,8 @@ ChangeServiceConfigA(
+@@ -1035,6 +1104,8 @@ ChangeServiceConfigA(
      _In_opt_    LPCSTR     lpPassword,
      _In_opt_    LPCSTR     lpDisplayName
      );
@@ -20,7 +174,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1057,6 +1061,8 @@ ChangeServiceConfigW(
+@@ -1057,20 +1128,24 @@ ChangeServiceConfigW(
  #define ChangeServiceConfig  ChangeServiceConfigA
  #endif // !UNICODE
  
@@ -29,8 +183,10 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1065,6 +1071,8 @@ ChangeServiceConfig2A(
-     _In_        DWORD        dwInfoLevel,
+ ChangeServiceConfig2A(
+     _In_        SC_HANDLE    hService,
+-    _In_        DWORD        dwInfoLevel,
++    _Win32_AssociatedEnum_(SERVICE_CONFIG) _In_        DWORD        dwInfoLevel,
      _In_opt_    LPVOID       lpInfo
      );
 +_Win32_SetLastError_
@@ -38,7 +194,14 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1079,6 +1087,8 @@ ChangeServiceConfig2W(
+ ChangeServiceConfig2W(
+     _In_        SC_HANDLE    hService,
+-    _In_        DWORD        dwInfoLevel,
++    _Win32_AssociatedEnum_(SERVICE_CONFIG) _In_        DWORD        dwInfoLevel,
+     _In_opt_    LPVOID       lpInfo
+     );
+ #ifdef UNICODE
+@@ -1079,6 +1154,8 @@ ChangeServiceConfig2W(
  #define ChangeServiceConfig2  ChangeServiceConfig2A
  #endif // !UNICODE
  
@@ -47,7 +210,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1086,6 +1096,8 @@ CloseServiceHandle(
+@@ -1086,6 +1163,8 @@ CloseServiceHandle(
      _In_        SC_HANDLE   hSCObject
      );
  
@@ -56,7 +219,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1095,6 +1107,8 @@ ControlService(
+@@ -1095,6 +1174,8 @@ ControlService(
      _Out_       LPSERVICE_STATUS    lpServiceStatus
      );
  
@@ -65,7 +228,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1114,6 +1128,8 @@ CreateServiceA(
+@@ -1114,6 +1195,8 @@ CreateServiceA(
      _In_opt_    LPCSTR     lpServiceStartName,
      _In_opt_    LPCSTR     lpPassword
      );
@@ -74,7 +237,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1139,6 +1155,8 @@ CreateServiceW(
+@@ -1139,6 +1222,8 @@ CreateServiceW(
  #define CreateService  CreateServiceA
  #endif // !UNICODE
  
@@ -83,7 +246,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1146,6 +1164,8 @@ DeleteService(
+@@ -1146,26 +1231,30 @@ DeleteService(
      _In_        SC_HANDLE   hService
      );
  
@@ -92,7 +255,14 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1159,6 +1179,8 @@ EnumDependentServicesA(
+ WINAPI
+ EnumDependentServicesA(
+     _In_            SC_HANDLE               hService,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPENUM_SERVICE_STATUSA  lpServices,
+     _In_            DWORD                   cbBufSize,
      _Out_           LPDWORD                 pcbBytesNeeded,
      _Out_           LPDWORD                 lpServicesReturned
      );
@@ -101,7 +271,15 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1184,6 +1206,8 @@ EnumDependentServicesW(
+ WINAPI
+ EnumDependentServicesW(
+     _In_            SC_HANDLE               hService,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPENUM_SERVICE_STATUSW  lpServices,
+     _In_            DWORD                   cbBufSize,
+@@ -1184,6 +1273,8 @@ EnumDependentServicesW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -110,7 +288,16 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1199,6 +1223,8 @@ EnumServicesStatusA(
+@@ -1191,7 +1282,7 @@ WINAPI
+ EnumServicesStatusA(
+     _In_            SC_HANDLE               hSCManager,
+     _In_            DWORD                   dwServiceType,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPENUM_SERVICE_STATUSA  lpServices,
+     _In_            DWORD                   cbBufSize,
+@@ -1199,6 +1290,8 @@ EnumServicesStatusA(
      _Out_           LPDWORD                 lpServicesReturned,
      _Inout_opt_     LPDWORD                 lpResumeHandle
      );
@@ -119,7 +306,16 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1226,6 +1252,8 @@ EnumServicesStatusW(
+@@ -1206,7 +1299,7 @@ WINAPI
+ EnumServicesStatusW(
+     _In_            SC_HANDLE               hSCManager,
+     _In_            DWORD                   dwServiceType,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPENUM_SERVICE_STATUSW  lpServices,
+     _In_            DWORD                   cbBufSize,
+@@ -1226,6 +1319,8 @@ EnumServicesStatusW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -128,7 +324,16 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1243,6 +1271,8 @@ EnumServicesStatusExA(
+@@ -1234,7 +1329,7 @@ EnumServicesStatusExA(
+     _In_            SC_HANDLE               hSCManager,
+     _In_            SC_ENUM_TYPE            InfoLevel,
+     _In_            DWORD                   dwServiceType,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPBYTE                  lpServices,
+     _In_            DWORD                   cbBufSize,
+@@ -1243,6 +1338,8 @@ EnumServicesStatusExA(
      _Inout_opt_     LPDWORD                 lpResumeHandle,
      _In_opt_        LPCSTR                pszGroupName
      );
@@ -137,7 +342,16 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1266,6 +1296,8 @@ EnumServicesStatusExW(
+@@ -1251,7 +1348,7 @@ EnumServicesStatusExW(
+     _In_            SC_HANDLE               hSCManager,
+     _In_            SC_ENUM_TYPE            InfoLevel,
+     _In_            DWORD                   dwServiceType,
+-    _In_            DWORD                   dwServiceState,
++    _Win32_AssociatedEnum_(ENUM_SERVICE_STATE) _In_            DWORD                   dwServiceState,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPBYTE                  lpServices,
+     _In_            DWORD                   cbBufSize,
+@@ -1266,6 +1363,8 @@ EnumServicesStatusExW(
  #define EnumServicesStatusEx  EnumServicesStatusExA
  #endif // !UNICODE
  
@@ -146,7 +360,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1277,6 +1309,8 @@ GetServiceKeyNameA(
+@@ -1277,6 +1376,8 @@ GetServiceKeyNameA(
                      LPSTR                 lpServiceName,
      _Inout_         LPDWORD                 lpcchBuffer
      );
@@ -155,7 +369,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1294,6 +1328,8 @@ GetServiceKeyNameW(
+@@ -1294,6 +1395,8 @@ GetServiceKeyNameW(
  #define GetServiceKeyName  GetServiceKeyNameA
  #endif // !UNICODE
  
@@ -164,7 +378,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1305,6 +1341,8 @@ GetServiceDisplayNameA(
+@@ -1305,6 +1408,8 @@ GetServiceDisplayNameA(
                      LPSTR                 lpDisplayName,
      _Inout_         LPDWORD                 lpcchBuffer
      );
@@ -173,7 +387,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1328,6 +1366,8 @@ GetServiceDisplayNameW(
+@@ -1328,6 +1433,8 @@ GetServiceDisplayNameW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -182,7 +396,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  SC_LOCK
  WINAPI
-@@ -1335,6 +1375,8 @@ LockServiceDatabase(
+@@ -1335,6 +1442,8 @@ LockServiceDatabase(
      _In_            SC_HANDLE               hSCManager
      );
  
@@ -191,7 +405,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1348,6 +1390,8 @@ NotifyBootConfigStatus(
+@@ -1348,6 +1457,8 @@ NotifyBootConfigStatus(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -200,7 +414,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1357,6 +1401,8 @@ OpenSCManagerA(
+@@ -1357,6 +1468,8 @@ OpenSCManagerA(
      _In_opt_        LPCSTR                lpDatabaseName,
      _In_            DWORD                   dwDesiredAccess
      );
@@ -209,7 +423,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1372,6 +1418,8 @@ OpenSCManagerW(
+@@ -1372,6 +1485,8 @@ OpenSCManagerW(
  #define OpenSCManager  OpenSCManagerA
  #endif // !UNICODE
  
@@ -218,7 +432,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1381,6 +1429,8 @@ OpenServiceA(
+@@ -1381,6 +1496,8 @@ OpenServiceA(
      _In_            LPCSTR                lpServiceName,
      _In_            DWORD                   dwDesiredAccess
      );
@@ -227,7 +441,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SC_HANDLE
-@@ -1396,6 +1446,8 @@ OpenServiceW(
+@@ -1396,6 +1513,8 @@ OpenServiceW(
  #define OpenService  OpenServiceA
  #endif // !UNICODE
  
@@ -236,7 +450,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1407,6 +1459,8 @@ QueryServiceConfigA(
+@@ -1407,6 +1526,8 @@ QueryServiceConfigA(
      _In_            DWORD                   cbBufSize,
      _Out_           LPDWORD                 pcbBytesNeeded
      );
@@ -245,7 +459,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1424,6 +1478,8 @@ QueryServiceConfigW(
+@@ -1424,6 +1545,8 @@ QueryServiceConfigW(
  #define QueryServiceConfig  QueryServiceConfigA
  #endif // !UNICODE
  
@@ -254,7 +468,14 @@ index e653a243..5186a151 100644
  _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONA))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
-@@ -1443,6 +1499,8 @@ QueryServiceConfig2A(
+@@ -1437,12 +1560,14 @@ BOOL
+ WINAPI
+ QueryServiceConfig2A(
+     _In_            SC_HANDLE               hService,
+-    _In_            DWORD                   dwInfoLevel,
++    _Win32_AssociatedEnum_(SERVICE_CONFIG) _In_            DWORD                   dwInfoLevel,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPBYTE                  lpBuffer,
      _In_            DWORD                   cbBufSize,
      _Out_           LPDWORD                 pcbBytesNeeded
      );
@@ -263,7 +484,16 @@ index e653a243..5186a151 100644
  _When_(dwInfoLevel == SERVICE_CONFIG_DESCRIPTION,
         _At_(cbBufSize, _In_range_(>=, sizeof(LPSERVICE_DESCRIPTIONW))))
  _When_(dwInfoLevel == SERVICE_CONFIG_FAILURE_ACTIONS,
-@@ -1474,6 +1532,8 @@ QueryServiceConfig2W(
+@@ -1456,7 +1581,7 @@ BOOL
+ WINAPI
+ QueryServiceConfig2W(
+     _In_            SC_HANDLE               hService,
+-    _In_            DWORD                   dwInfoLevel,
++    _Win32_AssociatedEnum_(SERVICE_CONFIG) _In_            DWORD                   dwInfoLevel,
+     _Out_writes_bytes_opt_(cbBufSize)
+                     LPBYTE                  lpBuffer,
+     _In_            DWORD                   cbBufSize,
+@@ -1474,6 +1599,8 @@ QueryServiceConfig2W(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -272,7 +502,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1485,6 +1545,8 @@ QueryServiceLockStatusA(
+@@ -1485,6 +1612,8 @@ QueryServiceLockStatusA(
      _In_            DWORD                           cbBufSize,
      _Out_           LPDWORD                         pcbBytesNeeded
      );
@@ -281,7 +511,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1508,6 +1570,8 @@ QueryServiceLockStatusW(
+@@ -1508,6 +1637,8 @@ QueryServiceLockStatusW(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -290,7 +520,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1521,6 +1585,8 @@ QueryServiceObjectSecurity(
+@@ -1521,6 +1652,8 @@ QueryServiceObjectSecurity(
      _Out_           LPDWORD                 pcbBytesNeeded
      );
  
@@ -299,7 +529,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1530,6 +1596,8 @@ QueryServiceStatus(
+@@ -1530,6 +1663,8 @@ QueryServiceStatus(
      _Out_           LPSERVICE_STATUS    lpServiceStatus
      );
  
@@ -308,7 +538,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -1543,6 +1611,8 @@ QueryServiceStatusEx(
+@@ -1543,6 +1678,8 @@ QueryServiceStatusEx(
      _Out_           LPDWORD             pcbBytesNeeded
      );
  
@@ -317,7 +547,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1552,6 +1622,8 @@ RegisterServiceCtrlHandlerA(
+@@ -1552,6 +1689,8 @@ RegisterServiceCtrlHandlerA(
      _In_    __callback
              LPHANDLER_FUNCTION          lpHandlerProc
      );
@@ -326,7 +556,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1567,6 +1639,8 @@ RegisterServiceCtrlHandlerW(
+@@ -1567,6 +1706,8 @@ RegisterServiceCtrlHandlerW(
  #define RegisterServiceCtrlHandler  RegisterServiceCtrlHandlerA
  #endif // !UNICODE
  
@@ -335,7 +565,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1577,6 +1651,8 @@ RegisterServiceCtrlHandlerExA(
+@@ -1577,6 +1718,8 @@ RegisterServiceCtrlHandlerExA(
              LPHANDLER_FUNCTION_EX       lpHandlerProc,
      _In_opt_ LPVOID                     lpContext
      );
@@ -344,7 +574,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  WINADVAPI
  SERVICE_STATUS_HANDLE
-@@ -1593,6 +1669,8 @@ RegisterServiceCtrlHandlerExW(
+@@ -1593,6 +1736,8 @@ RegisterServiceCtrlHandlerExW(
  #define RegisterServiceCtrlHandlerEx  RegisterServiceCtrlHandlerExA
  #endif // !UNICODE
  
@@ -353,7 +583,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1602,6 +1680,8 @@ SetServiceObjectSecurity(
+@@ -1602,6 +1747,8 @@ SetServiceObjectSecurity(
      _In_        PSECURITY_DESCRIPTOR    lpSecurityDescriptor
      );
  
@@ -362,7 +592,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1610,12 +1690,16 @@ SetServiceStatus(
+@@ -1610,12 +1757,16 @@ SetServiceStatus(
      _In_        LPSERVICE_STATUS        lpServiceStatus
      );
  
@@ -379,7 +609,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1629,6 +1713,8 @@ StartServiceCtrlDispatcherW(
+@@ -1629,6 +1780,8 @@ StartServiceCtrlDispatcherW(
  #endif // !UNICODE
  
  
@@ -388,7 +618,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1638,6 +1724,8 @@ StartServiceA(
+@@ -1638,6 +1791,8 @@ StartServiceA(
      _In_reads_opt_(dwNumServiceArgs)
                      LPCSTR             *lpServiceArgVectors
      );
@@ -397,7 +627,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1659,6 +1747,8 @@ StartServiceW(
+@@ -1659,6 +1814,8 @@ StartServiceW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -406,7 +636,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1674,6 +1764,7 @@ UnlockServiceDatabase(
+@@ -1674,6 +1831,7 @@ UnlockServiceDatabase(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -414,7 +644,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  DWORD
  WINAPI
-@@ -1682,6 +1773,7 @@ NotifyServiceStatusChangeA (
+@@ -1682,6 +1840,7 @@ NotifyServiceStatusChangeA (
      _In_        DWORD                   dwNotifyMask,
      _In_        PSERVICE_NOTIFYA        pNotifyBuffer
      );
@@ -422,7 +652,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  DWORD
  WINAPI
-@@ -1696,6 +1788,8 @@ NotifyServiceStatusChangeW (
+@@ -1696,6 +1855,8 @@ NotifyServiceStatusChangeW (
  #define NotifyServiceStatusChange  NotifyServiceStatusChangeA
  #endif // !UNICODE
  
@@ -431,7 +661,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1705,6 +1799,8 @@ ControlServiceExA(
+@@ -1705,6 +1866,8 @@ ControlServiceExA(
      _In_        DWORD                   dwInfoLevel,
      _Inout_     PVOID                   pControlParams
      );
@@ -440,7 +670,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1720,6 +1816,8 @@ ControlServiceExW(
+@@ -1720,6 +1883,8 @@ ControlServiceExW(
  #define ControlServiceEx  ControlServiceExA
  #endif // !UNICODE
  
@@ -449,7 +679,7 @@ index e653a243..5186a151 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -1796,6 +1894,7 @@ typedef enum SERVICE_REGISTRY_STATE_TYPE {
+@@ -1796,6 +1961,7 @@ typedef enum SERVICE_REGISTRY_STATE_TYPE {
      MaxServiceRegistryStateType = 2,
  } SERVICE_REGISTRY_STATE_TYPE;
  
@@ -457,7 +687,7 @@ index e653a243..5186a151 100644
  _Must_inspect_result_
  DWORD
  WINAPI
-@@ -1815,6 +1914,7 @@ typedef enum SERVICE_DIRECTORY_TYPE {
+@@ -1815,6 +1981,7 @@ typedef enum SERVICE_DIRECTORY_TYPE {
      ServiceDirectoryTypeMax = 1,
  } SERVICE_DIRECTORY_TYPE;
  

@@ -140,6 +140,20 @@ namespace Win32MetadataScraperTests
                 var probe = probes[value.Substring(6, end - 6)];
                 values[probe.Group].Add(probe.Member, long.Parse(value.Substring(end + 1), CultureInfo.InvariantCulture));
             }
+            string output = Path.Combine(batch, "observations");
+            Directory.CreateDirectory(output);
+            var nativeValueDifferences = groups.SelectMany(group =>
+                group.GetProperty("baseline").GetProperty("values").EnumerateObject()
+                    .Where(value => !values[group.GetProperty("name").GetString()].TryGetValue(value.Name, out long actual) ||
+                        actual != long.Parse(value.Value.GetString(), CultureInfo.InvariantCulture))
+                    .Select(value => new
+                    {
+                        group = group.GetProperty("name").GetString(), member = value.Name, legacyValue = value.Value.GetString(),
+                        nativeValue = values[group.GetProperty("name").GetString()].TryGetValue(value.Name, out long actual)
+                            ? actual.ToString(CultureInfo.InvariantCulture) : null,
+                    })).ToArray();
+            File.WriteAllText(Path.Combine(output, "native-value-differences-" + architecture + ".json"),
+                JsonSerializer.Serialize(nativeValueDifferences, new JsonSerializerOptions { WriteIndented = true }));
             var namespaces = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
                     "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
                 .Where(line => !line.StartsWith("#", StringComparison.Ordinal)).Select(line => line.Split('=', 2))
@@ -179,7 +193,7 @@ namespace Win32MetadataScraperTests
                         .DecodeSignature(new HeaderAnnotationWinmdTests.SignatureNames(), null);
                     string expectedStorage = group.GetProperty("baseline").GetProperty("storage").GetString() switch
                     {
-                        "unsigned char" => "Byte", "unsigned short" => "UInt16", "short" => "Int16",
+                        "unsigned char" => "Byte", "signed char" => "SByte", "unsigned short" => "UInt16", "short" => "Int16",
                         "unsigned int" => "UInt32", "int" => "Int32",
                         var unknown => throw new InvalidOperationException(unknown),
                     };
@@ -190,7 +204,8 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(values[name].OrderBy(pair => pair.Key), physical.OrderBy(pair => pair.Key));
                     var oldValues = group.GetProperty("baseline").GetProperty("values").EnumerateObject().ToDictionary(
                         value => value.Name, value => long.Parse(value.Value.GetString(), CultureInfo.InvariantCulture), StringComparer.Ordinal);
-                    Assert.Equal(oldValues.OrderBy(pair => pair.Key), physical.OrderBy(pair => pair.Key));
+                    Assert.True(oldValues.OrderBy(pair => pair.Key).SequenceEqual(physical.OrderBy(pair => pair.Key)),
+                        name + ": native-backed values differ from the exact old physical values; see native-value-differences-" + architecture + ".json");
                     Assert.Equal(group.GetProperty("flags").GetBoolean(), type.GetCustomAttributes()
                         .Any(handle => HeaderAnnotationWinmdTests.AttributeName(reader, handle) == "FlagsAttribute"));
                     Assert.DoesNotContain(type.GetCustomAttributes(),
@@ -231,8 +246,6 @@ namespace Win32MetadataScraperTests
                         Assert.Equal(primitive, storage);
                     observations.Add(new { use.Group, use.Owner, use.Slot, use.NativeSlot, use.RawType, physicalType = storage });
                 }
-                string output = Path.Combine(batch, "observations");
-                Directory.CreateDirectory(output);
                 File.WriteAllText(Path.Combine(output, "actual-" + architecture + ".json"), JsonSerializer.Serialize(new
                 {
                     architecture, groupObservations, useObservations = observations, physicalUseCount = observations.Count,

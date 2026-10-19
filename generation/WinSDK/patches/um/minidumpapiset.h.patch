@@ -1,8 +1,64 @@
 diff --git a/um/minidumpapiset.h b/um/minidumpapiset.h
-index f3e7cbb5..3c29c6d6 100644
+index f3e7cbb5..576bd5aa 100644
 --- a/um/minidumpapiset.h
 +++ b/um/minidumpapiset.h
-@@ -1469,6 +1469,7 @@ typedef struct _MINIDUMP_CALLBACK_INFORMATION {
+@@ -7,6 +7,12 @@
+ #ifndef _MINIDUMP_H
+ #define _MINIDUMP_H
+ 
++#include <sal.h>
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int MINIDUMP_MISC_INFO_FLAGS;
++typedef unsigned int MINIDUMP_THREAD_INFO_DUMP_FLAGS;
++#endif
++
+ #ifdef _CONTRACT_GEN
+ #include <nt.h>
+ #include <ntrtl.h>
+@@ -576,6 +582,12 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
+ 
+ #define MINIDUMP_MISC1_PROCESS_ID            0x00000001
+ #define MINIDUMP_MISC1_PROCESS_TIMES         0x00000002
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MINIDUMP_MISC_INFO_FLAGS, unsigned int,
++    MINIDUMP_MISC1_PROCESS_ID,
++    MINIDUMP_MISC1_PROCESS_TIMES);
++#endif
+ #define MINIDUMP_MISC1_PROCESSOR_POWER_INFO  0x00000004
+ #define MINIDUMP_MISC3_PROCESS_INTEGRITY     0x00000010
+ #define MINIDUMP_MISC3_PROCESS_EXECUTE_FLAGS 0x00000020
+@@ -586,7 +598,7 @@ typedef struct _XSTATE_CONFIG_FEATURE_MSC_INFO
+ 
+ typedef struct _MINIDUMP_MISC_INFO {
+     ULONG32 SizeOfInfo;
+-    ULONG32 Flags1;
++    _Win32_AssociatedEnum_(MINIDUMP_MISC_INFO_FLAGS) ULONG32 Flags1;
+     ULONG32 ProcessId;
+     ULONG32 ProcessCreateTime;
+     ULONG32 ProcessUserTime;
+@@ -741,9 +753,19 @@ typedef struct _MINIDUMP_THREAD_NAME_LIST {
+ #define MINIDUMP_THREAD_INFO_INVALID_CONTEXT 0x00000010
+ #define MINIDUMP_THREAD_INFO_INVALID_TEB     0x00000020
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(MINIDUMP_THREAD_INFO_DUMP_FLAGS, unsigned int,
++    MINIDUMP_THREAD_INFO_ERROR_THREAD,
++    MINIDUMP_THREAD_INFO_WRITING_THREAD,
++    MINIDUMP_THREAD_INFO_EXITED_THREAD,
++    MINIDUMP_THREAD_INFO_INVALID_INFO,
++    MINIDUMP_THREAD_INFO_INVALID_CONTEXT,
++    MINIDUMP_THREAD_INFO_INVALID_TEB);
++#endif
++
+ typedef struct _MINIDUMP_THREAD_INFO {
+     ULONG32 ThreadId;
+-    ULONG32 DumpFlags;
++    _Win32_AssociatedEnum_(MINIDUMP_THREAD_INFO_DUMP_FLAGS) ULONG32 DumpFlags;
+     ULONG32 DumpError;
+     ULONG32 ExitStatus;
+     ULONG64 CreateTime;
+@@ -1469,6 +1491,7 @@ typedef struct _MINIDUMP_CALLBACK_INFORMATION {
  
  #define RVA_TO_ADDR(Mapping,Rva) ((PVOID)(((ULONG_PTR) (Mapping)) + (Rva)))
  

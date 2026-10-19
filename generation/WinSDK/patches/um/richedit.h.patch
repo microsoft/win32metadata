@@ -1,11 +1,20 @@
 diff --git a/um/richedit.h b/um/richedit.h
-index 5bebec44..f0ef7380 100644
+index 5bebec44..c771980f 100644
 --- a/um/richedit.h
 +++ b/um/richedit.h
-@@ -9,6 +9,18 @@
+@@ -9,6 +9,27 @@
  
  #ifndef _RICHEDIT_
  #define _RICHEDIT_
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int ENDCOMPOSITIONNOTIFY_CODE;
++typedef unsigned char FONT_CHARSET;
++typedef unsigned int GETTEXTEX_FLAGS;
++typedef unsigned int GETTEXTLENGTHEX_FLAGS;
++typedef unsigned int IMECOMPTEXT_FLAGS;
++typedef unsigned short PARAFORMAT_NUMBERING_STYLE;
++#endif
 +
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef unsigned int CFE_EFFECTS;
@@ -21,7 +30,45 @@ index 5bebec44..f0ef7380 100644
  #pragma once
  #include <winapifamily.h>
  #include <wtypes.h>
-@@ -674,8 +686,8 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
+@@ -359,11 +380,16 @@ typedef enum tagTextMode
+ // EM_GETIMECOMPTEXT wparam structure
+ typedef struct _imecomptext {
+ 	LONG	cb; 		// count of bytes in the output buffer.
+-	DWORD	flags;		// value specifying the composition string type.
++	_Win32_AssociatedEnum_(IMECOMPTEXT_FLAGS) DWORD	flags;		// value specifying the composition string type.
+ 						//	Currently only support ICT_RESULTREADSTR
+ } IMECOMPTEXT;
+ #define ICT_RESULTREADSTR		1
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMECOMPTEXT_FLAGS, unsigned int,
++    ICT_RESULTREADSTR);
++#endif
++
+ // Outline mode wparam values
+ #define EMO_EXIT				0		// Enter normal mode,  lparam ignored
+ #define EMO_ENTER				1		// Enter outline mode, lparam ignored
+@@ -548,12 +574,18 @@ typedef struct tagRICHEDIT_IMAGE_PARAMETERS
+ typedef struct _endcomposition
+ {
+ 	NMHDR	nmhdr;
+-	DWORD	dwCode;
++	_Win32_AssociatedEnum_(ENDCOMPOSITIONNOTIFY_CODE) DWORD	dwCode;
+ } ENDCOMPOSITIONNOTIFY;
+ 
+ // Constants for ENDCOMPOSITIONNOTIFY dwCode
+ #define ECN_ENDCOMPOSITION	0x0001
+ #define ECN_NEWTEXT			0x0002
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENDCOMPOSITIONNOTIFY_CODE, unsigned int,
++    ECN_ENDCOMPOSITION,
++    ECN_NEWTEXT);
++#endif
+ #endif
+ 
+ // Event notification masks 
+@@ -674,12 +706,12 @@ typedef LONG (*EDITWORDBREAKPROCEX)(char *pchText, LONG cchText, BYTE bCharSet,
  typedef struct _charformat
  {
  	UINT		cbSize;
@@ -32,7 +79,12 @@ index 5bebec44..f0ef7380 100644
  	LONG		yHeight;
  	LONG		yOffset;
  	COLORREF	crTextColor;
-@@ -687,8 +699,8 @@ typedef struct _charformat
+-	BYTE		bCharSet;
++	_Win32_AssociatedEnum_(FONT_CHARSET) BYTE		bCharSet;
+ 	BYTE		bPitchAndFamily;
+ 	char		szFaceName[LF_FACESIZE];
+ } CHARFORMATA;
+@@ -687,12 +719,12 @@ typedef struct _charformat
  typedef struct _charformatw
  {
  	UINT		cbSize;
@@ -43,7 +95,12 @@ index 5bebec44..f0ef7380 100644
  	LONG		yHeight;
  	LONG		yOffset;
  	COLORREF	crTextColor;
-@@ -889,6 +901,11 @@ typedef struct _charformat2a
+-	BYTE		bCharSet;
++	_Win32_AssociatedEnum_(FONT_CHARSET) BYTE		bCharSet;
+ 	BYTE		bPitchAndFamily;
+ 	WCHAR		szFaceName[LF_FACESIZE];
+ } CHARFORMATW;
+@@ -889,6 +921,11 @@ typedef struct _charformat2a
  #define CFM_UNDERLINETYPE	0x00800000		// Many displayed by 3.0 
  #if (_RICHEDIT_VER >= 0x0600)
  #define CFM_COOKIE			0x01000000		// RE 6.0
@@ -55,7 +112,7 @@ index 5bebec44..f0ef7380 100644
  #endif
  #define CFM_LCID			0x02000000
  #define CFM_BACKCOLOR		0x04000000		// Higher mask bits defined above
-@@ -911,10 +928,20 @@ typedef struct _charformat2a
+@@ -911,10 +948,20 @@ typedef struct _charformat2a
  					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR \
  					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION \
  					| CFM_COOKIE)
@@ -76,7 +133,7 @@ index 5bebec44..f0ef7380 100644
  #endif
  
  #define CFE_SMALLCAPS		CFM_SMALLCAPS
-@@ -940,6 +967,51 @@ typedef struct _charformat2a
+@@ -940,6 +987,51 @@ typedef struct _charformat2a
  
  #define	CFM_ALLEFFECTS				(CFM_EFFECTS2 | CFM_FONTBOUND | CFM_EXTENDED | CFM_MATHNOBUILDUP | CFM_MATH | CFM_MATHORDINARY)
  
@@ -128,7 +185,7 @@ index 5bebec44..f0ef7380 100644
  #define CFE_FONTBOUND				0x00100000	// Font chosen by binder, not user
  #define	CFE_LINKPROTECTED			0x00800000
  #define CFE_EXTENDED				0x02000000
-@@ -947,6 +1019,35 @@ typedef struct _charformat2a
+@@ -947,6 +1039,35 @@ typedef struct _charformat2a
  #define CFE_MATH					0x10000000
  #define CFE_MATHORDINARY			0x20000000
  
@@ -164,7 +221,7 @@ index 5bebec44..f0ef7380 100644
  // Underline types. RE 1.0 displays only CFU_UNDERLINE
  #define CFU_CF1UNDERLINE	0xFF	// Map charformat's bit underline to CF2
  #define CFU_INVERT			0xFE	// For IME composition fake a selection
-@@ -1133,8 +1234,8 @@ typedef struct _formatrange
+@@ -1133,8 +1254,8 @@ typedef struct _formatrange
  typedef struct _paraformat
  {
  	UINT	cbSize;
@@ -175,7 +232,7 @@ index 5bebec44..f0ef7380 100644
  	union
  	{
  		WORD	wReserved;
-@@ -1143,7 +1244,7 @@ typedef struct _paraformat
+@@ -1143,7 +1264,7 @@ typedef struct _paraformat
  	LONG	dxStartIndent;
  	LONG	dxRightIndent;
  	LONG	dxOffset;
@@ -184,7 +241,25 @@ index 5bebec44..f0ef7380 100644
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1256,6 +1357,44 @@ typedef struct _paraformat2
+@@ -1160,7 +1281,7 @@ struct PARAFORMAT2 : _paraformat
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
+ 	WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering
+-	WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
++	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING_STYLE) WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet FirstIndent & 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half pts)
+@@ -1194,7 +1315,7 @@ typedef struct _paraformat2
+ 	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
+ 	WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
+ 	WORD	wNumberingStart;		// Starting value for numbering 			
+-	WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
++	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING_STYLE) WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
+ 	WORD	wNumberingTab;			// Space bet 1st indent and 1st-line text
+ 	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)	
+ 	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half twips)	
+@@ -1256,6 +1377,44 @@ typedef struct _paraformat2
  					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
  					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
  
@@ -229,7 +304,7 @@ index 5bebec44..f0ef7380 100644
  #define PFE_RTLPARA 			(PFM_RTLPARA		 >> 16)
  #define PFE_KEEP				(PFM_KEEP			 >> 16) // (*)	
  #define PFE_KEEPNEXT			(PFM_KEEPNEXT		 >> 16) // (*)	
-@@ -1282,6 +1421,16 @@ typedef struct _paraformat2
+@@ -1282,6 +1441,16 @@ typedef struct _paraformat2
  #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
  #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
  
@@ -246,7 +321,68 @@ index 5bebec44..f0ef7380 100644
  // PARAFORMAT2 wNumberingStyle options 
  #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
  #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
-@@ -1600,6 +1749,7 @@ typedef struct hyphresult
+@@ -1290,6 +1459,16 @@ typedef struct _paraformat2
+ #define PFNS_NONUMBER	0x400	// Used for continuation w/o number
+ 
+ #define PFNS_NEWNUMBER	0x8000	// Start new number with wNumberingStart		
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PARAFORMAT_NUMBERING_STYLE, unsigned short,
++    PFNS_PAREN,
++    PFNS_PARENS,
++    PFNS_PERIOD,
++    PFNS_PLAIN,
++    PFNS_NONUMBER,
++    PFNS_NEWNUMBER);
++#endif
+ 								// (can be combined with other PFNS_xxx)
+ // PARAFORMAT alignment options 
+ #define PFA_LEFT			 1
+@@ -1506,11 +1685,20 @@ typedef struct _settextex
+ #define GT_RAWTEXT		4
+ #define GT_NOHIDDENTEXT 8
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(GETTEXTEX_FLAGS, unsigned int,
++    GT_DEFAULT,
++    GT_USECRLF,
++    GT_SELECTION,
++    GT_RAWTEXT,
++    GT_NOHIDDENTEXT);
++#endif
++
+ // EM_GETTEXTEX info; this struct is passed in the wparam of the message 
+ typedef struct _gettextex
+ {
+ 	DWORD	cb; 			// Count of bytes in the string
+-	DWORD	flags;			// Flags (see the GT_XXX defines
++	_Win32_AssociatedEnum_(GETTEXTEX_FLAGS) DWORD	flags;			// Flags (see the GT_XXX defines
+ 	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
+ 							//	1200 for Unicode, -1 for control default)
+ 	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
+@@ -1525,10 +1713,20 @@ typedef struct _gettextex
+ #define GTL_NUMCHARS	8	// Return number of characters
+ #define GTL_NUMBYTES	16	// Return number of _bytes_
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(GETTEXTLENGTHEX_FLAGS, unsigned int,
++    GTL_DEFAULT,
++    GTL_USECRLF,
++    GTL_PRECISE,
++    GTL_CLOSE,
++    GTL_NUMCHARS,
++    GTL_NUMBYTES);
++#endif
++
+ // EM_GETTEXTLENGTHEX info; this struct is passed in the wparam of the msg 
+ typedef struct _gettextlengthex
+ {
+-	DWORD	flags;			// Flags (see GTL_XXX defines)
++	_Win32_AssociatedEnum_(GETTEXTLENGTHEX_FLAGS) DWORD	flags;			// Flags (see GTL_XXX defines)
+ 	UINT	codepage;		// Code page for translation (CP_ACP for default,
+ 							//	1200 for Unicode)
+ } GETTEXTLENGTHEX;
+@@ -1600,6 +1798,7 @@ typedef struct hyphresult
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -254,7 +390,7 @@ index 5bebec44..f0ef7380 100644
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
-@@ -1629,6 +1779,19 @@ typedef struct tagHyphenateInfo
+@@ -1629,6 +1828,19 @@ typedef struct tagHyphenateInfo
  #define PFA_FULL_SCALED 	 7	// Not implemented
  #define PFA_FULL_GLYPHS 	 8	// Not implemented
  

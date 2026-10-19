@@ -1,8 +1,20 @@
 diff --git a/um/libloaderapi.h b/um/libloaderapi.h
-index b40e7819..39974fc2 100644
+index b40e7819..0279da1d 100644
 --- a/um/libloaderapi.h
 +++ b/um/libloaderapi.h
-@@ -127,6 +127,8 @@ typedef ENUMRESLANGPROCA ENUMRESLANGPROC;
+@@ -13,6 +13,11 @@
+ #ifndef _APISETLIBLOADER_
+ #define _APISETLIBLOADER_
+ 
++#include <sal.h>
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int LOAD_LIBRARY_FLAGS;
++#endif
++
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+@@ -127,6 +132,8 @@ typedef ENUMRESLANGPROCA ENUMRESLANGPROC;
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -11,7 +23,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -151,6 +153,8 @@ FindResourceExW(
+@@ -151,6 +158,8 @@ FindResourceExW(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
  
@@ -20,7 +32,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  int
  WINAPI
-@@ -165,6 +169,8 @@ FindStringOrdinal(
+@@ -165,6 +174,8 @@ FindStringOrdinal(
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
  
@@ -29,7 +41,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -172,6 +178,7 @@ FreeLibrary(
+@@ -172,6 +183,7 @@ FreeLibrary(
      _In_ HMODULE hLibModule
      );
  
@@ -37,7 +49,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  DECLSPEC_NORETURN
  VOID
-@@ -187,6 +194,7 @@ FreeLibraryAndExitThread(
+@@ -187,6 +199,7 @@ FreeLibraryAndExitThread(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -45,7 +57,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -200,6 +208,8 @@ FreeResource(
+@@ -200,6 +213,8 @@ FreeResource(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -54,7 +66,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Success_(return != 0)
  _Ret_range_(1,nSize)
-@@ -211,6 +221,8 @@ GetModuleFileNameA(
+@@ -211,6 +226,8 @@ GetModuleFileNameA(
      _In_ DWORD nSize
      );
  
@@ -63,7 +75,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Success_(return != 0)
  _Ret_range_(1,nSize)
-@@ -228,6 +240,8 @@ GetModuleFileNameW(
+@@ -228,6 +245,8 @@ GetModuleFileNameW(
  #define GetModuleFileName  GetModuleFileNameA
  #endif // !UNICODE
  
@@ -72,7 +84,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _When_(lpModuleName == NULL,_Ret_notnull_)
  _When_(lpModuleName != NULL,_Ret_maybenull_)
-@@ -237,6 +251,8 @@ GetModuleHandleA(
+@@ -237,6 +256,8 @@ GetModuleHandleA(
      _In_opt_ LPCSTR lpModuleName
      );
  
@@ -81,7 +93,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _When_(lpModuleName == NULL,_Ret_notnull_)
  _When_(lpModuleName != NULL,_Ret_maybenull_)
-@@ -280,6 +296,8 @@ PGET_MODULE_HANDLE_EXW)(
+@@ -280,6 +301,8 @@ PGET_MODULE_HANDLE_EXW)(
  #define PGET_MODULE_HANDLE_EX  PGET_MODULE_HANDLE_EXA
  #endif // !UNICODE
  
@@ -90,7 +102,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -289,6 +307,8 @@ GetModuleHandleExA(
+@@ -289,6 +312,8 @@ GetModuleHandleExA(
      _Out_ HMODULE* phModule
      );
  
@@ -99,7 +111,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -306,6 +326,8 @@ GetModuleHandleExW(
+@@ -306,6 +331,8 @@ GetModuleHandleExW(
  
  #endif
  
@@ -108,7 +120,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  FARPROC
  WINAPI
-@@ -332,6 +354,8 @@ typedef struct _REDIRECTION_DESCRIPTOR {
+@@ -332,6 +359,8 @@ typedef struct _REDIRECTION_DESCRIPTOR {
  
  typedef const REDIRECTION_DESCRIPTOR *PCREDIRECTION_DESCRIPTOR;
  
@@ -117,8 +129,12 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -342,6 +366,8 @@ LoadLibraryExA(
-     _In_ DWORD dwFlags
+@@ -339,9 +368,11 @@ WINAPI
+ LoadLibraryExA(
+     _In_ LPCSTR lpLibFileName,
+     _Reserved_ HANDLE hFile,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) _In_ DWORD dwFlags
      );
  
 +_Win32_SetLastError_
@@ -126,7 +142,63 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -395,6 +421,8 @@ LoadLibraryExW(
+@@ -349,7 +380,7 @@ WINAPI
+ LoadLibraryExW(
+     _In_ LPCWSTR lpLibFileName,
+     _Reserved_ HANDLE hFile,
+-    _In_ DWORD dwFlags
++    _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) _In_ DWORD dwFlags
+     );
+ 
+ #ifdef UNICODE
+@@ -372,12 +403,34 @@ LoadLibraryExW(
+ #define LOAD_LIBRARY_SEARCH_SYSTEM32        0x00000800
+ #define LOAD_LIBRARY_SEARCH_DEFAULT_DIRS    0x00001000
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(LOAD_LIBRARY_FLAGS, unsigned int,
++    DONT_RESOLVE_DLL_REFERENCES,
++    LOAD_LIBRARY_AS_DATAFILE,
++    LOAD_WITH_ALTERED_SEARCH_PATH,
++    LOAD_IGNORE_CODE_AUTHZ_LEVEL,
++    LOAD_LIBRARY_AS_IMAGE_RESOURCE,
++    LOAD_LIBRARY_AS_DATAFILE_EXCLUSIVE,
++    LOAD_LIBRARY_REQUIRE_SIGNED_TARGET,
++    LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR,
++    LOAD_LIBRARY_SEARCH_APPLICATION_DIR,
++    LOAD_LIBRARY_SEARCH_USER_DIRS,
++    LOAD_LIBRARY_SEARCH_SYSTEM32,
++    LOAD_LIBRARY_SEARCH_DEFAULT_DIRS);
++#endif
++
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+ 
+ #define LOAD_LIBRARY_SAFE_CURRENT_DIRS      0x00002000
+ 
+ #define LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER   0x00004000
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(LOAD_LIBRARY_FLAGS, unsigned int,
++    LOAD_LIBRARY_SAFE_CURRENT_DIRS,
++    LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER);
++#endif
++
+ #else
+ 
+ //
+@@ -387,6 +440,11 @@ LoadLibraryExW(
+ 
+ #define LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER   LOAD_LIBRARY_SEARCH_SYSTEM32
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(LOAD_LIBRARY_FLAGS, unsigned int,
++    LOAD_LIBRARY_SEARCH_SYSTEM32_NO_FORWARDER);
++#endif
++
+ #endif // (_APISET_LIBLOADER_VER >= 0x0202)
+ 
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS2)
+@@ -395,6 +453,8 @@ LoadLibraryExW(
  
  #endif
  
@@ -135,7 +207,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Ret_maybenull_
  HGLOBAL
-@@ -430,6 +458,7 @@ LoadStringW(
+@@ -430,6 +490,7 @@ LoadStringW(
  #define LoadString  LoadStringA
  #endif // !UNICODE
  
@@ -143,7 +215,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  LPVOID
  WINAPI
-@@ -437,6 +466,8 @@ LockResource(
+@@ -437,6 +498,8 @@ LockResource(
      _In_ HGLOBAL hResData
      );
  
@@ -152,7 +224,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -453,6 +484,8 @@ SizeofResource(
+@@ -453,6 +516,8 @@ SizeofResource(
  
  typedef PVOID DLL_DIRECTORY_COOKIE, *PDLL_DIRECTORY_COOKIE;
  
@@ -161,7 +233,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  DLL_DIRECTORY_COOKIE
  WINAPI
-@@ -460,6 +493,8 @@ AddDllDirectory(
+@@ -460,6 +525,8 @@ AddDllDirectory(
      _In_ PCWSTR NewDirectory
      );
  
@@ -170,7 +242,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -467,6 +502,8 @@ RemoveDllDirectory(
+@@ -467,11 +534,13 @@ RemoveDllDirectory(
      _In_ DLL_DIRECTORY_COOKIE Cookie
      );
  
@@ -179,7 +251,13 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -482,6 +519,8 @@ SetDefaultDllDirectories(
+ SetDefaultDllDirectories(
+-    _In_ DWORD DirectoryFlags
++    _Win32_AssociatedEnum_(LOAD_LIBRARY_FLAGS) _In_ DWORD DirectoryFlags
+     );
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+@@ -482,6 +551,8 @@ SetDefaultDllDirectories(
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
  
@@ -188,7 +266,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  APIENTRY
-@@ -495,6 +534,8 @@ EnumResourceLanguagesExA(
+@@ -495,6 +566,8 @@ EnumResourceLanguagesExA(
      LANGID LangId
      );
  
@@ -197,7 +275,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  APIENTRY
-@@ -514,6 +555,8 @@ EnumResourceLanguagesExW(
+@@ -514,6 +587,8 @@ EnumResourceLanguagesExW(
  #define EnumResourceLanguagesEx  EnumResourceLanguagesExA
  #endif // !UNICODE
  
@@ -206,7 +284,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -526,6 +569,8 @@ EnumResourceNamesExA(
+@@ -526,6 +601,8 @@ EnumResourceNamesExA(
      LANGID LangId
      );
  
@@ -215,7 +293,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -544,6 +589,8 @@ EnumResourceNamesExW(
+@@ -544,6 +621,8 @@ EnumResourceNamesExW(
  #define EnumResourceNamesEx  EnumResourceNamesExA
  #endif // !UNICODE
  
@@ -224,7 +302,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -555,6 +602,8 @@ EnumResourceTypesExA(
+@@ -555,6 +634,8 @@ EnumResourceTypesExA(
      LANGID LangId
      );
  
@@ -233,7 +311,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -594,6 +643,8 @@ FindResourceW(
+@@ -594,6 +675,8 @@ FindResourceW(
  #define FindResource  FindResourceW
  #endif
  
@@ -242,7 +320,7 @@ index b40e7819..39974fc2 100644
  WINBASEAPI
  _Ret_maybenull_
  HMODULE
-@@ -602,6 +653,8 @@ LoadLibraryA(
+@@ -602,6 +685,8 @@ LoadLibraryA(
      _In_ LPCSTR lpLibFileName
      );
  
