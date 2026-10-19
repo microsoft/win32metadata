@@ -121,7 +121,10 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 .Where(value => value.GetProperty("status").GetString() == "converted").ToArray();
             Assert.NotEmpty(facts);
             bool returnAssociations = facts.All(value => value.GetProperty("category").GetString() == "associated-enum-return");
-            Assert.True(returnAssociations || facts.All(value => value.GetProperty("category").GetString() == "supportedOS"));
+            bool parameterContracts = facts.All(value => value.GetProperty("category").GetString()
+                is "associated-enum-parameter" or "contains-interior-pointers");
+            bool addedAttributes = returnAssociations || parameterContracts;
+            Assert.True(addedAttributes || facts.All(value => value.GetProperty("category").GetString() == "supportedOS"));
             if (report.RootElement.TryGetProperty("physicalMetadataComponentExclusions", out var exclusions))
             {
                 var excluded = exclusions.EnumerateArray().Select(value => value.GetProperty("symbol").GetString())
@@ -130,9 +133,10 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 facts = facts.Where(value => !excluded.Contains(value.GetProperty("symbol").GetString())).ToArray();
                 Assert.NotEmpty(facts);
             }
-            var names = facts.Select(value => value.GetProperty("symbol").GetString()).ToHashSet(StringComparer.Ordinal);
-            var factsByName = facts.ToDictionary(value => value.GetProperty("symbol").GetString(), StringComparer.Ordinal);
-            var retired = returnAssociations
+            var names = facts.Select(value => value.GetProperty("symbol").GetString().Split("::")[0])
+                .ToHashSet(StringComparer.Ordinal);
+            var factsByName = facts.ToLookup(value => value.GetProperty("symbol").GetString().Split("::")[0], StringComparer.Ordinal);
+            var retired = addedAttributes
                 ? report.RootElement.GetProperty("emitterRowsToRemove").EnumerateArray()
                     .Select(value => value.GetString()).ToHashSet(StringComparer.Ordinal)
                 : new HashSet<string>(StringComparer.Ordinal);
@@ -145,7 +149,7 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                     names.Contains(parts[0].Split("::")[0]) && !retired.Contains(parts[0] + "=" + parts[1]))
                 .ToDictionary(parts => parts[0], parts => parts[1], StringComparer.Ordinal);
             string component = Path.Combine(bindings, "availability-component-" + Guid.NewGuid().ToString("N"));
-            foreach (string state in returnAssociations ? new[] { "before", "after", "expected" } : new[] { "before", "after" })
+            foreach (string state in addedAttributes ? new[] { "before", "after", "expected" } : new[] { "before", "after" })
             {
                 string directory = Path.Combine(component, state);
                 Directory.CreateDirectory(directory);
@@ -171,8 +175,32 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                     {
                         source = source.ReplaceNodes(methods, (method, _) =>
                         {
+                            if (parameterContracts)
+                            {
+                                var parameters = method.ParameterList.Parameters.Select(parameter =>
+                                {
+                                    foreach (var fact in factsByName[method.Identifier.ValueText].Where(value =>
+                                        value.GetProperty("symbol").GetString().Split("::")[1] == parameter.Identifier.ValueText))
+                                    {
+                                        bool association = fact.GetProperty("category").GetString() == "associated-enum-parameter";
+                                        var parameterAttribute = SyntaxFactory.Attribute(SyntaxFactory.IdentifierName(
+                                            association ? "AssociatedEnum" : "ContainsInteriorPointers"));
+                                        if (association)
+                                            parameterAttribute = parameterAttribute.WithArgumentList(
+                                                SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(
+                                                    SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
+                                                        SyntaxKind.StringLiteralExpression,
+                                                        SyntaxFactory.Literal(fact.GetProperty("enumName").GetString()))))));
+                                        parameter = parameter.AddAttributeLists(SyntaxFactory.AttributeList(
+                                            SyntaxFactory.SingletonSeparatedList(parameterAttribute)));
+                                    }
+                                    return parameter;
+                                });
+                                return method.WithParameterList(method.ParameterList.WithParameters(
+                                    SyntaxFactory.SeparatedList(parameters)));
+                            }
                             var argument = SyntaxFactory.AttributeArgument(SyntaxFactory.LiteralExpression(
-                                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(factsByName[method.Identifier.ValueText]
+                                SyntaxKind.StringLiteralExpression, SyntaxFactory.Literal(Assert.Single(factsByName[method.Identifier.ValueText])
                                     .GetProperty("enumName").GetString())));
                             var attribute = SyntaxFactory.Attribute(SyntaxFactory.IdentifierName("AssociatedEnum"),
                                 SyntaxFactory.AttributeArgumentList(SyntaxFactory.SingletonSeparatedList(argument)));
@@ -231,7 +259,7 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 memberRemaps: remaps, references: new[] { baseline }, requiredNamespaces: namespaces);
             AssertMetadataClosure(before.Reader);
             AssertMetadataClosure(after.Reader);
-            if (returnAssociations)
+            if (addedAttributes)
             {
                 using var expected = Emit(Path.Combine(component, "expected"), architecture,
                     memberRemaps: remaps, references: new[] { baseline }, requiredNamespaces: namespaces);
@@ -242,10 +270,26 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                 Assert.Equal(Snapshot(before.Reader), Snapshot(after.Reader));
             foreach (var fact in facts)
             {
-                string name = fact.GetProperty("symbol").GetString();
+                string[] targetName = fact.GetProperty("symbol").GetString().Split("::");
+                string name = targetName[0];
                 var method = Assert.Single(after.Reader.MethodDefinitions.Select(after.Reader.GetMethodDefinition)
                     .Where(value => after.Reader.GetString(value.Name) == name));
-                if (returnAssociations)
+                if (parameterContracts)
+                {
+                    var parameter = Assert.Single(method.GetParameters().Select(after.Reader.GetParameter)
+                        .Where(value => value.SequenceNumber > 0 && after.Reader.GetString(value.Name) == targetName[1]));
+                    if (fact.GetProperty("category").GetString() == "associated-enum-parameter")
+                    {
+                        Assert.Equal(fact.GetProperty("nativeStorage").GetString(),
+                            method.DecodeSignature(new SignatureNames(), null).ParameterTypes[parameter.SequenceNumber - 1]);
+                        AssertStringAttribute(after.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute",
+                            fact.GetProperty("enumName").GetString());
+                    }
+                    else
+                        Assert.Single(parameter.GetCustomAttributes().Where(handle =>
+                            AttributeName(after.Reader, handle) == "ContainsInteriorPointersAttribute"));
+                }
+                else if (returnAssociations)
                 {
                     Assert.Equal(fact.GetProperty("nativeStorage").GetString(),
                         method.DecodeSignature(new SignatureNames(), null).ReturnType);
@@ -264,7 +308,7 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
             }
             Console.WriteLine($"{architecture}: {facts.Length} exact owned declaration facts, actual imported native signatures, " +
                 "calling conventions and namespaces checked without retired sidecar rows; " +
-                (returnAssociations ? "only the source-qualified return associations added." : "physical metadata unchanged."));
+                (addedAttributes ? "only the source-qualified declaration attributes added." : "physical metadata unchanged."));
 
             static string[] Snapshot(MetadataReader reader) => reader.TypeDefinitions.Select(reader.GetTypeDefinition)
                 .Select(type => WinHttpMigrationTests.SnapshotType(reader, type))

@@ -3791,3 +3791,35 @@ or relying on ambiguous architecture variants from the baseline reference.
 Native controls preserve calling conventions, imports, SAL and prior payloads.
 Final SDK-wide consumer grading remains with integration. Evidence is under
 `artifacts\bulk-annotations\system-error-associations-011-*`.
+
+### System native parameter associations and caller-owned buffers
+
+Six already-positive native originals carry 28 parameter associations and
+17 caller-owned output-buffer annotations: `aclapi.h` (2), `appmodel.h` (8),
+`combaseapi.h` (5), `ole2.h` (12), `pdh.h` (7) and `wincrypt.h` (11).
+Exactly eleven `enums.json` uses and 34 emitter assertions are retired.
+Every logical definition, member, namespace, storage, Flags state and native
+value remains unchanged; outside and unknown uses remain in their existing
+objects.
+
+The eleven old enum-typed parameter uses deliberately become native unsigned
+scalar/pointer parameters with `AssociatedEnum`. The other seventeen
+associations retain their existing representation. `ContainsInteriorPointers`
+stays on the seventeen actual caller-owned output buffers, preserving native
+SAL and introducing no allocation or cleanup ownership.
+
+An association needs its native type available at that declaration:
+`_Win32_AssociatedEnum_(name)` uses `(name)0`. The initial 129-site selection
+therefore retains 84 uses whose synthetic type is absent or whose existing
+metadata alias appears later. No forward typedefs, duplicate groups, fabricated
+values or protected-definition changes are introduced. The failed broader
+attempts remain noncoverage rather than excluded passing facts.
+
+Actual normal sources and bounded physical components cover all 45 selected
+sites on x86, x64 and ARM64. Native controls compare ordinary and metadata
+compilation separately, including Cryptography C17, with unchanged ABI, SAL
+and prior payloads. The component expectation adds only the exact parameter
+attributes to the observed native signatures and retains their generated
+dependency layouts. Final SDK-wide consumer grading remains with integration.
+Evidence is under
+`artifacts\bulk-annotations\system-parameter-contracts-012-*`.

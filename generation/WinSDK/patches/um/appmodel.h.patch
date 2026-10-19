@@ -1,5 +1,5 @@
 diff --git a/um/appmodel.h b/um/appmodel.h
-index b9e2d1e4..6d998973 100644
+index b9e2d1e4..a1667aca 100644
 --- a/um/appmodel.h
 +++ b/um/appmodel.h
 @@ -1,3 +1,6 @@
@@ -9,7 +9,7 @@ index b9e2d1e4..6d998973 100644
  /***************************************************
  *                                                  *
  *   Copyright (C) Microsoft. All rights reserved.  *
-@@ -79,45 +82,50 @@ typedef struct PACKAGE_ID {
+@@ -79,55 +82,61 @@ typedef struct PACKAGE_ID {
  
  // Identity Functions
  
@@ -21,7 +21,8 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetCurrentPackageId(
      _Inout_ UINT32* bufferLength,
-     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer
      );
  
 +_Win32_SupportedOS_Windows8_
@@ -65,8 +66,9 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetPackageId(
      _In_ HANDLE hProcess,
-@@ -125,9 +133,10 @@ GetPackageId(
-     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer
      );
  
 +_Win32_SupportedOS_Windows8_
@@ -175,7 +177,7 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetStagedPackagePathByFullName2(
      _In_ PCWSTR packageFullName,
-@@ -236,9 +253,10 @@ GetStagedPackagePathByFullName2(
+@@ -236,21 +253,23 @@ GetStagedPackagePathByFullName2(
      _Out_writes_opt_(*pathLength) PWSTR path
      );
  
@@ -187,7 +189,10 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetCurrentPackageInfo2(
      _In_ const UINT32 flags,
-@@ -248,9 +266,10 @@ GetCurrentPackageInfo2(
+     _In_ PackagePathType packagePathType,
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer,
      _Out_opt_ UINT32* count
      );
  
@@ -271,7 +276,7 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  VerifyPackageRelativeApplicationId(
      _In_ PCWSTR packageRelativeApplicationId
-@@ -349,10 +368,11 @@ VerifyPackageRelativeApplicationId(
+@@ -349,22 +368,24 @@ VerifyPackageRelativeApplicationId(
  
  // Conversion Functions
  
@@ -284,8 +289,10 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  PackageIdFromFullName(
      _In_ PCWSTR packageFullName,
-@@ -361,10 +381,11 @@ PackageIdFromFullName(
-     _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
+     _In_ const UINT32 flags,
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer
      );
  
 +_Win32_SupportedOS_Windows8_
@@ -405,7 +412,7 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetStagedPackageOrigin(
      _In_ PCWSTR packageFullName,
-@@ -544,9 +573,10 @@ typedef struct PACKAGE_INFO {
+@@ -544,20 +573,22 @@ typedef struct PACKAGE_INFO {
  
  // Dependency Functions
  
@@ -417,7 +424,9 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetCurrentPackageInfo(
      _In_ const UINT32 flags,
-@@ -555,9 +585,10 @@ GetCurrentPackageInfo(
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer,
      _Out_opt_ UINT32* count
      );
  
@@ -438,7 +447,7 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  OpenPackageInfoByFullNameForUser(
      _In_opt_ PSID userSid,
-@@ -578,17 +609,19 @@ OpenPackageInfoByFullNameForUser(
+@@ -578,48 +609,52 @@ OpenPackageInfoByFullNameForUser(
      _Out_ PACKAGE_INFO_REFERENCE* packageInfoReference
      );
  
@@ -460,7 +469,10 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetPackageInfo(
      _In_ PACKAGE_INFO_REFERENCE packageInfoReference,
-@@ -598,9 +631,10 @@ GetPackageInfo(
+     _In_ const UINT32 flags,
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer,
      _Out_opt_ UINT32* count
      );
  
@@ -472,7 +484,10 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetPackageApplicationIds(
      _In_ PACKAGE_INFO_REFERENCE packageInfoReference,
-@@ -610,9 +644,10 @@ GetPackageApplicationIds(
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer,
+     _Out_opt_ UINT32* count
      );
  
  #if NTDDI_VERSION >= NTDDI_WIN10_19H1
@@ -484,6 +499,14 @@ index b9e2d1e4..6d998973 100644
  WINAPI
  GetPackageInfo2(
      _In_ PACKAGE_INFO_REFERENCE packageInfoReference,
+     _In_ const UINT32 flags,
+     _In_ PackagePathType packagePathType,
+     _Inout_ UINT32* bufferLength,
+-    _Out_writes_bytes_opt_(*bufferLength) BYTE* buffer,
++    _Out_writes_bytes_opt_(*bufferLength) _Win32_ContainsInteriorPointers_ BYTE* buffer,
+     _Out_opt_ UINT32* count
+     );
+ 
 @@ -1090,7 +1125,7 @@ typedef enum AppPolicyLifecycleManagement
  WINBASEAPI
  _Check_return_

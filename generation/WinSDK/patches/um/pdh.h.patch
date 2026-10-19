@@ -1,5 +1,5 @@
 diff --git a/um/pdh.h b/um/pdh.h
-index e1ef840a..0d6cf7bb 100644
+index 9058afda..e04e9af8 100644
 --- a/um/pdh.h
 +++ b/um/pdh.h
 @@ -49,6 +49,12 @@ typedef LONG            PDH_STATUS;
@@ -250,7 +250,7 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumMachinesA(
      _In_opt_ LPCSTR  szDataSource,
-@@ -544,6 +585,7 @@ PdhEnumMachinesA(
+@@ -544,26 +585,29 @@ PdhEnumMachinesA(
      _Inout_ LPDWORD pcchBufferSize
  );
  
@@ -258,7 +258,11 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectsW(
      _In_opt_ LPCWSTR szDataSource,
-@@ -554,6 +596,7 @@ PdhEnumObjectsW(
+     _In_opt_ LPCWSTR szMachineName,
+     _Out_writes_opt_(* pcchBufferSize) PZZWSTR mszObjectList,
+     _Inout_  LPDWORD pcchBufferSize,
+-    _In_     DWORD   dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD   dwDetailLevel,
      _In_     BOOL    bRefresh
  );
  
@@ -266,7 +270,11 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectsA(
      _In_opt_ LPCSTR  szDataSource,
-@@ -564,6 +607,7 @@ PdhEnumObjectsA(
+     _In_opt_ LPCSTR  szMachineName,
+     _Out_writes_opt_(* pcchBufferSize) PZZSTR mszObjectList,
+     _Inout_  LPDWORD pcchBufferSize,
+-    _In_     DWORD   dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD   dwDetailLevel,
      _In_     BOOL    bRefresh
  );
  
@@ -274,7 +282,12 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectItemsW(
      _In_opt_ LPCWSTR szDataSource,
-@@ -577,6 +621,7 @@ PdhEnumObjectItemsW(
+@@ -573,10 +617,11 @@ PdhEnumObjectItemsW(
+     _Inout_  LPDWORD pcchCounterListLength,
+     _Out_writes_opt_(* pcchInstanceListLength) PZZWSTR mszInstanceList,
+     _Inout_  LPDWORD pcchInstanceListLength,
+-    _In_     DWORD   dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD   dwDetailLevel,
      _In_     DWORD   dwFlags
  );
  
@@ -282,7 +295,12 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectItemsA(
      _In_opt_ LPCSTR  szDataSource,
-@@ -590,6 +635,7 @@ PdhEnumObjectItemsA(
+@@ -586,10 +631,11 @@ PdhEnumObjectItemsA(
+     _Inout_  LPDWORD pcchCounterListLength,
+     _Out_writes_opt_(* pcchInstanceListLength) PZZSTR mszInstanceList,
+     _Inout_  LPDWORD pcchInstanceListLength,
+-    _In_     DWORD   dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD   dwDetailLevel,
      _In_     DWORD   dwFlags
  );
  
@@ -668,7 +686,7 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectsHW(
      _In_opt_ PDH_HLOG hDataSource,
-@@ -1166,6 +1270,7 @@ PdhEnumObjectsHW(
+@@ -1166,16 +1270,18 @@ PdhEnumObjectsHW(
      _In_     BOOL     bRefresh
  ) ;
  
@@ -676,7 +694,11 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectsHA(
      _In_opt_ PDH_HLOG hDataSource,
-@@ -1176,6 +1281,7 @@ PdhEnumObjectsHA(
+     _In_opt_ LPCSTR   szMachineName,
+     _Out_writes_opt_(* pcchBufferSize) PZZSTR    mszObjectList,
+     _Inout_  LPDWORD  pcchBufferSize,
+-    _In_     DWORD    dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD    dwDetailLevel,
      _In_     BOOL     bRefresh
  );
  
@@ -684,7 +706,12 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectItemsHW(
      _In_opt_ PDH_HLOG hDataSource,
-@@ -1189,6 +1295,7 @@ PdhEnumObjectItemsHW(
+@@ -1185,10 +1291,11 @@ PdhEnumObjectItemsHW(
+     _Inout_  LPDWORD  pcchCounterListLength,
+     _Out_writes_opt_(* pcchInstanceListLength) PZZWSTR   mszInstanceList,
+     _Inout_  LPDWORD  pcchInstanceListLength,
+-    _In_     DWORD    dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD    dwDetailLevel,
      _In_     DWORD    dwFlags
  );
  
@@ -692,7 +719,12 @@ index e1ef840a..0d6cf7bb 100644
  PDH_FUNCTION
  PdhEnumObjectItemsHA(
      _In_opt_ PDH_HLOG hDataSource,
-@@ -1202,6 +1309,7 @@ PdhEnumObjectItemsHA(
+@@ -1198,10 +1305,11 @@ PdhEnumObjectItemsHA(
+     _Inout_  LPDWORD  pcchCounterListLength,
+     _Out_writes_opt_(* pcchInstanceListLength) PZZSTR    mszInstanceList,
+     _Inout_  LPDWORD  pcchInstanceListLength,
+-    _In_     DWORD    dwDetailLevel,
++    _In_     _Win32_AssociatedEnum_(PERF_DETAIL) DWORD    dwDetailLevel,
      _In_     DWORD    dwFlags
  );
  

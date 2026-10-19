@@ -1,5 +1,5 @@
 diff --git a/um/wincrypt.h b/um/wincrypt.h
-index 924c87c4..00a83847 100644
+index c5a1f165..ddb75e05 100644
 --- a/um/wincrypt.h
 +++ b/um/wincrypt.h
 @@ -535,6 +535,18 @@ typedef ULONG_PTR HCRYPTHASH;
@@ -508,7 +508,7 @@ index 924c87c4..00a83847 100644
      _In_ LPCSTR lpszStructType,
      _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
      _In_ DWORD cbEncoded,
-@@ -2850,11 +2983,13 @@ CryptDecodeObjectEx(
+@@ -2850,16 +2983,18 @@ CryptDecodeObjectEx(
      );
  
  
@@ -523,6 +523,12 @@ index 924c87c4..00a83847 100644
      _In_ LPCSTR lpszStructType,
      _In_reads_bytes_(cbEncoded) const BYTE *pbEncoded,
      _In_ DWORD cbEncoded,
+     _In_ DWORD dwFlags,
+-    _Out_writes_bytes_to_opt_(*pcbStructInfo, *pcbStructInfo) void *pvStructInfo,
++    _Out_writes_bytes_to_opt_(*pcbStructInfo, *pcbStructInfo) _Win32_ContainsInteriorPointers_ void *pvStructInfo,
+     _Inout_ DWORD *pcbStructInfo
+     );
+ 
 @@ -3644,6 +3779,13 @@ CryptDecodeObject(
  // Subject logotype
  #define CERT_ROOT_PROGRAM_FLAG_SUBJECT_LOGO 0x20
@@ -911,6 +917,15 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
+@@ -7529,7 +7788,7 @@ CryptMsgGetParam(
+     _In_ HCRYPTMSG hCryptMsg,
+     _In_ DWORD dwParamType,
+     _In_ DWORD dwIndex,
+-    _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData,
++    _Out_writes_bytes_to_opt_(*pcbData, *pcbData) _Win32_ContainsInteriorPointers_ void *pvData,
+     _Inout_ DWORD *pcbData
+     );
+ 
 @@ -8006,6 +8265,12 @@ typedef struct _CMSG_KEY_AGREE_RECIPIENT_INFO {
  #define CMSG_KEY_AGREE_ORIGINATOR_CERT         1
  #define CMSG_KEY_AGREE_ORIGINATOR_PUBLIC_KEY   2
@@ -1194,7 +1209,7 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -11796,6 +12131,8 @@ CertSetCertificateContextProperty(
+@@ -11796,13 +12131,15 @@ CertSetCertificateContextProperty(
  //
  //  For all other PROP_IDs, pvData points to an encoded array of bytes.
  //--------------------------------------------------------------------------
@@ -1203,6 +1218,14 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
+ CertGetCertificateContextProperty(
+     _In_ PCCERT_CONTEXT pCertContext,
+     _In_ DWORD dwPropId,
+-    _Out_writes_bytes_to_opt_(*pcbData, *pcbData) void *pvData,
++    _Out_writes_bytes_to_opt_(*pcbData, *pcbData) _Win32_ContainsInteriorPointers_ void *pvData,
+     _Inout_ DWORD *pcbData
+     );
+ 
 @@ -11820,6 +12157,7 @@ CertGetCertificateContextProperty(
  //  properties are stored as fields in the CERT_KEY_CONTEXT_PROP_ID
  //  property, they aren't enumerated individually.
@@ -1220,6 +1243,15 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  _Success_(return != FALSE)
  BOOL
+@@ -11860,7 +12200,7 @@ CertCreateCTLEntryFromCertificateContextProperties(
+     _In_reads_opt_(cOptAttr) PCRYPT_ATTRIBUTE rgOptAttr,
+     _In_ DWORD dwFlags,
+     _Reserved_ void *pvReserved,
+-    _Out_writes_bytes_to_opt_(*pcbCtlEntry, *pcbCtlEntry) PCTL_ENTRY pCtlEntry,
++    _Out_writes_bytes_to_opt_(*pcbCtlEntry, *pcbCtlEntry) _Win32_ContainsInteriorPointers_ PCTL_ENTRY pCtlEntry,
+     _Inout_ DWORD *pcbCtlEntry
+     );
+ 
 @@ -11879,6 +12219,8 @@ CertCreateCTLEntryFromCertificateContextProperties(
  //
  //  CERT_SET_PROPERTY_IGNORE_PERSIST_ERROR_FLAG may be set in dwFlags.
@@ -1722,7 +1754,7 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -13658,6 +14099,8 @@ CertEnumPhysicalStore(
+@@ -13658,13 +14099,15 @@ CertEnumPhysicalStore(
  //  If the CERT_FIND_PROP_ONLY_ENHKEY_USAGE_FLAG is set, then, only get the
  //  property.
  //--------------------------------------------------------------------------
@@ -1731,6 +1763,14 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
+ CertGetEnhancedKeyUsage(
+     _In_ PCCERT_CONTEXT pCertContext,
+     _In_ DWORD dwFlags,
+-    _Out_writes_bytes_to_opt_(*pcbUsage, *pcbUsage) PCERT_ENHKEY_USAGE pUsage,
++    _Out_writes_bytes_to_opt_(*pcbUsage, *pcbUsage) _Win32_ContainsInteriorPointers_ PCERT_ENHKEY_USAGE pUsage,
+     _Inout_ DWORD *pcbUsage
+     );
+ 
 @@ -13677,6 +14120,8 @@ CertGetEnhancedKeyUsage(
  //+-------------------------------------------------------------------------
  //  Set the enhanced key usage property for the certificate.
@@ -2172,7 +2212,7 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
-@@ -15050,13 +15572,15 @@ CryptUninstallDefaultContext(
+@@ -15050,14 +15572,16 @@ CryptUninstallDefaultContext(
  //  Calls CryptExportPublicKeyInfoEx with pszPublicKeyObjId = NULL,
  //  dwFlags = 0 and pvAuxInfo = NULL.
  //--------------------------------------------------------------------------
@@ -2185,11 +2225,13 @@ index 924c87c4..00a83847 100644
      _In_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hCryptProvOrNCryptKey,
      _In_opt_ DWORD dwKeySpec,       // not applicable for NCRYPT_KEY_HANDLE
 -    _In_ DWORD dwCertEncodingType,
+-    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) PCERT_PUBLIC_KEY_INFO pInfo,
 +    _In_ _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) DWORD dwCertEncodingType,
-     _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) PCERT_PUBLIC_KEY_INFO pInfo,
++    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) _Win32_ContainsInteriorPointers_ PCERT_PUBLIC_KEY_INFO pInfo,
      _Inout_ DWORD *pcbInfo
      );
-@@ -15090,13 +15614,15 @@ CryptExportPublicKeyInfo(
+ 
+@@ -15090,17 +15614,19 @@ CryptExportPublicKeyInfo(
  //      CRYPT_OID_USE_CURVE_PARAMETERS_FOR_ENCODE_FLAG
  //--------------------------------------------------------------------------
  
@@ -2206,7 +2248,12 @@ index 924c87c4..00a83847 100644
      _In_opt_ LPSTR pszPublicKeyObjId,
      _In_ DWORD dwFlags,
      _In_opt_ void *pvAuxInfo,
-@@ -15145,12 +15671,13 @@ typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
+-    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) PCERT_PUBLIC_KEY_INFO pInfo,
++    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) _Win32_ContainsInteriorPointers_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _Inout_ DWORD *pcbInfo
+     );
+ 
+@@ -15145,16 +15671,17 @@ typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC) (
  //      CRYPT_OID_INFO_PUBKEY_ENCRYPT_KEY_FLAG
  //--------------------------------------------------------------------------
  
@@ -2221,6 +2268,11 @@ index 924c87c4..00a83847 100644
      _In_opt_ LPSTR pszPublicKeyObjId,
      _In_ DWORD dwFlags,
      _In_opt_ void *pvAuxInfo,
+-    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) PCERT_PUBLIC_KEY_INFO pInfo,
++    _Out_writes_bytes_to_opt_(*pcbInfo, *pcbInfo) _Win32_ContainsInteriorPointers_ PCERT_PUBLIC_KEY_INFO pInfo,
+     _Inout_ DWORD *pcbInfo
+     );
+ 
 @@ -15184,12 +15711,14 @@ typedef BOOL (WINAPI *PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC)
  //  Calls CryptImportPublicKeyInfoEx with aiKeyAlg = 0, dwFlags = 0 and
  //  pvAuxInfo = NULL.
@@ -2280,6 +2332,15 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
+@@ -15370,7 +15905,7 @@ CryptAcquireCertificatePrivateKey(
+     _In_ DWORD dwFlags,
+     _In_opt_ void *pvParameters,
+     _Out_ HCRYPTPROV_OR_NCRYPT_KEY_HANDLE *phCryptProvOrNCryptKey,
+-    _Out_opt_ DWORD *pdwKeySpec,
++    _Out_opt_ _Win32_AssociatedEnum_(CERT_KEY_SPEC) DWORD *pdwKeySpec,
+     _Out_opt_ BOOL *pfCallerFreeProvOrNCryptKey
+     );
+ 
 @@ -15416,6 +15951,8 @@ CryptAcquireCertificatePrivateKey(
  //  The above CRYPT_ACQUIRE_NCRYPT_KEY_FLAGS can also be set. The default
  //  is CRYPT_ACQUIRE_ALLOW_NCRYPT_KEY_FLAG.
@@ -2636,6 +2697,15 @@ index 924c87c4..00a83847 100644
  WINCRYPT32API
  BOOL
  WINAPI
+@@ -17057,7 +17666,7 @@ CryptQueryObject(
+     _In_ DWORD                    dwExpectedContentTypeFlags,
+     _In_ DWORD                    dwExpectedFormatTypeFlags,
+     _In_ DWORD                    dwFlags,
+-    _Out_opt_ DWORD               *pdwMsgAndCertEncodingType,
++    _Out_opt_ _Win32_AssociatedEnum_(CERT_QUERY_ENCODING_TYPE) DWORD               *pdwMsgAndCertEncodingType,
+     _Out_opt_ DWORD               *pdwContentType,
+     _Out_opt_ DWORD               *pdwFormatType,
+     _Out_opt_ HCERTSTORE          *phCertStore,
 @@ -17072,6 +17681,12 @@ CryptQueryObject(
  #define     CERT_QUERY_OBJECT_FILE         0x00000001
  #define     CERT_QUERY_OBJECT_BLOB         0x00000002
@@ -2785,7 +2855,7 @@ index 924c87c4..00a83847 100644
  typedef struct _CRYPT_URL_ARRAY {
      DWORD   cUrl;
      LPWSTR* rgwszUrl;
-@@ -17891,13 +18572,15 @@ typedef struct _CRYPT_URL_INFO {
+@@ -17891,14 +18572,16 @@ typedef struct _CRYPT_URL_INFO {
      DWORD   *rgcGroupEntry;
  } CRYPT_URL_INFO, *PCRYPT_URL_INFO;
  
@@ -2798,10 +2868,12 @@ index 924c87c4..00a83847 100644
      _In_ LPCSTR pszUrlOid,
      _In_ LPVOID pvPara,
 -    _In_ DWORD dwFlags,
+-    _Out_writes_bytes_to_opt_(*pcbUrlArray, *pcbUrlArray) PCRYPT_URL_ARRAY pUrlArray,
 +    _In_ _Win32_AssociatedEnum_(CRYPT_GET_URL_FLAGS) DWORD dwFlags,
-     _Out_writes_bytes_to_opt_(*pcbUrlArray, *pcbUrlArray) PCRYPT_URL_ARRAY pUrlArray,
++    _Out_writes_bytes_to_opt_(*pcbUrlArray, *pcbUrlArray) _Win32_ContainsInteriorPointers_ PCRYPT_URL_ARRAY pUrlArray,
      _Inout_ DWORD* pcbUrlArray,
      _Out_writes_bytes_to_opt_(*pcbUrlInfo, *pcbUrlInfo) PCRYPT_URL_INFO pUrlInfo,
+     _Inout_opt_ DWORD* pcbUrlInfo,
 @@ -18080,6 +18763,8 @@ typedef struct _CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO {
  } CRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO,
      *PCRYPT_GET_TIME_VALID_OBJECT_EXTRA_INFO;

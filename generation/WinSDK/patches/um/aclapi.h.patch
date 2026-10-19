@@ -1,5 +1,5 @@
 diff --git a/um/aclapi.h b/um/aclapi.h
-index 3eaee661..5a723b97 100644
+index 3eaee661..1873dd27 100644
 --- a/um/aclapi.h
 +++ b/um/aclapi.h
 @@ -1,3 +1,6 @@
@@ -227,7 +227,13 @@ index 3eaee661..5a723b97 100644
  WINAPI
  TreeSetNamedSecurityInfoA(
      _In_     LPSTR               pObjectName,
-@@ -352,8 +375,9 @@ TreeSetNamedSecurityInfoA(
+@@ -347,13 +370,14 @@ TreeSetNamedSecurityInfoA(
+     _In_opt_ PSID                 pGroup,
+     _In_opt_ PACL                 pDacl,
+     _In_opt_ PACL                 pSacl,
+-    _In_     DWORD                dwAction,
++    _In_     _Win32_AssociatedEnum_(TREE_SEC_INFO) DWORD                dwAction,
+     _In_opt_ FN_PROGRESS          fnProgress,
      _In_     PROG_INVOKE_SETTING  ProgressInvokeSetting,
      _In_opt_ PVOID                Args
      );
@@ -238,6 +244,15 @@ index 3eaee661..5a723b97 100644
  WINAPI
  TreeSetNamedSecurityInfoW(
      _In_     LPWSTR               pObjectName,
+@@ -363,7 +387,7 @@ TreeSetNamedSecurityInfoW(
+     _In_opt_ PSID                 pGroup,
+     _In_opt_ PACL                 pDacl,
+     _In_opt_ PACL                 pSacl,
+-    _In_     DWORD                dwAction,
++    _In_     _Win32_AssociatedEnum_(TREE_SEC_INFO) DWORD                dwAction,
+     _In_opt_ FN_PROGRESS          fnProgress,
+     _In_     PROG_INVOKE_SETTING  ProgressInvokeSetting,
+     _In_opt_ PVOID                Args
 @@ -381,8 +405,9 @@ TreeSetNamedSecurityInfoW(
  // implement access control on their own objects.
  //----------------------------------------------------------------------------

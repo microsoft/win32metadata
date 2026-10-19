@@ -380,17 +380,20 @@ using WINHTTP_INTERNET_SCHEME = void;
                 .Where(value => value.GetProperty("status").GetString() == "converted"))
             {
                 string symbol = fact.GetProperty("symbol").GetString();
-                if (!before.Any(value => value.StartsWith("function " + symbol + " ", StringComparison.Ordinal)))
+                string function = symbol.Split("::")[0];
+                string targetName = symbol.Split("::").Last();
+                if (!before.Any(value => value.StartsWith("function " + function + " ", StringComparison.Ordinal)))
                     continue;
                 string payload = fact.GetProperty("category").GetString() switch
                 {
                     "setLastError" => "SetLastError",
-                    "associated-enum-return" => "AssociatedEnum",
+                    "associated-enum-return" or "associated-enum-parameter" => "AssociatedEnum",
+                    "contains-interior-pointers" => "ContainsInteriorPointers",
                     _ => fact.GetProperty("value").GetString().Split('=', 2)[1],
                 };
-                Assert.Contains(symbol + "|" + payload, annotations);
-                addedAnnotations.AddRange(beforeEnabled.Where(value => value.StartsWith("function " + symbol + " ", StringComparison.Ordinal))
-                    .Select(_ => symbol + "|" + payload));
+                Assert.Contains(targetName + "|" + payload, annotations);
+                addedAnnotations.AddRange(beforeEnabled.Where(value => value.StartsWith("function " + function + " ", StringComparison.Ordinal))
+                    .Select(_ => targetName + "|" + payload));
                 checkedFacts++;
             }
             Assert.Equal(beforeAnnotations.Concat(addedAnnotations).OrderBy(value => value, StringComparer.Ordinal),
@@ -456,7 +459,8 @@ using WINHTTP_INTERNET_SCHEME = void;
             foreach (var fact in report.RootElement.GetProperty("facts").EnumerateArray()
                 .Where(value => value.GetProperty("status").GetString() == "converted"))
             {
-                var projected = methods[fact.GetProperty("symbol").GetString()].ToArray();
+                string[] target = fact.GetProperty("symbol").GetString().Split("::");
+                var projected = methods[target[0]].ToArray();
                 if (projected.Length == 0)
                 {
                     nativeOnly++;
@@ -465,7 +469,28 @@ using WINHTTP_INTERNET_SCHEME = void;
                 foreach (var method in projected)
                 {
                     var attributes = method.AttributeLists.SelectMany(list => list.Attributes).ToArray();
-                    if (fact.GetProperty("category").GetString() == "associated-enum-return")
+                    if (fact.GetProperty("category").GetString() is "associated-enum-parameter" or "contains-interior-pointers")
+                    {
+                        Assert.Equal(2, target.Length);
+                        var parameter = Assert.Single(method.ParameterList.Parameters
+                            .Where(value => value.Identifier.ValueText == target[1]));
+                        var parameterAttributes = parameter.AttributeLists.SelectMany(list => list.Attributes);
+                        if (fact.GetProperty("category").GetString() == "associated-enum-parameter")
+                        {
+                            Assert.Equal(fact.GetProperty("nativeStorage").GetString()
+                                .Replace("UInt32", "uint", StringComparison.Ordinal)
+                                .Replace("Int32", "int", StringComparison.Ordinal), parameter.Type.ToString());
+                            var attribute = Assert.Single(parameterAttributes.Where(value =>
+                                value.Name.ToString().Split('.').Last() is "AssociatedEnum" or "AssociatedEnumAttribute"));
+                            Assert.Equal(fact.GetProperty("enumName").GetString(),
+                                Assert.IsType<LiteralExpressionSyntax>(
+                                    Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText);
+                        }
+                        else
+                            Assert.Single(parameterAttributes.Where(value => value.Name.ToString().Split('.').Last()
+                                is "ContainsInteriorPointers" or "ContainsInteriorPointersAttribute"));
+                    }
+                    else if (fact.GetProperty("category").GetString() == "associated-enum-return")
                     {
                         Assert.Equal(fact.GetProperty("nativeStorage").GetString() == "Int32" ? "int" : "uint",
                             method.ReturnType.ToString());

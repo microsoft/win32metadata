@@ -1871,63 +1871,59 @@
   {
       "addUsesTo": "CERT_QUERY_ENCODING_TYPE",
       "uses": [
-        {
-          "struct": "CERT_CONTEXT",
-          "field": "dwCertEncodingType"
-        },
-        {
-          "struct": "CRL_CONTEXT",
-          "field": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_GET_SIGNER_CERTIFICATE",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC",
-          "parameter": "dwCertEncodingType"
-        },
-        {
-          "method": "CryptQueryObject",
-          "parameter": "pdwMsgAndCertEncodingType"
-        },
-        {
-          "method": "CryptSIPGetSignedDataMsg",
-          "parameter": "pdwEncodingType"
-        },
-        {
-          "method": "PFN_CERT_DLL_OPEN_STORE_PROV_FUNC",
-          "parameter": "dwEncodingType"
-        },
-        {
-          "method": "CryptSIPPutSignedDataMsg",
-          "parameter": "dwEncodingType"
-        },
-        {
-          "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
-          "field": "dwMsgAndCertEncodingType"
-        }
-      ]
+      {
+        "struct": "CERT_CONTEXT",
+        "field": "dwCertEncodingType"
+      },
+      {
+        "struct": "CRL_CONTEXT",
+        "field": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_GET_SIGNER_CERTIFICATE",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptSIPGetSignedDataMsg",
+        "parameter": "pdwEncodingType"
+      },
+      {
+        "method": "PFN_CERT_DLL_OPEN_STORE_PROV_FUNC",
+        "parameter": "dwEncodingType"
+      },
+      {
+        "method": "CryptSIPPutSignedDataMsg",
+        "parameter": "dwEncodingType"
+      },
+      {
+        "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
+        "field": "dwMsgAndCertEncodingType"
+      }
+    ]
     },
   {
     "type": "uint",
@@ -2896,55 +2892,27 @@
   {
       "addUsesTo": "PERF_DETAIL",
       "uses": [
-        {
-          "method": "PdhEnumObjectItemsW",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectsHW",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectsW",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectItemsA",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectItemsHA",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectsHA",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectsA",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "method": "PdhEnumObjectItemsHW",
-          "parameter": "dwDetailLevel"
-        },
-        {
-          "struct": "PDH_BROWSE_DLG_CONFIG_A",
-          "field": "dwDefaultDetailLevel"
-        },
-        {
-          "struct": "PDH_BROWSE_DLG_CONFIG_HW",
-          "field": "dwDefaultDetailLevel"
-        },
-        {
-          "struct": "PDH_BROWSE_DLG_CONFIG_HA",
-          "field": "dwDefaultDetailLevel"
-        },
-        {
-          "struct": "PDH_BROWSE_DLG_CONFIG_W",
-          "field": "dwDefaultDetailLevel"
-        }
-      ]
+      {
+        "method": "PdhEnumObjectsHW",
+        "parameter": "dwDetailLevel"
+      },
+      {
+        "struct": "PDH_BROWSE_DLG_CONFIG_A",
+        "field": "dwDefaultDetailLevel"
+      },
+      {
+        "struct": "PDH_BROWSE_DLG_CONFIG_HW",
+        "field": "dwDefaultDetailLevel"
+      },
+      {
+        "struct": "PDH_BROWSE_DLG_CONFIG_HA",
+        "field": "dwDefaultDetailLevel"
+      },
+      {
+        "struct": "PDH_BROWSE_DLG_CONFIG_W",
+        "field": "dwDefaultDetailLevel"
+      }
+    ]
     },
   {
     "name": "SCROLLBAR_CONSTANTS",
@@ -5214,35 +5182,31 @@
   {
       "addUsesTo": "CERT_KEY_SPEC",
       "uses": [
-        {
-          "method": "NCryptCreatePersistedKey",
-          "parameter": "dwLegacyKeySpec"
-        },
-        {
-          "method": "NCryptOpenKey",
-          "parameter": "dwLegacyKeySpec"
-        },
-        {
-          "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
-          "field": "dwKeySpec"
-        },
-        {
-          "struct": "NCryptKeyName",
-          "field": "dwLegacyKeySpec"
-        },
-        {
-          "method": "CryptAcquireCertificatePrivateKey",
-          "parameter": "pdwKeySpec"
-        },
-        {
-          "method": "NCryptTranslateHandle",
-          "parameter": "dwLegacyKeySpec"
-        },
-        {
-          "method": "CryptXmlSign",
-          "parameter": "dwKeySpec"
-        }
-      ]
+      {
+        "method": "NCryptCreatePersistedKey",
+        "parameter": "dwLegacyKeySpec"
+      },
+      {
+        "method": "NCryptOpenKey",
+        "parameter": "dwLegacyKeySpec"
+      },
+      {
+        "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
+        "field": "dwKeySpec"
+      },
+      {
+        "struct": "NCryptKeyName",
+        "field": "dwLegacyKeySpec"
+      },
+      {
+        "method": "NCryptTranslateHandle",
+        "parameter": "dwLegacyKeySpec"
+      },
+      {
+        "method": "CryptXmlSign",
+        "parameter": "dwKeySpec"
+      }
+    ]
     },
   {
     "name": "ANIMATE_WINDOW_FLAGS",
@@ -10684,16 +10648,7 @@
   },
   {
       "addUsesTo": "TREE_SEC_INFO",
-      "uses": [
-        {
-          "method": "TreeSetNamedSecurityInfoA",
-          "parameter": "dwAction"
-        },
-        {
-          "method": "TreeSetNamedSecurityInfoW",
-          "parameter": "dwAction"
-        }
-      ]
+      "uses": []
     },
   {
     "name": "GET_WINDOW_CMD",

@@ -1045,12 +1045,7 @@ IMediaSample::IsDiscontinuity=[CanReturnMultipleSuccessValues]
 IMediaSample::IsPreroll=[CanReturnMultipleSuccessValues]
 IMediaSample::IsSyncPoint=[CanReturnMultipleSuccessValues]
 CERT_RDN_ATTR::dwValueType=[AssociatedEnum("CERT_RDN_ATTR_VALUE_TYPE")]
-CoGetClassObject::dwClsContext=[AssociatedEnum("CLSCTX")]
-CoInitializeEx::dwCoInit=[AssociatedEnum("COINIT")]
-CoInitializeSecurity::dwCapabilities=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
 CONTROLINFO::dwFlags=[AssociatedEnum("CTRLINFO")]
-CoRegisterClassObject::flags=[AssociatedEnum("REGCLS")]
-CoSetProxyBlanket::dwCapabilities=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
 D3D11_BUFFER_DESC::BindFlags=[AssociatedEnum("D3D11_BIND_FLAG")]
 D3D11_BUFFER_DESC::CPUAccessFlags=[AssociatedEnum("D3D11_CPU_ACCESS_FLAG")]
 D3D11_BUFFER_DESC::MiscFlags=[AssociatedEnum("D3D11_RESOURCE_MISC_FLAG")]
@@ -1125,19 +1120,7 @@ MFTEnumEx::Flags=[AssociatedEnum("MFT_ENUM_FLAG")]
 OLECMD::cmdf=[AssociatedEnum("OLECMDF")]
 OLECMD::cmdID=[AssociatedEnum("OLECMDID")]
 OleCreate::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateEx::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateFromData::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateFromDataEx::renderopt=[AssociatedEnum("OLERENDER")]
 OleCreateFromFile::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateFromFileEx::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLink::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLinkEx::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLinkFromData::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLinkFromDataEx::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLinkToFile::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateLinkToFileEx::renderopt=[AssociatedEnum("OLERENDER")]
-OleCreateStaticFromData::renderopt=[AssociatedEnum("OLERENDER")]
-OleRegGetUserType::dwFormOfType=[AssociatedEnum("USERCLASSTYPE")]
 OLEVERB::grfAttribs=[AssociatedEnum("OLEVERBATTRIB")]
 PathCleanupSpec::return=[AssociatedEnum("PCS_RET")]
 PathResolve::fFlags=[AssociatedEnum("PRF_FLAGS")]
@@ -1681,20 +1664,12 @@ GetTokenInformation::TokenInformation=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageid
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageid
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-packageidfromfullname
-GetCurrentPackageId::buffer=[ContainsInteriorPointers]
-GetPackageId::buffer=[ContainsInteriorPointers]
-PackageIdFromFullName::buffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getcurrentpackageinfo2
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageinfo2
-GetCurrentPackageInfo::buffer=[ContainsInteriorPointers]
-GetCurrentPackageInfo2::buffer=[ContainsInteriorPointers]
-GetPackageInfo::buffer=[ContainsInteriorPointers]
-GetPackageInfo2::buffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/appmodel/nf-appmodel-getpackageapplicationids
 # The pointer table and app ID strings share this single byte buffer.
-GetPackageApplicationIds::buffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersaddresses
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getadaptersinfo
 # https://learn.microsoft.com/windows/win32/api/iphlpapi/nf-iphlpapi-getperadapterinfo
@@ -1721,7 +1696,6 @@ WSAEnumNameSpaceProvidersW::lpnspBuffer=[ContainsInteriorPointers]
 WSAEnumNameSpaceProvidersExA::lpnspBuffer=[ContainsInteriorPointers]
 WSAEnumNameSpaceProvidersExW::lpnspBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptdecodeobject
-CryptDecodeObject::pvStructInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetchannelconfigproperty
 # https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgetqueryinfo
 # https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventinfo
@@ -1747,19 +1721,11 @@ GdipGetImageDecoders::decoders=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetenhancedkeyusage
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certcreatectlentryfromcertificatecontextproperties
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-certgetcertificatecontextproperty
-CertGetEnhancedKeyUsage::pUsage=[ContainsInteriorPointers]
-CertCreateCTLEntryFromCertificateContextProperties::pCtlEntry=[ContainsInteriorPointers]
-CertGetCertificateContextProperty::pvData=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptgetobjecturl
-CryptGetObjectUrl::pUrlArray=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptmsggetparam
-CryptMsgGetParam::pvData=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfo
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfoex
 # https://learn.microsoft.com/windows/win32/api/wincrypt/nf-wincrypt-cryptexportpublickeyinfofrombcryptkeyhandle
-CryptExportPublicKeyInfo::pInfo=[ContainsInteriorPointers]
-CryptExportPublicKeyInfoEx::pInfo=[ContainsInteriorPointers]
-CryptExportPublicKeyInfoFromBCryptKeyHandle::pInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceproviders32
 # https://learn.microsoft.com/windows/win32/api/ws2spi/nf-ws2spi-wscenumnamespaceprovidersex32
 # https://learn.microsoft.com/windows/win32/api/winsock2/nf-winsock2-wsalookupservicenexta
