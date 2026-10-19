@@ -1,6 +1,6 @@
 --- a/um/wingdi.h
 +++ b/um/wingdi.h
-@@ -10,6 +10,67 @@
+@@ -10,6 +10,68 @@
  
  #ifndef _WINGDI_
  #define _WINGDI_
@@ -34,6 +34,7 @@
 +typedef signed char PFD_LAYER_TYPE;
 +typedef unsigned char PFD_PIXEL_TYPE;
 +typedef unsigned short PRINTER_DEVICE_CAPABILITIES;
++typedef int RGN_COMBINE_MODE;
 +typedef unsigned int ROP_CODE;
 +typedef unsigned int SET_BOUNDS_RECT_FLAGS;
 +typedef int STRETCH_BLT_MODE;
@@ -68,7 +69,7 @@
  
  
  #pragma once
-@@ -95,10 +156,35 @@
+@@ -95,10 +157,35 @@
  #define DSTINVERT           (DWORD)0x00550009 /* dest = (NOT dest)               */
  #define BLACKNESS           (DWORD)0x00000042 /* dest = BLACK                    */
  #define WHITENESS           (DWORD)0x00FF0062 /* dest = WHITE                    */
@@ -104,7 +105,7 @@
  #endif /* WINVER >= 0x0500 */
  
  
-@@ -120,6 +206,14 @@
+@@ -120,6 +207,14 @@
  #define SIMPLEREGION        2
  #define COMPLEXREGION       3
  #define RGN_ERROR ERROR
@@ -119,7 +120,22 @@
  
  /* CombineRgn() Styles */
  #define RGN_AND             1
-@@ -135,6 +229,14 @@
+@@ -130,11 +225,29 @@
+ #define RGN_MIN             RGN_AND
+ #define RGN_MAX             RGN_COPY
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(RGN_COMBINE_MODE, int,
++    RGN_AND,
++    RGN_OR,
++    RGN_XOR,
++    RGN_DIFF,
++    RGN_COPY,
++    RGN_MIN,
++    RGN_MAX);
++#endif
+ /* StretchBlt() Modes */
+ #define BLACKONWHITE                 1
  #define WHITEONBLACK                 2
  #define COLORONCOLOR                 3
  #define HALFTONE                     4
@@ -134,7 +150,7 @@
  #define MAXSTRETCHBLTMODE            4
  
  #if(WINVER >= 0x0400)
-@@ -143,11 +245,25 @@
+@@ -143,11 +256,25 @@
  #define STRETCH_ORSCANS     WHITEONBLACK
  #define STRETCH_DELETESCANS COLORONCOLOR
  #define STRETCH_HALFTONE    HALFTONE
@@ -160,7 +176,7 @@
  #define POLYFILL_LAST                2
  
  /* Layout Orientation Options */
-@@ -157,6 +273,12 @@
+@@ -157,6 +284,12 @@
  #define LAYOUT_VBH                         0x00000004 // Vertical before horizontal
  #define LAYOUT_ORIENTATIONMASK             (LAYOUT_RTL | LAYOUT_BTT | LAYOUT_VBH)
  #define LAYOUT_BITMAPORIENTATIONPRESERVED  0x00000008
@@ -173,7 +189,7 @@
  #endif /* WINVER >= 0x0500 */
  
  /* Text Alignment Options */
-@@ -173,8 +295,19 @@
+@@ -173,8 +306,19 @@
  #if (WINVER >= 0x0400)
  #define TA_RTLREADING                256
  #define TA_MASK       (TA_BASELINE+TA_CENTER+TA_UPDATECP+TA_RTLREADING)
@@ -193,7 +209,7 @@
  #endif
  
  #define VTA_BASELINE TA_BASELINE
-@@ -183,6 +316,24 @@
+@@ -183,6 +327,24 @@
  #define VTA_CENTER   TA_CENTER
  #define VTA_BOTTOM   TA_RIGHT
  #define VTA_TOP      TA_LEFT
@@ -218,7 +234,7 @@
  
  #define ETO_OPAQUE                   0x0002
  #define ETO_CLIPPED                  0x0004
-@@ -210,6 +361,14 @@
+@@ -210,6 +372,14 @@
  #define DCB_SET         (DCB_RESET | DCB_ACCUMULATE)
  #define DCB_ENABLE      0x0004
  #define DCB_DISABLE     0x0008
@@ -233,7 +249,7 @@
  
  #ifndef NOMETAFILE
  
-@@ -582,6 +741,13 @@
+@@ -582,6 +752,13 @@
  #define MWT_LEFTMULTIPLY    2
  #define MWT_RIGHTMULTIPLY   3
  
@@ -247,7 +263,7 @@
  #define MWT_MIN             MWT_IDENTITY
  #define MWT_MAX             MWT_RIGHTMULTIPLY
  
-@@ -660,6 +826,13 @@
+@@ -660,6 +837,13 @@
  #define CS_DISABLE                      0x00000002L
  #define CS_DELETE_TRANSFORM             0x00000003L
  
@@ -261,7 +277,7 @@
  /* Logcolorspace signature */
  
  #define LCS_SIGNATURE           'PSOC'
-@@ -669,12 +842,23 @@
+@@ -669,12 +853,23 @@
  #define LCS_sRGB                'sRGB'
  #define LCS_WINDOWS_COLOR_SPACE 'Win '  // Windows default color space
  
@@ -285,7 +301,7 @@
  
  typedef LONG    LCSGAMUTMATCH;
  
-@@ -695,6 +879,17 @@
+@@ -695,6 +890,17 @@
  #define ICM_REGISTERICMATCHER           5
  #define ICM_UNREGISTERICMATCHER         6
  #define ICM_QUERYMATCH                  7
@@ -303,7 +319,7 @@
  
  /* Macros to retrieve CMYK values from a COLORREF */
  #define GetKValue(cmyk)      ((BYTE)(cmyk))
-@@ -907,6 +1102,16 @@
+@@ -907,6 +1113,16 @@
  #define BI_BITFIELDS  3L
  #define BI_JPEG       4L
  #define BI_PNG        5L
@@ -320,7 +336,7 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_NT4)
  #endif
  
-@@ -983,8 +1188,20 @@
+@@ -983,8 +1199,20 @@
  #define TCI_SRCCHARSET  1
  #define TCI_SRCCODEPAGE 2
  #define TCI_SRCFONTSIG  3
@@ -341,7 +357,7 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
  #pragma region Application Family
-@@ -1078,7 +1295,7 @@
+@@ -1078,7 +1306,7 @@
  /* Enhanced Metafile structures */
  typedef struct tagENHMETARECORD
  {
@@ -350,7 +366,7 @@
      DWORD   nSize;              // Record size in bytes
      DWORD   dParm[1];           // Parameters
  } ENHMETARECORD, *PENHMETARECORD, *LPENHMETARECORD;
-@@ -1131,6 +1348,14 @@
+@@ -1131,6 +1359,14 @@
  #define TMPF_DEVICE             0x08
  #define TMPF_TRUETYPE       0x04
  
@@ -365,7 +381,7 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -1173,7 +1398,7 @@
+@@ -1173,7 +1409,7 @@
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -374,7 +390,7 @@
      BYTE        tmCharSet;
  } TEXTMETRICA, *PTEXTMETRICA, NEAR *NPTEXTMETRICA, FAR *LPTEXTMETRICA;
  typedef struct tagTEXTMETRICW
-@@ -1196,7 +1421,7 @@
+@@ -1196,7 +1432,7 @@
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -383,7 +399,7 @@
      BYTE        tmCharSet;
  } TEXTMETRICW, *PTEXTMETRICW, NEAR *NPTEXTMETRICW, FAR *LPTEXTMETRICW;
  #ifdef UNICODE
-@@ -1256,7 +1481,7 @@
+@@ -1256,7 +1492,7 @@
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -392,7 +408,7 @@
      BYTE        tmCharSet;
      DWORD   ntmFlags;
      UINT    ntmSizeEM;
-@@ -1283,7 +1508,7 @@
+@@ -1283,7 +1519,7 @@
      BYTE        tmItalic;
      BYTE        tmUnderlined;
      BYTE        tmStruckOut;
@@ -401,7 +417,7 @@
      BYTE        tmCharSet;
      DWORD   ntmFlags;
      UINT    ntmSizeEM;
-@@ -1357,14 +1582,14 @@
+@@ -1357,14 +1593,14 @@
  /* Logical Brush (or Pattern) */
  typedef struct tagLOGBRUSH
    {
@@ -418,7 +434,7 @@
      COLORREF    lbColor;
      ULONG       lbHatch;
    } LOGBRUSH32, *PLOGBRUSH32, NEAR *NPLOGBRUSH32, FAR *LPLOGBRUSH32;
-@@ -1565,6 +1790,21 @@
+@@ -1565,6 +1801,21 @@
  #define OUT_SCREEN_OUTLINE_PRECIS   9
  #define OUT_PS_ONLY_PRECIS          10
  
@@ -440,7 +456,7 @@
  #define CLIP_DEFAULT_PRECIS     0
  #define CLIP_CHARACTER_PRECIS   1
  #define CLIP_STROKE_PRECIS      2
-@@ -1579,19 +1819,44 @@
+@@ -1579,19 +1830,44 @@
  #define DEFAULT_QUALITY         0
  #define DRAFT_QUALITY           1
  #define PROOF_QUALITY           2
@@ -485,7 +501,7 @@
  #if(WINVER >= 0x0400)
  #define MONO_FONT               8
  #endif /* WINVER >= 0x0400 */
-@@ -1605,6 +1870,19 @@
+@@ -1605,6 +1881,19 @@
  #define GB2312_CHARSET          134
  #define CHINESEBIG5_CHARSET     136
  #define OEM_CHARSET             255
@@ -505,7 +521,7 @@
  #if(WINVER >= 0x0400)
  #define JOHAB_CHARSET           130
  #define HEBREW_CHARSET          177
-@@ -1618,6 +1896,21 @@
+@@ -1618,6 +1907,21 @@
  
  #define MAC_CHARSET             77
  #define BALTIC_CHARSET          186
@@ -527,7 +543,7 @@
  
  #define FS_LATIN1               0x00000001L
  #define FS_LATIN2               0x00000002L
-@@ -1648,6 +1941,16 @@
+@@ -1648,6 +1952,16 @@
  #define FF_SCRIPT           0x40    /* Cursive, etc. */
  #define FF_DECORATIVE       0x50    /* Old English, etc. */
  
@@ -544,7 +560,7 @@
  /* Font Weights */
  #define FW_DONTCARE         0
  #define FW_THIN             100
-@@ -1665,6 +1968,25 @@
+@@ -1665,6 +1979,25 @@
  #define FW_DEMIBOLD         FW_SEMIBOLD
  #define FW_ULTRABOLD        FW_EXTRABOLD
  #define FW_BLACK            FW_HEAVY
@@ -570,7 +586,7 @@
  
  #define PANOSE_COUNT               10
  #define PAN_FAMILYTYPE_INDEX        0
-@@ -1873,12 +2195,24 @@
+@@ -1873,12 +2206,24 @@
  /* Background Modes */
  #define TRANSPARENT         1
  #define OPAQUE              2
@@ -595,7 +611,7 @@
  #define GM_LAST             2
  
  /* PolyDraw and GetPath point types */
-@@ -1896,6 +2230,18 @@
+@@ -1896,6 +2241,18 @@
  #define MM_TWIPS            6
  #define MM_ISOTROPIC        7
  #define MM_ANISOTROPIC      8
@@ -614,7 +630,7 @@
  
  /* Min and Max Mapping Mode values */
  #define MM_MIN              MM_TEXT
-@@ -1925,13 +2271,45 @@
+@@ -1925,13 +2282,45 @@
  #define DEFAULT_PALETTE     15
  #define SYSTEM_FIXED_FONT   16
  
@@ -660,7 +676,7 @@
  #endif
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
-@@ -1957,6 +2335,21 @@
+@@ -1957,6 +2346,21 @@
  #define BS_DIBPATTERN8X8    8
  #define BS_MONOPATTERN      9
  
@@ -682,7 +698,7 @@
  /* Hatch Styles */
  #define HS_HORIZONTAL       0       /* ----- */
  #define HS_VERTICAL         1       /* ||||| */
-@@ -1964,6 +2357,16 @@
+@@ -1964,6 +2368,16 @@
  #define HS_BDIAGONAL        3       /* ///// */
  #define HS_CROSS            4       /* +++++ */
  #define HS_DIAGCROSS        5       /* xxxxx */
@@ -699,7 +715,7 @@
  #define HS_API_MAX          12
  
  /* Pen Styles */
-@@ -1992,8 +2395,39 @@
+@@ -1992,8 +2406,39 @@
  #define PS_GEOMETRIC        0x00010000
  #define PS_TYPE_MASK        0x000F0000
  
@@ -739,7 +755,7 @@
  
  /* Device Parameters for GetDeviceCaps() */
  #define DRIVERVERSION 0     /* Device driver version                    */
-@@ -2046,9 +2480,57 @@
+@@ -2046,9 +2491,57 @@
                               /* pixels                                  */
  #define BLTALIGNMENT    119  /* Preferred blt alignment                 */
  
@@ -797,7 +813,7 @@
  #endif /* WINVER >= 0x0500 */
  
  #ifndef NOGDICAPMASKS
-@@ -2177,6 +2659,13 @@
+@@ -2177,6 +2670,13 @@
  #define SYSPAL_NOSTATIC 2
  #define SYSPAL_NOSTATIC256 3
  
@@ -811,7 +827,7 @@
  /* constants for CreateDIBitmap */
  #define CBM_INIT        0x04L   /* initialize bitmap */
  
-@@ -2184,6 +2673,12 @@
+@@ -2184,6 +2684,12 @@
  /* ExtFloodFill style flags */
  #define  FLOODFILLBORDER   0
  #define  FLOODFILLSURFACE  1
@@ -824,7 +840,7 @@
  
  /* size of a device name string */
  #define CCHDEVICENAME 32
-@@ -2430,10 +2925,25 @@
+@@ -2430,10 +2936,25 @@
  /* current version of specification */
  #if (WINVER >= 0x0500) || (_WIN32_WINNT >= _WIN32_WINNT_NT4)
  #define DM_SPECVERSION 0x0401
@@ -850,7 +866,7 @@
  #endif /* WINVER */
  
  /* field selection bits */
-@@ -2445,9 +2955,20 @@
+@@ -2445,9 +2966,20 @@
  #if(WINVER >= 0x0500)
  #define DM_POSITION             0x00000020L
  #define DM_NUP                  0x00000040L
@@ -871,7 +887,7 @@
  #endif /* WINVER >= 0x0501 */
  #define DM_COPIES               0x00000100L
  #define DM_DEFAULTSOURCE        0x00000200L
-@@ -2471,9 +2992,24 @@
+@@ -2471,9 +3003,24 @@
  #define DM_DITHERTYPE           0x04000000L
  #define DM_PANNINGWIDTH         0x08000000L
  #define DM_PANNINGHEIGHT        0x10000000L
@@ -896,7 +912,7 @@
  #endif /* WINVER >= 0x0501 */
  
  
-@@ -2647,22 +3183,53 @@
+@@ -2647,22 +3194,53 @@
  #define DMCOLOR_MONOCHROME  1
  #define DMCOLOR_COLOR       2
  
@@ -950,7 +966,7 @@
  
  #if(WINVER >= 0x0501)
  /* DEVMODE dmDisplayOrientation specifiations */
-@@ -2671,10 +3238,25 @@
+@@ -2671,10 +3249,25 @@
  #define DMDO_180        2
  #define DMDO_270        3
  
@@ -976,7 +992,7 @@
  #endif /* WINVER >= 0x0501 */
  
  /* DEVMODE dmDisplayFlags flags */
-@@ -2734,7 +3316,7 @@
+@@ -2734,7 +3327,7 @@
      DWORD  cb;
      CHAR   DeviceName[32];
      CHAR   DeviceString[128];
@@ -985,7 +1001,7 @@
      CHAR   DeviceID[128];
      CHAR   DeviceKey[128];
  } DISPLAY_DEVICEA, *PDISPLAY_DEVICEA, *LPDISPLAY_DEVICEA;
-@@ -2742,7 +3324,7 @@
+@@ -2742,7 +3335,7 @@
      DWORD  cb;
      WCHAR  DeviceName[32];
      WCHAR  DeviceString[128];
@@ -994,7 +1010,7 @@
      WCHAR  DeviceID[128];
      WCHAR  DeviceKey[128];
  } DISPLAY_DEVICEW, *PDISPLAY_DEVICEW, *LPDISPLAY_DEVICEW;
-@@ -2766,25 +3348,64 @@
+@@ -2766,25 +3359,64 @@
  #define DISPLAY_DEVICE_VGA_COMPATIBLE           0x00000010
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define DISPLAY_DEVICE_REMOVABLE                0x00000020
@@ -1059,7 +1075,7 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  #if(WINVER >= 0x0601)
-@@ -3334,6 +3955,16 @@
+@@ -3334,6 +3966,16 @@
  #define QDC_INCLUDE_HMD                               0x00000020
  #define QDC_VIRTUAL_REFRESH_RATE_AWARE                0x00000040
  
@@ -1076,7 +1092,7 @@
  //
  // Definitions used by SetDisplayConfig.
  //
-@@ -3358,6 +3989,27 @@
+@@ -3358,6 +4000,27 @@
  
  
  #define SDC_VIRTUAL_REFRESH_RATE_AWARE   0x00020000
@@ -1104,7 +1120,7 @@
  
  
  #endif /* WINVER >= 0x0601 */
-@@ -3585,15 +4237,36 @@
+@@ -3585,15 +4248,36 @@
  #define GGO_NATIVE         2
  #define GGO_BEZIER         3
  
@@ -1141,7 +1157,7 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  #define TT_POLYGON_TYPE   24
-@@ -3653,6 +4326,25 @@
+@@ -3653,6 +4337,25 @@
  #define GCP_NEUTRALOVERRIDE 0x02000000L
  #define GCP_NUMERICSLATIN   0x04000000L
  #define GCP_NUMERICSLOCAL   0x08000000L
@@ -1167,7 +1183,7 @@
  
  #define GCPCLASS_LATIN                  1
  #define GCPCLASS_HEBREW                 2
-@@ -3735,8 +4427,8 @@
+@@ -3735,8 +4438,8 @@
  {
      WORD  nSize;
      WORD  nVersion;
@@ -1178,7 +1194,7 @@
      BYTE  cColorBits;
      BYTE  cRedBits;
      BYTE  cRedShift;
-@@ -3768,10 +4460,23 @@
+@@ -3768,10 +4471,23 @@
  #define PFD_TYPE_RGBA        0
  #define PFD_TYPE_COLORINDEX  1
  
@@ -1202,7 +1218,7 @@
  
  /* PIXELFORMATDESCRIPTOR flags */
  #define PFD_DOUBLEBUFFER            0x00000001
-@@ -3796,6 +4501,29 @@
+@@ -3796,6 +4512,29 @@
  #define PFD_DOUBLEBUFFER_DONTCARE   0x40000000
  #define PFD_STEREO_DONTCARE         0x80000000
  
@@ -1232,7 +1248,7 @@
  
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
-@@ -3851,7 +4579,9 @@
+@@ -3851,7 +4590,9 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1242,7 +1258,7 @@
  WINGDIAPI int WINAPI AddFontResourceW(_In_ LPCWSTR);
  #ifdef UNICODE
  #define AddFontResource  AddFontResourceW
-@@ -3859,49 +4589,78 @@
+@@ -3859,49 +4600,78 @@
  #define AddFontResource  AddFontResourceA
  #endif // !UNICODE
  
@@ -1323,7 +1339,7 @@
  WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
                               _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _In_ DWORD iCharSet, _In_ DWORD iOutPrecision, _In_ DWORD iClipPrecision,
                               _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCWSTR pszFaceName);
-@@ -3911,44 +4670,67 @@
+@@ -3911,44 +4681,67 @@
  #define CreateFont  CreateFontA
  #endif // !UNICODE
  
@@ -1394,7 +1410,7 @@
  WINGDIAPI int  WINAPI DescribePixelFormat(  _In_ HDC hdc,
                                              _In_ int iPixelFormat,
                                              _In_ UINT nBytes,
-@@ -3975,6 +4757,39 @@
+@@ -3975,6 +4768,39 @@
  #define DM_IN_PROMPT        DM_PROMPT
  #define DM_OUT_BUFFER       DM_COPY
  #define DM_OUT_DEFAULT      DM_UPDATE
@@ -1434,7 +1450,7 @@
  
  /* device capabilities indices */
  #define DC_FIELDS           1
-@@ -3995,11 +4810,38 @@
+@@ -3995,11 +4821,38 @@
  #define DC_PAPERNAMES       16
  #define DC_ORIENTATION      17
  #define DC_COPIES           18
@@ -1473,7 +1489,7 @@
  #define DC_MANUFACTURER         23
  #define DC_MODEL                24
  #endif /* WINVER >= 0x0400 */
-@@ -4018,9 +4860,28 @@
+@@ -4018,9 +4871,28 @@
  #define DC_PRINTRATEPPM         31
  #define DC_COLORDEVICE          32
  #define DC_NUP                  33
@@ -1502,7 +1518,7 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #endif /* WINVER >= 0x0500 */
  
-@@ -4045,23 +4906,25 @@
+@@ -4045,23 +4917,25 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1530,7 +1546,7 @@
      _Out_writes_opt_(_Inexpressible_(1)) LPWSTR          pOutput,
      _In_opt_            CONST DEVMODEW   *pDevMode
      );
-@@ -4071,6 +4934,7 @@
+@@ -4071,6 +4945,7 @@
  #define DeviceCapabilities  DeviceCapabilitiesA
  #endif // !UNICODE
  
@@ -1538,7 +1554,7 @@
  WINGDIAPI int  WINAPI DrawEscape(   _In_ HDC    hdc,
                                      _In_ int    iEscape,
                                      _In_ int    cjIn,
-@@ -4079,7 +4943,9 @@
+@@ -4079,7 +4954,9 @@
   WINGDIAPI BOOL WINAPI Ellipse( _In_ HDC hdc, _In_ int left, _In_ int top,  _In_ int right, _In_ int bottom);
  
  #if(WINVER >= 0x0400)
@@ -1548,7 +1564,7 @@
  WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
  #ifdef UNICODE
  #define EnumFontFamiliesEx  EnumFontFamiliesExW
-@@ -4088,14 +4954,18 @@
+@@ -4088,14 +4965,18 @@
  #endif // !UNICODE
  #endif /* WINVER >= 0x0400 */
  
@@ -1567,7 +1583,7 @@
  WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define EnumFonts  EnumFontsW
-@@ -4110,33 +4980,48 @@
+@@ -4110,33 +4991,48 @@
  #endif
  
  
@@ -1618,7 +1634,7 @@
  WINGDIAPI
  int
  WINAPI
-@@ -4144,6 +5029,7 @@
+@@ -4144,6 +5040,7 @@
      _In_ HDC hdc
      );
  
@@ -1626,7 +1642,7 @@
  WINGDIAPI
  LONG
  WINAPI
-@@ -4153,26 +5039,35 @@
+@@ -4153,26 +5050,35 @@
      _Out_writes_bytes_(cb) LPVOID lpvBits
      );
  
@@ -1662,7 +1678,7 @@
  WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidthFloat  GetCharWidthFloatW
-@@ -4180,10 +5075,12 @@
+@@ -4180,10 +5086,12 @@
  #define GetCharWidthFloat  GetCharWidthFloatA
  #endif // !UNICODE
  
@@ -1675,7 +1691,7 @@
  WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
                                              _In_ UINT wFirst,
                                              _In_ UINT wLast,
-@@ -4194,22 +5091,32 @@
+@@ -4194,22 +5102,32 @@
  #define GetCharABCWidths  GetCharABCWidthsA
  #endif // !UNICODE
  
@@ -1709,7 +1725,7 @@
  _Success_(return != GDI_ERROR)
  WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
                                          _In_ DWORD   dwTable,
-@@ -4218,17 +5125,19 @@
+@@ -4218,17 +5136,19 @@
                                          _In_ DWORD   cjBuffer
                                          );
  
@@ -1731,7 +1747,7 @@
                                              _Out_ LPGLYPHMETRICS lpgm,
                                              _In_ DWORD cjBuffer,
                                              _Out_writes_bytes_opt_(cjBuffer) LPVOID pvBuffer,
-@@ -4240,8 +5149,11 @@
+@@ -4240,8 +5160,11 @@
  #define GetGlyphOutline  GetGlyphOutlineA
  #endif // !UNICODE
  
@@ -1744,7 +1760,7 @@
  WINGDIAPI UINT  WINAPI GetMetaFileBitsEx(_In_ HMETAFILE hMF, _In_ UINT cbBuffer, _Out_writes_bytes_opt_(cbBuffer) LPVOID lpData);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileA( _In_ LPCSTR lpName);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
-@@ -4250,16 +5162,21 @@
+@@ -4250,16 +5173,21 @@
  #else
  #define GetMetaFile  GetMetaFileA
  #endif // !UNICODE
@@ -1766,7 +1782,7 @@
  WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
                                                  _In_ UINT cjCopy,
                                                  _Out_writes_bytes_opt_(cjCopy) LPOUTLINETEXTMETRICW potm);
-@@ -4271,24 +5188,36 @@
+@@ -4271,24 +5199,36 @@
  
  #endif /* NOTEXTMETRIC */
  
@@ -1805,7 +1821,7 @@
  WINGDIAPI
  UINT
  WINAPI
-@@ -4299,11 +5228,16 @@
+@@ -4299,11 +5239,16 @@
      _Out_writes_opt_(cEntries) LPPALETTEENTRY pPalEntries
      );
  
@@ -1823,7 +1839,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4313,6 +5247,7 @@
+@@ -4313,6 +5258,7 @@
      _In_ int c,
      _Out_ LPSIZE lpsz
      );
@@ -1831,7 +1847,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4328,6 +5263,7 @@
+@@ -4328,6 +5274,7 @@
  #define GetTextExtentPoint  GetTextExtentPointA
  #endif // !UNICODE
  
@@ -1839,7 +1855,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4337,6 +5273,7 @@
+@@ -4337,6 +5284,7 @@
      _In_ int c,
      _Out_ LPSIZE psizl
      );
@@ -1847,7 +1863,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4352,6 +5289,7 @@
+@@ -4352,6 +5300,7 @@
  #define GetTextExtentPoint32  GetTextExtentPoint32A
  #endif // !UNICODE
  
@@ -1855,7 +1871,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4364,6 +5302,7 @@
+@@ -4364,6 +5313,7 @@
      _Out_writes_to_opt_ (cchString, *lpnFit) LPINT lpnDx,
      _Out_ LPSIZE lpSize
      );
@@ -1863,7 +1879,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4383,12 +5322,19 @@
+@@ -4383,12 +5333,19 @@
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -1886,7 +1902,7 @@
  #ifdef UNICODE
  #define GetCharacterPlacement  GetCharacterPlacementW
  #else
-@@ -4428,15 +5374,20 @@
+@@ -4428,15 +5385,20 @@
  
  #define GGI_MARK_NONEXISTING_GLYPHS  0X0001
  
@@ -1907,7 +1923,7 @@
  WINGDIAPI BOOL  WINAPI GetTextExtentExPointI (  _In_ HDC hdc,
                                                  _In_reads_(cwchString) LPWORD lpwszString,
                                                  _In_ int cwchString,
-@@ -4446,6 +5397,7 @@
+@@ -4446,6 +5408,7 @@
                                                  _Out_ LPSIZE lpSize
                                                  );
  
@@ -1915,7 +1931,7 @@
  WINGDIAPI BOOL  WINAPI GetCharWidthI(   _In_ HDC hdc,
                                          _In_ UINT giFirst,
                                          _In_ UINT cgi,
-@@ -4453,6 +5405,7 @@
+@@ -4453,6 +5416,7 @@
                                          _Out_writes_(cgi) LPINT piWidths
                                          );
  
@@ -1923,7 +1939,7 @@
  WINGDIAPI BOOL  WINAPI GetCharABCWidthsI(   _In_ HDC    hdc,
                                              _In_ UINT   giFirst,
                                              _In_ UINT   cgi,
-@@ -4476,28 +5429,40 @@
+@@ -4476,28 +5440,40 @@
      LONG   dvValues[MM_MAX_NUMAXES];
  } DESIGNVECTOR, *PDESIGNVECTOR, FAR *LPDESIGNVECTOR;
  
@@ -1966,7 +1982,7 @@
  
  // The actual size of the DESIGNVECTOR and ENUMLOGFONTEXDV structures
  // is determined by dvNumAxes,
-@@ -4573,7 +5538,9 @@
+@@ -4573,7 +5549,9 @@
  typedef LPENUMLOGFONTEXDVA LPENUMLOGFONTEXDV;
  #endif // UNICODE
  
@@ -1976,7 +1992,7 @@
  WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
  #ifdef UNICODE
  #define CreateFontIndirectEx  CreateFontIndirectExW
-@@ -4611,66 +5578,107 @@
+@@ -4611,66 +5589,107 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2091,7 +2107,7 @@
  WINGDIAPI
  LONG WINAPI
  SetBitmapBits(
-@@ -4678,39 +5686,66 @@
+@@ -4678,39 +5697,66 @@
      _In_ DWORD cb,
      _In_reads_bytes_(cb) CONST VOID *pvBits);
  
@@ -2168,7 +2184,7 @@
  WINGDIAPI BOOL  WINAPI UpdateColors(_In_ HDC hdc);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4826,6 +5861,7 @@
+@@ -4826,6 +5872,7 @@
  
  #define AC_SRC_ALPHA                0x01
  
@@ -2176,7 +2192,7 @@
  WINGDIAPI BOOL WINAPI AlphaBlend(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4839,6 +5875,7 @@
+@@ -4839,6 +5886,7 @@
      _In_ int hSrc,
      _In_ BLENDFUNCTION ftn);
  
@@ -2184,7 +2200,7 @@
  WINGDIAPI BOOL WINAPI TransparentBlt(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4860,8 +5897,16 @@
+@@ -4860,8 +5908,16 @@
  #define GRADIENT_FILL_RECT_H    0x00000000
  #define GRADIENT_FILL_RECT_V    0x00000001
  #define GRADIENT_FILL_TRIANGLE  0x00000002
@@ -2201,7 +2217,7 @@
  WINGDIAPI
  BOOL
  WINAPI
-@@ -4871,7 +5916,7 @@
+@@ -4871,7 +5927,7 @@
      _In_ ULONG nVertex,
      _In_ PVOID pMesh,
      _In_ ULONG nMesh,
@@ -2210,7 +2226,7 @@
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4885,17 +5930,20 @@
+@@ -4885,17 +5941,20 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  
@@ -2232,7 +2248,7 @@
  
  #endif
  
-@@ -4903,49 +5951,63 @@
+@@ -4903,49 +5962,63 @@
  
  #ifndef NOMETAFILE
  
@@ -2296,7 +2312,7 @@
  WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPWSTR lpDescription);
-@@ -4954,34 +6016,44 @@
+@@ -4954,34 +6027,44 @@
  #else
  #define GetEnhMetaFileDescription  GetEnhMetaFileDescriptionA
  #endif // !UNICODE
@@ -2341,7 +2357,7 @@
  WINGDIAPI BOOL  WINAPI GdiComment(_In_ HDC hdc, _In_ UINT nSize, _In_reads_bytes_(nSize) CONST BYTE *lpData);
  
  #endif  /* NOMETAFILE */
-@@ -5029,11 +6101,17 @@
+@@ -5029,11 +6112,17 @@
  } DIBSECTION, FAR *LPDIBSECTION, *PDIBSECTION;
  
  
@@ -2360,7 +2376,7 @@
  WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM *lpxf1, _In_ CONST XFORM *lpxf2);
  
  #define GDI_WIDTHBYTES(bits) ((DWORD)(((bits)+31) & (~31)) / 8)
-@@ -5041,6 +6119,8 @@
+@@ -5041,6 +6130,8 @@
  #define GDI__DIBSIZE(bi) (GDI_DIBWIDTHBYTES(bi) * (DWORD)(bi).biHeight)
  #define GDI_DIBSIZE(bi) ((bi).biHeight < 0 ? (-1)*(GDI__DIBSIZE(bi)) : GDI__DIBSIZE(bi))
  
@@ -2369,7 +2385,7 @@
  WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
      _In_opt_        HDC               hdc,
      _In_            CONST BITMAPINFO *pbmi,
-@@ -5052,11 +6132,13 @@
+@@ -5052,11 +6143,13 @@
      _In_            DWORD             offset);
  
  
@@ -2383,7 +2399,7 @@
  WINGDIAPI UINT WINAPI SetDIBColorTable( _In_ HDC  hdc,
                                          _In_ UINT iStart,
                                          _In_ UINT cEntries,
-@@ -5112,8 +6194,11 @@
+@@ -5112,8 +6205,11 @@
      SHORT  caRedGreenTint;
  } COLORADJUSTMENT, *PCOLORADJUSTMENT, FAR *LPCOLORADJUSTMENT;
  
@@ -2395,7 +2411,7 @@
  WINGDIAPI HPALETTE WINAPI CreateHalftonePalette( _In_opt_ HDC hdc);
  
  #ifdef STRICT
-@@ -5153,41 +6238,67 @@
+@@ -5153,41 +6249,67 @@
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
@@ -2465,7 +2481,7 @@
  WINGDIAPI int  WINAPI GetArcDirection(_In_ HDC hdc);
  
  WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
-@@ -5220,22 +6331,29 @@
+@@ -5220,22 +6342,29 @@
  #endif  /* _M_CEE */
  
  
@@ -2495,7 +2511,7 @@
  WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
  #ifdef UNICODE
  #define PolyTextOut  PolyTextOutW
-@@ -5243,31 +6361,51 @@
+@@ -5243,31 +6372,51 @@
  #define PolyTextOut  PolyTextOutA
  #endif // !UNICODE
  
@@ -2548,7 +2564,7 @@
  WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
-@@ -5283,9 +6421,11 @@
+@@ -5283,9 +6432,11 @@
     int  iKernAmount;
  } KERNINGPAIR, *LPKERNINGPAIR;
  
@@ -2560,7 +2576,7 @@
  WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
-@@ -5296,12 +6436,17 @@
+@@ -5296,12 +6447,17 @@
  #endif // !UNICODE
  
  
@@ -2578,7 +2594,7 @@
  WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
  
  #if(WINVER >= 0x0400)
-@@ -5311,6 +6456,14 @@
+@@ -5311,6 +6467,14 @@
  #define ICM_QUERY             3
  #define ICM_DONE_OUTSIDEDC    4
  
@@ -2593,7 +2609,7 @@
  typedef int (CALLBACK* ICMENUMPROCA)(LPSTR, LPARAM);
  typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #ifdef UNICODE
-@@ -5319,16 +6472,21 @@
+@@ -5319,16 +6483,21 @@
  #define ICMENUMPROC  ICMENUMPROCA
  #endif // !UNICODE
  
@@ -2616,7 +2632,7 @@
  WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
-@@ -5338,18 +6496,24 @@
+@@ -5338,18 +6507,24 @@
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -2641,7 +2657,7 @@
  WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
-@@ -5359,17 +6523,24 @@
+@@ -5359,17 +6534,24 @@
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -2667,7 +2683,7 @@
  WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
-@@ -5377,9 +6548,11 @@
+@@ -5377,9 +6559,11 @@
  #define EnumICMProfiles  EnumICMProfilesA
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
@@ -2681,7 +2697,7 @@
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,6 +6567,7 @@
+@@ -5394,6 +6578,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -2689,7 +2705,7 @@
  WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hPal, _In_ DWORD deFirst, _In_ DWORD num);
  #endif
  
-@@ -5522,6 +6696,17 @@
+@@ -5522,6 +6707,17 @@
  #define EMR_GLSRECORD                  102
  #define EMR_GLSBOUNDEDRECORD           103
  #define EMR_PIXELFORMAT                104
@@ -2707,7 +2723,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0500)
-@@ -5539,29 +6724,171 @@
+@@ -5539,29 +6735,171 @@
  #define EMR_TRANSPARENTBLT             116
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define EMR_RESERVED_117               117
@@ -2880,7 +2896,7 @@
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +7084,7 @@
+@@ -5757,7 +7095,7 @@
  {
      EMR     emr;
      XFORM   xform;
@@ -2889,7 +2905,7 @@
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -6283,7 +7610,7 @@
+@@ -6283,7 +7621,7 @@
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -2898,7 +2914,7 @@
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,22 +7654,44 @@
+@@ -6327,22 +7665,44 @@
  
  // OpenGL wgl prototypes
  
@@ -2943,7 +2959,7 @@
  WINGDIAPI BOOL  WINAPI SwapBuffers(HDC);
  
  typedef struct _POINTFLOAT {
-@@ -6360,8 +7709,12 @@
+@@ -6360,8 +7720,12 @@
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -2956,7 +2972,7 @@
  WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
-@@ -6446,13 +7799,22 @@
+@@ -6446,13 +7810,22 @@
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  

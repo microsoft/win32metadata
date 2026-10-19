@@ -14,6 +14,13 @@ recipe fragments into the canonical recipe rather than replacing its stage, SDK
 tree, tools or annotation header. Later source batches, parameter-override tooling
 and the manual-import availability bridge belong to a subsequent explicit cut.
 
+Bind unchanged native providers required by an admitted use delta, not just the
+delta's edited declarations. The first full header pass exposed the missing
+`RGN_COMBINE_MODE` provider inherited by the three Gdi associations. Restore only
+its existing guarded `int` binding and seven native-macro members from the admitted
+input's parent; this is a zero-credit dependency correction, not another source
+batch or permission to adopt the ancestor's cumulative patch.
+
 Source integration is not API acceptance. The CryptXML URI-query member deliberately
 uses the shipped SDK value `0x4` instead of the legacy sidecar value `3`; retain that
 raw difference along with native enum ordering, anonymous-coordinate and native
