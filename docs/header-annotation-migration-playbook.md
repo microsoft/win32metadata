@@ -257,19 +257,6 @@ quote region. Do not place a bare annotation or documentation comment in
 `cpp_quote` inside an interface: MIDL hoists it outside the method. Do not
 change a remotable method to `[local]`. Even legal annotations on a local method
 also decorate its generated proxy, so verify the actual target in final metadata.
-For an explicit parameter metadata override, use
-`_Win32_AnnotateParameter_(Interface::Method, nativeParameter, annotation)` in the
-same existing trailing region. Preserve native `[in]`, `[out]`, pointer,
-correlation and retval attributes. A new quote region can add native RPC handles
-and change proxy source even though MIDL succeeds; retain that case for manual
-source-context review rather than filtering the new declarations out of a diff.
-The selector names the original native parameter before managed remapping.
-`_Win32_Optional_(true|false)` and `_Win32_ComOutPtr_(true|false)` require a
-separately qualified reader/header/runtime; the frozen239 Headers adapter does
-not supply them. Invalid targets/storage, malformed booleans and duplicate
-selectors fail explicitly. Native SAL/MIDL is derived first, then only the
-selected metadata fact is overridden; pointer types, native direction, array
-counts and unrelated attributes must not change.
 Group interface forward carriers in an existing opening quote region to avoid
 creating new compiler-generated standard-interface regions between interfaces.
 The same SDK stage copies its verified manifest and MIDL evidence to

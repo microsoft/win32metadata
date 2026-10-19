@@ -28,90 +28,10 @@ namespace Win32MetadataScraperTests
         [InlineData("ImportLibrary(\"x.dll\", \"#65536\")")]
         [InlineData("ImportLibrary(\"x.dll\", \"#not-an-ordinal\")")]
         [InlineData("SupportedOSPlatform(\"windows10.0.99999\")")]
-        [InlineData("Optional")]
-        [InlineData("Optional()")]
-        [InlineData("Optional(1)")]
-        [InlineData("Optional(TRUE)")]
-        [InlineData("Optional(\"false\")")]
-        [InlineData("ComOutPtr(false, true)")]
-        [InlineData("ComOutPtr(true || false)")]
         [InlineData("Unsupported")]
         public void RejectsMalformedPayload(string payload)
         {
             Assert.Throws<FormatException>(() => HeaderAnnotation.Parse(payload));
-        }
-
-        [Theory]
-        [InlineData("Optional(true)", "Optional", "true")]
-        [InlineData("Optional(false)", "Optional", "false")]
-        [InlineData("Win32Metadata.ComOutPtr(true)", "ComOutPtr", "true")]
-        [InlineData("ComOutPtr(false)", "ComOutPtr", "false")]
-        public void ParameterOverridesRequireExplicitBooleanPayloads(string payload, string name, string value)
-        {
-            var annotation = HeaderAnnotation.Parse(payload);
-            Assert.Equal(name, annotation.Name);
-            Assert.Equal(value, Assert.Single(annotation.Arguments));
-        }
-
-        [Theory]
-        [InlineData("_Win32_Optional_(true) int F();", "not valid on")]
-        [InlineData("struct S { _Win32_Optional_(false) int value; };", "not valid on")]
-        [InlineData("void F(_Win32_ComOutPtr_(true) unsigned value);", "writable output pointer storage")]
-        [InlineData("void F(_Win32_ComOutPtr_(true) void* value);", "writable output pointer storage")]
-        [InlineData("void F(_Win32_ComOutPtr_(true) void* const* value);", "writable output pointer storage")]
-        [InlineData("void F(_In_ _Win32_ComOutPtr_(true) void** value);", "input-only")]
-        [InlineData("void F(/* [in] */ _Win32_ComOutPtr_(true) void** value);", "input-only")]
-        [InlineData("void F(_Win32_Optional_(true) _Win32_Optional_(false) unsigned value);", "Duplicate")]
-        [InlineData("void F(_Win32_Optional_(1) unsigned value);", "exactly true or false")]
-        public void ParameterOverridesRejectInvalidDeclarations(string declarations, string diagnostic)
-        {
-            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
-            Assert.Contains(diagnostic, fixture.Diagnostics);
-            Assert.False(File.Exists(fixture.Output));
-        }
-
-        [Theory]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(S::Run, missing, _Win32_Optional_(true));", "does not uniquely identify")]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(S::Run, value, );", "at least one metadata annotation")]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(S::Run, value, _Win32_SetLastError_);", "not valid on")]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(S::value, value, _Win32_Optional_(true));", "declared native interface method")]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(Free, value, _Win32_Optional_(true));", "declared native interface method")]
-        [InlineData("_WIN32META_ANNOTATE_PARAMETER_(S::Run, value, _Win32_Optional_(true));\n_WIN32META_ANNOTATE_PARAMETER_(S::Run, value, _Win32_Optional_(false));", "Duplicate")]
-        [InlineData("_WIN32META_ANNOTATION_(\"Parameter\", sizeof(&S::Run), \"value\") _Win32_Optional_(true) int NotACarrier;", "metadata-only")]
-        [InlineData("_WIN32META_ANNOTATION_(\"Parameter\", sizeof(&S::Run)) _Win32_Optional_(true) static const unsigned char _WIN32META_PARAMETER_bad = 0;", "method reference and native parameter name")]
-        public void ParameterCarriersRejectInvalidFactsAndSelectors(string declarations, string diagnostic)
-        {
-            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
-int Free(unsigned value);
-struct __declspec(uuid(""d6862065-5d96-4dcc-a981-dfdcd4e52c03"")) S
-{
-    int value;
-    virtual int __stdcall Run(unsigned value) = 0;
-};
-" + declarations);
-            Assert.NotEqual(0, fixture.Run());
-            Assert.Contains("WMA001", fixture.Diagnostics);
-            Assert.Contains(diagnostic, fixture.Diagnostics);
-            Assert.False(File.Exists(fixture.Output));
-        }
-
-        [Theory]
-        [InlineData("c", "c11", true, false)]
-        [InlineData("c++", "c++17", true, true)]
-        [InlineData("c++", "c++17", false, false)]
-        public void InactiveParameterCarriersDoNotReferenceOrDeclareSymbols(
-            string language, string standard, bool annotationsEnabled, bool cInterface)
-        {
-            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
-enum { _WIN32META_PARAMETER_0 = 7 };
-_WIN32META_ANNOTATE_PARAMETER_(Missing::Method, missing, _Win32_Optional_(true));
-void F();
-", annotationsEnabled: annotationsEnabled, extraSettings:
-                $"--language\n{language}\n--std\n{standard}\n" + (cInterface ? "--additional=-DCINTERFACE\n" : ""));
-            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
-            Assert.DoesNotContain("NativeAnnotation", fixture.ReadSource());
         }
 
         [Theory]
@@ -1875,7 +1795,7 @@ generate-cpp-attributes
             internal string Output { get; }
             private string[] Arguments { get; }
             internal string Diagnostics { get; private set; }
-            internal int Run(int timeoutSeconds = 120)
+            internal int Run()
             {
                 var start = new ProcessStartInfo("dotnet")
                 {
@@ -1890,13 +1810,7 @@ generate-cpp-attributes
                 using var process = Process.Start(start);
                 var output = process.StandardOutput.ReadToEndAsync();
                 var error = process.StandardError.ReadToEndAsync();
-                if (!process.WaitForExit(checked(timeoutSeconds * 1000)))
-                {
-                    process.Kill(entireProcessTree: true);
-                    process.WaitForExit();
-                    Diagnostics = output.GetAwaiter().GetResult() + error.GetAwaiter().GetResult();
-                    throw new TimeoutException($"Native annotation scrape exceeded {timeoutSeconds} seconds.\n{Diagnostics}");
-                }
+                process.WaitForExit();
                 Diagnostics = output.GetAwaiter().GetResult() + error.GetAwaiter().GetResult();
                 return process.ExitCode;
             }

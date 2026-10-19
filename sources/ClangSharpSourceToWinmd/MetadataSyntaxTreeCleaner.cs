@@ -28,7 +28,6 @@ namespace ClangSharpSourceToWinmd
             private static readonly Regex NativeTypeNameArrayRegex = new Regex(@"\[\s*(\d+)\s*\]$");
             private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
-            private static readonly Regex ParameterOverrideRegex = new Regex(@"^Win32Metadata\.(Optional|ComOutPtr)\((true|false)\)$");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
@@ -211,59 +210,27 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
-                var overrides = new Dictionary<string, bool>(StringComparer.Ordinal);
-                foreach (var attribute in node.AttributeLists.SelectMany(list => list.Attributes))
+
+                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
-                    if (TryReadParameterOverride(attribute, out string name, out bool enabled) && !overrides.TryAdd(name, enabled))
-                        throw new InvalidOperationException($"WMA001: Duplicate '{name}' parameter override on '{fullName}'.");
-                }
-                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName);
-                node = (ParameterSyntax)base.VisitParameter(node);
-                foreach (var pair in overrides)
-                {
-                    if (listAttributes != null)
+
+                    node = (ParameterSyntax)base.VisitParameter(node);
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+
+                    if (newName != null)
                     {
-                        listAttributes = listAttributes.Where(attribute =>
-                        {
-                            string name = attribute.Name.ToString();
-                            bool remove = name.EndsWith(EncodeHelpers.AttributeToRemoveSuffix, StringComparison.Ordinal);
-                            if (remove)
-                                name = name[..^EncodeHelpers.AttributeToRemoveSuffix.Length];
-                            if (!IsParameterMetadataAttribute(name, pair.Key))
-                                return true;
-                            if (pair.Value == remove)
-                                throw new InvalidOperationException($"WMA002: Legacy remapping '{attribute}' conflicts with header parameter override '{pair.Key}({pair.Value.ToString().ToLowerInvariant()})' on '{fullName}'.");
-                            return false;
-                        }).ToList();
+                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
                     }
-                    if (pair.Key == "ComOutPtr" && !pair.Value &&
-                        node.AttributeLists.SelectMany(list => list.Attributes)
-                            .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), "ComOutPtr")) &&
-                        !node.AttributeLists.SelectMany(list => list.Attributes)
-                            .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), "Out")))
+
+                    if (newType != null)
                     {
-                        // Keep the Out flag the emitter otherwise derives from ComOutPtr.
-                        node = node.AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Runtime.InteropServices.Out")))));
-                    }
-                    node = node.WithAttributeLists(SyntaxFactory.List(node.AttributeLists.Select(list =>
-                        list.WithAttributes(SyntaxFactory.SeparatedList(list.Attributes.Where(attribute =>
-                            pair.Value || !IsParameterMetadataAttribute(attribute.Name.ToString(), pair.Key)))))
-                        .Where(list => list.Attributes.Count != 0)));
-                    if (pair.Value && !node.AttributeLists.SelectMany(list => list.Attributes)
-                        .Any(attribute => IsParameterMetadataAttribute(attribute.Name.ToString(), pair.Key)))
-                    {
-                        string name = pair.Key == "Optional" ? "global::System.Runtime.InteropServices.Optional" :
-                            "global::Windows.Win32.Foundation.Metadata.ComOutPtr";
-                        node = node.AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SingletonSeparatedList(
-                            SyntaxFactory.Attribute(SyntaxFactory.ParseName(name)))));
+                        node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
                     }
                 }
-                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
-                if (newName != null)
-                    node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
-                if (newType != null)
-                    node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
+                else
+                {
+                    node = (ParameterSyntax)base.VisitParameter(node);
+                }
 
                 // Get rid of default parameter values
                 if (node.Default != null)
@@ -272,36 +239,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 return node;
-            }
-
-            private static bool TryReadParameterOverride(AttributeSyntax attribute, out string name, out bool enabled)
-            {
-                name = null;
-                enabled = false;
-                if (GetAttributeName(attribute) != "NativeAnnotation" ||
-                    attribute.ArgumentList?.Arguments.FirstOrDefault()?.Expression is not LiteralExpressionSyntax literal ||
-                    !literal.IsKind(SyntaxKind.StringLiteralExpression))
-                    return false;
-                string payload = literal.Token.ValueText;
-                if (!payload.StartsWith("Win32Metadata.Optional", StringComparison.Ordinal) &&
-                    !payload.StartsWith("Win32Metadata.ComOutPtr", StringComparison.Ordinal))
-                    return false;
-                var match = ParameterOverrideRegex.Match(payload);
-                if (attribute.ArgumentList.Arguments.Count != 1 || !match.Success)
-                    throw new InvalidOperationException($"WMA001: Malformed parameter override '{payload}'; expected Optional(true|false) or ComOutPtr(true|false).");
-                name = match.Groups[1].Value;
-                enabled = match.Groups[2].Value == "true";
-                return true;
-            }
-
-            private static bool IsParameterMetadataAttribute(string name, string semanticName)
-            {
-                name = name.Replace("global::", string.Empty, StringComparison.Ordinal);
-                if (name.EndsWith("Attribute", StringComparison.Ordinal))
-                    name = name[..^"Attribute".Length];
-                string qualified = semanticName is "Optional" or "Out" ? "System.Runtime.InteropServices." + semanticName :
-                    "Windows.Win32.Foundation.Metadata.ComOutPtr";
-                return name == semanticName || name == qualified;
             }
 
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
@@ -529,13 +466,6 @@ namespace ClangSharpSourceToWinmd
             private SyntaxNode ProcessAttribute(AttributeListSyntax node, AttributeSyntax firstAttr)
             {
                 var attrName = firstAttr.Name.ToString();
-
-                if (TryReadParameterOverride(firstAttr, out _, out _))
-                {
-                    if (node.Parent is not ParameterSyntax || node.Target?.Identifier.ValueText is not (null or "param"))
-                        throw new InvalidOperationException("WMA001: Optional/ComOutPtr overrides are valid only on parameters.");
-                    return null;
-                }
 
                 if ((attrName is "SupportedOSPlatform" or "SupportedOSPlatformAttribute" or
                     "Windows.Win32.Foundation.Metadata.SupportedOSPlatform" or

@@ -3979,7 +3979,7 @@
     "inputs": [
       {
         "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "A15C5FCC70606E51E61DC7F8BB671E4D1B6DC0174B859F2FBB9EFEF22CFE0188"
+        "sourceSha256": "71F94E882B3BB01825AC19191A4FE1707C0BBDD0539F5C3097043FA8F6F34196"
       },
       {
         "path": "shared\\sal.h",

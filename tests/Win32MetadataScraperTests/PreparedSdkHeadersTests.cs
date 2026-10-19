@@ -961,7 +961,7 @@ namespace Win32MetadataScraperTests
             Assert.Contains("cpp_quote(\"void Native([out] long* value);\")", converted);
         }
 
-        internal sealed class Fixture : IDisposable
+        private sealed class Fixture : IDisposable
         {
             internal const string Before = "#ifndef SAMPLE_H\r\n#define SAMPLE_H\r\n#define VALUE 1\r\n#endif\r\n";
             internal const string PatchPath = @"um\sample.h.patch";
@@ -1016,7 +1016,6 @@ namespace Win32MetadataScraperTests
             internal string MidlInput => Path.Combine(this.sdk, "c", "include", "um", "generated.idl");
             internal string MidlDependency => Path.Combine(this.sdk, "c", "include", "um", "dependency.idl");
             internal string MidlCompiler => Path.Combine(this.sdk, "c", "bin", "x64", "midl.exe");
-            internal string NativeSdkIncludeRoot { get; private set; }
             internal string AnnotationHeader => Path.Combine(this.source, "shared", "win32metadata_annotations.h");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
@@ -1115,7 +1114,6 @@ namespace Win32MetadataScraperTests
                 File.WriteAllText(MidlDependency, dependency, new UTF8Encoding(false));
                 var props = XDocument.Load(Path.Combine(RepositoryRoot, "obj", "BuildTools", "BuildTools.proj.nuget.g.props"));
                 string package = props.Descendants().Single(element => element.Name.LocalName == "PkgMicrosoft_Windows_SDK_CPP").Value;
-                NativeSdkIncludeRoot = Path.Combine(package, "c", "include", "10.0.26100.0");
                 foreach (string name in new[] { "midl.exe", "midlc.exe" })
                     File.Copy(Path.Combine(package, "c", "bin", "10.0.26100.0", "x64", name),
                         Path.Combine(Path.GetDirectoryName(MidlCompiler), name), overwrite: true);
@@ -1203,47 +1201,6 @@ namespace Win32MetadataScraperTests
                         path = @"shared\win32metadata_annotations.h",
                         sourceSha256 = Hash(File.ReadAllBytes(AnnotationHeader)),
                     }));
-                });
-            }
-
-            internal void EnableMidlParameterOverrides(bool annotated)
-            {
-                EnableMidlAnnotationHeader();
-                string[] lines =
-                {
-                    "cpp_quote(\"#define IDL_VALUE 1\")",
-                    "import \"dependency.idl\";",
-                    "#include <win32metadata_annotations.h>",
-                    "[object, uuid(7a22f761-442c-4260-9d80-4c937dce56b6), pointer_default(unique)]",
-                    "interface IMidlFixture {",
-                    "    HRESULT Fetch([in, unique] DEPENDENCY* context, [out] DEPENDENCY** result);",
-                    "    HRESULT Read([in] unsigned long count, [out, size_is(count), length_is(count)] DEPENDENCY* indices);",
-                    "};",
-                    "cpp_quote(\"/* Existing trailing quote region. */\")",
-                };
-                string[] carriers = annotated ? new[]
-                {
-                    "_Win32_AnnotateParameter_(IMidlFixture::Fetch, context, _Win32_Optional_(false))",
-                    "_Win32_AnnotateParameter_(IMidlFixture::Fetch, result, _Win32_ComOutPtr_(true))",
-                    "_Win32_AnnotateParameter_(IMidlFixture::Read, indices, _Win32_Optional_(true))",
-                } : Array.Empty<string>();
-                File.AppendAllText(MidlDependency, "typedef long HRESULT;\r\n", new UTF8Encoding(false));
-                File.WriteAllText(MidlInput, string.Join("\r\n", lines) + "\r\n", new UTF8Encoding(false));
-                File.WriteAllText(Path.Combine(this.root, IdlPatchPath),
-                    "diff --git a/um/generated.idl b/um/generated.idl\n" +
-                    "--- a/um/generated.idl\n+++ b/um/generated.idl\n" +
-                    $"@@ -1,{lines.Length} +1,{lines.Length + carriers.Length} @@\n" +
-                    "-" + lines[0] + "\r\n+" + lines[0].Replace("IDL_VALUE 1", "IDL_VALUE 2") + "\r\n" +
-                    string.Concat(lines.Skip(1).Select(line => " " + line + "\r\n")) +
-                    string.Concat(carriers.Select(line => "+" + line + "\r\n")), new UTF8Encoding(false));
-                MutateRecipe(recipe =>
-                {
-                    string hash = Hash(File.ReadAllBytes(MidlInput));
-                    recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
-                    recipe["headers"][1]["sdkSha256"] = hash;
-                    string dependencyHash = Hash(File.ReadAllBytes(MidlDependency));
-                    recipe["midl"]["inputs"][1]["sdkSha256"] = dependencyHash;
-                    recipe["headers"][2]["sdkSha256"] = dependencyHash;
                 });
             }
 
@@ -1519,6 +1476,6 @@ namespace Win32MetadataScraperTests
             public bool MidlReused { get; set; }
         }
 
-        internal sealed record ProcessResult(int ExitCode, string Output, string Error);
+        private sealed record ProcessResult(int ExitCode, string Output, string Error);
     }
 }
