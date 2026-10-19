@@ -34,6 +34,11 @@ forward's empty generated declaration; real empty enums, complete opaque enums,
 and unrelated same-name enums remain intact. Do not substitute a primitive alias
 or duplicate the members of a native enum.
 
+The repository annotation header is also a pinned MIDL input. Extending its
+vocabulary requires updating both `sourceGitTree` and that input's `sourceSha256`
+in `generation/WinSDK/patches/SdkHeaders.json`. Preserve the previous prepared
+cache: changed MIDL input bytes need their own qualified preparation identity.
+
 Use the [annotation specification](copilot/plans/shift-left-annotation-spec.md#attribute-reference)
 for the complete vocabulary, valid targets, and examples. The options below describe
 the existing response-file configuration; API-specific metadata moves into the owning
