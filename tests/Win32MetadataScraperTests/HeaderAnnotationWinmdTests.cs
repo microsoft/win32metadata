@@ -1755,6 +1755,184 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                     .Single(method => reader.GetString(method.Name) == name);
         }
 
+        [NativeMigrationTheory("TRANSFERRED_NATIVE_WAVE09_ROOT")]
+        [InlineData("x64")]
+        public void NormalTransferredNativeAssociationsPreserveScalarContractsAndRecordLayouts(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("TRANSFERRED_NATIVE_WAVE09_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "authored", "report.json")));
+            var authoredFacts = report.RootElement.GetProperty("facts").EnumerateArray().ToArray();
+            Assert.Equal(82, authoredFacts.Length);
+            Assert.Equal(82, authoredFacts.Select(fact => fact.GetProperty("factId").GetString()).Distinct().Count());
+            var facts = authoredFacts.Where(fact => fact.GetProperty("partition").GetString() != "Fs" ||
+                fact.GetProperty("kind").GetString() != "parameter").ToArray();
+            var blocked = authoredFacts.Except(facts).ToArray();
+            Assert.Equal(54, facts.Length);
+            Assert.Equal(28, blocked.Length);
+            Assert.Equal(48, facts.Count(fact => fact.GetProperty("category").GetString() == "associated-enum-use"));
+            Assert.Equal(6, facts.Count(fact => fact.GetProperty("category").GetString() == "direct-enum-use"));
+            Assert.Equal(8, report.RootElement.GetProperty("retainedFacts").GetArrayLength());
+            string baseline = Environment.GetEnvironmentVariable("EXISTING_NATIVE_AVAILABILITY_BASELINE");
+            Assert.False(string.IsNullOrEmpty(baseline));
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baseline), "exact-source-inputs.zip"));
+            string output = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            string controlDirectory = Path.Combine(output, "native-storage-expectation");
+            string candidateDirectory = Path.Combine(output, "candidate");
+            Directory.CreateDirectory(controlDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            string normal = Path.Combine(root, "scrape", "generated", architecture);
+            var methods = facts.Where(fact => fact.GetProperty("kind").GetString() == "parameter")
+                .Select(fact => fact.GetProperty("symbol").GetString().Split("::")[0]).ToHashSet(StringComparer.Ordinal);
+            var records = facts.Where(fact => fact.GetProperty("kind").GetString() == "field")
+                .Select(fact => fact.GetProperty("symbol").GetString().Split("::")[0]).ToHashSet(StringComparer.Ordinal);
+            Assert.Equal(20, methods.Count);
+            Assert.Equal(17, records.Count);
+            foreach (string partition in new[] { "Fs", "Setup" })
+            {
+                var selected = authoredFacts.Where(fact => fact.GetProperty("partition").GetString() == partition)
+                    .Select(fact => fact.GetProperty("symbol").GetString().Split("::")[0]).ToHashSet(StringComparer.Ordinal);
+                var entries = archive.Entries.Where(entry =>
+                    entry.FullName.Replace('\\', '/') == "common/" + partition + ".cs" ||
+                    entry.FullName.Replace('\\', '/') == architecture + "/" + partition + ".cs").ToArray();
+                Assert.NotEmpty(entries);
+                var oldSources = entries.Select(entry =>
+                {
+                    using var stream = new StreamReader(entry.Open());
+                    return stream.ReadToEnd();
+                }).ToArray();
+                WriteAvailabilityDeclarations(oldSources, partition, selected, controlDirectory);
+                WriteAvailabilityDeclarations(new[] { File.ReadAllText(Path.Combine(normal, partition + ".cs")) },
+                    partition, selected, candidateDirectory);
+            }
+            foreach (var group in new[] { (Partition: "Fs", Name: "NTMS_OMID_TYPE"),
+                (Partition: "Setup", Name: "MSIASSEMBLYINFO") })
+            {
+                var source = CSharpSyntaxTree.ParseText(File.ReadAllText(
+                    Path.Combine(normal, group.Partition + ".header-types.cs"))).GetCompilationUnitRoot();
+                var declaration = source.DescendantNodes().OfType<EnumDeclarationSyntax>()
+                    .Single(value => value.Identifier.ValueText == group.Name);
+                var ns = Assert.IsType<NamespaceDeclarationSyntax>(declaration.Parent);
+                File.WriteAllText(Path.Combine(candidateDirectory, group.Name + ".cs"), source.WithMembers(
+                    SyntaxFactory.SingletonList<MemberDeclarationSyntax>(ns.WithMembers(
+                        SyntaxFactory.SingletonList<MemberDeclarationSyntax>(declaration))))
+                    .NormalizeWhitespace().ToFullString());
+            }
+            var nativeExpectation = facts.ToDictionary(fact => fact.GetProperty("symbol").GetString(), fact =>
+                "[AssociatedEnum(\"" + fact.GetProperty("group").GetString() + "\")] " +
+                (fact.GetProperty("nativeStorage").GetString() == "Int32" ? "int" : "uint"), StringComparer.Ordinal);
+            var selectedNames = methods.Concat(records).Concat(new[] { "NTMS_OMID_TYPE", "MSIASSEMBLYINFO" })
+                .ToHashSet(StringComparer.Ordinal);
+            var routes = RspReader.GetSettingsValues(Path.Combine(WinHttpMigrationTests.RepositoryRoot,
+                    "generation", "WinSDK", "requiredNamespacesForNames.rsp"), "--requiredNamespaceForName")
+                .Select(line => line.Split('=', 2)).Where(pair => pair.Length == 2 && selectedNames.Contains(pair[0]))
+                .ToDictionary(pair => pair[0], pair => pair[1], StringComparer.Ordinal);
+            using var control = Emit(controlDirectory, architecture, memberRemaps: nativeExpectation,
+                references: new[] { baseline }, requiredNamespaces: routes);
+            using var candidate = Emit(candidateDirectory, architecture, references: new[] { baseline }, requiredNamespaces: routes);
+            using var reference = new MetadataImage(baseline);
+            AssertMetadataClosure(control.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            var blockedMethods = blocked.Select(fact => fact.GetProperty("symbol").GetString().Split("::")[0])
+                .ToHashSet(StringComparer.Ordinal);
+            Assert.Equal(26, blockedMethods.Count);
+            Assert.DoesNotContain(control.Reader.MethodDefinitions.Select(control.Reader.GetMethodDefinition),
+                method => blockedMethods.Contains(control.Reader.GetString(method.Name)));
+            Assert.DoesNotContain(candidate.Reader.MethodDefinitions.Select(candidate.Reader.GetMethodDefinition),
+                method => blockedMethods.Contains(candidate.Reader.GetString(method.Name)));
+            var fsSource = CSharpSyntaxTree.ParseText(File.ReadAllText(Path.Combine(normal, "Fs.cs"))).GetCompilationUnitRoot();
+            foreach (var fact in blocked)
+            {
+                string[] symbol = fact.GetProperty("symbol").GetString().Split("::");
+                var method = fsSource.DescendantNodes().OfType<MethodDeclarationSyntax>()
+                    .Single(value => value.Identifier.ValueText == symbol[0]);
+                var parameter = method.ParameterList.Parameters.Single(value => value.Identifier.ValueText == symbol[1]);
+                Assert.Equal(fact.GetProperty("nativeStorage").GetString() == "Int32" ? "int" : "uint", parameter.Type.ToString());
+                var association = parameter.AttributeLists.SelectMany(value => value.Attributes)
+                    .Single(value => value.Name.ToString().EndsWith(".AssociatedEnum", StringComparison.Ordinal));
+                Assert.Equal(fact.GetProperty("group").GetString(),
+                    Assert.IsType<LiteralExpressionSyntax>(Assert.Single(association.ArgumentList.Arguments).Expression).Token.ValueText);
+            }
+            foreach (string name in methods)
+            {
+                var before = Method(control.Reader, name);
+                var after = Method(candidate.Reader, name);
+                Assert.Equal(MethodShape(control.Reader, before), MethodShape(candidate.Reader, after));
+                Assert.Equal(Attributes(control.Reader, before.GetCustomAttributes()),
+                    Attributes(candidate.Reader, after.GetCustomAttributes()));
+            }
+            foreach (string name in records)
+            {
+                var before = FindType(control.Reader, name);
+                var after = FindType(candidate.Reader, name);
+                Assert.Equal(control.Reader.GetString(before.Namespace), candidate.Reader.GetString(after.Namespace));
+                Assert.Equal(before.Attributes, after.Attributes);
+                Assert.Equal(before.GetLayout(), after.GetLayout());
+                Assert.Equal(before.GetFields().Select(control.Reader.GetFieldDefinition).Select(field => FieldShape(control.Reader, field)),
+                    after.GetFields().Select(candidate.Reader.GetFieldDefinition).Select(field => FieldShape(candidate.Reader, field)));
+            }
+            foreach (var fact in facts)
+            {
+                string[] symbol = fact.GetProperty("symbol").GetString().Split("::");
+                string storage = fact.GetProperty("nativeStorage").GetString();
+                string group = fact.GetProperty("group").GetString();
+                if (fact.GetProperty("kind").GetString() == "field")
+                {
+                    var field = FindType(candidate.Reader, symbol[0]).GetFields().Select(candidate.Reader.GetFieldDefinition)
+                        .Single(value => candidate.Reader.GetString(value.Name) == symbol[1]);
+                    Assert.Equal(storage, field.DecodeSignature(new SignatureNames(), null));
+                    AssertStringAttribute(candidate.Reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", group);
+                }
+                else
+                {
+                    var method = Method(candidate.Reader, symbol[0]);
+                    var parameter = method.GetParameters().Select(candidate.Reader.GetParameter)
+                        .Single(value => candidate.Reader.GetString(value.Name) == symbol[1]);
+                    Assert.Equal(storage, method.DecodeSignature(new SignatureNames(), null).ParameterTypes[parameter.SequenceNumber - 1]);
+                    AssertStringAttribute(candidate.Reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", group);
+                }
+            }
+            foreach (string name in new[] { "NTMS_OMID_TYPE", "MSIASSEMBLYINFO" })
+            {
+                var before = FindType(reference.Reader, name);
+                var after = FindType(candidate.Reader, name);
+                Assert.Equal(reference.Reader.GetString(before.Namespace), candidate.Reader.GetString(after.Namespace));
+                Assert.Equal(before.GetFields().Select(reference.Reader.GetFieldDefinition).Select(field => FieldShape(reference.Reader, field)),
+                    after.GetFields().Select(candidate.Reader.GetFieldDefinition).Select(field => FieldShape(candidate.Reader, field)));
+            }
+            File.WriteAllText(Path.Combine(output, "observed.json"), JsonSerializer.Serialize(new
+            {
+                architecture,
+                completedUtc = DateTime.UtcNow,
+                sourceFacts = facts.Select(fact => fact.GetProperty("factId").GetString()).ToArray(),
+                sourceAssociatedEnumFacts = 48,
+                sourceDirectUseFacts = 6,
+                sourceAuthoredButUnqualifiedFacts = blocked.Select(fact => fact.GetProperty("factId").GetString()).ToArray(),
+                preexistingEmptyImportMethods = blockedMethods.OrderBy(value => value, StringComparer.Ordinal).ToArray(),
+                exactNativeScalarSites = facts.Select(fact => new
+                {
+                    symbol = fact.GetProperty("symbol").GetString(),
+                    storage = fact.GetProperty("nativeStorage").GetString(),
+                    group = fact.GetProperty("group").GetString(),
+                }).ToArray(),
+                unchangedMethods = methods.OrderBy(value => value, StringComparer.Ordinal).ToArray(),
+                unchangedRecordLayouts = records.OrderBy(value => value, StringComparer.Ordinal).ToArray(),
+                inheritedCanonicalGroupCredit = 0,
+                retainedFacts = report.RootElement.GetProperty("retainedFacts"),
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                scope = "Exact 54 physically qualified source facts in two explicitly transferred originals. The retained-normal control normalizes only these legacy association slots to their proven Int32/UInt32 native storage. Twenty method signatures/imports/directions/attributes and seventeen physical record layouts/field signatures agree. All 54 associations are exact. Another 28 source-authored NTMS parameter facts are checked in actual normal C# but earn no credit: both physical images omit the same 26 empty-import methods. Those old uses and eight other tails remain. Two inherited groups preserve identities/storage/field shape and earn no new credit. Normal/physical x64 only, no whole-SDK or consumer grade.",
+            }, new JsonSerializerOptions { WriteIndented = true }));
+
+            static MethodDefinition Method(MetadataReader reader, string name)
+                => reader.MethodDefinitions.Select(reader.GetMethodDefinition)
+                    .Single(method => reader.GetString(method.Name) == name);
+
+            static string[] Attributes(MetadataReader reader, CustomAttributeHandleCollection attributes)
+                => attributes.Select(handle => AttributeName(reader, handle) + "=" +
+                    Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
         private static string FieldShape(MetadataReader reader, FieldDefinition field)
             => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
                 field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);

@@ -1,5 +1,5 @@
 diff --git a/um/msi.h b/um/msi.h
-index 77ea809b..abb836a2 100644
+index 77ea809b..54939dff 100644
 --- a/um/msi.h
 +++ b/um/msi.h
 @@ -105,6 +105,7 @@ UINT WINAPI MsiCloseHandle(MSIHANDLE hAny);
@@ -39,19 +39,23 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiSetExternalUIRecord(
  	_In_opt_ INSTALLUI_HANDLER_RECORD puiHandler,         // for progress and error handling 
  	_In_ DWORD              dwMessageFilter,              // bit flags designating messages to handle
-@@ -563,10 +568,12 @@ UINT WINAPI MsiSetExternalUIRecord(
+@@ -563,12 +568,14 @@ UINT WINAPI MsiSetExternalUIRecord(
  // with control over which log messages are passed to the specified log file.
  // Messages are designated with a combination of bits from INSTALLLOGMODE enum.
  
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiEnableLogA(
- 	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
+-	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
++	_In_ _Win32_AssociatedEnum_(INSTALLLOGMODE) DWORD     dwLogMode,           // bit flags designating operations to report
  	_In_opt_ LPCSTR  szLogFile,       // log file, or NULL to disable logging
  	_In_ DWORD     dwLogAttributes);    // INSTALLLOGATTRIBUTES flags
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiEnableLogW(
- 	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
+-	_In_ DWORD     dwLogMode,           // bit flags designating operations to report
++	_In_ _Win32_AssociatedEnum_(INSTALLLOGMODE) DWORD     dwLogMode,           // bit flags designating operations to report
  	_In_opt_ LPCWSTR  szLogFile,       // log file, or NULL to disable logging
+ 	_In_ DWORD     dwLogAttributes);    // INSTALLLOGATTRIBUTES flags
+ #ifdef UNICODE
 @@ -583,8 +590,10 @@ UINT WINAPI MsiEnableLogW(
  
  // Return the installed state for a product
@@ -105,45 +109,60 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiInstallProductW(
  	_In_ LPCWSTR      szPackagePath,        // location of package to install
  	_In_opt_ LPCWSTR      szCommandLine);   // command line <property settings>
-@@ -653,10 +668,12 @@ UINT WINAPI MsiInstallProductW(
+@@ -653,13 +668,15 @@ UINT WINAPI MsiInstallProductW(
  // Install/uninstall an advertised or installed product
  // No action if installed and INSTALLSTATE_DEFAULT specified
  
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiConfigureProductA(
  	_In_ LPCSTR      szProduct,       // product code
- 	_In_ int          iInstallLevel,    // how much of the product to install
+-	_In_ int          iInstallLevel,    // how much of the product to install
++	_In_ _Win32_AssociatedEnum_(INSTALLLEVEL) int          iInstallLevel,    // how much of the product to install
  	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiConfigureProductW(
  	_In_ LPCWSTR      szProduct,       // product code
- 	_In_ int          iInstallLevel,    // how much of the product to install
-@@ -670,11 +687,13 @@ UINT WINAPI MsiConfigureProductW(
+-	_In_ int          iInstallLevel,    // how much of the product to install
++	_In_ _Win32_AssociatedEnum_(INSTALLLEVEL) int          iInstallLevel,    // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState);   // local/source/default/absent/lock/uncache
+ #ifdef UNICODE
+ #define MsiConfigureProduct  MsiConfigureProductW
+@@ -670,14 +687,16 @@ UINT WINAPI MsiConfigureProductW(
  // Install/uninstall an advertised or installed product
  // No action if installed and INSTALLSTATE_DEFAULT specified
  
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiConfigureProductExA(
  	_In_ LPCSTR      szProduct,            // product code
- 	_In_ int          iInstallLevel,         // how much of the product to install
+-	_In_ int          iInstallLevel,         // how much of the product to install
++	_In_ _Win32_AssociatedEnum_(INSTALLLEVEL) int          iInstallLevel,         // how much of the product to install
  	_In_ INSTALLSTATE eInstallState,         // local/source/default/absent/lock/uncache
  	_In_opt_ LPCSTR      szCommandLine);   // command line <property settings>
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiConfigureProductExW(
  	_In_ LPCWSTR      szProduct,            // product code
- 	_In_ int          iInstallLevel,         // how much of the product to install
-@@ -688,9 +707,11 @@ UINT WINAPI MsiConfigureProductExW(
+-	_In_ int          iInstallLevel,         // how much of the product to install
++	_In_ _Win32_AssociatedEnum_(INSTALLLEVEL) int          iInstallLevel,         // how much of the product to install
+ 	_In_ INSTALLSTATE eInstallState,         // local/source/default/absent/lock/uncache
+ 	_In_opt_ LPCWSTR      szCommandLine);   // command line <property settings>
+ #ifdef UNICODE
+@@ -688,12 +707,14 @@ UINT WINAPI MsiConfigureProductExW(
  
  // Reinstall product, used to validate or correct problems
  
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiReinstallProductA(
  	_In_ LPCSTR      szProduct,        // product code
- 	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
+-	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
++	_In_ _Win32_AssociatedEnum_(REINSTALLMODE) DWORD         szReinstallMode); // one or more REINSTALLMODE modes
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiReinstallProductW(
  	_In_ LPCWSTR      szProduct,        // product code
- 	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
+-	_In_ DWORD         szReinstallMode); // one or more REINSTALLMODE modes
++	_In_ _Win32_AssociatedEnum_(REINSTALLMODE) DWORD         szReinstallMode); // one or more REINSTALLMODE modes
+ #ifdef UNICODE
+ #define MsiReinstallProduct  MsiReinstallProductW
+ #else
 @@ -709,6 +730,7 @@ UINT WINAPI MsiReinstallProductW(
  // If dwOptions includes MSIADVERTISEOPTIONFLAGS_INSTANCE, then a new instance is advertised. Use of
  //    this option requires that szTransforms include the instance transform that changes the product code
@@ -482,7 +501,7 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiConfigureFeatureW(
  	_In_ LPCWSTR  szProduct,
  	_In_ LPCWSTR  szFeature,
-@@ -1203,10 +1272,12 @@ UINT WINAPI MsiConfigureFeatureW(
+@@ -1203,14 +1272,16 @@ UINT WINAPI MsiConfigureFeatureW(
  
  // Reinstall feature, used to validate or correct problems
  
@@ -490,12 +509,18 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiReinstallFeatureA(
  	_In_ LPCSTR      szProduct,        // product code
  	_In_ LPCSTR      szFeature,        // feature ID, NULL for entire product
- 	_In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
+-	_In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
++	_In_ _Win32_AssociatedEnum_(REINSTALLMODE) DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiReinstallFeatureW(
  	_In_ LPCWSTR      szProduct,        // product code
  	_In_ LPCWSTR      szFeature,        // feature ID, NULL for entire product
-@@ -1228,6 +1299,7 @@ UINT WINAPI MsiReinstallFeatureW(
+-	_In_ DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
++	_In_ _Win32_AssociatedEnum_(REINSTALLMODE) DWORD         dwReinstallMode); // one or more REINSTALLMODE modes
+ #ifdef UNICODE
+ #define MsiReinstallFeature  MsiReinstallFeatureW
+ #else
+@@ -1228,18 +1299,20 @@ UINT WINAPI MsiReinstallFeatureW(
  // then calls MsiConfigureFeature if any of its components are uninstalled
  // then calls MsiLocateComponent to obtain the path the its key file
  
@@ -503,15 +528,22 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiProvideComponentA(
  	_In_ LPCSTR     szProduct,                               // product code in case install required
  	_In_ LPCSTR     szFeature,                               // feature ID in case install required
-@@ -1235,6 +1307,7 @@ UINT WINAPI MsiProvideComponentA(
- 	_In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_In_ LPCSTR     szComponent,                             // component ID
+-	_In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR      lpPathBuf,    // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD      pcchPathBuf); // in/out buffer character count
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiProvideComponentW(
  	_In_ LPCWSTR     szProduct,                               // product code in case install required
  	_In_ LPCWSTR     szFeature,                               // feature ID in case install required
-@@ -1251,12 +1324,14 @@ UINT WINAPI MsiProvideComponentW(
+ 	_In_ LPCWSTR     szComponent,                             // component ID
+-	_In_ DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                           // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD      pcchPathBuf); // in/out buffer character count
+ #ifdef UNICODE
+@@ -1251,16 +1324,18 @@ UINT WINAPI MsiProvideComponentW(
  // Return full component path for a qualified component, performing any necessary installation. 
  // Prompts for source if necessary and increments the usage count for the feature.
  
@@ -519,14 +551,20 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiProvideQualifiedComponentA(
  	_In_ LPCSTR     szCategory,                           // component category ID
  	_In_ LPCSTR     szQualifier,                          // specifies which component to access
- 	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,     // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiProvideQualifiedComponentW(
  	_In_ LPCWSTR     szCategory,                           // component category ID
  	_In_ LPCWSTR     szQualifier,                          // specifies which component to access
-@@ -1274,6 +1349,7 @@ UINT WINAPI MsiProvideQualifiedComponentW(
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,     // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
+ #ifdef UNICODE
+@@ -1274,19 +1349,21 @@ UINT WINAPI MsiProvideQualifiedComponentW(
  // The szProduct parameter specifies the product to match that has published the qualified
  // component. If null, this API works the same as MsiProvideQualifiedComponent. 
  
@@ -534,7 +572,10 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiProvideQualifiedComponentExA(
  	_In_ LPCSTR     szCategory,                           // component category ID
  	_In_ LPCSTR     szQualifier,                          // specifies which component to access
-@@ -1283,6 +1359,7 @@ UINT WINAPI MsiProvideQualifiedComponentExA(
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_In_opt_ LPCSTR     szProduct,                        // the product code 
+ 	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
  	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,     // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf);  // in/out buffer character count
@@ -542,6 +583,11 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiProvideQualifiedComponentExW(
  	_In_ LPCWSTR     szCategory,                           // component category ID
  	_In_ LPCWSTR     szQualifier,                          // specifies which component to access
+-	_In_ DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD        dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+ 	_In_opt_ LPCWSTR     szProduct,                        // the product code 
+ 	_Reserved_ DWORD        dwUnused1,                      // not used, must be zero
+ 	_Reserved_ DWORD        dwUnused2,                      // not used, must be zero
 @@ -1300,11 +1377,13 @@ UINT WINAPI MsiProvideQualifiedComponentExW(
  
  // Return full path to an installed component
@@ -572,7 +618,7 @@ index 77ea809b..abb836a2 100644
  INSTALLSTATE WINAPI MsiGetComponentPathExW(		
  	_In_					LPCWSTR		szProductCode,		// ProductCode
  	_In_					LPCWSTR		szComponentCode,	// ComponentCode
-@@ -1346,12 +1427,19 @@ INSTALLSTATE WINAPI MsiGetComponentPathExW(
+@@ -1346,24 +1427,32 @@ INSTALLSTATE WINAPI MsiGetComponentPathExW(
  #define MSIASSEMBLYINFO_NETASSEMBLY   0 // Net assemblies
  #define MSIASSEMBLYINFO_WIN32ASSEMBLY 1 // Win32 assemblies
  
@@ -592,14 +638,23 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiProvideAssemblyA(
  	_In_ LPCSTR    szAssemblyName,                       // stringized assembly name
  	_In_opt_ LPCSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
-@@ -1359,6 +1447,7 @@ UINT WINAPI MsiProvideAssemblyA(
- 	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
+-	_In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+-	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(MSIASSEMBLYINFO) DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
  	_Out_writes_opt_(*pcchPathBuf)  LPSTR  lpPathBuf,    // returned path, NULL if not desired
  	_Inout_opt_                     LPDWORD  pcchPathBuf); // in/out buffer character count
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiProvideAssemblyW(
  	_In_ LPCWSTR    szAssemblyName,                       // stringized assembly name
  	_In_opt_ LPCWSTR    szAppContext,                     // specifies the full path to the parent asm's .cfg file, null for global assemblies
+-	_In_ DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
+-	_In_ DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
++	_In_ _Win32_AssociatedEnum_(INSTALLMODE) DWORD       dwInstallMode,                        // either of type INSTALLMODE or a combination of the REINSTALLMODE flags
++	_In_ _Win32_AssociatedEnum_(MSIASSEMBLYINFO) DWORD       dwAssemblyInfo,                       // assembly info, including assembly type
+ 	_Out_writes_opt_(*pcchPathBuf)  LPWSTR  lpPathBuf,    // returned path, NULL if not desired
+ 	_Inout_opt_                     LPDWORD  pcchPathBuf); // in/out buffer character count
+ #ifdef UNICODE
 @@ -1377,12 +1466,14 @@ UINT WINAPI MsiProvideAssemblyW(
  #if (_WIN32_MSI >= 300)
  // Query the installed state of a component in the specified product instance
@@ -712,7 +767,7 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiEnumClientsW(
  	_In_ LPCWSTR  szComponent,
  	_In_ DWORD     iProductIndex,                               // 0-based index into client products
-@@ -1549,6 +1654,7 @@ UINT WINAPI MsiEnumClientsW(
+@@ -1549,19 +1654,21 @@ UINT WINAPI MsiEnumClientsW(
  // Enumerate the client products for a component for a given users 
  // and context
  
@@ -720,7 +775,10 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiEnumClientsExA (	
  	_In_					LPCSTR		szComponent,		// ComponentCode for enumeration
  	_In_opt_				LPCSTR		szUserSid,		// Account for enumeration
-@@ -1558,6 +1664,7 @@ UINT WINAPI MsiEnumClientsExA (
+-	_In_					DWORD			dwContext,		// Contexts for enumeration
++	_In_					_Win32_AssociatedEnum_(MSIINSTALLCONTEXT) DWORD			dwContext,		// Contexts for enumeration
+ 	_In_					DWORD			dwProductIndex,		// 0-based index into component clients
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)	CHAR			szProductBuf[39],	// Enumerated component's client ProductCode
  	_Out_opt_				MSIINSTALLCONTEXT	*pdwInstalledContext,	// Enumerated component's client product's context
  	_Out_writes_opt_(*pcchSid)		LPSTR			szSid,			// Enumerated user account
  	_Inout_opt_				LPDWORD			pcchSid);		// in/out character count of szSid 
@@ -728,6 +786,11 @@ index 77ea809b..abb836a2 100644
  UINT WINAPI MsiEnumClientsExW (	
  	_In_					LPCWSTR		szComponent,		// ComponentCode for enumeration
  	_In_opt_				LPCWSTR		szUserSid,		// Account for enumeration
+-	_In_					DWORD			dwContext,		// Contexts for enumeration
++	_In_					_Win32_AssociatedEnum_(MSIINSTALLCONTEXT) DWORD			dwContext,		// Contexts for enumeration
+ 	_In_					DWORD			dwProductIndex,		// 0-based index into component clients
+ 	_Out_writes_opt_(MAX_GUID_CHARS+1)	WCHAR			szProductBuf[39],	// Enumerated component's client ProductCode
+ 	_Out_opt_				MSIINSTALLCONTEXT	*pdwInstalledContext,	// Enumerated component's client product's context
 @@ -1576,6 +1683,7 @@ UINT WINAPI MsiEnumClientsExW (
  
  // Enumerate the qualifiers for an advertised component.

@@ -7688,24 +7688,7 @@
   {
     "addUsesTo": "INSTALLLEVEL",
     "members": [],
-    "uses": [
-      {
-        "method": "MsiConfigureProductW",
-        "parameter": "iInstallLevel"
-      },
-      {
-        "method": "MsiConfigureProductExW",
-        "parameter": "iInstallLevel"
-      },
-      {
-        "method": "MsiConfigureProductExA",
-        "parameter": "iInstallLevel"
-      },
-      {
-        "method": "MsiConfigureProductA",
-        "parameter": "iInstallLevel"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "MONITOR_FROM_FLAGS",
@@ -9838,16 +9821,7 @@
   },
   {
       "addUsesTo": "MSIASSEMBLYINFO",
-      "uses": [
-        {
-          "method": "MsiProvideAssemblyA",
-          "parameter": "dwAssemblyInfo"
-        },
-        {
-          "method": "MsiProvideAssemblyW",
-          "parameter": "dwAssemblyInfo"
-        }
-      ]
+      "uses": []
     },
 
   {
