@@ -39,6 +39,14 @@ and exact physical `Const` metadata at every covered site without legacy
 fallback before retiring rows. Permission to change a native contract does not
 itself convert a fact, authorize new vocabulary, or retire printer-rights debt.
 
+Winspool's 92 input-string contracts use declaration-local `LPCSTR`/`LPCWSTR`
+in place of 46 `LPSTR` and 46 `LPWSTR` uses. Ordinary Printing output and
+three-architecture physical metadata preserve the existing `Const`, parameter
+types/flags and imports without those overrides. The C/C++ pointee qualifiers
+and `NativeTypeName` spellings intentionally change; global typedefs, the 29
+prior interior-pointer facts, two prior associations and 20 printer-rights
+residuals are unchanged. This is not a consumer-compatibility claim.
+
 ### SDK-wide inventory and source queue
 
 `scripts\Get-SdkAnnotationCoverage.py` inventories the selected SDK package,

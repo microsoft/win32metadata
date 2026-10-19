@@ -21,6 +21,67 @@ namespace Win32MetadataScraperTests
 
         public WinHttpNativeControlTests(ITestOutputHelper output) => this.output = output;
 
+        internal static readonly string[] WinspoolConstParameters =
+        {
+            "AddMonitorA::pName", "AddMonitorW::pName",
+            "AddPortA::pMonitorName", "AddPortA::pName", "AddPortW::pMonitorName", "AddPortW::pName",
+            "AddPrinterA::pName", "AddPrinterW::pName",
+            "AddPrinterConnectionA::pName", "AddPrinterConnectionW::pName",
+            "AddPrinterDriverA::pName", "AddPrinterDriverW::pName",
+            "AddPrinterDriverExA::pName", "AddPrinterDriverExW::pName",
+            "AddPrintProcessorA::pEnvironment", "AddPrintProcessorA::pName",
+            "AddPrintProcessorA::pPathName", "AddPrintProcessorA::pPrintProcessorName",
+            "AddPrintProcessorW::pEnvironment", "AddPrintProcessorW::pName",
+            "AddPrintProcessorW::pPathName", "AddPrintProcessorW::pPrintProcessorName",
+            "ConfigurePortA::pName", "ConfigurePortA::pPortName",
+            "ConfigurePortW::pName", "ConfigurePortW::pPortName",
+            "DeleteFormA::pFormName", "DeleteFormW::pFormName",
+            "DeleteMonitorA::pEnvironment", "DeleteMonitorA::pMonitorName", "DeleteMonitorA::pName",
+            "DeleteMonitorW::pEnvironment", "DeleteMonitorW::pMonitorName", "DeleteMonitorW::pName",
+            "DeletePortA::pName", "DeletePortA::pPortName", "DeletePortW::pName", "DeletePortW::pPortName",
+            "DeletePrinterDataA::pValueName", "DeletePrinterDataW::pValueName",
+            "DeletePrinterDriverA::pDriverName", "DeletePrinterDriverA::pEnvironment", "DeletePrinterDriverA::pName",
+            "DeletePrinterDriverW::pDriverName", "DeletePrinterDriverW::pEnvironment", "DeletePrinterDriverW::pName",
+            "DeletePrinterDriverExA::pDriverName", "DeletePrinterDriverExA::pEnvironment", "DeletePrinterDriverExA::pName",
+            "DeletePrinterDriverExW::pDriverName", "DeletePrinterDriverExW::pEnvironment", "DeletePrinterDriverExW::pName",
+            "DeletePrintProcessorA::pEnvironment", "DeletePrintProcessorA::pName", "DeletePrintProcessorA::pPrintProcessorName",
+            "DeletePrintProcessorW::pEnvironment", "DeletePrintProcessorW::pName", "DeletePrintProcessorW::pPrintProcessorName",
+            "EnumPrinterDriversA::pEnvironment", "EnumPrinterDriversA::pName",
+            "EnumPrinterDriversW::pEnvironment", "EnumPrinterDriversW::pName",
+            "EnumPrintersA::Name", "EnumPrintersW::Name",
+            "EnumPrintProcessorDatatypesA::pName", "EnumPrintProcessorDatatypesA::pPrintProcessorName",
+            "EnumPrintProcessorDatatypesW::pName", "EnumPrintProcessorDatatypesW::pPrintProcessorName",
+            "EnumPrintProcessorsA::pEnvironment", "EnumPrintProcessorsA::pName",
+            "EnumPrintProcessorsW::pEnvironment", "EnumPrintProcessorsW::pName",
+            "GetFormA::pFormName", "GetFormW::pFormName",
+            "GetPrinterDataA::pValueName", "GetPrinterDataW::pValueName",
+            "GetPrinterDriverA::pEnvironment", "GetPrinterDriverW::pEnvironment",
+            "GetPrinterDriverDirectoryA::pEnvironment", "GetPrinterDriverDirectoryA::pName",
+            "GetPrinterDriverDirectoryW::pEnvironment", "GetPrinterDriverDirectoryW::pName",
+            "GetPrintProcessorDirectoryA::pEnvironment", "GetPrintProcessorDirectoryA::pName",
+            "GetPrintProcessorDirectoryW::pEnvironment", "GetPrintProcessorDirectoryW::pName",
+            "OpenPrinterA::pPrinterName", "OpenPrinterW::pPrinterName",
+            "SetFormA::pFormName", "SetFormW::pFormName",
+            "SetPrinterDataA::pValueName", "SetPrinterDataW::pValueName",
+        };
+
+        [Fact]
+        public void NetworkWinspoolNativeConstRetiresOnlyQualifiedPointerOverrides()
+        {
+            string root = WinHttpMigrationTests.RepositoryRoot;
+            string[] settings = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "emitter.settings.rsp"));
+            Assert.Equal(92, WinspoolConstParameters.Distinct(StringComparer.Ordinal).Count());
+            foreach (string target in WinspoolConstParameters)
+                Assert.DoesNotContain(target + "=[Const]", settings);
+            Assert.Contains("AddPrinterA::return=PRINTER_HANDLE", settings);
+            Assert.Contains("AddPrinterW::return=PRINTER_HANDLE", settings);
+            string patch = File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "patches", "um", "winspool.h.patch"));
+            Assert.DoesNotContain("_Win32_Const_", patch);
+            Assert.DoesNotContain("_Win32_Enum_(PRINTER_ACCESS_RIGHTS", patch);
+            Assert.Contains("\"name\": \"PRINTER_ACCESS_RIGHTS\"",
+                File.ReadAllText(Path.Combine(root, "generation", "WinSDK", "enums.json")));
+        }
+
         [NativeMigrationTheory]
         [InlineData("WinHttp", "x86", "i686-pc-windows-msvc")]
         [InlineData("WinHttp", "x64", "x86_64-pc-windows-msvc")]
@@ -2735,14 +2796,16 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "ActiveDirectory" => "dsclient.h",
                 "RRas" => "mprapi.h",
                 "MsCs" => "resapi.h",
-                "Printing" => "winspool.h",
+                "Printing" or "PrintingConst" => "winspool.h",
                 "RasDialMode" => "ras.h",
                 "WinSockGroups" or "WinSockGroupsBeforeWaitAll" or "WinSockGroupsBeforePushImmediate" => "winsock2.h",
                 _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
             };
             string root = WinHttpMigrationTests.RepositoryRoot;
             bool winsockGroups = partition.StartsWith("WinSockGroups", StringComparison.Ordinal);
-            string sourcePartition = partition == "RasDialMode" ? "RRas" : winsockGroups ? "WinSock" : partition;
+            bool printingConst = partition == "PrintingConst";
+            string sourcePartition = partition == "RasDialMode" ? "RRas" : winsockGroups ? "WinSock" :
+                printingConst ? "Printing" : partition;
             string control = Environment.GetEnvironmentVariable("NETWORK_BROAD_CONTROL_HEADERS");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             var beforeSal = new List<string>();
@@ -2751,6 +2814,8 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             var afterAnnotations = new List<string>();
             var beforeDiagnostics = new List<string>();
             var afterDiagnostics = new List<string>();
+            var beforeParameters = printingConst ? new List<NativeParameter>() : null;
+            var afterParameters = printingConst ? new List<NativeParameter>() : null;
             string[] headers = { header, "main.cpp" };
             // The unrelated WinHTTP include contains C++ helpers; the owned HTTP header also supports C.
             string sourceText = partition == "HttpServer" && language == "c" ?
@@ -2773,7 +2838,7 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             }
             string controlSourceText = sourceText;
             string controlHeader = null;
-            if (partition == "Printing")
+            if (partition is "Printing" or "PrintingConst")
             {
                 controlHeader = Environment.GetEnvironmentVariable("NETWORK_WINSPOOL_CONTROL_HEADER");
                 Assert.True(!string.IsNullOrEmpty(controlHeader) && File.Exists(controlHeader),
@@ -2805,10 +2870,12 @@ typedef char WinSockPushImmediateNativeValue[(MSG_PUSH_IMMEDIATE == 32) ? 1 : -1
 ";
             var before = Surface(root, control, sourcePartition, architecture, target, headers, checks,
                 metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
-                diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: controlSourceText);
+                diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: controlSourceText,
+                parameters: beforeParameters);
             var after = Surface(root, prepared, sourcePartition, architecture, target, headers, checks,
                 metadataEnabled: enabled, annotations: afterAnnotations, salAnnotations: afterSal,
-                diagnostics: afterDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText);
+                diagnostics: afterDiagnostics, language: language, cInterface: cInterface, sourceText: sourceText,
+                parameters: afterParameters);
             string[] carriers = enabled && partition == "HttpServer" ?
                 new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } :
                 enabled && partition == "RasDialMode" ?
@@ -2820,7 +2887,10 @@ typedef char WinSockPushImmediateNativeValue[(MSG_PUSH_IMMEDIATE == 32) ? 1 : -1
             if (winsockGroups)
                 foreach (string name in new[] { "send", "recv", "shutdown", "socket" })
                     Assert.Single(before.Where(value => value.StartsWith("function " + name + " ", StringComparison.Ordinal)));
-            Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
+            if (printingConst)
+                AssertWinspoolPointeeConstChanges(before, after, beforeParameters, afterParameters);
+            else
+                Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
             if (controlHeader != null)
                 beforeDiagnostics = beforeDiagnostics.Select(value => value.Replace(controlHeader,
                     Path.Combine("<headers>", "um", "winspool.h"), StringComparison.OrdinalIgnoreCase)).ToList();
@@ -2908,13 +2978,15 @@ typedef char WinSockPushImmediateNativeValue[(MSG_PUSH_IMMEDIATE == 32) ? 1 : -1
             Assert.Equal(beforeAnnotations.Concat(addedAnnotations).OrderBy(value => value, StringComparer.Ordinal),
                 afterAnnotations.OrderBy(value => value, StringComparer.Ordinal));
             this.output.WriteLine($"{partition}/{architecture}/{language}/CINTERFACE={cInterface}/metadata={enabled}: " +
-                $"{before.Length} unchanged native signature/type/layout/value/typedef facts; " +
+                (printingConst ? "92 authorized native pointee qualifications across54 functions; binary ABI, " +
+                    "calling conventions, return types, layout, typedefs and other parameters unchanged; " :
+                    $"{before.Length} unchanged native signature/type/layout/value/typedef facts; ") +
                 $"{addedSal.Count} exact legacy-SAL enrichments, {addedAnnotations.Count} exact source annotations; matched diagnostics.");
         }
 
         public static IEnumerable<object[]> NetworkBroadSourceControls()
         {
-            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing", "RasDialMode",
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing", "PrintingConst", "RasDialMode",
                 "WinSockGroups", "WinSockGroupsBeforeWaitAll", "WinSockGroupsBeforePushImmediate" })
                 foreach (var architecture in new[]
                 {
@@ -3148,11 +3220,71 @@ void NetworkBroadSourceSalProbe(
         public static IEnumerable<object[]> DeviceNativeReturnFollowthroughNativeControls()
             => DeviceNativeFollowthroughNativeControls().Where(parameters => parameters[0] is "Shell" or "Variant");
 
+        internal sealed record NativeParameter(string Method, string Name, int Index, string NativeType,
+            string CanonicalType, string PointeeType, bool PointerConst, bool PointeeConst, int PointerDepth,
+            long Size, long Alignment);
+
+        private static void AssertWinspoolPointeeConstChanges(string[] before, string[] after,
+            List<NativeParameter> beforeParameters, List<NativeParameter> afterParameters)
+        {
+            var targets = WinspoolConstParameters.ToHashSet(StringComparer.Ordinal);
+            Assert.Equal(92, targets.Count);
+            var methods = targets.Select(value => value.Substring(0, value.IndexOf("::", StringComparison.Ordinal)))
+                .ToHashSet(StringComparer.Ordinal);
+            Assert.Equal(54, methods.Count);
+            var selected = beforeParameters.Where(value => targets.Contains(value.Method + "::" + value.Name)).ToArray();
+            Assert.Equal(92, selected.Length);
+            Assert.Equal(targets.OrderBy(value => value, StringComparer.Ordinal),
+                selected.Select(value => value.Method + "::" + value.Name).OrderBy(value => value, StringComparer.Ordinal));
+            var expected = beforeParameters.Select(value =>
+            {
+                if (!targets.Contains(value.Method + "::" + value.Name))
+                    return value;
+                Assert.Contains(value.NativeType, new[] { "LPSTR", "LPWSTR" });
+                Assert.Contains(value.PointeeType, new[] { "char", "wchar_t", "unsigned short" });
+                Assert.Equal(1, value.PointerDepth);
+                Assert.False(value.PointerConst);
+                Assert.False(value.PointeeConst);
+                return value with
+                {
+                    NativeType = value.NativeType == "LPSTR" ? "LPCSTR" : "LPCWSTR",
+                    CanonicalType = "const " + value.CanonicalType,
+                    PointeeType = "const " + value.PointeeType,
+                    PointeeConst = true,
+                };
+            }).ToArray();
+            Assert.Equal(expected.OrderBy(value => value.Method, StringComparer.Ordinal).ThenBy(value => value.Index),
+                afterParameters.OrderBy(value => value.Method, StringComparer.Ordinal).ThenBy(value => value.Index));
+
+            var expectedSurface = before.Select(value =>
+            {
+                if (!value.StartsWith("function ", StringComparison.Ordinal))
+                    return value;
+                string method = value.Substring("function ".Length).Split(' ')[0];
+                if (!methods.Contains(method))
+                    return value;
+                Assert.Single(before.Where(item => item.StartsWith("function " + method + " ", StringComparison.Ordinal)));
+                int open = value.IndexOf('(');
+                Assert.True(open >= 0);
+                int depth = 1, close = open;
+                while (depth != 0)
+                {
+                    close++;
+                    if (value[close] == '(') depth++;
+                    else if (value[close] == ')') depth--;
+                }
+                var arguments = expected.Where(argument => argument.Method == method)
+                    .OrderBy(argument => argument.Index).Select(argument => argument.CanonicalType);
+                return value.Substring(0, open + 1) + string.Join(", ", arguments) + value.Substring(close);
+            });
+            Assert.Equal(expectedSurface.OrderBy(value => value, StringComparer.Ordinal), after);
+        }
+
         internal static unsafe string[] Surface(string root, string includeRoot, string partition, string architecture,
             string target, string[] headers, string checks, bool metadataEnabled = false, List<string> annotations = null,
             string sourceText = null, List<string> salAnnotations = null, List<string> diagnostics = null,
             string language = "c++", bool cInterface = false, List<string> rawSalAnnotations = null,
-            bool includeCallableOwners = false)
+            bool includeCallableOwners = false, List<NativeParameter> parameters = null)
         {
             string source = Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "main.cpp");
             string[] partitionOptions = File.ReadAllLines(Path.Combine(root, "generation", "WinSDK", "Partitions", partition, "settings.rsp"));
@@ -3255,7 +3387,23 @@ void NetworkBroadSourceSalProbe(
                     if (kind is CX_DeclKind.CX_DeclKind_Function or CX_DeclKind.CX_DeclKind_CXXMethod or
                         CX_DeclKind.CX_DeclKind_CXXConstructor or CX_DeclKind.CX_DeclKind_CXXDestructor or
                         CX_DeclKind.CX_DeclKind_CXXConversion or CX_DeclKind.CX_DeclKind_CXXDeductionGuide)
+                    {
                         result.Add("function " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling));
+                        if (parameters != null)
+                            for (int argumentIndex = 0; argumentIndex < cursor.NumArguments; argumentIndex++)
+                            {
+                                var argument = cursor.GetArgument((uint)argumentIndex);
+                                var type = argument.Type.CanonicalType;
+                                var pointee = type.PointeeType;
+                                int pointerDepth = 0;
+                                for (var current = type; current.kind == CXTypeKind.CXType_Pointer;
+                                    current = current.PointeeType.CanonicalType)
+                                    pointerDepth++;
+                                parameters.Add(new NativeParameter(owner + name, Text(argument.Spelling), argumentIndex,
+                                    Text(argument.Type.Spelling), Text(type.Spelling), Text(pointee.Spelling),
+                                    type.IsConstQualified, pointee.IsConstQualified, pointerDepth, type.SizeOf, type.AlignOf));
+                            }
+                    }
                     else if (kind is CX_DeclKind.CX_DeclKind_Field or CX_DeclKind.CX_DeclKind_ObjCAtDefsField)
                         result.Add("field " + owner + name + " " + Text(cursor.Type.CanonicalType.Spelling) + " " + cursor.OffsetOfField);
                     else if (record && cursor.IsCompleteDefinition)

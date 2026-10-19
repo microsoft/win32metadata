@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using ClangSharp;
@@ -4532,6 +4533,108 @@ namespace Test { public static class Apis { public const int ALIAS = SHARED; } }
                     .Select(handle => AttributeName(reader, handle) + ":" +
                         Convert.ToHexString(reader.GetBlobBytes(reader.GetCustomAttribute(handle).Value)))
                     .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+        }
+
+        [NativeMigrationTheory("NETWORK_WINSPOOL_CONST_NORMAL_SOURCES")]
+        [InlineData("x86")]
+        [InlineData("x64")]
+        [InlineData("arm64")]
+        public void WinspoolNativePointeeConstNormalSourcesReachPhysicalMetadata(string architecture)
+        {
+            string source = Path.Combine(Environment.GetEnvironmentVariable("NETWORK_WINSPOOL_CONST_NORMAL_SOURCES"),
+                architecture, "Printing.cs");
+            string baseline = Environment.GetEnvironmentVariable("NETWORK_WINSPOOL_CONST_BASELINE_WINMD");
+            string output = Environment.GetEnvironmentVariable("NETWORK_WINSPOOL_CONST_PHYSICAL_ROOT");
+            Assert.True(File.Exists(source), "The actual ordinary Printing source is required: " + source);
+            Assert.True(File.Exists(baseline), "The frozen physical baseline is required: " + baseline);
+            Assert.False(string.IsNullOrEmpty(output));
+            string directory = Path.Combine(output, architecture);
+            Assert.False(Directory.Exists(directory), "Preserve prior physical attempts and select a fresh output directory.");
+            Directory.CreateDirectory(directory);
+            string sourceDirectory = Path.Combine(directory, architecture);
+            Directory.CreateDirectory(sourceDirectory);
+
+            var targets = WinHttpNativeControlTests.WinspoolConstParameters.ToHashSet(StringComparer.Ordinal);
+            Assert.Equal(92, targets.Count);
+            var methods = targets.Select(value => value.Substring(0, value.IndexOf("::", StringComparison.Ordinal)))
+                .ToHashSet(StringComparer.Ordinal);
+            var syntax = CSharpSyntaxTree.ParseText(File.ReadAllText(source)).GetCompilationUnitRoot();
+            var ns = Assert.Single(syntax.Members.OfType<NamespaceDeclarationSyntax>());
+            Assert.Equal("Windows.Win32.Graphics.Printing", ns.Name.ToString());
+            var apis = Assert.Single(ns.Members.OfType<ClassDeclarationSyntax>()
+                .Where(value => value.Identifier.ValueText == "Apis"));
+            var selected = apis.Members.OfType<MethodDeclarationSyntax>()
+                .Where(value => methods.Contains(value.Identifier.ValueText)).ToArray();
+            Assert.Equal(54, selected.Length);
+            Assert.Equal(methods.OrderBy(value => value, StringComparer.Ordinal),
+                selected.Select(value => value.Identifier.ValueText).OrderBy(value => value, StringComparer.Ordinal));
+            var subset = syntax.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                ns.WithMembers(SyntaxFactory.SingletonList<MemberDeclarationSyntax>(
+                    apis.WithMembers(SyntaxFactory.List<MemberDeclarationSyntax>(selected))))));
+            File.WriteAllText(Path.Combine(sourceDirectory, "Printing.cs"), subset.ToFullString());
+
+            // Keep actual NORMAL declarations intact; the reference supplies unrelated native dependency types.
+            using var original = new MetadataImage(baseline);
+            using var current = Emit(directory, architecture, references: new[] { baseline });
+            var oldApis = Assert.Single(original.Reader.TypeDefinitions.Select(original.Reader.GetTypeDefinition)
+                .Where(value => original.Reader.GetString(value.Namespace) == "Windows.Win32.Graphics.Printing" &&
+                    original.Reader.GetString(value.Name) == "Apis"));
+            var newApis = FindType(current.Reader, "Apis");
+            var observations = new List<object>();
+            var signatureNames = new SignatureNames(qualifiedNames: true);
+            foreach (string target in targets.OrderBy(value => value, StringComparer.Ordinal))
+            {
+                string[] names = target.Split(new[] { "::" }, StringSplitOptions.None);
+                var nativeMethod = Assert.Single(selected.Where(value => value.Identifier.ValueText == names[0]));
+                var nativeParameter = Assert.Single(nativeMethod.ParameterList.Parameters
+                    .Where(value => value.Identifier.ValueText == names[1]));
+                int index = nativeMethod.ParameterList.Parameters.IndexOf(nativeParameter);
+                string alias = names[0].EndsWith("A", StringComparison.Ordinal) ? "LPCSTR" : "LPCWSTR";
+                var nativeType = Assert.Single(nativeParameter.AttributeLists.SelectMany(value => value.Attributes)
+                    .Where(value => value.Name.ToString() == "NativeTypeName"));
+                Assert.Equal(alias, nativeType.ArgumentList.Arguments[0].Expression.ToString().Trim('"'));
+
+                var oldMethod = Assert.Single(oldApis.GetMethods().Select(original.Reader.GetMethodDefinition)
+                    .Where(value => original.Reader.GetString(value.Name) == names[0]));
+                var newMethod = Assert.Single(newApis.GetMethods().Select(current.Reader.GetMethodDefinition)
+                    .Where(value => current.Reader.GetString(value.Name) == names[0]));
+                var oldParameter = Assert.Single(oldMethod.GetParameters().Select(original.Reader.GetParameter)
+                    .Where(value => original.Reader.GetString(value.Name) == names[1]));
+                var newParameter = Assert.Single(newMethod.GetParameters().Select(current.Reader.GetParameter)
+                    .Where(value => current.Reader.GetString(value.Name) == names[1]));
+                Assert.Equal(index + 1, oldParameter.SequenceNumber);
+                Assert.Equal(oldParameter.SequenceNumber, newParameter.SequenceNumber);
+                Assert.Equal(oldParameter.Attributes, newParameter.Attributes);
+                Assert.Single(oldParameter.GetCustomAttributes()
+                    .Where(value => AttributeName(original.Reader, value) == "ConstAttribute"));
+                Assert.Single(newParameter.GetCustomAttributes()
+                    .Where(value => AttributeName(current.Reader, value) == "ConstAttribute"));
+                string oldType = oldMethod.DecodeSignature(signatureNames, null).ParameterTypes[index];
+                string newType = newMethod.DecodeSignature(signatureNames, null).ParameterTypes[index];
+                Assert.Equal(oldType, newType);
+                Assert.Equal("Windows.Win32.Foundation." + (alias == "LPCSTR" ? "PSTR" : "PWSTR"), newType);
+                observations.Add(new
+                {
+                    symbol = target, parameterIndex = index,
+                    beforeNativeTypeName = alias == "LPCSTR" ? "LPSTR" : "LPWSTR",
+                    afterNativeTypeName = alias, pointerIndirection = 1, nativePointeeConstChangeAuthorized = true,
+                    oldPhysicalType = oldType, newPhysicalType = newType, oldConstCount = 1, newConstCount = 1,
+                    parameterFlags = newParameter.Attributes.ToString(), legacyMemberRemapsUsed = 0,
+                });
+            }
+            Assert.Equal(92, observations.Count);
+            AssertMetadataClosure(current.Reader);
+            string image = Path.Combine(directory, "Test.winmd");
+            File.WriteAllText(Path.Combine(directory, "normal-physical-observations.json"), JsonSerializer.Serialize(new
+            {
+                architecture, actualNormalSource = source,
+                normalSourceSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(source))),
+                baselineWinmd = baseline,
+                baselineSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(baseline))),
+                physicalImage = image, physicalImageSha256 = Convert.ToHexString(SHA256.HashData(File.ReadAllBytes(image))),
+                actualNormalMethodsUnmodified = 54, exactParameters = observations, legacyMemberRemapsUsed = 0,
+                fullSdkImageOrConsumerClaimed = false,
+            }, new JsonSerializerOptions { WriteIndented = true }));
         }
 
         internal static MetadataImage Emit(string directory, string architecture, HashSet<string> reducePointerLevels = null,
