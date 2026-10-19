@@ -171,6 +171,20 @@ payloads remain residuals. Only one complete native method/parameter can bind ea
 forwarded, ambiguous, unsupported and already-native `[retval]` contracts remain
 explicit residuals. Existing native facts do not earn new conversion credit.
 
+Existing `associated-enum-use` rows can bind one original IDL struct field or
+interface method parameter. The authorer inserts
+`[annotation("_Win32_AssociatedEnum_(NativeEnum)")]`, or appends the token inside
+the single existing native annotation payload. It preserves native types,
+storage, field order and SAL; imported, quoted, ambiguous and unsupported targets
+remain exact residuals. The named enum must resolve in the actual native compiler,
+and the actual normal projection must contain the exact associated-enum payload
+on the field or every native/derived method and vtable delegate parameter.
+This does not implement legacy direct-enum-use type substitutions.
+For an anonymous original enum with a unique existing same-original MIDL-tag
+remapping, the carrier references that real generated `enum` tag. The existing
+global parser remap remains intact; native compilation and the exact normal
+payload must prove the binding. No native enum declaration or member is added.
+
 Normal member controls follow native inheritance and each wrapper's exact
 vtable-delegate reference, preserving receiver and parameter signatures.
 Anonymous `NativeTypeName` coordinate changes are enumerated separately.

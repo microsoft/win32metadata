@@ -1,5 +1,5 @@
 diff --git a/um/shobjidl_core.idl b/um/shobjidl_core.idl
-index 3074ba74..a074ca59 100644
+index 3074ba74..6b1f9b6d 100644
 --- a/um/shobjidl_core.idl
 +++ b/um/shobjidl_core.idl
 @@ -3,6 +3,7 @@
@@ -191,7 +191,14 @@ index 3074ba74..a074ca59 100644
  [
      uuid(000214E3-0000-0000-C000-000000000046),
      object,
-@@ -1646,7 +1674,9 @@ interface IShellView : IOleWindow
+@@ -1640,13 +1668,15 @@ interface IShellView : IOleWindow
+         [in] SVSIF uFlags);
+ 
+     HRESULT GetItemObject(
+-        [in] UINT /* SVGIO */ uItem,
++        [annotation("_Win32_AssociatedEnum_(_SVGIO)")] [in] UINT /* SVGIO */ uItem,
+         [in] REFIID riid,
+         [out, iid_is(riid)] void **ppv);
  
  typedef IShellView *LPSHELLVIEW;
  }
@@ -209,6 +216,21 @@ index 3074ba74..a074ca59 100644
  [
      uuid(cde725b0-ccc9-4519-917e-325d72fab4ce),
      object,
+@@ -1723,12 +1754,12 @@ interface IFolderView : IUnknown
+ 
+     // get the count of items for selection, total, etc
+     HRESULT ItemCount(
+-        [in] UINT /* SVGIO */ uFlags,
++        [annotation("_Win32_AssociatedEnum_(_SVGIO)")] [in] UINT /* SVGIO */ uFlags,
+         [out] int *pcItems);
+ 
+     // get the items in the view in the form of IShellItemArray, IDataObject, etc
+     HRESULT Items(
+-        [in] UINT /* SVGIO */ uFlags,
++        [annotation("_Win32_AssociatedEnum_(_SVGIO)")] [in] UINT /* SVGIO */ uFlags,
+         [in] REFIID riid,
+         [out, iid_is(riid)] void **ppv);
+ 
 @@ -1789,6 +1820,7 @@ cpp_quote("#if defined(__cplusplus)")
  cpp_quote("#define DEPRECATED_HRESULT HRESULT DECLSPEC_DEPRECATED")
  cpp_quote("#endif")
@@ -1198,7 +1220,19 @@ index 3074ba74..a074ca59 100644
  [
      uuid(a08ce4d0-fa25-44ab-b57c-c7b1c323e0b9),
      pointer_default(unique)
-@@ -7588,6 +7737,7 @@ interface IExplorerCommand : IUnknown
+@@ -7578,16 +7727,17 @@ interface IExplorerCommand : IUnknown
+     // When "fOkToBeSlow" is FALSE this method must return quickly, in this case you can
+     // return E_PENDING and this object will be recreated on a background thread and called with
+     // fOkToBeSlow == TRUE where you can do expensive work.
+-    HRESULT GetState([in, unique] IShellItemArray *psiItemArray, [in] BOOL fOkToBeSlow, [out] EXPCMDSTATE *pCmdState);
++    HRESULT GetState([in, unique] IShellItemArray *psiItemArray, [in] BOOL fOkToBeSlow, [annotation("_Win32_AssociatedEnum_(_EXPCMDSTATE)")] [out] EXPCMDSTATE *pCmdState);
+ 
+     HRESULT Invoke([in, unique] IShellItemArray *psiItemArray, [in, unique] IBindCtx *pbc);
+ 
+-    HRESULT GetFlags([out] EXPCMDFLAGS *pFlags);
++    HRESULT GetFlags([annotation("_Win32_AssociatedEnum_(_EXPCMDFLAGS)")] [out] EXPCMDFLAGS *pFlags);
+ 
+     // If GetFlags() returned ECF_HASSUBCOMMANDS this will be used to discover the sub commands.
      HRESULT EnumSubCommands([out] IEnumExplorerCommand **ppEnum);
  }
  

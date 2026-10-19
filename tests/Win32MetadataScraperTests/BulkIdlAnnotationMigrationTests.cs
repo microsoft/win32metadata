@@ -218,6 +218,111 @@ namespace Win32MetadataScraperTests
             Assert.True(application.ExitCode == 0, application.Error);
         }
 
+        [Theory]
+        [InlineData("\r\n", false)]
+        [InlineData("\n", true)]
+        public void NativeEnumAssociationsPreserveFieldsParameterSalAndAllOriginalBytes(string newline, bool inlineAnnotation)
+        {
+            string native = inlineAnnotation ? "[annotation(\"_Field_range_(0, 2)\")] " : "";
+            string source = ("typedef enum NATIVE_KIND { First = 1, Second = 2 } NATIVE_KIND;\n" +
+                "typedef struct _NATIVE_RECORD {\n" +
+                "    " + native + "unsigned flags;\n" +
+                "    struct { unsigned flags; } nested;\n" +
+                "} NATIVE_RECORD;\n" +
+                "interface IExisting : IUnknown {\n" +
+                "    HRESULT Read([in] unsigned count, [out, annotation(\"_Out_\")] unsigned* result);\n" +
+                "};\n").Replace("\n", newline, StringComparison.Ordinal);
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            object[] facts =
+            {
+                Association("NATIVE_RECORD::flags", "NATIVE_KIND"),
+                Association("IExisting::Read::result", "NATIVE_KIND"),
+            };
+            fixture.WriteMap(facts);
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+            const string macro = "_Win32_AssociatedEnum_(NATIVE_KIND)";
+            Assert.Contains(inlineAnnotation ? "[annotation(\"_Field_range_(0, 2) " + macro + "\")] unsigned flags" :
+                "[annotation(\"" + macro + "\")] unsigned flags", authored);
+            Assert.Contains("[out, annotation(\"_Out_ " + macro + "\")] unsigned* result", authored);
+            Assert.Contains("struct { unsigned flags; } nested;", authored);
+            Assert.Equal(source, authored.Replace("#include <sal.h>" + newline, "", StringComparison.Ordinal)
+                .Replace(inlineAnnotation ? " " + macro : "[annotation(\"" + macro + "\")] ", "", StringComparison.Ordinal)
+                .Replace(" " + macro, "", StringComparison.Ordinal));
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(2, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(0, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            var field = report.RootElement.GetProperty("owners")[0].GetProperty("dispositions")[0];
+            Assert.Equal("FieldDecl", field.GetProperty("declaration").GetProperty("kind").GetString());
+            Assert.Equal("_NATIVE_RECORD::flags", field.GetProperty("declaration").GetProperty("nativeQualifiedName").GetString());
+        }
+
+        [Fact]
+        public void AmbiguousImportedAndQuotedEnumAssociationsRemainExactLegacyDebt()
+        {
+            const string source = "typedef struct Duplicate { unsigned flags; unsigned flags; } Duplicate;\n" +
+                "typedef struct Other { unsigned flags; } VariableNotType;\n" +
+                "struct Forward;\n" +
+                "cpp_quote(\"typedef struct Quoted { unsigned flags; } Quoted;\")\n" +
+                "interface IExisting : IUnknown {\n" +
+                "    HRESULT Read([out, annotation(\"_Out_\")][annotation(\"_Out_\")] unsigned* result);\n" +
+                "};\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            object[] facts =
+            {
+                Association("Duplicate::flags", "NATIVE_KIND"),
+                Association("Forward::flags", "NATIVE_KIND"),
+                Association("Quoted::flags", "NATIVE_KIND"),
+                Association("Imported::flags", "NATIVE_KIND"),
+                Association("IExisting::Read::result", "NATIVE_KIND"),
+                new { category = "associated-enum-use", symbol = "Other::flags",
+                    value = "Other::flags=[AssociatedEnum(\"invented::payload\")]"},
+            };
+            fixture.WriteMap(facts);
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(0, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(6, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            Assert.False(Directory.Exists(Path.Combine(result.OutputDirectory, "patches")));
+            Assert.Equal(source, File.ReadAllText(fixture.Source));
+        }
+
+        private static object Association(string symbol, string name) => new
+        {
+            category = "associated-enum-use", symbol, value = symbol + "=[AssociatedEnum(\"" + name + "\")]",
+        };
+
+        [Theory]
+        [InlineData(false)]
+        [InlineData(true)]
+        public void AnonymousEnumAssociationsUseOnlyUniqueExistingSameOriginalParserRemaps(bool ambiguous)
+        {
+            const string source = "enum { NativeChoice = 1 };\n" +
+                "typedef struct HOLDER { unsigned flags; } HOLDER;\n";
+            using var fixture = new Fixture(Encoding.ASCII.GetBytes(source));
+            const string tag = "__MIDL___MIDL_itf_sample_0000_0000_0012";
+            File.WriteAllText(Path.Combine(fixture.Project, "scraper.settings.rsp"),
+                "--remap\n" + tag + "=NATIVE_GROUP\n" +
+                "__MIDL___MIDL_itf_foreign_0000_0000_0012=NATIVE_GROUP\n" +
+                (ambiguous ? "__MIDL___MIDL_itf_sample_0000_0000_0013=NATIVE_GROUP\n" : ""));
+            fixture.WriteMap(new[] { Association("HOLDER::flags", "NATIVE_GROUP") });
+            var result = fixture.Run();
+            Assert.True(result.ExitCode == 0, result.Error);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(result.OutputDirectory, "report.json")));
+            Assert.Equal(ambiguous ? 0 : 1, report.RootElement.GetProperty("authoredFacts").GetInt32());
+            Assert.Equal(ambiguous ? 1 : 0, report.RootElement.GetProperty("retainedLegacyFacts").GetInt32());
+            if (!ambiguous)
+            {
+                string authored = File.ReadAllText(Path.Combine(result.OutputDirectory, "source", "um", "sample.idl"));
+                const string annotation = "[annotation(\"_Win32_AssociatedEnum_(enum " + tag + ")\")] ";
+                Assert.Contains(annotation + "unsigned flags", authored);
+                Assert.Equal(source, authored.Replace("#include <sal.h>\n", "", StringComparison.Ordinal)
+                    .Replace(annotation, "", StringComparison.Ordinal));
+            }
+        }
+
         [Fact]
         public void AuthoringIsRepeatableAndNeverOverwritesAPublishedResult()
         {
@@ -663,6 +768,21 @@ namespace Win32MetadataScraperTests
                 afterSal.OrderBy(value => value, StringComparer.Ordinal));
             Assert.Equal(beforeDiagnostics.OrderBy(value => value, StringComparer.Ordinal),
                 afterDiagnostics.OrderBy(value => value, StringComparer.Ordinal));
+            if (newFacts.All(value => value.GetProperty("fact").GetProperty("category").GetString() == "associated-enum-use"))
+            {
+                string[] expectedAssociations = newFacts.Select(value =>
+                    value.GetProperty("declaration").GetProperty("nativeQualifiedName").GetString() + "|AssociatedEnum")
+                    .OrderBy(value => value, StringComparer.Ordinal).ToArray();
+                Assert.Equal(expectedAssociations, afterAnnotations.Except(beforeAnnotations, StringComparer.Ordinal)
+                    .Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
+                Assert.Equal(beforeAnnotations.OrderBy(value => value, StringComparer.Ordinal),
+                    afterAnnotations.Where(value => !expectedAssociations.Contains(value, StringComparer.Ordinal))
+                        .OrderBy(value => value, StringComparer.Ordinal));
+                this.output.WriteLine($"{partition}/{architecture}: {before.Length} unchanged native ABI/value facts, " +
+                    $"{beforeSal.Count} unchanged fully qualified SAL facts and all prior annotation multiplicities; " +
+                    $"{newFacts.Length} exact new native association targets; actual normal controls check typed payloads.");
+                return;
+            }
             string[] expectedBefore = originalFacts.Select(Fact).OrderBy(value => value, StringComparer.Ordinal).ToArray();
             Assert.Equal(expectedBefore, beforeAnnotations.Distinct(StringComparer.Ordinal).OrderBy(value => value, StringComparer.Ordinal));
             string[] carriers = afterAnnotations.Where(value => value.StartsWith("_WIN32META_METHOD_", StringComparison.Ordinal)).ToArray();
@@ -782,6 +902,7 @@ namespace Win32MetadataScraperTests
                         "_Win32_PreserveResult_" => "global::System.Runtime.InteropServices.PreserveSig",
                         "_Win32_Retval_" => "global::Windows.Win32.Foundation.Metadata.RetVal",
                         _ when category == "supportedOS" => "global::Windows.Win32.Foundation.Metadata.SupportedOSPlatform",
+                        _ when category == "associated-enum-use" => "global::Windows.Win32.Foundation.Metadata.AssociatedEnum",
                         _ => throw new InvalidOperationException("Unknown native contract projection."),
                     };
                     var attribute = Assert.Single(attributes.Where(value => value.Name.ToString() == name));
@@ -791,6 +912,12 @@ namespace Win32MetadataScraperTests
                         string payload = "SupportedOSPlatform(\"" + Assert.IsType<LiteralExpressionSyntax>(
                             Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText + "\")";
                         Assert.Equal(symbol + "=" + payload, fact.GetProperty("value").GetString());
+                    }
+                    else if (category == "associated-enum-use")
+                    {
+                        string payload = Assert.IsType<LiteralExpressionSyntax>(
+                            Assert.Single(attribute.ArgumentList.Arguments).Expression).Token.ValueText;
+                        Assert.Equal(symbol + "=[AssociatedEnum(\"" + payload + "\")]", fact.GetProperty("value").GetString());
                     }
                     var list = Assert.IsType<AttributeListSyntax>(attribute.Parent);
                     Assert.Single(list.Attributes);
@@ -923,6 +1050,7 @@ namespace Win32MetadataScraperTests
                 MethodDeclarationSyntax method => method.Identifier.ValueText,
                 DelegateDeclarationSyntax callback => callback.Identifier.ValueText,
                 ParameterSyntax parameter => parameter.Identifier.ValueText,
+                FieldDeclarationSyntax field => Assert.Single(field.Declaration.Variables).Identifier.ValueText,
                 _ => null,
             }).Where(value => value != null));
             static object Describe(SyntaxToken token) => new
@@ -939,6 +1067,9 @@ namespace Win32MetadataScraperTests
                         method.Identifier.ValueText == symbol && method.AttributeLists.SelectMany(list => list.Attributes).Any(IsImport));
                 var types = root.DescendantNodes().OfType<TypeDeclarationSyntax>().ToLookup(type =>
                     type.Identifier.ValueText, StringComparer.Ordinal);
+                if (kind == "FieldDecl")
+                    return types[parts[0]].SelectMany(type => type.Members.OfType<FieldDeclarationSyntax>())
+                        .Where(field => field.Declaration.Variables.Any(variable => variable.Identifier.ValueText == parts[1]));
                 var methods = types.SelectMany(group => group).Where(IsOwnerOrDerived)
                     .SelectMany(type => type.Members.OfType<MethodDeclarationSyntax>())
                     .Where(method => method.Identifier.ValueText == parts[1]).ToArray();

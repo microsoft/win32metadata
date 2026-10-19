@@ -1,5 +1,5 @@
 diff --git a/shared/dxgi1_3.idl b/shared/dxgi1_3.idl
-index 06b176bc..c4029a43 100644
+index 06b176bc..c4f3d025 100644
 --- a/shared/dxgi1_3.idl
 +++ b/shared/dxgi1_3.idl
 @@ -1,5 +1,6 @@
@@ -49,6 +49,15 @@ index 06b176bc..c4029a43 100644
  [
      object,
      uuid( 25483823-cd46-4c7d-86ca-47aa95b837bd ),
+@@ -108,7 +113,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+ //------------------------------------------------------------------------------
+ typedef struct DXGI_DECODE_SWAP_CHAIN_DESC
+ {
+-    UINT Flags;
++    [annotation("_Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG)")] UINT Flags;
+ }  DXGI_DECODE_SWAP_CHAIN_DESC;
+ 
+ //+-----------------------------------------------------------------------------
 @@ -126,6 +131,7 @@ typedef enum DXGI_MULTIPLANE_OVERLAY_YCbCr_FLAGS
  //--------------------------------------------------------------------------------------------------------
  // IDXGIDecodeSwapChain interface
@@ -87,3 +96,12 @@ index 06b176bc..c4029a43 100644
  [
      object,
      uuid( 8a6bb301-7e7e-41F4-a8e0-5b32f7f99b18 ),
+@@ -244,7 +254,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ interface IDXGIOutput3 :
+     IDXGIOutput2
+ {
+-    HRESULT CheckOverlaySupport( [in, annotation("_In_")] DXGI_FORMAT EnumFormat, [out, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_")] UINT *pFlags );
++    HRESULT CheckOverlaySupport( [in, annotation("_In_")] DXGI_FORMAT EnumFormat, [out, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_ _Win32_AssociatedEnum_(DXGI_OVERLAY_SUPPORT_FLAG)")] UINT *pFlags );
+ };
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")

@@ -158,6 +158,59 @@ function Get-ClosingDelimiter([string]$Mask, [int]$Start, [char]$Open, [char]$Cl
     -1
 }
 
+function Get-IdlAnnotationInsertion([string]$Text, [string]$Mask, [int]$Start, [int]$End) {
+    $declaration = $Mask.Substring($Start, $End - $Start)
+    $annotations = @([regex]::Matches($Text.Substring($Start, $End - $Start),
+        '\bannotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)') |
+        Where-Object { $Mask.Substring($Start + $_.Index, 'annotation'.Length) -ceq 'annotation' })
+    $annotation = if ($annotations.Count -eq 1) { $annotations[0].Groups['value'] }
+    [pscustomobject]@{
+        insertionOffset = if ($annotation) { $Start + $annotation.Index + $annotation.Length }
+            else { $Start + [regex]::Match($declaration, '\S').Index }
+        annotationCount = $annotations.Count
+        appendToAnnotation = $null -ne $annotation
+        nativeRetval = $declaration -match '\[[^\]]*\bretval\b[^\]]*\]' -or
+            ($annotation -and $annotation.Value -match '\b_(?:Out|COM_Outptr)_retval_')
+    }
+}
+
+function Find-IdlField([string]$Text, [string]$Mask, [string]$Name) {
+    $parts = $Name -split '::'
+    if ($parts.Count -ne 2) { return }
+    foreach ($record in [regex]::Matches($Mask,
+        '\b(?:(?<typedef>typedef)(?:\s|\[[^\]]*\])+)?struct\s+(?:(?<tag>[A-Za-z_]\w*)\s*)?\{')) {
+        $open = $record.Index + $record.Length - 1
+        $close = Get-ClosingDelimiter $Mask $open '{' '}'
+        if ($close -lt 0) { continue }
+        $alias = [regex]::Match($Mask.Substring($close + 1), '^\s*(?<name>[A-Za-z_]\w*)\s*;')
+        if ($record.Groups['tag'].Value -cne $parts[0] -and
+            !($record.Groups['typedef'].Success -and $alias.Success -and $alias.Groups['name'].Value -ceq $parts[0])) { continue }
+        $depth = 0
+        $start = $open + 1
+        for ($cursor = $start; $cursor -lt $close; $cursor++) {
+            if ($Mask[$cursor] -eq '{') { $depth++ }
+            elseif ($Mask[$cursor] -eq '}') { $depth-- }
+            elseif ($Mask[$cursor] -eq ';' -and !$depth) {
+                $declaration = $Mask.Substring($start, $cursor - $start)
+                $field = [regex]::Match($declaration,
+                    "\b(?<name>$([regex]::Escape($parts[1])))\s*(?:\[[^\]]*\]\s*)*$")
+                if ($field.Success) {
+                    $placement = Get-IdlAnnotationInsertion $Text $Mask $start $cursor
+                    $nativeOwner = if ($record.Groups['tag'].Success) { $record.Groups['tag'].Value } else { '' }
+                    [pscustomobject]@{
+                        offset = $start + $field.Groups['name'].Index; start = $start; end = $cursor
+                        nativeQualifiedName = "${nativeOwner}::$($parts[1])"
+                        insertionOffset = $placement.insertionOffset
+                        annotationCount = $placement.annotationCount
+                        appendToAnnotation = $placement.appendToAnnotation
+                    }
+                }
+                $start = $cursor + 1
+            }
+        }
+    }
+}
+
 function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [string]$Name) {
     $parts = $Name -split '::'
     if ($parts.Count -notin @(2, 3)) { return }
@@ -200,19 +253,14 @@ function Find-IdlMethod([string]$Text, [string]$Mask, [object[]]$Definitions, [s
                     $match = [regex]::Match($parameter,
                         "\b(?<name>$([regex]::Escape($parts[2])))\s*(?:\[[^\]]*\]\s*)*$")
                     if ($match.Success) {
-                        $parameterText = $Text.Substring($start, $cursor - $start)
-                        $annotations = @([regex]::Matches($parameterText, '\bannotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)') |
-                            Where-Object { $Mask.Substring($start + $_.Index, 'annotation'.Length) -ceq 'annotation' })
-                        $annotation = if ($annotations.Count -eq 1) { $annotations[0].Groups['value'] }
+                        $placement = Get-IdlAnnotationInsertion $Text $Mask $start $cursor
                         [pscustomobject]@{
                             offset = $start + $match.Groups['name'].Index; start = $start; end = $cursor
-                            insertionOffset = if ($annotation) { $start + $annotation.Index + $annotation.Length }
-                                else { $start + [regex]::Match($parameter, '\S').Index }
+                            insertionOffset = $placement.insertionOffset
                             needsNewline = $false
-                            annotationCount = $annotations.Count
-                            appendToAnnotation = $null -ne $annotation
-                            nativeRetval = $parameter -match '\[[^\]]*\bretval\b[^\]]*\]' -or
-                                ($annotation -and $annotation.Value -match '\b_(?:Out|COM_Outptr)_retval_')
+                            annotationCount = $placement.annotationCount
+                            appendToAnnotation = $placement.appendToAnnotation
+                            nativeRetval = $placement.nativeRetval
                         }
                     }
                     $start = $cursor + 1
@@ -288,6 +336,10 @@ foreach ($match in [regex]::Matches($annotationText, '(?m)^#define _WIN32META_OS
     $macros[$match.Groups[2].Value] = $macro
 }
 if (!$macros.Count) { throw 'No canonical public SupportedOS vocabulary was found.' }
+$globalSettings = Join-Path $SdkProjectRoot 'scraper.settings.rsp'
+$enumRemaps = @(if (Test-Path -LiteralPath $globalSettings -PathType Leaf) {
+    Get-RspValues ([IO.File]::ReadAllText($globalSettings)) '--remap'
+})
 
 $results = [Collections.Generic.List[object]]::new()
 $plans = [Collections.Generic.List[object]]::new()
@@ -340,6 +392,52 @@ foreach ($owner in $owners) {
         $declarations = @($definitions | Where-Object { $_.Groups['name'].Value -ceq $fact.symbol })
         $functions = @(Find-QuotedFunction $text $mask $quotes $fact.symbol)
         $reason = $null
+        if ($fact.category -ceq 'associated-enum-use') {
+            $association = [regex]::Match($fact.value,
+                '^([^=]+)=\[AssociatedEnum\("(?<enum>[A-Za-z_]\w*)"\)\]$')
+            $parts = $fact.symbol -split '::'
+            $targets = @(if ($parts.Count -eq 2) { Find-IdlField $text $mask $fact.symbol }
+                elseif ($parts.Count -eq 3) { Find-IdlMethod $text $mask $definitions $fact.symbol })
+            if (!$association.Success -or $association.Groups[1].Value -cne $fact.symbol) {
+                $reason = 'unsupported-or-inconsistent-associated-enum-payload'
+            }
+            elseif ($targets.Count -ne 1) { $reason = "requires-one-original-field-or-method-parameter-found-$($targets.Count)" }
+            elseif ($targets[0].annotationCount -gt 1) {
+                $reason = "requires-one-existing-native-annotation-found-$($targets[0].annotationCount)"
+            }
+            $enumName = $association.Groups['enum'].Value
+            $generatedTagPattern = '^(__MIDL___MIDL_itf_' +
+                [regex]::Escape([IO.Path]::GetFileNameWithoutExtension($relative)) +
+                '_[0-9_]+)=' + [regex]::Escape($enumName) + '$'
+            $generatedTags = @($enumRemaps | ForEach-Object {
+                $match = [regex]::Match($_, $generatedTagPattern)
+                if ($match.Success) { $match.Groups[1].Value }
+            })
+            if ($generatedTags.Count -gt 1) { $reason = 'ambiguous-existing-same-original-generated-enum-remaps' }
+            if ($reason) {
+                $dispositions.Add([ordered]@{ fact = $fact; disposition = 'retained-legacy'; reason = $reason })
+                continue
+            }
+            $target = $targets[0]
+            $enumType = if ($generatedTags.Count -eq 1) { "enum $($generatedTags[0])" } else { $enumName }
+            $macro = "_Win32_AssociatedEnum_($enumType)"
+            $annotation = if ($target.appendToAnnotation) { " $macro" } else { "[annotation(`"$macro`")] " }
+            $insertions.Add([pscustomobject]@{ offset = $target.insertionOffset; text = $annotation })
+            $dispositions.Add([ordered]@{
+                fact = $fact; disposition = 'authored-original-idl'; macro = $macro
+                declaration = [ordered]@{
+                    name = $parts[-1]; qualifiedName = $fact.symbol
+                    kind = if ($parts.Count -eq 2) { 'FieldDecl' } else { 'ParmVarDecl' }
+                    sourceForm = 'native-idl-field-or-interface-parameter'; file = $relative
+                    nativeQualifiedName = if ($parts.Count -eq 2) { $target.nativeQualifiedName } else { $fact.symbol }
+                    enumNativeType = $enumType
+                    line = 1 + [regex]::Matches($text.Substring(0, $target.offset), '\n').Count
+                    offset = $target.offset; start = $target.start; end = $target.end
+                    isDefinition = $false; sourceSha256 = Get-Hash $bytes
+                }
+            })
+            continue
+        }
         $methodAnnotation = if ($fact.category -ceq 'declaration-attribute-override' -and
             $fact.value -ceq "$($fact.symbol)=[RetVal]") { '_Win32_Retval_' }
         elseif ($fact.category -ceq 'declaration-attribute-override' -and

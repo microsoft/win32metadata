@@ -1,5 +1,5 @@
 diff --git a/um/dxva2api.idl b/um/dxva2api.idl
-index 5ca7bc2e..c6f3d54b 100644
+index 5ca7bc2e..34e59655 100644
 --- a/um/dxva2api.idl
 +++ b/um/dxva2api.idl
 @@ -5,6 +5,7 @@
@@ -10,6 +10,15 @@ index 5ca7bc2e..c6f3d54b 100644
  import "unknwn.idl";
  
  cpp_quote("#include <winapifamily.h>")
+@@ -551,7 +552,7 @@ typedef struct _DXVA2_ConfigPictureDecode
+ 
+ typedef struct _DXVA2_DecodeBufferDesc
+ {
+-    DWORD       CompressedBufferType;
++    [annotation("_Win32_AssociatedEnum_(enum __MIDL___MIDL_itf_dxva2api_0000_0000_0012)")] DWORD       CompressedBufferType;
+     UINT        BufferIndex;    // reserved
+     UINT        DataOffset;
+     UINT        DataSize;
 @@ -631,6 +632,7 @@ interface IDirectXVideoProcessor;
  //
  //  TBD.
@@ -26,6 +35,15 @@ index 5ca7bc2e..c6f3d54b 100644
  [
      object,
      uuid(fc51a550-d5e7-11d9-af55-00054e43ff02),
+@@ -694,7 +697,7 @@ interface IDirectXVideoAccelerationService : IUnknown
+         [in, annotation("_In_")] D3DFORMAT Format,
+         [in, annotation("_In_")] D3DPOOL Pool,
+         [in, annotation("_In_")] DWORD Usage,
+-        [in, annotation("_In_")] DWORD DxvaType,    // see DXVA2_VideoXxxxRenderTarget
++        [in, annotation("_In_ _Win32_AssociatedEnum_(enum __MIDL___MIDL_itf_dxva2api_0000_0000_0013)")] DWORD DxvaType,    // see DXVA2_VideoXxxxRenderTarget
+         [out, size_is(BackBuffers+1), annotation("_Out_writes_(BackBuffers+1)")] IDirect3DSurface9** ppSurface,
+         [in, out, annotation("_Inout_opt_")] HANDLE* pSharedHandle
+         );
 @@ -705,6 +708,7 @@ interface IDirectXVideoAccelerationService : IUnknown
  //
  //  TBD.
@@ -50,6 +68,15 @@ index 5ca7bc2e..c6f3d54b 100644
  [
      object,
      uuid(f2b0810a-fd00-43c9-918c-df94e2d8ef7d),
+@@ -838,7 +844,7 @@ interface IDirectXVideoDecoder : IUnknown
+         );
+ 
+     HRESULT GetBuffer(
+-        [in, annotation("_In_")] UINT BufferType,
++        [in, annotation("_In_ _Win32_AssociatedEnum_(enum __MIDL___MIDL_itf_dxva2api_0000_0000_0012)")] UINT BufferType,
+         [out, annotation("_Out_")] void** ppBuffer,
+         [out, annotation("_Out_")] UINT* pBufferSize
+         );
 @@ -867,6 +873,7 @@ interface IDirectXVideoDecoder : IUnknown
  //
  //  TBD.
