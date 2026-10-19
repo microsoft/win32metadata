@@ -1843,6 +1843,55 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                             yield return new object[] { partition, architecture.Item1, architecture.Item2, enabled, cInterface };
         }
 
+        [Fact]
+        public void SourcePatchesKeepWinSockGroupsAndNativeAvailability()
+        {
+            string root = Path.Combine(WinHttpMigrationTests.RepositoryRoot, "generation", "WinSDK");
+            using var enums = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "enums.json")));
+            var retained = enums.RootElement.GetProperty("items").EnumerateArray().ToArray();
+            foreach (string name in new[] { "SEND_RECV_FLAGS", "WINSOCK_SOCKET_TYPE", "WINSOCK_SHUTDOWN_HOW" })
+                Assert.DoesNotContain(retained, item =>
+                    item.TryGetProperty("name", out var value) && value.GetString() == name ||
+                    item.TryGetProperty("addUsesTo", out var additional) && additional.GetString() == name);
+            string winsock = File.ReadAllText(Path.Combine(root, "patches", "um", "winsock2.h.patch"));
+            string additions = string.Join("\n", winsock.Split('\n')
+                .Where(line => line.StartsWith("+", StringComparison.Ordinal) && !line.StartsWith("+++", StringComparison.Ordinal))
+                .Select(line => line.Substring(1).TrimEnd('\r')));
+            var groups = Regex.Matches(additions,
+                @"_Win32_(?<kind>FlagsEnum|Enum)_\((?<name>SEND_RECV_FLAGS|WINSOCK_SOCKET_TYPE|WINSOCK_SHUTDOWN_HOW),\s*(?<storage>\w+),\s*(?<members>[^)]+)\);");
+            Assert.Equal(5, groups.Count);
+            Assert.Equal(3, groups.Select(group => group.Groups["name"].Value).Distinct(StringComparer.Ordinal).Count());
+            foreach (Match group in groups)
+                Assert.Equal("int", group.Groups["storage"].Value);
+            foreach (var expected in new[]
+            {
+                ("WINSOCK_SOCKET_TYPE", new[] { "SOCK_STREAM", "SOCK_DGRAM", "SOCK_RAW", "SOCK_RDM", "SOCK_SEQPACKET" }),
+                ("WINSOCK_SHUTDOWN_HOW", new[] { "SD_RECEIVE", "SD_SEND", "SD_BOTH" }),
+            })
+            {
+                var group = Assert.Single(groups.Where(group => group.Groups["name"].Value == expected.Item1));
+                Assert.Equal("Enum", group.Groups["kind"].Value);
+                Assert.Equal(expected.Item2, group.Groups["members"].Value.Split(',').Select(value => value.Trim()));
+            }
+            var flags = groups.Where(group => group.Groups["name"].Value == "SEND_RECV_FLAGS")
+                .OrderBy(group => group.Groups["members"].Value.Split(',').Length).ToArray();
+            Assert.Equal(3, flags.Length);
+            string[] nativeFlags = { "MSG_OOB", "MSG_PEEK", "MSG_DONTROUTE", "MSG_WAITALL", "MSG_PUSH_IMMEDIATE" };
+            for (int i = 0; i < flags.Length; i++)
+            {
+                Assert.Equal("FlagsEnum", flags[i].Groups["kind"].Value);
+                Assert.Equal(nativeFlags.Take(i + 3), flags[i].Groups["members"].Value.Split(',').Select(value => value.Trim()));
+            }
+            Assert.Contains("#if(_WIN32_WINNT >= 0x0603)\n_Win32_FlagsEnum_(SEND_RECV_FLAGS", additions);
+            Assert.Contains("#elif(_WIN32_WINNT >= 0x0502)\n_Win32_FlagsEnum_(SEND_RECV_FLAGS", additions);
+            Assert.Equal(2, Regex.Matches(additions,
+                @"_Win32_AssociatedEnum_\(SEND_RECV_FLAGS\)\s+_In_\s+int\s+flags").Count);
+            Assert.Single(Regex.Matches(additions,
+                @"_Win32_AssociatedEnum_\(WINSOCK_SOCKET_TYPE\)\s+_In_\s+int\s+type"));
+            Assert.Single(Regex.Matches(additions,
+                @"_Win32_AssociatedEnum_\(WINSOCK_SHUTDOWN_HOW\)\s+_In_\s+int\s+how"));
+        }
+
         [NativeMigrationTheory]
         [MemberData(nameof(OriginalErrorOwnerControls))]
         public void OriginalErrorOwnersPreserveNativeAbiAndSalWithCompleteGroupContributions(
@@ -2688,10 +2737,12 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                 "MsCs" => "resapi.h",
                 "Printing" => "winspool.h",
                 "RasDialMode" => "ras.h",
+                "WinSockGroups" or "WinSockGroupsBeforeWaitAll" or "WinSockGroupsBeforePushImmediate" => "winsock2.h",
                 _ => throw new ArgumentException("Unknown broad source owner.", nameof(partition)),
             };
             string root = WinHttpMigrationTests.RepositoryRoot;
-            string sourcePartition = partition == "RasDialMode" ? "RRas" : partition;
+            bool winsockGroups = partition.StartsWith("WinSockGroups", StringComparison.Ordinal);
+            string sourcePartition = partition == "RasDialMode" ? "RRas" : winsockGroups ? "WinSock" : partition;
             string control = Environment.GetEnvironmentVariable("NETWORK_BROAD_CONTROL_HEADERS");
             string prepared = Environment.GetEnvironmentVariable("WINHTTP_PREPARED_HEADERS");
             var beforeSal = new List<string>();
@@ -2707,6 +2758,19 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             if (partition == "RasDialMode" || language == "c" && partition is "RRas" or "MsCs")
                 sourceText = "#define SECURITY_WIN32\n#define QCC_OS_GROUP_WINDOWS\n#include \"intrinfix.h\"\n" +
                     "#include \"windows.fixed.h\"\n#include <sdkddkver.h>\n#include <" + header + ">\n";
+            if (winsockGroups)
+            {
+                string version = partition switch
+                {
+                    "WinSockGroupsBeforeWaitAll" => "0x0501",
+                    "WinSockGroupsBeforePushImmediate" => "0x0502",
+                    _ => "0x0A00",
+                };
+                sourceText = "#undef _WIN32_WINNT\n#define _WIN32_WINNT " + version +
+                    "\n#undef WINVER\n#define WINVER " + version +
+                    "\n#undef NTDDI_VERSION\n#define NTDDI_VERSION (" + version + " << 16)\n" +
+                    "#define WIN32_LEAN_AND_MEAN\n#include \"intrinfix.h\"\n#include <winsock2.h>\n";
+            }
             string controlSourceText = sourceText;
             string controlHeader = null;
             if (partition == "Printing")
@@ -2722,6 +2786,23 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             string checks = BroadSourceSalProbe;
             if (partition == "RasDialMode")
                 checks += "\ntypedef char RasDialModeNativeValues[(RASEDM_DialAll == 1 && RASEDM_DialAsNeeded == 2) ? 1 : -1];\n";
+            if (winsockGroups)
+                checks += @"
+typedef char WinSockGroupNativeValues[
+    (SOCK_STREAM == 1 && SOCK_DGRAM == 2 && SOCK_RAW == 3 && SOCK_RDM == 4 && SOCK_SEQPACKET == 5 &&
+     SD_RECEIVE == 0 && SD_SEND == 1 && SD_BOTH == 2 &&
+     MSG_OOB == 1 && MSG_PEEK == 2 && MSG_DONTROUTE == 4) ? 1 : -1];
+#if (_WIN32_WINNT >= 0x0502)
+typedef char WinSockWaitAllNativeValue[(MSG_WAITALL == 8) ? 1 : -1];
+#elif defined(MSG_WAITALL)
+#error MSG_WAITALL is visible before its native guard.
+#endif
+#if (_WIN32_WINNT >= 0x0603)
+typedef char WinSockPushImmediateNativeValue[(MSG_PUSH_IMMEDIATE == 32) ? 1 : -1];
+#elif defined(MSG_PUSH_IMMEDIATE)
+#error MSG_PUSH_IMMEDIATE is visible before its native guard.
+#endif
+";
             var before = Surface(root, control, sourcePartition, architecture, target, headers, checks,
                 metadataEnabled: enabled, annotations: beforeAnnotations, salAnnotations: beforeSal,
                 diagnostics: beforeDiagnostics, language: language, cInterface: cInterface, sourceText: controlSourceText);
@@ -2731,8 +2812,14 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
             string[] carriers = enabled && partition == "HttpServer" ?
                 new[] { "typedef HTTP_RECEIVE_HTTP_REQUEST_FLAGS unsigned long" } :
                 enabled && partition == "RasDialMode" ?
-                new[] { "typedef RASENTRY_DIAL_MODE unsigned long" } : Array.Empty<string>();
+                new[] { "typedef RASENTRY_DIAL_MODE unsigned long" } :
+                enabled && winsockGroups ?
+                new[] { "typedef WINSOCK_SOCKET_TYPE int", "typedef WINSOCK_SHUTDOWN_HOW int", "typedef SEND_RECV_FLAGS int" } :
+                Array.Empty<string>();
             Assert.NotEmpty(before);
+            if (winsockGroups)
+                foreach (string name in new[] { "send", "recv", "shutdown", "socket" })
+                    Assert.Single(before.Where(value => value.StartsWith("function " + name + " ", StringComparison.Ordinal)));
             Assert.Equal(before.Concat(carriers).OrderBy(value => value, StringComparer.Ordinal), after);
             if (controlHeader != null)
                 beforeDiagnostics = beforeDiagnostics.Select(value => value.Replace(controlHeader,
@@ -2791,6 +2878,18 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
                             addedAnnotations.AddRange(Enumerable.Repeat(name + "::dwDialMode|AssociatedEnum", occurrences));
                         }
                         break;
+                    case var _ when winsockGroups:
+                        addedAnnotations.Add("WINSOCK_SOCKET_TYPE|Enum(SOCK_STREAM, SOCK_DGRAM, SOCK_RAW, SOCK_RDM, SOCK_SEQPACKET)");
+                        addedAnnotations.Add("WINSOCK_SHUTDOWN_HOW|Enum(SD_RECEIVE, SD_SEND, SD_BOTH)");
+                        string flagMembers = "MSG_OOB, MSG_PEEK, MSG_DONTROUTE";
+                        if (partition != "WinSockGroupsBeforeWaitAll")
+                            flagMembers += ", MSG_WAITALL";
+                        if (partition == "WinSockGroups")
+                            flagMembers += ", MSG_PUSH_IMMEDIATE";
+                        addedAnnotations.Add("SEND_RECV_FLAGS|FlagsEnum(" + flagMembers + ")");
+                        addedAnnotations.AddRange(new[] { "flags|AssociatedEnum", "flags|AssociatedEnum",
+                            "how|AssociatedEnum", "type|AssociatedEnum" });
+                        break;
                     case "Policy":
                     case "ActiveDirectory":
                         bool cStyle = language == "c" || cInterface;
@@ -2815,7 +2914,8 @@ MIDI_FRAGMENT_ASSERT(MIDI_IO_STATUS == 32UL, ""native MIDI_IO_STATUS"");
 
         public static IEnumerable<object[]> NetworkBroadSourceControls()
         {
-            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing", "RasDialMode" })
+            foreach (string partition in new[] { "HttpServer", "Certificates", "Dns", "NWifi", "Policy", "ActiveDirectory", "RRas", "MsCs", "Printing", "RasDialMode",
+                "WinSockGroups", "WinSockGroupsBeforeWaitAll", "WinSockGroupsBeforePushImmediate" })
                 foreach (var architecture in new[]
                 {
                     ("x86", "i686-pc-windows-msvc"), ("x64", "x86_64-pc-windows-msvc"),
