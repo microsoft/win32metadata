@@ -9,8 +9,6 @@ bind
 BroadcastSystemMessage
 closesocket
 CopyFile
-CopyFileA
-CopyFileW
 CreateDirectory
 CreateFileMappingFromApp
 CreateFileMappingW
@@ -34,8 +32,6 @@ FindExecutableImage
 FindExecutableImageEx
 FindExecutableImageExW
 FormatMessage
-FormatMessageA
-FormatMessageW
 GetClassName
 GetClassNameA
 GetClassNameW
@@ -51,8 +47,6 @@ GetMessageA
 GetMessageW
 getpeername
 GetPrivateProfileString
-GetPrivateProfileStringA
-GetPrivateProfileStringW
 GetProcessWorkingSetSize
 getprotobyname
 getprotobynumber
@@ -63,7 +57,6 @@ getsockopt
 GetTempFileName
 GetTimestampForLoadedLibrary
 GetWindow
-GlobalReAlloc
 HasOverlappedIoCompleted
 htonl
 htons
@@ -94,12 +87,8 @@ InternetInitializeAutoProxyDll
 ioctlsocket
 LoadStringA
 LoadStringW
-LookupAccountNameA
-LookupAccountNameW
-LookupAccountSidA
 LookupAccountSidLocalA
 LookupAccountSidLocalW
-LookupAccountSidW
 MakeSureDirectoryPathExists
 MapDebugInformation
 MapViewOfFile
@@ -110,8 +99,6 @@ MessageBox
 MessageBoxA
 MessageBoxW
 MoveFile
-MoveFileA
-MoveFileW
 ntohl
 ntohs
 OpenFileMappingFromApp

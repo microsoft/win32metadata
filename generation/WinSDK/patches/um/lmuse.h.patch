@@ -1,8 +1,18 @@
-diff --git a/um/lmuse.h b/um/lmuse.h
-index 56cfb2b9..4cbe3a07 100644
 --- a/um/lmuse.h
 +++ b/um/lmuse.h
-@@ -60,6 +60,7 @@ extern "C" {
+@@ -44,6 +44,11 @@
+ 
+ #include <lmcons.h>
+ #include <lmuseflg.h>                   // Deletion force level flags
++#include <win32metadata_annotations.h>
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int USE_INFO_ASG_TYPE;
++#endif
+ 
+ //
+ // LevelFlags : The lower 16 bits describe the use level while the upper 16 bits are flags.
+@@ -60,6 +65,7 @@
  // Function Prototypes
  //
  
@@ -10,7 +20,7 @@ index 56cfb2b9..4cbe3a07 100644
  NET_API_STATUS NET_API_FUNCTION
  NetUseAdd (
      _In_opt_ LPTSTR servername,
-@@ -74,6 +75,7 @@ NetUseAdd (
+@@ -74,6 +80,7 @@
      _Out_opt_ LPDWORD parm_err
      );
  
@@ -18,7 +28,7 @@ index 56cfb2b9..4cbe3a07 100644
  NET_API_STATUS NET_API_FUNCTION
  NetUseDel (
      _In_opt_ LMSTR  UncServerName OPTIONAL,
-@@ -81,6 +83,7 @@ NetUseDel (
+@@ -81,6 +88,7 @@
      _In_ DWORD ForceLevelFlags
      );
  
@@ -26,7 +36,7 @@ index 56cfb2b9..4cbe3a07 100644
  NET_API_STATUS NET_API_FUNCTION
  NetUseEnum (
      _In_opt_ LMSTR  UncServerName,
-@@ -92,6 +95,7 @@ NetUseEnum (
+@@ -92,6 +100,7 @@
      _Inout_opt_ LPDWORD ResumeHandle
      );
  
@@ -34,3 +44,32 @@ index 56cfb2b9..4cbe3a07 100644
  NET_API_STATUS NET_API_FUNCTION
  NetUseGetInfo (
      _In_opt_ LMSTR  UncServerName,
+@@ -120,7 +129,7 @@
+     LMSTR   ui1_remote;
+     LMSTR   ui1_password;
+     DWORD   ui1_status;
+-    DWORD   ui1_asg_type;
++    _Win32_AssociatedEnum_(USE_INFO_ASG_TYPE) DWORD   ui1_asg_type;
+     DWORD   ui1_refcount;
+     DWORD   ui1_usecount;
+ }USE_INFO_1, *PUSE_INFO_1, *LPUSE_INFO_1;
+@@ -130,7 +139,7 @@
+     LMSTR    ui2_remote;
+     LMSTR    ui2_password;
+     DWORD    ui2_status;
+-    DWORD    ui2_asg_type;
++    _Win32_AssociatedEnum_(USE_INFO_ASG_TYPE) DWORD    ui2_asg_type;
+     DWORD    ui2_refcount;
+     DWORD    ui2_usecount;
+     LMSTR    ui2_username;
+@@ -205,6 +214,10 @@
+ #define USE_CHARDEV             2
+ #define USE_IPC                 3
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(USE_INFO_ASG_TYPE, unsigned int, USE_WILDCARD, USE_DISKDEV, USE_SPOOLDEV, USE_IPC);
++#endif
++
+ //
+ // Flags defined in the use_info_3 structure
+ //

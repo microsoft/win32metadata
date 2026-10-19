@@ -1,16 +1,25 @@
-diff --git a/um/subauth.h b/um/subauth.h
-index 227870b8..9c737ad8 100644
 --- a/um/subauth.h
 +++ b/um/subauth.h
-@@ -302,6 +302,7 @@ typedef struct _NETLOGON_TARGET_INFO {
+@@ -302,11 +302,17 @@
  #define MSV1_0_GUEST_LOGON  0x02
  #define MSV1_0_KERBEROS_LOGON  0x04
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(MSV1_0, unsigned int,
++    MSV1_0_PASSTHRU, MSV1_0_GUEST_LOGON);
++#endif
++
 +_Win32_SupportedOS_WindowsXP_
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationRoutine(
      IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
-@@ -347,6 +348,7 @@ typedef struct _MSV1_0_VALIDATION_INFO {
+     IN PVOID LogonInformation,
+-    IN ULONG Flags,
++    IN _Win32_AssociatedEnum_(MSV1_0) ULONG Flags,
+     IN PUSER_ALL_INFORMATION UserAll,
+     OUT PULONG WhichFields,
+     OUT PULONG UserFlags,
+@@ -347,17 +353,19 @@
  #define MSV1_0_SUBAUTH_ACCOUNT_TYPE            0x00000040
  #define MSV1_0_SUBAUTH_LOCKOUT                 0x00000080
  
@@ -18,7 +27,12 @@ index 227870b8..9c737ad8 100644
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationRoutineEx(
      IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
-@@ -358,6 +360,7 @@ Msv1_0SubAuthenticationRoutineEx(
+     IN PVOID LogonInformation,
+-    IN ULONG Flags,
++    IN _Win32_AssociatedEnum_(MSV1_0) ULONG Flags,
+     IN PUSER_ALL_INFORMATION UserAll,
+     IN SAM_HANDLE UserHandle,
+     IN OUT PMSV1_0_VALIDATION_INFO ValidationInfo,
      OUT PULONG ActionsPerformed
  );
  
@@ -26,7 +40,7 @@ index 227870b8..9c737ad8 100644
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationRoutineGeneric(
      IN PVOID SubmitBuffer,
-@@ -366,6 +369,7 @@ Msv1_0SubAuthenticationRoutineGeneric(
+@@ -366,11 +374,12 @@
      OUT PVOID *ReturnBuffer
  );
  
@@ -34,3 +48,9 @@ index 227870b8..9c737ad8 100644
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationFilter(
      IN NETLOGON_LOGON_INFO_CLASS LogonLevel,
+     IN PVOID LogonInformation,
+-    IN ULONG Flags,
++    IN _Win32_AssociatedEnum_(MSV1_0) ULONG Flags,
+     IN PUSER_ALL_INFORMATION UserAll,
+     OUT PULONG WhichFields,
+     OUT PULONG UserFlags,

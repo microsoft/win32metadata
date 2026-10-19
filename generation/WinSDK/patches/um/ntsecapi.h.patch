@@ -1,8 +1,6 @@
-diff --git a/um/ntsecapi.h b/um/ntsecapi.h
-index e30ee026..baf259f6 100644
 --- a/um/ntsecapi.h
 +++ b/um/ntsecapi.h
-@@ -1653,6 +1653,7 @@ typedef enum _POLICY_AUDIT_EVENT_TYPE {
+@@ -1653,6 +1653,7 @@
  #ifndef _NTLSA_IFS_
  // begin_ntifs
  
@@ -10,7 +8,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -1668,6 +1669,7 @@ LsaRegisterLogonProcess (
+@@ -1668,6 +1669,7 @@
  // However, the function has always been there, so it is okay to use
  // even on w2k
  //
@@ -18,7 +16,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -1691,6 +1693,7 @@ LsaLogonUser (
+@@ -1691,6 +1693,7 @@
  
  // end_ntifs
  
@@ -26,7 +24,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -1703,6 +1706,7 @@ LsaLookupAuthenticationPackage (
+@@ -1703,6 +1706,7 @@
  
  // begin_ntifs
  
@@ -34,7 +32,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  NTSTATUS
  NTAPI
-@@ -1712,6 +1716,7 @@ LsaFreeReturnBuffer (
+@@ -1712,6 +1716,7 @@
  
  // end_ntifs
  
@@ -42,7 +40,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -1726,6 +1731,7 @@ LsaCallAuthenticationPackage (
+@@ -1726,6 +1731,7 @@
      _Out_opt_ PNTSTATUS ProtocolStatus
      );
  
@@ -50,7 +48,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -1734,6 +1740,7 @@ LsaDeregisterLogonProcess (
+@@ -1734,6 +1740,7 @@
      _In_ HANDLE LsaHandle
      );
  
@@ -58,7 +56,7 @@ index e30ee026..baf259f6 100644
  _IRQL_requires_same_
  _IRQL_requires_max_(PASSIVE_LEVEL)
  NTSTATUS
-@@ -2858,12 +2865,14 @@ typedef struct _LSA_ENUMERATION_INFORMATION {
+@@ -2858,12 +2865,14 @@
  ////////////////////////////////////////////////////////////////////////////
  
  
@@ -73,7 +71,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaClose(
-@@ -2924,6 +2933,7 @@ typedef struct _SECURITY_LOGON_SESSION_DATA {
+@@ -2924,6 +2933,7 @@
  #endif
  } SECURITY_LOGON_SESSION_DATA, * PSECURITY_LOGON_SESSION_DATA;
  
@@ -81,7 +79,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaEnumerateLogonSessions(
-@@ -2931,6 +2941,7 @@ LsaEnumerateLogonSessions(
+@@ -2931,6 +2941,7 @@
      _Out_ PLUID * LogonSessionList
      );
  
@@ -89,7 +87,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaGetLogonSessionData(
-@@ -2939,6 +2950,7 @@ LsaGetLogonSessionData(
+@@ -2939,6 +2950,7 @@
      );
  
  #endif
@@ -97,7 +95,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaOpenPolicy(
-@@ -3082,6 +3094,7 @@ LsaQueryCAPs(
+@@ -3082,6 +3094,7 @@
      );
  
  
@@ -105,7 +103,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaQueryInformationPolicy(
-@@ -3090,6 +3103,7 @@ LsaQueryInformationPolicy(
+@@ -3090,6 +3103,7 @@
      _Out_ PVOID *Buffer
      );
  
@@ -113,7 +111,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaSetInformationPolicy(
-@@ -3098,6 +3112,7 @@ LsaSetInformationPolicy(
+@@ -3098,6 +3112,7 @@
      _In_ PVOID Buffer
      );
  
@@ -121,7 +119,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaQueryDomainInformationPolicy(
-@@ -3106,6 +3121,7 @@ LsaQueryDomainInformationPolicy(
+@@ -3106,6 +3121,7 @@
      _Out_ PVOID *Buffer
      );
  
@@ -129,7 +127,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaSetDomainInformationPolicy(
-@@ -3115,6 +3131,7 @@ LsaSetDomainInformationPolicy(
+@@ -3115,6 +3131,7 @@
      );
  
  
@@ -137,7 +135,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaRegisterPolicyChangeNotification(
-@@ -3122,6 +3139,7 @@ LsaRegisterPolicyChangeNotification(
+@@ -3122,6 +3139,7 @@
      _In_ HANDLE  NotificationEventHandle
      );
  
@@ -145,7 +143,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaUnregisterPolicyChangeNotification(
-@@ -3131,6 +3149,7 @@ LsaUnregisterPolicyChangeNotification(
+@@ -3131,6 +3149,7 @@
  
  
  
@@ -153,7 +151,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaEnumerateTrustedDomains(
-@@ -3142,6 +3161,7 @@ LsaEnumerateTrustedDomains(
+@@ -3142,6 +3161,7 @@
      );
  
  
@@ -161,7 +159,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaLookupNames(
-@@ -3153,6 +3173,7 @@ LsaLookupNames(
+@@ -3153,6 +3173,7 @@
      );
  
  #if (_WIN32_WINNT >= 0x0501)
@@ -169,7 +167,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaLookupNames2(
-@@ -3165,6 +3186,7 @@ LsaLookupNames2(
+@@ -3165,6 +3186,7 @@
      );
  #endif
  
@@ -177,7 +175,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaLookupSids(
-@@ -3175,6 +3197,7 @@ LsaLookupSids(
+@@ -3175,6 +3197,7 @@
      _Out_ PLSA_TRANSLATED_NAME *Names
      );
  
@@ -185,7 +183,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaLookupSids2(
-@@ -3205,6 +3228,7 @@ LsaLookupSids2(
+@@ -3205,6 +3228,7 @@
  // This new API returns all the accounts with a certain privilege
  //
  
@@ -193,7 +191,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaEnumerateAccountsWithUserRight(
-@@ -3219,6 +3243,7 @@ LsaEnumerateAccountsWithUserRight(
+@@ -3219,6 +3243,7 @@
  // to open the account first and passing in an account handle
  //
  
@@ -201,7 +199,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaEnumerateAccountRights(
-@@ -3228,6 +3253,7 @@ LsaEnumerateAccountRights(
+@@ -3228,6 +3253,7 @@
      _Out_ PULONG CountOfRights
      );
  
@@ -209,7 +207,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaAddAccountRights(
-@@ -3237,6 +3263,7 @@ LsaAddAccountRights(
+@@ -3237,6 +3263,7 @@
      _In_ ULONG CountOfRights
      );
  
@@ -217,7 +215,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaRemoveAccountRights(
-@@ -3253,6 +3280,7 @@ LsaRemoveAccountRights(
+@@ -3253,6 +3280,7 @@
  //                                                                           //
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -225,7 +223,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaOpenTrustedDomainByName(
-@@ -3263,6 +3291,7 @@ LsaOpenTrustedDomainByName(
+@@ -3263,6 +3291,7 @@
      );
  
  
@@ -233,7 +231,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaQueryTrustedDomainInfo(
-@@ -3272,6 +3301,7 @@ LsaQueryTrustedDomainInfo(
+@@ -3272,6 +3301,7 @@
      _Out_ PVOID *Buffer
      );
  
@@ -241,7 +239,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaSetTrustedDomainInformation(
-@@ -3281,6 +3311,7 @@ LsaSetTrustedDomainInformation(
+@@ -3281,6 +3311,7 @@
      _In_ PVOID Buffer
      );
  
@@ -249,7 +247,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaDeleteTrustedDomain(
-@@ -3288,6 +3319,7 @@ LsaDeleteTrustedDomain(
+@@ -3288,6 +3319,7 @@
      _In_ PSID TrustedDomainSid
      );
  
@@ -257,7 +255,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaQueryTrustedDomainInfoByName(
-@@ -3297,6 +3329,7 @@ LsaQueryTrustedDomainInfoByName(
+@@ -3297,6 +3329,7 @@
      _Out_ PVOID *Buffer
      );
  
@@ -265,7 +263,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaSetTrustedDomainInfoByName(
-@@ -3306,6 +3339,7 @@ LsaSetTrustedDomainInfoByName(
+@@ -3306,6 +3339,7 @@
      _In_ PVOID Buffer
      );
  
@@ -273,7 +271,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaEnumerateTrustedDomainsEx(
-@@ -3316,6 +3350,7 @@ LsaEnumerateTrustedDomainsEx(
+@@ -3316,6 +3350,7 @@
      _Out_ PULONG CountReturned
      );
  
@@ -281,7 +279,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaCreateTrustedDomainEx(
-@@ -3327,6 +3362,7 @@ LsaCreateTrustedDomainEx(
+@@ -3327,6 +3362,7 @@
      );
  
  #if (_WIN32_WINNT >= 0x0501)
@@ -289,7 +287,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaQueryForestTrustInformation(
-@@ -3335,6 +3371,7 @@ LsaQueryForestTrustInformation(
+@@ -3335,6 +3371,7 @@
      _Out_ PLSA_FOREST_TRUST_INFORMATION * ForestTrustInfo
      );
  
@@ -297,7 +295,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaSetForestTrustInformation(
-@@ -3366,6 +3403,7 @@ LsaForestTrustFindMatch(
+@@ -3366,6 +3403,7 @@
  // the SSI_SECRET_NAME secret)
  //
  
@@ -305,7 +303,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaStorePrivateData(
-@@ -3374,6 +3412,7 @@ LsaStorePrivateData(
+@@ -3374,6 +3412,7 @@
      _In_opt_ PLSA_UNICODE_STRING PrivateData
      );
  
@@ -313,7 +311,7 @@ index e30ee026..baf259f6 100644
  NTSTATUS
  NTAPI
  LsaRetrievePrivateData(
-@@ -3383,6 +3422,7 @@ LsaRetrievePrivateData(
+@@ -3383,6 +3422,7 @@
      );
  
  
@@ -321,7 +319,7 @@ index e30ee026..baf259f6 100644
  ULONG
  NTAPI
  LsaNtStatusToWinError(
-@@ -3494,6 +3534,16 @@ typedef struct _DOMAIN_PASSWORD_INFORMATION {
+@@ -3494,6 +3534,16 @@
  #define DOMAIN_LOCKOUT_ADMINS               0x00000008L
  #define DOMAIN_PASSWORD_STORE_CLEARTEXT     0x00000010L
  #define DOMAIN_REFUSE_PASSWORD_CHANGE       0x00000020L
@@ -338,10 +336,35 @@ index e30ee026..baf259f6 100644
  #if(_WIN32_WINNT >= 0x0502)
  #define DOMAIN_NO_LM_OWF_CHANGE             0x00000040L
  #endif
-@@ -4399,6 +4449,24 @@ RtlDecryptMemory(
+@@ -4176,6 +4226,7 @@
+ #endif
+ 
+ #if(_WIN32_WINNT >= 0x0501)
++_Win32_SupportedOS_WindowsXP_
+ BOOLEAN
+ __stdcall
+ RtlGenRandom(
+@@ -4215,6 +4266,7 @@
+ 
+ #define RTL_ENCRYPT_OPTION_FOR_SYSTEM       0x04
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ __stdcall
+ RtlEncryptMemory(
+@@ -4223,6 +4275,7 @@
+     _In_ ULONG OptionFlags
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ NTSTATUS
+ __stdcall
+ RtlDecryptMemory(
+@@ -4398,6 +4451,24 @@
+ #endif
  #define KERB_TICKET_FLAGS_enc_pa_rep        0x00010000
  #define KERB_TICKET_FLAGS_reserved1         0x00000001
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(KERB_TICKET_FLAGS, unsigned long,
 +    KERB_TICKET_FLAGS_forwardable,
@@ -359,11 +382,46 @@ index e30ee026..baf259f6 100644
 +    KERB_TICKET_FLAGS_reserved,
 +    KERB_TICKET_FLAGS_reserved1);
 +#endif
+ 
+ 
+ 
+@@ -4750,7 +4821,7 @@
+     LARGE_INTEGER EndTime;
+     LARGE_INTEGER RenewTime;
+     LONG EncryptionType;
+-    ULONG TicketFlags;
++    _Win32_AssociatedEnum_(KERB_TICKET_FLAGS) ULONG TicketFlags;
+ } KERB_TICKET_CACHE_INFO, *PKERB_TICKET_CACHE_INFO;
+ 
+ 
+@@ -4916,7 +4987,7 @@
+     UNICODE_STRING TargetDomainName;
+     UNICODE_STRING AltTargetDomainName;  // contains ClientDomainName
+     KERB_CRYPTO_KEY SessionKey;
+-    ULONG TicketFlags;
++    _Win32_AssociatedEnum_(KERB_TICKET_FLAGS) ULONG TicketFlags;
+     ULONG Flags;
+     LARGE_INTEGER KeyExpirationTime;
+     LARGE_INTEGER StartTime;
+@@ -5284,19 +5355,30 @@
+ // requires TCB to alter "other" creds
+ //
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long KERB_REQUEST_FLAGS;
++#endif
 +
+ typedef struct _KERB_ADD_CREDENTIALS_REQUEST {
+     KERB_PROTOCOL_MESSAGE_TYPE MessageType;
+     UNICODE_STRING UserName;
+     UNICODE_STRING DomainName;
+     UNICODE_STRING Password;
+     LUID  LogonId; // optional
+-    ULONG Flags;
++    _Win32_AssociatedEnum_(KERB_REQUEST_FLAGS) ULONG Flags;
+ } KERB_ADD_CREDENTIALS_REQUEST, *PKERB_ADD_CREDENTIALS_REQUEST;
  
  
- #if (_WIN32_WINNT >= 0x0501)
-@@ -5297,6 +5365,13 @@ typedef struct _KERB_ADD_CREDENTIALS_REQUEST {
  #define KERB_REQUEST_ADD_CREDENTIAL     1
  #define KERB_REQUEST_REPLACE_CREDENTIAL 2
  #define KERB_REQUEST_REMOVE_CREDENTIAL  4
@@ -377,7 +435,7 @@ index e30ee026..baf259f6 100644
  #define KERB_REQUEST_CRED_LOCAL_ACCOUNT 8
  #endif
  
-@@ -5479,6 +5554,8 @@ typedef const PAUDIT_POLICY_INFORMATION PCAUDIT_POLICY_INFORMATION, LPCAUDIT_POL
+@@ -5479,6 +5561,8 @@
  #define AUDIT_GENERIC_EXECUTE        (STANDARD_RIGHTS_EXECUTE)
  
  
@@ -386,7 +444,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditSetSystemPolicy(
-@@ -5486,6 +5563,8 @@ AuditSetSystemPolicy(
+@@ -5486,6 +5570,8 @@
      _In_ ULONG dwPolicyCount
      );
  
@@ -395,7 +453,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditSetPerUserPolicy(
-@@ -5494,6 +5573,8 @@ AuditSetPerUserPolicy(
+@@ -5494,6 +5580,8 @@
      _In_ ULONG dwPolicyCount
      );
  
@@ -404,7 +462,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5504,6 +5585,8 @@ AuditQuerySystemPolicy(
+@@ -5504,6 +5592,8 @@
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -413,7 +471,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5515,6 +5598,8 @@ AuditQueryPerUserPolicy(
+@@ -5515,6 +5605,8 @@
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -422,7 +480,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5522,6 +5607,8 @@ AuditEnumeratePerUserPolicy(
+@@ -5522,6 +5614,8 @@
      _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PPOLICY_AUDIT_SID_ARRAY* ppAuditSidArray
      );
  
@@ -431,7 +489,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5533,6 +5620,8 @@ AuditComputeEffectivePolicyBySid(
+@@ -5533,6 +5627,8 @@
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -440,7 +498,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5544,6 +5633,8 @@ AuditComputeEffectivePolicyByToken(
+@@ -5544,6 +5640,8 @@
      _When_(return != 0, __drv_allocatesMem(Mem)) PAUDIT_POLICY_INFORMATION* ppAuditPolicy
      );
  
@@ -449,7 +507,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5553,6 +5644,8 @@ AuditEnumerateCategories(
+@@ -5553,6 +5651,8 @@
      _Out_ PULONG pdwCountReturned
      );
  
@@ -458,7 +516,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5564,6 +5657,8 @@ AuditEnumerateSubCategories(
+@@ -5564,6 +5664,8 @@
      _Out_ PULONG pdwCountReturned
      );
  
@@ -467,7 +525,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5572,6 +5667,8 @@ AuditLookupCategoryNameW(
+@@ -5572,6 +5674,8 @@
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszCategoryName
      );
  
@@ -476,7 +534,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5586,6 +5683,8 @@ AuditLookupCategoryNameA(
+@@ -5586,6 +5690,8 @@
  #define AuditLookupCategoryName  AuditLookupCategoryNameA
  #endif
  
@@ -485,7 +543,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5594,6 +5693,8 @@ AuditLookupSubCategoryNameW(
+@@ -5594,6 +5700,8 @@
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PWSTR* ppszSubCategoryName
      );
  
@@ -494,7 +552,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5608,6 +5709,8 @@ AuditLookupSubCategoryNameA(
+@@ -5608,6 +5716,8 @@
  #define AuditLookupSubCategoryName  AuditLookupSubCategoryNameA
  #endif
  
@@ -503,7 +561,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditLookupCategoryIdFromCategoryGuid(
-@@ -5615,6 +5718,8 @@ AuditLookupCategoryIdFromCategoryGuid(
+@@ -5615,6 +5725,8 @@
      _Out_ PPOLICY_AUDIT_EVENT_TYPE pAuditCategoryId
      );
  
@@ -512,7 +570,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditLookupCategoryGuidFromCategoryId(
-@@ -5622,6 +5727,8 @@ AuditLookupCategoryGuidFromCategoryId(
+@@ -5622,6 +5734,8 @@
      _Out_ GUID* pAuditCategoryGuid
      );
  
@@ -521,7 +579,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditSetSecurity(
-@@ -5629,6 +5736,8 @@ AuditSetSecurity(
+@@ -5629,6 +5743,8 @@
      _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
      );
  
@@ -530,7 +588,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5637,6 +5746,8 @@ AuditQuerySecurity(
+@@ -5637,6 +5753,8 @@
      _Outptr_ _When_(return != 0, __drv_allocatesMem(Mem)) PSECURITY_DESCRIPTOR *ppSecurityDescriptor
      );
  
@@ -539,7 +597,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditSetGlobalSaclW(
-@@ -5644,6 +5755,8 @@ AuditSetGlobalSaclW(
+@@ -5644,6 +5762,8 @@
      _In_opt_ PACL Acl
      );
  
@@ -548,7 +606,7 @@ index e30ee026..baf259f6 100644
  BOOLEAN
  NTAPI
  AuditSetGlobalSaclA(
-@@ -5657,6 +5770,8 @@ AuditSetGlobalSaclA(
+@@ -5657,6 +5777,8 @@
  #define AuditSetGlobalSacl AuditSetGlobalSaclA
  #endif
  
@@ -557,7 +615,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5665,6 +5780,8 @@ AuditQueryGlobalSaclW(
+@@ -5665,6 +5787,8 @@
      _Out_ _When_(return != 0, __drv_allocatesMem(Mem)) PACL *Acl
      );
  
@@ -566,7 +624,7 @@ index e30ee026..baf259f6 100644
  _Check_return_
  BOOLEAN
  NTAPI
-@@ -5679,6 +5796,7 @@ AuditQueryGlobalSaclA(
+@@ -5679,6 +5803,7 @@
  #define AuditQueryGlobalSacl AuditQueryGlobalSaclA
  #endif
  

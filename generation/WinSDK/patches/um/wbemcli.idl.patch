@@ -1,16 +1,17 @@
-diff --git a/um/wbemcli.idl b/um/wbemcli.idl
-index 62cdff5e..ac08bccf 100644
 --- a/um/wbemcli.idl
 +++ b/um/wbemcli.idl
-@@ -2,6 +2,7 @@
+@@ -2,6 +2,10 @@
  // copyright information moved after library declaration
  //
  
 +#include <sal.h>
++#include <win32metadata_annotations.h>
++cpp_quote("#include <sal.h>")
++cpp_quote("#include <win32metadata_annotations.h>")
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family or WinMgmt Package
-@@ -572,6 +573,7 @@ cpp_quote("/********************************************************************
+@@ -572,6 +576,7 @@
  
  interface IWbemQualifierSet;
  
@@ -18,7 +19,25 @@ index 62cdff5e..ac08bccf 100644
  [local, restricted, object, uuid(dc12a681-737f-11cf-884d-00aa004b2e24)]
  
  interface IWbemClassObject : IUnknown
-@@ -699,6 +701,7 @@ interface IWbemClassObject : IUnknown
+@@ -601,7 +606,7 @@
+ 
+     HRESULT GetNames(
+         [in, string] LPCWSTR wszQualifierName,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_CONDITION_FLAG_TYPE)")] [in] long lFlags,
+         [in] VARIANT* pQualifierVal,
+         [out] SAFEARRAY (BSTR)* pNames
+         );
+@@ -643,7 +648,7 @@
+         );
+ 
+     HRESULT CompareTo(
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_COMPARISON_FLAG)")] [in] long lFlags,
+         [in] IWbemClassObject* pCompareTo
+         );
+ 
+@@ -699,6 +704,7 @@
  };
  
  
@@ -26,7 +45,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, local, uuid(dc12a680-737f-11cf-884d-00aa004b2e24)]
  
  interface IWbemQualifierSet : IUnknown
-@@ -741,6 +744,7 @@ interface IWbemQualifierSet : IUnknown
+@@ -741,6 +747,7 @@
  
  interface IWbemServices;
  
@@ -34,7 +53,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, local, uuid(dc12a687-737f-11cf-884d-00aa004b2e24),
      pointer_default(unique)]
  interface IWbemLocator  : IUnknown
-@@ -760,6 +764,7 @@ interface IWbemLocator  : IUnknown
+@@ -760,6 +767,7 @@
  
  /////////////////////////////////////////////////////////////////
  
@@ -42,7 +61,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(7c857801-7381-11cf-884d-00aa004b2e24)]
  
  interface IWbemObjectSink : IUnknown
-@@ -780,6 +785,7 @@ interface IWbemObjectSink : IUnknown
+@@ -780,6 +788,7 @@
  
  };
  
@@ -50,7 +69,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(e7d35cfa-348b-485e-b524-252725d697ca)]
  
  interface IWbemObjectSinkEx : IWbemObjectSink
-@@ -817,6 +823,7 @@ interface IWbemObjectSinkEx : IWbemObjectSink
+@@ -817,6 +826,7 @@
  
  };
  
@@ -58,7 +77,13 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(027947e1-d731-11ce-a357-000000000001)]
  
  interface IEnumWbemClassObject : IUnknown
-@@ -848,6 +855,7 @@ interface IEnumWbemClassObject : IUnknown
+@@ -845,9 +855,13 @@
+         [in] ULONG nCount
+         );
+ };
++_Win32_AnnotateMethod_(IEnumWbemClassObject::Skip, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumWbemClassObject::NextAsync, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumWbemClassObject::Next, _Win32_PreserveResult_)
  
  /////////////////////////////////////////////////////////////////////////
  
@@ -66,7 +91,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, local, uuid(44aca674-e8fc-11d0-a07c-00c04fb68820)]
  
  interface IWbemContext : IUnknown
-@@ -891,6 +899,7 @@ interface IWbemContext : IUnknown
+@@ -891,6 +905,7 @@
  };
  
  
@@ -74,7 +99,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(44aca675-e8fc-11d0-a07c-00c04fb68820)]
  
  interface IWbemCallResult : IUnknown
-@@ -921,6 +930,7 @@ interface IWbemCallResult : IUnknown
+@@ -921,6 +936,7 @@
  
  /////////////////////////////////////////////////////////////////////////
  
@@ -82,7 +107,195 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(9556dc99-828c-11cf-a37e-00aa003240c7),
          pointer_default(unique)]
  
-@@ -1113,6 +1123,7 @@ interface IWbemServices : IUnknown
+@@ -930,7 +946,7 @@
+     // ========
+     HRESULT OpenNamespace(
+         [in]  const BSTR strNamespace,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemServices** ppWorkingNamespace,
+         [out, OPTIONAL] IWbemCallResult** ppResult
+@@ -941,7 +957,7 @@
+         );
+ 
+     HRESULT QueryObjectSink(
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [out] IWbemObjectSink** ppResponseHandler
+         );
+ 
+@@ -950,7 +966,7 @@
+ 
+     HRESULT GetObject(
+         [in]  const BSTR strObjectPath,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemClassObject** ppObject,
+         [out, OPTIONAL] IWbemCallResult** ppCallResult
+@@ -958,7 +974,7 @@
+ 
+     HRESULT GetObjectAsync(
+         [in]  const BSTR strObjectPath,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [in]  IWbemObjectSink* pResponseHandler
+         );
+@@ -968,42 +984,42 @@
+ 
+     HRESULT PutClass(
+         [in] IWbemClassObject* pObject,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemCallResult** ppCallResult
+         );
+ 
+     HRESULT PutClassAsync(
+         [in] IWbemClassObject* pObject,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+ 
+     HRESULT DeleteClass(
+         [in] const BSTR strClass,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemCallResult** ppCallResult
+         );
+ 
+     HRESULT DeleteClassAsync(
+         [in] const BSTR strClass,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+ 
+     HRESULT CreateClassEnum(
+         [in]  const BSTR strSuperclass,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out] IEnumWbemClassObject** ppEnum
+         );
+ 
+     HRESULT CreateClassEnumAsync(
+         [in]  const BSTR strSuperclass,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [in]  IWbemObjectSink* pResponseHandler
+         );
+@@ -1013,42 +1029,42 @@
+ 
+     HRESULT PutInstance(
+         [in] IWbemClassObject* pInst,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemCallResult** ppCallResult
+         );
+ 
+     HRESULT PutInstanceAsync(
+         [in] IWbemClassObject* pInst,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+ 
+     HRESULT DeleteInstance(
+         [in] const BSTR strObjectPath,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out, OPTIONAL] IWbemCallResult** ppCallResult
+         );
+ 
+     HRESULT DeleteInstanceAsync(
+         [in] const BSTR strObjectPath,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+ 
+     HRESULT CreateInstanceEnum(
+         [in] const BSTR strFilter,          // allow more things than a class name
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out] IEnumWbemClassObject** ppEnum
+         );
+ 
+     HRESULT CreateInstanceEnumAsync(
+         [in] const BSTR strFilter,          // allow more things than a class name
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+@@ -1059,7 +1075,7 @@
+     HRESULT ExecQuery(
+         [in]  const BSTR strQueryLanguage,
+         [in]  const BSTR strQuery,
+-        [in]  long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in]  long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out] IEnumWbemClassObject** ppEnum
+         );
+@@ -1067,7 +1083,7 @@
+     HRESULT ExecQueryAsync(
+         [in] const BSTR strQueryLanguage,
+         [in] const BSTR strQuery,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+@@ -1076,7 +1092,7 @@
+     HRESULT ExecNotificationQuery(
+         [in] const BSTR strQueryLanguage,
+         [in] const BSTR strQuery,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in]  IWbemContext* pCtx,
+         [out] IEnumWbemClassObject** ppEnum
+         );
+@@ -1084,7 +1100,7 @@
+     HRESULT ExecNotificationQueryAsync(
+         [in] const BSTR strQueryLanguage,
+         [in] const BSTR strQuery,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemObjectSink* pResponseHandler
+         );
+@@ -1095,7 +1111,7 @@
+     HRESULT ExecMethod(
+         [in] const BSTR strObjectPath,
+         [in] const BSTR strMethodName,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemClassObject* pInParams,
+         [out, OPTIONAL] IWbemClassObject** ppOutParams,
+@@ -1105,7 +1121,7 @@
+     HRESULT ExecMethodAsync(
+         [in] const BSTR strObjectPath,
+         [in] const BSTR strMethodName,
+-        [in] long lFlags,
++        [annotation("_Win32_AssociatedEnum_(WBEM_GENERIC_FLAG_TYPE)")] [in] long lFlags,
+         [in] IWbemContext* pCtx,
+         [in] IWbemClassObject* pInParams,
+         [in] IWbemObjectSink* pResponseHandler
+@@ -1113,6 +1129,7 @@
  };
  
  
@@ -90,7 +303,7 @@ index 62cdff5e..ac08bccf 100644
  [object, uuid(b7b31df9-d515-11d3-a11c-00105a1f515a)]
  interface IWbemShutdown : IUnknown
  {
-@@ -1151,6 +1162,7 @@ typedef [v1_enum] enum tag_WMI_OBJ_TEXT
+@@ -1151,6 +1168,7 @@
  //
  // CoCreatable
  
@@ -98,7 +311,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, local, uuid(bfbf883a-cad7-11d3-a11b-00105a1f515a)]
  
  interface IWbemObjectTextSrc : IUnknown
-@@ -1178,6 +1190,7 @@ interface IWbemObjectTextSrc : IUnknown
+@@ -1178,6 +1196,7 @@
  /////////////////////////////////////////////////////////////////////////
  
  
@@ -106,7 +319,7 @@ index 62cdff5e..ac08bccf 100644
  [local, restricted, object, uuid(49353c9a-516b-11d1-aea6-00c04fb68820)]
  interface IWbemObjectAccess : IWbemClassObject
  {
-@@ -1266,6 +1279,7 @@ typedef [v1_enum] enum tag_WBEM_CONNECT_OPTIONS
+@@ -1266,6 +1285,7 @@
      WBEM_FLAG_CONNECT_PROVIDERS       = 0X100
  } WBEM_CONNECT_OPTIONS;
  
@@ -114,7 +327,7 @@ index 62cdff5e..ac08bccf 100644
  [local, object, uuid(6daf974e-2e37-11d2-aec9-00c04fb68820)]
  
  interface IMofCompiler : IUnknown
-@@ -1310,6 +1324,7 @@ interface IMofCompiler : IUnknown
+@@ -1310,6 +1330,7 @@
          // lFlags correspond to all the available command-line flags.
  };
  
@@ -122,7 +335,7 @@ index 62cdff5e..ac08bccf 100644
  [restricted, uuid(1cfaba8c-1523-11d1-ad79-00c04fd8fdff), object]
  interface IUnsecuredApartment : IUnknown
  {
-@@ -1326,6 +1341,7 @@ typedef [v1_enum] enum tag_WBEM_UNSECAPP_FLAG_TYPE
+@@ -1326,6 +1347,7 @@
  
  } WBEM_UNSECAPP_FLAG_TYPE;
  
@@ -130,7 +343,7 @@ index 62cdff5e..ac08bccf 100644
  [restricted, uuid(31739d04-3471-4cf4-9a7c-57a44ae71956), object]
  interface IWbemUnsecuredApartment : IUnsecuredApartment
  {
-@@ -1343,6 +1359,7 @@ typedef [v1_enum] enum tag_WBEM_INFORMATION_FLAG_TYPE
+@@ -1343,6 +1365,7 @@
  } WBEM_INFORMATION_FLAG_TYPE;
  
  
@@ -138,7 +351,7 @@ index 62cdff5e..ac08bccf 100644
  [local, object, uuid(eb87e1bc-3233-11d2-aec9-00c04fb68820)]
  
  interface IWbemStatusCodeText : IUnknown
-@@ -1363,6 +1380,7 @@ interface IWbemStatusCodeText : IUnknown
+@@ -1363,6 +1386,7 @@
  
  };
  
@@ -146,7 +359,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(C49E32C7-BC8B-11d2-85D4-00105A1F8304)]
  interface IWbemBackupRestore : IUnknown
  {
-@@ -1377,6 +1395,7 @@ interface IWbemBackupRestore : IUnknown
+@@ -1377,6 +1401,7 @@
          );
  };
  
@@ -154,7 +367,7 @@ index 62cdff5e..ac08bccf 100644
  [object, restricted, uuid(A359DEC5-E813-4834-8A2A-BA7F1D777D76)]
  interface IWbemBackupRestoreEx : IWbemBackupRestore
  {
-@@ -1385,12 +1404,14 @@ interface IWbemBackupRestoreEx : IWbemBackupRestore
+@@ -1385,12 +1410,14 @@
      HRESULT Resume();
  };
  
@@ -169,7 +382,7 @@ index 62cdff5e..ac08bccf 100644
  [local, restricted, object, uuid(2705C288-79AE-11d2-B348-00105A1F8177)]
  interface IWbemHiPerfEnum : IUnknown
  {
-@@ -1421,6 +1442,7 @@ interface IWbemHiPerfEnum : IUnknown
+@@ -1421,6 +1448,7 @@
              );
  };
  

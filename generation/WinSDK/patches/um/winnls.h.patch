@@ -1,11 +1,20 @@
 diff --git a/um/winnls.h b/um/winnls.h
-index 2a104ac5..7babe67b 100644
+index 2a104ac5..d3c1dff2 100644
 --- a/um/winnls.h
 +++ b/um/winnls.h
-@@ -17,6 +17,13 @@ Abstract:
+@@ -17,6 +17,22 @@ Abstract:
  #ifndef _WINNLS_
  #define _WINNLS_
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef int COMPARESTRING_RESULT;
++typedef unsigned int COMPARE_STRING_FLAGS;
++typedef unsigned int ENUM_DATE_FORMATS_FLAGS;
++typedef unsigned int FOLD_STRING_MAP_FLAGS;
++typedef unsigned int MULTI_BYTE_TO_WIDE_CHAR_FLAGS;
++typedef unsigned int TIME_FORMAT_FLAGS;
++#endif
++
 +#include <sal.h>
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef unsigned int ENUM_SYSTEM_CODE_PAGES_FLAGS;
@@ -16,7 +25,44 @@ index 2a104ac5..7babe67b 100644
  #include <winapifamily.h>
  
  
-@@ -305,12 +312,24 @@ extern "C" {
+@@ -147,6 +163,14 @@ extern "C" {
+ #define MB_USEGLYPHCHARS          0x00000004  // DEPRECATED: use glyph chars, not ctrl chars
+ #define MB_ERR_INVALID_CHARS      0x00000008  // error for invalid chars
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(MULTI_BYTE_TO_WIDE_CHAR_FLAGS, unsigned int,
++    MB_COMPOSITE,
++    MB_ERR_INVALID_CHARS,
++    MB_PRECOMPOSED,
++    MB_USEGLYPHCHARS);
++#endif
++
+ // WC_COMPOSITECHECK, WC_DISCARDNS and WC_SEPCHARS are deprecated, not recommended,
+ // and provide out-of-date behavior.
+ // Windows typically uses Unicode Normalization Form C type sequences,
+@@ -250,8 +274,21 @@ extern "C" {
+ #define MAP_COMPOSITE             0x00000040  // convert to composite chars
+ #define MAP_FOLDDIGITS            0x00000080  // all digits to ASCII 0-9
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(FOLD_STRING_MAP_FLAGS, unsigned int,
++    MAP_COMPOSITE,
++    MAP_FOLDCZONE,
++    MAP_FOLDDIGITS,
++    MAP_PRECOMPOSED);
++#endif
++
+ #if(WINVER >= 0x0500)
+ #define MAP_EXPAND_LIGATURES      0x00002000  // expand all ligatures
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(FOLD_STRING_MAP_FLAGS, unsigned int,
++    MAP_EXPAND_LIGATURES);
++#endif
+ #endif /* WINVER >= 0x0500 */
+ 
+ //
+@@ -305,12 +342,24 @@ extern "C" {
  #define LGRPID_INSTALLED          0x00000001  // installed language group ids
  #define LGRPID_SUPPORTED          0x00000002  // supported language group ids
  
@@ -41,7 +87,7 @@ index 2a104ac5..7babe67b 100644
  #define LCID_ALTERNATE_SORTS      0x00000004  // alternate sort locale ids
  
  
-@@ -336,6 +355,12 @@ extern "C" {
+@@ -336,6 +385,12 @@ extern "C" {
  #define CP_INSTALLED              0x00000001  // installed code page ids
  #define CP_SUPPORTED              0x00000002  // supported code page ids
  
@@ -54,7 +100,107 @@ index 2a104ac5..7babe67b 100644
  
  //
  //  Sorting Flags.
-@@ -1611,12 +1636,14 @@ typedef struct _FILEMUIINFO {
+@@ -369,9 +424,27 @@ extern "C" {
+ //
+ #define SORT_STRINGSORT           0x00001000  // use string sort method
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(COMPARE_STRING_FLAGS, unsigned int,
++    LINGUISTIC_IGNORECASE,
++    LINGUISTIC_IGNOREDIACRITIC,
++    NORM_IGNORECASE,
++    NORM_IGNOREKANATYPE,
++    NORM_IGNORENONSPACE,
++    NORM_IGNORESYMBOLS,
++    NORM_IGNOREWIDTH,
++    NORM_LINGUISTIC_CASING,
++    SORT_STRINGSORT);
++#endif
++
+ //  Sort digits as numbers (ie: 2 comes before 10)
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+ #define SORT_DIGITSASNUMBERS      0x00000008  // use digits as numbers sort method
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(COMPARE_STRING_FLAGS, unsigned int,
++    SORT_DIGITSASNUMBERS);
++#endif
+ #endif // (WINVER >= _WIN32_WINNT_WIN7)
+ 
+ 
+@@ -382,6 +455,13 @@ extern "C" {
+ #define CSTR_EQUAL                2           // string 1 equal to string 2
+ #define CSTR_GREATER_THAN         3           // string 1 greater than string 2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(COMPARESTRING_RESULT, int,
++    CSTR_LESS_THAN,
++    CSTR_EQUAL,
++    CSTR_GREATER_THAN);
++#endif
++
+ 
+ //
+ //  Code Page Default Values.
+@@ -805,6 +885,14 @@ extern "C" {
+ #define TIME_NOTIMEMARKER         0x00000004  // do not use time marker
+ #define TIME_FORCE24HOURFORMAT    0x00000008  // always use 24 hour format
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(TIME_FORMAT_FLAGS, unsigned int,
++    TIME_NOMINUTESORSECONDS,
++    TIME_NOSECONDS,
++    TIME_NOTIMEMARKER,
++    TIME_FORCE24HOURFORMAT);
++#endif
++
+ 
+ //
+ //  Date Flags for GetDateFormat.
+@@ -813,18 +901,42 @@ extern "C" {
+ #define DATE_LONGDATE             0x00000002  // use long date picture
+ #define DATE_USE_ALT_CALENDAR     0x00000004  // use alternate calendar (if any)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENUM_DATE_FORMATS_FLAGS, unsigned int,
++    DATE_SHORTDATE,
++    DATE_LONGDATE,
++    DATE_USE_ALT_CALENDAR);
++#endif
++
+ #if(WINVER >= 0x0500)
+ #define DATE_YEARMONTH            0x00000008  // use year month picture
+ #define DATE_LTRREADING           0x00000010  // add marks for left to right reading order layout
+ #define DATE_RTLREADING           0x00000020  // add marks for right to left reading order layout
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENUM_DATE_FORMATS_FLAGS, unsigned int,
++    DATE_YEARMONTH,
++    DATE_LTRREADING,
++    DATE_RTLREADING);
++#endif
+ #endif /* WINVER >= 0x0500 */
+ 
+ #if (WINVER >= _WIN32_WINNT_WIN7)
+ #define DATE_AUTOLAYOUT           0x00000040  // add appropriate marks for left-to-right or right-to-left reading order layout
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENUM_DATE_FORMATS_FLAGS, unsigned int,
++    DATE_AUTOLAYOUT);
++#endif
+ #endif //(WINVER >= _WIN32_WINNT_WIN7)
+ 
+ #if (WINVER >= _WIN32_WINNT_WINTHRESHOLD)
+ #define DATE_MONTHDAY             0x00000080  // include month day pictures
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(ENUM_DATE_FORMATS_FLAGS, unsigned int,
++    DATE_MONTHDAY);
++#endif
+ #endif //(WINVER >= _WIN32_WINNT_WINTHRESHOLD)
+ 
+ //
+@@ -1611,12 +1723,14 @@ typedef struct _FILEMUIINFO {
  //  Applications should use Unicode (WCHAR / UTF-16 &/or UTF-8)
  //
  
@@ -69,7 +215,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  UINT
  WINAPI
-@@ -1628,6 +1655,7 @@ GetACP(void);
+@@ -1628,6 +1742,7 @@ GetACP(void);
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -77,7 +223,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  UINT
  WINAPI
-@@ -1640,6 +1668,8 @@ GetOEMCP(void);
+@@ -1640,6 +1755,8 @@ GetOEMCP(void);
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP |WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accuratedly and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -86,7 +232,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1654,6 +1684,8 @@ GetCPInfo(
+@@ -1654,6 +1771,8 @@ GetCPInfo(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP |WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -95,7 +241,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1662,6 +1694,8 @@ GetCPInfoExA(
+@@ -1662,6 +1781,8 @@ GetCPInfoExA(
      _In_ DWORD         dwFlags,
      _Out_ LPCPINFOEXA  lpCPInfoEx);
  DEPRECATED("Use Unicode. The information in this structure cannot represent all encodings accurately and may be unreliable on many machines. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -104,7 +250,15 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1739,6 +1773,8 @@ CompareString(
+@@ -1686,6 +1807,7 @@ GetCPInfoExW(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
+ 
+ DEPRECATED("CompareStringEx is preferred. Set DISABLE_NLS_DEPRECATION to disable this warning.")
++_Win32_SupportedOS_Windows2000_
+ WINBASEAPI
+ int
+ WINAPI
+@@ -1739,6 +1861,8 @@ CompareString(
  #if (WINVER >= 0x0600)
  
  // DEPRECATED: FindNLSStringEx is preferred
@@ -113,7 +267,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1760,6 +1796,8 @@ FindNLSString(
+@@ -1760,6 +1884,8 @@ FindNLSString(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: LCMapStringEx is preferred
@@ -122,7 +276,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1775,6 +1813,8 @@ LCMapStringW(
+@@ -1775,6 +1901,8 @@ LCMapStringW(
  #endif
  
  // DEPRECATED: Use Unicode, LCMapStringEx is preferred
@@ -131,7 +285,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1796,6 +1836,8 @@ LCMapStringA(
+@@ -1796,6 +1924,8 @@ LCMapStringA(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: GetLocaleInfoEx is preferred
@@ -140,7 +294,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1810,6 +1852,8 @@ GetLocaleInfoW(
+@@ -1810,6 +1940,8 @@ GetLocaleInfoW(
  #endif
  
  // DEPRECATED: Use Unicode. GetLocaleInfoEx is preferred
@@ -149,7 +303,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int 
  WINAPI 
-@@ -1830,6 +1874,8 @@ GetLocaleInfoA(
+@@ -1830,6 +1962,8 @@ GetLocaleInfoA(
  #pragma region Application or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -158,7 +312,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1837,6 +1883,8 @@ SetLocaleInfoA(
+@@ -1837,6 +1971,8 @@ SetLocaleInfoA(
      _In_ LCID     Locale,
      _In_ LCTYPE   LCType,
      _In_ LPCSTR  lpLCData);
@@ -167,7 +321,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1853,6 +1901,8 @@ SetLocaleInfoW(
+@@ -1853,6 +1989,8 @@ SetLocaleInfoW(
  #if (WINVER >= 0x040A)
  
  // DEPRECATED: GetCalendarInfoEx is preferred
@@ -176,7 +330,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1864,6 +1914,8 @@ GetCalendarInfoA(
+@@ -1864,6 +2002,8 @@ GetCalendarInfoA(
      _In_ int      cchData,
      _Out_opt_ LPDWORD  lpValue);
  // DEPRECATED: GetCalendarInfoEx is preferred
@@ -185,7 +339,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1880,6 +1932,8 @@ GetCalendarInfoW(
+@@ -1880,6 +2020,8 @@ GetCalendarInfoW(
  #define GetCalendarInfo  GetCalendarInfoA
  #endif // !UNICODE
  
@@ -194,7 +348,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1888,6 +1942,8 @@ SetCalendarInfoA(
+@@ -1888,6 +2030,8 @@ SetCalendarInfoA(
      _In_ CALID    Calendar,
      _In_ CALTYPE  CalType,
      _In_ LPCSTR  lpCalData);
@@ -203,7 +357,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1919,6 +1975,7 @@ SetCalendarInfoW(
+@@ -1919,6 +2063,7 @@ SetCalendarInfoW(
  #define MUI_SKIP_STRING_CACHE  0x0008     
  #define MUI_IMMUTABLE_LOOKUP   0x0010     
          
@@ -211,7 +365,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI                                
  BOOL                                      
  WINAPI                                    
-@@ -1941,6 +1998,8 @@ LoadStringByReference(
+@@ -1941,6 +2086,8 @@ LoadStringByReference(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  DEPRECATED("Use Unicode. The information provided by this structure is inaccurate for some encodings and may be unreliable on many machines.")
@@ -220,7 +374,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI         
  BOOL               
  WINAPI             
-@@ -1949,6 +2008,8 @@ IsDBCSLeadByte(
+@@ -1949,6 +2096,8 @@ IsDBCSLeadByte(
      );
  
  DEPRECATED("Use Unicode. The information provided by this structure is inaccurate for some encodings and may be unreliable on many machines.")
@@ -229,7 +383,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1967,6 +2028,8 @@ IsDBCSLeadByteEx(
+@@ -1967,6 +2116,8 @@ IsDBCSLeadByteEx(
  
  // Use of Locale Names is preferred, LCIDs are deprecated.
  // This function is provided to enable compatibility with legacy data sets only.
@@ -238,7 +392,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LCID
  WINAPI
-@@ -1976,6 +2039,8 @@ LocaleNameToLCID(
+@@ -1976,6 +2127,8 @@ LocaleNameToLCID(
  
  // Use of Locale Names is preferred, LCIDs are deprecated.
  // This function is provided to enable compatibility with legacy data sets only.
@@ -247,7 +401,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -1995,6 +2060,8 @@ LCIDToLocaleName(
+@@ -1995,6 +2148,8 @@ LCIDToLocaleName(
  
  // DEPRECATED: GetDurationFormatEx is preferred
  #if (WINVER >= 0x0600)
@@ -256,7 +410,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2015,6 +2082,8 @@ GetDurationFormat(
+@@ -2015,6 +2170,8 @@ GetDurationFormat(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  // DEPRECATED: GetNumberFormatEx is preferred
@@ -265,7 +419,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2026,6 +2095,8 @@ GetNumberFormatA(
+@@ -2026,6 +2183,8 @@ GetNumberFormatA(
      _Out_writes_opt_(cchNumber) LPSTR          lpNumberStr,
      _In_ int              cchNumber);
  // DEPRECATED: GetNumberFormatEx is preferred
@@ -274,7 +428,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2043,6 +2114,8 @@ GetNumberFormatW(
+@@ -2043,6 +2202,8 @@ GetNumberFormatW(
  #endif // !UNICODE
  
  // DEPRECATED: GetCurrencyFormatEx is preferred
@@ -283,7 +437,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2054,6 +2127,8 @@ GetCurrencyFormatA(
+@@ -2054,6 +2215,8 @@ GetCurrencyFormatA(
      _Out_writes_opt_(cchCurrency) LPSTR            lpCurrencyStr,
      _In_ int                cchCurrency);
  // DEPRECATED: GetCurrencyFormatEx is preferred
@@ -292,7 +446,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2077,6 +2152,8 @@ GetCurrencyFormatW(
+@@ -2077,6 +2240,8 @@ GetCurrencyFormatW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: EnumCalendarInfoExEx is preferred
@@ -301,7 +455,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2086,6 +2163,8 @@ EnumCalendarInfoA(
+@@ -2086,6 +2251,8 @@ EnumCalendarInfoA(
      _In_ CALID             Calendar,
      _In_ CALTYPE           CalType);
  // DEPRECATED: EnumCalendarInfoExEx is preferred
@@ -310,7 +464,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2102,6 +2181,8 @@ EnumCalendarInfoW(
+@@ -2102,6 +2269,8 @@ EnumCalendarInfoW(
  
  #if(WINVER >= 0x0500)
  // DEPRECATED: EnumCalendarInfoExEx is preferred
@@ -319,7 +473,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2111,6 +2192,8 @@ EnumCalendarInfoExA(
+@@ -2111,6 +2280,8 @@ EnumCalendarInfoExA(
      _In_ CALID               Calendar,
      _In_ CALTYPE             CalType);
  // DEPRECATED: EnumCalendarInfoExEx is preferred
@@ -328,7 +482,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2127,6 +2210,8 @@ EnumCalendarInfoExW(
+@@ -2127,6 +2298,8 @@ EnumCalendarInfoExW(
  #endif /* WINVER >= 0x0500 */
  
  // DEPRECATED: EnumTimeFormatsEx is preferred
@@ -337,7 +491,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2135,6 +2220,8 @@ EnumTimeFormatsA(
+@@ -2135,6 +2308,8 @@ EnumTimeFormatsA(
      _In_ LCID              Locale,
      _In_ DWORD             dwFlags);
  // DEPRECATED: EnumTimeFormatsEx is preferred
@@ -346,7 +500,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2149,6 +2236,8 @@ EnumTimeFormatsW(
+@@ -2149,6 +2324,8 @@ EnumTimeFormatsW(
  #endif // !UNICODE
  
  // DEPRECATED: EnumDateFormatsExEx is preferred
@@ -355,7 +509,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2157,6 +2246,8 @@ EnumDateFormatsA(
+@@ -2157,6 +2334,8 @@ EnumDateFormatsA(
      _In_ LCID              Locale,
      _In_ DWORD             dwFlags);
  // DEPRECATED: EnumDateFormatsExEx is preferred
@@ -364,7 +518,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2172,6 +2263,8 @@ EnumDateFormatsW(
+@@ -2172,6 +2351,8 @@ EnumDateFormatsW(
  
  #if(WINVER >= 0x0500)
  // DEPRECATED: EnumDateFormatsExEx is preferred
@@ -373,7 +527,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2180,6 +2273,8 @@ EnumDateFormatsExA(
+@@ -2180,6 +2361,8 @@ EnumDateFormatsExA(
      _In_ LCID                Locale,
      _In_ DWORD               dwFlags);
  // DEPRECATED: EnumDateFormatsExEx is preferred
@@ -382,7 +536,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2202,15 +2297,18 @@ EnumDateFormatsExW(
+@@ -2202,15 +2385,18 @@ EnumDateFormatsExW(
  
  #if(WINVER >= 0x0500)
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -402,7 +556,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2226,12 +2324,13 @@ GetNLSVersion(
+@@ -2226,12 +2412,13 @@ GetNLSVersion(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: IsValidLocaleName is preferred
@@ -417,7 +571,7 @@ index 2a104ac5..7babe67b 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -2241,6 +2340,8 @@ IsValidLocale(
+@@ -2241,6 +2428,8 @@ IsValidLocale(
  
  // GetGeoInfoEx is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -426,7 +580,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2252,6 +2353,8 @@ GetGeoInfoA(
+@@ -2252,6 +2441,8 @@ GetGeoInfoA(
      _In_ LANGID      LangId);
  // GetGeoInfoEx is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -435,7 +589,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2268,6 +2371,8 @@ GetGeoInfoW(
+@@ -2268,6 +2459,8 @@ GetGeoInfoW(
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -444,7 +598,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2286,6 +2391,8 @@ GetGeoInfoEx(
+@@ -2286,6 +2479,8 @@ GetGeoInfoEx(
  
  // EnumSystemGeoNames is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use EnumSystemGoNames instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -453,7 +607,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2295,6 +2402,8 @@ EnumSystemGeoID(
+@@ -2295,6 +2490,8 @@ EnumSystemGeoID(
      _In_ GEO_ENUMPROC    lpGeoEnumProc);
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -462,7 +616,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2312,6 +2421,7 @@ EnumSystemGeoNames(
+@@ -2312,6 +2509,7 @@ EnumSystemGeoNames(
  
  // GetUserDefaultGeoName is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetUserDefaultGeoName instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -470,7 +624,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  GEOID
  WINAPI
-@@ -2323,6 +2433,8 @@ GetUserGeoID(
+@@ -2323,6 +2521,8 @@ GetUserGeoID(
   * (Please use this API instead of calling GetUserGeoID.)
   *
   */
@@ -479,7 +633,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2340,6 +2452,8 @@ GetUserDefaultGeoName(
+@@ -2340,6 +2540,8 @@ GetUserDefaultGeoName(
  // GetUserDefaultGeoName is preferred where available
  // Applications are recommended to not change user settings themselves.
  DEPRECATED("The GeoID concept is obsolete. Use SetUserGeoName instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -488,7 +642,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2348,6 +2462,8 @@ SetUserGeoID(
+@@ -2348,6 +2550,8 @@ SetUserGeoID(
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
  // Applications are recommended to not change user settings themselves.
@@ -497,7 +651,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2356,6 +2472,7 @@ SetUserGeoName(
+@@ -2356,6 +2560,7 @@ SetUserGeoName(
  #endif
  
  // DEPRECATED: Please use ResolveLocaleName
@@ -505,7 +659,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LCID
  WINAPI
-@@ -2364,6 +2481,7 @@ ConvertDefaultLocale(
+@@ -2364,6 +2569,7 @@ ConvertDefaultLocale(
  
  #if(WINVER >= 0x0500)
  // DEPRECATED: Please use the user's language profile.
@@ -513,7 +667,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LANGID
  WINAPI
-@@ -2377,11 +2495,13 @@ GetSystemDefaultUILanguage(void);
+@@ -2377,11 +2583,13 @@ GetSystemDefaultUILanguage(void);
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  #if(WINVER >= 0x0500)
  
@@ -527,7 +681,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2397,6 +2517,7 @@ SetThreadLocale(
+@@ -2397,6 +2605,7 @@ SetThreadLocale(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  #if(WINVER >= 0x0500)
  // DEPRECATED: Please use the user's language profile.
@@ -535,7 +689,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LANGID
  WINAPI
-@@ -2404,6 +2525,7 @@ GetUserDefaultUILanguage(void);
+@@ -2404,6 +2613,7 @@ GetUserDefaultUILanguage(void);
  #endif /* WINVER >= 0x0500 */
  
  // DEPRECATED: Please use GetUserDefaultLocaleName
@@ -543,7 +697,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LANGID
  WINAPI
-@@ -2416,18 +2538,21 @@ GetUserDefaultLangID(void);
+@@ -2416,18 +2626,21 @@ GetUserDefaultLangID(void);
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: Please use GetUserDefaultLocaleName or the user's Language Profile
@@ -565,7 +719,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LCID
  WINAPI
-@@ -2446,6 +2571,8 @@ GetUserDefaultLCID(void);
+@@ -2446,6 +2659,8 @@ GetUserDefaultLCID(void);
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -574,7 +728,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  LANGID
  WINAPI
-@@ -2454,11 +2581,14 @@ SetThreadUILanguage(_In_ LANGID LangId);
+@@ -2454,11 +2669,14 @@ SetThreadUILanguage(_In_ LANGID LangId);
  
  #if (WINVER >= 0x0600)
  
@@ -589,7 +743,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2470,6 +2600,8 @@ GetProcessPreferredUILanguages(
+@@ -2470,6 +2688,8 @@ GetProcessPreferredUILanguages(
  );
  
  
@@ -598,7 +752,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2487,6 +2619,8 @@ SetProcessPreferredUILanguages(
+@@ -2487,6 +2707,8 @@ SetProcessPreferredUILanguages(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PHONE_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if(WINVER >= 0x0600)
@@ -607,7 +761,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2507,6 +2641,8 @@ GetUserPreferredUILanguages (
+@@ -2507,6 +2729,8 @@ GetUserPreferredUILanguages (
  
  #if(WINVER >= 0x0600)
  
@@ -616,7 +770,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2518,6 +2654,8 @@ GetSystemPreferredUILanguages (
+@@ -2518,6 +2742,8 @@ GetSystemPreferredUILanguages (
  );
  
  
@@ -625,7 +779,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2529,6 +2667,7 @@ GetThreadPreferredUILanguages(
+@@ -2529,6 +2755,7 @@ GetThreadPreferredUILanguages(
  );
  
  
@@ -633,7 +787,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2538,6 +2677,8 @@ SetThreadPreferredUILanguages(
+@@ -2538,6 +2765,8 @@ SetThreadPreferredUILanguages(
      _Out_opt_   PULONG pulNumLanguages
  );
  
@@ -642,7 +796,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  _Success_(return!=FALSE)
  BOOL
-@@ -2548,6 +2689,8 @@ GetFileMUIInfo(
+@@ -2548,6 +2777,8 @@ GetFileMUIInfo(
      _Inout_updates_bytes_to_opt_(*pcbFileMUIInfo,*pcbFileMUIInfo) PFILEMUIINFO    pFileMUIInfo,
      _Inout_             DWORD*          pcbFileMUIInfo);
  
@@ -651,7 +805,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2562,6 +2705,8 @@ GetFileMUIPath(
+@@ -2562,6 +2793,8 @@ GetFileMUIPath(
  );
  
  
@@ -660,7 +814,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2609,6 +2754,7 @@ RestoreThreadPreferredUILanguages(_In_ const HSAVEDUILANGUAGES snapshot);
+@@ -2609,6 +2842,7 @@ RestoreThreadPreferredUILanguages(_In_ const HSAVEDUILANGUAGES snapshot);
  
  #if(WINVER >= 0x0600)
  
@@ -668,7 +822,16 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2658,6 +2804,8 @@ GetStringTypeExA(
+@@ -2616,7 +2850,7 @@ NotifyUILanguageChange(
+     _In_        DWORD dwFlags,
+     _In_opt_    PCWSTR pcwstrNewLanguage,
+     _In_opt_    PCWSTR pcwstrPreviousLanguage,
+-    _In_        DWORD dwReserved,
++    _Win32_Reserved_ _In_        DWORD dwReserved,
+     _Out_opt_   PDWORD pdwStatusRtrn
+ );
+ 
+@@ -2658,6 +2892,8 @@ GetStringTypeExA(
  //
  //        GetStringTypeEx (above) should be used instead.
  //
@@ -677,7 +840,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2668,6 +2816,8 @@ GetStringTypeA(
+@@ -2668,6 +2904,8 @@ GetStringTypeA(
      _In_ int      cchSrc,
      _Out_ LPWORD  lpCharType);
  
@@ -686,7 +849,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2690,6 +2840,8 @@ FoldStringA(
+@@ -2690,6 +2928,8 @@ FoldStringA(
  #if(WINVER >= 0x0500)
  
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
@@ -695,7 +858,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2697,6 +2849,8 @@ EnumSystemLocalesA(
+@@ -2697,6 +2937,8 @@ EnumSystemLocalesA(
      _In_ LOCALE_ENUMPROCA lpLocaleEnumProc,
      _In_ DWORD            dwFlags);
  // DEPRECATED, please use Locale Names and call EnumSystemLocalesEx
@@ -704,7 +867,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2720,20 +2874,24 @@ EnumSystemLocalesW(
+@@ -2720,20 +2962,24 @@ EnumSystemLocalesW(
  #if(WINVER >= 0x0500)
  
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -731,7 +894,7 @@ index 2a104ac5..7babe67b 100644
      _In_ LONG_PTR                lParam);
  #ifdef UNICODE
  #define EnumSystemLanguageGroups  EnumSystemLanguageGroupsW
-@@ -2742,6 +2900,8 @@ EnumSystemLanguageGroupsW(
+@@ -2742,6 +2988,8 @@ EnumSystemLanguageGroupsW(
  #endif // !UNICODE
  
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -740,7 +903,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2751,6 +2911,8 @@ EnumLanguageGroupLocalesA(
+@@ -2751,6 +2999,8 @@ EnumLanguageGroupLocalesA(
      _In_ DWORD                     dwFlags,
      _In_ LONG_PTR                  lParam);
  DEPRECATED("The Language Group concept is obsolete and no longer supported. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -749,7 +912,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2772,6 +2934,8 @@ EnumLanguageGroupLocalesW(
+@@ -2772,6 +3022,8 @@ EnumLanguageGroupLocalesW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
  // DEPRECATED: use the user language profile instead.
@@ -758,7 +921,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2780,6 +2944,8 @@ EnumUILanguagesA(
+@@ -2780,6 +3032,8 @@ EnumUILanguagesA(
      _In_ DWORD                dwFlags,
      _In_ LONG_PTR             lParam);
  // DEPRECATED: use the user language profile instead.
@@ -767,7 +930,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2802,19 +2968,23 @@ EnumUILanguagesW(
+@@ -2802,19 +3056,23 @@ EnumUILanguagesW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP  | WINAPI_PARTITION_SYSTEM)
  
  // Please use Unicode instead.  Use of other code pages/encodings is discouraged.
@@ -793,7 +956,7 @@ index 2a104ac5..7babe67b 100644
  #ifdef UNICODE
  #define EnumSystemCodePages  EnumSystemCodePagesW
  #else
-@@ -2836,6 +3006,8 @@ EnumSystemCodePagesW(
+@@ -2836,6 +3094,8 @@ EnumSystemCodePagesW(
  //
  // IDN (International Domain Name) Functions
  //
@@ -802,7 +965,7 @@ index 2a104ac5..7babe67b 100644
  WINNORMALIZEAPI
  int
  WINAPI IdnToAscii(_In_                           DWORD    dwFlags,
-@@ -2844,6 +3016,8 @@ WINAPI IdnToAscii(_In_                           DWORD    dwFlags,
+@@ -2844,6 +3104,8 @@ WINAPI IdnToAscii(_In_                           DWORD    dwFlags,
                    _Out_writes_opt_(cchASCIIChar) LPWSTR   lpASCIICharStr,
                    _In_                        	 int      cchASCIIChar);
  
@@ -811,7 +974,7 @@ index 2a104ac5..7babe67b 100644
  WINNORMALIZEAPI
  int
  WINAPI IdnToUnicode(_In_                         	 DWORD   dwFlags,
-@@ -2852,6 +3026,8 @@ WINAPI IdnToUnicode(_In_                         	 DWORD   dwFlags,
+@@ -2852,6 +3114,8 @@ WINAPI IdnToUnicode(_In_                         	 DWORD   dwFlags,
                      _Out_writes_opt_(cchUnicodeChar) LPWSTR  lpUnicodeCharStr,
                      _In_                         	 int     cchUnicodeChar);
  
@@ -820,7 +983,7 @@ index 2a104ac5..7babe67b 100644
  WINNORMALIZEAPI
  int
  WINAPI IdnToNameprepUnicode(_In_                            	DWORD   dwFlags,
-@@ -2870,6 +3046,8 @@ WINAPI IdnToNameprepUnicode(_In_                            	DWORD   dwFlags,
+@@ -2870,6 +3134,8 @@ WINAPI IdnToNameprepUnicode(_In_                            	DWORD   dwFlags,
  
  #if (WINVER >= 0x0600)
  
@@ -829,7 +992,7 @@ index 2a104ac5..7babe67b 100644
  WINNORMALIZEAPI
  int
  WINAPI NormalizeString( _In_                          NORM_FORM NormForm,
-@@ -2878,12 +3056,16 @@ WINAPI NormalizeString( _In_                          NORM_FORM NormForm,
+@@ -2878,12 +3144,16 @@ WINAPI NormalizeString( _In_                          NORM_FORM NormForm,
                          _Out_writes_opt_(cwDstLength) LPWSTR    lpDstString,
                          _In_                          int       cwDstLength );
  
@@ -846,7 +1009,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI VerifyScripts(
-@@ -2893,6 +3075,8 @@ WINAPI VerifyScripts(
+@@ -2893,6 +3163,8 @@ WINAPI VerifyScripts(
      _In_    LPCWSTR lpTestScripts,      // test scripts string
      _In_    int     cchTestScripts);    // size of test list string
  
@@ -855,7 +1018,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI GetStringScripts(
-@@ -2920,6 +3104,8 @@ WINAPI GetStringScripts(
+@@ -2920,6 +3192,8 @@ WINAPI GetStringScripts(
  #define LOCALE_NAME_INVARIANT               L""
  #define LOCALE_NAME_SYSTEM_DEFAULT          L"!x-sys-default-locale"
  
@@ -864,7 +1027,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2936,6 +3122,8 @@ GetLocaleInfoEx(
+@@ -2936,13 +3210,15 @@ GetLocaleInfoEx(
  #pragma region Desktop or PC Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -873,7 +1036,15 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2976,6 +3164,8 @@ GetDurationFormatEx(
+ GetCalendarInfoEx(
+     _In_opt_ LPCWSTR lpLocaleName,
+     _In_ CALID Calendar,
+-    _In_opt_ LPCWSTR lpReserved,
++    _Win32_Reserved_ _In_opt_ LPCWSTR lpReserved,
+     _In_ CALTYPE CalType,
+     _Out_writes_opt_(cchData) LPWSTR lpCalData,
+     _In_ int cchData,
+@@ -2976,6 +3252,8 @@ GetDurationFormatEx(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -882,7 +1053,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2988,6 +3178,8 @@ GetNumberFormatEx(
+@@ -2988,6 +3266,8 @@ GetNumberFormatEx(
      _In_ int cchNumber
  );
  
@@ -891,7 +1062,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -3000,6 +3192,8 @@ GetCurrencyFormatEx(
+@@ -3000,6 +3280,8 @@ GetCurrencyFormatEx(
      _In_ int cchCurrency
  );
  
@@ -900,7 +1071,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -3014,6 +3208,8 @@ GetUserDefaultLocaleName(
+@@ -3014,6 +3296,8 @@ GetUserDefaultLocaleName(
  #pragma region Desktop or PC Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -909,7 +1080,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -3022,6 +3218,8 @@ GetSystemDefaultLocaleName(
+@@ -3022,6 +3306,8 @@ GetSystemDefaultLocaleName(
      _In_ int cchLocaleName
  );
  
@@ -918,7 +1089,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3032,6 +3230,8 @@ IsNLSDefinedString(
+@@ -3032,6 +3318,8 @@ IsNLSDefinedString(
      _In_reads_(cchStr) LPCWSTR          lpString,
      _In_ INT              cchStr);
  
@@ -927,7 +1098,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3042,6 +3242,7 @@ GetNLSVersionEx(
+@@ -3042,6 +3330,7 @@ GetNLSVersionEx(
  );
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -935,7 +1106,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  DWORD
  WINAPI
-@@ -3058,6 +3259,8 @@ IsValidNLSVersion(
+@@ -3058,6 +3347,8 @@ IsValidNLSVersion(
  #pragma region Application Family or OneCore or Gamaes Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -944,7 +1115,13 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  int
  WINAPI
-@@ -3075,6 +3278,8 @@ FindNLSStringEx(
+@@ -3070,11 +3361,13 @@ FindNLSStringEx(
+     _In_ int cchValue,
+     _Out_opt_ LPINT pcchFound,
+     _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
+-    _In_opt_ LPVOID lpReserved,
++    _Win32_Reserved_ _In_opt_ LPVOID lpReserved,
+     _In_opt_ LPARAM sortHandle
  );
  
  #if (WINVER >= _WIN32_WINNT_WIN8)
@@ -953,7 +1130,12 @@ index 2a104ac5..7babe67b 100644
  _When_((dwMapFlags & (LCMAP_SORTKEY | LCMAP_BYTEREV | LCMAP_HASH | LCMAP_SORTHANDLE)) != 0, _At_((LPBYTE) lpDestStr, _Out_writes_bytes_opt_(cchDest)))
  #else
  _When_((dwMapFlags & (LCMAP_SORTKEY | LCMAP_BYTEREV)) != 0, _At_((LPBYTE) lpDestStr, _Out_writes_bytes_opt_(cchDest)))
-@@ -3096,6 +3301,7 @@ LCMapStringEx(
+@@ -3092,10 +3385,11 @@ LCMapStringEx(
+     _Out_writes_opt_(cchDest) LPWSTR lpDestStr,
+     _In_ int cchDest,
+     _In_opt_ LPNLSVERSIONINFO lpVersionInformation,
+-    _In_opt_ LPVOID lpReserved,
++    _Win32_Reserved_ _In_opt_ LPVOID lpReserved,
      _In_opt_ LPARAM sortHandle
  );
  
@@ -961,7 +1143,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3111,6 +3317,8 @@ IsValidLocaleName(
+@@ -3111,6 +3405,8 @@ IsValidLocaleName(
  
  typedef BOOL (CALLBACK* CALINFO_ENUMPROCEXEX)(LPWSTR, CALID, LPWSTR, LPARAM);
  
@@ -970,7 +1152,15 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3125,6 +3333,8 @@ EnumCalendarInfoExEx(
+@@ -3118,13 +3414,15 @@ EnumCalendarInfoExEx(
+     _In_ CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx,
+     _In_opt_ LPCWSTR lpLocaleName,
+     _In_ CALID Calendar,
+-    _In_opt_ LPCWSTR lpReserved,
++    _Win32_Reserved_ _In_opt_ LPCWSTR lpReserved,
+     _In_ CALTYPE CalType,
+     _In_ LPARAM lParam
+ );
  
  typedef BOOL (CALLBACK* DATEFMT_ENUMPROCEXEX)(LPWSTR, CALID, LPARAM);
  
@@ -979,7 +1169,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3137,6 +3347,8 @@ EnumDateFormatsExEx(
+@@ -3137,6 +3435,8 @@ EnumDateFormatsExEx(
  
  typedef BOOL (CALLBACK* TIMEFMT_ENUMPROCEX)(LPWSTR, LPARAM);
  
@@ -988,7 +1178,7 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3155,6 +3367,8 @@ EnumTimeFormatsEx(
+@@ -3155,6 +3455,8 @@ EnumTimeFormatsEx(
  
  typedef BOOL (CALLBACK* LOCALE_ENUMPROCEX)(LPWSTR, DWORD, LPARAM);
  
@@ -997,7 +1187,16 @@ index 2a104ac5..7babe67b 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3175,6 +3389,8 @@ EnumSystemLocalesEx(
+@@ -3162,7 +3464,7 @@ EnumSystemLocalesEx(
+     _In_ LOCALE_ENUMPROCEX lpLocaleEnumProcEx,
+     _In_ DWORD dwFlags,
+     _In_ LPARAM lParam,
+-    _In_opt_ LPVOID lpReserved
++    _Win32_Reserved_ _In_opt_ LPVOID lpReserved
+ );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PC_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -3175,6 +3477,8 @@ EnumSystemLocalesEx(
  #pragma region Application Family or OneCore or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  

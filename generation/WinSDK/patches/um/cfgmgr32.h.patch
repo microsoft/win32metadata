@@ -806,7 +806,7 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2536,6 +2780,7 @@
+@@ -2536,12 +2780,13 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -814,7 +814,15 @@
  CMAPI
  CONFIGRET
  WINAPI
-@@ -2554,6 +2799,7 @@
+ CM_Get_DevNode_Status(
+-    _Out_ PULONG        pulStatus,
+-    _Out_ PULONG        pulProblemNumber,
++    _Out_ _Win32_AssociatedEnum_(CM_DEVNODE_STATUS_FLAGS) PULONG        pulStatus,
++    _Out_ _Win32_AssociatedEnum_(CM_PROB) PULONG        pulProblemNumber,
+     _In_  DEVINST       dnDevInst,
+     _In_  ULONG         ulFlags
+     );
+@@ -2554,12 +2799,13 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -822,6 +830,14 @@
  CMAPI
  CONFIGRET
  WINAPI
+ CM_Get_DevNode_Status_Ex(
+-    _Out_ PULONG        pulStatus,
+-    _Out_ PULONG        pulProblemNumber,
++    _Out_ _Win32_AssociatedEnum_(CM_DEVNODE_STATUS_FLAGS) PULONG        pulStatus,
++    _Out_ _Win32_AssociatedEnum_(CM_PROB) PULONG        pulProblemNumber,
+     _In_  DEVINST       dnDevInst,
+     _In_  ULONG         ulFlags,
+     _In_opt_ HMACHINE   hMachine
 @@ -2567,22 +2813,24 @@
  
  #define CM_Get_DevInst_Status_Ex CM_Get_DevNode_Status_Ex

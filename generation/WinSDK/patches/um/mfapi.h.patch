@@ -948,6 +948,146 @@
  STDAPI MFCreateMediaBufferFromMediaType(
      _In_ IMFMediaType* pMediaType,
      _In_ LONGLONG llDuration,   // Sample Duration, needed for audio
+@@ -4309,14 +4435,14 @@
+ 
+ inline
+ UINT64
+-Pack2UINT32AsUINT64(UINT32 unHigh, UINT32 unLow)
++_Win32_SupportedOS_WindowsVista_ Pack2UINT32AsUINT64(UINT32 unHigh, UINT32 unLow)
+ {
+     return ((UINT64)unHigh << 32) | unLow;
+ }
+ 
+ inline
+ void
+-Unpack2UINT32AsUINT64(UINT64 unPacked, _Out_ UINT32* punHigh, _Out_ UINT32* punLow)
++_Win32_SupportedOS_WindowsVista_ Unpack2UINT32AsUINT64(UINT64 unPacked, _Out_ UINT32* punHigh, _Out_ UINT32* punLow)
+ {
+     *punHigh = HI32(unPacked);
+     *punLow = LO32(unPacked);
+@@ -4324,28 +4450,28 @@
+ 
+ inline
+ UINT64
+-PackSize(UINT32 unWidth, UINT32 unHeight)
++_Win32_SupportedOS_Windows8_ PackSize(UINT32 unWidth, UINT32 unHeight)
+ {
+     return Pack2UINT32AsUINT64(unWidth, unHeight);
+ }
+ 
+ inline
+ void
+-UnpackSize(UINT64 unPacked, _Out_ UINT32* punWidth, _Out_ UINT32* punHeight)
++_Win32_SupportedOS_Windows8_ UnpackSize(UINT64 unPacked, _Out_ UINT32* punWidth, _Out_ UINT32* punHeight)
+ {
+     Unpack2UINT32AsUINT64(unPacked, punWidth, punHeight);
+ }
+ 
+ inline
+ UINT64
+-PackRatio(INT32 nNumerator, UINT32 unDenominator)
++_Win32_SupportedOS_Windows8_ PackRatio(INT32 nNumerator, UINT32 unDenominator)
+ {
+     return Pack2UINT32AsUINT64((UINT32)nNumerator, unDenominator);
+ }
+ 
+ inline
+ void
+-UnpackRatio(UINT64 unPacked, _Out_ INT32* pnNumerator, _Out_ UINT32* punDenominator)
++_Win32_SupportedOS_Windows8_ UnpackRatio(UINT64 unPacked, _Out_ INT32* pnNumerator, _Out_ UINT32* punDenominator)
+ {
+     Unpack2UINT32AsUINT64(unPacked, (UINT32*)pnNumerator, punDenominator);
+ }
+@@ -4356,7 +4482,7 @@
+ //
+ inline
+ UINT32
+-MFGetAttributeUINT32(
++_Win32_SupportedOS_WindowsVista_ MFGetAttributeUINT32(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     UINT32          unDefault
+@@ -4371,7 +4497,7 @@
+ 
+ inline
+ UINT64
+-MFGetAttributeUINT64(
++_Win32_SupportedOS_WindowsVista_ MFGetAttributeUINT64(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     UINT64          unDefault
+@@ -4386,7 +4512,7 @@
+ 
+ inline
+ double
+-MFGetAttributeDouble(
++_Win32_SupportedOS_WindowsVista_ MFGetAttributeDouble(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     double          fDefault
+@@ -4405,7 +4531,7 @@
+ 
+ inline
+ HRESULT
+-MFGetAttribute2UINT32asUINT64(
++_Win32_SupportedOS_WindowsVista_ MFGetAttribute2UINT32asUINT64(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     _Out_ UINT32*   punHigh32,
+@@ -4426,7 +4552,7 @@
+ 
+ inline
+ HRESULT
+-MFSetAttribute2UINT32asUINT64(
++_Win32_SupportedOS_WindowsVista_ MFSetAttribute2UINT32asUINT64(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     UINT32          unHigh32,
+@@ -4438,7 +4564,7 @@
+ 
+ inline
+ HRESULT
+-MFGetAttributeRatio(
++_Win32_SupportedOS_WindowsVista_ MFGetAttributeRatio(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     _Out_ UINT32*   punNumerator,
+@@ -4450,7 +4576,7 @@
+ 
+ inline
+ HRESULT
+-MFGetAttributeSize(
++_Win32_SupportedOS_WindowsVista_ MFGetAttributeSize(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     _Out_ UINT32*   punWidth,
+@@ -4462,7 +4588,7 @@
+ 
+ inline
+ HRESULT
+-MFSetAttributeRatio(
++_Win32_SupportedOS_WindowsVista_ MFSetAttributeRatio(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     UINT32          unNumerator,
+@@ -4474,7 +4600,7 @@
+ 
+ inline
+ HRESULT
+-MFSetAttributeSize(
++_Win32_SupportedOS_WindowsVista_ MFSetAttributeSize(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     UINT32          unWidth,
+@@ -4487,7 +4613,7 @@
+ #ifdef _INTSAFE_H_INCLUDED_
+ inline
+ HRESULT
+-MFGetAttributeString(
++_Win32_SupportedOS_Windows8_ MFGetAttributeString(
+     IMFAttributes*  pAttributes,
+     REFGUID         guidKey,
+     _Outptr_ PWSTR *ppsz
 @@ -4532,6 +4658,7 @@
  //
  // Instantiates the MF-provided IMFCollection implementation

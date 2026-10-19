@@ -157,32 +157,7 @@
       "filter": "MB_",
       "header": "WinUser.h"
     },
-    "members": [
-      {
-        "name": "MB_ABORTRETRYIGNORE"
-      },
-      {
-        "name": "MB_CANCELTRYCONTINUE"
-      },
-      {
-        "name": "MB_HELP"
-      },
-      {
-        "name": "MB_OK"
-      },
-      {
-        "name": "MB_OKCANCEL"
-      },
-      {
-        "name": "MB_RETRYCANCEL"
-      },
-      {
-        "name": "MB_YESNO"
-      },
-      {
-        "name": "MB_YESNOCANCEL"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "MessageBoxW",
@@ -219,14 +194,6 @@
       {
         "method": "MessageBeep",
         "parameter": "uType"
-      },
-      {
-        "method": "ShellMessageBoxW",
-        "parameter": "fuStyle"
-      },
-      {
-        "method": "ShellMessageBoxA",
-        "parameter": "fuStyle"
       }
     ]
   },
@@ -237,50 +204,7 @@
       "filter": "MF_",
       "header": "WinUser.h"
     },
-    "members": [
-      {
-        "name": "MF_BYCOMMAND"
-      },
-      {
-        "name": "MF_BYPOSITION"
-      },
-      {
-        "name": "MF_BITMAP"
-      },
-      {
-        "name": "MF_CHECKED"
-      },
-      {
-        "name": "MF_DISABLED"
-      },
-      {
-        "name": "MF_ENABLED"
-      },
-      {
-        "name": "MF_GRAYED"
-      },
-      {
-        "name": "MF_MENUBARBREAK"
-      },
-      {
-        "name": "MF_MENUBREAK"
-      },
-      {
-        "name": "MF_OWNERDRAW"
-      },
-      {
-        "name": "MF_POPUP"
-      },
-      {
-        "name": "MF_SEPARATOR"
-      },
-      {
-        "name": "MF_STRING"
-      },
-      {
-        "name": "MF_UNCHECKED"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "EnableMenuItem",
@@ -472,33 +396,11 @@
   {
     "name": "SCROLL_WINDOW_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "SW_SCROLLCHILDREN",
-        "value": "1"
-      },
-      {
-        "name": "SW_INVALIDATE",
-        "value": "2"
-      },
-      {
-        "name": "SW_ERASE",
-        "value": "4"
-      },
-      {
-        "name": "SW_SMOOTHSCROLL",
-        "value": "16"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "ScrollWindowEx",
         "parameter": "flags"
-      },
-      {
-        "interface": "ITextHost",
-        "method": "TxScrollWindowEx",
-        "parameter": "fuScroll"
       }
     ]
   },
@@ -689,48 +591,7 @@
     ]
   },
   {
-    "type": "int",
-    "name": "THREAD_PRIORITY",
-    "members": [
-      {
-        "name": "THREAD_MODE_BACKGROUND_BEGIN",
-        "value": "65536"
-      },
-      {
-        "name": "THREAD_MODE_BACKGROUND_END",
-        "value": "131072"
-      },
-      {
-        "name": "THREAD_PRIORITY_ABOVE_NORMAL",
-        "value": "1"
-      },
-      {
-        "name": "THREAD_PRIORITY_BELOW_NORMAL"
-      },
-      {
-        "name": "THREAD_PRIORITY_HIGHEST",
-        "value": "2"
-      },
-      {
-        "name": "THREAD_PRIORITY_IDLE"
-      },
-      {
-        "name": "THREAD_PRIORITY_MIN",
-        "value": "-2"
-      },
-      {
-        "name": "THREAD_PRIORITY_LOWEST",
-        "value": "THREAD_PRIORITY_MIN"
-      },
-      {
-        "name": "THREAD_PRIORITY_NORMAL",
-        "value": "0"
-      },
-      {
-        "name": "THREAD_PRIORITY_TIME_CRITICAL",
-        "value": "15"
-      }
-    ],
+    "addUsesTo": "THREAD_PRIORITY",
     "uses": [
       {
         "method": "SetThreadPriority",
@@ -2365,15 +2226,6 @@
     "members": [
       {
         "name": "SB_CTL"
-      },
-      {
-        "name": "SB_HORZ"
-      },
-      {
-        "name": "SB_VERT"
-      },
-      {
-        "name": "SB_BOTH"
       }
     ],
     "uses": [
@@ -2404,39 +2256,6 @@
       {
         "method": "ShowScrollBar",
         "parameter": "wBar"
-      },
-      {
-        "method": "FlatSB_ShowScrollBar",
-        "parameter": "code"
-      },
-      {
-        "interface": "ITextHost",
-        "method": "TxEnableScrollBar",
-        "parameter": "fuSBFlags"
-      },
-      {
-        "method": "FlatSB_GetScrollRange",
-        "parameter": "code"
-      },
-      {
-        "method": "FlatSB_GetScrollPos",
-        "parameter": "code"
-      },
-      {
-        "method": "FlatSB_SetScrollPos",
-        "parameter": "code"
-      },
-      {
-        "method": "FlatSB_SetScrollInfo",
-        "parameter": "code"
-      },
-      {
-        "method": "FlatSB_SetScrollRange",
-        "parameter": "code"
-      },
-      {
-        "method": "FlatSB_GetScrollInfo",
-        "parameter": "code"
       }
     ]
   },
@@ -2593,31 +2412,7 @@
     },
   {
     "name": "ACC_UTILITY_STATE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "ANRUS_ON_SCREEN_KEYBOARD_ACTIVE",
-        "value": "1"
-      },
-      {
-        "name": "ANRUS_TOUCH_MODIFICATION_ACTIVE",
-        "value": "2"
-      },
-      {
-        "name": "ANRUS_PRIORITY_AUDIO_ACTIVE",
-        "value": "4"
-      },
-      {
-        "name": "ANRUS_PRIORITY_AUDIO_ACTIVE_NODUCK",
-        "value": "8"
-      }
-    ],
-    "uses": [
-      {
-        "method": "AccSetRunningUtilityState",
-        "parameter": "dwUtilityState"
-      }
-    ]
+    "flags": true
   },
   {
     "name": "DRAW_TEXT_FORMAT",
@@ -2809,30 +2604,7 @@
     ]
   },
   {
-    "name": "THREAD_ERROR_MODE",
-    "flags": true,
-    "members": [
-      {
-        "name": "SEM_ALL_ERRORS",
-        "value": "0"
-      },
-      {
-        "name": "SEM_FAILCRITICALERRORS",
-        "value": "1"
-      },
-      {
-        "name": "SEM_NOGPFAULTERRORBOX",
-        "value": "2"
-      },
-      {
-        "name": "SEM_NOOPENFILEERRORBOX",
-        "value": "32768"
-      },
-      {
-        "name": "SEM_NOALIGNMENTFAULTEXCEPT",
-        "value": "4"
-      }
-    ],
+    "addUsesTo": "THREAD_ERROR_MODE",
     "uses": [
       {
         "method": "SetThreadErrorMode",
@@ -2958,57 +2730,9 @@
       }
     ]
   },
-
   {
-    "name": "NAMED_PIPE_MODE",
-    "flags": true,
-    "members": [
-      {
-        "name": "PIPE_WAIT",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_NOWAIT",
-        "value": "1"
-      },
-      {
-        "name": "PIPE_READMODE_BYTE",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_READMODE_MESSAGE",
-        "value": "2"
-      },
-      {
-        "name": "PIPE_CLIENT_END",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_SERVER_END",
-        "value": "1"
-      },
-      {
-        "name": "PIPE_TYPE_BYTE",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_TYPE_MESSAGE",
-        "value": "4"
-      },
-      {
-        "name": "PIPE_ACCEPT_REMOTE_CLIENTS",
-        "value": "0"
-      },
-      {
-        "name": "PIPE_REJECT_REMOTE_CLIENTS",
-        "value": "8"
-      }
-    ],
+    "addUsesTo": "NAMED_PIPE_MODE",
     "uses": [
-      {
-        "method": "GetNamedPipeHandleStateA",
-        "parameter": "lpState"
-      },
       {
         "method": "GetNamedPipeHandleStateW",
         "parameter": "lpState"
@@ -3023,10 +2747,6 @@
       },
       {
         "method": "SetNamedPipeHandleState",
-        "parameter": "dwPipeMode"
-      },
-      {
-        "method": "CreateNamedPipeA",
         "parameter": "dwPipeMode"
       },
       {
@@ -3259,23 +2979,7 @@
   {
     "name": "FOLD_STRING_MAP_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "MAP_COMPOSITE"
-      },
-      {
-        "name": "MAP_EXPAND_LIGATURES"
-      },
-      {
-        "name": "MAP_FOLDCZONE"
-      },
-      {
-        "name": "MAP_FOLDDIGITS"
-      },
-      {
-        "name": "MAP_PRECOMPOSED"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "FoldStringA",
@@ -3874,28 +3578,8 @@
     },
   {
     "name": "MSV1_0",
-    "members": [
-      {
-        "name": "MSV1_0_PASSTHRU"
-      },
-      {
-        "name": "MSV1_0_GUEST_LOGON"
-      }
-    ],
-    "uses": [
-      {
-        "method": "Msv1_0SubAuthenticationRoutine",
-        "parameter": "Flags"
-      },
-      {
-        "method": "Msv1_0SubAuthenticationFilter",
-        "parameter": "Flags"
-      },
-      {
-        "method": "Msv1_0SubAuthenticationRoutineEx",
-        "parameter": "Flags"
-      }
-    ]
+    "members": [],
+    "uses": []
   },
   {
     "name": "LZOPENFILE_STYLE",
@@ -5023,65 +4707,8 @@
     "name": "IMAGE_FLAGS",
     "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "flags": true,
-    "members": [
-      {
-        "name": "LR_CREATEDIBSECTION",
-        "value": "8192"
-      },
-      {
-        "name": "LR_DEFAULTCOLOR",
-        "value": "0"
-      },
-      {
-        "name": "LR_DEFAULTSIZE",
-        "value": "64"
-      },
-      {
-        "name": "LR_LOADFROMFILE",
-        "value": "16"
-      },
-      {
-        "name": "LR_LOADMAP3DCOLORS",
-        "value": "4096"
-      },
-      {
-        "name": "LR_LOADTRANSPARENT",
-        "value": "32"
-      },
-      {
-        "name": "LR_MONOCHROME",
-        "value": "1"
-      },
-      {
-        "name": "LR_SHARED",
-        "value": "32768"
-      },
-      {
-        "name": "LR_VGACOLOR",
-        "value": "128"
-      },
-      {
-        "name": "LR_COPYDELETEORG",
-        "value": "8"
-      },
-      {
-        "name": "LR_COPYFROMRESOURCE",
-        "value": "16384"
-      },
-      {
-        "name": "LR_COPYRETURNORG",
-        "value": "4"
-      }
-    ],
+    "members": [],
     "uses": [
-      {
-        "method": "ImageList_LoadImageA",
-        "parameter": "uFlags"
-      },
-      {
-        "method": "ImageList_LoadImageW",
-        "parameter": "uFlags"
-      },
       {
         "method": "LoadImageW",
         "parameter": "fuLoad"
@@ -5225,32 +4852,7 @@
   },
   {
     "name": "ENUM_DATE_FORMATS_FLAGS",
-    "members": [
-      {
-        "name": "DATE_SHORTDATE"
-      },
-      {
-        "name": "DATE_LONGDATE"
-      },
-      {
-        "name": "DATE_YEARMONTH"
-      },
-      {
-        "name": "DATE_MONTHDAY"
-      },
-      {
-        "name": "DATE_AUTOLAYOUT"
-      },
-      {
-        "name": "DATE_LTRREADING"
-      },
-      {
-        "name": "DATE_RTLREADING"
-      },
-      {
-        "name": "DATE_USE_ALT_CALENDAR"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "EnumDateFormatsExEx",
@@ -5991,18 +5593,6 @@
     "flags": true,
     "members": [
       {
-        "name": "TIME_NOMINUTESORSECONDS"
-      },
-      {
-        "name": "TIME_NOSECONDS"
-      },
-      {
-        "name": "TIME_NOTIMEMARKER"
-      },
-      {
-        "name": "TIME_FORCE24HOURFORMAT"
-      },
-      {
         "name": "LOCAL_USE_CP_ACP"
       }
     ],
@@ -6062,33 +5652,6 @@
         "interface": "ICertExit",
         "method": "Initialize",
         "parameter": "pEventMask"
-      }
-    ]
-  },
-  {
-    "name": "NET_REMOTE_COMPUTER_SUPPORTS_OPTIONS",
-    "type": "uint",
-    "members": [
-      {
-        "name": "SUPPORTS_REMOTE_ADMIN_PROTOCOL"
-      },
-      {
-        "name": "SUPPORTS_RPC"
-      },
-      {
-        "name": "SUPPORTS_SAM_PROTOCOL"
-      },
-      {
-        "name": "SUPPORTS_UNICODE"
-      },
-      {
-        "name": "SUPPORTS_LOCAL"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NetRemoteComputerSupports",
-        "parameter": "OptionsWanted"
       }
     ]
   },
@@ -7467,16 +7030,7 @@
     "flags": true,
     "members": [
       {
-        "name": "MB_COMPOSITE"
-      },
-      {
-        "name": "MB_ERR_INVALID_CHARS"
-      },
-      {
         "name": "MB_PRECOMPOSED"
-      },
-      {
-        "name": "MB_USEGLYPHCHARS"
       }
     ],
     "uses": [
@@ -7874,12 +7428,6 @@
     "flags": true,
     "members": [
       {
-        "name": "LINGUISTIC_IGNORECASE"
-      },
-      {
-        "name": "LINGUISTIC_IGNOREDIACRITIC"
-      },
-      {
         "name": "NORM_IGNORECASE"
       },
       {
@@ -7889,16 +7437,7 @@
         "name": "NORM_IGNORENONSPACE"
       },
       {
-        "name": "NORM_IGNORESYMBOLS"
-      },
-      {
         "name": "NORM_IGNOREWIDTH"
-      },
-      {
-        "name": "NORM_LINGUISTIC_CASING"
-      },
-      {
-        "name": "SORT_DIGITSASNUMBERS"
       },
       {
         "name": "SORT_STRINGSORT"
@@ -8130,26 +7669,6 @@
     ]
   },
   {
-    "name": "PROCESS_DEP_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PROCESS_DEP_ENABLE",
-        "value": "1"
-      },
-      {
-        "name": "PROCESS_DEP_DISABLE_ATL_THUNK_EMULATION",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SetProcessDEPPolicy",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "SYM_FIND_ID_OPTION",
     "members": [
       {
@@ -8173,39 +7692,6 @@
       {
         "method": "SymFindFileInPath",
         "parameter": "flags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "_LI_METRIC",
-    "members": [],
-    "uses": [
-      {
-        "method": "LoadIconMetric",
-        "parameter": "lims"
-      }
-    ]
-  },
-  {
-    "name": "PROCESS_NAME_FORMAT",
-    "members": [
-      {
-        "name": "PROCESS_NAME_WIN32",
-        "value": "0"
-      },
-      {
-        "name": "PROCESS_NAME_NATIVE",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "QueryFullProcessImageNameA",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "QueryFullProcessImageNameW",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -8270,13 +7756,7 @@
     "uses": []
   },
   {
-    "name": "HANDLE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "header": "winbase.h",
-      "filter": "HANDLE_FLAG_"
-    },
-    "members": [],
+    "addUsesTo": "HANDLE_FLAGS",
     "uses": [
       {
         "method": "SetHandleInformation",
@@ -8673,15 +8153,6 @@
     ]
   },
   {
-    "addUsesTo": "LPPROGRESS_ROUTINE_CALLBACK_REASON",
-    "uses": [
-      {
-        "method": "LPPROGRESS_ROUTINE",
-        "parameter": "dwCallbackReason"
-      }
-    ]
-  },
-  {
     "addUsesTo": "tomConstants",
     "flags": true,
     "members": [],
@@ -8941,35 +8412,8 @@
       ]
     },
   {
-    "name": "GLOBAL_ALLOC_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "GHND",
-        "value": "66"
-      },
-      {
-        "name": "GMEM_FIXED",
-        "value": "0"
-      },
-      {
-        "name": "GMEM_MOVEABLE",
-        "value": "2"
-      },
-      {
-        "name": "GMEM_ZEROINIT",
-        "value": "64"
-      },
-      {
-        "name": "GPTR",
-        "value": "64"
-      }
-    ],
+    "addUsesTo": "GLOBAL_ALLOC_FLAGS",
     "uses": [
-      {
-        "method": "GlobalAlloc",
-        "parameter": "uFlags"
-      },
       {
         "method": "OleDuplicateData",
         "parameter": "uiFlags"
@@ -9096,16 +8540,7 @@
     },
   {
       "addUsesTo": "KERB_TICKET_FLAGS",
-      "uses": [
-        {
-          "struct": "KERB_TICKET_CACHE_INFO",
-          "field": "TicketFlags"
-        },
-        {
-          "struct": "KERB_EXTERNAL_TICKET",
-          "field": "TicketFlags"
-        }
-      ]
+      "uses": []
     },
   {
     "name": "IPSEC_SA_BUNDLE_FLAGS",
@@ -9521,81 +8956,6 @@
         }
       ]
     },
-  {
-    "name": "MIXERLINE_COMPONENTTYPE",
-    "members": [
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_DIGITAL"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_HEADPHONES"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_LINE"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_MONITOR"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_SPEAKERS"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_TELEPHONE"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_UNDEFINED"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_VOICEIN"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_DST_WAVEIN"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_ANALOG"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_AUXILIARY"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_COMPACTDISC"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_DIGITAL"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_LINE"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_MICROPHONE"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_PCSPEAKER"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_SYNTHESIZER"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_TELEPHONE"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_UNDEFINED"
-      },
-      {
-        "name": "MIXERLINE_COMPONENTTYPE_SRC_WAVEOUT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MIXERLINEW",
-        "field": "dwComponentType"
-      },
-      {
-        "struct": "MIXERLINEA",
-        "field": "dwComponentType"
-      }
-    ]
-  },
   {
     "name": "JOB_OBJECT_CPU_RATE_CONTROL",
     "flags": true,
@@ -10183,33 +9543,6 @@
       {
         "struct": "IKEEXT_PRESHARED_KEY_AUTHENTICATION1",
         "field": "flags"
-      }
-    ]
-  },
-  {
-    "name": "USE_INFO_ASG_TYPE",
-    "members": [
-      {
-        "name": "USE_WILDCARD"
-      },
-      {
-        "name": "USE_DISKDEV"
-      },
-      {
-        "name": "USE_SPOOLDEV"
-      },
-      {
-        "name": "USE_IPC"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "USE_INFO_1",
-        "field": "ui1_asg_type"
-      },
-      {
-        "struct": "USE_INFO_2",
-        "field": "ui2_asg_type"
       }
     ]
   },
@@ -11217,12 +10550,7 @@
   },
   {
       "addUsesTo": "KERB_REQUEST_FLAGS",
-      "uses": [
-        {
-          "struct": "KERB_ADD_CREDENTIALS_REQUEST",
-          "field": "Flags"
-        }
-      ]
+      "uses": []
     },
   {
       "addUsesTo": "CERT_BIOMETRIC_DATA_TYPE",
@@ -13872,150 +13200,7 @@
     ]
   },
   {
-    "name": "UIA_PATTERN_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_InvokePatternId",
-        "value": 10000
-      },
-      {
-        "name": "UIA_SelectionPatternId",
-        "value": 10001
-      },
-      {
-        "name": "UIA_ValuePatternId",
-        "value": 10002
-      },
-      {
-        "name": "UIA_RangeValuePatternId",
-        "value": 10003
-      },
-      {
-        "name": "UIA_ScrollPatternId",
-        "value": 10004
-      },
-      {
-        "name": "UIA_ExpandCollapsePatternId",
-        "value": 10005
-      },
-      {
-        "name": "UIA_GridPatternId",
-        "value": 10006
-      },
-      {
-        "name": "UIA_GridItemPatternId",
-        "value": 10007
-      },
-      {
-        "name": "UIA_MultipleViewPatternId",
-        "value": 10008
-      },
-      {
-        "name": "UIA_WindowPatternId",
-        "value": 10009
-      },
-      {
-        "name": "UIA_SelectionItemPatternId",
-        "value": 10010
-      },
-      {
-        "name": "UIA_DockPatternId",
-        "value": 10011
-      },
-      {
-        "name": "UIA_TablePatternId",
-        "value": 10012
-      },
-      {
-        "name": "UIA_TableItemPatternId",
-        "value": 10013
-      },
-      {
-        "name": "UIA_TextPatternId",
-        "value": 10014
-      },
-      {
-        "name": "UIA_TogglePatternId",
-        "value": 10015
-      },
-      {
-        "name": "UIA_TransformPatternId",
-        "value": 10016
-      },
-      {
-        "name": "UIA_ScrollItemPatternId",
-        "value": 10017
-      },
-      {
-        "name": "UIA_LegacyIAccessiblePatternId",
-        "value": 10018
-      },
-      {
-        "name": "UIA_ItemContainerPatternId",
-        "value": 10019
-      },
-      {
-        "name": "UIA_VirtualizedItemPatternId",
-        "value": 10020
-      },
-      {
-        "name": "UIA_SynchronizedInputPatternId",
-        "value": 10021
-      },
-      {
-        "name": "UIA_ObjectModelPatternId",
-        "value": 10022
-      },
-      {
-        "name": "UIA_AnnotationPatternId",
-        "value": 10023
-      },
-      {
-        "name": "UIA_TextPattern2Id",
-        "value": 10024
-      },
-      {
-        "name": "UIA_StylesPatternId",
-        "value": 10025
-      },
-      {
-        "name": "UIA_SpreadsheetPatternId",
-        "value": 10026
-      },
-      {
-        "name": "UIA_SpreadsheetItemPatternId",
-        "value": 10027
-      },
-      {
-        "name": "UIA_TransformPattern2Id",
-        "value": 10028
-      },
-      {
-        "name": "UIA_TextChildPatternId",
-        "value": 10029
-      },
-      {
-        "name": "UIA_DragPatternId",
-        "value": 10030
-      },
-      {
-        "name": "UIA_DropTargetPatternId",
-        "value": 10031
-      },
-      {
-        "name": "UIA_TextEditPatternId",
-        "value": 10032
-      },
-      {
-        "name": "UIA_CustomNavigationPatternId",
-        "value": 10033
-      },
-      {
-        "name": "UIA_SelectionPattern2Id",
-        "value": 10034
-      }
-    ],
+    "addUsesTo": "UIA_PATTERN_ID",
     "uses": [
       {
         "interface": "IRawElementProviderSimple",
@@ -14055,158 +13240,7 @@
     ]
   },
   {
-    "name": "UIA_EVENT_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_ToolTipOpenedEventId",
-        "value": 20000
-      },
-      {
-        "name": "UIA_ToolTipClosedEventId",
-        "value": 20001
-      },
-      {
-        "name": "UIA_StructureChangedEventId",
-        "value": 20002
-      },
-      {
-        "name": "UIA_MenuOpenedEventId",
-        "value": 20003
-      },
-      {
-        "name": "UIA_AutomationPropertyChangedEventId",
-        "value": 20004
-      },
-      {
-        "name": "UIA_AutomationFocusChangedEventId",
-        "value": 20005
-      },
-      {
-        "name": "UIA_AsyncContentLoadedEventId",
-        "value": 20006
-      },
-      {
-        "name": "UIA_MenuClosedEventId",
-        "value": 20007
-      },
-      {
-        "name": "UIA_LayoutInvalidatedEventId",
-        "value": 20008
-      },
-      {
-        "name": "UIA_Invoke_InvokedEventId",
-        "value": 20009
-      },
-      {
-        "name": "UIA_SelectionItem_ElementAddedToSelectionEventId",
-        "value": 20010
-      },
-      {
-        "name": "UIA_SelectionItem_ElementRemovedFromSelectionEventId",
-        "value": 20011
-      },
-      {
-        "name": "UIA_SelectionItem_ElementSelectedEventId",
-        "value": 20012
-      },
-      {
-        "name": "UIA_Selection_InvalidatedEventId",
-        "value": 20013
-      },
-      {
-        "name": "UIA_Text_TextSelectionChangedEventId",
-        "value": 20014
-      },
-      {
-        "name": "UIA_Text_TextChangedEventId",
-        "value": 20015
-      },
-      {
-        "name": "UIA_Window_WindowOpenedEventId",
-        "value": 20016
-      },
-      {
-        "name": "UIA_Window_WindowClosedEventId",
-        "value": 20017
-      },
-      {
-        "name": "UIA_MenuModeStartEventId",
-        "value": 20018
-      },
-      {
-        "name": "UIA_MenuModeEndEventId",
-        "value": 20019
-      },
-      {
-        "name": "UIA_InputReachedTargetEventId",
-        "value": 20020
-      },
-      {
-        "name": "UIA_InputReachedOtherElementEventId",
-        "value": 20021
-      },
-      {
-        "name": "UIA_InputDiscardedEventId",
-        "value": 20022
-      },
-      {
-        "name": "UIA_SystemAlertEventId",
-        "value": 20023
-      },
-      {
-        "name": "UIA_LiveRegionChangedEventId",
-        "value": 20024
-      },
-      {
-        "name": "UIA_HostedFragmentRootsInvalidatedEventId",
-        "value": 20025
-      },
-      {
-        "name": "UIA_Drag_DragStartEventId",
-        "value": 20026
-      },
-      {
-        "name": "UIA_Drag_DragCancelEventId",
-        "value": 20027
-      },
-      {
-        "name": "UIA_Drag_DragCompleteEventId",
-        "value": 20028
-      },
-      {
-        "name": "UIA_DropTarget_DragEnterEventId",
-        "value": 20029
-      },
-      {
-        "name": "UIA_DropTarget_DragLeaveEventId",
-        "value": 20030
-      },
-      {
-        "name": "UIA_DropTarget_DroppedEventId",
-        "value": 20031
-      },
-      {
-        "name": "UIA_TextEdit_TextChangedEventId",
-        "value": 20032
-      },
-      {
-        "name": "UIA_TextEdit_ConversionTargetChangedEventId",
-        "value": 20033
-      },
-      {
-        "name": "UIA_ChangesEventId",
-        "value": 20034
-      },
-      {
-        "name": "UIA_NotificationEventId",
-        "value": 20035
-      },
-      {
-        "name": "UIA_ActiveTextPositionChangedEventId",
-        "value": 20036
-      }
-    ],
+    "addUsesTo": "UIA_EVENT_ID",
     "uses": [
       {
         "method": "UiaRaiseAutomationEvent",
@@ -14264,710 +13298,7 @@
     ]
   },
   {
-    "name": "UIA_PROPERTY_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_RuntimeIdPropertyId",
-        "value": 30000
-      },
-      {
-        "name": "UIA_BoundingRectanglePropertyId",
-        "value": 30001
-      },
-      {
-        "name": "UIA_ProcessIdPropertyId",
-        "value": 30002
-      },
-      {
-        "name": "UIA_ControlTypePropertyId",
-        "value": 30003
-      },
-      {
-        "name": "UIA_LocalizedControlTypePropertyId",
-        "value": 30004
-      },
-      {
-        "name": "UIA_NamePropertyId",
-        "value": 30005
-      },
-      {
-        "name": "UIA_AcceleratorKeyPropertyId",
-        "value": 30006
-      },
-      {
-        "name": "UIA_AccessKeyPropertyId",
-        "value": 30007
-      },
-      {
-        "name": "UIA_HasKeyboardFocusPropertyId",
-        "value": 30008
-      },
-      {
-        "name": "UIA_IsKeyboardFocusablePropertyId",
-        "value": 30009
-      },
-      {
-        "name": "UIA_IsEnabledPropertyId",
-        "value": 30010
-      },
-      {
-        "name": "UIA_AutomationIdPropertyId",
-        "value": 30011
-      },
-      {
-        "name": "UIA_ClassNamePropertyId",
-        "value": 30012
-      },
-      {
-        "name": "UIA_HelpTextPropertyId",
-        "value": 30013
-      },
-      {
-        "name": "UIA_ClickablePointPropertyId",
-        "value": 30014
-      },
-      {
-        "name": "UIA_CulturePropertyId",
-        "value": 30015
-      },
-      {
-        "name": "UIA_IsControlElementPropertyId",
-        "value": 30016
-      },
-      {
-        "name": "UIA_IsContentElementPropertyId",
-        "value": 30017
-      },
-      {
-        "name": "UIA_LabeledByPropertyId",
-        "value": 30018
-      },
-      {
-        "name": "UIA_IsPasswordPropertyId",
-        "value": 30019
-      },
-      {
-        "name": "UIA_NativeWindowHandlePropertyId",
-        "value": 30020
-      },
-      {
-        "name": "UIA_ItemTypePropertyId",
-        "value": 30021
-      },
-      {
-        "name": "UIA_IsOffscreenPropertyId",
-        "value": 30022
-      },
-      {
-        "name": "UIA_OrientationPropertyId",
-        "value": 30023
-      },
-      {
-        "name": "UIA_FrameworkIdPropertyId",
-        "value": 30024
-      },
-      {
-        "name": "UIA_IsRequiredForFormPropertyId",
-        "value": 30025
-      },
-      {
-        "name": "UIA_ItemStatusPropertyId",
-        "value": 30026
-      },
-      {
-        "name": "UIA_IsDockPatternAvailablePropertyId",
-        "value": 30027
-      },
-      {
-        "name": "UIA_IsExpandCollapsePatternAvailablePropertyId",
-        "value": 30028
-      },
-      {
-        "name": "UIA_IsGridItemPatternAvailablePropertyId",
-        "value": 30029
-      },
-      {
-        "name": "UIA_IsGridPatternAvailablePropertyId",
-        "value": 30030
-      },
-      {
-        "name": "UIA_IsInvokePatternAvailablePropertyId",
-        "value": 30031
-      },
-      {
-        "name": "UIA_IsMultipleViewPatternAvailablePropertyId",
-        "value": 30032
-      },
-      {
-        "name": "UIA_IsRangeValuePatternAvailablePropertyId",
-        "value": 30033
-      },
-      {
-        "name": "UIA_IsScrollPatternAvailablePropertyId",
-        "value": 30034
-      },
-      {
-        "name": "UIA_IsScrollItemPatternAvailablePropertyId",
-        "value": 30035
-      },
-      {
-        "name": "UIA_IsSelectionItemPatternAvailablePropertyId",
-        "value": 30036
-      },
-      {
-        "name": "UIA_IsSelectionPatternAvailablePropertyId",
-        "value": 30037
-      },
-      {
-        "name": "UIA_IsTablePatternAvailablePropertyId",
-        "value": 30038
-      },
-      {
-        "name": "UIA_IsTableItemPatternAvailablePropertyId",
-        "value": 30039
-      },
-      {
-        "name": "UIA_IsTextPatternAvailablePropertyId",
-        "value": 30040
-      },
-      {
-        "name": "UIA_IsTogglePatternAvailablePropertyId",
-        "value": 30041
-      },
-      {
-        "name": "UIA_IsTransformPatternAvailablePropertyId",
-        "value": 30042
-      },
-      {
-        "name": "UIA_IsValuePatternAvailablePropertyId",
-        "value": 30043
-      },
-      {
-        "name": "UIA_IsWindowPatternAvailablePropertyId",
-        "value": 30044
-      },
-      {
-        "name": "UIA_ValueValuePropertyId",
-        "value": 30045
-      },
-      {
-        "name": "UIA_ValueIsReadOnlyPropertyId",
-        "value": 30046
-      },
-      {
-        "name": "UIA_RangeValueValuePropertyId",
-        "value": 30047
-      },
-      {
-        "name": "UIA_RangeValueIsReadOnlyPropertyId",
-        "value": 30048
-      },
-      {
-        "name": "UIA_RangeValueMinimumPropertyId",
-        "value": 30049
-      },
-      {
-        "name": "UIA_RangeValueMaximumPropertyId",
-        "value": 30050
-      },
-      {
-        "name": "UIA_RangeValueLargeChangePropertyId",
-        "value": 30051
-      },
-      {
-        "name": "UIA_RangeValueSmallChangePropertyId",
-        "value": 30052
-      },
-      {
-        "name": "UIA_ScrollHorizontalScrollPercentPropertyId",
-        "value": 30053
-      },
-      {
-        "name": "UIA_ScrollHorizontalViewSizePropertyId",
-        "value": 30054
-      },
-      {
-        "name": "UIA_ScrollVerticalScrollPercentPropertyId",
-        "value": 30055
-      },
-      {
-        "name": "UIA_ScrollVerticalViewSizePropertyId",
-        "value": 30056
-      },
-      {
-        "name": "UIA_ScrollHorizontallyScrollablePropertyId",
-        "value": 30057
-      },
-      {
-        "name": "UIA_ScrollVerticallyScrollablePropertyId",
-        "value": 30058
-      },
-      {
-        "name": "UIA_SelectionSelectionPropertyId",
-        "value": 30059
-      },
-      {
-        "name": "UIA_SelectionCanSelectMultiplePropertyId",
-        "value": 30060
-      },
-      {
-        "name": "UIA_SelectionIsSelectionRequiredPropertyId",
-        "value": 30061
-      },
-      {
-        "name": "UIA_GridRowCountPropertyId",
-        "value": 30062
-      },
-      {
-        "name": "UIA_GridColumnCountPropertyId",
-        "value": 30063
-      },
-      {
-        "name": "UIA_GridItemRowPropertyId",
-        "value": 30064
-      },
-      {
-        "name": "UIA_GridItemColumnPropertyId",
-        "value": 30065
-      },
-      {
-        "name": "UIA_GridItemRowSpanPropertyId",
-        "value": 30066
-      },
-      {
-        "name": "UIA_GridItemColumnSpanPropertyId",
-        "value": 30067
-      },
-      {
-        "name": "UIA_GridItemContainingGridPropertyId",
-        "value": 30068
-      },
-      {
-        "name": "UIA_DockDockPositionPropertyId",
-        "value": 30069
-      },
-      {
-        "name": "UIA_ExpandCollapseExpandCollapseStatePropertyId",
-        "value": 30070
-      },
-      {
-        "name": "UIA_MultipleViewCurrentViewPropertyId",
-        "value": 30071
-      },
-      {
-        "name": "UIA_MultipleViewSupportedViewsPropertyId",
-        "value": 30072
-      },
-      {
-        "name": "UIA_WindowCanMaximizePropertyId",
-        "value": 30073
-      },
-      {
-        "name": "UIA_WindowCanMinimizePropertyId",
-        "value": 30074
-      },
-      {
-        "name": "UIA_WindowWindowVisualStatePropertyId",
-        "value": 30075
-      },
-      {
-        "name": "UIA_WindowWindowInteractionStatePropertyId",
-        "value": 30076
-      },
-      {
-        "name": "UIA_WindowIsModalPropertyId",
-        "value": 30077
-      },
-      {
-        "name": "UIA_WindowIsTopmostPropertyId",
-        "value": 30078
-      },
-      {
-        "name": "UIA_SelectionItemIsSelectedPropertyId",
-        "value": 30079
-      },
-      {
-        "name": "UIA_SelectionItemSelectionContainerPropertyId",
-        "value": 30080
-      },
-      {
-        "name": "UIA_TableRowHeadersPropertyId",
-        "value": 30081
-      },
-      {
-        "name": "UIA_TableColumnHeadersPropertyId",
-        "value": 30082
-      },
-      {
-        "name": "UIA_TableRowOrColumnMajorPropertyId",
-        "value": 30083
-      },
-      {
-        "name": "UIA_TableItemRowHeaderItemsPropertyId",
-        "value": 30084
-      },
-      {
-        "name": "UIA_TableItemColumnHeaderItemsPropertyId",
-        "value": 30085
-      },
-      {
-        "name": "UIA_ToggleToggleStatePropertyId",
-        "value": 30086
-      },
-      {
-        "name": "UIA_TransformCanMovePropertyId",
-        "value": 30087
-      },
-      {
-        "name": "UIA_TransformCanResizePropertyId",
-        "value": 30088
-      },
-      {
-        "name": "UIA_TransformCanRotatePropertyId",
-        "value": 30089
-      },
-      {
-        "name": "UIA_IsLegacyIAccessiblePatternAvailablePropertyId",
-        "value": 30090
-      },
-      {
-        "name": "UIA_LegacyIAccessibleChildIdPropertyId",
-        "value": 30091
-      },
-      {
-        "name": "UIA_LegacyIAccessibleNamePropertyId",
-        "value": 30092
-      },
-      {
-        "name": "UIA_LegacyIAccessibleValuePropertyId",
-        "value": 30093
-      },
-      {
-        "name": "UIA_LegacyIAccessibleDescriptionPropertyId",
-        "value": 30094
-      },
-      {
-        "name": "UIA_LegacyIAccessibleRolePropertyId",
-        "value": 30095
-      },
-      {
-        "name": "UIA_LegacyIAccessibleStatePropertyId",
-        "value": 30096
-      },
-      {
-        "name": "UIA_LegacyIAccessibleHelpPropertyId",
-        "value": 30097
-      },
-      {
-        "name": "UIA_LegacyIAccessibleKeyboardShortcutPropertyId",
-        "value": 30098
-      },
-      {
-        "name": "UIA_LegacyIAccessibleSelectionPropertyId",
-        "value": 30099
-      },
-      {
-        "name": "UIA_LegacyIAccessibleDefaultActionPropertyId",
-        "value": 30100
-      },
-      {
-        "name": "UIA_AriaRolePropertyId",
-        "value": 30101
-      },
-      {
-        "name": "UIA_AriaPropertiesPropertyId",
-        "value": 30102
-      },
-      {
-        "name": "UIA_IsDataValidForFormPropertyId",
-        "value": 30103
-      },
-      {
-        "name": "UIA_ControllerForPropertyId",
-        "value": 30104
-      },
-      {
-        "name": "UIA_DescribedByPropertyId",
-        "value": 30105
-      },
-      {
-        "name": "UIA_FlowsToPropertyId",
-        "value": 30106
-      },
-      {
-        "name": "UIA_ProviderDescriptionPropertyId",
-        "value": 30107
-      },
-      {
-        "name": "UIA_IsItemContainerPatternAvailablePropertyId",
-        "value": 30108
-      },
-      {
-        "name": "UIA_IsVirtualizedItemPatternAvailablePropertyId",
-        "value": 30109
-      },
-      {
-        "name": "UIA_IsSynchronizedInputPatternAvailablePropertyId",
-        "value": 30110
-      },
-      {
-        "name": "UIA_OptimizeForVisualContentPropertyId",
-        "value": 30111
-      },
-      {
-        "name": "UIA_IsObjectModelPatternAvailablePropertyId",
-        "value": 30112
-      },
-      {
-        "name": "UIA_AnnotationAnnotationTypeIdPropertyId",
-        "value": 30113
-      },
-      {
-        "name": "UIA_AnnotationAnnotationTypeNamePropertyId",
-        "value": 30114
-      },
-      {
-        "name": "UIA_AnnotationAuthorPropertyId",
-        "value": 30115
-      },
-      {
-        "name": "UIA_AnnotationDateTimePropertyId",
-        "value": 30116
-      },
-      {
-        "name": "UIA_AnnotationTargetPropertyId",
-        "value": 30117
-      },
-      {
-        "name": "UIA_IsAnnotationPatternAvailablePropertyId",
-        "value": 30118
-      },
-      {
-        "name": "UIA_IsTextPattern2AvailablePropertyId",
-        "value": 30119
-      },
-      {
-        "name": "UIA_StylesStyleIdPropertyId",
-        "value": 30120
-      },
-      {
-        "name": "UIA_StylesStyleNamePropertyId",
-        "value": 30121
-      },
-      {
-        "name": "UIA_StylesFillColorPropertyId",
-        "value": 30122
-      },
-      {
-        "name": "UIA_StylesFillPatternStylePropertyId",
-        "value": 30123
-      },
-      {
-        "name": "UIA_StylesShapePropertyId",
-        "value": 30124
-      },
-      {
-        "name": "UIA_StylesFillPatternColorPropertyId",
-        "value": 30125
-      },
-      {
-        "name": "UIA_StylesExtendedPropertiesPropertyId",
-        "value": 30126
-      },
-      {
-        "name": "UIA_IsStylesPatternAvailablePropertyId",
-        "value": 30127
-      },
-      {
-        "name": "UIA_IsSpreadsheetPatternAvailablePropertyId",
-        "value": 30128
-      },
-      {
-        "name": "UIA_SpreadsheetItemFormulaPropertyId",
-        "value": 30129
-      },
-      {
-        "name": "UIA_SpreadsheetItemAnnotationObjectsPropertyId",
-        "value": 30130
-      },
-      {
-        "name": "UIA_SpreadsheetItemAnnotationTypesPropertyId",
-        "value": 30131
-      },
-      {
-        "name": "UIA_IsSpreadsheetItemPatternAvailablePropertyId",
-        "value": 30132
-      },
-      {
-        "name": "UIA_Transform2CanZoomPropertyId",
-        "value": 30133
-      },
-      {
-        "name": "UIA_IsTransformPattern2AvailablePropertyId",
-        "value": 30134
-      },
-      {
-        "name": "UIA_LiveSettingPropertyId",
-        "value": 30135
-      },
-      {
-        "name": "UIA_IsTextChildPatternAvailablePropertyId",
-        "value": 30136
-      },
-      {
-        "name": "UIA_IsDragPatternAvailablePropertyId",
-        "value": 30137
-      },
-      {
-        "name": "UIA_DragIsGrabbedPropertyId",
-        "value": 30138
-      },
-      {
-        "name": "UIA_DragDropEffectPropertyId",
-        "value": 30139
-      },
-      {
-        "name": "UIA_DragDropEffectsPropertyId",
-        "value": 30140
-      },
-      {
-        "name": "UIA_IsDropTargetPatternAvailablePropertyId",
-        "value": 30141
-      },
-      {
-        "name": "UIA_DropTargetDropTargetEffectPropertyId",
-        "value": 30142
-      },
-      {
-        "name": "UIA_DropTargetDropTargetEffectsPropertyId",
-        "value": 30143
-      },
-      {
-        "name": "UIA_DragGrabbedItemsPropertyId",
-        "value": 30144
-      },
-      {
-        "name": "UIA_Transform2ZoomLevelPropertyId",
-        "value": 30145
-      },
-      {
-        "name": "UIA_Transform2ZoomMinimumPropertyId",
-        "value": 30146
-      },
-      {
-        "name": "UIA_Transform2ZoomMaximumPropertyId",
-        "value": 30147
-      },
-      {
-        "name": "UIA_FlowsFromPropertyId",
-        "value": 30148
-      },
-      {
-        "name": "UIA_IsTextEditPatternAvailablePropertyId",
-        "value": 30149
-      },
-      {
-        "name": "UIA_IsPeripheralPropertyId",
-        "value": 30150
-      },
-      {
-        "name": "UIA_IsCustomNavigationPatternAvailablePropertyId",
-        "value": 30151
-      },
-      {
-        "name": "UIA_PositionInSetPropertyId",
-        "value": 30152
-      },
-      {
-        "name": "UIA_SizeOfSetPropertyId",
-        "value": 30153
-      },
-      {
-        "name": "UIA_LevelPropertyId",
-        "value": 30154
-      },
-      {
-        "name": "UIA_AnnotationTypesPropertyId",
-        "value": 30155
-      },
-      {
-        "name": "UIA_AnnotationObjectsPropertyId",
-        "value": 30156
-      },
-      {
-        "name": "UIA_LandmarkTypePropertyId",
-        "value": 30157
-      },
-      {
-        "name": "UIA_LocalizedLandmarkTypePropertyId",
-        "value": 30158
-      },
-      {
-        "name": "UIA_FullDescriptionPropertyId",
-        "value": 30159
-      },
-      {
-        "name": "UIA_FillColorPropertyId",
-        "value": 30160
-      },
-      {
-        "name": "UIA_OutlineColorPropertyId",
-        "value": 30161
-      },
-      {
-        "name": "UIA_FillTypePropertyId",
-        "value": 30162
-      },
-      {
-        "name": "UIA_VisualEffectsPropertyId",
-        "value": 30163
-      },
-      {
-        "name": "UIA_OutlineThicknessPropertyId",
-        "value": 30164
-      },
-      {
-        "name": "UIA_CenterPointPropertyId",
-        "value": 30165
-      },
-      {
-        "name": "UIA_RotationPropertyId",
-        "value": 30166
-      },
-      {
-        "name": "UIA_SizePropertyId",
-        "value": 30167
-      },
-      {
-        "name": "UIA_IsSelectionPattern2AvailablePropertyId",
-        "value": 30168
-      },
-      {
-        "name": "UIA_Selection2FirstSelectedItemPropertyId",
-        "value": 30169
-      },
-      {
-        "name": "UIA_Selection2LastSelectedItemPropertyId",
-        "value": 30170
-      },
-      {
-        "name": "UIA_Selection2CurrentSelectedItemPropertyId",
-        "value": 30171
-      },
-      {
-        "name": "UIA_Selection2ItemCountPropertyId",
-        "value": 30172
-      },
-      {
-        "name": "UIA_HeadingLevelPropertyId",
-        "value": 30173
-      },
-      {
-        "name": "UIA_IsDialogPropertyId",
-        "value": 30174
-      }
-    ],
+    "addUsesTo": "UIA_PROPERTY_ID",
     "uses": [
       {
         "method": "UiaRaiseAutomationPropertyChangedEvent",
@@ -15068,189 +13399,9 @@
         "parameter": "property"
       }
     ]
-
   },
   {
-    "name": "UIA_TEXTATTRIBUTE_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_AnimationStyleAttributeId",
-        "value": 40000
-      },
-      {
-        "name": "UIA_BackgroundColorAttributeId",
-        "value": 40001
-      },
-      {
-        "name": "UIA_BulletStyleAttributeId",
-        "value": 40002
-      },
-      {
-        "name": "UIA_CapStyleAttributeId",
-        "value": 40003
-      },
-      {
-        "name": "UIA_CultureAttributeId",
-        "value": 40004
-      },
-      {
-        "name": "UIA_FontNameAttributeId",
-        "value": 40005
-      },
-      {
-        "name": "UIA_FontSizeAttributeId",
-        "value": 40006
-      },
-      {
-        "name": "UIA_FontWeightAttributeId",
-        "value": 40007
-      },
-      {
-        "name": "UIA_ForegroundColorAttributeId",
-        "value": 40008
-      },
-      {
-        "name": "UIA_HorizontalTextAlignmentAttributeId",
-        "value": 40009
-      },
-      {
-        "name": "UIA_IndentationFirstLineAttributeId",
-        "value": 40010
-      },
-      {
-        "name": "UIA_IndentationLeadingAttributeId",
-        "value": 40011
-      },
-      {
-        "name": "UIA_IndentationTrailingAttributeId",
-        "value": 40012
-      },
-      {
-        "name": "UIA_IsHiddenAttributeId",
-        "value": 40013
-      },
-      {
-        "name": "UIA_IsItalicAttributeId",
-        "value": 40014
-      },
-      {
-        "name": "UIA_IsReadOnlyAttributeId",
-        "value": 40015
-      },
-      {
-        "name": "UIA_IsSubscriptAttributeId",
-        "value": 40016
-      },
-      {
-        "name": "UIA_IsSuperscriptAttributeId",
-        "value": 40017
-      },
-      {
-        "name": "UIA_MarginBottomAttributeId",
-        "value": 40018
-      },
-      {
-        "name": "UIA_MarginLeadingAttributeId",
-        "value": 40019
-      },
-      {
-        "name": "UIA_MarginTopAttributeId",
-        "value": 40020
-      },
-      {
-        "name": "UIA_MarginTrailingAttributeId",
-        "value": 40021
-      },
-      {
-        "name": "UIA_OutlineStylesAttributeId",
-        "value": 40022
-      },
-      {
-        "name": "UIA_OverlineColorAttributeId",
-        "value": 40023
-      },
-      {
-        "name": "UIA_OverlineStyleAttributeId",
-        "value": 40024
-      },
-      {
-        "name": "UIA_StrikethroughColorAttributeId",
-        "value": 40025
-      },
-      {
-        "name": "UIA_StrikethroughStyleAttributeId",
-        "value": 40026
-      },
-      {
-        "name": "UIA_TabsAttributeId",
-        "value": 40027
-      },
-      {
-        "name": "UIA_TextFlowDirectionsAttributeId",
-        "value": 40028
-      },
-      {
-        "name": "UIA_UnderlineColorAttributeId",
-        "value": 40029
-      },
-      {
-        "name": "UIA_UnderlineStyleAttributeId",
-        "value": 40030
-      },
-      {
-        "name": "UIA_AnnotationTypesAttributeId",
-        "value": 40031
-      },
-      {
-        "name": "UIA_AnnotationObjectsAttributeId",
-        "value": 40032
-      },
-      {
-        "name": "UIA_StyleNameAttributeId",
-        "value": 40033
-      },
-      {
-        "name": "UIA_StyleIdAttributeId",
-        "value": 40034
-      },
-      {
-        "name": "UIA_LinkAttributeId",
-        "value": 40035
-      },
-      {
-        "name": "UIA_IsActiveAttributeId",
-        "value": 40036
-      },
-      {
-        "name": "UIA_SelectionActiveEndAttributeId",
-        "value": 40037
-      },
-      {
-        "name": "UIA_CaretPositionAttributeId",
-        "value": 40038
-      },
-      {
-        "name": "UIA_CaretBidiModeAttributeId",
-        "value": 40039
-      },
-      {
-        "name": "UIA_LineSpacingAttributeId",
-        "value": 40040
-      },
-      {
-        "name": "UIA_BeforeParagraphSpacingAttributeId",
-        "value": 40041
-      },
-      {
-        "name": "UIA_AfterParagraphSpacingAttributeId",
-        "value": 40042
-      },
-      {
-        "name": "UIA_SayAsInterpretAsAttributeId",
-        "value": 40043
-      }
-    ],
+    "addUsesTo": "UIA_TEXTATTRIBUTE_ID",
     "uses": [
       {
         "interface": "IUIAutomationTextRange",
@@ -15280,174 +13431,7 @@
     ]
   },
   {
-    "name": "UIA_CONTROLTYPE_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_ButtonControlTypeId",
-        "value": 50000
-      },
-      {
-        "name": "UIA_CalendarControlTypeId",
-        "value": 50001
-      },
-      {
-        "name": "UIA_CheckBoxControlTypeId",
-        "value": 50002
-      },
-      {
-        "name": "UIA_ComboBoxControlTypeId",
-        "value": 50003
-      },
-      {
-        "name": "UIA_EditControlTypeId",
-        "value": 50004
-      },
-      {
-        "name": "UIA_HyperlinkControlTypeId",
-        "value": 50005
-      },
-      {
-        "name": "UIA_ImageControlTypeId",
-        "value": 50006
-      },
-      {
-        "name": "UIA_ListItemControlTypeId",
-        "value": 50007
-      },
-      {
-        "name": "UIA_ListControlTypeId",
-        "value": 50008
-      },
-      {
-        "name": "UIA_MenuControlTypeId",
-        "value": 50009
-      },
-      {
-        "name": "UIA_MenuBarControlTypeId",
-        "value": 50010
-      },
-      {
-        "name": "UIA_MenuItemControlTypeId",
-        "value": 50011
-      },
-      {
-        "name": "UIA_ProgressBarControlTypeId",
-        "value": 50012
-      },
-      {
-        "name": "UIA_RadioButtonControlTypeId",
-        "value": 50013
-      },
-      {
-        "name": "UIA_ScrollBarControlTypeId",
-        "value": 50014
-      },
-      {
-        "name": "UIA_SliderControlTypeId",
-        "value": 50015
-      },
-      {
-        "name": "UIA_SpinnerControlTypeId",
-        "value": 50016
-      },
-      {
-        "name": "UIA_StatusBarControlTypeId",
-        "value": 50017
-      },
-      {
-        "name": "UIA_TabControlTypeId",
-        "value": 50018
-      },
-      {
-        "name": "UIA_TabItemControlTypeId",
-        "value": 50019
-      },
-      {
-        "name": "UIA_TextControlTypeId",
-        "value": 50020
-      },
-      {
-        "name": "UIA_ToolBarControlTypeId",
-        "value": 50021
-      },
-      {
-        "name": "UIA_ToolTipControlTypeId",
-        "value": 50022
-      },
-      {
-        "name": "UIA_TreeControlTypeId",
-        "value": 50023
-      },
-      {
-        "name": "UIA_TreeItemControlTypeId",
-        "value": 50024
-      },
-      {
-        "name": "UIA_CustomControlTypeId",
-        "value": 50025
-      },
-      {
-        "name": "UIA_GroupControlTypeId",
-        "value": 50026
-      },
-      {
-        "name": "UIA_ThumbControlTypeId",
-        "value": 50027
-      },
-      {
-        "name": "UIA_DataGridControlTypeId",
-        "value": 50028
-      },
-      {
-        "name": "UIA_DataItemControlTypeId",
-        "value": 50029
-      },
-      {
-        "name": "UIA_DocumentControlTypeId",
-        "value": 50030
-      },
-      {
-        "name": "UIA_SplitButtonControlTypeId",
-        "value": 50031
-      },
-      {
-        "name": "UIA_WindowControlTypeId",
-        "value": 50032
-      },
-      {
-        "name": "UIA_PaneControlTypeId",
-        "value": 50033
-      },
-      {
-        "name": "UIA_HeaderControlTypeId",
-        "value": 50034
-      },
-      {
-        "name": "UIA_HeaderItemControlTypeId",
-        "value": 50035
-      },
-      {
-        "name": "UIA_TableControlTypeId",
-        "value": 50036
-      },
-      {
-        "name": "UIA_TitleBarControlTypeId",
-        "value": 50037
-      },
-      {
-        "name": "UIA_SeparatorControlTypeId",
-        "value": 50038
-      },
-      {
-        "name": "UIA_SemanticZoomControlTypeId",
-        "value": 50039
-      },
-      {
-        "name": "UIA_AppBarControlTypeId",
-        "value": 50040
-      }
-    ],
+    "addUsesTo": "UIA_CONTROLTYPE_ID",
     "uses": [
       {
         "interface": "IUIAutomationElement",
@@ -15585,78 +13569,7 @@
     ]
   },
   {
-    "name": "UIA_STYLE_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "StyleId_Custom",
-        "value": 70000
-      },
-      {
-        "name": "StyleId_Heading1",
-        "value": 70001
-      },
-      {
-        "name": "StyleId_Heading2",
-        "value": 70002
-      },
-      {
-        "name": "StyleId_Heading3",
-        "value": 70003
-      },
-      {
-        "name": "StyleId_Heading4",
-        "value": 70004
-      },
-      {
-        "name": "StyleId_Heading5",
-        "value": 70005
-      },
-      {
-        "name": "StyleId_Heading6",
-        "value": 70006
-      },
-      {
-        "name": "StyleId_Heading7",
-        "value": 70007
-      },
-      {
-        "name": "StyleId_Heading8",
-        "value": 70008
-      },
-      {
-        "name": "StyleId_Heading9",
-        "value": 70009
-      },
-      {
-        "name": "StyleId_Title",
-        "value": 70010
-      },
-      {
-        "name": "StyleId_Subtitle",
-        "value": 70011
-      },
-      {
-        "name": "StyleId_Normal",
-        "value": 70012
-      },
-      {
-        "name": "StyleId_Emphasis",
-        "value": 70013
-      },
-      {
-        "name": "StyleId_Quote",
-        "value": 70014
-      },
-      {
-        "name": "StyleId_BulletedList",
-        "value": 70015
-      },
-      {
-        "name": "StyleId_NumberedList",
-        "value": 70016
-      }
-    ],
+    "addUsesTo": "UIA_STYLE_ID",
     "uses": [
       {
         "interface": "IUIAutomationStylesPattern",
@@ -15676,30 +13589,7 @@
     ]
   },
   {
-    "name": "UIA_LANDMARKTYPE_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_CustomLandmarkTypeId",
-        "value": 80000
-      },
-      {
-        "name": "UIA_FormLandmarkTypeId",
-        "value": 80001
-      },
-      {
-        "name": "UIA_MainLandmarkTypeId",
-        "value": 80002
-      },
-      {
-        "name": "UIA_NavigationLandmarkTypeId",
-        "value": 80003
-      },
-      {
-        "name": "UIA_SearchLandmarkTypeId",
-        "value": 80004
-      }
-    ],
+    "addUsesTo": "UIA_LANDMARKTYPE_ID",
     "uses": [
       {
         "interface": "IUIAutomationElement5",
@@ -15714,50 +13604,7 @@
     ]
   },
   {
-    "name": "UIA_HEADINGLEVEL_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "HeadingLevel_None",
-        "value": 80050
-      },
-      {
-        "name": "HeadingLevel1",
-        "value": 80051
-      },
-      {
-        "name": "HeadingLevel2",
-        "value": 80052
-      },
-      {
-        "name": "HeadingLevel3",
-        "value": 80053
-      },
-      {
-        "name": "HeadingLevel4",
-        "value": 80054
-      },
-      {
-        "name": "HeadingLevel5",
-        "value": 80055
-      },
-      {
-        "name": "HeadingLevel6",
-        "value": 80056
-      },
-      {
-        "name": "HeadingLevel7",
-        "value": 80057
-      },
-      {
-        "name": "HeadingLevel8",
-        "value": 80058
-      },
-      {
-        "name": "HeadingLevel9",
-        "value": 80059
-      }
-    ],
+    "addUsesTo": "UIA_HEADINGLEVEL_ID",
     "uses": [
       {
         "interface": "IUIAutomationElement8",
@@ -15772,25 +13619,11 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.UI.Accessibility",
-    "name": "UIA_CHANGE_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_SummaryChangeId",
-        "value": 90000
-      }
-    ]
+    "addUsesTo": "UIA_CHANGE_ID",
+    "uses": []
   },
   {
-    "name": "UIA_METADATA_ID",
-    "type": "int",
-    "members": [
-      {
-        "name": "UIA_SayAsInterpretAsMetadataId",
-        "value": 100000
-      }
-    ],
+    "addUsesTo": "UIA_METADATA_ID",
     "uses": [
       {
         "interface": "IRawElementProviderSimple3",
@@ -16091,122 +13924,6 @@
         "struct": "FUNCDESC",
         "field": "wFuncFlags"
       }
-    ]
-  },
-  {
-    "addUsesTo": "WBEM_GENERIC_FLAG_TYPE",
-    "members": [],
-    "uses": [
-      {
-        "interface": "IWbemServices",
-        "method": "CreateClassEnumAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "CreateInstanceEnumAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "DeleteClassAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "DeleteInstanceAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecMethodAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecNotificationQueryAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecQueryAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "GetObjectAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "PutClassAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "PutInstanceAsync",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "CreateClassEnum",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "CreateInstanceEnum",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "DeleteClass",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "DeleteInstance",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecMethod",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecNotificationQuery",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "ExecQuery",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "GetObject",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "OpenNamespace",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "PutClass",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "PutInstance",
-        "parameter": "lFlags"
-      },
-      {
-        "interface": "IWbemServices",
-        "method": "QueryObjectSink",
-        "parameter": "lFlags"
-        }
     ]
   },
   {
@@ -16512,31 +14229,13 @@
     ]
   },
   {
-      "addUsesTo": "WINUSB_PIPE_POLICY",
-      "uses": [
-        {
-          "method": "WinUsb_GetPipePolicy",
-          "parameter": "PolicyType"
-        },
-        {
-          "method": "WinUsb_SetPipePolicy",
-          "parameter": "PolicyType"
-        }
-      ]
-    },
+    "addUsesTo": "WINUSB_PIPE_POLICY",
+    "uses": []
+  },
   {
-      "addUsesTo": "WINUSB_POWER_POLICY",
-      "uses": [
-        {
-          "method": "WinUsb_GetPowerPolicy",
-          "parameter": "PolicyType"
-        },
-        {
-          "method": "WinUsb_SetPowerPolicy",
-          "parameter": "PolicyType"
-        }
-      ]
-    },
+    "addUsesTo": "WINUSB_POWER_POLICY",
+    "uses": []
+  },
   {
     "addUsesTo": "ShellWindowTypeConstants",
     "members": [],
@@ -16686,28 +14385,6 @@
       {
         "method": "CompareStringOrdinal",
         "parameter": "return"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "WBEM_CONDITION_FLAG_TYPE",
-    "members": [],
-    "uses": [
-      {
-        "interface": "IWbemClassObject",
-        "method": "GetNames",
-        "parameter": "lFlags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "WBEM_COMPARISON_FLAG",
-    "members": [],
-    "uses": [
-      {
-        "interface": "IWbemClassObject",
-        "method": "CompareTo",
-        "parameter": "lFlags"
       }
     ]
   },
@@ -17429,31 +15106,13 @@
     "uses": []
   },
   {
-      "addUsesTo": "CM_DEVNODE_STATUS_FLAGS",
-      "uses": [
-        {
-          "method": "CM_Get_DevNode_Status",
-          "parameter": "pulStatus"
-        },
-        {
-          "method": "CM_Get_DevNode_Status_Ex",
-          "parameter": "pulStatus"
-        }
-      ]
-    },
+    "addUsesTo": "CM_DEVNODE_STATUS_FLAGS",
+    "uses": []
+  },
   {
-      "addUsesTo": "CM_PROB",
-      "uses": [
-        {
-          "method": "CM_Get_DevNode_Status",
-          "parameter": "pulProblemNumber"
-        },
-        {
-          "method": "CM_Get_DevNode_Status_Ex",
-          "parameter": "pulProblemNumber"
-        }
-      ]
-    },
+    "addUsesTo": "CM_PROB",
+    "uses": []
+  },
   {
     "name": "FILEOPERATION_FLAGS",
     "flags": true,

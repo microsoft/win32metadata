@@ -226,7 +226,7 @@
  
  
  #ifdef _WIN32
-@@ -602,14 +738,20 @@
+@@ -602,15 +738,21 @@
  #define HBITMAP_CALLBACK               ((HBITMAP)-1)       // only for SparseImageList
  #endif
  
@@ -242,13 +242,16 @@
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
 -WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ UINT flags);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
+-WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
 +WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT flags);
 +_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
++WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
 +_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
++WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
  
  #ifdef UNICODE
+ #define ImageList_LoadImage     ImageList_LoadImageW
 @@ -620,16 +762,30 @@
  
  #define ILCF_MOVE   (0x00000000)
@@ -1908,19 +1911,27 @@
  
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL WINAPI FlatSB_EnableScrollBar(HWND, int, UINT);
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, int code, BOOL);
- 
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, int code, LPINT, LPINT);
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, int code, LPSCROLLINFO);
- 
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, int code);
- 
- 
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, int code, BOOL);
+-
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, int code, LPINT, LPINT);
+-WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, int code, LPSCROLLINFO);
+-
+-WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, int code);
+-
+-
 -WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, int propIndex, LPINT);
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI BOOL WINAPI FlatSB_ShowScrollBar(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, BOOL);
++
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPINT, LPINT);
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO);
++
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI int WINAPI FlatSB_GetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code);
++
++
 +_Win32_SupportedOS_WindowsVista_
 +WINCOMMCTRLAPI BOOL WINAPI FlatSB_GetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) int propIndex, LPINT);
  #ifdef _WIN64
@@ -1932,16 +1943,22 @@
  #endif
  
  
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, int code, int pos, BOOL fRedraw);
- 
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, int code, LPSCROLLINFO psi, BOOL fRedraw);
- 
- 
-+_Win32_SupportedOS_WindowsVista_
- WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, int code, int min, int max, BOOL fRedraw);
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, int code, int pos, BOOL fRedraw);
+-
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, int code, LPSCROLLINFO psi, BOOL fRedraw);
+-
+-
+-WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, int code, int min, int max, BOOL fRedraw);
 -WINCOMMCTRLAPI BOOL WINAPI FlatSB_SetScrollProp(HWND, UINT index, INT_PTR newValue, BOOL);
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollPos(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, int pos, BOOL fRedraw);
++
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollInfo(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, LPSCROLLINFO psi, BOOL fRedraw);
++
++
++_Win32_SupportedOS_WindowsVista_
++WINCOMMCTRLAPI int WINAPI FlatSB_SetScrollRange(HWND, _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) int code, int min, int max, BOOL fRedraw);
 +_Win32_SupportedOS_WindowsVista_
 +WINCOMMCTRLAPI BOOL WINAPI FlatSB_SetScrollProp(HWND, _Win32_AssociatedEnum_(WSB_PROP) UINT index, INT_PTR newValue, BOOL);
  #define FlatSB_SetScrollPropPtr FlatSB_SetScrollProp
@@ -1977,7 +1994,7 @@
 -WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(HINSTANCE hinst, PCWSTR pszName, int lims, _Out_ HICON *phico);
 -WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Out_ HICON *phico);
 +_Win32_SupportedOS_WindowsVista_
-+WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(_In_opt_ HINSTANCE hinst, PCWSTR pszName, int lims, _Out_ HICON *phico);
++WINCOMMCTRLAPI HRESULT WINAPI LoadIconMetric(_In_opt_ HINSTANCE hinst, PCWSTR pszName, _Win32_AssociatedEnum_(enum _LI_METRIC) int lims, _Out_ HICON *phico);
 +_Win32_SupportedOS_WindowsVista_
 +WINCOMMCTRLAPI HRESULT WINAPI LoadIconWithScaleDown(_In_opt_ HINSTANCE hinst, PCWSTR pszName, int cx, int cy, _Out_ HICON *phico);
  

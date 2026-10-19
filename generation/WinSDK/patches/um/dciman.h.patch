@@ -1,8 +1,6 @@
-diff --git a/um/dciman.h b/um/dciman.h
-index 1da64fa5..df65800d 100644
 --- a/um/dciman.h
 +++ b/um/dciman.h
-@@ -38,9 +38,12 @@ DECLARE_HANDLE(HWINWATCH);  // context handle for WinWatch instance
+@@ -38,9 +38,12 @@
  /****************************************************************************
   ***************************************************************************/
  
@@ -15,3 +13,16 @@ index 1da64fa5..df65800d 100644
  extern int WINAPI DCICreatePrimary(HDC hdc, LPDCISURFACEINFO FAR *lplpSurface);
  extern int WINAPI DCICreateOffscreen(HDC hdc, DWORD dwCompression, DWORD dwRedMask,
      DWORD dwGreenMask, DWORD dwBlueMask, DWORD dwWidth, DWORD dwHeight,
+@@ -78,9 +81,9 @@
+ /****************************************************************************
+  helper functions to call DCIMAN16.DLL
+  ***************************************************************************/
+-extern void WINAPI DCIEndAccess(LPDCISURFACEINFO pdci);
+-extern DCIRVAL WINAPI DCIBeginAccess(LPDCISURFACEINFO pdci, int x, int y, int dx, int dy);
+-extern void WINAPI DCIDestroy(LPDCISURFACEINFO pdci);
++extern void WINAPI _Win32_SupportedOS_Windows2000_ DCIEndAccess(LPDCISURFACEINFO pdci);
++extern DCIRVAL WINAPI _Win32_SupportedOS_Windows2000_ DCIBeginAccess(LPDCISURFACEINFO pdci, int x, int y, int dx, int dy);
++extern void WINAPI _Win32_SupportedOS_Windows2000_ DCIDestroy(LPDCISURFACEINFO pdci);
+ extern DCIRVAL WINAPI DCIDraw(LPDCIOFFSCREEN pdci);
+ extern DCIRVAL WINAPI DCISetClipList(LPDCIOFFSCREEN pdci, LPRGNDATA prd);
+ extern DCIRVAL WINAPI DCISetDestination(LPDCIOFFSCREEN pdci, LPRECT dst, LPRECT src);

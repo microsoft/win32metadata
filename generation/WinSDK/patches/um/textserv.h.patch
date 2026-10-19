@@ -44,6 +44,24 @@
  							LONG  lindex,			
  							void * pvAspect,		 
  							DVTARGETDEVICE * ptd,									
+@@ -328,7 +329,7 @@
+ 	virtual BOOL		TxShowScrollBar(INT fnBar, BOOL fShow) = 0;
+ 
+ 	//@cmember Enable the scroll bar
+-	virtual BOOL		TxEnableScrollBar (INT fuSBFlags, INT fuArrowflags) = 0;
++	virtual BOOL		TxEnableScrollBar (_Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) INT fuSBFlags, INT fuArrowflags) = 0;
+ 
+ 	//@cmember Set the scroll range
+ 	virtual BOOL		TxSetScrollRange(
+@@ -369,7 +370,7 @@
+ 							LPCRECT lprcClip,
+ 							HRGN hrgnUpdate, 
+ 							LPRECT lprcUpdate, 
+-							UINT fuScroll) = 0;
++							_Win32_AssociatedEnum_(SCROLL_WINDOW_FLAGS) UINT fuScroll) = 0;
+ 	
+ 	//@cmember Get mouse capture
+ 	virtual void		TxSetCapture(BOOL fCapture) = 0;
 @@ -457,6 +458,9 @@
   *
   *	@base	public | IUnknown 

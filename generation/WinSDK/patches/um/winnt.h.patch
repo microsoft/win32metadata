@@ -1,9 +1,154 @@
 --- a/um/winnt.h
 +++ b/um/winnt.h
-@@ -10254,6 +10254,14 @@
+@@ -1030,21 +1030,21 @@
+ 
+ ULONGLONG
+ NTAPI
+-Int64ShllMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShllMod32 (
+     _In_ ULONGLONG Value,
+     _In_ DWORD ShiftCount
+     );
+ 
+ LONGLONG
+ NTAPI
+-Int64ShraMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShraMod32 (
+     _In_ LONGLONG Value,
+     _In_ DWORD ShiftCount
+     );
+ 
+ ULONGLONG
+ NTAPI
+-Int64ShrlMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShrlMod32 (
+     _In_ ULONGLONG Value,
+     _In_ DWORD ShiftCount
+     );
+@@ -1056,7 +1056,7 @@
+ 
+ __inline ULONGLONG
+ NTAPI
+-Int64ShllMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShllMod32 (
+     _In_ ULONGLONG Value,
+     _In_ DWORD ShiftCount
+     )
+@@ -1072,7 +1072,7 @@
+ 
+ __inline LONGLONG
+ NTAPI
+-Int64ShraMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShraMod32 (
+     _In_ LONGLONG Value,
+     _In_ DWORD ShiftCount
+     )
+@@ -1088,7 +1088,7 @@
+ 
+ __inline ULONGLONG
+ NTAPI
+-Int64ShrlMod32 (
++_Win32_SupportedOS_WindowsXP_ Int64ShrlMod32 (
+     _In_ ULONGLONG Value,
+     _In_ DWORD ShiftCount
+     )
+@@ -3597,7 +3597,7 @@
+ #if !defined(_M_ARM64EC)
+ 
+ VOID
+-__faststorefence (
++_Win32_SupportedOS_WindowsVista_ __faststorefence (
+     VOID
+     );
+ 
+@@ -3625,7 +3625,7 @@
+     );
+ 
+ VOID
+-_mm_pause (
++_Win32_SupportedOS_WindowsVista_ _mm_pause (
+     VOID
+     );
+ 
+@@ -4642,7 +4642,7 @@
+ 
+ FORCEINLINE
+ VOID
+-YieldProcessor (
++_Win32_SupportedOS_WindowsVista_ YieldProcessor (
+     VOID
+     )
+ {
+@@ -5177,7 +5177,7 @@
+ #if defined(_M_CEE_PURE)
+ FORCEINLINE
+ VOID
+-YieldProcessor (
++_Win32_SupportedOS_WindowsVista_ YieldProcessor (
+     VOID
+     )
+ {
+@@ -5822,7 +5822,7 @@
+ 
+ FORCEINLINE
+ VOID
+-MemoryBarrier (
++_Win32_SupportedOS_WindowsVista_ MemoryBarrier (
+     VOID
+     )
+ {
+@@ -5838,7 +5838,7 @@
+ 
+ FORCEINLINE
+ VOID
+-YieldProcessor (
++_Win32_SupportedOS_WindowsVista_ YieldProcessor (
+     VOID
+     )
+ {
+@@ -6625,7 +6625,7 @@
+ #if defined(_M_CEE_PURE)
+ FORCEINLINE
+ VOID
+-YieldProcessor (
++_Win32_SupportedOS_WindowsVista_ YieldProcessor (
+     VOID
+     )
+ {
+@@ -8299,7 +8299,7 @@
+ 
+ #if !defined(_MANAGED) && !defined(_M_HYBRID_X86_ARM64)
+ VOID
+-_mm_pause (
++_Win32_SupportedOS_WindowsVista_ _mm_pause (
+     VOID
+     );
+ 
+@@ -8327,7 +8327,7 @@
+ #pragma warning(disable: 4793)
+ FORCEINLINE
+ VOID
+-MemoryBarrier (
++_Win32_SupportedOS_WindowsVista_ MemoryBarrier (
+     VOID
+     )
+ {
+@@ -8411,8 +8411,8 @@
+ 
+ #if !defined(_MANAGED)
+ 
+-__inline PVOID GetFiberData( void )    { return *(PVOID *) (ULONG_PTR) __readfsdword (0x10);}
+-__inline PVOID GetCurrentFiber( void ) { return (PVOID) (ULONG_PTR) __readfsdword (0x10);}
++__inline PVOID _Win32_SupportedOS_WindowsXP_ GetFiberData( void )    { return *(PVOID *) (ULONG_PTR) __readfsdword (0x10);}
++__inline PVOID _Win32_SupportedOS_WindowsXP_ GetCurrentFiber( void ) { return (PVOID) (ULONG_PTR) __readfsdword (0x10);}
+ 
+ #endif // !defined(_MANAGED)
+ 
+@@ -10253,6 +10253,14 @@
+ #define GENERIC_WRITE                    (0x40000000L)
  #define GENERIC_EXECUTE                  (0x20000000L)
  #define GENERIC_ALL                      (0x10000000L)
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(GENERIC_ACCESS_RIGHTS, unsigned long,
 +    GENERIC_READ,
@@ -11,10 +156,9 @@
 +    GENERIC_EXECUTE,
 +    GENERIC_ALL);
 +#endif
-+
+ 
  //
  //  Define the generic mapping array.  This is used to denote the
- //  mapping of each generic access right to a specific access mask.
 @@ -12955,6 +12963,14 @@
  #define QUOTA_LIMITS_HARDWS_MIN_DISABLE 0x00000002
  #define QUOTA_LIMITS_HARDWS_MAX_ENABLE  0x00000004
@@ -327,11 +471,10 @@
  
  #ifndef _MAC
  #include "pshpack2.h"                       // Symbols, relocs, and linenumbers are 2 byte packed
-@@ -21936,6 +22155,29 @@
- #define IMAGE_DLLCHARACTERISTICS_EX_CET_RESERVED_2                              0x20  // Reserved for CET policy *downgrade* only!
+@@ -21937,6 +22156,29 @@
  #define IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT                          0x40
  #define IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE                         0x80
-+
+ 
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(IMAGE_DLL_CHARACTERISTICS, unsigned short,
 +    IMAGE_DLLCHARACTERISTICS_HIGH_ENTROPY_VA,
@@ -354,9 +497,169 @@
 +    IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT,
 +    IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE);
 +#endif
- 
++
  
  typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
+     DWORD   NumberOfSymbols;
+@@ -22239,7 +22481,7 @@
+ _Success_(return != 0)
+ WORD  
+ NTAPI
+-RtlCaptureStackBackTrace(
++_Win32_SupportedOS_WindowsXP_ RtlCaptureStackBackTrace(
+     _In_ DWORD FramesToSkip,
+     _In_ DWORD FramesToCapture,
+     _Out_writes_to_(FramesToCapture,return) PVOID* BackTrace,
+@@ -22253,7 +22495,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlCaptureContext(
++_Win32_SupportedOS_WindowsXP_ RtlCaptureContext(
+     _Out_ PCONTEXT ContextRecord
+     );
+ 
+@@ -22317,7 +22559,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlUnwind(
++_Win32_SupportedOS_WindowsXP_ RtlUnwind(
+     _In_opt_ PVOID TargetFrame,
+     _In_opt_ PVOID TargetIp,
+     _In_opt_ PEXCEPTION_RECORD ExceptionRecord,
+@@ -22371,7 +22613,7 @@
+ NTSYSAPI
+ DWORD   
+ NTAPI
+-RtlAddGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlAddGrowableFunctionTable(
+     _Out_ PVOID* DynamicTable,
+     _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
+     _In_ DWORD EntryCount,
+@@ -22383,7 +22625,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlGrowFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlGrowFunctionTable(
+     _Inout_ PVOID DynamicTable,
+     _In_ DWORD NewEntryCount
+     );
+@@ -22391,7 +22633,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlDeleteGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlDeleteGrowableFunctionTable(
+     _In_ PVOID DynamicTable
+     );
+ 
+@@ -22508,7 +22750,7 @@
+ NTSYSAPI
+ DWORD   
+ NTAPI
+-RtlAddGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlAddGrowableFunctionTable(
+     _Out_ PVOID* DynamicTable,
+     _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
+     _In_ DWORD EntryCount,
+@@ -22520,7 +22762,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlGrowFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlGrowFunctionTable(
+     _Inout_ PVOID DynamicTable,
+     _In_ DWORD NewEntryCount
+     );
+@@ -22528,7 +22770,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlDeleteGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlDeleteGrowableFunctionTable(
+     _In_ PVOID DynamicTable
+     );
+ 
+@@ -22634,7 +22876,7 @@
+ NTSYSAPI
+ DWORD   
+ NTAPI
+-RtlAddGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlAddGrowableFunctionTable(
+     _Out_ PVOID* DynamicTable,
+     _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
+     _In_ DWORD EntryCount,
+@@ -22646,7 +22888,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlGrowFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlGrowFunctionTable(
+     _Inout_ PVOID DynamicTable,
+     _In_ DWORD NewEntryCount
+     );
+@@ -22654,7 +22896,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlDeleteGrowableFunctionTable(
++_Win32_SupportedOS_Windows8_ RtlDeleteGrowableFunctionTable(
+     _In_ PVOID DynamicTable
+     );
+ 
+@@ -22918,7 +23160,7 @@
+ NTSYSAPI
+ VOID
+ NTAPI
+-RtlInitializeSListHead (
++_Win32_SupportedOS_WindowsXP_ RtlInitializeSListHead (
+     _Out_ PSLIST_HEADER ListHead
+     );
+ 
+@@ -22926,21 +23168,21 @@
+ NTSYSAPI
+ PSLIST_ENTRY
+ NTAPI
+-RtlFirstEntrySList (
++_Win32_SupportedOS_WindowsXP_ RtlFirstEntrySList (
+     _In_ const SLIST_HEADER *ListHead
+     );
+ 
+ NTSYSAPI
+ PSLIST_ENTRY
+ NTAPI
+-RtlInterlockedPopEntrySList (
++_Win32_SupportedOS_WindowsXP_ RtlInterlockedPopEntrySList (
+     _Inout_ PSLIST_HEADER ListHead
+     );
+ 
+ NTSYSAPI
+ PSLIST_ENTRY
+ NTAPI
+-RtlInterlockedPushEntrySList (
++_Win32_SupportedOS_WindowsXP_ RtlInterlockedPushEntrySList (
+     _Inout_ PSLIST_HEADER ListHead,
+     _Inout_ __drv_aliasesMem PSLIST_ENTRY ListEntry
+     );
+@@ -22958,14 +23200,14 @@
+ NTSYSAPI
+ PSLIST_ENTRY
+ NTAPI
+-RtlInterlockedFlushSList (
++_Win32_SupportedOS_WindowsXP_ RtlInterlockedFlushSList (
+     _Inout_ PSLIST_HEADER ListHead
+     );
+ 
+ NTSYSAPI
+ WORD  
+ NTAPI
+-RtlQueryDepthSList (
++_Win32_SupportedOS_WindowsXP_ RtlQueryDepthSList (
+     _In_ PSLIST_HEADER ListHead
+     );
+ 
 @@ -23192,6 +23434,19 @@
  #define COMPRESSION_FORMAT_LZ4           (0x0006)   
  #define COMPRESSION_FORMAT_DEFLATE       (0x0007)   
@@ -377,6 +680,15 @@
  #define COMPRESSION_ENGINE_STANDARD      (0x0000)   
  #define COMPRESSION_ENGINE_MAXIMUM       (0x0100)   
  #define COMPRESSION_ENGINE_HIBER         (0x0200)   
+@@ -23620,7 +23875,7 @@
+ NTSYSAPI
+ ULONGLONG
+ NTAPI
+-VerSetConditionMask(
++_Win32_SupportedOS_Windows2000_ VerSetConditionMask(
+     _In_ ULONGLONG ConditionMask,
+     _In_ DWORD TypeMask,
+     _In_ BYTE  Condition
 @@ -24680,6 +24935,29 @@
  #define DEVICEFAMILYINFOENUM_WINDOWS_CORE_HEADLESS      0x00000011
  
@@ -467,3 +779,93 @@
  VOID
  NTAPI
  RtlGetDeviceFamilyInfoEnum(
+@@ -26150,7 +26481,7 @@
+ 
+ __forceinline
+ struct _TEB *
+-NtCurrentTeb (
++_Win32_SupportedOS_Windows7_ NtCurrentTeb (
+     VOID
+     )
+ 
+@@ -26286,7 +26617,7 @@
+ 
+ __forceinline
+ PVOID
+-GetCurrentFiber (
++_Win32_SupportedOS_WindowsXP_ GetCurrentFiber (
+     VOID
+     )
+ 
+@@ -26296,7 +26627,7 @@
+ 
+ __forceinline
+ PVOID
+-GetFiberData (
++_Win32_SupportedOS_WindowsXP_ GetFiberData (
+     VOID
+     )
+ 
+@@ -26311,7 +26642,7 @@
+ 
+ __forceinline
+ struct _TEB *
+-NtCurrentTeb (
++_Win32_SupportedOS_Windows7_ NtCurrentTeb (
+     VOID
+     )
+ {
+@@ -26320,7 +26651,7 @@
+ 
+ __forceinline
+ PVOID
+-GetCurrentFiber (
++_Win32_SupportedOS_WindowsXP_ GetCurrentFiber (
+     VOID
+     )
+ {
+@@ -26329,7 +26660,7 @@
+ 
+ __forceinline
+ PVOID
+-GetFiberData (
++_Win32_SupportedOS_WindowsXP_ GetFiberData (
+     VOID
+     )
+ 
+@@ -26344,7 +26675,7 @@
+ 
+ __forceinline
+ struct _TEB *
+-NtCurrentTeb (
++_Win32_SupportedOS_Windows7_ NtCurrentTeb (
+     VOID
+     )
+ {
+@@ -26433,7 +26764,7 @@
+ 
+ __forceinline
+ PVOID
+-GetCurrentFiber (
++_Win32_SupportedOS_WindowsXP_ GetCurrentFiber (
+     VOID
+     )
+ {
+@@ -26442,7 +26773,7 @@
+ 
+ __forceinline
+ PVOID
+-GetFiberData (
++_Win32_SupportedOS_WindowsXP_ GetFiberData (
+     VOID
+     )
+ 
+@@ -26461,7 +26792,7 @@
+ 
+ __inline
+ struct _TEB*
+-NtCurrentTeb(
++_Win32_SupportedOS_Windows7_ NtCurrentTeb(
+     void)
+ {
+     return (struct _TEB *) (ULONG_PTR) __readfsdword (PcTeb);
