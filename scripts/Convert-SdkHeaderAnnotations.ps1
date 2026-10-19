@@ -381,7 +381,8 @@ foreach ($owner in $Original) {
                     $masked.Substring($nameOffset + $fact.symbol.Length) -match '^\s*\('
                 if (!$isRecord -and !$returnMacro) {
                     $returnType = [regex]::Match($decl.type, '^\s*(?:const\s+|volatile\s+)*([A-Za-z_]\w*)').Groups[1].Value
-                    if (!$returnType -or $nativePrefix -cnotmatch ('\b' + [regex]::Escape($returnType) + '\b')) {
+                    $voidWinapi = $returnType -ceq 'void' -and $nativePrefix -cmatch '^VOID[ \t\r\n]+WINAPI[ \t\r\n]*$'
+                    if (!$returnType -or (!$voidWinapi -and $nativePrefix -cnotmatch ('\b' + [regex]::Escape($returnType) + '\b'))) {
                         $row.reason = 'unsupported-function-declaration-macro'
                         continue
                     }

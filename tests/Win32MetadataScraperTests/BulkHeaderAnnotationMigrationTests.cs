@@ -212,6 +212,45 @@ void Unrelated(unsigned flags);
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void VoidWinapiRequiresTheActualNativeVoidReturn(string architecture, string target, bool nativeVoid)
+        {
+            string original = "int Earlier(void);\r\n#define VOID " + (nativeVoid ? "void" : "int") +
+                "\r\n#define WINAPI __stdcall\r\nVOID\r\nWINAPI\r\nUnique(void);\r\n";
+            using var fixture = new AuthoringFixture(original, new[] { "Unique" }, Array.Empty<string>(), architecture, target);
+            string cumulative = original.Replace("int Earlier", "_Win32_PreserveResult_\r\nint Earlier");
+            fixture.InstallExistingPatch(cumulative);
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            fixture.RemoveMapOption();
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            string[] native = Signatures(fixture.Native.ReadSource());
+            var result = fixture.Run(apply: true);
+            Assert.True(result.ExitCode == 0, result.Text);
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(fixture.Output, "report.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal(nativeVoid ? "converted" : "retained", fact.GetProperty("status").GetString());
+            if (!nativeVoid)
+            {
+                Assert.Equal("unsupported-function-declaration-macro", fact.GetProperty("reason").GetString());
+                Assert.Contains("Unique=SupportedOSPlatform", File.ReadAllText(fixture.OSSidecar));
+                return;
+            }
+            string after = File.ReadAllText(Path.Combine(fixture.Output, "after", "um", "sample.h"));
+            Assert.Contains("_Win32_SupportedOS_Windows7_\r\nVOID\r\nWINAPI\r\nUnique", after);
+            Assert.Equal(cumulative, after.Replace("#include <sal.h>\r\n", "")
+                .Replace("_Win32_SupportedOS_Windows7_\r\n", ""));
+            File.WriteAllText(fixture.Mirror, after, new UTF8Encoding(false));
+            Assert.True(fixture.Native.Run() == 0, fixture.Native.Diagnostics);
+            Assert.Equal(native, Signatures(fixture.Native.ReadSource()));
+            Assert.Contains("SupportedOSPlatform(\"windows6.1\")", fixture.Native.ReadSource());
+        }
+
+        [Theory]
         [InlineData("stale-map")]
         [InlineData("changed-declaration")]
         [InlineData("unadmitted-patch")]
