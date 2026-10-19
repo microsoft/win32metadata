@@ -2131,6 +2131,47 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
             }, new JsonSerializerOptions { WriteIndented = true }));
         }
 
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void ExplicitReservedMetadataPreservesDirectionAndOptionality(string architecture, string target)
+        {
+            const string annotation = "_Win32_Reserved_ ";
+            const string declarations = @"
+int __stdcall PreserveReserved(
+    _In_ _Win32_Reserved_ void* input,
+    _Win32_Reserved_ unsigned scalar,
+    _Win32_Reserved_ void* untyped,
+    _In_opt_ _Win32_Reserved_ void* optional);
+";
+            using var candidateSource = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations);
+            Assert.True(candidateSource.Run() == 0, candidateSource.Diagnostics);
+            using var legacySource = new HeaderAnnotationTests.NativeFixture(architecture, target, declarations.Replace(annotation, ""));
+            Assert.True(legacySource.Run() == 0, legacySource.Diagnostics);
+            Assert.Equal(NativeSurface(candidateSource, target, metadataEnabled: false),
+                NativeSurface(candidateSource, target, metadataEnabled: true));
+            using var candidate = Emit(candidateSource, architecture);
+            using var legacy = Emit(legacySource.DirectoryPath, architecture, memberRemaps: new Dictionary<string, string>
+            {
+                ["PreserveReserved::input"] = "[Reserved]",
+                ["PreserveReserved::scalar"] = "[Reserved]",
+                ["PreserveReserved::untyped"] = "[Reserved]",
+                ["PreserveReserved::optional"] = "[Reserved]",
+            });
+            var before = FindMethod(legacy.Reader, "Apis", "PreserveReserved");
+            var after = FindMethod(candidate.Reader, "Apis", "PreserveReserved");
+            Assert.Equal(MethodShape(legacy.Reader, before), MethodShape(candidate.Reader, after));
+            var parameters = after.GetParameters().Select(candidate.Reader.GetParameter).ToArray();
+            Assert.Equal(4, parameters.Length);
+            Assert.Equal(new[] { ParameterAttributes.In, ParameterAttributes.In, ParameterAttributes.In | ParameterAttributes.Out,
+                ParameterAttributes.In | ParameterAttributes.Optional },
+                parameters.Select(parameter => parameter.Attributes).ToArray());
+            foreach (var parameter in parameters)
+                AssertHasAttribute(candidate.Reader, parameter.GetCustomAttributes(), "ReservedAttribute");
+            AssertMetadataClosure(candidate.Reader);
+        }
+
         private static string FieldShape(MetadataReader reader, FieldDefinition field)
             => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
                 field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);

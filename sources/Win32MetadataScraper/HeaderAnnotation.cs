@@ -16,7 +16,7 @@ namespace Win32MetadataScraper
         private static readonly HashSet<string> Names = new(StringComparer.Ordinal)
         {
             "SetLastError", "ImportLibrary", "SupportedOSPlatform", "PreserveResult",
-            "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal",
+            "RAIIFree", "Retained", "ContainsInteriorPointers", "RetVal", "Reserved",
             "AlsoUsableFor", "AssociatedEnum", "AssociatedConstant", "Enum", "FlagsEnum",
         };
 

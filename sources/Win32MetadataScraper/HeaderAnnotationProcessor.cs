@@ -519,7 +519,7 @@ namespace Win32MetadataScraper
                 "Enum" or "FlagsEnum" => typedef,
                 "AlsoUsableFor" => typedef && facts.LogicalEnumMembers == null,
                 "RAIIFree" => function || parameter,
-                "Retained" or "ContainsInteriorPointers" or "RetVal" => parameter,
+                "Retained" or "ContainsInteriorPointers" or "RetVal" or "Reserved" => parameter,
                 _ => false,
             };
             if (!valid)

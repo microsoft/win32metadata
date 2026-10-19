@@ -65,6 +65,7 @@ permitted, and annotations on unsupported targets are errors.
 | Producer cleanup | `_Win32_RAIIFree_(CloseX, invalid...)` | Producer return or output parameter. Names its cleanup function and optional integral invalid values. |
 | HANDLE cleanup shorthand | `_Win32_RAIIFree_Handle_(CloseX)` | Producer return or output parameter whose invalid set is exactly `-1, 0`. |
 | Retained pointer | `_Win32_Retained_` | Pointer parameter retained by the API after the call. Follow the API's documented lifetime. |
+| Reserved parameter | `_Win32_Reserved_` | Reserved pointer or scalar parameter. Records `[Reserved]` while preserving existing native types, direction SAL, and optionality. Valueless and non-repeatable. |
 | Interior pointers | `_Win32_ContainsInteriorPointers_` | Caller-owned output/inout buffer parameter. Returned absolute pointers may borrow storage inside that same allocation; keep it alive and at a stable address until all pointer use or copying ends. Valueless and non-repeatable. |
 | Compatible native typedef | `_Win32_AlsoUsableFor_(TYPE)` | Genuine native typedef, not a logical enum group. |
 | Enum use | `_Win32_AssociatedEnum_(TYPE)` | Return, parameter, or field associated with an already declared native enum or metadata-only group. Keep its native declaration type. |

@@ -250,6 +250,7 @@ Defined annotations:
 | `_Win32_AssociatedEnum_(type)` | return, parameter, field | Association while preserving native declaration types |
 | `_Win32_ImportLibrary_(dll[, export or ordinal])` | function | Module and optional `ImplMap.ImportName` override |
 | `_Win32_Retained_` | parameter | Retained pointer metadata |
+| `_Win32_Reserved_` | parameter | Reserved metadata; preserves existing native direction and optionality |
 | `_Win32_ContainsInteriorPointers_` | caller-owned output buffer | Same-allocation interior-pointer metadata |
 
 Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. A prepared

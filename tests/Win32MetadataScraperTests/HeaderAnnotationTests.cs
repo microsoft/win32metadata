@@ -16,6 +16,7 @@ namespace Win32MetadataScraperTests
         [Theory]
         [InlineData("SetLastError()")]
         [InlineData("Retained(1)")]
+        [InlineData("Reserved()")]
         [InlineData("ContainsInteriorPointers=value")]
         [InlineData("RAIIFree()")]
         [InlineData("RAIIFree(Close, )")]
@@ -982,6 +983,10 @@ _Win32_SupportedOS_END_()
 
         [Theory]
         [InlineData("_Win32_SetLastError_ typedef int Bad;")]
+        [InlineData("_Win32_Reserved_ int Bad(void* value);")]
+        [InlineData("_Win32_Reserved_ typedef int Bad;")]
+        [InlineData("struct Bad { _Win32_Reserved_ void* value; };")]
+        [InlineData("int Bad(_Win32_Reserved_ _Win32_Reserved_ void* value);")]
         [InlineData("_Win32_ContainsInteriorPointers_ int Bad(void* buffer);")]
         [InlineData("struct Bad { _Win32_ContainsInteriorPointers_ void* field; };")]
         [InlineData("int Bad(_Win32_ContainsInteriorPointers_ int value);")]
