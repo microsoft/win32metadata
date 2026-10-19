@@ -1,5 +1,5 @@
 diff --git a/um/oleauto.h b/um/oleauto.h
-index 7860ea3c..5bf04b62 100644
+index 7860ea3c..e45226ea 100644
 --- a/um/oleauto.h
 +++ b/um/oleauto.h
 @@ -75,14 +75,16 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
@@ -114,7 +114,7 @@ index 7860ea3c..5bf04b62 100644
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-@@ -1299,6 +1356,13 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+@@ -1299,9 +1356,16 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
  #define ACTIVEOBJECT_STRONG 0x0
  #define ACTIVEOBJECT_WEAK 0x1
  
@@ -127,4 +127,8 @@ index 7860ea3c..5bf04b62 100644
 +
  _Check_return_
  WINOLEAUTAPI RegisterActiveObject(IUnknown * punk, REFCLSID rclsid,
-             DWORD dwFlags, DWORD * pdwRegister);
+-            DWORD dwFlags, DWORD * pdwRegister);
++            _Win32_AssociatedEnum_(ACTIVEOBJECT_FLAGS) DWORD dwFlags, DWORD * pdwRegister);
+ 
+ WINOLEAUTAPI RevokeActiveObject(DWORD dwRegister, void * pvReserved);
+ 

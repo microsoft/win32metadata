@@ -1,8 +1,21 @@
 diff --git a/um/schannel.h b/um/schannel.h
-index a2208f5d..833fcf78 100644
+index a2208f5d..91e2c6c8 100644
 --- a/um/schannel.h
 +++ b/um/schannel.h
-@@ -735,10 +735,20 @@ typedef struct _SCHANNEL_ALERT_TOKEN
+@@ -703,6 +703,12 @@ typedef struct _SCHANNEL_ALERT_TOKEN
+ #define TLS1_ALERT_WARNING              1
+ #define TLS1_ALERT_FATAL                2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++_Win32_Enum_(SCHANNEL_ALERT_TOKEN_ALERT_TYPE, unsigned long,
++    TLS1_ALERT_WARNING,
++    TLS1_ALERT_FATAL);
++#endif
++
+ // Alert messages.
+ #define TLS1_ALERT_CLOSE_NOTIFY                 0       // warning
+ #define TLS1_ALERT_UNEXPECTED_MESSAGE           10      // error
+@@ -735,10 +741,20 @@ typedef struct _SCHANNEL_ALERT_TOKEN
  #define SSL_SESSION_ENABLE_RECONNECTS   1
  #define SSL_SESSION_DISABLE_RECONNECTS  2
  
@@ -23,7 +36,31 @@ index a2208f5d..833fcf78 100644
      DWORD   dwFlags;
  } SCHANNEL_SESSION_TOKEN;
  
-@@ -1087,6 +1097,7 @@ typedef SECURITY_STATUS
+@@ -887,6 +903,7 @@ typedef BOOL
+     LPSTR  pszTargetName,
+     DWORD  dwFlags);
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ SslEmptyCacheA(_In_ LPSTR  pszTargetName,
+@@ -897,6 +914,7 @@ typedef BOOL
+     LPWSTR pszTargetName,
+     DWORD  dwFlags);
+ 
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ SslEmptyCacheW(_In_ LPWSTR pszTargetName,
+@@ -1024,6 +1042,7 @@ SslGenerateRandomBits(
+ 
+ // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
+ // to get the same functionality instead.
++_Win32_SupportedOS_WindowsXP_
+ BOOL
+ WINAPI
+ SslCrackCertificate(
+@@ -1087,6 +1106,7 @@ typedef SECURITY_STATUS
  );
  
  EXTERN_C

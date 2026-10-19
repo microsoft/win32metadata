@@ -6993,37 +6993,6 @@
     ]
   },
   {
-    "name": "COMPRESS_ALGORITHM",
-    "members": [
-      {
-        "name": "COMPRESS_ALGORITHM_MSZIP",
-        "value": "2"
-      },
-      {
-        "name": "COMPRESS_ALGORITHM_XPRESS",
-        "value": "3"
-      },
-      {
-        "name": "COMPRESS_ALGORITHM_XPRESS_HUFF",
-        "value": "4"
-      },
-      {
-        "name": "COMPRESS_ALGORITHM_LZMS",
-        "value": "5"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CreateDecompressor",
-        "parameter": "Algorithm"
-      },
-      {
-        "method": "CreateCompressor",
-        "parameter": "Algorithm"
-      }
-    ]
-  },
-  {
     "addUsesTo": "SNMP_PDU_TYPE",
     "uses": [
       {
@@ -16546,17 +16515,7 @@
     ]
   },
   {
-    "name": "SCHANNEL_ALERT_TOKEN_ALERT_TYPE",
-    "members": [
-      {
-        "name": "TLS1_ALERT_WARNING",
-        "value": "1"
-      },
-      {
-        "name": "TLS1_ALERT_FATAL",
-        "value": "2"
-      }
-    ],
+    "addUsesTo": "SCHANNEL_ALERT_TOKEN_ALERT_TYPE",
     "uses": [
       {
         "struct": "SCHANNEL_ALERT_TOKEN",
@@ -20068,26 +20027,6 @@
         "parameter": "grfMode"
       },
       {
-        "method": "StgCreateDocfile",
-        "parameter": "grfMode"
-      },
-      {
-        "method": "StgCreateDocfileOnILockBytes",
-        "parameter": "grfMode"
-      },
-      {
-        "method": "StgCreateStorageEx",
-        "parameter": "grfMode"
-      },
-      {
-        "method": "StgOpenStorage",
-        "parameter": "grfMode"
-      },
-      {
-        "method": "StgOpenStorageEx",
-        "parameter": "grfMode"
-      },
-      {
         "interface": "IFunctionInstance",
         "method": "OpenPropertyStore",
         "parameter": "dwStgAccess"
@@ -20107,16 +20046,7 @@
   {
     "addUsesTo": "STGFMT",
     "namespace": "Windows.Win32.System.Com.StructuredStorage",
-    "uses": [
-      {
-        "method": "StgCreateStorageEx",
-        "parameter": "stgfmt"
-      },
-      {
-        "method": "StgOpenStorageEx",
-        "parameter": "stgfmt"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "DCB_STOP_BITS",
@@ -20409,28 +20339,7 @@
   {
     "addUsesTo": "PATHCCH_OPTIONS",
     "members": [],
-    "uses": [
-      {
-        "method": "PathCchCanonicalizeEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "PathCchCombineEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "PathCchAppendEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "PathAllocCombine",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "PathAllocCanonicalize",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CONSOLE_CHARACTER_ATTRIBUTES",
@@ -20790,14 +20699,6 @@
       {
         "struct": "STATSTG",
         "field": "grfMode"
-      },
-      {
-        "method": "StgOpenStorageOnILockBytes",
-        "parameter": "grfMode"
-      },
-      {
-        "method": "StgCreateDocfileOnILockBytes",
-        "parameter": "grfMode"
       }
     ]
   },
@@ -21109,12 +21010,7 @@
   {
     "addUsesTo": "ACTIVEOBJECT_FLAGS",
     "namespace": "Windows.Win32.System.Ole",
-    "uses": [
-      {
-        "method": "RegisterActiveObject",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "FADF",
