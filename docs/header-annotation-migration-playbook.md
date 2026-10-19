@@ -270,6 +270,46 @@ SAL and metadata annotation payloads: MIDL otherwise emits only the last
 `annotation(...)` attribute and silently drops the preceding SAL. Check the
 actual regenerated header and final metadata, not just converted IDL text.
 
+### Bounded ordinary runs with an external prepared root
+
+`Invoke-PreparedSdkPartitions.ps1` imports the existing GeneratorSdk targets
+through `PreparedSdkPartitions.proj`. It consumes an explicit authored project
+directory and an already prepared include root; it does not prepare headers,
+run MIDL, invoke Git, or reuse another run's generated sources. Use separate,
+fresh output directories for OLD, control and NEW.
+
+```powershell
+.\scripts\Invoke-PreparedSdkPartitions.ps1 `
+    -ProjectDirectory $ownedSdkProject `
+    -IncludeRoot $preparedIncludeRoot `
+    -ToolsDirectory $privateTools `
+    -RuntimeManifest $runtimeManifest `
+    -RuntimeManifestSha256 $runtimeManifestSha256 `
+    -AnnotationHeader $selectedAnnotationHeader `
+    -OutputDirectory $freshOutput `
+    -Partition WinAuto,ComOle `
+    -NativeIncludeDirectory $msvcInclude `
+    -Architecture crossarch -Stage Headers
+```
+
+The runtime manifest binds relative file paths and SHA-256 hashes under the
+selected private tools root. SDK targets and assets default to that runtime;
+there is no ambient tool fallback. The standalone annotation header must match
+the prepared root's `shared\win32metadata_annotations.h`; the driver never
+replaces prepared inputs. Generated sources and actual settings, remaps and
+diagnostics are retained in `obj\generated` and `obj\scratch`, with input,
+command, log and output hashes.
+
+`Headers`, `Constants` and `Emit` are distinct stages. A runtime without
+`ConstantsScraper.dll` supports only `Headers`; the other stages fail explicitly
+before starting a producer. A library-only enum control is not a normal complete
+constants scrape or emission. Retained C# enum JSON does not provide a native
+C++ declaration for `AssociatedEnum`: native type resolution precedes constants
+generation. Supply only source-owned definitions or separately reviewed context,
+not invented carriers. The existing crossarch task uses `-m32` for x86, `-m64`
+for x64 and `-m64` plus `_ARM64_` for arm64; three ordinary jobs do not constitute
+a new ARM64-target ABI qualification.
+
 ## 3. Capture native facts and classify every difference
 
 Faithfully capturing existing SDK, SAL and MIDL annotations is always acceptable,
