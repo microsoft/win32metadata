@@ -1933,6 +1933,57 @@ struct __declspec(uuid(""0b38dfbb-3bb3-4ab1-b2f1-2c3e2059246a"")) IDirections {
                     .OrderBy(value => value, StringComparer.Ordinal).ToArray();
         }
 
+        [NativeMigrationTheory("OWNED_SSL_AVAILABILITY_ROOT")]
+        [InlineData("x64")]
+        public void NormalCompilerBoundVoidWinapiPreservesSchannelAvailabilityAndImport(string architecture)
+        {
+            string root = Environment.GetEnvironmentVariable("OWNED_SSL_AVAILABILITY_ROOT");
+            using var report = JsonDocument.Parse(File.ReadAllText(Path.Combine(root, "qualification-input.json")));
+            var fact = Assert.Single(report.RootElement.GetProperty("facts").EnumerateArray());
+            Assert.Equal("SslFreeCertificate", fact.GetProperty("symbol").GetString());
+            string baseline = Environment.GetEnvironmentVariable("EXISTING_NATIVE_AVAILABILITY_BASELINE");
+            Assert.False(string.IsNullOrEmpty(baseline));
+            using var archive = System.IO.Compression.ZipFile.OpenRead(
+                Path.Combine(Path.GetDirectoryName(baseline), "exact-source-inputs.zip"));
+            string output = Path.Combine(root, "physical", architecture, Guid.NewGuid().ToString("N"));
+            string controlDirectory = Path.Combine(output, "control");
+            string candidateDirectory = Path.Combine(output, "candidate");
+            Directory.CreateDirectory(controlDirectory);
+            Directory.CreateDirectory(candidateDirectory);
+            var selected = new HashSet<string>(StringComparer.Ordinal) { "SslFreeCertificate" };
+            var entries = archive.Entries.Where(entry => entry.FullName.Replace('\\', '/') == "common/Identity.cs" ||
+                entry.FullName.Replace('\\', '/') == architecture + "/Identity.cs").ToArray();
+            Assert.NotEmpty(entries);
+            var oldSources = entries.Select(entry =>
+            {
+                using var stream = new StreamReader(entry.Open());
+                return stream.ReadToEnd();
+            }).ToArray();
+            WriteAvailabilityDeclarations(oldSources, "Identity", selected, controlDirectory);
+            WriteAvailabilityDeclarations(new[] { File.ReadAllText(Path.Combine(root, "scrape", "generated",
+                architecture, "Identity.cs")) }, "Identity", selected, candidateDirectory);
+            using var control = Emit(controlDirectory, architecture, references: new[] { baseline });
+            using var candidate = Emit(candidateDirectory, architecture, references: new[] { baseline });
+            AssertMetadataClosure(control.Reader);
+            AssertMetadataClosure(candidate.Reader);
+            var before = FindMethod(control.Reader, "Apis", "SslFreeCertificate");
+            var after = FindMethod(candidate.Reader, "Apis", "SslFreeCertificate");
+            AssertStringAttribute(control.Reader, before.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows5.1.2600");
+            AssertStringAttribute(candidate.Reader, after.GetCustomAttributes(), "SupportedOSPlatformAttribute", "windows5.1.2600");
+            Assert.Equal(MethodShape(control.Reader, before), MethodShape(candidate.Reader, after));
+            Assert.Equal("SCHANNEL.dll", candidate.Reader.GetString(candidate.Reader.GetModuleReference(after.GetImport().Module).Name));
+            File.WriteAllText(Path.Combine(output, "observed.json"), JsonSerializer.Serialize(new
+            {
+                completedUtc = DateTime.UtcNow,
+                architecture,
+                sourceFacts = new[] { fact.GetProperty("factId").GetString() },
+                exactFloor = "windows5.1.2600",
+                unchangedVoidWinapiPointerParameterAndImport = true,
+                candidatePath = Path.Combine(candidateDirectory, "Test.winmd"),
+                scope = "One newly unblocked source availability fact; actual normal Identity/x64 and physical WinMD preserve the existing floor, void/pointer signature, calling convention, directions and SCHANNEL.dll import. No previous cohort or whole-SDK/consumer grade.",
+            }, new JsonSerializerOptions { WriteIndented = true }));
+        }
+
         private static string FieldShape(MetadataReader reader, FieldDefinition field)
             => reader.GetString(field.Name) + "|" + field.Attributes + "|" + field.GetOffset() + "|" +
                 field.DecodeSignature(new SignatureNames(qualifiedNames: true), null);

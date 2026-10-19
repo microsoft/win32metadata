@@ -1,5 +1,5 @@
 diff --git a/um/schannel.h b/um/schannel.h
-index a2208f5d..91e2c6c8 100644
+index a2208f5d..e746282b 100644
 --- a/um/schannel.h
 +++ b/um/schannel.h
 @@ -703,6 +703,12 @@ typedef struct _SCHANNEL_ALERT_TOKEN
@@ -60,7 +60,15 @@ index a2208f5d..91e2c6c8 100644
  BOOL
  WINAPI
  SslCrackCertificate(
-@@ -1087,6 +1106,7 @@ typedef SECURITY_STATUS
+@@ -1035,6 +1054,7 @@ SslCrackCertificate(
+ 
+ // Pre NT4.0 SP2 calls.  Call CAPI1 or CAPI2
+ // to get the same functionality instead.
++_Win32_SupportedOS_WindowsXP_
+ VOID
+ WINAPI
+ SslFreeCertificate(
+@@ -1087,6 +1107,7 @@ typedef SECURITY_STATUS
  );
  
  EXTERN_C
