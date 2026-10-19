@@ -65,6 +65,20 @@ preceding annotation line preserves the original native line, including its
 trailing spaces/tabs. Do not trim SDK payloads or weaken `--whitespace=error-all`.
 The separately qualified placement repair adds no facts or retirements.
 
+### Logical enum members and retained enum names
+
+An actual header-group member may share its name with an independent retained
+enum type. The constants stage recognizes producer-owned members in their
+resolved constant namespace while preserving both enum identities and normal
+scalar-alias processing; unrelated constant/type collisions remain errors.
+The emitter removes the loose member copy. A primitive scalar alias may resolve
+an otherwise unbound name, or an enum type used as a value, only to a uniquely
+owned header-group member in the same namespace when a type is already bound.
+Checked primitive conversions preserve storage and expose overflow. Valid value
+bindings, foreign types, ambiguous groups and ordinary native enums remain
+unchanged. Include the complete normal constants scrape and emission: a small
+group-only image does not prove the residual constants closure.
+
 ### SDK-wide inventory and source queue
 
 `scripts\Get-SdkAnnotationCoverage.py` inventories the selected SDK package,

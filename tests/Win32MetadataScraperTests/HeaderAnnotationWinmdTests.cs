@@ -22,6 +22,94 @@ namespace Win32MetadataScraperTests
 {
     public class HeaderAnnotationWinmdTests
     {
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void HeaderGroupMemberAndIndependentLegacyEnumKeepTheirIdentities(string architecture, string target, bool sameNamespace)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define CFE_UNDERLINE 4UL
+#define CFU_SINGLE 1
+#define CFU_DOUBLE 2
+#define UNDERLINE_ALIAS CFE_UNDERLINE
+_Win32_Enum_(CFE_EFFECTS, unsigned, CFE_UNDERLINE);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string residual = Path.Combine(fixture.DirectoryPath, "residual.json");
+            string legacyJson = @"{ ""items"": [{
+                ""name"": ""CFE_UNDERLINE"", ""namespace"": ""Test"", ""type"": ""uint"", ""flags"": true,
+                ""autoPopulate"": { ""filter"": ""CFU_"", ""header"": """ + Path.GetFileName(fixture.Header) + @""" }
+            }] }";
+            File.WriteAllText(residual, sameNamespace ? legacyJson : legacyJson.Replace(@"""namespace"": ""Test"",", ""));
+            if (!sameNamespace)
+                File.WriteAllText(Path.Combine(fixture.DirectoryPath, "LegacyApis.manual.cs"),
+                    "namespace Windows.Win32.System.SystemServices { public static partial class Apis { } }");
+            MetadataUtils.ConstantsScraper.ScrapeConstants(new[] { residual }, "Test", fixture.DirectoryPath, "using System;\n",
+                new HashSet<string>(), new() { [fixture.Header] = "Test" }, new(), new(), new(), new());
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var effects = FindType(reader, "CFE_EFFECTS");
+            Assert.Equal(new[] { "value__", "CFE_UNDERLINE" }, effects.GetFields()
+                .Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            Assert.Equal(4U, reader.GetBlobReader(reader.GetConstant(effects.GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "CFE_UNDERLINE").GetDefaultValue()).Value).ReadUInt32());
+            var legacy = FindType(reader, "CFE_UNDERLINE");
+            Assert.Equal(sameNamespace ? "Test" : "Windows.Win32.System.SystemServices", reader.GetString(legacy.Namespace));
+            AssertHasAttribute(reader, legacy.GetCustomAttributes(), "FlagsAttribute");
+            Assert.Equal("UInt32", reader.GetFieldDefinition(legacy.GetFields().First()).DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(new[] { "value__", "CFU_SINGLE", "CFU_DOUBLE" }, legacy.GetFields()
+                .Select(handle => reader.GetString(reader.GetFieldDefinition(handle).Name)));
+            var fields = reader.TypeDefinitions.Select(reader.GetTypeDefinition)
+                .Single(type => reader.GetString(type.Name) == "Apis" && reader.GetString(type.Namespace) == "Test")
+                .GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.DoesNotContain(fields, field => reader.GetString(field.Name) == "CFE_UNDERLINE");
+            var alias = Assert.Single(fields, field => reader.GetString(field.Name) == "UNDERLINE_ALIAS");
+            Assert.Equal("UInt32", alias.DecodeSignature(new SignatureNames(), null));
+            Assert.Equal(4U, reader.GetBlobReader(reader.GetConstant(alias.GetDefaultValue()).Value).ReadUInt32());
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("foreign-type")]
+        [InlineData("ambiguous-groups")]
+        [InlineData("out-of-range")]
+        [InlineData("existing-value")]
+        public void HeaderMemberTypeNameAliasKeepsBindingAndErrorBoundaries(string boundary)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+#define FIRST 512U
+_Win32_Enum_(SOURCE_GROUP, unsigned, FIRST);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string ns = boundary == "foreign-type" ? "Foreign" : "Test";
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Extra.manual.cs"),
+                $"namespace {ns} {{ public enum FIRST : uint {{ OTHER = 1 }} }}");
+            if (boundary == "ambiguous-groups")
+                File.WriteAllText(Path.Combine(Path.GetDirectoryName(fixture.Output), "Extra.header-types.cs"),
+                    "namespace Test { public enum OTHER_GROUP : uint { FIRST = 512 } }");
+            string storage = boundary == "out-of-range" ? "byte" : "uint";
+            string existing = boundary == "existing-value" ? "private const uint FIRST = 7;" : "";
+            File.WriteAllText(Path.Combine(fixture.DirectoryPath, "Aliases.constants.cs"),
+                (boundary == "foreign-type" ? "using Foreign;\n" : "") +
+                $"namespace Test {{ public static partial class Apis {{ {existing} public const {storage} ALIAS = FIRST; }} }}");
+            if (boundary != "existing-value")
+            {
+                var error = Assert.Throws<Xunit.Sdk.EmptyException>(() => Emit(fixture, "x64"));
+                Assert.Contains(boundary == "out-of-range" ? "CS0221" : "CS0119", error.Message);
+                return;
+            }
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            var alias = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
+                .Single(field => reader.GetString(field.Name) == "ALIAS");
+            Assert.Equal(7U, reader.GetBlobReader(reader.GetConstant(alias.GetDefaultValue()).Value).ReadUInt32());
+            AssertMetadataClosure(reader);
+        }
+
         private const string Declarations = @"
 typedef void* HANDLE;
 typedef int HRESULT;

@@ -125,14 +125,19 @@ namespace ClangSharpSourceToWinmd
                         if (expression is not IdentifierNameSyntax identifier)
                             continue;
                         var info = model.GetSymbolInfo(identifier);
-                        if (info.Symbol != null || info.CandidateSymbols.Length != 0)
-                            continue;
                         var matches = members[identifier.Identifier.ValueText].ToArray();
                         if (matches.Length != 1)
                             continue;
 
                         // The cleaner removed the loose copy of this uniquely owned group member.
                         var member = matches[0];
+                        var namedType = info.Symbol as INamedTypeSymbol;
+                        if (namedType == null && info.CandidateReason == CandidateReason.NotAValue && info.CandidateSymbols.Length == 1)
+                            namedType = info.CandidateSymbols[0] as INamedTypeSymbol;
+                        bool enumNameInValueContext = namedType?.TypeKind == TypeKind.Enum &&
+                            SymbolEqualityComparer.Default.Equals(namedType.ContainingNamespace, member.ContainingNamespace);
+                        if ((info.Symbol != null || info.CandidateSymbols.Length != 0) && !enumNameInValueContext)
+                            continue;
                         string name = SyntaxFacts.GetKeywordKind(member.Name) == SyntaxKind.None ? member.Name : "@" + member.Name;
                         expression = value.ReplaceNode(identifier, SyntaxFactory.ParseExpression(
                             member.ContainingType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat) + "." + name)
