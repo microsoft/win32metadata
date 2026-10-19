@@ -669,6 +669,7 @@ IADesktopP2=Windows.Win32.UI.LegacyWindowsEnvironmentFeatures
 DoPrivacyDlg=Windows.Win32.Web.MsHtml
 # endregion shlobj.h
 # region shlobj_core.h
+ILFree=Windows.Win32.UI.Shell.Common
 PROPERTYUI_FLAGS=Windows.Win32.UI.Shell.PropertiesSystem
 PROPERTYUI_NAME_FLAGS=Windows.Win32.UI.Shell.PropertiesSystem
 PROPERTYUI_FORMAT_FLAGS=Windows.Win32.UI.Shell.PropertiesSystem
