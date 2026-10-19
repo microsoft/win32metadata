@@ -1,5 +1,5 @@
 diff --git a/um/oleauto.h b/um/oleauto.h
-index 7860ea3c..e45226ea 100644
+index 7860ea3c..7cde7e69 100644
 --- a/um/oleauto.h
 +++ b/um/oleauto.h
 @@ -75,14 +75,16 @@ WINOLEAUTAPI_(BSTR) SysAllocString(_In_opt_z_ const OLECHAR * psz);
@@ -98,7 +98,119 @@ index 7860ea3c..e45226ea 100644
  // VT_HARDTYPE tells the compare routine that the argument is a literal or
  // otherwise declared of that specific type.  It causes comparison rules to
  // change. For example, if a hard-type string is compared to a variant (not hard
-@@ -1084,6 +1132,15 @@ typedef DISPID MEMBERID;
+@@ -968,18 +1016,71 @@ WINOLEAUTAPI GetAltMonthNames(LCID lcid, _Outptr_result_buffer_maybenull_(13) LP
+ #pragma region Application Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
++enum VARFORMAT_FIRST_DAY : int
++{
++    VARFORMAT_FIRST_DAY_SYSTEMDEFAULT = 0,
++    VARFORMAT_FIRST_DAY_MONDAY = 1,
++    VARFORMAT_FIRST_DAY_TUESDAY = 2,
++    VARFORMAT_FIRST_DAY_WEDNESDAY = 3,
++    VARFORMAT_FIRST_DAY_THURSDAY = 4,
++    VARFORMAT_FIRST_DAY_FRIDAY = 5,
++    VARFORMAT_FIRST_DAY_SATURDAY = 6,
++    VARFORMAT_FIRST_DAY_SUNDAY = 7,
++};
++
++enum VARFORMAT_FIRST_WEEK : int
++{
++    VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT = 0,
++    VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST = 1,
++    VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR = 2,
++    VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS = 3,
++};
++
++enum VARFORMAT_GROUP : int
++{
++    VARFORMAT_GROUP_SYSTEMDEFAULT = -2,
++    VARFORMAT_GROUP_THOUSANDS = -1,
++    VARFORMAT_GROUP_NOTTHOUSANDS = 0,
++};
++
++enum VARFORMAT_LEADING_DIGIT : int
++{
++    VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT = -2,
++    VARFORMAT_LEADING_DIGIT_INCLUDED = -1,
++    VARFORMAT_LEADING_DIGIT_NOTINCLUDED = 0,
++};
++
++enum VARFORMAT_NAMED_FORMAT : int
++{
++    VARFORMAT_NAMED_FORMAT_GENERALDATE = 0,
++    VARFORMAT_NAMED_FORMAT_LONGDATE = 1,
++    VARFORMAT_NAMED_FORMAT_SHORTDATE = 2,
++    VARFORMAT_NAMED_FORMAT_LONGTIME = 3,
++    VARFORMAT_NAMED_FORMAT_SHORTTIME = 4,
++};
++
++enum VARFORMAT_PARENTHESES : int
++{
++    VARFORMAT_PARENTHESES_SYSTEMDEFAULT = -2,
++    VARFORMAT_PARENTHESES_USED = -1,
++    VARFORMAT_PARENTHESES_NOTUSED = 0,
++};
++
++#endif
++
+ WINOLEAUTAPI VarFormat(
+ 	_In_ LPVARIANT pvarIn,
+ 	_In_opt_ LPOLESTR pstrFormat,
+-	int iFirstDay,
+-	int iFirstWeek,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_DAY) int iFirstDay,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_WEEK) int iFirstWeek,
+ 	ULONG dwFlags,
+ 	_Out_ BSTR *pbstrOut
+ 	);
+ 
+ WINOLEAUTAPI VarFormatDateTime(
+ 	_In_ LPVARIANT pvarIn,
+-	int iNamedFormat,
++	_Win32_AssociatedEnum_(VARFORMAT_NAMED_FORMAT) int iNamedFormat,
+ 	ULONG dwFlags,
+ 	_Out_ BSTR *pbstrOut
+ 	);
+@@ -987,9 +1088,9 @@ WINOLEAUTAPI VarFormatDateTime(
+ WINOLEAUTAPI VarFormatNumber(
+ 	_In_ LPVARIANT pvarIn,
+ 	int iNumDig,
+-	int iIncLead,
+-	int iUseParens,
+-	int iGroup,
++	_Win32_AssociatedEnum_(VARFORMAT_LEADING_DIGIT) int iIncLead,
++	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
++	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
+ 	ULONG dwFlags,
+ 	_Out_ BSTR *pbstrOut
+ 	);
+@@ -997,9 +1098,9 @@ WINOLEAUTAPI VarFormatNumber(
+ WINOLEAUTAPI VarFormatPercent(
+ 	_In_ LPVARIANT pvarIn,
+ 	int iNumDig,
+-	int iIncLead,
+-	int iUseParens,
+-	int iGroup,
++	_Win32_AssociatedEnum_(VARFORMAT_LEADING_DIGIT) int iIncLead,
++	_Win32_AssociatedEnum_(VARFORMAT_PARENTHESES) int iUseParens,
++	_Win32_AssociatedEnum_(VARFORMAT_GROUP) int iGroup,
+ 	ULONG dwFlags,
+ 	_Out_ BSTR *pbstrOut
+ 	);
+@@ -1042,8 +1143,8 @@ WINOLEAUTAPI VarTokenizeFormatString(
+ 	_In_opt_ LPOLESTR pstrFormat,
+ 	_Inout_updates_(cbTok) LPBYTE rgbTok,
+ 	int cbTok,
+-	int iFirstDay,
+-	int iFirstWeek,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_DAY) int iFirstDay,
++	_Win32_AssociatedEnum_(VARFORMAT_FIRST_WEEK) int iFirstWeek,
+ 	LCID lcid,
+ 	_In_opt_ int *pcbActual
+ 	);
+@@ -1084,6 +1185,15 @@ typedef DISPID MEMBERID;
  #define DISPATCH_PROPERTYPUT    0x4
  #define DISPATCH_PROPERTYPUTREF 0x8
  
@@ -114,7 +226,7 @@ index 7860ea3c..e45226ea 100644
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
-@@ -1299,9 +1356,16 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
+@@ -1299,9 +1409,16 @@ WINOLEAUTAPI DispCallFunc(_In_opt_ void * pvInstance, ULONG_PTR oVft, CALLCONV c
  #define ACTIVEOBJECT_STRONG 0x0
  #define ACTIVEOBJECT_WEAK 0x1
  
