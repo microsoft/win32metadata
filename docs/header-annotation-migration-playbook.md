@@ -258,7 +258,11 @@ pretend the helper came from the selected SDK or search ambient include paths.
 A header patch consumed by MIDL must bind the same pristine SDK input as its
 native-header copy and apply to both private snapshots before conversion.
 Verify MIDL's actual saved preprocessor input set against
-the declared closure. Preserve raw inputs, converted IDLs, commands, diagnostics,
+the declared closure. Resolve admitted canonical absolute paths once, then check
+every saved `#line` through that exact path map rather than repeating filesystem
+walks for every include visit. Noncanonical, escaping and unbound paths remain
+errors, as do unused declared inputs; whole-tree reparse and tamper checks still
+apply. Preserve raw inputs, converted IDLs, commands, diagnostics,
 outputs and their hashes in the private cache. Keep warnings enabled and compare
 the exact diagnostic/target/payload multiset against unmodified-IDL regeneration,
 accounting only for source line shifts. Do not add native `[local]` attributes or

@@ -873,6 +873,34 @@ namespace Win32MetadataScraperTests
             Assert.Empty(Directory.GetDirectories(fixture.Output));
         }
 
+        [Theory]
+        [InlineData(@"um\dependency.idl", true)]
+        [InlineData(@"um\..\um\dependency.idl", false)]
+        [InlineData(@"um\unbound.idl", false)]
+        [InlineData(@"..\other\dependency.idl", false)]
+        public void RepeatedMidlPreprocessorPathsRequireExactCanonicalDeclaredInputs(string path, bool accepted)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl();
+            fixture.AddMidlPreprocessorTrace(path);
+            var result = fixture.Run();
+            if (accepted)
+            {
+                Assert.True(result.ExitCode == 0, result.Error + result.Output);
+                var prepared = JsonSerializer.Deserialize<PreparationResult>(result.Output);
+                using var inputs = JsonDocument.Parse(File.ReadAllText(Path.Combine(
+                    Path.GetDirectoryName(prepared.IncludeRoot), "midl", "preprocessed-inputs.json")));
+                Assert.Equal(new[] { @"um\dependency.idl", @"um\generated.idl" },
+                    inputs.RootElement.EnumerateArray().Select(value => value.GetString()));
+            }
+            else
+            {
+                Assert.NotEqual(0, result.ExitCode);
+                Assert.Contains("MIDL preprocessing read an unpinned input", result.Error);
+                Assert.Empty(Directory.GetDirectories(fixture.Output));
+            }
+        }
+
         [Fact]
         public void SdkArtifactKindsDeterminePreparationOrderRatherThanRecipeOrder()
         {
@@ -1075,6 +1103,34 @@ namespace Win32MetadataScraperTests
                     start.ArgumentList.Add(argument);
                 var result = Execute(start);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
+            }
+
+            internal void AddMidlPreprocessorTrace(string relative)
+            {
+                UsePrivatePreparationScripts();
+                string path = PreparationScript("Prepare-SdkHeaders.ps1");
+                string text = File.ReadAllText(path);
+                const string before = "foreach ($file in @(Get-ChildItem -LiteralPath $generated -Filter '*.tmp' -File)) {";
+                const string after = "if (!$usedInputs.SetEquals([string[]]$midlInputs.path)) {";
+                Assert.Contains(before, text);
+                Assert.Contains(after, text);
+                text = text.Replace(before, @"
+                    $tracePath = $sal + '\' + " + Quote(relative) + @"
+                    $line = '#line 1 ""' + $tracePath.Replace('\', '\\') + '""'
+                    [IO.File]::WriteAllText(""$generated\repeated-input.tmp"", ($line + ""`n"") * 10000)
+                    $originalResolver = ${function:Resolve-Child}
+                    $script:traceResolutions = 0
+                    function Resolve-Child([string]$Root, [string]$RelativePath) {
+                        $script:traceResolutions++
+                        & $originalResolver $Root $RelativePath
+                    }
+                    " + before);
+                text = text.Replace(after, @"
+                    if ($script:traceResolutions -gt $midlInputs.Count) {
+                        throw 'MIDL path validation repeats filesystem resolution for the same declared inputs.'
+                    }
+                    " + after);
+                File.WriteAllText(path, text);
             }
 
             internal void RepeatPatch() => File.AppendAllText(this.patch, File.ReadAllText(this.patch));

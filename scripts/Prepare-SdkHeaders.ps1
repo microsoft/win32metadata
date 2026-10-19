@@ -159,11 +159,15 @@ function Invoke-PreparedMidl([string]$Staging) {
                 headerSha256 = Get-Sha256 $header
             }
         }
+        $declaredPaths = [Collections.Generic.Dictionary[string, string]]::new([StringComparer]::OrdinalIgnoreCase)
+        foreach ($input in $midlInputs) {
+            $declaredPaths.Add((Resolve-Child $sal $input.path), $input.path)
+        }
         foreach ($file in @(Get-ChildItem -LiteralPath $generated -Filter '*.tmp' -File)) {
             foreach ($match in [regex]::Matches([IO.File]::ReadAllText($file.FullName), '(?m)^\s*#line\s+\d+\s+"([^"]+)"')) {
                 $path = $match.Groups[1].Value.Replace('\\', '\')
-                $relative = [IO.Path]::GetRelativePath($sal, $path)
-                if ($relative -notin @($midlInputs.path) -or (Resolve-Child $sal $relative) -ne $path) {
+                $relative = $null
+                if (!$declaredPaths.TryGetValue($path, [ref]$relative)) {
                     throw "MIDL preprocessing read an unpinned input: $path"
                 }
                 $usedInputs.Add($relative) | Out-Null
