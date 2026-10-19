@@ -2457,18 +2457,21 @@
     "Namespace": "Windows.Win32.Devices.HumanInterfaceDevice",
     "Name": "PHIDP_PREPARSED_DATA",
     "ValueType": "typedef struct _HIDP_PREPARSED_DATA",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "PAPPCONSTRAIN_REGISTRATION",
     "ValueType": "typedef struct _APPCONSTRAIN_REGISTRATION",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.UI.Shell",
     "Name": "PAPPSTATE_REGISTRATION",
     "ValueType": "typedef struct _APPSTATE_REGISTRATION",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2493,6 +2496,7 @@
     "Namespace": "Windows.Win32.System.WinRT",
     "Name": "RO_REGISTRATION_COOKIE",
     "ValueType": "typedef struct _RO_REGISTRATION_COOKIE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2541,6 +2545,7 @@
     "Namespace": "Windows.Win32.System.Services",
     "Name": "PSC_NOTIFICATION_REGISTRATION",
     "ValueType": "typedef struct _SC_NOTIFICATION_REGISTRATION",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2577,12 +2582,14 @@
     "Namespace": "Windows.Win32.Storage.Packaging.Appx",
     "Name": "PACKAGE_VIRTUALIZATION_CONTEXT_HANDLE",
     "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
     "Namespace": "Windows.Win32.Storage.Packaging.Appx",
     "Name": "PACKAGEDEPENDENCY_CONTEXT",
     "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
@@ -2680,6 +2687,7 @@
     "Namespace": "Windows.Win32.Devices.DeviceQuery",
     "Name": "HDEVQUERY",
     "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ],
     "NativeTypedef": true
   },
   {
