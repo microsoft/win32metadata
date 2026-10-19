@@ -92,13 +92,19 @@ an intermediate compatibility bridge, not permission to add type-wide ownership:
 new cleanup annotations still belong on producing results or output parameters.
 
 Include the complete normal constants scrape and emission in that dependency batch.
+An actual header-group member can share its name with a separate retained enum type.
+The constants stage recognizes producer-owned members in their resolved namespace,
+preserving both enum identities and the normal scalar-alias processing; unrelated
+constant/type collisions remain errors. The emitter removes the loose member copy.
 Scalar macro aliases outside the group must keep their own primitive storage and
 values; do not absorb them into the group or add casts to native headers. The emitter
 uses Roslyn-bound header-group identities to add checked scalar conversions in its
 private compiler inputs. When removal of a grouped member's loose constant leaves
 a bare scalar alias unbound, the emitter resolves it only if normal C# lookup has
 no symbol or candidates and exactly one producer-owned logical group supplies that
-member. Parenthesized aliases follow the same rule; existing bindings and ambiguous
+member. Parenthesized aliases follow the same rule. A bare alias that instead names
+an enum type can resolve the unique header-group member in that same namespace:
+the type is not a value binding. Valid value bindings, foreign types, and ambiguous
 or missing names are not guessed. Original generated sources remain unchanged.
 Ordinary native enums, enum-typed aliases, and unrelated compiler errors are
 unchanged; out-of-range constants still fail. A small group-only image does not

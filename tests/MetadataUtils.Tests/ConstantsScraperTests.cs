@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.IO.Abstractions.TestingHelpers;
 using System.Reflection;
 using Moq;
@@ -9,6 +10,60 @@ namespace MetadataUtils.Tests
 {
     public class ConstantsScraperTests
     {
+        [Theory]
+        [InlineData(@"x86\Group.header-types.cs", "Test", false, true, false)]
+        [InlineData(@"x64\Group.header-types.cs", "Test", false, true, false)]
+        [InlineData(@"arm64\Group.header-types.cs", "Test", false, true, false)]
+        [InlineData(@"common\header-types.cs", "Test", false, true, false)]
+        [InlineData(@"x64\Group.cs", "Test", false, false, false)]
+        [InlineData(@"x64\Group.header-types.modified.cs", "Test", false, false, false)]
+        [InlineData(@"x64\Group.header-types.cs", "Foreign", false, false, false)]
+        [InlineData(@"x64\Group.header-types.cs", "Foreign", true, true, false)]
+        [InlineData(@"x64\Group.header-types.cs", "Test", false, true, true)]
+        public void HeaderGroupMemberDoesNotCollideWithIndependentEnum(
+            string sourceName, string sourceNamespace, bool routeNamespace, bool succeeds, bool omitLegacyNamespace)
+        {
+            string directory = Path.Combine(Path.GetTempPath(), "header-constants-" + Guid.NewGuid().ToString("N"));
+            Directory.CreateDirectory(directory);
+            try
+            {
+                string source = Path.Combine(directory, sourceName);
+                Directory.CreateDirectory(Path.GetDirectoryName(source));
+                File.WriteAllText(source, $"namespace {sourceNamespace} {{ public enum SOURCE_GROUP : uint {{ MEMBER = 4 }} }}");
+                string header = Path.Combine(directory, "test.h");
+                File.WriteAllText(header, "#define MEMBER 4\n#define LEGACY_SINGLE 1\n#define LEGACY_DOUBLE 2\n");
+                string enums = Path.Combine(directory, "enums.json");
+                string legacy = @"{ ""items"": [{
+                    ""name"": ""MEMBER"", ""namespace"": ""Test"", ""type"": ""uint"", ""flags"": true,
+                    ""autoPopulate"": { ""filter"": ""LEGACY_"", ""header"": ""test.h"" }
+                }] }";
+                File.WriteAllText(enums, omitLegacyNamespace ? legacy.Replace(@"""namespace"": ""Test"",", "") : legacy);
+                var namespaces = new Dictionary<string, string>();
+                if (routeNamespace)
+                    namespaces.Add("SOURCE_GROUP", "Test");
+                Action scrape = () => ConstantsScraper.ScrapeConstants(new[] { enums }, "Test", directory, "",
+                    new(), new() { [header] = "Test" }, namespaces, new(), new(), new());
+                if (!succeeds)
+                {
+                    var error = Assert.Throws<InvalidOperationException>(scrape);
+                    Assert.Contains("constant with the same name already exists", error.Message);
+                    return;
+                }
+                scrape();
+                string output = File.ReadAllText(Path.Combine(directory,
+                    omitLegacyNamespace ? "System.SystemServices.enums.cs" : "Test.enums.cs"));
+                Assert.Contains("enum MEMBER", output);
+                Assert.Contains("LEGACY_SINGLE", output);
+                Assert.Contains("LEGACY_DOUBLE", output);
+                Assert.DoesNotContain("enum SOURCE_GROUP", output);
+                Assert.Contains("MEMBER = 4", File.ReadAllText(Path.Combine(directory, "Test.constants.cs")));
+            }
+            finally
+            {
+                Directory.Delete(directory, true);
+            }
+        }
+
         [Theory]
 
         // No multicharacter literals = no change

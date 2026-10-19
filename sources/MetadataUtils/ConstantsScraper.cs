@@ -90,6 +90,8 @@ namespace MetadataUtils
             private WildcardDictionary requiredNamespaces;
             private Dictionary<string, string> scannedNamesToNamespaces;
             private Dictionary<string, string> writtenConstants;
+            private HashSet<string> headerEnumMemberNames = new(StringComparer.Ordinal);
+            private Dictionary<string, string> scrapedConstantNamespaces = new(StringComparer.Ordinal);
 
             private List<EnumObject> enumObjectsFromJsons = new();
             private Dictionary<string, string> withTypes;
@@ -149,6 +151,7 @@ namespace MetadataUtils
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
                 this.writtenConstants = ScraperUtils.GetConstants(scraperOutputDir);
+                this.headerEnumMemberNames = this.GetHeaderEnumMemberNames();
 
                 this.CleanExistingFiles();
 
@@ -448,6 +451,7 @@ namespace MetadataUtils
                 {
                     foundNamespace = newNamespace;
                 }
+                this.scrapedConstantNamespaces[name] = foundNamespace;
 
                 if (!this.namespacesToConstantWriters.TryGetValue(foundNamespace, out IConstantWriter constantWriter))
                 {
@@ -478,6 +482,20 @@ namespace MetadataUtils
                 }
 
                 return manualEnumMemberNames;
+            }
+
+            private HashSet<string> GetHeaderEnumMemberNames()
+            {
+                var files = this._fileSystem.Directory.GetFiles(this.scraperOutputDir, "*header-types.cs", SearchOption.AllDirectories)
+                    .Where(file => Path.GetFileName(file) == "header-types.cs" || file.EndsWith(".header-types.cs", StringComparison.Ordinal));
+                var members = new HashSet<string>(StringComparer.Ordinal);
+                foreach (var group in LoadEnumsFromSourceFiles(files))
+                {
+                    string groupNamespace = this.LookupNamespaceForName(group.name) ?? group.@namespace;
+                    foreach (var member in group.members)
+                        members.Add($"{groupNamespace}.{member.name}");
+                }
+                return members;
             }
 
             private void LoadEnumObjectsFromJsonFiles(string[] enumJsonFiles)
@@ -1188,7 +1206,10 @@ namespace MetadataUtils
 
                         if (obj.name != null)
                         {
-                            if (this.writtenConstants.ContainsKey(obj.name))
+                            // The emitter removes the loose copy of a producer-owned logical enum member.
+                            if (this.writtenConstants.ContainsKey(obj.name) &&
+                                !(this.scrapedConstantNamespaces.TryGetValue(obj.name, out var constantNamespace) &&
+                                  this.headerEnumMemberNames.Contains($"{constantNamespace}.{obj.name}")))
                             {
                                 throw new InvalidOperationException($"Tried to add enum {obj.name} but a constant with the same name already exists.");
                             }
