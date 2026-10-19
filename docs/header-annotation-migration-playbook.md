@@ -3744,3 +3744,24 @@ partition is not opted in, and this batch does not enable it or revise shared
 WinNT source. Other unsupported/changed-span candidates and the MI inline-only
 pool remain explicit debt. Final SDK-wide API grading stays with integration.
 Evidence is under `artifacts\bulk-annotations\system-retained-floors-010-*`.
+
+### System native error-code return associations
+
+The next source majority replaces 183 `WIN32_ERROR` return member remaps with
+`_Win32_AssociatedEnum_(WIN32_ERROR)` on the actual return carriers in
+`evntrace.h` (30), `aclapi.h` (25), `appmodel.h` (49), `wincred.h` (4) and
+`winreg.h` (75). The Foundation-owned enum definition, namespace, values and
+flags remain unchanged. Metadata-only includes expose its existing native
+alias without changing ordinary compilation.
+
+The resulting signatures preserve the SDK's 124 signed `LONG`/`LSTATUS`
+and 59 unsigned `ULONG`/`DWORD` returns, with a return-target association.
+This deliberately replaces the old enum-typed return projection; it is not
+an unchanged managed API assertion. Actual normal output and bounded physical
+components cover all 183 methods on x86, x64 and ARM64 without their old
+member remaps. Components retain actual generated signature dependencies,
+including `PACKAGE_ID` and `PACKAGE_VERSION`, instead of inventing substitutes
+or relying on ambiguous architecture variants from the baseline reference.
+Native controls preserve calling conventions, imports, SAL and prior payloads.
+Final SDK-wide consumer grading remains with integration. Evidence is under
+`artifacts\bulk-annotations\system-error-associations-011-*`.

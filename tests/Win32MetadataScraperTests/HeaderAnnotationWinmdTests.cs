@@ -184,12 +184,35 @@ struct __declspec(uuid(""b3dd7ce4-3a4c-42d8-b506-b32919dc848e"")) _Win32_Support
                                 value.Modifiers.Any(SyntaxKind.ExternKeyword) &&
                                 value.Parent is ClassDeclarationSyntax parent && parent.Identifier.ValueText == "Apis").ToArray();
                     }
-                    var members = methods.GroupBy(value => string.Join(".", value.Ancestors()
+                    var availableTypes = source.DescendantNodes().OfType<BaseTypeDeclarationSyntax>()
+                        .Where(value => value is StructDeclarationSyntax or EnumDeclarationSyntax &&
+                            !value.Ancestors().OfType<BaseTypeDeclarationSyntax>().Any())
+                        .ToLookup(value => value.Identifier.ValueText, StringComparer.Ordinal);
+                    var requiredTypes = new Queue<string>(methods.SelectMany(method =>
+                            new[] { method.ReturnType }.Concat(method.ParameterList.Parameters
+                                .Where(parameter => parameter.Type != null).Select(parameter => parameter.Type)))
+                        .SelectMany(type => type.DescendantNodesAndSelf().OfType<IdentifierNameSyntax>())
+                        .Select(type => type.Identifier.ValueText).Distinct(StringComparer.Ordinal));
+                    var dependencies = new List<BaseTypeDeclarationSyntax>();
+                    var visited = new HashSet<string>(StringComparer.Ordinal);
+                    while (requiredTypes.TryDequeue(out string name))
+                    {
+                        if (!visited.Add(name) || !availableTypes.Contains(name))
+                            continue;
+                        var declaration = Assert.Single(availableTypes[name]);
+                        dependencies.Add(declaration);
+                        foreach (var type in declaration.DescendantNodes().OfType<IdentifierNameSyntax>())
+                            requiredTypes.Enqueue(type.Identifier.ValueText);
+                    }
+                    var members = methods.Cast<MemberDeclarationSyntax>().Concat(dependencies)
+                        .GroupBy(value => string.Join(".", value.Ancestors()
                             .OfType<BaseNamespaceDeclarationSyntax>().Reverse().Select(parent => parent.Name.ToString())))
                         .Select(group => SyntaxFactory.NamespaceDeclaration(SyntaxFactory.ParseName(group.Key))
-                            .AddMembers(group.GroupBy(method => method.Ancestors().OfType<ClassDeclarationSyntax>().First())
+                            .AddMembers(group.OfType<MethodDeclarationSyntax>()
+                                .GroupBy(method => method.Ancestors().OfType<ClassDeclarationSyntax>().First())
                                 .Select(methodsInClass => methodsInClass.Key.WithMembers(
-                                    SyntaxFactory.List<MemberDeclarationSyntax>(methodsInClass))).ToArray()));
+                                    SyntaxFactory.List<MemberDeclarationSyntax>(methodsInClass)))
+                                .Concat<MemberDeclarationSyntax>(group.OfType<BaseTypeDeclarationSyntax>()).ToArray()));
                     var subset = SyntaxFactory.CompilationUnit().WithUsings(source.Usings.Add(SyntaxFactory.UsingDirective(
                             SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata"))))
                         .AddMembers(members.ToArray()).NormalizeWhitespace();
