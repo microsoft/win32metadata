@@ -627,6 +627,12 @@ integral expressions such as `-1` and `0`, not pointer-cast `INVALID_HANDLE_VALU
 Nonintegral, unresolved, and nonconstant values are errors. The shorthand is only for
 the exact HANDLE contract `-1, 0`; null-only handles retain `_Win32_RAIIFree_(CloseX, 0)`.
 
+A unary cleanup may accept the address of the produced pointer.
+`GdipNewPrivateFontCollection::fontCollection` can name
+`GdipDeletePrivateFontCollection`; its sole `GpFontCollection**` parameter receives
+the address of the produced `GpFontCollection*`. The cleanup's native signature
+determines the required indirection.
+
 Consumer/freeing APIs such as `LocalFree` retain their raw native signature. Do not use
 generic invalid-handle success logic for them: `LocalFree` returns `NULL` on success and
 the still-valid input handle on failure.

@@ -1,5 +1,5 @@
 diff --git a/um/bdaiface.idl b/um/bdaiface.idl
-index dd7af9a9..b81b5b6f 100644
+index dd7af9a9..7425e75f 100644
 --- a/um/bdaiface.idl
 +++ b/um/bdaiface.idl
 @@ -15,6 +15,8 @@
@@ -151,7 +151,23 @@ index dd7af9a9..b81b5b6f 100644
  [
      object,
      uuid(53B14189-E478-4b7a-A1FF-506DB4B99DFE),
-@@ -2151,6 +2174,7 @@ interface IESEvents : IUnknown
+@@ -2116,6 +2139,7 @@ cpp_quote("#define SID_BDA_UserActivityService __uuidof(IBDA_UserActivityService
+ // Generic and specific events that could return
+ // in OnESEventReceived
+ //
++_Win32_AnnotateInterface_(IESEvent, _Win32_SupportedOS_Windows7_)
+ [
+ 	object,
+ 	uuid(1F0E5357-AF43-44e6-8547-654C645145D2),
+@@ -2140,6 +2164,7 @@ interface IESEvent : IUnknown
+ 	HRESULT GetStringData ([out, retval] BSTR* pbstrData);
+ };
+ 
++_Win32_AnnotateInterface_(IESEvents, _Win32_SupportedOS_Windows7_)
+ [
+ 	object,
+ 	uuid(ABD414BF-CFE5-4e5e-AF5B-4B4E49C5BFEB),
+@@ -2151,6 +2176,7 @@ interface IESEvents : IUnknown
  	HRESULT OnESEventReceived([in] GUID guidEventType, [in] IESEvent* pESEvent);
  };
  
@@ -159,7 +175,7 @@ index dd7af9a9..b81b5b6f 100644
  [
      object,
      hidden,
-@@ -2177,6 +2201,7 @@ interface IBroadcastEventEx : IBroadcastEvent
+@@ -2177,6 +2203,7 @@ interface IBroadcastEventEx : IBroadcastEvent
      HRESULT FireEx([in] GUID EventID, [in] ULONG Param1, [in] ULONG Param2, [in] ULONG Param3, [in] ULONG Param4);
  };
  

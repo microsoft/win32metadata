@@ -475,7 +475,19 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipGetFontStyle(GpFont *font, INT *style);
  
-@@ -2627,6 +2877,13 @@ GpStatus WINGDIPAPI
+@@ -2511,6 +2761,11 @@ GdipNewPrivateFontCollection(GpFontCollection** fontCollection);
+ GpStatus WINGDIPAPI
+ GdipDeletePrivateFontCollection(GpFontCollection** fontCollection);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipNewPrivateFontCollection, fontCollection,
++    _Win32_RAIIFree_(GdipDeletePrivateFontCollection));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetFontCollectionFamilyCount(
+     GpFontCollection* fontCollection,
+@@ -2627,6 +2882,13 @@ GpStatus WINGDIPAPI
  GdipCloneStringFormat(GDIPCONST GpStringFormat *format, 
                        GpStringFormat **newFormat);
  
@@ -489,7 +501,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipSetStringFormatFlags(GpStringFormat *format, INT flags);
  
-@@ -2714,6 +2971,11 @@ GdipCreateCachedBitmap(
+@@ -2714,6 +2976,11 @@ GdipCreateCachedBitmap(
  GpStatus WINGDIPAPI
  GdipDeleteCachedBitmap(GpCachedBitmap *cachedBitmap);
  
@@ -501,7 +513,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipDrawCachedBitmap(
      GpGraphics *graphics,
-@@ -2785,6 +3047,16 @@ GdipConvertToEmfPlusToStream(
+@@ -2785,6 +3052,16 @@ GdipConvertToEmfPlusToStream(
     const WCHAR* description,
     GpMetafile** out_metafile
  );
