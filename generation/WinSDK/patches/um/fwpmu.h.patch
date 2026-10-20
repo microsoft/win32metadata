@@ -1,5 +1,5 @@
 diff --git a/um/fwpmu.h b/um/fwpmu.h
-index 7d953b38..d6d358bb 100644
+index 7d953b38..96975317 100644
 --- a/um/fwpmu.h
 +++ b/um/fwpmu.h
 @@ -5,6 +5,7 @@
@@ -31,7 +31,8 @@ index 7d953b38..d6d358bb 100644
     _In_ UINT32 authnService,
     _In_opt_ SEC_WINNT_AUTH_IDENTITY_W* authIdentity,
     _In_opt_ const FWPM_SESSION0* session,
-    _Out_ HANDLE* engineHandle
+-   _Out_ HANDLE* engineHandle
++   _Win32_RAIIFree_(FwpmEngineClose0, -1, 0) _Out_ HANDLE* engineHandle
     );
  
 +_Win32_SupportedOS_WindowsVista_

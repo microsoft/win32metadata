@@ -25,7 +25,7 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI_(LPWSTR *)  CommandLineToArgvW(_In_ LPCWSTR lpCmdLine, _Out_ int* pNumArgs);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
-@@ -79,20 +89,27 @@
+@@ -79,30 +89,39 @@
  DECLARE_HANDLE(HDROP);
  
  _Success_(return != 0)
@@ -48,12 +48,15 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI_(HINSTANCE) ShellExecuteA(_In_opt_ HWND hwnd, _In_opt_ LPCSTR lpOperation, _In_ LPCSTR lpFile, _In_opt_ LPCSTR lpParameters,
-     _In_opt_ LPCSTR lpDirectory, _In_ INT nShowCmd);
+-    _In_opt_ LPCSTR lpDirectory, _In_ INT nShowCmd);
++    _In_opt_ LPCSTR lpDirectory, _Win32_AssociatedEnum_(SHOW_WINDOW_CMD) _In_ INT nShowCmd);
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI_(HINSTANCE) ShellExecuteW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR lpOperation, _In_ LPCWSTR lpFile, _In_opt_ LPCWSTR lpParameters,
-     _In_opt_ LPCWSTR lpDirectory, _In_ INT nShowCmd);
+-    _In_opt_ LPCWSTR lpDirectory, _In_ INT nShowCmd);
++    _In_opt_ LPCWSTR lpDirectory, _Win32_AssociatedEnum_(SHOW_WINDOW_CMD) _In_ INT nShowCmd);
  #ifdef UNICODE
-@@ -101,8 +118,10 @@
+ #define ShellExecute  ShellExecuteW
+ #else
  #define ShellExecute  ShellExecuteA
  #endif // !UNICODE
  _Success_(return > 32) // SE_ERR_DLLNOTFOUND
@@ -377,17 +380,23 @@ diff --git a/um/shellapi.h b/um/shellapi.h
  SHSTDAPI Shell_NotifyIconGetRect(_In_ const NOTIFYICONIDENTIFIER* identifier, _Out_ RECT* iconLocation);
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
-@@ -1269,8 +1371,10 @@
+@@ -1269,10 +1371,12 @@
  #define SHGFI_OVERLAYINDEX      0x000000040     // Get the index of the overlay
                                                  // in the upper 8 bits of the iIcon
  
+-SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(_In_ LPCSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOA *psfi,
+-    UINT cbFileInfo, UINT uFlags);
+-SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
+-    UINT cbFileInfo, UINT uFlags);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(_In_ LPCSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOA *psfi,
-     UINT cbFileInfo, UINT uFlags);
++SHSTDAPI_(DWORD_PTR) SHGetFileInfoA(_In_ LPCSTR pszPath, _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOA *psfi,
++    UINT cbFileInfo, _Win32_AssociatedEnum_(SHGFI_FLAGS) UINT uFlags);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
-     UINT cbFileInfo, UINT uFlags);
++SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
++    UINT cbFileInfo, _Win32_AssociatedEnum_(SHGFI_FLAGS) UINT uFlags);
  #ifdef UNICODE
+ #define SHGetFileInfo  SHGetFileInfoW
+ #else
 @@ -1297,6 +1401,17 @@
  #define SHGSI_LARGEICON         SHGFI_LARGEICON
  #define SHGSI_SMALLICON         SHGFI_SMALLICON

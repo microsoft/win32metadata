@@ -1,8 +1,16 @@
 diff --git a/um/namedpipeapi.h b/um/namedpipeapi.h
-index 814463bb..4ac9744c 100644
+index 814463bb..d310da1e 100644
 --- a/um/namedpipeapi.h
 +++ b/um/namedpipeapi.h
-@@ -24,6 +24,8 @@ extern "C" {
+@@ -12,6 +12,7 @@
+ 
+ #ifndef _NAMEDPIPE_H_
+ #define _NAMEDPIPE_H_
++#include <sal.h>
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -24,6 +25,8 @@ extern "C" {
  
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -11,7 +19,7 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -34,6 +36,8 @@ CreatePipe(
+@@ -34,6 +37,8 @@ CreatePipe(
      _In_ DWORD nSize
      );
  
@@ -20,7 +28,7 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -42,6 +46,8 @@ ConnectNamedPipe(
+@@ -42,6 +47,8 @@ ConnectNamedPipe(
      _Inout_opt_ LPOVERLAPPED lpOverlapped
      );
  
@@ -29,7 +37,7 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -49,6 +55,8 @@ DisconnectNamedPipe(
+@@ -49,16 +56,20 @@ DisconnectNamedPipe(
      _In_ HANDLE hNamedPipe
      );
  
@@ -38,7 +46,11 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -59,6 +67,8 @@ SetNamedPipeHandleState(
+ SetNamedPipeHandleState(
+     _In_ HANDLE hNamedPipe,
+-    _In_opt_ LPDWORD lpMode,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _In_opt_ LPDWORD lpMode,
+     _In_opt_ LPDWORD lpMaxCollectionCount,
      _In_opt_ LPDWORD lpCollectDataTimeout
      );
  
@@ -47,7 +59,7 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -75,6 +85,8 @@ PeekNamedPipe(
+@@ -75,6 +86,8 @@ PeekNamedPipe(
  
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -56,7 +68,18 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -143,6 +155,8 @@ GetNamedPipeClientComputerNameW(
+@@ -97,8 +110,8 @@ HANDLE
+ WINAPI
+ CreateNamedPipeW(
+     _In_ LPCWSTR lpName,
+-    _In_ DWORD dwOpenMode,
+-    _In_ DWORD dwPipeMode,
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_ DWORD dwOpenMode,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _In_ DWORD dwPipeMode,
+     _In_ DWORD nMaxInstances,
+     _In_ DWORD nOutBufferSize,
+     _In_ DWORD nInBufferSize,
+@@ -143,6 +156,8 @@ GetNamedPipeClientComputerNameW(
  #define GetNamedPipeClientComputerName  GetNamedPipeClientComputerNameW
  #endif
  
@@ -65,7 +88,7 @@ index 814463bb..4ac9744c 100644
  WINADVAPI
  _Must_inspect_result_
  BOOL
-@@ -156,6 +170,8 @@ ImpersonateNamedPipeClient(
+@@ -156,12 +171,14 @@ ImpersonateNamedPipeClient(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -74,3 +97,19 @@ index 814463bb..4ac9744c 100644
  WINBASEAPI
  BOOL
  WINAPI
+ GetNamedPipeInfo(
+     _In_ HANDLE hNamedPipe,
+-    _Out_opt_ LPDWORD lpFlags,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _Out_opt_ LPDWORD lpFlags,
+     _Out_opt_ LPDWORD lpOutBufferSize,
+     _Out_opt_ LPDWORD lpInBufferSize,
+     _Out_opt_ LPDWORD lpMaxInstances
+@@ -172,7 +189,7 @@ BOOL
+ WINAPI
+ GetNamedPipeHandleStateW(
+     _In_ HANDLE hNamedPipe,
+-    _Out_opt_ LPDWORD lpState,
++    _Win32_AssociatedEnum_(NAMED_PIPE_MODE) _Out_opt_ LPDWORD lpState,
+     _Out_opt_ LPDWORD lpCurInstances,
+     _Out_opt_ LPDWORD lpMaxCollectionCount,
+     _Out_opt_ LPDWORD lpCollectDataTimeout,

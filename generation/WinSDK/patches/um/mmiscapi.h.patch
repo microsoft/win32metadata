@@ -1,5 +1,4 @@
 diff --git a/um/mmiscapi.h b/um/mmiscapi.h
-index 95469a0a..abe729f4 100644
 --- a/um/mmiscapi.h
 +++ b/um/mmiscapi.h
 @@ -95,6 +95,7 @@ typedef struct tagDRVCONFIGINFO {
@@ -26,7 +25,15 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LRESULT
  WINAPI
-@@ -130,6 +133,7 @@ DrvGetModuleHandle(
+@@ -123,6 +126,7 @@ SendDriverMessage(
+     _In_ LPARAM lParam2
+     );
+ 
++_Win32_SupportedOS_Windows2000_
+ WINMMAPI
+ HMODULE
+ WINAPI
+@@ -130,6 +134,7 @@ DrvGetModuleHandle(
      _In_ HDRVR hDriver
      );
  
@@ -34,7 +41,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  HMODULE
  WINAPI
-@@ -137,6 +141,7 @@ GetDriverModuleHandle(
+@@ -137,6 +142,7 @@ GetDriverModuleHandle(
      _In_ HDRVR hDriver
      );
  
@@ -42,7 +49,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LRESULT
  WINAPI
-@@ -175,6 +180,7 @@ LRESULT   WINAPI DrvDefDriverProc(DWORD dwDriverIdentifier, HDRVR hdrvr, UINT uM
+@@ -175,6 +181,7 @@ LRESULT   WINAPI DrvDefDriverProc(DWORD dwDriverIdentifier, HDRVR hdrvr, UINT uM
                        Driver Helper function moved from mmddk.h
  
  ***************************************************************************/
@@ -50,7 +57,18 @@ index 95469a0a..abe729f4 100644
  BOOL
  APIENTRY
  DriverCallback(
-@@ -382,6 +388,7 @@ typedef const MMCKINFO *LPCMMCKINFO;
+@@ -191,7 +198,9 @@ DriverCallback(
+ 
+   Sound schemes
+ 
+-****************************************************************************/LONG
++****************************************************************************/
++_Win32_SupportedOS_Windows81_
++LONG
+ WINAPI
+ sndOpenSound(
+     _In_ LPCWSTR EventName,
+@@ -382,6 +391,7 @@ typedef const MMCKINFO *LPCMMCKINFO;
  /* MMIO function prototypes */
  #ifdef _WIN32
  
@@ -58,7 +76,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  FOURCC
  WINAPI
-@@ -390,6 +397,7 @@ mmioStringToFOURCCA(
+@@ -390,6 +400,7 @@ mmioStringToFOURCCA(
      _In_ UINT uFlags
      );
  
@@ -66,7 +84,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  FOURCC
  WINAPI
-@@ -403,6 +411,7 @@ mmioStringToFOURCCW(
+@@ -403,6 +414,7 @@ mmioStringToFOURCCW(
  #else
  #define mmioStringToFOURCC  mmioStringToFOURCCA
  #endif // !UNICODE
@@ -74,7 +92,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LPMMIOPROC
  WINAPI
-@@ -412,6 +421,7 @@ mmioInstallIOProcA(
+@@ -412,6 +424,7 @@ mmioInstallIOProcA(
      _In_ DWORD dwFlags
      );
  
@@ -82,7 +100,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LPMMIOPROC
  WINAPI
-@@ -426,6 +436,7 @@ mmioInstallIOProcW(
+@@ -426,6 +439,7 @@ mmioInstallIOProcW(
  #else
  #define mmioInstallIOProc  mmioInstallIOProcA
  #endif // !UNICODE
@@ -90,7 +108,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  HMMIO
  WINAPI
-@@ -435,6 +446,7 @@ mmioOpenA(
+@@ -435,6 +449,7 @@ mmioOpenA(
      _In_ DWORD fdwOpen
      );
  
@@ -98,7 +116,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  HMMIO
  WINAPI
-@@ -449,6 +461,7 @@ mmioOpenW(
+@@ -449,6 +464,7 @@ mmioOpenW(
  #else
  #define mmioOpen  mmioOpenA
  #endif // !UNICODE
@@ -106,7 +124,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -459,6 +472,7 @@ mmioRenameA(
+@@ -459,6 +475,7 @@ mmioRenameA(
      _In_ DWORD fdwRename
      );
  
@@ -114,7 +132,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -483,6 +497,7 @@ MMRESULT WINAPI mmioRename( _In_ LPCSTR pszFileName, _In_ LPCSTR pszNewFileName,
+@@ -483,6 +500,7 @@ MMRESULT WINAPI mmioRename( _In_ LPCSTR pszFileName, _In_ LPCSTR pszNewFileName,
  #endif /* ifdef WINVER >= 0x030a */
  #endif
  
@@ -122,7 +140,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -491,6 +506,7 @@ mmioClose(
+@@ -491,6 +509,7 @@ mmioClose(
      _In_ UINT fuClose
      );
  
@@ -130,7 +148,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LONG
  WINAPI
-@@ -500,6 +516,7 @@ mmioRead(
+@@ -500,6 +519,7 @@ mmioRead(
      _In_ LONG cch
      );
  
@@ -138,7 +156,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LONG
  WINAPI
-@@ -509,6 +526,7 @@ mmioWrite(
+@@ -509,6 +529,7 @@ mmioWrite(
      _In_ LONG cch
      );
  
@@ -146,7 +164,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LONG
  WINAPI
-@@ -518,6 +536,7 @@ mmioSeek(
+@@ -518,6 +539,7 @@ mmioSeek(
      _In_ int iOrigin
      );
  
@@ -154,7 +172,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -527,6 +546,7 @@ mmioGetInfo(
+@@ -527,6 +549,7 @@ mmioGetInfo(
      _In_ UINT fuInfo
      );
  
@@ -162,7 +180,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -536,6 +556,7 @@ mmioSetInfo(
+@@ -536,6 +559,7 @@ mmioSetInfo(
      _In_ UINT fuInfo
      );
  
@@ -170,7 +188,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -546,6 +567,7 @@ mmioSetBuffer(
+@@ -546,6 +570,7 @@ mmioSetBuffer(
      _In_ UINT fuBuffer
      );
  
@@ -178,7 +196,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -554,6 +576,7 @@ mmioFlush(
+@@ -554,6 +579,7 @@ mmioFlush(
      _In_ UINT fuFlush
      );
  
@@ -186,7 +204,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -563,6 +586,7 @@ mmioAdvance(
+@@ -563,6 +589,7 @@ mmioAdvance(
      _In_ UINT fuAdvance
      );
  
@@ -194,7 +212,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  LRESULT
  WINAPI
-@@ -573,6 +597,7 @@ mmioSendMessage(
+@@ -573,6 +600,7 @@ mmioSendMessage(
      _In_opt_ LPARAM lParam2
      );
  
@@ -202,7 +220,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -583,6 +608,7 @@ mmioDescend(
+@@ -583,6 +611,7 @@ mmioDescend(
      _In_ UINT fuDescend
      );
  
@@ -210,7 +228,7 @@ index 95469a0a..abe729f4 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -592,6 +618,7 @@ mmioAscend(
+@@ -592,6 +621,7 @@ mmioAscend(
      _In_ UINT fuAscend
      );
  

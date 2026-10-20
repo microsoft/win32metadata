@@ -1,8 +1,7 @@
 diff --git a/um/lzexpand.h b/um/lzexpand.h
-index 88e197e4..2acba423 100644
 --- a/um/lzexpand.h
 +++ b/um/lzexpand.h
-@@ -71,6 +71,7 @@ CopyLZFile(
+@@ -71,6 +71,7 @@
      _In_ INT hfDest
      );
  
@@ -10,7 +9,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  LONG
-@@ -80,6 +81,7 @@ LZCopy(
+@@ -80,6 +81,7 @@
      _In_ INT hfDest
      );
  
@@ -18,7 +17,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -88,6 +90,8 @@ LZInit(
+@@ -88,6 +90,8 @@
      _In_ INT hfSource
      );
  
@@ -27,7 +26,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -96,6 +100,8 @@ GetExpandedNameA(
+@@ -96,6 +100,8 @@
      _In_ LPSTR lpszSource,
      _Out_writes_(MAX_PATH) LPSTR lpszBuffer
      );
@@ -36,7 +35,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -110,6 +116,7 @@ GetExpandedNameW(
+@@ -110,6 +116,7 @@
  #define GetExpandedName  GetExpandedNameA
  #endif // !UNICODE
  
@@ -44,15 +43,27 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -119,6 +126,7 @@ LZOpenFileA(
+@@ -117,8 +124,9 @@
+ LZOpenFileA(
+     _In_ LPSTR lpFileName,
      _Inout_ LPOFSTRUCT lpReOpenBuf,
-     _In_ WORD wStyle
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
      );
 +_Win32_SupportedOS_WindowsXP_
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -134,6 +142,7 @@ LZOpenFileW(
+@@ -126,7 +134,7 @@
+ LZOpenFileW(
+     _In_ LPWSTR lpFileName,
+     _Inout_ LPOFSTRUCT lpReOpenBuf,
+-    _In_ WORD wStyle
++    _Win32_AssociatedEnum_(LZOPENFILE_STYLE) _In_ WORD wStyle
+     );
+ #ifdef UNICODE
+ #define LZOpenFile  LZOpenFileW
+@@ -134,6 +142,7 @@
  #define LZOpenFile  LZOpenFileA
  #endif // !UNICODE
  
@@ -60,7 +71,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  LONG
-@@ -144,6 +153,7 @@ LZSeek(
+@@ -144,6 +153,7 @@
      _In_ INT iOrigin
      );
  
@@ -68,7 +79,7 @@ index 88e197e4..2acba423 100644
  _Success_(return >= 0)
  _Check_return_
  INT
-@@ -154,6 +164,7 @@ LZRead(
+@@ -154,6 +164,7 @@
      _In_ INT cbRead
      );
  

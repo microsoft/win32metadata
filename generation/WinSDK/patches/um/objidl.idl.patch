@@ -240,6 +240,33 @@
  [
      object,
      uuid(0000010f-0000-0000-C000-000000000046),
+@@ -1132,7 +1162,7 @@
+     cpp_quote("#endif")
+ 
+     typedef struct tagRemSTGMEDIUM {
+-        DWORD tymed;
++        [annotation("_Win32_AssociatedEnum_(TYMED)")] DWORD tymed;
+         DWORD dwHandleType;
+         ULONG pData;
+         ULONG pUnkForRelease;
+@@ -1150,7 +1180,7 @@
+ 
+ cpp_quote("#ifdef NONAMELESSUNION")
+ cpp_quote("typedef struct tagSTGMEDIUM {")
+-cpp_quote("    DWORD tymed;")
++cpp_quote("    _Win32_AssociatedEnum_(TYMED) DWORD tymed;")
+ cpp_quote("    union {")
+ cpp_quote("        HBITMAP hBitmap;")
+ cpp_quote("        HMETAFILEPICT hMetaFilePict;")
+@@ -1165,7 +1195,7 @@
+ cpp_quote("#else")
+ 
+     typedef struct tagSTGMEDIUM {
+-    DWORD tymed;
++    [annotation("_Win32_AssociatedEnum_(TYMED)")] DWORD tymed;
+     [switch_type(DWORD), switch_is((DWORD) tymed)]
+         union
+         {
 @@ -1359,6 +1389,7 @@
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")

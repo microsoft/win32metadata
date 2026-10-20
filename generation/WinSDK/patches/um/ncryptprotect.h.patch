@@ -1,8 +1,7 @@
 diff --git a/um/ncryptprotect.h b/um/ncryptprotect.h
-index a2df1063..12e30721 100644
 --- a/um/ncryptprotect.h
 +++ b/um/ncryptprotect.h
-@@ -175,6 +175,7 @@ DECLARE_HANDLE( NCRYPT_DESCRIPTOR_HANDLE );
+@@ -175,6 +175,7 @@
  
  
  ****************************************************************************/
@@ -10,7 +9,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptRegisterProtectionDescriptorName(
-@@ -218,6 +219,7 @@ NCryptRegisterProtectionDescriptorName(
+@@ -218,6 +219,7 @@
      
  
  ****************************************************************************/
@@ -18,7 +17,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptQueryProtectionDescriptorName(
-@@ -261,6 +263,7 @@ NCryptQueryProtectionDescriptorName(
+@@ -261,6 +263,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -26,7 +25,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptCreateProtectionDescriptor(
-@@ -294,6 +297,7 @@ NCryptCreateProtectionDescriptor(
+@@ -294,6 +297,7 @@
      NTE_INVALID_HANDLE
  
  ****************************************************************************/
@@ -34,7 +33,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptCloseProtectionDescriptor(
-@@ -355,6 +359,7 @@ NCryptCloseProtectionDescriptor(
+@@ -355,6 +359,7 @@
  //
  #define NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING   0x00000001  // LPWSTR
  
@@ -42,7 +41,7 @@ index a2df1063..12e30721 100644
  _Success_(return == 0)
  _When_(dwInfoType == NCRYPT_PROTECTION_INFO_TYPE_DESCRIPTOR_STRING,
         _At_((LPWSTR*)ppvInfo, _Outptr_result_nullonfailure_))
-@@ -420,6 +425,7 @@ NCryptGetProtectionDescriptorInfo(
+@@ -420,6 +425,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -50,7 +49,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptProtectSecret(
-@@ -498,6 +504,7 @@ NCryptProtectSecret(
+@@ -498,11 +504,12 @@
      no actual decryption will occur.
  
  ****************************************************************************/
@@ -58,7 +57,24 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptUnprotectSecret(
-@@ -627,6 +634,7 @@ typedef struct NCRYPT_PROTECT_STREAM_INFO {
+     _Out_opt_       NCRYPT_DESCRIPTOR_HANDLE            *phDescriptor,
+-     _In_            DWORD                               dwFlags,
++     _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_            DWORD                               dwFlags,
+     _In_reads_bytes_(cbProtectedBlob)
+                     const BYTE                          *pbProtectedBlob,
+                     ULONG                               cbProtectedBlob,
+@@ -515,6 +522,10 @@
+ 
+ #define NCRYPT_UNPROTECT_NO_DECRYPT                     0x00000001
+ 
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(NCRYPT_FLAGS, unsigned int, NCRYPT_UNPROTECT_NO_DECRYPT);
++#endif
++
+ /*--------------------------------------------------------------------------
+ //
+ //                               STREAM API
+@@ -627,6 +638,7 @@
      NTE_BAD_TYPE
  
  ****************************************************************************/
@@ -66,7 +82,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptStreamOpenToProtect(
-@@ -672,6 +680,7 @@ NCryptStreamOpenToProtect(
+@@ -672,6 +684,7 @@
      NTE_DECRYPTION_FAILURE
  
  ****************************************************************************/
@@ -74,7 +90,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptStreamOpenToUnprotect(
-@@ -837,6 +846,7 @@ NCryptStreamOpenToUnprotectEx(
+@@ -837,6 +850,7 @@
      NTE_DECRYPTION_FAILURE
  
  ****************************************************************************/
@@ -82,7 +98,7 @@ index a2df1063..12e30721 100644
  SECURITY_STATUS
  WINAPI
  NCryptStreamUpdate(
-@@ -863,6 +873,7 @@ NCryptStreamUpdate(
+@@ -863,6 +877,7 @@
      NTE_INVALID_HANDLE
  
  ****************************************************************************/

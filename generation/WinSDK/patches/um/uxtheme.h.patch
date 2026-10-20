@@ -156,6 +156,15 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeText(
      _In_ HTHEME hTheme,
+@@ -541,7 +572,7 @@
+     _In_ int iStateId,
+     _In_reads_(cchText) LPCWSTR pszText,
+     _In_ int cchText,
+-    _In_ DWORD dwTextFlags,
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ DWORD dwTextFlags,
+     _In_ DWORD dwTextFlags2,
+     _In_ LPCRECT pRect
+     );
 @@ -559,6 +590,7 @@
  //      pBoundingRect   - the outer RECT of the part being drawn
  //      pContentRect    - RECT to receive the content area
@@ -196,6 +205,15 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeTextExtent(
      _In_ HTHEME hTheme,
+@@ -667,7 +703,7 @@
+     _In_ int iStateId,
+     _In_reads_(cchCharCount) LPCWSTR pszText,
+     _In_ int cchCharCount,
+-    _In_ DWORD dwTextFlags,
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ DWORD dwTextFlags,
+     _In_opt_ LPCRECT pBoundingRect,
+     _Out_ LPRECT pExtentRect
+     );
 @@ -683,6 +719,7 @@
  //  iStateId            - state number (of the part) 
  //  ptm                 - receives the font info
@@ -248,6 +266,17 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeEdge(
      _In_ HTHEME hTheme,
+@@ -782,8 +834,8 @@
+     _In_ int iPartId,
+     _In_ int iStateId,
+     _In_ LPCRECT pDestRect,
+-    _In_ UINT uEdge,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(DRAWEDGE_FLAGS) _In_ UINT uEdge,
++    _Win32_AssociatedEnum_(DRAW_EDGE_FLAGS) _In_ UINT uFlags,
+     _Out_opt_ LPRECT pContentRect
+     );
+ 
 @@ -799,6 +851,7 @@
  //  himl                - handle to IMAGELIST 
  //  iImageIndex         - index into IMAGELIST (which icon to draw)
@@ -272,7 +301,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  IsThemeBackgroundPartiallyTransparent(
      _In_ HTHEME hTheme,
-@@ -868,6 +923,7 @@
+@@ -868,12 +923,13 @@
  //  iPropId             - the property number to get the value for
  //  pColor              - receives the value of the property
  //-----------------------------------------------------------------------
@@ -280,7 +309,14 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeColor(
      _In_ HTHEME hTheme,
-@@ -888,6 +944,7 @@
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ COLORREF *pColor
+     );
+ 
+@@ -888,13 +944,14 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -288,6 +324,14 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeMetric(
      _In_ HTHEME hTheme,
+     _In_opt_ HDC hdc,
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ int *piVal
+     );
+ 
 @@ -908,6 +965,7 @@
  //  pszBuff             - receives the string property value
  //  cchMaxBuffChars     - max. number of chars allowed in pszBuff
@@ -296,7 +340,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeString(
      _In_ HTHEME hTheme,
-@@ -927,6 +985,7 @@
+@@ -927,12 +985,13 @@
  //  iPropId             - the property number to get the value for
  //  pfVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -304,7 +348,14 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeBool(
      _In_ HTHEME hTheme,
-@@ -945,6 +1004,7 @@
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ BOOL *pfVal
+     );
+ 
+@@ -945,12 +1004,13 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the property
  //-----------------------------------------------------------------------
@@ -312,7 +363,14 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeInt(
      _In_ HTHEME hTheme,
-@@ -963,6 +1023,7 @@
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ int *piVal
+     );
+ 
+@@ -963,12 +1023,13 @@
  //  iPropId             - the property number to get the value for
  //  piVal               - receives the value of the enum (cast to int*)
  //-----------------------------------------------------------------------
@@ -320,7 +378,14 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeEnumValue(
      _In_ HTHEME hTheme,
-@@ -982,6 +1043,7 @@
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ int *piVal
+     );
+ 
+@@ -982,12 +1043,13 @@
  //  iPropId             - the property number to get the value for
  //  pPoint              - receives the value of the position property
  //-----------------------------------------------------------------------
@@ -328,6 +393,13 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemePosition(
      _In_ HTHEME hTheme,
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ POINT *pPoint
+     );
+ 
 @@ -1002,6 +1064,7 @@
  //  pFont               - receives the value of the LOGFONT property
  //                        (scaled for the current logical screen dpi) 
@@ -344,7 +416,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeRect(
      _In_ HTHEME hTheme,
-@@ -1050,6 +1114,7 @@
+@@ -1050,13 +1114,14 @@
  //      prc             - RECT for area to be drawn into
  //      pMargins        - receives the value of the MARGINS property
  //-----------------------------------------------------------------------
@@ -352,7 +424,15 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeMargins(
      _In_ HTHEME hTheme,
-@@ -1082,6 +1147,7 @@
+     _In_opt_ HDC hdc,
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _In_opt_ LPCRECT prc,
+     _Out_ MARGINS *pMargins
+     );
+@@ -1082,12 +1147,13 @@
  //      iPropId         - the property number to get the value for
  //      pIntList        - receives the value of the INTLIST property
  //-----------------------------------------------------------------------
@@ -360,6 +440,13 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeIntList(
      _In_ HTHEME hTheme,
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_ INTLIST *pIntList
+     );
+ 
 @@ -1112,6 +1178,7 @@
  //  iPropId             - the property number to search for
  //  pOrigin             - receives the value of the property origin
@@ -376,7 +463,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  SetWindowTheme(
      _In_ HWND hwnd,
-@@ -1167,6 +1235,7 @@
+@@ -1167,12 +1235,13 @@
  //  pszThemeFileName    - output buffer to receive the filename
  //  cchMaxBuffChars     - the size of the return buffer, in chars
  //---------------------------------------------------------------------------
@@ -384,6 +471,13 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeFilename(
      _In_ HTHEME hTheme,
+     _In_ int iPartId,
+     _In_ int iStateId,
+-    _In_ int iPropId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
+     _Out_writes_(cchMaxBuffChars) LPWSTR pszThemeFileName,
+     _In_ int cchMaxBuffChars
+     );
 @@ -1186,6 +1255,7 @@
  //
  //  iColorId            - the system color index defined in winuser.h
@@ -392,7 +486,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(COLORREF)
  GetThemeSysColor(
      _In_opt_ HTHEME hTheme,
-@@ -1203,6 +1273,7 @@
+@@ -1203,10 +1273,11 @@
  //
  //  iColorId            - the system color index defined in winuser.h
  //---------------------------------------------------------------------------
@@ -400,7 +494,12 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(HBRUSH)
  GetThemeSysColorBrush(
      _In_opt_ HTHEME hTheme,
-@@ -1219,6 +1290,7 @@
+-    _In_ int iColorId
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iColorId
+     );
+ 
+ //---------------------------------------------------------------------------
+@@ -1219,10 +1290,11 @@
  //  iBoolId             - the TMT_XXX BOOL number (first BOOL
  //                        is TMT_FLATMENUS)
  //---------------------------------------------------------------------------
@@ -408,6 +507,11 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(BOOL)
  GetThemeSysBool(
      _In_opt_ HTHEME hTheme,
+-    _In_ int iBoolId
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iBoolId
+     );
+ 
+ //---------------------------------------------------------------------------
 @@ -1250,6 +1322,7 @@
  //                        when hTheme is NULL, iSizeId is passed directly
  //                        to the GetSystemMetrics() function
@@ -416,7 +520,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI_(int)
  GetThemeSysSize(
      _In_opt_ HTHEME hTheme,
-@@ -1269,6 +1342,7 @@
+@@ -1269,10 +1342,11 @@
  //  plf                 - ptr to LOGFONT to receive the font value.
  //                        (scaled for the current logical screen dpi) 
  //---------------------------------------------------------------------------
@@ -424,7 +528,12 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeSysFont(
      _In_opt_ HTHEME hTheme,
-@@ -1290,6 +1364,7 @@
+-    _In_ int iFontId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iFontId,
+     _Out_ LOGFONTW *plf
+     );
+ 
+@@ -1290,10 +1364,11 @@
  //
  //  cchMaxStringChars   - max. number of chars that pszStringBuff can hold
  //---------------------------------------------------------------------------
@@ -432,7 +541,12 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeSysString(
      _In_ HTHEME hTheme,
-@@ -1311,6 +1386,7 @@
+-    _In_ int iStringId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iStringId,
+     _Out_writes_(cchMaxStringChars) LPWSTR pszStringBuff,
+     _In_ int cchMaxStringChars
+     );
+@@ -1311,10 +1386,11 @@
  //
  //  piValue             - ptr to int to receive value
  //---------------------------------------------------------------------------
@@ -440,6 +554,11 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  GetThemeSysInt(
      _In_ HTHEME hTheme,
+-    _In_ int iIntId,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iIntId,
+     _Out_ int *piValue
+     );
+ 
 @@ -1325,6 +1401,7 @@
  //                        use the API "IsAppThemed()" to test if a theme is
  //                        active for the calling process.
@@ -599,7 +718,7 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  __inline HRESULT SetWindowThemeNonClientAttributes(HWND hwnd, DWORD dwMask, DWORD dwAttributes)    
  {
      WTA_OPTIONS wta;
-@@ -1655,11 +1764,29 @@
+@@ -1655,15 +1764,33 @@
                               DTT_APPLYOVERLAY | \
                               DTT_GLOWSIZE | \
                               DTT_COMPOSITED)
@@ -630,6 +749,11 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      COLORREF          crText;              // color to use for text fill
      COLORREF          crBorder;            // color to use for text outline
      COLORREF          crShadow;            // color to use for text shadow
+-    int               iTextShadowType;     // TST_SINGLE or TST_CONTINUOUS
++    _Win32_AssociatedEnum_(DTTOPTS_iTextShadowTypeFlags) int               iTextShadowType;     // TST_SINGLE or TST_CONTINUOUS
+     POINT             ptShadowOffset;      // where shadow is drawn (relative to text)
+     int               iBorderSize;         // Border radius around text
+     int               iFontPropId;         // Font property to use for the text instead of TMT_FONT
 @@ -1677,6 +1804,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -638,6 +762,15 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
  THEMEAPI
  DrawThemeTextEx(
      _In_ HTHEME hTheme,
+@@ -1685,7 +1813,7 @@
+     _In_ int iStateId,
+     _In_reads_(cchText) LPCWSTR pszText,
+     _In_ int cchText,
+-    _In_ DWORD dwTextFlags,
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ DWORD dwTextFlags,
+     _Inout_ LPRECT pRect,
+     _In_opt_ const DTTOPTS *pOptions
+     );
 @@ -1704,13 +1832,14 @@
  //                    file when iPropId==TMT_DISKSTREAM (use GetCurrentThemeName 
  //                    and LoadLibraryEx(LOAD_LIBRARY_AS_DATAFILE)
@@ -648,8 +781,9 @@ diff --git a/um/uxtheme.h b/um/uxtheme.h
      _In_ HTHEME hTheme,
      _In_ int iPartId,
      _In_ int iStateId,
-     _In_ int iPropId,
+-    _In_ int iPropId,
 -    _In_ ULONG dwFlags,
++    _Win32_AssociatedEnum_(THEME_PROPERTY_SYMBOL_ID) _In_ int iPropId,
 +    _Win32_AssociatedEnum_(GET_THEME_BITMAP_FLAGS) _In_ ULONG dwFlags,
      _Out_ HBITMAP* phBitmap
      );

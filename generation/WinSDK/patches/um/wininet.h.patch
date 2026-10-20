@@ -111,7 +111,7 @@
  BOOLAPI InternetTimeToSystemTime(
      _In_ LPCSTR lpszTime,          // NULL terminated string
      _Out_ SYSTEMTIME *pst,         // output in GMT time
-@@ -793,6 +815,8 @@
+@@ -793,18 +815,22 @@
  #endif // !UNICODE
  
  
@@ -120,8 +120,9 @@
  BOOLAPI
  InternetCrackUrlA(
      _In_reads_(dwUrlLength) LPCSTR lpszUrl,
-@@ -800,6 +824,8 @@
-     _In_ DWORD dwFlags,
+     _In_ DWORD dwUrlLength,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(WIN_HTTP_CREATE_URL_FLAGS) _In_ DWORD dwFlags,
      _Inout_ LPURL_COMPONENTSA lpUrlComponents
      );
 +_Win32_SetLastError_
@@ -129,6 +130,12 @@
  BOOLAPI
  InternetCrackUrlW(
      _In_reads_(dwUrlLength) LPCWSTR lpszUrl,
+     _In_ DWORD dwUrlLength,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(WIN_HTTP_CREATE_URL_FLAGS) _In_ DWORD dwFlags,
+     _Inout_ LPURL_COMPONENTSW lpUrlComponents
+     );
+ #ifdef UNICODE
 @@ -813,6 +839,8 @@
  #define InternetCrackUrl  InternetCrackUrlA
  #endif // !UNICODE

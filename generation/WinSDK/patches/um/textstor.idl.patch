@@ -55,15 +55,18 @@
  [
    object,
    uuid(0feb7e34-5a60-4356-8ef7-abdec2ff7cf8),
-@@ -519,6 +526,7 @@
+@@ -519,6 +526,10 @@
      HRESULT Clone([out] IAnchor **ppaClone);
  };
  
++cpp_quote("_Win32_FlagsEnum_(ANCHOR_CHANGE_HISTORY_FLAGS, unsigned int, TS_CH_PRECEDING_DEL, TS_CH_FOLLOWING_DEL);")
++cpp_quote("_Win32_AnnotateParameter_(IAnchor::GetChangeHistory, pdwHistory, _Win32_AssociatedEnum_(ANCHOR_CHANGE_HISTORY_FLAGS));")
++
 +_Win32_AnnotateInterface_(ITextStoreAnchor, _Win32_SupportedOS_Windows2000_)
  [
    object,
    uuid(9b2077b0-5f18-4dec-bee9-3cc722f5dfe0),
-@@ -651,6 +659,7 @@
+@@ -651,6 +662,7 @@
  //
  // ITextStoreAnchorSink
  //
@@ -71,7 +74,7 @@
  [
    object,
    uuid(aa80e905-2021-11d2-93e0-0060b067b86e),
-@@ -673,7 +682,7 @@
+@@ -673,7 +685,7 @@
                            [in] ULONG cAttrs,
                            [in, size_is(cAttrs)] const TS_ATTRID *paAttrs);
  

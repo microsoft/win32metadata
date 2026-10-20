@@ -1,8 +1,6 @@
-diff --git a/winrt/weakreference.idl b/winrt/weakreference.idl
-index e2a3c552..ebe51408 100644
 --- a/winrt/weakreference.idl
 +++ b/winrt/weakreference.idl
-@@ -1,6 +1,7 @@
+@@ -1,14 +1,17 @@
  //  Microsoft Windows
  //  Copyright (c) Microsoft Corporation. All rights reserved.
  
@@ -10,7 +8,9 @@ index e2a3c552..ebe51408 100644
  cpp_quote("//  Microsoft Windows")
  cpp_quote("//  Copyright (c) Microsoft Corporation. All rights reserved.")
  cpp_quote("#pragma once")
-@@ -9,6 +10,7 @@ cpp_quote("#pragma once")
++cpp_quote("#include <sal.h>")
+ 
+ #ifndef DO_NO_IMPORTS
  import "inspectable.idl";
  #endif
  
@@ -18,7 +18,21 @@ index e2a3c552..ebe51408 100644
  [
      object,
      uuid(00000037-0000-0000-C000-000000000046),
-@@ -45,6 +47,7 @@ cpp_quote("#else")
+@@ -26,7 +29,7 @@
+ cpp_quote("        public:")
+ cpp_quote("            virtual HRESULT STDMETHODCALLTYPE Resolve( ")
+ cpp_quote("                /* [in] */ __RPC__in REFIID riid,")
+-cpp_quote("                /* [iid_is][out] */ __RPC__deref_out IInspectable **objectReference) = 0;")
++cpp_quote("                /* [iid_is][out] */ _Win32_ComOutPtr_(true) __RPC__deref_out IInspectable **objectReference) = 0;")
+ cpp_quote("")
+ cpp_quote("            template <typename T>")
+ cpp_quote("            _At_(*objectReference, _When_(FAILED(return), _Null_))")
+@@ -41,10 +44,11 @@
+ cpp_quote("#else")
+ 
+    HRESULT Resolve([in] REFIID riid, 
+-                   [out, retval, iid_is(riid)] IInspectable **objectReference);
++                   [out, retval, iid_is(riid), annotation("_Win32_ComOutPtr_(true)")] IInspectable **objectReference);
  }
  cpp_quote("#endif")
  

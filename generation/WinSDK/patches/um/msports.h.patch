@@ -1,0 +1,19 @@
+--- a/um/msports.h
++++ b/um/msports.h
+@@ -17,6 +17,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -103,7 +104,7 @@
+ LONG
+ WINAPI
+ ComDBOpen (
+-    _Out_ PHCOMDB PHComDB
++    _Win32_RAIIFree_(ComDBClose, -1, 0) _Out_ PHCOMDB PHComDB
+     );
+ /*++
+ 

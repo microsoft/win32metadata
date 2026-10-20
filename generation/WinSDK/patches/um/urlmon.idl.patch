@@ -42,3 +42,24 @@
  
  cpp_quote("#endif")
  
+@@ -1576,8 +1580,11 @@
+         [out] BOOL* pfEqual);
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__cplusplus)")
++cpp_quote("typedef unsigned int URI_CREATE_FLAGS;")
++cpp_quote("#endif")
+ #pragma midl_echo("STDAPI CreateUri(_In_ LPCWSTR pwzURI,")
+-#pragma midl_echo("                 _In_ DWORD dwFlags,")
++#pragma midl_echo("                 _In_ _Win32_AssociatedEnum_(URI_CREATE_FLAGS) DWORD dwFlags,")
+ #pragma midl_echo("                 _Reserved_ DWORD_PTR dwReserved,   // must be 0")
+ #pragma midl_echo("                 _Outptr_ IUri** ppURI);")
+ #pragma midl_echo("")
+@@ -1650,6 +1657,7 @@
+ #pragma midl_echo("#define Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS 0x00008000    // Don't percent-encode characters that are forbidden by the RFC.")
+ #pragma midl_echo("#define Uri_CREATE_NORMALIZE_INTL_CHARACTERS      0x00010000    // Percent encode all extended unicode charcters, then decode all percent encoded extended unicode characters (except those identified as dangerous)")
+ #pragma midl_echo("#define Uri_CREATE_CANONICALIZE_ABSOLUTE          0x00020000    // Generate a fully UTF-8 encoded value for absoluteUri")
++cpp_quote("_Win32_FlagsEnum_(URI_CREATE_FLAGS, unsigned int, Uri_CREATE_ALLOW_RELATIVE, Uri_CREATE_ALLOW_IMPLICIT_WILDCARD_SCHEME, Uri_CREATE_ALLOW_IMPLICIT_FILE_SCHEME, Uri_CREATE_NOFRAG, Uri_CREATE_NO_CANONICALIZE, Uri_CREATE_CANONICALIZE, Uri_CREATE_FILE_USE_DOS_PATH, Uri_CREATE_DECODE_EXTRA_INFO, Uri_CREATE_NO_DECODE_EXTRA_INFO, Uri_CREATE_CRACK_UNKNOWN_SCHEMES, Uri_CREATE_NO_CRACK_UNKNOWN_SCHEMES, Uri_CREATE_PRE_PROCESS_HTML_URI, Uri_CREATE_NO_PRE_PROCESS_HTML_URI, Uri_CREATE_IE_SETTINGS, Uri_CREATE_NO_IE_SETTINGS, Uri_CREATE_NO_ENCODE_FORBIDDEN_CHARACTERS, Uri_CREATE_NORMALIZE_INTL_CHARACTERS, Uri_CREATE_CANONICALIZE_ABSOLUTE);")
+ 
+ #pragma midl_echo("//The following flags may be passed in through the dwFlags ")
+ #pragma midl_echo("//parameter of the IUri::GetPropertyBSTR or IUri::GetPropertyLength functions.")

@@ -1,3 +1,4 @@
+diff --git a/um/textserv.h b/um/textserv.h
 --- a/um/textserv.h
 +++ b/um/textserv.h
 @@ -16,6 +16,7 @@
@@ -62,6 +63,15 @@
  	
  	//@cmember Get mouse capture
  	virtual void		TxSetCapture(BOOL fCapture) = 0;
+@@ -405,7 +406,7 @@
+ 	virtual HRESULT		TxGetParaFormat(const PARAFORMAT **ppPF) = 0;
+ 
+ 	//@cmember Get the background color for the window
+-	virtual COLORREF	TxGetSysColor(int nIndex) = 0;
++	virtual COLORREF	TxGetSysColor(_Win32_AssociatedEnum_(SYS_COLOR_INDEX) int nIndex) = 0;
+ 
+ 	//@cmember Get the background (either opaque or transparent)
+ 	virtual HRESULT		TxGetBackStyle(TXTBACKSTYLE *pstyle) = 0;
 @@ -457,6 +458,9 @@
   *
   *	@base	public | IUnknown 

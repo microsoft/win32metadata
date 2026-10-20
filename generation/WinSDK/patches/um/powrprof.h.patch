@@ -1,5 +1,5 @@
 diff --git a/um/powrprof.h b/um/powrprof.h
-index 7d68d141..27a94582 100644
+index 7d68d141..dce62d52 100644
 --- a/um/powrprof.h
 +++ b/um/powrprof.h
 @@ -15,6 +15,7 @@
@@ -144,7 +144,15 @@ index 7d68d141..27a94582 100644
  STDAPI_(BOOLEAN)
  WriteProcessorPwrScheme(
      _In_ UINT uiID,
-@@ -409,6 +441,7 @@ typedef struct _DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
+@@ -390,6 +422,7 @@ typedef enum _POWER_DATA_ACCESSOR {
+ //
+ 
+ #define DEVICE_NOTIFY_CALLBACK 2
++_Win32_FlagsEnum_(REGISTER_NOTIFICATION_FLAGS, unsigned int, DEVICE_NOTIFY_CALLBACK);
+ 
+ typedef
+ ULONG
+@@ -409,6 +442,7 @@ typedef struct _DEVICE_NOTIFY_SUBSCRIBE_PARAMETERS {
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -152,7 +160,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(BOOLEAN)
  PowerIsSettingRangeDefined (
      _In_opt_ CONST GUID *SubKeyGuid OPTIONAL,
-@@ -418,16 +451,20 @@ PowerIsSettingRangeDefined (
+@@ -418,16 +452,20 @@ PowerIsSettingRangeDefined (
  
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -174,7 +182,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerSettingAccessCheck (
      _In_ POWER_DATA_ACCESSOR AccessFlags,
-@@ -467,6 +504,8 @@ PowerSetUserConfiguredDCPowerMode(
+@@ -467,6 +505,8 @@ PowerSetUserConfiguredDCPowerMode(
  // Read functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -183,7 +191,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadACValueIndex (
      _In_opt_ HKEY RootPowerKey,
-@@ -478,6 +517,7 @@ PowerReadACValueIndex (
+@@ -478,6 +518,7 @@ PowerReadACValueIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -191,7 +199,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadDCValueIndex (
      _In_opt_ HKEY RootPowerKey,
-@@ -489,6 +529,8 @@ PowerReadDCValueIndex (
+@@ -489,6 +530,8 @@ PowerReadDCValueIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -200,7 +208,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -501,6 +543,8 @@ PowerReadFriendlyName (
+@@ -501,6 +544,8 @@ PowerReadFriendlyName (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -209,7 +217,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -513,6 +557,8 @@ PowerReadDescription (
+@@ -513,6 +558,8 @@ PowerReadDescription (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -218,7 +226,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadPossibleValue (
      _In_opt_ HKEY RootPowerKey,
-@@ -526,6 +572,8 @@ PowerReadPossibleValue (
+@@ -526,6 +573,8 @@ PowerReadPossibleValue (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -227,7 +235,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadPossibleFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -538,6 +586,8 @@ PowerReadPossibleFriendlyName (
+@@ -538,6 +587,8 @@ PowerReadPossibleFriendlyName (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -236,7 +244,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadPossibleDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -550,6 +600,8 @@ PowerReadPossibleDescription (
+@@ -550,6 +601,8 @@ PowerReadPossibleDescription (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -245,7 +253,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadValueMin (
      _In_opt_ HKEY RootPowerKey,
-@@ -560,6 +612,8 @@ PowerReadValueMin (
+@@ -560,6 +613,8 @@ PowerReadValueMin (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -254,7 +262,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadValueMax (
      _In_opt_ HKEY RootPowerKey,
-@@ -570,6 +624,8 @@ PowerReadValueMax (
+@@ -570,6 +625,8 @@ PowerReadValueMax (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -263,7 +271,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadValueIncrement (
      _In_opt_ HKEY RootPowerKey,
-@@ -580,6 +636,8 @@ PowerReadValueIncrement (
+@@ -580,6 +637,8 @@ PowerReadValueIncrement (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -272,7 +280,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadValueUnitsSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -591,6 +649,7 @@ PowerReadValueUnitsSpecifier (
+@@ -591,6 +650,7 @@ PowerReadValueUnitsSpecifier (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -280,7 +288,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadACDefaultIndex (
      _In_opt_ HKEY RootPowerKey,
-@@ -602,6 +661,7 @@ PowerReadACDefaultIndex (
+@@ -602,6 +662,7 @@ PowerReadACDefaultIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -288,7 +296,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadDCDefaultIndex (
      _In_opt_ HKEY RootPowerKey,
-@@ -613,6 +673,8 @@ PowerReadDCDefaultIndex (
+@@ -613,6 +674,8 @@ PowerReadDCDefaultIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -297,7 +305,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadIconResourceSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -625,6 +687,7 @@ PowerReadIconResourceSpecifier (
+@@ -625,6 +688,7 @@ PowerReadIconResourceSpecifier (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -305,7 +313,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReadSettingAttributes (
      _In_opt_ CONST GUID *SubGroupGuid,
-@@ -636,6 +699,8 @@ PowerReadSettingAttributes (
+@@ -636,6 +700,8 @@ PowerReadSettingAttributes (
  // Write functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -314,7 +322,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -648,6 +713,8 @@ PowerWriteFriendlyName (
+@@ -648,6 +714,8 @@ PowerWriteFriendlyName (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -323,7 +331,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -660,6 +727,8 @@ PowerWriteDescription (
+@@ -660,6 +728,8 @@ PowerWriteDescription (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -332,7 +340,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWritePossibleValue (
      _In_opt_ HKEY RootPowerKey,
-@@ -673,6 +742,8 @@ PowerWritePossibleValue (
+@@ -673,6 +743,8 @@ PowerWritePossibleValue (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -341,7 +349,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWritePossibleFriendlyName (
      _In_opt_ HKEY RootPowerKey,
-@@ -685,6 +756,8 @@ PowerWritePossibleFriendlyName (
+@@ -685,6 +757,8 @@ PowerWritePossibleFriendlyName (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -350,7 +358,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWritePossibleDescription (
      _In_opt_ HKEY RootPowerKey,
-@@ -697,6 +770,8 @@ PowerWritePossibleDescription (
+@@ -697,6 +771,8 @@ PowerWritePossibleDescription (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -359,7 +367,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteValueMin (
      _In_opt_ HKEY RootPowerKey,
-@@ -707,6 +782,8 @@ PowerWriteValueMin (
+@@ -707,6 +783,8 @@ PowerWriteValueMin (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -368,7 +376,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteValueMax (
      _In_opt_ HKEY RootPowerKey,
-@@ -717,6 +794,8 @@ PowerWriteValueMax (
+@@ -717,6 +795,8 @@ PowerWriteValueMax (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -377,7 +385,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteValueIncrement (
      _In_opt_ HKEY RootPowerKey,
-@@ -727,6 +806,8 @@ PowerWriteValueIncrement (
+@@ -727,6 +807,8 @@ PowerWriteValueIncrement (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -386,7 +394,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteValueUnitsSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -738,6 +819,7 @@ PowerWriteValueUnitsSpecifier (
+@@ -738,6 +820,7 @@ PowerWriteValueUnitsSpecifier (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -394,7 +402,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteACDefaultIndex (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -749,6 +831,7 @@ PowerWriteACDefaultIndex (
+@@ -749,6 +832,7 @@ PowerWriteACDefaultIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -402,7 +410,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteDCDefaultIndex (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -760,6 +843,8 @@ PowerWriteDCDefaultIndex (
+@@ -760,6 +844,8 @@ PowerWriteDCDefaultIndex (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -411,7 +419,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteIconResourceSpecifier (
      _In_opt_ HKEY RootPowerKey,
-@@ -772,6 +857,8 @@ PowerWriteIconResourceSpecifier (
+@@ -772,6 +858,8 @@ PowerWriteIconResourceSpecifier (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -420,7 +428,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerWriteSettingAttributes (
      _In_opt_ CONST GUID *SubGroupGuid,
-@@ -781,6 +868,8 @@ PowerWriteSettingAttributes (
+@@ -781,6 +869,8 @@ PowerWriteSettingAttributes (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -429,7 +437,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerDuplicateScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -790,6 +879,8 @@ PowerDuplicateScheme (
+@@ -790,6 +880,8 @@ PowerDuplicateScheme (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -438,7 +446,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerImportPowerScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -799,6 +890,8 @@ PowerImportPowerScheme (
+@@ -799,6 +891,8 @@ PowerImportPowerScheme (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -447,7 +455,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerDeleteScheme (
      _In_opt_ HKEY RootPowerKey,
-@@ -807,6 +900,8 @@ PowerDeleteScheme (
+@@ -807,6 +901,8 @@ PowerDeleteScheme (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -456,7 +464,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerRemovePowerSetting (
     _In_ CONST GUID *PowerSettingSubKeyGuid,
-@@ -815,6 +910,8 @@ PowerRemovePowerSetting (
+@@ -815,6 +911,8 @@ PowerRemovePowerSetting (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -465,7 +473,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerCreateSetting (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -824,6 +921,8 @@ PowerCreateSetting (
+@@ -824,6 +922,8 @@ PowerCreateSetting (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -474,7 +482,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerCreatePossibleSetting (
      _In_opt_ HKEY RootSystemPowerKey,
-@@ -837,6 +936,8 @@ PowerCreatePossibleSetting (
+@@ -837,6 +937,8 @@ PowerCreatePossibleSetting (
  // Enumerate Functions.
  //
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -483,7 +491,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerEnumerate (
      _In_opt_ HKEY RootPowerKey,
-@@ -868,6 +969,8 @@ PowerOpenSystemPowerKey (
+@@ -868,6 +970,8 @@ PowerOpenSystemPowerKey (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -492,7 +500,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerCanRestoreIndividualDefaultPowerScheme (
      _In_ CONST GUID *SchemeGuid
-@@ -875,6 +978,8 @@ PowerCanRestoreIndividualDefaultPowerScheme (
+@@ -875,6 +979,8 @@ PowerCanRestoreIndividualDefaultPowerScheme (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -501,7 +509,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerRestoreIndividualDefaultPowerScheme (
      _In_ CONST GUID *SchemeGuid
-@@ -882,6 +987,8 @@ PowerRestoreIndividualDefaultPowerScheme (
+@@ -882,6 +988,8 @@ PowerRestoreIndividualDefaultPowerScheme (
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -510,7 +518,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerRestoreDefaultPowerSchemes(
      VOID
-@@ -889,6 +996,7 @@ PowerRestoreDefaultPowerSchemes(
+@@ -889,6 +997,7 @@ PowerRestoreDefaultPowerSchemes(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -518,7 +526,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  PowerReplaceDefaultPowerSchemes(
      VOID
-@@ -896,6 +1004,7 @@ PowerReplaceDefaultPowerSchemes(
+@@ -896,6 +1005,7 @@ PowerReplaceDefaultPowerSchemes(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -526,7 +534,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(POWER_PLATFORM_ROLE)
  PowerDeterminePlatformRole(
      VOID
-@@ -1042,10 +1151,25 @@ PowerDeterminePlatformRole(
+@@ -1042,10 +1152,25 @@ PowerDeterminePlatformRole(
  #define PDCAP_S4_SUPPORTED              0x01000000
  #define PDCAP_S5_SUPPORTED              0x02000000
  
@@ -552,7 +560,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(BOOLEAN)
  DevicePowerEnumDevices(
      _In_ ULONG  QueryIndex,
-@@ -1057,6 +1181,8 @@ DevicePowerEnumDevices(
+@@ -1057,6 +1182,8 @@ DevicePowerEnumDevices(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WS03)
@@ -561,7 +569,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(DWORD)
  DevicePowerSetDeviceState(
      _In_ LPCWSTR DeviceDescription,
-@@ -1066,6 +1192,7 @@ DevicePowerSetDeviceState(
+@@ -1066,6 +1193,7 @@ DevicePowerSetDeviceState(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WS03)
@@ -569,7 +577,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(BOOLEAN)
  DevicePowerOpen(
      _In_opt_ ULONG DebugMask
-@@ -1073,6 +1200,7 @@ DevicePowerOpen(
+@@ -1073,6 +1201,7 @@ DevicePowerOpen(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WS03)
@@ -577,7 +585,7 @@ index 7d68d141..27a94582 100644
  STDAPI_(BOOLEAN)
  DevicePowerClose(
      VOID
-@@ -1095,12 +1223,15 @@ typedef struct _THERMAL_EVENT {
+@@ -1095,12 +1224,15 @@ typedef struct _THERMAL_EVENT {
  } THERMAL_EVENT, *PTHERMAL_EVENT; 
  
  #if (NTDDI_VERSION >= NTDDI_WINBLUE)

@@ -1,5 +1,5 @@
 diff --git a/um/ws2spi.h b/um/ws2spi.h
-index e1d43ea9..917dea7b 100644
+index e1d43ea9..d32b809c 100644
 --- a/um/ws2spi.h
 +++ b/um/ws2spi.h
 @@ -19,6 +19,7 @@
@@ -184,7 +184,7 @@ index e1d43ea9..917dea7b 100644
      _Out_ LPINT lpErrno
      );
  
-+_Win32_SupportedOS_Windows2000_
++_Win32_RAIIFree_(WSACloseEvent, 0) _Win32_SupportedOS_Windows2000_
  WSAEVENT
  WSPAPI
  WPUCreateEvent(

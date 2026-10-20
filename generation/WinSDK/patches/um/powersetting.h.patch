@@ -1,7 +1,7 @@
 diff --git a/um/powersetting.h b/um/powersetting.h
 --- a/um/powersetting.h
 +++ b/um/powersetting.h
-@@ -40,6 +40,8 @@
+@@ -40,6 +40,8 @@ typedef PVOID HPOWERNOTIFY, *PHPOWERNOTIFY;
  #endif // _HPOWERNOTIFY_DEF_
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -10,7 +10,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerReadACValue(
-@@ -55,6 +57,8 @@
+@@ -55,6 +57,8 @@ PowerReadACValue(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -19,7 +19,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerReadDCValue(
-@@ -70,6 +74,8 @@
+@@ -70,6 +74,8 @@ PowerReadDCValue(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -28,7 +28,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerWriteACValueIndex(
-@@ -83,6 +89,7 @@
+@@ -83,6 +89,7 @@ PowerWriteACValueIndex(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -36,7 +36,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerWriteDCValueIndex(
-@@ -96,6 +103,8 @@
+@@ -96,6 +103,8 @@ PowerWriteDCValueIndex(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -45,7 +45,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerGetActiveScheme(
-@@ -106,6 +115,8 @@
+@@ -106,6 +115,8 @@ PowerGetActiveScheme(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -54,7 +54,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerSetActiveScheme(
-@@ -116,6 +127,8 @@
+@@ -116,6 +127,8 @@ PowerSetActiveScheme(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -63,7 +63,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerSettingRegisterNotification(
-@@ -128,6 +141,8 @@
+@@ -128,12 +141,19 @@ PowerSettingRegisterNotification(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -72,7 +72,18 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  DWORD
  WINAPI
  PowerSettingUnregisterNotification(
-@@ -153,6 +168,7 @@
+     _Inout_ HPOWERNOTIFY RegistrationHandle
+     );
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(PowerSettingRegisterNotification, RegistrationHandle,
++    _Win32_RAIIFree_(PowerSettingUnregisterNotification, -1, 0));
++#endif
++
+ #endif
+ 
+ #if NTDDI_VERSION >= NTDDI_WIN10_RS5
+@@ -153,6 +173,7 @@ typedef enum EFFECTIVE_POWER_MODE {
  #define EFFECTIVE_POWER_MODE_V1 (0x00000001)
  #define EFFECTIVE_POWER_MODE_V2 (0x00000002)
  
@@ -80,7 +91,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  typedef _Function_class_(EFFECTIVE_POWER_MODE_CALLBACK)
  VOID
  WINAPI
-@@ -164,6 +180,7 @@
+@@ -164,6 +185,7 @@ EFFECTIVE_POWER_MODE_CALLBACK (
  
  #if NTDDI_VERSION >= NTDDI_WIN10_RS5
  _Must_inspect_result_
@@ -88,7 +99,7 @@ diff --git a/um/powersetting.h b/um/powersetting.h
  HRESULT
  WINAPI
  PowerRegisterForEffectivePowerModeNotifications(
-@@ -176,6 +193,7 @@
+@@ -176,6 +198,7 @@ PowerRegisterForEffectivePowerModeNotifications(
  #endif
  
  #if NTDDI_VERSION >= NTDDI_WIN10_RS5

@@ -4317,6 +4317,66 @@
       "sourceSha256": "8183F90C31E7DBC184E835C5525AB2A385A98178019F5CAB20FFE4690802709C",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\winsplp.h",
       "sdkSha256": "8183F90C31E7DBC184E835C5525AB2A385A98178019F5CAB20FFE4690802709C"
+    },
+    {
+      "path": "shared\\windnsdef.h",
+      "sourceSha256": "905489CCA8B6B1B3A796BD715FDBAFA2EEF251AA651B848E88427E62E75FFA7A",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\windnsdef.h",
+      "sdkSha256": "905489CCA8B6B1B3A796BD715FDBAFA2EEF251AA651B848E88427E62E75FFA7A"
+    },
+    {
+      "path": "shared\\ws2def.h",
+      "sourceSha256": "57C53A7FAA53BB1ACFEC935EB8E562B1F2D51069A7F30AC3DFA2E046DD6C304F",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ws2def.h",
+      "sdkSha256": "57C53A7FAA53BB1ACFEC935EB8E562B1F2D51069A7F30AC3DFA2E046DD6C304F"
+    },
+    {
+      "path": "um\\propsys.idl",
+      "sourceSha256": "1D53E43BDC74CD3884B637B8BA30E2FB6D87F9557904A1AF69C46F75182A41E2",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propsys.idl",
+      "sdkSha256": "1D53E43BDC74CD3884B637B8BA30E2FB6D87F9557904A1AF69C46F75182A41E2"
+    },
+    {
+      "path": "um\\msports.h",
+      "sourceSha256": "8CA9C12EB5BA2C2EA37A634735F28C1C293B3E543425D64C97EE7C803215891F",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\msports.h",
+      "sdkSha256": "8CA9C12EB5BA2C2EA37A634735F28C1C293B3E543425D64C97EE7C803215891F"
+    },
+    {
+      "path": "um\\gdiplusheaders.h",
+      "sourceSha256": "C47DA15209BC32D900A6DAED0DF69345BADA74F1802039845264B6F5F42AEF93",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\gdiplusheaders.h",
+      "sdkSha256": "C47DA15209BC32D900A6DAED0DF69345BADA74F1802039845264B6F5F42AEF93"
+    },
+    {
+      "path": "winrt\\wrl\\wrappers\\corewrappers.h",
+      "sourceSha256": "2DE38D91C122646F0E2B256184B0D55BB8D9453735BD8D3A0E8F91696DF0CB6B",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\wrl\\wrappers\\corewrappers.h",
+      "sdkSha256": "2DE38D91C122646F0E2B256184B0D55BB8D9453735BD8D3A0E8F91696DF0CB6B"
+    },
+    {
+      "path": "shared\\d3d9.h",
+      "sourceSha256": "DF78083EE8E75E6D3851422F6AA8ABF6213E349F22BF27E7F161E98E8D90DF04",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\d3d9.h",
+      "sdkSha256": "DF78083EE8E75E6D3851422F6AA8ABF6213E349F22BF27E7F161E98E8D90DF04"
+    },
+    {
+      "path": "shared\\devioctl.h",
+      "sourceSha256": "53517C9E0E43807F3E638C7D8DB6179EE4EBB04BD860F3F0D16A8DD4585C27F8",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\devioctl.h",
+      "sdkSha256": "53517C9E0E43807F3E638C7D8DB6179EE4EBB04BD860F3F0D16A8DD4585C27F8"
+    },
+    {
+      "path": "um\\reconcil.h",
+      "sourceSha256": "7F8CB9199D1E00378A0B354F4663FFB0D027B83FF2D847E4E0F995A422470085",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\reconcil.h",
+      "sdkSha256": "7F8CB9199D1E00378A0B354F4663FFB0D027B83FF2D847E4E0F995A422470085"
+    },
+    {
+      "path": "um\\ieobj.h",
+      "sourceSha256": "0C039613D87488B9B79AE9529DEFDF9BC1934F37C8751CBAA343B11DEDD8E81C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\ieobj.h",
+      "sdkSha256": "0C039613D87488B9B79AE9529DEFDF9BC1934F37C8751CBAA343B11DEDD8E81C"
     }
   ],
   "midl": {
@@ -6632,10 +6692,6 @@
         "sdkSha256": "880848DC653C5E72528A2B0DFC512EF595EB817A58B472CF25723B63C552BBE4"
       },
       {
-        "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
-      },
-      {
         "path": "winrt\\windows.applicationmodel.resources.core.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\winrt\\windows.applicationmodel.resources.core.idl",
         "sdkSha256": "13FBD39B914B8FD7488AFF31EA6D03E736642E7CE32CD5D8B5FA24E32A9B502A"
@@ -6644,6 +6700,25 @@
         "path": "um\\wsdxml.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\wsdxml.idl",
         "sdkSha256": "C8DC076719D7CD2BE8F2BF1B49ED32DE25F238244076304BBFCFE800F2975717"
+      },
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
+      },
+      {
+        "path": "um\\txlogpub.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
+        "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
+      },
+      {
+        "path": "um\\cmdtre.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\cmdtre.idl",
+        "sdkSha256": "3D2B99BC939FFCAAA4411569DDF27D2162ECC68E9C97DD12D40179AA87FC09A2"
+      },
+      {
+        "path": "um\\qrybas.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\qrybas.idl",
+        "sdkSha256": "DA5AB6BE0B59FDFE045FD1D73322804C0BD48E3F0EC2F338BD268EAB3D77692B"
       }
     ],
     "outputs": [
@@ -8579,6 +8654,19 @@
     "um\\opcdigitalsignature.idl.patch",
     "um\\opcobjectmodel.idl.patch",
     "um\\opcparturi.idl.patch",
-    "um\\servprov.idl.patch"
+    "um\\servprov.idl.patch",
+    "shared\\windnsdef.h.patch",
+    "shared\\ws2def.h.patch",
+    "um\\dbs.idl.patch",
+    "um\\msports.h.patch",
+    "um\\gdiplusheaders.h.patch",
+    "winrt\\wrl\\wrappers\\corewrappers.h.patch",
+    "shared\\d3d9.h.patch",
+    "shared\\devioctl.h.patch",
+    "um\\reconcil.h.patch",
+    "um\\txlogpub.idl.patch",
+    "um\\cmdtre.idl.patch",
+    "um\\qrybas.idl.patch",
+    "um\\ieobj.h.patch"
   ]
 }

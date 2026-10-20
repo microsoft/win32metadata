@@ -293,8 +293,9 @@ diff --git a/um/propvarutil.h b/um/propvarutil.h
  typedef int PROPVAR_CHANGE_FLAGS;
  
  // Coersions
+-PSSTDAPI PropVariantChangeType(_Out_ PROPVARIANT *ppropvarDest, _In_ REFPROPVARIANT propvarSrc, _In_ PROPVAR_CHANGE_FLAGS flags, _In_ VARTYPE vt);
 +_Win32_SupportedOS_WindowsXP_
- PSSTDAPI PropVariantChangeType(_Out_ PROPVARIANT *ppropvarDest, _In_ REFPROPVARIANT propvarSrc, _In_ PROPVAR_CHANGE_FLAGS flags, _In_ VARTYPE vt);
++PSSTDAPI PropVariantChangeType(_Out_ PROPVARIANT *ppropvarDest, _In_ REFPROPVARIANT propvarSrc, _In_ PROPVAR_CHANGE_FLAGS flags, _Win32_AssociatedEnum_(enum VARENUM) _In_ VARTYPE vt);
  
  // Conversions
 +_Win32_SupportedOS_WindowsVista_

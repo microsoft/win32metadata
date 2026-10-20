@@ -93,14 +93,12 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IURLSearchHook2, IURLSearchHook, "5ee44da4-6d32-46e3-86bc-07540dedd0e0")
  {
      STDMETHOD(TranslateWithSearchContext)(THIS_ _Out_writes_(cchBufferSize) PWSTR pwszSearchURL, DWORD cchBufferSize, _In_opt_ ISearchContext * pSearchContext) PURE;
-@@ -650,27 +676,45 @@
+@@ -650,27 +676,43 @@
  #define FCIDM_MENU_EXPLORE          (FCIDM_GLOBALFIRST+0x0150)
  #define FCIDM_MENU_FAVORITES        (FCIDM_GLOBALFIRST+0x0170)
  
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_SupportedOS_WindowsXP_
  SHSTDAPI_(PIDLIST_RELATIVE)     ILClone(_In_ PCUIDLIST_RELATIVE pidl);
-+_Win32_SupportedOS_WindowsXP_
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI_(PITEMID_CHILD)        ILCloneFirst(_In_ PCUIDLIST_RELATIVE pidl);
 +_Win32_SupportedOS_WindowsXP_
@@ -140,7 +138,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(PIDLIST_ABSOLUTE)     ILCreateFromPath(_In_ PCTSTR pszPath);
  #else
  #ifdef UNICODE
-@@ -680,6 +724,7 @@
+@@ -680,6 +722,7 @@
  #endif  // !UNICODE
  #endif  // NO_WRAPPERS_FOR_ILCREATEFROMPATH
  
@@ -148,7 +146,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHILCreateFromPath(_In_ PCWSTR pszPath, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _Inout_opt_ DWORD *rgfInOut);
  
  
-@@ -689,28 +734,40 @@
+@@ -689,28 +732,40 @@
  
  } // extern "C"
  
@@ -189,7 +187,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  inline PCUIDLIST_RELATIVE       ILFindChild(_In_ PCIDLIST_ABSOLUTE pidlParent, _In_ PCIDLIST_ABSOLUTE pidlChild) { return const_cast<PCUIDLIST_RELATIVE>(ILFindChild(const_cast<PIDLIST_ABSOLUTE>(pidlParent), pidlChild)); }
  #endif // defined(STRICT_TYPED_ITEMIDS) && defined(__cplusplus)
  
-@@ -733,6 +790,7 @@
+@@ -733,6 +788,7 @@
  
  #endif // defined(STRICT_TYPED_ITEMIDS) && defined(__cplusplus)
  
@@ -197,12 +195,13 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(PIDLIST_RELATIVE) ILAppendID(_In_opt_ PIDLIST_RELATIVE pidl, _In_ LPCSHITEMID pmkid, BOOL fAppend);
  
  
-@@ -748,17 +806,20 @@
+@@ -748,17 +804,20 @@
  
  
  typedef int GPFIDL_FLAGS;
+-SHSTDAPI_(BOOL) SHGetPathFromIDListEx(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(cchPath) PWSTR pszPath, DWORD cchPath, GPFIDL_FLAGS uOpts);
 +_Win32_SupportedOS_WindowsVista_
- SHSTDAPI_(BOOL) SHGetPathFromIDListEx(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(cchPath) PWSTR pszPath, DWORD cchPath, GPFIDL_FLAGS uOpts);
++SHSTDAPI_(BOOL) SHGetPathFromIDListEx(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(cchPath) PWSTR pszPath, DWORD cchPath, _Win32_AssociatedEnum_(GPFIDL_FLAGS) GPFIDL_FLAGS uOpts);
  #endif // NTDDI_VISTA
  //
  // SHGetPathFromIDListW is the old version of SHGetPathFromIDListEx that assumes the size of the buffer (MAX_PATH).
@@ -218,7 +217,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(BOOL) SHGetPathFromIDListW(_In_ PCIDLIST_ABSOLUTE pidl, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetPathFromIDList  SHGetPathFromIDListW
-@@ -766,8 +827,11 @@
+@@ -766,8 +825,11 @@
  #define SHGetPathFromIDList  SHGetPathFromIDListA
  #endif // !UNICODE
  
@@ -230,7 +229,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(int) SHCreateDirectoryExW(_In_opt_ HWND hwnd, _In_ LPCWSTR pszPath, _In_opt_ const SECURITY_ATTRIBUTES *psa);
  #ifdef UNICODE
  #define SHCreateDirectoryEx  SHCreateDirectoryExW
-@@ -782,10 +846,12 @@
+@@ -782,10 +844,12 @@
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  
@@ -243,7 +242,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHCreateShellItem(_In_opt_ PCIDLIST_ABSOLUTE pidlParent, _In_opt_ IShellFolder *psfParent, _In_ PCUITEMID_CHILD pidl, _Outptr_ IShellItem **ppsi);
  
  #endif
-@@ -891,12 +957,16 @@
+@@ -891,12 +955,16 @@
  #define CSIDL_FLAG_MASK                 0xFF00        // mask for all possible flag values
  
  _Check_return_
@@ -260,7 +259,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(BOOL) SHGetSpecialFolderPathW(_Reserved_ HWND hwnd, _Out_writes_(MAX_PATH) LPWSTR pszPath, _In_ int csidl, _In_ BOOL fCreate);
  #ifdef UNICODE
  #define SHGetSpecialFolderPath  SHGetSpecialFolderPathW
-@@ -905,6 +975,7 @@
+@@ -905,6 +973,7 @@
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -268,7 +267,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(void) SHFlushSFCache(void);
  
  typedef enum {
-@@ -912,25 +983,32 @@
+@@ -912,25 +981,32 @@
      SHGFP_TYPE_DEFAULT  = 1,   // default value, may not exist
  } SHGFP_TYPE;
  
@@ -301,7 +300,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  STDAPI SHGetFolderPathAndSubDirW(_Reserved_ HWND hwnd, _In_ int csidl, _In_opt_ HANDLE hToken, _In_ DWORD dwFlags, _In_opt_ LPCWSTR pszSubDir, _Out_writes_(MAX_PATH) LPWSTR pszPath);
  #ifdef UNICODE
  #define SHGetFolderPathAndSubDir  SHGetFolderPathAndSubDirW
-@@ -1033,30 +1111,34 @@
+@@ -1033,30 +1109,34 @@
  
  DEFINE_ENUM_FLAG_OPERATORS(KNOWN_FOLDER_FLAG)
  
@@ -339,7 +338,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  #endif // NTDDI_WIN7
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
-@@ -1114,6 +1196,7 @@
+@@ -1114,6 +1194,7 @@
  #include <poppack.h>        /* Return to byte packing */
  
  // Gets/Sets the Folder Custom Settings for pszPath based on dwReadWrite. dwReadWrite can be FCS_READ/FCS_WRITE/FCS_FORCEWRITE
@@ -347,7 +346,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHGetSetFolderCustomSettings(_Inout_ LPSHFOLDERCUSTOMSETTINGS pfcs, _In_ PCWSTR pszPath, DWORD dwReadWrite);
  
  #endif //NTDDI_VISTA
-@@ -1207,7 +1290,9 @@
+@@ -1207,7 +1288,9 @@
  #define BFFM_SETOKTEXT          (WM_USER + 105) // Unicode only
  #define BFFM_SETEXPANDED        (WM_USER + 106) // Unicode only
  
@@ -357,7 +356,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(PIDLIST_ABSOLUTE) SHBrowseForFolderW(_In_ LPBROWSEINFOW lpbi);
  
  #ifdef UNICODE
-@@ -1233,6 +1318,7 @@
+@@ -1233,6 +1316,7 @@
  //-------------------------------------------------------------------------
  
  _Check_return_
@@ -365,7 +364,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHLoadInProc(_In_ REFCLSID rclsid);
  
  
-@@ -1272,6 +1358,7 @@
+@@ -1272,6 +1356,7 @@
  //  CoCreateInstance(CLSID_Desktop, NULL, CLSCTX_INPROC, IID_PPV_ARGS(&pshf));
  //
  _Check_return_
@@ -373,7 +372,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHGetDesktopFolder(_Outptr_ IShellFolder **ppshf);
  
  // this interface is deprecated, data sources should
-@@ -1280,6 +1367,9 @@
+@@ -1280,6 +1365,9 @@
  #undef  INTERFACE
  #define INTERFACE   IShellDetails
  
@@ -383,7 +382,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IShellDetails, IUnknown, "000214EC-0000-0000-c000-000000000046")
  {
      STDMETHOD(GetDetailsOf)(THIS_ _In_opt_ PCUITEMID_CHILD pidl, UINT iColumn, _Out_ SHELLDETAILS *pDetails) PURE;
-@@ -1302,6 +1392,9 @@
+@@ -1302,6 +1390,9 @@
  #undef INTERFACE
  #define INTERFACE IObjMgr
  
@@ -393,7 +392,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IObjMgr, IUnknown, "00BB2761-6A77-11D0-A535-00C04FD7D062")
  {
      STDMETHOD(Append) (THIS_ _In_ IUnknown *punk) PURE;
-@@ -1326,6 +1419,9 @@
+@@ -1326,6 +1417,9 @@
  #undef INTERFACE
  #define INTERFACE IACList
  
@@ -403,7 +402,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IACList, IUnknown, "77A130B0-94FD-11D0-A544-00C04FD7d062")
  {
      STDMETHOD(Expand) (THIS_ _In_ PCWSTR pszExpand) PURE;
-@@ -1355,6 +1451,9 @@
+@@ -1355,6 +1449,9 @@
  #endif
  } AUTOCOMPLETELISTOPTIONS;
  
@@ -413,7 +412,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IACList2, IACList, "470141a0-5186-11d2-bbb6-0060977b464c")
  {
      // *** IACList2 specific methods ***
-@@ -1434,6 +1533,9 @@
+@@ -1434,6 +1531,9 @@
  #undef  INTERFACE
  #define INTERFACE   IProgressDialog
  
@@ -423,7 +422,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IProgressDialog, IUnknown, "EBBC7C04-315E-11d2-B62F-006097DF5BD4")
  {
      STDMETHOD(StartProgressDialog)(THIS_ _In_opt_ HWND hwndParent, _In_opt_ IUnknown * punkEnableModless, DWORD dwFlags, _Reserved_ LPCVOID pvResevered) PURE;
-@@ -1487,6 +1589,9 @@
+@@ -1487,6 +1587,9 @@
  #undef  INTERFACE
  #define INTERFACE   IDockingWindowSite
  
@@ -433,15 +432,27 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IDockingWindowSite, IOleWindow, "2a342fc2-7b26-11d0-8ca9-00a0c92dbfe8")
  {
      STDMETHOD(GetBorderDW) (THIS_ _In_ IUnknown* punkObj, _Out_ RECT *prcBorder) PURE;
-@@ -2057,6 +2162,7 @@
+@@ -1725,6 +1828,9 @@
+ #undef INTERFACE
+ #define INTERFACE IActiveDesktop
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_Windows2000_ struct IActiveDesktop IActiveDesktop;
++#endif
+ DECLARE_INTERFACE_IID_(IActiveDesktop, IUnknown, "f490eb00-1240-11d1-9888-006097deacf9")
+ {
+     // IUnknown methods
+@@ -2057,7 +2163,8 @@
  //
  //  APIs
  //
+-SHSTDAPI_(void) SHChangeNotify(LONG wEventId, UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(void) SHChangeNotify(LONG wEventId, UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
++SHSTDAPI_(void) SHChangeNotify(_Win32_AssociatedEnum_(SHCNE_ID) LONG wEventId, _Win32_AssociatedEnum_(SHCNF_FLAGS) UINT uFlags, _In_opt_ LPCVOID dwItem1, _In_opt_ LPCVOID dwItem2);
  
  //
-@@ -2065,6 +2171,9 @@
+ // IShellChangeNotify
+@@ -2065,6 +2172,9 @@
  #undef  INTERFACE
  #define INTERFACE  IShellChangeNotify
  
@@ -451,7 +462,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IShellChangeNotify, IUnknown, "D82BE2B1-5764-11D0-A96E-00C04FD705A2")
  {
      STDMETHOD(OnChange) (THIS_ LONG lEvent, _In_opt_ PCIDLIST_ABSOLUTE pidl1, _In_opt_ PCIDLIST_ABSOLUTE pidl2) PURE;
-@@ -2084,6 +2193,9 @@
+@@ -2084,9 +2194,12 @@
  #undef  INTERFACE
  #define INTERFACE  IQueryInfo
  
@@ -460,8 +471,12 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
 +#endif
  DECLARE_INTERFACE_IID_(IQueryInfo, IUnknown, "00021500-0000-0000-c000-000000000046")
  {
-     STDMETHOD(GetInfoTip)(THIS_ DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
-@@ -2152,6 +2264,7 @@
+-    STDMETHOD(GetInfoTip)(THIS_ DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
++    STDMETHOD(GetInfoTip)(THIS_ _Win32_AssociatedEnum_(QITIPF_FLAGS) DWORD dwFlags, _Outptr_ PWSTR *ppwszTip) PURE;
+     STDMETHOD(GetInfoFlags)(THIS_ _Out_ DWORD *pdwFlags) PURE;
+ };
+ 
+@@ -2152,6 +2265,7 @@
  #endif
  
  // The type of the data pointed to by pv is a function of uFlags values that are SHARD_XXX values.  PV can be a PCIDLIST_ABSOLUTE, PCWSTR, PCSTR, SHARDAPPIDINFO, or SHARDAPPIDINFOIDLIST.
@@ -469,7 +484,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(void) SHAddToRecentDocs(UINT uFlags, _In_opt_ LPCVOID pv);
  
  
-@@ -2177,8 +2290,11 @@
+@@ -2177,8 +2291,11 @@
      WCHAR szName[MAX_PATH];
      USHORT cbZero;
  } SHChangeUpdateImageIDList, * LPSHChangeUpdateImageIDList;
@@ -481,17 +496,18 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(void) SHUpdateImageW(_In_ LPCWSTR pszHashItem, int iIndex, UINT uFlags, int iImageIndex);
  #ifdef UNICODE
  #define SHUpdateImage  SHUpdateImageW
-@@ -2187,7 +2303,9 @@
+@@ -2187,7 +2304,9 @@
  #endif // !UNICODE
  #endif /* NTDDI_WIN2K */
  
+-SHSTDAPI_(ULONG) SHChangeNotifyRegister(_In_ HWND hwnd, int fSources, LONG fEvents, UINT wMsg, int cEntries, _In_ const SHChangeNotifyEntry *pshcne);
 +_Win32_SupportedOS_Windows2000_
- SHSTDAPI_(ULONG) SHChangeNotifyRegister(_In_ HWND hwnd, int fSources, LONG fEvents, UINT wMsg, int cEntries, _In_ const SHChangeNotifyEntry *pshcne);
++SHSTDAPI_(ULONG) SHChangeNotifyRegister(_In_ HWND hwnd, _Win32_AssociatedEnum_(SHCNRF_SOURCE) int fSources, LONG fEvents, UINT wMsg, int cEntries, _In_ const SHChangeNotifyEntry *pshcne);
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI_(BOOL) SHChangeNotifyDeregister(ULONG ulID);
  
  typedef enum
-@@ -2196,14 +2314,19 @@
+@@ -2196,14 +2315,19 @@
      SCNRT_DISABLE = 1,
  } SCNRT_STATUS;
  
@@ -512,17 +528,29 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHGetInstanceExplorer(_Outptr_ IUnknown **ppunk);
  
  //
-@@ -2254,7 +2377,9 @@
+@@ -2246,7 +2370,7 @@
+ #include <pshpack8.h>
+ 
+ typedef struct _SHDESCRIPTIONID {
+-    DWORD   dwDescriptionId;
++    _Win32_AssociatedEnum_(SHDID_ID) DWORD   dwDescriptionId;
+     CLSID   clsid;
+ } SHDESCRIPTIONID, *LPSHDESCRIPTIONID;
+ 
+@@ -2254,8 +2378,10 @@
  
  // these delegate to IShellFolder2::GetDetailsEx()
  
+-SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
+-SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++SHSTDAPI SHGetDataFromIDListA(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
++SHSTDAPI SHGetDataFromIDListW(_In_ IShellFolder *psf, _In_ PCUITEMID_CHILD pidl, _Win32_AssociatedEnum_(SHGDFIL_FORMAT) int nFormat, _Out_writes_bytes_(cb) void *pv, int cb);
  #ifdef UNICODE
  #define SHGetDataFromIDList  SHGetDataFromIDListW
-@@ -2274,18 +2399,25 @@
+ #else
+@@ -2274,19 +2400,26 @@
  #define PRF_REQUIREABSOLUTE         0x0010
  #endif
  
@@ -547,11 +575,13 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI CIDLData_CreateFromIDArray(_In_ PCIDLIST_ABSOLUTE pidlFolder, _In_ UINT cidl, _In_reads_opt_(cidl) PCUIDLIST_RELATIVE_ARRAY apidl, _Outptr_ IDataObject **ppdtobj);
 +_Win32_SupportedOS_WindowsXP_
  SHSTDAPI SHCreateStdEnumFmtEtc(_In_ UINT cfmt, _In_reads_(cfmt) const FORMATETC afmt[], _Outptr_ IEnumFORMATETC **ppenumFormatEtc);
+-SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _In_ DWORD dwEffect, _Out_ DWORD *pdwEffect);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _In_ DWORD dwEffect, _Out_ DWORD *pdwEffect);
++SHSTDAPI SHDoDragDrop(_In_opt_ HWND hwnd, _In_ IDataObject *pdata, _In_opt_ IDropSource *pdsrc, _Win32_AssociatedEnum_(DROPEFFECT) _In_ DWORD dwEffect, _Win32_AssociatedEnum_(DROPEFFECT) _Out_ DWORD *pdwEffect);
  // stuff for doing auto scrolling
  #define NUM_POINTS      3
-@@ -2297,12 +2429,19 @@
+ typedef struct {        // asd
+@@ -2297,12 +2430,19 @@
      DWORD dwTimes[NUM_POINTS];
  } AUTO_SCROLL_DATA;
  
@@ -571,7 +601,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(BOOL) DAD_AutoScroll(HWND hwnd, AUTO_SCROLL_DATA *pad, const POINT *pptNow);
  typedef struct {
      WORD cLength;
-@@ -2326,9 +2465,13 @@
+@@ -2326,9 +2466,13 @@
  #define CABINETSTATE_VERSION 2
  
  // APIs for reading and writing the cabinet state.
@@ -585,16 +615,18 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(BOOL) PathIsExe(_In_ PCWSTR pszPath);
  //
  //  Return codes from PathCleanupSpec.  Negative return values are
-@@ -2340,20 +2483,28 @@
+@@ -2340,21 +2484,30 @@
  #define PCS_TRUNCATED       0x00000004
  #define PCS_PATHTOOLONG     0x00000008  // Always combined with FATAL
  
 +_Win32_SupportedOS_WindowsXP_
++_Win32_AssociatedEnum_(PCS_RET)
  SHSTDAPI_(int) PathCleanupSpec(_In_opt_ PCWSTR pszDir, _Inout_ PWSTR pszSpec);
  
+-SHSTDAPI_(int) PathResolve(_Inout_updates_(MAX_PATH) PWSTR pszPath, _In_opt_ PZPCWSTR dirs, UINT fFlags);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(int) PathResolve(_Inout_updates_(MAX_PATH) PWSTR pszPath, _In_opt_ PZPCWSTR dirs, UINT fFlags);
++SHSTDAPI_(int) PathResolve(_Inout_updates_(MAX_PATH) PWSTR pszPath, _In_opt_ PZPCWSTR dirs, _Win32_AssociatedEnum_(PRF_FLAGS) UINT fFlags);
 +_Win32_SupportedOS_Windows2000_
  SHSTDAPI_(BOOL) GetFileNameFromBrowse(_In_opt_ HWND hwnd, _Inout_updates_(cchFilePath) PWSTR pszFilePath, UINT cchFilePath,
                                        _In_opt_ PCWSTR pszWorkingDir, _In_ PCWSTR pszDefExt, _In_opt_ PCWSTR pszFilters, _In_opt_ PCWSTR pszTitle);
@@ -610,27 +642,33 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  #define MM_SUBMENUSHAVEIDS      0x00000002L
  #define MM_DONTREMOVESEPS       0x00000004L
  
+-SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, ULONG uFlags);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, ULONG uFlags);
++SHSTDAPI_(UINT) Shell_MergeMenus(_In_ HMENU hmDst, _In_ HMENU hmSrc, UINT uInsert, UINT uIDAdjust, UINT uIDAdjustMax, _Win32_AssociatedEnum_(MM_FLAGS) ULONG uFlags);
  
  
-@@ -2372,6 +2523,7 @@
+ /*
+@@ -2372,7 +2525,8 @@
   *
   *     TRUE if the Properties command was invoked
   */
+-SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
++SHSTDAPI_(BOOL) SHObjectProperties(_In_opt_ HWND hwnd, _Win32_AssociatedEnum_(SHOP_TYPE) _In_ DWORD shopObjectType, _In_ PCWSTR pszObjectName, _In_opt_ PCWSTR pszPropertyPage);
  
  #define SHOP_PRINTERNAME 0x00000001  // pszObjectName points to a printer friendly name
-@@ -2447,6 +2599,7 @@
+ #define SHOP_FILEPATH    0x00000002  // pszObjectName points to a fully qualified path+file name
+@@ -2447,7 +2601,8 @@
   *      last time".
   *
   */
+-SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT options);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, UINT fmtID, UINT options);
++SHSTDAPI_(DWORD) SHFormatDrive(_In_ HWND hwnd, UINT drive, _Win32_AssociatedEnum_(SHFMT_ID) UINT fmtID, _Win32_AssociatedEnum_(SHFMT_OPT) UINT options);
  
  //
-@@ -2469,10 +2622,14 @@
+ // Special value of fmtID which means "use the default format"
+@@ -2469,10 +2624,14 @@
  
  #ifndef HPSXA_DEFINED
  #define HPSXA_DEFINED
@@ -645,7 +683,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  WINSHELLAPI UINT WINAPI SHReplaceFromPropSheetExtArray(_In_ HPSXA hpsxa, UINT uPageID, _In_ LPFNADDPROPSHEETPAGE lpfnReplaceWith, LPARAM lParam);
  
  // shell restriction values, parameter for SHRestricted()
-@@ -2698,32 +2855,44 @@
+@@ -2698,32 +2857,44 @@
  #endif  // NTDDI_VISTA
  #endif  // NTDDI_WINXPSP2
  } RESTRICTIONS;
@@ -692,7 +730,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
                             _Out_opt_ HICON *phiconLarge, _Out_opt_ HICON *phiconSmall, UINT nIconSize);
  #ifdef UNICODE
  #define SHDefExtractIcon  SHDefExtractIconW
-@@ -2734,7 +2903,11 @@
+@@ -2734,7 +2905,11 @@
  // Elevation
  
  // OpenAsInfo flags
@@ -705,7 +743,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
      OAIF_ALLOW_REGISTRATION = 0x00000001,     // enable the "always use this file" checkbox (NOTE if you don't pass this, it will be disabled)
      OAIF_REGISTER_EXT       = 0x00000002,     // do the registration after the user hits "ok"
      OAIF_EXEC               = 0x00000004,     // execute file after registering
-@@ -2765,13 +2938,18 @@
+@@ -2765,13 +2940,18 @@
  #include <poppack.h>        /* Return to byte packing */
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -724,15 +762,17 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(int)  Shell_GetCachedImageIndexW(_In_ LPCWSTR pszIconPath, int iIconIndex, UINT uIconFlags);
  #ifdef UNICODE
  #define Shell_GetCachedImageIndex  Shell_GetCachedImageIndexW
-@@ -2789,6 +2967,7 @@
+@@ -2789,7 +2969,8 @@
  #define VALIDATEUNC_VALID       0x0007          // valid flags
  #endif
  
+-SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, UINT fConnect);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, UINT fConnect);
++SHSTDAPI_(BOOL) SHValidateUNC(_In_opt_ HWND hwndOwner, _Inout_ PWSTR pszFile, _Win32_AssociatedEnum_(VALIDATEUNC_OPTION) UINT fConnect);
  #define PIFNAMESIZE     30
  #define PIFSTARTLOCSIZE 63
-@@ -2817,14 +2996,21 @@
+ #define PIFDEFPATHSIZE  64
+@@ -2817,14 +2998,21 @@
  typedef UNALIGNED PROPPRG FAR *LPPROPPRG;
  typedef const UNALIGNED PROPPRG FAR *LPCPROPPRG;
  
@@ -754,7 +794,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI_(LRESULT) SHShellFolderView_Message(_In_ HWND hwndMain, UINT uMsg, LPARAM lParam);
  
  //
-@@ -2834,6 +3020,9 @@
+@@ -2834,9 +3022,12 @@
  #undef  INTERFACE
  #define INTERFACE   IShellFolderViewCB
  
@@ -763,8 +803,12 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
 +#endif
  DECLARE_INTERFACE_IID_(IShellFolderViewCB, IUnknown, "2047E320-F2A9-11CE-AE65-08002B2E1262")
  {
-     STDMETHOD(MessageSFVCB)(THIS_ UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
-@@ -2950,6 +3139,9 @@
+-    STDMETHOD(MessageSFVCB)(THIS_ UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
++    STDMETHOD(MessageSFVCB)(THIS_ _Win32_AssociatedEnum_(SFVM_MESSAGE_ID) UINT uMsg, WPARAM wParam, LPARAM lParam) PURE;
+ };
+ 
+ #include <pshpack8.h>
+@@ -2950,6 +3141,9 @@
  #undef  INTERFACE
  #define INTERFACE   IShellFolderView
  
@@ -774,7 +818,16 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(IShellFolderView, IUnknown, "37A378C0-F82D-11CE-AE65-08002B2E1262")
  {
      STDMETHOD(Rearrange) (THIS_ LPARAM lParamSort) PURE; // use IFolderView2::SetSortColumns
-@@ -2992,10 +3184,12 @@
+@@ -2978,7 +3172,7 @@
+     STDMETHOD(SetPoints) (THIS_ _In_ IDataObject *pDataObject) PURE; // copies points of current selection in to data object.  Call is not needed if drag operation was originated by the IShellView.
+     STDMETHOD(GetItemSpacing) (THIS_ _Out_ ITEMSPACING *pSpacing) PURE; // use IFolderView::GetSpacing instead.  GetItemSpacing returns the spacing for small and large view modes only, returning S_OK if the current view mode is is positionable, S_FALSE otherwise.
+     STDMETHOD(SetCallback) (THIS_ _In_opt_ IShellFolderViewCB* pNewCB, _Outptr_result_maybenull_ IShellFolderViewCB** ppOldCB) PURE; // replace the IShellFolderViewCB that the IShellView uses
+-    STDMETHOD(Select) ( THIS_  UINT dwFlags ) PURE; // SFVS_ select flags: select all, select none, invert selection
++    STDMETHOD(Select) ( THIS_  _Win32_AssociatedEnum_(SFVS_SELECT) UINT dwFlags ) PURE; // SFVS_ select flags: select all, select none, invert selection
+     STDMETHOD(QuerySupport) (THIS_ _Inout_ UINT * pdwSupport ) PURE; // does nothing, returns S_OK.
+     STDMETHOD(SetAutomationObject)(THIS_ _In_opt_ IDispatch* pdisp) PURE; // replaces the IShellView's internal automation object.
+ };
+@@ -2992,10 +3186,12 @@
      IShellFolderViewCB* psfvcb; // No callback if NULL
  } SFV_CREATE;
  
@@ -787,7 +840,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI CDefFolderMenu_Create2(_In_opt_ PCIDLIST_ABSOLUTE pidlFolder, _In_opt_ HWND hwnd,
                                  UINT cidl, _In_reads_opt_(cidl) PCUITEMID_CHILD_ARRAY apidl,
                                  _In_opt_ IShellFolder *psf, _In_opt_ LPFNDFMCALLBACK pfn,
-@@ -3017,7 +3211,8 @@
+@@ -3017,7 +3213,8 @@
  // used in the implemetnation of ::GetUIObjectOf()
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -797,7 +850,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  #endif // NTDDI_VISTA
  
  // structure for lParam of DFM_INFOKECOMMANDEX
-@@ -3100,7 +3295,9 @@
+@@ -3100,7 +3297,9 @@
  
  #include <poppack.h>        /* Return to byte packing */
  
@@ -807,15 +860,17 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHCreateShellFolderViewEx(_In_ CSFV *pcsfv, _Outptr_ IShellView **ppsv);
  
  
-@@ -3313,6 +3510,7 @@
+@@ -3313,7 +3512,8 @@
  #define SHELLSTATE_SIZE_IE4   FIELD_OFFSET(SHELLSTATE,uNotUsed)
  #define SHELLSTATE_SIZE_WIN2K sizeof(SHELLSTATE)
  
+-SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, DWORD dwMask, BOOL bSet);
 +_Win32_SupportedOS_WindowsXP_
- SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, DWORD dwMask, BOOL bSet);
++SHSTDAPI_(void) SHGetSetSettings(_Inout_opt_ LPSHELLSTATE lpss, _Win32_AssociatedEnum_(SSF_MASK) DWORD dwMask, BOOL bSet);
  
  //
-@@ -3394,24 +3592,29 @@
+ //  SysFiles are these windows special files:
+@@ -3394,24 +3594,29 @@
  // When these settings change, a WM_SETTINGCHANGE message is sent
  // with the string lParam value of "ShellState".
  //
@@ -849,7 +904,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  
  #endif // NTDDI_VISTA
  
-@@ -3445,6 +3648,7 @@
+@@ -3445,6 +3650,7 @@
  //  psfgaoOut is optional for SFGAO attributes
  //
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -857,7 +912,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHParseDisplayName(_In_ PCWSTR pszName, _In_opt_ IBindCtx *pbc, _Outptr_ PIDLIST_ABSOLUTE *ppidl, _In_ SFGAOF sfgaoIn, _Out_opt_ SFGAOF *psfgaoOut);
  #endif // NTDDI_WINXP
  
-@@ -3475,7 +3679,9 @@
+@@ -3475,7 +3681,9 @@
  #endif // NTDDI_WINXP
  
  
@@ -867,7 +922,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHPathPrepareForWriteW(_In_opt_ HWND hwnd, _In_opt_ IUnknown *punkEnableModless, _In_ LPCWSTR pszPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHPathPrepareForWrite  SHPathPrepareForWriteW
-@@ -3491,6 +3697,9 @@
+@@ -3491,6 +3699,9 @@
  //--------------------------------------------------------------------------
  #undef  INTERFACE
  #define INTERFACE  INamedPropertyBag
@@ -877,7 +932,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  DECLARE_INTERFACE_IID_(INamedPropertyBag, IUnknown, "FB700430-952C-11d1-946F-000000000000")
  {
      STDMETHOD(ReadPropertyNPB) (THIS_ _In_ PCWSTR pszBagname,
-@@ -3521,6 +3730,7 @@
+@@ -3521,6 +3732,7 @@
  //  IPropertyStorage** ppstg,  // Address to receive requested vtable
  //  puCodePage      //  Optional address to receive the code page ID for the set.
  //
@@ -885,7 +940,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHPropStgCreate(_In_ IPropertySetStorage* psstg, _In_ REFFMTID fmtid, _In_opt_ const CLSID *pclsid, DWORD grfFlags, DWORD grfMode, DWORD dwDisposition, _Outptr_ IPropertyStorage** ppstg, _Out_opt_ UINT* puCodePage);
  
  
-@@ -3536,6 +3746,7 @@
+@@ -3536,6 +3748,7 @@
  //  rgpspec,   //Array of the properties to be read
  //  rgvar      //Array of PROPVARIANTs containing the property values on return
  //
@@ -893,7 +948,7 @@ diff --git a/um/shlobj_core.h b/um/shlobj_core.h
  SHSTDAPI SHPropStgReadMultiple(_In_ IPropertyStorage* pps, UINT uCodePage, ULONG cpspec, _In_reads_(cpspec) PROPSPEC const rgpspec[], _Out_writes_all_(cpspec) PROPVARIANT rgvar[] );
  
  
-@@ -3552,35 +3763,43 @@
+@@ -3552,35 +3765,43 @@
  //  rgvar,     // Array of PROPVARIANT values
  //  propidNameFirst // Minimum value for property identifiers. This value should be >= PID_FIRST_USABLE
  //

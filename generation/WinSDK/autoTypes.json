@@ -1009,13 +1009,23 @@
     "Namespace": "Windows.Win32.System.WindowsProgramming",
     "Name": "FEATURE_STATE_CHANGE_SUBSCRIPTION",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "UnsubscribeFeatureStateChangeNotification",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Namespace": "Windows.Win32.Storage.FileHistory",
     "Name": "FH_SERVICE_PIPE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "FhServiceClosePipe",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Namespace": "Windows.Win32.UI.Input.Ime",
@@ -1183,7 +1193,12 @@
     "Namespace": "Windows.Win32.System.Diagnostics.ProcessSnapshotting",
     "Name": "HPSSWALK",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "PssWalkMarkerFree",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Namespace": "Windows.Win32.Storage.ProjectedFileSystem",
@@ -1301,7 +1316,12 @@
     "Namespace": "Windows.Win32.Networking.WebSocket",
     "Name": "WEB_SOCKET_HANDLE",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "WebSocketDeleteHandle",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Namespace": "Windows.Win32.Networking.WinInet",
@@ -1726,7 +1746,12 @@
     "Namespace": "Windows.Win32.System.Hypervisor",
     "Name": "WHV_PARTITION_HANDLE",
     "ValueType": "IntPtr",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "WHvDeletePartition",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Namespace": "Windows.Win32.Foundation",
@@ -1872,7 +1897,12 @@
   {
     "Name": "HCS_OPERATION",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "HcsCloseOperation",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   },
   {
     "Name": "HCS_SYSTEM",
@@ -3507,6 +3537,11 @@
     "Namespace": "Windows.Win32.Gaming",
     "Name": "GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION",
     "ValueType": "DECLARE_HANDLE",
-    "NativeTypedef": true
+    "NativeTypedef": true,
+    "CloseApi": "UnregisterGamingFullScreenExperienceChangeNotification",
+    "InvalidHandleValues": [
+      -1,
+      0
+    ]
   }
 ]

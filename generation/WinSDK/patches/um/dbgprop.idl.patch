@@ -1,8 +1,8 @@
 diff --git a/um/dbgprop.idl b/um/dbgprop.idl
-index 9879bd32..104d90e4 100644
+index 3a8845f8..a78d6784 100644
 --- a/um/dbgprop.idl
 +++ b/um/dbgprop.idl
-@@ -101,6 +101,9 @@ enum
+@@ -101,11 +101,17 @@ enum
      DBGPROP_ATTRIB_VALUE_PENDING_MUTATION = 0x10000000,
  };
  typedef DWORD DBGPROP_ATTRIB_FLAGS;
@@ -12,7 +12,25 @@ index 9879bd32..104d90e4 100644
  
  // -----------------------------------------------------------------------
  // DebugPropertyInfo
-@@ -336,7 +339,7 @@ interface IEnumDebugPropertyInfo : IUnknown
+ // Basic info that all IDebugProperty implementations must support
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum
+ {
+ 	// Flags used to specify DebugPropertyInfo (and ExtendedDebugPropertyInfo) fields
+@@ -121,6 +127,9 @@ enum
+ 
+ 	DBGPROP_INFO_AUTOEXPAND =	0x8000000,	// make the Value result auto-expand
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ typedef DWORD DBGPROP_INFO_FLAGS;
+ 
+ const DBGPROP_INFO_FLAGS DBGPROP_INFO_STANDARD =	DBGPROP_INFO_NAME | DBGPROP_INFO_TYPE | DBGPROP_INFO_VALUE | DBGPROP_INFO_ATTRIBUTES;
+@@ -336,7 +345,7 @@ interface IEnumDebugPropertyInfo : IUnknown
  	[local]
      HRESULT Next(
          [in] ULONG celt,

@@ -1,8 +1,16 @@
 diff --git a/winrt/roparameterizediid.h b/winrt/roparameterizediid.h
-index 4ca62976..fb485ddf 100644
+index 4ca62976..1ad6316f 100644
 --- a/winrt/roparameterizediid.h
 +++ b/winrt/roparameterizediid.h
-@@ -65,6 +65,7 @@ struct IRoMetaDataLocator
+@@ -8,6 +8,7 @@
+ #define _ROPARAMETERIXEDIID_H
+ 
+ #ifdef _CONTRACT_GEN
++#include <sal.h>
+ #include <nt.h>
+ #include <ntrtl.h>
+ #include <nturtl.h>
+@@ -65,20 +66,23 @@ struct IRoMetaDataLocator
      ) const = 0;
  };
  
@@ -10,8 +18,11 @@ index 4ca62976..fb485ddf 100644
  STDAPI
  RoGetParameterizedTypeInstanceIID(
      UINT32 nameElementCount,
-@@ -74,11 +75,13 @@ RoGetParameterizedTypeInstanceIID(
-     _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
+     _In_reads_(nameElementCount) PCWSTR* nameElements,
+     _In_ const IRoMetaDataLocator& metaDataLocator,
+     _Out_ GUID* iid,
+-    _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
++    _Win32_RAIIFree_(RoFreeParameterizedTypeExtra, -1, 0) _Outptr_opt_ ROPARAMIIDHANDLE* pExtra
      );
  
 +_Win32_SupportedOS_Windows8_

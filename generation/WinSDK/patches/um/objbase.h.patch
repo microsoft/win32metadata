@@ -93,12 +93,13 @@
  
  
  WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulReserved, _In_ HRESULT appsHR);
-@@ -148,15 +165,19 @@
+@@ -148,15 +165,21 @@
  #endif
  
  /* other helpers */
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI_(BOOL) CoIsOle1Class(_In_ REFCLSID rclsid);
++_Win32_SupportedOS_Windows2000_
  _Check_return_ WINOLEAPI CLSIDFromProgIDEx (_In_ LPCOLESTR lpszProgID, _Out_ LPCLSID lpclsid);
  
 +_Win32_SupportedOS_Windows2000_
@@ -107,13 +108,14 @@
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI_(BOOL) CoDosDateTimeToFileTime(
                         _In_ WORD nDosDate, _In_ WORD nDosTime, _Out_ FILETIME FAR* lpFileTime);
++_Win32_SupportedOS_Windows2000_
  WINOLEAPI  CoFileTimeNow( _Out_ FILETIME FAR* lpFileTime );
  
 +_Win32_SupportedOS_Windows2000_
  _Check_return_ WINOLEAPI CoRegisterMessageFilter( _In_opt_ LPMESSAGEFILTER lpMessageFilter,
                                  _Outptr_opt_result_maybenull_ LPMESSAGEFILTER FAR* lplpMessageFilter );
  
-@@ -168,6 +189,7 @@
+@@ -168,15 +191,18 @@
  
  /* TreatAs APIS */
  
@@ -121,8 +123,9 @@
  _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID clsidNew);
  
  
-@@ -175,8 +197,9 @@
+ /****** DV APIs ***********************************************************/
  
++_Win32_SupportedOS_Windows2000_
  WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
  
 +_Win32_SupportedOS_Windows2000_
@@ -132,7 +135,7 @@
  
  
  /****** Storage API Prototypes ********************************************/
-@@ -221,28 +244,42 @@
+@@ -221,28 +247,42 @@
  //  Moniker APIs
  //
  
@@ -178,7 +181,7 @@
  _Check_return_ WINOLEAPI  CreateObjrefMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_ LPMONIKER FAR * ppmk);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */
-@@ -251,6 +288,7 @@
+@@ -251,6 +291,7 @@
  #pragma region Desktop Partition
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  

@@ -1,3 +1,4 @@
+diff --git a/um/subauth.h b/um/subauth.h
 --- a/um/subauth.h
 +++ b/um/subauth.h
 @@ -302,11 +302,17 @@
@@ -40,7 +41,7 @@
  NTSTATUS NTAPI
  Msv1_0SubAuthenticationRoutineGeneric(
      IN PVOID SubmitBuffer,
-@@ -366,11 +374,12 @@
+@@ -366,14 +374,15 @@
      OUT PVOID *ReturnBuffer
  );
  
@@ -53,4 +54,8 @@
 +    IN _Win32_AssociatedEnum_(MSV1_0) ULONG Flags,
      IN PUSER_ALL_INFORMATION UserAll,
      OUT PULONG WhichFields,
-     OUT PULONG UserFlags,
+-    OUT PULONG UserFlags,
++    _Win32_AssociatedEnum_(MSV_SUB_AUTHENTICATION_FILTER) OUT PULONG UserFlags,
+     OUT PBOOLEAN Authoritative,
+     OUT PLARGE_INTEGER LogoffTime,
+     OUT PLARGE_INTEGER KickoffTime

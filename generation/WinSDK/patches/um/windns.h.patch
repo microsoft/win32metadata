@@ -55,8 +55,9 @@
  WINAPI
  DnsQuery_A(
      _In_                PCSTR           pszName,
-     _In_                WORD            wType,
+-    _In_                WORD            wType,
 -    _In_                DWORD           Options,
++    _Win32_AssociatedEnum_(DNS_TYPE) _In_                WORD            wType,
 +    _Win32_AssociatedEnum_(DNS_QUERY_OPTIONS) _In_                DWORD           Options,
      _Inout_opt_         PVOID           pExtra,
      _Outptr_result_maybenull_     PDNS_RECORD *   ppQueryResults,
@@ -72,8 +73,9 @@
  WINAPI
  DnsQuery_UTF8(
      _In_                PCSTR           pszName,
-     _In_                WORD            wType,
+-    _In_                WORD            wType,
 -    _In_                DWORD           Options,
++    _Win32_AssociatedEnum_(DNS_TYPE) _In_                WORD            wType,
 +    _Win32_AssociatedEnum_(DNS_QUERY_OPTIONS) _In_                DWORD           Options,
      _Inout_opt_         PVOID           pExtra,
      _Outptr_result_maybenull_     PDNS_RECORD *   ppQueryResults,
@@ -89,8 +91,9 @@
  WINAPI
  DnsQuery_W(
      _In_                PCWSTR          pszName,
-     _In_                WORD            wType,
+-    _In_                WORD            wType,
 -    _In_                DWORD           Options,
++    _Win32_AssociatedEnum_(DNS_TYPE) _In_                WORD            wType,
 +    _Win32_AssociatedEnum_(DNS_QUERY_OPTIONS) _In_                DWORD           Options,
      _Inout_opt_         PVOID           pExtra,
      _Outptr_result_maybenull_     PDNS_RECORD *   ppQueryResults,

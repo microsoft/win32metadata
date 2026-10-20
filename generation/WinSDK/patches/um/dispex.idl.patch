@@ -1,8 +1,17 @@
 diff --git a/um/dispex.idl b/um/dispex.idl
-index 2a62cc5b..f637f574 100644
+index 5f7cc1fe..31a1b5fd 100644
 --- a/um/dispex.idl
 +++ b/um/dispex.idl
-@@ -107,6 +107,9 @@ cpp_quote("#define fdexPropCanConstruct        0x00000400L")
+@@ -7,6 +7,8 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+ cpp_quote("// DispEx.h")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -107,6 +109,9 @@ cpp_quote("#define fdexPropCanConstruct        0x00000400L")
  cpp_quote("#define fdexPropCannotConstruct     0x00000800L")
  cpp_quote("#define fdexPropCanSourceEvents     0x00001000L")
  cpp_quote("#define fdexPropCannotSourceEvents  0x00002000L")
@@ -12,3 +21,21 @@ index 2a62cc5b..f637f574 100644
  cpp_quote("")
  cpp_quote("#define grfdexPropCanAll \\")
  cpp_quote("       (fdexPropCanGet | fdexPropCanPut | fdexPropCanPutRef | \\")
+@@ -209,7 +214,7 @@ interface IDispatchEx : IDispatch
+ 	HRESULT GetMemberProperties(
+ 		[in] DISPID id,
+ 		[in] DWORD grfdexFetch,
+-		[out] DWORD *pgrfdex);
++		[annotation("_Win32_AssociatedEnum_(FDEX_PROP_FLAGS)")] [out] DWORD *pgrfdex);
+ 
+ 	HRESULT GetMemberName(
+ 		[in] DISPID id,
+@@ -260,7 +265,7 @@ interface IVariantChangeType : IUnknown
+ 		[in, out, unique] VARIANT *pvarDst,
+ 		[in, unique] VARIANT *pvarSrc,
+ 		[in] LCID lcid,
+-		[in] VARTYPE vtNew);
++		[annotation("_Win32_AssociatedEnum_(VARENUM)")] [in] VARTYPE vtNew);
+ 	};
+ 
+ 

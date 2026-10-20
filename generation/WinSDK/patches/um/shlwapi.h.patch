@@ -1186,7 +1186,7 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  LWSTDAPI_(BOOL) SHRegGetBoolUSValueW(_In_ LPCWSTR pszSubKey, _In_opt_ LPCWSTR pszValue, _In_ BOOL fIgnoreHKCU, _In_ BOOL fDefault);
  #ifdef UNICODE
  #define SHRegGetBoolUSValue  SHRegGetBoolUSValueW
-@@ -1783,6 +2111,9 @@
+@@ -1783,45 +2111,60 @@
  #undef INTERFACE
  #define INTERFACE IQueryAssociations
  
@@ -1196,7 +1196,18 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  DECLARE_INTERFACE_IID_( IQueryAssociations, IUnknown, "c46ca590-3c3f-11d2-bee6-0000f805ca57" )
  {
      // IQueryAssociations methods
-@@ -1796,31 +2127,43 @@
+-    STDMETHOD (Init)(THIS_ _In_ ASSOCF flags, _In_opt_ LPCWSTR pszAssoc, _In_opt_ HKEY hkProgid, _In_opt_ HWND hwnd) PURE;
+-    STDMETHOD (GetString)(THIS_ _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut) PURE;
+-    STDMETHOD (GetKey)(THIS_ _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut) PURE;
+-    STDMETHOD (GetData)(THIS_ _In_ ASSOCF flags, _In_ ASSOCDATA data, _In_opt_ LPCWSTR pszExtra, _Out_writes_bytes_opt_(*pcbOut) void * pvOut, _Inout_opt_ DWORD *pcbOut) PURE;
+-    STDMETHOD (GetEnum)(THIS_ _In_ ASSOCF flags, _In_ ASSOCENUM assocenum, _In_opt_ LPCWSTR pszExtra, _In_ REFIID riid, _Outptr_ void **ppvOut) PURE;
++    STDMETHOD (Init)(THIS_ _Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_opt_ LPCWSTR pszAssoc, _In_opt_ HKEY hkProgid, _In_opt_ HWND hwnd) PURE;
++    STDMETHOD (GetString)(THIS_ _Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut) PURE;
++    STDMETHOD (GetKey)(THIS_ _Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut) PURE;
++    STDMETHOD (GetData)(THIS_ _Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCDATA data, _In_opt_ LPCWSTR pszExtra, _Out_writes_bytes_opt_(*pcbOut) void * pvOut, _Inout_opt_ DWORD *pcbOut) PURE;
++    STDMETHOD (GetEnum)(THIS_ _Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCENUM assocenum, _In_opt_ LPCWSTR pszExtra, _In_ REFIID riid, _Outptr_ void **ppvOut) PURE;
+ };
+ 
  
  // use CLSID_QueryAssociations for clsid, object implements IQueryAssociations
  // AssocCreateForClasses() is the more functional version of this API
@@ -1212,35 +1223,42 @@ diff --git a/um/shlwapi.h b/um/shlwapi.h
  STDAPI_(DWORD) SHGetAssocKeys(_In_ IQueryAssociations *pqa, _Out_writes_to_(cKeys, return) HKEY *rgKeys, DWORD cKeys);
  
  //  wrappers for the interface
+-LWSTDAPI AssocQueryStringA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
 +_Win32_SupportedOS_Windows2000_
 +_Win32_PreserveResult_
- LWSTDAPI AssocQueryStringA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
++LWSTDAPI AssocQueryStringA(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
  //  wrappers for the interface
+-LWSTDAPI AssocQueryStringW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
 +_Win32_SupportedOS_Windows2000_
 +_Win32_PreserveResult_
- LWSTDAPI AssocQueryStringW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
++LWSTDAPI AssocQueryStringW(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
  #ifdef UNICODE
  #define AssocQueryString  AssocQueryStringW
  #else
  #define AssocQueryString  AssocQueryStringA
  #endif // !UNICODE
+-LWSTDAPI AssocQueryStringByKeyA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
+-LWSTDAPI AssocQueryStringByKeyW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
 +_Win32_SupportedOS_Windows2000_
 +_Win32_PreserveResult_
- LWSTDAPI AssocQueryStringByKeyA(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
++LWSTDAPI AssocQueryStringByKeyA(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCSTR pszExtra, _Out_writes_opt_(*pcchOut) LPSTR pszOut, _Inout_ DWORD *pcchOut);
 +_Win32_SupportedOS_Windows2000_
 +_Win32_PreserveResult_
- LWSTDAPI AssocQueryStringByKeyW(_In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
++LWSTDAPI AssocQueryStringByKeyW(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCSTR str, _In_ HKEY hkAssoc, _In_opt_ LPCWSTR pszExtra, _Out_writes_opt_(*pcchOut) LPWSTR pszOut, _Inout_ DWORD *pcchOut);
  #ifdef UNICODE
  #define AssocQueryStringByKey  AssocQueryStringByKeyW
  #else
  #define AssocQueryStringByKey  AssocQueryStringByKeyA
  #endif // !UNICODE
+-LWSTDAPI AssocQueryKeyA(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_ HKEY *phkeyOut);
+-LWSTDAPI AssocQueryKeyW(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI AssocQueryKeyA(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_ HKEY *phkeyOut);
++LWSTDAPI AssocQueryKeyA(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCSTR pszAssoc, _In_opt_ LPCSTR pszExtra, _Out_ HKEY *phkeyOut);
 +_Win32_SupportedOS_Windows2000_
- LWSTDAPI AssocQueryKeyW(_In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut);
++LWSTDAPI AssocQueryKeyW(_Win32_AssociatedEnum_(ASSOCF) _In_ ASSOCF flags, _In_ ASSOCKEY key, _In_ LPCWSTR pszAssoc, _In_opt_ LPCWSTR pszExtra, _Out_ HKEY *phkeyOut);
  #ifdef UNICODE
  #define AssocQueryKey  AssocQueryKeyW
+ #else
 @@ -1843,11 +2186,13 @@
  //      then it checks the editflags for the file type looking for the FTA_AlwaysUnsafe bit.
  //      then it checks Safer policies.

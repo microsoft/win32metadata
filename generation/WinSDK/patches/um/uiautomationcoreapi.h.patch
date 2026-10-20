@@ -9,6 +9,15 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  BOOL WINAPI UiaGetErrorDescription(BSTR * pDescription);
  
  // --------------------------------------------------------------------------
+@@ -511,7 +512,7 @@
+ struct UiaPropertyCondition
+ {
+     enum ConditionType ConditionType;
+-    PROPERTYID PropertyId;
++    _Win32_AssociatedEnum_(UIA_PROPERTY_ID) PROPERTYID PropertyId;
+     VARIANT Value;
+     enum PropertyConditionFlags Flags;
+ };
 @@ -556,8 +557,11 @@
      enum AutomationElementMode automationElementMode;
  };
@@ -30,8 +39,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaGetPropertyValue(HUIANODE hnode, PROPERTYID propertyId, VARIANT * pValue);
+-HRESULT WINAPI UiaGetPatternProvider(HUIANODE hnode, PATTERNID patternId, HUIAPATTERNOBJECT * phobj);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaGetPatternProvider(HUIANODE hnode, PATTERNID patternId, HUIAPATTERNOBJECT * phobj);
++HRESULT WINAPI UiaGetPatternProvider(HUIANODE hnode, PATTERNID patternId, _Win32_RAIIFree_(UiaPatternRelease, -1, 0) HUIAPATTERNOBJECT * phobj);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaGetRuntimeId(HUIANODE hnode, SAFEARRAY ** pruntimeId);
 +_Win32_SupportedOS_WindowsXP_
@@ -51,8 +61,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, HUIANODE * phnode);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, HUIANODE * phnode);
+-HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
++HRESULT WINAPI UiaGetRootNode(_Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE * phnode);
  
  
  #ifdef __cplusplus
@@ -94,16 +105,27 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaGetReservedMixedAttributeValue(IUnknown **punkMixedAttributeValue);
  
  // --------------------------------------------------------------------------
+@@ -725,7 +748,7 @@
+ struct UiaPropertyChangedEventArgs
+ {
+     enum EventArgsType Type;
+-    int EventId;
++    _Win32_AssociatedEnum_(UIA_EVENT_ID) int EventId;
+     PROPERTYID PropertyId;
+     VARIANT OldValue;
+     VARIANT NewValue;
 @@ -774,19 +797,28 @@
  //
  // Provider Event APIs
  //
 +_Win32_SupportedOS_WindowsXP_
  BOOL WINAPI UiaClientsAreListening();
+-HRESULT WINAPI UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple * pProvider, PROPERTYID id, VARIANT oldValue, VARIANT newValue);
+-HRESULT WINAPI UiaRaiseAutomationEvent(IRawElementProviderSimple * pProvider, EVENTID id);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple * pProvider, PROPERTYID id, VARIANT oldValue, VARIANT newValue);
++HRESULT WINAPI UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple * pProvider, _Win32_AssociatedEnum_(UIA_PROPERTY_ID) PROPERTYID id, VARIANT oldValue, VARIANT newValue);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaRaiseAutomationEvent(IRawElementProviderSimple * pProvider, EVENTID id);
++HRESULT WINAPI UiaRaiseAutomationEvent(IRawElementProviderSimple * pProvider, _Win32_AssociatedEnum_(UIA_EVENT_ID) EVENTID id);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaRaiseStructureChangedEvent(IRawElementProviderSimple * pProvider, enum StructureChangeType structureChangeType, int * pRuntimeId, int cRuntimeIdLen);
 +_Win32_SupportedOS_WindowsXP_
@@ -127,8 +149,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  // Client Event APIs
  //
  typedef void WINAPI UiaEventCallback(struct UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
+-HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, enum TreeScope scope, PROPERTYID * pProperties, int cProperties, struct UiaCacheRequest * pRequest, HUIAEVENT * phEvent);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, enum TreeScope scope, PROPERTYID * pProperties, int cProperties, struct UiaCacheRequest * pRequest, HUIAEVENT * phEvent);
++HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, enum TreeScope scope, PROPERTYID * pProperties, int cProperties, struct UiaCacheRequest * pRequest, _Win32_RAIIFree_(UiaRemoveEvent, -1, 0) HUIAEVENT * phEvent);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaRemoveEvent(HUIAEVENT hEvent);
 +_Win32_SupportedOS_WindowsXP_
@@ -194,8 +217,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, HUIATEXTRANGE* pRetVal);
+-HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, HUIATEXTRANGE* pRetVal);
++HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, enum SupportedTextSelection* pRetVal);
 +_Win32_SupportedOS_WindowsXP_

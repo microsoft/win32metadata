@@ -27,8 +27,6 @@ IPPROTO::IPPROTO_IP=0
 IPPROTO::IPPROTO_RM=113
 MENUPARTS::MENU_POPUPSUBMENU_HCHOT=21
 --enumMakeFlags
-_EXPCMDSTATE
-_EXPCMDFLAGS
 ADVISE_TYPE
 AMMSF_MS_FLAGS
 AMMSF_RENDER_FLAGS
@@ -37,13 +35,11 @@ ASM_BIND_FLAGS
 ATTACH_VIRTUAL_DISK_FLAG
 COMPACT_VIRTUAL_DISK_FLAG
 CREATE_VIRTUAL_DISK_FLAG
-DBGPROP_INFO
 DDSFF_FLAGS
 DELETE_SNAPSHOT_VHDSET_FLAG
 DEPENDENT_DISK_FLAG
 DETACH_VIRTUAL_DISK_FLAG
 EXPAND_VIRTUAL_DISK_FLAG
-FILEOPENDIALOGOPTIONS
 GET_STORAGE_DEPENDENCY_FLAG
 HLBWIF_FLAGS
 IdentityUpdateEvent
@@ -58,17 +54,12 @@ MODIFY_VHDSET_FLAG
 OBJECT_ATTRIB_FLAG
 OPEN_VIRTUAL_DISK_FLAG
 OPM_HDCP_FLAGS
-PRINTFLAG
 PROFILER_EVENT_MASK
-PROPDESC_FORMAT_FLAGS
-PROPDESC_SEARCHINFO_FLAGS
-PROPDESC_VIEW_FLAGS
 RAW_SCSI_VIRTUAL_DISK_FLAG
 REG_PINFLAG
 RESIZE_VIRTUAL_DISK_FLAG
 TAKE_SNAPSHOT_VHDSET_FLAG
 VIRTUAL_DISK_ACCESS_MASK
-WBEM_GENERIC_FLAG_TYPE
 --reducePointerLevel
 RPC_OBJECT_INQ_FN
 RPC_IF_CALLBACK_FN
@@ -206,10 +197,6 @@ FilterInstanceCreate777::hInstance=HFILTER_INSTANCE*
 TdhOpenDecodingHandle::Handle=TDH_HANDLE*
 GetConsoleMode::lpMode=CONSOLE_MODE*
 SetConsoleMode::dwMode=CONSOLE_MODE
-SHGetFileInfoA::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
-SHGetFileInfoA::uFlags=SHGFI_FLAGS
-SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
-SHGetFileInfoW::uFlags=SHGFI_FLAGS
 OpenProcess::dwDesiredAccess=PROCESS_ACCESS_RIGHTS
 JOBOBJECT_BASIC_LIMIT_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
@@ -220,13 +207,6 @@ JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_LIMIT_VIOLATION_INFORMATION_2::ViolationLimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION_2::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_SECURITY_LIMIT_INFORMATION::SecurityLimitFlags=JOB_OBJECT_SECURITY
-SHChangeNotify::uFlags=SHCNF_FLAGS
-SHChangeNotifyRegister::fSources=SHCNRF_SOURCE
-SHGetDataFromIDListA::nFormat=SHGDFIL_FORMAT
-SHGetDataFromIDListW::nFormat=SHGDFIL_FORMAT
-Shell_MergeMenus::uFlags=MM_FLAGS
-SHFormatDrive::fmtID=SHFMT_ID
-SHGetSetSettings::dwMask=SSF_MASK
 IStream::Seek::dwOrigin=STREAM_SEEK
 PSINJECTDATA::InjectionPoint=PSINJECT_POINT
 EnumObjects::nType=OBJ_TYPE
@@ -298,12 +278,10 @@ EapHostPeerGetDataToUnplumbCredentials::phCredentialImpersonationToken=IntPtr*
 FARPROC::return=IntPtr
 NEARPROC::return=IntPtr
 PROC::return=IntPtr
-DHCP_IP_ARRAY::Elements=[NativeArrayInfo(CountParamIndex=0)]
 LoadCursorA::return=[DoNotRelease]
 LoadCursorW::return=[DoNotRelease]
 GetModuleHandleA::return=[DoNotRelease]
 GetModuleHandleW::return=[DoNotRelease]
-IWeakReference::Resolve::objectReference=[ComOutPtr]void**
 PCEVENT_DESCRIPTOR=[Const]
 PCCERT_CONTEXT=[Const]
 EXCEPTION_RECORD::ExceptionCode=NTSTATUS
@@ -352,7 +330,6 @@ IADsPropertyList::Next=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Skip=[CanReturnMultipleSuccessValues]
 PDNS_SERVICE_BROWSE_CALLBACK::pDnsRecord=DNS_RECORDW*
 IMMDevice::Activate::dwClsCtx=CLSCTX
-IMMDevice::Activate::ppInterface=[ComOutPtr]
 RegCloseKey::return=WIN32_ERROR
 RegEnumValueW::return=WIN32_ERROR
 RegLoadMUIStringW::return=WIN32_ERROR
@@ -396,18 +373,14 @@ IOfflineFilesChangeInfo::IsDirty=[CanReturnMultipleSuccessValues]
 IAudioClient::IsFormatSupported=[CanReturnMultipleSuccessValues]
 CoInitializeSecurity::asAuthSvc=[-NativeArrayInfo]
 IWMDRMMessageParser::ParseLicenseRequestMsg::pbLicenseRequestMsg=[NativeArrayInfo(CountParamIndex = 1)]
-IAudioClient::GetService::ppv=[ComOutPtr]
 LoadStringA::lpBuffer=[-NativeArrayInfo]
 LoadStringW::lpBuffer=[-NativeArrayInfo]
 DebugCreate::Interface=[ComOutPtr]
 DebugCreateEx::Interface=[ComOutPtr]
 ITransactionContextEx::CreateInstance::pObject=[ComOutPtr]
-IWICBitmapDecoderInfo::CreateInstance::ppIBitmapDecoder=[ComOutPtr]
-IWICBitmapEncoderInfo::CreateInstance::ppIBitmapEncoder=[ComOutPtr]
 ISpeechObjectToken::Object=[ComOutPtr]
 ICreateWithTipTransactionEx::CreateInstance::pObject=[ComOutPtr]
 ICreateWithTransactionEx::CreateInstance::pObject=[ComOutPtr]
-IClassFactory2::CreateInstanceLic::ppvObj=[ComOutPtr]
 IWbemServices::CreateInstanceEnum::ppEnum=[ComOutPtr]
 ImageList_CoCreateInstance::ppv=[ComOutPtr]
 IDXGIDecodeSwapChainPartner::PresentBuffer=[CanReturnMultipleSuccessValues]
@@ -447,15 +420,11 @@ UpdateTraceA::TraceHandle=CONTROLTRACE_HANDLE
 UpdateTraceW::TraceHandle=CONTROLTRACE_HANDLE
 VARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM
 IDebugFormatter::GetStringForVarType::vt=VARENUM
-DBPROPINFO::vtType=VARENUM
 KAGREQDIAG::vt=VARENUM
-SHCOLUMNINFO::vt=VARENUM
 TYPEDESC::vt=VARENUM
 PROPBAG2::vt=VARENUM
-IVariantChangeType::ChangeType::vtNew=VARENUM
 IModelObject::GetIntrinsicValueAs::vt=VARENUM
 PSPropertyBag_ReadType::type=VARENUM
-PropVariantChangeType::vt=VARENUM
 WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
@@ -496,41 +465,17 @@ MINIDUMP_CALLBACK_OUTPUT=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 # cfgmgr32.h
 # usbuser.h
 # netiodef.h
-DL_TEREDO_ADDRESS=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-DL_TEREDO_ADDRESS_PRV=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-TCP_OPT_WS=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-TCP_OPT_SACK_PERMITTED=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-TCP_OPT_SACK=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-TCP_OPT_UNKNOWN=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-TCP_OPT_FASTOPEN=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # txfw32.h
 # shtypes.h
 # mxdc.h
-MXDC_PRINTTICKET_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-MXDC_S0PAGE_RESOURCE_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # mpeg2struts.h
 # shlwapi.h
-IQueryAssociations::Init::flags=ASSOCF
-IQueryAssociations::GetString::flags=ASSOCF
-IQueryAssociations::GetKey::flags=ASSOCF
-IQueryAssociations::GetData::flags=ASSOCF
-IQueryAssociations::GetEnum::flags=ASSOCF
-AssocQueryStringA::flags=ASSOCF
-AssocQueryStringW::flags=ASSOCF
-AssocQueryStringByKeyA::flags=ASSOCF
-AssocQueryStringByKeyW::flags=ASSOCF
-AssocQueryKeyA::flags=ASSOCF
-AssocQueryKeyW::flags=ASSOCF
 # snmp.h
-AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 TrackPopupMenu::prcRect=[In][Optional][-Reserved]
 ReleaseStgMedium::param0=[Out]
 # tsvirtualchannels.h
 IWTSVirtualChannelManager::CreateListener::pszChannelName=PSTR
 DXGIFactory::EnumAdapters=[CanReturnErrorsAsSuccess]
-IWICImagingFactory::CreateDecoderFromFilename::pguidVendor=[Optional]
 HttpCloseRequestQueue::RequestQueueHandle=HTTP_REQUEST_QUEUE_HANDLE
 HttpCreateRequestQueue::RequestQueueHandle=HTTP_REQUEST_QUEUE_HANDLE*
 ^Pdh\w+::return$=uint
@@ -782,21 +727,6 @@ EXTLOGPEN32::elpPenStyle=[AssociatedEnum("PEN_STYLE")]
 GetBkMode::return=[AssociatedEnum("BACKGROUND_MODE")]
 GetCurrentObject::type=[AssociatedEnum("OBJ_TYPE")]
 GetDeviceCaps::index=[AssociatedEnum("GET_DEVICE_CAPS_INDEX")]
-GetThemeBitmap::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeBool::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeColor::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeEnumValue::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeFilename::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeInt::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeIntList::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeMargins::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeMetric::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemePosition::iPropId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeSysBool::iBoolId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeSysColorBrush::iColorId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeSysFont::iFontId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeSysInt::iIntId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-GetThemeSysString::iStringId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
 IAzClientContext3::GetGroups::ulOptions=[AssociatedEnum("AZ_PROP_CONSTANTS")]
 IClientSecurity::QueryBlanket::pCapabilites=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
 IClientSecurity::SetBlanket::dwCapabilities=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
@@ -806,9 +736,6 @@ IImePad::Request::reqId=[AssociatedEnum("IME_PAD_REQUEST_FLAGS")]
 IOleClientSite::GetMoniker::dwAssign=[AssociatedEnum("OLEGETMONIKER")]
 IOleClientSite::GetMoniker::dwWhichMoniker=[AssociatedEnum("OLEWHICHMK")]
 IOleContainer::EnumObjects::grfFlags=[AssociatedEnum("OLECONTF")]
-IQueryInfo::GetInfoTip::dwFlags=[AssociatedEnum("QITIPF_FLAGS")]
-IShellFolderView::Select::dwFlags=[AssociatedEnum("SFVS_SELECT")]
-IShellFolderViewCB::MessageSFVCB::uMsg=[AssociatedEnum("SFVM_MESSAGE_ID")]
 IStream::Commit::grfCommitFlags=[AssociatedEnum("STGC")]
 IStream::LockRegion::dwLockType=[AssociatedEnum("LOCKTYPE")]
 IStream::Stat::grfStatFlag=[AssociatedEnum("STATFLAG")]
@@ -821,26 +748,13 @@ OLECMD::cmdID=[AssociatedEnum("OLECMDID")]
 OleCreate::renderopt=[AssociatedEnum("OLERENDER")]
 OleCreateFromFile::renderopt=[AssociatedEnum("OLERENDER")]
 OLEVERB::grfAttribs=[AssociatedEnum("OLEVERBATTRIB")]
-PathCleanupSpec::return=[AssociatedEnum("PCS_RET")]
-PathResolve::fFlags=[AssociatedEnum("PRF_FLAGS")]
 PIXELFORMATDESCRIPTOR::iLayerType=[AssociatedEnum("PFD_LAYER_TYPE")]
 RegRestoreKeyA::dwFlags=[AssociatedEnum("REG_RESTORE_KEY_FLAGS")]
 RegRestoreKeyW::dwFlags=[AssociatedEnum("REG_RESTORE_KEY_FLAGS")]
-RemSTGMEDIUM::tymed=[AssociatedEnum("TYMED")]
 SetBkMode::mode=[AssociatedEnum("BACKGROUND_MODE")]
-SHChangeNotify::wEventId=[AssociatedEnum("SHCNE_ID")]
-SHDESCRIPTIONID::dwDescriptionId=[AssociatedEnum("SHDID_ID")]
-SHFormatDrive::options=[AssociatedEnum("SHFMT_OPT")]
-SHObjectProperties::shopObjectType=[AssociatedEnum("SHOP_TYPE")]
-SHValidateUNC::fConnect=[AssociatedEnum("VALIDATEUNC_OPTION")]
 STATSTG::grfLocksSupported=[AssociatedEnum("LOCKTYPE")]
-STGMEDIUM::tymed=[AssociatedEnum("TYMED")]
 SymGetHomeDirectory::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
 SymGetHomeDirectoryW::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
-BeginUpdateResourceA::return=[RAIIFree("EndUpdateResourceA")]
-BeginUpdateResourceW::return=[RAIIFree("EndUpdateResourceW")]
-CreateActCtxA::return=[RAIIFree("ReleaseActCtx")]
-CreateActCtxW::return=[RAIIFree("ReleaseActCtx")]
 CreateBoundaryDescriptorW::return=[RAIIFree("DeleteBoundaryDescriptor")]
 CreateEnhMetaFileA::return=[RAIIFree("DeleteEnhMetaFile")]
 CreateEnhMetaFileW::return=[RAIIFree("DeleteEnhMetaFile")]
@@ -851,8 +765,6 @@ FilterFindFirst::lpFilterFind=[RAIIFree("FilterFindClose")]
 FilterInstanceFindFirst::lpFilterInstanceFind=[RAIIFree("FilterInstanceFindClose")]
 FilterVolumeFindFirst::lpVolumeFind=[RAIIFree("FilterVolumeFindClose")]
 FilterVolumeInstanceFindFirst::lpVolumeInstanceFind=[RAIIFree("FilterVolumeInstanceFindClose")]
-FindFirstVolumeMountPointA::return=[RAIIFree("FindVolumeMountPointClose")]
-FindFirstVolumeMountPointW::return=[RAIIFree("FindVolumeMountPointClose")]
 FindFirstVolumeW::return=[RAIIFree("FindVolumeClose")]
 OpenPrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
 WTSVirtualChannelOpen::return=[RAIIFree("WTSVirtualChannelClose")]
@@ -1253,7 +1165,6 @@ IPsecSaDbSetSecurityInfo0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaDestroyEnumHandle0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaEnum0::engineHandle=FWPM_ENGINE_HANDLE
 IPsecSaEnum1::engineHandle=FWPM_ENGINE_HANDLE
-IWICBitmapSource::CopyPixels::prc=[Optional]
 NotifyServiceStatusChangeA::pNotifyBuffer=[Retained]
 NotifyServiceStatusChangeW::pNotifyBuffer=[Retained]
 # Caller-owned buffers containing absolute pointers into the same allocation.
@@ -1414,7 +1325,6 @@ IPsecSaCreateEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE*
 IPsecSaEnum0::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaEnum1::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaDestroyEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE
-ITfCandidateListUIElement::GetPageIndex::pIndex=[Optional]
 RasEnumConnectionsA::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
 RasEnumConnectionsW::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
 MsiDatabaseGenerateTransformA::iReserved1=[Reserved]
@@ -1425,3 +1335,4 @@ MsiDatabaseGenerateTransformW::iReserved2=[Reserved]
 FACILITY_CODE=Windows.Win32.System.Diagnostics.Debug
 RPC_STATUS=Windows.Win32.System.Rpc
 DWriteCreateFactory::factory=void**
+IWeakReference::Resolve::objectReference=void**

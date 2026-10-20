@@ -45,7 +45,14 @@ diff --git a/um/aclui.h b/um/aclui.h
  
  typedef struct _SI_ACCESS
  {
-@@ -206,6 +232,9 @@ typedef enum _SI_PAGE_ACTIVATED
+@@ -203,9 +229,16 @@ typedef enum _SI_PAGE_ACTIVATED
+ // PSPCB_CREATE and PSPCB_RELEASE)
+ #define PSPCB_SI_INITDIALOG    (WM_USER + 1)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PSPCB_MESSAGE, unsigned int, PSPCB_SI_INITDIALOG);
++#endif
++
  
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation
@@ -55,7 +62,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-00AA00BBB723")
  {
      // *** IUnknown methods ***
-@@ -221,7 +250,10 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+@@ -221,7 +254,10 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
      STDMETHOD(SetSecurity) (THIS_ SECURITY_INFORMATION SecurityInformation,
                              PSECURITY_DESCRIPTOR pSecurityDescriptor ) PURE;
      STDMETHOD(GetAccessRights) (THIS_ const GUID* pguidObjectType,
@@ -67,7 +74,14 @@ diff --git a/um/aclui.h b/um/aclui.h
                                  PSI_ACCESS *ppAccess,
                                  ULONG *pcAccesses,
                                  ULONG *piDefaultAccess ) PURE;
-@@ -236,6 +268,9 @@ typedef ISecurityInformation *LPSECURITYINFO;
+@@ -230,12 +266,15 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+                            ACCESS_MASK *pMask) PURE;
+     STDMETHOD(GetInheritTypes) (THIS_ PSI_INHERIT_TYPE *ppInheritTypes,
+                                 ULONG *pcInheritTypes ) PURE;
+-    STDMETHOD(PropertySheetPageCallback)(THIS_ HWND hwnd, UINT uMsg, SI_PAGE_TYPE uPage ) PURE;
++    STDMETHOD(PropertySheetPageCallback)(THIS_ HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, SI_PAGE_TYPE uPage ) PURE;
+ };
+ typedef ISecurityInformation *LPSECURITYINFO;
  
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation2
@@ -77,7 +91,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
  {
      // *** IUnknown methods ***
-@@ -268,6 +303,9 @@ typedef struct _SID_INFO_LIST
+@@ -268,6 +307,9 @@ typedef struct _SID_INFO_LIST
  
  #undef INTERFACE
  #define INTERFACE   IEffectivePermission
@@ -87,7 +101,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
  {
      // *** IUnknown methods ***
-@@ -289,6 +327,9 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
+@@ -289,6 +331,9 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
  
  #undef INTERFACE
  #define INTERFACE   ISecurityObjectTypeInfo
@@ -97,7 +111,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
  {
      // *** IUnknown methods ***
-@@ -307,6 +348,9 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
+@@ -307,6 +352,9 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
  // Support for separation or read-only ACL viewer and elevated ACL editor
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation3
@@ -107,7 +121,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
  {
      // *** IUnknown methods ***
-@@ -351,6 +395,9 @@ typedef struct _EFFPERM_RESULT_LIST
+@@ -351,6 +399,9 @@ typedef struct _EFFPERM_RESULT_LIST
  
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation4
@@ -117,7 +131,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
  {
      // *** IUnknown methods ***
-@@ -368,6 +415,9 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
+@@ -368,6 +419,9 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
  
  #undef INTERFACE
  #define INTERFACE   IEffectivePermission
@@ -127,7 +141,7 @@ diff --git a/um/aclui.h b/um/aclui.h
  DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
  {
      // *** IUnknown methods ***
-@@ -419,11 +469,17 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
+@@ -419,11 +473,17 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
  EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  
