@@ -1026,9 +1026,13 @@ unsigned long __stdcall NativeResourceType(
             Assert.False(retained.TryGetProperty("autoPopulate", out _));
             Assert.False(retained.TryGetProperty("members", out _));
             Assert.Equal("Windows.Win32.System.SystemInformation", retained.GetProperty("namespace").GetString());
-            var use = Assert.Single(retained.GetProperty("uses").EnumerateArray());
-            Assert.Equal("GetProductInfo", use.GetProperty("method").GetString());
-            Assert.Equal("pdwReturnedProductType", use.GetProperty("parameter").GetString());
+            Assert.Empty(retained.GetProperty("uses").EnumerateArray());
+            Assert.Contains("OS_PRODUCT_TYPE=Windows.Win32.System.SystemInformation",
+                File.ReadAllLines(Path.Combine(project, "requiredNamespacesForNames.rsp")));
+            string product = File.ReadAllText(Path.Combine(project, "patches", "um", "sysinfoapi.h.patch"));
+            Assert.Single(Regex.Matches(product, @"(?m)^@@[^\r\n]*GetProductInfo\(\r?$"));
+            Assert.Single(Regex.Matches(product,
+                @"(?m)^\+    _Win32_AssociatedEnum_\(OS_PRODUCT_TYPE\) _Out_ PDWORD pdwReturnedProductType\r?$"));
         }
 
         [NativeMigrationTheory("ROUTED_NATIVE_ENUM_MIGRATION_ROOT")]
@@ -2709,12 +2713,14 @@ int __stdcall PreserveReserved(
                 Assert.Single(File.ReadAllLines(Path.Combine(project, "patches", "um", group.Header + ".patch"))
                     .Where(line => line.StartsWith("+" + macro + "(" + group.Name + ",", StringComparison.Ordinal)));
             }
-            var wds = Assert.Single(items.Where(item => item.TryGetProperty("addUsesTo", out var name) &&
-                name.GetString() == "PFN_WDS_CLI_CALLBACK_MESSAGE_ID"));
-            Assert.Equal("Windows.Win32.System.DeploymentServices", wds.GetProperty("namespace").GetString());
-            var callback = Assert.Single(wds.GetProperty("uses").EnumerateArray());
-            Assert.Equal("PFN_WdsCliCallback", callback.GetProperty("method").GetString());
-            Assert.Equal("dwMessageId", callback.GetProperty("parameter").GetString());
+            Assert.DoesNotContain(items, item => item.TryGetProperty("addUsesTo", out var name) &&
+                name.GetString() == "PFN_WDS_CLI_CALLBACK_MESSAGE_ID");
+            Assert.Equal("Windows.Win32.System.DeploymentServices", Assert.Single(RspReader.GetSettingsValues(
+                Path.Combine(project, "Partitions", "Wds", "settings.rsp"), "--namespace")));
+            string wds = File.ReadAllText(Path.Combine(project, "patches", "um", "wdsclientapi.h.patch"));
+            Assert.Single(Regex.Matches(wds,
+                @"(?m)^ \(WDSCLIAPI \*PFN_WdsCliCallback\)\(\r?\n-    DWORD dwMessageId,\r?\n" +
+                @"\+    _Win32_AssociatedEnum_\(PFN_WDS_CLI_CALLBACK_MESSAGE_ID\) DWORD dwMessageId,\r?$"));
             Assert.Contains(items, item => item.TryGetProperty("name", out var name) &&
                 name.GetString() == "SI_OBJECT_INFO_FLAGS");
             var rows = File.ReadAllLines(Path.Combine(project, "emitter.settings.rsp"));
@@ -2722,13 +2728,13 @@ int __stdcall PreserveReserved(
             {
                 "GetProcessHeap::return=[DoNotRelease]",
                 "GetProcessHeaps::ProcessHeaps=[DoNotRelease]",
-                "OleCreatePropertyFrame::dwReserved=[Reserved]",
-                "OleCreatePropertyFrame::pvReserved=[Reserved]",
-                "OleLoadPicturePath::dwReserved=[Reserved]",
             })
                 Assert.Contains(row, rows);
             foreach (string row in new[]
             {
+                "OleCreatePropertyFrame::dwReserved=[Reserved]",
+                "OleCreatePropertyFrame::pvReserved=[Reserved]",
+                "OleLoadPicturePath::dwReserved=[Reserved]",
                 "SysAllocStringByteLen::psz=[NativeArrayInfo(CountParamIndex = 1)]",
                 "CoInitialize=[CanReturnMultipleSuccessValues]",
                 "CreateDataCache::ppv=[ComOutPtr]",
@@ -2738,6 +2744,16 @@ int __stdcall PreserveReserved(
                 "PXE_DHCPV6_RELAY_MESSAGE=[StructLayout(LayoutKind.Sequential, Pack = 1)]",
             })
                 Assert.DoesNotContain(row, rows);
+            string olectl = string.Join("\n", File.ReadAllLines(Path.Combine(project, "patches", "um", "olectl.h.patch"))
+                .Where(line => line.Length > 0 && (line[0] == ' ' ||
+                    line[0] == '+' && !line.StartsWith("+++", StringComparison.Ordinal)))
+                .Select(line => line.Substring(1)));
+            Assert.Single(Regex.Matches(olectl, @"\bOleCreatePropertyFrame\([^;]*" +
+                @"_Win32_Reserved_\s+DWORD\s+dwReserved,\s*_In_\s+_Win32_Reserved_\s+LPVOID\s+pvReserved\);"));
+            Assert.Single(Regex.Matches(olectl,
+                @"\bOleLoadPicturePath\([^;]*_Win32_Reserved_\s+DWORD\s+dwReserved,"));
+            Assert.Equal("Windows.Win32.System.Ole", Assert.Single(RspReader.GetSettingsValues(
+                Path.Combine(project, "Partitions", "ComOle", "settings.rsp"), "--namespace")));
         }
 
         [NativeMigrationTheory("EXISTING_NATIVE_CATEGORY_NEXT_ROOT")]
