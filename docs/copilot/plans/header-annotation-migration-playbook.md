@@ -61,6 +61,29 @@ Track drafted, applied, and validated facts separately against the same fixed
 inventory. A draft is useful unfinished work; neither its existence nor deletion of
 a legacy row earns validation or API-acceptance credit.
 
+### Breadth-first conversion and shared gap families
+
+Work across the SDK before trying to complete an individual partition. Partitions
+are scrape and comparison units, not authoring-completion gates. Draft the currently
+expressible facts in leased originals, record the remaining dependencies, and move
+to the next source cohort. Do not wait for every fact in a partition to qualify.
+
+Group gaps by the shared mechanism across all affected originals and partitions:
+declaration selection, cleanup binding, IDL placement, enum-provider and namespace
+closure, macro-only targets, type projection, or import discovery. Reuse the exact
+fact IDs, native targets, and examples in existing receipts; do not require another
+per-fact census or proof matrix before authors continue. Keep source ambiguity and
+API-specific contract questions explicit rather than calling a whole bucket
+unsupported.
+
+Repair a shared mechanism once, then replay its affected cohorts together in a
+central successor. Collect independent scrape failures across the batch where
+possible instead of repeatedly completing one partition before attempting another.
+Failed or unattempted jobs remain visible; collecting a partial batch does not make
+its image acceptable. Review unresolved buckets separately while other source
+conversion continues. Paired header/reader changes still require coherent central
+qualification, not separate author qualification.
+
 ## Start from a pinned control
 
 The integration lane records the qualified tooling and pilot commits, tree
@@ -111,7 +134,8 @@ either output without claiming to have migrated their APIs.
 | Logical enums | Keep metadata-only, unscoped bags of existing constants. Preserve names, members, compiled values, and storage; associate native integer fields/parameters rather than replacing their native types. Native scoped enums remain scoped. |
 | Historical labels absent from native source | Use the already-qualified original-AST carrier, with a short explanation of the label/expression pairing. Do not invent a native alias or expose an ordinary-consumer symbol. The XInput `ALL = 0` label is such an exception. |
 | Availability | Use the qualified Clang lexical OS scopes or explicit type carriers. Preserve actual floors and scope boundaries; do not invent floors for structs merely because a nearby interface has one. |
-| Cleanup and invalid values | Put resource ownership on producers' return values or output parameters. Do not create pseudo-handle types or move ownership onto an existing plain handle typedef. |
+| Cleanup and invalid values | Put resource ownership on producers' return values or output parameters. Resolve cleanup names against actual native function declarations after the complete translation-unit walk; declaration order must not require copied or moved prototypes. Preserve complete invalid sets. Do not create pseudo-handle types or move ownership onto an existing plain handle typedef. |
+| Compiler intrinsics | Preserve the generator's actual native-Builtin exclusion. Do not invent DLL APIs or require metadata projection for those excluded declarations; still parse and validate their authored annotations. |
 | Direction, buffers, counts, and retval | Prefer native SAL/MIDL semantics, preserving count expressions and units. Do not replace or silently discard existing SAL, or add redundant scalar direction annotations. |
 | Exact results | `_Win32_PreserveResult_`, legacy `CanReturnMultipleSuccessValues`, and legacy `CanReturnErrorsAsSuccess` converge on CLR `PreserveSig`. Do not introduce a separate multiple-success annotation or preserve the legacy custom-attribute instances. |
 | Agile | Do not migrate the old Agile fact into SDK headers; its intentional removal is not a missing annotation to restore. |
@@ -129,15 +153,18 @@ global namespace mechanism. Preserve the complete physical member inventory acro
 all owners, including mixed-case native names. A prefix-only or uppercase-only
 inventory is not a completeness check.
 
-Do not satisfy an association with an unbound typedef, subset group, generated C#
-enum, or broad include of another API's headers. Qualify the source-owned group and
-its native visibility first. Preserve `.header-types.cs` producer filenames in frozen
+Do not accept an association with an unbound typedef, subset group, generated C#
+enum, or broad include of another API's headers. Central integration must qualify
+the source-owned group and its native visibility before accepting the association.
+Authors can draft providers and use-site contributions in parallel, keeping missing
+provider or visibility closure as a shared dependency rather than an authoring gate.
+Preserve `.header-types.cs` producer filenames in frozen
 source overlays so the emitter can distinguish group contributions from ordinary
 native or residual legacy enum definitions. Keep unmigrated use-site facts explicit
-until their own declaration owners qualify. After moving a complete group definition,
-the existing `addUsesTo` form can retain those existing uses without `name`, `members`,
-or `autoPopulate`; it emits remaps, not another enum definition. Do not add new
-API-specific sidecar facts as part of that bridge.
+until central qualification covers their declaration owners. After moving a complete
+group definition, the existing `addUsesTo` form can retain those existing uses without
+`name`, `members`, or `autoPopulate`; it emits remaps, not another enum definition.
+Do not add new API-specific sidecar facts as part of that bridge.
 
 Header typedef annotations can also coexist with a retained AutoTypes record during
 incremental migration. The emitter composes generated native typedef wrappers by
