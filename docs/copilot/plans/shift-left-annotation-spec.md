@@ -73,7 +73,7 @@ permitted, and annotations on unsupported targets are errors.
 | Logical enum | `_Win32_Enum_(name, storage, constants...)` | Metadata-only unscoped group of existing constants, using the specified native integral storage type of at most 64 bits. |
 | Logical flags enum | `_Win32_FlagsEnum_(name, storage, constants...)` | The same grouping contract with flags semantics. |
 | Projected return parameter | `_Win32_Retval_` | Output parameter in a C/C++-authored declaration, alongside direction SAL. Use native `[retval]` in IDL instead. |
-| IDL interface annotation | `_Win32_AnnotateInterface_(name, annotation)` | Before the original IDL interface declaration. Supplies a public annotation such as `_Win32_SupportedOS_15063_` without editing the generated header. |
+| Original-IDL metadata | `cpp_quote("/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(...) */")` | The same fact vocabulary and validation, with explicit native identity and no synthetic declaration. |
 
 Use existing native syntax where it already expresses the contract:
 
@@ -213,68 +213,69 @@ typedef BOOL(WINAPI *PUBLIC_CALLBACK)(DWORD value);
 
 Patch the original SDK IDL, not its generated header. Ordinary C/C++ prefix macros
 do not automatically survive MIDL. Use native IDL attributes for direction, counts,
-and retval; use MIDL's `[annotation("...")]` transport on fields and local
-methods/parameters for metadata that those native attributes cannot express.
+and retval. Additional metadata uses standard `cpp_quote` emitting an owned comment,
+outside parameter/field lists and inside the declaration's native conditional region.
 
 For example, a field can carry its enum association:
 
 ```idl
 typedef struct DESCRIPTION {
-    [annotation("_Win32_AssociatedEnum_(DESCRIPTION_KIND)")]
     long kind;
 } DESCRIPTION;
+cpp_quote("/* Win32Metadata: field ::DESCRIPTION::kind => AssociatedEnum(DESCRIPTION_KIND) */")
 ```
 
-On an already-local method, combine additional metadata with the parameter's
-native SAL in one annotation payload:
+Native callable attributes and SAL stay unchanged:
 
 ```idl
-[annotation("_Win32_PreserveResult_")]
 HRESULT Read(
-    [in, annotation("_In_ _Win32_Retained_")] byte* input,
-    [out, retval, annotation("_Out_retval_")] long* result);
+    [in] byte* input,
+    [out, retval] long* result);
+cpp_quote("/* Win32Metadata: method ::IReader::Read => PreserveResult */")
+cpp_quote("/* Win32Metadata: parameter ::IReader::Read::input => Retained */")
 ```
 
-The shared SAL bootstrap supplies the annotation definitions; do not add an
+The shared SAL bootstrap supplies native macro definitions when required; do not add an
 annotation-header include to each API header or emit one through `cpp_quote`.
 An original IDL preprocessing stream that does not already include SAL must
 include `<sal.h>` before using the helpers. An IDL `import` does not establish
 CPP macro visibility.
 
-Do not use `[annotation]` as a blanket substitute for native MIDL attributes or
-assume it supports every IDL target. In particular, interfaces need the dedicated
-helper before the interface declaration:
+Do not use `[annotation]` as a metadata channel. It overrides native SAL, rejects
+interface/enumerator positions and restricts nonlocal callables. Interface facts
+instead bind the original native record:
 
-```cpp
-_Win32_AnnotateInterface_(IWaaSAssessor, _Win32_SupportedOS_15063_)
+```idl
+cpp_quote("/* Win32Metadata: interface ::IWaaSAssessor => SupportedOSPlatform(\"windows10.0.15063\") */")
 ```
 
 Keep native interface attributes, methods, and vtables unchanged. MIDL has additional
-limitations for type-level annotations and non-local methods; see the
+limitations for type-level annotations and nonlocal methods; see the
 [verified transport limits](#native-idl-annotation-limits) before migrating another
 IDL declaration kind.
 
-For a non-local method, use the method helper **after the interface definition**:
+A nonlocal method uses the same comment transport:
 
 ```idl
-_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Skip, _Win32_PreserveResult_)
+cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Skip => PreserveResult */")
 ```
 
-Group these helpers with an existing trailing `cpp_quote` section when possible,
-after all referenced interfaces are complete.
+Reuse existing quote regions where possible and preserve raw generated-header/RPC
+differences if removing a carrier changes MIDL's implicit bookkeeping.
 
 The method must already be declared, and the annotation must be valid on that
 method. This preserves the native RPC contract and SAL without adding a MIDL SAL
-override. The helper can also target a local method when its metadata must not
+override. A comment can also target a local method when its metadata must not
 propagate to the generated proxy function:
 
 ```idl
-_Win32_AnnotateMethod_(IEnumSTATPROPSTG::Next, _Win32_PreserveResult_)
+cpp_quote("/* Win32Metadata: method ::IEnumSTATPROPSTG::Next => PreserveResult */")
 ```
 
-These helpers do not create symbols for ordinary SDK consumers. The method helper
-does not annotate parameters or the C-interface vtable fields; those remain
-separate targets.
+Comments do not create symbols for any SDK consumer. Parameter comments append
+the actual native parameter name to the method/function path. A method selector
+does not annotate C-interface vtable fields; the ordinary scraper uses C++ interface
+definitions. Native C/CINTERFACE consumption remains unchanged.
 
 For an existing IDL enum, emit a metadata/Clang-guarded `#pragma clang attribute`
 push/pop pair through `cpp_quote` around the original definition to apply
@@ -950,16 +951,44 @@ transport tests must not be counted as qualification of that contract.
 
 ### Original-IDL preparation
 
-Under `MIDL_PASS`, `_Win32_AnnotateInterface_` emits an annotated same-name C++
-typedef through `cpp_quote`. The existing primary-typedef bridge transfers its
-facts to the native interface record. This works before or after the interface
-definition: MIDL can hoist library-referenced interfaces ahead of their quotes,
-and Clang discards attributes on a record redeclared after its definition.
-The typedef does not introduce a new type or change native layout. This encoding
-is needed because native MIDL does not emit an arbitrary interface `[annotation]`
-on the C++ definition; ignored-attribute diagnostics remain errors.
-The emitted declaration is guarded by `WIN32METADATA`, `__clang__`, and
-`__cplusplus`, so ordinary native consumers do not receive an extra typedef.
+Original-IDL facts use one block comment per fact:
+
+```text
+/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(arguments) */
+```
+
+Use standard `cpp_quote` with quotes/backslashes escaped for its ordinary string
+literal. MIDL removes ordinary IDL source comments; quoted comments survive.
+The reader examines actual Clang comment tokens, not marker text inside strings.
+No special MIDL attribute, annotated forward typedef, copied native signature,
+or compiler-expression carrier is required.
+
+Selectors are `interface`/`record`, `method`, `function`, `return`, `parameter`,
+`field`, `type`, `enum`, `enumerator`, and `constant`. Targets are absolute native
+identifiers separated by `::`. Parameters append their native name to the callable.
+Use actual emitted `get_`/`put_` names for properties and free-function names for
+non-object RPC interfaces. Record aliases resolve their native fields, including
+anonymous-member injection such as `::PROPVARIANT::vt`; a macro-erased inner tag
+is not an identity. Distinct typedef aliases remain distinct.
+
+The same canonical fact parser, validation, native cleanup resolution, projection
+and final emitter serve macros and comments. `return` accepts RAIIFree and
+AssociatedEnum. References use native lookup from the bound declaration.
+AssociatedEnum admits real enum declarations and already-compiled logical groups,
+including exact native `__MIDL_*` tags. AlsoUsableFor and AssociatedConstant must
+resolve actual native types/constants. ImportLibrary uses literal quoted strings.
+Comment RAIIFree invalids are signed decimal Int64 literals, preserving their order
+and sign; symbols, hexadecimal/suffixed literals, casts and expressions fail.
+Existing native C/C++ macros retain compiler-evaluated arguments and Enum/FlagsEnum
+groups keep their compiled-value transport.
+
+The existing annotation option enables this path. Clang's detailed preprocessing
+record supplies included files and skipped ranges. Disabled branches do not apply;
+active comments in directives/macros, malformed or unknown payloads, missing names,
+and ambiguous native targets/references produce WMA001. Template helper bodies
+excluded from ordinary projection do not create false method overloads; two real
+non-template overloads remain ambiguous. Adjacent native direction/retval comment
+blocks remain readable, without treating arbitrary comments as native direction.
 
 Metadata-only C/C++ enum grouping invocations must be excluded from `MIDL_PASS`,
 including their trailing semicolon. An empty `_Win32_Enum_` expansion leaves a
@@ -971,11 +1000,13 @@ and explicitly pass the necessary preprocessor defines/includes when MIDL `cpp_o
 overrides normal forwarding. Preserve ordinary MIDL diagnostics and native C/C++
 declarations.
 
-Prepare native IDL `[retval]` as `_Out_retval_` or `_COM_Outptr_retval_` SAL, producing
-`SAL_retval` in the first Clang AST. The C# reader retains a compatibility bridge for
-legacy generated SDK headers whose retval appears only in MIDL comments. Remove that
-bridge only when original-IDL preparation supplies native SAL for every affected
-declaration and equivalence is established.
+Preserve native `[retval]` and read MIDL's emitted parameter comment. The selected
+native SDK SAL has no `_Out_retval_`/`_COM_Outptr_retval_`; local conversion uses
+standard `_Out_`/`_COM_Outptr_`. Remote interface methods retain `/sal`-generated
+RPC direction/count annotations without synthetic `[annotation]` overrides.
+Explicit native SAL and local-method count conversion remain intact. Native
+retval, SAL and an explicit metadata RetVal converge once; duplicate authored
+metadata facts still fail.
 
 #### Native IDL annotation limits
 
@@ -984,7 +1015,7 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 
 | IDL target | Native transport and qualification limit |
 | --- | --- |
-| Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies an annotated same-name C++ typedef, including when MIDL hoists the definition before its quote. |
+| Interface | `[annotation]` is rejected with MIDL2072. A quoted owned comment binds the original native record without a typedef. |
 | Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type. If the enum is declared later, `_Win32_AnnotateField_` instead targets the original field after both native definitions. |
 | Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
 | Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |
@@ -992,15 +1023,13 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 | Struct or enum written as a typedef | MIDL emits the annotation on the typedef, not directly on the tag, and produces MIDL2525. The C# reader transfers primary-record typedef facts to the record; do not infer arbitrary type/tag coverage from that compatibility behavior. |
 
 `[annotation]` is a SAL override, not an automatically composed list of independent
-metadata and native SAL facts. Preserve the declaration's native SAL in the same
-payload or through the qualified preparation converter; a separate metadata-only
-payload can replace it. The interface carrier does not solve these other IDL
-grammar, placement, or SAL-composition issues.
+metadata and native SAL facts. Preserve authored native SAL; a separate
+metadata-only payload can replace it. Structured comments avoid that override and
+the native attribute placement restrictions.
 
-The existing interface pilot is qualified; this is not blanket admission of every
-IDL target. A type-level migration that cannot use a warning-free native form needs
-an explicitly qualified source-IDL carrier before admission, not a generated-header
-patch or a new warning suppression.
+The native-attribute table describes MIDL's restrictions, not the production
+structured-comment target surface. Comment recognition does not waive original
+source, native layout/RPC, physical metadata or complete-image equivalence checks.
 
 #### Original-AST method references
 
@@ -1012,7 +1041,7 @@ and field lists. Successful MIDL compilation alone does not prove attachment.
 Creating a new quote region can also introduce MIDL's standard-interface
 bookkeeping; reusing an existing trailing region avoids that unrelated churn.
 
-`_Win32_AnnotateMethod_` emits a metadata-only C++ carrier after the complete
+For native-authored C/C++, `_Win32_AnnotateMethod_` emits a metadata-only carrier after the complete
 interface. Its annotation arguments contain `sizeof(&Interface::Method)`, so
 Clang resolves the actual method in the original translation unit. The reader
 applies the ordinary attributes to that declaration and excludes the private
@@ -1037,7 +1066,7 @@ enum FLAGS { FIRST = 1, SECOND = 4 };
 _Win32_AnnotateField_(Record::flags, _Win32_AssociatedEnum_(FLAGS));
 ```
 
-The same spelling in original IDL emits the private carrier through `cpp_quote`.
+Existing native carriers remain supported; original-IDL migration uses comments.
 Place it at native global scope after both definitions, preserving their
 conditional frames. It references `sizeof(&Record::flags)` and the unchanged
 typed `(FLAGS)0` annotation argument. The reader resolves the canonical
@@ -1064,17 +1093,17 @@ with parameter positions. Its
 recognizes `in`, `out`, `optional`, `retval`, and `iid_is`; it is not a generic
 transport for new type, field, or method attributes. Property accessor markers
 are a separate fixed case. This is useful legacy-marker recovery, but does not
-solve the quoted-comment placement problem or preserve arbitrary new metadata
-through MIDL. The C# pipeline therefore keeps its existing retval compatibility
-bridge without adding a new source-token parser for this pilot.
+solve arbitrary metadata transport through MIDL. The C# reader preserves native
+marker recovery alongside its explicit owned-comment parser and native identity
+binding.
 
 ### C# integration and compatibility bridges
 
 The C# scraper opts in with `--config parse-win32-annotations` and uses
 `WIN32METADATA` as the public header feature gate. Its private transport override
 supplies diagnostic policy as described above. There is no backend-specific header
-gate, private expanded-expression payload, second parse, or
-detailed-preprocessing-record dependency. Header annotation ingestion is implemented;
+gate, private expanded-expression payload or second parse. Comment ingestion uses
+the first translation unit's detailed preprocessing record. Header annotation ingestion is implemented;
 remaining sidecar migrations must still be qualified against their actual headers and
 output.
 

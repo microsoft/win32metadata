@@ -232,7 +232,7 @@ The shared `win32metadata_annotations.h` defines the `_Win32_*_` vocabulary usin
 Clang attributes owned by the `Win32Metadata.` payload prefix. The scraper opts in
 with `--config parse-win32-annotations`, defines `WIN32METADATA`, and uses the same
 translation unit for annotation extraction, remap discovery, and ClangSharp
-generation. RAII invalid values, group values, type associations, and optional
+generation. Native macro RAII invalid values, group values, type associations, and optional
 import overrides are typed annotation arguments from that first AST. No
 `WIN32METADATA_CSHARP` gate or second expression parse is used.
 Cleanup references use a tagged expanded native name, bound to one actual function
@@ -256,10 +256,20 @@ Defined annotations:
 | `_Win32_Reserved_` | parameter | Reserved metadata; preserves existing native direction and optionality |
 | `_Win32_ContainsInteriorPointers_` | caller-owned output buffer | Same-allocation interior-pointer metadata |
 
-Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. A prepared
-IDL `[retval]` becomes native retval SAL in the AST. A legacy generated-header
-comment bridge remains until all affected original IDLs are prepared; it is not
-the transport for new annotations.
+Prefer existing SAL/MIDL for counts, directions, COM outputs and retval. Native
+IDL `[retval]` survives in MIDL's parameter comments and is read alongside adjacent
+direction blocks. Native SDK SAL uses `_Out_`/`_COM_Outptr_`, not generator-only
+retval macros. Nonlocal methods retain `/sal`-generated RPC annotations.
+
+Original IDL transports additional facts with standard `cpp_quote` emitting
+`/* Win32Metadata: KIND ::Native::Target => CanonicalAnnotation(arguments) */`.
+This uses the same opt-in, facts, target validation and emitter as native macros.
+Clang's active comment tokens, included files and skipped ranges supply source
+scope; strings are not comments. Explicit native identities bind interfaces,
+methods, parameters, fields, types, functions/returns and enum/constants without
+synthetic declarations. Cleanup/type/enum references resolve natively; comment
+RAIIFree invalids support signed decimal Int64 literals. Compiled logical groups
+and native C/C++ expressions retain their existing macro path.
 
 See `docs/copilot/plans/shift-left-annotation-spec.md` for the full vocabulary and
 original-SDK-artifact patching requirements.

@@ -56,13 +56,43 @@ $annotationPattern = '\[annotation\s*\(\s*"(?<value>(?:\\.|[^"\\])*)"\s*\)\s*\]'
 $annotationBeforeNative = [Regex]::new("(?<annotation>$annotationPattern)\s*(?<native>$attributeListPattern)")
 $adjacentAnnotations = [Regex]::new("(?<left>$annotationPattern)\s*(?<right>$annotationPattern)")
 
-$stream = [System.IO.StreamWriter] $outputFileName
+function Test-NativeLocalAttribute([string]$text) {
+    return $text -match '[\[,]\s*local\s*(?=,|\])'
+}
 
-foreach ($line in (Get-Content $inputFileName)) {
+function Get-RemoteInterfaceRanges([string]$text) {
+    $code = [regex]::Replace($text,
+        '/\*[\s\S]*?\*/|//[^\r\n]*|"(?:\\[\s\S]|[^"\\])*"|(?m)^[ \t]*#(?:[^\r\n]*\\\r?\n)*[^\r\n]*',
+        { param($match) [regex]::Replace($match.Value, '[^\r\n]', ' ') })
+    $braces = [System.Collections.Generic.Stack[int]]::new()
+    $ends = @{}
+    for ($i = 0; $i -lt $code.Length; $i++) {
+        if ($code[$i] -eq '{') {
+            $braces.Push($i)
+        } elseif ($code[$i] -eq '}' -and $braces.Count -gt 0) {
+            $ends[$braces.Pop()] = $i
+        }
+    }
+    $ranges = foreach ($match in [regex]::Matches($code,
+        '\b(?:interface|dispinterface)\s+[A-Za-z_]\w*\s*(?::[^;{]+)?\s*\{')) {
+        $begin = $match.Index + $match.Length - 1
+        if (!$ends.ContainsKey($begin)) {
+            throw "Cannot bind the native IDL interface body at offset $($match.Index) in $inputFileName."
+        }
+        $previous = if ($match.Index -eq 0) { -1 } else {
+            $code.LastIndexOfAny([char[]]';{}', $match.Index - 1)
+        }
+        if (!(Test-NativeLocalAttribute $code.Substring($previous + 1, $match.Index - $previous - 1))) {
+            [pscustomobject]@{ Begin = $begin; End = $ends[$begin] }
+        }
+    }
+    return [pscustomobject]@{ Code = $code; Ranges = @($ranges) }
+}
+
+$lines = foreach ($line in (Get-Content $inputFileName)) {
     # Quoted C++ text is not an IDL parameter declaration.
-    if ($line.TrimStart().StartsWith("cpp_quote(") -or $line.TrimStart().StartsWith("#pragma")) {
-        $stream.WriteLine($line)
-
+    if ($line.TrimStart() -match '^(?:cpp_quote|midl_echo)\b|^#') {
+        $line
         continue
     }
 
@@ -88,13 +118,37 @@ foreach ($line in (Get-Content $inputFileName)) {
             '[annotation("' + $left + ' ' + $right + '")]'
         })
     }
+    $line
+}
 
+$source = [string]::Join("`n", @($lines))
+$native = Get-RemoteInterfaceRanges $source
+$stream = [System.IO.StreamWriter] $outputFileName
+$offset = 0
+foreach ($line in $lines) {
+    $originalLength = $line.Length
+    $inserted = 0
+    if ($line.TrimStart() -match '^(?:cpp_quote|midl_echo)\b|^#') {
+        $stream.WriteLine($line)
+        $offset += $originalLength + 1
+        continue
+    }
     # Convert MIDL attributes to SAL annotations.
     $startAt = 0
     while ($attributeListPattern.IsMatch($line, $startAt)) {
         $match = $attributeListPattern.Match($line, $startAt)
         $attributeList = $match.Groups[1].Value
         $attributeListIndex = $match.Groups[0].Index + $match.Groups[0].Length
+        $nativeOffset = $offset + $match.Index - $inserted
+        $remote = @($native.Ranges | Where-Object { $nativeOffset -gt $_.Begin -and $nativeOffset -lt $_.End })
+        if ($remote.Count -gt 0) {
+            $previous = $native.Code.LastIndexOfAny([char[]]';{}', $nativeOffset - 1)
+            if (!(Test-NativeLocalAttribute $native.Code.Substring($previous + 1, $nativeOffset - $previous - 1))) {
+                # /sal derives remote RPC counts/directions; annotation would override it and cause MIDL2495.
+                $startAt = $attributeListIndex
+                continue
+            }
+        }
         $existingAnnotation = [regex]::Match($line.Substring($attributeListIndex), "^\s*$annotationPattern")
         if ($existingAnnotation.Success -and
             $existingAnnotation.Groups['value'].Value -match '_(?:In|Out|Inout|COM_Outptr)[A-Za-z0-9_]*(?:\(|$|\s)') {
@@ -105,7 +159,6 @@ foreach ($line in (Get-Content $inputFileName)) {
         $in = $false
         $out = $false
         $isComPtr = $false
-        $retval = $false
         $optional = $false
         $size_is = $null
         $length_is = $null
@@ -122,8 +175,6 @@ foreach ($line in (Get-Content $inputFileName)) {
                 $out = $true
             } elseif ($attribute.StartsWith("iid_is")) {
                 $isComPtr = $true
-            } elseif ($attribute -eq "retval") {
-                $retval = $true
             } elseif ($attribute -eq "optional") {
                 $optional = $true
             } elseif ($attribute.StartsWith("size_is")) {
@@ -180,15 +231,9 @@ foreach ($line in (Get-Content $inputFileName)) {
             $annotation += $parameters
         }
 
-        # Overwrite the annotation with _COM_Outptr_ or _Out_retval_ if possible.
+        # [retval] remains in MIDL's native comment; SDK SAL has no _Out_retval_ macro.
         if ($out -and $isComPtr) {
             $annotation = "_COM_Outptr_"
-
-            if ($retval) {
-                $annotation += "retval_"
-            }
-        } elseif ($out -and $retval) {
-            $annotation = "_Out_retval_"
         }
 
         # Insert the annotation attribute into the line after the original attribute list.
@@ -201,6 +246,7 @@ foreach ($line in (Get-Content $inputFileName)) {
 
             $line = $line.Substring(0, $attributeListIndex) + $annotationAttribute +
                 $line.Substring($attributeListIndex + $existingAnnotation.Length)
+            $inserted += $annotationAttribute.Length - $existingAnnotation.Length
 
             $startAt = $attributeListIndex + $annotationAttribute.Length
         } else {
@@ -209,6 +255,7 @@ foreach ($line in (Get-Content $inputFileName)) {
     }
 
     $stream.WriteLine($line)
+    $offset += $originalLength + 1
 }
 
 $stream.Close()

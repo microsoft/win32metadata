@@ -14,7 +14,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace Win32MetadataScraper
 {
-    internal sealed class HeaderAnnotationProcessor
+    internal sealed partial class HeaderAnnotationProcessor
     {
         private const string MetadataNamespace = "global::Windows.Win32.Foundation.Metadata.";
         private const string CleanupReferencePrefix = HeaderAnnotation.OwnerPrefix + "FunctionDecl:";
@@ -37,6 +37,7 @@ namespace Win32MetadataScraper
         private readonly List<(VarDecl Declaration, Attr Target)> fieldCarriers = new();
         private readonly HashSet<Cursor> visited = new();
         private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
+        private NativeNameLookup nativeNames;
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
             .Select(carrier => carrier.Declaration.Name);
@@ -54,6 +55,10 @@ namespace Win32MetadataScraper
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
             ApplyFieldAnnotations();
+            ApplyCommentAnnotations(translationUnit);
+            foreach (var facts in declarations.Values.Where(value => value.HasMidlRetval))
+                if (!facts.Annotations.Any(annotation => annotation.Name == "RetVal"))
+                    AddAnnotation(facts, new HeaderAnnotation("RetVal", Array.Empty<string>()), facts.Location);
             ResolveCleanupReferences();
             MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
@@ -222,86 +227,13 @@ namespace Win32MetadataScraper
         {
             if (cleanupReferences.Count == 0)
                 return;
-            var named = visited.OfType<NamedDecl>().Where(declaration => declaration.SemanticParentCursor != null &&
-                (declaration is ParmVarDecl || declaration.SemanticParentCursor is not FunctionDecl)).ToArray();
-            var declarationsByScope = named.Where(declaration => declaration.Name.Length != 0)
-                .ToLookup(declaration =>
-                {
-                    Cursor scope = declaration.SemanticParentCursor;
-                    if (declaration is EnumConstantDecl && scope is EnumDecl enumeration && !enumeration.IsScoped)
-                        scope = enumeration.SemanticParentCursor;
-                    return (scope.Handle.CanonicalCursor, declaration.Name);
-                });
-            var records = new Dictionary<CXCursor, CXXRecordDecl>();
-            foreach (var record in named.OfType<CXXRecordDecl>())
-                records.TryAdd(record.Handle.CanonicalCursor, record);
-            var namespaceImports = named.OfType<UsingDirectiveDecl>()
-                .ToLookup(declaration => declaration.SemanticParentCursor.Handle.CanonicalCursor);
-            var implicitNamespaces = named.OfType<NamespaceDecl>()
-                .Where(declaration => declaration.IsInline || declaration.IsAnonymousNamespace)
-                .ToLookup(declaration => declaration.SemanticParentCursor.Handle.CanonicalCursor);
+            nativeNames ??= new NativeNameLookup(visited);
             foreach (var reference in cleanupReferences)
             {
-                bool absolute = reference.Name.StartsWith("::", StringComparison.Ordinal);
-                string[] parts = (absolute ? reference.Name[2..] : reference.Name)
-                    .Split(new[] { "::" }, StringSplitOptions.None);
-                Cursor scope = absolute ? reference.Owner.TranslationUnitDecl : reference.Owner.SemanticParentCursor;
-                NamedDecl[] candidates = Array.Empty<NamedDecl>();
-                while (scope != null)
-                {
-                    candidates = Lookup(scope.Handle.CanonicalCursor, parts[0]);
-                    if (candidates.Length != 0 || absolute)
-                        break;
-                    scope = scope.SemanticParentCursor;
-                }
-                foreach (string part in parts.Skip(1))
-                {
-                    candidates = candidates.Where(declaration => declaration is NamespaceDecl or RecordDecl)
-                        .SelectMany(declaration => Lookup(declaration.Handle.CanonicalCursor, part))
-                        .ToArray();
-                }
-                candidates = candidates.GroupBy(declaration => declaration.Handle.CanonicalCursor)
-                    .Select(group => group.First()).ToArray();
+                var candidates = nativeNames.Resolve(reference.Owner, reference.Name, reference.Location);
                 if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
                     throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
                 reference.Arguments[0] = candidates[0].Name;
-            }
-
-            NamedDecl[] Lookup(CXCursor scope, string name)
-            {
-                var candidates = new List<NamedDecl>();
-                var searched = new HashSet<CXCursor>();
-                var scopes = new Stack<CXCursor>();
-                scopes.Push(scope);
-                while (scopes.TryPop(out scope))
-                {
-                    if (!searched.Add(scope))
-                        continue;
-                    var direct = declarationsByScope[(scope, name)].ToArray();
-                    candidates.AddRange(direct.Select(declaration => declaration.UnderlyingDecl));
-                    if (direct.Length == 0 && records.TryGetValue(scope, out var record))
-                        foreach (var parent in (record.Definition ?? record).Bases)
-                        {
-                            if (parent.Type.CanonicalType is not RecordType type)
-                                throw Error(GetLocation(record.Location), "RAIIFree cleanup lookup requires a resolved native base declaration.");
-                            scopes.Push(type.Decl.Handle.CanonicalCursor);
-                        }
-                    foreach (var declaration in implicitNamespaces[scope])
-                        scopes.Push(declaration.Handle.CanonicalCursor);
-                    foreach (var directive in namespaceImports[scope])
-                    {
-                        var target = directive.CursorChildren.LastOrDefault(child => child.Handle.Kind == CXCursorKind.CXCursor_NamespaceRef);
-                        if (target == null)
-                            throw Error(GetLocation(directive.Location), "A cleanup namespace import requires a native namespace reference.");
-                        var handle = target.Handle.Referenced;
-                        if (handle.Kind == CXCursorKind.CXCursor_NamespaceAlias)
-                            handle = handle.Referenced;
-                        if (handle.Kind != CXCursorKind.CXCursor_Namespace)
-                            throw Error(GetLocation(directive.Location), "A cleanup namespace import must resolve to a native namespace.");
-                        scopes.Push(handle.CanonicalCursor);
-                    }
-                }
-                return candidates.ToArray();
             }
         }
 
@@ -468,8 +400,7 @@ namespace Win32MetadataScraper
                     {
                         var retval = new HeaderAnnotation("RetVal", Array.Empty<string>());
                         ValidateTarget(facts, retval, location);
-                        if (!facts.Annotations.Any(annotation => annotation.Name == retval.Name))
-                            facts.Annotations.Add(retval);
+                        facts.HasMidlRetval = true;
                     }
                 }
                 if (declaration is EnumDecl enumDeclaration)
@@ -594,23 +525,28 @@ namespace Win32MetadataScraper
                 {
                     throw Error(attributeLocation, exception.Message);
                 }
-                ValidateTarget(facts, annotation, attributeLocation);
-                if (annotation.Name != "AssociatedConstant")
-                {
-                    var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
-                    if (existing != null)
-                    {
-                        if (annotation.Name is "Enum" or "FlagsEnum")
-                            continue;
-                        if (annotation.Name != "SupportedOSPlatform")
-                            throw Error(attributeLocation, $"Duplicate '{annotation.Name}' annotation.");
-                        if (!existing.Arguments.SequenceEqual(annotation.Arguments))
-                            throw Error(attributeLocation, $"Conflicting 'SupportedOSPlatform' annotations on '{facts.Declaration.Name}'. Clang scopes accumulate; close the prior scope before changing floors.");
-                        continue;
-                    }
-                }
-                facts.Annotations.Add(annotation);
+                AddAnnotation(facts, annotation, attributeLocation);
             }
+        }
+
+        private static void AddAnnotation(DeclarationFacts facts, HeaderAnnotation annotation, NativeLocation location)
+        {
+            ValidateTarget(facts, annotation, location);
+            if (annotation.Name != "AssociatedConstant")
+            {
+                var existing = facts.Annotations.FirstOrDefault(item => item.Name == annotation.Name);
+                if (existing != null)
+                {
+                    if (annotation.Name is "Enum" or "FlagsEnum")
+                        return;
+                    if (annotation.Name != "SupportedOSPlatform")
+                        throw Error(location, $"Duplicate '{annotation.Name}' annotation.");
+                    if (!existing.Arguments.SequenceEqual(annotation.Arguments))
+                        throw Error(location, $"Conflicting 'SupportedOSPlatform' annotations on '{facts.Declaration.Name}'. Clang scopes accumulate; close the prior scope before changing floors.");
+                    return;
+                }
+            }
+            facts.Annotations.Add(annotation);
         }
 
         private void MergeRedeclarationFacts()
@@ -756,8 +692,9 @@ namespace Win32MetadataScraper
                     throw Error(location, $"'{annotation.Name}' requires a pointer or reference parameter.");
                 var salNames = declaration.Attrs.Select(attribute =>
                     Regex.Match(attribute.Spelling, @"\bName\s*=\s*SAL_name\s*;\s*p1\s*=\s*""([^""]+)""").Groups[1].Value).ToArray();
-                bool inputOnly = salNames.Any(name => name.StartsWith("_In_", StringComparison.Ordinal) ||
-                    name.StartsWith("__RPC__in_", StringComparison.Ordinal));
+                bool inputOnly = facts.MidlDirection == ParameterAttributes.In ||
+                    salNames.Any(name => name.StartsWith("_In_", StringComparison.Ordinal) ||
+                    name == "__RPC__in" || name.StartsWith("__RPC__in_", StringComparison.Ordinal));
                 if (inputOnly && annotation.Name is "ContainsInteriorPointers" or "RAIIFree" or "RetVal")
                     throw Error(location, $"'{annotation.Name}' requires output/inout storage, not an input-only parameter.");
                 if (annotation.Name is "ContainsInteriorPointers" or "RAIIFree" or "RetVal")
@@ -1083,10 +1020,9 @@ namespace Win32MetadataScraper
 
         private static ParameterAttributes GetMidlDirection(string comment)
         {
-            if (!Regex.IsMatch(comment, @"^/\*\s*(\[[^\[\]]*\]\s*)+\*/$"))
-                return ParameterAttributes.None;
             var direction = ParameterAttributes.None;
-            foreach (Match attributeList in Regex.Matches(comment, @"\[([^\[\]]*)\]"))
+            foreach (Match block in Regex.Matches(comment, @"/\*\s*(\[[^\[\]]*\]\s*)+\*/"))
+            foreach (Match attributeList in Regex.Matches(block.Value, @"\[([^\[\]]*)\]"))
                 foreach (string attribute in attributeList.Groups[1].Value.Split(','))
                 {
                     if (attribute.Trim().Equals("in", StringComparison.OrdinalIgnoreCase))
@@ -1106,17 +1042,24 @@ namespace Win32MetadataScraper
             var file = declaration.TranslationUnit.Handle.GetFile(start.File);
             var contents = declaration.TranslationUnit.Handle.GetFileContents(file, out _);
             int position = checked((int)start.Offset);
-            while (position > 0 && char.IsWhiteSpace((char)contents[position - 1]))
-                position--;
-            if (position < 2 || contents[position - 2] != '*' || contents[position - 1] != '/')
-                return string.Empty;
-            int end = position;
-            position -= 2;
-            while (position >= 2 && !(contents[position - 2] == '/' && contents[position - 1] == '*'))
-                position--;
-            if (position < 2)
-                return string.Empty;
-            return Encoding.UTF8.GetString(contents.Slice(position - 2, end - position + 2));
+            var comments = new List<string>();
+            while (position > 0)
+            {
+                while (position > 0 && char.IsWhiteSpace((char)contents[position - 1]))
+                    position--;
+                if (position < 2 || contents[position - 2] != '*' || contents[position - 1] != '/')
+                    break;
+                int end = position;
+                position -= 2;
+                while (position >= 2 && !(contents[position - 2] == '/' && contents[position - 1] == '*'))
+                    position--;
+                if (position < 2)
+                    break;
+                position -= 2;
+                comments.Add(Encoding.UTF8.GetString(contents.Slice(position, end - position)));
+            }
+            comments.Reverse();
+            return string.Join(" ", comments);
         }
 
         private static NativeLocation GetLocation(CXSourceLocation location)
@@ -1145,6 +1088,7 @@ namespace Win32MetadataScraper
             internal DeclarationFacts AnnotationOwner { get; set; }
             internal List<HeaderAnnotation> Annotations { get; set; } = new();
             internal List<long> InvalidValues { get; set; } = new();
+            internal bool HasMidlRetval { get; set; }
             internal bool IsScopedEnum { get; set; }
             internal bool IsFlagsEnum { get; set; }
             internal ParameterAttributes MidlDirection { get; set; }

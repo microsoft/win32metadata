@@ -26,6 +26,48 @@ semantics: supported OS, imports, ownership and invalid values, result and lifet
 behavior, logical enum groups and associations, and the rest of the supported
 vocabulary. Native declarations and existing SAL remain authoritative.
 
+#### Original-IDL structured comments
+
+The same `parse-win32-annotations` option reads owned comments emitted by MIDL.
+Each block carries one existing canonical fact and an absolute native target:
+
+```cpp
+/* Win32Metadata: interface ::IExample => SupportedOSPlatform("windows6.1") */
+/* Win32Metadata: return ::OpenExample => RAIIFree(CloseExample, -1, 0) */
+/* Win32Metadata: parameter ::IExample::Run::flags => AssociatedEnum(EXAMPLE_FLAGS) */
+/* Win32Metadata: field ::EXAMPLE_RECORD::flags => AssociatedEnum(EXAMPLE_FLAGS) */
+```
+
+Use a standard IDL quote, outside field/parameter lists:
+
+```idl
+cpp_quote("/* Win32Metadata: interface ::IExample => SupportedOSPlatform(\"windows6.1\") */")
+```
+
+Selectors are `interface`/`record`, `method`, `function`, `return`, `parameter`,
+`field`, `type`, `enum`, `enumerator`, and `constant`. A parameter appends its
+native name to its function/method path. Use emitted property names such as
+`::IExample::get_Value::value`. Record typedefs and their tags identify the same
+native fields, including compiler-owned anonymous-member injection; distinct type
+aliases stay distinct. `return` accepts only RAIIFree and AssociatedEnum.
+
+All existing simple facts are supported with their existing target validation.
+Native cleanup, compatible-type, constant and enum references resolve from the
+target's native scope. AssociatedEnum also accepts an already-compiled logical
+group. Enum/FlagsEnum groups retain the compiled native macro transport; comments
+do not evaluate their values. RAIIFree invalids are signed decimal Int64 literals,
+not symbols, suffixes, casts, hexadecimal literals or C++ expressions. Existing
+native C/C++ annotations retain compiler-evaluated arguments.
+
+Payload strings use ordinary quoted canonical arguments, including escaped quotes
+and backslashes. Escape the whole comment again when placing it in `cpp_quote`.
+Only actual Clang comment tokens are read, never strings containing marker text.
+The first native translation unit supplies included files, skipped conditional
+ranges, identities and projection rules. An active comment inside a preprocessor
+directive/macro, malformed payload, unknown fact, missing reference, or ambiguous
+target fails with WMA001. Comments do not add declarations or change SAL.
+Adjacent native MIDL direction/retval blocks remain readable.
+
 An enum association can use a metadata-only forward declaration of the original
 native enum tag and typedef when its definition is in another header or partition.
 The complete original definition must still participate in metadata generation.
@@ -134,21 +176,19 @@ from a reserved schema-1 owner map. Each `owners` entry contains `original`,
 ```
 
 The tool binds interface definitions in original shipped IDL, ignoring comments
-and forward declarations. It inserts the reviewed
-`_Win32_AnnotateInterface_` carrier before native attributes and adds the SAL
-bootstrap without rewriting existing bytes, guards, attributes or method order.
+and forward declarations. Interface facts use the structured-comment transport
+above, without an annotated forward typedef. Preserve original bytes, guards,
+attributes, method order and the selected SAL bootstrap.
 Native function-like attribute macros are kept intact when every source definition
 expands to an attribute list; carriers precede the original invocation.
 It also binds unique native function prototypes in consecutive `cpp_quote`
 statements with an explicit `STDAPI`, `STDAPI_(type)`, `SHSTDAPI`, or HRESULT/DWORD
 `STDAPICALLTYPE`, `STDMETHODCALLTYPE`, or `WINAPI` prefix and a complete parameter
 list ending in a semicolon. Consecutive quoted return-type and calling-convention
-lines are kept intact. The public OS macro
-is inserted immediately before the function name, preserving native linkage,
-return types, calling conventions and SAL. If that original line has trailing
-whitespace, it uses the equivalent position after the parameter list instead,
-without cleaning native bytes or weakening patch checks. If neither line can be
-patched strictly, the exact fact remains legacy debt. Calls, definitions, comments and
+lines are kept intact. The emitted comment names the bound native function,
+preserving linkage, return type, calling convention, SAL and original whitespace.
+If the source cannot be patched strictly, the exact fact remains legacy debt.
+Calls, definitions, comments and
 incomplete or ambiguous prototypes are not admitted. Rerun with the owner's full
 fact map to preserve already-authored interface annotations in cumulative patches.
 Ambiguous targets, unsupported OS vocabulary, existing carriers and other
@@ -171,34 +211,24 @@ the complete remaining C# syntax without suppressing unrelated attributes.
 Selected callable facts can pin an `existingImportLibrary` in the qualification
 report to require the same nonempty `DllImport` in actual normal output.
 
-The same native prototype binding supports function `setLastError` facts through
-`_Win32_SetLastError_`. Exact interface method
-`CanReturnMultipleSuccessValues`/`CanReturnErrorsAsSuccess` overrides use the
-existing `_Win32_AnnotateMethod_(Interface::Method, _Win32_PreserveResult_)`
-carrier inside the original interface's guards. Native method parameter
-`RetVal` overrides use `[annotation("_Win32_Retval_")]` alongside the untouched
-MIDL attributes. If a parameter already has one native inline `annotation`
-payload, the token is appended inside that same payload: MIDL otherwise keeps
-only the last annotation and loses the metadata. Multiple existing annotation
-payloads remain residuals. Only one complete native method/parameter can bind each fact;
+The same native prototype binding supplies function `SetLastError` comments.
+Interface result overrides use `method ::Interface::Method => PreserveResult`;
+parameter overrides use their absolute native method/parameter identity and
+existing canonical fact. Keep native MIDL attributes and native inline SAL
+annotations untouched. Do not insert metadata into a native `[annotation]`:
+it overrides MIDL's default SAL and is restricted on nonlocal declarations.
+Only one complete native method/parameter can bind each fact;
 forwarded, ambiguous, unsupported and already-native `[retval]` contracts remain
 explicit residuals. Existing native facts do not earn new conversion credit.
 
-`-AllowCompleteInterfaceParameterCarriers` opts into the existing selected
-`_Win32_Optional_(true|false)` and `_Win32_ComOutPtr_(true|false)` transports for
-exact positive or negative parameter overrides. Interface parameters use
-`_Win32_AnnotateParameter_(Interface::Method, parameter, annotation)` after a
-complete interface at matching IDL and quoted-native global scope. An existing
-trailing `cpp_quote` region is preferred but is not required. Native declarations,
-parameter order, SAL and inline annotations are not rewritten. A short
-`Interface::parameter` selector must identify exactly one actual method parameter;
-ambiguous parameters and property methods remain residuals rather than guessing
-native `get_`/`put_` names. Native function parameters in one complete `cpp_quote`
-prototype use the same selected override macro without changing their native SAL.
+Positive/negative Optional and ComOutPtr overrides use canonical Boolean payloads
+on the exact native parameter. Native declarations, order, SAL and inline
+annotations are not rewritten. Short authoring selectors must still bind one
+actual parameter; the emitted comment names the complete native method path.
+Resolve property methods to their real generated `get_`/`put_` names.
 
-The option is additive to this authorer's existing default: without it, parameter
-overrides retain the prior disposition and existing method/retval placement is
-unchanged. The two new switches follow all existing positional parameters.
+Authoring switches still control which fact classes the authorer admits; they do
+not select a different reader or a native `[annotation]` metadata transport.
 `-SharedSalBootstrap` additionally supplies native `sal.h` through `cpp_quote`
 when absent, using the selected preparation policy's shared vocabulary. It does
 not add a per-original annotation-header include or remove existing includes.
@@ -207,8 +237,8 @@ patches, exact input hashes and the normal `-Apply` admission checks still apply
 
 Existing `associated-enum-use` rows can bind one original IDL struct field or
 interface method parameter. The authorer inserts
-`[annotation("_Win32_AssociatedEnum_(NativeEnum)")]`, or appends the token inside
-the single existing native annotation payload. It preserves native types,
+`field ::Record::field => AssociatedEnum(NativeEnum)` or the complete native
+parameter selector through `cpp_quote`. It preserves native types,
 storage, field order and SAL; imported, quoted, ambiguous and unsupported targets
 remain exact residuals. The named enum must resolve in the actual native compiler,
 and the actual normal projection must contain the exact associated-enum payload
@@ -219,17 +249,16 @@ remapping, the carrier references that real generated `enum` tag. The existing
 global parser remap remains intact; native compilation and the exact normal
 payload must prove the binding. No native enum declaration or member is added.
 
-For a field whose enum is declared later, the shared vocabulary also supports a
+For native-authored C/C++ whose enum is declared later, the shared vocabulary also supports a
 post-definition `_Win32_AnnotateField_(Record::field, _Win32_AssociatedEnum_(Enum))`
-carrier. Place it after the complete native record and enum; original IDL emits
-the carrier through `cpp_quote`. The original field keeps its scalar storage and
+carrier. Place it after the complete native record and enum. The original field keeps its scalar storage and
 the enum retains its native members. The reader resolves a compiler-bound instance
 field and applies the existing annotation before projection. Unknown or non-field
 targets, missing annotations, duplicate facts and raw-string target substitutes
 fail. The carrier is active in metadata-enabled Clang C++, including `CINTERFACE`,
 and disappears in ordinary builds and C. This is a target transport, not a new
-semantic annotation. The IDL authorer's default inline placement is unchanged;
-it does not automatically select or place this late-field carrier.
+semantic annotation. Original-IDL comments bind the same native field without
+introducing that compiler-expression carrier.
 
 Normal member controls follow native inheritance and each wrapper's exact
 vtable-delegate reference, preserving receiver and parameter signatures.

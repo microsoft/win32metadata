@@ -25,7 +25,11 @@ namespace Win32MetadataScraperTests
         [InlineData("void F([in][annotation(\"_In_opt_\")] IDispatch* callback);",
             "void F([in][annotation(\"_In_opt_\")] IDispatch* callback);")]
         [InlineData("void F([out, retval][annotation(\"_Win32_Retval_\")] long* value);",
-            "void F([out, retval][annotation(\"_Out_retval_ _Win32_Retval_\")] long* value);")]
+            "void F([out, retval][annotation(\"_Out_ _Win32_Retval_\")] long* value);")]
+        [InlineData("void F([out, retval] long* value);",
+            "void F([out, retval][annotation(\"_Out_\")] long* value);")]
+        [InlineData("void F([out, retval, iid_is(riid)] void** value);",
+            "void F([out, retval, iid_is(riid)][annotation(\"_COM_Outptr_\")] void** value);")]
         [InlineData("void F([annotation(\"_Win32_Retained_\")][in] long* value);",
             "void F([in][annotation(\"_In_ _Win32_Retained_\")] long* value);")]
         [InlineData("void F([in] IDispatch* callback, [in] long count);",
@@ -33,6 +37,29 @@ namespace Win32MetadataScraperTests
         [InlineData("cpp_quote(\"void Native([in] IDispatch* callback);\")",
             "cpp_quote(\"void Native([in] IDispatch* callback);\")")]
         public void RichAnnotationsScalarInputsAndQuotedTextRemainUnchanged(string input, string expected)
+        {
+            Assert.Equal(expected, Convert(input));
+        }
+
+        [Theory]
+        [InlineData("[object] interface I { HRESULT Remote([in] long count, [out, size_is(count)] long* values); };")]
+        [InlineData("[object]\ninterface I : IUnknown {\n HRESULT Remote([out, retval] long* result);\n};")]
+        [InlineData("/* [local] */ [object] interface I { HRESULT Remote([out] long* result); };")]
+        [InlineData("cpp_quote(\"[local] interface Fake {\")\n[object] interface I { HRESULT Remote([out] long* result); };")]
+        [InlineData("[object] interface I { HRESULT Remote([out, annotation(\"_Out_\")] long* result); };")]
+        public void RemoteMethodsPreserveNativeMidlSalWithoutSyntheticOverrides(string input)
+        {
+            Assert.Equal(input.Replace("\n", Environment.NewLine, StringComparison.Ordinal), Convert(input));
+        }
+
+        [Theory]
+        [InlineData("[object, local] interface I { HRESULT F([out, retval] long* value); };",
+            "[object, local] interface I { HRESULT F([out, retval][annotation(\"_Out_\")] long* value); };")]
+        [InlineData("[object] interface I { [local] HRESULT F([out, retval] long* value); };",
+            "[object] interface I { [local] HRESULT F([out, retval][annotation(\"_Out_\")] long* value); };")]
+        [InlineData("[object] interface I { [local] HRESULT F([in] long count, [out, size_is(count)] long* values); HRESULT Remote([out] long* result); };",
+            "[object] interface I { [local] HRESULT F([in][annotation(\"_In_\")] long count, [out, size_is(count)][annotation(\"_Out_writes_(count)\")] long* values); HRESULT Remote([out] long* result); };")]
+        public void ExplicitLocalMethodsRetainStandardSalCountsAndNativeRetval(string input, string expected)
         {
             Assert.Equal(expected, Convert(input));
         }

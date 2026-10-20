@@ -20,7 +20,7 @@ using Xunit;
 
 namespace Win32MetadataScraperTests
 {
-    public class HeaderAnnotationWinmdTests
+    public partial class HeaderAnnotationWinmdTests
     {
         [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", 0)]
@@ -381,6 +381,62 @@ __declspec(dllimport) int __stdcall CloseLater(void* value);
             AssertDoesNotHaveAttribute(reader, borrowed.GetCustomAttributes(), "RAIIFreeAttribute");
             foreach (var parameter in borrowed.GetParameters().Select(reader.GetParameter))
                 AssertDoesNotHaveAttribute(reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc")]
+        [InlineData("x64", "x86_64-pc-windows-msvc")]
+        [InlineData("arm64", "aarch64-pc-windows-msvc")]
+        public void AssociatedEnumPreservesSameNameNativeScalarTypedef(string architecture, string target)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+typedef unsigned DXGI_USAGE;
+#define USAGE_INPUT 0x10U
+#define USAGE_OUTPUT 0x20U
+_Win32_FlagsEnum_(DXGI_USAGE, unsigned, USAGE_INPUT, USAGE_OUTPUT);
+enum NATIVE_USAGE : unsigned { NativeUsage = 1 };
+struct DESCRIPTION {
+    _Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE BufferUsage;
+    _Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE* Pointer;
+    _Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE Fixed[2];
+    _Win32_AssociatedEnum_(NATIVE_USAGE) NATIVE_USAGE Native;
+    DXGI_USAGE Legacy;
+};
+_Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE QueryUsage();
+_Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE* QueryUsagePointer();
+void UseUsage(_Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE value,
+    _Win32_AssociatedEnum_(DXGI_USAGE) DXGI_USAGE* output);
+DXGI_USAGE LegacyUsage(DXGI_USAGE value, DXGI_USAGE* output);
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var provider = new SignatureNames(qualifiedNames: true);
+            var fields = FindType(reader, "DESCRIPTION").GetFields().Select(reader.GetFieldDefinition)
+                .ToDictionary(field => reader.GetString(field.Name));
+            foreach (var pair in new[] { ("BufferUsage", "UInt32"), ("Pointer", "UInt32*"), ("Fixed", "UInt32[]") })
+            {
+                var field = fields[pair.Item1];
+                Assert.Equal(pair.Item2, field.DecodeSignature(provider, null));
+                AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "DXGI_USAGE");
+            }
+            Assert.Equal("Test.NATIVE_USAGE", fields["Native"].DecodeSignature(provider, null));
+            Assert.Equal("Test.DXGI_USAGE", fields["Legacy"].DecodeSignature(provider, null));
+            foreach (var pair in new[] { ("QueryUsage", "UInt32"), ("QueryUsagePointer", "UInt32*") })
+            {
+                var method = FindMethod(reader, "Apis", pair.Item1);
+                Assert.Equal(pair.Item2, method.DecodeSignature(provider, null).ReturnType);
+                var result = method.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+                AssertStringAttribute(reader, result.GetCustomAttributes(), "AssociatedEnumAttribute", "DXGI_USAGE");
+            }
+            var use = FindMethod(reader, "Apis", "UseUsage");
+            Assert.Equal(new[] { "UInt32", "UInt32*" }, use.DecodeSignature(provider, null).ParameterTypes);
+            foreach (var parameter in use.GetParameters().Select(reader.GetParameter))
+                AssertStringAttribute(reader, parameter.GetCustomAttributes(), "AssociatedEnumAttribute", "DXGI_USAGE");
+            var legacy = FindMethod(reader, "Apis", "LegacyUsage").DecodeSignature(provider, null);
+            Assert.Equal("Test.DXGI_USAGE", legacy.ReturnType);
+            Assert.Equal(new[] { "Test.DXGI_USAGE", "Test.DXGI_USAGE*" }, legacy.ParameterTypes);
             AssertMetadataClosure(reader);
         }
 
@@ -4599,7 +4655,7 @@ struct __declspec(uuid(""1d04d0ec-13d6-4fa8-9b02-9a4cc7b8bb7f"")) Producer {
             {
                 "--language=" + language, "--std=" + (language == "c" ? "c11" : "c++17"), "--target=" + target,
                 "--include-directory=" + Path.Combine(AppContext.BaseDirectory, "assets"),
-                "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1", "-Wno-ignored-attributes",
+                "-D_USE_DECLSPECS_FOR_SAL=1", "-D_PREFAST_=1",
             };
             if (metadataEnabled)
                 arguments.Add("-DWIN32METADATA");

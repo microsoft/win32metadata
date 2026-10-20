@@ -165,6 +165,8 @@ class Program
 
             var translationFlags = CXTranslationUnit_IncludeAttributedTypes
                                  | CXTranslationUnit_VisitImplicitAttributes;
+            if (parseHeaderAnnotations)
+                translationFlags |= CXTranslationUnit_DetailedPreprocessingRecord;
 
             // ── Parse translation unit ──
             // We parse once with our own CXIndex, walk the AST to discover remaps,

@@ -61,10 +61,6 @@
 #define _Win32_AssociatedConstant_(name) _WIN32META_ANNOTATION_("AssociatedConstant(" #name ")")
 
 #if defined(MIDL_PASS)
-#define _Win32_AnnotateInterface_(name, annotation) \
-    cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)") \
-    cpp_quote("typedef " #annotation " struct " #name " " #name ";") \
-    cpp_quote("#endif")
 #define _Win32_AnnotateMethod_(method, annotation) \
     cpp_quote("_WIN32META_ANNOTATE_METHOD_(" #method ", " #annotation ");")
 #define _Win32_AnnotateParameter_(method, parameter, annotation) \

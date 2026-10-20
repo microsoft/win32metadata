@@ -228,36 +228,42 @@ libraries are outside that set. The WSL override is therefore not evidence of a
 missed library in this SDK. Repeat the check when changing SDKs; do not generalize
 this result to unexamined packages or architectures.
 
-### MIDL transport: do not substitute local experiments for qualified behavior
+### MIDL transport
 
 Native MIDL `[annotation]` is a SAL override, not an unrestricted additive channel.
-It works for qualified field cases; type/interface and non-local callable targets
-have additional restrictions. Existing parameter/retval marker comments are a
-limited compatibility bridge, not a generic new-metadata transport.
+Type/interface and nonlocal callable targets have additional restrictions.
+Use the owned structured-comment transport for original-IDL metadata:
+
+```idl
+cpp_quote("/* Win32Metadata: interface ::IExample => SupportedOSPlatform(\"windows6.1\") */")
+cpp_quote("/* Win32Metadata: parameter ::IExample::Create::handle => RAIIFree(CloseHandle, -1, 0) */")
+cpp_quote("/* Win32Metadata: field ::STATSTG::grfLocksSupported => AssociatedEnum(LOCKTYPE) */")
+```
+
+Place comments in the declaration's existing native conditional/include region.
+They bind absolute native identities after the complete translation unit is
+available, not neighboring syntax. Retain native attributes, SAL and `[retval]`.
+The ordinary annotation reader validates targets/references and emits the existing
+facts; a missing/ambiguous target is an error. Record aliases resolve to native
+fields, including anonymous-member injection. Property selectors use actual
+generated `get_`/`put_` method names. See
+[the full grammar](../../generationOptions.md#original-idl-structured-comments).
 
 For plain input pointer parameters without authored annotations, preserve MIDL's
 compiler-derived RPC SAL instead of injecting `_In_`: that override can erase
-native interface-pointer optionality. Scalar inputs, buffer counts, outputs,
-retval, and existing annotation payloads retain their separate conversion paths.
+native interface-pointer optionality. Nonlocal interface methods retain MIDL
+`/sal`-derived RPC direction/count annotations without synthetic `[annotation]`
+overrides. Explicit local methods retain standard SAL conversion. Native SDK SAL
+has no `_Out_retval_`/`_COM_Outptr_retval_`; use `_Out_`/`_COM_Outptr_` and read the
+preserved native `[retval]` comment. Do not suppress MIDL2495 or change locality.
 
-Use `_Win32_AnnotateInterface_` for interface facts, grouped in an existing opening
-quote region. Use `_Win32_AnnotateMethod_(Interface::Method, annotation)` after the
-complete interface definitions, grouped with an existing trailing quote region.
-The helper binds the real method through a compiler-parsed member reference. Do not
-copy the signature, bind a method by string lookup, change RPC locality, or place a
-`cpp_quote` inside a field/parameter list.
-
-Use that method helper for both local and remotable methods when metadata belongs
-only on the interface method. A native local-method `[annotation]` can also annotate
-the generated `*_Proxy` declaration. Do not accept that spill by comparing macro
-text alone. Adding quote regions between interfaces can also change MIDL's generated
-bookkeeping; reuse existing regions and compare actual RPC outputs.
-
-There is no qualified arbitrary non-local parameter carrier. If native MIDL/SAL and
-the existing helpers cannot express a required fact, retain that fact as a residual
-and report its exact target and required transport to the tooling lane. Hand off the
-other authored facts without waiting for that fix. Do not silently omit the residual,
-make the method local, invent a comment payload, or add an API-specific sidecar.
+Do not copy signatures or place `cpp_quote` inside field/parameter lists.
+Keep compiled Enum/FlagsEnum groups and native C/C++ macro semantics; the comment
+grammar does not expand macros or evaluate C++ expressions. RAIIFree comment
+invalids are signed decimal Int64 literals; unsupported forms stay explicit
+residuals. Compare pristine, prior macro and new output. Removing quote blocks can
+change implicit RPC bookkeeping: preserve the raw delta and resolve it rather
+than retaining empty scaffolding or normalizing it away.
 
 ## Integrate and qualify a combined batch
 
