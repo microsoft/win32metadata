@@ -1,8 +1,36 @@
 diff --git a/um/minwinbase.h b/um/minwinbase.h
-index f45ca723..cee13d66 100644
+index f45ca723..c97abc99 100644
 --- a/um/minwinbase.h
 +++ b/um/minwinbase.h
-@@ -243,6 +243,12 @@ VOID
+@@ -8,6 +8,7 @@
+ #pragma once
+ #ifndef _MINWINBASE_
+ #define _MINWINBASE_
++#include <sal.h>
+ 
+ #if     ( _MSC_VER >= 800 )
+ #pragma warning(disable:4514)
+@@ -143,8 +144,19 @@ typedef enum _FINDEX_INFO_LEVELS {
+ 
+ #define FIND_FIRST_EX_CASE_SENSITIVE        0x00000001
+ #define FIND_FIRST_EX_LARGE_FETCH           0x00000002
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(FIND_FIRST_EX_FLAGS, unsigned int,
++    FIND_FIRST_EX_CASE_SENSITIVE,
++    FIND_FIRST_EX_LARGE_FETCH);
++#endif
+ #if (NTDDI_VERSION >= NTDDI_WIN10_RS4)
+ #define FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY  0x00000004
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(FIND_FIRST_EX_FLAGS, unsigned int,
++    FIND_FIRST_EX_ON_DISK_ENTRIES_ONLY);
++#endif
+ #endif
+ 
+ typedef enum _FINDEX_SEARCH_OPS {
+@@ -243,6 +255,12 @@ VOID
  #define LOCKFILE_FAIL_IMMEDIATELY   0x00000001
  #define LOCKFILE_EXCLUSIVE_LOCK     0x00000002
  
@@ -15,7 +43,7 @@ index f45ca723..cee13d66 100644
  typedef struct _PROCESS_HEAP_ENTRY {
      PVOID lpData;
      DWORD cbData;
-@@ -272,7 +278,7 @@ typedef struct _PROCESS_HEAP_ENTRY {
+@@ -272,7 +290,7 @@ typedef struct _PROCESS_HEAP_ENTRY {
  
  typedef struct _REASON_CONTEXT {
      ULONG Version;
@@ -24,7 +52,7 @@ index f45ca723..cee13d66 100644
      union {
          struct {
              HMODULE LocalizedReasonModule;
-@@ -299,6 +305,19 @@ typedef struct _REASON_CONTEXT {
+@@ -299,6 +317,19 @@ typedef struct _REASON_CONTEXT {
  #define OUTPUT_DEBUG_STRING_EVENT   8
  #define RIP_EVENT                   9
  
@@ -44,7 +72,7 @@ index f45ca723..cee13d66 100644
  typedef DWORD (WINAPI *PTHREAD_START_ROUTINE)(
      LPVOID lpThreadParameter
      );
-@@ -367,7 +386,7 @@ typedef struct _RIP_INFO {
+@@ -367,7 +398,7 @@ typedef struct _RIP_INFO {
  
  
  typedef struct _DEBUG_EVENT {
@@ -53,7 +81,7 @@ index f45ca723..cee13d66 100644
      DWORD dwProcessId;
      DWORD dwThreadId;
      union {
-@@ -440,6 +459,17 @@ typedef PCONTEXT LPCONTEXT;
+@@ -440,6 +471,17 @@ typedef PCONTEXT LPCONTEXT;
  #define NONZEROLHND         (LMEM_MOVEABLE)
  #define NONZEROLPTR         (LMEM_FIXED)
  

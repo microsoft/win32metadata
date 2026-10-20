@@ -398,7 +398,7 @@
  WINADVAPI
  _Must_inspect_result_
  BOOL
-@@ -532,6 +604,8 @@
+@@ -532,12 +604,14 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -407,7 +407,14 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -547,6 +621,8 @@
+ OpenProcessToken(
+     _In_ HANDLE ProcessHandle,
+-    _In_ DWORD DesiredAccess,
++    _In_ _Win32_AssociatedEnum_(TOKEN_ACCESS_MASK) DWORD DesiredAccess,
+     _Outptr_ PHANDLE TokenHandle
+     );
+ 
+@@ -547,24 +621,30 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -416,7 +423,11 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -557,14 +633,18 @@
+ OpenThreadToken(
+     _In_ HANDLE ThreadHandle,
+-    _In_ DWORD DesiredAccess,
++    _In_ _Win32_AssociatedEnum_(TOKEN_ACCESS_MASK) DWORD DesiredAccess,
+     _In_ BOOL OpenAsSelf,
      _Outptr_ PHANDLE TokenHandle
      );
  
@@ -614,7 +625,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -882,6 +998,8 @@
+@@ -882,20 +998,23 @@
      _Out_ LPFILETIME lpUserTime
      );
  
@@ -623,7 +634,10 @@
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -891,11 +1009,12 @@
+ OpenProcess(
+-    _In_ DWORD dwDesiredAccess,
++    _In_ _Win32_AssociatedEnum_(PROCESS_ACCESS_RIGHTS) DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
      _In_ DWORD dwProcessId
      );
  

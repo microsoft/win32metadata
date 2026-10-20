@@ -437,7 +437,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -686,6 +756,8 @@
+@@ -686,12 +756,14 @@
      _Outptr_ PHANDLE DuplicateTokenHandle
      );
  
@@ -446,6 +446,13 @@
  WINADVAPI
  BOOL
  WINAPI
+ DuplicateTokenEx(
+     _In_ HANDLE hExistingToken,
+-    _In_ DWORD dwDesiredAccess,
++    _In_ _Win32_AssociatedEnum_(TOKEN_ACCESS_MASK) DWORD dwDesiredAccess,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpTokenAttributes,
+     _In_ SECURITY_IMPERSONATION_LEVEL ImpersonationLevel,
+     _In_ TOKEN_TYPE TokenType,
 @@ -704,6 +776,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
