@@ -129,10 +129,11 @@
          DWORD grfLocksSupported;
          CLSID clsid;
          DWORD grfStateBits;
-@@ -578,12 +600,20 @@
+@@ -578,12 +600,21 @@
          [out] IStream **ppstm);
  
  }
++_Win32_AnnotateField_(STATSTG::grfLocksSupported, _Win32_AssociatedEnum_(LOCKTYPE))
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("#include <wtypes.h>")
 +cpp_quote("#endif")
@@ -150,7 +151,7 @@
  [
      local,
      object,
-@@ -750,6 +780,7 @@
+@@ -750,6 +781,7 @@
  }
  
  
@@ -158,7 +159,7 @@
  [
      local,
      object,
-@@ -776,6 +807,7 @@
+@@ -776,6 +808,7 @@
  #pragma region Application Family or OneCore Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -166,7 +167,7 @@
  [
      local,
      object,
-@@ -821,6 +853,7 @@
+@@ -821,6 +854,7 @@
  
  
  
@@ -174,7 +175,7 @@
  [
      local,
      object,
-@@ -927,6 +960,7 @@
+@@ -927,6 +961,7 @@
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -182,7 +183,7 @@
  [
      local,
      object,
-@@ -1015,6 +1049,12 @@
+@@ -1015,6 +1050,12 @@
          [out, annotation("_Outptr_")] IUnknown **ppCopy
      );
  }
@@ -195,7 +196,7 @@
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -1022,6 +1062,7 @@
+@@ -1022,6 +1063,7 @@
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -203,7 +204,7 @@
  [
      local,
      object,
-@@ -1066,6 +1107,7 @@
+@@ -1066,6 +1108,7 @@
  } RPCOPT_SERVER_LOCALITY_VALUES;
  
  
@@ -211,7 +212,7 @@
  [
  object,
  local,
-@@ -1152,6 +1194,7 @@
+@@ -1152,6 +1195,7 @@
     COMGLB_UNMARSHALING_POLICY_HYBRID = 2
  } GLOBALOPT_UNMARSHALING_POLICY_VALUES;
  
@@ -219,7 +220,7 @@
  [
      object,
      local,
-@@ -1174,6 +1217,7 @@
+@@ -1174,6 +1218,7 @@
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -227,7 +228,7 @@
  [
   uuid(00000022-0000-0000-C000-000000000046),
   version(1.0),
-@@ -1191,6 +1235,7 @@
+@@ -1191,6 +1236,7 @@
  }
  
  
@@ -235,7 +236,7 @@
  [
      local,
      object,
-@@ -1226,6 +1271,7 @@
+@@ -1226,6 +1272,7 @@
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -243,7 +244,7 @@
  [
      object,
      uuid(00000030-0000-0000-C000-000000000046)
-@@ -1239,6 +1285,7 @@
+@@ -1239,6 +1286,7 @@
  }
  
  
@@ -251,7 +252,7 @@
  [
   local,
   object,
-@@ -1250,6 +1297,7 @@
+@@ -1250,6 +1298,7 @@
  }
  
  
@@ -259,7 +260,7 @@
  [
   local,
   object,
-@@ -1261,6 +1309,7 @@
+@@ -1261,6 +1310,7 @@
  }
  
  
@@ -267,7 +268,7 @@
  [
   local,
   object,
-@@ -1290,6 +1339,7 @@
+@@ -1290,6 +1340,7 @@
  
  
  
@@ -275,7 +276,7 @@
  [
   local,
   object,
-@@ -1325,6 +1375,7 @@
+@@ -1325,6 +1376,7 @@
      HRESULT GetState      ( [out, annotation("_Out_")] ULONG *pulStateFlags);
  }
  
@@ -283,7 +284,7 @@
  [
   local,
   object,
-@@ -1470,6 +1521,7 @@
+@@ -1470,6 +1522,7 @@
  } ContextProperty;
  
  
@@ -291,7 +292,7 @@
  [
      local,
      object,
-@@ -1491,6 +1543,7 @@
+@@ -1491,6 +1544,7 @@
  }
  
  
@@ -299,7 +300,7 @@
  [
      local,
      object,
-@@ -1594,6 +1647,7 @@
+@@ -1594,6 +1648,7 @@
  
  typedef DWORD APARTMENTID;
  
@@ -307,7 +308,7 @@
  [
      local,
      object,
-@@ -1608,6 +1662,7 @@
+@@ -1608,6 +1663,7 @@
      HRESULT SetCurrentLogicalThreadId( [in, annotation("_In_")] REFGUID rguid );
  };
  
@@ -315,7 +316,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1619,6 +1674,7 @@
+@@ -1619,6 +1675,7 @@
  };
  
  // marker interface for objects that want to opt into the fast rundown feature.
@@ -323,7 +324,7 @@
  [
      object,
      local,
-@@ -1653,6 +1709,7 @@
+@@ -1653,6 +1710,7 @@
      CO_MARSHALING_CONTEXT_ATTRIBUTE_RESERVED_18 = 0x80000011,
  } CO_MARSHALING_CONTEXT_ATTRIBUTES;
  
@@ -331,7 +332,7 @@
  [
      local,
      object,
-@@ -1674,6 +1731,7 @@
+@@ -1674,6 +1732,7 @@
  #pragma region Application Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -339,7 +340,7 @@
  [
      local,
      object,
-@@ -1692,7 +1750,7 @@
+@@ -1692,7 +1751,7 @@
  cpp_quote("        public:")
  cpp_quote("            virtual HRESULT STDMETHODCALLTYPE Resolve( ")
  cpp_quote("                /* [in] */ REFIID riid,")
@@ -348,7 +349,7 @@
  cpp_quote("")
  cpp_quote("            template<class Q>")
  cpp_quote("            HRESULT")
-@@ -1710,7 +1768,7 @@
+@@ -1710,7 +1769,7 @@
  cpp_quote("    } // extern C++")
  cpp_quote("#else")
     HRESULT Resolve([in] REFIID riid, 
