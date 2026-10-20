@@ -94,6 +94,12 @@ The separately qualified placement repair adds no facts or retirements.
 
 ### Logical enum members and retained enum names
 
+Preserve materialized membership when replacing legacy auto-populated groups.
+The constants scraper assigns a macro to the first matching filter in JSON order.
+Expanding overlapping filters independently into header groups can add duplicate
+members that OLD never emitted. Keep the SDK macros and their existing owning
+group; compare complete ordered membership rather than filter text alone.
+
 An actual header-group member may share its name with an independent retained
 enum type. The constants stage recognizes producer-owned members in their
 resolved constant namespace while preserving both enum identities and normal
