@@ -1,8 +1,31 @@
 diff --git a/um/namespaceapi.h b/um/namespaceapi.h
-index 589691ed..3daced34 100644
+index 589691ed..65fc9afa 100644
 --- a/um/namespaceapi.h
 +++ b/um/namespaceapi.h
-@@ -44,6 +44,8 @@ OpenPrivateNamespaceW(
+@@ -12,6 +12,7 @@
+ 
+ #ifndef _APISETNAMESPACE_
+ #define _APISETNAMESPACE_
++#include <sal.h>
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -30,7 +31,7 @@ extern "C" {
+ WINBASEAPI
+ HANDLE
+ WINAPI
+-CreatePrivateNamespaceW(
++_Win32_RAIIFree_(ClosePrivateNamespace) CreatePrivateNamespaceW(
+     _In_opt_ LPSECURITY_ATTRIBUTES lpPrivateNamespaceAttributes,
+     _In_ LPVOID lpBoundaryDescriptor,
+     _In_ LPCWSTR lpAliasPrefix
+@@ -39,11 +40,13 @@ CreatePrivateNamespaceW(
+ WINBASEAPI
+ HANDLE
+ WINAPI
+-OpenPrivateNamespaceW(
++_Win32_RAIIFree_(ClosePrivateNamespace) OpenPrivateNamespaceW(
+     _In_ LPVOID lpBoundaryDescriptor,
      _In_ LPCWSTR lpAliasPrefix
      );
  
@@ -11,7 +34,13 @@ index 589691ed..3daced34 100644
  WINBASEAPI
  BOOLEAN
  WINAPI
-@@ -60,6 +62,8 @@ CreateBoundaryDescriptorW(
+@@ -55,11 +58,13 @@ ClosePrivateNamespace(
+ WINBASEAPI
+ HANDLE
+ WINAPI
+-CreateBoundaryDescriptorW(
++_Win32_RAIIFree_(DeleteBoundaryDescriptor) CreateBoundaryDescriptorW(
+     _In_ LPCWSTR Name,
      _In_ ULONG Flags
      );
  
@@ -20,7 +49,7 @@ index 589691ed..3daced34 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -68,6 +72,7 @@ AddSIDToBoundaryDescriptor(
+@@ -68,6 +73,7 @@ AddSIDToBoundaryDescriptor(
      _In_ PSID RequiredSid
      );
  

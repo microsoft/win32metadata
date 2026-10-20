@@ -275,7 +275,7 @@
  [
      local,
      object,
-@@ -1144,15 +1167,18 @@
+@@ -1144,15 +1167,21 @@
      HRESULT QueryContinueDrag
      (
          [in, annotation("_In_")] BOOL fEscapePressed,
@@ -295,11 +295,14 @@
 +_Win32_AnnotateMethod_(IDropSource::GiveFeedback, _Win32_PreserveResult_)
 +_Win32_AnnotateMethod_(IDropSource::QueryContinueDrag, _Win32_PreserveResult_)
 +
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef unsigned int DROPEFFECT;")
++cpp_quote("#endif")
 +_Win32_AnnotateInterface_(IDropTarget, _Win32_SupportedOS_Windows2000_)
  [
      object,
      uuid(00000122-0000-0000-C000-000000000046),    
-@@ -1197,16 +1223,16 @@
+@@ -1197,16 +1226,16 @@
      HRESULT DragEnter
      (
          [in, unique] IDataObject *pDataObj,
@@ -320,7 +323,7 @@
      );
  
      HRESULT DragLeave
-@@ -1217,12 +1243,13 @@
+@@ -1217,12 +1246,16 @@
      HRESULT Drop
      (
          [in, unique] IDataObject *pDataObj,
@@ -334,12 +337,15 @@
 +        [annotation("_Win32_AssociatedEnum_(DROPEFFECT)")] [in, out] DWORD *pdwEffect
 +    );
 +}
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DROPEFFECT, unsigned int, DROPEFFECT_NONE, DROPEFFECT_COPY, DROPEFFECT_MOVE, DROPEFFECT_LINK, DROPEFFECT_SCROLL);")
++cpp_quote("#endif")
 +
 +_Win32_AnnotateInterface_(IDropSourceNotify, _Win32_SupportedOS_WindowsVista_)
  [
      local,
      object,
-@@ -1242,6 +1269,7 @@
+@@ -1242,6 +1275,7 @@
      );
  }
  
@@ -347,7 +353,7 @@
  [
      object,
      uuid(390E3878-FD55-4E18-819D-4682081C0CFD),
-@@ -1262,6 +1290,7 @@
+@@ -1262,6 +1296,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  

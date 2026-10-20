@@ -1,6 +1,14 @@
 --- a/shared/winerror.h
 +++ b/shared/winerror.h
-@@ -22,6 +22,7 @@
+@@ -8,6 +8,7 @@
+ 
+ #ifndef _WINERROR_
+ #define _WINERROR_
++#include <sal.h>
+ 
+ #if defined (_MSC_VER) && (_MSC_VER >= 1020) && !defined(__midl)
+ #pragma once
+@@ -22,6 +23,7 @@
  #endif
  
  #include <specstrings.h>
@@ -8,10 +16,22 @@
  
  //
  // Note: There is a slightly modified layout for HRESULT values below,
-@@ -30329,6 +30330,50 @@
+@@ -1917,6 +1919,10 @@
+ //
+ #define WAIT_TIMEOUT                     258L    // dderror
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(WAIT_EVENT, unsigned int, WAIT_TIMEOUT);
++#endif
++
+ //
+ // MessageId: ERROR_NO_MORE_ITEMS
+ //
+@@ -30328,6 +30334,50 @@
+ // Define bits here so macros are guaranteed to work
  
  #define FACILITY_NT_BIT                 0x10000000
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(FACILITY_CODE, unsigned int,
 +    FACILITY_NULL, FACILITY_RPC, FACILITY_DISPATCH, FACILITY_STORAGE,
@@ -55,11 +75,10 @@
 +    FACILITY_USERMODE_PRM, FACILITY_USERMODE_WIN_ACCEL, FACILITY_PPF, FACILITY_PIX,
 +    FACILITY_NT_BIT);
 +#endif
-+
+ 
  //
  // HRESULT_FROM_WIN32(x) used to be a macro, however we now run it as an inline function
- // to prevent double evaluation of 'x'. If you still need the macro, you can use __HRESULT_FROM_WIN32(x)
-@@ -66990,4 +67035,3295 @@
+@@ -66990,4 +67040,3295 @@
  //
  #define PPF_E_TRANSFORM_DIGEST_ALGO_NOT_PRESENT _HRESULT_TYPEDEF_(0xC9280004L)
  

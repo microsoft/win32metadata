@@ -1,8 +1,16 @@
 diff --git a/um/ktmw32.h b/um/ktmw32.h
-index c62087e6..672329a4 100644
+index c62087e6..68df6566 100644
 --- a/um/ktmw32.h
 +++ b/um/ktmw32.h
-@@ -36,6 +36,8 @@ extern "C" {
+@@ -22,6 +22,7 @@ Revision History:
+ #define _KTMUSER_
+ 
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family or BootableSku Package
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU)
+@@ -36,18 +37,22 @@ extern "C" {
  // Win32-level transaction manager API calls
  //
  
@@ -11,7 +19,18 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  CreateTransaction (
-@@ -48,6 +50,8 @@ CreateTransaction (
+-    IN LPSECURITY_ATTRIBUTES lpTransactionAttributes OPTIONAL,
+-    IN LPGUID UOW OPTIONAL,
+-    IN DWORD CreateOptions OPTIONAL,
+-    IN DWORD IsolationLevel OPTIONAL,
+-    IN DWORD IsolationFlags OPTIONAL,
+-    IN DWORD Timeout OPTIONAL,
++    _In_ _Win32_Optional_(true) IN LPSECURITY_ATTRIBUTES lpTransactionAttributes OPTIONAL,
++    _In_ _Win32_Optional_(true) IN LPGUID UOW OPTIONAL,
++    _In_ _Win32_Optional_(true) IN DWORD CreateOptions OPTIONAL,
++    _In_ _Win32_Optional_(true) IN DWORD IsolationLevel OPTIONAL,
++    _In_ _Win32_Optional_(true) IN DWORD IsolationFlags OPTIONAL,
++    _In_ _Win32_Optional_(true) IN DWORD Timeout OPTIONAL,
      _In_opt_ LPWSTR Description
      );
  
@@ -20,7 +39,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  OpenTransaction (
-@@ -55,30 +59,40 @@ OpenTransaction (
+@@ -55,30 +60,40 @@ OpenTransaction (
      IN LPGUID TransactionId
      );
  
@@ -61,7 +80,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetTransactionId (
-@@ -87,6 +101,8 @@ GetTransactionId (
+@@ -87,6 +102,8 @@ GetTransactionId (
      );
  
  
@@ -70,7 +89,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetTransactionInformation (
-@@ -99,6 +115,8 @@ GetTransactionInformation (
+@@ -99,6 +116,8 @@ GetTransactionInformation (
      _Out_writes_to_opt_(BufferLength, return + 1) LPWSTR Description
      );
  
@@ -79,7 +98,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  SetTransactionInformation (
-@@ -109,6 +127,8 @@ SetTransactionInformation (
+@@ -109,6 +128,8 @@ SetTransactionInformation (
      _In_opt_ LPWSTR Description
      );
  
@@ -88,7 +107,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  CreateTransactionManager (
-@@ -118,6 +138,8 @@ CreateTransactionManager (
+@@ -118,6 +139,8 @@ CreateTransactionManager (
      IN ULONG CommitStrength OPTIONAL
      );
  
@@ -97,7 +116,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  OpenTransactionManager (
-@@ -126,6 +148,8 @@ OpenTransactionManager (
+@@ -126,6 +149,8 @@ OpenTransactionManager (
      IN ULONG OpenOptions OPTIONAL
      );
  
@@ -106,7 +125,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  OpenTransactionManagerById (
-@@ -134,6 +158,8 @@ OpenTransactionManagerById (
+@@ -134,6 +159,8 @@ OpenTransactionManagerById (
      IN ULONG OpenOptions OPTIONAL
      );
  
@@ -115,7 +134,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  RenameTransactionManager (
-@@ -141,6 +167,8 @@ RenameTransactionManager (
+@@ -141,6 +168,8 @@ RenameTransactionManager (
      IN LPGUID ExistingTransactionManagerGuid
      );
  
@@ -124,7 +143,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  RollforwardTransactionManager (
-@@ -148,24 +176,32 @@ RollforwardTransactionManager (
+@@ -148,24 +177,32 @@ RollforwardTransactionManager (
      IN PLARGE_INTEGER TmVirtualClock
      );
  
@@ -157,7 +176,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  CreateResourceManager (
-@@ -176,6 +212,8 @@ CreateResourceManager (
+@@ -176,6 +213,8 @@ CreateResourceManager (
      _In_opt_ LPWSTR Description
      );
  
@@ -166,7 +185,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  OpenResourceManager (
-@@ -184,12 +222,16 @@ OpenResourceManager (
+@@ -184,12 +223,16 @@ OpenResourceManager (
      IN LPGUID ResourceManagerId
      );
  
@@ -183,7 +202,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetNotificationResourceManager (
-@@ -200,6 +242,8 @@ GetNotificationResourceManager (
+@@ -200,6 +243,8 @@ GetNotificationResourceManager (
      OUT PULONG                          ReturnLength OPTIONAL
      );
  
@@ -192,7 +211,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetNotificationResourceManagerAsync (
-@@ -210,6 +254,8 @@ GetNotificationResourceManagerAsync (
+@@ -210,6 +255,8 @@ GetNotificationResourceManagerAsync (
      IN  LPOVERLAPPED                  lpOverlapped
      );
      
@@ -201,7 +220,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  SetResourceManagerCompletionPort(
-@@ -218,6 +264,8 @@ SetResourceManagerCompletionPort(
+@@ -218,6 +265,8 @@ SetResourceManagerCompletionPort(
      IN ULONG_PTR CompletionKey
      );
  
@@ -210,7 +229,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  CreateEnlistment (
-@@ -229,6 +277,8 @@ CreateEnlistment (
+@@ -229,6 +278,8 @@ CreateEnlistment (
      IN PVOID             EnlistmentKey OPTIONAL
      );
  
@@ -219,7 +238,7 @@ index c62087e6..672329a4 100644
  HANDLE
  APIENTRY
  OpenEnlistment (
-@@ -238,6 +288,8 @@ OpenEnlistment (
+@@ -238,6 +289,8 @@ OpenEnlistment (
      );
  
  
@@ -228,7 +247,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  RecoverEnlistment (
-@@ -246,6 +298,8 @@ RecoverEnlistment (
+@@ -246,6 +299,8 @@ RecoverEnlistment (
      );
  
  
@@ -237,7 +256,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetEnlistmentRecoveryInformation (
-@@ -255,6 +309,8 @@ GetEnlistmentRecoveryInformation (
+@@ -255,6 +310,8 @@ GetEnlistmentRecoveryInformation (
      OUT PULONG BufferUsed OPTIONAL
      );
  
@@ -246,7 +265,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  GetEnlistmentId (
-@@ -262,6 +318,8 @@ GetEnlistmentId (
+@@ -262,6 +319,8 @@ GetEnlistmentId (
      OUT LPGUID EnlistmentId
      );
  
@@ -255,7 +274,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  SetEnlistmentRecoveryInformation (
-@@ -270,6 +328,8 @@ SetEnlistmentRecoveryInformation (
+@@ -270,6 +329,8 @@ SetEnlistmentRecoveryInformation (
      IN PVOID  Buffer
      );
  
@@ -264,7 +283,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  PrepareEnlistment (
-@@ -277,6 +337,8 @@ PrepareEnlistment (
+@@ -277,6 +338,8 @@ PrepareEnlistment (
      IN PLARGE_INTEGER TmVirtualClock
      );
  
@@ -273,7 +292,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  PrePrepareEnlistment (
-@@ -284,6 +346,8 @@ PrePrepareEnlistment (
+@@ -284,6 +347,8 @@ PrePrepareEnlistment (
      IN PLARGE_INTEGER TmVirtualClock
      );
  
@@ -282,7 +301,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  CommitEnlistment (
-@@ -291,6 +355,8 @@ CommitEnlistment (
+@@ -291,6 +356,8 @@ CommitEnlistment (
      IN PLARGE_INTEGER TmVirtualClock
      );
  
@@ -291,7 +310,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  RollbackEnlistment (
-@@ -298,6 +364,8 @@ RollbackEnlistment (
+@@ -298,6 +365,8 @@ RollbackEnlistment (
      IN PLARGE_INTEGER TmVirtualClock
      );
  
@@ -300,7 +319,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  PrePrepareComplete (
-@@ -305,6 +373,8 @@ PrePrepareComplete (
+@@ -305,6 +374,8 @@ PrePrepareComplete (
      IN  PLARGE_INTEGER    TmVirtualClock
      );
  
@@ -309,7 +328,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  PrepareComplete (
-@@ -312,6 +382,8 @@ PrepareComplete (
+@@ -312,6 +383,8 @@ PrepareComplete (
      IN  PLARGE_INTEGER    TmVirtualClock
      );
  
@@ -318,7 +337,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  ReadOnlyEnlistment (
-@@ -319,6 +391,8 @@ ReadOnlyEnlistment (
+@@ -319,6 +392,8 @@ ReadOnlyEnlistment (
      IN  PLARGE_INTEGER    TmVirtualClock
      );
  
@@ -327,7 +346,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  CommitComplete (
-@@ -326,6 +400,8 @@ CommitComplete (
+@@ -326,6 +401,8 @@ CommitComplete (
      IN  PLARGE_INTEGER    TmVirtualClock
      );
  
@@ -336,7 +355,7 @@ index c62087e6..672329a4 100644
  BOOL
  APIENTRY
  RollbackComplete (
-@@ -333,6 +409,8 @@ RollbackComplete (
+@@ -333,6 +410,8 @@ RollbackComplete (
      IN  PLARGE_INTEGER    TmVirtualClock
      );
  

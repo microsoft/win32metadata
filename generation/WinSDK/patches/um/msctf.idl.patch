@@ -1,5 +1,5 @@
 diff --git a/um/msctf.idl b/um/msctf.idl
-index e412edd9..16cf67d7 100644
+index e412edd9..cd845cea 100644
 --- a/um/msctf.idl
 +++ b/um/msctf.idl
 @@ -1,3 +1,7 @@
@@ -159,15 +159,18 @@ index e412edd9..16cf67d7 100644
  [
      object,
      uuid(2433bf8e-0f9b-435c-ba2c-180611978c30),
-@@ -919,6 +939,7 @@ interface IEnumTfContextViews : IUnknown
+@@ -919,6 +939,10 @@ interface IEnumTfContextViews : IUnknown
  //
  // ITfContext
  //
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef unsigned int TF_CONTEXT_EDIT_CONTEXT_FLAGS;")
++cpp_quote("#endif")
 +_Win32_AnnotateInterface_(ITfContext, _Win32_SupportedOS_Windows2000_)
  [
      object,
      uuid(aa80e7fd-2021-11d2-93e0-0060b067b86e),
-@@ -934,7 +955,7 @@ interface ITfContext : IUnknown
+@@ -934,7 +958,7 @@ interface ITfContext : IUnknown
  
      HRESULT RequestEditSession([in] TfClientId tid,
                                 [in] ITfEditSession *pes,
@@ -176,7 +179,17 @@ index e412edd9..16cf67d7 100644
                                 [out] HRESULT *phrSession);
  
      HRESULT InWriteSession([in] TfClientId tid,
-@@ -1017,6 +1038,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+@@ -1010,6 +1034,9 @@ interface ITfContext : IUnknown
+                               [in] ITfRange *pRange,
+                               [out] ITfRangeBackup **ppBackup);
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(TF_CONTEXT_EDIT_CONTEXT_FLAGS, unsigned int, TF_ES_ASYNCDONTCARE, TF_ES_SYNC, TF_ES_READ, TF_ES_READWRITE, TF_ES_ASYNC);")
++cpp_quote("#endif")
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma endregion
+@@ -1017,6 +1044,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -184,15 +197,18 @@ index e412edd9..16cf67d7 100644
  [
      object,
      uuid(0fab9bdb-d250-4169-84e5-6be118fdd7a8),
-@@ -1032,6 +1054,7 @@ interface ITfQueryEmbedded : IUnknown
+@@ -1032,6 +1060,10 @@ interface ITfQueryEmbedded : IUnknown
  //
  // ITfInsertAtSelection
  //
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef unsigned int INSERT_TEXT_AT_SELECTION_FLAGS;")
++cpp_quote("#endif")
 +_Win32_AnnotateInterface_(ITfInsertAtSelection, _Win32_SupportedOS_Windows2000_)
  [
      object,
      uuid(55ce16ba-3014-41c1-9ceb-fade1446ac6c),
-@@ -1044,7 +1067,7 @@ interface ITfInsertAtSelection : IUnknown
+@@ -1044,7 +1076,7 @@ interface ITfInsertAtSelection : IUnknown
      const DWORD TF_IAS_NO_DEFAULT_COMPOSITION = 0x80000000; // caller takes responsibility for starting a composition over the range
  
      HRESULT InsertTextAtSelection([in] TfEditCookie ec,
@@ -201,7 +217,14 @@ index e412edd9..16cf67d7 100644
                                    [in, size_is(cch)] const WCHAR *pchText,
                                    [in] LONG cch,
                                    [out] ITfRange **ppRange);
-@@ -1058,6 +1081,7 @@ interface ITfInsertAtSelection : IUnknown
+@@ -1054,10 +1086,14 @@ interface ITfInsertAtSelection : IUnknown
+                                       [in] IDataObject *pDataObject,
+                                       [out] ITfRange **ppRange);
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_Enum_(INSERT_TEXT_AT_SELECTION_FLAGS, unsigned int, TF_IAS_NOQUERY, TF_IAS_QUERYONLY, TF_IAS_NO_DEFAULT_COMPOSITION);")
++cpp_quote("#endif")
+ 
  //
  // ITfCleanupContextSink
  //
@@ -209,7 +232,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(01689689-7acb-4e9b-ab7c-7ea46b12b522),
-@@ -1071,6 +1095,7 @@ interface ITfCleanupContextSink : IUnknown
+@@ -1071,6 +1107,7 @@ interface ITfCleanupContextSink : IUnknown
  //
  // ITfCleanupContextDurationSink
  //
@@ -217,7 +240,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(45c35144-154e-4797-bed8-d33ae7bf8794),
-@@ -1092,6 +1117,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -1092,6 +1129,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfReadOnlyProperty
  //
@@ -225,7 +248,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(17d49a3d-f8b8-4b2f-b254-52319dd64c53),
-@@ -1121,6 +1147,7 @@ typedef [uuid(d678c645-eb6a-45c9-b4ee-0f3e3a991348)] struct TF_PROPERTYVAL
+@@ -1121,6 +1159,7 @@ typedef [uuid(d678c645-eb6a-45c9-b4ee-0f3e3a991348)] struct TF_PROPERTYVAL
  //
  // IEnumTfPropertyValue
  //
@@ -233,7 +256,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(8ed8981b-7c10-4d7d-9fb3-ab72e9c75f72),
-@@ -1148,6 +1175,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -1148,6 +1187,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfMouseTracker
  //
@@ -241,7 +264,7 @@ index e412edd9..16cf67d7 100644
  [
      object,
      uuid(09d146cd-a544-4132-925b-7afa8ef322d0),
-@@ -1165,6 +1193,7 @@ interface ITfMouseTracker : IUnknown
+@@ -1165,6 +1205,7 @@ interface ITfMouseTracker : IUnknown
  //
  // ITfMouseTracker
  //
@@ -249,7 +272,7 @@ index e412edd9..16cf67d7 100644
  [
      object,
      uuid(3bdd78e2-c16e-47fd-b883-ce6facc1a208),
-@@ -1182,6 +1211,7 @@ interface ITfMouseTrackerACP : IUnknown
+@@ -1182,6 +1223,7 @@ interface ITfMouseTrackerACP : IUnknown
  //
  // ITfMouseSink
  //
@@ -257,7 +280,7 @@ index e412edd9..16cf67d7 100644
  [
      object,
      local,
-@@ -1205,6 +1235,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -1205,6 +1247,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfEditRecord
  //
@@ -265,7 +288,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(42d4d099-7c1a-4a89-b836-6c6f22160df0),
-@@ -1216,7 +1247,7 @@ interface ITfEditRecord : IUnknown
+@@ -1216,7 +1259,7 @@ interface ITfEditRecord : IUnknown
  
      HRESULT GetSelectionStatus([out] BOOL *pfChanged);
  
@@ -274,7 +297,7 @@ index e412edd9..16cf67d7 100644
                                        [in, size_is(cProperties)] const GUID **prgProperties,
                                        [in] ULONG cProperties,
                                        [out] IEnumTfRanges **ppEnum);
-@@ -1225,6 +1256,7 @@ interface ITfEditRecord : IUnknown
+@@ -1225,6 +1268,7 @@ interface ITfEditRecord : IUnknown
  //
  // ITfTextEditSink
  //
@@ -282,7 +305,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(8127d409-ccd3-4683-967a-b43d5b482bf7),
-@@ -1244,6 +1276,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -1244,6 +1288,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfTextLayoutSink
  //
@@ -290,7 +313,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(2af2d06a-dd5b-4927-a0b4-54f19c91fade),
-@@ -1259,6 +1292,7 @@ interface ITfTextLayoutSink : IUnknown
+@@ -1259,6 +1304,7 @@ interface ITfTextLayoutSink : IUnknown
  //
  // ITfStatusSink
  //
@@ -298,7 +321,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(6b7d8d73-b267-4f69-b32e-1ca321ce4f45),
-@@ -1272,6 +1306,7 @@ interface ITfStatusSink : IUnknown
+@@ -1272,6 +1318,7 @@ interface ITfStatusSink : IUnknown
  //
  // ITfEditTransactionSink
  //
@@ -306,7 +329,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(708fbf70-b520-416b-b06c-2c41ab44f8ba),
-@@ -1287,6 +1322,7 @@ interface ITfEditTransactionSink : IUnknown
+@@ -1287,6 +1334,7 @@ interface ITfEditTransactionSink : IUnknown
  //
  // ITfContextOwner
  //
@@ -314,7 +337,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(aa80e80c-2021-11d2-93e0-0060b067b86e),
-@@ -1321,6 +1357,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -1321,6 +1369,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfContextOwnerServices
  //
@@ -322,7 +345,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(b23eb630-3e1c-11d3-a745-0050040ab407),
-@@ -1360,6 +1397,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -1360,6 +1409,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfContextKeyEventSink
  //
@@ -330,7 +353,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -1394,6 +1432,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -1394,6 +1444,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfEditSession
  //
@@ -338,7 +361,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(aa80e803-2021-11d2-93e0-0060b067b86e),
-@@ -1407,6 +1446,7 @@ interface ITfEditSession : IUnknown
+@@ -1407,6 +1458,7 @@ interface ITfEditSession : IUnknown
  //
  // ITfRange
  //
@@ -346,7 +369,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(aa80e7ff-2021-11d2-93e0-0060b067b86e),
-@@ -1530,6 +1570,7 @@ interface ITfRange : IUnknown
+@@ -1530,6 +1582,7 @@ interface ITfRange : IUnknown
  //
  // ITfRangeACP
  //
@@ -354,7 +377,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(057a6296-029b-4154-b79a-0d461d4ea94c),
-@@ -1547,6 +1588,7 @@ interface ITfRangeACP : ITfRange
+@@ -1547,6 +1600,7 @@ interface ITfRangeACP : ITfRange
  //
  // ITextStoreACPServices
  //
@@ -362,7 +385,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(aa80e901-2021-11d2-93e0-0060b067b86e),
-@@ -1574,6 +1616,7 @@ interface ITextStoreACPServices : IUnknown
+@@ -1574,6 +1628,7 @@ interface ITextStoreACPServices : IUnknown
  //
  // ITfRangeBackup
  //
@@ -370,7 +393,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(463a506d-6992-49d2-9b88-93d55e70bb16),
-@@ -1589,6 +1632,7 @@ interface ITfRangeBackup : IUnknown
+@@ -1589,6 +1644,7 @@ interface ITfRangeBackup : IUnknown
  //
  // ITfPropertyStore
  //
@@ -378,7 +401,7 @@ index e412edd9..16cf67d7 100644
  [
      object,
      uuid(6834b120-88cb-11d2-bf45-00105a2799b5),
-@@ -1627,6 +1671,7 @@ interface ITfPropertyStore : IUnknown
+@@ -1627,6 +1683,7 @@ interface ITfPropertyStore : IUnknown
  //
  // IEnumTfRanges
  //
@@ -386,7 +409,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(f99d3f40-8e32-11d2-bf46-00105a2799b5),
-@@ -1654,6 +1699,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -1654,6 +1711,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfCreatePropertyStore
  //
@@ -394,7 +417,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(2463fbf0-b0af-11d2-afc5-00105a2799b5),
-@@ -1682,6 +1728,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -1682,6 +1740,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfPersistentPropertyLoaderACP
  //
@@ -402,7 +425,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(4ef89150-0807-11d3-8df0-00105a2799b5),
-@@ -1696,6 +1743,7 @@ interface ITfPersistentPropertyLoaderACP : IUnknown
+@@ -1696,6 +1755,7 @@ interface ITfPersistentPropertyLoaderACP : IUnknown
  //
  // ITfProperty
  //
@@ -410,7 +433,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(e2449660-9542-11d2-bf46-00105a2799b5),
-@@ -1724,6 +1772,7 @@ interface ITfProperty : ITfReadOnlyProperty
+@@ -1724,6 +1784,7 @@ interface ITfProperty : ITfReadOnlyProperty
  //
  // IEnumTfProperties
  //
@@ -418,7 +441,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(19188cb0-aca9-11d2-afc5-00105a2799b5),
-@@ -1745,6 +1794,7 @@ interface IEnumTfProperties : IUnknown
+@@ -1745,6 +1806,7 @@ interface IEnumTfProperties : IUnknown
  //
  // ITfCompartment
  //
@@ -426,7 +449,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(bb08f7a9-607a-4384-8623-056892b64371),
-@@ -1761,6 +1811,7 @@ interface ITfCompartment : IUnknown
+@@ -1761,6 +1823,7 @@ interface ITfCompartment : IUnknown
  //
  // ITfCompartmentEventSink
  //
@@ -434,7 +457,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(743abd5f-f26d-48df-8cc5-238492419b64),
-@@ -1774,6 +1825,7 @@ interface ITfCompartmentEventSink : IUnknown
+@@ -1774,6 +1837,7 @@ interface ITfCompartmentEventSink : IUnknown
  //
  // ITfCompartmentMgr
  //
@@ -442,7 +465,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(7dcf57ac-18ad-438b-824d-979bffb74b7c),
-@@ -1794,6 +1846,7 @@ interface ITfCompartmentMgr : IUnknown
+@@ -1794,6 +1858,7 @@ interface ITfCompartmentMgr : IUnknown
  //
  // ITfFunction
  //
@@ -450,7 +473,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(db593490-098f-11d3-8df0-00105a2799b5),
-@@ -1807,6 +1860,7 @@ interface ITfFunction : IUnknown
+@@ -1807,6 +1872,7 @@ interface ITfFunction : IUnknown
  //
  // ITfFunctionProvider
  //
@@ -458,7 +481,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(101d6610-0990-11d3-8df0-00105a2799b5),
-@@ -1827,6 +1881,7 @@ interface ITfFunctionProvider : IUnknown
+@@ -1827,6 +1893,7 @@ interface ITfFunctionProvider : IUnknown
  //
  // IEnumTfFunctionProviders
  //
@@ -466,7 +489,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(e4b24db0-0990-11d3-8df0-00105a2799b5),
-@@ -1854,6 +1909,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -1854,6 +1921,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfInputProcessorProfiles
  //
@@ -474,7 +497,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(1F02B6C5-7842-4EE6-8A0B-9A24183A95CA),
-@@ -1938,6 +1994,7 @@ interface ITfInputProcessorProfiles : IUnknown
+@@ -1938,6 +2006,7 @@ interface ITfInputProcessorProfiles : IUnknown
  //
  // Implemented by Cicero
  //
@@ -482,7 +505,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(892f230f-fe00-4a41-a98e-fcd6de0d35ef),
-@@ -1958,6 +2015,7 @@ interface ITfInputProcessorProfilesEx : ITfInputProcessorProfiles
+@@ -1958,6 +2027,7 @@ interface ITfInputProcessorProfilesEx : ITfInputProcessorProfiles
  //
  // Implemented by Cicero
  //
@@ -490,7 +513,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(4fd67194-1002-4513-bff2-c0ddf6258552),
-@@ -1974,6 +2032,7 @@ interface ITfInputProcessorProfileSubstituteLayout : IUnknown
+@@ -1974,6 +2044,7 @@ interface ITfInputProcessorProfileSubstituteLayout : IUnknown
  //
  // ITfActiveLanguageProfileNotifySink
  //
@@ -498,7 +521,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(b246cb75-a93e-4652-bf8c-b3fe0cfd7e57),
-@@ -1989,6 +2048,7 @@ interface ITfActiveLanguageProfileNotifySink : IUnknown
+@@ -1989,6 +2060,7 @@ interface ITfActiveLanguageProfileNotifySink : IUnknown
  //
  // IEnumTfLanguageProfiles
  //
@@ -506,7 +529,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(3d61bf11-ac5f-42c8-a4cb-931bcc28c744),
-@@ -2017,6 +2077,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -2017,6 +2089,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfLanguageProfileNotifySink
  //
@@ -514,7 +537,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(43c9fe15-f494-4c17-9de2-b8a4ac350aa8),
-@@ -2046,6 +2107,7 @@ typedef [uuid(44d2825a-10e5-43b2-877f-6cb2f43b7e7e)] struct TF_INPUTPROCESSORPRO
+@@ -2046,6 +2119,7 @@ typedef [uuid(44d2825a-10e5-43b2-877f-6cb2f43b7e7e)] struct TF_INPUTPROCESSORPRO
  //
  // ITfInputProcessorProfileMgr
  //
@@ -522,7 +545,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(71c6e74c-0f28-11d8-a82a-00065b84435c),
-@@ -2107,6 +2169,7 @@ interface ITfInputProcessorProfileMgr : IUnknown
+@@ -2107,6 +2181,7 @@ interface ITfInputProcessorProfileMgr : IUnknown
  //
  // IEnumTfInputProcessorProfiles
  //
@@ -530,7 +553,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(71c6e74d-0f28-11d8-a82a-00065b84435c),
-@@ -2128,6 +2191,7 @@ interface IEnumTfInputProcessorProfiles : IUnknown
+@@ -2128,6 +2203,7 @@ interface IEnumTfInputProcessorProfiles : IUnknown
  //
  // ITfInputProcessorProfileActivationSink
  //
@@ -538,7 +561,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(71c6e74e-0f28-11d8-a82a-00065b84435c),
-@@ -2154,6 +2218,7 @@ typedef [uuid(77c12f95-b783-450d-879f-1cd2362c6521)] struct TF_PRESERVEDKEY
+@@ -2154,6 +2230,7 @@ typedef [uuid(77c12f95-b783-450d-879f-1cd2362c6521)] struct TF_PRESERVEDKEY
  //
  // ITfKeystrokeMgr
  //
@@ -546,7 +569,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2218,6 +2283,7 @@ interface ITfKeystrokeMgr : IUnknown
+@@ -2218,6 +2295,7 @@ interface ITfKeystrokeMgr : IUnknown
  //
  // ITfKeyEventSink
  //
@@ -554,7 +577,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2256,6 +2322,7 @@ interface ITfKeyEventSink : IUnknown
+@@ -2256,6 +2334,7 @@ interface ITfKeyEventSink : IUnknown
  //
  // ITfKeyTraceEventSink
  //
@@ -562,7 +585,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2274,6 +2341,7 @@ interface ITfKeyTraceEventSink : IUnknown
+@@ -2274,6 +2353,7 @@ interface ITfKeyTraceEventSink : IUnknown
  //
  // ITfPreservedKeyNotifySink
  //
@@ -570,7 +593,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(6f77c993-d2b1-446e-853e-5912efc8a286),
-@@ -2293,6 +2361,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -2293,6 +2373,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfMessagePump
  //
@@ -578,7 +601,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2331,6 +2400,7 @@ interface ITfMessagePump : IUnknown
+@@ -2331,6 +2412,7 @@ interface ITfMessagePump : IUnknown
  //
  // ITfUIFocusSink
  //
@@ -586,7 +609,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2347,6 +2417,7 @@ interface ITfThreadFocusSink : IUnknown
+@@ -2347,6 +2429,7 @@ interface ITfThreadFocusSink : IUnknown
  //
  // ITfTextInputProcessor
  //
@@ -594,7 +617,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2364,6 +2435,7 @@ interface ITfTextInputProcessor : IUnknown
+@@ -2364,6 +2447,7 @@ interface ITfTextInputProcessor : IUnknown
  //
  // ITfTextInputProcessorEx
  //
@@ -602,7 +625,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2380,6 +2452,7 @@ interface ITfTextInputProcessorEx : ITfTextInputProcessor
+@@ -2380,6 +2464,7 @@ interface ITfTextInputProcessorEx : ITfTextInputProcessor
  //
  // ITfClientId
  //
@@ -610,7 +633,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2446,6 +2519,7 @@ typedef [uuid(1bf1c305-419b-4182-a4d2-9bfadc3f021f)] struct TF_DISPLAYATTRIBUTE
+@@ -2446,6 +2531,7 @@ typedef [uuid(1bf1c305-419b-4182-a4d2-9bfadc3f021f)] struct TF_DISPLAYATTRIBUTE
  //
  // ITfDisplayAttributeInfo
  //
@@ -618,7 +641,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(70528852-2f26-4aea-8c96-215150578932),
-@@ -2467,6 +2541,7 @@ interface ITfDisplayAttributeInfo : IUnknown
+@@ -2467,6 +2553,7 @@ interface ITfDisplayAttributeInfo : IUnknown
  //
  // IEnumTfDisplayAttributeInfo interface
  //
@@ -626,7 +649,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(7cef04d7-cb75-4e80-a7ab-5f5bc7d332de),
-@@ -2488,6 +2563,7 @@ interface IEnumTfDisplayAttributeInfo : IUnknown
+@@ -2488,6 +2575,7 @@ interface IEnumTfDisplayAttributeInfo : IUnknown
  //
  // ITfDisplayAttributeProvider interface
  //
@@ -634,7 +657,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(fee47777-163c-4769-996a-6e9c50ad8f54),
-@@ -2505,6 +2581,7 @@ interface ITfDisplayAttributeProvider : IUnknown
+@@ -2505,6 +2593,7 @@ interface ITfDisplayAttributeProvider : IUnknown
  // 
  // ITfDisplayAttributeMgr interface
  // 
@@ -642,7 +665,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2526,6 +2603,7 @@ interface ITfDisplayAttributeMgr : IUnknown
+@@ -2526,6 +2615,7 @@ interface ITfDisplayAttributeMgr : IUnknown
  //
  // ITfDisplayAttributeNotifySink interface
  // 
@@ -650,7 +673,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(ad56f402-e162-4f25-908f-7d577cf9bda9),
-@@ -2539,6 +2617,7 @@ interface ITfDisplayAttributeNotifySink : IUnknown
+@@ -2539,6 +2629,7 @@ interface ITfDisplayAttributeNotifySink : IUnknown
  // 
  // ITfCategoryMgr interface
  // 
@@ -658,7 +681,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2604,6 +2683,7 @@ const DWORD TF_INVALID_COOKIE = 0xffffffff;
+@@ -2604,6 +2695,7 @@ const DWORD TF_INVALID_COOKIE = 0xffffffff;
  // 
  // ITfSource
  // 
@@ -666,7 +689,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(4ea48a35-60ae-446f-8fd6-e6a8d82459f7),
-@@ -2621,6 +2701,7 @@ interface ITfSource : IUnknown
+@@ -2621,6 +2713,7 @@ interface ITfSource : IUnknown
  // 
  // ITfSourceSingle
  // 
@@ -674,7 +697,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(73131f9c-56a9-49dd-b0ee-d046633f7528),
-@@ -2639,6 +2720,7 @@ interface ITfSourceSingle : IUnknown
+@@ -2639,6 +2732,7 @@ interface ITfSourceSingle : IUnknown
  //
  // ITfUIElementMgr
  //
@@ -682,7 +705,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2657,6 +2739,7 @@ interface ITfUIElementMgr : IUnknown
+@@ -2657,6 +2751,7 @@ interface ITfUIElementMgr : IUnknown
  //
  // IEnumTfUIElements
  //
@@ -690,7 +713,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2677,6 +2760,7 @@ interface IEnumTfUIElements : IUnknown
+@@ -2677,6 +2772,7 @@ interface IEnumTfUIElements : IUnknown
  //
  // ITfUIElementSink
  //
@@ -698,7 +721,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2693,6 +2777,7 @@ interface ITfUIElementSink : IUnknown
+@@ -2693,6 +2789,7 @@ interface ITfUIElementSink : IUnknown
  //
  // ITfUIElement
  //
@@ -706,7 +729,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2710,6 +2795,7 @@ interface ITfUIElement : IUnknown
+@@ -2710,6 +2807,7 @@ interface ITfUIElement : IUnknown
  //
  // ITfCandidateListUIElement
  //
@@ -714,7 +737,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2731,10 +2817,12 @@ interface ITfCandidateListUIElement : ITfUIElement
+@@ -2731,10 +2829,12 @@ interface ITfCandidateListUIElement : ITfUIElement
      HRESULT GetCurrentPage([out] UINT *puPage);
                            
  };
@@ -727,7 +750,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2751,6 +2839,7 @@ interface ITfCandidateListUIElementBehavior : ITfCandidateListUIElement
+@@ -2751,6 +2851,7 @@ interface ITfCandidateListUIElementBehavior : ITfCandidateListUIElement
  
  // ITfReadingInformationUIElement
  //
@@ -735,7 +758,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2776,6 +2865,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -2776,6 +2877,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfTransitoryExtensionUIElement
  //
@@ -743,7 +766,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2789,6 +2879,7 @@ interface ITfTransitoryExtensionUIElement : ITfUIElement
+@@ -2789,6 +2891,7 @@ interface ITfTransitoryExtensionUIElement : ITfUIElement
  
  // ITfTransitoryExtensionSink
  //
@@ -751,7 +774,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2807,6 +2898,7 @@ interface ITfTransitoryExtensionSink : IUnknown
+@@ -2807,6 +2910,7 @@ interface ITfTransitoryExtensionSink : IUnknown
  //
  // ITfToolTipUIElement
  //
@@ -759,7 +782,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    local,
-@@ -2821,6 +2913,7 @@ interface ITfToolTipUIElement : ITfUIElement
+@@ -2821,6 +2925,7 @@ interface ITfToolTipUIElement : ITfUIElement
  //
  // ITfReverseConversionList
  //
@@ -767,7 +790,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(151d69f0-86f4-4674-b721-56911e797f47),
-@@ -2837,6 +2930,7 @@ interface ITfReverseConversionList : IUnknown
+@@ -2837,6 +2942,7 @@ interface ITfReverseConversionList : IUnknown
  //
  // ITfReverseConversion
  //
@@ -775,7 +798,7 @@ index e412edd9..16cf67d7 100644
  [
    object,
    uuid(a415e162-157d-417d-8a8c-0ab26c7d2781),
-@@ -2851,6 +2945,7 @@ interface ITfReverseConversion : IUnknown
+@@ -2851,6 +2957,7 @@ interface ITfReverseConversion : IUnknown
  //
  // ITfReverseConversionMgr
  //

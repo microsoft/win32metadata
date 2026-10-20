@@ -1,5 +1,5 @@
 diff --git a/um/winnls.h b/um/winnls.h
-index 2a104ac5..758ea9d5 100644
+index 2a104ac5..f64422d2 100644
 --- a/um/winnls.h
 +++ b/um/winnls.h
 @@ -17,6 +17,22 @@ Abstract:
@@ -583,7 +583,7 @@ index 2a104ac5..758ea9d5 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
-@@ -2241,6 +2428,8 @@ IsValidLocale(
+@@ -2241,23 +2428,27 @@ IsValidLocale(
  
  // GetGeoInfoEx is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -592,7 +592,12 @@ index 2a104ac5..758ea9d5 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2252,6 +2441,8 @@ GetGeoInfoA(
+ GetGeoInfoA(
+     _In_ GEOID       Location,
+-    _In_ GEOTYPE     GeoType,
++    _Win32_AssociatedEnum_(enum SYSGEOTYPE) _In_ GEOTYPE     GeoType,
+     _Out_writes_opt_(cchData) LPSTR     lpGeoData,
+     _In_ int         cchData,
      _In_ LANGID      LangId);
  // GetGeoInfoEx is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetGeoInfoEx instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -601,7 +606,14 @@ index 2a104ac5..758ea9d5 100644
  WINBASEAPI
  int
  WINAPI
-@@ -2268,6 +2459,8 @@ GetGeoInfoW(
+ GetGeoInfoW(
+     _In_ GEOID       Location,
+-    _In_ GEOTYPE     GeoType,
++    _Win32_AssociatedEnum_(enum SYSGEOTYPE) _In_ GEOTYPE     GeoType,
+     _Out_writes_opt_(cchData) LPWSTR     lpGeoData,
+     _In_ int         cchData,
+     _In_ LANGID      LangId);
+@@ -2268,12 +2459,14 @@ GetGeoInfoW(
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -610,6 +622,13 @@ index 2a104ac5..758ea9d5 100644
  WINBASEAPI
  int
  WINAPI
+ GetGeoInfoEx(
+     _In_ PWSTR       location,
+-    _In_ GEOTYPE     geoType,
++    _Win32_AssociatedEnum_(enum SYSGEOTYPE) _In_ GEOTYPE     geoType,
+     _Out_writes_opt_(geoDataCount) PWSTR    geoData,
+     _In_ int         geoDataCount);
+ #endif
 @@ -2286,6 +2479,8 @@ GetGeoInfoEx(
  
  // EnumSystemGeoNames is preferred where available
@@ -628,7 +647,7 @@ index 2a104ac5..758ea9d5 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2312,6 +2509,7 @@ EnumSystemGeoNames(
+@@ -2312,17 +2509,20 @@ EnumSystemGeoNames(
  
  // GetUserDefaultGeoName is preferred where available
  DEPRECATED("The GeoID concept is obsolete. Use GetUserDefaultGeoName instead. Set DISABLE_NLS_DEPRECATION to disable this warning.")
@@ -636,7 +655,12 @@ index 2a104ac5..758ea9d5 100644
  WINBASEAPI
  GEOID
  WINAPI
-@@ -2323,6 +2521,8 @@ GetUserGeoID(
+ GetUserGeoID(
+-    _In_ GEOCLASS    GeoClass);
++    _Win32_AssociatedEnum_(enum SYSGEOCLASS) _In_ GEOCLASS    GeoClass);
+ 
+ /**
+  * Note: This API was added in the Windows 10 Fall Creators Update.
   * (Please use this API instead of calling GetUserGeoID.)
   *
   */

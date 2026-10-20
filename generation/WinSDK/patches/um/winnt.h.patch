@@ -1,3 +1,4 @@
+diff --git a/um/winnt.h b/um/winnt.h
 --- a/um/winnt.h
 +++ b/um/winnt.h
 @@ -17,6 +17,47 @@
@@ -229,7 +230,25 @@
  // This is the history of ACL revisions.  Add a new one whenever
  // ACL_REVISION is updated
  
-@@ -11306,7 +11361,7 @@
+@@ -11179,6 +11234,17 @@
+ 
+ #define SUCCESSFUL_ACCESS_ACE_FLAG       (0x40)
+ #define FAILED_ACCESS_ACE_FLAG           (0x80)
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(ACE_FLAGS, unsigned long,
++    CONTAINER_INHERIT_ACE,
++    FAILED_ACCESS_ACE_FLAG,
++    INHERIT_ONLY_ACE,
++    INHERITED_ACE,
++    NO_PROPAGATE_INHERIT_ACE,
++    OBJECT_INHERIT_ACE,
++    SUCCESSFUL_ACCESS_ACE_FLAG);
++#endif
+ 
+ //
+ //  SYSTEM_ACCESS_FILTER_ACE AceFlags
+@@ -11306,7 +11372,7 @@
  typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -238,7 +257,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11315,7 +11370,7 @@
+@@ -11315,7 +11381,7 @@
  typedef struct _ACCESS_DENIED_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -247,7 +266,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11324,7 +11379,7 @@
+@@ -11324,7 +11390,7 @@
  typedef struct _SYSTEM_AUDIT_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -256,7 +275,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11375,7 +11430,7 @@
+@@ -11375,7 +11441,7 @@
  typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -265,7 +284,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11385,7 +11440,7 @@
+@@ -11385,7 +11451,7 @@
  typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -274,7 +293,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11395,7 +11450,7 @@
+@@ -11395,7 +11461,7 @@
  typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -283,7 +302,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11405,7 +11460,7 @@
+@@ -11405,7 +11471,7 @@
  typedef struct _SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
      ACE_HEADER Header;
      ACCESS_MASK Mask;
@@ -292,7 +311,7 @@
      GUID ObjectType;
      GUID InheritedObjectType;
      DWORD SidStart;
-@@ -11418,6 +11473,12 @@
+@@ -11418,6 +11484,12 @@
  
  #define ACE_OBJECT_TYPE_PRESENT           0x1
  #define ACE_INHERITED_OBJECT_TYPE_PRESENT 0x2
@@ -305,7 +324,50 @@
  
  
  //
-@@ -11696,6 +11757,14 @@
+@@ -11494,6 +11566,24 @@
+ #define SE_RM_CONTROL_VALID              (0x4000)
+ #define SE_SELF_RELATIVE                 (0x8000)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SECURITY_DESCRIPTOR_CONTROL, unsigned short,
++    SE_OWNER_DEFAULTED,
++    SE_GROUP_DEFAULTED,
++    SE_DACL_PRESENT,
++    SE_DACL_DEFAULTED,
++    SE_SACL_PRESENT,
++    SE_SACL_DEFAULTED,
++    SE_DACL_AUTO_INHERIT_REQ,
++    SE_SACL_AUTO_INHERIT_REQ,
++    SE_DACL_AUTO_INHERITED,
++    SE_SACL_AUTO_INHERITED,
++    SE_DACL_PROTECTED,
++    SE_SACL_PROTECTED,
++    SE_RM_CONTROL_VALID,
++    SE_SELF_RELATIVE);
++#endif
++
+ //
+ //  Where:
+ //
+@@ -11570,7 +11660,7 @@
+ typedef struct _SECURITY_DESCRIPTOR_RELATIVE {
+     BYTE  Revision;
+     BYTE  Sbz1;
+-    SECURITY_DESCRIPTOR_CONTROL Control;
++    _Win32_AssociatedEnum_(SECURITY_DESCRIPTOR_CONTROL) SECURITY_DESCRIPTOR_CONTROL Control;
+     DWORD Owner;
+     DWORD Group;
+     DWORD Sacl;
+@@ -11580,7 +11670,7 @@
+ typedef struct _SECURITY_DESCRIPTOR {
+    BYTE  Revision;
+    BYTE  Sbz1;
+-   SECURITY_DESCRIPTOR_CONTROL Control;
++   _Win32_AssociatedEnum_(SECURITY_DESCRIPTOR_CONTROL) SECURITY_DESCRIPTOR_CONTROL Control;
+    PSID Owner;
+    PSID Group;
+    PACL Sacl;
+@@ -11696,6 +11786,14 @@
  #define SE_PRIVILEGE_ENABLED            (0x00000002L)
  #define SE_PRIVILEGE_REMOVED            (0X00000004L)
  #define SE_PRIVILEGE_USED_FOR_ACCESS    (0x80000000L)
@@ -320,7 +382,7 @@
  
  #define SE_PRIVILEGE_VALID_ATTRIBUTES   (SE_PRIVILEGE_ENABLED_BY_DEFAULT | \
                                           SE_PRIVILEGE_ENABLED            | \
-@@ -12202,12 +12271,20 @@
+@@ -12202,12 +12300,20 @@
  #define TOKEN_MANDATORY_POLICY_VALID_MASK      (TOKEN_MANDATORY_POLICY_NO_WRITE_UP | \
                                                  TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN)
  
@@ -342,7 +404,7 @@
  } TOKEN_MANDATORY_POLICY, *PTOKEN_MANDATORY_POLICY;
  
  typedef PVOID PSECURITY_ATTRIBUTES_OPAQUE;
-@@ -12365,6 +12442,17 @@
+@@ -12365,6 +12471,17 @@
  
  #define CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING  0x10
  
@@ -360,7 +422,7 @@
  //
  // Attribute Flags
  //
-@@ -12407,6 +12495,16 @@
+@@ -12407,6 +12524,16 @@
  //
  
  #define CLAIM_SECURITY_ATTRIBUTE_MANDATORY 0x0020
@@ -377,7 +439,7 @@
  
  
  #define CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS   (    \
-@@ -12442,7 +12540,7 @@
+@@ -12442,7 +12569,7 @@
      //  Data type of attribute.
      //
  
@@ -386,7 +448,7 @@
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12494,7 +12592,7 @@
+@@ -12494,7 +12621,7 @@
      //  Data type of attribute.
      //
  
@@ -395,7 +457,7 @@
  
      //
      //  Pass 0 in a set operation and check for 0 in
-@@ -12507,7 +12605,7 @@
+@@ -12507,7 +12634,7 @@
      // Attribute Flags
      //
  
@@ -404,7 +466,7 @@
  
      //
      //  Number of values.
-@@ -12607,6 +12705,14 @@
+@@ -12607,6 +12734,14 @@
  #define SANDBOX_INERT           0x2 
  #define LUA_TOKEN               0x4 
  #define WRITE_RESTRICTED        0x8 
@@ -419,7 +481,77 @@
  
  typedef DWORD SECURITY_INFORMATION, *PSECURITY_INFORMATION;
  
-@@ -12955,6 +13061,14 @@
+@@ -12625,6 +12760,22 @@
+ #define PROTECTED_SACL_SECURITY_INFORMATION         (0x40000000L)
+ #define UNPROTECTED_DACL_SECURITY_INFORMATION       (0x20000000L)
+ #define UNPROTECTED_SACL_SECURITY_INFORMATION       (0x10000000L)
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(OBJECT_SECURITY_INFORMATION, unsigned long,
++    ATTRIBUTE_SECURITY_INFORMATION,
++    BACKUP_SECURITY_INFORMATION,
++    DACL_SECURITY_INFORMATION,
++    GROUP_SECURITY_INFORMATION,
++    LABEL_SECURITY_INFORMATION,
++    OWNER_SECURITY_INFORMATION,
++    PROTECTED_DACL_SECURITY_INFORMATION,
++    PROTECTED_SACL_SECURITY_INFORMATION,
++    SACL_SECURITY_INFORMATION,
++    SCOPE_SECURITY_INFORMATION,
++    UNPROTECTED_DACL_SECURITY_INFORMATION,
++    UNPROTECTED_SACL_SECURITY_INFORMATION);
++#endif
+ 
+ 
+ //
+@@ -12728,6 +12879,30 @@
+                                    0x3FF)
+ #endif
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(THREAD_TERMINATE, THREAD_SUSPEND_RESUME, THREAD_GET_CONTEXT, THREAD_SET_CONTEXT, THREAD_SET_INFORMATION, THREAD_QUERY_INFORMATION, THREAD_SET_THREAD_TOKEN, THREAD_IMPERSONATE, THREAD_DIRECT_IMPERSONATION, THREAD_SET_LIMITED_INFORMATION, THREAD_QUERY_LIMITED_INFORMATION, THREAD_RESUME, THREAD_ALL_ACCESS, THREAD_DELETE, THREAD_READ_CONTROL, THREAD_WRITE_DAC, THREAD_WRITE_OWNER, THREAD_SYNCHRONIZE, THREAD_STANDARD_RIGHTS_REQUIRED)",
++    THREAD_TERMINATE,
++    THREAD_SUSPEND_RESUME,
++    THREAD_GET_CONTEXT,
++    THREAD_SET_CONTEXT,
++    THREAD_SET_INFORMATION,
++    THREAD_QUERY_INFORMATION,
++    THREAD_SET_THREAD_TOKEN,
++    THREAD_IMPERSONATE,
++    THREAD_DIRECT_IMPERSONATION,
++    THREAD_SET_LIMITED_INFORMATION,
++    THREAD_QUERY_LIMITED_INFORMATION,
++    THREAD_RESUME,
++    THREAD_ALL_ACCESS,
++    DELETE,
++    READ_CONTROL,
++    WRITE_DAC,
++    WRITE_OWNER,
++    SYNCHRONIZE,
++    STANDARD_RIGHTS_REQUIRED)
++    unsigned long THREAD_ACCESS_RIGHTS;
++#endif
++
+ //
+ //
+ 
+@@ -12869,6 +13044,15 @@
+ #define MEMORY_PRIORITY_BELOW_NORMAL     4
+ #define MEMORY_PRIORITY_NORMAL           5
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(MEMORY_PRIORITY, unsigned long,
++    MEMORY_PRIORITY_VERY_LOW,
++    MEMORY_PRIORITY_LOW,
++    MEMORY_PRIORITY_MEDIUM,
++    MEMORY_PRIORITY_BELOW_NORMAL,
++    MEMORY_PRIORITY_NORMAL);
++#endif
++
+ //
+ //
+ 
+@@ -12955,6 +13139,14 @@
  #define QUOTA_LIMITS_HARDWS_MIN_DISABLE 0x00000002
  #define QUOTA_LIMITS_HARDWS_MAX_ENABLE  0x00000004
  #define QUOTA_LIMITS_HARDWS_MAX_DISABLE 0x00000008
@@ -434,7 +566,7 @@
  #define QUOTA_LIMITS_USE_DEFAULT_LIMITS 0x00000010
  
  typedef union _RATE_QUOTA_LIMIT {
-@@ -13388,7 +13502,7 @@
+@@ -13388,7 +13580,7 @@
  } JOBOBJECT_SECURITY_LIMIT_INFORMATION, *PJOBOBJECT_SECURITY_LIMIT_INFORMATION ;
  
  typedef struct _JOBOBJECT_END_OF_JOB_TIME_INFORMATION {
@@ -443,7 +575,7 @@
  } JOBOBJECT_END_OF_JOB_TIME_INFORMATION, *PJOBOBJECT_END_OF_JOB_TIME_INFORMATION;
  
  typedef struct _JOBOBJECT_ASSOCIATE_COMPLETION_PORT {
-@@ -13515,7 +13629,7 @@
+@@ -13515,7 +13707,7 @@
  //
  
  typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
@@ -452,7 +584,7 @@
      union {
          DWORD CpuRate;
          DWORD Weight;
-@@ -13662,6 +13776,12 @@
+@@ -13662,6 +13854,12 @@
  #define JOB_OBJECT_TERMINATE_AT_END_OF_JOB  0
  #define JOB_OBJECT_POST_AT_END_OF_JOB       1
  
@@ -465,7 +597,7 @@
  //
  // Completion Port Messages for job objects
  //
-@@ -13793,6 +13913,16 @@
+@@ -13793,6 +13991,16 @@
  #define JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE        0x10
  #define JOB_OBJECT_CPU_RATE_CONTROL_PER_PROCESSOR_CAPS  0x20
  #define JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS         0x3f
@@ -482,7 +614,52 @@
  
  //
  //
-@@ -14270,6 +14400,99 @@
+@@ -13945,6 +14153,17 @@
+ #define TIMER_ALL_ACCESS (STANDARD_RIGHTS_REQUIRED|SYNCHRONIZE|\
+                           TIMER_QUERY_STATE|TIMER_MODIFY_STATE)
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SYNCHRONIZATION_ACCESS_RIGHTS, unsigned long,
++    EVENT_ALL_ACCESS,
++    EVENT_MODIFY_STATE,
++    SEMAPHORE_ALL_ACCESS,
++    SEMAPHORE_MODIFY_STATE,
++    TIMER_ALL_ACCESS,
++    TIMER_MODIFY_STATE,
++    TIMER_QUERY_STATE);
++#endif
++
+ //
+ //
+ 
+@@ -14179,6 +14398,26 @@
+ #define PROCESSOR_ARCHITECTURE_IA32_ON_ARM64    14
+ 
+ #define PROCESSOR_ARCHITECTURE_UNKNOWN 0xFFFF
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(PROCESSOR_ARCHITECTURE, unsigned short,
++    PROCESSOR_ARCHITECTURE_INTEL,
++    PROCESSOR_ARCHITECTURE_MIPS,
++    PROCESSOR_ARCHITECTURE_ALPHA,
++    PROCESSOR_ARCHITECTURE_PPC,
++    PROCESSOR_ARCHITECTURE_SHX,
++    PROCESSOR_ARCHITECTURE_ARM,
++    PROCESSOR_ARCHITECTURE_IA64,
++    PROCESSOR_ARCHITECTURE_ALPHA64,
++    PROCESSOR_ARCHITECTURE_MSIL,
++    PROCESSOR_ARCHITECTURE_AMD64,
++    PROCESSOR_ARCHITECTURE_IA32_ON_WIN64,
++    PROCESSOR_ARCHITECTURE_NEUTRAL,
++    PROCESSOR_ARCHITECTURE_ARM64,
++    PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64,
++    PROCESSOR_ARCHITECTURE_IA32_ON_ARM64,
++    PROCESSOR_ARCHITECTURE_UNKNOWN);
++#endif
+ 
+ //
+ #define PF_FLOATING_POINT_PRECISION_ERRATA           0   
+@@ -14270,6 +14509,99 @@
  #define PF_ARM_SME_I16I64_INSTRUCTIONS_AVAILABLE    86   
  #define PF_ARM_SME_LUTv2_INSTRUCTIONS_AVAILABLE     87   
  #define PF_ARM_SME_FA64_INSTRUCTIONS_AVAILABLE      88   
@@ -582,7 +759,7 @@
  //
  
  //
-@@ -14877,7 +15100,7 @@
+@@ -14877,7 +15209,7 @@
      SIZE_T RegionSize;
      DWORD State;
      DWORD Protect;
@@ -591,7 +768,7 @@
  } MEMORY_BASIC_INFORMATION, *PMEMORY_BASIC_INFORMATION;
  
  // end_ntifs
-@@ -14889,7 +15112,7 @@
+@@ -14889,7 +15221,7 @@
      DWORD RegionSize;
      DWORD State;
      DWORD Protect;
@@ -600,7 +777,7 @@
  } MEMORY_BASIC_INFORMATION32, *PMEMORY_BASIC_INFORMATION32;
  
  typedef struct DECLSPEC_ALIGN(16) _MEMORY_BASIC_INFORMATION64 {
-@@ -14900,7 +15123,7 @@
+@@ -14900,7 +15232,7 @@
      ULONGLONG RegionSize;
      DWORD     State;
      DWORD     Protect;
@@ -609,7 +786,7 @@
      DWORD     __alignment2;
  } MEMORY_BASIC_INFORMATION64, *PMEMORY_BASIC_INFORMATION64;
  
-@@ -14959,6 +15182,17 @@
+@@ -14959,6 +15291,17 @@
                              SECTION_MAP_READ |       \
                              SECTION_MAP_EXECUTE |    \
                              SECTION_EXTEND_SIZE)
@@ -627,7 +804,93 @@
  
  //
  // Session Specific Access Rights.
-@@ -15109,6 +15343,13 @@
+@@ -15017,9 +15360,35 @@
+ #define MEM_UNMAP_WITH_TRANSIENT_BOOST  0x00000001  
+ #define MEM_COALESCE_PLACEHOLDERS       0x00000001  
+ #define MEM_PRESERVE_PLACEHOLDER        0x00000002  
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("Enum(MEM_UNMAP_NONE, MEM_UNMAP_WITH_TRANSIENT_BOOST, MEM_PRESERVE_PLACEHOLDER)",
++    0,
++    MEM_UNMAP_WITH_TRANSIENT_BOOST,
++    MEM_PRESERVE_PLACEHOLDER)
++    unsigned long UNMAP_VIEW_OF_FILE_FLAGS;
++#endif
+ #define MEM_DECOMMIT                    0x00004000  
+ #define MEM_RELEASE                     0x00008000  
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(VIRTUAL_FREE_TYPE, unsigned long,
++    MEM_DECOMMIT,
++    MEM_RELEASE);
++#endif
+ #define MEM_FREE                        0x00010000  
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(VIRTUAL_ALLOCATION_TYPE, unsigned long,
++    MEM_COMMIT,
++    MEM_RESERVE,
++    MEM_RESET,
++    MEM_RESET_UNDO,
++    MEM_REPLACE_PLACEHOLDER,
++    MEM_LARGE_PAGES,
++    MEM_RESERVE_PLACEHOLDER,
++    MEM_FREE);
++#endif
+ #define MEM_EXTENDED_PARAMETER_GRAPHICS                 0x00000001  
+ #define MEM_EXTENDED_PARAMETER_NONPAGED                 0x00000002  
+ #define MEM_EXTENDED_PARAMETER_ZERO_PAGES_OPTIONAL      0x00000004  
+@@ -15096,6 +15465,49 @@
+ #define SEC_WRITECOMBINE            0x40000000  
+ #define SEC_LARGE_PAGES             0x80000000  
+ #define SEC_IMAGE_NO_EXECUTE (SEC_IMAGE | SEC_NOCACHE)  
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(PAGE_PROTECTION_FLAGS, unsigned long,
++    PAGE_NOACCESS,
++    PAGE_READONLY,
++    PAGE_READWRITE,
++    PAGE_WRITECOPY,
++    PAGE_EXECUTE,
++    PAGE_EXECUTE_READ,
++    PAGE_EXECUTE_READWRITE,
++    PAGE_EXECUTE_WRITECOPY,
++    PAGE_GUARD,
++    PAGE_NOCACHE,
++    PAGE_WRITECOMBINE,
++    PAGE_GRAPHICS_NOACCESS,
++    PAGE_GRAPHICS_READONLY,
++    PAGE_GRAPHICS_READWRITE,
++    PAGE_GRAPHICS_EXECUTE,
++    PAGE_GRAPHICS_EXECUTE_READ,
++    PAGE_GRAPHICS_EXECUTE_READWRITE,
++    PAGE_GRAPHICS_COHERENT,
++    PAGE_GRAPHICS_NOCACHE,
++    PAGE_ENCLAVE_THREAD_CONTROL,
++    PAGE_REVERT_TO_FILE_MAP,
++    PAGE_TARGETS_NO_UPDATE,
++    PAGE_TARGETS_INVALID,
++    PAGE_ENCLAVE_UNVALIDATED,
++    PAGE_ENCLAVE_MASK,
++    PAGE_ENCLAVE_DECOMMIT,
++    PAGE_ENCLAVE_SS_FIRST,
++    PAGE_ENCLAVE_SS_REST,
++    SEC_PARTITION_OWNER_HANDLE,
++    SEC_64K_PAGES,
++    SEC_FILE,
++    SEC_IMAGE,
++    SEC_PROTECTED_IMAGE,
++    SEC_RESERVE,
++    SEC_COMMIT,
++    SEC_NOCACHE,
++    SEC_WRITECOMBINE,
++    SEC_LARGE_PAGES,
++    SEC_IMAGE_NO_EXECUTE);
++#endif
+ // begin_wdm
+ 
+ typedef enum MEM_SECTION_EXTENDED_PARAMETER_TYPE {
+@@ -15109,6 +15521,13 @@
  #define MEM_PRIVATE                 0x00020000  
  #define MEM_MAPPED                  0x00040000  
  #define MEM_IMAGE                   0x01000000  
@@ -641,7 +904,23 @@
  #define WRITE_WATCH_FLAG_RESET  0x01    
  #define VM_PREFETCH_TO_WORKING_SET        0x1  
  
-@@ -15338,11 +15579,32 @@
+@@ -15303,6 +15722,15 @@
+ #define FILE_SHARE_READ                 0x00000001  
+ #define FILE_SHARE_WRITE                0x00000002  
+ #define FILE_SHARE_DELETE               0x00000004  
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(FILE_SHARE_NONE, FILE_SHARE_DELETE, FILE_SHARE_READ, FILE_SHARE_WRITE)",
++    0,
++    FILE_SHARE_DELETE,
++    FILE_SHARE_READ,
++    FILE_SHARE_WRITE)
++    unsigned long FILE_SHARE_MODE;
++#endif
+ #define FILE_ATTRIBUTE_READONLY             0x00000001  
+ #define FILE_ATTRIBUTE_HIDDEN               0x00000002  
+ #define FILE_ATTRIBUTE_SYSTEM               0x00000004  
+@@ -15338,11 +15766,32 @@
  #define FILE_NOTIFY_CHANGE_LAST_ACCESS  0x00000020   
  #define FILE_NOTIFY_CHANGE_CREATION     0x00000040   
  #define FILE_NOTIFY_CHANGE_SECURITY     0x00000100   
@@ -674,7 +953,7 @@
  #define MAILSLOT_NO_MESSAGE             ((DWORD)-1) 
  #define MAILSLOT_WAIT_FOREVER           ((DWORD)-1) 
  #define FILE_CASE_SENSITIVE_SEARCH          0x00000001  
-@@ -15388,7 +15650,7 @@
+@@ -15388,7 +15837,7 @@
  
  typedef struct _FILE_NOTIFY_INFORMATION {
      DWORD NextEntryOffset;
@@ -683,7 +962,7 @@
      DWORD FileNameLength;
      WCHAR FileName[1];
  } FILE_NOTIFY_INFORMATION, *PFILE_NOTIFY_INFORMATION;
-@@ -15396,7 +15658,7 @@
+@@ -15396,7 +15845,7 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS3)
  typedef struct _FILE_NOTIFY_EXTENDED_INFORMATION {
      DWORD NextEntryOffset;
@@ -692,7 +971,7 @@
      LARGE_INTEGER CreationTime;
      LARGE_INTEGER LastModificationTime;
      LARGE_INTEGER LastChangeTime;
-@@ -16372,6 +16634,12 @@
+@@ -16372,6 +16821,12 @@
  #define DUPLICATE_CLOSE_SOURCE      0x00000001  
  #define DUPLICATE_SAME_ACCESS       0x00000002  
  
@@ -705,7 +984,7 @@
  //
  // =========================================
  // Define GUIDs which represent well-known power schemes
-@@ -18447,6 +18715,15 @@
+@@ -18447,6 +18902,15 @@
  #define ES_AWAYMODE_REQUIRED ((DWORD)0x00000040)
  #define ES_CONTINUOUS        ((DWORD)0x80000000)
  
@@ -721,7 +1000,7 @@
  typedef DWORD EXECUTION_STATE, *PEXECUTION_STATE;
  
  typedef enum {
-@@ -18470,6 +18747,12 @@
+@@ -18470,6 +18934,12 @@
  
  #define POWER_REQUEST_CONTEXT_SIMPLE_STRING         DIAGNOSTIC_REASON_SIMPLE_STRING
  #define POWER_REQUEST_CONTEXT_DETAILED_STRING       DIAGNOSTIC_REASON_DETAILED_STRING
@@ -734,7 +1013,7 @@
  
  typedef enum _POWER_REQUEST_TYPE {
      PowerRequestDisplayRequired,
-@@ -18496,6 +18779,19 @@
+@@ -18496,6 +18966,19 @@
  #define PDCAP_WAKE_FROM_D2_SUPPORTED    0x00000040
  #define PDCAP_WAKE_FROM_D3_SUPPORTED    0x00000080
  #define PDCAP_WARM_EJECT_SUPPORTED      0x00000100
@@ -754,7 +1033,7 @@
  
  typedef struct CM_Power_Data_s {
      DWORD               PD_Size;
-@@ -18923,6 +19219,12 @@
+@@ -18923,6 +19406,12 @@
  #define POWER_PLATFORM_ROLE_V1_MAX (PlatformRolePerformanceServer + 1)
  
  #define POWER_PLATFORM_ROLE_V2     (0x00000002)
@@ -767,7 +1046,7 @@
  #define POWER_PLATFORM_ROLE_V2_MAX (PlatformRoleSlate + 1)
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
-@@ -19269,7 +19571,7 @@
+@@ -19269,7 +19758,7 @@
  typedef struct {
      POWER_ACTION    Action;
      DWORD           Flags;
@@ -776,7 +1055,7 @@
  } POWER_ACTION_POLICY, *PPOWER_ACTION_POLICY;
  
  // POWER_ACTION_POLICY->Flags:
-@@ -19296,6 +19598,16 @@
+@@ -19296,6 +19785,16 @@
  #define POWER_USER_NOTIFY_SHUTDOWN        0x00000010 // Application and Services are intimated of shutdown.
  #define POWER_USER_NOTIFY_FORCED_SHUTDOWN 0x00000020 // Immediate shutdown - Application and Services are not intimated.
  #define POWER_FORCE_TRIGGER_RESET         0x80000000
@@ -793,7 +1072,19 @@
  
  // Note: for battery alarm EventCodes, the ID of the battery alarm << 16 is ORed
  // into the flags.  For example: DISCHARGE_POLICY_LOW << 16
-@@ -19780,7 +20092,7 @@
+@@ -19773,14 +20272,18 @@
+ // File header format.
+ //
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned short IMAGE_FILE_MACHINE;
++#endif
++
+ typedef struct _IMAGE_FILE_HEADER {
+-    WORD    Machine;
++    _Win32_AssociatedEnum_(IMAGE_FILE_MACHINE) WORD    Machine;
+     WORD    NumberOfSections;
+     DWORD   TimeDateStamp;
      DWORD   PointerToSymbolTable;
      DWORD   NumberOfSymbols;
      WORD    SizeOfOptionalHeader;
@@ -802,7 +1093,7 @@
  } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
  
  #define IMAGE_SIZEOF_FILE_HEADER             20
-@@ -19800,6 +20112,25 @@
+@@ -19800,6 +20303,25 @@
  #define IMAGE_FILE_DLL                       0x2000  // File is a DLL.
  #define IMAGE_FILE_UP_SYSTEM_ONLY            0x4000  // File should only be run on a UP machine
  #define IMAGE_FILE_BYTES_REVERSED_HI         0x8000  // Bytes of machine word are reversed.
@@ -828,10 +1119,54 @@
  
  #define IMAGE_FILE_MACHINE_UNKNOWN           0
  #define IMAGE_FILE_MACHINE_TARGET_HOST       0x0001  // Useful for indicating we want to interact with the host and not a WoW guest.
-@@ -19850,6 +20181,14 @@
+@@ -19834,6 +20356,42 @@
+ #define IMAGE_FILE_MACHINE_ARM64             0xAA64  // ARM64 Little-Endian
+ #define IMAGE_FILE_MACHINE_CEE               0xC0EE
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGE_FILE_MACHINE, unsigned short,
++    IMAGE_FILE_MACHINE_AXP64,
++    IMAGE_FILE_MACHINE_I386,
++    IMAGE_FILE_MACHINE_IA64,
++    IMAGE_FILE_MACHINE_AMD64,
++    IMAGE_FILE_MACHINE_UNKNOWN,
++    IMAGE_FILE_MACHINE_TARGET_HOST,
++    IMAGE_FILE_MACHINE_R3000,
++    IMAGE_FILE_MACHINE_R4000,
++    IMAGE_FILE_MACHINE_R10000,
++    IMAGE_FILE_MACHINE_WCEMIPSV2,
++    IMAGE_FILE_MACHINE_ALPHA,
++    IMAGE_FILE_MACHINE_SH3,
++    IMAGE_FILE_MACHINE_SH3DSP,
++    IMAGE_FILE_MACHINE_SH3E,
++    IMAGE_FILE_MACHINE_SH4,
++    IMAGE_FILE_MACHINE_SH5,
++    IMAGE_FILE_MACHINE_ARM,
++    IMAGE_FILE_MACHINE_THUMB,
++    IMAGE_FILE_MACHINE_ARMNT,
++    IMAGE_FILE_MACHINE_AM33,
++    IMAGE_FILE_MACHINE_POWERPC,
++    IMAGE_FILE_MACHINE_POWERPCFP,
++    IMAGE_FILE_MACHINE_MIPS16,
++    IMAGE_FILE_MACHINE_ALPHA64,
++    IMAGE_FILE_MACHINE_MIPSFPU,
++    IMAGE_FILE_MACHINE_MIPSFPU16,
++    IMAGE_FILE_MACHINE_TRICORE,
++    IMAGE_FILE_MACHINE_CEF,
++    IMAGE_FILE_MACHINE_EBC,
++    IMAGE_FILE_MACHINE_M32R,
++    IMAGE_FILE_MACHINE_ARM64,
++    IMAGE_FILE_MACHINE_CEE);
++#endif
++
+ 
+ //
+ // Directory format.
+@@ -19849,6 +20407,14 @@
+ //
  // Optional header format.
  //
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +typedef unsigned short IMAGE_DLL_CHARACTERISTICS;
 +#endif
@@ -839,11 +1174,10 @@
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +typedef unsigned short IMAGE_SUBSYSTEM;
 +#endif
-+
+ 
  typedef struct _IMAGE_OPTIONAL_HEADER {
      //
-     // Standard fields.
-@@ -19882,8 +20221,8 @@
+@@ -19882,8 +20448,8 @@
      DWORD   SizeOfImage;
      DWORD   SizeOfHeaders;
      DWORD   CheckSum;
@@ -854,7 +1188,7 @@
      DWORD   SizeOfStackReserve;
      DWORD   SizeOfStackCommit;
      DWORD   SizeOfHeapReserve;
-@@ -19931,8 +20270,8 @@
+@@ -19931,8 +20497,8 @@
      DWORD       SizeOfImage;
      DWORD       SizeOfHeaders;
      DWORD       CheckSum;
@@ -865,7 +1199,22 @@
      ULONGLONG   SizeOfStackReserve;
      ULONGLONG   SizeOfStackCommit;
      ULONGLONG   SizeOfHeapReserve;
-@@ -20006,6 +20345,25 @@
+@@ -19954,6 +20520,14 @@
+ typedef IMAGE_OPTIONAL_HEADER32             IMAGE_OPTIONAL_HEADER;
+ typedef PIMAGE_OPTIONAL_HEADER32            PIMAGE_OPTIONAL_HEADER;
+ #define IMAGE_NT_OPTIONAL_HDR_MAGIC         IMAGE_NT_OPTIONAL_HDR32_MAGIC
++#endif
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGE_OPTIONAL_HEADER_MAGIC, unsigned short,
++    IMAGE_NT_OPTIONAL_HDR_MAGIC,
++    IMAGE_NT_OPTIONAL_HDR32_MAGIC,
++    IMAGE_NT_OPTIONAL_HDR64_MAGIC,
++    IMAGE_ROM_OPTIONAL_HDR_MAGIC);
+ #endif
+ 
+ typedef struct _IMAGE_NT_HEADERS64 {
+@@ -20006,6 +20580,25 @@
  #define IMAGE_SUBSYSTEM_XBOX                 14
  #define IMAGE_SUBSYSTEM_WINDOWS_BOOT_APPLICATION 16
  #define IMAGE_SUBSYSTEM_XBOX_CODE_CATALOG    17
@@ -891,7 +1240,7 @@
  
  // DllCharacteristics Entries
  
-@@ -20044,6 +20402,25 @@
+@@ -20044,6 +20637,25 @@
  #define IMAGE_DIRECTORY_ENTRY_DELAY_IMPORT   13   // Delay Load Import Descriptors
  #define IMAGE_DIRECTORY_ENTRY_COM_DESCRIPTOR 14   // COM Runtime descriptor
  
@@ -917,7 +1266,7 @@
  //
  // Non-COFF Object file header
  //
-@@ -20095,6 +20472,10 @@
+@@ -20095,6 +20707,10 @@
  //
  
  #define IMAGE_SIZEOF_SHORT_NAME              8
@@ -928,7 +1277,7 @@
  
  typedef struct _IMAGE_SECTION_HEADER {
      BYTE    Name[IMAGE_SIZEOF_SHORT_NAME];
-@@ -20109,7 +20490,7 @@
+@@ -20109,7 +20725,7 @@
      DWORD   PointerToLinenumbers;
      WORD    NumberOfRelocations;
      WORD    NumberOfLinenumbers;
@@ -937,7 +1286,7 @@
  } IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;
  
  #define IMAGE_SIZEOF_SECTION_HEADER          40
-@@ -20174,6 +20555,49 @@
+@@ -20174,6 +20790,49 @@
  // TLS Characteristic Flags
  //
  #define IMAGE_SCN_SCALE_INDEX                0x00000001  // Tls index is scaled
@@ -987,7 +1336,7 @@
  
  #ifndef _MAC
  #include "pshpack2.h"                       // Symbols, relocs, and linenumbers are 2 byte packed
-@@ -21901,7 +22325,7 @@
+@@ -21901,7 +22560,7 @@
      DWORD   TimeDateStamp;
      WORD    MajorVersion;
      WORD    MinorVersion;
@@ -996,7 +1345,7 @@
      DWORD   SizeOfData;
      DWORD   AddressOfRawData;
      DWORD   PointerToRawData;
-@@ -21917,6 +22341,18 @@
+@@ -21917,6 +22576,18 @@
  #define IMAGE_DEBUG_TYPE_OMAP_TO_SRC            7
  #define IMAGE_DEBUG_TYPE_OMAP_FROM_SRC          8
  #define IMAGE_DEBUG_TYPE_BORLAND                9
@@ -1015,7 +1364,7 @@
  #define IMAGE_DEBUG_TYPE_RESERVED10             10
  #define IMAGE_DEBUG_TYPE_BBT                    IMAGE_DEBUG_TYPE_RESERVED10
  #define IMAGE_DEBUG_TYPE_CLSID                  11
-@@ -21936,6 +22372,29 @@
+@@ -21936,6 +22607,29 @@
  #define IMAGE_DLLCHARACTERISTICS_EX_CET_RESERVED_2                              0x20  // Reserved for CET policy *downgrade* only!
  #define IMAGE_DLLCHARACTERISTICS_EX_FORWARD_CFI_COMPAT                          0x40
  #define IMAGE_DLLCHARACTERISTICS_EX_HOTPATCH_COMPATIBLE                         0x80
@@ -1045,7 +1394,7 @@
  
  
  typedef struct _IMAGE_COFF_SYMBOLS_HEADER {
-@@ -22239,7 +22698,7 @@
+@@ -22239,7 +22933,7 @@
  _Success_(return != 0)
  WORD  
  NTAPI
@@ -1054,7 +1403,7 @@
      _In_ DWORD FramesToSkip,
      _In_ DWORD FramesToCapture,
      _Out_writes_to_(FramesToCapture,return) PVOID* BackTrace,
-@@ -22253,7 +22712,7 @@
+@@ -22253,7 +22947,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1063,7 +1412,7 @@
      _Out_ PCONTEXT ContextRecord
      );
  
-@@ -22317,7 +22776,7 @@
+@@ -22317,7 +23011,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1072,7 +1421,7 @@
      _In_opt_ PVOID TargetFrame,
      _In_opt_ PVOID TargetIp,
      _In_opt_ PEXCEPTION_RECORD ExceptionRecord,
-@@ -22371,7 +22830,7 @@
+@@ -22371,7 +23065,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1081,7 +1430,7 @@
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22383,7 +22842,7 @@
+@@ -22383,7 +23077,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1090,7 +1439,7 @@
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22391,7 +22850,7 @@
+@@ -22391,7 +23085,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1099,7 +1448,7 @@
      _In_ PVOID DynamicTable
      );
  
-@@ -22508,7 +22967,7 @@
+@@ -22508,7 +23202,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1108,7 +1457,7 @@
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22520,7 +22979,7 @@
+@@ -22520,7 +23214,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1117,7 +1466,7 @@
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22528,7 +22987,7 @@
+@@ -22528,7 +23222,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1126,7 +1475,7 @@
      _In_ PVOID DynamicTable
      );
  
-@@ -22634,7 +23093,7 @@
+@@ -22634,7 +23328,7 @@
  NTSYSAPI
  DWORD   
  NTAPI
@@ -1135,7 +1484,7 @@
      _Out_ PVOID* DynamicTable,
      _In_reads_(MaximumEntryCount) PRUNTIME_FUNCTION FunctionTable,
      _In_ DWORD EntryCount,
-@@ -22646,7 +23105,7 @@
+@@ -22646,7 +23340,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1144,7 +1493,7 @@
      _Inout_ PVOID DynamicTable,
      _In_ DWORD NewEntryCount
      );
-@@ -22654,7 +23113,7 @@
+@@ -22654,7 +23348,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1153,7 +1502,7 @@
      _In_ PVOID DynamicTable
      );
  
-@@ -22918,7 +23377,7 @@
+@@ -22918,7 +23612,7 @@
  NTSYSAPI
  VOID
  NTAPI
@@ -1162,7 +1511,7 @@
      _Out_ PSLIST_HEADER ListHead
      );
  
-@@ -22926,21 +23385,21 @@
+@@ -22926,21 +23620,21 @@
  NTSYSAPI
  PSLIST_ENTRY
  NTAPI
@@ -1187,7 +1536,7 @@
      _Inout_ PSLIST_HEADER ListHead,
      _Inout_ __drv_aliasesMem PSLIST_ENTRY ListEntry
      );
-@@ -22958,14 +23417,14 @@
+@@ -22958,14 +23652,14 @@
  NTSYSAPI
  PSLIST_ENTRY
  NTAPI
@@ -1204,7 +1553,62 @@
      _In_ PSLIST_HEADER ListHead
      );
  
-@@ -23192,6 +23651,19 @@
+@@ -23143,6 +23837,28 @@
+ #define HEAP_TAG_SHIFT                  18                  
+ #define HEAP_CREATE_SEGMENT_HEAP        0x00000100      
+ #define HEAP_CREATE_HARDENED            0x00000200      
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(HEAP_NONE, HEAP_NO_SERIALIZE, HEAP_GROWABLE, HEAP_GENERATE_EXCEPTIONS, HEAP_ZERO_MEMORY, HEAP_REALLOC_IN_PLACE_ONLY, HEAP_TAIL_CHECKING_ENABLED, HEAP_FREE_CHECKING_ENABLED, HEAP_DISABLE_COALESCE_ON_FREE, HEAP_CREATE_ALIGN_16, HEAP_CREATE_ENABLE_TRACING, HEAP_CREATE_ENABLE_EXECUTE, HEAP_MAXIMUM_TAG, HEAP_PSEUDO_TAG_FLAG, HEAP_TAG_SHIFT, HEAP_CREATE_SEGMENT_HEAP, HEAP_CREATE_HARDENED)",
++    0,
++    HEAP_NO_SERIALIZE,
++    HEAP_GROWABLE,
++    HEAP_GENERATE_EXCEPTIONS,
++    HEAP_ZERO_MEMORY,
++    HEAP_REALLOC_IN_PLACE_ONLY,
++    HEAP_TAIL_CHECKING_ENABLED,
++    HEAP_FREE_CHECKING_ENABLED,
++    HEAP_DISABLE_COALESCE_ON_FREE,
++    HEAP_CREATE_ALIGN_16,
++    HEAP_CREATE_ENABLE_TRACING,
++    HEAP_CREATE_ENABLE_EXECUTE,
++    HEAP_MAXIMUM_TAG,
++    HEAP_PSEUDO_TAG_FLAG,
++    HEAP_TAG_SHIFT,
++    HEAP_CREATE_SEGMENT_HEAP,
++    HEAP_CREATE_HARDENED)
++    unsigned long HEAP_FLAGS;
++#endif
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ #if !defined(MIDL_PASS)
+@@ -23183,6 +23899,25 @@
+ #define IS_TEXT_UNICODE_NOT_UNICODE_MASK      0x0F00
+ #define IS_TEXT_UNICODE_NOT_ASCII_MASK        0xF000
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(IS_TEXT_UNICODE_RESULT, unsigned long,
++    IS_TEXT_UNICODE_ASCII16,
++    IS_TEXT_UNICODE_REVERSE_ASCII16,
++    IS_TEXT_UNICODE_STATISTICS,
++    IS_TEXT_UNICODE_REVERSE_STATISTICS,
++    IS_TEXT_UNICODE_CONTROLS,
++    IS_TEXT_UNICODE_REVERSE_CONTROLS,
++    IS_TEXT_UNICODE_SIGNATURE,
++    IS_TEXT_UNICODE_REVERSE_SIGNATURE,
++    IS_TEXT_UNICODE_ILLEGAL_CHARS,
++    IS_TEXT_UNICODE_ODD_LENGTH,
++    IS_TEXT_UNICODE_NULL_BYTES,
++    IS_TEXT_UNICODE_UNICODE_MASK,
++    IS_TEXT_UNICODE_REVERSE_MASK,
++    IS_TEXT_UNICODE_NOT_UNICODE_MASK,
++    IS_TEXT_UNICODE_NOT_ASCII_MASK);
++#endif
++
+ #define COMPRESSION_FORMAT_NONE          (0x0000)   
+ #define COMPRESSION_FORMAT_DEFAULT       (0x0001)   
+ #define COMPRESSION_FORMAT_LZNT1         (0x0002)   
+@@ -23192,6 +23927,19 @@
  #define COMPRESSION_FORMAT_LZ4           (0x0006)   
  #define COMPRESSION_FORMAT_DEFLATE       (0x0007)   
  #define COMPRESSION_FORMAT_ZLIB          (0x0008)   
@@ -1224,7 +1628,7 @@
  #define COMPRESSION_ENGINE_STANDARD      (0x0000)   
  #define COMPRESSION_ENGINE_MAXIMUM       (0x0100)   
  #define COMPRESSION_ENGINE_HIBER         (0x0200)   
-@@ -23457,6 +23929,21 @@
+@@ -23457,6 +24205,21 @@
  #define SEF_MACL_NO_EXECUTE_UP            0x400
  #define SEF_AI_USE_EXTRA_PARAMS           0x800
  #define SEF_AVOID_OWNER_RESTRICTION       0x1000
@@ -1246,7 +1650,7 @@
  #define SEF_FORCE_USER_MODE               0x2000
  #define SEF_NORMALIZE_OUTPUT_DESCRIPTOR   0x4000
  
-@@ -23582,6 +24069,18 @@
+@@ -23582,6 +24345,18 @@
  #define VER_SUITENAME                   0x0000040
  #define VER_PRODUCT_TYPE                0x0000080
  
@@ -1265,7 +1669,21 @@
  //
  // RtlVerifyVersionInfo() os product type values
  //
-@@ -23620,9 +24119,9 @@
+@@ -23598,6 +24373,13 @@
+ #define VER_PLATFORM_WIN32_WINDOWS      1
+ #define VER_PLATFORM_WIN32_NT           2
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(VER_PLATFORM, unsigned long,
++    VER_PLATFORM_WIN32s,
++    VER_PLATFORM_WIN32_WINDOWS,
++    VER_PLATFORM_WIN32_NT);
++#endif
++
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+ 
+@@ -23620,9 +24402,9 @@
  NTSYSAPI
  ULONGLONG
  NTAPI
@@ -1277,7 +1695,7 @@
      _In_ BYTE  Condition
      );
  
-@@ -24443,6 +24942,18 @@
+@@ -24443,6 +25225,18 @@
  #define WT_EXECUTEINPERSISTENTIOTHREAD  0x00000040                   
  #define WT_EXECUTEINPERSISTENTTHREAD 0x00000080                      
  #define WT_TRANSFER_IMPERSONATION 0x00000100                         
@@ -1296,7 +1714,7 @@
  #define WT_SET_MAX_THREADPOOL_THREADS(Flags, Limit)  ((Flags) |= (Limit)<<16) 
  typedef VOID (NTAPI * WAITORTIMERCALLBACKFUNC) (PVOID, BOOLEAN );   
  typedef VOID (NTAPI * WORKERCALLBACKFUNC) (PVOID );                 
-@@ -24680,6 +25191,29 @@
+@@ -24680,6 +25474,29 @@
  #define DEVICEFAMILYINFOENUM_WINDOWS_CORE_HEADLESS      0x00000011
  
  #define DEVICEFAMILYINFOENUM_MAX                        0x00000011
@@ -1326,7 +1744,7 @@
  
  #define DEVICEFAMILYDEVICEFORM_UNKNOWN                  0x00000000
  #define DEVICEFAMILYDEVICEFORM_PHONE                    0x00000001
-@@ -24735,12 +25269,65 @@
+@@ -24735,12 +25552,65 @@
  
  #define DEVICEFAMILYDEVICEFORM_MAX                      0x0000002F
  
@@ -1394,7 +1812,7 @@
  );
  
  DWORD   
-@@ -24780,6 +25367,14 @@
+@@ -24780,6 +25650,14 @@
  #define EVENTLOG_FORWARDS_READ          0x0004
  #define EVENTLOG_BACKWARDS_READ         0x0008
  
@@ -1409,7 +1827,7 @@
  //
  // The types of events that can be logged.
  //
-@@ -24789,6 +25384,16 @@
+@@ -24789,6 +25667,16 @@
  #define EVENTLOG_INFORMATION_TYPE       0x0004
  #define EVENTLOG_AUDIT_SUCCESS          0x0008
  #define EVENTLOG_AUDIT_FAILURE          0x0010
@@ -1426,7 +1844,7 @@
  
  //
  // Defines for the WRITE flags used by Auditing for paired events
-@@ -24816,7 +25421,7 @@
+@@ -24816,7 +25704,7 @@
      DWORD  TimeGenerated; // Seconds since 1-1-1970
      DWORD  TimeWritten;   // Seconds since 1-1-1970
      DWORD  EventID;
@@ -1435,7 +1853,7 @@
      WORD   NumStrings;
      WORD   EventCategory;
      WORD   ReservedFlags;
-@@ -24980,6 +25585,13 @@
+@@ -24980,6 +25868,13 @@
  #define REG_LATEST_FORMAT       2
  #define REG_NO_COMPRESSION      4
  
@@ -1449,7 +1867,7 @@
  //
  // Key restore & hive load flags
  //
-@@ -24988,6 +25600,12 @@
+@@ -24988,6 +25883,12 @@
  #define REG_REFRESH_HIVE                (0x00000002L)   // Unwind changes to last flush
  #define REG_NO_LAZY_FLUSH               (0x00000004L)   // Never lazy flush this hive
  #define REG_FORCE_RESTORE               (0x00000008L)   // Force the restore process even when we have open handles on subkeys
@@ -1462,7 +1880,7 @@
  #define REG_APP_HIVE                    (0x00000010L)   // Loads the hive visible to the calling process
  #define REG_PROCESS_PRIVATE             (0x00000020L)   // Hive cannot be mounted by any other process while in use
  #define REG_START_JOURNAL               (0x00000040L)   // Starts Hive Journal
-@@ -25017,6 +25635,15 @@
+@@ -25017,6 +25918,15 @@
  #define REG_NOTIFY_CHANGE_LAST_SET      (0x00000004L) // time stamp
  #define REG_NOTIFY_CHANGE_SECURITY      (0x00000008L)
  #define REG_NOTIFY_THREAD_AGNOSTIC      (0x10000000L) // Not associated with a calling thread, can only be used
@@ -1478,11 +1896,12 @@
                                                        // for async user event based notification
  
  #define REG_LEGAL_CHANGE_FILTER                 \
-@@ -25077,6 +25704,20 @@
+@@ -25077,6 +25987,21 @@
  #define SERVICE_USER_OWN_PROCESS       (SERVICE_USER_SERVICE | \
                                          SERVICE_WIN32_OWN_PROCESS)
  
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_AssociatedConstant_(SERVICE_NO_CHANGE)
 +_Win32_FlagsEnum_(ENUM_SERVICE_TYPE, unsigned int,
 +    SERVICE_DRIVER,
 +    SERVICE_KERNEL_DRIVER,
@@ -1499,11 +1918,12 @@
  #define SERVICE_INTERACTIVE_PROCESS    0x00000100
  #define SERVICE_PKG_SERVICE            0x00000200
  
-@@ -25098,6 +25739,15 @@
+@@ -25098,6 +26023,16 @@
  #define SERVICE_DEMAND_START           0x00000003
  #define SERVICE_DISABLED               0x00000004
  
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_AssociatedConstant_(SERVICE_NO_CHANGE)
 +_Win32_Enum_(SERVICE_START_TYPE, unsigned int,
 +    SERVICE_AUTO_START,
 +    SERVICE_BOOT_START,
@@ -1515,12 +1935,13 @@
  //
  // Error control type
  //
-@@ -25105,6 +25755,14 @@
+@@ -25105,6 +26040,15 @@
  #define SERVICE_ERROR_NORMAL           0x00000001
  #define SERVICE_ERROR_SEVERE           0x00000002
  #define SERVICE_ERROR_CRITICAL         0x00000003
 +
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_AssociatedConstant_(SERVICE_NO_CHANGE)
 +_Win32_Enum_(SERVICE_ERROR, unsigned int,
 +    SERVICE_ERROR_CRITICAL,
 +    SERVICE_ERROR_IGNORE,
@@ -1530,7 +1951,7 @@
  
  //
  //
-@@ -25204,8 +25862,14 @@
+@@ -25204,8 +26148,14 @@
  #define TAPE_ERASE_SHORT            0L
  #define TAPE_ERASE_LONG             1L
  
@@ -1546,7 +1967,7 @@
      BOOLEAN Immediate;
  } TAPE_ERASE, *PTAPE_ERASE;
  
-@@ -25220,8 +25884,18 @@
+@@ -25220,8 +26170,18 @@
  #define TAPE_UNLOCK                 4L
  #define TAPE_FORMAT                 5L
  
@@ -1566,7 +1987,7 @@
      BOOLEAN Immediate;
  } TAPE_PREPARE, *PTAPE_PREPARE;
  
-@@ -25234,8 +25908,16 @@
+@@ -25234,8 +26194,16 @@
  #define TAPE_SHORT_FILEMARKS        2L
  #define TAPE_LONG_FILEMARKS         3L
  
@@ -1584,7 +2005,7 @@
      DWORD Count;
      BOOLEAN Immediate;
  } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
-@@ -25246,10 +25928,16 @@
+@@ -25246,10 +26214,16 @@
  
  #define TAPE_ABSOLUTE_POSITION       0L
  #define TAPE_LOGICAL_POSITION        1L
@@ -1602,7 +2023,7 @@
      DWORD Partition;
      LARGE_INTEGER Offset;
  } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
-@@ -25269,8 +25957,21 @@
+@@ -25269,8 +26243,21 @@
  #define TAPE_SPACE_SETMARKS         8L
  #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
  
@@ -1625,7 +2046,7 @@
      DWORD Partition;
      LARGE_INTEGER Offset;
      BOOLEAN Immediate;
-@@ -25358,6 +26059,39 @@
+@@ -25358,6 +26345,39 @@
  #define TAPE_DRIVE_WRITE_LONG_FMKS  0x88000000
  
  #define TAPE_DRIVE_WRITE_MARK_IMMED 0x90000000
@@ -1665,7 +2086,7 @@
  #define TAPE_DRIVE_FORMAT           0xA0000000
  #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
  #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
-@@ -25372,7 +26106,7 @@
+@@ -25372,7 +26392,7 @@
      DWORD MinimumBlockSize;
      DWORD MaximumPartitionCount;
      DWORD FeaturesLow;
@@ -1674,7 +2095,7 @@
      DWORD EOTWarningZoneSize;
  } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
  
-@@ -25415,6 +26149,13 @@
+@@ -25415,6 +26435,13 @@
  #define TAPE_FIXED_PARTITIONS       0L
  #define TAPE_SELECT_PARTITIONS      1L
  #define TAPE_INITIATOR_PARTITIONS   2L
@@ -1688,7 +2109,7 @@
  
  typedef struct _TAPE_CREATE_PARTITION {
      DWORD Method;
-@@ -26150,7 +26891,7 @@
+@@ -26150,7 +27177,7 @@
  
  __forceinline
  struct _TEB *
@@ -1697,7 +2118,7 @@
      VOID
      )
  
-@@ -26286,7 +27027,7 @@
+@@ -26286,7 +27313,7 @@
  
  __forceinline
  PVOID
@@ -1706,7 +2127,7 @@
      VOID
      )
  
-@@ -26296,7 +27037,7 @@
+@@ -26296,7 +27323,7 @@
  
  __forceinline
  PVOID
@@ -1715,7 +2136,7 @@
      VOID
      )
  
-@@ -26311,7 +27052,7 @@
+@@ -26311,7 +27338,7 @@
  
  __forceinline
  struct _TEB *
@@ -1724,7 +2145,7 @@
      VOID
      )
  {
-@@ -26320,7 +27061,7 @@
+@@ -26320,7 +27347,7 @@
  
  __forceinline
  PVOID
@@ -1733,7 +2154,7 @@
      VOID
      )
  {
-@@ -26329,7 +27070,7 @@
+@@ -26329,7 +27356,7 @@
  
  __forceinline
  PVOID
@@ -1742,7 +2163,7 @@
      VOID
      )
  
-@@ -26344,7 +27085,7 @@
+@@ -26344,7 +27371,7 @@
  
  __forceinline
  struct _TEB *
@@ -1751,7 +2172,7 @@
      VOID
      )
  {
-@@ -26433,7 +27174,7 @@
+@@ -26433,7 +27460,7 @@
  
  __forceinline
  PVOID
@@ -1760,7 +2181,7 @@
      VOID
      )
  {
-@@ -26442,7 +27183,7 @@
+@@ -26442,7 +27469,7 @@
  
  __forceinline
  PVOID
@@ -1769,7 +2190,7 @@
      VOID
      )
  
-@@ -26461,7 +27202,7 @@
+@@ -26461,7 +27488,7 @@
  
  __inline
  struct _TEB*

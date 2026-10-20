@@ -1,8 +1,30 @@
 diff --git a/um/vssym32.h b/um/vssym32.h
-index 8db1c56c..8a28bdc2 100644
+index 8db1c56c..51727e8d 100644
 --- a/um/vssym32.h
 +++ b/um/vssym32.h
-@@ -448,6 +448,267 @@ enum GLYPHFONTSIZINGTYPE {
+@@ -4,6 +4,7 @@
+ 
+ #ifndef __VSSYM32_H__
+ #define __VSSYM32_H__
++#include <sal.h>
+ 
+ #include "VSStyle.h"
+ 
+@@ -141,6 +142,13 @@ enum TEXTSHADOWTYPE {
+ 	TST_CONTINUOUS = 2,
+ };
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(DTTOPTS_iTextShadowTypeFlags, unsigned int,
++    TST_NONE,
++    TST_SINGLE,
++    TST_CONTINUOUS);
++#endif
++
+ 
+ //
+ //  enumerated property values
+@@ -448,6 +456,267 @@ enum GLYPHFONTSIZINGTYPE {
  #define TMT_ATLASINPUTIMAGE	8001
  #define TMT_ATLASRECT	8002
  

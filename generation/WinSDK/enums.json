@@ -171,32 +171,7 @@
   {
     "name": "BCRYPT_OPERATION",
     "flags": true,
-    "members": [
-      {
-        "name": "BCRYPT_CIPHER_OPERATION",
-        "value": "1"
-      },
-      {
-        "name": "BCRYPT_HASH_OPERATION",
-        "value": "2"
-      },
-      {
-        "name": "BCRYPT_ASYMMETRIC_ENCRYPTION_OPERATION",
-        "value": "4"
-      },
-      {
-        "name": "BCRYPT_SECRET_AGREEMENT_OPERATION",
-        "value": "8"
-      },
-      {
-        "name": "BCRYPT_SIGNATURE_OPERATION",
-        "value": "16"
-      },
-      {
-        "name": "BCRYPT_RNG_OPERATION",
-        "value": "32"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "method": "BCryptEnumAlgorithms",
@@ -204,7 +179,6 @@
       }
     ]
   },
-
   {
       "addUsesTo": "DDE_ENABLE_CALLBACK_CMD",
       "uses": [
@@ -439,18 +413,6 @@
       {
         "name": "FILE_SHARE_NONE",
         "value": "0"
-      },
-      {
-        "name": "FILE_SHARE_DELETE",
-        "value": "4"
-      },
-      {
-        "name": "FILE_SHARE_READ",
-        "value": "1"
-      },
-      {
-        "name": "FILE_SHARE_WRITE",
-        "value": "2"
       }
     ],
     "uses": [
@@ -546,70 +508,6 @@
       {
         "name": "HEAP_NONE",
         "value": "0x00000000"
-      },
-      {
-        "name": "HEAP_NO_SERIALIZE",
-        "value": "0x00000001"
-      },
-      {
-        "name": "HEAP_GROWABLE",
-        "value": "0x00000002"
-      },
-      {
-        "name": "HEAP_GENERATE_EXCEPTIONS",
-        "value": "0x00000004"
-      },
-      {
-        "name": "HEAP_ZERO_MEMORY",
-        "value": "0x00000008"
-      },
-      {
-        "name": "HEAP_REALLOC_IN_PLACE_ONLY",
-        "value": "0x00000010"
-      },
-      {
-        "name": "HEAP_TAIL_CHECKING_ENABLED",
-        "value": "0x00000020"
-      },
-      {
-        "name": "HEAP_FREE_CHECKING_ENABLED",
-        "value": "0x00000040"
-      },
-      {
-        "name": "HEAP_DISABLE_COALESCE_ON_FREE",
-        "value": "0x00000080"
-      },
-      {
-        "name": "HEAP_CREATE_ALIGN_16",
-        "value": "0x00010000"
-      },
-      {
-        "name": "HEAP_CREATE_ENABLE_TRACING",
-        "value": "0x00020000"
-      },
-      {
-        "name": "HEAP_CREATE_ENABLE_EXECUTE",
-        "value": "0x00040000"
-      },
-      {
-        "name": "HEAP_MAXIMUM_TAG",
-        "value": "0x0FFF"
-      },
-      {
-        "name": "HEAP_PSEUDO_TAG_FLAG",
-        "value": "0x8000"
-      },
-      {
-        "name": "HEAP_TAG_SHIFT",
-        "value": "18"
-      },
-      {
-        "name": "HEAP_CREATE_SEGMENT_HEAP",
-        "value": "0x00000100"
-      },
-      {
-        "name": "HEAP_CREATE_HARDENED",
-        "value": "0x00000200"
       }
     ],
     "uses": []
@@ -685,24 +583,7 @@
     ]
   },
   {
-    "uses": [
-      {
-        "method": "InitiateShutdownA",
-        "parameter": "dwReason"
-      },
-      {
-        "method": "InitiateShutdownW",
-        "parameter": "dwReason"
-      },
-      {
-        "method": "InitiateSystemShutdownExA",
-        "parameter": "dwReason"
-      },
-      {
-        "method": "InitiateSystemShutdownExW",
-        "parameter": "dwReason"
-      }
-    ],
+    "uses": [],
     "addUsesTo": "SHUTDOWN_REASON"
   },
   {
@@ -735,14 +616,6 @@
     "members": [],
     "uses": [
       {
-        "method": "CoInitializeSecurity",
-        "parameter": "dwAuthnLevel"
-      },
-      {
-        "method": "CoSetProxyBlanket",
-        "parameter": "dwAuthnLevel"
-      },
-      {
         "interface": "IClientSecurity",
         "method": "SetBlanket",
         "parameter": "dwAuthnLevel"
@@ -763,14 +636,6 @@
     },
     "members": [],
     "uses": [
-      {
-        "method": "CoInitializeSecurity",
-        "parameter": "dwImpLevel"
-      },
-      {
-        "method": "CoSetProxyBlanket",
-        "parameter": "dwImpLevel"
-      },
       {
         "interface": "IClientSecurity",
         "method": "SetBlanket",
@@ -887,29 +752,7 @@
     ]
   },
   {
-    "name": "IMAGE_OPTIONAL_HEADER_MAGIC",
-    "type": "ushort",
-    "autoPopulate": {
-      "filter": "IMAGE_NT_OPTIONAL_HDR32_MAGIC|IMAGE_NT_OPTIONAL_HDR64_MAGIC|IMAGE_ROM_OPTIONAL_HDR_MAGIC",
-      "header": "winnt.h"
-    },
-    "members": [
-      {
-        "name": "IMAGE_NT_OPTIONAL_HDR_MAGIC"
-      },
-      {
-        "name": "IMAGE_NT_OPTIONAL_HDR32_MAGIC",
-        "value": "267"
-      },
-      {
-        "name": "IMAGE_NT_OPTIONAL_HDR64_MAGIC",
-        "value": "523"
-      },
-      {
-        "name": "IMAGE_ROM_OPTIONAL_HDR_MAGIC",
-        "value": "263"
-      }
-    ],
+    "addUsesTo": "IMAGE_OPTIONAL_HEADER_MAGIC",
     "uses": [
       {
         "struct": "IMAGE_OPTIONAL_HEADER32",
@@ -938,32 +781,7 @@
     "namespace": "Windows.Win32.Foundation",
     "type": "uint",
     "name": "WAIT_EVENT",
-    "members": [
-      {
-        "name": "WAIT_OBJECT_0",
-        "value": 0
-      },
-      {
-        "name": "WAIT_ABANDONED",
-        "value": "0x00000080"
-      },
-      {
-        "name": "WAIT_ABANDONED_0",
-        "value": "0x00000080"
-      },
-      {
-        "name": "WAIT_IO_COMPLETION",
-        "value": "0x000000C0"
-      },
-      {
-        "name": "WAIT_TIMEOUT",
-        "value": "0x00000102"
-      },
-      {
-        "name": "WAIT_FAILED",
-        "value": "0xFFFFFFFF"
-      }
-    ],
+    "members": [],
     "uses": []
   },
   {
@@ -1100,167 +918,6 @@
     "uses": []
   },
   {
-    "type": "uint",
-    "name": "PAGE_PROTECTION_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "PAGE_NOACCESS",
-        "value": "0x01"
-      },
-      {
-        "name": "PAGE_READONLY",
-        "value": "0x02"
-      },
-      {
-        "name": "PAGE_READWRITE",
-        "value": "0x04"
-      },
-      {
-        "name": "PAGE_WRITECOPY",
-        "value": "0x08"
-      },
-      {
-        "name": "PAGE_EXECUTE",
-        "value": "0x10"
-      },
-      {
-        "name": "PAGE_EXECUTE_READ",
-        "value": "0x20"
-      },
-      {
-        "name": "PAGE_EXECUTE_READWRITE",
-        "value": "0x40"
-      },
-      {
-        "name": "PAGE_EXECUTE_WRITECOPY",
-        "value": "0x80"
-      },
-      {
-        "name": "PAGE_GUARD",
-        "value": "0x100"
-      },
-      {
-        "name": "PAGE_NOCACHE",
-        "value": "0x200"
-      },
-      {
-        "name": "PAGE_WRITECOMBINE",
-        "value": "0x400"
-      },
-      {
-        "name": "PAGE_GRAPHICS_NOACCESS",
-        "value": "0x0800"
-      },
-      {
-        "name": "PAGE_GRAPHICS_READONLY",
-        "value": "0x1000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_READWRITE",
-        "value": "0x2000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_EXECUTE",
-        "value": "0x4000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_EXECUTE_READ",
-        "value": "0x8000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_EXECUTE_READWRITE",
-        "value": "0x10000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_COHERENT",
-        "value": "0x20000"
-      },
-      {
-        "name": "PAGE_GRAPHICS_NOCACHE",
-        "value": "0x40000"
-      },
-      {
-        "name": "PAGE_ENCLAVE_THREAD_CONTROL",
-        "value": "0x80000000"
-      },
-      {
-        "name": "PAGE_REVERT_TO_FILE_MAP",
-        "value": "0x80000000"
-      },
-      {
-        "name": "PAGE_TARGETS_NO_UPDATE",
-        "value": "0x40000000"
-      },
-      {
-        "name": "PAGE_TARGETS_INVALID",
-        "value": "0x40000000"
-      },
-      {
-        "name": "PAGE_ENCLAVE_UNVALIDATED",
-        "value": "0x20000000"
-      },
-      {
-        "name": "PAGE_ENCLAVE_MASK",
-        "value": "0x10000000"
-      },
-      {
-        "name": "PAGE_ENCLAVE_DECOMMIT",
-        "value": "(PAGE_ENCLAVE_MASK | 0)"
-      },
-      {
-        "name": "PAGE_ENCLAVE_SS_FIRST",
-        "value": "(PAGE_ENCLAVE_MASK | 1)"
-      },
-      {
-        "name": "PAGE_ENCLAVE_SS_REST",
-        "value": "(PAGE_ENCLAVE_MASK | 2)"
-      },
-      {
-        "name": "SEC_PARTITION_OWNER_HANDLE",
-        "value": "0x00040000"
-      },
-      {
-        "name": "SEC_64K_PAGES",
-        "value": "0x00080000"
-      },
-      {
-        "name": "SEC_FILE",
-        "value": "0x00800000"
-      },
-      {
-        "name": "SEC_IMAGE",
-        "value": "0x01000000"
-      },
-      {
-        "name": "SEC_PROTECTED_IMAGE",
-        "value": "0x02000000"
-      },
-      {
-        "name": "SEC_RESERVE",
-        "value": "0x04000000"
-      },
-      {
-        "name": "SEC_COMMIT",
-        "value": "0x08000000"
-      },
-      {
-        "name": "SEC_NOCACHE",
-        "value": "0x10000000"
-      },
-      {
-        "name": "SEC_WRITECOMBINE",
-        "value": "0x40000000"
-      },
-      {
-        "name": "SEC_LARGE_PAGES",
-        "value": "0x80000000"
-      },
-      {
-        "name": "SEC_IMAGE_NO_EXECUTE",
-        "value": "(SEC_IMAGE | SEC_NOCACHE)"
-      }
-    ],
     "uses": [
       {
         "struct": "MEMORY_BASIC_INFORMATION",
@@ -1286,7 +943,8 @@
         "struct": "MEMORY_BASIC_INFORMATION64",
         "field": "Protect"
       }
-    ]
+    ],
+    "addUsesTo": "PAGE_PROTECTION_FLAGS"
   },
   {
     "name": "SHARE_TYPE",
@@ -1395,38 +1053,6 @@
     "uses": []
   },
   {
-    "name": "CLFS_FLAG",
-    "flags": true,
-    "members": [
-      {
-        "name": "CLFS_FLAG_FORCE_APPEND"
-      },
-      {
-        "name": "CLFS_FLAG_FORCE_FLUSH"
-      },
-      {
-        "name": "CLFS_FLAG_NO_FLAGS"
-      },
-      {
-        "name": "CLFS_FLAG_USE_RESERVATION"
-      }
-    ],
-    "uses": [
-      {
-        "method": "ReserveAndAppendLog",
-        "parameter": "fFlags"
-      },
-      {
-        "method": "ReserveAndAppendLogAligned",
-        "parameter": "fFlags"
-      },
-      {
-        "method": "WriteLogRestartArea",
-        "parameter": "fFlags"
-      }
-    ]
-  },
-  {
       "addUsesTo": "CERT_STRING_TYPE",
       "uses": [
         {
@@ -1516,16 +1142,7 @@
   },
   {
     "addUsesTo": "REG_SAVE_FORMAT",
-    "uses": [
-      {
-        "method": "RegSaveKeyExA",
-        "parameter": "Flags"
-      },
-      {
-        "method": "RegSaveKeyExW",
-        "parameter": "Flags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "REPORT_EVENT_TYPE",
@@ -1734,22 +1351,14 @@
     "uses": []
   },
   {
-    "name": "UNMAP_VIEW_OF_FILE_FLAGS",
     "members": [
       {
         "name": "MEM_UNMAP_NONE",
         "value": "0"
-      },
-      {
-        "name": "MEM_UNMAP_WITH_TRANSIENT_BOOST",
-        "value": "1"
-      },
-      {
-        "name": "MEM_PRESERVE_PLACEHOLDER",
-        "value": "2"
       }
     ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "UNMAP_VIEW_OF_FILE_FLAGS"
   },
   {
     "addUsesTo": "DEFINE_DOS_DEVICE_FLAGS",
@@ -2067,34 +1676,9 @@
     "uses": []
   },
   {
-    "name": "BCRYPT_INTERFACE",
-    "members": [
-      {
-        "name": "BCRYPT_ASYMMETRIC_ENCRYPTION_INTERFACE"
-      },
-      {
-        "name": "BCRYPT_CIPHER_INTERFACE"
-      },
-      {
-        "name": "BCRYPT_HASH_INTERFACE"
-      },
-      {
-        "name": "BCRYPT_SECRET_AGREEMENT_INTERFACE"
-      },
-      {
-        "name": "BCRYPT_SIGNATURE_INTERFACE"
-      },
-      {
-        "name": "NCRYPT_KEY_STORAGE_INTERFACE"
-      },
-      {
-        "name": "NCRYPT_SCHANNEL_INTERFACE"
-      },
-      {
-        "name": "NCRYPT_SCHANNEL_SIGNATURE_INTERFACE"
-      }
-    ],
-    "uses": []
+    "members": [],
+    "uses": [],
+    "addUsesTo": "BCRYPT_INTERFACE"
   },
   {
     "name": "RTL_VIRTUAL_UNWIND_HANDLER_TYPE",
@@ -2160,44 +1744,12 @@
     "flags": true,
     "members": [
       {
-        "name": "CRYPTUI_WIZ_NO_UI",
-        "value": "1"
-      },
-      {
         "name": "CRYPTUI_WIZ_IGNORE_NO_UI_FLAG_FOR_CSPS",
         "value": "2"
       },
       {
         "name": "CRYPTUI_WIZ_NO_UI_EXCEPT_CSP",
         "value": "3"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_ALLOW_CERT",
-        "value": "131072"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_ALLOW_CRL",
-        "value": "262144"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_ALLOW_CTL",
-        "value": "524288"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_NO_CHANGE_DEST_STORE",
-        "value": "65536"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_TO_LOCALMACHINE",
-        "value": "1048576"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_TO_CURRENTUSER",
-        "value": "2097152"
-      },
-      {
-        "name": "CRYPTUI_WIZ_IMPORT_REMOTE_DEST_STORE",
-        "value": "4194304"
       },
       {
         "name": "CRYPTUI_WIZ_EXPORT_PRIVATE_KEY",
@@ -2371,17 +1923,7 @@
     "uses": []
   },
   {
-    "name": "VIRTUAL_FREE_TYPE",
-    "members": [
-      {
-        "name": "MEM_DECOMMIT",
-        "value": "16384"
-      },
-      {
-        "name": "MEM_RELEASE",
-        "value": "32768"
-      }
-    ],
+    "addUsesTo": "VIRTUAL_FREE_TYPE",
     "uses": [
       {
         "method": "VirtualFree",
@@ -2439,32 +1981,6 @@
     "name": "ACE_FLAGS",
     "flags": true,
     "members": [
-      {
-        "name": "CONTAINER_INHERIT_ACE",
-        "value": "2"
-      },
-      {
-        "name": "FAILED_ACCESS_ACE_FLAG"
-      },
-      {
-        "name": "INHERIT_ONLY_ACE",
-        "value": "8"
-      },
-      {
-        "name": "INHERITED_ACE",
-        "value": "16"
-      },
-      {
-        "name": "NO_PROPAGATE_INHERIT_ACE",
-        "value": "4"
-      },
-      {
-        "name": "OBJECT_INHERIT_ACE",
-        "value": "1"
-      },
-      {
-        "name": "SUCCESSFUL_ACCESS_ACE_FLAG"
-      },
       {
         "name": "SUB_CONTAINERS_AND_OBJECTS_INHERIT",
         "value": "3"
@@ -2675,44 +2191,6 @@
     "namespace": "Windows.Win32.Security",
     "name": "OBJECT_SECURITY_INFORMATION",
     "flags": true,
-    "members": [
-      {
-        "name": "ATTRIBUTE_SECURITY_INFORMATION"
-      },
-      {
-        "name": "BACKUP_SECURITY_INFORMATION"
-      },
-      {
-        "name": "DACL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "GROUP_SECURITY_INFORMATION"
-      },
-      {
-        "name": "LABEL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "OWNER_SECURITY_INFORMATION"
-      },
-      {
-        "name": "PROTECTED_DACL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "PROTECTED_SACL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "SACL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "SCOPE_SECURITY_INFORMATION"
-      },
-      {
-        "name": "UNPROTECTED_DACL_SECURITY_INFORMATION"
-      },
-      {
-        "name": "UNPROTECTED_SACL_SECURITY_INFORMATION"
-      }
-    ],
     "uses": [
       {
         "method": "GetNamedSecurityInfoA",
@@ -3147,72 +2625,6 @@
     "namespace": "Windows.Win32.System.SystemInformation",
     "name": "PROCESSOR_ARCHITECTURE",
     "type": "ushort",
-    "members": [
-      {
-        "name": "PROCESSOR_ARCHITECTURE_INTEL",
-        "value": "0"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_MIPS",
-        "value": "1"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_ALPHA",
-        "value": "2"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_PPC",
-        "value": "3"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_SHX",
-        "value": "4"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_ARM",
-        "value": "5"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_IA64",
-        "value": "6"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_ALPHA64",
-        "value": "7"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_MSIL",
-        "value": "8"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_AMD64",
-        "value": "9"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_WIN64",
-        "value": "10"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_NEUTRAL",
-        "value": "11"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_ARM64",
-        "value": "12"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_ARM32_ON_WIN64",
-        "value": "13"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_IA32_ON_ARM64",
-        "value": "14"
-      },
-      {
-        "name": "PROCESSOR_ARCHITECTURE_UNKNOWN",
-        "value": "65535"
-      }
-    ],
     "uses": [
       {
         "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
@@ -3259,42 +2671,6 @@
     ]
   },
   {
-    "name": "VIRTUAL_ALLOCATION_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "MEM_COMMIT",
-        "value": "4096"
-      },
-      {
-        "name": "MEM_RESERVE",
-        "value": "8192"
-      },
-      {
-        "name": "MEM_RESET",
-        "value": "524288"
-      },
-      {
-        "name": "MEM_RESET_UNDO",
-        "value": "16777216"
-      },
-      {
-        "name": "MEM_REPLACE_PLACEHOLDER",
-        "value": "16384"
-      },
-      {
-        "name": "MEM_LARGE_PAGES",
-        "value": "536870912"
-      },
-      {
-        "name": "MEM_RESERVE_PLACEHOLDER",
-        "value": "262144"
-      },
-      {
-        "name": "MEM_FREE",
-        "value": "65536"
-      }
-    ],
     "uses": [
       {
         "struct": "MEMORY_BASIC_INFORMATION",
@@ -3308,7 +2684,8 @@
         "struct": "MEMORY_BASIC_INFORMATION64",
         "field": "State"
       }
-    ]
+    ],
+    "addUsesTo": "VIRTUAL_ALLOCATION_TYPE"
   },
   {
     "addUsesTo": "FILE_FLAGS_AND_ATTRIBUTES",
@@ -3456,12 +2833,7 @@
   },
   {
     "addUsesTo": "REG_NOTIFY_FILTER",
-    "uses": [
-      {
-        "method": "RegNotifyChangeKeyValue",
-        "parameter": "dwNotifyFilter"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CERT_FIND_CHAIN_IN_STORE_FLAGS",
@@ -3476,21 +2848,6 @@
         }
       ]
     },
-  {
-    "name": "INSERT_TEXT_AT_SELECTION_FLAGS",
-    "members": [
-      {
-        "name": "TF_IAS_NOQUERY"
-      },
-      {
-        "name": "TF_IAS_QUERYONLY"
-      },
-      {
-        "name": "TF_IAS_NO_DEFAULT_COMPOSITION"
-      }
-    ],
-    "uses": []
-  },
   {
     "addUsesTo": "IMAGE_DIRECTORY_ENTRY",
     "uses": []
@@ -4434,28 +3791,6 @@
     ]
   },
   {
-    "name": "TF_CONTEXT_EDIT_CONTEXT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "TF_ES_ASYNCDONTCARE"
-      },
-      {
-        "name": "TF_ES_SYNC"
-      },
-      {
-        "name": "TF_ES_READ"
-      },
-      {
-        "name": "TF_ES_READWRITE"
-      },
-      {
-        "name": "TF_ES_ASYNC"
-      }
-    ],
-    "uses": []
-  },
-  {
     "addUsesTo": "NtmsObjectsTypes",
     "members": [],
     "uses": []
@@ -4511,28 +3846,6 @@
   {
     "addUsesTo": "OS_PRODUCT_TYPE",
     "namespace": "Windows.Win32.System.SystemInformation",
-    "uses": []
-  },
-  {
-    "name": "MULTICLASSINFO_FLAGS",
-    "members": [
-      {
-        "name": "MULTICLASSINFO_GETTYPEINFO",
-        "value": "1"
-      },
-      {
-        "name": "MULTICLASSINFO_GETNUMRESERVEDDISPIDS",
-        "value": "2"
-      },
-      {
-        "name": "MULTICLASSINFO_GETIIDPRIMARY",
-        "value": "4"
-      },
-      {
-        "name": "MULTICLASSINFO_GETIIDSOURCE",
-        "value": "8"
-      }
-    ],
     "uses": []
   },
   {
@@ -4592,52 +3905,7 @@
     "flags": true,
     "members": [
       {
-        "name": "IS_TEXT_UNICODE_ASCII16"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_REVERSE_ASCII16"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_STATISTICS"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_REVERSE_STATISTICS"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_CONTROLS"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_REVERSE_CONTROLS"
-      },
-      {
         "name": "IS_TEXT_UNICODE_BUFFER_TOO_SMALL"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_SIGNATURE"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_REVERSE_SIGNATURE"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_ILLEGAL_CHARS"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_ODD_LENGTH"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_NULL_BYTES"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_UNICODE_MASK"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_REVERSE_MASK"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_NOT_UNICODE_MASK"
-      },
-      {
-        "name": "IS_TEXT_UNICODE_NOT_ASCII_MASK"
       }
     ],
     "uses": []
@@ -4737,12 +4005,7 @@
     },
   {
       "addUsesTo": "AUTHZ_GENERATE_RESULTS",
-      "uses": [
-        {
-          "struct": "AUTHZ_ACCESS_REPLY",
-          "field": "SaclEvaluationResults"
-        }
-      ]
+      "uses": []
     },
   {
       "addUsesTo": "KERB_TICKET_FLAGS",
@@ -4768,20 +4031,7 @@
   },
   {
     "addUsesTo": "SYSTEM_AUDIT_OBJECT_ACE_FLAGS",
-    "uses": [
-      {
-        "struct": "OBJECTS_AND_NAME_W",
-        "field": "ObjectsPresent"
-      },
-      {
-        "struct": "OBJECTS_AND_SID",
-        "field": "ObjectsPresent"
-      },
-      {
-        "struct": "OBJECTS_AND_NAME_A",
-        "field": "ObjectsPresent"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "MODEMDEVCAPS_DIAL_OPTIONS",
@@ -5007,27 +4257,6 @@
       {
         "struct": "MODEMSETTINGS",
         "field": "dwSpeakerMode"
-      }
-    ]
-  },
-  {
-    "name": "SEC_WINNT_AUTH_IDENTITY",
-    "members": [
-      {
-        "name": "SEC_WINNT_AUTH_IDENTITY_ANSI"
-      },
-      {
-        "name": "SEC_WINNT_AUTH_IDENTITY_UNICODE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SEC_WINNT_AUTH_IDENTITY_A",
-        "field": "Flags"
-      },
-      {
-        "struct": "SEC_WINNT_AUTH_IDENTITY_W",
-        "field": "Flags"
       }
     ]
   },
@@ -5295,25 +4524,6 @@
       ]
     },
   {
-    "name": "DROPEFFECT",
-    "flags": true,
-    "members": [
-      {
-        "name": "DROPEFFECT_NONE"
-      },
-      {
-        "name": "DROPEFFECT_COPY"
-      },
-      {
-        "name": "DROPEFFECT_MOVE"
-      },
-      {
-        "name": "DROPEFFECT_LINK"
-      },
-      {
-        "name": "DROPEFFECT_SCROLL"
-      }
-    ],
     "uses": [
       {
         "method": "DoDragDrop",
@@ -5323,7 +4533,8 @@
         "method": "DoDragDrop",
         "parameter": "pdwEffect"
       }
-    ]
+    ],
+    "addUsesTo": "DROPEFFECT"
   },
   {
       "addUsesTo": "DOMAIN_PASSWORD_PROPERTIES",
@@ -5471,27 +4682,13 @@
     "name": "TRUSTED_DOMAIN_TRUST_TYPE",
     "members": [
       {
-        "name": "TRUST_TYPE_DOWNLEVEL"
-      },
-      {
-        "name": "TRUST_TYPE_UPLEVEL"
-      },
-      {
-        "name": "TRUST_TYPE_MIT"
-      },
-      {
         "name": "0x5_-_0x000FFFFF"
       },
       {
         "name": "0x00100000_to_0xFFF00000"
       }
     ],
-    "uses": [
-      {
-        "struct": "TRUSTED_DOMAIN_INFORMATION_EX",
-        "field": "TrustType"
-      }
-    ]
+    "uses": []
   },
   {
     "uses": [],
@@ -5575,21 +4772,6 @@
       ]
     },
   {
-    "name": "VER_PLATFORM",
-    "members": [
-      {
-        "name": "VER_PLATFORM_WIN32s",
-        "value": "0"
-      },
-      {
-        "name": "VER_PLATFORM_WIN32_WINDOWS",
-        "value": "1"
-      },
-      {
-        "name": "VER_PLATFORM_WIN32_NT",
-        "value": "2"
-      }
-    ],
     "uses": [
       {
         "struct": "SP_ALTPLATFORM_INFO_V2",
@@ -5599,7 +4781,8 @@
         "struct": "SP_ALTPLATFORM_INFO_V1",
         "field": "Platform"
       }
-    ]
+    ],
+    "addUsesTo": "VER_PLATFORM"
   },
   {
       "addUsesTo": "KERB_REQUEST_FLAGS",
@@ -5669,19 +4852,8 @@
       ]
     },
   {
-    "name": "DTTOPTS_iTextShadowTypeFlags",
-    "members": [
-      {
-        "name": "TST_NONE"
-      },
-      {
-        "name": "TST_SINGLE"
-      },
-      {
-        "name": "TST_CONTINUOUS"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "DTTOPTS_iTextShadowTypeFlags"
   },
   {
     "name": "CRYPT_XML_TRANSFORM_FLAGS",
@@ -5856,16 +5028,7 @@
   },
   {
       "addUsesTo": "ACTRL_ACCESS_ENTRY_ACCESS_FLAGS",
-      "uses": [
-        {
-          "struct": "ACTRL_ACCESS_ENTRYA",
-          "field": "fAccessFlags"
-        },
-        {
-          "struct": "ACTRL_ACCESS_ENTRYW",
-          "field": "fAccessFlags"
-        }
-      ]
+      "uses": []
     },
   {
     "members": [],
@@ -5882,30 +5045,8 @@
       ]
     },
   {
-    "name": "MEMORY_PRIORITY",
-    "members": [
-      {
-        "name": "MEMORY_PRIORITY_VERY_LOW",
-        "value": "1"
-      },
-      {
-        "name": "MEMORY_PRIORITY_LOW",
-        "value": "2"
-      },
-      {
-        "name": "MEMORY_PRIORITY_MEDIUM",
-        "value": "3"
-      },
-      {
-        "name": "MEMORY_PRIORITY_BELOW_NORMAL",
-        "value": "4"
-      },
-      {
-        "name": "MEMORY_PRIORITY_NORMAL",
-        "value": "5"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "MEMORY_PRIORITY"
   },
   {
     "name": "RESOURCE_DISPLAY_TYPE",
@@ -6045,12 +5186,7 @@
   },
   {
       "addUsesTo": "AUTHZ_SECURITY_ATTRIBUTE_FLAGS",
-      "uses": [
-        {
-          "struct": "AUTHZ_SECURITY_ATTRIBUTE_V1",
-          "field": "Flags"
-        }
-      ]
+      "uses": []
     },
   {
       "addUsesTo": "CRYPT_TIMESTAMP_VERSION",
@@ -6269,87 +5405,8 @@
     ]
   },
   {
-    "name": "THREAD_ACCESS_RIGHTS",
-    "flags": true,
-    "members": [
-      {
-        "name": "THREAD_TERMINATE",
-        "value": "(0x0001)"
-      },
-      {
-        "name": "THREAD_SUSPEND_RESUME",
-        "value": "(0x0002)"
-      },
-      {
-        "name": "THREAD_GET_CONTEXT",
-        "value": "(0x0008)"
-      },
-      {
-        "name": "THREAD_SET_CONTEXT",
-        "value": "(0x0010)"
-      },
-      {
-        "name": "THREAD_SET_INFORMATION",
-        "value": "(0x0020)"
-      },
-      {
-        "name": "THREAD_QUERY_INFORMATION",
-        "value": "(0x0040)"
-      },
-      {
-        "name": "THREAD_SET_THREAD_TOKEN",
-        "value": "(0x0080)"
-      },
-      {
-        "name": "THREAD_IMPERSONATE",
-        "value": "(0x0100)"
-      },
-      {
-        "name": "THREAD_DIRECT_IMPERSONATION",
-        "value": "(0x0200)"
-      },
-      {
-        "name": "THREAD_SET_LIMITED_INFORMATION",
-        "value": "(0x0400)"
-      },
-      {
-        "name": "THREAD_QUERY_LIMITED_INFORMATION",
-        "value": "(0x0800)"
-      },
-      {
-        "name": "THREAD_RESUME",
-        "value": "(0x1000)"
-      },
-      {
-        "name": "THREAD_ALL_ACCESS",
-        "value": "(THREAD_STANDARD_RIGHTS_REQUIRED | THREAD_SYNCHRONIZE | 0xFFFF)"
-      },
-      {
-        "name": "THREAD_DELETE",
-        "value": "(0x00010000)"
-      },
-      {
-        "name": "THREAD_READ_CONTROL",
-        "value": "(0x00020000)"
-      },
-      {
-        "name": "THREAD_WRITE_DAC",
-        "value": "(0x00040000)"
-      },
-      {
-        "name": "THREAD_WRITE_OWNER",
-        "value": "(0x00080000)"
-      },
-      {
-        "name": "THREAD_SYNCHRONIZE",
-        "value": "(0x00100000)"
-      },
-      {
-        "name": "THREAD_STANDARD_RIGHTS_REQUIRED",
-        "value": "(0x000F0000)"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "THREAD_ACCESS_RIGHTS"
   },
   {
     "name": "VIRTUAL_KEY",
@@ -6554,42 +5611,6 @@
     "flags": true,
     "members": [
       {
-        "name": "EVENT_ALL_ACCESS",
-        "value": "(0x1F0003)"
-      },
-      {
-        "name": "EVENT_MODIFY_STATE",
-        "value": "(0x0002)"
-      },
-      {
-        "name": "MUTEX_ALL_ACCESS",
-        "value": "(0x1F0001)"
-      },
-      {
-        "name": "MUTEX_MODIFY_STATE",
-        "value": "(0x0001)"
-      },
-      {
-        "name": "SEMAPHORE_ALL_ACCESS",
-        "value": "(0x1F0003)"
-      },
-      {
-        "name": "SEMAPHORE_MODIFY_STATE",
-        "value": "(0x0002)"
-      },
-      {
-        "name": "TIMER_ALL_ACCESS",
-        "value": "(0x1F0003)"
-      },
-      {
-        "name": "TIMER_MODIFY_STATE",
-        "value": "(0x0002)"
-      },
-      {
-        "name": "TIMER_QUERY_STATE",
-        "value": "(0x0001)"
-      },
-      {
         "name": "SYNCHRONIZATION_DELETE",
         "value": "(0x00010000)"
       },
@@ -6785,29 +5806,6 @@
     ]
   },
   {
-    "name": "SFGAO_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SFGAO_",
-      "header": "shobjidl_core.h"
-    },
-    "members": [
-      {
-        "name": "SFGAO_CANCOPY",
-        "value": "0x1"
-      },
-      {
-        "name": "SFGAO_CANMOVE",
-        "value": "0x2"
-      },
-      {
-        "name": "SFGAO_CANLINK",
-        "value": "0x4"
-      }
-    ],
-    "uses": []
-  },
-  {
     "type": "uint",
     "name": "DESKTOP_ACCESS_FLAGS",
     "autoPopulate": {
@@ -6934,45 +5932,6 @@
     "addUsesTo": "LOAD_PICTURE_FLAGS",
     "namespace": "Windows.Win32.System.Ole",
     "uses": []
-  },
-  {
-    "name": "OLECREATE",
-    "autoPopulate": {
-      "filter": "OLECREATE_",
-      "header": "ole2.h"
-    },
-    "members": [
-      {
-        "name": "OLECREATE_ZERO",
-        "value": "0"
-      }
-    ],
-    "uses": [
-      {
-        "method": "OleCreateEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleCreateFromDataEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleCreateFromFileEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleCreateLinkEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleCreateLinkFromDataEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleCreateLinkToFileEx",
-        "parameter": "dwFlags"
-      }
-    ]
   },
   {
     "name": "EMPTY_VOLUME_CACHE_FLAGS",
@@ -7696,60 +6655,7 @@
     "name": "SECURITY_DESCRIPTOR_CONTROL",
     "type": "ushort",
     "flags": true,
-    "members": [
-      {
-        "name": "SE_OWNER_DEFAULTED"
-      },
-      {
-        "name": "SE_GROUP_DEFAULTED"
-      },
-      {
-        "name": "SE_DACL_PRESENT"
-      },
-      {
-        "name": "SE_DACL_DEFAULTED"
-      },
-      {
-        "name": "SE_SACL_PRESENT"
-      },
-      {
-        "name": "SE_SACL_DEFAULTED"
-      },
-      {
-        "name": "SE_DACL_AUTO_INHERIT_REQ"
-      },
-      {
-        "name": "SE_SACL_AUTO_INHERIT_REQ"
-      },
-      {
-        "name": "SE_DACL_AUTO_INHERITED"
-      },
-      {
-        "name": "SE_SACL_AUTO_INHERITED"
-      },
-      {
-        "name": "SE_DACL_PROTECTED"
-      },
-      {
-        "name": "SE_SACL_PROTECTED"
-      },
-      {
-        "name": "SE_RM_CONTROL_VALID"
-      },
-      {
-        "name": "SE_SELF_RELATIVE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SECURITY_DESCRIPTOR",
-        "field": "Control"
-      },
-      {
-        "struct": "SECURITY_DESCRIPTOR_RELATIVE",
-        "field": "Control"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "WINUSB_PIPE_POLICY",
@@ -8566,14 +7472,6 @@
         "value": "0x00100000"
       }
     ],
-    "uses": []
-  },
-  {
-    "name": "DEVICE_STATE",
-    "autoPopulate": {
-      "filter": "DEVICE_STATE_",
-      "header": "mmdeviceapi.h"
-    },
     "uses": []
   },
   {

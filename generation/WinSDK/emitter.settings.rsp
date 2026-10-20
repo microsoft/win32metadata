@@ -27,9 +27,6 @@ IPPROTO::IPPROTO_IP=0
 IPPROTO::IPPROTO_RM=113
 MENUPARTS::MENU_POPUPSUBMENU_HCHOT=21
 --enumMakeFlags
-ADVISE_TYPE
-AMMSF_MS_FLAGS
-AMMSF_RENDER_FLAGS
 APPLY_SNAPSHOT_VHDSET_FLAG
 ASM_BIND_FLAGS
 ATTACH_VIRTUAL_DISK_FLAG
@@ -45,8 +42,6 @@ HLBWIF_FLAGS
 IdentityUpdateEvent
 JOB_OBJECT_NET_RATE_CONTROL_FLAGS
 MERGE_VIRTUAL_DISK_FLAG
-MF_RESOLUTION_FLAGS
-MFT_ENUM_FLAG
 MINIDUMP_TYPE
 MIRROR_VIRTUAL_DISK_FLAG
 MMSSF_GET_INFORMATION_FLAGS
@@ -56,7 +51,6 @@ OPEN_VIRTUAL_DISK_FLAG
 OPM_HDCP_FLAGS
 PROFILER_EVENT_MASK
 RAW_SCSI_VIRTUAL_DISK_FLAG
-REG_PINFLAG
 RESIZE_VIRTUAL_DISK_FLAG
 TAKE_SNAPSHOT_VHDSET_FLAG
 VIRTUAL_DISK_ACCESS_MASK
@@ -308,7 +302,6 @@ IUIAutomationElement::get_CachedNativeWindowHandle::retVal=HWND*
 IUIAutomationProxyFactory::CreateProvider::hwnd=HWND
 IUIAutomation::ElementFromHandle::hwnd=HWND
 IUIAutomation::ElementFromHandleBuildCache::hwnd=HWND
-DoDragDrop=[CanReturnMultipleSuccessValues]
 RtlInstallFunctionTableCallback::TableIdentifier=ulong
 RtlInstallFunctionTableCallback::BaseAddress=ulong
 GetLastInputInfo::plii=[In]
@@ -330,11 +323,6 @@ IADsPropertyList::Next=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Skip=[CanReturnMultipleSuccessValues]
 PDNS_SERVICE_BROWSE_CALLBACK::pDnsRecord=DNS_RECORDW*
 IMMDevice::Activate::dwClsCtx=CLSCTX
-RegCloseKey::return=WIN32_ERROR
-RegEnumValueW::return=WIN32_ERROR
-RegLoadMUIStringW::return=WIN32_ERROR
-RegOpenKeyExW::return=WIN32_ERROR
-RegQueryValueExW::return=WIN32_ERROR
 FatalExit=[DoesNotReturn]
 EngDebugBreak=[DoesNotReturn]
 DbgRaiseAssertionFailure=[DoesNotReturn]
@@ -375,13 +363,10 @@ CoInitializeSecurity::asAuthSvc=[-NativeArrayInfo]
 IWMDRMMessageParser::ParseLicenseRequestMsg::pbLicenseRequestMsg=[NativeArrayInfo(CountParamIndex = 1)]
 LoadStringA::lpBuffer=[-NativeArrayInfo]
 LoadStringW::lpBuffer=[-NativeArrayInfo]
-DebugCreate::Interface=[ComOutPtr]
-DebugCreateEx::Interface=[ComOutPtr]
 ITransactionContextEx::CreateInstance::pObject=[ComOutPtr]
 ISpeechObjectToken::Object=[ComOutPtr]
 ICreateWithTipTransactionEx::CreateInstance::pObject=[ComOutPtr]
 ICreateWithTransactionEx::CreateInstance::pObject=[ComOutPtr]
-IWbemServices::CreateInstanceEnum::ppEnum=[ComOutPtr]
 ImageList_CoCreateInstance::ppv=[ComOutPtr]
 IDXGIDecodeSwapChainPartner::PresentBuffer=[CanReturnMultipleSuccessValues]
 IDirectorySearch::AbandonSearch::phSearchResult=ADS_SEARCH_HANDLE
@@ -487,18 +472,12 @@ SendMessageA::lParam=[-Optional]
 NCryptOpenKey::dwLegacyKeySpec=[-Optional]
 DirectSoundCreate::pUnkOuter=[Optional]
 IDirectSound::CreateSoundBuffer::pUnkOuter=[Optional]
-FlushLogBuffers::pvMarshal=[In]
-FlushLogBuffers::pOverlapped=[In][Out][Optional][Retained]
 GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
 GetPhysicalMonitorsFromHMONITOR::return=BOOL
 DestroyPhysicalMonitor::return=BOOL
 DestroyPhysicalMonitors::return=BOOL
 GetPrivateProfileIntW::return=int
 ContinueDebugEvent::dwContinueStatus=NTSTATUS
-CoGetObjectContext::ppv=[ComOutPtr]
-CoGetClassObject::ppv=[ComOutPtr]
-CoGetCallContext::ppInterface=[ComOutPtr]
-CoGetCancelObject::ppUnk=[ComOutPtr]
 QueryDisplayConfig::currentTopologyId=[Optional]
 ID3D12GraphicsCommandList::ClearDepthStencilView::pRects=[Optional]
 ID3D12GraphicsCommandList::ClearRenderTargetView::pRects=[Optional]
@@ -652,7 +631,6 @@ CoFreeUnusedLibrariesEx::dwReserved=[Reserved]
 CoInitializeEx::pvReserved=[Reserved]
 CoInitializeSecurity::pReserved1=[Reserved]
 CoInitializeSecurity::pReserved3=[Reserved]
-OleInitialize::pvReserved=[Reserved]
 REG_NOTIFY_FILTER::REG_NOTIFY_THREAD_AGNOSTIC=[SupportedOSPlatform("windows8.0")]
 D3D12_COMMAND_SIGNATURE_DESC::pArgumentDescs=[NativeArrayInfo(CountFieldName = "NumArgumentDescs")]
 D3D12_INPUT_LAYOUT_DESC::pInputElementDescs=[NativeArrayInfo(CountFieldName = "NumElements")]
@@ -749,45 +727,25 @@ OleCreate::renderopt=[AssociatedEnum("OLERENDER")]
 OleCreateFromFile::renderopt=[AssociatedEnum("OLERENDER")]
 OLEVERB::grfAttribs=[AssociatedEnum("OLEVERBATTRIB")]
 PIXELFORMATDESCRIPTOR::iLayerType=[AssociatedEnum("PFD_LAYER_TYPE")]
-RegRestoreKeyA::dwFlags=[AssociatedEnum("REG_RESTORE_KEY_FLAGS")]
-RegRestoreKeyW::dwFlags=[AssociatedEnum("REG_RESTORE_KEY_FLAGS")]
 SetBkMode::mode=[AssociatedEnum("BACKGROUND_MODE")]
 STATSTG::grfLocksSupported=[AssociatedEnum("LOCKTYPE")]
 SymGetHomeDirectory::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
 SymGetHomeDirectoryW::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
-CreateBoundaryDescriptorW::return=[RAIIFree("DeleteBoundaryDescriptor")]
 CreateEnhMetaFileA::return=[RAIIFree("DeleteEnhMetaFile")]
 CreateEnhMetaFileW::return=[RAIIFree("DeleteEnhMetaFile")]
 CreateMetaFileA::return=[RAIIFree("DeleteMetaFile")]
 CreateMetaFileW::return=[RAIIFree("DeleteMetaFile")]
-CreatePrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
-FilterFindFirst::lpFilterFind=[RAIIFree("FilterFindClose")]
-FilterInstanceFindFirst::lpFilterInstanceFind=[RAIIFree("FilterInstanceFindClose")]
-FilterVolumeFindFirst::lpVolumeFind=[RAIIFree("FilterVolumeFindClose")]
-FilterVolumeInstanceFindFirst::lpVolumeInstanceFind=[RAIIFree("FilterVolumeInstanceFindClose")]
 FindFirstVolumeW::return=[RAIIFree("FindVolumeClose")]
-OpenPrivateNamespaceW::return=[RAIIFree("ClosePrivateNamespace")]
-WTSVirtualChannelOpen::return=[RAIIFree("WTSVirtualChannelClose")]
-WTSVirtualChannelOpenEx::return=[RAIIFree("WTSVirtualChannelClose")]
 CLRCreateInstance::ppInterface=[Out][ComOutPtr]
 CfReleaseTransferKey::TransferKey=[-Out][In]
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
 LoadResource::return=[DoNotRelease]
-GetUserGeoID::GeoClass=SYSGEOCLASS
-GetGeoInfoA::GeoType=SYSGEOTYPE
-GetGeoInfoW::GeoType=SYSGEOTYPE
-GetGeoInfoEx::geoType=SYSGEOTYPE
 TrackPopupMenu=[CanReturnMultipleSuccessValues]
 TrackPopupMenuEx=[CanReturnMultipleSuccessValues]
 IAMStreamConfig::GetStreamCaps::pSCC=[NativeArrayInfo]
-ENUM_SERVICE_TYPE=[AssociatedConstant("SERVICE_NO_CHANGE")]
-SERVICE_ERROR=[AssociatedConstant("SERVICE_NO_CHANGE")]
-SERVICE_START_TYPE=[AssociatedConstant("SERVICE_NO_CHANGE")]
 PFTASKDIALOGCALLBACK::msg=[AssociatedEnum("TASKDIALOG_NOTIFICATIONS")]
 GlobalMemoryStatusEx::lpBuffer=[In]
 GetApplicationRecoveryCallback=[CanReturnMultipleSuccessValues]
-CoGetTreatAsClass=[CanReturnMultipleSuccessValues]
-CoInitializeEx=[CanReturnMultipleSuccessValues]
 IEnumUnknown::Next=[CanReturnMultipleSuccessValues]
 IShellFolder2::GetDefaultColumnState::pcsFlags=SHCOLSTATE
 WriteConsoleA::lpBuffer=PSTR
@@ -825,7 +783,6 @@ WSAEventSelect::hEventObject=WSAEVENT
 WSAResetEvent::hEvent=WSAEVENT
 WSASetEvent::hEvent=WSAEVENT
 ScriptStringAnalyse::piDx=[-NativeArrayInfo]
-MFCreateAttributes::ppMFAttributes=[ComOutPtr]
 StartServiceCtrlDispatcherA::lpServiceStartTable=[NativeArrayInfo]
 StartServiceCtrlDispatcherW::lpServiceStartTable=[NativeArrayInfo]
 PMPRADMINCONNECTIONHANGUPNOTIFICATION3::param3=RAS_CONNECTION_3*
@@ -965,13 +922,6 @@ CreateFontW::iClipPrecision=[AssociatedEnum("FONT_CLIP_PRECISION")]
 CreateFontW::iQuality=[AssociatedEnum("FONT_QUALITY")]
 ReadFileEx::lpOverlapped=[Retained]
 WriteFileEx::lpOverlapped=[Retained]
-CreateTransaction::lpTransactionAttributes=[In][Optional]
-CreateTransaction::UOW=[In][Optional]
-CreateTransaction::CreateOptions=[In][Optional]
-CreateTransaction::IsolationLevel=[In][Optional]
-CreateTransaction::IsolationFlags=[In][Optional]
-CreateTransaction::Timeout=[In][Optional]
-CreateStreamOnHGlobal::hGlobal=[Optional]
 CfOpenFileWithOplock::ProtectedHandle=[RAIIFree("CfCloseHandle")]
 ShellExecuteA::return=[DoNotRelease]
 ShellExecuteW::return=[DoNotRelease]
@@ -1273,7 +1223,6 @@ WSALookupServiceNextW::lpqsResults=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamea
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparenta
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceparentw
-PSCreateMemoryPropertyStore::ppv=[ComOutPtr]
 FwpmCalloutCreateEnumHandle0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE*
 FwpmCalloutEnum0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE
 FwpmCalloutDestroyEnumHandle0::enumHandle=FWPM_CALLOUT_ENUM_HANDLE
@@ -1327,10 +1276,6 @@ IPsecSaEnum1::enumHandle=IPSEC_SA_ENUM_HANDLE
 IPsecSaDestroyEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE
 RasEnumConnectionsA::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
 RasEnumConnectionsW::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
-MsiDatabaseGenerateTransformA::iReserved1=[Reserved]
-MsiDatabaseGenerateTransformA::iReserved2=[Reserved]
-MsiDatabaseGenerateTransformW::iReserved1=[Reserved]
-MsiDatabaseGenerateTransformW::iReserved2=[Reserved]
 --requiredNamespaceForName
 FACILITY_CODE=Windows.Win32.System.Diagnostics.Debug
 RPC_STATUS=Windows.Win32.System.Rpc

@@ -1,5 +1,3 @@
-diff --git a/um/mfidl.idl b/um/mfidl.idl
-index d7abc97e..c80374fb 100644
 --- a/um/mfidl.idl
 +++ b/um/mfidl.idl
 @@ -1,3 +1,4 @@
@@ -7,7 +5,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote("#include <winapifamily.h>")
  
  //*@@@+++@@@@******************************************************************
-@@ -239,6 +240,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -239,6 +240,7 @@
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -15,7 +13,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(90377834-21D0-4dee-8214-BA2E3E6C1127),
-@@ -546,7 +548,7 @@ cpp_quote( "EXTERN_GUID( MF_PMP_SERVER_CONTEXT, 0x2f00c910, 0xd2cf, 0x4278, 0x8b
+@@ -546,7 +548,7 @@
  ///     Specifies a pointer to a variable where the media session object
  ///     will be stored.
  /// </param>
@@ -24,7 +22,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IMFAttributes* pConfiguration," )
  cpp_quote( "    _Outptr_ IMFMediaSession** ppMediaSession" )
  cpp_quote( "    );" )
-@@ -579,7 +581,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
+@@ -579,7 +581,7 @@
  ///     will be stored
  /// </param>
  
@@ -33,7 +31,27 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    DWORD dwCreationFlags," )
  cpp_quote( "    IMFAttributes *pConfiguration," )
  cpp_quote( "    _Outptr_ IMFMediaSession** ppMediaSession," )
-@@ -700,6 +702,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -605,6 +607,9 @@
+     MF_OBJECT_INVALID
+ } MF_OBJECT_TYPE;
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum
+ {
+     //
+@@ -658,6 +663,9 @@
+     MF_RESOLUTION_READ              = 0x00010000,
+     MF_RESOLUTION_WRITE             = 0x00020000
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
+ #pragma endregion
+ 
+@@ -700,6 +708,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -41,7 +59,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(FBE5A32D-A497-4b61-BB85-97B1A848A6E3),
-@@ -806,7 +809,7 @@ interface IMFSourceResolver : IUnknown
+@@ -806,7 +815,7 @@
                  );
  }
  
@@ -50,7 +68,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "        /* out */     _Outptr_ IMFSourceResolver     **ppISourceResolver);" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
-@@ -815,7 +818,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -815,7 +824,7 @@
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
  
@@ -59,7 +77,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "        /* out */     _Outptr_ IPropertyStore        **ppStore);" )
  
  
-@@ -832,7 +835,7 @@ cpp_quote( "        /* out */     _Outptr_ IPropertyStore        **ppStore);" )
+@@ -832,7 +841,7 @@
  ///     The user of this function is responsible for calling PropVariantClear()
  ///     on the PROPVARIANT to ensure that the array of strings is deallocated.
  /// </remarks>
@@ -68,7 +86,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "       _Out_ PROPVARIANT* pPropVarSchemeArray  );  ")
  
  /// <summary>
-@@ -848,7 +851,7 @@ cpp_quote( "       _Out_ PROPVARIANT* pPropVarSchemeArray  );  ")
+@@ -848,7 +857,7 @@
  ///     The user of this function is responsible for calling PropVariantClear()
  ///     on the PROPVARIANT to ensure that the array of strings is deallocated.
  /// </remarks>
@@ -77,7 +95,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "       _Out_ PROPVARIANT* pPropVarMimeTypeArray  );  ")
  
  
-@@ -1108,6 +1111,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -1108,6 +1117,7 @@
  interface IMFPresentationDescriptor;
  interface IMFStreamDescriptor;
  
@@ -85,7 +103,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(279a808d-aec7-40c8-9c6b-a6b492c78a66),
-@@ -1246,6 +1250,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+@@ -1246,6 +1256,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -93,7 +111,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(3C9B2EB9-86D5-4514-A394-F56664F9F0D8),
-@@ -1286,6 +1291,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+@@ -1286,6 +1297,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -101,7 +119,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(6ef2a662-47c0-4666-b13d-cbb717f2fa2c)
-@@ -1312,6 +1318,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
+@@ -1312,6 +1324,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -109,7 +127,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(D182108F-4EC6-443f-AA42-A71106EC825F),
-@@ -1455,6 +1462,7 @@ cpp_quote( "EXTERN_GUID( MF_INDEPENDENT_STILL_IMAGE, 0xea12af41, 0x0710, 0x42c9,
+@@ -1455,6 +1468,7 @@
  
  interface IMFStreamSink;
  
@@ -117,7 +135,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(6ef2a660-47c0-4666-b13d-cbb717f2fa2c)
-@@ -1793,6 +1801,7 @@ typedef enum _MFSTREAMSINK_MARKER_TYPE
+@@ -1793,6 +1807,7 @@
  
  interface IMFMediaTypeHandler;
  
@@ -125,7 +143,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(0A97B3CF-8E7C-4a3d-8F8C-0C843DC247FB),
-@@ -2009,6 +2018,7 @@ interface IMFStreamSink : IMFMediaEventGenerator
+@@ -2009,6 +2024,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  
  
@@ -133,7 +151,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(86cbc910-e533-4751-8e3b-f19b5b806a03),
-@@ -2033,6 +2043,7 @@ interface IMFVideoSampleAllocator : IUnknown
+@@ -2033,6 +2049,7 @@
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -141,7 +159,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(A792CDBE-C374-4e89-8335-278E7B9956A4),
-@@ -2045,6 +2056,7 @@ interface IMFVideoSampleAllocatorNotify : IUnknown
+@@ -2045,6 +2062,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -149,7 +167,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(3978AA1A-6D5B-4B7F-A340-90899189AE34),
-@@ -2058,6 +2070,7 @@ interface IMFVideoSampleAllocatorNotifyEx : IMFVideoSampleAllocatorNotify
+@@ -2058,6 +2076,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -157,7 +175,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(992388B4-3372-4f67-8B6F-C84C071F4751),
-@@ -2072,6 +2085,7 @@ interface IMFVideoSampleAllocatorCallback : IUnknown
+@@ -2072,6 +2091,7 @@
          [out] LONG* plSamples);
  };
  
@@ -165,7 +183,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      local,
-@@ -2095,6 +2109,7 @@ interface IMFVideoSampleAllocatorEx : IMFVideoSampleAllocator
+@@ -2095,6 +2115,7 @@
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
@@ -173,7 +191,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(20bc074b-7a8d-4609-8c3b-64a0a3b5d7ce),
-@@ -2129,6 +2144,7 @@ typedef enum _MF_VIDEO_PROCESSOR_MIRROR
+@@ -2129,6 +2150,7 @@
      MIRROR_VERTICAL            = 2
  } MF_VIDEO_PROCESSOR_MIRROR;
  
@@ -181,7 +199,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      local,
-@@ -2155,6 +2171,7 @@ interface IMFVideoProcessorControl : IUnknown
+@@ -2155,6 +2177,7 @@
  };
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
@@ -189,7 +207,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      local,
-@@ -2362,6 +2379,7 @@ interface IMFTopologyNode;
+@@ -2362,6 +2385,7 @@
  /// IMFTopology is provided to configure topology. The application or other MF components can create
  /// the topology object via MFCreateTopology and then use the interface to configure the partial topology.
  /// </summary>
@@ -197,7 +215,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC433),
-@@ -2693,7 +2711,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
+@@ -2693,7 +2717,7 @@
  //
  // Topology functions
  //
@@ -206,7 +224,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFTopology ** ppTopo );" )
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -2737,6 +2755,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -2737,6 +2761,7 @@
  /// IMFTopologyNode interface.
  /// Methods for configuring topology nodes
  /// </summary>
@@ -214,7 +232,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(83CF873A-F6DA-4bc8-823F-BACFD55DC430),
-@@ -3325,7 +3344,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -3325,7 +3350,7 @@
  #pragma region PC Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
  
@@ -223,7 +241,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    MF_TOPOLOGY_TYPE NodeType," )
  cpp_quote( "    _Outptr_ IMFTopologyNode ** ppNode );" )
  
-@@ -3347,7 +3366,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -3347,7 +3372,7 @@
  /// If the method succeeds, the return value is S_OK.
  /// If the method fails, the return value will be some failure code.
  /// </returns>
@@ -232,7 +250,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IMFTopologyNode* pNode," )
  cpp_quote( "    DWORD dwStreamIndex," )
  cpp_quote( "    BOOL fOutput," )
-@@ -3363,6 +3382,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -3363,6 +3388,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -240,7 +258,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(fa993888-4383-415a-a930-dd472a8cf6f7)
-@@ -3407,7 +3427,7 @@ interface IMFGetService : IUnknown
+@@ -3407,7 +3433,7 @@
  
  }
  
@@ -249,7 +267,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IUnknown* punkObject," )
  cpp_quote( "    REFGUID guidService," )
  cpp_quote( "    REFIID riid," )
-@@ -3603,6 +3623,7 @@ cpp_quote( "#define MFCLOCK_JITTER_DPC          4000" )
+@@ -3603,6 +3629,7 @@
  cpp_quote( "#define MFCLOCK_JITTER_PASSIVE      10000" )
  
  
@@ -257,7 +275,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(2eb1e945-18b8-4139-9b1a-d5d584818530),
-@@ -3691,7 +3712,7 @@ interface IMFClock : IUnknown
+@@ -3691,7 +3718,7 @@
  ///     Return value is the current MF system time in 100ns units
  /// </returns>
  cpp_quote( "STDAPI_(MFTIME) " )
@@ -266,7 +284,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    );" )
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -3708,6 +3729,7 @@ cpp_quote( "#define PRESENTATION_CURRENT_POSITION   0x7fffffffffffffff" )
+@@ -3708,6 +3735,7 @@
  interface IMFClockStateSink;
  interface IMFPresentationTimeSource;
  
@@ -274,7 +292,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(868CE85C-8EA9-4f55-AB82-B009A910A805),
-@@ -3913,7 +3935,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
+@@ -3913,7 +3941,7 @@
  ///     *ppPresentationClock must be given a valid Presentation Time Source
  ///     before it will work.
  /// </remarks>
@@ -283,7 +301,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFPresentationClock** ppPresentationClock" )
  cpp_quote( "    );" )
  
-@@ -3926,6 +3948,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */")
+@@ -3926,6 +3954,7 @@
  #pragma region Application or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
  
@@ -291,7 +309,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(7FF12CCE-F76F-41c2-863B-1666C8E5E139),
-@@ -3988,13 +4011,14 @@ interface IMFPresentationTimeSource : IMFClock
+@@ -3988,13 +4017,14 @@
  ///     Presentation Time Source based on system time
  /// </param>
  cpp_quote( "STDAPI" )
@@ -307,7 +325,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F6696E82-74F7-4f3d-A178-8A5E09C3659F),
-@@ -4295,6 +4319,7 @@ cpp_quote("DEFINE_GUID( MF_PD_ADAPTIVE_STREAMING, 0xEA0D5D97, 0x29F9, 0x488B, 0x
+@@ -4295,6 +4325,7 @@
  
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINTHRESHOLD) ")
  
@@ -315,7 +333,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(03cb2711-24d7-4db6-a17f-f3a7a479a536),
-@@ -4330,7 +4355,7 @@ interface IMFPresentationDescriptor : IMFAttributes
+@@ -4330,7 +4361,7 @@
  // The IMFStreamDescriptors in the apStreamDescriptors array should be the
  // MF implementations.
  //
@@ -324,7 +342,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    DWORD cStreamDescriptors," )
  cpp_quote( "    _In_reads_opt_( cStreamDescriptors ) IMFStreamDescriptor** apStreamDescriptors," )
  cpp_quote( "    _Outptr_ IMFPresentationDescriptor** ppPresentationDescriptor" )
-@@ -4348,7 +4373,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+@@ -4348,7 +4379,7 @@
  // Given an IMFPresentationDescriptor, determines whether this presentation
  // requires that it be played in the Media Foundation Protected Environment.
  //
@@ -333,7 +351,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote("     _In_ IMFPresentationDescriptor* pPresentationDescriptor")
  cpp_quote("     );")
  cpp_quote("")
-@@ -4356,13 +4381,13 @@ cpp_quote("")
+@@ -4356,13 +4387,13 @@
  //
  // Functions to serialize and deserialize a Presentation Descriptor
  //
@@ -349,7 +367,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ DWORD cbData," )
  cpp_quote( "    _In_reads_( cbData ) BYTE * pbData," )
  cpp_quote( "    _Outptr_ IMFPresentationDescriptor ** ppPD);")
-@@ -4407,6 +4432,7 @@ cpp_quote( "EXTERN_GUID(MF_SD_MUTUALLY_EXCLUSIVE, 0x23ef79c, 0x388d, 0x487f, 0xa
+@@ -4407,6 +4438,7 @@
  // even if the content is protected.
  cpp_quote("DEFINE_GUID( MF_SD_SUPPORTS_PROTECTED_CODEC_SWITCH, 0x8fb6b117, 0x862e, 0x4b31, 0x8d, 0xab, 0x5e, 0x0a, 0x43, 0x4c, 0xae, 0xf0);")
  
@@ -357,7 +375,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(56c03d9c-9dbb-45f5-ab4b-d80f47c05938),
-@@ -4427,7 +4453,7 @@ interface IMFStreamDescriptor : IMFAttributes
+@@ -4427,7 +4459,7 @@
  // Instantiates the Media Foundation-provided implementations of
  // IMFStreamDescriptor
  //
@@ -366,7 +384,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    DWORD dwStreamIdentifier," )
  cpp_quote( "    DWORD cMediaTypes," )
  cpp_quote( "    _In_reads_(cMediaTypes) IMFMediaType** apMediaTypes," )
-@@ -4438,6 +4464,7 @@ cpp_quote( "" )
+@@ -4438,6 +4470,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -374,7 +392,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(e93dcf6c-4b07-4e1e-8123-aa16ed6eadf5),
-@@ -4517,7 +4544,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -4517,7 +4550,7 @@
  // type.  To use this object, initialize it with a media type via
  // IMFMediaTypeHandler::SetCurrentMediaType.
  //
@@ -383,7 +401,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFMediaTypeHandler ** ppHandler );" )
  
  ///////////////////////////////////////////////////////////////////////////////
-@@ -4533,6 +4560,7 @@ typedef enum MFTIMER_FLAGS
+@@ -4533,6 +4566,7 @@
  } MFTIMER_FLAGS;
  
  
@@ -391,7 +409,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(e56e4cbd-8f70-49d8-a0f8-edb3d6ab9bf2),
-@@ -4649,6 +4677,7 @@ typedef enum _MFSHUTDOWN_STATUS
+@@ -4649,6 +4683,7 @@
      MFSHUTDOWN_COMPLETED,
  } MFSHUTDOWN_STATUS;
  
@@ -399,7 +417,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(97ec2ea4-0e42-4937-97ac-9d6d328824e1),
-@@ -4689,7 +4718,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -4689,7 +4724,7 @@
  // If the object inherits from IMFShutdown, then IMFShutdown::Shutdown is
  // called.  Regardless, this function will return success.
  cpp_quote( "STDAPI " )
@@ -408,7 +426,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IUnknown * pUnk );")
  
  
-@@ -4701,7 +4730,7 @@ cpp_quote( "    IUnknown * pUnk );")
+@@ -4701,7 +4736,7 @@
  
  
  cpp_quote( "STDAPI" )
@@ -417,7 +435,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IMFAttributes* pAudioAttributes," )
  cpp_quote( "    _Outptr_ IMFMediaSink** ppSink" )
  cpp_quote( "    );" )
-@@ -4720,7 +4749,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP)")
+@@ -4720,7 +4755,7 @@
  ///     Returns pointer to an Audio Renderer Media Sink Activate
  /// </param>
  cpp_quote( "STDAPI" )
@@ -426,7 +444,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFActivate ** ppActivate " )
  cpp_quote( "    );" )
  
-@@ -4809,7 +4838,7 @@ cpp_quote( "EXTERN_GUID( MF_AUDIO_RENDERER_ATTRIBUTE_STREAM_CATEGORY, 0xa9770471
+@@ -4809,7 +4844,7 @@
  ///     Returns pointer to a Video Renderer Media Sink Activate
  /// </param>
  cpp_quote( "STDAPI" )
@@ -435,7 +453,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ HWND hwndVideo, " )
  cpp_quote( "    _Outptr_ IMFActivate ** ppActivate " )
  cpp_quote( "    );" )
-@@ -4831,7 +4860,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -4831,7 +4866,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -444,7 +462,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4855,7 +4884,7 @@ cpp_quote( "    );" )
+@@ -4855,7 +4890,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -453,7 +471,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4873,7 +4902,7 @@ cpp_quote( "    );" )
+@@ -4873,7 +4908,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -462,7 +480,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _Outptr_ IMFMediaSink** ppMediaSink " )
  cpp_quote( "    );" )
-@@ -4891,7 +4920,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+@@ -4891,7 +4926,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -471,7 +489,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -4908,7 +4937,7 @@ cpp_quote( "    );" )
+@@ -4908,7 +4943,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -480,7 +498,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -4939,7 +4968,7 @@ cpp_quote( "    );" )
+@@ -4939,7 +4974,7 @@
  ///         the return value will be a failure code.
  /// </returns>
  cpp_quote( "STDAPI" )
@@ -489,7 +507,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ GUID guidOutputSubType, " )
  cpp_quote( "    _In_opt_ IMFAttributes* pOutputAttributes, " )
  cpp_quote( "    _In_opt_ IMFByteStream* pOutputByteStream, " )
-@@ -4962,7 +4991,7 @@ cpp_quote( "    );" )
+@@ -4962,7 +4997,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -498,7 +516,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -4988,7 +5017,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
+@@ -4988,7 +5023,7 @@
  ///     Receives a pointer to the IMFMediaSink Interface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -507,7 +525,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pIByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pVideoMediaType, " )
  cpp_quote( "    _In_opt_ IMFMediaType* pAudioMediaType, " )
-@@ -5009,7 +5038,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
+@@ -5009,7 +5044,7 @@
  ///     Receives a pointer to the IMFMediaSinkInterface.  The caller must release this interface.
  /// </param>
  cpp_quote( "STDAPI" )
@@ -516,7 +534,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFByteStream* pTargetByteStream, " )
  cpp_quote( "    _In_ IMFMediaType* pAudioMediaType, " )
  cpp_quote("     _Outptr_ IMFMediaSink** ppMediaSink " )
-@@ -5040,6 +5069,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINBLUE) ")
+@@ -5040,6 +5075,7 @@
  ///     topology to afull topology, which can be set on the Media Session with
  ///     the flag MFSESSION_SETTOPOLOGY_NORESOLUTION.
  /// </summary>
@@ -524,7 +542,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(DE9A6157-F660-4643-B56A-DF9F7998C7CD),
-@@ -5094,7 +5124,7 @@ interface IMFTopoLoader : IUnknown
+@@ -5094,7 +5130,7 @@
  ///     Pointer to an IMFTopoLoader pointer where the Topology Loader object
  ///     will be returned
  /// </param>
@@ -533,7 +551,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFTopoLoader ** ppObj );" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -5112,6 +5142,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -5112,6 +5148,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -541,7 +559,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( ACF92459-6A61-42bd-B57C-B43E51203CB0 ),
-@@ -5229,6 +5260,7 @@ typedef enum
+@@ -5229,6 +5266,7 @@
      MF_LICENSE_URL_TAMPERED,
  }   MF_URL_TRUST_STATUS;
  
@@ -549,7 +567,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( D3C4EF59-49CE-4381-9071-D5BCD044C770 ),
-@@ -5565,6 +5597,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -5565,6 +5603,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -557,7 +575,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F88CFB8C-EF16-4991-B450-CB8C69E51704),
-@@ -5687,6 +5720,7 @@ interface IMFMetadata : IUnknown
+@@ -5687,6 +5726,7 @@
                  );
  };
  
@@ -565,7 +583,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(56181D2D-E221-4adb-B1C8-3CEE6A53F76F)
-@@ -5782,6 +5816,7 @@ typedef enum _MFRATE_DIRECTION
+@@ -5782,6 +5822,7 @@
  
  }   MFRATE_DIRECTION;
  
@@ -573,7 +591,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(0a9ccdbc-d797-4563-9667-94ec5d79292d),
-@@ -6008,6 +6043,7 @@ cpp_quote( "EXTERN_GUID( MF_RATE_CONTROL_SERVICE, 0x866fa297, 0xb802, 0x4bf8, 0x
+@@ -6008,6 +6049,7 @@
  
  
  
@@ -581,7 +599,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(88ddcd21-03c3-4275-91ed-55ee3929328f),
-@@ -6142,6 +6178,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -6142,6 +6184,7 @@
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -589,7 +607,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(ab9d8661-f7e8-4ef4-9861-89f334f94e74),
-@@ -6195,6 +6232,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -6195,6 +6238,7 @@
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -597,7 +615,7 @@ index d7abc97e..c80374fb 100644
  [
      object, 
      uuid(26AFEA53-D9ED-42B5-AB80-E64F9EE34779),
-@@ -6256,6 +6294,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
+@@ -6256,6 +6300,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -605,7 +623,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(089EDF13-CF71-4338-8D13-9E569DBDC319)
-@@ -6296,6 +6335,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+@@ -6296,6 +6341,7 @@
  cpp_quote( "EXTERN_GUID( MR_CAPTURE_POLICY_VOLUME_SERVICE, 0x24030acd, 0x107a, 0x4265, 0x97, 0x5c, 0x41, 0x4e, 0x33, 0xe6, 0x5f, 0x2a);" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN8) ")
  
@@ -613,7 +631,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(76B1BBDB-4EC8-4f36-B106-70A9316DF593)
-@@ -6346,6 +6386,7 @@ cpp_quote( "EXTERN_GUID( MR_STREAM_VOLUME_SERVICE, 0xf8b5fa2f, 0x32ef, 0x46f5, 0
+@@ -6346,6 +6392,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -621,7 +639,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(a0638c2b-6465-4395-9ae7-a321a9fd2856),
-@@ -6385,6 +6426,7 @@ cpp_quote( "EXTERN_GUID( MR_AUDIO_POLICY_SERVICE, 0x911fd737, 0x6775, 0x4ab0, 0x
+@@ -6385,6 +6432,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -629,7 +647,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(8C7B80BF-EE42-4b59-B1DF-55668E1BDCA8),
-@@ -6418,7 +6460,7 @@ interface IMFSampleGrabberSinkCallback : IMFClockStateSink
+@@ -6418,7 +6466,7 @@
  }
  
  cpp_quote( "STDAPI" )
@@ -638,7 +656,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IMFMediaType *pIMFMediaType,")
  cpp_quote( "    IMFSampleGrabberSinkCallback* pIMFSampleGrabberSinkCallback," )
  cpp_quote( "    _Outptr_ IMFActivate** ppIActivate" )
-@@ -6447,6 +6489,7 @@ cpp_quote( "EXTERN_GUID( MF_SAMPLEGRABBERSINK_IGNORE_CLOCK, 0x0efda2c0, 0x2b69,
+@@ -6447,6 +6495,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -646,7 +664,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(ca86aa50-c46e-429e-ab27-16d6ac6844cb),
-@@ -6520,6 +6563,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -6520,6 +6569,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -654,7 +672,7 @@ index d7abc97e..c80374fb 100644
  [
     object,
     uuid(35FE1BB8-A3A9-40fe-BBEC-EB569C9CCCA3),
-@@ -6776,6 +6820,7 @@ cpp_quote( "EXTERN_GUID( MF_WORKQUEUE_SERVICES, 0x8e37d489, 0x41e0, 0x413a, 0x90
+@@ -6776,6 +6826,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -662,7 +680,7 @@ index d7abc97e..c80374fb 100644
  [
     object,
     uuid(96bf961b-40fe-42f1-ba9d-320238b49700),
-@@ -6923,6 +6968,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -6923,6 +6974,7 @@
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
  ///////////////////////////////////////////////////////////////////////////////
@@ -670,7 +688,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(8D009D86-5B9F-4115-B1FC-9F80D52AB8AB),
-@@ -7051,7 +7097,7 @@ interface IMFQualityManager : IUnknown
+@@ -7051,7 +7103,7 @@
  ///     A 3rd party can create the default MF Quality Manager using
  ///     this function. It could be used to sub-class its functionality.
  /// </remarks>
@@ -679,7 +697,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFQualityManager **ppQualityManager );" )
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -7073,6 +7119,7 @@ cpp_quote( "EXTERN_GUID( MF_QUALITY_NOTIFY_SAMPLE_LAG, 0x30d15206, 0xed2a, 0x476
+@@ -7073,6 +7125,7 @@
  
  
  
@@ -687,7 +705,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(EC15E2E9-E36B-4f7c-8758-77D452EF4CE7)
-@@ -7216,6 +7263,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -7216,6 +7269,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -695,7 +713,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F3706F0D-8EA2-4886-8000-7155E9EC2EAE)
-@@ -7246,6 +7294,7 @@ interface IMFQualityAdvise2: IMFQualityAdvise
+@@ -7246,6 +7300,7 @@
  };
  
  ///////////////////////////////////////////////////////////////////////////////
@@ -703,7 +721,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(dfcd8e4d-30b5-4567-acaa-8eb5b7853dc9)
-@@ -7282,6 +7331,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -7282,6 +7337,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -711,7 +729,7 @@ index d7abc97e..c80374fb 100644
  [
     object,
     uuid(2347D60B-3FB5-480c-8803-8DF3ADCD3EF0),
-@@ -7326,6 +7376,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
+@@ -7326,6 +7382,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -719,7 +737,7 @@ index d7abc97e..c80374fb 100644
  [
     object,
     uuid(03910848-AB16-4611-B100-17B88AE2F248)   
-@@ -7387,6 +7438,7 @@ typedef enum _MFSequencerTopologyFlags
+@@ -7387,6 +7444,7 @@
      SequencerTopologyFlags_Last = 0x00000001,
  } MFSequencerTopologyFlags;
  
@@ -727,7 +745,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(197CD219-19CB-4de1-A64C-ACF2EDCBE59E),
-@@ -7530,7 +7582,7 @@ cpp_quote( "EXTERN_GUID( MF_TIME_FORMAT_SEGMENT_OFFSET, 0xc8b8be77, 0x869c, 0x43
+@@ -7530,7 +7588,7 @@
  /// <param name="ppSequencer">
  ///     Returns pointer to a Sequencer.
  /// </param>
@@ -736,7 +754,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IUnknown *pReserved," )
  cpp_quote( "    _Outptr_ IMFSequencerSource **ppSequencerSource" )
  cpp_quote( "    );" )
-@@ -7550,7 +7602,7 @@ cpp_quote( "    );" )
+@@ -7550,7 +7608,7 @@
  ///     Pointer to receive the PROPVARIANT that should be used with Start()
  ///     calls
  /// </param>
@@ -745,7 +763,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    MFSequencerElementId dwId," )
  cpp_quote( "    MFTIME hnsOffset," )
  cpp_quote( "    _Out_ PROPVARIANT *pvarSegmentOffset" )
-@@ -7572,7 +7624,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -7572,7 +7630,7 @@
  /// <param name="ppAggSource">
  ///     Returns a pointer to the aggregated media source.
  /// </param>
@@ -754,7 +772,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFCollection *pSourceCollection," )
  cpp_quote( "    _Outptr_ IMFMediaSource **ppAggSource" )
  cpp_quote( "    );" )
-@@ -7587,6 +7639,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -7587,6 +7645,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -762,7 +780,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(0E1D6009-C9F3-442d-8C51-A42D2D49452F),
-@@ -7621,6 +7674,7 @@ interface IMFMediaSourceTopologyProvider : IUnknown
+@@ -7621,6 +7680,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -770,7 +788,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(0E1D600a-C9F3-442d-8C51-A42D2D49452F),
-@@ -7695,6 +7749,7 @@ cpp_quote("#if defined(_MSC_VER) && (_MSC_VER >= 1600)")
+@@ -7695,6 +7755,7 @@
  cpp_quote("#pragma warning(pop)")
  cpp_quote("#endif")
  
@@ -778,7 +796,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(676aa6dd-238a-410d-bb99-65668d01605a),
-@@ -7846,6 +7901,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -7846,6 +7907,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -786,7 +804,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(6d66d782-1d4f-4db7-8c63-cb8c77f1ef5e),
-@@ -7886,6 +7942,7 @@ interface IMFByteStreamBuffering : IUnknown
+@@ -7886,6 +7948,7 @@
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
@@ -794,7 +812,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F5042EA4-7A96-4a75-AA7B-2BE1EF7F88D5),
-@@ -7909,6 +7966,7 @@ interface IMFByteStreamCacheControl : IUnknown
+@@ -7909,6 +7972,7 @@
  //////////////////////////////////////////////////////////////////////////////
  //////////////////////////////////////////////////////////////////////////////
  
@@ -802,7 +820,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(64976BFA-FB61-4041-9069-8C9A5F659BEB),
-@@ -7982,6 +8040,7 @@ typedef struct
+@@ -7982,6 +8046,7 @@
      QWORD qwEndOffset;
  } MF_BYTE_STREAM_CACHE_RANGE;
  
@@ -810,7 +828,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(71CE469C-F34B-49EA-A56B-2D2A10E51149),
-@@ -8049,6 +8108,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -8049,6 +8114,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -818,7 +836,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(5b87ef6a-7ed8-434f-ba0e-184fac1628d1),
-@@ -8166,6 +8226,7 @@ HRESULT SetPassword(
+@@ -8166,6 +8232,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -826,7 +844,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(5b87ef6b-7ed8-434f-ba0e-184fac1628d1),
-@@ -8279,6 +8340,7 @@ interface IMFNetCredentialManager : IUnknown
+@@ -8279,6 +8346,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -834,7 +852,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(5b87ef6c-7ed8-434f-ba0e-184fac1628d1),
-@@ -8431,7 +8493,7 @@ interface IMFNetCredentialCache : IUnknown
+@@ -8431,7 +8499,7 @@
  ///     should use the default Credential Cache to persist credentials.
  /// </summary>
  cpp_quote( "STDAPI ")
@@ -843,7 +861,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFNetCredentialCache ** ppCache);")
  
  
-@@ -8447,6 +8509,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -8447,6 +8515,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -851,7 +869,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(61f7d887-1230-4a8b-aeba-8ad434d1a64d),
-@@ -8575,6 +8638,7 @@ cpp_quote( "EXTERN_GUID( MFNETSOURCE_SSLCERTIFICATE_MANAGER, 0x55e6cb27, 0xe69b,
+@@ -8575,6 +8644,7 @@
  //  Synopsis:   Callbacks for filtering and sending requests.
  //
  //------------------------------------------------------------------------------
@@ -859,7 +877,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(091878a3-bf11-4a5c-bc9f-33995b06ef2d),
-@@ -8607,6 +8671,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -8607,6 +8677,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -867,7 +885,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(059054B3-027C-494C-A27D-9113291CF87F),
-@@ -8637,6 +8702,7 @@ interface IMFSourceOpenMonitor : IUnknown
+@@ -8637,6 +8708,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -875,7 +893,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(e9cd0383-a268-4bb4-82de-658d53574d41),
-@@ -8704,7 +8770,7 @@ interface IMFNetProxyLocator : IUnknown
+@@ -8704,7 +8776,7 @@
  ///     See property keys MFNETSOURCE_PROXYHOSTNAME through MFNETSOURCE_PROXYRERUNAUTODETECTION.
  /// </param>
  /// <param name=ppProxyLocator>Pointer to receive the ProxyLocator object.</param>
@@ -884,7 +902,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    LPCWSTR pszProtocol," )
  cpp_quote( "    IPropertyStore* pProxyConfig, " )
  cpp_quote( "    _Outptr_ IMFNetProxyLocator** ppProxyLocator );" )
-@@ -8714,6 +8780,7 @@ cpp_quote( "    _Outptr_ IMFNetProxyLocator** ppProxyLocator );" )
+@@ -8714,6 +8786,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -892,7 +910,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(e9cd0384-a268-4bb4-82de-658d53574d41),
-@@ -8747,6 +8814,7 @@ interface IMFNetProxyLocatorFactory : IUnknown
+@@ -8747,6 +8820,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -900,7 +918,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(e9931663-80bf-4c6e-98af-5dcf58747d1f),
-@@ -8836,6 +8904,7 @@ typedef enum _MFNETSOURCE_PROTOCOL_TYPE
+@@ -8836,6 +8910,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -908,7 +926,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(7BE19E73-C9BF-468a-AC5A-A5E8653BEC87),
-@@ -8883,7 +8952,7 @@ interface IMFNetSchemeHandlerConfig : IUnknown
+@@ -8883,7 +8958,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -917,7 +935,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    REFIID riid, " )
  cpp_quote( "    LPVOID *ppvHandler );" )
  
-@@ -9480,6 +9549,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+@@ -9480,6 +9555,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -925,7 +943,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(6D4C7B74-52A0-4bb7-B0DB-55F29F47A668),
-@@ -9520,6 +9590,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -9520,6 +9596,7 @@
  cpp_quote( "EXTERN_GUID(MF_BYTESTREAMHANDLER_ACCEPTS_SHARE_WRITE, 0xa6e1f733, 0x3001, 0x4915, 0x81, 0x50, 0x15, 0x58, 0xa2, 0x18, 0xe, 0xc8);" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  
@@ -933,7 +951,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(BB420AA4-765B-4a1f-91FE-D6A8A143924C),
-@@ -9576,6 +9647,7 @@ cpp_quote( "EXTERN_GUID( MF_BYTESTREAM_SERVICE, 0xab025e2b, 0x16d9, 0x4180, 0xa1
+@@ -9576,6 +9653,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -941,7 +959,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 542612C4-A1B8-4632-B521-DE11EA64A0B0 ),
-@@ -9701,6 +9773,7 @@ interface IMFOutputPolicy;
+@@ -9701,6 +9779,7 @@
  
  cpp_quote("EXTERN_GUID( MF_MEDIA_PROTECTION_MANAGER_PROPERTIES, 0x38BD81A9, 0xACEA, 0x4C73, 0x89, 0xB2, 0x55, 0x32, 0xC0, 0xAE, 0xCA, 0x79 );")
  
@@ -949,7 +967,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( D19F8E98-B126-4446-890C-5DCB7AD71453 ),
-@@ -9937,6 +10010,7 @@ interface IMFInputTrustAuthority : IUnknown
+@@ -9937,6 +10016,7 @@
  
  interface IMFOutputTrustAuthority;
  
@@ -957,7 +975,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( D19F8E95-B126-4446-890C-5DCB7AD71453 ),
-@@ -10015,6 +10089,7 @@ interface IMFTrustedOutput : IUnknown
+@@ -10015,6 +10095,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -965,7 +983,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( D19F8E94-B126-4446-890C-5DCB7AD71453 ),
-@@ -10081,6 +10156,7 @@ interface IMFOutputSchema;
+@@ -10081,6 +10162,7 @@
  ////////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -973,7 +991,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 7F00F10A-DAED-41AF-AB26-5FDFA4DFBA3C ),
-@@ -10271,6 +10347,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
+@@ -10271,6 +10353,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -981,7 +999,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 7BE0FC5B-ABD9-44FB-A5C8-F50136E71599 ),
-@@ -10590,6 +10667,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+@@ -10590,6 +10673,7 @@
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -989,7 +1007,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( d0ae555d-3b12-4d97-b060-0990bc5aeb67 ),
-@@ -10656,6 +10734,7 @@ typedef enum SAMPLE_PROTECTION_VERSION
+@@ -10656,6 +10740,7 @@
  
  cpp_quote( "EXTERN_GUID( MF_SampleProtectionSalt, 0x5403deee, 0xb9ee, 0x438f, 0xaa, 0x83, 0x38, 0x4, 0x99, 0x7e, 0x56, 0x9d);" )
  
@@ -997,7 +1015,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 8e36395f-c7b9-43c4-a54d-512b4af63c95 ),
-@@ -10788,6 +10867,7 @@ interface IMFSampleProtection : IUnknown
+@@ -10788,6 +10873,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -1005,7 +1023,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(5dfd4b2a-7674-4110-a4e6-8a68fd5f3688)
-@@ -10829,6 +10909,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+@@ -10829,6 +10915,7 @@
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -1013,7 +1031,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(EAECB74A-9A50-42ce-9541-6A7F57AA4AD7),
-@@ -10895,6 +10976,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -10895,6 +10982,7 @@
  #pragma region Application Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  
@@ -1021,7 +1039,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(9db7aa41-3cc5-40d4-8509-555804ad34cc)
-@@ -10959,6 +11041,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -10959,6 +11047,7 @@
  /// process for source and sequencer. All proxy objects should implement the IMFRemoteProxy interface in order for
  /// pipeline to access remote object and proxy host.
  /// </summary>
@@ -1029,7 +1047,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 994e23ad-1cc2-493c-b9fa-46f1cb040fa4 ),
-@@ -10982,6 +11065,7 @@ cpp_quote( "EXTERN_GUID( MF_REMOTE_PROXY, 0x2f00c90e, 0xd2cf, 0x4278, 0x8b, 0x6a
+@@ -10982,6 +11071,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -1037,7 +1055,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(09EF5BE3-C8A7-469e-8B70-73BF25BB193F),
-@@ -11009,6 +11093,7 @@ cpp_quote( "EXTERN_GUID( CLSID_CreateMediaExtensionObject, 0xef65a54d, 0x0788, 0
+@@ -11009,6 +11099,7 @@
  
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
@@ -1045,7 +1063,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F70CA1A9-FDC7-4782-B994-ADFFB1C98606),
-@@ -11062,6 +11147,7 @@ cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN7) ")
+@@ -11062,6 +11153,7 @@
  cpp_quote( "EXTERN_C const GUID MF_PMP_SERVICE;" )
  cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WIN7) ")
  
@@ -1053,7 +1071,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(6C4E655D-EAD8-4421-B6B9-54DCDBBDF820),
-@@ -11081,6 +11167,7 @@ interface IMFPMPClient: IUnknown
+@@ -11081,6 +11173,7 @@
          );
  }
  
@@ -1061,7 +1079,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 994e23af-1cc2-493c-b9fa-46f1cb040fa4 ),
-@@ -11110,7 +11197,7 @@ interface IMFPMPServer : IUnknown
+@@ -11110,7 +11203,7 @@
                  [out, iid_is(riid)] void ** ppObject);
  };
  
@@ -1070,7 +1088,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    DWORD dwCreationFlags," )
  cpp_quote( "    _Outptr_ IMFPMPServer** ppPMPServer" )
  cpp_quote( "    );" )
-@@ -11118,6 +11205,7 @@ cpp_quote( "    );" )
+@@ -11118,6 +11211,7 @@
  ///////////////////////////////////////////////////////////////////////////////
  ///////////////////////////////////////////////////////////////////////////////
  
@@ -1078,7 +1096,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid( 1cde6309-cae0-4940-907e-c1ec9c3d1d4a ),
-@@ -11140,7 +11228,7 @@ interface IMFRemoteDesktopPlugin : IUnknown
+@@ -11140,7 +11234,7 @@
  /// <summary>
  /// Creates party remote manager
  /// </summary>
@@ -1087,7 +1105,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFRemoteDesktopPlugin** ppPlugin );" )
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -11149,7 +11237,7 @@ cpp_quote( "    _Outptr_ IMFRemoteDesktopPlugin** ppPlugin );" )
+@@ -11149,7 +11243,7 @@
  //
  // CreateNamedPropertyStore
  //
@@ -1096,7 +1114,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "        _Outptr_ INamedPropertyStore **ppStore" )
  cpp_quote( "        );" )
  cpp_quote( "" )
-@@ -11165,6 +11253,7 @@ cpp_quote( "" )
+@@ -11165,6 +11259,7 @@
  /// <summary>
  ///     Used to retrieve and set SAMI styles on the MF SAMI Media Source.
  /// </summary>
@@ -1104,7 +1122,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(A7E025DD-5303-4a62-89D6-E747E1EFAC73),
-@@ -11251,13 +11340,14 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -11251,13 +11346,14 @@
  ///     Specifies a pointer to a variable where the sample copier transform
  ///     will be stored.
  /// </param>
@@ -1120,7 +1138,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(4ADFDBA3-7AB0-4953-A62B-461E7FF3DA1E),
-@@ -11554,7 +11644,7 @@ cpp_quote("#endif // (WINVER >= _WIN32_WINNT_WINBLUE) ")
+@@ -11554,7 +11650,7 @@
  ///     Specifies a pointer to a variable where the transcode profile
  ///     will be stored.
  /// </param>
@@ -1129,7 +1147,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFTranscodeProfile** ppTranscodeProfile" )
  cpp_quote( "    );" )
  
-@@ -11578,7 +11668,7 @@ cpp_quote( "    );" )
+@@ -11578,7 +11674,7 @@
  ///     Specifies a pointer to a variable where the partial transcode topology
  ///     will be stored.
  /// </param>
@@ -1138,7 +1156,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFMediaSource* pSrc," )
  cpp_quote( "    _In_ LPCWSTR pwszOutputFilePath," )
  cpp_quote( "    _In_ IMFTranscodeProfile* pProfile," )
-@@ -11613,7 +11703,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -11613,7 +11709,7 @@
  ///     Specifies a pointer to a variable where the partial transcode topology
  ///     will be stored.
  /// </param>
@@ -1147,7 +1165,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IMFMediaSource* pSrc," )
  cpp_quote( "    _In_ IMFByteStream* pOutputStream," )
  cpp_quote( "    _In_ IMFTranscodeProfile* pProfile," )
-@@ -11645,7 +11735,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -11645,7 +11741,7 @@
  /// <param name="ppAvailableTypes">
  ///     Specifies a pointer to a variable to a list of the available output types.
  /// </param>
@@ -1156,7 +1174,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( " _In_ REFGUID guidSubType," )
  cpp_quote( " _In_ DWORD dwMFTFlags," )
  cpp_quote( " _In_opt_ IMFAttributes* pCodecConfig, ")
-@@ -11659,6 +11749,7 @@ typedef struct _MF_TRANSCODE_SINK_INFO {
+@@ -11659,6 +11755,7 @@
      IMFMediaType* pAudioMediaType;
  } MF_TRANSCODE_SINK_INFO;
  
@@ -1164,7 +1182,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(8CFFCD2E-5A03-4a3a-AFF7-EDCD107C620E),
-@@ -11680,7 +11771,7 @@ interface IMFTranscodeSinkInfoProvider : IUnknown
+@@ -11680,7 +11777,7 @@
  /// <param name="ppActivate">
  ///    Receive pointer for a transcode sink activate.
  /// </param>
@@ -1173,7 +1191,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote(" _Outptr_ IMFActivate** ppActivate ); ")
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -11689,6 +11780,7 @@ cpp_quote(" _Outptr_ IMFActivate** ppActivate ); ")
+@@ -11689,6 +11786,7 @@
  //
  /////////////////////////////////////////////////////////////////////////////
  
@@ -1181,7 +1199,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(508E71D3-EC66-4fc3-8775-B4B9ED6BA847),
-@@ -11731,6 +11823,7 @@ typedef struct _MFT_REGISTRATION_INFO
+@@ -11731,6 +11829,7 @@
  /* ddf5cf9c-4506-45aa-abf0-6d5d94dd1b4a */
  cpp_quote( "EXTERN_GUID(MF_LOCAL_MFT_REGISTRATION_SERVICE, 0xddf5cf9c, 0x4506, 0x45aa, 0xab, 0xf0, 0x6d, 0x5d, 0x94, 0xdd, 0x1b, 0x4a);" )
  
@@ -1189,7 +1207,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(149c4d73-b4be-4f8d-8b87-079e926b6add),
-@@ -11795,6 +11888,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+@@ -11795,6 +11894,7 @@
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WIN8) ")
  
@@ -1197,7 +1215,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(84d2054a-3aa1-4728-a3b0-440a418cf49c)
-@@ -11813,6 +11907,7 @@ interface IMFPMPHostApp : IUnknown
+@@ -11813,6 +11913,7 @@
        [out, iid_is(riid)] void ** ppv);
  }
  
@@ -1205,7 +1223,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(c004f646-be2c-48f3-93a2-a0983eba1108),
-@@ -11835,6 +11930,7 @@ interface IMFPMPClientApp : IUnknown
+@@ -11835,6 +11936,7 @@
  cpp_quote("#endif ")
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
@@ -1213,7 +1231,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(380b9af9-a85b-4e78-a2af-ea5ce645c6b4),
-@@ -11851,6 +11947,7 @@ interface IMFMediaStreamSourceSampleRequest : IUnknown
+@@ -11851,6 +11953,7 @@
  
  cpp_quote("#endif ")
  
@@ -1221,7 +1239,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(245BF8E9-0755-40f7-88A5-AE0F18D55E17),
-@@ -11900,7 +11997,7 @@ interface IMFTrackedSample : IUnknown
+@@ -11900,7 +12003,7 @@
  /////////////////////////////////////////////////////////////////////////////
  
  
@@ -1230,7 +1248,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _Outptr_ IMFTrackedSample** ppMFSample);" )
  
  
-@@ -11911,7 +12008,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTI
+@@ -11911,7 +12014,7 @@
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)")
  
  /////////////////////////////////////////////////////////////////////////////
@@ -1239,7 +1257,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    IStream*        pStream," )
  cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream);" )
  
-@@ -11919,7 +12016,7 @@ cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream);" )
+@@ -11919,7 +12022,7 @@
  
  cpp_quote( "STDAPI MFCreateStreamOnMFByteStream(" ) 
  cpp_quote( "    _In_ IMFByteStream* pByteStream," ) 
@@ -1248,7 +1266,7 @@ index d7abc97e..c80374fb 100644
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
-@@ -11927,7 +12024,7 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_P
+@@ -11927,7 +12030,7 @@
  #pragma region Application Family
  cpp_quote( "#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)" )
  
@@ -1257,14 +1275,15 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_ IUnknown* punkStream," )
  cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream );" )
  
-@@ -11935,16 +12032,16 @@ cpp_quote( "    _Outptr_ IMFByteStream** ppByteStream );" )
+@@ -11935,16 +12038,16 @@
  cpp_quote( "STDAPI MFCreateStreamOnMFByteStreamEx(" ) 
  cpp_quote( "    _In_ IMFByteStream* pByteStream," ) 
  cpp_quote( "    _In_ REFIID riid," )
 -cpp_quote( "    _Outptr_ void **ppv );" )
-+cpp_quote( "    _Outptr_ void **ppv ) _Win32_SupportedOS_Windows8_;" )
- 
+-
 -cpp_quote( "STDAPI MFCreateMediaTypeFromProperties(" )
++cpp_quote( "    _Outptr_ void **ppv ) _Win32_SupportedOS_Windows8_;" )
++
 +cpp_quote( "STDAPI _Win32_SupportedOS_Windows8_ MFCreateMediaTypeFromProperties(" )
  cpp_quote( "    _In_ IUnknown* punkStream," )
  cpp_quote( "    _Outptr_ IMFMediaType** ppMediaType );" )
@@ -1277,7 +1296,7 @@ index d7abc97e..c80374fb 100644
  
  cpp_quote("#if (WINVER >= _WIN32_WINNT_WINBLUE) ")
  
-@@ -12016,7 +12113,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -12016,7 +12119,7 @@
  /// <param name="pcSourceActivate">
  ///     Number of pointers in the pppSourceActivate array
  /// </param>
@@ -1286,7 +1305,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_                IMFAttributes*                      pAttributes," )
  cpp_quote( "    _Outptr_result_buffer_(*pcSourceActivate) IMFActivate***    pppSourceActivate," )
  cpp_quote( "    _Out_               UINT32*                             pcSourceActivate" )
-@@ -12033,7 +12130,7 @@ cpp_quote( ");" )
+@@ -12033,7 +12136,7 @@
  /// <param name="ppSource">
  ///     Returns pointer to a Device Source
  /// </param>
@@ -1295,7 +1314,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_  IMFAttributes*   pAttributes," )
  cpp_quote( "    _Outptr_ IMFMediaSource** ppSource" )
  cpp_quote( ");" )
-@@ -12049,7 +12146,7 @@ cpp_quote( ");" )
+@@ -12049,7 +12152,7 @@
  /// <param name="ppActivate">
  ///     Returns pointer to a Device Source Activate
  /// </param>
@@ -1304,7 +1323,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_  IMFAttributes*   pAttributes," )
  cpp_quote( "    _Outptr_ IMFActivate**   ppActivate" )
  cpp_quote( ");" )
-@@ -12324,6 +12421,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -12324,6 +12427,7 @@
  
  interface IMFSignedLibrary;
  
@@ -1312,7 +1331,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(ef5dc845-f0d9-4ec9-b00c-cb5183d38434),
-@@ -12336,6 +12434,7 @@ interface IMFProtectedEnvironmentAccess : IUnknown
+@@ -12336,6 +12440,7 @@
      HRESULT ReadGRL([annotation("_Out_")] UINT32 *outputLength, [annotation("_Outptr_result_bytebuffer_(*outputLength)")] BYTE **output);
  }
  
@@ -1320,7 +1339,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(4a724bca-ff6a-4c07-8e0d-7a358421cf06),
-@@ -12346,6 +12445,7 @@ interface IMFSignedLibrary : IUnknown
+@@ -12346,6 +12451,7 @@
      HRESULT GetProcedureAddress([annotation("_In_")] LPCSTR name, [annotation("_Outptr_")] PVOID *address);
  }
  
@@ -1328,7 +1347,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(fff4af3a-1fc1-4ef9-a29b-d26c49e2f31a),
-@@ -12360,22 +12460,22 @@ interface IMFSystemId : IUnknown
+@@ -12360,22 +12466,22 @@
                    
  }
  
@@ -1355,7 +1374,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "    _In_reads_bytes_(size) const BYTE *verifier," )
  cpp_quote( "    _In_ UINT32 size," )
  cpp_quote( "    _Outptr_ LPWSTR *id" )
-@@ -12503,6 +12603,7 @@ cpp_quote( "} MFCONTENTPROTECTIONDEVICE_REALTIMECLIENT_DATA;" )
+@@ -12503,6 +12609,7 @@
  /// <summary>
  /// This interface allows a decryptor to communicate with the security processor implementing the hardware decryption for the given ProtectionSystemId.
  /// </summary>
@@ -1363,7 +1382,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(E6257174-A060-4C9A-A088-3B1B471CAD28),
-@@ -12541,20 +12642,21 @@ interface IMFContentProtectionDevice : IUnknown
+@@ -12541,20 +12648,21 @@
  /// <summary>
  /// This API creates an IMFContentProtectionDevice interface for the given ProtectionSystemId.
  /// </summary>
@@ -1387,7 +1406,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(7EC4B1BD-43FB-4763-85D2-64FCB5C5F4CB),
-@@ -12587,7 +12689,7 @@ cpp_quote("EXTERN_GUID( MF_CONTENT_PROTECTION_DEVICE_SERVICE, 0xff58436f, 0x76a0
+@@ -12587,7 +12695,7 @@
  /// <summary>
  /// This API creates an IMFContentDecryptorContext interface for the given ProtectionSystemId.
  /// </summary>
@@ -1396,7 +1415,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote( "   _In_ REFGUID guidMediaProtectionSystemId, " )
  cpp_quote( "   _In_opt_ IMFDXGIDeviceManager *pD3DManager, " )
  cpp_quote( "   _In_ IMFContentProtectionDevice *pContentProtectionDevice, " )
-@@ -12758,6 +12860,7 @@ typedef enum _MF_CROSS_ORIGIN_POLICY
+@@ -12758,6 +12866,7 @@
  //  * GetSourceOrigin() returns the W3C origin of the HTML5 media element.  Use CoTaskMemFree to free the string.
  //  * IsSameOrigin() returns true when the specified URL has the same origin as the HTML5 media element.
  // </summary>
@@ -1404,7 +1423,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(bc2b7d44-a72d-49d5-8376-1480dee58b22),
-@@ -12791,6 +12894,7 @@ cpp_quote("EXTERN_GUID(MFNETSOURCE_CROSS_ORIGIN_SUPPORT, 0x9842207c, 0xb02c, 0x4
+@@ -12791,6 +12900,7 @@
  // <summary>
  // This interface is implemented by clients to provide HTTP based download functionality to Media Foundation.
  // </summary>
@@ -1412,7 +1431,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F779FDDF-26E7-4270-8A8B-B983D1859DE0),
-@@ -12877,6 +12981,7 @@ interface IMFHttpDownloadRequest : IUnknown
+@@ -12877,6 +12987,7 @@
  // <summary>
  // This interface is implemented by clients to provide an IMFHttpDownloadRequest implementation to Media Foundation.
  // </summary>
@@ -1420,7 +1439,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(71FA9A2C-53CE-4662-A132-1A7E8CBF62DB),
-@@ -12905,6 +13010,7 @@ interface IMFHttpDownloadSession : IUnknown
+@@ -12905,6 +13016,7 @@
  // This interface is implemented by clients that want to provide their own IMFHttpDownloadSession implementation.
  // Media Foundation uses this interface to create an IMFHttpDownloadSession for downloading media.
  // </summary>
@@ -1428,7 +1447,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(1B4CF4B9-3A16-4115-839D-03CC5C99DF01),
-@@ -13109,6 +13215,7 @@ typedef enum
+@@ -13109,6 +13221,7 @@
      MFSensorDeviceMode_Shared
  } MFSensorDeviceMode;
  
@@ -1436,7 +1455,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(FB9F48F2-2A18-4E28-9730-786F30F04DC4),
-@@ -13159,6 +13266,7 @@ interface IMFSensorDevice : IUnknown
+@@ -13159,6 +13272,7 @@
          );
  };
  
@@ -1444,7 +1463,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(4110243A-9757-461F-89F1-F22345BCAB4E),
-@@ -13203,6 +13311,7 @@ interface IMFSensorGroup : IUnknown
+@@ -13203,6 +13317,7 @@
          );
  };
  
@@ -1452,7 +1471,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(E9A42171-C56E-498A-8B39-EDA5A070B7FC),
-@@ -13225,6 +13334,7 @@ interface IMFSensorStream : IMFAttributes
+@@ -13225,6 +13340,7 @@
          );
  };
  
@@ -1460,7 +1479,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(EED9C2EE-66B4-4F18-A697-AC7D3960215C),
-@@ -13263,13 +13373,13 @@ interface IMFSensorTransformFactory : IUnknown
+@@ -13263,13 +13379,13 @@
  };
  
  cpp_quote("STDAPI")
@@ -1476,7 +1495,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote("    _In_ DWORD StreamId,")
  cpp_quote("    _In_opt_ IMFAttributes* pAttributes,")
  cpp_quote("    _In_ IMFCollection* pMediaTypeCollection,")
-@@ -13284,6 +13394,7 @@ typedef struct
+@@ -13284,6 +13400,7 @@
      UINT32  Unused;
  } SENSORPROFILEID;
  
@@ -1484,7 +1503,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(22F765D1-8DAB-4107-846D-56BAF72215E7),
-@@ -13312,6 +13423,7 @@ interface IMFSensorProfile : IUnknown
+@@ -13312,6 +13429,7 @@
          );
  };
  
@@ -1492,7 +1511,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(C95EA55B-0187-48BE-9353-8D2507662351),
-@@ -13347,7 +13459,7 @@ interface IMFSensorProfileCollection : IUnknown
+@@ -13347,7 +13465,7 @@
  };
  
  cpp_quote("STDAPI")
@@ -1501,7 +1520,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote("    _In_ REFGUID ProfileType,")
  cpp_quote("    _In_ UINT32 ProfileIndex,")
  cpp_quote("    _In_opt_z_ LPCWSTR Constraints,")
-@@ -13355,7 +13467,7 @@ cpp_quote("    _COM_Outptr_ IMFSensorProfile** ppProfile")
+@@ -13355,7 +13473,7 @@
  cpp_quote("    );")
  
  cpp_quote("STDAPI")
@@ -1510,7 +1529,7 @@ index d7abc97e..c80374fb 100644
  cpp_quote("    _COM_Outptr_ IMFSensorProfileCollection** ppSensorProfile")
  cpp_quote("    );")
  
-@@ -13363,6 +13475,7 @@ cpp_quote("    );")
+@@ -13363,6 +13481,7 @@
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
  #pragma endregion
  
@@ -1518,7 +1537,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(39DC7F4A-B141-4719-813C-A7F46162A2B8),
-@@ -13388,6 +13501,7 @@ interface IMFSensorProcessActivity : IUnknown
+@@ -13388,6 +13507,7 @@
          );
  };
  
@@ -1526,7 +1545,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(3E8C4BE1-A8C2-4528-90DE-2851BDE5FEAD),
-@@ -13418,6 +13532,7 @@ interface IMFSensorActivityReport  : IUnknown
+@@ -13418,6 +13538,7 @@
          );
  };
  
@@ -1534,7 +1553,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(683F7A5E-4A19-43CD-B1A9-DBF4AB3F7777),
-@@ -13441,6 +13556,7 @@ interface IMFSensorActivitiesReport : IUnknown
+@@ -13441,6 +13562,7 @@
          );
  };
  
@@ -1542,7 +1561,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(DE5072EE-DBE3-46DC-8A87-B6F631194751),
-@@ -13454,6 +13570,7 @@ interface IMFSensorActivitiesReportCallback : IUnknown
+@@ -13454,6 +13576,7 @@
          );
  };
  
@@ -1550,7 +1569,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(D0CEF145-B3F4-4340-A2E5-7A5080CA05CB),
-@@ -13761,6 +13878,7 @@ interface IMFExtendedCameraController : IUnknown
+@@ -13761,6 +13884,7 @@
  };
  
  
@@ -1558,7 +1577,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(F25362EA-2C0E-447F-81E2-755914CDC0C3),
-@@ -13785,6 +13903,7 @@ interface IMFRelativePanelReport : IUnknown
+@@ -13785,6 +13909,7 @@
      );
  };
  
@@ -1566,7 +1585,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      uuid(421AF7F6-573E-4AD0-8FDA-2E57CEDB18C6),
-@@ -13825,12 +13944,13 @@ interface IMFRelativePanelWatcher : IMFShutdown
+@@ -13825,12 +13950,13 @@
  /// </param>
  cpp_quote("")
  cpp_quote("STDAPI")
@@ -1581,7 +1600,7 @@ index d7abc97e..c80374fb 100644
  [
      object,
      local,
-@@ -13896,6 +14016,7 @@ typedef enum MFSampleAllocatorUsage
+@@ -13896,6 +14022,7 @@
      MFSampleAllocatorUsage_DoesNotAllocate
  } MFSampleAllocatorUsage;
  

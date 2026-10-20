@@ -1,5 +1,5 @@
 diff --git a/um/propsys.idl b/um/propsys.idl
-index 1fe720ca..288c38ce 100644
+index 1fe720ca..d977d54f 100644
 --- a/um/propsys.idl
 +++ b/um/propsys.idl
 @@ -8,6 +8,9 @@
@@ -226,15 +226,18 @@ index 1fe720ca..288c38ce 100644
  cpp_quote("    _In_ LPCWSTR pszString,")
  cpp_quote("    _Out_ PROPERTYKEY *pkey);")
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
-@@ -778,7 +842,7 @@ cpp_quote("")
+@@ -778,9 +842,9 @@ cpp_quote("")
  cpp_quote("")
  cpp_quote("// Creates an in-memory property store")
  cpp_quote("// Returns an IPropertyStore, IPersistSerializedPropStorage, and related interfaces interface")
 -cpp_quote("PSSTDAPI PSCreateMemoryPropertyStore(")
 +cpp_quote("PSSTDAPI _Win32_SupportedOS_WindowsXP_ PSCreateMemoryPropertyStore(")
  cpp_quote("    _In_ REFIID riid,")
- cpp_quote("    _Outptr_ void **ppv);")
+-cpp_quote("    _Outptr_ void **ppv);")
++cpp_quote("    _Win32_ComOutPtr_(true) _Outptr_ void **ppv);")
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma endregion
+ #pragma region Desktop Family
 @@ -789,7 +853,7 @@ cpp_quote("")
  cpp_quote("")
  cpp_quote("// Create a read-only, delay-bind multiplexing property store")

@@ -297,16 +297,20 @@
  DWORD
  WINAPI
  WaitForMultipleObjectsEx(
-@@ -389,6 +438,8 @@
+@@ -389,6 +438,12 @@
  #define MUTEX_MODIFY_STATE  MUTANT_QUERY_STATE
  #define MUTEX_ALL_ACCESS    MUTANT_ALL_ACCESS
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SYNCHRONIZATION_ACCESS_RIGHTS, unsigned int, MUTEX_ALL_ACCESS, MUTEX_MODIFY_STATE);
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -399,6 +450,8 @@
+@@ -399,6 +454,8 @@
      _In_opt_ LPCSTR lpName
      );
  
@@ -315,7 +319,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -415,12 +468,14 @@
+@@ -415,12 +472,14 @@
  #define CreateMutex  CreateMutexA
  #endif // !UNICODE
  
@@ -331,7 +335,7 @@
      _In_ BOOL bInheritHandle,
      _In_ LPCWSTR lpName
      );
-@@ -429,6 +484,8 @@
+@@ -429,6 +488,8 @@
  #define OpenMutex  OpenMutexW
  #endif
  
@@ -340,7 +344,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -440,6 +497,8 @@
+@@ -440,6 +501,8 @@
      _In_opt_ LPCSTR lpName
      );
  
@@ -349,7 +353,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -457,22 +516,26 @@
+@@ -457,22 +520,26 @@
  #define CreateEvent  CreateEventA
  #endif // !UNICODE
  
@@ -378,7 +382,7 @@
      _In_ BOOL bInheritHandle,
      _In_ LPCWSTR lpName
      );
-@@ -483,12 +546,14 @@
+@@ -483,12 +550,14 @@
  #define OpenEvent  OpenEventA
  #endif // !UNICODE
  
@@ -394,7 +398,7 @@
      _In_ BOOL bInheritHandle,
      _In_ LPCWSTR lpName
      );
-@@ -507,12 +572,14 @@
+@@ -507,12 +576,14 @@
      _In_     DWORD dwTimerHighValue
      );
  
@@ -410,7 +414,7 @@
      _In_ BOOL bInheritHandle,
      _In_ LPCWSTR lpTimerName
      );
-@@ -523,6 +590,8 @@
+@@ -523,6 +594,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
  
@@ -419,7 +423,7 @@
  BOOL
  WINAPI
  SetWaitableTimerEx(
-@@ -537,6 +606,8 @@
+@@ -537,6 +610,8 @@
  
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
  
@@ -428,7 +432,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -549,6 +620,8 @@
+@@ -549,6 +624,8 @@
      _In_ BOOL fResume
      );
  
@@ -437,7 +441,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -560,6 +633,8 @@
+@@ -560,6 +637,8 @@
  
  #define CREATE_MUTEX_INITIAL_OWNER  0x00000001
  
@@ -446,7 +450,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -571,6 +646,8 @@
+@@ -571,6 +650,8 @@
      _In_ DWORD dwDesiredAccess
      );
  
@@ -455,7 +459,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -591,6 +668,14 @@
+@@ -591,6 +672,14 @@
  #define CREATE_EVENT_MANUAL_RESET   0x00000001
  #define CREATE_EVENT_INITIAL_SET    0x00000002
  
@@ -470,7 +474,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -598,10 +683,12 @@
+@@ -598,10 +687,12 @@
  CreateEventExA(
      _In_opt_ LPSECURITY_ATTRIBUTES lpEventAttributes,
      _In_opt_ LPCSTR lpName,
@@ -484,7 +488,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -609,7 +696,7 @@
+@@ -609,7 +700,7 @@
  CreateEventExW(
      _In_opt_ LPSECURITY_ATTRIBUTES lpEventAttributes,
      _In_opt_ LPCWSTR lpName,
@@ -493,7 +497,7 @@
      _In_ DWORD dwDesiredAccess
      );
  
-@@ -619,6 +706,8 @@
+@@ -619,6 +710,8 @@
  #define CreateEventEx  CreateEventExA
  #endif // !UNICODE
  
@@ -502,7 +506,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -641,6 +730,8 @@
+@@ -641,6 +734,8 @@
  #define CREATE_WAITABLE_TIMER_HIGH_RESOLUTION 0x00000002
  #endif
  
@@ -511,7 +515,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -668,6 +759,7 @@
+@@ -668,6 +763,7 @@
  #define SYNCHRONIZATION_BARRIER_FLAGS_BLOCK_ONLY 0x02
  #define SYNCHRONIZATION_BARRIER_FLAGS_NO_DELETE  0x04
  
@@ -519,7 +523,7 @@
  BOOL
  WINAPI
  EnterSynchronizationBarrier(
-@@ -675,6 +767,8 @@
+@@ -675,6 +771,8 @@
      _In_ DWORD dwFlags
      );
  
@@ -528,7 +532,7 @@
  BOOL
  WINAPI
  InitializeSynchronizationBarrier(
-@@ -683,12 +777,14 @@
+@@ -683,12 +781,14 @@
      _In_ LONG lSpinCount
      );
  
@@ -543,7 +547,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -696,6 +792,8 @@
+@@ -696,6 +796,8 @@
      _In_ DWORD dwMilliseconds
      );
  
@@ -552,7 +556,7 @@
  BOOL
  WINAPI
  WaitOnAddress(
-@@ -705,12 +803,14 @@
+@@ -705,12 +807,14 @@
      _In_opt_ DWORD dwMilliseconds
      );
  
@@ -567,7 +571,7 @@
  VOID
  WINAPI
  WakeByAddressAll(
-@@ -725,7 +825,7 @@
+@@ -725,7 +829,7 @@
  
  #ifndef MIDL_PASS
  
@@ -576,7 +580,7 @@
  DWORD
  WINAPI
  SignalObjectAndWait(
-@@ -743,7 +843,9 @@
+@@ -743,7 +847,9 @@
  #pragma region Application or OneCore Family or Games Partition
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -587,7 +591,7 @@
  DWORD
  WINAPI
  WaitForMultipleObjects(
-@@ -753,6 +855,8 @@
+@@ -753,6 +859,8 @@
      _In_ DWORD dwMilliseconds
      );
  
@@ -596,7 +600,7 @@
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -767,6 +871,8 @@
+@@ -767,6 +875,8 @@
  #define CreateSemaphore  CreateSemaphoreW
  #endif
  

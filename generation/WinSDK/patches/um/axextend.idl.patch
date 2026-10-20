@@ -21,7 +21,27 @@
  
  
  typedef IEnumRegFilters *PENUMREGFILTERS;
-@@ -375,6 +378,7 @@
+@@ -307,6 +310,9 @@
+ } REGPINMEDIUM;
+ 
+ // flags for dwFlags in REFILTERPINS2
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum
+ {
+     // OK to have zero instances of pin In this case you will have to
+@@ -322,6 +328,9 @@
+     // This is an Output pin
+     REG_PINFLAG_B_OUTPUT = 0x8
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ // describes pin for filter registration through IFilterMapper2
+@@ -375,6 +384,7 @@
  
  
  
@@ -29,7 +49,7 @@
  [
  AM_LOCAL
  object,
-@@ -442,6 +446,7 @@
+@@ -442,6 +452,7 @@
         );
  }
  
@@ -37,7 +57,7 @@
  [
  AM_LOCAL
  object,
-@@ -489,6 +494,7 @@
+@@ -489,6 +500,7 @@
  typedef IQualityControl *PQUALITYCONTROL;
  
  
@@ -45,7 +65,27 @@
  [
  AM_LOCAL
  object,
-@@ -596,6 +602,7 @@
+@@ -551,6 +563,9 @@
+ // doesn't mean that the other notification call backs won't ever be called
+ // the IOverlay implementation may use this as an efficiency optimisation
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum { ADVISE_NONE = 0x0,               // No notifications required
+        ADVISE_CLIPPING = 0x1,           // Synchronous clip information
+        ADVISE_PALETTE = 0x2,            // Palette change notifications
+@@ -558,6 +573,9 @@
+        ADVISE_POSITION = 0x8,           // Likewise when window moves etc
+        ADVISE_DISPLAY_CHANGE = 0x10     // Called on WM_DISPLAYCHANGE
+      };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ const DWORD ADVISE_ALL = ADVISE_CLIPPING |
+                          ADVISE_PALETTE |
+@@ -596,6 +614,7 @@
  //=====================================================================
  //=====================================================================
  
@@ -53,7 +93,7 @@
  [
  AM_LOCAL
  object,
-@@ -667,6 +674,7 @@
+@@ -667,6 +686,7 @@
  cpp_quote("DECLARE_HANDLE(HMONITOR);")
  cpp_quote("#endif")
  
@@ -61,7 +101,7 @@
  [
  object,
  local,
-@@ -693,6 +701,7 @@
+@@ -693,6 +713,7 @@
  //=====================================================================
  //=====================================================================
  
@@ -69,7 +109,7 @@
  [
  object,
  local,
-@@ -758,6 +767,7 @@
+@@ -758,6 +779,7 @@
  //=====================================================================
  //=====================================================================
  
@@ -77,7 +117,7 @@
  [
          local,
          object,
-@@ -785,6 +795,7 @@
+@@ -785,6 +807,7 @@
  //=====================================================================
  //=====================================================================
  
@@ -85,7 +125,7 @@
  [
          AM_LOCAL
          object,
-@@ -815,6 +826,7 @@
+@@ -815,6 +838,7 @@
  //=====================================================================
  //=====================================================================
  
@@ -93,7 +133,7 @@
  [
          AM_LOCAL
          object,
-@@ -837,6 +849,7 @@
+@@ -837,6 +861,7 @@
  
  typedef IFileSinkFilter *PFILTERFILESINK;
  
@@ -101,7 +141,7 @@
  [
          AM_LOCAL
          object,
-@@ -870,6 +883,7 @@
+@@ -870,6 +895,7 @@
  // building of graphs by automatic selection and connection of appropriate
  // filters
  
@@ -109,7 +149,7 @@
  [
      AM_LOCAL
      object,
-@@ -1043,6 +1057,7 @@
+@@ -1043,6 +1069,7 @@
  //
  // Capture graph builder "CopyCapturedFile" progress callback
  
@@ -117,7 +157,7 @@
  [
      AM_LOCAL
      object,
-@@ -1068,6 +1083,7 @@
+@@ -1068,6 +1095,7 @@
  // video, for example
  //
  
@@ -125,7 +165,7 @@
  [
      AM_LOCAL
      object,
-@@ -1185,6 +1201,7 @@
+@@ -1185,6 +1213,7 @@
  // New methods on for IFilterGraph and IGraphBuilder will have to go here.
  //
  
@@ -133,7 +173,7 @@
  [
      AM_LOCAL
      object,
-@@ -1248,6 +1265,7 @@
+@@ -1248,6 +1277,7 @@
  // IFilterGraph3
  //
  
@@ -141,7 +181,7 @@
  [
      AM_LOCAL
      object,
-@@ -1275,6 +1293,7 @@
+@@ -1275,6 +1305,7 @@
  // aka convergent graphs
  // aka Closed captioning
  
@@ -149,7 +189,7 @@
  [
      object,
      local,
-@@ -1304,6 +1323,7 @@
+@@ -1304,6 +1335,7 @@
  // multiple overlapped reads from different positions
  
  
@@ -157,7 +197,7 @@
  [
          AM_LOCAL
          object,
-@@ -1385,6 +1405,7 @@
+@@ -1385,6 +1417,7 @@
  // interface provided by the filtergraph itself to let other objects
  // (especially plug-in distributors, but also apps like graphedt) know
  // when the graph has changed.
@@ -165,7 +205,7 @@
  [
      AM_LOCAL
      object,
-@@ -1412,6 +1433,7 @@
+@@ -1412,6 +1445,7 @@
  // need to pass your implementation of this pointer as an in param.
  //
  // use if: you are a resource manager who implements IResourceManager
@@ -173,7 +213,7 @@
  [
      local,
      object,
-@@ -1460,6 +1482,7 @@
+@@ -1460,6 +1494,7 @@
  // Notifying change of focus to the resource manager will cause the resource
  // manager to switch contended resources to the objects that have the user's
  // focus
@@ -181,7 +221,7 @@
  [
      local,
      object,
-@@ -1590,6 +1613,7 @@
+@@ -1590,6 +1625,7 @@
  // under HKCR\Interface\<IID>\Distributor= for some interface).
  //
  // Use if: you are the filtergraph.
@@ -189,7 +229,7 @@
  [
      AM_LOCAL
      object,
-@@ -1653,6 +1677,7 @@
+@@ -1653,6 +1689,7 @@
  // IAMStreamControl
  //
  
@@ -197,7 +237,7 @@
  [
      AM_LOCAL
      object,
-@@ -1692,6 +1717,7 @@
+@@ -1692,6 +1729,7 @@
  // ISeekingPassThru
  //
  
@@ -205,7 +245,7 @@
  [
      AM_LOCAL
      object,
-@@ -1809,6 +1835,7 @@
+@@ -1809,6 +1847,7 @@
  // media type can describe which other sample rates, bit rates and channels
  // you support.
  
@@ -213,7 +253,7 @@
  [
      AM_LOCAL
      object,
-@@ -1944,6 +1971,7 @@
+@@ -1944,6 +1983,7 @@
  
  
  // Interface to control interleaving of different streams in one file
@@ -221,7 +261,7 @@
  [
  AM_LOCAL
  object,
-@@ -1993,6 +2021,7 @@
+@@ -1993,6 +2033,7 @@
  }
  
  // Interface to control the AVI mux
@@ -229,7 +269,7 @@
  [
  AM_LOCAL
  object,
-@@ -2049,6 +2078,7 @@
+@@ -2049,6 +2090,7 @@
      // many keyframes, etc., and to find information like capabilities and
      // the description of this compressor
  
@@ -237,7 +277,7 @@
      [
          AM_LOCAL
          object,
-@@ -2173,6 +2203,7 @@
+@@ -2173,6 +2215,7 @@
      // capture driver Capture Filter.  It allows an application to bring up
      // one of the 3 driver dialogs that VfW capture drivers have.
  
@@ -245,7 +285,7 @@
      [
          object,
          local,
-@@ -2215,6 +2246,7 @@
+@@ -2215,6 +2258,7 @@
      // (Co).  It allows an application to bring up either the Configure or
      // About dialogs for the ICM codec that it is currently using.
  
@@ -253,7 +293,7 @@
      [
          object,
          local,
-@@ -2304,6 +2336,7 @@
+@@ -2304,6 +2348,7 @@
      // Never send the same frame # twice, and never go back in time.  The
      // regular time stamp of a sample can also never go back in time.
  
@@ -261,7 +301,7 @@
      [
          AM_LOCAL
          object,
-@@ -2362,6 +2395,7 @@
+@@ -2362,6 +2407,7 @@
      // This interface can also be supported by the audio capture filter itself
      // to control to overall record level and panning after the mix
  
@@ -269,7 +309,7 @@
      [
          AM_LOCAL
          object,
-@@ -2473,6 +2507,7 @@
+@@ -2473,6 +2519,7 @@
      // GetAllocatorProperties can only be called after a pin is connected and
      // it returns the properties of the current allocator being used
  
@@ -277,7 +317,7 @@
      [
          AM_LOCAL
          object,
-@@ -2546,6 +2581,7 @@
+@@ -2546,6 +2593,7 @@
      // IAMAnalogVideoDecoder interface
      //---------------------------------------------------------------------
  
@@ -285,7 +325,7 @@
      [
          AM_LOCAL
          object,
-@@ -2630,6 +2666,7 @@
+@@ -2630,6 +2678,7 @@
      //
      //---------------------------------------------------------------------
  
@@ -293,7 +333,7 @@
      [
          AM_LOCAL
          object,
-@@ -2697,6 +2734,7 @@
+@@ -2697,6 +2746,7 @@
      // Control of local or remote cameras
      //---------------------------------------------------------------------
  
@@ -301,7 +341,7 @@
      [
          AM_LOCAL
          object,
-@@ -2752,6 +2790,7 @@
+@@ -2752,6 +2802,7 @@
      // and listing available frame rates
      //---------------------------------------------------------------------
  
@@ -309,7 +349,7 @@
      [
          AM_LOCAL
          object,
-@@ -2815,6 +2854,7 @@
+@@ -2815,6 +2866,7 @@
      // Controls a routing matrix for analog or digital video or audio
      //---------------------------------------------------------------------
  
@@ -317,7 +357,7 @@
      [
          AM_LOCAL
          object,
-@@ -2893,6 +2933,7 @@
+@@ -2893,6 +2945,7 @@
  
      interface IAMTunerNotification;
  
@@ -325,7 +365,7 @@
      [
          AM_LOCAL
          object,
-@@ -2994,6 +3035,7 @@
+@@ -2994,6 +3047,7 @@
      // Controls an analog TV tuner device
      //---------------------------------------------------------------------
  
@@ -333,7 +373,7 @@
      [
          AM_LOCAL
          object,
-@@ -3110,6 +3152,7 @@
+@@ -3110,6 +3164,7 @@
  
      interface IAMTVAudioNotification;
  
@@ -341,7 +381,7 @@
      [
          AM_LOCAL
          object,
-@@ -3292,6 +3335,7 @@
+@@ -3292,6 +3347,7 @@
      }
  cpp_quote("#endif // _IKsPropertySet_")
  
@@ -349,7 +389,7 @@
  [
  AM_LOCAL
  object,
-@@ -3314,6 +3358,7 @@
+@@ -3314,6 +3370,7 @@
  }
  
  
@@ -357,7 +397,7 @@
  [
  AM_LOCAL
  object,
-@@ -3389,6 +3434,7 @@
+@@ -3389,6 +3446,7 @@
     //
     // See edevdefs.h for the enumerated parameter list
     //---------------------------------------------------------------------
@@ -365,7 +405,7 @@
   [
       AM_LOCAL
       object,
-@@ -3452,6 +3498,7 @@
+@@ -3452,6 +3510,7 @@
     //
     // See edevdefs.h for the parameter lists
     //---------------------------------------------------------------------
@@ -373,7 +413,7 @@
  [
       AM_LOCAL
       object,
-@@ -3665,6 +3712,7 @@
+@@ -3665,6 +3724,7 @@
  typedef TIMECODE *PTIMECODE;
  typedef TIMECODE_SAMPLE *PTIMECODE_SAMPLE;
  
@@ -381,7 +421,7 @@
  [
       AM_LOCAL
       object,
-@@ -3722,6 +3770,7 @@
+@@ -3722,6 +3782,7 @@
     //
     // See edevdefs.h for the parameter lists
      //---------------------------------------------------------------------
@@ -389,7 +429,7 @@
  [
       AM_LOCAL
       object,
-@@ -3790,6 +3839,7 @@
+@@ -3790,6 +3851,7 @@
     //
     // See edevdefs.h for the parameter lists
      //---------------------------------------------------------------------
@@ -397,7 +437,7 @@
  [
       AM_LOCAL
       object,
-@@ -3903,6 +3953,7 @@
+@@ -3903,6 +3965,7 @@
  //  Control which logical streams are played and find out information about
  //  them
  //  Normally supported by a filter
@@ -405,7 +445,7 @@
  [
      AM_LOCAL
      object,
-@@ -3951,6 +4002,7 @@
+@@ -3951,6 +4014,7 @@
  //
  //  Normally supported by a filter
  //
@@ -413,7 +453,7 @@
  [
      AM_LOCAL
      object,
-@@ -3971,6 +4023,7 @@
+@@ -3971,6 +4035,7 @@
  
  
  //  Set clock adjustments - supported by some clocks
@@ -421,7 +461,7 @@
  [
      AM_LOCAL
      object,
-@@ -3995,6 +4048,7 @@
+@@ -3995,6 +4060,7 @@
      AM_FILTER_MISC_FLAGS_IS_SOURCE   = 0x00000002  /*  Filter sources data */
  };
  
@@ -429,7 +469,7 @@
  [
      AM_LOCAL
      object,
-@@ -4041,6 +4095,7 @@
+@@ -4041,6 +4107,7 @@
  // decimating their output image by an arbitary amount.
  //
  //
@@ -437,7 +477,7 @@
  [
      object,
      local,
-@@ -4076,6 +4131,7 @@
+@@ -4076,6 +4143,7 @@
      DECIMATION_DEFAULT              // decimate at decoder then ovly the vide port then crop
  } DECIMATION_USAGE;
  
@@ -445,7 +485,7 @@
  [
      object,
      local,
-@@ -4105,6 +4161,7 @@
+@@ -4105,6 +4173,7 @@
  //
  //---------------------------------------------------------------------
  
@@ -453,7 +493,7 @@
  [
      AM_LOCAL
      object,
-@@ -4190,6 +4247,7 @@
+@@ -4190,6 +4259,7 @@
  //
  // Used to set a source filter to run in a "live" mode.
  //
@@ -461,7 +501,7 @@
  [
      AM_LOCAL
      object,
-@@ -4243,6 +4301,7 @@
+@@ -4243,6 +4313,7 @@
  //
  // ------------------------------------------------------------------------
  
@@ -469,7 +509,7 @@
  [
          AM_LOCAL
          object,
-@@ -4300,6 +4359,7 @@
+@@ -4300,6 +4371,7 @@
      DVENCODERFORMAT_DVHD        =   2008,
      DVENCODERFORMAT_DVSL        =   2009
  };
@@ -477,7 +517,7 @@
  [
          AM_LOCAL
          object,
-@@ -4346,6 +4406,7 @@
+@@ -4346,6 +4418,7 @@
      DVRESOLUTION_QUARTER        =   1002,
      DVRESOLUTION_DC         =   1003
  };
@@ -485,7 +525,7 @@
  [
          AM_LOCAL
          object,
-@@ -4376,6 +4437,7 @@
+@@ -4376,6 +4449,7 @@
  //
  //------------------------------------------------------------------------
  
@@ -493,7 +533,7 @@
  [
          AM_LOCAL
          object,
-@@ -4395,6 +4457,7 @@
+@@ -4395,6 +4469,7 @@
  // Implemented by DV splitter filters
  //
  // ------------------------------------------------------------------------
@@ -501,7 +541,7 @@
  [
      AM_LOCAL
      object,
-@@ -4439,6 +4502,7 @@
+@@ -4439,6 +4514,7 @@
  //
  //---------------------------------------------------------------------
  
@@ -509,7 +549,7 @@
  [
      AM_LOCAL
      object,
-@@ -4464,6 +4528,7 @@
+@@ -4464,6 +4540,7 @@
  //
  //---------------------------------------------------------------------
  
@@ -517,7 +557,7 @@
  [
      AM_LOCAL
      object,
-@@ -4493,6 +4558,7 @@
+@@ -4493,6 +4570,7 @@
  //
  //---------------------------------------------------------------------
  
@@ -525,7 +565,7 @@
  [
      AM_LOCAL
      object,
-@@ -4543,6 +4609,7 @@
+@@ -4543,6 +4621,7 @@
      AMOVERFX_DEINTERLACE =      0x00000008
  };
  
@@ -533,7 +573,7 @@
  [
      AM_LOCAL
      object,
-@@ -4579,6 +4646,7 @@
+@@ -4579,6 +4658,7 @@
  // IAMOpenProgress interface provides information about current progress through
  // a download
  
@@ -541,7 +581,7 @@
  [
  AM_LOCAL
  object,
-@@ -4610,6 +4678,7 @@
+@@ -4610,6 +4690,7 @@
      This interface is implemented by the MPEG-2 Demultiplexer filter,
      irrespective of program vs. transport stream splitting functionality.
  --*/
@@ -549,7 +589,7 @@
  [
      object,
      local,
-@@ -4687,6 +4756,7 @@
+@@ -4687,6 +4768,7 @@
  /*++
      Enumerates the StreamIds mapped on a pin
  --*/
@@ -557,7 +597,7 @@
  [
      object,
      local,
-@@ -4722,6 +4792,7 @@
+@@ -4722,6 +4804,7 @@
  
      Provides the ability to map/unmap a stream_id to/from an output pin.
  --*/
@@ -565,7 +605,7 @@
  [
      object,
      local,
-@@ -4752,6 +4823,7 @@
+@@ -4752,6 +4835,7 @@
  
  
  //  Register a service provider with the filter graph
@@ -573,7 +613,7 @@
  [
          object,
          local,
-@@ -4783,6 +4855,7 @@
+@@ -4783,6 +4867,7 @@
  //
  // Used to set/get the error tolerance used by a slaving audio renderer
  //
@@ -581,7 +621,7 @@
  [
      AM_LOCAL
      object,
-@@ -4824,6 +4897,7 @@
+@@ -4824,6 +4909,7 @@
  //
  //---------------------------------------------------------------------
  
@@ -589,7 +629,7 @@
  [
      object,
      uuid(4995f511-9ddb-4f12-bd3b-f04611807b79),
-@@ -4868,6 +4942,7 @@
+@@ -4868,6 +4954,7 @@
  // Copyright (c) 1992 - 2002, Microsoft Corporation.  All rights reserved.
  //------------------------------------------------------------------------------
  
@@ -597,7 +637,7 @@
  [
          object,
          local,
-@@ -4963,6 +5038,7 @@
+@@ -4963,6 +5050,7 @@
  cpp_quote("#define      DECODER_CAP_NOTSUPPORTED        0x00000000")
  cpp_quote("#define      DECODER_CAP_SUPPORTED           0x00000001")
  
@@ -605,7 +645,7 @@
  [
          object,
          local,
-@@ -5006,6 +5082,7 @@
+@@ -5006,6 +5094,7 @@
  } AMCOPPStatusOutput, *LPAMCOPPStatusOutput;
  
  
@@ -613,7 +653,7 @@
  [
          object,
          local,
-@@ -5037,6 +5114,7 @@
+@@ -5037,6 +5126,7 @@
  //  Can be implemented by implementors of IAsyncReader on a Filter's output pin
  //  fRaw = TRUE means sample timestamp = byte position
  //  fRaw = FALSE (default) means sample timestamp = 10000000 * (byte position)
@@ -621,7 +661,7 @@
  [
          object,
          local,
-@@ -5062,6 +5140,7 @@
+@@ -5062,6 +5152,7 @@
  //  COM object
  //
  
@@ -629,7 +669,7 @@
  [
      object,
      local,
-@@ -5104,4 +5183,3 @@
+@@ -5104,4 +5195,3 @@
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion

@@ -4377,6 +4377,18 @@
       "sourceSha256": "0C039613D87488B9B79AE9529DEFDF9BC1934F37C8751CBAA343B11DEDD8E81C",
       "sdkPath": "c\\include\\10.0.26100.0\\um\\ieobj.h",
       "sdkSha256": "0C039613D87488B9B79AE9529DEFDF9BC1934F37C8751CBAA343B11DEDD8E81C"
+    },
+    {
+      "path": "um\\dbgeng.h",
+      "sourceSha256": "3DAA5D6AEBBFCA3AEFCEE6FD0B5B34ABD2EEBF2A0313FACB3F5939DA6AE8DEFA",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dbgeng.h",
+      "sdkSha256": "3DAA5D6AEBBFCA3AEFCEE6FD0B5B34ABD2EEBF2A0313FACB3F5939DA6AE8DEFA"
+    },
+    {
+      "path": "um\\imepad.h",
+      "sourceSha256": "96CCB64E5628E3D1FFC3E3B0A9458AF2DCAEC58CDCA8AE1BE4AED51F0E8C100E",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\imepad.h",
+      "sdkSha256": "96CCB64E5628E3D1FFC3E3B0A9458AF2DCAEC58CDCA8AE1BE4AED51F0E8C100E"
     }
   ],
   "midl": {
@@ -6702,10 +6714,6 @@
         "sdkSha256": "C8DC076719D7CD2BE8F2BF1B49ED32DE25F238244076304BBFCFE800F2975717"
       },
       {
-        "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
-      },
-      {
         "path": "um\\txlogpub.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\txlogpub.idl",
         "sdkSha256": "67E008A14FB077ECAA13577FC7B3D5EF85BC8BB3DC5C089D3B07B4A31BF1D178"
@@ -6719,6 +6727,10 @@
         "path": "um\\qrybas.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\qrybas.idl",
         "sdkSha256": "DA5AB6BE0B59FDFE045FD1D73322804C0BD48E3F0EC2F338BD268EAB3D77692B"
+      },
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
       }
     ],
     "outputs": [
@@ -8667,6 +8679,8 @@
     "um\\txlogpub.idl.patch",
     "um\\cmdtre.idl.patch",
     "um\\qrybas.idl.patch",
-    "um\\ieobj.h.patch"
+    "um\\ieobj.h.patch",
+    "um\\dbgeng.h.patch",
+    "um\\imepad.h.patch"
   ]
 }

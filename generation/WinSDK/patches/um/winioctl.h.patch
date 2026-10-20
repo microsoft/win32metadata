@@ -1,6 +1,29 @@
 --- a/um/winioctl.h
 +++ b/um/winioctl.h
-@@ -12093,13 +12093,17 @@
+@@ -146,6 +146,7 @@
+ 
+ #ifndef _WINIOCTL_
+ #define _WINIOCTL_
++#include <sal.h>
+ 
+ #if _MSC_VER >= 1200
+ #pragma warning(push)
+@@ -217,6 +218,14 @@
+ #define FILE_DEVICE_SMARTCARD           0x00000031
+ #define FILE_DEVICE_ACPI                0x00000032
+ #define FILE_DEVICE_DVD                 0x00000033
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(FILE_DEVICE_TYPE, unsigned int,
++    FILE_DEVICE_CD_ROM,
++    FILE_DEVICE_DISK,
++    FILE_DEVICE_TAPE,
++    FILE_DEVICE_DVD);
++#endif
+ #define FILE_DEVICE_FULLSCREEN_VIDEO    0x00000034
+ #define FILE_DEVICE_DFS_FILE_SYSTEM     0x00000035
+ #define FILE_DEVICE_DFS_VOLUME          0x00000036
+@@ -12093,13 +12102,17 @@
      LONGLONG Length;
  } USN_RECORD_EXTENT, *PUSN_RECORD_EXTENT;
  
@@ -19,7 +42,7 @@
      DWORD RemainingExtents;
      WORD   NumberOfExtents;
      WORD   ExtentSize;
-@@ -12211,6 +12215,12 @@
+@@ -12211,6 +12224,12 @@
  #define USN_DELETE_FLAG_DELETE              (0x00000001)
  #define USN_DELETE_FLAG_NOTIFY              (0x00000002)
  
@@ -32,7 +55,7 @@
  #define USN_DELETE_VALID_FLAGS              (0x00000003)
  
  #endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN2K */
-@@ -12298,6 +12308,14 @@
+@@ -12298,6 +12317,14 @@
  #define USN_SOURCE_REPLICATION_MANAGEMENT           (0x00000004)
  #define USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT    (0x00000008)
  
@@ -47,7 +70,7 @@
  #define USN_SOURCE_VALID_FLAGS      (USN_SOURCE_DATA_MANAGEMENT |               \
                                       USN_SOURCE_AUXILIARY_DATA |                \
                                       USN_SOURCE_REPLICATION_MANAGEMENT |        \
-@@ -12517,6 +12535,13 @@
+@@ -12517,6 +12544,13 @@
  #define FILESYSTEM_STATISTICS_TYPE_NTFS     1
  #define FILESYSTEM_STATISTICS_TYPE_FAT      2
  #define FILESYSTEM_STATISTICS_TYPE_EXFAT    3
@@ -61,7 +84,7 @@
  #define FILESYSTEM_STATISTICS_TYPE_REFS     4
  
  //
-@@ -13453,6 +13478,27 @@
+@@ -13453,6 +13487,27 @@
  #define TXFS_RM_FLAG_PREFER_CONSISTENCY                     0x00010000
  #define TXFS_RM_FLAG_PREFER_AVAILABILITY                    0x00020000
  
@@ -89,7 +112,7 @@
  #define TXFS_LOGGING_MODE_SIMPLE        (0x0001)
  #define TXFS_LOGGING_MODE_FULL          (0x0002)
  
-@@ -16255,6 +16301,11 @@
+@@ -16255,6 +16310,11 @@
  //
  
  #define FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY    (0x00020000)
@@ -101,7 +124,7 @@
  #define FILE_STORAGE_TIER_FLAG_WRITE_BACK_CACHE   (0x00200000)
  #define FILE_STORAGE_TIER_FLAG_READ_CACHE         (0x00400000)
  #define FILE_STORAGE_TIER_FLAG_PARITY             (0x00800000)
-@@ -16360,7 +16411,7 @@
+@@ -16360,7 +16420,7 @@
      // Flags
      //
  

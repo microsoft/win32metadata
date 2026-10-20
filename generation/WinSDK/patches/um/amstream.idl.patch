@@ -9,7 +9,7 @@
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -33,9 +35,15 @@
+@@ -33,11 +35,20 @@
  interface IAMMediaTypeSample;
  
  //  Flags definitions for IAMMultiMediaStream::Initialize
@@ -24,11 +24,39 @@
 +cpp_quote("#endif")
  
  //  Flags definitions for AddMediaStream and IAMMediaStream::Initialize
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
  enum {
-@@ -65,11 +73,17 @@
+     //  Don't add a stream - create a default renderer instead
+     //  for the supplied purpose id
+@@ -51,9 +62,15 @@
+     //  If Update is not called keep going
+     AMMSF_NOSTALL            = 0x00000008
  };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
  
  
+ //  Flag definitions for OpenFile and OpenMoniker
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum {
+     AMMSF_RENDERTYPEMASK     = 0x00000003,
+     AMMSF_RENDERTOEXISTING   = 0x00000000,
+@@ -63,13 +80,22 @@
+     AMMSF_NOCLOCK            = 0x00000004,
+     AMMSF_RUN                = 0x00000008
+ };
+-
+-
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
++
++
 +cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
 +cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
 +cpp_quote("#endif")
@@ -43,7 +71,7 @@
  
  
  // IAMMultiMediaStream interface
-@@ -82,7 +96,7 @@
+@@ -82,7 +108,7 @@
  {
      HRESULT Initialize(
          [in] STREAM_TYPE StreamType,
@@ -52,7 +80,7 @@
          [in]  IGraphBuilder *pFilterGraph);
  
      HRESULT GetFilterGraph(
-@@ -94,7 +108,7 @@
+@@ -94,7 +120,7 @@
      HRESULT AddMediaStream(
          [in]  IUnknown *pStreamObject,
          [in]  const MSPID *PurposeId,
@@ -61,7 +89,7 @@
          [out] IMediaStream **ppNewStream);
  
      HRESULT OpenFile(
-@@ -181,6 +195,7 @@
+@@ -181,6 +207,7 @@
  
  
  
@@ -69,7 +97,7 @@
  [
  object,
  local,
-@@ -193,6 +208,7 @@
+@@ -193,6 +220,7 @@
  };
  
  
@@ -77,7 +105,7 @@
  [
  object,
  local,
-@@ -290,4 +306,3 @@
+@@ -290,4 +318,3 @@
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion

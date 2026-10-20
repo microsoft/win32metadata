@@ -255,7 +255,7 @@
  /****************************************************************************
   CryptXmlImportPublicKey
  
-@@ -1686,11 +1760,12 @@
+@@ -1686,13 +1760,14 @@
          [out] Pointer to BCRYPT_KEY_HANDLE that receives imported key handle.
  
  ****************************************************************************/
@@ -267,8 +267,11 @@
 -                    DWORD               dwFlags,
 +                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
      _In_            const CRYPT_XML_KEY_VALUE *pKeyValue,
-     _Out_           BCRYPT_KEY_HANDLE   *phKey
+-    _Out_           BCRYPT_KEY_HANDLE   *phKey
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_           BCRYPT_KEY_HANDLE   *phKey
      );
+ 
+ /****************************************************************************
 @@ -1713,13 +1788,14 @@
          CRYPT_XML_FLAG_DISABLE_EXTENSIONS
  
@@ -362,3 +365,12 @@
      _Outptr_     CRYPT_XML_ALGORITHM_INFO        **ppAlgInfo
      );
  
+@@ -2383,7 +2471,7 @@
+ HRESULT
+ (WINAPI * CryptXmlDllCreateKey)(
+     _In_            const CRYPT_XML_BLOB *pEncoded,
+-    _Out_           BCRYPT_KEY_HANDLE   *phKey
++    _Win32_RAIIFree_(BCryptDestroyKey, 0) _Out_           BCRYPT_KEY_HANDLE   *phKey
+     );
+ 
+ #ifdef __cplusplus

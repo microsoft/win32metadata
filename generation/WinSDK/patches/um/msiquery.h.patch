@@ -1,8 +1,16 @@
 diff --git a/um/msiquery.h b/um/msiquery.h
-index 08157113..c67990ab 100644
+index 08157113..8e2e540a 100644
 --- a/um/msiquery.h
 +++ b/um/msiquery.h
-@@ -193,9 +193,11 @@ extern "C" {
+@@ -20,6 +20,7 @@
+ #ifndef _MSIQUERY_H_
+ #define _MSIQUERY_H_
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+@@ -193,9 +194,11 @@ extern "C" {
  // else ERROR_INVALID_HANDLE, ERROR_INVALID_HANDLE_STATE, ERROR_BAD_QUERY_SYNTAX, ERROR_GEN_FAILURE
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -14,7 +22,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
  	LPCWSTR     szQuery,            // SQL query to be prepared
  	MSIHANDLE*  phView);            // returned view if TRUE
-@@ -209,9 +211,11 @@ UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
+@@ -209,9 +212,11 @@ UINT WINAPI MsiDatabaseOpenViewW(MSIHANDLE hDatabase,
  // Similar to a GetLastError function, but for the view. NOT the same as MsiGetLastErrorRecord
  // Returns errors of MsiViewModify.
  
@@ -26,7 +34,7 @@ index 08157113..c67990ab 100644
  MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
  	_Out_writes_opt_(*pcchBuf)  LPWSTR szColumnNameBuffer,   // buffer to hold column name 
  	_Inout_opt_                 LPDWORD pcchBuf);             // size of buffer
-@@ -225,6 +229,7 @@ MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
+@@ -225,6 +230,7 @@ MSIDBERROR WINAPI MsiViewGetErrorW(MSIHANDLE hView,
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_HANDLE_STATE, ERROR_GEN_FAILURE
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -34,7 +42,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiViewExecute(MSIHANDLE hView,
  	MSIHANDLE hRecord);             // optional parameter record, or 0 if none
  
-@@ -233,6 +238,7 @@ UINT WINAPI MsiViewExecute(MSIHANDLE hView,
+@@ -233,6 +239,7 @@ UINT WINAPI MsiViewExecute(MSIHANDLE hView,
  // else ERROR_NO_MORE_ITEMS if no records remain, and a null handle is returned
  // else result is error: ERROR_INVALID_HANDLE_STATE, ERROR_INVALID_HANDLE, ERROR_GEN_FAILURE
  
@@ -42,7 +50,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiViewFetch(MSIHANDLE hView,
  	MSIHANDLE  *phRecord);          // returned data record if fetch succeeds
  
-@@ -240,6 +246,7 @@ UINT WINAPI MsiViewFetch(MSIHANDLE hView,
+@@ -240,6 +247,7 @@ UINT WINAPI MsiViewFetch(MSIHANDLE hView,
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_HANDLE_STATE, ERROR_GEN_FAILURE, ERROR_ACCESS_DENIED
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -50,7 +58,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiViewModify(MSIHANDLE hView,
  	MSIMODIFY eModifyMode,         // modify action to perform
  	MSIHANDLE hRecord);            // record obtained from fetch, or new record
-@@ -247,6 +254,7 @@ UINT WINAPI MsiViewModify(MSIHANDLE hView,
+@@ -247,6 +255,7 @@ UINT WINAPI MsiViewModify(MSIHANDLE hView,
  // Return the column names or specifications for the current view
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_PARAMETER, or ERROR_INVALID_HANDLE_STATE
  
@@ -58,7 +66,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiViewGetColumnInfo(MSIHANDLE hView,
  	MSICOLINFO eColumnInfo,        // retrieve columns names or definitions
  	MSIHANDLE *phRecord);          // returned data record containing all names or definitions
-@@ -255,6 +263,7 @@ UINT WINAPI MsiViewGetColumnInfo(MSIHANDLE hView,
+@@ -255,6 +264,7 @@ UINT WINAPI MsiViewGetColumnInfo(MSIHANDLE hView,
  // Only needs to be called if not all records have been fetched
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_HANDLE_STATE
  
@@ -66,7 +74,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiViewClose(MSIHANDLE hView);
  
  // Return a record containing the names of all primary key columns for a given table
-@@ -263,9 +272,11 @@ UINT WINAPI MsiViewClose(MSIHANDLE hView);
+@@ -263,9 +273,11 @@ UINT WINAPI MsiViewClose(MSIHANDLE hView);
  // Field [0] of the record contains the table name.
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_TABLE
  
@@ -78,7 +86,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
  	LPCWSTR    szTableName,       // the name of a specific table <case-sensitive>
  	MSIHANDLE  *phRecord);         // returned record if ERROR_SUCCESS
-@@ -278,8 +289,10 @@ UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
+@@ -278,8 +290,10 @@ UINT WINAPI MsiDatabaseGetPrimaryKeysW(MSIHANDLE hDatabase,
  // Return an enum defining the state of the table (temporary, unknown, or persistent).
  // Returns MSICONDITION_ERROR, MSICONDITION_FALSE, MSICONDITION_TRUE, MSICONDITION_NONE
  
@@ -89,7 +97,7 @@ index 08157113..c67990ab 100644
  MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
  	LPCWSTR szTableName);         // the name of a specific table
  #ifdef UNICODE
-@@ -300,10 +313,12 @@ MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
+@@ -300,10 +314,12 @@ MSICONDITION WINAPI MsiDatabaseIsTablePersistentW(MSIHANDLE hDatabase,
  // Obtain a handle for the _SummaryInformation stream for an MSI database     
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -102,7 +110,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
  	LPCWSTR  szDatabasePath,  // path to database, 0 if database handle supplied
  	UINT     uiUpdateCount,    // maximium number of updated values, 0 to open read-only
-@@ -316,18 +331,21 @@ UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
+@@ -316,18 +332,21 @@ UINT WINAPI MsiGetSummaryInformationW(MSIHANDLE hDatabase, // 0 if not open
  
  // Obtain the number of existing properties in the SummaryInformation stream
  
@@ -124,7 +132,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	UINT     uiDataType,     // VT_I4, VT_LPSTR, VT_FILETIME, or VT_EMPTY
-@@ -343,6 +361,7 @@ UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
+@@ -343,6 +362,7 @@ UINT WINAPI MsiSummaryInfoSetPropertyW(MSIHANDLE hSummaryInfo,
  // Get a single property from the summary information
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_UNKNOWN_PROPERTY
  
@@ -132,7 +140,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	_Out_ PUINT     puiDataType,   // returned type: VT_I4, VT_LPSTR, VT_FILETIME, VT_EMPTY
-@@ -350,6 +369,7 @@ UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
+@@ -350,6 +370,7 @@ UINT WINAPI MsiSummaryInfoGetPropertyA(MSIHANDLE hSummaryInfo,
  	_Out_opt_                        FILETIME  *pftValue,      // returned datetime property data
  	_Out_writes_opt_(*pcchValueBuf)  LPSTR   szValueBuf,     // buffer to return string property data
  	_Inout_opt_                      LPDWORD   pcchValueBuf);  // in/out buffer character count
@@ -140,7 +148,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
  	UINT     uiProperty,     // property ID, one of allowed values for summary information
  	_Out_ PUINT     puiDataType,   // returned type: VT_I4, VT_LPSTR, VT_FILETIME, VT_EMPTY
-@@ -365,6 +385,7 @@ UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
+@@ -365,6 +386,7 @@ UINT WINAPI MsiSummaryInfoGetPropertyW(MSIHANDLE hSummaryInfo,
  
  // Write back changed information to summary information stream
  
@@ -148,7 +156,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSummaryInfoPersist(MSIHANDLE hSummaryInfo);
  
  // --------------------------------------------------------------------------
-@@ -375,10 +396,12 @@ UINT WINAPI MsiSummaryInfoPersist(MSIHANDLE hSummaryInfo);
+@@ -375,10 +397,12 @@ UINT WINAPI MsiSummaryInfoPersist(MSIHANDLE hSummaryInfo);
  // Predefined persist values are reserved pointer values, requiring pointer arithmetic.
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -161,7 +169,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiOpenDatabaseW(
  	LPCWSTR      szDatabasePath,  // path to database, 0 to create temporary database
  	LPCWSTR      szPersist,       // output database path or one of predefined values
-@@ -392,9 +415,11 @@ UINT WINAPI MsiOpenDatabaseW(
+@@ -392,9 +416,11 @@ UINT WINAPI MsiOpenDatabaseW(
  // Import an MSI text archive table into an open database
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -173,7 +181,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
  	LPCWSTR   szFolderPath,     // folder containing archive files
  	LPCWSTR   szFileName);      // table archive file to be imported
-@@ -407,10 +432,12 @@ UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
+@@ -407,10 +433,12 @@ UINT WINAPI MsiDatabaseImportW(MSIHANDLE hDatabase,
  // Export an MSI table from an open database to a text archive file
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -186,7 +194,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
  	LPCWSTR   szTableName,      // name of table in database <case-sensitive>
  	LPCWSTR   szFolderPath,     // folder containing archive files
-@@ -424,9 +451,11 @@ UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
+@@ -424,9 +452,11 @@ UINT WINAPI MsiDatabaseExportW(MSIHANDLE hDatabase,
  // Merge two database together, allowing duplicate rows
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -198,7 +206,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseMerge,    // database to be merged into hDatabase
  	LPCWSTR   szTableName);      // name of non-persistent table to receive errors
-@@ -439,11 +468,13 @@ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
+@@ -439,16 +469,18 @@ UINT WINAPI MsiDatabaseMergeW(MSIHANDLE hDatabase,
  // Generate a transform file of differences between two databases
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -206,13 +214,22 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseGenerateTransformA(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCSTR   szTransformFile,   // name of generated transform file
- 	int       iReserved1,         // reserved argument, not used
- 	int       iReserved2);        // reserved argument, not used
+-	int       iReserved1,         // reserved argument, not used
+-	int       iReserved2);        // reserved argument, not used
++	_Win32_Reserved_ int       iReserved1,         // reserved argument, not used
++	_Win32_Reserved_ int       iReserved2);        // reserved argument, not used
 +_Win32_SupportedOS_Windows8_
  UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCWSTR   szTransformFile,   // name of generated transform file
-@@ -458,9 +489,11 @@ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
+-	int       iReserved1,         // reserved argument, not used
+-	int       iReserved2);        // reserved argument, not used
++	_Win32_Reserved_ int       iReserved1,         // reserved argument, not used
++	_Win32_Reserved_ int       iReserved2);        // reserved argument, not used
+ #ifdef UNICODE
+ #define MsiDatabaseGenerateTransform  MsiDatabaseGenerateTransformW
+ #else
+@@ -458,9 +490,11 @@ UINT WINAPI MsiDatabaseGenerateTransformW(MSIHANDLE hDatabase,
  // Apply a transform file containing database difference
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -224,7 +241,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
  	LPCWSTR   szTransformFile,    // name of transform file
  	int       iErrorConditions);   // errors to suppress, bits from MSITRANSFORM_ERROR
-@@ -473,11 +506,13 @@ UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
+@@ -473,11 +507,13 @@ UINT WINAPI MsiDatabaseApplyTransformW(MSIHANDLE hDatabase,
  // Create summary information of existing transform to include validation and error conditions
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -238,7 +255,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
  	MSIHANDLE hDatabaseReference, // base database to reference changes
  	LPCWSTR   szTransformFile,    // name of generated transform file
-@@ -492,10 +527,12 @@ UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
+@@ -492,10 +528,12 @@ UINT WINAPI MsiCreateTransformSummaryInfoW(MSIHANDLE hDatabase,
  // Write out all persistent table data, ignored if database opened read-only
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -251,7 +268,7 @@ index 08157113..c67990ab 100644
  MSIDBSTATE WINAPI MsiGetDatabaseState(MSIHANDLE hDatabase);
  
  // --------------------------------------------------------------------------
-@@ -507,6 +544,7 @@ MSIDBSTATE WINAPI MsiGetDatabaseState(MSIHANDLE hDatabase);
+@@ -507,6 +545,7 @@ MSIDBSTATE WINAPI MsiGetDatabaseState(MSIHANDLE hDatabase);
  // All fields are initialized to null
  // Returns a handle to the created record, or 0 if memory could not be allocated
  
@@ -259,7 +276,7 @@ index 08157113..c67990ab 100644
  MSIHANDLE WINAPI MsiCreateRecord(
  	UINT cParams);                   // the number of data fields
  
-@@ -514,6 +552,7 @@ MSIHANDLE WINAPI MsiCreateRecord(
+@@ -514,6 +553,7 @@ MSIHANDLE WINAPI MsiCreateRecord(
  // Returns TRUE if the field is null or does not exist
  // Returns FALSE if the field contains data, or the handle is invalid
  
@@ -267,7 +284,7 @@ index 08157113..c67990ab 100644
  BOOL WINAPI MsiRecordIsNull(MSIHANDLE hRecord,
  	UINT iField);
  
-@@ -523,12 +562,14 @@ BOOL WINAPI MsiRecordIsNull(MSIHANDLE hRecord,
+@@ -523,12 +563,14 @@ BOOL WINAPI MsiRecordIsNull(MSIHANDLE hRecord,
  // Returns character count if string data (not counting null terminator)
  // Returns bytes count if stream data
  
@@ -282,7 +299,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordSetInteger(MSIHANDLE hRecord,
  	UINT iField,
  	int iValue);
-@@ -537,9 +578,11 @@ UINT WINAPI MsiRecordSetInteger(MSIHANDLE hRecord,
+@@ -537,9 +579,11 @@ UINT WINAPI MsiRecordSetInteger(MSIHANDLE hRecord,
  // A null string pointer and an empty string both set the field to null
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_INVALID_FIELD
  
@@ -294,7 +311,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
  	UINT iField,
  	LPCWSTR      szValue);
-@@ -553,6 +596,7 @@ UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
+@@ -553,6 +597,7 @@ UINT WINAPI MsiRecordSetStringW(MSIHANDLE hRecord,
  // Returns the value MSI_NULL_INTEGER if the field is null
  // or if the field is a string that cannot be converted to an integer
  
@@ -302,7 +319,7 @@ index 08157113..c67990ab 100644
  int WINAPI MsiRecordGetInteger(MSIHANDLE hRecord,
  	UINT iField);
  
-@@ -563,10 +607,12 @@ int WINAPI MsiRecordGetInteger(MSIHANDLE hRecord,
+@@ -563,10 +608,12 @@ int WINAPI MsiRecordGetInteger(MSIHANDLE hRecord,
  // Returns ERROR_SUCCESS, ERROR_MORE_DATA, 
  //         ERROR_INVALID_HANDLE, ERROR_INVALID_FIELD, ERROR_BAD_ARGUMENTS
  
@@ -315,7 +332,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
  	                                UINT iField,
  	_Out_writes_opt_(*pcchValueBuf) LPWSTR  szValueBuf,      // buffer for returned value
-@@ -580,6 +626,7 @@ UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
+@@ -580,6 +627,7 @@ UINT WINAPI MsiRecordGetStringW(MSIHANDLE hRecord,
  // Returns the number of fields allocated in the record
  // Does not count field 0, used for formatting and op codes
  
@@ -323,7 +340,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordGetFieldCount(MSIHANDLE hRecord);
  
  // Set a record stream field from a file
-@@ -587,9 +634,11 @@ UINT WINAPI MsiRecordGetFieldCount(MSIHANDLE hRecord);
+@@ -587,9 +635,11 @@ UINT WINAPI MsiRecordGetFieldCount(MSIHANDLE hRecord);
  // The stream will be persisted if the record is inserted into the database
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -335,7 +352,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
  	UINT iField,
  	LPCWSTR      szFilePath);   // path to file containing stream data
-@@ -604,6 +653,7 @@ UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
+@@ -604,6 +654,7 @@ UINT WINAPI MsiRecordSetStreamW(MSIHANDLE hRecord,
  // The number of bytes transferred is returned through the argument
  // If no more bytes are available, ERROR_SUCCESS is still returned
  
@@ -343,7 +360,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordReadStream(MSIHANDLE hRecord,
  	                               UINT iField,
  	_Out_writes_bytes_opt_(*pcbDataBuf)  char    *szDataBuf,   // buffer to receive bytes from stream
-@@ -611,6 +661,7 @@ UINT WINAPI MsiRecordReadStream(MSIHANDLE hRecord,
+@@ -611,6 +662,7 @@ UINT WINAPI MsiRecordReadStream(MSIHANDLE hRecord,
  
  // Clears all data fields in a record to NULL
  
@@ -351,7 +368,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiRecordClearData(MSIHANDLE hRecord);
  
  // --------------------------------------------------------------------------
-@@ -620,6 +671,7 @@ UINT WINAPI MsiRecordClearData(MSIHANDLE hRecord);
+@@ -620,6 +672,7 @@ UINT WINAPI MsiRecordClearData(MSIHANDLE hRecord);
  
  // Return a handle to the database currently in use by this installer instance
  
@@ -359,7 +376,7 @@ index 08157113..c67990ab 100644
  MSIHANDLE WINAPI MsiGetActiveDatabase(MSIHANDLE hInstall); // returns handle to database, 0 if none active
  
  // Set the value for an installer property
-@@ -627,9 +679,11 @@ MSIHANDLE WINAPI MsiGetActiveDatabase(MSIHANDLE hInstall); // returns handle to
+@@ -627,9 +680,11 @@ MSIHANDLE WINAPI MsiGetActiveDatabase(MSIHANDLE hInstall); // returns handle to
  // If the value is null or an empty string, the property will be removed
  // Returns ERROR_SUCCESS, ERROR_INVALID_HANDLE, ERROR_BAD_ARGUMENTS
  
@@ -371,7 +388,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
  	LPCWSTR   szName,       // property identifier, case-sensitive
  	LPCWSTR   szValue);     // property value, null to undefine property
-@@ -643,10 +697,12 @@ UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
+@@ -643,10 +698,12 @@ UINT WINAPI MsiSetPropertyW(MSIHANDLE hInstall,
  // If the property is not defined, it is equivalent to a 0-length value, not error
  // Returns ERROR_SUCCESS, ERROR_MORE_DATA, ERROR_INVALID_HANDLE, ERROR_BAD_ARGUMENTS
  
@@ -384,7 +401,7 @@ index 08157113..c67990ab 100644
  UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
  	                                 LPCWSTR szName,           // property identifier, case-sensitive
  	_Out_writes_opt_(*pcchValueBuf)  LPWSTR  szValueBuf,       // buffer for returned property value
-@@ -660,11 +716,13 @@ UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
+@@ -660,11 +717,13 @@ UINT  WINAPI MsiGetPropertyW(MSIHANDLE hInstall,
  // Return the numeric language for the currently running install
  // Returns 0 if an install not running
  
@@ -398,7 +415,7 @@ index 08157113..c67990ab 100644
  BOOL WINAPI MsiGetMode(MSIHANDLE hInstall,
  	MSIRUNMODE eRunMode);   // particular mode for which the state is returned
  
-@@ -673,6 +731,7 @@ BOOL WINAPI MsiGetMode(MSIHANDLE hInstall,
+@@ -673,6 +732,7 @@ BOOL WINAPI MsiGetMode(MSIHANDLE hInstall,
  // Returns ERROR_ACCESS_DENIED if the mode is not settable
  // Returns ERROR_INVALID_HANDLE if the handle is not an active install session
  
@@ -406,7 +423,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetMode(MSIHANDLE hInstall,
  	MSIRUNMODE eRunMode,    // particular mode for which state is to be set
  	BOOL fState);           // new state for bit flag
-@@ -681,10 +740,12 @@ UINT WINAPI MsiSetMode(MSIHANDLE hInstall,
+@@ -681,10 +741,12 @@ UINT WINAPI MsiSetMode(MSIHANDLE hInstall,
  // Record field 0 must contain the format string
  // Other fields must contain data that may be referenced by the format string.
  
@@ -419,7 +436,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expansion
  	                                  MSIHANDLE hRecord,         // handle to record, field 0 contains format string
  	_Out_writes_opt_(*pcchResultBuf)  LPWSTR    szResultBuf,    // buffer to return formatted string
-@@ -706,8 +767,10 @@ UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expans
+@@ -706,8 +768,10 @@ UINT WINAPI MsiFormatRecordW(MSIHANDLE hInstall, // non-zero for property expans
  // Returns ERROR_INVALID_DATA if failure calling custom action
  // Returns ERROR_INVALID_HANDLE or ERROR_INVALID_PARAMETER if arguments invalid
  
@@ -430,7 +447,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
  	LPCWSTR szAction);     // name of action to call, case-sensitive
  #ifdef UNICODE
-@@ -719,9 +782,11 @@ UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
+@@ -719,9 +783,11 @@ UINT WINAPI MsiDoActionW(MSIHANDLE hInstall,
  // Execute another action sequence, as descibed in the specified table
  // Returns the same error codes as MsiDoAction
  
@@ -442,7 +459,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
  	LPCWSTR szTable,       // name of table containing action sequence
  	INT iSequenceMode);     // for future use, must be 0 in MSI 1.0
-@@ -739,14 +804,17 @@ UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
+@@ -739,14 +805,17 @@ UINT WINAPI MsiSequenceW(MSIHANDLE hInstall,
  // Returns Win32 button codes: IDOK IDCANCEL IDABORT IDRETRY IDIGNORE IDYES IDNO
  //   or 0 if no action taken, or -1 if invalid argument or handle
  
@@ -460,7 +477,7 @@ index 08157113..c67990ab 100644
  MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
  	LPCWSTR  szCondition);
  #ifdef UNICODE
-@@ -758,10 +826,12 @@ MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
+@@ -758,10 +827,12 @@ MSICONDITION WINAPI MsiEvaluateConditionW(MSIHANDLE hInstall,
  // Get the installed state and requested action state of a feature
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -473,7 +490,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
-@@ -775,9 +845,11 @@ UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
+@@ -775,9 +846,11 @@ UINT WINAPI MsiGetFeatureStateW(MSIHANDLE hInstall,
  // Request a feature to be set to a specified state
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -485,7 +502,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	INSTALLSTATE iState);       // requested state for feature
-@@ -792,9 +864,11 @@ UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
+@@ -792,9 +865,11 @@ UINT WINAPI MsiSetFeatureStateW(MSIHANDLE hInstall,
  // Set the attribute bits of a specified feature at runtime.
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -497,7 +514,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
  	LPCWSTR     szFeature,     // feature name within product
  	DWORD dwAttributes);        // attributes bits to set for this feature
-@@ -809,10 +883,12 @@ UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
+@@ -809,10 +884,12 @@ UINT WINAPI MsiSetFeatureAttributesW(MSIHANDLE hInstall,
  // Get the installed state and requested action state of a component
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -510,7 +527,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
  	LPCWSTR     szComponent,   // component name within product
  	INSTALLSTATE *piInstalled,  // returned current install state
-@@ -826,9 +902,11 @@ UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
+@@ -826,9 +903,11 @@ UINT WINAPI MsiGetComponentStateW(MSIHANDLE hInstall,
  // Request a component to be set to a specified state
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -522,7 +539,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
  	LPCWSTR     szComponent,   // component name within product
  	INSTALLSTATE iState);       // requested state for component
-@@ -845,11 +923,13 @@ UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
+@@ -845,11 +924,13 @@ UINT WINAPI MsiSetComponentStateW(MSIHANDLE hInstall,
  // excessively large cost due to shared components and parents.
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -536,7 +553,7 @@ index 08157113..c67990ab 100644
  UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
  	LPCWSTR      szFeature,      // name of feature
  	MSICOSTTREE  iCostTree,     // portion of tree to cost
-@@ -875,6 +955,7 @@ UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
+@@ -875,6 +956,7 @@ UINT  WINAPI MsiGetFeatureCostW(MSIHANDLE hInstall,
  // Execution of this function sets the error record, accessible
  // via MsiGetLastErrorRecord.
  
@@ -544,7 +561,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
  	LPCSTR      szComponent,     // name of component
  	DWORD        dwIndex,         // 0-based index into the list of drives
-@@ -883,6 +964,7 @@ UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
+@@ -883,6 +965,7 @@ UINT WINAPI MsiEnumComponentCostsA(MSIHANDLE hInstall,
  	_Inout_                      LPDWORD       pcchDriveBuf,   // in/out buffer character count
  	_Out_                        LPINT         piCost,         // returned cost, in units of 512 bytes
  	_Out_                        LPINT         piTempCost);    // returned temporary cost, in units of 512 bytes
@@ -552,7 +569,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
  	LPCWSTR      szComponent,     // name of component
  	DWORD        dwIndex,         // 0-based index into the list of drives
-@@ -903,6 +985,7 @@ UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
+@@ -903,6 +986,7 @@ UINT WINAPI MsiEnumComponentCostsW(MSIHANDLE hInstall,
  // Setting the value to 0 initialized components and features to the default level
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -560,7 +577,7 @@ index 08157113..c67990ab 100644
  UINT  WINAPI MsiSetInstallLevel(MSIHANDLE hInstall,
  	int iInstallLevel);
  
-@@ -910,9 +993,11 @@ UINT  WINAPI MsiSetInstallLevel(MSIHANDLE hInstall,
+@@ -910,9 +994,11 @@ UINT  WINAPI MsiSetInstallLevel(MSIHANDLE hInstall,
  // For each valid install state, a bit is set of value: (1 << INSTALLSTATE)
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -572,7 +589,7 @@ index 08157113..c67990ab 100644
  UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
  	LPCWSTR szFeature,
  	LPDWORD  lpInstallStates);
-@@ -925,10 +1010,12 @@ UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
+@@ -925,10 +1011,12 @@ UINT  WINAPI MsiGetFeatureValidStatesW(MSIHANDLE hInstall,
  // Return the full source path for a folder in the Directory table
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -585,7 +602,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
  	                                LPCWSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      szPathBuf,     // buffer to return full path
-@@ -942,10 +1029,12 @@ UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
+@@ -942,10 +1030,12 @@ UINT WINAPI MsiGetSourcePathW(MSIHANDLE hInstall,
  // Return the full target path for a folder in the Directory table
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -598,7 +615,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
  	                                LPCWSTR     szFolder,      // folder identifier, primary key into Directory table
  	_Out_writes_opt_(*pcchPathBuf)  LPWSTR      szPathBuf,     // buffer to return full path
-@@ -959,9 +1048,11 @@ UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
+@@ -959,9 +1049,11 @@ UINT WINAPI MsiGetTargetPathW(MSIHANDLE hInstall,
  // Set the full target path for a folder in the Directory table
  // Execution of this function sets the error record, accessible via MsiGetLastErrorRecord
  
@@ -610,7 +627,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
  	LPCWSTR     szFolder,       // folder identifier, primary key into Directory table
  	LPCWSTR     szFolderPath);  // full path for folder, ending in directory separator
-@@ -974,6 +1065,7 @@ UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
+@@ -974,6 +1066,7 @@ UINT WINAPI MsiSetTargetPathW(MSIHANDLE hInstall,
  // Check to see if sufficent disk space is present for the current installation
  // Returns ERROR_SUCCESS, ERROR_DISK_FULL, ERROR_INVALID_HANDLE_STATE, or ERROR_INVALID_HANDLE
  
@@ -618,7 +635,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiVerifyDiskSpace(MSIHANDLE hInstall);
  
  // --------------------------------------------------------------------------
-@@ -984,14 +1076,17 @@ UINT WINAPI MsiVerifyDiskSpace(MSIHANDLE hInstall);
+@@ -984,14 +1077,17 @@ UINT WINAPI MsiVerifyDiskSpace(MSIHANDLE hInstall);
  // Enable UI in preview mode to facilitate authoring of UI dialogs.
  // The preview mode will end when the handle is closed.
  
@@ -636,7 +653,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
  	LPCWSTR szDialogName);      // dialog to display, Dialog table key
  #ifdef UNICODE
-@@ -1003,9 +1098,11 @@ UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
+@@ -1003,9 +1099,11 @@ UINT WINAPI MsiPreviewDialogW(MSIHANDLE hPreview,
  // Display a billboard within a host control in the displayed dialog.
  // Supplying a null billboard name will remove any billboard displayed.
  
@@ -648,7 +665,7 @@ index 08157113..c67990ab 100644
  UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
  	LPCWSTR szControlName,      // name of control that accepts billboards
  	LPCWSTR szBillboard);       // name of billboard to display
-@@ -1025,6 +1122,7 @@ UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
+@@ -1025,6 +1123,7 @@ UINT WINAPI MsiPreviewBillboardW(MSIHANDLE hPreview,
  // Other fields will contain data specific to the particular error
  // The error record is released internally after this function is executed
  

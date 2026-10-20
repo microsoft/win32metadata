@@ -1,5 +1,5 @@
 diff --git a/um/wbemcli.idl b/um/wbemcli.idl
-index 62cdff5e..1851bbb9 100644
+index 62cdff5e..c1b7057b 100644
 --- a/um/wbemcli.idl
 +++ b/um/wbemcli.idl
 @@ -2,6 +2,10 @@
@@ -412,3 +412,10 @@ index 62cdff5e..1851bbb9 100644
  [local, restricted, object, uuid(49353c92-516b-11d1-aea6-00c04fb68820)]
  interface IWbemConfigureRefresher : IUnknown
  {
+@@ -1460,5 +1494,6 @@ interface IWbemConfigureRefresher : IUnknown
+ };
+ 
+ 
++_Win32_AnnotateParameter_(IWbemServices::CreateInstanceEnum, ppEnum, _Win32_ComOutPtr_(true))
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT) */")
+ #pragma endregion

@@ -1,5 +1,3 @@
-diff --git a/um/ole2.h b/um/ole2.h
-index e899e193..6a6f69eb 100644
 --- a/um/ole2.h
 +++ b/um/ole2.h
 @@ -1,3 +1,4 @@
@@ -7,7 +5,29 @@ index e899e193..6a6f69eb 100644
  #include <winapifamily.h>
  
  
-@@ -94,20 +95,24 @@ WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
+@@ -66,6 +67,13 @@
+ /* extended create function flags */
+ #define OLECREATE_LEAVERUNNING	0x00000001
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_(
++    "Enum(OLECREATE_ZERO, OLECREATE_LEAVERUNNING)",
++    0, OLECREATE_LEAVERUNNING)
++    unsigned int OLECREATE;
++#endif
++
+ #define OLESTREAM_CONVERSION_DEFAULT 0x00000000L
+ #define OLESTREAM_CONVERSION_DISABLEOLELINK 0x00000001L
+ 
+@@ -87,27 +95,31 @@
+     || !ISOLATION_AWARE_ENABLED \
+     || !defined(_OBJBASE_H_) \
+     || !defined(CreateDataAdviseHolder)
+-WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
++WINOLEAPI _Win32_SupportedOS_Windows2000_ CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
+ #endif
+ 
+ /****** OLE API Prototypes ************************************************/
  
  WINOLEAPI_(DWORD) OleBuildVersion( VOID );
  
@@ -20,7 +40,7 @@ index e899e193..6a6f69eb 100644
  /* init/term */
  
 -_Check_return_ WINOLEAPI OleInitialize(IN LPVOID pvReserved);
-+_Check_return_ WINOLEAPI _Win32_SupportedOS_Windows2000_ OleInitialize(IN LPVOID pvReserved);
++_Check_return_ WINOLEAPI _Win32_SupportedOS_Windows2000_ OleInitialize(_Win32_Reserved_ IN LPVOID pvReserved);
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI_(void) OleUninitialize(void);
  
@@ -34,13 +54,14 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI  OleQueryCreateFromData(IN LPDATAOBJECT pSrcDataObject);
  
  
-@@ -118,58 +123,68 @@ WINOLEAPI  OleCreate(IN REFCLSID rclsid, IN REFIID riid, IN DWORD renderopt,
+@@ -118,58 +130,68 @@
                  IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
  
  _Check_return_
-+_Win32_SupportedOS_Windows2000_
- WINOLEAPI  OleCreateEx(IN REFCLSID rclsid, IN REFIID riid, IN DWORD dwFlags,
+-WINOLEAPI  OleCreateEx(IN REFCLSID rclsid, IN REFIID riid, IN DWORD dwFlags,
 -                IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++_Win32_SupportedOS_Windows2000_
++WINOLEAPI  OleCreateEx(IN REFCLSID rclsid, IN REFIID riid, _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags,
 +                IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
                  IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
                  OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
@@ -57,7 +78,7 @@ index e899e193..6a6f69eb 100644
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleCreateFromDataEx(IN LPDATAOBJECT pSrcDataObj, IN REFIID riid,
 -                IN DWORD dwFlags, IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
-+                IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++                _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
                  IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
                  OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
                  IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
@@ -73,7 +94,7 @@ index e899e193..6a6f69eb 100644
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleCreateLinkFromDataEx(IN LPDATAOBJECT pSrcDataObj, IN REFIID riid,
 -                IN DWORD dwFlags, IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
-+                IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++                _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
                  IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
                  OUT IN DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
                  IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
@@ -95,7 +116,7 @@ index e899e193..6a6f69eb 100644
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleCreateLinkEx(IN LPMONIKER pmkLinkSrc, IN REFIID riid,
 -            IN DWORD dwFlags, IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
-+            IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++            _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
              IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
              OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
              IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
@@ -109,18 +130,18 @@ index e899e193..6a6f69eb 100644
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleCreateLinkToFileEx(IN LPCOLESTR lpszFileName, IN REFIID riid,
 -            IN DWORD dwFlags, IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
-+            IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++            _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
              IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
              OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
              IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
-@@ -179,62 +194,80 @@ WINOLEAPI  OleCreateFromFile(IN REFCLSID rclsid, IN LPCOLESTR lpszFileName, IN R
+@@ -179,62 +201,80 @@
              IN LPOLECLIENTSITE pClientSite, IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
  
  _Check_return_
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleCreateFromFileEx(IN REFCLSID rclsid, IN LPCOLESTR lpszFileName, IN REFIID riid,
 -            IN DWORD dwFlags, IN DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
-+            IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
++            _Win32_AssociatedEnum_(OLECREATE) IN DWORD dwFlags, IN _Win32_AssociatedEnum_(OLERENDER) DWORD renderopt, IN ULONG cFormats, IN DWORD* rgAdvf,
              IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
              OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
              IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
@@ -148,8 +169,9 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI  RegisterDragDrop(IN HWND hwnd, IN LPDROPTARGET pDropTarget);
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  RevokeDragDrop(IN HWND hwnd);
+-WINOLEAPI  DoDragDrop(IN LPDATAOBJECT pDataObj, IN LPDROPSOURCE pDropSource,
 +_Win32_SupportedOS_Windows2000_
- WINOLEAPI  DoDragDrop(IN LPDATAOBJECT pDataObj, IN LPDROPSOURCE pDropSource,
++WINOLEAPI  _Win32_PreserveResult_ DoDragDrop(IN LPDATAOBJECT pDataObj, IN LPDROPSOURCE pDropSource,
              IN DWORD dwOKEffects, OUT LPDWORD pdwEffect);
  
  /* Clipboard APIs */
@@ -195,7 +217,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN CLIPFORMAT cfFormat,
                          IN UINT uiFlags);
  
-@@ -243,30 +276,41 @@ WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN CLIPFORMAT cfFormat,
+@@ -243,30 +283,41 @@
  WINOLEAPI          OleDraw (IN LPUNKNOWN pUnknown, IN DWORD dwAspect, IN HDC hdcDraw,
                      IN LPCRECT lprcBounds);
  
@@ -238,7 +260,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLESTR lpszLabel,
                                          _In_ LPOLESTR lpszSourceFile, IN UINT iIconIndex);
  
-@@ -274,15 +318,18 @@ WINOLEAPI_(HGLOBAL) OleMetafilePictFromIconAndLabel(IN HICON hIcon, _In_ LPOLEST
+@@ -274,15 +325,18 @@
  
  /* Registration Database Helper APIs */
  
@@ -258,7 +280,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI OleRegEnumVerbs (IN REFCLSID clsid, _Outptr_ LPENUMOLEVERB FAR* ppenum);
  
  
-@@ -313,6 +360,7 @@ typedef HRESULT(STDAPICALLTYPE *OLESTREAMQUERYCONVERTOLELINKCALLBACK)
+@@ -313,6 +367,7 @@
      _In_opt_ ULONG      linkUpdatingOption,
      _In_opt_ PVOID      pvContext);
  
@@ -266,7 +288,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI OleConvertOLESTREAMToIStorage
      (IN LPOLESTREAM                lpolestream,
      OUT LPSTORAGE                   pstg,
-@@ -326,6 +374,7 @@ WINOLEAPI OleConvertOLESTREAMToIStorage2
+@@ -326,6 +381,7 @@
      _In_opt_ PVOID                      pvCallbackContext,
      _In_opt_ OLESTREAMQUERYCONVERTOLELINKCALLBACK pQueryConvertOLELinkCallback);
  
@@ -274,7 +296,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI OleConvertIStorageToOLESTREAM
      (IN LPSTORAGE      pstg,
      OUT LPOLESTREAM     lpolestream);
-@@ -333,13 +382,18 @@ WINOLEAPI OleConvertIStorageToOLESTREAM
+@@ -333,13 +389,18 @@
  
  /* ConvertTo APIS */
  
@@ -293,7 +315,7 @@ index e899e193..6a6f69eb 100644
  WINOLEAPI OleConvertIStorageToOLESTREAMEx
      (IN LPSTORAGE          pstg,
                                      // Presentation data to OLESTREAM
-@@ -350,6 +404,7 @@ WINOLEAPI OleConvertIStorageToOLESTREAMEx
+@@ -350,6 +411,7 @@
       IN LPSTGMEDIUM        pmedium,    //      bits
       OUT LPOLESTREAM        polestm);
  

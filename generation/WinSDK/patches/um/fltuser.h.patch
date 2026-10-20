@@ -1,8 +1,52 @@
 diff --git a/um/fltuser.h b/um/fltuser.h
-index f555a8a4..76950568 100644
+index f555a8a4..53143746 100644
 --- a/um/fltuser.h
 +++ b/um/fltuser.h
-@@ -430,6 +430,7 @@ FilterGetMessage (
+@@ -19,6 +19,7 @@ Environment:
+ #ifndef __FLTUSER_H__
+ #define __FLTUSER_H__
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -233,7 +234,7 @@ FilterFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpFilterFind
++    _Win32_RAIIFree_(FilterFindClose) _Out_ LPHANDLE lpFilterFind
+     );
+ 
+ _Must_inspect_result_
+@@ -263,7 +264,7 @@ FilterVolumeFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ PHANDLE lpVolumeFind
++    _Win32_RAIIFree_(FilterVolumeFindClose) _Out_ PHANDLE lpVolumeFind
+     );
+ 
+ _Must_inspect_result_
+@@ -296,7 +297,7 @@ FilterInstanceFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpFilterInstanceFind
++    _Win32_RAIIFree_(FilterInstanceFindClose) _Out_ LPHANDLE lpFilterInstanceFind
+     );
+ 
+ _Must_inspect_result_
+@@ -331,7 +332,7 @@ FilterVolumeInstanceFindFirst (
+     _Out_writes_bytes_to_(dwBufferSize,*lpBytesReturned) LPVOID lpBuffer,
+     _In_ DWORD dwBufferSize,
+     _Out_ LPDWORD lpBytesReturned,
+-    _Out_ LPHANDLE lpVolumeInstanceFind
++    _Win32_RAIIFree_(FilterVolumeInstanceFindClose) _Out_ LPHANDLE lpVolumeInstanceFind
+     );
+ 
+ _Must_inspect_result_
+@@ -430,6 +431,7 @@ FilterGetMessage (
      _Inout_opt_ LPOVERLAPPED lpOverlapped
      );
  
