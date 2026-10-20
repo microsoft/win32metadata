@@ -781,6 +781,7 @@ IKsTopologyInfo=Windows.Win32.Media.KernelStreaming
 # endregion vidcap.h
 # region winbase.h
 DEFINE_DOS_DEVICE_FLAGS=Windows.Win32.Storage.FileSystem
+STD_HANDLE=Windows.Win32.System.Console
 AccessCheckAndAuditAlarmA=Windows.Win32.Security
 AccessCheckByTypeAndAuditAlarmA=Windows.Win32.Security
 AccessCheckByTypeResultListAndAuditAlarmA=Windows.Win32.Security
@@ -1699,6 +1700,13 @@ InitiateSystemShutdownExW=Windows.Win32.System.Shutdown
 InitiateSystemShutdownW=Windows.Win32.System.Shutdown
 # endregion winreg.h
 # region winnt.h (SLIST per-architecture design also defined in ntdef.h)
+FILE_ACCESS_RIGHTS=Windows.Win32.Storage.FileSystem
+FILE_FLAGS_AND_ATTRIBUTES=Windows.Win32.Storage.FileSystem
+OBJECT_SECURITY_INFORMATION=Windows.Win32.Security
+PROCESSOR_ARCHITECTURE=Windows.Win32.System.SystemInformation
+REG_CREATE_KEY_DISPOSITION=Windows.Win32.System.Registry
+REG_OPEN_CREATE_OPTIONS=Windows.Win32.System.Registry
+REG_SAM_FLAGS=Windows.Win32.System.Registry
 PROCESS_ACCESS_RIGHTS=Windows.Win32.System.Threading
 REG_VALUE_TYPE=Windows.Win32.System.Registry
 TOKEN_ACCESS_MASK=Windows.Win32.Security
