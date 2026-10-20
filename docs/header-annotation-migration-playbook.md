@@ -336,7 +336,7 @@ fresh output directories for OLD, control and NEW.
     -AnnotationHeader $selectedAnnotationHeader `
     -OutputDirectory $freshOutput `
     -Partition WinAuto,ComOle `
-    -NativeIncludeDirectory $msvcInclude `
+    -NativeIncludeDirectory $msvcInclude,$sdkUcrtInclude `
     -Architecture crossarch -Stage Headers
 ```
 
@@ -348,12 +348,21 @@ replaces prepared inputs. Generated sources and actual settings, remaps and
 diagnostics are retained in `obj\generated` and `obj\scratch`, with input,
 command, log and output hashes.
 
-When unchanged mirror directories are needed as fallbacks, put the prepared
-`shared`, `um`, `ucrt` and `winrt` directories before MSVC and those fallbacks in
-`NativeIncludeDirectory`. The normal task appends its default SDK includes after
-additional includes; a mirror-first list can silently select an untraversed
-header and produce an empty file. Check expected declarations, not exit code
-alone.
+The driver prepends the canonical prepared `shared`, `um`, `ucrt` and `winrt`
+directories before the explicitly selected MSVC/UCRT fallbacks. It rejects
+unprepared SDK `shared`, `um` and `winrt` fallback directories before starting a
+producer. The normal task appends its default SDK includes after additional
+includes; an unchecked mirror-first list can select an untraversed header and
+produce an empty file.
+
+Both the bounded driver and the full conversion-wave driver validate the actual
+emitted response files before proceeding. Each canonical SDK include root must
+be present before any selected native fallback; unselected native or SDK roots
+are errors. Explicit external traverse directories remain selected source
+inputs, not SDK fallbacks. The bounded result and the full wave's
+`prepared-includes.json` retain the checked response paths, hashes and include
+order. Check expected declarations as well; process success alone does not
+establish source capture.
 
 `Headers`, `Constants` and `Emit` are distinct stages. A runtime without
 `ConstantsScraper.dll` supports only `Headers`; the other stages fail explicitly

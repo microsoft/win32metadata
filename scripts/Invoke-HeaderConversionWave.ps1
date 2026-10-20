@@ -9,6 +9,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+. "$PSScriptRoot\PreparedSdkHeaderIncludes.ps1"
 $repo = [IO.Path]::GetFullPath("$PSScriptRoot\..").TrimEnd('\')
 $WaveManifest = [IO.Path]::GetFullPath($WaveManifest)
 $OutputDirectory = [IO.Path]::GetFullPath($OutputDirectory).TrimEnd('\')
@@ -110,6 +111,7 @@ $plan = [ordered]@{
     baselineWinmd = $baseline
     baselineWinmdSha256 = $wave.baselineWinmdSha256
     toolsDirectory = $tools
+    preparedIncludeValidationSha256 = Get-WaveHash "$PSScriptRoot\PreparedSdkHeaderIncludes.ps1"
     commands = $commands
     nativeSourcesReusedFromFrozenImage = 0
     sourceIntegrationPolicy = 'Exact coherent additive deltas only; never ancestor/coalesced file replacement. Per-packet API admission is not a source-production prerequisite.'
@@ -213,6 +215,23 @@ try {
         Write-WaveJson "$OutputDirectory\stage-results.json" $results.ToArray()
         if ($exit -ne 0 -and !$differences) {
             throw "New conversion-wave stage '$($command.stage)' failed; freeze this boundary and inspect $log. Do not replay frozen producers."
+        }
+        if ($command.stage -eq 'headers') {
+            $preparedRoot = (Get-Content -LiteralPath "$OutputDirectory\obj\prepared-sdk.txt" -Raw).Trim()
+            $responses = @(Get-ChildItem -LiteralPath "$OutputDirectory\obj\scratch" -Recurse -File -Filter '*.settings.rsp' |
+                Select-Object -ExpandProperty FullName)
+            try {
+                $verified = @(Assert-PreparedSdkHeaderIncludes -IncludeRoot $preparedRoot `
+                    -ProjectDirectory "$repo\generation\WinSDK" -ResponseFile $responses)
+                Write-WaveJson "$OutputDirectory\prepared-includes.json" ([ordered]@{
+                    status = 'verified'; includeRoot = $preparedRoot; responseFiles = $verified
+                })
+            } catch {
+                Write-WaveJson "$OutputDirectory\prepared-includes.json" ([ordered]@{
+                    status = 'failed'; includeRoot = $preparedRoot; error = $_.Exception.Message
+                })
+                throw
+            }
         }
         if ($command.stage -eq 'compare' -and !$differences -and
             ($rawLines.Count -ne 1 -or $rawLines[0] -cne 'No unknown differences found.')) {

@@ -21,6 +21,7 @@ param(
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
+. "$PSScriptRoot\PreparedSdkHeaderIncludes.ps1"
 if (!$AssetsDirectory) { $AssetsDirectory = Join-Path $ToolsDirectory 'assets' }
 if (!$SdkTargetsFile) { $SdkTargetsFile = Join-Path $ToolsDirectory 'assets\scraper.sdk.targets' }
 if (!$ScriptsDirectory) { $ScriptsDirectory = Join-Path $ProjectDirectory '..\..\scripts' }
@@ -89,12 +90,7 @@ foreach ($owner in $Partition) {
         throw "An ordinary owner partition is invalid or missing: $owner"
     }
 }
-$NativeIncludeDirectory = @($NativeIncludeDirectory | ForEach-Object { [IO.Path]::GetFullPath($_) })
-foreach ($include in $NativeIncludeDirectory) {
-    if (!(Test-Path -LiteralPath $include -PathType Container)) {
-        throw "An explicitly selected native include directory is missing: $include"
-    }
-}
+$NativeIncludeDirectory = @(Get-PreparedSdkHeaderIncludes $IncludeRoot $NativeIncludeDirectory)
 $driver = "$PSScriptRoot\PreparedSdkPartitions.proj"
 if (!(Test-Path -LiteralPath $driver) -or !(Test-Path -LiteralPath $SdkTargetsFile)) {
     throw 'The pinned adapter project and existing GeneratorSdk targets are both required.'
@@ -113,7 +109,8 @@ $pin = {
     param([string]$Path)
     [ordered]@{ path = $Path; sha256 = (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash }
 }
-$inputs = @(& $pin $PSCommandPath; & $pin $driver; & $pin $SdkTargetsFile; & $pin $RuntimeManifest;
+$inputs = @(& $pin $PSCommandPath; & $pin "$PSScriptRoot\PreparedSdkHeaderIncludes.ps1";
+    & $pin $driver; & $pin $SdkTargetsFile; & $pin $RuntimeManifest;
     & $pin $AnnotationHeader; & $pin $preparedAnnotationHeader)
 $inputs += @(Get-ChildItem -LiteralPath $ProjectDirectory -File | Where-Object Extension -In '.rsp', '.json', '.txt' |
     ForEach-Object { & $pin $_.FullName })
@@ -131,6 +128,7 @@ $inputPath = "$OutputDirectory\ordinary-inputs.json"
     project = $ProjectDirectory; includeRoot = $IncludeRoot; tools = $ToolsDirectory
     annotationHeader = $AnnotationHeader; runtimeManifest = $RuntimeManifest
     runtimeManifestSha256 = $RuntimeManifestSha256; runtimeFiles = $runtimeFiles
+    preparedAndNativeIncludeDirectories = $NativeIncludeDirectory
     arguments = $arguments; inputs = $inputs
     generatesNativeEnumCarriersFromLegacyJson = $false
     reusesColdGeneratedSourcesOrAmbientTools = $false
@@ -140,6 +138,21 @@ $started = [DateTime]::UtcNow.ToString('o')
 & dotnet @arguments *> "$OutputDirectory\ordinary.log"
 $exit = $LASTEXITCODE
 $objectDirectory = "$OutputDirectory\obj"
+$architectures = if ($Architecture -eq 'crossarch') { @('x86', 'x64', 'arm64') } else { @($Architecture) }
+$expectedResponses = @(foreach ($arch in $architectures) {
+    foreach ($owner in $Partition) { "$objectDirectory\scratch\$arch\$owner.settings.rsp" }
+})
+$responses = if ($exit -eq 0) { $expectedResponses } else {
+    @($expectedResponses | Where-Object { Test-Path -LiteralPath $_ -PathType Leaf })
+}
+$includeValidation = @()
+$includeValidationError = $null
+try {
+    $includeValidation = @(Assert-PreparedSdkHeaderIncludes -IncludeRoot $IncludeRoot `
+        -ProjectDirectory $ProjectDirectory -ResponseFile $responses -NativeIncludeDirectory $NativeIncludeDirectory)
+} catch {
+    $includeValidationError = $_.Exception.Message
+}
 $outputFiles = if (Test-Path -LiteralPath $objectDirectory -PathType Container) {
     @(Get-ChildItem -LiteralPath $objectDirectory -Recurse -File |
         ForEach-Object { [ordered]@{ path = [IO.Path]::GetRelativePath($OutputDirectory, $_.FullName); sha256 = (Get-FileHash -LiteralPath $_.FullName).Hash } })
@@ -150,8 +163,18 @@ $outputFiles = if (Test-Path -LiteralPath $objectDirectory -PathType Container) 
     inputSha256 = (Get-FileHash -LiteralPath $inputPath).Hash
     logSha256 = (Get-FileHash -LiteralPath "$OutputDirectory\ordinary.log").Hash
     objectDirectoryCreated = Test-Path -LiteralPath $objectDirectory -PathType Container
+    preparedHeaderIncludeValidation = [ordered]@{
+        expectedResponses = $expectedResponses.Count
+        verifiedResponses = $includeValidation.Count
+        complete = !$includeValidationError -and $includeValidation.Count -eq $expectedResponses.Count
+        error = $includeValidationError
+        responseFiles = $includeValidation
+    }
     files = @($outputFiles)
 } | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath "$OutputDirectory\ordinary-result.json" -Encoding utf8NoBOM
+if ($includeValidationError) {
+    throw "Prepared SDK include validation failed after ordinary $Stage exit ${exit}: $includeValidationError. Retain all diagnostics in $OutputDirectory."
+}
 if ($exit -ne 0) {
     throw "The actual ordinary $Stage stage failed; retain $OutputDirectory\ordinary.log and all partial outputs."
 }
