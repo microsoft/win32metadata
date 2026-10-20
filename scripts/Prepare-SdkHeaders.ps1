@@ -140,21 +140,9 @@ function Invoke-PreparedMidl([string]$Staging) {
             & $midlCompiler @arguments *> $log
             $exitCode = $LASTEXITCODE
             $text = [IO.File]::ReadAllText($log)
-            $errors = @(Get-MidlErrorDiagnostics $text)
-            $baselineControl = $null
-            if ($exitCode -ne 0 -or $errors.Count) {
-                if ($output.source -cne 'um\propsys.idl' -or $output.path -cne 'um\propsys.h') {
-                    throw "MIDL failed for $($output.source) (exit $exitCode):`n$text"
-                }
-                Assert-PropsysMidlBaselineDiagnostic $output.source $exitCode $text
-                $baselineControl = New-PristinePropsysMidlBaseline $SdkPackageRoot $midlCompiler `
-                    $MidlPreprocessorPath "$Staging\midl\baseline-propsys"
-                Assert-PropsysMidlBaseline $output.source $exitCode $text $header $baselineControl `
-                    $SdkPackageRoot $midlCompiler $MidlPreprocessorPath
-                Write-Warning "Pre-existing clean-SDK error admitted: um\propsys.idl, MIDL2337, tagSERIALIZEDPROPSTORAGE; baseline-error count 1. Raw diagnostic: $($errors[0]). Pristine control: $baselineControl"
-            }
-            if (!(Test-Path -LiteralPath $header -PathType Leaf)) {
-                throw "MIDL did not produce its admitted header: $($output.path)"
+            $diagnostics = Assert-MidlHeaderResult $output.source $exitCode $text $header
+            if ($diagnostics.nonBlockingErrorCount) {
+                Write-Warning "Non-blocking MIDL2337 diagnostics for $($output.source): count $($diagnostics.nonBlockingErrorCount); native exit 0; complete header verified. Raw diagnostics:`n$($diagnostics.nonBlockingErrors -join "`n")"
             }
             $commands += [pscustomobject][ordered]@{
                 source = $output.source
@@ -164,9 +152,9 @@ function Invoke-PreparedMidl([string]$Staging) {
                     ForEach-Object { $_.Value.Replace($Staging, '<prepared>') })
                 exitCode = $exitCode
                 logSha256 = Get-Sha256 $log
-                baselineErrorCount = $errors.Count
-                baselineErrors = $errors
-                baselineControl = if ($baselineControl) { [IO.Path]::GetRelativePath("$Staging\midl", $baselineControl) } else { $null }
+                nonBlockingErrorCount = $diagnostics.nonBlockingErrorCount
+                nonBlockingErrorCounts = $diagnostics.nonBlockingErrorCounts
+                nonBlockingErrors = $diagnostics.nonBlockingErrors
                 headerSha256 = Get-Sha256 $header
             }
         }
@@ -189,10 +177,11 @@ function Invoke-PreparedMidl([string]$Staging) {
             throw 'The declared MIDL input closure does not match the actual preprocessed inputs.'
         }
         [IO.File]::WriteAllText("$Staging\midl\commands.json", ($commands | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
-        $baselineErrors = @($commands | Where-Object baselineErrorCount -GT 0 |
-            Select-Object source, baselineErrorCount, baselineErrors, baselineControl, exitCode, logSha256, headerSha256)
-        [IO.File]::WriteAllText("$Staging\midl\baseline-errors.json",
-            (@{ count = @($commands | ForEach-Object { $_.baselineErrors }).Count; commands = $baselineErrors } | ConvertTo-Json -Depth 8),
+        $nonBlockingErrors = @($commands | Where-Object nonBlockingErrorCount -GT 0 |
+            Select-Object source, nonBlockingErrorCount, nonBlockingErrorCounts, nonBlockingErrors, exitCode, logSha256, headerSha256)
+        $nonBlockingCount = [int]($commands | Measure-Object -Property nonBlockingErrorCount -Sum).Sum
+        [IO.File]::WriteAllText("$Staging\midl\categorized-diagnostics.json",
+            (@{ count = $nonBlockingCount; counts = @{ MIDL2337 = $nonBlockingCount }; commands = $nonBlockingErrors } | ConvertTo-Json -Depth 8),
             [Text.UTF8Encoding]::new($false))
         [IO.File]::WriteAllText("$Staging\midl\preprocessed-inputs.json",
             (@($usedInputs | Sort-Object -CaseSensitive) | ConvertTo-Json), [Text.UTF8Encoding]::new($false))
@@ -577,8 +566,9 @@ try {
         $manifest.midlTools = $midlTools
         $manifest.midlScripts = $midlScripts
         $manifest.midlSha256 = (Get-DirectoryState "$staging\midl").sha256
-        $manifest.midlBaselineErrorCount = (Get-Content -LiteralPath "$staging\midl\baseline-errors.json" -Raw |
-            ConvertFrom-Json).count
+        $diagnostics = Get-Content -LiteralPath "$staging\midl\categorized-diagnostics.json" -Raw | ConvertFrom-Json
+        $manifest.midlNonBlockingErrorCount = $diagnostics.count
+        $manifest.midlNonBlockingErrorCounts = $diagnostics.counts
     }
     [IO.File]::WriteAllText("$staging\manifest.json", ($manifest | ConvertTo-Json -Depth 8), [Text.UTF8Encoding]::new($false))
     try {

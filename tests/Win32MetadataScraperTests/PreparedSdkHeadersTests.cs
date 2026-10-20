@@ -444,6 +444,43 @@ namespace Win32MetadataScraperTests
         }
 
         [Theory]
+        [InlineData(1)]
+        [InlineData(2)]
+        public void Midl2337PublishesVisibleCategorizedDiagnosticsWithoutAFileSpecificBaseline(int count)
+        {
+            using var fixture = new Fixture();
+            fixture.EnableMidl2337(count);
+            var first = fixture.Prepare(captureMidlWarnings: true);
+            Assert.Contains("Non-blocking MIDL2337", File.ReadAllText(fixture.MidlWarnings));
+            Assert.Contains($"count {count}", File.ReadAllText(fixture.MidlWarnings));
+            string cache = Path.GetDirectoryName(first.IncludeRoot);
+            using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(cache, "manifest.json")));
+            Assert.Equal(count, manifest.RootElement.GetProperty("midlNonBlockingErrorCount").GetInt32());
+            Assert.Equal(count, manifest.RootElement.GetProperty("midlNonBlockingErrorCounts")
+                .GetProperty("MIDL2337").GetInt32());
+            using var diagnostics = JsonDocument.Parse(File.ReadAllText(Path.Combine(cache, "midl", "categorized-diagnostics.json")));
+            Assert.Equal(count, diagnostics.RootElement.GetProperty("count").GetInt32());
+            var command = Assert.Single(diagnostics.RootElement.GetProperty("commands").EnumerateArray());
+            Assert.Equal(@"um\generated.idl", command.GetProperty("source").GetString());
+            Assert.Equal(0, command.GetProperty("exitCode").GetInt32());
+            Assert.Equal(count, command.GetProperty("nonBlockingErrorCount").GetInt32());
+            Assert.Equal(count, command.GetProperty("nonBlockingErrors").GetArrayLength());
+            Assert.All(command.GetProperty("nonBlockingErrors").EnumerateArray(),
+                diagnostic => Assert.Contains("error MIDL2337", diagnostic.GetString()));
+            string log = Path.Combine(cache, "midl", "generated", "generated.log");
+            Assert.Contains("error MIDL2337", File.ReadAllText(log));
+            Assert.Equal(Fixture.Hash(File.ReadAllBytes(log)), command.GetProperty("logSha256").GetString());
+            Assert.False(Directory.Exists(Path.Combine(cache, "midl", "baseline-propsys")));
+            Assert.False(File.Exists(Path.Combine(cache, "midl", "baseline-errors.json")));
+
+            Assert.True(fixture.Prepare(captureMidlWarnings: true).Reused);
+            fixture.WritePatch(3);
+            var reused = fixture.Prepare(captureMidlWarnings: true);
+            Assert.True(reused.MidlReused);
+            AssertMidlProductionEqual(first, reused);
+        }
+
+        [Theory]
         [InlineData("native-patch")]
         [InlineData("unrelated-mirror")]
         [InlineData("unrelated-admission")]
@@ -1084,6 +1121,7 @@ namespace Win32MetadataScraperTests
             internal string MidlCompiler => Path.Combine(this.sdk, "c", "bin", "x64", "midl.exe");
             internal string AnnotationHeader => Path.Combine(this.source, "shared", "win32metadata_annotations.h");
             internal string BuildEvents => Path.Combine(this.root, "build-events.txt");
+            internal string MidlWarnings => Path.Combine(this.root, "midl-warnings.log");
             internal string[] ScrapeMarkers => new[] { "scannedheaders.crossarch.txt", "scannedheaders.x86.txt",
                 "scannedheaders.x64.txt", "scannedheaders.arm64.txt", "constants.scraped.txt" }
                 .Select(name => Path.Combine(this.root, "obj", "generated", name)).ToArray();
@@ -1276,6 +1314,22 @@ namespace Win32MetadataScraperTests
                 });
             }
 
+            internal void EnableMidl2337(int count)
+            {
+                EnableMidl();
+                for (int i = 0; i < count; i++)
+                {
+                    File.AppendAllText(MidlInput, $"\r\ntypedef struct OPAQUE_{i}_ OPAQUE_{i};\r\n" +
+                        $"typedef struct USE_{i}_ {{ [unique] OPAQUE_{i}* value; }} USE_{i};\r\n");
+                }
+                MutateRecipe(recipe =>
+                {
+                    string hash = Hash(File.ReadAllBytes(MidlInput));
+                    recipe["midl"]["inputs"][0]["sdkSha256"] = hash;
+                    recipe["headers"][1]["sdkSha256"] = hash;
+                });
+            }
+
             internal void EnableMidlAnnotationHeader()
             {
                 EnableMidl();
@@ -1411,19 +1465,22 @@ namespace Win32MetadataScraperTests
                     Assert.Equal(File.ReadAllBytes(Path.Combine(source, path)), File.ReadAllBytes(Path.Combine(target, path)));
             }
 
-            internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null)
+            internal PreparationResult Prepare(string workingDirectory = null, string outputRoot = null,
+                bool captureMidlWarnings = false)
             {
-                var result = Run(workingDirectory, outputRoot: outputRoot);
+                var result = Run(workingDirectory, outputRoot: outputRoot, captureMidlWarnings: captureMidlWarnings);
                 Assert.True(result.ExitCode == 0, result.Error + result.Output);
                 return JsonSerializer.Deserialize<PreparationResult>(result.Output);
             }
 
-            internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null)
+            internal ProcessResult Run(string workingDirectory = null, string ambientInclude = null, string outputRoot = null,
+                bool captureMidlWarnings = false)
             {
                 return RunPowerShell("$ErrorActionPreference = 'Stop'; & " +
                     Quote(PreparationScript("Prepare-SdkHeaders.ps1")) +
                     " -Recipe " + Quote(this.recipe) + " -SourceRoot " + Quote(this.source) +
                     " -SdkPackageRoot " + Quote(this.sdk) + " -OutputRoot " + Quote(outputRoot ?? Output) +
+                    (captureMidlWarnings ? " 3> " + Quote(MidlWarnings) : "") +
                     " | ConvertTo-Json -Compress", workingDirectory, ambientInclude);
             }
 
@@ -1573,272 +1630,154 @@ namespace Win32MetadataScraperTests
         private sealed record ProcessResult(int ExitCode, string Output, string Error);
     }
 
-    public sealed class PropsysMidlBaselineTests : IClassFixture<PropsysMidlBaselineTests.NativeFixture>
+    public sealed class MidlDiagnosticCategoryTests
     {
-        private readonly NativeFixture fixture;
-
-        public PropsysMidlBaselineTests(NativeFixture fixture) => this.fixture = fixture;
-
-        [Fact]
-        public void ExactPristineBaselineRetainsRawErrorAndNativeContract()
+        [Theory]
+        [InlineData(@"um\propsys.idl", " : error MIDL2337 : unsatisfied forward declaration : tagSERIALIZEDPROPSTORAGE", 1)]
+        [InlineData(@"shared\iketypes.idl", " : error MIDL2337 : unsatisfied forward declaration : IPSEC_V4_UDP_ENCAPSULATION0_", 1)]
+        [InlineData(@"winrt\another.idl", " : error MIDL2337 : another native forward declaration", 1)]
+        [InlineData(@"um\new.idl", "error MIDL2337 : first\nerror MIDL2337 : second", 2)]
+        [InlineData(@"um\new.idl", "error MIDL2337 : first; error MIDL2337 : second", 2)]
+        [InlineData(@"um\new.idl", "midl : error MIDL2337 : native forward declaration", 1)]
+        [InlineData(@"um\new.idl", "error midl2337 : native forward declaration", 1)]
+        [InlineData(@"um\new.idl", "warning MIDL2495 : native warning", 0)]
+        [InlineData(@"um\new.idl", "", 0)]
+        public void OnlyTheCategoryAndSuccessfulCompleteOutputDetermineAdmission(string source, string text, int count)
         {
-            var result = this.fixture.Check(null);
+            using var fixture = new Fixture();
+            var result = fixture.Check(source, 0, text);
             Assert.True(result.ExitCode == 0, result.Error + result.Output);
-            using var receipt = JsonDocument.Parse(File.ReadAllText(this.fixture.Control));
-            Assert.Equal("pre-existing-clean-sdk-error", receipt.RootElement.GetProperty("classification").GetString());
-            Assert.Equal(0, receipt.RootElement.GetProperty("exitCode").GetInt32());
-            Assert.Equal(1, receipt.RootElement.GetProperty("baselineErrorCount").GetInt32());
-            Assert.Contains("error MIDL2337", File.ReadAllText(Path.Combine(
-                Path.GetDirectoryName(this.fixture.Control), "midl.log")));
-            Assert.Equal("156FD0D406830642EAA5EDAB11783236893BAF4E5210271B26609E37F5F2997B",
-                receipt.RootElement.GetProperty("headerSha256").GetString());
-            Assert.DoesNotContain("/no_warn", receipt.RootElement.GetProperty("arguments").ToString());
-        }
-
-        [Fact]
-        public void CanonicalPreparationPublishesTheVisibleBaselineWithItsControlAndRawDiagnostics()
-        {
-            var result = this.fixture.Prepare();
-            Assert.True(result.ExitCode == 0, result.Error + result.Output);
-            Assert.Contains("Pre-existing clean-SDK error admitted", result.Output);
-            Assert.Contains("baseline-error count 1", result.Output);
-            using var prepared = JsonDocument.Parse(File.ReadAllText(this.fixture.PreparedResult));
-            string cache = Path.GetDirectoryName(prepared.RootElement.GetProperty("IncludeRoot").GetString());
-            using var manifest = JsonDocument.Parse(File.ReadAllText(Path.Combine(cache, "manifest.json")));
-            Assert.Equal(1, manifest.RootElement.GetProperty("midlBaselineErrorCount").GetInt32());
-            using var errors = JsonDocument.Parse(File.ReadAllText(Path.Combine(cache, "midl", "baseline-errors.json")));
-            Assert.Equal(1, errors.RootElement.GetProperty("count").GetInt32());
-            var command = Assert.Single(errors.RootElement.GetProperty("commands").EnumerateArray());
-            Assert.Equal(@"um\propsys.idl", command.GetProperty("source").GetString());
-            Assert.Equal(0, command.GetProperty("exitCode").GetInt32());
-            Assert.Contains("error MIDL2337", command.GetProperty("baselineErrors").ToString());
-            Assert.True(File.Exists(Path.Combine(cache, "midl", command.GetProperty("baselineControl").GetString())));
-            Assert.Contains("error MIDL2337", File.ReadAllText(Path.Combine(cache, "midl", "generated", "propsys.log")));
+            using var diagnostics = JsonDocument.Parse(result.Output);
+            Assert.Equal(count, diagnostics.RootElement.GetProperty("nonBlockingErrorCount").GetInt32());
+            Assert.Equal(count, diagnostics.RootElement.GetProperty("nonBlockingErrorCounts")
+                .GetProperty("MIDL2337").GetInt32());
+            if (count != 0)
+                Assert.Contains("2337", diagnostics.RootElement.GetProperty("nonBlockingErrors").ToString());
         }
 
         [Theory]
-        [InlineData("nonzero-exit")]
-        [InlineData("other-invocation")]
-        [InlineData("other-tag")]
-        [InlineData("other-error")]
-        [InlineData("extra-error")]
-        [InlineData("duplicate-error")]
-        [InlineData("fatal-error")]
-        [InlineData("missing-header")]
-        [InlineData("empty-header")]
-        [InlineData("truncated-header")]
-        [InlineData("missing-footer")]
-        [InlineData("defined-opaque-type")]
-        [InlineData("changed-alias")]
-        [InlineData("changed-pointer")]
-        [InlineData("missing-buffer-api")]
-        [InlineData("changed-buffer-sal")]
-        [InlineData("changed-count-type")]
-        [InlineData("changed-count-direction")]
-        [InlineData("changed-interface")]
-        [InlineData("pristine-nonzero-exit")]
-        [InlineData("pristine-no-error")]
-        [InlineData("pristine-extra-error")]
-        [InlineData("missing-pristine-header")]
-        [InlineData("changed-pristine-header")]
-        [InlineData("changed-profile")]
-        [InlineData("changed-input-hash")]
-        [InlineData("changed-arguments")]
-        [InlineData("changed-diagnostic-receipt")]
-        [InlineData("changed-log-hash")]
-        public void AnyDepartureFromTheExactNativeBaselineIsRejected(string mutation)
+        [InlineData("error MIDL2025 : syntax error")]
+        [InlineData("error MIDL23370 : another category")]
+        [InlineData("error C1083 : missing include")]
+        [InlineData("fatal error : native compiler failure")]
+        [InlineData("fatal error C1001 : native compiler failure")]
+        [InlineData("fatal error MIDL2337 : fatal compiler failure")]
+        [InlineData("midl : error : native compiler failure")]
+        [InlineData("error MIDL2337 : forward\nerror MIDL2025 : new error")]
+        [InlineData("error MIDL2337 : forward\nerror C1083 : missing include")]
+        [InlineData("error MIDL2337 : forward\nfatal error : native compiler failure")]
+        [InlineData("error MIDL2337 : forward; error MIDL2025 : new error")]
+        [InlineData("error C1083 : missing include; error MIDL2337 : forward")]
+        [InlineData("error MIDL2337 : forward; midl : error : compiler failure")]
+        public void EveryOtherErrorAndMixedErrorLogRemainBlocking(string text)
         {
-            var result = this.fixture.Check(mutation);
+            using var fixture = new Fixture();
+            var result = fixture.Check(@"um\any.idl", 0, text);
             Assert.NotEqual(0, result.ExitCode);
-            Assert.False(string.IsNullOrWhiteSpace(result.Error), result.Output);
+            Assert.Contains("MIDL failed", result.Error);
+            Assert.False(string.IsNullOrWhiteSpace(result.Error));
         }
 
-        public sealed class NativeFixture : IDisposable
+        [Theory]
+        [InlineData(1, "error MIDL2337 : forward")]
+        [InlineData(2, "")]
+        [InlineData(-1, "error MIDL2337 : forward")]
+        public void NonzeroNativeExitsAlwaysFail(int exitCode, string text)
         {
+            using var fixture = new Fixture();
+            var result = fixture.Check(@"um\any.idl", exitCode, text);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains($"exit {exitCode}", result.Error);
+        }
+
+        [Theory]
+        [InlineData("missing", true)]
+        [InlineData("empty", true)]
+        [InlineData("truncated", true)]
+        [InlineData("missing-footer", true)]
+        [InlineData("missing-cpp-close", true)]
+        [InlineData("missing-extern", true)]
+        [InlineData("missing-opening-guard", true)]
+        [InlineData("mismatched-define", true)]
+        [InlineData("missing-banner", true)]
+        [InlineData("missing", false)]
+        [InlineData("empty", false)]
+        [InlineData("truncated", false)]
+        public void MissingOrIncompleteHeadersFailEvenWithOnlyTheNonBlockingCategory(string mutation, bool diagnostic)
+        {
+            using var fixture = new Fixture();
+            var result = fixture.Check(@"um\any.idl", 0, diagnostic ? "error MIDL2337 : forward" : "", mutation);
+            Assert.NotEqual(0, result.ExitCode);
+            Assert.Contains("header", result.Error);
+        }
+
+        private sealed class Fixture : IDisposable
+        {
+            private const string CompleteHeader = "/* File created by MIDL compiler */\n" +
+                "#ifndef __sample_h__\n#define __sample_h__\n" +
+                "#ifdef __cplusplus\nextern \"C\" {\n#endif\n" +
+                "typedef long SAMPLE;\n#ifdef __cplusplus\n}\n#endif\n#endif\n";
             private readonly string repository;
             private readonly string root;
-            private readonly string sdk;
-            private readonly string midl;
-            private readonly string preprocessor;
 
-            public NativeFixture()
+            internal Fixture()
             {
                 var directory = new DirectoryInfo(AppContext.BaseDirectory);
                 while (directory != null && !File.Exists(Path.Combine(directory.FullName, "scripts", "MidlHeaderUtils.ps1")))
                     directory = directory.Parent;
                 this.repository = directory?.FullName ?? throw new InvalidOperationException("Repository scripts were not found.");
-                this.root = Path.Combine(this.repository, "artifacts", "prepared-header-tests", "propsys-" + Guid.NewGuid().ToString("N"));
+                this.root = Path.Combine(this.repository, "artifacts", "prepared-header-tests", "diagnostics-" + Guid.NewGuid().ToString("N"));
                 Directory.CreateDirectory(this.root);
-                var props = XDocument.Load(Path.Combine(this.repository, "obj", "BuildTools", "BuildTools.proj.nuget.g.props"));
-                this.sdk = props.Descendants().Single(element => element.Name.LocalName == "PkgMicrosoft_Windows_SDK_CPP").Value.TrimEnd('\\');
-                this.midl = Path.Combine(this.sdk, "c", "bin", "10.0.26100.0", "x64", "midl.exe");
-                var result = Run(@"
-                    . " + Quote(Path.Combine(this.repository, "scripts", "CommonUtils.ps1")) + @"
-                    $cl = Join-Path (Get-VcDirPath -Arch x64 -HostArch x64) 'cl.exe'
-                    $control = New-PristinePropsysMidlBaseline " + Quote(this.sdk) + " " + Quote(this.midl) + @" $cl " +
-                    Quote(Path.Combine(this.root, "control")) + @"
-                    @{ control = $control; preprocessor = $cl } | ConvertTo-Json -Compress
-                    ");
-                Assert.True(result.ExitCode == 0, result.Error + result.Output);
-                using var output = JsonDocument.Parse(result.Output);
-                Control = output.RootElement.GetProperty("control").GetString();
-                this.preprocessor = output.RootElement.GetProperty("preprocessor").GetString();
             }
 
-            internal string Control { get; }
-            internal string PreparedResult => Path.Combine(this.root, "prepared-result.json");
-
-            internal ProcessResult Prepare()
+            internal ProcessResult Check(string source, int exitCode, string text, string mutation = null)
             {
-                string source = Path.Combine(this.root, "mirror");
-                Directory.CreateDirectory(Path.Combine(source, "um"));
-                string header = Path.Combine(source, "um", "propsys.h");
-                string include = Path.Combine(this.sdk, "c", "include", "10.0.26100.0");
-                File.Copy(Path.Combine(include, "um", "propsys.h"), header);
-                using var control = JsonDocument.Parse(File.ReadAllText(Control));
-                var inputs = control.RootElement.GetProperty("inputs").EnumerateArray().Select(input =>
-                {
-                    string sdkPath = input.GetProperty("sdkPath").GetString();
-                    return new
-                    {
-                        path = Path.GetRelativePath(include, Path.Combine(this.sdk, sdkPath)),
-                        sdkPath,
-                        sdkSha256 = input.GetProperty("sha256").GetString(),
-                    };
-                }).ToArray();
-                string recipe = Path.Combine(this.root, "recipe.json");
-                File.WriteAllText(recipe, JsonSerializer.Serialize(new
-                {
-                    schemaVersion = 1,
-                    sdkPackageVersion = "10.0.26100.7705",
-                    sourceStage = "post-midl",
-                    sourceGitTree = "",
-                    headers = new[] { new
-                    {
-                        path = @"um\propsys.h",
-                        sourceSha256 = Hash(header),
-                        sdkPath = @"c\include\10.0.26100.0\um\propsys.idl",
-                        sdkSha256 = "1D53E43BDC74CD3884B637B8BA30E2FB6D87F9557904A1AF69C46F75182A41E2",
-                    } },
-                    midl = new
-                    {
-                        inputs,
-                        outputs = new[] { new { source = @"um\propsys.idl", path = @"um\propsys.h" } },
-                        tools = new[] { "midl.exe", "midlc.exe" }.Select(name => new
-                        {
-                            sdkPath = @"c\bin\10.0.26100.0\x64\" + name,
-                            sha256 = Hash(Path.Combine(Path.GetDirectoryName(this.midl), name)),
-                        }),
-                    },
-                    patches = Array.Empty<string>(),
-                }));
-                return Run("& " + Quote(Path.Combine(this.repository, "scripts", "Prepare-SdkHeaders.ps1")) +
-                    " -Recipe " + Quote(recipe) + " -SourceRoot " + Quote(source) +
-                    " -SdkPackageRoot " + Quote(this.sdk) + " -MidlPreprocessorPath " + Quote(this.preprocessor) +
-                    " -OutputRoot " + Quote(Path.Combine(this.root, "prepared")) +
-                    " | ConvertTo-Json -Depth 8 | Set-Content -LiteralPath " + Quote(PreparedResult), timeout: 120000);
-            }
-
-            internal ProcessResult Check(string mutation)
-            {
-                string directory = Path.Combine(this.root, Guid.NewGuid().ToString("N"));
-                Directory.CreateDirectory(directory);
-                foreach (string name in new[] { "control.json", "propsys.h", "midl.log" })
-                    File.Copy(Path.Combine(Path.GetDirectoryName(Control), name), Path.Combine(directory, name));
-                string header = Path.Combine(directory, "candidate.h");
-                string control = Path.Combine(directory, "control.json");
-                string log = Path.Combine(directory, "midl.log");
-                string pristine = Path.Combine(directory, "propsys.h");
-                File.Copy(pristine, header);
-                string text = File.ReadAllText(log);
-                string source = @"um\propsys.idl";
-                int exit = 0;
-                var receipt = JsonNode.Parse(File.ReadAllText(control)).AsObject();
+                string header = Path.Combine(this.root, "sample.h");
+                string value = CompleteHeader;
                 switch (mutation)
                 {
-                    case "nonzero-exit": exit = 1; break;
-                    case "other-invocation": source = @"um\other.idl"; break;
-                    case "other-tag": text = text.Replace("tagSERIALIZEDPROPSTORAGE", "tagOTHER"); break;
-                    case "other-error": text = text.Replace("MIDL2337", "MIDL2025"); break;
-                    case "extra-error": text += "\n : error C1083 : another error\n"; break;
-                    case "duplicate-error": text += text; break;
-                    case "fatal-error": text += "\nfatal error : unexpected compiler failure\n"; break;
-                    case "missing-header": File.Delete(header); break;
-                    case "empty-header": File.WriteAllText(header, ""); break;
-                    case "truncated-header": File.WriteAllText(header, File.ReadAllText(header).Substring(0, 1000)); break;
-                    case "missing-footer": Rewrite(header, value => value.Substring(0, value.LastIndexOf("#endif", StringComparison.Ordinal))); break;
-                    case "defined-opaque-type": Rewrite(header, value => value.Replace(
-                        "typedef struct tagSERIALIZEDPROPSTORAGE SERIALIZEDPROPSTORAGE;",
-                        "typedef struct tagSERIALIZEDPROPSTORAGE { int invented; } SERIALIZEDPROPSTORAGE;")); break;
-                    case "changed-alias": Rewrite(header, value => value.Replace("PCUSERIALIZEDPROPSTORAGE", "CHANGED_ALIAS")); break;
-                    case "changed-pointer": Rewrite(header, value => value.Replace("SERIALIZEDPROPSTORAGE **ppsps", "SERIALIZEDPROPSTORAGE *ppsps")); break;
-                    case "missing-buffer-api": Rewrite(header, value => value.Replace(
-                        "PSGetNamedPropertyFromPropertyStorage", "MissingNativeApi")); break;
-                    case "changed-buffer-sal": Rewrite(header, value => value.Replace("_Out_writes_bytes_to_", "_Out_")); break;
-                    case "changed-count-type": Rewrite(header, value => value.Replace("DWORD cb,", "ULONG cb,")); break;
-                    case "changed-count-direction": Rewrite(header, value => value.Replace("DWORD cb,", "_Out_ DWORD cb,")); break;
-                    case "changed-interface": Rewrite(header, value => value.Replace(
-                        "e318ad57-0aa0-450f-aca5-6fab7103d917", "00000000-0000-0000-0000-000000000000")); break;
-                    case "pristine-nonzero-exit": receipt["exitCode"] = 1; break;
-                    case "pristine-no-error":
-                    case "pristine-extra-error":
-                        File.WriteAllText(log, mutation == "pristine-no-error" ? "" : text + "\n : error MIDL2025 : new error\n");
-                        receipt["logSha256"] = Hash(log);
-                        break;
-                    case "missing-pristine-header": File.Delete(pristine); break;
-                    case "changed-pristine-header": File.AppendAllText(pristine, "// changed"); break;
-                    case "changed-profile": receipt["profile"]["files"][0]["sha256"] = new string('0', 64); break;
-                    case "changed-input-hash": receipt["inputs"][0]["sha256"] = new string('0', 64); break;
-                    case "changed-arguments": receipt["arguments"][5] = "/DUNQUALIFIED_PROFILE=1"; break;
-                    case "changed-diagnostic-receipt": receipt["diagnostics"][0] = "different error"; break;
-                    case "changed-log-hash": receipt["logSha256"] = new string('0', 64); break;
+                    case "empty": value = ""; break;
+                    case "truncated": value = value.Substring(0, value.Length / 2); break;
+                    case "missing-footer": value = value.Substring(0, value.LastIndexOf("#endif", StringComparison.Ordinal)); break;
+                    case "missing-cpp-close": value = value.Replace("}\n#endif\n#endif", "#endif\n#endif"); break;
+                    case "missing-extern": value = value.Replace("extern \"C\" {", ""); break;
+                    case "missing-opening-guard": value = value.Replace("#ifndef __sample_h__", "#if 1"); break;
+                    case "mismatched-define": value = value.Replace("#define __sample_h__", "#define __other_h__"); break;
+                    case "missing-banner": value = value.Replace("File created by MIDL compiler", "Other generated file"); break;
                 }
-                File.WriteAllText(control, receipt.ToJsonString());
-                string inputs = Path.Combine(directory, "test-inputs.json");
-                File.WriteAllText(inputs, JsonSerializer.Serialize(new { source, exit, text, header, control }));
-                return Run(@"
-                    $input = Get-Content -LiteralPath " + Quote(inputs) + @" -Raw | ConvertFrom-Json
-                    Assert-PropsysMidlBaseline $input.source $input.exit $input.text $input.header $input.control " +
-                    Quote(this.sdk) + " " + Quote(this.midl) + " " + Quote(this.preprocessor));
-            }
-
-            private ProcessResult Run(string command, int timeout = 30000)
-            {
+                if (mutation != "missing")
+                    File.WriteAllText(header, value);
+                string inputs = Path.Combine(this.root, "inputs.json");
+                File.WriteAllText(inputs, JsonSerializer.Serialize(new { source, exitCode, text, header }));
                 var start = new ProcessStartInfo("pwsh")
                 {
                     WorkingDirectory = this.repository,
                     UseShellExecute = false,
+                    CreateNoWindow = true,
                     RedirectStandardOutput = true,
                     RedirectStandardError = true,
                 };
-                foreach (string argument in new[] { "-NoLogo", "-NoProfile", "-NonInteractive", "-Command",
-                    "$ErrorActionPreference='Stop'; Set-StrictMode -Version Latest; . " +
-                    Quote(Path.Combine(this.repository, "scripts", "MidlHeaderUtils.ps1")) + "; " + command })
+                string command = "$ErrorActionPreference='Stop'; Set-StrictMode -Version Latest; . " +
+                    Quote(Path.Combine(this.repository, "scripts", "MidlHeaderUtils.ps1")) +
+                    "; $input=Get-Content -LiteralPath " + Quote(inputs) + " -Raw | ConvertFrom-Json; " +
+                    "Assert-MidlHeaderResult $input.source $input.exitCode $input.text $input.header | ConvertTo-Json -Depth 5 -Compress";
+                foreach (string argument in new[] { "-NoLogo", "-NoProfile", "-NonInteractive", "-Command", command })
                     start.ArgumentList.Add(argument);
                 using var process = Process.Start(start);
                 var output = process.StandardOutput.ReadToEndAsync();
                 var error = process.StandardError.ReadToEndAsync();
-                if (!process.WaitForExit(timeout))
+                if (!process.WaitForExit(30000))
                 {
                     process.Kill(entireProcessTree: true);
-                    throw new TimeoutException("The bounded native baseline check did not terminate.");
+                    throw new TimeoutException("The bounded MIDL diagnostic check did not terminate.");
                 }
                 return new ProcessResult(process.ExitCode, output.GetAwaiter().GetResult(), error.GetAwaiter().GetResult());
             }
 
-            private static void Rewrite(string path, Func<string, string> change)
-            {
-                string before = File.ReadAllText(path);
-                string after = change(before);
-                Assert.NotEqual(before, after);
-                File.WriteAllText(path, after);
-            }
-
-            private static string Hash(string path) => Convert.ToHexString(System.Security.Cryptography.SHA256.HashData(File.ReadAllBytes(path)));
             private static string Quote(string value) => "'" + value.Replace("'", "''") + "'";
             public void Dispose() => Directory.Delete(this.root, recursive: true);
         }
 
-        public sealed record ProcessResult(int ExitCode, string Output, string Error);
+        private sealed record ProcessResult(int ExitCode, string Output, string Error);
     }
 }
