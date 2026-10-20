@@ -1,15 +1,30 @@
 diff --git a/um/commoncontrols.idl b/um/commoncontrols.idl
-index 10787e66..0202cd36 100644
+index 10787e66..82428937 100644
 --- a/um/commoncontrols.idl
 +++ b/um/commoncontrols.idl
-@@ -1,5 +1,6 @@
+@@ -1,5 +1,7 @@
  // CommonControls.idl
  //
 +#include <sal.h>
++cpp_quote("#include <sal.h>")
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -126,6 +127,7 @@ cpp_quote("#define ILR_SCALE_ASPECTRATIO        0x0100")
+@@ -58,11 +60,11 @@ cpp_quote("#endif") // MIDL_PASS
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
+ 
+-cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI ImageList_CoCreateInstance(")
++cpp_quote("WINCOMMCTRLAPI HRESULT WINAPI _Win32_SupportedOS_WindowsVista_ ImageList_CoCreateInstance(")
+ cpp_quote("         _In_  REFCLSID rclsid,")
+ cpp_quote("     _In_opt_  const IUnknown *punkOuter,")
+ cpp_quote("         _In_  REFIID riid,")
+-cpp_quote("  _Outptr_ void **ppv);")
++cpp_quote("  _Win32_ComOutPtr_(true) _Outptr_ void **ppv);")
+ cpp_quote("#endif")
+ 
+ // flags returned by GetItemFlags
+@@ -126,6 +128,7 @@ cpp_quote("#define ILR_SCALE_ASPECTRATIO        0x0100")
  
  
  // New for (_WIN32_IE >= 0x0605)

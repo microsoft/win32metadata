@@ -1,0 +1,77 @@
+diff --git a/um/wcmconfig.idl b/um/wcmconfig.idl
+index 20d045a5..89603450 100644
+--- a/um/wcmconfig.idl
++++ b/um/wcmconfig.idl
+@@ -11,6 +11,8 @@
+ *               11/10/2004  shangwu     Split into public and private interfaces   *
+ ************************************************************************************/
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ import "oaidl.idl";
+ import "ocidl.idl";
+ import "Objidl.idl";
+@@ -133,6 +135,7 @@ typedef enum
+ //_____________________________________________________________________________
+ //
+ 
++_Win32_AnnotateInterface_(IItemEnumerator, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -178,6 +181,7 @@ cpp_quote("#define WCM_SETTINGS_ID_FLAG_REFERENCE     0x00000000")
+ cpp_quote("#define WCM_SETTINGS_ID_FLAG_DEFINITION    0x00000001")
+ 
+ 
++_Win32_AnnotateInterface_(ISettingsIdentity, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -214,6 +218,7 @@ interface ISettingsIdentity : IUnknown
+ //_____________________________________________________________________________
+ //
+ 
++_Win32_AnnotateInterface_(ITargetInfo, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -332,6 +337,7 @@ interface ITargetInfo : IUnknown
+ 
+ cpp_quote("#define LINK_STORE_TO_ENGINE_INSTANCE    0x00000001")
+ 
++_Win32_AnnotateInterface_(ISettingsEngine, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -438,6 +444,7 @@ interface ISettingsEngine : IUnknown
+ //_____________________________________________________________________________
+ //
+ 
++_Win32_AnnotateInterface_(ISettingsItem, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -573,6 +580,7 @@ interface ISettingsItem : IUnknown
+ //_____________________________________________________________________________
+ //
+ 
++_Win32_AnnotateInterface_(ISettingsNamespace, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -624,6 +632,7 @@ interface ISettingsNamespace : IUnknown
+ //_____________________________________________________________________________
+ //
+ 
++_Win32_AnnotateInterface_(ISettingsResult, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),
+@@ -660,6 +669,7 @@ interface ISettingsResult : IUnknown
+ cpp_quote("#define LIMITED_VALIDATION_MODE    0x00000001")
+ 
+ 
++_Win32_AnnotateInterface_(ISettingsContext, _Win32_SupportedOS_WindowsVista_)
+ [
+     local,
+     object, nonextensible, pointer_default(unique),

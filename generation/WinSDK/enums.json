@@ -2183,11 +2183,6 @@
     ]
   },
   {
-    "name": "TXFS_MINIVERSION",
-    "members": [],
-    "uses": []
-  },
-  {
     "namespace": "Windows.Win32.Security",
     "name": "OBJECT_SECURITY_INFORMATION",
     "flags": true,
@@ -6652,10 +6647,8 @@
     "uses": []
   },
   {
-    "name": "SECURITY_DESCRIPTOR_CONTROL",
-    "type": "ushort",
-    "flags": true,
-    "uses": []
+    "uses": [],
+    "addUsesTo": "SECURITY_DESCRIPTOR_CONTROL"
   },
   {
     "addUsesTo": "WINUSB_PIPE_POLICY",

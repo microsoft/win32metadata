@@ -1460,7 +1460,7 @@
  WINGDIAPI HFONT   WINAPI CreateFontW( _In_ int cHeight, _In_ int cWidth, _In_ int cEscapement, _In_ int cOrientation, _In_ int cWeight, _In_ DWORD bItalic,
                               _In_ DWORD bUnderline, _In_ DWORD bStrikeOut, _In_ DWORD iCharSet, _In_ DWORD iOutPrecision, _In_ DWORD iClipPrecision,
                               _In_ DWORD iQuality, _In_ DWORD iPitchAndFamily, _In_opt_ LPCWSTR pszFaceName);
-@@ -3911,44 +4681,128 @@
+@@ -3911,44 +4681,134 @@
  #define CreateFont  CreateFontA
  #endif // !UNICODE
  
@@ -1527,6 +1527,12 @@
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI BOOL WINAPI DeleteObject( _In_ HGDIOBJ ho);
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CloseMetaFile,
++    _Win32_RAIIFree_(DeleteMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CopyMetaFileA,
++    _Win32_RAIIFree_(DeleteMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CopyMetaFileW,
++    _Win32_RAIIFree_(DeleteMetaFile, -1, 0));
 +_WIN32META_ANNOTATE_METHOD_(CreateBitmap,
 +    _Win32_RAIIFree_(DeleteObject, -1, 0));
 +_WIN32META_ANNOTATE_METHOD_(CreateBitmapIndirect,
@@ -1592,7 +1598,7 @@
  WINGDIAPI int  WINAPI DescribePixelFormat(  _In_ HDC hdc,
                                              _In_ int iPixelFormat,
                                              _In_ UINT nBytes,
-@@ -3975,6 +4829,39 @@
+@@ -3975,6 +4835,39 @@
  #define DM_IN_PROMPT        DM_PROMPT
  #define DM_OUT_BUFFER       DM_COPY
  #define DM_OUT_DEFAULT      DM_UPDATE
@@ -1632,7 +1638,7 @@
  
  /* device capabilities indices */
  #define DC_FIELDS           1
-@@ -3995,11 +4882,38 @@
+@@ -3995,11 +4888,38 @@
  #define DC_PAPERNAMES       16
  #define DC_ORIENTATION      17
  #define DC_COPIES           18
@@ -1671,7 +1677,7 @@
  #define DC_MANUFACTURER         23
  #define DC_MODEL                24
  #endif /* WINVER >= 0x0400 */
-@@ -4018,9 +4932,28 @@
+@@ -4018,9 +4938,28 @@
  #define DC_PRINTRATEPPM         31
  #define DC_COLORDEVICE          32
  #define DC_NUP                  33
@@ -1700,7 +1706,7 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #endif /* WINVER >= 0x0500 */
  
-@@ -4045,23 +4978,25 @@
+@@ -4045,23 +4984,25 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1728,7 +1734,7 @@
      _Out_writes_opt_(_Inexpressible_(1)) LPWSTR          pOutput,
      _In_opt_            CONST DEVMODEW   *pDevMode
      );
-@@ -4071,15 +5006,18 @@
+@@ -4071,15 +5012,18 @@
  #define DeviceCapabilities  DeviceCapabilitiesA
  #endif // !UNICODE
  
@@ -1748,7 +1754,7 @@
  WINGDIAPI int  WINAPI EnumFontFamiliesExW( _In_ HDC hdc, _In_ LPLOGFONTW lpLogfont, _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam, _In_ DWORD dwFlags);
  #ifdef UNICODE
  #define EnumFontFamiliesEx  EnumFontFamiliesExW
-@@ -4088,14 +5026,18 @@
+@@ -4088,14 +5032,18 @@
  #endif // !UNICODE
  #endif /* WINVER >= 0x0400 */
  
@@ -1767,7 +1773,7 @@
  WINGDIAPI int  WINAPI EnumFontsW( _In_ HDC hdc, _In_opt_ LPCWSTR lpLogfont,  _In_ FONTENUMPROCW lpProc, _In_ LPARAM lParam);
  #ifdef UNICODE
  #define EnumFonts  EnumFontsW
-@@ -4110,33 +5052,49 @@
+@@ -4110,33 +5058,49 @@
  #endif
  
  
@@ -1820,7 +1826,7 @@
  WINGDIAPI
  int
  WINAPI
-@@ -4144,6 +5102,7 @@
+@@ -4144,6 +5108,7 @@
      _In_ HDC hdc
      );
  
@@ -1828,7 +1834,7 @@
  WINGDIAPI
  LONG
  WINAPI
-@@ -4153,26 +5112,35 @@
+@@ -4153,26 +5118,35 @@
      _Out_writes_bytes_(cb) LPVOID lpvBits
      );
  
@@ -1864,7 +1870,7 @@
  WINGDIAPI BOOL  APIENTRY GetCharWidthFloatW( _In_ HDC hdc, _In_ UINT iFirst, _In_ UINT iLast, _Out_writes_(iLast + 1 - iFirst) PFLOAT lpBuffer);
  #ifdef UNICODE
  #define GetCharWidthFloat  GetCharWidthFloatW
-@@ -4180,10 +5148,12 @@
+@@ -4180,10 +5154,12 @@
  #define GetCharWidthFloat  GetCharWidthFloatA
  #endif // !UNICODE
  
@@ -1877,7 +1883,7 @@
  WINGDIAPI BOOL  APIENTRY GetCharABCWidthsW( _In_ HDC hdc,
                                              _In_ UINT wFirst,
                                              _In_ UINT wLast,
-@@ -4194,22 +5164,32 @@
+@@ -4194,22 +5170,32 @@
  #define GetCharABCWidths  GetCharABCWidthsA
  #endif // !UNICODE
  
@@ -1913,7 +1919,7 @@
  _Success_(return != GDI_ERROR)
  WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
                                          _In_ DWORD   dwTable,
-@@ -4218,17 +5198,19 @@
+@@ -4218,17 +5204,19 @@
                                          _In_ DWORD   cjBuffer
                                          );
  
@@ -1935,7 +1941,7 @@
                                              _Out_ LPGLYPHMETRICS lpgm,
                                              _In_ DWORD cjBuffer,
                                              _Out_writes_bytes_opt_(cjBuffer) LPVOID pvBuffer,
-@@ -4240,8 +5222,11 @@
+@@ -4240,8 +5228,11 @@
  #define GetGlyphOutline  GetGlyphOutlineA
  #endif // !UNICODE
  
@@ -1948,7 +1954,7 @@
  WINGDIAPI UINT  WINAPI GetMetaFileBitsEx(_In_ HMETAFILE hMF, _In_ UINT cbBuffer, _Out_writes_bytes_opt_(cbBuffer) LPVOID lpData);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileA( _In_ LPCSTR lpName);
  WINGDIAPI HMETAFILE   WINAPI GetMetaFileW( _In_ LPCWSTR lpName);
-@@ -4250,16 +5235,21 @@
+@@ -4250,16 +5241,21 @@
  #else
  #define GetMetaFile  GetMetaFileA
  #endif // !UNICODE
@@ -1970,7 +1976,7 @@
  WINGDIAPI UINT APIENTRY GetOutlineTextMetricsW( _In_ HDC hdc,
                                                  _In_ UINT cjCopy,
                                                  _Out_writes_bytes_opt_(cjCopy) LPOUTLINETEXTMETRICW potm);
-@@ -4271,24 +5261,36 @@
+@@ -4271,24 +5267,36 @@
  
  #endif /* NOTEXTMETRIC */
  
@@ -2009,7 +2015,7 @@
  WINGDIAPI
  UINT
  WINAPI
-@@ -4299,11 +5301,16 @@
+@@ -4299,11 +5307,16 @@
      _Out_writes_opt_(cEntries) LPPALETTEENTRY pPalEntries
      );
  
@@ -2027,7 +2033,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4313,6 +5320,7 @@
+@@ -4313,6 +5326,7 @@
      _In_ int c,
      _Out_ LPSIZE lpsz
      );
@@ -2035,7 +2041,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4328,6 +5336,7 @@
+@@ -4328,6 +5342,7 @@
  #define GetTextExtentPoint  GetTextExtentPointA
  #endif // !UNICODE
  
@@ -2043,7 +2049,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4337,6 +5346,7 @@
+@@ -4337,6 +5352,7 @@
      _In_ int c,
      _Out_ LPSIZE psizl
      );
@@ -2051,7 +2057,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4352,6 +5362,7 @@
+@@ -4352,6 +5368,7 @@
  #define GetTextExtentPoint32  GetTextExtentPoint32A
  #endif // !UNICODE
  
@@ -2059,7 +2065,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4364,6 +5375,7 @@
+@@ -4364,6 +5381,7 @@
      _Out_writes_to_opt_ (cchString, *lpnFit) LPINT lpnDx,
      _Out_ LPSIZE lpSize
      );
@@ -2067,7 +2073,7 @@
  WINGDIAPI
  BOOL
  APIENTRY
-@@ -4383,12 +5395,19 @@
+@@ -4383,12 +5401,19 @@
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -2090,7 +2096,7 @@
  #ifdef UNICODE
  #define GetCharacterPlacement  GetCharacterPlacementW
  #else
-@@ -4428,15 +5447,20 @@
+@@ -4428,15 +5453,20 @@
  
  #define GGI_MARK_NONEXISTING_GLYPHS  0X0001
  
@@ -2111,7 +2117,7 @@
  WINGDIAPI BOOL  WINAPI GetTextExtentExPointI (  _In_ HDC hdc,
                                                  _In_reads_(cwchString) LPWORD lpwszString,
                                                  _In_ int cwchString,
-@@ -4446,6 +5470,7 @@
+@@ -4446,6 +5476,7 @@
                                                  _Out_ LPSIZE lpSize
                                                  );
  
@@ -2119,7 +2125,7 @@
  WINGDIAPI BOOL  WINAPI GetCharWidthI(   _In_ HDC hdc,
                                          _In_ UINT giFirst,
                                          _In_ UINT cgi,
-@@ -4453,6 +5478,7 @@
+@@ -4453,6 +5484,7 @@
                                          _Out_writes_(cgi) LPINT piWidths
                                          );
  
@@ -2127,7 +2133,7 @@
  WINGDIAPI BOOL  WINAPI GetCharABCWidthsI(   _In_ HDC    hdc,
                                              _In_ UINT   giFirst,
                                              _In_ UINT   cgi,
-@@ -4476,28 +5502,40 @@
+@@ -4476,28 +5508,40 @@
      LONG   dvValues[MM_MAX_NUMAXES];
  } DESIGNVECTOR, *PDESIGNVECTOR, FAR *LPDESIGNVECTOR;
  
@@ -2170,7 +2176,7 @@
  
  // The actual size of the DESIGNVECTOR and ENUMLOGFONTEXDV structures
  // is determined by dvNumAxes,
-@@ -4573,7 +5611,11 @@
+@@ -4573,7 +5617,11 @@
  typedef LPENUMLOGFONTEXDVA LPENUMLOGFONTEXDV;
  #endif // UNICODE
  
@@ -2182,7 +2188,7 @@
  WINGDIAPI HFONT  WINAPI CreateFontIndirectExW( _In_ CONST ENUMLOGFONTEXDVW *);
  #ifdef UNICODE
  #define CreateFontIndirectEx  CreateFontIndirectExW
-@@ -4611,66 +5653,107 @@
+@@ -4611,66 +5659,107 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -2297,7 +2303,7 @@
  WINGDIAPI
  LONG WINAPI
  SetBitmapBits(
-@@ -4678,39 +5761,66 @@
+@@ -4678,39 +5767,70 @@
      _In_ DWORD cb,
      _In_reads_bytes_(cb) CONST VOID *pvBits);
  
@@ -2331,6 +2337,10 @@
  
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI HMETAFILE   WINAPI SetMetaFileBitsEx(_In_ UINT cbBuffer, _In_reads_bytes_(cbBuffer) CONST BYTE *lpData);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(SetMetaFileBitsEx,
++    _Win32_RAIIFree_(DeleteMetaFile, -1, 0));
++#endif
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI UINT  WINAPI SetPaletteEntries(   _In_ HPALETTE hpal,
                                              _In_ UINT iStart,
@@ -2377,7 +2387,7 @@
  WINGDIAPI BOOL  WINAPI UpdateColors(_In_ HDC hdc);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4826,6 +5936,7 @@
+@@ -4826,6 +5946,7 @@
  
  #define AC_SRC_ALPHA                0x01
  
@@ -2385,7 +2395,7 @@
  WINGDIAPI BOOL WINAPI AlphaBlend(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4839,6 +5950,7 @@
+@@ -4839,6 +5960,7 @@
      _In_ int hSrc,
      _In_ BLENDFUNCTION ftn);
  
@@ -2393,7 +2403,7 @@
  WINGDIAPI BOOL WINAPI TransparentBlt(
      _In_ HDC hdcDest,
      _In_ int xoriginDest,
-@@ -4860,8 +5972,16 @@
+@@ -4860,8 +5982,16 @@
  #define GRADIENT_FILL_RECT_H    0x00000000
  #define GRADIENT_FILL_RECT_V    0x00000001
  #define GRADIENT_FILL_TRIANGLE  0x00000002
@@ -2410,7 +2420,7 @@
  WINGDIAPI
  BOOL
  WINAPI
-@@ -4871,7 +5991,7 @@
+@@ -4871,7 +6001,7 @@
      _In_ ULONG nVertex,
      _In_ PVOID pMesh,
      _In_ ULONG nMesh,
@@ -2419,7 +2429,7 @@
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -4885,17 +6005,20 @@
+@@ -4885,17 +6015,20 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  
  
@@ -2441,7 +2451,7 @@
  
  #endif
  
-@@ -4903,49 +6026,63 @@
+@@ -4903,49 +6036,63 @@
  
  #ifndef NOMETAFILE
  
@@ -2505,7 +2515,7 @@
  WINGDIAPI UINT  WINAPI GetEnhMetaFileDescriptionW(  _In_ HENHMETAFILE hemf,
                                                      _In_ UINT cchBuffer,
                                                      _Out_writes_opt_(cchBuffer) LPWSTR lpDescription);
-@@ -4954,34 +6091,44 @@
+@@ -4954,34 +6101,60 @@
  #else
  #define GetEnhMetaFileDescription  GetEnhMetaFileDescriptionA
  #endif // !UNICODE
@@ -2546,11 +2556,27 @@
                                                      _In_reads_bytes_(nSize) CONST BYTE *lpMeta16Data,
                                                      _In_opt_ HDC hdcRef,
                                                      _In_opt_ CONST METAFILEPICT *lpMFP);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CloseEnhMetaFile,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CopyEnhMetaFileA,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CopyEnhMetaFileW,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(GetEnhMetaFileA,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(GetEnhMetaFileW,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(SetEnhMetaFileBits,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(SetWinMetaFileBits,
++    _Win32_RAIIFree_(DeleteEnhMetaFile, -1, 0));
++#endif
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI BOOL  WINAPI GdiComment(_In_ HDC hdc, _In_ UINT nSize, _In_reads_bytes_(nSize) CONST BYTE *lpData);
  
  #endif  /* NOMETAFILE */
-@@ -5029,11 +6176,17 @@
+@@ -5029,11 +6202,17 @@
  } DIBSECTION, FAR *LPDIBSECTION, *PDIBSECTION;
  
  
@@ -2569,7 +2595,7 @@
  WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM *lpxf1, _In_ CONST XFORM *lpxf2);
  
  #define GDI_WIDTHBYTES(bits) ((DWORD)(((bits)+31) & (~31)) / 8)
-@@ -5041,10 +6194,13 @@
+@@ -5041,10 +6220,13 @@
  #define GDI__DIBSIZE(bi) (GDI_DIBWIDTHBYTES(bi) * (DWORD)(bi).biHeight)
  #define GDI_DIBSIZE(bi) ((bi).biHeight < 0 ? (-1)*(GDI__DIBSIZE(bi)) : GDI__DIBSIZE(bi))
  
@@ -2584,7 +2610,7 @@
      _When_((pbmi->bmiHeader.biBitCount != 0), _Outptr_result_bytebuffer_(_Inexpressible_(GDI_DIBSIZE((pbmi->bmiHeader)))))
      _When_((pbmi->bmiHeader.biBitCount == 0), _Outptr_result_bytebuffer_((pbmi->bmiHeader).biSizeImage))
                      VOID            **ppvBits,
-@@ -5052,11 +6208,13 @@
+@@ -5052,11 +6234,13 @@
      _In_            DWORD             offset);
  
  
@@ -2598,7 +2624,7 @@
  WINGDIAPI UINT WINAPI SetDIBColorTable( _In_ HDC  hdc,
                                          _In_ UINT iStart,
                                          _In_ UINT cEntries,
-@@ -5112,8 +6270,12 @@
+@@ -5112,8 +6296,12 @@
      SHORT  caRedGreenTint;
  } COLORADJUSTMENT, *PCOLORADJUSTMENT, FAR *LPCOLORADJUSTMENT;
  
@@ -2611,7 +2637,7 @@
  WINGDIAPI HPALETTE WINAPI CreateHalftonePalette( _In_opt_ HDC hdc);
  
  #ifdef STRICT
-@@ -5153,44 +6315,73 @@
+@@ -5153,44 +6341,73 @@
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
@@ -2688,7 +2714,7 @@
  WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
  #ifdef UNICODE
  #define GetObject  GetObjectW
-@@ -5220,22 +6411,29 @@
+@@ -5220,22 +6437,29 @@
  #endif  /* _M_CEE */
  
  
@@ -2720,7 +2746,7 @@
  WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
  #ifdef UNICODE
  #define PolyTextOut  PolyTextOutW
-@@ -5243,31 +6441,52 @@
+@@ -5243,31 +6467,52 @@
  #define PolyTextOut  PolyTextOutA
  #endif // !UNICODE
  
@@ -2774,7 +2800,7 @@
  WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
-@@ -5283,9 +6502,11 @@
+@@ -5283,9 +6528,11 @@
     int  iKernAmount;
  } KERNINGPAIR, *LPKERNINGPAIR;
  
@@ -2786,7 +2812,7 @@
  WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
-@@ -5296,12 +6517,17 @@
+@@ -5296,12 +6543,17 @@
  #endif // !UNICODE
  
  
@@ -2804,7 +2830,7 @@
  WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
  
  #if(WINVER >= 0x0400)
-@@ -5311,6 +6537,14 @@
+@@ -5311,6 +6563,14 @@
  #define ICM_QUERY             3
  #define ICM_DONE_OUTSIDEDC    4
  
@@ -2819,7 +2845,7 @@
  typedef int (CALLBACK* ICMENUMPROCA)(LPSTR, LPARAM);
  typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #ifdef UNICODE
-@@ -5319,16 +6553,21 @@
+@@ -5319,16 +6579,21 @@
  #define ICMENUMPROC  ICMENUMPROCA
  #endif // !UNICODE
  
@@ -2842,7 +2868,7 @@
  WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
-@@ -5338,18 +6577,24 @@
+@@ -5338,18 +6603,24 @@
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -2867,7 +2893,7 @@
  WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
-@@ -5359,17 +6604,24 @@
+@@ -5359,17 +6630,24 @@
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -2893,7 +2919,7 @@
  WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
-@@ -5377,9 +6629,11 @@
+@@ -5377,9 +6655,11 @@
  #define EnumICMProfiles  EnumICMProfilesA
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
@@ -2907,7 +2933,7 @@
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,6 +6648,7 @@
+@@ -5394,6 +6674,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -2915,7 +2941,7 @@
  WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hPal, _In_ DWORD deFirst, _In_ DWORD num);
  #endif
  
-@@ -5522,6 +6777,17 @@
+@@ -5522,6 +6803,17 @@
  #define EMR_GLSRECORD                  102
  #define EMR_GLSBOUNDEDRECORD           103
  #define EMR_PIXELFORMAT                104
@@ -2933,7 +2959,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0500)
-@@ -5539,29 +6805,171 @@
+@@ -5539,29 +6831,171 @@
  #define EMR_TRANSPARENTBLT             116
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define EMR_RESERVED_117               117
@@ -3106,7 +3132,7 @@
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +7165,7 @@
+@@ -5757,7 +7191,7 @@
  {
      EMR     emr;
      XFORM   xform;
@@ -3115,7 +3141,7 @@
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -6283,7 +7691,7 @@
+@@ -6283,7 +7717,7 @@
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -3124,7 +3150,7 @@
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,22 +7735,44 @@
+@@ -6327,22 +7761,44 @@
  
  // OpenGL wgl prototypes
  
@@ -3169,7 +3195,7 @@
  WINGDIAPI BOOL  WINAPI SwapBuffers(HDC);
  
  typedef struct _POINTFLOAT {
-@@ -6360,8 +7790,12 @@
+@@ -6360,8 +7816,12 @@
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -3182,7 +3208,7 @@
  WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
-@@ -6446,13 +7880,22 @@
+@@ -6446,13 +7906,22 @@
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  
@@ -3205,7 +3231,7 @@
  WINGDIAPI BOOL  WINAPI wglSwapLayerBuffers(HDC, UINT);
  
  #if (WINVER >= 0x0500)
-@@ -6490,4 +7933,3 @@
+@@ -6490,4 +7959,3 @@
  #endif
  
  #endif /* _WINGDI_ */

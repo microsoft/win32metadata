@@ -1,5 +1,5 @@
 diff --git a/um/propsys.idl b/um/propsys.idl
-index 1fe720ca..d977d54f 100644
+index 1fe720ca..525e7b19 100644
 --- a/um/propsys.idl
 +++ b/um/propsys.idl
 @@ -8,6 +8,9 @@
@@ -437,8 +437,9 @@ index 1fe720ca..d977d54f 100644
  cpp_quote("    _In_ IPropertyBag *propBag,")
  cpp_quote("    _In_ LPCWSTR propName,")
  cpp_quote("    _Out_ VARIANT *var,")
- cpp_quote("    VARTYPE type);")
+-cpp_quote("    VARTYPE type);")
 -cpp_quote("PSSTDAPI PSPropertyBag_ReadStr(")
++cpp_quote("    _Win32_AssociatedEnum_(VARENUM) VARTYPE type);")
 +cpp_quote("PSSTDAPI _Win32_SupportedOS_Windows7_ PSPropertyBag_ReadStr(")
  cpp_quote("    _In_ IPropertyBag *propBag,")
  cpp_quote("    _In_ LPCWSTR propName,")

@@ -18,18 +18,22 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
      VARIANT Value;
      enum PropertyConditionFlags Flags;
  };
-@@ -556,8 +557,11 @@
+@@ -556,9 +557,12 @@
      enum AutomationElementMode automationElementMode;
  };
  
+-HRESULT WINAPI UiaHUiaNodeFromVariant(VARIANT * pvar, HUIANODE *phnode);
+-HRESULT WINAPI UiaHPatternObjectFromVariant(VARIANT * pvar, HUIAPATTERNOBJECT *phobj);
+-HRESULT WINAPI UiaHTextRangeFromVariant(VARIANT * pvar, HUIATEXTRANGE *phtextrange);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaHUiaNodeFromVariant(VARIANT * pvar, HUIANODE *phnode);
++HRESULT WINAPI UiaHUiaNodeFromVariant(VARIANT * pvar, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE *phnode);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaHPatternObjectFromVariant(VARIANT * pvar, HUIAPATTERNOBJECT *phobj);
++HRESULT WINAPI UiaHPatternObjectFromVariant(VARIANT * pvar, _Win32_RAIIFree_(UiaPatternRelease, -1, 0) HUIAPATTERNOBJECT *phobj);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaHTextRangeFromVariant(VARIANT * pvar, HUIATEXTRANGE *phtextrange);
++HRESULT WINAPI UiaHTextRangeFromVariant(VARIANT * pvar, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE *phtextrange);
  
  // --------------------------------------------------------------------------
+ //
 @@ -605,24 +609,38 @@
      struct UiaCondition * pFindCondition;
  };
@@ -57,11 +61,13 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI UiaNodeFromPoint(double x, double y, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI UiaNodeFromFocus(struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
-+_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, HUIANODE * phnode);
-+_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, HUIANODE * phnode);
+-HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, HUIANODE * phnode);
+-HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, HUIANODE * phnode);
 -HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
++_Win32_SupportedOS_WindowsXP_
++HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE * phnode);
++_Win32_SupportedOS_WindowsXP_
++HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE * phnode);
 +_Win32_SupportedOS_WindowsXP_
 +HRESULT WINAPI UiaGetRootNode(_Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE * phnode);
  
@@ -170,8 +176,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI ExpandCollapsePattern_Collapse(HUIAPATTERNOBJECT hobj);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI ExpandCollapsePattern_Expand(HUIAPATTERNOBJECT hobj);
+-HRESULT WINAPI GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int row, int column, HUIANODE * pResult);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int row, int column, HUIANODE * pResult);
++HRESULT WINAPI GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int row, int column, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE * pResult);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI InvokePattern_Invoke(HUIAPATTERNOBJECT hobj);
 +_Win32_SupportedOS_WindowsXP_
@@ -213,17 +220,20 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI TextPattern_GetSelection(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextPattern_GetVisibleRanges(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
-+_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, HUIATEXTRANGE* pRetVal);
-+_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, HUIATEXTRANGE* pRetVal);
+-HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, HUIATEXTRANGE* pRetVal);
+-HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, HUIATEXTRANGE* pRetVal);
 -HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, HUIATEXTRANGE* pRetVal);
++_Win32_SupportedOS_WindowsXP_
++HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
++_Win32_SupportedOS_WindowsXP_
++HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
 +HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, enum SupportedTextSelection* pRetVal);
+-HRESULT WINAPI TextRange_Clone(HUIATEXTRANGE hobj, HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextRange_Clone(HUIATEXTRANGE hobj, HUIATEXTRANGE* pRetVal);
++HRESULT WINAPI TextRange_Clone(HUIATEXTRANGE hobj, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextRange_Compare(HUIATEXTRANGE hobj, HUIATEXTRANGE range, BOOL* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
@@ -232,14 +242,17 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
  HRESULT WINAPI TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, enum TextUnit unit);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextRange_GetAttributeValue(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT * pRetVal);
+-HRESULT WINAPI TextRange_FindAttribute(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT val, BOOL backward, HUIATEXTRANGE * pRetVal);
+-HRESULT WINAPI TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextRange_FindAttribute(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT val, BOOL backward, HUIATEXTRANGE * pRetVal);
++HRESULT WINAPI TextRange_FindAttribute(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT val, BOOL backward, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE * pRetVal);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, HUIATEXTRANGE* pRetVal);
++HRESULT WINAPI TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, _Win32_RAIIFree_(UiaTextRangeRelease, -1, 0) HUIATEXTRANGE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextRange_GetBoundingRectangles(HUIATEXTRANGE hobj, SAFEARRAY** pRetVal);
+-HRESULT WINAPI TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, HUIANODE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, HUIANODE* pRetVal);
++HRESULT WINAPI TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextRange_GetText(HUIATEXTRANGE hobj, int maxLength, BSTR* pRetVal);
 +_Win32_SupportedOS_WindowsXP_
@@ -259,8 +272,9 @@ diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI TextRange_GetChildren(HUIATEXTRANGE hobj, SAFEARRAY** pRetVal);
  
+-HRESULT WINAPI ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, PROPERTYID propertyId, VARIANT value, HUIANODE *pFound);
 +_Win32_SupportedOS_Windows7_
- HRESULT WINAPI ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, PROPERTYID propertyId, VARIANT value, HUIANODE *pFound);
++HRESULT WINAPI ItemContainerPattern_FindItemByProperty(HUIAPATTERNOBJECT hobj, HUIANODE hnodeStartAfter, PROPERTYID propertyId, VARIANT value, _Win32_RAIIFree_(UiaNodeRelease, -1, 0) HUIANODE *pFound);
 +_Win32_SupportedOS_Windows7_
  HRESULT WINAPI LegacyIAccessiblePattern_Select(HUIAPATTERNOBJECT hobj, long flagsSelect);
 +_Win32_SupportedOS_Windows7_

@@ -1,19 +1,19 @@
-diff --git a/um/recapis.h b/um/recapis.h
-index 3969ac6c..21c34aab 100644
 --- a/um/recapis.h
 +++ b/um/recapis.h
-@@ -70,49 +70,84 @@ typedef IID CLSID;
+@@ -70,49 +70,84 @@
  ////////////////////////
  // IRecognizer
  ////////////////////////
+-HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
++HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, _Win32_RAIIFree_Handle_(DestroyRecognizer) HRECOGNIZER *phrec);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI DestroyRecognizer(HRECOGNIZER hrec);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, RECO_ATTRS* pRecoAttrs);
+-HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
++HRESULT WINAPI CreateContext(HRECOGNIZER hrec, _Win32_RAIIFree_Handle_(DestroyContext) HRECOCONTEXT *phrc);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI DestroyContext(HRECOCONTEXT hrc);
 +_Win32_SupportedOS_WindowsXP_
@@ -42,8 +42,9 @@ index 3969ac6c..21c34aab 100644
  HRESULT WINAPI SetCACMode(HRECOCONTEXT hrc, int iMode);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI EndInkInput(HRECOCONTEXT hrc);
+-HRESULT WINAPI CloneContext(HRECOCONTEXT hrc, HRECOCONTEXT* pCloneHrc);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI CloneContext(HRECOCONTEXT hrc, HRECOCONTEXT* pCloneHrc);
++HRESULT WINAPI CloneContext(HRECOCONTEXT hrc, _Win32_RAIIFree_Handle_(DestroyContext) HRECOCONTEXT* pCloneHrc);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI ResetContext(HRECOCONTEXT hrc);
  HRESULT WINAPI Process(HRECOCONTEXT hrc, BOOL *pbPartialProcessing);
@@ -87,18 +88,20 @@ index 3969ac6c..21c34aab 100644
  HRESULT WINAPI MakeWordList(HRECOGNIZER hrec, _NullNull_terminated_ WCHAR *pBuffer, HRECOWORDLIST *phwl);
  
  #ifdef __cplusplus
-@@ -180,44 +215,70 @@ extern "C" {
+@@ -180,44 +215,70 @@
  ////////////////////////
  // IRecognizer
  ////////////////////////
+-HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, HRECOGNIZER *phrec);
++HRESULT WINAPI CreateRecognizer(CLSID *pCLSID, _Win32_RAIIFree_Handle_(DestroyRecognizer) HRECOGNIZER *phrec);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI DestroyRecognizer(HRECOGNIZER hrec);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI GetRecoAttributes(HRECOGNIZER hrec, RECO_ATTRS* pRecoAttrs);
+-HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
 +_Win32_SupportedOS_WindowsXP_
- HRESULT WINAPI CreateContext(HRECOGNIZER hrec, HRECOCONTEXT *phrc);
++HRESULT WINAPI CreateContext(HRECOGNIZER hrec, _Win32_RAIIFree_Handle_(DestroyContext) HRECOCONTEXT *phrc);
 +_Win32_SupportedOS_WindowsXP_
  HRESULT WINAPI DestroyContext(HRECOCONTEXT hrc);
 +_Win32_SupportedOS_WindowsXP_

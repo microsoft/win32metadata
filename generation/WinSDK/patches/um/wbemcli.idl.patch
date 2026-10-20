@@ -1,5 +1,5 @@
 diff --git a/um/wbemcli.idl b/um/wbemcli.idl
-index 62cdff5e..c1b7057b 100644
+index 62cdff5e..24e44af5 100644
 --- a/um/wbemcli.idl
 +++ b/um/wbemcli.idl
 @@ -2,6 +2,10 @@
@@ -59,15 +59,19 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemClassObject* pCompareTo
          );
  
-@@ -699,6 +710,7 @@ interface IWbemClassObject : IUnknown
+@@ -698,7 +709,11 @@ interface IWbemClassObject : IUnknown
+         );
  };
  
++_Win32_AnnotateParameter_(IWbemClassObject::Get, pType, _Win32_Optional_(true))
++_Win32_AnnotateParameter_(IWbemClassObject::Get, plFlavor, _Win32_Optional_(true))
  
++
 +_Win32_AnnotateInterface_(IWbemQualifierSet, _Win32_SupportedOS_WindowsVista_)
  [object, restricted, local, uuid(dc12a680-737f-11cf-884d-00aa004b2e24)]
  
  interface IWbemQualifierSet : IUnknown
-@@ -741,6 +753,7 @@ interface IWbemQualifierSet : IUnknown
+@@ -741,6 +756,7 @@ interface IWbemQualifierSet : IUnknown
  
  interface IWbemServices;
  
@@ -75,7 +79,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, local, uuid(dc12a687-737f-11cf-884d-00aa004b2e24),
      pointer_default(unique)]
  interface IWbemLocator  : IUnknown
-@@ -760,6 +773,7 @@ interface IWbemLocator  : IUnknown
+@@ -760,6 +776,7 @@ interface IWbemLocator  : IUnknown
  
  /////////////////////////////////////////////////////////////////
  
@@ -83,7 +87,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(7c857801-7381-11cf-884d-00aa004b2e24)]
  
  interface IWbemObjectSink : IUnknown
-@@ -780,6 +794,7 @@ interface IWbemObjectSink : IUnknown
+@@ -780,6 +797,7 @@ interface IWbemObjectSink : IUnknown
  
  };
  
@@ -91,7 +95,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(e7d35cfa-348b-485e-b524-252725d697ca)]
  
  interface IWbemObjectSinkEx : IWbemObjectSink
-@@ -817,6 +832,7 @@ interface IWbemObjectSinkEx : IWbemObjectSink
+@@ -817,6 +835,7 @@ interface IWbemObjectSinkEx : IWbemObjectSink
  
  };
  
@@ -99,7 +103,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(027947e1-d731-11ce-a357-000000000001)]
  
  interface IEnumWbemClassObject : IUnknown
-@@ -845,9 +861,13 @@ interface IEnumWbemClassObject : IUnknown
+@@ -845,9 +864,13 @@ interface IEnumWbemClassObject : IUnknown
          [in] ULONG nCount
          );
  };
@@ -113,7 +117,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, local, uuid(44aca674-e8fc-11d0-a07c-00c04fb68820)]
  
  interface IWbemContext : IUnknown
-@@ -891,6 +911,7 @@ interface IWbemContext : IUnknown
+@@ -891,6 +914,7 @@ interface IWbemContext : IUnknown
  };
  
  
@@ -121,7 +125,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(44aca675-e8fc-11d0-a07c-00c04fb68820)]
  
  interface IWbemCallResult : IUnknown
-@@ -921,6 +942,7 @@ interface IWbemCallResult : IUnknown
+@@ -921,6 +945,7 @@ interface IWbemCallResult : IUnknown
  
  /////////////////////////////////////////////////////////////////////////
  
@@ -129,7 +133,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(9556dc99-828c-11cf-a37e-00aa003240c7),
          pointer_default(unique)]
  
-@@ -930,7 +952,7 @@ interface IWbemServices : IUnknown
+@@ -930,7 +955,7 @@ interface IWbemServices : IUnknown
      // ========
      HRESULT OpenNamespace(
          [in]  const BSTR strNamespace,
@@ -138,7 +142,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [out, OPTIONAL] IWbemServices** ppWorkingNamespace,
          [out, OPTIONAL] IWbemCallResult** ppResult
-@@ -941,7 +963,7 @@ interface IWbemServices : IUnknown
+@@ -941,7 +966,7 @@ interface IWbemServices : IUnknown
          );
  
      HRESULT QueryObjectSink(
@@ -147,7 +151,7 @@ index 62cdff5e..c1b7057b 100644
          [out] IWbemObjectSink** ppResponseHandler
          );
  
-@@ -950,7 +972,7 @@ interface IWbemServices : IUnknown
+@@ -950,7 +975,7 @@ interface IWbemServices : IUnknown
  
      HRESULT GetObject(
          [in]  const BSTR strObjectPath,
@@ -156,7 +160,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [out, OPTIONAL] IWbemClassObject** ppObject,
          [out, OPTIONAL] IWbemCallResult** ppCallResult
-@@ -958,7 +980,7 @@ interface IWbemServices : IUnknown
+@@ -958,7 +983,7 @@ interface IWbemServices : IUnknown
  
      HRESULT GetObjectAsync(
          [in]  const BSTR strObjectPath,
@@ -165,7 +169,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [in]  IWbemObjectSink* pResponseHandler
          );
-@@ -968,42 +990,42 @@ interface IWbemServices : IUnknown
+@@ -968,42 +993,42 @@ interface IWbemServices : IUnknown
  
      HRESULT PutClass(
          [in] IWbemClassObject* pObject,
@@ -214,7 +218,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [in]  IWbemObjectSink* pResponseHandler
          );
-@@ -1013,42 +1035,42 @@ interface IWbemServices : IUnknown
+@@ -1013,42 +1038,42 @@ interface IWbemServices : IUnknown
  
      HRESULT PutInstance(
          [in] IWbemClassObject* pInst,
@@ -263,7 +267,7 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemContext* pCtx,
          [in] IWbemObjectSink* pResponseHandler
          );
-@@ -1059,7 +1081,7 @@ interface IWbemServices : IUnknown
+@@ -1059,7 +1084,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecQuery(
          [in]  const BSTR strQueryLanguage,
          [in]  const BSTR strQuery,
@@ -272,7 +276,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [out] IEnumWbemClassObject** ppEnum
          );
-@@ -1067,7 +1089,7 @@ interface IWbemServices : IUnknown
+@@ -1067,7 +1092,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecQueryAsync(
          [in] const BSTR strQueryLanguage,
          [in] const BSTR strQuery,
@@ -281,7 +285,7 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemContext* pCtx,
          [in] IWbemObjectSink* pResponseHandler
          );
-@@ -1076,7 +1098,7 @@ interface IWbemServices : IUnknown
+@@ -1076,7 +1101,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecNotificationQuery(
          [in] const BSTR strQueryLanguage,
          [in] const BSTR strQuery,
@@ -290,7 +294,7 @@ index 62cdff5e..c1b7057b 100644
          [in]  IWbemContext* pCtx,
          [out] IEnumWbemClassObject** ppEnum
          );
-@@ -1084,7 +1106,7 @@ interface IWbemServices : IUnknown
+@@ -1084,7 +1109,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecNotificationQueryAsync(
          [in] const BSTR strQueryLanguage,
          [in] const BSTR strQuery,
@@ -299,7 +303,7 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemContext* pCtx,
          [in] IWbemObjectSink* pResponseHandler
          );
-@@ -1095,7 +1117,7 @@ interface IWbemServices : IUnknown
+@@ -1095,7 +1120,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecMethod(
          [in] const BSTR strObjectPath,
          [in] const BSTR strMethodName,
@@ -308,7 +312,7 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemContext* pCtx,
          [in] IWbemClassObject* pInParams,
          [out, OPTIONAL] IWbemClassObject** ppOutParams,
-@@ -1105,7 +1127,7 @@ interface IWbemServices : IUnknown
+@@ -1105,7 +1130,7 @@ interface IWbemServices : IUnknown
      HRESULT ExecMethodAsync(
          [in] const BSTR strObjectPath,
          [in] const BSTR strMethodName,
@@ -317,7 +321,7 @@ index 62cdff5e..c1b7057b 100644
          [in] IWbemContext* pCtx,
          [in] IWbemClassObject* pInParams,
          [in] IWbemObjectSink* pResponseHandler
-@@ -1113,6 +1135,7 @@ interface IWbemServices : IUnknown
+@@ -1113,6 +1138,7 @@ interface IWbemServices : IUnknown
  };
  
  
@@ -325,7 +329,7 @@ index 62cdff5e..c1b7057b 100644
  [object, uuid(b7b31df9-d515-11d3-a11c-00105a1f515a)]
  interface IWbemShutdown : IUnknown
  {
-@@ -1151,6 +1174,7 @@ typedef [v1_enum] enum tag_WMI_OBJ_TEXT
+@@ -1151,6 +1177,7 @@ typedef [v1_enum] enum tag_WMI_OBJ_TEXT
  //
  // CoCreatable
  
@@ -333,7 +337,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, local, uuid(bfbf883a-cad7-11d3-a11b-00105a1f515a)]
  
  interface IWbemObjectTextSrc : IUnknown
-@@ -1178,6 +1202,7 @@ interface IWbemObjectTextSrc : IUnknown
+@@ -1178,6 +1205,7 @@ interface IWbemObjectTextSrc : IUnknown
  /////////////////////////////////////////////////////////////////////////
  
  
@@ -341,7 +345,7 @@ index 62cdff5e..c1b7057b 100644
  [local, restricted, object, uuid(49353c9a-516b-11d1-aea6-00c04fb68820)]
  interface IWbemObjectAccess : IWbemClassObject
  {
-@@ -1266,6 +1291,7 @@ typedef [v1_enum] enum tag_WBEM_CONNECT_OPTIONS
+@@ -1266,6 +1294,7 @@ typedef [v1_enum] enum tag_WBEM_CONNECT_OPTIONS
      WBEM_FLAG_CONNECT_PROVIDERS       = 0X100
  } WBEM_CONNECT_OPTIONS;
  
@@ -349,7 +353,7 @@ index 62cdff5e..c1b7057b 100644
  [local, object, uuid(6daf974e-2e37-11d2-aec9-00c04fb68820)]
  
  interface IMofCompiler : IUnknown
-@@ -1310,6 +1336,7 @@ interface IMofCompiler : IUnknown
+@@ -1310,6 +1339,7 @@ interface IMofCompiler : IUnknown
          // lFlags correspond to all the available command-line flags.
  };
  
@@ -357,7 +361,7 @@ index 62cdff5e..c1b7057b 100644
  [restricted, uuid(1cfaba8c-1523-11d1-ad79-00c04fd8fdff), object]
  interface IUnsecuredApartment : IUnknown
  {
-@@ -1326,6 +1353,7 @@ typedef [v1_enum] enum tag_WBEM_UNSECAPP_FLAG_TYPE
+@@ -1326,6 +1356,7 @@ typedef [v1_enum] enum tag_WBEM_UNSECAPP_FLAG_TYPE
  
  } WBEM_UNSECAPP_FLAG_TYPE;
  
@@ -365,7 +369,7 @@ index 62cdff5e..c1b7057b 100644
  [restricted, uuid(31739d04-3471-4cf4-9a7c-57a44ae71956), object]
  interface IWbemUnsecuredApartment : IUnsecuredApartment
  {
-@@ -1343,6 +1371,7 @@ typedef [v1_enum] enum tag_WBEM_INFORMATION_FLAG_TYPE
+@@ -1343,6 +1374,7 @@ typedef [v1_enum] enum tag_WBEM_INFORMATION_FLAG_TYPE
  } WBEM_INFORMATION_FLAG_TYPE;
  
  
@@ -373,7 +377,7 @@ index 62cdff5e..c1b7057b 100644
  [local, object, uuid(eb87e1bc-3233-11d2-aec9-00c04fb68820)]
  
  interface IWbemStatusCodeText : IUnknown
-@@ -1363,6 +1392,7 @@ interface IWbemStatusCodeText : IUnknown
+@@ -1363,6 +1395,7 @@ interface IWbemStatusCodeText : IUnknown
  
  };
  
@@ -381,7 +385,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(C49E32C7-BC8B-11d2-85D4-00105A1F8304)]
  interface IWbemBackupRestore : IUnknown
  {
-@@ -1377,6 +1407,7 @@ interface IWbemBackupRestore : IUnknown
+@@ -1377,6 +1410,7 @@ interface IWbemBackupRestore : IUnknown
          );
  };
  
@@ -389,7 +393,7 @@ index 62cdff5e..c1b7057b 100644
  [object, restricted, uuid(A359DEC5-E813-4834-8A2A-BA7F1D777D76)]
  interface IWbemBackupRestoreEx : IWbemBackupRestore
  {
-@@ -1385,12 +1416,14 @@ interface IWbemBackupRestoreEx : IWbemBackupRestore
+@@ -1385,12 +1419,14 @@ interface IWbemBackupRestoreEx : IWbemBackupRestore
      HRESULT Resume();
  };
  
@@ -404,7 +408,7 @@ index 62cdff5e..c1b7057b 100644
  [local, restricted, object, uuid(2705C288-79AE-11d2-B348-00105A1F8177)]
  interface IWbemHiPerfEnum : IUnknown
  {
-@@ -1421,6 +1454,7 @@ interface IWbemHiPerfEnum : IUnknown
+@@ -1421,6 +1457,7 @@ interface IWbemHiPerfEnum : IUnknown
              );
  };
  
@@ -412,7 +416,7 @@ index 62cdff5e..c1b7057b 100644
  [local, restricted, object, uuid(49353c92-516b-11d1-aea6-00c04fb68820)]
  interface IWbemConfigureRefresher : IUnknown
  {
-@@ -1460,5 +1494,6 @@ interface IWbemConfigureRefresher : IUnknown
+@@ -1460,5 +1497,6 @@ interface IWbemConfigureRefresher : IUnknown
  };
  
  

@@ -247,15 +247,17 @@
  HANDLE
  WINAPI
  FindFirstFileExW(
-@@ -300,6 +359,8 @@
+@@ -300,7 +359,9 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_RAIIFree_(FindVolumeClose) WINBASEAPI
  HANDLE
  WINAPI
+ FindFirstVolumeW(
 @@ -312,6 +373,8 @@
  #define FindFirstVolume FindFirstVolumeW
  #endif // !UNICODE

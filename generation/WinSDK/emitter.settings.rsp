@@ -40,7 +40,6 @@ EXPAND_VIRTUAL_DISK_FLAG
 GET_STORAGE_DEPENDENCY_FLAG
 HLBWIF_FLAGS
 IdentityUpdateEvent
-JOB_OBJECT_NET_RATE_CONTROL_FLAGS
 MERGE_VIRTUAL_DISK_FLAG
 MINIDUMP_TYPE
 MIRROR_VIRTUAL_DISK_FLAG
@@ -255,8 +254,6 @@ CoRegisterClassObject::dwClsContext=CLSCTX
 mouse_event::dx=int
 mouse_event::dy=int
 mouse_event::dwData=int
-IMAGE_OPTIONAL_HEADER32::LoaderFlags=[Obsolete]
-IMAGE_OPTIONAL_HEADER64::LoaderFlags=[Obsolete]
 MsiGetFeatureValidStates::lpInstallStates=INSTALLSTATE
 IWPCWebSettings::GetSettings::pdwSettings=WPCFLAG_WEB_SETTING*
 MsiDatabaseApplyTransformA::iErrorConditions=MSITRANSFORM_ERROR
@@ -367,7 +364,6 @@ ITransactionContextEx::CreateInstance::pObject=[ComOutPtr]
 ISpeechObjectToken::Object=[ComOutPtr]
 ICreateWithTipTransactionEx::CreateInstance::pObject=[ComOutPtr]
 ICreateWithTransactionEx::CreateInstance::pObject=[ComOutPtr]
-ImageList_CoCreateInstance::ppv=[ComOutPtr]
 IDXGIDecodeSwapChainPartner::PresentBuffer=[CanReturnMultipleSuccessValues]
 IDirectorySearch::AbandonSearch::phSearchResult=ADS_SEARCH_HANDLE
 IDirectorySearch::CloseSearchHandle::hSearchResult=ADS_SEARCH_HANDLE
@@ -735,7 +731,6 @@ CreateEnhMetaFileA::return=[RAIIFree("DeleteEnhMetaFile")]
 CreateEnhMetaFileW::return=[RAIIFree("DeleteEnhMetaFile")]
 CreateMetaFileA::return=[RAIIFree("DeleteMetaFile")]
 CreateMetaFileW::return=[RAIIFree("DeleteMetaFile")]
-FindFirstVolumeW::return=[RAIIFree("FindVolumeClose")]
 CLRCreateInstance::ppInterface=[Out][ComOutPtr]
 CfReleaseTransferKey::TransferKey=[-Out][In]
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
@@ -765,8 +760,6 @@ IDXGIOutput4::CheckOverlayColorSpaceSupport::pFlags=[AssociatedEnum("DXGI_OVERLA
 IDXGIOutput6::CheckHardwareCompositionSupport::pFlags=[AssociatedEnum("DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS")]
 IDXGISwapChain3::CheckColorSpaceSupport::pColorSpaceSupport=[AssociatedEnum("DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG")]
 IDXGISwapChain3::ResizeBuffers1::SwapChainFlags=[AssociatedEnum("DXGI_SWAP_CHAIN_FLAG")]
-IDXGIAdapter4::GetDesc3::pDesc=[RetVal]
-IDXGIOutput6::GetDesc1::pDesc=[RetVal]
 LPWPUCLOSEEVENT::hEvent=WSAEVENT
 LPWPUCREATEEVENT::return=WSAEVENT
 LPWPURESETEVENT::hEvent=WSAEVENT
@@ -922,7 +915,6 @@ CreateFontW::iClipPrecision=[AssociatedEnum("FONT_CLIP_PRECISION")]
 CreateFontW::iQuality=[AssociatedEnum("FONT_QUALITY")]
 ReadFileEx::lpOverlapped=[Retained]
 WriteFileEx::lpOverlapped=[Retained]
-CfOpenFileWithOplock::ProtectedHandle=[RAIIFree("CfCloseHandle")]
 ShellExecuteA::return=[DoNotRelease]
 ShellExecuteW::return=[DoNotRelease]
 AddPrinterW::return=PRINTER_HANDLE

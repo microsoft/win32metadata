@@ -1,16 +1,18 @@
 diff --git a/um/threadpoolapiset.h b/um/threadpoolapiset.h
-index 830d51fb..e96b816d 100644
+index 830d51fb..5e58190c 100644
 --- a/um/threadpoolapiset.h
 +++ b/um/threadpoolapiset.h
-@@ -42,6 +42,8 @@ VOID
+@@ -42,7 +42,9 @@ VOID
  
  #if (_WIN32_WINNT >= 0x0600)
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpool, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_POOL
+ WINAPI
 @@ -50,6 +52,7 @@ CreateThreadpool(
      _Reserved_ PVOID reserved
      );
@@ -54,15 +56,17 @@ index 830d51fb..e96b816d 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -89,6 +99,8 @@ CloseThreadpool(
+@@ -89,7 +99,9 @@ CloseThreadpool(
      _Inout_ PTP_POOL ptpp
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpoolCleanupGroup, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_CLEANUP_GROUP
+ WINAPI
 @@ -97,6 +109,7 @@ CreateThreadpoolCleanupGroup(
      VOID
      );
@@ -144,15 +148,17 @@ index 830d51fb..e96b816d 100644
  WINBASEAPI
  _Must_inspect_result_
  BOOL
-@@ -178,6 +201,8 @@ TrySubmitThreadpoolCallback(
+@@ -178,7 +201,9 @@ TrySubmitThreadpoolCallback(
      _In_opt_ PTP_CALLBACK_ENVIRON pcbe
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpoolWork, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_WORK
+ WINAPI
 @@ -188,6 +213,7 @@ CreateThreadpoolWork(
      _In_opt_ PTP_CALLBACK_ENVIRON pcbe
      );
@@ -177,15 +183,17 @@ index 830d51fb..e96b816d 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -210,6 +238,8 @@ CloseThreadpoolWork(
+@@ -210,7 +238,9 @@ CloseThreadpoolWork(
      _Inout_ PTP_WORK pwk
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpoolTimer, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_TIMER
+ WINAPI
 @@ -220,6 +250,7 @@ CreateThreadpoolTimer(
      _In_opt_ PTP_CALLBACK_ENVIRON pcbe
      );
@@ -218,15 +226,17 @@ index 830d51fb..e96b816d 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -252,6 +286,8 @@ CloseThreadpoolTimer(
+@@ -252,7 +286,9 @@ CloseThreadpoolTimer(
      _Inout_ PTP_TIMER pti
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpoolWait, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_WAIT
+ WINAPI
 @@ -262,6 +298,7 @@ CreateThreadpoolWait(
      _In_opt_ PTP_CALLBACK_ENVIRON pcbe
      );
@@ -251,15 +261,17 @@ index 830d51fb..e96b816d 100644
  WINBASEAPI
  VOID
  WINAPI
-@@ -286,6 +325,8 @@ CloseThreadpoolWait(
+@@ -286,7 +325,9 @@ CloseThreadpoolWait(
      _Inout_ PTP_WAIT pwa
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
- WINBASEAPI
++_Win32_RAIIFree_(CloseThreadpoolIo, 0) WINBASEAPI
  _Must_inspect_result_
  PTP_IO
+ WINAPI
 @@ -297,6 +338,7 @@ CreateThreadpoolIo(
      _In_opt_ PTP_CALLBACK_ENVIRON pcbe
      );
