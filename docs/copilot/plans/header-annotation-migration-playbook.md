@@ -141,6 +141,15 @@ either output without claiming to have migrated their APIs.
 | Agile | Do not migrate the old Agile fact into SDK headers; its intentional removal is not a missing annotation to restore. |
 | Removed SDK APIs | Do not restore headers or declarations missing from the selected shipped SDK. Compare same-SDK controls so SDK surface changes are not mistaken for annotation omissions. |
 
+Retiring a legacy type-wide cleanup or invalid-value field requires evidence that
+the producer annotations cover the same ownership contract and complete invalid
+set. A few annotated producers, or a passing cleanup-name binding test, do not
+establish that closure. Keep unresolved type-policy facts on the legacy path and
+count their producer drafts as partial. This does not require recreating type-wide
+cleanup annotations. Assess independent typedef aliases against their own wrapper
+projection path; cleanup binding does not prove alias transport. Continue other
+source drafting while central coverage and output review remain pending.
+
 The helper is an SDK asset. Exercise both packaged and repository-backed
 GeneratorSdk samples when changing the common bootstrap: a helper available through
 the main SDK's include paths can still be missing from another asset layout.
