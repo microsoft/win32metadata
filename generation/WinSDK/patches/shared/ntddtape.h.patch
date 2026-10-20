@@ -1,5 +1,5 @@
 diff --git a/shared/ntddtape.h b/shared/ntddtape.h
-index fb92fdeb..6eaa1b8b 100644
+index fb92fdeb..7a1995b4 100644
 --- a/shared/ntddtape.h
 +++ b/shared/ntddtape.h
 @@ -16,6 +16,18 @@ Abstract:
@@ -21,7 +21,7 @@ index fb92fdeb..6eaa1b8b 100644
  #if _MSC_VER > 1000
  #pragma once
  #endif
-@@ -102,6 +114,12 @@ extern "C" {
+@@ -102,8 +114,14 @@ extern "C" {
  #define TAPE_ERASE_SHORT            0L
  #define TAPE_ERASE_LONG             1L
  
@@ -32,9 +32,12 @@ index fb92fdeb..6eaa1b8b 100644
 +#endif
 +
  typedef struct _TAPE_ERASE {
-     ULONG Type;
+-    ULONG Type;
++    _Win32_AssociatedEnum_(ERASE_TAPE_TYPE) ULONG Type;
      BOOLEAN Immediate;
-@@ -118,6 +136,16 @@ typedef struct _TAPE_ERASE {
+ } TAPE_ERASE, *PTAPE_ERASE;
+ 
+@@ -118,8 +136,18 @@ typedef struct _TAPE_ERASE {
  #define TAPE_UNLOCK                 4L
  #define TAPE_FORMAT                 5L
  
@@ -49,9 +52,12 @@ index fb92fdeb..6eaa1b8b 100644
 +#endif
 +
  typedef struct _TAPE_PREPARE {
-     ULONG Operation;
+-    ULONG Operation;
++    _Win32_AssociatedEnum_(PREPARE_TAPE_OPERATION) ULONG Operation;
      BOOLEAN Immediate;
-@@ -132,6 +160,14 @@ typedef struct _TAPE_PREPARE {
+ } TAPE_PREPARE, *PTAPE_PREPARE;
+ 
+@@ -132,8 +160,16 @@ typedef struct _TAPE_PREPARE {
  #define TAPE_SHORT_FILEMARKS        2L
  #define TAPE_LONG_FILEMARKS         3L
  
@@ -64,9 +70,12 @@ index fb92fdeb..6eaa1b8b 100644
 +#endif
 +
  typedef struct _TAPE_WRITE_MARKS {
-     ULONG Type;
+-    ULONG Type;
++    _Win32_AssociatedEnum_(TAPEMARK_TYPE) ULONG Type;
      ULONG Count;
-@@ -144,6 +180,12 @@ typedef struct _TAPE_WRITE_MARKS {
+     BOOLEAN Immediate;
+ } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
+@@ -144,10 +180,16 @@ typedef struct _TAPE_WRITE_MARKS {
  
  #define TAPE_ABSOLUTE_POSITION       0L
  #define TAPE_LOGICAL_POSITION        1L
@@ -79,7 +88,12 @@ index fb92fdeb..6eaa1b8b 100644
  #define TAPE_PSEUDO_LOGICAL_POSITION 2L
  
  typedef struct _TAPE_GET_POSITION {
-@@ -167,6 +209,19 @@ typedef struct _TAPE_GET_POSITION {
+-    ULONG Type;
++    _Win32_AssociatedEnum_(TAPE_POSITION_TYPE) ULONG Type;
+     ULONG Partition;
+     LARGE_INTEGER Offset;
+ } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
+@@ -167,8 +209,21 @@ typedef struct _TAPE_GET_POSITION {
  #define TAPE_SPACE_SETMARKS         8L
  #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
  
@@ -97,8 +111,11 @@ index fb92fdeb..6eaa1b8b 100644
 +#endif
 +
  typedef struct _TAPE_SET_POSITION {
-     ULONG Method;
+-    ULONG Method;
++    _Win32_AssociatedEnum_(TAPE_POSITION_METHOD) ULONG Method;
      ULONG Partition;
+     LARGE_INTEGER Offset;
+     BOOLEAN Immediate;
 @@ -256,6 +311,39 @@ typedef struct _TAPE_SET_POSITION {
  #define TAPE_DRIVE_WRITE_LONG_FMKS  0x88000000
  
@@ -139,6 +156,15 @@ index fb92fdeb..6eaa1b8b 100644
  #define TAPE_DRIVE_FORMAT           0xA0000000
  #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
  #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
+@@ -270,7 +358,7 @@ typedef struct _TAPE_GET_DRIVE_PARAMETERS {
+     ULONG MinimumBlockSize;
+     ULONG MaximumPartitionCount;
+     ULONG FeaturesLow;
+-    ULONG FeaturesHigh;
++    _Win32_AssociatedEnum_(TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH) ULONG FeaturesHigh;
+     ULONG EOTWarningZoneSize;
+ } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
+ 
 @@ -314,6 +402,13 @@ typedef struct _TAPE_SET_MEDIA_PARAMETERS {
  #define TAPE_SELECT_PARTITIONS      1L
  #define TAPE_INITIATOR_PARTITIONS   2L

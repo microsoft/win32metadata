@@ -27,7 +27,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -184,6 +190,8 @@
+@@ -184,23 +190,27 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -36,7 +36,11 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -194,6 +202,8 @@
+ AddAccessAllowedAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
+     _In_ DWORD AccessMask,
      _In_ PSID pSid
      );
  
@@ -45,7 +49,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -211,6 +221,8 @@
+ AddAccessAllowedAceEx(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_ PSID pSid
+     );
+@@ -211,47 +221,55 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -54,7 +67,15 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -224,6 +236,8 @@
+ AddAccessAllowedObjectAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_opt_ GUID* ObjectTypeGuid,
+     _In_opt_ GUID* InheritedObjectTypeGuid,
      _In_ PSID pSid
      );
  
@@ -63,7 +84,11 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -234,6 +248,8 @@
+ AddAccessDeniedAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
+     _In_ DWORD AccessMask,
      _In_ PSID pSid
      );
  
@@ -72,7 +97,13 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -245,6 +261,8 @@
+ AddAccessDeniedAceEx(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
      _In_ PSID pSid
      );
  
@@ -81,7 +112,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -264,6 +282,8 @@
+ AddAccessDeniedObjectAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_opt_ GUID* ObjectTypeGuid,
+     _In_opt_ GUID* InheritedObjectTypeGuid,
+@@ -264,12 +282,14 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -90,7 +130,14 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -281,6 +301,8 @@
+ AddAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
+     _In_ DWORD dwStartingAceIndex,
+     _In_reads_bytes_(nAceListLength) LPVOID pAceList,
+     _In_ DWORD nAceListLength
+@@ -281,38 +301,44 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -99,7 +146,13 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -293,6 +315,8 @@
+ AddAuditAccessAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
+     _In_ DWORD dwAccessMask,
+     _In_ PSID pSid,
+     _In_ BOOL bAuditSuccess,
      _In_ BOOL bAuditFailure
      );
  
@@ -108,7 +161,15 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -306,6 +330,8 @@
+ AddAuditAccessAceEx(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD dwAccessMask,
+     _In_ PSID pSid,
+     _In_ BOOL bAuditSuccess,
      _In_ BOOL bAuditFailure
      );
  
@@ -117,7 +178,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -329,6 +355,8 @@
+ AddAuditAccessObjectAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_opt_ GUID* ObjectTypeGuid,
+     _In_opt_ GUID* InheritedObjectTypeGuid,
+@@ -329,13 +355,15 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -126,7 +196,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -350,6 +378,8 @@
+ AddMandatoryAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD MandatoryPolicy,
+     _In_ PSID pLabelSid
+     );
+@@ -350,26 +378,30 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -135,7 +214,15 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -363,6 +393,8 @@
+ AddResourceAttributeAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_ PSID pSid,
+     _In_ PCLAIM_SECURITY_ATTRIBUTES_INFORMATION pAttributeInfo,
      _Out_ PDWORD pReturnLength
      );
  
@@ -144,6 +231,15 @@
  WINADVAPI
  BOOL
  WINAPI
+ AddScopedPolicyIDAce(
+     _Inout_ PACL pAcl,
+-    _In_ DWORD dwAceRevision,
+-    _In_ DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_ DWORD AceFlags,
+     _In_ DWORD AccessMask,
+     _In_ PSID pSid
+     );
 @@ -382,6 +414,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -259,7 +355,13 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -589,6 +645,8 @@
+@@ -584,11 +640,13 @@
+     _Outptr_ PSECURITY_DESCRIPTOR* NewDescriptor,
+     _In_opt_ GUID* ObjectType,
+     _In_ BOOL IsContainerObject,
+-    _In_ ULONG AutoInheritFlags,
++    _Win32_AssociatedEnum_(SECURITY_AUTO_INHERIT_FLAGS) _In_ ULONG AutoInheritFlags,
+     _In_opt_ HANDLE Token,
      _In_ PGENERIC_MAPPING GenericMapping
      );
  
@@ -268,7 +370,13 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -604,6 +662,8 @@
+@@ -599,17 +657,19 @@
+     _In_reads_opt_(GuidCount) GUID** ObjectTypes,
+     _In_ ULONG GuidCount,
+     _In_ BOOL IsContainerObject,
+-    _In_ ULONG AutoInheritFlags,
++    _Win32_AssociatedEnum_(SECURITY_AUTO_INHERIT_FLAGS) _In_ ULONG AutoInheritFlags,
+     _In_opt_ HANDLE Token,
      _In_ PGENERIC_MAPPING GenericMapping
      );
  
@@ -277,6 +385,13 @@
  WINADVAPI
  BOOL
  APIENTRY
+ CreateRestrictedToken(
+     _In_ HANDLE ExistingTokenHandle,
+-    _In_ DWORD Flags,
++    _Win32_AssociatedEnum_(CREATE_RESTRICTED_TOKEN_FLAGS) _In_ DWORD Flags,
+     _In_ DWORD DisableSidCount,
+     _In_reads_opt_(DisableSidCount) PSID_AND_ATTRIBUTES SidsToDisable,
+     _In_ DWORD DeletePrivilegeCount,
 @@ -627,6 +687,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
@@ -551,7 +666,7 @@
  _Must_inspect_result_
  WINADVAPI
  BOOL
-@@ -982,6 +1098,8 @@
+@@ -982,15 +1098,19 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -560,10 +675,15 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -991,6 +1109,8 @@
-     _In_ DWORD dwAclRevision
-     );
- 
+ InitializeAcl(
+     _Out_writes_bytes_(nAclLength) PACL pAcl,
+     _In_ DWORD nAclLength,
+-    _In_ DWORD dwAclRevision
+-    );
+-
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_ DWORD dwAclRevision
++    );
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINADVAPI
@@ -698,7 +818,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1264,6 +1408,8 @@
+@@ -1264,20 +1408,23 @@
      _In_opt_ HANDLE Token
      );
  
@@ -707,7 +827,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1278,6 +1424,7 @@
+ SetPrivateObjectSecurityEx(
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_ PSECURITY_DESCRIPTOR ModificationDescriptor,
+     _Inout_ PSECURITY_DESCRIPTOR* ObjectsSecurityDescriptor,
+-    _In_ ULONG AutoInheritFlags,
++    _Win32_AssociatedEnum_(SECURITY_AUTO_INHERIT_FLAGS) _In_ ULONG AutoInheritFlags,
+     _In_ PGENERIC_MAPPING GenericMapping,
+     _In_opt_ HANDLE Token
+     );
  
  #if (_WIN32_WINNT >= 0x0600)
  

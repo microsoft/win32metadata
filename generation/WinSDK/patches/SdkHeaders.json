@@ -4011,6 +4011,60 @@
       "sourceSha256": "62A73169F77F9A8EACD955BF756744A1F1FBECB40E162340DCA08559174F8B3C",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntddtape.h",
       "sdkSha256": "62A73169F77F9A8EACD955BF756744A1F1FBECB40E162340DCA08559174F8B3C"
+    },
+    {
+      "path": "um\\dbghelp.h",
+      "sourceSha256": "55EC5FFEA6C2A099316DF485CD054C46E48FFC7B016F81158F8B5D6FED6D161C",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\dbghelp.h",
+      "sdkSha256": "55EC5FFEA6C2A099316DF485CD054C46E48FFC7B016F81158F8B5D6FED6D161C"
+    },
+    {
+      "path": "shared\\intsafe.h",
+      "sourceSha256": "E2BD9872E5402F8A802946D4859526FDFDA55C3A08F52249B0D976CB6E177A19",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\intsafe.h",
+      "sdkSha256": "E2BD9872E5402F8A802946D4859526FDFDA55C3A08F52249B0D976CB6E177A19"
+    },
+    {
+      "path": "shared\\strsafe.h",
+      "sourceSha256": "034660EB69D7B4F4ACA3D350A99F58F554297447160D44B18373F8A400427996",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\strsafe.h",
+      "sdkSha256": "034660EB69D7B4F4ACA3D350A99F58F554297447160D44B18373F8A400427996"
+    },
+    {
+      "path": "um\\baseaudioprocessingobject.h",
+      "sourceSha256": "AA31AB4FB49840EF21480C85B1A442D54CA434407BC2AC4DFCF0A198557852D5",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\baseaudioprocessingobject.h",
+      "sdkSha256": "AA31AB4FB49840EF21480C85B1A442D54CA434407BC2AC4DFCF0A198557852D5"
+    },
+    {
+      "path": "um\\gdiplusinit.h",
+      "sourceSha256": "950C01B3D4F57B849B2EFC1CBEEAC46EB90B83A8DFE46CD1AEE8ADFFB8E84863",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\gdiplusinit.h",
+      "sdkSha256": "950C01B3D4F57B849B2EFC1CBEEAC46EB90B83A8DFE46CD1AEE8ADFFB8E84863"
+    },
+    {
+      "path": "um\\gdiplusenums.h",
+      "sourceSha256": "CBC7BF08D7BBDED17A9DFB4851FF62FCAB3280EE890A8C1B372D3C097666F77D",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\gdiplusenums.h",
+      "sdkSha256": "CBC7BF08D7BBDED17A9DFB4851FF62FCAB3280EE890A8C1B372D3C097666F77D"
+    },
+    {
+      "path": "um\\vswriter.h",
+      "sourceSha256": "BA15C10621F2FC83379E95DDFD9ABD8B577F0EBE0AAD15F77214924FAA8C8127",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\vswriter.h",
+      "sdkSha256": "BA15C10621F2FC83379E95DDFD9ABD8B577F0EBE0AAD15F77214924FAA8C8127"
+    },
+    {
+      "path": "winrt\\roregistrationapi.h",
+      "sourceSha256": "2C4B016488FBD0AADE5FCC1DD412ADB640DE2165ED16A5C9DB8BD413294022B2",
+      "sdkPath": "c\\include\\10.0.26100.0\\winrt\\roregistrationapi.h",
+      "sdkSha256": "2C4B016488FBD0AADE5FCC1DD412ADB640DE2165ED16A5C9DB8BD413294022B2"
+    },
+    {
+      "path": "um\\propsys.h",
+      "sourceSha256": "0F6F1C67C37086D194F8B6B777ACB104A203E9E0195132B25E78450A502EA4A4",
+      "sdkPath": "c\\include\\10.0.26100.0\\um\\propsys.idl",
+      "sdkSha256": "1D53E43BDC74CD3884B637B8BA30E2FB6D87F9557904A1AF69C46F75182A41E2"
     }
   ],
   "midl": {
@@ -7298,6 +7352,10 @@
       {
         "source": "um\\d3dcommon.idl",
         "path": "um\\d3dcommon.h"
+      },
+      {
+        "source": "um\\propsys.idl",
+        "path": "um\\propsys.h"
       }
     ]
   },
@@ -7531,7 +7589,8 @@
     "HtmlHelp",
     "Kernel",
     "Direct3D",
-    "Direct3DDxc"
+    "Direct3DDxc",
+    "Properties"
   ],
   "patches": [
     "shared\\sal.h.patch",
@@ -8180,6 +8239,15 @@
     "um\\d3dcommon.idl.patch",
     "um\\dxcapi.h.patch",
     "um\\winsock.h.patch",
-    "shared\\ntddtape.h.patch"
+    "shared\\ntddtape.h.patch",
+    "um\\dbghelp.h.patch",
+    "shared\\intsafe.h.patch",
+    "shared\\strsafe.h.patch",
+    "um\\baseaudioprocessingobject.h.patch",
+    "um\\gdiplusinit.h.patch",
+    "um\\gdiplusenums.h.patch",
+    "um\\vswriter.h.patch",
+    "winrt\\roregistrationapi.h.patch",
+    "um\\propsys.idl.patch"
   ]
 }

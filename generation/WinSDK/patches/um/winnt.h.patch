@@ -192,11 +192,10 @@
  
  #endif // !defined(_MANAGED)
  
-@@ -10253,6 +10294,14 @@
- #define GENERIC_WRITE                    (0x40000000L)
+@@ -10254,6 +10295,14 @@
  #define GENERIC_EXECUTE                  (0x20000000L)
  #define GENERIC_ALL                      (0x10000000L)
-+
+ 
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(GENERIC_ACCESS_RIGHTS, unsigned long,
 +    GENERIC_READ,
@@ -204,9 +203,19 @@
 +    GENERIC_EXECUTE,
 +    GENERIC_ALL);
 +#endif
- 
++
  //
  //  Define the generic mapping array.  This is used to denote the
+ //  mapping of each generic access right to a specific access mask.
+@@ -10282,7 +10331,7 @@
+ 
+ typedef struct _LUID_AND_ATTRIBUTES {
+     LUID Luid;
+-    DWORD Attributes;
++    _Win32_AssociatedEnum_(TOKEN_PRIVILEGES_ATTRIBUTES) DWORD Attributes;
+     } LUID_AND_ATTRIBUTES, * PLUID_AND_ATTRIBUTES;
+ typedef LUID_AND_ATTRIBUTES LUID_AND_ATTRIBUTES_ARRAY[ANYSIZE_ARRAY];
+ typedef LUID_AND_ATTRIBUTES_ARRAY *PLUID_AND_ATTRIBUTES_ARRAY;
 @@ -11046,6 +11095,12 @@
  #define ACL_REVISION     (2)
  #define ACL_REVISION_DS  (4)
@@ -220,19 +229,82 @@
  // This is the history of ACL revisions.  Add a new one whenever
  // ACL_REVISION is updated
  
-@@ -11419,6 +11474,12 @@
+@@ -11306,7 +11361,7 @@
+ typedef struct _ACCESS_ALLOWED_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11315,7 +11370,7 @@
+ typedef struct _ACCESS_DENIED_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11324,7 +11379,7 @@
+ typedef struct _SYSTEM_AUDIT_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11375,7 +11430,7 @@
+ typedef struct _ACCESS_ALLOWED_CALLBACK_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11385,7 +11440,7 @@
+ typedef struct _ACCESS_DENIED_CALLBACK_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11395,7 +11450,7 @@
+ typedef struct _SYSTEM_AUDIT_CALLBACK_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11405,7 +11460,7 @@
+ typedef struct _SYSTEM_ALARM_CALLBACK_OBJECT_ACE {
+     ACE_HEADER Header;
+     ACCESS_MASK Mask;
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS) DWORD Flags;
+     GUID ObjectType;
+     GUID InheritedObjectType;
+     DWORD SidStart;
+@@ -11418,6 +11473,12 @@
+ 
  #define ACE_OBJECT_TYPE_PRESENT           0x1
  #define ACE_INHERITED_OBJECT_TYPE_PRESENT 0x2
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(SYSTEM_AUDIT_OBJECT_ACE_FLAGS, unsigned int,
 +    ACE_OBJECT_TYPE_PRESENT,
 +    ACE_INHERITED_OBJECT_TYPE_PRESENT);
 +#endif
-+
+ 
  
  //
- //  The following declarations are used for setting and querying information
 @@ -11696,6 +11757,14 @@
  #define SE_PRIVILEGE_ENABLED            (0x00000002L)
  #define SE_PRIVILEGE_REMOVED            (0X00000004L)
@@ -248,7 +320,7 @@
  
  #define SE_PRIVILEGE_VALID_ATTRIBUTES   (SE_PRIVILEGE_ENABLED_BY_DEFAULT | \
                                           SE_PRIVILEGE_ENABLED            | \
-@@ -12202,6 +12271,14 @@
+@@ -12202,12 +12271,20 @@
  #define TOKEN_MANDATORY_POLICY_VALID_MASK      (TOKEN_MANDATORY_POLICY_NO_WRITE_UP | \
                                                  TOKEN_MANDATORY_POLICY_NEW_PROCESS_MIN)
  
@@ -263,6 +335,13 @@
  #ifndef MIDL_PASS
  #define TOKEN_INTEGRITY_LEVEL_MAX_SIZE ((((DWORD)(sizeof(TOKEN_MANDATORY_LABEL)) + sizeof(PVOID) - 1) & ~(sizeof(PVOID)-1)) + SECURITY_MAX_SID_SIZE)
  #endif
+ 
+ typedef struct _TOKEN_MANDATORY_POLICY {
+-    DWORD Policy;
++    _Win32_AssociatedEnum_(TOKEN_MANDATORY_POLICY_ID) DWORD Policy;
+ } TOKEN_MANDATORY_POLICY, *PTOKEN_MANDATORY_POLICY;
+ 
+ typedef PVOID PSECURITY_ATTRIBUTES_OPAQUE;
 @@ -12365,6 +12442,17 @@
  
  #define CLAIM_SECURITY_ATTRIBUTE_TYPE_OCTET_STRING  0x10
@@ -298,6 +377,33 @@
  
  
  #define CLAIM_SECURITY_ATTRIBUTE_VALID_FLAGS   (    \
+@@ -12442,7 +12540,7 @@
+     //  Data type of attribute.
+     //
+ 
+-    WORD    ValueType;
++    _Win32_AssociatedEnum_(CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE) WORD    ValueType;
+ 
+     //
+     //  Pass 0 in a set operation and check for 0 in
+@@ -12494,7 +12592,7 @@
+     //  Data type of attribute.
+     //
+ 
+-    WORD    ValueType;
++    _Win32_AssociatedEnum_(CLAIM_SECURITY_ATTRIBUTE_VALUE_TYPE) WORD    ValueType;
+ 
+     //
+     //  Pass 0 in a set operation and check for 0 in
+@@ -12507,7 +12605,7 @@
+     // Attribute Flags
+     //
+ 
+-    DWORD   Flags;
++    _Win32_AssociatedEnum_(CLAIM_SECURITY_ATTRIBUTE_FLAGS) DWORD   Flags;
+ 
+     //
+     //  Number of values.
 @@ -12607,6 +12705,14 @@
  #define SANDBOX_INERT           0x2 
  #define LUA_TOKEN               0x4 
@@ -328,6 +434,24 @@
  #define QUOTA_LIMITS_USE_DEFAULT_LIMITS 0x00000010
  
  typedef union _RATE_QUOTA_LIMIT {
+@@ -13388,7 +13502,7 @@
+ } JOBOBJECT_SECURITY_LIMIT_INFORMATION, *PJOBOBJECT_SECURITY_LIMIT_INFORMATION ;
+ 
+ typedef struct _JOBOBJECT_END_OF_JOB_TIME_INFORMATION {
+-    DWORD EndOfJobTimeAction;
++    _Win32_AssociatedEnum_(JOB_OBJECT_TERMINATE_AT_END_ACTION) DWORD EndOfJobTimeAction;
+ } JOBOBJECT_END_OF_JOB_TIME_INFORMATION, *PJOBOBJECT_END_OF_JOB_TIME_INFORMATION;
+ 
+ typedef struct _JOBOBJECT_ASSOCIATE_COMPLETION_PORT {
+@@ -13515,7 +13629,7 @@
+ //
+ 
+ typedef struct _JOBOBJECT_CPU_RATE_CONTROL_INFORMATION {
+-    DWORD ControlFlags;
++    _Win32_AssociatedEnum_(JOB_OBJECT_CPU_RATE_CONTROL) DWORD ControlFlags;
+     union {
+         DWORD CpuRate;
+         DWORD Weight;
 @@ -13662,6 +13776,12 @@
  #define JOB_OBJECT_TERMINATE_AT_END_OF_JOB  0
  #define JOB_OBJECT_POST_AT_END_OF_JOB       1
@@ -458,6 +582,33 @@
  //
  
  //
+@@ -14877,7 +15100,7 @@
+     SIZE_T RegionSize;
+     DWORD State;
+     DWORD Protect;
+-    DWORD Type;
++    _Win32_AssociatedEnum_(PAGE_TYPE) DWORD Type;
+ } MEMORY_BASIC_INFORMATION, *PMEMORY_BASIC_INFORMATION;
+ 
+ // end_ntifs
+@@ -14889,7 +15112,7 @@
+     DWORD RegionSize;
+     DWORD State;
+     DWORD Protect;
+-    DWORD Type;
++    _Win32_AssociatedEnum_(PAGE_TYPE) DWORD Type;
+ } MEMORY_BASIC_INFORMATION32, *PMEMORY_BASIC_INFORMATION32;
+ 
+ typedef struct DECLSPEC_ALIGN(16) _MEMORY_BASIC_INFORMATION64 {
+@@ -14900,7 +15123,7 @@
+     ULONGLONG RegionSize;
+     DWORD     State;
+     DWORD     Protect;
+-    DWORD     Type;
++    _Win32_AssociatedEnum_(PAGE_TYPE) DWORD     Type;
+     DWORD     __alignment2;
+ } MEMORY_BASIC_INFORMATION64, *PMEMORY_BASIC_INFORMATION64;
+ 
 @@ -14959,6 +15182,17 @@
                              SECTION_MAP_READ |       \
                              SECTION_MAP_EXECUTE |    \
@@ -523,6 +674,24 @@
  #define MAILSLOT_NO_MESSAGE             ((DWORD)-1) 
  #define MAILSLOT_WAIT_FOREVER           ((DWORD)-1) 
  #define FILE_CASE_SENSITIVE_SEARCH          0x00000001  
+@@ -15388,7 +15650,7 @@
+ 
+ typedef struct _FILE_NOTIFY_INFORMATION {
+     DWORD NextEntryOffset;
+-    DWORD Action;
++    _Win32_AssociatedEnum_(FILE_ACTION) DWORD Action;
+     DWORD FileNameLength;
+     WCHAR FileName[1];
+ } FILE_NOTIFY_INFORMATION, *PFILE_NOTIFY_INFORMATION;
+@@ -15396,7 +15658,7 @@
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_RS3)
+ typedef struct _FILE_NOTIFY_EXTENDED_INFORMATION {
+     DWORD NextEntryOffset;
+-    DWORD Action;
++    _Win32_AssociatedEnum_(FILE_ACTION) DWORD Action;
+     LARGE_INTEGER CreationTime;
+     LARGE_INTEGER LastModificationTime;
+     LARGE_INTEGER LastChangeTime;
 @@ -16372,6 +16634,12 @@
  #define DUPLICATE_CLOSE_SOURCE      0x00000001  
  #define DUPLICATE_SAME_ACCESS       0x00000002  
@@ -598,6 +767,15 @@
  #define POWER_PLATFORM_ROLE_V2_MAX (PlatformRoleSlate + 1)
  
  #if (NTDDI_VERSION >= NTDDI_WIN8)
+@@ -19269,7 +19571,7 @@
+ typedef struct {
+     POWER_ACTION    Action;
+     DWORD           Flags;
+-    DWORD           EventCode;
++    _Win32_AssociatedEnum_(POWER_ACTION_POLICY_EVENT_CODE) DWORD           EventCode;
+ } POWER_ACTION_POLICY, *PPOWER_ACTION_POLICY;
+ 
+ // POWER_ACTION_POLICY->Flags:
 @@ -19296,6 +19598,16 @@
  #define POWER_USER_NOTIFY_SHUTDOWN        0x00000010 // Application and Services are intimated of shutdown.
  #define POWER_USER_NOTIFY_FORCED_SHUTDOWN 0x00000020 // Immediate shutdown - Application and Services are not intimated.
@@ -615,10 +793,20 @@
  
  // Note: for battery alarm EventCodes, the ID of the battery alarm << 16 is ORed
  // into the flags.  For example: DISCHARGE_POLICY_LOW << 16
-@@ -19801,6 +20113,25 @@
+@@ -19780,7 +20092,7 @@
+     DWORD   PointerToSymbolTable;
+     DWORD   NumberOfSymbols;
+     WORD    SizeOfOptionalHeader;
+-    WORD    Characteristics;
++    _Win32_AssociatedEnum_(IMAGE_FILE_CHARACTERISTICS) WORD    Characteristics;
+ } IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;
+ 
+ #define IMAGE_SIZEOF_FILE_HEADER             20
+@@ -19800,6 +20112,25 @@
+ #define IMAGE_FILE_DLL                       0x2000  // File is a DLL.
  #define IMAGE_FILE_UP_SYSTEM_ONLY            0x4000  // File should only be run on a UP machine
  #define IMAGE_FILE_BYTES_REVERSED_HI         0x8000  // Bytes of machine word are reversed.
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(IMAGE_FILE_CHARACTERISTICS, unsigned short,
 +    IMAGE_FILE_RELOCS_STRIPPED,
@@ -637,10 +825,9 @@
 +    IMAGE_FILE_UP_SYSTEM_ONLY,
 +    IMAGE_FILE_BYTES_REVERSED_HI);
 +#endif
-+
+ 
  #define IMAGE_FILE_MACHINE_UNKNOWN           0
  #define IMAGE_FILE_MACHINE_TARGET_HOST       0x0001  // Useful for indicating we want to interact with the host and not a WoW guest.
- #define IMAGE_FILE_MACHINE_I386              0x014c  // Intel 386.
 @@ -19850,6 +20181,14 @@
  // Optional header format.
  //
@@ -800,6 +987,15 @@
  
  #ifndef _MAC
  #include "pshpack2.h"                       // Symbols, relocs, and linenumbers are 2 byte packed
+@@ -21901,7 +22325,7 @@
+     DWORD   TimeDateStamp;
+     WORD    MajorVersion;
+     WORD    MinorVersion;
+-    DWORD   Type;
++    _Win32_AssociatedEnum_(IMAGE_DEBUG_TYPE) DWORD   Type;
+     DWORD   SizeOfData;
+     DWORD   AddressOfRawData;
+     DWORD   PointerToRawData;
 @@ -21917,6 +22341,18 @@
  #define IMAGE_DEBUG_TYPE_OMAP_TO_SRC            7
  #define IMAGE_DEBUG_TYPE_OMAP_FROM_SRC          8
@@ -1069,15 +1265,18 @@
  //
  // RtlVerifyVersionInfo() os product type values
  //
-@@ -23620,7 +24119,7 @@
+@@ -23620,9 +24119,9 @@
  NTSYSAPI
  ULONGLONG
  NTAPI
 -VerSetConditionMask(
 +_Win32_SupportedOS_Windows2000_ VerSetConditionMask(
      _In_ ULONGLONG ConditionMask,
-     _In_ DWORD TypeMask,
+-    _In_ DWORD TypeMask,
++    _Win32_AssociatedEnum_(VER_FLAGS) _In_ DWORD TypeMask,
      _In_ BYTE  Condition
+     );
+ 
 @@ -24443,6 +24942,18 @@
  #define WT_EXECUTEINPERSISTENTIOTHREAD  0x00000040                   
  #define WT_EXECUTEINPERSISTENTTHREAD 0x00000080                      
@@ -1127,7 +1326,7 @@
  
  #define DEVICEFAMILYDEVICEFORM_UNKNOWN                  0x00000000
  #define DEVICEFAMILYDEVICEFORM_PHONE                    0x00000001
-@@ -24735,6 +25269,59 @@
+@@ -24735,12 +25269,65 @@
  
  #define DEVICEFAMILYDEVICEFORM_MAX                      0x0000002F
  
@@ -1187,6 +1386,14 @@
  VOID
  NTAPI
  RtlGetDeviceFamilyInfoEnum(
+     _Out_opt_ ULONGLONG *pullUAPInfo,
+-    _Out_opt_ DWORD *pulDeviceFamily,
+-    _Out_opt_ DWORD *pulDeviceForm
++    _Out_opt_ _Win32_AssociatedEnum_(DEVICEFAMILYINFOENUM) DWORD *pulDeviceFamily,
++    _Out_opt_ _Win32_AssociatedEnum_(DEVICEFAMILYDEVICEFORM) DWORD *pulDeviceForm
+ );
+ 
+ DWORD   
 @@ -24780,6 +25367,14 @@
  #define EVENTLOG_FORWARDS_READ          0x0004
  #define EVENTLOG_BACKWARDS_READ         0x0008
@@ -1219,6 +1426,15 @@
  
  //
  // Defines for the WRITE flags used by Auditing for paired events
+@@ -24816,7 +25421,7 @@
+     DWORD  TimeGenerated; // Seconds since 1-1-1970
+     DWORD  TimeWritten;   // Seconds since 1-1-1970
+     DWORD  EventID;
+-    WORD   EventType;
++    _Win32_AssociatedEnum_(REPORT_EVENT_TYPE) WORD   EventType;
+     WORD   NumStrings;
+     WORD   EventCategory;
+     WORD   ReservedFlags;
 @@ -24980,6 +25585,13 @@
  #define REG_LATEST_FORMAT       2
  #define REG_NO_COMPRESSION      4
@@ -1314,7 +1530,7 @@
  
  //
  //
-@@ -25204,6 +25862,12 @@
+@@ -25204,8 +25862,14 @@
  #define TAPE_ERASE_SHORT            0L
  #define TAPE_ERASE_LONG             1L
  
@@ -1325,9 +1541,12 @@
 +#endif
 +
  typedef struct _TAPE_ERASE {
-     DWORD Type;
+-    DWORD Type;
++    _Win32_AssociatedEnum_(ERASE_TAPE_TYPE) DWORD Type;
      BOOLEAN Immediate;
-@@ -25220,6 +25884,16 @@
+ } TAPE_ERASE, *PTAPE_ERASE;
+ 
+@@ -25220,8 +25884,18 @@
  #define TAPE_UNLOCK                 4L
  #define TAPE_FORMAT                 5L
  
@@ -1342,13 +1561,15 @@
 +#endif
 +
  typedef struct _TAPE_PREPARE {
-     DWORD Operation;
+-    DWORD Operation;
++    _Win32_AssociatedEnum_(PREPARE_TAPE_OPERATION) DWORD Operation;
      BOOLEAN Immediate;
-@@ -25233,6 +25907,14 @@
- #define TAPE_FILEMARKS              1L
+ } TAPE_PREPARE, *PTAPE_PREPARE;
+ 
+@@ -25234,8 +25908,16 @@
  #define TAPE_SHORT_FILEMARKS        2L
  #define TAPE_LONG_FILEMARKS         3L
-+
+ 
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_Enum_(TAPEMARK_TYPE, unsigned int,
 +    TAPE_FILEMARKS,
@@ -1356,10 +1577,14 @@
 +    TAPE_SETMARKS,
 +    TAPE_SHORT_FILEMARKS);
 +#endif
- 
++
  typedef struct _TAPE_WRITE_MARKS {
-     DWORD Type;
-@@ -25246,6 +25928,12 @@
+-    DWORD Type;
++    _Win32_AssociatedEnum_(TAPEMARK_TYPE) DWORD Type;
+     DWORD Count;
+     BOOLEAN Immediate;
+ } TAPE_WRITE_MARKS, *PTAPE_WRITE_MARKS;
+@@ -25246,10 +25928,16 @@
  
  #define TAPE_ABSOLUTE_POSITION       0L
  #define TAPE_LOGICAL_POSITION        1L
@@ -1372,7 +1597,12 @@
  #define TAPE_PSEUDO_LOGICAL_POSITION 2L
  
  typedef struct _TAPE_GET_POSITION {
-@@ -25269,6 +25957,19 @@
+-    DWORD Type;
++    _Win32_AssociatedEnum_(TAPE_POSITION_TYPE) DWORD Type;
+     DWORD Partition;
+     LARGE_INTEGER Offset;
+ } TAPE_GET_POSITION, *PTAPE_GET_POSITION;
+@@ -25269,8 +25957,21 @@
  #define TAPE_SPACE_SETMARKS         8L
  #define TAPE_SPACE_SEQUENTIAL_SMKS  9L
  
@@ -1390,8 +1620,11 @@
 +#endif
 +
  typedef struct _TAPE_SET_POSITION {
-     DWORD Method;
+-    DWORD Method;
++    _Win32_AssociatedEnum_(TAPE_POSITION_METHOD) DWORD Method;
      DWORD Partition;
+     LARGE_INTEGER Offset;
+     BOOLEAN Immediate;
 @@ -25358,6 +26059,39 @@
  #define TAPE_DRIVE_WRITE_LONG_FMKS  0x88000000
  
@@ -1432,6 +1665,15 @@
  #define TAPE_DRIVE_FORMAT           0xA0000000
  #define TAPE_DRIVE_FORMAT_IMMEDIATE 0xC0000000
  #define TAPE_DRIVE_HIGH_FEATURES    0x80000000  //mask for high features flag
+@@ -25372,7 +26106,7 @@
+     DWORD MinimumBlockSize;
+     DWORD MaximumPartitionCount;
+     DWORD FeaturesLow;
+-    DWORD FeaturesHigh;
++    _Win32_AssociatedEnum_(TAPE_GET_DRIVE_PARAMETERS_FEATURES_HIGH) DWORD FeaturesHigh;
+     DWORD EOTWarningZoneSize;
+ } TAPE_GET_DRIVE_PARAMETERS, *PTAPE_GET_DRIVE_PARAMETERS;
+ 
 @@ -25415,6 +26149,13 @@
  #define TAPE_FIXED_PARTITIONS       0L
  #define TAPE_SELECT_PARTITIONS      1L

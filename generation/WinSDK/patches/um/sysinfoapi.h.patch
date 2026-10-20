@@ -1,5 +1,5 @@
 diff --git a/um/sysinfoapi.h b/um/sysinfoapi.h
-index f53062ca..49e1c086 100644
+index f53062ca..35e32574 100644
 --- a/um/sysinfoapi.h
 +++ b/um/sysinfoapi.h
 @@ -13,6 +13,11 @@
@@ -273,7 +273,16 @@ index f53062ca..49e1c086 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -514,6 +573,8 @@ GetOsSafeBootMode(
+@@ -473,7 +532,7 @@ GetProductInfo(
+     _In_ DWORD dwOSMinorVersion,
+     _In_ DWORD dwSpMajorVersion,
+     _In_ DWORD dwSpMinorVersion,
+-    _Out_ PDWORD pdwReturnedProductType
++    _Win32_AssociatedEnum_(OS_PRODUCT_TYPE) _Out_ PDWORD pdwReturnedProductType
+     );
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_VISTA)
+@@ -514,20 +573,24 @@ GetOsSafeBootMode(
  #pragma region OneCore Family or App Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP)
  
@@ -282,7 +291,10 @@ index f53062ca..49e1c086 100644
  WINBASEAPI
  UINT
  WINAPI
-@@ -523,6 +584,8 @@ EnumSystemFirmwareTables(
+ EnumSystemFirmwareTables(
+-    _In_ DWORD FirmwareTableProviderSignature,
++    _Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) _In_ DWORD FirmwareTableProviderSignature,
+     _Out_writes_bytes_to_opt_(BufferSize,return) PVOID pFirmwareTableEnumBuffer,
      _In_ DWORD BufferSize
      );
  
@@ -291,6 +303,12 @@ index f53062ca..49e1c086 100644
  WINBASEAPI
  UINT
  WINAPI
+ GetSystemFirmwareTable(
+-    _In_ DWORD FirmwareTableProviderSignature,
++    _Win32_AssociatedEnum_(FIRMWARE_TABLE_PROVIDER) _In_ DWORD FirmwareTableProviderSignature,
+     _In_ DWORD FirmwareTableID,
+     _Out_writes_bytes_to_opt_(BufferSize,return) PVOID pFirmwareTableBuffer,
+     _In_ DWORD BufferSize
 @@ -549,6 +612,8 @@ DnsHostnameToComputerNameExW(
      _Inout_ LPDWORD nSize
      );

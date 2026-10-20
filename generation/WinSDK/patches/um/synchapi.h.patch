@@ -256,15 +256,17 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -346,6 +388,8 @@
+@@ -346,7 +388,9 @@
      _In_ HANDLE hMutex
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
+ WaitForSingleObject(
 @@ -354,6 +398,7 @@
      _In_ DWORD dwMilliseconds
      );
@@ -273,24 +275,28 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -362,6 +407,8 @@
+@@ -362,7 +407,9 @@
      _In_ BOOL bAlertable
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
-@@ -371,6 +418,8 @@
+ WaitForSingleObjectEx(
+@@ -371,7 +418,9 @@
      _In_ BOOL bAlertable
      );
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
+ WaitForMultipleObjectsEx(
 @@ -389,6 +438,8 @@
  #define MUTEX_MODIFY_STATE  MUTANT_QUERY_STATE
  #define MUTEX_ALL_ACCESS    MUTANT_ALL_ACCESS
@@ -309,7 +315,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -415,6 +468,8 @@
+@@ -415,12 +468,14 @@
  #define CreateMutex  CreateMutexA
  #endif // !UNICODE
  
@@ -318,6 +324,13 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
+ WINAPI
+ OpenMutexW(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(SYNCHRONIZATION_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
+     _In_ LPCWSTR lpName
+     );
 @@ -429,6 +484,8 @@
  #define OpenMutex  OpenMutexW
  #endif
@@ -336,7 +349,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -457,6 +516,8 @@
+@@ -457,22 +516,26 @@
  #define CreateEvent  CreateEventA
  #endif // !UNICODE
  
@@ -345,7 +358,11 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -467,6 +528,8 @@
+ WINAPI
+ OpenEventA(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(SYNCHRONIZATION_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
      _In_ LPCSTR lpName
      );
  
@@ -354,7 +371,14 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -483,6 +546,8 @@
+ WINAPI
+ OpenEventW(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(SYNCHRONIZATION_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
+     _In_ LPCWSTR lpName
+     );
+@@ -483,12 +546,14 @@
  #define OpenEvent  OpenEventA
  #endif // !UNICODE
  
@@ -363,7 +387,14 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -507,6 +572,8 @@
+ WINAPI
+ OpenSemaphoreW(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(SYNCHRONIZATION_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
+     _In_ LPCWSTR lpName
+     );
+@@ -507,12 +572,14 @@
      _In_     DWORD dwTimerHighValue
      );
  
@@ -372,6 +403,13 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
+ WINAPI
+ OpenWaitableTimerW(
+-    _In_ DWORD dwDesiredAccess,
++    _Win32_AssociatedEnum_(SYNCHRONIZATION_ACCESS_RIGHTS) _In_ DWORD dwDesiredAccess,
+     _In_ BOOL bInheritHandle,
+     _In_ LPCWSTR lpTimerName
+     );
 @@ -523,6 +590,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN7)
@@ -534,19 +572,21 @@
  #ifndef MIDL_PASS
  
 -WINBASEAPI
-+_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ WINBASEAPI
++_Win32_SetLastError_ _Win32_SupportedOS_WindowsXP_ _Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
  SignalObjectAndWait(
-@@ -743,6 +843,8 @@
+@@ -743,7 +843,9 @@
  #pragma region Application or OneCore Family or Games Partition
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
+-WINBASEAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
- WINBASEAPI
++_Win32_AssociatedEnum_(WAIT_EVENT) WINBASEAPI
  DWORD
  WINAPI
+ WaitForMultipleObjects(
 @@ -753,6 +855,8 @@
      _In_ DWORD dwMilliseconds
      );

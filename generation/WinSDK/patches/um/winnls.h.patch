@@ -1,5 +1,5 @@
 diff --git a/um/winnls.h b/um/winnls.h
-index 2a104ac5..d3c1dff2 100644
+index 2a104ac5..ba68a14e 100644
 --- a/um/winnls.h
 +++ b/um/winnls.h
 @@ -17,6 +17,22 @@ Abstract:
@@ -250,14 +250,16 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1686,6 +1807,7 @@ GetCPInfoExW(
+@@ -1686,7 +1807,8 @@ GetCPInfoExW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
  
  DEPRECATED("CompareStringEx is preferred. Set DISABLE_NLS_DEPRECATION to disable this warning.")
+-WINBASEAPI
 +_Win32_SupportedOS_Windows2000_
- WINBASEAPI
++_Win32_AssociatedEnum_(COMPARESTRING_RESULT) WINBASEAPI
  int
  WINAPI
+ CompareStringA(
 @@ -1739,6 +1861,8 @@ CompareString(
  #if (WINVER >= 0x0600)
  
@@ -482,7 +484,7 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2127,6 +2298,8 @@ EnumCalendarInfoExW(
+@@ -2127,21 +2298,25 @@ EnumCalendarInfoExW(
  #endif /* WINVER >= 0x0500 */
  
  // DEPRECATED: EnumTimeFormatsEx is preferred
@@ -491,15 +493,25 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2135,6 +2308,8 @@ EnumTimeFormatsA(
+ EnumTimeFormatsA(
+     _In_ TIMEFMT_ENUMPROCA lpTimeFmtEnumProc,
      _In_ LCID              Locale,
-     _In_ DWORD             dwFlags);
+-    _In_ DWORD             dwFlags);
++    _Win32_AssociatedEnum_(TIME_FORMAT_FLAGS) _In_ DWORD             dwFlags);
  // DEPRECATED: EnumTimeFormatsEx is preferred
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINBASEAPI
  BOOL
  WINAPI
+ EnumTimeFormatsW(
+     _In_ TIMEFMT_ENUMPROCW lpTimeFmtEnumProc,
+     _In_ LCID              Locale,
+-    _In_ DWORD             dwFlags);
++    _Win32_AssociatedEnum_(TIME_FORMAT_FLAGS) _In_ DWORD             dwFlags);
+ #ifdef UNICODE
+ #define EnumTimeFormats  EnumTimeFormatsW
+ #else
 @@ -2149,6 +2324,8 @@ EnumTimeFormatsW(
  #endif // !UNICODE
  
@@ -840,7 +852,7 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -2668,6 +2904,8 @@ GetStringTypeA(
+@@ -2668,11 +2904,13 @@ GetStringTypeA(
      _In_ int      cchSrc,
      _Out_ LPWORD  lpCharType);
  
@@ -849,6 +861,12 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  int
  WINAPI
+ FoldStringA(
+-    _In_ DWORD    dwMapFlags,
++    _Win32_AssociatedEnum_(FOLD_STRING_MAP_FLAGS) _In_ DWORD    dwMapFlags,
+     _In_reads_(cchSrc) LPCSTR  lpSrcStr,
+     _In_ int      cchSrc,
+     _Out_writes_opt_(cchDest) LPSTR  lpDestStr,
 @@ -2690,6 +2928,8 @@ FoldStringA(
  #if(WINVER >= 0x0500)
  
@@ -1152,7 +1170,7 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3118,13 +3414,15 @@ EnumCalendarInfoExEx(
+@@ -3118,25 +3414,29 @@ EnumCalendarInfoExEx(
      _In_ CALINFO_ENUMPROCEXEX pCalInfoEnumProcExEx,
      _In_opt_ LPCWSTR lpLocaleName,
      _In_ CALID Calendar,
@@ -1169,7 +1187,13 @@ index 2a104ac5..d3c1dff2 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -3137,6 +3435,8 @@ EnumDateFormatsExEx(
+ EnumDateFormatsExEx(
+     _In_ DATEFMT_ENUMPROCEXEX lpDateFmtEnumProcExEx,
+     _In_opt_ LPCWSTR lpLocaleName,
+-    _In_ DWORD dwFlags,
++    _Win32_AssociatedEnum_(ENUM_DATE_FORMATS_FLAGS) _In_ DWORD dwFlags,
+     _In_ LPARAM lParam
+ );
  
  typedef BOOL (CALLBACK* TIMEFMT_ENUMPROCEX)(LPWSTR, LPARAM);
  

@@ -1,8 +1,25 @@
-diff --git a/um/winioctl.h b/um/winioctl.h
-index 8977b829..82db92d8 100644
 --- a/um/winioctl.h
 +++ b/um/winioctl.h
-@@ -12211,6 +12211,12 @@ typedef struct {
+@@ -12093,13 +12093,17 @@
+     LONGLONG Length;
+ } USN_RECORD_EXTENT, *PUSN_RECORD_EXTENT;
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned long USN_SOURCE_INFO_ID;
++#endif
++
+ typedef struct {
+     USN_RECORD_COMMON_HEADER Header;
+     FILE_ID_128 FileReferenceNumber;
+     FILE_ID_128 ParentFileReferenceNumber;
+     USN Usn;
+     DWORD Reason;
+-    DWORD SourceInfo;
++    _Win32_AssociatedEnum_(USN_SOURCE_INFO_ID) DWORD SourceInfo;
+     DWORD RemainingExtents;
+     WORD   NumberOfExtents;
+     WORD   ExtentSize;
+@@ -12211,6 +12215,12 @@
  #define USN_DELETE_FLAG_DELETE              (0x00000001)
  #define USN_DELETE_FLAG_NOTIFY              (0x00000002)
  
@@ -15,7 +32,7 @@ index 8977b829..82db92d8 100644
  #define USN_DELETE_VALID_FLAGS              (0x00000003)
  
  #endif /* _WIN32_WINNT >= _WIN32_WINNT_WIN2K */
-@@ -12298,6 +12304,14 @@ typedef struct _MARK_HANDLE_INFO32 {
+@@ -12298,6 +12308,14 @@
  #define USN_SOURCE_REPLICATION_MANAGEMENT           (0x00000004)
  #define USN_SOURCE_CLIENT_REPLICATION_MANAGEMENT    (0x00000008)
  
@@ -30,7 +47,7 @@ index 8977b829..82db92d8 100644
  #define USN_SOURCE_VALID_FLAGS      (USN_SOURCE_DATA_MANAGEMENT |               \
                                       USN_SOURCE_AUXILIARY_DATA |                \
                                       USN_SOURCE_REPLICATION_MANAGEMENT |        \
-@@ -12517,6 +12531,13 @@ typedef struct _FILESYSTEM_STATISTICS {
+@@ -12517,6 +12535,13 @@
  #define FILESYSTEM_STATISTICS_TYPE_NTFS     1
  #define FILESYSTEM_STATISTICS_TYPE_FAT      2
  #define FILESYSTEM_STATISTICS_TYPE_EXFAT    3
@@ -44,7 +61,7 @@ index 8977b829..82db92d8 100644
  #define FILESYSTEM_STATISTICS_TYPE_REFS     4
  
  //
-@@ -13453,6 +13474,27 @@ typedef struct _SHRINK_VOLUME_INFORMATION
+@@ -13453,6 +13478,27 @@
  #define TXFS_RM_FLAG_PREFER_CONSISTENCY                     0x00010000
  #define TXFS_RM_FLAG_PREFER_AVAILABILITY                    0x00020000
  
@@ -72,7 +89,7 @@ index 8977b829..82db92d8 100644
  #define TXFS_LOGGING_MODE_SIMPLE        (0x0001)
  #define TXFS_LOGGING_MODE_FULL          (0x0002)
  
-@@ -16255,6 +16297,11 @@ typedef struct _WRITE_USN_REASON_INPUT {
+@@ -16255,6 +16301,11 @@
  //
  
  #define FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY    (0x00020000)
@@ -84,3 +101,12 @@ index 8977b829..82db92d8 100644
  #define FILE_STORAGE_TIER_FLAG_WRITE_BACK_CACHE   (0x00200000)
  #define FILE_STORAGE_TIER_FLAG_READ_CACHE         (0x00400000)
  #define FILE_STORAGE_TIER_FLAG_PARITY             (0x00800000)
+@@ -16360,7 +16411,7 @@
+     // Flags
+     //
+ 
+-    DWORD Flags;
++    _Win32_AssociatedEnum_(FILE_STORAGE_TIER_FLAGS) DWORD Flags;
+ 
+     //
+     // The total number of available tiers for this disk

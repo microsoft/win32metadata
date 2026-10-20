@@ -1,5 +1,5 @@
 diff --git a/um/winuser.h b/um/winuser.h
-index f99e9294..b5a230a9 100644
+index f99e9294..9015e4bb 100644
 --- a/um/winuser.h
 +++ b/um/winuser.h
 @@ -13,6 +13,132 @@
@@ -1250,7 +1250,7 @@ index f99e9294..b5a230a9 100644
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  
-@@ -2979,6 +3565,7 @@ TrackMouseEvent(
+@@ -2979,14 +3565,15 @@ TrackMouseEvent(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -1258,6 +1258,16 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
+ DrawEdge(
+     _In_ HDC hdc,
+     _Inout_ LPRECT qrc,
+-    _In_ UINT edge,
+-    _In_ UINT grfFlags);
++    _Win32_AssociatedEnum_(DRAWEDGE_FLAGS) _In_ UINT edge,
++    _Win32_AssociatedEnum_(DRAW_EDGE_FLAGS) _In_ UINT grfFlags);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -2997,8 +3584,21 @@ DrawEdge(
  #define DFC_MENU                2
  #define DFC_SCROLL              3
@@ -1535,8 +1545,21 @@ index f99e9294..b5a230a9 100644
  #endif /* _WIN32_WINNT >= 0x0500 */
  #endif /* WINVER >= 0x0500 */
  
-@@ -3357,8 +4071,8 @@ typedef struct tagDRAWITEMSTRUCT {
-     UINT        CtlType;
+@@ -3342,7 +4056,7 @@ typedef struct tagSTYLESTRUCT
+  * MEASUREITEMSTRUCT for ownerdraw
+  */
+ typedef struct tagMEASUREITEMSTRUCT {
+-    UINT       CtlType;
++    _Win32_AssociatedEnum_(DRAWITEMSTRUCT_CTL_TYPE) UINT       CtlType;
+     UINT       CtlID;
+     UINT       itemID;
+     UINT       itemWidth;
+@@ -3354,11 +4068,11 @@ typedef struct tagMEASUREITEMSTRUCT {
+  * DRAWITEMSTRUCT for ownerdraw
+  */
+ typedef struct tagDRAWITEMSTRUCT {
+-    UINT        CtlType;
++    _Win32_AssociatedEnum_(DRAWITEMSTRUCT_CTL_TYPE) UINT        CtlType;
      UINT        CtlID;
      UINT        itemID;
 -    UINT        itemAction;
@@ -1546,6 +1569,24 @@ index f99e9294..b5a230a9 100644
      HWND        hwndItem;
      HDC         hDC;
      RECT        rcItem;
+@@ -3369,7 +4083,7 @@ typedef struct tagDRAWITEMSTRUCT {
+  * DELETEITEMSTRUCT for ownerdraw
+  */
+ typedef struct tagDELETEITEMSTRUCT {
+-    UINT       CtlType;
++    _Win32_AssociatedEnum_(DRAWITEMSTRUCT_CTL_TYPE) UINT       CtlType;
+     UINT       CtlID;
+     UINT       itemID;
+     HWND       hwndItem;
+@@ -3380,7 +4094,7 @@ typedef struct tagDELETEITEMSTRUCT {
+  * COMPAREITEMSTUCT for ownerdraw sorting
+  */
+ typedef struct tagCOMPAREITEMSTRUCT {
+-    UINT        CtlType;
++    _Win32_AssociatedEnum_(DRAWITEMSTRUCT_CTL_TYPE) UINT        CtlType;
+     UINT        CtlID;
+     HWND        hwndItem;
+     UINT        itemID1;
 @@ -3449,17 +4163,20 @@ GetMessage(
  #endif  /* _M_CEE */
  
@@ -1575,14 +1616,25 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3516,6 +4234,7 @@ PeekMessageA(
+@@ -3515,7 +4233,8 @@ PeekMessageA(
+     _In_opt_ HWND hWnd,
      _In_ UINT wMsgFilterMin,
      _In_ UINT wMsgFilterMax,
-     _In_ UINT wRemoveMsg);
+-    _In_ UINT wRemoveMsg);
++    _Win32_AssociatedEnum_(PEEK_MESSAGE_REMOVE_TYPE) _In_ UINT wRemoveMsg);
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  BOOL
  WINAPI
+@@ -3524,7 +4243,7 @@ PeekMessageW(
+     _In_opt_ HWND hWnd,
+     _In_ UINT wMsgFilterMin,
+     _In_ UINT wMsgFilterMax,
+-    _In_ UINT wRemoveMsg);
++    _Win32_AssociatedEnum_(PEEK_MESSAGE_REMOVE_TYPE) _In_ UINT wRemoveMsg);
+ #ifdef UNICODE
+ #define PeekMessage  PeekMessageW
+ #else
 @@ -3555,15 +4274,19 @@ PeekMessageW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -1681,8 +1733,9 @@ index f99e9294..b5a230a9 100644
  WINAPI
  ExitWindowsEx(
 -    _In_ UINT uFlags,
+-    _In_ DWORD dwReason);
 +    _Win32_AssociatedEnum_(EXIT_WINDOWS_FLAGS) _In_ UINT uFlags,
-     _In_ DWORD dwReason);
++    _Win32_AssociatedEnum_(SHUTDOWN_REASON) _In_ DWORD dwReason);
  
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
@@ -1921,7 +1974,7 @@ index f99e9294..b5a230a9 100644
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  #define BROADCAST_QUERY_DENY         0x424D5144  // Return this value to deny a query.
-@@ -3950,6 +4772,8 @@ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
+@@ -3950,26 +4772,32 @@ typedef  HDEVNOTIFY     *PHDEVNOTIFY;
  #define DEVICE_NOTIFY_ALL_INTERFACE_CLASSES  0x00000004
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -1930,16 +1983,24 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  HDEVNOTIFY
  WINAPI
-@@ -3957,6 +4781,8 @@ RegisterDeviceNotificationA(
+ RegisterDeviceNotificationA(
      _In_ HANDLE hRecipient,
      _In_ LPVOID NotificationFilter,
-     _In_ DWORD Flags);
+-    _In_ DWORD Flags);
++    _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) _In_ DWORD Flags);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINUSERAPI
  HDEVNOTIFY
  WINAPI
-@@ -3970,6 +4796,8 @@ RegisterDeviceNotificationW(
+ RegisterDeviceNotificationW(
+     _In_ HANDLE hRecipient,
+     _In_ LPVOID NotificationFilter,
+-    _In_ DWORD Flags);
++    _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) _In_ DWORD Flags);
+ #ifdef UNICODE
+ #define RegisterDeviceNotification  RegisterDeviceNotificationW
+ #else
  #define RegisterDeviceNotification  RegisterDeviceNotificationA
  #endif // !UNICODE
  
@@ -1948,7 +2009,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -3988,6 +4816,8 @@ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
+@@ -3988,15 +4816,19 @@ typedef  HPOWERNOTIFY   *PHPOWERNOTIFY;
  
  #endif
  
@@ -1957,8 +2018,11 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  HPOWERNOTIFY
  WINAPI
-@@ -3997,6 +4827,8 @@ RegisterPowerSettingNotification(
-     IN DWORD Flags
+ RegisterPowerSettingNotification(
+     IN HANDLE hRecipient,
+     IN LPCGUID PowerSettingGuid,
+-    IN DWORD Flags
++    IN _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) DWORD Flags
      );
  
 +_Win32_SetLastError_
@@ -1966,7 +2030,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4004,6 +4836,8 @@ UnregisterPowerSettingNotification(
+@@ -4004,14 +4836,18 @@ UnregisterPowerSettingNotification(
      IN HPOWERNOTIFY Handle
      );
  
@@ -1975,8 +2039,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  HPOWERNOTIFY
  WINAPI
-@@ -4012,6 +4846,8 @@ RegisterSuspendResumeNotification (
-     IN DWORD Flags
+ RegisterSuspendResumeNotification (
+     IN HANDLE hRecipient,
+-    IN DWORD Flags
++    IN _Win32_AssociatedEnum_(REGISTER_NOTIFICATION_FLAGS) DWORD Flags
      );
  
 +_Win32_SetLastError_
@@ -2450,7 +2516,13 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -4694,6 +5615,7 @@ typedef struct {
+@@ -4689,11 +5610,12 @@ FlashWindow(
+ typedef struct {
+     UINT  cbSize;
+     HWND  hwnd;
+-    DWORD dwFlags;
++    _Win32_AssociatedEnum_(FLASHWINFO_FLAGS) DWORD dwFlags;
+     UINT  uCount;
      DWORD dwTimeout;
  } FLASHWINFO, *PFLASHWINFO;
  
@@ -3611,7 +3683,7 @@ index f99e9294..b5a230a9 100644
      _In_ DWORD dx,
      _In_ DWORD dy,
      _In_ DWORD dwData,
-@@ -6119,7 +7324,7 @@ typedef struct tagMOUSEINPUT {
+@@ -6119,15 +7324,15 @@ typedef struct tagMOUSEINPUT {
      LONG    dx;
      LONG    dy;
      DWORD   mouseData;
@@ -3620,9 +3692,10 @@ index f99e9294..b5a230a9 100644
      DWORD   time;
      ULONG_PTR dwExtraInfo;
  } MOUSEINPUT, *PMOUSEINPUT, FAR* LPMOUSEINPUT;
-@@ -6127,7 +7332,7 @@ typedef struct tagMOUSEINPUT {
+ 
  typedef struct tagKEYBDINPUT {
-     WORD    wVk;
+-    WORD    wVk;
++    _Win32_AssociatedEnum_(VIRTUAL_KEY) WORD    wVk;
      WORD    wScan;
 -    DWORD   dwFlags;
 +    _Win32_AssociatedEnum_(KEYBD_EVENT_FLAGS) DWORD   dwFlags;
@@ -4146,7 +4219,7 @@ index f99e9294..b5a230a9 100644
      _In_opt_ HKL dwhkl);
  #ifdef UNICODE
  #define MapVirtualKeyEx  MapVirtualKeyExW
-@@ -6941,17 +8284,32 @@ MapVirtualKeyExW(
+@@ -6941,43 +8284,64 @@ MapVirtualKeyExW(
  #define MAPVK_VSC_TO_VK     (1)
  #define MAPVK_VK_TO_CHAR    (2)
  #define MAPVK_VSC_TO_VK_EX  (3)
@@ -4179,8 +4252,9 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -6959,25 +8317,31 @@ GetQueueStatus(
-     _In_ UINT flags);
+ GetQueueStatus(
+-    _In_ UINT flags);
++    _Win32_AssociatedEnum_(QUEUE_STATUS_FLAGS) _In_ UINT flags);
  
  
 +_Win32_SupportedOS_Windows2000_
@@ -4208,26 +4282,30 @@ index f99e9294..b5a230a9 100644
 -WINUSERAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_ WINUSERAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
  DWORD
  WINAPI
  MsgWaitForMultipleObjects(
-@@ -6987,7 +8351,9 @@ MsgWaitForMultipleObjects(
+@@ -6985,17 +8349,19 @@ MsgWaitForMultipleObjects(
+     _In_reads_opt_(nCount) CONST HANDLE *pHandles,
+     _In_ BOOL fWaitAll,
      _In_ DWORD dwMilliseconds,
-     _In_ DWORD dwWakeMask);
+-    _In_ DWORD dwWakeMask);
++    _Win32_AssociatedEnum_(QUEUE_STATUS_FLAGS) _In_ DWORD dwWakeMask);
  
 -WINUSERAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
-+_Win32_PreserveResult_ WINUSERAPI
++_Win32_PreserveResult_ _Win32_AssociatedEnum_(WAIT_EVENT) WINUSERAPI
  DWORD
  WINAPI
  MsgWaitForMultipleObjectsEx(
-@@ -6995,7 +8361,7 @@ MsgWaitForMultipleObjectsEx(
+     _In_ DWORD nCount,
      _In_reads_opt_(nCount) CONST HANDLE *pHandles,
      _In_ DWORD dwMilliseconds,
-     _In_ DWORD dwWakeMask,
+-    _In_ DWORD dwWakeMask,
 -    _In_ DWORD dwFlags);
++    _Win32_AssociatedEnum_(QUEUE_STATUS_FLAGS) _In_ DWORD dwWakeMask,
 +    _Win32_AssociatedEnum_(MSG_WAIT_FOR_MULTIPLE_OBJECTS_EX_FLAGS) _In_ DWORD dwFlags);
  
  
@@ -4684,15 +4762,25 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
-@@ -7556,6 +9122,7 @@ GetMenuStringA(
+@@ -7555,7 +9121,8 @@ GetMenuStringA(
+     _In_ UINT uIDItem,
      _Out_writes_opt_(cchMax) LPSTR lpString,
      _In_ int cchMax,
-     _In_ UINT flags);
+-    _In_ UINT flags);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT flags);
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  int
  WINAPI
-@@ -7571,6 +9138,7 @@ GetMenuStringW(
+@@ -7564,21 +9131,24 @@ GetMenuStringW(
+     _In_ UINT uIDItem,
+     _Out_writes_opt_(cchMax) LPWSTR lpString,
+     _In_ int cchMax,
+-    _In_ UINT flags);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT flags);
+ #ifdef UNICODE
+ #define GetMenuString  GetMenuStringW
+ #else
  #define GetMenuString  GetMenuStringA
  #endif // !UNICODE
  
@@ -4700,9 +4788,11 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -7579,6 +9147,8 @@ GetMenuState(
+ GetMenuState(
+     _In_ HMENU hMenu,
      _In_ UINT uId,
-     _In_ UINT uFlags);
+-    _In_ UINT uFlags);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
@@ -4749,7 +4839,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -7625,6 +9203,7 @@ CheckMenuItem(
+@@ -7625,14 +9203,16 @@ CheckMenuItem(
      _In_ UINT uIDCheckItem,
      _In_ UINT uCheck);
  
@@ -4757,9 +4847,11 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7633,6 +9212,7 @@ EnableMenuItem(
+ EnableMenuItem(
+     _In_ HMENU hMenu,
      _In_ UINT uIDEnableItem,
-     _In_ UINT uEnable);
+-    _In_ UINT uEnable);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uEnable);
  
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
@@ -4773,7 +4865,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  UINT
  WINAPI
-@@ -7647,12 +9228,16 @@ GetMenuItemID(
+@@ -7647,28 +9228,34 @@ GetMenuItemID(
      _In_ HMENU hMenu,
      _In_ int nPos);
  
@@ -4790,8 +4882,11 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7662,6 +9247,8 @@ InsertMenuA(
-     _In_ UINT uFlags,
+ InsertMenuA(
+     _In_ HMENU hMenu,
+     _In_ UINT uPosition,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 +_Win32_SetLastError_
@@ -4799,7 +4894,15 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7677,6 +9264,8 @@ InsertMenuW(
+ InsertMenuW(
+     _In_ HMENU hMenu,
+     _In_ UINT uPosition,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
+     _In_ UINT_PTR uIDNewItem,
+     _In_opt_ LPCWSTR lpNewItem);
+ #ifdef UNICODE
+@@ -7677,20 +9264,24 @@ InsertMenuW(
  #define InsertMenu  InsertMenuA
  #endif // !UNICODE
  
@@ -4808,8 +4911,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7685,6 +9274,8 @@ AppendMenuA(
-     _In_ UINT uFlags,
+ AppendMenuA(
+     _In_ HMENU hMenu,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 +_Win32_SetLastError_
@@ -4817,7 +4922,14 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7699,6 +9290,8 @@ AppendMenuW(
+ AppendMenuW(
+     _In_ HMENU hMenu,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
+     _In_ UINT_PTR uIDNewItem,
+     _In_opt_ LPCWSTR lpNewItem);
+ #ifdef UNICODE
+@@ -7699,22 +9290,26 @@ AppendMenuW(
  #define AppendMenu  AppendMenuA
  #endif // !UNICODE
  
@@ -4826,8 +4938,11 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7708,6 +9301,8 @@ ModifyMenuA(
-     _In_ UINT uFlags,
+ ModifyMenuA(
+     _In_ HMENU hMnu,
+     _In_ UINT uPosition,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
      _In_ UINT_PTR uIDNewItem,
      _In_opt_ LPCSTR lpNewItem);
 +_Win32_SetLastError_
@@ -4835,7 +4950,15 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7723,6 +9318,8 @@ ModifyMenuW(
+ ModifyMenuW(
+     _In_ HMENU hMnu,
+     _In_ UINT uPosition,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
+     _In_ UINT_PTR uIDNewItem,
+     _In_opt_ LPCWSTR lpNewItem);
+ #ifdef UNICODE
+@@ -7723,43 +9318,52 @@ ModifyMenuW(
  #define ModifyMenu  ModifyMenuA
  #endif // !UNICODE
  
@@ -4844,25 +4967,32 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI RemoveMenu(
-@@ -7730,6 +9327,8 @@ WINAPI RemoveMenu(
+     _In_ HMENU hMenu,
      _In_ UINT uPosition,
-     _In_ UINT uFlags);
+-    _In_ UINT uFlags);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7738,6 +9337,8 @@ DeleteMenu(
+ DeleteMenu(
+     _In_ HMENU hMenu,
      _In_ UINT uPosition,
-     _In_ UINT uFlags);
+-    _In_ UINT uFlags);
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  BOOL
  WINAPI
-@@ -7748,18 +9349,21 @@ SetMenuItemBitmaps(
+ SetMenuItemBitmaps(
+     _In_ HMENU hMenu,
+     _In_ UINT uPosition,
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(MENU_ITEM_FLAGS) _In_ UINT uFlags,
      _In_opt_ HBITMAP hBitmapUnchecked,
      _In_opt_ HBITMAP hBitmapChecked);
  
@@ -5249,14 +5379,25 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  _Success_(return)
  int
-@@ -8254,6 +9984,7 @@ DrawTextA(
+@@ -8253,7 +9983,8 @@ DrawTextA(
+     LPCSTR lpchText,
      _In_ int cchText,
      _Inout_ LPRECT lprc,
-     _In_ UINT format);
+-    _In_ UINT format);
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format);
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  _Success_(return)
  int
+@@ -8265,7 +9996,7 @@ DrawTextW(
+     LPCWSTR lpchText,
+     _In_ int cchText,
+     _Inout_ LPRECT lprc,
+-    _In_ UINT format);
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format);
+ #ifdef UNICODE
+ #define DrawText  DrawTextW
+ #else
 @@ -8300,6 +10031,7 @@ DrawText(
  
  
@@ -5265,14 +5406,26 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  _Success_(return)
  int
-@@ -8314,6 +10046,7 @@ DrawTextExA(
+@@ -8312,8 +10044,9 @@ DrawTextExA(
+     LPSTR lpchText,
+     _In_ int cchText,
      _Inout_ LPRECT lprc,
-     _In_ UINT format,
+-    _In_ UINT format,
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format,
      _In_opt_ LPDRAWTEXTPARAMS lpdtp);
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  _Success_(return)
  int
+@@ -8326,7 +10059,7 @@ DrawTextExW(
+     LPWSTR lpchText,
+     _In_ int cchText,
+     _Inout_ LPRECT lprc,
+-    _In_ UINT format,
++    _Win32_AssociatedEnum_(DRAW_TEXT_FORMAT) _In_ UINT format,
+     _In_opt_ LPDRAWTEXTPARAMS lpdtp);
+ #ifdef UNICODE
+ #define DrawTextEx  DrawTextExW
 @@ -8343,6 +10076,7 @@ DrawTextExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -5690,6 +5843,15 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
+@@ -8794,7 +10628,7 @@ ScrollWindowEx(
+     _In_opt_ CONST RECT *prcClip,
+     _In_opt_ HRGN hrgnUpdate,
+     _Out_opt_ LPRECT prcUpdate,
+-    _In_ UINT flags);
++    _Win32_AssociatedEnum_(SCROLL_WINDOW_FLAGS) _In_ UINT flags);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -8802,8 +10636,20 @@ ScrollWindowEx(
  #define SW_SCROLLCHILDREN   0x0001  /* Scroll children within *lprcScroll. */
  #define SW_INVALIDATE       0x0002  /* Invalidate after scrolling */
@@ -5711,7 +5873,7 @@ index f99e9294..b5a230a9 100644
  #endif /* WINVER >= 0x0500 */
  
  #pragma region Desktop Family
-@@ -8811,6 +10657,8 @@ ScrollWindowEx(
+@@ -8811,56 +10657,68 @@ ScrollWindowEx(
  
  #ifndef NOSCROLL
  
@@ -5720,7 +5882,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8820,6 +10668,8 @@ SetScrollPos(
+ SetScrollPos(
+     _In_ HWND hWnd,
+-    _In_ int nBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar,
      _In_ int nPos,
      _In_ BOOL bRedraw);
  
@@ -5729,16 +5894,21 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
-@@ -8827,6 +10677,8 @@ GetScrollPos(
+ GetScrollPos(
      _In_ HWND hWnd,
-     _In_ int nBar);
+-    _In_ int nBar);
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsVista_
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8837,6 +10689,8 @@ SetScrollRange(
+ SetScrollRange(
+     _In_ HWND hWnd,
+-    _In_ int nBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar,
+     _In_ int nMinPos,
      _In_ int nMaxPos,
      _In_ BOOL bRedraw);
  
@@ -5747,7 +5917,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8846,6 +10700,8 @@ GetScrollRange(
+ GetScrollRange(
+     _In_ HWND hWnd,
+-    _In_ int nBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar,
      _Out_ LPINT lpMinPos,
      _Out_ LPINT lpMaxPos);
  
@@ -5756,8 +5929,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -8854,13 +10710,15 @@ ShowScrollBar(
-     _In_ int wBar,
+ ShowScrollBar(
+     _In_ HWND hWnd,
+-    _In_ int wBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int wBar,
      _In_ BOOL bShow);
  
 +_Win32_SetLastError_
@@ -6129,7 +6304,7 @@ index f99e9294..b5a230a9 100644
  #endif
  
  #define MB_TYPEMASK                 0x0000000FL
-@@ -9222,9 +11184,41 @@ GetMenuContextHelpId(
+@@ -9222,25 +11184,59 @@ GetMenuContextHelpId(
  #define MB_MODEMASK                 0x00003000L
  #define MB_MISCMASK                 0x0000C000L
  
@@ -6166,53 +6341,101 @@ index f99e9294..b5a230a9 100644
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
+-WINUSERAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
-@@ -9233,6 +11227,8 @@ MessageBoxA(
+ MessageBoxA(
+     _In_opt_ HWND hWnd,
      _In_opt_ LPCSTR lpText,
      _In_opt_ LPCSTR lpCaption,
-     _In_ UINT uType);
+-    _In_ UINT uType);
+-WINUSERAPI
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
-@@ -9271,6 +11267,8 @@ MessageBox(
+ MessageBoxW(
+     _In_opt_ HWND hWnd,
+     _In_opt_ LPCWSTR lpText,
+     _In_opt_ LPCWSTR lpCaption,
+-    _In_ UINT uType);
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType);
+ #ifdef UNICODE
+ #define MessageBox  MessageBoxW
+ #else
+@@ -9271,23 +11267,27 @@ MessageBox(
  }
  #endif  /* _M_CEE */
  
+-WINUSERAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
-@@ -9280,6 +11278,8 @@ MessageBoxExA(
+ MessageBoxExA(
+     _In_opt_ HWND hWnd,
+     _In_opt_ LPCSTR lpText,
      _In_opt_ LPCSTR lpCaption,
-     _In_ UINT uType,
+-    _In_ UINT uType,
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType,
      _In_ WORD wLanguageId);
+-WINUSERAPI
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
-@@ -9335,11 +11335,13 @@ typedef PMSGBOXPARAMSA PMSGBOXPARAMS;
+ MessageBoxExW(
+     _In_opt_ HWND hWnd,
+     _In_opt_ LPCWSTR lpText,
+     _In_opt_ LPCWSTR lpCaption,
+-    _In_ UINT uType,
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType,
+     _In_ WORD wLanguageId);
+ #ifdef UNICODE
+ #define MessageBoxEx  MessageBoxExW
+@@ -9306,7 +11306,7 @@ typedef struct tagMSGBOXPARAMSA
+     HINSTANCE   hInstance;
+     LPCSTR      lpszText;
+     LPCSTR      lpszCaption;
+-    DWORD       dwStyle;
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) DWORD       dwStyle;
+     LPCSTR      lpszIcon;
+     DWORD_PTR   dwContextHelpId;
+     MSGBOXCALLBACK      lpfnMsgBoxCallback;
+@@ -9319,7 +11319,7 @@ typedef struct tagMSGBOXPARAMSW
+     HINSTANCE   hInstance;
+     LPCWSTR     lpszText;
+     LPCWSTR     lpszCaption;
+-    DWORD       dwStyle;
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) DWORD       dwStyle;
+     LPCWSTR     lpszIcon;
+     DWORD_PTR   dwContextHelpId;
+     MSGBOXCALLBACK      lpfnMsgBoxCallback;
+@@ -9335,12 +11335,14 @@ typedef PMSGBOXPARAMSA PMSGBOXPARAMS;
  typedef LPMSGBOXPARAMSA LPMSGBOXPARAMS;
  #endif // UNICODE
  
+-WINUSERAPI
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
  MessageBoxIndirectA(
      _In_ CONST MSGBOXPARAMSA * lpmbp);
+-WINUSERAPI
 +_Win32_SupportedOS_Windows2000_
- WINUSERAPI
++_Win32_AssociatedEnum_(MESSAGEBOX_RESULT) WINUSERAPI
  int
  WINAPI
-@@ -9360,6 +11362,8 @@ MessageBoxIndirectW(
+ MessageBoxIndirectW(
+@@ -9360,11 +11362,13 @@ MessageBoxIndirectW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6221,6 +6444,12 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
+ MessageBeep(
+-    _In_ UINT uType);
++    _Win32_AssociatedEnum_(MESSAGEBOX_STYLE) _In_ UINT uType);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -9381,6 +11385,7 @@ MessageBeep(
  #pragma region Desktop Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
@@ -6469,7 +6698,7 @@ index f99e9294..b5a230a9 100644
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -9685,6 +11739,7 @@ ChildWindowFromPointEx(
+@@ -9685,22 +11739,26 @@ ChildWindowFromPointEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -6477,15 +6706,19 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -9692,6 +11747,7 @@ GetSysColor(
-     _In_ int nIndex);
+ GetSysColor(
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(SYS_COLOR_INDEX) _In_ int nIndex);
  
  #if(WINVER >= 0x0400)
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  HBRUSH
  WINAPI
-@@ -9701,6 +11757,8 @@ GetSysColorBrush(
+ GetSysColorBrush(
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(SYS_COLOR_INDEX) _In_ int nIndex);
+ 
  
  #endif /* WINVER >= 0x0400 */
  
@@ -6612,7 +6845,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -9857,12 +11930,16 @@ SetWindowWord(
+@@ -9857,37 +11930,45 @@ SetWindowWord(
  
  #ifndef NOWINOFFSETS
  
@@ -6623,13 +6856,20 @@ index f99e9294..b5a230a9 100644
  WINAPI
  GetWindowLongA(
      _In_ HWND hWnd,
-     _In_ int nIndex);
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  LONG
  WINAPI
-@@ -9875,6 +11952,8 @@ GetWindowLongW(
+ GetWindowLongW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
+ #ifdef UNICODE
+ #define GetWindowLong  GetWindowLongW
+ #else
  #define GetWindowLong  GetWindowLongA
  #endif // !UNICODE
  
@@ -6638,16 +6878,24 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  LONG
  WINAPI
-@@ -9882,6 +11961,8 @@ SetWindowLongA(
+ SetWindowLongA(
      _In_ HWND hWnd,
-     _In_ int nIndex,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
      _In_ LONG dwNewLong);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  LONG
  WINAPI
-@@ -9897,12 +11978,16 @@ SetWindowLongW(
+ SetWindowLongW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
+     _In_ LONG dwNewLong);
+ #ifdef UNICODE
+ #define SetWindowLong  SetWindowLongW
+@@ -9897,37 +11978,45 @@ SetWindowLongW(
  
  #ifdef _WIN64
  
@@ -6658,13 +6906,20 @@ index f99e9294..b5a230a9 100644
  WINAPI
  GetWindowLongPtrA(
      _In_ HWND hWnd,
-     _In_ int nIndex);
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  LONG_PTR
  WINAPI
-@@ -9915,6 +12000,8 @@ GetWindowLongPtrW(
+ GetWindowLongPtrW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex);
+ #ifdef UNICODE
+ #define GetWindowLongPtr  GetWindowLongPtrW
+ #else
  #define GetWindowLongPtr  GetWindowLongPtrA
  #endif // !UNICODE
  
@@ -6673,15 +6928,23 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  LONG_PTR
  WINAPI
-@@ -9922,6 +12009,8 @@ SetWindowLongPtrA(
+ SetWindowLongPtrA(
      _In_ HWND hWnd,
-     _In_ int nIndex,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  LONG_PTR
  WINAPI
+ SetWindowLongPtrW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(WINDOW_LONG_PTR_INDEX) _In_ int nIndex,
+     _In_ LONG_PTR dwNewLong);
+ #ifdef UNICODE
+ #define SetWindowLongPtr  SetWindowLongPtrW
 @@ -9965,6 +12054,8 @@ SetWindowLongPtrW(
  
  #ifndef NOWINOFFSETS
@@ -6700,7 +6963,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  WORD
  WINAPI
-@@ -9980,12 +12073,16 @@ SetClassWord(
+@@ -9980,37 +12073,45 @@ SetClassWord(
      _In_ int nIndex,
      _In_ WORD wNewWord);
  
@@ -6711,13 +6974,20 @@ index f99e9294..b5a230a9 100644
  WINAPI
  GetClassLongA(
      _In_ HWND hWnd,
-     _In_ int nIndex);
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  DWORD
  WINAPI
-@@ -9998,6 +12095,8 @@ GetClassLongW(
+ GetClassLongW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
+ #ifdef UNICODE
+ #define GetClassLong  GetClassLongW
+ #else
  #define GetClassLong  GetClassLongA
  #endif // !UNICODE
  
@@ -6726,16 +6996,24 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  DWORD
  WINAPI
-@@ -10005,6 +12104,8 @@ SetClassLongA(
+ SetClassLongA(
      _In_ HWND hWnd,
-     _In_ int nIndex,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
      _In_ LONG dwNewLong);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  DWORD
  WINAPI
-@@ -10020,12 +12121,16 @@ SetClassLongW(
+ SetClassLongW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
+     _In_ LONG dwNewLong);
+ #ifdef UNICODE
+ #define SetClassLong  SetClassLongW
+@@ -10020,37 +12121,45 @@ SetClassLongW(
  
  #ifdef _WIN64
  
@@ -6746,13 +7024,20 @@ index f99e9294..b5a230a9 100644
  WINAPI
  GetClassLongPtrA(
      _In_ HWND hWnd,
-     _In_ int nIndex);
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  ULONG_PTR
  WINAPI
-@@ -10038,6 +12143,8 @@ GetClassLongPtrW(
+ GetClassLongPtrW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex);
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex);
+ #ifdef UNICODE
+ #define GetClassLongPtr  GetClassLongPtrW
+ #else
  #define GetClassLongPtr  GetClassLongPtrA
  #endif // !UNICODE
  
@@ -6761,15 +7046,23 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  ULONG_PTR
  WINAPI
-@@ -10045,6 +12152,8 @@ SetClassLongPtrA(
+ SetClassLongPtrA(
      _In_ HWND hWnd,
-     _In_ int nIndex,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
      _In_ LONG_PTR dwNewLong);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  ULONG_PTR
  WINAPI
+ SetClassLongPtrW(
+     _In_ HWND hWnd,
+-    _In_ int nIndex,
++    _Win32_AssociatedEnum_(GET_CLASS_LONG_INDEX) _In_ int nIndex,
+     _In_ LONG_PTR dwNewLong);
+ #ifdef UNICODE
+ #define SetClassLongPtr  SetClassLongPtrW
 @@ -10081,12 +12190,16 @@ SetClassLongPtrW(
  #endif /* !NOWINOFFSETS */
  
@@ -7209,7 +7502,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10723,6 +12977,8 @@ CopyCursor(
+@@ -10723,12 +12977,14 @@ CopyCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -7218,6 +7511,13 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
+ SetSystemCursor(
+     _In_ HCURSOR hcur,
+-    _In_ DWORD id);
++    _Win32_AssociatedEnum_(SYSTEM_CURSOR_ID) _In_ DWORD id);
+ 
+ typedef struct _ICONINFO {
+     BOOL    fIcon;
 @@ -10739,12 +12995,16 @@ typedef struct _ICONINFO {
  } ICONINFO;
  typedef ICONINFO *PICONINFO;
@@ -7286,8 +7586,12 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
-@@ -10825,6 +13095,8 @@ LookupIconIdFromDirectoryEx(
-     _In_ UINT Flags);
+@@ -10822,9 +13092,11 @@ LookupIconIdFromDirectoryEx(
+     _In_ BOOL fIcon,
+     _In_ int cxDesired,
+     _In_ int cyDesired,
+-    _In_ UINT Flags);
++    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT Flags);
  #endif /* WINVER >= 0x0400 */
  
 +_Win32_SetLastError_
@@ -7304,6 +7608,15 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  HICON
  WINAPI
+@@ -10845,7 +13119,7 @@ CreateIconFromResourceEx(
+     _In_ DWORD dwVer,
+     _In_ int cxDesired,
+     _In_ int cyDesired,
+-    _In_ UINT Flags);
++    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT Flags);
+ 
+ /* Icon/Cursor header */
+ typedef struct tagCURSORSHAPE
 @@ -10881,6 +13155,13 @@ SetThreadCursorCreationScaling(
  #define IMAGE_BITMAP        0
  #define IMAGE_ICON          1
@@ -7318,7 +7631,7 @@ index f99e9294..b5a230a9 100644
  #if(WINVER >= 0x0400)
  #define IMAGE_ENHMETAFILE   3
  
-@@ -10898,26 +13179,46 @@ SetThreadCursorCreationScaling(
+@@ -10898,44 +13179,66 @@ SetThreadCursorCreationScaling(
  #define LR_COPYFROMRESOURCE 0x00004000
  #define LR_SHARED           0x00008000
  
@@ -7353,7 +7666,8 @@ index f99e9294..b5a230a9 100644
 +    _Win32_AssociatedEnum_(GDI_IMAGE_TYPE) _In_ UINT type,
      _In_ int cx,
      _In_ int cy,
-     _In_ UINT fuLoad);
+-    _In_ UINT fuLoad);
++    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT fuLoad);
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
@@ -7366,8 +7680,11 @@ index f99e9294..b5a230a9 100644
 +    _Win32_AssociatedEnum_(GDI_IMAGE_TYPE) _In_ UINT type,
      _In_ int cx,
      _In_ int cy,
-     _In_ UINT fuLoad);
-@@ -10927,12 +13228,14 @@ LoadImageW(
+-    _In_ UINT fuLoad);
++    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT fuLoad);
+ #ifdef UNICODE
+ #define LoadImage  LoadImageW
+ #else
  #define LoadImage  LoadImageA
  #endif // !UNICODE
  
@@ -7382,7 +7699,11 @@ index f99e9294..b5a230a9 100644
 +    _Win32_AssociatedEnum_(GDI_IMAGE_TYPE) _In_ UINT type,
      _In_ int cx,
      _In_ int cy,
-     _In_ UINT flags);
+-    _In_ UINT flags);
++    _Win32_AssociatedEnum_(IMAGE_FLAGS) _In_ UINT flags);
+ 
+ #define DI_MASK         0x0001
+ #define DI_IMAGE        0x0002
 @@ -10946,6 +13249,8 @@ CopyImage(
  #define DI_NOMIRROR     0x0010
  #endif /* _WIN32_WINNT >= 0x0501 */
@@ -7392,6 +7713,15 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI BOOL WINAPI DrawIconEx(
      _In_ HDC hdc,
      _In_ int xLeft,
+@@ -10955,7 +13260,7 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
+     _In_ int cyWidth,
+     _In_ UINT istepIfAniCur,
+     _In_opt_ HBRUSH hbrFlickerFreeDraw,
+-    _In_ UINT diFlags);
++    _Win32_AssociatedEnum_(DI_FLAGS) _In_ UINT diFlags);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
+ #pragma endregion
 @@ -10965,18 +13270,24 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
@@ -7669,7 +7999,7 @@ index f99e9294..b5a230a9 100644
      int     nMin;
      int     nMax;
      UINT    nPage;
-@@ -12047,6 +14456,7 @@ typedef struct tagSCROLLINFO
+@@ -12047,21 +14456,24 @@ typedef struct tagSCROLLINFO
  }   SCROLLINFO, FAR *LPSCROLLINFO;
  typedef SCROLLINFO CONST FAR *LPCSCROLLINFO;
  
@@ -7677,7 +8007,10 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  int
  WINAPI
-@@ -12056,6 +14466,8 @@ SetScrollInfo(
+ SetScrollInfo(
+     _In_ HWND hwnd,
+-    _In_ int nBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar,
      _In_ LPCSCROLLINFO lpsi,
      _In_ BOOL redraw);
  
@@ -7686,6 +8019,13 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
+ GetScrollInfo(
+     _In_ HWND hwnd,
+-    _In_ int nBar,
++    _Win32_AssociatedEnum_(SCROLLBAR_CONSTANTS) _In_ int nBar,
+     _Inout_ LPSCROLLINFO lpsi);
+ 
+ 
 @@ -12084,9 +14496,25 @@ GetScrollInfo(
   */
  #define MDITILE_VERTICAL       0x0000 /*not in win3.1 */
@@ -7858,7 +8198,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12412,6 +14859,8 @@ WinHelpW(
+@@ -12412,12 +14859,14 @@ WinHelpW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  #if(WINVER >= 0x0500)
@@ -7867,6 +8207,13 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  DWORD
  WINAPI
+ GetGuiResources(
+     _In_ HANDLE hProcess,
+-    _In_ DWORD uiFlags);
++    _Win32_AssociatedEnum_(GET_GUI_RESOURCES_FLAGS) _In_ DWORD uiFlags);
+ #endif /* WINVER >= 0x0500 */
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 @@ -12514,6 +14963,52 @@ GetGuiResources(
  #define SPI_GETMOUSETRAILS          0x005E
  #define SPI_SETSCREENSAVERRUNNING   0x0061
@@ -8635,8 +8982,9 @@ index f99e9294..b5a230a9 100644
  
  #if(WINVER >= 0x0601)
  
+-WINUSERAPI
 +_Win32_SupportedOS_WindowsVista_
- WINUSERAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) WINUSERAPI
  LONG
  WINAPI
  GetDisplayConfigBufferSizes(
@@ -8656,8 +9004,9 @@ index f99e9294..b5a230a9 100644
 -    _In_ UINT32 flags);
 +    _Win32_AssociatedEnum_(SET_DISPLAY_CONFIG_FLAGS) _In_ UINT32 flags);
  
+-WINUSERAPI
 +_Win32_SupportedOS_Windows7_
- WINUSERAPI
++_Win32_AssociatedEnum_(WIN32_ERROR) WINUSERAPI
  _Success_(return == ERROR_SUCCESS) LONG
  WINAPI
  QueryDisplayConfig(
@@ -8887,7 +9236,7 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13559,6 +16511,8 @@ SetDebugErrorLevel(
+@@ -13559,13 +16511,17 @@ SetDebugErrorLevel(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -8896,8 +9245,9 @@ index f99e9294..b5a230a9 100644
  WINUSERAPI
  VOID
  WINAPI
-@@ -13566,6 +16520,8 @@ SetLastErrorEx(
-     _In_ DWORD dwErrCode,
+ SetLastErrorEx(
+-    _In_ DWORD dwErrCode,
++    _Win32_AssociatedEnum_(WIN32_ERROR) _In_ DWORD dwErrCode,
      _In_ DWORD dwType);
  
 +_Win32_SetLastError_

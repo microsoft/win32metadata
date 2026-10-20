@@ -98,7 +98,7 @@
          [out] IMoniker **ppmk
      );
  
-@@ -451,7 +462,7 @@
+@@ -451,19 +462,19 @@
  
      HRESULT GetUserType
      (
@@ -107,6 +107,31 @@
          [out] LPOLESTR *pszUserType
      );
  
+     HRESULT SetExtent
+     (
+-        [in] DWORD dwDrawAspect,
++        [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD dwDrawAspect,
+         [in] SIZEL *psizel
+     );
+ 
+     HRESULT GetExtent
+     (
+-        [in] DWORD dwDrawAspect,
++        [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD dwDrawAspect,
+         [out] SIZEL *psizel
+     );
+ 
+@@ -485,8 +496,8 @@
+ 
+     HRESULT GetMiscStatus
+     (
+-        [in] DWORD dwAspect,
+-        [out] DWORD *pdwStatus
++        [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD dwAspect,
++        [annotation("_Win32_AssociatedEnum_(OLEMISC)")] [out] DWORD *pdwStatus
+     );
+ 
+     HRESULT SetColorScheme
 @@ -568,6 +579,7 @@
  
  }
@@ -179,6 +204,42 @@
  [
      object,
      uuid(0000010d-0000-0000-C000-000000000046)
+@@ -1012,7 +1032,7 @@
+     [local]
+     HRESULT Draw
+     (
+-        [in, annotation("_In_")] DWORD dwDrawAspect,
++        [in, annotation("_In_ _Win32_AssociatedEnum_(DVASPECT)")] DWORD dwDrawAspect,
+         [in, annotation("_In_")] LONG lindex,
+         [in, unique,annotation("_Null_")] void * pvAspect,
+         [in, unique, annotation("_In_opt_")] DVTARGETDEVICE *ptd,
+@@ -1041,7 +1061,7 @@
+     [local]
+     HRESULT GetColorSet
+     (
+-        [in, annotation("_In_")] DWORD dwDrawAspect,
++        [in, annotation("_In_ _Win32_AssociatedEnum_(DVASPECT)")] DWORD dwDrawAspect,
+         [in, annotation("_In_")] LONG lindex,
+         [in, unique, annotation("_Null_")] void *pvAspect,
+         [in, unique, annotation("_In_opt_")] DVTARGETDEVICE *ptd,
+@@ -1063,7 +1083,7 @@
+     [local]
+     HRESULT Freeze
+     (
+-        [in, annotation("_In_")] DWORD dwDrawAspect,
++        [in, annotation("_In_ _Win32_AssociatedEnum_(DVASPECT)")] DWORD dwDrawAspect,
+         [in, annotation("_In_")] LONG lindex,
+         [in, unique, annotation("_Null_")] void *pvAspect,
+         [out, annotation("_Out_")] DWORD *pdwFreeze
+@@ -1086,7 +1106,7 @@
+ 
+     HRESULT SetAdvise
+     (
+-        [in] DWORD aspects,
++        [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD aspects,
+         [in] DWORD advf,
+         [in, unique] IAdviseSink *pAdvSink
+     );
 @@ -1109,6 +1129,7 @@
  
  }
@@ -187,6 +248,15 @@
  [
      object,
      uuid(00000127-0000-0000-C000-000000000046)
+@@ -1121,7 +1142,7 @@
+ 
+     HRESULT GetExtent
+     (
+-        [in]  DWORD dwDrawAspect,
++        [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in]  DWORD dwDrawAspect,
+         [in]  LONG lindex,
+         [in, unique]  DVTARGETDEVICE* ptd,
+         [out] LPSIZEL lpsizel
 @@ -1130,6 +1151,7 @@
  }
  

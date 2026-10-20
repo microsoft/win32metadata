@@ -12,11 +12,10 @@
  #include <apiset.h>
  #include <apisetcconv.h>
  #include <minwindef.h>
-@@ -41,6 +46,18 @@
- #define FILE_MAP_RESERVE          0x80000000
+@@ -42,6 +47,18 @@
  #define FILE_MAP_TARGETS_INVALID  0x40000000
  #define FILE_MAP_LARGE_PAGES      0x20000000
-+
+ 
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(FILE_MAP, unsigned int,
 +    FILE_MAP_WRITE,
@@ -28,9 +27,21 @@
 +    FILE_MAP_TARGETS_INVALID,
 +    FILE_MAP_LARGE_PAGES);
 +#endif
- 
++
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
+ 
+@@ -56,8 +73,8 @@
+ VirtualAlloc(
+     _In_opt_ LPVOID lpAddress,
+     _In_ SIZE_T dwSize,
+-    _In_ DWORD flAllocationType,
+-    _In_ DWORD flProtect
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ DWORD flAllocationType,
++    _Win32_AssociatedEnum_(PAGE_PROTECTION_FLAGS) _In_ DWORD flProtect
+     );
+ 
+ WINBASEAPI
 @@ -77,6 +94,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -58,10 +69,18 @@
  WINBASEAPI
  _Ret_maybenull_
  _Post_writable_byte_size_(dwSize)
-@@ -117,6 +140,8 @@
-     _In_ DWORD flProtect
-     );
- 
+@@ -113,10 +136,12 @@
+     _In_ HANDLE hProcess,
+     _In_opt_ LPVOID lpAddress,
+     _In_ SIZE_T dwSize,
+-    _In_ DWORD flAllocationType,
+-    _In_ DWORD flProtect
+-    );
+-
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ DWORD flAllocationType,
++    _Win32_AssociatedEnum_(PAGE_PROTECTION_FLAGS) _In_ DWORD flProtect
++    );
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
  WINBASEAPI
@@ -170,6 +189,15 @@
  WINBASEAPI
  BOOL
  WINAPI
+@@ -329,7 +372,7 @@
+     _In_ HANDLE hProcess,
+     _In_ SIZE_T dwMinimumWorkingSetSize,
+     _In_ SIZE_T dwMaximumWorkingSetSize,
+-    _In_ DWORD Flags
++    _Win32_AssociatedEnum_(SETPROCESSWORKINGSETSIZEEX_FLAGS) _In_ DWORD Flags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 @@ -338,6 +381,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -258,7 +286,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -521,11 +582,13 @@
+@@ -521,17 +582,19 @@
  WINAPI
  MapViewOfFileFromApp(
      _In_ HANDLE hFileMappingObject,
@@ -273,6 +301,13 @@
  WINBASEAPI
  BOOL
  WINAPI
+ UnmapViewOfFileEx(
+     _In_ PVOID BaseAddress,
+-    _In_ ULONG UnmapFlags
++    _Win32_AssociatedEnum_(UNMAP_VIEW_OF_FILE_FLAGS) _In_ ULONG UnmapFlags
+     );
+ 
+ #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 @@ -544,6 +607,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
@@ -318,6 +353,15 @@
  WINBASEAPI
  _Post_writable_byte_size_(dwSize)
  LPVOID
+@@ -597,7 +670,7 @@
+     _In_ HANDLE hProcess,
+     _In_opt_ LPVOID lpAddress,
+     _In_ SIZE_T dwSize,
+-    _In_ DWORD flAllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ DWORD flAllocationType,
+     _In_ DWORD flProtect,
+     _In_ DWORD nndPreferred
+     );
 @@ -608,6 +681,8 @@
  
  #define MEHC_PATROL_SCRUBBER_PRESENT  0x1
@@ -377,6 +421,15 @@
  WINBASEAPI
  BOOL
  WINAPI
+@@ -727,7 +810,7 @@
+ VirtualAllocFromApp(
+     _In_opt_ PVOID BaseAddress,
+     _In_ SIZE_T Size,
+-    _In_ ULONG AllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ ULONG AllocationType,
+     _In_ ULONG Protection
+     );
+ 
 @@ -895,6 +978,8 @@
  #pragma warning(pop)
  #endif
@@ -395,7 +448,7 @@
  _Ret_maybenull_  __out_data_source(FILE)
  PVOID
  MapViewOfFile2(
-@@ -962,6 +1047,8 @@
+@@ -962,13 +1047,15 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -404,6 +457,14 @@
  WINBASEAPI
  BOOL
  WINAPI
+ UnmapViewOfFile2(
+     _In_ HANDLE Process,
+     _In_ PVOID BaseAddress,
+-    _In_ ULONG UnmapFlags
++    _Win32_AssociatedEnum_(UNMAP_VIEW_OF_FILE_FLAGS) _In_ ULONG UnmapFlags
+     );
+ 
+ WINBASEAPI
 @@ -988,6 +1075,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -413,7 +474,14 @@
  WINBASEAPI
  _Ret_maybenull_
  _Post_writable_byte_size_(Size)
-@@ -1003,6 +1092,8 @@
+@@ -997,12 +1086,14 @@
+     _In_opt_ HANDLE Process,
+     _In_opt_ PVOID BaseAddress,
+     _In_ SIZE_T Size,
+-    _In_ ULONG AllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ ULONG AllocationType,
+     _In_ ULONG PageProtection,
+     _Inout_updates_opt_(ParameterCount) MEM_EXTENDED_PARAMETER* ExtendedParameters,
      _In_ ULONG ParameterCount
      );
  
@@ -422,6 +490,15 @@
  WINBASEAPI
  _Ret_maybenull_  __out_data_source(FILE)
  PVOID
+@@ -1013,7 +1104,7 @@
+     _In_opt_ PVOID BaseAddress,
+     _In_ ULONG64 Offset,
+     _In_ SIZE_T ViewSize,
+-    _In_ ULONG AllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ ULONG AllocationType,
+     _In_ ULONG PageProtection,
+     _Inout_updates_opt_(ParameterCount) MEM_EXTENDED_PARAMETER* ExtendedParameters,
+     _In_ ULONG ParameterCount
 @@ -1025,6 +1116,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -431,7 +508,14 @@
  WINBASEAPI
  _Ret_maybenull_
  _Post_writable_byte_size_(Size)
-@@ -1040,6 +1133,8 @@
+@@ -1034,12 +1127,14 @@
+     _In_opt_ HANDLE Process,
+     _In_opt_ PVOID BaseAddress,
+     _In_ SIZE_T Size,
+-    _In_ ULONG AllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ ULONG AllocationType,
+     _In_ ULONG PageProtection,
+     _Inout_updates_opt_(ParameterCount) MEM_EXTENDED_PARAMETER* ExtendedParameters,
      _In_ ULONG ParameterCount
      );
  
@@ -440,6 +524,15 @@
  WINBASEAPI
  _Ret_maybenull_  __out_data_source(FILE)
  PVOID
+@@ -1050,7 +1145,7 @@
+     _In_opt_ PVOID BaseAddress,
+     _In_ ULONG64 Offset,
+     _In_ SIZE_T ViewSize,
+-    _In_ ULONG AllocationType,
++    _Win32_AssociatedEnum_(VIRTUAL_ALLOCATION_TYPE) _In_ ULONG AllocationType,
+     _In_ ULONG PageProtection,
+     _Inout_updates_opt_(ParameterCount) MEM_EXTENDED_PARAMETER* ExtendedParameters,
+     _In_ ULONG ParameterCount
 @@ -1066,6 +1161,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

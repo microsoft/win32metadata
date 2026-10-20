@@ -47,20 +47,29 @@
  
  
  /****************************************************************************
-@@ -664,6 +688,13 @@
+@@ -640,7 +664,7 @@
+     ULONG                               cbSize;    
+     LPCWSTR                             wszAlgorithm;
+     ULONG                               cbBufferSize;
+-    DWORD                               dwFlags;
++    _Win32_AssociatedEnum_(CRYPT_XML_TRANSFORM_FLAGS) DWORD                               dwFlags;
+     PFN_CRYPT_XML_CREATE_TRANSFORM      pfnCreateTransform;
+ }CRYPT_XML_TRANSFORM_INFO, *PCRYPT_XML_TRANSFORM_INFO;
+ 
+@@ -663,6 +687,13 @@
+ // without the QueryString
  
  #define CRYPT_XML_TRANSFORM_URI_QUERY_STRING    0x00000004
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +_Win32_FlagsEnum_(CRYPT_XML_TRANSFORM_FLAGS, unsigned int,
 +    CRYPT_XML_TRANSFORM_ON_STREAM,
 +    CRYPT_XML_TRANSFORM_ON_NODESET,
 +    CRYPT_XML_TRANSFORM_URI_QUERY_STRING);
 +#endif
-+
+ 
  /****************************************************************************
   CRYPT_XML_TRANSFORM_CHAIN_CONFIG
- 
 @@ -803,7 +834,7 @@
  
  ****************************************************************************/
@@ -214,7 +223,7 @@
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1652,6 +1718,7 @@
+@@ -1652,14 +1718,15 @@
      [in] Specifies the canonicalization method.
  
  ****************************************************************************/
@@ -222,11 +231,12 @@
  _Success_( return == 0 )
  HRESULT 
  WINAPI 
-@@ -1659,7 +1726,7 @@
+ CryptXmlSign(
      _In_            HCRYPTXML           hSignature,
      _In_opt_        HCRYPTPROV_OR_NCRYPT_KEY_HANDLE hKey,
-                     DWORD               dwKeySpec,
+-                    DWORD               dwKeySpec,
 -                    DWORD               dwFlags,
++                    _Win32_AssociatedEnum_(CERT_KEY_SPEC) DWORD               dwKeySpec,
 +                    _Win32_AssociatedEnum_(CRYPT_XML_FLAGS) DWORD               dwFlags,
                      CRYPT_XML_KEYINFO_SPEC dwKeyInfoSpec,
      _In_opt_        const void          *pvKeyInfoSpec,

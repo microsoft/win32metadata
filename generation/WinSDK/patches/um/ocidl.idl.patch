@@ -97,7 +97,7 @@
  [
      object,
      uuid(B196B289-BAB4-101A-B69C-00AA00341D07),
-@@ -532,7 +547,7 @@
+@@ -532,12 +547,12 @@
      HRESULT TransformCoords(
                  [in, out] POINTL * pPtlHimetric,
                  [in, out] POINTF * pPtfContainer,
@@ -106,6 +106,12 @@
              );
  
      HRESULT TranslateAccelerator(
+                 [in] MSG * pMsg,
+-                [in] DWORD grfModifiers
++                [annotation("_Win32_AssociatedEnum_(KEYMODIFIERS)")] [in] DWORD grfModifiers
+             );
+ 
+     HRESULT OnFocus(
 @@ -550,6 +565,7 @@
  }
  
@@ -248,6 +254,15 @@
  [
      object,
      pointer_default(unique),
+@@ -1410,7 +1442,7 @@
+             );
+ 
+     HRESULT GetNaturalExtent (
+-                [in] DWORD dwAspect,
++                [annotation("_Win32_AssociatedEnum_(DVASPECT)")] [in] DWORD dwAspect,
+                 [in] LONG lindex,
+                 [in] DVTARGETDEVICE * ptd,
+                 [in] HDC hicTargetDev,
 @@ -1420,6 +1452,7 @@
  }
  
@@ -298,6 +313,15 @@
  [
      object,
      pointer_default(unique),
+@@ -1602,7 +1641,7 @@
+     } POINTERINACTIVE;
+ 
+     HRESULT GetActivationPolicy(
+-                [out] DWORD * pdwPolicy
++                [annotation("_Win32_AssociatedEnum_(POINTERINACTIVE)")] [out] DWORD * pdwPolicy
+             );
+ 
+     HRESULT OnInactiveMouseMove(
 @@ -1622,6 +1661,7 @@
  }
  

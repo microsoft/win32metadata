@@ -1,5 +1,5 @@
 diff --git a/um/winineti.h b/um/winineti.h
-index d951d495..4d7c9584 100644
+index d951d495..921a6563 100644
 --- a/um/winineti.h
 +++ b/um/winineti.h
 @@ -1042,6 +1042,8 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
@@ -138,16 +138,19 @@ index d951d495..4d7c9584 100644
  BOOLAPI InternetGoOnline(
      _In_opt_ LPSTR   lpszURL,
      _In_ HWND     hwndParent,
-@@ -1809,6 +1854,8 @@ BOOLAPI InternetGoOnline(
+@@ -1809,8 +1854,10 @@ BOOLAPI InternetGoOnline(
  #endif // _WINX32_
  #endif // !UNICODE
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  BOOLAPI InternetAutodial(
-     _In_       DWORD  dwFlags,
+-    _In_       DWORD  dwFlags,
++    _Win32_AssociatedEnum_(INTERNET_AUTODIAL) _In_ DWORD dwFlags,
      _In_opt_ HWND   hwndParent);
-@@ -1821,13 +1868,19 @@ BOOLAPI InternetAutodial(
+ 
+ // Flags for InternetAutodial
+@@ -1821,24 +1868,32 @@ BOOLAPI InternetAutodial(
  
  
  #define INTERNET_AUTODIAL_FLAGS_MASK (INTERNET_AUTODIAL_FORCE_ONLINE | INTERNET_AUTODIAL_FORCE_UNATTENDED | INTERNET_AUTODIAL_FAILIFSECURITYCHECK | INTERNET_AUTODIAL_OVERRIDE_NET_PRESENT)
@@ -159,15 +162,18 @@ index d951d495..4d7c9584 100644
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  BOOLAPI InternetGetConnectedState(
-     _Out_  LPDWORD  lpdwFlags,
+-    _Out_  LPDWORD  lpdwFlags,
++    _Win32_AssociatedEnum_(INTERNET_CONNECTION) _Out_ LPDWORD lpdwFlags,
      _Reserved_ DWORD    dwReserved);
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  BOOLAPI
  InternetGetConnectedStateExA(
-     _Out_opt_ LPDWORD lpdwFlags,
-@@ -1836,6 +1889,8 @@ InternetGetConnectedStateExA(
+-    _Out_opt_ LPDWORD lpdwFlags,
++    _Win32_AssociatedEnum_(INTERNET_CONNECTION) _Out_opt_ LPDWORD lpdwFlags,
+     _Out_writes_opt_(cchNameLen) LPSTR lpszConnectionName,
+     _In_ DWORD cchNameLen,
      _Reserved_ DWORD dwReserved
  );
  
@@ -175,7 +181,11 @@ index d951d495..4d7c9584 100644
 +_Win32_SupportedOS_Windows2000_
  BOOLAPI
  InternetGetConnectedStateExW(
-     _Out_opt_ LPDWORD lpdwFlags,
+-    _Out_opt_ LPDWORD lpdwFlags,
++    _Win32_AssociatedEnum_(INTERNET_CONNECTION) _Out_opt_ LPDWORD lpdwFlags,
+     _Out_writes_opt_(cchNameLen) LPWSTR lpszConnectionName,
+     _In_ DWORD cchNameLen,
+     _Reserved_ DWORD dwReserved
 @@ -1880,16 +1935,21 @@ ReadGuidsForConnectedNetworks(
  #define INTERNET_AUTOPROXY_INIT_MASK (INTERNET_AUTOPROXY_INIT_DEFAULT|INTERNET_AUTOPROXY_INIT_DOWNLOADSYNC|INTERNET_AUTOPROXY_INIT_QUERYSTATE|INTERNET_AUTOPROXY_INIT_ONLYQUERY)
  
@@ -198,15 +208,18 @@ index d951d495..4d7c9584 100644
  BOOLAPI CreateMD5SSOHash (
      _In_ PWSTR    pszChallengeInfo,
      _In_ PWSTR    pwszRealm,
-@@ -1903,6 +1963,8 @@ BOOLAPI CreateMD5SSOHash (
+@@ -1903,8 +1963,10 @@ BOOLAPI CreateMD5SSOHash (
  #ifdef _WINX32_
  #define InternetGetConnectedStateEx  InternetGetConnectedStateExA
  #else
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  BOOLAPI InternetGetConnectedStateEx(
-     _Out_ LPDWORD lpdwFlags,
+-    _Out_ LPDWORD lpdwFlags,
++    _Win32_AssociatedEnum_(INTERNET_CONNECTION) _Out_ LPDWORD lpdwFlags,
      _Out_writes_opt_(dwNameLen) LPSTR lpszConnectionName,
+     _In_ DWORD dwNameLen,
+     _In_ DWORD dwReserved
 @@ -2107,12 +2169,14 @@ BOOLAPI IsDomainLegalCookieDomainW(    // in "wininet\http\cookie.cxx"
  #endif // !UNICODE
  

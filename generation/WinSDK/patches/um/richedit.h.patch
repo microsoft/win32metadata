@@ -237,24 +237,40 @@
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1160,7 +1281,7 @@
+@@ -1158,13 +1279,13 @@
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
+ 	BYTE	bOutlineLevel;			// Outline level
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
- 	WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
+-	WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Nibble 0: style, 1: cfpat, 2: cbpat
  	WORD	wNumberingStart;		// Starting value for numbering
 -	WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
 +	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING_STYLE) WORD	wNumberingStyle;		// Alignment, roman/arabic, (), ), ., etc.
  	WORD	wNumberingTab;			// Space bet FirstIndent & 1st-line text
  	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)
  	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half pts)
-@@ -1194,7 +1315,7 @@
+-	WORD	wBorders;				// Border styles (nibble/border)
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)
+ };
+ 
+ #else	// Regular C-style	
+@@ -1192,13 +1313,13 @@
+ 	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
+ 	BYTE	bOutlineLevel;			// Outline Level						
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
- 	WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
+-	WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
++	_Win32_AssociatedEnum_(PARAFORMAT_SHADING_STYLE) WORD	wShadingStyle;			// Byte 0: style, nib 2: cfpat, 3: cbpat
  	WORD	wNumberingStart;		// Starting value for numbering 			
 -	WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
 +	_Win32_AssociatedEnum_(PARAFORMAT_NUMBERING_STYLE) WORD	wNumberingStyle;		// Alignment, Roman/Arabic, (), ), ., etc.
  	WORD	wNumberingTab;			// Space bet 1st indent and 1st-line text
  	WORD	wBorderSpace;			// Border-text spaces (nbl/bdr in pts)	
  	WORD	wBorderWidth;			// Pen widths (nbl/bdr in half twips)	
+-	WORD	wBorders;				// Border styles (nibble/border)		
++	_Win32_AssociatedEnum_(PARAFORMAT_BORDERS) WORD	wBorders;				// Border styles (nibble/border)		
+ } PARAFORMAT2;
+ 
+ #endif // C++	
 @@ -1256,6 +1377,44 @@
  					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
  					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
@@ -334,6 +350,24 @@
  								// (can be combined with other PFNS_xxx)
  // PARAFORMAT alignment options 
  #define PFA_LEFT			 1
+@@ -1330,7 +1509,7 @@
+ {
+ 	NMHDR nmhdr;
+ 	CHARRANGE chrg;
+-	WORD seltyp;
++	_Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltyp;
+ } SELCHANGE;
+ 
+ #if (_RICHEDIT_VER >= 0x0800)
+@@ -1439,7 +1618,7 @@
+ {
+ 	NMHDR nmhdr;
+ 	CHARRANGE chrg;
+-	WORD seltyp;
++	_Win32_AssociatedEnum_(RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE) WORD seltyp;
+ } ENCORRECTTEXT;
+ 
+ // East Asia specific 
 @@ -1466,7 +1645,7 @@
  // Paste Special 
  typedef struct _repastespecial

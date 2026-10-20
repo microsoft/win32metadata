@@ -1,5 +1,5 @@
 diff --git a/um/ncrypt.h b/um/ncrypt.h
-index 4ba920f4..608a872c 100644
+index 4ba920f4..d2722851 100644
 --- a/um/ncrypt.h
 +++ b/um/ncrypt.h
 @@ -14,6 +14,12 @@
@@ -83,7 +83,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -759,6 +784,7 @@ typedef struct NCryptKeyName
+@@ -755,10 +780,11 @@ typedef struct NCryptKeyName
+ {
+     LPWSTR  pszName;
+     LPWSTR  pszAlgid;
+-    DWORD   dwLegacyKeySpec;
++    _Win32_AssociatedEnum_(CERT_KEY_SPEC) DWORD   dwLegacyKeySpec;
      DWORD   dwFlags;
  } NCryptKeyName;
  
@@ -91,6 +96,15 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
+@@ -767,7 +793,7 @@ NCryptEnumKeys(
+     _In_opt_ LPCWSTR pszScope,
+     _Outptr_ NCryptKeyName **ppKeyName,
+     _Inout_ PVOID * ppEnumState,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
 @@ -780,6 +806,7 @@ typedef struct NCryptProviderName
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -115,6 +129,17 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
+@@ -817,8 +846,8 @@ NCryptOpenKey(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+     _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszKeyName,
+-    _In_opt_ DWORD  dwLegacyKeySpec,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(CERT_KEY_SPEC) _In_opt_ DWORD  dwLegacyKeySpec,
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
 @@ -826,6 +855,7 @@ NCryptOpenKey(
  #define NCRYPT_MACHINE_KEY_FLAG         0x00000020
  #define NCRYPT_OVERWRITE_KEY_FLAG       0x00000080
@@ -123,6 +148,17 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
+@@ -834,8 +864,8 @@ NCryptCreatePersistedKey(
+     _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    LPCWSTR pszAlgId,
+     _In_opt_ LPCWSTR pszKeyName,
+-    _In_    DWORD   dwLegacyKeySpec,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(CERT_KEY_SPEC) _In_    DWORD   dwLegacyKeySpec,
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
 @@ -1241,6 +1271,7 @@ typedef struct __NCRYPT_PCP_RAW_POLICYDIGEST
  // NCryptGetProperty flags
  #define NCRYPT_PERSIST_ONLY_FLAG        0x40000000
@@ -131,6 +167,15 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  _Success_( return == 0 )
  SECURITY_STATUS
+@@ -1251,7 +1282,7 @@ NCryptGetProperty(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_    DWORD   dwFlags);
+ 
+ 
+ 
 @@ -1259,6 +1290,7 @@ NCryptGetProperty(
  #define NCRYPT_PERSIST_FLAG             0x80000000
  #define NCRYPT_PERSIST_ONLY_FLAG        0x40000000
@@ -139,7 +184,15 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1274,6 +1306,7 @@ NCryptSetProperty(
+@@ -1267,22 +1299,24 @@ NCryptSetProperty(
+     _In_    LPCWSTR pszProperty,
+     _In_reads_bytes_(cbInput) PBYTE pbInput,
+     _In_    DWORD   cbInput,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
  // NCryptFinalizeKey flags
  #define     NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG   0x00000200
  
@@ -147,7 +200,10 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1283,6 +1316,7 @@ NCryptFinalizeKey(
+ NCryptFinalizeKey(
+     _In_    NCRYPT_KEY_HANDLE hKey,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -155,7 +211,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1298,6 +1332,7 @@ NCryptEncrypt(
+@@ -1294,10 +1328,11 @@ NCryptEncrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -163,6 +224,15 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
+@@ -1309,7 +1344,7 @@ NCryptDecrypt(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
 @@ -1423,6 +1458,7 @@ typedef struct _NCRYPT_PQ_BLOB
  #define NCRYPT_DO_NOT_FINALIZE_FLAG     0x00000400
  #define NCRYPT_EXPORT_LEGACY_FLAG       0x00000800
@@ -171,7 +241,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1438,6 +1474,7 @@ NCryptImportKey(
+@@ -1434,10 +1470,11 @@ NCryptImportKey(
+     _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_reads_bytes_(cbData) PBYTE pbData,
+     _In_    DWORD   cbData,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -179,7 +254,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1453,6 +1490,7 @@ NCryptExportKey(
+@@ -1449,10 +1486,11 @@ NCryptExportKey(
+     _Out_writes_bytes_to_opt_(cbOutput, *pcbResult) PBYTE pbOutput,
+     _In_    DWORD   cbOutput,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -187,7 +267,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1468,6 +1506,7 @@ NCryptSignHash(
+@@ -1464,10 +1502,11 @@ NCryptSignHash(
+     _Out_writes_bytes_to_opt_(cbSignature, *pcbResult) PBYTE pbSignature,
+     _In_    DWORD   cbSignature,
+     _Out_   DWORD * pcbResult,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -195,7 +280,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1482,6 +1521,7 @@ NCryptVerifySignature(
+@@ -1478,10 +1517,11 @@ NCryptVerifySignature(
+     _In_    DWORD   cbHashValue,
+     _In_reads_bytes_(cbSignature) PBYTE pbSignature,
+     _In_    DWORD   cbSignature,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  
@@ -225,7 +315,16 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1527,6 +1570,7 @@ NCryptTranslateHandle(
+@@ -1512,7 +1555,7 @@ NCryptTranslateHandle(
+     _Out_   NCRYPT_KEY_HANDLE *phKey,
+     _In_    HCRYPTPROV hLegacyProv,
+     _In_opt_ HCRYPTKEY hLegacyKey,
+-    _In_opt_ DWORD  dwLegacyKeySpec,
++    _Win32_AssociatedEnum_(CERT_KEY_SPEC) _In_opt_ DWORD  dwLegacyKeySpec,
+     _In_    DWORD   dwFlags);
+ 
+ #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -1527,19 +1570,21 @@ NCryptTranslateHandle(
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -233,7 +332,14 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1540,6 +1584,7 @@ NCryptNotifyChangeKey(
+ NCryptNotifyChangeKey(
+     _In_    NCRYPT_PROV_HANDLE hProvider,
+     _Inout_ HANDLE *phEvent,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
+ 
+ 
+ 
  #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  #pragma endregion
  
@@ -241,7 +347,12 @@ index 4ba920f4..608a872c 100644
  _Check_return_
  SECURITY_STATUS
  WINAPI
-@@ -1551,6 +1596,7 @@ NCryptSecretAgreement(
+@@ -1547,10 +1592,11 @@ NCryptSecretAgreement(
+     _In_    NCRYPT_KEY_HANDLE hPrivKey,
+     _In_    NCRYPT_KEY_HANDLE hPubKey,
+     _Out_   NCRYPT_SECRET_HANDLE *phAgreedSecret,
+-    _In_    DWORD   dwFlags);
++    _Win32_AssociatedEnum_(NCRYPT_FLAGS) _In_    DWORD   dwFlags);
  
  
  

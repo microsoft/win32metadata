@@ -19,7 +19,7 @@ index 5295f270..e6f1d4f4 100644
 -
 -
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
-+typedef unsigned long SET_COMPOSITION_STRING_TYPE; typedef unsigned long GET_GUIDE_LINE_TYPE; typedef unsigned long NOTIFY_IME_INDEX; typedef unsigned long NOTIFY_IME_ACTION; typedef unsigned long GET_CONVERSION_LIST_FLAG;
++typedef unsigned long SET_COMPOSITION_STRING_TYPE; typedef unsigned long GET_GUIDE_LINE_TYPE; typedef unsigned long NOTIFY_IME_INDEX; typedef unsigned long NOTIFY_IME_ACTION; typedef unsigned long GET_CONVERSION_LIST_FLAG; typedef unsigned long IME_CONVERSION_MODE; typedef unsigned long IME_SENTENCE_MODE; typedef unsigned long IME_COMPOSITION_STRING; typedef unsigned long IME_ESCAPE; typedef unsigned long IME_HOTKEY_IDENTIFIER;
 +#endif
  // prototype of IMM API
  
@@ -66,7 +66,7 @@ index 5295f270..e6f1d4f4 100644
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmIsIME(IN HKL);
  
 -BOOL WINAPI ImmSimulateHotKey(IN HWND, IN DWORD);
-+_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSimulateHotKey(IN HWND, IN DWORD);
++_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSimulateHotKey(IN HWND, IN _Win32_AssociatedEnum_(IME_HOTKEY_IDENTIFIER) DWORD);
  
 -HIMC WINAPI ImmCreateContext(void);
 -BOOL WINAPI ImmDestroyContext(IN HIMC);
@@ -85,8 +85,8 @@ index 5295f270..e6f1d4f4 100644
  
 -LONG  WINAPI ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
 -LONG  WINAPI ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
-+_Win32_SupportedOS_WindowsXP_ LONG  WINAPI ImmGetCompositionStringA(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
-+_Win32_SupportedOS_WindowsXP_ LONG  WINAPI ImmGetCompositionStringW(IN HIMC, IN DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++_Win32_SupportedOS_WindowsXP_ LONG  WINAPI ImmGetCompositionStringA(IN HIMC, IN _Win32_AssociatedEnum_(IME_COMPOSITION_STRING) DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
++_Win32_SupportedOS_WindowsXP_ LONG  WINAPI ImmGetCompositionStringW(IN HIMC, IN _Win32_AssociatedEnum_(IME_COMPOSITION_STRING) DWORD, _Out_writes_bytes_opt_(dwBufLen) LPVOID lpBuf, IN DWORD dwBufLen);
  #ifdef UNICODE
  #define ImmGetCompositionString  ImmGetCompositionStringW
  #else
@@ -126,7 +126,7 @@ index 5295f270..e6f1d4f4 100644
 -DWORD WINAPI ImmGetGuideLineA(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPSTR lpBuf, _In_ DWORD dwBufLen);
 -DWORD WINAPI ImmGetGuideLineW(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPWSTR lpBuf, _In_ DWORD dwBufLen);
 +_Win32_SupportedOS_WindowsXP_ DWORD WINAPI ImmGetGuideLineA(_In_ HIMC, _Win32_AssociatedEnum_(GET_GUIDE_LINE_TYPE) _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPSTR lpBuf, _In_ DWORD dwBufLen);
-+_Win32_SupportedOS_WindowsXP_ DWORD WINAPI ImmGetGuideLineW(_In_ HIMC, _In_ DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPWSTR lpBuf, _In_ DWORD dwBufLen);
++_Win32_SupportedOS_WindowsXP_ DWORD WINAPI ImmGetGuideLineW(_In_ HIMC, _In_ _Win32_AssociatedEnum_(GET_GUIDE_LINE_TYPE) DWORD dwIndex, _Out_writes_bytes_opt_(dwBufLen) LPWSTR lpBuf, _In_ DWORD dwBufLen);
  #ifdef UNICODE
  #define ImmGetGuideLine  ImmGetGuideLineW
  #else
@@ -137,8 +137,8 @@ index 5295f270..e6f1d4f4 100644
 -BOOL WINAPI ImmSetConversionStatus(IN HIMC, IN DWORD, IN DWORD);
 -BOOL WINAPI ImmGetOpenStatus(IN HIMC);
 -BOOL WINAPI ImmSetOpenStatus(IN HIMC, IN BOOL);
-+_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetConversionStatus(IN HIMC, _Out_opt_ LPDWORD lpfdwConversion, _Out_opt_ LPDWORD lpfdwSentence);
-+_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetConversionStatus(IN HIMC, IN DWORD, IN DWORD);
++_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetConversionStatus(IN HIMC, _Out_opt_ _Win32_AssociatedEnum_(IME_CONVERSION_MODE) LPDWORD lpfdwConversion, _Out_opt_ _Win32_AssociatedEnum_(IME_SENTENCE_MODE) LPDWORD lpfdwSentence);
++_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetConversionStatus(IN HIMC, IN _Win32_AssociatedEnum_(IME_CONVERSION_MODE) DWORD, IN _Win32_AssociatedEnum_(IME_SENTENCE_MODE) DWORD);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetOpenStatus(IN HIMC);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetOpenStatus(IN HIMC, IN BOOL);
  
@@ -176,8 +176,8 @@ index 5295f270..e6f1d4f4 100644
  
 -LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
 -LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
-+_Win32_SupportedOS_WindowsXP_ LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN UINT, IN LPVOID);
-+_Win32_SupportedOS_WindowsXP_ LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN UINT, IN LPVOID);
++_Win32_SupportedOS_WindowsXP_ LRESULT WINAPI ImmEscapeA(IN HKL, IN HIMC, IN _Win32_AssociatedEnum_(IME_ESCAPE) UINT, IN LPVOID);
++_Win32_SupportedOS_WindowsXP_ LRESULT WINAPI ImmEscapeW(IN HKL, IN HIMC, IN _Win32_AssociatedEnum_(IME_ESCAPE) UINT, IN LPVOID);
  #ifdef UNICODE
  #define ImmEscape  ImmEscapeW
  #else
@@ -186,7 +186,7 @@ index 5295f270..e6f1d4f4 100644
  
 -DWORD   WINAPI ImmGetConversionListA(IN HKL, IN HIMC, _In_ LPCSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
 -DWORD   WINAPI ImmGetConversionListW(IN HKL, IN HIMC, _In_ LPCWSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
-+_Win32_SupportedOS_WindowsXP_ DWORD   WINAPI ImmGetConversionListA(IN HKL, IN HIMC, _In_ LPCSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN UINT uFlag);
++_Win32_SupportedOS_WindowsXP_ DWORD   WINAPI ImmGetConversionListA(IN HKL, IN HIMC, _In_ LPCSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN _Win32_AssociatedEnum_(GET_CONVERSION_LIST_FLAG) UINT uFlag);
 +_Win32_SupportedOS_WindowsXP_ DWORD   WINAPI ImmGetConversionListW(IN HKL, IN HIMC, _In_ LPCWSTR lpSrc, _Out_writes_bytes_(dwBufLen) LPCANDIDATELIST lpDst, IN DWORD dwBufLen, IN _Win32_AssociatedEnum_(GET_CONVERSION_LIST_FLAG) UINT uFlag);
  #ifdef UNICODE
  #define ImmGetConversionList  ImmGetConversionListW
@@ -308,6 +308,18 @@ index 5295f270..e6f1d4f4 100644
  // bit field for conversion mode
  // IME_CMODE_HANGEUL is old name of IME_CMODE_HANGUL. It will be gone eventually.
  #define IME_CMODE_HANGEUL               IME_CMODE_NATIVE
+@@ -765,8 +765,8 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+ // for Windows Simplified Chinese Edition
+ #define SOFTKEYBOARD_TYPE_C1            0x0002
+-
+-
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(IME_CONVERSION_MODE, unsigned long, IME_CMODE_ALPHANUMERIC, IME_CMODE_NATIVE, IME_CMODE_CHINESE, IME_CMODE_HANGUL, IME_CMODE_JAPANESE, IME_CMODE_KATAKANA, IME_CMODE_LANGUAGE, IME_CMODE_FULLSHAPE, IME_CMODE_ROMAN, IME_CMODE_CHARCODE, IME_CMODE_HANJACONVERT, IME_CMODE_NATIVESYMBOL, IME_CMODE_HANGEUL, IME_CMODE_SOFTKBD, IME_CMODE_NOCONVERSION, IME_CMODE_EUDC, IME_CMODE_SYMBOL, IME_CMODE_FIXED, IME_CMODE_RESERVED); _Win32_FlagsEnum_(IME_SENTENCE_MODE, unsigned long, IME_SMODE_NONE, IME_SMODE_PLAURALCLAUSE, IME_SMODE_SINGLECONVERT, IME_SMODE_AUTOMATIC, IME_SMODE_PHRASEPREDICT, IME_SMODE_CONVERSATION, IME_SMODE_RESERVED); _Win32_FlagsEnum_(IME_COMPOSITION_STRING, unsigned long, GCS_COMPREADSTR, GCS_COMPREADATTR, GCS_COMPREADCLAUSE, GCS_COMPSTR, GCS_COMPATTR, GCS_COMPCLAUSE, GCS_CURSORPOS, GCS_DELTASTART, GCS_RESULTREADSTR, GCS_RESULTREADCLAUSE, GCS_RESULTSTR, GCS_RESULTCLAUSE); _Win32_Enum_(IME_ESCAPE, unsigned long, IME_ESC_QUERY_SUPPORT, IME_ESC_RESERVED_FIRST, IME_ESC_RESERVED_LAST, IME_ESC_PRIVATE_FIRST, IME_ESC_PRIVATE_LAST, IME_ESC_SEQUENCE_TO_INTERNAL, IME_ESC_GET_EUDC_DICTIONARY, IME_ESC_SET_EUDC_DICTIONARY, IME_ESC_MAX_KEY, IME_ESC_IME_NAME, IME_ESC_SYNC_HOTKEY, IME_ESC_HANJA_MODE, IME_ESC_AUTOMATA, IME_ESC_PRIVATE_HOTKEY, IME_ESC_GETHELPFILENAME); _Win32_Enum_(IME_HOTKEY_IDENTIFIER, unsigned long, IME_CHOTKEY_IME_NONIME_TOGGLE, IME_CHOTKEY_SHAPE_TOGGLE, IME_CHOTKEY_SYMBOL_TOGGLE, IME_JHOTKEY_CLOSE_OPEN, IME_KHOTKEY_SHAPE_TOGGLE, IME_KHOTKEY_HANJACONVERT, IME_KHOTKEY_ENGLISH, IME_THOTKEY_IME_NONIME_TOGGLE, IME_THOTKEY_SHAPE_TOGGLE, IME_THOTKEY_SYMBOL_TOGGLE, IME_ITHOTKEY_RESEND_RESULTSTR, IME_ITHOTKEY_PREVIOUS_COMPOSITION, IME_ITHOTKEY_UISTYLE_TOGGLE, IME_ITHOTKEY_RECONVERTSTRING);
++#endif
+ #endif  // _IMM_SDK_DEFINED_
+-
+ #ifndef _IMM_DDK_DEFINED_
+ #define _IMM_DDK_DEFINED_
 @@ -921,7 +921,9 @@ BOOL WINAPI ImmGenerateMessage(IN HIMC);
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)

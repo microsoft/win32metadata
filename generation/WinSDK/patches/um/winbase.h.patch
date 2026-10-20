@@ -1,5 +1,5 @@
 diff --git a/um/winbase.h b/um/winbase.h
-index 62b14502..f50d478a 100644
+index 62b14502..a1945a00 100644
 --- a/um/winbase.h
 +++ b/um/winbase.h
 @@ -12,6 +12,48 @@
@@ -542,7 +542,12 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  _Success_(return != NULL)
  _Post_writable_byte_size_(uBytes)
-@@ -1243,6 +1503,8 @@ LocalAlloc(
+@@ -1239,10 +1499,12 @@ DECLSPEC_ALLOCATOR
+ HLOCAL
+ WINAPI
+ LocalAlloc(
+-    _In_ UINT uFlags,
++    _Win32_AssociatedEnum_(LOCAL_ALLOC_FLAGS) _In_ UINT uFlags,
      _In_ SIZE_T uBytes
      );
  
@@ -2638,7 +2643,7 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  _Success_(return != 0 && return < nBufferLength)
  DWORD
-@@ -5363,6 +6090,8 @@ GetFullPathNameTransactedW(
+@@ -5363,11 +6090,13 @@ GetFullPathNameTransactedW(
  #define DDD_NO_BROADCAST_SYSTEM     0x00000008
  #define DDD_LUID_BROADCAST_DRIVE    0x00000010
  
@@ -2647,6 +2652,12 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  BOOL
  WINAPI
+ DefineDosDeviceA(
+-    _In_     DWORD dwFlags,
++    _Win32_AssociatedEnum_(DEFINE_DOS_DEVICE_FLAGS) _In_     DWORD dwFlags,
+     _In_     LPCSTR lpDeviceName,
+     _In_opt_ LPCSTR lpTargetPath
+     );
 @@ -5375,7 +6104,9 @@ DefineDosDeviceA(
  #define DefineDosDevice  DefineDosDeviceA
  #endif
@@ -2658,7 +2669,7 @@ index 62b14502..f50d478a 100644
  DWORD
  WINAPI
  QueryDosDeviceA(
-@@ -5397,6 +6128,8 @@ QueryDosDeviceA(
+@@ -5397,31 +6128,35 @@ QueryDosDeviceA(
  
  #if _WIN32_WINNT >= 0x0600
  
@@ -2667,7 +2678,18 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -5412,6 +6145,8 @@ CreateFileTransactedA(
+ CreateFileTransactedA(
+     _In_       LPCSTR lpFileName,
+     _In_       DWORD dwDesiredAccess,
+-    _In_       DWORD dwShareMode,
++    _Win32_AssociatedEnum_(FILE_SHARE_MODE) _In_       DWORD dwShareMode,
+     _In_opt_   LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _In_       DWORD dwCreationDisposition,
+-    _In_       DWORD dwFlagsAndAttributes,
++    _Win32_AssociatedEnum_(FILE_CREATION_DISPOSITION) _In_       DWORD dwCreationDisposition,
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_       DWORD dwFlagsAndAttributes,
+     _In_opt_   HANDLE hTemplateFile,
+     _In_       HANDLE hTransaction,
      _In_opt_   PUSHORT pusMiniVersion,
      _Reserved_ PVOID  lpExtendedParameter
      );
@@ -2676,7 +2698,20 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -5443,6 +6178,8 @@ CreateFileTransactedW(
+ CreateFileTransactedW(
+     _In_       LPCWSTR lpFileName,
+     _In_       DWORD dwDesiredAccess,
+-    _In_       DWORD dwShareMode,
++    _Win32_AssociatedEnum_(FILE_SHARE_MODE) _In_       DWORD dwShareMode,
+     _In_opt_   LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _In_       DWORD dwCreationDisposition,
+-    _In_       DWORD dwFlagsAndAttributes,
++    _Win32_AssociatedEnum_(FILE_CREATION_DISPOSITION) _In_       DWORD dwCreationDisposition,
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_       DWORD dwFlagsAndAttributes,
+     _In_opt_   HANDLE hTemplateFile,
+     _In_       HANDLE hTransaction,
+     _In_opt_   PUSHORT pusMiniVersion,
+@@ -5443,14 +6178,16 @@ CreateFileTransactedW(
  
  #if _WIN32_WINNT >= 0x0502
  
@@ -2685,6 +2720,16 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  HANDLE
  WINAPI
+ ReOpenFile(
+     _In_ HANDLE  hOriginalFile,
+     _In_ DWORD   dwDesiredAccess,
+-    _In_ DWORD   dwShareMode,
+-    _In_ DWORD   dwFlagsAndAttributes
++    _Win32_AssociatedEnum_(FILE_SHARE_MODE) _In_ DWORD   dwShareMode,
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_ DWORD   dwFlagsAndAttributes
+     );
+ 
+ #endif // _WIN32_WINNT >= 0x0502
 @@ -5464,6 +6201,8 @@ ReOpenFile(
  
  #if _WIN32_WINNT >= 0x0600
@@ -3609,7 +3654,7 @@ index 62b14502..f50d478a 100644
  WINADVAPI
  BOOL
  WINAPI
-@@ -7080,6 +8012,8 @@ PrivilegedServiceAuditAlarmA (
+@@ -7080,13 +8012,15 @@ PrivilegedServiceAuditAlarmA (
  #endif
  
  #if(_WIN32_WINNT >= 0x0601)
@@ -3618,6 +3663,15 @@ index 62b14502..f50d478a 100644
  WINADVAPI
  BOOL
  WINAPI
+ AddConditionalAce (
+     _Inout_ PACL pAcl,
+-    _In_    DWORD dwAceRevision,
+-    _In_    DWORD AceFlags,
++    _Win32_AssociatedEnum_(ACE_REVISION) _In_    DWORD dwAceRevision,
++    _Win32_AssociatedEnum_(ACE_FLAGS) _In_    DWORD AceFlags,
+     _In_    UCHAR AceType,
+     _In_    DWORD AccessMask,
+     _In_    PSID pSid,
 @@ -7101,6 +8035,8 @@ AddConditionalAce (
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
@@ -3645,7 +3699,15 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -7149,6 +8089,8 @@ ReadDirectoryChangesW(
+@@ -7142,13 +8082,15 @@ ReadDirectoryChangesW(
+     _Out_writes_bytes_to_(nBufferLength, *lpBytesReturned) LPVOID lpBuffer,
+     _In_        DWORD nBufferLength,
+     _In_        BOOL bWatchSubtree,
+-    _In_        DWORD dwNotifyFilter,
++    _Win32_AssociatedEnum_(FILE_NOTIFY_CHANGE) _In_        DWORD dwNotifyFilter,
+     _Out_opt_   LPDWORD lpBytesReturned,
+     _Inout_opt_ LPOVERLAPPED lpOverlapped,
+     _In_opt_    LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine
      );
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -3654,6 +3716,15 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  BOOL
  WINAPI
+@@ -7157,7 +8099,7 @@ ReadDirectoryChangesExW(
+     _Out_writes_bytes_to_(nBufferLength, *lpBytesReturned) LPVOID lpBuffer,
+     _In_        DWORD nBufferLength,
+     _In_        BOOL bWatchSubtree,
+-    _In_        DWORD dwNotifyFilter,
++    _Win32_AssociatedEnum_(FILE_NOTIFY_CHANGE) _In_        DWORD dwNotifyFilter,
+     _Out_opt_   LPDWORD lpBytesReturned,
+     _Inout_opt_ LPOVERLAPPED lpOverlapped,
+     _In_opt_    LPOVERLAPPED_COMPLETION_ROUTINE lpCompletionRoutine,
 @@ -7174,13 +8116,15 @@ ReadDirectoryChangesExW(
  
  #if _WIN32_WINNT >= 0x0600
@@ -4104,7 +4175,7 @@ index 62b14502..f50d478a 100644
  WINADVAPI
  _Must_inspect_result_ BOOL
  WINAPI
-@@ -7803,7 +8855,7 @@ CreateProcessWithLogonW(
+@@ -7803,25 +8855,27 @@ CreateProcessWithLogonW(
      _In_        LPCWSTR lpUsername,
      _In_opt_    LPCWSTR lpDomain,
      _In_        LPCWSTR lpPassword,
@@ -4112,8 +4183,11 @@ index 62b14502..f50d478a 100644
 +    _Win32_AssociatedEnum_(CREATE_PROCESS_LOGON_FLAGS) _In_        DWORD dwLogonFlags,
      _In_opt_    LPCWSTR lpApplicationName,
      _Inout_opt_ LPWSTR lpCommandLine,
-     _In_        DWORD dwCreationFlags,
-@@ -7813,12 +8865,14 @@ CreateProcessWithLogonW(
+-    _In_        DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_        DWORD dwCreationFlags,
+     _In_opt_    LPVOID lpEnvironment,
+     _In_opt_    LPCWSTR lpCurrentDirectory,
+     _In_        LPSTARTUPINFOW lpStartupInfo,
      _Out_       LPPROCESS_INFORMATION lpProcessInformation
        );
  
@@ -4128,7 +4202,11 @@ index 62b14502..f50d478a 100644
 +    _Win32_AssociatedEnum_(CREATE_PROCESS_LOGON_FLAGS) _In_        DWORD dwLogonFlags,
      _In_opt_    LPCWSTR lpApplicationName,
      _Inout_opt_ LPWSTR lpCommandLine,
-     _In_        DWORD dwCreationFlags,
+-    _In_        DWORD dwCreationFlags,
++    _Win32_AssociatedEnum_(PROCESS_CREATION_FLAGS) _In_        DWORD dwCreationFlags,
+     _In_opt_    LPVOID lpEnvironment,
+     _In_opt_    LPCWSTR lpCurrentDirectory,
+     _In_        LPSTARTUPINFOW lpStartupInfo,
 @@ -7848,6 +8902,8 @@ IsTokenUntrusted(
  
  #if (_WIN32_WINNT >= 0x0500)
@@ -4138,8 +4216,12 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  BOOL
  WINAPI
-@@ -7860,6 +8916,8 @@ RegisterWaitForSingleObject(
-     _In_        ULONG dwFlags
+@@ -7857,9 +8913,11 @@ RegisterWaitForSingleObject(
+     _In_        WAITORTIMERCALLBACK Callback,
+     _In_opt_    PVOID Context,
+     _In_        ULONG dwMilliseconds,
+-    _In_        ULONG dwFlags
++    _Win32_AssociatedEnum_(WORKER_THREAD_FLAGS) _In_        ULONG dwFlags
      );
  
 +_Win32_SetLastError_
@@ -4805,6 +4887,18 @@ index 62b14502..f50d478a 100644
  WINBASEAPI
  HANDLE
  WINAPI
+@@ -9435,9 +10623,9 @@ OpenFileById (
+     _In_     HANDLE hVolumeHint,
+     _In_     LPFILE_ID_DESCRIPTOR lpFileId,
+     _In_     DWORD dwDesiredAccess,
+-    _In_     DWORD dwShareMode,
++    _Win32_AssociatedEnum_(FILE_SHARE_MODE) _In_     DWORD dwShareMode,
+     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes,
+-    _In_     DWORD dwFlagsAndAttributes
++    _Win32_AssociatedEnum_(FILE_FLAGS_AND_ATTRIBUTES) _In_     DWORD dwFlagsAndAttributes
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 @@ -9468,22 +10656,32 @@ OpenFileById (
  
  #define SYMBOLIC_LINK_FLAG_ALLOW_UNPRIVILEGED_CREATE    (0x2)

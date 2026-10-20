@@ -319,6 +319,24 @@
  
  /* Macros to retrieve CMYK values from a COLORREF */
  #define GetKValue(cmyk)      ((BYTE)(cmyk))
+@@ -840,7 +1046,7 @@
+         LONG         bV4Height;
+         WORD         bV4Planes;
+         WORD         bV4BitCount;
+-        DWORD        bV4V4Compression;
++        _Win32_AssociatedEnum_(BI_COMPRESSION) DWORD        bV4V4Compression;
+         DWORD        bV4SizeImage;
+         LONG         bV4XPelsPerMeter;
+         LONG         bV4YPelsPerMeter;
+@@ -871,7 +1077,7 @@
+         LONG         bV5Height;
+         WORD         bV5Planes;
+         WORD         bV5BitCount;
+-        DWORD        bV5Compression;
++        _Win32_AssociatedEnum_(BI_COMPRESSION) DWORD        bV5Compression;
+         DWORD        bV5SizeImage;
+         LONG         bV5XPelsPerMeter;
+         LONG         bV5YPelsPerMeter;
 @@ -907,6 +1113,16 @@
  #define BI_BITFIELDS  3L
  #define BI_JPEG       4L
@@ -1312,12 +1330,15 @@
  #else
  #define CreateDC  CreateDCA
  #endif // !UNICODE
+-WINGDIAPI HBITMAP WINAPI CreateDIBitmap( _In_ HDC hdc, _In_opt_ CONST BITMAPINFOHEADER *pbmih, _In_ DWORD flInit, _In_opt_ CONST VOID *pjBits, _In_opt_ CONST BITMAPINFO *pbmi, _In_ UINT iUsage);
+-WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrush( _In_ HGLOBAL h, _In_ UINT iUsage);
+- WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrushPt( _In_ CONST VOID *lpPackedDIB, _In_ UINT iUsage);
 +_Win32_SupportedOS_Windows2000_
- WINGDIAPI HBITMAP WINAPI CreateDIBitmap( _In_ HDC hdc, _In_opt_ CONST BITMAPINFOHEADER *pbmih, _In_ DWORD flInit, _In_opt_ CONST VOID *pjBits, _In_opt_ CONST BITMAPINFO *pbmi, _In_ UINT iUsage);
++WINGDIAPI HBITMAP WINAPI CreateDIBitmap( _In_ HDC hdc, _In_opt_ CONST BITMAPINFOHEADER *pbmih, _In_ DWORD flInit, _In_opt_ CONST VOID *pjBits, _In_opt_ CONST BITMAPINFO *pbmi, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT iUsage);
 +_Win32_SupportedOS_Windows2000_
- WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrush( _In_ HGLOBAL h, _In_ UINT iUsage);
++WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrush( _In_ HGLOBAL h, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT iUsage);
 + _Win32_SupportedOS_Windows2000_
-  WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrushPt( _In_ CONST VOID *lpPackedDIB, _In_ UINT iUsage);
++ WINGDIAPI HBRUSH  WINAPI CreateDIBPatternBrushPt( _In_ CONST VOID *lpPackedDIB, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT iUsage);
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI HRGN    WINAPI CreateEllipticRgn( _In_ int x1, _In_ int y1, _In_ int x2, _In_ int y2);
 +_Win32_SupportedOS_Windows2000_
@@ -1616,8 +1637,9 @@
   WINGDIAPI BOOL WINAPI FloodFill( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ COLORREF color);
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI BOOL WINAPI FrameRgn( _In_ HDC hdc, _In_ HRGN hrgn, _In_ HBRUSH hbr, _In_ int w, _In_ int h);
+-WINGDIAPI int  WINAPI GetROP2( _In_ HDC hdc);
 +_Win32_SupportedOS_Windows2000_
- WINGDIAPI int  WINAPI GetROP2( _In_ HDC hdc);
++_Win32_AssociatedEnum_(R2_MODE) WINGDIAPI int  WINAPI GetROP2( _In_ HDC hdc);
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI BOOL WINAPI GetAspectRatioFilterEx( _In_ HDC hdc, _Out_ LPSIZE lpsize);
 +_Win32_SupportedOS_Windows2000_
@@ -1719,8 +1741,10 @@
  WINGDIAPI int   WINAPI GetDeviceCaps( _In_opt_ HDC hdc, _In_ int index);
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI int   WINAPI GetDIBits( _In_ HDC hdc, _In_ HBITMAP hbm, _In_ UINT start, _In_ UINT cLines,
-     _Out_opt_ LPVOID lpvBits, _At_((LPBITMAPINFOHEADER)lpbmi, _Inout_) LPBITMAPINFO lpbmi, _In_ UINT usage);  // SAL actual size of lpbmi is computed from structure elements
- 
+-    _Out_opt_ LPVOID lpvBits, _At_((LPBITMAPINFOHEADER)lpbmi, _Inout_) LPBITMAPINFO lpbmi, _In_ UINT usage);  // SAL actual size of lpbmi is computed from structure elements
+-
++    _Out_opt_ LPVOID lpvBits, _At_((LPBITMAPINFOHEADER)lpbmi, _Inout_) LPBITMAPINFO lpbmi, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT usage);  // SAL actual size of lpbmi is computed from structure elements
++
 +_Win32_SupportedOS_Windows2000_
  _Success_(return != GDI_ERROR)
  WINGDIAPI DWORD WINAPI GetFontData (    _In_ HDC     hdc,
@@ -2112,13 +2136,15 @@
      _In_reads_bytes_(cb) CONST VOID *pvBits);
  
 -WINGDIAPI UINT  WINAPI SetBoundsRect(_In_ HDC hdc, _In_opt_ CONST RECT * lprect, _In_ UINT flags);
+-WINGDIAPI int   WINAPI SetDIBits(_In_opt_ HDC hdc, _In_ HBITMAP hbm, _In_ UINT start, _In_ UINT cLines, _In_ CONST VOID *lpBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT ColorUse);
 +_Win32_SupportedOS_Windows2000_
 +WINGDIAPI UINT  WINAPI SetBoundsRect(_In_ HDC hdc, _In_opt_ CONST RECT * lprect, _Win32_AssociatedEnum_(SET_BOUNDS_RECT_FLAGS) _In_ UINT flags);
 +_Win32_SupportedOS_Windows2000_
- WINGDIAPI int   WINAPI SetDIBits(_In_opt_ HDC hdc, _In_ HBITMAP hbm, _In_ UINT start, _In_ UINT cLines, _In_ CONST VOID *lpBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT ColorUse);
++WINGDIAPI int   WINAPI SetDIBits(_In_opt_ HDC hdc, _In_ HBITMAP hbm, _In_ UINT start, _In_ UINT cLines, _In_ CONST VOID *lpBits, _In_ CONST BITMAPINFO * lpbmi, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT ColorUse);
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI int   WINAPI SetDIBitsToDevice(_In_ HDC hdc, _In_ int xDest, _In_ int yDest, _In_ DWORD w, _In_ DWORD h, _In_ int xSrc,
-         _In_ int ySrc, _In_ UINT StartScan, _In_ UINT cLines, _In_ CONST VOID * lpvBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT ColorUse);
+-        _In_ int ySrc, _In_ UINT StartScan, _In_ UINT cLines, _In_ CONST VOID * lpvBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT ColorUse);
++        _In_ int ySrc, _In_ UINT StartScan, _In_ UINT cLines, _In_ CONST VOID * lpvBits, _In_ CONST BITMAPINFO * lpbmi, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT ColorUse);
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI DWORD WINAPI SetMapperFlags(_In_ HDC hdc, _In_ DWORD flags);
 -WINGDIAPI int   WINAPI SetGraphicsMode(_In_ HDC hdc, _In_ int iMode);
@@ -2162,11 +2188,12 @@
 + _Win32_SupportedOS_Windows2000_
   WINGDIAPI int   WINAPI StretchDIBits(_In_ HDC hdc, _In_ int xDest, _In_ int yDest, _In_ int DestWidth, _In_ int DestHeight, _In_ int xSrc, _In_ int ySrc, _In_ int SrcWidth, _In_ int SrcHeight,
 -        _In_opt_ CONST VOID * lpBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT iUsage, _In_ DWORD rop);
-+        _In_opt_ CONST VOID * lpBits, _In_ CONST BITMAPINFO * lpbmi, _In_ UINT iUsage, _Win32_AssociatedEnum_(ROP_CODE) _In_ DWORD rop);
-+ _Win32_SupportedOS_Windows2000_
-  WINGDIAPI int   WINAPI SetROP2(_In_ HDC hdc, _In_ int rop2);
+- WINGDIAPI int   WINAPI SetROP2(_In_ HDC hdc, _In_ int rop2);
 - WINGDIAPI int   WINAPI SetStretchBltMode(_In_ HDC hdc, _In_ int mode);
 -WINGDIAPI UINT  WINAPI SetSystemPaletteUse(_In_ HDC hdc, _In_ UINT use);
++        _In_opt_ CONST VOID * lpBits, _In_ CONST BITMAPINFO * lpbmi, _Win32_AssociatedEnum_(DIB_USAGE) _In_ UINT iUsage, _Win32_AssociatedEnum_(ROP_CODE) _In_ DWORD rop);
++ _Win32_SupportedOS_Windows2000_
++ WINGDIAPI int   WINAPI SetROP2(_In_ HDC hdc, _Win32_AssociatedEnum_(R2_MODE) _In_ int rop2);
 + _Win32_SupportedOS_Windows2000_
 + WINGDIAPI int   WINAPI SetStretchBltMode(_In_ HDC hdc, _Win32_AssociatedEnum_(STRETCH_BLT_MODE) _In_ int mode);
 +_Win32_SupportedOS_Windows2000_
@@ -2376,7 +2403,7 @@
  WINGDIAPI BOOL WINAPI CombineTransform( _Out_ LPXFORM lpxfOut, _In_ CONST XFORM *lpxf1, _In_ CONST XFORM *lpxf2);
  
  #define GDI_WIDTHBYTES(bits) ((DWORD)(((bits)+31) & (~31)) / 8)
-@@ -5041,6 +6130,8 @@
+@@ -5041,10 +6130,12 @@
  #define GDI__DIBSIZE(bi) (GDI_DIBWIDTHBYTES(bi) * (DWORD)(bi).biHeight)
  #define GDI_DIBSIZE(bi) ((bi).biHeight < 0 ? (-1)*(GDI__DIBSIZE(bi)) : GDI__DIBSIZE(bi))
  
@@ -2385,6 +2412,11 @@
  WINGDIAPI _Success_(return != NULL) HBITMAP WINAPI CreateDIBSection(
      _In_opt_        HDC               hdc,
      _In_            CONST BITMAPINFO *pbmi,
+-    _In_            UINT              usage,
++    _Win32_AssociatedEnum_(DIB_USAGE) _In_            UINT              usage,
+     _When_((pbmi->bmiHeader.biBitCount != 0), _Outptr_result_bytebuffer_(_Inexpressible_(GDI_DIBSIZE((pbmi->bmiHeader)))))
+     _When_((pbmi->bmiHeader.biBitCount == 0), _Outptr_result_bytebuffer_((pbmi->bmiHeader).biSizeImage))
+                     VOID            **ppvBits,
 @@ -5052,11 +6143,13 @@
      _In_            DWORD             offset);
  
