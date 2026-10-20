@@ -1,5 +1,5 @@
 diff --git a/um/winnls.h b/um/winnls.h
-index 2a104ac5..ba68a14e 100644
+index 2a104ac5..758ea9d5 100644
 --- a/um/winnls.h
 +++ b/um/winnls.h
 @@ -17,6 +17,22 @@ Abstract:
@@ -1062,6 +1062,15 @@ index 2a104ac5..ba68a14e 100644
      _In_ CALTYPE CalType,
      _Out_writes_opt_(cchData) LPWSTR lpCalData,
      _In_ int cchData,
+@@ -2956,7 +3232,7 @@ GetCalendarInfoEx(
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
+ #ifndef GetDurationFormatEx_DEFINED
+-WINBASEAPI
++_Win32_SetLastError_ _Win32_SupportedOS_WindowsVista_ WINBASEAPI
+ int
+ WINAPI
+ GetDurationFormatEx(
 @@ -2976,6 +3252,8 @@ GetDurationFormatEx(
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)

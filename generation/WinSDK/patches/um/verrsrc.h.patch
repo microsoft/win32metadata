@@ -1,8 +1,13 @@
 diff --git a/um/verrsrc.h b/um/verrsrc.h
-index 0454424d..bcf1a5b6 100644
+index 0454424de7eaaff7536017e9d4064b4a44ce7a90..b4c4b69f94ced1f899b98c5451bf457d814998fd 100644
 --- a/um/verrsrc.h
 +++ b/um/verrsrc.h
-@@ -35,6 +35,16 @@
+@@ -1,3 +1,4 @@
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ /*****************************************************************************\
+@@ -35,6 +36,16 @@
  #define VS_FF_INFOINFERRED      0x00000010L
  #define VS_FF_SPECIALBUILD      0x00000020L
  
@@ -19,10 +24,11 @@ index 0454424d..bcf1a5b6 100644
  /* ----- VS_VERSION.dwFileOS ----- */
  #define VOS_UNKNOWN             0x00000000L
  #define VOS_DOS                 0x00010000L
-@@ -55,6 +65,26 @@
+@@ -54,6 +65,26 @@
+ #define VOS_OS216_PM16          0x00020002L
  #define VOS_OS232_PM32          0x00030003L
  #define VOS_NT_WINDOWS32        0x00040004L
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(VS_FIXEDFILEINFO_FILE_OS, unsigned long,
 +    VOS_UNKNOWN,
@@ -42,14 +48,14 @@ index 0454424d..bcf1a5b6 100644
 +    VOS_OS232_PM32,
 +    VOS_NT_WINDOWS32);
 +#endif
-+
+ 
  /* ----- VS_VERSION.dwFileType ----- */
  #define VFT_UNKNOWN             0x00000000L
- #define VFT_APP                 0x00000001L
-@@ -64,6 +94,17 @@
+@@ -63,6 +94,17 @@
+ #define VFT_FONT                0x00000004L
  #define VFT_VXD                 0x00000005L
  #define VFT_STATIC_LIB          0x00000007L
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(VS_FIXEDFILEINFO_FILE_TYPE, int,
 +    VFT_UNKNOWN,
@@ -60,11 +66,10 @@ index 0454424d..bcf1a5b6 100644
 +    VFT_VXD,
 +    VFT_STATIC_LIB);
 +#endif
-+
+ 
  /* ----- VS_VERSION.dwFileSubtype for VFT_WINDOWS_DRV ----- */
  #define VFT2_UNKNOWN            0x00000000L
- #define VFT2_DRV_PRINTER        0x00000001L
-@@ -84,6 +125,26 @@
+@@ -84,6 +126,26 @@
  #define VFT2_FONT_VECTOR        0x00000002L
  #define VFT2_FONT_TRUETYPE      0x00000003L
  
@@ -91,15 +96,16 @@ index 0454424d..bcf1a5b6 100644
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
-@@ -93,14 +154,32 @@
+@@ -92,14 +154,32 @@
+ 
  /* ----- VerFindFile() flags ----- */
  #define VFFF_ISSHAREDFILE       0x0001
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(VER_FIND_FILE_FLAGS, unsigned long,
 +    VFFF_ISSHAREDFILE);
 +#endif
-+
+ 
  #define VFF_CURNEDEST           0x0001
  #define VFF_FILEINUSE           0x0002
  #define VFF_BUFFTOOSMALL        0x0004
@@ -114,17 +120,16 @@ index 0454424d..bcf1a5b6 100644
  /* ----- VerInstallFile() flags ----- */
  #define VIFF_FORCEINSTALL       0x0001
  #define VIFF_DONTDELETEOLD      0x0002
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(VER_INSTALL_FILE_FLAGS, unsigned long,
 +    VIFF_FORCEINSTALL,
 +    VIFF_DONTDELETEOLD);
 +#endif
-+
+ 
  #define VIF_TEMPFILE            0x00000001L
  #define VIF_MISMATCH            0x00000002L
- #define VIF_SRCOLD              0x00000004L
-@@ -127,6 +206,31 @@
+@@ -127,6 +207,31 @@
  #define VIF_CANNOTLOADLZ32      0x00080000L
  #define VIF_CANNOTLOADCABINET   0x00100000L
  
@@ -156,7 +161,7 @@ index 0454424d..bcf1a5b6 100644
  #ifndef RC_INVOKED              /* RC doesn't need to see the rest of this */
  
  #ifdef __cplusplus
-@@ -142,6 +246,13 @@ extern "C" {
+@@ -142,6 +247,13 @@
  #define FILE_VER_GET_NEUTRAL    0x02
  #define FILE_VER_GET_PREFETCHED 0x04
  
@@ -170,3 +175,18 @@ index 0454424d..bcf1a5b6 100644
  /* ----- Types and structures ----- */
  
  typedef struct tagVS_FIXEDFILEINFO
+@@ -153,10 +265,10 @@
+     DWORD   dwProductVersionMS;     /* e.g. 0x00030010 = "3.10" */
+     DWORD   dwProductVersionLS;     /* e.g. 0x00000031 = "0.31" */
+     DWORD   dwFileFlagsMask;        /* = 0x3F for version "0.42" */
+-    DWORD   dwFileFlags;            /* e.g. VFF_DEBUG | VFF_PRERELEASE */
+-    DWORD   dwFileOS;               /* e.g. VOS_DOS_WINDOWS16 */
+-    DWORD   dwFileType;             /* e.g. VFT_DRIVER */
+-    DWORD   dwFileSubtype;          /* e.g. VFT2_DRV_KEYBOARD */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_FLAGS) DWORD   dwFileFlags;            /* e.g. VFF_DEBUG | VFF_PRERELEASE */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_OS) DWORD   dwFileOS;               /* e.g. VOS_DOS_WINDOWS16 */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_TYPE) DWORD   dwFileType;             /* e.g. VFT_DRIVER */
++    _Win32_AssociatedEnum_(VS_FIXEDFILEINFO_FILE_SUBTYPE) DWORD   dwFileSubtype;          /* e.g. VFT2_DRV_KEYBOARD */
+     DWORD   dwFileDateMS;           /* e.g. 0 */
+     DWORD   dwFileDateLS;           /* e.g. 0 */
+ } VS_FIXEDFILEINFO;

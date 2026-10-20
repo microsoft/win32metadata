@@ -1,0 +1,27 @@
+--- a/um/icodecapi.idl
++++ b/um/icodecapi.idl
+@@ -7,6 +7,8 @@
+ //------------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Application Family
+@@ -37,6 +39,7 @@
+ //
+ //  See uuids.h for a more detailed list.
+ //
++_Win32_AnnotateInterface_(ICodecAPI, _Win32_SupportedOS_WindowsXP_)
+ [
+     AM_LOCAL
+     object,
+@@ -233,6 +236,7 @@
+         [out AM_ANNOTATION("_Out_")] ULONG *ChangedParamCount );
+ }
+ 
++_Win32_AnnotateMethod_(ICodecAPI::IsModifiable, _Win32_PreserveResult_)
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
+ #pragma endregion
+ 

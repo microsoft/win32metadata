@@ -1,8 +1,25 @@
 diff --git a/um/winsnmp.h b/um/winsnmp.h
-index dcbad6c7..f784e8ce 100644
+index dcbad6c7..826f1043 100644
 --- a/um/winsnmp.h
 +++ b/um/winsnmp.h
-@@ -185,6 +185,9 @@ typedef const  smiVALUE       FAR *smiLPCVALUE;
+@@ -16,6 +16,7 @@
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family
+@@ -141,6 +142,8 @@ typedef const  smiVALUE       FAR *smiLPCVALUE;
+ #define SNMP_PDU_INFORM       (ASN_CONTEXT | ASN_CONSTRUCTOR | 0x6)
+ #define SNMP_PDU_TRAP         (ASN_CONTEXT | ASN_CONSTRUCTOR | 0x7)
+ 
++_Win32_Enum_(SNMP_PDU_TYPE, ULONG, SNMP_PDU_GET, SNMP_PDU_GETNEXT, SNMP_PDU_RESPONSE, SNMP_PDU_SET, SNMP_PDU_GETBULK, SNMP_PDU_TRAP);
++
+ /*Constants for SnmpListenEx*/
+ #define SNMPLISTEN_USEENTITY_ADDR    0 /*Use entity address*/
+ #define SNMPLISTEN_ALL_ADDR          1 /*Use any address based on address family and port no*/
+@@ -185,6 +188,9 @@ typedef const  smiVALUE       FAR *smiLPCVALUE;
  #define SNMPAPI_UNTRANSLATED_V1    1
  #define SNMPAPI_UNTRANSLATED_V2    2
  
@@ -12,7 +29,7 @@ index dcbad6c7..f784e8ce 100644
  /* Values used to indicate "SNMP level" supported by the implementation */
  #define SNMPAPI_NO_SUPPORT         0
  #define SNMPAPI_V1_SUPPORT         1
-@@ -195,6 +198,18 @@ typedef const  smiVALUE       FAR *smiLPCVALUE;
+@@ -195,6 +201,18 @@ typedef const  smiVALUE       FAR *smiLPCVALUE;
  #define SNMPAPI_OFF                0    /* Refuse support */
  #define SNMPAPI_ON                 1    /* Request support */
  
@@ -31,7 +48,7 @@ index dcbad6c7..f784e8ce 100644
  /* WinSNMP API Function Return Codes */
  typedef smiUINT32    SNMPAPI_STATUS;    /* Used for function ret values */
  #define SNMPAPI_FAILURE            0    /* Generic error code */
-@@ -267,58 +282,72 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
+@@ -267,58 +285,72 @@ typedef SNMPAPI_STATUS (CALLBACK *SNMPAPI_CALLBACK)
                           IN LPVOID lpClientData);
  
  /* Local Database Functions */
@@ -110,7 +127,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpSendMsg
                                (IN HSNMP_SESSION session,
                                IN HSNMP_ENTITY srcEntity,
-@@ -326,6 +355,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSendMsg
+@@ -326,6 +358,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSendMsg
                                IN HSNMP_CONTEXT context,
                                IN HSNMP_PDU PDU);
  
@@ -118,7 +135,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
                                (IN HSNMP_SESSION session,
                                OUT LPHSNMP_ENTITY srcEntity,
-@@ -333,80 +363,94 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
+@@ -333,96 +366,112 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpRecvMsg
                                OUT LPHSNMP_CONTEXT  context,
                                OUT LPHSNMP_PDU PDU);
  
@@ -216,15 +233,18 @@ index dcbad6c7..f784e8ce 100644
 +_Win32_SupportedOS_Windows2000_
  HSNMP_PDU      SNMPAPI_CALL   SnmpCreatePdu
                                (IN HSNMP_SESSION session,
-                               IN smiINT PDU_type,
-@@ -415,14 +459,16 @@ HSNMP_PDU      SNMPAPI_CALL   SnmpCreatePdu
+-                              IN smiINT PDU_type,
++                              _Win32_AssociatedEnum_(SNMP_PDU_TYPE) IN smiINT PDU_type,
+                               IN smiINT32 request_id,
+                               IN smiINT error_status,
                                IN smiINT error_index,
                                IN HSNMP_VBL varbindlist);
  
 +_Win32_SupportedOS_Windows2000_
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpGetPduData
                                (IN HSNMP_PDU PDU,
-                               OUT smiLPINT PDU_type,
+-                              OUT smiLPINT PDU_type,
++                              _Win32_AssociatedEnum_(SNMP_PDU_TYPE) OUT smiLPINT PDU_type,
                                OUT smiLPINT32 request_id,
 -                              OUT smiLPINT error_status,
 +                              OUT _Win32_AssociatedEnum_(SNMP_ERROR) smiLPINT error_status,
@@ -235,7 +255,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
                                (IN HSNMP_PDU PDU,
                                IN const smiINT FAR *PDU_type,
-@@ -431,68 +477,83 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
+@@ -431,68 +480,83 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpSetPduData
                                IN const smiINT FAR *max_repetitions,
                                IN const HSNMP_VBL FAR *varbindlist);
  
@@ -319,7 +339,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
                                (IN HSNMP_SESSION session,
                                IN HSNMP_ENTITY srcEntity,
-@@ -501,6 +562,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
+@@ -501,6 +565,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpEncodeMsg
                                IN HSNMP_PDU pdu,
                                OUT smiLPOCTETS msgBufDesc);
  
@@ -327,7 +347,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
                                (IN HSNMP_SESSION session,
                                OUT LPHSNMP_ENTITY srcEntity,
-@@ -509,6 +571,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
+@@ -509,6 +574,7 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpDecodeMsg
                                OUT LPHSNMP_PDU pdu,
                                IN smiLPCOCTETS msgBufDesc);
  
@@ -335,7 +355,7 @@ index dcbad6c7..f784e8ce 100644
  SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
                                (IN smiUINT32 syntax,
                                IN smiLPOPAQUE descriptor);
-@@ -522,4 +585,3 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
+@@ -522,4 +588,3 @@ SNMPAPI_STATUS SNMPAPI_CALL   SnmpFreeDescriptor
  #pragma endregion
  
  #endif         /* _INC_WINSNMP */

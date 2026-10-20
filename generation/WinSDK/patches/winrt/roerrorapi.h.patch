@@ -1,8 +1,21 @@
 diff --git a/winrt/roerrorapi.h b/winrt/roerrorapi.h
-index f807be93..e60b14a1 100644
 --- a/winrt/roerrorapi.h
 +++ b/winrt/roerrorapi.h
-@@ -61,6 +61,7 @@ RoSetErrorReportingFlags(
+@@ -45,11 +45,13 @@
+ //not including the terminating null
+ #define MAX_ERROR_MESSAGE_CHARS 512
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI
+ RoGetErrorReportingFlags(
+     _Out_ UINT32* pflags
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI
+ RoSetErrorReportingFlags(
+     _In_ UINT32 flags
+@@ -61,6 +63,7 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -10,7 +23,7 @@ index f807be93..e60b14a1 100644
  STDAPI
  RoResolveRestrictedErrorInfoReference(
      _In_ PCWSTR reference,
-@@ -73,11 +74,13 @@ RoResolveRestrictedErrorInfoReference(
+@@ -73,16 +76,19 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -24,7 +37,36 @@ index f807be93..e60b14a1 100644
  STDAPI
  GetRestrictedErrorInfo(
      _Outptr_result_maybenull_ IRestrictedErrorInfo** ppRestrictedErrorInfo
-@@ -115,11 +118,13 @@ RoTransformError(
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(BOOL)
+ RoOriginateErrorW(
+     _In_ HRESULT error,
+@@ -92,12 +98,14 @@
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(BOOL)
+ RoOriginateError(
+     _In_ HRESULT error,
+     _In_opt_ HSTRING message
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(BOOL)
+ RoTransformErrorW(
+     _In_ HRESULT oldError,
+@@ -108,6 +116,7 @@
+              _When_(cchMax >= MAX_ERROR_MESSAGE_CHARS, _In_reads_or_z_(MAX_ERROR_MESSAGE_CHARS) ) PCWSTR message
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ STDAPI_(BOOL)
+ RoTransformError(
+     _In_ HRESULT oldError,
+@@ -115,11 +124,13 @@
      _In_opt_ HSTRING message
      );
  
@@ -38,7 +80,7 @@ index f807be93..e60b14a1 100644
  STDAPI_(void)
  RoFailFastWithErrorContext(
      HRESULT hrError
-@@ -324,6 +329,7 @@ namespace ABI
+@@ -324,6 +335,7 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -46,7 +88,7 @@ index f807be93..e60b14a1 100644
  STDAPI_(BOOL)
  RoOriginateLanguageException(
      _In_ HRESULT error,
-@@ -331,6 +337,7 @@ RoOriginateLanguageException(
+@@ -331,6 +343,7 @@
      _In_opt_ IUnknown* languageException
      );
  
@@ -54,7 +96,7 @@ index f807be93..e60b14a1 100644
  STDAPI_(void)
  RoClearError(
      void
-@@ -353,6 +360,7 @@ typedef HRESULT (WINAPI *PINSPECT_MEMORY_CALLBACK)(
+@@ -353,6 +366,7 @@
      UINT32 length,
      _Out_writes_(length) BYTE* buffer);
  
@@ -62,7 +104,7 @@ index f807be93..e60b14a1 100644
  STDAPI
  RoInspectThreadErrorInfo(
      _In_ UINT_PTR targetTebAddress,
-@@ -362,6 +370,7 @@ RoInspectThreadErrorInfo(
+@@ -362,6 +376,7 @@
      _Out_ UINT_PTR* targetErrorInfoAddress
      );
  
@@ -70,7 +112,7 @@ index f807be93..e60b14a1 100644
  STDAPI
  RoInspectCapturedStackBackTrace(
      _In_ UINT_PTR targetErrorInfoAddress,
-@@ -384,6 +393,7 @@ RoReportFailedDelegate(
+@@ -384,6 +399,7 @@
      _In_ IRestrictedErrorInfo* pRestrictedErrorInfo
      );
  

@@ -1,0 +1,151 @@
+diff --git a/shared/ipsectypes.idl b/shared/ipsectypes.idl
+index ca9befba..fd63f13d 100644
+--- a/shared/ipsectypes.idl
++++ b/shared/ipsectypes.idl
+@@ -5,6 +5,8 @@
+ 
+      Defines data types used by IPsec.
+ */
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family or AppRuntime Package
+@@ -303,6 +305,8 @@ cpp_quote("#define IPSEC_POLICY_FLAG_DONT_NEGOTIATE_SECOND_LIFETIME   (0x0000004
+ // interoperating with 3rd party devices that dont support 'byte' lifetime.
+ cpp_quote("#define IPSEC_POLICY_FLAG_DONT_NEGOTIATE_BYTE_LIFETIME   (0x00000080)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IPSEC_POLICY_FLAG, ULONG, IPSEC_POLICY_FLAG_ND_SECURE, IPSEC_POLICY_FLAG_ND_BOUNDARY, IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_PEER_BEHIND_NAT, IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_GENERAL_NAT_TRAVERSAL, IPSEC_POLICY_FLAG_DONT_NEGOTIATE_SECOND_LIFETIME, IPSEC_POLICY_FLAG_DONT_NEGOTIATE_BYTE_LIFETIME, IPSEC_POLICY_FLAG_CLEAR_DF_ON_TUNNEL);")
++
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ // Negotiate IPv6 inside IPv4 IPsec tunneling. Applicable only for tunnel mode
+ // policy, and currently supported only by IKEv2.
+@@ -319,11 +323,15 @@ cpp_quote("#define IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ALREADY_SECURE_CONNECTION (0x
+ // Allow ICMPv6 traffic to bypass the tunnel. Applicable only for tunnel mode
+ // policy.
+ cpp_quote("#define IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6 (0x00001000)")
++
++cpp_quote("_Win32_FlagsEnum_(IPSEC_POLICY_FLAG, ULONG, IPSEC_POLICY_FLAG_ENABLE_V6_IN_V4_TUNNELING, IPSEC_POLICY_FLAG_ENABLE_SERVER_ADDR_ASSIGNMENT, IPSEC_POLICY_FLAG_TUNNEL_ALLOW_OUTBOUND_CLEAR_CONNECTION, IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ALREADY_SECURE_CONNECTION, IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6);")
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+ // If set, allows the local TIA to dictate key
+ cpp_quote("#define IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY (0x00002000)")
++
++cpp_quote("_Win32_FlagsEnum_(IPSEC_POLICY_FLAG, ULONG, IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY);")
+ // If set, allows the local TIA to receive key notifications
+ cpp_quote("#define IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_NOTIFY_KEY (0x00004000)")
+ cpp_quote("#define IPSEC_POLICY_FLAG_RESERVED1 (0x00008000)")
+@@ -349,7 +357,7 @@ typedef struct IPSEC_TRANSPORT_POLICY0_
+    // Array of quick mode proposals.
+    [size_is(numIpsecProposals), ref] IPSEC_PROPOSAL0* ipsecProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Timeout in seconds, after which the IPsec SA should stop accepting
+    // packets coming in the clear. Used for negotiation discovery.
+    UINT32 ndAllowClearTimeoutSeconds;
+@@ -368,7 +376,7 @@ typedef struct IPSEC_TRANSPORT_POLICY1_
+    // Array of quick mode proposals.
+    [size_is(numIpsecProposals), ref] IPSEC_PROPOSAL0* ipsecProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Timeout in seconds, after which the IPsec SA should stop accepting
+    // packets coming in the clear. Used for negotiation discovery.
+    UINT32 ndAllowClearTimeoutSeconds;
+@@ -388,7 +396,7 @@ typedef struct IPSEC_TRANSPORT_POLICY2_
+    // Array of quick mode proposals.
+    [size_is(numIpsecProposals), ref] IPSEC_PROPOSAL0* ipsecProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Timeout in seconds, after which the IPsec SA should stop accepting
+    // packets coming in the clear. Used for negotiation discovery.
+    UINT32 ndAllowClearTimeoutSeconds;
+@@ -505,7 +513,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ typedef struct IPSEC_TUNNEL_POLICY0_
+ {
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Number of quick mode proposals in the policy
+    UINT32 numIpsecProposals;
+    // Array of quick mode proposals.
+@@ -523,7 +531,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ typedef struct IPSEC_TUNNEL_POLICY1_
+ {
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Number of quick mode proposals in the policy
+    UINT32 numIpsecProposals;
+    // Array of quick mode proposals.
+@@ -542,7 +550,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+ typedef struct IPSEC_TUNNEL_POLICY2_
+ {
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_POLICY_FLAG)")] UINT32 flags;
+    // Number of quick mode proposals in the policy
+    UINT32 numIpsecProposals;
+    // Array of quick mode proposals.
+@@ -878,9 +886,13 @@ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_CLEAR_DF_ON_TUNNEL   (0x00000400)")
+ // matching this SA with packets on outbound connections that don't have an
+ // associated IPsec-NAT-shim context.
+ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_ASSUME_UDP_CONTEXT_OUTBOUND (0x00000800)")
++
++cpp_quote("_Win32_FlagsEnum_(IPSEC_SA_BUNDLE_FLAGS, ULONG, IPSEC_SA_BUNDLE_FLAG_ND_SECURE, IPSEC_SA_BUNDLE_FLAG_ND_BOUNDARY, IPSEC_SA_BUNDLE_FLAG_ND_PEER_NAT_BOUNDARY, IPSEC_SA_BUNDLE_FLAG_GUARANTEE_ENCRYPTION, IPSEC_SA_BUNDLE_FLAG_ALLOW_NULL_TARGET_NAME_MATCH, IPSEC_SA_BUNDLE_FLAG_CLEAR_DF_ON_TUNNEL, IPSEC_SA_BUNDLE_FLAG_ASSUME_UDP_CONTEXT_OUTBOUND);")
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN6SP1)")
+ // Peer has negotiation discovery enabled, and is on a perimeter network.
+ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_ND_PEER_BOUNDARY (0x00001000)")
++
++cpp_quote("_Win32_FlagsEnum_(IPSEC_SA_BUNDLE_FLAGS, ULONG, IPSEC_SA_BUNDLE_FLAG_ND_PEER_BOUNDARY);")
+ cpp_quote("#endif")
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+@@ -888,6 +900,8 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ // when an outbound SA is added, to prevent unnecessary duplicate SAs.
+ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETION (0x00002000)")
+ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION (0x00004000)")
++
++cpp_quote("_Win32_FlagsEnum_(IPSEC_SA_BUNDLE_FLAGS, ULONG, IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETION, IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION);")
+ // Only allow inbound connections to use this SA
+ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_FORCE_INBOUND_CONNECTIONS (0x00008000)")
+ // Only allow outbound connections to use this SA. Only valid for tunnel mode.
+@@ -930,7 +944,7 @@ cpp_quote("#define IPSEC_SA_BUNDLE_FLAG_TUNNEL_BANDWIDTH4 (0x80000000)")
+ typedef struct IPSEC_SA_BUNDLE0_
+ {
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_SA_BUNDLE_FLAGS)")] UINT32 flags;
+    // Lifetime of all the SAs in the bundle. If any lifetime value (seconds,
+    // kilobytes, or packets) is specifed as 0, then the corresponding lifetime
+    // check will be disabled. Security note: specifying 0 for lifetimePackets
+@@ -988,7 +1002,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ typedef struct IPSEC_SA_BUNDLE1_
+ {
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_SA_BUNDLE_FLAGS)")] UINT32 flags;
+    // Lifetime of all the SAs in the bundle. If any lifetime value (seconds,
+    // kilobytes, or packets) is specifed as 0, then the corresponding lifetime
+    // check will be disabled. Security note: specifying 0 for lifetimePackets
+@@ -1380,6 +1394,8 @@ cpp_quote("#define IPSEC_DOSP_FLAG_FILTER_BLOCK  (0x00000010)")
+ // Flag to exempt all matching IPv6 traffic.
+ cpp_quote("#define IPSEC_DOSP_FLAG_FILTER_EXEMPT  (0x00000020)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IPSEC_DOSP_FLAGS, ULONG, IPSEC_DOSP_FLAG_ENABLE_IKEV1, IPSEC_DOSP_FLAG_ENABLE_IKEV2, IPSEC_DOSP_FLAG_DISABLE_AUTHIP, IPSEC_DOSP_FLAG_DISABLE_DEFAULT_BLOCK, IPSEC_DOSP_FLAG_FILTER_BLOCK, IPSEC_DOSP_FLAG_FILTER_EXEMPT);")
++
+ // Value to set in the XXXDscp fields below, if caller wants to disable the
+ // DSCP marking for that category.
+ cpp_quote("#define IPSEC_DOSP_DSCP_DISABLE_VALUE  (0xff)")
+@@ -1441,7 +1457,7 @@ typedef struct IPSEC_DOSP_OPTIONS0_
+    // unauthenticated IPv6 IPsec traffic. Value must be > 0.
+    UINT32 maxPerIPRateLimitQueues;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IPSEC_DOSP_FLAGS)")] UINT32 flags;
+    // Array of public interface LUIDs
+    UINT32 numPublicIFLuids;
+    [size_is(numPublicIFLuids), unique] UINT64* publicIFLuids;

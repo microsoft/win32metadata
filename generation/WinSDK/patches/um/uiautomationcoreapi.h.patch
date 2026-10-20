@@ -1,8 +1,7 @@
 diff --git a/um/uiautomationcoreapi.h b/um/uiautomationcoreapi.h
-index 9d1ef041..652665d4 100644
 --- a/um/uiautomationcoreapi.h
 +++ b/um/uiautomationcoreapi.h
-@@ -476,6 +476,7 @@ DEFINE_GUID(IsDialog_Property_GUID,                                     0x9d0dfb
+@@ -476,6 +476,7 @@
  //
  // --------------------------------------------------------------------------
  
@@ -10,7 +9,7 @@ index 9d1ef041..652665d4 100644
  BOOL WINAPI UiaGetErrorDescription(BSTR * pDescription);
  
  // --------------------------------------------------------------------------
-@@ -556,8 +557,11 @@ struct UiaCacheRequest
+@@ -556,8 +557,11 @@
      enum AutomationElementMode automationElementMode;
  };
  
@@ -22,7 +21,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaHTextRangeFromVariant(VARIANT * pvar, HUIATEXTRANGE *phtextrange);
  
  // --------------------------------------------------------------------------
-@@ -605,20 +609,33 @@ struct UiaFindParams
+@@ -605,24 +609,38 @@
      struct UiaCondition * pFindCondition;
  };
  
@@ -56,7 +55,20 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
  
  
-@@ -652,6 +669,7 @@ enum ProviderType
+ #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
+ inline void UiaRectSetEmpty(_Out_ UiaRect & rc)
+ {
+     rc.left = 0;
+@@ -631,6 +649,7 @@
+     rc.height = 0;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline bool UiaRectIsEmpty(const UiaRect & rc)
+ {
+     return rc.width <= 0 || rc.height <= 0;
+@@ -652,6 +671,7 @@
  
  typedef SAFEARRAY * WINAPI UiaProviderCallback(HWND hwnd, enum ProviderType providerType);
  
@@ -64,7 +76,7 @@ index 9d1ef041..652665d4 100644
  void WINAPI UiaRegisterProviderCallback(UiaProviderCallback * pCallback);
  
  
-@@ -674,6 +692,7 @@ enum AutomationIdentifierType
+@@ -674,6 +694,7 @@
      AutomationIdentifierType_Style,
  };
  
@@ -72,7 +84,7 @@ index 9d1ef041..652665d4 100644
  int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -682,7 +701,9 @@ int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
+@@ -682,7 +703,9 @@
  #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
  
@@ -82,7 +94,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaGetReservedMixedAttributeValue(IUnknown **punkMixedAttributeValue);
  
  // --------------------------------------------------------------------------
-@@ -774,19 +795,28 @@ struct UiaWindowClosedEventArgs
+@@ -774,19 +797,28 @@
  //
  // Provider Event APIs
  //
@@ -111,7 +123,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
      _In_ IRawElementProviderSimple* provider,
      _In_opt_ ITextRangeProvider* textRange);
-@@ -801,9 +831,13 @@ HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
+@@ -801,9 +833,13 @@
  // Client Event APIs
  //
  typedef void WINAPI UiaEventCallback(struct UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
@@ -125,7 +137,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
  
  
-@@ -813,65 +847,121 @@ HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
+@@ -813,65 +849,121 @@
  //
  // --------------------------------------------------------------------------
  
@@ -247,7 +259,7 @@ index 9d1ef041..652665d4 100644
  BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -887,8 +977,11 @@ BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);
+@@ -887,8 +979,11 @@
  // 
  // --------------------------------------------------------------------------
  
@@ -259,7 +271,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaProviderForNonClient(HWND hwnd, long idObject, long idChild, IRawElementProviderSimple ** ppProvider);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-@@ -900,6 +993,7 @@ HRESULT WINAPI UiaProviderForNonClient(HWND hwnd, long idObject, long idChild, I
+@@ -900,6 +995,7 @@
  #define UIA_IAFP_DEFAULT        0x0000
  #define UIA_IAFP_UNWRAP_BRIDGE  0x0001
  
@@ -267,7 +279,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaIAccessibleFromProvider(
      _In_ IRawElementProviderSimple * pProvider, 
      _In_ DWORD dwFlags, 
-@@ -915,6 +1009,7 @@ HRESULT WINAPI UiaIAccessibleFromProvider(
+@@ -915,6 +1011,7 @@
  #define UIA_PFIA_DEFAULT        0x0000
  #define UIA_PFIA_UNWRAP_BRIDGE  0x0001
  
@@ -275,7 +287,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaProviderFromIAccessible(
      _In_ IAccessible * pAccessible, 
      long idChild, 
-@@ -927,7 +1022,9 @@ HRESULT WINAPI UiaProviderFromIAccessible(
+@@ -927,7 +1024,9 @@
  // 
  // --------------------------------------------------------------------------
  
@@ -285,7 +297,7 @@ index 9d1ef041..652665d4 100644
  HRESULT WINAPI UiaDisconnectProvider(IRawElementProviderSimple * pProvider);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
-@@ -942,6 +1039,7 @@ HRESULT WINAPI UiaDisconnectProvider(IRawElementProviderSimple * pProvider);
+@@ -942,6 +1041,7 @@
  //
  // --------------------------------------------------------------------------
  

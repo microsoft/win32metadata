@@ -1,7 +1,18 @@
 diff --git a/um/prsht.h b/um/prsht.h
-index 9b253c6d..5283380c 100644
+index 9b253c6d..f2a5288b 100644
 --- a/um/prsht.h
 +++ b/um/prsht.h
+@@ -101,8 +101,8 @@ struct _PROPSHEETPAGEA;
+ struct _PROPSHEETPAGEW;
+ #endif
+ 
+-typedef UINT (CALLBACK *LPFNPSPCALLBACKA)(HWND hwnd, UINT uMsg, struct _PROPSHEETPAGEA *ppsp);
+-typedef UINT (CALLBACK *LPFNPSPCALLBACKW)(HWND hwnd, UINT uMsg, struct _PROPSHEETPAGEW *ppsp);
++typedef UINT (CALLBACK *LPFNPSPCALLBACKA)(HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, struct _PROPSHEETPAGEA *ppsp);
++typedef UINT (CALLBACK *LPFNPSPCALLBACKW)(HWND hwnd, _Win32_AssociatedEnum_(PSPCB_MESSAGE) UINT uMsg, struct _PROPSHEETPAGEW *ppsp);
+ 
+ #ifdef UNICODE
+ #define LPFNPSPCALLBACK         LPFNPSPCALLBACKW
 @@ -582,12 +582,19 @@ typedef LPCPROPSHEETHEADERW_V2      LPCPROPSHEETHEADERW;
  #define PSCB_BUTTONPRESSED 3
  #endif  // NTDDI_VERSION >= NTDDI_WINXP

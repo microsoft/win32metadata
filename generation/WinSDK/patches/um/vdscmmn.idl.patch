@@ -1,0 +1,166 @@
+--- a/um/vdscmmn.idl
++++ b/um/vdscmmn.idl
+@@ -11,6 +11,8 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -225,6 +227,7 @@
+ const ULONG VDS_NF_PACK_DEPART              = 2;
+         // When a pack is deleted
+ const ULONG VDS_NF_PACK_MODIFY              = 3;
++cpp_quote("_Win32_Enum_(VDS_NF_PACK, unsigned int, VDS_NF_PACK_ARRIVE, VDS_NF_PACK_DEPART, VDS_NF_PACK_MODIFY);")
+         // When a pack is modified(including online, offline)
+ 
+ //
+@@ -250,6 +253,7 @@
+         // When a spindle is unplugged, or a RAID controller unbound a LUN
+         // that was local to the host.
+ const ULONG VDS_NF_DISK_MODIFY              = 10;
++cpp_quote("_Win32_Enum_(VDS_NF_DISK, unsigned int, VDS_NF_DISK_ARRIVE, VDS_NF_DISK_DEPART, VDS_NF_DISK_MODIFY);")
+         // When something changed in the disk's VDS_DISK_PROP structure.
+ 
+ //
+@@ -304,6 +308,7 @@
+ const ULONG     VDS_NF_LUN_DEPART             = 109;
+         // When a LUN is deleted.
+ const ULONG     VDS_NF_LUN_MODIFY             = 110;
++cpp_quote("_Win32_Enum_(VDS_NF_LUN, unsigned int, VDS_NF_LUN_ARRIVE, VDS_NF_LUN_DEPART, VDS_NF_LUN_MODIFY);")
+         // When something changed in the LUN's VDS_LUN_PROP structure.
+     // TODO: add VDS_NF_LUN_REBUILDING_PROGRESS?
+ 
+@@ -366,6 +371,7 @@
+         // When a volume gets a new label, or file system is extended or shrunk.
+         // Note, this does not include change of file system comression flags.
+ const ULONG       VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS = 204;
++cpp_quote("_Win32_Enum_(VDS_NF_FILE_SYSTEM, unsigned int, VDS_NF_FILE_SYSTEM_MODIFY, VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS);")
+         // When a file system is being formated.
+ // NOTE: more file system notifications continue below starting at 206
+ 
+@@ -395,6 +401,7 @@
+ const ULONG     VDS_NF_CONTROLLER_MODIFY      = 350;
+         // When something changed in controller's properties.
+ const ULONG     VDS_NF_CONTROLLER_REMOVED     = 351;
++cpp_quote("_Win32_Enum_(VDS_NF_CONTROLLER, unsigned int, VDS_NF_CONTROLLER_ARRIVE, VDS_NF_CONTROLLER_DEPART, VDS_NF_CONTROLLER_MODIFY, VDS_NF_CONTROLLER_REMOVED);")
+         // When a controller is removed.
+ 
+ //
+@@ -403,6 +410,7 @@
+ const ULONG     VDS_NF_PORT_MODIFY            = 352;
+         // When something changed in controller port's properties.
+ const ULONG     VDS_NF_PORT_REMOVED           = 353;
++cpp_quote("_Win32_Enum_(VDS_NF_PORT, unsigned int, VDS_NF_PORT_ARRIVE, VDS_NF_PORT_DEPART, VDS_NF_PORT_MODIFY, VDS_NF_PORT_REMOVED);")
+         // When a controller port is removed.
+ 
+ 
+@@ -410,6 +418,7 @@
+ // drive notifications
+ //
+ const ULONG     VDS_NF_DRIVE_REMOVED           = 354;
++cpp_quote("_Win32_Enum_(VDS_NF_DRIVE, unsigned int, VDS_NF_DRIVE_ARRIVE, VDS_NF_DRIVE_DEPART, VDS_NF_DRIVE_MODIFY, VDS_NF_DRIVE_REMOVED);")
+         // When a drive is removed.
+ 
+ //
+@@ -418,14 +427,14 @@
+ 
+ typedef struct _VDS_PACK_NOTIFICATION
+ {
+-    ULONG               ulEvent;
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_PACK)")] ULONG               ulEvent;
+     VDS_OBJECT_ID       packId;
+ 
+ } VDS_PACK_NOTIFICATION;
+ 
+ typedef struct _VDS_DISK_NOTIFICATION
+ {
+-    ULONG               ulEvent;  // arrival, departure, modified.
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_DISK)")] ULONG               ulEvent;  // arrival, departure, modified.
+     VDS_OBJECT_ID       diskId;
+ 
+ } VDS_DISK_NOTIFICATION;
+@@ -469,7 +478,7 @@
+ 
+ typedef struct _VDS_FILE_SYSTEM_NOTIFICATION
+ {
+-    ULONG               ulEvent;  // created, format progress
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_FILE_SYSTEM)")] ULONG               ulEvent;  // created, format progress
+     VDS_OBJECT_ID       volumeId;
+     DWORD               dwPercentCompleted;
+ 
+@@ -491,28 +500,28 @@
+ 
+ typedef struct _VDS_CONTROLLER_NOTIFICATION
+ {
+-    ULONG               ulEvent;
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_CONTROLLER)")] ULONG               ulEvent;
+     VDS_OBJECT_ID       controllerId;
+ 
+ } VDS_CONTROLLER_NOTIFICATION;
+ 
+ typedef struct _VDS_DRIVE_NOTIFICATION
+ {
+-    ULONG               ulEvent;
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_DRIVE)")] ULONG               ulEvent;
+     VDS_OBJECT_ID       driveId;
+ 
+ } VDS_DRIVE_NOTIFICATION;
+ 
+ typedef struct _VDS_LUN_NOTIFICATION
+ {
+-    ULONG               ulEvent;
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_LUN)")] ULONG               ulEvent;
+     VDS_OBJECT_ID       LunId;
+ 
+ } VDS_LUN_NOTIFICATION;
+ 
+ typedef struct _VDS_PORT_NOTIFICATION
+ {
+-    ULONG               ulEvent;
++    [annotation("_Win32_AssociatedEnum_(VDS_NF_PORT)")] ULONG               ulEvent;
+     VDS_OBJECT_ID       portId;
+ 
+ } VDS_PORT_NOTIFICATION;
+@@ -1177,6 +1186,7 @@
+ //   spindles. But different types of objects do not mix in a collection.
+ // Implemented by: enum object
+ //
++_Win32_AnnotateInterface_(IEnumVdsObject, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(118610b7-8d94-4030-b5b8-500889788e4e),
+@@ -1213,6 +1223,7 @@
+ // IVdsAsync:
+ // Implemented by: async object
+ //
++_Win32_AnnotateInterface_(IVdsAsync, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(d5d23b6d-5a55-4492-9889-397a3c2d2dbc),
+@@ -1257,6 +1268,7 @@
+ // Implemented by: callback object
+ // Implemented where: application, common layer
+ //
++_Win32_AnnotateInterface_(IVdsAdviseSink, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(8326cd1d-cf59-4936-b786-5efc08798e25),
+@@ -1279,6 +1291,7 @@
+ // Implemented where: providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(10c5e575-7984-4e81-a56b-431f5f92ae42),
+@@ -1299,6 +1312,7 @@
+ // Implemented where: providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsProviderSupport, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(1732be13-e8f9-4a03-bfbc-5f616aa66ce1),

@@ -1,16 +1,17 @@
 diff --git a/um/mmdeviceapi.idl b/um/mmdeviceapi.idl
-index d12a237b..d6ee6bd3 100644
+index d12a237b..f4dc3ce2 100644
 --- a/um/mmdeviceapi.idl
 +++ b/um/mmdeviceapi.idl
-@@ -3,6 +3,7 @@
+@@ -3,6 +3,8 @@
  // Copyright (C) Microsoft Corporation. All rights reserved.
  //
  //**@@@*@@@****************************************************
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop or Games Family
-@@ -213,6 +214,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
+@@ -213,6 +215,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITI
  // Description:
  //      This interface is implemented by a client who wishes to be notified of changes
  //      to Endpoint devices on the system.
@@ -18,7 +19,16 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -308,6 +310,7 @@ interface IMMNotificationClient : IUnknown
+@@ -235,7 +238,7 @@ interface IMMNotificationClient : IUnknown
+     //      ignored
+     //
+     [id(1), helpstring("method OnDeviceStateChanged")] 
+-    HRESULT OnDeviceStateChanged([in, annotation("_In_")] LPCWSTR pwstrDeviceId, [in, annotation("_In_")]DWORD dwNewState);
++    HRESULT OnDeviceStateChanged([in, annotation("_In_")] LPCWSTR pwstrDeviceId, [in, annotation("_In_ _Win32_AssociatedEnum_(DEVICE_STATE)")]DWORD dwNewState);
+ 
+     //-------------------------------------------------------------------------
+     // Description:
+@@ -308,6 +311,7 @@ interface IMMNotificationClient : IUnknown
  // Description:
  //      Base interface for Device objects supported by MMDeviceAPI.
  //
@@ -26,7 +36,25 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -397,6 +400,7 @@ interface IMMDevice : IUnknown
+@@ -356,7 +360,7 @@ interface IMMDevice : IUnknown
+     //      S_OK if successful
+     //
+     [id(2), helpstring("method OpenPropertyStore")] 
+-    HRESULT OpenPropertyStore([in, annotation("_In_")] DWORD stgmAccess, [out, annotation("_Out_")] IPropertyStore** ppProperties);
++    HRESULT OpenPropertyStore([in, annotation("_In_ _Win32_AssociatedEnum_(STGM)")] DWORD stgmAccess, [out, annotation("_Out_")] IPropertyStore** ppProperties);
+ 
+     //-------------------------------------------------------------------------
+     // Description:
+@@ -388,7 +392,7 @@ interface IMMDevice : IUnknown
+     //      S_OK if successful
+     //
+     [id(4), helpstring("method GetState")] 
+-    HRESULT GetState([out, annotation("_Out_")] DWORD* pdwState);
++    HRESULT GetState([out, annotation("_Out_ _Win32_AssociatedEnum_(DEVICE_STATE)")] DWORD* pdwState);
+ };
+ 
+ // ----------------------------------------------------------------------
+@@ -397,6 +401,7 @@ interface IMMDevice : IUnknown
  // Description:
  //      Provides methods for accessing and enumerating a collection of IMMDevice objects
  //
@@ -34,7 +62,7 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -444,6 +448,7 @@ interface IMMDeviceCollection : IUnknown
+@@ -444,6 +449,7 @@ interface IMMDeviceCollection : IUnknown
  // Description:
  //      Provides additional methods beyond IMMDevice for Endpoint device objects
  //
@@ -42,7 +70,7 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -477,6 +482,7 @@ interface IMMEndpoint : IUnknown
+@@ -477,6 +483,7 @@ interface IMMEndpoint : IUnknown
  //      Provides methods for enumerating IMMDevice objects and for registering notifications
  //      about Endpoint devices
  //
@@ -50,7 +78,16 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -621,6 +627,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+@@ -503,7 +510,7 @@ interface IMMDeviceEnumerator : IUnknown
+     //      S_OK if successful
+     //
+     [id(1), helpstring("method EnumAudioEndpoints")] 
+-    HRESULT EnumAudioEndpoints([in, annotation("_In_")] EDataFlow dataFlow, [in, annotation("_In_")] DWORD dwStateMask, [out, annotation("_Out_")] IMMDeviceCollection** ppDevices);
++    HRESULT EnumAudioEndpoints([in, annotation("_In_")] EDataFlow dataFlow, [in, annotation("_In_ _Win32_AssociatedEnum_(DEVICE_STATE)")] DWORD dwStateMask, [out, annotation("_Out_")] IMMDeviceCollection** ppDevices);
+ 
+     //-------------------------------------------------------------------------
+     // Description:
+@@ -621,6 +628,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
  
  interface IActivateAudioInterfaceAsyncOperation;
  
@@ -58,7 +95,7 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -634,6 +641,7 @@ interface IActivateAudioInterfaceCompletionHandler : IUnknown
+@@ -634,6 +642,7 @@ interface IActivateAudioInterfaceCompletionHandler : IUnknown
      HRESULT ActivateCompleted([in, annotation("_In_")] IActivateAudioInterfaceAsyncOperation* activateOperation);
  };
  
@@ -66,7 +103,7 @@ index d12a237b..d6ee6bd3 100644
  [
      object,
      local,
-@@ -657,7 +665,7 @@ cpp_quote("// * a COM interface identifier")
+@@ -657,7 +666,7 @@ cpp_quote("// * a COM interface identifier")
  cpp_quote("// * activation parameters specific to the interface being activated")
  cpp_quote("// and asynchronously returns a pointer to the specified interface")
  cpp_quote("// ----------------------------------------------------------------------")

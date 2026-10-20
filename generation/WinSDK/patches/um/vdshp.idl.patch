@@ -1,0 +1,227 @@
+--- a/um/vdshp.idl
++++ b/um/vdshp.idl
+@@ -11,6 +11,8 @@
+ //
+ //----------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family
+@@ -941,6 +943,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsHwProvider, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(d99bdaae-b13a-4178-9fdb-e27f16b4603e),
+@@ -984,6 +987,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsHwProviderType, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(3e0f5166-542d-4fc6-947a-012174240b7e),
+@@ -1006,6 +1010,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsHwProviderType2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(8190236f-c4d0-4e81-8011-d69512fcc984),
+@@ -1028,6 +1033,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsHwProviderStoragePools, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(d5b5937a-f188-4c79-b86c-11c920ad11b8),
+@@ -1071,6 +1077,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsSubSystem, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(6fcee2d3-6d90-4f91-80e2-a5c7caaca9d8),
+@@ -1183,6 +1190,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsSubSystem2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(be666735-7800-4a77-9d9c-40f85b87e292),
+@@ -1241,6 +1249,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsSubSystemNaming, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0d70faa3-9cd4-4900-aa20-6981b6aafc75),
+@@ -1261,6 +1270,7 @@
+ // Implemented where: iSCSI hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsSubSystemIscsi, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0027346f-40d0-4b45-8cec-5906dc0380c8),
+@@ -1300,6 +1310,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsSubSystemInterconnect, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(9e6fa560-c141-477b-83ba-0b6c38f7febf),
+@@ -1320,6 +1331,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsControllerPort, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(18691d0d-4e7f-43e8-92e4-cf44beeed11c),
+@@ -1362,6 +1374,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsController, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(cb53d96e-dffb-474a-a078-790d1e2bc082),
+@@ -1425,6 +1438,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsControllerControllerPort, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(ca5d735f-6bae-42c0-b30e-f2666045ce71),
+@@ -1446,6 +1460,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsDrive, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(ff24efa4-aade-4b6b-898b-eaa6a20887c7),
+@@ -1499,6 +1514,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsDrive2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(60b5a730-addf-4436-8ca7-5769e2d1ffa4),
+@@ -1521,6 +1537,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLun, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(3540a9c7-e60f-4111-a840-8bba6c2c83d8),
+@@ -1706,6 +1723,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLun2, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(e5b3a735-9efb-499a-8071-4394d9ee6fcb),
+@@ -1732,6 +1750,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunNaming, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(907504cb-6b4e-4d88-a34d-17ba661fbb06),
+@@ -1752,6 +1771,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunNumber, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(d3f95e46-54b3-41f9-b678-0f1871443a08),
+@@ -1772,6 +1792,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunControllerPorts, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(451fe266-da6d-406a-bb60-82e534f85aeb),
+@@ -1810,6 +1831,7 @@
+ // Implemented where: non-iSCSI hardware providers supporting MPIO, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunMpio, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7c5fbae3-333a-48a1-a982-33c15788cde3),
+@@ -1862,6 +1884,7 @@
+ // Implemented where: iSCSI hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunIscsi, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0d7c1e64-b59b-45ae-b86a-2c2cc6a42067),
+@@ -1890,6 +1913,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsLunPlex, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(0ee1a790-5d2e-4abb-8c99-c481e8be2138),
+@@ -1934,6 +1958,7 @@
+ // Implemented where: iSCSI hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsIscsiPortal, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(7fa1499d-ec85-4a8a-a47b-ff69201fcd34),
+@@ -1989,6 +2014,7 @@
+ // Implemented where: iSCSI hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsIscsiTarget, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(aa8f5055-83e5-4bcc-aa73-19851a36a849),
+@@ -2059,6 +2085,7 @@
+ // Implemented where: iSCSI hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsIscsiPortalGroup, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(fef5f89d-a3dd-4b36-bf28-e7dde045c593),
+@@ -2107,6 +2134,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsStoragePool, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(932ca8cf-0eb3-4ba8-9620-22665d7f8450),
+@@ -2154,6 +2182,7 @@
+ // Implemented where: hardware providers, common layer
+ // Accessed by: applications
+ //
++_Win32_AnnotateInterface_(IVdsMaintenance, _Win32_SupportedOS_WindowsVista_)
+ [
+     object,
+     uuid(daebeef3-8523-47ed-a2b9-05cecce2a1ae),

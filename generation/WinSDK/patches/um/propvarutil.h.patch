@@ -1,3 +1,4 @@
+diff --git a/um/propvarutil.h b/um/propvarutil.h
 --- a/um/propvarutil.h
 +++ b/um/propvarutil.h
 @@ -1,3 +1,4 @@
@@ -18,7 +19,7 @@
  {
      PSTF_UTC   = 0x00000000,
      PSTF_LOCAL = 0x00000001,
-@@ -55,40 +60,57 @@
+@@ -55,147 +60,218 @@
  //====================
  
  // Initialize a propvariant
@@ -77,8 +78,30 @@
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitPropVariantFromStringAsVector(_In_opt_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  HRESULT  InitPropVariantFromBoolean(_In_ BOOL fVal, _Out_ PROPVARIANT *ppropvar);
-@@ -106,13 +128,21 @@
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromInt16(_In_ SHORT nVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromUInt16(_In_ USHORT uiVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromInt32(_In_ LONG lVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromUInt32(_In_ ULONG ulVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromInt64(_In_ LONGLONG llVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromUInt64(_In_ ULONGLONG ullVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromDouble(_In_ DOUBLE dblVal, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromString(_In_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitPropVariantFromGUIDAsBuffer(_In_ REFGUID guid, _Out_ PROPVARIANT *ppropvar);
++_Win32_SupportedOS_WindowsXP_
+ BOOL     IsPropVariantVector(_In_ REFPROPVARIANT propvar);
++_Win32_SupportedOS_WindowsXP_
+ BOOL     IsPropVariantString(_In_ REFPROPVARIANT propvar);
  #endif
  
  // Extract data from a propvariant
@@ -100,8 +123,9 @@
  PSSTDAPI_(DOUBLE)    PropVariantToDoubleWithDefault(_In_ REFPROPVARIANT propvarIn, _In_ DOUBLE dblDefault);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -120,82 +150,111 @@
+ #pragma region Application Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI_(PCWSTR)    PropVariantToStringWithDefault(_In_ REFPROPVARIANT propvarIn, _In_opt_ LPCWSTR pszDefault);
  
 +_Win32_SupportedOS_WindowsXP_
@@ -114,7 +138,9 @@
  PSSTDAPI             PropVariantToInt16(_In_ REFPROPVARIANT propvarIn, _Out_ SHORT *piRet);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI             PropVariantToUInt16(_In_ REFPROPVARIANT propvarIn, _Out_ USHORT *puiRet);
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI             PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ LONG *plRet);
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI             PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ ULONG *pulRet);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI             PropVariantToInt64(_In_ REFPROPVARIANT propvarIn, _Out_ LONGLONG *pllRet);
@@ -145,6 +171,7 @@
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI             PropVariantToFileTime(_In_ REFPROPVARIANT propvar, _In_ PSTIME_FLAGS pstfOut, _Out_ FILETIME* pftOut);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  HRESULT              PropVariantToCLSID(_In_ REFPROPVARIANT propvar, _Out_ CLSID *pclsid);
  #endif
  
@@ -220,6 +247,7 @@
 -_Check_return_ PSSTDAPI PropVariantGetStringElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
 +_Check_return_ PSSTDAPI _Win32_SupportedOS_WindowsXP_ PropVariantGetStringElem(_In_ REFPROPVARIANT propvar, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  HRESULT  PropVariantGetElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar);
  #endif
  
@@ -228,7 +256,7 @@
  PSSTDAPI_(void) ClearPropVariantArray(_Inout_updates_(cVars) PROPVARIANT *rgPropVar, _In_ UINT cVars);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -215,7 +274,11 @@
+@@ -215,7 +291,11 @@
      PVCU_YEAR    = 6
  } PROPVAR_COMPARE_UNIT;
  
@@ -241,13 +269,14 @@
  {
      PVCF_DEFAULT                 = 0x00000000,   // When comparing strings, use StrCmpLogical
      PVCF_TREATEMPTYASGREATERTHAN = 0x00000001,   // Empty/null values are greater-than non-empty values
-@@ -228,12 +291,16 @@
+@@ -228,12 +308,17 @@
  typedef int PROPVAR_COMPARE_FLAGS;
  
  // Comparisons
 -PSSTDAPI_(int) PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
 +PSSTDAPI_(int) _Win32_SupportedOS_WindowsXP_ PropVariantCompareEx(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2, _In_ PROPVAR_COMPARE_UNIT unit, _In_ PROPVAR_COMPARE_FLAGS flags);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  int PropVariantCompare(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2);
  #endif
  
@@ -260,7 +289,7 @@
  {
      PVCHF_DEFAULT           = 0x00000000,
      PVCHF_NOVALUEPROP       = 0x00000001,       // Maps to VARIANT_NOVALUEPROP for VariantChangeType
-@@ -245,10 +312,13 @@
+@@ -245,10 +330,13 @@
  typedef int PROPVAR_CHANGE_FLAGS;
  
  // Coersions
@@ -274,7 +303,7 @@
  PSSTDAPI VariantToPropVariant(_In_ const VARIANT* pVar, _Out_ PROPVARIANT* pPropVar);
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
  #pragma endregion
-@@ -256,11 +326,12 @@
+@@ -256,11 +344,12 @@
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  // Stg functions
@@ -288,7 +317,20 @@
  PSSTDAPI StgDeserializePropVariant(
              _In_ const SERIALIZEDPROPERTYVALUE* pprop,
              _In_ ULONG cbMax,
-@@ -283,29 +354,43 @@
+@@ -275,131 +364,204 @@
+ //================
+ 
+ #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
+ BOOL IsVarTypeFloat(_In_ VARTYPE vt);
++_Win32_SupportedOS_WindowsXP_
+ BOOL IsVariantArray(_In_ REFVARIANT var);
++_Win32_SupportedOS_WindowsXP_
+ BOOL IsVariantString(_In_ REFVARIANT var);
++_Win32_SupportedOS_WindowsXP_
+ BOOL IsVarTypeNumber(_In_ VARTYPE vt);
++_Win32_SupportedOS_WindowsXP_
+ BOOL IsVarTypeInteger(_In_ VARTYPE vt);
  #endif
  
  // Initialize a VARIANT
@@ -333,8 +375,31 @@
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI InitVariantFromStringArray(_In_reads_(cElems) PCWSTR *prgsz, _In_ ULONG cElems, _Out_ VARIANT *pvar);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  HRESULT  InitVariantFromBoolean(_In_ BOOL fVal, _Out_ VARIANT *pvar);
-@@ -324,82 +409,120 @@
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromInt16(_In_ SHORT iVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromUInt16(_In_ USHORT uiVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromInt32(_In_ LONG lVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromUInt32(_In_ ULONG ulVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromInt64(_In_ LONGLONG llVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromUInt64(_In_ ULONGLONG ullVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromDouble(_In_ DOUBLE dblVal, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromString(_In_ PCWSTR psz, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromDispatch(_In_opt_ IDispatch* pdisp, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromDosDateTime(_In_ WORD wDate, _In_ WORD wTime, _Out_ VARIANT *pvar);
++_Win32_SupportedOS_WindowsXP_
+ HRESULT  InitVariantFromGUIDAsBuffer(_In_ REFGUID guid, _Out_ VARIANT *pvar);
+ HRESULT  InitVariantFromUnknown(_In_opt_ IUnknown *unknown, _Out_ VARIANT* variant);
  #endif
  
  // Extract data from a VARIANT
@@ -354,6 +419,7 @@
  PSSTDAPI_(ULONGLONG)  VariantToUInt64WithDefault(_In_ REFVARIANT varIn, _In_ ULONGLONG ullDefault);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI_(DOUBLE)     VariantToDoubleWithDefault(_In_ REFVARIANT varIn, _In_ DOUBLE dblDefault);
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI_(PCWSTR)     VariantToStringWithDefault(_In_ REFVARIANT varIn, _In_opt_ LPCWSTR pszDefault);
  
 +_Win32_SupportedOS_WindowsXP_
@@ -362,7 +428,9 @@
  PSSTDAPI              VariantToInt16(_In_ REFVARIANT varIn, _Out_ SHORT *piRet);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI              VariantToUInt16(_In_ REFVARIANT varIn, _Out_ USHORT *puiRet);
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI              VariantToInt32(_In_ REFVARIANT varIn, _Out_ LONG *plRet);
++_Win32_SupportedOS_WindowsXP_
  PSSTDAPI              VariantToUInt32(_In_ REFVARIANT varIn, _Out_ ULONG *pulRet);
 +_Win32_SupportedOS_WindowsXP_
  PSSTDAPI              VariantToInt64(_In_ REFVARIANT varIn, _Out_ LONGLONG *pllRet);
@@ -458,6 +526,7 @@
 -_Check_return_ PSSTDAPI VariantGetStringElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
 +_Check_return_ PSSTDAPI _Win32_SupportedOS_WindowsXP_ VariantGetStringElem(_In_ REFVARIANT var, _In_ ULONG iElem, _Outptr_ PWSTR *ppszVal);
  #ifdef __cplusplus
++_Win32_SupportedOS_WindowsXP_
  HRESULT  VariantGetElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar);
  #endif
  
@@ -468,7 +537,7 @@
  PSSTDAPI_(int) VariantCompare(_In_ REFVARIANT var1, _In_ REFVARIANT var2);
  
  //===========================
-@@ -414,7 +537,11 @@
+@@ -414,7 +576,11 @@
  // propvar.caul.pElems[0] = current progress
  // propvar.caul.pElems[1] = total progress
  // propvar.caul.pElems[2] = DRAWPROGRESSFLAGS (see below);
@@ -481,3 +550,294 @@
  {
      DPF_NONE                = 0x0,  // No progress flags.
      DPF_MARQUEE             = 0x1,  // The progress bar should draw in marquee mode.
+@@ -438,6 +604,7 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromBoolean(_In_ BOOL fVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_BOOL;
+@@ -445,6 +612,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromInt16(_In_ SHORT nVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_I2;
+@@ -452,6 +620,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromUInt16(_In_ USHORT uiVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_UI2;
+@@ -459,6 +628,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromInt32(_In_ LONG lVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_I4;
+@@ -466,6 +636,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromUInt32(_In_ ULONG ulVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_UI4;
+@@ -473,6 +644,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromInt64(_In_ LONGLONG llVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_I8;
+@@ -480,6 +652,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromUInt64(_In_ ULONGLONG ullVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_UI8;
+@@ -487,6 +660,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromDouble(_In_ DOUBLE dblVal, _Out_ PROPVARIANT *ppropvar)
+ {
+     V_VT(ppropvar) = VT_R8;
+@@ -495,6 +669,7 @@
+ }
+ 
+ // Creates a VT_LPWSTR propvariant.
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromString(_In_ PCWSTR psz, _Out_ PROPVARIANT *ppropvar)
+ {
+     HRESULT hr = psz != nullptr ? S_OK : E_INVALIDARG; // Previous API behavior counter to the SAL requirement.
+@@ -517,34 +692,40 @@
+ }
+ 
+ // Creates a VT_VECTOR | VT_UI1 propvariant.
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitPropVariantFromGUIDAsBuffer(_In_ REFGUID guid, _Out_ PROPVARIANT *ppropvar)
+ {
+     return InitPropVariantFromBuffer(&guid, sizeof(GUID), ppropvar);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsPropVariantVector(_In_ REFPROPVARIANT propvar)
+ {
+     return (propvar.vt & (VT_ARRAY | VT_VECTOR));
+ }
+ 
+ // If TRUE, propvar contains a unicode string.  Use PropVariantToStringWithDefault(propvar, NULL) to retrieve it.
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsPropVariantString(_In_ REFPROPVARIANT propvar)
+ {
+     return (PropVariantToStringWithDefault(propvar, NULL) != NULL);
+ }
+ 
+ // Handles int instead of LONG
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT PropVariantToInt32(_In_ REFPROPVARIANT propvarIn, _Out_ int *piRet)
+ {
+     return PropVariantToInt32(propvarIn, (LONG*)piRet);
+ }
+ 
+ // Handles UINT instead of ULONG
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT PropVariantToUInt32(_In_ REFPROPVARIANT propvarIn, _Out_ UINT *piRet)
+ {
+     return PropVariantToUInt32(propvarIn, (ULONG*)piRet);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT PropVariantToCLSID(_In_ REFPROPVARIANT propvarIn, _Out_ CLSID *pclsid)
+ { 
+     return PropVariantToGUID(propvarIn, (GUID*)pclsid);
+@@ -557,6 +738,7 @@
+ #pragma region Application Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline int PropVariantCompare(_In_ REFPROPVARIANT propvar1, _In_ REFPROPVARIANT propvar2)
+ {
+     return PropVariantCompareEx(propvar1, propvar2, PVCU_DEFAULT, PVCF_DEFAULT);
+@@ -568,11 +750,13 @@
+ #pragma region Desktop Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT PropVariantGetElem(_In_ REFPROPVARIANT propvarIn, _In_ ULONG iElem, _Out_ PROPVARIANT *ppropvar)
+ {
+     return InitPropVariantFromPropVariantVectorElem(propvarIn, iElem, ppropvar);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromBoolean(_In_ BOOL fVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_BOOL;
+@@ -580,6 +764,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromInt16(_In_ short iVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_I2;
+@@ -587,6 +772,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromUInt16(_In_ USHORT uiVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_UI2;
+@@ -594,6 +780,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromInt32(_In_ LONG lVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_I4;
+@@ -601,6 +788,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromUInt32(_In_ ULONG ulVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_UI4;
+@@ -608,6 +796,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromInt64(_In_ LONGLONG llVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_I8;
+@@ -615,6 +804,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromUInt64(_In_ ULONGLONG ullVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_UI8;
+@@ -622,6 +812,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromDouble(_In_ DOUBLE dblVal, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_R8;
+@@ -629,6 +820,7 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromString(_In_ PCWSTR psz, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_BSTR;
+@@ -641,6 +833,7 @@
+     return hr;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromDispatch(_In_opt_ IDispatch* pdisp, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_DISPATCH;
+@@ -653,6 +846,7 @@
+ }
+ 
+ // Creates a VT_DATE variant
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromDosDateTime(_In_ WORD wDate, _In_ WORD wTime, _Out_ VARIANT *pvar)
+ {
+     V_VT(pvar) = VT_DATE;
+@@ -671,27 +865,32 @@
+     return S_OK;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVarTypeFloat(_In_ VARTYPE vt)
+ {
+     return (vt == VT_R4 || vt == VT_R8);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVariantArray(_In_ REFVARIANT var)
+ {
+     return (var.vt & VT_ARRAY);
+ }
+ 
+ // if TRUE, you can use VariantToStringCast to obtain the string pointer
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVariantString(_In_ REFVARIANT var)
+ {
+     return (VariantToStringWithDefault(var, NULL) != NULL);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVarTypeNumber(_In_ VARTYPE vt)
+ {
+     return IsVarTypeInteger(vt) || IsVarTypeFloat(vt);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVarTypeSignedInteger(_In_ VARTYPE vt)
+ {
+     BOOL fRet = FALSE;
+@@ -706,6 +905,7 @@
+     return fRet;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVarTypeUnsignedInteger(_In_ VARTYPE vt)
+ {
+     BOOL fRet = FALSE;
+@@ -720,29 +920,34 @@
+     return fRet;
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline BOOL IsVarTypeInteger(_In_ VARTYPE vt)
+ {
+     return IsVarTypeSignedInteger(vt) || IsVarTypeUnsignedInteger(vt);
+ }
+ 
+ // Creates a VT_ARRAY | VT_UI1 variant.
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT InitVariantFromGUIDAsBuffer(_In_ REFGUID guid, _Out_ VARIANT *pvar)
+ {
+     return InitVariantFromBuffer(&guid, sizeof(GUID), pvar);
+ }
+ 
+ // Handles int instead of LONG
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT VariantToInt32(_In_ REFVARIANT varIn, _Out_ int *piRet)
+ {
+     return VariantToInt32(varIn, (LONG*)piRet);
+ }
+ 
+ // Handles UINT instead of ULONG
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT VariantToUInt32(_In_ REFVARIANT varIn, _Out_ UINT *piRet)
+ {
+     return VariantToUInt32(varIn, (ULONG*)piRet);
+ }
+ 
++_Win32_SupportedOS_WindowsXP_
+ inline HRESULT VariantGetElem(_In_ REFVARIANT varIn, _In_ ULONG iElem, _Out_ VARIANT *pvar)
+ {
+     return InitVariantFromVariantArrayElem(varIn, iElem, pvar);

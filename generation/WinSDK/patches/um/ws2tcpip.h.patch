@@ -1,8 +1,16 @@
 diff --git a/um/ws2tcpip.h b/um/ws2tcpip.h
-index ed035f54..ba6ee04b 100644
+index ed035f54..f434db93 100644
 --- a/um/ws2tcpip.h
 +++ b/um/ws2tcpip.h
-@@ -115,6 +115,8 @@ typedef ADDRINFOEXA     ADDRINFOEX, *PADDRINFOEX;
+@@ -22,6 +22,7 @@
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #if _MSC_VER >= 1200
+@@ -115,6 +116,8 @@ typedef ADDRINFOEXA     ADDRINFOEX, *PADDRINFOEX;
  extern "C" {
  #endif
  
@@ -11,7 +19,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -126,6 +128,7 @@ getaddrinfo(
+@@ -126,6 +129,7 @@ getaddrinfo(
      );
  
  #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
@@ -19,7 +27,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -185,6 +188,7 @@ void
+@@ -185,6 +189,7 @@ void
  
  #pragma region Desktop Family or OneCore Family or Game Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -27,7 +35,7 @@ index ed035f54..ba6ee04b 100644
  _WINSOCK_DEPRECATED_BY("GetAddrInfoExW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -204,6 +208,7 @@ GetAddrInfoExA(
+@@ -204,6 +209,7 @@ GetAddrInfoExA(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
@@ -35,7 +43,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -220,6 +225,7 @@ GetAddrInfoExW(
+@@ -220,6 +226,7 @@ GetAddrInfoExW(
      _Out_opt_   LPHANDLE        lpHandle
      );
  
@@ -43,7 +51,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -227,6 +233,7 @@ GetAddrInfoExCancel(
+@@ -227,6 +234,7 @@ GetAddrInfoExCancel(
      _In_        LPHANDLE        lpHandle
      );
  
@@ -51,7 +59,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -300,6 +307,7 @@ INT
+@@ -300,6 +308,7 @@ INT
  #if (_WIN32_WINNT >= 0x0600)
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -59,7 +67,7 @@ index ed035f54..ba6ee04b 100644
  _WINSOCK_DEPRECATED_BY("SetAddrInfoExW()")
  WINSOCK_API_LINKAGE
  INT
-@@ -321,6 +329,7 @@ SetAddrInfoExA(
+@@ -321,6 +330,7 @@ SetAddrInfoExA(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
@@ -67,7 +75,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -393,6 +402,8 @@ INT
+@@ -393,6 +403,8 @@ INT
  
  #endif
  
@@ -76,7 +84,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  VOID
  WSAAPI
-@@ -401,6 +412,7 @@ freeaddrinfo(
+@@ -401,6 +413,7 @@ freeaddrinfo(
      );
  
  #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
@@ -84,7 +92,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  VOID
  WSAAPI
-@@ -443,6 +455,7 @@ VOID
+@@ -443,6 +456,7 @@ VOID
  
  #pragma region App Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -92,7 +100,7 @@ index ed035f54..ba6ee04b 100644
  _WINSOCK_DEPRECATED_BY("FreeAddrInfoExW()")
  WINSOCK_API_LINKAGE
  void
-@@ -453,6 +466,7 @@ FreeAddrInfoEx(
+@@ -453,6 +467,7 @@ FreeAddrInfoEx(
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
  #pragma endregion
  
@@ -100,7 +108,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  void
  WSAAPI
-@@ -495,6 +509,8 @@ void
+@@ -495,6 +510,8 @@ void
  
  typedef int socklen_t;
  
@@ -109,7 +117,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -509,6 +525,7 @@ getnameinfo(
+@@ -509,6 +526,7 @@ getnameinfo(
      );
  
  #if (NTDDI_VERSION >= NTDDI_WINXPSP2) || (_WIN32_WINNT >= 0x0502)
@@ -117,7 +125,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -567,6 +584,8 @@ INT
+@@ -567,6 +585,8 @@ INT
  
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -126,7 +134,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -578,6 +597,7 @@ inet_pton(
+@@ -578,6 +598,7 @@ inet_pton(
                                                PVOID           pAddrBuf
      );
  
@@ -134,7 +142,7 @@ index ed035f54..ba6ee04b 100644
  INT
  WSAAPI
  InetPtonW(
-@@ -588,6 +608,8 @@ InetPtonW(
+@@ -588,6 +609,8 @@ InetPtonW(
                                                PVOID           pAddrBuf
      );
  
@@ -143,7 +151,7 @@ index ed035f54..ba6ee04b 100644
  PCSTR
  WSAAPI
  inet_ntop(
-@@ -597,6 +619,7 @@ inet_ntop(
+@@ -597,6 +620,7 @@ inet_ntop(
      _In_                                size_t          StringBufSize
      );
  
@@ -151,7 +159,142 @@ index ed035f54..ba6ee04b 100644
  PCWSTR
  WSAAPI
  InetNtopW(
-@@ -1229,6 +1252,8 @@ WSASetReceivedProcessorOption(
+@@ -681,7 +705,7 @@ PCWSTR
+ 
+ WS2TCPIP_INLINE
+ char *
+-gai_strerrorA(
++_Win32_SupportedOS_Windows2000_ gai_strerrorA(
+     _In_ int ecode)
+ {
+     static char buff[GAI_STRERROR_BUFFER_SIZE + 1];
+@@ -701,7 +725,7 @@ gai_strerrorA(
+ 
+ WS2TCPIP_INLINE
+ WCHAR *
+-gai_strerrorW(
++_Win32_SupportedOS_Windows2000_ gai_strerrorW(
+     _In_ int ecode
+     )
+ {
+@@ -726,7 +750,7 @@ gai_strerrorW(
+ 
+ WS2TCPIP_INLINE
+ int
+-setipv4sourcefilter(
++_Win32_SupportedOS_Windows81_ setipv4sourcefilter(
+     _In_ SOCKET Socket,
+     _In_ IN_ADDR Interface,
+     _In_ IN_ADDR Group,
+@@ -772,7 +796,7 @@ setipv4sourcefilter(
+ _Success_(return == 0)
+ WS2TCPIP_INLINE
+ int
+-getipv4sourcefilter(
++_Win32_SupportedOS_Windows81_ getipv4sourcefilter(
+     _In_ SOCKET Socket,
+     _In_ IN_ADDR Interface,
+     _In_ IN_ADDR Group,
+@@ -822,7 +846,7 @@ getipv4sourcefilter(
+ #if (NTDDI_VERSION >= NTDDI_WINXP)
+ WS2TCPIP_INLINE
+ int
+-setsourcefilter(
++_Win32_SupportedOS_Windows81_ setsourcefilter(
+     _In_ SOCKET Socket,
+     _In_ ULONG Interface,
+     _In_ CONST SOCKADDR *Group,
+@@ -870,7 +894,7 @@ setsourcefilter(
+ _Success_(return == 0)
+ WS2TCPIP_INLINE
+ int
+-getsourcefilter(
++_Win32_SupportedOS_Windows81_ getsourcefilter(
+     _In_ SOCKET Socket,
+     _In_ ULONG Interface,
+     _In_ CONST SOCKADDR *Group,
+@@ -965,7 +989,7 @@ idealsendbacklognotify(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSAGetIPUserMtu(
++_Win32_SupportedOS_19041_ WSAGetIPUserMtu(
+     _In_ SOCKET Socket,
+     _Out_ DWORD *Mtu
+     )
+@@ -996,7 +1020,7 @@ WSAGetIPUserMtu(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSASetIPUserMtu(
++_Win32_SupportedOS_19041_ WSASetIPUserMtu(
+     _In_ SOCKET Socket,
+     _In_ DWORD Mtu
+     )
+@@ -1031,7 +1055,7 @@ WSASetIPUserMtu(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSAGetFailConnectOnIcmpError(
++_Win32_SupportedOS_19041_ WSAGetFailConnectOnIcmpError(
+     _In_ SOCKET Socket,
+     _Out_ DWORD *Enabled
+     )
+@@ -1043,7 +1067,7 @@ WSAGetFailConnectOnIcmpError(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSASetFailConnectOnIcmpError(
++_Win32_SupportedOS_19041_ WSASetFailConnectOnIcmpError(
+     _In_ SOCKET Socket,
+     _In_ DWORD Enabled
+     )
+@@ -1054,7 +1078,7 @@ WSASetFailConnectOnIcmpError(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSAGetIcmpErrorInfo(
++_Win32_SupportedOS_19041_ WSAGetIcmpErrorInfo(
+     _In_ SOCKET Socket,
+     _Out_ ICMP_ERROR_INFO *Info
+     )
+@@ -1079,7 +1103,7 @@ WSAGetIcmpErrorInfo(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSAGetUdpSendMessageSize(
++_Win32_SupportedOS_19041_ WSAGetUdpSendMessageSize(
+     _In_ SOCKET Socket,
+     _Out_ DWORD *MsgSize
+     )
+@@ -1092,7 +1116,7 @@ WSAGetUdpSendMessageSize(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSASetUdpSendMessageSize(
++_Win32_SupportedOS_19041_ WSASetUdpSendMessageSize(
+     _In_ SOCKET Socket,
+     _In_ DWORD MsgSize
+     )
+@@ -1103,7 +1127,7 @@ WSASetUdpSendMessageSize(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSAGetUdpRecvMaxCoalescedSize(
++_Win32_SupportedOS_19041_ WSAGetUdpRecvMaxCoalescedSize(
+     _In_ SOCKET Socket,
+     _Out_ DWORD *MaxCoalescedMsgSize
+     )
+@@ -1116,7 +1140,7 @@ WSAGetUdpRecvMaxCoalescedSize(
+ 
+ WS2TCPIP_INLINE
+ INT
+-WSASetUdpRecvMaxCoalescedSize(
++_Win32_SupportedOS_19041_ WSASetUdpRecvMaxCoalescedSize(
+     _In_ SOCKET Socket,
+     _In_ DWORD MaxCoalescedMsgSize
+     )
+@@ -1229,6 +1253,8 @@ WSASetReceivedProcessorOption(
  // Secure socket API definitions
  //
  
@@ -160,7 +303,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -1240,6 +1265,8 @@ WSASetSocketSecurity (
+@@ -1240,6 +1266,8 @@ WSASetSocketSecurity (
     _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
  );
  
@@ -169,7 +312,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -1253,6 +1280,8 @@ WSAQuerySocketSecurity (
+@@ -1253,6 +1281,8 @@ WSAQuerySocketSecurity (
     _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
  );
  
@@ -178,7 +321,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -1264,6 +1293,8 @@ WSASetSocketPeerTargetName (
+@@ -1264,6 +1294,8 @@ WSASetSocketPeerTargetName (
     _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
  );
  
@@ -187,7 +330,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -1275,6 +1306,8 @@ WSADeleteSocketPeerTargetName (
+@@ -1275,6 +1307,8 @@ WSADeleteSocketPeerTargetName (
     _In_opt_ LPWSAOVERLAPPED_COMPLETION_ROUTINE CompletionRoutine
  );
  
@@ -196,7 +339,7 @@ index ed035f54..ba6ee04b 100644
  WINSOCK_API_LINKAGE
  INT
  WSAAPI
-@@ -1284,6 +1317,8 @@ WSAImpersonateSocketPeer (
+@@ -1284,6 +1318,8 @@ WSAImpersonateSocketPeer (
     _In_ ULONG PeerAddrLen
  );
  

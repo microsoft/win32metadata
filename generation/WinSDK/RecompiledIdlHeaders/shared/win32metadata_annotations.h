@@ -9,7 +9,7 @@
 #define _WIN32META_STRINGIFY_(...) #__VA_ARGS__
 #define _WIN32META_EXPAND_STRINGIFY_(...) _WIN32META_STRINGIFY_(__VA_ARGS__)
 #define _Win32_RAIIFree_(cleanup, ...) \
-    _WIN32META_ANNOTATION_("RAIIFree", sizeof(&(cleanup)), ##__VA_ARGS__)
+    _WIN32META_ANNOTATION_("RAIIFree", "Win32Metadata.FunctionDecl:" _WIN32META_EXPAND_STRINGIFY_(cleanup), ##__VA_ARGS__)
 #define _Win32_ImportLibrary_(...) _WIN32META_ANNOTATION_("ImportLibrary", __VA_ARGS__)
 #define _Win32_AssociatedEnum_(name) _WIN32META_ANNOTATION_("AssociatedEnum", (name)0)
 #define _Win32_Enum_(name, storage, ...) \

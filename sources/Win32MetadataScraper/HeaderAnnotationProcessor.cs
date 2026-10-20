@@ -17,6 +17,7 @@ namespace Win32MetadataScraper
     internal sealed class HeaderAnnotationProcessor
     {
         private const string MetadataNamespace = "global::Windows.Win32.Foundation.Metadata.";
+        private const string CleanupReferencePrefix = HeaderAnnotation.OwnerPrefix + "FunctionDecl:";
         private readonly Dictionary<NamedDecl, DeclarationFacts> declarations = new();
         private readonly Dictionary<(string File, uint Line, uint Column), List<DeclarationFacts>> projectionLocations = new();
         private readonly Dictionary<string, string> remaps;
@@ -33,6 +34,7 @@ namespace Win32MetadataScraper
         private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> parameterCarriers = new();
         private readonly HashSet<Cursor> visited = new();
+        private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
 
         internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers)
             .Select(carrier => carrier.Declaration.Name);
@@ -48,6 +50,7 @@ namespace Win32MetadataScraper
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
+            ResolveCleanupReferences();
             MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
                 if (association.Declaration.Kind != CXCursorKind.CXCursor_EnumDecl &&
@@ -102,7 +105,7 @@ namespace Win32MetadataScraper
             }
         }
 
-        private HeaderAnnotation ReadAnnotation(Attr attribute, DeclarationFacts facts, NativeLocation location)
+        private HeaderAnnotation ReadAnnotation(Attr attribute, DeclarationFacts facts, NamedDecl owner, NativeLocation location)
         {
             string payload = HeaderAnnotation.RemoveOwnerPrefix(attribute.Spelling);
             var arguments = attribute.CursorChildren.ToArray();
@@ -110,11 +113,29 @@ namespace Win32MetadataScraper
             {
                 if (arguments.Length == 0)
                     throw Error(location, "RAIIFree requires a cleanup function and optional integral constant arguments.");
-                var cleanup = ReadCleanupReference(arguments[0], location);
+                bool deferred = UnwrapArgument(arguments[0]) is StringLiteral;
+                string cleanup;
+                if (deferred)
+                {
+                    string reference = ReadStringArgument(arguments[0], location);
+                    if (!reference.StartsWith(CleanupReferencePrefix, StringComparison.Ordinal))
+                        throw Error(location, "RAIIFree requires a native cleanup function reference, not an untagged string.");
+                    cleanup = reference[CleanupReferencePrefix.Length..].Trim();
+                    while (cleanup.StartsWith("(", StringComparison.Ordinal) && cleanup.EndsWith(")", StringComparison.Ordinal))
+                        cleanup = cleanup[1..^1].Trim();
+                    cleanup = Regex.Replace(cleanup, @"\s*::\s*", "::");
+                    if (!Regex.IsMatch(cleanup, @"^(?:::)?[A-Za-z_]\w*(?:::[A-Za-z_]\w*)*$"))
+                        throw Error(location, "RAIIFree requires a native cleanup function name.");
+                }
+                else
+                    cleanup = ReadCleanupReference(arguments[0], location).Spelling.ToString();
                 var values = arguments.Skip(1).Select(argument => ReadInteger(argument, location)).ToArray();
                 facts.InvalidValues.AddRange(values.Select(value => unchecked((long)value)));
-                return new HeaderAnnotation("RAIIFree", new[] { cleanup.Spelling.ToString() }
-                    .Concat(facts.InvalidValues.Select(value => value.ToString(CultureInfo.InvariantCulture))).ToArray());
+                var annotationArguments = new[] { cleanup }
+                    .Concat(facts.InvalidValues.Select(value => value.ToString(CultureInfo.InvariantCulture))).ToArray();
+                if (deferred)
+                    cleanupReferences.Add((owner, cleanup, annotationArguments, location));
+                return new HeaderAnnotation("RAIIFree", annotationArguments);
             }
             if (payload == "ImportLibrary")
             {
@@ -192,6 +213,93 @@ namespace Win32MetadataScraper
         private static CXCursor ReadCleanupReference(Cursor argument, NativeLocation location)
             => ReadDeclarationReference(argument, CXCursorKind.CXCursor_FunctionDecl, location,
                 "RAIIFree requires a reference to a declared native cleanup function.");
+
+        private void ResolveCleanupReferences()
+        {
+            if (cleanupReferences.Count == 0)
+                return;
+            var named = visited.OfType<NamedDecl>().Where(declaration => declaration.SemanticParentCursor != null &&
+                (declaration is ParmVarDecl || declaration.SemanticParentCursor is not FunctionDecl)).ToArray();
+            var declarationsByScope = named.Where(declaration => declaration.Name.Length != 0)
+                .ToLookup(declaration =>
+                {
+                    Cursor scope = declaration.SemanticParentCursor;
+                    if (declaration is EnumConstantDecl && scope is EnumDecl enumeration && !enumeration.IsScoped)
+                        scope = enumeration.SemanticParentCursor;
+                    return (scope.Handle.CanonicalCursor, declaration.Name);
+                });
+            var records = new Dictionary<CXCursor, CXXRecordDecl>();
+            foreach (var record in named.OfType<CXXRecordDecl>())
+                records.TryAdd(record.Handle.CanonicalCursor, record);
+            var namespaceImports = named.OfType<UsingDirectiveDecl>()
+                .ToLookup(declaration => declaration.SemanticParentCursor.Handle.CanonicalCursor);
+            var implicitNamespaces = named.OfType<NamespaceDecl>()
+                .Where(declaration => declaration.IsInline || declaration.IsAnonymousNamespace)
+                .ToLookup(declaration => declaration.SemanticParentCursor.Handle.CanonicalCursor);
+            foreach (var reference in cleanupReferences)
+            {
+                bool absolute = reference.Name.StartsWith("::", StringComparison.Ordinal);
+                string[] parts = (absolute ? reference.Name[2..] : reference.Name)
+                    .Split(new[] { "::" }, StringSplitOptions.None);
+                Cursor scope = absolute ? reference.Owner.TranslationUnitDecl : reference.Owner.SemanticParentCursor;
+                NamedDecl[] candidates = Array.Empty<NamedDecl>();
+                while (scope != null)
+                {
+                    candidates = Lookup(scope.Handle.CanonicalCursor, parts[0]);
+                    if (candidates.Length != 0 || absolute)
+                        break;
+                    scope = scope.SemanticParentCursor;
+                }
+                foreach (string part in parts.Skip(1))
+                {
+                    candidates = candidates.Where(declaration => declaration is NamespaceDecl or RecordDecl)
+                        .SelectMany(declaration => Lookup(declaration.Handle.CanonicalCursor, part))
+                        .ToArray();
+                }
+                candidates = candidates.GroupBy(declaration => declaration.Handle.CanonicalCursor)
+                    .Select(group => group.First()).ToArray();
+                if (candidates.Length != 1 || candidates[0].Handle.Kind != CXCursorKind.CXCursor_FunctionDecl)
+                    throw Error(reference.Location, $"RAIIFree cleanup '{reference.Name}' must identify one declared native cleanup function; found {candidates.Length} candidates.");
+                reference.Arguments[0] = candidates[0].Name;
+            }
+
+            NamedDecl[] Lookup(CXCursor scope, string name)
+            {
+                var candidates = new List<NamedDecl>();
+                var searched = new HashSet<CXCursor>();
+                var scopes = new Stack<CXCursor>();
+                scopes.Push(scope);
+                while (scopes.TryPop(out scope))
+                {
+                    if (!searched.Add(scope))
+                        continue;
+                    var direct = declarationsByScope[(scope, name)].ToArray();
+                    candidates.AddRange(direct.Select(declaration => declaration.UnderlyingDecl));
+                    if (direct.Length == 0 && records.TryGetValue(scope, out var record))
+                        foreach (var parent in (record.Definition ?? record).Bases)
+                        {
+                            if (parent.Type.CanonicalType is not RecordType type)
+                                throw Error(GetLocation(record.Location), "RAIIFree cleanup lookup requires a resolved native base declaration.");
+                            scopes.Push(type.Decl.Handle.CanonicalCursor);
+                        }
+                    foreach (var declaration in implicitNamespaces[scope])
+                        scopes.Push(declaration.Handle.CanonicalCursor);
+                    foreach (var directive in namespaceImports[scope])
+                    {
+                        var target = directive.CursorChildren.LastOrDefault(child => child.Handle.Kind == CXCursorKind.CXCursor_NamespaceRef);
+                        if (target == null)
+                            throw Error(GetLocation(directive.Location), "A cleanup namespace import requires a native namespace reference.");
+                        var handle = target.Handle.Referenced;
+                        if (handle.Kind == CXCursorKind.CXCursor_NamespaceAlias)
+                            handle = handle.Referenced;
+                        if (handle.Kind != CXCursorKind.CXCursor_Namespace)
+                            throw Error(GetLocation(directive.Location), "A cleanup namespace import must resolve to a native namespace.");
+                        scopes.Push(handle.CanonicalCursor);
+                    }
+                }
+                return candidates.ToArray();
+            }
+        }
 
         private static CXCursor ReadDeclarationReference(Cursor argument, CXCursorKind kind, NativeLocation location, string message)
         {
@@ -447,7 +555,7 @@ namespace Win32MetadataScraper
                 HeaderAnnotation annotation;
                 try
                 {
-                    annotation = ReadAnnotation(attribute, facts, attributeLocation);
+                    annotation = ReadAnnotation(attribute, facts, declaration, attributeLocation);
                 }
                 catch (FormatException exception)
                 {
@@ -735,7 +843,9 @@ namespace Win32MetadataScraper
         {
             for (Cursor cursor = declaration; cursor is NamedDecl named; cursor = cursor.SemanticParentCursor)
                 if (excludedNames.Contains(named.Name) ||
-                    excludeFunctionsWithBody && named is FunctionDecl function && function.HasBody)
+                    named is FunctionDecl function &&
+                    (function.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Builtin) ||
+                        excludeFunctionsWithBody && function.HasBody))
                     return false;
             if (location.File.Length == 0)
                 return false;

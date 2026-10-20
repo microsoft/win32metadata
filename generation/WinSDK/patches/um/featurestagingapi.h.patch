@@ -1,0 +1,22 @@
+diff --git a/um/featurestagingapi.h b/um/featurestagingapi.h
+index 35e58e4089323725b2b15484a10e43b9ff8efdc3..1a1b9b61d03cfd8b306b93e138211c31b889e860 100644
+--- a/um/featurestagingapi.h
++++ b/um/featurestagingapi.h
+@@ -8,6 +8,8 @@
+ 
+ #ifndef _APISET_WIL_FEATURESTAGING_
+ #define _APISET_WIL_FEATURESTAGING_
++
++#include <sal.h>
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -81,7 +83,7 @@
+ EXTERN_C
+ void
+ SubscribeFeatureStateChangeNotification(
+-    _Outptr_ FEATURE_STATE_CHANGE_SUBSCRIPTION* subscription,
++    _Outptr_ _Win32_RAIIFree_(UnsubscribeFeatureStateChangeNotification, -1, 0) FEATURE_STATE_CHANGE_SUBSCRIPTION* subscription,
+     _In_ PFEATURE_STATE_CHANGE_CALLBACK callback,
+     _In_opt_ void* context
+     );

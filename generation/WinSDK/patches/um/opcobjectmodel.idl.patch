@@ -1,0 +1,69 @@
+diff --git a/um/opcobjectmodel.idl b/um/opcobjectmodel.idl
+index a9b20840..cbae7883 100644
+--- a/um/opcobjectmodel.idl
++++ b/um/opcobjectmodel.idl
+@@ -14,6 +14,8 @@
+ //----------------------------------------------------------------------------
+ 
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -71,6 +73,7 @@ typedef [v1_enum] enum
+ 
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(OPC_WRITE_FLAGS);")
+ 
++_Win32_AnnotateInterface_(IOpcPackage, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE70),
+@@ -90,6 +93,7 @@ interface IOpcPackage : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcPart, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE71),
+@@ -123,6 +127,7 @@ interface IOpcPart : IUnknown
+         );    
+ }
+ 
++_Win32_AnnotateInterface_(IOpcRelationship, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE72),
+@@ -156,6 +161,7 @@ interface IOpcRelationship : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcPartSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE73),
+@@ -195,6 +201,7 @@ interface IOpcPartSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcRelationshipSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE74),
+@@ -247,6 +254,7 @@ interface IOpcRelationshipSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcPartEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE75),
+@@ -263,6 +271,7 @@ interface IOpcPartEnumerator  : IUnknown
+     HRESULT Clone([out, retval] IOpcPartEnumerator **copy);
+ }
+ 
++_Win32_AnnotateInterface_(IOpcRelationshipEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(42195949-3B79-4fc8-89C6-FC7FB979EE76),

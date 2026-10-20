@@ -1,0 +1,48 @@
+diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
+--- a/um/gdiplusflat.h
++++ b/um/gdiplusflat.h
+@@ -1337,7 +1337,7 @@ GdipCreateBitmapFromHBITMAP(HBITMAP hbm,
+ 
+ GpStatus WINGDIPAPI
+ GdipCreateHBITMAPFromBitmap(GpBitmap* bitmap,
+-                            HBITMAP* hbmReturn,
++                            _Win32_RAIIFree_(DeleteObject, -1, 0) HBITMAP* hbmReturn,
+                             ARGB background);
+ 
+ GpStatus WINGDIPAPI
+@@ -1346,7 +1346,7 @@ GdipCreateBitmapFromHICON(HICON hicon,
+ 
+ GpStatus WINGDIPAPI
+ GdipCreateHICONFromBitmap(GpBitmap* bitmap,
+-                          HICON* hbmReturn);
++                          _Win32_RAIIFree_(DestroyIcon, -1, 0) HICON* hbmReturn);
+ 
+ GpStatus WINGDIPAPI
+ GdipCreateBitmapFromResource(HINSTANCE hInstance,
+@@ -1692,7 +1692,7 @@ GpStatus WINGDIPAPI
+ GdipGetNearestColor(GpGraphics *graphics, ARGB* argb);
+ 
+ // Creates the Win9x Halftone Palette (even on NT) with correct Desktop colors
+-HPALETTE WINGDIPAPI
++_Win32_RAIIFree_(DeleteObject, -1, 0) HPALETTE WINGDIPAPI
+ GdipCreateHalftonePalette();
+ 
+ GpStatus WINGDIPAPI
+@@ -2357,7 +2357,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
+ GpStatus WINGDIPAPI
+ GdipGetImageDecoders(_In_ UINT numDecoders,
+                      _In_ UINT size,
+-                     _Out_writes_bytes_(size) ImageCodecInfo *decoders);
++                     _Out_writes_bytes_(size) _Win32_ContainsInteriorPointers_ ImageCodecInfo *decoders);
+ 
+ GpStatus WINGDIPAPI
+ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEncoders) * sizeof(ImageCodecInfo)) UINT *size);
+@@ -2365,7 +2365,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
+ GpStatus WINGDIPAPI
+ GdipGetImageEncoders(_In_ UINT numEncoders,
+                      _In_ UINT size,
+-                     _Out_writes_bytes_(size) ImageCodecInfo *encoders);
++                     _Out_writes_bytes_(size) _Win32_ContainsInteriorPointers_ ImageCodecInfo *encoders);
+ 
+ GpStatus WINGDIPAPI
+ GdipComment(GpGraphics* graphics, UINT sizeData, GDIPCONST BYTE * data);

@@ -1,3 +1,4 @@
+diff --git a/um/shellapi.h b/um/shellapi.h
 --- a/um/shellapi.h
 +++ b/um/shellapi.h
 @@ -19,6 +19,14 @@
@@ -131,7 +132,23 @@
  SHSTDAPI_(UINT) ExtractIconExW(_In_ LPCWSTR lpszFile, int nIconIndex, _Out_writes_opt_(nIcons) HICON *phiconLarge, _Out_writes_opt_(nIcons) HICON *phiconSmall, UINT nIcons);
  #ifdef UNICODE
  #define ExtractIconEx  ExtractIconExW
-@@ -321,13 +356,18 @@
+@@ -269,6 +304,15 @@
+ #endif // (NTDDI_VERSION >= NTDDI_WINXP)
+ #define FOF_NO_UI                   (FOF_SILENT | FOF_NOCONFIRMATION | FOF_NOERRORUI | FOF_NOCONFIRMMKDIR) // don't display any UI at all
+ 
++#ifdef WIN32METADATA
++_Win32_FlagsEnum_(FILEOPERATION_FLAGS, unsigned long,
++    FOF_MULTIDESTFILES, FOF_CONFIRMMOUSE, FOF_SILENT, FOF_RENAMEONCOLLISION,
++    FOF_NOCONFIRMATION, FOF_WANTMAPPINGHANDLE, FOF_ALLOWUNDO, FOF_FILESONLY,
++    FOF_SIMPLEPROGRESS, FOF_NOCONFIRMMKDIR, FOF_NOERRORUI, FOF_NOCOPYSECURITYATTRIBS,
++    FOF_NORECURSION, FOF_NO_CONNECTED_ELEMENTS, FOF_WANTNUKEWARNING, FOF_NORECURSEREPARSE,
++    FOF_NO_UI);
++#endif
++
+ typedef WORD FILEOP_FLAGS;
+ 
+ #define PO_DELETE       0x0013  // printer is being deleted
+@@ -321,13 +365,18 @@
  typedef LPSHFILEOPSTRUCTA LPSHFILEOPSTRUCT;
  #endif
  
@@ -150,7 +167,7 @@
  SHSTDAPI_(void) SHFreeNameMappings(_In_opt_ HANDLE hNameMappings);
  
  typedef struct _SHNAMEMAPPINGA
-@@ -499,7 +539,11 @@
+@@ -499,7 +548,11 @@
  typedef LPSHELLEXECUTEINFOA LPSHELLEXECUTEINFO;
  #endif // UNICODE
  
@@ -162,7 +179,7 @@
  SHSTDAPI_(BOOL) ShellExecuteExW(_Inout_ SHELLEXECUTEINFOW *pExecInfo);
  #ifdef UNICODE
  #define ShellExecuteEx  ShellExecuteExW
-@@ -526,11 +570,14 @@
+@@ -526,11 +579,14 @@
      LPPROCESS_INFORMATION lpProcessInformation;
  } SHCREATEPROCESSINFOW, *PSHCREATEPROCESSINFOW;
  
@@ -177,7 +194,7 @@
  SHSTDAPI SHEvaluateSystemCommandTemplate(_In_ PCWSTR pszCmdTemplate, _Outptr_ PWSTR *ppszApplication, _Outptr_opt_ PWSTR *ppszCommandLine, _Outptr_opt_ PWSTR *ppszParameters);
  //
  //  SHEvaluateSystemCommandTemplate()
-@@ -894,6 +941,7 @@
+@@ -894,6 +950,7 @@
  
  // the object returned from this API implements IQueryAssociations
  
@@ -185,7 +202,7 @@
  SHSTDAPI AssocCreateForClasses(_In_reads_(cClasses) const ASSOCIATIONELEMENT *rgClasses, ULONG cClasses, _In_ REFIID riid, _COM_Outptr_ void **ppv);
  
  /* #if 0 // SAMPLE CODE
-@@ -959,14 +1007,18 @@
+@@ -959,14 +1016,18 @@
  #define SHERB_NOSOUND           0x00000004
  
  
@@ -204,7 +221,7 @@
  SHSTDAPI SHEmptyRecycleBinW(_In_opt_ HWND hwnd, _In_opt_ LPCWSTR pszRootPath, DWORD dwFlags);
  #ifdef UNICODE
  #define SHEmptyRecycleBin  SHEmptyRecycleBinW
-@@ -999,12 +1051,14 @@
+@@ -999,12 +1060,14 @@
  #endif
  } QUERY_USER_NOTIFICATION_STATE;
  
@@ -220,7 +237,7 @@
  #endif
  
  
-@@ -1012,7 +1066,7 @@
+@@ -1012,7 +1075,7 @@
      DWORD cbSize;
      HWND hWnd;
      UINT uID;
@@ -229,7 +246,7 @@
      UINT uCallbackMessage;
      HICON hIcon;
  #if (NTDDI_VERSION < NTDDI_WIN2K)
-@@ -1020,8 +1074,8 @@
+@@ -1020,8 +1083,8 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
      CHAR   szTip[128];
@@ -240,7 +257,7 @@
      CHAR   szInfo[256];
  #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
      union {
-@@ -1030,7 +1084,7 @@
+@@ -1030,7 +1093,7 @@
      } DUMMYUNIONNAME;
  #endif
      CHAR   szInfoTitle[64];
@@ -249,7 +266,7 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WINXP)
      GUID guidItem;
-@@ -1043,7 +1097,7 @@
+@@ -1043,7 +1106,7 @@
      DWORD cbSize;
      HWND hWnd;
      UINT uID;
@@ -258,7 +275,7 @@
      UINT uCallbackMessage;
      HICON hIcon;
  #if (NTDDI_VERSION < NTDDI_WIN2K)
-@@ -1051,8 +1105,8 @@
+@@ -1051,8 +1114,8 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
      WCHAR  szTip[128];
@@ -269,7 +286,7 @@
      WCHAR  szInfo[256];
  #ifndef _SHELL_EXPORTS_INTERNALAPI_H_
      union {
-@@ -1061,7 +1115,7 @@
+@@ -1061,7 +1124,7 @@
      } DUMMYUNIONNAME;
  #endif
      WCHAR  szInfoTitle[64];
@@ -278,7 +295,7 @@
  #endif
  #if (NTDDI_VERSION >= NTDDI_WINXP)
      GUID guidItem;
-@@ -1125,6 +1179,14 @@
+@@ -1125,6 +1188,14 @@
  #define NIM_DELETE      0x00000002
  #define NIM_SETFOCUS    0x00000003
  #define NIM_SETVERSION  0x00000004
@@ -293,7 +310,7 @@
  
  
  // set NOTIFYICONDATA.uVersion with 0, 3 or 4
-@@ -1145,10 +1207,26 @@
+@@ -1145,10 +1216,26 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #define NIF_REALTIME    0x00000040
  #define NIF_SHOWTIP     0x00000080
@@ -320,7 +337,7 @@
  
  // says this is the source of a shared icon
  
-@@ -1171,6 +1249,18 @@
+@@ -1171,6 +1258,18 @@
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
  #define NIIF_RESPECT_QUIET_TIME 0x00000080
@@ -339,7 +356,7 @@
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
  
-@@ -1182,8 +1272,10 @@
+@@ -1182,8 +1281,10 @@
  } NOTIFYICONIDENTIFIER, *PNOTIFYICONIDENTIFIER;
  
  
@@ -352,7 +369,7 @@
  #ifdef UNICODE
  #define Shell_NotifyIcon  Shell_NotifyIconW
  #else
-@@ -1191,6 +1283,7 @@
+@@ -1191,6 +1292,7 @@
  #endif // !UNICODE
  
  #if (NTDDI_VERSION >= NTDDI_WIN7)
@@ -360,7 +377,7 @@
  SHSTDAPI Shell_NotifyIconGetRect(_In_ const NOTIFYICONIDENTIFIER* identifier, _Out_ RECT* iconLocation);
  #endif // (NTDDI_VERSION >= NTDDI_WIN7)
  
-@@ -1269,8 +1362,10 @@
+@@ -1269,8 +1371,10 @@
  #define SHGFI_OVERLAYINDEX      0x000000040     // Get the index of the overlay
                                                  // in the upper 8 bits of the iIcon
  
@@ -371,7 +388,7 @@
  SHSTDAPI_(DWORD_PTR) SHGetFileInfoW(_In_ LPCWSTR pszPath, DWORD dwFileAttributes, _Inout_updates_bytes_opt_(cbFileInfo) SHFILEINFOW *psfi,
      UINT cbFileInfo, UINT uFlags);
  #ifdef UNICODE
-@@ -1297,6 +1392,17 @@
+@@ -1297,6 +1401,17 @@
  #define SHGSI_LARGEICON         SHGFI_LARGEICON
  #define SHGSI_SMALLICON         SHGFI_SMALLICON
  #define SHGSI_SHELLICONSIZE     SHGFI_SHELLICONSIZE
@@ -389,7 +406,7 @@
  
  //  Shell icons
  
-@@ -1404,7 +1510,8 @@
+@@ -1404,7 +1519,8 @@
  
  #define SIID_INVALID ((SHSTOCKICONID)-1)
  
@@ -399,7 +416,7 @@
  
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
-@@ -1412,8 +1519,10 @@
+@@ -1412,8 +1528,10 @@
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
  #define SHGetDiskFreeSpace SHGetDiskFreeSpaceEx
  
@@ -410,7 +427,7 @@
  SHSTDAPI_(BOOL) SHGetDiskFreeSpaceExW(_In_ LPCWSTR pszDirectoryName, _Out_opt_ ULARGE_INTEGER* pulFreeBytesAvailableToCaller,
      _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfBytes, _Out_opt_ ULARGE_INTEGER* pulTotalNumberOfFreeBytes);
  #ifdef UNICODE
-@@ -1422,8 +1531,10 @@
+@@ -1422,8 +1540,10 @@
  #define SHGetDiskFreeSpaceEx  SHGetDiskFreeSpaceExA
  #endif // !UNICODE
  _Success_(return != 0)
@@ -421,7 +438,7 @@
  SHSTDAPI_(BOOL) SHGetNewLinkInfoW(_In_ LPCWSTR pszLinkTo, _In_ LPCWSTR pszDir, _Out_writes_(MAX_PATH) LPWSTR pszName, _Out_ BOOL *pfMustCopy, _In_ UINT uFlags);
  #ifdef UNICODE
  #define SHGetNewLinkInfo  SHGetNewLinkInfoW
-@@ -1456,7 +1567,9 @@
+@@ -1456,7 +1576,9 @@
  
  // deprecated, instead invoke verbs on printers/netprinters using IContextMenu or ShellExecute()
  
@@ -431,7 +448,7 @@
  SHSTDAPI_(BOOL) SHInvokePrinterCommandW(_In_opt_ HWND hwnd, UINT uAction, _In_ LPCWSTR lpBuf1, _In_opt_ LPCWSTR lpBuf2, BOOL fModal);
  #ifdef UNICODE
  #define SHInvokePrinterCommand  SHInvokePrinterCommandW
-@@ -1509,6 +1622,7 @@
+@@ -1509,6 +1631,7 @@
  // Returns:
  //      S_OK
  //
@@ -439,7 +456,7 @@
  SHSTDAPI SHLoadNonloadedIconOverlayIdentifiers(void);
  
  //
-@@ -1530,6 +1644,7 @@
+@@ -1530,6 +1653,7 @@
  //     Both OFFLINE_STATUS_LOCAL and OFFLINE_STATUS_REMOTE may be returned,
  //     indicating "open in both places." This is common when the server is online.
  //
@@ -447,7 +464,7 @@
  SHSTDAPI SHIsFileAvailableOffline(_In_ PCWSTR pwszPath, _Out_opt_ DWORD *pdwStatus);
  
  #define OFFLINE_STATUS_LOCAL        0x0001  // If open, it's open locally
-@@ -1543,13 +1658,16 @@
+@@ -1543,13 +1667,16 @@
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  //  sets the specified path to use the string resource
  //  as the UI instead of the file system name
@@ -464,7 +481,7 @@
  SHSTDAPI SHGetLocalizedName(_In_ PCWSTR pszPath, _Out_writes_(cch) PWSTR pszResModule, UINT cch, _Out_ int *pidsRes);
  #endif // (NTDDI_VERSION >= NTDDI_VISTA)
  
-@@ -1579,18 +1697,22 @@
+@@ -1579,18 +1706,22 @@
  #define LWSTDAPIV_(type)  STDAPIV_(type)
  #endif
  
@@ -489,7 +506,7 @@
  #ifdef UNICODE
  #define ShellMessageBox  ShellMessageBoxW
  #else
-@@ -1610,7 +1732,9 @@
+@@ -1610,7 +1741,9 @@
  
  #if         _WIN32_IE >= 0x0600
  
@@ -499,7 +516,7 @@
  STDAPI SHEnumerateUnreadMailAccountsW(_In_opt_ HKEY hKeyUser, DWORD dwIndex, _Out_writes_(cchMailAddress) LPWSTR pszMailAddress, int cchMailAddress);
  #ifdef UNICODE
  #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsW
-@@ -1618,6 +1742,7 @@
+@@ -1618,6 +1751,7 @@
  #define SHEnumerateUnreadMailAccounts  SHEnumerateUnreadMailAccountsA
  #endif // !UNICODE
  STDAPI SHGetUnreadMailCountA(_In_opt_ HKEY hKeyUser, _In_opt_ LPCSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPSTR pszShellExecuteCommand, int cchShellExecuteCommand);
@@ -507,7 +524,7 @@
  STDAPI SHGetUnreadMailCountW(_In_opt_ HKEY hKeyUser, _In_opt_ LPCWSTR pszMailAddress, _Out_opt_ DWORD *pdwCount, _Out_opt_ FILETIME *pFileTime, _Out_writes_opt_(cchShellExecuteCommand) LPWSTR pszShellExecuteCommand, int cchShellExecuteCommand);
  #ifdef UNICODE
  #define SHGetUnreadMailCount  SHGetUnreadMailCountW
-@@ -1625,6 +1750,7 @@
+@@ -1625,6 +1759,7 @@
  #define SHGetUnreadMailCount  SHGetUnreadMailCountA
  #endif // !UNICODE
  STDAPI SHSetUnreadMailCountA(_In_ LPCSTR pszMailAddress, DWORD dwCount, _In_ LPCSTR pszShellExecuteCommand);
@@ -515,7 +532,7 @@
  STDAPI SHSetUnreadMailCountW(_In_ LPCWSTR pszMailAddress, DWORD dwCount, _In_ LPCWSTR pszShellExecuteCommand);
  #ifdef UNICODE
  #define SHSetUnreadMailCount  SHSetUnreadMailCountW
-@@ -1635,13 +1761,15 @@
+@@ -1635,13 +1770,15 @@
  #endif  /*  _WIN32_IE >= 0x0600     */
  
  #if (_WIN32_IE >= 0x0601)
@@ -532,7 +549,7 @@
  #endif // (NTDDI_VERSION >= NTDDI_WINXP)
  
  
-@@ -1689,6 +1817,7 @@
+@@ -1689,6 +1826,7 @@
  
  // Instantiation
  #define WC_NETADDRESS L"msctls_netaddress"
@@ -540,7 +557,7 @@
  SHSTDAPI_(BOOL) InitNetworkAddressControl(void);
  
  // Address Control Messages
-@@ -1730,6 +1859,7 @@
+@@ -1730,6 +1868,7 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  // Returns the type of media (CD, DVD, Blank, etc) that is in the drive.
  // dwMediaContent is set to a combination of ARCONTENT flags.

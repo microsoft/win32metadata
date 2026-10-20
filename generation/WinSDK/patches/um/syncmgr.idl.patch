@@ -1,16 +1,17 @@
 diff --git a/um/syncmgr.idl b/um/syncmgr.idl
-index 10c046fc..4e20036b 100644
+index 10c046fc..a099160e 100644
 --- a/um/syncmgr.idl
 +++ b/um/syncmgr.idl
-@@ -8,6 +8,7 @@
+@@ -8,6 +8,8 @@
  //
  //****************************************************************************
  
 +#include <sal.h>
++cpp_quote("#include <sal.h>")
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -62,6 +63,7 @@ const ULONG MAX_SYNCMGR_NAME = 128;
+@@ -62,6 +64,7 @@ const ULONG MAX_SYNCMGR_NAME = 128;
  // be unique across all handlers in the system.  For that reason, most handler
  // IDs will be simply string-ized GUIDs.
  //
@@ -18,7 +19,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(a7f337a3-d20b-45cb-9ed7-87d094ca5045)
-@@ -165,6 +167,7 @@ typedef [v1_enum] enum SYNCMGR_HANDLER_POLICIES
+@@ -165,6 +168,7 @@ typedef [v1_enum] enum SYNCMGR_HANDLER_POLICIES
  //  SYNCMGR_OBJECTID_QueryBeforeDisable
  //      Query the user before disabling the handler.
  //
@@ -26,7 +27,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(04ec2e43-ac77-49f9-9b98-0307ef7a72a2)
-@@ -214,6 +217,7 @@ typedef [v1_enum] enum SYNCMGR_HANDLER_TYPE
+@@ -214,6 +218,7 @@ typedef [v1_enum] enum SYNCMGR_HANDLER_TYPE
  // changed in the future without requiring handlers to be recompiled.  It also
  // provides type-safe access to the properties.
  //
@@ -34,7 +35,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(4ff1d798-ecf7-4524-aa81-1e362a0aef3a)
-@@ -236,6 +240,7 @@ interface ISyncMgrHandlerInfo : IUnknown
+@@ -236,6 +241,7 @@ interface ISyncMgrHandlerInfo : IUnknown
  // call QueryInterface() on the ISyncMgrHandler interface to query for the
  // ISyncMgrItemContainer interface.
  //
@@ -42,7 +43,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(90701133-be32-4129-a65c-99e616cafff4)
-@@ -323,6 +328,7 @@ typedef [v1_enum] enum SYNCMGR_ITEM_POLICIES
+@@ -323,6 +329,7 @@ typedef [v1_enum] enum SYNCMGR_ITEM_POLICIES
  //  SYNCMGR_OBJECTID_QueryBeforeDelete
  //      Query the user before deleting an item.
  //
@@ -50,7 +51,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(b20b24ce-2593-4f04-bd8b-7ad6c45051cd)
-@@ -351,6 +357,7 @@ interface ISyncMgrSyncItem : IUnknown
+@@ -351,6 +358,7 @@ interface ISyncMgrSyncItem : IUnknown
  // An alternate approach would be to define a single method that returns a
  // structure.
  //
@@ -58,7 +59,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(e7fd9502-be0c-4464-90a1-2b5277031232)
-@@ -364,11 +371,13 @@ interface ISyncMgrSyncItemInfo : IUnknown
+@@ -364,11 +372,13 @@ interface ISyncMgrSyncItemInfo : IUnknown
      HRESULT IsEnabled();
      HRESULT IsConnected();
  }
@@ -72,7 +73,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(54b3abf3-f085-4181-b546-e29c403c726b)
-@@ -456,6 +465,7 @@ typedef [v1_enum] enum SYNCMGR_EVENT_FLAGS
+@@ -456,6 +466,7 @@ typedef [v1_enum] enum SYNCMGR_EVENT_FLAGS
  // Note that the ISyncMgrSyncCallback interface should NOT be created in the
  // handler and then passed to the external process.
  //
@@ -80,7 +81,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(17f48517-f305-4321-a08d-b25a834918fd)
-@@ -478,6 +488,7 @@ interface ISyncMgrSessionCreator : IUnknown
+@@ -478,6 +489,7 @@ interface ISyncMgrSessionCreator : IUnknown
  // The object implementing this interface will also implement the
  // ISyncMgrEvents interface.
  //
@@ -88,7 +89,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(884ccd87-b139-4937-a4ba-4f8e19513fbe)
-@@ -553,6 +564,7 @@ interface ISyncMgrSyncCallback : IUnknown
+@@ -553,6 +565,7 @@ interface ISyncMgrSyncCallback : IUnknown
  //  SYNCMGR_OBJECTID_QueryBeforeDelete
  //      Query the user before deleting an item.
  //
@@ -96,7 +97,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(fc7cfa47-dfe1-45b5-a049-8cfd82bec271)
-@@ -561,6 +573,7 @@ interface ISyncMgrUIOperation : IUnknown
+@@ -561,6 +574,7 @@ interface ISyncMgrUIOperation : IUnknown
  {
      HRESULT Run([in, unique] HWND hwndOwner);
  }
@@ -104,7 +105,7 @@ index 10c046fc..4e20036b 100644
  
  //
  // The ISyncMgrEventLinkUIOperation interface will be called when event links
-@@ -568,6 +581,7 @@ interface ISyncMgrUIOperation : IUnknown
+@@ -568,6 +582,7 @@ interface ISyncMgrUIOperation : IUnknown
  // on the ISyncMgrHandler specifying SYNCMGR_OBJECTID_EventLinkClick for the
  // object ID.
  //
@@ -112,7 +113,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(64522e52-848b-4015-89ce-5a36f00b94ff)
-@@ -586,6 +600,7 @@ interface ISyncMgrEventLinkUIOperation : ISyncMgrUIOperation
+@@ -586,6 +601,7 @@ interface ISyncMgrEventLinkUIOperation : ISyncMgrUIOperation
  // Center calls the GetObject() method on ISyncMgrHandler specifying
  // SYNCMGR_OBJECTID_ShowSchedule for the object ID.
  //
@@ -120,7 +121,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(459a6c84-21d2-4ddc-8a53-f023a46066f2)
-@@ -599,6 +614,7 @@ interface ISyncMgrScheduleWizardUIOperation : ISyncMgrUIOperation
+@@ -599,6 +615,7 @@ interface ISyncMgrScheduleWizardUIOperation : ISyncMgrUIOperation
  // Applications calling ISyncMgrControl can pass this interface to get the
  // result of a StartHandlerSync() or StartItemSync() call.
  //
@@ -128,7 +129,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(2b90f17e-5a3e-4b33-bb7f-1bc48056b94d)
-@@ -661,6 +677,7 @@ typedef [v1_enum] enum SYNCMGR_UPDATE_REASON
+@@ -661,6 +678,7 @@ typedef [v1_enum] enum SYNCMGR_UPDATE_REASON
  // or to properties.  All methods on this interface will not block but will
  // queue the request with Sync Center.
  //
@@ -136,7 +137,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(9B63616C-36B2-46BC-959F-C1593952D19B)
-@@ -794,6 +811,7 @@ interface ISyncMgrControl : IUnknown
+@@ -794,6 +812,7 @@ interface ISyncMgrControl : IUnknown
  // SYNCMGR_HC_EVENT_STORE flag in the mask returned from its
  // GetCapabilities() method.
  //
@@ -144,7 +145,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(37e412f9-016e-44c2-81ff-db3add774266)
-@@ -811,6 +829,7 @@ interface ISyncMgrEventStore : IUnknown
+@@ -811,6 +830,7 @@ interface ISyncMgrEventStore : IUnknown
  // the store as well as toretrieve individual events.  The ISyncMgrEvent
  // interface provides the data for the event to Sync Center.
  //
@@ -152,7 +153,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(fee0ef8b-46bd-4db4-b7e6-ff2c687313bc)
-@@ -830,6 +849,7 @@ interface ISyncMgrEvent : IUnknown
+@@ -830,6 +850,7 @@ interface ISyncMgrEvent : IUnknown
      HRESULT GetContext([out, ref, string] LPWSTR *ppszContext);
  }
  
@@ -160,7 +161,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      uuid(c81a1d4e-8cf7-4683-80e0-bcae88d677b6)
-@@ -853,6 +873,7 @@ typedef struct SYNCMGR_CONFLICT_ID_INFO
+@@ -853,6 +874,7 @@ typedef struct SYNCMGR_CONFLICT_ID_INFO
  } SYNCMGR_CONFLICT_ID_INFO, *PSYNCMGR_CONFLICT_ID_INFO;
  
  // ISyncMgrConflictStore
@@ -168,7 +169,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(cf8fc579-c396-4774-85f1-d908a831156e),
      pointer_default(unique),
-@@ -880,6 +901,7 @@ interface ISyncMgrConflictStore : IUnknown
+@@ -880,6 +902,7 @@ interface ISyncMgrConflictStore : IUnknown
  };
  
  // IEnumSyncMgrConflict
@@ -176,7 +177,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(82705914-dda3-4893-ba99-49de6c8c8036),
      pointer_default(unique),
-@@ -906,6 +928,7 @@ interface ISyncMgrConflictItems;
+@@ -906,6 +929,7 @@ interface ISyncMgrConflictItems;
  interface ISyncMgrConflictResolveInfo;
  
  // ISyncMgrConflict
@@ -184,7 +185,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(9c204249-c443-4ba4-85ed-c972681db137),
      pointer_default(unique),
-@@ -961,6 +984,7 @@ typedef [v1_enum] enum SYNCMGR_RESOLUTION_FEEDBACK
+@@ -961,6 +985,7 @@ typedef [v1_enum] enum SYNCMGR_RESOLUTION_FEEDBACK
  } SYNCMGR_RESOLUTION_FEEDBACK;
  
  // ISyncMgrResolutionHandler
@@ -192,7 +193,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(40A3D052-8BFF-4c4b-A338-D4A395700DE9),
      pointer_default(unique),
-@@ -984,6 +1008,7 @@ interface ISyncMgrResolutionHandler : IUnknown
+@@ -984,6 +1009,7 @@ interface ISyncMgrResolutionHandler : IUnknown
  }
  
  // ISyncMgrConflictPresenter
@@ -200,7 +201,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(0b4f5353-fd2b-42cd-8763-4779f2d508a3),
      pointer_default(unique),
-@@ -1035,6 +1060,7 @@ typedef [v1_enum] enum SYNCMGR_PRESENTER_CHOICE
+@@ -1035,6 +1061,7 @@ typedef [v1_enum] enum SYNCMGR_PRESENTER_CHOICE
  } SYNCMGR_PRESENTER_CHOICE;
  
  // ISyncMgrConflictResolveInfo
@@ -208,7 +209,7 @@ index 10c046fc..4e20036b 100644
  [
      object,
      local,  // don't allow marshaling across threads/processes
-@@ -1093,6 +1119,7 @@ interface ISyncMgrConflictResolveInfo : IUnknown
+@@ -1093,6 +1120,7 @@ interface ISyncMgrConflictResolveInfo : IUnknown
  }
  
  // ISyncMgrConflictFolder
@@ -216,7 +217,16 @@ index 10c046fc..4e20036b 100644
  [
      uuid(59287f5e-bc81-4fca-a7f1-e5a8ecdb1d69),
      pointer_default(unique),
-@@ -1137,6 +1164,7 @@ typedef struct CONFIRM_CONFLICT_RESULT_INFO
+@@ -1116,7 +1144,7 @@ typedef struct CONFIRM_CONFLICT_ITEM
+ } CONFIRM_CONFLICT_ITEM;
+ 
+ cpp_quote("#if defined(__cplusplus) && !defined(CINTERFACE)")
+-cpp_quote("__inline void FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)")
++cpp_quote("__inline void _Win32_SupportedOS_WindowsVista_ FreeConfirmConflictItem(_Inout_ CONFIRM_CONFLICT_ITEM *pcci)")
+ cpp_quote("{")
+ cpp_quote("    if (pcci->pShellItem)")
+ cpp_quote("    {")
+@@ -1137,6 +1165,7 @@ typedef struct CONFIRM_CONFLICT_RESULT_INFO
  } CONFIRM_CONFLICT_RESULT_INFO;
  
  // ISyncMgrConflictItems
@@ -224,7 +234,7 @@ index 10c046fc..4e20036b 100644
  [
      uuid(9C7EAD52-8023-4936-A4DB-D2A9A99E436A),
      pointer_default(unique),
-@@ -1152,6 +1180,7 @@ interface ISyncMgrConflictItems : IUnknown
+@@ -1152,6 +1181,7 @@ interface ISyncMgrConflictItems : IUnknown
  }
  
  // ISyncMgrConflictResolutionItems

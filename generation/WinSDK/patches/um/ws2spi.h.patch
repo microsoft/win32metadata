@@ -1,7 +1,16 @@
 diff --git a/um/ws2spi.h b/um/ws2spi.h
+index e1d43ea9..917dea7b 100644
 --- a/um/ws2spi.h
 +++ b/um/ws2spi.h
-@@ -615,6 +615,7 @@ typedef struct _WSPUPCALLTABLE {
+@@ -19,6 +19,7 @@
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -615,6 +616,7 @@ typedef struct _WSPUPCALLTABLE {
   *  WinSock 2 SPI socket function prototypes
   */
  
@@ -9,7 +18,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  _Must_inspect_result_
  int
  WSPAPI
-@@ -641,6 +642,7 @@ int
+@@ -641,6 +643,7 @@ int
   * Installation and configuration entrypoints.
   */
  
@@ -17,7 +26,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCEnumProtocols(
-@@ -666,6 +668,7 @@ int
+@@ -666,6 +669,7 @@ int
   * separate 64-bit and 32-bit catalogs.  API with '32' prefix
   * allow 32 bit catalog manipulations by 64 bit process.
   */
@@ -25,7 +34,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCEnumProtocols32(
-@@ -676,6 +679,7 @@ WSCEnumProtocols32(
+@@ -676,6 +680,7 @@ WSCEnumProtocols32(
      );
  #endif //(defined(_WIN64) && _WIN32_WINNT >= 0x0501)
  
@@ -33,7 +42,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCDeinstallProvider(
-@@ -692,6 +696,7 @@ int
+@@ -692,6 +697,7 @@ int
  
  #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
  
@@ -41,7 +50,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCDeinstallProvider32(
-@@ -700,6 +705,7 @@ WSCDeinstallProvider32(
+@@ -700,6 +706,7 @@ WSCDeinstallProvider32(
      );
  #endif //(defined(_WIN64) && _WIN32_WINNT >= 0x0501)
  
@@ -49,7 +58,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCInstallProvider(
-@@ -727,6 +733,7 @@ int
+@@ -727,6 +734,7 @@ int
   * It is needed to guarantee the same catalog IDs for provider catalog
   * entries in both 64-bit and 32-bit catalogs.
   */
@@ -57,7 +66,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCInstallProvider64_32(
-@@ -738,6 +745,7 @@ WSCInstallProvider64_32(
+@@ -738,6 +746,7 @@ WSCInstallProvider64_32(
      );
  #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
  
@@ -65,7 +74,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCGetProviderPath(
-@@ -758,6 +766,7 @@ int
+@@ -758,6 +767,7 @@ int
  
  #if(_WIN32_WINNT >= 0x0501)
  #if defined(_WIN64)
@@ -73,7 +82,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  _Success_(return == 0)
  int
  WSPAPI
-@@ -769,6 +778,7 @@ WSCGetProviderPath32(
+@@ -769,6 +779,7 @@ WSCGetProviderPath32(
      );
  #endif
  
@@ -81,7 +90,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCUpdateProvider(
-@@ -790,6 +800,7 @@ int
+@@ -790,6 +801,7 @@ int
      );
  
  #if defined(_WIN64)
@@ -89,7 +98,25 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCUpdateProvider32(
-@@ -870,6 +881,7 @@ typedef struct _WSC_PROVIDER_AUDIT_INFO {
+@@ -805,7 +817,7 @@ WSCUpdateProvider32(
+ #if (_WIN32_WINNT < 0x0600)
+ int
+ WSPAPI
+-WSCInstallQOSTemplate (
++_Win32_SupportedOS_Windows2000_ WSCInstallQOSTemplate (
+     _In_  const LPGUID    Guid,
+     _In_  LPWSABUF        QosName,
+     _In_  LPQOS           Qos
+@@ -821,7 +833,7 @@ int
+ 
+ int
+ WSPAPI
+-WSCRemoveQOSTemplate (
++_Win32_SupportedOS_Windows2000_ WSCRemoveQOSTemplate (
+     _In_  const LPGUID    Guid,
+     _In_  LPWSABUF        QosName
+     );
+@@ -870,6 +882,7 @@ typedef struct _WSC_PROVIDER_AUDIT_INFO {
      // Full Path of EXE performing install
  } WSC_PROVIDER_AUDIT_INFO;
  
@@ -97,7 +124,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCSetProviderInfo( 
-@@ -881,6 +893,7 @@ WSCSetProviderInfo(
+@@ -881,6 +894,7 @@ WSCSetProviderInfo(
      _Out_ LPINT lpErrno
      );
  
@@ -105,7 +132,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCGetProviderInfo( 
-@@ -894,6 +907,7 @@ WSCGetProviderInfo(
+@@ -894,6 +908,7 @@ WSCGetProviderInfo(
  
  #if defined(_WIN64)
  
@@ -113,7 +140,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCSetProviderInfo32( 
-@@ -905,6 +919,7 @@ WSCSetProviderInfo32(
+@@ -905,6 +920,7 @@ WSCSetProviderInfo32(
      _Out_ LPINT lpErrno
      );
  
@@ -121,7 +148,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCGetProviderInfo32( 
-@@ -922,6 +937,7 @@ WSCGetProviderInfo32(
+@@ -922,6 +938,7 @@ WSCGetProviderInfo32(
  // App Permitted LSP Categorization APIs
  //
  
@@ -129,7 +156,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCSetApplicationCategory(
-@@ -934,6 +950,7 @@ WSCSetApplicationCategory(
+@@ -934,6 +951,7 @@ WSCSetApplicationCategory(
      _Out_ LPINT lpErrno
      );
  
@@ -137,7 +164,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WSCGetApplicationCategory(
-@@ -953,6 +970,7 @@ WSCGetApplicationCategory(
+@@ -953,6 +971,7 @@ WSCGetApplicationCategory(
   *  should not be used by any service providers.
   */
  
@@ -145,7 +172,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  BOOL
  WSPAPI
  WPUCloseEvent(
-@@ -960,6 +978,7 @@ WPUCloseEvent(
+@@ -960,6 +979,7 @@ WPUCloseEvent(
      _Out_ LPINT lpErrno
      );
  
@@ -153,7 +180,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUCloseSocketHandle(
-@@ -967,12 +986,14 @@ WPUCloseSocketHandle(
+@@ -967,12 +987,14 @@ WPUCloseSocketHandle(
      _Out_ LPINT lpErrno
      );
  
@@ -168,7 +195,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  SOCKET
  WSPAPI
  WPUCreateSocketHandle(
-@@ -981,6 +1002,7 @@ WPUCreateSocketHandle(
+@@ -981,6 +1003,7 @@ WPUCreateSocketHandle(
      _Out_ LPINT lpErrno
      );
  
@@ -176,7 +203,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUFDIsSet(
-@@ -988,6 +1010,7 @@ WPUFDIsSet(
+@@ -988,6 +1011,7 @@ WPUFDIsSet(
      _In_ fd_set FAR * fdset
      );
  
@@ -184,7 +211,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUGetProviderPath(
-@@ -997,6 +1020,7 @@ WPUGetProviderPath(
+@@ -997,6 +1021,7 @@ WPUGetProviderPath(
      _Out_ LPINT lpErrno
      );
  
@@ -192,7 +219,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  SOCKET
  WSPAPI
  WPUModifyIFSHandle(
-@@ -1005,6 +1029,7 @@ WPUModifyIFSHandle(
+@@ -1005,6 +1030,7 @@ WPUModifyIFSHandle(
      _Out_ LPINT lpErrno
      );
  
@@ -200,7 +227,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  BOOL
  WSPAPI
  WPUPostMessage(
-@@ -1014,6 +1039,7 @@ WPUPostMessage(
+@@ -1014,6 +1040,7 @@ WPUPostMessage(
      _In_ LPARAM lParam
      );
  
@@ -208,7 +235,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUQueryBlockingCallback(
-@@ -1023,6 +1049,7 @@ WPUQueryBlockingCallback(
+@@ -1023,6 +1050,7 @@ WPUQueryBlockingCallback(
      _Out_ LPINT lpErrno
      );
  
@@ -216,7 +243,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUQuerySocketHandleContext(
-@@ -1031,6 +1058,7 @@ WPUQuerySocketHandleContext(
+@@ -1031,6 +1059,7 @@ WPUQuerySocketHandleContext(
      _Out_ LPINT lpErrno
      );
  
@@ -224,7 +251,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUQueueApc(
-@@ -1040,6 +1068,7 @@ WPUQueueApc(
+@@ -1040,6 +1069,7 @@ WPUQueueApc(
      _Out_ LPINT lpErrno
      );
  
@@ -232,7 +259,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  BOOL
  WSPAPI
  WPUResetEvent(
-@@ -1047,6 +1076,7 @@ WPUResetEvent(
+@@ -1047,6 +1077,7 @@ WPUResetEvent(
      _Out_ LPINT lpErrno
      );
  
@@ -240,7 +267,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  BOOL
  WSPAPI
  WPUSetEvent(
-@@ -1054,6 +1084,7 @@ WPUSetEvent(
+@@ -1054,6 +1085,7 @@ WPUSetEvent(
      _Out_ LPINT lpErrno
      );
  
@@ -248,7 +275,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUCompleteOverlappedRequest (
-@@ -1065,6 +1096,7 @@ WPUCompleteOverlappedRequest (
+@@ -1065,6 +1097,7 @@ WPUCompleteOverlappedRequest (
  );
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -256,7 +283,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUOpenCurrentThread(
-@@ -1072,6 +1104,7 @@ WPUOpenCurrentThread(
+@@ -1072,6 +1105,7 @@ WPUOpenCurrentThread(
      _Out_ LPINT lpErrno
      );
  
@@ -264,7 +291,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int
  WSPAPI
  WPUCloseThread(
-@@ -1094,11 +1127,12 @@ WPUCloseThread(
+@@ -1094,11 +1128,12 @@ WPUCloseThread(
  #define LPFN_WSCENUMNAMESPACEPROVIDERS LPFN_WSAENUMNAMESPACEPROVIDERSW
  
  #if defined(_WIN64)
@@ -278,7 +305,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
      );
  #endif
  #endif //(_WIN32_WINNT >= 0x0501)
-@@ -1108,15 +1142,17 @@ WSCEnumNameSpaceProviders32(
+@@ -1108,15 +1143,17 @@ WSCEnumNameSpaceProviders32(
  #define LPFN_WSCENUMNAMESPACEPROVIDERSEX LPFN_WSAENUMNAMESPACEPROVIDERSEXW
  
  #if defined(_WIN64)
@@ -297,7 +324,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCInstallNameSpace (
-@@ -1138,6 +1174,7 @@ INT
+@@ -1138,6 +1175,7 @@ INT
      );
  
  #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
@@ -305,7 +332,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCInstallNameSpace32 (
-@@ -1149,6 +1186,7 @@ WSCInstallNameSpace32 (
+@@ -1149,6 +1187,7 @@ WSCInstallNameSpace32 (
      );
  #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
  
@@ -313,7 +340,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCUnInstallNameSpace (
-@@ -1162,6 +1200,7 @@ INT
+@@ -1162,6 +1201,7 @@ INT
      );
  
  #if (_WIN32_WINNT >= 0x0600 )
@@ -321,7 +348,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCInstallNameSpaceEx(
-@@ -1175,6 +1214,7 @@ WSCInstallNameSpaceEx(
+@@ -1175,6 +1215,7 @@ WSCInstallNameSpaceEx(
  #endif //(defined(_WIN32_WINNT >= 0x0600)
  
  #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0600))
@@ -329,7 +356,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCInstallNameSpaceEx32(
-@@ -1188,6 +1228,7 @@ WSCInstallNameSpaceEx32(
+@@ -1188,6 +1229,7 @@ WSCInstallNameSpaceEx32(
  #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0600))
  
  #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
@@ -337,7 +364,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCUnInstallNameSpace32 (
-@@ -1195,6 +1236,7 @@ WSCUnInstallNameSpace32 (
+@@ -1195,6 +1237,7 @@ WSCUnInstallNameSpace32 (
      );
  #endif //(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
  
@@ -345,7 +372,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCEnableNSProvider (
-@@ -1210,6 +1252,7 @@ INT
+@@ -1210,6 +1253,7 @@ INT
      );
  
  #if(defined(_WIN64) && (_WIN32_WINNT >= 0x0501))
@@ -353,7 +380,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  INT
  WSPAPI
  WSCEnableNSProvider32 (
-@@ -1221,8 +1264,10 @@ WSCEnableNSProvider32 (
+@@ -1221,8 +1265,10 @@ WSCEnableNSProvider32 (
  #if (_WIN32_WINNT >= 0x0600)
  
  #if defined(_WIN64)
@@ -364,7 +391,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  int WSPAPI WSCInstallProviderAndChains(
  #endif
      _In_ LPGUID lpProviderId,
-@@ -1359,6 +1404,7 @@ typedef struct _NSP_ROUTINE {
+@@ -1359,6 +1405,7 @@ typedef struct _NSP_ROUTINE {
   * Startup procedures.
   */
  
@@ -372,7 +399,7 @@ diff --git a/um/ws2spi.h b/um/ws2spi.h
  _Must_inspect_result_
  INT
  WSAAPI
-@@ -1450,13 +1496,19 @@ typedef const NSPV2_ROUTINE * PCNSPV2_ROUTINE, * LPCNSPV2_ROUTINE;
+@@ -1450,13 +1497,19 @@ typedef const NSPV2_ROUTINE * PCNSPV2_ROUTINE, * LPCNSPV2_ROUTINE;
  
  #if(_WIN32_WINNT >= 0x0600)
  

@@ -1,8 +1,25 @@
 diff --git a/um/dbghelp.h b/um/dbghelp.h
-index 09bb15cb..3ad5669c 100644
+index 09bb15cb..066f6257 100644
 --- a/um/dbghelp.h
 +++ b/um/dbghelp.h
-@@ -140,7 +140,7 @@ typedef BOOL
+@@ -26,6 +26,16 @@ Revision History:
+ 
+ #include <winapifamily.h>
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++typedef unsigned int IMAGEHLP_CBA_EVENT_SEVERITY;
++typedef unsigned int IMAGEHLP_GET_TYPE_INFO_FLAGS;
++typedef unsigned int MODLOAD_DATA_TYPE;
++typedef unsigned int SYMBOL_INFO_FLAGS;
++typedef unsigned int SYM_FIND_ID_OPTION;
++typedef unsigned int SYM_LOAD_FLAGS;
++typedef unsigned int SYM_SRV_STORE_FILE_FLAGS;
++#endif
++
+ #define NONGAMESPARTITIONS WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WER
+ 
+ #pragma region Desktop Family or WER Package
+@@ -140,7 +150,7 @@ typedef BOOL
  
  HANDLE
  IMAGEAPI
@@ -11,7 +28,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCSTR FileName,
      _Out_writes_(MAX_PATH + 1) PSTR DebugFilePath,
-@@ -157,7 +157,7 @@ typedef BOOL
+@@ -157,7 +167,7 @@ typedef BOOL
  
  HANDLE
  IMAGEAPI
@@ -20,7 +37,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCWSTR FileName,
      _Out_writes_(MAX_PATH + 1) PWSTR DebugFilePath,
-@@ -167,7 +167,7 @@ SymFindDebugInfoFileW(
+@@ -167,7 +177,7 @@ SymFindDebugInfoFileW(
  
  HANDLE
  IMAGEAPI
@@ -29,7 +46,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR FileName,
      _In_ PCSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PSTR DebugFilePath
-@@ -175,7 +175,7 @@ FindDebugInfoFile (
+@@ -175,7 +185,7 @@ FindDebugInfoFile (
  
  HANDLE
  IMAGEAPI
@@ -38,7 +55,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR FileName,
      _In_ PCSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PSTR  DebugFilePath,
-@@ -185,7 +185,7 @@ FindDebugInfoFileEx (
+@@ -185,7 +195,7 @@ FindDebugInfoFileEx (
  
  HANDLE
  IMAGEAPI
@@ -47,7 +64,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR FileName,
      _In_ PCWSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PWSTR DebugFilePath,
-@@ -201,7 +201,7 @@ typedef BOOL
+@@ -201,14 +211,14 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -56,7 +73,15 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hprocess,
      _In_opt_ PCSTR SearchPath,
      _In_ PCSTR FileName,
-@@ -222,7 +222,7 @@ typedef BOOL
+     _In_opt_ PVOID id,
+     _In_ DWORD two,
+     _In_ DWORD three,
+-    _In_ DWORD flags,
++    _Win32_AssociatedEnum_(SYM_FIND_ID_OPTION) _In_ DWORD flags,
+     _Out_writes_(MAX_PATH + 1) PSTR FoundFile,
+     _In_opt_ PFINDFILEINPATHCALLBACK callback,
+     _In_opt_ PVOID context
+@@ -222,14 +232,14 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -65,7 +90,15 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hprocess,
      _In_opt_ PCWSTR SearchPath,
      _In_ PCWSTR FileName,
-@@ -244,7 +244,7 @@ typedef BOOL
+     _In_opt_ PVOID id,
+     _In_ DWORD two,
+     _In_ DWORD three,
+-    _In_ DWORD flags,
++    _Win32_AssociatedEnum_(SYM_FIND_ID_OPTION) _In_ DWORD flags,
+     _Out_writes_(MAX_PATH + 1) PWSTR FoundFile,
+     _In_opt_ PFINDFILEINPATHCALLBACKW callback,
+     _In_opt_ PVOID context
+@@ -244,7 +254,7 @@ typedef BOOL
  
  HANDLE
  IMAGEAPI
@@ -74,7 +107,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCSTR FileName,
      _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath,
-@@ -261,7 +261,7 @@ typedef BOOL
+@@ -261,7 +271,7 @@ typedef BOOL
  
  HANDLE
  IMAGEAPI
@@ -83,7 +116,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCWSTR FileName,
      _Out_writes_(MAX_PATH + 1) PWSTR ImageFilePath,
-@@ -271,7 +271,7 @@ SymFindExecutableImageW(
+@@ -271,7 +281,7 @@ SymFindExecutableImageW(
  
  HANDLE
  IMAGEAPI
@@ -92,7 +125,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR FileName,
      _In_ PCSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath
-@@ -279,7 +279,7 @@ FindExecutableImage(
+@@ -279,7 +289,7 @@ FindExecutableImage(
  
  HANDLE
  IMAGEAPI
@@ -101,7 +134,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR FileName,
      _In_ PCSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PSTR ImageFilePath,
-@@ -289,7 +289,7 @@ FindExecutableImageEx(
+@@ -289,7 +299,7 @@ FindExecutableImageEx(
  
  HANDLE
  IMAGEAPI
@@ -110,7 +143,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR FileName,
      _In_ PCWSTR SymbolPath,
      _Out_writes_(MAX_PATH + 1) PWSTR ImageFilePath,
-@@ -299,13 +299,13 @@ FindExecutableImageExW(
+@@ -299,32 +309,32 @@ FindExecutableImageExW(
  
  PIMAGE_NT_HEADERS
  IMAGEAPI
@@ -125,8 +158,11 @@ index 09bb15cb..3ad5669c 100644
 +_Win32_SetLastError_ ImageDirectoryEntryToDataEx (
      _In_ PVOID Base,
      _In_ BOOLEAN MappedAsImage,
-     _In_ USHORT DirectoryEntry,
-@@ -315,7 +315,7 @@ ImageDirectoryEntryToDataEx (
+-    _In_ USHORT DirectoryEntry,
++    _Win32_AssociatedEnum_(IMAGE_DIRECTORY_ENTRY) _In_ USHORT DirectoryEntry,
+     _Out_ PULONG Size,
+     _Out_opt_ PIMAGE_SECTION_HEADER *FoundHeader
+     );
  
  PVOID
  IMAGEAPI
@@ -134,8 +170,10 @@ index 09bb15cb..3ad5669c 100644
 +_Win32_SetLastError_ ImageDirectoryEntryToData (
      _In_ PVOID Base,
      _In_ BOOLEAN MappedAsImage,
-     _In_ USHORT DirectoryEntry,
-@@ -324,7 +324,7 @@ ImageDirectoryEntryToData (
+-    _In_ USHORT DirectoryEntry,
++    _Win32_AssociatedEnum_(IMAGE_DIRECTORY_ENTRY) _In_ USHORT DirectoryEntry,
+     _Out_ PULONG Size
+     );
  
  PIMAGE_SECTION_HEADER
  IMAGEAPI
@@ -144,7 +182,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PIMAGE_NT_HEADERS NtHeaders,
      _In_ PVOID Base,
      _In_ ULONG Rva
-@@ -332,7 +332,7 @@ ImageRvaToSection(
+@@ -332,7 +342,7 @@ ImageRvaToSection(
  
  PVOID
  IMAGEAPI
@@ -153,7 +191,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PIMAGE_NT_HEADERS NtHeaders,
      _In_ PVOID Base,
      _In_ ULONG Rva,
-@@ -391,7 +391,7 @@ typedef struct _IMAGE_DEBUG_INFORMATION {
+@@ -391,7 +401,7 @@ typedef struct _IMAGE_DEBUG_INFORMATION {
  
  PIMAGE_DEBUG_INFORMATION
  IMAGEAPI
@@ -162,7 +200,7 @@ index 09bb15cb..3ad5669c 100644
      _In_opt_ HANDLE FileHandle,
      _In_ PCSTR FileName,
      _In_opt_ PCSTR SymbolPath,
-@@ -400,7 +400,7 @@ MapDebugInformation(
+@@ -400,7 +410,7 @@ MapDebugInformation(
  
  BOOL
  IMAGEAPI
@@ -171,7 +209,7 @@ index 09bb15cb..3ad5669c 100644
      _Out_writes_(_Inexpressible_(unknown)) PIMAGE_DEBUG_INFORMATION DebugInfo
      );
  
-@@ -408,7 +408,7 @@ UnmapDebugInformation(
+@@ -408,7 +418,7 @@ UnmapDebugInformation(
  
  BOOL
  IMAGEAPI
@@ -180,7 +218,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR RootPath,
      _In_ PCSTR InputPathName,
      _Out_writes_(MAX_PATH + 1) PSTR OutputPathBuffer
-@@ -416,7 +416,7 @@ SearchTreeForFile(
+@@ -416,7 +426,7 @@ SearchTreeForFile(
  
  BOOL
  IMAGEAPI
@@ -189,7 +227,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR RootPath,
      _In_ PCWSTR InputPathName,
      _Out_writes_(MAX_PATH + 1) PWSTR OutputPathBuffer
-@@ -430,7 +430,7 @@ typedef BOOL
+@@ -430,7 +440,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -198,7 +236,7 @@ index 09bb15cb..3ad5669c 100644
      _In_opt_ HANDLE hProcess,
      _In_ PCSTR RootPath,
      _In_ PCSTR InputPathName,
-@@ -447,7 +447,7 @@ typedef BOOL
+@@ -447,7 +457,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -207,7 +245,7 @@ index 09bb15cb..3ad5669c 100644
      _In_opt_ HANDLE hProcess,
      _In_ PCWSTR RootPath,
      _In_ PCWSTR InputPathName,
-@@ -458,7 +458,7 @@ EnumDirTreeW(
+@@ -458,7 +468,7 @@ EnumDirTreeW(
  
  BOOL
  IMAGEAPI
@@ -216,7 +254,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR DirPath
      );
  
-@@ -488,7 +488,7 @@ MakeSureDirectoryPathExists(
+@@ -488,7 +498,7 @@ MakeSureDirectoryPathExists(
  DWORD
  IMAGEAPI
  WINAPI
@@ -225,7 +263,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR name,
      _Out_writes_(maxStringLength) PSTR outputString,
      _In_ DWORD maxStringLength,
-@@ -498,7 +498,7 @@ UnDecorateSymbolName(
+@@ -498,7 +508,7 @@ UnDecorateSymbolName(
  DWORD
  IMAGEAPI
  WINAPI
@@ -234,7 +272,29 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR name,
      _Out_writes_(maxStringLength) PWSTR outputString,
      _In_ DWORD maxStringLength,
-@@ -1057,7 +1057,7 @@ ImagehlpApiVersionEx(
+@@ -513,6 +523,12 @@ UnDecorateSymbolNameW(
+ 
+ #define DBHHEADER_DEBUGDIRS     0x1
+ #define DBHHEADER_CVMISC        0x2
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(MODLOAD_DATA_TYPE, unsigned int,
++    DBHHEADER_DEBUGDIRS,
++    DBHHEADER_CVMISC);
++#endif
+ #define DBHHEADER_PDBGUID       0x3
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+@@ -523,7 +539,7 @@ UnDecorateSymbolNameW(
+ 
+ typedef struct _MODLOAD_DATA {
+     DWORD   ssize;                  // size of this struct
+-    DWORD   ssig;                   // signature identifying the passed data
++    _Win32_AssociatedEnum_(MODLOAD_DATA_TYPE) DWORD   ssig;                   // signature identifying the passed data
+     PVOID   data;                   // pointer to passed data
+     DWORD   size;                   // size of passed data
+     DWORD   flags;                  // options
+@@ -1057,7 +1073,7 @@ ImagehlpApiVersionEx(
  
  DWORD
  IMAGEAPI
@@ -243,7 +303,65 @@ index 09bb15cb..3ad5669c 100644
      _In_ HMODULE Module
      );
  
-@@ -1709,7 +1709,7 @@ typedef struct _IMAGEHLP_JIT_SYMBOL_MAP {
+@@ -1279,6 +1295,27 @@ enum SymTagEnum
+ #define SYMFLAG_ILREL               0x00010000
+ #define SYMFLAG_METADATA            0x00020000
+ #define SYMFLAG_CLR_TOKEN           0x00040000
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SYMBOL_INFO_FLAGS, unsigned int,
++    SYMFLAG_CLR_TOKEN,
++    SYMFLAG_CONSTANT,
++    SYMFLAG_EXPORT,
++    SYMFLAG_FORWARDER,
++    SYMFLAG_FRAMEREL,
++    SYMFLAG_FUNCTION,
++    SYMFLAG_ILREL,
++    SYMFLAG_LOCAL,
++    SYMFLAG_METADATA,
++    SYMFLAG_PARAMETER,
++    SYMFLAG_REGISTER,
++    SYMFLAG_REGREL,
++    SYMFLAG_SLOT,
++    SYMFLAG_THUNK,
++    SYMFLAG_TLSREL,
++    SYMFLAG_VALUEPRESENT,
++    SYMFLAG_VIRTUAL);
++#endif
+ #define SYMFLAG_NULL                0x00080000
+ #define SYMFLAG_FUNC_NO_RETURN      0x00100000
+ #define SYMFLAG_SYNTHETIC_ZEROBASE  0x00200000
+@@ -1618,19 +1655,27 @@ enum {
+     sevMax  // unused
+ };
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_CBA_EVENT_SEVERITY, unsigned int,
++    sevInfo,
++    sevProblem,
++    sevAttn,
++    sevFatal);
++#endif
++
+ #define EVENT_SRCSPEW_START 100
+ #define EVENT_SRCSPEW       100
+ #define EVENT_SRCSPEW_END   199
+ 
+ typedef struct _IMAGEHLP_CBA_EVENT {
+-    DWORD severity;                                     // values from sevInfo to sevFatal
++    _Win32_AssociatedEnum_(IMAGEHLP_CBA_EVENT_SEVERITY) DWORD severity;                                     // values from sevInfo to sevFatal
+     DWORD code;                                         // numerical code IDs the error
+     PCHAR desc;                                         // may contain a text description of the error
+     PVOID object;                                       // value dependant upon the error code
+ } IMAGEHLP_CBA_EVENT, *PIMAGEHLP_CBA_EVENT;
+ 
+ typedef struct _IMAGEHLP_CBA_EVENTW {
+-    DWORD  severity;                                     // values from sevInfo to sevFatal
++    _Win32_AssociatedEnum_(IMAGEHLP_CBA_EVENT_SEVERITY) DWORD  severity;                                     // values from sevInfo to sevFatal
+     DWORD  code;                                         // numerical code IDs the error
+     PCWSTR desc;                                         // may contain a text description of the error
+     PVOID  object;                                       // value dependant upon the error code
+@@ -1709,7 +1754,7 @@ typedef struct _IMAGEHLP_JIT_SYMBOL_MAP {
  
  BOOL
  IMAGEAPI
@@ -252,7 +370,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HWND hwnd
      );
  
-@@ -1721,21 +1721,21 @@ SymGetParentWindow(
+@@ -1721,21 +1766,21 @@ SymGetParentWindow(
  
  PCHAR
  IMAGEAPI
@@ -277,7 +395,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ DWORD type,
      _Out_writes_(size) PSTR dir,
      _In_ size_t size
-@@ -1743,7 +1743,7 @@ SymGetHomeDirectory(
+@@ -1743,7 +1788,7 @@ SymGetHomeDirectory(
  
  PWSTR
  IMAGEAPI
@@ -286,7 +404,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ DWORD type,
      _Out_writes_(size) PWSTR dir,
      _In_ size_t size
-@@ -1763,7 +1763,7 @@ typedef struct _OMAP {
+@@ -1763,7 +1808,7 @@ typedef struct _OMAP {
  
  BOOL
  IMAGEAPI
@@ -295,7 +413,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 BaseOfDll,
      _Out_ POMAP *OmapTo,
-@@ -1850,7 +1850,7 @@ SymGetOptions(
+@@ -1850,7 +1895,7 @@ SymGetOptions(
  
  BOOL
  IMAGEAPI
@@ -304,7 +422,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess
      );
  
-@@ -1878,7 +1878,7 @@ SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
+@@ -1878,7 +1923,7 @@ SymSetExtendedOption(_In_ IMAGEHLP_EXTENDED_OPTIONS option, _In_ BOOL value);
  
  BOOL
  IMAGEAPI
@@ -313,7 +431,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR string,
      _In_ PCSTR expression,
      _In_ BOOL fCase
-@@ -1894,7 +1894,7 @@ SymMatchStringA(
+@@ -1894,7 +1939,7 @@ SymMatchStringA(
  
  BOOL
  IMAGEAPI
@@ -322,7 +440,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR string,
      _In_ PCWSTR expression,
      _In_ BOOL fCase
-@@ -1911,7 +1911,7 @@ typedef BOOL
+@@ -1911,7 +1956,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -331,7 +449,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 ModBase,
      _In_opt_ PCSTR Mask,
-@@ -1927,7 +1927,7 @@ typedef BOOL
+@@ -1927,7 +1972,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -340,7 +458,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 ModBase,
      _In_opt_ PCWSTR Mask,
-@@ -1937,7 +1937,7 @@ SymEnumSourceFilesW(
+@@ -1937,7 +1982,7 @@ SymEnumSourceFilesW(
  
  BOOL
  IMAGEAPI
@@ -349,7 +467,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYM_ENUMMODULES_CALLBACK64 EnumModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1945,7 +1945,7 @@ SymEnumerateModules64(
+@@ -1945,7 +1990,7 @@ SymEnumerateModules64(
  
  BOOL
  IMAGEAPI
@@ -358,7 +476,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYM_ENUMMODULES_CALLBACKW64 EnumModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1956,7 +1956,7 @@ SymEnumerateModulesW64(
+@@ -1956,7 +2001,7 @@ SymEnumerateModulesW64(
  #else
  BOOL
  IMAGEAPI
@@ -367,7 +485,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYM_ENUMMODULES_CALLBACK EnumModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1965,7 +1965,7 @@ SymEnumerateModules(
+@@ -1965,7 +2010,7 @@ SymEnumerateModules(
  
  BOOL
  IMAGEAPI
@@ -376,7 +494,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PENUMLOADED_MODULES_CALLBACK64 EnumLoadedModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1973,7 +1973,7 @@ EnumerateLoadedModulesEx(
+@@ -1973,7 +2018,7 @@ EnumerateLoadedModulesEx(
  
  BOOL
  IMAGEAPI
@@ -385,7 +503,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PENUMLOADED_MODULES_CALLBACKW64 EnumLoadedModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1981,7 +1981,7 @@ EnumerateLoadedModulesExW(
+@@ -1981,7 +2026,7 @@ EnumerateLoadedModulesExW(
  
  BOOL
  IMAGEAPI
@@ -394,7 +512,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PENUMLOADED_MODULES_CALLBACK64 EnumLoadedModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -1989,7 +1989,7 @@ EnumerateLoadedModules64(
+@@ -1989,7 +2034,7 @@ EnumerateLoadedModules64(
  
  BOOL
  IMAGEAPI
@@ -403,7 +521,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PENUMLOADED_MODULES_CALLBACKW64 EnumLoadedModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -2000,7 +2000,7 @@ EnumerateLoadedModulesW64(
+@@ -2000,7 +2045,7 @@ EnumerateLoadedModulesW64(
  #else
  BOOL
  IMAGEAPI
@@ -412,7 +530,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PENUMLOADED_MODULES_CALLBACK EnumLoadedModulesCallback,
      _In_opt_ PVOID UserContext
-@@ -2009,7 +2009,7 @@ EnumerateLoadedModules(
+@@ -2009,7 +2054,7 @@ EnumerateLoadedModules(
  
  PVOID
  IMAGEAPI
@@ -421,7 +539,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 AddrBase
      );
-@@ -2034,7 +2034,7 @@ SymFunctionTableAccess64AccessRoutines(
+@@ -2034,7 +2079,7 @@ SymFunctionTableAccess64AccessRoutines(
  #else
  PVOID
  IMAGEAPI
@@ -430,7 +548,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD AddrBase
      );
-@@ -2057,7 +2057,7 @@ SymGetUnwindInfo(
+@@ -2057,7 +2102,7 @@ SymGetUnwindInfo(
  
  BOOL
  IMAGEAPI
@@ -439,7 +557,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr,
      _Out_ PIMAGEHLP_MODULE64 ModuleInfo
-@@ -2065,7 +2065,7 @@ SymGetModuleInfo64(
+@@ -2065,7 +2110,7 @@ SymGetModuleInfo64(
  
  BOOL
  IMAGEAPI
@@ -448,7 +566,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr,
      _Out_ PIMAGEHLP_MODULEW64 ModuleInfo
-@@ -2077,7 +2077,7 @@ SymGetModuleInfoW64(
+@@ -2077,7 +2122,7 @@ SymGetModuleInfoW64(
  #else
  BOOL
  IMAGEAPI
@@ -457,7 +575,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD dwAddr,
      _Out_ PIMAGEHLP_MODULE ModuleInfo
-@@ -2085,7 +2085,7 @@ SymGetModuleInfo(
+@@ -2085,7 +2130,7 @@ SymGetModuleInfo(
  
  BOOL
  IMAGEAPI
@@ -466,7 +584,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD dwAddr,
      _Out_ PIMAGEHLP_MODULEW ModuleInfo
-@@ -2094,7 +2094,7 @@ SymGetModuleInfoW(
+@@ -2094,7 +2139,7 @@ SymGetModuleInfoW(
  
  DWORD64
  IMAGEAPI
@@ -475,7 +593,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr
      );
-@@ -2104,7 +2104,7 @@ SymGetModuleBase64(
+@@ -2104,7 +2149,7 @@ SymGetModuleBase64(
  #else
  DWORD
  IMAGEAPI
@@ -484,7 +602,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD dwAddr
      );
-@@ -2144,7 +2144,7 @@ typedef BOOL
+@@ -2144,7 +2189,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -493,7 +611,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCSTR Obj,
-@@ -2161,7 +2161,7 @@ typedef BOOL
+@@ -2161,7 +2206,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -502,7 +620,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCWSTR Obj,
-@@ -2178,7 +2178,7 @@ SymEnumLinesW(
+@@ -2178,7 +2223,7 @@ SymEnumLinesW(
  
  BOOL
  IMAGEAPI
@@ -511,7 +629,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr,
      _Out_ PDWORD pdwDisplacement,
-@@ -2193,7 +2193,7 @@ SymGetLineFromAddr64(
+@@ -2193,7 +2238,7 @@ SymGetLineFromAddr64(
  
  BOOL
  IMAGEAPI
@@ -520,7 +638,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 dwAddr,
      _Out_ PDWORD pdwDisplacement,
-@@ -2202,7 +2202,7 @@ SymGetLineFromAddrW64(
+@@ -2202,7 +2247,7 @@ SymGetLineFromAddrW64(
  
  BOOL
  IMAGEAPI
@@ -529,7 +647,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr,
      _In_ ULONG InlineContext,
-@@ -2213,7 +2213,7 @@ SymGetLineFromInlineContext(
+@@ -2213,7 +2258,7 @@ SymGetLineFromInlineContext(
  
  BOOL
  IMAGEAPI
@@ -538,7 +656,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 dwAddr,
      _In_ ULONG InlineContext,
-@@ -2224,7 +2224,7 @@ SymGetLineFromInlineContextW(
+@@ -2224,7 +2269,7 @@ SymGetLineFromInlineContextW(
  
  BOOL
  IMAGEAPI
@@ -547,7 +665,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCSTR Obj,
-@@ -2237,7 +2237,7 @@ SymEnumSourceLines(
+@@ -2237,7 +2282,7 @@ SymEnumSourceLines(
  
  BOOL
  IMAGEAPI
@@ -556,7 +674,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCWSTR Obj,
-@@ -2278,7 +2278,7 @@ SymCompareInlineTrace(
+@@ -2278,7 +2323,7 @@ SymCompareInlineTrace(
  
  BOOL
  IMAGEAPI
@@ -565,7 +683,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 StartAddress,
      _In_ DWORD StartContext,
-@@ -2302,7 +2302,7 @@ SymQueryInlineTrace(
+@@ -2302,7 +2347,7 @@ SymQueryInlineTrace(
  #else
  BOOL
  IMAGEAPI
@@ -574,7 +692,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD dwAddr,
      _Out_ PDWORD pdwDisplacement,
-@@ -2321,7 +2321,7 @@ SymGetLineFromAddrW(
+@@ -2321,7 +2366,7 @@ SymGetLineFromAddrW(
  
  BOOL
  IMAGEAPI
@@ -583,7 +701,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR ModuleName,
      _In_opt_ PCSTR FileName,
-@@ -2332,7 +2332,7 @@ SymGetLineFromName64(
+@@ -2332,7 +2377,7 @@ SymGetLineFromName64(
  
  BOOL
  IMAGEAPI
@@ -592,7 +710,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR ModuleName,
      _In_opt_ PCWSTR FileName,
-@@ -2346,7 +2346,7 @@ SymGetLineFromNameW64(
+@@ -2346,7 +2391,7 @@ SymGetLineFromNameW64(
  #else
  BOOL
  IMAGEAPI
@@ -601,7 +719,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR ModuleName,
      _In_opt_ PCSTR FileName,
-@@ -2358,14 +2358,14 @@ SymGetLineFromName(
+@@ -2358,14 +2403,14 @@ SymGetLineFromName(
  
  BOOL
  IMAGEAPI
@@ -618,7 +736,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_LINEW64 Line
      );
-@@ -2375,7 +2375,7 @@ SymGetLineNextW64(
+@@ -2375,7 +2420,7 @@ SymGetLineNextW64(
  #else
  BOOL
  IMAGEAPI
@@ -627,7 +745,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_LINE Line
      );
-@@ -2390,14 +2390,14 @@ SymGetLineNextW(
+@@ -2390,14 +2435,14 @@ SymGetLineNextW(
  
  BOOL
  IMAGEAPI
@@ -644,7 +762,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_LINEW64 Line
      );
-@@ -2407,7 +2407,7 @@ SymGetLinePrevW64(
+@@ -2407,7 +2452,7 @@ SymGetLinePrevW64(
  #else
  BOOL
  IMAGEAPI
@@ -653,7 +771,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_LINE Line
      );
-@@ -2422,7 +2422,7 @@ SymGetLinePrevW(
+@@ -2422,7 +2467,7 @@ SymGetLinePrevW(
  
  ULONG
  IMAGEAPI
@@ -662,7 +780,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR ModuleName,
      _In_ PCSTR FileName,
-@@ -2432,7 +2432,7 @@ SymGetFileLineOffsets64(
+@@ -2432,7 +2477,7 @@ SymGetFileLineOffsets64(
  
  BOOL
  IMAGEAPI
@@ -671,7 +789,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR FileName,
      _In_ PCSTR Match,
      _Outptr_opt_ PSTR *FileNameStop,
-@@ -2441,7 +2441,7 @@ SymMatchFileName(
+@@ -2441,7 +2486,7 @@ SymMatchFileName(
  
  BOOL
  IMAGEAPI
@@ -680,7 +798,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR FileName,
      _In_ PCWSTR Match,
      _Outptr_opt_ PWSTR *FileNameStop,
-@@ -2450,7 +2450,7 @@ SymMatchFileNameW(
+@@ -2450,7 +2495,7 @@ SymMatchFileNameW(
  
  BOOL
  IMAGEAPI
@@ -689,7 +807,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCSTR Params,
-@@ -2461,7 +2461,7 @@ SymGetSourceFile(
+@@ -2461,7 +2506,7 @@ SymGetSourceFile(
  
  BOOL
  IMAGEAPI
@@ -698,7 +816,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCWSTR Params,
-@@ -2472,7 +2472,7 @@ SymGetSourceFileW(
+@@ -2472,7 +2517,7 @@ SymGetSourceFileW(
  
  BOOL
  IMAGEAPI
@@ -707,7 +825,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_ PCSTR FileSpec,
-@@ -2494,7 +2494,7 @@ SymGetSourceFileTokenByTokenName(
+@@ -2494,7 +2539,7 @@ SymGetSourceFileTokenByTokenName(
  
  BOOL
  IMAGEAPI
@@ -716,7 +834,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_ PCWSTR FileSpec,
-@@ -2506,7 +2506,7 @@ SymGetSourceFileChecksumW(
+@@ -2506,7 +2551,7 @@ SymGetSourceFileChecksumW(
  
  BOOL
  IMAGEAPI
@@ -725,7 +843,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_ PCSTR FileSpec,
-@@ -2518,7 +2518,7 @@ SymGetSourceFileChecksum(
+@@ -2518,7 +2563,7 @@ SymGetSourceFileChecksum(
  
  BOOL
  IMAGEAPI
@@ -734,7 +852,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_ PCWSTR FileSpec,
-@@ -2540,7 +2540,7 @@ SymGetSourceFileTokenByTokenNameW(
+@@ -2540,7 +2585,7 @@ SymGetSourceFileTokenByTokenNameW(
  
  BOOL
  IMAGEAPI
@@ -743,7 +861,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PVOID Token,
      _In_opt_ PCSTR Params,
-@@ -2561,7 +2561,7 @@ SymGetSourceFileFromTokenByTokenName(
+@@ -2561,7 +2606,7 @@ SymGetSourceFileFromTokenByTokenName(
  
  BOOL
  IMAGEAPI
@@ -752,7 +870,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PVOID Token,
      _In_opt_ PCWSTR Params,
-@@ -2582,7 +2582,7 @@ SymGetSourceFileFromTokenByTokenNameW(
+@@ -2582,7 +2627,7 @@ SymGetSourceFileFromTokenByTokenNameW(
  
  BOOL
  IMAGEAPI
@@ -761,7 +879,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PVOID Token,
      _In_opt_ PCSTR Params,
-@@ -2593,7 +2593,7 @@ SymGetSourceVarFromToken(
+@@ -2593,7 +2638,7 @@ SymGetSourceVarFromToken(
  
  BOOL
  IMAGEAPI
@@ -770,7 +888,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PVOID Token,
      _In_opt_ PCWSTR Params,
-@@ -2606,7 +2606,7 @@ typedef BOOL (CALLBACK *PENUMSOURCEFILETOKENSCALLBACK)(_In_ PVOID token,  _In_ s
+@@ -2606,7 +2651,7 @@ typedef BOOL (CALLBACK *PENUMSOURCEFILETOKENSCALLBACK)(_In_ PVOID token,  _In_ s
  
  BOOL
  IMAGEAPI
@@ -779,7 +897,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_ PENUMSOURCEFILETOKENSCALLBACK Callback
-@@ -2620,7 +2620,7 @@ SymEnumSourceFileTokens(
+@@ -2620,7 +2665,7 @@ SymEnumSourceFileTokens(
  
  BOOL
  IMAGEAPI
@@ -788,7 +906,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR UserSearchPath,
      _In_ BOOL fInvadeProcess
-@@ -2628,7 +2628,7 @@ SymInitialize(
+@@ -2628,7 +2673,7 @@ SymInitialize(
  
  BOOL
  IMAGEAPI
@@ -797,7 +915,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR UserSearchPath,
      _In_ BOOL fInvadeProcess
-@@ -2648,7 +2648,7 @@ SymInitializeW(
+@@ -2648,7 +2693,7 @@ SymInitializeW(
  
  BOOL
  IMAGEAPI
@@ -806,7 +924,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Out_writes_(SearchPathLength) PSTR SearchPath,
      _In_ DWORD SearchPathLength
-@@ -2656,7 +2656,7 @@ SymGetSearchPath(
+@@ -2656,7 +2701,7 @@ SymGetSearchPath(
  
  BOOL
  IMAGEAPI
@@ -815,7 +933,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Out_writes_(SearchPathLength) PWSTR SearchPath,
      _In_ DWORD SearchPathLength
-@@ -2664,7 +2664,7 @@ SymGetSearchPathW(
+@@ -2664,7 +2709,7 @@ SymGetSearchPathW(
  
  BOOL
  IMAGEAPI
@@ -824,7 +942,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SearchPath
      );
-@@ -2677,7 +2677,7 @@ SymSetSearchPath(
+@@ -2677,7 +2722,7 @@ SymSetSearchPath(
  
  BOOL
  IMAGEAPI
@@ -833,8 +951,18 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SearchPath
      );
-@@ -2694,7 +2694,7 @@ SymSetSearchPathW(
+@@ -2692,9 +2737,17 @@ SymSetSearchPathW(
+ #define SLMFLAG_ALT_INDEX   0x2
+ #define SLMFLAG_NO_SYMBOLS  0x4
  
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++// Retain the existing logical zero label without adding a native constant.
++typedef _WIN32META_ANNOTATION_(
++    "FlagsEnum(SLMFLAG_NONE, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)",
++    0, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)
++    unsigned int SYM_LOAD_FLAGS;
++#endif
++
  DWORD64
  IMAGEAPI
 -SymLoadModuleEx(
@@ -842,7 +970,16 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ HANDLE hFile,
      _In_opt_ PCSTR ImageName,
-@@ -2713,7 +2713,7 @@ SymLoadModuleEx(
+@@ -2702,7 +2755,7 @@ SymLoadModuleEx(
+     _In_ DWORD64 BaseOfDll,
+     _In_ DWORD DllSize,
+     _In_opt_ PMODLOAD_DATA Data,
+-    _In_opt_ DWORD Flags
++    _Win32_AssociatedEnum_(SYM_LOAD_FLAGS) _In_opt_ DWORD Flags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+@@ -2713,7 +2766,7 @@ SymLoadModuleEx(
  
  DWORD64
  IMAGEAPI
@@ -851,7 +988,16 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ HANDLE hFile,
      _In_opt_ PCWSTR ImageName,
-@@ -2732,7 +2732,7 @@ SymLoadModuleExW(
+@@ -2721,7 +2774,7 @@ SymLoadModuleExW(
+     _In_ DWORD64 BaseOfDll,
+     _In_ DWORD DllSize,
+     _In_opt_ PMODLOAD_DATA Data,
+-    _In_opt_ DWORD Flags
++    _Win32_AssociatedEnum_(SYM_LOAD_FLAGS) _In_opt_ DWORD Flags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+@@ -2732,7 +2785,7 @@ SymLoadModuleExW(
  
  BOOL
  IMAGEAPI
@@ -860,7 +1006,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 BaseOfDll
      );
-@@ -2742,7 +2742,7 @@ SymUnloadModule64(
+@@ -2742,7 +2795,7 @@ SymUnloadModule64(
  #else
  BOOL
  IMAGEAPI
@@ -869,7 +1015,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD BaseOfDll
      );
-@@ -2750,7 +2750,7 @@ SymUnloadModule(
+@@ -2750,7 +2803,7 @@ SymUnloadModule(
  
  BOOL
  IMAGEAPI
@@ -878,7 +1024,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PIMAGEHLP_SYMBOL64 sym,            // Symbol to undecorate
      _Out_writes_(UnDecNameLength) PSTR UnDecName,   // Buffer to store undecorated name in
      _In_ DWORD UnDecNameLength              // Size of the buffer
-@@ -2761,7 +2761,7 @@ SymUnDName64(
+@@ -2761,7 +2814,7 @@ SymUnDName64(
  #else
  BOOL
  IMAGEAPI
@@ -887,7 +1033,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PIMAGEHLP_SYMBOL sym,              // Symbol to undecorate
      _Out_writes_(UnDecNameLength) PSTR UnDecName,   // Buffer to store undecorated name in
      _In_ DWORD UnDecNameLength              // Size of the buffer
-@@ -2770,7 +2770,7 @@ SymUnDName(
+@@ -2770,7 +2823,7 @@ SymUnDName(
  
  BOOL
  IMAGEAPI
@@ -896,7 +1042,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYMBOL_REGISTERED_CALLBACK64 CallbackFunction,
      _In_ ULONG64 UserContext
-@@ -2778,7 +2778,7 @@ SymRegisterCallback64(
+@@ -2778,7 +2831,7 @@ SymRegisterCallback64(
  
  BOOL
  IMAGEAPI
@@ -905,7 +1051,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYMBOL_REGISTERED_CALLBACK64 CallbackFunction,
      _In_ ULONG64 UserContext
-@@ -2786,7 +2786,7 @@ SymRegisterCallbackW64(
+@@ -2786,7 +2839,7 @@ SymRegisterCallbackW64(
  
  BOOL
  IMAGEAPI
@@ -914,7 +1060,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYMBOL_FUNCENTRY_CALLBACK64 CallbackFunction,
      _In_ ULONG64 UserContext
-@@ -2798,7 +2798,7 @@ SymRegisterFunctionEntryCallback64(
+@@ -2798,7 +2851,7 @@ SymRegisterFunctionEntryCallback64(
  #else
  BOOL
  IMAGEAPI
@@ -923,7 +1069,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYMBOL_REGISTERED_CALLBACK CallbackFunction,
      _In_opt_ PVOID UserContext
-@@ -2806,7 +2806,7 @@ SymRegisterCallback(
+@@ -2806,7 +2859,7 @@ SymRegisterCallback(
  
  BOOL
  IMAGEAPI
@@ -932,7 +1078,25 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PSYMBOL_FUNCENTRY_CALLBACK CallbackFunction,
      _In_opt_ PVOID UserContext
-@@ -2903,7 +2903,7 @@ typedef VOID IMAGEHLP_CONTEXT, *PIMAGEHLP_CONTEXT;
+@@ -2839,7 +2892,7 @@ typedef struct _SYMBOL_INFO {
+     ULONG       Index;
+     ULONG       Size;
+     ULONG64     ModBase;          // Base Address of module comtaining this symbol
+-    ULONG       Flags;
++    _Win32_AssociatedEnum_(SYMBOL_INFO_FLAGS) ULONG       Flags;
+     ULONG64     Value;            // Value of symbol, ValuePresent should be 1
+     ULONG64     Address;          // Address of symbol including base address of module
+     ULONG       Register;         // register holding value or pointer to value
+@@ -2862,7 +2915,7 @@ typedef struct _SYMBOL_INFOW {
+     ULONG       Index;
+     ULONG       Size;
+     ULONG64     ModBase;          // Base Address of module comtaining this symbol
+-    ULONG       Flags;
++    _Win32_AssociatedEnum_(SYMBOL_INFO_FLAGS) ULONG       Flags;
+     ULONG64     Value;            // Value of symbol, ValuePresent should be 1
+     ULONG64     Address;          // Address of symbol including base address of module
+     ULONG       Register;         // register holding value or pointer to value
+@@ -2903,7 +2956,7 @@ typedef VOID IMAGEHLP_CONTEXT, *PIMAGEHLP_CONTEXT;
  
  BOOL
  IMAGEAPI
@@ -941,7 +1105,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PIMAGEHLP_STACK_FRAME StackFrame,
      _In_opt_ PIMAGEHLP_CONTEXT Context
-@@ -2911,14 +2911,14 @@ SymSetContext(
+@@ -2911,14 +2964,14 @@ SymSetContext(
  
  BOOL
  IMAGEAPI
@@ -958,7 +1122,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Address,
      _In_ ULONG InlineContext
-@@ -2926,7 +2926,7 @@ SymSetScopeFromInlineContext(
+@@ -2926,7 +2979,7 @@ SymSetScopeFromInlineContext(
  
  BOOL
  IMAGEAPI
@@ -967,7 +1131,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ DWORD Index
-@@ -2940,7 +2940,7 @@ typedef BOOL
+@@ -2940,7 +2993,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -976,7 +1140,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PSYM_ENUMPROCESSES_CALLBACK EnumProcessesCallback,
      _In_ PVOID UserContext
      );
-@@ -2953,7 +2953,7 @@ SymEnumProcesses(
+@@ -2953,7 +3006,7 @@ SymEnumProcesses(
  
  BOOL
  IMAGEAPI
@@ -985,7 +1149,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _Out_opt_ PDWORD64 Displacement,
-@@ -2962,7 +2962,7 @@ SymFromAddr(
+@@ -2962,7 +3015,7 @@ SymFromAddr(
  
  BOOL
  IMAGEAPI
@@ -994,7 +1158,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _Out_opt_ PDWORD64 Displacement,
-@@ -2977,7 +2977,7 @@ SymFromAddrW(
+@@ -2977,7 +3030,7 @@ SymFromAddrW(
  
  BOOL
  IMAGEAPI
@@ -1003,7 +1167,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _In_ ULONG InlineContext,
-@@ -2987,7 +2987,7 @@ SymFromInlineContext(
+@@ -2987,7 +3040,7 @@ SymFromInlineContext(
  
  BOOL
  IMAGEAPI
@@ -1012,7 +1176,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _In_ ULONG InlineContext,
-@@ -2997,7 +2997,7 @@ SymFromInlineContextW(
+@@ -2997,7 +3050,7 @@ SymFromInlineContextW(
  
  BOOL
  IMAGEAPI
@@ -1021,7 +1185,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Base,
      _In_ DWORD Token,
-@@ -3006,7 +3006,7 @@ SymFromToken(
+@@ -3006,7 +3059,7 @@ SymFromToken(
  
  BOOL
  IMAGEAPI
@@ -1030,7 +1194,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Base,
      _In_ DWORD Token,
-@@ -3015,28 +3015,28 @@ SymFromTokenW(
+@@ -3015,28 +3068,28 @@ SymFromTokenW(
  
  BOOL
  IMAGEAPI
@@ -1063,7 +1227,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PSYMBOL_INFOW siw
      );
-@@ -3049,7 +3049,7 @@ SymPrevW(
+@@ -3049,7 +3102,7 @@ SymPrevW(
  
  BOOL
  IMAGEAPI
@@ -1072,7 +1236,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCSTR Name,
      _Inout_ PSYMBOL_INFO Symbol
-@@ -3057,7 +3057,7 @@ SymFromName(
+@@ -3057,7 +3110,7 @@ SymFromName(
  
  BOOL
  IMAGEAPI
@@ -1081,7 +1245,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCWSTR Name,
      _Inout_ PSYMBOL_INFOW Symbol
-@@ -3075,7 +3075,7 @@ typedef BOOL
+@@ -3075,7 +3128,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -1090,7 +1254,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCSTR Mask,
-@@ -3085,7 +3085,7 @@ SymEnumSymbols(
+@@ -3085,7 +3138,7 @@ SymEnumSymbols(
  
  BOOL
  IMAGEAPI
@@ -1099,7 +1263,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCSTR Mask,
-@@ -3103,7 +3103,7 @@ typedef BOOL
+@@ -3103,7 +3156,7 @@ typedef BOOL
  
  BOOL
  IMAGEAPI
@@ -1108,7 +1272,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCWSTR Mask,
-@@ -3113,7 +3113,7 @@ SymEnumSymbolsW(
+@@ -3113,7 +3166,7 @@ SymEnumSymbolsW(
  
  BOOL
  IMAGEAPI
@@ -1117,7 +1281,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCWSTR Mask,
-@@ -3124,7 +3124,7 @@ SymEnumSymbolsExW(
+@@ -3124,7 +3177,7 @@ SymEnumSymbolsExW(
  
  BOOL
  IMAGEAPI
@@ -1126,7 +1290,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _In_ PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
-@@ -3133,7 +3133,7 @@ SymEnumSymbolsForAddr(
+@@ -3133,7 +3186,7 @@ SymEnumSymbolsForAddr(
  
  BOOL
  IMAGEAPI
@@ -1135,7 +1299,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 Address,
      _In_ PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,
-@@ -3147,7 +3147,7 @@ SymEnumSymbolsForAddrW(
+@@ -3147,7 +3200,7 @@ SymEnumSymbolsForAddrW(
  
  BOOL
  IMAGEAPI
@@ -1144,7 +1308,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ DWORD Index,
-@@ -3161,7 +3161,7 @@ SymSearch(
+@@ -3161,7 +3214,7 @@ SymSearch(
  
  BOOL
  IMAGEAPI
@@ -1153,7 +1317,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ DWORD Index,
-@@ -3175,7 +3175,7 @@ SymSearchW(
+@@ -3175,7 +3228,7 @@ SymSearchW(
  
  BOOL
  IMAGEAPI
@@ -1162,7 +1326,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ DWORD Index,
-@@ -3184,7 +3184,7 @@ SymGetScope(
+@@ -3184,7 +3237,7 @@ SymGetScope(
  
  BOOL
  IMAGEAPI
@@ -1171,7 +1335,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ DWORD Index,
-@@ -3193,7 +3193,7 @@ SymGetScopeW(
+@@ -3193,7 +3246,7 @@ SymGetScopeW(
  
  BOOL
  IMAGEAPI
@@ -1180,7 +1344,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ DWORD Index,
-@@ -3202,7 +3202,7 @@ SymFromIndex(
+@@ -3202,7 +3255,7 @@ SymFromIndex(
  
  BOOL
  IMAGEAPI
@@ -1189,7 +1353,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ DWORD Index,
-@@ -3271,7 +3271,7 @@ typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
+@@ -3271,7 +3324,7 @@ typedef struct _TI_GET_DISCRIMINATEDUNION_TAG_RANGES_PARAMS {
  
  BOOL
  IMAGEAPI
@@ -1198,7 +1362,24 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 ModBase,
      _In_ ULONG TypeId,
-@@ -3305,7 +3305,7 @@ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+@@ -3282,9 +3335,15 @@ SymGetTypeInfo(
+ #define IMAGEHLP_GET_TYPE_INFO_UNCACHED 0x00000001
+ #define IMAGEHLP_GET_TYPE_INFO_CHILDREN 0x00000002
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_GET_TYPE_INFO_FLAGS, unsigned int,
++    IMAGEHLP_GET_TYPE_INFO_CHILDREN,
++    IMAGEHLP_GET_TYPE_INFO_UNCACHED);
++#endif
++
+ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+     IN  ULONG    SizeOfStruct;
+-    IN  ULONG    Flags;
++    _Win32_AssociatedEnum_(IMAGEHLP_GET_TYPE_INFO_FLAGS) IN  ULONG    Flags;
+     IN  ULONG    NumIds;
+     IN  PULONG   TypeIds;
+     IN  ULONG64  TagFilter;
+@@ -3305,7 +3364,7 @@ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
  
  BOOL
  IMAGEAPI
@@ -1207,7 +1388,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 ModBase,
      _Inout_ PIMAGEHLP_GET_TYPE_INFO_PARAMS Params
-@@ -3313,7 +3313,7 @@ SymGetTypeInfoEx(
+@@ -3313,7 +3372,7 @@ SymGetTypeInfoEx(
  
  BOOL
  IMAGEAPI
@@ -1216,7 +1397,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PSYM_ENUMERATESYMBOLS_CALLBACK EnumSymbolsCallback,
-@@ -3322,7 +3322,7 @@ SymEnumTypes(
+@@ -3322,7 +3381,7 @@ SymEnumTypes(
  
  BOOL
  IMAGEAPI
@@ -1225,7 +1406,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PSYM_ENUMERATESYMBOLS_CALLBACKW EnumSymbolsCallback,
-@@ -3331,7 +3331,7 @@ SymEnumTypesW(
+@@ -3331,7 +3390,7 @@ SymEnumTypesW(
  
  BOOL
  IMAGEAPI
@@ -1234,7 +1415,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCSTR mask,
-@@ -3341,7 +3341,7 @@ SymEnumTypesByName(
+@@ -3341,7 +3400,7 @@ SymEnumTypesByName(
  
  BOOL
  IMAGEAPI
@@ -1243,7 +1424,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCWSTR mask,
-@@ -3351,7 +3351,7 @@ SymEnumTypesByNameW(
+@@ -3351,7 +3410,7 @@ SymEnumTypesByNameW(
  
  BOOL
  IMAGEAPI
@@ -1252,7 +1433,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PCSTR Name,
-@@ -3360,7 +3360,7 @@ SymGetTypeFromName(
+@@ -3360,7 +3419,7 @@ SymGetTypeFromName(
  
  BOOL
  IMAGEAPI
@@ -1261,7 +1442,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PCWSTR Name,
-@@ -3369,7 +3369,7 @@ SymGetTypeFromNameW(
+@@ -3369,7 +3428,7 @@ SymGetTypeFromNameW(
  
  BOOL
  IMAGEAPI
@@ -1270,7 +1451,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PCSTR Name,
-@@ -3380,7 +3380,7 @@ SymAddSymbol(
+@@ -3380,7 +3439,7 @@ SymAddSymbol(
  
  BOOL
  IMAGEAPI
@@ -1279,7 +1460,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PCWSTR Name,
-@@ -3391,7 +3391,7 @@ SymAddSymbolW(
+@@ -3391,7 +3450,7 @@ SymAddSymbolW(
  
  BOOL
  IMAGEAPI
@@ -1288,7 +1469,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCSTR Name,
-@@ -3401,7 +3401,7 @@ SymDeleteSymbol(
+@@ -3401,7 +3460,7 @@ SymDeleteSymbol(
  
  BOOL
  IMAGEAPI
@@ -1297,7 +1478,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_opt_ PCWSTR Name,
-@@ -3417,7 +3417,7 @@ SymDeleteSymbolW(
+@@ -3417,7 +3476,7 @@ SymDeleteSymbolW(
  
  BOOL
  IMAGEAPI
@@ -1306,7 +1487,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess
      );
  
-@@ -3429,7 +3429,7 @@ SymRefreshModuleList(
+@@ -3429,7 +3488,7 @@ SymRefreshModuleList(
  
  BOOL
  IMAGEAPI
@@ -1315,7 +1496,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCSTR StreamFile,
-@@ -3453,7 +3453,7 @@ typedef BOOL (WINAPI *SYMADDSOURCESTREAMA)(HANDLE, ULONG64, PCSTR, PBYTE, size_t
+@@ -3453,7 +3512,7 @@ typedef BOOL (WINAPI *SYMADDSOURCESTREAMA)(HANDLE, ULONG64, PCSTR, PBYTE, size_t
  
  BOOL
  IMAGEAPI
@@ -1324,7 +1505,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 Base,
      _In_opt_ PCWSTR FileSpec,
-@@ -3463,21 +3463,21 @@ SymAddSourceStreamW(
+@@ -3463,21 +3522,21 @@ SymAddSourceStreamW(
  
  BOOL
  IMAGEAPI
@@ -1349,7 +1530,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SymPath,
      _In_ PCSTR Type,
-@@ -3487,7 +3487,7 @@ SymSrvDeltaName(
+@@ -3487,7 +3546,7 @@ SymSrvDeltaName(
  
  PCWSTR
  IMAGEAPI
@@ -1358,7 +1539,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SymPath,
      _In_ PCWSTR Type,
-@@ -3497,7 +3497,7 @@ SymSrvDeltaNameW(
+@@ -3497,7 +3556,7 @@ SymSrvDeltaNameW(
  
  PCSTR
  IMAGEAPI
@@ -1367,7 +1548,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SymPath,
      _In_ PCSTR Node,
-@@ -3506,7 +3506,7 @@ SymSrvGetSupplement(
+@@ -3506,7 +3565,7 @@ SymSrvGetSupplement(
  
  PCWSTR
  IMAGEAPI
@@ -1376,7 +1557,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SymPath,
      _In_ PCWSTR Node,
-@@ -3515,7 +3515,7 @@ SymSrvGetSupplementW(
+@@ -3515,7 +3574,7 @@ SymSrvGetSupplementW(
  
  BOOL
  IMAGEAPI
@@ -1385,7 +1566,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR File,
      _Out_ GUID *Id,
      _Out_ PDWORD Val1,
-@@ -3525,7 +3525,7 @@ SymSrvGetFileIndexes(
+@@ -3525,7 +3584,7 @@ SymSrvGetFileIndexes(
  
  BOOL
  IMAGEAPI
@@ -1394,7 +1575,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR File,
      _Out_ GUID *Id,
      _Out_ PDWORD Val1,
-@@ -3535,7 +3535,7 @@ SymSrvGetFileIndexesW(
+@@ -3535,7 +3594,7 @@ SymSrvGetFileIndexesW(
  
  BOOL
  IMAGEAPI
@@ -1403,7 +1584,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SrvPath,
      _In_ PCWSTR File,
-@@ -3546,7 +3546,7 @@ SymSrvGetFileIndexStringW(
+@@ -3546,7 +3605,7 @@ SymSrvGetFileIndexStringW(
  
  BOOL
  IMAGEAPI
@@ -1412,7 +1593,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SrvPath,
      _In_ PCSTR File,
-@@ -3583,7 +3583,7 @@ typedef struct {
+@@ -3583,7 +3642,7 @@ typedef struct {
  
  BOOL
  IMAGEAPI
@@ -1421,7 +1602,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCSTR File,
      _Out_ PSYMSRV_INDEX_INFO Info,
      _In_ DWORD Flags
-@@ -3591,7 +3591,7 @@ SymSrvGetFileIndexInfo(
+@@ -3591,7 +3650,7 @@ SymSrvGetFileIndexInfo(
  
  BOOL
  IMAGEAPI
@@ -1430,7 +1611,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ PCWSTR File,
      _Out_ PSYMSRV_INDEX_INFOW Info,
      _In_ DWORD Flags
-@@ -3599,7 +3599,7 @@ SymSrvGetFileIndexInfoW(
+@@ -3599,7 +3658,7 @@ SymSrvGetFileIndexInfoW(
  
  PCSTR
  IMAGEAPI
@@ -1439,7 +1620,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SrvPath,
      _In_ PCSTR Node,
-@@ -3609,7 +3609,7 @@ SymSrvStoreSupplement(
+@@ -3609,7 +3668,7 @@ SymSrvStoreSupplement(
  
  PCWSTR
  IMAGEAPI
@@ -1448,7 +1629,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SymPath,
      _In_ PCWSTR Node,
-@@ -3619,7 +3619,7 @@ SymSrvStoreSupplementW(
+@@ -3619,11 +3678,11 @@ SymSrvStoreSupplementW(
  
  PCSTR
  IMAGEAPI
@@ -1457,7 +1638,12 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCSTR SrvPath,
      _In_ PCSTR File,
-@@ -3634,7 +3634,7 @@ SymSrvStoreFile(
+-    _In_ DWORD Flags
++    _Win32_AssociatedEnum_(SYM_SRV_STORE_FILE_FLAGS) _In_ DWORD Flags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+@@ -3634,11 +3693,11 @@ SymSrvStoreFile(
  
  PCWSTR
  IMAGEAPI
@@ -1466,7 +1652,12 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ PCWSTR SrvPath,
      _In_ PCWSTR File,
-@@ -3659,7 +3659,7 @@ typedef enum {
+-    _In_ DWORD Flags
++    _Win32_AssociatedEnum_(SYM_SRV_STORE_FILE_FLAGS) _In_ DWORD Flags
+     );
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS | WINAPI_PARTITION_GAMES) */
+@@ -3659,11 +3718,11 @@ typedef enum {
  
  BOOL
  IMAGEAPI
@@ -1475,7 +1666,12 @@ index 09bb15cb..3ad5669c 100644
      _In_opt_ HANDLE hProcess,
      _In_opt_ PCSTR SymPath,
      _In_ PCSTR ImageFile,
-@@ -3672,7 +3672,7 @@ SymGetSymbolFile(
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(IMAGEHLP_SF_TYPE) _In_ DWORD Type,
+     _Out_writes_(cSymbolFile) PSTR SymbolFile,
+     _In_ size_t cSymbolFile,
+     _Out_writes_(cDbgFile) PSTR DbgFile,
+@@ -3672,11 +3731,11 @@ SymGetSymbolFile(
  
  BOOL
  IMAGEAPI
@@ -1484,7 +1680,12 @@ index 09bb15cb..3ad5669c 100644
      _In_opt_ HANDLE hProcess,
      _In_opt_ PCWSTR SymPath,
      _In_ PCWSTR ImageFile,
-@@ -3723,7 +3723,7 @@ DbgHelpCreateUserDumpW(
+-    _In_ DWORD Type,
++    _Win32_AssociatedEnum_(IMAGEHLP_SF_TYPE) _In_ DWORD Type,
+     _Out_writes_(cSymbolFile) PWSTR SymbolFile,
+     _In_ size_t cSymbolFile,
+     _Out_writes_(cDbgFile) PWSTR DbgFile,
+@@ -3723,7 +3782,7 @@ DbgHelpCreateUserDumpW(
  
  BOOL
  IMAGEAPI
@@ -1493,7 +1694,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD64 qwAddr,
      _Out_opt_ PDWORD64 pdwDisplacement,
-@@ -3736,7 +3736,7 @@ SymGetSymFromAddr64(
+@@ -3736,7 +3795,7 @@ SymGetSymFromAddr64(
  #else
  BOOL
  IMAGEAPI
@@ -1502,7 +1703,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ DWORD dwAddr,
      _Out_opt_ PDWORD pdwDisplacement,
-@@ -3758,7 +3758,7 @@ SymGetSymFromAddr(
+@@ -3758,7 +3817,7 @@ SymGetSymFromAddr(
  
  BOOL
  IMAGEAPI
@@ -1511,7 +1712,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCSTR Name,
      _Inout_ PIMAGEHLP_SYMBOL64 Symbol
-@@ -3769,7 +3769,7 @@ SymGetSymFromName64(
+@@ -3769,7 +3828,7 @@ SymGetSymFromName64(
  #else
  BOOL
  IMAGEAPI
@@ -1520,7 +1721,37 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ PCSTR Name,
      _Inout_ PIMAGEHLP_SYMBOL Symbol
-@@ -4064,7 +4064,7 @@ SymEnumSym(
+@@ -3831,6 +3890,13 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+ #define SSRVOPT_DWORD               0x00000002
+ #define SSRVOPT_DWORDPTR            0x00000004
+ #define SSRVOPT_GUIDPTR             0x00000008
++
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_FIND_ID_OPTION, unsigned int,
++    SSRVOPT_DWORD,
++    SSRVOPT_DWORDPTR,
++    SSRVOPT_GUIDPTR);
++#endif
+ #define SSRVOPT_OLDGUIDPTR          0x00000010
+ #define SSRVOPT_UNATTENDED          0x00000020
+ #define SSRVOPT_NOCOPY              0x00000040
+@@ -3907,6 +3973,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+  #define SYMSTOREOPT_UNICODE         0x20
+  #define SYMSTOREOPT_PASS_IF_EXISTS  0x40
+ 
++#if defined(WIN32METADATA) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_SRV_STORE_FILE_FLAGS, unsigned int,
++    SYMSTOREOPT_COMPRESS,
++    SYMSTOREOPT_OVERWRITE,
++    SYMSTOREOPT_PASS_IF_EXISTS,
++    SYMSTOREOPT_POINTER,
++    SYMSTOREOPT_RETURNINDEX);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+@@ -4064,7 +4139,7 @@ SymEnumSym(
  DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
@@ -1529,7 +1760,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PSYM_ENUMSYMBOLS_CALLBACK64 EnumSymbolsCallback,
-@@ -4074,7 +4074,7 @@ SymEnumerateSymbols64(
+@@ -4074,7 +4149,7 @@ SymEnumerateSymbols64(
  DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
@@ -1538,7 +1769,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG64 BaseOfDll,
      _In_ PSYM_ENUMSYMBOLS_CALLBACK64W EnumSymbolsCallback,
-@@ -4089,7 +4089,7 @@ SymEnumerateSymbolsW64(
+@@ -4089,7 +4164,7 @@ SymEnumerateSymbolsW64(
  DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
@@ -1547,7 +1778,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG BaseOfDll,
      _In_ PSYM_ENUMSYMBOLS_CALLBACK EnumSymbolsCallback,
-@@ -4099,7 +4099,7 @@ SymEnumerateSymbols(
+@@ -4099,7 +4174,7 @@ SymEnumerateSymbols(
  DBHLP_DEPRECIATED
  BOOL
  IMAGEAPI
@@ -1556,7 +1787,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_ ULONG BaseOfDll,
      _In_ PSYM_ENUMSYMBOLS_CALLBACKW EnumSymbolsCallback,
-@@ -4111,7 +4111,7 @@ SymEnumerateSymbolsW(
+@@ -4111,7 +4186,7 @@ SymEnumerateSymbolsW(
  
  DWORD64
  IMAGEAPI
@@ -1565,7 +1796,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ HANDLE hFile,
      _In_opt_ PCSTR ImageName,
-@@ -4125,7 +4125,7 @@ SymLoadModule64(
+@@ -4125,7 +4200,7 @@ SymLoadModule64(
  #else
  DWORD
  IMAGEAPI
@@ -1574,7 +1805,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _In_opt_ HANDLE hFile,
      _In_opt_ PCSTR ImageName,
-@@ -4137,7 +4137,7 @@ SymLoadModule(
+@@ -4137,7 +4212,7 @@ SymLoadModule(
  
  BOOL
  IMAGEAPI
@@ -1583,7 +1814,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_SYMBOL64 Symbol
      );
-@@ -4155,7 +4155,7 @@ SymGetSymNextW64(
+@@ -4155,7 +4230,7 @@ SymGetSymNextW64(
  #else
  BOOL
  IMAGEAPI
@@ -1592,7 +1823,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_SYMBOL Symbol
      );
-@@ -4170,7 +4170,7 @@ SymGetSymNextW(
+@@ -4170,7 +4245,7 @@ SymGetSymNextW(
  
  BOOL
  IMAGEAPI
@@ -1601,7 +1832,7 @@ index 09bb15cb..3ad5669c 100644
      _In_ HANDLE hProcess,
      _Inout_ PIMAGEHLP_SYMBOL64 Symbol
      );
-@@ -4188,7 +4188,7 @@ SymGetSymPrevW64(
+@@ -4188,7 +4263,7 @@ SymGetSymPrevW64(
  #else
  BOOL
  IMAGEAPI

@@ -1,0 +1,22 @@
+diff --git a/um/gamingexperience.h b/um/gamingexperience.h
+index 7079702b67391309024a1d2ce465f0eb21b0944c..ce60c42930a8674fc2666a263d9a2c7b7681177f 100644
+--- a/um/gamingexperience.h
++++ b/um/gamingexperience.h
+@@ -18,6 +18,8 @@
+ 
+ #ifndef _APISET_GAMING_EXPERIENCE_
+ #define _APISET_GAMING_EXPERIENCE_
++
++#include <sal.h>
+ 
+ #include <apiset.h>
+ #include <apisetcconv.h>
+@@ -65,7 +67,7 @@
+ RegisterGamingFullScreenExperienceChangeNotification(
+     _In_ PGAMING_FULL_SCREEN_EXPERIENCE_CHANGE_ROUTINE routine,
+     _In_opt_ PVOID context,
+-    _Out_ GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION* registration
++    _Out_ _Win32_RAIIFree_(UnregisterGamingFullScreenExperienceChangeNotification, -1, 0) GAMING_FULL_SCREEN_EXPERIENCE_REGISTRATION* registration
+     );
+ 
+ VOID

@@ -516,7 +516,7 @@
  WINADVAPI
  _Post_satisfies_(return >= 8 && return <= SECURITY_MAX_SID_SIZE)
  _Success_(1)
-@@ -813,6 +899,8 @@
+@@ -813,13 +899,15 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -525,6 +525,14 @@
  WINADVAPI
  _Success_(return != FALSE)
  BOOL
+ WINAPI
+ GetPrivateObjectSecurity(
+     _In_ PSECURITY_DESCRIPTOR ObjectDescriptor,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _Out_writes_bytes_to_opt_(DescriptorLength,*ReturnLength) PSECURITY_DESCRIPTOR ResultantDescriptor,
+     _In_ DWORD DescriptorLength,
+     _Out_ PDWORD ReturnLength
 @@ -831,6 +919,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -774,7 +782,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1192,6 +1327,7 @@
+@@ -1192,16 +1327,19 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -782,7 +790,11 @@
  WINADVAPI
  VOID
  WINAPI
-@@ -1202,6 +1338,8 @@
+ QuerySecurityAccessMask(
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _Out_ LPDWORD DesiredAccess
+     );
  
  #endif // (_WIN32_WINNT >= 0x0600)
  
@@ -800,7 +812,16 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1238,6 +1378,8 @@
+@@ -1224,7 +1364,7 @@
+ WINAPI
+ SetFileSecurityW(
+     _In_ LPCWSTR lpFileName,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
+     );
+ 
+@@ -1238,12 +1378,14 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -809,7 +830,14 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1253,6 +1395,8 @@
+ SetKernelObjectSecurity(
+     _In_ HANDLE Handle,
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_ PSECURITY_DESCRIPTOR SecurityDescriptor
+     );
+ 
+@@ -1253,36 +1395,41 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -818,7 +846,12 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1264,20 +1408,23 @@
+ SetPrivateObjectSecurity(
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _In_ PSECURITY_DESCRIPTOR ModificationDescriptor,
+     _Inout_ PSECURITY_DESCRIPTOR* ObjectsSecurityDescriptor,
+     _In_ PGENERIC_MAPPING GenericMapping,
      _In_opt_ HANDLE Token
      );
  
@@ -844,6 +877,12 @@
  WINADVAPI
  VOID
  WINAPI
+ SetSecurityAccessMask(
+-    _In_ SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) _In_ SECURITY_INFORMATION SecurityInformation,
+     _Out_ LPDWORD DesiredAccess
+     );
+ 
 @@ -1294,6 +1441,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)

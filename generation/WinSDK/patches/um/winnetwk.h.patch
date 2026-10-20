@@ -1,5 +1,4 @@
 diff --git a/um/winnetwk.h b/um/winnetwk.h
-index 1cd6d53c..253c967b 100644
 --- a/um/winnetwk.h
 +++ b/um/winnetwk.h
 @@ -60,8 +60,12 @@ extern "C" {
@@ -42,9 +41,18 @@ index 1cd6d53c..253c967b 100644
  #define RESOURCEDISPLAYTYPE_GENERIC        0x00000000
  #define RESOURCEDISPLAYTYPE_DOMAIN         0x00000001
  #define RESOURCEDISPLAYTYPE_SERVER         0x00000002
-@@ -98,8 +112,8 @@ extern "C" {
+@@ -97,9 +111,17 @@ extern "C" {
+ #define RESOURCEDISPLAYTYPE_NDSCONTAINER   0x0000000B
  #endif /* WINVER >= 0x0400 */
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(RESOURCE_DISPLAY_TYPE, DWORD,
++    RESOURCEDISPLAYTYPE_DOMAIN, RESOURCEDISPLAYTYPE_FILE,
++    RESOURCEDISPLAYTYPE_GENERIC, RESOURCEDISPLAYTYPE_GROUP,
++    RESOURCEDISPLAYTYPE_SERVER, RESOURCEDISPLAYTYPE_SHARE,
++    RESOURCEDISPLAYTYPE_TREE);
++#endif
++
  typedef struct  _NETRESOURCEA {
 -    DWORD    dwScope;
 -    DWORD    dwType;
@@ -53,7 +61,7 @@ index 1cd6d53c..253c967b 100644
      DWORD    dwDisplayType;
      DWORD    dwUsage;
      LPSTR    lpLocalName;
-@@ -108,8 +122,8 @@ typedef struct  _NETRESOURCEA {
+@@ -108,8 +130,8 @@ typedef struct  _NETRESOURCEA {
      LPSTR    lpProvider;
  }NETRESOURCEA, *LPNETRESOURCEA;
  typedef struct  _NETRESOURCEW {
@@ -64,7 +72,7 @@ index 1cd6d53c..253c967b 100644
      DWORD    dwDisplayType;
      DWORD    dwUsage;
      LPWSTR   lpLocalName;
-@@ -137,6 +151,9 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
+@@ -137,6 +159,9 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
  #define CONNECT_INTERACTIVE         0x00000008
  #define CONNECT_PROMPT              0x00000010
  #define CONNECT_NEED_DRIVE          0x00000020
@@ -74,7 +82,7 @@ index 1cd6d53c..253c967b 100644
  #if(WINVER >= 0x0400)
  #define CONNECT_REFCOUNT            0x00000040
  #define CONNECT_REDIRECT            0x00000080
-@@ -144,13 +161,18 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
+@@ -144,13 +169,18 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
  #define CONNECT_CURRENT_MEDIA       0x00000200
  #define CONNECT_DEFERRED            0x00000400
  #define CONNECT_RESERVED            0xFF000000
@@ -93,7 +101,7 @@ index 1cd6d53c..253c967b 100644
  #endif /* WINVER >= 0x0600 */
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)  
-@@ -159,9 +181,14 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
+@@ -159,9 +189,14 @@ typedef LPNETRESOURCEA LPNETRESOURCE;
  #define CONNECT_REQUIRE_PRIVACY                  0x00008000
  #define CONNECT_WRITE_THROUGH_SEMANTICS          0x00010000
  #define CONNECT_GLOBAL_MAPPING                   0x00040000 
@@ -108,7 +116,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnectionA(
-@@ -169,6 +196,7 @@ WNetAddConnectionA(
+@@ -169,6 +204,7 @@ WNetAddConnectionA(
      _In_opt_ LPCSTR   lpPassword,
      _In_opt_ LPCSTR   lpLocalName
      );
@@ -116,7 +124,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnectionW(
-@@ -176,34 +204,41 @@ WNetAddConnectionW(
+@@ -176,34 +212,41 @@ WNetAddConnectionW(
      _In_opt_ LPCWSTR   lpPassword,
      _In_opt_ LPCWSTR   lpLocalName
      );
@@ -160,7 +168,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnection3A(
-@@ -211,8 +246,9 @@ WNetAddConnection3A(
+@@ -211,8 +254,9 @@ WNetAddConnection3A(
      _In_     LPNETRESOURCEA lpNetResource,
      _In_opt_ LPCSTR       lpPassword,
      _In_opt_ LPCSTR       lpUserName,
@@ -171,7 +179,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnection3W(
-@@ -220,8 +256,9 @@ WNetAddConnection3W(
+@@ -220,8 +264,9 @@ WNetAddConnection3W(
      _In_     LPNETRESOURCEW lpNetResource,
      _In_opt_ LPCWSTR       lpPassword,
      _In_opt_ LPCWSTR       lpUserName,
@@ -182,7 +190,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetAddConnection3  WNetAddConnection3W
  #else
-@@ -229,6 +266,7 @@ WNetAddConnection3W(
+@@ -229,6 +274,7 @@ WNetAddConnection3W(
  #endif // !UNICODE
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
@@ -190,7 +198,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnection4A(
-@@ -236,10 +274,11 @@ WNetAddConnection4A(
+@@ -236,10 +282,11 @@ WNetAddConnection4A(
      _In_     LPNETRESOURCEA lpNetResource,
      _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
      _In_     DWORD          cbAuthBuffer,
@@ -203,7 +211,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetAddConnection4W(
-@@ -247,7 +286,7 @@ WNetAddConnection4W(
+@@ -247,7 +294,7 @@ WNetAddConnection4W(
      _In_     LPNETRESOURCEW lpNetResource,
      _In_reads_bytes_(cbAuthBuffer) PVOID  pAuthBuffer,
      _In_     DWORD          cbAuthBuffer,
@@ -212,7 +220,7 @@ index 1cd6d53c..253c967b 100644
      _In_reads_bytes_(cbUseOptions)     PBYTE          lpUseOptions,
      _In_     DWORD          cbUseOptions
      );
-@@ -258,44 +297,54 @@ WNetAddConnection4W(
+@@ -258,44 +305,54 @@ WNetAddConnection4W(
  #endif // !UNICODE
  #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
  
@@ -269,7 +277,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetConnectionA(
-@@ -303,6 +352,7 @@ WNetGetConnectionA(
+@@ -303,6 +360,7 @@ WNetGetConnectionA(
      _Out_writes_opt_(*lpnLength) LPSTR  lpRemoteName,
      _Inout_ LPDWORD lpnLength
      );
@@ -277,7 +285,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetConnectionW(
-@@ -310,6 +360,7 @@ WNetGetConnectionW(
+@@ -310,6 +368,7 @@ WNetGetConnectionW(
      _Out_writes_opt_(*lpnLength) LPWSTR  lpRemoteName,
      _Inout_ LPDWORD lpnLength
      );
@@ -285,7 +293,15 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetConnection  WNetGetConnectionW
  #else
-@@ -349,6 +400,8 @@ WNetRestoreConnectionW(
+@@ -334,6 +393,7 @@ WNetRestoreSingleConnectionW(
+ 
+ #else
+ _Check_return_
++_Win32_SupportedOS_Windows2000_
+ DWORD APIENTRY
+ WNetRestoreConnectionW(
+     _In_opt_ HWND    hWnd,
+@@ -349,6 +409,8 @@ WNetRestoreConnectionW(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
  #if(WINVER >= 0x0400)
@@ -294,7 +310,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetUseConnectionA(
-@@ -356,11 +409,12 @@ WNetUseConnectionA(
+@@ -356,11 +418,12 @@ WNetUseConnectionA(
      _In_     LPNETRESOURCEA  lpNetResource,
      _In_opt_ LPCSTR        lpPassword,
      _In_opt_ LPCSTR        lpUserId,
@@ -308,7 +324,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetUseConnectionW(
-@@ -368,11 +422,12 @@ WNetUseConnectionW(
+@@ -368,11 +431,12 @@ WNetUseConnectionW(
      _In_     LPNETRESOURCEW  lpNetResource,
      _In_opt_ LPCWSTR        lpPassword,
      _In_opt_ LPCWSTR        lpUserId,
@@ -322,7 +338,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetUseConnection  WNetUseConnectionW
  #else
-@@ -381,6 +436,7 @@ WNetUseConnectionW(
+@@ -381,6 +445,7 @@ WNetUseConnectionW(
  #endif /* WINVER >= 0x0400 */
  
  #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
@@ -330,7 +346,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetUseConnection4A(
-@@ -395,6 +451,7 @@ WNetUseConnection4A(
+@@ -395,6 +460,7 @@ WNetUseConnection4A(
      _Inout_opt_ LPDWORD lpBufferSize,
      _Out_opt_ LPDWORD   lpResult
      );
@@ -338,7 +354,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetUseConnection4W(
-@@ -420,6 +477,8 @@ WNetUseConnection4W(
+@@ -420,6 +486,8 @@ WNetUseConnection4W(
  //
  //  Network Connection Dialogs.
  //
@@ -347,7 +363,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetConnectionDialog(
-@@ -427,26 +486,45 @@ WNetConnectionDialog(
+@@ -427,26 +495,45 @@ WNetConnectionDialog(
      _In_ DWORD dwType
      );
  
@@ -395,7 +411,7 @@ index 1cd6d53c..253c967b 100644
      DWORD dwDevNum;          /* number of devices connected to */
  } CONNECTDLGSTRUCTW, FAR *LPCONNECTDLGSTRUCTW;
  #ifdef UNICODE
-@@ -457,48 +535,44 @@ typedef CONNECTDLGSTRUCTA CONNECTDLGSTRUCT;
+@@ -457,48 +544,44 @@ typedef CONNECTDLGSTRUCTA CONNECTDLGSTRUCT;
  typedef LPCONNECTDLGSTRUCTA LPCONNECTDLGSTRUCT;
  #endif // UNICODE
  
@@ -455,7 +471,7 @@ index 1cd6d53c..253c967b 100644
  } DISCDLGSTRUCTW, FAR *LPDISCDLGSTRUCTW;
  #ifdef UNICODE
  typedef DISCDLGSTRUCTW DISCDLGSTRUCT;
-@@ -508,19 +582,20 @@ typedef DISCDLGSTRUCTA DISCDLGSTRUCT;
+@@ -508,19 +591,20 @@ typedef DISCDLGSTRUCTA DISCDLGSTRUCT;
  typedef LPDISCDLGSTRUCTA LPDISCDLGSTRUCT;
  #endif // UNICODE
  
@@ -479,7 +495,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetDisconnectDialog1  WNetDisconnectDialog1W
  #else
-@@ -532,95 +607,113 @@ WNetDisconnectDialog1W(
+@@ -532,95 +616,113 @@ WNetDisconnectDialog1W(
  //  Network Browsing.
  //
  
@@ -613,7 +629,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetResourceInformation  WNetGetResourceInformationW
  #else
-@@ -635,6 +728,8 @@ WNetGetResourceInformationW(
+@@ -635,6 +737,8 @@ WNetGetResourceInformationW(
  #define UNIVERSAL_NAME_INFO_LEVEL   0x00000001
  #define REMOTE_NAME_INFO_LEVEL      0x00000002
  
@@ -622,7 +638,7 @@ index 1cd6d53c..253c967b 100644
  typedef struct  _UNIVERSAL_NAME_INFOA {
      LPSTR    lpUniversalName;
  }UNIVERSAL_NAME_INFOA, *LPUNIVERSAL_NAME_INFOA;
-@@ -667,22 +762,26 @@ typedef REMOTE_NAME_INFOA REMOTE_NAME_INFO;
+@@ -667,22 +771,26 @@ typedef REMOTE_NAME_INFOA REMOTE_NAME_INFO;
  typedef LPREMOTE_NAME_INFOA LPREMOTE_NAME_INFO;
  #endif // UNICODE
  
@@ -653,7 +669,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetUniversalName  WNetGetUniversalNameW
  #else
-@@ -692,6 +791,8 @@ WNetGetUniversalNameW(
+@@ -692,6 +800,8 @@ WNetGetUniversalNameW(
  //
  //  Authentication and Logon/Logoff.
  //
@@ -662,7 +678,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetUserA(
-@@ -702,6 +803,7 @@ WNetGetUserA(
+@@ -702,6 +812,7 @@ WNetGetUserA(
  //
  //  Authentication and Logon/Logoff.
  //
@@ -670,7 +686,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetUserW(
-@@ -709,6 +811,7 @@ WNetGetUserW(
+@@ -709,6 +820,7 @@ WNetGetUserW(
      _Out_writes_(*lpnLength) LPWSTR lpUserName,
      _Inout_  LPDWORD lpnLength
      );
@@ -678,7 +694,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetUser  WNetGetUserW
  #else
-@@ -726,10 +829,13 @@ WNetGetUserW(
+@@ -726,10 +838,13 @@ WNetGetUserW(
  #define WNFMT_ABBREVIATED       0x02
  #define WNFMT_INENUM            0x10
  #define WNFMT_CONNECTION        0x20
@@ -692,7 +708,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetProviderNameA(
-@@ -737,6 +843,7 @@ WNetGetProviderNameA(
+@@ -737,6 +852,7 @@ WNetGetProviderNameA(
      _Out_writes_(*lpBufferSize) LPSTR lpProviderName,
      _Inout_ LPDWORD lpBufferSize
      );
@@ -700,7 +716,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetProviderNameW(
-@@ -744,39 +851,47 @@ WNetGetProviderNameW(
+@@ -744,39 +860,47 @@ WNetGetProviderNameW(
      _Out_writes_(*lpBufferSize) LPWSTR lpProviderName,
      _Inout_ LPDWORD lpBufferSize
      );
@@ -754,7 +770,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetNetworkInformation  WNetGetNetworkInformationW
  #else
-@@ -789,6 +904,9 @@ WNetGetNetworkInformationW(
+@@ -789,6 +913,9 @@ WNetGetNetworkInformationW(
  //  Error handling.
  //
  
@@ -764,7 +780,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetLastErrorA(
-@@ -798,6 +916,8 @@ WNetGetLastErrorA(
+@@ -798,6 +925,8 @@ WNetGetLastErrorA(
      _Out_writes_(nNameBufSize) LPSTR  lpNameBuf,
      _In_ DWORD      nNameBufSize
      );
@@ -773,7 +789,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  WNetGetLastErrorW(
-@@ -807,6 +927,7 @@ WNetGetLastErrorW(
+@@ -807,6 +936,7 @@ WNetGetLastErrorW(
      _Out_writes_(nNameBufSize) LPWSTR  lpNameBuf,
      _In_ DWORD      nNameBufSize
      );
@@ -781,7 +797,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define WNetGetLastError  WNetGetLastErrorW
  #else
-@@ -895,6 +1016,7 @@ typedef struct _NETCONNECTINFOSTRUCT{
+@@ -895,6 +1025,7 @@ typedef struct _NETCONNECTINFOSTRUCT{
  #define WNCON_SLOWLINK          0x00000004
  #define WNCON_DYNAMIC           0x00000008
  
@@ -789,7 +805,7 @@ index 1cd6d53c..253c967b 100644
  _Check_return_
  DWORD APIENTRY
  MultinetGetConnectionPerformanceA(
-@@ -907,6 +1029,7 @@ MultinetGetConnectionPerformanceW(
+@@ -907,6 +1038,7 @@ MultinetGetConnectionPerformanceW(
      _In_  LPNETRESOURCEW lpNetResource,
      _Out_ LPNETCONNECTINFOSTRUCT lpNetConnectInfoStruct
      );
@@ -797,7 +813,7 @@ index 1cd6d53c..253c967b 100644
  #ifdef UNICODE
  #define MultinetGetConnectionPerformance  MultinetGetConnectionPerformanceW
  #else
-@@ -929,4 +1052,3 @@ MultinetGetConnectionPerformanceW(
+@@ -929,4 +1061,3 @@ MultinetGetConnectionPerformanceW(
  
  
  #endif  // _WINNETWK_

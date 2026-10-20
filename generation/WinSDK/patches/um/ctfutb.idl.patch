@@ -1,13 +1,14 @@
 diff --git a/um/ctfutb.idl b/um/ctfutb.idl
-index 3e8ec12d..30e15b5d 100644
+index 3e8ec12d..a0054762 100644
 --- a/um/ctfutb.idl
 +++ b/um/ctfutb.idl
-@@ -1,3 +1,4 @@
+@@ -1,3 +1,5 @@
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  //+-------------------------------------------------------------------------
-@@ -170,6 +171,7 @@ interface ITfMenu;
+@@ -170,6 +172,7 @@ interface ITfMenu;
  //
  // ITfLangBarMgr
  //
@@ -15,7 +16,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(87955690-e627-11d2-8ddb-00105a2799b5),
-@@ -212,6 +214,7 @@ interface ITfLangBarMgr: IUnknown
+@@ -212,6 +215,7 @@ interface ITfLangBarMgr: IUnknown
  //
  // ITfLangBarEventSink
  //
@@ -23,7 +24,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(18a4e900-e0ae-11d2-afdd-00105a2799b5),
-@@ -238,6 +241,7 @@ interface ITfLangBarEventSink: IUnknown
+@@ -238,6 +242,7 @@ interface ITfLangBarEventSink: IUnknown
  //
  // ITfLangBarItemSink
  //
@@ -31,7 +32,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(57dbe1a0-de25-11d2-afdd-00105a2799b5),
-@@ -251,6 +255,7 @@ interface ITfLangBarItemSink : IUnknown
+@@ -251,6 +256,7 @@ interface ITfLangBarItemSink : IUnknown
  //
  // IEnumTfLangBarItems
  //
@@ -39,7 +40,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(583f34d0-de25-11d2-afdd-00105a2799b5),
-@@ -295,6 +300,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -295,6 +301,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfLangBarItemMgr
  //
@@ -47,7 +48,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(ba468c55-9956-4fb1-a59d-52a7dd7cc6aa),
-@@ -349,6 +355,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -349,6 +356,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfLangBarItem
  //
@@ -55,7 +56,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(73540d69-edeb-4ee9-96c9-23aa30b25916),
-@@ -374,6 +381,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -374,6 +382,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfSystemLangBarItemSink
  //
@@ -63,7 +64,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(1449d9ab-13cf-4687-aa3e-8d8b18574396),
-@@ -389,6 +397,7 @@ interface ITfSystemLangBarItemSink : IUnknown
+@@ -389,6 +398,7 @@ interface ITfSystemLangBarItemSink : IUnknown
  //
  // ITfSystemLangBarItem
  //
@@ -71,7 +72,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(1e13e9ec-6b33-4d4a-b5eb-8a92f029f356),
-@@ -405,6 +414,7 @@ interface ITfSystemLangBarItem : IUnknown
+@@ -405,6 +415,7 @@ interface ITfSystemLangBarItem : IUnknown
  //
  // ITfSystemLangBarItemText
  //
@@ -79,7 +80,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(5c4ce0e5-ba49-4b52-ac6b-3b397b4f701f),
-@@ -420,6 +430,7 @@ interface ITfSystemLangBarItemText : IUnknown
+@@ -420,6 +431,7 @@ interface ITfSystemLangBarItemText : IUnknown
  //
  // ITfSystemDeviceTypeLangBarItem
  //
@@ -87,7 +88,16 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(45672eb9-9059-46a2-838d-4530355f6a77),
-@@ -453,6 +464,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -427,7 +439,7 @@ interface ITfSystemLangBarItemText : IUnknown
+ ]
+ interface ITfSystemDeviceTypeLangBarItem : IUnknown
+ {
+-    HRESULT SetIconMode([in] DWORD dwFlags);
++    HRESULT SetIconMode([annotation("_Win32_AssociatedEnum_(LANG_BAR_ITEM_ICON_MODE_FLAGS)")] [in] DWORD dwFlags);
+ 
+     HRESULT GetIconMode([out] DWORD *pdwFlags);
+ }
+@@ -453,6 +465,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfLangBarItemButton
  //
@@ -95,7 +105,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(28c7f1d0-de25-11d2-afdd-00105a2799b5),
-@@ -476,6 +488,7 @@ interface ITfLangBarItemButton : ITfLangBarItem
+@@ -476,6 +489,7 @@ interface ITfLangBarItemButton : ITfLangBarItem
  //
  // ITfLangBarItemBitmapButton
  //
@@ -103,7 +113,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(a26a0525-3fae-4fa0-89ee-88a964f9f1b5),
-@@ -506,6 +519,7 @@ interface ITfLangBarItemBitmapButton : ITfLangBarItem
+@@ -506,6 +520,7 @@ interface ITfLangBarItemBitmapButton : ITfLangBarItem
  //
  // ITfLangBarItemBitmap
  //
@@ -111,7 +121,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(73830352-d722-4179-ada5-f045c98df355),
-@@ -536,6 +550,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+@@ -536,6 +551,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
  //
  // ITfLangBarItemBalloon
  //
@@ -119,7 +129,7 @@ index 3e8ec12d..30e15b5d 100644
  [
    object,
    uuid(01C2D285-D3C7-4B7B-B5B5-D97411D0C283),
-@@ -574,6 +589,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -574,6 +590,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  //
  // ITfMenu
  //

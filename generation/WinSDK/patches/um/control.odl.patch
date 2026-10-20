@@ -1,0 +1,96 @@
+--- a/um/control.odl
++++ b/um/control.odl
+@@ -1,3 +1,5 @@
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ //==========================================================================;
+ //
+ //  THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY
+@@ -61,6 +63,7 @@
+ 
+ 
+     // core control providing state control
++    _Win32_AnnotateInterface_(IMediaControl, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b1-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IMediaControl interface"),
+@@ -131,6 +134,7 @@
+     // after receiving an event.
+     //
+ 
++    _Win32_AnnotateInterface_(IMediaEvent, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b6-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IMediaEvent interface"),
+@@ -198,6 +202,7 @@
+                         );
+     }
+ 
++    _Win32_AnnotateInterface_(IMediaEventEx, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868c0-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IMediaEventEx interface"),
+@@ -242,6 +247,7 @@
+ 
+ 
+     // seek/cueing for positional media
++    _Win32_AnnotateInterface_(IMediaPosition, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b2-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IMediaPosition interface"),
+@@ -291,6 +297,7 @@
+     }
+ 
+     // basic audio-related functionality
++    _Win32_AnnotateInterface_(IBasicAudio, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b3-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IBasicAudio interface"),
+@@ -318,6 +325,7 @@
+     }
+ 
+     // basic window-related functionality
++    _Win32_AnnotateInterface_(IVideoWindow, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b4-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IVideoWindow interface"),
+@@ -470,6 +478,7 @@
+     }
+ 
+     // basic video-related functionality
++    _Win32_AnnotateInterface_(IBasicVideo, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b5-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IBasicVideo interface"),
+@@ -595,6 +604,7 @@
+     }
+ 
+     // interface extension to IBasicVideo to return preferred aspect ratio
++    _Win32_AnnotateInterface_(IBasicVideo2, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(329bb360-f6ea-11d1-9038-00a0c9697298),
+         helpstring("IBasicVideo2"),
+@@ -612,6 +622,7 @@
+     }
+ 
+     // interface returned to a command that has been queued via IQueueCommand
++    _Win32_AnnotateInterface_(IDeferredCommand, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b8-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IDeferredCommand"),
+@@ -631,6 +642,7 @@
+     };
+ 
+     // queue an IDispatch-based command for execution at a specified time
++    _Win32_AnnotateInterface_(IQueueCommand, _Win32_SupportedOS_Windows2000_)
+     [
+         uuid(56a868b7-0ad4-11ce-b03a-0020af0ba770),
+         helpstring("IQueueCommand"),
+@@ -861,6 +873,7 @@
+     //  Note that the calls using an index are likely to be much faster
+     //--------------------------------------------------------------------
+ 
++    _Win32_AnnotateInterface_(IAMStats, _Win32_SupportedOS_WindowsXP_)
+     [
+             uuid(bc9bcf80-dcd2-11d2-abf6-00a0c905f375),
+             helpstring("Statistics"),

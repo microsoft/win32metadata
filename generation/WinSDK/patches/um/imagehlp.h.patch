@@ -1,5 +1,5 @@
 diff --git a/um/imagehlp.h b/um/imagehlp.h
-index 1cdaaf10..d5baaceb 100644
+index 1cdaaf10..5bb44717 100644
 --- a/um/imagehlp.h
 +++ b/um/imagehlp.h
 @@ -126,6 +126,8 @@ typedef struct _LOADED_IMAGE {
@@ -213,3 +213,117 @@ index 1cdaaf10..d5baaceb 100644
  BOOL
  IMAGEAPI
  UpdateDebugInfoFileEx(
+@@ -845,6 +890,12 @@ UnDecorateSymbolNameW(
+ 
+ #define DBHHEADER_DEBUGDIRS     0x1
+ #define DBHHEADER_CVMISC        0x2
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(MODLOAD_DATA_TYPE, unsigned int,
++    DBHHEADER_DEBUGDIRS,
++    DBHHEADER_CVMISC);
++#endif
+ #define DBHHEADER_PDBGUID       0x3
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(NONGAMESPARTITIONS) */
+@@ -1611,6 +1662,27 @@ enum SymTagEnum
+ #define SYMFLAG_ILREL               0x00010000
+ #define SYMFLAG_METADATA            0x00020000
+ #define SYMFLAG_CLR_TOKEN           0x00040000
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_FlagsEnum_(SYMBOL_INFO_FLAGS, unsigned int,
++    SYMFLAG_CLR_TOKEN,
++    SYMFLAG_CONSTANT,
++    SYMFLAG_EXPORT,
++    SYMFLAG_FORWARDER,
++    SYMFLAG_FRAMEREL,
++    SYMFLAG_FUNCTION,
++    SYMFLAG_ILREL,
++    SYMFLAG_LOCAL,
++    SYMFLAG_METADATA,
++    SYMFLAG_PARAMETER,
++    SYMFLAG_REGISTER,
++    SYMFLAG_REGREL,
++    SYMFLAG_SLOT,
++    SYMFLAG_THUNK,
++    SYMFLAG_TLSREL,
++    SYMFLAG_VALUEPRESENT,
++    SYMFLAG_VIRTUAL);
++#endif
+ #define SYMFLAG_NULL                0x00080000
+ #define SYMFLAG_FUNC_NO_RETURN      0x00100000
+ #define SYMFLAG_SYNTHETIC_ZEROBASE  0x00200000
+@@ -1949,6 +2021,14 @@ enum {
+     sevFatal,
+     sevMax  // unused
+ };
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_CBA_EVENT_SEVERITY, unsigned int,
++    sevInfo,
++    sevProblem,
++    sevAttn,
++    sevFatal);
++#endif
++
+ 
+ #define EVENT_SRCSPEW_START 100
+ #define EVENT_SRCSPEW       100
+@@ -3024,6 +3104,14 @@ SymSetSearchPathW(
+ #define SLMFLAG_ALT_INDEX   0x2
+ #define SLMFLAG_NO_SYMBOLS  0x4
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++// Retain the existing logical zero label without adding a native constant.
++typedef _WIN32META_ANNOTATION_(
++    "FlagsEnum(SLMFLAG_NONE, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)",
++    0, SLMFLAG_VIRTUAL, SLMFLAG_ALT_INDEX, SLMFLAG_NO_SYMBOLS)
++    unsigned int SYM_LOAD_FLAGS;
++#endif
++
+ DWORD64
+ IMAGEAPI
+ SymLoadModuleEx(
+@@ -3614,6 +3702,12 @@ SymGetTypeInfo(
+ #define IMAGEHLP_GET_TYPE_INFO_UNCACHED 0x00000001
+ #define IMAGEHLP_GET_TYPE_INFO_CHILDREN 0x00000002
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(IMAGEHLP_GET_TYPE_INFO_FLAGS, unsigned int,
++    IMAGEHLP_GET_TYPE_INFO_CHILDREN,
++    IMAGEHLP_GET_TYPE_INFO_UNCACHED);
++#endif
++
+ typedef struct _IMAGEHLP_GET_TYPE_INFO_PARAMS {
+     IN  ULONG    SizeOfStruct;
+     IN  ULONG    Flags;
+@@ -4163,6 +4257,13 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+ #define SSRVOPT_DWORD               0x00000002
+ #define SSRVOPT_DWORDPTR            0x00000004
+ #define SSRVOPT_GUIDPTR             0x00000008
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_FIND_ID_OPTION, unsigned int,
++    SSRVOPT_DWORD,
++    SSRVOPT_DWORDPTR,
++    SSRVOPT_GUIDPTR);
++#endif
+ #define SSRVOPT_OLDGUIDPTR          0x00000010
+ #define SSRVOPT_UNATTENDED          0x00000020
+ #define SSRVOPT_NOCOPY              0x00000040
+@@ -4239,6 +4340,15 @@ typedef BOOL (WINAPI *PSYMBOLSERVERSETHTTPAUTHHEADER)(_In_ PCWSTR pszAuthHeader)
+  #define SYMSTOREOPT_UNICODE         0x20
+  #define SYMSTOREOPT_PASS_IF_EXISTS  0x40
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++_Win32_Enum_(SYM_SRV_STORE_FILE_FLAGS, unsigned int,
++    SYMSTOREOPT_COMPRESS,
++    SYMSTOREOPT_OVERWRITE,
++    SYMSTOREOPT_PASS_IF_EXISTS,
++    SYMSTOREOPT_POINTER,
++    SYMSTOREOPT_RETURNINDEX);
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 

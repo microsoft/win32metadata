@@ -1,16 +1,67 @@
-diff --git a/um/amstream.idl b/um/amstream.idl
-index ab95439b..4d13d611 100644
 --- a/um/amstream.idl
 +++ b/um/amstream.idl
-@@ -7,6 +7,7 @@
+@@ -7,6 +7,8 @@
  //------------------------------------------------------------------------------
  
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -181,6 +182,7 @@ interface IMediaStreamFilter : IBaseFilter
+@@ -33,9 +35,15 @@
+ interface IAMMediaTypeSample;
+ 
+ //  Flags definitions for IAMMultiMediaStream::Initialize
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ enum {
+     AMMSF_NOGRAPHTHREAD      = 0x00000001
+ };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ //  Flags definitions for AddMediaStream and IAMMediaStream::Initialize
+ enum {
+@@ -65,11 +73,17 @@
+ };
+ 
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum {
+     Disabled = 0,
+     ReadData = 1,
+     RenderData = 2
+ } OUTPUT_STATE;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ // IAMMultiMediaStream interface
+@@ -82,7 +96,7 @@
+ {
+     HRESULT Initialize(
+         [in] STREAM_TYPE StreamType,
+-        [in] DWORD dwFlags,
++        [annotation("_Win32_AssociatedEnum_(enum __MIDL___MIDL_itf_amstream_0000_0000_0001)")] [in] DWORD dwFlags,
+         [in]  IGraphBuilder *pFilterGraph);
+ 
+     HRESULT GetFilterGraph(
+@@ -94,7 +108,7 @@
+     HRESULT AddMediaStream(
+         [in]  IUnknown *pStreamObject,
+         [in]  const MSPID *PurposeId,
+-        [in]  DWORD dwFlags,
++        [annotation("_Win32_AssociatedEnum_(enum __MIDL___MIDL_itf_amstream_0000_0000_0002)")] [in]  DWORD dwFlags,
+         [out] IMediaStream **ppNewStream);
+ 
+     HRESULT OpenFile(
+@@ -181,6 +195,7 @@
  
  
  
@@ -18,7 +69,7 @@ index ab95439b..4d13d611 100644
  [
  object,
  local,
-@@ -193,6 +195,7 @@ interface IDirectDrawMediaSampleAllocator : IUnknown
+@@ -193,6 +208,7 @@
  };
  
  
@@ -26,3 +77,8 @@ index ab95439b..4d13d611 100644
  [
  object,
  local,
+@@ -290,4 +306,3 @@
+ 
+ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ #pragma endregion
+-

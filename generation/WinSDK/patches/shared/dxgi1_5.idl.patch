@@ -1,5 +1,4 @@
 diff --git a/shared/dxgi1_5.idl b/shared/dxgi1_5.idl
-index d08fe528..9e2f23e3 100644
 --- a/shared/dxgi1_5.idl
 +++ b/shared/dxgi1_5.idl
 @@ -1,5 +1,6 @@
@@ -9,7 +8,21 @@ index d08fe528..9e2f23e3 100644
  import "dxgi1_4.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -15,6 +16,7 @@ typedef enum DXGI_OUTDUPL_FLAG {
+@@ -7,14 +8,21 @@ cpp_quote("#include <winapifamily.h>")
+ #pragma region App Family
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)")
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_OUTDUPL_FLAG {
+     DXGI_OUTDUPL_COMPOSITED_UI_CAPTURE_ONLY = 1,
+ } DXGI_OUTDUPL_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput5 interface
  //--------------------------------------------------------------------------------------------------------
@@ -17,3 +30,29 @@ index d08fe528..9e2f23e3 100644
  [
      object,
      uuid(80A07424-AB52-42EB-833C-0C42FD282D98),
+@@ -85,10 +93,16 @@ interface IDXGISwapChain4 :
+ //--------------------------------------------------------------------------------------------------------
+ // IDXGIDevice4 interface
+ //--------------------------------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum _DXGI_OFFER_RESOURCE_FLAGS
+ {
+     DXGI_OFFER_RESOURCE_FLAG_ALLOW_DECOMMIT = 0x1,
+ } DXGI_OFFER_RESOURCE_FLAGS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ typedef enum _DXGI_RECLAIM_RESOURCE_RESULTS
+ {
+@@ -110,7 +124,7 @@ interface IDXGIDevice4 :
+         [in, annotation("_In_")] UINT NumResources,
+         [in, size_is(NumResources), annotation("_In_reads_(NumResources)")] IDXGIResource *const *ppResources,
+         [in, annotation("_In_")] DXGI_OFFER_RESOURCE_PRIORITY Priority,
+-        [in, annotation("_In_")] UINT Flags);
++        [in, annotation("_In_ _Win32_AssociatedEnum_(DXGI_OFFER_RESOURCE_FLAGS)")] UINT Flags);
+     HRESULT ReclaimResources1(
+         [in, annotation("_In_")] UINT NumResources,
+         [in, size_is(NumResources), annotation("_In_reads_(NumResources)")] IDXGIResource *const *ppResources,

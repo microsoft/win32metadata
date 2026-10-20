@@ -1,9 +1,13 @@
 --- a/um/richedit.h
 +++ b/um/richedit.h
-@@ -9,6 +9,27 @@
+@@ -9,6 +9,31 @@
  
  #ifndef _RICHEDIT_
  #define _RICHEDIT_
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned short RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE;
++#endif
 +
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
 +typedef unsigned int ENDCOMPOSITIONNOTIFY_CODE;
@@ -28,7 +32,7 @@
  #pragma once
  #include <winapifamily.h>
  #include <wtypes.h>
-@@ -359,10 +380,15 @@
+@@ -359,10 +384,15 @@
  // EM_GETIMECOMPTEXT wparam structure
  typedef struct _imecomptext {
  	LONG	cb; 		// count of bytes in the output buffer.
@@ -45,7 +49,7 @@
  
  // Outline mode wparam values
  #define EMO_EXIT				0		// Enter normal mode,  lparam ignored
-@@ -548,12 +574,18 @@
+@@ -548,12 +578,18 @@
  typedef struct _endcomposition
  {
  	NMHDR	nmhdr;
@@ -65,7 +69,7 @@
  #endif
  
  // Event notification masks 
-@@ -674,12 +706,12 @@
+@@ -674,12 +710,12 @@
  typedef struct _charformat
  {
  	UINT		cbSize;
@@ -81,7 +85,7 @@
  	BYTE		bPitchAndFamily;
  	char		szFaceName[LF_FACESIZE];
  } CHARFORMATA;
-@@ -687,12 +719,12 @@
+@@ -687,12 +723,12 @@
  typedef struct _charformatw
  {
  	UINT		cbSize;
@@ -97,7 +101,7 @@
  	BYTE		bPitchAndFamily;
  	WCHAR		szFaceName[LF_FACESIZE];
  } CHARFORMATW;
-@@ -889,6 +921,11 @@
+@@ -889,6 +925,11 @@
  #define CFM_UNDERLINETYPE	0x00800000		// Many displayed by 3.0 
  #if (_RICHEDIT_VER >= 0x0600)
  #define CFM_COOKIE			0x01000000		// RE 6.0
@@ -109,7 +113,7 @@
  #endif
  #define CFM_LCID			0x02000000
  #define CFM_BACKCOLOR		0x04000000		// Higher mask bits defined above
-@@ -911,10 +948,20 @@
+@@ -911,10 +952,20 @@
  					| CFM_UNDERLINETYPE | CFM_WEIGHT | CFM_REVAUTHOR \
  					| CFM_SPACING | CFM_KERNING | CFM_STYLE | CFM_ANIMATION \
  					| CFM_COOKIE)
@@ -130,7 +134,7 @@
  #endif
  
  #define CFE_SMALLCAPS		CFM_SMALLCAPS
-@@ -940,12 +987,86 @@
+@@ -940,12 +991,86 @@
  
  #define	CFM_ALLEFFECTS				(CFM_EFFECTS2 | CFM_FONTBOUND | CFM_EXTENDED | CFM_MATHNOBUILDUP | CFM_MATH | CFM_MATHORDINARY)
  
@@ -217,7 +221,7 @@
  
  // Underline types. RE 1.0 displays only CFU_UNDERLINE
  #define CFU_CF1UNDERLINE	0xFF	// Map charformat's bit underline to CF2
-@@ -1133,8 +1254,8 @@
+@@ -1133,8 +1258,8 @@
  typedef struct _paraformat
  {
  	UINT	cbSize;
@@ -228,7 +232,7 @@
  	union
  	{
  		WORD	wReserved;
-@@ -1143,7 +1264,7 @@
+@@ -1143,7 +1268,7 @@
  	LONG	dxStartIndent;
  	LONG	dxRightIndent;
  	LONG	dxOffset;
@@ -237,7 +241,7 @@
  	SHORT	cTabCount;
  	LONG	rgxTabs[MAX_TAB_STOPS];
  } PARAFORMAT;
-@@ -1158,13 +1279,13 @@
+@@ -1158,13 +1283,13 @@
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)
  	BYTE	bOutlineLevel;			// Outline level
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent
@@ -254,7 +258,7 @@
  };
  
  #else	// Regular C-style	
-@@ -1192,13 +1313,13 @@
+@@ -1192,13 +1317,13 @@
  	BYTE	bLineSpacingRule;		// Rule for line spacing (see tom.doc)	
  	BYTE	bOutlineLevel;			// Outline Level						
  	WORD	wShadingWeight; 		// Shading in hundredths of a per cent	
@@ -271,7 +275,7 @@
  } PARAFORMAT2;
  
  #endif // C++	
-@@ -1256,6 +1377,44 @@
+@@ -1256,6 +1381,44 @@
  					| PFM_LINESPACING | PFM_STYLE | PFM_SHADING | PFM_BORDER \
  					| PFM_NUMBERINGTAB | PFM_NUMBERINGSTART | PFM_NUMBERINGSTYLE)
  
@@ -316,7 +320,7 @@
  #define PFE_RTLPARA 			(PFM_RTLPARA		 >> 16)
  #define PFE_KEEP				(PFM_KEEP			 >> 16) // (*)	
  #define PFE_KEEPNEXT			(PFM_KEEPNEXT		 >> 16) // (*)	
-@@ -1282,6 +1441,16 @@
+@@ -1282,6 +1445,16 @@
  #define PFN_LCROMAN 	5		// tomListNumberAsLCRoman:	i, ii, iii, ...
  #define PFN_UCROMAN 	6		// tomListNumberAsUCRoman:	I, II, III, ...
  
@@ -333,7 +337,7 @@
  // PARAFORMAT2 wNumberingStyle options 
  #define PFNS_PAREN		0x000	// default, e.g.,				  1)	
  #define PFNS_PARENS 	0x100	// tomListParentheses/256, e.g., (1)	
-@@ -1290,6 +1459,16 @@
+@@ -1290,6 +1463,16 @@
  #define PFNS_NONUMBER	0x400	// Used for continuation w/o number
  
  #define PFNS_NEWNUMBER	0x8000	// Start new number with wNumberingStart		
@@ -350,7 +354,7 @@
  								// (can be combined with other PFNS_xxx)
  // PARAFORMAT alignment options 
  #define PFA_LEFT			 1
-@@ -1330,7 +1509,7 @@
+@@ -1330,7 +1513,7 @@
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -359,7 +363,25 @@
  } SELCHANGE;
  
  #if (_RICHEDIT_VER >= 0x0800)
-@@ -1439,7 +1618,7 @@
+@@ -1358,6 +1541,17 @@
+ // a right-mouse drag drop should be generated.  The IOleObject parameter
+ // will really be the IDataObject for the drop
+ #define GCM_RIGHTMOUSEDROP	0x8000
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef _WIN32META_ANNOTATION_("FlagsEnum(SEL_EMPTY, SEL_TEXT, SEL_OBJECT, SEL_MULTICHAR, SEL_MULTIOBJECT, GCM_RIGHTMOUSEDROP)",
++    SEL_EMPTY,
++    SEL_TEXT,
++    SEL_OBJECT,
++    SEL_MULTICHAR,
++    SEL_MULTIOBJECT,
++    GCM_RIGHTMOUSEDROP)
++    unsigned short RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE;
++#endif
+ 
+ #if (_RICHEDIT_VER >= 0x0800)
+ typedef struct _getcontextmenuex
+@@ -1439,7 +1633,7 @@
  {
  	NMHDR nmhdr;
  	CHARRANGE chrg;
@@ -368,7 +390,7 @@
  } ENCORRECTTEXT;
  
  // East Asia specific 
-@@ -1466,7 +1645,7 @@
+@@ -1466,7 +1660,7 @@
  // Paste Special 
  typedef struct _repastespecial
  {
@@ -377,7 +399,7 @@
  	DWORD_PTR	dwParam;
  } REPASTESPECIAL;
  
-@@ -1506,11 +1685,20 @@
+@@ -1506,11 +1700,20 @@
  #define GT_RAWTEXT		4
  #define GT_NOHIDDENTEXT 8
  
@@ -399,7 +421,7 @@
  	UINT	codepage;		// Code page for translation (CP_ACP for sys default,
  							//	1200 for Unicode, -1 for control default)
  	LPCSTR	lpDefaultChar;	// Replacement for unmappable chars
-@@ -1525,10 +1713,20 @@
+@@ -1525,10 +1728,20 @@
  #define GTL_NUMCHARS	8	// Return number of characters
  #define GTL_NUMBYTES	16	// Return number of _bytes_
  
@@ -421,7 +443,7 @@
  	UINT	codepage;		// Code page for translation (CP_ACP for default,
  							//	1200 for Unicode)
  } GETTEXTLENGTHEX;
-@@ -1600,6 +1798,7 @@
+@@ -1600,6 +1813,7 @@
  	WCHAR chHyph;			// Depending on hyphenation type, character added, changed, etc.
  } HYPHRESULT;
  
@@ -429,7 +451,7 @@
  void WINAPI HyphenateProc(_In_ WCHAR *pszWord, LANGID langid, long ichExceed, HYPHRESULT *phyphresult);
  typedef struct tagHyphenateInfo
  {
-@@ -1629,6 +1828,19 @@
+@@ -1629,6 +1843,19 @@
  #define PFA_FULL_SCALED 	 7	// Not implemented
  #define PFA_FULL_GLYPHS 	 8	// Not implemented
  

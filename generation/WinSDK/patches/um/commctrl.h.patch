@@ -1,3 +1,4 @@
+diff --git a/um/commctrl.h b/um/commctrl.h
 --- a/um/commctrl.h
 +++ b/um/commctrl.h
 @@ -13,6 +13,66 @@
@@ -165,7 +166,7 @@
      LPARAM lItemlParam;
  } NMCUSTOMDRAW, *LPNMCUSTOMDRAW;
  
-@@ -546,17 +655,25 @@
+@@ -546,17 +655,26 @@
  #define ILC_ORIGINALSIZE        0x00010000      // Imagelist should accept smaller than set images and apply OriginalSize based on image added
  #define ILC_HIGHQUALITYSCALE    0x00020000      // Imagelist should enable use of the high quality scaler.
  #endif
@@ -182,6 +183,7 @@
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI int         WINAPI ImageList_Add(_In_ HIMAGELIST himl, _In_ HBITMAP hbmImage, _In_opt_ HBITMAP hbmMask);
  
++_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI int         WINAPI ImageList_ReplaceIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ HICON hicon);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI COLORREF    WINAPI ImageList_SetBkColor(_In_ HIMAGELIST himl, _In_ COLORREF clrBk);
@@ -191,7 +193,7 @@
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_SetOverlayImage(_In_ HIMAGELIST himl, _In_ int iImage, _In_ int iOverlay);
  
  #define     ImageList_AddIcon(himl, hicon) ImageList_ReplaceIcon(himl, -1, hicon)
-@@ -580,6 +697,24 @@
+@@ -580,6 +698,24 @@
  #define ILD_SELECTED            ILD_BLEND50
  #define ILD_FOCUS               ILD_BLEND25
  #define ILD_BLEND               ILD_BLEND50
@@ -216,7 +218,7 @@
  #define CLR_HILIGHT             CLR_DEFAULT
  
  #define ILS_NORMAL              0x00000000
-@@ -593,7 +728,8 @@
+@@ -593,7 +729,8 @@
  #define ILGT_ASYNC              0x00000001
  #endif
  
@@ -226,7 +228,7 @@
  
  
  #ifdef _WIN32
-@@ -602,15 +738,21 @@
+@@ -602,15 +739,23 @@
  #define HBITMAP_CALLBACK               ((HBITMAP)-1)       // only for SparseImageList
  #endif
  
@@ -240,10 +242,12 @@
 +WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawEx(_In_ HIMAGELIST himl, _In_ int i, _In_ HDC hdcDst, _In_ int x, _In_ int y, _In_ int dx, _In_ int dy, _In_ COLORREF rgbBk, _In_ COLORREF rgbFg, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT fStyle);
 +_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_DrawIndirect(_In_ IMAGELISTDRAWPARAMS* pimldp);
++_Win32_SupportedOS_WindowsVista_
  WINCOMMCTRLAPI BOOL        WINAPI ImageList_Remove(_In_ HIMAGELIST himl, _In_ int i);
 -WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _In_ UINT flags);
 -WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
 -WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageW(HINSTANCE hi, LPCWSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, UINT uFlags);
++_Win32_SupportedOS_WindowsVista_
 +WINCOMMCTRLAPI HICON       WINAPI ImageList_GetIcon(_In_ HIMAGELIST himl, _In_ int i, _Win32_AssociatedEnum_(IMAGE_LIST_DRAW_STYLE) _In_ UINT flags);
 +_Win32_SupportedOS_WindowsVista_
 +WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_LoadImageA(HINSTANCE hi, LPCSTR lpbmp, int cx, int cGrow, COLORREF crMask, UINT uType, _Win32_AssociatedEnum_(IMAGE_FLAGS) UINT uFlags);
@@ -252,7 +256,7 @@
  
  #ifdef UNICODE
  #define ImageList_LoadImage     ImageList_LoadImageW
-@@ -620,16 +762,30 @@
+@@ -620,16 +765,30 @@
  
  #define ILCF_MOVE   (0x00000000)
  #define ILCF_SWAP   (0x00000001)
@@ -285,7 +289,7 @@
  _Success_(return != NULL) WINCOMMCTRLAPI HIMAGELIST  WINAPI ImageList_GetDragImage(_Out_opt_ POINT *ppt, _Out_opt_ POINT *pptHotspot);
  
  #define     ImageList_RemoveAll(himl) ImageList_Remove(himl, -1)
-@@ -638,16 +794,25 @@
+@@ -638,16 +797,25 @@
  
  struct IStream;
  
@@ -314,7 +318,7 @@
  #endif
  
  
-@@ -662,16 +827,22 @@
+@@ -662,16 +830,22 @@
  } IMAGEINFO, *LPIMAGEINFO;
  #endif
  
@@ -337,7 +341,7 @@
  WINCOMMCTRLAPI HRESULT WINAPI HIMAGELIST_QueryInterface(_In_ HIMAGELIST himl, _In_ REFIID riid, _Outptr_ void **ppv);
  
  #ifdef __cplusplus
-@@ -734,6 +905,13 @@
+@@ -734,6 +908,13 @@
  #define HDFT_ISDATE         0x0002      // HD_ITEM.pvFilter points to a DWORD (dos date)
  
  #define HDFT_HASNOVALUE     0x8000      // clear the filter, by setting this bit
@@ -351,7 +355,7 @@
  
  #ifdef UNICODE
  #define HD_TEXTFILTER HD_TEXTFILTERW
-@@ -765,19 +943,19 @@
+@@ -765,19 +946,19 @@
  
  typedef struct _HD_ITEMA
  {
@@ -375,7 +379,7 @@
  #endif
  } HDITEMA, *LPHDITEMA;
  
-@@ -787,19 +965,19 @@
+@@ -787,19 +968,19 @@
  
  typedef struct _HD_ITEMW
  {
@@ -399,7 +403,7 @@
  #endif
  } HDITEMW, *LPHDITEMW;
  
-@@ -826,6 +1004,20 @@
+@@ -826,6 +1007,20 @@
  #define HDI_FILTER              0x0100
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #define HDI_STATE               0x0200
@@ -420,7 +424,7 @@
  #endif
  
  // HDF_ flags are shared with the listview control (LVCFMT_ flags)
-@@ -852,10 +1044,33 @@
+@@ -852,10 +1047,33 @@
  #define HDF_CHECKED             0x0080
  #define HDF_FIXEDWIDTH          0x0100 // Can't resize the column; same as LVCFMT_FIXED_WIDTH
  #define HDF_SPLITBUTTON      0x1000000 // Column is a split button; same as LVCFMT_SPLITBUTTON
@@ -454,7 +458,7 @@
  #endif
  
  #define HDM_GETITEMCOUNT        (HDM_FIRST + 0)
-@@ -934,6 +1149,22 @@
+@@ -934,6 +1152,22 @@
  #define HHT_ONITEMSTATEICON     0x1000
  #define HHT_ONDROPDOWN          0x2000
  #define HHT_ONOVERFLOW          0x4000
@@ -477,7 +481,7 @@
  #endif
  
  #define HD_HITTESTINFO HDHITTESTINFO
-@@ -941,7 +1172,7 @@
+@@ -941,7 +1175,7 @@
  typedef struct _HD_HITTESTINFO
  {
      POINT pt;
@@ -486,7 +490,7 @@
      int iItem;
  } HDHITTESTINFO, *LPHDHITTESTINFO;
  
-@@ -1145,7 +1376,7 @@
+@@ -1145,7 +1379,7 @@
  {
      NMHDR   hdr;
      int     iItem;
@@ -495,7 +499,7 @@
      LPWSTR  pszText;
      int     cchTextMax;
      int     iImage;
-@@ -1156,7 +1387,7 @@
+@@ -1156,7 +1390,7 @@
  {
      NMHDR   hdr;
      int     iItem;
@@ -504,7 +508,7 @@
      LPSTR   pszText;
      int     cchTextMax;
      int     iImage;
-@@ -1221,11 +1452,15 @@
+@@ -1221,11 +1455,15 @@
      COLORREF to;
  } COLORMAP, *LPCOLORMAP;
  
@@ -520,7 +524,7 @@
  WINCOMMCTRLAPI HBITMAP WINAPI CreateMappedBitmap(HINSTANCE hInstance, INT_PTR idBitmap,
                                    UINT wFlags, _In_opt_ LPCOLORMAP lpColorMap,
                                    int iNumMaps);
-@@ -1492,10 +1727,16 @@
+@@ -1492,10 +1730,16 @@
  
  typedef struct {
      int   iButton;
@@ -538,7 +542,7 @@
  
  #define TB_GETINSERTMARK        (WM_USER + 79)  // lParam == LPTBINSERTMARK
  #define TB_SETINSERTMARK        (WM_USER + 80)  // lParam == LPTBINSERTMARK
-@@ -1545,10 +1786,21 @@
+@@ -1545,10 +1789,21 @@
  #define TBIF_SIZE               0x00000040
  
  #define TBIF_BYINDEX            0x80000000 // this specifies that the wparam in Get/SetButtonInfo is an index, not id
@@ -561,7 +565,7 @@
      int idCommand;
      int iImage;
      BYTE fsState;
-@@ -1561,7 +1813,7 @@
+@@ -1561,7 +1816,7 @@
  
  typedef struct {
      UINT cbSize;
@@ -570,7 +574,7 @@
      int idCommand;
      int iImage;
      BYTE fsState;
-@@ -1680,7 +1932,7 @@
+@@ -1680,7 +1935,7 @@
      NMHDR   hdr;
      int     idOld;
      int     idNew;
@@ -579,7 +583,7 @@
  } NMTBHOTITEM, * LPNMTBHOTITEM;
  
  // Hot item change flags
-@@ -1694,6 +1946,19 @@
+@@ -1694,6 +1949,19 @@
  #define HICF_RESELECT       0x00000040          // hot item reselected
  #define HICF_LMOUSE         0x00000080          // left mouse button selected
  #define HICF_TOGGLEDROPDOWN 0x00000100          // Toggle button's dropdown state
@@ -599,7 +603,7 @@
  
  
  #define TBN_HOTITEMCHANGE       (TBN_FIRST - 13)
-@@ -1771,10 +2036,16 @@
+@@ -1771,10 +2039,16 @@
  #define TBNF_IMAGE              0x00000001
  #define TBNF_TEXT               0x00000002
  #define TBNF_DI_SETITEM         0x10000000
@@ -617,7 +621,7 @@
      int idCommand;    // [in] id of button we're requesting info for
      DWORD_PTR lParam;  // [in] lParam of button
      int iImage;       // [out] image index
-@@ -1784,7 +2055,7 @@
+@@ -1784,7 +2058,7 @@
  
  typedef struct {
      NMHDR hdr;
@@ -626,7 +630,7 @@
      int idCommand;    // [in] id of button we're requesting info for
      DWORD_PTR lParam;  // [in] lParam of button
      int iImage;       // [out] image index
-@@ -2132,7 +2403,7 @@
+@@ -2132,7 +2406,7 @@
  typedef struct tagNMREBAR
  {
      NMHDR   hdr;
@@ -635,7 +639,7 @@
      UINT    uBand;
      UINT    fStyle;
      UINT    wID;
-@@ -2143,6 +2414,12 @@
+@@ -2143,6 +2417,12 @@
  #define RBNM_ID         0x00000001
  #define RBNM_STYLE      0x00000002
  #define RBNM_LPARAM     0x00000004
@@ -648,7 +652,7 @@
  
  
  typedef struct tagNMRBAUTOSIZE
-@@ -2241,7 +2518,7 @@
+@@ -2241,7 +2521,7 @@
  
  typedef struct tagTOOLINFOA {
      UINT cbSize;
@@ -657,7 +661,7 @@
      HWND hwnd;
      UINT_PTR uId;
      RECT rect;
-@@ -2255,7 +2532,7 @@
+@@ -2255,7 +2535,7 @@
  
  typedef struct tagTOOLINFOW {
      UINT cbSize;
@@ -666,7 +670,7 @@
      HWND hwnd;
      UINT_PTR uId;
      RECT rect;
-@@ -2310,6 +2587,18 @@
+@@ -2310,6 +2590,18 @@
  #define TTF_TRANSPARENT         0x0100
  #define TTF_PARSELINKS          0x1000
  #define TTF_DI_SETITEM          0x8000       // valid only on the TTN_NEEDTEXT callback
@@ -685,7 +689,7 @@
  
  
  #define TTDT_AUTOMATIC          0
-@@ -2326,6 +2615,16 @@
+@@ -2326,6 +2618,16 @@
  #define TTI_INFO_LARGE          4
  #define TTI_WARNING_LARGE       5
  #define TTI_ERROR_LARGE         6
@@ -702,7 +706,7 @@
  #endif  // (NTDDI_VERSION >= NTDDI_VISTA)
  
  // Tool Tip Messages
-@@ -2476,7 +2775,7 @@
+@@ -2476,7 +2778,7 @@
      LPSTR lpszText;
      char szText[80];
      HINSTANCE hinst;
@@ -711,7 +715,7 @@
      LPARAM lParam;
  } NMTTDISPINFOA, *LPNMTTDISPINFOA;
  
-@@ -2485,7 +2784,7 @@
+@@ -2485,7 +2787,7 @@
      LPWSTR lpszText;
      WCHAR szText[80];
      HINSTANCE hinst;
@@ -720,7 +724,7 @@
      LPARAM lParam;
  } NMTTDISPINFOW, *LPNMTTDISPINFOW;
  
-@@ -2516,10 +2815,16 @@
+@@ -2516,10 +2818,16 @@
  
  // end_r_commctrl
  
@@ -737,7 +741,7 @@
  WINCOMMCTRLAPI HWND WINAPI CreateStatusWindowW(LONG style, LPCWSTR lpszText, HWND hwndParent, UINT wID);
  
  #ifdef UNICODE
-@@ -2602,8 +2907,11 @@
+@@ -2602,8 +2910,11 @@
  
  #ifndef NOMENUHELP
  
@@ -749,7 +753,7 @@
  WINCOMMCTRLAPI void WINAPI GetEffectiveClientRect(_In_ HWND hWnd, _Out_ LPRECT lprc,  _In_z_ const INT *lpInfo);
  
  #define MINSYSCOMMAND   SC_SIZE
-@@ -2739,7 +3047,7 @@
+@@ -2739,7 +3050,7 @@
  #ifndef NODRAGLIST
  
  typedef struct tagDRAGLISTINFO {
@@ -758,7 +762,7 @@
      HWND hWnd;
      POINT ptCursor;
  } DRAGLISTINFO, *LPDRAGLISTINFO;
-@@ -2748,6 +3056,13 @@
+@@ -2748,6 +3059,13 @@
  #define DL_DRAGGING             (WM_USER+134)
  #define DL_DROPPED              (WM_USER+135)
  #define DL_CANCELDRAG           (WM_USER+136)
@@ -772,7 +776,7 @@
  
  #define DL_CURSORSET            0
  #define DL_STOPCURSOR           1
-@@ -2756,9 +3071,12 @@
+@@ -2756,9 +3074,12 @@
  
  #define DRAGLISTMSGSTRING       TEXT("commctrl_DragListMsg")
  
@@ -785,7 +789,7 @@
  WINCOMMCTRLAPI int WINAPI LBItemFromPt(HWND hLB, POINT pt, BOOL bAutoScroll);
  
  #endif
-@@ -2823,6 +3141,7 @@
+@@ -2823,6 +3144,7 @@
  #define UDM_SETPOS32            (WM_USER+113)
  #define UDM_GETPOS32            (WM_USER+114)
  
@@ -793,7 +797,7 @@
  WINCOMMCTRLAPI HWND WINAPI CreateUpDownControl(DWORD dwStyle, int x, int y, int cx, int cy,
                                  HWND hParent, int nID, HINSTANCE hInst,
                                  HWND hBuddy,
-@@ -3012,6 +3331,13 @@
+@@ -3012,6 +3334,13 @@
  #define LIF_STATE        0x00000002
  #define LIF_ITEMID       0x00000004
  #define LIF_URL          0x00000008
@@ -807,7 +811,7 @@
  
  #define LIS_FOCUSED         0x00000001
  #define LIS_ENABLED         0x00000002
-@@ -3019,14 +3345,22 @@
+@@ -3019,14 +3348,22 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #define LIS_HOTTRACK        0x00000008
  #define LIS_DEFAULTCOLORS   0x00000010 // Don't use any custom text colors
@@ -833,7 +837,7 @@
      WCHAR       szID[MAX_LINKID_TEXT] ;
      WCHAR       szUrl[L_MAX_URL_LENGTH] ;
  } LITEM, * PLITEM ;
-@@ -3166,6 +3500,17 @@
+@@ -3166,6 +3503,17 @@
  
  #define LVIS_OVERLAYMASK        0x0F00
  #define LVIS_STATEIMAGEMASK     0xF000
@@ -851,7 +855,7 @@
  
  #define INDEXTOSTATEIMAGEMASK(i) ((i) << 12)
  
-@@ -3176,6 +3521,11 @@
+@@ -3176,6 +3524,11 @@
  #if (NTDDI_VERSION >= NTDDI_WINXP)
  #define I_GROUPIDCALLBACK   (-1)
  #define I_GROUPIDNONE       (-2)
@@ -863,7 +867,7 @@
  #endif
  #define LV_ITEM LVITEM
  
-@@ -3195,11 +3545,11 @@
+@@ -3195,11 +3548,11 @@
  
  typedef struct tagLVITEMA
  {
@@ -878,7 +882,7 @@
      LPSTR pszText;
      int cchTextMax;
      int iImage;
-@@ -3211,18 +3561,18 @@
+@@ -3211,18 +3564,18 @@
      PUINT puColumns;
  #endif
  #if (NTDDI_VERSION >= NTDDI_VISTA) // Will be unused downlevel, but sizeof(LVITEMA) must be equal to sizeof(LVITEMW)
@@ -901,7 +905,7 @@
      LPWSTR pszText;
      int cchTextMax;
      int iImage;
-@@ -3234,7 +3584,7 @@
+@@ -3234,7 +3587,7 @@
      PUINT puColumns;
  #endif
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -910,7 +914,7 @@
      int iGroup; // readonly. only valid for owner data.
  #endif
  } LVITEMW, *LPLVITEMW;
-@@ -3350,6 +3700,15 @@
+@@ -3350,6 +3703,15 @@
  #define LVFI_PARTIAL            0x0008
  #define LVFI_WRAP               0x0020
  #define LVFI_NEARESTXY          0x0040
@@ -926,7 +930,7 @@
  
  #define LV_FINDINFOA    LVFINDINFOA
  #define LV_FINDINFOW    LVFINDINFOW
-@@ -3358,7 +3717,7 @@
+@@ -3358,7 +3720,7 @@
  
  typedef struct tagLVFINDINFOA
  {
@@ -935,7 +939,7 @@
      LPCSTR psz;
      LPARAM lParam;
      POINT pt;
-@@ -3367,7 +3726,7 @@
+@@ -3367,7 +3729,7 @@
  
  typedef struct tagLVFINDINFOW
  {
@@ -944,7 +948,7 @@
      LPCWSTR psz;
      LPARAM lParam;
      POINT pt;
-@@ -3446,6 +3805,26 @@
+@@ -3446,6 +3808,26 @@
  #define LVHT_EX_GROUP              (LVHT_EX_GROUP_BACKGROUND | LVHT_EX_GROUP_COLLAPSE | LVHT_EX_GROUP_FOOTER | LVHT_EX_GROUP_HEADER | LVHT_EX_GROUP_STATEICON | LVHT_EX_GROUP_SUBSETLINK)
  #define LVHT_EX_ONCONTENTS         0x04000000 // On item AND not on the background
  #define LVHT_EX_FOOTER             0x08000000
@@ -971,7 +975,7 @@
  
  #define LV_HITTESTINFO LVHITTESTINFO
  
-@@ -3454,7 +3833,7 @@
+@@ -3454,7 +3836,7 @@
  typedef struct tagLVHITTESTINFO
  {
      POINT pt;
@@ -980,7 +984,7 @@
      int iItem;
      int iSubItem;    // this is was NOT in win95.  valid only for LVM_SUBITEMHITTEST
  #if (NTDDI_VERSION >= NTDDI_VISTA)
-@@ -3522,8 +3901,8 @@
+@@ -3522,8 +3904,8 @@
  
  typedef struct tagLVCOLUMNA
  {
@@ -991,7 +995,7 @@
      int cx;
      LPSTR pszText;
      int cchTextMax;
-@@ -3539,8 +3918,8 @@
+@@ -3539,8 +3921,8 @@
  
  typedef struct tagLVCOLUMNW
  {
@@ -1002,7 +1006,7 @@
      int cx;
      LPWSTR pszText;
      int cchTextMax;
-@@ -3575,6 +3954,18 @@
+@@ -3575,6 +3957,18 @@
  #define LVCF_MINWIDTH           0x0040
  #define LVCF_DEFAULTWIDTH       0x0080
  #define LVCF_IDEALWIDTH         0x0100
@@ -1021,7 +1025,7 @@
  #endif
  
  // LVCFMT_ flags up to FFFF are shared with the header control (HDF_ flags).
-@@ -3600,8 +3991,30 @@
+@@ -3600,8 +3994,30 @@
  #define LVCFMT_WRAP                0x400000 // This sub-item can be wrapped.
  #define LVCFMT_NO_TITLE            0x800000  // This sub-item doesn't have an title.
  #define LVCFMT_TILE_PLACEMENTMASK (LVCFMT_LINE_BREAK | LVCFMT_FILL)
@@ -1052,7 +1056,7 @@
  #endif
  
  #define LVM_GETCOLUMNA          (LVM_FIRST + 25)
-@@ -3949,7 +4362,7 @@
+@@ -3949,7 +4365,7 @@
  
  typedef struct tagLVBKIMAGEA
  {
@@ -1061,7 +1065,7 @@
      HBITMAP hbm;
      LPSTR pszImage;
      UINT cchImageMax;
-@@ -3958,7 +4371,7 @@
+@@ -3958,7 +4374,7 @@
  } LVBKIMAGEA, *LPLVBKIMAGEA;
  typedef struct tagLVBKIMAGEW
  {
@@ -1070,7 +1074,7 @@
      HBITMAP hbm;
      LPWSTR pszImage;
      UINT cchImageMax;
-@@ -3977,6 +4390,19 @@
+@@ -3977,6 +4393,19 @@
  #define LVBKIF_FLAG_TILEOFFSET  0x00000100
  #define LVBKIF_TYPE_WATERMARK   0x10000000
  #define LVBKIF_FLAG_ALPHABLEND  0x20000000
@@ -1090,7 +1094,7 @@
  #endif
  
  #define LVM_SETBKIMAGEA         (LVM_FIRST + 68)
-@@ -4021,6 +4447,24 @@
+@@ -4021,6 +4450,24 @@
  #define LVGF_ITEMS              0x00004000  // iFirstItem and cItems are valid
  #define LVGF_SUBSET             0x00008000  // pszSubsetTitle is valid
  #define LVGF_SUBSETITEMS        0x00010000  // readonly, cItems holds count of items in visible subset, iFirstItem is valid
@@ -1115,7 +1119,7 @@
  #endif
  
  #define LVGS_NORMAL             0x00000000
-@@ -4032,6 +4476,18 @@
+@@ -4032,6 +4479,18 @@
  #define LVGS_SELECTED           0x00000020
  #define LVGS_SUBSETED           0x00000040
  #define LVGS_SUBSETLINKFOCUSED  0x00000080
@@ -1134,7 +1138,7 @@
  
  #define LVGA_HEADER_LEFT    0x00000001
  #define LVGA_HEADER_CENTER  0x00000002
-@@ -4039,11 +4495,20 @@
+@@ -4039,11 +4498,20 @@
  #define LVGA_FOOTER_LEFT    0x00000008
  #define LVGA_FOOTER_CENTER  0x00000010
  #define LVGA_FOOTER_RIGHT   0x00000020  // Don't forget to validate exclusivity
@@ -1156,7 +1160,7 @@
      LPWSTR  pszHeader;
      int     cchHeader;
  
-@@ -4052,9 +4517,9 @@
+@@ -4052,9 +4520,9 @@
  
      int     iGroupId;
  
@@ -1169,7 +1173,7 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA) 
      LPWSTR  pszSubtitle;
      UINT    cchSubtitle;
-@@ -4196,6 +4661,13 @@
+@@ -4196,6 +4664,13 @@
  #define LVTVIF_FIXEDWIDTH     0x00000001
  #define LVTVIF_FIXEDHEIGHT    0x00000002
  #define LVTVIF_FIXEDSIZE      0x00000003
@@ -1183,7 +1187,7 @@
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #define LVTVIF_EXTENDED       0x00000004
  #endif
-@@ -4203,12 +4675,18 @@
+@@ -4203,12 +4678,18 @@
  #define LVTVIM_TILESIZE       0x00000001
  #define LVTVIM_COLUMNS        0x00000002
  #define LVTVIM_LABELMARGIN    0x00000004
@@ -1204,7 +1208,7 @@
      SIZE    sizeTile;
      int     cLines;
      RECT    rcLabelMargin;
-@@ -4366,13 +4844,18 @@
+@@ -4366,13 +4847,18 @@
  // footer item flags
  #define LVFIF_TEXT               0x00000001
  #define LVFIF_STATE              0x00000002
@@ -1224,7 +1228,7 @@
      int iItem;
      LPWSTR pszText;
      int cchTextMax;
-@@ -4442,7 +4925,7 @@
+@@ -4442,7 +4928,7 @@
      int     iSubItem;
      UINT    uNewState;
      UINT    uOldState;
@@ -1233,7 +1237,7 @@
      POINT   ptAction;
      LPARAM  lParam;
  } NMLISTVIEW, *LPNMLISTVIEW;
-@@ -4481,7 +4964,7 @@
+@@ -4481,7 +4967,7 @@
      COLORREF clrTextBk;
      int iSubItem;
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -1242,7 +1246,7 @@
  
      // Item custom draw
      COLORREF clrFace;
-@@ -4492,7 +4975,7 @@
+@@ -4492,7 +4978,7 @@
  
      // Group Custom Draw
      RECT rcText;
@@ -1251,7 +1255,7 @@
  #endif
  } NMLVCUSTOMDRAW, *LPNMLVCUSTOMDRAW;
  
-@@ -4500,6 +4983,12 @@
+@@ -4500,6 +4986,12 @@
  #define LVCDI_ITEM      0x00000000
  #define LVCDI_GROUP     0x00000001
  #define LVCDI_ITEMSLIST 0x00000002
@@ -1264,7 +1268,7 @@
  
  // ListView custom draw return values
  #define LVCDRF_NOSELECT             0x00010000
-@@ -4558,8 +5047,8 @@
+@@ -4558,8 +5050,8 @@
      NMHDR hdr;
      int iFrom;
      int iTo;
@@ -1275,7 +1279,7 @@
  } NMLVODSTATECHANGE, *LPNMLVODSTATECHANGE;
  
  #define PNM_ODSTATECHANGE   LPNMLVODSTATECHANGE
-@@ -4615,6 +5104,19 @@
+@@ -4615,6 +5107,19 @@
  
  
  #define LVIF_DI_SETITEM         0x1000
@@ -1295,7 +1299,7 @@
  
  #define LV_DISPINFOA    NMLVDISPINFOA
  #define LV_DISPINFOW    NMLVDISPINFOW
-@@ -4671,7 +5173,7 @@
+@@ -4671,7 +5176,7 @@
  typedef struct tagNMLVGETINFOTIPA
  {
      NMHDR hdr;
@@ -1304,7 +1308,7 @@
      LPSTR pszText;
      int cchTextMax;
      int iItem;
-@@ -4682,7 +5184,7 @@
+@@ -4682,7 +5187,7 @@
  typedef struct tagNMLVGETINFOTIPW
  {
      NMHDR hdr;
@@ -1313,7 +1317,7 @@
      LPWSTR pszText;
      int cchTextMax;
      int iItem;
-@@ -4693,6 +5195,11 @@
+@@ -4693,6 +5198,11 @@
  // NMLVGETINFOTIPA.dwFlag values
  
  #define LVGIT_UNFOLDED  0x0001
@@ -1325,7 +1329,7 @@
  
  #define LVN_GETINFOTIPA          (LVN_FIRST-57)
  #define LVN_GETINFOTIPW          (LVN_FIRST-58)
-@@ -4760,12 +5267,16 @@
+@@ -4760,12 +5270,16 @@
  
  
  #define EMF_CENTERED            0x00000001  // render markup centered in the listview area
@@ -1343,7 +1347,7 @@
      WCHAR szMarkup[L_MAX_URL_LENGTH];   // markup displayed
  } NMLVEMPTYMARKUP;
  
-@@ -4869,6 +5380,22 @@
+@@ -4869,6 +5383,22 @@
  #define TVIS_EX_DISABLED        0x0002
  #endif
  #define TVIS_EX_ALL             0x0002
@@ -1366,7 +1370,7 @@
  
  // Structure for TreeView's NM_TVSTATEIMAGECHANGING notification
  typedef struct tagNMTVSTATEIMAGECHANGING
-@@ -4892,10 +5419,10 @@
+@@ -4892,10 +5422,10 @@
  #define TV_ITEM                 TVITEM
  
  typedef struct tagTVITEMA {
@@ -1380,7 +1384,7 @@
      LPSTR     pszText;
      int       cchTextMax;
      int       iImage;
-@@ -4905,10 +5432,10 @@
+@@ -4905,10 +5435,10 @@
  } TVITEMA, *LPTVITEMA;
  
  typedef struct tagTVITEMW {
@@ -1394,7 +1398,7 @@
      LPWSTR    pszText;
      int       cchTextMax;
      int       iImage;
-@@ -4919,7 +5446,7 @@
+@@ -4919,7 +5449,7 @@
  
  // only used for Get and Set messages.  no notifies
  typedef struct tagTVITEMEXA {
@@ -1403,7 +1407,7 @@
      HTREEITEM hItem;
      UINT      state;
      UINT      stateMask;
-@@ -4941,7 +5468,7 @@
+@@ -4941,7 +5471,7 @@
  } TVITEMEXA, *LPTVITEMEXA;
  // only used for Get and Set messages.  no notifies
  typedef struct tagTVITEMEXW {
@@ -1412,7 +1416,7 @@
      HTREEITEM hItem;
      UINT      state;
      UINT      stateMask;
-@@ -5198,7 +5725,7 @@
+@@ -5198,7 +5728,7 @@
  
  typedef struct tagTVHITTESTINFO {
      POINT       pt;
@@ -1421,7 +1425,7 @@
      HTREEITEM   hItem;
  } TVHITTESTINFO, *LPTVHITTESTINFO;
  
-@@ -5215,6 +5742,21 @@
+@@ -5215,6 +5745,21 @@
  #define TVHT_BELOW              0x0200
  #define TVHT_TORIGHT            0x0400
  #define TVHT_TOLEFT             0x0800
@@ -1443,7 +1447,7 @@
  
  
  #define TVM_CREATEDRAGIMAGE     (TV_FIRST + 18)
-@@ -5432,7 +5974,7 @@
+@@ -5432,7 +5977,7 @@
  
  typedef struct tagNMTREEVIEWA {
      NMHDR       hdr;
@@ -1452,7 +1456,7 @@
      TVITEMA    itemOld;
      TVITEMA    itemNew;
      POINT       ptDrag;
-@@ -5441,7 +5983,7 @@
+@@ -5441,7 +5986,7 @@
  
  typedef struct tagNMTREEVIEWW {
      NMHDR       hdr;
@@ -1461,7 +1465,7 @@
      TVITEMW    itemOld;
      TVITEMW    itemNew;
      POINT       ptDrag;
-@@ -5465,6 +6007,17 @@
+@@ -5465,6 +6010,17 @@
  #define TVC_UNKNOWN             0x0000
  #define TVC_BYMOUSE             0x0001
  #define TVC_BYKEYBOARD          0x0002
@@ -1479,7 +1483,7 @@
  
  #define TVN_GETDISPINFOA        (TVN_FIRST-3)
  #define TVN_GETDISPINFOW        (TVN_FIRST-52)
-@@ -5472,6 +6025,20 @@
+@@ -5472,6 +6028,20 @@
  #define TVN_SETDISPINFOW        (TVN_FIRST-53)
  
  #define TVIF_DI_SETITEM         0x1000
@@ -1500,7 +1504,7 @@
  
  #define TV_DISPINFOA            NMTVDISPINFOA
  #define TV_DISPINFOW            NMTVDISPINFOW
-@@ -5698,10 +6265,20 @@
+@@ -5698,10 +6268,20 @@
  #define CBEIF_LPARAM            0x00000020
  
  #define CBEIF_DI_SETITEM        0x10000000
@@ -1522,7 +1526,7 @@
      INT_PTR iItem;
      LPSTR pszText;
      int cchTextMax;
-@@ -5716,7 +6293,7 @@
+@@ -5716,7 +6296,7 @@
  
  typedef struct tagCOMBOBOXEXITEMW
  {
@@ -1531,7 +1535,7 @@
      INT_PTR iItem;
      LPWSTR pszText;
      int cchTextMax;
-@@ -5961,10 +6538,23 @@
+@@ -5961,10 +6541,23 @@
  #define TCIF_RTLREADING         0x0004
  #define TCIF_PARAM              0x0008
  #define TCIF_STATE              0x0010
@@ -1555,7 +1559,7 @@
  
  #define TC_ITEMHEADERA         TCITEMHEADERA
  #define TC_ITEMHEADERW         TCITEMHEADERW
-@@ -5972,7 +6562,7 @@
+@@ -5972,7 +6565,7 @@
  
  typedef struct tagTCITEMHEADERA
  {
@@ -1564,7 +1568,7 @@
      UINT lpReserved1;
      UINT lpReserved2;
      LPSTR pszText;
-@@ -5982,7 +6572,7 @@
+@@ -5982,7 +6575,7 @@
  
  typedef struct tagTCITEMHEADERW
  {
@@ -1573,7 +1577,7 @@
      UINT lpReserved1;
      UINT lpReserved2;
      LPWSTR pszText;
-@@ -6005,9 +6595,9 @@
+@@ -6005,9 +6598,9 @@
  
  typedef struct tagTCITEMA
  {
@@ -1586,7 +1590,7 @@
      LPSTR pszText;
      int cchTextMax;
      int iImage;
-@@ -6017,9 +6607,9 @@
+@@ -6017,9 +6610,9 @@
  
  typedef struct tagTCITEMW
  {
@@ -1599,7 +1603,7 @@
      LPWSTR pszText;
      int cchTextMax;
      int iImage;
-@@ -6104,6 +6694,13 @@
+@@ -6104,6 +6697,13 @@
  #define TCHT_ONITEMICON         0x0002
  #define TCHT_ONITEMLABEL        0x0004
  #define TCHT_ONITEM             (TCHT_ONITEMICON | TCHT_ONITEMLABEL)
@@ -1613,7 +1617,7 @@
  
  #define LPTC_HITTESTINFO        LPTCHITTESTINFO
  #define TC_HITTESTINFO          TCHITTESTINFO
-@@ -6111,7 +6708,7 @@
+@@ -6111,7 +6711,7 @@
  typedef struct tagTCHITTESTINFO
  {
      POINT pt;
@@ -1622,7 +1626,7 @@
  } TCHITTESTINFO, *LPTCHITTESTINFO;
  
  #define TCM_HITTEST             (TCM_FIRST + 13)
-@@ -6396,7 +6993,7 @@
+@@ -6396,7 +6996,7 @@
          UINT cbSize;
          POINT pt;
  
@@ -1631,7 +1635,7 @@
          SYSTEMTIME st;
  #if (NTDDI_VERSION >= NTDDI_VISTA)
          RECT rc;
-@@ -6435,6 +7032,29 @@
+@@ -6435,6 +7035,29 @@
  #define MCHT_CALENDARWEEKNUM            (MCHT_CALENDAR | 0x0003)
  #define MCHT_CALENDARDATEMIN            (MCHT_CALENDAR | 0x0004)
  #define MCHT_CALENDARDATEMAX            (MCHT_CALENDAR | 0x0005)
@@ -1661,7 +1665,7 @@
  
  // set first day of week to iDay:
  // 0 for Monday, 1 for Tuesday, ..., 6 for Sunday
-@@ -6500,6 +7120,14 @@
+@@ -6500,6 +7123,14 @@
  #define MCMV_DECADE     2
  #define MCMV_CENTURY    3
  #define MCMV_MAX        MCMV_CENTURY
@@ -1676,7 +1680,7 @@
  
  #define MCM_GETCURRENTVIEW (MCM_FIRST + 22)
  #define MonthCal_GetCurrentView(hmc) \
-@@ -6519,16 +7147,34 @@
+@@ -6519,16 +7150,34 @@
  #define MCGIP_CALENDARBODY         6
  #define MCGIP_CALENDARROW          7
  #define MCGIP_CALENDARCELL         8
@@ -1713,7 +1717,7 @@
      int iCalendar;
      int iRow;
      int iCol;
-@@ -6613,8 +7259,8 @@
+@@ -6613,8 +7262,8 @@
  typedef struct tagNMVIEWCHANGE
  {
      NMHDR           nmhdr;  // this must be first, so we don't break WM_NOTIFY
@@ -1724,7 +1728,7 @@
  } NMVIEWCHANGE, *LPNMVIEWCHANGE;
  
  #define MCN_VIEWCHANGE      (MCN_FIRST - 4) // -750
-@@ -6780,7 +7426,7 @@
+@@ -6780,7 +7429,7 @@
  typedef struct tagNMDATETIMECHANGE
  {
      NMHDR       nmhdr;
@@ -1733,7 +1737,7 @@
      SYSTEMTIME  st;         // valid iff dwFlags==GDT_VALID
  } NMDATETIMECHANGE, *LPNMDATETIMECHANGE;
  
-@@ -6910,6 +7556,11 @@
+@@ -6910,6 +7559,11 @@
  #define GDT_ERROR    -1
  #define GDT_VALID    0
  #define GDT_NONE     1
@@ -1745,7 +1749,7 @@
  
  
  #endif // _WIN32
-@@ -7086,12 +7737,26 @@
+@@ -7086,12 +7740,26 @@
  #define PGF_SCROLLDOWN      2
  #define PGF_SCROLLLEFT      4
  #define PGF_SCROLLRIGHT     8
@@ -1772,7 +1776,7 @@
  
  
  #ifdef _WIN32
-@@ -7101,9 +7766,9 @@
+@@ -7101,9 +7769,9 @@
  // This structure is sent along with PGN_SCROLL notifications
  typedef struct {
      NMHDR hdr;
@@ -1784,7 +1788,7 @@
      int  iXpos;             // Horizontal scroll position
      int  iYpos;             // Vertical scroll position
      int  iScroll;           // [in/out] Amount to scroll
-@@ -7119,10 +7784,15 @@
+@@ -7119,10 +7787,15 @@
  
  #define PGF_CALCWIDTH       1
  #define PGF_CALCHEIGHT      2
@@ -1801,7 +1805,7 @@
      int     iWidth;
      int     iHeight;
  }NMPGCALCSIZE, *LPNMPGCALCSIZE;
-@@ -7209,12 +7879,20 @@
+@@ -7209,12 +7882,20 @@
  #define BUTTON_IMAGELIST_ALIGN_TOP      2
  #define BUTTON_IMAGELIST_ALIGN_BOTTOM   3
  #define BUTTON_IMAGELIST_ALIGN_CENTER   4       // Doesn't draw text
@@ -1823,7 +1827,7 @@
  } BUTTON_IMAGELIST, *PBUTTON_IMAGELIST;
  
  #define BCM_GETIDEALSIZE        (BCM_FIRST + 0x0001)
-@@ -7239,7 +7917,7 @@
+@@ -7239,7 +7920,7 @@
  typedef struct tagNMBCHOTITEM
  {
      NMHDR   hdr;
@@ -1832,7 +1836,7 @@
  } NMBCHOTITEM, * LPNMBCHOTITEM;
  
  #define BCN_HOTITEMCHANGE       (BCN_FIRST + 0x0001)
-@@ -7407,7 +8085,7 @@
+@@ -7407,7 +8088,7 @@
      DWORD   cbStruct;
      LPCWSTR pszTitle;
      LPCWSTR pszText;
@@ -1841,7 +1845,7 @@
  } EDITBALLOONTIP, *PEDITBALLOONTIP;
  #define EM_SHOWBALLOONTIP   (ECM_FIRST + 3)     // Show a balloon tip associated to the edit control
  #define Edit_ShowBalloonTip(hwnd, peditballoontip) \
-@@ -7626,7 +8304,11 @@
+@@ -7626,7 +8307,11 @@
  
  typedef HRESULT (CALLBACK *PFTASKDIALOGCALLBACK)(_In_ HWND hwnd, _In_ UINT msg, _In_ WPARAM wParam, _In_ LPARAM lParam, _In_ LONG_PTR lpRefData);
  
@@ -1854,7 +1858,7 @@
  {
      TDF_ENABLE_HYPERLINKS               = 0x0001,
      TDF_USE_HICON_MAIN                  = 0x0002,
-@@ -7762,7 +8444,9 @@
+@@ -7762,7 +8447,9 @@
  } TASKDIALOGCONFIG;
  
  
@@ -1864,7 +1868,7 @@
  WINCOMMCTRLAPI HRESULT WINAPI TaskDialog(_In_opt_ HWND hwndOwner, _In_opt_ HINSTANCE hInstance, _In_opt_ PCWSTR pszWindowTitle, _In_opt_ PCWSTR pszMainInstruction, _In_opt_ PCWSTR pszContent, TASKDIALOG_COMMON_BUTTON_FLAGS dwCommonButtons, _In_opt_ PCWSTR pszIcon, _Out_opt_ int *pnButton);
  
  
-@@ -7781,9 +8465,11 @@
+@@ -7781,9 +8468,11 @@
  // === MUI APIs ===
  //
  #ifndef NOMUI
@@ -1876,7 +1880,7 @@
  LANGID WINAPI GetMUILanguage(void);
  #endif  // NOMUI
  
-@@ -7835,6 +8521,7 @@
+@@ -7835,6 +8524,7 @@
  // Declare _TrackMouseEvent.  This API tries to use the window manager's
  // implementation of TrackMouseEvent if it is present, otherwise it emulates.
  //
@@ -1884,7 +1888,7 @@
  WINCOMMCTRLAPI
  BOOL
  WINAPI
-@@ -7858,39 +8545,67 @@
+@@ -7858,39 +8548,67 @@
  #define WSB_PROP_HSTYLE     0x00000200L
  #define WSB_PROP_WINSTYLE   0x00000400L
  #define WSB_PROP_PALETTE    0x00000800L
@@ -1969,7 +1973,7 @@
  WINCOMMCTRLAPI HRESULT WINAPI UninitializeFlatSB(HWND);
  
  #endif  //  NOFLATSBAPIS
-@@ -7907,13 +8622,17 @@
+@@ -7907,13 +8625,17 @@
      LPARAM lParam, UINT_PTR uIdSubclass, DWORD_PTR dwRefData);
  
  
@@ -1987,7 +1991,7 @@
  LRESULT WINAPI DefSubclassProc(HWND hWnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
  #endif
  
-@@ -7925,13 +8644,16 @@
+@@ -7925,13 +8647,16 @@
     LIM_LARGE, // corresponds to SM_CXICON/SM_CYICON
  };
  

@@ -1,13 +1,12 @@
-diff --git a/um/portabledeviceapi.idl b/um/portabledeviceapi.idl
-index 4e8e252b..9a9d3b22 100644
 --- a/um/portabledeviceapi.idl
 +++ b/um/portabledeviceapi.idl
-@@ -1,3 +1,4 @@
+@@ -1,3 +1,5 @@
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  //-----------------------------------------------------------------------------
-@@ -196,6 +197,7 @@ interface IPortableDeviceContent : IUnknown
+@@ -196,6 +198,7 @@
  // object creation and update properties, and update objects with
  // properties and data
  //---------------------------------------------------------
@@ -15,7 +14,17 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(9b4add96-f6bf-4034-8708-eca72bf10554),
-@@ -420,6 +422,7 @@ interface IPortableDeviceDataStream : IStream
+@@ -239,6 +242,9 @@
+ 
+     HRESULT Cancel();
+ };
++
++_Win32_AnnotateMethod_(IEnumPortableDeviceObjectIDs::Next, _Win32_PreserveResult_)
++_Win32_AnnotateMethod_(IEnumPortableDeviceObjectIDs::Skip, _Win32_PreserveResult_)
+ 
+ //---------------------------------------------------------
+ // Clients use this interface to work with properties.
+@@ -420,6 +426,7 @@
  // It has several PortableDeviceApi specific methods but not
  // IStream ones.
  //---------------------------------------------------------
@@ -23,7 +32,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(5e98025f-bfc4-47a2-9a5f-bc900a507c67),
-@@ -512,6 +515,7 @@ interface IPortableDevicePropertiesBulkCallback : IUnknown
+@@ -512,6 +519,7 @@
  // be retrieved by making a QueryInterface call on an
  // existing IPortableDeviceManager interface.
  //---------------------------------------------------------
@@ -31,7 +40,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(a8abc4e9-a84a-47a9-80b3-c5d9b172a961),
-@@ -540,6 +544,7 @@ interface IPortableDeviceServiceManager : IUnknown
+@@ -540,6 +548,7 @@
  // Microsoft defines and publishes a set of well-known services 
  // that clients can query and access.
  //---------------------------------------------------------
@@ -39,7 +48,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(d3bd3a44-d7b5-40a9-98b7-2fa4d01dec08),
-@@ -591,6 +596,7 @@ interface IPortableDeviceService : IUnknown
+@@ -591,6 +600,7 @@
  // Clients use this interface to discover the static 
  // capabilities of a service. 
  //---------------------------------------------------------
@@ -47,7 +56,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(24dbd89d-413e-43e0-bd5b-197f3c56c886),
-@@ -666,6 +672,7 @@ interface IPortableDeviceServiceCapabilities : IUnknown
+@@ -666,6 +676,7 @@
  // Clients use this interface to invoke methods on  
  // a service synchronously or asynchronously. 
  //---------------------------------------------------------
@@ -55,7 +64,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(e20333c9-fd34-412d-a381-cc6f2d820df7),
-@@ -693,6 +700,7 @@ interface IPortableDeviceServiceMethods : IUnknown
+@@ -693,6 +704,7 @@
  // retrieving results of an asynchronous service method 
  // invocation
  //---------------------------------------------------------
@@ -63,7 +72,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      uuid(c424233c-afce-4828-a756-7ed7a2350083),
-@@ -751,6 +759,7 @@ interface IPortableDeviceServiceOpenCallback : IUnknown
+@@ -751,6 +763,7 @@
  // This interface is locked down as local-only.  
  // Marshaling is not supported.
  //---------------------------------------------------------
@@ -71,7 +80,7 @@ index 4e8e252b..9a9d3b22 100644
  [
      object,
      local,
-@@ -776,6 +785,7 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
+@@ -776,6 +789,7 @@
  // Marshaling is not supported.
  // Not extensible with additional members at runtime.
  //---------------------------------------------------------

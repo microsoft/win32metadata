@@ -1,9 +1,17 @@
 --- a/um/processthreadsapi.h
 +++ b/um/processthreadsapi.h
-@@ -12,6 +12,12 @@
+@@ -12,6 +12,20 @@
  
  #ifndef _PROCESSTHREADSAPI_H_
  #define _PROCESSTHREADSAPI_H_
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int THREAD_CREATION_FLAGS;
++#endif
++
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned int PROCESS_AFFINITY_AUTO_UPDATE_FLAGS;
++#endif
 +
 +#include <sal.h>
 +#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
@@ -13,7 +21,7 @@
  
  #include <apiset.h>
  #include <apisetcconv.h>
-@@ -44,7 +50,7 @@
+@@ -44,7 +58,7 @@
      DWORD   dwXCountChars;
      DWORD   dwYCountChars;
      DWORD   dwFillAttribute;
@@ -22,7 +30,7 @@
      WORD    wShowWindow;
      WORD    cbReserved2;
      LPBYTE  lpReserved2;
-@@ -64,7 +70,7 @@
+@@ -64,7 +78,7 @@
      DWORD   dwXCountChars;
      DWORD   dwYCountChars;
      DWORD   dwFillAttribute;
@@ -31,7 +39,7 @@
      WORD    wShowWindow;
      WORD    cbReserved2;
      LPBYTE  lpReserved2;
-@@ -88,6 +94,8 @@
+@@ -88,6 +102,8 @@
  
  #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
  
@@ -40,7 +48,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -131,6 +139,8 @@
+@@ -131,6 +147,8 @@
  
  #endif /* NTDDI_VERSION >= NTDDI_WIN10_MN */
  
@@ -49,7 +57,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -142,6 +152,7 @@
+@@ -142,6 +160,7 @@
      _Out_ LPFILETIME lpUserTime
      );
  
@@ -57,7 +65,7 @@
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -149,6 +160,7 @@
+@@ -149,6 +168,7 @@
      VOID
      );
  
@@ -65,7 +73,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -156,6 +168,7 @@
+@@ -156,6 +176,7 @@
      VOID
      );
  
@@ -73,7 +81,7 @@
  WINBASEAPI
  DECLSPEC_NORETURN
  VOID
-@@ -164,6 +177,8 @@
+@@ -164,6 +185,8 @@
      _In_ UINT uExitCode
      );
  
@@ -82,7 +90,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -172,6 +187,8 @@
+@@ -172,6 +195,8 @@
      _In_ UINT uExitCode
      );
  
@@ -91,7 +99,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -180,6 +197,7 @@
+@@ -180,6 +205,7 @@
      _Out_ LPDWORD lpExitCode
      );
  
@@ -99,7 +107,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -187,6 +205,8 @@
+@@ -187,6 +213,8 @@
      VOID
      );
  
@@ -108,7 +116,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -196,7 +216,7 @@
+@@ -196,7 +224,7 @@
      _In_ SIZE_T dwStackSize,
      _In_ LPTHREAD_START_ROUTINE lpStartAddress,
      _In_opt_ __drv_aliasesMem LPVOID lpParameter,
@@ -117,7 +125,7 @@
      _Out_opt_ LPDWORD lpThreadId
      );
  
-@@ -205,6 +225,8 @@
+@@ -205,6 +233,8 @@
  
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -126,7 +134,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -225,6 +247,7 @@
+@@ -225,6 +255,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -134,7 +142,7 @@
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -232,6 +255,7 @@
+@@ -232,6 +263,7 @@
      VOID
      );
  
@@ -142,7 +150,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -239,24 +263,30 @@
+@@ -239,24 +271,30 @@
      VOID
      );
  
@@ -177,7 +185,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -265,6 +295,8 @@
+@@ -265,6 +303,8 @@
      _In_ BOOL bDisablePriorityBoost
      );
  
@@ -186,7 +194,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -273,6 +305,8 @@
+@@ -273,6 +313,8 @@
      _Out_ PBOOL pDisablePriorityBoost
      );
  
@@ -195,7 +203,7 @@
  WINBASEAPI
  int
  WINAPI
-@@ -280,6 +314,7 @@
+@@ -280,6 +322,7 @@
      _In_ HANDLE hThread
      );
  
@@ -203,7 +211,7 @@
  WINBASEAPI
  DECLSPEC_NORETURN
  VOID
-@@ -293,6 +328,8 @@
+@@ -293,6 +336,8 @@
  
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -212,7 +220,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -307,6 +344,8 @@
+@@ -307,6 +352,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -221,7 +229,7 @@
  WINBASEAPI
  _Success_(return != 0)
  BOOL
-@@ -316,6 +355,8 @@
+@@ -316,6 +363,8 @@
      _Out_ LPDWORD lpExitCode
      );
  
@@ -230,7 +238,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -323,6 +364,8 @@
+@@ -323,6 +372,8 @@
      _In_ HANDLE hThread
      );
  
@@ -239,7 +247,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -334,6 +377,8 @@
+@@ -334,6 +385,8 @@
  #define TLS_OUT_OF_INDEXES ((DWORD)0xFFFFFFFF)
  #endif
  
@@ -248,7 +256,7 @@
  _Must_inspect_result_
  WINBASEAPI
  DWORD
-@@ -342,6 +387,8 @@
+@@ -342,6 +395,8 @@
      VOID
      );
  
@@ -257,7 +265,7 @@
  WINBASEAPI
  LPVOID
  WINAPI
-@@ -349,6 +396,8 @@
+@@ -349,6 +404,8 @@
      _In_ DWORD dwTlsIndex
      );
  
@@ -266,7 +274,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -357,6 +406,8 @@
+@@ -357,6 +414,8 @@
      _In_opt_ LPVOID lpTlsValue
      );
  
@@ -275,7 +283,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -364,6 +415,8 @@
+@@ -364,6 +423,8 @@
      _In_ DWORD dwTlsIndex
      );
  
@@ -284,7 +292,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -373,13 +426,15 @@
+@@ -373,13 +434,15 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ BOOL bInheritHandles,
@@ -301,7 +309,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -389,7 +444,7 @@
+@@ -389,7 +452,7 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ BOOL bInheritHandles,
@@ -310,7 +318,7 @@
      _In_opt_ LPVOID lpEnvironment,
      _In_opt_ LPCWSTR lpCurrentDirectory,
      _In_ LPSTARTUPINFOW lpStartupInfo,
-@@ -408,6 +463,8 @@
+@@ -408,6 +471,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -319,7 +327,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -416,6 +473,8 @@
+@@ -416,6 +481,8 @@
      _In_ DWORD dwFlags
      );
  
@@ -328,7 +336,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -429,6 +488,7 @@
+@@ -429,6 +496,7 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -336,7 +344,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -446,6 +506,8 @@
+@@ -446,6 +514,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -345,7 +353,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -456,7 +518,7 @@
+@@ -456,7 +526,7 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ BOOL bInheritHandles,
@@ -354,7 +362,34 @@
      _In_opt_ LPVOID lpEnvironment,
      _In_opt_ LPCWSTR lpCurrentDirectory,
      _In_ LPSTARTUPINFOW lpStartupInfo,
-@@ -517,6 +579,8 @@
+@@ -487,7 +557,7 @@
+ #if !defined(MIDL_PASS)
+ #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
+ 
+-FORCEINLINE
++_Win32_SupportedOS_Windows8_ FORCEINLINE
+ HANDLE
+ GetCurrentProcessToken (
+     VOID
+@@ -496,7 +566,7 @@
+     return (HANDLE)(LONG_PTR) -4;
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_Windows8_ FORCEINLINE
+ HANDLE
+ GetCurrentThreadToken (
+     VOID
+@@ -505,7 +575,7 @@
+     return (HANDLE)(LONG_PTR) -5;
+ }
+ 
+-FORCEINLINE
++_Win32_SupportedOS_Windows8_ FORCEINLINE
+ HANDLE
+ GetCurrentThreadEffectiveToken (
+     VOID
+@@ -517,6 +587,8 @@
  #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  #endif // !defined(MIDL_PASS)
  
@@ -363,7 +398,7 @@
  WINADVAPI
  _Must_inspect_result_
  BOOL
-@@ -532,6 +596,8 @@
+@@ -532,6 +604,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -372,7 +407,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -547,6 +613,8 @@
+@@ -547,6 +621,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -381,7 +416,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -557,14 +625,18 @@
+@@ -557,14 +633,18 @@
      _Outptr_ PHANDLE TokenHandle
      );
  
@@ -403,7 +438,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -578,6 +650,8 @@
+@@ -578,6 +658,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -412,7 +447,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -591,6 +665,8 @@
+@@ -591,6 +673,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -421,7 +456,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -615,6 +691,8 @@
+@@ -615,6 +699,8 @@
  
  #if (_WIN32_WINNT >= 0x0501)
  
@@ -430,7 +465,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -626,6 +704,8 @@
+@@ -626,6 +712,8 @@
  
  #if (_WIN32_WINNT >= 0x0502)
  
@@ -439,7 +474,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -637,6 +717,7 @@
+@@ -637,6 +725,7 @@
  
  #if (_WIN32_WINNT >= 0x0600)
  
@@ -447,7 +482,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -654,6 +735,8 @@
+@@ -654,6 +743,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -456,7 +491,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -661,6 +744,8 @@
+@@ -661,6 +752,8 @@
      _In_ HANDLE Thread
      );
  
@@ -465,7 +500,7 @@
  WINBASEAPI
  _Success_(return != FALSE)
  BOOL
-@@ -672,6 +757,7 @@
+@@ -672,6 +765,7 @@
      _When_(lpAttributeList == nullptr,_Out_) _When_(lpAttributeList != nullptr,_Inout_) PSIZE_T lpSize
      );
  
@@ -473,7 +508,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -681,6 +767,8 @@
+@@ -681,6 +775,8 @@
  
  #define PROC_THREAD_ATTRIBUTE_REPLACE_VALUE     0x00000001
  
@@ -482,7 +517,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -696,6 +784,7 @@
+@@ -696,6 +792,7 @@
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
  
@@ -490,7 +525,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -728,6 +817,8 @@
+@@ -728,6 +825,8 @@
  
  #define PROCESS_AFFINITY_ENABLE_AUTO_UPDATE 0x00000001UL
  
@@ -499,7 +534,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -736,6 +827,8 @@
+@@ -736,6 +835,8 @@
      _In_ DWORD dwFlags
      );
  
@@ -508,7 +543,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -752,6 +845,8 @@
+@@ -752,6 +853,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -517,7 +552,7 @@
  WINBASEAPI
  _Ret_maybenull_
  HANDLE
-@@ -777,6 +872,7 @@
+@@ -777,6 +880,7 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -525,7 +560,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -787,6 +883,8 @@
+@@ -787,6 +891,8 @@
  
  #endif
  
@@ -534,7 +569,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -803,6 +901,8 @@
+@@ -803,6 +909,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -543,7 +578,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -821,6 +921,8 @@
+@@ -821,6 +929,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -552,7 +587,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -837,6 +939,8 @@
+@@ -837,6 +947,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -561,7 +596,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -856,6 +960,8 @@
+@@ -856,6 +968,8 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -570,7 +605,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -871,6 +977,8 @@
+@@ -871,6 +985,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -579,7 +614,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -882,6 +990,8 @@
+@@ -882,6 +998,8 @@
      _Out_ LPFILETIME lpUserTime
      );
  
@@ -588,7 +623,7 @@
  WINBASEAPI
  HANDLE
  WINAPI
-@@ -891,11 +1001,12 @@
+@@ -891,11 +1009,12 @@
      _In_ DWORD dwProcessId
      );
  
@@ -602,7 +637,7 @@
      );
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM  | WINAPI_PARTITION_GAMES) */
-@@ -906,6 +1017,8 @@
+@@ -906,6 +1025,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -611,7 +646,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -924,6 +1037,7 @@
+@@ -924,6 +1045,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -619,7 +654,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -941,6 +1055,8 @@
+@@ -941,6 +1063,8 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -628,7 +663,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -950,6 +1066,8 @@
+@@ -950,6 +1074,8 @@
      _Out_opt_ PPROCESSOR_NUMBER lpPreviousIdealProcessor
      );
  
@@ -637,7 +672,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -958,6 +1076,7 @@
+@@ -958,6 +1084,7 @@
      _Out_ PPROCESSOR_NUMBER lpIdealProcessor
      );
  
@@ -645,7 +680,7 @@
  WINBASEAPI
  VOID
  WINAPI
-@@ -975,6 +1094,8 @@
+@@ -975,6 +1102,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -654,7 +689,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -983,6 +1104,8 @@
+@@ -983,6 +1112,8 @@
      _Out_ PBOOL pDisablePriorityBoost
      );
  
@@ -663,7 +698,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1001,6 +1124,8 @@
+@@ -1001,6 +1132,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -672,7 +707,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1018,6 +1143,8 @@
+@@ -1018,6 +1151,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINXP)
  
@@ -681,7 +716,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1049,9 +1176,11 @@
+@@ -1049,9 +1184,11 @@
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN8)
  
  typedef struct _MEMORY_PRIORITY_INFORMATION {
@@ -694,7 +729,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1062,6 +1191,8 @@
+@@ -1062,6 +1199,8 @@
      _In_ DWORD ThreadInformationSize
      );
  
@@ -703,7 +738,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1098,6 +1229,8 @@
+@@ -1098,6 +1237,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WINBLUE)
  
@@ -712,7 +747,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1110,6 +1243,8 @@
+@@ -1110,6 +1251,8 @@
  
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
  
@@ -721,7 +756,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1119,6 +1254,7 @@
+@@ -1119,6 +1262,7 @@
      _Out_opt_ PULONG_PTR OldPolicyValue
      );
  
@@ -729,7 +764,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1135,6 +1271,8 @@
+@@ -1135,6 +1279,8 @@
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -738,7 +773,7 @@
  WINBASEAPI
  DWORD
  WINAPI
-@@ -1183,7 +1321,7 @@
+@@ -1183,7 +1329,7 @@
  #endif
  
  typedef struct _PROCESS_MACHINE_INFORMATION {
@@ -747,7 +782,7 @@
      USHORT Res0;
      MACHINE_ATTRIBUTES MachineAttributes;
  } PROCESS_MACHINE_INFORMATION;
-@@ -1229,7 +1367,7 @@
+@@ -1229,7 +1375,7 @@
  } PROCESS_POWER_THROTTLING_STATE, *PPROCESS_POWER_THROTTLING_STATE;
  
  typedef struct PROCESS_PROTECTION_LEVEL_INFORMATION {
@@ -756,7 +791,7 @@
  } PROCESS_PROTECTION_LEVEL_INFORMATION;
  
  #define PROCESS_LEAP_SECOND_INFO_FLAG_ENABLE_SIXTY_SECOND   0x1
-@@ -1243,6 +1381,8 @@
+@@ -1243,6 +1389,8 @@
  
  #if (_WIN32_WINNT >= 0x0602)
  
@@ -765,7 +800,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1253,6 +1393,8 @@
+@@ -1253,6 +1401,8 @@
      _In_ DWORD ProcessInformationSize
      );
  
@@ -774,7 +809,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1324,6 +1466,8 @@
+@@ -1324,6 +1474,8 @@
  #pragma region Desktop Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
  
@@ -783,7 +818,7 @@
  WINADVAPI
  BOOL
  WINAPI
-@@ -1334,7 +1478,7 @@
+@@ -1334,7 +1486,7 @@
      _In_opt_ LPSECURITY_ATTRIBUTES lpProcessAttributes,
      _In_opt_ LPSECURITY_ATTRIBUTES lpThreadAttributes,
      _In_ BOOL bInheritHandles,
@@ -792,7 +827,7 @@
      _In_opt_ LPVOID lpEnvironment,
      _In_opt_ LPCSTR lpCurrentDirectory,
      _In_ LPSTARTUPINFOA lpStartupInfo,
-@@ -1345,6 +1489,8 @@
+@@ -1345,6 +1497,8 @@
  #define CreateProcessAsUser  CreateProcessAsUserA
  #endif
  
@@ -801,7 +836,7 @@
  WINBASEAPI
  BOOL
  WINAPI
-@@ -1419,6 +1565,7 @@
+@@ -1419,6 +1573,7 @@
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion
  
@@ -809,7 +844,7 @@
  WINBASEAPI
  HRESULT
  WINAPI
-@@ -1427,6 +1574,7 @@
+@@ -1427,6 +1582,7 @@
      _In_ PCWSTR lpThreadDescription
      );
  

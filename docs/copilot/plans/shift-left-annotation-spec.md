@@ -609,8 +609,9 @@ Do not create `PRINTER_HANDLE`, `HEAP_HANDLE`, or similar metadata-only pseudo t
 Absence of `RAIIFree` means borrowed. `GetProcessHeap`, for example, requires no custom
 annotation because its returned `HANDLE` is not automatically closed.
 
-The first argument names an already declared cleanup function. Optional remaining
-arguments are the API's invalid values:
+The first argument names a cleanup function declared in the same native translation
+unit. Its prototype may follow the producer; do not copy or reorder API declarations.
+Optional remaining arguments are the API's invalid values:
 
 ```cpp
 _Win32_RAIIFree_(SysFreeString)
@@ -618,7 +619,9 @@ _Win32_RAIIFree_Handle_(CloseHandle)
 _Win32_RAIIFree_(WinHttpCloseHandle, 0)
 ```
 
-The cleanup name must denote a function, not an integer or function-pointer variable.
+The cleanup name must resolve to one actual native function declaration, not an
+integer, function-pointer variable, or ambiguous overload. Unresolved cleanup names
+are errors even on excluded declarations. Input handle types do not infer cleanup.
 Invalid values are API-specific rather than a fixed global set. Supply compile-time
 integral expressions such as `-1` and `0`, not pointer-cast `INVALID_HANDLE_VALUE`.
 Nonintegral, unresolved, and nonconstant values are errors. The shorthand is only for
@@ -870,17 +873,21 @@ The lifecycle definitions are:
 
 ```cpp
 #define _Win32_RAIIFree_(cleanup, ...) \
-    _WIN32META_ANNOTATION_("RAIIFree", sizeof(&(cleanup)), ##__VA_ARGS__)
+    _WIN32META_ANNOTATION_("RAIIFree", "Win32Metadata.FunctionDecl:" _WIN32META_EXPAND_STRINGIFY_(cleanup), ##__VA_ARGS__)
 #define _Win32_RAIIFree_Handle_(cleanup) \
     _Win32_RAIIFree_(cleanup, -1, 0)
 ```
 
-The unevaluated `sizeof` operand preserves the cleanup's `DeclRefExpr` and compiler
-name/type checking without requiring a constant imported function address: Windows
-`dllimport` addresses are not constant annotation arguments. Extract the referenced
-function declaration, not the size. Invalid values remain integral expression
-arguments; pointer-cast `INVALID_HANDLE_VALUE` is not a valid annotation constant.
-Emit one `RAIIFreeAttribute` and one `InvalidHandleValueAttribute` per supplied value.
+The internal tagged cleanup name preserves declaration-time macro expansion without
+requiring the cleanup prototype before the producer or a constant imported function
+address. After walking the complete original translation unit, the reader binds it
+to one actual native `FunctionDecl` in the annotation's scope. Canonical redeclarations
+share an identity; unknown names, non-functions, ambiguous lookups, and untagged string
+arguments fail. The earlier typed `sizeof` transport remains readable. A raw
+`RAIIFree(CloseX, ...)` annotation string is not a supported bypass.
+Invalid values remain integral expression arguments from the first Clang parse;
+pointer-cast `INVALID_HANDLE_VALUE` is not a valid annotation constant. Emit one
+`RAIIFreeAttribute` and one `InvalidHandleValueAttribute` per supplied value.
 
 `AssociatedEnum` uses a typed expression to reference the already declared enum or
 group. `__typefix` is analyzer metadata, not a projection contract. DLL/export strings

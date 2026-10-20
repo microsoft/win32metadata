@@ -1,6 +1,16 @@
---- a/um/SetupAPI.h
-+++ b/um/SetupAPI.h
-@@ -14,6 +14,8 @@
+diff --git a/um/setupapi.h b/um/setupapi.h
+index d30e1d6ba886ba2267723e3579068177c884ef9d..5c9712c2c826e470ff2ec7396d7ede08650f51bc 100644
+--- a/um/setupapi.h
++++ b/um/setupapi.h
+@@ -1,3 +1,7 @@
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned short PROCESSOR_ARCHITECTURE;
++typedef unsigned int VER_PLATFORM;
++#endif
+ /*++
+ 
+ Copyright (c) Microsoft Corporation.  All rights reserved.
+@@ -14,6 +18,8 @@
  
  #ifndef _INC_SETUPAPI
  #define _INC_SETUPAPI
@@ -9,7 +19,7 @@
  
  #if _MSC_VER > 1000
  #pragma once
-@@ -90,6 +92,26 @@
+@@ -90,6 +96,26 @@
  extern "C" {
  #endif
  
@@ -36,7 +46,7 @@
  //
  // Define maximum string length constants
  //
-@@ -134,7 +156,7 @@
+@@ -134,7 +160,7 @@
  // Inf file information structure.
  //
  typedef struct _SP_INF_INFORMATION {
@@ -45,7 +55,38 @@
      DWORD InfCount;
      BYTE VersionData[ANYSIZE_ARRAY];
  } SP_INF_INFORMATION, *PSP_INF_INFORMATION;
-@@ -905,8 +927,8 @@
+@@ -214,10 +240,10 @@
+ 
+ typedef struct _SP_ALTPLATFORM_INFO_V2 {
+     DWORD cbSize;
+-    DWORD Platform;
++    _Win32_AssociatedEnum_(VER_PLATFORM) DWORD Platform;
+     DWORD MajorVersion;
+     DWORD MinorVersion;
+-    WORD  ProcessorArchitecture;
++    _Win32_AssociatedEnum_(PROCESSOR_ARCHITECTURE) WORD  ProcessorArchitecture;
+     union {
+         WORD  Reserved;
+         WORD  Flags;
+@@ -228,7 +254,7 @@
+ 
+ typedef struct _SP_ALTPLATFORM_INFO_V1 {
+     DWORD cbSize;
+-    DWORD Platform;
++    _Win32_AssociatedEnum_(VER_PLATFORM) DWORD Platform;
+     DWORD MajorVersion;
+     DWORD MinorVersion;
+     WORD  ProcessorArchitecture;
+@@ -506,7 +532,7 @@
+     PCWSTR Target;
+     PCWSTR Source;  // not used for delete operations
+     UINT   Win32Error;
+-    DWORD  Flags;   // such as SP_COPY_NOSKIP for copy errors
++    _Win32_AssociatedEnum_(SP_COPY_STYLE) DWORD  Flags;   // such as SP_COPY_NOSKIP for copy errors
+ } FILEPATHS_W, *PFILEPATHS_W;
+ 
+ #ifdef UNICODE
+@@ -905,8 +931,8 @@
  //
  typedef struct _SP_DEVINSTALL_PARAMS_A {
      DWORD             cbSize;
@@ -56,7 +97,7 @@
      HWND              hwndParent;
      PSP_FILE_CALLBACK InstallMsgHandler;
      PVOID             InstallMsgHandlerContext;
-@@ -918,8 +940,8 @@
+@@ -918,8 +944,8 @@
  
  typedef struct _SP_DEVINSTALL_PARAMS_W {
      DWORD             cbSize;
@@ -67,7 +108,7 @@
      HWND              hwndParent;
      PSP_FILE_CALLBACK InstallMsgHandler;
      PVOID             InstallMsgHandlerContext;
-@@ -1097,7 +1119,7 @@
+@@ -1097,7 +1123,7 @@
  //
  typedef struct _SP_CLASSINSTALL_HEADER {
      DWORD       cbSize;
@@ -76,7 +117,7 @@
  } SP_CLASSINSTALL_HEADER, *PSP_CLASSINSTALL_HEADER;
  
  
-@@ -1135,8 +1157,8 @@
+@@ -1135,8 +1161,8 @@
  //
  typedef struct _SP_PROPCHANGE_PARAMS {
      SP_CLASSINSTALL_HEADER ClassInstallHeader;
@@ -87,7 +128,7 @@
      DWORD                  HwProfile;
  } SP_PROPCHANGE_PARAMS, *PSP_PROPCHANGE_PARAMS;
  
-@@ -1146,7 +1168,7 @@
+@@ -1146,7 +1172,7 @@
  //
  typedef struct _SP_REMOVEDEVICE_PARAMS {
      SP_CLASSINSTALL_HEADER ClassInstallHeader;
@@ -96,7 +137,7 @@
      DWORD HwProfile;
  } SP_REMOVEDEVICE_PARAMS, *PSP_REMOVEDEVICE_PARAMS;
  
-@@ -1573,7 +1595,7 @@
+@@ -1573,7 +1599,7 @@
  typedef struct _SP_DRVINSTALL_PARAMS {
      DWORD cbSize;
      DWORD Rank;
@@ -105,7 +146,7 @@
      DWORD_PTR PrivateData;
      DWORD Reserved;
  } SP_DRVINSTALL_PARAMS, *PSP_DRVINSTALL_PARAMS;
-@@ -1954,7 +1976,101 @@
+@@ -1954,7 +1980,101 @@
  #define ERROR_NOT_INSTALLED (APPLICATION_ERROR_MASK|ERROR_SEVERITY_ERROR|0x1000)
  
  #endif // _SPAPI_ERRORS
@@ -208,7 +249,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -1967,6 +2083,8 @@
+@@ -1967,6 +2087,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -217,7 +258,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -1995,6 +2113,8 @@
+@@ -1995,6 +2117,8 @@
  #endif
  
  
@@ -226,7 +267,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2006,6 +2126,8 @@
+@@ -2006,6 +2130,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -235,7 +276,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2024,6 +2146,8 @@
+@@ -2024,6 +2150,8 @@
  #endif
  
  
@@ -244,7 +285,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2034,6 +2158,8 @@
+@@ -2034,6 +2162,8 @@
      _Out_ PSP_ORIGINAL_FILE_INFO_A OriginalFileInfo
      );
  
@@ -253,7 +294,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2051,6 +2177,8 @@
+@@ -2051,6 +2181,8 @@
  #endif
  
  
@@ -262,7 +303,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2063,6 +2191,8 @@
+@@ -2063,6 +2195,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -271,7 +312,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2084,6 +2214,8 @@
+@@ -2084,6 +2218,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -280,7 +321,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2096,6 +2228,8 @@
+@@ -2096,6 +2232,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -289,7 +330,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2114,6 +2248,8 @@
+@@ -2114,6 +2252,8 @@
  #define SetupGetInfDriverStoreLocation SetupGetInfDriverStoreLocationA
  #endif
  
@@ -298,7 +339,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2124,6 +2260,8 @@
+@@ -2124,6 +2264,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -307,7 +348,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2143,23 +2281,27 @@
+@@ -2143,23 +2285,27 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
  
@@ -337,7 +378,7 @@
      _Out_writes_(ReturnBufferSize) PWSTR ReturnBuffer,
      _In_ DWORD ReturnBufferSize,
      _Out_opt_ PDWORD RequiredSize
-@@ -2172,23 +2314,27 @@
+@@ -2172,23 +2318,27 @@
  #endif
  
  
@@ -367,7 +408,7 @@
      _Out_opt_ PUINT ErrorLine
      );
  
-@@ -2199,6 +2345,8 @@
+@@ -2199,6 +2349,8 @@
  #endif
  
  
@@ -376,7 +417,7 @@
  WINSETUPAPI
  HINF
  WINAPI
-@@ -2207,6 +2355,8 @@
+@@ -2207,6 +2359,8 @@
      );
  
  
@@ -385,7 +426,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2216,6 +2366,8 @@
+@@ -2216,6 +2370,8 @@
      _Out_opt_ PUINT ErrorLine
      );
  
@@ -394,7 +435,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2232,6 +2384,7 @@
+@@ -2232,6 +2388,7 @@
  #endif
  
  
@@ -402,7 +443,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -2240,6 +2393,8 @@
+@@ -2240,6 +2397,8 @@
      );
  
  
@@ -411,7 +452,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2250,6 +2405,8 @@
+@@ -2250,6 +2409,8 @@
      _Out_ PINFCONTEXT Context
      );
  
@@ -420,7 +461,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2267,6 +2424,8 @@
+@@ -2267,6 +2428,8 @@
  #endif
  
  
@@ -429,7 +470,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2276,6 +2435,8 @@
+@@ -2276,6 +2439,8 @@
      );
  
  
@@ -438,7 +479,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2285,6 +2446,8 @@
+@@ -2285,6 +2450,8 @@
      _Out_ PINFCONTEXT ContextOut
      );
  
@@ -447,7 +488,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2301,6 +2464,8 @@
+@@ -2301,6 +2468,8 @@
  #endif
  
  
@@ -456,7 +497,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2311,6 +2476,8 @@
+@@ -2311,6 +2480,8 @@
      _Out_ PINFCONTEXT Context
      );
  
@@ -465,7 +506,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2328,6 +2495,8 @@
+@@ -2328,6 +2499,8 @@
  #endif
  
  
@@ -474,7 +515,7 @@
  WINSETUPAPI
  LONG
  WINAPI
-@@ -2336,6 +2505,8 @@
+@@ -2336,6 +2509,8 @@
      _In_ PCSTR Section
      );
  
@@ -483,7 +524,7 @@
  WINSETUPAPI
  LONG
  WINAPI
-@@ -2351,6 +2522,8 @@
+@@ -2351,6 +2526,8 @@
  #endif
  
  
@@ -492,7 +533,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2364,6 +2537,8 @@
+@@ -2364,6 +2541,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -501,7 +542,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2384,6 +2559,8 @@
+@@ -2384,6 +2563,8 @@
  #endif
  
  
@@ -510,7 +551,7 @@
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2392,6 +2569,8 @@
+@@ -2392,6 +2573,8 @@
      );
  
  
@@ -519,7 +560,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2403,6 +2582,8 @@
+@@ -2403,6 +2586,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -528,7 +569,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2421,6 +2602,8 @@
+@@ -2421,6 +2606,8 @@
  #endif
  
  
@@ -537,7 +578,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2431,6 +2614,8 @@
+@@ -2431,6 +2618,8 @@
      );
  
  
@@ -546,7 +587,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2442,6 +2627,8 @@
+@@ -2442,6 +2631,8 @@
      _Out_opt_ LPDWORD RequiredSize
      );
  
@@ -555,7 +596,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2459,6 +2646,8 @@
+@@ -2459,6 +2650,8 @@
  #define SetupGetMultiSzField SetupGetMultiSzFieldA
  #endif
  
@@ -564,7 +605,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -2479,6 +2668,8 @@
+@@ -2479,6 +2672,8 @@
  // must be freed by the export setupapi!MyFree (NT4+ Win95+)
  // or LocalFree (Win2k+)
  //
@@ -573,7 +614,7 @@
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2487,9 +2678,11 @@
+@@ -2487,9 +2682,11 @@
      _Out_ PSTR *ActualSourceFileName,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -588,7 +629,7 @@
  WINSETUPAPI
  DWORD
  WINAPI
-@@ -2498,7 +2691,7 @@
+@@ -2498,7 +2695,7 @@
      _Out_ PWSTR *ActualSourceFileName,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -597,7 +638,7 @@
      );
  
  #ifdef UNICODE
-@@ -2516,6 +2709,8 @@
+@@ -2516,6 +2713,8 @@
  // buffer.
  //
  
@@ -606,7 +647,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2526,9 +2721,11 @@
+@@ -2526,9 +2725,11 @@
      _Out_opt_ PDWORD RequiredBufferLen,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -621,7 +662,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2539,7 +2736,7 @@
+@@ -2539,7 +2740,7 @@
      _Out_opt_ PDWORD RequiredBufferLen,
      _Out_ PDWORD SourceFileSize,
      _Out_ PDWORD TargetFileSize,
@@ -630,7 +671,7 @@
      );
  
  #ifdef UNICODE
-@@ -2559,22 +2756,26 @@
+@@ -2559,22 +2760,26 @@
  #define FILE_COMPRESSION_NTCAB      3
  
  
@@ -661,7 +702,7 @@
      );
  
  #ifdef UNICODE
-@@ -2584,6 +2785,8 @@
+@@ -2584,6 +2789,8 @@
  #endif
  
  
@@ -670,7 +711,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2597,6 +2800,8 @@
+@@ -2597,6 +2804,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -679,7 +720,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2617,6 +2822,8 @@
+@@ -2617,6 +2826,8 @@
  #endif
  
  
@@ -688,7 +729,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2629,6 +2836,8 @@
+@@ -2629,6 +2840,8 @@
      _In_ UINT RoundingFactor
      );
  
@@ -697,7 +738,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2648,6 +2857,8 @@
+@@ -2648,6 +2861,8 @@
  #endif
  
  
@@ -706,7 +747,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2660,6 +2871,8 @@
+@@ -2660,6 +2875,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -715,7 +756,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2692,6 +2905,8 @@
+@@ -2692,6 +2909,8 @@
  #define SRCLIST_NOSTRIPPLATFORM 0x00000400
  
  
@@ -724,7 +765,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2701,6 +2916,8 @@
+@@ -2701,6 +2920,8 @@
      _In_ UINT SourceCount
      );
  
@@ -733,7 +774,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2717,6 +2934,8 @@
+@@ -2717,6 +2938,8 @@
  #endif
  
  
@@ -742,7 +783,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2725,6 +2944,8 @@
+@@ -2725,6 +2948,8 @@
      );
  
  
@@ -751,7 +792,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2733,6 +2954,8 @@
+@@ -2733,6 +2958,8 @@
      _In_ PCSTR Source
      );
  
@@ -760,7 +801,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2748,6 +2971,8 @@
+@@ -2748,6 +2975,8 @@
  #endif
  
  
@@ -769,7 +810,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2756,6 +2981,8 @@
+@@ -2756,6 +2985,8 @@
      _In_ PCSTR Source
      );
  
@@ -778,7 +819,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2771,6 +2998,8 @@
+@@ -2771,6 +3002,8 @@
  #endif
  
  
@@ -787,7 +828,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2780,6 +3009,8 @@
+@@ -2780,6 +3013,8 @@
      _Out_ PUINT Count
      );
  
@@ -796,7 +837,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2796,6 +3027,8 @@
+@@ -2796,6 +3031,8 @@
  #endif
  
  
@@ -805,7 +846,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2804,6 +3037,8 @@
+@@ -2804,6 +3041,8 @@
      _In_ UINT Count
      );
  
@@ -814,7 +855,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -2819,6 +3054,8 @@
+@@ -2819,6 +3058,8 @@
  #endif
  
  
@@ -823,7 +864,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2835,6 +3072,8 @@
+@@ -2835,6 +3076,8 @@
      _Out_opt_ PDWORD PathRequiredSize
      );
  
@@ -832,7 +873,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2858,6 +3097,8 @@
+@@ -2858,6 +3101,8 @@
  #endif
  
  
@@ -841,7 +882,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2875,6 +3116,8 @@
+@@ -2875,6 +3120,8 @@
      _Out_opt_ PDWORD PathRequiredSize
      );
  
@@ -850,7 +891,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2899,6 +3142,8 @@
+@@ -2899,6 +3146,8 @@
  #endif
  
  
@@ -859,7 +900,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2911,6 +3156,8 @@
+@@ -2911,6 +3160,8 @@
      _In_ DWORD Style
      );
  
@@ -868,7 +909,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2930,6 +3177,8 @@
+@@ -2930,6 +3181,8 @@
  #endif
  
  
@@ -877,7 +918,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2941,6 +3190,8 @@
+@@ -2941,6 +3194,8 @@
      _In_ DWORD Style
      );
  
@@ -886,7 +927,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2958,6 +3209,8 @@
+@@ -2958,6 +3213,8 @@
  #define SetupDeleteError SetupDeleteErrorA
  #endif
  
@@ -895,7 +936,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -2970,6 +3223,8 @@
+@@ -2970,6 +3227,8 @@
      _In_ DWORD Style
      );
  
@@ -904,7 +945,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -3021,6 +3276,8 @@
+@@ -3021,6 +3280,8 @@
  #define DPROMPT_OUTOFMEMORY     4
  
  
@@ -913,7 +954,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3030,6 +3287,8 @@
+@@ -3030,6 +3291,8 @@
      _In_opt_ PCSTR Directory
      );
  
@@ -922,7 +963,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3046,6 +3305,8 @@
+@@ -3046,6 +3309,8 @@
  #endif
  
  
@@ -931,7 +972,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3058,6 +3319,8 @@
+@@ -3058,6 +3323,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -940,7 +981,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3082,6 +3345,8 @@
+@@ -3082,6 +3349,8 @@
  #define SETDIRID_NOT_FULL_PATH      0x00000001
  
  
@@ -949,7 +990,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3094,6 +3359,8 @@
+@@ -3094,6 +3363,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -958,7 +999,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3133,6 +3400,8 @@
+@@ -3133,6 +3404,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -967,7 +1008,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3142,11 +3411,13 @@
+@@ -3142,11 +3415,13 @@
      _In_opt_ PCSTR SourceFile,
      _In_opt_ PCSTR SourcePathRoot,
      _In_opt_ PCSTR DestinationName,
@@ -982,7 +1023,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3156,7 +3427,7 @@
+@@ -3156,7 +3431,7 @@
      _In_opt_ PCWSTR SourceFile,
      _In_opt_ PCWSTR SourcePathRoot,
      _In_opt_ PCWSTR DestinationName,
@@ -991,7 +1032,7 @@
      _In_opt_ PSP_FILE_CALLBACK_W CopyMsgHandler,
      _In_opt_ PVOID Context
      );
-@@ -3167,6 +3438,8 @@
+@@ -3167,6 +3442,8 @@
  #define SetupInstallFile SetupInstallFileA
  #endif
  
@@ -1000,7 +1041,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3176,12 +3449,14 @@
+@@ -3176,12 +3453,14 @@
      _In_opt_ PCSTR SourceFile,
      _In_opt_ PCSTR SourcePathRoot,
      _In_opt_ PCSTR DestinationName,
@@ -1016,7 +1057,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3191,7 +3466,7 @@
+@@ -3191,7 +3470,7 @@
      _In_opt_ PCWSTR SourceFile,
      _In_opt_ PCWSTR SourcePathRoot,
      _In_opt_ PCWSTR DestinationName,
@@ -1025,7 +1066,7 @@
      _In_opt_ PSP_FILE_CALLBACK_W CopyMsgHandler,
      _In_opt_ PVOID Context,
      _Out_ PBOOL FileWasInUse
-@@ -3271,6 +3546,8 @@
+@@ -3271,6 +3550,8 @@
  #endif //_SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
  
@@ -1034,7 +1075,7 @@
  WINSETUPAPI
  HSPFILEQ
  WINAPI
-@@ -3278,6 +3555,7 @@
+@@ -3278,6 +3559,7 @@
      VOID
      );
  
@@ -1042,7 +1083,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3285,6 +3563,8 @@
+@@ -3285,6 +3567,8 @@
      _In_ HSPFILEQ QueueHandle
      );
  
@@ -1051,7 +1092,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3294,6 +3574,8 @@
+@@ -3294,6 +3578,8 @@
      _In_opt_ PCSTR AlternateDefaultCatalogFile
      );
  
@@ -1060,7 +1101,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3310,6 +3592,8 @@
+@@ -3310,6 +3596,8 @@
  #endif
  
  
@@ -1069,7 +1110,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3317,6 +3601,8 @@
+@@ -3317,6 +3605,8 @@
      _In_opt_ PCSTR Override
      );
  
@@ -1078,7 +1119,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3331,6 +3617,8 @@
+@@ -3331,6 +3621,8 @@
  #endif
  
  
@@ -1087,7 +1128,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3346,6 +3634,8 @@
+@@ -3346,6 +3638,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1096,7 +1137,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3368,6 +3658,8 @@
+@@ -3368,6 +3662,8 @@
  #endif
  
  
@@ -1105,7 +1146,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3375,6 +3667,8 @@
+@@ -3375,6 +3671,8 @@
      _In_ PSP_FILE_COPY_PARAMS_A CopyParams
      );
  
@@ -1114,7 +1155,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3389,6 +3683,8 @@
+@@ -3389,6 +3687,8 @@
  #endif
  
  
@@ -1123,7 +1164,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3401,6 +3697,8 @@
+@@ -3401,6 +3701,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1132,7 +1173,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3420,6 +3718,8 @@
+@@ -3420,6 +3722,8 @@
  #endif
  
  
@@ -1141,7 +1182,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3432,6 +3732,8 @@
+@@ -3432,6 +3736,8 @@
      _In_ DWORD CopyStyle
      );
  
@@ -1150,7 +1191,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3451,6 +3753,8 @@
+@@ -3451,6 +3757,8 @@
  #endif
  
  
@@ -1159,7 +1200,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3460,6 +3764,8 @@
+@@ -3460,6 +3768,8 @@
      _In_opt_ PCSTR PathPart2
      );
  
@@ -1168,7 +1209,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3476,6 +3782,8 @@
+@@ -3476,6 +3786,8 @@
  #endif
  
  
@@ -1177,7 +1218,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3486,6 +3794,8 @@
+@@ -3486,6 +3798,8 @@
      _In_ PCSTR Section
      );
  
@@ -1186,7 +1227,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3503,6 +3813,8 @@
+@@ -3503,6 +3817,8 @@
  #endif
  
  
@@ -1195,7 +1236,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3514,6 +3826,8 @@
+@@ -3514,6 +3830,8 @@
      _In_ PCSTR TargetFilename
      );
  
@@ -1204,7 +1245,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3532,6 +3846,8 @@
+@@ -3532,6 +3850,8 @@
  #endif
  
  
@@ -1213,7 +1254,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3542,6 +3858,8 @@
+@@ -3542,6 +3862,8 @@
      _In_ PCSTR Section
      );
  
@@ -1222,7 +1263,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3559,6 +3877,8 @@
+@@ -3559,6 +3881,8 @@
  #endif
  
  
@@ -1231,7 +1272,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3569,6 +3889,8 @@
+@@ -3569,6 +3893,8 @@
      _In_ PVOID Context
      );
  
@@ -1240,7 +1281,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3586,24 +3908,28 @@
+@@ -3586,24 +3912,28 @@
  #endif
  
  
@@ -1271,7 +1312,7 @@
      _In_opt_ HWND Window,
      _In_opt_ PSP_FILE_CALLBACK_W CallbackRoutine,
      _In_opt_ PVOID CallbackContext,
-@@ -3655,6 +3981,8 @@
+@@ -3655,6 +3985,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -1280,7 +1321,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3664,6 +3992,8 @@
+@@ -3664,6 +3996,8 @@
      _Out_ PUINT NumOperations
      );
  
@@ -1289,7 +1330,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3672,6 +4002,8 @@
+@@ -3672,6 +4006,8 @@
      _Out_ PDWORD Flags
      );
  
@@ -1298,7 +1339,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3719,28 +4051,32 @@
+@@ -3719,28 +4055,32 @@
  #define SPOST_URL   2
  #define SPOST_MAX   3
  
@@ -1335,7 +1376,7 @@
      _Out_writes_opt_(DestinationInfFileNameSize) PWSTR DestinationInfFileName,
      _In_ DWORD DestinationInfFileNameSize,
      _Out_opt_ PDWORD RequiredSize,
-@@ -3770,6 +4106,7 @@
+@@ -3770,6 +4110,7 @@
  
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
@@ -1343,7 +1384,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3779,6 +4116,7 @@
+@@ -3779,6 +4120,7 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -1351,7 +1392,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3795,6 +4133,8 @@
+@@ -3795,6 +4137,8 @@
  #endif
  
  
@@ -1360,7 +1401,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3810,6 +4150,8 @@
+@@ -3810,6 +4154,8 @@
  //
  // Disk space list APIs
  //
@@ -1369,7 +1410,7 @@
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3819,6 +4161,8 @@
+@@ -3819,6 +4165,8 @@
      _In_ UINT Flags
      );
  
@@ -1378,7 +1419,7 @@
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3841,6 +4185,8 @@
+@@ -3841,6 +4189,8 @@
  #define SPDSL_DISALLOW_NEGATIVE_ADJUST 0x00000002
  
  
@@ -1387,7 +1428,7 @@
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3851,6 +4197,8 @@
+@@ -3851,6 +4201,8 @@
      _In_ UINT Flags
      );
  
@@ -1396,7 +1437,7 @@
  WINSETUPAPI
  HDSKSPC
  WINAPI
-@@ -3868,6 +4216,8 @@
+@@ -3868,6 +4220,8 @@
  #endif
  
  
@@ -1405,7 +1446,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3876,6 +4226,8 @@
+@@ -3876,6 +4230,8 @@
      );
  
  
@@ -1414,7 +1455,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3886,6 +4238,8 @@
+@@ -3886,6 +4242,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -1423,7 +1464,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3903,6 +4257,8 @@
+@@ -3903,6 +4261,8 @@
  #endif
  
  
@@ -1432,7 +1473,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3914,6 +4270,8 @@
+@@ -3914,6 +4274,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1441,7 +1482,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3932,6 +4290,8 @@
+@@ -3932,6 +4294,8 @@
  #endif
  
  
@@ -1450,7 +1491,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3943,6 +4303,8 @@
+@@ -3943,6 +4307,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1459,7 +1500,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3961,6 +4323,8 @@
+@@ -3961,6 +4327,8 @@
  #endif
  
  
@@ -1468,7 +1509,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3968,11 +4332,13 @@
+@@ -3968,11 +4336,13 @@
      _In_ HDSKSPC DiskSpace,
      _In_ PCSTR TargetFilespec,
      _In_ LONGLONG FileSize,
@@ -1483,7 +1524,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -3980,7 +4346,7 @@
+@@ -3980,7 +4350,7 @@
      _In_ HDSKSPC DiskSpace,
      _In_ PCWSTR TargetFilespec,
      _In_ LONGLONG FileSize,
@@ -1492,7 +1533,7 @@
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -3992,6 +4358,8 @@
+@@ -3992,6 +4362,8 @@
  #endif
  
  
@@ -1501,7 +1542,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4000,11 +4368,13 @@
+@@ -4000,11 +4372,13 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCSTR SectionName,
@@ -1516,7 +1557,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4013,7 +4383,7 @@
+@@ -4013,7 +4387,7 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCWSTR SectionName,
@@ -1525,7 +1566,7 @@
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4025,6 +4395,8 @@
+@@ -4025,6 +4399,8 @@
  #endif
  
  
@@ -1534,7 +1575,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4037,6 +4409,8 @@
+@@ -4037,6 +4413,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1543,7 +1584,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4056,24 +4430,28 @@
+@@ -4056,24 +4434,28 @@
  #endif
  
  
@@ -1574,7 +1615,7 @@
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4085,6 +4463,8 @@
+@@ -4085,6 +4467,8 @@
  #endif
  
  
@@ -1583,7 +1624,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4093,11 +4473,13 @@
+@@ -4093,11 +4477,13 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCSTR SectionName,
@@ -1598,7 +1639,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4106,7 +4488,7 @@
+@@ -4106,7 +4492,7 @@
      _In_ HINF InfHandle,
      _In_opt_ HINF ListInfHandle,
      _In_ PCWSTR SectionName,
@@ -1607,7 +1648,7 @@
      _Reserved_ PVOID Reserved1,
      _Reserved_ UINT Reserved2
      );
-@@ -4118,6 +4500,8 @@
+@@ -4118,6 +4504,8 @@
  #endif
  
  
@@ -1616,7 +1657,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4130,6 +4514,8 @@
+@@ -4130,6 +4518,8 @@
      _Reserved_ UINT Reserved2
      );
  
@@ -1625,7 +1666,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4153,6 +4539,8 @@
+@@ -4153,6 +4543,8 @@
  // Cabinet APIs
  //
  
@@ -1634,7 +1675,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4163,6 +4551,8 @@
+@@ -4163,6 +4555,8 @@
      _In_ PVOID Context
      );
  
@@ -1643,7 +1684,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4180,6 +4570,8 @@
+@@ -4180,6 +4574,8 @@
  #endif
  
  
@@ -1652,7 +1693,7 @@
  WINSETUPAPI
  INT
  WINAPI
-@@ -4197,6 +4589,8 @@
+@@ -4197,6 +4593,8 @@
  #define SPFILEQ_REBOOT_IN_PROGRESS  0x00000004
  
  
@@ -1661,7 +1702,7 @@
  WINSETUPAPI
  PVOID
  WINAPI
-@@ -4204,6 +4598,7 @@
+@@ -4204,6 +4602,7 @@
      _In_opt_ HWND OwnerWindow
      );
  
@@ -1669,7 +1710,7 @@
  WINSETUPAPI
  PVOID
  WINAPI
-@@ -4215,6 +4610,8 @@
+@@ -4215,6 +4614,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -1678,7 +1719,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4222,6 +4619,8 @@
+@@ -4222,6 +4623,8 @@
      _In_ PVOID Context
      );
  
@@ -1687,7 +1728,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -4232,6 +4631,8 @@
+@@ -4232,6 +4635,8 @@
      _In_ UINT_PTR Param2
      );
  
@@ -1696,7 +1737,7 @@
  WINSETUPAPI
  UINT
  WINAPI
-@@ -4409,6 +4810,8 @@
+@@ -4409,6 +4814,8 @@
  #define FLG_DELPROPERTY_MULTI_SZ_DELSTRING  ( 0x00000001 )
  
  
@@ -1705,7 +1746,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4426,6 +4829,8 @@
+@@ -4426,6 +4833,8 @@
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
  
@@ -1714,7 +1755,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4499,6 +4904,8 @@
+@@ -4499,6 +4908,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -1723,7 +1764,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4511,6 +4918,8 @@
+@@ -4511,6 +4922,8 @@
      _In_ UINT CopyFlags
      );
  
@@ -1732,7 +1773,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4646,22 +5055,26 @@
+@@ -4646,22 +5059,26 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
  
@@ -1763,7 +1804,7 @@
      );
  
  #ifdef UNICODE
-@@ -4671,26 +5084,30 @@
+@@ -4671,26 +5088,30 @@
  #endif
  
  
@@ -1796,7 +1837,7 @@
      _In_opt_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _Reserved_ PVOID Reserved1,
-@@ -4713,6 +5130,7 @@
+@@ -4713,6 +5134,7 @@
  // wsprintf(CmdLineBuffer,TEXT("DefaultInstall 132 %s"),InfPath);
  // InstallHinfSection(NULL,NULL,CmdLineBuffer,0);
  //
@@ -1804,7 +1845,7 @@
  VOID
  WINAPI
  InstallHinfSectionA(
-@@ -4722,6 +5140,7 @@
+@@ -4722,6 +5144,7 @@
      _In_ INT ShowCommand
      );
  
@@ -1812,7 +1853,7 @@
  VOID
  WINAPI
  InstallHinfSectionW(
-@@ -4746,6 +5165,8 @@
+@@ -4746,6 +5169,8 @@
  //
  typedef PVOID HSPFILELOG;
  
@@ -1821,7 +1862,7 @@
  WINSETUPAPI
  HSPFILELOG
  WINAPI
-@@ -4754,6 +5175,8 @@
+@@ -4754,6 +5179,8 @@
      _In_ DWORD Flags
      );
  
@@ -1830,7 +1871,7 @@
  WINSETUPAPI
  HSPFILELOG
  WINAPI
-@@ -4776,6 +5199,8 @@
+@@ -4776,6 +5203,8 @@
  #define SPFILELOG_QUERYONLY     0x00000004  // allows non-administrators to read system log
  
  
@@ -1839,7 +1880,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4784,6 +5209,8 @@
+@@ -4784,6 +5213,8 @@
      );
  
  
@@ -1848,7 +1889,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4799,6 +5226,8 @@
+@@ -4799,6 +5230,8 @@
      _In_ DWORD Flags
      );
  
@@ -1857,7 +1898,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4826,6 +5255,8 @@
+@@ -4826,6 +5259,8 @@
  #define SPFILELOG_OEMFILE   0x00000001
  
  
@@ -1866,7 +1907,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4835,6 +5266,8 @@
+@@ -4835,6 +5270,8 @@
      _In_opt_ PCSTR TargetFilename
      );
  
@@ -1875,7 +1916,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4863,6 +5296,8 @@
+@@ -4863,6 +5300,8 @@
      SetupFileLogMax
  } SetupFileLogInfo;
  
@@ -1884,7 +1925,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4876,6 +5311,8 @@
+@@ -4876,6 +5315,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -1893,7 +1934,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4905,6 +5342,8 @@
+@@ -4905,6 +5346,8 @@
  #define LogSevFatalError            0x00000003
  #define LogSevMaximum               0x00000004
  
@@ -1902,7 +1943,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4912,6 +5351,8 @@
+@@ -4912,6 +5355,8 @@
      _In_ BOOL Erase
      );
  
@@ -1911,7 +1952,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4920,6 +5361,8 @@
+@@ -4920,6 +5365,8 @@
      _In_ LogSeverity Severity
      );
  
@@ -1920,7 +1961,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -4934,6 +5377,7 @@
+@@ -4934,6 +5381,7 @@
  #define SetupLogError SetupLogErrorA
  #endif
  
@@ -1928,7 +1969,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4948,6 +5392,7 @@
+@@ -4948,6 +5396,7 @@
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
  
@@ -1936,7 +1977,7 @@
  WINSETUPAPI
  SP_LOG_TOKEN
  WINAPI
-@@ -4955,6 +5400,7 @@
+@@ -4955,6 +5404,7 @@
      VOID
      );
  
@@ -1944,7 +1985,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4962,6 +5408,7 @@
+@@ -4962,6 +5412,7 @@
      _In_ SP_LOG_TOKEN LogToken
      );
  
@@ -1952,7 +1993,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4973,6 +5420,7 @@
+@@ -4973,6 +5424,7 @@
      ...
      );
  
@@ -1960,7 +2001,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -4985,6 +5433,7 @@
+@@ -4985,6 +5437,7 @@
      ...
      );
  
@@ -1968,7 +2009,7 @@
  WINSETUPAPI
  VOID
  WINAPI
-@@ -5059,6 +5508,7 @@
+@@ -5059,6 +5512,7 @@
  // Overriden if SetupAPI is run in non-interactive window session
  //
  
@@ -1976,7 +2017,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5066,6 +5516,7 @@
+@@ -5066,6 +5520,7 @@
      _In_ BOOL NonInteractiveFlag
      );
  
@@ -1984,7 +2025,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5079,6 +5530,8 @@
+@@ -5079,9 +5534,11 @@
  // Device Installer APIs
  //
  
@@ -1992,8 +2033,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HDEVINFO
-@@ -5089,6 +5542,8 @@
+-HDEVINFO
++_Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) HDEVINFO
+ WINAPI
+ SetupDiCreateDeviceInfoList(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -5089,9 +5546,11 @@
      );
  
  
@@ -2001,8 +2046,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HDEVINFO
-@@ -5100,6 +5555,8 @@
+-HDEVINFO
++_Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) HDEVINFO
+ WINAPI
+ SetupDiCreateDeviceInfoListExA(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -5100,9 +5559,11 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2010,8 +2059,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HDEVINFO
-@@ -5118,6 +5575,8 @@
+-HDEVINFO
++_Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) HDEVINFO
+ WINAPI
+ SetupDiCreateDeviceInfoListExW(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -5118,6 +5579,8 @@
  #endif
  
  
@@ -2020,7 +2073,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5126,20 +5585,24 @@
+@@ -5126,20 +5589,24 @@
      _Out_ LPGUID ClassGuid
      );
  
@@ -2049,7 +2102,7 @@
      );
  
  #ifdef UNICODE
-@@ -5155,6 +5618,8 @@
+@@ -5155,6 +5622,8 @@
  #define DICD_GENERATE_ID        0x00000001
  #define DICD_INHERIT_CLASSDRVS  0x00000002
  
@@ -2058,7 +2111,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5164,10 +5629,12 @@
+@@ -5164,10 +5633,12 @@
      _In_ CONST GUID *ClassGuid,
      _In_opt_ PCSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
@@ -2075,7 +2128,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5177,8 +5644,8 @@
+@@ -5177,8 +5648,8 @@
      _In_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR DeviceDescription,
      _In_opt_ HWND hwndParent,
@@ -2086,7 +2139,7 @@
      );
  
  #ifdef UNICODE
-@@ -5194,6 +5661,8 @@
+@@ -5194,6 +5665,8 @@
  #define DIOD_INHERIT_CLASSDRVS  0x00000002
  #define DIOD_CANCEL_REMOVE      0x00000004
  
@@ -2095,7 +2148,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5202,9 +5671,11 @@
+@@ -5202,9 +5675,11 @@
      _In_ PCSTR DeviceInstanceId,
      _In_opt_ HWND hwndParent,
      _In_ DWORD OpenFlags,
@@ -2110,7 +2163,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5213,7 +5684,7 @@
+@@ -5213,7 +5688,7 @@
      _In_ PCWSTR DeviceInstanceId,
      _In_opt_ HWND hwndParent,
      _In_ DWORD OpenFlags,
@@ -2119,7 +2172,7 @@
      );
  
  #ifdef UNICODE
-@@ -5223,6 +5694,8 @@
+@@ -5223,6 +5698,8 @@
  #endif
  
  
@@ -2128,7 +2181,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5234,6 +5707,8 @@
+@@ -5234,6 +5711,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2137,7 +2190,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5252,6 +5727,8 @@
+@@ -5252,6 +5731,8 @@
  #endif
  
  
@@ -2146,7 +2199,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5261,16 +5738,20 @@
+@@ -5261,16 +5742,20 @@
      );
  
  
@@ -2171,7 +2224,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5279,6 +5760,8 @@
+@@ -5279,6 +5764,8 @@
      );
  
  
@@ -2180,7 +2233,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5287,7 +5770,7 @@
+@@ -5287,7 +5774,7 @@
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ CONST GUID *InterfaceClassGuid,
      _In_ DWORD MemberIndex,
@@ -2189,7 +2242,7 @@
      );
  
  //
-@@ -5296,6 +5779,8 @@
+@@ -5296,6 +5783,8 @@
  #define SetupDiEnumInterfaceDevice SetupDiEnumDeviceInterfaces
  
  
@@ -2198,7 +2251,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5305,9 +5790,11 @@
+@@ -5305,9 +5794,11 @@
      _In_ CONST GUID *InterfaceClassGuid,
      _In_opt_ PCSTR ReferenceString,
      _In_ DWORD CreationFlags,
@@ -2213,7 +2266,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5317,7 +5804,7 @@
+@@ -5317,7 +5808,7 @@
      _In_ CONST GUID *InterfaceClassGuid,
      _In_opt_ PCWSTR ReferenceString,
      _In_ DWORD CreationFlags,
@@ -2222,7 +2275,7 @@
      );
  
  #ifdef UNICODE
-@@ -5343,6 +5830,8 @@
+@@ -5343,6 +5834,8 @@
  //
  #define DIODI_NO_ADD    0x00000001
  
@@ -2231,7 +2284,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5350,9 +5839,11 @@
+@@ -5350,9 +5843,11 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PCSTR DevicePath,
      _In_ DWORD OpenFlags,
@@ -2246,7 +2299,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5360,7 +5851,7 @@
+@@ -5360,7 +5855,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PCWSTR DevicePath,
      _In_ DWORD OpenFlags,
@@ -2255,7 +2308,7 @@
      );
  
  #ifdef UNICODE
-@@ -5381,6 +5872,8 @@
+@@ -5381,6 +5876,8 @@
  #endif
  
  
@@ -2264,7 +2317,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5388,7 +5881,7 @@
+@@ -5388,7 +5885,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVICE_INTERFACE_DATA DeviceInterfaceData,
      _In_ CONST GUID *AliasInterfaceClassGuid,
@@ -2273,7 +2326,7 @@
      );
  
  //
-@@ -5397,6 +5890,8 @@
+@@ -5397,6 +5894,8 @@
  #define SetupDiGetInterfaceDeviceAlias SetupDiGetDeviceInterfaceAlias
  
  
@@ -2282,7 +2335,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5411,6 +5906,8 @@
+@@ -5411,6 +5910,8 @@
  #define SetupDiDeleteInterfaceDeviceData SetupDiDeleteDeviceInterfaceData
  
  
@@ -2291,7 +2344,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5424,6 +5921,8 @@
+@@ -5424,6 +5925,8 @@
  //
  #define SetupDiRemoveInterfaceDevice SetupDiRemoveDeviceInterface
  
@@ -2300,7 +2353,7 @@
  _Success_(return != FALSE)
  _At_((LPSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
-@@ -5435,9 +5934,11 @@
+@@ -5435,9 +5938,11 @@
      _Inout_updates_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_A DeviceInterfaceDetailData,
      _In_ DWORD DeviceInterfaceDetailDataSize,
      _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_A)) PDWORD RequiredSize,
@@ -2315,7 +2368,7 @@
  _Success_(return != FALSE)
  _At_((LPWSTR)DeviceInterfaceDetailData->DevicePath, _Post_z_)
  WINSETUPAPI
-@@ -5449,7 +5950,7 @@
+@@ -5449,7 +5954,7 @@
      _Out_writes_bytes_to_opt_(DeviceInterfaceDetailDataSize, *RequiredSize) PSP_DEVICE_INTERFACE_DETAIL_DATA_W DeviceInterfaceDetailData,
      _In_ DWORD DeviceInterfaceDetailDataSize,
      _Out_opt_ _Out_range_(>=, sizeof(SP_DEVICE_INTERFACE_DETAIL_DATA_W)) PDWORD RequiredSize,
@@ -2324,7 +2377,7 @@
      );
  
  #ifdef UNICODE
-@@ -5473,6 +5974,8 @@
+@@ -5473,6 +5978,8 @@
  //
  // Default install handler for DIF_INSTALLINTERFACES.
  //
@@ -2333,7 +2386,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5489,6 +5992,8 @@
+@@ -5489,6 +5996,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -2342,7 +2395,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5511,6 +6016,8 @@
+@@ -5511,6 +6020,8 @@
  //
  #define SPRDI_FIND_DUPS        0x00000001
  
@@ -2351,7 +2404,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5520,7 +6027,7 @@
+@@ -5520,7 +6031,7 @@
      _In_ DWORD Flags,
      _In_opt_ PSP_DETSIG_CMPPROC CompareProc,
      _In_opt_ PVOID CompareContext,
@@ -2360,7 +2413,7 @@
      );
  
  
-@@ -5533,16 +6040,20 @@
+@@ -5533,16 +6044,20 @@
  #define SPDIT_CLASSDRIVER        0x00000001
  #define SPDIT_COMPATDRIVER       0x00000002
  
@@ -2385,7 +2438,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5551,26 +6062,30 @@
+@@ -5551,26 +6066,30 @@
      );
  
  
@@ -2422,7 +2475,7 @@
      );
  
  #ifdef UNICODE
-@@ -5580,22 +6095,26 @@
+@@ -5580,22 +6099,26 @@
  #endif
  
  
@@ -2453,7 +2506,7 @@
      );
  
  #ifdef UNICODE
-@@ -5605,6 +6124,8 @@
+@@ -5605,6 +6128,8 @@
  #endif
  
  
@@ -2462,7 +2515,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5614,6 +6135,8 @@
+@@ -5614,6 +6139,8 @@
      _Inout_opt_ PSP_DRVINFO_DATA_A DriverInfoData
      );
  
@@ -2471,7 +2524,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5629,6 +6152,8 @@
+@@ -5629,6 +6156,8 @@
  #define SetupDiSetSelectedDriver SetupDiSetSelectedDriverA
  #endif
  
@@ -2480,7 +2533,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5641,6 +6166,8 @@
+@@ -5641,6 +6170,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2489,7 +2542,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5660,13 +6187,15 @@
+@@ -5660,13 +6191,15 @@
  #endif
  
  
@@ -2506,7 +2559,7 @@
      );
  
  
-@@ -5686,6 +6215,8 @@
+@@ -5686,26 +6219,30 @@
  #define DIGCF_INTERFACEDEVICE DIGCF_DEVICEINTERFACE
  
  
@@ -2514,8 +2567,10 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HDEVINFO
-@@ -5694,9 +6225,11 @@
+-HDEVINFO
++_Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) HDEVINFO
+ WINAPI
+ SetupDiGetClassDevsA(
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2529,8 +2584,10 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HDEVINFO
-@@ -5705,7 +6238,7 @@
+-HDEVINFO
++_Win32_RAIIFree_(SetupDiDestroyDeviceInfoList, -1, 0) HDEVINFO
+ WINAPI
+ SetupDiGetClassDevsW(
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2539,7 +2596,7 @@
      );
  
  #ifdef UNICODE
-@@ -5715,6 +6248,8 @@
+@@ -5715,6 +6252,8 @@
  #endif
  
  
@@ -2548,7 +2605,7 @@
  _Check_return_
  WINSETUPAPI
  HDEVINFO
-@@ -5723,12 +6258,14 @@
+@@ -5723,12 +6262,14 @@
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2564,7 +2621,7 @@
  _Check_return_
  WINSETUPAPI
  HDEVINFO
-@@ -5737,7 +6274,7 @@
+@@ -5737,7 +6278,7 @@
      _In_opt_ CONST GUID *ClassGuid,
      _In_opt_ PCWSTR Enumerator,
      _In_opt_ HWND hwndParent,
@@ -2573,7 +2630,7 @@
      _In_opt_ HDEVINFO DeviceInfoSet,
      _In_opt_ PCWSTR MachineName,
      _Reserved_ PVOID Reserved
-@@ -5750,6 +6287,8 @@
+@@ -5750,6 +6291,8 @@
  #endif
  
  
@@ -2582,7 +2639,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5761,6 +6300,8 @@
+@@ -5761,6 +6304,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2591,7 +2648,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5786,6 +6327,8 @@
+@@ -5786,6 +6331,8 @@
  #define DIBCI_NOINSTALLCLASS   0x00000001
  #define DIBCI_NODISPLAYCLASS   0x00000002
  
@@ -2600,7 +2657,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5797,6 +6340,8 @@
+@@ -5797,6 +6344,8 @@
      _Out_ PDWORD RequiredSize
      );
  
@@ -2609,7 +2666,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5810,6 +6355,8 @@
+@@ -5810,6 +6359,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2618,7 +2675,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -5830,6 +6377,8 @@
+@@ -5830,6 +6381,8 @@
  #endif
  
  
@@ -2627,7 +2684,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5840,6 +6389,8 @@
+@@ -5840,6 +6393,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -2636,7 +2693,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5857,6 +6408,8 @@
+@@ -5857,6 +6412,8 @@
  #endif
  
  
@@ -2645,7 +2702,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5869,6 +6422,8 @@
+@@ -5869,6 +6426,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2654,7 +2711,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5888,11 +6443,13 @@
+@@ -5888,11 +6447,13 @@
  #endif
  
  
@@ -2669,7 +2726,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData
      );
-@@ -5901,6 +6458,8 @@
+@@ -5901,6 +6462,8 @@
  //
  // Default install handler for DIF_SELECTDEVICE
  //
@@ -2678,7 +2735,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5913,6 +6472,8 @@
+@@ -5913,6 +6476,8 @@
  //
  // Default install handler for DIF_SELECTBESTCOMPATDRV
  //
@@ -2687,7 +2744,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5925,6 +6486,8 @@
+@@ -5925,6 +6490,8 @@
  //
  // Default install handler for DIF_INSTALLDEVICE
  //
@@ -2696,7 +2753,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5937,6 +6500,8 @@
+@@ -5937,6 +6504,8 @@
  //
  // Default install handler for DIF_INSTALLDEVICEFILES
  //
@@ -2705,7 +2762,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5949,6 +6514,8 @@
+@@ -5949,6 +6518,8 @@
  //
  // Default install handler for DIF_REGISTER_COINSTALLERS
  //
@@ -2714,7 +2771,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5961,6 +6528,7 @@
+@@ -5961,6 +6532,7 @@
  //
  // Default install handler for DIF_REMOVE
  //
@@ -2722,7 +2779,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5973,6 +6541,8 @@
+@@ -5973,6 +6545,8 @@
  //
  // Default install handler for DIF_UNREMOVE
  //
@@ -2731,7 +2788,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5983,6 +6553,7 @@
+@@ -5983,6 +6557,7 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
@@ -2739,7 +2796,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -5996,6 +6567,8 @@
+@@ -5996,6 +6571,8 @@
  //
  // Default install handler for DIF_PROPERTYCHANGE
  //
@@ -2748,7 +2805,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6005,6 +6578,8 @@
+@@ -6005,6 +6582,8 @@
      );
  
  
@@ -2757,7 +2814,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6015,6 +6590,8 @@
+@@ -6015,6 +6594,8 @@
      _In_opt_ HSPFILEQ FileQueue
      );
  
@@ -2766,7 +2823,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6032,6 +6609,8 @@
+@@ -6032,6 +6613,8 @@
  #endif
  
  
@@ -2775,7 +2832,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6045,6 +6624,8 @@
+@@ -6045,6 +6628,8 @@
      _Reserved_ PVOID Reserved2
      );
  
@@ -2784,7 +2841,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6065,6 +6646,8 @@
+@@ -6065,9 +6650,11 @@
  #endif
  
  
@@ -2792,8 +2849,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6081,6 +6664,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiOpenClassRegKey(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -6081,9 +6668,11 @@
  #define DIOCR_INSTALLER   0x00000001    // class installer registry branch
  #define DIOCR_INTERFACE   0x00000002    // interface class registry branch
  
@@ -2801,8 +2862,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6093,6 +6678,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiOpenClassRegKeyExA(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -6093,9 +6682,11 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2810,8 +2875,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6112,6 +6699,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiOpenClassRegKeyExW(
+     _In_opt_ CONST GUID *ClassGuid,
+@@ -6112,9 +6703,11 @@
  #endif
  
  
@@ -2819,8 +2888,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6125,6 +6714,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiCreateDeviceInterfaceRegKeyA(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6125,9 +6718,11 @@
      _In_opt_ PCSTR InfSectionName
      );
  
@@ -2828,8 +2901,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6156,6 +6747,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiCreateDeviceInterfaceRegKeyW(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6156,9 +6751,11 @@
  #endif
  
  
@@ -2837,8 +2914,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6173,6 +6766,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiOpenDeviceInterfaceRegKey(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6173,6 +6770,8 @@
  #define SetupDiOpenInterfaceDeviceRegKey SetupDiOpenDeviceInterfaceRegKey
  
  
@@ -2847,7 +2928,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6196,6 +6791,8 @@
+@@ -6196,9 +6795,11 @@
  #define DIREG_DRV       0x00000002          // Open/Create/Delete driver key
  #define DIREG_BOTH      0x00000004          // Delete both driver and Device key
  
@@ -2855,8 +2936,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6210,6 +6807,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiCreateDevRegKeyA(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6210,9 +6811,11 @@
      _In_opt_ PCSTR InfSectionName
      );
  
@@ -2864,8 +2949,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6231,6 +6830,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiCreateDevRegKeyW(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6231,9 +6834,11 @@
  #endif
  
  
@@ -2873,8 +2962,12 @@
 +_Win32_SupportedOS_Windows2000_
  _Check_return_
  WINSETUPAPI
- HKEY
-@@ -6245,6 +6846,8 @@
+-HKEY
++_Win32_RAIIFree_(RegCloseKey, -1, 0) HKEY
+ WINAPI
+ SetupDiOpenDevRegKey(
+     _In_ HDEVINFO DeviceInfoSet,
+@@ -6245,6 +6850,8 @@
      );
  
  
@@ -2883,7 +2976,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6256,6 +6859,8 @@
+@@ -6256,6 +6863,8 @@
      _In_ DWORD KeyType
      );
  
@@ -2892,7 +2985,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6267,6 +6872,8 @@
+@@ -6267,6 +6876,8 @@
      _Out_opt_ PDWORD CurrentlyActiveIndex
      );
  
@@ -2901,7 +2994,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6280,6 +6887,8 @@
+@@ -6280,6 +6891,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -2910,7 +3003,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6301,6 +6910,8 @@
+@@ -6301,6 +6914,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -2919,7 +3012,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6313,6 +6924,8 @@
+@@ -6313,6 +6928,8 @@
      _In_         DWORD            Flags
      );
  
@@ -2928,7 +3021,7 @@
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6335,6 +6948,8 @@
+@@ -6335,6 +6952,8 @@
  #define SetupDiGetDeviceProperty SetupDiGetDevicePropertyW
  #endif
  
@@ -2937,7 +3030,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6352,6 +6967,8 @@
+@@ -6352,6 +6971,8 @@
  #define SetupDiSetDeviceProperty SetupDiSetDevicePropertyW
  #endif
  
@@ -2946,7 +3039,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6364,6 +6981,8 @@
+@@ -6364,6 +6985,8 @@
      _In_         DWORD            Flags
      );
  
@@ -2955,7 +3048,7 @@
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6386,6 +7005,8 @@
+@@ -6386,6 +7009,8 @@
  #define SetupDiGetDeviceInterfaceProperty SetupDiGetDeviceInterfacePropertyW
  #endif
  
@@ -2964,7 +3057,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6410,6 +7031,8 @@
+@@ -6410,6 +7035,8 @@
  #define DICLASSPROP_INSTALLER   0x00000001    // device setup class property
  #define DICLASSPROP_INTERFACE   0x00000002    // device interface class property
  
@@ -2973,7 +3066,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6421,6 +7044,8 @@
+@@ -6421,6 +7048,8 @@
      _In_         DWORD            Flags
      );
  
@@ -2982,7 +3075,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6438,6 +7063,8 @@
+@@ -6438,6 +7067,8 @@
  #define SetupDiGetClassPropertyKeysEx SetupDiGetClassPropertyKeysExW
  #endif
  
@@ -2991,7 +3084,7 @@
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6459,6 +7086,8 @@
+@@ -6459,6 +7090,8 @@
  #define SetupDiGetClassProperty SetupDiGetClassPropertyW
  #endif
  
@@ -3000,7 +3093,7 @@
  _Success_(return != FALSE)
  _When_(*PropertyType == DEVPROP_TYPE_STRING, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
  _When_(*PropertyType == DEVPROP_TYPE_STRING_INDIRECT, _At_((PWSTR) PropertyBuffer, _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize)))
-@@ -6482,6 +7111,8 @@
+@@ -6482,6 +7115,8 @@
  #define SetupDiGetClassPropertyEx SetupDiGetClassPropertyExW
  #endif
  
@@ -3009,7 +3102,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6498,6 +7129,8 @@
+@@ -6498,6 +7133,8 @@
  #define SetupDiSetClassProperty SetupDiSetClassPropertyW
  #endif
  
@@ -3018,7 +3111,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6588,6 +7221,8 @@
+@@ -6588,6 +7225,8 @@
  #define SPCRP_CHARACTERISTICS             (0x0000001B)  // Device Characteristics (R/W)
  #define SPCRP_MAXIMUM_PROPERTY            (0x0000001C)  // Upper bound on ordinals
  
@@ -3027,7 +3120,7 @@
  _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZSTR) PropertyBuffer, _Post_valid_))
-@@ -6597,13 +7232,15 @@
+@@ -6597,13 +7236,15 @@
  SetupDiGetDeviceRegistryPropertyA(
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVINFO_DATA DeviceInfoData,
@@ -3044,7 +3137,7 @@
  _Success_(return != FALSE)
  _When_((*PropertyRegDataType == REG_SZ), _At_((PWSTR) PropertyBuffer, _Post_valid_))
  _When_((*PropertyRegDataType == REG_MULTI_SZ), _At_((PZZWSTR) PropertyBuffer, _Post_valid_))
-@@ -6613,7 +7250,7 @@
+@@ -6613,7 +7254,7 @@
  SetupDiGetDeviceRegistryPropertyW(
      _In_ HDEVINFO DeviceInfoSet,
      _In_ PSP_DEVINFO_DATA DeviceInfoData,
@@ -3053,7 +3146,7 @@
      _Out_opt_ PDWORD PropertyRegDataType,
      _Out_writes_bytes_to_opt_(PropertyBufferSize, *RequiredSize) PBYTE PropertyBuffer,
      _In_ DWORD PropertyBufferSize,
-@@ -6628,6 +7265,8 @@
+@@ -6628,6 +7269,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3062,7 +3155,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6643,6 +7282,8 @@
+@@ -6643,6 +7286,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3071,7 +3164,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6666,24 +7307,28 @@
+@@ -6666,24 +7311,28 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3102,7 +3195,7 @@
      _In_reads_bytes_opt_(PropertyBufferSize) CONST BYTE *PropertyBuffer,
      _In_ DWORD PropertyBufferSize
      );
-@@ -6696,6 +7341,8 @@
+@@ -6696,6 +7345,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3111,7 +3204,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6708,6 +7355,8 @@
+@@ -6708,6 +7359,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3120,7 +3213,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6728,22 +7377,26 @@
+@@ -6728,22 +7381,26 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3151,7 +3244,7 @@
      );
  
  #ifdef UNICODE
-@@ -6752,6 +7405,8 @@
+@@ -6752,6 +7409,8 @@
  #define SetupDiGetDeviceInstallParams SetupDiGetDeviceInstallParamsA
  #endif
  
@@ -3160,7 +3253,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6764,6 +7419,8 @@
+@@ -6764,6 +7423,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3169,7 +3262,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -6783,6 +7440,8 @@
+@@ -6783,6 +7444,8 @@
  #endif
  
  
@@ -3178,7 +3271,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6792,6 +7451,8 @@
+@@ -6792,6 +7455,8 @@
      _In_ PSP_DEVINSTALL_PARAMS_A DeviceInstallParams
      );
  
@@ -3187,7 +3280,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6808,6 +7469,8 @@
+@@ -6808,6 +7473,8 @@
  #endif
  
  
@@ -3196,7 +3289,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6818,6 +7481,8 @@
+@@ -6818,6 +7485,8 @@
      _In_ DWORD ClassInstallParamsSize
      );
  
@@ -3205,7 +3298,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6835,6 +7500,8 @@
+@@ -6835,6 +7504,8 @@
  #endif
  
  
@@ -3214,7 +3307,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6842,9 +7509,11 @@
+@@ -6842,9 +7513,11 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ PSP_DRVINFO_DATA_A DriverInfoData,
@@ -3229,7 +3322,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6852,7 +7521,7 @@
+@@ -6852,7 +7525,7 @@
      _In_ HDEVINFO DeviceInfoSet,
      _In_opt_ PSP_DEVINFO_DATA DeviceInfoData,
      _In_ PSP_DRVINFO_DATA_W DriverInfoData,
@@ -3238,7 +3331,7 @@
      );
  
  #ifdef UNICODE
-@@ -6862,6 +7531,8 @@
+@@ -6862,6 +7535,8 @@
  #endif
  
  
@@ -3247,7 +3340,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6872,6 +7543,8 @@
+@@ -6872,6 +7547,8 @@
      _In_ PSP_DRVINSTALL_PARAMS DriverInstallParams
      );
  
@@ -3256,7 +3349,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6889,6 +7562,8 @@
+@@ -6889,17 +7566,21 @@
  #endif
  
  
@@ -3265,7 +3358,12 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6900,6 +7575,8 @@
+ SetupDiLoadClassIcon(
+     _In_ CONST GUID *ClassGuid,
+-    _Out_opt_ HICON *LargeIcon,
++    _Out_opt_ _Win32_RAIIFree_(DestroyIcon, -1, 0) HICON *LargeIcon,
+     _Out_opt_ PINT MiniIconIndex
+     );
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
  
@@ -3274,7 +3372,16 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6922,6 +7599,7 @@
+@@ -6909,7 +7590,7 @@
+     _In_ UINT cxIcon,
+     _In_ UINT cyIcon,
+     _In_ DWORD Flags,
+-    _Out_ HICON *hIcon
++    _Out_ _Win32_RAIIFree_(DestroyIcon, -1, 0) HICON *hIcon
+     );
+ 
+ #endif // _SETUPAPI_VER >= _WIN32_WINNT_LONGHORN
+@@ -6922,6 +7603,7 @@
  #define DMI_BKCOLOR   0x00000002
  #define DMI_USERECT   0x00000004
  
@@ -3282,7 +3389,7 @@
  WINSETUPAPI
  INT
  WINAPI
-@@ -6933,6 +7611,8 @@
+@@ -6933,6 +7615,8 @@
      );
  
  
@@ -3291,7 +3398,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6942,28 +7622,34 @@
+@@ -6942,28 +7626,34 @@
      );
  
  
@@ -3332,7 +3439,7 @@
      _In_opt_ PCWSTR MachineName,
      _Reserved_ PVOID Reserved
      );
-@@ -6975,6 +7661,8 @@
+@@ -6975,6 +7665,8 @@
  #endif
  
  
@@ -3341,7 +3448,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -6985,6 +7673,8 @@
+@@ -6985,6 +7677,8 @@
      );
  
  
@@ -3350,7 +3457,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7006,6 +7696,8 @@
+@@ -7006,6 +7700,8 @@
  
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3359,7 +3466,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7018,6 +7710,8 @@
+@@ -7018,6 +7714,8 @@
      _In_ DWORD PropertySheetType
      );
  
@@ -3368,7 +3475,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7054,6 +7748,8 @@
+@@ -7054,6 +7752,8 @@
  #define IDI_FORCED_OVL              502
  
  
@@ -3377,7 +3484,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7063,6 +7759,8 @@
+@@ -7063,6 +7763,8 @@
      );
  
  
@@ -3386,7 +3493,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7073,6 +7771,8 @@
+@@ -7073,6 +7775,8 @@
      );
  
  
@@ -3395,7 +3502,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7083,6 +7783,8 @@
+@@ -7083,6 +7787,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3404,7 +3511,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7100,6 +7802,8 @@
+@@ -7100,6 +7806,8 @@
  #endif
  
  
@@ -3413,7 +3520,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7112,6 +7816,8 @@
+@@ -7112,6 +7820,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3422,7 +3529,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7130,6 +7836,8 @@
+@@ -7130,6 +7840,8 @@
  #define SetupDiClassNameFromGuidEx SetupDiClassNameFromGuidExA
  #endif
  
@@ -3431,7 +3538,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7141,6 +7849,8 @@
+@@ -7141,6 +7853,8 @@
      _Out_ PDWORD RequiredSize
      );
  
@@ -3440,7 +3547,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7159,6 +7869,8 @@
+@@ -7159,6 +7873,8 @@
  #endif
  
  
@@ -3449,7 +3556,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7172,6 +7884,8 @@
+@@ -7172,6 +7888,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3458,7 +3565,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7192,6 +7906,8 @@
+@@ -7192,6 +7910,8 @@
  #endif
  
  
@@ -3467,7 +3574,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7202,6 +7918,8 @@
+@@ -7202,6 +7922,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3476,7 +3583,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7219,6 +7937,8 @@
+@@ -7219,6 +7941,8 @@
  #endif
  
  
@@ -3485,7 +3592,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7231,6 +7951,8 @@
+@@ -7231,6 +7955,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3494,7 +3601,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7272,15 +7994,19 @@
+@@ -7272,15 +7998,19 @@
      );
  
  
@@ -3518,7 +3625,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7292,6 +8018,7 @@
+@@ -7292,6 +8022,7 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
@@ -3526,7 +3633,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7304,6 +8031,7 @@
+@@ -7304,6 +8035,7 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3534,7 +3641,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7325,6 +8053,8 @@
+@@ -7325,6 +8057,8 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
  
@@ -3543,7 +3650,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7337,6 +8067,8 @@
+@@ -7337,6 +8071,8 @@
      _Out_opt_ PSTR *Extension
      );
  
@@ -3552,7 +3659,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7358,6 +8090,8 @@
+@@ -7358,6 +8094,8 @@
  
  #if _SETUPAPI_VER >= _WIN32_WINNT_WINXP
  
@@ -3561,7 +3668,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7372,6 +8106,8 @@
+@@ -7372,6 +8110,8 @@
      _Reserved_ PVOID Reserved
      );
  
@@ -3570,7 +3677,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7400,6 +8136,8 @@
+@@ -7400,6 +8140,8 @@
  //
  // SetupEnumInfSections is for low-level parsing of an INF
  //
@@ -3579,7 +3686,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7411,6 +8149,8 @@
+@@ -7411,6 +8153,8 @@
      _Out_opt_ UINT *SizeNeeded
      );
  
@@ -3588,7 +3695,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7519,6 +8259,7 @@
+@@ -7519,6 +8263,7 @@
  #endif  // use current version of signer info structure
  
  
@@ -3596,7 +3703,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7528,6 +8269,7 @@
+@@ -7528,6 +8273,7 @@
      _Inout_ PSP_INF_SIGNER_INFO_A InfSignerInfo
      );
  
@@ -3604,7 +3711,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7552,6 +8294,8 @@
+@@ -7552,6 +8298,8 @@
  //
  #define DICUSTOMDEVPROP_MERGE_MULTISZ    0x00000001
  
@@ -3613,7 +3720,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7567,6 +8311,8 @@
+@@ -7567,6 +8315,8 @@
      _Out_opt_ PDWORD RequiredSize
      );
  
@@ -3622,7 +3729,7 @@
  _Success_(return != FALSE)
  WINSETUPAPI
  BOOL
-@@ -7604,6 +8350,7 @@
+@@ -7604,6 +8354,7 @@
  //
  #define SCWMI_CLOBBER_SECURITY  0x00000001
  
@@ -3630,7 +3737,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7613,6 +8360,7 @@
+@@ -7613,6 +8364,7 @@
      _In_ DWORD Flags
      );
  
@@ -3638,7 +3745,7 @@
  WINSETUPAPI
  BOOL
  WINAPI
-@@ -7632,6 +8380,316 @@
+@@ -7632,6 +8384,316 @@
  #endif // _SETUPAPI_VER >= _WIN32_WINNT_WS03
  
  

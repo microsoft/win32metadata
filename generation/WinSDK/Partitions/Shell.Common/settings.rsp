@@ -6,6 +6,5 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/shtypes.h
 <IncludeRoot>/um/ObjectArray.h
 --with-attribute
-SIIGBF=Flags
 --namespace
 Windows.Win32.UI.Shell.Common

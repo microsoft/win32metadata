@@ -1,11 +1,39 @@
 diff --git a/um/aclui.h b/um/aclui.h
-index 09088fa2..38d046b1 100644
 --- a/um/aclui.h
 +++ b/um/aclui.h
-@@ -127,6 +127,14 @@ typedef struct _SI_OBJECT_INFO
+@@ -73,9 +73,13 @@ extern "C" {
+ //              destroyed is indicated by the uPage parameter.
+ //
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef DWORD SI_OBJECT_INFO_FLAGS;
++#endif
++
+ typedef struct _SI_OBJECT_INFO
+ {
+-    DWORD       dwFlags;
++    _Win32_AssociatedEnum_(SI_OBJECT_INFO_FLAGS) DWORD       dwFlags;
+     HINSTANCE   hInstance;          // resources (e.g. strings) reside here
+     LPWSTR      pszServerName;      // must be present
+     LPWSTR      pszObjectName;      // must be present
+@@ -127,6 +131,28 @@ typedef struct _SI_OBJECT_INFO
  
  #define SI_EDIT_ALL     (SI_EDIT_PERMS | SI_EDIT_OWNER | SI_EDIT_AUDITS)
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS) && (NTDDI_VERSION >= NTDDI_WIN8)
++// Keep the existing metadata labels without adding native underscore aliases.
++typedef _WIN32META_ANNOTATION_("FlagsEnum(SI_ADVANCED_, SI_AUDITS_ELEVATION_REQUIRED, SI_CONTAINER_, SI_DISABLE_DENY_ACE, SI_EDIT_ALL_, SI_EDIT_AUDITS_, SI_EDIT_EFFECTIVE, SI_EDIT_OWNER_, SI_EDIT_PERMS_, SI_EDIT_PROPERTIES_, SI_ENABLE_CENTRAL_POLICY, SI_ENABLE_EDIT_ATTRIBUTE_CONDITION, SI_MAY_WRITE, SI_NO_ACL_PROTECT_, SI_NO_ADDITIONAL_PERMISSION, SI_NO_TREE_APPLY_, SI_OBJECT_GUID_, SI_OWNER_ELEVATION_REQUIRED, SI_OWNER_READONLY_, SI_OWNER_RECURSE_, SI_PAGE_TITLE_, SI_PERMS_ELEVATION_REQUIRED, SI_READONLY_, SI_RESET_, SI_RESET_DACL, SI_RESET_DACL_TREE_, SI_RESET_OWNER, SI_RESET_SACL, SI_RESET_SACL_TREE_, SI_SCOPE_ELEVATION_REQUIRED, SI_SERVER_IS_DC_, SI_VIEW_ONLY)",
++    SI_ADVANCED, SI_AUDITS_ELEVATION_REQUIRED, SI_CONTAINER, SI_DISABLE_DENY_ACE,
++    SI_EDIT_ALL, SI_EDIT_AUDITS, SI_EDIT_EFFECTIVE, SI_EDIT_OWNER, SI_EDIT_PERMS,
++    SI_EDIT_PROPERTIES, SI_ENABLE_CENTRAL_POLICY, SI_ENABLE_EDIT_ATTRIBUTE_CONDITION,
++    SI_MAY_WRITE, SI_NO_ACL_PROTECT, SI_NO_ADDITIONAL_PERMISSION, SI_NO_TREE_APPLY,
++    SI_OBJECT_GUID, SI_OWNER_ELEVATION_REQUIRED, SI_OWNER_READONLY, SI_OWNER_RECURSE,
++    SI_PAGE_TITLE, SI_PERMS_ELEVATION_REQUIRED, SI_READONLY, SI_RESET, SI_RESET_DACL,
++    SI_RESET_DACL_TREE, SI_RESET_OWNER, SI_RESET_SACL, SI_RESET_SACL_TREE,
++    SI_SCOPE_ELEVATION_REQUIRED, SI_SERVER_IS_DC, SI_VIEW_ONLY)
++    DWORD SI_OBJECT_INFO_FLAGS;
++#endif
++
 +#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus) && !defined(MIDL_PASS)
 +#include <sal.h>
 +_Win32_FlagsEnum_(SECURITY_INFO_PAGE_FLAGS, unsigned long,
@@ -17,7 +45,17 @@ index 09088fa2..38d046b1 100644
  
  typedef struct _SI_ACCESS
  {
-@@ -221,7 +229,10 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
+@@ -206,6 +232,9 @@ typedef enum _SI_PAGE_ACTIVATED
+ 
+ #undef INTERFACE
+ #define INTERFACE   ISecurityInformation
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_SupportedOS_WindowsXP_ struct ISecurityInformation ISecurityInformation;
++#endif
+ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-00AA00BBB723")
+ {
+     // *** IUnknown methods ***
+@@ -221,7 +250,10 @@ DECLARE_INTERFACE_IID_(ISecurityInformation, IUnknown, "965FC360-16FF-11d0-91CB-
      STDMETHOD(SetSecurity) (THIS_ SECURITY_INFORMATION SecurityInformation,
                              PSECURITY_DESCRIPTOR pSecurityDescriptor ) PURE;
      STDMETHOD(GetAccessRights) (THIS_ const GUID* pguidObjectType,
@@ -29,7 +67,7 @@ index 09088fa2..38d046b1 100644
                                  PSI_ACCESS *ppAccess,
                                  ULONG *pcAccesses,
                                  ULONG *piDefaultAccess ) PURE;
-@@ -236,6 +247,9 @@ typedef ISecurityInformation *LPSECURITYINFO;
+@@ -236,6 +268,9 @@ typedef ISecurityInformation *LPSECURITYINFO;
  
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation2
@@ -39,7 +77,7 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(ISecurityInformation2, IUnknown, "c3ccfdb4-6f88-11d2-a3ce-00c04fb1782a")
  {
      // *** IUnknown methods ***
-@@ -268,6 +282,9 @@ typedef struct _SID_INFO_LIST
+@@ -268,6 +303,9 @@ typedef struct _SID_INFO_LIST
  
  #undef INTERFACE
  #define INTERFACE   IEffectivePermission
@@ -49,7 +87,7 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(IEffectivePermission, IUnknown, "3853DC76-9F35-407c-88A1-D19344365FBC")
  {
      // *** IUnknown methods ***
-@@ -289,6 +306,9 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
+@@ -289,6 +327,9 @@ typedef IEffectivePermission *LPEFFECTIVEPERMISSION;
  
  #undef INTERFACE
  #define INTERFACE   ISecurityObjectTypeInfo
@@ -59,7 +97,7 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(ISecurityObjectTypeInfo, IUnknown, "FC3066EB-79EF-444b-9111-D18A75EBF2FA")
  {
      // *** IUnknown methods ***
-@@ -307,6 +327,9 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
+@@ -307,6 +348,9 @@ typedef ISecurityObjectTypeInfo *LPSecurityObjectTypeInfo;
  // Support for separation or read-only ACL viewer and elevated ACL editor
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation3
@@ -69,7 +107,7 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(ISecurityInformation3, IUnknown, "E2CDC9CC-31BD-4f8f-8C8B-B641AF516A1A")
  {
      // *** IUnknown methods ***
-@@ -351,6 +374,9 @@ typedef struct _EFFPERM_RESULT_LIST
+@@ -351,6 +395,9 @@ typedef struct _EFFPERM_RESULT_LIST
  
  #undef INTERFACE
  #define INTERFACE   ISecurityInformation4
@@ -79,7 +117,7 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(ISecurityInformation4, IUnknown, "EA961070-CD14-4621-ACE4-F63C03E583E4")
  {
      // *** IUnknown methods ***
-@@ -368,6 +394,9 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
+@@ -368,6 +415,9 @@ typedef ISecurityInformation4 *LPSECURITYINFO4;
  
  #undef INTERFACE
  #define INTERFACE   IEffectivePermission
@@ -89,12 +127,13 @@ index 09088fa2..38d046b1 100644
  DECLARE_INTERFACE_IID_(IEffectivePermission2, IUnknown, "941FABCA-DD47-4FCA-90BB-B0E10255F20D")
  {
      // *** IUnknown methods ***
-@@ -419,11 +448,16 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
+@@ -419,11 +469,17 @@ EXTERN_GUID(IID_ISecurityInformation4, 0xea961070, 0xcd14, 0x4621, 0xac, 0xe4, 0
  EXTERN_GUID(IID_IEffectivePermission2, 0x941fabca, 0xdd47, 0x4fca, 0x90, 0xbb, 0xb0, 0xe1, 0x2, 0x55, 0xf2, 0xd);
  #endif // (NTDDI_VERSION >= NTDDI_WIN8)
  
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_
++_Win32_RAIIFree_(DestroyPropertySheetPage, -1, 0)
  HPROPSHEETPAGE ACLUIAPI CreateSecurityPage(_In_ LPSECURITYINFO psi );
 +_Win32_SetLastError_
 +_Win32_SupportedOS_WindowsXP_

@@ -235,8 +235,11 @@ translation unit for annotation extraction, remap discovery, and ClangSharp
 generation. RAII invalid values, group values, type associations, and optional
 import overrides are typed annotation arguments from that first AST. No
 `WIN32METADATA_CSHARP` gate or second expression parse is used.
-Cleanup references use an unevaluated address operand so `dllimport` functions do
-not need constant addresses. The shared helper makes ignored metadata annotations
+Cleanup references use a tagged expanded native name, bound to one actual function
+declaration after the complete translation unit is available. The cleanup prototype
+may follow the producer; unknown, non-function, and ambiguous references fail.
+Invalid-value expressions remain compiler-evaluated and input handles do not infer
+cleanup. The shared helper makes ignored metadata annotations
 errors locally without changing the native SDK/SAL warning policy.
 
 Defined annotations:

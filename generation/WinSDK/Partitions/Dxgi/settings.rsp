@@ -16,7 +16,5 @@ Windows.Win32.Graphics.Dxgi
 --config
 parse-win32-annotations
 --with-attribute
-DXGI_OFFER_RESOURCE_FLAGS=Flags
-DXGI_OUTDUPL_FLAG=Flags
 DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG=Flags
 DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG=Flags

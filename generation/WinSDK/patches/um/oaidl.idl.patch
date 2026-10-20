@@ -1,13 +1,34 @@
+diff --git a/um/oaidl.idl b/um/oaidl.idl
+index c39506fd..674eb0d1 100644
 --- a/um/oaidl.idl
 +++ b/um/oaidl.idl
-@@ -1,3 +1,6 @@
+@@ -1,3 +1,7 @@
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
 +#include <win32metadata_annotations.h>
 +cpp_quote("#include <win32metadata_annotations.h>")
  cpp_quote("#include <winapifamily.h>")
  
  //+---------------------------------------------------------------------------
-@@ -1181,6 +1184,8 @@
+@@ -804,7 +808,7 @@ interface ICreateTypeInfo: IUnknown
+ 
+     HRESULT SetImplTypeFlags(
+                 [in] UINT index,
+-                [in] INT implTypeFlags
++                [annotation("_Win32_AssociatedEnum_(IMPLTYPEFLAGS)")] [in] INT implTypeFlags
+             );
+ 
+     HRESULT SetAlignment(
+@@ -1089,7 +1093,7 @@ interface IDispatch : IUnknown
+                 [in, annotation("_In_")] DISPID dispIdMember,
+                 [in, annotation("_In_")] REFIID riid,
+                 [in, annotation("_In_")] LCID lcid,
+-                [in, annotation("_In_")] WORD wFlags,
++                [in, annotation("_In_ _Win32_AssociatedEnum_(DISPATCH_FLAGS)")] WORD wFlags,
+                 [in, out, annotation("_In_")] DISPPARAMS * pDispParams,
+                 [out, annotation("_Out_opt_")] VARIANT * pVarResult,
+                 [out, annotation("_Out_opt_")] EXCEPINFO * pExcepInfo,
+@@ -1181,6 +1185,8 @@ interface IEnumVARIANT : IUnknown
                  [out] IEnumVARIANT ** ppEnum
              );
  }
@@ -16,3 +37,12 @@
  
  
  [
+@@ -1327,7 +1333,7 @@ interface ITypeInfo : IUnknown
+ 
+     HRESULT GetImplTypeFlags(
+                 [in] UINT index,
+-                [out] INT * pImplTypeFlags
++                [annotation("_Win32_AssociatedEnum_(IMPLTYPEFLAGS)")] [out] INT * pImplTypeFlags
+             );
+ 
+     [local]

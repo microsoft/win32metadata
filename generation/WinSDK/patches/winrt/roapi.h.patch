@@ -1,3 +1,4 @@
+diff --git a/winrt/roapi.h b/winrt/roapi.h
 --- a/winrt/roapi.h
 +++ b/winrt/roapi.h
 @@ -2,6 +2,7 @@
@@ -18,7 +19,23 @@
  _Check_return_
  HRESULT
  WINAPI
-@@ -76,6 +78,7 @@
+@@ -61,6 +63,7 @@
+     _In_ RO_INIT_TYPE initType
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ void
+ WINAPI
+@@ -69,6 +72,7 @@
+ 
+ ROAPI
+ _Check_return_
++_Win32_SupportedOS_Windows8_
+ HRESULT
+ WINAPI
+ RoActivateInstance(
+@@ -76,6 +80,7 @@
      _COM_Outptr_ IInspectable** instance
      );
  
@@ -26,7 +43,15 @@
  ROAPI
  _Check_return_
  HRESULT
-@@ -94,6 +97,7 @@
+@@ -87,6 +92,7 @@
+     _Out_ RO_REGISTRATION_COOKIE* cookie
+     );
+ 
++_Win32_SupportedOS_Windows8_
+ ROAPI
+ void
+ WINAPI
+@@ -94,6 +100,7 @@
      _In_ RO_REGISTRATION_COOKIE cookie
      );
  
@@ -34,7 +59,7 @@
  ROAPI
  _Check_return_
  HRESULT
-@@ -107,6 +111,7 @@
+@@ -107,6 +114,7 @@
  typedef interface IApartmentShutdown IApartmentShutdown;
  DECLARE_HANDLE(APARTMENT_SHUTDOWN_REGISTRATION_COOKIE);
  
@@ -42,7 +67,7 @@
  ROAPI
  _Check_return_
  HRESULT
-@@ -117,6 +122,7 @@
+@@ -117,6 +125,7 @@
      _Out_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE* regCookie
      );
  
@@ -50,7 +75,7 @@
  ROAPI
  _Check_return_
  HRESULT
-@@ -125,6 +131,7 @@
+@@ -125,6 +134,7 @@
      _In_ APARTMENT_SHUTDOWN_REGISTRATION_COOKIE regCookie
      );
  
@@ -58,3 +83,19 @@
  ROAPI
  _Check_return_
  HRESULT
+@@ -208,6 +218,7 @@
+         // get activation factory
+         template<class T>
+         _Check_return_
++_Win32_SupportedOS_Windows8_
+         __inline HRESULT GetActivationFactory(
+             _In_        HSTRING activatableClassId,
+             _COM_Outptr_ T**     factory)
+@@ -266,6 +277,7 @@
+             // get activation factory
+             template<class T>
+             _Check_return_
++_Win32_SupportedOS_Windows8_
+             __inline HRESULT GetActivationFactory(
+                 _In_        HSTRING activatableClassId,
+                 _COM_Outptr_ T**     factory)

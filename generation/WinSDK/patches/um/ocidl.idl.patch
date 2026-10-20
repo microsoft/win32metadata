@@ -1,13 +1,14 @@
 --- a/um/ocidl.idl
 +++ b/um/ocidl.idl
-@@ -1,3 +1,6 @@
+@@ -1,3 +1,7 @@
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
 +#include <win32metadata_annotations.h>
 +cpp_quote("#include <win32metadata_annotations.h>")
  cpp_quote("#include <winapifamily.h>")
  
  //+---------------------------------------------------------------------------
-@@ -183,6 +186,7 @@
+@@ -183,6 +187,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -15,7 +16,7 @@
  [
      object,
      uuid(B196B287-BAB4-101A-B69C-00AA00341D07),
-@@ -230,8 +234,10 @@
+@@ -230,8 +235,10 @@
                  [out] IEnumConnections ** ppEnum
              );
  }
@@ -28,7 +29,7 @@
  [
      object,
      uuid(B196B286-BAB4-101A-B69C-00AA00341D07),
-@@ -266,6 +272,7 @@
+@@ -266,6 +273,7 @@
  }
  
  
@@ -36,7 +37,7 @@
  [
      object,
      uuid(B196B285-BAB4-101A-B69C-00AA00341D07),
-@@ -305,8 +312,10 @@
+@@ -305,8 +313,10 @@
                  [out] IEnumConnectionPoints ** ppEnum
              );
  }
@@ -49,7 +50,7 @@
  [
      object,
      uuid(B196B284-BAB4-101A-B69C-00AA00341D07),
-@@ -336,6 +345,7 @@
+@@ -336,6 +346,7 @@
  #pragma region Desktop Family or OneCore Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)")
  
@@ -57,7 +58,7 @@
  [
      object,
      uuid(B196B28F-BAB4-101A-B69C-00AA00341D07),
-@@ -381,6 +391,7 @@
+@@ -381,6 +392,7 @@
  }
  
  
@@ -65,7 +66,7 @@
  [
      object,
      uuid(B196B283-BAB4-101A-B69C-00AA00341D07),
-@@ -397,6 +408,7 @@
+@@ -397,6 +409,7 @@
  }
  
  
@@ -73,7 +74,7 @@
  [
      object,
      uuid(A6BC3AC0-DBAA-11CE-9DE3-00AA004BB851),
-@@ -418,6 +430,7 @@
+@@ -418,6 +431,7 @@
  }
  
  
@@ -81,7 +82,16 @@
  [
      object,
      uuid(A7ABA9C1-8983-11cf-8F20-00805F2CD064),
-@@ -450,6 +463,7 @@
+@@ -440,7 +454,7 @@
+ 
+     HRESULT GetInfoOfIndex(
+                 [in]  ULONG iti,
+-                [in]  DWORD dwFlags,
++                [annotation("_Win32_AssociatedEnum_(MULTICLASSINFO_FLAGS)")] [in]  DWORD dwFlags,
+                 [out] ITypeInfo ** pptiCoClass,
+                 [out] DWORD * pdwTIFlags,
+                 [out] ULONG * pcdispidReserved,
+@@ -450,6 +464,7 @@
  }
  
  
@@ -89,7 +99,7 @@
  [
      object,
      uuid(B196B288-BAB4-101A-B69C-00AA00341D07),
-@@ -492,6 +506,7 @@
+@@ -492,6 +507,7 @@
  }
  
  
@@ -97,7 +107,7 @@
  [
      object,
      uuid(B196B289-BAB4-101A-B69C-00AA00341D07),
-@@ -532,12 +547,12 @@
+@@ -532,12 +548,12 @@
      HRESULT TransformCoords(
                  [in, out] POINTL * pPtlHimetric,
                  [in, out] POINTF * pPtfContainer,
@@ -112,7 +122,7 @@
              );
  
      HRESULT OnFocus(
-@@ -550,6 +565,7 @@
+@@ -550,6 +566,7 @@
  }
  
  
@@ -120,7 +130,7 @@
  [
      object,
      uuid(B196B28D-BAB4-101A-B69C-00AA00341D07),
-@@ -620,6 +636,7 @@
+@@ -620,6 +637,7 @@
  }
  
  
@@ -128,7 +138,7 @@
  [
      object,
      uuid(01E44665-24AC-101B-84ED-08002B2EC713),
-@@ -636,6 +653,7 @@
+@@ -636,6 +654,7 @@
  }
  
  
@@ -136,7 +146,7 @@
  [
      object,
      uuid(B196B28C-BAB4-101A-B69C-00AA00341D07),
-@@ -653,7 +671,7 @@
+@@ -653,7 +672,7 @@
      } PROPPAGESTATUS;
  
      HRESULT OnStatusChange(
@@ -145,7 +155,7 @@
              );
  
      HRESULT GetLocaleID(
-@@ -670,6 +688,7 @@
+@@ -670,6 +689,7 @@
  }
  
  
@@ -153,7 +163,7 @@
  [
      object,
      uuid(9BFBBC02-EFF1-101A-84ED-00AA00341D07),
-@@ -690,6 +709,7 @@
+@@ -690,6 +710,7 @@
  }
  
  
@@ -161,7 +171,7 @@
  [
      object,
      uuid(B196B28B-BAB4-101A-B69C-00AA00341D07),
-@@ -761,8 +781,10 @@
+@@ -761,8 +782,10 @@
                  void
              );
  }
@@ -174,7 +184,7 @@
  [
      object,
      uuid(7FD52380-4E07-101B-AE2D-08002B2EC713),
-@@ -794,6 +816,7 @@
+@@ -794,6 +817,7 @@
                  void
              );
  }
@@ -182,7 +192,7 @@
  
  
  [
-@@ -823,6 +846,7 @@
+@@ -823,6 +847,7 @@
  }
  
  
@@ -190,7 +200,7 @@
  [
      object,
      uuid(742B0E01-14E6-101B-914E-00AA00300CAB),
-@@ -853,6 +877,7 @@
+@@ -853,6 +878,7 @@
  }
  
  
@@ -198,7 +208,7 @@
  [
      object,
      uuid(BEF6E002-A874-101A-8BBA-00AA00300CAB),
-@@ -970,6 +995,7 @@
+@@ -970,6 +996,7 @@
  }
  
  
@@ -206,7 +216,16 @@
  [
      object,
      uuid(7BF80980-BF32-101A-8BBB-00AA00300CAB),
-@@ -1172,6 +1198,7 @@
+@@ -1000,7 +1027,7 @@
+             );
+ 
+     HRESULT get_Type(
+-                [out] SHORT * pType
++                [annotation("_Win32_AssociatedEnum_(PICTYPE)")] [out] SHORT * pType
+             );
+ 
+     HRESULT get_Width(
+@@ -1172,6 +1199,7 @@
      typedef IFontEventsDisp * LPFONTEVENTS;
  }
  
@@ -214,7 +233,7 @@
  [
      object,
      uuid(BEF6E003-A874-101A-8BBA-00AA00300CAB),
-@@ -1184,6 +1211,7 @@
+@@ -1184,6 +1212,7 @@
  }
  
  
@@ -222,7 +241,7 @@
  [
      object,
      uuid(7BF80981-BF32-101A-8BBB-00AA00300CAB),
-@@ -1203,6 +1231,7 @@
+@@ -1203,6 +1232,7 @@
  //----------------------------------------------------------------------------
  
  
@@ -230,7 +249,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1226,6 +1255,7 @@
+@@ -1226,6 +1256,7 @@
  }
  
  
@@ -238,7 +257,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1255,6 +1285,7 @@
+@@ -1255,6 +1286,7 @@
  }
  
  
@@ -246,7 +265,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1333,6 +1364,7 @@
+@@ -1333,6 +1365,7 @@
  }
  
  
@@ -254,7 +273,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1410,7 +1442,7 @@
+@@ -1410,7 +1443,7 @@
              );
  
      HRESULT GetNaturalExtent (
@@ -263,7 +282,7 @@
                  [in] LONG lindex,
                  [in] DVTARGETDEVICE * ptd,
                  [in] HDC hicTargetDev,
-@@ -1420,6 +1452,7 @@
+@@ -1420,6 +1453,7 @@
  }
  
  
@@ -271,7 +290,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1449,6 +1482,7 @@
+@@ -1449,6 +1483,7 @@
  }
  
  
@@ -279,7 +298,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1482,6 +1516,7 @@
+@@ -1482,6 +1517,7 @@
  }
  
  
@@ -287,7 +306,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1520,8 +1555,10 @@
+@@ -1520,8 +1556,10 @@
                  [out] IEnumOleUndoUnits ** ppEnum
              );
  }
@@ -300,7 +319,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1583,8 +1620,10 @@
+@@ -1583,8 +1621,10 @@
                  [in] BOOL fEnable
              );
  }
@@ -313,7 +332,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1602,7 +1641,7 @@
+@@ -1602,7 +1642,7 @@
      } POINTERINACTIVE;
  
      HRESULT GetActivationPolicy(
@@ -322,7 +341,7 @@
              );
  
      HRESULT OnInactiveMouseMove(
-@@ -1622,6 +1661,7 @@
+@@ -1622,6 +1662,7 @@
  }
  
  
@@ -330,7 +349,7 @@
  [
      object,
      uuid(FC4801A3-2BA9-11CF-A229-00AA003D7352),
-@@ -1654,6 +1694,7 @@
+@@ -1654,6 +1695,7 @@
  
  
  
@@ -338,7 +357,7 @@
  [
      object,
      uuid(376BD3AA-3845-101B-84ED-08002B2EC713),
-@@ -1810,6 +1851,7 @@
+@@ -1810,6 +1852,7 @@
                  void
              );
  }
@@ -346,7 +365,7 @@
  
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */")
  #pragma endregion
-@@ -1823,6 +1865,7 @@
+@@ -1823,6 +1866,7 @@
  
  #if !defined(_DCOM_OC_REMOTING_)
  
@@ -354,7 +373,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1852,6 +1895,7 @@
+@@ -1852,6 +1896,7 @@
  #pragma region Application Family or OneCore Family or Games Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)")
  
@@ -362,7 +381,7 @@
  [
      object,
      pointer_default(unique),
-@@ -1881,7 +1925,7 @@
+@@ -1881,7 +1926,7 @@
          IAdviseSinkEx *         pAdviseSink;
          IPropertyNotifySink *   pPropertyNotifySink;
          IUnknown *              pUnkEventSink;
@@ -371,7 +390,7 @@
          OLE_COLOR               colorFore;
          OLE_COLOR               colorBack;
          IFont *                 pFont;
-@@ -1896,11 +1940,11 @@
+@@ -1896,11 +1941,11 @@
  
      typedef struct tagQACONTROL {
          ULONG   cbSize;

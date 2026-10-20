@@ -1,3 +1,4 @@
+diff --git a/shared/dxgi.idl b/shared/dxgi.idl
 --- a/shared/dxgi.idl
 +++ b/shared/dxgi.idl
 @@ -1,3 +1,4 @@
@@ -5,7 +6,27 @@
  import "oaidl.idl";
  import "ocidl.idl";
  
-@@ -163,6 +164,9 @@
+@@ -55,6 +56,9 @@ cpp_quote( "#define DXGI_USAGE_UNORDERED_ACCESS         0x00000400UL" )
+ //    0           DXGI (implying that DXGI usages can be extended to 24 bits (DXGI field plus the 9-bit private field)
+ //    1           D3D (covering d3d10 and later revisions)typedef DXGI_USAGE UINT;
+ typedef UINT DXGI_USAGE;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DXGI_USAGE, unsigned int, DXGI_USAGE_SHADER_INPUT, DXGI_USAGE_RENDER_TARGET_OUTPUT, DXGI_USAGE_BACK_BUFFER, DXGI_USAGE_SHARED, DXGI_USAGE_READ_ONLY, DXGI_USAGE_DISCARD_ON_PRESENT, DXGI_USAGE_UNORDERED_ACCESS);")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ typedef struct DXGI_FRAME_STATISTICS
+@@ -135,6 +139,9 @@ const UINT DXGI_RESOURCE_PRIORITY_LOW = 0x50000000;
+ const UINT DXGI_RESOURCE_PRIORITY_NORMAL = 0x78000000;
+ const UINT DXGI_RESOURCE_PRIORITY_HIGH = 0xa0000000;
+ const UINT DXGI_RESOURCE_PRIORITY_MAXIMUM = 0xc8000000;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_Enum_(DXGI_RESOURCE_PRIORITY, unsigned int, DXGI_RESOURCE_PRIORITY_MINIMUM, DXGI_RESOURCE_PRIORITY_LOW, DXGI_RESOURCE_PRIORITY_NORMAL, DXGI_RESOURCE_PRIORITY_HIGH, DXGI_RESOURCE_PRIORITY_MAXIMUM);")
++cpp_quote("#endif")
+ 
+ //--------------------------------------------------------------------------------------------------------
+ typedef enum DXGI_RESIDENCY
+@@ -163,6 +170,9 @@ typedef enum DXGI_SWAP_EFFECT
  } DXGI_SWAP_EFFECT;
  
  //--------------------------------------------------------------------------------------------------------
@@ -15,7 +36,7 @@
  typedef enum DXGI_SWAP_CHAIN_FLAG
  {
      DXGI_SWAP_CHAIN_FLAG_NONPREROTATED = 1,
-@@ -179,6 +183,9 @@
+@@ -179,18 +189,21 @@ typedef enum DXGI_SWAP_CHAIN_FLAG
      DXGI_SWAP_CHAIN_FLAG_ALLOW_TEARING = 2048,
      DXGI_SWAP_CHAIN_FLAG_RESTRICTED_TO_ALL_HOLOGRAPHIC_DISPLAYS = 4096,
  } DXGI_SWAP_CHAIN_FLAG;
@@ -25,7 +46,12 @@
  
  //--------------------------------------------------------------------------------------------------------
  typedef struct DXGI_SWAP_CHAIN_DESC
-@@ -190,7 +197,7 @@
+ {
+     DXGI_MODE_DESC BufferDesc;
+     DXGI_SAMPLE_DESC SampleDesc;
+-    DXGI_USAGE BufferUsage;
++    [annotation("_Win32_AssociatedEnum_(DXGI_USAGE)")] DXGI_USAGE BufferUsage;
+     UINT BufferCount;
      HWND OutputWindow;
      BOOL Windowed;
      DXGI_SWAP_EFFECT SwapEffect;
@@ -34,7 +60,30 @@
  } DXGI_SWAP_CHAIN_DESC;
  
  
-@@ -291,7 +298,7 @@
+@@ -253,9 +266,9 @@ interface IDXGIResource :
+     IDXGIDeviceSubObject
+ {
+     HRESULT GetSharedHandle( [out, annotation("_Out_")] HANDLE * pSharedHandle );
+-    HRESULT GetUsage( [out] DXGI_USAGE * pUsage );
+-    HRESULT SetEvictionPriority( [in] UINT EvictionPriority );
+-    HRESULT GetEvictionPriority( [out, retval, annotation("_Out_")] UINT* pEvictionPriority );
++    HRESULT GetUsage( [annotation("_Win32_AssociatedEnum_(DXGI_USAGE)")] [out] DXGI_USAGE * pUsage );
++    HRESULT SetEvictionPriority( [annotation("_Win32_AssociatedEnum_(DXGI_RESOURCE_PRIORITY)")] [in] UINT EvictionPriority );
++    HRESULT GetEvictionPriority( [out, retval, annotation("_Out_ _Win32_AssociatedEnum_(DXGI_RESOURCE_PRIORITY)")] UINT* pEvictionPriority );
+ };
+ 
+ //--------------------------------------------------------------------------------------------------------
+@@ -281,6 +294,9 @@ interface IDXGIKeyedMutex :
+ const UINT DXGI_MAP_READ    = 1UL;
+ const UINT DXGI_MAP_WRITE   = 2UL;
+ const UINT DXGI_MAP_DISCARD = 4UL;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DXGI_MAP_FLAGS, unsigned int, DXGI_MAP_READ, DXGI_MAP_WRITE, DXGI_MAP_DISCARD);")
++cpp_quote("#endif")
+ 
+ [
+     object,
+@@ -291,10 +307,10 @@ const UINT DXGI_MAP_DISCARD = 4UL;
  interface IDXGISurface :
      IDXGIDeviceSubObject
  {
@@ -42,8 +91,12 @@
 +    HRESULT GetDesc([out, annotation("_Out_ _Win32_Retval_")] DXGI_SURFACE_DESC *pDesc);
      HRESULT Map(
          [out, annotation("_Out_")] DXGI_MAPPED_RECT *pLockedRect,
-         [in] UINT MapFlags );
-@@ -303,6 +310,7 @@
+-        [in] UINT MapFlags );
++        [annotation("_Win32_AssociatedEnum_(DXGI_MAP_FLAGS)")] [in] UINT MapFlags );
+     HRESULT Unmap();
+ };
+ 
+@@ -303,6 +319,7 @@ interface IDXGISurface :
  // The DXGISurface1
  //--------------------------------------------------------------------------------------------------------
  
@@ -51,7 +104,7 @@
  [
      object,
      uuid( 4AE63092-6327-4c1b-80AE-BFE12EA32B86),
-@@ -336,11 +344,12 @@
+@@ -336,15 +353,19 @@ interface IDXGIAdapter : IDXGIObject
      HRESULT EnumOutputs(
          [in] UINT Output,
          [in, out, annotation("_COM_Outptr_")] IDXGIOutput **ppOutput );
@@ -65,7 +118,14 @@
  
  //--------------------------------------------------------------------------------------------------------
  const UINT DXGI_ENUM_MODES_INTERLACED = 1UL;
-@@ -360,7 +369,7 @@
+ const UINT DXGI_ENUM_MODES_SCALING = 2UL;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef unsigned int DXGI_ENUM_MODES;")
++cpp_quote("#endif")
+ 
+ // Additional mode enumerations in DXGI 1.2
+ 
+@@ -360,10 +381,10 @@ const UINT DXGI_ENUM_MODES_SCALING = 2UL;
  interface IDXGIOutput :
      IDXGIObject
  {
@@ -73,8 +133,31 @@
 +    HRESULT GetDesc( [out,annotation("_Out_ _Win32_Retval_")] DXGI_OUTPUT_DESC *pDesc );
      HRESULT GetDisplayModeList(
          [in] DXGI_FORMAT EnumFormat,
-         [in] UINT Flags,
-@@ -421,13 +430,14 @@
+-        [in] UINT Flags,
++        [annotation("_Win32_AssociatedEnum_(DXGI_ENUM_MODES)")] [in] UINT Flags,
+         [in, out, annotation("_Inout_")] UINT * pNumModes,
+         [out, annotation("_Out_writes_to_opt_(*pNumModes,*pNumModes)")] DXGI_MODE_DESC *pDesc);
+     HRESULT FindClosestMatchingMode(
+@@ -400,6 +421,9 @@ cpp_quote( "#define DXGI_PRESENT_RESTRICT_TO_OUTPUT        0x00000040UL" )
+ //cpp_quote( "#define DXGI_PRESENT_DDA_PROTECTED_CONTENT   0x00000080UL" ) reserved
+ cpp_quote( "#define DXGI_PRESENT_USE_DURATION              0x00000100UL" )
+ cpp_quote( "#define DXGI_PRESENT_ALLOW_TEARING             0x00000200UL" )
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DXGI_PRESENT, unsigned int, DXGI_PRESENT_TEST, DXGI_PRESENT_DO_NOT_SEQUENCE, DXGI_PRESENT_RESTART, DXGI_PRESENT_DO_NOT_WAIT, DXGI_PRESENT_STEREO_PREFER_RIGHT, DXGI_PRESENT_STEREO_TEMPORARY_MONO, DXGI_PRESENT_RESTRICT_TO_OUTPUT, DXGI_PRESENT_USE_DURATION, DXGI_PRESENT_ALLOW_TEARING);")
++cpp_quote("#endif")
+ 
+ [
+     object,
+@@ -410,7 +434,7 @@ cpp_quote( "#define DXGI_PRESENT_ALLOW_TEARING             0x00000200UL" )
+ interface IDXGISwapChain :
+     IDXGIDeviceSubObject
+ {
+-    HRESULT Present([in] UINT SyncInterval, [in] UINT Flags);
++    HRESULT Present([in] UINT SyncInterval, [annotation("_Win32_AssociatedEnum_(DXGI_PRESENT)")] [in] UINT Flags);
+     HRESULT GetBuffer(
+         [in] UINT Buffer,
+         [in, annotation("_In_")] REFIID riid,
+@@ -421,13 +445,14 @@ interface IDXGISwapChain :
      HRESULT GetFullscreenState(
          [out, annotation("_Out_opt_")] BOOL *pFullscreen,
          [out, annotation("_COM_Outptr_opt_result_maybenull_")] IDXGIOutput **ppTarget );
@@ -91,7 +174,26 @@
  
  //--------------------------------------------------------------------------------------------------------
  // The DXGIFactory
-@@ -460,6 +470,7 @@
+@@ -437,6 +462,9 @@ cpp_quote( "#define DXGI_MWA_NO_WINDOW_CHANGES      ( 1 << 0 )" )
+ cpp_quote( "#define DXGI_MWA_NO_ALT_ENTER           ( 1 << 1 )" )
+ cpp_quote( "#define DXGI_MWA_NO_PRINT_SCREEN        ( 1 << 2 )" )
+ cpp_quote( "#define DXGI_MWA_VALID                  ( 0x7 )" )
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DXGI_MWA_FLAGS, unsigned int, DXGI_MWA_NO_WINDOW_CHANGES, DXGI_MWA_NO_ALT_ENTER, DXGI_MWA_NO_PRINT_SCREEN, DXGI_MWA_VALID);")
++cpp_quote("#endif")
+ 
+ [
+     object,
+@@ -450,7 +478,7 @@ interface IDXGIFactory :
+     HRESULT EnumAdapters(
+         [in] UINT Adapter,
+         [out, annotation("_COM_Outptr_")] IDXGIAdapter **ppAdapter );
+-    HRESULT MakeWindowAssociation(HWND WindowHandle, UINT Flags); //pass NULL to break the association
++    HRESULT MakeWindowAssociation(HWND WindowHandle, [annotation("_Win32_AssociatedEnum_(DXGI_MWA_FLAGS)")] UINT Flags); //pass NULL to break the association
+     HRESULT GetWindowAssociation( [out, annotation("_Out_")] HWND *pWindowHandle );
+     HRESULT CreateSwapChain(
+         [in, annotation("_In_")] IUnknown *pDevice,
+@@ -460,6 +488,7 @@ interface IDXGIFactory :
          [in] HMODULE Module,
          [out, annotation("_COM_Outptr_")] IDXGIAdapter **ppAdapter );
  };
@@ -99,7 +201,7 @@
  
  //--------------------------------------------------------------------------------------------------------
  // DXGI instantiation
-@@ -471,7 +482,7 @@
+@@ -471,7 +500,7 @@ cpp_quote( "HRESULT WINAPI CreateDXGIFactory(REFIID riid, _COM_Outptr_ void **pp
  cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
  #pragma endregion
  
@@ -108,7 +210,16 @@
  
  //----------------------------- ---------------------------------------------------------------------------
  // The DXGIDevice base interface
-@@ -507,6 +518,9 @@
+@@ -489,7 +518,7 @@ interface IDXGIDevice :
+     HRESULT CreateSurface(
+         [in, annotation("_In_")] const DXGI_SURFACE_DESC *pDesc,
+         [in] UINT NumSurfaces,
+-        [in] DXGI_USAGE Usage,
++        [annotation("_Win32_AssociatedEnum_(DXGI_USAGE)")] [in] DXGI_USAGE Usage,
+         [in, annotation("_In_opt_")] const DXGI_SHARED_RESOURCE *pSharedResource,
+         [out, size_is(NumSurfaces), annotation("_Out_writes_(NumSurfaces)")] IDXGISurface **ppSurface );
+     HRESULT QueryResourceResidency(
+@@ -507,6 +536,9 @@ interface IDXGIDevice :
  
  
  //--------------------------------------------------------------------------------------------------------
@@ -118,7 +229,7 @@
  typedef enum DXGI_ADAPTER_FLAG
  {
      DXGI_ADAPTER_FLAG_NONE                      = 0,
-@@ -514,6 +528,9 @@
+@@ -514,6 +546,9 @@ typedef enum DXGI_ADAPTER_FLAG
      DXGI_ADAPTER_FLAG_SOFTWARE                  = 2,
      DXGI_ADAPTER_FLAG_FORCE_DWORD               = 0xFFFFFFFF,
  } DXGI_ADAPTER_FLAG;
@@ -128,7 +239,7 @@
  
  //--------------------------------------------------------------------------------------------------------
  typedef struct DXGI_ADAPTER_DESC1
-@@ -531,7 +548,7 @@
+@@ -531,7 +566,7 @@ typedef struct DXGI_ADAPTER_DESC1
  
      LUID AdapterLuid;
  
@@ -137,7 +248,7 @@
  } DXGI_ADAPTER_DESC1;
  
  //--------------------------------------------------------------------------------------------------------
-@@ -550,6 +567,7 @@
+@@ -550,6 +585,7 @@ interface IDXGIAdapter1;
  // The DXGIFactory1
  //--------------------------------------------------------------------------------------------------------
  
@@ -145,7 +256,7 @@
  [
      object,
      uuid( 770aae78-f26f-4dba-a829-253c83d1b387 ),
-@@ -564,10 +582,12 @@
+@@ -564,10 +600,12 @@ interface IDXGIFactory1 :
          [out, annotation("_COM_Outptr_")] IDXGIAdapter1 **ppAdapter );
      BOOL IsCurrent();
  };
@@ -158,7 +269,7 @@
  [
      object,
      uuid( 29038f61-3839-4626-91fd-086879011a05 ),
-@@ -577,13 +597,14 @@
+@@ -577,13 +615,14 @@ interface IDXGIFactory1 :
  interface IDXGIAdapter1 :
      IDXGIAdapter
  {

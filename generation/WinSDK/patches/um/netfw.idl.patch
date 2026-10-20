@@ -1,5 +1,3 @@
-diff --git a/um/netfw.idl b/um/netfw.idl
-index b68dec12..b0b1524f 100644
 --- a/um/netfw.idl
 +++ b/um/netfw.idl
 @@ -8,6 +8,7 @@
@@ -10,7 +8,31 @@ index b68dec12..b0b1524f 100644
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -117,7 +118,7 @@ cpp_quote("    _In_ HANDLE registrationObject ")
+@@ -16,7 +17,7 @@
+ cpp_quote("")
+ cpp_quote("HRESULT")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationSetupAppContainerBinaries (")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationSetupAppContainerBinaries (")
+ cpp_quote("    _In_ PSID applicationContainerSid,")
+ cpp_quote("    _In_ LPCWSTR packageFullName,")
+ cpp_quote("    _In_ LPCWSTR packageFolder,")
+@@ -104,7 +105,7 @@
+ cpp_quote("")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationRegisterForAppContainerChanges(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationRegisterForAppContainerChanges(")
+ cpp_quote("    _In_ DWORD flags,")
+ cpp_quote("    _In_ PAC_CHANGES_CALLBACK_FN callback,")
+ cpp_quote("    _In_opt_ PVOID context,")
+@@ -112,37 +113,37 @@
+ cpp_quote("    );")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationUnregisterForAppContainerChanges(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationUnregisterForAppContainerChanges(")
+ cpp_quote("    _In_ HANDLE registrationObject ")
  cpp_quote("    );")
  cpp_quote("HRESULT")
  cpp_quote("WINAPI")
@@ -19,7 +41,45 @@ index b68dec12..b0b1524f 100644
  cpp_quote("    _Outptr_ IEnumVARIANT ** newEnum")
  cpp_quote("    );")
  cpp_quote("")
-@@ -178,7 +179,7 @@ cpp_quote("#define NETISO_GEID_FOR_WDAG 0x01")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationFreeAppContainers(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationFreeAppContainers(")
+ cpp_quote("    _In_ PINET_FIREWALL_APP_CONTAINER pPublicAppCs ")
+ cpp_quote("    );")
+ cpp_quote("")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationEnumAppContainers(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationEnumAppContainers(")
+ cpp_quote("    _In_  DWORD Flags,")
+ cpp_quote("    _Out_ DWORD *pdwNumPublicAppCs,")
+ cpp_quote("    _Outptr_result_buffer_(*pdwNumPublicAppCs) PINET_FIREWALL_APP_CONTAINER *ppPublicAppCs ")
+ cpp_quote("    );")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationGetAppContainerConfig(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationGetAppContainerConfig(")
+ cpp_quote("    _Out_ DWORD *pdwNumPublicAppCs,")
+ cpp_quote("    _Outptr_result_buffer_(*pdwNumPublicAppCs) PSID_AND_ATTRIBUTES *appContainerSids")
+ cpp_quote("    );")
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationSetAppContainerConfig(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationSetAppContainerConfig(")
+ cpp_quote("    _In_ DWORD dwNumPublicAppCs,")
+ cpp_quote("    _In_reads_(dwNumPublicAppCs) PSID_AND_ATTRIBUTES appContainerSids")
+ cpp_quote("    );")
+@@ -161,7 +162,7 @@
+ 
+ cpp_quote("DWORD")
+ cpp_quote("WINAPI")
+-cpp_quote("NetworkIsolationDiagnoseConnectFailureAndGetInfo(")
++cpp_quote("_Win32_SupportedOS_Windows8_ NetworkIsolationDiagnoseConnectFailureAndGetInfo(")
+ cpp_quote("    _In_ LPCWSTR wszServerName,")
+ cpp_quote("    _Out_ NETISO_ERROR_TYPE  *netIsoError")
+ cpp_quote("    );")
+@@ -178,7 +179,7 @@
  cpp_quote("#define NETISO_GEID_FOR_NEUTRAL_AWARE 0x02")
  cpp_quote("DWORD")
  cpp_quote("WINAPI")
@@ -28,7 +88,7 @@ index b68dec12..b0b1524f 100644
  cpp_quote("    _In_z_ LPCWSTR wszServerName,")
  cpp_quote("    _In_   DWORD   dwFlags,")
  cpp_quote("    _In_opt_ void *  context,")
-@@ -187,7 +188,7 @@ cpp_quote("    _Out_  HANDLE *hOperation ")
+@@ -187,7 +188,7 @@
  cpp_quote("    );")
  cpp_quote("DWORD")
  cpp_quote("WINAPI")
@@ -37,7 +97,7 @@ index b68dec12..b0b1524f 100644
  cpp_quote("    _In_ HANDLE hOperation,")
  cpp_quote("    _In_ BOOL   bWaitForOperation")
  cpp_quote("    );")
-@@ -280,6 +281,7 @@ import "oaidl.idl";
+@@ -280,6 +281,7 @@
  // instance of this interface is retrieved through the RemoteAdminSettings
  // property of the INetFwProfile interface. All configuration changes take
  // effect immediately.
@@ -45,7 +105,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(D4BECDDF-6F73-4A83-B832-9C66874CD20E),
-@@ -336,6 +338,7 @@ interface INetFwRemoteAdminSettings : IDispatch
+@@ -336,6 +338,7 @@
  // this interface is retrieved through the IcmpSettings property of the
  // INetFwProfile interface. All configuration changes take effect
  // immediately.
@@ -53,7 +113,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(A6207B2E-7CDD-426A-951E-5E1CBC5AFEAD),
-@@ -452,6 +455,7 @@ interface INetFwIcmpSettings : IDispatch
+@@ -452,6 +455,7 @@
  // HNetCfg.FwOpenPort COM object. For reading or modifying existing ports,
  // instances of this interface are retrieved through the INetFwOpenPorts
  // collection. All configuration changes take effect immediately.
@@ -61,7 +121,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(E0483BA0-47FF-4D9C-A6D6-7741D0B195F7),
-@@ -549,6 +553,7 @@ interface INetFwOpenPort : IDispatch
+@@ -549,6 +553,7 @@
  // of this interface is retrieved through the GloballyOpenPorts property of the
  // INetFwProfile interface. All configuration changes take effect
  // immediately.
@@ -69,7 +129,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(C0E9D7FA-E07E-430A-B19A-090CE82D92E2),
-@@ -598,6 +603,7 @@ interface INetFwOpenPorts : IDispatch
+@@ -598,6 +603,7 @@
  // listen through the firewall.  Instances of this interface are retrieved
  // through the INetFwServices collection. All configuration changes take
  // effect immediately.
@@ -77,7 +137,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(79FD57C8-908E-4A36-9888-D5B3F0A444CF),
-@@ -683,6 +689,7 @@ interface INetFwService : IDispatch
+@@ -683,6 +689,7 @@
  // through the firewall. An instance of this interface is retrieved through the
  // Services property of the INetFwProfile interface. All configuration
  // changes take effect immediately.
@@ -85,7 +145,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(79649BB4-903E-421B-94C9-79848E79F6EE),
-@@ -718,6 +725,7 @@ interface INetFwServices : IDispatch
+@@ -718,6 +725,7 @@
  // modifying existing apps, instances of this interface are retrieved through
  // the INetFwAuthorizedApplications collection. All configuration changes
  // take effect immediately.
@@ -93,7 +153,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(B5E64FFA-C2C5-444E-A301-FB5E00018050),
-@@ -800,6 +808,7 @@ interface INetFwAuthorizedApplication : IDispatch
+@@ -800,6 +808,7 @@
  // firewall. An instance of this interface is retrieved through the
  // AuthorizedApplications property of the INetFwProfile interface. All
  // configuration changes take effect immediately.
@@ -101,7 +161,7 @@ index b68dec12..b0b1524f 100644
  [
     object,
     uuid(644EFD52-CCF9-486C-97A2-39F352570B30),
-@@ -847,6 +856,7 @@ interface INetFwAuthorizedApplications : IDispatch
+@@ -847,6 +856,7 @@
  // interface is supported by the HNetCfg.FwRule COM object.  For reading or
  // modifying existing rules, instances of this interface are retrieved through
  // the INetFwRules collection. All configuration changes take effect immediately.
@@ -109,7 +169,7 @@ index b68dec12..b0b1524f 100644
  [
     local,
     object,
-@@ -1039,6 +1049,7 @@ interface INetFwRule : IDispatch
+@@ -1039,6 +1049,7 @@
  
  
  // Provides access to the dynamic edge properties of a rule.
@@ -117,7 +177,7 @@ index b68dec12..b0b1524f 100644
  [
     local,
     object,
-@@ -1062,6 +1073,7 @@ interface INetFwRule2 : INetFwRule
+@@ -1062,6 +1073,7 @@
  
  
  // Provides access to the lowbox properties of a rule.
@@ -125,7 +185,7 @@ index b68dec12..b0b1524f 100644
  [
     local,
     object,
-@@ -1136,6 +1148,7 @@ interface INetFwRule3 : INetFwRule2
+@@ -1136,6 +1148,7 @@
  // Provides access to a collection of rules in the specified profile. An instance
  // of this interface is retrieved through the Rules property of the INetFwPolicy2
  // interface. All configuration changes take effect immediately.
@@ -133,7 +193,7 @@ index b68dec12..b0b1524f 100644
  [
     local,
     object,
-@@ -1183,6 +1196,7 @@ interface INetFwRules : IDispatch
+@@ -1183,6 +1196,7 @@
  // Provides access to the service hardening firewall policy. Instances of this
  // interface are retrieved through the ServiceRestriction property of the
  // INetFwPolicy2 interface. All configuration changes take effect immediately.
@@ -141,7 +201,7 @@ index b68dec12..b0b1524f 100644
  [
      local,
      object,
-@@ -1220,6 +1234,7 @@ interface INetFwServiceRestriction : IDispatch
+@@ -1220,6 +1234,7 @@
  // are retrieved through the CurrentProfile property or GetProfileByType method
  // of the INetFwPolicy interface. All configuration changes take effect
  // immediately.
@@ -149,7 +209,7 @@ index b68dec12..b0b1524f 100644
  [
      object,
      uuid(174A0DDA-E9F9-449D-993B-21AB667CA456),
-@@ -1312,6 +1327,7 @@ interface INetFwProfile : IDispatch
+@@ -1312,6 +1327,7 @@
  // Provides access to a firewall policy. Instances of this interface are
  // retrieved through the LocalPolicy method of the INetFwMgr interface. All
  // configuration changes take effect immediately.
@@ -157,7 +217,7 @@ index b68dec12..b0b1524f 100644
  [
      object,
      uuid(D46D2478-9AC9-4008-9DC7-5563CE5536CC),
-@@ -1336,6 +1352,7 @@ interface INetFwPolicy : IDispatch
+@@ -1336,6 +1352,7 @@
  // Provides access to the firewall settings for a computer. This interface is
  // supported by the HNetCfg.FwPolicy2 COM object. All configuration changes take
  // effect immediately.
@@ -165,7 +225,7 @@ index b68dec12..b0b1524f 100644
  [
      local,
      object,
-@@ -1496,6 +1513,7 @@ interface INetFwPolicy2 : IDispatch
+@@ -1496,6 +1513,7 @@
  // Provides access to the firewall settings for a computer. This interface is
  // supported by the HNetCfg.FwMgr COM object. All configuration changes take
  // effect immediately.
@@ -173,7 +233,7 @@ index b68dec12..b0b1524f 100644
  [
      object,
      uuid(F7898AF5-CAC4-4632-A2EC-DA06E5111AF2),
-@@ -1574,6 +1592,7 @@ interface INetFwMgr : IDispatch
+@@ -1574,6 +1592,7 @@
  }
  
  // Provides access to the properties of a third-party firewall registration.
@@ -181,7 +241,7 @@ index b68dec12..b0b1524f 100644
  [
     local,
     object,
-@@ -1616,6 +1635,7 @@ interface INetFwProduct : IDispatch
+@@ -1616,6 +1635,7 @@
  // Provides access to the collection of third-party firewalls registered with
  // the Windows Firewall. This interface is supported by the HNetCfg.FwProducts
  // COM object.

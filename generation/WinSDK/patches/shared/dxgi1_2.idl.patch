@@ -1,3 +1,4 @@
+diff --git a/shared/dxgi1_2.idl b/shared/dxgi1_2.idl
 --- a/shared/dxgi1_2.idl
 +++ b/shared/dxgi1_2.idl
 @@ -1,5 +1,8 @@
@@ -9,7 +10,7 @@
  import "dxgi.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -7,6 +10,7 @@
+@@ -7,6 +10,7 @@ cpp_quote("#include <winapifamily.h>")
  #pragma region Desktop Family
  cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)")
  
@@ -17,7 +18,7 @@
  [
      object,
      uuid( ea9dbf1a-c88e-4486-854a-98aa0138f30c ),
-@@ -73,6 +77,7 @@
+@@ -73,6 +77,7 @@ typedef struct DXGI_OUTDUPL_FRAME_INFO
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutputDuplication interface
  //--------------------------------------------------------------------------------------------------------
@@ -25,7 +26,7 @@
  [
      object,
      uuid(191cfac3-a341-470d-b26e-a864f428319c),
-@@ -82,7 +87,7 @@
+@@ -82,7 +87,7 @@ typedef struct DXGI_OUTDUPL_FRAME_INFO
  interface IDXGIOutputDuplication :
      IDXGIObject
  {
@@ -34,7 +35,7 @@
      HRESULT AcquireNextFrame([in, annotation ("_In_")] UINT TimeoutInMilliseconds,
                               [out, annotation("_Out_")] DXGI_OUTDUPL_FRAME_INFO* pFrameInfo,
                               [out, annotation("_COM_Outptr_")] IDXGIResource** ppDesktopResource);
-@@ -115,6 +120,7 @@
+@@ -115,6 +120,7 @@ typedef enum DXGI_ALPHA_MODE
      DXGI_ALPHA_MODE_FORCE_DWORD = 0xffffffff
  } DXGI_ALPHA_MODE;
  
@@ -42,7 +43,7 @@
  [
      object,
      uuid(aba496dd-b617-4cb8-a866-bc44d7eb1fa2),
-@@ -129,6 +135,7 @@
+@@ -129,6 +135,7 @@ interface IDXGISurface2 :
                          [out, annotation("_Out_")] UINT *pSubresourceIndex);
  };
  
@@ -50,7 +51,16 @@
  [
      object,
      uuid(30961379-4609-4a41-998e-54fe567ee0c1),
-@@ -156,6 +163,7 @@
+@@ -146,7 +153,7 @@ interface IDXGIResource1 :
+         [in, annotation("_In_opt_")] const SECURITY_ATTRIBUTES *pAttributes,
+         [in, annotation("_In_")] DWORD dwAccess,
+         [in, annotation("_In_opt_")] LPCWSTR lpName,
+-        [out, annotation("_Out_")] HANDLE *pHandle);
++        [out, annotation("_Out_ _Win32_RAIIFree_(CloseHandle, -1, 0)")] HANDLE *pHandle);
+ };
+ 
+ typedef enum _DXGI_OFFER_RESOURCE_PRIORITY
+@@ -156,6 +163,7 @@ typedef enum _DXGI_OFFER_RESOURCE_PRIORITY
      DXGI_OFFER_RESOURCE_PRIORITY_HIGH,
  } DXGI_OFFER_RESOURCE_PRIORITY;
  
@@ -58,7 +68,13 @@
  [
      object,
      uuid( 05008617-fbfd-4051-a790-144884b4f6a9 ),
-@@ -181,6 +189,7 @@
+@@ -178,9 +186,13 @@ interface IDXGIDevice2 :
+ 
+ const UINT DXGI_ENUM_MODES_STEREO = 4UL;
+ const UINT DXGI_ENUM_MODES_DISABLED_STEREO = 8UL;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("_Win32_FlagsEnum_(DXGI_ENUM_MODES, unsigned int, DXGI_ENUM_MODES_INTERLACED, DXGI_ENUM_MODES_SCALING, DXGI_ENUM_MODES_STEREO, DXGI_ENUM_MODES_DISABLED_STEREO);")
++cpp_quote("#endif")
  
  const DWORD DXGI_SHARED_RESOURCE_READ = 0x80000000L;
  const DWORD DXGI_SHARED_RESOURCE_WRITE = 1;
@@ -66,7 +82,7 @@
  
  typedef struct DXGI_MODE_DESC1
  {
-@@ -215,7 +224,7 @@
+@@ -215,7 +227,7 @@ typedef struct DXGI_SWAP_CHAIN_DESC1
      DXGI_SCALING      Scaling;
      DXGI_SWAP_EFFECT  SwapEffect;
      DXGI_ALPHA_MODE   AlphaMode;
@@ -75,7 +91,7 @@
  } DXGI_SWAP_CHAIN_DESC1;
  
  typedef struct DXGI_SWAP_CHAIN_FULLSCREEN_DESC
-@@ -237,6 +246,7 @@
+@@ -237,6 +249,7 @@ typedef struct DXGI_PRESENT_PARAMETERS
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapchain1 interface
  //--------------------------------------------------------------------------------------------------------
@@ -83,7 +99,7 @@
  [
      object,
      uuid( 790a45f7-0d42-4876-983a-0a55cfe6f4aa ),
-@@ -246,8 +256,8 @@
+@@ -246,8 +259,8 @@ typedef struct DXGI_PRESENT_PARAMETERS
  interface IDXGISwapChain1 :
      IDXGISwapChain
  {
@@ -94,7 +110,16 @@
  
      HRESULT GetHwnd( [out, annotation("_Out_")] HWND *pHwnd);
      HRESULT GetCoreWindow (
-@@ -265,10 +275,12 @@
+@@ -256,7 +269,7 @@ interface IDXGISwapChain1 :
+ 
+     HRESULT Present1(
+         [in] UINT SyncInterval,
+-        [in] UINT PresentFlags,
++        [annotation("_Win32_AssociatedEnum_(DXGI_PRESENT)")] [in] UINT PresentFlags,
+         [in, annotation("_In_")] const DXGI_PRESENT_PARAMETERS* pPresentParameters );
+     BOOL IsTemporaryMonoSupported();
+     HRESULT GetRestrictToOutput( [out, annotation("_Out_")] IDXGIOutput** ppRestrictToOutput );
+@@ -265,10 +278,12 @@ interface IDXGISwapChain1 :
      HRESULT SetRotation( [in, annotation("_In_")] DXGI_MODE_ROTATION Rotation );
      HRESULT GetRotation( [out, annotation("_Out_")] DXGI_MODE_ROTATION* pRotation );
  };
@@ -107,7 +132,7 @@
  [
      object,
      uuid( 50c83a1c-e072-4c48-87b0-3630fa36a6d0 ),
-@@ -366,7 +378,7 @@
+@@ -366,7 +381,7 @@ typedef struct DXGI_ADAPTER_DESC2
  
      LUID AdapterLuid;
  
@@ -116,7 +141,7 @@
  
      DXGI_GRAPHICS_PREEMPTION_GRANULARITY GraphicsPreemptionGranularity;
      DXGI_COMPUTE_PREEMPTION_GRANULARITY ComputePreemptionGranularity;
-@@ -375,6 +387,7 @@
+@@ -375,6 +390,7 @@ typedef struct DXGI_ADAPTER_DESC2
  //--------------------------------------------------------------------------------------------------------
  // IDXGIAdapter2 interface
  //--------------------------------------------------------------------------------------------------------
@@ -124,7 +149,7 @@
  [
      object,
      uuid(0AA1AE0A-FA0E-4B84-8644-E05FF8E5ACB5),
-@@ -384,12 +397,13 @@
+@@ -384,12 +400,13 @@ typedef struct DXGI_ADAPTER_DESC2
  interface IDXGIAdapter2 :
      IDXGIAdapter1
  {
@@ -139,3 +164,12 @@
  [
      object,
      uuid(00cddea8-939b-4b83-a340-a685226666cc),
+@@ -401,7 +418,7 @@ interface IDXGIOutput1 :
+ {
+     HRESULT GetDisplayModeList1(
+         [in] DXGI_FORMAT EnumFormat,
+-        [in] UINT Flags,
++        [annotation("_Win32_AssociatedEnum_(DXGI_ENUM_MODES)")] [in] UINT Flags,
+         [in, out, annotation("_Inout_")] UINT * pNumModes,
+         [out, annotation("_Out_writes_to_opt_(*pNumModes,*pNumModes)")] DXGI_MODE_DESC1 *pDesc);
+     HRESULT FindClosestMatchingMode1(

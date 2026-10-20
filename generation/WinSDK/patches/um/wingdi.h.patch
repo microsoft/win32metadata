@@ -858,6 +858,106 @@
  
  /* size of a device name string */
  #define CCHDEVICENAME 32
+@@ -2201,7 +2707,7 @@
+     WORD dmDriverVersion;
+     WORD dmSize;
+     WORD dmDriverExtra;
+-    DWORD dmFields;
++    _Win32_AssociatedEnum_(DEVMODE_FIELD_FLAGS) DWORD dmFields;
+     union {
+       /* printer only fields */
+       struct {
+@@ -2221,11 +2727,11 @@
+         DWORD  dmDisplayFixedOutput;
+       } DUMMYSTRUCTNAME2;
+     } DUMMYUNIONNAME;
+-    short dmColor;
+-    short dmDuplex;
++    _Win32_AssociatedEnum_(DEVMODE_COLOR) short dmColor;
++    _Win32_AssociatedEnum_(DEVMODE_DUPLEX) short dmDuplex;
+     short dmYResolution;
+-    short dmTTOption;
+-    short dmCollate;
++    _Win32_AssociatedEnum_(DEVMODE_TRUETYPE_OPTION) short dmTTOption;
++    _Win32_AssociatedEnum_(DEVMODE_COLLATE) short dmCollate;
+     BYTE   dmFormName[CCHFORMNAME];
+     WORD   dmLogPixels;
+     DWORD  dmBitsPerPel;
+@@ -2255,7 +2761,7 @@
+     WORD dmDriverVersion;
+     WORD dmSize;
+     WORD dmDriverExtra;
+-    DWORD dmFields;
++    _Win32_AssociatedEnum_(DEVMODE_FIELD_FLAGS) DWORD dmFields;
+     union {
+       /* printer only fields */
+       struct {
+@@ -2275,11 +2781,11 @@
+         DWORD  dmDisplayFixedOutput;
+       } DUMMYSTRUCTNAME2;
+     } DUMMYUNIONNAME;
+-    short dmColor;
+-    short dmDuplex;
++    _Win32_AssociatedEnum_(DEVMODE_COLOR) short dmColor;
++    _Win32_AssociatedEnum_(DEVMODE_DUPLEX) short dmDuplex;
+     short dmYResolution;
+-    short dmTTOption;
+-    short dmCollate;
++    _Win32_AssociatedEnum_(DEVMODE_TRUETYPE_OPTION) short dmTTOption;
++    _Win32_AssociatedEnum_(DEVMODE_COLLATE) short dmCollate;
+     WCHAR  dmFormName[CCHFORMNAME];
+     WORD   dmLogPixels;
+     DWORD  dmBitsPerPel;
+@@ -2321,7 +2827,7 @@
+     WORD dmDriverVersion;
+     WORD dmSize;
+     WORD dmDriverExtra;
+-    DWORD dmFields;
++    _Win32_AssociatedEnum_(DEVMODE_FIELD_FLAGS) DWORD dmFields;
+     union {
+       struct {
+         short dmOrientation;
+@@ -2335,11 +2841,11 @@
+     short dmCopies;
+     short dmDefaultSource;
+     short dmPrintQuality;
+-    short dmColor;
+-    short dmDuplex;
++    _Win32_AssociatedEnum_(DEVMODE_COLOR) short dmColor;
++    _Win32_AssociatedEnum_(DEVMODE_DUPLEX) short dmDuplex;
+     short dmYResolution;
+-    short dmTTOption;
+-    short dmCollate;
++    _Win32_AssociatedEnum_(DEVMODE_TRUETYPE_OPTION) short dmTTOption;
++    _Win32_AssociatedEnum_(DEVMODE_COLLATE) short dmCollate;
+     BYTE   dmFormName[CCHFORMNAME];
+     WORD   dmLogPixels;
+     DWORD  dmBitsPerPel;
+@@ -2369,7 +2875,7 @@
+     WORD dmDriverVersion;
+     WORD dmSize;
+     WORD dmDriverExtra;
+-    DWORD dmFields;
++    _Win32_AssociatedEnum_(DEVMODE_FIELD_FLAGS) DWORD dmFields;
+     union {
+       struct {
+         short dmOrientation;
+@@ -2383,11 +2889,11 @@
+     short dmCopies;
+     short dmDefaultSource;
+     short dmPrintQuality;
+-    short dmColor;
+-    short dmDuplex;
++    _Win32_AssociatedEnum_(DEVMODE_COLOR) short dmColor;
++    _Win32_AssociatedEnum_(DEVMODE_DUPLEX) short dmDuplex;
+     short dmYResolution;
+-    short dmTTOption;
+-    short dmCollate;
++    _Win32_AssociatedEnum_(DEVMODE_TRUETYPE_OPTION) short dmTTOption;
++    _Win32_AssociatedEnum_(DEVMODE_COLLATE) short dmCollate;
+     WCHAR  dmFormName[CCHFORMNAME];
+     WORD   dmLogPixels;
+     DWORD  dmBitsPerPel;
 @@ -2430,10 +2936,25 @@
  /* current version of specification */
  #if (WINVER >= 0x0500) || (_WIN32_WINNT >= _WIN32_WINNT_NT4)
@@ -1567,7 +1667,7 @@
      _Out_writes_opt_(_Inexpressible_(1)) LPWSTR          pOutput,
      _In_opt_            CONST DEVMODEW   *pDevMode
      );
-@@ -4071,6 +4945,7 @@
+@@ -4071,15 +4945,18 @@
  #define DeviceCapabilities  DeviceCapabilitiesA
  #endif // !UNICODE
  
@@ -1575,8 +1675,10 @@
  WINGDIAPI int  WINAPI DrawEscape(   _In_ HDC    hdc,
                                      _In_ int    iEscape,
                                      _In_ int    cjIn,
-@@ -4079,7 +4954,9 @@
-  WINGDIAPI BOOL WINAPI Ellipse( _In_ HDC hdc, _In_ int left, _In_ int top,  _In_ int right, _In_ int bottom);
+                                     _In_reads_bytes_opt_(cjIn) LPCSTR lpIn);
+ 
+- WINGDIAPI BOOL WINAPI Ellipse( _In_ HDC hdc, _In_ int left, _In_ int top,  _In_ int right, _In_ int bottom);
++ _Win32_SupportedOS_Windows7_ WINGDIAPI BOOL WINAPI Ellipse( _In_ HDC hdc, _In_ int left, _In_ int top,  _In_ int right, _In_ int bottom);
  
  #if(WINVER >= 0x0400)
 +_Win32_SupportedOS_Windows2000_
@@ -2443,7 +2545,7 @@
  WINGDIAPI HPALETTE WINAPI CreateHalftonePalette( _In_opt_ HDC hdc);
  
  #ifdef STRICT
-@@ -5153,41 +6249,67 @@
+@@ -5153,44 +6249,71 @@
  #define DI_ROPS_READ_DESTINATION    0x00000002
  #endif /* WINVER >= 0x0400 */
  
@@ -2512,8 +2614,13 @@
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI int  WINAPI GetArcDirection(_In_ HDC hdc);
  
- WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
-@@ -5220,22 +6342,29 @@
+-WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
++_Win32_SupportedOS_Windows2000_ WINGDIAPI int   WINAPI GetObjectA(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
++_Win32_SupportedOS_Windows2000_
+ WINGDIAPI int   WINAPI GetObjectW(_In_ HANDLE h, _In_ int c, _Out_writes_bytes_opt_(c) LPVOID pv);
+ #ifdef UNICODE
+ #define GetObject  GetObjectW
+@@ -5220,22 +6343,29 @@
  #endif  /* _M_CEE */
  
  
@@ -2528,10 +2635,12 @@
  #else
  #define TextOut  TextOutA
  #endif // !UNICODE
+- WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
+- WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
 + _Win32_SupportedOS_Windows2000_
-  WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
++ WINGDIAPI BOOL  WINAPI ExtTextOutA( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
 + _Win32_SupportedOS_Windows2000_
-  WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
++ WINGDIAPI BOOL  WINAPI ExtTextOutW( _In_ HDC hdc, _In_ int x, _In_ int y, _Win32_AssociatedEnum_(ETO_OPTIONS) _In_ UINT options, _In_opt_ CONST RECT * lprect, _In_reads_opt_(c) LPCWSTR lpString, _In_ UINT c, _In_reads_opt_(c) CONST INT * lpDx);
  #ifdef UNICODE
  #define ExtTextOut  ExtTextOutW
  #else
@@ -2543,7 +2652,7 @@
  WINGDIAPI BOOL  WINAPI PolyTextOutW(_In_ HDC hdc, _In_reads_(nstrings) CONST POLYTEXTW * ppt, _In_ int nstrings);
  #ifdef UNICODE
  #define PolyTextOut  PolyTextOutW
-@@ -5243,31 +6372,51 @@
+@@ -5243,31 +6373,51 @@
  #define PolyTextOut  PolyTextOutA
  #endif // !UNICODE
  
@@ -2596,7 +2705,7 @@
  WINGDIAPI int   WINAPI GetTextFaceW( _In_ HDC hdc, _In_ int c, _Out_writes_to_opt_(c, return)  LPWSTR lpName);
  #ifdef UNICODE
  #define GetTextFace  GetTextFaceW
-@@ -5283,9 +6432,11 @@
+@@ -5283,9 +6433,11 @@
     int  iKernAmount;
  } KERNINGPAIR, *LPKERNINGPAIR;
  
@@ -2608,7 +2717,7 @@
  WINGDIAPI DWORD WINAPI GetKerningPairsW(    _In_ HDC hdc,
                                              _In_ DWORD nPairs,
                                              _Out_writes_to_opt_(nPairs, return) LPKERNINGPAIR   lpKernPair);
-@@ -5296,12 +6447,17 @@
+@@ -5296,12 +6448,17 @@
  #endif // !UNICODE
  
  
@@ -2626,7 +2735,7 @@
  WINGDIAPI DWORD WINAPI GdiGetBatchLimit(void);
  
  #if(WINVER >= 0x0400)
-@@ -5311,6 +6467,14 @@
+@@ -5311,6 +6468,14 @@
  #define ICM_QUERY             3
  #define ICM_DONE_OUTSIDEDC    4
  
@@ -2641,7 +2750,7 @@
  typedef int (CALLBACK* ICMENUMPROCA)(LPSTR, LPARAM);
  typedef int (CALLBACK* ICMENUMPROCW)(LPWSTR, LPARAM);
  #ifdef UNICODE
-@@ -5319,16 +6483,21 @@
+@@ -5319,16 +6484,21 @@
  #define ICMENUMPROC  ICMENUMPROCA
  #endif // !UNICODE
  
@@ -2664,7 +2773,7 @@
  WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
-@@ -5338,18 +6507,24 @@
+@@ -5338,18 +6508,24 @@
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -2689,7 +2798,7 @@
  WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
-@@ -5359,17 +6534,24 @@
+@@ -5359,17 +6535,24 @@
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -2715,7 +2824,7 @@
  WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
-@@ -5377,9 +6559,11 @@
+@@ -5377,9 +6560,11 @@
  #define EnumICMProfiles  EnumICMProfilesA
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
@@ -2729,7 +2838,7 @@
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,6 +6578,7 @@
+@@ -5394,6 +6579,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -2737,7 +2846,7 @@
  WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hPal, _In_ DWORD deFirst, _In_ DWORD num);
  #endif
  
-@@ -5522,6 +6707,17 @@
+@@ -5522,6 +6708,17 @@
  #define EMR_GLSRECORD                  102
  #define EMR_GLSBOUNDEDRECORD           103
  #define EMR_PIXELFORMAT                104
@@ -2755,7 +2864,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0500)
-@@ -5539,29 +6735,171 @@
+@@ -5539,29 +6736,171 @@
  #define EMR_TRANSPARENTBLT             116
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define EMR_RESERVED_117               117
@@ -2928,7 +3037,7 @@
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +7095,7 @@
+@@ -5757,7 +7096,7 @@
  {
      EMR     emr;
      XFORM   xform;
@@ -2937,7 +3046,7 @@
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -6283,7 +7621,7 @@
+@@ -6283,7 +7622,7 @@
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -2946,7 +3055,7 @@
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,22 +7665,44 @@
+@@ -6327,22 +7666,44 @@
  
  // OpenGL wgl prototypes
  
@@ -2991,7 +3100,7 @@
  WINGDIAPI BOOL  WINAPI SwapBuffers(HDC);
  
  typedef struct _POINTFLOAT {
-@@ -6360,8 +7720,12 @@
+@@ -6360,8 +7721,12 @@
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -3004,7 +3113,7 @@
  WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
-@@ -6446,13 +7810,22 @@
+@@ -6446,13 +7811,22 @@
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  

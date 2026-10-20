@@ -30,13 +30,11 @@ MENUPARTS::MENU_POPUPSUBMENU_HCHOT=21
 _EXPCMDSTATE
 _EXPCMDFLAGS
 ADVISE_TYPE
-AMMSF_MMS_INIT_FLAGS
 AMMSF_MS_FLAGS
 AMMSF_RENDER_FLAGS
 APPLY_SNAPSHOT_VHDSET_FLAG
 ASM_BIND_FLAGS
 ATTACH_VIRTUAL_DISK_FLAG
-CLSCTX
 COMPACT_VIRTUAL_DISK_FLAG
 CREATE_VIRTUAL_DISK_FLAG
 DBGPROP_INFO
@@ -46,12 +44,10 @@ DEPENDENT_DISK_FLAG
 DETACH_VIRTUAL_DISK_FLAG
 EXPAND_VIRTUAL_DISK_FLAG
 FILEOPENDIALOGOPTIONS
-FORK_VIRTUAL_DISK_FLAG
 GET_STORAGE_DEPENDENCY_FLAG
 HLBWIF_FLAGS
 IdentityUpdateEvent
 JOB_OBJECT_NET_RATE_CONTROL_FLAGS
-KSPROPERTY_IPSINK
 MERGE_VIRTUAL_DISK_FLAG
 MF_RESOLUTION_FLAGS
 MFT_ENUM_FLAG
@@ -59,17 +55,14 @@ MINIDUMP_TYPE
 MIRROR_VIRTUAL_DISK_FLAG
 MMSSF_GET_INFORMATION_FLAGS
 MODIFY_VHDSET_FLAG
-MOUSE_EVENT_FLAGS
 OBJECT_ATTRIB_FLAG
 OPEN_VIRTUAL_DISK_FLAG
 OPM_HDCP_FLAGS
-OUTPUT_STATE
 PRINTFLAG
 PROFILER_EVENT_MASK
 PROPDESC_FORMAT_FLAGS
 PROPDESC_SEARCHINFO_FLAGS
 PROPDESC_VIEW_FLAGS
-QUERY_CHANGES_VIRTUAL_DISK_FLAG
 RAW_SCSI_VIRTUAL_DISK_FLAG
 REG_PINFLAG
 RESIZE_VIRTUAL_DISK_FLAG
@@ -218,8 +211,6 @@ SHGetFileInfoA::uFlags=SHGFI_FLAGS
 SHGetFileInfoW::dwFileAttributes=FILE_FLAGS_AND_ATTRIBUTES
 SHGetFileInfoW::uFlags=SHGFI_FLAGS
 OpenProcess::dwDesiredAccess=PROCESS_ACCESS_RIGHTS
-D3D11CreateDevice::Flags=D3D11_CREATE_DEVICE_FLAG
-D3D11CreateDeviceAndSwapChain::Flags=D3D11_CREATE_DEVICE_FLAG
 JOBOBJECT_BASIC_LIMIT_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_NOTIFICATION_LIMIT_INFORMATION::LimitFlags=JOB_OBJECT_LIMIT
 JOBOBJECT_BASIC_UI_RESTRICTIONS::UIRestrictionsClass=JOB_OBJECT_UILIMIT
@@ -287,16 +278,12 @@ CoCreateInstance::dwClsContext=CLSCTX
 CoCreateInstanceEx::dwClsCtx=CLSCTX
 CoCreateInstanceFromApp::dwClsCtx=CLSCTX
 CoRegisterClassObject::dwClsContext=CLSCTX
-CoGetClassObjectFromURL::dwClsContext=CLSCTX
-CoGetInstanceFromFile::dwClsCtx=CLSCTX
-CoGetInstanceFromIStorage::dwClsCtx=CLSCTX
 mouse_event::dx=int
 mouse_event::dy=int
 mouse_event::dwData=int
 IMAGE_OPTIONAL_HEADER32::LoaderFlags=[Obsolete]
 IMAGE_OPTIONAL_HEADER64::LoaderFlags=[Obsolete]
 MsiGetFeatureValidStates::lpInstallStates=INSTALLSTATE
-MsiAdvertiseScript::dwFlags=SCRIPTFLAGS
 IWPCWebSettings::GetSettings::pdwSettings=WPCFLAG_WEB_SETTING*
 MsiDatabaseApplyTransformA::iErrorConditions=MSITRANSFORM_ERROR
 MsiDatabaseApplyTransformW::iErrorConditions=MSITRANSFORM_ERROR
@@ -304,7 +291,6 @@ MsiCreateTransformSummaryInfoA::iValidation=MSITRANSFORM_VALIDATE
 MsiCreateTransformSummaryInfoW::iValidation=MSITRANSFORM_VALIDATE
 MsiCreateTransformSummaryInfoA::iErrorConditions=MSITRANSFORM_ERROR
 MsiCreateTransformSummaryInfoW::iErrorConditions=MSITRANSFORM_ERROR
-MsiEndTransaction::dwTransactionState=MSITRANSACTIONSTATE
 ADsOpenObject::dwReserved=ADS_AUTHENTICATION_ENUM
 GetObjectA::h=HGDIOBJ
 GetObjectW::h=HGDIOBJ
@@ -354,31 +340,16 @@ IDirectorySearch::GetNextRow=[CanReturnMultipleSuccessValues]
 IDirectorySearch::GetFirstRow=[CanReturnMultipleSuccessValues]
 IDirectorySearch::GetPreviousRow=[CanReturnMultipleSuccessValues]
 IDirectorySearch::GetNextColumnName=[CanReturnMultipleSuccessValues]
-IEnumSpellingError::Next=[CanReturnMultipleSuccessValues]
 IEnumString::Next=[CanReturnMultipleSuccessValues]
 IEnumString::Skip=[CanReturnMultipleSuccessValues]
 IEnumWorkItems::Next=[CanReturnMultipleSuccessValues]
 IEnumWorkItems::Skip=[CanReturnMultipleSuccessValues]
 IEnumGUID::Next=[CanReturnMultipleSuccessValues]
 IEnumGUID::Skip=[CanReturnMultipleSuccessValues]
-IEnumPortableDeviceObjectIDs::Next=[CanReturnMultipleSuccessValues]
-IEnumPortableDeviceObjectIDs::Skip=[CanReturnMultipleSuccessValues]
 ISequentialStream::Read=[CanReturnMultipleSuccessValues]
 ISequentialStream::Write=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Next=[CanReturnMultipleSuccessValues]
 IADsPropertyList::Skip=[CanReturnMultipleSuccessValues]
-SHCreateItemFromIDList::ppv=[ComOutPtr]
-SHCreateItemFromParsingName::ppv=[ComOutPtr]
-SHCreateItemWithParent::ppvItem=[ComOutPtr]
-SHCreateItemFromRelativeName::ppv=[ComOutPtr]
-SHCreateItemInKnownFolder::ppv=[ComOutPtr]
-SHGetItemFromObject::ppv=[ComOutPtr]
-SHGetItemFromDataObject::ppv=[ComOutPtr]
-SHCreateShellItemArrayFromDataObject::ppv=[ComOutPtr]
-SHCreateShellItemArrayFromShellItem::ppv=[ComOutPtr]
-SHCreateAssociationRegistration::ppv=[ComOutPtr]
-SHCreateDefaultExtractIcon::ppv=[ComOutPtr]
-SHAssocEnumHandlersForProtocolByApplication::enumHandlers=[ComOutPtr]
 PDNS_SERVICE_BROWSE_CALLBACK::pDnsRecord=DNS_RECORDW*
 IMMDevice::Activate::dwClsCtx=CLSCTX
 IMMDevice::Activate::ppInterface=[ComOutPtr]
@@ -390,9 +361,6 @@ RegQueryValueExW::return=WIN32_ERROR
 FatalExit=[DoesNotReturn]
 EngDebugBreak=[DoesNotReturn]
 DbgRaiseAssertionFailure=[DoesNotReturn]
-FreeLibraryAndExitThread=[DoesNotReturn]
-ExitProcess=[DoesNotReturn]
-ExitThread=[DoesNotReturn]
 IAgileReference::Resolve::ppvObjectReference=[ComOutPtr]
 AvQuerySystemResponsiveness::AvrtHandle=AVRT_TASK_HANDLE
 AvRevertMmThreadCharacteristics::AvrtHandle=AVRT_TASK_HANDLE
@@ -408,9 +376,6 @@ AvSetMmMaxThreadCharacteristicsW::return=AVRT_TASK_HANDLE
 AvSetMmThreadCharacteristicsA::return=AVRT_TASK_HANDLE
 AvSetMmThreadCharacteristicsW::return=AVRT_TASK_HANDLE
 AvSetMmThreadPriority::AvrtHandle=AVRT_TASK_HANDLE
-GetAllAttachedVirtualDiskPhysicalPaths::return=WIN32_ERROR
-ForkVirtualDisk::return=WIN32_ERROR
-CompleteForkVirtualDisk::return=WIN32_ERROR
 WAVEHDR::lpData=[NotNullTerminated]
 IBackgroundCopyJobHttpOptions::GetClientCertificate::ppCertHashBlob=[-NativeArrayInfo][FreeWith("CoTaskMemFree")]
 IBackgroundCopyJobHttpOptions::GetClientCertificate::pSubjectName=[FreeWith("CoTaskMemFree")]
@@ -426,11 +391,8 @@ IBackgroundCopyFile::GetLocalName::ppName=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile::GetRemoteName::ppName=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile2::GetFileRanges::Ranges=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyFile3::GetTemporaryName::pFilename=[FreeWith("CoTaskMemFree")]
-IMILBitmapEffectPrimitiveImpl::IsDirty=[CanReturnMultipleSuccessValues]
 IMoniker::IsDirty=[CanReturnMultipleSuccessValues]
 IOfflineFilesChangeInfo::IsDirty=[CanReturnMultipleSuccessValues]
-IPersistMoniker::IsDirty=[CanReturnMultipleSuccessValues]
-ISceSvcAttachmentPersistInfo::IsDirty=[CanReturnMultipleSuccessValues]
 IAudioClient::IsFormatSupported=[CanReturnMultipleSuccessValues]
 CoInitializeSecurity::asAuthSvc=[-NativeArrayInfo]
 IWMDRMMessageParser::ParseLicenseRequestMsg::pbLicenseRequestMsg=[NativeArrayInfo(CountParamIndex = 1)]
@@ -440,8 +402,6 @@ LoadStringW::lpBuffer=[-NativeArrayInfo]
 DebugCreate::Interface=[ComOutPtr]
 DebugCreateEx::Interface=[ComOutPtr]
 ITransactionContextEx::CreateInstance::pObject=[ComOutPtr]
-IMFCaptureEngineClassFactory::CreateInstance::ppvObject=[ComOutPtr]
-IWICMetadataReaderInfo::CreateInstance::ppIReader=[ComOutPtr]
 IWICBitmapDecoderInfo::CreateInstance::ppIBitmapDecoder=[ComOutPtr]
 IWICBitmapEncoderInfo::CreateInstance::ppIBitmapEncoder=[ComOutPtr]
 ISpeechObjectToken::Object=[ComOutPtr]
@@ -449,10 +409,6 @@ ICreateWithTipTransactionEx::CreateInstance::pObject=[ComOutPtr]
 ICreateWithTransactionEx::CreateInstance::pObject=[ComOutPtr]
 IClassFactory2::CreateInstanceLic::ppvObj=[ComOutPtr]
 IWbemServices::CreateInstanceEnum::ppEnum=[ComOutPtr]
-StiCreateInstanceW::ppSti=[ComOutPtr]
-IMFImageSharingEngineClassFactory::CreateInstanceFromUDN::ppEngine=[ComOutPtr]
-IMFReadWriteClassFactory::CreateInstanceFromURL::ppvObject=[ComOutPtr]
-IMFReadWriteClassFactory::CreateInstanceFromObject::ppvObject=[ComOutPtr]
 ImageList_CoCreateInstance::ppv=[ComOutPtr]
 IDXGIDecodeSwapChainPartner::PresentBuffer=[CanReturnMultipleSuccessValues]
 IDirectorySearch::AbandonSearch::phSearchResult=ADS_SEARCH_HANDLE
@@ -463,14 +419,6 @@ IDirectorySearch::GetFirstRow::hSearchResult=ADS_SEARCH_HANDLE
 IDirectorySearch::GetNextColumnName::hSearchHandle=ADS_SEARCH_HANDLE
 IDirectorySearch::GetNextRow::hSearchResult=ADS_SEARCH_HANDLE
 IDirectorySearch::GetPreviousRow::hSearchResult=ADS_SEARCH_HANDLE
-AcceptSecurityContext=[CanReturnMultipleSuccessValues]
-SaslAcceptSecurityContext=[CanReturnMultipleSuccessValues]
-InitializeSecurityContextA=[CanReturnMultipleSuccessValues]
-InitializeSecurityContextW=[CanReturnMultipleSuccessValues]
-SaslInitializeSecurityContextA=[CanReturnMultipleSuccessValues]
-SaslInitializeSecurityContextW=[CanReturnMultipleSuccessValues]
-DecryptMessage=[CanReturnMultipleSuccessValues]
-EncryptMessage=[CanReturnMultipleSuccessValues]
 CallNtPowerInformation::return=NTSTATUS
 CloseTrace::TraceHandle=PROCESSTRACE_HANDLE
 ControlTraceA::TraceHandle=CONTROLTRACE_HANDLE
@@ -498,31 +446,19 @@ TraceSetInformation::SessionHandle=CONTROLTRACE_HANDLE
 UpdateTraceA::TraceHandle=CONTROLTRACE_HANDLE
 UpdateTraceW::TraceHandle=CONTROLTRACE_HANDLE
 VARIANT::_Anonymous_e__Union::_Anonymous_e__Struct::vt=VARENUM
-VariantChangeType::vt=VARENUM
-VariantChangeTypeEx::vt=VARENUM
 IDebugFormatter::GetStringForVarType::vt=VARENUM
 DBPROPINFO::vtType=VARENUM
 KAGREQDIAG::vt=VARENUM
 SHCOLUMNINFO::vt=VARENUM
 TYPEDESC::vt=VARENUM
-PARAMDATA::vt=VARENUM
-METHODDATA::vtReturn=VARENUM
 PROPBAG2::vt=VARENUM
 IVariantChangeType::ChangeType::vtNew=VARENUM
-SafeArrayAllocDescriptorEx::vt=VARENUM
-SafeArrayCreate::vt=VARENUM
-SafeArrayCreateEx::vt=VARENUM
-SafeArrayCreateVector::vt=VARENUM
-SafeArrayCreateVectorEx::vt=VARENUM
-DispGetParam::vtTarg=VARENUM
-DispCallFunc::vtReturn=VARENUM
 IModelObject::GetIntrinsicValueAs::vt=VARENUM
 PSPropertyBag_ReadType::type=VARENUM
 PropVariantChangeType::vt=VARENUM
 WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
-SafeArrayGetVartype::pvt=VARENUM
 IDataSourceLocator::get_hWnd::phwndParent=HWND*
 IDataSourceLocator::put_hWnd::hwndParent=HWND
 # For some reason ClangSharp doesn't emit this for many structs in minidumpapiset.h
@@ -558,34 +494,7 @@ MINIDUMP_INCLUDE_THREAD_CALLBACK=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 MINIDUMP_CALLBACK_INPUT=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 MINIDUMP_CALLBACK_OUTPUT=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 # cfgmgr32.h
-MEM_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-MEM_LARGE_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-DMA_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-IRQ_RESOURCE_32=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-IRQ_RESOURCE_64=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-DEVPRIVATE_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-CS_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-PCCARD_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-MFCARD_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-BUSNUMBER_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-CONNECTION_RESOURCE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # usbuser.h
-USBUSER_SEND_ONE_PACKET=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_RAW_RESET_ROOT_PORT=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_ROOTPORT_FEATURE_REQUEST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_ROOTPORT_PARAMETERS=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_CONTROLLER_INFO_0=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_CONTROLLER_UNICODE_NAME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_PASS_THRU_REQUEST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_POWER_INFO_REQUEST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_OPEN_RAW_DEVICE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_CLOSE_RAW_DEVICE=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_SEND_RAW_COMMAND=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_BANDWIDTH_INFO_REQUEST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_BUS_STATISTICS_0_REQUEST=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_GET_DRIVER_VERSION=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USB_USB2HW_VERSION_PARAMETERS=[StructLayout(LayoutKind.Sequential, Pack = 1)]
-USBUSER_GET_USB2HW_VERSION=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # netiodef.h
 DL_TEREDO_ADDRESS=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 DL_TEREDO_ADDRESS_PRV=[StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -595,9 +504,6 @@ TCP_OPT_SACK=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 TCP_OPT_UNKNOWN=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 TCP_OPT_FASTOPEN=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # txfw32.h
-TXF_ID=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-TXF_LOG_RECORD_BASE=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-TXF_LOG_RECORD_AFFECTED_FILE=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 # shtypes.h
 # mxdc.h
 MXDC_PRINTTICKET_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
@@ -619,9 +525,7 @@ AssocQueryKeyW::flags=ASSOCF
 # snmp.h
 AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
-DWriteCreateFactory::factory=[ComOutPtr]void**
 TrackPopupMenu::prcRect=[In][Optional][-Reserved]
-SHGetPropertyStoreFromParsingName::ppv=[ComOutPtr]
 ReleaseStgMedium::param0=[Out]
 # tsvirtualchannels.h
 IWTSVirtualChannelManager::CreateListener::pszChannelName=PSTR
@@ -636,18 +540,14 @@ LCMapStringEx::sortHandle=[-Optional]
 SendMessageA::wParam=[-Optional]
 SendMessageA::lParam=[-Optional]
 NCryptOpenKey::dwLegacyKeySpec=[-Optional]
-MFPCreateMediaPlayer::creationOptions=[-Optional]
 DirectSoundCreate::pUnkOuter=[Optional]
 IDirectSound::CreateSoundBuffer::pUnkOuter=[Optional]
 FlushLogBuffers::pvMarshal=[In]
 FlushLogBuffers::pOverlapped=[In][Out][Optional][Retained]
-GetMessageA=[CanReturnMultipleSuccessValues]
-GetMessageW=[CanReturnMultipleSuccessValues]
 GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
 GetPhysicalMonitorsFromHMONITOR::return=BOOL
 DestroyPhysicalMonitor::return=BOOL
 DestroyPhysicalMonitors::return=BOOL
-IUnknown::QueryInterface=[CanReturnErrorsAsSuccess]
 GetPrivateProfileIntW::return=int
 ContinueDebugEvent::dwContinueStatus=NTSTATUS
 CoGetObjectContext::ppv=[ComOutPtr]
@@ -655,36 +555,6 @@ CoGetClassObject::ppv=[ComOutPtr]
 CoGetCallContext::ppInterface=[ComOutPtr]
 CoGetCancelObject::ppUnk=[ComOutPtr]
 QueryDisplayConfig::currentTopologyId=[Optional]
-WTSQuerySessionInformationA::hServer=[Optional]
-WTSQuerySessionInformationW::hServer=[Optional]
-WTSCreateListenerA::hServer=[Optional][Reserved]
-WTSCreateListenerW::hServer=[Optional][Reserved]
-WTSDisconnectSession::hServer=[Optional]
-WTSEnumerateListenersA::hServer=[Optional][Reserved]
-WTSEnumerateListenersW::hServer=[Optional][Reserved]
-WTSEnumerateProcessesA::hServer=[Optional]
-WTSEnumerateProcessesExA::hServer=[Optional]
-WTSEnumerateProcessesExW::hServer=[Optional]
-WTSEnumerateProcessesW::hServer=[Optional]
-WTSEnumerateSessionsA::hServer=[Optional]
-WTSEnumerateSessionsExA::hServer=[Optional]
-WTSEnumerateSessionsExW::hServer=[Optional]
-WTSEnumerateSessionsW::hServer=[Optional]
-WTSGetListenerSecurityA::hServer=[Optional][Reserved]
-WTSGetListenerSecurityW::hServer=[Optional][Reserved]
-WTSLogoffSession::hServer=[Optional]
-WTSQueryListenerConfigA::hServer=[Optional][Reserved]
-WTSQueryListenerConfigW::hServer=[Optional][Reserved]
-WTSRegisterSessionNotificationEx::hServer=[Optional]
-WTSSendMessageA::hServer=[Optional]
-WTSSendMessageW::hServer=[Optional]
-WTSSetListenerSecurityA::hServer=[Optional][Reserved]
-WTSSetListenerSecurityW::hServer=[Optional][Reserved]
-WTSShutdownSystem::hServer=[Optional]
-WTSTerminateProcess::hServer=[Optional]
-WTSUnRegisterSessionNotificationEx::hServer=[Optional]
-WTSVirtualChannelOpen::hServer=[Optional][Reserved]
-WTSWaitSystemEvent::hServer=[Optional]
 ID3D12GraphicsCommandList::ClearDepthStencilView::pRects=[Optional]
 ID3D12GraphicsCommandList::ClearRenderTargetView::pRects=[Optional]
 ID3D12PageableTools::GetAllocation::pAllocation=[RetVal]
@@ -697,7 +567,6 @@ WriteFileEx::lpBuffer=byte*
 PrivateExtractIconsA::piconid=[-NativeArrayInfo]
 PrivateExtractIconsW::piconid=[-NativeArrayInfo]
 CfConnectSyncRoot::CallbackTable=[NativeArrayInfo]
-CERT_INFO::rgExtension=[NativeArrayInfo(CountFieldName="cExtension")]
 GetClipboardData::return=[DoNotRelease]
 GetCommandLineA::return=[Const]
 GetCommandLineW::return=[Const]
@@ -838,12 +707,7 @@ CoFreeUnusedLibrariesEx::dwReserved=[Reserved]
 CoInitializeEx::pvReserved=[Reserved]
 CoInitializeSecurity::pReserved1=[Reserved]
 CoInitializeSecurity::pReserved3=[Reserved]
-GetActiveObject::pvReserved=[Reserved]
-OleCreatePropertyFrame::dwReserved=[Reserved]
-OleCreatePropertyFrame::pvReserved=[Reserved]
 OleInitialize::pvReserved=[Reserved]
-OleLoadPicturePath::dwReserved=[Reserved]
-RevokeActiveObject::pvReserved=[Reserved]
 REG_NOTIFY_FILTER::REG_NOTIFY_THREAD_AGNOSTIC=[SupportedOSPlatform("windows8.0")]
 D3D12_COMMAND_SIGNATURE_DESC::pArgumentDescs=[NativeArrayInfo(CountFieldName = "NumArgumentDescs")]
 D3D12_INPUT_LAYOUT_DESC::pInputElementDescs=[NativeArrayInfo(CountFieldName = "NumElements")]
@@ -901,7 +765,6 @@ PeerGroupSetProperties::hGroup=[-NativeTypeName]
 PeerGroupUniversalTimeToPeerTime::hGroup=[-NativeTypeName]
 PeerGroupUpdateRecord::hGroup=[-NativeTypeName]
 DDMDL::Process=IntPtr
-IEnumPIDMap::Next=[CanReturnMultipleSuccessValues]
 SignalObjectAndWait=[CanReturnMultipleSuccessValues]
 WaitForSingleObject=[CanReturnMultipleSuccessValues]
 WaitForSingleObjectEx=[CanReturnMultipleSuccessValues]
@@ -934,8 +797,6 @@ GetThemeSysColorBrush::iColorId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
 GetThemeSysFont::iFontId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
 GetThemeSysInt::iIntId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
 GetThemeSysString::iStringId=[AssociatedEnum("THEME_PROPERTY_SYMBOL_ID")]
-IAMMultiMediaStream::AddMediaStream::dwFlags=[AssociatedEnum("AMMSF_MS_FLAGS")]
-IAMMultiMediaStream::Initialize::dwFlags=[AssociatedEnum("AMMSF_MMS_INIT_FLAGS")]
 IAzClientContext3::GetGroups::ulOptions=[AssociatedEnum("AZ_PROP_CONSTANTS")]
 IClientSecurity::QueryBlanket::pCapabilites=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
 IClientSecurity::SetBlanket::dwCapabilities=[AssociatedEnum("EOLE_AUTHENTICATION_CAPABILITIES")]
@@ -956,7 +817,6 @@ IWPCProviderConfig::RequestOverride::dwFlags=[AssociatedEnum("WPCFLAG_RESTRICTIO
 IWSCProductList::Initialize::provider=[AssociatedEnum("WSC_SECURITY_PROVIDER")]
 JOBOBJECT_IO_RATE_CONTROL_INFORMATION::ControlFlags=[AssociatedEnum("JOB_OBJECT_IO_RATE_CONTROL_FLAGS")]
 LOGPEN::lopnStyle=[AssociatedEnum("PEN_STYLE")]
-OLECMD::cmdf=[AssociatedEnum("OLECMDF")]
 OLECMD::cmdID=[AssociatedEnum("OLECMDID")]
 OleCreate::renderopt=[AssociatedEnum("OLERENDER")]
 OleCreateFromFile::renderopt=[AssociatedEnum("OLERENDER")]
@@ -977,11 +837,6 @@ STATSTG::grfLocksSupported=[AssociatedEnum("LOCKTYPE")]
 STGMEDIUM::tymed=[AssociatedEnum("TYMED")]
 SymGetHomeDirectory::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
 SymGetHomeDirectoryW::type=[AssociatedEnum("IMAGEHLP_HD_TYPE")]
-SymGetSymbolFile::Type=[AssociatedEnum("IMAGEHLP_SF_TYPE")]
-SymGetSymbolFileW::Type=[AssociatedEnum("IMAGEHLP_SF_TYPE")]
-VS_FIXEDFILEINFO::dwFileSubtype=[AssociatedEnum("VS_FIXEDFILEINFO_FILE_SUBTYPE")]
-VS_FIXEDFILEINFO::dwFileType=[AssociatedEnum("VS_FIXEDFILEINFO_FILE_TYPE")]
-WINDOWPLACEMENT::showCmd=[AssociatedEnum("SHOW_WINDOW_CMD")]
 BeginUpdateResourceA::return=[RAIIFree("EndUpdateResourceA")]
 BeginUpdateResourceW::return=[RAIIFree("EndUpdateResourceW")]
 CreateActCtxA::return=[RAIIFree("ReleaseActCtx")]
@@ -1006,8 +861,6 @@ CLRCreateInstance::ppInterface=[Out][ComOutPtr]
 CfReleaseTransferKey::TransferKey=[-Out][In]
 IServiceProvider::QueryService::ppvObject=[ComOutPtr]
 LoadResource::return=[DoNotRelease]
-CertOpenStore::hCryptProv=[Reserved]
-IAudioSessionControl2::IsSystemSoundsSession=[CanReturnMultipleSuccessValues]
 GetUserGeoID::GeoClass=SYSGEOCLASS
 GetGeoInfoA::GeoType=SYSGEOTYPE
 GetGeoInfoW::GeoType=SYSGEOTYPE
@@ -1020,34 +873,24 @@ SERVICE_ERROR=[AssociatedConstant("SERVICE_NO_CHANGE")]
 SERVICE_START_TYPE=[AssociatedConstant("SERVICE_NO_CHANGE")]
 PFTASKDIALOGCALLBACK::msg=[AssociatedEnum("TASKDIALOG_NOTIFICATIONS")]
 GlobalMemoryStatusEx::lpBuffer=[In]
-SHCreateItemInKnownFolder::dwKFFlags=[AssociatedEnum("KNOWN_FOLDER_FLAG")]
 GetApplicationRecoveryCallback=[CanReturnMultipleSuccessValues]
-IFEDictionary::ExistWord=[CanReturnMultipleSuccessValues]
 CoGetTreatAsClass=[CanReturnMultipleSuccessValues]
 CoInitializeEx=[CanReturnMultipleSuccessValues]
 IEnumUnknown::Next=[CanReturnMultipleSuccessValues]
-IBitsPeerCacheAdministration::SetMaximumContentAge=[CanReturnMultipleSuccessValues]
-ICodecAPI::IsModifiable=[CanReturnMultipleSuccessValues]
-IMoniker::BindToObject::ppvResult=[ComOutPtr]
-IMoniker::BindToStorage::ppvObj=[ComOutPtr]
 IShellFolder2::GetDefaultColumnState::pcsFlags=SHCOLSTATE
 WriteConsoleA::lpBuffer=PSTR
 WriteConsoleW::lpBuffer=PWSTR
-PopIoRingCompletion=[CanReturnMultipleSuccessValues]
 CREATESTRUCTA::style=[AssociatedEnum("WINDOW_STYLE")]
 CREATESTRUCTW::style=[AssociatedEnum("WINDOW_STYLE")]
 SendMessageTimeoutA=[CanReturnMultipleSuccessValues]
 SendMessageTimeoutW=[CanReturnMultipleSuccessValues]
-GetWindowThreadProcessId=[CanReturnMultipleSuccessValues]
 AttachThreadInput=[CanReturnMultipleSuccessValues]
 SetActiveWindow=[CanReturnMultipleSuccessValues]
 QueryDosDeviceA=[CanReturnMultipleSuccessValues]
 QueryDosDeviceW=[CanReturnMultipleSuccessValues]
 GetFileAttributesA=[CanReturnMultipleSuccessValues]
 GetFileAttributesW=[CanReturnMultipleSuccessValues]
-CertCreateCertificateContext=[CanReturnMultipleSuccessValues]
 DeviceIoControl::lpOverlapped=[In][Out][Optional][Retained]
-IDXGIDevice4::OfferResources1::Flags=[AssociatedEnum("DXGI_OFFER_RESOURCE_FLAGS")]
 IDXGIOutput4::CheckOverlayColorSpaceSupport::pFlags=[AssociatedEnum("DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG")]
 IDXGIOutput6::CheckHardwareCompositionSupport::pFlags=[AssociatedEnum("DXGI_HARDWARE_COMPOSITION_SUPPORT_FLAGS")]
 IDXGISwapChain3::CheckColorSpaceSupport::pColorSpaceSupport=[AssociatedEnum("DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG")]
@@ -1225,7 +1068,6 @@ AddPrinterA::return=PRINTER_HANDLE
 FindFirstPrinterChangeNotification::return=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindNextPrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
 FindClosePrinterChangeNotification::hChange=FINDPRINTERCHANGENOTIFICATION_HANDLE
-FwpmEngineOpen0::serverName=[Reserved]
 FwpmCalloutAdd0::engineHandle=FWPM_ENGINE_HANDLE
 FwpmCalloutCreateEnumHandle0::engineHandle=FWPM_ENGINE_HANDLE
 FwpmCalloutDeleteById0::engineHandle=FWPM_ENGINE_HANDLE
@@ -1417,50 +1259,21 @@ NotifyServiceStatusChangeW::pNotifyBuffer=[Retained]
 # Caller-owned buffers containing absolute pointers into the same allocation.
 # Contracts and exclusions: docs/copilot/plans/shift-left-annotation-spec.md
 # https://learn.microsoft.com/windows/win32/printdocs/addjob
-AddJobA::pData=[ContainsInteriorPointers]
-AddJobW::pData=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumforms
 # https://learn.microsoft.com/windows/win32/printdocs/getform
-EnumFormsA::pForm=[ContainsInteriorPointers]
-EnumFormsW::pForm=[ContainsInteriorPointers]
-GetFormA::pForm=[ContainsInteriorPointers]
-GetFormW::pForm=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumjobs
 # https://learn.microsoft.com/windows/win32/printdocs/getjob
-EnumJobsA::pJob=[ContainsInteriorPointers]
-EnumJobsW::pJob=[ContainsInteriorPointers]
-GetJobA::pJob=[ContainsInteriorPointers]
-GetJobW::pJob=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enummonitors
-EnumMonitorsA::pMonitor=[ContainsInteriorPointers]
-EnumMonitorsW::pMonitor=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumports
-EnumPortsA::pPort=[ContainsInteriorPointers]
-EnumPortsW::pPort=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumprinterdataex
-EnumPrinterDataExA::pEnumValues=[ContainsInteriorPointers]
-EnumPrinterDataExW::pEnumValues=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumprinterdrivers
 # https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver
 # https://learn.microsoft.com/windows/win32/printdocs/getprinterdriver2
 # GetPrinterDriver2A always returns ERROR_NOT_SUPPORTED; it has no output contract.
-EnumPrinterDriversA::pDriverInfo=[ContainsInteriorPointers]
-EnumPrinterDriversW::pDriverInfo=[ContainsInteriorPointers]
-GetPrinterDriverA::pDriverInfo=[ContainsInteriorPointers]
-GetPrinterDriverW::pDriverInfo=[ContainsInteriorPointers]
-GetPrinterDriver2W::pDriverInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumprinters
 # https://learn.microsoft.com/windows/win32/printdocs/getprinter
-EnumPrintersA::pPrinterEnum=[ContainsInteriorPointers]
-EnumPrintersW::pPrinterEnum=[ContainsInteriorPointers]
-GetPrinterA::pPrinter=[ContainsInteriorPointers]
-GetPrinterW::pPrinter=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessordatatypes
-EnumPrintProcessorDatatypesA::pDatatypes=[ContainsInteriorPointers]
-EnumPrintProcessorDatatypesW::pDatatypes=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/printdocs/enumprintprocessors
-EnumPrintProcessorsA::pPrintProcessorInfo=[ContainsInteriorPointers]
-EnumPrintProcessorsW::pPrintProcessorInfo=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winsvc/nf-winsvc-enumservicesstatusexw
 EnumServicesStatusExA::lpServices=[ContainsInteriorPointers]
 EnumServicesStatusExW::lpServices=[ContainsInteriorPointers]
@@ -1510,8 +1323,6 @@ WSAEnumNameSpaceProvidersExW::lpnspBuffer=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winevt/nf-winevt-evtgeteventmetadataproperty
 # https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimageencoders
 # https://learn.microsoft.com/windows/win32/api/gdiplusimagecodec/nf-gdiplusimagecodec-getimagedecoders
-GdipGetImageEncoders::encoders=[ContainsInteriorPointers]
-GdipGetImageDecoders::decoders=[ContainsInteriorPointers]
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetenumresourcew
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetresourceinformationw
 # https://learn.microsoft.com/windows/win32/api/winnetwk/nf-winnetwk-wnetgetuniversalnamew
@@ -1606,15 +1417,6 @@ IPsecSaDestroyEnumHandle0::enumHandle=IPSEC_SA_ENUM_HANDLE
 ITfCandidateListUIElement::GetPageIndex::pIndex=[Optional]
 RasEnumConnectionsA::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
 RasEnumConnectionsW::param0=[NativeArrayInfo(CountParamIndex = 2), MemorySize(BytesParamIndex = 1)]
-DXCoreAdapterPreference=[ScopedEnum]
-DXCoreAdapterProperty=[ScopedEnum]
-DXCoreHardwareTypeFilterFlags=[ScopedEnum]
-DXCoreHardwareTypeFilterFlags=[ScopedEnum]
-DXCoreMemoryType=[ScopedEnum]
-DXCoreNotificationType=[ScopedEnum]
-DXCoreRuntimeFilterFlags=[ScopedEnum]
-DXCoreSegmentGroup=[ScopedEnum]
-DXCoreWorkload=[ScopedEnum]
 MsiDatabaseGenerateTransformA::iReserved1=[Reserved]
 MsiDatabaseGenerateTransformA::iReserved2=[Reserved]
 MsiDatabaseGenerateTransformW::iReserved1=[Reserved]
@@ -1622,3 +1424,4 @@ MsiDatabaseGenerateTransformW::iReserved2=[Reserved]
 --requiredNamespaceForName
 FACILITY_CODE=Windows.Win32.System.Diagnostics.Debug
 RPC_STATUS=Windows.Win32.System.Rpc
+DWriteCreateFactory::factory=void**

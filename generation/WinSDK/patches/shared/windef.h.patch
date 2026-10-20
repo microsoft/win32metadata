@@ -1,0 +1,56 @@
+diff --git a/shared/windef.h b/shared/windef.h
+--- a/shared/windef.h
++++ b/shared/windef.h
+@@ -37,6 +37,9 @@ extern "C" {
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+ 
+ DECLARE_HANDLE            (HWND);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_AlsoUsableFor_(HANDLE) HWND HWND;
++#endif
+ DECLARE_HANDLE            (HHOOK);
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+@@ -72,6 +75,10 @@ DECLARE_HANDLE(HACCEL);
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+ DECLARE_HANDLE(HBITMAP);
+ DECLARE_HANDLE(HBRUSH);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_AlsoUsableFor_(HGDIOBJ) HBITMAP HBITMAP;
++typedef _Win32_AlsoUsableFor_(HGDIOBJ) HBRUSH HBRUSH;
++#endif
+ #endif
+ #if(WINVER >= 0x0400)
+ DECLARE_HANDLE(HCOLORSPACE);
+@@ -84,6 +91,9 @@ DECLARE_HANDLE(HDESK);
+ DECLARE_HANDLE(HENHMETAFILE);
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+ DECLARE_HANDLE(HFONT);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_AlsoUsableFor_(HGDIOBJ) HFONT HFONT;
++#endif
+ #endif
+ DECLARE_HANDLE(HICON);
+ #if !defined(_MAC) || !defined(WIN_INTERNAL)
+@@ -92,6 +102,10 @@ DECLARE_HANDLE(HMENU);
+ #if !defined(_MAC) || !defined(GDI_INTERNAL)
+ DECLARE_HANDLE(HPALETTE);
+ DECLARE_HANDLE(HPEN);
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_AlsoUsableFor_(HGDIOBJ) HPALETTE HPALETTE;
++typedef _Win32_AlsoUsableFor_(HGDIOBJ) HPEN HPEN;
++#endif
+ #endif
+ 
+ #if(WINVER >= 0x0400)
+@@ -133,6 +147,10 @@ typedef HICON HCURSOR;      /* HICONs & HCURSORs are polymorphic */
+ DECLARE_HANDLE(HCURSOR);    /* HICONs & HCURSORs are not polymorphic */
+ #endif
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++typedef _Win32_AlsoUsableFor_(HICON) HCURSOR HCURSOR;
++#endif
++
+ typedef DWORD   COLORREF;
+ 
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */

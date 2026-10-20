@@ -1,16 +1,17 @@
 diff --git a/um/bits3_0.idl b/um/bits3_0.idl
-index 7cb425e8..1ed50a36 100644
+index 7cb425e8..d3e07ab4 100644
 --- a/um/bits3_0.idl
 +++ b/um/bits3_0.idl
-@@ -13,6 +13,7 @@ Abstract:
+@@ -13,6 +13,8 @@ Abstract:
  
  --*/
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -30,6 +31,7 @@ import "bits2_5.idl";
+@@ -30,6 +32,7 @@ import "bits2_5.idl";
  /**
   * IBitsPeerCacheRecord - deprecated interface
   */
@@ -18,7 +19,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdeaf-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeerCacheRecord"),
-@@ -62,6 +64,7 @@ interface IBitsPeerCacheRecord : IUnknown
+@@ -62,6 +65,7 @@ interface IBitsPeerCacheRecord : IUnknown
  /**
   * IEnumBitsPeerCacheRecords - deprecated interface
   */
@@ -26,7 +27,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdea4-489e-11d9-a9cd-000d56965251),
      helpstring("IEnumBitsPeerCacheRecords"),
-@@ -92,6 +95,7 @@ interface IEnumBitsPeerCacheRecords : IUnknown
+@@ -92,6 +96,7 @@ interface IEnumBitsPeerCacheRecords : IUnknown
  };
  
  
@@ -34,7 +35,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdea2-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeer"),
-@@ -109,6 +113,7 @@ interface IBitsPeer : IUnknown
+@@ -109,6 +114,7 @@ interface IBitsPeer : IUnknown
  /**
   * IEnumBitsPeers - deprecated interface
   */
@@ -42,7 +43,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdea5-489e-11d9-a9cd-000d56965251),
      helpstring("IEnumBitsPeers"),
-@@ -141,6 +146,7 @@ interface IEnumBitsPeers : IUnknown
+@@ -141,6 +147,7 @@ interface IEnumBitsPeers : IUnknown
  /**
   * IBitsPeerCacheAdministration - deprecated interface
   */
@@ -50,7 +51,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdead-489e-11d9-a9cd-000d56965251),
      helpstring("IBitsPeerCacheAdministration"),
-@@ -188,6 +194,7 @@ cpp_quote("#define   BG_DISABLE_BRANCH_CACHE        0x0004")
+@@ -188,6 +195,7 @@ cpp_quote("#define   BG_DISABLE_BRANCH_CACHE        0x0004")
      HRESULT DiscoverPeers();
  };
  
@@ -58,7 +59,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdeae-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyJob4 Interface"),
-@@ -222,6 +229,7 @@ cpp_quote("#define   BG_JOB_DISABLE_BRANCH_CACHE        0x0004")
+@@ -222,6 +230,7 @@ cpp_quote("#define   BG_JOB_DISABLE_BRANCH_CACHE        0x0004")
  
  };
  
@@ -66,7 +67,7 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdeaa-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyFile3 interface"),
-@@ -256,6 +264,7 @@ interface IBackgroundCopyFile3 : IBackgroundCopyFile2
+@@ -256,6 +265,7 @@ interface IBackgroundCopyFile3 : IBackgroundCopyFile2
  }
  
  
@@ -74,3 +75,11 @@ index 7cb425e8..1ed50a36 100644
  [
      uuid(659cdeac-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyCallback2 Interface"),
+@@ -306,6 +316,7 @@ library BackgroundCopyManager3_0
+     interface IEnumBitsPeers;
+ }
+ 
++_Win32_AnnotateMethod_(IBitsPeerCacheAdministration::SetMaximumContentAge, _Win32_PreserveResult_)
+ cpp_quote("#include \"bits4_0.h\"")
+ 
+ 

@@ -1,5 +1,5 @@
 diff --git a/um/usp10.h b/um/usp10.h
-index bcb720b2..cc2c023c 100644
+index bcb720b2..75b25e98 100644
 --- a/um/usp10.h
 +++ b/um/usp10.h
 @@ -6,6 +6,12 @@
@@ -231,7 +231,7 @@ index bcb720b2..cc2c023c 100644
  _Check_return_ HRESULT WINAPI ScriptStringValidate(
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa); 
  
-@@ -1716,6 +1749,7 @@ _Check_return_ HRESULT WINAPI ScriptStringValidate(
+@@ -1716,11 +1749,12 @@ _Check_return_ HRESULT WINAPI ScriptStringValidate(
  //      Requires SSA_GLYPHS requested in original ScriptStringAnalyse call.
  
  
@@ -239,6 +239,12 @@ index bcb720b2..cc2c023c 100644
  _Check_return_ HRESULT WINAPI ScriptStringOut(
      _In_reads_(1) SCRIPT_STRING_ANALYSIS   ssa,            //In  Analysis with glyphs
      int                                     iX,             //In
+     int                                     iY,             //In
+-    UINT                                    uOptions,       //In  ExtTextOut options
++    _Win32_AssociatedEnum_(ETO_OPTIONS) UINT                                    uOptions,       //In  ExtTextOut options
+     _In_reads_opt_(1) const RECT           *prc,           //In  Clipping rectangle (iff ETO_CLIPPED)
+     int                                     iMinSel,        //In  Logical selection. Set iMinSel>=iMaxSel for no selection
+     int                                     iMaxSel,        //In
 @@ -1742,6 +1776,13 @@ _Check_return_ HRESULT WINAPI ScriptStringOut(
  #define SIC_COMPLEX     1   // Treat complex script letters as complex
  #define SIC_ASCIIDIGIT  2   // Treat digits U+0030 through U+0039 as complex

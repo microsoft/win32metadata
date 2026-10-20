@@ -1,0 +1,43 @@
+diff --git a/um/dimm.idl b/um/dimm.idl
+index 4350234e..008904cb 100644
+--- a/um/dimm.idl
++++ b/um/dimm.idl
+@@ -10,6 +10,8 @@
+ //
+ //--------------------------------------------------------------------------
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+ cpp_quote("// dimm.h")
+ cpp_quote("//=--------------------------------------------------------------------------=")
+@@ -87,10 +89,10 @@ library ActiveIMM
+         BYTE      lfItalic;
+         BYTE      lfUnderline;
+         BYTE      lfStrikeOut;
+-        BYTE      lfCharSet;
+-        BYTE      lfOutPrecision;
+-        BYTE      lfClipPrecision;
+-        BYTE      lfQuality;
++        [annotation("_Win32_AssociatedEnum_(FONT_CHARSET)")] BYTE      lfCharSet;
++        [annotation("_Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION)")] BYTE      lfOutPrecision;
++        [annotation("_Win32_AssociatedEnum_(FONT_CLIP_PRECISION)")] BYTE      lfClipPrecision;
++        [annotation("_Win32_AssociatedEnum_(FONT_QUALITY)")] BYTE      lfQuality;
+         BYTE      lfPitchAndFamily;
+         CHAR      lfFaceName[LF_FACESIZE];
+     } LOGFONTA;
+@@ -105,10 +107,10 @@ library ActiveIMM
+         BYTE      lfItalic;
+         BYTE      lfUnderline;
+         BYTE      lfStrikeOut;
+-        BYTE      lfCharSet;
+-        BYTE      lfOutPrecision;
+-        BYTE      lfClipPrecision;
+-        BYTE      lfQuality;
++        [annotation("_Win32_AssociatedEnum_(FONT_CHARSET)")] BYTE      lfCharSet;
++        [annotation("_Win32_AssociatedEnum_(FONT_OUTPUT_PRECISION)")] BYTE      lfOutPrecision;
++        [annotation("_Win32_AssociatedEnum_(FONT_CLIP_PRECISION)")] BYTE      lfClipPrecision;
++        [annotation("_Win32_AssociatedEnum_(FONT_QUALITY)")] BYTE      lfQuality;
+         BYTE      lfPitchAndFamily;
+         WCHAR     lfFaceName[LF_FACESIZE];
+     } LOGFONTW;

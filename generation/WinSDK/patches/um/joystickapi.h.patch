@@ -1,8 +1,16 @@
 diff --git a/um/joystickapi.h b/um/joystickapi.h
-index 57d6e6d0..3afbe34d 100644
+index 57d6e6d0..fff497c0 100644
 --- a/um/joystickapi.h
 +++ b/um/joystickapi.h
-@@ -326,6 +326,7 @@ typedef struct joyinfoex_tag {
+@@ -13,6 +13,7 @@
+ #ifndef _JOYSTICKAPI_H_
+ #define _JOYSTICKAPI_H_
+ 
++#include <sal.h>
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ 
+@@ -326,6 +327,7 @@ typedef struct joyinfoex_tag {
  /* joystick function prototypes */
  
  #if (WINVER >= 0x0400)
@@ -10,7 +18,7 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -336,6 +337,7 @@ joyGetPosEx(
+@@ -336,6 +338,7 @@ joyGetPosEx(
  
  #endif /* WINVER >= 0x0400 */
  
@@ -18,7 +26,7 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  UINT
  WINAPI
-@@ -354,6 +356,7 @@ joyGetDevCapsA(
+@@ -354,6 +357,7 @@ joyGetDevCapsA(
      _In_ UINT cbjc
      );
  
@@ -26,15 +34,19 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -373,6 +376,7 @@ joyGetDevCapsW(
- MMRESULT WINAPI joyGetDevCaps(UINT uJoyID, LPJOYCAPS pjc, UINT cbjc);
+@@ -370,9 +374,10 @@ joyGetDevCapsW(
+ #endif // !UNICODE
+ 
+ #else
+-MMRESULT WINAPI joyGetDevCaps(UINT uJoyID, LPJOYCAPS pjc, UINT cbjc);
++MMRESULT WINAPI _Win32_SupportedOS_Windows2000_ joyGetDevCaps(UINT uJoyID, LPJOYCAPS pjc, UINT cbjc);
  #endif
  
 +_Win32_SupportedOS_Windows2000_
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -381,6 +385,7 @@ joyGetPos(
+@@ -381,6 +386,7 @@ joyGetPos(
      _Out_ LPJOYINFO pji
      );
  
@@ -42,7 +54,7 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -389,6 +394,7 @@ joyGetThreshold(
+@@ -389,6 +395,7 @@ joyGetThreshold(
      _Out_ LPUINT puThreshold
      );
  
@@ -50,7 +62,7 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -396,6 +402,7 @@ joyReleaseCapture(
+@@ -396,6 +403,7 @@ joyReleaseCapture(
      _In_ UINT uJoyID
      );
  
@@ -58,7 +70,7 @@ index 57d6e6d0..3afbe34d 100644
  WINMMAPI
  MMRESULT
  WINAPI
-@@ -406,6 +413,7 @@ joySetCapture(
+@@ -406,6 +414,7 @@ joySetCapture(
      _In_ BOOL fChanged
      );
  

@@ -1,8 +1,7 @@
 diff --git a/um/newdev.h b/um/newdev.h
-index 76d48264..fd80364b 100644
 --- a/um/newdev.h
 +++ b/um/newdev.h
-@@ -35,25 +35,35 @@ extern "C" {
+@@ -35,25 +35,35 @@
  #define INSTALLFLAG_NONINTERACTIVE      0x00000004  // No UI shown at all. API will fail if any UI must be shown.
  #define INSTALLFLAG_BITS                0x00000007
  
@@ -40,7 +39,7 @@ index 76d48264..fd80364b 100644
      _Out_opt_ PBOOL bRebootRequired
      );
  
-@@ -74,6 +84,15 @@ UpdateDriverForPlugAndPlayDevicesW(
+@@ -74,6 +84,15 @@
  #define DIIDFLAG_INSTALLCOPYINFDRIVERS  0x00000008      // Install any extra INFs specified via CopyInf directive.
  #define DIIDFLAG_BITS                   0x0000000F
  
@@ -56,7 +55,7 @@ index 76d48264..fd80364b 100644
  BOOL
  WINAPI
  DiInstallDevice(
-@@ -81,7 +100,7 @@ DiInstallDevice(
+@@ -81,7 +100,7 @@
      _In_      HDEVINFO DeviceInfoSet,
      _In_      PSP_DEVINFO_DATA DeviceInfoData,
      _In_opt_  PSP_DRVINFO_DATA DriverInfoData,
@@ -65,7 +64,7 @@ index 76d48264..fd80364b 100644
      _Out_opt_ PBOOL NeedReboot
      );
  
-@@ -125,21 +144,40 @@ DiInstallDevice(
+@@ -125,21 +144,40 @@
  
  #endif // (WINVER >= _WIN32_WINNT_WINBLUE)
  
@@ -92,10 +91,13 @@ index 76d48264..fd80364b 100644
      _In_opt_  HWND hwndParent,
      _In_      LPCWSTR InfPath,
 -    _In_      DWORD Flags,
+-    _Out_opt_ PBOOL NeedReboot
+-    );
+-
 +    _In_      _Win32_AssociatedEnum_(DIINSTALLDRIVER_FLAGS) DWORD Flags,
-     _Out_opt_ PBOOL NeedReboot
-     );
- 
++    _Out_opt_ PBOOL NeedReboot
++    );
++
 +_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  BOOL
@@ -108,7 +110,7 @@ index 76d48264..fd80364b 100644
      _Out_opt_ PBOOL NeedReboot
      );
  
-@@ -153,6 +191,8 @@ DiInstallDriverA(
+@@ -153,6 +191,8 @@
  
  
  #if (WINVER >= _WIN32_WINNT_WIN7)
@@ -117,7 +119,7 @@ index 76d48264..fd80364b 100644
  BOOL
  WINAPI
  DiUninstallDevice(
-@@ -176,12 +216,19 @@ DiUninstallDevice(
+@@ -176,21 +216,29 @@
  #define DIURFLAG_VALID              (DIURFLAG_NO_REMOVE_INF |\
                                       DIURFLAG_RESERVED      )
  
@@ -134,11 +136,16 @@ index 76d48264..fd80364b 100644
      _In_opt_  HWND hwndParent,
      _In_      LPCWSTR InfPath,
 -    _In_      DWORD Flags,
+-    _Out_opt_ PBOOL NeedReboot
+-    );
+-
 +    _In_      _Win32_AssociatedEnum_(DIUNINSTALLDRIVER_FLAGS) DWORD Flags,
-     _Out_opt_ PBOOL NeedReboot
-     );
- 
-@@ -190,7 +237,7 @@ WINAPI
++    _Out_opt_ PBOOL NeedReboot
++    );
++
++_Win32_SetLastError_
+ BOOL
+ WINAPI
  DiUninstallDriverA(
      _In_opt_  HWND hwndParent,
      _In_      LPCSTR InfPath,
@@ -147,7 +154,7 @@ index 76d48264..fd80364b 100644
      _Out_opt_ PBOOL NeedReboot
      );
  
-@@ -203,6 +250,8 @@ DiUninstallDriverA(
+@@ -203,6 +251,8 @@
  
  
  #if (WINVER >= _WIN32_WINNT_LONGHORN)
@@ -156,14 +163,15 @@ index 76d48264..fd80364b 100644
  BOOL
  WINAPI
  DiShowUpdateDevice(
-@@ -220,14 +269,19 @@ DiShowUpdateDevice(
+@@ -220,14 +270,19 @@
  #define ROLLBACK_FLAG_NO_UI             0x00000001  // don't show any UI (this could cause failures if UI must be displayed)
  #define ROLLBACK_BITS                   0x00000001
  
+-
 +_Win32_FlagsEnum_(DIROLLBACKDRIVER_FLAGS, DWORD,
 +    ROLLBACK_FLAG_NO_UI,
 +    ROLLBACK_BITS);
- 
++
 +_Win32_SupportedOS_WindowsVista_
 +_Win32_SetLastError_
  BOOL
@@ -177,7 +185,7 @@ index 76d48264..fd80364b 100644
      _Out_opt_ PBOOL NeedReboot
      );
  #endif // (WINVER >= _WIN32_WINNT_LONGHORN)
-@@ -254,4 +308,3 @@ DiShowUpdateDriver(
+@@ -254,4 +309,3 @@
  #pragma endregion
  
  #endif // _INC_NEWDEV

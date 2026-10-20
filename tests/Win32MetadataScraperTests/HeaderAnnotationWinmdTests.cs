@@ -29,6 +29,32 @@ namespace Win32MetadataScraperTests
         [InlineData("x86", "i686-pc-windows-msvc", false)]
         [InlineData("x64", "x86_64-pc-windows-msvc", false)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void CompilerBuiltinsRemainAbsentFromPhysicalDllApiMetadata(string architecture, string target, bool annotated)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target,
+                HeaderAnnotationIntrinsicTests.Declarations, annotationsEnabled: annotated);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            Assert.DoesNotContain(reader.MethodDefinitions, handle => reader.GetString(reader.GetMethodDefinition(handle).Name)
+                is "__builtin_trap" or "__builtin_memcpy" or "_mm_pause" or "__faststorefence");
+            var ordinary = FindMethod(reader, "Apis", "Ordinary");
+            Assert.Equal("scan.dll", reader.GetString(reader.GetModuleReference(ordinary.GetImport().Module).Name));
+            Assert.Equal("Ordinary", reader.GetString(ordinary.GetImport().Name));
+            var parameter = Assert.Single(ordinary.GetParameters().Select(reader.GetParameter));
+            Assert.Equal(annotated, parameter.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "RetainedAttribute"));
+            Assert.Equal(annotated, ordinary.GetCustomAttributes().Any(handle => AttributeName(reader, handle) == "SupportedOSPlatformAttribute"));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
         public void ParameterOverridesPreserveNativeContractsAndReachPhysicalMetadata(
             string architecture, string target, bool annotationsEnabled)
         {
@@ -216,6 +242,40 @@ _Win32_Enum_(SOURCE_GROUP, unsigned, FIRST);
             var alias = FindType(reader, "Apis").GetFields().Select(reader.GetFieldDefinition)
                 .Single(field => reader.GetString(field.Name) == "ALIAS");
             Assert.Equal(7U, reader.GetBlobReader(reader.GetConstant(alias.GetDefaultValue()).Value).ReadUInt32());
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
+        [InlineData("c", "c11")]
+        [InlineData("c++", "c++17")]
+        public void ForwardCleanupIdentityAndCompleteInvalidSetsReachPhysicalMetadata(string language, string standard)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+_Win32_RAIIFree_Handle_(CloseLater) void* __stdcall OpenLater(void);
+int __stdcall CreateLater(_Out_ _Win32_RAIIFree_(CloseLater, -1, 0) void** value);
+void* __stdcall BorrowLater(void* value);
+__declspec(dllimport) int __stdcall CloseLater(void* value);
+", extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, "x86_64-pc-windows-msvc", false, language),
+                NativeSurface(fixture, "x86_64-pc-windows-msvc", true, language));
+            using var image = Emit(fixture, "x64");
+            var reader = image.Reader;
+            var open = FindMethod(reader, "Apis", "OpenLater");
+            Assert.Equal("Void*", open.DecodeSignature(new SignatureNames(), null).ReturnType);
+            var result = open.GetParameters().Select(reader.GetParameter).Single(parameter => parameter.SequenceNumber == 0);
+            AssertStringAttribute(reader, result.GetCustomAttributes(), "RAIIFreeAttribute", "CloseLater");
+            Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(reader, result.GetCustomAttributes()));
+            var create = FindMethod(reader, "Apis", "CreateLater");
+            Assert.Equal(new[] { "Void**" }, create.DecodeSignature(new SignatureNames(), null).ParameterTypes);
+            var output = Assert.Single(create.GetParameters().Select(reader.GetParameter));
+            Assert.True(output.Attributes.HasFlag(ParameterAttributes.Out));
+            AssertStringAttribute(reader, output.GetCustomAttributes(), "RAIIFreeAttribute", "CloseLater");
+            Assert.Equal(new long[] { -1, 0 }, ReadInvalidValues(reader, output.GetCustomAttributes()));
+            var borrowed = FindMethod(reader, "Apis", "BorrowLater");
+            AssertDoesNotHaveAttribute(reader, borrowed.GetCustomAttributes(), "RAIIFreeAttribute");
+            foreach (var parameter in borrowed.GetParameters().Select(reader.GetParameter))
+                AssertDoesNotHaveAttribute(reader, parameter.GetCustomAttributes(), "RAIIFreeAttribute");
             AssertMetadataClosure(reader);
         }
 

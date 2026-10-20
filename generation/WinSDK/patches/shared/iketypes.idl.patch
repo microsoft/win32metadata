@@ -1,0 +1,189 @@
+diff --git a/shared/iketypes.idl b/shared/iketypes.idl
+index b202edd9..1a49ff2d 100644
+--- a/shared/iketypes.idl
++++ b/shared/iketypes.idl
+@@ -5,6 +5,8 @@
+ 
+      Defines data types used by the IKE keying module.
+ */
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("#include <winapifamily.h>")
+ 
+ #pragma region Desktop Family or AppRuntime Package
+@@ -82,13 +84,15 @@ cpp_quote("#define IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY  (0x00000001)")
+ // Use PSK for authenticating remote entity to local entity only
+ cpp_quote("#define IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY  (0x00000002)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS, ULONG, IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY, IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY);")
++
+ 
+ typedef struct IKEEXT_PRESHARED_KEY_AUTHENTICATION1__
+ {
+    // The preshared key
+    FWP_BYTE_BLOB presharedKey;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS)")] UINT32 flags;
+ } IKEEXT_PRESHARED_KEY_AUTHENTICATION1;
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+@@ -114,6 +118,8 @@ cpp_quote("#define IKEEXT_CERT_FLAG_IGNORE_INIT_CERT_MAP_FAILURE (0x00000010)")
+ //local cert selection
+ cpp_quote("#define IKEEXT_CERT_FLAG_PREFER_NAP_CERTIFICATE_OUTBOUND (0x00000020)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_CERT_FLAGS, ULONG, IKEEXT_CERT_FLAG_ENABLE_ACCOUNT_MAPPING, IKEEXT_CERT_FLAG_DISABLE_REQUEST_PAYLOAD, IKEEXT_CERT_FLAG_USE_NAP_CERTIFICATE, IKEEXT_CERT_FLAG_INTERMEDIATE_CA, IKEEXT_CERT_FLAG_IGNORE_INIT_CERT_MAP_FAILURE, IKEEXT_CERT_FLAG_PREFER_NAP_CERTIFICATE_OUTBOUND);")
++
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+ // Select a NAP certificate for outbound
+ cpp_quote("#define IKEEXT_CERT_FLAG_SELECT_NAP_CERTIFICATE (0x00000040)")
+@@ -122,6 +128,8 @@ cpp_quote("#define IKEEXT_CERT_FLAG_VERIFY_NAP_CERTIFICATE (0x00000080)")
+ // Follow renewal property on the certificate when selecting local certificate for outbound.
+ // Only applicable when hash of the certificate is specified.
+ cpp_quote("#define IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE (0x00000100)")
++
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_CERT_FLAGS, ULONG, IKEEXT_CERT_FLAG_SELECT_NAP_CERTIFICATE, IKEEXT_CERT_FLAG_VERIFY_NAP_CERTIFICATE, IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE);")
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN8)")
+ 
+ 
+@@ -131,7 +139,7 @@ typedef struct IKEEXT_CERT_ROOT_CONFIG0_
+    // specifying Enterprise or trusted root store config.
+    FWP_BYTE_BLOB certData;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_CERT_FLAGS)")] UINT32 flags;
+ } IKEEXT_CERT_ROOT_CONFIG0;
+ 
+ //////////
+@@ -157,6 +165,8 @@ cpp_quote("#define IKEEXT_CERT_AUTH_ENABLE_CRL_CHECK_STRONG       (0x00000004)")
+ // IKE-style certificate verification
+ cpp_quote("#define IKEEXT_CERT_AUTH_DISABLE_SSL_CERT_VALIDATION (0x00000008)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_CERT_AUTH, ULONG, IKEEXT_CERT_AUTH_FLAG_SSL_ONE_WAY, IKEEXT_CERT_AUTH_ENABLE_CRL_CHECK_STRONG, IKEEXT_CERT_AUTH_DISABLE_SSL_CERT_VALIDATION);")
++
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+ // Allow lookup of peer certificate information from an HTTP URL. Only supported 
+ // by IKEv2.
+@@ -166,6 +176,8 @@ cpp_quote("#define IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP  (0x00000010)")
+ // encoded certificate-bundle. If this flag is not specifed, IKEv2 will assume
+ // that the URL points to an encoded certificate. Only supported by IKEv2.
+ cpp_quote("#define IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE  (0x00000020)")
++
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_CERT_AUTH, ULONG, IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP, IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE);")
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+ 
+ // Disable sending CERT_REQ payload from the Client
+@@ -242,7 +254,7 @@ typedef struct IKEEXT_CERTIFICATE_AUTHENTICATION0_
+          [unique] IKEEXT_CERT_ROOT_CONFIG0* outboundTrustedRootStoreConfig;
+    };
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_CERT_AUTH)")] UINT32 flags;
+ } IKEEXT_CERTIFICATE_AUTHENTICATION0;
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
+@@ -303,7 +315,7 @@ typedef struct IKEEXT_CERTIFICATE_AUTHENTICATION1_
+       [case(IKEEXT_CERT_CONFIG_UNSPECIFIED)];
+    };
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_CERT_AUTH)")] UINT32 flags;
+ 
+    // HTTP URL pointing to an encoded certificate or certificate-bundle, that 
+    // will be used by IKEv2 for authenticating local machine to a peer. 
+@@ -434,7 +446,7 @@ typedef struct IKEEXT_CERTIFICATE_AUTHENTICATION2_
+       [case(IKEEXT_CERT_CONFIG_UNSPECIFIED)];
+    };
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_CERT_AUTH)")] UINT32 flags;
+ 
+    // HTTP URL pointing to an encoded certificate or certificate-bundle, that 
+    // will be used by IKEv2 for authenticating local machine to a peer. 
+@@ -467,10 +479,12 @@ cpp_quote("#define IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION (0x000000
+ // Refuse connections if the peer is using explicit credentials
+ cpp_quote("#define IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS (0x00000002)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_KERBEROS_AUTHENTICATION_FLAGS, ULONG, IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION, IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS);")
++
+ // Stores information needed for kerberos authentication
+ typedef struct IKEEXT_KERBEROS_AUTHENTICATION0__
+ {
+-  UINT32 flags;
++  [annotation("_Win32_AssociatedEnum_(IKEEXT_KERBEROS_AUTHENTICATION_FLAGS)")] UINT32 flags;
+ } IKEEXT_KERBEROS_AUTHENTICATION0;
+ 
+ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN8)")
+@@ -481,7 +495,7 @@ cpp_quote("#define IKEEXT_KERB_AUTH_FORCE_PROXY_ON_INITIATOR (0x00000004)")
+ // Stores information needed for Kerberos authentication
+ typedef struct IKEEXT_KERBEROS_AUTHENTICATION1__
+ {
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_KERBEROS_AUTHENTICATION_FLAGS)")] UINT32 flags;
+    [string, unique] wchar_t* proxyServer;
+ } IKEEXT_KERBEROS_AUTHENTICATION1;
+ 
+@@ -490,10 +504,12 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN8)")
+ // Disable initiator generation of peer token from the peer's name string
+ cpp_quote("#define IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION (0x00000001)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_RESERVED_AUTHENTICATION_FLAGS, ULONG, IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION);")
++
+ // Stores information needed for RESERVED authentication
+ typedef struct IKEEXT_RESERVED_AUTHENTICATION0__
+ {
+-  UINT32 flags;
++  [annotation("_Win32_AssociatedEnum_(IKEEXT_RESERVED_AUTHENTICATION_FLAGS)")] UINT32 flags;
+ } IKEEXT_RESERVED_AUTHENTICATION0;
+ 
+ 
+@@ -513,10 +529,12 @@ cpp_quote("#define IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY  (0x00000001)")
+ // Use EAP for authenticating remote entity to local entity only
+ cpp_quote("#define IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY  (0x00000002)")
+ 
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_EAP_AUTHENTICATION_FLAGS, ULONG, IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY, IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY);")
++
+ // Stores information needed for EAP authentication
+ typedef struct IKEEXT_EAP_AUTHENTICATION0__
+ {
+-  UINT32 flags;
++  [annotation("_Win32_AssociatedEnum_(IKEEXT_EAP_AUTHENTICATION_FLAGS)")] UINT32 flags;
+ } IKEEXT_EAP_AUTHENTICATION0;
+ 
+ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
+@@ -712,6 +730,8 @@ cpp_quote("#define IKEEXT_POLICY_FLAG_NO_IMPERSONATION_LUID_VERIFY (0x00000004)"
+ // AuthIP only:  allow responder to accept any DH proposal (including NO dh)
+ // regardless of what is configured in policy
+ cpp_quote("#define IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH (0x00000008)")
++
++cpp_quote("_Win32_FlagsEnum_(IKEEXT_POLICY_FLAG, ULONG, IKEEXT_POLICY_FLAG_DISABLE_DIAGNOSTICS, IKEEXT_POLICY_FLAG_NO_MACHINE_LUID_VERIFY, IKEEXT_POLICY_FLAG_NO_IMPERSONATION_LUID_VERIFY, IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH);")
+ // IKEv2 only: Disable MOBIKE
+ cpp_quote("#define IKEEXT_POLICY_FLAG_MOBIKE_NOT_SUPPORTED (0x00000010)")
+ // IKEv2 Site to Site
+@@ -741,7 +761,7 @@ typedef struct IKEEXT_POLICY0_
+    // Array of main mode proposals
+    [size_is(numIkeProposals), ref] IKEEXT_PROPOSAL0* ikeProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_POLICY_FLAG)")] UINT32 flags;
+    // Maximum number of dynamic IPsec filters (per remote IP address and per
+    // transport layer) that is allowed to be added for any SA negotiated using
+    // this policy. This throttle prevents an attacker from making IKE, Authip
+@@ -768,7 +788,7 @@ typedef struct IKEEXT_POLICY1_
+    // Array of main mode proposals
+    [size_is(numIkeProposals), ref] IKEEXT_PROPOSAL0* ikeProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_POLICY_FLAG)")] UINT32 flags;
+    // Maximum number of dynamic IPsec filters (per remote IP address and per
+    // transport layer) that is allowed to be added for any SA negotiated using
+    // this policy. This throttle prevents an attacker from making IKE, Authip
+@@ -800,7 +820,7 @@ typedef struct IKEEXT_POLICY2_
+    // Array of main mode proposals
+    [size_is(numIkeProposals), ref] IKEEXT_PROPOSAL0* ikeProposals;
+    // Flags
+-   UINT32 flags;
++   [annotation("_Win32_AssociatedEnum_(IKEEXT_POLICY_FLAG)")] UINT32 flags;
+    // Maximum number of dynamic IPsec filters (per remote IP address and per
+    // transport layer) that is allowed to be added for any SA negotiated using
+    // this policy. This throttle prevents an attacker from making IKE, Authip

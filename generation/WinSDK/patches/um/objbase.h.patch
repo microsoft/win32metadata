@@ -1,5 +1,3 @@
-diff --git a/um/objbase.h b/um/objbase.h
-index a156d7da..34bd91ec 100644
 --- a/um/objbase.h
 +++ b/um/objbase.h
 @@ -28,7 +28,11 @@
@@ -15,7 +13,7 @@ index a156d7da..34bd91ec 100644
  {
    COINIT_APARTMENTTHREADED  = 0x2,      // Apartment model
  
-@@ -77,17 +81,23 @@ WINOLEAPI_(DWORD) CoBuildVersion( VOID );
+@@ -77,17 +81,23 @@
  
  /* init/uninit */
  
@@ -40,7 +38,7 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI  CoRevokeInitializeSpy(_In_ ULARGE_INTEGER uliCookie);
  
  // COM System Security Descriptors (used when the corresponding registry
-@@ -100,20 +110,25 @@ typedef enum tagCOMSD
+@@ -100,36 +110,42 @@
      SD_ACCESSRESTRICTIONS = 3       // Machine wide access limits
  
  } COMSD;
@@ -66,7 +64,12 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI CoGetInstanceFromFile(
      _In_opt_ COSERVERINFO *            pServerInfo,
      _In_opt_ CLSID        *            pClsid,
-@@ -125,6 +140,7 @@ _Check_return_ WINOLEAPI CoGetInstanceFromFile(
+     _In_opt_ IUnknown     *            punkOuter, // only relevant locally
+-    _In_ DWORD                         dwClsCtx,
++    _In_ _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsCtx,
+     _In_ DWORD                         grfMode,
+     _In_ _Null_terminated_ OLECHAR *    pwszName,
+     _In_ DWORD                         dwCount,
      _Inout_updates_(dwCount) MULTI_QI * pResults );
  
  
@@ -74,7 +77,13 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
      _In_opt_ COSERVERINFO *            pServerInfo,
      _In_opt_ CLSID        *            pClsid,
-@@ -140,7 +156,8 @@ _Check_return_ WINOLEAPI CoGetInstanceFromIStorage(
+     _In_opt_ IUnknown     *            punkOuter, // only relevant locally
+-    _In_ DWORD                         dwClsCtx,
++    _In_ _Win32_AssociatedEnum_(CLSCTX) DWORD dwClsCtx,
+     _In_ struct IStorage  *            pstg,
+     _In_ DWORD                         dwCount,
+     _Inout_updates_(dwCount) MULTI_QI * pResults );
+@@ -140,7 +156,8 @@
  #if (_WIN32_WINNT >= 0x0500 ) || defined(_WIN32_DCOM) // DCOM
  
  
@@ -84,7 +93,7 @@ index a156d7da..34bd91ec 100644
  
  
  WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulReserved, _In_ HRESULT appsHR);
-@@ -148,15 +165,19 @@ WINOLEAPI DcomChannelSetHResult(_In_opt_ LPVOID pvReserved, _In_opt_ ULONG* pulR
+@@ -148,15 +165,19 @@
  #endif
  
  /* other helpers */
@@ -104,7 +113,7 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI CoRegisterMessageFilter( _In_opt_ LPMESSAGEFILTER lpMessageFilter,
                                  _Outptr_opt_result_maybenull_ LPMESSAGEFILTER FAR* lplpMessageFilter );
  
-@@ -168,6 +189,7 @@ WINOLEAPI CoRegisterChannelHook( _In_ REFGUID ExtensionUuid, _In_ IChannelHook *
+@@ -168,6 +189,7 @@
  
  /* TreatAs APIS */
  
@@ -112,7 +121,7 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID clsidNew);
  
  
-@@ -175,8 +197,9 @@ _Check_return_ WINOLEAPI CoTreatAsClass(_In_ REFCLSID clsidOld, _In_ REFCLSID cl
+@@ -175,8 +197,9 @@
  
  WINOLEAPI CreateDataAdviseHolder(_Outptr_ LPDATAADVISEHOLDER FAR* ppDAHolder);
  
@@ -123,15 +132,16 @@ index a156d7da..34bd91ec 100644
  
  
  /****** Storage API Prototypes ********************************************/
-@@ -221,28 +244,42 @@ WINOLEAPI  CoInstall(
+@@ -221,28 +244,42 @@
  //  Moniker APIs
  //
  
 -_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _Outptr_ LPVOID FAR* ppvResult);
+-
+-_Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _Outptr_ void **ppv);
 +_Win32_SupportedOS_Windows2000_
 +_Check_return_ WINOLEAPI  BindMoniker(_In_ LPMONIKER pmk, _In_ DWORD grfOpt, _In_ REFIID iidResult, _COM_Outptr_ LPVOID FAR* ppvResult);
- 
--_Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _Outptr_ void **ppv);
++
 +_Win32_SupportedOS_Windows2000_
 +_Check_return_ WINOLEAPI  CoGetObject(_In_ LPCWSTR pszName, _In_opt_ BIND_OPTS *pBindOptions, _In_ REFIID riid, _COM_Outptr_ void **ppv);
 +_Win32_SupportedOS_Windows2000_
@@ -168,7 +178,7 @@ index a156d7da..34bd91ec 100644
  _Check_return_ WINOLEAPI  CreateObjrefMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_ LPMONIKER FAR * ppmk);
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_PC_APP) */
-@@ -251,6 +288,7 @@ _Check_return_ WINOLEAPI  CreateObjrefMoniker(_In_opt_ LPUNKNOWN punk, _Outptr_
+@@ -251,6 +288,7 @@
  #pragma region Desktop Partition
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  

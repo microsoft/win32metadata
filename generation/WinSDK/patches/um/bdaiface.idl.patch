@@ -1,16 +1,17 @@
 diff --git a/um/bdaiface.idl b/um/bdaiface.idl
-index dd7af9a9..1a823a2b 100644
+index dd7af9a9..b81b5b6f 100644
 --- a/um/bdaiface.idl
 +++ b/um/bdaiface.idl
-@@ -15,6 +15,7 @@
+@@ -15,6 +15,8 @@
  //---------------------------------------------------------------------
  // IUnknown import idl
  //---------------------------------------------------------------------
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -782,6 +783,7 @@ interface IBDA_AutoDemodulate : IUnknown
+@@ -782,6 +784,7 @@ interface IBDA_AutoDemodulate : IUnknown
  //---------------------------------------------------------------------
  // IBDA_AutoDemodulateEx interface
  //---------------------------------------------------------------------
@@ -18,7 +19,27 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(34518D13-1182-48e6-B28F-B24987787326),
-@@ -1075,6 +1077,7 @@ typedef struct {
+@@ -976,6 +979,9 @@ interface IBDA_DigitalDemodulator3 : IBDA_DigitalDemodulator2
+         );
+ }
+ 
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum
+ {
+     KSPROPERTY_IPSINK_MULTICASTLIST,
+@@ -983,6 +989,9 @@ typedef enum
+     KSPROPERTY_IPSINK_ADAPTER_ADDRESS
+ 
+ } KSPROPERTY_IPSINK;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+ 
+ 
+@@ -1075,6 +1084,7 @@ typedef struct {
  } PID_MAP ;
  #endif // REMOVE_THESE
  
@@ -26,7 +47,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid (afb6c2a2-2c41-11d3-8a60-0000f81e0e4a),
-@@ -1108,6 +1111,7 @@ interface IEnumPIDMap : IUnknown
+@@ -1108,6 +1118,7 @@ interface IEnumPIDMap : IUnknown
  // IMPEG2PIDMap interface
  //---------------------------------------------------------------------
  
@@ -34,7 +55,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid (afb6c2a1-2c41-11d3-8a60-0000f81e0e4a),
-@@ -1195,6 +1199,7 @@ interface IMPEG2PIDMap : IUnknown
+@@ -1195,6 +1206,7 @@ interface IMPEG2PIDMap : IUnknown
  // Currently implemented on the TIF and registered as a service by TIF.
  //---------------------------------------------------------------------
  
@@ -42,7 +63,7 @@ index dd7af9a9..1a823a2b 100644
      [
           object,
       uuid(D806973D-3EBE-46de-8FBB-6358FE784208),
-@@ -1242,6 +1247,7 @@ cpp_quote("#define SID_BDA_TransportStreamInfo __uuidof(IBDA_TransportStreamInfo
+@@ -1242,6 +1254,7 @@ cpp_quote("#define SID_BDA_TransportStreamInfo __uuidof(IBDA_TransportStreamInfo
  //---------------------------------------------------------------------
  // IBDA_ConditionalAccess interface
  //---------------------------------------------------------------------
@@ -50,7 +71,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(CD51F1E0-7BE9-4123-8482-A2A796C0A6B0),
-@@ -1350,6 +1356,7 @@ cpp_quote("#define SID_BDA_DiagnosticProperties __uuidof(IBDA_DiagnosticProperti
+@@ -1350,6 +1363,7 @@ cpp_quote("#define SID_BDA_DiagnosticProperties __uuidof(IBDA_DiagnosticProperti
  // IBDA_DRM interface
  //---------------------------------------------------------------------
  
@@ -58,7 +79,7 @@ index dd7af9a9..1a823a2b 100644
      [
          object,
          uuid(F98D88B0-1992-4cd6-A6D9-B9AFAB99330D),
-@@ -1414,6 +1421,7 @@ cpp_quote("#define SID_BDA_NameValueService __uuidof(IBDA_NameValueService)")
+@@ -1414,6 +1428,7 @@ cpp_quote("#define SID_BDA_NameValueService __uuidof(IBDA_NameValueService)")
  //---------------------------------------------------------------------
  // IBDA_ConditionalAccessEx interface
  //---------------------------------------------------------------------
@@ -66,7 +87,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(497C3418-23CB-44ba-BB62-769F506FCEA7),
-@@ -1472,6 +1480,7 @@ cpp_quote("#define SID_BDA_ConditionalAccessEx __uuidof(IBDA_ConditionalAccessEx
+@@ -1472,6 +1487,7 @@ cpp_quote("#define SID_BDA_ConditionalAccessEx __uuidof(IBDA_ConditionalAccessEx
  //---------------------------------------------------------------------
  // IBDA_ISDBConditionalAccess interface
  //---------------------------------------------------------------------
@@ -74,7 +95,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(5E68C627-16C2-4e6c-B1E2-D00170CDAA0F),
-@@ -1495,6 +1504,7 @@ cpp_quote("#define SID_BDA_ISDBConditionalAccess __uuidof(IBDA_ISDBConditionalAc
+@@ -1495,6 +1511,7 @@ cpp_quote("#define SID_BDA_ISDBConditionalAccess __uuidof(IBDA_ISDBConditionalAc
  //---------------------------------------------------------------------
  // IBDA_EventingService interface
  //---------------------------------------------------------------------
@@ -82,7 +103,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(207C413F-00DC-4c61-BAD6-6FEE1FF07064),
-@@ -1554,6 +1564,7 @@ cpp_quote("0xfd456373, 0x3323, 0x4090, 0xad, 0xca, 0x8e, 0xd4, 0x5f, 0x55, 0xcf,
+@@ -1554,6 +1571,7 @@ cpp_quote("0xfd456373, 0x3323, 0x4090, 0xad, 0xca, 0x8e, 0xd4, 0x5f, 0x55, 0xcf,
  //---------------------------------------------------------------------
  // IBDA_Encoder interface
  //---------------------------------------------------------------------
@@ -90,7 +111,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(3a8bad59-59fe-4559-a0ba-396cfaa98ae3),
-@@ -1648,6 +1659,7 @@ cpp_quote("#define PBDA_Encoder_BitrateMode_Average                 0x00000003")
+@@ -1648,6 +1666,7 @@ cpp_quote("#define PBDA_Encoder_BitrateMode_Average                 0x00000003")
  //---------------------------------------------------------------------
  // IBDA_FDC interface
  //---------------------------------------------------------------------
@@ -98,7 +119,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(138adc7e-58ae-437f-b0b4-c9fe19d5b4ac),
-@@ -1721,6 +1733,7 @@ cpp_quote("0xe7dbf9a0, 0x22ab, 0x4047, 0x8e, 0x67, 0xef, 0x9a, 0xd5, 0x4, 0xe7,
+@@ -1721,6 +1740,7 @@ cpp_quote("0xe7dbf9a0, 0x22ab, 0x4047, 0x8e, 0x67, 0xef, 0x9a, 0xd5, 0x4, 0xe7,
  //---------------------------------------------------------------------
  // IBDA_GuideDataDeliveryService interface
  //---------------------------------------------------------------------
@@ -106,7 +127,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(C0AFCB73-23E7-4bc6-BAFA-FDC167B4719F),
-@@ -1936,6 +1949,7 @@ cpp_quote("#define SID_BDA_WMDRMTuner __uuidof(IBDA_WMDRMTuner)")
+@@ -1936,6 +1956,7 @@ cpp_quote("#define SID_BDA_WMDRMTuner __uuidof(IBDA_WMDRMTuner)")
  //---------------------------------------------------------------------
  // IBDA_DRIDRMService interface
  //---------------------------------------------------------------------
@@ -114,7 +135,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(1F9BC2A5-44A3-4c52-AAB1-0BBCE5A1381D),
-@@ -2026,6 +2040,7 @@ cpp_quote("#define SID_BDA_DRIWMDRMSession __uuidof(IBDA_DRIWMDRMSession)")
+@@ -2026,6 +2047,7 @@ cpp_quote("#define SID_BDA_DRIWMDRMSession __uuidof(IBDA_DRIWMDRMSession)")
  //---------------------------------------------------------------------
  // IBDA_MUX interface
  //---------------------------------------------------------------------
@@ -122,7 +143,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(942AAFEC-4C05-4c74-B8EB-8706C2A4943F),
-@@ -2083,6 +2098,7 @@ cpp_quote("#define SID_BDA_TransportStreamSelector __uuidof(IBDA_TransportStream
+@@ -2083,6 +2105,7 @@ cpp_quote("#define SID_BDA_TransportStreamSelector __uuidof(IBDA_TransportStream
  //---------------------------------------------------------------------
  // IBDA_UserActivityService interface
  //---------------------------------------------------------------------
@@ -130,7 +151,7 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      uuid(53B14189-E478-4b7a-A1FF-506DB4B99DFE),
-@@ -2151,6 +2167,7 @@ interface IESEvents : IUnknown
+@@ -2151,6 +2174,7 @@ interface IESEvents : IUnknown
  	HRESULT OnESEventReceived([in] GUID guidEventType, [in] IESEvent* pESEvent);
  };
  
@@ -138,3 +159,11 @@ index dd7af9a9..1a823a2b 100644
  [
      object,
      hidden,
+@@ -2177,6 +2201,7 @@ interface IBroadcastEventEx : IBroadcastEvent
+     HRESULT FireEx([in] GUID EventID, [in] ULONG Param1, [in] ULONG Param2, [in] ULONG Param3, [in] ULONG Param4);
+ };
+ 
++_Win32_AnnotateMethod_(IEnumPIDMap::Next, _Win32_PreserveResult_)
+ cpp_quote ("DEFINE_GUID(CLSID_BroadcastEventService, 0x0B3FFB92, 0x0919, 0x4934, 0x9D, 0x5B, 0x61, 0x9C, 0x71, 0x9D, 0x02, 0x02);")
+ cpp_quote("#define SID_SBroadcastEventService CLSID_BroadcastEventService")
+ 

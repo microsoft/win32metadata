@@ -1,16 +1,17 @@
 diff --git a/um/uiautomationcore.idl b/um/uiautomationcore.idl
-index 6d8cea3a..1cb64a6c 100644
+index 6d8cea3a..d7cc771b 100644
 --- a/um/uiautomationcore.idl
 +++ b/um/uiautomationcore.idl
-@@ -6,6 +6,7 @@
+@@ -6,6 +6,8 @@
  // Copyright (c) Microsoft Corporation. All rights reserved.
  // -------------------------------------------------------------
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("// -------------------------------------------------------------")
  cpp_quote("// UIAutomationCore.H")
  cpp_quote("//")
-@@ -409,6 +410,7 @@ library UIA
+@@ -409,6 +411,7 @@ library UIA
      //
      //  IRawElementProviderSimple
      //
@@ -18,7 +19,21 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(d6dd68d1-86fd-4332-8666-9abedea2d24c), pointer_default(unique), oleautomation]
      interface IRawElementProviderSimple : IUnknown
      {
-@@ -430,6 +432,7 @@ library UIA
+@@ -416,11 +419,11 @@ library UIA
+             [out, retval] enum ProviderOptions * pRetVal );
+ 
+         HRESULT GetPatternProvider (
+-            [in] PATTERNID patternId,
++            [annotation("_Win32_AssociatedEnum_(UIA_PATTERN_ID)")] [in] PATTERNID patternId,
+             [out, retval] IUnknown ** pRetVal );
+ 
+         HRESULT GetPropertyValue (
+-            [in] PROPERTYID propertyId,
++            [annotation("_Win32_AssociatedEnum_(UIA_PROPERTY_ID)")] [in] PROPERTYID propertyId,
+             [out, retval] VARIANT * pRetVal );
+ 
+         [propget] HRESULT HostRawElementProvider (
+@@ -430,6 +433,7 @@ library UIA
      //
      // IAccessibleEx
      //
@@ -26,7 +41,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(f8b80ada-2c44-48d0-89be-5ff23c9cd875), pointer_default(unique), oleautomation]
      interface IAccessibleEx: IUnknown
      {
-@@ -478,6 +481,7 @@ library UIA
+@@ -478,6 +482,7 @@ library UIA
      //
      //  IRawElementProviderSimple2
      //
@@ -34,7 +49,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(A0A839A9-8DA1-4A82-806A-8E0D44E79F56), pointer_default(unique), oleautomation]
      interface IRawElementProviderSimple2 : IRawElementProviderSimple
      {
-@@ -487,6 +491,7 @@ library UIA
+@@ -487,12 +492,13 @@ library UIA
      //
      //  IRawElementProviderSimple3
      //
@@ -42,7 +57,14 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(fcf5d820-d7ec-4613-bdf6-42a84ce7daaf), pointer_default(unique), oleautomation]
      interface IRawElementProviderSimple3 : IRawElementProviderSimple2
      {
-@@ -502,6 +507,7 @@ library UIA
+         HRESULT GetMetadataValue(
+             [in] int targetId,
+-            [in] METADATAID metadataId,
++            [annotation("_Win32_AssociatedEnum_(UIA_METADATA_ID)")] [in] METADATAID metadataId,
+             [out, retval] VARIANT* returnVal
+         );
+     }
+@@ -502,6 +508,7 @@ library UIA
      //
      //  IRawElementProviderFragment
      //
@@ -50,7 +72,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(f7063da8-8359-439c-9297-bbc5299a7d87), pointer_default(unique), oleautomation]
      interface IRawElementProviderFragment : IUnknown
      {
-@@ -527,6 +533,7 @@ library UIA
+@@ -527,6 +534,7 @@ library UIA
      //
      //  IRawElementProviderFragmentRoot
      //
@@ -58,7 +80,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(620ce2a5-ab8f-40a9-86cb-de3c75599b58), pointer_default(unique), oleautomation]
      interface IRawElementProviderFragmentRoot : IUnknown
      {
-@@ -542,6 +549,7 @@ library UIA
+@@ -542,15 +550,16 @@ library UIA
      //
      //  IRawElementProviderAdviseEvents
      //
@@ -66,7 +88,18 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(a407b27b-0f6d-4427-9292-473c7bf93258), pointer_default(unique), oleautomation]
      interface IRawElementProviderAdviseEvents : IUnknown
      {
-@@ -558,6 +566,7 @@ library UIA
+         HRESULT AdviseEventAdded(
+-            [in] EVENTID eventId,
++            [annotation("_Win32_AssociatedEnum_(UIA_EVENT_ID)")] [in] EVENTID eventId,
+             [in] SAFEARRAY(PROPERTYID) propertyIDs);
+ 
+         HRESULT AdviseEventRemoved(
+-            [in] EVENTID eventId,
++            [annotation("_Win32_AssociatedEnum_(UIA_EVENT_ID)")] [in] EVENTID eventId,
+             [in] SAFEARRAY(PROPERTYID) propertyIDs);
+     }
+ 
+@@ -558,6 +567,7 @@ library UIA
      //  IRawElementProviderHwndOverride
      //
  
@@ -74,7 +107,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(1d5df27c-8947-4425-b8d9-79787bb460b8), pointer_default(unique), oleautomation]
      interface IRawElementProviderHwndOverride : IUnknown
      {
-@@ -572,6 +581,7 @@ library UIA
+@@ -572,17 +582,18 @@ library UIA
      // This is provided by UiaCore when it calls IProxyProviderWinEventHandler::RespondToWinEvent
      // It stores up the events added to it, and when RespondToWinEvent returns, it passes
      // the events back to the client side, where they are actually fired.
@@ -82,7 +115,20 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(4fd82b78-a43e-46ac-9803-0a6969c7c183), pointer_default(unique), oleautomation]
      interface IProxyProviderWinEventSink : IUnknown
      {
-@@ -600,6 +610,7 @@ library UIA
+         HRESULT AddAutomationPropertyChangedEvent(
+             [in] IRawElementProviderSimple * pProvider,
+-            [in] PROPERTYID id,
++            [annotation("_Win32_AssociatedEnum_(UIA_PROPERTY_ID)")] [in] PROPERTYID id,
+             [in] VARIANT newValue);
+ 
+         HRESULT AddAutomationEvent(
+             [in] IRawElementProviderSimple * pProvider,
+-            [in] EVENTID id);
++            [annotation("_Win32_AssociatedEnum_(UIA_EVENT_ID)")] [in] EVENTID id);
+ 
+         HRESULT AddStructureChangedEvent(
+             [in] IRawElementProviderSimple * pProvider,
+@@ -600,6 +611,7 @@ library UIA
      // 
      // When responding to WinEvents, RespondToWinEvent should not actually fire Events directly,
      // it should use the Add*Event methods on the provided IProxyProviderWinEventSink
@@ -90,7 +136,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(89592ad4-f4e0-43d5-a3b6-bad7e111b435), pointer_default(unique), oleautomation]
      interface IProxyProviderWinEventHandler : IUnknown
      {
-@@ -616,6 +627,7 @@ library UIA
+@@ -616,6 +628,7 @@ library UIA
      //  
      // Implemented by a windowless control site in order to enable the control
      // to expose its UIA elements, properties, and events.
@@ -98,7 +144,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(0a2a93cc-bfad-42ac-9b2e-0991fb0d3ea0), pointer_default(unique), oleautomation]
      interface IRawElementProviderWindowlessSite : IUnknown
      {
-@@ -636,6 +648,7 @@ library UIA
+@@ -636,6 +649,7 @@ library UIA
      //  
      // Implemented by a root element for an HWND to indicate that the
      // HWND is hosting windowless UIA fragments internally.
@@ -106,7 +152,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(33AC331B-943E-4020-B295-DB37784974A3), pointer_default(unique), oleautomation]
      interface IAccessibleHostingElementProviders : IUnknown
      {
-@@ -657,6 +670,7 @@ library UIA
+@@ -657,6 +671,7 @@ library UIA
      //  
      // Implemented by a root element for an HWND to indicate that the
      // HWND is hosting windowless MSAA fragments internally.
@@ -114,7 +160,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(24BE0B07-D37D-487A-98CF-A13ED465E9B3), pointer_default(unique), oleautomation]
      interface IRawElementProviderHostingAccessibles : IUnknown
      {
-@@ -668,6 +682,7 @@ library UIA
+@@ -668,6 +683,7 @@ library UIA
      // Control Pattern Interfaces...
      //
  
@@ -122,7 +168,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(159bc72c-4ad3-485e-9637-d7052edf0146), pointer_default(unique), oleautomation]
      interface IDockProvider : IUnknown
      {
-@@ -679,6 +694,7 @@ library UIA
+@@ -679,6 +695,7 @@ library UIA
  
      };
  
@@ -130,7 +176,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(d847d3a5-cab0-4a98-8c32-ecb45c59ad24), pointer_default(unique), oleautomation]
      interface IExpandCollapseProvider : IUnknown
      {
-@@ -688,6 +704,7 @@ library UIA
+@@ -688,6 +705,7 @@ library UIA
              [out, retval] enum ExpandCollapseState * pRetVal );
      };
  
@@ -138,7 +184,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(b17d6187-0907-464b-a168-0ef17a1572b1), pointer_default(unique), oleautomation]
      interface IGridProvider : IUnknown
      {
-@@ -701,6 +718,7 @@ library UIA
+@@ -701,6 +719,7 @@ library UIA
              [out, retval] int * pRetVal );
      };
  
@@ -146,7 +192,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(d02541f1-fb81-4d64-ae32-f520f8a6dbd1), pointer_default(unique), oleautomation]
      interface IGridItemProvider : IUnknown
      {
-@@ -716,12 +734,14 @@ library UIA
+@@ -716,12 +735,14 @@ library UIA
              [out, retval] IRawElementProviderSimple ** pRetVal );
      };
  
@@ -161,7 +207,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(6278cab1-b556-4a1a-b4e0-418acc523201), pointer_default(unique), oleautomation]
      interface IMultipleViewProvider : IUnknown
      {
-@@ -736,6 +756,7 @@ library UIA
+@@ -736,6 +757,7 @@ library UIA
              [out, retval] SAFEARRAY(int) * pRetVal );
      };
  
@@ -169,7 +215,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(36dc7aef-33e6-4691-afe1-2be7274b3d33), pointer_default(unique), oleautomation]
      interface IRangeValueProvider : IUnknown
      {
-@@ -755,12 +776,14 @@ library UIA
+@@ -755,12 +777,14 @@ library UIA
              [out, retval] double * pRetVal );
      };
  
@@ -184,7 +230,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(fb8b03af-3bdf-48d4-bd36-1a65793be168), pointer_default(unique), oleautomation]
      interface ISelectionProvider : IUnknown
      {
-@@ -772,6 +795,7 @@ library UIA
+@@ -772,6 +796,7 @@ library UIA
              [out, retval] BOOL * pRetVal );
      };
  
@@ -192,7 +238,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(14f68475-ee1c-44f6-a869-d239381f0fe7), pointer_default(unique), oleautomation]
      interface ISelectionProvider2 : ISelectionProvider
      {
-@@ -785,6 +809,7 @@ library UIA
+@@ -785,6 +810,7 @@ library UIA
              [out, retval] int * retVal);
      };
  
@@ -200,7 +246,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(b38b8077-1fc3-42a5-8cae-d40c2215055a), pointer_default(unique), oleautomation]
      interface IScrollProvider : IUnknown
      {
-@@ -808,6 +833,7 @@ library UIA
+@@ -808,6 +834,7 @@ library UIA
              [out, retval] BOOL * pRetVal );
      };
  
@@ -208,7 +254,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(2acad808-b2d4-452d-a407-91ff1ad167b2), pointer_default(unique), oleautomation]
      interface ISelectionItemProvider : IUnknown
      {
-@@ -820,6 +846,7 @@ library UIA
+@@ -820,6 +847,7 @@ library UIA
              [out, retval] IRawElementProviderSimple ** pRetVal );
      };
  
@@ -216,7 +262,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(29db1a06-02ce-4cf7-9b42-565d4fab20ee), pointer_default(unique), oleautomation]
      interface ISynchronizedInputProvider : IUnknown
      {
-@@ -828,6 +855,7 @@ library UIA
+@@ -828,6 +856,7 @@ library UIA
          HRESULT Cancel ();
      };
  
@@ -224,7 +270,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(9c860395-97b3-490a-b52a-858cc22af166), pointer_default(unique), oleautomation]
      interface ITableProvider : IUnknown
      {
-@@ -839,6 +867,7 @@ library UIA
+@@ -839,6 +868,7 @@ library UIA
              [out, retval] enum RowOrColumnMajor * pRetVal );
      };
  
@@ -232,7 +278,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(b9734fa6-771f-4d78-9c90-2517999349cd), pointer_default(unique), oleautomation]
      interface ITableItemProvider : IUnknown
      {
-@@ -848,6 +877,7 @@ library UIA
+@@ -848,6 +878,7 @@ library UIA
              [out, retval] SAFEARRAY(IRawElementProviderSimple*) * pRetVal );
      };
  
@@ -240,7 +286,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(56d00bd0-c4f4-433c-a836-1a52a57e0892), pointer_default(unique), oleautomation]
      interface IToggleProvider : IUnknown
      {
-@@ -856,6 +886,7 @@ library UIA
+@@ -856,6 +887,7 @@ library UIA
              [out, retval] enum ToggleState * pRetVal );
      };
  
@@ -248,7 +294,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(6829ddc4-4f91-4ffa-b86f-bd3e2987cb4c), pointer_default(unique), oleautomation]
      interface ITransformProvider : IUnknown
      {
-@@ -875,6 +906,7 @@ library UIA
+@@ -875,6 +907,7 @@ library UIA
              [out, retval] BOOL * pRetVal );
      };
  
@@ -256,7 +302,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(c7935180-6fb3-4201-b174-7df73adbf64a), pointer_default(unique), oleautomation]
      interface IValueProvider : IUnknown
      {
-@@ -886,6 +918,7 @@ library UIA
+@@ -886,6 +919,7 @@ library UIA
              [out, retval] BOOL * pRetVal );
      };
  
@@ -264,7 +310,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(987df77b-db06-4d77-8f8a-86a9c3bb90b9), pointer_default(unique), oleautomation]
      interface IWindowProvider : IUnknown
      {
-@@ -909,6 +942,7 @@ library UIA
+@@ -909,6 +943,7 @@ library UIA
              [out, retval] BOOL * pRetVal );
      };
  
@@ -272,7 +318,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(e44c3566-915d-4070-99c6-047bff5a08f5), pointer_default(unique), oleautomation]
      interface ILegacyIAccessibleProvider : IUnknown
      {
-@@ -938,6 +972,7 @@ library UIA
+@@ -938,6 +973,7 @@ library UIA
              [out, retval] BSTR * pszDefaultAction );
      };
  
@@ -280,7 +326,13 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(e747770b-39ce-4382-ab30-d8fb3f336f24), pointer_default(unique), oleautomation]
      interface IItemContainerProvider : IUnknown
      {
-@@ -965,6 +1000,7 @@ library UIA
+@@ -960,11 +996,12 @@ library UIA
+         // with pStartAfter=NULL to get the first item, and then to get successive
+         // items. Value should be VT_EMPTY in this case.
+         HRESULT FindItemByProperty([in] IRawElementProviderSimple * pStartAfter,
+-                                   [in] PROPERTYID propertyId,
++                                   [annotation("_Win32_AssociatedEnum_(UIA_PROPERTY_ID)")] [in] PROPERTYID propertyId,
+                                    [in] VARIANT value,
                                     [out, retval] IRawElementProviderSimple ** pFound);
      };
  
@@ -288,7 +340,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(cb98b665-2d35-4fac-ad35-f3c60d0c0b8b), pointer_default(unique), oleautomation]
      interface IVirtualizedItemProvider : IUnknown
      {
-@@ -977,12 +1013,14 @@ library UIA
+@@ -977,12 +1014,14 @@ library UIA
      };
  
  
@@ -303,7 +355,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(f95c7e80-bd63-4601-9782-445ebff011fc), pointer_default(unique), oleautomation]
      interface IAnnotationProvider : IUnknown
      {
-@@ -1003,6 +1041,7 @@ library UIA
+@@ -1003,6 +1042,7 @@ library UIA
  
      };
  
@@ -311,7 +363,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(19b6b649-f5d7-4a6d-bdcb-129252be588a), pointer_default(unique), oleautomation]
      interface IStylesProvider : IUnknown
      {
-@@ -1028,6 +1067,7 @@ library UIA
+@@ -1028,6 +1068,7 @@ library UIA
              [out, retval] BSTR * retVal ); 
      };
  
@@ -319,7 +371,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(6f6b5d35-5525-4f80-b758-85473832ffc7), pointer_default(unique), oleautomation]
      interface ISpreadsheetProvider : IUnknown
      {
-@@ -1037,6 +1077,7 @@ library UIA
+@@ -1037,6 +1078,7 @@ library UIA
      };
  
      
@@ -327,7 +379,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(eaed4660-7b3d-4879-a2e6-365ce603f3d0), pointer_default(unique), oleautomation]
      interface ISpreadsheetItemProvider : IUnknown
      {
-@@ -1050,6 +1091,7 @@ library UIA
+@@ -1050,6 +1092,7 @@ library UIA
              [out, retval] SAFEARRAY(int) * pRetVal );
      };
  
@@ -335,7 +387,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(4758742f-7ac2-460c-bc48-09fc09308a93), pointer_default(unique), oleautomation]
      interface ITransformProvider2 : ITransformProvider
      {
-@@ -1072,6 +1114,7 @@ library UIA
+@@ -1072,6 +1115,7 @@ library UIA
              [in] enum ZoomUnit zoomUnit);
      }
  
@@ -343,7 +395,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(6aa7bbbb-7ff9-497d-904f-d20b897929d8), pointer_default(unique), oleautomation]
      interface IDragProvider : IUnknown
      {
-@@ -1088,6 +1131,7 @@ library UIA
+@@ -1088,6 +1132,7 @@ library UIA
              [out, retval] SAFEARRAY(IRawElementProviderSimple*) * pRetVal );
      };
  
@@ -351,7 +403,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(bae82bfd-358a-481c-85a0-d8b4d90a5d61), pointer_default(unique), oleautomation]
      interface IDropTargetProvider : IUnknown
      {
-@@ -1100,6 +1144,7 @@ library UIA
+@@ -1100,6 +1145,7 @@ library UIA
  
      interface ITextRangeProvider;
  
@@ -359,7 +411,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(3589c92c-63f3-4367-99bb-ada653b77cf2), pointer_default(unique), oleautomation]
      interface ITextProvider : IUnknown
      {
-@@ -1119,6 +1164,7 @@ library UIA
+@@ -1119,6 +1165,7 @@ library UIA
              [out, retval] enum SupportedTextSelection * pRetVal );
      };
  
@@ -367,7 +419,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(0dc5e6ed-3e16-4bf1-8f9a-a979878bc195), pointer_default(unique), oleautomation]
      interface ITextProvider2 : ITextProvider
      {
-@@ -1131,6 +1177,7 @@ library UIA
+@@ -1131,6 +1178,7 @@ library UIA
              [out, retval] ITextRangeProvider ** pRetVal );
      }
  
@@ -375,7 +427,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(EA3605B4-3A05-400E-B5F9-4E91B40F6176), pointer_default(unique), oleautomation]
      interface ITextEditProvider : ITextProvider
      {
-@@ -1141,6 +1188,7 @@ library UIA
+@@ -1141,6 +1189,7 @@ library UIA
              [out, retval] ITextRangeProvider ** pRetVal );
      }
  
@@ -383,7 +435,25 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(5347ad7b-c355-46f8-aff5-909033582f63), pointer_default(unique), oleautomation]
      interface ITextRangeProvider : IUnknown
      {
-@@ -1198,12 +1246,14 @@ library UIA
+@@ -1157,7 +1206,7 @@ library UIA
+         HRESULT ExpandToEnclosingUnit (
+             [in] enum TextUnit unit );
+         HRESULT FindAttribute (
+-            [in] TEXTATTRIBUTEID attributeId,
++            [annotation("_Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID)")] [in] TEXTATTRIBUTEID attributeId,
+             [in] VARIANT val,
+             [in] BOOL backward,
+             [out, retval] ITextRangeProvider ** pRetVal );
+@@ -1167,7 +1216,7 @@ library UIA
+             [in] BOOL ignoreCase,
+             [out, retval] ITextRangeProvider ** pRetVal );
+         HRESULT GetAttributeValue (
+-            [in] TEXTATTRIBUTEID attributeId,
++            [annotation("_Win32_AssociatedEnum_(UIA_TEXTATTRIBUTE_ID)")] [in] TEXTATTRIBUTEID attributeId,
+             [out, retval] VARIANT * pRetVal );
+         HRESULT GetBoundingRectangles (
+             [out, retval] SAFEARRAY(double) * pRetVal );
+@@ -1198,12 +1247,14 @@ library UIA
              [out, retval] SAFEARRAY(IRawElementProviderSimple*) * pRetVal );
      };
  
@@ -398,7 +468,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(4c2de2b9-c88f-4f88-a111-f1d336b7d1a9), pointer_default(unique), oleautomation]
      interface ITextChildProvider : IUnknown
      {
-@@ -1314,6 +1364,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
+@@ -1314,6 +1365,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
      // This interface is implemented by UIA and represents a pattern object; the
      // client API wrapper sits on top of this, and implements all property/method
      // calls in terms of GetProperty and CallMethod.
@@ -406,7 +476,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(c03a7fe4-9431-409f-bed8-ae7c2299bc8d), pointer_default(unique), oleautomation]
      interface IUIAutomationPatternInstance : IUnknown
      {
-@@ -1342,6 +1393,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
+@@ -1342,6 +1394,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
      // responsible for returning a client API wrapper object, and for unmarhalling
      // property and method requests to an actual provider instance.
      // The PatternHandler object is stateless, so can be implemented by a singleton.
@@ -414,7 +484,7 @@ index 6d8cea3a..1cb64a6c 100644
      [object, uuid(d97022f3-a947-465e-8b2a-ac4315fa54e8), pointer_default(unique), oleautomation]
      interface IUIAutomationPatternHandler : IUnknown
      {
-@@ -1386,6 +1438,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
+@@ -1386,6 +1439,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
      // Additional methods added to new IUIAutomationRegistrar object for registering 
      // patterns, properties and events; and for getting the patterns/properties supported
      // by an object.

@@ -1,0 +1,21 @@
+diff --git a/um/ioringapi.h b/um/ioringapi.h
+index f7ec762e..6efb9022 100644
+--- a/um/ioringapi.h
++++ b/um/ioringapi.h
+@@ -9,6 +9,7 @@
+ #ifndef _APISET_IORING_
+ #define _APISET_IORING_
+ 
++#include <sal.h>
+ #include <apiset.h>
+ #include <apisetcconv.h>
+ #include <minwindef.h>
+@@ -214,7 +215,7 @@ STDAPI SubmitIoRing(_In_ HIORING ioRing, UINT32 waitOperations, UINT32 milliseco
+ 
+ STDAPI CloseIoRing(_In_ _Post_ptr_invalid_ HIORING ioRing);
+ 
+-STDAPI PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
++STDAPI _Win32_PreserveResult_ PopIoRingCompletion(_In_ HIORING ioRing, _Out_ IORING_CQE* cqe);
+ 
+ STDAPI SetIoRingCompletionEvent(_In_ HIORING ioRing, _In_ HANDLE hEvent);
+ 

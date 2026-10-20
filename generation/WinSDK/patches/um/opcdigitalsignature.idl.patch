@@ -1,0 +1,181 @@
+diff --git a/um/opcdigitalsignature.idl b/um/opcdigitalsignature.idl
+index 1154bd52..ac59b50c 100644
+--- a/um/opcdigitalsignature.idl
++++ b/um/opcdigitalsignature.idl
+@@ -10,6 +10,8 @@
+ // 
+ //
+ //----------------------------------------------------------------------------
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ cpp_quote("//+-------------------------------------------------------------------------")
+ cpp_quote("//")
+ cpp_quote("//  Microsoft Windows")
+@@ -113,6 +115,7 @@ typedef enum
+ 
+ //==========================INTERFACEs============================================//
+ 
++_Win32_AnnotateInterface_(IOpcSignaturePartReference, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(e24231ca-59f4-484e-b64b-36eeda36072c),
+@@ -148,6 +151,7 @@ interface IOpcSignaturePartReference : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcRelationshipSelector, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(f8f26c7f-b28f-4899-84c8-5d5639ede75f),
+@@ -167,6 +171,7 @@ interface IOpcRelationshipSelector : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureRelationshipReference, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(57babac6-9d4a-4e50-8b86-e5d4051eae7c),
+@@ -207,6 +212,7 @@ interface IOpcSignatureRelationshipReference : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureReference, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(1b47005e-3011-4edc-be6f-0f65e5ab0342),
+@@ -247,6 +253,7 @@ interface IOpcSignatureReference : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureCustomObject, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(5d77a19e-62c1-44e7-becd-45da5ae51a56),
+@@ -265,6 +272,7 @@ interface IOpcSignatureCustomObject : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignaturePartReferenceEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(80eb1561-8c77-49cf-8266-459b356ee99a),
+@@ -294,6 +302,7 @@ interface IOpcSignaturePartReferenceEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcRelationshipSelectorEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(5e50a181-a91b-48ac-88d2-bca3d8f8c0b1),
+@@ -323,6 +332,7 @@ interface IOpcRelationshipSelectorEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcSignatureRelationshipReferenceEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(773ba3e4-f021-48e4-aa04-9816db5d3495),
+@@ -352,6 +362,7 @@ interface IOpcSignatureRelationshipReferenceEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcSignatureReferenceEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(cfa59a45-28b1-4868-969e-fa8097fdc12a),
+@@ -381,6 +392,7 @@ interface IOpcSignatureReferenceEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcSignatureCustomObjectEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(5ee4fe1d-e1b0-4683-8079-7ea0fcf80b4c),
+@@ -410,6 +422,7 @@ interface IOpcSignatureCustomObjectEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcCertificateEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(85131937-8f24-421f-b439-59ab24d140b8),
+@@ -440,6 +453,7 @@ interface IOpcCertificateEnumerator : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcDigitalSignatureEnumerator, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(967b6882-0ba3-4358-b9e7-b64c75063c5e),
+@@ -472,6 +486,7 @@ interface IOpcDigitalSignatureEnumerator : IUnknown
+ //
+ // Set Interfaces
+ //
++_Win32_AnnotateInterface_(IOpcSignaturePartReferenceSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(6c9fe28c-ecd9-4b22-9d36-7fdde670fec0),
+@@ -499,6 +514,7 @@ interface IOpcSignaturePartReferenceSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcRelationshipSelectorSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(6e34c269-a4d3-47c0-b5c4-87ff2b3b6136),
+@@ -525,6 +541,7 @@ interface IOpcRelationshipSelectorSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureRelationshipReferenceSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(9f863ca5-3631-404c-828d-807e0715069b),
+@@ -559,6 +576,7 @@ interface IOpcSignatureRelationshipReferenceSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureReferenceSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(f3b02d31-ab12-42dd-9e2f-2b16761c3c1e),
+@@ -588,6 +606,7 @@ interface IOpcSignatureReferenceSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcSignatureCustomObjectSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(8f792ac5-7947-4e11-bc3d-2659ff046ae1),
+@@ -614,6 +633,7 @@ interface IOpcSignatureCustomObjectSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcCertificateSet, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(56ea4325-8e2d-4167-b1a4-e486d24c8fa7),
+@@ -639,6 +659,7 @@ interface IOpcCertificateSet : IUnknown
+         );
+ }
+ 
++_Win32_AnnotateInterface_(IOpcDigitalSignature, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(52ab21dd-1cd0-4949-bc80-0c1232d00cb4),
+@@ -728,6 +749,7 @@ interface IOpcDigitalSignature : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcSigningOptions, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(50d2d6a5-7aeb-46c0-b241-43ab0e9b407e),
+@@ -823,6 +845,7 @@ interface IOpcSigningOptions : IUnknown
+         );
+ };
+ 
++_Win32_AnnotateInterface_(IOpcDigitalSignatureManager, _Win32_SupportedOS_Windows7_)
+ [
+     object,
+     uuid(d5e62a0b-696d-462f-94df-72e33cef2659),

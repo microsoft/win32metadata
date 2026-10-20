@@ -1,14 +1,17 @@
+diff --git a/um/shobjidl.idl b/um/shobjidl.idl
+index 80f71937..07c725dc 100644
 --- a/um/shobjidl.idl
 +++ b/um/shobjidl.idl
-@@ -7,6 +7,7 @@
+@@ -7,6 +7,8 @@
  //  Contents: This interface definition contains shell objects that can be remoted
  //
  
 +#include <sal.h>
++cpp_quote("#include <sal.h>")
  cpp_quote("#include <winapifamily.h>")
  
  cpp_quote("#if _MSC_VER >= 1200")
-@@ -40,6 +41,7 @@
+@@ -40,6 +42,7 @@ import "shobjidl_core.idl";
  cpp_quote("#include <sherrors.h>")
  
  
@@ -16,7 +19,7 @@
  [
      object,
      uuid("C7B236CE-EE80-11D0-985F-006008059382"),
-@@ -55,6 +57,9 @@
+@@ -55,6 +58,9 @@ interface IQueryCodePage : IUnknown
  // These values are used by any Sync Engine to expose internal engine states to the PropertyStore's PKEY_StorageProviderState
  // in the File Indexer. To update the key, bind through GPS_EXTRINSICPROPERTIES and use the IPropertyStore interface 
  // to set the key to the desired bitmask value.
@@ -26,7 +29,7 @@
  typedef [v1_enum] enum SYNC_ENGINE_STATE_FLAGS
  {
      SESF_NONE                                       = 0x00, // No state
-@@ -69,6 +74,9 @@
+@@ -69,6 +75,9 @@ typedef [v1_enum] enum SYNC_ENGINE_STATE_FLAGS
      SESF_PAUSED_DUE_TO_USER_REQUEST                 = 0x100, // Sync engine was paused due to an explicit user request
      SESF_ALL_FLAGS                                  = (SESF_NONE | SESF_SERVICE_QUOTA_NEARING_LIMIT | SESF_SERVICE_QUOTA_EXCEEDED_LIMIT | SESF_AUTHENTICATION_ERROR | SESF_PAUSED_DUE_TO_METERED_NETWORK | SESF_PAUSED_DUE_TO_DISK_SPACE_FULL | SESF_PAUSED_DUE_TO_CLIENT_POLICY | SESF_PAUSED_DUE_TO_SERVICE_POLICY | SESF_SERVICE_UNAVAILABLE | SESF_PAUSED_DUE_TO_USER_REQUEST),
  } SYNC_ENGINE_STATE_FLAGS;
@@ -36,7 +39,7 @@
  
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SYNC_ENGINE_STATE_FLAGS)")
  
-@@ -82,6 +90,7 @@
+@@ -82,6 +91,7 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(SYNC_ENGINE_STATE_FLAGS)")
  
  typedef char * LPVIEWSETTINGS;
  
@@ -44,7 +47,7 @@
  [
      uuid(3cc974d2-b302-4d36-ad3e-06d93f695d3f),
      object,
-@@ -113,6 +122,7 @@
+@@ -113,6 +123,7 @@ interface IFolderViewOptions : IUnknown
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
@@ -52,7 +55,7 @@
  [
      uuid(ec39fa88-f8af-41c5-8421-38bed28f4673),
      object,
-@@ -146,6 +156,7 @@
+@@ -146,6 +157,7 @@ cpp_quote("#endif  // NTDDI_VISTA")
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
  // to discover the search box, use IServiceProvider::QueryService() using SID_SSearchBoxInfo on a site pointer within the explorer window
@@ -60,7 +63,7 @@
  [
      uuid(6af6e03f-d664-4ef4-9626-f7e0ed36755e),
      object
-@@ -163,6 +174,7 @@
+@@ -163,6 +175,7 @@ cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN7)")
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -68,7 +71,7 @@
  [
      uuid(e693cf68-d967-4112-8763-99172aee5e5a),
      object,
-@@ -217,6 +229,7 @@
+@@ -217,6 +230,7 @@ cpp_quote("#endif  // _WIN32_IE_IE70")
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  
@@ -76,7 +79,7 @@
  [
      uuid(c8ad25a1-3294-41ee-8165-71174bd01c57),
      object,
-@@ -239,6 +252,7 @@
+@@ -239,6 +253,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
  
  // Notification callback for changes to user accounts
@@ -84,7 +87,7 @@
  [
      object,
      uuid(a561e69a-b4b8-4113-91a5-64c6bcca3430),
-@@ -273,6 +287,7 @@
+@@ -273,6 +288,7 @@ typedef struct _OVERLAPPED {
  
  cpp_quote("#endif // MIDL_PASS")
  
@@ -92,7 +95,7 @@
  [
      object,
      uuid(fe0b6665-e0ca-49b9-a178-2b5cb48d92a5),
-@@ -287,6 +302,7 @@
+@@ -287,6 +303,7 @@ interface IStreamAsync : IStream
      HRESULT CancelIo();
  }
  
@@ -100,7 +103,7 @@
  [
      object,
      uuid(8a68fdda-1fdc-4c20-8ceb-416643b5a625),
-@@ -300,9 +316,9 @@
+@@ -300,9 +317,9 @@ interface IStreamUnbufferedInfo : IUnknown
  
  cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  cpp_quote("SHSTDAPI SHRemovePersonalPropertyValues(_In_ IShellItemArray *psia);")
@@ -113,7 +116,7 @@
  cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN2K)")
-@@ -316,6 +332,7 @@
+@@ -316,6 +333,7 @@ typedef [v1_enum] enum DSH_FLAGS
  } DSH_FLAGS;
  cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(DSH_FLAGS)")
  
@@ -121,7 +124,7 @@
  [
      uuid(83E07D0D-0C5F-4163-BF1A-60B274051E40),
      local,
-@@ -335,6 +352,7 @@
+@@ -335,6 +353,7 @@ cpp_quote("#endif  // NTDDI_WIN2K")
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
  // HW Event Handler Interface
@@ -129,7 +132,7 @@
  [
      object,
      uuid(C1FB73D0-EC3A-4ba2-B512-8CDB9187B6D1),
-@@ -359,6 +377,7 @@
+@@ -359,6 +378,7 @@ interface IHWEventHandler : IUnknown
  }
  
  // HW Event Handler Interface 2
@@ -137,7 +140,7 @@
  [
      object,
      uuid(CFCC809F-295D-42e8-9FFC-424B33C487E6),
-@@ -374,6 +393,7 @@
+@@ -374,6 +394,7 @@ interface IHWEventHandler2 : IHWEventHandler
  }
  
  // HW Event Handler Interface
@@ -145,7 +148,7 @@
  [
      object,
      uuid(DDEFE873-6997-4e68-BE26-39B633ADBE12),
-@@ -406,6 +426,7 @@
+@@ -406,6 +427,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  //  S_OK = show, S_FALSE = hide, E_xx = error
  //
  // Dynamic HW Handler Interface
@@ -153,7 +156,7 @@
  [
      object,
      uuid(DC2601D7-059E-42fc-A09D-2AFD21B6D5F7),
-@@ -424,6 +445,7 @@
+@@ -424,6 +446,7 @@ cpp_quote("#endif  // NTDDI_VISTA")
  //cpp_quote("#endif  // NTDDI_WINXP")
  
  
@@ -161,7 +164,7 @@
  [
      uuid(19108294-0441-4AFF-8013-FA0A730B0BEA),
      object
-@@ -438,6 +460,7 @@
+@@ -438,6 +461,7 @@ interface IUserNotificationCallback : IUnknown
      HRESULT OnContextMenu([in] POINT * pt);
  }
  
@@ -169,7 +172,7 @@
  [
      uuid(215913CC-57EB-4FAB-AB5A-E5FA7BEA2A6C),
      object,
-@@ -485,6 +508,7 @@
+@@ -485,6 +509,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  //   Does the deskband currently render with or without composition?
  //
  //-------------------------------------------------------------------------
@@ -177,7 +180,7 @@
  [
      uuid(79D16DE4-ABEE-4021-8D9D-9169B261D657),
      object,
-@@ -500,6 +524,7 @@
+@@ -500,6 +525,7 @@ interface IDeskBand2 : IDeskBand
  
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -185,7 +188,7 @@
  [
      uuid(4CD19ADA-25A5-4A32-B3B7-347BEE5BE36B),
      object,
-@@ -512,6 +537,7 @@
+@@ -512,6 +538,7 @@ interface IStartMenuPinnedList : IUnknown
      HRESULT RemoveFromList([in] IShellItem *pitem);
  }
  
@@ -193,7 +196,7 @@
  [
      object,
      uuid(3d73a659-e5d0-4d42-afc0-5121ba425c8d),     // IID_ICDBurn
-@@ -545,6 +571,7 @@
+@@ -545,6 +572,7 @@ cpp_quote("#define IDD_WIZEXTN_LAST     0x5100")
  // next page it would call GetNextPage and select the specified HPAGE.
  
  // Wizard Extension Site
@@ -201,7 +204,7 @@
  [
      uuid(88960f5b-422f-4e7b-8013-73415381c3c3),
      local
-@@ -566,6 +593,7 @@
+@@ -566,6 +594,7 @@ cpp_quote("#define SID_WizardSite IID_IWizardSite")
  // into the extenion it will do so via GetFirstPage and selecting that.
  
  // Wizard Extension
@@ -209,7 +212,7 @@
  [
      uuid(c02ea696-86cc-491e-9b23-74394a0444a8),
      local
-@@ -587,6 +615,7 @@
+@@ -587,6 +616,7 @@ interface IWizardExtension : IUnknown
  // create a HTML wizard starting at the URL defined via SetInitialURL.
  
  // Web Wizard Page Extension
@@ -217,7 +220,7 @@
  [
      uuid(0e6b3f66-98d1-48c0-a222-fbde74e2fbc5),
      local,
-@@ -614,6 +643,7 @@
+@@ -614,6 +644,7 @@ cpp_quote ("#endif  // NTDDI_VISTA")
  cpp_quote ("#define SHPWHF_VALIDATEVIAWEBFOLDERS    0x00010000  // enable web folders to validate network places (ANP support)")
  
  // Web Publishing Wizard
@@ -225,7 +228,7 @@
  [
      uuid(aa9198bb-ccec-472d-beed-19a4f6733f7a),
      local,
-@@ -636,6 +666,7 @@
+@@ -636,6 +667,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
  // Object to host an IFolderView in a window.  This is used to build check mark selection
  // UI for files.
  // Shell Folder Host
@@ -233,7 +236,7 @@
  [
      uuid(1ea58f02-d55a-411d-b09e-9e65ac21605b),
      local,
-@@ -653,6 +684,7 @@
+@@ -653,6 +685,7 @@ cpp_quote("#if (_WIN32_IE >= _WIN32_IE_IE70)")
  //
  //  This allows you to set the accessible name on COM objects that function as UI elements
  //
@@ -241,7 +244,7 @@
  [
      uuid(95A391C5-9ED4-4c28-8401-AB9E06719E11),
      object,
-@@ -666,6 +698,7 @@
+@@ -666,6 +699,7 @@ cpp_quote("#endif  // (_WIN32_IE >= _WIN32_IE_IE70)")
  
  // New for Vista, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
@@ -249,7 +252,7 @@
  [
      object,
      uuid(96E5AE6D-6AE1-4b1c-900C-C6480EAA8828),
-@@ -705,6 +738,7 @@
+@@ -705,6 +739,7 @@ cpp_quote("#endif  // NTDDI_WINXP || (_WIN32_IE >= _WIN32_IE_IE70)")
  //
  cpp_quote("#define ACDD_VISIBLE        0x0001")
  
@@ -257,7 +260,7 @@
  [
      uuid(3CD141F4-3C6A-11d2-BCAA-00C04FD929DB),
      object,
-@@ -741,6 +775,7 @@
+@@ -741,6 +776,7 @@ cpp_quote("#define SID_CDWizardHost IID_ICDBurnExt")
  typedef DWORD CDBE_ACTIONS;
  
  // add-ons for cd burning
@@ -265,7 +268,7 @@
  [
      uuid(2271dcca-74fc-4414-8fb7-c56b05ace2d7)
  ]
-@@ -754,6 +789,7 @@
+@@ -754,6 +790,7 @@ cpp_quote("#endif  // NTDDI_WINXP")
  // New for XP, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
@@ -273,7 +276,7 @@
  [
      uuid(61E00D45-8FFF-4e60-924E-6537B61612DD),
      object,
-@@ -766,6 +802,7 @@
+@@ -766,6 +803,7 @@ interface IEnumReadyCallback : IUnknown
  }
  
  // interface between CDefView and clients like the NSC which will try to share enumeration with the view
@@ -281,7 +284,7 @@
  [
      uuid(8C8BF236-1AEC-495f-9894-91D57C3C686F),
      local
-@@ -787,6 +824,7 @@
+@@ -787,6 +825,7 @@ cpp_quote("#define SID_EnumerableView IID_IEnumerableView")
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP) || (_WIN32_IE >= _WIN32_IE_IE70)")
  
  // supports inserting an item into a folder
@@ -289,7 +292,7 @@
  [
      uuid(D2B57227-3D23-4b95-93C0-492BD454C356),
      object,
-@@ -799,6 +837,7 @@
+@@ -799,6 +838,7 @@ interface IInsertItem : IUnknown
  
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_WINXP)")
  
@@ -297,7 +300,7 @@
  [
      object,
      uuid(47c01f95-e185-412c-b5c5-4f27df965aea),     // IID_IFolderBandPriv
-@@ -820,6 +859,7 @@
+@@ -820,6 +860,7 @@ interface IFolderBandPriv : IUnknown
  // image is < that size then return S_FALSE.
  
  // Image Recompression Object
@@ -305,7 +308,7 @@
  [
      uuid(505f1513-6b3e-4892-a272-59f8889a4d3e),
      pointer_default(unique),
-@@ -844,6 +884,7 @@
+@@ -844,6 +885,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
  // Event notifications from the controls, handled by an interface
  // optionally implemented by the same IFileDialogEvents object supplied by the app.
@@ -313,7 +316,7 @@
  [
      uuid(36116642-D713-4b97-9B83-7484A9D00433),
      object,
-@@ -879,6 +920,7 @@
+@@ -879,6 +921,7 @@ interface IFileDialogControlEvents : IUnknown
          [in] DWORD dwIDCtl);
  }
  
@@ -321,7 +324,7 @@
  [
      uuid(61744fc7-85b5-4791-a9b0-272276309b13),
      object,
-@@ -896,6 +938,7 @@
+@@ -896,6 +939,7 @@ interface IFileDialog2 : IFileDialog
  }
  
  // Application File Extension and URL Protocol Registration UI
@@ -329,7 +332,7 @@
  [
      object,
      uuid(1f76a169-f994-40ac-8fc8-0959e8874710),
-@@ -908,6 +951,7 @@
+@@ -908,6 +952,7 @@ interface IApplicationAssociationRegistrationUI : IUnknown
  
  cpp_quote("#endif  // NTDDI_VISTA")
  
@@ -337,7 +340,7 @@
  [
      uuid(fce4bde0-4b68-4b80-8e9c-7426315a7388),
      object,
-@@ -919,6 +963,7 @@
+@@ -919,6 +964,7 @@ interface IShellRunDll : IUnknown
      HRESULT Run([in, string, annotation("_In_")] LPCWSTR pszArgs);
  }
  
@@ -345,7 +348,7 @@
  [
      object,
      uuid(76e54780-ad74-48e3-a695-3ba9a0aff10d),
-@@ -936,6 +981,7 @@
+@@ -936,6 +982,7 @@ interface IPreviousVersionsInfo : IUnknown
  cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
  // used to find the item that should be used when browsing to this item (used by pagespace control)
@@ -353,7 +356,7 @@
  [
      object,
      uuid(05edda5c-98a3-4717-8adb-c5e7da991eb1),
-@@ -961,6 +1007,7 @@
+@@ -961,6 +1008,7 @@ cpp_quote("DEFINE_GUID(SID_SCommandBarState, 0xB99EAA5C, 0x3850, 0x4400, 0xBC, 0
  // New for Vista, but used by downlevel code
  //cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  
@@ -361,7 +364,7 @@
  [
      object,
      uuid(7cc7aed8-290e-49bc-8945-c1401cc9306c),
-@@ -1004,6 +1051,7 @@
+@@ -1004,6 +1052,7 @@ cpp_quote("#define ISMBUTTON(x) (NSTCECT_MBUTTON == ((x) & NSTCECT_BUTTON))")
  cpp_quote("#define ISRBUTTON(x) (NSTCECT_RBUTTON == ((x) & NSTCECT_BUTTON))")
  cpp_quote("#define ISDBLCLICK(x) (NSTCECT_DBLCLICK == ((x) & NSTCECT_DBLCLICK))")
  
@@ -369,7 +372,7 @@
  [
      object,
      uuid(93D77985-B3D8-4484-8318-672CDDA002CE),
-@@ -1106,6 +1154,7 @@
+@@ -1106,6 +1155,7 @@ interface INameSpaceTreeControlEvents : IUnknown
  
  cpp_quote("#define NSTCDHPOS_ONTOP  -1")
  
@@ -377,7 +380,7 @@
  [
      object,
      uuid(F9C665D6-C2F2-4c19-BF33-8322D7352F51),
-@@ -1148,6 +1197,7 @@
+@@ -1148,6 +1198,7 @@ interface INameSpaceTreeControlDropHandler : IUnknown
      HRESULT OnDragLeave([in, unique, annotation("_In_opt_")] IShellItem *psiOver);
  }
  
@@ -385,7 +388,7 @@
  [
      object,
      uuid(71f312de-43ed-4190-8477-e9536b82350b),
-@@ -1166,6 +1216,7 @@
+@@ -1166,6 +1217,7 @@ interface INameSpaceTreeAccessible : IUnknown
          [out, annotation("_Out_")] VARIANT *pvarRole);
  }
  
@@ -393,7 +396,7 @@
  [
      object,
      uuid(2D3BA758-33EE-42d5-BB7B-5F3431D86C78),
-@@ -1215,6 +1266,7 @@
+@@ -1215,6 +1267,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_VISTA)")
  //
  // for show/hide deskbands
  //
@@ -401,7 +404,7 @@
  [
      object,
      uuid(6D67E846-5B9C-4db8-9CBC-DDE12F4254F1),
-@@ -1231,6 +1283,7 @@
+@@ -1231,6 +1284,7 @@ interface ITrayDeskBand : IUnknown
      HRESULT DeskBandRegistrationChanged();
  }
  
@@ -409,7 +412,7 @@
  [
      uuid(B9075C7C-D48E-403f-AB99-D6C77A1084AC),
      object,
-@@ -1257,6 +1310,7 @@
+@@ -1257,6 +1311,7 @@ cpp_quote("#define SID_SBandHost IID_IBandHost")
  cpp_quote("#endif  // NTDDI_VISTA")
  
  
@@ -417,7 +420,7 @@
  [
      object,
      uuid(0DF60D92-6818-46d6-B358-D66170DDE466),
-@@ -1271,6 +1325,7 @@
+@@ -1271,6 +1326,7 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")
  
  cpp_quote("#endif // NTDDI_WIN7")
  
@@ -425,3 +428,12 @@
  [
      object,
      uuid(c1646bc4-f298-4f91-a204-eb2dd1709d1a),
+@@ -1402,7 +1458,7 @@ cpp_quote("// throws warning C6387 anyway.  Thus, the warning is disabled to avo
+ cpp_quote("// that includes shobjidl.h and compiles with /analyze.")
+ cpp_quote("#pragma warning(push)")
+ cpp_quote("#pragma warning(disable:6387)")
+-cpp_quote("__inline HRESULT SHResolveFolderPathInLibrary(_In_ IShellLibrary *plib, _In_ PCWSTR pszFolderPath, _In_ DWORD dwTimeout, _Outptr_ PWSTR *ppszResolvedPath)")
++cpp_quote("__inline HRESULT _Win32_SupportedOS_Windows7_ SHResolveFolderPathInLibrary(_In_ IShellLibrary *plib, _In_ PCWSTR pszFolderPath, _In_ DWORD dwTimeout, _Outptr_ PWSTR *ppszResolvedPath)")
+ cpp_quote("{")
+ cpp_quote("    *ppszResolvedPath = NULL;")
+ cpp_quote("    PIDLIST_ABSOLUTE pidlFolder = SHSimpleIDListFromPath(pszFolderPath);")

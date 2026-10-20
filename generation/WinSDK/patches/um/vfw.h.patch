@@ -41,22 +41,26 @@
  _Success_(return != 0)
  LRESULT
  VFWAPI
-@@ -578,6 +584,7 @@
+@@ -578,7 +584,8 @@
      _In_ DWORD cb
      );
  
+-HIC
 +_Win32_SupportedOS_Windows2000_
- HIC
++_Win32_RAIIFree_(ICClose, -1, 0) HIC
  VFWAPI
  ICOpen(
-@@ -586,6 +593,7 @@
+     _In_ DWORD fccType,
+@@ -586,7 +593,8 @@
      _In_ UINT wMode
      );
  
+-HIC
 +_Win32_SupportedOS_Windows2000_
- HIC
++_Win32_RAIIFree_(ICClose, -1, 0) HIC
  VFWAPI
  ICOpenFunction(
+     _In_ DWORD fccType,
 @@ -595,13 +603,14 @@
      _In_ FARPROC lpfnHandler
      );
@@ -155,7 +159,7 @@
      ICLocate(fccType, fccHandler, lpbiIn, NULL, ICMODE_DRAW)
  
 -HIC
-+_Win32_SupportedOS_Windows2000_ HIC
++_Win32_SupportedOS_Windows2000_ _Win32_RAIIFree_(ICClose, -1, 0) HIC
  VFWAPI
  ICLocate(
      _In_     DWORD fccType,

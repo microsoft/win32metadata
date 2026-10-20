@@ -707,6 +707,101 @@ _Win32_RAIIFree_(CLEANUP, Values::Invalid, Limits::Invalid, ~0ULL) void* OtherHa
         }
 
         [Theory]
+        [InlineData("c", "c11", false)]
+        [InlineData("c", "c11", true)]
+        [InlineData("c++", "c++17", false)]
+        [InlineData("c++", "c++17", true)]
+        public void RaiiCleanupDeclarationOrderPreservesProducerContracts(string language, string standard, bool cleanupFirst)
+        {
+            const string cleanup = "__declspec(dllimport) int __stdcall ReleaseLater(void* value);\n";
+            const string producers = @"
+#define SELECTED_CLEANUP ReleaseLater
+_Win32_RAIIFree_Handle_(SELECTED_CLEANUP) void* __stdcall OpenLater(void);
+int __stdcall CreateLater(_Out_ _Win32_RAIIFree_(SELECTED_CLEANUP, -1, 0) void** value);
+void* __stdcall BorrowLater(void* value);
+";
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                cleanupFirst ? cleanup + producers + cleanup : producers + cleanup + cleanup,
+                extraSettings: $"--language\n{language}\n--std\n{standard}\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            Assert.Equal(2, source.Split("RAIIFree(\"ReleaseLater\")").Length - 1);
+            Assert.Equal(2, source.Split("InvalidHandleValue(-1L)").Length - 1);
+            Assert.Equal(2, source.Split("InvalidHandleValue(0L)").Length - 1);
+            var methods = CSharpSyntaxTree.ParseText(source).GetRoot().DescendantNodes()
+                .OfType<MethodDeclarationSyntax>().ToArray();
+            var open = Assert.Single(methods.Where(method => method.Identifier.ValueText == "OpenLater"));
+            Assert.Equal("void*", open.ReturnType.ToString());
+            Assert.All(open.AttributeLists.Where(list => list.Attributes.Any(attribute =>
+                attribute.Name.ToString().Contains("RAIIFree", StringComparison.Ordinal))),
+                list => Assert.Equal("return", list.Target?.Identifier.ValueText));
+            var create = Assert.Single(methods.Where(method => method.Identifier.ValueText == "CreateLater"));
+            Assert.Equal("void**", Assert.Single(create.ParameterList.Parameters).Type?.ToString());
+            var borrowed = Assert.Single(methods.Where(method => method.Identifier.ValueText == "BorrowLater"));
+            Assert.DoesNotContain("RAIIFree", borrowed.ToString());
+            Assert.DoesNotContain("InvalidHandleValue", borrowed.ToString());
+        }
+
+        [Theory]
+        [InlineData("namespace Outer { _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInScope(); int CloseLater(void*); }")]
+        [InlineData("_Win32_RAIIFree_(Outer::CloseLater, -1, 0) void* OpenQualified(); namespace Outer { int CloseLater(void*); }")]
+        [InlineData("namespace Outer { int CloseLater(void*); } using namespace Outer; _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenImported();")]
+        [InlineData("namespace Outer { inline namespace V1 { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenInline(); }")]
+        [InlineData("namespace { int CloseLater(void*); } _Win32_RAIIFree_(CloseLater, -1, 0) void* OpenAnonymous();")]
+        [InlineData("_Win32_RAIIFree_(::CloseLater, -1, 0) void* OpenGlobal(); int CloseLater(void*);")]
+        public void RaiiCleanupNamesBindActualNativeScopes(string declarations)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations,
+                extraSettings: "--exclude\nCloseLater\n");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("RAIIFree(\"CloseLater\")", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(-1L)", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
+        }
+
+        [Fact]
+        public void RaiiCleanupParameterLookupDoesNotIncludeTheFunctionBody()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+void Create(_Out_ _Win32_RAIIFree_(CloseThing, -1, 0) void** value) { int CloseThing = 0; }
+");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("RAIIFree(\"CloseThing\")", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(-1L)", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
+        }
+
+        [Theory]
+        [InlineData("_Win32_RAIIFree_(MissingCleanup, -1, 0) void* Bad();")]
+        [InlineData("_Win32_RAIIFree_(Overloaded, 0) void* Bad(); int Overloaded(void*); int Overloaded(int*);")]
+        [InlineData("namespace A { int Cleanup(void*); } namespace B { int Cleanup(void*); } using namespace A; using namespace B; _Win32_RAIIFree_(Cleanup, 0) void* Bad();")]
+        [InlineData("int Bad(int CloseThing, _Win32_RAIIFree_(CloseThing, 0) void** value);")]
+        [InlineData("struct Cleaner { static int Cleanup(void*); }; _Win32_RAIIFree_(Cleaner::Cleanup, 0) void* Bad();")]
+        [InlineData("struct Cleaner { enum { CloseThing = 1 }; _Win32_RAIIFree_(CloseThing, 0) void* Bad(); };")]
+        [InlineData("struct Base { static int CloseThing(void*); }; struct Cleaner : Base { _Win32_RAIIFree_(CloseThing, 0) void* Bad(); };")]
+        [InlineData("_WIN32META_ANNOTATION_(\"RAIIFree\", \"CloseThing\", 0) void* Bad();")]
+        [InlineData("_WIN32META_ANNOTATION_(\"RAIIFree\", \"Win32Metadata.FunctionDecl:MissingCleanup\", 0) void* Bad();")]
+        [InlineData("_WIN32META_ANNOTATION_(\"RAIIFree\", \"Win32Metadata.FunctionDecl:CloseThing()\", 0) void* Bad();")]
+        public void RaiiCleanupBindingRejectsUnknownAmbiguousAndRawStringReferences(string declarations)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", declarations);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("RAIIFree", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void RaiiCleanupBindingRetainsExistingTypedReferenceTransport()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "_WIN32META_ANNOTATION_(\"RAIIFree\", sizeof(&(CloseThing)), -1, 0) void* Legacy();");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Contains("RAIIFree(\"CloseThing\")", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(-1L)", fixture.ReadSource());
+            Assert.Contains("InvalidHandleValue(0L)", fixture.ReadSource());
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc", "c++", "c++17", true)]
         [InlineData("x64", "x86_64-pc-windows-msvc", "c++", "c++17", true)]
         [InlineData("arm64", "aarch64-pc-windows-msvc", "c++", "c++17", true)]
@@ -741,7 +836,6 @@ __attribute__((annotate(""NativeSAL""))) struct NATIVE_IGNORED_AFTER { int value
 
         [Theory]
         [InlineData("_Win32_RAIIFree_(42, 0) void* Bad();")]
-        [InlineData("_Win32_RAIIFree_(LaterCleanup, 0) void* Bad();\nint LaterCleanup(void*);")]
         [InlineData("_Win32_RAIIFree_(CloseThing, ((void*)-1)) void* Bad();")]
         [InlineData("_Win32_RAIIFree_(CloseThing, 1.5) void* Bad();")]
         [InlineData("int (*Cleanup)(void*) = CloseThing;\n_Win32_RAIIFree_(Cleanup, 0) void* Bad();")]
@@ -1542,7 +1636,7 @@ _Win32_SupportedOS_Windows7_ inline int Helper(_Win32_Retained_ void* context) {
 
         [Theory]
         [InlineData("inline int Helper(_Win32_Retained_ int value) { return value; }", "pointer or reference")]
-        [InlineData("_Win32_RAIIFree_(MissingCleanup, 0) inline void* Helper() { return 0; }", "undeclared identifier")]
+        [InlineData("_Win32_RAIIFree_(MissingCleanup, 0) inline void* Helper() { return 0; }", "declared native cleanup function")]
         [InlineData("_Win32_SupportedOS_Windows7_ _Win32_SupportedOS_Windows8_ inline int Helper() { return 0; }", "Conflicting")]
         public void FunctionBodyFilterDoesNotBypassAnnotationValidation(string declarations, string diagnostic)
         {

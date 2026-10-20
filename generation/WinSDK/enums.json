@@ -4,25 +4,6 @@
 [
 
   {
-    "name": "THREAD_CREATION_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "THREAD_CREATE_RUN_IMMEDIATELY",
-        "value": "0"
-      },
-      {
-        "name": "THREAD_CREATE_SUSPENDED",
-        "value": "4"
-      },
-      {
-        "name": "STACK_SIZE_PARAM_IS_A_RESERVATION",
-        "value": "0x00010000"
-      }
-    ],
-    "uses": []
-  },
-  {
     "name": "CRED_FLAGS",
     "flags": true,
     "autoPopulate": {
@@ -102,13 +83,7 @@
     ]
   },
   {
-    "name": "DRAWEDGE_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "BDR_|EDGE_",
-      "header": "WinUser.h"
-    },
-    "members": [],
+    "addUsesTo": "DRAWEDGE_FLAGS",
     "uses": [
       {
         "method": "DrawThemeEdge",
@@ -126,48 +101,20 @@
     ]
   },
   {
-    "name": "CLIPBOARD_FORMAT",
-    "type": "ushort",
-    "autoPopulate": {
-      "filter": "CF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
+    "addUsesTo": "CLIPBOARD_FORMAT",
     "uses": [
       {
         "method": "OleDuplicateData",
         "parameter": "cfFormat"
       }
-  ]
-  },
-  {
-    "type": "uint",
-    "name": "MESSAGEBOX_STYLE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "MB_",
-      "header": "WinUser.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "method": "WTSSendMessageA",
-        "parameter": "Style"
-      },
-      {
-        "method": "WTSSendMessageW",
-        "parameter": "Style"
-      }
     ]
   },
   {
-    "name": "MENU_ITEM_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "MF_",
-      "header": "WinUser.h"
-    },
-    "members": [],
+    "uses": [],
+    "addUsesTo": "MESSAGEBOX_STYLE"
+  },
+  {
+    "addUsesTo": "MENU_ITEM_FLAGS",
     "uses": [
       {
         "method": "OLEVERB",
@@ -191,79 +138,7 @@
     ]
   },
   {
-    "name": "SHOW_WINDOW_CMD",
-    "type": "int",
-    "members": [
-      {
-        "name": "SW_HIDE",
-        "value": "0"
-      },
-      {
-        "name": "SW_SHOWNORMAL",
-        "value": "1"
-      },
-      {
-        "name": "SW_NORMAL",
-        "value": "1"
-      },
-      {
-        "name": "SW_SHOWMINIMIZED",
-        "value": "2"
-      },
-      {
-        "name": "SW_SHOWMAXIMIZED",
-        "value": "3"
-      },
-      {
-        "name": "SW_MAXIMIZE",
-        "value": "3"
-      },
-      {
-        "name": "SW_SHOWNOACTIVATE",
-        "value": "4"
-      },
-      {
-        "name": "SW_SHOW",
-        "value": "5"
-      },
-      {
-        "name": "SW_MINIMIZE",
-        "value": "6"
-      },
-      {
-        "name": "SW_SHOWMINNOACTIVE",
-        "value": "7"
-      },
-      {
-        "name": "SW_SHOWNA",
-        "value": "8"
-      },
-      {
-        "name": "SW_RESTORE",
-        "value": "9"
-      },
-      {
-        "name": "SW_SHOWDEFAULT",
-        "value": "10"
-      },
-      {
-        "name": "SW_FORCEMINIMIZE",
-        "value": "11"
-      },
-      {
-        "name": "SW_MAX",
-        "value": "11"
-      }
-    ],
     "uses": [
-      {
-        "method": "ShowWindow",
-        "parameter": "nCmdShow"
-      },
-      {
-        "method": "ShowWindowAsync",
-        "parameter": "nCmdShow"
-      },
       {
         "method": "ShellExecuteW",
         "parameter": "nShowCmd"
@@ -271,26 +146,6 @@
       {
         "method": "ShellExecuteA",
         "parameter": "nShowCmd"
-      },
-      {
-        "interface": "IShellLinkW",
-        "method": "SetShowCmd",
-        "parameter": "iShowCmd"
-      },
-      {
-        "interface": "IShellLinkW",
-        "method": "GetShowCmd",
-        "parameter": "piShowCmd"
-      },
-      {
-        "interface": "IShellLinkA",
-        "method": "SetShowCmd",
-        "parameter": "iShowCmd"
-      },
-      {
-        "interface": "IShellLinkA",
-        "method": "GetShowCmd",
-        "parameter": "piShowCmd"
       },
       {
         "interface": "ITfFnConfigure",
@@ -302,85 +157,24 @@
         "method": "get_WindowState",
         "parameter": "WindowState"
       }
-    ]
+    ],
+    "addUsesTo": "SHOW_WINDOW_CMD"
   },
   {
-    "name": "SCROLL_WINDOW_FLAGS",
-    "flags": true,
-    "members": [],
+    "uses": [],
+    "addUsesTo": "SCROLL_WINDOW_FLAGS"
+  },
+  {
+    "addUsesTo": "WINBIO_SETTING_SOURCE",
     "uses": []
   },
   {
-      "addUsesTo": "WINBIO_SETTING_SOURCE",
-      "uses": [
-        {
-          "method": "WinBioGetEnabledSetting",
-          "parameter": "Source"
-        },
-        {
-          "method": "WinBioGetLogonSetting",
-          "parameter": "Source"
-        },
-        {
-          "method": "WinBioGetDomainLogonSetting",
-          "parameter": "Source"
-        }
-      ]
-    },
+    "addUsesTo": "WINBIO_COMPONENT",
+    "uses": []
+  },
   {
-      "addUsesTo": "WINBIO_COMPONENT",
-      "uses": [
-        {
-          "method": "WinBioControlUnit",
-          "parameter": "Component"
-        },
-        {
-          "method": "WinBioControlUnitPrivileged",
-          "parameter": "Component"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "WINBIO_POOL",
-      "uses": [
-        {
-          "method": "WinBioOpenSession",
-          "parameter": "PoolType"
-        },
-        {
-          "method": "WinBioAsyncOpenSession",
-          "parameter": "PoolType"
-        }
-      ]
-    },
-  {
-    "name": "SNMP_PDU_TYPE",
-    "members": [
-      {
-        "name": "SNMP_PDU_GET"
-      },
-      {
-        "name": "SNMP_PDU_GETNEXT"
-      },
-      {
-        "name": "SNMP_PDU_RESPONSE"
-      },
-      {
-        "name": "SNMP_PDU_SET"
-      },
-      {
-        "name": "SNMP_PDU_GETBULK"
-      },
-      {
-        "name": "SNMP_PDU_TRAP"
-      }
-    ],
-    "uses": [
-      {
-        "method": "SnmpCreatePdu",
-        "parameter": "PDU_type"
-      }
-    ]
+    "addUsesTo": "WINBIO_POOL",
+    "uses": []
   },
   {
     "name": "CFE_UNDERLINE",
@@ -483,13 +277,7 @@
         "name": "UPDFCACHE__ALLBUTNODATACACHE"
       }
     ],
-    "uses": [
-      {
-        "interface": "IOleCache2",
-        "method": "UpdateCache",
-        "parameter": "grfUpdf"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "THREAD_PRIORITY",
@@ -624,112 +412,31 @@
     "addUsesTo": "VER_FLAGS",
     "uses": [
       {
-        "method": "VerifyVersionInfoA",
-        "parameter": "dwTypeMask"
-      },
-      {
-        "method": "VerifyVersionInfoW",
-        "parameter": "dwTypeMask"
-      },
-      {
         "method": "VerSetConditionMask",
         "parameter": "TypeMask"
       }
     ]
   },
   {
-      "addUsesTo": "GET_FILE_VERSION_INFO_FLAGS",
-      "uses": [
-        {
-          "method": "GetFileVersionInfoExA",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "GetFileVersionInfoExW",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "GetFileVersionInfoSizeExA",
-          "parameter": "dwFlags"
-        },
-        {
-          "method": "GetFileVersionInfoSizeExW",
-          "parameter": "dwFlags"
-        }
-      ]
-    },
+    "addUsesTo": "GET_FILE_VERSION_INFO_FLAGS",
+    "uses": []
+  },
   {
-      "addUsesTo": "VER_FIND_FILE_FLAGS",
-      "uses": [
-        {
-          "method": "VerFindFileA",
-          "parameter": "uFlags"
-        },
-        {
-          "method": "VerFindFileW",
-          "parameter": "uFlags"
-        }
-      ]
-    },
+    "addUsesTo": "VER_FIND_FILE_FLAGS",
+    "uses": []
+  },
   {
-      "addUsesTo": "VER_FIND_FILE_STATUS",
-      "uses": [
-        {
-          "method": "VerFindFileA",
-          "parameter": "return"
-        },
-        {
-          "method": "VerFindFileW",
-          "parameter": "return"
-        }
-      ]
-    },
+    "addUsesTo": "VER_FIND_FILE_STATUS",
+    "uses": []
+  },
   {
-      "addUsesTo": "VER_INSTALL_FILE_FLAGS",
-      "uses": [
-        {
-          "method": "VerInstallFileA",
-          "parameter": "uFlags"
-        },
-        {
-          "method": "VerInstallFileW",
-          "parameter": "uFlags"
-        }
-      ]
-    },
+    "addUsesTo": "VER_INSTALL_FILE_FLAGS",
+    "uses": []
+  },
   {
-      "addUsesTo": "VER_INSTALL_FILE_STATUS",
-      "uses": [
-        {
-          "method": "VerInstallFileA",
-          "parameter": "return"
-        },
-        {
-          "method": "VerInstallFileW",
-          "parameter": "return"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "VS_FIXEDFILEINFO_FILE_FLAGS",
-      "uses": [
-        {
-          "struct": "VS_FIXEDFILEINFO",
-          "field": "dwFileFlags"
-        }
-      ]
-    },
-  {
-      "addUsesTo": "VS_FIXEDFILEINFO_FILE_OS",
-      "uses": [
-        {
-          "struct": "VS_FIXEDFILEINFO",
-          "field": "dwFileOS"
-        }
-      ]
-    },
-
-
+    "addUsesTo": "VER_INSTALL_FILE_STATUS",
+    "uses": []
+  },
   {
     "name": "URI_CREATE_FLAGS",
     "flags": true,
@@ -746,29 +453,7 @@
     ]
   },
   {
-    "name": "FILE_CREATION_DISPOSITION",
-    "members": [
-      {
-        "name": "CREATE_NEW",
-        "value": "1"
-      },
-      {
-        "name": "CREATE_ALWAYS",
-        "value": "2"
-      },
-      {
-        "name": "OPEN_EXISTING",
-        "value": "3"
-      },
-      {
-        "name": "OPEN_ALWAYS",
-        "value": "4"
-      },
-      {
-        "name": "TRUNCATE_EXISTING",
-        "value": "5"
-      }
-    ],
+    "addUsesTo": "FILE_CREATION_DISPOSITION",
     "uses": [
       {
         "method": "CreateLogFile",
@@ -921,16 +606,7 @@
         "value": "0x4"
       }
     ],
-    "uses": [
-      {
-        "method": "SymLoadModuleEx",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SymLoadModuleExW",
-        "parameter": "Flags"
-      }
-    ]
+    "uses": []
   },
   {
     "type": "uint",
@@ -1007,36 +683,7 @@
         "value": "0x00000200"
       }
     ],
-    "uses": [
-      {
-        "method": "HeapAlloc",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapCompact",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapFree",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapReAlloc",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapSize",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapValidate",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "HeapCreate",
-        "parameter": "flOptions"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CERT_QUERY_OBJECT_TYPE",
@@ -1084,8 +731,8 @@
       ]
     },
   {
-      "addUsesTo": "CERT_QUERY_ENCODING_TYPE",
-      "uses": [
+    "addUsesTo": "CERT_QUERY_ENCODING_TYPE",
+    "uses": [
       {
         "struct": "CERT_CONTEXT",
         "field": "dwCertEncodingType"
@@ -1095,40 +742,8 @@
         "field": "dwCertEncodingType"
       },
       {
-        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_CRYPT_GET_SIGNER_CERTIFICATE",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
-        "method": "PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC",
-        "parameter": "dwCertEncodingType"
-      },
-      {
         "method": "CryptSIPGetSignedDataMsg",
         "parameter": "pdwEncodingType"
-      },
-      {
-        "method": "PFN_CERT_DLL_OPEN_STORE_PROV_FUNC",
-        "parameter": "dwEncodingType"
       },
       {
         "method": "CryptSIPPutSignedDataMsg",
@@ -1139,21 +754,8 @@
         "field": "dwMsgAndCertEncodingType"
       }
     ]
-    },
+  },
   {
-    "type": "uint",
-    "name": "SHUTDOWN_REASON",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SHTDN_REASON_",
-      "header": "reason.h"
-    },
-    "members": [
-      {
-        "name": "SHTDN_REASON_NONE",
-        "value": "0"
-      }
-    ],
     "uses": [
       {
         "method": "InitiateShutdownA",
@@ -1171,7 +773,8 @@
         "method": "InitiateSystemShutdownExW",
         "parameter": "dwReason"
       }
-    ]
+    ],
+    "addUsesTo": "SHUTDOWN_REASON"
   },
   {
     "type": "uint",
@@ -1300,40 +903,7 @@
         "value": "0"
       }
     ],
-    "uses": [
-      {
-        "struct": "RPC_SECURITY_QOS_V2_A",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V2_W",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_A",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V3_W",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_A",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V4_W",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_A",
-        "field": "AdditionalSecurityInfoType"
-      },
-      {
-        "struct": "RPC_SECURITY_QOS_V5_W",
-        "field": "AdditionalSecurityInfoType"
-      }
-    ]
+    "uses": []
   },
   {
     "type": "ushort",
@@ -1608,20 +1178,7 @@
     "addUsesTo": "ETO_OPTIONS",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "method": "ExtTextOutA",
-        "parameter": "options"
-      },
-      {
-        "method": "ExtTextOutW",
-        "parameter": "options"
-      },
-      {
-        "method": "ScriptStringOut",
-        "parameter": "uOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "type": "uint",
@@ -1787,46 +1344,6 @@
     ],
     "uses": [
       {
-        "method": "CreateFileMappingA",
-        "parameter": "flProtect"
-      },
-      {
-        "method": "CreateFileMappingW",
-        "parameter": "flProtect"
-      },
-      {
-        "method": "CreateFileMappingNumaA",
-        "parameter": "flProtect"
-      },
-      {
-        "method": "CreateFileMappingNumaW",
-        "parameter": "flProtect"
-      },
-      {
-        "method": "VirtualProtect",
-        "parameter": "flNewProtect"
-      },
-      {
-        "method": "VirtualProtect",
-        "parameter": "lpflOldProtect"
-      },
-      {
-        "method": "VirtualProtectEx",
-        "parameter": "flNewProtect"
-      },
-      {
-        "method": "VirtualProtectEx",
-        "parameter": "lpflOldProtect"
-      },
-      {
-        "method": "CreateFileMapping2",
-        "parameter": "PageProtection"
-      },
-      {
-        "method": "CreateFileMappingFromApp",
-        "parameter": "PageProtection"
-      },
-      {
         "struct": "MEMORY_BASIC_INFORMATION",
         "field": "AllocationProtect"
       },
@@ -1935,16 +1452,9 @@
     ]
     },
   {
-    "name": "SCROLLBAR_CONSTANTS",
-    "type": "int",
     "namespace": "Windows.Win32.UI.WindowsAndMessaging",
-    "flags": true,
-    "members": [
-      {
-        "name": "SB_CTL"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "SCROLLBAR_CONSTANTS"
   },
   {
       "addUsesTo": "CERT_RDN_ATTR_VALUE_TYPE",
@@ -1959,60 +1469,6 @@
   {
     "name": "GET_CLASS_LONG_INDEX",
     "members": [
-      {
-        "name": "GCW_ATOM"
-      },
-      {
-        "name": "GCL_CBCLSEXTRA"
-      },
-      {
-        "name": "GCL_CBWNDEXTRA"
-      },
-      {
-        "name": "GCL_HBRBACKGROUND"
-      },
-      {
-        "name": "GCL_HCURSOR"
-      },
-      {
-        "name": "GCL_HICON"
-      },
-      {
-        "name": "GCL_HICONSM"
-      },
-      {
-        "name": "GCL_HMODULE"
-      },
-      {
-        "name": "GCL_MENUNAME"
-      },
-      {
-        "name": "GCL_STYLE"
-      },
-      {
-        "name": "GCL_WNDPROC"
-      },
-      {
-        "name": "GCLP_HBRBACKGROUND"
-      },
-      {
-        "name": "GCLP_HCURSOR"
-      },
-      {
-        "name": "GCLP_HICON"
-      },
-      {
-        "name": "GCLP_HICONSM"
-      },
-      {
-        "name": "GCLP_HMODULE"
-      },
-      {
-        "name": "GCLP_MENUNAME"
-      },
-      {
-        "name": "GCLP_WNDPROC"
-      },
       {
         "name": "GCLP__HBRBACKGROUND"
       }
@@ -2069,82 +1525,7 @@
     "flags": true
   },
   {
-    "name": "DRAW_TEXT_FORMAT",
-    "flags": true,
-    "members": [
-      {
-        "name": "DT_BOTTOM"
-      },
-      {
-        "name": "DT_CALCRECT"
-      },
-      {
-        "name": "DT_CENTER"
-      },
-      {
-        "name": "DT_EDITCONTROL"
-      },
-      {
-        "name": "DT_END_ELLIPSIS"
-      },
-      {
-        "name": "DT_EXPANDTABS"
-      },
-      {
-        "name": "DT_EXTERNALLEADING"
-      },
-      {
-        "name": "DT_HIDEPREFIX"
-      },
-      {
-        "name": "DT_INTERNAL"
-      },
-      {
-        "name": "DT_LEFT"
-      },
-      {
-        "name": "DT_MODIFYSTRING"
-      },
-      {
-        "name": "DT_NOCLIP"
-      },
-      {
-        "name": "DT_NOFULLWIDTHCHARBREAK"
-      },
-      {
-        "name": "DT_NOPREFIX"
-      },
-      {
-        "name": "DT_PATH_ELLIPSIS"
-      },
-      {
-        "name": "DT_PREFIXONLY"
-      },
-      {
-        "name": "DT_RIGHT"
-      },
-      {
-        "name": "DT_RTLREADING"
-      },
-      {
-        "name": "DT_SINGLELINE"
-      },
-      {
-        "name": "DT_TABSTOP"
-      },
-      {
-        "name": "DT_TOP"
-      },
-      {
-        "name": "DT_VCENTER"
-      },
-      {
-        "name": "DT_WORDBREAK"
-      },
-      {
-        "name": "DT_WORD_ELLIPSIS"
-      }
-    ],
+    "addUsesTo": "DRAW_TEXT_FORMAT",
     "uses": [
       {
         "method": "DrawThemeText",
@@ -2209,16 +1590,7 @@
         "name": "WB_RIGHTBREAK"
       }
     ],
-    "uses": [
-      {
-        "method": "EDITWORDBREAKPROCA",
-        "parameter": "code"
-      },
-      {
-        "method": "EDITWORDBREAKPROCW",
-        "parameter": "code"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CERT_VIEW_COLUMN_INDEX",
@@ -2261,12 +1633,7 @@
   {
     "addUsesTo": "NtmsInventoryMethod",
     "members": [],
-    "uses": [
-      {
-        "method": "AccessNtmsLibraryDoor",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "REG_SAVE_FORMAT",
@@ -2283,26 +1650,12 @@
   },
   {
     "addUsesTo": "REPORT_EVENT_TYPE",
-    "uses": [
-      {
-        "method": "ReportEventW",
-        "parameter": "wType"
-      },
-      {
-        "method": "ReportEventA",
-        "parameter": "wType"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "ETO_OPTIONS",
     "members": [],
-    "uses": [
-      {
-        "method": "ScriptStringOut",
-        "parameter": "uOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CERT_DELETE_ROW_FLAGS",
@@ -2351,16 +1704,7 @@
   {
     "addUsesTo": "NtmsCreateOptions",
     "members": [],
-    "uses": [
-      {
-        "method": "CreateNtmsMediaPoolA",
-        "parameter": "dwAction"
-      },
-      {
-        "method": "CreateNtmsMediaPoolW",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "SETUP_FILE_OPERATION",
@@ -2387,26 +1731,13 @@
   {
     "addUsesTo": "NtmsCreateNtmsMediaOptions",
     "members": [],
-    "uses": [
-      {
-        "method": "CreateNtmsMediaA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "CreateNtmsMediaW",
-        "parameter": "dwOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "FILE_FLAGS_AND_ATTRIBUTES",
     "flags": true,
     "members": [],
     "uses": [
-      {
-        "method": "CreateNamedPipeA",
-        "parameter": "dwOpenMode"
-      },
       {
         "method": "CreateNamedPipeW",
         "parameter": "dwOpenMode"
@@ -2515,9 +1846,7 @@
     ]
   },
   {
-    "name": "FOLD_STRING_MAP_FLAGS",
-    "flags": true,
-    "members": [],
+    "addUsesTo": "FOLD_STRING_MAP_FLAGS",
     "uses": [
       {
         "method": "FoldStringW",
@@ -2654,24 +1983,7 @@
   {
     "addUsesTo": "NtmsUITypes",
     "members": [],
-    "uses": [
-      {
-        "method": "SetNtmsUIOptionsA",
-        "parameter": "dwType"
-      },
-      {
-        "method": "GetNtmsUIOptionsW",
-        "parameter": "dwType"
-      },
-      {
-        "method": "GetNtmsUIOptionsA",
-        "parameter": "dwType"
-      },
-      {
-        "method": "SetNtmsUIOptionsW",
-        "parameter": "dwType"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "FONT_CLIP_PRECISION",
@@ -2729,16 +2041,7 @@
   {
     "addUsesTo": "NtmsEjectOperation",
     "members": [],
-    "uses": [
-      {
-        "method": "EjectDiskFromSADriveA",
-        "parameter": "dwOptions"
-      },
-      {
-        "method": "EjectDiskFromSADriveW",
-        "parameter": "dwOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "tomConstants",
@@ -2753,39 +2056,9 @@
     ]
   },
   {
-    "name": "SCE_LOG_ERR_LEVEL",
-    "type": "int",
-    "members": [
-      {
-        "name": "SCE_LOG_LEVEL_ALWAYS"
-      },
-      {
-        "name": "SCE_LOG_LEVEL_ERROR"
-      },
-      {
-        "name": "SCE_LOG_LEVEL_DETAIL"
-      },
-      {
-        "name": "SCE_LOG_LEVEL_DEBUG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "PFSCE_LOG_INFO",
-        "parameter": "ErrLevel"
-      }
-    ]
-  },
-  {
     "addUsesTo": "COMAdminApplicationInstallOptions",
     "members": [],
-    "uses": [
-      {
-        "interface": "ICOMAdminCatalog",
-        "method": "InstallApplication",
-        "parameter": "lOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "CERT_KEY_SPEC",
@@ -2799,12 +2072,7 @@
   {
     "addUsesTo": "NtmsEjectOperation",
     "members": [],
-    "uses": [
-      {
-        "method": "EjectNtmsMedia",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "MEDIA_FLAGS",
@@ -2899,74 +2167,7 @@
     "uses": []
   },
   {
-    "name": "LZOPENFILE_STYLE",
-    "type": "ushort",
-    "flags": true,
-    "members": [
-      {
-        "name": "OF_CANCEL",
-        "value": "2048"
-      },
-      {
-        "name": "OF_CREATE",
-        "value": "4096"
-      },
-      {
-        "name": "OF_DELETE",
-        "value": "512"
-      },
-      {
-        "name": "OF_EXIST",
-        "value": "16384"
-      },
-      {
-        "name": "OF_PARSE",
-        "value": "256"
-      },
-      {
-        "name": "OF_PROMPT",
-        "value": "8192"
-      },
-      {
-        "name": "OF_READ",
-        "value": "0"
-      },
-      {
-        "name": "OF_READWRITE",
-        "value": "2"
-      },
-      {
-        "name": "OF_REOPEN",
-        "value": "32768"
-      },
-      {
-        "name": "OF_SHARE_DENY_NONE",
-        "value": "64"
-      },
-      {
-        "name": "OF_SHARE_DENY_READ",
-        "value": "48"
-      },
-      {
-        "name": "OF_SHARE_DENY_WRITE",
-        "value": "32"
-      },
-      {
-        "name": "OF_SHARE_EXCLUSIVE",
-        "value": "16"
-      },
-      {
-        "name": "OF_WRITE",
-        "value": "1"
-      },
-      {
-        "name": "OF_SHARE_COMPAT",
-        "value": "0"
-      },
-      {
-        "name": "OF_VERIFY"
-      }
-    ],
+    "addUsesTo": "LZOPENFILE_STYLE",
     "uses": [
       {
         "method": "LZOpenFileA",
@@ -2981,12 +2182,7 @@
   {
     "addUsesTo": "NtmsEjectOperation",
     "members": [],
-    "uses": [
-      {
-        "method": "EjectNtmsCleaner",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "DVASPECT",
@@ -3086,12 +2282,7 @@
   {
     "addUsesTo": "NtmsDismountOptions",
     "members": [],
-    "uses": [
-      {
-        "method": "IdentifyNtmsSlot",
-        "parameter": "dwOption"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "BCRYPT_INTERFACE",
@@ -3381,16 +2572,7 @@
   },
   {
     "addUsesTo": "DPAMM_MESSAGE",
-    "uses": [
-      {
-        "method": "PFNDPAMERGE",
-        "parameter": "uMsg"
-      },
-      {
-        "method": "PFNDPAMERGECONST",
-        "parameter": "uMsg"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CRYPT_STRING",
@@ -3417,12 +2599,7 @@
     "addUsesTo": "NtmsMountOptions",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "method": "MountNtmsMedia",
-        "parameter": "dwOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "ENUM_CERT_COLUMN_VALUE_FLAGS",
@@ -3505,13 +2682,7 @@
   {
     "addUsesTo": "COMAdminApplicationExportOptions",
     "members": [],
-    "uses": [
-      {
-        "interface": "ICOMAdminCatalog",
-        "method": "ExportApplication",
-        "parameter": "lOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "VIRTUAL_FREE_TYPE",
@@ -3539,12 +2710,7 @@
   {
     "addUsesTo": "NtmsObjectsTypes",
     "members": [],
-    "uses": [
-      {
-        "method": "DeleteNtmsRequests",
-        "parameter": "dwType"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CERTADMIN_GET_ROLES_FLAGS",
@@ -3693,20 +2859,9 @@
     "uses": []
   },
   {
-    "name": "IMAGE_FLAGS",
     "namespace": "Windows.Win32.UI.WindowsAndMessaging",
-    "flags": true,
-    "members": [],
-    "uses": []
-  },
-  {
-    "addUsesTo": "SNMP_PDU_TYPE",
-    "uses": [
-      {
-        "method": "SnmpGetPduData",
-        "parameter": "PDU_type"
-      }
-    ]
+    "uses": [],
+    "addUsesTo": "IMAGE_FLAGS"
   },
   {
     "name": "CR_DISP",
@@ -3792,9 +2947,8 @@
     ]
   },
   {
-    "name": "ENUM_DATE_FORMATS_FLAGS",
-    "members": [],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "ENUM_DATE_FORMATS_FLAGS"
   },
   {
     "name": "CRYPT_ENCODE_OBJECT_FLAGS",
@@ -3842,16 +2996,7 @@
         "value": "65534"
       }
     ],
-    "uses": [
-      {
-        "method": "CreateFileTransactedW",
-        "parameter": "pusMiniVersion"
-      },
-      {
-        "method": "CreateFileTransactedA",
-        "parameter": "pusMiniVersion"
-      }
-    ]
+    "uses": []
   },
   {
     "namespace": "Windows.Win32.Security",
@@ -3913,10 +3058,6 @@
         "parameter": "SecurityInfo"
       },
       {
-        "method": "SetServiceObjectSecurity",
-        "parameter": "dwSecurityInformation"
-      },
-      {
         "interface": "ISecurityInformation",
         "method": "SetSecurity",
         "parameter": "SecurityInformation"
@@ -3925,10 +3066,6 @@
         "interface": "ISecurityInformation",
         "method": "GetSecurity",
         "parameter": "RequestedInformation"
-      },
-      {
-        "method": "SetUserObjectSecurity",
-        "parameter": "pSIRequested"
       },
       {
         "method": "ConvertSecurityDescriptorToStringSecurityDescriptorA",
@@ -3967,43 +3104,11 @@
         "parameter": "SecurityInformation"
       },
       {
-        "method": "SetNtmsObjectSecurity",
-        "parameter": "SecurityInformation"
-      },
-      {
         "method": "AuditSetSecurity",
         "parameter": "SecurityInformation"
       },
       {
         "method": "AuditQuerySecurity",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "GetPrivateObjectSecurity",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "QuerySecurityAccessMask",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "SetFileSecurityW",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "SetKernelObjectSecurity",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "SetPrivateObjectSecurity",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "SetSecurityAccessMask",
-        "parameter": "SecurityInformation"
-      },
-      {
-        "method": "SetFileSecurityA",
         "parameter": "SecurityInformation"
       },
       {
@@ -4059,12 +3164,7 @@
   },
   {
       "addUsesTo": "CRYPT_OBJECT_LOCATOR_RELEASE_REASON",
-      "uses": [
-        {
-          "method": "PFN_CRYPT_OBJECT_LOCATOR_PROVIDER_RELEASE",
-          "parameter": "dwReason"
-        }
-      ]
+      "uses": []
     },
   {
     "name": "CRYPT_ACQUIRE_FLAGS",
@@ -4082,12 +3182,7 @@
   },
   {
     "addUsesTo": "TAPE_POSITION_TYPE",
-    "uses": [
-      {
-        "method": "GetTapePosition",
-        "parameter": "dwPositionType"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CREATE_TAPE_PARTITION_METHOD",
@@ -4226,13 +3321,7 @@
         "name": "TF_DTLBI_USEPROFILEICON"
       }
     ],
-    "uses": [
-      {
-        "interface": "ITfSystemDeviceTypeLangBarItem",
-        "method": "SetIconMode",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "INTERNET_COOKIE_FLAGS",
@@ -4282,16 +3371,7 @@
     "addUsesTo": "ETO_OPTIONS",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "method": "ExtTextOutA",
-        "parameter": "options"
-      },
-      {
-        "method": "ExtTextOutW",
-        "parameter": "options"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "SYM_SRV_STORE_FILE_FLAGS",
@@ -4317,16 +3397,7 @@
         "value": "4"
       }
     ],
-    "uses": [
-      {
-        "method": "SymSrvStoreFile",
-        "parameter": "Flags"
-      },
-      {
-        "method": "SymSrvStoreFileW",
-        "parameter": "Flags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "POWER_PLATFORM_ROLE_VERSION",
@@ -4363,69 +3434,6 @@
     ]
   },
   {
-    "name": "QUEUE_STATUS_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "QS_ALLEVENTS",
-        "value": "1215"
-      },
-      {
-        "name": "QS_ALLINPUT",
-        "value": "1279"
-      },
-      {
-        "name": "QS_ALLPOSTMESSAGE",
-        "value": "256"
-      },
-      {
-        "name": "QS_HOTKEY",
-        "value": "128"
-      },
-      {
-        "name": "QS_INPUT",
-        "value": "1031"
-      },
-      {
-        "name": "QS_KEY",
-        "value": "1"
-      },
-      {
-        "name": "QS_MOUSE",
-        "value": "6"
-      },
-      {
-        "name": "QS_MOUSEBUTTON",
-        "value": "4"
-      },
-      {
-        "name": "QS_MOUSEMOVE",
-        "value": "2"
-      },
-      {
-        "name": "QS_PAINT",
-        "value": "32"
-      },
-      {
-        "name": "QS_POSTMESSAGE",
-        "value": "8"
-      },
-      {
-        "name": "QS_RAWINPUT",
-        "value": "1024"
-      },
-      {
-        "name": "QS_SENDMESSAGE",
-        "value": "64"
-      },
-      {
-        "name": "QS_TIMER",
-        "value": "16"
-      }
-    ],
-    "uses": []
-  },
-  {
     "name": "TEXT_STORE_CHANGE_FLAGS",
     "flags": true,
     "members": [
@@ -4458,12 +3466,7 @@
   {
     "addUsesTo": "NtmsInjectOperation",
     "members": [],
-    "uses": [
-      {
-        "method": "InjectNtmsMedia",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CERT_EXIT_EVENT_MASK",
@@ -4491,13 +3494,7 @@
         "name": "EXITEVENT_SHUTDOWN"
       }
     ],
-    "uses": [
-      {
-        "interface": "ICertExit",
-        "method": "Initialize",
-        "parameter": "pEventMask"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "REGISTER_NOTIFICATION_FLAGS",
@@ -4532,12 +3529,7 @@
   {
     "addUsesTo": "REG_SAM_FLAGS",
     "members": [],
-    "uses": [
-      {
-        "method": "PowerSettingAccessCheckEx",
-        "parameter": "AccessType"
-      }
-    ]
+    "uses": []
   },
   {
     "namespace": "Windows.Win32.System.SystemInformation",
@@ -4613,10 +3605,6 @@
       {
         "struct": "SYSTEM_INFO::_Anonymous_e__Union::_Anonymous_e__Struct",
         "field": "wProcessorArchitecture"
-      },
-      {
-        "struct": "SP_ALTPLATFORM_INFO_V2",
-        "field": "ProcessorArchitecture"
       }
     ]
   },
@@ -4799,12 +3787,7 @@
     "addUsesTo": "NtmsAllocateOptions",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "method": "AllocateNtmsMedia",
-        "parameter": "dwOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "ADDED_CERT_TYPE",
@@ -4832,12 +3815,7 @@
   },
   {
     "addUsesTo": "TAPEMARK_TYPE",
-    "uses": [
-      {
-        "method": "WriteTapemark",
-        "parameter": "dwTapemarkType"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "SERVICE_START_TYPE",
@@ -4884,12 +3862,7 @@
   },
   {
       "addUsesTo": "CERT_FIND_CHAIN_IN_STORE_FLAGS",
-      "uses": [
-        {
-          "method": "CertFindChainInStore",
-          "parameter": "dwFindFlags"
-        }
-      ]
+      "uses": []
     },
   {
       "addUsesTo": "CERT_CONTROL_STORE_FLAGS",
@@ -4913,26 +3886,11 @@
         "name": "TF_IAS_NO_DEFAULT_COMPOSITION"
       }
     ],
-    "uses": [
-      {
-        "interface": "ITfInsertAtSelection",
-        "method": "InsertTextAtSelection",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "IMAGE_DIRECTORY_ENTRY",
-    "uses": [
-      {
-        "method": "ImageDirectoryEntryToDataEx",
-        "parameter": "DirectoryEntry"
-      },
-      {
-        "method": "ImageDirectoryEntryToData",
-        "parameter": "DirectoryEntry"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "PSPCB_MESSAGE",
@@ -4951,14 +3909,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "LPFNPSPCALLBACKA",
-        "parameter": "uMsg"
-      },
-      {
-        "method": "LPFNPSPCALLBACKW",
-        "parameter": "uMsg"
-      },
       {
         "interface": "ISecurityInformation",
         "method": "PropertySheetPageCallback",
@@ -5190,15 +4140,8 @@
   },
   {
     "addUsesTo": "SENS_CONNECTION_TYPE",
-    "uses": [
-      {
-        "interface": "ISensNetwork",
-        "method": "ConnectionLost",
-        "parameter": "ulType"
-      }
-    ]
+    "uses": []
   },
-
   {
       "addUsesTo": "CERT_PROPERTY_TYPE",
       "uses": [
@@ -5316,57 +4259,13 @@
   },
   {
     "addUsesTo": "TAPE_POSITION_METHOD",
-    "uses": [
-      {
-        "method": "SetTapePosition",
-        "parameter": "dwPositionMethod"
-      }
-    ]
-  },
-  {
-    "name": "TEXT_STORE_LOCK_FLAGS",
-    "members": [
-      {
-        "name": "TS_LF_READ"
-      },
-      {
-        "name": "TS_LF_READWRITE"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "ITextStoreAnchorSink",
-        "method": "OnLockGranted",
-        "parameter": "dwLockFlags"
-      },
-      {
-        "interface": "ITextStoreACPSink",
-        "method": "OnLockGranted",
-        "parameter": "dwLockFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "CRYPT_KEY_FLAGS",
     "uses": [
       {
-        "method": "CryptImportPKCS8",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CryptGenKey",
-        "parameter": "dwFlags"
-      },
-      {
         "method": "PFXImportCertStore",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "CryptImportKey",
         "parameter": "dwFlags"
       },
       {
@@ -5376,102 +4275,7 @@
     ]
   },
   {
-    "name": "PEEK_MESSAGE_REMOVE_TYPE",
-    "flags": true,
-    "members": [
-      {
-        "name": "PM_NOREMOVE",
-        "value": "0"
-      },
-      {
-        "name": "PM_REMOVE",
-        "value": "1"
-      },
-      {
-        "name": "PM_NOYIELD",
-        "value": "2"
-      },
-      {
-        "name": "PM_QS_INPUT",
-        "value": "(QUEUE_STATUS_FLAGS.QS_INPUT << 16)"
-      },
-      {
-        "name": "PM_QS_POSTMESSAGE",
-        "value": "((QUEUE_STATUS_FLAGS.QS_POSTMESSAGE | QUEUE_STATUS_FLAGS.QS_HOTKEY | QUEUE_STATUS_FLAGS.QS_TIMER) << 16)"
-      },
-      {
-        "name": "PM_QS_PAINT",
-        "value": "(QUEUE_STATUS_FLAGS.QS_PAINT << 16)"
-      },
-      {
-        "name": "PM_QS_SENDMESSAGE",
-        "value": "(QUEUE_STATUS_FLAGS.QS_SENDMESSAGE << 16)"
-      }
-    ],
-    "uses": []
-  },
-  {
-    "name": "DRAW_EDGE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "BF_ADJUST"
-      },
-      {
-        "name": "BF_BOTTOM"
-      },
-      {
-        "name": "BF_BOTTOMLEFT"
-      },
-      {
-        "name": "BF_BOTTOMRIGHT"
-      },
-      {
-        "name": "BF_DIAGONAL"
-      },
-      {
-        "name": "BF_DIAGONAL_ENDBOTTOMLEFT"
-      },
-      {
-        "name": "BF_DIAGONAL_ENDBOTTOMRIGHT"
-      },
-      {
-        "name": "BF_DIAGONAL_ENDTOPLEFT"
-      },
-      {
-        "name": "BF_DIAGONAL_ENDTOPRIGHT"
-      },
-      {
-        "name": "BF_FLAT"
-      },
-      {
-        "name": "BF_LEFT"
-      },
-      {
-        "name": "BF_MIDDLE"
-      },
-      {
-        "name": "BF_MONO"
-      },
-      {
-        "name": "BF_RECT"
-      },
-      {
-        "name": "BF_RIGHT"
-      },
-      {
-        "name": "BF_SOFT"
-      },
-      {
-        "name": "BF_TOP"
-      },
-      {
-        "name": "BF_TOPLEFT"
-      },
-      {
-        "name": "BF_TOPRIGHT"
-      }
-    ],
+    "addUsesTo": "DRAW_EDGE_FLAGS",
     "uses": [
       {
         "method": "DrawThemeEdge",
@@ -5528,22 +4332,10 @@
         "name": "TF_GTP_INCL_TEXT"
       }
     ],
-    "uses": [
-      {
-        "interface": "ITfEditRecord",
-        "method": "GetTextAndPropertyUpdates",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
-    "name": "SYS_COLOR_INDEX",
-    "type": "int",
-    "autoPopulate": {
-      "filter": "COLOR_",
-      "header": "WinUser.h"
-    },
-    "members": [],
+    "addUsesTo": "SYS_COLOR_INDEX",
     "uses": [
       {
         "interface": "ITextHost",
@@ -5568,13 +4360,7 @@
   {
     "addUsesTo": "COMAdminApplicationInstallOptions",
     "members": [],
-    "uses": [
-      {
-        "interface": "ICOMAdminCatalog2",
-        "method": "InstallPartition",
-        "parameter": "lOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "AZ_PROP_CONSTANTS",
@@ -5590,26 +4376,12 @@
   {
     "addUsesTo": "NtmsOpreqCommand",
     "members": [],
-    "uses": [
-      {
-        "method": "SubmitNtmsOperatorRequestA",
-        "parameter": "dwRequest"
-      },
-      {
-        "method": "SubmitNtmsOperatorRequestW",
-        "parameter": "dwRequest"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "NtmsInventoryMethod",
     "members": [],
-    "uses": [
-      {
-        "method": "InventoryNtmsLibrary",
-        "parameter": "dwAction"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "IASSEMBLYCACHE_UNINSTALL_DISPOSITION",
@@ -5759,25 +4531,7 @@
     "uses": []
   },
   {
-    "name": "COMPARE_STRING_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NORM_IGNORECASE"
-      },
-      {
-        "name": "NORM_IGNOREKANATYPE"
-      },
-      {
-        "name": "NORM_IGNORENONSPACE"
-      },
-      {
-        "name": "NORM_IGNOREWIDTH"
-      },
-      {
-        "name": "SORT_STRINGSORT"
-      }
-    ],
+    "addUsesTo": "COMPARE_STRING_FLAGS",
     "uses": [
       {
         "method": "CompareStringEx",
@@ -5844,23 +4598,7 @@
     "addUsesTo": "COMAdminApplicationExportOptions",
     "flags": true,
     "members": [],
-    "uses": [
-      {
-        "interface": "ICOMAdminCatalog2",
-        "method": "ExportPartition",
-        "parameter": "lOptions"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "WORD_WHEEL_OPEN_FLAGS",
-    "uses": [
-      {
-        "interface": "IITWordWheel",
-        "method": "Open",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "REG_ROUTINE_FLAGS",
@@ -5978,32 +4716,6 @@
     ]
   },
   {
-    "name": "TBS_COMMAND_PRIORITY",
-    "members": [
-      {
-        "name": "TBS_COMMAND_PRIORITY_LOW"
-      },
-      {
-        "name": "TBS_COMMAND_PRIORITY_NORMAL"
-      },
-      {
-        "name": "TBS_COMMAND_PRIORITY_SYSTEM"
-      },
-      {
-        "name": "TBS_COMMAND_PRIORITY_HIGH"
-      },
-      {
-        "name": "TBS_COMMAND_PRIORITY_MAX"
-      }
-    ],
-    "uses": [
-      {
-        "method": "Tbsip_Submit_Command",
-        "parameter": "Priority"
-      }
-    ]
-  },
-  {
     "name": "SYM_FIND_ID_OPTION",
     "members": [
       {
@@ -6019,35 +4731,16 @@
         "value": "8"
       }
     ],
-    "uses": [
-      {
-        "method": "SymFindFileInPathW",
-        "parameter": "flags"
-      },
-      {
-        "method": "SymFindFileInPath",
-        "parameter": "flags"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CRYPT_VERIFY_CERT_FLAGS",
-      "uses": [
-        {
-          "method": "CryptVerifyCertificateSignatureEx",
-          "parameter": "dwFlags"
-        }
-      ]
+      "uses": []
     },
   {
-      "addUsesTo": "NTMS_OMID_TYPE",
-      "uses": [
-        {
-          "method": "UpdateNtmsOmidInfo",
-          "parameter": "labelType"
-        }
-      ]
-    },
+    "addUsesTo": "NTMS_OMID_TYPE",
+    "uses": []
+  },
   {
     "name": "CERT_REQUEST_OUT_TYPE",
     "type": "int",
@@ -6120,12 +4813,7 @@
   },
   {
     "addUsesTo": "EXECUTION_STATE",
-    "uses": [
-      {
-        "method": "SetThreadExecutionState",
-        "parameter": "esFlags"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "GET_ADAPTERS_ADDRESSES_FLAGS",
@@ -6281,66 +4969,16 @@
         "name": "TF_ES_ASYNC"
       }
     ],
-    "uses": [
-      {
-        "interface": "ITfContext",
-        "method": "RequestEditSession",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "TBS_COMMAND_LOCALITY",
-    "members": [
-      {
-        "name": "TBS_COMMAND_LOCALITY_ZERO"
-      },
-      {
-        "name": "TBS_COMMAND_LOCALITY_ONE"
-      },
-      {
-        "name": "TBS_COMMAND_LOCALITY_TWO"
-      },
-      {
-        "name": "TBS_COMMAND_LOCALITY_THREE"
-      },
-      {
-        "name": "TBS_COMMAND_LOCALITY_FOUR"
-      }
-    ],
-    "uses": [
-      {
-        "method": "Tbsip_Submit_Command",
-        "parameter": "Locality"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "NtmsObjectsTypes",
     "members": [],
-    "uses": [
-      {
-        "method": "EnableNtmsObject",
-        "parameter": "dwType"
-      },
-      {
-        "method": "DisableNtmsObject",
-        "parameter": "dwType"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "READ_EVENT_LOG_READ_FLAGS",
-    "uses": [
-      {
-        "method": "ReadEventLogW",
-        "parameter": "dwReadFlags"
-      },
-      {
-        "method": "ReadEventLogA",
-        "parameter": "dwReadFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "LOCAL_ALLOC_FLAGS",
@@ -6411,28 +5049,11 @@
         "value": "8"
       }
     ],
-    "uses": [
-      {
-        "interface": "IProvideMultipleClassInfo",
-        "method": "GetInfoOfIndex",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
-    "name": "LOCK_FILE_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "LOCKFILE_EXCLUSIVE_LOCK",
-        "value": "2"
-      },
-      {
-        "name": "LOCKFILE_FAIL_IMMEDIATELY",
-        "value": "1"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "LOCK_FILE_FLAGS"
   },
   {
     "addUsesTo": "tomConstants",
@@ -6461,22 +5082,10 @@
     },
   {
       "addUsesTo": "CERT_SYSTEM_STORE_FLAGS",
-      "uses": [
-        {
-          "method": "PFN_CERT_ENUM_SYSTEM_STORE",
-          "parameter": "dwFlags"
-        }
-      ]
+      "uses": []
     },
   {
-    "name": "RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE",
-    "type": "ushort",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SEL_|GCM_RIGHTMOUSEDROP",
-      "header": "richedit.h"
-    },
-    "members": [],
+    "addUsesTo": "RICH_EDIT_GET_CONTEXT_MENU_SEL_TYPE",
     "uses": [
       {
         "interface": "IRichEditOleCallback",
@@ -6558,12 +5167,7 @@
         "name": "IS_TEXT_UNICODE_NOT_ASCII_MASK"
       }
     ],
-    "uses": [
-      {
-        "method": "IsTextUnicode",
-        "parameter": "lpiResult"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CERT_CREATE_SELFSIGN_FLAGS",
@@ -6577,12 +5181,7 @@
   {
     "addUsesTo": "NtmsObjectsTypes",
     "members": [],
-    "uses": [
-      {
-        "method": "EnumerateNtmsObject",
-        "parameter": "dwType"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CRYPT_DEFAULT_CONTEXT_TYPE",
@@ -6600,25 +5199,11 @@
   {
     "addUsesTo": "NtmsUIOperations",
     "members": [],
-    "uses": [
-      {
-        "method": "SetNtmsUIOptionsW",
-        "parameter": "dwOperation"
-      },
-      {
-        "method": "SetNtmsUIOptionsA",
-        "parameter": "dwOperation"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "PREPARE_TAPE_OPERATION",
-    "uses": [
-      {
-        "method": "PrepareTape",
-        "parameter": "dwOperation"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "IMAGE_LIST_ITEM_FLAGS",
@@ -6662,57 +5247,11 @@
   {
     "addUsesTo": "NtmsInjectOperation",
     "members": [],
-    "uses": [
-      {
-        "method": "InjectNtmsCleaner",
-        "parameter": "dwAction"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "ERASE_TAPE_TYPE",
-    "uses": [
-      {
-        "method": "EraseTape",
-        "parameter": "dwEraseType"
-      }
-    ]
-  },
-  {
-    "name": "GET_GUI_RESOURCES_FLAGS",
-    "members": [
-      {
-        "name": "GR_GLOBAL",
-        "value": "unchecked((uint)-2)"
-      },
-      {
-        "name": "GR_GDIOBJECTS",
-        "value": "0"
-      },
-      {
-        "name": "GR_GDIOBJECTS_PEAK",
-        "value": "2"
-      },
-      {
-        "name": "GR_USEROBJECTS",
-        "value": "1"
-      },
-      {
-        "name": "GR_USEROBJECTS_PEAK",
-        "value": "4"
-      }
-    ],
     "uses": []
   },
   {
-    "addUsesTo": "PFN_WDS_CLI_CALLBACK_MESSAGE_ID",
-    "namespace": "Windows.Win32.System.DeploymentServices",
-    "uses": [
-      {
-        "method": "PFN_WdsCliCallback",
-        "parameter": "dwMessageId"
-      }
-    ]
+    "addUsesTo": "ERASE_TAPE_TYPE",
+    "uses": []
   },
   {
       "addUsesTo": "CRYPT_FIND_FLAGS",
@@ -6737,21 +5276,8 @@
       "uses": []
     },
   {
-    "name": "IPSEC_SA_BUNDLE_FLAGS",
-    "flags": true,
+    "addUsesTo": "IPSEC_SA_BUNDLE_FLAGS",
     "members": [
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ND_SECURE"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ND_BOUNDARY"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ND_PEER_NAT_BOUNDARY"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_GUARANTEE_ENCRYPTION"
-      },
       {
         "name": "_IPSEC_SA_BUNDLE_FLAG_NLB"
       },
@@ -6763,36 +5289,9 @@
       },
       {
         "name": "_IPSEC_SA_BUNDLE_FLAG_NO_EXPLICIT_CRED_MATCH"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ALLOW_NULL_TARGET_NAME_MATCH"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_CLEAR_DF_ON_TUNNEL"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ASSUME_UDP_CONTEXT_OUTBOUND"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_ND_PEER_BOUNDARY"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_SUPPRESS_DUPLICATE_DELETION"
-      },
-      {
-        "name": "IPSEC_SA_BUNDLE_FLAG_PEER_SUPPORTS_GUARANTEE_ENCRYPTION"
       }
     ],
-    "uses": [
-      {
-        "struct": "IPSEC_SA_BUNDLE1",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_SA_BUNDLE0",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "SYSTEM_AUDIT_OBJECT_ACE_FLAGS",
@@ -6849,78 +5348,13 @@
     ]
   },
   {
-    "name": "IPSEC_POLICY_FLAG",
-    "flags": true,
+    "addUsesTo": "IPSEC_POLICY_FLAG",
     "members": [
-      {
-        "name": "IPSEC_POLICY_FLAG_ND_SECURE"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_ND_BOUNDARY"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_PEER_BEHIND_NAT"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_NAT_ENCAP_ALLOW_GENERAL_NAT_TRAVERSAL"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_DONT_NEGOTIATE_SECOND_LIFETIME"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_DONT_NEGOTIATE_BYTE_LIFETIME"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_CLEAR_DF_ON_TUNNEL"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_ENABLE_V6_IN_V4_TUNNELING"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_ENABLE_SERVER_ADDR_ASSIGNMENT"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_TUNNEL_ALLOW_OUTBOUND_CLEAR_CONNECTION"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ALREADY_SECURE_CONNECTION"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_TUNNEL_BYPASS_ICMPV6"
-      },
-      {
-        "name": "IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_DICTATE_KEY"
-      },
       {
         "name": "IPSEC_POLICY_FLAG_KEY_MANAGER_ALLOW_NOTIFY_KEY_"
       }
     ],
-    "uses": [
-      {
-        "struct": "IPSEC_TRANSPORT_POLICY1",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_TRANSPORT_POLICY0",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_TUNNEL_POLICY1",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_TUNNEL_POLICY0",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_TUNNEL_POLICY2",
-        "field": "flags"
-      },
-      {
-        "struct": "IPSEC_TRANSPORT_POLICY2",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "IMAGE_FILE_CHARACTERISTICS2",
@@ -7055,26 +5489,8 @@
   },
   {
     "name": "VDS_NF_PACK",
-    "members": [
-      {
-        "name": "VDS_NF_PACK_ARRIVE",
-        "value": "1"
-      },
-      {
-        "name": "VDS_NF_PACK_DEPART",
-        "value": "2"
-      },
-      {
-        "name": "VDS_NF_PACK_MODIFY",
-        "value": "3"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_PACK_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
+    "members": [],
+    "uses": []
   },
   {
       "addUsesTo": "CERT_ROOT_PROGRAM_FLAGS",
@@ -7086,42 +5502,13 @@
       ]
     },
   {
-    "name": "IKEEXT_CERT_AUTH",
-    "flags": true,
+    "addUsesTo": "IKEEXT_CERT_AUTH",
     "members": [
       {
-        "name": "IKEEXT_CERT_AUTH_FLAG_SSL_ONE_WAY"
-      },
-      {
         "name": "IKEEXT_CERT_AUTH_FLAG_DISABLE_CRL_CHECK__"
-      },
-      {
-        "name": "IKEEXT_CERT_AUTH_ENABLE_CRL_CHECK_STRONG"
-      },
-      {
-        "name": "IKEEXT_CERT_AUTH_DISABLE_SSL_CERT_VALIDATION"
-      },
-      {
-        "name": "IKEEXT_CERT_AUTH_ALLOW_HTTP_CERT_LOOKUP"
-      },
-      {
-        "name": "IKEEXT_CERT_AUTH_URL_CONTAINS_BUNDLE"
       }
     ],
-    "uses": [
-      {
-        "struct": "IKEEXT_CERTIFICATE_AUTHENTICATION2",
-        "field": "flags"
-      },
-      {
-        "struct": "IKEEXT_CERTIFICATE_AUTHENTICATION1",
-        "field": "flags"
-      },
-      {
-        "struct": "IKEEXT_CERTIFICATE_AUTHENTICATION0",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CERT_LOGOTYPE_CHOICE",
@@ -7132,25 +5519,6 @@
         }
       ]
     },
-  {
-    "name": "VDS_NF_FILE_SYSTEM",
-    "members": [
-      {
-        "name": "VDS_NF_FILE_SYSTEM_MODIFY",
-        "value": "203"
-      },
-      {
-        "name": "VDS_NF_FILE_SYSTEM_FORMAT_PROGRESS",
-        "value": "204"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_FILE_SYSTEM_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
-  },
   {
       "addUsesTo": "USN_DELETE_FLAGS",
       "uses": [
@@ -7221,52 +5589,11 @@
     "name": "SHARE_INFO_PERMISSIONS",
     "members": [
       {
-        "name": "ACCESS_READ",
-        "value": "1"
-      },
-      {
-        "name": "ACCESS_WRITE",
-        "value": "2"
-      },
-      {
-        "name": "ACCESS_CREATE",
-        "value": "4"
-      },
-      {
-        "name": "ACCESS_EXEC",
-        "value": "8"
-      },
-      {
-        "name": "ACCESS_DELETE",
-        "value": "16"
-      },
-      {
-        "name": "ACCESS_ATRIB",
-        "value": "32"
-      },
-      {
-        "name": "ACCESS_PERM",
-        "value": "64"
-      },
-      {
         "name": "ACCESS_ALL",
         "value": "32768"
       }
     ],
-    "uses": [
-      {
-        "struct": "SHARE_INFO_502",
-        "field": "shi502_permissions"
-      },
-      {
-        "struct": "SHARE_INFO_503",
-        "field": "shi503_permissions"
-      },
-      {
-        "struct": "SHARE_INFO_2",
-        "field": "shi2_permissions"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "KERB_ADDRESS_TYPE",
@@ -7327,155 +5654,24 @@
     "name": "RAS_FLAGS",
     "members": [
       {
-        "name": "RAS_FLAGS_PPP_CONNECTION",
-        "value": "1"
-      },
-      {
-        "name": "RAS_FLAGS_MESSENGER_PRESENT",
-        "value": "2"
-      },
-      {
-        "name": "RAS_FLAGS_QUARANTINE_PRESENT",
-        "value": "8"
-      },
-      {
         "name": "RAS_FLAGS_ARAP_CONNECTION",
         "value": "16"
       },
       {
         "name": "RAS_FLAGS_IKEV2_CONNECTION",
         "value": "16"
-      },
-      {
-        "name": "RAS_FLAGS_DORMANT",
-        "value": "32"
       }
     ],
-    "uses": [
-      {
-        "struct": "RAS_CONNECTION_4",
-        "field": "dwConnectionFlags"
-      },
-      {
-        "struct": "RAS_CONNECTION_0",
-        "field": "dwConnectionFlags"
-      },
-      {
-        "struct": "RAS_CONNECTION_EX",
-        "field": "dwConnectionFlags"
-      }
-    ]
+    "uses": []
   },
   {
-    "name": "SYMBOL_INFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SYMFLAG_CLR_TOKEN",
-        "value": "262144"
-      },
-      {
-        "name": "SYMFLAG_CONSTANT",
-        "value": "256"
-      },
-      {
-        "name": "SYMFLAG_EXPORT",
-        "value": "512"
-      },
-      {
-        "name": "SYMFLAG_FORWARDER",
-        "value": "1024"
-      },
-      {
-        "name": "SYMFLAG_FRAMEREL",
-        "value": "32"
-      },
-      {
-        "name": "SYMFLAG_FUNCTION",
-        "value": "2048"
-      },
-      {
-        "name": "SYMFLAG_ILREL",
-        "value": "65536"
-      },
-      {
-        "name": "SYMFLAG_LOCAL",
-        "value": "128"
-      },
-      {
-        "name": "SYMFLAG_METADATA",
-        "value": "131072"
-      },
-      {
-        "name": "SYMFLAG_PARAMETER",
-        "value": "64"
-      },
-      {
-        "name": "SYMFLAG_REGISTER",
-        "value": "8"
-      },
-      {
-        "name": "SYMFLAG_REGREL",
-        "value": "16"
-      },
-      {
-        "name": "SYMFLAG_SLOT",
-        "value": "32768"
-      },
-      {
-        "name": "SYMFLAG_THUNK",
-        "value": "8192"
-      },
-      {
-        "name": "SYMFLAG_TLSREL",
-        "value": "16384"
-      },
-      {
-        "name": "SYMFLAG_VALUEPRESENT",
-        "value": "1"
-      },
-      {
-        "name": "SYMFLAG_VIRTUAL",
-        "value": "4096"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SYMBOL_INFO",
-        "field": "Flags"
-      },
-      {
-        "struct": "SYMBOL_INFOW",
-        "field": "Flags"
-      }
-    ]
+    "uses": [],
+    "addUsesTo": "SYMBOL_INFO_FLAGS"
   },
   {
     "name": "VDS_NF_CONTROLLER",
-    "members": [
-      {
-        "name": "VDS_NF_CONTROLLER_ARRIVE",
-        "value": "103"
-      },
-      {
-        "name": "VDS_NF_CONTROLLER_DEPART",
-        "value": "104"
-      },
-      {
-        "name": "VDS_NF_CONTROLLER_MODIFY",
-        "value": "350"
-      },
-      {
-        "name": "VDS_NF_CONTROLLER_REMOVED",
-        "value": "351"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_CONTROLLER_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
+    "members": [],
+    "uses": []
   },
   {
     "name": "FILE_DEVICE_TYPE",
@@ -7493,38 +5689,7 @@
         "name": "FILE_DEVICE_DVD"
       }
     ],
-    "uses": [
-      {
-        "struct": "NTMS_MEDIATYPEINFORMATION",
-        "field": "DeviceType"
-      },
-      {
-        "struct": "NTMS_DRIVETYPEINFORMATIONW",
-        "field": "DeviceType"
-      },
-      {
-        "struct": "NTMS_DRIVETYPEINFORMATIONA",
-        "field": "DeviceType"
-      }
-    ]
-  },
-  {
-    "name": "IKEEXT_PRESHARED_KEY_AUTHENTICATION_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "IKEEXT_PSK_FLAG_LOCAL_AUTH_ONLY"
-      },
-      {
-        "name": "IKEEXT_PSK_FLAG_REMOTE_AUTH_ONLY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IKEEXT_PRESHARED_KEY_AUTHENTICATION1",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "PARAFORMAT_BORDERS",
@@ -7704,86 +5869,6 @@
       ]
     },
   {
-    "name": "SCHANNEL_CRED_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "SCH_CRED_AUTO_CRED_VALIDATION",
-        "value": "32"
-      },
-      {
-        "name": "SCH_CRED_CACHE_ONLY_URL_RETRIEVAL_ON_CREATE",
-        "value": "131072"
-      },
-      {
-        "name": "SCH_DISABLE_RECONNECTS",
-        "value": "128"
-      },
-      {
-        "name": "SCH_CRED_IGNORE_NO_REVOCATION_CHECK",
-        "value": "2048"
-      },
-      {
-        "name": "SCH_CRED_IGNORE_REVOCATION_OFFLINE",
-        "value": "4096"
-      },
-      {
-        "name": "SCH_CRED_MANUAL_CRED_VALIDATION",
-        "value": "8"
-      },
-      {
-        "name": "SCH_CRED_NO_DEFAULT_CREDS",
-        "value": "16"
-      },
-      {
-        "name": "SCH_CRED_NO_SERVERNAME_CHECK",
-        "value": "4"
-      },
-      {
-        "name": "SCH_CRED_NO_SYSTEM_MAPPER",
-        "value": "2"
-      },
-      {
-        "name": "SCH_CRED_REVOCATION_CHECK_CHAIN",
-        "value": "512"
-      },
-      {
-        "name": "SCH_CRED_REVOCATION_CHECK_CHAIN_EXCLUDE_ROOT",
-        "value": "1024"
-      },
-      {
-        "name": "SCH_CRED_REVOCATION_CHECK_END_CERT",
-        "value": "256"
-      },
-      {
-        "name": "SCH_CRED_USE_DEFAULT_CREDS",
-        "value": "64"
-      },
-      {
-        "name": "SCH_SEND_AUX_RECORD",
-        "value": "2097152"
-      },
-      {
-        "name": "SCH_SEND_ROOT_CERT",
-        "value": "262144"
-      },
-      {
-        "name": "SCH_USE_STRONG_CRYPTO",
-        "value": "4194304"
-      },
-      {
-        "name": "SCH_USE_PRESHAREDKEY_ONLY",
-        "value": "8388608"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "SCHANNEL_CRED",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "DROPEFFECT",
     "flags": true,
     "members": [
@@ -7823,34 +5908,6 @@
       {
         "method": "IRichEditOleCallback::GetDragDropEffect",
         "parameter": "pdwEffect"
-      },
-      {
-        "method": "IDropSource::GiveFeedback",
-        "parameter": "dwEffect"
-      },
-      {
-        "method": "IDropTarget::DragEnter",
-        "parameter": "pdwEffect"
-      },
-      {
-        "method": "IDropTarget::DragOver",
-        "parameter": "pdwEffect"
-      },
-      {
-        "method": "IDropTarget::Drop",
-        "parameter": "pdwEffect"
-      },
-      {
-        "method": "IDropTargetHelper::DragEnter",
-        "parameter": "dwEffect"
-      },
-      {
-        "method": "IDropTargetHelper::DragOver",
-        "parameter": "dwEffect"
-      },
-      {
-        "method": "IDropTargetHelper::Drop",
-        "parameter": "dwEffect"
       }
     ]
   },
@@ -7886,92 +5943,6 @@
       ]
     },
   {
-    "name": "IKEEXT_POLICY_FLAG",
-    "flags": true,
-    "members": [
-      {
-        "name": "IKEEXT_POLICY_FLAG_DISABLE_DIAGNOSTICS"
-      },
-      {
-        "name": "IKEEXT_POLICY_FLAG_NO_MACHINE_LUID_VERIFY"
-      },
-      {
-        "name": "IKEEXT_POLICY_FLAG_NO_IMPERSONATION_LUID_VERIFY"
-      },
-      {
-        "name": "IKEEXT_POLICY_FLAG_ENABLE_OPTIONAL_DH"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IKEEXT_POLICY2",
-        "field": "flags"
-      },
-      {
-        "struct": "IKEEXT_POLICY0",
-        "field": "flags"
-      },
-      {
-        "struct": "IKEEXT_POLICY1",
-        "field": "flags"
-      }
-    ]
-  },
-  {
-    "name": "VDS_NF_DRIVE",
-    "members": [
-      {
-        "name": "VDS_NF_DRIVE_ARRIVE",
-        "value": "105"
-      },
-      {
-        "name": "VDS_NF_DRIVE_DEPART",
-        "value": "106"
-      },
-      {
-        "name": "VDS_NF_DRIVE_MODIFY",
-        "value": "107"
-      },
-      {
-        "name": "VDS_NF_DRIVE_REMOVED",
-        "value": "354"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_DRIVE_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
-  },
-  {
-    "name": "VDS_NF_PORT",
-    "members": [
-      {
-        "name": "VDS_NF_PORT_ARRIVE",
-        "value": "121"
-      },
-      {
-        "name": "VDS_NF_PORT_DEPART",
-        "value": "122"
-      },
-      {
-        "name": "VDS_NF_PORT_MODIFY",
-        "value": "352"
-      },
-      {
-        "name": "VDS_NF_PORT_REMOVED",
-        "value": "353"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_PORT_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
-  },
-  {
     "name": "CRYPTUI_WIZ_DIGITAL_SIGN_SUBJECT",
     "members": [
       {
@@ -8004,86 +5975,12 @@
       ]
     },
   {
-    "name": "IKEEXT_CERT_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "IKEEXT_CERT_FLAG_ENABLE_ACCOUNT_MAPPING"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_DISABLE_REQUEST_PAYLOAD"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_USE_NAP_CERTIFICATE"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_INTERMEDIATE_CA"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_IGNORE_INIT_CERT_MAP_FAILURE"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_PREFER_NAP_CERTIFICATE_OUTBOUND"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_SELECT_NAP_CERTIFICATE"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_VERIFY_NAP_CERTIFICATE"
-      },
-      {
-        "name": "IKEEXT_CERT_FLAG_FOLLOW_RENEWAL_CERTIFICATE"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IKEEXT_CERT_ROOT_CONFIG0",
-        "field": "flags"
-      }
-    ]
-  },
-  {
     "addUsesTo": "FLASHWINFO_FLAGS",
     "uses": []
   },
   {
     "addUsesTo": "SCHANNEL_ALERT_TOKEN_ALERT_TYPE",
-    "uses": [
-      {
-        "struct": "SCHANNEL_ALERT_TOKEN",
-        "field": "dwAlertType"
-      }
-    ]
-  },
-  {
-    "name": "IPSEC_DOSP_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "IPSEC_DOSP_FLAG_ENABLE_IKEV1"
-      },
-      {
-        "name": "IPSEC_DOSP_FLAG_ENABLE_IKEV2"
-      },
-      {
-        "name": "IPSEC_DOSP_FLAG_DISABLE_AUTHIP"
-      },
-      {
-        "name": "IPSEC_DOSP_FLAG_DISABLE_DEFAULT_BLOCK"
-      },
-      {
-        "name": "IPSEC_DOSP_FLAG_FILTER_BLOCK"
-      },
-      {
-        "name": "IPSEC_DOSP_FLAG_FILTER_EXEMPT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IPSEC_DOSP_OPTIONS0",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "BCRYPT_DSA_MAGIC",
@@ -8144,60 +6041,17 @@
     ]
   },
   {
-    "name": "IKEEXT_KERBEROS_AUTHENTICATION_FLAGS",
-    "flags": true,
+    "addUsesTo": "IKEEXT_KERBEROS_AUTHENTICATION_FLAGS",
     "members": [
-      {
-        "name": "IKEEXT_KERB_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION"
-      },
-      {
-        "name": "IKEEXT_KERB_AUTH_DONT_ACCEPT_EXPLICIT_CREDENTIALS"
-      },
       {
         "name": "IKEEXT_KERB_AUTH_FORCE_PROXY_ON_INITIATOR_"
       }
     ],
-    "uses": [
-      {
-        "struct": "IKEEXT_KERBEROS_AUTHENTICATION1",
-        "field": "flags"
-      },
-      {
-        "struct": "IKEEXT_KERBEROS_AUTHENTICATION0",
-        "field": "flags"
-      }
-    ]
+    "uses": []
   },
   {
-    "name": "IMAGEHLP_CBA_EVENT_SEVERITY",
-    "members": [
-      {
-        "name": "sevInfo",
-        "value": "0"
-      },
-      {
-        "name": "sevProblem",
-        "value": "1"
-      },
-      {
-        "name": "sevAttn",
-        "value": "2"
-      },
-      {
-        "name": "sevFatal",
-        "value": "3"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IMAGEHLP_CBA_EVENT",
-        "field": "severity"
-      },
-      {
-        "struct": "IMAGEHLP_CBA_EVENTW",
-        "field": "severity"
-      }
-    ]
+    "uses": [],
+    "addUsesTo": "IMAGEHLP_CBA_EVENT_SEVERITY"
   },
   {
     "name": "TRUSTED_DOMAIN_TRUST_TYPE",
@@ -8229,33 +6083,8 @@
     ]
   },
   {
-    "name": "IMAGEHLP_GET_TYPE_INFO_FLAGS",
-    "members": [
-      {
-        "name": "IMAGEHLP_GET_TYPE_INFO_CHILDREN",
-        "value": "2"
-      },
-      {
-        "name": "IMAGEHLP_GET_TYPE_INFO_UNCACHED",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IMAGEHLP_GET_TYPE_INFO_PARAMS",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
-    "name": "CRYPTUI_WIZ_DIGITAL_SIGN",
-    "members": [
-      {
-        "name": "CRYPTUI_WIZ_DIGITAL_SIGN_NONE",
-        "value": "0"
-      }
-    ],
-    "uses": []
+    "uses": [],
+    "addUsesTo": "IMAGEHLP_GET_TYPE_INFO_FLAGS"
   },
   {
     "name": "PARAFORMAT_SHADING_STYLE",
@@ -8317,21 +6146,7 @@
     "uses": []
   },
   {
-    "name": "RIP_INFO_TYPE",
-    "members": [
-      {
-        "name": "SLE_ERROR",
-        "value": "1"
-      },
-      {
-        "name": "SLE_MINORERROR",
-        "value": "2"
-      },
-      {
-        "name": "SLE_WARNING",
-        "value": "3"
-      }
-    ],
+    "addUsesTo": "RIP_INFO_TYPE",
     "uses": [
       {
         "struct": "RIP_INFO",
@@ -8430,21 +6245,6 @@
         }
       ]
     },
-  {
-    "name": "IKEEXT_RESERVED_AUTHENTICATION_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "IKEEXT_RESERVED_AUTH_DISABLE_INITIATOR_TOKEN_GENERATION"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IKEEXT_RESERVED_AUTHENTICATION0",
-        "field": "flags"
-      }
-    ]
-  },
   {
     "name": "CERT_CHAIN_POLICY_FLAGS",
     "flags": true,
@@ -8545,12 +6345,7 @@
     },
   {
       "addUsesTo": "CERT_SELECT_CRITERIA_TYPE",
-      "uses": [
-        {
-          "struct": "CERT_SELECT_CRITERIA",
-          "field": "dwType"
-        }
-      ]
+      "uses": []
     },
   {
     "name": "CHANGER_ELEMENT_STATUS_FLAGS",
@@ -8632,22 +6427,13 @@
         "name": "SI_ADVANCED_"
       },
       {
-        "name": "SI_AUDITS_ELEVATION_REQUIRED"
-      },
-      {
         "name": "SI_CONTAINER_"
-      },
-      {
-        "name": "SI_DISABLE_DENY_ACE"
       },
       {
         "name": "SI_EDIT_ALL_"
       },
       {
         "name": "SI_EDIT_AUDITS_"
-      },
-      {
-        "name": "SI_EDIT_EFFECTIVE"
       },
       {
         "name": "SI_EDIT_OWNER_"
@@ -8659,28 +6445,13 @@
         "name": "SI_EDIT_PROPERTIES_"
       },
       {
-        "name": "SI_ENABLE_CENTRAL_POLICY"
-      },
-      {
-        "name": "SI_ENABLE_EDIT_ATTRIBUTE_CONDITION"
-      },
-      {
-        "name": "SI_MAY_WRITE"
-      },
-      {
         "name": "SI_NO_ACL_PROTECT_"
-      },
-      {
-        "name": "SI_NO_ADDITIONAL_PERMISSION"
       },
       {
         "name": "SI_NO_TREE_APPLY_"
       },
       {
         "name": "SI_OBJECT_GUID_"
-      },
-      {
-        "name": "SI_OWNER_ELEVATION_REQUIRED"
       },
       {
         "name": "SI_OWNER_READONLY_"
@@ -8692,68 +6463,32 @@
         "name": "SI_PAGE_TITLE_"
       },
       {
-        "name": "SI_PERMS_ELEVATION_REQUIRED"
-      },
-      {
         "name": "SI_READONLY_"
       },
       {
         "name": "SI_RESET_"
       },
       {
-        "name": "SI_RESET_DACL"
-      },
-      {
         "name": "SI_RESET_DACL_TREE_"
-      },
-      {
-        "name": "SI_RESET_OWNER"
-      },
-      {
-        "name": "SI_RESET_SACL"
       },
       {
         "name": "SI_RESET_SACL_TREE_"
       },
       {
-        "name": "SI_SCOPE_ELEVATION_REQUIRED"
-      },
-      {
         "name": "SI_SERVER_IS_DC_"
-      },
-      {
-        "name": "SI_VIEW_ONLY"
       }
     ],
-    "uses": [
-      {
-        "struct": "SI_OBJECT_INFO",
-        "field": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
-    "name": "TRUSTED_DOMAIN_TRUST_DIRECTION",
-    "members": [
-      {
-        "name": "TRUST_DIRECTION_DISABLED"
-      },
-      {
-        "name": "TRUST_DIRECTION_INBOUND"
-      },
-      {
-        "name": "TRUST_DIRECTION_OUTBOUND"
-      },
-      {
-        "name": "TRUST_DIRECTION_BIDIRECTIONAL"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "struct": "TRUSTED_DOMAIN_INFORMATION_EX",
         "field": "TrustDirection"
       }
-    ]
+    ],
+    "addUsesTo": "TRUSTED_DOMAIN_TRUST_DIRECTION"
   },
   {
       "addUsesTo": "ACTRL_ACCESS_ENTRY_ACCESS_FLAGS",
@@ -8888,53 +6623,6 @@
     ]
   },
   {
-    "name": "DEBUG_EVENT_CODE",
-    "members": [
-      {
-        "name": "CREATE_PROCESS_DEBUG_EVENT",
-        "value": "3"
-      },
-      {
-        "name": "CREATE_THREAD_DEBUG_EVENT",
-        "value": "2"
-      },
-      {
-        "name": "EXCEPTION_DEBUG_EVENT",
-        "value": "1"
-      },
-      {
-        "name": "EXIT_PROCESS_DEBUG_EVENT",
-        "value": "5"
-      },
-      {
-        "name": "EXIT_THREAD_DEBUG_EVENT",
-        "value": "4"
-      },
-      {
-        "name": "LOAD_DLL_DEBUG_EVENT",
-        "value": "6"
-      },
-      {
-        "name": "OUTPUT_DEBUG_STRING_EVENT",
-        "value": "8"
-      },
-      {
-        "name": "RIP_EVENT",
-        "value": "9"
-      },
-      {
-        "name": "UNLOAD_DLL_DEBUG_EVENT",
-        "value": "7"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "DEBUG_EVENT",
-        "field": "dwDebugEventCode"
-      }
-    ]
-  },
-  {
     "name": "INTERNET_STATE",
     "members": [
       {
@@ -8957,29 +6645,6 @@
       {
         "struct": "INTERNET_CONNECTED_INFO",
         "field": "dwConnectedState"
-      }
-    ]
-  },
-  {
-    "name": "VDS_NF_LUN",
-    "members": [
-      {
-        "name": "VDS_NF_LUN_ARRIVE",
-        "value": "108"
-      },
-      {
-        "name": "VDS_NF_LUN_DEPART",
-        "value": "109"
-      },
-      {
-        "name": "VDS_NF_LUN_MODIFY",
-        "value": "110"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_LUN_NOTIFICATION",
-        "field": "ulEvent"
       }
     ]
   },
@@ -9076,29 +6741,6 @@
       ]
     },
   {
-    "name": "VDS_NF_DISK",
-    "members": [
-      {
-        "name": "VDS_NF_DISK_ARRIVE",
-        "value": "8"
-      },
-      {
-        "name": "VDS_NF_DISK_DEPART",
-        "value": "9"
-      },
-      {
-        "name": "VDS_NF_DISK_MODIFY",
-        "value": "10"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VDS_DISK_NOTIFICATION",
-        "field": "ulEvent"
-      }
-    ]
-  },
-  {
       "addUsesTo": "CRYPT_TIMESTAMP_VERSION",
       "uses": [
         {
@@ -9140,24 +6782,6 @@
       {
         "struct": "KERB_RETRIEVE_TKT_REQUEST",
         "field": "EncryptionType"
-      }
-    ]
-  },
-  {
-    "name": "IKEEXT_EAP_AUTHENTICATION_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "IKEEXT_EAP_FLAG_LOCAL_AUTH_ONLY"
-      },
-      {
-        "name": "IKEEXT_EAP_FLAG_REMOTE_AUTH_ONLY"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "IKEEXT_EAP_AUTHENTICATION0",
-        "field": "flags"
       }
     ]
   },
@@ -9207,27 +6831,14 @@
       ]
     },
   {
-    "name": "LSA_AUTH_INFORMATION_AUTH_TYPE",
-    "members": [
-      {
-        "name": "TRUST_AUTH_TYPE_NONE"
-      },
-      {
-        "name": "TRUST_AUTH_TYPE_NT4OWF"
-      },
-      {
-        "name": "TRUST_AUTH_TYPE_CLEAR"
-      },
-      {
-        "name": "TRUST_AUTH_TYPE_VERSION"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "struct": "LSA_AUTH_INFORMATION",
         "field": "AuthType"
       }
-    ]
+    ],
+    "addUsesTo": "LSA_AUTH_INFORMATION_AUTH_TYPE"
   },
   {
     "name": "CRYPTUI_WIZ_DIGITAL_ADDITIONAL_CERT_CHOICE",
@@ -9241,12 +6852,7 @@
   },
   {
     "addUsesTo": "POWER_REQUEST_CONTEXT_FLAGS",
-    "uses": [
-      {
-        "struct": "REASON_CONTEXT",
-        "field": "Flags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "CRYPT_XML_STATUS_ERROR_STATUS",
@@ -9311,55 +6917,18 @@
       ]
     },
   {
-    "name": "MODLOAD_DATA_TYPE",
-    "members": [
-      {
-        "name": "DBHHEADER_DEBUGDIRS",
-        "value": "1"
-      },
-      {
-        "name": "DBHHEADER_CVMISC",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MODLOAD_DATA",
-        "field": "ssig"
-      }
-    ]
+    "uses": [],
+    "addUsesTo": "MODLOAD_DATA_TYPE"
   },
   {
-    "name": "TRUSTED_DOMAIN_TRUST_ATTRIBUTES",
-    "members": [
-      {
-        "name": "TRUST_ATTRIBUTE_NON_TRANSITIVE"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_UPLEVEL_ONLY"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_FILTER_SIDS"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_FOREST_TRANSITIVE"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_CROSS_ORGANIZATION"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_TREAT_AS_EXTERNAL"
-      },
-      {
-        "name": "TRUST_ATTRIBUTE_WITHIN_FOREST"
-      }
-    ],
+    "members": [],
     "uses": [
       {
         "struct": "TRUSTED_DOMAIN_INFORMATION_EX",
         "field": "TrustAttributes"
       }
-    ]
+    ],
+    "addUsesTo": "TRUSTED_DOMAIN_TRUST_ATTRIBUTES"
   },
   {
     "name": "CRED_PACK_FLAGS",
@@ -9480,150 +7049,6 @@
     },
     "members": [
       {
-        "name": "VK_0",
-        "value": "0x30"
-      },
-      {
-        "name": "VK_1",
-        "value": "0x31"
-      },
-      {
-        "name": "VK_2",
-        "value": "0x32"
-      },
-      {
-        "name": "VK_3",
-        "value": "0x33"
-      },
-      {
-        "name": "VK_4",
-        "value": "0x34"
-      },
-      {
-        "name": "VK_5",
-        "value": "0x35"
-      },
-      {
-        "name": "VK_6",
-        "value": "0x36"
-      },
-      {
-        "name": "VK_7",
-        "value": "0x37"
-      },
-      {
-        "name": "VK_8",
-        "value": "0x38"
-      },
-      {
-        "name": "VK_9",
-        "value": "0x39"
-      },
-      {
-        "name": "VK_A",
-        "value": "0x41"
-      },
-      {
-        "name": "VK_B",
-        "value": "0x42"
-      },
-      {
-        "name": "VK_C",
-        "value": "0x43"
-      },
-      {
-        "name": "VK_D",
-        "value": "0x44"
-      },
-      {
-        "name": "VK_E",
-        "value": "0x45"
-      },
-      {
-        "name": "VK_F",
-        "value": "0x46"
-      },
-      {
-        "name": "VK_G",
-        "value": "0x47"
-      },
-      {
-        "name": "VK_H",
-        "value": "0x48"
-      },
-      {
-        "name": "VK_I",
-        "value": "0x49"
-      },
-      {
-        "name": "VK_J",
-        "value": "0x4A"
-      },
-      {
-        "name": "VK_K",
-        "value": "0x4B"
-      },
-      {
-        "name": "VK_L",
-        "value": "0x4C"
-      },
-      {
-        "name": "VK_M",
-        "value": "0x4D"
-      },
-      {
-        "name": "VK_N",
-        "value": "0x4E"
-      },
-      {
-        "name": "VK_O",
-        "value": "0x4F"
-      },
-      {
-        "name": "VK_P",
-        "value": "0x50"
-      },
-      {
-        "name": "VK_Q",
-        "value": "0x51"
-      },
-      {
-        "name": "VK_R",
-        "value": "0x52"
-      },
-      {
-        "name": "VK_S",
-        "value": "0x53"
-      },
-      {
-        "name": "VK_T",
-        "value": "0x54"
-      },
-      {
-        "name": "VK_U",
-        "value": "0x55"
-      },
-      {
-        "name": "VK_V",
-        "value": "0x56"
-      },
-      {
-        "name": "VK_W",
-        "value": "0x57"
-      },
-      {
-        "name": "VK_X",
-        "value": "0x58"
-      },
-      {
-        "name": "VK_Y",
-        "value": "0x59"
-      },
-      {
-        "name": "VK_Z",
-        "value": "0x5A"
-      },
-      {
         "name": "VK_ABNT_C1"
       },
       {
@@ -9706,38 +7131,6 @@
     },
     "members": [
       {
-        "name": "PRINTER_ALL_ACCESS",
-        "value": "(PRINTER_STANDARD_RIGHTS_REQUIRED | PRINTER_ACCESS_ADMINISTER | PRINTER_ACCESS_USE)"
-      },
-      {
-        "name": "PRINTER_READ",
-        "value": "(PRINTER_STANDARD_RIGHTS_READ | PRINTER_ACCESS_USE)"
-      },
-      {
-        "name": "PRINTER_WRITE",
-        "value": "(PRINTER_STANDARD_RIGHTS_WRITE | PRINTER_ACCESS_USE)"
-      },
-      {
-        "name": "PRINTER_EXECUTE",
-        "value": "(PRINTER_STANDARD_RIGHTS_EXECUTE | PRINTER_ACCESS_USE)"
-      },
-      {
-        "name": "SERVER_ALL_ACCESS",
-        "value": "(PRINTER_STANDARD_RIGHTS_REQUIRED | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE)"
-      },
-      {
-        "name": "SERVER_READ",
-        "value": "(PRINTER_STANDARD_RIGHTS_READ | SERVER_ACCESS_ENUMERATE)"
-      },
-      {
-        "name": "SERVER_WRITE",
-        "value": "(PRINTER_STANDARD_RIGHTS_WRITE | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE)"
-      },
-      {
-        "name": "SERVER_EXECUTE",
-        "value": "(PRINTER_STANDARD_RIGHTS_EXECUTE | SERVER_ACCESS_ENUMERATE)"
-      },
-      {
         "name": "PRINTER_DELETE",
         "value": "(0x00010000)"
       },
@@ -9774,55 +7167,16 @@
         "value": "(0x00020000)"
       }
     ],
-    "uses": [
-      {
-        "struct": "PRINTER_DEFAULTSA",
-        "field": "DesiredAccess"
-      },
-      {
-        "struct": "PRINTER_DEFAULTSW",
-        "field": "DesiredAccess"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "STGM",
     "namespace": "Windows.Win32.System.Com",
     "uses": [
       {
-        "interface": "IStorage",
-        "method": "CreateStorage",
-        "parameter": "grfMode"
-      },
-      {
-        "interface": "IStorage",
-        "method": "CreateStream",
-        "parameter": "grfMode"
-      },
-      {
-        "interface": "IStorage",
-        "method": "OpenStorage",
-        "parameter": "grfMode"
-      },
-      {
-        "interface": "IStorage",
-        "method": "OpenStream",
-        "parameter": "grfMode"
-      },
-      {
         "interface": "IFunctionInstance",
         "method": "OpenPropertyStore",
         "parameter": "dwStgAccess"
-      },
-      {
-        "interface": "IMMDevice",
-        "method": "OpenPropertyStore",
-        "parameter": "stgmAccess"
-      },
-      {
-        "interface": "IPersistFile",
-        "method": "Load",
-        "parameter": "dwMode"
       }
     ]
   },
@@ -10004,36 +7358,13 @@
     "uses": []
   },
   {
-    "type": "uint",
-    "name": "MODIFIERKEYS_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "MK_",
-      "header": "WinUser.h"
-    },
-    "members": [],
     "uses": [
       {
         "method": "IRichEditOleCallback::GetDragDropEffect",
         "parameter": "grfKeyState"
-      },
-      {
-        "method": "IDropSource::QueryContinueDrag",
-        "parameter": "grfKeyState"
-      },
-      {
-        "method": "IDropTarget::DragOver",
-        "parameter": "grfKeyState"
-      },
-      {
-        "method": "IDropTarget::DragEnter",
-        "parameter": "grfKeyState"
-      },
-      {
-        "method": "IDropTarget::Drop",
-        "parameter": "grfKeyState"
       }
-    ]
+    ],
+    "addUsesTo": "MODIFIERKEYS_FLAGS"
   },
   {
     "addUsesTo": "OLEMISC",
@@ -10088,55 +7419,19 @@
   },
   {
     "addUsesTo": "DEVMODE_FIELD_FLAGS",
-    "uses": [
-      {
-        "struct": "DEVMODEW",
-        "field": "dmFields"
-      },
-      {
-        "struct": "DEVMODEA",
-        "field": "dmFields"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "DEVMODE_COLOR",
-    "uses": [
-      {
-        "struct": "DEVMODEW",
-        "field": "dmColor"
-      },
-      {
-        "struct": "DEVMODEA",
-        "field": "dmColor"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "DEVMODE_DUPLEX",
-    "uses": [
-      {
-        "struct": "DEVMODEW",
-        "field": "dmDuplex"
-      },
-      {
-        "struct": "DEVMODEA",
-        "field": "dmDuplex"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "DEVMODE_COLLATE",
-    "uses": [
-      {
-        "struct": "DEVMODEW",
-        "field": "dmCollate"
-      },
-      {
-        "struct": "DEVMODEA",
-        "field": "dmCollate"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "DEVMODE_DISPLAY_ORIENTATION",
@@ -10166,16 +7461,7 @@
   },
   {
     "addUsesTo": "DEVMODE_TRUETYPE_OPTION",
-    "uses": [
-      {
-        "struct": "DEVMODEW",
-        "field": "dmTTOption"
-      },
-      {
-        "struct": "DEVMODEA",
-        "field": "dmTTOption"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "VARFLAGS",
@@ -10271,24 +7557,7 @@
         "value": "0x4"
       }
     ],
-    "uses": [
-      {
-        "method": "IShellItem::GetAttributes",
-        "parameter": "sfgaoMask"
-      },
-      {
-        "method": "IShellItem::GetAttributes",
-        "parameter": "psfgaoAttribs"
-      },
-      {
-        "method": "IShellItemArray::GetAttributes",
-        "parameter": "psfgaoAttribs"
-      },
-      {
-        "method": "IShellItemArray::GetAttributes",
-        "parameter": "sfgaoMask"
-      }
-    ]
+    "uses": []
   },
   {
     "type": "uint",
@@ -10373,18 +7642,7 @@
       "header": "oaidl.h"
     },
     "members": [],
-    "uses": [
-      {
-        "interface": "ITypeInfo",
-        "method": "GetImplTypeFlags",
-        "parameter": "pImplTypeFlags"
-      },
-      {
-        "interface": "ICreateTypeInfo",
-        "method": "SetImplTypeFlags",
-        "parameter": "implTypeFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "PARAMFLAGS",
@@ -10438,57 +7696,17 @@
   {
     "addUsesTo": "NUMPARSE_FLAGS",
     "namespace": "Windows.Win32.System.Ole",
-    "uses": [
-      {
-        "struct": "NUMPARSE",
-        "field": "dwInFlags"
-      },
-      {
-        "struct": "NUMPARSE",
-        "field": "dwOutFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "PICTYPE",
     "namespace": "Windows.Win32.System.Ole",
-    "uses": [
-      {
-        "interface": "IPicture",
-        "method": "get_Type",
-        "parameter": "pType"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "VARCMP",
     "namespace": "Windows.Win32.System.Ole",
-    "uses": [
-      {
-        "method": "VarCmp",
-        "parameter": "return"
-      },
-      {
-        "method": "VarCyCmp",
-        "parameter": "return"
-      },
-      {
-        "method": "VarCyCmpR8",
-        "parameter": "return"
-      },
-      {
-        "method": "VarDecCmp",
-        "parameter": "return"
-      },
-      {
-        "method": "VarDecCmpR8",
-        "parameter": "return"
-      },
-      {
-        "method": "VarR4CmpR8",
-        "parameter": "return"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "EMBDHLP_FLAGS",
@@ -10518,16 +7736,7 @@
   {
     "addUsesTo": "LOAD_PICTURE_FLAGS",
     "namespace": "Windows.Win32.System.Ole",
-    "uses": [
-      {
-        "method": "OleLoadPictureFileEx",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "OleLoadPictureEx",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "OLECREATE",
@@ -10597,11 +7806,6 @@
     "addUsesTo": "UIA_PATTERN_ID",
     "uses": [
       {
-        "interface": "IRawElementProviderSimple",
-        "method": "GetPatternProvider",
-        "parameter": "patternId"
-      },
-      {
         "interface": "IUIAutomationCacheRequest",
         "method": "AddPattern",
         "parameter": "patternId"
@@ -10645,21 +7849,6 @@
         "field": "EventId"
       },
       {
-        "interface": "IRawElementProviderAdviseEvents",
-        "method": "AdviseEventAdded",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IRawElementProviderAdviseEvents",
-        "method": "AdviseEventRemoved",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IProxyProviderWinEventSink",
-        "method": "AddAutomationEvent",
-        "parameter": "id"
-      },
-      {
         "interface": "IUIAutomationEventHandler",
         "method": "HandleAutomationEvent",
         "parameter": "eventId"
@@ -10701,21 +7890,6 @@
       {
         "struct": "UiaPropertyCondition",
         "field": "PropertyId"
-      },
-      {
-        "interface": "IRawElementProviderSimple",
-        "method": "GetPropertyValue",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IProxyProviderWinEventSink",
-        "method": "AddAutomationPropertyChangedEvent",
-        "parameter": "id"
-      },
-      {
-        "interface": "IItemContainerProvider",
-        "method": "FindItemByProperty",
-        "parameter": "propertyId"
       },
       {
         "interface": "IUIAutomationPropertyCondition",
@@ -10811,16 +7985,6 @@
         "interface": "IUIAutomationTextRange3",
         "method": "GetAttributeValues",
         "parameter": "attributeIds"
-      },
-      {
-        "interface": "ITextRangeProvider",
-        "method": "FindAttribute",
-        "parameter": "attributeId"
-      },
-      {
-        "interface": "ITextRangeProvider",
-        "method": "GetAttributeValue",
-        "parameter": "attributeId"
       }
     ]
   },
@@ -11019,11 +8183,6 @@
   {
     "addUsesTo": "UIA_METADATA_ID",
     "uses": [
-      {
-        "interface": "IRawElementProviderSimple3",
-        "method": "GetMetadataValue",
-        "parameter": "metadataId"
-      },
       {
         "interface": "IUIAutomationElement7",
         "method": "GetCurrentMetadataValue",
@@ -11276,11 +8435,6 @@
     "namespace": "Windows.Win32.System.Com",
     "uses": [
       {
-        "interface": "IDispatch",
-        "method": "Invoke",
-        "parameter": "wFlags"
-      },
-      {
         "interface": "ITypeInfo",
         "method": "Invoke",
         "parameter": "wFlags"
@@ -11356,73 +8510,7 @@
         "value": "unchecked((uint)0x0400000000000000)"
       }
     ],
-    "uses": [
-      {
-        "method": "DnsQuery_A",
-        "parameter": "Options"
-      },
-      {
-        "method": "DnsQuery_W",
-        "parameter": "Options"
-      },
-      {
-        "method": "DnsQuery_UTF8",
-        "parameter": "Options"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_USAGE",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_USAGE_",
-      "header": "dxgi.h"
-    },
-    "uses": [
-      {
-        "struct": "DXGI_SWAP_CHAIN_DESC",
-        "field": "BufferUsage"
-      },
-      {
-        "interface": "IDXGIResource",
-        "method": "GetUsage",
-        "parameter": "pUsage"
-      },
-      {
-        "interface": "IDXGIDevice",
-        "method": "CreateSurface",
-        "parameter": "Usage"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_PRESENT",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_PRESENT_",
-      "header": "dxgi.h"
-    },
-    "uses": [
-      {
-        "interface": "IDXGISwapChain",
-        "method": "Present",
-        "parameter": "Flags"
-      },
-      {
-        "interface": "IDXGISwapChain1",
-        "method": "Present1",
-        "parameter": "PresentFlags"
-      },
-      {
-        "interface": "IDXGIDecodeSwapChain",
-        "method": "PresentBuffer",
-        "parameter": "Flags"
-      }
-    ]
+    "uses": []
   },
   {
     "namespace": "Windows.Win32.Graphics.Dxgi",
@@ -11447,89 +8535,8 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_MWA_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_MWA_",
-      "header": "dxgi.h"
-    },
-    "uses": [
-      {
-        "interface": "IDXGIFactory",
-        "method": "MakeWindowAssociation",
-        "parameter": "Flags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_MAP_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_MAP_",
-      "header": "dxgi.h"
-    },
-    "uses": [
-      {
-        "interface": "IDXGISurface",
-        "method": "Map",
-        "parameter": "MapFlags"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_RESOURCE_PRIORITY",
-    "autoPopulate": {
-      "filter": "DXGI_RESOURCE_PRIORITY_",
-      "header": "dxgi.h"
-    },
-    "uses": [
-      {
-        "interface": "IDXGIResource",
-        "method": "SetEvictionPriority",
-        "parameter": "EvictionPriority"
-      },
-      {
-        "interface": "IDXGIResource",
-        "method": "GetEvictionPriority",
-        "parameter": "pEvictionPriority"
-      }
-    ]
-  },
-  {
-    "namespace": "Windows.Win32.Graphics.Dxgi",
-    "type": "uint",
-    "name": "DXGI_CREATE_FACTORY_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "DXGI_CREATE_FACTORY_",
-      "header": "dxgi1_3.h"
-    },
-    "uses": [
-      {
-        "method": "CreateDXGIFactory2",
-        "parameter": "Flags"
-      },
-      {
-        "interface": "IDXGIFactory3",
-        "method": "GetCreationFlags",
-        "parameter": "return"
-      }
-    ]
-  },
-  {
     "addUsesTo": "COMPRESSION_FORMAT",
-    "uses": [
-      {
-        "struct": "FILE_COMPRESSION_INFO",
-        "field": "CompressionFormat"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "SECURITY_DESCRIPTOR_CONTROL",
@@ -11591,33 +8598,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.System.RemoteDesktop",
-    "name": "WTS_SECURITY_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "WTS_SECURITY_",
-      "header": "wtsapi32.h"
-    },
-    "members": [
-      {
-        "name": "WTS_SECURITY_CURRENT_GUEST_ACCESS",
-        "value": "(WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF)"
-      },
-      {
-        "name": "WTS_SECURITY_USER_ACCESS",
-        "value": "(WTS_SECURITY_CURRENT_GUEST_ACCESS | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_CONNECT)"
-      },
-      {
-        "name": "WTS_SECURITY_CURRENT_USER_ACCESS",
-        "value": "(WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF | WTS_SECURITY_DISCONNECT)"
-      },
-      {
-        "name": "WTS_SECURITY_ALL_ACCESS",
-        "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
-      }
-    ]
-  },
-  {
     "addUsesTo": "WINUSB_PIPE_POLICY",
     "uses": []
   },
@@ -11630,21 +8610,6 @@
     "members": [],
     "uses": [
       {
-        "interface": "IShellWindows",
-        "method": "FindWindowSW",
-        "parameter": "swClass"
-      },
-      {
-        "interface": "IShellWindows",
-        "method": "Register",
-        "parameter": "swClass"
-      },
-      {
-        "interface": "IShellWindows",
-        "method": "RegisterPending",
-        "parameter": "swClass"
-      },
-      {
         "interface": "IBrowserService",
         "method": "RegisterWindow",
         "parameter": "swc"
@@ -11654,13 +8619,7 @@
   {
     "addUsesTo": "ShellWindowFindWindowOptions",
     "members": [],
-    "uses": [
-      {
-        "interface": "IShellWindows",
-        "method": "FindWindowSW",
-        "parameter": "swfwOptions"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "CF_HYDRATION_POLICY_PRIMARY",
@@ -11703,13 +8662,7 @@
   },
   {
     "addUsesTo": "GENERIC_ACCESS_RIGHTS",
-    "uses": [
-      {
-        "interface": "IWICImagingFactory",
-        "method": "CreateDecoderFromFilename",
-        "parameter": "dwDesiredAccess"
-      }
-    ]
+    "uses": []
   },
   {
     "namespace": "Windows.Win32.System.ClrHosting",
@@ -11724,12 +8677,7 @@
     ]
   },
   {
-    "name": "COMPARESTRING_RESULT",
-    "type": "int",
-    "autoPopulate": {
-      "header": "winnls.h",
-      "filter": "CSTR_"
-    },
+    "addUsesTo": "COMPARESTRING_RESULT",
     "uses": [
       {
         "method": "CompareStringW",
@@ -11976,18 +8924,6 @@
       {
         "struct": "CONTEXT",
         "field": "ContextFlags"
-      },
-      {
-        "method": "InitializeContext",
-        "parameter": "ContextFlags"
-      },
-      {
-        "method": "InitializeContext2",
-        "parameter": "ContextFlags"
-      },
-      {
-        "method": "CopyContext",
-        "parameter": "ContextFlags"
       }
     ]
   },
@@ -12063,16 +8999,7 @@
   {
     "addUsesTo": "VAR_CHANGE_FLAGS",
     "namespace": "Windows.Win32.System.Variant",
-    "uses": [
-      {
-        "method": "VariantChangeType",
-        "parameter": "wFlags"
-      },
-      {
-        "method": "VariantChangeTypeEx",
-        "parameter": "wFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "SIGNER_SIGN_FLAGS",
@@ -12460,69 +9387,9 @@
     "uses": []
   },
   {
-    "name": "FILEOPERATION_FLAGS",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "FOF_",
-      "header": "shellapi.h"
-    },
-    "members": [
-      {
-        "name": "FOFX_NOSKIPJUNCTIONS"
-      },
-      {
-        "name": "FOFX_PREFERHARDLINK"
-      },
-      {
-        "name": "FOFX_SHOWELEVATIONPROMPT"
-      },
-      {
-        "name": "FOFX_RECYCLEONDELETE"
-      },
-      {
-        "name": "FOFX_EARLYFAILURE"
-      },
-      {
-        "name": "FOFX_PRESERVEFILEEXTENSIONS"
-      },
-      {
-        "name": "FOFX_KEEPNEWERFILE"
-      },
-      {
-        "name": "FOFX_NOCOPYHOOKS"
-      },
-      {
-        "name": "FOFX_NOMINIMIZEBOX"
-      },
-      {
-        "name": "FOFX_MOVEACLSACROSSVOLUMES"
-      },
-      {
-        "name": "FOFX_DONTDISPLAYSOURCEPATH"
-      },
-      {
-        "name": "FOFX_DONTDISPLAYDESTPATH"
-      },
-      {
-        "name": "FOFX_REQUIREELEVATION"
-      },
-      {
-        "name": "FOFX_ADDUNDORECORD"
-      },
-      {
-        "name": "FOFX_COPYASDOWNLOAD"
-      },
-      {
-        "name": "FOFX_DONTDISPLAYLOCATIONS"
-      }
-    ],
-    "uses": [
-      {
-        "interface": "IFileOperation",
-        "method": "SetOperationFlags",
-        "parameter": "dwOperationFlags"
-      }
-    ]
+    "members": [],
+    "uses": [],
+    "addUsesTo": "FILEOPERATION_FLAGS"
   },
   {
     "namespace": "Windows.Win32.NetworkManagement.WiFi",
@@ -12595,23 +9462,7 @@
       "filter": "DEVICE_STATE_",
       "header": "mmdeviceapi.h"
     },
-    "uses": [
-      {
-        "interface": "IMMNotificationClient",
-        "method": "OnDeviceStateChanged",
-        "parameter": "dwNewState"
-      },
-      {
-        "interface": "IMMDeviceEnumerator",
-        "method": "EnumAudioEndpoints",
-        "parameter": "dwStateMask"
-      },
-      {
-        "interface": "IMMDevice",
-        "method": "GetState",
-        "parameter": "pdwState"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "COPYPROGRESSROUTINE_PROGRESS",
@@ -12632,10 +9483,6 @@
       {
         "struct": "sp_file_copy_params_w",
         "field": "CopyStyle"
-      },
-      {
-        "struct": "filepaths_w",
-        "field": "Flags"
       },
       {
         "struct": "filepaths_a",

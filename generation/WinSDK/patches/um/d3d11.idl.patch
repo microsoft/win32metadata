@@ -574,12 +574,23 @@
  
  const UINT D3D11_SDK_VERSION = 7;
  
-@@ -5346,7 +5420,7 @@
+@@ -5346,8 +5420,8 @@
  cpp_quote( "HRESULT WINAPI D3D11CreateDevice(" )
  cpp_quote( "    _In_opt_ IDXGIAdapter* pAdapter," )
  cpp_quote( "    D3D_DRIVER_TYPE DriverType," )
 -cpp_quote( "    HMODULE Software," )
+-cpp_quote( "    UINT Flags," )
 +cpp_quote( "    _Win32_Optional_(true) HMODULE Software," )
- cpp_quote( "    UINT Flags," )
++cpp_quote( "    _Win32_AssociatedEnum_(D3D11_CREATE_DEVICE_FLAG) UINT Flags," )
  cpp_quote( "    _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels," )
  cpp_quote( "    UINT FeatureLevels," )
+ cpp_quote( "    UINT SDKVersion," )
+@@ -5423,7 +5497,7 @@
+ cpp_quote( "    _In_opt_ IDXGIAdapter* pAdapter," )
+ cpp_quote( "    D3D_DRIVER_TYPE DriverType," )
+ cpp_quote( "    HMODULE Software," )
+-cpp_quote( "    UINT Flags," )
++cpp_quote( "    _Win32_AssociatedEnum_(D3D11_CREATE_DEVICE_FLAG) UINT Flags," )
+ cpp_quote( "    _In_reads_opt_( FeatureLevels ) CONST D3D_FEATURE_LEVEL* pFeatureLevels," )
+ cpp_quote( "    UINT FeatureLevels," )
+ cpp_quote( "    UINT SDKVersion," )

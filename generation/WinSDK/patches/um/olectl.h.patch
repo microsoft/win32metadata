@@ -1,5 +1,4 @@
 diff --git a/um/olectl.h b/um/olectl.h
-index cb297a63..4e6e7f8b 100644
 --- a/um/olectl.h
 +++ b/um/olectl.h
 @@ -166,11 +166,25 @@ typedef struct tagFONTDESC
@@ -28,7 +27,7 @@ index cb297a63..4e6e7f8b 100644
      UINT picType;
      union
      {
-@@ -411,46 +425,56 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
+@@ -411,56 +425,71 @@ typedef VARIANT_BOOL OLE_ENABLEDEFAULTBOOL;
  /////////////////////////////////////////////////////////////////////////////
  // Self-registration APIs (to be implemented by server DLL)
  
@@ -47,7 +46,7 @@ index cb297a63..4e6e7f8b 100644
 -    LPCOLESTR lpszCaption, ULONG cObjects, LPUNKNOWN FAR* ppUnk, ULONG cPages,
 -    LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, LPVOID pvReserved);
 +    LPCOLESTR lpszCaption, ULONG cObjects, _In_ LPUNKNOWN FAR* ppUnk, ULONG cPages,
-+    _In_ LPCLSID pPageClsID, LCID lcid, DWORD dwReserved, _In_ LPVOID pvReserved);
++    _In_ LPCLSID pPageClsID, LCID lcid, _Win32_Reserved_ DWORD dwReserved, _In_ _Win32_Reserved_ LPVOID pvReserved);
  
 -WINOLECTLAPI OleCreatePropertyFrameIndirect(LPOCPFIPARAMS lpParams);
 +_Win32_SupportedOS_Windows2000_
@@ -79,16 +78,22 @@ index cb297a63..4e6e7f8b 100644
 -    REFIID riid, LPVOID FAR* lplpvObj);
 +    REFIID riid, _Out_ LPVOID FAR* lplpvObj);
  
++#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)
++typedef unsigned long LOAD_PICTURE_FLAGS;
++#endif
++
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleLoadPictureEx(LPSTREAM lpstream, LONG lSize, BOOL fRunmode,
-     REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags,
+-    REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags,
 -    LPVOID FAR* lplpvObj);
++    REFIID riid, DWORD xSizeDesired, DWORD ySizeDesired, _Win32_AssociatedEnum_(LOAD_PICTURE_FLAGS) DWORD dwFlags,
 +    _Out_ LPVOID FAR* lplpvObj);
  
 +_Win32_SupportedOS_Windows2000_
  WINOLECTLAPI OleLoadPicturePath(  _In_ LPOLESTR  szURLorPath,
  				  LPUNKNOWN punkCaller,
- 				  DWORD     dwReserved,
+-				  DWORD     dwReserved,
++				  _Win32_Reserved_ DWORD     dwReserved,
  				  OLE_COLOR clrReserved,
  				  REFIID    riid,
 -				  LPVOID *  ppvRet );
@@ -96,7 +101,11 @@ index cb297a63..4e6e7f8b 100644
  
  WINOLECTLAPI OleLoadPictureFile(VARIANT varFileName,
      LPDISPATCH* lplpdispPicture);
-@@ -461,6 +485,7 @@ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
+ 
+ WINOLECTLAPI OleLoadPictureFileEx(VARIANT varFileName,
+-    DWORD xSizeDesired, DWORD ySizeDesired, DWORD dwFlags, LPDISPATCH* lplpdispPicture);
++    DWORD xSizeDesired, DWORD ySizeDesired, _Win32_AssociatedEnum_(LOAD_PICTURE_FLAGS) DWORD dwFlags, LPDISPATCH* lplpdispPicture);
+ 
  WINOLECTLAPI OleSavePictureFile(LPDISPATCH lpdispPicture,
      BSTR bstrFileName);
  
@@ -104,7 +113,7 @@ index cb297a63..4e6e7f8b 100644
  WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
  
  #define LP_DEFAULT      0x00
-@@ -468,6 +493,15 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
+@@ -468,6 +497,15 @@ WINOLECTLAPI_(HCURSOR) OleIconToCursor(HINSTANCE hinstExe, HICON hIcon);
  #define LP_VGACOLOR     0x02
  #define LP_COLOR        0x04
  

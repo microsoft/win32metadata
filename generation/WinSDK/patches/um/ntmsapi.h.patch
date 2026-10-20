@@ -1,8 +1,14 @@
-diff --git a/um/ntmsapi.h b/um/ntmsapi.h
-index 9b3376d2..488137cb 100644
 --- a/um/ntmsapi.h
 +++ b/um/ntmsapi.h
-@@ -155,18 +155,23 @@ enum NtmsSessionOptions {
+@@ -25,6 +25,7 @@
+ #pragma once
+ #endif
+ #include <winapifamily.h>
++#include <sal.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+ #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+@@ -155,18 +156,23 @@
      NTMS_SESSION_QUERYEXPEDITE      = 0x1
  };
  
@@ -26,7 +32,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI CloseNtmsSession(
      HANDLE hSession
      );
-@@ -222,17 +227,19 @@ typedef struct _NTMS_MOUNT_INFORMATION
+@@ -222,17 +228,19 @@
  
  #ifndef MIDL_PASS
  
@@ -47,7 +53,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI DismountNtmsMedia(
      HANDLE hSession,
      LPNTMS_GUID lpMediaId,
-@@ -273,40 +280,46 @@ typedef struct _NTMS_ALLOCATION_INFORMATION
+@@ -273,40 +281,46 @@
  
  #ifndef MIDL_PASS
  
@@ -95,7 +101,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI ChangeNtmsMediaType(
      HANDLE hSession,
      LPNTMS_GUID lpMediaId,
-@@ -317,16 +330,19 @@ DWORD WINAPI ChangeNtmsMediaType(
+@@ -317,16 +331,19 @@
  // MEDIA STATES
  //=======================================================================
  
@@ -115,7 +121,15 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI DeleteNtmsMedia(
      HANDLE hSession,
      LPNTMS_GUID lpMediaId
-@@ -363,24 +379,27 @@ DWORD WINAPI CreateNtmsMediaPool(
+@@ -351,6 +368,7 @@
+ #ifndef MIDL_PASS
+ #ifdef PRE_SEVIL
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI CreateNtmsMediaPool(
+     HANDLE hSession,
+     LPCTSTR lpPoolName,
+@@ -363,24 +381,27 @@
  #endif
  
  // SEVILIA
@@ -145,7 +159,7 @@ index 9b3376d2..488137cb 100644
  DWORD
  WINAPI
  GetNtmsMediaPoolNameA(
-@@ -390,6 +409,7 @@ GetNtmsMediaPoolNameA(
+@@ -390,6 +411,7 @@
      _Inout_ LPDWORD lpdwBufSize
      );
  
@@ -153,7 +167,7 @@ index 9b3376d2..488137cb 100644
  DWORD
  WINAPI
  GetNtmsMediaPoolNameW(
-@@ -399,22 +419,26 @@ GetNtmsMediaPoolNameW(
+@@ -399,22 +421,26 @@
      _Inout_ LPDWORD lpdwBufSize
      );
  
@@ -180,7 +194,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI DeleteNtmsDrive(
      HANDLE hSession,
      LPNTMS_GUID lpDriveId
-@@ -466,7 +490,7 @@ enum NtmsDriveState {
+@@ -466,7 +492,7 @@
  
  typedef struct _NTMS_DRIVEINFORMATIONA {
      DWORD       Number;
@@ -189,7 +203,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   DriveType;
      CHAR        szDeviceName[NTMS_DEVICENAME_LENGTH];
      CHAR        szSerialNumber[NTMS_SERIALNUMBER_LENGTH];
-@@ -485,7 +509,7 @@ typedef struct _NTMS_DRIVEINFORMATIONA {
+@@ -485,7 +511,7 @@
  
  typedef struct _NTMS_DRIVEINFORMATIONW {
      DWORD       Number;
@@ -198,7 +212,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   DriveType;
      WCHAR       szDeviceName[NTMS_DEVICENAME_LENGTH];
      WCHAR       szSerialNumber[NTMS_SERIALNUMBER_LENGTH];
-@@ -529,12 +553,12 @@ enum NtmsInventoryMethod {
+@@ -529,12 +555,12 @@
  };
  
  typedef struct _NTMS_LIBRARYINFORMATION {
@@ -213,7 +227,7 @@ index 9b3376d2..488137cb 100644
      DWORD       dwCleanerUsesRemaining;
      DWORD       FirstDriveNumber;
      DWORD       dwNumberOfDrives;
-@@ -551,7 +575,7 @@ typedef struct _NTMS_LIBRARYINFORMATION {
+@@ -551,7 +577,7 @@
      DWORD       dwNumberOfLibRequests;
      GUID        Reserved;
      BOOL        AutoRecovery;
@@ -222,7 +236,7 @@ index 9b3376d2..488137cb 100644
  } NTMS_LIBRARYINFORMATION;
  
  #ifdef UNICODE
-@@ -610,7 +634,7 @@ enum NtmsDoorState {
+@@ -610,7 +636,7 @@
  
  typedef struct _NTMS_IEDOORINFORMATION {
      DWORD       Number;
@@ -231,7 +245,7 @@ index 9b3376d2..488137cb 100644
      WORD        MaxOpenSecs;
      NTMS_GUID   Library;
  } NTMS_IEDOORINFORMATION;
-@@ -629,8 +653,8 @@ enum NtmsPortContent {
+@@ -629,8 +655,8 @@
  
  typedef struct _NTMS_IEPORTINFORMATION {
      DWORD       Number;
@@ -242,7 +256,7 @@ index 9b3376d2..488137cb 100644
      WORD        MaxExtendSecs;
      NTMS_GUID   Library;
  } NTMS_IEPORTINFORMATION;
-@@ -667,9 +691,9 @@ typedef struct _NTMS_PMIDINFORMATIONA {
+@@ -667,9 +693,9 @@
      NTMS_GUID   MediaType;
      NTMS_GUID   HomeSlot;                       // home slot for online media
      CHAR        szBarCode[NTMS_BARCODE_LENGTH]; // bar code string
@@ -254,7 +268,7 @@ index 9b3376d2..488137cb 100644
      DWORD       dwNumberOfPartitions;
      DWORD       dwMediaTypeCode;
      DWORD       dwDensityCode;
-@@ -684,9 +708,9 @@ typedef struct _NTMS_PMIDINFORMATIONW {
+@@ -684,9 +710,9 @@
      NTMS_GUID   MediaType;
      NTMS_GUID   HomeSlot;                       // home slot for online media
      WCHAR       szBarCode[NTMS_BARCODE_LENGTH]; // bar code string
@@ -266,7 +280,7 @@ index 9b3376d2..488137cb 100644
      DWORD       dwNumberOfPartitions;
      DWORD       dwMediaTypeCode;
      DWORD       dwDensityCode;
-@@ -725,7 +749,7 @@ enum NtmsPartitionState {
+@@ -725,7 +751,7 @@
  typedef struct _NTMS_PARTITIONINFORMATIONA {
      NTMS_GUID   PhysicalMedia;
      NTMS_GUID   LogicalMedia;
@@ -275,7 +289,7 @@ index 9b3376d2..488137cb 100644
      WORD        Side;
      DWORD       dwOmidLabelIdLength;    // binary id
      BYTE        OmidLabelId[NTMS_OMIDLABELID_LENGTH];
-@@ -739,7 +763,7 @@ typedef struct _NTMS_PARTITIONINFORMATIONA {
+@@ -739,7 +765,7 @@
  typedef struct _NTMS_PARTITIONINFORMATIONW {
      NTMS_GUID   PhysicalMedia;
      NTMS_GUID   LogicalMedia;
@@ -284,16 +298,35 @@ index 9b3376d2..488137cb 100644
      WORD        Side;
      DWORD       dwOmidLabelIdLength;    // binary id
      BYTE        OmidLabelId[NTMS_OMIDLABELID_LENGTH];
-@@ -788,7 +812,7 @@ enum NtmsReadWriteCharacteristics {
+@@ -788,8 +814,8 @@
  typedef struct _NTMS_MEDIATYPEINFORMATION {
      DWORD       MediaType;      // MediaTypeCodes
      DWORD       NumberOfSides;
 -    DWORD       ReadWriteCharacteristics;
+-    DWORD       DeviceType;
 +    _Win32_AssociatedEnum_(NtmsReadWriteCharacteristics) DWORD       ReadWriteCharacteristics;
-     DWORD       DeviceType;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
  } NTMS_MEDIATYPEINFORMATION;
  
-@@ -887,9 +911,9 @@ enum NtmsLmState {
+ #ifdef UNICODE
+@@ -804,14 +830,14 @@
+     CHAR        szVendor[NTMS_VENDORNAME_LENGTH];
+     CHAR        szProduct[NTMS_PRODUCTNAME_LENGTH];
+     DWORD       NumberOfHeads;
+-    DWORD       DeviceType;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
+ } NTMS_DRIVETYPEINFORMATIONA;
+ 
+ typedef struct _NTMS_DRIVETYPEINFORMATIONW {
+     WCHAR       szVendor[NTMS_VENDORNAME_LENGTH];
+     WCHAR       szProduct[NTMS_PRODUCTNAME_LENGTH];
+     DWORD       NumberOfHeads;
+-    DWORD       DeviceType;
++    _Win32_AssociatedEnum_(FILE_DEVICE_TYPE) DWORD       DeviceType;
+ } NTMS_DRIVETYPEINFORMATIONW;
+ 
+ #ifdef UNICODE
+@@ -887,9 +913,9 @@
  #endif
  
  typedef struct _NTMS_LIBREQUESTINFORMATIONA {
@@ -305,7 +338,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   PartitionId;
      NTMS_GUID   DriveId;
      NTMS_GUID   PhysMediaId;
-@@ -906,9 +930,9 @@ typedef struct _NTMS_LIBREQUESTINFORMATIONA {
+@@ -906,9 +932,9 @@
  } NTMS_LIBREQUESTINFORMATIONA;
  
  typedef struct _NTMS_LIBREQUESTINFORMATIONW {
@@ -317,7 +350,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   PartitionId;
      NTMS_GUID   DriveId;
      NTMS_GUID   PhysMediaId;
-@@ -951,13 +975,13 @@ enum NtmsOpreqState {
+@@ -951,13 +977,13 @@
  #endif
  
  typedef struct _NTMS_OPREQUESTINFORMATIONA {
@@ -335,7 +368,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   Arg2;
      CHAR        szApplication[NTMS_APPLICATIONNAME_LENGTH];
      CHAR        szUser[NTMS_USERNAME_LENGTH];
-@@ -965,13 +989,13 @@ typedef struct _NTMS_OPREQUESTINFORMATIONA {
+@@ -965,13 +991,13 @@
  } NTMS_OPREQUESTINFORMATIONA;
  
  typedef struct _NTMS_OPREQUESTINFORMATIONW {
@@ -353,7 +386,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID   Arg2;
      WCHAR       szApplication[NTMS_APPLICATIONNAME_LENGTH];
      WCHAR       szUser[NTMS_USERNAME_LENGTH];
-@@ -1027,12 +1051,12 @@ enum NtmsOperationalState {
+@@ -1027,12 +1053,12 @@
  
  typedef struct _NTMS_OBJECTINFORMATIONA {
      DWORD       dwSize;
@@ -368,7 +401,7 @@ index 9b3376d2..488137cb 100644
      CHAR        szName[NTMS_OBJECTNAME_LENGTH];
      CHAR        szDescription[NTMS_DESCRIPTION_LENGTH];
  #ifdef MIDL_PASS
-@@ -1079,12 +1103,12 @@ typedef struct _NTMS_OBJECTINFORMATIONA {
+@@ -1079,12 +1105,12 @@
  
  typedef struct _NTMS_OBJECTINFORMATIONW {
      DWORD       dwSize;
@@ -383,7 +416,22 @@ index 9b3376d2..488137cb 100644
      WCHAR       szName[NTMS_OBJECTNAME_LENGTH];
      WCHAR       szDescription[NTMS_DESCRIPTION_LENGTH];
  #ifdef MIDL_PASS
-@@ -1426,24 +1450,28 @@ DWORD WINAPI SetNtmsObjectInformation(
+@@ -1411,12 +1437,14 @@
+ 
+ #ifdef PRE_SEVIL
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI GetNtmsObjectInformation(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+     LPNTMS_OBJECTINFORMATION lpInfo
+     );
+ 
++_Win32_SupportedOS_WindowsXP_
+ DWORD WINAPI SetNtmsObjectInformation(
+     HANDLE hSession,
+     LPNTMS_GUID lpObjectId,
+@@ -1426,24 +1454,28 @@
  #endif
  
  // Added by SEvilia
@@ -412,7 +460,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SetNtmsObjectInformationW(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1451,18 +1479,20 @@ DWORD WINAPI SetNtmsObjectInformationW(
+@@ -1451,18 +1483,20 @@
      );
  // END of SEVILIA
  
@@ -435,7 +483,7 @@ index 9b3376d2..488137cb 100644
      ) ;
  
  enum NtmsEnumerateOption {
-@@ -1470,24 +1500,27 @@ enum NtmsEnumerateOption {
+@@ -1470,24 +1504,27 @@
      NTMS_ENUM_ROOTPOOL                  = 1
      };
  
@@ -466,7 +514,7 @@ index 9b3376d2..488137cb 100644
      LPNTMS_GUID lpObjectId
      );
  
-@@ -1500,11 +1533,12 @@ enum NtmsEjectOperation {
+@@ -1500,11 +1537,12 @@
      NTMS_EJECT_ASK_USER             = 5
  };
  
@@ -480,7 +528,7 @@ index 9b3376d2..488137cb 100644
      );
  
  enum NtmsInjectOperation {
-@@ -1514,45 +1548,57 @@ enum NtmsInjectOperation {
+@@ -1514,44 +1552,56 @@
      NTMS_INJECT_STARTMANY           = 3
  };
  
@@ -490,17 +538,21 @@ index 9b3376d2..488137cb 100644
      LPNTMS_GUID lpLibraryId,
      LPNTMS_GUID lpInjectOperation,
 -    DWORD dwAction
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsInjectOperation) DWORD dwAction
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI AccessNtmsLibraryDoor(
      HANDLE hSession,
      LPNTMS_GUID lpLibraryId,
 -    DWORD dwAction
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsInventoryMethod) DWORD dwAction
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI CleanNtmsDrive(
      HANDLE hSession,
@@ -518,9 +570,11 @@ index 9b3376d2..488137cb 100644
      HANDLE hSession,
      LPNTMS_GUID lpLibraryId,
 -    DWORD dwAction
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsInventoryMethod) DWORD dwAction
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI IdentifyNtmsSlot(
      HANDLE hSession,
@@ -532,17 +586,16 @@ index 9b3376d2..488137cb 100644
  // definitions for the UpdateNtmsOmidInfo ...
  #define NTMS_OMID_TYPE_RAW_LABEL        0x01
  #define NTMS_OMID_TYPE_FILESYSTEM_INFO  0x02
- 
++
 +#if defined(WIN32METADATA) && !defined(MIDL_PASS)
 +_Win32_Enum_(NTMS_OMID_TYPE, unsigned long,
 +    NTMS_OMID_TYPE_FILESYSTEM_INFO,
 +    NTMS_OMID_TYPE_RAW_LABEL);
 +#endif
-+
+ 
  typedef struct
  {
-     WCHAR FileSystemType[64] ;
-@@ -1560,69 +1606,80 @@ typedef struct
+@@ -1560,69 +1610,80 @@
      DWORD SerialNumber ;
  } NTMS_FILESYSTEM_INFO ;
  
@@ -605,18 +658,22 @@ index 9b3376d2..488137cb 100644
      LPNTMS_GUID lpInjectOperation,
      DWORD dwNumberOfCleansLeft,
 -    DWORD dwAction
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsInjectOperation) DWORD dwAction
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI EjectNtmsCleaner (
      HANDLE hSession,
      LPNTMS_GUID lpLibrary,
      LPNTMS_GUID lpEjectOperation,
 -    DWORD dwAction
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsEjectOperation) DWORD dwAction
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsXP_
  DWORD WINAPI BeginNtmsDeviceChangeDetection(
      HANDLE hSession,
@@ -627,7 +684,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SetNtmsDeviceChangeDetection(
      HANDLE hSession,
      HANDLE DetectHandle,
-@@ -1631,6 +1688,7 @@ DWORD WINAPI SetNtmsDeviceChangeDetection(
+@@ -1631,6 +1692,7 @@
      DWORD dwCount
      );
  
@@ -635,7 +692,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI EndNtmsDeviceChangeDetection(
      HANDLE hSession,
      HANDLE DetectHandle
-@@ -1648,6 +1706,7 @@ enum NtmsDriveType {
+@@ -1648,6 +1710,7 @@
  #ifndef MIDL_PASS
  
  // Security for NTMS API
@@ -643,7 +700,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI GetNtmsObjectSecurity(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1658,6 +1717,7 @@ DWORD WINAPI GetNtmsObjectSecurity(
+@@ -1658,11 +1721,12 @@
      LPDWORD lpnLengthNeeded
      );
  
@@ -651,7 +708,13 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SetNtmsObjectSecurity(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1696,6 +1756,7 @@ enum NtmsAccessMask {
+     DWORD dwType,
+-    SECURITY_INFORMATION SecurityInformation,
++    _Win32_AssociatedEnum_(OBJECT_SECURITY_INFORMATION) SECURITY_INFORMATION SecurityInformation,
+     PSECURITY_DESCRIPTOR lpSecurityDescriptor
+     );
+ 
+@@ -1696,6 +1760,7 @@
  #define NTMS_MAXATTR_NAMELEN        32
  
  // Object extensions for NTMS API
@@ -659,7 +722,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI GetNtmsObjectAttributeA(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1705,6 +1766,7 @@ DWORD WINAPI GetNtmsObjectAttributeA(
+@@ -1705,6 +1770,7 @@
      LPDWORD lpAttributeSize
      );
  
@@ -667,7 +730,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI GetNtmsObjectAttributeW(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1714,6 +1776,7 @@ DWORD WINAPI GetNtmsObjectAttributeW(
+@@ -1714,6 +1780,7 @@
      LPDWORD lpAttributeSize
      );
  
@@ -675,7 +738,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SetNtmsObjectAttributeA(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1723,6 +1786,7 @@ DWORD WINAPI SetNtmsObjectAttributeA(
+@@ -1723,6 +1790,7 @@
      DWORD dwAttributeSize
      );
  
@@ -683,7 +746,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SetNtmsObjectAttributeW(
      HANDLE hSession,
      LPNTMS_GUID lpObjectId,
-@@ -1748,74 +1812,83 @@ enum NtmsUIOperations {
+@@ -1748,74 +1816,83 @@
      NTMS_UIOPERATION_MAX
  };
  
@@ -775,7 +838,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI SatisfyNtmsOperatorRequest(
      HANDLE hSession,
      LPNTMS_GUID lpRequestId
-@@ -1835,7 +1908,7 @@ enum NtmsNotificationOperations {
+@@ -1835,7 +1912,7 @@
  
  // object notification
  typedef struct _NTMS_NOTIFICATIONINFORMATION {
@@ -784,7 +847,7 @@ index 9b3376d2..488137cb 100644
      NTMS_GUID ObjectId;
  } NTMS_NOTIFICATIONINFORMATION, *LPNTMS_NOTIFICATIONINFORMATION;
  
-@@ -1843,10 +1916,12 @@ typedef struct _NTMS_NOTIFICATIONINFORMATION {
+@@ -1843,10 +1920,12 @@
  
  #ifndef MIDL_PASS
  
@@ -797,7 +860,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI ExportNtmsDatabase(
      HANDLE hSession
      );
-@@ -1855,10 +1930,12 @@ DWORD WINAPI ExportNtmsDatabase(
+@@ -1855,10 +1934,12 @@
  
  #ifndef MIDL_PASS
  
@@ -810,7 +873,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI ExportNtmsDatabase(
      HANDLE hSession
      );
-@@ -1867,17 +1944,21 @@ DWORD WINAPI ExportNtmsDatabase(
+@@ -1867,17 +1948,21 @@
  
  #ifndef MIDL_PASS
  
@@ -832,7 +895,7 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI CloseNtmsNotification(
      HANDLE hNotification
      );
-@@ -1886,6 +1967,7 @@ DWORD WINAPI CloseNtmsNotification(
+@@ -1886,6 +1971,7 @@
  
  #ifndef MIDL_PASS
  
@@ -840,19 +903,21 @@ index 9b3376d2..488137cb 100644
  DWORD WINAPI EjectDiskFromSADriveW(
      LPCWSTR lpComputerName,
      LPCWSTR lpAppName,
-@@ -1893,9 +1975,10 @@ DWORD WINAPI EjectDiskFromSADriveW(
+@@ -1893,9 +1979,10 @@
      HWND hWnd,
      LPCWSTR lpTitle,
      LPCWSTR lpMessage,
 -    DWORD dwOptions
+-    );
+-
 +    _Win32_AssociatedEnum_(NtmsEjectOperation) DWORD dwOptions
-     );
- 
++    );
++
 +_Win32_SupportedOS_WindowsVista_
  DWORD WINAPI EjectDiskFromSADriveA(
      LPCSTR lpComputerName,
      LPCSTR lpAppName,
-@@ -1903,13 +1986,14 @@ DWORD WINAPI EjectDiskFromSADriveA(
+@@ -1903,13 +1990,14 @@
      HWND hWnd,
      LPCSTR lpTitle,
      LPCSTR lpMessage,
@@ -868,7 +933,7 @@ index 9b3376d2..488137cb 100644
  DWORD
  WINAPI
  GetVolumesFromDriveW(
-@@ -1918,6 +2002,7 @@ GetVolumesFromDriveW(
+@@ -1918,6 +2006,7 @@
      _Outptr_ LPWSTR *DriveLetterBufferPtr
      );
  

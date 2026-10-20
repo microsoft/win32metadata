@@ -1,5 +1,5 @@
 diff --git a/um/windowsstoragecom.idl b/um/windowsstoragecom.idl
-index 435f2a19..9bce1398 100644
+index 435f2a19..e9596624 100644
 --- a/um/windowsstoragecom.idl
 +++ b/um/windowsstoragecom.idl
 @@ -4,6 +4,7 @@
@@ -34,7 +34,27 @@ index 435f2a19..9bce1398 100644
  [
      object,
      uuid(A65C9109-42AB-4B94-A7B1-DD2E4E68515E),
-@@ -91,6 +95,7 @@ typedef [v1_enum] enum HANDLE_CREATION_OPTIONS
+@@ -50,6 +54,9 @@ cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
+ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
+ 
+ // This enum is a subset of the FILE_FLAG_* constants that are valid for use inside an app-container setting.
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef [v1_enum] enum HANDLE_OPTIONS
+ {
+     HO_NONE                  = 0x00000000,
+@@ -61,6 +68,9 @@ typedef [v1_enum] enum HANDLE_OPTIONS
+     HO_OVERLAPPED            = 0x40000000,
+     HO_WRITE_THROUGH         = 0x80000000,
+ } HANDLE_OPTIONS;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(HANDLE_OPTIONS);")
+ 
+ typedef [v1_enum] enum HANDLE_ACCESS_OPTIONS
+@@ -91,6 +101,7 @@ typedef [v1_enum] enum HANDLE_CREATION_OPTIONS
      HCO_TRUNCATE_EXISTING = 0x5,
  } HANDLE_CREATION_OPTIONS;
  
@@ -42,7 +62,7 @@ index 435f2a19..9bce1398 100644
  [
      object,
      uuid(826ABE3D-3ACD-47D3-84F2-88AAEDCF6304),
-@@ -100,6 +105,7 @@ interface IOplockBreakingHandler : IUnknown
+@@ -100,6 +111,7 @@ interface IOplockBreakingHandler : IUnknown
      HRESULT OplockBreaking();
  }
  
@@ -50,7 +70,7 @@ index 435f2a19..9bce1398 100644
  [
      object,
      uuid(5CA296B2-2C25-4D22-B785-B885C8201E6A),
-@@ -115,6 +121,7 @@ interface IStorageItemHandleAccess : IUnknown
+@@ -115,6 +127,7 @@ interface IStorageItemHandleAccess : IUnknown
          );
  }
  

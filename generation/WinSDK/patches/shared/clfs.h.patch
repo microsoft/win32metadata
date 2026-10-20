@@ -1,0 +1,40 @@
+diff --git a/shared/clfs.h b/shared/clfs.h
+index f987975a..f4ba4fa9 100644
+--- a/shared/clfs.h
++++ b/shared/clfs.h
+@@ -930,7 +930,7 @@ extern "C"
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API BOOLEAN NTAPI
+-ClfsLsnEqual
++_Win32_SupportedOS_WindowsVista_ ClfsLsnEqual
+ (
+     _In_ const CLFS_LSN* plsn1,
+     _In_ const CLFS_LSN* plsn2
+@@ -959,7 +959,7 @@ ClfsLsnEqual
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API BOOLEAN NTAPI
+-ClfsLsnLess
++_Win32_SupportedOS_WindowsVista_ ClfsLsnLess
+ (
+     _In_ const CLFS_LSN* plsn1,
+     _In_ const CLFS_LSN* plsn2
+@@ -988,7 +988,7 @@ ClfsLsnLess
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API BOOLEAN NTAPI
+-ClfsLsnGreater
++_Win32_SupportedOS_WindowsVista_ ClfsLsnGreater
+ (
+     _In_ const CLFS_LSN* plsn1,
+     _In_ const CLFS_LSN* plsn2
+@@ -1017,7 +1017,7 @@ ClfsLsnGreater
+ //-----------------------------------------------------------------------------
+ 
+ CLFSUSER_API BOOLEAN NTAPI
+-ClfsLsnNull
++_Win32_SupportedOS_WindowsVista_ ClfsLsnNull
+ (
+     _In_ const CLFS_LSN* plsn
+ );

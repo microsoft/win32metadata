@@ -1,5 +1,5 @@
 diff --git a/um/winineti.h b/um/winineti.h
-index d951d495..921a6563 100644
+index 63c850c4..d92ffe1c 100644
 --- a/um/winineti.h
 +++ b/um/winineti.h
 @@ -1042,6 +1042,8 @@ URLCACHEAPI_(DWORD) CommitUrlCacheEntryBinaryBlob(
@@ -104,6 +104,15 @@ index d951d495..921a6563 100644
  INTERNETAPI_(DWORD) InternetDialA(
      _In_ HWND     hwndParent,
      _In_opt_ LPSTR   lpszConnectoid,
+@@ -1745,7 +1783,7 @@ INTERNETAPI_(DWORD) InternetDialA(
+     _Reserved_ DWORD    dwReserved
+     );
+ 
+-INTERNETAPI_(DWORD) InternetDialW(
++INTERNETAPI_(DWORD) _Win32_SupportedOS_Windows2000_ InternetDialW(
+     _In_ HWND     hwndParent,
+     _In_opt_ LPWSTR   lpszConnectoid,
+     _In_ DWORD    dwFlags,
 @@ -1759,6 +1797,7 @@ INTERNETAPI_(DWORD) InternetDialW(
  #ifdef _WINX32_
  #define InternetDial  InternetDialA
@@ -112,6 +121,15 @@ index d951d495..921a6563 100644
  INTERNETAPI_(DWORD) InternetDial(
      _In_ HWND     hwndParent,
      _In_opt_ LPSTR   lpszConnectoid,
+@@ -1775,7 +1814,7 @@ INTERNETAPI_(DWORD) InternetDial(
+ #define INTERNET_DIAL_SHOW_OFFLINE     0x4000
+ #define INTERNET_DIAL_UNATTENDED       0x8000
+ 
+-INTERNETAPI_(DWORD) InternetHangUp(
++INTERNETAPI_(DWORD) _Win32_SupportedOS_Windows2000_ InternetHangUp(
+     _In_   DWORD_PTR    dwConnection,
+     _Reserved_ DWORD        dwReserved);
+ 
 @@ -1783,12 +1822,16 @@ INTERNETAPI_(DWORD) InternetHangUp(
  #define INTERENT_GOONLINE_NOPROMPT 0x00000002
  #define INTERENT_GOONLINE_MASK     0x00000003

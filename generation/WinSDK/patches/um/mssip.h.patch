@@ -1,8 +1,23 @@
-diff --git a/um/mssip.h b/um/mssip.h
-index 9ba32f87..2a9185fd 100644
 --- a/um/mssip.h
 +++ b/um/mssip.h
-@@ -275,6 +275,8 @@ typedef struct SIP_INDIRECT_DATA_
+@@ -14,6 +14,7 @@
+ 
+ #ifndef MSSIP_H
+ #define MSSIP_H
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ #pragma region Desktop Family or OneCore Family
+@@ -50,6 +51,8 @@
+ #define SPC_DIGEST_SIGN_FLAG                    0x400
+ // 0x1000 and 0x2000 are used by SIG_APPEND and SIG_SEAL defined in signer.w 
+ #define SPC_DIGEST_SIGN_EX_FLAG                 0x4000
++
++_Win32_FlagsEnum_(SIGNER_SIGN_FLAGS, ULONG, SPC_INC_PE_RESOURCES_FLAG, SPC_INC_PE_DEBUG_INFO_FLAG, SPC_INC_PE_IMPORT_ADDR_TABLE_FLAG, SPC_EXC_PE_PAGE_HASHES_FLAG, SPC_INC_PE_PAGE_HASHES_FLAG, SPC_DIGEST_GENERATE_FLAG, SPC_DIGEST_SIGN_FLAG, SPC_DIGEST_SIGN_EX_FLAG);
+ 
+ // Define relaxed PE marker check semantic.
+ #define SPC_RELAXED_PE_MARKER_CHECK             0x800
+@@ -275,6 +278,8 @@
  //                                      enough to hold the data.  pcbSignedDataMsg
  //                                      contains the required size.
  //
@@ -11,7 +26,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPGetSignedDataMsg(
                                  IN      SIP_SUBJECTINFO *pSubjectInfo,
                                  OUT     DWORD           *pdwEncodingType,
-@@ -321,6 +323,8 @@ typedef BOOL (WINAPI * pCryptSIPGetSignedDataMsg)(
+@@ -321,6 +326,8 @@
  //                                      indirect data (hash).  Then, call the
  //                                      'put' function again.
  //
@@ -20,7 +35,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPPutSignedDataMsg(
                                  IN      SIP_SUBJECTINFO *pSubjectInfo,
                                  IN      DWORD           dwEncodingType,
-@@ -356,6 +360,8 @@ typedef BOOL (WINAPI * pCryptSIPPutSignedDataMsg)(
+@@ -356,6 +363,8 @@
  //      ERROR_BAD_FORMAT:               file/data format is not correct
  //                                      for the requested SIP.
  //
@@ -29,7 +44,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPCreateIndirectData(
                                  IN      SIP_SUBJECTINFO     *pSubjectInfo,
                                  IN OUT  DWORD               *pcbIndirectData,
-@@ -389,6 +395,8 @@ typedef BOOL (WINAPI * pCryptSIPCreateIndirectData)(
+@@ -389,6 +398,8 @@
  //      ERROR_INVALID_PARAMETER:        bad argument passed in
  //      ERROR_BAD_FORMAT:               file/data format is not correct
  //                                      for the requested SIP.
@@ -38,7 +53,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPVerifyIndirectData(
                                  IN      SIP_SUBJECTINFO     *pSubjectInfo,
                                  IN      SIP_INDIRECT_DATA   *pIndirectData);
-@@ -415,6 +423,8 @@ typedef BOOL (WINAPI * pCryptSIPVerifyIndirectData)(
+@@ -415,6 +426,8 @@
  //      ERROR_BAD_FORMAT:               file/data format is not correct
  //                                      for the requested SIP.
  //
@@ -47,7 +62,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPRemoveSignedDataMsg(
                                  IN      SIP_SUBJECTINFO     *pSubjectInfo,
                                  IN      DWORD               dwIndex);
-@@ -490,6 +500,8 @@ typedef struct SIP_ADD_NEWPROVIDER_
+@@ -490,6 +503,8 @@
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()
  //
@@ -56,7 +71,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPLoad(IN const GUID               *pgSubject,     // GUID for the requried sip
                                  IN DWORD                    dwFlags,        // Reserved - MUST BE ZERO
                                  IN OUT SIP_DISPATCH_INFO    *pSipDispatch); // Table of functions
-@@ -505,6 +517,8 @@ extern BOOL WINAPI CryptSIPLoad(IN const GUID               *pgSubject,     // G
+@@ -505,6 +520,8 @@
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()
  //
@@ -65,7 +80,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPRetrieveSubjectGuid(IN LPCWSTR FileName,   // wide file name
                                                 IN OPTIONAL HANDLE hFileIn,     // or handle of open file
                                                 OUT GUID *pgSubject);           // defined SIP's GUID
-@@ -522,6 +536,8 @@ extern BOOL WINAPI CryptSIPRetrieveSubjectGuid(IN LPCWSTR FileName,   // wide fi
+@@ -522,6 +539,8 @@
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()
  //
@@ -74,7 +89,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPRetrieveSubjectGuidForCatalogFile(IN LPCWSTR FileName,   // wide file name
                                                               IN OPTIONAL HANDLE hFileIn,     // or handle of open file
                                                               OUT GUID *pgSubject);           // defined SIP's GUID
-@@ -536,6 +552,8 @@ extern BOOL WINAPI CryptSIPRetrieveSubjectGuidForCatalogFile(IN LPCWSTR FileName
+@@ -536,6 +555,8 @@
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()
  //
@@ -83,7 +98,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPAddProvider(IN SIP_ADD_NEWPROVIDER *psNewProv);
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -547,6 +565,8 @@ extern BOOL WINAPI CryptSIPAddProvider(IN SIP_ADD_NEWPROVIDER *psNewProv);
+@@ -547,6 +568,8 @@
  //      TRUE:                           No fatal errors
  //      FALSE:                          Errors occured.  See GetLastError()
  //
@@ -92,7 +107,7 @@ index 9ba32f87..2a9185fd 100644
  extern BOOL WINAPI CryptSIPRemoveProvider(IN GUID *pgProv);
  
  //////////////////////////////////////////////////////////////////////////////
-@@ -560,6 +580,7 @@ extern BOOL WINAPI CryptSIPRemoveProvider(IN GUID *pgProv);
+@@ -560,6 +583,7 @@
  //      FALSE:                          Errors occured.  See GetLastError()
  //  
  #if (NTDDI_VERSION >= NTDDI_WIN8)

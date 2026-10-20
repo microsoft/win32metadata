@@ -1,7 +1,16 @@
 diff --git a/um/iphlpapi.h b/um/iphlpapi.h
+index 15b1d4a0..1e3eee4d 100644
 --- a/um/iphlpapi.h
 +++ b/um/iphlpapi.h
-@@ -78,6 +78,7 @@ extern "C" {
+@@ -18,6 +18,7 @@ Abstract:
+ #if _MSC_VER > 1000
+ #pragma once
+ #endif
++#include <sal.h>
+ #include <winapifamily.h>
+ 
+ //////////////////////////////////////////////////////////////////////////////
+@@ -78,6 +79,7 @@ extern "C" {
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -9,7 +18,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -93,6 +94,7 @@ GetNumberOfInterfaces(
+@@ -93,6 +95,7 @@ GetNumberOfInterfaces(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -17,7 +26,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -106,6 +108,7 @@ GetIfEntry(
+@@ -106,6 +109,7 @@ GetIfEntry(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -25,7 +34,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -121,6 +124,7 @@ GetIfTable(
+@@ -121,6 +125,7 @@ GetIfTable(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -33,7 +42,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -136,6 +140,7 @@ GetIpAddrTable(
+@@ -136,6 +141,7 @@ GetIpAddrTable(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -41,7 +50,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -151,6 +156,7 @@ GetIpNetTable(
+@@ -151,6 +157,7 @@ GetIpNetTable(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -49,7 +58,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -172,6 +178,7 @@ GetIpForwardTable(
+@@ -172,6 +179,7 @@ GetIpForwardTable(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -57,7 +66,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -181,6 +188,7 @@ GetTcpTable(
+@@ -181,6 +189,7 @@ GetTcpTable(
      _In_                             BOOL          Order
      );
  
@@ -65,7 +74,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -211,13 +219,14 @@ GetExtendedTcpTable(
+@@ -211,13 +220,14 @@ GetExtendedTcpTable(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -81,7 +90,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
      _Inout_                PDWORD                        pdwSize
      );
  
-@@ -227,6 +236,7 @@ GetOwnerModuleFromTcpEntry(
+@@ -227,6 +237,7 @@ GetOwnerModuleFromTcpEntry(
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -89,7 +98,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -236,6 +246,7 @@ GetUdpTable(
+@@ -236,6 +247,7 @@ GetUdpTable(
      _In_                             BOOL          Order
      );
  
@@ -97,7 +106,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -254,17 +265,19 @@ GetExtendedUdpTable(
+@@ -254,17 +266,19 @@ GetExtendedUdpTable(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -118,7 +127,25 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -318,6 +331,7 @@ AllocateAndGetUdpExTableFromStack(
+@@ -287,7 +301,7 @@ GetTcpTable2(
+ //
+ 
+ DWORD
+-AllocateAndGetTcpExTableFromStack(
++_Win32_SupportedOS_WindowsXP_ AllocateAndGetTcpExTableFromStack(
+     _Outptr_ PVOID         *ppTcpTable,
+     _In_        BOOL          bOrder,
+     _In_        HANDLE        hHeap,
+@@ -296,7 +310,7 @@ AllocateAndGetTcpExTableFromStack(
+     );
+ 
+ DWORD
+-AllocateAndGetUdpExTableFromStack(
++_Win32_SupportedOS_WindowsXP_ AllocateAndGetUdpExTableFromStack(
+     _Outptr_ PVOID         *ppUdpTable,
+     _In_        BOOL          bOrder,
+     _In_        HANDLE        hHeap,
+@@ -318,6 +332,7 @@ AllocateAndGetUdpExTableFromStack(
  //
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
@@ -126,7 +153,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -327,6 +341,7 @@ GetTcp6Table(
+@@ -327,6 +342,7 @@ GetTcp6Table(
      _In_                         BOOL           Order
      );
  
@@ -134,7 +161,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -340,6 +355,7 @@ GetTcp6Table2(
+@@ -340,6 +356,7 @@ GetTcp6Table2(
  
  #ifdef WINAPI
  
@@ -142,7 +169,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -357,6 +373,7 @@ GetPerTcpConnectionEStats(
+@@ -357,6 +374,7 @@ GetPerTcpConnectionEStats(
      _In_ ULONG RodSize
      );
  
@@ -150,7 +177,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -371,6 +388,7 @@ SetPerTcpConnectionEStats(
+@@ -371,6 +389,7 @@ SetPerTcpConnectionEStats(
  
  #ifdef _WS2IPDEF_
  
@@ -158,7 +185,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -388,6 +406,7 @@ GetPerTcp6ConnectionEStats(
+@@ -388,6 +407,7 @@ GetPerTcp6ConnectionEStats(
      _In_  ULONG RodSize
      );
  
@@ -166,7 +193,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -404,16 +423,18 @@ SetPerTcp6ConnectionEStats(
+@@ -404,16 +424,18 @@ SetPerTcp6ConnectionEStats(
  
  #endif // WINAPI
  
@@ -186,7 +213,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -423,13 +444,14 @@ GetUdp6Table(
+@@ -423,13 +445,14 @@ GetUdp6Table(
      _In_                         BOOL           Order
      );
  
@@ -202,7 +229,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
      _Inout_                   PDWORD                        pdwSize
      );
  
-@@ -455,6 +477,7 @@ GetOwnerModuleFromPidAndInfo(
+@@ -455,6 +478,7 @@ GetOwnerModuleFromPidAndInfo(
  //////////////////////////////////////////////////////////////////////////////
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -210,7 +237,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -470,6 +493,7 @@ GetIpStatistics(
+@@ -470,6 +494,7 @@ GetIpStatistics(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -218,7 +245,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -485,6 +509,7 @@ GetIcmpStatistics(
+@@ -485,6 +510,7 @@ GetIcmpStatistics(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -226,7 +253,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -492,6 +517,7 @@ GetTcpStatistics(
+@@ -492,6 +518,7 @@ GetTcpStatistics(
      _Out_ PMIB_TCPSTATS Statistics
      );
  
@@ -234,7 +261,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -501,6 +527,7 @@ GetUdpStatistics(
+@@ -501,6 +528,7 @@ GetUdpStatistics(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -242,7 +269,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -517,6 +544,7 @@ SetIpStatisticsEx(
+@@ -517,6 +545,7 @@ SetIpStatisticsEx(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WINXP)
@@ -250,7 +277,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -525,6 +553,7 @@ GetIpStatisticsEx(
+@@ -525,6 +554,7 @@ GetIpStatisticsEx(
      _In_  ULONG Family
      );
  
@@ -258,7 +285,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -533,6 +562,7 @@ GetIcmpStatisticsEx(
+@@ -533,6 +563,7 @@ GetIcmpStatisticsEx(
      _In_  ULONG Family
      );
  
@@ -266,7 +293,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -541,6 +571,7 @@ GetTcpStatisticsEx(
+@@ -541,6 +572,7 @@ GetTcpStatisticsEx(
      _In_  ULONG Family
      );
  
@@ -274,7 +301,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -551,6 +582,7 @@ GetUdpStatisticsEx(
+@@ -551,6 +583,7 @@ GetUdpStatisticsEx(
  #endif
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
@@ -282,7 +309,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -559,6 +591,7 @@ GetTcpStatisticsEx2(
+@@ -559,6 +592,7 @@ GetTcpStatisticsEx2(
      _In_  ULONG Family
      );
  
@@ -290,7 +317,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -583,6 +616,7 @@ GetUdpStatisticsEx2(
+@@ -583,6 +617,7 @@ GetUdpStatisticsEx2(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -298,7 +325,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -600,6 +634,7 @@ SetIfEntry(
+@@ -600,6 +635,7 @@ SetIfEntry(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -306,7 +333,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -607,6 +642,7 @@ CreateIpForwardEntry(
+@@ -607,6 +643,7 @@ CreateIpForwardEntry(
      _In_ PMIB_IPFORWARDROW pRoute
      );
  
@@ -314,7 +341,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -614,6 +650,7 @@ SetIpForwardEntry(
+@@ -614,6 +651,7 @@ SetIpForwardEntry(
      _In_ PMIB_IPFORWARDROW pRoute
      );
  
@@ -322,7 +349,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -632,6 +669,7 @@ DeleteIpForwardEntry(
+@@ -632,6 +670,7 @@ DeleteIpForwardEntry(
  //////////////////////////////////////////////////////////////////////////////
  
  #if (NTDDI_VERSION >= NTDDI_WIN2K)
@@ -330,7 +357,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -646,6 +684,7 @@ SetIpStatistics(
+@@ -646,6 +685,7 @@ SetIpStatistics(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -338,7 +365,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -661,6 +700,7 @@ SetIpTTL(
+@@ -661,6 +701,7 @@ SetIpTTL(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -346,7 +373,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -668,6 +708,7 @@ CreateIpNetEntry(
+@@ -668,6 +709,7 @@ CreateIpNetEntry(
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -354,7 +381,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -675,6 +716,7 @@ SetIpNetEntry(
+@@ -675,6 +717,7 @@ SetIpNetEntry(
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -362,7 +389,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -682,6 +724,7 @@ DeleteIpNetEntry(
+@@ -682,6 +725,7 @@ DeleteIpNetEntry(
      _In_ PMIB_IPNETROW    pArpEntry
      );
  
@@ -370,7 +397,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -698,6 +741,7 @@ FlushIpNetTable(
+@@ -698,6 +742,7 @@ FlushIpNetTable(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -378,7 +405,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -707,6 +751,7 @@ CreateProxyArpEntry(
+@@ -707,6 +752,7 @@ CreateProxyArpEntry(
      _In_  DWORD   dwIfIndex
      );
  
@@ -386,7 +413,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -724,6 +769,7 @@ DeleteProxyArpEntry(
+@@ -724,6 +770,7 @@ DeleteProxyArpEntry(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -394,7 +421,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -731,6 +777,7 @@ SetTcpEntry(
+@@ -731,6 +778,7 @@ SetTcpEntry(
      _In_ PMIB_TCPROW pTcpRow
      );
  
@@ -402,7 +429,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -751,6 +798,7 @@ GetUniDirectionalAdapterInfo(
+@@ -751,6 +799,7 @@ GetUniDirectionalAdapterInfo(
  #ifndef NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
  #define NHPALLOCATEANDGETINTERFACEINFOFROMSTACK_DEFINED
  
@@ -410,7 +437,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -771,6 +819,7 @@ NhpAllocateAndGetInterfaceInfoFromStack(
+@@ -771,6 +820,7 @@ NhpAllocateAndGetInterfaceInfoFromStack(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -418,7 +445,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -787,6 +836,7 @@ GetBestInterface(
+@@ -787,6 +837,7 @@ GetBestInterface(
  
  #pragma warning(push)
  #pragma warning(disable:4115)
@@ -426,7 +453,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -812,6 +862,7 @@ GetBestInterfaceEx(
+@@ -812,6 +863,7 @@ GetBestInterfaceEx(
  //                                                                          //
  //////////////////////////////////////////////////////////////////////////////
  
@@ -434,7 +461,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -821,6 +872,7 @@ GetBestRoute(
+@@ -821,6 +873,7 @@ GetBestRoute(
      _Out_     PMIB_IPFORWARDROW   pBestRoute
      );
  
@@ -442,7 +469,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -829,6 +881,7 @@ NotifyAddrChange(
+@@ -829,6 +882,7 @@ NotifyAddrChange(
      _In_  LPOVERLAPPED overlapped
      );
  
@@ -450,7 +477,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -837,6 +890,7 @@ NotifyRouteChange(
+@@ -837,6 +891,7 @@ NotifyRouteChange(
      _In_  LPOVERLAPPED overlapped
      );
  
@@ -458,7 +485,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -844,6 +898,7 @@ CancelIPChangeNotify(
+@@ -844,6 +899,7 @@ CancelIPChangeNotify(
      _In_  LPOVERLAPPED notifyOverlapped
      );
  
@@ -466,7 +493,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -852,6 +907,7 @@ GetAdapterIndex(
+@@ -852,6 +908,7 @@ GetAdapterIndex(
      _Inout_ PULONG IfIndex
      );
  
@@ -474,7 +501,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -863,6 +919,7 @@ AddIPAddress(
+@@ -863,6 +920,7 @@ AddIPAddress(
      _Out_ PULONG  NTEInstance
      );
  
@@ -482,7 +509,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -877,6 +934,8 @@ DeleteIPAddress(
+@@ -877,6 +935,8 @@ DeleteIPAddress(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
  #if (NTDDI_VERSION >= NTDDI_WIN2KSP1)
@@ -491,7 +518,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -892,14 +951,16 @@ GetNetworkParams(
+@@ -892,14 +952,16 @@ GetNetworkParams(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -509,7 +536,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  PIP_ADAPTER_ORDER_MAP
  WINAPI
-@@ -920,6 +981,7 @@ GetAdapterOrderMap(
+@@ -920,6 +982,7 @@ GetAdapterOrderMap(
  // The following functions require Winsock2.
  //
  
@@ -517,7 +544,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -927,19 +989,20 @@ GetAdaptersAddresses(
+@@ -927,19 +990,20 @@ GetAdaptersAddresses(
      _In_ ULONG Family,
      _In_ ULONG Flags,
      _Reserved_ PVOID Reserved,
@@ -540,7 +567,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
      _Inout_                         PULONG               pOutBufLen
      );
  #endif
-@@ -1178,6 +1241,7 @@ CancelIfTimestampConfigChange(
+@@ -1178,6 +1242,7 @@ CancelIfTimestampConfigChange(
  #pragma region Desktop Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
  
@@ -548,7 +575,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1185,6 +1249,7 @@ IpReleaseAddress(
+@@ -1185,6 +1250,7 @@ IpReleaseAddress(
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -556,7 +583,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1192,6 +1257,7 @@ IpRenewAddress(
+@@ -1192,6 +1258,7 @@ IpRenewAddress(
      _In_ PIP_ADAPTER_INDEX_MAP  AdapterInfo
      );
  
@@ -564,7 +591,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1202,6 +1268,8 @@ SendARP(
+@@ -1202,6 +1269,8 @@ SendARP(
      _Inout_ PULONG  PhyAddrLen
      );
  
@@ -573,7 +600,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  BOOL
  WINAPI
-@@ -1212,6 +1280,7 @@ GetRTTAndHopCount(
+@@ -1212,6 +1281,7 @@ GetRTTAndHopCount(
      _Out_ PULONG RTT
      );
  
@@ -581,7 +608,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1219,6 +1288,7 @@ GetFriendlyIfIndex(
+@@ -1219,6 +1289,7 @@ GetFriendlyIfIndex(
      _In_ DWORD IfIndex
      );
  
@@ -589,7 +616,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1227,6 +1297,7 @@ EnableRouter(
+@@ -1227,6 +1298,7 @@ EnableRouter(
      _Out_ OVERLAPPED* pOverlapped
      );
  
@@ -597,7 +624,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1235,6 +1306,7 @@ UnenableRouter(
+@@ -1235,6 +1307,7 @@ UnenableRouter(
      _Out_opt_ LPDWORD lpdwEnableCount
      );
  
@@ -605,7 +632,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1243,6 +1315,7 @@ DisableMediaSense(
+@@ -1243,6 +1316,7 @@ DisableMediaSense(
      _In_  OVERLAPPED *pOverLapped
      );
  
@@ -613,7 +640,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1253,6 +1326,7 @@ RestoreMediaSense(
+@@ -1253,6 +1327,7 @@ RestoreMediaSense(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  
@@ -621,7 +648,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  DWORD
  WINAPI
-@@ -1264,6 +1338,7 @@ GetIpErrorString(
+@@ -1264,6 +1339,7 @@ GetIpErrorString(
  
  #if (NTDDI_VERSION >= NTDDI_VISTA)
  #ifdef _WS2DEF_
@@ -629,7 +656,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1279,6 +1354,7 @@ ResolveNeighbor(
+@@ -1279,6 +1355,7 @@ ResolveNeighbor(
  // Port reservation API routines.
  //
  
@@ -637,7 +664,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1288,6 +1364,7 @@ CreatePersistentTcpPortReservation(
+@@ -1288,6 +1365,7 @@ CreatePersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -645,7 +672,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1297,6 +1374,7 @@ CreatePersistentUdpPortReservation(
+@@ -1297,6 +1375,7 @@ CreatePersistentUdpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -653,7 +680,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1305,6 +1383,7 @@ DeletePersistentTcpPortReservation(
+@@ -1305,6 +1384,7 @@ DeletePersistentTcpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -661,7 +688,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1313,6 +1392,7 @@ DeletePersistentUdpPortReservation(
+@@ -1313,6 +1393,7 @@ DeletePersistentUdpPortReservation(
      _In_ USHORT NumberOfPorts
      );
  
@@ -669,7 +696,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1322,6 +1402,7 @@ LookupPersistentTcpPortReservation(
+@@ -1322,6 +1403,7 @@ LookupPersistentTcpPortReservation(
      _Out_ PULONG64 Token
      );
  
@@ -677,7 +704,7 @@ diff --git a/um/iphlpapi.h b/um/iphlpapi.h
  IPHLPAPI_DLL_LINKAGE
  ULONG
  WINAPI
-@@ -1427,6 +1508,7 @@ typedef struct NET_ADDRESS_INFO_
+@@ -1427,6 +1509,7 @@ typedef struct NET_ADDRESS_INFO_
  
  } NET_ADDRESS_INFO, *PNET_ADDRESS_INFO;
  

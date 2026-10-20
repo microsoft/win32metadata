@@ -1,8 +1,14 @@
-diff --git a/um/lmshare.h b/um/lmshare.h
-index 50827309..f7528d7f 100644
 --- a/um/lmshare.h
 +++ b/um/lmshare.h
-@@ -51,6 +51,7 @@ extern "C" {
+@@ -24,6 +24,7 @@
+     You must include <windef.h> and <lmcons.h> before this file.
+ 
+ --*/
++#include <sal.h>
+ 
+ #include <winapifamily.h>
+ 
+@@ -51,6 +52,7 @@
  // Function Prototypes - Share
  //
  
@@ -10,7 +16,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetShareAdd(
-@@ -63,6 +64,7 @@ NetShareAdd(
+@@ -63,6 +65,7 @@
      _Out_opt_ LPDWORD parm_err
      );
  
@@ -18,7 +24,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -99,6 +101,7 @@ NetShareEnumSticky(
+@@ -99,6 +102,7 @@
      _Inout_opt_ LPDWORD resume_handle
      );
  
@@ -26,7 +32,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -116,6 +119,7 @@ NetShareGetInfo(
+@@ -116,6 +120,7 @@
      LPBYTE *bufptr
      );
  
@@ -34,7 +40,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetShareSetInfo(
-@@ -134,6 +138,7 @@ NetShareSetInfo(
+@@ -134,6 +139,7 @@
      _Out_opt_ LPDWORD parm_err
      );
  
@@ -42,7 +48,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetShareDel(
-@@ -150,6 +155,7 @@ NetShareDelSticky(
+@@ -150,6 +156,7 @@
      _Reserved_ DWORD reserved
      );
  
@@ -50,7 +56,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetShareCheck(
-@@ -158,6 +164,7 @@ NetShareCheck(
+@@ -158,6 +165,7 @@
      _Out_ LPDWORD type
      );
  
@@ -58,7 +64,55 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetShareDelEx(
-@@ -412,6 +419,7 @@ typedef struct _SERVER_ALIAS_INFO_0 {
+@@ -185,11 +193,14 @@
+     LMSTR   shi1_remark;
+ } SHARE_INFO_1, *PSHARE_INFO_1, *LPSHARE_INFO_1;
+ 
++#if defined(WIN32METADATA)
++typedef ULONG SHARE_INFO_PERMISSIONS;
++#endif
+ typedef struct _SHARE_INFO_2 {
+     LMSTR   shi2_netname;
+     DWORD   shi2_type;
+     LMSTR   shi2_remark;
+-    DWORD   shi2_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD   shi2_permissions;
+     DWORD   shi2_max_uses;
+     DWORD   shi2_current_uses;
+     LMSTR   shi2_path;
+@@ -203,11 +214,14 @@
+     DWORD   shi501_flags;
+ } SHARE_INFO_501, *PSHARE_INFO_501, *LPSHARE_INFO_501;
+ 
++#if defined(WIN32METADATA)
++typedef ULONG SHARE_INFO_PERMISSIONS;
++#endif
+ typedef struct _SHARE_INFO_502 {
+     LMSTR     shi502_netname;
+     DWORD     shi502_type;
+     LMSTR     shi502_remark;
+-    DWORD     shi502_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD     shi502_permissions;
+     DWORD     shi502_max_uses;
+     DWORD     shi502_current_uses;
+     LMSTR     shi502_path;
+@@ -216,11 +230,14 @@
+     PSECURITY_DESCRIPTOR  shi502_security_descriptor;
+ } SHARE_INFO_502, *PSHARE_INFO_502, *LPSHARE_INFO_502;
+ 
++#if defined(WIN32METADATA)
++typedef ULONG SHARE_INFO_PERMISSIONS;
++#endif
+ typedef struct _SHARE_INFO_503 {
+     LMSTR     shi503_netname;
+     DWORD     shi503_type;
+     LMSTR     shi503_remark;
+-    DWORD     shi503_permissions;
++    _Win32_AssociatedEnum_(SHARE_INFO_PERMISSIONS) DWORD     shi503_permissions;
+     DWORD     shi503_max_uses;
+     DWORD     shi503_current_uses;
+     LMSTR     shi503_path;
+@@ -412,6 +429,7 @@
  //
  // Function Prototypes Session
  //
@@ -66,7 +120,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -432,6 +440,7 @@ NetSessionEnum(
+@@ -432,6 +450,7 @@
      _Inout_opt_ LPDWORD resume_handle
      );
  
@@ -74,7 +128,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetSessionDel(
-@@ -440,6 +449,7 @@ NetSessionDel(
+@@ -440,6 +459,7 @@
      _In_opt_ LMSTR username
      );
  
@@ -82,17 +136,18 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0 )
  NET_API_STATUS NET_API_FUNCTION
-@@ -463,13 +473,17 @@ typedef struct _SESSION_INFO_0 {
+@@ -462,6 +482,10 @@
+ typedef struct _SESSION_INFO_0 {
      LMSTR     sesi0_cname;              // client name (no backslashes)
  } SESSION_INFO_0, *PSESSION_INFO_0, *LPSESSION_INFO_0;
- 
++
 +#if defined(WIN32METADATA) && defined(__clang__)
 +typedef DWORD SESSION_INFO_USER_FLAGS;
 +#endif
-+
+ 
  typedef struct _SESSION_INFO_1 {
      LMSTR     sesi1_cname;              // client name (no backslashes)
-     LMSTR     sesi1_username;
+@@ -469,7 +493,7 @@
      DWORD     sesi1_num_opens;
      DWORD     sesi1_time;
      DWORD     sesi1_idle_time;
@@ -101,7 +156,7 @@ index 50827309..f7528d7f 100644
  } SESSION_INFO_1, *PSESSION_INFO_1, *LPSESSION_INFO_1;
  
  typedef struct _SESSION_INFO_2 {
-@@ -478,7 +492,7 @@ typedef struct _SESSION_INFO_2 {
+@@ -478,7 +502,7 @@
      DWORD     sesi2_num_opens;
      DWORD     sesi2_time;
      DWORD     sesi2_idle_time;
@@ -110,7 +165,7 @@ index 50827309..f7528d7f 100644
      LMSTR     sesi2_cltype_name;
  } SESSION_INFO_2, *PSESSION_INFO_2, *LPSESSION_INFO_2;
  
-@@ -495,7 +509,7 @@ typedef struct _SESSION_INFO_502 {
+@@ -495,7 +519,7 @@
      DWORD     sesi502_num_opens;
      DWORD     sesi502_time;
      DWORD     sesi502_idle_time;
@@ -119,7 +174,7 @@ index 50827309..f7528d7f 100644
      LMSTR     sesi502_cltype_name;
      LMSTR     sesi502_transport;
  } SESSION_INFO_502, *PSESSION_INFO_502, *LPSESSION_INFO_502;
-@@ -511,6 +525,8 @@ typedef struct _SESSION_INFO_502 {
+@@ -511,6 +535,8 @@
  #define SESS_GUEST          0x00000001  // session is logged on as a guest
  #define SESS_NOENCRYPTION   0x00000002  // session is not using encryption
  
@@ -128,7 +183,7 @@ index 50827309..f7528d7f 100644
  #define SESI1_NUM_ELEMENTS  8
  #define SESI2_NUM_ELEMENTS  9
  
-@@ -528,6 +544,7 @@ typedef struct _SESSION_INFO_502 {
+@@ -528,6 +554,7 @@
  // Function Prototypes - CONNECTION
  //
  
@@ -136,7 +191,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0  || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -575,6 +592,7 @@ typedef struct _CONNECTION_INFO_1 {
+@@ -575,6 +602,7 @@
  // Function Prototypes - FILE
  //
  
@@ -144,7 +199,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  NET_API_STATUS NET_API_FUNCTION
  NetFileClose(
-@@ -582,6 +600,7 @@ NetFileClose(
+@@ -582,6 +610,7 @@
      _In_ DWORD fileid
      );
  
@@ -152,7 +207,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0 || return == ERROR_MORE_DATA )
  NET_API_STATUS NET_API_FUNCTION
-@@ -599,6 +618,7 @@ NetFileEnum(
+@@ -599,6 +628,7 @@
      _Inout_opt_ PDWORD_PTR resume_handle
      );
  
@@ -160,7 +215,7 @@ index 50827309..f7528d7f 100644
  _Check_return_
  _Success_( return == 0)
  NET_API_STATUS NET_API_FUNCTION
-@@ -623,9 +643,13 @@ typedef struct _FILE_INFO_2 {
+@@ -623,9 +653,13 @@
      DWORD     fi2_id;
  } FILE_INFO_2, *PFILE_INFO_2, *LPFILE_INFO_2;
  
@@ -175,7 +230,7 @@ index 50827309..f7528d7f 100644
      DWORD     fi3_num_locks;
      LMSTR     fi3_pathname;
      LMSTR     fi3_username;
-@@ -643,6 +667,9 @@ typedef struct _FILE_INFO_3 {
+@@ -643,6 +677,9 @@
  #define PERM_FILE_WRITE     0x2 // user has write access
  #define PERM_FILE_CREATE    0x4 // user has create access
  
@@ -185,7 +240,7 @@ index 50827309..f7528d7f 100644
  #ifdef __cplusplus
  }
  #endif
-@@ -651,4 +678,3 @@ typedef struct _FILE_INFO_3 {
+@@ -651,4 +688,3 @@
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
  #pragma endregion

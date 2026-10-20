@@ -1,16 +1,17 @@
 diff --git a/um/docobj.idl b/um/docobj.idl
-index 8a1ee2e5..027c6c76 100644
+index 8a1ee2e5..e1199cd2 100644
 --- a/um/docobj.idl
 +++ b/um/docobj.idl
-@@ -6,6 +6,7 @@
+@@ -6,6 +6,8 @@
  //
  //----------------------------------------------------------------------------
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("//=--------------------------------------------------------------------------=")
  cpp_quote("// DocObj.h")
  cpp_quote("//=--------------------------------------------------------------------------=")
-@@ -68,6 +69,7 @@ cpp_quote("//  Interface Definitions")
+@@ -68,6 +70,7 @@ cpp_quote("//  Interface Definitions")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENT_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENT_DEFINED")
@@ -18,7 +19,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcc5-4e68-101b-a2bc-00aa00404770),
-@@ -110,6 +112,7 @@ cpp_quote("#endif")
+@@ -110,6 +113,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENTSITE_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENTSITE_DEFINED")
@@ -26,7 +27,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcc7-4e68-101b-a2bc-00aa00404770),
-@@ -134,6 +137,7 @@ cpp_quote("#endif")
+@@ -134,6 +138,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLEDOCUMENTVIEW_DEFINED")
  cpp_quote("#define _LPOLEDOCUMENTVIEW_DEFINED")
@@ -34,7 +35,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcc6-4e68-101b-a2bc-00aa00404770),
-@@ -198,6 +202,7 @@ cpp_quote("#endif")
+@@ -198,6 +203,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPENUMOLEDOCUMENTVIEWS_DEFINED")
  cpp_quote("#define _LPENUMOLEDOCUMENTVIEWS_DEFINED")
@@ -42,7 +43,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcc8-4e68-101b-a2bc-00aa00404770),
-@@ -241,6 +246,7 @@ cpp_quote("#endif")
+@@ -241,6 +247,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPCONTINUECALLBACK_DEFINED")
  cpp_quote("#define _LPCONTINUECALLBACK_DEFINED")
@@ -50,7 +51,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcca-4e68-101b-a2bc-00aa00404770),
-@@ -269,6 +275,7 @@ cpp_quote("#endif")
+@@ -269,6 +276,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPPRINT_DEFINED")
  cpp_quote("#define _LPPRINT_DEFINED")
@@ -58,7 +59,7 @@ index 8a1ee2e5..027c6c76 100644
  [
          object,
          uuid(b722bcc9-4e68-101b-a2bc-00aa00404770),
-@@ -348,6 +355,7 @@ cpp_quote("#endif")
+@@ -348,6 +356,7 @@ cpp_quote("#endif")
  //----------------------------------------------------------------------------
  cpp_quote("#ifndef _LPOLECOMMANDTARGET_DEFINED")
  cpp_quote("#define _LPOLECOMMANDTARGET_DEFINED")
@@ -66,3 +67,12 @@ index 8a1ee2e5..027c6c76 100644
  [
          //local,
          object,
+@@ -371,7 +380,7 @@ interface IOleCommandTarget : IUnknown
+ 
+         typedef struct _tagOLECMD {
+                 ULONG   cmdID;
+-                DWORD   cmdf;
++                [annotation("_Win32_AssociatedEnum_(OLECMDF)")] DWORD   cmdf;
+         } OLECMD;
+ 
+         typedef struct _tagOLECMDTEXT{

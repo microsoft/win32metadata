@@ -1,0 +1,19 @@
+--- a/um/mshtml.idl
++++ b/um/mshtml.idl
+@@ -5,6 +5,8 @@
+ //*            Copyright(c) Microsoft Corp., 1996-1998               **
+ //*********************************************************************
+ 
++#include <sal.h>
++cpp_quote("#include <sal.h>")
+ midl_pragma warning(disable:2362)   // too many methods in the interface, requires Windows NT 4.0 SP3 or greater
+ 
+ cpp_quote("#include <winapifamily.h>")
+@@ -61587,6 +61589,7 @@
+                         interface IDOMException;
+ };
+ cpp_quote("EXTERN_C const GUID CLSID_CDOMException;")
++_Win32_AnnotateInterface_(IRangeException, _Win32_SupportedOS_Windows7_)
+ [
+     odl,
+     oleautomation,

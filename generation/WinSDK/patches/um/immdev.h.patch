@@ -1,5 +1,5 @@
 diff --git a/um/immdev.h b/um/immdev.h
-index 5295f270..e6f1d4f4 100644
+index 5295f270015bff2e46628499ee78ad48ac54a9f6..a8e0b4d35a7e1c26881ed9bff0535707ff61d4fb 100644
 --- a/um/immdev.h
 +++ b/um/immdev.h
 @@ -7,7 +7,7 @@
@@ -11,7 +11,7 @@ index 5295f270..e6f1d4f4 100644
  
  #ifdef __cplusplus
  extern "C" {
-@@ -215,111 +215,111 @@ typedef BOOL    (CALLBACK* IMCENUMPROC)(HIMC, LPARAM);
+@@ -215,111 +215,111 @@
  #pragma endregion
  
  #endif /* WINVER >= 0x040A */
@@ -37,10 +37,11 @@ index 5295f270..e6f1d4f4 100644
  #endif // !UNICODE
  
 -HWND WINAPI ImmGetDefaultIMEWnd(IN HWND);
-+_Win32_SupportedOS_WindowsXP_ HWND WINAPI ImmGetDefaultIMEWnd(IN HWND);
- 
+-
 -UINT WINAPI ImmGetDescriptionA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszDescription, IN UINT uBufLen);
 -UINT WINAPI ImmGetDescriptionW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszDescription, IN UINT uBufLen);
++_Win32_SupportedOS_WindowsXP_ HWND WINAPI ImmGetDefaultIMEWnd(IN HWND);
++
 +_Win32_SupportedOS_WindowsXP_ UINT WINAPI ImmGetDescriptionA(IN HKL, _Out_writes_opt_(uBufLen) LPSTR lpszDescription, IN UINT uBufLen);
 +_Win32_SupportedOS_WindowsXP_ UINT WINAPI ImmGetDescriptionW(IN HKL, _Out_writes_opt_(uBufLen) LPWSTR lpszDescription, IN UINT uBufLen);
  #ifdef UNICODE
@@ -60,20 +61,23 @@ index 5295f270..e6f1d4f4 100644
  #endif // !UNICODE
  
 -DWORD WINAPI ImmGetProperty(IN HKL, IN DWORD);
-+_Win32_SupportedOS_WindowsXP_ DWORD WINAPI ImmGetProperty(IN HKL, IN DWORD);
- 
+-
 -BOOL WINAPI ImmIsIME(IN HKL);
-+_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmIsIME(IN HKL);
- 
+-
 -BOOL WINAPI ImmSimulateHotKey(IN HWND, IN DWORD);
-+_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSimulateHotKey(IN HWND, IN _Win32_AssociatedEnum_(IME_HOTKEY_IDENTIFIER) DWORD);
- 
+-
 -HIMC WINAPI ImmCreateContext(void);
 -BOOL WINAPI ImmDestroyContext(IN HIMC);
 -HIMC WINAPI ImmGetContext(IN HWND);
 -BOOL WINAPI ImmReleaseContext(IN HWND, IN HIMC);
 -HIMC WINAPI ImmAssociateContext(IN HWND, IN HIMC);
-+_Win32_SupportedOS_WindowsXP_ HIMC WINAPI ImmCreateContext(void);
++_Win32_SupportedOS_WindowsXP_ DWORD WINAPI ImmGetProperty(IN HKL, IN DWORD);
++
++_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmIsIME(IN HKL);
++
++_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSimulateHotKey(IN HWND, IN _Win32_AssociatedEnum_(IME_HOTKEY_IDENTIFIER) DWORD);
++
++_Win32_SupportedOS_WindowsXP_ _Win32_RAIIFree_(ImmDestroyContext, -1, 0) HIMC WINAPI ImmCreateContext(void);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmDestroyContext(IN HIMC);
 +_Win32_SupportedOS_WindowsXP_ HIMC WINAPI ImmGetContext(IN HWND);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmReleaseContext(IN HWND, IN HIMC);
@@ -160,7 +164,7 @@ index 5295f270..e6f1d4f4 100644
  #ifdef UNICODE
  #define ImmSetCompositionFont  ImmSetCompositionFontW
  #else
-@@ -327,48 +327,48 @@ BOOL WINAPI ImmSetCompositionFontW(IN HIMC, _In_ LPLOGFONTW lplf);
+@@ -327,48 +327,48 @@
  #endif // !UNICODE
  #endif  // defined(_WINGDI_) && !defined(NOGDI)
  
@@ -195,23 +199,25 @@ index 5295f270..e6f1d4f4 100644
  #endif // !UNICODE
  
 -BOOL    WINAPI ImmNotifyIME(IN HIMC, IN DWORD dwAction, IN DWORD dwIndex, IN DWORD dwValue);
-+_Win32_SupportedOS_WindowsXP_ BOOL    WINAPI ImmNotifyIME(IN HIMC, IN _Win32_AssociatedEnum_(NOTIFY_IME_ACTION) DWORD dwAction, IN _Win32_AssociatedEnum_(NOTIFY_IME_INDEX) DWORD dwIndex, IN DWORD dwValue);
- 
+-
 -BOOL WINAPI ImmGetStatusWindowPos(IN HIMC, _Out_ LPPOINT lpptPos);
 -BOOL WINAPI ImmSetStatusWindowPos(IN HIMC, _In_ LPPOINT lpptPos);
 -BOOL WINAPI ImmGetCompositionWindow(IN HIMC, _Out_ LPCOMPOSITIONFORM lpCompForm);
 -BOOL WINAPI ImmSetCompositionWindow(IN HIMC, _In_ LPCOMPOSITIONFORM lpCompForm);
 -BOOL WINAPI ImmGetCandidateWindow(IN HIMC, IN DWORD, _Out_ LPCANDIDATEFORM lpCandidate);
 -BOOL WINAPI ImmSetCandidateWindow(IN HIMC, _In_ LPCANDIDATEFORM lpCandidate);
+-
+-BOOL WINAPI ImmIsUIMessageA(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
+-BOOL WINAPI ImmIsUIMessageW(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
++_Win32_SupportedOS_WindowsXP_ BOOL    WINAPI ImmNotifyIME(IN HIMC, IN _Win32_AssociatedEnum_(NOTIFY_IME_ACTION) DWORD dwAction, IN _Win32_AssociatedEnum_(NOTIFY_IME_INDEX) DWORD dwIndex, IN DWORD dwValue);
++
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetStatusWindowPos(IN HIMC, _Out_ LPPOINT lpptPos);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetStatusWindowPos(IN HIMC, _In_ LPPOINT lpptPos);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetCompositionWindow(IN HIMC, _Out_ LPCOMPOSITIONFORM lpCompForm);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetCompositionWindow(IN HIMC, _In_ LPCOMPOSITIONFORM lpCompForm);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmGetCandidateWindow(IN HIMC, IN DWORD, _Out_ LPCANDIDATEFORM lpCandidate);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmSetCandidateWindow(IN HIMC, _In_ LPCANDIDATEFORM lpCandidate);
- 
--BOOL WINAPI ImmIsUIMessageA(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
--BOOL WINAPI ImmIsUIMessageW(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
++
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmIsUIMessageA(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
 +_Win32_SupportedOS_WindowsXP_ BOOL WINAPI ImmIsUIMessageW(IN HWND, IN UINT, IN WPARAM, IN LPARAM);
  #ifdef UNICODE
@@ -225,7 +231,7 @@ index 5295f270..e6f1d4f4 100644
  
  typedef int (CALLBACK *REGISTERWORDENUMPROCA)(_In_ LPCSTR lpszReading, DWORD, _In_ LPCSTR lpszString, LPVOID);
  typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _In_ LPCWSTR lpszString, LPVOID);
-@@ -378,32 +378,32 @@ typedef int (CALLBACK *REGISTERWORDENUMPROCW)(_In_ LPCWSTR lpszReading, DWORD, _
+@@ -378,32 +378,32 @@
  #define REGISTERWORDENUMPROC  REGISTERWORDENUMPROCA
  #endif // !UNICODE
  
@@ -266,7 +272,7 @@ index 5295f270..e6f1d4f4 100644
  #ifdef UNICODE
  #define ImmEnumRegisterWord  ImmEnumRegisterWordW
  #else
-@@ -411,21 +411,21 @@ UINT WINAPI ImmEnumRegisterWordW(IN HKL, IN REGISTERWORDENUMPROCW, _In_opt_ LPCW
+@@ -411,21 +411,21 @@
  #endif // !UNICODE
  
  #if (WINVER >= 0x040A)
@@ -294,7 +300,7 @@ index 5295f270..e6f1d4f4 100644
  #endif /* WINVER >= 0x0602 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -629,10 +629,10 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+@@ -629,10 +629,10 @@
  #define GCL_CONVERSION                  0x0001
  #define GCL_REVERSECONVERSION           0x0002
  #define GCL_REVERSE_LENGTH              0x0003
@@ -308,7 +314,8 @@ index 5295f270..e6f1d4f4 100644
  // bit field for conversion mode
  // IME_CMODE_HANGEUL is old name of IME_CMODE_HANGUL. It will be gone eventually.
  #define IME_CMODE_HANGEUL               IME_CMODE_NATIVE
-@@ -765,8 +765,8 @@ BOOL WINAPI ImmDisableLegacyIME(void);
+@@ -764,10 +764,10 @@
+ #define SOFTKEYBOARD_TYPE_T1            0x0001
  // for Windows Simplified Chinese Edition
  #define SOFTKEYBOARD_TYPE_C1            0x0002
 -
@@ -320,7 +327,8 @@ index 5295f270..e6f1d4f4 100644
 -
  #ifndef _IMM_DDK_DEFINED_
  #define _IMM_DDK_DEFINED_
-@@ -921,7 +921,9 @@ BOOL WINAPI ImmGenerateMessage(IN HIMC);
+ 
+@@ -921,7 +921,9 @@
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
