@@ -105,12 +105,7 @@
   },
   {
     "addUsesTo": "MENU_ITEM_FLAGS",
-    "uses": [
-      {
-        "method": "OLEVERB",
-        "parameter": "fuFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "OLEIVERB",
@@ -120,12 +115,7 @@
       "header": "Ole2.h"
     },
     "members": [],
-    "uses": [
-      {
-        "struct": "OLEVERB",
-        "field": "lVerb"
-      }
-    ]
+    "uses": []
   },
   {
     "uses": [
@@ -238,43 +228,6 @@
   {
     "addUsesTo": "THREAD_PRIORITY",
     "uses": []
-  },
-  {
-    "type": "ulong",
-    "name": "GPT_ATTRIBUTES",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "GPT_ATTRIBUTE_|GPT_BASIC_DATA_ATTRIBUTE_",
-      "header": "ntdisk.h"
-    },
-    "members": [
-      {
-        "name": "GPT_ATTRIBUTE_PLATFORM_REQUIRED",
-        "value": "1"
-      },
-      {
-        "name": "GPT_BASIC_DATA_ATTRIBUTE_NO_DRIVE_LETTER",
-        "value": "9223372036854775808"
-      },
-      {
-        "name": "GPT_BASIC_DATA_ATTRIBUTE_HIDDEN",
-        "value": "4611686018427387904"
-      },
-      {
-        "name": "GPT_BASIC_DATA_ATTRIBUTE_SHADOW_COPY",
-        "value": "2305843009213693952"
-      },
-      {
-        "name": "GPT_BASIC_DATA_ATTRIBUTE_READ_ONLY",
-        "value": "1152921504606846976"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "PARTITION_INFORMATION_GPT",
-        "field": "Attributes"
-      }
-    ]
   },
   {
     "name": "CERT_FIND_FLAGS",
@@ -2157,30 +2110,10 @@
     "flags": true,
     "members": [
       {
-        "name": "CRYPT_ENCODE_ALLOC_FLAG"
-      },
-      {
-        "name": "CRYPT_ENCODE_ENABLE_PUNYCODE_FLAG"
-      },
-      {
-        "name": "CRYPT_UNICODE_NAME_ENCODE_DISABLE_CHECK_TYPE_FLAG"
-      },
-      {
-        "name": "CRYPT_UNICODE_NAME_ENCODE_ENABLE_T61_UNICODE_FLAG"
-      },
-      {
-        "name": "CRYPT_UNICODE_NAME_ENCODE_ENABLE_UTF8_UNICODE_FLAG"
-      },
-      {
         "name": "CRYPT_UNICODE_NAME_ENCODE_FORCE_UTF8_UNICODE_FLAG_"
       }
     ],
-    "uses": [
-      {
-        "method": "CryptEncodeObjectEx",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "namespace": "Windows.Win32.Security",
@@ -3004,66 +2937,10 @@
     "name": "CRYPT_SET_PROV_PARAM_ID",
     "members": [
       {
-        "name": "PP_CLIENT_HWND"
-      },
-      {
-        "name": "PP_DELETEKEY"
-      },
-      {
-        "name": "PP_KEYEXCHANGE_ALG"
-      },
-      {
-        "name": "PP_KEYEXCHANGE_PIN"
-      },
-      {
-        "name": "PP_KEYEXCHANGE_KEYSIZE"
-      },
-      {
-        "name": "PP_KEYSET_SEC_DESCR"
-      },
-      {
-        "name": "PP_PIN_PROMPT_STRING"
-      },
-      {
-        "name": "PP_ROOT_CERTSTORE"
-      },
-      {
-        "name": "PP_SIGNATURE_ALG"
-      },
-      {
-        "name": "PP_SIGNATURE_PIN"
-      },
-      {
-        "name": "PP_SIGNATURE_KEYSIZE"
-      },
-      {
-        "name": "PP_UI_PROMPT"
-      },
-      {
-        "name": "PP_USE_HARDWARE_RNG"
-      },
-      {
-        "name": "PP_USER_CERTSTORE"
-      },
-      {
-        "name": "PP_SECURE_KEYEXCHANGE_PIN"
-      },
-      {
-        "name": "PP_SECURE_SIGNATURE_PIN"
-      },
-      {
-        "name": "PP_SMARTCARD_READER"
-      },
-      {
         "name": "PP_SMARTCARD_GUID_"
       }
     ],
-    "uses": [
-      {
-        "method": "CryptSetProvParam",
-        "parameter": "dwParam"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "SENS_CONNECTION_TYPE",
@@ -3412,55 +3289,10 @@
     "flags": true,
     "members": [
       {
-        "name": "CERT_STORE_BACKUP_RESTORE_FLAG"
-      },
-      {
-        "name": "CERT_STORE_CREATE_NEW_FLAG"
-      },
-      {
-        "name": "CERT_STORE_DEFER_CLOSE_UNTIL_LAST_FREE_FLAG"
-      },
-      {
-        "name": "CERT_STORE_DELETE_FLAG"
-      },
-      {
-        "name": "CERT_STORE_ENUM_ARCHIVED_FLAG"
-      },
-      {
-        "name": "CERT_STORE_MAXIMUM_ALLOWED_FLAG"
-      },
-      {
-        "name": "CERT_STORE_NO_CRYPT_RELEASE_FLAG"
-      },
-      {
-        "name": "CERT_STORE_OPEN_EXISTING_FLAG"
-      },
-      {
-        "name": "CERT_STORE_READONLY_FLAG"
-      },
-      {
-        "name": "CERT_STORE_SET_LOCALIZED_NAME_FLAG"
-      },
-      {
-        "name": "CERT_STORE_SHARE_CONTEXT_FLAG"
-      },
-      {
-        "name": "CERT_STORE_UPDATE_KEYID_FLAG"
-      },
-      {
         "name": "CERT_STORE_MAXIMUM_ALLOWED"
       }
     ],
-    "uses": [
-      {
-        "method": "CertOpenStore",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "PFN_CERT_DLL_OPEN_STORE_PROV_FUNC",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "COMAdminApplicationExportOptions",
@@ -4211,14 +4043,8 @@
       ]
     },
   {
-      "addUsesTo": "USN_DELETE_FLAGS",
-      "uses": [
-        {
-          "struct": "DELETE_USN_JOURNAL_DATA",
-          "field": "DeleteFlags"
-        }
-      ]
-    },
+    "addUsesTo": "USN_DELETE_FLAGS"
+  },
   {
       "addUsesTo": "CMSG_KEY_AGREE_OPTION",
       "uses": [
@@ -4378,146 +4204,8 @@
     "uses": []
   },
   {
-    "name": "CHANGER_FEATURES",
-    "flags": true,
-    "members": [
-      {
-        "name": "CHANGER_BAR_CODE_SCANNER_INSTALLED",
-        "value": "1"
-      },
-      {
-        "name": "CHANGER_CARTRIDGE_MAGAZINE",
-        "value": "256"
-      },
-      {
-        "name": "CHANGER_CLEANER_ACCESS_NOT_VALID",
-        "value": "262144"
-      },
-      {
-        "name": "CHANGER_CLEANER_SLOT",
-        "value": "64"
-      },
-      {
-        "name": "CHANGER_CLOSE_IEPORT",
-        "value": "4"
-      },
-      {
-        "name": "CHANGER_DEVICE_REINITIALIZE_CAPABLE",
-        "value": "134217728"
-      },
-      {
-        "name": "CHANGER_DRIVE_CLEANING_REQUIRED",
-        "value": "65536"
-      },
-      {
-        "name": "CHANGER_DRIVE_EMPTY_ON_DOOR_ACCESS",
-        "value": "536870912"
-      },
-      {
-        "name": "CHANGER_EXCHANGE_MEDIA",
-        "value": "32"
-      },
-      {
-        "name": "CHANGER_INIT_ELEM_STAT_WITH_RANGE",
-        "value": "2"
-      },
-      {
-        "name": "CHANGER_KEYPAD_ENABLE_DISABLE",
-        "value": "268435456"
-      },
-      {
-        "name": "CHANGER_LOCK_UNLOCK",
-        "value": "128"
-      },
-      {
-        "name": "CHANGER_MEDIUM_FLIP",
-        "value": "512"
-      },
-      {
-        "name": "CHANGER_OPEN_IEPORT",
-        "value": "8"
-      },
-      {
-        "name": "CHANGER_POSITION_TO_ELEMENT",
-        "value": "1024"
-      },
-      {
-        "name": "CHANGER_PREDISMOUNT_EJECT_REQUIRED",
-        "value": "131072"
-      },
-      {
-        "name": "CHANGER_PREMOUNT_EJECT_REQUIRED",
-        "value": "524288"
-      },
-      {
-        "name": "CHANGER_REPORT_IEPORT_STATE",
-        "value": "2048"
-      },
-      {
-        "name": "CHANGER_SERIAL_NUMBER_VALID",
-        "value": "67108864"
-      },
-      {
-        "name": "CHANGER_STATUS_NON_VOLATILE",
-        "value": "16"
-      },
-      {
-        "name": "CHANGER_STORAGE_DRIVE",
-        "value": "4096"
-      },
-      {
-        "name": "CHANGER_STORAGE_IEPORT",
-        "value": "8192"
-      },
-      {
-        "name": "CHANGER_STORAGE_SLOT",
-        "value": "16384"
-      },
-      {
-        "name": "CHANGER_STORAGE_TRANSPORT",
-        "value": "32768"
-      },
-      {
-        "name": "CHANGER_VOLUME_ASSERT",
-        "value": "4194304"
-      },
-      {
-        "name": "CHANGER_VOLUME_IDENTIFICATION",
-        "value": "1048576"
-      },
-      {
-        "name": "CHANGER_VOLUME_REPLACE",
-        "value": "8388608"
-      },
-      {
-        "name": "CHANGER_VOLUME_SEARCH",
-        "value": "2097152"
-      },
-      {
-        "name": "CHANGER_VOLUME_UNDEFINE",
-        "value": "16777216"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "GET_CHANGER_PARAMETERS",
-        "field": "Features0"
-      }
-    ]
+    "addUsesTo": "TXFS_RMF_LAGS"
   },
-  {
-      "addUsesTo": "TXFS_RMF_LAGS",
-      "uses": [
-        {
-          "struct": "TXFS_MODIFY_RM",
-          "field": "Flags"
-        },
-        {
-          "struct": "TXFS_QUERY_RM_INFORMATION",
-          "field": "Flags"
-        }
-      ]
-    },
   {
     "uses": [
       {
@@ -4582,18 +4270,8 @@
       ]
     },
   {
-      "addUsesTo": "FILESYSTEM_STATISTICS_TYPE",
-      "uses": [
-        {
-          "struct": "FILESYSTEM_STATISTICS_EX",
-          "field": "FileSystemType"
-        },
-        {
-          "struct": "FILESYSTEM_STATISTICS",
-          "field": "FileSystemType"
-        }
-      ]
-    },
+    "addUsesTo": "FILESYSTEM_STATISTICS_TYPE"
+  },
   {
     "addUsesTo": "FLASHWINFO_FLAGS",
     "uses": []
@@ -4879,78 +4557,6 @@
       "uses": []
     },
   {
-    "name": "CHANGER_ELEMENT_STATUS_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "ELEMENT_STATUS_ACCESS",
-        "value": "8"
-      },
-      {
-        "name": "ELEMENT_STATUS_AVOLTAG",
-        "value": "536870912"
-      },
-      {
-        "name": "ELEMENT_STATUS_EXCEPT",
-        "value": "4"
-      },
-      {
-        "name": "ELEMENT_STATUS_EXENAB",
-        "value": "16"
-      },
-      {
-        "name": "ELEMENT_STATUS_FULL",
-        "value": "1"
-      },
-      {
-        "name": "ELEMENT_STATUS_ID_VALID",
-        "value": "8192"
-      },
-      {
-        "name": "ELEMENT_STATUS_IMPEXP",
-        "value": "2"
-      },
-      {
-        "name": "ELEMENT_STATUS_INENAB",
-        "value": "32"
-      },
-      {
-        "name": "ELEMENT_STATUS_INVERT",
-        "value": "4194304"
-      },
-      {
-        "name": "ELEMENT_STATUS_LUN_VALID",
-        "value": "4096"
-      },
-      {
-        "name": "ELEMENT_STATUS_NOT_BUS",
-        "value": "32768"
-      },
-      {
-        "name": "ELEMENT_STATUS_PVOLTAG",
-        "value": "268435456"
-      },
-      {
-        "name": "ELEMENT_STATUS_SVALID",
-        "value": "8388608"
-      },
-      {
-        "name": "ELEMENT_STATUS_PRODUCT_DATA",
-        "value": "64"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "CHANGER_ELEMENT_STATUS",
-        "field": "Flags"
-      },
-      {
-        "struct": "CHANGER_ELEMENT_STATUS_EX",
-        "field": "Flags"
-      }
-    ]
-  },
-  {
     "name": "SI_OBJECT_INFO_FLAGS",
     "flags": true,
     "members": [
@@ -5123,62 +4729,6 @@
         }
       ]
     },
-  {
-    "name": "GET_CHANGER_PARAMETERS_FEATURES1",
-    "flags": true,
-    "members": [
-      {
-        "name": "CHANGER_CLEANER_AUTODISMOUNT",
-        "value": "2147483652"
-      },
-      {
-        "name": "CHANGER_CLEANER_OPS_NOT_SUPPORTED",
-        "value": "2147483712"
-      },
-      {
-        "name": "CHANGER_IEPORT_USER_CONTROL_CLOSE",
-        "value": "2147483904"
-      },
-      {
-        "name": "CHANGER_IEPORT_USER_CONTROL_OPEN",
-        "value": "2147483776"
-      },
-      {
-        "name": "CHANGER_MOVE_EXTENDS_IEPORT",
-        "value": "2147484160"
-      },
-      {
-        "name": "CHANGER_MOVE_RETRACTS_IEPORT",
-        "value": "2147484672"
-      },
-      {
-        "name": "CHANGER_PREDISMOUNT_ALIGN_TO_DRIVE",
-        "value": "2147483650"
-      },
-      {
-        "name": "CHANGER_PREDISMOUNT_ALIGN_TO_SLOT",
-        "value": "2147483649"
-      },
-      {
-        "name": "CHANGER_RTN_MEDIA_TO_ORIGINAL_ADDR",
-        "value": "2147483680"
-      },
-      {
-        "name": "CHANGER_SLOTS_USE_TRAYS",
-        "value": "2147483664"
-      },
-      {
-        "name": "CHANGER_TRUE_EXCHANGE_CAPABLE",
-        "value": "2147483656"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "GET_CHANGER_PARAMETERS",
-        "field": "Features1"
-      }
-    ]
-  },
   {
       "addUsesTo": "AUTHZ_SECURITY_ATTRIBUTE_FLAGS",
       "uses": []
@@ -5955,188 +5505,23 @@
   },
   {
     "addUsesTo": "UIA_PATTERN_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationCacheRequest",
-        "method": "AddPattern",
-        "parameter": "patternId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCurrentPatternAs",
-        "parameter": "patternId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCachedPatternAs",
-        "parameter": "patternId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCurrentPattern",
-        "parameter": "patternId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCachedPattern",
-        "parameter": "patternId"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "GetPatternProgrammaticName",
-        "parameter": "pattern"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_EVENT_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationEventHandler",
-        "method": "HandleAutomationEvent",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IUIAutomationProxyFactoryEntry",
-        "method": "SetWinEventsForAutomationEvent",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IUIAutomationProxyFactoryEntry",
-        "method": "GetWinEventsForAutomationEvent",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IUIAutomationEventHandlerGroup",
-        "method": "AddAutomationEventHandler",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "AddAutomationEventHandler",
-        "parameter": "eventId"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "RemoveAutomationEventHandler",
-        "parameter": "eventId"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_PROPERTY_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationPropertyCondition",
-        "method": "get_PropertyId",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationCacheRequest",
-        "method": "AddProperty",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationPropertyChangedEventHandler",
-        "method": "HandlePropertyChangedEvent",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationItemContainerPattern",
-        "method": "FindItemByProperty",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCurrentPropertyValue",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCurrentPropertyValueEx",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCachedPropertyValue",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "GetCachedPropertyValueEx",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationProxyFactoryEntry",
-        "method": "SetWinEventsForAutomationEvent",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationProxyFactoryEntry",
-        "method": "GetWinEventsForAutomationEvent",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomationEventHandlerGroup",
-        "method": "AddPropertyChangedEventHandler",
-        "parameter": "propertyArray"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "CreatePropertyCondition",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "CreatePropertyConditionEx",
-        "parameter": "propertyId"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "AddPropertyChangedEventHandlerNativeArray",
-        "parameter": "propertyArray"
-      },
-      {
-        "interface": "IUIAutomation",
-        "method": "GetPropertyProgrammaticName",
-        "parameter": "property"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_TEXTATTRIBUTE_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationTextRange",
-        "method": "FindAttribute",
-        "parameter": "attr"
-      },
-      {
-        "interface": "IUIAutomationTextRange",
-        "method": "GetAttributeValue",
-        "parameter": "attr"
-      },
-      {
-        "interface": "IUIAutomationTextRange3",
-        "method": "GetAttributeValues",
-        "parameter": "attributeIds"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_CONTROLTYPE_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationElement",
-        "method": "get_CurrentControlType",
-        "parameter": "retVal"
-      },
-      {
-        "interface": "IUIAutomationElement",
-        "method": "get_CachedControlType",
-        "parameter": "retVal"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "UIA_ANNOTATIONTYPE",
@@ -6263,53 +5648,15 @@
   },
   {
     "addUsesTo": "UIA_STYLE_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationStylesPattern",
-        "method": "get_CachedStyleId",
-        "parameter": "retVal"
-      },
-      {
-        "interface": "IUIAutomationStylesPattern",
-        "method": "get_CurrentStyleId",
-        "parameter": "retVal"
-      },
-      {
-        "interface": "IStylesProvider",
-        "method": "get_StyleId",
-        "parameter": "retVal"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_LANDMARKTYPE_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationElement5",
-        "method": "get_CurrentLandmarkType",
-        "parameter": "retVal"
-      },
-      {
-        "interface": "IUIAutomationElement5",
-        "method": "get_CachedLandmarkType",
-        "parameter": "retVal"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_HEADINGLEVEL_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationElement8",
-        "method": "get_CurrentHeadingLevel",
-        "parameter": "retVal"
-      },
-      {
-        "interface": "IUIAutomationElement8",
-        "method": "get_CachedHeadingLevel",
-        "parameter": "retVal"
-      }
-    ]
+    "uses": []
   },
   {
     "addUsesTo": "UIA_CHANGE_ID",
@@ -6317,13 +5664,7 @@
   },
   {
     "addUsesTo": "UIA_METADATA_ID",
-    "uses": [
-      {
-        "interface": "IUIAutomationElement7",
-        "method": "GetCurrentMetadataValue",
-        "parameter": "metadataId"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "PAN_FAMILY_TYPE",

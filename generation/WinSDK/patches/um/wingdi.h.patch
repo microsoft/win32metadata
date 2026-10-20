@@ -2868,7 +2868,7 @@
  WINGDIAPI BOOL        WINAPI GetLogColorSpaceW( _In_ HCOLORSPACE hColorSpace,
                                                  _Out_writes_bytes_(nSize) LPLOGCOLORSPACEW lpBuffer,
                                                  _In_ DWORD nSize);
-@@ -5338,18 +6603,24 @@
+@@ -5338,18 +6603,32 @@
  #define GetLogColorSpace  GetLogColorSpaceA
  #endif // !UNICODE
  
@@ -2885,6 +2885,14 @@
  WINGDIAPI HCOLORSPACE WINAPI SetColorSpace( _In_ HDC hdc, _In_ HCOLORSPACE hcs);
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI BOOL        WINAPI DeleteColorSpace( _In_ HCOLORSPACE hcs);
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CreateColorSpaceA,
++    _Win32_RAIIFree_(DeleteColorSpace, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CreateColorSpaceW,
++    _Win32_RAIIFree_(DeleteColorSpace, -1, 0));
++#endif
++
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI BOOL        WINAPI GetICMProfileA(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
@@ -2893,7 +2901,7 @@
  WINGDIAPI BOOL        WINAPI GetICMProfileW(    _In_ HDC hdc,
                                                  _Inout_ LPDWORD pBufSize,
                                                  _Out_writes_opt_(*pBufSize) LPWSTR pszFilename);
-@@ -5359,17 +6630,24 @@
+@@ -5359,17 +6638,24 @@
  #define GetICMProfile  GetICMProfileA
  #endif // !UNICODE
  
@@ -2919,7 +2927,7 @@
  WINGDIAPI int         WINAPI EnumICMProfilesW( _In_ HDC hdc, _In_ ICMENUMPROCW proc, _In_opt_ LPARAM param);
  #ifdef UNICODE
  #define EnumICMProfiles  EnumICMProfilesW
-@@ -5377,9 +6655,11 @@
+@@ -5377,9 +6663,11 @@
  #define EnumICMProfiles  EnumICMProfilesA
  #endif // !UNICODE
  // The Win95 update API UpdateICMRegKeyA is deprecated to set last error to ERROR_NOT_SUPPORTED and return FALSE
@@ -2933,7 +2941,7 @@
  #ifdef UNICODE
  #define UpdateICMRegKey  UpdateICMRegKeyW
  #else
-@@ -5394,6 +6674,7 @@
+@@ -5394,6 +6682,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if (WINVER >= 0x0500)
@@ -2941,7 +2949,7 @@
  WINGDIAPI BOOL        WINAPI ColorCorrectPalette( _In_ HDC hdc, _In_ HPALETTE hPal, _In_ DWORD deFirst, _In_ DWORD num);
  #endif
  
-@@ -5522,6 +6803,17 @@
+@@ -5522,6 +6811,17 @@
  #define EMR_GLSRECORD                  102
  #define EMR_GLSBOUNDEDRECORD           103
  #define EMR_PIXELFORMAT                104
@@ -2959,7 +2967,7 @@
  #endif /* WINVER >= 0x0400 */
  
  #if(WINVER >= 0x0500)
-@@ -5539,29 +6831,171 @@
+@@ -5539,29 +6839,171 @@
  #define EMR_TRANSPARENTBLT             116
  #if (_WIN32_WINNT >= _WIN32_WINNT_WIN2K)
  #define EMR_RESERVED_117               117
@@ -3132,7 +3140,7 @@
      DWORD   nSize;              // Length of the record in bytes.
                                  // This must be a multiple of 4.
  } EMR, *PEMR;
-@@ -5757,7 +7191,7 @@
+@@ -5757,7 +7199,7 @@
  {
      EMR     emr;
      XFORM   xform;
@@ -3141,7 +3149,7 @@
  } EMRMODIFYWORLDTRANSFORM, *PEMRMODIFYWORLDTRANSFORM;
  
  typedef struct tagEMRSETPIXELV
-@@ -6283,7 +7717,7 @@
+@@ -6283,7 +7725,7 @@
      RECTL     rclBounds;          // Inclusive-inclusive bounds in device units
      DWORD     nVer;
      DWORD     nTri;
@@ -3150,7 +3158,7 @@
      TRIVERTEX Ver[1];
  }EMRGRADIENTFILL,*PEMRGRADIENTFILL;
  
-@@ -6327,22 +7761,44 @@
+@@ -6327,22 +7769,52 @@
  
  // OpenGL wgl prototypes
  
@@ -3166,6 +3174,14 @@
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI BOOL  WINAPI wglDeleteContext(HGLRC);
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(wglCreateContext,
++    _Win32_RAIIFree_(wglDeleteContext, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(wglCreateLayerContext,
++    _Win32_RAIIFree_(wglDeleteContext, -1, 0));
++#endif
++
 +_Win32_SupportedOS_Windows2000_
  WINGDIAPI HGLRC WINAPI wglGetCurrentContext(VOID);
 +_Win32_SupportedOS_Windows2000_
@@ -3195,7 +3211,7 @@
  WINGDIAPI BOOL  WINAPI SwapBuffers(HDC);
  
  typedef struct _POINTFLOAT {
-@@ -6360,8 +7816,12 @@
+@@ -6360,8 +7832,12 @@
  
  #define WGL_FONT_LINES      0
  #define WGL_FONT_POLYGONS   1
@@ -3208,7 +3224,7 @@
  WINGDIAPI BOOL  WINAPI wglUseFontOutlinesW(HDC, DWORD, DWORD, DWORD, FLOAT,
                                             FLOAT, int, LPGLYPHMETRICSFLOAT);
  #ifdef UNICODE
-@@ -6446,13 +7906,22 @@
+@@ -6446,13 +7922,22 @@
  #define WGL_SWAP_UNDERLAY14     0x20000000
  #define WGL_SWAP_UNDERLAY15     0x40000000
  
@@ -3231,7 +3247,7 @@
  WINGDIAPI BOOL  WINAPI wglSwapLayerBuffers(HDC, UINT);
  
  #if (WINVER >= 0x0500)
-@@ -6490,4 +7959,3 @@
+@@ -6490,4 +7975,3 @@
  #endif
  
  #endif /* _WINGDI_ */

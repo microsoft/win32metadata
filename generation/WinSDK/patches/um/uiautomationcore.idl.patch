@@ -1,5 +1,5 @@
 diff --git a/um/uiautomationcore.idl b/um/uiautomationcore.idl
-index 6d8cea3a..d7cc771b 100644
+index 6d8cea3a..808fc96b 100644
 --- a/um/uiautomationcore.idl
 +++ b/um/uiautomationcore.idl
 @@ -6,6 +6,8 @@
@@ -492,3 +492,15 @@ index 6d8cea3a..d7cc771b 100644
      [object, uuid(8609c4ec-4a1a-4d88-a357-5a66e060e1cf), pointer_default(unique), oleautomation]
      interface IUIAutomationRegistrar : IUnknown
      {
+@@ -1695,3 +1749,11 @@ cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(UIAutomationType)")
+         [default] interface IUIAutomationClientInfoSource;
+     }
+ }
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef int UIA_STYLE_ID;")
++cpp_quote("#endif")
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("typedef int UIA_ANNOTATIONTYPE;")
++cpp_quote("#endif")
++_Win32_AnnotateParameter_(IStylesProvider::get_StyleId, retVal, _Win32_AssociatedEnum_(UIA_STYLE_ID))
++_Win32_AnnotateParameter_(IAnnotationProvider::get_AnnotationTypeId, retVal, _Win32_AssociatedEnum_(UIA_ANNOTATIONTYPE))

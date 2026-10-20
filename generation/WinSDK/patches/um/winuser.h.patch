@@ -3381,8 +3381,8 @@ diff --git a/um/winuser.h b/um/winuser.h
 +    WDA_MONITOR,
 +    WDA_EXCLUDEFROMCAPTURE);
 +#endif
-+
  
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows7_
  WINUSERAPI
@@ -8494,7 +8494,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HCURSOR
  WINAPI
-@@ -10666,6 +13634,8 @@ CreateCursor(
+@@ -10666,12 +13634,19 @@ CreateCursor(
      _In_ CONST VOID *pvANDPlane,
      _In_ CONST VOID *pvXORPlane);
  
@@ -8503,7 +8503,18 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -10681,7 +13651,7 @@ DestroyCursor(
+ DestroyCursor(
+     _In_ HCURSOR hCursor);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CreateCursor,
++    _Win32_RAIIFree_(DestroyCursor, -1, 0));
++#endif
++
+ #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
+ #pragma endregion
+ 
+@@ -10681,7 +13656,7 @@ DestroyCursor(
  #ifndef _MAC
  #define CopyCursor(pcur) ((HCURSOR)CopyIcon((HICON)(pcur)))
  #else
@@ -8512,7 +8523,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  HCURSOR
  WINAPI
  CopyCursor(
-@@ -10723,12 +13693,14 @@ CopyCursor(
+@@ -10723,12 +13698,14 @@ CopyCursor(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -8528,7 +8539,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  typedef struct _ICONINFO {
      BOOL    fIcon;
-@@ -10739,12 +13711,16 @@ typedef struct _ICONINFO {
+@@ -10739,12 +13716,16 @@ typedef struct _ICONINFO {
  } ICONINFO;
  typedef ICONINFO *PICONINFO;
  
@@ -8545,7 +8556,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HICON
  WINAPI
-@@ -10758,6 +13734,7 @@ LoadIconW(
+@@ -10758,6 +13739,7 @@ LoadIconW(
  #endif // !UNICODE
  
  
@@ -8553,7 +8564,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -10770,6 +13747,7 @@ PrivateExtractIconsA(
+@@ -10770,6 +13752,7 @@ PrivateExtractIconsA(
      _Out_writes_opt_(nIcons) UINT *piconid,
      _In_ UINT nIcons,
      _In_ UINT flags);
@@ -8561,7 +8572,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -10788,6 +13766,8 @@ PrivateExtractIconsW(
+@@ -10788,6 +13771,8 @@ PrivateExtractIconsW(
  #define PrivateExtractIcons  PrivateExtractIconsA
  #endif // !UNICODE
  
@@ -8570,7 +8581,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HICON
  WINAPI
-@@ -10800,12 +13780,16 @@ CreateIcon(
+@@ -10800,12 +13785,25 @@ CreateIcon(
      _In_ CONST BYTE *lpbANDbits,
      _In_ CONST BYTE *lpbXORbits);
  
@@ -8582,12 +8593,21 @@ diff --git a/um/winuser.h b/um/winuser.h
  DestroyIcon(
      _In_ HICON hIcon);
  
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CreateIcon,
++    _Win32_RAIIFree_(DestroyIcon, -1, 0));
++_WIN32META_ANNOTATE_PARAMETER_(PrivateExtractIconsA, phicon,
++    _Win32_RAIIFree_(DestroyIcon, -1, 0));
++_WIN32META_ANNOTATE_PARAMETER_(PrivateExtractIconsW, phicon,
++    _Win32_RAIIFree_(DestroyIcon, -1, 0));
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  int
  WINAPI
-@@ -10814,6 +13798,8 @@ LookupIconIdFromDirectory(
+@@ -10814,6 +13812,8 @@ LookupIconIdFromDirectory(
      _In_ BOOL fIcon);
  
  #if(WINVER >= 0x0400)
@@ -8596,7 +8616,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -10822,9 +13808,11 @@ LookupIconIdFromDirectoryEx(
+@@ -10822,9 +13822,11 @@ LookupIconIdFromDirectoryEx(
      _In_ BOOL fIcon,
      _In_ int cxDesired,
      _In_ int cyDesired,
@@ -8609,7 +8629,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HICON
  WINAPI
-@@ -10835,6 +13823,8 @@ CreateIconFromResource(
+@@ -10835,6 +13837,8 @@ CreateIconFromResource(
      _In_ DWORD dwVer);
  
  #if(WINVER >= 0x0400)
@@ -8618,7 +8638,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HICON
  WINAPI
-@@ -10845,7 +13835,7 @@ CreateIconFromResourceEx(
+@@ -10845,7 +13849,7 @@ CreateIconFromResourceEx(
      _In_ DWORD dwVer,
      _In_ int cxDesired,
      _In_ int cyDesired,
@@ -8627,7 +8647,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  /* Icon/Cursor header */
  typedef struct tagCURSORSHAPE
-@@ -10881,6 +13871,13 @@ SetThreadCursorCreationScaling(
+@@ -10881,6 +13885,13 @@ SetThreadCursorCreationScaling(
  #define IMAGE_BITMAP        0
  #define IMAGE_ICON          1
  #define IMAGE_CURSOR        2
@@ -8641,7 +8661,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #if(WINVER >= 0x0400)
  #define IMAGE_ENHMETAFILE   3
  
-@@ -10898,44 +13895,66 @@ SetThreadCursorCreationScaling(
+@@ -10898,44 +13909,66 @@ SetThreadCursorCreationScaling(
  #define LR_COPYFROMRESOURCE 0x00004000
  #define LR_SHARED           0x00008000
  
@@ -8714,7 +8734,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  #define DI_MASK         0x0001
  #define DI_IMAGE        0x0002
-@@ -10946,6 +13965,8 @@ CopyImage(
+@@ -10946,6 +13979,8 @@ CopyImage(
  #define DI_NOMIRROR     0x0010
  #endif /* _WIN32_WINNT >= 0x0501 */
  
@@ -8723,7 +8743,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI BOOL WINAPI DrawIconEx(
      _In_ HDC hdc,
      _In_ int xLeft,
-@@ -10955,7 +13976,7 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
+@@ -10955,7 +13990,7 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
      _In_ int cyWidth,
      _In_ UINT istepIfAniCur,
      _In_opt_ HBRUSH hbrFlickerFreeDraw,
@@ -8732,7 +8752,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -10965,18 +13986,24 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
+@@ -10965,18 +14000,31 @@ WINUSERAPI BOOL WINAPI DrawIconEx(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -8752,12 +8772,19 @@ diff --git a/um/winuser.h b/um/winuser.h
  CopyIcon(
      _In_ HICON hIcon);
  
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_METHOD_(CreateIconIndirect,
++    _Win32_RAIIFree_(DestroyIcon, -1, 0));
++_WIN32META_ANNOTATE_METHOD_(CopyIcon,
++    _Win32_RAIIFree_(DestroyIcon, -1, 0));
++#endif
++
 +_Win32_SetLastError_
 +_Win32_SupportedOS_Windows2000_
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11015,12 +14042,14 @@ typedef ICONINFOEXA ICONINFOEX;
+@@ -11015,12 +14063,14 @@ typedef ICONINFOEXA ICONINFOEX;
  typedef PICONINFOEXA PICONINFOEX;
  #endif // UNICODE
  
@@ -8772,7 +8799,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11099,11 +14128,31 @@ GetIconInfoExW(
+@@ -11099,11 +14149,31 @@ GetIconInfoExW(
  #define OCR_SIZEALL         32646
  #define OCR_ICOCUR          32647   /* OBSOLETE: use OIC_WINLOGO */
  #define OCR_NO              32648
@@ -8804,7 +8831,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0400 */
  
  
-@@ -11176,7 +14225,7 @@ GetIconInfoExW(
+@@ -11176,7 +14246,7 @@ GetIconInfoExW(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -8813,7 +8840,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  int
  WINAPI
  LoadStringA(
-@@ -11184,7 +14233,7 @@ LoadStringA(
+@@ -11184,7 +14254,7 @@ LoadStringA(
      _In_ UINT uID,
      _Out_writes_to_(cchBufferMax, return + 1) LPSTR lpBuffer,
      _In_ int cchBufferMax);
@@ -8822,7 +8849,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  int
  WINAPI
  LoadStringW(
-@@ -11214,20 +14263,39 @@ LoadStringW(
+@@ -11214,20 +14284,39 @@ LoadStringW(
  #define IDIGNORE            5
  #define IDYES               6
  #define IDNO                7
@@ -8862,7 +8889,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0501 */
  
  
-@@ -11377,6 +14445,10 @@ typedef enum {
+@@ -11377,6 +14466,10 @@ typedef enum {
  #define WB_RIGHT           1
  #define WB_ISDELIMITER     2
  
@@ -8873,7 +8900,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  /*
   * Button Control Styles
-@@ -11450,6 +14522,13 @@ typedef enum {
+@@ -11450,6 +14543,13 @@ typedef enum {
  #define BST_UNCHECKED      0x0000
  #define BST_CHECKED        0x0001
  #define BST_INDETERMINATE  0x0002
@@ -8887,7 +8914,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define BST_PUSHED         0x0004
  #define BST_FOCUS          0x0008
  #endif /* WINVER >= 0x0400 */
-@@ -11478,11 +14557,45 @@ typedef enum {
+@@ -11478,11 +14578,45 @@ typedef enum {
  #define SS_ETCHEDVERT       0x00000011L
  #define SS_ETCHEDFRAME      0x00000012L
  #define SS_TYPEMASK         0x0000001FL
@@ -8933,7 +8960,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #if(WINVER >= 0x0400)
  #define SS_NOTIFY           0x00000100L
  #define SS_CENTERIMAGE      0x00000200L
-@@ -11494,6 +14607,20 @@ typedef enum {
+@@ -11494,6 +14628,20 @@ typedef enum {
  #define SS_PATHELLIPSIS     0x00008000L
  #define SS_WORDELLIPSIS     0x0000C000L
  #define SS_ELLIPSISMASK     0x0000C000L
@@ -8954,7 +8981,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0400 */
  
  
-@@ -11548,12 +14675,14 @@ typedef enum {
+@@ -11548,12 +14696,14 @@ typedef enum {
  
  #ifndef NOMSG
  
@@ -8969,7 +8996,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11568,6 +14697,8 @@ IsDialogMessageW(
+@@ -11568,6 +14718,8 @@ IsDialogMessageW(
  
  #endif /* !NOMSG */
  
@@ -8978,7 +9005,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11575,6 +14706,7 @@ MapDialogRect(
+@@ -11575,6 +14727,7 @@ MapDialogRect(
      _In_ HWND hDlg,
      _Inout_ LPRECT lpRect);
  
@@ -8986,7 +9013,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -11583,7 +14715,8 @@ DlgDirListA(
+@@ -11583,7 +14736,8 @@ DlgDirListA(
      _Inout_ LPSTR lpPathSpec,
      _In_ int nIDListBox,
      _In_ int nIDStaticPath,
@@ -8996,7 +9023,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -11592,7 +14725,7 @@ DlgDirListW(
+@@ -11592,7 +14746,7 @@ DlgDirListW(
      _Inout_ LPWSTR lpPathSpec,
      _In_ int nIDListBox,
      _In_ int nIDStaticPath,
@@ -9005,7 +9032,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #ifdef UNICODE
  #define DlgDirList  DlgDirListW
  #else
-@@ -11616,9 +14749,24 @@ DlgDirListW(
+@@ -11616,9 +14770,24 @@ DlgDirListW(
  #define DDL_DRIVES          0x4000
  #define DDL_EXCLUSIVE       0x8000
  
@@ -9030,7 +9057,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11627,6 +14775,8 @@ DlgDirSelectExA(
+@@ -11627,6 +14796,8 @@ DlgDirSelectExA(
      _Out_writes_(chCount) LPSTR lpString,
      _In_ int chCount,
      _In_ int idListBox);
@@ -9039,7 +9066,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11641,6 +14791,8 @@ DlgDirSelectExW(
+@@ -11641,6 +14812,8 @@ DlgDirSelectExW(
  #define DlgDirSelectEx  DlgDirSelectExA
  #endif // !UNICODE
  
@@ -9048,7 +9075,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -11649,7 +14801,9 @@ DlgDirListComboBoxA(
+@@ -11649,7 +14822,9 @@ DlgDirListComboBoxA(
      _Inout_ LPSTR lpPathSpec,
      _In_ int nIDComboBox,
      _In_ int nIDStaticPath,
@@ -9059,7 +9086,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -11658,13 +14812,15 @@ DlgDirListComboBoxW(
+@@ -11658,13 +14833,15 @@ DlgDirListComboBoxW(
      _Inout_ LPWSTR lpPathSpec,
      _In_ int nIDComboBox,
      _In_ int nIDStaticPath,
@@ -9076,7 +9103,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -11673,6 +14829,8 @@ DlgDirSelectComboBoxExA(
+@@ -11673,6 +14850,8 @@ DlgDirSelectComboBoxExA(
      _Out_writes_(cchOut) LPSTR lpString,
      _In_ int cchOut,
      _In_ int idComboBox);
@@ -9085,7 +9112,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12032,13 +15190,23 @@ DlgDirSelectComboBoxExW(
+@@ -12032,13 +15211,23 @@ DlgDirSelectComboBoxExW(
  #define SIF_TRACKPOS        0x0010
  #define SIF_ALL             (SIF_RANGE | SIF_PAGE | SIF_POS | SIF_TRACKPOS)
  
@@ -9110,7 +9137,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      int     nMin;
      int     nMax;
      UINT    nPage;
-@@ -12047,21 +15215,24 @@ typedef struct tagSCROLLINFO
+@@ -12047,21 +15236,24 @@ typedef struct tagSCROLLINFO
  }   SCROLLINFO, FAR *LPSCROLLINFO;
  typedef SCROLLINFO CONST FAR *LPCSCROLLINFO;
  
@@ -9137,7 +9164,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_ LPSCROLLINFO lpsi);
  
  
-@@ -12084,9 +15255,25 @@ GetScrollInfo(
+@@ -12084,9 +15276,25 @@ GetScrollInfo(
   */
  #define MDITILE_VERTICAL       0x0000 /*not in win3.1 */
  #define MDITILE_HORIZONTAL     0x0001 /*not in win3.1 */
@@ -9163,7 +9190,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0500 */
  
  #pragma region Desktop Family
-@@ -12100,7 +15287,7 @@ typedef struct tagMDICREATESTRUCTA {
+@@ -12100,7 +15308,7 @@ typedef struct tagMDICREATESTRUCTA {
      int y;
      int cx;
      int cy;
@@ -9172,7 +9199,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      LPARAM lParam;        /* app-defined stuff */
  } MDICREATESTRUCTA, *LPMDICREATESTRUCTA;
  typedef struct tagMDICREATESTRUCTW {
-@@ -12111,7 +15298,7 @@ typedef struct tagMDICREATESTRUCTW {
+@@ -12111,7 +15319,7 @@ typedef struct tagMDICREATESTRUCTW {
      int y;
      int cx;
      int cy;
@@ -9181,7 +9208,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      LPARAM lParam;        /* app-defined stuff */
  } MDICREATESTRUCTW, *LPMDICREATESTRUCTW;
  #ifdef UNICODE
-@@ -12127,6 +15314,7 @@ typedef struct tagCLIENTCREATESTRUCT {
+@@ -12127,6 +15335,7 @@ typedef struct tagCLIENTCREATESTRUCT {
      UINT idFirstChild;
  } CLIENTCREATESTRUCT, *LPCLIENTCREATESTRUCT;
  
@@ -9189,7 +9216,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -12136,6 +15324,7 @@ DefFrameProcA(
+@@ -12136,6 +15345,7 @@ DefFrameProcA(
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -9197,7 +9224,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -12151,6 +15340,7 @@ DefFrameProcW(
+@@ -12151,6 +15361,7 @@ DefFrameProcW(
  #define DefFrameProc  DefFrameProcA
  #endif // !UNICODE
  
@@ -9205,7 +9232,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -12164,6 +15354,7 @@ DefMDIChildProcA(
+@@ -12164,6 +15375,7 @@ DefMDIChildProcA(
      _In_ UINT uMsg,
      _In_ WPARAM wParam,
      _In_ LPARAM lParam);
@@ -9213,7 +9240,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  #ifndef _MAC
  LRESULT
-@@ -12185,6 +15376,7 @@ DefMDIChildProcW(
+@@ -12185,6 +15397,7 @@ DefMDIChildProcW(
  
  #ifndef NOMSG
  
@@ -9221,7 +9248,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12194,19 +15386,23 @@ TranslateMDISysAccel(
+@@ -12194,19 +15407,23 @@ TranslateMDISysAccel(
  
  #endif /* !NOMSG */
  
@@ -9246,7 +9273,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _In_ int X,
      _In_ int Y,
      _In_ int nWidth,
-@@ -12214,13 +15410,15 @@ CreateMDIWindowA(
+@@ -12214,13 +15431,15 @@ CreateMDIWindowA(
      _In_opt_ HWND hWndParent,
      _In_opt_ HINSTANCE hInstance,
      _In_ LPARAM lParam);
@@ -9263,7 +9290,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _In_ int X,
      _In_ int Y,
      _In_ int nWidth,
-@@ -12235,21 +15433,25 @@ CreateMDIWindowW(
+@@ -12235,21 +15454,25 @@ CreateMDIWindowW(
  #endif // !UNICODE
  
  #if(WINVER >= 0x0400)
@@ -9291,7 +9318,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _In_opt_ CONST RECT * lpRect,
      _In_ UINT cKids,
      _In_reads_opt_(cKids) const HWND FAR * lpKids);
-@@ -12367,6 +15569,8 @@ typedef LPHELPWININFOA LPHELPWININFO;
+@@ -12367,6 +15590,8 @@ typedef LPHELPWININFOA LPHELPWININFO;
  
  
  
@@ -9300,7 +9327,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12375,6 +15579,8 @@ WinHelpA(
+@@ -12375,6 +15600,8 @@ WinHelpA(
      _In_opt_ LPCSTR lpszHelp,
      _In_ UINT uCommand,
      _In_ ULONG_PTR dwData);
@@ -9309,7 +9336,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -12398,26 +15604,48 @@ WinHelpW(
+@@ -12398,26 +15625,48 @@ WinHelpW(
  
  #define GR_GDIOBJECTS       0       /* Count of GDI objects */
  #define GR_USEROBJECTS      1       /* Count of USER objects */
@@ -9359,7 +9386,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0500 */
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -12514,6 +15742,52 @@ GetGuiResources(
+@@ -12514,6 +15763,52 @@ GetGuiResources(
  #define SPI_GETMOUSETRAILS          0x005E
  #define SPI_SETSCREENSAVERRUNNING   0x0061
  #define SPI_SCREENSAVERRUNNING     SPI_SETSCREENSAVERRUNNING
@@ -9412,7 +9439,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0400 */
  #define SPI_GETFILTERKEYS          0x0032
  #define SPI_SETFILTERKEYS          0x0033
-@@ -12530,12 +15804,75 @@ GetGuiResources(
+@@ -12530,12 +15825,75 @@ GetGuiResources(
  #if(WINVER >= 0x0400)
  #define SPI_GETSERIALKEYS          0x003E
  #define SPI_SETSERIALKEYS          0x003F
@@ -9488,7 +9515,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0400 */
  #if (_WIN32_WINNT >= 0x0400) || (_WIN32_WINDOWS > 0x0400)
  #define SPI_GETMOUSEHOVERWIDTH     0x0062
-@@ -12552,10 +15889,32 @@ GetGuiResources(
+@@ -12552,10 +15910,32 @@ GetGuiResources(
  #if (_WIN32_WINNT >= 0x0600)
  #define SPI_GETWHEELSCROLLCHARS   0x006C
  #define SPI_SETWHEELSCROLLCHARS   0x006D
@@ -9521,7 +9548,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif
  
  
-@@ -12564,6 +15923,14 @@ GetGuiResources(
+@@ -12564,6 +15944,14 @@ GetGuiResources(
  #define SPI_SETMOUSESPEED         0x0071
  #define SPI_GETSCREENSAVERRUNNING 0x0072
  #define SPI_GETDESKWALLPAPER      0x0073
@@ -9536,7 +9563,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0500 */
  
  #if(WINVER >= 0x0600)
-@@ -12572,6 +15939,14 @@ GetGuiResources(
+@@ -12572,6 +15960,14 @@ GetGuiResources(
  
  #define SPI_GETSCREENSAVESECURE   0x0076
  #define SPI_SETSCREENSAVESECURE   0x0077
@@ -9551,7 +9578,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0600 */
  
  #if(_WIN32_WINNT >= 0x0601)
-@@ -12601,6 +15976,36 @@ GetGuiResources(
+@@ -12601,6 +15997,36 @@ GetGuiResources(
  #define SPI_SETSNAPSIZING               0x008F
  #define SPI_GETDOCKMOVING               0x0090
  #define SPI_SETDOCKMOVING               0x0091
@@ -9588,7 +9615,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0601 */
  
  #if(WINVER >= 0x0602)
-@@ -12641,12 +16046,28 @@ typedef struct tagTouchPredictionParameters
+@@ -12641,12 +16067,28 @@ typedef struct tagTouchPredictionParameters
  
  #define SPI_GETMENURECT   0x00A2
  #define SPI_SETMENURECT   0x00A3
@@ -9617,7 +9644,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif // NTDDI_VERSION >= NTDDI_WIN11_GE
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_CO)
-@@ -12702,6 +16123,22 @@ typedef struct tagTouchPredictionParameters
+@@ -12702,6 +16144,22 @@ typedef struct tagTouchPredictionParameters
  #define SPI_SETDROPSHADOW                   0x1025
  #define SPI_GETBLOCKSENDINPUTRESETS         0x1026
  #define SPI_SETBLOCKSENDINPUTRESETS         0x1027
@@ -9640,7 +9667,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  #define SPI_GETUIEFFECTS                    0x103E
-@@ -12716,6 +16153,18 @@ typedef struct tagTouchPredictionParameters
+@@ -12716,6 +16174,18 @@ typedef struct tagTouchPredictionParameters
  #define SPI_SETCLEARTYPE                    0x1049
  #define SPI_GETSPEECHRECOGNITION            0x104A
  #define SPI_SETSPEECHRECOGNITION            0x104B
@@ -9659,7 +9686,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0601)
-@@ -12725,6 +16174,16 @@ typedef struct tagTouchPredictionParameters
+@@ -12725,6 +16195,16 @@ typedef struct tagTouchPredictionParameters
  #define SPI_SETTHREADLOCALINPUTSETTINGS     0x104F
  #define SPI_GETSYSTEMLANGUAGEBAR            0x1050
  #define SPI_SETSYSTEMLANGUAGEBAR            0x1051
@@ -9676,7 +9703,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0601 */
  
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
-@@ -12739,6 +16198,48 @@ typedef struct tagTouchPredictionParameters
+@@ -12739,6 +16219,48 @@ typedef struct tagTouchPredictionParameters
  #define SPI_GETCARETWIDTH                   0x2006
  #define SPI_SETCARETWIDTH                   0x2007
  
@@ -9725,7 +9752,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #if(_WIN32_WINNT >= 0x0501)
  #define SPI_GETMOUSECLICKLOCKTIME           0x2008
  #define SPI_SETMOUSECLICKLOCKTIME           0x2009
-@@ -12760,6 +16261,22 @@ typedef struct tagTouchPredictionParameters
+@@ -12760,6 +16282,22 @@ typedef struct tagTouchPredictionParameters
  #define SPI_GETFONTSMOOTHINGORIENTATION           0x2012
  #define SPI_SETFONTSMOOTHINGORIENTATION           0x2013
  
@@ -9748,7 +9775,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /* constants for SPI_GETFONTSMOOTHINGORIENTATION and SPI_SETFONTSMOOTHINGORIENTATION: */
  #define FE_FONTSMOOTHINGORIENTATIONBGR   0x0000
  #define FE_FONTSMOOTHINGORIENTATIONRGB   0x0001
-@@ -12770,6 +16287,14 @@ typedef struct tagTouchPredictionParameters
+@@ -12770,6 +16308,14 @@ typedef struct tagTouchPredictionParameters
  #define SPI_SETMINIMUMHITRADIUS             0x2015
  #define SPI_GETMESSAGEDURATION              0x2016
  #define SPI_SETMESSAGEDURATION              0x2017
@@ -9763,7 +9790,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0602)
-@@ -12782,6 +16307,14 @@ typedef struct tagTouchPredictionParameters
+@@ -12782,6 +16328,14 @@ typedef struct tagTouchPredictionParameters
  
  #define SPI_GETGESTUREVISUALIZATION         0x201A
  #define SPI_SETGESTUREVISUALIZATION         0x201B
@@ -9778,7 +9805,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /* constants for SPI_GETGESTUREVISUALIZATION and SPI_SETGESTUREVISUALIZATION */
  #define GESTUREVISUALIZATION_OFF                 0x0000
  #define GESTUREVISUALIZATION_ON                  0x001F
-@@ -12796,6 +16329,12 @@ typedef struct tagTouchPredictionParameters
+@@ -12796,6 +16350,12 @@ typedef struct tagTouchPredictionParameters
  #define SPI_GETMOUSEWHEELROUTING            0x201C
  #define SPI_SETMOUSEWHEELROUTING            0x201D
  
@@ -9791,7 +9818,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define MOUSEWHEEL_ROUTING_FOCUS                  0
  #define MOUSEWHEEL_ROUTING_HYBRID                 1
  #if(WINVER >= 0x0603)
-@@ -12815,6 +16354,14 @@ typedef struct tagTouchPredictionParameters
+@@ -12815,6 +16375,14 @@ typedef struct tagTouchPredictionParameters
  
  #define SPI_GETPENARBITRATIONTYPE                0x2020
  #define SPI_SETPENARBITRATIONTYPE                0x2021
@@ -9806,7 +9833,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /* constants for SPI_{GET|SET}PENARBITRATIONTYPE */
  #define PENARBITRATIONTYPE_NONE                  0x0000
  #define PENARBITRATIONTYPE_WIN8                  0x0001
-@@ -12826,11 +16373,23 @@ typedef struct tagTouchPredictionParameters
+@@ -12826,11 +16394,23 @@ typedef struct tagTouchPredictionParameters
  #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
  #define SPI_GETCARETTIMEOUT                      0x2022
  #define SPI_SETCARETTIMEOUT                      0x2023
@@ -9830,7 +9857,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  typedef enum tagHANDEDNESS {
      HANDEDNESS_LEFT = 0,
      HANDEDNESS_RIGHT
-@@ -12846,6 +16405,13 @@ typedef enum tagHANDEDNESS {
+@@ -12846,6 +16426,13 @@ typedef enum tagHANDEDNESS {
  #define SPIF_SENDWININICHANGE 0x0002
  #define SPIF_SENDCHANGE       SPIF_SENDWININICHANGE
  
@@ -9844,7 +9871,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  #define METRICS_USEDEFAULT -1
  #ifdef _WINGDI_
-@@ -12916,6 +16482,14 @@ typedef LPNONCLIENTMETRICSA LPNONCLIENTMETRICS;
+@@ -12916,6 +16503,14 @@ typedef LPNONCLIENTMETRICSA LPNONCLIENTMETRICS;
  #define ARW_BOTTOMRIGHT             0x0001L
  #define ARW_TOPLEFT                 0x0002L
  #define ARW_TOPRIGHT                0x0003L
@@ -9859,7 +9886,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define ARW_STARTMASK               0x0003L
  #define ARW_STARTRIGHT              0x0001L
  #define ARW_STARTTOP                0x0002L
-@@ -12935,7 +16509,7 @@ typedef struct tagMINIMIZEDMETRICS
+@@ -12935,7 +16530,7 @@ typedef struct tagMINIMIZEDMETRICS
      int     iWidth;
      int     iHorzGap;
      int     iVertGap;
@@ -9868,7 +9895,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  }   MINIMIZEDMETRICS, *PMINIMIZEDMETRICS, *LPMINIMIZEDMETRICS;
  
  #ifdef _WINGDI_
-@@ -12977,7 +16551,7 @@ typedef struct tagANIMATIONINFO
+@@ -12977,7 +16572,7 @@ typedef struct tagANIMATIONINFO
  typedef struct tagSERIALKEYSA
  {
      UINT    cbSize;
@@ -9877,7 +9904,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      LPSTR     lpszActivePort;
      LPSTR     lpszPort;
      UINT    iBaudRate;
-@@ -12987,7 +16561,7 @@ typedef struct tagSERIALKEYSA
+@@ -12987,7 +16582,7 @@ typedef struct tagSERIALKEYSA
  typedef struct tagSERIALKEYSW
  {
      UINT    cbSize;
@@ -9886,7 +9913,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      LPWSTR    lpszActivePort;
      LPWSTR    lpszPort;
      UINT    iBaudRate;
-@@ -13007,17 +16581,24 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
+@@ -13007,17 +16602,24 @@ typedef LPSERIALKEYSA LPSERIALKEYS;
  #define SERKF_AVAILABLE     0x00000002
  #define SERKF_INDICATOR     0x00000004
  
@@ -9913,7 +9940,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      LPWSTR  lpszDefaultScheme;
  }   HIGHCONTRASTW, *LPHIGHCONTRASTW;
  #ifdef UNICODE
-@@ -13043,6 +16624,18 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13043,6 +16645,18 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #define HCF_DEFAULTDESKTOP          0x00000200
  #define HCF_OPTION_NOTHEMECHANGE    0x00001000
  
@@ -9932,7 +9959,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /* Flags for ChangeDisplaySettings */
  #define CDS_UPDATEREGISTRY           0x00000001
  #define CDS_TEST                     0x00000002
-@@ -13053,11 +16646,30 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13053,11 +16667,30 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #if(WINVER >= 0x0600)
  #define CDS_ENABLE_UNSAFE_MODES      0x00000100
  #define CDS_DISABLE_UNSAFE_MODES     0x00000200
@@ -9963,7 +9990,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #include <tvout.h>
  
  /* Return values for ChangeDisplaySettings */
-@@ -13068,8 +16680,24 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13068,8 +16701,24 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #define DISP_CHANGE_NOTUPDATED      -3
  #define DISP_CHANGE_BADFLAGS        -4
  #define DISP_CHANGE_BADPARAM        -5
@@ -9988,7 +10015,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0501 */
  
  #pragma region Desktop Family
-@@ -13078,41 +16706,45 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
+@@ -13078,41 +16727,45 @@ typedef LPHIGHCONTRASTA LPHIGHCONTRAST;
  #ifdef _WINGDI_
  #ifndef NOGDI
  
@@ -10042,7 +10069,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _In_opt_ LPVOID lParam);
  #ifdef UNICODE
  #define ChangeDisplaySettingsEx  ChangeDisplaySettingsExW
-@@ -13124,19 +16756,27 @@ ChangeDisplaySettingsExW(
+@@ -13124,19 +16777,27 @@ ChangeDisplaySettingsExW(
  #define ENUM_CURRENT_SETTINGS       ((DWORD)-1)
  #define ENUM_REGISTRY_SETTINGS      ((DWORD)-2)
  
@@ -10072,7 +10099,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_ DEVMODEW* lpDevMode);
  #ifdef UNICODE
  #define EnumDisplaySettings  EnumDisplaySettingsW
-@@ -13146,22 +16786,24 @@ EnumDisplaySettingsW(
+@@ -13146,22 +16807,24 @@ EnumDisplaySettingsW(
  
  #if(WINVER >= 0x0500)
  
@@ -10101,7 +10128,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #ifdef UNICODE
  #define EnumDisplaySettingsEx  EnumDisplaySettingsExW
  #else
-@@ -13172,6 +16814,13 @@ EnumDisplaySettingsExW(
+@@ -13172,6 +16835,13 @@ EnumDisplaySettingsExW(
  #define EDS_RAWMODE                   0x00000002
  #define EDS_ROTATEDMODE               0x00000004
  
@@ -10115,7 +10142,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13180,6 +16829,7 @@ EnumDisplayDevicesA(
+@@ -13180,6 +16850,7 @@ EnumDisplayDevicesA(
      _In_ DWORD iDevNum,
      _Inout_ PDISPLAY_DEVICEA lpDisplayDevice,
      _In_ DWORD dwFlags);
@@ -10123,7 +10150,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13201,14 +16851,16 @@ EnumDisplayDevicesW(
+@@ -13201,14 +16872,16 @@ EnumDisplayDevicesW(
  
  #if(WINVER >= 0x0601)
  
@@ -10142,7 +10169,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  LONG
  WINAPI
-@@ -13217,13 +16869,14 @@ SetDisplayConfig(
+@@ -13217,13 +16890,14 @@ SetDisplayConfig(
      _In_reads_opt_(numPathArrayElements) DISPLAYCONFIG_PATH_INFO* pathArray,
      _In_ UINT32 numModeInfoArrayElements,
      _In_reads_opt_(numModeInfoArrayElements) DISPLAYCONFIG_MODE_INFO* modeInfoArray,
@@ -10160,7 +10187,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_ UINT32* numPathArrayElements,
      _Out_writes_to_(*numPathArrayElements, *numPathArrayElements) DISPLAYCONFIG_PATH_INFO* pathArray,
      _Inout_ UINT32* numModeInfoArrayElements,
-@@ -13232,12 +16885,14 @@ QueryDisplayConfig(
+@@ -13232,12 +16906,14 @@ QueryDisplayConfig(
      _When_(flags & QDC_DATABASE_CURRENT, _Out_)
          DISPLAYCONFIG_TOPOLOGY_ID* currentTopologyId);
  
@@ -10175,7 +10202,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  LONG
  WINAPI
-@@ -13251,24 +16906,28 @@ DisplayConfigSetDeviceInfo(
+@@ -13251,24 +16927,28 @@ DisplayConfigSetDeviceInfo(
  #endif /* _WINGDI_ */
  
  
@@ -10208,7 +10235,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #ifdef UNICODE
  #define SystemParametersInfo  SystemParametersInfoW
  #else
-@@ -13277,6 +16936,8 @@ SystemParametersInfoW(
+@@ -13277,6 +16957,8 @@ SystemParametersInfoW(
  
  
  #if(WINVER >= 0x0605)
@@ -10217,7 +10244,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  _Success_(return != FALSE)
  BOOL
-@@ -13331,7 +16992,7 @@ typedef struct tagFILTERKEYS
+@@ -13331,7 +17013,7 @@ typedef struct tagFILTERKEYS
  typedef struct tagSTICKYKEYS
  {
      UINT  cbSize;
@@ -10226,7 +10253,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  } STICKYKEYS, *LPSTICKYKEYS;
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -13349,6 +17010,19 @@ typedef struct tagSTICKYKEYS
+@@ -13349,6 +17031,19 @@ typedef struct tagSTICKYKEYS
  #define SKF_AUDIBLEFEEDBACK 0x00000040
  #define SKF_TRISTATE        0x00000080
  #define SKF_TWOKEYSOFF      0x00000100
@@ -10246,7 +10273,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #if(_WIN32_WINNT >= 0x0500)
  #define SKF_LALTLATCHED       0x10000000
  #define SKF_LCTLLATCHED       0x04000000
-@@ -13366,6 +17040,26 @@ typedef struct tagSTICKYKEYS
+@@ -13366,6 +17061,26 @@ typedef struct tagSTICKYKEYS
  #define SKF_RSHIFTLOCKED      0x00020000
  #define SKF_LWINLOCKED        0x00400000
  #define SKF_RWINLOCKED        0x00800000
@@ -10273,7 +10300,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0500 */
  
  #pragma region Desktop Family
-@@ -13423,16 +17117,36 @@ typedef struct tagACCESSTIMEOUT
+@@ -13423,16 +17138,36 @@ typedef struct tagACCESSTIMEOUT
  #define ATF_TIMEOUTON       0x00000001
  #define ATF_ONOFFFEEDBACK   0x00000002
  
@@ -10310,7 +10337,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /* values for SOUNDSENTRY iWindowsEffect field */
  #define SSWF_NONE     0
  #define SSWF_TITLE    1
-@@ -13440,20 +17154,29 @@ typedef struct tagACCESSTIMEOUT
+@@ -13440,20 +17175,29 @@ typedef struct tagACCESSTIMEOUT
  #define SSWF_DISPLAY  3
  #define SSWF_CUSTOM   4
  
@@ -10344,7 +10371,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      DWORD iWindowsEffectMSec;
      LPSTR   lpszWindowsEffectDLL;
      DWORD iWindowsEffectOrdinal;
-@@ -13461,14 +17184,14 @@ typedef struct tagSOUNDSENTRYA
+@@ -13461,14 +17205,14 @@ typedef struct tagSOUNDSENTRYA
  typedef struct tagSOUNDSENTRYW
  {
      UINT cbSize;
@@ -10363,7 +10390,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      DWORD iWindowsEffectMSec;
      LPWSTR  lpszWindowsEffectDLL;
      DWORD iWindowsEffectOrdinal;
-@@ -13491,9 +17214,17 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
+@@ -13491,9 +17235,17 @@ typedef LPSOUNDSENTRYA LPSOUNDSENTRY;
  #define SSF_AVAILABLE       0x00000002
  #define SSF_INDICATOR       0x00000004
  
@@ -10381,7 +10408,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13556,16 +17287,28 @@ SetDebugErrorLevel(
+@@ -13556,16 +17308,28 @@ SetDebugErrorLevel(
  #define SLE_MINORERROR  0x00000002
  #define SLE_WARNING     0x00000003
  
@@ -10411,7 +10438,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  int
  WINAPI
-@@ -13576,7 +17319,7 @@ InternalGetWindowText(
+@@ -13576,7 +17340,7 @@ InternalGetWindowText(
  
  
  #if defined(WINNT)
@@ -10420,7 +10447,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  BOOL
  WINAPI
  EndTask(
-@@ -13605,29 +17348,39 @@ CancelShutdown(
+@@ -13605,29 +17369,39 @@ CancelShutdown(
  #define MONITOR_DEFAULTTOPRIMARY    0x00000001
  #define MONITOR_DEFAULTTONEAREST    0x00000002
  
@@ -10463,7 +10490,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -13685,12 +17438,14 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
+@@ -13685,12 +17459,14 @@ typedef LPMONITORINFOEXA LPMONITORINFOEX;
  #endif // UNICODE
  #endif
  
@@ -10478,7 +10505,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13705,6 +17460,7 @@ GetMonitorInfoW(
+@@ -13705,6 +17481,7 @@ GetMonitorInfoW(
  
  typedef BOOL (CALLBACK* MONITORENUMPROC)(HMONITOR, HDC, LPRECT, LPARAM);
  
@@ -10486,7 +10513,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13726,6 +17482,7 @@ EnumDisplayMonitors(
+@@ -13726,6 +17503,7 @@ EnumDisplayMonitors(
   * WinEvents - Active Accessibility hooks
   */
  
@@ -10494,7 +10521,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  VOID
  WINAPI
-@@ -13744,6 +17501,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
+@@ -13744,6 +17522,7 @@ typedef VOID (CALLBACK* WINEVENTPROC)(
      DWORD         idEventThread,
      DWORD         dwmsEventTime);
  
@@ -10502,7 +10529,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HWINEVENTHOOK
  WINAPI
-@@ -13757,6 +17515,7 @@ SetWinEventHook(
+@@ -13757,6 +17536,7 @@ SetWinEventHook(
      _In_ DWORD dwFlags);
  
  #if(_WIN32_WINNT >= 0x0501)
@@ -10510,7 +10537,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -13778,12 +17537,18 @@ IsWinEventHookInstalled(
+@@ -13778,12 +17558,18 @@ IsWinEventHookInstalled(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -10529,7 +10556,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
  
-@@ -13828,6 +17593,24 @@ UnhookWinEvent(
+@@ -13828,6 +17614,24 @@ UnhookWinEvent(
  #define     OBJID_QUERYCLASSNAMEIDX ((LONG)0xFFFFFFF4)
  #define     OBJID_NATIVEOM      ((LONG)0xFFFFFFF0)
  
@@ -10554,7 +10581,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  /*
   * EVENT DEFINITION
   */
-@@ -14391,6 +18174,15 @@ UnhookWinEvent(
+@@ -14391,6 +18195,15 @@ UnhookWinEvent(
  #define ALERT_SYSTEM_ERROR              3       // MB_ERROR
  #define ALERT_SYSTEM_QUERY              4       // MB_QUESTION
  #define ALERT_SYSTEM_CRITICAL           5       // HardSysErrBox
@@ -10570,7 +10597,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define CALERT_SYSTEM                   6
  
  #pragma region Desktop Family
-@@ -14399,7 +18191,7 @@ UnhookWinEvent(
+@@ -14399,7 +18212,7 @@ UnhookWinEvent(
  typedef struct tagGUITHREADINFO
  {
      DWORD   cbSize;
@@ -10579,7 +10606,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      HWND    hwndActive;
      HWND    hwndFocus;
      HWND    hwndCapture;
-@@ -14417,6 +18209,15 @@ typedef struct tagGUITHREADINFO
+@@ -14417,6 +18230,15 @@ typedef struct tagGUITHREADINFO
  #define GUI_INMENUMODE      0x00000004
  #define GUI_SYSTEMMENUMODE  0x00000008
  #define GUI_POPUPMENUMODE   0x00000010
@@ -10595,7 +10622,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #if(_WIN32_WINNT >= 0x0501)
  #if defined(_WIN64)
  #define GUI_16BITTASK       0x00000000
-@@ -14428,6 +18229,8 @@ typedef struct tagGUITHREADINFO
+@@ -14428,6 +18250,8 @@ typedef struct tagGUITHREADINFO
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -10604,7 +10631,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14435,6 +18238,8 @@ GetGUIThreadInfo(
+@@ -14435,6 +18259,8 @@ GetGUIThreadInfo(
      _In_ DWORD idThread,
      _Inout_ PGUITHREADINFO pgui);
  
@@ -10613,7 +10640,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14445,12 +18250,14 @@ BlockInput(
+@@ -14445,12 +18271,14 @@ BlockInput(
  
  #define USER_DEFAULT_SCREEN_DPI 96
  
@@ -10628,7 +10655,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14460,36 +18267,42 @@ IsProcessDPIAware(
+@@ -14460,36 +18288,42 @@ IsProcessDPIAware(
  #endif /* _WIN32_WINNT >= 0x0600 */
  
  #if(WINVER >= 0x0605)
@@ -10671,7 +10698,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14497,30 +18310,36 @@ AreDpiAwarenessContextsEqual(
+@@ -14497,30 +18331,36 @@ AreDpiAwarenessContextsEqual(
      _In_ DPI_AWARENESS_CONTEXT dpiContextA,
      _In_ DPI_AWARENESS_CONTEXT dpiContextB);
  
@@ -10708,7 +10735,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14537,6 +18356,8 @@ InheritWindowMonitor(
+@@ -14537,6 +18377,8 @@ InheritWindowMonitor(
  #endif /* WINVER >= 0x0605 */
  
  #if(WINVER >= 0x0605)
@@ -10717,7 +10744,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14558,17 +18379,20 @@ GetDpiAwarenessContextForProcess(
+@@ -14558,17 +18400,20 @@ GetDpiAwarenessContextForProcess(
  
  #if(WINVER >= 0x0606)
  
@@ -10738,7 +10765,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  DPI_HOSTING_BEHAVIOR
  WINAPI
-@@ -14578,6 +18402,7 @@ GetWindowDpiHostingBehavior(
+@@ -14578,6 +18423,7 @@ GetWindowDpiHostingBehavior(
  #endif /* WINVER >= 0x0606 */
  
  
@@ -10746,7 +10773,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -14585,6 +18410,7 @@ GetWindowModuleFileNameA(
+@@ -14585,6 +18431,7 @@ GetWindowModuleFileNameA(
      _In_ HWND hwnd,
      _Out_writes_to_(cchFileNameMax, return) LPSTR pszFileName,
      _In_ UINT cchFileNameMax);
@@ -10754,7 +10781,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -14624,6 +18450,15 @@ GetWindowModuleFileNameW(
+@@ -14624,6 +18471,15 @@ GetWindowModuleFileNameW(
  #define STATE_SYSTEM_MOVEABLE           0x00040000
  #define STATE_SYSTEM_SELFVOICING        0x00080000
  #define STATE_SYSTEM_FOCUSABLE          0x00100000
@@ -10770,7 +10797,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define STATE_SYSTEM_SELECTABLE         0x00200000
  #define STATE_SYSTEM_LINKED             0x00400000
  #define STATE_SYSTEM_TRAVERSED          0x00800000
-@@ -14648,17 +18483,29 @@ GetWindowModuleFileNameW(
+@@ -14648,17 +18504,29 @@ GetWindowModuleFileNameW(
  typedef struct tagCURSORINFO
  {
      DWORD   cbSize;
@@ -10801,7 +10828,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14679,8 +18526,8 @@ typedef struct tagWINDOWINFO
+@@ -14679,8 +18547,8 @@ typedef struct tagWINDOWINFO
      DWORD cbSize;
      RECT rcWindow;
      RECT rcClient;
@@ -10812,7 +10839,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      DWORD dwWindowStatus;
      UINT cxWindowBorders;
      UINT cyWindowBorders;
-@@ -14690,6 +18537,13 @@ typedef struct tagWINDOWINFO
+@@ -14690,6 +18558,13 @@ typedef struct tagWINDOWINFO
  
  #define WS_ACTIVECAPTION    0x0001
  
@@ -10826,7 +10853,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14707,6 +18561,8 @@ typedef struct tagTITLEBARINFO
+@@ -14707,6 +18582,8 @@ typedef struct tagTITLEBARINFO
      DWORD rgstate[CCHILDREN_TITLEBAR + 1];
  } TITLEBARINFO, *PTITLEBARINFO, *LPTITLEBARINFO;
  
@@ -10835,7 +10862,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14738,12 +18594,14 @@ typedef struct tagMENUBARINFO
+@@ -14738,12 +18615,14 @@ typedef struct tagMENUBARINFO
      BOOL fUnused:30;     // reserved
  } MENUBARINFO, *PMENUBARINFO, *LPMENUBARINFO;
  
@@ -10851,7 +10878,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _In_ LONG idItem,
      _Inout_ PMENUBARINFO pmbi);
  
-@@ -14761,12 +18619,14 @@ typedef struct tagSCROLLBARINFO
+@@ -14761,12 +18640,14 @@ typedef struct tagSCROLLBARINFO
      DWORD rgstate[CCHILDREN_SCROLLBAR + 1];
  } SCROLLBARINFO, *PSCROLLBARINFO, *LPSCROLLBARINFO;
  
@@ -10867,7 +10894,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_ PSCROLLBARINFO psbi);
  
  /*
-@@ -14777,12 +18637,14 @@ typedef struct tagCOMBOBOXINFO
+@@ -14777,12 +18658,14 @@ typedef struct tagCOMBOBOXINFO
      DWORD cbSize;
      RECT rcItem;
      RECT rcButton;
@@ -10883,7 +10910,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14800,15 +18662,23 @@ GetComboBoxInfo(
+@@ -14800,15 +18683,23 @@ GetComboBoxInfo(
  #define     GA_ROOT         2
  #define     GA_ROOTOWNER    3
  
@@ -10908,7 +10935,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  
  /*
-@@ -14817,6 +18687,7 @@ GetAncestor(
+@@ -14817,6 +18708,7 @@ GetAncestor(
   * fields will get returned.  In other words, it is kind of a cross between
   * ChildWindowFromPointEx and WindowFromPoint.
   */
@@ -10916,7 +10943,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  HWND
  WINAPI
-@@ -14840,6 +18711,8 @@ RealGetWindowClassA(
+@@ -14840,6 +18732,8 @@ RealGetWindowClassA(
   * This gets the name of the window TYPE, not class.  This allows us to
   * recognize ThunderButton32 et al.
   */
@@ -10925,7 +10952,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -14869,6 +18742,8 @@ typedef struct tagALTTABINFO
+@@ -14869,6 +18763,8 @@ typedef struct tagALTTABINFO
      POINT ptStart;
  } ALTTABINFO, *PALTTABINFO, *LPALTTABINFO;
  
@@ -10934,7 +10961,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14878,6 +18753,8 @@ GetAltTabInfoA(
+@@ -14878,6 +18774,8 @@ GetAltTabInfoA(
      _Inout_ PALTTABINFO pati,
      _Out_writes_opt_(cchItemText) LPSTR pszItemText,
      _In_ UINT cchItemText);
@@ -10943,7 +10970,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14897,6 +18774,7 @@ GetAltTabInfoW(
+@@ -14897,6 +18795,7 @@ GetAltTabInfoW(
   * Listbox information.
   * Returns the number of items per row.
   */
@@ -10951,7 +10978,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  DWORD
  WINAPI
-@@ -14914,6 +18792,8 @@ GetListBoxInfo(
+@@ -14914,6 +18813,8 @@ GetListBoxInfo(
  
  
  #if(_WIN32_WINNT >= 0x0500)
@@ -10960,7 +10987,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14923,6 +18803,8 @@ LockWorkStation(
+@@ -14923,6 +18824,8 @@ LockWorkStation(
  
  #if(_WIN32_WINNT >= 0x0500)
  
@@ -10969,7 +10996,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -14994,6 +18876,13 @@ typedef struct tagRAWINPUTHEADER {
+@@ -14994,6 +18897,13 @@ typedef struct tagRAWINPUTHEADER {
  #define RIM_TYPEMOUSE       0
  #define RIM_TYPEKEYBOARD    1
  #define RIM_TYPEHID         2
@@ -10983,7 +11010,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #define RIM_TYPEMAX         2
  
  #pragma region Desktop Family
-@@ -15012,7 +18901,7 @@ typedef struct tagRAWMOUSE {
+@@ -15012,7 +18922,7 @@ typedef struct tagRAWMOUSE {
      /*
       * Indicator flags.
       */
@@ -10992,7 +11019,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
      /*
       * The transition state of the mouse buttons.
-@@ -15094,8 +18983,21 @@ typedef struct tagRAWMOUSE {
+@@ -15094,8 +19004,21 @@ typedef struct tagRAWMOUSE {
  #define MOUSE_MOVE_ABSOLUTE         1
  #define MOUSE_VIRTUAL_DESKTOP    0x02  // the coordinates are mapped to the virtual desktop
  #define MOUSE_ATTRIBUTES_CHANGED 0x04  // requery for mouse attributes
@@ -11014,7 +11041,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* WINVER >= 0x0600 */
  // NOTE: 0x100 is already claimed by MOUSE_TERMSRV_SRC_SHADOW in ntddmou.w
  
-@@ -15201,15 +19103,22 @@ typedef struct tagRAWINPUT {
+@@ -15201,15 +19124,22 @@ typedef struct tagRAWINPUT {
  #define RID_INPUT               0x10000003
  #define RID_HEADER              0x10000005
  
@@ -11038,7 +11065,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Out_writes_bytes_to_opt_(*pcbSize, return) LPVOID pData,
      _Inout_ PUINT pcbSize,
      _In_ UINT cbSizeHeader);
-@@ -15224,6 +19133,13 @@ GetRawInputData(
+@@ -15224,6 +19154,13 @@ GetRawInputData(
  #define RIDI_DEVICENAME         0x20000007  // the return valus is the character length, not the byte size
  #define RIDI_DEVICEINFO         0x2000000b
  
@@ -11052,7 +11079,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -15257,7 +19173,7 @@ typedef struct tagRID_DEVICE_INFO_HID {
+@@ -15257,7 +19194,7 @@ typedef struct tagRID_DEVICE_INFO_HID {
  
  typedef struct tagRID_DEVICE_INFO {
      DWORD cbSize;
@@ -11061,7 +11088,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      union {
          RID_DEVICE_INFO_MOUSE mouse;
          RID_DEVICE_INFO_KEYBOARD keyboard;
-@@ -15265,20 +19181,24 @@ typedef struct tagRID_DEVICE_INFO {
+@@ -15265,20 +19202,24 @@ typedef struct tagRID_DEVICE_INFO {
      } DUMMYUNIONNAME;
  } RID_DEVICE_INFO, *PRID_DEVICE_INFO, *LPRID_DEVICE_INFO;
  
@@ -11088,7 +11115,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_updates_bytes_to_opt_(*pcbSize, *pcbSize) LPVOID pData,
      _Inout_ PUINT pcbSize);
  #ifdef UNICODE
-@@ -15291,6 +19211,8 @@ GetRawInputDeviceInfoW(
+@@ -15291,6 +19232,8 @@ GetRawInputDeviceInfoW(
  /*
   * Raw Input Bulk Read: GetRawInputBuffer
   */
@@ -11097,7 +11124,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -15305,7 +19227,7 @@ GetRawInputBuffer(
+@@ -15305,7 +19248,7 @@ GetRawInputBuffer(
  typedef struct tagRAWINPUTDEVICE {
      USHORT usUsagePage; // Toplevel collection UsagePage
      USHORT usUsage;     // Toplevel collection Usage
@@ -11106,7 +11133,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      HWND hwndTarget;    // Target hwnd. NULL = follows keyboard focus
  } RAWINPUTDEVICE, *PRAWINPUTDEVICE, *LPRAWINPUTDEVICE;
  
-@@ -15322,9 +19244,27 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
+@@ -15322,9 +19265,27 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
  #define RIDEV_CAPTUREMOUSE      0x00000200  // effective when mouse nolegacy is specified, otherwise it would be an error
  #define RIDEV_NOHOTKEYS         0x00000200  // effective for keyboard.
  #define RIDEV_APPKEYS           0x00000400  // effective for keyboard.
@@ -11134,7 +11161,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #endif /* _WIN32_WINNT >= 0x0501 */
  #define RIDEV_EXMODEMASK        0x000000F0
  
-@@ -15347,6 +19287,8 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
+@@ -15347,6 +19308,8 @@ typedef CONST RAWINPUTDEVICE* PCRAWINPUTDEVICE;
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -11143,7 +11170,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15355,6 +19297,8 @@ RegisterRawInputDevices(
+@@ -15355,6 +19318,8 @@ RegisterRawInputDevices(
      _In_ UINT uiNumDevices,
      _In_ UINT cbSize);
  
@@ -11152,7 +11179,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -15366,9 +19310,11 @@ GetRegisteredRawInputDevices(
+@@ -15366,9 +19331,11 @@ GetRegisteredRawInputDevices(
  
  typedef struct tagRAWINPUTDEVICELIST {
      HANDLE hDevice;
@@ -11165,7 +11192,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  UINT
  WINAPI
-@@ -15377,6 +19323,7 @@ GetRawInputDeviceList(
+@@ -15377,6 +19344,7 @@ GetRawInputDeviceList(
      _Inout_ PUINT puiNumDevices,
      _In_ UINT cbSize);
  
@@ -11173,7 +11200,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  LRESULT
  WINAPI
-@@ -15456,6 +19403,8 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
+@@ -15456,6 +19424,8 @@ typedef struct tagPOINTER_DEVICE_CURSOR_INFO {
      POINTER_DEVICE_CURSOR_TYPE cursor;
  } POINTER_DEVICE_CURSOR_INFO;
  
@@ -11182,7 +11209,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15463,6 +19412,8 @@ GetPointerDevices(
+@@ -15463,6 +19433,8 @@ GetPointerDevices(
      _Inout_ UINT32* deviceCount,
      _Out_writes_opt_(*deviceCount) POINTER_DEVICE_INFO *pointerDevices);
  
@@ -11191,7 +11218,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15470,6 +19421,8 @@ GetPointerDevice(
+@@ -15470,6 +19442,8 @@ GetPointerDevice(
      _In_ HANDLE device,
      _Out_writes_(1) POINTER_DEVICE_INFO *pointerDevice);
  
@@ -11200,7 +11227,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15478,6 +19431,8 @@ GetPointerDeviceProperties(
+@@ -15478,6 +19452,8 @@ GetPointerDeviceProperties(
      _Inout_ UINT32* propertyCount,
      _Out_writes_opt_(*propertyCount) POINTER_DEVICE_PROPERTY *pointerProperties);
  
@@ -11209,7 +11236,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15485,6 +19440,8 @@ RegisterPointerDeviceNotifications(
+@@ -15485,6 +19461,8 @@ RegisterPointerDeviceNotifications(
      _In_ HWND window,
      _In_ BOOL notifyRange);
  
@@ -11218,7 +11245,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15493,6 +19450,8 @@ GetPointerDeviceRects(
+@@ -15493,6 +19471,8 @@ GetPointerDeviceRects(
      _Out_writes_(1) RECT* pointerDeviceRect,
      _Out_writes_(1) RECT* displayRect);
  
@@ -11227,7 +11254,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15501,6 +19460,8 @@ GetPointerDeviceCursors(
+@@ -15501,6 +19481,8 @@ GetPointerDeviceCursors(
      _Inout_ UINT32* cursorCount,
      _Out_writes_opt_(*cursorCount) POINTER_DEVICE_CURSOR_INFO *deviceCursors);
  
@@ -11236,7 +11263,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15622,15 +19583,23 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
+@@ -15622,15 +19604,23 @@ typedef struct tagTOUCHPAD_PARAMETERS_V2 {
  #define MSGFLT_ADD 1
  #define MSGFLT_REMOVE 2
  
@@ -11261,7 +11288,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
  #pragma endregion
-@@ -15647,12 +19616,20 @@ ChangeWindowMessageFilter(
+@@ -15647,12 +19637,20 @@ ChangeWindowMessageFilter(
  #define MSGFLTINFO_ALREADYDISALLOWED_FORWND     (2)
  #define MSGFLTINFO_ALLOWED_HIGHER               (3)
  
@@ -11283,7 +11310,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  } CHANGEFILTERSTRUCT, *PCHANGEFILTERSTRUCT;
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -15665,16 +19642,25 @@ typedef struct tagCHANGEFILTERSTRUCT {
+@@ -15665,16 +19663,25 @@ typedef struct tagCHANGEFILTERSTRUCT {
  #define MSGFLT_ALLOW                            (1)
  #define MSGFLT_DISALLOW                         (2)
  
@@ -11310,7 +11337,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      _Inout_opt_ PCHANGEFILTERSTRUCT pChangeFilterStruct);   // Optional
  
  #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
-@@ -15721,6 +19707,18 @@ DECLARE_HANDLE(HGESTUREINFO);
+@@ -15721,6 +19728,18 @@ DECLARE_HANDLE(HGESTUREINFO);
  #define GID_PRESSANDTAP                 7
  #define GID_ROLLOVER                    GID_PRESSANDTAP
  
@@ -11329,7 +11356,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
-@@ -15773,6 +19771,8 @@ typedef struct tagGESTURENOTIFYSTRUCT {
+@@ -15773,6 +19792,8 @@ typedef struct tagGESTURENOTIFYSTRUCT {
   * Gesture information retrieval
   *   - HGESTUREINFO is received by a window in the lParam of a WM_GESTURE message.
   */
@@ -11338,7 +11365,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15786,6 +19786,8 @@ GetGestureInfo(
+@@ -15786,6 +19807,8 @@ GetGestureInfo(
   *   - Size, in bytes, of the extra argument data is available in the cbExtraArgs
   *     field of the GESTUREINFO structure retrieved using the GetGestureInfo function.
   */
@@ -11347,7 +11374,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15804,6 +19806,8 @@ GetGestureExtraArgs(
+@@ -15804,6 +19827,8 @@ GetGestureExtraArgs(
   *     one of the PostMessage or SendMessage class of API functions, the handle
   *     is transfered with the message and need not be closed by the application.
   */
@@ -11356,7 +11383,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15819,7 +19823,7 @@ CloseGestureInfoHandle(
+@@ -15819,7 +19844,7 @@ CloseGestureInfoHandle(
   *     system defaults.
   */
  typedef struct tagGESTURECONFIG {
@@ -11365,7 +11392,7 @@ diff --git a/um/winuser.h b/um/winuser.h
      DWORD dwWant;                   // settings related to gesture ID that are to be turned on
      DWORD dwBlock;                  // settings related to gesture ID that are to be turned off
  } GESTURECONFIG, *PGESTURECONFIG;
-@@ -15866,12 +19870,29 @@ typedef struct tagGESTURECONFIG {
+@@ -15866,12 +19891,29 @@ typedef struct tagGESTURECONFIG {
  #define GC_PRESSANDTAP                              0x00000001
  #define GC_ROLLOVER                                 GC_PRESSANDTAP
  
@@ -11395,7 +11422,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15887,6 +19908,8 @@ SetGestureConfig(
+@@ -15887,6 +19929,8 @@ SetGestureConfig(
  #define GCF_INCLUDE_ANCESTORS           0x00000001      // If specified, GetGestureConfig returns consolidated configuration
                                                          // for the specified window and it's parent window chain
  
@@ -11404,7 +11431,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15927,6 +19950,8 @@ GetGestureConfig(
+@@ -15927,6 +19971,8 @@ GetGestureConfig(
  #pragma region Desktop Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
@@ -11413,7 +11440,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15934,6 +19959,8 @@ ShutdownBlockReasonCreate(
+@@ -15934,6 +19980,8 @@ ShutdownBlockReasonCreate(
      _In_ HWND hWnd,
      _In_ LPCWSTR pwszReason);
  
@@ -11422,7 +11449,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15942,6 +19969,8 @@ ShutdownBlockReasonQuery(
+@@ -15942,6 +19990,8 @@ ShutdownBlockReasonQuery(
      _Out_writes_opt_(*pcchBuff) LPWSTR pwszBuff,
      _Inout_ DWORD *pcchBuff);
  
@@ -11431,7 +11458,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -15990,12 +20019,15 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
+@@ -15990,12 +20040,15 @@ typedef enum tagINPUT_MESSAGE_ORIGIN_ID {
  /*
   * API to determine the input source of the current messsage.
   */
@@ -11447,7 +11474,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -16097,12 +20129,16 @@ SetDisplayAutoRotationPreferences(
+@@ -16097,12 +20150,16 @@ SetDisplayAutoRotationPreferences(
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
  
  
@@ -11464,7 +11491,7 @@ diff --git a/um/winuser.h b/um/winuser.h
  WINUSERAPI
  BOOL
  WINAPI
-@@ -16486,6 +20522,3 @@ EnterMoveSizeLoop(
+@@ -16486,6 +20543,3 @@ EnterMoveSizeLoop(
  #endif  /* __cplusplus */
  
  #endif /* !_WINUSER_ */

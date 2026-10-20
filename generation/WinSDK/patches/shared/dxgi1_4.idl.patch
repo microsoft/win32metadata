@@ -1,15 +1,31 @@
 diff --git a/shared/dxgi1_4.idl b/shared/dxgi1_4.idl
-index cac1fa60..0e851f35 100644
+index cac1fa60..970396c5 100644
 --- a/shared/dxgi1_4.idl
 +++ b/shared/dxgi1_4.idl
-@@ -1,5 +1,6 @@
+@@ -1,5 +1,7 @@
  // Copyright (c) Microsoft Corporation.  All Rights Reserved
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  import "dxgi1_3.idl";
  
  cpp_quote("#include <winapifamily.h>")
-@@ -21,6 +22,7 @@ typedef enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
+@@ -12,15 +14,22 @@ cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_G
+ //  Return flags from CheckColorSpaceSupport
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG
+ {
+     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_PRESENT         = 0x00000001,
+     DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG_OVERLAY_PRESENT = 0x00000002
+ } DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGISwapChain3 interface
  //--------------------------------------------------------------------------------------------------------
@@ -17,7 +33,38 @@ index cac1fa60..0e851f35 100644
  [
      object,
      uuid( 94d99bdb-f1f8-4ab0-b236-7da0170edab1 ),
-@@ -58,6 +60,7 @@ typedef enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+@@ -31,14 +40,14 @@ interface IDXGISwapChain3 :
+     IDXGISwapChain2
+ {
+     UINT GetCurrentBackBufferIndex();
+-    HRESULT CheckColorSpaceSupport( [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace, [out, annotation("_Out_")] UINT* pColorSpaceSupport );
++    HRESULT CheckColorSpaceSupport( [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace, [out, annotation("_Out_ _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_COLOR_SPACE_SUPPORT_FLAG)")] UINT* pColorSpaceSupport );
+     HRESULT SetColorSpace1( [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace );
+     HRESULT ResizeBuffers1(
+         [in, annotation("_In_")] UINT BufferCount,
+         [in, annotation("_In_")] UINT Width,
+         [in, annotation("_In_")] UINT Height,
+         [in, annotation("_In_")] DXGI_FORMAT Format,
+-        [in, annotation("_In_")] UINT SwapChainFlags,
++        [in, annotation("_In_ _Win32_AssociatedEnum_(DXGI_SWAP_CHAIN_FLAG)")] UINT SwapChainFlags,
+         [in, annotation("_In_reads_(BufferCount)")] const UINT* pCreationNodeMask,
+         [in, annotation("_In_reads_(BufferCount)")] IUnknown* const* ppPresentQueue
+         );
+@@ -50,14 +59,21 @@ interface IDXGISwapChain3 :
+ //  Return flags from CheckOverlayColorSpaceSupport
+ //
+ //------------------------------------------------------------------------------
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+ typedef enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+ {
+     DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG_PRESENT = 0x00000001,
+ } DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG;
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__) && !defined(MIDL_PASS)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
  //--------------------------------------------------------------------------------------------------------
  // IDXGIOutput4 interface
  //--------------------------------------------------------------------------------------------------------
@@ -25,3 +72,12 @@ index cac1fa60..0e851f35 100644
  [
      object,
      uuid(dc7dca35-2196-414d-9F53-617884032a60),
+@@ -67,7 +83,7 @@ typedef enum DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG
+ interface IDXGIOutput4 :
+     IDXGIOutput3
+ {
+-    HRESULT CheckOverlayColorSpaceSupport( [in, annotation("_In_")] DXGI_FORMAT Format, [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace, [in, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_")] UINT *pFlags );
++    HRESULT CheckOverlayColorSpaceSupport( [in, annotation("_In_")] DXGI_FORMAT Format, [in, annotation("_In_")] DXGI_COLOR_SPACE_TYPE ColorSpace, [in, annotation("_In_")] IUnknown *pConcernedDevice, [out, annotation("_Out_ _Win32_AssociatedEnum_(DXGI_OVERLAY_COLOR_SPACE_SUPPORT_FLAG)")] UINT *pFlags );
+ };
+ 
+ 

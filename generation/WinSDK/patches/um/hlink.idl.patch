@@ -1,5 +1,5 @@
 diff --git a/um/hlink.idl b/um/hlink.idl
-index 41ba06b5..cf8058f8 100644
+index 9678c608..ad2d9aa1 100644
 --- a/um/hlink.idl
 +++ b/um/hlink.idl
 @@ -76,7 +76,7 @@ cpp_quote("             IHlinkSite * pihlsite,
@@ -93,3 +93,23 @@ index 41ba06b5..cf8058f8 100644
  
          // Status flags
          typedef enum
+@@ -714,6 +726,9 @@ interface IHlinkBrowseContext : IUnknown
+         } HLTBINFO;
+ 
+         // information about the browse window
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute push (__attribute__((flag_enum)), apply_to = enum)")
++cpp_quote("#endif")
+         enum
+         {
+             HLBWIF_HASFRAMEWNDINFO      = 0x00000001,
+@@ -723,6 +738,9 @@ interface IHlinkBrowseContext : IUnknown
+             HLBWIF_HASWEBTOOLBARINFO    = 0x00000010,
+             HLBWIF_WEBTOOLBARHIDDEN     = 0x00000020
+         };
++cpp_quote("#if defined(WIN32METADATA) && defined(__clang__)")
++cpp_quote("#pragma clang attribute pop")
++cpp_quote("#endif")
+ 
+         typedef struct _tagHLBWINFO
+         {

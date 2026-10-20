@@ -1,5 +1,5 @@
 diff --git a/um/bits3_0.idl b/um/bits3_0.idl
-index 7cb425e8..d3e07ab4 100644
+index 7cb425e8..13fc0364 100644
 --- a/um/bits3_0.idl
 +++ b/um/bits3_0.idl
 @@ -13,6 +13,8 @@ Abstract:
@@ -67,15 +67,18 @@ index 7cb425e8..d3e07ab4 100644
  [
      uuid(659cdeaa-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyFile3 interface"),
-@@ -256,6 +265,7 @@ interface IBackgroundCopyFile3 : IBackgroundCopyFile2
+@@ -254,8 +263,10 @@ interface IBackgroundCopyFile3 : IBackgroundCopyFile2
+ 	//
+ 	HRESULT IsDownloadedFromPeer( [out] BOOL * pVal );
  }
++_Win32_AnnotateParameter_(IBackgroundCopyFile3::GetTemporaryName, pFilename, _Win32_RAIIFree_(CoTaskMemFree))
  
  
 +_Win32_AnnotateInterface_(IBackgroundCopyCallback2, _Win32_SupportedOS_WindowsVista_)
  [
      uuid(659cdeac-489e-11d9-a9cd-000d56965251),
      helpstring("IBackgroundCopyCallback2 Interface"),
-@@ -306,6 +316,7 @@ library BackgroundCopyManager3_0
+@@ -306,6 +317,7 @@ library BackgroundCopyManager3_0
      interface IEnumBitsPeers;
  }
  

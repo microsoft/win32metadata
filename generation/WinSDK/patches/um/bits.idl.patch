@@ -1,16 +1,17 @@
 diff --git a/um/bits.idl b/um/bits.idl
-index 65af0618..43600d3c 100644
+index 65af0618..bb1265a0 100644
 --- a/um/bits.idl
 +++ b/um/bits.idl
-@@ -10,6 +10,7 @@
+@@ -10,6 +10,8 @@
  //
  //=======================================================================
  
++cpp_quote("#include <sal.h>")
 +#include <sal.h>
  cpp_quote("#include <winapifamily.h>")
  
  #pragma region Desktop Family
-@@ -31,6 +32,7 @@ cpp_quote("#define BG_SIZE_UNKNOWN     (UINT64)(-1)")
+@@ -31,6 +33,7 @@ cpp_quote("#define BG_SIZE_UNKNOWN     (UINT64)(-1)")
  // Marshalled interfaces
  // =============================
  
@@ -18,7 +19,7 @@ index 65af0618..43600d3c 100644
  [
      uuid(01b7bd23-fb88-4a77-8490-5891d3e4653a),
      odl
-@@ -55,6 +57,7 @@ interface IBackgroundCopyFile : IUnknown
+@@ -55,6 +58,7 @@ interface IBackgroundCopyFile : IUnknown
  
  //--------------------------------------------------------------------
  //
@@ -26,7 +27,7 @@ index 65af0618..43600d3c 100644
  [
      uuid(ca51e165-c365-424c-8d41-24aaa4ff3c40),
      helpstring("IEnumBackgroundCopyFiles Interface"),
-@@ -78,6 +81,7 @@ interface IEnumBackgroundCopyFiles : IUnknown
+@@ -78,6 +82,7 @@ interface IEnumBackgroundCopyFiles : IUnknown
  //--------------------------------------------------------------------
  //
  
@@ -34,7 +35,7 @@ index 65af0618..43600d3c 100644
  [
      uuid(19c613a0-fcb8-4f28-81ae-897c3d078f81),
      helpstring("error object for IBackgroundCopyJob"),
-@@ -121,6 +125,7 @@ interface IBackgroundCopyError : IUnknown
+@@ -121,6 +126,7 @@ interface IBackgroundCopyError : IUnknown
  
  // ==============================================
  // Job Interface
@@ -42,7 +43,17 @@ index 65af0618..43600d3c 100644
  [
      uuid(37668d37-507e-4160-9316-26306d150b12),
      helpstring("IBackgroundCopyJob Interface"),
-@@ -331,6 +336,7 @@ interface IBackgroundCopyJob : IUnknown
+@@ -326,11 +332,17 @@ interface IBackgroundCopyJob : IUnknown
+     HRESULT TakeOwnership();
+ 
+ }
++_Win32_AnnotateParameter_(IBackgroundCopyJob::GetProxySettings, pProxyBypassList, _Win32_RAIIFree_(CoTaskMemFree))
++_Win32_AnnotateParameter_(IBackgroundCopyJob::GetProxySettings, pProxyList, _Win32_RAIIFree_(CoTaskMemFree))
++_Win32_AnnotateParameter_(IBackgroundCopyJob::GetOwner, pVal, _Win32_RAIIFree_(CoTaskMemFree))
++_Win32_AnnotateParameter_(IBackgroundCopyJob::GetDisplayName, pVal, _Win32_RAIIFree_(CoTaskMemFree))
++_Win32_AnnotateParameter_(IBackgroundCopyJob::GetDescription, pVal, _Win32_RAIIFree_(CoTaskMemFree))
+ 
+ 
  // ==============================================
  // IEnumJobs Interface
  //     This interface allows enumerating the jobs under a Job
@@ -50,7 +61,7 @@ index 65af0618..43600d3c 100644
  [
      uuid(1af4f612-3b71-466f-8f58-7b6f73ac57ad),
      helpstring("IEnumBackgroundCopyJobs2 Interface"),
-@@ -362,6 +368,7 @@ cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
+@@ -362,6 +374,7 @@ cpp_quote("#define   BG_NOTIFY_FILE_RANGES_TRANSFERRED 0x0020")
  // IBackgroundCallback Interface
  //     This interface is implemented by the client and is used by the queue manager
  //     to supply progress information to the client.
@@ -58,7 +69,7 @@ index 65af0618..43600d3c 100644
  [
      uuid(97ea99c7-0186-4ad4-8df9-c5b4e0ed6b22),
  #if !defined( BITS_DONT_USE_ASYNC_DCOM )
-@@ -396,6 +403,7 @@ interface IBackgroundCopyCallback : IUnknown
+@@ -396,6 +409,7 @@ interface IBackgroundCopyCallback : IUnknown
  //
  // IBackgroundCopyManager is the "root" interface to the background file copy component.
  //
@@ -66,3 +77,11 @@ index 65af0618..43600d3c 100644
  [
      uuid(5ce34c0d-0dc9-4c1f-897c-daa1b78cee7c),
      helpstring("Background Copy interface"),
+@@ -427,6 +441,7 @@ interface IBackgroundCopyManager : IUnknown
+         [in] DWORD LanguageId,
+         [out] LPWSTR *pErrorDescription );
+ }
++_Win32_AnnotateParameter_(IBackgroundCopyManager::GetErrorDescription, pErrorDescription, _Win32_RAIIFree_(CoTaskMemFree))
+ 
+ //---------------------------------------------------------------------------
+ 
