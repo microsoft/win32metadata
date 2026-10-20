@@ -1,7 +1,81 @@
 diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
 --- a/um/gdiplusflat.h
 +++ b/um/gdiplusflat.h
-@@ -467,7 +467,8 @@ GdipGetRegionBoundsI(GpRegion *region, GpGraphics *graphics,
+@@ -49,6 +49,17 @@ GdipClonePath(GpPath* path, GpPath **clonePath);
+ GpStatus WINGDIPAPI
+ GdipDeletePath(GpPath* path);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePath, path,
++    _Win32_RAIIFree_(GdipDeletePath));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePath2, path,
++    _Win32_RAIIFree_(GdipDeletePath));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePath2I, path,
++    _Win32_RAIIFree_(GdipDeletePath));
++_WIN32META_ANNOTATE_PARAMETER_(GdipClonePath, clonePath,
++    _Win32_RAIIFree_(GdipDeletePath));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipResetPath(GpPath* path);
+ 
+@@ -275,6 +286,11 @@ GdipCreatePathIter(GpPathIterator **iterator, GpPath* path);
+ GpStatus WINGDIPAPI
+ GdipDeletePathIter(GpPathIterator *iterator);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePathIter, iterator,
++    _Win32_RAIIFree_(GdipDeletePathIter));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipPathIterNextSubpath(GpPathIterator* iterator, INT *resultCount,
+         INT* startIndex, INT* endIndex, BOOL* isClosed);
+@@ -346,6 +362,19 @@ GdipCloneMatrix(GpMatrix *matrix, GpMatrix **cloneMatrix);
+ GpStatus WINGDIPAPI
+ GdipDeleteMatrix(GpMatrix *matrix);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMatrix, matrix,
++    _Win32_RAIIFree_(GdipDeleteMatrix));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMatrix2, matrix,
++    _Win32_RAIIFree_(GdipDeleteMatrix));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMatrix3, matrix,
++    _Win32_RAIIFree_(GdipDeleteMatrix));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMatrix3I, matrix,
++    _Win32_RAIIFree_(GdipDeleteMatrix));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneMatrix, cloneMatrix,
++    _Win32_RAIIFree_(GdipDeleteMatrix));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetMatrixElements(GpMatrix *matrix, REAL m11, REAL m12, REAL m21, REAL m22,
+                       REAL dx, REAL dy);
+@@ -428,6 +457,23 @@ GdipCloneRegion(GpRegion *region, GpRegion **cloneRegion);
+ GpStatus WINGDIPAPI
+ GdipDeleteRegion(GpRegion *region);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegion, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegionRect, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegionRectI, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegionPath, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegionRgnData, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateRegionHrgn, region,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneRegion, cloneRegion,
++    _Win32_RAIIFree_(GdipDeleteRegion));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetInfinite(GpRegion *region);
+ 
+@@ -467,7 +513,8 @@ GdipGetRegionBoundsI(GpRegion *region, GpGraphics *graphics,
                               GpRect *rect);
  
  GpStatus WINGDIPAPI
@@ -11,7 +85,161 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipIsEmptyRegion(GpRegion *region, GpGraphics *graphics,
-@@ -1159,6 +1160,19 @@ GdipCloneImage(GpImage *image, GpImage **cloneImage);
+@@ -526,6 +573,11 @@ GdipCloneBrush(GpBrush *brush, GpBrush **cloneBrush);
+ GpStatus WINGDIPAPI
+ GdipDeleteBrush(GpBrush *brush);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneBrush, cloneBrush,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetBrushType(GpBrush *brush, GpBrushType *type);
+ 
+@@ -537,6 +589,11 @@ GpStatus WINGDIPAPI
+ GdipCreateHatchBrush(GpHatchStyle hatchstyle, ARGB forecol,
+                               ARGB backcol, GpHatch **brush);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateHatchBrush, brush,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetHatchStyle(GpHatch *brush, GpHatchStyle *hatchstyle);
+ 
+@@ -608,6 +665,21 @@ GdipGetTextureWrapMode(GpTexture *brush, GpWrapMode *wrapmode);
+ GpStatus WINGDIPAPI
+ GdipGetTextureImage(GpTexture *brush, GpImage **image);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateTexture, texture,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateTexture2, texture,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateTextureIA, texture,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateTexture2I, texture,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateTextureIAI, texture,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetTextureImage, image,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ //----------------------------------------------------------------------------
+ // SolidBrush APIs
+ //----------------------------------------------------------------------------
+@@ -615,6 +687,11 @@ GdipGetTextureImage(GpTexture *brush, GpImage **image);
+ GpStatus WINGDIPAPI
+ GdipCreateSolidFill(ARGB color, GpSolidFill **brush);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateSolidFill, brush,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetSolidFillColor(GpSolidFill *brush, ARGB color);
+ 
+@@ -669,6 +746,21 @@ GdipCreateLineBrushFromRectWithAngleI(GDIPCONST GpRect* rect,
+                                      GpWrapMode wrapMode,
+                                      GpLineGradient **lineGradient);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrush, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrushI, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrushFromRect, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrushFromRectI, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrushFromRectWithAngle, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateLineBrushFromRectWithAngleI, lineGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetLineColors(GpLineGradient *brush, ARGB color1, ARGB color2);
+ 
+@@ -766,6 +858,15 @@ GpStatus WINGDIPAPI
+ GdipCreatePathGradientFromPath(GDIPCONST GpPath* path,
+                                     GpPathGradient **polyGradient);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePathGradient, polyGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePathGradientI, polyGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePathGradientFromPath, polyGradient,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetPathGradientCenterColor(
+                         GpPathGradient *brush, ARGB* colors);
+@@ -917,6 +1018,15 @@ GdipClonePen(GpPen *pen, GpPen **clonepen);
+ GpStatus WINGDIPAPI
+ GdipDeletePen(GpPen *pen);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePen1, pen,
++    _Win32_RAIIFree_(GdipDeletePen));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreatePen2, pen,
++    _Win32_RAIIFree_(GdipDeletePen));
++_WIN32META_ANNOTATE_PARAMETER_(GdipClonePen, clonepen,
++    _Win32_RAIIFree_(GdipDeletePen));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetPenWidth(GpPen *pen, REAL width);
+ 
+@@ -1017,6 +1127,11 @@ GdipSetPenBrushFill(GpPen *pen, GpBrush *brush);
+ GpStatus WINGDIPAPI
+ GdipGetPenBrushFill(GpPen *pen, GpBrush **brush);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetPenBrushFill, brush,
++    _Win32_RAIIFree_(GdipDeleteBrush));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetPenFillType(GpPen *pen, GpPenType* type);
+ 
+@@ -1065,6 +1180,17 @@ GpStatus WINGDIPAPI
+ GdipCloneCustomLineCap(GpCustomLineCap* customCap,
+                        GpCustomLineCap** clonedCap);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateCustomLineCap, customCap,
++    _Win32_RAIIFree_(GdipDeleteCustomLineCap));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneCustomLineCap, clonedCap,
++    _Win32_RAIIFree_(GdipDeleteCustomLineCap));
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetPenCustomStartCap, customCap,
++    _Win32_RAIIFree_(GdipDeleteCustomLineCap));
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetPenCustomEndCap, customCap,
++    _Win32_RAIIFree_(GdipDeleteCustomLineCap));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetCustomLineCapType(GpCustomLineCap* customCap,
+                        CustomLineCapType* capType);
+@@ -1111,6 +1237,11 @@ GpStatus WINGDIPAPI
+ GdipCreateAdjustableArrowCap(REAL height, REAL width, BOOL isFilled,
+                              GpAdjustableArrowCap **cap);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateAdjustableArrowCap, cap,
++    _Win32_RAIIFree_(GdipDeleteCustomLineCap));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetAdjustableArrowCapHeight(GpAdjustableArrowCap* cap, REAL height);
+ 
+@@ -1159,6 +1290,19 @@ GdipCloneImage(GpImage *image, GpImage **cloneImage);
  GpStatus WINGDIPAPI
  GdipDisposeImage(GpImage *image);
  
@@ -31,7 +259,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipSaveImageToFile(GpImage *image, GDIPCONST WCHAR* filename,
                      GDIPCONST CLSID* clsidEncoder, 
-@@ -1214,6 +1228,11 @@ GdipGetImageThumbnail(GpImage *image, UINT thumbWidth, UINT thumbHeight,
+@@ -1214,6 +1358,11 @@ GdipGetImageThumbnail(GpImage *image, UINT thumbWidth, UINT thumbHeight,
                        GpImage **thumbImage,
                        GetThumbnailImageAbort callback, VOID * callbackData);
  
@@ -43,7 +271,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipGetEncoderParameterListSize(GpImage *image, GDIPCONST CLSID* clsidEncoder,
                                  UINT* size);
-@@ -1337,7 +1356,7 @@ GdipCreateBitmapFromHBITMAP(HBITMAP hbm,
+@@ -1337,7 +1486,7 @@ GdipCreateBitmapFromHBITMAP(HBITMAP hbm,
  
  GpStatus WINGDIPAPI
  GdipCreateHBITMAPFromBitmap(GpBitmap* bitmap,
@@ -52,7 +280,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
                              ARGB background);
  
  GpStatus WINGDIPAPI
-@@ -1346,7 +1365,7 @@ GdipCreateBitmapFromHICON(HICON hicon,
+@@ -1346,7 +1495,7 @@ GdipCreateBitmapFromHICON(HICON hicon,
  
  GpStatus WINGDIPAPI
  GdipCreateHICONFromBitmap(GpBitmap* bitmap,
@@ -61,7 +289,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipCreateBitmapFromResource(HINSTANCE hInstance,
-@@ -1368,6 +1387,35 @@ GdipCloneBitmapAreaI(INT x,
+@@ -1368,6 +1517,35 @@ GdipCloneBitmapAreaI(INT x,
                       GpBitmap *srcBitmap,
                       GpBitmap **dstBitmap);
  
@@ -97,7 +325,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipBitmapLockBits(GpBitmap* bitmap,
                     GDIPCONST GpRect* rect,
-@@ -1438,6 +1486,11 @@ GdipBitmapCreateApplyEffect(
+@@ -1438,6 +1616,11 @@ GdipBitmapCreateApplyEffect(
      INT *auxDataSize
  );
  
@@ -109,7 +337,41 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipBitmapGetHistogram(
      GpBitmap* bitmap, 
-@@ -1692,7 +1745,7 @@ GpStatus WINGDIPAPI
+@@ -1473,6 +1656,13 @@ GdipCloneImageAttributes(GDIPCONST GpImageAttributes *imageattr,
+ GpStatus WINGDIPAPI
+ GdipDisposeImageAttributes(GpImageAttributes *imageattr);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateImageAttributes, imageattr,
++    _Win32_RAIIFree_(GdipDisposeImageAttributes));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneImageAttributes, cloneImageattr,
++    _Win32_RAIIFree_(GdipDisposeImageAttributes));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetImageAttributesToIdentity(GpImageAttributes *imageattr,
+                                  ColorAdjustType type);
+@@ -1574,6 +1764,19 @@ GdipCreateFromHWNDICM(HWND hwnd, GpGraphics **graphics);
+ GpStatus WINGDIPAPI
+ GdipDeleteGraphics(GpGraphics *graphics);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFromHDC, graphics,
++    _Win32_RAIIFree_(GdipDeleteGraphics));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFromHDC2, graphics,
++    _Win32_RAIIFree_(GdipDeleteGraphics));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFromHWND, graphics,
++    _Win32_RAIIFree_(GdipDeleteGraphics));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFromHWNDICM, graphics,
++    _Win32_RAIIFree_(GdipDeleteGraphics));
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetImageGraphicsContext, graphics,
++    _Win32_RAIIFree_(GdipDeleteGraphics));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetDC(GpGraphics* graphics, HDC * hdc);
+ 
+@@ -1692,7 +1895,7 @@ GpStatus WINGDIPAPI
  GdipGetNearestColor(GpGraphics *graphics, ARGB* argb);
  
  // Creates the Win9x Halftone Palette (even on NT) with correct Desktop colors
@@ -118,7 +380,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GdipCreateHalftonePalette();
  
  GpStatus WINGDIPAPI
-@@ -2247,7 +2300,7 @@ GpStatus
+@@ -2247,7 +2450,7 @@ GpStatus
  WINGDIPAPI
  GdipGetHemfFromMetafile(
      GpMetafile *        metafile,
@@ -127,7 +389,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
      );
  
  GpStatus WINGDIPAPI
-@@ -2339,6 +2392,31 @@ GdipRecordMetafileStreamI(
+@@ -2339,6 +2542,31 @@ GdipRecordMetafileStreamI(
      GpMetafile **       metafile
      );
  
@@ -159,7 +421,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  GpStatus WINGDIPAPI
  GdipSetMetafileDownLevelRasterizationLimit(
      GpMetafile *            metafile,
-@@ -2357,7 +2435,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
+@@ -2357,7 +2585,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
  GpStatus WINGDIPAPI
  GdipGetImageDecoders(_In_ UINT numDecoders,
                       _In_ UINT size,
@@ -168,7 +430,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEncoders) * sizeof(ImageCodecInfo)) UINT *size);
-@@ -2365,7 +2443,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
+@@ -2365,7 +2593,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
  GpStatus WINGDIPAPI
  GdipGetImageEncoders(_In_ UINT numEncoders,
                       _In_ UINT size,
@@ -177,7 +439,69 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipComment(GpGraphics* graphics, UINT sizeData, GDIPCONST BYTE * data);
-@@ -2785,6 +2863,16 @@ GdipConvertToEmfPlusToStream(
+@@ -2385,6 +2613,13 @@ GdipDeleteFontFamily(GpFontFamily *fontFamily);
+ GpStatus WINGDIPAPI
+ GdipCloneFontFamily(GpFontFamily *fontFamily, GpFontFamily **clonedFontFamily);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFontFamilyFromName, fontFamily,
++    _Win32_RAIIFree_(GdipDeleteFontFamily));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneFontFamily, clonedFontFamily,
++    _Win32_RAIIFree_(GdipDeleteFontFamily));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetGenericFontFamilySansSerif(GpFontFamily **nativeFamily);
+ 
+@@ -2480,6 +2715,21 @@ GdipDeleteFont(GpFont* font);
+ GpStatus WINGDIPAPI
+ GdipGetFamily(GpFont *font, GpFontFamily **family);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFontFromDC, font,
++    _Win32_RAIIFree_(GdipDeleteFont));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFontFromLogfontA, font,
++    _Win32_RAIIFree_(GdipDeleteFont));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFontFromLogfontW, font,
++    _Win32_RAIIFree_(GdipDeleteFont));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateFont, font,
++    _Win32_RAIIFree_(GdipDeleteFont));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneFont, cloneFont,
++    _Win32_RAIIFree_(GdipDeleteFont));
++_WIN32META_ANNOTATE_PARAMETER_(GdipGetFamily, family,
++    _Win32_RAIIFree_(GdipDeleteFontFamily));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipGetFontStyle(GpFont *font, INT *style);
+ 
+@@ -2627,6 +2877,13 @@ GpStatus WINGDIPAPI
+ GdipCloneStringFormat(GDIPCONST GpStringFormat *format, 
+                       GpStringFormat **newFormat);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateStringFormat, format,
++    _Win32_RAIIFree_(GdipDeleteStringFormat));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCloneStringFormat, newFormat,
++    _Win32_RAIIFree_(GdipDeleteStringFormat));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetStringFormatFlags(GpStringFormat *format, INT flags);
+ 
+@@ -2714,6 +2971,11 @@ GdipCreateCachedBitmap(
+ GpStatus WINGDIPAPI
+ GdipDeleteCachedBitmap(GpCachedBitmap *cachedBitmap);
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateCachedBitmap, cachedBitmap,
++    _Win32_RAIIFree_(GdipDeleteCachedBitmap));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipDrawCachedBitmap(
+     GpGraphics *graphics,
+@@ -2785,6 +3047,16 @@ GdipConvertToEmfPlusToStream(
     const WCHAR* description,
     GpMetafile** out_metafile
  );

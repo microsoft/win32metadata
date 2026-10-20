@@ -6760,6 +6760,11 @@
       {
         "path": "shared\\win32metadata_annotations.h",
         "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
+      },
+      {
+        "path": "um\\activdbg.idl",
+        "sdkPath": "c\\include\\10.0.26100.0\\um\\activdbg.idl",
+        "sdkSha256": "C63EDCEB9F0678E94AA19DD3683C9C2F1EAAD9BB38291274B85E228C6BCA0447"
       }
     ],
     "outputs": [
@@ -8715,6 +8720,7 @@
     "shared\\ntddchgr.h.patch",
     "shared\\ntdddisk.h.patch",
     "shared\\rpcnterr.h.patch",
-    "shared\\ntiologc.h.patch"
+    "shared\\ntiologc.h.patch",
+    "um\\activdbg.idl.patch"
   ]
 }

@@ -1,0 +1,11 @@
+--- a/um/activdbg.idl
++++ b/um/activdbg.idl
+@@ -3035,7 +3035,7 @@
+ {
+ 	HRESULT  GetStringForVariant([in] VARIANT *pvar, [in] ULONG nRadix, [out] BSTR *pbstrValue);
+ 	HRESULT  GetVariantForString([in] LPCOLESTR pwstrValue, [out] VARIANT *pvar);
+-	HRESULT	 GetStringForVarType([in] VARTYPE vt, [in] TYPEDESC *ptdescArrayType, [out] BSTR *pbstr);
++	HRESULT	 GetStringForVarType([in, annotation("_Win32_AssociatedEnum_(VARENUM)")] VARTYPE vt, [in] TYPEDESC *ptdescArrayType, [out] BSTR *pbstr);
+ }
+ 
+ /* ISimpleConnectionPoint
