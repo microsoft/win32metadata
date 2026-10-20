@@ -19,7 +19,7 @@
  #define OLESTREAM_CONVERSION_DEFAULT 0x00000000L
  #define OLESTREAM_CONVERSION_DISABLEOLELINK 0x00000001L
  
-@@ -87,27 +95,31 @@
+@@ -87,186 +95,229 @@
      || !ISOLATION_AWARE_ENABLED \
      || !defined(_OBJBASE_H_) \
      || !defined(CreateDataAdviseHolder)
@@ -54,7 +54,11 @@
  WINOLEAPI  OleQueryCreateFromData(IN LPDATAOBJECT pSrcDataObject);
  
  
-@@ -118,58 +130,68 @@
+ /* Object creation APIs */
+ 
+-WINOLEAPI  OleCreate(IN REFCLSID rclsid, IN REFIID riid, IN DWORD renderopt,
++WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleCreate(IN REFCLSID rclsid, IN REFIID riid, _Win32_AssociatedEnum_(OLERENDER) IN DWORD renderopt,
+                 IN LPFORMATETC pFormatEtc, IN LPOLECLIENTSITE pClientSite,
                  IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
  
  _Check_return_
@@ -134,7 +138,11 @@
              IN LPFORMATETC rgFormatEtc, IN IAdviseSink FAR* lpAdviseSink,
              OUT DWORD FAR* rgdwConnection, IN LPOLECLIENTSITE pClientSite,
              IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
-@@ -179,62 +201,80 @@
+ 
+-WINOLEAPI  OleCreateFromFile(IN REFCLSID rclsid, IN LPCOLESTR lpszFileName, IN REFIID riid,
+-            IN DWORD renderopt, IN LPFORMATETC lpFormatEtc,
++WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleCreateFromFile(IN REFCLSID rclsid, IN LPCOLESTR lpszFileName, IN REFIID riid,
++            _Win32_AssociatedEnum_(OLERENDER) IN DWORD renderopt, IN LPFORMATETC lpFormatEtc,
              IN LPOLECLIENTSITE pClientSite, IN LPSTORAGE pStg, OUT LPVOID FAR* ppvObj);
  
  _Check_return_
@@ -153,10 +161,14 @@
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleSave(_In_ LPPERSISTSTORAGE pPS, _In_ LPSTORAGE pStg, _In_ BOOL fSameAsLoad);
  
- WINOLEAPI  OleLoadFromStream( IN LPSTREAM pStm, IN REFIID iidInterface, OUT LPVOID FAR* ppvObj);
- WINOLEAPI  OleSaveToStream( IN LPPERSISTSTREAM pPStm, IN LPSTREAM pStm );
- 
- 
+-WINOLEAPI  OleLoadFromStream( IN LPSTREAM pStm, IN REFIID iidInterface, OUT LPVOID FAR* ppvObj);
+-WINOLEAPI  OleSaveToStream( IN LPPERSISTSTREAM pPStm, IN LPSTREAM pStm );
+-
+-
++WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleLoadFromStream( IN LPSTREAM pStm, IN REFIID iidInterface, OUT LPVOID FAR* ppvObj);
++WINOLEAPI  _Win32_SupportedOS_Windows2000_ OleSaveToStream( IN LPPERSISTSTREAM pPStm, IN LPSTREAM pStm );
++
++
 +_Win32_SupportedOS_Windows2000_
  WINOLEAPI  OleSetContainedObject(IN LPUNKNOWN pUnknown, IN BOOL fContained);
 +_Win32_SupportedOS_Windows2000_
@@ -217,8 +229,10 @@
  WINOLEAPI_(HANDLE) OleDuplicateData (IN HANDLE hSrc, IN CLIPFORMAT cfFormat,
                          IN UINT uiFlags);
  
-@@ -243,30 +283,41 @@
- WINOLEAPI          OleDraw (IN LPUNKNOWN pUnknown, IN DWORD dwAspect, IN HDC hdcDraw,
+ 
+ 
+-WINOLEAPI          OleDraw (IN LPUNKNOWN pUnknown, IN DWORD dwAspect, IN HDC hdcDraw,
++WINOLEAPI          _Win32_SupportedOS_Windows2000_ OleDraw (IN LPUNKNOWN pUnknown, IN DWORD dwAspect, IN HDC hdcDraw,
                      IN LPCRECT lprcBounds);
  
 -_Check_return_ WINOLEAPI          OleRun(IN LPUNKNOWN pUnknown);

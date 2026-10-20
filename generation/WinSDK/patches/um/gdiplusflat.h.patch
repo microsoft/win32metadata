@@ -127,7 +127,39 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
      );
  
  GpStatus WINGDIPAPI
-@@ -2357,7 +2410,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
+@@ -2339,6 +2392,31 @@ GdipRecordMetafileStreamI(
+     GpMetafile **       metafile
+     );
+ 
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMetafileFromWmf, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMetafileFromEmf, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMetafileFromFile, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMetafileFromWmfFile, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipCreateMetafileFromStream, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafile, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafileI, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafileFileName, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafileFileNameI, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafileStream, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipRecordMetafileStreamI, metafile,
++    _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ GpStatus WINGDIPAPI
+ GdipSetMetafileDownLevelRasterizationLimit(
+     GpMetafile *            metafile,
+@@ -2357,7 +2435,7 @@ GdipGetImageDecodersSize(_Out_ UINT *numDecoders, _Out_ _Out_range_(>=, (*numDec
  GpStatus WINGDIPAPI
  GdipGetImageDecoders(_In_ UINT numDecoders,
                       _In_ UINT size,
@@ -136,7 +168,7 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEncoders) * sizeof(ImageCodecInfo)) UINT *size);
-@@ -2365,7 +2418,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
+@@ -2365,7 +2443,7 @@ GdipGetImageEncodersSize(_Out_ UINT *numEncoders, _Out_ _Out_range_(>=, (*numEnc
  GpStatus WINGDIPAPI
  GdipGetImageEncoders(_In_ UINT numEncoders,
                       _In_ UINT size,
@@ -145,3 +177,20 @@ diff --git a/um/gdiplusflat.h b/um/gdiplusflat.h
  
  GpStatus WINGDIPAPI
  GdipComment(GpGraphics* graphics, UINT sizeData, GDIPCONST BYTE * data);
+@@ -2785,6 +2863,16 @@ GdipConvertToEmfPlusToStream(
+    const WCHAR* description,
+    GpMetafile** out_metafile
+ );
++
++#if defined(WIN32METADATA) && defined(__clang__) && defined(__cplusplus)
++_WIN32META_ANNOTATE_PARAMETER_(GdipConvertToEmfPlus, out_metafile,
++   _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipConvertToEmfPlusToFile, out_metafile,
++   _Win32_RAIIFree_(GdipDisposeImage));
++_WIN32META_ANNOTATE_PARAMETER_(GdipConvertToEmfPlusToStream, out_metafile,
++   _Win32_RAIIFree_(GdipDisposeImage));
++#endif
++
+ #endif //(GDIPVER >= 0x0110)
+ 
+ #ifdef __cplusplus

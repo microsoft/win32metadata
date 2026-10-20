@@ -1,5 +1,5 @@
 diff --git a/um/winreg.h b/um/winreg.h
-index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb8048c16e551 100644
+index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..7554ecdea7291a7c9b46857abbc0646e88891642 100644
 --- a/um/winreg.h
 +++ b/um/winreg.h
 @@ -1,3 +1,6 @@
@@ -177,7 +177,7 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegCreateKeyW (
      _In_ HKEY hKey,
-@@ -371,8 +402,9 @@
+@@ -371,34 +402,36 @@
  #define RegCreateKey  RegCreateKeyA
  #endif // !UNICODE
  
@@ -189,33 +189,46 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegCreateKeyExA(
      _In_ HKEY hKey,
-@@ -382,12 +414,13 @@
-     _In_ DWORD dwOptions,
-     _In_ REGSAM samDesired,
+     _In_ LPCSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
      _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
 -    _Out_ PHKEY phkResult,
-+    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
-     _Out_opt_ LPDWORD lpdwDisposition
-     );
- 
+-    _Out_opt_ LPDWORD lpdwDisposition
+-    );
+-
 -WINADVAPI
 -LSTATUS
++    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition
++    );
++
 +_Win32_SupportedOS_Windows2000_
 +WINADVAPI
 +_Win32_AssociatedEnum_(WIN32_ERROR) LSTATUS
  APIENTRY
  RegCreateKeyExW(
      _In_ HKEY hKey,
-@@ -397,7 +430,7 @@
-     _In_ DWORD dwOptions,
-     _In_ REGSAM samDesired,
+     _In_ LPCWSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPWSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
      _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
 -    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition
 +    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
-     _Out_opt_ LPDWORD lpdwDisposition
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition
      );
  
-@@ -413,8 +446,9 @@
+ #ifdef UNICODE
+@@ -413,35 +446,37 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -227,13 +240,18 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegCreateKeyTransactedA (
      _In_ HKEY hKey,
-@@ -424,13 +458,14 @@
-     _In_ DWORD dwOptions,
-     _In_ REGSAM samDesired,
+     _In_ LPCSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
      _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
 -    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition,
 +    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
-     _Out_opt_ LPDWORD lpdwDisposition,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition,
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParemeter
      );
@@ -245,15 +263,21 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegCreateKeyTransactedW (
      _In_ HKEY hKey,
-@@ -440,7 +475,7 @@
-     _In_ DWORD dwOptions,
-     _In_ REGSAM samDesired,
+     _In_ LPCWSTR lpSubKey,
+     _Reserved_ DWORD Reserved,
+     _In_opt_ LPWSTR lpClass,
+-    _In_ DWORD dwOptions,
+-    _In_ REGSAM samDesired,
++    _In_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD dwOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
      _In_opt_ CONST LPSECURITY_ATTRIBUTES lpSecurityAttributes,
 -    _Out_ PHKEY phkResult,
+-    _Out_opt_ LPDWORD lpdwDisposition,
 +    _Out_ _Win32_RAIIFree_(RegCloseKey, -1, 0) PHKEY phkResult,
-     _Out_opt_ LPDWORD lpdwDisposition,
++    _Out_opt_ _Win32_AssociatedEnum_(REG_CREATE_KEY_DISPOSITION) LPDWORD lpdwDisposition,
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParemeter
+     );
 @@ -457,15 +492,17 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -535,7 +559,7 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegOpenKeyW (
      _In_ HKEY hKey,
-@@ -771,8 +829,9 @@
+@@ -771,25 +829,26 @@
  #define RegOpenKey  RegOpenKeyA
  #endif // !UNICODE
  
@@ -547,7 +571,12 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegOpenKeyExA(
      _In_ HKEY hKey,
-@@ -783,7 +842,7 @@
+     _In_opt_ LPCSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult
      );
  
  WINADVAPI
@@ -556,7 +585,15 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegOpenKeyExW(
      _In_ HKEY hKey,
-@@ -805,8 +864,9 @@
+     _In_opt_ LPCWSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult
+     );
+ 
+@@ -805,26 +864,28 @@
  #pragma region Application Family or OneCore Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
  
@@ -568,7 +605,12 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegOpenKeyTransactedA (
      _In_ HKEY hKey,
-@@ -817,8 +877,9 @@
+     _In_opt_ LPCSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult,
      _In_        HANDLE hTransaction,
      _Reserved_ PVOID  pExtendedParemeter
      );
@@ -580,6 +622,14 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegOpenKeyTransactedW (
      _In_ HKEY hKey,
+     _In_opt_ LPCWSTR lpSubKey,
+-    _In_opt_ DWORD ulOptions,
+-    _In_ REGSAM samDesired,
++    _In_opt_ _Win32_AssociatedEnum_(REG_OPEN_CREATE_OPTIONS) DWORD ulOptions,
++    _In_ _Win32_AssociatedEnum_(REG_SAM_FLAGS) REGSAM samDesired,
+     _Out_ PHKEY phkResult,
+     _In_        HANDLE hTransaction,
+     _Reserved_ PVOID  pExtendedParemeter
 @@ -841,8 +902,9 @@
  #pragma region Application Family or OneCore Family or Games Family
  #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
@@ -928,7 +978,7 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
  APIENTRY
  RegCopyTreeA (
      _In_        HKEY     hKeySrc,
-@@ -1278,14 +1366,15 @@
+@@ -1278,15 +1366,16 @@
  
  #if (_WIN32_WINNT >= 0x0502)
  
@@ -943,12 +993,13 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
      _In_opt_ LPCSTR lpSubKey,
      _In_opt_ LPCSTR lpValue,
 -    _In_ DWORD dwFlags,
-+    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
 -    _Out_opt_ LPDWORD pdwType,
++    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
 +    _Out_opt_ _Win32_AssociatedEnum_(REG_VALUE_TYPE) LPDWORD pdwType,
      _When_((dwFlags & 0x7F) == RRF_RT_REG_SZ ||
                 (dwFlags & 0x7F) == RRF_RT_REG_EXPAND_SZ ||
-@@ -1298,14 +1387,15 @@
+                (dwFlags & 0x7F) == (RRF_RT_REG_SZ | RRF_RT_REG_EXPAND_SZ) ||
+@@ -1298,15 +1387,16 @@
      _Inout_opt_ LPDWORD pcbData
      );
  
@@ -963,11 +1014,12 @@ index 5a1415e34d2622a6ad1ed3d03e803840eb4d30f4..5527f5f99954ff788e4b0f70d38bb804
      _In_opt_ LPCWSTR lpSubKey,
      _In_opt_ LPCWSTR lpValue,
 -    _In_ DWORD dwFlags,
-+    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
 -    _Out_opt_ LPDWORD pdwType,
++    _In_ _Win32_AssociatedEnum_(REG_ROUTINE_FLAGS) DWORD dwFlags,
 +    _Out_opt_ _Win32_AssociatedEnum_(REG_VALUE_TYPE) LPDWORD pdwType,
      _When_((dwFlags & 0x7F) == RRF_RT_REG_SZ ||
                 (dwFlags & 0x7F) == RRF_RT_REG_EXPAND_SZ ||
+                (dwFlags & 0x7F) == (RRF_RT_REG_SZ | RRF_RT_REG_EXPAND_SZ) ||
 @@ -1328,8 +1418,9 @@
  
  #if (_WIN32_WINNT >= 0x0600)

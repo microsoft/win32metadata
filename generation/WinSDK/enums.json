@@ -567,18 +567,7 @@
       "header": "rpcdce.h"
     },
     "members": [],
-    "uses": [
-      {
-        "interface": "IClientSecurity",
-        "method": "SetBlanket",
-        "parameter": "dwAuthnLevel"
-      },
-      {
-        "interface": "IClientSecurity",
-        "method": "QueryBlanket",
-        "parameter": "pAuthnLevel"
-      }
-    ]
+    "uses": []
   },
   {
     "type": "uint",
@@ -589,16 +578,6 @@
     },
     "members": [],
     "uses": [
-      {
-        "interface": "IClientSecurity",
-        "method": "SetBlanket",
-        "parameter": "dwImpLevel"
-      },
-      {
-        "interface": "IClientSecurity",
-        "method": "QueryBlanket",
-        "parameter": "pImpLevel"
-      },
       {
         "struct": "RPC_SECURITY_QOS",
         "field": "ImpersonationType"
@@ -2487,12 +2466,6 @@
     "uses": []
   },
   {
-    "name": "CERT_EXIT_EVENT_MASK",
-    "flags": true,
-    "members": [],
-    "uses": []
-  },
-  {
     "name": "REGISTER_NOTIFICATION_FLAGS",
     "flags": true,
     "members": [
@@ -3724,13 +3697,7 @@
   },
   {
     "addUsesTo": "IMAGE_LIST_ITEM_FLAGS",
-    "uses": [
-      {
-        "interface": "IImageList",
-        "method": "GetItemFlags",
-        "parameter": "dwFlags"
-      }
-    ]
+    "uses": []
   },
   {
       "addUsesTo": "CERT_FIND_TYPE",

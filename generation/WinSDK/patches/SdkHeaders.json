@@ -4401,6 +4401,18 @@
       "sourceSha256": "A35AC9D3AA4EF603E49BA154862C4AAE6391DCE4D78C8BC1E24D21E1475F704D",
       "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntdddisk.h",
       "sdkSha256": "A35AC9D3AA4EF603E49BA154862C4AAE6391DCE4D78C8BC1E24D21E1475F704D"
+    },
+    {
+      "path": "shared\\rpcnterr.h",
+      "sourceSha256": "9D94281CBD9272E02A39B51E19367DF2A87F3756B85B5C848BEE38828E0CDC23",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\rpcnterr.h",
+      "sdkSha256": "9D94281CBD9272E02A39B51E19367DF2A87F3756B85B5C848BEE38828E0CDC23"
+    },
+    {
+      "path": "shared\\ntiologc.h",
+      "sourceSha256": "2FC1A6AF02A01B2F8903F1AE07CE9F17D53CC1EB0C1621AB5876C74594CBDFD6",
+      "sdkPath": "c\\include\\10.0.26100.0\\shared\\ntiologc.h",
+      "sdkSha256": "2FC1A6AF02A01B2F8903F1AE07CE9F17D53CC1EB0C1621AB5876C74594CBDFD6"
     }
   ],
   "midl": {
@@ -6741,13 +6753,13 @@
         "sdkSha256": "DA5AB6BE0B59FDFE045FD1D73322804C0BD48E3F0EC2F338BD268EAB3D77692B"
       },
       {
-        "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
-      },
-      {
         "path": "um\\ddstream.idl",
         "sdkPath": "c\\include\\10.0.26100.0\\um\\ddstream.idl",
         "sdkSha256": "D0D559F74149A353AAFF5D8E496D39B82FA13B008D3591991B39794601AF5934"
+      },
+      {
+        "path": "shared\\win32metadata_annotations.h",
+        "sourceSha256": "AD2D03A944EA84F29CE82024685C3DE3E400D1A8DFA9DD840E03BB9399641568"
       }
     ],
     "outputs": [
@@ -8701,6 +8713,8 @@
     "um\\imepad.h.patch",
     "um\\ddstream.idl.patch",
     "shared\\ntddchgr.h.patch",
-    "shared\\ntdddisk.h.patch"
+    "shared\\ntdddisk.h.patch",
+    "shared\\rpcnterr.h.patch",
+    "shared\\ntiologc.h.patch"
   ]
 }
