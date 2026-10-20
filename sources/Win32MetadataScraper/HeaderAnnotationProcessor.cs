@@ -33,10 +33,11 @@ namespace Win32MetadataScraper
         private readonly HashSet<CXCursor> enumReferenceCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> methodCarriers = new();
         private readonly List<(VarDecl Declaration, Attr Target)> parameterCarriers = new();
+        private readonly List<(VarDecl Declaration, Attr Target)> fieldCarriers = new();
         private readonly HashSet<Cursor> visited = new();
         private readonly List<(NamedDecl Owner, string Name, string[] Arguments, NativeLocation Location)> cleanupReferences = new();
 
-        internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers)
+        internal IEnumerable<string> AnnotationCarrierNames => methodCarriers.Concat(parameterCarriers).Concat(fieldCarriers)
             .Select(carrier => carrier.Declaration.Name);
 
         internal HeaderAnnotationProcessor(TranslationUnit translationUnit, Dictionary<string, string> remaps, string generatedNamespace,
@@ -50,6 +51,7 @@ namespace Win32MetadataScraper
             Walk(translationUnit.TranslationUnitDecl);
             ApplyMethodAnnotations();
             ApplyParameterAnnotations();
+            ApplyFieldAnnotations();
             ResolveCleanupReferences();
             MergeRedeclarationFacts();
             foreach (var association in enumAssociations)
@@ -428,18 +430,24 @@ namespace Win32MetadataScraper
                 var location = GetLocation(declaration.Location);
                 var targets = declaration.Attrs.Where(attribute =>
                     attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
-                    attribute.Spelling is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter").ToArray();
+                    attribute.Spelling is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter" or
+                        HeaderAnnotation.OwnerPrefix + "Field").ToArray();
                 if (targets.Length != 0)
                 {
-                    bool parameterCarrier = targets[0].Spelling == HeaderAnnotation.OwnerPrefix + "Parameter";
-                    string kind = parameterCarrier ? "Parameter" : "Method";
+                    string kind = HeaderAnnotation.RemoveOwnerPrefix(targets[0].Spelling);
                     if (targets.Length != 1 || declaration is not VarDecl variable ||
                         variable.Handle.StorageClass != CX_StorageClass.CX_SC_Static ||
                         variable.Type.CanonicalType.Kind != CXTypeKind.CXType_UChar ||
                         !variable.Type.Handle.IsConstQualified ||
                         !variable.Name.StartsWith("_WIN32META_" + kind.ToUpperInvariant() + "_", StringComparison.Ordinal))
                         throw Error(location, $"{kind} annotations require the metadata-only _Win32_Annotate{kind}_ carrier.");
-                    (parameterCarrier ? parameterCarriers : methodCarriers).Add((variable, targets[0]));
+                    var carriers = kind switch
+                    {
+                        "Parameter" => parameterCarriers,
+                        "Field" => fieldCarriers,
+                        _ => methodCarriers,
+                    };
+                    carriers.Add((variable, targets[0]));
                     return;
                 }
                 var facts = new DeclarationFacts(declaration, location);
@@ -531,6 +539,27 @@ namespace Win32MetadataScraper
             }
         }
 
+        private void ApplyFieldAnnotations()
+        {
+            foreach (var carrier in fieldCarriers)
+            {
+                var location = GetLocation(carrier.Target.Location);
+                var arguments = carrier.Target.CursorChildren.ToArray();
+                if (arguments.Length != 1)
+                    throw Error(location, "A field carrier requires one compiler-parsed native field reference.");
+                var target = ReadDeclarationReference(arguments[0], CXCursorKind.CXCursor_FieldDecl, location,
+                    "A field carrier requires a reference to a declared native instance field.");
+                var facts = declarations.Values.FirstOrDefault(item => item.Declaration is FieldDecl &&
+                    item.Declaration.Handle.CanonicalCursor == target);
+                if (facts == null)
+                    throw Error(location, "The referenced field was not found in the original Clang AST.");
+                if (!carrier.Declaration.Attrs.Any(attribute => attribute.Kind == CX_AttrKind.CX_AttrKind_Annotate &&
+                    attribute.Spelling != HeaderAnnotation.OwnerPrefix + "Field" && HeaderAnnotation.IsKnownPayload(attribute.Spelling)))
+                    throw Error(location, "A field carrier requires at least one metadata annotation.");
+                ReadAnnotations(carrier.Declaration, facts);
+            }
+        }
+
         private void ReadAnnotations(NamedDecl declaration, DeclarationFacts facts)
         {
             var occurrences = new HashSet<CXCursor>();
@@ -546,7 +575,8 @@ namespace Win32MetadataScraper
             {
                 var attributeLocation = GetLocation(attribute.Location);
                 string payload = attribute.Spelling;
-                if (payload is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter")
+                if (payload is HeaderAnnotation.OwnerPrefix + "Method" or HeaderAnnotation.OwnerPrefix + "Parameter" or
+                    HeaderAnnotation.OwnerPrefix + "Field")
                     continue;
                 if (!HeaderAnnotation.IsKnownPayload(payload))
                     continue;

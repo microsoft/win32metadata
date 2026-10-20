@@ -14,6 +14,113 @@ namespace Win32MetadataScraperTests
     public class HeaderAnnotationTests
     {
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        public void FieldTargetCarriersBindLateEnumsToCanonicalNativeFields(string architecture, string target, bool cInterface)
+        {
+            using var fixture = new NativeFixture(architecture, target, @"
+typedef struct tagRecord { unsigned other; unsigned flags; } Record, *PRecord;
+typedef Record SameRecord;
+struct Other { unsigned flags; };
+enum LATE_FLAGS { FLAG_FIRST = 1, FLAG_SECOND = 4 };
+" + $"_Win32_AnnotateField_({(cInterface ? "tagRecord" : "SameRecord")}::flags, _Win32_AssociatedEnum_(LATE_FLAGS));",
+                extraSettings: cInterface ? "--additional=-DCINTERFACE\n" : "");
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            string source = fixture.ReadSource();
+            var root = CSharpSyntaxTree.ParseText(source).GetRoot();
+            var fields = root.DescendantNodes().OfType<FieldDeclarationSyntax>()
+                .Where(field => field.Declaration.Variables.Single().Identifier.ValueText == "flags").ToArray();
+            var annotated = Assert.Single(fields, field => field.AttributeLists.ToString().Contains("AssociatedEnum", StringComparison.Ordinal));
+            Assert.Contains("LATE_FLAGS", annotated.AttributeLists.ToString());
+            Assert.Equal("Record", annotated.Ancestors().OfType<StructDeclarationSyntax>().First().Identifier.ValueText);
+            Assert.Equal("uint", annotated.Declaration.Type.ToString());
+            Assert.DoesNotContain("_WIN32META_FIELD_", source);
+            Assert.DoesNotContain("Win32Metadata.Field", source);
+        }
+
+        [Theory]
+        [InlineData("_Win32_AnnotateField_(S::value, );", "at least one metadata annotation")]
+        [InlineData("_Win32_AnnotateField_(S::value, _Win32_SetLastError_);", "not valid on")]
+        [InlineData("_Win32_AnnotateField_(S::Run, _Win32_AssociatedEnum_(E));", "native instance field")]
+        [InlineData("_Win32_AnnotateField_(S::shared, _Win32_AssociatedEnum_(E));", "native instance field")]
+        [InlineData("_Win32_AnnotateField_(Global, _Win32_AssociatedEnum_(E));", "native instance field")]
+        [InlineData("_Win32_AnnotateField_(Free, _Win32_AssociatedEnum_(E));", "native instance field")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\", \"S::value\") _Win32_AssociatedEnum_(E) static const unsigned char _WIN32META_FIELD_bad = 0;", "native instance field")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\") _Win32_AssociatedEnum_(E) static const unsigned char _WIN32META_FIELD_bad = 0;", "one compiler-parsed")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\", sizeof(&S::value), sizeof(&S::other)) _Win32_AssociatedEnum_(E) static const unsigned char _WIN32META_FIELD_bad = 0;", "one compiler-parsed")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\", sizeof(&S::value) + sizeof(&S::other)) _Win32_AssociatedEnum_(E) static const unsigned char _WIN32META_FIELD_bad = 0;", "native instance field")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\", sizeof(&S::value)) _Win32_AssociatedEnum_(E) int NotACarrier;", "metadata-only")]
+        [InlineData("_WIN32META_ANNOTATION_(\"Field\", sizeof(&S::value)) _WIN32META_ANNOTATION_(\"Field\", sizeof(&S::value)) _Win32_AssociatedEnum_(E) static const unsigned char _WIN32META_FIELD_bad = 0;", "metadata-only")]
+        [InlineData("_Win32_AnnotateField_(S::value, _WIN32META_ANNOTATION_(\"AssociatedEnum(E)\"));", "requires compiler-parsed annotation arguments")]
+        [InlineData("_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(E));\n_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(E));", "Duplicate")]
+        [InlineData("_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(E));\n_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(Other));", "Duplicate")]
+        public void FieldTargetCarriersRejectInvalidTargetsAndDuplicateFacts(string declarations, string diagnostic)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum E { FIRST = 1 };
+enum Other { SECOND = 2 };
+int Global;
+int Free();
+struct S { unsigned value; unsigned other; static unsigned shared; int Run(); };
+" + declarations);
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains(diagnostic, fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Fact]
+        public void FieldTargetCarriersRejectAnAlreadyAnnotatedField()
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum E { FIRST = 1 };
+struct S { _Win32_AssociatedEnum_(E) unsigned value; };
+_Win32_AnnotateField_(S::value, _Win32_AssociatedEnum_(E));
+");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("WMA001", fixture.Diagnostics);
+            Assert.Contains("Duplicate 'AssociatedEnum'", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("S::missing", "E")]
+        [InlineData("Missing::value", "E")]
+        [InlineData("S::value", "Missing")]
+        public void FieldTargetReferencesRemainCompilerBound(string field, string enumeration)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc",
+                "struct S { unsigned value; };\nenum E { FIRST = 1 };\n" +
+                $"_Win32_AnnotateField_({field}, _Win32_AssociatedEnum_({enumeration}));");
+            Assert.NotEqual(0, fixture.Run());
+            Assert.Contains("error:", fixture.Diagnostics);
+            Assert.False(File.Exists(fixture.Output));
+        }
+
+        [Theory]
+        [InlineData("c", "c11", true, false, true)]
+        [InlineData("c", "c11", false, false, true)]
+        [InlineData("c++", "c++17", false, false, true)]
+        [InlineData("c++", "c++17", false, true, true)]
+        [InlineData("c++", "c++17", true, false, false)]
+        public void InactiveFieldTargetCarriersDoNotReferenceOrDeclareSymbols(
+            string language, string standard, bool enabled, bool cInterface, bool clang)
+        {
+            using var fixture = new NativeFixture("x64", "x86_64-pc-windows-msvc", @"
+enum { _WIN32META_FIELD_0 = 7 };
+_Win32_AnnotateField_(Missing::value, _Win32_AssociatedEnum_(MissingEnum));
+int F();
+", annotationsEnabled: enabled, extraSettings: $"--language\n{language}\n--std\n{standard}\n" +
+                (cInterface ? "--additional=-DCINTERFACE\n" : "") + (clang ? "" : "--additional=-U__clang__\n"));
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.DoesNotContain("NativeAnnotation", fixture.ReadSource());
+        }
+
+        [Theory]
         [InlineData("Optional(true)", "Optional", "true")]
         [InlineData("Optional(false)", "Optional", "false")]
         [InlineData("Win32Metadata.ComOutPtr(true)", "ComOutPtr", "true")]
@@ -96,6 +203,7 @@ void F();
         [InlineData("RAIIFree(Close, (0)")]
         [InlineData("RAIIFree(Close, [))")]
         [InlineData("AssociatedEnum")]
+        [InlineData("Field")]
         [InlineData("ImportLibrary(\"\")")]
         [InlineData("ImportLibrary(\"x.dll\", \"#0\")")]
         [InlineData("ImportLibrary(\"x.dll\", \"#65536\")")]

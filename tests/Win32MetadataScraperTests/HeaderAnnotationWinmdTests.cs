@@ -136,6 +136,51 @@ _WIN32META_ANNOTATE_PARAMETER_(IParameterOverrides::ReadRect, prc, _Win32_Option
         }
 
         [Theory]
+        [InlineData("x86", "i686-pc-windows-msvc", true)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", true)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", true)]
+        [InlineData("x86", "i686-pc-windows-msvc", false)]
+        [InlineData("x64", "x86_64-pc-windows-msvc", false)]
+        [InlineData("arm64", "aarch64-pc-windows-msvc", false)]
+        public void LateFieldTargetCarriersReachPhysicalMetadataWithoutChangingStorage(
+            string architecture, string target, bool annotationsEnabled)
+        {
+            using var fixture = new HeaderAnnotationTests.NativeFixture(architecture, target, @"
+#define CINTERFACE
+typedef struct tagRecord { unsigned before; unsigned flags; unsigned after; } Record, *PRecord;
+struct Other { unsigned flags; };
+enum LATE_FLAGS { FLAG_FIRST = 1, FLAG_SECOND = 4 };
+_Win32_AnnotateField_(Record::flags, _Win32_AssociatedEnum_(LATE_FLAGS));
+", annotationsEnabled: annotationsEnabled);
+            Assert.True(fixture.Run() == 0, fixture.Diagnostics);
+            Assert.Equal(NativeSurface(fixture, target, false), NativeSurface(fixture, target, true));
+            Assert.DoesNotContain("_WIN32META_FIELD_", fixture.ReadSource());
+            using var image = Emit(fixture, architecture);
+            var reader = image.Reader;
+            var fields = FindType(reader, "Record").GetFields().Select(reader.GetFieldDefinition).ToArray();
+            Assert.Equal(new[] { "before", "flags", "after" }, fields.Select(field => reader.GetString(field.Name)));
+            Assert.All(fields, field => Assert.Equal("UInt32", field.DecodeSignature(new SignatureNames(), null)));
+            foreach (var field in fields)
+            {
+                if (annotationsEnabled && reader.GetString(field.Name) == "flags")
+                    AssertStringAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute", "LATE_FLAGS");
+                else
+                    AssertDoesNotHaveAttribute(reader, field.GetCustomAttributes(), "AssociatedEnumAttribute");
+            }
+            var unrelated = Assert.Single(FindType(reader, "Other").GetFields().Select(reader.GetFieldDefinition));
+            Assert.Equal("UInt32", unrelated.DecodeSignature(new SignatureNames(), null));
+            AssertDoesNotHaveAttribute(reader, unrelated.GetCustomAttributes(), "AssociatedEnumAttribute");
+            var members = FindType(reader, "LATE_FLAGS").GetFields().Select(reader.GetFieldDefinition)
+                .Where(field => reader.GetString(field.Name) != "value__").ToArray();
+            Assert.Equal(new[] { "FLAG_FIRST", "FLAG_SECOND" }, members.Select(field => reader.GetString(field.Name)));
+            Assert.Equal(new[] { 1, 4 }, members.Select(field =>
+                reader.GetBlobReader(reader.GetConstant(field.GetDefaultValue()).Value).ReadInt32()));
+            Assert.DoesNotContain(reader.FieldDefinitions, handle =>
+                reader.GetString(reader.GetFieldDefinition(handle).Name).StartsWith("_WIN32META_FIELD_", StringComparison.Ordinal));
+            AssertMetadataClosure(reader);
+        }
+
+        [Theory]
         [InlineData("x86", "i686-pc-windows-msvc")]
         [InlineData("x64", "x86_64-pc-windows-msvc")]
         [InlineData("arm64", "aarch64-pc-windows-msvc")]

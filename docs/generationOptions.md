@@ -219,6 +219,18 @@ remapping, the carrier references that real generated `enum` tag. The existing
 global parser remap remains intact; native compilation and the exact normal
 payload must prove the binding. No native enum declaration or member is added.
 
+For a field whose enum is declared later, the shared vocabulary also supports a
+post-definition `_Win32_AnnotateField_(Record::field, _Win32_AssociatedEnum_(Enum))`
+carrier. Place it after the complete native record and enum; original IDL emits
+the carrier through `cpp_quote`. The original field keeps its scalar storage and
+the enum retains its native members. The reader resolves a compiler-bound instance
+field and applies the existing annotation before projection. Unknown or non-field
+targets, missing annotations, duplicate facts and raw-string target substitutes
+fail. The carrier is active in metadata-enabled Clang C++, including `CINTERFACE`,
+and disappears in ordinary builds and C. This is a target transport, not a new
+semantic annotation. The IDL authorer's default inline placement is unchanged;
+it does not automatically select or place this late-field carrier.
+
 Normal member controls follow native inheritance and each wrapper's exact
 vtable-delegate reference, preserving receiver and parameter signatures.
 Anonymous `NativeTypeName` coordinate changes are enumerated separately.

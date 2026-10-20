@@ -985,7 +985,7 @@ C/C++ header annotation tests alone do not establish IDL transport support.
 | IDL target | Native transport and qualification limit |
 | --- | --- |
 | Interface | `[annotation]` is rejected with MIDL2072. `_Win32_AnnotateInterface_` supplies an annotated same-name C++ typedef, including when MIDL hoists the definition before its quote. |
-| Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type and is read from the field AST normally. |
+| Field | `[annotation("_Win32_AssociatedEnum_(KIND)")]` is emitted before the field type. If the enum is declared later, `_Win32_AnnotateField_` instead targets the original field after both native definitions. |
 | Method | `[annotation("...")]` emits a prefix and can also annotate the generated proxy prototype. On non-local methods it produces MIDL2495. `_Win32_AnnotateMethod_` instead targets the actual C++ method from a helper after the interface definition, without changing RPC/SAL or the proxy. |
 | Parameter | `[annotation("...")]` emits the requested prefix. Non-local parameters produce MIDL2495; the method helper does not provide parameter transport. Do not change RPC locality or suppress the warning just to carry metadata. |
 | Scalar typedef | `typedef [annotation("...")]` emits an annotated typedef, with MIDL2525 warning that a SAL override on a typedef is not recommended. |
@@ -1025,6 +1025,33 @@ conflicting-floor validation.
 This transport is empty without `WIN32METADATA`, under a non-Clang compiler, or in
 the C-interface view. Referencing an undeclared or non-method target fails rather
 than producing unbound metadata.
+
+#### Original-AST field references
+
+`_Win32_AnnotateField_` applies an existing annotation to a compiler-resolved
+instance field after its native record and referenced enum are complete:
+
+```cpp
+struct Record { unsigned flags; };
+enum FLAGS { FIRST = 1, SECOND = 4 };
+_Win32_AnnotateField_(Record::flags, _Win32_AssociatedEnum_(FLAGS));
+```
+
+The same spelling in original IDL emits the private carrier through `cpp_quote`.
+Place it at native global scope after both definitions, preserving their
+conditional frames. It references `sizeof(&Record::flags)` and the unchanged
+typed `(FLAGS)0` annotation argument. The reader resolves the canonical
+`FieldDecl`, applies the annotation before projection and redeclaration merging,
+and excludes the private carrier from generated bindings. Native field storage,
+record layout, unrelated fields and enum members are unchanged.
+
+This field transport remains active in metadata-enabled Clang C++ with
+`CINTERFACE` defined; method carriers retain their C++ interface requirement.
+It is empty in C, ordinary metadata-off builds and non-Clang builds. Undeclared
+targets fail in the compiler. Non-field targets, static members, malformed or
+unannotated carriers, duplicate/conflicting facts and string-substituted targets
+fail in the reader. `Field` is a private target marker, not a semantic annotation
+or a new lifetime contract.
 
 #### Upstream MIDL comment recovery
 
