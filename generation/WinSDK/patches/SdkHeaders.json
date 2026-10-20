@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "sdkPackageVersion": "10.0.26100.7705",
   "sourceStage": "post-midl",
-  "sourceGitTree": "12a50c3fe212c3830518d14bfe7944ed22a32e2b",
+  "sourceGitTree": "48b482620cd547129810f811f7a3cd1d0ff41ebc",
   "headers": [
     {
       "path": "um\\winnt.h",
@@ -6753,7 +6753,7 @@
       },
       {
         "path": "shared\\win32metadata_annotations.h",
-        "sourceSha256": "4FC5896AEA3F9832F9DB8B19853209C26744142DC20B5EC00F7237AD5933BE1E"
+        "sourceSha256": "509D16FA1E87159904232999F77E48E2D1C8668467EB419574DAAD93571FC979"
       },
       {
         "path": "um\\activdbg.idl",
