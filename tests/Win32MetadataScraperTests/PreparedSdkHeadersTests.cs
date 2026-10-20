@@ -423,7 +423,7 @@ namespace Win32MetadataScraperTests
             var first = fixture.Prepare();
             string header = Path.Combine(first.IncludeRoot, "um", "generated.h");
             Assert.Contains("#define IDL_VALUE 2", File.ReadAllText(header));
-            Assert.Contains("_Out_", File.ReadAllText(header));
+            AssertRemoteRetvalParameter(File.ReadAllText(header));
             Assert.Contains("_Win32_Retval_", File.ReadAllText(header));
             Assert.Contains("typedef long DEPENDENCY", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "dependency.h")));
             Assert.Contains("VALUE 2", File.ReadAllText(Path.Combine(first.IncludeRoot, "um", "sample.h")));
@@ -707,7 +707,7 @@ namespace Win32MetadataScraperTests
             {
                 string header = File.ReadAllText(Path.Combine(prepared.IncludeRoot, "um", name + ".h"));
                 Assert.Contains("#define IDL_VALUE 2", header);
-                Assert.Contains("_Out_", header);
+                AssertRemoteRetvalParameter(header);
                 Assert.Contains("_Win32_Retval_", header);
             }
             using var inputs = JsonDocument.Parse(File.ReadAllText(Path.Combine(Path.GetDirectoryName(prepared.IncludeRoot),
@@ -1067,6 +1067,15 @@ namespace Win32MetadataScraperTests
             Assert.DoesNotContain("_COM_Outptr_retval_", converted);
             Assert.Equal(2, converted.Split("[annotation(\"_In_\")]").Length - 1);
             Assert.Contains("cpp_quote(\"void Native([out] long* value);\")", converted);
+        }
+
+        private static void AssertRemoteRetvalParameter(string header)
+        {
+            Assert.Contains("/* [annotation][out] */ \n    _Win32_Retval_  DEPENDENCY *result);",
+                header.Replace("\r\n", "\n"));
+            Assert.DoesNotContain("_Out_", header);
+            Assert.DoesNotContain("_Out_retval_", header);
+            Assert.DoesNotContain("_COM_Outptr_retval_", header);
         }
 
         private sealed class Fixture : IDisposable
